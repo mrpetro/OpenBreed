@@ -3,6 +3,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
@@ -22,6 +23,20 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #endregion Private Fields
 
         #region Internal Constructors
+
+        internal TileAtlas(int id, ITexture texture, int tileSize, Point[] points)
+        {
+            Id = id;
+            Texture = texture;
+            TileSize = tileSize;
+
+            vboList = new List<int>();
+
+            RenderTools.CreateIndicesArray(indices, out ibo);
+
+            foreach (var point in points)
+                AddCoords(point.X, point.Y);
+        }
 
         internal TileAtlas(int id, ITexture texture, int tileSize, int tileColumns, int tileRows)
         {
@@ -80,22 +95,24 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Private Methods
 
+        private void AddCoords(float x, float y)
+        {
+                var coord = new Vector2(x, y);
+                coord = Vector2.Divide(coord, new Vector2(Texture.Width, Texture.Height));
+
+                var vertices = CreateVertices(coord);
+
+                int vbo;
+                RenderTools.CreateVertexArray(vertices, out vbo);
+                vboList.Add(vbo);
+        }
+
         private void BuildCoords(int tileRows, int tileColumns)
         {
             for (int y = 0; y < tileRows; y++)
             {
                 for (int x = 0; x < tileColumns; x++)
-                {
-                    var coord = new Vector2(x, y);
-                    coord = Vector2.Multiply(coord, TileSize);
-                    coord = Vector2.Divide(coord, new Vector2(Texture.Width, Texture.Height));
-
-                    var vertices = CreateVertices(coord);
-
-                    int vbo;
-                    RenderTools.CreateVertexArray(vertices, out vbo);
-                    vboList.Add(vbo);
-                }
+                    AddCoords(x * TileSize, y * TileSize);
             }
         }
 

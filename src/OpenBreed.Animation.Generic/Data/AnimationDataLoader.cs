@@ -34,7 +34,7 @@ namespace OpenBreed.Animation.Generic.Data
 
         public object LoadObject(string entryId) => Load(entryId);
 
-        public IClip Load(string entryId)
+        public IClip Load(string entryId, params object[] args)
         {
             var entry = repositoryProvider.GetRepository<IAnimationEntry>().GetById(entryId);
             if (entry == null)

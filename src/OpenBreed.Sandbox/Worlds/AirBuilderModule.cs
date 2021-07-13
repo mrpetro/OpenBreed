@@ -30,7 +30,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             worldBlockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
             worldBlockBuilder.HasBody = false;
-            worldBlockBuilder.SetPosition(new Vector2(x * 16, y * 16));
+            worldBlockBuilder.SetPosition(x * 16, y * 16);
             worldBlockBuilder.SetTileId(WorldBuilderHelper.ToTileId(gfxCode));
 
             var entity = worldBlockBuilder.Build();

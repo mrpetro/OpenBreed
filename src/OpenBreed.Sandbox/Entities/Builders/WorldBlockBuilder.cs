@@ -48,15 +48,20 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         #region Public Methods
 
-        public void SetPosition(Vector2 pos)
+        public void SetPosition(float x, float y)
         {
-            this.pos = pos;
+            this.pos = new Vector2(x, y);
         }
 
         public void SetTileAtlas(string atlasAlias)
         {
             var atlas = tileMan.GetByAlias(atlasAlias);
             this.atlasId = atlas.Id;
+        }
+
+        public void SetTileAtlas(int atlasId)
+        {
+            this.atlasId = atlasId;
         }
 
         public void SetTileId(int tileId)

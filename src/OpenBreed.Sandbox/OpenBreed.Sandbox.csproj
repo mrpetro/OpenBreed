@@ -80,6 +80,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MapCellEntityFactory.cs" />
+    <Compile Include="TileSetDataLoader.cs" />
     <Compile Include="Commands\MoveToCommand.cs" />
     <None Include="Content\Graphics\Cursors.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -145,6 +147,7 @@
     <Compile Include="Worlds\AirBuilderModule.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />
     <Compile Include="Worlds\HudWorldHelper.cs" />
+    <Compile Include="Worlds\IEntityFactoryProvider.cs" />
     <Compile Include="Worlds\MapWorldDataLoader.cs" />
     <Compile Include="Worlds\TextWorldHelper.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />

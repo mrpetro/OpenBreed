@@ -46,7 +46,10 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            var cursorEntity = core.GetManager<IEntityMan>().GetByTag("MouseCursor").First();
+            var cursorEntity = core.GetManager<IEntityMan>().GetByTag("MouseCursor").FirstOrDefault();
+
+            if (cursorEntity == null)
+                return;
 
             var cursorPos = cursorEntity.Get<PositionComponent>();
 

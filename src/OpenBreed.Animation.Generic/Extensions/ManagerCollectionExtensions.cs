@@ -17,20 +17,13 @@ namespace OpenBreed.Animation.Generic.Extensions
             manCollection.AddSingleton<IFrameUpdaterMan>(() => new FrameUpdaterMan(manCollection.GetManager<ILogger>()));
         }
 
-        public static void SetupDataLoaderFactory(this IManagerCollection managerCollection)
+
+        public static void SetupAnimationDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            managerCollection.AddSingleton<IDataLoaderFactory>(() =>
-            {
-                var dataLoaderFactory = new DataLoaderFactory();
-
-                dataLoaderFactory.Register(new AnimationDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-                                                                   managerCollection.GetManager<IClipMan>(),
-                                                                   managerCollection.GetManager<IFrameUpdaterMan>()));
-
-                return dataLoaderFactory;
-            });
+            dataLoaderFactory.Register(new AnimationDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+                                                                               managerCollection.GetManager<IClipMan>(),
+                                                                               managerCollection.GetManager<IFrameUpdaterMan>()));
         }
-
 
         #endregion Public Methods
     }

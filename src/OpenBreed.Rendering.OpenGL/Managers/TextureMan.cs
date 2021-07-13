@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Interface;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using System;
@@ -19,13 +20,15 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private readonly Dictionary<string, ITexture> aliases = new Dictionary<string, ITexture>();
         private readonly List<ITexture> items = new List<ITexture>();
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal TextureMan()
+        internal TextureMan(ILogger logger)
         {
+            this.logger = logger;
         }
 
         #endregion Internal Constructors
@@ -112,6 +115,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             texture.Id = items.Count;
             items.Add(texture);
             aliases.Add(alias, texture);
+
+            logger.Verbose($"Texture {texture.Id} ({alias}) created.");
+
             return texture;
         }
 

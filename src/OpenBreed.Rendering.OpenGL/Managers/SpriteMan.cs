@@ -55,6 +55,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             result = saBuilder.Build();
             items.Add(result);
             names.Add(alias, result);
+
+            logger.Verbose($"Sprite Atlas {result.Id} ({alias}) created.");
+
             return result;
         }
 

@@ -40,6 +40,7 @@ using OpenBreed.Wecs.Components.Gui;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Common;
 using OpenBreed.Sandbox.Entities.Viewport;
+using OpenBreed.Sandbox.Extensions;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -72,40 +73,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void AddSystems(WorldBuilder builder)
         {
-            int width = builder.width;
-            int height = builder.height;
-
-            //AI
-            // Pathfinding/ AI systems here
-
-            //Input
-            builder.AddSystem(systemFactory.Create<WalkingControlSystem>());
-            builder.AddSystem(systemFactory.Create<AiControlSystem>());
-            builder.AddSystem(systemFactory.Create<WalkingControllerSystem>());
-            builder.AddSystem(systemFactory.Create<AttackControllerSystem>());
-
-            //Action
-            builder.AddSystem(systemFactory.Create<MovementSystem>());
-            builder.AddSystem(systemFactory.Create<DirectionSystem>());
-            builder.AddSystem(systemFactory.Create<FollowerSystem>());
-            //builder.AddSystem(new FollowerSystem(core));
-            builder.AddSystem(systemFactory.Create<PhysicsSystem>());
-            builder.AddSystem(systemFactory.Create<AnimationSystem>());
-            builder.AddSystem(systemFactory.Create<TimerSystem>());
-            builder.AddSystem(systemFactory.Create<FsmSystem>());
-
-            ////Audio
-            //builder.AddSystem(core.CreateSoundSystem().Build());
-
-            //Video
-            builder.AddSystem(systemFactory.Create<TileSystem>());
-            builder.AddSystem(systemFactory.Create<SpriteSystem>());
-            //builder.AddSystem(core.CreateWireframeSystem().Build());
-            builder.AddSystem(systemFactory.Create<TextSystem>());
-
-            builder.AddSystem(systemFactory.Create<UiSystem>());
-
-            builder.AddSystem(systemFactory.Create<ViewportSystem>());
+            builder.SetupGameWorldSystems(systemFactory);
         }
 
         internal void Create(ICore core)
@@ -144,15 +112,7 @@ namespace OpenBreed.Sandbox.Worlds
 
 
             var actorHelper = core.GetManager<ActorHelper>();
-
-            var actor = actorHelper.CreateActor(new Vector2(128, 128));
-
-            var p1 = playersMan.GetByName("P1");
-
-            actor.Add(new WalkingInputComponent(p1.Id, 0));
-            actor.Add(new AttackInputComponent(p1.Id, 0));
-            actor.Add(new WalkingControlComponent());
-            actor.Add(new AttackControlComponent());
+            var actor = actorHelper.CreatePlayerActor(new Vector2(128, 128));
 
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 

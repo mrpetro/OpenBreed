@@ -13,6 +13,9 @@ using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Wecs.Components.Control;
+using OpenBreed.Input.Generic;
+using OpenBreed.Input.Interface;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -116,6 +119,22 @@ namespace OpenBreed.Sandbox.Entities.Actor
             awur.AddFrame(23, 3.0f);
             awur.AddFrame(31, 4.0f);
             awur.AddFrame(39, 5.0f);
+        }
+
+        public Entity CreatePlayerActor(Vector2 pos)
+        {
+            var playersMan = core.GetManager<IPlayersMan>();
+
+            var actor = CreateActor(pos);
+
+            var p1 = playersMan.GetByName("P1");
+
+            actor.Add(new WalkingInputComponent(p1.Id, 0));
+            actor.Add(new AttackInputComponent(p1.Id, 0));
+            actor.Add(new WalkingControlComponent());
+            actor.Add(new AttackControlComponent());
+
+            return actor;
         }
 
         public Entity CreateActor(Vector2 pos)

@@ -18,9 +18,10 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
     {
         public static void SetupOpenGLManagers(this IManagerCollection manCollection)
         {
-            manCollection.AddSingleton<ITextureMan>(() => new TextureMan());
+            manCollection.AddSingleton<ITextureMan>(() => new TextureMan(manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<ITileMan>(() => new TileMan(manCollection.GetManager<ITextureMan>()));
+            manCollection.AddSingleton<ITileMan>(() => new TileMan(manCollection.GetManager<ITextureMan>(),
+                                                                   manCollection.GetManager<ILogger>()));
 
             manCollection.AddSingleton<ISpriteMan>(() => new SpriteMan(manCollection.GetManager<ITextureMan>(),
                                                                        manCollection.GetManager<ILogger>()));

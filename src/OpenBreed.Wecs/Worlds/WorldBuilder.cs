@@ -63,6 +63,16 @@ namespace OpenBreed.Wecs.Worlds
             systems.Add(systemType, system);
         }
 
+        public World Build()
+        {
+            if (worldMan.GetByName(name) != null)
+                throw new InvalidOperationException($"World with name '{name}' already exist.");
+
+            var newWorld = new World(this);
+            worldMan.RegisterWorld(newWorld);
+            return newWorld;
+        }
+
         public World Build(ICore core)
         {
             if (worldMan.GetByName(name) != null)

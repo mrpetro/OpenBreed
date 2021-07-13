@@ -59,6 +59,7 @@ using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Control;
+using OpenBreed.Wecs.Systems.Control.Commands;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Control.Handlers;
 using OpenBreed.Wecs.Systems.Control.Inputs;
@@ -70,10 +71,12 @@ using OpenBreed.Wecs.Systems.Physics.Extensions;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
+using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace OpenBreed.Sandbox
@@ -111,6 +114,7 @@ namespace OpenBreed.Sandbox
             manCollection.SetupAnimationComponents();
             manCollection.SetupFsmComponents();
 
+            manCollection.SetupMapEntityFactory();
             manCollection.SetupDataLoaderFactory();
 
 
@@ -277,15 +281,23 @@ namespace OpenBreed.Sandbox
         [STAThread]
         private static void Main(string[] args)
         {
+            if (args.Length < 2)
+            {
+                Console.WriteLine("Not enough arguments.");
+                Console.WriteLine($"Usage:");
+                Console.WriteLine($"{System.AppDomain.CurrentDomain.FriendlyName} <database XML file path> <vanilla game folder path>");
+                return;
+            }
+            var asm = Assembly.GetExecutingAssembly();
             var gameDbFileName = args[0];
-            var gameFolderPath = args[1];
+            var vanillaGameFolderPath = args[1];
             var execFolderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var gameDbFilePath = Path.Combine(execFolderPath, gameDbFileName);
 
 
             var programFactory = new ProgramFactory();
 
-            var program = programFactory.Create(gameDbFilePath, gameFolderPath);
+            var program = programFactory.Create(gameDbFilePath, vanillaGameFolderPath);
 
             //program.Sounds.Sounds.PlaySound(0);
 
@@ -417,8 +429,38 @@ namespace OpenBreed.Sandbox
             var hudWorldHelper = GetManager<HudWorldHelper>();
             hudWorldHelper.Create(this);
 
-            var gameWorldHelper = GetManager<GameWorldHelper>();
-            gameWorldHelper.Create(this);
+
+            var dataLoaderFactory = GetManager<IDataLoaderFactory>();
+            var mapWorldLoader = dataLoaderFactory.GetLoader<World>();
+
+
+            var cameraBuilder = GetManager<CameraBuilder>();
+            var commandsMan = GetManager<ICommandsMan>();
+            var entityMan = GetManager<IEntityMan>();
+
+            var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 2");
+
+
+            cameraBuilder.SetupPlayerCamera();
+
+            var playerCamera = cameraBuilder.Build();
+            playerCamera.Tag = "PlayerCamera";
+
+            var playerActor = actorHelper.CreatePlayerActor(new Vector2(16 * 31, 16 * 31));
+
+
+            //gameWorld.AddEntity(actor);
+
+            var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
+
+            gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
+
+            commandsMan.Post(new AddEntityCommand(gameWorld.Id, playerActor.Id));
+            commandsMan.Post(new FollowedAddFollowerCommand(playerActor.Id, playerCamera.Id));
+
+
+            //var gameWorldHelper = GetManager<GameWorldHelper>();
+            //gameWorldHelper.Create(this);
 
             OnEngineInitialized();
         }
