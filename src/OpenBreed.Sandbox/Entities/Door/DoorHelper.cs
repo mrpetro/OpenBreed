@@ -1,17 +1,10 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.States;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Components.States;
 using OpenBreed.Sandbox.Entities.Door.States;
@@ -23,130 +16,104 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Fsm;
+using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
+using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Database.Interface;
+using OpenBreed.Common;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
-    public static class DoorHelper
+    public class DoorHelper
     {
+        public DoorHelper(ICore core)
+        {
+            this.core = core;
+        }
+
         private const string TILE_ATLAS = "Atlases/Tiles/16/Test";
         private const string STAMP_DOOR_HORIZONTAL_CLOSED = "Tiles/Stamps/DoorHorizontal/Closed";
         private const string STAMP_DOOR_HORIZONTAL_OPENED = "Tiles/Stamps/DoorHorizontal/Opened";
         private const string STAMP_DOOR_VERTICAL_CLOSED = "Tiles/Stamps/DoorVertical/Closed";
         private const string STAMP_DOOR_VERTICAL_OPENED = "Tiles/Stamps/DoorVertical/Opened";
+        private readonly ICore core;
 
-        public static void CreateAnimations(ICore core)
+        public void CreateAnimations()
         {
-            var horizontalDoorOpening = core.Animations.Create<int>("Animations/DoorHorizontal/Opening", OnFrameUpdate);
-            horizontalDoorOpening.AddFrame(0, 1.0f);
-            horizontalDoorOpening.AddFrame(1, 1.0f);
-            horizontalDoorOpening.AddFrame(2, 1.0f);
-            horizontalDoorOpening.AddFrame(3, 1.0f);
-            horizontalDoorOpening.AddFrame(4, 1.0f);
-            var horizontalDoorClosing = core.Animations.Create<int>("Animations/DoorHorizontal/Closing", OnFrameUpdate);
-            horizontalDoorClosing.AddFrame(4, 1.0f);
-            horizontalDoorClosing.AddFrame(3, 1.0f);
-            horizontalDoorClosing.AddFrame(2, 1.0f);
-            horizontalDoorClosing.AddFrame(1, 1.0f);
-            horizontalDoorClosing.AddFrame(0, 1.0f);
-            var verticalDoorOpening = core.Animations.Create<int>("Animations/DoorVertical/Opening", OnFrameUpdate);
-            verticalDoorOpening.AddFrame(0, 1.0f);
-            verticalDoorOpening.AddFrame(1, 1.0f);
-            verticalDoorOpening.AddFrame(2, 1.0f);
-            verticalDoorOpening.AddFrame(3, 1.0f);
-            verticalDoorOpening.AddFrame(4, 1.0f);
-            var verticalDoorClosing = core.Animations.Create<int>("Animations/DoorVertical/Closing", OnFrameUpdate);
-            verticalDoorClosing.AddFrame(4, 1.0f);
-            verticalDoorClosing.AddFrame(3, 1.0f);
-            verticalDoorClosing.AddFrame(2, 1.0f);
-            verticalDoorClosing.AddFrame(1, 1.0f);
-            verticalDoorClosing.AddFrame(0, 1.0f);
+
+
+            var animationMan = core.GetManager<IClipMan>();
+            var animatorMan = core.GetManager<IFrameUpdaterMan>();
+
+            animatorMan.Register("Sprite.ImageId", (FrameUpdater<int>)OnFrameUpdate);
+
+            var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
+            var animationLoader = dataLoaderFactory.GetLoader<IClip>();
+
+            var verticalDoorOpening = animationLoader.Load("Animations.DoorVertical.Opening");
+            var verticalDoorClosing = animationLoader.Load("Animations.DoorVertical.Closing");
+            var horizontalDoorOpening = animationLoader.Load("Animations.DoorHorizontal.Opening");
+            var horizontalDoorClosing = animationLoader.Load("Animations.DoorHorizontal.Closing");
         }
 
-        private static void OnFrameUpdate(Entity entity, int nextValue)
+        private void OnFrameUpdate(Entity entity, int nextValue)
         {
-            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-
-        public static void CreateFsm(ICore core)
-        {
-            var fsm = core.StateMachines.Create<FunctioningState, FunctioningImpulse>("Door.Functioning");
-
-            fsm.AddState(new OpeningState());
-            fsm.AddState(new OpenedAwaitClose());
-            fsm.AddState(new ClosingState());
-            fsm.AddState(new ClosedState());
-
-            fsm.AddTransition(FunctioningState.Closed, FunctioningImpulse.Open, FunctioningState.Opening);
-            fsm.AddTransition(FunctioningState.Opening, FunctioningImpulse.StopOpening, FunctioningState.Opened);
-            fsm.AddTransition(FunctioningState.Opened, FunctioningImpulse.Close, FunctioningState.Closing);
-            fsm.AddTransition(FunctioningState.Closing, FunctioningImpulse.StopClosing, FunctioningState.Closed);
-        }
-
-        private static void OnOpenningEnding()
+        private void OnOpenningEnding()
         {
             Console.WriteLine("Door -> OpenningEnding");
         }
 
-        private static void OnOpeningStarting()
+        private void OnOpeningStarting()
         {
             Console.WriteLine("Door -> OpenningStarting");
         }
 
-        private static void OnOpen()
+        private void OnOpen()
         {
             Console.WriteLine("Door -> Open");
         }
 
-        private static void OnOpened()
+        private void OnOpened()
         {
             Console.WriteLine("Door -> Opened");
         }
 
-        public static void AddVerticalDoor(World world, int x, int y)
+        public void AddVerticalDoor(World world, int x, int y)
         {
-            var core = world.Core;
+            var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml");
+            var door = core.GetManager<IEntityFactory>().Create(doorVerticalTemplate);
 
-            //var door = core.Entities.Create();
-            var door = core.Entities.CreateFromTemplate("DoorVertical");
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            door.Add(new CollisionComponent());
 
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
-            //world.AddEntity(door);
-
-            //door.Subscribe<EntityEnteredWorldEventArgs>((s, a) =>
-            //{
-            //    door.PostCommand(new SetStateCommand(door.Id, doorSm.Id, (int)FunctioningState.Closed));
-            //});
-
-            //doorSm.SetInitialState(FunctioningState.Closed);
+            core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
         }
 
-        public static void AddHorizontalDoor(World world, int x, int y)
+        public void AddHorizontalDoor(World world, int x, int y)
         {
-            var core = world.Core;
+            var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml");
+            var door = core.GetManager<IEntityFactory>().Create(doorHorizontalTemplate);
 
-            var door = core.Entities.CreateFromTemplate("DoorHorizontal");
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            door.Add(new CollisionComponent());
 
-            //var doorFsm = world.Core.StateMachines.GetByName("Door.Functioning");
-            //doorFsm.SetInitialState(door, (int)FunctioningState.Closed);
-
-            //door.Subscribe<EntityEnteredWorldEventArgs>((s, a) =>
-            //{
-            //    door.PostCommand(new SetStateCommand(door.Id, doorSm.Id, FunctioningState.Closed));
-            //});
-
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
-            //world.AddEntity(door);
-
-
-            //doorSm.SetInitialState(FunctioningState.Closed);
+            core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
         }
 
-        public static void CreateStamps(ICore core)
+        public void CreateStamps()
         {
-            var stampBuilder = core.Rendering.Stamps.Create();
+            var stampBuilder = core.GetManager<IStampMan>().Create();
 
             stampBuilder.ClearTiles();
             stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_CLOSED);

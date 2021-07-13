@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+        <Position x="0" y="0" />
+        <Text> 
+            <Text>Crazy Mover</Text>
+            <Offset X="2" Y="6" />
+            <Color R="255" G="0" B="255" A="125" />
+            <FontName>Arial</FontName>
+            <FontSize>9</FontSize>
+            <Order>100</Order>
+        </Text>
+        <Animation>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>true</Loop>
+					<ClipName>Animations/Misc/CrazyMove</ClipName>
+				</State>
+			</States>
+        </Animation>
+    </Components>
+</EntityTemplate>

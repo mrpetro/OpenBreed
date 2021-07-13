@@ -1,14 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Common;
-
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Jobs;
@@ -16,12 +6,20 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Sandbox.Entities.WorldGate;
+using OpenBreed.Common.Tools;
+using OpenBreed.Physics.Generic;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
@@ -55,42 +53,57 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public static void CreateAnimations(ICore core)
         {
-            var animationTeleportEntry = core.Animations.Create<int>(ANIMATION_TELEPORT_ENTRY, OnFrameUpdate);
-            animationTeleportEntry.AddFrame(0, 1.0f);
-            animationTeleportEntry.AddFrame(1, 1.0f);
-            animationTeleportEntry.AddFrame(2, 1.0f);
-            animationTeleportEntry.AddFrame(3, 1.0f);
+            var animations = core.GetManager<IClipMan>();
+
+            var animationTeleportEntry = animations.CreateClip(ANIMATION_TELEPORT_ENTRY, 4.0f);
+            var te = animationTeleportEntry.AddTrack<int>(FrameInterpolation.None, (e,nv) => OnFrameUpdate(core, e, nv), 0);
+            te.AddFrame(0, 1.0f);
+            te.AddFrame(1, 2.0f);
+            te.AddFrame(2, 3.0f);
+            te.AddFrame(3, 4.0f);
 
         }
 
-        private static void OnFrameUpdate(Entity entity, int nextValue)
+        private static void OnFrameUpdate(ICore core, Entity entity, int nextValue)
         {
-            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-        public static Entity AddTeleportEntry(World world, int x, int y, int pairId)
+        public static Entity AddTeleportEntry(ICore core, World world, int x, int y, int pairId)
         {
-            var core = world.Core;
-
-            var teleportEntry = core.Entities.CreateFromTemplate("TeleportEntry");
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportEntry.xml");
+            var teleportEntry = core.GetManager<IEntityFactory>().Create(entityTemplate);
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
 
             teleportEntry.Get<PositionComponent>().Value = new Vector2( 16 * x, 16 * y);
-
-            //teleportEntry.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
-            teleportEntry.Subscribe<CollisionEventArgs>(OnCollision);
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntry.Id));
-            //world.AddEntity(teleportEntry);
-
+            teleportEntry.Add(new CollisionComponent(ColliderTypes.TeleportEntryTrigger));
+            core.Commands.Post(new AddEntityCommand(world.Id, teleportEntry.Id));
             return teleportEntry;
         }
 
-        public static Entity AddTeleportExit(World world, int x, int y, int pairId)
-        {
-            var core = world.Core;
+        //public static void RegisterCollisionPairs(ICore core)
+        //{
+        //    var collisionMan = core.GetModule<PhysicsModule>().Collisions;
 
-            var teleportExit = core.Entities.CreateFromTemplate("TeleportExit");
+        //    collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallback);
+        //    //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
+        //}
+
+        //private static void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        //{
+        //    if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
+        //        PerformEntityExit(entityB, entityA);
+        //    else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
+        //        PerformEntityExit(entityA, entityB);
+        //}
+
+
+        public static Entity AddTeleportExit(ICore core, World world, int x, int y, int pairId)
+        {
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportExit.xml");
+            var teleportExit = core.GetManager<IEntityFactory>().Create(entityTemplate);
+            //var teleportExit = core.GetManager<IEntityMan>().CreateFromTemplate("TeleportExit");
 
             teleportExit.Tag = new TeleportPair { Id = pairId };
 
@@ -98,7 +111,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             //teleportExit.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportExit.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, teleportExit.Id));
             //world.AddEntity(teleportExit);
 
             return teleportExit;
@@ -108,47 +121,15 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        private static void OnCollision(object sender, CollisionEventArgs args)
-        {
-            var entity = (Entity)sender;
-            var entryEntity = entity;
-            var world = entity.World;
-            var targetEntity = args.Entity;
-            var core = targetEntity.Core;
-
-            var cameraEntity = targetEntity.TryGet<FollowerComponent>()?.FollowerIds.
-                                                                              Select(item => core.Entities.GetById(item)).
-                                                                              FirstOrDefault(item => item.Tag is "PlayerCamera");
-
-            if (cameraEntity == null)
-                return;
-
-            //Vanilla game
-            var jobChain = new JobChain();
-            //1. Pause game
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == world.Id; }, () => core.Commands.Post(new PauseWorldCommand(world.Id, true))));
-            //2. Camera fade-out   
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
-            //3. Teleport character
-            jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, entryEntity, true)));
-            //4. Unpause game
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == world.Id; }, () => core.Commands.Post(new PauseWorldCommand(world.Id, false))));
-            //5. Camera fade-in
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
-
-            entryEntity.Core.Jobs.Execute(jobChain);
-        }
-
-        public static void SetPosition(Entity target, Entity entryEntity, bool cancelMovement)
+        public static void SetPosition(ICore core, Entity target, Entity entryEntity, bool cancelMovement)
         {
             var pair = (TeleportPair)entryEntity.Tag;
-            var exitEntity = target.Core.Entities.GetByTag(pair).FirstOrDefault(item => item != entryEntity);
+            var exitEntity = core.GetManager<IEntityMan>().GetByTag(pair).FirstOrDefault(item => item != entryEntity);
 
             if (exitEntity == null)
                 throw new Exception("No exit entity found");
 
             var exitPos = exitEntity.Get<PositionComponent>();
-            var exitAabb = exitEntity.Get<BodyComponent>().Aabb;
             var targetPos = target.Get<PositionComponent>();
             var targetAabb = target.Get<BodyComponent>().Aabb;
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);

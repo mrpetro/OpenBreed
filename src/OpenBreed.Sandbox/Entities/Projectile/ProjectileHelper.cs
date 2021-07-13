@@ -1,15 +1,9 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.States;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Physics.Generic.Helpers;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Projectile.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
@@ -18,74 +12,106 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Physics.Interface;
+using OpenBreed.Wecs.Systems.Physics.Helpers;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Fsm;
+using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {
-    public static class ProjectileHelper
+    public class ProjectileHelper
     {
-        public static void CreateAnimations(ICore core)
+        public ProjectileHelper(ICore core)
         {
-            var laserR = core.Animations.Create<int>("Animations/Laser/Fired/Right", OnFrameUpdate);
-            laserR.AddFrame(0, 2.0f);
-            var laserRD = core.Animations.Create<int>("Animations/Laser/Fired/RightDown", OnFrameUpdate);
-            laserRD.AddFrame(1, 2.0f);
-            var laserD = core.Animations.Create<int>("Animations/Laser/Fired/Down", OnFrameUpdate);
-            laserD.AddFrame(2, 2.0f);
-            var laserDL = core.Animations.Create<int>("Animations/Laser/Fired/DownLeft", OnFrameUpdate);
-            laserDL.AddFrame(3, 2.0f);
-            var laserL = core.Animations.Create<int>("Animations/Laser/Fired/Left", OnFrameUpdate);
-            laserL.AddFrame(4, 2.0f);
-            var laserLU = core.Animations.Create<int>("Animations/Laser/Fired/LeftUp", OnFrameUpdate);
-            laserLU.AddFrame(5, 2.0f);
-            var laserU = core.Animations.Create<int>("Animations/Laser/Fired/Up", OnFrameUpdate);
-            laserU.AddFrame(6, 2.0f);
-            var laserUR = core.Animations.Create<int>("Animations/Laser/Fired/UpRight", OnFrameUpdate);
-            laserUR.AddFrame(7, 2.0f);
+            this.core = core;
         }
 
-        private static void OnFrameUpdate(Entity entity, int nextValue)
+        public void CreateAnimations()
         {
-            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+            var animations = core.GetManager<IClipMan>();
+
+            var laserR = animations.CreateClip("Animations/Laser/Fired/Right", 2.0f);
+            laserR.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 0).AddFrame(0, 2.0f);
+            var laserRD = animations.CreateClip("Animations/Laser/Fired/RightDown", 2.0f);
+            laserRD.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 1).AddFrame(1, 2.0f);
+            var laserD = animations.CreateClip("Animations/Laser/Fired/Down", 2.0f);
+            laserD.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 2).AddFrame(2, 2.0f);
+            var laserDL = animations.CreateClip("Animations/Laser/Fired/DownLeft", 2.0f);
+            laserDL.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 3).AddFrame(3, 2.0f);
+            var laserL = animations.CreateClip("Animations/Laser/Fired/Left", 2.0f);
+            laserL.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 4).AddFrame(4, 2.0f);
+            var laserLU = animations.CreateClip("Animations/Laser/Fired/LeftUp", 2.0f);
+            laserLU.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 5).AddFrame(5, 2.0f);
+            var laserU = animations.CreateClip("Animations/Laser/Fired/Up", 2.0f);
+            laserU.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 6).AddFrame(6, 2.0f);
+            var laserUR = animations.CreateClip("Animations/Laser/Fired/UpRight", 2.0f);
+            laserUR.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 7).AddFrame(7, 2.0f);
         }
 
-        private static void OnCollision(object sender, CollisionEventArgs args)
+        private void OnFrameUpdate(Entity entity, int nextValue)
         {
-            var entity = (Entity)sender;
-            var body = args.Entity.TryGet<BodyComponent>();
-
-            var type = body.Tag;
-
-            switch (type)
-            {
-                case "Solid":
-                    DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
-                    return;
-                default:
-                    break;
-            }
+            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-        public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
+        //private static void OnCollision(object sender, CollisionEventArgs args)
+        //{
+        //    //var entity = (Entity)sender;
+        //    //var body = args.Entity.TryGet<BodyComponent>();
+
+        //    //var type = body.Tag;
+
+        //    //switch (type)
+        //    //{
+        //    //    case "Solid":
+        //    //        DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
+        //    //        return;
+        //    //    default:
+        //    //        break;
+        //    //}
+        //}
+
+        public void RegisterCollisionPairs()
         {
-            var projectile = core.Entities.CreateFromTemplate("Projectile");
+            var collisionMan = core.GetManager<ICollisionMan>();
+
+            collisionMan.RegisterCollisionPair(ColliderTypes.Projectile, ColliderTypes.StaticObstacle, Projectile2StaticObstacle);
+        }
+
+        private void Projectile2StaticObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        {
+            DynamicHelper.ResolveVsStatic(entityA, entityB, projection);
+        }
+
+        static IEntityTemplate projectileTemplate;
+        private readonly ICore core;
+
+        public void AddProjectile(int worldId, float x, float y, float vx, float vy)
+        {
+            if(projectileTemplate == null)
+                projectileTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Projectile\Projectile.xml");
+
+            var projectile = core.GetManager<IEntityFactory>().Create(projectileTemplate);
+            //var projectile = core.GetManager<IEntityMan>().CreateFromTemplate("Projectile");
+
             //projectile.Add(new FsmComponent());
 
             projectile.Get<PositionComponent>().Value = new Vector2(x, y);
             projectile.Get<VelocityComponent>().Value = new Vector2(vx, vy);
+            projectile.Add(new CollisionComponent(ColliderTypes.Projectile));
 
-            projectile.Subscribe<CollisionEventArgs>(OnCollision);
-
-            //var projectileFsm = core.StateMachines.GetByName("Projectile");
+            //var projectileFsm = core.GetManager<IFsmMan>().GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, projectile.Id));
+            core.Commands.Post(new AddEntityCommand(worldId, projectile.Id));
             //world.AddEntity(projectile);
 
-        }
-
-        public static void CreateFsm(ICore core)
-        {
-            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Projectile");
-            stateMachine.AddState(new FiredState("Animations/Laser/Fired/"));
         }
     }
 }

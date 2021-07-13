@@ -1,24 +1,30 @@
 ﻿
 using NLua;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.States;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Fsm;
+using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
     public class IdleState : IState<AttackingState, AttackingImpulse>
     {
-        public IdleState()
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
+
+        public IdleState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
         }
 
         public int Id => (int)AttackingState.Idle;
@@ -26,9 +32,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         public void EnterState(Entity entity)
         {
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
-
+            var currentStateNames = fsmMan.GetStateNames(entity);
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
             entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
@@ -42,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             var entity = sender as Entity;
 
             if (eventArgs.Fire)
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+                commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
         }
 
     }

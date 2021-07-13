@@ -1,32 +1,39 @@
-﻿
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.States;
-using OpenBreed.Sandbox.Helpers;
+﻿using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Animation.Commands;
+using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Fsm;
+using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
+    public interface ITriggerMan
+    {
+    }
+
     public class StandingState : IState<MovementState, MovementImpulse>
     {
         #region Private Fields
 
         private readonly string animPrefix;
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public StandingState()
+        public StandingState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
             this.animPrefix = "Animations";
         }
 
@@ -43,7 +50,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public void EnterState(Entity entity)
         {
-            var direction = entity.Get<DirectionComponent>().Value;
+            var direction = entity.Get<AngularPositionComponent>().GetDirection();
 
             var animDirName = AnimHelper.ToDirectionName(direction);
             var className = entity.Get<ClassComponent>().Name;
@@ -52,13 +59,16 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             thrust.Value = Vector2.Zero;
 
-            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id,  $"{animPrefix}/{className}/{stateName}/{animDirName}", 0));
+            var stateName = fsmMan.GetStateName(FsmId, Id);
+            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirName}", 0));
 
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            var currentStateNames = fsmMan.GetStateNames(entity);
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+
+
+            //triggerMan.OnTrigger<ControlDirectionChangedEventArgs>(entity, OnControlDirectionChanged);
         }
 
         public void LeaveState(Entity entity)
@@ -75,7 +85,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var entity = sender as Entity;
 
             if (eventArgs.Direction != Vector2.Zero)
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
+            {
+                commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
+
+                var angularThrust = entity.Get<AngularVelocityComponent>();
+                angularThrust.SetDirection(new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y));
+            }
         }
 
         #endregion Private Methods

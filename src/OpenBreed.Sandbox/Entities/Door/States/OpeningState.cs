@@ -1,16 +1,17 @@
-﻿
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.States;
+﻿using OpenBreed.Wecs.Systems.Rendering.Commands;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Sandbox.Entities;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Systems.Animation.Commands;
+using OpenBreed.Wecs.Systems.Animation.Events;
+using OpenBreed.Fsm;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -19,13 +20,17 @@ namespace OpenBreed.Sandbox.Components.States
         #region Private Fields
 
         private readonly string animPrefix;
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpeningState()
+        public OpeningState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
             animPrefix = "Animations";
         }
 
@@ -42,13 +47,13 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
-            entity.Core.Commands.Post(new SpriteOnCommand(entity.Id));
+            commandsMan.Post(new SpriteOnCommand(entity.Id));
 
             var className = entity.Get<ClassComponent>().Name;
-            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
+            var stateName = fsmMan.GetStateName(FsmId, Id);
+            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}.{className}.{stateName}", 0));
 
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
@@ -56,6 +61,9 @@ namespace OpenBreed.Sandbox.Components.States
         public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
+
+            var colCmp = entity.Get<CollisionComponent>();
+            colCmp.ColliderTypes.Remove(ColliderTypes.StaticObstacle);
         }
 
         #endregion Public Methods
@@ -72,7 +80,7 @@ namespace OpenBreed.Sandbox.Components.States
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {
             var entity = sender as Entity;
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopOpening));
+            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopOpening));
         }
 
         #endregion Private Methods

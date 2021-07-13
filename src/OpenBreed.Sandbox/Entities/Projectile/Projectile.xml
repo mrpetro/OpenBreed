@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Fsm>
+			<States>
+				<State FsmName="Projectile" StateName="Fired" />
+			</States>
+		</Fsm>
+		<Animation>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>true</Loop>
+				</State>
+			</States>	
+		</Animation>
+		<Position x="0" y="0" />
+		<Thrust x="0" y="0" />
+		<Velocity x="0" y="0" />
+		<Body>
+			<CofFactor>0.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Type>Dynamic</Type>
+			<Fixtures>
+				<Fixture>Fixtures/Projectile</Fixture>
+			</Fixtures>
+		</Body>
+		<Sprite>
+			<AtlasName>Atlases/Sprites/Projectiles/Laser</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Order>0</Order>
+		</Sprite>
+		<Text>
+			<Text>Bullet</Text>
+			<Offset X="-10" Y="10" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>9</FontSize>
+			<Order>0</Order>
+		</Text>
+    </Components>
+</EntityTemplate>

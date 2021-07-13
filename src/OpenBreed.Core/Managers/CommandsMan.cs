@@ -1,6 +1,5 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Helpers;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core.Commands;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,32 +7,49 @@ using System.Reflection;
 
 namespace OpenBreed.Core.Managers
 {
-    public class CommandsMan
+    internal class CommandsMan : ICommandsMan
     {
-        #region Public Constructors
+        #region Private Fields
 
-        public CommandsMan(ICore core)
+        private readonly Dictionary<Type, ICommandHandler> commandHandlers = new Dictionary<Type, ICommandHandler>();
+        private readonly Dictionary<Type, ICommandHandler> handlersEx = new Dictionary<Type, ICommandHandler>();
+
+        private readonly Dictionary<Type, (MethodInfo Method, object Target)> handlers = new Dictionary<Type, (MethodInfo Method, object Target)>();
+        private readonly ILogger logger;
+        private Queue<ICommand> messageQueue = new Queue<ICommand>();
+
+        #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal CommandsMan(ILogger logger)
         {
-            Core = core;
+            this.logger = logger;
         }
 
-        #endregion Public Constructors
-        #region Public Properties
-
-        public ICore Core { get; }
-
-        #endregion Public Properties
+        #endregion Internal Constructors
 
         #region Public Methods
 
-        private readonly Dictionary<Type, (MethodInfo Method, object Target)> handlers = new Dictionary<Type, (MethodInfo Method, object Target)>();
+        public void RegisterHandler<TCommand>(ICommandHandler<TCommand> commandHandler) where TCommand : ICommand
+        {
+            var commandType = typeof(TCommand);
 
-        public void Register<T>(Func<ICore, T, bool> cmdHandler)
+            if (commandHandlers.ContainsKey(commandType))
+                throw new InvalidOperationException($"Handler for command types '{commandType}' already registered.");
+
+            commandHandlers.Add(commandType, commandHandler);
+        }
+
+        public void RegisterCommand<TCommand>(ICommandHandler cmdHandler) where TCommand : ICommand
+        {
+            handlersEx.Add(typeof(TCommand), cmdHandler);
+        }
+
+        public void Register<T>(Func<T, bool> cmdHandler)
         {
             handlers.Add(typeof(T), (cmdHandler.Method, cmdHandler.Target));
         }
-
-        private Queue<ICommand> messageQueue = new Queue<ICommand>();
 
         public void ExecuteEnqueued()
         {
@@ -44,16 +60,49 @@ namespace OpenBreed.Core.Managers
             }
         }
 
+        public void Post(ICommand msg)
+        {
+            Debug.Assert(msg != null);
+
+            if (TryHandleEx(msg))
+                return;
+
+            if (TryHandle(msg))
+                return;
+
+            logger.Warning($"Command '{msg.GetType()}' not registered.");
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
         private void Execute(ICommand msg)
         {
             if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))
                 return;
 
-            handler.Method.Invoke(handler.Target, new object[] {Core,  msg });
+            handler.Method.Invoke(handler.Target, new object[] { msg });
+        }
+
+        private bool TryHandleEx(ICommand msg)
+        {
+            if (handlersEx.TryGetValue(msg.GetType(), out ICommandHandler commandHandler))
+            {
+                commandHandler.Handle(msg);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool TryHandle(ICommand msg)
         {
+
+
+
             if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))
                 return false;
 
@@ -62,20 +111,6 @@ namespace OpenBreed.Core.Managers
             //handler.Method.Invoke(handler.Target, new object[] { msg });
             return true;
         }
-
-        public void Post(ICommand msg)
-        {
-            Debug.Assert(msg != null);
-
-            if (TryHandle(msg))
-                return;
-
-            Core.Logging.Warning($"Command '{msg.GetType()}' not registered.");
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         #endregion Private Methods
     }

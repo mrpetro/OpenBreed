@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Class>
+			<Name>DoorHorizontal</Name>
+		</Class>
+		<Timer>
+		</Timer>
+		<Fsm>
+			<States>
+				<State FsmName="Door.Functioning" StateName="Closed" />
+			</States>
+		</Fsm>
+		<Animation>
+			<States>
+				<State>
+					<Speed>5</Speed>
+					<Loop>false</Loop>		
+				</State>
+			</States>
+		</Animation>
+        <Position x="0" y="0" />
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Type>Static</Type>
+			<Fixtures>
+				<Fixture>Fixtures/DoorHorizontal</Fixture>
+			</Fixtures>
+		</Body>
+		<Sprite>
+			<AtlasName>Atlases/Sprites/Door/Horizontal</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Order>0</Order>
+		</Sprite>
+		<Text>
+			<Text>Door</Text>
+			<Offset X="-10" Y="10" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>9</FontSize>
+			<Order>0</Order>
+		</Text>
+		<!--<Messaging>
+		</Messaging>-->
+    </Components>
+</EntityTemplate>

@@ -1,17 +1,11 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Entities.Builders;
-using OpenBreed.Core.Modules.Physics;
-using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
+﻿using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Entities.Builders;
 using OpenTK;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Builders
 {
@@ -25,30 +19,49 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         #endregion Internal Fields
 
-        #region Public Constructors
+        #region Private Fields
 
-        public WorldBlockBuilder(ICore core) : base(core)
+        private readonly ITileMan tileMan;
+        private readonly IFixtureMan fixtureMan;
+        private readonly BodyComponentBuilder bodyComponentBuilder;
+
+        #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal WorldBlockBuilder(ITileMan tileMan, IFixtureMan fixtureMan, IEntityMan entityMan, BodyComponentBuilder bodyComponentBuilder) : base(entityMan)
         {
-            HasBody = true;
+            this.tileMan = tileMan;
+            this.fixtureMan = fixtureMan;
+            this.bodyComponentBuilder = bodyComponentBuilder;
 
-            physics = core.GetModule<PhysicsModule>();
+            HasBody = true;
         }
 
-        private PhysicsModule physics;
+        #endregion Internal Constructors
 
-        #endregion Public Constructors
+        #region Public Properties
+
+        public bool HasBody { get; set; }
+
+        #endregion Public Properties
 
         #region Public Methods
 
-        public void SetPosition(Vector2 pos )
+        public void SetPosition(float x, float y)
         {
-            this.pos = pos;
+            this.pos = new Vector2(x, y);
         }
 
         public void SetTileAtlas(string atlasAlias)
         {
-            var atlas = Core.Rendering.Tiles.GetByAlias(atlasAlias);
+            var atlas = tileMan.GetByAlias(atlasAlias);
             this.atlasId = atlas.Id;
+        }
+
+        public void SetTileAtlas(int atlasId)
+        {
+            this.atlasId = atlasId;
         }
 
         public void SetTileId(int tileId)
@@ -56,33 +69,27 @@ namespace OpenBreed.Sandbox.Entities.Builders
             this.tileId = tileId;
         }
 
-        public bool HasBody { get; set; }
-
         public override Entity Build()
         {
-            var entity = Core.Entities.Create();
-
+            var entity = entityMan.Create();
             entity.Add(PositionComponent.Create(pos));
-
 
             if (HasBody)
             {
-                var bodyComponentBuilder = BodyComponentBuilder.New(Core);
+                var fixtureId = fixtureMan.GetByAlias("Fixtures/GridCell").Id;
 
-                var fixtureId = physics.Fixturs.GetByAlias("Fixtures/GridCell").Id;
-
-                bodyComponentBuilder.SetProperty("CofFactor", 1.0f);
-                bodyComponentBuilder.SetProperty("CorFactor", 1.0f);
-                bodyComponentBuilder.SetProperty("Type", "Static");
-                bodyComponentBuilder.SetProperty("Fixtures", new List<int> (new int[] { fixtureId }));
+                bodyComponentBuilder.SetCofFactor(1.0f);
+                bodyComponentBuilder.SetCorFactor(1.0f);
+                bodyComponentBuilder.SetType("Static");
+                bodyComponentBuilder.AddFixture(fixtureId);
 
                 entity.Add(bodyComponentBuilder.Build());
+                entity.Add(new CollisionComponent(ColliderTypes.StaticObstacle));
             }
 
-
             var tileComponentBuilder = TileComponentBuilder.New(Core);
-            tileComponentBuilder.SetProperty("AtlasId", atlasId);
-            tileComponentBuilder.SetProperty("ImageId", tileId);
+            tileComponentBuilder.SetAtlasById(atlasId);
+            tileComponentBuilder.SetImageIndex(tileId);
 
             entity.Add(tileComponentBuilder.Build());
 

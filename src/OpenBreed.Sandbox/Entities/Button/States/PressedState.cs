@@ -1,9 +1,8 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.States;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Fsm;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
@@ -12,15 +11,17 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         #region Private Fields
 
         private readonly int stampId;
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PressedState()
+        public PressedState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
-            //Name = id;
-            //this.stampId = stampId;
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -36,30 +37,26 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         public void EnterState(Entity entity)
         {
-            entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
+            commandsMan.Post(new SpriteOffCommand(entity.Id));
 
             var pos = entity.Get<PositionComponent>();
-            entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
+            commandsMan.Post(new PutStampCommand(entity.Id, stampId, 0, pos.Value));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
-            entity.Subscribe<CollisionEventArgs>(OnCollision);
+            //entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<CollisionEventArgs>(OnCollision);
+            //entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
         #endregion Public Methods
 
-        #region Private Methods
-
-        private void OnCollision(object sender, CollisionEventArgs eventArgs)
-        {
-            var entity = sender as Entity;
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Unpress));
-        }
-
-        #endregion Private Methods
+        //private void OnCollision(object sender, CollisionEventArgs eventArgs)
+        //{
+        //    var entity = sender as Entity;
+        //    entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Unpress));
+        //}
     }
 }

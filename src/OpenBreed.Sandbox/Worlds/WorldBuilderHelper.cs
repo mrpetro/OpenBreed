@@ -1,14 +1,16 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;
+using OpenBreed.Sandbox.Entities.Turret;
+using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Entities.WorldGate;
+using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -27,7 +29,8 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private WorldBuilder builder;
-
+        private readonly IEntityMan entityMan;
+        private readonly ViewportCreator viewportCreator;
         private Dictionary<int, Tuple<string, int>> exits = new Dictionary<int, Tuple<string, int>>();
 
         private Dictionary<int, (int, int, string)> viewports = new Dictionary<int, (int, int, string)>();
@@ -37,9 +40,11 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Constructors
 
-        public WorldBuilderHelper(WorldBuilder builder)
+        public WorldBuilderHelper(WorldBuilder builder, IEntityMan entityMan, ViewportCreator viewportCreator)
         {
             this.builder = builder;
+            this.entityMan = entityMan;
+            this.viewportCreator = viewportCreator;
         }
 
         #endregion Public Constructors
@@ -65,8 +70,11 @@ namespace OpenBreed.Sandbox.Worlds
             builder.RegisterCode('}', AddWorldEntry);
             builder.RegisterCode('{', AddWorldExit);
             builder.RegisterCode('V', AddViewport);
-
+            builder.RegisterCode('T', AddTurret);
+            builder.RegisterCode('A', AddAnimTest);
             builder.RegisterCode(' ', AddAirCell);
+
+            //builder.RegisterCodeModule(' ', new AirBuilderModule(commandsMan, worldBlockBuilder);
 
             builder.RegisterCode(PLAYER_SPAWN_POINT, AddPlayer);
         }
@@ -75,9 +83,8 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Private Methods
 
-        private void AddViewport(World world, int code, object[] args)
+        private void AddViewport(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
@@ -85,51 +92,69 @@ namespace OpenBreed.Sandbox.Worlds
             if (!viewports.TryGetValue(pairCode, out (int Width, int Height, string CameraName ) viewportData))
                 return;
 
-            var vp = ScreenWorldHelper.CreateViewportEntity(core, $"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, true);
+            var vp = viewportCreator.CreateViewportEntity($"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, ScreenWorldHelper.GAME_VIEWPORT);
 
-            vp.Get<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
+            vp.Get<ViewportComponent>().CameraEntityId = entityMan.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
             vp.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //GameWorldHelper.SetPreserveAspectRatio(vp);
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, vp.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, vp.Id));
             //world.AddEntity(vp);
         }
 
-        private static void AddTeleportEntry(World world, int code, object[] args)
+        private static void AddTeleportEntry(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            TeleportHelper.AddTeleportEntry(world, x, y, pairCode);
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            var teleportEntry = TeleportHelper.AddTeleportEntry(core, world, x, y, pairCode);
+            core.Commands.Post(new TileSetCommand(teleportEntry.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private static void AddWorldEntry(World world, int code, object[] args)
+        private static void AddWorldEntry(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            WorldGateHelper.AddWorldEntry(world, x, y, pairCode);
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            var worldGateHelper = core.GetManager<WorldGateHelper>();
+            var worldEntry = worldGateHelper.AddWorldEntry(world, x, y, pairCode);
+            core.Commands.Post(new TileSetCommand(worldEntry.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private static void AddTeleportExit(World world, int code, object[] args)
+        private static void AddAnimTest(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            TeleportHelper.AddTeleportExit(world, x, y, pairCode);
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            var crazyMover = Misc.AddToWorld(core, world);
+            core.Commands.Post(new TileSetCommand(crazyMover.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private void AddWorldExit(World world, int code, object[] args)
+        private static void AddTurret(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
+            var x = (int)args[0];
+            var y = (int)args[1];
+            var pairCode = (int)args[2];
+
+            var turret = TurretHelper.Create(core, new Vector2(x * 16, y * 16));
+            core.Commands.Post(new AddEntityCommand(world.Id, turret.Id));
+            core.Commands.Post(new TileSetCommand(turret.Id, 0, 12, new Vector2(x * 16, y * 16)));
+        }
+
+        private static void AddTeleportExit(ICore core, World world, int code, object[] args)
+        {
+            var x = (int)args[0];
+            var y = (int)args[1];
+            var pairCode = (int)args[2];
+
+            var teleportEntity = TeleportHelper.AddTeleportExit(core, world, x, y, pairCode);
+            core.Commands.Post(new TileSetCommand(teleportEntity.Id, 0, 12, new Vector2(x * 16, y * 16)));
+        }
+
+        private void AddWorldExit(ICore core, World world, int code, object[] args)
+        {
             var x = (int)args[0];
             var y = (int)args[1];
             var exitNo = (int)args[2];
@@ -138,15 +163,17 @@ namespace OpenBreed.Sandbox.Worlds
             if (!exits.TryGetValue(exitNo, out exitInfo))
                 return;
 
-            WorldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            var worldGateHelper = core.GetManager<WorldGateHelper>();
+
+            var worldExit = worldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
+            core.Commands.Post(new TileSetCommand(worldExit.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private static void AddPlayer(World world, int code, object[] args)
+        private static void AddPlayer(ICore core, World world, int code, object[] args)
         {
         }
 
-        private static int ToTileId(int gfxCode)
+        public static int ToTileId(int gfxCode)
         {
             switch (gfxCode)
             {
@@ -182,53 +209,52 @@ namespace OpenBreed.Sandbox.Worlds
             }
         }
 
-        private static void AddAirCell(World world, int code, object[] args)
+        private static void AddAirCell(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var gfxCode = (int)args[2];
 
-            var blockBuilder = new WorldBlockBuilder(world.Core);
+            var blockBuilder = core.GetManager<WorldBlockBuilder>();
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
             blockBuilder.HasBody = false;
-            blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
+            blockBuilder.SetPosition(x * 16, y * 16);
             blockBuilder.SetTileId(ToTileId(gfxCode));
 
             var entity = blockBuilder.Build();
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
             //world.AddEntity(blockBuilder.Build());
         }
 
-        private static void AddObstacleCell(World world, int code, object[] args)
+        private static void AddObstacleCell(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var gfxCode = (int)args[2];
 
-            var blockBuilder = new WorldBlockBuilder(world.Core);
+            var blockBuilder = core.GetManager<WorldBlockBuilder>();
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
             blockBuilder.HasBody = true;
-            blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
+            blockBuilder.SetPosition(x * 16, y * 16);
             blockBuilder.SetTileId(ToTileId(gfxCode));
 
             var entity = blockBuilder.Build();
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
             //world.AddEntity(blockBuilder.Build());
         }
 
-        private static void AddDoor(World world, int code, object[] args)
+        private static void AddDoor(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
+            var doorHelper = core.GetManager<DoorHelper>();
+
             var x = (int)args[0];
             var y = (int)args[1];
             var type = (int)args[2];
 
             if (type == 'H')
-                DoorHelper.AddHorizontalDoor(world, x, y);
+                doorHelper.AddHorizontalDoor(world, x, y);
             else if (type == 'V')
-                DoorHelper.AddVerticalDoor(world, x, y);
+                doorHelper.AddVerticalDoor(world, x, y);
         }
 
         #endregion Private Methods

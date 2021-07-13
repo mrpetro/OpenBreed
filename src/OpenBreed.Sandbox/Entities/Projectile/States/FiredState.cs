@@ -1,12 +1,10 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.States;
+﻿using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Wecs.Systems.Animation.Commands;
+using OpenBreed.Fsm;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
 {
@@ -15,14 +13,16 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         #region Private Fields
 
         private readonly string animPrefix;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FiredState(string animPrefix)
+        public FiredState(string animPrefix, ICommandsMan commandsMan)
         {
             this.animPrefix = animPrefix;
+            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -42,9 +42,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Projectile - Fired"));
-            entity.Subscribe<CollisionEventArgs>(OnCollision);
+            commandsMan.Post(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Projectile - Fired"));
         }
 
         public void Initialize(Entity entity)
@@ -59,10 +58,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         #region Private Methods
 
-        private void OnCollision(object sender, CollisionEventArgs e)
-        {
-            //Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Open"));
-        }
 
         #endregion Private Methods
     }

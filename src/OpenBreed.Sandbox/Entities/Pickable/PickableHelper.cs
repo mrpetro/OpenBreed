@@ -3,8 +3,8 @@
 //using OpenBreed.Core.Common;
 //using OpenBreed.Core.Common.Systems.Components;
 //using OpenBreed.Core.Entities;
-//using OpenBreed.Core.Modules.Physics.Components;
-//using OpenBreed.Core.Modules.Physics.Events;
+//using OpenBreed.Physics.Generic.Components;
+//using OpenBreed.Physics.Generic.Events;
 //using OpenBreed.Core.States;
 //using OpenBreed.Sandbox.Entities.Pickable.States;
 //using OpenBreed.Sandbox.Helpers;
@@ -33,7 +33,7 @@
 
 //        public static void AddItem(ICore core, World world, int x, int y)
 //        {
-//            var item = core.Entities.Create();
+//            var item = core.GetManager<IEntityMan>().Create();
 
 //            //item.Add(new Animator(5.0f, false));
 //            item.Add(BodyComponent.Create(1.0f, 1.0f, "Trigger"));

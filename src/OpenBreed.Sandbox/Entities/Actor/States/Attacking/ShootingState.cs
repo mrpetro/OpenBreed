@@ -1,23 +1,33 @@
-﻿
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.States;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Managers;
+using OpenBreed.Fsm;
 using OpenBreed.Sandbox.Entities.Projectile;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenTK;
-using System;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
     public class ShootingState : IState<AttackingState, AttackingImpulse>
     {
+        #region Private Fields
+
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
+        private readonly ProjectileHelper projectileHelper;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public ShootingState()
+        public ShootingState(IFsmMan fsmMan, ICommandsMan commandsMan, ProjectileHelper projectileHelper)
         {
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
+            this.projectileHelper = projectileHelper;
         }
 
         #endregion Public Constructors
@@ -34,25 +44,27 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState(Entity entity)
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
+            var currentStateNames = fsmMan.GetStateNames(entity);
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
 
             var pos = entity.Get<PositionComponent>().Value;
-            pos += new Vector2(8,8);
-            var direction = entity.Get<DirectionComponent>().Value;
+            pos += new Vector2(8, 8);
+            var direction = entity.Get<AngularPositionComponent>().GetDirection();
             direction.Normalize();
             direction *= 500.0f;
-            ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);
+            projectileHelper.AddProjectile(entity.WorldId, pos.X, pos.Y, direction.X, direction.Y);
 
             //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
             //entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
+            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
         }
 
         public void LeaveState(Entity entity)
         {
             //Entity.Unsubscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
         }
+
+        #endregion Public Methods
 
         //private void OnControlFireChanged(object sender, IEvent e)
         //{
@@ -66,13 +78,5 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         //    else
         //        Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Cooldown"));
         //}
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-
-
-        #endregion Private Methods
     }
 }

@@ -1,4 +1,6 @@
-﻿using OpenBreed.Core.Common;
+﻿using OpenBreed.Core;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;

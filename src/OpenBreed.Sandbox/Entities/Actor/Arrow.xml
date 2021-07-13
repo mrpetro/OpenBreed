@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Class>
+			<Name>Actor</Name>
+		</Class>
+		<Timer>
+		</Timer>
+		<Fsm>
+			<States>
+				<State FsmName="Actor.Movement" StateName="Standing" />
+				<State FsmName="Actor.Attacking" StateName="Idle" />
+			</States>
+		</Fsm>
+		<Animation>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>true</Loop>
+					<ClipName>Animations/Teleport/Entry</ClipName>
+				</State>
+			</States>
+		</Animation>
+        <Position x="0" y="0" />
+		<Thrust x="0" y="0" />
+		<Velocity x="0" y="0" />
+		<AngularPosition>
+			<Value>0</Value>
+		</AngularPosition>
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>0.0</CorFactor>
+			<Type>Dynamic</Type>
+			<Fixtures>
+				<Fixture>Fixtures/Arrow</Fixture>
+			</Fixtures>
+		</Body>
+		<Motion></Motion>
+		<Sprite>
+			<AtlasName>Atlases/Sprites/Arrow</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Order>100</Order>
+		</Sprite>
+		<Text>
+			<Text>Hero</Text>
+			<Offset X="0" Y="32" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>9</FontSize>
+			<Order>0</Order>
+		</Text>
+    </Components>
+</EntityTemplate>

@@ -1,11 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Builders;
-using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Builders;
-using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Wecs.Components.Common;
 using OpenTK;
 using OpenTK.Graphics;
 using System;
@@ -13,6 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Core;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities
 {
@@ -22,13 +23,13 @@ namespace OpenBreed.Sandbox.Entities
         {
         }
 
-        public static Entity CreateText(World world)
+        public static Entity CreateText(IEntityMan entityMan, IFontMan fontMan, World world)
         {
-            var e = world.Core.Entities.Create();
+            var e = entityMan.Create();
             e.Add(new TextCaretComponent());
             e.Add(new TextDataComponent("This is test"));
 
-            var font = world.Core.Rendering.Fonts.Create("Consolas", 20);
+            var font = fontMan.Create("Consolas", 20);
 
             e.Add(new TextPresentationComponent(font.Id, Color4.White, 200.0f));
             e.Add(PositionComponent.Create(-200.0f,50.0f));

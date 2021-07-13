@@ -1,37 +1,37 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Animation.Systems;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+﻿using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenTK;
 using System.Linq;
-using OpenBreed.Core.Common.Systems;
-
-using OpenBreed.Core.Modules.Physics.Commands;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Wecs.Systems.Physics.Commands;
+using OpenBreed.Fsm;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class OpenedState : IState<FunctioningState, FunctioningImpulse>
+    public class OpenedState : IState
     {
         #region Private Fields
 
         private readonly string stampPrefix;
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
+        private readonly IStampMan stampMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenedState()
+        public OpenedState(IFsmMan fsmMan, ICommandsMan commandsMan, IStampMan stampMan)
         {
             this.stampPrefix = "Tiles/Stamps";
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
+            this.stampMan = stampMan;
         }
 
         #endregion Public Constructors
@@ -47,20 +47,20 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
-            entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
-            entity.Core.Commands.Post(new BodyOffCommand(entity.Id));
+            commandsMan.Post(new SpriteOffCommand(entity.Id));
+            commandsMan.Post(new BodyOffCommand(entity.Id));
 
             var pos = entity.Get<PositionComponent>();
 
             //entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
             var className = entity.Get<ClassComponent>().Name;
-            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
-            var stampId = entity.Core.Rendering.Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
-            entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            var stateName = fsmMan.GetStateName(FsmId, Id);
+            var stampId = stampMan.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
+            commandsMan.Post(new PutStampCommand(entity.Id, stampId, 0, pos.Value));
 
 
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));
         }
 
         public void LeaveState(Entity entity)

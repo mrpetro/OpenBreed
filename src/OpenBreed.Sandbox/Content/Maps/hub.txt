@@ -17,7 +17,7 @@ O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
 O4{3 5 5DV 5 5 5 5 5 5 5 5 5 5O4
 O1O2O2O2O9 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
- 0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
+ 0 0 0 0O4 5 5 5 5 5 5T5 5 5 5O4
 O7O2O2O2O3 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
 O4{2 5 5DV 5 5 5 5 5 5 5 5 5 5O4
@@ -25,13 +25,13 @@ O1O2O2O2O9 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
 O7O2O2O2O3 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4{1 5 5DV 5 5 5 5 5 5 5 5 5 5O4
+O4 5 5 5 5 5 5A5 5 5 5 5 5 5 5O4
+O4{1 5 5DV 5 5 5 5 5 5T5 5 5 5O4
 O1O2O2O2O9 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5<1 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5}1 5 5 5O4
-V1 0 0 0O1O2O2O2O2O2O2O2O2O2O2O3
+ 0 0 0 0O1O2O2O2O2O2O2O2O2O2O2O3
 MAP.EXITS 3
 1 DEMO_1 1
 2 DEMO_2 1
@@ -46,3 +46,4 @@ D - Door (V - Vertical, H - Horizontal)
 < - Teleport Exit (Number - Number of teleport pair)
 } - World Entry (Number - Number of gate pair)
 { - World Exit (Number - Number of gate pair)
+T - Turret

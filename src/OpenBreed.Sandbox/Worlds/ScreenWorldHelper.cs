@@ -1,79 +1,94 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Builders;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenTK.Graphics;
+using OpenBreed.Core.Managers;
+using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Entities.Viewport;
+using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Events;
+using OpenBreed.Wecs.Worlds;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Worlds
 {
-    public static class ScreenWorldHelper
+    public class ScreenWorldHelper
     {
+        #region Public Fields
+
         public const string GAME_VIEWPORT = "GameViewport";
+
         public const string HUD_VIEWPORT = "HUDViewport";
+
         public const string TEXT_VIEWPORT = "TextViewport";
 
-        public static void AddSystems(Program core, WorldBuilder builder)
+        #endregion Public Fields
+
+        #region Private Fields
+
+        private readonly ICore core;
+        private readonly ISystemFactory systemFactory;
+        private readonly ICommandsMan commandsMan;
+        private readonly IRenderingMan renderingMan;
+        private readonly IWorldMan worldMan;
+        private readonly IEventsMan eventsMan;
+        private readonly ViewportCreator viewportCreator;
+        private readonly IViewClient viewClient;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public ScreenWorldHelper(ICore core, ISystemFactory systemFactory, ICommandsMan commandsMan, IRenderingMan renderingMan, IWorldMan worldMan, IEventsMan eventsMan, ViewportCreator viewportCreator, IViewClient viewClient)
+        {
+            this.core = core;
+            this.systemFactory = systemFactory;
+            this.commandsMan = commandsMan;
+            this.renderingMan = renderingMan;
+            this.worldMan = worldMan;
+            this.eventsMan = eventsMan;
+            this.viewportCreator = viewportCreator;
+            this.viewClient = viewClient;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void AddSystems(WorldBuilder builder)
         {
             //Video
-            builder.AddSystem(new ViewportSystem(core));
+            builder.AddSystem(systemFactory.Create<ViewportSystem>());
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             //builder.AddSystem(core.CreateTextSystem().Build());
         }
 
-        public static Entity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
+        public World CreateWorld()
         {
-            var viewport = core.Entities.Create();
-            viewport.Tag = name;
+            var builder = worldMan.Create().SetName("ScreenWorld");
+            AddSystems(builder);
 
-            var vpcBuilder = ViewportComponentBuilder.New(core);
-            vpcBuilder.SetProperty("Width", width);
-            vpcBuilder.SetProperty("Height", height);
-            vpcBuilder.SetProperty("DrawBorder", true);
-            vpcBuilder.SetProperty("DrawBackground", drawBackground);
-            vpcBuilder.SetProperty("Clipping", clipping);
-            vpcBuilder.SetProperty("BackgroundColor", Color4.Black);
+            var world = builder.Build(core);
 
-            viewport.Add(vpcBuilder.Build());
-            viewport.Add(PositionComponent.Create(x, y));
-
-            return viewport;
-        }
-
-        public static World CreateWorld(Program core)
-        {
-            var builder = core.Worlds.Create().SetName("ScreenWorld");
-            AddSystems(core, builder);
-
-            var world = builder.Build();
-
-            var gameViewport = CreateViewportEntity(core, GAME_VIEWPORT, 32, 32, core.ClientRectangle.Width - 64, core.ClientRectangle.Height - 64, true, true);
+            var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 32, 32, viewClient.ClientRectangle.Width - 64, viewClient.ClientRectangle.Height - 64, GAME_VIEWPORT);
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
-            var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
-            var textViewport = CreateViewportEntity(core, TEXT_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
+            var hudViewport = viewportCreator.CreateViewportEntity(HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, HUD_VIEWPORT);
+            var textViewport = viewportCreator.CreateViewportEntity(TEXT_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, TEXT_VIEWPORT);
 
-            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
-            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
-            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeTextViewport(hudViewport, a));
+            renderingMan.ClientResized += (s, a) => ResizeGameViewport(gameViewport, a);
+            renderingMan.ClientResized += (s, a) => ResizeHudViewport(hudViewport, a);
+            renderingMan.ClientResized += (s, a) => ResizeTextViewport(hudViewport, a);
 
-
-            core.Commands.Post(new AddEntityCommand(world.Id, gameViewport.Id));
-            core.Commands.Post(new AddEntityCommand(world.Id, hudViewport.Id));
-            core.Commands.Post(new AddEntityCommand(world.Id, textViewport.Id));
+            commandsMan.Post(new AddEntityCommand(world.Id, gameViewport.Id));
+            commandsMan.Post(new AddEntityCommand(world.Id, hudViewport.Id));
+            commandsMan.Post(new AddEntityCommand(world.Id, textViewport.Id));
             //world.AddEntity(gameViewport);
             //world.AddEntity(hudViewport);
 
@@ -82,24 +97,30 @@ namespace OpenBreed.Sandbox.Worlds
             return world;
         }
 
-        private static void OnViewportClick(object sender, ViewportClickedEventArgs args)
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void OnViewportClick(object sender, ViewportClickedEventArgs args)
         {
             throw new NotImplementedException();
         }
 
-        private static void ResizeGameViewport(Entity viewport, ClientResizedEventArgs args)
+        private void ResizeGameViewport(Entity viewport, ClientResizedEventArgs args)
         {
-            viewport.Core.Commands.Post(new ViewportResizeCommand(viewport.Id, args.Width - 64, args.Height - 64));
+            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width - 64, args.Height - 64));
         }
 
-        private static void ResizeHudViewport(Entity viewport, ClientResizedEventArgs args)
+        private void ResizeHudViewport(Entity viewport, ClientResizedEventArgs args)
         {
-            viewport.Core.Commands.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
+            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
         }
 
-        private static void ResizeTextViewport(Entity viewport, ClientResizedEventArgs args)
+        private void ResizeTextViewport(Entity viewport, ClientResizedEventArgs args)
         {
-            viewport.Core.Commands.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
+            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
         }
+
+        #endregion Private Methods
     }
 }

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>OpenBreed.Core</RootNamespace>
     <AssemblyName>OpenBreed.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -77,149 +77,35 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Commands\FollowedAddFollowerCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\AddEntityCommand.cs" />
-    <Compile Include="Commands\RemoveEntityCommand.cs" />
-    <Compile Include="Commands\FollowerSetTargetCommand.cs" />
-    <Compile Include="Commands\TextDataRemove.cs" />
-    <Compile Include="Commands\TextDataInsert.cs" />
-    <Compile Include="Commands\TextCaretSetPosition.cs" />
-    <Compile Include="Commands\TimerStopCommand.cs" />
-    <Compile Include="Commands\TimerStartCommand.cs" />
-    <Compile Include="Commands\PauseWorldCommand.cs" />
-    <Compile Include="Common\Builders\TimerComponentBuilder.cs" />
-    <Compile Include="Common\Builders\FsmComponentBuilder.cs" />
-    <Compile Include="Common\Builders\ClassComponentBuilder.cs" />
-    <Compile Include="Common\Components\ClassComponent.cs" />
-    <Compile Include="Common\Components\FollowerComponent.cs" />
-    <Compile Include="Common\Components\GroupComponent.cs" />
-    <Compile Include="Common\Components\TextCaretComponent.cs" />
-    <Compile Include="Common\Components\TextDataComponent.cs" />
-    <Compile Include="Common\Components\TimerComponent.cs" />
     <Compile Include="CoreBase.cs" />
-    <Compile Include="Events\EntityAddedEventArgs.cs" />
-    <Compile Include="Events\EntityRemovedEventArgs.cs" />
+    <Compile Include="CoreFactory.cs" />
+    <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\TextDataChanged.cs" />
     <Compile Include="Events\TextCaretPositionChanged.cs" />
-    <Compile Include="Events\TimerUpdateEventArgs.cs" />
-    <Compile Include="Events\TimerElapsedEventArgs.cs" />
-    <Compile Include="EntityJob.cs" />
-    <Compile Include="Events\WorldUnpausedEventArgs.cs" />
-    <Compile Include="Events\WorldPausedEventArgs.cs" />
-    <Compile Include="Modules\Animation\Builders\AnimationComponentBuilder.cs" />
-    <Compile Include="Common\Builders\BaseComponentBuilder.cs" />
-    <Compile Include="Common\Builders\IBuilder.cs" />
-    <Compile Include="Common\Builders\PositionComponentBuilder.cs" />
-    <Compile Include="Common\Builders\VelocityComponentBuilder.cs" />
-    <Compile Include="Common\Builders\ThrustComponentBuilder.cs" />
-    <Compile Include="Common\Builders\DirectionComponentBuilder.cs" />
-    <Compile Include="Common\Builders\IComponentBuilder.cs" />
-    <Compile Include="Modules\Animation\Builders\AnimationSystemBuilder.cs" />
-    <Compile Include="Modules\Animation\Components\AnimationComponent.cs" />
-    <Compile Include="Common\Components\PauseImmuneComponent.cs" />
-    <Compile Include="Builders\IWorldSystemBuilder.cs" />
-    <Compile Include="Common\Components\ShapeComponent.cs" />
-    <Compile Include="Common\Components\FsmComponent.cs" />
-    <Compile Include="Common\Shapes\BoxShape.cs" />
-    <Compile Include="Common\Shapes\CircleShape.cs" />
-    <Compile Include="Common\Shapes\IShape.cs" />
-    <Compile Include="Common\Shapes\PolygonShape.cs" />
-    <Compile Include="Events\WorldDeinitializedEventArgs.cs" />
-    <Compile Include="Events\WorldInitializedEventArgs.cs" />
+    <Compile Include="Extensions\QuaternionExtension.cs" />
+    <Compile Include="Extensions\Vector2Extension.cs" />
+    <Compile Include="Extensions\Vector3Extension.cs" />
+    <Compile Include="IViewClient.cs" />
+    <Compile Include="Managers\IEventHandler.cs" />
+    <Compile Include="Managers\IEventQueue.cs" />
+    <Compile Include="Managers\IEventsMan.cs" />
+    <Compile Include="Managers\ICommandsMan.cs" />
     <Compile Include="IJob.cs" />
-    <Compile Include="Collections\IdMap.cs" />
-    <Compile Include="Builders\ComponentBuilder.cs" />
-    <Compile Include="Common\Components\EquipmentComponent.cs" />
-    <Compile Include="Common\Components\IControlComponent.cs" />
-    <Compile Include="Common\Components\InventoryComponent.cs" />
-    <Compile Include="Managers\AnimMan.cs" />
     <Compile Include="Managers\EventsMan.cs" />
     <Compile Include="Helpers\MovementTools.cs" />
-    <Compile Include="Managers\FsmMan.cs" />
-    <Compile Include="Managers\IScriptMan.cs" />
-    <Compile Include="Managers\LuaScriptMan.cs" />
-    <Compile Include="Managers\ShapeMan.cs" />
-    <Compile Include="Modules\Animation\Commands\PauseAnimCommand.cs" />
-    <Compile Include="Modules\Animation\Commands\PlayAnimCommand.cs" />
-    <Compile Include="Modules\Animation\Commands\SetAnimCommand.cs" />
-    <Compile Include="Modules\Animation\Commands\StopAnimCommand.cs" />
-    <Compile Include="Modules\Animation\Events\AnimChangedEventArgs.cs" />
-    <Compile Include="Modules\Animation\Events\AnimStoppedEventArgs.cs" />
-    <Compile Include="Modules\Animation\Helpers\Animation.cs" />
-    <Compile Include="Modules\Animation\Systems\AnimationSystem.cs" />
-    <Compile Include="Modules\BaseCoreModule.cs" />
-    <Compile Include="Scripting\IScriptFunc.cs" />
-    <Compile Include="Scripting\LuaScriptFunc.cs" />
-    <Compile Include="Systems\FollowerSystem.cs" />
-    <Compile Include="Systems\ISystem.cs" />
-    <Compile Include="Systems\TextInputSystem.cs" />
-    <Compile Include="WorldJob.cs" />
-    <Compile Include="Systems\StateMachineSystem.cs" />
-    <Compile Include="Systems\TimerSystem.cs" />
-    <Compile Include="CoreTools.cs" />
     <Compile Include="Managers\CommandsMan.cs" />
-    <Compile Include="Commands\DestroyEntityCommand.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Inputs\IControlHandler.cs" />
-    <Compile Include="Managers\ComponentsMan.cs" />
-    <Compile Include="Managers\ILogMan.cs" />
-    <Compile Include="Inputs\InputControl.cs" />
-    <Compile Include="Inputs\InputController.cs" />
-    <Compile Include="Managers\InputsMan.cs" />
-    <Compile Include="Inputs\IPlayerInput.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Managers\ItemsMan.cs" />
     <Compile Include="JobChain.cs" />
+    <Compile Include="Managers\IMessagesMan.cs" />
     <Compile Include="Managers\JobMan.cs" />
+    <Compile Include="Managers\EventQueue.cs" />
+    <Compile Include="Managers\MessagesMan.cs" />
     <Compile Include="MathTools.cs" />
-    <Compile Include="Modules\Animation\Helpers\IAnimation.cs" />
-    <Compile Include="Modules\Audio\Components\IAudioComponent.cs" />
-    <Compile Include="Modules\Audio\Components\ISoundEmiter.cs" />
-    <Compile Include="Modules\Audio\Helpers\ISound.cs" />
-    <Compile Include="Managers\ISoundMan.cs" />
-    <Compile Include="Modules\Rendering\Components\Builders\IStampBuilder.cs" />
-    <Compile Include="Managers\IFontMan.cs" />
-    <Compile Include="Managers\ISpriteMan.cs" />
-    <Compile Include="Managers\IStampMan.cs" />
-    <Compile Include="Modules\Rendering\Helpers\ITileStamp.cs" />
-    <Compile Include="Modules\Rendering\Helpers\IFont.cs" />
-    <Compile Include="Managers\ITileMan.cs" />
-    <Compile Include="Modules\Rendering\Helpers\ITileAtlas.cs" />
-    <Compile Include="Modules\Rendering\Helpers\ISpriteAtlas.cs" />
-    <Compile Include="Managers\ITextureMan.cs" />
-    <Compile Include="Modules\ICoreModule.cs" />
-    <Compile Include="Modules\Rendering\IRenderModule.cs" />
-    <Compile Include="Modules\Audio\IAudioModule.cs" />
-    <Compile Include="Modules\Rendering\Helpers\ITexture.cs" />
-    <Compile Include="Modules\Rendering\Systems\IWireframeSystem.cs" />
     <Compile Include="Other.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Managers\PlayersMan.cs" />
-    <Compile Include="States\IState.cs" />
-    <Compile Include="Commands\EntitySetStateCommand.cs" />
-    <Compile Include="States\StateMachine.cs" />
-    <Compile Include="Common\Components\ThrustComponent.cs" />
-    <Compile Include="Common\Components\VelocityComponent.cs" />
-    <Compile Include="Common\Components\PositionComponent.cs" />
-    <Compile Include="Common\Components\DirectionComponent.cs" />
-    <Compile Include="Modules\Physics\IPhysicsSystem.cs" />
-    <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
-    <Compile Include="Systems\IRenderableSystem.cs" />
-    <Compile Include="Systems\IUpdatableSystem.cs" />
-    <Compile Include="Systems\IWorldSystem.cs" />
-    <Compile Include="Systems\WorldSystem.cs" />
-    <Compile Include="Common\Components\Transformation.cs" />
     <Compile Include="ICore.cs" />
-    <Compile Include="Common\Components\IEntityComponent.cs" />
-    <Compile Include="Entities\IEntityBuilder.cs" />
-    <Compile Include="Entities\Builders\EntityBuilder.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Managers\EntityMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\World.cs" />
-    <Compile Include="WorldBuilder.cs" />
-    <Compile Include="Managers\WorldMan.cs" />
+    <Compile Include="OpenTKWindowClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
@@ -250,6 +136,16 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
+      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
+      <Name>OpenBreed.Common.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
+      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Name>OpenBreed.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
