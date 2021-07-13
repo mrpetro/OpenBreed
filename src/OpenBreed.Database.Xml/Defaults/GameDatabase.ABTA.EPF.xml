@@ -3954,86 +3954,100 @@
 				<Animation Id="Animations.DoorVertical.Closing">
 					<Length>5.0</Length>
 					<Tracks>
-						<!-- <Track> -->
-							<!-- <AnimatorType>Sprite</AnimatorType> -->
-							<!-- <AnimatorArguments> -->
-								<!-- <Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg> -->
-							<!-- </AnimatorArguments> -->
-							<!-- <Frames> -->
-								<!-- <Frame Time="0.0" ValueIndex="4" /> -->
-							<!-- </Frames> -->
-						<!-- </Track> -->
-						<Track>
+						<!-- <IntegerTrack> -->
+						<!-- <Component>Sprite</Component> -->
+						<!-- <AnimatorArguments> -->
+						<!-- <Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg> -->
+						<!-- </AnimatorArguments> -->
+						<!-- <Frames> -->
+						<!-- <Frame Time="0.0" Value="4" /> -->
+						<!-- </Frames> -->
+						<!-- </IntegerTrack> -->
+						<IntegerTrack>
 							<Interpolation>None</Interpolation>
-							<AnimatorType>Sprite</AnimatorType>
-							<AnimatorArguments>
-								<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
-							</AnimatorArguments>
+							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="1.0" ValueIndex="4" />
-								<Frame Time="2.0" ValueIndex="3"  />
-								<Frame Time="3.0" ValueIndex="2" />
-								<Frame Time="4.0" ValueIndex="1" />
-								<Frame Time="5.0" ValueIndex="0" />
+								<Frame Time="1.0" Value="4" />
+								<Frame Time="2.0" Value="3"  />
+								<Frame Time="3.0" Value="2" />
+								<Frame Time="4.0" Value="1" />
+								<Frame Time="5.0" Value="0" />
 							</Frames>
-						</Track>
+						</IntegerTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations.DoorVertical.Opening">
 					<Length>5.0</Length>
 					<Tracks>
-						<Track>
+						<IntegerTrack>
 							<Interpolation>None</Interpolation>
-							<AnimatorType>Sprite</AnimatorType>
-							<AnimatorArguments>
-								<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
-							</AnimatorArguments>
+							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="1.0" ValueIndex="0" />
-								<Frame Time="2.0" ValueIndex="1" />
-								<Frame Time="3.0" ValueIndex="2" />
-								<Frame Time="4.0" ValueIndex="3" />
-								<Frame Time="5.0" ValueIndex="4" />
+								<Frame Time="1.0" Value="0" />
+								<Frame Time="2.0" Value="1" />
+								<Frame Time="3.0" Value="2" />
+								<Frame Time="4.0" Value="3" />
+								<Frame Time="5.0" Value="4" />
 							</Frames>
-						</Track>
+						</IntegerTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations.DoorHorizontal.Closing">
 					<Length>5.0</Length>
 					<Tracks>
-						<Track>
+						<IntegerTrack>
 							<Interpolation>None</Interpolation>
-							<AnimatorType>Sprite</AnimatorType>
-							<AnimatorArguments>
-								<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
-							</AnimatorArguments>
+							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="1.0" ValueIndex="4" />
-								<Frame Time="2.0" ValueIndex="3"  />
-								<Frame Time="3.0" ValueIndex="2" />
-								<Frame Time="4.0" ValueIndex="1" />
-								<Frame Time="5.0" ValueIndex="0" />
+								<Frame Time="1.0" Value="4" />
+								<Frame Time="2.0" Value="3"  />
+								<Frame Time="3.0" Value="2" />
+								<Frame Time="4.0" Value="1" />
+								<Frame Time="5.0" Value="0" />
 							</Frames>
-						</Track>
+						</IntegerTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations.DoorHorizontal.Opening">
 					<Length>5.0</Length>
 					<Tracks>
-						<Track>
+						<IntegerTrack>
 							<Interpolation>None</Interpolation>
-							<AnimatorType>Sprite</AnimatorType>
-							<AnimatorArguments>
-								<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
-							</AnimatorArguments>
+							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="1.0" ValueIndex="0" />
-								<Frame Time="2.0" ValueIndex="1" />
-								<Frame Time="3.0" ValueIndex="2" />
-								<Frame Time="4.0" ValueIndex="3" />
-								<Frame Time="5.0" ValueIndex="4" />
+								<Frame Time="1.0" Value="0" />
+								<Frame Time="2.0" Value="1" />
+								<Frame Time="3.0" Value="2" />
+								<Frame Time="4.0" Value="3" />
+								<Frame Time="5.0" Value="4" />
 							</Frames>
-						</Track>
+						</IntegerTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Animations/Camera/Effects/FadeOut">
+					<Length>10.0</Length>
+					<Tracks>
+						<FloatTrack>
+							<Interpolation>Linear</Interpolation>
+							<Controller>Camera.Brightness</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="1.0" />
+								<Frame Time="10.0" Value="0.0" />
+							</Frames>
+						</FloatTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Animations/Camera/Effects/FadeIn">
+					<Length>10.0</Length>
+					<Tracks>
+						<FloatTrack>
+							<Interpolation>Linear</Interpolation>
+							<Controller>Camera.Brightness</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0.0" />
+								<Frame Time="10.0" Value="1.0" />
+							</Frames>
+						</FloatTrack>
 					</Tracks>
 				</Animation>
 			</Items>
