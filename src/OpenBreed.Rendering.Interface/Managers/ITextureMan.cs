@@ -14,14 +14,14 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// Get texture by it's Id
         /// </summary>
         /// <param name="name">Given Id of texture</param>
-        /// <returns>Return ITexture object if found, false otherwise</returns>
+        /// <returns>Return ITexture object if found, null otherwise</returns>
         ITexture GetById(int id);
 
         /// <summary>
         /// Get texture by user friendly alias
         /// </summary>
         /// <param name="alias">Alias name</param>
-        /// <returns></returns>
+        /// <returns>Return ITexture object if found, null otherwise</returns>
         ITexture GetByAlias(string alias);
 
         /// <summary>

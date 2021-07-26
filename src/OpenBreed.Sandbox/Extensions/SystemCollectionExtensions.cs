@@ -11,6 +11,7 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Animation;
@@ -95,6 +96,14 @@ namespace OpenBreed.Sandbox.Extensions
                                                              managerCollection.GetManager<ITileMan>()));
         }
 
+        public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
+        {
+            dataLoaderFactory.Register(new SpriteSetDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+                                                             managerCollection.GetManager<AssetsDataProvider>(),
+                                                             managerCollection.GetManager<ITextureMan>(),
+                                                             managerCollection.GetManager<ISpriteMan>()));
+        }
+
         public static void SetupGameWorldSystems(this WorldBuilder builder, ISystemFactory systemFactory)
         {
             builder.AddSystem(systemFactory.Create<WalkingControlSystem>());
@@ -145,6 +154,7 @@ namespace OpenBreed.Sandbox.Extensions
                 dataLoaderFactory.SetupAnimationDataLoader(managerCollection);
                 dataLoaderFactory.SetupMapWorldDataLoader(managerCollection);
                 dataLoaderFactory.SetupTileSetDataLoader(managerCollection);
+                dataLoaderFactory.SetupSpriteSetDataLoader(managerCollection);
 
                 return dataLoaderFactory;
             });

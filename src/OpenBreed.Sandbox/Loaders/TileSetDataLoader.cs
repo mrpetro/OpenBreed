@@ -11,7 +11,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 
-namespace OpenBreed.Sandbox
+namespace OpenBreed.Sandbox.Loaders
 {
     internal class TileSetDataLoader : IDataLoader<ITileAtlas>
     {

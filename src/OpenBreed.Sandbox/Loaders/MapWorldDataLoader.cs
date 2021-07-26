@@ -9,6 +9,7 @@ using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
@@ -19,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Sandbox.Worlds
+namespace OpenBreed.Sandbox.Loaders
 {
     internal class MapWorldDataLoader : IDataLoader<World>
     {
@@ -65,7 +66,8 @@ namespace OpenBreed.Sandbox.Worlds
             if (entry == null)
                 throw new Exception("Map error: " + entryId);
 
-            var tileAtlas = LoadReferencedTileSet(entry);
+            LoadReferencedTileSet(entry);
+            LoadReferencedSpriteSets(entry);
 
             var map = mapsDataProvider.GetMap(entry.Id);
 
@@ -85,7 +87,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var newWorld = worldBuilder.Build();
 
-            worldBlockBuilder.SetTileAtlas(tileAtlas.Id);
+            worldBlockBuilder.SetTileAtlas(entry.TileSetRef);
 
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
@@ -168,11 +170,19 @@ namespace OpenBreed.Sandbox.Worlds
             }
         }
 
-        private ITileAtlas LoadReferencedTileSet(IMapEntry entry)
+        private void LoadReferencedTileSet(IMapEntry entry)
         {
             var palette = palettesDataProvider.GetPalette(entry.PaletteRefs.First());
             var tileAtlasLoader = dataLoaderFactory.GetLoader<ITileAtlas>();
-            return tileAtlasLoader.Load(entry.TileSetRef, palette);
+            tileAtlasLoader.Load(entry.TileSetRef, palette);
+        }
+
+        private void LoadReferencedSpriteSets(IMapEntry entry)
+        {
+            var spriteAtlasLoader = dataLoaderFactory.GetLoader<ISpriteAtlas>();
+
+            foreach (var spriteSetRef in entry.SpriteSetRefs)
+                spriteAtlasLoader.Load(spriteSetRef);
         }
     }
 }

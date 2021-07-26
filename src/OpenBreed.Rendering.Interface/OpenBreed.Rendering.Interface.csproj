@@ -69,6 +69,7 @@
     <Compile Include="Events\ClientResizedEventArgs.cs" />
     <Compile Include="IFont.cs" />
     <Compile Include="IPrimitiveRenderer.cs" />
+    <Compile Include="ISpriteAtlasBuilder.cs" />
     <Compile Include="Managers\IFontMan.cs" />
     <Compile Include="Managers\IRenderingMan.cs" />
     <Compile Include="ISpriteAtlas.cs" />

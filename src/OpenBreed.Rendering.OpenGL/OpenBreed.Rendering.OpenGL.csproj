@@ -73,6 +73,7 @@
     <Compile Include="Helpers\FontAtlas.cs" />
     <Compile Include="Helpers\GridCell.cs" />
     <Compile Include="Helpers\RenderTools.cs" />
+    <Compile Include="Helpers\SpriteAtlasEx.cs" />
     <Compile Include="Helpers\SpriteAtlas.cs" />
     <Compile Include="Helpers\Texture.cs" />
     <Compile Include="Helpers\TileAtlas.cs" />
