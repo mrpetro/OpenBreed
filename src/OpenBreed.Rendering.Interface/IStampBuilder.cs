@@ -11,6 +11,6 @@ namespace OpenBreed.Rendering.Interface
         void SetSize(int width, int height);
         void SetOrigin(int originX, int originY);
         void ClearTiles();
-        void AddTile(int x, int y, int tileId);
+        void AddTile(int x, int y, int atlasId, int tileId);
     }
 }

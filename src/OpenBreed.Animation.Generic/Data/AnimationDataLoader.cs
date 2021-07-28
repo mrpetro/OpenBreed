@@ -85,6 +85,8 @@ namespace OpenBreed.Animation.Generic.Data
                 LoadTrack<int>(animation, (IAnimationEntryTrack<int>)entryTrack);
             else if (entryTrack is IAnimationEntryTrack<float>)
                 LoadTrack<float>(animation, (IAnimationEntryTrack<float>)entryTrack);
+            else if (entryTrack is IAnimationEntryTrack<string>)
+                LoadTrack<string>(animation, (IAnimationEntryTrack<string>)entryTrack);
         }
 
         #endregion Private Methods

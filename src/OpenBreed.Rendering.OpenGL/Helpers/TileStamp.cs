@@ -3,14 +3,26 @@ using OpenBreed.Rendering.OpenGL.Builders;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
-    public class TileStamp : ITileStamp
+    internal class TileStampCell : ITileStampCell
+    {
+        public TileStampCell(int atlasId, int tileId)
+        {
+            AtlasId = atlasId;
+            ImageId = tileId;
+        }
+
+        public int AtlasId { get; }
+        public int ImageId { get; }
+    }
+
+    internal class TileStamp : ITileStamp
     {
         #region Internal Constructors
 
         internal TileStamp(StampBuilder builder)
         {
             Id = builder.GetId();
-            Data = builder.GetData();
+            Cells = builder.GetData();
             Width = builder.width;
             Height = builder.height;
             OriginX = builder.originX;
@@ -22,7 +34,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Public Properties
 
-        public int[] Data { get; }
+        public ITileStampCell[] Cells { get; }
         public int Id { get; }
         public int Width { get; }
         public int Height { get; }

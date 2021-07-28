@@ -456,7 +456,7 @@ namespace OpenBreed.Sandbox
             projectileHelper.RegisterCollisionPairs();
 
             CameraHelper.CreateAnimations(this);
-            doorHelper.CreateStamps();
+
             doorHelper.CreateAnimations();
             actorHelper.CreateAnimations();
             TurretHelper.CreateAnimations(this);
@@ -490,7 +490,7 @@ namespace OpenBreed.Sandbox
             var entityMan = GetManager<IEntityMan>();
 
             var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 2");
-
+            doorHelper.CreateStamps();
 
             cameraBuilder.SetupPlayerCamera();
 

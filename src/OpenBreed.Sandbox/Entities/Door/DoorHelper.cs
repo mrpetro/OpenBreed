@@ -53,7 +53,8 @@ namespace OpenBreed.Sandbox.Entities.Door
             var animationMan = core.GetManager<IClipMan>();
             var animatorMan = core.GetManager<IFrameUpdaterMan>();
 
-            animatorMan.Register("Sprite.ImageId", (FrameUpdater<int>)OnFrameUpdate);
+            animatorMan.Register("Sprite.ImageId", (FrameUpdater<int>)OnImageIdUpdate);
+            animatorMan.Register("Sprite.AtlasId", (FrameUpdater<string>)OnAtlasIdUpdate);
 
             var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
             var animationLoader = dataLoaderFactory.GetLoader<IClip>();
@@ -64,9 +65,15 @@ namespace OpenBreed.Sandbox.Entities.Door
             var horizontalDoorClosing = animationLoader.Load("Animations.DoorHorizontal.Closing");
         }
 
-        private void OnFrameUpdate(Entity entity, int nextValue)
+        private void OnImageIdUpdate(Entity entity, int nextValue)
         {
             core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+        }
+
+        private void OnAtlasIdUpdate(Entity entity, string nextValue)
+        {
+            var atlas = core.GetManager<ISpriteMan>().GetByName(nextValue);
+            core.Commands.Post(new SpriteSetAtlasCommand(entity.Id, atlas.Id));
         }
 
         private void OnOpenningEnding()
@@ -114,37 +121,40 @@ namespace OpenBreed.Sandbox.Entities.Door
         public void CreateStamps()
         {
             var stampBuilder = core.GetManager<IStampMan>().Create();
+            var tileMan = core.GetManager<ITileMan>();
+
+            var tileSet = tileMan.GetByAlias("TileSets.L4");
 
             stampBuilder.ClearTiles();
             stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_CLOSED);
             stampBuilder.SetSize(2, 1);
             stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, 0);
-            stampBuilder.AddTile(1, 0, 1);
+            stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 4 + 8);
+            stampBuilder.AddTile(1, 0, tileSet.Id, 20 * 4 + 9);
             stampBuilder.Build();
 
             stampBuilder.ClearTiles();
             stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_OPENED);
             stampBuilder.SetSize(2, 1);
             stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, 12);
-            stampBuilder.AddTile(1, 0, 12);
+            stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 2 + 0);
+            stampBuilder.AddTile(1, 0, tileSet.Id, 20 * 2 + 1);
             stampBuilder.Build();
 
             stampBuilder.ClearTiles();
             stampBuilder.SetName(STAMP_DOOR_VERTICAL_CLOSED);
             stampBuilder.SetSize(1, 2);
             stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, 4);
-            stampBuilder.AddTile(0, 1, 8);
+            stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 1 + 8);
+            stampBuilder.AddTile(0, 1, tileSet.Id, 20 * 2 + 8);
             stampBuilder.Build();
 
             stampBuilder.ClearTiles();
             stampBuilder.SetName(STAMP_DOOR_VERTICAL_OPENED);
             stampBuilder.SetSize(1, 2);
             stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, 12);
-            stampBuilder.AddTile(0, 1, 12);
+            stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 4 + 1);
+            stampBuilder.AddTile(0, 1, tileSet.Id, 20 * 3 + 1);
             stampBuilder.Build();
 
         }

@@ -61,6 +61,10 @@ namespace OpenBreed.Sandbox.Loaders
             {
                 var spriteAtlasKey = $"{entryId}#{sprite.Index}";
                 var bitmap = ToBitmap(sprite.Width, sprite.Height, sprite.Data);
+
+                if (paletteModel != null)
+                    BitmapHelper.SetPaletteColors(bitmap, paletteModel.Data);
+
                 var texture = textureMan.Create(spriteAtlasKey, bitmap);
 
                 spriteMan.CreateAtlas()

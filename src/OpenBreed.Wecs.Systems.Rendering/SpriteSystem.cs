@@ -39,6 +39,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             RegisterHandler<SpriteOnCommand>(HandleSpriteOnCommand);
             RegisterHandler<SpriteOffCommand>(HandleSpriteOffCommand);
             RegisterHandler<SpriteSetCommand>(HandleSpriteSetCommand);
+            RegisterHandler<SpriteSetAtlasCommand>(HandleSpriteSetAtlasCommand);
         }
 
         #endregion Internal Constructors
@@ -107,7 +108,17 @@ namespace OpenBreed.Wecs.Systems.Rendering
             return true;
         }
 
+        private bool HandleSpriteSetAtlasCommand(SpriteSetAtlasCommand cmd)
+        {
+            var toModify = active.FirstOrDefault(item => item.Id == cmd.EntityId);
+            if (toModify == null)
+                return false;
 
+            var sprite = toModify.Get<SpriteComponent>();
+            sprite.AtlasId = cmd.AtlasId;
+
+            return true;
+        }
 
         private bool HandleSpriteOffCommand(SpriteOffCommand cmd)
         {

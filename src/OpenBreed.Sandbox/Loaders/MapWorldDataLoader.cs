@@ -179,10 +179,11 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void LoadReferencedSpriteSets(IMapEntry entry)
         {
+            var palette = palettesDataProvider.GetPalette(entry.PaletteRefs.First());
             var spriteAtlasLoader = dataLoaderFactory.GetLoader<ISpriteAtlas>();
 
             foreach (var spriteSetRef in entry.SpriteSetRefs)
-                spriteAtlasLoader.Load(spriteSetRef);
+                spriteAtlasLoader.Load(spriteSetRef, palette);
         }
     }
 }

@@ -68,9 +68,9 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             cells.Clear();
         }
 
-        public void AddTile(int x, int y, int tileId)
+        public void AddTile(int x, int y, int atlasId, int tileId)
         {
-            cells.Add(new StampCellData() { X = x, Y = y, TileId = tileId });
+            cells.Add(new StampCellData() { X = x, Y = y, AtlasId = atlasId, TileId = tileId });
         }
 
         #endregion Public Methods
@@ -87,12 +87,12 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             return manager.GenerateNewId();
         }
 
-        internal int[] GetData()
+        internal ITileStampCell[] GetData()
         {
             Debug.Assert(width > 0, "Width must be greater than zero.");
             Debug.Assert(height > 0, "Height must be greater than zero.");
 
-            var data = new int[width * height];
+            var data = new ITileStampCell[width * height];
 
             for (int i = 0; i < cells.Count; i++)
             {
@@ -101,7 +101,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                 Debug.Assert(cell.X >= 0 && cell.X < width, "Cell X must be in range of stamp width.");
                 Debug.Assert(cell.Y >= 0 && cell.Y < height, "Cell Y must be in range of stamp height.");
 
-                data[cell.X + width * cell.Y] = cell.TileId;
+                data[cell.X + width * cell.Y] = new TileStampCell(cell.AtlasId, cell.TileId);
             }
 
             return data;
@@ -117,6 +117,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
             internal int X;
             internal int Y;
+            internal int AtlasId;
             internal int TileId;
 
             #endregion Internal Fields
