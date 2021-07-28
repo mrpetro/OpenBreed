@@ -26,6 +26,7 @@ namespace OpenBreed.Database.Xml.Items.Animations
         [XmlArray("Tracks")]
         [XmlArrayItem(ElementName = "IntegerTrack", Type = typeof(XmlAnimationEntryTrack<int>))]
         [XmlArrayItem(ElementName = "FloatTrack", Type = typeof(XmlAnimationEntryTrack<float>))]
+        [XmlArrayItem(ElementName = "StringTrack", Type = typeof(XmlAnimationEntryTrack<string>))]
         public List<XmlAnimationEntryTrack> XmlTracks { get; set; }
 
         [XmlIgnore]
