@@ -39,6 +39,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             RegisterHandler<SpriteOnCommand>(HandleSpriteOnCommand);
             RegisterHandler<SpriteOffCommand>(HandleSpriteOffCommand);
             RegisterHandler<SpriteSetCommand>(HandleSpriteSetCommand);
+            RegisterHandler<SpriteSetAtlasCommand>(HandleSpriteSetAtlasCommand);
         }
 
         #endregion Internal Constructors
@@ -107,7 +108,17 @@ namespace OpenBreed.Wecs.Systems.Rendering
             return true;
         }
 
+        private bool HandleSpriteSetAtlasCommand(SpriteSetAtlasCommand cmd)
+        {
+            var toModify = active.FirstOrDefault(item => item.Id == cmd.EntityId);
+            if (toModify == null)
+                return false;
 
+            var sprite = toModify.Get<SpriteComponent>();
+            sprite.AtlasId = cmd.AtlasId;
+
+            return true;
+        }
 
         private bool HandleSpriteOffCommand(SpriteOffCommand cmd)
         {
@@ -136,28 +147,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             var pos = entity.Get<PositionComponent>();
             var spc = entity.Get<SpriteComponent>();
-            var atlas = spriteMan.GetById(spc.AtlasId);
 
-            //Test viewport for clippling here
-            if (pos.Value.X + atlas.SpriteWidth < clipBox.Left)
-                return;
-
-            if (pos.Value.X > clipBox.Right)
-                return;
-
-            if (pos.Value.Y + atlas.SpriteHeight < clipBox.Bottom)
-                return;
-
-            if (pos.Value.Y > clipBox.Top)
-                return;
-
-            GL.PushMatrix();
-
-            GL.Translate((int)pos.Value.X, (int)pos.Value.Y, spc.Order);
-
-            atlas.Draw(spc.ImageId);
-
-            GL.PopMatrix();
+            spriteMan.Render(spc.AtlasId, spc.ImageId, pos.Value, spc.Order, clipBox);
         }
 
         #endregion Private Methods

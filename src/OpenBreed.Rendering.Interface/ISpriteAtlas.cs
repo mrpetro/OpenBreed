@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Rendering.Interface
+﻿using OpenTK;
+
+namespace OpenBreed.Rendering.Interface
 {
     /// <summary>
     /// Interface for accessing sprite atlas
@@ -12,25 +14,11 @@
         /// </summary>
         int Id { get; }
 
-        /// <summary>
-        /// Atlas sprite width
-        /// </summary>
-        float SpriteWidth { get; }
-
-        /// <summary>
-        /// Atlas sprite height
-        /// </summary>
-        float SpriteHeight { get; }
-
         #endregion Public Properties
 
         #region Public Methods
 
-        /// <summary>
-        /// Draw sprite with given image Id
-        /// </summary>
-        /// <param name="imageId">Atlas image id to draw</param>
-        void Draw(int imageId);
+        Vector2 GetSpriteSize(int spriteId);
 
         #endregion Public Methods
     }

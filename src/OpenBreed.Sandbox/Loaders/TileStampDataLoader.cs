@@ -2,7 +2,7 @@
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Tiles;
+using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Tiles;
 using OpenBreed.Rendering.Interface;
@@ -11,29 +11,32 @@ using System;
 using System.Drawing;
 using System.Linq;
 
-namespace OpenBreed.Sandbox
+namespace OpenBreed.Sandbox.Loaders
 {
-    internal class TileSetDataLoader : IDataLoader<ITileAtlas>
+    internal class TileStampDataLoader : IDataLoader<ITileStamp>
     {
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
         private readonly AssetsDataProvider assetsDataProvider;
         private readonly ITextureMan textureMan;
+        private readonly IStampMan stampMan;
         private readonly ITileMan tileMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSetDataLoader(IRepositoryProvider repositoryProvider,
+        public TileStampDataLoader(IRepositoryProvider repositoryProvider,
                                  AssetsDataProvider assetsDataProvider,
                                  ITextureMan textureMan,
+                                 IStampMan stampMan,
                                  ITileMan tileMan)
         {
             this.repositoryProvider = repositoryProvider;
             this.assetsDataProvider = assetsDataProvider;
             this.textureMan = textureMan;
+            this.stampMan = stampMan;
             this.tileMan = tileMan;
         }
 
@@ -43,22 +46,26 @@ namespace OpenBreed.Sandbox
 
         public object LoadObject(string entryId) => Load(entryId);
 
-        public ITileAtlas Load(string entryId, params object[] args)
+        public ITileStamp Load(string entryId, params object[] args)
         {
-            var paletteModel = args.FirstOrDefault() as PaletteModel;
-
-            var entry = repositoryProvider.GetRepository<ITileSetEntry>().GetById(entryId) as ITileSetFromBlkEntry;
+            var entry = repositoryProvider.GetRepository<IDbTileStamp>().GetById(entryId);
             if (entry == null)
-                throw new Exception("Tileset error: " + entryId);
+                throw new Exception("Tilestamp error: " + entryId);
 
-            var tileSet = assetsDataProvider.LoadModel(entry.DataRef) as TileSetModel;
+            var stampBuilder = stampMan.Create();
 
-            if(paletteModel != null)
-                BitmapHelper.SetPaletteColors(tileSet.Bitmap, paletteModel.Data);
+            stampBuilder.ClearTiles();
+            stampBuilder.SetName(entry.Id);
+            stampBuilder.SetSize(entry.Width, entry.Height);
+            stampBuilder.SetOrigin(entry.CenterX, entry.CenterY);
 
-            var texture = textureMan.Create(entry.DataRef, tileSet.Bitmap);
+            foreach (var cell in entry.Cells)
+            {
+                var ts = tileMan.GetByAlias(cell.TsId);
+                stampBuilder.AddTile(cell.X, cell.Y, ts.Id, cell.TsTi);
+            }
 
-            return tileMan.Create(entryId, texture.Id, tileSet.TileSize, tileSet.Tiles.Select(tile => new Point(tile.Rectangle.X, tile.Rectangle.Y)).ToArray()); ;
+            return stampBuilder.Build();
         }
 
         #endregion Public Methods

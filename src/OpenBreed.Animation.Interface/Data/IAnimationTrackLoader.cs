@@ -10,7 +10,7 @@ namespace OpenBreed.Animation.Interface.Data
     {
         #region Public Methods
 
-        void Load(IClip animation, IAnimationEntryTrack animationEntryPart);
+        void Load(IClip animation, IDbAnimationTrack animationEntryPart);
 
         #endregion Public Methods
     }

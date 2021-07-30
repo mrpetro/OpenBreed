@@ -20,6 +20,7 @@ using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
@@ -371,26 +372,76 @@ namespace OpenBreed.Sandbox
             tileMan.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
 
             var doorTex = textureMan.Create("Textures/Sprites/Door", @"Content\Graphics\DoorSpriteSet.png");
-            spriteMan.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
-            spriteMan.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
+            spriteMan.CreateAtlas()
+                .SetTexture(doorTex.Id)
+                .SetName("Atlases/Sprites/Door/Horizontal")
+                .AppendCoordsFromGrid(32, 16, 5, 1, 0, 0)
+                .Build();
+            //spriteMan.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
+            spriteMan.CreateAtlas()
+                .SetTexture(doorTex.Id)
+                .SetName("Atlases/Sprites/Door/Vertical")
+                .AppendCoordsFromGrid(16, 32, 5, 1, 0, 16)
+                .Build();
+            //spriteMan.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
 
             var teleportTex = textureMan.Create("Textures/Sprites/Teleport", @"Content\Graphics\TeleportSpriteSet.png");
-            spriteMan.Create(TeleportHelper.SPRITE_TELEPORT_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 0);
-            spriteMan.Create(TeleportHelper.SPRITE_TELEPORT_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 32);
-            spriteMan.Create(WorldGateHelper.SPRITE_WORLD_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 96);
-            spriteMan.Create(WorldGateHelper.SPRITE_WORLD_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 64);
+            spriteMan.CreateAtlas()
+                .SetTexture(teleportTex.Id)
+                .SetName(TeleportHelper.SPRITE_TELEPORT_ENTRY)
+                .AppendCoordsFromGrid(32, 32, 4, 1, 0, 0)
+                .Build();
+            //spriteMan.Create(TeleportHelper.SPRITE_TELEPORT_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 0);
+            spriteMan.CreateAtlas()
+                .SetTexture(teleportTex.Id)
+                .SetName(TeleportHelper.SPRITE_TELEPORT_EXIT)
+                .AppendCoordsFromGrid(32, 32, 4, 1, 0, 32)
+                .Build();
+            //spriteMan.Create(TeleportHelper.SPRITE_TELEPORT_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 32);
+            spriteMan.CreateAtlas()
+                .SetTexture(teleportTex.Id)
+                .SetName(WorldGateHelper.SPRITE_WORLD_ENTRY)
+                .AppendCoordsFromGrid(32, 32, 4, 1, 0, 96)
+                .Build();
+            //spriteMan.Create(WorldGateHelper.SPRITE_WORLD_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 96);
+            spriteMan.CreateAtlas()
+                .SetTexture(teleportTex.Id)
+                .SetName(WorldGateHelper.SPRITE_WORLD_EXIT)
+                .AppendCoordsFromGrid(32, 32, 4, 1, 0, 64)
+                .Build();
+            //spriteMan.Create(WorldGateHelper.SPRITE_WORLD_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 64);
 
             var laserTex = textureMan.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
-            spriteMan.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
+            spriteMan.CreateAtlas()
+                .SetTexture(laserTex.Id)
+                .SetName("Atlases/Sprites/Projectiles/Laser")
+                .AppendCoordsFromGrid(16, 16, 8, 1, 0, 0)
+                .Build();
+            //spriteMan.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
 
             var arrowTex = textureMan.Create("Textures/Sprites/Arrow", @"Content\Graphics\ArrowSpriteSet.png");
-            spriteMan.Create(ActorHelper.SPRITE_ARROW, arrowTex.Id, 32, 32, 8, 5);
+            spriteMan.CreateAtlas()
+                .SetTexture(arrowTex.Id)
+                .SetName(ActorHelper.SPRITE_ARROW)
+                .AppendCoordsFromGrid(32, 32, 8, 5)
+                .Build();
 
             var turretTex = textureMan.Create("Textures/Sprites/Turret", @"Content\Graphics\TurretSpriteSet.png");
-            spriteMan.Create(TurretHelper.SPRITE_TURRET, turretTex.Id, 32, 32, 8, 2);
+            spriteMan.CreateAtlas()
+                .SetTexture(turretTex.Id)
+                .SetName(TurretHelper.SPRITE_TURRET)
+                .AppendCoordsFromGrid(32, 32, 8, 2)
+                .Build();
+
+            //spriteMan.Create(TurretHelper.SPRITE_TURRET, turretTex.Id, 32, 32, 8, 2);
 
             var cursorsTex = textureMan.Create("Textures/Sprites/Cursors", @"Content\Graphics\Cursors.png");
-            spriteMan.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
+            spriteMan.CreateAtlas()
+                .SetTexture(cursorsTex.Id)
+                .SetName("Atlases/Sprites/Cursors")
+                .AppendCoordsFromGrid(16, 16, 1, 1)
+                .Build();
+            //spriteMan.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
 
             var worldGateHelper = GetManager<WorldGateHelper>();
             var doorHelper = GetManager<DoorHelper>();
@@ -405,7 +456,7 @@ namespace OpenBreed.Sandbox
             projectileHelper.RegisterCollisionPairs();
 
             CameraHelper.CreateAnimations(this);
-            doorHelper.CreateStamps();
+
             doorHelper.CreateAnimations();
             actorHelper.CreateAnimations();
             TurretHelper.CreateAnimations(this);
@@ -439,7 +490,7 @@ namespace OpenBreed.Sandbox
             var entityMan = GetManager<IEntityMan>();
 
             var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 2");
-
+            doorHelper.LoadStamps();
 
             cameraBuilder.SetupPlayerCamera();
 

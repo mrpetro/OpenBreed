@@ -205,9 +205,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
                 for (int i = 0; i < stamp.Width; i++)
                 {
-                    var imageId = stamp.Data[i + stamp.Width * j];
-                    cells[cellIndex].ImageId = imageId;
-                    cells[cellIndex].AtlasId = 0;
+                    var stampCell = stamp.Cells[i + stamp.Width * j];
+                    cells[cellIndex].AtlasId = stampCell.AtlasId;
+                    cells[cellIndex].ImageId = stampCell.ImageId;
                     cellIndex++;
                 }
             }
@@ -226,6 +226,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 GL.PushMatrix();
 
                 GL.Translate(xIndex * TILE_SIZE, yIndex * TILE_SIZE, 0.0f);
+
+
 
                 tileMan.GetById(cellTile.AtlasId).Draw(cellTile.ImageId);
 

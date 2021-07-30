@@ -1,10 +1,16 @@
 ﻿namespace OpenBreed.Rendering.Interface
 {
+    public interface ITileStampCell
+    {
+        int AtlasId { get; }
+        int ImageId { get; }
+    }
+
     public interface ITileStamp
     {
         #region Public Properties
 
-        int[] Data { get; }
+        ITileStampCell[] Cells { get; }
         int Id { get; }
         int Width { get; }
         int Height { get; }

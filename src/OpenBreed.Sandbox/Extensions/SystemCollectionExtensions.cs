@@ -11,6 +11,7 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Animation;
@@ -89,10 +90,27 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register(new TileSetDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+            dataLoaderFactory.Register(new TileAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
                                                              managerCollection.GetManager<ITextureMan>(),
                                                              managerCollection.GetManager<ITileMan>()));
+        }
+
+        public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
+        {
+            dataLoaderFactory.Register(new TileStampDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+                                                             managerCollection.GetManager<AssetsDataProvider>(),
+                                                             managerCollection.GetManager<ITextureMan>(),
+                                                             managerCollection.GetManager<IStampMan>(),
+                                                             managerCollection.GetManager<ITileMan>()));
+        }
+
+        public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
+        {
+            dataLoaderFactory.Register(new SpriteAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+                                                             managerCollection.GetManager<AssetsDataProvider>(),
+                                                             managerCollection.GetManager<ITextureMan>(),
+                                                             managerCollection.GetManager<ISpriteMan>()));
         }
 
         public static void SetupGameWorldSystems(this WorldBuilder builder, ISystemFactory systemFactory)
@@ -145,6 +163,8 @@ namespace OpenBreed.Sandbox.Extensions
                 dataLoaderFactory.SetupAnimationDataLoader(managerCollection);
                 dataLoaderFactory.SetupMapWorldDataLoader(managerCollection);
                 dataLoaderFactory.SetupTileSetDataLoader(managerCollection);
+                dataLoaderFactory.SetupTileStampDataLoader(managerCollection);
+                dataLoaderFactory.SetupSpriteSetDataLoader(managerCollection);
 
                 return dataLoaderFactory;
             });
