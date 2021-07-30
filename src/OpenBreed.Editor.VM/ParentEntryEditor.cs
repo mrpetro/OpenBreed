@@ -3,7 +3,7 @@ using OpenBreed.Database.Interface.Items;
 
 namespace OpenBreed.Editor.VM
 {
-    public abstract class ParentEntryEditor<E> : EntryEditorBaseVM<E> where E : IEntry
+    public abstract class ParentEntryEditor<E> : EntryEditorBaseVM<E> where E : IDbEntry
     {
         #region Private Fields
 

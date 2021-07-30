@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Maps
         public MapEditorActionsToolVM(MapEditorVM parent, IWorkspaceMan workspaceMan)
         {
             Parent = parent;
-            RefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IActionSetEntry));
+            RefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbActionSet));
             ActionsSelector = new MapEditorActionsSelectorVM(this);
 
             RefIdEditor.PropertyChanged += ActionEntryRef_PropertyChanged;

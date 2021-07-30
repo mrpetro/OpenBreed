@@ -54,7 +54,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<ISoundEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbSound> subeditor)
         {
             Panel.Controls.Clear();
 

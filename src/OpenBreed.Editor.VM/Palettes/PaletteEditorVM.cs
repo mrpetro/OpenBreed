@@ -9,7 +9,7 @@ using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteEditorVM : ParentEntryEditor<IPaletteEntry>
+    public class PaletteEditorVM : ParentEntryEditor<IDbPalette>
     {
         #region Public Constructors
 

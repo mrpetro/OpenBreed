@@ -54,7 +54,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<IImageEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbImage> subeditor)
         {
             Panel.Controls.Clear();
 

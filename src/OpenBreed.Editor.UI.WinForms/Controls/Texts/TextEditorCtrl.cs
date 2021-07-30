@@ -43,7 +43,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<ITextEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbText> subeditor)
         {
             Controls.Clear();
 

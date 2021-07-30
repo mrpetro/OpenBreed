@@ -27,33 +27,33 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Public Methods
 
-        public DbEntryVM Create(IEntry entry)
+        public DbEntryVM Create(IDbEntry entry)
         {
-            if (entry is IImageEntry)
+            if (entry is IDbImage)
                 return new DbImageEntryVM();
-            else if (entry is ISoundEntry)
+            else if (entry is IDbSound)
                 return new DbSoundEntryVM();
-            else if (entry is IMapEntry)
+            else if (entry is IDbMap)
                 return new DbMapEntryVM();
-            else if (entry is IDataSourceEntry)
+            else if (entry is IDbDataSource)
                 return new DbDataSourceEntryVM();
-            else if (entry is IAssetEntry)
+            else if (entry is IDbAsset)
                 return new DbAssetEntryVM();
-            else if (entry is IActionSetEntry)
+            else if (entry is IDbActionSet)
                 return new DbActionSetEntryVM();
-            else if (entry is ITileSetEntry)
+            else if (entry is IDbTileAtlas)
                 return new DbTileSetEntryVM();
-            else if (entry is ISpriteSetEntry)
+            else if (entry is IDbSpriteAtlas)
                 return new DbSpriteSetEntryVM();
-            else if (entry is IPaletteEntry)
+            else if (entry is IDbPalette)
                 return new DbPaletteEntryVM();
-            else if (entry is ITextEntry)
+            else if (entry is IDbText)
                 return new DbTextEntryVM();
-            else if (entry is IScriptEntry)
+            else if (entry is IDbScript)
                 return new DbScriptEntryVM();
-            else if (entry is IEntityTemplateEntry)
+            else if (entry is IDbEntityTemplate)
                 return new DbEntityTemplateEntryVM();
-            else if (entry is IAnimationEntry)
+            else if (entry is IDbAnimation)
                 return new DbAnimationEntryVM();
             else
                 throw new NotImplementedException(entry.ToString());

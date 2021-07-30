@@ -5,7 +5,7 @@ using OpenBreed.Database.Interface.Items.EntityTemplates;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
 {
-    public class EntityTemplateEditorVM : ParentEntryEditor<IEntityTemplateEntry>
+    public class EntityTemplateEditorVM : ParentEntryEditor<IDbEntityTemplate>
     {
         #region Public Constructors
 

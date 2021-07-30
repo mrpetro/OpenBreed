@@ -42,7 +42,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<IScriptEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbScript> subeditor)
         {
             Controls.Clear();
 

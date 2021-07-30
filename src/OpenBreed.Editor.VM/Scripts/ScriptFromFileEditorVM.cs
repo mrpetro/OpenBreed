@@ -9,7 +9,7 @@ using OpenBreed.Editor.VM.Common;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
-    public class ScriptFromFileEditorVM : BaseViewModel, IEntryEditor<IScriptEntry>
+    public class ScriptFromFileEditorVM : BaseViewModel, IEntryEditor<IDbScript>
     {
         #region Private Fields
 
@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.VM.Scripts
             this.dataProvider = dataProvider;
             PropertyChanged += This_PropertyChanged;
 
-            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IAssetEntry));
+            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbAsset));
             ScriptAssetRefIdEditor.RefIdSelected = (newRefId) => { DataRef = newRefId; };
         }
 
@@ -63,9 +63,9 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Methods
 
-        public void UpdateVM(IScriptEntry entry)
+        public void UpdateVM(IDbScript entry)
         {
-            var scriptFromFileEntry = (IScriptFromFileEntry)entry;
+            var scriptFromFileEntry = (IDbScriptFromFile)entry;
 
             var model = scriptsDataProvider.GetScript(entry.Id);
 
@@ -75,9 +75,9 @@ namespace OpenBreed.Editor.VM.Scripts
             DataRef = scriptFromFileEntry.DataRef;
         }
 
-        public void UpdateEntry(IScriptEntry entry)
+        public void UpdateEntry(IDbScript entry)
         {
-            var scriptFromFileEntry = (IScriptFromFileEntry)entry;
+            var scriptFromFileEntry = (IDbScriptFromFile)entry;
 
             var model = dataProvider.GetModel<TextModel>(DataRef);
 

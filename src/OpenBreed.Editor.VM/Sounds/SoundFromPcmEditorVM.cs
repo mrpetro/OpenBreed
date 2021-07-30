@@ -5,7 +5,7 @@ using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
-    public class SoundFromPcmEditorVM : BaseViewModel, IEntryEditor<ISoundEntry>
+    public class SoundFromPcmEditorVM : BaseViewModel, IEntryEditor<IDbSound>
     {
         private readonly SoundsDataProvider soundsDataProvider;
         #region Private Fields
@@ -65,7 +65,7 @@ namespace OpenBreed.Editor.VM.Sounds
             pcmPlayer.PlaySync();
         }
 
-        public void UpdateEntry(ISoundEntry entry)
+        public void UpdateEntry(IDbSound entry)
         {
             var model = soundsDataProvider.GetSound(entry.Id);
 
@@ -75,7 +75,7 @@ namespace OpenBreed.Editor.VM.Sounds
             model.Data = Data;
         }
 
-        public void UpdateVM(ISoundEntry entry)
+        public void UpdateVM(IDbSound entry)
         {
             var model = soundsDataProvider.GetSound(entry.Id);
             BitsPerSample = model.BitsPerSample;

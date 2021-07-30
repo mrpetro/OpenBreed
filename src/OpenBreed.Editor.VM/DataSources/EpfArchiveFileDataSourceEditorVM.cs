@@ -3,7 +3,7 @@ using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.DataSources
 {
-    public class EpfArchiveFileDataSourceEditorVM : BaseViewModel, IEntryEditor<IDataSourceEntry>
+    public class EpfArchiveFileDataSourceEditorVM : BaseViewModel, IEntryEditor<IDbDataSource>
     {
         #region Private Fields
 
@@ -38,17 +38,17 @@ namespace OpenBreed.Editor.VM.DataSources
 
         #region Public Methods
 
-        public void UpdateVM(IDataSourceEntry entry)
+        public void UpdateVM(IDbDataSource entry)
         {
-            var epfEntry = (IEPFArchiveDataSourceEntry)entry;
+            var epfEntry = (IDbEpfArchiveDataSource)entry;
 
             ArchivePath = epfEntry.ArchivePath;
             EntryName = epfEntry.EntryName;
         }
 
-        public void UpdateEntry(IDataSourceEntry entry)
+        public void UpdateEntry(IDbDataSource entry)
         {
-            var epfEntry = (IEPFArchiveDataSourceEntry)entry;
+            var epfEntry = (IDbEpfArchiveDataSource)entry;
 
             epfEntry.ArchivePath = ArchivePath;
             epfEntry.EntryName = EntryName;

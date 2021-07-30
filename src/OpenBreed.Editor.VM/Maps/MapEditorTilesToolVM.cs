@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Parent = parent;
 
-            RefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(ITileSetEntry));
+            RefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbTileAtlas));
 
             TilesCursor = new List<MapEditorTileInsertOperation>();
             //Inserter = new MapEditorTilesInserter(Parent);

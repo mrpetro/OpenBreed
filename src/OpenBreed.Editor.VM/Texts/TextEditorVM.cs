@@ -6,7 +6,7 @@ using System;
 
 namespace OpenBreed.Editor.VM.Texts
 {
-    public class TextEditorVM : ParentEntryEditor<ITextEntry>
+    public class TextEditorVM : ParentEntryEditor<IDbText>
     {
         #region Public Constructors
 

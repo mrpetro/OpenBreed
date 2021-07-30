@@ -5,7 +5,7 @@ using OpenBreed.Database.Interface.Items.Images;
 
 namespace OpenBreed.Editor.VM.Images
 {
-    public class ImageEditorVM : ParentEntryEditor<IImageEntry>
+    public class ImageEditorVM : ParentEntryEditor<IDbImage>
     {
         #region Public Constructors
 

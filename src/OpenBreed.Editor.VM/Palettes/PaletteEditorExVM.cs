@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteEditorExVM : BaseViewModel, IEntryEditor<IPaletteEntry>
+    public class PaletteEditorExVM : BaseViewModel, IEntryEditor<IDbPalette>
     {
         #region Private Fields
 
@@ -64,11 +64,11 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Methods
 
-        public virtual void UpdateVM(IPaletteEntry entry)
+        public virtual void UpdateVM(IDbPalette entry)
         {
         }
 
-        public virtual void UpdateEntry(IPaletteEntry target)
+        public virtual void UpdateEntry(IDbPalette target)
         {
             var model = palettesDataProvider.GetPalette(target.Id);
 

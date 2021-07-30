@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorVM : EntryEditorBaseVM<IMapEntry>
+    public class MapEditorVM : EntryEditorBaseVM<IDbMap>
     {
         #region Private Fields
 
@@ -28,13 +28,13 @@ namespace OpenBreed.Editor.VM.Maps
         private readonly MapsDataProvider mapsDataProvider;
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly ActionSetsDataProvider actionSetsDataProvider;
-        private readonly TileSetsDataProvider tileSetsDataProvider;
+        private readonly TileAtlasDataProvider tileAtlasDataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapEditorVM(IWorkspaceMan workspaceMan, MapsDataProvider mapsDataProvider, PalettesDataProvider palettesDataProvider, ActionSetsDataProvider actionSetsDataProvider, TileSetsDataProvider tileSetsDataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+        public MapEditorVM(IWorkspaceMan workspaceMan, MapsDataProvider mapsDataProvider, PalettesDataProvider palettesDataProvider, ActionSetsDataProvider actionSetsDataProvider, TileAtlasDataProvider tileAtlasDataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
             Tools = new MapEditorToolsVM();
 
@@ -62,7 +62,7 @@ namespace OpenBreed.Editor.VM.Maps
             this.mapsDataProvider = mapsDataProvider;
             this.palettesDataProvider = palettesDataProvider;
             this.actionSetsDataProvider = actionSetsDataProvider;
-            this.tileSetsDataProvider = tileSetsDataProvider;
+            this.tileAtlasDataProvider = tileAtlasDataProvider;
         }
 
         #endregion Public Constructors
@@ -175,7 +175,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Protected Methods
 
-        protected override void UpdateEntry(IMapEntry entry)
+        protected override void UpdateEntry(IDbMap entry)
         {
             base.UpdateEntry(entry);
 
@@ -184,7 +184,7 @@ namespace OpenBreed.Editor.VM.Maps
             //LayoutVm.ToMap(Model);
         }
 
-        protected override void UpdateVM(IMapEntry entry)
+        protected override void UpdateVM(IDbMap entry)
         {
             base.UpdateVM(entry);
 
@@ -231,7 +231,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         private void OnTileSetModelChange(string tileSetRef)
         {
-            TileSet = tileSetsDataProvider.GetTileSet(tileSetRef);
+            TileSet = tileAtlasDataProvider.GetTileAtlas(tileSetRef);
 
             CurrentTilesBitmap = (Bitmap)TileSet.Bitmap.Clone();
 
@@ -289,7 +289,7 @@ namespace OpenBreed.Editor.VM.Maps
         //    SpriteSetViewer.CurrentItem = CurrentLevel.SpriteSets.FirstOrDefault();
         //    PaletteSelector.CurrentItem = CurrentLevel.Palettes.FirstOrDefault();
         //}
-        //protected override void UpdateVM(IMapEntry source, MapVM target)
+        //protected override void UpdateVM(IDbMap source, MapVM target)
         //{
         //    target.FromEntry(source);
         //public LevelTileSelectorVM TileSelector { get; }

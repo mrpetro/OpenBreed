@@ -6,7 +6,7 @@ using System;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
-    public class SoundEditorVM : ParentEntryEditor<ISoundEntry>
+    public class SoundEditorVM : ParentEntryEditor<IDbSound>
     {
         #region Public Constructors
 

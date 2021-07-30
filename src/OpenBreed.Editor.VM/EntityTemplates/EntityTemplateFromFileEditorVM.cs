@@ -7,7 +7,7 @@ using OpenBreed.Model.Texts;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
 {
-    public class EntityTemplateFromFileEditorVM : BaseViewModel, IEntryEditor<IEntityTemplateEntry>
+    public class EntityTemplateFromFileEditorVM : BaseViewModel, IEntryEditor<IDbEntityTemplate>
     {
         #region Private Fields
 
@@ -55,7 +55,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         #region Public Methods
 
-        public void UpdateVM(IEntityTemplateEntry entry)
+        public void UpdateVM(IDbEntityTemplate entry)
         {
             var model = entityTemplatesDataProvider.GetEntityTemplate(entry.Id);
 
@@ -65,7 +65,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             DataRef = entry.DataRef;
         }
 
-        public void UpdateEntry(IEntityTemplateEntry entry)
+        public void UpdateEntry(IDbEntityTemplate entry)
         {
             var model = dataProvider.GetModel<TextModel>(DataRef);
             model.Text = EntityTemplate;

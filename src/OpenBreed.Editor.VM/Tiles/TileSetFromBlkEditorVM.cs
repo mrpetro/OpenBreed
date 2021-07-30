@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetFromBlkEditorVM : BaseViewModel, IEntryEditor<ITileSetEntry>
+    public class TileSetFromBlkEditorVM : BaseViewModel, IEntryEditor<IDbTileAtlas>
     {
         #region Private Fields
 
@@ -22,14 +22,14 @@ namespace OpenBreed.Editor.VM.Tiles
         private int _tileSize;
 
         private TileSetModel model;
-        private readonly TileSetsDataProvider tileSetsDataProvider;
+        private readonly TileAtlasDataProvider tileSetsDataProvider;
         private readonly PalettesDataProvider palettesDataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSetFromBlkEditorVM(TileSetsDataProvider tileSetsDataProvider,
+        public TileSetFromBlkEditorVM(TileAtlasDataProvider tileSetsDataProvider,
                                       PalettesDataProvider palettesDataProvider)
         {
             PaletteIds = new BindingList<string>();
@@ -84,13 +84,13 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Methods
 
-        public virtual void UpdateEntry(ITileSetEntry entry)
+        public virtual void UpdateEntry(IDbTileAtlas entry)
         {
         }
 
-        public virtual void UpdateVM(ITileSetEntry entry)
+        public virtual void UpdateVM(IDbTileAtlas entry)
         {
-            model = tileSetsDataProvider.GetTileSet(entry.Id);
+            model = tileSetsDataProvider.GetTileAtlas(entry.Id);
 
             if (model == null)
                 return;

@@ -43,7 +43,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<IPaletteEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbPalette> subeditor)
         {
             Controls.Clear();
 

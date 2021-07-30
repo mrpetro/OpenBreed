@@ -34,13 +34,13 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _description, value); }
         }
 
-        internal virtual void FromEntry(IEntry entry)
+        internal virtual void FromEntry(IDbEntry entry)
         {
             Id = entry.Id;
             Description = entry.Description;
         }
 
-        internal virtual void ToEntry(IEntry entry)
+        internal virtual void ToEntry(IDbEntry entry)
         {
             entry.Id = Id;
             entry.Description = Description;
