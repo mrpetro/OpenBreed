@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyImagesRepository : XmlReadonlyRepositoryBase<IImageEntry>
+    public class XmlReadonlyImagesRepository : XmlReadonlyRepositoryBase<IDbImage>
     {
         #region Private Fields
 
@@ -26,8 +26,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlImageEntry); } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbImage); } }
         public override string Name { get { return "Images"; } }
 
         public override int Count => context.Items.Count;
@@ -40,20 +40,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override IImageEntry GetEntryWithIndex(int index)
+        protected override IDbImage GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IImageEntry entry)
+        protected override int GetIndexOf(IDbImage entry)
         {
-            return context.Items.IndexOf((XmlImageEntry)entry);
+            return context.Items.IndexOf((XmlDbImage)entry);
         }
 
         #endregion Protected Methods
     }
 
-    public class XmlImagesRepository : XmlRepositoryBase<IImageEntry>
+    public class XmlImagesRepository : XmlRepositoryBase<IDbImage>
     {
         #region Private Fields
 
@@ -72,8 +72,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlImageEntry); } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbImage); } }
         public override string Name { get { return "Images"; } }
 
         public override int Count => context.Items.Count;
@@ -82,28 +82,28 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Methods
 
-        public override void Add(IImageEntry newEntry)
+        public override void Add(IDbImage newEntry)
         {
-            context.Items.Add((XmlImageEntry)newEntry);
+            context.Items.Add((XmlDbImage)newEntry);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override IImageEntry GetEntryWithIndex(int index)
+        protected override IDbImage GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IImageEntry entry)
+        protected override int GetIndexOf(IDbImage entry)
         {
-            return context.Items.IndexOf((XmlImageEntry)entry);
+            return context.Items.IndexOf((XmlDbImage)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, IImageEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbImage newEntry)
         {
-            context.Items[index] = (XmlImageEntry)newEntry;
+            context.Items[index] = (XmlDbImage)newEntry;
         }
 
         #endregion Protected Methods

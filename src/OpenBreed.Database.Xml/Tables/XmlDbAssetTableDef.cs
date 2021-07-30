@@ -15,8 +15,8 @@ namespace OpenBreed.Database.Xml.Tables
         #region Public Fields
 
         [XmlArray("Items"),
-        XmlArrayItem("Asset", typeof(XmlAssetEntry))]
-        public readonly List<XmlAssetEntry> Items = new List<XmlAssetEntry>();
+        XmlArrayItem("Asset", typeof(XmlDbAsset))]
+        public readonly List<XmlDbAsset> Items = new List<XmlDbAsset>();
 
         #endregion Public Fields
     }

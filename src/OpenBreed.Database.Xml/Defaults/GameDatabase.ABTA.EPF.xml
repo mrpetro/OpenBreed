@@ -992,28 +992,28 @@
 					</Parameters>
 				</Asset>
 				<Asset Id="Assets.EPSLOGO1.LBM" DataSourceRef="DataSources.EPSLOGO1.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.EPSLOGO2.LBM" DataSourceRef="DataSources.EPSLOGO2.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.OUTRO.LBM" DataSourceRef="DataSources.OUTRO.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.T17LOGO.LBM" DataSourceRef="DataSources.T17LOGO.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.COMPUTER.LBM" DataSourceRef="DataSources.COMPUTER.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.IPC.LBM" DataSourceRef="DataSources.IPC.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.SMARTPIC.LBM" DataSourceRef="DataSources.SMARTPIC.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.TITLEBAC.LBM" DataSourceRef="DataSources.TITLEBAC.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="DataSources.Scripts.Entry.lua" FormatType="TEXT">
 					<Parameters />
@@ -1559,6 +1559,34 @@
 				</TileSetFromBLK>
 			</Items>
 		</TileSets>
+		<TileStamps>
+			<Items>
+				<TileStamp Id="Tiles/Stamps/DoorHorizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="88" />
+						<Cell X="1" Y="0" TsId="TileSets.L4" TsTi ="89" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/DoorHorizontal/Opened" Width="2" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="40" />
+						<Cell X="1" Y="0" TsId="TileSets.L4" TsTi ="41" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/DoorVertical/Closed" Width="1" Height="2" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="28" />
+						<Cell X="0" Y="1" TsId="TileSets.L4" TsTi ="48" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/DoorVertical/Opened" Width="1" Height="2" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="81" />
+						<Cell X="0" Y="1" TsId="TileSets.L4" TsTi ="61" />
+					</Cells>
+				</TileStamp>
+			</Items>
+		</TileStamps>
 		<Maps>
 			<Items>
 				<Map Id="CRASH LANDING SITE">
@@ -3952,76 +3980,91 @@
 		<Animations>
 			<Items>
 				<Animation Id="Animations.DoorVertical.Closing">
-					<Length>5.0</Length>
+					<Length>4.0</Length>
 					<Tracks>
-						<!-- <IntegerTrack> -->
-						<!-- <Component>Sprite</Component> -->
-						<!-- <AnimatorArguments> -->
-						<!-- <Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg> -->
-						<!-- </AnimatorArguments> -->
-						<!-- <Frames> -->
-						<!-- <Frame Time="0.0" Value="4" /> -->
-						<!-- </Frames> -->
-						<!-- </IntegerTrack> -->
-						<IntegerTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="SpriteSets.SPR4A#3" />
+								<Frame Time="2.0" Value="SpriteSets.SPR4A#2" />
+								<Frame Time="3.0" Value="SpriteSets.SPR4A#1" />
+								<Frame Time="4.0" Value="SpriteSets.SPR4A#0" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="4" />
-								<Frame Time="2.0" Value="3"  />
-								<Frame Time="3.0" Value="2" />
-								<Frame Time="4.0" Value="1" />
-								<Frame Time="5.0" Value="0" />
+								<Frame Time="0.0" Value="0" />
 							</Frames>
-						</IntegerTrack>
+						</IntTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations.DoorVertical.Opening">
-					<Length>5.0</Length>
+					<Length>4.0</Length>
 					<Tracks>
-						<IntegerTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="SpriteSets.SPR4A#0" />
+								<Frame Time="2.0" Value="SpriteSets.SPR4A#1" />
+								<Frame Time="3.0" Value="SpriteSets.SPR4A#2" />
+								<Frame Time="4.0" Value="SpriteSets.SPR4A#3" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="0" />
-								<Frame Time="2.0" Value="1" />
-								<Frame Time="3.0" Value="2" />
-								<Frame Time="4.0" Value="3" />
-								<Frame Time="5.0" Value="4" />
+								<Frame Time="0.0" Value="0" />
 							</Frames>
-						</IntegerTrack>
+						</IntTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations.DoorHorizontal.Closing">
-					<Length>5.0</Length>
+					<Length>4.0</Length>
 					<Tracks>
-						<IntegerTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="SpriteSets.SPR4A#7" />
+								<Frame Time="2.0" Value="SpriteSets.SPR4A#6" />
+								<Frame Time="3.0" Value="SpriteSets.SPR4A#5" />
+								<Frame Time="4.0" Value="SpriteSets.SPR4A#4" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="4" />
-								<Frame Time="2.0" Value="3"  />
-								<Frame Time="3.0" Value="2" />
-								<Frame Time="4.0" Value="1" />
-								<Frame Time="5.0" Value="0" />
+								<Frame Time="0.0" Value="0" />
 							</Frames>
-						</IntegerTrack>
+						</IntTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations.DoorHorizontal.Opening">
-					<Length>5.0</Length>
+					<Length>4.0</Length>
 					<Tracks>
-						<IntegerTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="SpriteSets.SPR4A#4" />
+								<Frame Time="2.0" Value="SpriteSets.SPR4A#5" />
+								<Frame Time="3.0" Value="SpriteSets.SPR4A#6" />
+								<Frame Time="4.0" Value="SpriteSets.SPR4A#7" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="0" />
-								<Frame Time="2.0" Value="1" />
-								<Frame Time="3.0" Value="2" />
-								<Frame Time="4.0" Value="3" />
-								<Frame Time="5.0" Value="4" />
+								<Frame Time="0.0" Value="0" />
 							</Frames>
-						</IntegerTrack>
+						</IntTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations/Camera/Effects/FadeOut">

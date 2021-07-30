@@ -42,7 +42,7 @@ namespace OpenBreed.Common.Data
             if (_openedDataSources.TryGetValue(name, out ds))
                 return ds;
 
-            var entry = repositoryProvider.GetRepository<IDataSourceEntry>().GetById(name);
+            var entry = repositoryProvider.GetRepository<IDbDataSource>().GetById(name);
             if (entry == null)
                 throw new Exception($"Data source error: {name}");
 
@@ -136,22 +136,22 @@ namespace OpenBreed.Common.Data
 
         #region Private Methods
 
-        private DataSourceBase CreateDataSource(IDataSourceEntry dsEntry)
+        private DataSourceBase CreateDataSource(IDbDataSource dsEntry)
         {
-            if (dsEntry is IFileDataSourceEntry)
-                return CreateFileDataSource((IFileDataSourceEntry)dsEntry);
-            else if (dsEntry is IEPFArchiveDataSourceEntry)
-                return CreateEPFArchiveDataSource((IEPFArchiveDataSourceEntry)dsEntry);
+            if (dsEntry is IDbFileDataSource)
+                return CreateFileDataSource((IDbFileDataSource)dsEntry);
+            else if (dsEntry is IDbEpfArchiveDataSource)
+                return CreateEPFArchiveDataSource((IDbEpfArchiveDataSource)dsEntry);
             else
                 throw new NotImplementedException("Unknown sourceDef");
         }
 
-        private DataSourceBase CreateEPFArchiveDataSource(IEPFArchiveDataSourceEntry dsEntry)
+        private DataSourceBase CreateEPFArchiveDataSource(IDbEpfArchiveDataSource dsEntry)
         {
             return new EPFArchiveFileDataSource(this, dsEntry.Id, dsEntry.ArchivePath, dsEntry.EntryName);
         }
 
-        private DataSourceBase CreateFileDataSource(IFileDataSourceEntry dsEntry)
+        private DataSourceBase CreateFileDataSource(IDbFileDataSource dsEntry)
         {
             return new FileDataSource(this, dsEntry.Id, dsEntry.FilePath);
         }

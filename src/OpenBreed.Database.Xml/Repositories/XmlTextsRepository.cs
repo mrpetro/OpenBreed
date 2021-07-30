@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyTextsRepository : XmlReadonlyRepositoryBase<ITextEntry>
+    public class XmlReadonlyTextsRepository : XmlReadonlyRepositoryBase<IDbText>
     {
 
         #region Private Fields
@@ -32,14 +32,14 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlTextEmbeddedEntry);
-                yield return typeof(XmlTextFromMapEntry);
-                yield return typeof(XmlTextFromFileEntry);
+                yield return typeof(XmlDbTextEmbedded);
+                yield return typeof(XmlDbTextFromMap);
+                yield return typeof(XmlDbTextFromFile);
             }
         }
         public override string Name { get { return "Texts"; } }
@@ -50,21 +50,21 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Methods
 
-        protected override ITextEntry GetEntryWithIndex(int index)
+        protected override IDbText GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(ITextEntry entry)
+        protected override int GetIndexOf(IDbText entry)
         {
-            return context.Items.IndexOf((XmlTextEntry)entry);
+            return context.Items.IndexOf((XmlDbText)entry);
         }
 
         #endregion Public Methods
 
     }
 
-    public class XmlTextsRepository : XmlRepositoryBase<ITextEntry>
+    public class XmlTextsRepository : XmlRepositoryBase<IDbText>
     {
 
         #region Private Fields
@@ -84,14 +84,14 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlTextEmbeddedEntry);
-                yield return typeof(XmlTextFromMapEntry);
-                yield return typeof(XmlTextFromFileEntry);
+                yield return typeof(XmlDbTextEmbedded);
+                yield return typeof(XmlDbTextFromMap);
+                yield return typeof(XmlDbTextFromFile);
             }
         }
         public override string Name { get { return "Texts"; } }
@@ -102,24 +102,24 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Methods
 
-        protected override ITextEntry GetEntryWithIndex(int index)
+        protected override IDbText GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(ITextEntry entry)
+        protected override int GetIndexOf(IDbText entry)
         {
-            return context.Items.IndexOf((XmlTextEntry)entry);
+            return context.Items.IndexOf((XmlDbText)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, ITextEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbText newEntry)
         {
-            context.Items[index] = (XmlTextEntry)newEntry;
+            context.Items[index] = (XmlDbText)newEntry;
         }
 
-        public override void Add(ITextEntry newEntry)
+        public override void Add(IDbText newEntry)
         {
-            context.Items.Add((XmlTextEntry)newEntry);
+            context.Items.Add((XmlDbText)newEntry);
         }
 
         #endregion Public Methods

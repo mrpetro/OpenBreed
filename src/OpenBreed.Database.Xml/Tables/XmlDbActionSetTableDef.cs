@@ -12,8 +12,8 @@ namespace OpenBreed.Database.Xml.Tables
         public override string Name => NAME;
 
         [XmlArray("Items"),
-        XmlArrayItem("ActionSet", typeof(XmlActionSetEntry))]
-        public readonly List<XmlActionSetEntry> Items = new List<XmlActionSetEntry>();
+        XmlArrayItem("ActionSet", typeof(XmlDbActionSet))]
+        public readonly List<XmlDbActionSet> Items = new List<XmlDbActionSet>();
 
     }
 }

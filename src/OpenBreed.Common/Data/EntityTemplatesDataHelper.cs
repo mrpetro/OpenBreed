@@ -14,7 +14,7 @@ namespace OpenBreed.Common.Data
 {
     internal class EntityTemplatesDataHelper
     {
-        internal static EntityTemplateModel FromText(IModelsProvider provider, IEntityTemplateFromFileEntry entry)
+        internal static EntityTemplateModel FromText(IModelsProvider provider, IDbEntityTemplateFromFile entry)
         {
             if (entry.DataRef == null)
                 return null;

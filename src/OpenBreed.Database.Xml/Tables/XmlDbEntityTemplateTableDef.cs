@@ -18,8 +18,8 @@ namespace OpenBreed.Database.Xml.Tables
         #region Public Fields
 
         [XmlArray("Items"),
-        XmlArrayItem("EntityTemplateFromFile", typeof(XmlEntityTemplateFromFileEntry)),]
-        public readonly List<XmlEntityTemplateEntry> Items = new List<XmlEntityTemplateEntry>();
+        XmlArrayItem("EntityTemplateFromFile", typeof(XmlDbEntityTemplateFromFile)),]
+        public readonly List<XmlDbEntityTemplate> Items = new List<XmlDbEntityTemplate>();
 
         #endregion Public Fields
     }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyAssetsRepository : XmlReadonlyRepositoryBase<IAssetEntry>
+    public class XmlReadonlyAssetsRepository : XmlReadonlyRepositoryBase<IDbAsset>
     {
         #region Private Fields
 
@@ -26,14 +26,14 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
         public override string Name { get { return "Assets"; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlAssetEntry);
+                yield return typeof(XmlDbAsset);
             }
         }
 
@@ -47,20 +47,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override IAssetEntry GetEntryWithIndex(int index)
+        protected override IDbAsset GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IAssetEntry entry)
+        protected override int GetIndexOf(IDbAsset entry)
         {
-            return context.Items.IndexOf((XmlAssetEntry)entry);
+            return context.Items.IndexOf((XmlDbAsset)entry);
         }
 
         #endregion Protected Methods
     }
 
-    public class XmlAssetsRepository : XmlRepositoryBase<IAssetEntry>
+    public class XmlAssetsRepository : XmlRepositoryBase<IDbAsset>
     {
         #region Private Fields
 
@@ -79,14 +79,14 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
         public override string Name { get { return "Assets"; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlAssetEntry);
+                yield return typeof(XmlDbAsset);
             }
         }
 
@@ -96,28 +96,28 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Methods
 
-        public override void Add(IAssetEntry newEntry)
+        public override void Add(IDbAsset newEntry)
         {
-            context.Items.Add((XmlAssetEntry)newEntry);
+            context.Items.Add((XmlDbAsset)newEntry);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override IAssetEntry GetEntryWithIndex(int index)
+        protected override IDbAsset GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IAssetEntry entry)
+        protected override int GetIndexOf(IDbAsset entry)
         {
-            return context.Items.IndexOf((XmlAssetEntry)entry);
+            return context.Items.IndexOf((XmlDbAsset)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, IAssetEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbAsset newEntry)
         {
-            context.Items[index] = (XmlAssetEntry)newEntry;
+            context.Items[index] = (XmlDbAsset)newEntry;
         }
 
         #endregion Protected Methods

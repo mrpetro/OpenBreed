@@ -17,14 +17,14 @@ namespace OpenBreed.Common.Data
     internal class ScriptsDataHelper
     {
 
-        public static ScriptModel FromBinary(IModelsProvider dataProvider, IScriptEmbeddedEntry scriptEntry)
+        public static ScriptModel FromBinary(IModelsProvider dataProvider, IDbScriptEmbedded scriptEntry)
         {
             var builder = ScriptBuilder.NewScriptModel();
             builder.SetScript(scriptEntry.Script);
             return builder.Build();
         }
 
-        internal static ScriptModel FromText(IModelsProvider dataProvider, IScriptFromFileEntry entry)
+        internal static ScriptModel FromText(IModelsProvider dataProvider, IDbScriptFromFile entry)
         {
             if (entry.DataRef == null)
                 return null;

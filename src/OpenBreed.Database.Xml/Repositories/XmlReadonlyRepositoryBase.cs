@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public abstract class XmlReadonlyRepositoryBase<T> : IReadonlyRepository<T> where T : class, IEntry
+    public abstract class XmlReadonlyRepositoryBase<T> : IReadonlyRepository<T> where T : class, IDbEntry
     {
         #region Public Properties
 
@@ -14,7 +14,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public abstract IEnumerable<Type> EntryTypes { get; }
 
-        public abstract IEnumerable<IEntry> Entries { get; }
+        public abstract IEnumerable<IDbEntry> Entries { get; }
 
         public abstract int Count { get; }
 
@@ -52,7 +52,7 @@ namespace OpenBreed.Database.Xml.Repositories
                 return null;
         }
 
-        public IEntry Find(string id)
+        public IDbEntry Find(string id)
         {
             return Entries.FirstOrDefault(item => item.Id == id);
         }

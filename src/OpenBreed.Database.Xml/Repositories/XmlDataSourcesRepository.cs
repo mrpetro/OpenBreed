@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyDataSourcesRepository : XmlReadonlyRepositoryBase<IDataSourceEntry>
+    public class XmlReadonlyDataSourcesRepository : XmlReadonlyRepositoryBase<IDbDataSource>
     {
         #region Private Fields
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public override int Count => context.Items.Count;
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override string Name { get { return "Data sources"; } }
 
@@ -36,25 +36,25 @@ namespace OpenBreed.Database.Xml.Repositories
         {
             get
             {
-                yield return typeof(XmlFileDataSourceEntry);
-                yield return typeof(XmlEPFArchiveFileDataSourceEntry);
+                yield return typeof(XmlDbFileDataSource);
+                yield return typeof(XmlDbEpfArchiveFileDataSource);
             }
         }
 
-        protected override IDataSourceEntry GetEntryWithIndex(int index)
+        protected override IDbDataSource GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IDataSourceEntry entry)
+        protected override int GetIndexOf(IDbDataSource entry)
         {
-            return context.Items.IndexOf((XmlDataSourceEntry)entry);
+            return context.Items.IndexOf((XmlDbDataSource)entry);
         }
 
         #endregion Public Properties
     }
 
-    public class XmlDataSourcesRepository : XmlRepositoryBase<IDataSourceEntry>
+    public class XmlDataSourcesRepository : XmlRepositoryBase<IDbDataSource>
     {
         #region Private Fields
 
@@ -75,7 +75,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public override int Count => context.Items.Count;
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override string Name { get { return "Data sources"; } }
 
@@ -83,29 +83,29 @@ namespace OpenBreed.Database.Xml.Repositories
         {
             get
             {
-                yield return typeof(XmlFileDataSourceEntry);
-                yield return typeof(XmlEPFArchiveFileDataSourceEntry);
+                yield return typeof(XmlDbFileDataSource);
+                yield return typeof(XmlDbEpfArchiveFileDataSource);
             }
         }
 
-        protected override IDataSourceEntry GetEntryWithIndex(int index)
+        protected override IDbDataSource GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IDataSourceEntry entry)
+        protected override int GetIndexOf(IDbDataSource entry)
         {
-            return context.Items.IndexOf((XmlDataSourceEntry)entry);
+            return context.Items.IndexOf((XmlDbDataSource)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, IDataSourceEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbDataSource newEntry)
         {
-            context.Items[index] = (XmlDataSourceEntry)newEntry;
+            context.Items[index] = (XmlDbDataSource)newEntry;
         }
 
-        public override void Add(IDataSourceEntry newEntry)
+        public override void Add(IDbDataSource newEntry)
         {
-            context.Items.Add((XmlDataSourceEntry)newEntry);
+            context.Items.Add((XmlDbDataSource)newEntry);
         }
 
         #endregion Public Properties

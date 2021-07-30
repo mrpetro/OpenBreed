@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyEntityTemplatesRepository : XmlReadonlyRepositoryBase<IEntityTemplateEntry>
+    public class XmlReadonlyEntityTemplatesRepository : XmlReadonlyRepositoryBase<IDbEntityTemplate>
     {
         #region Private Fields
 
@@ -26,13 +26,13 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlEntityTemplateFromFileEntry);
+                yield return typeof(XmlDbEntityTemplateFromFile);
             }
         }
 
@@ -48,20 +48,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override IEntityTemplateEntry GetEntryWithIndex(int index)
+        protected override IDbEntityTemplate GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IEntityTemplateEntry entry)
+        protected override int GetIndexOf(IDbEntityTemplate entry)
         {
-            return context.Items.IndexOf((XmlEntityTemplateEntry)entry);
+            return context.Items.IndexOf((XmlDbEntityTemplate)entry);
         }
 
         #endregion Protected Methods
     }
 
-    public class XmlEntityTemplatesRepository : XmlRepositoryBase<IEntityTemplateEntry>
+    public class XmlEntityTemplatesRepository : XmlRepositoryBase<IDbEntityTemplate>
     {
         #region Private Fields
 
@@ -80,13 +80,13 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlEntityTemplateFromFileEntry);
+                yield return typeof(XmlDbEntityTemplateFromFile);
             }
         }
 
@@ -98,28 +98,28 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Methods
 
-        public override void Add(IEntityTemplateEntry newEntry)
+        public override void Add(IDbEntityTemplate newEntry)
         {
-            context.Items.Add((XmlEntityTemplateEntry)newEntry);
+            context.Items.Add((XmlDbEntityTemplate)newEntry);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override IEntityTemplateEntry GetEntryWithIndex(int index)
+        protected override IDbEntityTemplate GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IEntityTemplateEntry entry)
+        protected override int GetIndexOf(IDbEntityTemplate entry)
         {
-            return context.Items.IndexOf((XmlEntityTemplateEntry)entry);
+            return context.Items.IndexOf((XmlDbEntityTemplate)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, IEntityTemplateEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbEntityTemplate newEntry)
         {
-            context.Items[index] = (XmlEntityTemplateEntry)newEntry;
+            context.Items[index] = (XmlDbEntityTemplate)newEntry;
         }
 
         #endregion Protected Methods

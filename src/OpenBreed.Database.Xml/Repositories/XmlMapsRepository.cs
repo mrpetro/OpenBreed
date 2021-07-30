@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyMapsRepository : XmlReadonlyRepositoryBase<IMapEntry>
+    public class XmlReadonlyMapsRepository : XmlReadonlyRepositoryBase<IDbMap>
     {
         #region Private Fields
 
@@ -26,11 +26,11 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override string Name { get { return "Maps"; } }
 
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlMapEntry); } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbMap); } }
 
         public override int Count => context.Items.Count;
 
@@ -42,20 +42,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override IMapEntry GetEntryWithIndex(int index)
+        protected override IDbMap GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IMapEntry entry)
+        protected override int GetIndexOf(IDbMap entry)
         {
-            return context.Items.IndexOf((XmlMapEntry)entry);
+            return context.Items.IndexOf((XmlDbMap)entry);
         }
 
         #endregion Protected Methods
     }
 
-    public class XmlMapsRepository : XmlRepositoryBase<IMapEntry>
+    public class XmlMapsRepository : XmlRepositoryBase<IDbMap>
     {
         #region Private Fields
 
@@ -74,11 +74,11 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override string Name { get { return "Maps"; } }
 
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlMapEntry); } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbMap); } }
 
         public override int Count => context.Items.Count;
 
@@ -86,28 +86,28 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Methods
 
-        public override void Add(IMapEntry newEntry)
+        public override void Add(IDbMap newEntry)
         {
-            context.Items.Add((XmlMapEntry)newEntry);
+            context.Items.Add((XmlDbMap)newEntry);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override IMapEntry GetEntryWithIndex(int index)
+        protected override IDbMap GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IMapEntry entry)
+        protected override int GetIndexOf(IDbMap entry)
         {
-            return context.Items.IndexOf((XmlMapEntry)entry);
+            return context.Items.IndexOf((XmlDbMap)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, IMapEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbMap newEntry)
         {
-            context.Items[index] = (XmlMapEntry)newEntry;
+            context.Items[index] = (XmlDbMap)newEntry;
         }
 
         #endregion Protected Methods
