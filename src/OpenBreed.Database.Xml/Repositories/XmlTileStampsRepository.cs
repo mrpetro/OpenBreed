@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyTileStampsRepository : XmlReadonlyRepositoryBase<ITileStampEntry>
+    public class XmlReadonlyTileStampsRepository : XmlReadonlyRepositoryBase<IDbTileStamp>
     {
         #region Private Fields
 
@@ -26,13 +26,13 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlTileStampEntry);
+                yield return typeof(XmlDbTileStamp);
             }
         }
 
@@ -44,20 +44,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override ITileStampEntry GetEntryWithIndex(int index)
+        protected override IDbTileStamp GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(ITileStampEntry entry)
+        protected override int GetIndexOf(IDbTileStamp entry)
         {
-            return context.Items.IndexOf((XmlTileStampEntry)entry);
+            return context.Items.IndexOf((XmlDbTileStamp)entry);
         }
 
         #endregion Protected Methods
     }
 
-    public class XmlTileStampsRepository : XmlRepositoryBase<ITileStampEntry>
+    public class XmlTileStampsRepository : XmlRepositoryBase<IDbTileStamp>
     {
         #region Private Fields
 
@@ -76,13 +76,13 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlTileStampEntry);
+                yield return typeof(XmlDbTileStamp);
             }
         }
 
@@ -94,24 +94,24 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override ITileStampEntry GetEntryWithIndex(int index)
+        protected override IDbTileStamp GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(ITileStampEntry entry)
+        protected override int GetIndexOf(IDbTileStamp entry)
         {
-            return context.Items.IndexOf((XmlTileStampEntry)entry);
+            return context.Items.IndexOf((XmlDbTileStamp)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, ITileStampEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbTileStamp newEntry)
         {
-            context.Items[index] = (XmlTileStampEntry)newEntry;
+            context.Items[index] = (XmlDbTileStamp)newEntry;
         }
 
-        public override void Add(ITileStampEntry newEntry)
+        public override void Add(IDbTileStamp newEntry)
         {
-            context.Items.Add((XmlTileStampEntry)newEntry);
+            context.Items.Add((XmlDbTileStamp)newEntry);
         }
 
         #endregion Protected Methods

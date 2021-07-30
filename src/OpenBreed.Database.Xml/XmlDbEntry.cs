@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml
 {
-    public abstract class XmlDbEntry : IEntry
+    public abstract class XmlDbEntry : IDbEntry
     {
         #region Public Properties
 
@@ -19,7 +19,7 @@ namespace OpenBreed.Database.Xml
         [XmlAttribute]
         public string Id { get; set; }
 
-        public abstract IEntry Copy();
+        public abstract IDbEntry Copy();
 
         #endregion Public Properties
 

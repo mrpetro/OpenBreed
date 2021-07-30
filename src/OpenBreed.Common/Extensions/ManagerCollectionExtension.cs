@@ -28,10 +28,10 @@ namespace OpenBreed.Common.Extensions
             managerCollection.AddSingleton<ActionSetsDataProvider>(() => new ActionSetsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IRepositoryProvider>()));
 
-            managerCollection.AddSingleton<SpriteSetsDataProvider>(() => new SpriteSetsDataProvider(managerCollection.GetManager<IModelsProvider>(),
+            managerCollection.AddSingleton<SpriteAtlasDataProvider>(() => new SpriteAtlasDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IRepositoryProvider>()));
 
-            managerCollection.AddSingleton<TileSetsDataProvider>(() => new TileSetsDataProvider(managerCollection.GetManager<IModelsProvider>(),
+            managerCollection.AddSingleton<TileAtlasDataProvider>(() => new TileAtlasDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IRepositoryProvider>()));
 
             managerCollection.AddSingleton<ScriptsDataProvider>(() => new ScriptsDataProvider(managerCollection.GetManager<IModelsProvider>(),
@@ -48,7 +48,7 @@ namespace OpenBreed.Common.Extensions
 
             managerCollection.AddSingleton<MapsDataProvider>(() => new MapsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                         managerCollection.GetManager<IRepositoryProvider>(),
-                                                                                        managerCollection.GetManager<TileSetsDataProvider>(),
+                                                                                        managerCollection.GetManager<TileAtlasDataProvider>(),
                                                                                         managerCollection.GetManager<PalettesDataProvider>(),
                                                                                         managerCollection.GetManager<ActionSetsDataProvider>()));
 

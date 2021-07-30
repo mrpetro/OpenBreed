@@ -40,7 +40,7 @@ namespace OpenBreed.Database.Xml
 
         #region Public Methods
 
-        public IRepository<T> GetRepository<T>() where T : IEntry
+        public IRepository<T> GetRepository<T>() where T : IDbEntry
         {
             return (IRepository<T>)GetRepository(typeof(T));
         }
@@ -69,7 +69,7 @@ namespace OpenBreed.Database.Xml
 
         #region Protected Methods
 
-        protected void RegisterRepository<T>(IRepository<T> repository) where T : IEntry
+        protected void RegisterRepository<T>(IRepository<T> repository) where T : IDbEntry
         {
             _repositories.Add(typeof(T), repository);
         }
@@ -82,9 +82,9 @@ namespace OpenBreed.Database.Xml
         {
             RegisterRepository(new XmlDataSourcesRepository(context.GetTable<XmlDbDataSourceTableDef>()));
             RegisterRepository(new XmlAssetsRepository(context.GetTable<XmlDbAssetTableDef>()));
-            RegisterRepository(new XmlTileSetsRepository(context.GetTable<XmlDbTileSetTableDef>()));
+            RegisterRepository(new XmlTileAtlasRepository(context.GetTable<XmlDbTileAtlasTableDef>()));
             RegisterRepository(new XmlTileStampsRepository(context.GetTable<XmlDbTileStampTableDef>()));
-            RegisterRepository(new XmlSpriteSetsRepository(context.GetTable<XmlDbSpriteSetTableDef>()));
+            RegisterRepository(new XmlSpriteAtlasRepository(context.GetTable<XmlDbSpriteAtlasTableDef>()));
             RegisterRepository(new XmlActionSetsRepository(context.GetTable<XmlDbActionSetTableDef>()));
             RegisterRepository(new XmlImagesRepository(context.GetTable<XmlDbImageTableDef>()));
             RegisterRepository(new XmlPalettesRepository(context.GetTable<XmlDbPaletteTableDef>()));

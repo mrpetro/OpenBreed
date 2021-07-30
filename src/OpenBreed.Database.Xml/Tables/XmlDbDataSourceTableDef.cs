@@ -15,9 +15,9 @@ namespace OpenBreed.Database.Xml.Tables
         #region Public Fields
 
         [XmlArray("Items"),
-        XmlArrayItem("FileDataSource", typeof(XmlFileDataSourceEntry)),
-        XmlArrayItem("EPFArchiveFileDataSource", typeof(XmlEPFArchiveFileDataSourceEntry))]
-        public readonly List<XmlDataSourceEntry> Items = new List<XmlDataSourceEntry>();
+        XmlArrayItem("FileDataSource", typeof(XmlDbFileDataSource)),
+        XmlArrayItem("EPFArchiveFileDataSource", typeof(XmlDbEpfArchiveFileDataSource))]
+        public readonly List<XmlDbDataSource> Items = new List<XmlDbDataSource>();
 
         #endregion Public Fields
     }

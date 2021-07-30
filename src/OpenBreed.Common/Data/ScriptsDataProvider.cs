@@ -29,7 +29,7 @@ namespace OpenBreed.Common.Data
 
         public ScriptModel GetScript(string id)
         {
-            var entry = repositoryProvider.GetRepository<IScriptEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<IDbScript>().GetById(id);
             if (entry == null)
                 throw new Exception("Script error: " + id);
 
@@ -40,12 +40,12 @@ namespace OpenBreed.Common.Data
 
         #region Private Methods
 
-        private ScriptModel GetModelImpl(IScriptFromFileEntry entry)
+        private ScriptModel GetModelImpl(IDbScriptFromFile entry)
         {
             return ScriptsDataHelper.FromText(dataProvider, entry);
         }
 
-        private ScriptModel GetModelImpl(IScriptEmbeddedEntry entry)
+        private ScriptModel GetModelImpl(IDbScriptEmbedded entry)
         {
             return ScriptsDataHelper.FromBinary(dataProvider, entry);
         }

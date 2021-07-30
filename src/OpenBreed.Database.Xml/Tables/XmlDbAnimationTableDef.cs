@@ -13,7 +13,7 @@ namespace OpenBreed.Database.Xml.Tables
 
 
         [XmlArray("Items"),
-        XmlArrayItem("Animation", typeof(XmlAnimationEntry))]
-        public readonly List<XmlAnimationEntry> Items = new List<XmlAnimationEntry>();
+        XmlArrayItem("Animation", typeof(XmlDbAnimation))]
+        public readonly List<XmlDbAnimation> Items = new List<XmlDbAnimation>();
     }
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyAnimationsRepository : XmlReadonlyRepositoryBase<IAnimationEntry>
+    public class XmlReadonlyAnimationsRepository : XmlReadonlyRepositoryBase<IDbAnimation>
     {
         #region Private Fields
 
@@ -26,8 +26,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlAnimationEntry); } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbAnimation); } }
         public override string Name { get { return "Animations"; } }
         public override int Count => context.Items.Count;
 
@@ -35,20 +35,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override IAnimationEntry GetEntryWithIndex(int index)
+        protected override IDbAnimation GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IAnimationEntry entry)
+        protected override int GetIndexOf(IDbAnimation entry)
         {
-            return context.Items.IndexOf((XmlAnimationEntry)entry);
+            return context.Items.IndexOf((XmlDbAnimation)entry);
         }
 
         #endregion Protected Methods
     }
 
-    public class XmlAnimationsRepository : XmlRepositoryBase<IAnimationEntry>
+    public class XmlAnimationsRepository : XmlRepositoryBase<IDbAnimation>
     {
         #region Private Fields
 
@@ -67,8 +67,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlAnimationEntry); } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbAnimation); } }
         public override string Name { get { return "Animations"; } }
         public override int Count => context.Items.Count;
 
@@ -76,24 +76,24 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override IAnimationEntry GetEntryWithIndex(int index)
+        protected override IDbAnimation GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IAnimationEntry entry)
+        protected override int GetIndexOf(IDbAnimation entry)
         {
-            return context.Items.IndexOf((XmlAnimationEntry)entry);
+            return context.Items.IndexOf((XmlDbAnimation)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, IAnimationEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbAnimation newEntry)
         {
-            context.Items[index] = (XmlAnimationEntry)newEntry;
+            context.Items[index] = (XmlDbAnimation)newEntry;
         }
 
-        public override void Add(IAnimationEntry newEntry)
+        public override void Add(IDbAnimation newEntry)
         {
-            context.Items.Add((XmlAnimationEntry)newEntry);
+            context.Items.Add((XmlDbAnimation)newEntry);
         }
 
         #endregion Protected Methods

@@ -18,9 +18,9 @@ namespace OpenBreed.Database.Xml.Tables
         #region Public Fields
 
         [XmlArray("Items"),
-        XmlArrayItem("ScriptEmbedded", typeof(XmlScriptEmbeddedEntry)),
-        XmlArrayItem("ScriptFromFile", typeof(XmlScriptFromFileEntry)),]
-        public readonly List<XmlScriptEntry> Items = new List<XmlScriptEntry>();
+        XmlArrayItem("ScriptEmbedded", typeof(XmlDbScriptEmbedded)),
+        XmlArrayItem("ScriptFromFile", typeof(XmlDbScriptFromFile)),]
+        public readonly List<XmlDbScript> Items = new List<XmlDbScript>();
 
         #endregion Public Fields
     }

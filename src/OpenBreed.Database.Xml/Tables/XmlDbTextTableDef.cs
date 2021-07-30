@@ -18,10 +18,10 @@ namespace OpenBreed.Database.Xml.Tables
         #region Public Fields
 
         [XmlArray("Items"),
-        XmlArrayItem("TextEmbedded", typeof(XmlTextEmbeddedEntry)),
-        XmlArrayItem("TextFromMAP", typeof(XmlTextFromMapEntry)),
-        XmlArrayItem("TextFromFile", typeof(XmlTextFromFileEntry)),]
-        public readonly List<XmlTextEntry> Items = new List<XmlTextEntry>();
+        XmlArrayItem("TextEmbedded", typeof(XmlDbTextEmbedded)),
+        XmlArrayItem("TextFromMAP", typeof(XmlDbTextFromMap)),
+        XmlArrayItem("TextFromFile", typeof(XmlDbTextFromFile)),]
+        public readonly List<XmlDbText> Items = new List<XmlDbText>();
 
         #endregion Public Fields
     }

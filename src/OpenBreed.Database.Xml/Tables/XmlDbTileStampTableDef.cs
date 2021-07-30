@@ -12,7 +12,7 @@ namespace OpenBreed.Database.Xml.Tables
         public override string Name => NAME;
 
         [XmlArray("Items"),
-        XmlArrayItem("TileStamp", typeof(XmlTileStampEntry))]
-        public readonly List<XmlTileStampEntry> Items = new List<XmlTileStampEntry>();
+        XmlArrayItem("TileStamp", typeof(XmlDbTileStamp))]
+        public readonly List<XmlDbTileStamp> Items = new List<XmlDbTileStamp>();
     }
 }

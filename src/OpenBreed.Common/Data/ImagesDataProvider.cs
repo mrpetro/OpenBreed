@@ -29,7 +29,7 @@ namespace OpenBreed.Common.Data
 
         public Image GetImage(string id)
         {
-            var entry = repositoryProvider.GetRepository<IImageEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<IDbImage>().GetById(id);
             if (entry == null)
                 throw new Exception("Image error: " + id);
 

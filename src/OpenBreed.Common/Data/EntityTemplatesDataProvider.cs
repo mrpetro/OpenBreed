@@ -33,7 +33,7 @@ namespace OpenBreed.Common.Data
 
         public EntityTemplateModel GetEntityTemplate(string id)
         {
-            var entry = repositoryProvider.GetRepository<IEntityTemplateEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<IDbEntityTemplate>().GetById(id);
             if (entry == null)
                 throw new Exception("Script error: " + id);
 
@@ -44,7 +44,7 @@ namespace OpenBreed.Common.Data
 
         #region Private Methods
 
-        private EntityTemplateModel GetModelImpl(IEntityTemplateFromFileEntry entry)
+        private EntityTemplateModel GetModelImpl(IDbEntityTemplateFromFile entry)
         {
             return EntityTemplatesDataHelper.FromText(Provider, entry);
         }

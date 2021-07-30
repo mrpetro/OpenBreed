@@ -12,7 +12,7 @@ using OpenBreed.Database.Xml.Tables;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyPalettesRepository : XmlReadonlyRepositoryBase<IPaletteEntry>
+    public class XmlReadonlyPalettesRepository : XmlReadonlyRepositoryBase<IDbPalette>
     {
 
         #region Private Fields
@@ -32,13 +32,13 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlPaletteFromBinaryEntry);
-                yield return typeof(XmlPaletteFromMapEntry);
+                yield return typeof(XmlDbPaletteFromBinary);
+                yield return typeof(XmlDbPaletteFromMap);
             }
         }
 
@@ -51,21 +51,21 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Methods
 
-        protected override IPaletteEntry GetEntryWithIndex(int index)
+        protected override IDbPalette GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IPaletteEntry entry)
+        protected override int GetIndexOf(IDbPalette entry)
         {
-            return context.Items.IndexOf((XmlPaletteEntry)entry);
+            return context.Items.IndexOf((XmlDbPalette)entry);
         }
 
         #endregion Public Methods
 
     }
 
-    public class XmlPalettesRepository : XmlRepositoryBase<IPaletteEntry>
+    public class XmlPalettesRepository : XmlRepositoryBase<IDbPalette>
     {
 
         #region Private Fields
@@ -85,13 +85,13 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlPaletteFromBinaryEntry);
-                yield return typeof(XmlPaletteFromMapEntry);
+                yield return typeof(XmlDbPaletteFromBinary);
+                yield return typeof(XmlDbPaletteFromMap);
             }
         }
 
@@ -104,24 +104,24 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Methods
 
-        protected override IPaletteEntry GetEntryWithIndex(int index)
+        protected override IDbPalette GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IPaletteEntry entry)
+        protected override int GetIndexOf(IDbPalette entry)
         {
-            return context.Items.IndexOf((XmlPaletteEntry)entry);
+            return context.Items.IndexOf((XmlDbPalette)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, IPaletteEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbPalette newEntry)
         {
-            context.Items[index] = (XmlPaletteEntry)newEntry;
+            context.Items[index] = (XmlDbPalette)newEntry;
         }
 
-        public override void Add(IPaletteEntry newEntry)
+        public override void Add(IDbPalette newEntry)
         {
-            context.Items.Add((XmlPaletteEntry)newEntry);
+            context.Items.Add((XmlDbPalette)newEntry);
         }
 
         #endregion Public Methods
