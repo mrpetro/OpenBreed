@@ -8,5 +8,6 @@ namespace OpenBreed.Database.Interface.Items.Texts
 {
     public interface IDbTextFromMap : IDbText
     {
+        string BlockName { get; set; }
     }
 }

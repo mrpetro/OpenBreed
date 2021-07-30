@@ -22,7 +22,7 @@ namespace OpenBreed.Common.Data
             return builder.Build();
         }
 
-        public static TextModel FromMapModel(IModelsProvider dataProvider, IDbTextFromFile textData)
+        public static TextModel FromMapModel(IModelsProvider dataProvider, IDbTextFromMap textData)
         {
             var mapModel = dataProvider.GetModel<MapModel>(textData.DataRef);
 

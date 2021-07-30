@@ -40,7 +40,7 @@ namespace OpenBreed.Common.Data
 
         #region Private Methods
 
-        private TextModel GetModelImpl(IDbTextFromFile entry)
+        private TextModel GetModelImpl(IDbTextFromMap entry)
         {
             return TextsDataHelper.FromMapModel(dataProvider, entry);
         }

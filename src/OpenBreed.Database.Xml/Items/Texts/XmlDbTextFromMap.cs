@@ -13,7 +13,7 @@ namespace OpenBreed.Database.Xml.Items.Texts
 {
     [Serializable]
     [Description("Text from MAP"), Category("Appearance")]
-    public class XmlDbTextFromMap : XmlDbText, IDbTextFromFile
+    public class XmlDbTextFromMap : XmlDbText, IDbTextFromMap
     {
         [XmlElement("BlockName")]
         public string BlockName { get; set; }
