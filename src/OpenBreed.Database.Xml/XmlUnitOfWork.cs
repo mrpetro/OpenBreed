@@ -83,6 +83,7 @@ namespace OpenBreed.Database.Xml
             RegisterRepository(new XmlDataSourcesRepository(context.GetTable<XmlDbDataSourceTableDef>()));
             RegisterRepository(new XmlAssetsRepository(context.GetTable<XmlDbAssetTableDef>()));
             RegisterRepository(new XmlTileSetsRepository(context.GetTable<XmlDbTileSetTableDef>()));
+            RegisterRepository(new XmlTileStampsRepository(context.GetTable<XmlDbTileStampTableDef>()));
             RegisterRepository(new XmlSpriteSetsRepository(context.GetTable<XmlDbSpriteSetTableDef>()));
             RegisterRepository(new XmlActionSetsRepository(context.GetTable<XmlDbActionSetTableDef>()));
             RegisterRepository(new XmlImagesRepository(context.GetTable<XmlDbImageTableDef>()));

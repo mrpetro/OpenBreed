@@ -47,6 +47,7 @@ namespace OpenBreed.Database.Xml
             RegisterTable(GetTable<XmlDbDataSourceTableDef>());
             RegisterTable(GetTable<XmlDbAssetTableDef>());
             RegisterTable(GetTable<XmlDbTileSetTableDef>());
+            RegisterTable(GetTable<XmlDbTileStampTableDef>());
             RegisterTable(GetTable<XmlDbSpriteSetTableDef>());
             RegisterTable(GetTable<XmlDbActionSetTableDef>());
             RegisterTable(GetTable<XmlDbImageTableDef>());
@@ -64,6 +65,7 @@ namespace OpenBreed.Database.Xml
             RegisterRepository(new XmlDataSourcesRepository(GetTable<XmlDbDataSourceTableDef>()));
             RegisterRepository(new XmlAssetsRepository(GetTable<XmlDbAssetTableDef>()));
             RegisterRepository(new XmlTileSetsRepository(GetTable<XmlDbTileSetTableDef>()));
+            RegisterRepository(new XmlTileStampsRepository(GetTable<XmlDbTileStampTableDef>()));
             RegisterRepository(new XmlSpriteSetsRepository(GetTable<XmlDbSpriteSetTableDef>()));
             RegisterRepository(new XmlActionSetsRepository(GetTable<XmlDbActionSetTableDef>()));
             RegisterRepository(new XmlImagesRepository(GetTable<XmlDbImageTableDef>()));

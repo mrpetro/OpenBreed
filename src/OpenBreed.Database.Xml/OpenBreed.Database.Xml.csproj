@@ -95,6 +95,7 @@
     <Compile Include="Items\Texts\XmlTextEmbeddedEntry.cs" />
     <Compile Include="Items\Texts\XmlTextFromFileEntry.cs" />
     <Compile Include="Items\Texts\XmlTextFromMapEntry.cs" />
+    <Compile Include="Items\TileStamps\XmlTileStampEntry.cs" />
     <Compile Include="Items\Tiles\XmlTileSetEntry.cs" />
     <Compile Include="Items\Tiles\XmlTileSetFromImageEntry.cs" />
     <Compile Include="Items\Tiles\XmlTileSetFromBlkEntry.cs" />
@@ -113,10 +114,12 @@
     <Compile Include="Repositories\XmlScriptsRepository.cs" />
     <Compile Include="Repositories\XmlTextsRepository.cs" />
     <Compile Include="Repositories\XmlEntityTemplatesRepository.cs" />
+    <Compile Include="Repositories\XmlTileStampsRepository.cs" />
     <Compile Include="Repositories\XmlTileSetsRepository.cs" />
     <Compile Include="Resources\ResourceDef.cs" />
     <Compile Include="Resources\ResourceLevelDef.cs" />
     <Compile Include="Tables\XmlDbActionSetTableDef.cs" />
+    <Compile Include="Tables\XmlDbTileStampTableDef.cs" />
     <Compile Include="Tables\XmlDbEntityTemplateTableDef.cs" />
     <Compile Include="Tables\XmlDbScriptTableDef.cs" />
     <Compile Include="Tables\XmlDbAnimationTableDef.cs" />

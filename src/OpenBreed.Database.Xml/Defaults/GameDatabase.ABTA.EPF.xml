@@ -992,28 +992,28 @@
 					</Parameters>
 				</Asset>
 				<Asset Id="Assets.EPSLOGO1.LBM" DataSourceRef="DataSources.EPSLOGO1.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.EPSLOGO2.LBM" DataSourceRef="DataSources.EPSLOGO2.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.OUTRO.LBM" DataSourceRef="DataSources.OUTRO.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.T17LOGO.LBM" DataSourceRef="DataSources.T17LOGO.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.COMPUTER.LBM" DataSourceRef="DataSources.COMPUTER.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.IPC.LBM" DataSourceRef="DataSources.IPC.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.SMARTPIC.LBM" DataSourceRef="DataSources.SMARTPIC.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.TITLEBAC.LBM" DataSourceRef="DataSources.TITLEBAC.LBM" FormatType="IFF_IMAGE">
-					<Parameters/>
+					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="DataSources.Scripts.Entry.lua" FormatType="TEXT">
 					<Parameters />
@@ -1559,6 +1559,34 @@
 				</TileSetFromBLK>
 			</Items>
 		</TileSets>
+		<TileStamps>
+			<Items>
+				<TileStamp Id="Tiles/Stamps/DoorHorizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="88" />
+						<Cell X="1" Y="0" TsId="TileSets.L4" TsTi ="89" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/DoorHorizontal/Opened" Width="2" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="40" />
+						<Cell X="1" Y="0" TsId="TileSets.L4" TsTi ="41" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/DoorVertical/Closed" Width="1" Height="2" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="28" />
+						<Cell X="0" Y="1" TsId="TileSets.L4" TsTi ="48" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/DoorVertical/Opened" Width="1" Height="2" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="81" />
+						<Cell X="0" Y="1" TsId="TileSets.L4" TsTi ="61" />
+					</Cells>
+				</TileStamp>
+			</Items>
+		</TileStamps>
 		<Maps>
 			<Items>
 				<Map Id="CRASH LANDING SITE">
