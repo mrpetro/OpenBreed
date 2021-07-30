@@ -5,7 +5,7 @@ using OpenBreed.Database.Interface.Items.DataSources;
 
 namespace OpenBreed.Editor.VM.DataSources
 {
-    public class DataSourceEditorVM : ParentEntryEditor<IDataSourceEntry>
+    public class DataSourceEditorVM : ParentEntryEditor<IDbDataSource>
     {
         #region Public Constructors
 

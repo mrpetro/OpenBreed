@@ -5,7 +5,7 @@ using OpenBreed.Database.Interface.Items.Actions;
 
 namespace OpenBreed.Editor.VM.Actions
 {
-    public class ActionSetEditorVM : ParentEntryEditor<IActionSetEntry>
+    public class ActionSetEditorVM : ParentEntryEditor<IDbActionSet>
     {
         #region Public Constructors
 

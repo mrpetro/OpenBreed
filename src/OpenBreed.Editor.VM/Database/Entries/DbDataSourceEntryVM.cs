@@ -10,7 +10,7 @@ namespace OpenBreed.Editor.VM.Database.Entries
     {
         #region Private Fields
 
-        private IDataSourceEntry _entry;
+        private IDbDataSource _entry;
 
         #endregion Private Fields
 
@@ -24,15 +24,15 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #region Public Properties
 
-        public override IEntry Entry { get { return _entry; } }
+        public override IDbEntry Entry { get { return _entry; } }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public override void Load(IEntry entry)
+        public override void Load(IDbEntry entry)
         {
-            _entry = entry as IDataSourceEntry ?? throw new InvalidOperationException($"Expected {nameof(IDataSourceEntry)}");
+            _entry = entry as IDbDataSource ?? throw new InvalidOperationException($"Expected {nameof(IDbDataSource)}");
 
             base.Load(entry);
         }

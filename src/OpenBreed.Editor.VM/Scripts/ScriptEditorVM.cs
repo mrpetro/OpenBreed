@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
-    public class ScriptEditorVM : ParentEntryEditor<IScriptEntry>
+    public class ScriptEditorVM : ParentEntryEditor<IDbScript>
     {
         #region Public Constructors
 

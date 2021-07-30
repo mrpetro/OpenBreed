@@ -69,23 +69,23 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Internal Methods
 
 
-        public override void UpdateVM(IPaletteEntry entry)
+        public override void UpdateVM(IDbPalette entry)
         {
             base.UpdateVM(entry);
-            UpdateVM((IPaletteFromMapEntry)entry);
+            UpdateVM((IDbPaletteFromMap)entry);
         }
 
-        public override void UpdateEntry(IPaletteEntry entry)
+        public override void UpdateEntry(IDbPalette entry)
         {
             base.UpdateEntry(entry);
-            UpdateEntry((IPaletteFromMapEntry)entry);
+            UpdateEntry((IDbPaletteFromMap)entry);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void UpdatePaletteBlocksList(IPaletteFromMapEntry source)
+        private void UpdatePaletteBlocksList(IDbPaletteFromMap source)
         {
             BlockNames.UpdateAfter(() =>
             {
@@ -107,7 +107,7 @@ namespace OpenBreed.Editor.VM.Palettes
             set { SetProperty(ref dataRef, value); }
         }
 
-        private void UpdateVM(IPaletteFromMapEntry entry)
+        private void UpdateVM(IDbPaletteFromMap entry)
         {
             UpdatePaletteBlocksList(entry);
 
@@ -120,7 +120,7 @@ namespace OpenBreed.Editor.VM.Palettes
             BlockName = entry.BlockName;
         }
 
-        private void UpdateEntry(IPaletteFromMapEntry source)
+        private void UpdateEntry(IDbPaletteFromMap source)
         {
             var mapModel = dataProvider.GetModel<MapModel>(DataRef);
 

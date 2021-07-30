@@ -57,7 +57,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<IActionSetEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbActionSet> subeditor)
         {
             Controls.Clear();
 

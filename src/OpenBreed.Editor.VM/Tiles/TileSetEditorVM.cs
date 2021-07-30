@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetEditorVM : ParentEntryEditor<ITileSetEntry>
+    public class TileSetEditorVM : ParentEntryEditor<IDbTileAtlas>
     {
         #region Public Constructors
 

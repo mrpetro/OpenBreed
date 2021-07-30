@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Images
 {
-    public class ImageFromFileEditorVM : BaseViewModel, IEntryEditor<IImageEntry>
+    public class ImageFromFileEditorVM : BaseViewModel, IEntryEditor<IDbImage>
     {
         #region Private Fields
 
@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.VM.Images
             this.workspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;
             this.dataProvider = dataProvider;
-            ImageAssetRefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IAssetEntry));
+            ImageAssetRefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbAsset));
             ImageAssetRefIdEditor.RefIdSelected = (newRefId) => { AssetRef = newRefId; };
             PropertyChanged += This_PropertyChanged;
         }
@@ -67,12 +67,12 @@ namespace OpenBreed.Editor.VM.Images
             gfx.DrawImage(Image, 0, 0, Image.Width, Image.Height);
         }
 
-        public void UpdateEntry(IImageEntry entry)
+        public void UpdateEntry(IDbImage entry)
         {
             entry.DataRef = AssetRef;
         }
 
-        public void UpdateVM(IImageEntry entry)
+        public void UpdateVM(IDbImage entry)
         {
             AssetRef = entry.DataRef;
             UpdateImage();

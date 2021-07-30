@@ -9,14 +9,14 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetEditorExVM : BaseViewModel, IEntryEditor<ISpriteSetEntry>
+    public class SpriteSetEditorExVM : BaseViewModel, IEntryEditor<IDbSpriteAtlas>
     {
         #region Private Fields
 
         private string _currentPaletteId;
 
         private PaletteModel palette;
-        protected readonly SpriteSetsDataProvider spriteSetsDataProvider;
+        protected readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
         protected readonly PalettesDataProvider palettesDataProvider;
         protected readonly IModelsProvider dataProvider;
 
@@ -24,11 +24,11 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetEditorExVM(SpriteSetsDataProvider spriteSetsDataProvider,
+        public SpriteSetEditorExVM(SpriteAtlasDataProvider spriteAtlasDataProvider,
                                    PalettesDataProvider palettesDataProvider,
                                    IModelsProvider dataProvider)
         {
-            this.spriteSetsDataProvider = spriteSetsDataProvider;
+            this.spriteAtlasDataProvider = spriteAtlasDataProvider;
             this.palettesDataProvider = palettesDataProvider;
             this.dataProvider = dataProvider;
             PaletteIds = new BindingList<string>();
@@ -38,7 +38,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Properties
 
-        public ParentEntryEditor<ISpriteSetEntry> Parent { get; }
+        public ParentEntryEditor<IDbSpriteAtlas> Parent { get; }
 
         public string CurrentPaletteId
         {
@@ -59,11 +59,11 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Methods
 
-        public virtual void UpdateEntry(ISpriteSetEntry entry)
+        public virtual void UpdateEntry(IDbSpriteAtlas entry)
         {
         }
 
-        public virtual void UpdateVM(ISpriteSetEntry entry)
+        public virtual void UpdateVM(IDbSpriteAtlas entry)
         {
             SetupPaletteIds(entry.PaletteRefs);
             SwitchPalette(CurrentPaletteId);

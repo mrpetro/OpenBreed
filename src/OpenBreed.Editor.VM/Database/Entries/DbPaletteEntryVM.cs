@@ -9,7 +9,7 @@ namespace OpenBreed.Editor.VM.Database.Entries
     {
         #region Private Fields
 
-        private IPaletteEntry _entry;
+        private IDbPalette _entry;
 
         #endregion Private Fields
 
@@ -23,15 +23,15 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #region Public Properties
 
-        public override IEntry Entry { get { return _entry; } }
+        public override IDbEntry Entry { get { return _entry; } }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public override void Load(IEntry entry)
+        public override void Load(IDbEntry entry)
         {
-            _entry = entry as IPaletteEntry ?? throw new InvalidOperationException($"Expected {nameof(IPaletteEntry)}");
+            _entry = entry as IDbPalette ?? throw new InvalidOperationException($"Expected {nameof(IDbPalette)}");
 
             base.Load(entry);
         }

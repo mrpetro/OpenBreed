@@ -19,7 +19,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetFromSprEditorVM(SpriteSetsDataProvider spriteSetsDataProvider,
+        public SpriteSetFromSprEditorVM(SpriteAtlasDataProvider spriteSetsDataProvider,
                                           PalettesDataProvider palettesDataProvider,
                                           IModelsProvider dataProvider) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider)
         {
@@ -42,16 +42,16 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Methods
 
-        public override void UpdateEntry(ISpriteSetEntry entry)
+        public override void UpdateEntry(IDbSpriteAtlas entry)
         {
             base.UpdateEntry(entry);
-            UpdateEntry((ISpriteSetFromSprEntry)entry);
+            UpdateEntry((IDbSpriteAtlasFromSpr)entry);
         }
 
-        public override void UpdateVM(ISpriteSetEntry entry)
+        public override void UpdateVM(IDbSpriteAtlas entry)
         {
             base.UpdateVM(entry);
-            UpdateVM((ISpriteSetFromSprEntry)entry);
+            UpdateVM((IDbSpriteAtlasFromSpr)entry);
         }
 
         #endregion Public Methods
@@ -78,13 +78,13 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Private Methods
 
-        private void UpdateEntry(ISpriteSetFromSprEntry entry)
+        private void UpdateEntry(IDbSpriteAtlasFromSpr entry)
         {
         }
 
-        private void UpdateVM(ISpriteSetFromSprEntry entry)
+        private void UpdateVM(IDbSpriteAtlasFromSpr entry)
         {
-            var model = spriteSetsDataProvider.GetSpriteSet(entry.Id);
+            var model = spriteAtlasDataProvider.GetSpriteSet(entry.Id);
 
             if (model != null)
                 FromModel(model);

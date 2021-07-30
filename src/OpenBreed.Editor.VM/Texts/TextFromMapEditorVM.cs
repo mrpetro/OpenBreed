@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Texts
 {
-    public class TextFromMapEditorVM : BaseViewModel, IEntryEditor<ITextEntry>
+    public class TextFromMapEditorVM : BaseViewModel, IEntryEditor<IDbText>
     {
         #region Private Fields
 
@@ -71,9 +71,9 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Methods
 
-        public virtual void UpdateVM(ITextEntry entry)
+        public virtual void UpdateVM(IDbText entry)
         {
-            var textFromMapEntry = (ITextFromMapEntry)entry;
+            var textFromMapEntry = (IDbTextFromMap)entry;
 
             UpdateTextBlocksList(textFromMapEntry);
 
@@ -86,9 +86,9 @@ namespace OpenBreed.Editor.VM.Texts
             BlockName = textFromMapEntry.BlockName;
         }
 
-        public virtual void UpdateEntry(ITextEntry entry)
+        public virtual void UpdateEntry(IDbText entry)
         {
-            var textFromMapEntry = (ITextFromMapEntry)entry;
+            var textFromMapEntry = (IDbTextFromMap)entry;
 
             var mapModel = dataProvider.GetModel<MapModel>(DataRef);
 
@@ -107,7 +107,7 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Private Methods
 
-        private void UpdateTextBlocksList(ITextFromMapEntry source)
+        private void UpdateTextBlocksList(IDbTextFromMap source)
         {
             BlockNames.UpdateAfter(() =>
             {
@@ -137,7 +137,7 @@ namespace OpenBreed.Editor.VM.Texts
             }
         }
 
-        private void ToEntry(ITextFromMapEntry source)
+        private void ToEntry(IDbTextFromMap source)
         {
         }
 

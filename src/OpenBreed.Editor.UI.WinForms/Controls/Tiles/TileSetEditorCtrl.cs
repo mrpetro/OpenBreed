@@ -43,7 +43,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<ITileSetEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbTileAtlas> subeditor)
         {
             Panel.Controls.Clear();
 

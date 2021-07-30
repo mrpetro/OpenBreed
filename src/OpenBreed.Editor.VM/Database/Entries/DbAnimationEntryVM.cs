@@ -9,7 +9,7 @@ namespace OpenBreed.Editor.VM.Database.Entries
     {
         #region Private Fields
 
-        private IAnimationEntry _entry;
+        private IDbAnimation _entry;
 
         #endregion Private Fields
 
@@ -23,15 +23,15 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #region Public Properties
 
-        public override IEntry Entry { get { return _entry; } }
+        public override IDbEntry Entry { get { return _entry; } }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public override void Load(IEntry entry)
+        public override void Load(IDbEntry entry)
         {
-            _entry = entry as IAnimationEntry ?? throw new InvalidOperationException($"Expected {nameof(IAnimationEntry)}");
+            _entry = entry as IDbAnimation ?? throw new InvalidOperationException($"Expected {nameof(IDbAnimation)}");
 
             base.Load(entry);
         }

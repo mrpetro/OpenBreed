@@ -6,7 +6,7 @@ using System;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetEditorVM : ParentEntryEditor<ISpriteSetEntry>
+    public class SpriteSetEditorVM : ParentEntryEditor<IDbSpriteAtlas>
     {
         #region Public Constructors
 

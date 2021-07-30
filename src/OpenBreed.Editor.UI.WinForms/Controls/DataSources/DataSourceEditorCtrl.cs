@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<IDataSourceEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbDataSource> subeditor)
         {
             Controls.Clear();
 

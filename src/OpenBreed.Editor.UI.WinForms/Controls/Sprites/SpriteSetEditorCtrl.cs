@@ -45,7 +45,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<ISpriteSetEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbSpriteAtlas> subeditor)
         {
             Panel.Controls.Clear();
 

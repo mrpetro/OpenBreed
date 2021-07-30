@@ -29,23 +29,23 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Methods
 
-        public override void UpdateVM(IPaletteEntry entry)
+        public override void UpdateVM(IDbPalette entry)
         {
             base.UpdateVM(entry);
-            UpdateVM((IPaletteFromBinaryEntry)entry);
+            UpdateVM((IDbPaletteFromBinary)entry);
         }
 
-        public override void UpdateEntry(IPaletteEntry entry)
+        public override void UpdateEntry(IDbPalette entry)
         {
             base.UpdateEntry(entry);
-            UpdateEntry((IPaletteFromBinaryEntry)entry);
+            UpdateEntry((IDbPaletteFromBinary)entry);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void UpdateVM(IPaletteFromBinaryEntry entry)
+        private void UpdateVM(IDbPaletteFromBinary entry)
         {
             var model = palettesDataProvider.GetPalette(entry.Id);
 
@@ -55,7 +55,7 @@ namespace OpenBreed.Editor.VM.Palettes
             DataRef = entry.DataRef;
         }
 
-        private void UpdateEntry(IPaletteFromBinaryEntry entry)
+        private void UpdateEntry(IDbPaletteFromBinary entry)
         {
             entry.DataRef = DataRef;
         }

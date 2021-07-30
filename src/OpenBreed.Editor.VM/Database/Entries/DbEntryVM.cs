@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #region Public Properties
 
-        public abstract IEntry Entry { get; }
+        public abstract IDbEntry Entry { get; }
 
         public virtual string Id
         {
@@ -42,7 +42,7 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #region Public Methods
 
-        public virtual void Load(IEntry entry)
+        public virtual void Load(IDbEntry entry)
         {
             Id = entry.Id;
             Description = entry.Description;

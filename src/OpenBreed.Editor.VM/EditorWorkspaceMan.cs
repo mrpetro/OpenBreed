@@ -73,7 +73,7 @@ namespace OpenBreed.Editor.VM
             logger.Info($"Database '{UnitOfWork.Name}' saved.");
         }
 
-        public IRepository<T> GetRepository<T>() where T : IEntry => UnitOfWork.GetRepository<T>();
+        public IRepository<T> GetRepository<T>() where T : IDbEntry => UnitOfWork.GetRepository<T>();
 
         public IRepository GetRepository(string name) => UnitOfWork.GetRepository(name);
 

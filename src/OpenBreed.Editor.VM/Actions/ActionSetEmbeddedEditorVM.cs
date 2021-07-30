@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Actions
 {
-    public class ActionSetEmbeddedEditorVM : BaseViewModel, IEntryEditor<IActionSetEntry>
+    public class ActionSetEmbeddedEditorVM : BaseViewModel, IEntryEditor<IDbActionSet>
     {
         #region Private Fields
 
@@ -65,7 +65,7 @@ namespace OpenBreed.Editor.VM.Actions
 
         private ActionSetModel model;
 
-        public virtual void UpdateVM(IActionSetEntry entry)
+        public virtual void UpdateVM(IDbActionSet entry)
         {
             model = actionSetsDataProvider.GetActionSet(entry.Id);
 
@@ -80,7 +80,7 @@ namespace OpenBreed.Editor.VM.Actions
             SelectedIndex = 0;
         }
 
-        public virtual void UpdateEntry(IActionSetEntry entry)
+        public virtual void UpdateEntry(IDbActionSet entry)
         {
             entry.Actions.Clear();
 

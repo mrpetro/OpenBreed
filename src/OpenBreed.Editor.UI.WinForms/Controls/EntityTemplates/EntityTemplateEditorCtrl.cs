@@ -42,7 +42,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates
             }
         }
 
-        private void OnSubeditorChanged(IEntryEditor<IEntityTemplateEntry> subeditor)
+        private void OnSubeditorChanged(IEntryEditor<IDbEntityTemplate> subeditor)
         {
             Controls.Clear();
 
