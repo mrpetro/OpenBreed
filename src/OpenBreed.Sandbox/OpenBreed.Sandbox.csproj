@@ -81,10 +81,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Loaders\PaletteDataLoader.cs" />
-    <Compile Include="Loaders\SpriteSetDataLoader.cs" />
+    <Compile Include="Loaders\SpriteAtlasDataLoader.cs" />
     <Compile Include="Loaders\TileStampDataLoader.cs" />
     <Compile Include="MapCellEntityFactory.cs" />
-    <Compile Include="Loaders\TileSetDataLoader.cs" />
+    <Compile Include="Loaders\TileAtlasDataLoader.cs" />
     <Compile Include="Commands\MoveToCommand.cs" />
     <None Include="Content\Graphics\Cursors.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

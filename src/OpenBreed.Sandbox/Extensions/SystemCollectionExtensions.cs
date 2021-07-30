@@ -90,7 +90,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register(new TileSetDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+            dataLoaderFactory.Register(new TileAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
                                                              managerCollection.GetManager<ITextureMan>(),
                                                              managerCollection.GetManager<ITileMan>()));
@@ -107,7 +107,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register(new SpriteSetDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+            dataLoaderFactory.Register(new SpriteAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
                                                              managerCollection.GetManager<ITextureMan>(),
                                                              managerCollection.GetManager<ISpriteMan>()));

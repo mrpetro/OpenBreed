@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    internal class TileSetDataLoader : IDataLoader<ITileAtlas>
+    internal class TileAtlasDataLoader : IDataLoader<ITileAtlas>
     {
         #region Private Fields
 
@@ -26,7 +26,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Constructors
 
-        public TileSetDataLoader(IRepositoryProvider repositoryProvider,
+        public TileAtlasDataLoader(IRepositoryProvider repositoryProvider,
                                  AssetsDataProvider assetsDataProvider,
                                  ITextureMan textureMan,
                                  ITileMan tileMan)
@@ -47,18 +47,18 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var paletteModel = args.FirstOrDefault() as PaletteModel;
 
-            var entry = repositoryProvider.GetRepository<ITileSetEntry>().GetById(entryId) as ITileSetFromBlkEntry;
+            var entry = repositoryProvider.GetRepository<IDbTileAtlas>().GetById(entryId) as IDbTileAtlasFromBlk;
             if (entry == null)
-                throw new Exception("Tileset error: " + entryId);
+                throw new Exception("Tile atlas error: " + entryId);
 
-            var tileSet = assetsDataProvider.LoadModel(entry.DataRef) as TileSetModel;
+            var tileAtlas = assetsDataProvider.LoadModel(entry.DataRef) as TileSetModel;
 
             if(paletteModel != null)
-                BitmapHelper.SetPaletteColors(tileSet.Bitmap, paletteModel.Data);
+                BitmapHelper.SetPaletteColors(tileAtlas.Bitmap, paletteModel.Data);
 
-            var texture = textureMan.Create(entry.DataRef, tileSet.Bitmap);
+            var texture = textureMan.Create(entry.DataRef, tileAtlas.Bitmap);
 
-            return tileMan.Create(entryId, texture.Id, tileSet.TileSize, tileSet.Tiles.Select(tile => new Point(tile.Rectangle.X, tile.Rectangle.Y)).ToArray()); ;
+            return tileMan.Create(entryId, texture.Id, tileAtlas.TileSize, tileAtlas.Tiles.Select(tile => new Point(tile.Rectangle.X, tile.Rectangle.Y)).ToArray()); ;
         }
 
         #endregion Public Methods

@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         public ITileStamp Load(string entryId, params object[] args)
         {
-            var entry = repositoryProvider.GetRepository<ITileStampEntry>().GetById(entryId);
+            var entry = repositoryProvider.GetRepository<IDbTileStamp>().GetById(entryId);
             if (entry == null)
                 throw new Exception("Tilestamp error: " + entryId);
 

@@ -36,7 +36,7 @@ namespace OpenBreed.Animation.Generic.Data
 
         public IClip Load(string entryId, params object[] args)
         {
-            var entry = repositoryProvider.GetRepository<IAnimationEntry>().GetById(entryId);
+            var entry = repositoryProvider.GetRepository<IDbAnimation>().GetById(entryId);
             if (entry == null)
                 throw new Exception("Animation error: " + entryId);
 
@@ -69,7 +69,7 @@ namespace OpenBreed.Animation.Generic.Data
             }
         }
 
-        private void LoadTrack<TValue>(IClip clip, IAnimationEntryTrack<TValue> entryTrack)
+        private void LoadTrack<TValue>(IClip clip, IDbAnimationTrack<TValue> entryTrack)
         {
             var updater = frameUpdaterMan.GetByName<TValue>(entryTrack.Controller);
             var interpolation = GetFrameInterpolation(entryTrack.Interpolation);
@@ -79,14 +79,14 @@ namespace OpenBreed.Animation.Generic.Data
                 track.AddFrame(frame.Value, frame.Time);
         }
 
-        private void LoadTrack(IClip animation, IAnimationEntryTrack entryTrack)
+        private void LoadTrack(IClip animation, IDbAnimationTrack entryTrack)
         {
-            if (entryTrack is IAnimationEntryTrack<int>)
-                LoadTrack<int>(animation, (IAnimationEntryTrack<int>)entryTrack);
-            else if (entryTrack is IAnimationEntryTrack<float>)
-                LoadTrack<float>(animation, (IAnimationEntryTrack<float>)entryTrack);
-            else if (entryTrack is IAnimationEntryTrack<string>)
-                LoadTrack<string>(animation, (IAnimationEntryTrack<string>)entryTrack);
+            if (entryTrack is IDbAnimationTrack<int>)
+                LoadTrack<int>(animation, (IDbAnimationTrack<int>)entryTrack);
+            else if (entryTrack is IDbAnimationTrack<float>)
+                LoadTrack<float>(animation, (IDbAnimationTrack<float>)entryTrack);
+            else if (entryTrack is IDbAnimationTrack<string>)
+                LoadTrack<string>(animation, (IDbAnimationTrack<string>)entryTrack);
         }
 
         #endregion Private Methods

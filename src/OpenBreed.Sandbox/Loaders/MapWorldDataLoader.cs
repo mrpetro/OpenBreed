@@ -62,7 +62,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         public World Load(string entryId, params object[] args)
         {
-            var entry = repositoryProvider.GetRepository<IMapEntry>().GetById(entryId);
+            var entry = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
             if (entry == null)
                 throw new Exception("Map error: " + entryId);
 
@@ -170,14 +170,14 @@ namespace OpenBreed.Sandbox.Loaders
             }
         }
 
-        private void LoadReferencedTileSet(IMapEntry entry)
+        private void LoadReferencedTileSet(IDbMap entry)
         {
             var palette = palettesDataProvider.GetPalette(entry.PaletteRefs.First());
             var tileAtlasLoader = dataLoaderFactory.GetLoader<ITileAtlas>();
             tileAtlasLoader.Load(entry.TileSetRef, palette);
         }
 
-        private void LoadReferencedSpriteSets(IMapEntry entry)
+        private void LoadReferencedSpriteSets(IDbMap entry)
         {
             var palette = palettesDataProvider.GetPalette(entry.PaletteRefs.First());
             var spriteAtlasLoader = dataLoaderFactory.GetLoader<ISpriteAtlas>();

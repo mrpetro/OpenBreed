@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    internal class SpriteSetDataLoader : IDataLoader<ISpriteAtlas>
+    internal class SpriteAtlasDataLoader : IDataLoader<ISpriteAtlas>
     {
         #region Private Fields
 
@@ -30,7 +30,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Constructors
 
-        public SpriteSetDataLoader(IRepositoryProvider repositoryProvider,
+        public SpriteAtlasDataLoader(IRepositoryProvider repositoryProvider,
                                  AssetsDataProvider assetsDataProvider,
                                  ITextureMan textureMan,
                                  ISpriteMan spriteMan)
@@ -51,9 +51,9 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var paletteModel = args.FirstOrDefault() as PaletteModel;
 
-            var entry = repositoryProvider.GetRepository<ISpriteSetEntry>().GetById(entryId) as ISpriteSetFromSprEntry;
+            var entry = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById(entryId) as IDbSpriteAtlasFromSpr;
             if (entry == null)
-                throw new Exception("Sprite set error: " + entryId);
+                throw new Exception("Sprite atlas error: " + entryId);
 
             var spriteSet = assetsDataProvider.LoadModel(entry.DataRef) as SpriteSetModel;
 
