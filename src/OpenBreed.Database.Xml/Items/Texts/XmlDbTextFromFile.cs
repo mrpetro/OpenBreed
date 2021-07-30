@@ -13,7 +13,7 @@ namespace OpenBreed.Database.Xml.Items.Texts
 {
     [Serializable]
     [Description("Text from file"), Category("Appearance")]
-    public class XmlDbTextFromFile : XmlDbText, IDbTextFromMap
+    public class XmlDbTextFromFile : XmlDbText, IDbTextFromFile
     {
         public override IDbEntry Copy()
         {
