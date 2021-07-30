@@ -9,7 +9,7 @@ namespace OpenBreed.Common.Data
     {
         #region Private Fields
 
-        private readonly TileSetsDataProvider tileSets;
+        private readonly TileAtlasDataProvider tileAtlasDataProvider;
         private readonly PalettesDataProvider palettes;
         private readonly ActionSetsDataProvider actionSets;
 
@@ -21,11 +21,11 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public MapsDataProvider(IModelsProvider provider, IRepositoryProvider repositoryProvider, TileSetsDataProvider tileSets, PalettesDataProvider palettes, ActionSetsDataProvider actionSets)
+        public MapsDataProvider(IModelsProvider provider, IRepositoryProvider repositoryProvider, TileAtlasDataProvider tileAtlasDataProvider, PalettesDataProvider palettes, ActionSetsDataProvider actionSets)
         {
             this.provider = provider;
             this.repositoryProvider = repositoryProvider;
-            this.tileSets = tileSets;
+            this.tileAtlasDataProvider = tileAtlasDataProvider;
             this.palettes = palettes;
             this.actionSets = actionSets;
         }
@@ -36,7 +36,7 @@ namespace OpenBreed.Common.Data
 
         public MapModel GetMap(string id)
         {
-            var entry = repositoryProvider.GetRepository<IMapEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<IDbMap>().GetById(id);
             if (entry == null)
                 throw new Exception("Map error: " + id);
 
@@ -46,7 +46,7 @@ namespace OpenBreed.Common.Data
             var map = provider.GetModel<MapModel>(entry.DataRef);
 
             if (entry.TileSetRef != null)
-                map.TileSet = tileSets.GetTileSet(entry.TileSetRef);
+                map.TileSet = tileAtlasDataProvider.GetTileAtlas(entry.TileSetRef);
 
             map.Palettes.Clear();
             foreach (var paletteRef in entry.PaletteRefs)

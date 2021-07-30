@@ -15,7 +15,7 @@ namespace OpenBreed.Common.Data
 {
     public class ActionSetsDataHelper
     {
-        public static ActionSetModel FromEmbeddedData(IModelsProvider provider, IActionSetEntry entry)
+        public static ActionSetModel FromEmbeddedData(IModelsProvider provider, IDbActionSet entry)
         {
             var model = new ActionSetModel();
 
@@ -52,7 +52,7 @@ namespace OpenBreed.Common.Data
             return "#" + c.A.ToString("X2") + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
 
-        public static void FromEntry(ActionModel model, IActionPresentation presentationEntry)
+        public static void FromEntry(ActionModel model, IDbActionPresentation presentationEntry)
         {
             Image image;
             string message;
@@ -101,7 +101,7 @@ namespace OpenBreed.Common.Data
             model.Icon = bitmap;
         }
 
-        public static void ToEntry(ActionModel actionModel, IActionEntry actionEntry)
+        public static void ToEntry(ActionModel actionModel, IDbAction actionEntry)
         {
             actionEntry.Id = actionModel.Id;
             actionEntry.Description = actionModel.Description;

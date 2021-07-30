@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlySoundsRepository : XmlReadonlyRepositoryBase<ISoundEntry>
+    public class XmlReadonlySoundsRepository : XmlReadonlyRepositoryBase<IDbSound>
     {
         #region Private Fields
 
@@ -26,8 +26,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlSoundEntry); } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbSound); } }
         public override string Name { get { return "Sounds"; } }
 
         public override int Count => context.Items.Count;
@@ -36,20 +36,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override ISoundEntry GetEntryWithIndex(int index)
+        protected override IDbSound GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(ISoundEntry entry)
+        protected override int GetIndexOf(IDbSound entry)
         {
-            return context.Items.IndexOf((XmlSoundEntry)entry);
+            return context.Items.IndexOf((XmlDbSound)entry);
         }
 
         #endregion Protected Methods
     }
 
-    public class XmlSoundsRepository : XmlRepositoryBase<ISoundEntry>
+    public class XmlSoundsRepository : XmlRepositoryBase<IDbSound>
     {
         #region Private Fields
 
@@ -68,8 +68,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlSoundEntry); } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbSound); } }
         public override string Name { get { return "Sounds"; } }
 
         public override int Count => context.Items.Count;
@@ -78,24 +78,24 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override ISoundEntry GetEntryWithIndex(int index)
+        protected override IDbSound GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(ISoundEntry entry)
+        protected override int GetIndexOf(IDbSound entry)
         {
-            return context.Items.IndexOf((XmlSoundEntry)entry);
+            return context.Items.IndexOf((XmlDbSound)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, ISoundEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbSound newEntry)
         {
-            context.Items[index] = (XmlSoundEntry)newEntry;
+            context.Items[index] = (XmlDbSound)newEntry;
         }
 
-        public override void Add(ISoundEntry newEntry)
+        public override void Add(IDbSound newEntry)
         {
-            context.Items.Add((XmlSoundEntry)newEntry);
+            context.Items.Add((XmlDbSound)newEntry);
         }
 
         #endregion Protected Methods

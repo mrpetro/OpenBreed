@@ -15,7 +15,7 @@ namespace OpenBreed.Common
     {
         #region Public Methods
 
-        TInterface Load(string entryId);
+        TInterface Load(string entryId, params object[] args);
 
         #endregion Public Methods
     }

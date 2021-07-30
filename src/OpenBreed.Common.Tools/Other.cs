@@ -24,9 +24,8 @@ namespace OpenBreed.Common.Tools
                 a();
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                //LogMan.Instance.Error(ex);
                 return false;
             }
         }

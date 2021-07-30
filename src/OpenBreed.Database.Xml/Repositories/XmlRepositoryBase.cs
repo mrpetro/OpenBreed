@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public abstract class XmlRepositoryBase<T> : XmlReadonlyRepositoryBase<T>, IRepository<T> where T : class, IEntry
+    public abstract class XmlRepositoryBase<T> : XmlReadonlyRepositoryBase<T>, IRepository<T> where T : class, IDbEntry
     {
         #region Public Methods
 
         public abstract void Add(T newEntry);
 
-        public IEntry New(string newId, Type entryType = null)
+        public IDbEntry New(string newId, Type entryType = null)
         {
             if (Find(newId) != null)
                 throw new Exception($"Entry with Id '{newId}' already exist.");

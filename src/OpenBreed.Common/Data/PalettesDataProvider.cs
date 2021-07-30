@@ -29,7 +29,7 @@ namespace OpenBreed.Common.Data
 
         public PaletteModel GetPalette(string id)
         {
-            var entry = repositoryProvider.GetRepository<IPaletteEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<IDbPalette>().GetById(id);
             if (entry == null)
                 throw new Exception("Palette error: " + id);
 
@@ -40,12 +40,12 @@ namespace OpenBreed.Common.Data
 
         #region Private Methods
 
-        private PaletteModel GetModelImpl(IPaletteFromMapEntry entry)
+        private PaletteModel GetModelImpl(IDbPaletteFromMap entry)
         {
             return PalettesDataHelper.FromMapModel(dataProvider, entry);
         }
 
-        private PaletteModel GetModelImpl(IPaletteFromBinaryEntry entry)
+        private PaletteModel GetModelImpl(IDbPaletteFromBinary entry)
         {
             return PalettesDataHelper.FromBinary(dataProvider, entry);
         }

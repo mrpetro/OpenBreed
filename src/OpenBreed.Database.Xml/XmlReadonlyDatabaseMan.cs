@@ -46,8 +46,9 @@ namespace OpenBreed.Database.Xml
         {
             RegisterTable(GetTable<XmlDbDataSourceTableDef>());
             RegisterTable(GetTable<XmlDbAssetTableDef>());
-            RegisterTable(GetTable<XmlDbTileSetTableDef>());
-            RegisterTable(GetTable<XmlDbSpriteSetTableDef>());
+            RegisterTable(GetTable<XmlDbTileAtlasTableDef>());
+            RegisterTable(GetTable<XmlDbTileStampTableDef>());
+            RegisterTable(GetTable<XmlDbSpriteAtlasTableDef>());
             RegisterTable(GetTable<XmlDbActionSetTableDef>());
             RegisterTable(GetTable<XmlDbImageTableDef>());
             RegisterTable(GetTable<XmlDbPaletteTableDef>());
@@ -63,8 +64,9 @@ namespace OpenBreed.Database.Xml
         {
             RegisterRepository(new XmlDataSourcesRepository(GetTable<XmlDbDataSourceTableDef>()));
             RegisterRepository(new XmlAssetsRepository(GetTable<XmlDbAssetTableDef>()));
-            RegisterRepository(new XmlTileSetsRepository(GetTable<XmlDbTileSetTableDef>()));
-            RegisterRepository(new XmlSpriteSetsRepository(GetTable<XmlDbSpriteSetTableDef>()));
+            RegisterRepository(new XmlTileAtlasRepository(GetTable<XmlDbTileAtlasTableDef>()));
+            RegisterRepository(new XmlTileStampsRepository(GetTable<XmlDbTileStampTableDef>()));
+            RegisterRepository(new XmlSpriteAtlasRepository(GetTable<XmlDbSpriteAtlasTableDef>()));
             RegisterRepository(new XmlActionSetsRepository(GetTable<XmlDbActionSetTableDef>()));
             RegisterRepository(new XmlImagesRepository(GetTable<XmlDbImageTableDef>()));
             RegisterRepository(new XmlPalettesRepository(GetTable<XmlDbPaletteTableDef>()));
@@ -92,7 +94,7 @@ namespace OpenBreed.Database.Xml
 
         public IEnumerable<IRepository> Repositories { get { return repositories.Values; } }
 
-        protected void RegisterRepository<T>(IRepository<T> repository) where T : IEntry
+        protected void RegisterRepository<T>(IRepository<T> repository) where T : IDbEntry
         {
             repositories.Add(typeof(T), repository);
         }
@@ -137,7 +139,7 @@ namespace OpenBreed.Database.Xml
             return table;
         }
 
-        public IRepository<T> GetRepository<T>() where T : IEntry
+        public IRepository<T> GetRepository<T>() where T : IDbEntry
         {
             return (IRepository<T>)GetRepository(typeof(T));
         }

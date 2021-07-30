@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyActionSetsRepository : XmlReadonlyRepositoryBase<IActionSetEntry>
+    public class XmlReadonlyActionSetsRepository : XmlReadonlyRepositoryBase<IDbActionSet>
     {
         #region Private Fields
 
@@ -26,8 +26,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlActionSetEntry); } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbActionSet); } }
         public override string Name { get { return "Action sets"; } }
 
         public override int Count => context.Items.Count;
@@ -40,20 +40,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override IActionSetEntry GetEntryWithIndex(int index)
+        protected override IDbActionSet GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IActionSetEntry entry)
+        protected override int GetIndexOf(IDbActionSet entry)
         {
-            return context.Items.IndexOf((XmlActionSetEntry)entry);
+            return context.Items.IndexOf((XmlDbActionSet)entry);
         }
 
         #endregion Protected Methods
     }
 
-    public class XmlActionSetsRepository : XmlRepositoryBase<IActionSetEntry>
+    public class XmlActionSetsRepository : XmlRepositoryBase<IDbActionSet>
     {
         #region Private Fields
 
@@ -72,8 +72,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlActionSetEntry); } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbActionSet); } }
         public override string Name { get { return "Action sets"; } }
 
         public override int Count => context.Items.Count;
@@ -82,28 +82,28 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Methods
 
-        public override void Add(IActionSetEntry newEntry)
+        public override void Add(IDbActionSet newEntry)
         {
-            context.Items.Add((XmlActionSetEntry)newEntry);
+            context.Items.Add((XmlDbActionSet)newEntry);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override IActionSetEntry GetEntryWithIndex(int index)
+        protected override IDbActionSet GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IActionSetEntry entry)
+        protected override int GetIndexOf(IDbActionSet entry)
         {
-            return context.Items.IndexOf((XmlActionSetEntry)entry);
+            return context.Items.IndexOf((XmlDbActionSet)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, IActionSetEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbActionSet newEntry)
         {
-            context.Items[index] = (XmlActionSetEntry)newEntry;
+            context.Items[index] = (XmlDbActionSet)newEntry;
         }
 
         #endregion Protected Methods

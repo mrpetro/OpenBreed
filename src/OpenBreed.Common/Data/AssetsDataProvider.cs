@@ -30,7 +30,7 @@ namespace OpenBreed.Common.Data
 
         public object LoadModel(string entryId)
         {
-            var assetEntry = repositoryProvider.GetRepository<IAssetEntry>().GetById(entryId);
+            var assetEntry = repositoryProvider.GetRepository<IDbAsset>().GetById(entryId);
             if (assetEntry == null)
                 throw new Exception($"Asset error: {entryId}");
 
@@ -49,7 +49,7 @@ namespace OpenBreed.Common.Data
 
         public void SaveModel(string entryId, object data)
         {
-            var assetEntry = repositoryProvider.GetRepository<IAssetEntry>().GetById(entryId);
+            var assetEntry = repositoryProvider.GetRepository<IDbAsset>().GetById(entryId);
             if (assetEntry == null)
                 throw new Exception($"Asset error: {entryId}");
 

@@ -14,7 +14,7 @@ namespace OpenBreed.Database.Interface
 
         #region Public Methods
 
-        IReadonlyRepository<TEntry> GetRepository<TEntry>() where TEntry : IEntry;
+        IReadonlyRepository<TEntry> GetRepository<TEntry>() where TEntry : IDbEntry;
 
         IReadonlyRepository GetRepository(string name);
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Database.Interface
 
         #region Public Methods
 
-        IRepository<TEntry> GetRepository<TEntry>() where TEntry : IEntry;
+        IRepository<TEntry> GetRepository<TEntry>() where TEntry : IDbEntry;
 
         IRepository GetRepository(string name);
 

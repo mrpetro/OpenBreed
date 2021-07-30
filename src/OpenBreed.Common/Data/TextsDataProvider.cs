@@ -29,7 +29,7 @@ namespace OpenBreed.Common.Data
 
         public TextModel GetText(string id)
         {
-            var entry = repositoryProvider.GetRepository<ITextEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<IDbText>().GetById(id);
             if (entry == null)
                 throw new Exception("Text error: " + id);
 
@@ -40,12 +40,12 @@ namespace OpenBreed.Common.Data
 
         #region Private Methods
 
-        private TextModel GetModelImpl(ITextFromMapEntry entry)
+        private TextModel GetModelImpl(IDbTextFromFile entry)
         {
             return TextsDataHelper.FromMapModel(dataProvider, entry);
         }
 
-        private TextModel GetModelImpl(ITextEmbeddedEntry entry)
+        private TextModel GetModelImpl(IDbTextEmbedded entry)
         {
             return TextsDataHelper.FromBinary(dataProvider, entry);
         }

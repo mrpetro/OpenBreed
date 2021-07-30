@@ -33,7 +33,7 @@ namespace OpenBreed.Common.Data
 
         public ActionSetModel GetActionSet(string id)
         {
-            var entry = repositoryProvider.GetRepository<IActionSetEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<IDbActionSet>().GetById(id);
             if (entry == null)
                 throw new Exception("ActionSet error: " + id);
 
@@ -44,7 +44,7 @@ namespace OpenBreed.Common.Data
 
         #region Private Methods
 
-        private ActionSetModel GetModelImpl(IActionSetEntry entry)
+        private ActionSetModel GetModelImpl(IDbActionSet entry)
         {
             return ActionSetsDataHelper.FromEmbeddedData(Provider, entry);
         }

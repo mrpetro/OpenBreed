@@ -16,7 +16,7 @@ namespace OpenBreed.Database.Xml.Tables
         public override string Name => NAME;
 
         [XmlArray("Items"),
-        XmlArrayItem("Map", typeof(XmlMapEntry))]
-        public readonly List<XmlMapEntry> Items = new List<XmlMapEntry>();
+        XmlArrayItem("Map", typeof(XmlDbMap))]
+        public readonly List<XmlDbMap> Items = new List<XmlDbMap>();
     }
 }

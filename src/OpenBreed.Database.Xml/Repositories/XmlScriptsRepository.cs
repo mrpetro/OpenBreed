@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlReadonlyScriptsRepository : XmlReadonlyRepositoryBase<IScriptEntry>
+    public class XmlReadonlyScriptsRepository : XmlReadonlyRepositoryBase<IDbScript>
     {
         #region Private Fields
 
@@ -26,14 +26,14 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlScriptEmbeddedEntry);
-                yield return typeof(XmlScriptFromFileEntry);
+                yield return typeof(XmlDbScriptEmbedded);
+                yield return typeof(XmlDbScriptFromFile);
             }
         }
 
@@ -45,20 +45,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override IScriptEntry GetEntryWithIndex(int index)
+        protected override IDbScript GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IScriptEntry entry)
+        protected override int GetIndexOf(IDbScript entry)
         {
-            return context.Items.IndexOf((XmlScriptEntry)entry);
+            return context.Items.IndexOf((XmlDbScript)entry);
         }
 
         #endregion Protected Methods
     }
 
-    public class XmlScriptsRepository : XmlRepositoryBase<IScriptEntry>
+    public class XmlScriptsRepository : XmlRepositoryBase<IDbScript>
     {
         #region Private Fields
 
@@ -77,14 +77,14 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlScriptEmbeddedEntry);
-                yield return typeof(XmlScriptFromFileEntry);
+                yield return typeof(XmlDbScriptEmbedded);
+                yield return typeof(XmlDbScriptFromFile);
             }
         }
 
@@ -96,24 +96,24 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Protected Methods
 
-        protected override IScriptEntry GetEntryWithIndex(int index)
+        protected override IDbScript GetEntryWithIndex(int index)
         {
             return context.Items[index];
         }
 
-        protected override int GetIndexOf(IScriptEntry entry)
+        protected override int GetIndexOf(IDbScript entry)
         {
-            return context.Items.IndexOf((XmlScriptEntry)entry);
+            return context.Items.IndexOf((XmlDbScript)entry);
         }
 
-        protected override void ReplaceEntryWithIndex(int index, IScriptEntry newEntry)
+        protected override void ReplaceEntryWithIndex(int index, IDbScript newEntry)
         {
-            context.Items[index] = (XmlScriptEntry)newEntry;
+            context.Items[index] = (XmlDbScript)newEntry;
         }
 
-        public override void Add(IScriptEntry newEntry)
+        public override void Add(IDbScript newEntry)
         {
-            context.Items.Add((XmlScriptEntry)newEntry);
+            context.Items.Add((XmlDbScript)newEntry);
         }
 
         #endregion Protected Methods

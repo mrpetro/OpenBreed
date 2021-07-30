@@ -8,14 +8,14 @@ namespace OpenBreed.Database.Interface
     {
         #region Public Properties
 
-        IEnumerable<IEntry> Entries { get; }
+        IEnumerable<IDbEntry> Entries { get; }
         string Name { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        IEntry Find(string name);
+        IDbEntry Find(string name);
 
         #endregion Public Methods
     }
@@ -30,12 +30,12 @@ namespace OpenBreed.Database.Interface
 
         #region Public Methods
 
-        IEntry New(string newId, Type entryType = null);
+        IDbEntry New(string newId, Type entryType = null);
 
         #endregion Public Methods
     }
 
-    public interface IReadonlyRepository<TEntry> : IReadonlyRepository where TEntry : IEntry
+    public interface IReadonlyRepository<TEntry> : IReadonlyRepository where TEntry : IDbEntry
     {
         #region Public Methods
 
@@ -48,7 +48,7 @@ namespace OpenBreed.Database.Interface
         #endregion Public Methods
     }
 
-    public interface IRepository<TEntry> : IRepository, IReadonlyRepository<TEntry> where TEntry : IEntry
+    public interface IRepository<TEntry> : IRepository, IReadonlyRepository<TEntry> where TEntry : IDbEntry
     {
         #region Public Methods
 
