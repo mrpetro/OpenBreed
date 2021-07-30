@@ -96,6 +96,15 @@ namespace OpenBreed.Sandbox.Extensions
                                                              managerCollection.GetManager<ITileMan>()));
         }
 
+        public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
+        {
+            dataLoaderFactory.Register(new TileStampDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+                                                             managerCollection.GetManager<AssetsDataProvider>(),
+                                                             managerCollection.GetManager<ITextureMan>(),
+                                                             managerCollection.GetManager<IStampMan>(),
+                                                             managerCollection.GetManager<ITileMan>()));
+        }
+
         public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
             dataLoaderFactory.Register(new SpriteSetDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
@@ -154,6 +163,7 @@ namespace OpenBreed.Sandbox.Extensions
                 dataLoaderFactory.SetupAnimationDataLoader(managerCollection);
                 dataLoaderFactory.SetupMapWorldDataLoader(managerCollection);
                 dataLoaderFactory.SetupTileSetDataLoader(managerCollection);
+                dataLoaderFactory.SetupTileStampDataLoader(managerCollection);
                 dataLoaderFactory.SetupSpriteSetDataLoader(managerCollection);
 
                 return dataLoaderFactory;

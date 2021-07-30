@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Loaders\PaletteDataLoader.cs" />
     <Compile Include="Loaders\SpriteSetDataLoader.cs" />
+    <Compile Include="Loaders\TileStampDataLoader.cs" />
     <Compile Include="MapCellEntityFactory.cs" />
     <Compile Include="Loaders\TileSetDataLoader.cs" />
     <Compile Include="Commands\MoveToCommand.cs" />

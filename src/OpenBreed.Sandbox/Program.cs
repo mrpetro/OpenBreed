@@ -490,7 +490,7 @@ namespace OpenBreed.Sandbox
             var entityMan = GetManager<IEntityMan>();
 
             var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 2");
-            doorHelper.CreateStamps();
+            doorHelper.LoadStamps();
 
             cameraBuilder.SetupPlayerCamera();
 

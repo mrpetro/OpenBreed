@@ -118,45 +118,53 @@ namespace OpenBreed.Sandbox.Entities.Door
             core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
         }
 
-        public void CreateStamps()
+        public void LoadStamps()
         {
-            var stampBuilder = core.GetManager<IStampMan>().Create();
-            var tileMan = core.GetManager<ITileMan>();
+            var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
+            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStamp>();
 
-            var tileSet = tileMan.GetByAlias("TileSets.L4");
+            tileStampLoader.Load("Tiles/Stamps/DoorHorizontal/Closed");
+            tileStampLoader.Load("Tiles/Stamps/DoorHorizontal/Opened");
+            tileStampLoader.Load("Tiles/Stamps/DoorVertical/Closed");
+            tileStampLoader.Load("Tiles/Stamps/DoorVertical/Opened");
 
-            stampBuilder.ClearTiles();
-            stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_CLOSED);
-            stampBuilder.SetSize(2, 1);
-            stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 4 + 8);
-            stampBuilder.AddTile(1, 0, tileSet.Id, 20 * 4 + 9);
-            stampBuilder.Build();
 
-            stampBuilder.ClearTiles();
-            stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_OPENED);
-            stampBuilder.SetSize(2, 1);
-            stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 2 + 0);
-            stampBuilder.AddTile(1, 0, tileSet.Id, 20 * 2 + 1);
-            stampBuilder.Build();
+            //var stampBuilder = core.GetManager<IStampMan>().Create();
+            //var tileMan = core.GetManager<ITileMan>();
 
-            stampBuilder.ClearTiles();
-            stampBuilder.SetName(STAMP_DOOR_VERTICAL_CLOSED);
-            stampBuilder.SetSize(1, 2);
-            stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 1 + 8);
-            stampBuilder.AddTile(0, 1, tileSet.Id, 20 * 2 + 8);
-            stampBuilder.Build();
+            //var tileSet = tileMan.GetByAlias("TileSets.L4");
 
-            stampBuilder.ClearTiles();
-            stampBuilder.SetName(STAMP_DOOR_VERTICAL_OPENED);
-            stampBuilder.SetSize(1, 2);
-            stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 4 + 1);
-            stampBuilder.AddTile(0, 1, tileSet.Id, 20 * 3 + 1);
-            stampBuilder.Build();
+            //stampBuilder.ClearTiles();
+            //stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_CLOSED);
+            //stampBuilder.SetSize(2, 1);
+            //stampBuilder.SetOrigin(0, 0);
+            //stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 4 + 8);
+            //stampBuilder.AddTile(1, 0, tileSet.Id, 20 * 4 + 9);
+            //stampBuilder.Build();
 
+            //stampBuilder.ClearTiles();
+            //stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_OPENED);
+            //stampBuilder.SetSize(2, 1);
+            //stampBuilder.SetOrigin(0, 0);
+            //stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 2 + 0);
+            //stampBuilder.AddTile(1, 0, tileSet.Id, 20 * 2 + 1);
+            //stampBuilder.Build();
+
+            //stampBuilder.ClearTiles();
+            //stampBuilder.SetName(STAMP_DOOR_VERTICAL_CLOSED);
+            //stampBuilder.SetSize(1, 2);
+            //stampBuilder.SetOrigin(0, 0);
+            //stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 1 + 8);
+            //stampBuilder.AddTile(0, 1, tileSet.Id, 20 * 2 + 8);
+            //stampBuilder.Build();
+
+            //stampBuilder.ClearTiles();
+            //stampBuilder.SetName(STAMP_DOOR_VERTICAL_OPENED);
+            //stampBuilder.SetSize(1, 2);
+            //stampBuilder.SetOrigin(0, 0);
+            //stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 4 + 1);
+            //stampBuilder.AddTile(0, 1, tileSet.Id, 20 * 3 + 1);
+            //stampBuilder.Build();
         }
     }
 }
