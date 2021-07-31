@@ -48,52 +48,13 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void CreateAnimations()
         {
-
-
-            var animationMan = core.GetManager<IClipMan>();
-            var animatorMan = core.GetManager<IFrameUpdaterMan>();
-
-            animatorMan.Register("Sprite.ImageId", (FrameUpdater<int>)OnImageIdUpdate);
-            animatorMan.Register("Sprite.AtlasId", (FrameUpdater<string>)OnAtlasIdUpdate);
-
             var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
             var animationLoader = dataLoaderFactory.GetLoader<IClip>();
 
-            var verticalDoorOpening = animationLoader.Load("Animations.DoorVertical.Opening");
-            var verticalDoorClosing = animationLoader.Load("Animations.DoorVertical.Closing");
-            var horizontalDoorOpening = animationLoader.Load("Animations.DoorHorizontal.Opening");
-            var horizontalDoorClosing = animationLoader.Load("Animations.DoorHorizontal.Closing");
-        }
-
-        private void OnImageIdUpdate(Entity entity, int nextValue)
-        {
-            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
-        }
-
-        private void OnAtlasIdUpdate(Entity entity, string nextValue)
-        {
-            var atlas = core.GetManager<ISpriteMan>().GetByName(nextValue);
-            core.Commands.Post(new SpriteSetAtlasCommand(entity.Id, atlas.Id));
-        }
-
-        private void OnOpenningEnding()
-        {
-            Console.WriteLine("Door -> OpenningEnding");
-        }
-
-        private void OnOpeningStarting()
-        {
-            Console.WriteLine("Door -> OpenningStarting");
-        }
-
-        private void OnOpen()
-        {
-            Console.WriteLine("Door -> Open");
-        }
-
-        private void OnOpened()
-        {
-            Console.WriteLine("Door -> Opened");
+            animationLoader.Load("Animations.DoorVertical.Opening");
+            animationLoader.Load("Animations.DoorVertical.Closing");
+            animationLoader.Load("Animations.DoorHorizontal.Opening");
+            animationLoader.Load("Animations.DoorHorizontal.Closing");
         }
 
         public void AddVerticalDoor(World world, int x, int y)
@@ -127,44 +88,6 @@ namespace OpenBreed.Sandbox.Entities.Door
             tileStampLoader.Load("Tiles/Stamps/DoorHorizontal/Opened");
             tileStampLoader.Load("Tiles/Stamps/DoorVertical/Closed");
             tileStampLoader.Load("Tiles/Stamps/DoorVertical/Opened");
-
-
-            //var stampBuilder = core.GetManager<IStampMan>().Create();
-            //var tileMan = core.GetManager<ITileMan>();
-
-            //var tileSet = tileMan.GetByAlias("TileSets.L4");
-
-            //stampBuilder.ClearTiles();
-            //stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_CLOSED);
-            //stampBuilder.SetSize(2, 1);
-            //stampBuilder.SetOrigin(0, 0);
-            //stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 4 + 8);
-            //stampBuilder.AddTile(1, 0, tileSet.Id, 20 * 4 + 9);
-            //stampBuilder.Build();
-
-            //stampBuilder.ClearTiles();
-            //stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_OPENED);
-            //stampBuilder.SetSize(2, 1);
-            //stampBuilder.SetOrigin(0, 0);
-            //stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 2 + 0);
-            //stampBuilder.AddTile(1, 0, tileSet.Id, 20 * 2 + 1);
-            //stampBuilder.Build();
-
-            //stampBuilder.ClearTiles();
-            //stampBuilder.SetName(STAMP_DOOR_VERTICAL_CLOSED);
-            //stampBuilder.SetSize(1, 2);
-            //stampBuilder.SetOrigin(0, 0);
-            //stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 1 + 8);
-            //stampBuilder.AddTile(0, 1, tileSet.Id, 20 * 2 + 8);
-            //stampBuilder.Build();
-
-            //stampBuilder.ClearTiles();
-            //stampBuilder.SetName(STAMP_DOOR_VERTICAL_OPENED);
-            //stampBuilder.SetSize(1, 2);
-            //stampBuilder.SetOrigin(0, 0);
-            //stampBuilder.AddTile(0, 0, tileSet.Id, 20 * 4 + 1);
-            //stampBuilder.AddTile(0, 1, tileSet.Id, 20 * 3 + 1);
-            //stampBuilder.Build();
         }
     }
 }

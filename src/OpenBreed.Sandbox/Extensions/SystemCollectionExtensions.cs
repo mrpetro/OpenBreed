@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Generic.Extensions;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
@@ -168,6 +169,13 @@ namespace OpenBreed.Sandbox.Extensions
 
                 return dataLoaderFactory;
             });
+        }
+
+        public static void SetupSpriteComponentAnimator(this IManagerCollection managerCollection)
+        {
+            new SpriteComponentAnimator(managerCollection.GetManager<IFrameUpdaterMan>(),
+                                        managerCollection.GetManager<ISpriteMan>(),
+                                        managerCollection.GetManager<ICommandsMan>());
         }
 
         #endregion Public Methods

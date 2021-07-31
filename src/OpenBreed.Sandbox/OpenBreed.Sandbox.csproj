@@ -147,6 +147,7 @@
     <Compile Include="Entities\CrazyMover\Misc.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpriteComponentAnimator.cs" />
     <Compile Include="Worlds\AirBuilderModule.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />
     <Compile Include="Worlds\HudWorldHelper.cs" />
