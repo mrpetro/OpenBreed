@@ -10,11 +10,11 @@ namespace OpenBreed.Rendering.Interface.Managers
         #region Public Methods
 
         /// <summary>
-        /// Get sprite atlas by it's id
+        /// Get sprite atlas by it's ID
         /// </summary>
-        /// <param name="id">Id of sprite atlas to get</param>
+        /// <param name="atlasId">Id of sprite atlas to get</param>
         /// <returns>Sprite atlas object</returns>
-        ISpriteAtlas GetById(int id);
+        ISpriteAtlas GetById(int atlasId);
 
         /// <summary>
         /// Get sprite atlas by it's name
@@ -22,6 +22,13 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// <param name="atlasName">Name of sprite atlas to get</param>
         /// <returns>Sprite atlas object</returns>
         ISpriteAtlas GetByName(string atlasName);
+
+        /// <summary>
+        /// Get atlas name based on it's ID
+        /// </summary>
+        /// <param name="atlasId">ID of atlas</param>
+        /// <returns>Sprite atlas name</returns>
+        string GetName(int atlasId);
 
         /// <summary>
         /// Checks if atlas with given name already exists
