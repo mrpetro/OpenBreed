@@ -71,6 +71,14 @@ namespace OpenBreed.Model.Palettes
 
         #region Public Methods
 
+        public void SetColors(int startIndex, Color[] sourceArray)
+        {
+            for (int i = 0; i < sourceArray.Length; i++)
+            {
+                Data[startIndex + i] = sourceArray[i];
+            }
+        }
+
         public static Color[] DefaultPalette()
         {
             Color[] colors = new Color[256];

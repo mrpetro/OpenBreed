@@ -27,11 +27,11 @@ namespace OpenBreed.Common.Data
                 paletteBuilder.SetColor(i, Color.FromArgb(255, colorData.R, colorData.G, colorData.B));
             }
 
-            for (int i = 64; i < paletteBlock.Value.Length; i++)
-            {
-                var colorData = paletteBlock.Value[i];
-                paletteBuilder.SetColor(i, Color.FromArgb(255, i, i, i));
-            }
+            //for (int i = 64; i < paletteBlock.Value.Length; i++)
+            //{
+            //    var colorData = paletteBlock.Value[i];
+            //    paletteBuilder.SetColor(i, Color.FromArgb(255, i, i, i));
+            //}
 
             return paletteBuilder.Build();
         }
