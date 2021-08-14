@@ -8,6 +8,7 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
@@ -66,6 +67,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return names.ContainsKey(atlasName);
         }
 
+        public string GetName(int atlasId)
+        {
+            //TODO: Very ineffective. Name should be part of ISpriteAtlas object.
+            return names.First(pair => pair.Value == items[atlasId]).Key;
+        }
+
         public ISpriteAtlas GetByName(string name)
         {
             if (names.TryGetValue(name, out SpriteAtlas result))
@@ -79,6 +86,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void Render(int atlasId, int imageId, Vector2 pos, float order, Box2 clipBox)
         {
             var atlas = items[atlasId];
+
+            if (imageId >= atlas.data.Count)
+                return;
 
             var spriteSize = atlas.GetSpriteSize(imageId);
 

@@ -118,7 +118,6 @@ namespace OpenBreed.Sandbox
             manCollection.SetupMapEntityFactory();
             manCollection.SetupDataLoaderFactory();
 
-
             //manCollection.SetupAudioSystems();
 
             //manCollection.SetupGameScriptingApi();
@@ -169,6 +168,9 @@ namespace OpenBreed.Sandbox
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
             manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core));
 
+
+
+            manCollection.SetupSpriteComponentAnimator();
 
             var variables = manCollection.GetManager<IVariableMan>();
 
