@@ -1391,15 +1391,15 @@
 				<SpriteSetFromSPR Id="SpriteSets.HERO1">
 					<DataRef>Assets.HERO1.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.HERO2">
 					<DataRef>Assets.HERO2.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.RESIDENT">
@@ -1412,29 +1412,29 @@
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_A">
 					<DataRef>Assets.ALIEN_A.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_B">
 					<DataRef>Assets.ALIEN_B.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_C">
 					<DataRef>Assets.ALIEN_C.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_E">
 					<DataRef>Assets.ALIEN_E.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_F">
@@ -1446,21 +1446,45 @@
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_G">
 					<DataRef>Assets.ALIEN_G.SPR</DataRef>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_H">
 					<DataRef>Assets.ALIEN_H.SPR</DataRef>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_I">
 					<DataRef>Assets.ALIEN_I.SPR</DataRef>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_J">
 					<DataRef>Assets.ALIEN_J.SPR</DataRef>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_K">
 					<DataRef>Assets.ALIEN_K.SPR</DataRef>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.ALIEN_X">
 					<DataRef>Assets.ALIEN_X.SPR</DataRef>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="SpriteSets.COMP1">
 					<DataRef>Assets.COMP1.SPR</DataRef>
