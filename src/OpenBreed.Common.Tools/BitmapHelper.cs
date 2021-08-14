@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace OpenBreed.Common.Tools
 {
@@ -56,6 +57,22 @@ namespace OpenBreed.Common.Tools
             Marshal.Copy(bytes, 0, bmpData.Scan0, bmp.Width * bmp.Height);
             bmp.UnlockBits(bmpData);
             return bmp;
+        }
+
+        public static void DumpColors(string filePath, Color[] colors)
+        {
+            using (var file = File.OpenWrite(filePath))
+            {
+                using (var writer = new BinaryWriter(file))
+                {
+                    for (int i = 0; i < colors.Length; i++)
+                    {
+                        writer.Write(colors[i].R);
+                        writer.Write(colors[i].G);
+                        writer.Write(colors[i].B);
+                    }
+                }
+            }
         }
 
         public static void SetPaletteColors(Image image, Color[] newColors)
