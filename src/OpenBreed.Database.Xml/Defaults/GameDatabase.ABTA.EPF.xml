@@ -4100,7 +4100,7 @@
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations/Actor/Walking/Up">
-					<Length>7.0</Length>
+					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
@@ -4114,19 +4114,19 @@
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
 								<Frame Time="0.0" Value="SpriteSets.HERO1#0" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#1" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#2" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#3" />
-								<Frame Time="4.0" Value="SpriteSets.HERO1#4" />
-								<Frame Time="5.0" Value="SpriteSets.HERO1#3" />
-								<Frame Time="6.0" Value="SpriteSets.HERO1#2" />
-								<Frame Time="7.0" Value="SpriteSets.HERO1#1" />
+								<Frame Time="0.5" Value="SpriteSets.HERO1#1" />
+								<Frame Time="1.0" Value="SpriteSets.HERO1#2" />
+								<Frame Time="1.5" Value="SpriteSets.HERO1#3" />
+								<Frame Time="2.0" Value="SpriteSets.HERO1#4" />
+								<Frame Time="2.5" Value="SpriteSets.HERO1#3" />
+								<Frame Time="3.0" Value="SpriteSets.HERO1#2" />
+								<Frame Time="3.5" Value="SpriteSets.HERO1#1" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations/Actor/Walking/UpRight">
-					<Length>7.0</Length>
+					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
@@ -4140,19 +4140,19 @@
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
 								<Frame Time="0.0" Value="SpriteSets.HERO1#5" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#6" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#7" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#8" />
-								<Frame Time="4.0" Value="SpriteSets.HERO1#9" />
-								<Frame Time="5.0" Value="SpriteSets.HERO1#8" />
-								<Frame Time="6.0" Value="SpriteSets.HERO1#7" />
-								<Frame Time="7.0" Value="SpriteSets.HERO1#6" />
+								<Frame Time="0.5" Value="SpriteSets.HERO1#6" />
+								<Frame Time="1.0" Value="SpriteSets.HERO1#7" />
+								<Frame Time="1.5" Value="SpriteSets.HERO1#8" />
+								<Frame Time="2.0" Value="SpriteSets.HERO1#9" />
+								<Frame Time="2.5" Value="SpriteSets.HERO1#8" />
+								<Frame Time="3.0" Value="SpriteSets.HERO1#7" />
+								<Frame Time="3.5" Value="SpriteSets.HERO1#6" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations/Actor/Walking/Right">
-					<Length>7.0</Length>
+					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
@@ -4166,19 +4166,19 @@
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
 								<Frame Time="0.0" Value="SpriteSets.HERO1#10" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#11" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#12" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#13" />
-								<Frame Time="4.0" Value="SpriteSets.HERO1#14" />
-								<Frame Time="5.0" Value="SpriteSets.HERO1#13" />
-								<Frame Time="6.0" Value="SpriteSets.HERO1#12" />
-								<Frame Time="7.0" Value="SpriteSets.HERO1#11" />
+								<Frame Time="0.5" Value="SpriteSets.HERO1#11" />
+								<Frame Time="1.0" Value="SpriteSets.HERO1#12" />
+								<Frame Time="1.5" Value="SpriteSets.HERO1#13" />
+								<Frame Time="2.0" Value="SpriteSets.HERO1#14" />
+								<Frame Time="2.5" Value="SpriteSets.HERO1#13" />
+								<Frame Time="3.0" Value="SpriteSets.HERO1#12" />
+								<Frame Time="3.5" Value="SpriteSets.HERO1#11" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations/Actor/Walking/RightDown">
-					<Length>7.0</Length>
+					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
@@ -4192,19 +4192,19 @@
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
 								<Frame Time="0.0" Value="SpriteSets.HERO1#15" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#16" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#17" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#18" />
-								<Frame Time="4.0" Value="SpriteSets.HERO1#19" />
-								<Frame Time="5.0" Value="SpriteSets.HERO1#18" />
-								<Frame Time="6.0" Value="SpriteSets.HERO1#17" />
-								<Frame Time="7.0" Value="SpriteSets.HERO1#16" />
+								<Frame Time="0.5" Value="SpriteSets.HERO1#16" />
+								<Frame Time="1.0" Value="SpriteSets.HERO1#17" />
+								<Frame Time="1.5" Value="SpriteSets.HERO1#18" />
+								<Frame Time="2.0" Value="SpriteSets.HERO1#19" />
+								<Frame Time="2.5" Value="SpriteSets.HERO1#18" />
+								<Frame Time="3.0" Value="SpriteSets.HERO1#17" />
+								<Frame Time="3.5" Value="SpriteSets.HERO1#16" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations/Actor/Walking/Down">
-					<Length>7.0</Length>
+					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
@@ -4218,19 +4218,19 @@
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
 								<Frame Time="0.0" Value="SpriteSets.HERO1#20" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#21" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#22" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#23" />
-								<Frame Time="4.0" Value="SpriteSets.HERO1#24" />
-								<Frame Time="5.0" Value="SpriteSets.HERO1#23" />
-								<Frame Time="6.0" Value="SpriteSets.HERO1#22" />
-								<Frame Time="7.0" Value="SpriteSets.HERO1#21" />
+								<Frame Time="0.5" Value="SpriteSets.HERO1#21" />
+								<Frame Time="1.0" Value="SpriteSets.HERO1#22" />
+								<Frame Time="1.5" Value="SpriteSets.HERO1#23" />
+								<Frame Time="2.0" Value="SpriteSets.HERO1#24" />
+								<Frame Time="2.5" Value="SpriteSets.HERO1#23" />
+								<Frame Time="3.0" Value="SpriteSets.HERO1#22" />
+								<Frame Time="3.5" Value="SpriteSets.HERO1#21" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations/Actor/Walking/DownLeft">
-					<Length>7.0</Length>
+					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
@@ -4244,19 +4244,19 @@
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
 								<Frame Time="0.0" Value="SpriteSets.HERO1#25" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#26" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#27" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#28" />
-								<Frame Time="4.0" Value="SpriteSets.HERO1#29" />
-								<Frame Time="5.0" Value="SpriteSets.HERO1#28" />
-								<Frame Time="6.0" Value="SpriteSets.HERO1#27" />
-								<Frame Time="7.0" Value="SpriteSets.HERO1#26" />
+								<Frame Time="0.5" Value="SpriteSets.HERO1#26" />
+								<Frame Time="1.0" Value="SpriteSets.HERO1#27" />
+								<Frame Time="1.5" Value="SpriteSets.HERO1#28" />
+								<Frame Time="2.0" Value="SpriteSets.HERO1#29" />
+								<Frame Time="2.5" Value="SpriteSets.HERO1#28" />
+								<Frame Time="3.0" Value="SpriteSets.HERO1#27" />
+								<Frame Time="3.5" Value="SpriteSets.HERO1#26" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations/Actor/Walking/Left">
-					<Length>7.0</Length>
+					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
@@ -4270,19 +4270,19 @@
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
 								<Frame Time="0.0" Value="SpriteSets.HERO1#30" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#31" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#32" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#33" />
-								<Frame Time="4.0" Value="SpriteSets.HERO1#34" />
-								<Frame Time="5.0" Value="SpriteSets.HERO1#33" />
-								<Frame Time="6.0" Value="SpriteSets.HERO1#32" />
-								<Frame Time="7.0" Value="SpriteSets.HERO1#31" />
+								<Frame Time="0.5" Value="SpriteSets.HERO1#31" />
+								<Frame Time="1.0" Value="SpriteSets.HERO1#32" />
+								<Frame Time="1.5" Value="SpriteSets.HERO1#33" />
+								<Frame Time="2.0" Value="SpriteSets.HERO1#34" />
+								<Frame Time="2.5" Value="SpriteSets.HERO1#33" />
+								<Frame Time="3.0" Value="SpriteSets.HERO1#32" />
+								<Frame Time="3.5" Value="SpriteSets.HERO1#31" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Animations/Actor/Walking/LeftUp">
-					<Length>7.0</Length>
+					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
@@ -4296,13 +4296,13 @@
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
 								<Frame Time="0.0" Value="SpriteSets.HERO1#35" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#36" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#37" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#38" />
-								<Frame Time="4.0" Value="SpriteSets.HERO1#39" />
-								<Frame Time="5.0" Value="SpriteSets.HERO1#38" />
-								<Frame Time="6.0" Value="SpriteSets.HERO1#37" />
-								<Frame Time="7.0" Value="SpriteSets.HERO1#36" />
+								<Frame Time="0.5" Value="SpriteSets.HERO1#36" />
+								<Frame Time="1.0" Value="SpriteSets.HERO1#37" />
+								<Frame Time="1.5" Value="SpriteSets.HERO1#38" />
+								<Frame Time="2.0" Value="SpriteSets.HERO1#39" />
+								<Frame Time="2.5" Value="SpriteSets.HERO1#38" />
+								<Frame Time="3.0" Value="SpriteSets.HERO1#37" />
+								<Frame Time="3.5" Value="SpriteSets.HERO1#36" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
