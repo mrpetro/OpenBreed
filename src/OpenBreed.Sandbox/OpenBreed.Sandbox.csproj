@@ -80,6 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\MapCellHelper.cs" />
+    <Compile Include="Loaders\DoorEntityLoader.cs" />
+    <Compile Include="Loaders\HeroEntityLoader.cs" />
     <Compile Include="Loaders\PaletteDataLoader.cs" />
     <Compile Include="Loaders\SpriteAtlasDataLoader.cs" />
     <Compile Include="Loaders\TileStampDataLoader.cs" />
@@ -92,7 +95,6 @@
     <None Include="Content\Graphics\TurretSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Entities\Actor\AnimationDataFactory.cs" />
     <Compile Include="Entities\Actor\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Actor\States\Attacking\AttackingState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
@@ -167,7 +169,7 @@
     <Content Include="Entities\Actor\States\Attacking\IdleState.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\Actor\Arrow.xml">
+    <Content Include="Entities\Actor\John.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\CrazyMover\CrazyMover.xml">

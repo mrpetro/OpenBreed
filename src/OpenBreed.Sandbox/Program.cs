@@ -25,6 +25,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
+using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Button;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
@@ -166,9 +167,10 @@ namespace OpenBreed.Sandbox
                                                                                   manCollection.GetManager<ViewportCreator>()));
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(core));
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
-            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core));
-
-
+            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core, manCollection.GetManager<ICommandsMan>(),
+                                                                                manCollection.GetManager<MapCellHelper>()));
+            manCollection.AddSingleton<MapCellHelper>(() => new MapCellHelper(manCollection.GetManager<WorldBlockBuilder>(),
+                                                                              manCollection.GetManager<ICommandsMan>()));
 
             manCollection.SetupSpriteComponentAnimator();
 
@@ -373,20 +375,6 @@ namespace OpenBreed.Sandbox
             var tileTex = textureMan.Create("Textures/Tiles/16/Test", @"Content\Graphics\TileAtlasTest32bit.bmp");
             tileMan.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
 
-            var doorTex = textureMan.Create("Textures/Sprites/Door", @"Content\Graphics\DoorSpriteSet.png");
-            spriteMan.CreateAtlas()
-                .SetTexture(doorTex.Id)
-                .SetName("Atlases/Sprites/Door/Horizontal")
-                .AppendCoordsFromGrid(32, 16, 5, 1, 0, 0)
-                .Build();
-            //spriteMan.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
-            spriteMan.CreateAtlas()
-                .SetTexture(doorTex.Id)
-                .SetName("Atlases/Sprites/Door/Vertical")
-                .AppendCoordsFromGrid(16, 32, 5, 1, 0, 16)
-                .Build();
-            //spriteMan.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
-
             var teleportTex = textureMan.Create("Textures/Sprites/Teleport", @"Content\Graphics\TeleportSpriteSet.png");
             spriteMan.CreateAtlas()
                 .SetTexture(teleportTex.Id)
@@ -420,13 +408,6 @@ namespace OpenBreed.Sandbox
                 .AppendCoordsFromGrid(16, 16, 8, 1, 0, 0)
                 .Build();
             //spriteMan.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
-
-            var arrowTex = textureMan.Create("Textures/Sprites/Arrow", @"Content\Graphics\ArrowSpriteSet.png");
-            spriteMan.CreateAtlas()
-                .SetTexture(arrowTex.Id)
-                .SetName(ActorHelper.SPRITE_ARROW)
-                .AppendCoordsFromGrid(32, 32, 8, 5)
-                .Build();
 
             var turretTex = textureMan.Create("Textures/Sprites/Turret", @"Content\Graphics\TurretSpriteSet.png");
             spriteMan.CreateAtlas()
@@ -491,25 +472,19 @@ namespace OpenBreed.Sandbox
             var commandsMan = GetManager<ICommandsMan>();
             var entityMan = GetManager<IEntityMan>();
 
-            var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 2");
+            var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 1");
             doorHelper.LoadStamps();
 
             cameraBuilder.SetupPlayerCamera();
 
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
-
-            var playerActor = actorHelper.CreatePlayerActor(new Vector2(16 * 31, 16 * 31));
-
-
-            //gameWorld.AddEntity(actor);
-
             var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
-
             gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
 
-            commandsMan.Post(new AddEntityCommand(gameWorld.Id, playerActor.Id));
-            commandsMan.Post(new FollowedAddFollowerCommand(playerActor.Id, playerCamera.Id));
+            //Follow John actor
+            var johnPlayerEntity = entityMan.GetByTag("John").First();
+            commandsMan.Post(new FollowedAddFollowerCommand(johnPlayerEntity.Id, playerCamera.Id));
 
 
             //var gameWorldHelper = GetManager<GameWorldHelper>();

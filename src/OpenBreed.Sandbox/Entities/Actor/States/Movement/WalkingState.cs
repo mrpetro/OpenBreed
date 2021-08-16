@@ -55,7 +55,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var control = entity.Get<WalkingControlComponent>();
             entity.Get<ThrustComponent>().Value = control.Direction * movement.Acceleration;
 
-            var animDirPostfix = AnimHelper.ToDirectionName(direction.GetDirection());
+            var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
 
             var stateName = fsmMan.GetStateName(FsmId, Id);
             var className = entity.Get<ClassComponent>().Name;
@@ -89,13 +89,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var movement = entity.Get<MotionComponent>();
             //entity.Get<VelocityComponent>().Value = Vector2.Zero;
             //entity.Get<ThrustComponent>().Value = direction.GetDirection() * movement.Acceleration;
-            var animDirName = AnimHelper.ToDirectionName(direction.GetDirection());
+            var animDirName = AnimHelper.ToDirectionName(direction.Value);
             var className = entity.Get<ClassComponent>().Name;
             var movementFsm = fsmMan.GetByName("Actor.Movement");
             var movementStateName = movementFsm.GetCurrentStateName(entity);
             commandsMan.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{movementStateName}/{animDirName}", 0));
-
-            //throw new NotImplementedException();
         }
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
@@ -106,7 +104,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             {
                 commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
                 var angularThrust = entity.Get<AngularVelocityComponent>();
-                angularThrust.SetDirection(new Vector2(e.Direction.X, e.Direction.Y));
+                angularThrust.Value = new Vector2(e.Direction.X, e.Direction.Y);
             }
             else
                 commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Stop));

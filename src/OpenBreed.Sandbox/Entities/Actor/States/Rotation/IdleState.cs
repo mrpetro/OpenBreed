@@ -66,13 +66,13 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             {
                 var angularPos = entity.Get<AngularPositionComponent>();
 
-                if (angularPos.GetDirection() != e.Direction)
+                if (angularPos.Value != e.Direction)
                 {
                     //var aPos3 = new Vector3(angularPos.GetDirection());
                     //var dPos3 = new Vector3(e.Direction);
                     //var newVec = Vector3Extension.RotateTowards(aPos3, dPos3, 0.4f, 1.0f);
                     var angularThrust = entity.Get<AngularVelocityComponent>();
-                    angularThrust.SetDirection(new Vector2(e.Direction.X, e.Direction.Y));
+                    angularThrust.Value = new Vector2(e.Direction.X, e.Direction.Y);
                     //dir.SetDirection(e.Direction);
                     commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
                 }

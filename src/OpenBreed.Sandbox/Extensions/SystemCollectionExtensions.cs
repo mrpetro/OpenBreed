@@ -8,6 +8,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Camera;
@@ -77,7 +78,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupMapWorldDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register(new MapWorldDataLoader(dataLoaderFactory,
+            var mapWorldDataLoader = new MapWorldDataLoader(dataLoaderFactory,
                                                               managerCollection.GetManager<IRepositoryProvider>(),
                                                               managerCollection.GetManager<MapsDataProvider>(),
                                                               managerCollection.GetManager<ISystemFactory>(),
@@ -85,8 +86,13 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<WorldBlockBuilder>(),
                                                               managerCollection.GetManager<ICommandsMan>(),
                                                               managerCollection.GetManager<PalettesDataProvider>(),
-                                                              managerCollection.GetManager<IEntityFactoryProvider>(),
-                                                              managerCollection.GetManager<DoorHelper>()));
+                                                              managerCollection.GetManager<IEntityFactoryProvider>());
+
+            mapWorldDataLoader.Register(56, new HeroEntityLoader(managerCollection.GetManager<ActorHelper>()));
+            mapWorldDataLoader.Register(62, new DoorEntityLoader(managerCollection.GetManager<DoorHelper>()));
+
+
+            dataLoaderFactory.Register(mapWorldDataLoader);
         }
 
         public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)

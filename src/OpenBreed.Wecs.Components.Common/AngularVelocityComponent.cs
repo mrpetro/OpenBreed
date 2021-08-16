@@ -8,16 +8,16 @@ namespace OpenBreed.Wecs.Components.Common
     {
         #region Public Constructors
 
-        public AngularVelocityComponent(float value)
+        public AngularVelocityComponent(float angleValue)
         {
-            Value = value;
+            Value = GetDirection(angleValue);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public float Value { get; set; }
+        public Vector2 Value { get; set; }
 
         #endregion Public Properties
 
@@ -26,17 +26,9 @@ namespace OpenBreed.Wecs.Components.Common
         /// <summary>
         /// Direction value
         /// </summary>
-        public void SetDirection(Vector2 vector)
+        public Vector2 GetDirection(float angleValue)
         {
-            Value = (float)Math.Atan2((float)vector.Y, (float)vector.X);
-        }
-
-        /// <summary>
-        /// Direction value
-        /// </summary>
-        public Vector2 GetDirection()
-        {
-            return new Vector2((float)Math.Cos(Value), (float)Math.Sin(Value));
+            return new Vector2((float)Math.Cos(angleValue), (float)Math.Sin(angleValue));
         }
 
         #endregion Public Methods

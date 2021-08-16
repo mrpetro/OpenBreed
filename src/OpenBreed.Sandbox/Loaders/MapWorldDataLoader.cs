@@ -6,24 +6,31 @@ using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Model.Maps;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Loaders
 {
+    public interface IMapWorldEntityLoader
+    {
+        #region Public Methods
+
+        void Load(MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world);
+
+        #endregion Public Methods
+    }
+
     internal class MapWorldDataLoader : IDataLoader<World>
     {
+        #region Private Fields
+
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly MapsDataProvider mapsDataProvider;
@@ -33,18 +40,22 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly ICommandsMan commandsMan;
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly IEntityFactoryProvider mapEntityFactory;
-        private readonly DoorHelper doorHelper;
 
-        public MapWorldDataLoader(IDataLoaderFactory dataLoaderFactory, 
-                                  IRepositoryProvider repositoryProvider,
+        private readonly Dictionary<int, IMapWorldEntityLoader> entityLoaders = new Dictionary<int, IMapWorldEntityLoader>();
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public MapWorldDataLoader(IDataLoaderFactory dataLoaderFactory,
+                                          IRepositoryProvider repositoryProvider,
                                   MapsDataProvider mapsDataProvider,
                                   ISystemFactory systemFactory,
                                   IWorldMan worldMan,
                                   WorldBlockBuilder worldBlockBuilder,
                                   ICommandsMan commandsMan,
                                   PalettesDataProvider palettesDataProvider,
-                                  IEntityFactoryProvider mapEntityFactory,
-                                  DoorHelper doorHelper)
+                                  IEntityFactoryProvider mapEntityFactory)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
@@ -55,10 +66,27 @@ namespace OpenBreed.Sandbox.Loaders
             this.commandsMan = commandsMan;
             this.palettesDataProvider = palettesDataProvider;
             this.mapEntityFactory = mapEntityFactory;
-            this.doorHelper = doorHelper;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public static int GetActionCellValue(MapLayoutModel layout, int ix, int iy)
+        {
+            var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
+
+            var values = layout.GetCellValues(ix, layout.Height - iy - 1);
+
+            return values[actionLayer];
         }
 
         public object LoadObject(string entryId) => Load(entryId);
+
+        public void Register(int entityType, IMapWorldEntityLoader entityLoader)
+        {
+            entityLoaders.Add(entityType, entityLoader);
+        }
 
         public World Load(string entryId, params object[] args)
         {
@@ -71,11 +99,11 @@ namespace OpenBreed.Sandbox.Loaders
 
             var map = mapsDataProvider.GetMap(entry.Id);
 
-            if(map is null)
+            if (map is null)
                 throw new Exception($"Map model  asset '{entry.DataRef}' could not be loaded.");
 
             var layout = map.Layout;
-            var visited = new bool[layout.Width,layout.Height];
+            var visited = new bool[layout.Width, layout.Height];
 
             var cellSize = layout.CellSize;
 
@@ -107,19 +135,29 @@ namespace OpenBreed.Sandbox.Loaders
             return newWorld;
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
         private void PutCell(MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             if (visited[ix, iy])
                 return;
 
+            if (entityLoaders.TryGetValue(actionValue, out IMapWorldEntityLoader entityLoader))
+            {
+                entityLoader.Load(layout, visited, ix, iy, gfxValue, actionValue, world);
+
+                if (visited[ix, iy])
+                    return;
+            }
+
             switch (actionValue)
             {
-                case 62:
-                    PutDoor(layout, visited, world, ix, iy, gfxValue);
-                    break;
                 case 63:
                     PutGenericCell(layout, visited, world, ix, iy, gfxValue, hasBody: true);
                     break;
+
                 default:
                     PutGenericCell(layout, visited, world, ix, iy, gfxValue, hasBody: false);
                     break;
@@ -138,38 +176,6 @@ namespace OpenBreed.Sandbox.Loaders
             visited[ix, iy] = true;
         }
 
-        private int GetActionCellValue(MapLayoutModel layout, int ix, int iy)
-        {
-            var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
-
-            var values = layout.GetCellValues(ix, layout.Height - iy - 1);
-
-            return values[actionLayer];
-        }
-
-        private void PutDoor(MapLayoutModel layout, bool[,] visited, World world, int ix, int iy, int gfxValue)
-        {
-            var rightValue = GetActionCellValue(layout, ix + 1, iy);
-
-            if (rightValue == 62)
-            {
-                doorHelper.AddHorizontalDoor(world, ix, iy);
-                visited[ix, iy] = true;
-                visited[ix + 1, iy] = true;
-                return;
-            }
-
-            var downValue = GetActionCellValue(layout, ix, iy + 1);
-
-            if (downValue == 62)
-            {
-                doorHelper.AddVerticalDoor(world, ix, iy);
-                visited[ix, iy] = true;
-                visited[ix, iy + 1] = true;
-                return;
-            }
-        }
-
         private void LoadReferencedTileSet(IDbMap entry)
         {
             var palette = palettesDataProvider.GetPalette(entry.PaletteRefs.First());
@@ -185,5 +191,7 @@ namespace OpenBreed.Sandbox.Loaders
             foreach (var spriteSetRef in entry.SpriteSetRefs)
                 spriteAtlasLoader.Load(spriteSetRef, palette);
         }
+
+        #endregion Private Methods
     }
 }

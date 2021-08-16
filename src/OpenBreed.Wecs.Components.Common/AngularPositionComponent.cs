@@ -21,22 +21,22 @@ namespace OpenBreed.Wecs.Components.Common
         /// <summary>
         /// Constructor with passed initial direction value
         /// </summary>
-        /// <param name="value">Initial value vector</param>
+        /// <param name="angleValue">Initial value vector</param>
         //internal AngularPositionComponent(AngularPositionComponentBuilder builder)
         //{
         //    Value = builder.Value;
         //}
 
-        internal AngularPositionComponent(float value)
+        internal AngularPositionComponent(float angleValue)
         {
-            Value = value;
+            Value = GetDirection(angleValue);
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public float Value { get; set; }
+        public Vector2 Value { get; set; }
 
         #endregion Public Properties
 
@@ -45,17 +45,9 @@ namespace OpenBreed.Wecs.Components.Common
         /// <summary>
         /// Direction value
         /// </summary>
-        public void SetDirection(Vector2 vector)
+        public Vector2 GetDirection(float angle)
         {
-            Value = (float)Math.Atan2((float)vector.Y, (float)vector.X);
-        }
-
-        /// <summary>
-        /// Direction value
-        /// </summary>
-        public Vector2 GetDirection()
-        {
-            return new Vector2((float)Math.Cos(Value), (float)Math.Sin(Value));
+            return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
         }
 
         #endregion Public Methods

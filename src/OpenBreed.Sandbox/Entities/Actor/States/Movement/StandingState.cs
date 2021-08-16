@@ -1,4 +1,5 @@
-﻿using OpenBreed.Sandbox.Helpers;
+﻿
+using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
 using System.Linq;
@@ -50,7 +51,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public void EnterState(Entity entity)
         {
-            var direction = entity.Get<AngularPositionComponent>().GetDirection();
+            var direction = entity.Get<AngularPositionComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
             var className = entity.Get<ClassComponent>().Name;
@@ -89,7 +90,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
                 commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
 
                 var angularThrust = entity.Get<AngularVelocityComponent>();
-                angularThrust.SetDirection(new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y));
+                angularThrust.Value = new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y);
             }
         }
 

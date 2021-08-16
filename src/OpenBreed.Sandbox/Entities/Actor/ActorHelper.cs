@@ -17,20 +17,36 @@ using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Input.Generic;
 using OpenBreed.Input.Interface;
 using OpenBreed.Common;
+using OpenBreed.Wecs.Worlds;
+using System;
+using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
     public  class ActorHelper
     {
-        public ActorHelper(ICore core)
+        public ActorHelper(ICore core, ICommandsMan commandsMan, MapCellHelper mapCellHelper)
         {
             this.core = core;
+            this.commandsMan = commandsMan;
+            this.mapCellHelper = mapCellHelper;
         }
 
         #region Public Fields
 
-        public const string SPRITE_ARROW = "Atlases/Sprites/Arrow";
+        internal void AddHero(World world, int ix, int iy)
+        {
+            var playerActor = CreatePlayerActor(new Vector2(16 * ix, 16 * iy));
+
+            playerActor.Tag = "John";
+
+            commandsMan.Post(new AddEntityCommand(world.Id, playerActor.Id));
+        }
+
         private readonly ICore core;
+        private readonly ICommandsMan commandsMan;
+        private readonly MapCellHelper mapCellHelper;
 
         #endregion Public Fields
 
@@ -86,12 +102,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public Entity CreateActor(Vector2 pos)
         {
-            //var actor = core.GetManager<IEntityMan>().Create();
-
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Actor\Arrow.xml");
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Actor\John.xml");
             var actor = core.GetManager<IEntityFactory>().Create(entityTemplate);
-            //var actor = core.GetManager<IEntityMan>().CreateFromTemplate("Arrow");
-
 
             actor.Add(new AngularVelocityComponent(0));
             actor.Add(new AngularThrustComponent(0));
@@ -110,11 +122,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
         #endregion Public Methods
 
         #region Private Methods
-
-        private void OnFrameUpdate(Entity entity, int nextValue)
-        {
-            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
-        }
 
         private void Dynamic2StaticCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         {

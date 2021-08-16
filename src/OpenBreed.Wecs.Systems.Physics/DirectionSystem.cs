@@ -53,8 +53,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             //Velocity equation
             //var newVel = angularVel.Value + angularThrust.Value * dt;
 
-            var aPos = angularPos.GetDirection();
-            var dPos = angularVel.GetDirection();
+            var aPos = angularPos.Value;
+            var dPos = angularVel.Value;
 
             var newPos = aPos.RotateTowards(dPos, (float)Math.PI * 0.125f, 1.0f);
             //newPos = MovementTools.SnapToCompass8Way(newPos);
@@ -62,8 +62,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             if (newPos == aPos)
                 return;
 
-            angularPos.SetDirection(newPos);
-            entity.RaiseEvent(new DirectionChangedEventArgs(angularPos.GetDirection()));
+            angularPos.Value = newPos;
+            entity.RaiseEvent(new DirectionChangedEventArgs(angularPos.Value));
         }
 
         #endregion Public Methods
