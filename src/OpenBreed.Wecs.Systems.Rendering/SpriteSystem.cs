@@ -148,7 +148,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var pos = entity.Get<PositionComponent>();
             var spc = entity.Get<SpriteComponent>();
 
-            spriteMan.Render(spc.AtlasId, spc.ImageId, pos.Value, spc.Order, clipBox);
+            spriteMan.Render(spc.AtlasId, spc.ImageId, spc.Origin, pos.Value, spc.Order, clipBox);
         }
 
         #endregion Private Methods

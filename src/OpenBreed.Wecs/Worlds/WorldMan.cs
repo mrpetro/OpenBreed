@@ -184,7 +184,7 @@ namespace OpenBreed.Wecs.Worlds
             {
                 foreach (var item in world.Systems.OfType<IUpdatableSystem>())
                 {
-                    commandsMan.ExecuteEnqueued();
+                    //commandsMan.ExecuteEnqueued();
                     item.UpdatePauseImmuneOnly(dt * world.TimeMultiplier);
                 }
                 //systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
@@ -193,7 +193,7 @@ namespace OpenBreed.Wecs.Worlds
             {
                 foreach (var item in world.Systems.OfType<IUpdatableSystem>())
                 {
-                    commandsMan.ExecuteEnqueued();
+                    //commandsMan.ExecuteEnqueued();
                     item.Update(dt * world.TimeMultiplier);
                 }
                 //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));

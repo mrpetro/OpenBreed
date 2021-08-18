@@ -31,6 +31,7 @@
 		<Sprite>
 			<AtlasName>SpriteSets.SPR4A#0</AtlasName>
 			<ImageIndex>0</ImageIndex>
+			<Origin X="0" Y="0" />
 			<Order>0</Order>
 		</Sprite>
 		<Text>

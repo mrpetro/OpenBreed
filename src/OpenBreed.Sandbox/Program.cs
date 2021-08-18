@@ -56,6 +56,7 @@ using OpenBreed.Wecs.Components.Rendering.Extensions;
 using OpenBreed.Wecs.Components.Rendering.Xml;
 using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
@@ -483,9 +484,21 @@ namespace OpenBreed.Sandbox
             gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
 
             //Follow John actor
-            var johnPlayerEntity = entityMan.GetByTag("John").First();
+            //var johnPlayerEntity = entityMan.GetByTag("John").First();
+            var johnPlayerEntity = actorHelper.CreatePlayerActor(new Vector2(0, 0));
+            johnPlayerEntity.Tag = "John";
+
             commandsMan.Post(new FollowedAddFollowerCommand(johnPlayerEntity.Id, playerCamera.Id));
 
+
+            GetManager<IEventsMan>().Subscribe<WorldInitializedEventArgs>(GetManager<IWorldMan>(), (s, a) =>
+            {
+                if (a.WorldId != gameWorld.Id)
+                    return;
+
+                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Id, 0);
+
+            });
 
             //var gameWorldHelper = GetManager<GameWorldHelper>();
             //gameWorldHelper.Create(this);
@@ -507,6 +520,7 @@ namespace OpenBreed.Sandbox
             shapeMan.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
             shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
             shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
+            shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
         }
 
         private void RegisterFixtures()
@@ -521,6 +535,7 @@ namespace OpenBreed.Sandbox
             fixtureMan.Create("Fixtures/DoorVertical", "Static", shapeMan.GetByTag("Shapes/Box_0_0_16_32"));
             fixtureMan.Create("Fixtures/DoorHorizontal", "Static", shapeMan.GetByTag("Shapes/Box_0_0_32_16"));
             fixtureMan.Create("Fixtures/Arrow", "Dynamic", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
+            fixtureMan.Create("Fixtures/Hero", "Dynamic", shapeMan.GetByTag("Shapes/Box_0_0_28_28"));
             fixtureMan.Create("Fixtures/Turret", "Static", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
         }
 

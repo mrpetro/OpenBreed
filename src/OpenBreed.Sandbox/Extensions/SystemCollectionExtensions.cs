@@ -13,6 +13,7 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
@@ -88,7 +89,8 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<PalettesDataProvider>(),
                                                               managerCollection.GetManager<IEntityFactoryProvider>());
 
-            mapWorldDataLoader.Register(56, new HeroEntityLoader(managerCollection.GetManager<ActorHelper>()));
+            mapWorldDataLoader.Register(56, new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
+                                                                     managerCollection.GetManager<WorldGateHelper>()));
             mapWorldDataLoader.Register(62, new DoorEntityLoader(managerCollection.GetManager<DoorHelper>()));
 
 

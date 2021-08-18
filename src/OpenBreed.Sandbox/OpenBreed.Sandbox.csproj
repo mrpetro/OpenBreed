@@ -82,7 +82,7 @@
   <ItemGroup>
     <Compile Include="Entities\MapCellHelper.cs" />
     <Compile Include="Loaders\DoorEntityLoader.cs" />
-    <Compile Include="Loaders\HeroEntityLoader.cs" />
+    <Compile Include="Loaders\LevelEntryCellLoader.cs" />
     <Compile Include="Loaders\PaletteDataLoader.cs" />
     <Compile Include="Loaders\SpriteAtlasDataLoader.cs" />
     <Compile Include="Loaders\TileStampDataLoader.cs" />
