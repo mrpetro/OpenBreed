@@ -32,13 +32,14 @@
 			<CorFactor>0.0</CorFactor>
 			<Type>Dynamic</Type>
 			<Fixtures>
-				<Fixture>Fixtures/Arrow</Fixture>
+				<Fixture>Fixtures/Hero</Fixture>
 			</Fixtures>
 		</Body>
 		<Motion></Motion>
 		<Sprite>
 			<AtlasName>SpriteSets.HERO1#0</AtlasName>
 			<ImageIndex>0</ImageIndex>
+			<Origin X="-2" Y="-2" />
 			<Order>100</Order>
 		</Sprite>
 		<Text>

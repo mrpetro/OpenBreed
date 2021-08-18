@@ -53,8 +53,9 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// </summary>
         /// <param name="atlasId">Atlas ID of rendered sprite</param>
         /// <param name="imageId">Image ID of rendered sprite</param>
+        /// <param name="origin">Local origin point of sprite</param>
         /// <param name="clipBox">Clip box to determine if sprite should be drawn or not</param>
-        void Render(int atlasId, int imageId, Vector2 pos, float order, Box2 clipBox);
+        void Render(int atlasId, int imageId, Vector2 origin, Vector2 pos, float order, Box2 clipBox);
 
         #endregion Public Methods
     }

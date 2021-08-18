@@ -447,6 +447,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                                       entity.Get<VelocityComponent>());
 
             activeDynamics.Add(pack);
+            UpdateAabb(pack.Body, pack.Position);
         }
 
         private void UnregisterDynamicEntity(Entity entity)

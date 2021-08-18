@@ -135,7 +135,6 @@ namespace OpenBreed.Wecs.Systems.Control
             var entity = entityMan.GetById(cmd.EntityId);
             var fc = entity.Get<FollowerComponent>();
             fc.FollowerIds.Add(cmd.FollowerEntityId);
-            commandsMan.Post(new AddEntityCommand(World.Id, cmd.FollowerEntityId));
 
             return true;
         }

@@ -83,7 +83,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return MissingSpriteAtlas;
         }
 
-        public void Render(int atlasId, int imageId, Vector2 pos, float order, Box2 clipBox)
+        public void Render(int atlasId, int imageId, Vector2 origin, Vector2 pos, float order, Box2 clipBox)
         {
             var atlas = items[atlasId];
 
@@ -93,21 +93,21 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             var spriteSize = atlas.GetSpriteSize(imageId);
 
             //Test viewport for clippling here
-            if (pos.X + spriteSize.X < clipBox.Left)
+            if (pos.X + origin.X + spriteSize.X < clipBox.Left)
                 return;
 
-            if (pos.X > clipBox.Right)
+            if (pos.X + origin.X > clipBox.Right)
                 return;
 
-            if (pos.Y + spriteSize.Y < clipBox.Bottom)
+            if (pos.Y + origin.Y + spriteSize.Y < clipBox.Bottom)
                 return;
 
-            if (pos.Y > clipBox.Top)
+            if (pos.Y + origin.Y > clipBox.Top)
                 return;
 
             GL.PushMatrix();
 
-            GL.Translate((int)pos.X, (int)pos.Y, order);
+            GL.Translate((int)(pos.X + origin.X), (int)(pos.Y + origin.Y), order);
 
             GL.BindTexture(TextureTarget.Texture2D, atlas.Texture.InternalId);
             RenderTools.Draw(atlas.data[imageId].Vbo, ibo, 6);

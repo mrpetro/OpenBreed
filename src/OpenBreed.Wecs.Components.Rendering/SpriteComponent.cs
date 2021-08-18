@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenTK;
+using System;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
@@ -9,6 +11,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         string AtlasName { get; set; }
         int ImageIndex { get; set; }
+        Vector2 Origin { get; set; }
         int Order { get; set; }
 
         #endregion Public Properties
@@ -28,6 +31,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         {
             AtlasId = builder.AtlasId;
             ImageId = builder.ImageId;
+            Origin = builder.Origin;
             Order = builder.Order;
         }
 
@@ -44,6 +48,11 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// Id of sprite image from the atlas
         /// </summary>
         public int ImageId { get; set; }
+
+        /// <summary>
+        /// Local origin of sprite coordinates
+        /// </summary>
+        public Vector2 Origin { get; set; }
 
         /// <summary>
         /// Order of drawing, higher value object is rendered on top of lower value objects
@@ -77,6 +86,7 @@ namespace OpenBreed.Wecs.Components.Rendering
             var builder = managerCollection.GetManager<SpriteComponentBuilder>();
             builder.SetAtlasByName(template.AtlasName);
             builder.SetImageId(template.ImageIndex);
+            builder.SetOrigin(template.Origin);
             builder.SetOrder(template.Order);
             return builder.Build();
         }
@@ -105,6 +115,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         internal int AtlasId { get; private set; }
         internal int ImageId { get; private set; }
+        internal Vector2 Origin { get; private set; }
         internal float Order { get; private set; }
 
         #endregion Internal Properties
@@ -119,6 +130,11 @@ namespace OpenBreed.Wecs.Components.Rendering
         public void SetOrder(int order)
         {
             Order = order;
+        }
+
+        public void SetOrigin(Vector2 origin)
+        {
+            Origin = origin;
         }
 
         public void SetImageId(int imageId)

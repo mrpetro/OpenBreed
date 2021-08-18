@@ -114,13 +114,38 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Load next world if needed
             jobChain.Equeue(new EntityJob(() => TryLoadWorld(exitInfo.WorldName, exitInfo.EntryId)));
             //Add entity to next world
-            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(worldMan, eventsMan, (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
+            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(worldMan, eventsMan, (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(targetEntity, exitInfo.WorldName)));
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, exitInfo.EntryId, true)));
             //Unpause this world
             jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
             //Fade in camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
+
+            core.Jobs.Execute(jobChain);
+        }
+
+        public void ExecuteHeroEnter(Entity heroEntity, int worldId, int entryId)
+        {
+            //var cameraEntity = heroEntity.TryGet<FollowerComponent>()?.FollowerIds.
+            //                                                                  Select(item => core.GetManager<IEntityMan>().GetById(item)).
+            //                                                                  FirstOrDefault(item => item.Tag is "PlayerCamera");
+
+            //if (cameraEntity == null)
+            //    return;
+
+            var eventsMan = core.GetManager<IEventsMan>();
+
+            var jobChain = new JobChain();
+
+            //Add entity to next world
+            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(worldMan, eventsMan, (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Id == worldId; }, () => AddToWorld(heroEntity, worldId)));
+            //Set position of entity to entry position in next world
+            jobChain.Equeue(new EntityJob<EntityAddedEventArgs>(heroEntity, () => SetPosition(heroEntity, entryId, true)));
+            //Unpause this world
+            //jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
+            //Fade in camera
+            //jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
 
             core.Jobs.Execute(jobChain);
         }
@@ -190,9 +215,15 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         //    exitEntity.Core.Jobs.Execute(jobChain);
         //}
 
-        private void AddToWorld(Entity target, string worldName, int entryId)
+        private void AddToWorld(Entity target, string worldName)
         {
             var world = core.GetManager<IWorldMan>().GetByName(worldName);
+            core.Commands.Post(new AddEntityCommand(world.Id, target.Id));
+        }
+
+        private void AddToWorld(Entity target, int worldId)
+        {
+            var world = core.GetManager<IWorldMan>().GetById(worldId);
             core.Commands.Post(new AddEntityCommand(world.Id, target.Id));
         }
 

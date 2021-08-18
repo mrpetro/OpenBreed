@@ -37,6 +37,7 @@
 		<Sprite>
 			<AtlasName>Atlases/Sprites/Turret</AtlasName>
 			<ImageIndex>0</ImageIndex>
+			<Origin X="0" Y="0" />
 			<Order>100</Order>
 		</Sprite>
 		<Text>

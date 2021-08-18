@@ -28,6 +28,7 @@
 		<Sprite>
 			<AtlasName>Atlases/Sprites/Projectiles/Laser</AtlasName>
 			<ImageIndex>0</ImageIndex>
+			<Origin X="0" Y="0" />
 			<Order>0</Order>
 		</Sprite>
 		<Text>
