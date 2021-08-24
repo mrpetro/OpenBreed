@@ -71,7 +71,7 @@ namespace OpenBreed.Game
             manCollection.SetupCoreSystems();
             manCollection.SetupControlSystems();
             manCollection.SetupAnimationSystems();
-            manCollection.SetupGuiSystems();
+            manCollection.SetupPhysicsDebugSystem();
             manCollection.SetupXmlReadonlyDatabase();
             //manCollection.SetupAudioSystems();
 

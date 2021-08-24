@@ -222,17 +222,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var cellTile = cells[index];
 
             if (!cellTile.IsEmpty)
-            {
-                GL.PushMatrix();
-
-                GL.Translate(xIndex * TILE_SIZE, yIndex * TILE_SIZE, 0.0f);
-
-
-
-                tileMan.GetById(cellTile.AtlasId).Draw(cellTile.ImageId);
-
-                GL.PopMatrix();
-            }
+                tileMan.Render(cellTile.AtlasId, cellTile.ImageId, xIndex * TILE_SIZE, yIndex * TILE_SIZE);
         }
 
         private void InitializeTilesMap()

@@ -306,8 +306,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             var dynamicAabb = pack.Aabb;
 
-            pack.Body.Boxes = new List<Tuple<int, int>>();
-
             int leftIndex;
             int rightIndex;
             int bottomIndex;
@@ -321,7 +319,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             {
                 for (int xIndex = leftIndex; xIndex < rightIndex; xIndex++)
                 {
-                    pack.Body.Boxes.Add(new Tuple<int, int>(xIndex, yIndex));
                     var collideres = gridStatics[xIndex + GridWidth * yIndex];
                     for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
                     {

@@ -28,5 +28,7 @@ namespace OpenBreed.Game.Extensions
             scriptMan.Expose("Players", manCollection.GetManager<IPlayersMan>());
             scriptMan.Expose("ModelsProvider", manCollection.GetManager<IModelsProvider>());
         }
+
+
     }
 }

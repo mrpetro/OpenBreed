@@ -108,7 +108,7 @@ namespace OpenBreed.Sandbox
             manCollection.SetupCoreSystems();
             manCollection.SetupControlSystems();
             manCollection.SetupAnimationSystems();
-            manCollection.SetupGuiSystems();
+            manCollection.SetupPhysicsDebugSystem();
 
 
             manCollection.SetupCommonComponents();
@@ -119,6 +119,8 @@ namespace OpenBreed.Sandbox
 
             manCollection.SetupMapEntityFactory();
             manCollection.SetupDataLoaderFactory();
+
+            manCollection.SetupUnknownMapCellDisplaySystem();
 
             //manCollection.SetupAudioSystems();
 
@@ -374,7 +376,12 @@ namespace OpenBreed.Sandbox
             var textureMan = GetManager<ITextureMan>();
 
             var tileTex = textureMan.Create("Textures/Tiles/16/Test", @"Content\Graphics\TileAtlasTest32bit.bmp");
-            tileMan.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
+            //tileMan.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
+            tileMan.CreateAtlas().SetName("Atlases/Tiles/16/Test")
+                                 .SetTexture(tileTex.Id)
+                                 .SetTileSize(16)
+                                 .AppendCoordsFromGrid(4, 4, 0, 0)
+                                 .Build();
 
             var teleportTex = textureMan.Create("Textures/Sprites/Teleport", @"Content\Graphics\TeleportSpriteSet.png");
             spriteMan.CreateAtlas()
