@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Wecs.Systems;
 using OpenTK;
 
-namespace OpenBreed.Wecs.Systems.Rendering
+namespace OpenBreed.Wecs.Systems
 {
     /// <summary>
     /// System that state will be rendered to parricular viewport during core render phase

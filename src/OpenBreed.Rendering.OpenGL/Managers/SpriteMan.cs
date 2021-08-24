@@ -135,7 +135,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return items.Count - 1;
         }
 
-
         internal int CreateSpriteVertices(SpriteData spriteData, int width, int height)
         {
             var vertices = CreateVertices(spriteData, width, height);

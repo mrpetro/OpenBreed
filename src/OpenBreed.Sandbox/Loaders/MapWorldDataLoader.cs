@@ -155,22 +155,28 @@ namespace OpenBreed.Sandbox.Loaders
             switch (actionValue)
             {
                 case 63:
-                    PutGenericCell(layout, visited, world, ix, iy, gfxValue, hasBody: true);
+                    PutGenericCell(layout, visited, world, ix, iy, gfxValue, actionValue, hasBody: true, unknown: false);
                     break;
-
+                case 0:
+                    PutGenericCell(layout, visited, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
+                    break;
                 default:
-                    PutGenericCell(layout, visited, world, ix, iy, gfxValue, hasBody: false);
+                    PutGenericCell(layout, visited, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: true);
                     break;
             }
         }
 
-        private void PutGenericCell(MapLayoutModel layout, bool[,] visited, World world, int ix, int iy, int gfxValue, bool hasBody)
+        private void PutGenericCell(MapLayoutModel layout, bool[,] visited, World world, int ix, int iy, int gfxValue, int actionValue, bool hasBody, bool unknown)
         {
             worldBlockBuilder.SetPosition(ix * layout.CellSize, iy * layout.CellSize);
             worldBlockBuilder.SetTileId(gfxValue);
             worldBlockBuilder.HasBody = hasBody;
 
             var cellEntity = worldBlockBuilder.Build();
+
+            if (unknown)
+                cellEntity.Tag = actionValue;
+
             commandsMan.Post(new AddEntityCommand(world.Id, cellEntity.Id));
 
             visited[ix, iy] = true;

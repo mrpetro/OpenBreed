@@ -66,12 +66,6 @@ namespace OpenBreed.Wecs.Components.Physics
         /// DEBUG only
         /// </summary>
         ///
-        public List<Tuple<int, int>> Boxes { get; set; }
-
-        /// <summary>
-        /// DEBUG only
-        /// </summary>
-        ///
         public Vector2 Projection { get; set; }
 
         /// <summary>

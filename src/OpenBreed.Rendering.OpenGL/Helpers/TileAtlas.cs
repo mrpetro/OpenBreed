@@ -1,56 +1,54 @@
 ﻿using OpenBreed.Rendering.Interface;
-using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using OpenBreed.Rendering.OpenGL.Builders;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
+    internal struct TileData
+    {
+        #region Public Fields
+
+        /// <summary>
+        /// U coordinate of tile on texture
+        /// </summary>
+        public int U;
+
+        /// <summary>
+        /// V coordinate of tile on texture
+        /// </summary>
+        public int V;
+
+        #endregion Public Fields
+
+        #region Internal Fields
+
+        /// <summary>
+        /// OpenGL vertex buffer object ID
+        /// </summary>
+        internal int Vbo;
+
+        #endregion Internal Fields
+    }
+
     internal class TileAtlas : ITileAtlas
     {
-        #region Private Fields
+        #region Internal Fields
 
-        private static uint[] indices = {
-                                            0,1,2,
-                                            0,2,3
-                                       };
+        internal readonly List<TileData> data;
 
-        private int ibo;
+        #endregion Internal Fields
 
-        private List<int> vboList;
+        #region Public Constructors
 
-        #endregion Private Fields
-
-        #region Internal Constructors
-
-        internal TileAtlas(int id, ITexture texture, int tileSize, Point[] points)
+        public TileAtlas(TileAtlasBuilder builder)
         {
-            Id = id;
-            Texture = texture;
-            TileSize = tileSize;
-
-            vboList = new List<int>();
-
-            RenderTools.CreateIndicesArray(indices, out ibo);
-
-            foreach (var point in points)
-                AddCoords(point.X, point.Y);
+            Texture = builder.Texture;
+            TileSize = builder.TileSize;
+            data = builder.GetTileData();
+            Id = builder.Register(this);
         }
 
-        internal TileAtlas(int id, ITexture texture, int tileSize, int tileColumns, int tileRows)
-        {
-            Id = id;
-            Texture = texture;
-            TileSize = tileSize;
-
-            vboList = new List<int>();
-
-            RenderTools.CreateIndicesArray(indices, out ibo);
-            BuildCoords(tileRows, tileColumns);
-        }
-
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 
@@ -59,63 +57,5 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public int Id { get; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        public void Draw(int tileId)
-        {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
-            RenderTools.Draw(vboList[tileId], ibo, 6);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-        }
-
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal Vertex[] CreateVertices(Vector2 coord)
-        {
-            var uvSize = new Vector2(TileSize, TileSize);
-            uvSize = Vector2.Divide(uvSize, new Vector2(Texture.Width, Texture.Height));
-
-            var uvLD = coord;
-            var uvRT = Vector2.Add(uvLD, uvSize);
-
-            Vertex[] vertices = {
-                                new Vertex(new Vector2(0,   0),              new Vector2(uvLD.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(TileSize,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(TileSize,  TileSize), new Vector2(uvRT.X, uvLD.Y), Color4.White),
-                                new Vertex(new Vector2(0,   TileSize),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
-                            };
-
-            return vertices;
-        }
-
-        #endregion Internal Methods
-
-        #region Private Methods
-
-        private void AddCoords(float x, float y)
-        {
-                var coord = new Vector2(x, y);
-                coord = Vector2.Divide(coord, new Vector2(Texture.Width, Texture.Height));
-
-                var vertices = CreateVertices(coord);
-
-                int vbo;
-                RenderTools.CreateVertexArray(vertices, out vbo);
-                vboList.Add(vbo);
-        }
-
-        private void BuildCoords(int tileRows, int tileColumns)
-        {
-            for (int y = 0; y < tileRows; y++)
-            {
-                for (int x = 0; x < tileColumns; x++)
-                    AddCoords(x * TileSize, y * TileSize);
-            }
-        }
-
-        #endregion Private Methods
     }
 }

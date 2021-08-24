@@ -58,7 +58,18 @@ namespace OpenBreed.Sandbox.Loaders
 
             var texture = textureMan.Create(entry.DataRef, tileAtlas.Bitmap);
 
-            return tileMan.Create(entryId, texture.Id, tileAtlas.TileSize, tileAtlas.Tiles.Select(tile => new Point(tile.Rectangle.X, tile.Rectangle.Y)).ToArray()); ;
+            var builder = tileMan.CreateAtlas()
+                                 .SetName(entryId)
+                                 .SetTexture(texture.Id)
+                                 .SetTileSize(tileAtlas.TileSize);
+
+            foreach (var tile in tileAtlas.Tiles)
+                builder.AppendCoords(tile.Rectangle.X, tile.Rectangle.Y);
+
+            return builder.Build();
+
+
+            //return tileMan.Create(entryId, texture.Id, tileAtlas.TileSize, tileAtlas.Tiles.Select(tile => new Point(tile.Rectangle.X, tile.Rectangle.Y)).ToArray()); ;
         }
 
         #endregion Public Methods

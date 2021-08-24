@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\FontAtlasBuilder.cs" />
+    <Compile Include="Builders\TileAtlasBuilder.cs" />
     <Compile Include="Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Builders\StampBuilder.cs" />
     <Compile Include="CoreExtensions.cs" />

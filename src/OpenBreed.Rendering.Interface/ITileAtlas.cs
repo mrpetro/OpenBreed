@@ -18,15 +18,5 @@
         float TileSize { get; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Draw tile with given image Id
-        /// </summary>
-        /// <param name="imageId">Atlas image id to draw</param>
-        void Draw(int imageId);
-
-        #endregion Public Methods
     }
 }

@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Input.Interface;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Wecs.Systems.Gui.Extensions
@@ -8,10 +9,10 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
     {
         #region Public Methods
 
-        public static void SetupGuiSystems(this IManagerCollection manCollection)
+        public static void SetupPhysicsDebugSystem(this IManagerCollection manCollection)
         {
             var systemFactory = manCollection.GetManager<ISystemFactory>();
-            systemFactory.Register(() => new UiSystem(manCollection.GetManager<IInputsMan>()));
+            systemFactory.Register(() => new PhysicsDebugDisplaySystem(manCollection.GetManager<IPrimitiveRenderer>()));
         }
 
         #endregion Public Methods

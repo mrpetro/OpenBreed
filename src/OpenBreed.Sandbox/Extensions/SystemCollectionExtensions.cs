@@ -7,6 +7,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -16,6 +17,7 @@ using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Sandbox.Worlds.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Control;
@@ -75,6 +77,13 @@ namespace OpenBreed.Sandbox.Extensions
             //                                                manCollection.GetManager<IFixtureMan>(),
             //                                                manCollection.GetManager<IEntityMan>(),
             //                                                manCollection.GetManager<BodyComponentBuilder>()));
+        }
+
+        public static void SetupUnknownMapCellDisplaySystem(this IManagerCollection manCollection)
+        {
+            var systemFactory = manCollection.GetManager<ISystemFactory>();
+            systemFactory.Register(() => new UnknownMapCellDisplaySystem(manCollection.GetManager<IPrimitiveRenderer>(),
+                                                                         manCollection.GetManager<IFontMan>()));
         }
 
         public static void SetupMapWorldDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
@@ -148,7 +157,8 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(systemFactory.Create<TextSystem>());
 
-            builder.AddSystem(systemFactory.Create<UiSystem>());
+            builder.AddSystem(systemFactory.Create<PhysicsDebugDisplaySystem>());
+            builder.AddSystem(systemFactory.Create<UnknownMapCellDisplaySystem>());
 
             builder.AddSystem(systemFactory.Create<ViewportSystem>());
         }

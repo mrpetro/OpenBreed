@@ -56,6 +56,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,7 +67,7 @@
   <ItemGroup>
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UiSystem.cs" />
+    <Compile Include="PhysicsDebugDisplaySystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
@@ -81,6 +82,10 @@
       <Project>{7CD20CF7-1CB8-4351-BDA1-6376C7A1D5E2}</Project>
       <Name>OpenBreed.Input.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj">
+      <Project>{33b3eca4-715e-475e-b01e-80b6db0876fc}</Project>
+      <Name>OpenBreed.Rendering.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
       <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
       <Name>OpenBreed.Wecs.Components.Common</Name>
@@ -88,6 +93,14 @@
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Gui\OpenBreed.Wecs.Components.Gui.csproj">
       <Project>{9A7295ED-F6E8-4C6A-9B89-F2ADFD501A04}</Project>
       <Name>OpenBreed.Wecs.Components.Gui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Physics\OpenBreed.Wecs.Components.Physics.csproj">
+      <Project>{ea5c8b57-f636-45fc-b6d4-1344c6764352}</Project>
+      <Name>OpenBreed.Wecs.Components.Physics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Rendering\OpenBreed.Wecs.Components.Rendering.csproj">
+      <Project>{4bf54e49-6bea-4733-8189-0a9204819a11}</Project>
+      <Name>OpenBreed.Wecs.Components.Rendering</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
       <Project>{d22d74e0-7fe4-4278-a93b-9983b788f40e}</Project>
