@@ -109,14 +109,14 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Methods
 
-        internal ITexture InternalCreate(string alias, Bitmap bitmap)
+        internal ITexture InternalCreate(string name, Bitmap bitmap)
         {
             var texture = Texture.CreateFromBitmap(bitmap);
             texture.Id = items.Count;
             items.Add(texture);
-            aliases.Add(alias, texture);
+            aliases.Add(name, texture);
 
-            logger.Verbose($"Texture {texture.Id} ({alias}) created.");
+            logger.Verbose($"Texture '{name}' created with ID {texture.Id}.");
 
             return texture;
         }

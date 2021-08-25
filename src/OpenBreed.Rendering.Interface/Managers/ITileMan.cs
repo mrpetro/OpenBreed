@@ -29,13 +29,11 @@ namespace OpenBreed.Rendering.Interface.Managers
         void UnloadAll();
 
         /// <summary>
-        /// Render particular tile giving it's atlas ID, image ID and index position
+        /// Render particular tile giving it's atlas and image ID
         /// </summary>
         /// <param name="atlasId">Atlas ID of rendered tile</param>
         /// <param name="imageId">Image ID of rendered tile</param>
-        /// <param name="xIndex">X index coordinate</param>
-        /// <param name="yIndex">Y index coordinate</param>
-        void Render(int atlasId, int imageId, int xIndex, int yIndex);
+        void Render(int atlasId, int imageId);
 
         #endregion Public Methods
     }

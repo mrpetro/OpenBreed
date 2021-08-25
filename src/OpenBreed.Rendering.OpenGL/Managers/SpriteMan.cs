@@ -78,7 +78,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             if (names.TryGetValue(name, out SpriteAtlas result))
                 return result;
 
-            logger.Error($"Unable to find animation with name '{name}'");
+            logger.Error($"Unable to find sprite with name '{name}'");
 
             return MissingSpriteAtlas;
         }
@@ -130,7 +130,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             items.Add(spriteAtlas);
             names.Add(name, spriteAtlas);
 
-            logger.Verbose($"Sprite Atlas {items.Count - 1} ({name}) created.");
+            logger.Verbose($"Sprite atlas '{name}' created with ID {items.Count - 1}.");
 
             return items.Count - 1;
         }

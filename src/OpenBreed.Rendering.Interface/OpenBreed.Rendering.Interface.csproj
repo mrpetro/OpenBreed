@@ -71,6 +71,7 @@
     <Compile Include="IPrimitiveRenderer.cs" />
     <Compile Include="ITileAtlasBuilder.cs" />
     <Compile Include="ISpriteAtlasBuilder.cs" />
+    <Compile Include="ITileGrid.cs" />
     <Compile Include="Managers\IFontMan.cs" />
     <Compile Include="Managers\IRenderingMan.cs" />
     <Compile Include="ISpriteAtlas.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="ITexture.cs" />
     <Compile Include="Managers\ITextureMan.cs" />
     <Compile Include="ITileAtlas.cs" />
+    <Compile Include="Managers\ITileGridMan.cs" />
     <Compile Include="Managers\ITileMan.cs" />
     <Compile Include="ITileStamp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
