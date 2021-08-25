@@ -87,7 +87,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             var transform = Matrix4.Identity;
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(vpc.Width, vpc.Height, 1.0f));
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(pos.Value.X, pos.Value.Y, 0.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation((int)pos.Value.X, (int)pos.Value.Y, 0.0f));
             return transform;
         }
 
@@ -101,7 +101,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var cmc = camera.Get<CameraComponent>();
 
             var transform = Matrix4.Identity;
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-(int)pos.Value.X, -(int)pos.Value.Y, 0.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / cmc.Width, 1.0f / cmc.Height, 1.0f));
 
             var vcRatio = vpc.Ratio / cmc.Ratio;
@@ -272,8 +272,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
                 GetVisibleRectangle(camera, transform, out Box2 clipBox);
 
-                GL.Color4(Color4.LightBlue);
-                primitiveRenderer.DrawRectangle(clipBox);
+                //GL.Color4(Color4.LightBlue);
+                //primitiveRenderer.DrawRectangle(clipBox);
 
                 if (vpc.Clipping)
                 {

@@ -126,7 +126,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
             GL.PushMatrix();
 
-            GL.Translate(posCmp.Value.X, posCmp.Value.Y, 0.0f);
+            GL.Translate((int)posCmp.Value.X, (int)posCmp.Value.Y, 0.0f);
 
             var aabb = Box2.FromTLRB(0, 0, 16, 16);
 

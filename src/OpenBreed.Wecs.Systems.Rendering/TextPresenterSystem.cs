@@ -85,7 +85,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
 
-            GL.Translate(pos.Value.X, pos.Value.Y, 0.0f);
+            GL.Translate((int)pos.Value.X, (int)pos.Value.Y, 0.0f);
 
             var caretPosX = 0.0f;
             var font = fontMan.GetById(tp.FontId);

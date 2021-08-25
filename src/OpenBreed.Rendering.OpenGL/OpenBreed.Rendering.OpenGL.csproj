@@ -78,6 +78,7 @@
     <Compile Include="Helpers\SpriteAtlas.cs" />
     <Compile Include="Helpers\Texture.cs" />
     <Compile Include="Helpers\TileAtlas.cs" />
+    <Compile Include="Helpers\TileGrid.cs" />
     <Compile Include="Helpers\TileStamp.cs" />
     <Compile Include="Helpers\Vertex.cs" />
     <Compile Include="Managers\FontMan.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Managers\SpriteMan.cs" />
     <Compile Include="Managers\StampMan.cs" />
     <Compile Include="Managers\TextureMan.cs" />
+    <Compile Include="Managers\TileGridMan.cs" />
     <Compile Include="Managers\TileMan.cs" />
     <Compile Include="Managers\RenderingMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -75,19 +75,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             throw new NotImplementedException();
         }
 
-        public void Render(int atlasId, int imageId, int xIndex, int yIndex)
+        public void Render(int atlasId, int imageId)
         {
             var atlas = items[atlasId];
-
-            GL.PushMatrix();
-
-            GL.Translate(xIndex, yIndex, 0.0f);
 
             GL.BindTexture(TextureTarget.Texture2D, atlas.Texture.InternalId);
             RenderTools.Draw(atlas.data[imageId].Vbo, ibo, 6);
             GL.BindTexture(TextureTarget.Texture2D, 0);
-
-            GL.PopMatrix();
         }
 
         #endregion Public Methods
@@ -99,7 +93,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             items.Add(tileAtlas);
             names.Add(name, tileAtlas);
 
-            logger.Verbose($"Tile Atlas {items.Count - 1} ({name}) created.");
+            logger.Verbose($"Tile atlas '{name}' created with ID {items.Count - 1}.");
 
             return items.Count - 1;
         }

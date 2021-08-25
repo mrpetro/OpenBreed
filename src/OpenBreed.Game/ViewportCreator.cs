@@ -34,7 +34,7 @@ namespace OpenBreed.Game
 
             var vpcBuilder = ViewportComponentBuilder.New();
             vpcBuilder.SetSize(width, height);
-            vpcBuilder.SetDrawBorderFlag(true);
+            vpcBuilder.SetDrawBorderFlag(false);
             vpcBuilder.SetDrawBackgroundFlag(drawBackground);
             vpcBuilder.SetClippingFlag(clipping);
             vpcBuilder.SetBackgroundColor(Color4.Black);
