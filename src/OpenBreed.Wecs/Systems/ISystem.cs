@@ -19,9 +19,9 @@ namespace OpenBreed.Wecs.Systems
         int PhaseId { get; }
 
         /// <summary>
-        /// World which owns this system
+        /// ID of world which owns this system
         /// </summary>
-        World World { get; }
+        int WorldId { get; }
 
         /// <summary>
         /// Initialize the system when world is created

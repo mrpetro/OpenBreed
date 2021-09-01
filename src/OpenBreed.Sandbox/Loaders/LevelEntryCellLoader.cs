@@ -1,16 +1,18 @@
 ﻿using OpenBreed.Model.Maps;
-using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.WorldGate;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
-using System;
 
 namespace OpenBreed.Sandbox.Loaders
 {
     internal class LevelEntryCellLoader : IMapWorldEntityLoader
     {
+        #region Public Fields
+
+        public static readonly int CODE = 56;
+
+        #endregion Public Fields
+
         #region Private Fields
 
         private readonly ActorHelper actorHelper;

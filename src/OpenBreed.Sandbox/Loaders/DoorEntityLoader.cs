@@ -6,6 +6,12 @@ namespace OpenBreed.Sandbox.Loaders
 {
     public class DoorEntityLoader : IMapWorldEntityLoader
     {
+        #region Public Fields
+
+        public static readonly int CODE = 62;
+
+        #endregion Public Fields
+
         #region Private Fields
 
         private readonly DoorHelper doorHelper;

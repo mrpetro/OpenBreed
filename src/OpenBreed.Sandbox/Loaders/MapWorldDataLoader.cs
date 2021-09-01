@@ -76,7 +76,7 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
 
-            var values = layout.GetCellValues(ix, layout.Height - iy - 1);
+            var values = layout.GetCellValues(ix, iy);
 
             return values[actionLayer];
         }
@@ -124,7 +124,7 @@ namespace OpenBreed.Sandbox.Loaders
             {
                 for (int ix = 0; ix < layout.Width; ix++)
                 {
-                    var cellValues = layout.GetCellValues(ix, layout.Height - iy - 1);
+                    var cellValues = layout.GetCellValues(ix, iy);
                     var gfxValue = cellValues[gfxLayer];
                     var actionValue = cellValues[actionLayer];
 
@@ -168,8 +168,11 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void PutGenericCell(MapLayoutModel layout, bool[,] visited, World world, int ix, int iy, int gfxValue, int actionValue, bool hasBody, bool unknown)
         {
+            var groupLayerIndex = layout.GetLayerIndex(MapLayerType.Group);
+
             worldBlockBuilder.SetPosition(ix * layout.CellSize, iy * layout.CellSize);
             worldBlockBuilder.SetTileId(gfxValue);
+            worldBlockBuilder.SetGroupId(layout.GetCellValue(groupLayerIndex, ix, iy));
             worldBlockBuilder.HasBody = hasBody;
 
             var cellEntity = worldBlockBuilder.Build();

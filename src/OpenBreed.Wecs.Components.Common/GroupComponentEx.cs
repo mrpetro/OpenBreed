@@ -4,13 +4,12 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Common
 {
-    public class GroupComponentEx : IEntityComponent
+    public class GroupComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public GroupComponentEx(int id)
+        public GroupComponent()
         {
-            Id = id;
         }
 
         #endregion Public Constructors
@@ -20,7 +19,7 @@ namespace OpenBreed.Wecs.Components.Common
         /// <summary>
         /// Ids of entities which are members of this group 
         /// </summary>
-        public int Id { get; }
+        public List<int> MemberIds { get; } = new List<int>();
 
         #endregion Public Properties
     }

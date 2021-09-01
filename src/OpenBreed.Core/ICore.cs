@@ -24,7 +24,7 @@ namespace OpenBreed.Core
         /// <summary>
         /// Jobs manager
         /// </summary>
-        JobMan Jobs { get; }
+        JobsMan Jobs { get; }
 
         /// <summary>
         /// Commands manager

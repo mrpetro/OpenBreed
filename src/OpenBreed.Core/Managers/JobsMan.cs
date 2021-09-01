@@ -7,7 +7,7 @@ namespace OpenBreed.Core.Managers
     /// <summary>
     /// Job manager class
     /// </summary>
-    public class JobMan
+    public class JobsMan : IJobsMan
     {
         #region Private Fields
 
@@ -22,19 +22,13 @@ namespace OpenBreed.Core.Managers
         /// Constructor which requires core object
         /// </summary>
         /// <param name="core">Reference to Core object</param>
-        public JobMan(ICore core)
+        public JobsMan()
         {
-            Core = core;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        /// <summary>
-        /// Reference to Core object
-        /// </summary>
-        public ICore Core { get; }
 
         #endregion Public Properties
 

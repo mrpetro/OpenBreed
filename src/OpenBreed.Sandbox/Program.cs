@@ -121,7 +121,7 @@ namespace OpenBreed.Sandbox
             manCollection.SetupDataLoaderFactory();
 
             manCollection.SetupUnknownMapCellDisplaySystem();
-
+            manCollection.SetupGroupMapCellDisplaySystem();
             //manCollection.SetupAudioSystems();
 
             //manCollection.SetupGameScriptingApi();
@@ -169,6 +169,13 @@ namespace OpenBreed.Sandbox
                                                                                   manCollection.GetManager<IEntityMan>(),
                                                                                   manCollection.GetManager<ViewportCreator>()));
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(core));
+            manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IWorldMan>(),
+                                                                                manCollection.GetManager<IEntityMan>(),
+                                                                                manCollection.GetManager<IEntityFactory>(),
+                                                                                manCollection.GetManager<ICommandsMan>(),
+                                                                                manCollection.GetManager<IEventsMan>(),
+                                                                                manCollection.GetManager<ICollisionMan>(),
+                                                                                manCollection.GetManager<JobsMan>()));
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
             manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core, manCollection.GetManager<ICommandsMan>(),
                                                                                 manCollection.GetManager<MapCellHelper>()));
@@ -237,7 +244,7 @@ namespace OpenBreed.Sandbox
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
 
-            Jobs = new JobMan(this);
+            Jobs = new JobsMan();
         }
 
         #endregion Public Constructors
@@ -255,7 +262,7 @@ namespace OpenBreed.Sandbox
 
         public IEntityMan Entities { get; }
 
-        public override JobMan Jobs { get; }
+        public override JobsMan Jobs { get; }
 
         public IInputsMan Inputs { get; }
 
@@ -438,12 +445,12 @@ namespace OpenBreed.Sandbox
             var doorHelper = GetManager<DoorHelper>();
             var projectileHelper = GetManager<ProjectileHelper>();
             var actorHelper = GetManager<ActorHelper>();
-
+            var teleportHelper = GetManager<TeleportHelper>();
 
             ColliderTypes.Initialize(GetManager<ICollisionMan>());
             actorHelper.RegisterCollisionPairs();
             worldGateHelper.RegisterCollisionPairs();
-            //TeleportHelper.RegisterCollisionPairs(this);
+            teleportHelper.RegisterCollisionPairs();
             projectileHelper.RegisterCollisionPairs();
 
             CameraHelper.CreateAnimations(this);

@@ -71,6 +71,7 @@
     <Compile Include="EquipmentComponent.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="FollowerComponent.cs" />
+    <Compile Include="GroupComponentEx.cs" />
     <Compile Include="GroupComponent.cs" />
     <Compile Include="IControlComponent.cs" />
     <Compile Include="InventoryComponent.cs" />

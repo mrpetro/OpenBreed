@@ -107,7 +107,7 @@ namespace OpenBreed.Sandbox.Worlds
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            var teleportEntry = TeleportHelper.AddTeleportEntry(core, world, x, y, pairCode);
+            var teleportEntry = core.GetManager<TeleportHelper>().AddTeleportEntry(world, x, y, pairCode);
             core.Commands.Post(new TileSetCommand(teleportEntry.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
@@ -149,7 +149,7 @@ namespace OpenBreed.Sandbox.Worlds
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            var teleportEntity = TeleportHelper.AddTeleportExit(core, world, x, y, pairCode);
+            var teleportEntity = core.GetManager<TeleportHelper>().AddTeleportExit(world, x, y, pairCode);
             core.Commands.Post(new TileSetCommand(teleportEntity.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
