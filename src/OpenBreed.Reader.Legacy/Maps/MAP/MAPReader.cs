@@ -182,9 +182,6 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
             var gfxLayerBuilder = layout.AddLayer(MapLayerType.Gfx);
             var actionLayerBuilder = layout.AddLayer(MapLayerType.Action);
 
-
-            //var bodyBlock = new MapBodyBlock(tilesNo);
-
             for (int i = 0; i < tilesNo; i++)
             {
                 UInt16 data = binReader.ReadUInt16();
@@ -205,8 +202,10 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
                 var x = i % sizeX;
                 var y = i / sizeX;
 
-                gfxLayerBuilder.SetValue(x, y, gfxId);
-                actionLayerBuilder.SetValue(x, y, actionId);
+                //Flipping map Y coordinates
+
+                gfxLayerBuilder.SetValue(x, sizeY - y - 1, gfxId);
+                actionLayerBuilder.SetValue(x, sizeY - y - 1, actionId);
 
                 //bodyBlock.Cells[i].GfxId = gfxId;
                 //bodyBlock.Cells[i].ActionId = actionId;

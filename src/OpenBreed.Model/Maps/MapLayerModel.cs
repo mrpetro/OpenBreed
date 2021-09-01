@@ -6,18 +6,15 @@ namespace OpenBreed.Model.Maps
 {
     public class MapLayerModel
     {
+        #region Public Fields
+
+        public const int UNSET_CELL = -1;
+
+        #endregion Public Fields
+
         #region Private Fields
 
         private readonly int[] cellValues;
-
-        public MapLayerType LayerType { get; }
-        public int Width { get; }
-        public int Height { get; }
-
-        /// <summary>
-        /// NOTE: Editor specific property
-        /// </summary>
-        public bool IsVisible { get; set; }
 
         #endregion Private Fields
 
@@ -32,22 +29,22 @@ namespace OpenBreed.Model.Maps
             IsVisible = true;
         }
 
-        /// <summary>
-        /// TODO: Move this out
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        private int Clamp(int value, int min, int max)
-        {
-            if (value < min)
-                value = min;
-            else if (value > max)
-                value = max;
+        #endregion Internal Constructors
 
-            return value;
-        }
+        #region Public Properties
+
+        public MapLayerType LayerType { get; }
+        public int Width { get; }
+        public int Height { get; }
+
+        /// <summary>
+        /// NOTE: Editor specific property
+        /// </summary>
+        public bool IsVisible { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public void GetClipIndices(RectangleF viewRect, out int xFrom, out int yFrom, out int xTo, out int yTo)
         {
@@ -66,10 +63,6 @@ namespace OpenBreed.Model.Maps
             xTo = Clamp(xTo, 0, Width - 1);
             yTo = Clamp(yTo, 0, Height - 1);
         }
-
-        #endregion Internal Constructors
-
-        #region Public Methods
 
         /// <summary>
         /// Get Layer cell using single index
@@ -112,5 +105,26 @@ namespace OpenBreed.Model.Maps
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        /// <summary>
+        /// TODO: Move this out
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        private int Clamp(int value, int min, int max)
+        {
+            if (value < min)
+                value = min;
+            else if (value > max)
+                value = max;
+
+            return value;
+        }
+
+        #endregion Private Methods
     }
 }

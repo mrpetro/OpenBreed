@@ -9,6 +9,7 @@ namespace OpenBreed.Model.Maps
     public enum MapLayerType
     {
         Gfx,
-        Action
+        Action,
+        Group
     }
 }
