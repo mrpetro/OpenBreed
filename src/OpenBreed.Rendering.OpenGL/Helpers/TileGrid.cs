@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.OpenGL.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,16 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
     internal class TileGrid : ITileGrid
     {
         #region Public Constructors
+
+        public TileGrid(TileGridBuilder builder)
+        {
+            Width = builder.Width;
+            Height = builder.Height;
+            LayersNo = builder.LayersNo;
+            Cells = builder.CreateTileArray();
+            CellSize = builder.CellSize;
+            CellBordersVisible = builder.CellBordersVisible;
+        }
 
         public TileGrid(int width, int height, int layersNo, int cellSize)
         {

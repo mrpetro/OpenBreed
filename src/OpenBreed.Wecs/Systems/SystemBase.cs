@@ -14,6 +14,7 @@ namespace OpenBreed.Wecs.Systems
         #region Private Fields
 
         private readonly List<Entity> toAdd = new List<Entity>();
+
         private readonly List<Entity> toRemove = new List<Entity>();
 
         private readonly List<Type> requiredComponentTypes = new List<Type>();
@@ -24,12 +25,21 @@ namespace OpenBreed.Wecs.Systems
 
         #endregion Private Fields
 
+        #region Protected Constructors
+
+        protected SystemBase()
+        {
+            WorldId = World.NO_WORLD;
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
 
         /// <summary>
-        /// World which owns this system
+        /// ID of world which owns this system
         /// </summary>
-        public World World { get; private set; }
+        public int WorldId { get; private set; }
 
         /// <summary>
         /// Id of the phase in which system will be updated
@@ -46,10 +56,10 @@ namespace OpenBreed.Wecs.Systems
         /// <param name="world">World that this system is initialized on</param>
         public virtual void Initialize(World world)
         {
-            if (World != null)
+            if (WorldId != World.NO_WORLD)
                 throw new InvalidOperationException("World sytem already initialized.");
 
-            World = world;
+            WorldId = world.Id;
         }
 
         /// <summary>
@@ -57,10 +67,10 @@ namespace OpenBreed.Wecs.Systems
         /// </summary>
         public virtual void Deinitialize()
         {
-            if (World == null)
+            if (WorldId == World.NO_WORLD)
                 throw new InvalidOperationException("World sytem already deinitialized.");
 
-            World = null;
+            WorldId = World.NO_WORLD;
         }
 
         public bool Matches(Entity entity)
@@ -82,11 +92,6 @@ namespace OpenBreed.Wecs.Systems
         public void RemoveEntity(Entity entity)
         {
             toRemove.Add(entity);
-        }
-
-        protected void RegisterHandler<TCommand>(Func<TCommand, bool> cmdHandler) where TCommand : IEntityCommand
-        {
-            handlers.Add(typeof(TCommand), cmdHandler);
         }
 
         public virtual bool EnqueueCommand(IEntityCommand command)
@@ -124,6 +129,11 @@ namespace OpenBreed.Wecs.Systems
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected void RegisterHandler<TCommand>(Func<TCommand, bool> cmdHandler) where TCommand : IEntityCommand
+        {
+            handlers.Add(typeof(TCommand), cmdHandler);
+        }
 
         protected virtual bool DenqueueCommand(IEntityCommand entityCommand)
         {

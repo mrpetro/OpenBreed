@@ -55,6 +55,9 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         public ITileAtlasBuilder SetTileSize(int size)
         {
+            if (size <= 0)
+                throw new InvalidOperationException("TileSize must be set to greater than zero.");
+
             TileSize = size;
             return this;
         }

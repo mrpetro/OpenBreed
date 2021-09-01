@@ -168,9 +168,10 @@ namespace OpenBreed.Wecs.Worlds
 
         public void RegisterWorld(World newWorld)
         {
-            newWorld.InitializeSystems();
             newWorld.Id = worlds.Add(newWorld);
             namesToIds.Add(newWorld.Name, newWorld.Id);
+
+            newWorld.InitializeSystems();
             toInitialize.Add(newWorld);
         }
 

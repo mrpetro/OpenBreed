@@ -16,6 +16,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
         internal Vector2 pos;
         internal int atlasId;
         internal int tileId;
+        internal int groupId;
 
         #endregion Internal Fields
 
@@ -69,10 +70,17 @@ namespace OpenBreed.Sandbox.Entities.Builders
             this.tileId = tileId;
         }
 
+        internal void SetGroupId(int groupId)
+        {
+            this.groupId = groupId;
+        }
+
+
         public override Entity Build()
         {
             var entity = entityMan.Create();
             entity.Add(PositionComponent.Create(pos));
+            entity.Add(new GroupComponentEx(groupId));
 
             if (HasBody)
             {

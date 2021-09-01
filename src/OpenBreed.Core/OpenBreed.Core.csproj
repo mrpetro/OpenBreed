@@ -97,8 +97,9 @@
     <Compile Include="Managers\CommandsMan.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="JobChain.cs" />
+    <Compile Include="Managers\IJobsMan.cs" />
     <Compile Include="Managers\IMessagesMan.cs" />
-    <Compile Include="Managers\JobMan.cs" />
+    <Compile Include="Managers\JobsMan.cs" />
     <Compile Include="Managers\EventQueue.cs" />
     <Compile Include="Managers\MessagesMan.cs" />
     <Compile Include="MathTools.cs" />

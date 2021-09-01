@@ -141,7 +141,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Add entity to next world
             jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(worldMan, eventsMan, (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Id == worldId; }, () => AddToWorld(heroEntity, worldId)));
             //Set position of entity to entry position in next world
-            jobChain.Equeue(new EntityJob<EntityAddedEventArgs>(heroEntity, () => SetPosition(heroEntity, entryId, true)));
+            jobChain.Equeue(new EntityJob(() => SetPosition(heroEntity, entryId, true)));
             //Unpause this world
             //jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
             //Fade in camera
