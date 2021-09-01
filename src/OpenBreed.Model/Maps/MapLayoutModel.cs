@@ -61,6 +61,48 @@ namespace OpenBreed.Model.Maps
             return new Point(x, y);
         }
 
+        public IEnumerable<(int X, int Y)> FindCellsWithValue(int layerIndex, int value)
+        {
+            for (int iy = 0; iy < Height; iy++)
+            {
+                for (int ix = 0; ix < Width; ix++)
+                {
+                    var cellValue = GetCellValue(layerIndex, ix,  iy);
+
+                    if (cellValue == value)
+                        yield return (ix, iy);
+                }
+            }
+        }
+
+        public IEnumerable<(int X, int Y)> FindNeighbourCellsWithValue(int x, int y, int layerIndex, int value)
+        {
+
+
+            for (int iy = 0; iy < Height; iy++)
+            {
+                for (int ix = 0; ix < Width; ix++)
+                {
+                    var cellValue = GetCellValue(layerIndex, ix, iy);
+
+                    if (cellValue == value)
+                        yield return (ix, iy);
+                }
+            }
+        }
+
+        public int GetCellValue(int layerIndex, int x, int y)
+        {
+            if (x > Width)
+                throw new ArgumentOutOfRangeException(nameof(x), x, $"Expecting 0 <= x < {Width}");
+            if (y > Height)
+                throw new ArgumentOutOfRangeException(nameof(y), y, $"Expecting 0 <= y < {Height}");
+
+            var valueIndex = y * Width + x;
+
+            return Layers[layerIndex].GetCellValue(valueIndex);
+        }
+
         public int[] GetCellValues(int x, int y)
         {
             if (x > Width)

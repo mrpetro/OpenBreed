@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Model.Maps
 {
@@ -52,6 +53,14 @@ namespace OpenBreed.Model.Maps
 
         public MapLayoutModel Build()
         {
+            var groupLayerBuilder = AddLayer(MapLayerType.Group);
+
+
+            var actionLayer = Layers.First(item => item.LayerType == MapLayerType.Action);
+
+            groupLayerBuilder.GenerateGroups(actionLayer);
+
+
             return new MapLayoutModel(this);
         }
 
