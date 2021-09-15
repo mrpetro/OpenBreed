@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Core.Managers;
+using OpenTK;
 
 namespace OpenBreed.Sandbox.Jobs
 {
-    public class CursorCoordsTextUpdateJob : IJob
+    public class JohnPositionTextUpdateJob : IJob
     {
         private readonly ICore core;
         #region Private Fields
@@ -24,7 +25,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         #region Public Constructors
 
-        public CursorCoordsTextUpdateJob(ICore core, Entity entity)
+        public JohnPositionTextUpdateJob(ICore core, Entity entity)
         {
             this.core = core;
             this.entity = entity;
@@ -46,14 +47,18 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            var cursorEntity = core.GetManager<IEntityMan>().GetByTag("MouseCursor").FirstOrDefault();
+            var johnEntity = core.GetManager<IEntityMan>().GetByTag("John").FirstOrDefault();
 
-            if (cursorEntity == null)
+            if (johnEntity == null)
                 return;
 
-            var cursorPos = cursorEntity.Get<PositionComponent>();
+            var playerPos = johnEntity.Get<PositionComponent>();
 
-            core.GetManager<ICommandsMan>().Post(new TextSetCommand(entity.Id, 0, $"Cursor: ({cursorPos.Value.X.ToString("0.00", CultureInfo.InvariantCulture)},{cursorPos.Value.Y.ToString("0.00", CultureInfo.InvariantCulture)})"));
+            var pos = playerPos.Value;
+            var indexPosX = (int)pos.X / 16;
+            var indexPosY = (int)pos.Y / 16;
+
+            core.GetManager<ICommandsMan>().Post(new TextSetCommand(entity.Id, 0, $"Player Pos: ({pos.X.ToString("0.00", CultureInfo.InvariantCulture)},{pos.Y.ToString("0.00", CultureInfo.InvariantCulture)}) ({indexPosX}, {indexPosY})"));
         }
 
         public void Dispose()

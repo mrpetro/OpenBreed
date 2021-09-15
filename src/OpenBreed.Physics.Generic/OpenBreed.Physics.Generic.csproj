@@ -74,10 +74,13 @@
   <ItemGroup>
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\ColliderType.cs" />
+    <Compile Include="Managers\BroadphaseGrid.cs" />
+    <Compile Include="Managers\BroadphaseMan.cs" />
     <Compile Include="Managers\CollisionMan.cs" />
     <Compile Include="Managers\FixtureMan.cs" />
     <Compile Include="Managers\ShapeMan.cs" />
     <Compile Include="Helpers\MaterialTable.cs" />
+    <Compile Include="Shapes\PointShape.cs" />
     <Compile Include="Shapes\BoxShape.cs" />
     <Compile Include="Shapes\CircleShape.cs" />
     <Compile Include="Shapes\PolygonShape.cs" />

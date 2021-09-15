@@ -90,8 +90,9 @@ namespace OpenBreed.Sandbox
 
         public ProgramFactory()
         {
-            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(800, 600, "OpenBreed"));
+            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(640 , 480, "OpenBreed"));
 
+            manCollection.SetupBuilderFactory();
             manCollection.SetupVariableManager();
             manCollection.SetupABFormats();
             manCollection.SetupAnimationManagers();
@@ -159,10 +160,7 @@ namespace OpenBreed.Sandbox
                                                                                             manCollection.GetManager<IEntityMan>(),
                                                                                         manCollection.GetManager<ISystemFactory>(),
                                                                                             manCollection.GetManager<IWorldMan>(),
-                                                                                            manCollection.GetManager<IRenderingMan>(),
-                                                                                            manCollection.GetManager<IEventsMan>(),
-                                                                                            manCollection.GetManager<ILogger>(),
-                                                                                            manCollection.GetManager<ViewportCreator>()));
+                                                                                            manCollection.GetManager<ILogger>()));
 
             manCollection.AddSingleton<WorldGateHelper>(() => new WorldGateHelper(core,
                                                                                   manCollection.GetManager<IWorldMan>(),
@@ -175,7 +173,8 @@ namespace OpenBreed.Sandbox
                                                                                 manCollection.GetManager<ICommandsMan>(),
                                                                                 manCollection.GetManager<IEventsMan>(),
                                                                                 manCollection.GetManager<ICollisionMan>(),
-                                                                                manCollection.GetManager<JobsMan>()));
+                                                                                manCollection.GetManager<IBuilderFactory>(),
+                                                                                manCollection.GetManager<IJobsMan>()));
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
             manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core, manCollection.GetManager<ICommandsMan>(),
                                                                                 manCollection.GetManager<MapCellHelper>()));
@@ -234,6 +233,7 @@ namespace OpenBreed.Sandbox
 
             Players = manCollection.GetManager<IPlayersMan>();
             Worlds = manCollection.GetManager<IWorldMan>();
+            Jobs = manCollection.GetManager<IJobsMan>();
             EntityFactory = manCollection.GetManager<IEntityFactory>();
 
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -243,8 +243,6 @@ namespace OpenBreed.Sandbox
 
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
-
-            Jobs = new JobsMan();
         }
 
         #endregion Public Constructors
@@ -262,7 +260,7 @@ namespace OpenBreed.Sandbox
 
         public IEntityMan Entities { get; }
 
-        public override JobsMan Jobs { get; }
+        public IJobsMan Jobs { get; }
 
         public IInputsMan Inputs { get; }
 
@@ -529,6 +527,7 @@ namespace OpenBreed.Sandbox
         {
             var shapeMan = GetManager<IShapeMan>();
 
+            shapeMan.Register("Shapes/Point_14_14", new PointShape(14, 14));
             shapeMan.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
             shapeMan.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
             shapeMan.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
@@ -542,15 +541,16 @@ namespace OpenBreed.Sandbox
             var shapeMan = GetManager<IShapeMan>();
             var fixtureMan = GetManager<IFixtureMan>();
 
-            fixtureMan.Create("Fixtures/GridCell", "Trigger", shapeMan.GetByTag("Shapes/Box_0_0_16_16"));
-            fixtureMan.Create("Fixtures/TeleportEntry", "Trigger", shapeMan.GetByTag("Shapes/Box_16_16_8_8"));
-            fixtureMan.Create("Fixtures/TeleportExit", "Trigger", shapeMan.GetByTag("Shapes/Box_16_16_8_8"));
-            fixtureMan.Create("Fixtures/Projectile", "Dynamic", shapeMan.GetByTag("Shapes/Box_0_0_16_16"));
-            fixtureMan.Create("Fixtures/DoorVertical", "Static", shapeMan.GetByTag("Shapes/Box_0_0_16_32"));
-            fixtureMan.Create("Fixtures/DoorHorizontal", "Static", shapeMan.GetByTag("Shapes/Box_0_0_32_16"));
-            fixtureMan.Create("Fixtures/Arrow", "Dynamic", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
-            fixtureMan.Create("Fixtures/Hero", "Dynamic", shapeMan.GetByTag("Shapes/Box_0_0_28_28"));
-            fixtureMan.Create("Fixtures/Turret", "Static", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
+            fixtureMan.Create("Fixtures/GridCell", shapeMan.GetByTag("Shapes/Box_0_0_16_16"));
+            fixtureMan.Create("Fixtures/TeleportEntry", shapeMan.GetByTag("Shapes/Box_16_16_8_8"));
+            fixtureMan.Create("Fixtures/TeleportExit", shapeMan.GetByTag("Shapes/Box_16_16_8_8"));
+            fixtureMan.Create("Fixtures/Projectile", shapeMan.GetByTag("Shapes/Box_0_0_16_16"));
+            fixtureMan.Create("Fixtures/DoorVertical", shapeMan.GetByTag("Shapes/Box_0_0_16_32"));
+            fixtureMan.Create("Fixtures/DoorHorizontal", shapeMan.GetByTag("Shapes/Box_0_0_32_16"));
+            fixtureMan.Create("Fixtures/Arrow", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
+            fixtureMan.Create("Fixtures/HeroBody", shapeMan.GetByTag("Shapes/Box_0_0_28_28"));
+            fixtureMan.Create("Fixtures/HeroTrigger", shapeMan.GetByTag("Shapes/Point_14_14"));
+            fixtureMan.Create("Fixtures/Turret", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
         }
 
         #endregion Private Methods

@@ -51,7 +51,6 @@ namespace OpenBreed.Game
 
         #region Public Properties
 
-        public override JobsMan Jobs => throw new NotImplementedException();
         public IFsmMan StateMachines => throw new NotImplementedException();
 
         #endregion Public Properties

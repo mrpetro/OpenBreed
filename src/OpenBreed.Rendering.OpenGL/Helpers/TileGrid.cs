@@ -8,19 +8,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
-    internal class TileGrid : ITileGrid
+    internal class TileGrid
     {
         #region Public Constructors
-
-        public TileGrid(TileGridBuilder builder)
-        {
-            Width = builder.Width;
-            Height = builder.Height;
-            LayersNo = builder.LayersNo;
-            Cells = builder.CreateTileArray();
-            CellSize = builder.CellSize;
-            CellBordersVisible = builder.CellBordersVisible;
-        }
 
         public TileGrid(int width, int height, int layersNo, int cellSize)
         {

@@ -75,7 +75,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var world = builder.Build(core);
 
-            var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 32, 32, viewClient.ClientRectangle.Width - 64, viewClient.ClientRectangle.Height - 64, GAME_VIEWPORT);
+            var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, GAME_VIEWPORT);
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
@@ -108,7 +108,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void ResizeGameViewport(Entity viewport, ClientResizedEventArgs args)
         {
-            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width - 64, args.Height - 64));
+            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
         }
 
         private void ResizeHudViewport(Entity viewport, ClientResizedEventArgs args)

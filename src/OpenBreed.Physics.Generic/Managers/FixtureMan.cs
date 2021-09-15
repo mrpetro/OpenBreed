@@ -29,7 +29,7 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #region Public Methods
 
-        public IFixture Create(string alias, string type, IShape shape)
+        public IFixture Create(string alias, IShape shape)
         {
             Fixture result;
             if (aliases.TryGetValue(alias, out result))

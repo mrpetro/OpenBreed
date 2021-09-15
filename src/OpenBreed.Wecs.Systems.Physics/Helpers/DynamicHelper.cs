@@ -9,8 +9,17 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics.Helpers
 {
-    public static class DynamicHelper
+    public class DynamicHelper
     {
+        private readonly PhysicsSystem system;
+        private readonly IEntityMan entityMan;
+
+        internal DynamicHelper(PhysicsSystem system, IEntityMan entityMan)
+        {
+            this.system = system;
+            this.entityMan = entityMan;
+        }
+
         #region Private Fields
 
         /// <summary>
@@ -25,15 +34,15 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
 
         #region Internal Methods
 
-        internal static bool TestVsDynamic(PhysicsSystem system, DynamicPack bodyA, DynamicPack bodyB, float dt, out Vector2 projection)
+        internal bool TestVsDynamic(DynamicPack bodyA, DynamicPack bodyB, float dt, out Vector2 projection)
         {
             if (bodyA.Body.Fixtures.Count > 0)
             {
-                var fixtureA = system.Fixtures.GetById(bodyA.Body.Fixtures.First());
+                var fixtureA = system.GetFixture(bodyA.Body.Fixtures.First());
 
                 if (bodyB.Body.Fixtures != null && bodyB.Body.Fixtures.Count > 0)
                 {
-                    var fixtureB = system.Fixtures.GetById(bodyB.Body.Fixtures.First());
+                    var fixtureB = system.GetFixture(bodyB.Body.Fixtures.First());
                     return CollisionChecker.Check(bodyA.Position.Value, fixtureA, bodyB.Position.Value, fixtureB, out projection);
                 }
                 else
@@ -43,16 +52,19 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
                 throw new NotImplementedException();
         }
 
-        internal static bool TestVsStatic(PhysicsSystem system, DynamicPack bodyA, StaticPack bodyB, float dt, out Vector2 projection)
+        internal bool TestVsStatic(DynamicPack entityA, Entity entityB, float dt, out Vector2 projection)
         {
-            if (bodyA.Body.Fixtures.Count > 0)
+            if (entityA.Body.Fixtures.Count > 0)
             {
-                var fixtureA = system.Fixtures.GetById(bodyA.Body.Fixtures.First());
+                var fixtureA = system.GetFixture(entityA.Body.Fixtures.First());
 
-                if (bodyB.Body.Fixtures != null && bodyB.Body.Fixtures.Count > 0)
+                var bodyB = entityB.Get<BodyComponent>();
+                var posB = entityB.Get<PositionComponent>();
+
+                if (bodyB.Fixtures != null && bodyB.Fixtures.Count > 0)
                 {
-                    var fixtureB = system.Fixtures.GetById(bodyB.Body.Fixtures.First());
-                    return CollisionChecker.Check(bodyA.Position.Value, fixtureA, bodyB.Position.Value, fixtureB, out projection);
+                    var fixtureB = system.GetFixture(bodyB.Fixtures.First());
+                    return CollisionChecker.Check(entityA.Position.Value, fixtureA, posB.Value, fixtureB, out projection);
                 }
                 else
                     throw new NotImplementedException();

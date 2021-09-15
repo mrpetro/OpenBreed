@@ -122,7 +122,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Fade in camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
 
-            core.Jobs.Execute(jobChain);
+            core.GetManager<IJobsMan>().Execute(jobChain);
         }
 
         public void ExecuteHeroEnter(Entity heroEntity, int worldId, int entryId)
@@ -147,7 +147,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Fade in camera
             //jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
 
-            core.Jobs.Execute(jobChain);
+            core.GetManager<IJobsMan>().Execute(jobChain);
         }
 
         private void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
@@ -233,8 +233,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             if (world == null)
             {
-                using (var reader = new TxtFileWorldReader(core, worldMan, entityMan, viewportCreator, $".\\Content\\Maps\\{worldName}.txt"))
-                    world = reader.GetWorld();
+
             }
         }
 

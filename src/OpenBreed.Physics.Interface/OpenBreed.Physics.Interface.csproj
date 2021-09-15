@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="IPhysicalBody.cs" />
     <Compile Include="IPhysicalWorld.cs" />
+    <Compile Include="Managers\IBroadphaseMan.cs" />
     <Compile Include="Managers\ICollisionMan.cs" />
     <Compile Include="IFixture.cs" />
     <Compile Include="Managers\IFixtureMan.cs" />

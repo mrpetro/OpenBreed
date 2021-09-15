@@ -58,15 +58,15 @@ namespace OpenBreed.Wecs.Components.Animation
     {
         #region Private Fields
 
-        private readonly IManagerCollection managerCollection;
+        private readonly IBuilderFactory builderFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AnimationComponentFactory(IManagerCollection managerCollection)
+        public AnimationComponentFactory(IBuilderFactory builderFactory)
         {
-            this.managerCollection = managerCollection;
+            this.builderFactory = builderFactory;
         }
 
         #endregion Public Constructors
@@ -75,7 +75,7 @@ namespace OpenBreed.Wecs.Components.Animation
 
         protected override IEntityComponent Create(IAnimationComponentTemplate template)
         {
-            var builder = managerCollection.GetManager<AnimationComponentBuilder>();
+            var builder = builderFactory.GetBuilder<AnimationComponentBuilder>();
 
             foreach (var stateTemplate in template.States)
             {
@@ -91,7 +91,7 @@ namespace OpenBreed.Wecs.Components.Animation
         #endregion Protected Methods
     }
 
-    public class AnimationComponentBuilder
+    public class AnimationComponentBuilder : IBuilder<AnimationComponent>
     {
         #region Internal Fields
 

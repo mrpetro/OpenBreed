@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Actor;
+using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Wecs.Worlds;
 
@@ -32,14 +33,14 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             var entryId = -1;
 
             if (actionValue == 56)
                 entryId = 0;
 
-            worldGateHelper.AddWorldEntry(world, ix, iy, entryId);
+            worldGateHelper.AddWorldEntry(world, ix + 15, iy + 68, entryId);
 
             //actorHelper.AddHero(world, ix, iy);
         }

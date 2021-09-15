@@ -66,15 +66,15 @@ namespace OpenBreed.Wecs.Components.Rendering
     {
         #region Private Fields
 
-        private readonly IManagerCollection managerCollection;
+        private readonly IBuilderFactory builderFactory;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal SpriteComponentFactory(IManagerCollection managerCollection)
+        internal SpriteComponentFactory(IBuilderFactory builderFactory)
         {
-            this.managerCollection = managerCollection;
+            this.builderFactory = builderFactory;
         }
 
         #endregion Internal Constructors
@@ -83,7 +83,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         protected override IEntityComponent Create(ISpriteComponentTemplate template)
         {
-            var builder = managerCollection.GetManager<SpriteComponentBuilder>();
+            var builder = builderFactory.GetBuilder<SpriteComponentBuilder>();
             builder.SetAtlasByName(template.AtlasName);
             builder.SetImageId(template.ImageIndex);
             builder.SetOrigin(template.Origin);
@@ -94,7 +94,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Protected Methods
     }
 
-    public class SpriteComponentBuilder
+    public class SpriteComponentBuilder : IBuilder<SpriteComponent>
     {
         #region Private Fields
 

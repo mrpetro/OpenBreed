@@ -21,7 +21,7 @@ namespace OpenBreed.Core
 
             manCollection.AddSingleton<IEventsMan>(() => new EventsMan());
 
-            manCollection.AddSingleton<JobsMan>(() => new JobsMan());
+            manCollection.AddSingleton<IJobsMan>(() => new JobsMan());
 
             manCollection.AddSingleton<IEventQueue>(() => new EventQueue(manCollection.GetManager<ILogger>()));
 

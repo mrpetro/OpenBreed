@@ -31,6 +31,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private readonly ITileGridMan tileGridMan;
         private readonly IStampMan stampMan;
         public int MAX_TILES_COUNT = 1024 * 1024;
+        private readonly int gridId;
 
         #endregion Public Fields
 
@@ -51,9 +52,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
             Require<TileComponent>();
             Require<PositionComponent>();
 
-
             RegisterHandler<TileSetCommand>(HandleTileSetCommand);
             RegisterHandler<PutStampCommand>(HandlePutStampCommand);
+
+            gridId = tileGridMan.CreateGrid(128, 128, 1, 16);
         }
 
         #endregion Public Constructors

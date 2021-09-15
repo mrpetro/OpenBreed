@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
@@ -20,53 +19,46 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         private const int CELL_SIZE = 16;
 
+        private readonly int gridId;
+
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
-        private readonly List<StaticPack> inactiveStatics = new List<StaticPack>();
+        private readonly List<int> inactiveStatics = new List<int>();
         private readonly IEntityMan entityMan;
-        private List<StaticPack>[] gridStatics;
+        private readonly IBroadphaseMan broadphaseMan;
+        private readonly IFixtureMan fixtureMan;
+        private readonly ICollisionMan collisionMan;
+        private readonly DynamicHelper dynamicHelper;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal PhysicsSystem(IEntityMan entityMan, IFixtureMan fixtureMan, ICollisionMan collisionMan)
+        internal PhysicsSystem(IEntityMan entityMan, IFixtureMan fixtureMan, ICollisionMan collisionMan, IBroadphaseMan broadphaseMan)
         {
-            Fixtures = fixtureMan;
-            Collisions = collisionMan;
             this.entityMan = entityMan;
+            this.fixtureMan = fixtureMan;
+            this.collisionMan = collisionMan;
+            this.broadphaseMan = broadphaseMan;
+            this.dynamicHelper = new DynamicHelper(this, entityMan);
 
             Require<BodyComponent>();
             RegisterHandler<BodyOnCommand>(HandleBodyOnCommand);
             RegisterHandler<BodyOffCommand>(HandleBodyOffCommand);
 
-            //TODO: This must not be a constant
-            GridWidth = 128;
-            GridHeight = 128;
-
-            InitializeGrid();
+            gridId = broadphaseMan.CreateGrid(128, 128, 16);
         }
 
         #endregion Internal Constructors
 
-        #region Public Properties
-
-        public IFixtureMan Fixtures { get; }
-        public ICollisionMan Collisions { get; }
-        public int GridWidth { get; }
-
-        public int GridHeight { get; }
-
-        #endregion Public Properties
-
         #region Public Methods
 
-        public static Vector2 GetTileCenter(PositionComponent pos)
+        public static Vector2 GetCellCenter(PositionComponent pos)
         {
             return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
 
-        public static Box2 GetTileBox(PositionComponent pos)
+        public static Box2 GetCellBox(PositionComponent pos)
         {
             var bx = pos.Value.X;
             var by = pos.Value.Y;
@@ -88,23 +80,16 @@ namespace OpenBreed.Wecs.Systems.Physics
             SweepAndPrune(dt);
         }
 
-        public bool TryGetGridIndices(Vector2 point, out int xIndex, out int yIndex)
-        {
-            xIndex = (int)point.X / CELL_SIZE;
-            yIndex = (int)point.Y / CELL_SIZE;
-            if (xIndex < 0)
-                return false;
-            if (yIndex < 0)
-                return false;
-            if (xIndex >= GridWidth)
-                return false;
-            if (yIndex >= GridHeight)
-                return false;
+        #endregion Public Methods
 
-            return true;
+        #region Internal Methods
+
+        internal IFixture GetFixture(int fixtureId)
+        {
+            return fixtureMan.GetById(fixtureId);
         }
 
-        #endregion Public Methods
+        #endregion Internal Methods
 
         #region Protected Methods
 
@@ -148,11 +133,10 @@ namespace OpenBreed.Wecs.Systems.Physics
                 return true;
             }
 
-            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
-            if (staticToActivate != null)
+            if (inactiveStatics.Contains(cmd.EntityId))
             {
-                InsertToGrid(staticToActivate);
-                inactiveStatics.Remove(staticToActivate);
+                InsertToGrid(entity);
+                inactiveStatics.Remove(cmd.EntityId);
                 entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
@@ -175,21 +159,15 @@ namespace OpenBreed.Wecs.Systems.Physics
                 return true;
             }
 
-            var staticToDeactivate = RemoveFromGrid(entity);
-
-            if (staticToDeactivate != null)
-            {
-                inactiveStatics.Add(staticToDeactivate);
-                entity.RaiseEvent(new BodyOffEventArgs(entity));
-                return true;
-            }
-
-            return false;
+            RemoveFromGrid(entity);
+            inactiveStatics.Add(entity.Id);
+            entity.RaiseEvent(new BodyOffEventArgs(entity));
+            return true;
         }
 
         private void UpdateAabb(BodyComponent body, PositionComponent pos)
         {
-            var fixture = Fixtures.GetById(body.Fixtures.First());
+            var fixture = fixtureMan.GetById(body.Fixtures.First());
             body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
         }
 
@@ -247,12 +225,12 @@ namespace OpenBreed.Wecs.Systems.Physics
         private void TestNarrowPhaseDynamic(DynamicPack packA, DynamicPack packB, float dt)
         {
             Vector2 projection;
-            if (DynamicHelper.TestVsDynamic(this, packA, packB, dt, out projection))
+            if (dynamicHelper.TestVsDynamic(packA, packB, dt, out projection))
             {
                 var entityA = entityMan.GetById(packA.EntityId);
                 var entityB = entityMan.GetById(packB.EntityId);
 
-                Collisions.Callback(entityA, entityB, projection);
+                collisionMan.Callback(entityA, entityB, projection);
 
                 //bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
                 //bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
@@ -260,84 +238,36 @@ namespace OpenBreed.Wecs.Systems.Physics
             }
         }
 
-        private void TestNarrowPhaseStatic(DynamicPack packA, StaticPack packB, float dt)
+        private void TestNarrowPhaseStatic(DynamicPack packA, Entity entityB, float dt)
         {
+            var entityA = entityMan.GetById(packA.EntityId);
+
             Vector2 projection;
-            if (DynamicHelper.TestVsStatic(this, packA, packB, dt, out projection))
+            if (dynamicHelper.TestVsStatic(packA, entityB, dt, out projection))
             {
-                var entityA = entityMan.GetById(packA.EntityId);
-                var entityB = entityMan.GetById(packB.EntityId);
-
-                Collisions.Callback(entityA, entityB, projection);
-                Collisions.Callback(entityB, entityA, -projection);
+                collisionMan.Callback(entityA, entityB, projection);
+                collisionMan.Callback(entityB, entityA, -projection);
             }
-        }
-
-        private void GetAabbIndices(Box2 aabb, out int left, out int right, out int bottom, out int top)
-        {
-            int xMod = (int)aabb.Right % CELL_SIZE;
-            int yMod = (int)aabb.Top % CELL_SIZE;
-
-            left = (int)aabb.Left >> 4;
-            right = (int)aabb.Right >> 4;
-            bottom = (int)aabb.Bottom >> 4;
-            top = (int)aabb.Top >> 4;
-
-            if (xMod > 0)
-                right++;
-
-            if (yMod > 0)
-                top++;
-
-            if (left < 0)
-                left = 0;
-
-            if (bottom < 0)
-                bottom = 0;
-
-            if (right > GridWidth - 1)
-                right = GridWidth - 1;
-
-            if (top > GridHeight - 1)
-                top = GridHeight - 1;
         }
 
         private void QueryStaticGrid(DynamicPack pack, float dt)
         {
             var dynamicAabb = pack.Aabb;
 
-            int leftIndex;
-            int rightIndex;
-            int bottomIndex;
-            int topIndex;
+            var idSet = broadphaseMan.QueryStatic(gridId, dynamicAabb);
 
-            GetAabbIndices(dynamicAabb, out leftIndex, out rightIndex, out bottomIndex, out topIndex);
-
-            //Collect all unique aabb boxes
-            var boxesSet = new List<StaticPack>();
-            for (int yIndex = bottomIndex; yIndex < topIndex; yIndex++)
-            {
-                for (int xIndex = leftIndex; xIndex < rightIndex; xIndex++)
-                {
-                    var collideres = gridStatics[xIndex + GridWidth * yIndex];
-                    for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
-                    {
-                        if (!boxesSet.Contains(collideres[boxIndex]))
-                            boxesSet.Add(collideres[boxIndex]);
-                    }
-                }
-            }
-
-            if (boxesSet.Count == 0)
+            if (idSet.Count == 0)
                 return;
+
+            var entitySet = idSet.Select(id => entityMan.GetById(id)).ToList();
 
             var pos = dynamicAabb.GetCenter();
 
-            boxesSet.Sort((a, b) => ShortestDistanceComparer(pos, GetTileCenter(a.Position), GetTileCenter(b.Position)));
+            entitySet.Sort((a, b) => ShortestDistanceComparer(pos, GetCellCenter(a.Get<PositionComponent>()), GetCellCenter(b.Get<PositionComponent>())));
 
             //Iterate all collected static bodies for detail test
-            foreach (var item in boxesSet)
-                TestNarrowPhaseStatic(pack, item, dt);
+            foreach (var entity in entitySet)
+                TestNarrowPhaseStatic(pack, entity, dt);
         }
 
         private int Xcomparison(DynamicPack x, DynamicPack y)
@@ -366,69 +296,25 @@ namespace OpenBreed.Wecs.Systems.Physics
                 return 1;
         }
 
-        private void InsertToGrid(StaticPack pack)
+        private void InsertToGrid(Entity entity)
         {
-            int xIndex;
-            int yIndex;
+            var pos = entity.Get<PositionComponent>();
+            var body = entity.Get<BodyComponent>();
 
-            if (!TryGetGridIndices(pack.Position.Value, out xIndex, out yIndex))
-                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
+            UpdateAabb(body, pos);
 
-            UpdateAabb(pack.Body, pack.Position);
-
-            var aabb = pack.Aabb;
-
-            int leftIndex;
-            int rightIndex;
-            int bottomIndex;
-            int topIndex;
-
-            GetAabbIndices(aabb, out leftIndex, out rightIndex, out bottomIndex, out topIndex);
-
-            for (int j = bottomIndex; j < topIndex; j++)
-            {
-                var gridIndex = GridWidth * j + leftIndex;
-                for (int i = leftIndex; i < rightIndex; i++)
-                {
-                    gridStatics[gridIndex].Add(pack);
-                    gridIndex++;
-                }
-            }
+            broadphaseMan.InsertStatic(gridId, entity.Id, body.Aabb);
         }
 
-        private StaticPack RemoveFromGrid(Entity entity)
+        private void RemoveFromGrid(Entity entity)
         {
-            StaticPack result = null;
             var aabb = GetAabb(entity);
-
-            int leftIndex;
-            int rightIndex;
-            int bottomIndex;
-            int topIndex;
-
-            GetAabbIndices(aabb, out leftIndex, out rightIndex, out bottomIndex, out topIndex);
-
-            for (int j = bottomIndex; j < topIndex; j++)
-            {
-                var gridIndex = GridWidth * j + leftIndex;
-                for (int i = leftIndex; i < rightIndex; i++)
-                {
-                    result = gridStatics[gridIndex].FirstOrDefault(item => item.EntityId == entity.Id);
-                    gridStatics[gridIndex].Remove(result);
-                    gridIndex++;
-                }
-            }
-
-            return result;
+            broadphaseMan.RemoveStatic(gridId, entity.Id, aabb);
         }
 
         private void RegisterStaticEntity(Entity entity)
         {
-            var pack = new StaticPack(entity.Id,
-                                      entity.Get<BodyComponent>(),
-                                      entity.Get<PositionComponent>());
-
-            InsertToGrid(pack);
+            InsertToGrid(entity);
         }
 
         private void UnregisterStaticEntity(Entity entity)
@@ -458,14 +344,6 @@ namespace OpenBreed.Wecs.Systems.Physics
                 throw new InvalidOperationException("Entity not found in this system.");
 
             activeDynamics.Remove(dynamic);
-        }
-
-        private void InitializeGrid()
-        {
-            gridStatics = new List<StaticPack>[GridWidth * GridHeight];
-
-            for (int i = 0; i < gridStatics.Length; i++)
-                gridStatics[i] = new List<StaticPack>();
         }
 
         #endregion Private Methods

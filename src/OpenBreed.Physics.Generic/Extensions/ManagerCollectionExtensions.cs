@@ -17,6 +17,7 @@ namespace OpenBreed.Physics.Generic.Extensions
             manCollection.AddSingleton<IShapeMan>(() => new ShapeMan(manCollection.GetManager<ILogger>()));
             manCollection.AddSingleton<IFixtureMan>(() => new FixtureMan(manCollection.GetManager<ILogger>()));
             manCollection.AddSingleton<ICollisionMan>(() => new CollisionMan(manCollection.GetManager<ILogger>()));
+            manCollection.AddSingleton<IBroadphaseMan>(() => new BroadphaseMan(manCollection.GetManager<ILogger>()));
         }
     }
 }

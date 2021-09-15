@@ -22,11 +22,6 @@ namespace OpenBreed.Core
         ILogger Logging { get; }
 
         /// <summary>
-        /// Jobs manager
-        /// </summary>
-        JobsMan Jobs { get; }
-
-        /// <summary>
         /// Commands manager
         /// </summary>
         ICommandsMan Commands { get; }

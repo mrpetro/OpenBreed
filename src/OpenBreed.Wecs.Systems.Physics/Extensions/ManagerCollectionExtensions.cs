@@ -19,7 +19,8 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             systemFactory.Register(() => new MovementSystem(manCollection.GetManager<IEntityMan>()));
             systemFactory.Register(() => new PhysicsSystem(manCollection.GetManager<IEntityMan>(),
                                                            manCollection.GetManager<IFixtureMan>(),
-                                                           manCollection.GetManager<ICollisionMan>()));
+                                                           manCollection.GetManager<ICollisionMan>(),
+                                                           manCollection.GetManager<IBroadphaseMan>()));
 
 
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();

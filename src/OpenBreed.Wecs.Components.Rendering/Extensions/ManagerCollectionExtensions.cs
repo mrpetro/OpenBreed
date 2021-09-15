@@ -19,15 +19,18 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
             XmlComponentsList.RegisterComponentType<XmlTextComponent>();
             XmlComponentsList.RegisterComponentType<XmlViewportComponent>();
 
-            manCollection.AddTransient<SpriteComponentBuilder>(() => new SpriteComponentBuilder(manCollection.GetManager<ISpriteMan>()));
-            manCollection.AddTransient<TextComponentBuilder>(() => new TextComponentBuilder(manCollection.GetManager<IFontMan>()));
-            manCollection.AddTransient<CameraComponentBuilder>(() => new CameraComponentBuilder());
-            manCollection.AddTransient<ViewportComponentBuilder>(() => new ViewportComponentBuilder());
+            var builderFactory = manCollection.GetManager<IBuilderFactory>();
 
-            manCollection.AddSingleton<SpriteComponentFactory>(() => new SpriteComponentFactory(manCollection));
-            manCollection.AddSingleton<ViewportComponentFactory>(() => new ViewportComponentFactory(manCollection));
-            manCollection.AddSingleton<TextComponentFactory>(() => new TextComponentFactory(manCollection));
-            manCollection.AddSingleton<CameraComponentFactory>(() => new CameraComponentFactory(manCollection));
+            builderFactory.Register<SpriteComponentBuilder>(() => new SpriteComponentBuilder(manCollection.GetManager<ISpriteMan>()));
+            builderFactory.Register<TextComponentBuilder>(() => new TextComponentBuilder(manCollection.GetManager<IFontMan>()));
+            builderFactory.Register<TileComponentBuilder>(() => new TileComponentBuilder(manCollection.GetManager<ITileMan>()));
+            builderFactory.Register<CameraComponentBuilder>(() => new CameraComponentBuilder());
+            builderFactory.Register<ViewportComponentBuilder>(() => new ViewportComponentBuilder());
+
+            manCollection.AddSingleton<SpriteComponentFactory>(() => new SpriteComponentFactory(manCollection.GetManager<IBuilderFactory>()));
+            manCollection.AddSingleton<ViewportComponentFactory>(() => new ViewportComponentFactory(manCollection.GetManager<IBuilderFactory>()));
+            manCollection.AddSingleton<TextComponentFactory>(() => new TextComponentFactory(manCollection.GetManager<IBuilderFactory>()));
+            manCollection.AddSingleton<CameraComponentFactory>(() => new CameraComponentFactory(manCollection.GetManager<IBuilderFactory>()));
 
             var entityFactory = manCollection.GetManager<IEntityFactory>();
             entityFactory.RegisterComponentFactory<XmlSpriteComponent>(manCollection.GetManager<SpriteComponentFactory>());

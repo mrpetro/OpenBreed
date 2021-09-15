@@ -81,11 +81,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\MapCellHelper.cs" />
-    <Compile Include="Loaders\DoorEntityLoader.cs" />
+    <Compile Include="Loaders\DoorCellEntityLoader.cs" />
     <Compile Include="Loaders\LevelEntryCellLoader.cs" />
+    <Compile Include="Loaders\GenericCellEntityLoader.cs" />
     <Compile Include="Loaders\PaletteDataLoader.cs" />
     <Compile Include="Loaders\SpriteAtlasDataLoader.cs" />
-    <Compile Include="Loaders\TeleportLoader.cs" />
+    <Compile Include="Loaders\TeleportCellEntityLoader.cs" />
     <Compile Include="Loaders\TileStampDataLoader.cs" />
     <Compile Include="MapCellEntityFactory.cs" />
     <Compile Include="Loaders\TileAtlasDataLoader.cs" />
@@ -145,7 +146,7 @@
     <Compile Include="Helpers\AnimHelper.cs" />
     <Compile Include="Entities\Viewport\ViewportCreator.cs" />
     <Compile Include="IWorldReader.cs" />
-    <Compile Include="Jobs\CursorCoordsTextUpdateJob.cs" />
+    <Compile Include="Jobs\JohnPositionTextUpdateJob.cs" />
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Entities\CrazyMover\Misc.cs" />
     <Compile Include="Program.cs" />
@@ -161,7 +162,6 @@
     <Compile Include="Worlds\TextWorldHelper.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
-    <Compile Include="Worlds\TxtFileWorldReader.cs" />
     <Compile Include="Worlds\WorldBuilderHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +185,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Projectile\Projectile.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Teleport\TeleportEntry - Copy.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Teleport\TeleportExit.xml">

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Physics.Interface.Managers;
+﻿using OpenBreed.Common;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
@@ -24,18 +25,17 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         private readonly ITileMan tileMan;
         private readonly IFixtureMan fixtureMan;
-        private readonly BodyComponentBuilder bodyComponentBuilder;
+        private readonly IBuilderFactory builderFactory;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal WorldBlockBuilder(ITileMan tileMan, IFixtureMan fixtureMan, IEntityMan entityMan, BodyComponentBuilder bodyComponentBuilder) : base(entityMan)
+        internal WorldBlockBuilder(ITileMan tileMan, IFixtureMan fixtureMan, IEntityMan entityMan, IBuilderFactory builderFactory) : base(entityMan)
         {
             this.tileMan = tileMan;
             this.fixtureMan = fixtureMan;
-            this.bodyComponentBuilder = bodyComponentBuilder;
-
+            this.builderFactory = builderFactory;
             HasBody = true;
         }
 
@@ -86,6 +86,8 @@ namespace OpenBreed.Sandbox.Entities.Builders
             {
                 var fixtureId = fixtureMan.GetByAlias("Fixtures/GridCell").Id;
 
+                var bodyComponentBuilder = builderFactory.GetBuilder<BodyComponentBuilder>();
+
                 bodyComponentBuilder.SetCofFactor(1.0f);
                 bodyComponentBuilder.SetCorFactor(1.0f);
                 bodyComponentBuilder.SetType("Static");
@@ -95,7 +97,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
                 entity.Add(new CollisionComponent(ColliderTypes.StaticObstacle));
             }
 
-            var tileComponentBuilder = TileComponentBuilder.New(Core);
+            var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
             tileComponentBuilder.SetAtlasById(atlasId);
             tileComponentBuilder.SetImageIndex(tileId);
 

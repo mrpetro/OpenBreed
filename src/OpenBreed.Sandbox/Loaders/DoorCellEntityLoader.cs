@@ -1,10 +1,11 @@
 ﻿using OpenBreed.Model.Maps;
+using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    public class DoorEntityLoader : IMapWorldEntityLoader
+    public class DoorCellEntityLoader : IMapWorldEntityLoader
     {
         #region Public Fields
 
@@ -20,7 +21,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Constructors
 
-        public DoorEntityLoader(DoorHelper doorHelper)
+        public DoorCellEntityLoader(DoorHelper doorHelper)
         {
             this.doorHelper = doorHelper;
         }
@@ -29,7 +30,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             PutDoor(layout, visited, world, ix, iy, gfxValue);
         }
@@ -42,7 +43,7 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var rightValue = MapWorldDataLoader.GetActionCellValue(layout, ix + 1, iy);
 
-            if (rightValue == 62)
+            if (rightValue == CODE)
             {
                 doorHelper.AddHorizontalDoor(world, ix, iy);
                 visited[ix, iy] = true;
@@ -52,7 +53,7 @@ namespace OpenBreed.Sandbox.Loaders
 
             var downValue = MapWorldDataLoader.GetActionCellValue(layout, ix, iy + 1);
 
-            if (downValue == 62)
+            if (downValue == CODE)
             {
                 doorHelper.AddVerticalDoor(world, ix, iy);
                 visited[ix, iy] = true;

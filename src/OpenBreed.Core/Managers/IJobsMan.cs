@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenBreed.Core.Managers
+﻿namespace OpenBreed.Core.Managers
 {
     public interface IJobsMan
     {
+        #region Public Methods
+
+        void Execute(IJob job);
+
+        void Update(float dt);
+
+        #endregion Public Methods
     }
 }

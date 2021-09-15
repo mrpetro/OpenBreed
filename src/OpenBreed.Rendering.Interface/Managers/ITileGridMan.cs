@@ -10,39 +10,21 @@ namespace OpenBreed.Rendering.Interface.Managers
         #region Public Methods
 
         /// <summary>
-        /// Get tile grid by it's ID
-        /// </summary>
-        /// <param name="atlasId">Id of tile grid to get</param>
-        /// <returns>Tile grid object</returns>
-        ITileGrid GetById(int id);
-
-        /// <summary>
-        /// Get tile grid by it's name
-        /// </summary>
-        /// <param name="tileGridName">Name of tile grid to get</param>
-        /// <returns>Tile grid object</returns>
-        ITileGrid GetByName(string tileGridName);
-
-        /// <summary>
-        /// Checks if tile grid with given name already exists
-        /// </summary>
-        /// <param name="tileGridId">Name of tile grid to check</param>
-        /// <returns>True if exits, false otherwise</returns>
-        bool Contains(string tileGridId);
-
-        /// <summary>
-        /// Get tile grid name based on it's ID
-        /// </summary>
-        /// <param name="tileGridId">ID of tile grid</param>
-        /// <returns>Tile grid name</returns>
-        string GetName(int tileGridId);
-
-        /// <summary>
         ///  Render tile grid with specific ID using clipping box limits
         /// </summary>
         /// <param name="tileGridId">ID of tile gird to render</param>
         /// <param name="clipBox">Clipping box used to limit rendering</param>
         void Render(int tileGridId, Box2 clipBox);
+
+        /// <summary>
+        /// Create a grid giving it's properties and return it's ID
+        /// </summary>
+        /// <param name="width">Width of grid</param>
+        /// <param name="height">Height of grid</param>
+        /// <param name="layersNo">Number of grid layers</param>
+        /// <param name="cellSize">Grid cell size</param>
+        /// <returns></returns>
+        int CreateGrid(int width, int height, int layersNo, int cellSize);
 
         /// <summary>
         /// Modify single tile grid cell with new tile data

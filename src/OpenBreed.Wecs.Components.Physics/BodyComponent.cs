@@ -80,15 +80,15 @@ namespace OpenBreed.Wecs.Components.Physics
     {
         #region Private Fields
 
-        private readonly IManagerCollection managerCollection;
+        private readonly IBuilderFactory builderFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public BodyComponentFactory(IManagerCollection managerCollection)
+        public BodyComponentFactory(IBuilderFactory builderFactory)
         {
-            this.managerCollection = managerCollection;
+            this.builderFactory = builderFactory;
         }
 
         #endregion Public Constructors
@@ -97,7 +97,8 @@ namespace OpenBreed.Wecs.Components.Physics
 
         protected override IEntityComponent Create(IBodyComponentTemplate template)
         {
-            var builder = managerCollection.GetManager<BodyComponentBuilder>();
+            var builder = builderFactory.GetBuilder<BodyComponentBuilder>();
+
             builder.SetCofFactor(template.CofFactor);
             builder.SetCorFactor(template.CorFactor);
             builder.SetType(template.Type);
@@ -111,7 +112,7 @@ namespace OpenBreed.Wecs.Components.Physics
         #endregion Protected Methods
     }
 
-    public class BodyComponentBuilder
+    public class BodyComponentBuilder : IBuilder<BodyComponent>
     {
         #region Internal Fields
 

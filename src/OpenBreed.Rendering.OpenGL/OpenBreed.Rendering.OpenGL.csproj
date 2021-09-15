@@ -69,7 +69,6 @@
     <Compile Include="Builders\TileAtlasBuilder.cs" />
     <Compile Include="Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Builders\StampBuilder.cs" />
-    <Compile Include="Builders\TileGridBuilder.cs" />
     <Compile Include="CoreExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\FontAtlas.cs" />

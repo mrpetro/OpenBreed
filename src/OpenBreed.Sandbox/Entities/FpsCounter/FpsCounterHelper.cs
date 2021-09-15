@@ -18,6 +18,8 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
+using OpenBreed.Common;
 
 namespace OpenBreed.Sandbox.Entities.FpsCounter
 {
@@ -32,7 +34,7 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
 
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(-windowClient.ClientRectangle.Width / 2.0f, -windowClient.ClientRectangle.Height / 2.0f)));
 
-            var textBuilder = core.GetManager<TextComponentBuilder>();
+            var textBuilder = core.GetManager<IBuilderFactory>().GetBuilder<TextComponentBuilder>();
             textBuilder.SetFontById(arial12.Id);
             textBuilder.SetOffset(Vector2.Zero);
             textBuilder.SetColor(Color4.White);
@@ -48,7 +50,7 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
 
             var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 
-            core.Jobs.Execute(new FpsTextUpdateJob(core, fpsTextEntity));
+            core.GetManager<IJobsMan>().Execute(new FpsTextUpdateJob(core, fpsTextEntity));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsPos(fpsTextEntity, a));
         }
 

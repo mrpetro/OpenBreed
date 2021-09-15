@@ -56,12 +56,12 @@ namespace OpenBreed.Sandbox.Extensions
         public static void SetupSandboxBuilders(this IManagerCollection manCollection)
         {
             manCollection.AddTransient<CameraBuilder>(() => new CameraBuilder(manCollection.GetManager<IEntityMan>(),
-                                                                              manCollection.GetManager<CameraComponentBuilder>()));
+                                                                              manCollection.GetManager<IBuilderFactory>()));
 
             manCollection.AddTransient<WorldBlockBuilder>(() => new WorldBlockBuilder(manCollection.GetManager<ITileMan>(),
                                                                                       manCollection.GetManager<IFixtureMan>(),
                                                                                       manCollection.GetManager<IEntityMan>(),
-                                                                                      manCollection.GetManager<BodyComponentBuilder>()));
+                                                                                      manCollection.GetManager<IBuilderFactory>()));
         }
 
         public static void SetupPlayerCamera(this CameraBuilder cameraBuilder)
@@ -106,15 +106,17 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<PalettesDataProvider>(),
                                                               managerCollection.GetManager<IEntityFactoryProvider>());
 
+            mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
+            mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
+
             mapWorldDataLoader.Register(LevelEntryCellLoader.CODE, new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
                                                                      managerCollection.GetManager<WorldGateHelper>()));
-            mapWorldDataLoader.Register(DoorEntityLoader.CODE, new DoorEntityLoader(managerCollection.GetManager<DoorHelper>()));
+            mapWorldDataLoader.Register(DoorCellEntityLoader.CODE, new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>()));
 
-            var teleportLoader = new TeleportLoader(managerCollection.GetManager<TeleportHelper>(),
+            var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetManager<TeleportHelper>(),
                                                     managerCollection.GetManager<ILogger>());
 
-            mapWorldDataLoader.Register(TeleportLoader.ENTRY_CODE, teleportLoader);
-            mapWorldDataLoader.Register(TeleportLoader.EXIT_CODE, teleportLoader);
+            mapWorldDataLoader.Register(TeleportCellEntityLoader.ENTRY_CODE, teleportLoader);
 
             dataLoaderFactory.Register(mapWorldDataLoader);
         }

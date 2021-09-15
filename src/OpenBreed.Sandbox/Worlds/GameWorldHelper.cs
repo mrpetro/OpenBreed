@@ -52,12 +52,9 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IEntityMan entityMan;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
-        private readonly IRenderingMan renderingMan;
-        private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
-        private readonly ViewportCreator viewportCreator;
 
-        public GameWorldHelper(IManagerCollection managerCollection, IPlayersMan playersMan, ICommandsMan commandsMan, IEntityMan entityMan, ISystemFactory systemFactory, IWorldMan worldMan, IRenderingMan renderingMan, IEventsMan eventsMan, ILogger logger, ViewportCreator viewportCreator)
+        public GameWorldHelper(IManagerCollection managerCollection, IPlayersMan playersMan, ICommandsMan commandsMan, IEntityMan entityMan, ISystemFactory systemFactory, IWorldMan worldMan, ILogger logger)
         {
             this.managerCollection = managerCollection;
             this.playersMan = playersMan;
@@ -65,86 +62,12 @@ namespace OpenBreed.Sandbox.Worlds
             this.entityMan = entityMan;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
-            this.renderingMan = renderingMan;
-            this.eventsMan = eventsMan;
             this.logger = logger;
-            this.viewportCreator = viewportCreator;
         }
 
         public void AddSystems(WorldBuilder builder)
         {
             builder.SetupGameWorldSystems(systemFactory);
-        }
-
-        internal void Create(ICore core)
-        {
-            World gameWorld = null;
-
-            var cameraBuilder = core.GetManager<CameraBuilder>();
-
-            cameraBuilder.SetPosition(new Vector2(0, 0));
-            cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetFov(320 , 240);
-
-            var playerCamera = cameraBuilder.Build();
-            playerCamera.Tag = "PlayerCamera";
-
-            var animCmpBuilder = core.GetManager<AnimationComponentBuilder>();
-            animCmpBuilder.AddState().SetSpeed(10.0f)
-                                     .SetLoop(false)
-                                     .SetById(-1);
-
-            playerCamera.Add(animCmpBuilder.Build());
-
-            cameraBuilder.SetFov(640, 480);
-            var gameCamera = cameraBuilder.Build();
-            gameCamera.Tag = "HubCamera";
-
-            animCmpBuilder = managerCollection.GetManager<AnimationComponentBuilder>();
-            animCmpBuilder.AddState().SetSpeed(10.0f)
-                                     .SetLoop(false)
-                                     .SetById(-1);
-
-            gameCamera.Add(animCmpBuilder.Build());
-
-            using (var reader = new TxtFileWorldReader(core, worldMan, entityMan, viewportCreator, ".\\Content\\Maps\\hub.txt"))
-                gameWorld = reader.GetWorld();
-
-
-            var actorHelper = core.GetManager<ActorHelper>();
-            var actor = actorHelper.CreatePlayerActor(new Vector2(128, 128));
-
-            //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
-
-            //actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
-            eventsMan.Subscribe<EntityAddedEventArgs>(worldMan, (s,a) => OnEntityAdded(s,a));
-            eventsMan.Subscribe<EntityRemovedEventArgs>(worldMan, (s,a) => OnEntityRemoved(s,a));
-
-            commandsMan.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
-            //gameWorld.AddEntity(actor);
-
-            var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
-
-            gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
-
-            var cursorEntity = entityMan.Create();
-        
-            var spriteBuilder = managerCollection.GetManager<SpriteComponentBuilder>();
-            spriteBuilder.SetAtlasByName("Atlases/Sprites/Cursors");
-            spriteBuilder.SetOrder(100);
-            spriteBuilder.SetImageId(0);
-            cursorEntity.Tag = "MouseCursor";
-            cursorEntity.Add(spriteBuilder.Build());
-            cursorEntity.Add(PositionComponent.Create(0, 0));
-            cursorEntity.Add(new CursorInputComponent(0));
-
-            //gameViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(playerCamera, (ViewportResizedEventArgs)a));
-            //SetPreserveAspectRatio(gameViewport);
-
-            commandsMan.Post(new AddEntityCommand(gameWorld.Id, cursorEntity.Id));
-
-            commandsMan.Post(new FollowedAddFollowerCommand(actor.Id, playerCamera.Id));
-            //gameWorld.PostCommand(new FollowerSetTargetCommand(playerCamera.Id, actor.Id));
         }
 
         public void SetPreserveAspectRatio(Entity viewportEntity)

@@ -18,9 +18,11 @@ namespace OpenBreed.Wecs.Components.Physics.Extensions
             XmlComponentsList.RegisterComponentType<XmlBodyComponent>();
             XmlComponentsList.RegisterComponentType<XmlMotionComponent>();
 
-            manCollection.AddTransient<BodyComponentBuilder>(() => new BodyComponentBuilder(manCollection.GetManager<IFixtureMan>()));
+            var builderFactory = manCollection.GetManager<IBuilderFactory>();
 
-            manCollection.AddSingleton<BodyComponentFactory>(() => new BodyComponentFactory(manCollection));
+            builderFactory.Register<BodyComponentBuilder>(() => new BodyComponentBuilder(manCollection.GetManager<IFixtureMan>()));
+
+            manCollection.AddSingleton<BodyComponentFactory>(() => new BodyComponentFactory(builderFactory));
             manCollection.AddSingleton<MotionComponentFactory>(() => new MotionComponentFactory());
 
 
