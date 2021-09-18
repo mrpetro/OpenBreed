@@ -32,9 +32,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             this.fontMan = fontMan;
 
-            Require<TextDataComponent>();
-            Require<TextPresentationComponent>();
-            Require<PositionComponent>();
+            RequireEntityWith<TextDataComponent>();
+            RequireEntityWith<TextPresentationComponent>();
+            RequireEntityWith<PositionComponent>();
         }
 
         #endregion Internal Constructors

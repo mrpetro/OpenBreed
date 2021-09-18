@@ -23,10 +23,10 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             this.entityMan = entityMan;
 
-            Require<ThrustComponent>();
-            Require<PositionComponent>();
-            Require<VelocityComponent>();
-            Require<BodyComponent>();
+            RequireEntityWith<ThrustComponent>();
+            RequireEntityWith<PositionComponent>();
+            RequireEntityWith<VelocityComponent>();
+            RequireEntityWith<BodyComponent>();
         }
 
         #endregion Internal Constructors

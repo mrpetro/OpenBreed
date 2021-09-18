@@ -24,6 +24,7 @@ namespace OpenBreed.Wecs.Worlds
 
         internal string name;
         internal Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
+        internal Dictionary<Type, object> modules = new Dictionary<Type, object>();
 
         #endregion Internal Fields
 
@@ -32,12 +33,6 @@ namespace OpenBreed.Wecs.Worlds
         private readonly IWorldMan worldMan;
 
         private readonly ILogger logger;
-        private Dictionary<int, Action<ICore, World, int, object[]>> codesToActions = new Dictionary<int, Action<ICore, World, int, object[]>>();
-
-        private Dictionary<int, IBuilderModule> codesToModules = new Dictionary<int, IBuilderModule>();
-
-
-        private List<Tuple<int, object[]>> actions = new List<Tuple<int, object[]>>();
 
         #endregion Private Fields
 
@@ -52,7 +47,18 @@ namespace OpenBreed.Wecs.Worlds
         #endregion Internal Constructors
 
         #region Public Methods
-        
+
+        public void AddModule<TModule>(TModule module)
+        {
+            var moduleType = typeof(TModule);
+
+            if (systems.ContainsKey(moduleType))
+                throw new InvalidOperationException($"Module with type '{moduleType}' already added.");
+
+            modules.Add(moduleType, module);
+        }
+
+
         public void AddSystem(ISystem system)
         {
             var systemType = system.GetType();
@@ -73,32 +79,10 @@ namespace OpenBreed.Wecs.Worlds
             return newWorld;
         }
 
-        public World Build(ICore core)
-        {
-            if (worldMan.GetByName(name) != null)
-                throw new InvalidOperationException($"World with name '{name}' already exist.");
-
-            var newWorld = new World(this);
-            worldMan.RegisterWorld(newWorld);
-            InvokeActions(core, newWorld);
-
-            return newWorld;
-        }
-
         public WorldBuilder SetName(string name)
         {
             this.name = name;
             return this;
-        }
-
-        public void RegisterCodeModule(int code, IBuilderModule module)
-        {
-            codesToModules.Add(code, module);
-        }
-
-        public void RegisterCode(int code, Action<ICore, World, int, object[]> action)
-        {
-            codesToActions.Add(code, action);
         }
 
         public void SetSize(int width, int height)
@@ -107,33 +91,9 @@ namespace OpenBreed.Wecs.Worlds
             this.height = height;
         }
 
-        public void Add(int code, object[] args)
-        {
-            actions.Add(new Tuple<int, object[]>(code, args));
-        }
-
         #endregion Public Methods
 
         #region Private Methods
-
-        private void InvokeActions(ICore core, World world)
-        {
-            foreach (var action in actions)
-            {
-                if (codesToModules.TryGetValue(action.Item1, out IBuilderModule module))
-                {
-                    module.Build(action.Item1, world, action.Item2);
-                    continue;
-                }
-
-                Action<ICore, World, int, object[]> actionHandler = null;
-
-                if (codesToActions.TryGetValue(action.Item1, out actionHandler))
-                    actionHandler.Invoke(core, world, action.Item1, action.Item2);
-                else
-                    logger.Warning($"Unsupported action code '{action.Item1}'");
-            }
-        }
 
         #endregion Private Methods
     }

@@ -154,15 +154,12 @@
     <Compile Include="SpriteComponentAnimator.cs" />
     <Compile Include="Wecs\Systems\GroupMapCellDisplaySystem.cs" />
     <Compile Include="Wecs\Systems\UnknownMapCellDisplaySystem.cs" />
-    <Compile Include="Worlds\AirBuilderModule.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />
     <Compile Include="Worlds\HudWorldHelper.cs" />
     <Compile Include="Worlds\IEntityFactoryProvider.cs" />
     <Compile Include="Loaders\MapWorldDataLoader.cs" />
-    <Compile Include="Worlds\TextWorldHelper.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
-    <Compile Include="Worlds\WorldBuilderHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Physics.Interface.Managers
 {
-    public interface IBroadphaseMan
+    /// <summary>
+    /// Factory for creating collision detection broadphase grid
+    /// </summary>
+    public interface IBroadphaseGridFactory
     {
         /// <summary>
         /// Create a grid giving it's properties and return it's ID
@@ -16,12 +19,6 @@ namespace OpenBreed.Physics.Interface.Managers
         /// <param name="height">Height of grid</param>
         /// <param name="cellSize">Grid cell size</param>
         /// <returns></returns>
-        int CreateGrid(int width, int height, int cellSize);
-
-        void InsertStatic(int gridId, int entityId, Box2 aabb);
-
-        void RemoveStatic(int gridId, int id, Box2 aabb);
-
-        HashSet<int> QueryStatic(int gridId, Box2 aabb);
+        IBroadphaseGrid CreateGrid(int width, int height, int cellSize);
     }
 }

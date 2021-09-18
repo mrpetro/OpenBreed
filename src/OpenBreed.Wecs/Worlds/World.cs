@@ -28,6 +28,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Fields
 
+        private readonly Dictionary<Type, object> modules = new Dictionary<Type, object>();
         private readonly List<Entity> entities = new List<Entity>();
         private readonly List<Entity> toAdd = new List<Entity>();
         private readonly List<Entity> toRemove = new List<Entity>();
@@ -40,6 +41,7 @@ namespace OpenBreed.Wecs.Worlds
         internal World(WorldBuilder builder)
         {
             Name = builder.name;
+            modules = builder.modules;
             Systems = builder.systems.Values.ToArray();
             Entities = new ReadOnlyCollection<Entity>(entities);
         }
@@ -107,6 +109,14 @@ namespace OpenBreed.Wecs.Worlds
         public T GetSystem<T>() where T : ISystem
         {
             return Systems.OfType<T>().FirstOrDefault();
+        }
+
+        public TModule GetModule<TModule>()
+        {
+            if (modules.TryGetValue(typeof(TModule), out object module))
+                return (TModule)module;
+            else
+                throw new InvalidOperationException($"Module of type '{typeof(TModule)}' not found.");
         }
 
         /// <summary>

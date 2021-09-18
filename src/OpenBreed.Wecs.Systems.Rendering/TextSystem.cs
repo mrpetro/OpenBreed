@@ -39,8 +39,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.fontMan = fontMan;
             this.logger = logger;
 
-            Require<TextComponent>();
-            Require<PositionComponent>();
+            RequireEntityWith<TextComponent>();
+            RequireEntityWith<PositionComponent>();
 
             RegisterHandler<TextSetCommand>(HandleTextSetCommand);
         }

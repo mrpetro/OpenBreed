@@ -17,15 +17,15 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             var systemFactory = manCollection.GetManager<ISystemFactory>();
             systemFactory.Register(() => new DirectionSystem(manCollection.GetManager<IEntityMan>()));
             systemFactory.Register(() => new MovementSystem(manCollection.GetManager<IEntityMan>()));
-            systemFactory.Register(() => new PhysicsSystem(manCollection.GetManager<IEntityMan>(),
+            systemFactory.Register(() => new DynamicBodiesSystem(manCollection.GetManager<IEntityMan>(),
                                                            manCollection.GetManager<IFixtureMan>(),
-                                                           manCollection.GetManager<ICollisionMan>(),
-                                                           manCollection.GetManager<IBroadphaseMan>()));
-
+                                                           manCollection.GetManager<ICollisionMan>()));
+            systemFactory.Register(() => new StaticBodiesSystem(manCollection.GetManager<IEntityMan>(),
+                                                           manCollection.GetManager<IFixtureMan>()));
 
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
-            entityCommandHandler.BindCommand<BodyOffCommand, PhysicsSystem>();
-            entityCommandHandler.BindCommand<BodyOnCommand, PhysicsSystem>();
+            entityCommandHandler.BindCommand<BodyOffCommand, DynamicBodiesSystem>();
+            entityCommandHandler.BindCommand<BodyOnCommand, DynamicBodiesSystem>();
         }
     }
 }

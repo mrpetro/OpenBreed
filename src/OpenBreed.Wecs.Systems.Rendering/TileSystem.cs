@@ -49,8 +49,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.tileMan = tileMan;
             this.tileGridMan = tileGridMan;
             this.stampMan = stampMan;
-            Require<TileComponent>();
-            Require<PositionComponent>();
+            RequireEntityWith<TileComponent>();
+            RequireEntityWith<PositionComponent>();
 
             RegisterHandler<TileSetCommand>(HandleTileSetCommand);
             RegisterHandler<PutStampCommand>(HandlePutStampCommand);

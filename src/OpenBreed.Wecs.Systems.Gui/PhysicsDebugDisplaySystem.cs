@@ -35,8 +35,8 @@ namespace OpenBreed.Wecs.Systems.Gui
         {
             this.primitiveRenderer = primitiveRenderer;
 
-            Require<BodyComponent>();
-            Require<PositionComponent>();
+            RequireEntityWith<BodyComponent>();
+            RequireEntityWith<PositionComponent>();
         }
 
         #endregion Public Constructors

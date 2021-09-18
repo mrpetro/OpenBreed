@@ -30,7 +30,6 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Private Fields
 
-        private readonly ICore core;
         private readonly ISystemFactory systemFactory;
         private readonly ICommandsMan commandsMan;
         private readonly IRenderingMan renderingMan;
@@ -43,9 +42,8 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Constructors
 
-        public ScreenWorldHelper(ICore core, ISystemFactory systemFactory, ICommandsMan commandsMan, IRenderingMan renderingMan, IWorldMan worldMan, IEventsMan eventsMan, ViewportCreator viewportCreator, IViewClient viewClient)
+        public ScreenWorldHelper(ISystemFactory systemFactory, ICommandsMan commandsMan, IRenderingMan renderingMan, IWorldMan worldMan, IEventsMan eventsMan, ViewportCreator viewportCreator, IViewClient viewClient)
         {
-            this.core = core;
             this.systemFactory = systemFactory;
             this.commandsMan = commandsMan;
             this.renderingMan = renderingMan;
@@ -73,7 +71,7 @@ namespace OpenBreed.Sandbox.Worlds
             var builder = worldMan.Create().SetName("ScreenWorld");
             AddSystems(builder);
 
-            var world = builder.Build(core);
+            var world = builder.Build();
 
             var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, GAME_VIEWPORT);
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;

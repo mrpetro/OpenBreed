@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -13,19 +14,17 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class PhysicsSystem : SystemBase, IUpdatableSystem
+    public class DynamicBodiesSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 
         private const int CELL_SIZE = 16;
 
-        private readonly int gridId;
+        private IBroadphaseGrid broadphaseGrid;
 
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
-        private readonly List<int> inactiveStatics = new List<int>();
         private readonly IEntityMan entityMan;
-        private readonly IBroadphaseMan broadphaseMan;
         private readonly IFixtureMan fixtureMan;
         private readonly ICollisionMan collisionMan;
         private readonly DynamicHelper dynamicHelper;
@@ -34,24 +33,31 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal PhysicsSystem(IEntityMan entityMan, IFixtureMan fixtureMan, ICollisionMan collisionMan, IBroadphaseMan broadphaseMan)
+        internal DynamicBodiesSystem(IEntityMan entityMan, IFixtureMan fixtureMan, ICollisionMan collisionMan)
         {
             this.entityMan = entityMan;
             this.fixtureMan = fixtureMan;
             this.collisionMan = collisionMan;
-            this.broadphaseMan = broadphaseMan;
             this.dynamicHelper = new DynamicHelper(this, entityMan);
 
-            Require<BodyComponent>();
+            RequireEntityWith<BodyComponent>();
+            RequireEntityWith<VelocityComponent>();
+            RequireEntityWith<PositionComponent>();
+
             RegisterHandler<BodyOnCommand>(HandleBodyOnCommand);
             RegisterHandler<BodyOffCommand>(HandleBodyOffCommand);
-
-            gridId = broadphaseMan.CreateGrid(128, 128, 16);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
+
+        public override void Initialize(World world)
+        {
+            base.Initialize(world);
+
+            broadphaseGrid = world.GetModule<IBroadphaseGrid>();
+        }
 
         public static Vector2 GetCellCenter(PositionComponent pos)
         {
@@ -75,7 +81,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             ExecuteCommands();
 
-            UpdateAabbs();
+            UpdateDynamicAabbs();
 
             SweepAndPrune(dt);
         }
@@ -95,29 +101,31 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         protected override void OnAddEntity(Entity entity)
         {
-            if (entity.Components.Any(item => item is VelocityComponent))
-                RegisterDynamicEntity(entity);
-            else
-                RegisterStaticEntity(entity);
+            var pack = new DynamicPack(entity.Id,
+                                      entity.Get<BodyComponent>(),
+                                      entity.Get<PositionComponent>(),
+                                      entity.Get<VelocityComponent>());
+
+            activeDynamics.Add(pack);
+            UpdateAabb(pack.Body, pack.Position);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            if (entity.Components.Any(item => item is VelocityComponent))
-                UnregisterDynamicEntity(entity);
-            else
-                UnregisterStaticEntity(entity);
+            var dynamic = activeDynamics.FirstOrDefault(item => item.EntityId == entity.Id);
+
+            if (dynamic == null)
+                dynamic = inactiveDynamics.FirstOrDefault(item => item.EntityId == entity.Id);
+
+            if (dynamic == null)
+                throw new InvalidOperationException("Entity not found in this system.");
+
+            activeDynamics.Remove(dynamic);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
-
-        private static Box2 GetAabb(Entity entity)
-        {
-            var body = entity.Get<BodyComponent>();
-            return body.Aabb;
-        }
 
         private bool HandleBodyOnCommand(BodyOnCommand cmd)
         {
@@ -129,14 +137,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             {
                 activeDynamics.Add(dynamicToActivate);
                 inactiveDynamics.Remove(dynamicToActivate);
-                entity.RaiseEvent(new BodyOnEventArgs(entity));
-                return true;
-            }
-
-            if (inactiveStatics.Contains(cmd.EntityId))
-            {
-                InsertToGrid(entity);
-                inactiveStatics.Remove(cmd.EntityId);
                 entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
@@ -159,10 +159,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                 return true;
             }
 
-            RemoveFromGrid(entity);
-            inactiveStatics.Add(entity.Id);
-            entity.RaiseEvent(new BodyOffEventArgs(entity));
-            return true;
+            return false;
         }
 
         private void UpdateAabb(BodyComponent body, PositionComponent pos)
@@ -171,7 +168,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
         }
 
-        private void UpdateAabbs()
+        private void UpdateDynamicAabbs()
         {
             for (int i = 0; i < activeDynamics.Count; i++)
             {
@@ -254,7 +251,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             var dynamicAabb = pack.Aabb;
 
-            var idSet = broadphaseMan.QueryStatic(gridId, dynamicAabb);
+            var idSet = broadphaseGrid.QueryStatic(dynamicAabb);
 
             if (idSet.Count == 0)
                 return;
@@ -294,56 +291,6 @@ namespace OpenBreed.Wecs.Systems.Physics
                 return 0;
             else
                 return 1;
-        }
-
-        private void InsertToGrid(Entity entity)
-        {
-            var pos = entity.Get<PositionComponent>();
-            var body = entity.Get<BodyComponent>();
-
-            UpdateAabb(body, pos);
-
-            broadphaseMan.InsertStatic(gridId, entity.Id, body.Aabb);
-        }
-
-        private void RemoveFromGrid(Entity entity)
-        {
-            var aabb = GetAabb(entity);
-            broadphaseMan.RemoveStatic(gridId, entity.Id, aabb);
-        }
-
-        private void RegisterStaticEntity(Entity entity)
-        {
-            InsertToGrid(entity);
-        }
-
-        private void UnregisterStaticEntity(Entity entity)
-        {
-            RemoveFromGrid(entity);
-        }
-
-        private void RegisterDynamicEntity(Entity entity)
-        {
-            var pack = new DynamicPack(entity.Id,
-                                      entity.Get<BodyComponent>(),
-                                      entity.Get<PositionComponent>(),
-                                      entity.Get<VelocityComponent>());
-
-            activeDynamics.Add(pack);
-            UpdateAabb(pack.Body, pack.Position);
-        }
-
-        private void UnregisterDynamicEntity(Entity entity)
-        {
-            var dynamic = activeDynamics.FirstOrDefault(item => item.EntityId == entity.Id);
-
-            if (dynamic == null)
-                dynamic = inactiveDynamics.FirstOrDefault(item => item.EntityId == entity.Id);
-
-            if (dynamic == null)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            activeDynamics.Remove(dynamic);
         }
 
         #endregion Private Methods

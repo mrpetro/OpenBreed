@@ -26,8 +26,8 @@ namespace OpenBreed.Wecs.Systems.Control
         {
             this.playersMan = playersMan;
 
-            Require<WalkingInputComponent>();
-            Require<WalkingControlComponent>();
+            RequireEntityWith<WalkingInputComponent>();
+            RequireEntityWith<WalkingControlComponent>();
         }
 
         #endregion Public Constructors

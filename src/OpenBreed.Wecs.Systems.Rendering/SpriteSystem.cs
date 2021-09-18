@@ -33,8 +33,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             this.spriteMan = spriteMan;
 
-            Require<SpriteComponent>();
-            Require<PositionComponent>();
+            RequireEntityWith<SpriteComponent>();
+            RequireEntityWith<PositionComponent>();
 
             RegisterHandler<SpriteOnCommand>(HandleSpriteOnCommand);
             RegisterHandler<SpriteOffCommand>(HandleSpriteOffCommand);

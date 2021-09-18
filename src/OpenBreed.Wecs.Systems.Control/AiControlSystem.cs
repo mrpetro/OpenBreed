@@ -27,8 +27,8 @@ namespace OpenBreed.Wecs.Systems.Control
 
         internal AiControlSystem()
         {
-            Require<AiControl>();
-            Require<PositionComponent>();
+            RequireEntityWith<AiControl>();
+            RequireEntityWith<PositionComponent>();
         }
 
         #endregion Internal Constructors

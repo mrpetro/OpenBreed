@@ -31,7 +31,7 @@ namespace OpenBreed.Wecs.Systems.Control
         {
             this.entityMan = entityMan;
 
-            Require<IControlComponent>();
+            RequireEntityWith<IControlComponent>();
 
             RegisterHandler<AttackControlCommand>(HandleAttackControlCommand);
         }

@@ -35,7 +35,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             this.clipMan = clipMan;
             this.logger = logger;
 
-            Require<AnimationComponent>();
+            RequireEntityWith<AnimationComponent>();
             RegisterHandler<SetAnimCommand>(HandleSetAnimCommand);
             RegisterHandler<PlayAnimCommand>(HandlePlayAnimCommand);
             RegisterHandler<PauseAnimCommand>(HandlePauseAnimCommand);

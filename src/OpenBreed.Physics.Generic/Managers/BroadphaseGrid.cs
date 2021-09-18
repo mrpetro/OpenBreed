@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Physics.Interface;
+using OpenTK;
 using System.Collections.Generic;
 
 namespace OpenBreed.Physics.Generic.Managers
@@ -32,7 +33,7 @@ namespace OpenBreed.Physics.Generic.Managers
         #endregion Internal Methods
     }
 
-    internal class BroadphaseGrid
+    internal class BroadphaseGrid : IBroadphaseGrid
     {
         #region Public Constructors
 
@@ -65,11 +66,7 @@ namespace OpenBreed.Physics.Generic.Managers
             return new Vector2(xIndex * CellSize + CellSize / 2, yIndex * CellSize + CellSize / 2);
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal void InsertStatic(int itemId, Box2 aabb)
+        public void InsertStatic(int itemId, Box2 aabb)
         {
             int leftIndex;
             int rightIndex;
@@ -81,7 +78,7 @@ namespace OpenBreed.Physics.Generic.Managers
             AddItem(leftIndex, rightIndex, bottomIndex, topIndex, itemId);
         }
 
-        internal void RemoveStatic(int itemId, Box2 aabb)
+        public void RemoveStatic(int itemId, Box2 aabb)
         {
             int leftIndex;
             int rightIndex;
@@ -93,7 +90,7 @@ namespace OpenBreed.Physics.Generic.Managers
             RemoveItem(leftIndex, rightIndex, bottomIndex, topIndex, itemId);
         }
 
-        internal HashSet<int> QueryStatic(Box2 aabb)
+        public HashSet<int> QueryStatic(Box2 aabb)
         {
             int leftIndex;
             int rightIndex;
@@ -115,7 +112,7 @@ namespace OpenBreed.Physics.Generic.Managers
             return result;
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
 
         #region Private Methods
 

@@ -26,8 +26,8 @@ namespace OpenBreed.Wecs.Systems.Control
             this.playersMan = playersMan;
             this.commandsMan = commandsMan;
 
-            Require<AttackInputComponent>();
-            Require<AttackControlComponent>();
+            RequireEntityWith<AttackInputComponent>();
+            RequireEntityWith<AttackControlComponent>();
         }
 
         #endregion Internal Constructors

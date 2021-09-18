@@ -4,6 +4,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Model.Maps;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
@@ -39,7 +40,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly ICommandsMan commandsMan;
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly IEntityFactoryProvider mapEntityFactory;
-
+        private readonly IBroadphaseGridFactory broadphaseGridFactory;
         private readonly Dictionary<int, IMapWorldEntityLoader> entityLoaders = new Dictionary<int, IMapWorldEntityLoader>();
 
         #endregion Private Fields
@@ -54,7 +55,8 @@ namespace OpenBreed.Sandbox.Loaders
                                   WorldBlockBuilder worldBlockBuilder,
                                   ICommandsMan commandsMan,
                                   PalettesDataProvider palettesDataProvider,
-                                  IEntityFactoryProvider mapEntityFactory)
+                                  IEntityFactoryProvider mapEntityFactory,
+                                  IBroadphaseGridFactory broadphaseGridFactory)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
@@ -65,6 +67,7 @@ namespace OpenBreed.Sandbox.Loaders
             this.commandsMan = commandsMan;
             this.palettesDataProvider = palettesDataProvider;
             this.mapEntityFactory = mapEntityFactory;
+            this.broadphaseGridFactory = broadphaseGridFactory;
         }
 
         #endregion Public Constructors
@@ -109,6 +112,9 @@ namespace OpenBreed.Sandbox.Loaders
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Width);
+
+            worldBuilder.AddModule(broadphaseGridFactory.CreateGrid(layout.Width, layout.Height, cellSize));
+
             worldBuilder.SetupGameWorldSystems(systemFactory);
             var newWorld = worldBuilder.Build();
 

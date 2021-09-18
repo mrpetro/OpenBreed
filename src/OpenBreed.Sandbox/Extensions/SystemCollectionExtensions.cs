@@ -104,7 +104,8 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<WorldBlockBuilder>(),
                                                               managerCollection.GetManager<ICommandsMan>(),
                                                               managerCollection.GetManager<PalettesDataProvider>(),
-                                                              managerCollection.GetManager<IEntityFactoryProvider>());
+                                                              managerCollection.GetManager<IEntityFactoryProvider>(),
+                                                              managerCollection.GetManager<IBroadphaseGridFactory>());
 
             mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
             mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
@@ -158,7 +159,8 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<DirectionSystem>());
             builder.AddSystem(systemFactory.Create<FollowerSystem>());
             //builder.AddSystem(new FollowerSystem(core));
-            builder.AddSystem(systemFactory.Create<PhysicsSystem>());
+            builder.AddSystem(systemFactory.Create<DynamicBodiesSystem>());
+            builder.AddSystem(systemFactory.Create<StaticBodiesSystem>());
             builder.AddSystem(systemFactory.Create<AnimationSystem>());
             builder.AddSystem(systemFactory.Create<TimerSystem>());
             builder.AddSystem(systemFactory.Create<FsmSystem>());
@@ -176,6 +178,9 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem(systemFactory.Create<UnknownMapCellDisplaySystem>());
             builder.AddSystem(systemFactory.Create<GroupMapCellDisplaySystem>());
             builder.AddSystem(systemFactory.Create<ViewportSystem>());
+
+
+            //builder.AddModule(
         }
 
         public static void SetupMapEntityFactory(this IManagerCollection managerCollection)

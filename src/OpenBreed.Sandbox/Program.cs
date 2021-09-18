@@ -143,7 +143,7 @@ namespace OpenBreed.Sandbox
         {
             var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
 
-            manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(core, manCollection.GetManager<ISystemFactory>(),
+            manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(manCollection.GetManager<ISystemFactory>(),
                                                                                             manCollection.GetManager<ICommandsMan>(), 
                                                                                             manCollection.GetManager<IRenderingMan>(),
                                                                                             manCollection.GetManager<IWorldMan>(), 
@@ -474,7 +474,7 @@ namespace OpenBreed.Sandbox
             //TextWorldHelper.Create(this);
 
             var hudWorldHelper = GetManager<HudWorldHelper>();
-            hudWorldHelper.Create(this);
+            hudWorldHelper.Create();
 
 
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();

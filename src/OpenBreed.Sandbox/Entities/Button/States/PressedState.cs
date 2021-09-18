@@ -10,7 +10,6 @@ namespace OpenBreed.Sandbox.Entities.Button.States
     {
         #region Private Fields
 
-        private readonly int stampId;
         private readonly IFsmMan fsmMan;
         private readonly ICommandsMan commandsMan;
 
@@ -40,7 +39,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             commandsMan.Post(new SpriteOffCommand(entity.Id));
 
             var pos = entity.Get<PositionComponent>();
-            commandsMan.Post(new PutStampCommand(entity.Id, stampId, 0, pos.Value));
+            commandsMan.Post(new PutStampCommand(entity.Id, 0, 0, pos.Value));
             commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
             //entity.Subscribe<CollisionEventArgs>(OnCollision);
