@@ -66,6 +66,7 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BuilderFactory.cs" />
     <Compile Include="DataLoaderFactory.cs" />
     <Compile Include="Data\EntityTemplatesDataProvider.cs" />
     <Compile Include="Data\EntityTemplatesDataHelper.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Formats\DataFormatMan.cs" />
     <Compile Include="Formats\BinaryFormat.cs" />
+    <Compile Include="IBuilder.cs" />
+    <Compile Include="IBuilderFactory.cs" />
     <Compile Include="IDataLoader.cs" />
     <Compile Include="IDataLoaderFactory.cs" />
     <Compile Include="IManagerCollection.cs" />
