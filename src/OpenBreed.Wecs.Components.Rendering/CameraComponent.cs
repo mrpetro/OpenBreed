@@ -60,15 +60,15 @@ namespace OpenBreed.Wecs.Components.Rendering
     {
         #region Private Fields
 
-        private readonly IManagerCollection managerCollection;
+        private readonly IBuilderFactory builderFactory;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal CameraComponentFactory(IManagerCollection managerCollection)
+        internal CameraComponentFactory(IBuilderFactory builderFactory)
         {
-            this.managerCollection = managerCollection;
+            this.builderFactory = builderFactory;
         }
 
         #endregion Internal Constructors
@@ -77,7 +77,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         protected override IEntityComponent Create(ICameraComponentTemplate template)
         {
-            var builder = managerCollection.GetManager<CameraComponentBuilder>();
+            var builder = builderFactory.GetBuilder<CameraComponentBuilder>();
             builder.SetSize(template.Width, template.Height);
             builder.SetBrightness(template.Brightness);
             return builder.Build();
@@ -86,7 +86,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Protected Methods
     }
 
-    public class CameraComponentBuilder
+    public class CameraComponentBuilder : IBuilder<CameraComponent>
     {
         #region Internal Fields
 

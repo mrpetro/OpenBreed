@@ -46,6 +46,9 @@ namespace OpenBreed.Wecs.Entities
         /// </summary>
         public object Tag { get; set; }
 
+
+        public object State { get; set; }
+
         /// <summary>
         /// Id of world which this entity is part of 
         /// </summary>

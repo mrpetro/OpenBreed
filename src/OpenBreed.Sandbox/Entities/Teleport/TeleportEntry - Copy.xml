@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+        <Position x="0" y="0" />
+        <Animation>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>true</Loop>
+					<ClipName>Animations/Teleport/Entry</ClipName>
+				</State>
+			</States>
+        </Animation>
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Type>Trigger</Type>
+			<Fixtures>
+				<Fixture>Fixtures/TeleportEntry</Fixture>
+			</Fixtures>
+		</Body>
+		<Sprite>
+			<AtlasName>Atlases/Sprites/Teleport/Entry</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Origin X="0" Y="0" />
+			<Order>0</Order>
+		</Sprite>
+		<Text>
+			<Text>TeleportEntry</Text>
+			<Offset X="0" Y="32" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>9</FontSize>
+			<Order>0</Order>
+		</Text>
+    </Components>
+</EntityTemplate>

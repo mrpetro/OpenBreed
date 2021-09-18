@@ -1,7 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Rendering.Interface;
-using System;
-using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Common;
 using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Components.Rendering
@@ -44,33 +41,32 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Public Properties
     }
 
-    public class TileComponentBuilder
+    public class TileComponentBuilder : IBuilder<TileComponent>
     {
-        #region Private Fields
+        #region Internal Fields
 
         internal int AtlasId;
         internal int ImageId;
         internal float Order;
 
+        #endregion Internal Fields
+
+        #region Private Fields
+
+        private readonly ITileMan tileMan;
+
         #endregion Private Fields
 
-        #region Private Constructors
+        #region Internal Constructors
 
-        private readonly ICore core;
-
-        private TileComponentBuilder(ICore core)
+        internal TileComponentBuilder(ITileMan tileMan)
         {
-            this.core = core;
+            this.tileMan = tileMan;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
-
-        public static TileComponentBuilder New(ICore core)
-        {
-            return new TileComponentBuilder(core);
-        }
 
         public TileComponent Build()
         {
@@ -84,7 +80,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetAtlasByName(string atlasName)
         {
-            var atlas = core.GetManager<ITileMan>().GetByAlias(atlasName);
+            var atlas = tileMan.GetByAlias(atlasName);
 
             SetAtlasById(atlas.Id);
         }
@@ -96,5 +92,4 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #endregion Public Methods
     }
-
 }

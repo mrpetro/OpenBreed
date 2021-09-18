@@ -33,8 +33,8 @@ namespace OpenBreed.Wecs.Systems.Control
             this.entityMan = entityMan;
             this.commandsMan = commandsMan;
 
-            Require<FollowerComponent>();
-            Require<PositionComponent>();
+            RequireEntityWith<FollowerComponent>();
+            RequireEntityWith<PositionComponent>();
 
             RegisterHandler<FollowedAddFollowerCommand>(HandleFollowedAddFollowerCommand);
         }

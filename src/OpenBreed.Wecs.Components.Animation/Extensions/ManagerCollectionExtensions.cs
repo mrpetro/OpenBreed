@@ -17,9 +17,11 @@ namespace OpenBreed.Wecs.Components.Animation.Extensions
         {
             XmlComponentsList.RegisterComponentType<XmlAnimationComponent>();
 
-            manCollection.AddTransient<AnimationComponentBuilder>(() => new AnimationComponentBuilder(manCollection.GetManager<IClipMan>()));
+            var builderFactory = manCollection.GetManager<IBuilderFactory>();
 
-            manCollection.AddSingleton<AnimationComponentFactory>(() => new AnimationComponentFactory(manCollection));
+            builderFactory.Register<AnimationComponentBuilder>(() => new AnimationComponentBuilder(manCollection.GetManager<IClipMan>()));
+
+            manCollection.AddSingleton<AnimationComponentFactory>(() => new AnimationComponentFactory(builderFactory));
 
             var entityFactory = manCollection.GetManager<IEntityFactory>();
             entityFactory.RegisterComponentFactory<XmlAnimationComponent>(manCollection.GetManager<AnimationComponentFactory>());

@@ -21,7 +21,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly TileGrid unknownTileGrid;
 
         private readonly List<TileGrid> items = new List<TileGrid>();
-        private readonly Dictionary<string, TileGrid> names = new Dictionary<string, TileGrid>();
 
         #endregion Private Fields
 
@@ -32,10 +31,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             this.tileMan = tileMan;
             this.stampMan = stampMan;
             this.logger = logger;
-
-            //TODO: Create builder for this
-            var tileGrid = new TileGrid(128, 128, 1, 16);
-            Register("GAME_GRID", tileGrid);
         }
 
         #endregion Internal Constructors
@@ -87,29 +82,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             }
         }
 
-        public ITileGrid GetById(int tileGridId)
+        internal TileGrid GetById(int tileGridId)
         {
             return items[tileGridId];
-        }
-
-        public ITileGrid GetByName(string tileGridName)
-        {
-            if (names.TryGetValue(tileGridName, out TileGrid result))
-                return result;
-
-            logger.Error($"Unable to find tile grid with name '{tileGridName}'");
-
-            return unknownTileGrid;
-        }
-
-        public bool Contains(string tileGridName)
-        {
-            return names.ContainsKey(tileGridName);
-        }
-
-        public string GetName(int tileGridId)
-        {
-            return names.First(pair => pair.Value == items[tileGridId]).Key;
         }
 
         public void Render(int tileGridId, Box2 clipBox)
@@ -163,16 +138,21 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.Disable(EnableCap.Texture2D);
         }
 
+        public int CreateGrid(int width, int height, int layersNo, int cellSize)
+        {
+            var tileGrid = new TileGrid(width, height, layersNo, cellSize);
+            return Register(tileGrid);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal int Register(string name, TileGrid tileGrid)
+        internal int Register(TileGrid tileGrid)
         {
             items.Add(tileGrid);
-            names.Add(name, tileGrid);
 
-            logger.Verbose($"Tile grid '{name}' created with ID {items.Count - 1}.");
+            logger.Verbose($"Tile grid with ID '{items.Count - 1}' created.");
 
             return items.Count - 1;
         }
@@ -188,7 +168,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         /// <param name="bottomIndex">Bottom border index of grid</param>
         /// <param name="rightIndex">Right border index of grid</param>
         /// <param name="topIndex">Top border index of grid</param>
-        private void DrawCellBorders(ITileGrid grid, int leftIndex, int bottomIndex, int rightIndex, int topIndex)
+        private void DrawCellBorders(TileGrid grid, int leftIndex, int bottomIndex, int rightIndex, int topIndex)
         {
             var cellSize = grid.CellSize;
 

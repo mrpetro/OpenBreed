@@ -18,6 +18,8 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
+using OpenBreed.Common;
 
 namespace OpenBreed.Sandbox.Entities.CursorCoords
 {
@@ -30,9 +32,11 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
 
             var entity = core.GetManager<IEntityMan>().Create();
 
-            entity.Add(PositionComponent.Create(new Vector2(windowClient.ClientRectangle.Width / 2.0f - 120.0f, -windowClient.ClientRectangle.Height / 2.0f)));
+            entity.Add(PositionComponent.Create(new Vector2(windowClient.ClientRectangle.Width / 2.0f - 180.0f, -windowClient.ClientRectangle.Height / 2.0f)));
 
-            var textBuilder = core.GetManager<TextComponentBuilder>();
+            var builderFactory = core.GetManager<IBuilderFactory>();
+
+            var textBuilder = builderFactory.GetBuilder<TextComponentBuilder>();
             textBuilder.SetFontById(arial12.Id);
             textBuilder.SetOffset(Vector2.Zero);
             textBuilder.SetColor(Color4.White);
@@ -48,13 +52,13 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
 
             var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 
-            core.Jobs.Execute(new CursorCoordsTextUpdateJob(core, entity));
+            core.GetManager<IJobsMan>().Execute(new JohnPositionTextUpdateJob(core, entity));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdatePos(entity, a));
         }
 
         private static void UpdatePos(Entity fpsTextEntity, ViewportResizedEventArgs a)
         {
-            fpsTextEntity.Get<PositionComponent>().Value = new Vector2(a.Width / 2.0f - 120.0f, -a.Height / 2.0f);
+            fpsTextEntity.Get<PositionComponent>().Value = new Vector2(a.Width / 2.0f - 180.0f, -a.Height / 2.0f);
         }
     }
 }

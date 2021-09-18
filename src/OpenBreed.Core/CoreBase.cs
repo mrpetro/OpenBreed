@@ -33,8 +33,6 @@ namespace OpenBreed.Core
         public IEventsMan Events { get; }
         public ILogger Logging { get; }
 
-        public abstract JobsMan Jobs { get; }
-
         #endregion Public Properties
 
         #region Public Methods

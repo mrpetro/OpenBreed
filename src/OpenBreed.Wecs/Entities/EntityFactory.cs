@@ -40,7 +40,7 @@ namespace OpenBreed.Wecs.Entities
 
         public void RegisterComponentFactory<T>(IComponentFactory factory) where T : IComponentTemplate
         {
-            Debug.Assert(!componentFactories.ContainsKey(typeof(T)), $"Component '{typeof(T)}' factory already regisered.");
+            Debug.Assert(!componentFactories.ContainsKey(typeof(T)), $"Component '{typeof(T)}' factory already registered.");
 
             componentFactories.Add(typeof(T), factory);
         }

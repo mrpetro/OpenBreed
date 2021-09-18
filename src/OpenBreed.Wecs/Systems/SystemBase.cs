@@ -19,6 +19,8 @@ namespace OpenBreed.Wecs.Systems
 
         private readonly List<Type> requiredComponentTypes = new List<Type>();
 
+        private readonly List<Type> forbiddenComponentTypes = new List<Type>();
+
         private readonly Queue<IEntityCommand> commandQueue = new Queue<IEntityCommand>();
 
         private Dictionary<Type, Delegate> handlers = new Dictionary<Type, Delegate>();
@@ -75,6 +77,12 @@ namespace OpenBreed.Wecs.Systems
 
         public bool Matches(Entity entity)
         {
+            foreach (var type in forbiddenComponentTypes)
+            {
+                if (entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
+                    return false;
+            }
+
             foreach (var type in requiredComponentTypes)
             {
                 if (!entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
@@ -163,9 +171,9 @@ namespace OpenBreed.Wecs.Systems
 
         protected abstract void OnAddEntity(Entity entity);
 
-        protected int Require<C>() where C : IEntityComponent
+        protected int RequireEntityWith<TComponent>() where TComponent : IEntityComponent
         {
-            var type = typeof(C);
+            var type = typeof(TComponent);
 
             var typeIndex = requiredComponentTypes.IndexOf(type);
 
@@ -175,6 +183,21 @@ namespace OpenBreed.Wecs.Systems
             {
                 requiredComponentTypes.Add(type);
                 return requiredComponentTypes.Count - 1;
+            }
+        }
+
+        protected int RequireEntityWithout<TComponent>() where TComponent : IEntityComponent
+        {
+            var type = typeof(TComponent);
+
+            var typeIndex = forbiddenComponentTypes.IndexOf(type);
+
+            if (typeIndex >= 0)
+                return typeIndex;
+            else
+            {
+                forbiddenComponentTypes.Add(type);
+                return forbiddenComponentTypes.Count - 1;
             }
         }
 

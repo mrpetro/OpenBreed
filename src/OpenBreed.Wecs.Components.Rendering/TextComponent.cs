@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Core;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
@@ -110,12 +109,17 @@ namespace OpenBreed.Wecs.Components.Rendering
 
     public sealed class TextComponentFactory : ComponentFactoryBase<ITextComponentTemplate>
     {
-        private readonly IManagerCollection managerCollection;
+        #region Private Fields
+
+        private readonly IBuilderFactory builderFactory;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public TextComponentFactory(IManagerCollection managerCollection)
+        public TextComponentFactory(IBuilderFactory builderFactory)
         {
-            this.managerCollection = managerCollection;
+            this.builderFactory = builderFactory;
         }
 
         #endregion Public Constructors
@@ -124,7 +128,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         protected override IEntityComponent Create(ITextComponentTemplate template)
         {
-            var builder = managerCollection.GetManager<TextComponentBuilder>();
+            var builder = builderFactory.GetBuilder<TextComponentBuilder>();
             builder.SetColor(template.Color);
             builder.SetFont(template.FontName, template.FontSize);
             builder.SetOffset(template.Offset);
@@ -137,7 +141,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Protected Methods
     }
 
-    public class TextComponentBuilder
+    public class TextComponentBuilder : IBuilder<TextComponent>
     {
         #region Private Fields
 

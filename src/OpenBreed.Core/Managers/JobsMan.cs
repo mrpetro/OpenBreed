@@ -7,7 +7,7 @@ namespace OpenBreed.Core.Managers
     /// <summary>
     /// Job manager class
     /// </summary>
-    public class JobsMan : IJobsMan
+    internal class JobsMan : IJobsMan
     {
         #region Private Fields
 

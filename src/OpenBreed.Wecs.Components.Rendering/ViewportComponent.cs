@@ -44,15 +44,15 @@ namespace OpenBreed.Wecs.Components.Rendering
     {
         #region Private Fields
 
-        private readonly IManagerCollection managerCollection;
+        private readonly IBuilderFactory builderFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ViewportComponentFactory(IManagerCollection managerCollection)
+        public ViewportComponentFactory(IBuilderFactory builderFactory)
         {
-            this.managerCollection = managerCollection;
+            this.builderFactory = builderFactory;
         }
 
         #endregion Public Constructors
@@ -61,7 +61,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         protected override IEntityComponent Create(IViewportComponentTemplate template)
         {
-            var builder = managerCollection.GetManager<ViewportComponentBuilder>();
+            var builder = builderFactory.GetBuilder<ViewportComponentBuilder>();
             builder.SetBackgroundColor(template.BackgroundColor);
             builder.SetClippingFlag(template.Clipping);
             builder.SetDrawBackgroundFlag(template.DrawBackgroud);
@@ -155,7 +155,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Public Properties
     }
 
-    public class ViewportComponentBuilder
+    public class ViewportComponentBuilder : IBuilder<ViewportComponent>
     {
         #region Internal Fields
 

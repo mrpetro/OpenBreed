@@ -32,7 +32,8 @@
 			<CorFactor>0.0</CorFactor>
 			<Type>Dynamic</Type>
 			<Fixtures>
-				<Fixture>Fixtures/Hero</Fixture>
+				<Fixture>Fixtures/HeroBody</Fixture>
+				<Fixture>Fixtures/HeroTrigger</Fixture>
 			</Fixtures>
 		</Body>
 		<Motion></Motion>

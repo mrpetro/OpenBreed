@@ -1,10 +1,10 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common;
+using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenTK;
-using OpenBreed.Wecs.Entities.Builders;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities.Builders;
+using OpenTK;
 
 namespace OpenBreed.Sandbox.Entities.Camera
 {
@@ -16,15 +16,20 @@ namespace OpenBreed.Sandbox.Entities.Camera
         internal float rotation;
         internal float width;
         internal float height;
-        private readonly CameraComponentBuilder cameraComponentBuilder;
 
         #endregion Internal Fields
 
+        #region Private Fields
+
+        private readonly IBuilderFactory builderFactory;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public CameraBuilder(IEntityMan entityMan, CameraComponentBuilder cameraComponentBuilder) : base(entityMan)
+        public CameraBuilder(IEntityMan entityMan, IBuilderFactory builderFactory) : base(entityMan)
         {
-            this.cameraComponentBuilder = cameraComponentBuilder;
+            this.builderFactory = builderFactory;
         }
 
         #endregion Public Constructors
@@ -35,6 +40,15 @@ namespace OpenBreed.Sandbox.Entities.Camera
         {
             var entity = entityMan.Create();
             entity.Add(PositionComponent.Create(position));
+
+            var animationComponentBuilder = builderFactory.GetBuilder<AnimationComponentBuilder>();
+            var cameraComponentBuilder = builderFactory.GetBuilder<CameraComponentBuilder>();
+
+            animationComponentBuilder.AddState().SetSpeed(10.0f)
+                                     .SetLoop(false)
+                                     .SetById(-1);
+
+            entity.Add(animationComponentBuilder.Build());
 
             cameraComponentBuilder.SetSize(width, height);
             entity.Add(cameraComponentBuilder.Build());

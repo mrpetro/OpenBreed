@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Model.Maps;
+using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    public class TeleportLoader : IMapWorldEntityLoader
+    public class TeleportCellEntityLoader : IMapWorldEntityLoader
     {
         #region Public Fields
 
@@ -26,7 +27,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Constructors
 
-        public TeleportLoader(TeleportHelper teleportHelper, ILogger logger)
+        public TeleportCellEntityLoader(TeleportHelper teleportHelper, ILogger logger)
         {
             this.teleportHelper = teleportHelper;
             this.logger = logger;
@@ -36,11 +37,13 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
-
             if (actionValue == ENTRY_CODE)
             {
+                if (!FindFarthestExit(layout, visited, ix, iy, out (int X, int Y) found))
+                    return;
+
                 var layerIndex = layout.GetLayerIndex(MapLayerType.Group);
 
                 var groupId = layout.GetCellValue(layerIndex, ix, iy);
@@ -48,15 +51,14 @@ namespace OpenBreed.Sandbox.Loaders
 
                 var cells = layout.FindCellsWithValue(layerIndex, groupId);
 
-                //teleportHelper.AddTeleportEntry(world, ix, iy, ix);
+                foreach (var cell in cells)
+                {
+                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix);
+                    visited[cell.X, cell.Y] = true;
+                }
 
-
-
-                //if (!FindFarthestExit(layout, visited, ix, iy, out (int X, int Y) found))
-                //    return;
-
-                //teleportHelper.AddTeleportExit(world, found.X, layout.Height - found.Y, ix);
-                //visited[found.X, found.Y] = true;
+                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix);
+                visited[found.X, found.Y] = true;
             }
 
             return;
@@ -69,8 +71,12 @@ namespace OpenBreed.Sandbox.Loaders
             found = (0, 0);
             var layerIndex = layout.GetLayerIndex(MapLayerType.Action);
 
+            var cells = layout.FindCellsWithValue(layerIndex, EXIT_CODE).ToArray();
+
+            cells = cells.Where(item => !visited[item.X, item.Y]).ToArray();
+
             //Found all not visited exits
-            var foundExits = layout.FindCellsWithValue(layerIndex, EXIT_CODE).Where(item => !visited[item.X, item.Y]).ToArray();
+            var foundExits = cells;
 
             //No exit was found which is not expected
             if (!foundExits.Any())

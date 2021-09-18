@@ -4,7 +4,7 @@
     {
         #region Public Methods
 
-        IFixture Create(string alias, string type, IShape shape);
+        IFixture Create(string alias, IShape shape);
 
         IFixture GetById(int id);
 

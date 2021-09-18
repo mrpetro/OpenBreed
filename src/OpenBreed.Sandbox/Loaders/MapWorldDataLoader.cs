@@ -4,9 +4,9 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Model.Maps;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Commands;
@@ -22,7 +22,7 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Methods
 
-        void Load(MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world);
+        void Load(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world);
 
         #endregion Public Methods
     }
@@ -40,7 +40,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly ICommandsMan commandsMan;
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly IEntityFactoryProvider mapEntityFactory;
-
+        private readonly IBroadphaseGridFactory broadphaseGridFactory;
         private readonly Dictionary<int, IMapWorldEntityLoader> entityLoaders = new Dictionary<int, IMapWorldEntityLoader>();
 
         #endregion Private Fields
@@ -48,14 +48,15 @@ namespace OpenBreed.Sandbox.Loaders
         #region Public Constructors
 
         public MapWorldDataLoader(IDataLoaderFactory dataLoaderFactory,
-                                          IRepositoryProvider repositoryProvider,
+                                  IRepositoryProvider repositoryProvider,
                                   MapsDataProvider mapsDataProvider,
                                   ISystemFactory systemFactory,
                                   IWorldMan worldMan,
                                   WorldBlockBuilder worldBlockBuilder,
                                   ICommandsMan commandsMan,
                                   PalettesDataProvider palettesDataProvider,
-                                  IEntityFactoryProvider mapEntityFactory)
+                                  IEntityFactoryProvider mapEntityFactory,
+                                  IBroadphaseGridFactory broadphaseGridFactory)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
@@ -66,6 +67,7 @@ namespace OpenBreed.Sandbox.Loaders
             this.commandsMan = commandsMan;
             this.palettesDataProvider = palettesDataProvider;
             this.mapEntityFactory = mapEntityFactory;
+            this.broadphaseGridFactory = broadphaseGridFactory;
         }
 
         #endregion Public Constructors
@@ -90,17 +92,17 @@ namespace OpenBreed.Sandbox.Loaders
 
         public World Load(string entryId, params object[] args)
         {
-            var entry = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
-            if (entry == null)
+            var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
+            if (dbMap == null)
                 throw new Exception("Map error: " + entryId);
 
-            LoadReferencedTileSet(entry);
-            LoadReferencedSpriteSets(entry);
+            LoadReferencedTileSet(dbMap);
+            LoadReferencedSpriteSets(dbMap);
 
-            var map = mapsDataProvider.GetMap(entry.Id);
+            var map = mapsDataProvider.GetMap(dbMap.Id);
 
             if (map is null)
-                throw new Exception($"Map model  asset '{entry.DataRef}' could not be loaded.");
+                throw new Exception($"Map model  asset '{dbMap.DataRef}' could not be loaded.");
 
             var layout = map.Layout;
             var visited = new bool[layout.Width, layout.Height];
@@ -108,14 +110,15 @@ namespace OpenBreed.Sandbox.Loaders
             var cellSize = layout.CellSize;
 
             var worldBuilder = worldMan.Create();
-            worldBuilder.SetupGameWorldSystems(systemFactory);
-
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Width);
 
+            worldBuilder.AddModule(broadphaseGridFactory.CreateGrid(layout.Width, layout.Height, cellSize));
+
+            worldBuilder.SetupGameWorldSystems(systemFactory);
             var newWorld = worldBuilder.Build();
 
-            worldBlockBuilder.SetTileAtlas(entry.TileSetRef);
+            worldBlockBuilder.SetTileAtlas(dbMap.TileSetRef);
 
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
@@ -128,7 +131,23 @@ namespace OpenBreed.Sandbox.Loaders
                     var gfxValue = cellValues[gfxLayer];
                     var actionValue = cellValues[actionLayer];
 
-                    PutCell(layout, visited, ix, iy, gfxValue, actionValue, newWorld);
+                    LoadCellEntity(worldBlockBuilder, layout, visited, ix, iy, gfxValue, actionValue, newWorld);
+                }
+            }
+
+            //Process trough all ont visited
+            for (int iy = 0; iy < layout.Height; iy++)
+            {
+                for (int ix = 0; ix < layout.Width; ix++)
+                {
+                    if (visited[ix, iy])
+                        continue;
+
+                    var cellValues = layout.GetCellValues(ix, iy);
+                    var gfxValue = cellValues[gfxLayer];
+                    var actionValue = cellValues[actionLayer];
+
+                    LoadUnknownCell(worldBlockBuilder, layout, newWorld, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
                 }
             }
 
@@ -139,34 +158,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private void PutCell(MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
-        {
-            if (visited[ix, iy])
-                return;
-
-            if (entityLoaders.TryGetValue(actionValue, out IMapWorldEntityLoader entityLoader))
-            {
-                entityLoader.Load(layout, visited, ix, iy, gfxValue, actionValue, world);
-
-                if (visited[ix, iy])
-                    return;
-            }
-
-            switch (actionValue)
-            {
-                case 63:
-                    PutGenericCell(layout, visited, world, ix, iy, gfxValue, actionValue, hasBody: true, unknown: false);
-                    break;
-                case 0:
-                    PutGenericCell(layout, visited, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
-                    break;
-                default:
-                    PutGenericCell(layout, visited, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: true);
-                    break;
-            }
-        }
-
-        private void PutGenericCell(MapLayoutModel layout, bool[,] visited, World world, int ix, int iy, int gfxValue, int actionValue, bool hasBody, bool unknown)
+        private void LoadUnknownCell(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, World world, int ix, int iy, int gfxValue, int actionValue, bool hasBody, bool unknown)
         {
             var groupLayerIndex = layout.GetLayerIndex(MapLayerType.Group);
 
@@ -181,8 +173,15 @@ namespace OpenBreed.Sandbox.Loaders
                 cellEntity.Tag = actionValue;
 
             commandsMan.Post(new AddEntityCommand(world.Id, cellEntity.Id));
+        }
 
-            visited[ix, iy] = true;
+        private void LoadCellEntity(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        {
+            if (visited[ix, iy])
+                return;
+
+            if (entityLoaders.TryGetValue(actionValue, out IMapWorldEntityLoader entityLoader))
+                entityLoader.Load(worldBlockBuilder, layout, visited, ix, iy, gfxValue, actionValue, world);
         }
 
         private void LoadReferencedTileSet(IDbMap entry)

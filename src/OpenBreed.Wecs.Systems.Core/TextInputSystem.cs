@@ -26,8 +26,8 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             this.entityMan = entityMan;
 
-            Require<TextCaretComponent>();
-            Require<TextDataComponent>();
+            RequireEntityWith<TextCaretComponent>();
+            RequireEntityWith<TextDataComponent>();
 
             RegisterHandler<TextCaretSetPosition>(HandleTextCaretSetPosition);
             RegisterHandler<TextDataInsert>(HandleTextDataInsert);

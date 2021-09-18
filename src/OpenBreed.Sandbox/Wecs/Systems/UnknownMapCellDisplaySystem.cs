@@ -40,8 +40,8 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             this.primitiveRenderer = primitiveRenderer;
             this.fontMan = fontMan;
 
-            Require<PositionComponent>();
-            Require<TileComponent>();
+            RequireEntityWith<PositionComponent>();
+            RequireEntityWith<TileComponent>();
 
             font = fontMan.Create("ARIAL", 8);
         }

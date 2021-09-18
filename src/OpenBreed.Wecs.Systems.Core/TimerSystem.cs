@@ -32,7 +32,7 @@ namespace OpenBreed.Wecs.Systems.Core
             this.entityMan = entityMan;
             this.logger = logger;
 
-            Require<TimerComponent>();
+            RequireEntityWith<TimerComponent>();
             RegisterHandler<TimerStartCommand>(HandleTimerStartCommand);
             RegisterHandler<TimerStopCommand>(HandleTimerStopCommand);
         }

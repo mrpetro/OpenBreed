@@ -47,8 +47,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.worldMan = worldMan;
             this.primitiveRenderer = primitiveRenderer;
             this.viewClient = viewClient;
-            Require<ViewportComponent>();
-            Require<PositionComponent>();
+            RequireEntityWith<ViewportComponent>();
+            RequireEntityWith<PositionComponent>();
 
             RegisterHandler<ViewportResizeCommand>(HandleViewportResizeCommand);
         }

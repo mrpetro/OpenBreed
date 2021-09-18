@@ -78,7 +78,8 @@
     <Compile Include="Helpers\DynamicPack.cs" />
     <Compile Include="Helpers\StaticPack.cs" />
     <Compile Include="MovementSystem.cs" />
-    <Compile Include="PhysicsSystem.cs" />
+    <Compile Include="StaticBodiesSystem.cs" />
+    <Compile Include="DynamicBodiesSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
