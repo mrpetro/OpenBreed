@@ -160,7 +160,8 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<DirectionSystem>());
             builder.AddSystem(systemFactory.Create<FollowerSystem>());
             //builder.AddSystem(new FollowerSystem(core));
-            builder.AddSystem(systemFactory.Create<DynamicBodiesSystem>());
+            builder.AddSystem(systemFactory.Create<DynamicBodiesAabbUpdaterSystem>());
+            builder.AddSystem(systemFactory.Create<DynamicBodiesCollisionCheckSystem>());
             builder.AddSystem(systemFactory.Create<StaticBodiesSystem>());
             builder.AddSystem(systemFactory.Create<AnimationSystem>());
             builder.AddSystem(systemFactory.Create<TimerSystem>());

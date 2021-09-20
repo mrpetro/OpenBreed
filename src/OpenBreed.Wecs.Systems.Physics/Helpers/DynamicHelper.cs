@@ -11,10 +11,10 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
 {
     public class DynamicHelper
     {
-        private readonly DynamicBodiesSystem system;
+        private readonly DynamicBodiesCollisionCheckSystem system;
         private readonly IEntityMan entityMan;
 
-        internal DynamicHelper(DynamicBodiesSystem system, IEntityMan entityMan)
+        internal DynamicHelper(DynamicBodiesCollisionCheckSystem system, IEntityMan entityMan)
         {
             this.system = system;
             this.entityMan = entityMan;
