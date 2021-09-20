@@ -86,7 +86,7 @@
     <Compile Include="Managers\SpriteMan.cs" />
     <Compile Include="Managers\StampMan.cs" />
     <Compile Include="Managers\TextureMan.cs" />
-    <Compile Include="Managers\TileGridMan.cs" />
+    <Compile Include="Managers\TileGridFactory.cs" />
     <Compile Include="Managers\TileMan.cs" />
     <Compile Include="Managers\RenderingMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

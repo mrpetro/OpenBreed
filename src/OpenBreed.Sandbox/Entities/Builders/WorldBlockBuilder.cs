@@ -15,7 +15,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
         #region Internal Fields
 
         internal Vector2 pos;
-        internal int atlasId;
+        public int atlasId;
         internal int tileId;
         internal int groupId;
 

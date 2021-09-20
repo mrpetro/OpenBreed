@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class DynamicBodiesSystem : SystemBase, IUpdatableSystem
+    public class DynamicBodiesCollisionCheckSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal DynamicBodiesSystem(IEntityMan entityMan, IFixtureMan fixtureMan, ICollisionMan collisionMan)
+        internal DynamicBodiesCollisionCheckSystem(IEntityMan entityMan, IFixtureMan fixtureMan, ICollisionMan collisionMan)
         {
             this.entityMan = entityMan;
             this.fixtureMan = fixtureMan;
@@ -80,8 +80,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         public void Update(float dt)
         {
             ExecuteCommands();
-
-            UpdateDynamicAabbs();
 
             SweepAndPrune(dt);
         }
@@ -166,15 +164,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             var fixture = fixtureMan.GetById(body.Fixtures.First());
             body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
-        }
-
-        private void UpdateDynamicAabbs()
-        {
-            for (int i = 0; i < activeDynamics.Count; i++)
-            {
-                var ad = activeDynamics[i];
-                UpdateAabb(ad.Body, ad.Position);
-            }
         }
 
         private void SweepAndPrune(float dt)

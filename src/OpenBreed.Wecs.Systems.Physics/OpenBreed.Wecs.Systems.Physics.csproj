@@ -67,6 +67,7 @@
     <Compile Include="Commands\BodyOffCommand.cs" />
     <Compile Include="Commands\BodyOnCommand.cs" />
     <Compile Include="DirectionSystem.cs" />
+    <Compile Include="DynamicBodiesAabbUpdaterSystem.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="Helpers\CollisionChecker.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="Helpers\StaticPack.cs" />
     <Compile Include="MovementSystem.cs" />
     <Compile Include="StaticBodiesSystem.cs" />
-    <Compile Include="DynamicBodiesSystem.cs" />
+    <Compile Include="DynamicBodiesCollisionCheckSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -44,20 +44,24 @@ namespace OpenBreed.Sandbox.Loaders
                 if (!FindFarthestExit(layout, visited, ix, iy, out (int X, int Y) found))
                     return;
 
-                var layerIndex = layout.GetLayerIndex(MapLayerType.Group);
+                var groupLayerIdx = layout.GetLayerIndex(MapLayerType.Group);
+                var gfxLayerIdx = layout.GetLayerIndex(MapLayerType.Gfx);
 
-                var groupId = layout.GetCellValue(layerIndex, ix, iy);
+                var groupId = layout.GetCellValue(groupLayerIdx, ix, iy);
 
 
-                var cells = layout.FindCellsWithValue(layerIndex, groupId);
+                var cells = layout.FindCellsWithValue(groupLayerIdx, groupId);
 
                 foreach (var cell in cells)
                 {
-                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix);
+                    var cellGfxValue = layout.GetCellValue(gfxLayerIdx, cell.X, cell.Y);
+                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix, worldBlockBuilder.atlasId, cellGfxValue);
                     visited[cell.X, cell.Y] = true;
                 }
 
-                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix);
+                var exitGfxValue = layout.GetCellValue(gfxLayerIdx, found.X, found.Y);
+
+                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, worldBlockBuilder.atlasId, exitGfxValue);
                 visited[found.X, found.Y] = true;
             }
 
