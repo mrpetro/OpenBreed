@@ -109,7 +109,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             te.AddFrame(3, 4.0f);
         }
 
-        public Entity AddTeleportEntry(World world, int x, int y, int pairId)
+        public Entity AddTeleportEntry(World world, int x, int y, int pairId, int atlasId, int gfxValue)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportEntry.xml");
             var teleportEntry = entityFactory.Create(entityTemplate);
@@ -119,10 +119,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportEntry.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             teleportEntry.Add(new CollisionComponent(ColliderTypes.TeleportEntryTrigger));
 
-            //var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
-            //tileComponentBuilder.SetAtlasById(atlasId);
-            //tileComponentBuilder.SetImageIndex(tileId);
-
+            var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
+            tileComponentBuilder.SetAtlasById(atlasId);
+            tileComponentBuilder.SetImageIndex(gfxValue);
+            teleportEntry.Add(tileComponentBuilder.Build());
 
             commandsMan.Post(new AddEntityCommand(world.Id, teleportEntry.Id));
             return teleportEntry;
@@ -134,7 +134,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallback);
         }
 
-        public Entity AddTeleportExit(World world, int x, int y, int pairId)
+        public Entity AddTeleportExit(World world, int x, int y, int pairId, int atlasId, int gfxValue)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportExit.xml");
             var teleportExit = entityFactory.Create(entityTemplate);
@@ -144,7 +144,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportExit.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
-            //teleportExit.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
+            var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
+            tileComponentBuilder.SetAtlasById(atlasId);
+            tileComponentBuilder.SetImageIndex(gfxValue);
+            teleportExit.Add(tileComponentBuilder.Build());
 
             commandsMan.Post(new AddEntityCommand(world.Id, teleportExit.Id));
             //world.AddEntity(teleportExit);

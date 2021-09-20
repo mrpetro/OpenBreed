@@ -105,7 +105,8 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<ICommandsMan>(),
                                                               managerCollection.GetManager<PalettesDataProvider>(),
                                                               managerCollection.GetManager<IEntityFactoryProvider>(),
-                                                              managerCollection.GetManager<IBroadphaseGridFactory>());
+                                                              managerCollection.GetManager<IBroadphaseGridFactory>(),
+                                                              managerCollection.GetManager<ITileGridFactory>());
 
             mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
             mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));

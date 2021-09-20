@@ -6,6 +6,7 @@ using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Worlds;
@@ -41,6 +42,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly IEntityFactoryProvider mapEntityFactory;
         private readonly IBroadphaseGridFactory broadphaseGridFactory;
+        private readonly ITileGridFactory tileGridFactory;
         private readonly Dictionary<int, IMapWorldEntityLoader> entityLoaders = new Dictionary<int, IMapWorldEntityLoader>();
 
         #endregion Private Fields
@@ -56,7 +58,8 @@ namespace OpenBreed.Sandbox.Loaders
                                   ICommandsMan commandsMan,
                                   PalettesDataProvider palettesDataProvider,
                                   IEntityFactoryProvider mapEntityFactory,
-                                  IBroadphaseGridFactory broadphaseGridFactory)
+                                  IBroadphaseGridFactory broadphaseGridFactory,
+                                  ITileGridFactory tileGridFactory)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
@@ -68,6 +71,7 @@ namespace OpenBreed.Sandbox.Loaders
             this.palettesDataProvider = palettesDataProvider;
             this.mapEntityFactory = mapEntityFactory;
             this.broadphaseGridFactory = broadphaseGridFactory;
+            this.tileGridFactory = tileGridFactory;
         }
 
         #endregion Public Constructors
@@ -114,6 +118,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.SetSize(layout.Width, layout.Width);
 
             worldBuilder.AddModule(broadphaseGridFactory.CreateGrid(layout.Width, layout.Height, cellSize));
+            worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
 
             worldBuilder.SetupGameWorldSystems(systemFactory);
             var newWorld = worldBuilder.Build();

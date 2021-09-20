@@ -23,7 +23,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
             manCollection.AddSingleton<ITileMan>(() => new TileMan(manCollection.GetManager<ITextureMan>(),
                                                                    manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<ITileGridMan>(() => new TileGridMan(manCollection.GetManager<ITileMan>(),
+            manCollection.AddSingleton<ITileGridFactory>(() => new TileGridFactory(manCollection.GetManager<ITileMan>(),
                                                                            manCollection.GetManager<IStampMan>(),
                                                                            manCollection.GetManager<ILogger>()));
 

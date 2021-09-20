@@ -99,6 +99,18 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             if (groupCmp.Id == -1)
                 return;
 
+            if (posCmp.Value.X + 16 < clipBox.Left)
+                return;
+
+            if (posCmp.Value.X > clipBox.Right)
+                return;
+
+            if (posCmp.Value.Y + 16 < clipBox.Bottom)
+                return;
+
+            if (posCmp.Value.Y > clipBox.Top)
+                return;
+
             GL.PushMatrix();
 
             GL.Translate((int)posCmp.Value.X, (int)posCmp.Value.Y, 0.0f);
