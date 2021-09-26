@@ -4307,7 +4307,6 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-
 				<Animation Id="Animations/Actor/Standing/Up">
 					<Length>1.0</Length>
 					<Tracks>
@@ -4460,7 +4459,6 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-
 				<Animation Id="Animations/Camera/Effects/FadeOut">
 					<Length>10.0</Length>
 					<Tracks>
@@ -4485,6 +4483,49 @@
 								<Frame Time="10.0" Value="1.0" />
 							</Frames>
 						</FloatTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Animations/Environment/Level4/TVFlickering">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="SpriteSets.SPR4B#4" />
+								<Frame Time="0.5" Value="SpriteSets.SPR4B#5" />
+								<Frame Time="1.0" Value="SpriteSets.SPR4B#6" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Animations/Environment/Level4/MonsterEating">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="SpriteSets.SPR4B#0" />
+								<Frame Time="0.5" Value="SpriteSets.SPR4B#1" />
+								<Frame Time="1.0" Value="SpriteSets.SPR4B#2" />
+								<Frame Time="1.5" Value="SpriteSets.SPR4B#3" />
+							</Frames>
+						</StringTrack>
 					</Tracks>
 				</Animation>
 			</Items>
