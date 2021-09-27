@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Animation>
+			<States>
+				<State>
+					<Speed>4</Speed>
+					<Loop>true</Loop>
+					<ClipName>Animations/Environment/Level4/MonsterEating</ClipName>
+				</State>
+			</States>
+		</Animation>
+        <Position x="0" y="0" />
+		<Sprite>
+			<AtlasName>SpriteSets.SPR4B#0</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Origin X="0" Y="-16" />
+			<Order>0</Order>
+		</Sprite>
+    </Components>
+</EntityTemplate>

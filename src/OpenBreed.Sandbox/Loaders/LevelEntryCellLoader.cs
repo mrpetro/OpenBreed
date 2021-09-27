@@ -40,7 +40,11 @@ namespace OpenBreed.Sandbox.Loaders
             if (actionValue == 56)
                 entryId = 0;
 
-            worldGateHelper.AddWorldEntry(world, ix + 15, iy + 68, entryId);
+            //NOTE: Override level entry for debuggin purpose
+            //Near teleport entry
+            //worldGateHelper.AddWorldEntry(world, ix + 15, iy + 68, entryId);
+            //Near TV
+            worldGateHelper.AddWorldEntry(world, ix + 30, iy, entryId);
 
             //actorHelper.AddHero(world, ix, iy);
         }

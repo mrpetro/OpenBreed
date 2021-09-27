@@ -150,23 +150,29 @@ namespace OpenBreed.Sandbox
                                                                                             manCollection.GetManager<IEventsMan>(),
                                                                                             manCollection.GetManager<ViewportCreator>(),
                                                                                             manCollection.GetManager<IViewClient>()));
-            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(core, manCollection.GetManager<ISystemFactory>(),
-                                                                                            manCollection.GetManager<IWorldMan>(),
-                                                                                            manCollection.GetManager<IViewClient>(),
-                                                                                            manCollection.GetManager<IEntityMan>()));
-            manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(manCollection,
-                                                                                        manCollection.GetManager<IPlayersMan>(),
-                                                                                            manCollection.GetManager<ICommandsMan>(),
-                                                                                            manCollection.GetManager<IEntityMan>(),
-                                                                                        manCollection.GetManager<ISystemFactory>(),
-                                                                                            manCollection.GetManager<IWorldMan>(),
-                                                                                            manCollection.GetManager<ILogger>()));
+            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(core, manCollection.GetManager<ICommandsMan>(),
+                                                                                      manCollection.GetManager<ISystemFactory>(),
+                                                                                      manCollection.GetManager<IWorldMan>(),
+                                                                                      manCollection.GetManager<IViewClient>(),
+                                                                                      manCollection.GetManager<IEntityMan>()));
+            manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(manCollection.GetManager<IPlayersMan>(),
+                                                                                  manCollection.GetManager<ICommandsMan>(),
+                                                                                  manCollection.GetManager<IEntityMan>(),
+                                                                                  manCollection.GetManager<ISystemFactory>(),
+                                                                                  manCollection.GetManager<IWorldMan>(),
+                                                                                  manCollection.GetManager<ILogger>()));
 
             manCollection.AddSingleton<WorldGateHelper>(() => new WorldGateHelper(core,
                                                                                   manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
                                                                                   manCollection.GetManager<ViewportCreator>()));
-            manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(core));
+            manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                        manCollection.GetManager<IEntityFactory>(),
+                                                                        manCollection.GetManager<ICommandsMan>()));
+            manCollection.AddSingleton<EnvironmentHelper>(() => new EnvironmentHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                                      manCollection.GetManager<IEntityFactory>(),
+                                                                                      manCollection.GetManager<ICommandsMan>(),
+                                                                                      manCollection.GetManager<IBuilderFactory>()));
             manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IWorldMan>(),
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
@@ -441,6 +447,7 @@ namespace OpenBreed.Sandbox
 
             var worldGateHelper = GetManager<WorldGateHelper>();
             var doorHelper = GetManager<DoorHelper>();
+            var environmentHelper = GetManager<EnvironmentHelper>();
             var projectileHelper = GetManager<ProjectileHelper>();
             var actorHelper = GetManager<ActorHelper>();
             var teleportHelper = GetManager<TeleportHelper>();
@@ -453,7 +460,8 @@ namespace OpenBreed.Sandbox
 
             CameraHelper.CreateAnimations(this);
 
-            doorHelper.CreateAnimations();
+            doorHelper.LoadAnimations();
+            environmentHelper.LoadAnimations();
             actorHelper.CreateAnimations();
             TurretHelper.CreateAnimations(this);
             TeleportHelper.CreateAnimations(this);

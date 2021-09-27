@@ -14,21 +14,24 @@ using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Animation;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Worlds
 {
     public  class HudWorldHelper
     {
         private readonly ICore core;
+        private readonly ICommandsMan commandsMan;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         private readonly IViewClient viewClient;
         private readonly IEntityMan entityMan;
         #region Public Methods
 
-        public HudWorldHelper(ICore core, ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan)
+        public HudWorldHelper(ICore core, ICommandsMan commandsMan, ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan)
         {
             this.core = core;
+            this.commandsMan = commandsMan;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             this.viewClient = viewClient;
@@ -80,7 +83,7 @@ namespace OpenBreed.Sandbox.Worlds
             cameraBuilder.SetFov(viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
-            core.Commands.Post(new AddEntityCommand(world.Id, hudCamera.Id));
+            commandsMan.Post(new AddEntityCommand(world.Id, hudCamera.Id));
             //world.AddEntity(hudCamera);
 
             FpsCounterHelper.AddToWorld(core, world);

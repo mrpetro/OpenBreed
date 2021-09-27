@@ -48,9 +48,9 @@ namespace OpenBreed.Sandbox.Loaders
                     PutGenericCell(worldBlockBuilder, layout, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
                     break;
 
-                    //default:
-                    //    PutGenericCell(layout, visited, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: true);
-                    //    break;
+                //default:
+                //    PutGenericCell(worldBlockBuilder, layout, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: true);
+                //    break;
             }
 
             visited[ix, iy] = true;

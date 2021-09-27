@@ -19,6 +19,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Wecs.Components;
 
 namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 {
@@ -41,6 +42,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             this.fontMan = fontMan;
 
             RequireEntityWith<PositionComponent>();
+            RequireEntityWith<UnknownCodeComponent>();
             RequireEntityWith<TileComponent>();
 
             font = fontMan.Create("ARIAL", 8);
@@ -118,11 +120,26 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
         /// <param name="viewport">Viewport which entity wireframe will be rendered to</param>
         private void DrawEntityAabb(Entity entity, Box2 clipBox)
         {
-            if (entity.Tag is null)
+            var posCmp = entity.Get<PositionComponent>();
+
+            if (posCmp.Value.X + 16 < clipBox.Left)
                 return;
 
-            var posCmp = entity.Get<PositionComponent>();
+            if (posCmp.Value.X > clipBox.Right)
+                return;
+
+            if (posCmp.Value.Y + 16 < clipBox.Bottom)
+                return;
+
+            if (posCmp.Value.Y > clipBox.Top)
+                return;
+
+
+
             var tileCmp = entity.Get<TileComponent>();
+            var unknownCodeCmp = entity.Get<UnknownCodeComponent>();
+
+
 
             GL.PushMatrix();
 
@@ -140,7 +157,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
             GL.BlendColor(Color4.Black);
 
-            font.Draw(entity.Tag.ToString());
+            font.Draw(unknownCodeCmp.Code.ToString());
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);

@@ -96,7 +96,9 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupMapWorldDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            var mapWorldDataLoader = new MapWorldDataLoader(dataLoaderFactory,
+            dataLoaderFactory.Register<World>(() =>
+            {
+                var mapWorldDataLoader = new MapWorldDataLoader(dataLoaderFactory,
                                                               managerCollection.GetManager<IRepositoryProvider>(),
                                                               managerCollection.GetManager<MapsDataProvider>(),
                                                               managerCollection.GetManager<ISystemFactory>(),
@@ -108,24 +110,32 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<IBroadphaseGridFactory>(),
                                                               managerCollection.GetManager<ITileGridFactory>());
 
-            mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
-            mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
+                mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
+                mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
 
-            mapWorldDataLoader.Register(LevelEntryCellLoader.CODE, new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
-                                                                     managerCollection.GetManager<WorldGateHelper>()));
-            mapWorldDataLoader.Register(DoorCellEntityLoader.CODE, new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>()));
+                var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetManager<EnvironmentHelper>());
+                mapWorldDataLoader.Register(AnimatedCellLoader.TV_FLICKERING_CODE, environmentCellLoader);
+                mapWorldDataLoader.Register(AnimatedCellLoader.MONSTER_EATING_CODE, environmentCellLoader);
 
-            var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetManager<TeleportHelper>(),
-                                                    managerCollection.GetManager<ILogger>());
+                mapWorldDataLoader.Register(LevelEntryCellLoader.CODE, new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
+                                                                         managerCollection.GetManager<WorldGateHelper>()));
+                mapWorldDataLoader.Register(DoorCellEntityLoader.CODE, new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>()));
 
-            mapWorldDataLoader.Register(TeleportCellEntityLoader.ENTRY_CODE, teleportLoader);
+                var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetManager<TeleportHelper>(),
+                                                        managerCollection.GetManager<ILogger>());
 
-            dataLoaderFactory.Register(mapWorldDataLoader);
+                mapWorldDataLoader.Register(TeleportCellEntityLoader.ENTRY_CODE, teleportLoader);
+
+                return mapWorldDataLoader;
+
+            });
+
+
         }
 
         public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register(new TileAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+            dataLoaderFactory.Register<ITileAtlas>(() => new TileAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
                                                              managerCollection.GetManager<ITextureMan>(),
                                                              managerCollection.GetManager<ITileMan>()));
@@ -133,7 +143,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register(new TileStampDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+            dataLoaderFactory.Register<ITileStamp>(() => new TileStampDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
                                                              managerCollection.GetManager<ITextureMan>(),
                                                              managerCollection.GetManager<IStampMan>(),
@@ -142,7 +152,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register(new SpriteAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+            dataLoaderFactory.Register<ISpriteAtlas>(() => new SpriteAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
                                                              managerCollection.GetManager<ITextureMan>(),
                                                              managerCollection.GetManager<ISpriteMan>()));
@@ -177,8 +187,8 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<TextSystem>());
 
             builder.AddSystem(systemFactory.Create<PhysicsDebugDisplaySystem>());
-            //builder.AddSystem(systemFactory.Create<UnknownMapCellDisplaySystem>());
-            builder.AddSystem(systemFactory.Create<GroupMapCellDisplaySystem>());
+            builder.AddSystem(systemFactory.Create<UnknownMapCellDisplaySystem>());
+            //builder.AddSystem(systemFactory.Create<GroupMapCellDisplaySystem>());
             builder.AddSystem(systemFactory.Create<ViewportSystem>());
 
 
