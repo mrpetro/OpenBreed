@@ -9,6 +9,7 @@ using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems;
@@ -140,7 +141,7 @@ namespace OpenBreed.Sandbox.Loaders
                 }
             }
 
-            //Process trough all ont visited
+            //Process trough all not visited
             for (int iy = 0; iy < layout.Height; iy++)
             {
                 for (int ix = 0; ix < layout.Width; ix++)
@@ -152,7 +153,8 @@ namespace OpenBreed.Sandbox.Loaders
                     var gfxValue = cellValues[gfxLayer];
                     var actionValue = cellValues[actionLayer];
 
-                    LoadUnknownCell(worldBlockBuilder, layout, newWorld, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
+                    PutUnknownCodeCell(worldBlockBuilder, layout, visited, ix, iy, gfxValue, actionValue, newWorld);
+                    //LoadUnknownCell(worldBlockBuilder, layout, newWorld, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
                 }
             }
 
@@ -187,6 +189,22 @@ namespace OpenBreed.Sandbox.Loaders
 
             if (entityLoaders.TryGetValue(actionValue, out IMapWorldEntityLoader entityLoader))
                 entityLoader.Load(worldBlockBuilder, layout, visited, ix, iy, gfxValue, actionValue, world);
+
+        }
+
+        private void PutUnknownCodeCell(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        {
+            worldBlockBuilder.SetPosition(ix * layout.CellSize, iy * layout.CellSize);
+            worldBlockBuilder.SetTileId(gfxValue);
+            worldBlockBuilder.HasBody = false;
+
+            var cellEntity = worldBlockBuilder.Build();
+
+            cellEntity.Add(new UnknownCodeComponent(actionValue));
+
+            commandsMan.Post(new AddEntityCommand(world.Id, cellEntity.Id));
+
+            visited[ix, iy] = true;
         }
 
         private void LoadReferencedTileSet(IDbMap entry)

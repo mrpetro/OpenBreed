@@ -34,21 +34,19 @@ namespace OpenBreed.Sandbox.Entities.Door
 {
     public class DoorHelper
     {
-        public DoorHelper(ICore core)
+        private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly IEntityFactory entityFactory;
+        private readonly ICommandsMan commandMan;
+
+        public DoorHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, ICommandsMan commandMan)
         {
-            this.core = core;
+            this.dataLoaderFactory = dataLoaderFactory;
+            this.entityFactory = entityFactory;
+            this.commandMan = commandMan;
         }
 
-        private const string TILE_ATLAS = "Atlases/Tiles/16/Test";
-        private const string STAMP_DOOR_HORIZONTAL_CLOSED = "Tiles/Stamps/DoorHorizontal/Closed";
-        private const string STAMP_DOOR_HORIZONTAL_OPENED = "Tiles/Stamps/DoorHorizontal/Opened";
-        private const string STAMP_DOOR_VERTICAL_CLOSED = "Tiles/Stamps/DoorVertical/Closed";
-        private const string STAMP_DOOR_VERTICAL_OPENED = "Tiles/Stamps/DoorVertical/Opened";
-        private readonly ICore core;
-
-        public void CreateAnimations()
+        public void LoadAnimations()
         {
-            var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
             var animationLoader = dataLoaderFactory.GetLoader<IClip>();
 
             animationLoader.Load("Animations.DoorVertical.Opening");
@@ -60,28 +58,27 @@ namespace OpenBreed.Sandbox.Entities.Door
         public void AddVerticalDoor(World world, int x, int y)
         {
             var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml");
-            var door = core.GetManager<IEntityFactory>().Create(doorVerticalTemplate);
+            var door = entityFactory.Create(doorVerticalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());
 
-            core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
+            commandMan.Post(new AddEntityCommand(world.Id, door.Id));
         }
 
         public void AddHorizontalDoor(World world, int x, int y)
         {
             var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml");
-            var door = core.GetManager<IEntityFactory>().Create(doorHorizontalTemplate);
+            var door = entityFactory.Create(doorHorizontalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());
 
-            core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
+            commandMan.Post(new AddEntityCommand(world.Id, door.Id));
         }
 
         public void LoadStamps()
         {
-            var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
             var tileStampLoader = dataLoaderFactory.GetLoader<ITileStamp>();
 
             tileStampLoader.Load("Tiles/Stamps/DoorHorizontal/Closed");

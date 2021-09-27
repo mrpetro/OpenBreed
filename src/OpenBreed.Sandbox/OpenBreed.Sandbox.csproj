@@ -80,7 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\EnvironmentHelper.cs" />
     <Compile Include="Entities\MapCellHelper.cs" />
+    <Compile Include="Loaders\AnimatedCellLoader.cs" />
     <Compile Include="Loaders\DoorCellEntityLoader.cs" />
     <Compile Include="Loaders\LevelEntryCellLoader.cs" />
     <Compile Include="Loaders\GenericCellEntityLoader.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteComponentAnimator.cs" />
+    <Compile Include="Wecs\Components\UnknownCodeComponent.cs" />
     <Compile Include="Wecs\Systems\GroupMapCellDisplaySystem.cs" />
     <Compile Include="Wecs\Systems\UnknownMapCellDisplaySystem.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />
@@ -173,6 +176,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\CrazyMover\CrazyMover.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Level4\MonsterEating.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Level4\TVFlickering.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Door\DoorVertical.xml">
