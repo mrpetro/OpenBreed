@@ -162,9 +162,13 @@ namespace OpenBreed.Sandbox
                                                                                   manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<WorldGateHelper>(() => new WorldGateHelper(core,
-                                                                                  manCollection.GetManager<IWorldMan>(),
+            manCollection.AddSingleton<WorldGateHelper>(() => new WorldGateHelper(manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
+                                                                                  manCollection.GetManager<IEntityFactory>(),
+                                                                                  manCollection.GetManager<IEventsMan>(),
+                                                                                  manCollection.GetManager<ICommandsMan>(),
+                                                                                  manCollection.GetManager<ICollisionMan>(),
+                                                                                  manCollection.GetManager<IJobsMan>(),
                                                                                   manCollection.GetManager<ViewportCreator>()));
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                         manCollection.GetManager<IEntityFactory>(),

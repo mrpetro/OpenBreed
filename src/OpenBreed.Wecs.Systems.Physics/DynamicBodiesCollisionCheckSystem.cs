@@ -64,14 +64,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
 
-        public static Box2 GetCellBox(PositionComponent pos)
-        {
-            var bx = pos.Value.X;
-            var by = pos.Value.Y;
-
-            return new Box2(bx, by, bx + CELL_SIZE, by + CELL_SIZE);
-        }
-
         public void UpdatePauseImmuneOnly(float dt)
         {
             ExecuteCommands();
@@ -105,7 +97,6 @@ namespace OpenBreed.Wecs.Systems.Physics
                                       entity.Get<VelocityComponent>());
 
             activeDynamics.Add(pack);
-            UpdateAabb(pack.Body, pack.Position);
         }
 
         protected override void OnRemoveEntity(Entity entity)
@@ -160,12 +151,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             return false;
         }
 
-        private void UpdateAabb(BodyComponent body, PositionComponent pos)
-        {
-            var fixture = fixtureMan.GetById(body.Fixtures.First());
-            body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
-        }
-
         private void SweepAndPrune(float dt)
         {
             var xActiveList = new List<DynamicPack>();
@@ -182,7 +167,9 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             for (int i = 0; i < activeDynamics.Count - 1; i++)
             {
-                QueryStaticGrid(activeDynamics[i], dt);
+                var activeDynamic = entityMan.GetById(activeDynamics[i].EntityId);
+
+                QueryStaticGrid(activeDynamic, dt);
 
                 nextCollider = activeDynamics[i + 1];
                 xActiveList.Add(activeDynamics[i]);
@@ -194,7 +181,12 @@ namespace OpenBreed.Wecs.Systems.Physics
                     if (nextCollider.Aabb.Left < currentCollider.Aabb.Right)
                     {
                         if (nextCollider.Aabb.Bottom <= currentCollider.Aabb.Top && nextCollider.Aabb.Top > currentCollider.Aabb.Bottom)
-                            TestNarrowPhaseDynamic(nextCollider, currentCollider, dt);
+                        {
+                            var nextEntity = entityMan.GetById(nextCollider.EntityId);
+                            var currentEntity = entityMan.GetById(currentCollider.EntityId);
+
+                            TestNarrowPhaseDynamic(nextEntity, currentEntity, dt);
+                        }
                     }
                     else
                     {
@@ -205,17 +197,17 @@ namespace OpenBreed.Wecs.Systems.Physics
             }
 
             if (activeDynamics.Count > 0)
-                QueryStaticGrid(activeDynamics.Last(), dt);
+            {
+                var lastDynamic = entityMan.GetById(activeDynamics.Last().EntityId);
+                QueryStaticGrid(lastDynamic, dt);
+            }
         }
 
-        private void TestNarrowPhaseDynamic(DynamicPack packA, DynamicPack packB, float dt)
+        private void TestNarrowPhaseDynamic(Entity entityA, Entity entityB, float dt)
         {
             Vector2 projection;
-            if (dynamicHelper.TestVsDynamic(packA, packB, dt, out projection))
+            if (dynamicHelper.TestVsDynamic(entityA, entityB, dt, out projection))
             {
-                var entityA = entityMan.GetById(packA.EntityId);
-                var entityB = entityMan.GetById(packB.EntityId);
-
                 collisionMan.Callback(entityA, entityB, projection);
 
                 //bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
@@ -224,21 +216,21 @@ namespace OpenBreed.Wecs.Systems.Physics
             }
         }
 
-        private void TestNarrowPhaseStatic(DynamicPack packA, Entity entityB, float dt)
+        private void TestNarrowPhaseStatic(Entity entityA, Entity entityB, float dt)
         {
-            var entityA = entityMan.GetById(packA.EntityId);
-
             Vector2 projection;
-            if (dynamicHelper.TestVsStatic(packA, entityB, dt, out projection))
+            if (dynamicHelper.TestVsStatic(entityA, entityB, dt, out projection))
             {
                 collisionMan.Callback(entityA, entityB, projection);
                 collisionMan.Callback(entityB, entityA, -projection);
             }
         }
 
-        private void QueryStaticGrid(DynamicPack pack, float dt)
+        private void QueryStaticGrid(Entity entity, float dt)
         {
-            var dynamicAabb = pack.Aabb;
+            var body = entity.Get<BodyComponent>();
+
+            var dynamicAabb = body.Aabb;
 
             var idSet = broadphaseGrid.QueryStatic(dynamicAabb);
 
@@ -252,8 +244,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             entitySet.Sort((a, b) => ShortestDistanceComparer(pos, GetCellCenter(a.Get<PositionComponent>()), GetCellCenter(b.Get<PositionComponent>())));
 
             //Iterate all collected static bodies for detail test
-            foreach (var entity in entitySet)
-                TestNarrowPhaseStatic(pack, entity, dt);
+            foreach (var staticEntity in entitySet)
+                TestNarrowPhaseStatic(entity, staticEntity, dt);
         }
 
         private int Xcomparison(DynamicPack x, DynamicPack y)

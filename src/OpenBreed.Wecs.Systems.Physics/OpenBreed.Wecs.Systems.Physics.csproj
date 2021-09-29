@@ -77,7 +77,6 @@
     <Compile Include="Events\CollisionEventArgs.cs" />
     <Compile Include="Events\DirectionChangedEventArgs.cs" />
     <Compile Include="Helpers\DynamicPack.cs" />
-    <Compile Include="Helpers\StaticPack.cs" />
     <Compile Include="MovementSystem.cs" />
     <Compile Include="StaticBodiesSystem.cs" />
     <Compile Include="DynamicBodiesCollisionCheckSystem.cs" />

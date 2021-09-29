@@ -34,16 +34,21 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
 
         #region Internal Methods
 
-        internal bool TestVsDynamic(DynamicPack bodyA, DynamicPack bodyB, float dt, out Vector2 projection)
+        internal bool TestVsDynamic(Entity entityA, Entity entityB, float dt, out Vector2 projection)
         {
-            if (bodyA.Body.Fixtures.Count > 0)
-            {
-                var fixtureA = system.GetFixture(bodyA.Body.Fixtures.First());
+            var bodyA = entityA.Get<BodyComponent>();
+            var posA = entityA.Get<PositionComponent>();
+            var bodyB = entityB.Get<BodyComponent>();
+            var posB = entityB.Get<PositionComponent>();
 
-                if (bodyB.Body.Fixtures != null && bodyB.Body.Fixtures.Count > 0)
+            if (bodyA.Fixtures.Count > 0)
+            {
+                var fixtureA = system.GetFixture(bodyA.Fixtures.First());
+
+                if (bodyB.Fixtures.Count > 0)
                 {
-                    var fixtureB = system.GetFixture(bodyB.Body.Fixtures.First());
-                    return CollisionChecker.Check(bodyA.Position.Value, fixtureA, bodyB.Position.Value, fixtureB, out projection);
+                    var fixtureB = system.GetFixture(bodyB.Fixtures.First());
+                    return CollisionChecker.Check(posA.Value, fixtureA, posB.Value, fixtureB, out projection);
                 }
                 else
                     throw new NotImplementedException();
@@ -52,19 +57,22 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
                 throw new NotImplementedException();
         }
 
-        internal bool TestVsStatic(DynamicPack entityA, Entity entityB, float dt, out Vector2 projection)
+        internal bool TestVsStatic(Entity entityA, Entity entityB, float dt, out Vector2 projection)
         {
-            if (entityA.Body.Fixtures.Count > 0)
+            var bodyA = entityA.Get<BodyComponent>();
+            var posA = entityA.Get<PositionComponent>();
+
+            if (bodyA.Fixtures.Count > 0)
             {
-                var fixtureA = system.GetFixture(entityA.Body.Fixtures.First());
+                var fixtureA = system.GetFixture(bodyA.Fixtures.First());
 
                 var bodyB = entityB.Get<BodyComponent>();
                 var posB = entityB.Get<PositionComponent>();
 
-                if (bodyB.Fixtures != null && bodyB.Fixtures.Count > 0)
+                if (bodyB.Fixtures.Count > 0)
                 {
                     var fixtureB = system.GetFixture(bodyB.Fixtures.First());
-                    return CollisionChecker.Check(entityA.Position.Value, fixtureA, posB.Value, fixtureB, out projection);
+                    return CollisionChecker.Check(posA.Value, fixtureA, posB.Value, fixtureB, out projection);
                 }
                 else
                     throw new NotImplementedException();
@@ -80,40 +88,44 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
         /// <param name="bodyB">Second dynamic body</param>
         /// <param name="projection">Given collision projection vector</param>
         /// <param name="dt">Delta time</param>
-        internal static void ResolveVsDynamic(ICore core, DynamicPack bodyA, DynamicPack bodyB, Vector2 projection, float dt)
+        internal static void ResolveVsDynamic(Entity entityA, Entity entityB, Vector2 projection, float dt)
         {
-            var entityA = core.GetManager<IEntityMan>().GetById(bodyA.EntityId);
-            var entityB = core.GetManager<IEntityMan>().GetById(bodyB.EntityId);
+            var bodyA = entityA.Get<BodyComponent>();
+            var posA = entityA.Get<PositionComponent>();
+            var velA = entityA.Get<VelocityComponent>();
+            var bodyB = entityB.Get<BodyComponent>();
+            var posB = entityB.Get<PositionComponent>();
+            var velB = entityB.Get<VelocityComponent>();
 
             entityA.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
             entityB.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
 
-            bodyA.Position.Value += projection / 2;
-            bodyB.Position.Value -= projection / 2;
+            posA.Value += projection / 2;
+            posB.Value -= projection / 2;
 
             var normalA = projection.Normalized();
             var normalB = -projection.Normalized();
 
             //find component of velocity parallel to collision normal
-            var dpA = Vector2.Dot(bodyA.Velocity.Value, normalA);
-            var dpB = Vector2.Dot(bodyB.Velocity.Value, normalB);
+            var dpA = Vector2.Dot(velA.Value, normalA);
+            var dpB = Vector2.Dot(velB.Value, normalB);
 
             //Apply collision response forces if the object is travelling into, and not out of, the collision
             if (dpA < 0)
             {
-                var corA = GENERIC_COR * bodyA.Body.CorFactor;
+                var corA = GENERIC_COR * bodyA.CorFactor;
                 var vnA = Vector2.Multiply(normalA, dpA);
-                var vtA = bodyA.Velocity.Value - vnA;
-                bodyA.Velocity.Value = vtA - corA * vnA;
+                var vtA = velA.Value - vnA;
+                velA.Value = vtA - corA * vnA;
             }
 
             //Apply collision response forces if the object is travelling into, and not out of, the collision
             if (dpB < 0)
             {
-                var corB = GENERIC_COR * bodyB.Body.CorFactor;
+                var corB = GENERIC_COR * bodyB.CorFactor;
                 var vnB = Vector2.Multiply(normalB, dpB);
-                var vtB = bodyB.Velocity.Value - vnB;
-                bodyB.Velocity.Value = vtB - corB * vnB;
+                var vtB = velB.Value - vnB;
+                velB.Value = vtB - corB * vnB;
             }
         }
 
