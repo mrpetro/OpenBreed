@@ -94,7 +94,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
                 bodyComponentBuilder.AddFixture(fixtureId);
 
                 entity.Add(bodyComponentBuilder.Build());
-                entity.Add(new CollisionComponent(ColliderTypes.StaticObstacle));
+                entity.Add(new ColliderComponent(ColliderTypes.StaticObstacle));
             }
 
             var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();

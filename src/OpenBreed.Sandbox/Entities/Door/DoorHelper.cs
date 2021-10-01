@@ -61,7 +61,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var door = entityFactory.Create(doorVerticalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            door.Add(new CollisionComponent());
+            door.Add(new ColliderComponent());
 
             commandMan.Post(new AddEntityCommand(world.Id, door.Id));
         }
@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var door = entityFactory.Create(doorHorizontalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            door.Add(new CollisionComponent());
+            door.Add(new ColliderComponent());
 
             commandMan.Post(new AddEntityCommand(world.Id, door.Id));
         }

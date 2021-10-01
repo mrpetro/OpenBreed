@@ -62,7 +62,7 @@ namespace OpenBreed.Sandbox.Components.States
         {
             entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
 
-            var colCmp = entity.Get<CollisionComponent>();
+            var colCmp = entity.Get<ColliderComponent>();
             colCmp.ColliderTypes.Remove(ColliderTypes.StaticObstacle);
         }
 

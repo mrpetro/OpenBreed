@@ -59,11 +59,6 @@ namespace OpenBreed.Wecs.Entities
         /// </summary>
         public int Id { get; internal set; }
 
-        /// <summary>
-        /// Property for various debug data
-        /// </summary>
-        public object DebugData { get; set; }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -136,6 +131,16 @@ namespace OpenBreed.Wecs.Entities
             Debug.Assert(component != null, "Adding null component to entity is forbidden.");
             Debug.Assert(!components.Any(item => item.GetType() == component.GetType()), "Adding two components of same type to one entity is forbidden.");
             components.Add(component);
+        }
+
+        /// <summary>
+        /// Remove component of specific type from entity
+        /// </summary>
+        /// <typeparam name="TComponent">Type of component to remove</typeparam>
+        /// <returns>True if component remove successfuly, false otherwise</returns>
+        public bool Remove<TComponent>()
+        {
+            return components.RemoveAll(cmp => cmp is TComponent) > 0;
         }
 
         /// <summary>

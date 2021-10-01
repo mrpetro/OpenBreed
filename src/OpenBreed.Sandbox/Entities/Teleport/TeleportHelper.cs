@@ -76,12 +76,13 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         private readonly ICollisionMan collisionMan;
         private readonly IBuilderFactory builderFactory;
         private readonly IJobsMan jobMan;
+        private readonly IFixtureMan fixtureMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TeleportHelper(IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, ICommandsMan commandsMan, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan)
+        public TeleportHelper(IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, ICommandsMan commandsMan, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IFixtureMan fixtureMan)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;
@@ -91,6 +92,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             this.collisionMan = collisionMan;
             this.builderFactory = builderFactory;
             this.jobMan = jobMan;
+            this.fixtureMan = fixtureMan;
         }
 
         #endregion Public Constructors
@@ -117,7 +119,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportEntry.Tag = new TeleportPair { Id = pairId, Type = TeleportType.In };
 
             teleportEntry.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            teleportEntry.Add(new CollisionComponent(ColliderTypes.TeleportEntryTrigger));
+            teleportEntry.Add(new ColliderComponent(ColliderTypes.TeleportEntryTrigger));
 
             var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
             tileComponentBuilder.SetAtlasById(atlasId);
@@ -166,7 +168,11 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             var exitPos = exitEntity.Get<PositionComponent>();
             var targetPos = target.Get<PositionComponent>();
-            var targetAabb = target.Get<BodyComponent>().Aabb;
+
+            var bodyCmp = target.Get<BodyComponent>();
+            var fixture = fixtureMan.GetById(bodyCmp.Fixtures.First());
+            var targetAabb = fixture.Shape.GetAabb().Translated(targetPos.Value);
+
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
 
             var newPosition = exitPos.Value + offset;

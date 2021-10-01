@@ -2,6 +2,7 @@
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Commands;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,10 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
                                                                                manCollection.GetManager<ICollisionMan>()));
             systemFactory.Register(() => new StaticBodiesSystem(manCollection.GetManager<IEntityMan>(),
                                                                 manCollection.GetManager<IFixtureMan>()));
-
+            systemFactory.Register(() => new CollisionResponseSystem(manCollection.GetManager<IEntityMan>(),
+                                                                     manCollection.GetManager<IFixtureMan>(),
+                                                                     manCollection.GetManager<IWorldMan>(),
+                                                                     manCollection.GetManager<ICollisionMan>()));
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
             entityCommandHandler.BindCommand<BodyOffCommand, DynamicBodiesCollisionCheckSystem>();
             entityCommandHandler.BindCommand<BodyOnCommand, DynamicBodiesCollisionCheckSystem>();

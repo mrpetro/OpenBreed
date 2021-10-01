@@ -4,7 +4,7 @@ using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Physics.Generic.Managers
 {
-    public class BroadphaseGridFactory : IBroadphaseGridFactory
+    public class BroadphaseFactory : IBroadphaseFactory
     {
         #region Private Fields
 
@@ -14,7 +14,7 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #region Internal Constructors
 
-        internal BroadphaseGridFactory(ILogger logger)
+        internal BroadphaseFactory(ILogger logger)
         {
             this.logger = logger;
         }
@@ -23,9 +23,14 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #region Public Methods
 
-        public IBroadphaseGrid CreateGrid(int width, int height, int cellSize)
+        public IBroadphaseStatic CreateStatic(int width, int height, int cellSize)
         {
-            return new BroadphaseGrid(width, height, cellSize);
+            return new BroadphaseStaticGrid(width, height, cellSize);
+        }
+
+        public IBroadphaseDynamic CreateDynamic()
+        {
+            return new BroadphaseDynamicSwepAndPrune();
         }
 
         #endregion Public Methods

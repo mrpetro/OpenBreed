@@ -57,17 +57,17 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
                 throw new NotImplementedException();
         }
 
-        internal bool TestVsStatic(Entity entityA, Entity entityB, float dt, out Vector2 projection)
+        internal bool TestVsStatic(Entity dynamicEntity, Entity staticEntity, float dt, out Vector2 projection)
         {
-            var bodyA = entityA.Get<BodyComponent>();
-            var posA = entityA.Get<PositionComponent>();
+            var bodyA = dynamicEntity.Get<BodyComponent>();
+            var posA = dynamicEntity.Get<PositionComponent>();
 
             if (bodyA.Fixtures.Count > 0)
             {
                 var fixtureA = system.GetFixture(bodyA.Fixtures.First());
 
-                var bodyB = entityB.Get<BodyComponent>();
-                var posB = entityB.Get<PositionComponent>();
+                var bodyB = staticEntity.Get<BodyComponent>();
+                var posB = staticEntity.Get<PositionComponent>();
 
                 if (bodyB.Fixtures.Count > 0)
                 {
@@ -97,8 +97,8 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             var posB = entityB.Get<PositionComponent>();
             var velB = entityB.Get<VelocityComponent>();
 
-            entityA.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
-            entityB.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
+            //entityA.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
+            //entityB.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
 
             posA.Value += projection / 2;
             posB.Value -= projection / 2;

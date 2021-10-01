@@ -42,7 +42,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly ICommandsMan commandsMan;
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly IEntityFactoryProvider mapEntityFactory;
-        private readonly IBroadphaseGridFactory broadphaseGridFactory;
+        private readonly IBroadphaseFactory broadphaseGridFactory;
         private readonly ITileGridFactory tileGridFactory;
         private readonly Dictionary<int, IMapWorldEntityLoader> entityLoaders = new Dictionary<int, IMapWorldEntityLoader>();
 
@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Loaders
                                   ICommandsMan commandsMan,
                                   PalettesDataProvider palettesDataProvider,
                                   IEntityFactoryProvider mapEntityFactory,
-                                  IBroadphaseGridFactory broadphaseGridFactory,
+                                  IBroadphaseFactory broadphaseGridFactory,
                                   ITileGridFactory tileGridFactory)
         {
             this.repositoryProvider = repositoryProvider;
@@ -118,7 +118,8 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Width);
 
-            worldBuilder.AddModule(broadphaseGridFactory.CreateGrid(layout.Width, layout.Height, cellSize));
+            worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
+            worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
             worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
 
             worldBuilder.SetupGameWorldSystems(systemFactory);

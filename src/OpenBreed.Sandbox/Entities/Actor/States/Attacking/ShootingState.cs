@@ -51,7 +51,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             pos += new Vector2(8, 8);
             var direction = entity.Get<AngularPositionComponent>().Value;
             direction.Normalize();
-            direction *= 500.0f;
+            direction *= 100.0f;
             projectileHelper.AddProjectile(entity.WorldId, pos.X, pos.Y, direction.X, direction.Y);
 
             //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);

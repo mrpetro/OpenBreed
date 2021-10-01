@@ -77,7 +77,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             teleportEntity.Tag = (worldName, entryId);
 
             teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            teleportEntity.Add(new CollisionComponent(ColliderTypes.WorldExitTrigger));
+            teleportEntity.Add(new ColliderComponent(ColliderTypes.WorldExitTrigger));
             //teleportEntity.Subscribe<CollisionEventArgs>(OnCollision);
 
             commandsMan.Post(new AddEntityCommand(world.Id, teleportEntity.Id));

@@ -184,7 +184,8 @@ namespace OpenBreed.Sandbox
                                                                                 manCollection.GetManager<IEventsMan>(),
                                                                                 manCollection.GetManager<ICollisionMan>(),
                                                                                 manCollection.GetManager<IBuilderFactory>(),
-                                                                                manCollection.GetManager<IJobsMan>()));
+                                                                                manCollection.GetManager<IJobsMan>(),
+                                                                                manCollection.GetManager<IFixtureMan>()));
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
             manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core, manCollection.GetManager<ICommandsMan>(),
                                                                                 manCollection.GetManager<MapCellHelper>()));

@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
-            var colCmp = entity.Get<CollisionComponent>();
+            var colCmp = entity.Get<ColliderComponent>();
 
             colCmp.ColliderTypes.Add(ColliderTypes.StaticObstacle);
             colCmp.ColliderTypes.Add(ColliderTypes.DoorOpenTrigger);
@@ -80,7 +80,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void LeaveState(Entity entity)
         {
-            var colCmp = entity.Get<CollisionComponent>();
+            var colCmp = entity.Get<ColliderComponent>();
             colCmp.ColliderTypes.Remove(ColliderTypes.DoorOpenTrigger);
         }
 

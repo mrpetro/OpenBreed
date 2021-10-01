@@ -6,20 +6,25 @@ using OpenTK;
 
 namespace OpenBreed.Wecs.Components.Physics
 {
-    public class ResponseComponent : IEntityComponent
+    public class ColliderComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public ResponseComponent()
+        public ColliderComponent()
         {
-            Contacts = new List<CollisionContact>();
+            ColliderTypes = new List<int>();
+        }
+
+        public ColliderComponent(int collisionTypeId)
+        {
+            ColliderTypes = new List<int>(new int[] { collisionTypeId });
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public List<CollisionContact> Contacts { get; }
+        public List<int> ColliderTypes { get; }
 
         #endregion Public Properties
     }

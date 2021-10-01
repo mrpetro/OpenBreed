@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             projectile.Get<PositionComponent>().Value = new Vector2(x, y);
             projectile.Get<VelocityComponent>().Value = new Vector2(vx, vy);
-            projectile.Add(new CollisionComponent(ColliderTypes.Projectile));
+            projectile.Add(new ColliderComponent(ColliderTypes.Projectile));
 
             //var projectileFsm = core.GetManager<IFsmMan>().GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);

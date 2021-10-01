@@ -67,8 +67,8 @@ namespace OpenBreed.Physics.Generic.Managers
 
         public void Callback(Entity entityA, Entity entityB, Vector2 projection)
         {
-            var colCmpA = entityA.Get<CollisionComponent>();
-            var colCmpB = entityB.Get<CollisionComponent>();
+            var colCmpA = entityA.Get<ColliderComponent>();
+            var colCmpB = entityB.Get<ColliderComponent>();
 
             for (int i = 0; i < colCmpA.ColliderTypes.Count; i++)
             {

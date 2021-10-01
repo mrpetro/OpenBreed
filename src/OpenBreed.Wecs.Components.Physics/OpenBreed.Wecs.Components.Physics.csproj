@@ -65,7 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BodyComponent.cs" />
+    <Compile Include="ResponseComponent.cs" />
     <Compile Include="CollisionComponent.cs" />
+    <Compile Include="ColliderComponent.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Fixture.cs" />
     <Compile Include="Material.cs" />

@@ -4,15 +4,17 @@ using System.Collections.Generic;
 namespace OpenBreed.Physics.Interface
 {
     /// <summary>
-    /// Interface for collision detection broadphase grid
+    /// Interface for static collision detection broadphase
     /// </summary>
-    public interface IBroadphaseGrid
+    public interface IBroadphaseStatic
     {
         #region Public Methods
 
-        void InsertStatic(int itemId, Box2 aabb);
+        void InsertItem(int itemId, Box2 aabb);
 
-        void RemoveStatic(int itemId, Box2 aabb);
+        void RemoveStatic(int itemId);
+
+        Box2 GetAabb(int itemId);
 
         HashSet<int> QueryStatic(Box2 aabb);
 

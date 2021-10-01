@@ -21,7 +21,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         private readonly List<int> inactiveStatics = new List<int>();
         private readonly IEntityMan entityMan;
         private readonly IFixtureMan fixtureMan;
-        private IBroadphaseGrid broadphaseGrid;
+        private IBroadphaseStatic broadphaseGrid;
 
         #endregion Private Fields
 
@@ -48,7 +48,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             base.Initialize(world);
 
-            broadphaseGrid = world.GetModule<IBroadphaseGrid>();
+            broadphaseGrid = world.GetModule<IBroadphaseStatic>();
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -79,12 +79,6 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Private Methods
 
-        private static Box2 GetAabb(Entity entity)
-        {
-            var body = entity.Get<BodyComponent>();
-            return body.Aabb;
-        }
-
         private bool HandleBodyOnCommand(BodyOnCommand cmd)
         {
             var entity = entityMan.GetById(cmd.EntityId);
@@ -111,26 +105,20 @@ namespace OpenBreed.Wecs.Systems.Physics
             return true;
         }
 
-        private void UpdateAabb(BodyComponent body, PositionComponent pos)
-        {
-            var fixture = fixtureMan.GetById(body.Fixtures.First());
-            body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
-        }
-
         private void InsertToGrid(Entity entity)
         {
             var pos = entity.Get<PositionComponent>();
             var body = entity.Get<BodyComponent>();
 
-            UpdateAabb(body, pos);
+            var fixture = fixtureMan.GetById(body.Fixtures.First());
+            var aabb = fixture.Shape.GetAabb().Translated(pos.Value);
 
-            broadphaseGrid.InsertStatic(entity.Id, body.Aabb);
+            broadphaseGrid.InsertItem(entity.Id, aabb);
         }
 
         private void RemoveFromGrid(Entity entity)
         {
-            var aabb = GetAabb(entity);
-            broadphaseGrid.RemoveStatic(entity.Id, aabb);
+            broadphaseGrid.RemoveStatic(entity.Id);
         }
 
         #endregion Private Methods

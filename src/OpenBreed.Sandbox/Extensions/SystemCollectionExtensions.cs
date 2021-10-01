@@ -107,7 +107,7 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<ICommandsMan>(),
                                                               managerCollection.GetManager<PalettesDataProvider>(),
                                                               managerCollection.GetManager<IEntityFactoryProvider>(),
-                                                              managerCollection.GetManager<IBroadphaseGridFactory>(),
+                                                              managerCollection.GetManager<IBroadphaseFactory>(),
                                                               managerCollection.GetManager<ITileGridFactory>());
 
                 mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
@@ -173,6 +173,7 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<DynamicBodiesAabbUpdaterSystem>());
             builder.AddSystem(systemFactory.Create<DynamicBodiesCollisionCheckSystem>());
             builder.AddSystem(systemFactory.Create<StaticBodiesSystem>());
+            builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
             builder.AddSystem(systemFactory.Create<AnimationSystem>());
             builder.AddSystem(systemFactory.Create<TimerSystem>());
             builder.AddSystem(systemFactory.Create<FsmSystem>());

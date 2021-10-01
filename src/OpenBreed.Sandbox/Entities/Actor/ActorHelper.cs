@@ -107,7 +107,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             actor.Add(new AngularVelocityComponent(0));
             actor.Add(new AngularThrustComponent(0));
-            actor.Add(new CollisionComponent(ColliderTypes.ActorBody));
+            actor.Add(new ColliderComponent(ColliderTypes.ActorBody));
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));

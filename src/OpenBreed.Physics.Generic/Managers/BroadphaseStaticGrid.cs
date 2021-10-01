@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Physics.Interface;
 using OpenTK;
+using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Physics.Generic.Managers
@@ -33,16 +34,24 @@ namespace OpenBreed.Physics.Generic.Managers
         #endregion Internal Methods
     }
 
-    internal class BroadphaseGrid : IBroadphaseGrid
+    internal class BroadphaseStaticGrid : IBroadphaseStatic
     {
+        #region Private Fields
+
+        private readonly BroadphaseCell[] cells;
+        private readonly Dictionary<int, Box2> items = new Dictionary<int, Box2>();
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public BroadphaseGrid(int width, int height, int cellSize)
+        public BroadphaseStaticGrid(int width, int height, int cellSize)
         {
             Width = width;
             Height = height;
             CellSize = cellSize;
-            Cells = CreateArray();
+
+            cells = CreateArray();
         }
 
         #endregion Public Constructors
@@ -55,8 +64,6 @@ namespace OpenBreed.Physics.Generic.Managers
 
         public int CellSize { get; }
 
-        public BroadphaseCell[] Cells { get; }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -66,28 +73,44 @@ namespace OpenBreed.Physics.Generic.Managers
             return new Vector2(xIndex * CellSize + CellSize / 2, yIndex * CellSize + CellSize / 2);
         }
 
-        public void InsertStatic(int itemId, Box2 aabb)
+        public Box2 GetAabb(int itemId)
         {
-            int leftIndex;
-            int rightIndex;
-            int bottomIndex;
-            int topIndex;
+            if (!items.TryGetValue(itemId, out Box2 aabb))
+                throw new InvalidOperationException($"Item with ID '{itemId}' was not inserted.");
 
-            GetAabbIndices(aabb, out leftIndex, out rightIndex, out bottomIndex, out topIndex);
-
-            AddItem(leftIndex, rightIndex, bottomIndex, topIndex, itemId);
+            return aabb;
         }
 
-        public void RemoveStatic(int itemId, Box2 aabb)
+        public void InsertItem(int itemId, Box2 aabb)
         {
+            if (items.ContainsKey(itemId))
+                throw new InvalidOperationException($"Item with ID '{itemId}' was already inserted.");
+
             int leftIndex;
             int rightIndex;
             int bottomIndex;
             int topIndex;
 
             GetAabbIndices(aabb, out leftIndex, out rightIndex, out bottomIndex, out topIndex);
+            InsertItemToGrid(leftIndex, rightIndex, bottomIndex, topIndex, itemId);
 
-            RemoveItem(leftIndex, rightIndex, bottomIndex, topIndex, itemId);
+            items.Add(itemId, aabb);
+        }
+
+        public void RemoveStatic(int itemId)
+        {
+            int leftIndex;
+            int rightIndex;
+            int bottomIndex;
+            int topIndex;
+
+            if (!items.TryGetValue(itemId, out Box2 aabb))
+                throw new InvalidOperationException($"Item with ID '{itemId}' was not inserted.");
+
+            GetAabbIndices(aabb, out leftIndex, out rightIndex, out bottomIndex, out topIndex);
+            RemoveItemFromGrid(leftIndex, rightIndex, bottomIndex, topIndex, itemId);
+
+            items.Remove(itemId);
         }
 
         public HashSet<int> QueryStatic(Box2 aabb)
@@ -105,7 +128,7 @@ namespace OpenBreed.Physics.Generic.Managers
             {
                 for (int xIndex = leftIndex; xIndex < rightIndex; xIndex++)
                 {
-                    Cells[xIndex + Width * yIndex].InsertTo(result);
+                    cells[xIndex + Width * yIndex].InsertTo(result);
                 }
             }
 
@@ -116,27 +139,27 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #region Private Methods
 
-        private void AddItem(int leftIndex, int rightIndex, int bottomIndex, int topIndex, int itemId)
+        private void InsertItemToGrid(int leftIndex, int rightIndex, int bottomIndex, int topIndex, int itemId)
         {
             for (int j = bottomIndex; j < topIndex; j++)
             {
                 var gridIndex = Width * j + leftIndex;
                 for (int i = leftIndex; i < rightIndex; i++)
                 {
-                    Cells[gridIndex].AddItem(itemId);
+                    cells[gridIndex].AddItem(itemId);
                     gridIndex++;
                 }
             }
         }
 
-        private void RemoveItem(int leftIndex, int rightIndex, int bottomIndex, int topIndex, int itemId)
+        private void RemoveItemFromGrid(int leftIndex, int rightIndex, int bottomIndex, int topIndex, int itemId)
         {
             for (int j = bottomIndex; j < topIndex; j++)
             {
                 var gridIndex = Width * j + leftIndex;
                 for (int i = leftIndex; i < rightIndex; i++)
                 {
-                    Cells[gridIndex].RemoveItem(itemId);
+                    cells[gridIndex].RemoveItem(itemId);
                     gridIndex++;
                 }
             }

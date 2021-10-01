@@ -8,17 +8,23 @@ using System.Threading.Tasks;
 namespace OpenBreed.Physics.Interface.Managers
 {
     /// <summary>
-    /// Factory for creating collision detection broadphase grid
+    /// Factory for creating collision detection broadphase
     /// </summary>
-    public interface IBroadphaseGridFactory
+    public interface IBroadphaseFactory
     {
         /// <summary>
-        /// Create a grid giving it's properties and return it's ID
+        /// Create a static broadphase grid giving it's properties and return it's ID
         /// </summary>
         /// <param name="width">Width of grid</param>
         /// <param name="height">Height of grid</param>
         /// <param name="cellSize">Grid cell size</param>
         /// <returns></returns>
-        IBroadphaseGrid CreateGrid(int width, int height, int cellSize);
+        IBroadphaseStatic CreateStatic(int width, int height, int cellSize);
+
+        /// <summary>
+        /// Create dynamic broadphase
+        /// </summary>
+        /// <returns></returns>
+        IBroadphaseDynamic CreateDynamic();
     }
 }

@@ -44,7 +44,7 @@ namespace OpenBreed.Sandbox.Loaders
             //Near teleport entry
             //worldGateHelper.AddWorldEntry(world, ix + 15, iy + 68, entryId);
             //Near TV
-            worldGateHelper.AddWorldEntry(world, ix + 30, iy, entryId);
+            worldGateHelper.AddWorldEntry(world, ix + 28, iy +2, entryId);
 
             //actorHelper.AddHero(world, ix, iy);
         }
