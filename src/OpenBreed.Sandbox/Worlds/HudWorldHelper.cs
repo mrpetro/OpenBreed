@@ -26,9 +26,10 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IWorldMan worldMan;
         private readonly IViewClient viewClient;
         private readonly IEntityMan entityMan;
+        private readonly CameraBuilder cameraBuilder;
         #region Public Methods
 
-        public HudWorldHelper(ICore core, ICommandsMan commandsMan, ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan)
+        public HudWorldHelper(ICore core, ICommandsMan commandsMan, ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, CameraBuilder cameraBuilder)
         {
             this.core = core;
             this.commandsMan = commandsMan;
@@ -36,6 +37,7 @@ namespace OpenBreed.Sandbox.Worlds
             this.worldMan = worldMan;
             this.viewClient = viewClient;
             this.entityMan = entityMan;
+            this.cameraBuilder = cameraBuilder;
         }
 
         private void AddSystems(WorldBuilder builder)
@@ -77,7 +79,6 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(World world)
         {
-            var cameraBuilder = core.GetManager<CameraBuilder>();
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetFov(viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height);

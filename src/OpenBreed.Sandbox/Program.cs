@@ -1,9 +1,7 @@
-﻿using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Generic.Extensions;
+﻿using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
-using OpenBreed.Common.Data;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
@@ -12,15 +10,12 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
-using OpenBreed.Fsm.Xml;
 using OpenBreed.Game;
-using OpenBreed.Input.Generic;
 using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
@@ -35,49 +30,32 @@ using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Extensions;
-using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
-using OpenBreed.Scripting.Lua;
 using OpenBreed.Scripting.Lua.Extensions;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Commands;
-using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Animation.Extensions;
-using OpenBreed.Wecs.Components.Animation.Xml;
-using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Components.Common.Xml;
-using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Components.Physics.Extensions;
-using OpenBreed.Wecs.Components.Physics.Xml;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Components.Rendering.Extensions;
-using OpenBreed.Wecs.Components.Rendering.Xml;
-using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
-using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Wecs.Systems.Control.Commands;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Control.Handlers;
 using OpenBreed.Wecs.Systems.Control.Inputs;
-using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
-using OpenBreed.Wecs.Systems.Physics;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
-using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Input;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -90,7 +68,7 @@ namespace OpenBreed.Sandbox
 
         public ProgramFactory()
         {
-            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(640 , 480, "OpenBreed"));
+            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(640, 480, "OpenBreed"));
 
             manCollection.SetupBuilderFactory();
             manCollection.SetupVariableManager();
@@ -111,7 +89,6 @@ namespace OpenBreed.Sandbox
             manCollection.SetupAnimationSystems();
             manCollection.SetupPhysicsDebugSystem();
 
-
             manCollection.SetupCommonComponents();
             manCollection.SetupPhysicsComponents();
             manCollection.SetupRenderingComponents();
@@ -127,13 +104,10 @@ namespace OpenBreed.Sandbox
 
             //manCollection.SetupGameScriptingApi();
 
-
             manCollection.SetupSandboxBuilders();
 
             manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(manCollection.GetManager<IEntityMan>(), manCollection.GetManager<IEntityFactory>()));
         }
-
-
 
         #endregion Public Constructors
 
@@ -144,9 +118,9 @@ namespace OpenBreed.Sandbox
             var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
 
             manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(manCollection.GetManager<ISystemFactory>(),
-                                                                                            manCollection.GetManager<ICommandsMan>(), 
+                                                                                            manCollection.GetManager<ICommandsMan>(),
                                                                                             manCollection.GetManager<IRenderingMan>(),
-                                                                                            manCollection.GetManager<IWorldMan>(), 
+                                                                                            manCollection.GetManager<IWorldMan>(),
                                                                                             manCollection.GetManager<IEventsMan>(),
                                                                                             manCollection.GetManager<ViewportCreator>(),
                                                                                             manCollection.GetManager<IViewClient>()));
@@ -154,7 +128,8 @@ namespace OpenBreed.Sandbox
                                                                                       manCollection.GetManager<ISystemFactory>(),
                                                                                       manCollection.GetManager<IWorldMan>(),
                                                                                       manCollection.GetManager<IViewClient>(),
-                                                                                      manCollection.GetManager<IEntityMan>()));
+                                                                                      manCollection.GetManager<IEntityMan>(),
+                                                                                      manCollection.GetManager<CameraBuilder>()));
             manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(manCollection.GetManager<IPlayersMan>(),
                                                                                   manCollection.GetManager<ICommandsMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
@@ -177,7 +152,13 @@ namespace OpenBreed.Sandbox
                                                                                       manCollection.GetManager<IEntityFactory>(),
                                                                                       manCollection.GetManager<ICommandsMan>(),
                                                                                       manCollection.GetManager<IBuilderFactory>()));
-            manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IWorldMan>(),
+
+            manCollection.AddSingleton<CameraHelper>(() => new CameraHelper(manCollection.GetManager<IClipMan>(),
+                                                                                manCollection.GetManager<IFrameUpdaterMan>(),
+                                                                                manCollection.GetManager<IDataLoaderFactory>()));
+
+            manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IClipMan>(),
+                                                                                manCollection.GetManager<IWorldMan>(),
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
                                                                                 manCollection.GetManager<ICommandsMan>(),
@@ -186,9 +167,21 @@ namespace OpenBreed.Sandbox
                                                                                 manCollection.GetManager<IBuilderFactory>(),
                                                                                 manCollection.GetManager<IJobsMan>(),
                                                                                 manCollection.GetManager<IFixtureMan>()));
-            manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
-            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core, manCollection.GetManager<ICommandsMan>(),
-                                                                                manCollection.GetManager<MapCellHelper>()));
+
+            manCollection.SetupDynamicResolver();
+            manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(manCollection.GetManager<IClipMan>(),
+                                                                                    manCollection.GetManager<ICollisionMan>(),
+                                                                                    manCollection.GetManager<ICommandsMan>(),
+                                                                                    manCollection.GetManager<IEntityFactory>(),
+                                                                                    manCollection.GetManager<DynamicResolver>()));
+            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(manCollection.GetManager<IClipMan>(),
+                                                                          manCollection.GetManager<ICollisionMan>(),
+                                                                          manCollection.GetManager<ICommandsMan>(),
+                                                                          manCollection.GetManager<IPlayersMan>(),
+                                                                          manCollection.GetManager<IDataLoaderFactory>(),
+                                                                          manCollection.GetManager<IEntityFactory>(),
+                                                                          manCollection.GetManager<MapCellHelper>(),
+                                                                          manCollection.GetManager<DynamicResolver>()));
             manCollection.AddSingleton<MapCellHelper>(() => new MapCellHelper(manCollection.GetManager<WorldBlockBuilder>(),
                                                                               manCollection.GetManager<ICommandsMan>()));
 
@@ -200,7 +193,6 @@ namespace OpenBreed.Sandbox
 
             manCollection.AddSingleton<IRepositoryProvider>(() => new XmlReadonlyDatabaseMan(variables, gameDbFilePath));
 
-
             return core;
         }
 
@@ -210,6 +202,7 @@ namespace OpenBreed.Sandbox
     public class Program : CoreBase
     {
         #region Private Fields
+
         private const string ABTA_PC_GAME_DB_FILE_NAME = "GameDatabase.ABTA.EPF.xml";
 
         private readonly IScriptMan scriptMan;
@@ -318,7 +311,6 @@ namespace OpenBreed.Sandbox
             var execFolderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var gameDbFilePath = Path.Combine(execFolderPath, gameDbFileName);
 
-
             var programFactory = new ProgramFactory();
 
             var program = programFactory.Create(gameDbFilePath, vanillaGameFolderPath);
@@ -382,10 +374,7 @@ namespace OpenBreed.Sandbox
             RegisterInputs();
             RegisterPlayers();
 
-
             //var map = manCollection.GetManager<MapsDataProvider>().GetMap("CRASH LANDING SITE");
-
-
 
             var spriteMan = GetManager<ISpriteMan>();
             var tileMan = GetManager<ITileMan>();
@@ -456,6 +445,7 @@ namespace OpenBreed.Sandbox
             var projectileHelper = GetManager<ProjectileHelper>();
             var actorHelper = GetManager<ActorHelper>();
             var teleportHelper = GetManager<TeleportHelper>();
+            var cameraHelper = GetManager<CameraHelper>();
 
             ColliderTypes.Initialize(GetManager<ICollisionMan>());
             actorHelper.RegisterCollisionPairs();
@@ -463,15 +453,12 @@ namespace OpenBreed.Sandbox
             teleportHelper.RegisterCollisionPairs();
             projectileHelper.RegisterCollisionPairs();
 
-            CameraHelper.CreateAnimations(this);
-
+            cameraHelper.CreateAnimations();
             doorHelper.LoadAnimations();
             environmentHelper.LoadAnimations();
             actorHelper.CreateAnimations();
-            TurretHelper.CreateAnimations(this);
-            TeleportHelper.CreateAnimations(this);
+            teleportHelper.CreateAnimations();
             projectileHelper.CreateAnimations();
-            Misc.CreateAnimations(this);
 
             manCollection.SetupButtonStates();
             manCollection.SetupProjectileStates();
@@ -489,10 +476,8 @@ namespace OpenBreed.Sandbox
             var hudWorldHelper = GetManager<HudWorldHelper>();
             hudWorldHelper.Create();
 
-
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
             var mapWorldLoader = dataLoaderFactory.GetLoader<World>();
-
 
             var cameraBuilder = GetManager<CameraBuilder>();
             var commandsMan = GetManager<ICommandsMan>();
@@ -515,14 +500,12 @@ namespace OpenBreed.Sandbox
 
             commandsMan.Post(new FollowedAddFollowerCommand(johnPlayerEntity.Id, playerCamera.Id));
 
-
             GetManager<IEventsMan>().Subscribe<WorldInitializedEventArgs>(GetManager<IWorldMan>(), (s, a) =>
             {
                 if (a.WorldId != gameWorld.Id)
                     return;
 
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Id, 0);
-
             });
 
             //var gameWorldHelper = GetManager<GameWorldHelper>();

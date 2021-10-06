@@ -15,62 +15,67 @@ using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Turret
 {
-    public static class TurretHelper
+    public class TurretHelper
     {
+        public TurretHelper(IClipMan clipMan, IEntityFactory entityFactory)
+        {
+            this.clipMan = clipMan;
+            this.entityFactory = entityFactory;
+        }
+
         #region Public Fields
 
         public const string SPRITE_TURRET = "Atlases/Sprites/Turret";
+        private readonly IClipMan clipMan;
+        private readonly IEntityFactory entityFactory;
 
-        public static void CreateAnimations(ICore core)
+        public void CreateAnimations()
         {
-            var animations = core.GetManager<IClipMan>();
-
-            var animationGuarding0 = animations.CreateClip("Animations/Turret/Guarding/0", 2.0f);
+            var animationGuarding0 = clipMan.CreateClip("Animations/Turret/Guarding/0", 2.0f);
             animationGuarding0.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 0).AddFrame(0, 2.0f);
-            var animationGuarding22_5 = animations.CreateClip("Animations/Guarding/Guard/22.5", 2.0f);
+            var animationGuarding22_5 = clipMan.CreateClip("Animations/Guarding/Guard/22.5", 2.0f);
             animationGuarding22_5.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 1).AddFrame(1, 2.0f);
-            var animationGuarding45 = animations.CreateClip("Animations/Turret/Guarding/45", 2.0f);
+            var animationGuarding45 = clipMan.CreateClip("Animations/Turret/Guarding/45", 2.0f);
             animationGuarding45.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 2).AddFrame(2, 2.0f);
-            var animationGuarding67_5 = animations.CreateClip("Animations/Turret/Guarding/67.5", 2.0f);
+            var animationGuarding67_5 = clipMan.CreateClip("Animations/Turret/Guarding/67.5", 2.0f);
             animationGuarding67_5.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 3).AddFrame(3, 2.0f);
-            var animationGuarding90 = animations.CreateClip("Animations/Guarding/Guard/90", 2.0f);
+            var animationGuarding90 = clipMan.CreateClip("Animations/Guarding/Guard/90", 2.0f);
             animationGuarding90.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 4).AddFrame(4, 2.0f);
-            var animationGuarding112_5 = animations.CreateClip("Animations/Turret/Guarding/112.5", 2.0f);
+            var animationGuarding112_5 = clipMan.CreateClip("Animations/Turret/Guarding/112.5", 2.0f);
             animationGuarding112_5.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 5).AddFrame(5, 2.0f);
-            var animationGuarding135 = animations.CreateClip("Animations/Turret/Guarding/135", 2.0f);
+            var animationGuarding135 = clipMan.CreateClip("Animations/Turret/Guarding/135", 2.0f);
             animationGuarding135.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 6).AddFrame(6, 2.0f);
-            var animationGuarding157_5 = animations.CreateClip("Animations/Turret/Guarding/157.5", 2.0f);
+            var animationGuarding157_5 = clipMan.CreateClip("Animations/Turret/Guarding/157.5", 2.0f);
             animationGuarding157_5.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 7).AddFrame(7, 2.0f);
-            var animationGuarding180 = animations.CreateClip("Animations/Turret/Guarding/180", 2.0f);
+            var animationGuarding180 = clipMan.CreateClip("Animations/Turret/Guarding/180", 2.0f);
             animationGuarding180.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 8).AddFrame(8, 2.0f);
-            var animationGuarding202_5 = animations.CreateClip("Animations/Turret/Guarding/202.5", 2.0f);
+            var animationGuarding202_5 = clipMan.CreateClip("Animations/Turret/Guarding/202.5", 2.0f);
             animationGuarding202_5.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 9).AddFrame(9, 2.0f);
-            var animationGuarding225 = animations.CreateClip("Animations/Guarding/Guard/225", 2.0f);
+            var animationGuarding225 = clipMan.CreateClip("Animations/Guarding/Guard/225", 2.0f);
             animationGuarding225.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 10).AddFrame(10, 2.0f);
-            var animationGuarding247_5 = animations.CreateClip("Animations/Turret/Guarding/247.5", 2.0f);
+            var animationGuarding247_5 = clipMan.CreateClip("Animations/Turret/Guarding/247.5", 2.0f);
             animationGuarding247_5.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 11).AddFrame(11, 2.0f);
-            var animationGuarding270 = animations.CreateClip("Animations/Turret/Guarding/270", 2.0f);
+            var animationGuarding270 = clipMan.CreateClip("Animations/Turret/Guarding/270", 2.0f);
             animationGuarding270.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 12).AddFrame(12, 2.0f);
-            var animationGuarding292_5 = animations.CreateClip("Animations/Guarding/Guard/292.5", 2.0f);
+            var animationGuarding292_5 = clipMan.CreateClip("Animations/Guarding/Guard/292.5", 2.0f);
             animationGuarding292_5.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 13).AddFrame(13, 2.0f);
-            var animationGuarding315 = animations.CreateClip("Animations/Turret/Guarding/315", 2.0f);
+            var animationGuarding315 = clipMan.CreateClip("Animations/Turret/Guarding/315", 2.0f);
             animationGuarding315.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 14).AddFrame(14, 2.0f);
-            var animationGuarding337_5 = animations.CreateClip("Animations/Turret/Guarding/337.5", 2.0f);
+            var animationGuarding337_5 = clipMan.CreateClip("Animations/Turret/Guarding/337.5", 2.0f);
             animationGuarding337_5.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 15).AddFrame(15, 2.0f);
         }
-        private static void OnStop()
+        private void OnStop()
         {
             Console.WriteLine("Rotation -> Stopped");
         }
 
-        private static void OnFrameUpdate(Entity entity, int nextValue)
+        private void OnFrameUpdate(Entity entity, int nextValue)
         {
             //entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-        public static Entity Create(ICore core, Vector2 pos)
+        public Entity Create(Vector2 pos)
         {
-            var entityFactory = core.GetManager<IEntityFactory>();
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Turret\Turret.xml");
             var entity = entityFactory.Create(entityTemplate);
 

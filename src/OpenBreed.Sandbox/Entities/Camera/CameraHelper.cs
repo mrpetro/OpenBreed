@@ -1,50 +1,63 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Animation.Interface;
-using OpenBreed.Wecs.Entities;
+﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Camera
 {
     public class CameraHelper
     {
+        #region Public Fields
+
         public const string CAMERA_FADE_OUT = "Animations/Camera/Effects/FadeOut";
+
         public const string CAMERA_FADE_IN = "Animations/Camera/Effects/FadeIn";
 
-        public static void CreateAnimations(ICore core)
+        #endregion Public Fields
+
+        #region Private Fields
+
+        private readonly IClipMan clipMan;
+
+        private readonly IFrameUpdaterMan frameUpdaterMan;
+
+        private readonly IDataLoaderFactory dataLoaderFactory;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public CameraHelper(IClipMan clipMan, IFrameUpdaterMan frameUpdaterMan, IDataLoaderFactory dataLoaderFactory)
         {
+            this.clipMan = clipMan;
+            this.frameUpdaterMan = frameUpdaterMan;
+            this.dataLoaderFactory = dataLoaderFactory;
+        }
 
-            var animationMan = core.GetManager<IClipMan>();
-            var animatorMan = core.GetManager<IFrameUpdaterMan>();
+        #endregion Public Constructors
 
-            animatorMan.Register("Camera.Brightness", (FrameUpdater<float>)OnFrameUpdate);
+        #region Public Methods
 
-            var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
+        public void CreateAnimations()
+        {
+            frameUpdaterMan.Register("Camera.Brightness", (FrameUpdater<float>)OnFrameUpdate);
+
             var animationLoader = dataLoaderFactory.GetLoader<IClip>();
 
             var cameraFadeOut = animationLoader.Load("Animations/Camera/Effects/FadeOut");
             var cameraFadeIn = animationLoader.Load("Animations/Camera/Effects/FadeIn");
-
-            //var cameraEffectFadeOut = core.GetManager<IAnimationMan>().Create(CAMERA_FADE_OUT, 10.0f);
-            //var fo = cameraEffectFadeOut.AddTrack<float>(FrameInterpolation.Linear, OnFrameUpdate, 1.0f);
-            //fo.AddFrame(0.0f, 10.0f);
-
-            //var cameraEffectFadeIn = core.GetManager<IAnimationMan>().Create(CAMERA_FADE_IN, 10.0f);
-            //var fi = cameraEffectFadeIn.AddTrack<float>(FrameInterpolation.Linear, OnFrameUpdate, 0.0f);
-            //fi.AddFrame(1.0f, 10.0f);
         }
 
-        private static void OnFrameUpdate(Entity entity, float nextValue)
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void OnFrameUpdate(Entity entity, float nextValue)
         {
             var cameraCmp = entity.Get<CameraComponent>();
             cameraCmp.Brightness = nextValue;
         }
+
+        #endregion Private Methods
     }
 }

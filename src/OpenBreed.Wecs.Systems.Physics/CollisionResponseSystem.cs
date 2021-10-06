@@ -55,13 +55,43 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             foreach (var entity in entities)
             {
+                if (!entity.Contains<VelocityComponent>())
+                {
+                    entity.Remove<CollisionComponent>();
+                    continue;
+                }
+
                 var collisionComponent = entity.Get<CollisionComponent>();
+
+                var pd = Vector2.Zero;
+                var vd = Vector2.Zero;
+                var posComponnent = entity.Get<PositionComponent>();
+                var velComponnent = entity.Get<VelocityComponent>();
+
+                if (collisionComponent.Contacts.Count > 4)
+                {
+                }
 
                 foreach (var contact in collisionComponent.Contacts)
                 {
                     var contactEntity = entityMan.GetById(contact.EntityId);
 
-                    collisionMan.Callback(entity, contactEntity, contact.Projection);
+                    var projection = contact.Projection - pd;
+
+                    if (projection == Vector2.Zero)
+                    {
+                        pd = projection;
+                        break;
+                    }
+
+                    var oldPos = posComponnent.Value;
+                    var oldVel = velComponnent.Value;
+
+
+                    collisionMan.Callback(entity, contactEntity, projection);
+
+                    pd = posComponnent.Value - oldPos;
+                    vd = velComponnent.Value - oldVel;
                 }
 
                 entity.Remove<CollisionComponent>();

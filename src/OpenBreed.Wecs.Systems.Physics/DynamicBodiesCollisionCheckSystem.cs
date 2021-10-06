@@ -19,16 +19,12 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Private Fields
 
         private const int CELL_SIZE = 16;
-
-        private IBroadphaseStatic broadphaseGrid;
-        private IBroadphaseDynamic broadphaseDynamic;
-
         private readonly List<Entity> inactiveDynamics = new List<Entity>();
-        //private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
         private readonly IEntityMan entityMan;
         private readonly IFixtureMan fixtureMan;
         private readonly ICollisionMan collisionMan;
-        private readonly DynamicHelper dynamicHelper;
+        private IBroadphaseStatic broadphaseGrid;
+        private IBroadphaseDynamic broadphaseDynamic;
 
         #endregion Private Fields
 
@@ -39,7 +35,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             this.entityMan = entityMan;
             this.fixtureMan = fixtureMan;
             this.collisionMan = collisionMan;
-            this.dynamicHelper = new DynamicHelper(this, entityMan);
 
             RequireEntityWith<BodyComponent>();
             RequireEntityWith<VelocityComponent>();
@@ -53,17 +48,17 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Public Methods
 
+        public static Vector2 GetCellCenter(PositionComponent pos)
+        {
+            return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
+        }
+
         public override void Initialize(World world)
         {
             base.Initialize(world);
 
             broadphaseGrid = world.GetModule<IBroadphaseStatic>();
             broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
-        }
-
-        public static Vector2 GetCellCenter(PositionComponent pos)
-        {
-            return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -93,12 +88,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         protected override void OnAddEntity(Entity entity)
         {
-
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-
         }
 
         #endregion Protected Methods
@@ -143,20 +136,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             broadphaseDynamic.RemoveItem(entity.Id);
 
-            //var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.Entity == entity);
+            inactiveDynamics.Add(entity);
 
-            //if (dynamicToDeactivate != null)
-            //{
-
-
-                inactiveDynamics.Add(entity);
-                //activeDynamics.Remove(dynamicToDeactivate);
-
-                entity.RaiseEvent(new BodyOffEventArgs(entity));
-                return true;
-            //}
-
-            //return false;
+            entity.RaiseEvent(new BodyOffEventArgs(entity));
+            return true;
         }
 
         private void TestNarrowPhaseDynamic(BroadphaseDynamicCell nextCollider, BroadphaseDynamicCell currentCollider, float dt)
@@ -165,7 +148,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             var entityB = entityMan.GetById(currentCollider.ItemId);
 
             Vector2 projection;
-            if (dynamicHelper.TestVsDynamic(entityA, entityB, dt, out projection))
+            if (TestVsDynamic(entityA, entityB, dt, out projection))
             {
                 collisionMan.Callback(entityA, entityB, projection);
 
@@ -178,7 +161,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         private void TestNarrowPhaseStatic(Entity dynamicEntity, Entity staticEntity, float dt)
         {
             Vector2 projection;
-            if (dynamicHelper.TestVsStatic(dynamicEntity, staticEntity, dt, out projection))
+            if (TestVsStatic(dynamicEntity, staticEntity, dt, out projection))
             {
                 //var collisionDynamic = dynamicEntity.TryGet<CollisionComponent>();
                 //if (collisionDynamic == null)
@@ -200,6 +183,53 @@ namespace OpenBreed.Wecs.Systems.Physics
                 collisionMan.Callback(dynamicEntity, staticEntity, projection);
                 collisionMan.Callback(staticEntity, dynamicEntity, -projection);
             }
+        }
+
+        private bool TestVsDynamic(Entity entityA, Entity entityB, float dt, out Vector2 projection)
+        {
+            var bodyA = entityA.Get<BodyComponent>();
+            var posA = entityA.Get<PositionComponent>();
+            var bodyB = entityB.Get<BodyComponent>();
+            var posB = entityB.Get<PositionComponent>();
+
+            if (bodyA.Fixtures.Count > 0)
+            {
+                var fixtureA = GetFixture(bodyA.Fixtures.First());
+
+                if (bodyB.Fixtures.Count > 0)
+                {
+                    var fixtureB = GetFixture(bodyB.Fixtures.First());
+                    return CollisionChecker.Check(posA.Value, fixtureA, posB.Value, fixtureB, out projection);
+                }
+                else
+                    throw new NotImplementedException();
+            }
+            else
+                throw new NotImplementedException();
+        }
+
+        private bool TestVsStatic(Entity dynamicEntity, Entity staticEntity, float dt, out Vector2 projection)
+        {
+            var bodyA = dynamicEntity.Get<BodyComponent>();
+            var posA = dynamicEntity.Get<PositionComponent>();
+
+            if (bodyA.Fixtures.Count > 0)
+            {
+                var fixtureA = GetFixture(bodyA.Fixtures.First());
+
+                var bodyB = staticEntity.Get<BodyComponent>();
+                var posB = staticEntity.Get<PositionComponent>();
+
+                if (bodyB.Fixtures.Count > 0)
+                {
+                    var fixtureB = GetFixture(bodyB.Fixtures.First());
+                    return CollisionChecker.Check(posA.Value, fixtureA, posB.Value, fixtureB, out projection);
+                }
+                else
+                    throw new NotImplementedException();
+            }
+            else
+                throw new NotImplementedException();
         }
 
         private void QueryStaticGrid(BroadphaseDynamicCell cell, float dt)

@@ -73,8 +73,6 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        public ICore Core { get; }
-
         public ReadOnlyCollection<Entity> Entities { get; }
 
         /// <summary>

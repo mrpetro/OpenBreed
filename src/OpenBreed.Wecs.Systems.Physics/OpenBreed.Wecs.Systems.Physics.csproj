@@ -71,7 +71,7 @@
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="Helpers\CollisionChecker.cs" />
-    <Compile Include="Helpers\DynamicHelper.cs" />
+    <Compile Include="Helpers\DynamicResolver.cs" />
     <Compile Include="Events\BodyOffEventArgs.cs" />
     <Compile Include="Events\BodyOnEventArgs.cs" />
     <Compile Include="Events\CollisionEventArgs.cs" />

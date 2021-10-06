@@ -62,7 +62,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         private const string ANIMATION_TELEPORT_ENTRY = "Animations/Teleport/Entry";
 
         private const string ANIMATION_TELEPORT_EXIT = "Animations/Teleport/Exit";
-
+        private readonly IClipMan clipMan;
         private readonly IWorldMan worldMan;
 
         private readonly IEntityMan entityMan;
@@ -82,8 +82,9 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Public Constructors
 
-        public TeleportHelper(IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, ICommandsMan commandsMan, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IFixtureMan fixtureMan)
+        public TeleportHelper(IClipMan clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, ICommandsMan commandsMan, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IFixtureMan fixtureMan)
         {
+            this.clipMan = clipMan;
             this.worldMan = worldMan;
             this.entityMan = entityMan;
             this.entityFactory = entityFactory;
@@ -99,12 +100,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Public Methods
 
-        public static void CreateAnimations(ICore core)
+        public void CreateAnimations()
         {
-            var animations = core.GetManager<IClipMan>();
-
-            var animationTeleportEntry = animations.CreateClip(ANIMATION_TELEPORT_ENTRY, 4.0f);
-            var te = animationTeleportEntry.AddTrack<int>(FrameInterpolation.None, (e, nv) => OnFrameUpdate(core, e, nv), 0);
+            var animationTeleportEntry = clipMan.CreateClip(ANIMATION_TELEPORT_ENTRY, 4.0f);
+            var te = animationTeleportEntry.AddTrack<int>(FrameInterpolation.None, (e, nv) => OnFrameUpdate(e, nv), 0);
             te.AddFrame(0, 1.0f);
             te.AddFrame(1, 2.0f);
             te.AddFrame(2, 3.0f);
@@ -132,7 +131,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public void RegisterCollisionPairs()
         {
-
             collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallback);
         }
 
@@ -153,7 +151,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             commandsMan.Post(new AddEntityCommand(world.Id, teleportExit.Id));
             //world.AddEntity(teleportExit);
-            
+
             return teleportExit;
         }
 
@@ -195,9 +193,9 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        private static void OnFrameUpdate(ICore core, Entity entity, int nextValue)
+        private void OnFrameUpdate(Entity entity, int nextValue)
         {
-            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+            commandsMan.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
         private void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)

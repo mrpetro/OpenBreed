@@ -1,11 +1,13 @@
-﻿using OpenBreed.Core;
-using System;
-
-namespace OpenBreed.Wecs.Entities.Builders
+﻿namespace OpenBreed.Wecs.Entities.Builders
 {
     public abstract class EntityBuilder : IEntityBuilder
     {
+        #region Protected Fields
+
         protected readonly IEntityMan entityMan;
+
+        #endregion Protected Fields
+
         #region Public Constructors
 
         public EntityBuilder(IEntityMan entityMan)
@@ -14,12 +16,6 @@ namespace OpenBreed.Wecs.Entities.Builders
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        public ICore Core { get; }
-
-        #endregion Public Properties
 
         #region Public Methods
 

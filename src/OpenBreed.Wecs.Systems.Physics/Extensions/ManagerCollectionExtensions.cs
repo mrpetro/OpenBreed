@@ -2,6 +2,7 @@
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Commands;
+using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,11 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 {
     public static class ManagerCollectionExtensions
     {
+        public static void SetupDynamicResolver(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<DynamicResolver>(() => new DynamicResolver(manCollection.GetManager<IEntityMan>()));
+        }
+
         public static void SetupPhysicsSystems(this IManagerCollection manCollection)
         {
             var systemFactory = manCollection.GetManager<ISystemFactory>();
