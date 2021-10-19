@@ -20,9 +20,13 @@
 		<Body>
 			<CofFactor>0.0</CofFactor>
 			<CorFactor>1.0</CorFactor>
-			<Type>Dynamic</Type>
 			<Fixtures>
-				<Fixture>Fixtures/Projectile</Fixture>
+				<Fixture>
+					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
+					<Groups>
+						<Group>Projectile</Group>
+					</Groups>
+				</Fixture>
 			</Fixtures>
 		</Body>
 		<Sprite>

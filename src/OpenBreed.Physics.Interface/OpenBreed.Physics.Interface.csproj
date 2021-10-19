@@ -71,7 +71,6 @@
     <Compile Include="Managers\IBroadphaseFactory.cs" />
     <Compile Include="Managers\ICollisionMan.cs" />
     <Compile Include="IFixture.cs" />
-    <Compile Include="Managers\IFixtureMan.cs" />
     <Compile Include="IShape.cs" />
     <Compile Include="Managers\IShapeMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

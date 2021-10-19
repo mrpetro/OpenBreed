@@ -13,8 +13,7 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
         public static void SetupPhysicsDebugSystem(this IManagerCollection manCollection)
         {
             var systemFactory = manCollection.GetManager<ISystemFactory>();
-            systemFactory.Register(() => new PhysicsDebugDisplaySystem(manCollection.GetManager<IPrimitiveRenderer>(),
-                                                                       manCollection.GetManager<IFixtureMan>()));
+            systemFactory.Register(() => new PhysicsDebugDisplaySystem(manCollection.GetManager<IPrimitiveRenderer>()));
         }
 
         #endregion Public Methods

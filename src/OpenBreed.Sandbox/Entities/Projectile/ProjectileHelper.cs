@@ -68,7 +68,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         public void RegisterCollisionPairs()
         {
-            collisionMan.RegisterCollisionPair(ColliderTypes.Projectile, ColliderTypes.StaticObstacle, Projectile2StaticObstacle);
+            //collisionMan.RegisterCollisionPair(ColliderTypes.Projectile, ColliderTypes.StaticObstacle, Projectile2StaticObstacle);
+            collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.StaticObstacle, Projectile2StaticObstacleEx);
         }
 
         public void AddProjectile(int worldId, float x, float y, float vx, float vy)
@@ -83,7 +84,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             projectile.Get<PositionComponent>().Value = new Vector2(x, y);
             projectile.Get<VelocityComponent>().Value = new Vector2(vx, vy);
-            projectile.Add(new ColliderComponent(ColliderTypes.Projectile));
 
             //var projectileFsm = core.GetManager<IFsmMan>().GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
@@ -116,7 +116,13 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         //    //        break;
         //    //}
         //}
+
         private void Projectile2StaticObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        {
+            dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
+        }
+
+        private void Projectile2StaticObstacleEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
         }

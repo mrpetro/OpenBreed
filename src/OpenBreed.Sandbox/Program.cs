@@ -106,6 +106,8 @@ namespace OpenBreed.Sandbox
 
             manCollection.SetupSandboxBuilders();
 
+            manCollection.AddSingleton<FixtureTypes>(() => new FixtureTypes(manCollection.GetManager<IShapeMan>()));
+
             manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(manCollection.GetManager<IEntityMan>(), manCollection.GetManager<IEntityFactory>()));
         }
 
@@ -166,7 +168,7 @@ namespace OpenBreed.Sandbox
                                                                                 manCollection.GetManager<ICollisionMan>(),
                                                                                 manCollection.GetManager<IBuilderFactory>(),
                                                                                 manCollection.GetManager<IJobsMan>(),
-                                                                                manCollection.GetManager<IFixtureMan>()));
+                                                                                manCollection.GetManager<IShapeMan>()));
 
             manCollection.SetupDynamicResolver();
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(manCollection.GetManager<IClipMan>(),
@@ -181,7 +183,8 @@ namespace OpenBreed.Sandbox
                                                                           manCollection.GetManager<IDataLoaderFactory>(),
                                                                           manCollection.GetManager<IEntityFactory>(),
                                                                           manCollection.GetManager<MapCellHelper>(),
-                                                                          manCollection.GetManager<DynamicResolver>()));
+                                                                          manCollection.GetManager<DynamicResolver>(),
+                                                                          manCollection.GetManager<FixtureTypes>()));
             manCollection.AddSingleton<MapCellHelper>(() => new MapCellHelper(manCollection.GetManager<WorldBlockBuilder>(),
                                                                               manCollection.GetManager<ICommandsMan>()));
 
@@ -332,8 +335,6 @@ namespace OpenBreed.Sandbox
             Players.ResetInputs();
 
             Inputs.Update();
-
-            //StateMachine.Update((float)e.Time);
             Worlds.Update(dt);
             Jobs.Update(dt);
         }
@@ -370,7 +371,9 @@ namespace OpenBreed.Sandbox
             InitLua();
 
             RegisterShapes();
-            RegisterFixtures();
+
+            GetManager<FixtureTypes>().Register();
+
             RegisterInputs();
             RegisterPlayers();
 
@@ -421,23 +424,6 @@ namespace OpenBreed.Sandbox
                 .AppendCoordsFromGrid(16, 16, 8, 1, 0, 0)
                 .Build();
             //spriteMan.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
-
-            var turretTex = textureMan.Create("Textures/Sprites/Turret", @"Content\Graphics\TurretSpriteSet.png");
-            spriteMan.CreateAtlas()
-                .SetTexture(turretTex.Id)
-                .SetName(TurretHelper.SPRITE_TURRET)
-                .AppendCoordsFromGrid(32, 32, 8, 2)
-                .Build();
-
-            //spriteMan.Create(TurretHelper.SPRITE_TURRET, turretTex.Id, 32, 32, 8, 2);
-
-            var cursorsTex = textureMan.Create("Textures/Sprites/Cursors", @"Content\Graphics\Cursors.png");
-            spriteMan.CreateAtlas()
-                .SetTexture(cursorsTex.Id)
-                .SetName("Atlases/Sprites/Cursors")
-                .AppendCoordsFromGrid(16, 16, 1, 1)
-                .Build();
-            //spriteMan.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
 
             var worldGateHelper = GetManager<WorldGateHelper>();
             var doorHelper = GetManager<DoorHelper>();
@@ -530,23 +516,6 @@ namespace OpenBreed.Sandbox
             shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
             shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
             shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
-        }
-
-        private void RegisterFixtures()
-        {
-            var shapeMan = GetManager<IShapeMan>();
-            var fixtureMan = GetManager<IFixtureMan>();
-
-            fixtureMan.Create("Fixtures/GridCell", shapeMan.GetByTag("Shapes/Box_0_0_16_16"));
-            fixtureMan.Create("Fixtures/TeleportEntry", shapeMan.GetByTag("Shapes/Box_16_16_8_8"));
-            fixtureMan.Create("Fixtures/TeleportExit", shapeMan.GetByTag("Shapes/Box_16_16_8_8"));
-            fixtureMan.Create("Fixtures/Projectile", shapeMan.GetByTag("Shapes/Box_0_0_16_16"));
-            fixtureMan.Create("Fixtures/DoorVertical", shapeMan.GetByTag("Shapes/Box_0_0_16_32"));
-            fixtureMan.Create("Fixtures/DoorHorizontal", shapeMan.GetByTag("Shapes/Box_0_0_32_16"));
-            fixtureMan.Create("Fixtures/Arrow", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
-            fixtureMan.Create("Fixtures/HeroBody", shapeMan.GetByTag("Shapes/Box_0_0_28_28"));
-            fixtureMan.Create("Fixtures/HeroTrigger", shapeMan.GetByTag("Shapes/Point_14_14"));
-            fixtureMan.Create("Fixtures/Turret", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
         }
 
         #endregion Private Methods

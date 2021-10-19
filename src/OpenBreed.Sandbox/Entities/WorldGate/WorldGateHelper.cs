@@ -77,8 +77,6 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             teleportEntity.Tag = (worldName, entryId);
 
             teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            teleportEntity.Add(new ColliderComponent(ColliderTypes.WorldExitTrigger));
-            //teleportEntity.Subscribe<CollisionEventArgs>(OnCollision);
 
             commandsMan.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
             //world.AddEntity(teleportEntity);
@@ -88,7 +86,9 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         public void RegisterCollisionPairs()
         {
-            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv ) => Actor2TriggerCallback(ca, ea, cb,eb, pv));
+            //collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv ) => Actor2TriggerCallback(ca, ea, cb,eb, pv));
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv) => Actor2TriggerCallbackEx(ca, ea, cb, eb, pv));
+
             //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
         }
 
@@ -150,11 +150,19 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             jobsMan.Execute(jobChain);
         }
 
-        private void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        //private void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        //{
+        //    if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
+        //        PerformEntityExit(entityB, entityA);
+        //    else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
+        //        PerformEntityExit(entityA, entityB);
+        //}
+
+        private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
         {
-            if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
-                PerformEntityExit(entityB, entityA);
-            else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
+            //if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
+            //    PerformEntityExit(entityB, entityA);
+            //else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
                 PerformEntityExit(entityA, entityB);
         }
 
@@ -247,12 +255,15 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
                 throw new Exception($"No entry with id '{pair.Id}' found.");
 
 
+            var world = worldMan.GetById(target.WorldId);
+            var broadphase = world.GetModule<IBroadphaseDynamic>();
+            
             var entryPos = entryEntity.Get<PositionComponent>();
             var targetPos = target.Get<PositionComponent>();
-            var targetAabb = target.Get<BodyComponent>().Aabb;
-            var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
+            //var targetAabb = broadphase.GetAabb(target.Id);
+            //var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
 
-            var newPosition = entryPos.Value + offset;
+            var newPosition = entryPos.Value;// + offset;
 
             targetPos.Value = newPosition;
 

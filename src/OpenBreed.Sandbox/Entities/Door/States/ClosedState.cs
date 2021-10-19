@@ -12,6 +12,7 @@ using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenTK;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -36,7 +37,8 @@ namespace OpenBreed.Sandbox.Components.States
             this.collisionMan = collisionMan;
             this.stampMan = stampMan;
             stampPrefix = "Tiles/Stamps";
-            collisionMan.RegisterCollisionPair(ColliderTypes.DoorOpenTrigger, ColliderTypes.ActorBody, DoorOpenTriggerCallback);
+            //collisionMan.RegisterCollisionPair(ColliderTypes.DoorOpenTrigger, ColliderTypes.ActorBody, DoorOpenTriggerCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.DoorOpenTrigger, DoorOpenTriggerCallbackEx);
         }
 
         #endregion Public Constructors
@@ -72,25 +74,28 @@ namespace OpenBreed.Sandbox.Components.States
 
             commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
-            var colCmp = entity.Get<ColliderComponent>();
+            var bodyCmp = entity.Get<BodyComponent>();
 
-            colCmp.ColliderTypes.Add(ColliderTypes.StaticObstacle);
-            colCmp.ColliderTypes.Add(ColliderTypes.DoorOpenTrigger);
+            var fixture = bodyCmp.Fixtures.First();
+            fixture.GroupIds.Clear();
+            fixture.GroupIds.Add(ColliderTypes.StaticObstacle);
+            fixture.GroupIds.Add(ColliderTypes.DoorOpenTrigger);
         }
 
         public void LeaveState(Entity entity)
         {
-            var colCmp = entity.Get<ColliderComponent>();
-            colCmp.ColliderTypes.Remove(ColliderTypes.DoorOpenTrigger);
+            var bodyCmp = entity.Get<BodyComponent>();
+            var fixture = bodyCmp.Fixtures.First();
+            fixture.GroupIds.RemoveAll(id => id == ColliderTypes.DoorOpenTrigger);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void DoorOpenTriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        private void DoorOpenTriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
         {
-            commandsMan.Post(new SetEntityStateCommand(entityA.Id, FsmId, (int)FunctioningImpulse.Open));
+            commandsMan.Post(new SetEntityStateCommand(entityB.Id, FsmId, (int)FunctioningImpulse.Open));
         }
 
         #endregion Private Methods

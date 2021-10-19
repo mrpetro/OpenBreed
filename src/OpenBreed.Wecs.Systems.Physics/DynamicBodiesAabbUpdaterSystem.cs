@@ -15,16 +15,16 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
-        private readonly IFixtureMan fixtureMan;
+        private readonly IShapeMan shapeMan;
         private IBroadphaseDynamic broadphaseDynamic;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal DynamicBodiesAabbUpdaterSystem(IFixtureMan fixtureMan)
+        internal DynamicBodiesAabbUpdaterSystem(IShapeMan shapeMan)
         {
-            this.fixtureMan = fixtureMan;
+            this.shapeMan = shapeMan;
 
             RequireEntityWith<BodyComponent>();
             RequireEntityWith<PositionComponent>();
@@ -86,8 +86,8 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             var body = entity.Get<BodyComponent>();
             var pos = entity.Get<PositionComponent>();
-            var fixture = fixtureMan.GetById(body.Fixtures.First());
-            return fixture.Shape.GetAabb().Translated(pos.Value);
+            var shape = shapeMan.GetById(body.Fixtures.First().ShapeId);
+            return shape.GetAabb().Translated(pos.Value);
         }
 
         #endregion Private Methods

@@ -11,6 +11,7 @@ namespace OpenBreed.Physics.Interface.Managers
          int Count { get; }
 
         IShape GetByTag(string tag);
+        int GetIdByTag(string tag);
         IShape GetById(int id);
         void Register(string tag, IShape shape, bool overwrite = false);
     }

@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\FixtureTypes.cs" />
     <Compile Include="Entities\EnvironmentHelper.cs" />
     <Compile Include="Entities\MapCellHelper.cs" />
     <Compile Include="Loaders\AnimatedCellLoader.cs" />
@@ -191,9 +192,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Projectile\Projectile.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Teleport\TeleportEntry - Copy.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Teleport\TeleportExit.xml">

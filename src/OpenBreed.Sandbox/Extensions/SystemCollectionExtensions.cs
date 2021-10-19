@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Extensions
                                                                               manCollection.GetManager<IBuilderFactory>()));
 
             manCollection.AddTransient<WorldBlockBuilder>(() => new WorldBlockBuilder(manCollection.GetManager<ITileMan>(),
-                                                                                      manCollection.GetManager<IFixtureMan>(),
+                                                                                      manCollection.GetManager<IShapeMan>(),
                                                                                       manCollection.GetManager<IEntityMan>(),
                                                                                       manCollection.GetManager<IBuilderFactory>()));
         }

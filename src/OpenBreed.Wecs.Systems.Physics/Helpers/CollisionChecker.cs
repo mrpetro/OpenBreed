@@ -83,13 +83,14 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
 
         public static bool Check(Vector2 posA, PointShape pointShape, Vector2 posB, BoxShape shapeB, out Vector2 projection)
         {
-            var aabbA = pointShape.GetAabb();
+            //var aabbA = pointShape.GetAabb();
             var aabbB = shapeB.GetAabb();
             aabbB.Translate(posB - posA);
 
-            var aPos = aabbA.GetCenter();
-            var aHalfWidth = aabbA.Width / 2.0f;
-            var aHalfHeight = aabbA.Height / 2.0f;
+            //var aPos = new Vector2(pointShape.X, pointShape.Y);
+            var aPos = new Vector2(pointShape.X, pointShape.Y);
+            //var aHalfWidth = aabbA.Width / 2.0f;
+            //var aHalfHeight = aabbA.Height / 2.0f;
 
             var bPos = aabbB.GetCenter();
             var bHalfWidth = aabbB.Width / 2.0f;
@@ -98,14 +99,14 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             var dx = aPos.X - bPos.X;
 
             //Calculate depth in x
-            var px = (bHalfWidth + aHalfWidth) - Math.Abs(dx);
+            var px = (bHalfWidth) - Math.Abs(dx);
 
             if (0 < px)
             {
                 var dy = aPos.Y - bPos.Y;
 
                 //Calculate depth in y
-                var py = (bHalfHeight + aHalfHeight) - Math.Abs(dy);
+                var py = (bHalfHeight) - Math.Abs(dy);
 
                 if (0 < py)
                 {
@@ -150,16 +151,19 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             return false;
         }
 
-        public static bool Check(Vector2 posA, IFixture fixtureA, Vector2 posB, IFixture fixtureB, out Vector2 projection)
+        public static bool Check(Vector2 posA, IShape shapeA, Vector2 posB, IShape shapeB, out Vector2 projection)
         {
-            if (fixtureA.Shape is BoxShape && fixtureB.Shape is BoxShape)
-                return Check(posA, (BoxShape)fixtureA.Shape, posB, (BoxShape)fixtureB.Shape, out projection);
-            else if (fixtureA.Shape is PointShape && fixtureB.Shape is BoxShape)
-                return Check(posA, (PointShape)fixtureA.Shape, posB, (BoxShape)fixtureB.Shape, out projection);
-            else if (fixtureA.Shape is BoxShape && fixtureB.Shape is PointShape)
-                return Check(posB, (PointShape)fixtureB.Shape, posA, (BoxShape)fixtureA.Shape, out projection);
+            Console.WriteLine($"{shapeA.GetType()} {shapeB.GetType()}");
+
+            if (shapeA is BoxShape && shapeB is BoxShape)
+                return Check(posA, (BoxShape)shapeA, posB, (BoxShape)shapeB, out projection);
+            else if (shapeA is PointShape && shapeB is BoxShape)
+                return Check(posA, (PointShape)shapeA, posB, (BoxShape)shapeB, out projection);
+            else if (shapeA is BoxShape && shapeB is PointShape)
+                return Check(posB, (PointShape)shapeB, posA, (BoxShape)shapeA, out projection);
             else
                 throw new NotImplementedException();
         }
+
     }
 }

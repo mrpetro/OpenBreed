@@ -15,7 +15,6 @@ namespace OpenBreed.Physics.Generic.Extensions
         public static void SetupGenericPhysicsManagers(this IManagerCollection manCollection)
         {
             manCollection.AddSingleton<IShapeMan>(() => new ShapeMan(manCollection.GetManager<ILogger>()));
-            manCollection.AddSingleton<IFixtureMan>(() => new FixtureMan(manCollection.GetManager<ILogger>()));
             manCollection.AddSingleton<ICollisionMan>(() => new CollisionMan(manCollection.GetManager<ILogger>()));
             manCollection.AddSingleton<IBroadphaseFactory>(() => new BroadphaseFactory(manCollection.GetManager<ILogger>()));
         }

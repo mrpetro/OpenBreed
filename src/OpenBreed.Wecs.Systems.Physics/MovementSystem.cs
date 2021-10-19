@@ -61,7 +61,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             var newPos = position.Value + (velocity.Value + newVel) * 0.5f * dt;
 
             velocity.Value = newVel;
-            dynamicBody.OldPosition = position.Value;
             position.Value = newPos;
         }
 

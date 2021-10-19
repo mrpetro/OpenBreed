@@ -24,17 +24,17 @@ namespace OpenBreed.Sandbox.Entities.Builders
         #region Private Fields
 
         private readonly ITileMan tileMan;
-        private readonly IFixtureMan fixtureMan;
+        private readonly IShapeMan shapeMan;
         private readonly IBuilderFactory builderFactory;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal WorldBlockBuilder(ITileMan tileMan, IFixtureMan fixtureMan, IEntityMan entityMan, IBuilderFactory builderFactory) : base(entityMan)
+        internal WorldBlockBuilder(ITileMan tileMan, IShapeMan shapeMan, IEntityMan entityMan, IBuilderFactory builderFactory) : base(entityMan)
         {
             this.tileMan = tileMan;
-            this.fixtureMan = fixtureMan;
+            this.shapeMan = shapeMan;
             this.builderFactory = builderFactory;
             HasBody = true;
         }
@@ -84,17 +84,13 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
             if (HasBody)
             {
-                var fixtureId = fixtureMan.GetByAlias("Fixtures/GridCell").Id;
-
                 var bodyComponentBuilder = builderFactory.GetBuilder<BodyComponentBuilder>();
 
                 bodyComponentBuilder.SetCofFactor(1.0f);
                 bodyComponentBuilder.SetCorFactor(1.0f);
-                bodyComponentBuilder.SetType("Static");
-                bodyComponentBuilder.AddFixture(fixtureId);
+                bodyComponentBuilder.AddFixture("Shapes/Box_0_0_16_16", new string[] { "StaticObstacle" });
 
                 entity.Add(bodyComponentBuilder.Build());
-                entity.Add(new ColliderComponent(ColliderTypes.StaticObstacle));
             }
 
             var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();

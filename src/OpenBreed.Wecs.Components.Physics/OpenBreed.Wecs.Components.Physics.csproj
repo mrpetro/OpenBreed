@@ -67,9 +67,7 @@
     <Compile Include="BodyComponent.cs" />
     <Compile Include="ResponseComponent.cs" />
     <Compile Include="CollisionComponent.cs" />
-    <Compile Include="ColliderComponent.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
-    <Compile Include="Fixture.cs" />
     <Compile Include="Material.cs" />
     <Compile Include="MotionComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

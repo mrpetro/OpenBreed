@@ -33,12 +33,13 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private readonly MapCellHelper mapCellHelper;
 
         private readonly DynamicResolver dynamicResolver;
+        private readonly FixtureTypes fixtureTypes;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ActorHelper(IClipMan clipMan, ICollisionMan collisionMan, ICommandsMan commandsMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, MapCellHelper mapCellHelper, DynamicResolver dynamicResolver)
+        public ActorHelper(IClipMan clipMan, ICollisionMan collisionMan, ICommandsMan commandsMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, MapCellHelper mapCellHelper, DynamicResolver dynamicResolver, FixtureTypes fixtureTypes)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
@@ -48,6 +49,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             this.entityFactory = entityFactory;
             this.mapCellHelper = mapCellHelper;
             this.dynamicResolver = dynamicResolver;
+            this.fixtureTypes = fixtureTypes;
         }
 
         #endregion Public Constructors
@@ -56,7 +58,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public void RegisterCollisionPairs()
         {
-            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallback);
+            //collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallback);
+
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallbackEx);
         }
 
         public void CreateAnimations()
@@ -103,7 +107,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             actor.Add(new AngularVelocityComponent(0));
             actor.Add(new AngularThrustComponent(0));
-            actor.Add(new ColliderComponent(ColliderTypes.ActorBody));
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
@@ -133,6 +136,11 @@ namespace OpenBreed.Sandbox.Entities.Actor
         #region Private Methods
 
         private void Dynamic2StaticCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        {
+            dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
+        }
+
+        private void Dynamic2StaticCallbackEx(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
         }

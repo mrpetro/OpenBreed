@@ -20,17 +20,17 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         private readonly List<int> inactiveStatics = new List<int>();
         private readonly IEntityMan entityMan;
-        private readonly IFixtureMan fixtureMan;
+        private readonly IShapeMan shapeMan;
         private IBroadphaseStatic broadphaseGrid;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal StaticBodiesSystem(IEntityMan entityMan, IFixtureMan fixtureMan)
+        internal StaticBodiesSystem(IEntityMan entityMan, IShapeMan shapeMan)
         {
             this.entityMan = entityMan;
-            this.fixtureMan = fixtureMan;
+            this.shapeMan = shapeMan;
 
             RequireEntityWith<BodyComponent>();
             RequireEntityWith<PositionComponent>();
@@ -110,8 +110,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             var pos = entity.Get<PositionComponent>();
             var body = entity.Get<BodyComponent>();
 
-            var fixture = fixtureMan.GetById(body.Fixtures.First());
-            var aabb = fixture.Shape.GetAabb().Translated(pos.Value);
+            var shape = shapeMan.GetById(body.Fixtures.First().ShapeId);
+            var aabb = shape.GetAabb().Translated(pos.Value);
 
             broadphaseGrid.InsertItem(entity.Id, aabb);
         }

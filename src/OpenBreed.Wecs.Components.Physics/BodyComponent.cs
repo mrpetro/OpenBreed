@@ -3,17 +3,23 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenTK;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Wecs.Components.Physics
 {
+    public interface IBodyFixtureTemplate
+    {
+        string ShapeName { get; set; }
+        IEnumerable<string> Groups { get; }
+    }
+
     public interface IBodyComponentTemplate : IComponentTemplate
     {
         #region Public Properties
 
         float CofFactor { get; set; }
         float CorFactor { get; set; }
-        string Type { get; set; }
-        string[] Fixtures { get; set; }
+        IEnumerable<IBodyFixtureTemplate> Fixtures { get; }
 
         #endregion Public Properties
     }
@@ -30,7 +36,6 @@ namespace OpenBreed.Wecs.Components.Physics
             CofFactor = builder.CofFactor;
             CorFactor = builder.CorFactor;
             Fixtures = builder.Fixtures;
-            Tag = builder.Type;
         }
 
         #endregion Public Constructors
@@ -55,23 +60,7 @@ namespace OpenBreed.Wecs.Components.Physics
         /// <summary>
         /// List of Fixture IDs
         /// </summary>
-        public List<int> Fixtures { get; }
-
-        /// <summary>
-        /// User defined tag
-        /// </summary>
-        public string Tag { get; set; }
-
-        /// <summary>
-        /// DEBUG only
-        /// </summary>
-        ///
-        public Vector2 Projection { get; set; }
-
-        /// <summary>
-        /// OldPosition used for verlet integration
-        /// </summary>
-        public Vector2 OldPosition { get; set; }
+        public List<BodyFixture> Fixtures { get; }
 
         #endregion Public Properties
     }
@@ -101,10 +90,9 @@ namespace OpenBreed.Wecs.Components.Physics
 
             builder.SetCofFactor(template.CofFactor);
             builder.SetCorFactor(template.CorFactor);
-            builder.SetType(template.Type);
 
-            foreach (var fixtureName in template.Fixtures)
-                builder.AddFixtureByName(fixtureName);
+            foreach (var fixture in template.Fixtures)
+                builder.AddFixture(fixture.ShapeName, fixture.Groups);
 
             return builder.Build();
         }
@@ -116,24 +104,25 @@ namespace OpenBreed.Wecs.Components.Physics
     {
         #region Internal Fields
 
-        internal readonly List<int> Fixtures = new List<int>();
+        internal readonly List<BodyFixture> Fixtures = new List<BodyFixture>();
         internal float CofFactor;
         internal float CorFactor;
-        internal string Type;
 
         #endregion Internal Fields
 
         #region Private Fields
 
-        private readonly IFixtureMan fixtureMan;
+        private readonly IShapeMan shapeMan;
+        private readonly ICollisionMan collisionMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal BodyComponentBuilder(IFixtureMan fixtureMan)
+        internal BodyComponentBuilder(IShapeMan shapeMan, ICollisionMan collisionMan)
         {
-            this.fixtureMan = fixtureMan;
+            this.shapeMan = shapeMan;
+            this.collisionMan = collisionMan;
         }
 
         #endregion Internal Constructors
@@ -155,22 +144,11 @@ namespace OpenBreed.Wecs.Components.Physics
             CorFactor = corFactor;
         }
 
-        public void AddFixture(int fixtureId)
+        public void AddFixture(string shapeName, IEnumerable<string> groupNames)
         {
-            Fixtures.Add(fixtureId);
-        }
-
-        public void AddFixtureByName(string fixtureName)
-        {
-            var fixture = fixtureMan.GetByAlias(fixtureName);
-
-            if (fixture != null)
-                Fixtures.Add(fixture.Id);
-        }
-
-        public void SetType(string type)
-        {
-            Type = type;
+            var shapeId = shapeMan.GetIdByTag(shapeName);
+            var groupIds = groupNames.Select(item => collisionMan.GetGroupId(item));
+            Fixtures.Add(new BodyFixture(shapeId, groupIds));
         }
 
         #endregion Public Methods

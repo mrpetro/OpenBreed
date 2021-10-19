@@ -29,16 +29,14 @@ namespace OpenBreed.Wecs.Systems.Gui
         private List<Entity> entities = new List<Entity>();
         private IBroadphaseDynamic broadphaseDynamic;
         private readonly IPrimitiveRenderer primitiveRenderer;
-        private readonly IFixtureMan fixtureMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PhysicsDebugDisplaySystem(IPrimitiveRenderer primitiveRenderer, IFixtureMan fixtureMan)
+        public PhysicsDebugDisplaySystem(IPrimitiveRenderer primitiveRenderer)
         {
             this.primitiveRenderer = primitiveRenderer;
-            this.fixtureMan = fixtureMan;
 
             RequireEntityWith<BodyComponent>();
             RequireEntityWith<PositionComponent>();

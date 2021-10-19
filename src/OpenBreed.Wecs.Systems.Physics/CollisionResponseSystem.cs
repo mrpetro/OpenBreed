@@ -18,7 +18,6 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
-        private readonly IFixtureMan fixtureMan;
         private readonly IWorldMan worldMan;
         private readonly ICollisionMan collisionMan;
 
@@ -26,10 +25,9 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        public CollisionResponseSystem(IEntityMan entityMan, IFixtureMan fixtureMan, IWorldMan worldMan, ICollisionMan collisionMan)
+        public CollisionResponseSystem(IEntityMan entityMan, IWorldMan worldMan, ICollisionMan collisionMan)
         {
             this.entityMan = entityMan;
-            this.fixtureMan = fixtureMan;
             this.worldMan = worldMan;
             this.collisionMan = collisionMan;
         }
@@ -72,6 +70,9 @@ namespace OpenBreed.Wecs.Systems.Physics
                 {
                 }
 
+                //collisionMan.Resolve(entity, contactEntity, collisionComponent.Contacts);
+
+
                 foreach (var contact in collisionComponent.Contacts)
                 {
                     var contactEntity = entityMan.GetById(contact.EntityId);
@@ -86,9 +87,6 @@ namespace OpenBreed.Wecs.Systems.Physics
 
                     var oldPos = posComponnent.Value;
                     var oldVel = velComponnent.Value;
-
-
-                    collisionMan.Callback(entity, contactEntity, projection);
 
                     pd = posComponnent.Value - oldPos;
                     vd = velComponnent.Value - oldVel;

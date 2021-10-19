@@ -14,9 +14,13 @@
 		<Body>
 			<CofFactor>1.0</CofFactor>
 			<CorFactor>1.0</CorFactor>
-			<Type>Trigger</Type>
 			<Fixtures>
-				<Fixture>Fixtures/TeleportExit</Fixture>
+				<Fixture>
+					<ShapeName>Shapes/Box_16_16_8_8</ShapeName>
+					<Groups>
+						<Group>WorldExitTrigger</Group>
+					</Groups>
+				</Fixture>
 			</Fixtures>	
 		</Body>
 		<Sprite>

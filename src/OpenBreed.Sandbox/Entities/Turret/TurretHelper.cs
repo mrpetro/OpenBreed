@@ -80,7 +80,7 @@ namespace OpenBreed.Sandbox.Entities.Turret
             var entity = entityFactory.Create(entityTemplate);
 
             entity.Get<PositionComponent>().Value = pos;
-            entity.Add(new ColliderComponent(ColliderTypes.StaticObstacle));
+            //entity.Add(new ColliderComponent(ColliderTypes.StaticObstacle));
             //entity.Subscribe<CollisionEventArgs>(OnCollision);
 
             return entity;

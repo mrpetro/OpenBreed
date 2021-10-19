@@ -30,10 +30,19 @@
 		<Body>
 			<CofFactor>1.0</CofFactor>
 			<CorFactor>0.0</CorFactor>
-			<Type>Dynamic</Type>
 			<Fixtures>
-				<Fixture>Fixtures/HeroBody</Fixture>
-				<Fixture>Fixtures/HeroTrigger</Fixture>
+				<Fixture>
+					<ShapeName>Shapes/Box_0_0_28_28</ShapeName>
+					<Groups>
+						<Group>ActorBody</Group>
+					</Groups>
+				</Fixture>
+				<Fixture>
+					<ShapeName>Shapes/Point_14_14</ShapeName>
+					<Groups>
+						<Group>ActorTrigger</Group>
+					</Groups>
+				</Fixture>
 			</Fixtures>
 		</Body>
 		<Motion></Motion>

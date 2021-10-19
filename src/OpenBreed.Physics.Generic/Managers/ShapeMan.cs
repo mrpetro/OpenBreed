@@ -43,6 +43,11 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #region Public Methods
 
+        public int GetIdByTag(string tag)
+        {
+            return (int)tagsToIds[tag];
+        }
+
         public IShape GetByTag(string tag)
         {
             var id = tagsToIds[tag];

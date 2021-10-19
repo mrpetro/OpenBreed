@@ -24,14 +24,13 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             var systemFactory = manCollection.GetManager<ISystemFactory>();
             systemFactory.Register(() => new DirectionSystem(manCollection.GetManager<IEntityMan>()));
             systemFactory.Register(() => new MovementSystem(manCollection.GetManager<IEntityMan>()));
-            systemFactory.Register(() => new DynamicBodiesAabbUpdaterSystem(manCollection.GetManager<IFixtureMan>()));
+            systemFactory.Register(() => new DynamicBodiesAabbUpdaterSystem(manCollection.GetManager<IShapeMan>()));
             systemFactory.Register(() => new DynamicBodiesCollisionCheckSystem(manCollection.GetManager<IEntityMan>(),
-                                                                               manCollection.GetManager<IFixtureMan>(),
+                                                                               manCollection.GetManager<IShapeMan>(),
                                                                                manCollection.GetManager<ICollisionMan>()));
             systemFactory.Register(() => new StaticBodiesSystem(manCollection.GetManager<IEntityMan>(),
-                                                                manCollection.GetManager<IFixtureMan>()));
+                                                                manCollection.GetManager<IShapeMan>()));
             systemFactory.Register(() => new CollisionResponseSystem(manCollection.GetManager<IEntityMan>(),
-                                                                     manCollection.GetManager<IFixtureMan>(),
                                                                      manCollection.GetManager<IWorldMan>(),
                                                                      manCollection.GetManager<ICollisionMan>()));
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
