@@ -8,6 +8,7 @@ using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenTK;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Physics.Generic.Managers
 {
@@ -65,6 +66,30 @@ namespace OpenBreed.Physics.Generic.Managers
             return list[id].Name;
         }
 
+        public void Resolve(Entity entityA, Entity entityB, List<CollisionManifold> manifolds)
+        {
+            var firstManifold = manifolds.First();
+
+            var colCmpA = entityA.Get<ColliderComponent>();
+            var colCmpB = entityB.Get<ColliderComponent>();
+
+            for (int i = 0; i < colCmpA.ColliderTypes.Count; i++)
+            {
+                var colliderTypeId = colCmpA.ColliderTypes[i];
+                var colliderType = list[colliderTypeId];
+                for (int j = 0; j < colCmpB.ColliderTypes.Count; j++)
+                    colliderType.Callback(colliderTypeId, entityA, colCmpB.ColliderTypes[j], entityB, firstManifold.Projection);
+            }
+
+            for (int i = 0; i < colCmpB.ColliderTypes.Count; i++)
+            {
+                var colliderTypeId = colCmpB.ColliderTypes[i];
+                var colliderType = list[colliderTypeId];
+                for (int j = 0; j < colCmpA.ColliderTypes.Count; j++)
+                    colliderType.Callback(colliderTypeId, entityB, colCmpA.ColliderTypes[j], entityA, -firstManifold.Projection);
+            }
+        }
+
         public void Callback(Entity entityA, Entity entityB, Vector2 projection)
         {
             var colCmpA = entityA.Get<ColliderComponent>();
@@ -77,13 +102,6 @@ namespace OpenBreed.Physics.Generic.Managers
                 for (int j = 0; j < colCmpB.ColliderTypes.Count; j++)
                     colliderType.Callback(colliderTypeId, entityA, colCmpB.ColliderTypes[j], entityB, projection);
             }
-
-            //for (int i = 0; i < colCmpB.ColliderTypes.Count; i++)
-            //{
-            //    var colliderTypeId = colCmpB.ColliderTypes[i];
-            //    for (int j = 0; j < colCmpA.ColliderTypes.Count; j++)
-            //        list[colliderTypeId].Callback(colliderTypeId, entityB, colCmpA.ColliderTypes[i], entityA, projection);
-            //}
         }
 
         #endregion Public Methods

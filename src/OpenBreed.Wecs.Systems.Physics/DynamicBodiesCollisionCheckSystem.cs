@@ -75,15 +75,6 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #endregion Public Methods
 
-        #region Internal Methods
-
-        internal IFixture GetFixture(int fixtureId)
-        {
-            return fixtureMan.GetById(fixtureId);
-        }
-
-        #endregion Internal Methods
-
         #region Protected Methods
 
         protected override void OnAddEntity(Entity entity)
@@ -142,7 +133,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             return true;
         }
 
-        private void TestNarrowPhaseDynamic(BroadphaseDynamicCell nextCollider, BroadphaseDynamicCell currentCollider, float dt)
+        private void TestNarrowPhaseDynamic(BroadphaseDynamicElement nextCollider, BroadphaseDynamicElement currentCollider, float dt)
         {
             var entityA = entityMan.GetById(nextCollider.ItemId);
             var entityB = entityMan.GetById(currentCollider.ItemId);
@@ -160,29 +151,30 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         private void TestNarrowPhaseStatic(Entity dynamicEntity, Entity staticEntity, float dt)
         {
-            Vector2 projection;
-            if (TestVsStatic(dynamicEntity, staticEntity, dt, out projection))
-            {
-                //var collisionDynamic = dynamicEntity.TryGet<CollisionComponent>();
-                //if (collisionDynamic == null)
-                //{
-                //    collisionDynamic = new CollisionComponent();
-                //    dynamicEntity.Add(collisionDynamic);
-                //}
+            if (TestVsStatic(dynamicEntity, staticEntity, dt, out List<CollisionManifold> manifolds))
+                collisionMan.Resolve(dynamicEntity, staticEntity, manifolds);
+            //{
+            //    var projection = manifolds.First().Projection;
+            //    //var collisionDynamic = dynamicEntity.TryGet<CollisionComponent>();
+            //    //if (collisionDynamic == null)
+            //    //{
+            //    //    collisionDynamic = new CollisionComponent();
+            //    //    dynamicEntity.Add(collisionDynamic);
+            //    //}
 
-                //var collisionStatic = staticEntity.TryGet<CollisionComponent>();
-                //if (collisionStatic == null)
-                //{
-                //    collisionStatic = new CollisionComponent();
-                //    staticEntity.Add(collisionStatic);
-                //}
+            //    //var collisionStatic = staticEntity.TryGet<CollisionComponent>();
+            //    //if (collisionStatic == null)
+            //    //{
+            //    //    collisionStatic = new CollisionComponent();
+            //    //    staticEntity.Add(collisionStatic);
+            //    //}
 
-                //collisionDynamic.Contacts.Add(new CollisionContact(staticEntity.Id, projection));
-                //collisionStatic.Contacts.Add(new CollisionContact(dynamicEntity.Id, -projection));
+            //    //collisionDynamic.Contacts.Add(new CollisionContact(staticEntity.Id, projection));
+            //    //collisionStatic.Contacts.Add(new CollisionContact(dynamicEntity.Id, -projection));
 
-                collisionMan.Callback(dynamicEntity, staticEntity, projection);
-                collisionMan.Callback(staticEntity, dynamicEntity, -projection);
-            }
+            //    collisionMan.Callback(dynamicEntity, staticEntity, projection);
+            //    //collisionMan.Callback(staticEntity, dynamicEntity, -projection);
+            //}
         }
 
         private bool TestVsDynamic(Entity entityA, Entity entityB, float dt, out Vector2 projection)
@@ -194,11 +186,11 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             if (bodyA.Fixtures.Count > 0)
             {
-                var fixtureA = GetFixture(bodyA.Fixtures.First());
+                var fixtureA = fixtureMan.GetById(bodyA.Fixtures.First());
 
                 if (bodyB.Fixtures.Count > 0)
                 {
-                    var fixtureB = GetFixture(bodyB.Fixtures.First());
+                    var fixtureB = fixtureMan.GetById(bodyB.Fixtures.First());
                     return CollisionChecker.Check(posA.Value, fixtureA, posB.Value, fixtureB, out projection);
                 }
                 else
@@ -208,31 +200,45 @@ namespace OpenBreed.Wecs.Systems.Physics
                 throw new NotImplementedException();
         }
 
-        private bool TestVsStatic(Entity dynamicEntity, Entity staticEntity, float dt, out Vector2 projection)
+        private bool TestVsStatic(Entity dynamicEntity, Entity staticEntity, float dt, out List<CollisionManifold> manifolds)
         {
             var bodyA = dynamicEntity.Get<BodyComponent>();
             var posA = dynamicEntity.Get<PositionComponent>();
 
-            if (bodyA.Fixtures.Count > 0)
+            if (bodyA.Fixtures.Count == 0)
             {
-                var fixtureA = GetFixture(bodyA.Fixtures.First());
-
-                var bodyB = staticEntity.Get<BodyComponent>();
-                var posB = staticEntity.Get<PositionComponent>();
-
-                if (bodyB.Fixtures.Count > 0)
-                {
-                    var fixtureB = GetFixture(bodyB.Fixtures.First());
-                    return CollisionChecker.Check(posA.Value, fixtureA, posB.Value, fixtureB, out projection);
-                }
-                else
-                    throw new NotImplementedException();
+                manifolds = null;
+                return false;
             }
-            else
-                throw new NotImplementedException();
+
+            var bodyB = staticEntity.Get<BodyComponent>();
+            var posB = staticEntity.Get<PositionComponent>();
+
+            if (bodyB.Fixtures.Count == 0)
+            {
+                manifolds = null;
+                return false;
+            }
+
+            manifolds = new List<CollisionManifold>();
+
+            foreach (var fixtureAId in bodyA.Fixtures)
+            {
+                var fixtureA = fixtureMan.GetById(fixtureAId);
+
+                foreach (var fixtureBId in bodyB.Fixtures)
+                {
+                    var fixtureB = fixtureMan.GetById(fixtureBId);
+
+                    if (CollisionChecker.Check(posA.Value, fixtureA, posB.Value, fixtureB, out Vector2 projection))
+                        manifolds.Add(new CollisionManifold(fixtureAId, fixtureBId, projection));
+                }
+            }
+
+            return manifolds.Count > 0;
         }
 
-        private void QueryStaticGrid(BroadphaseDynamicCell cell, float dt)
+        private void QueryStaticGrid(BroadphaseDynamicElement cell, float dt)
         {
             var dynamicAabb = cell.Aabb;
 

@@ -39,8 +39,8 @@ namespace OpenBreed.Physics.Generic.Managers
     {
         #region Private Fields
 
-        private readonly List<BroadphaseDynamicCell> cells = new List<BroadphaseDynamicCell>();
-        private readonly Dictionary<int, BroadphaseDynamicCell> items = new Dictionary<int, BroadphaseDynamicCell>();
+        private readonly List<BroadphaseDynamicElement> cells = new List<BroadphaseDynamicElement>();
+        private readonly Dictionary<int, BroadphaseDynamicElement> items = new Dictionary<int, BroadphaseDynamicElement>();
 
         #endregion Private Fields
 
@@ -56,7 +56,7 @@ namespace OpenBreed.Physics.Generic.Managers
 
         public Box2 GetAabb(int itemId)
         {
-            if (!items.TryGetValue(itemId, out BroadphaseDynamicCell cell))
+            if (!items.TryGetValue(itemId, out BroadphaseDynamicElement cell))
                 throw new InvalidOperationException($"Item with ID '{itemId}' was not inserted.");
 
             return cell.Aabb;
@@ -67,7 +67,7 @@ namespace OpenBreed.Physics.Generic.Managers
             if (items.ContainsKey(itemId))
                 throw new InvalidOperationException($"Item with ID '{itemId}' was already inserted.");
 
-            var newCell = new BroadphaseDynamicCell(itemId, aabb);
+            var newCell = new BroadphaseDynamicElement(itemId, aabb);
 
             cells.Add(newCell);
             items.Add(itemId, newCell);
@@ -75,7 +75,7 @@ namespace OpenBreed.Physics.Generic.Managers
 
         public void UpdateItem(int itemId, Box2 aabb)
         {
-            if (!items.TryGetValue(itemId, out BroadphaseDynamicCell cell))
+            if (!items.TryGetValue(itemId, out BroadphaseDynamicElement cell))
                 throw new InvalidOperationException($"Item with ID '{itemId}' was not inserted.");
 
             cell.Aabb = aabb;
@@ -83,17 +83,17 @@ namespace OpenBreed.Physics.Generic.Managers
 
         public void RemoveItem(int itemId)
         {
-            if (!items.TryGetValue(itemId, out BroadphaseDynamicCell cell))
+            if (!items.TryGetValue(itemId, out BroadphaseDynamicElement cell))
                 throw new InvalidOperationException($"Item with ID '{itemId}' was not inserted.");
 
             cells.Remove(cell);
             items.Remove(itemId);
         }
 
-        public void Solve(Action<BroadphaseDynamicCell, float> staticPhase, Action<BroadphaseDynamicCell, BroadphaseDynamicCell, float> narrowPhase, float dt)
+        public void Solve(Action<BroadphaseDynamicElement, float> staticPhase, Action<BroadphaseDynamicElement, BroadphaseDynamicElement, float> narrowPhase, float dt)
         {
-            var xActiveList = new List<BroadphaseDynamicCell>();
-            BroadphaseDynamicCell nextCollider;
+            var xActiveList = new List<BroadphaseDynamicElement>();
+            BroadphaseDynamicElement nextCollider;
 
             cells.Sort(Xcomparison);
 
@@ -136,7 +136,7 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #region Private Methods
 
-        private int Xcomparison(BroadphaseDynamicCell x, BroadphaseDynamicCell y)
+        private int Xcomparison(BroadphaseDynamicElement x, BroadphaseDynamicElement y)
         {
             var xAabb = x.Aabb;
             var yAabb = y.Aabb;

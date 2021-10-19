@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Physics.Interface
 {
-    public class BroadphaseDynamicCell
+    public class BroadphaseDynamicElement
     {
-        public BroadphaseDynamicCell(int itemId, Box2 aabb)
+        public BroadphaseDynamicElement(int itemId, Box2 aabb)
         {
             ItemId = itemId;
             Aabb = aabb;
@@ -33,7 +33,7 @@ namespace OpenBreed.Physics.Interface
         Box2 GetAabb(int itemId);
 
 
-        void Solve(Action<BroadphaseDynamicCell, float> staticPhase, Action<BroadphaseDynamicCell, BroadphaseDynamicCell, float> narrowPhase, float dt);
+        void Solve(Action<BroadphaseDynamicElement, float> staticPhase, Action<BroadphaseDynamicElement, BroadphaseDynamicElement, float> narrowPhase, float dt);
 
         #endregion Public Methods
     }
