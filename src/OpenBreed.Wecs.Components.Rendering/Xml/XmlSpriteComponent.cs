@@ -25,6 +25,8 @@ namespace OpenBreed.Wecs.Components.Rendering.Xml
 
         public int Order { get; set; }
 
+        public bool Hidden { get; set; }
+
         #endregion Public Properties
     }
 }

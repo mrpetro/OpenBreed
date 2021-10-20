@@ -15,6 +15,7 @@ using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
@@ -195,7 +196,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         private void OnFrameUpdate(Entity entity, int nextValue)
         {
-            commandsMan.Post(new SpriteSetCommand(entity.Id, nextValue));
+            entity.SetSpriteImageId(nextValue);
         }
 
         private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)

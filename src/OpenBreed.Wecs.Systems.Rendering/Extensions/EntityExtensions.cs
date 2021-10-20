@@ -17,6 +17,30 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             textCmp.Parts[textPartId].Text = text;
         }
 
+        public static void SetSpriteOn(this Entity entity)
+        {
+            var sprite = entity.Get<SpriteComponent>();
+            sprite.Hidden = false;
+        }
+
+        public static void SetSpriteOff(this Entity entity)
+        {
+            var sprite = entity.Get<SpriteComponent>();
+            sprite.Hidden = true;
+        }
+
+        public static void SetSpriteImageId(this Entity entity, int imageId)
+        {
+            var sprite = entity.Get<SpriteComponent>();
+            sprite.ImageId = imageId;
+        }
+
+        public static void SetSpriteAtlas(this Entity entity, int atlasId)
+        {
+            var sprite = entity.Get<SpriteComponent>();
+            sprite.AtlasId = atlasId;
+        }
+
         #endregion Public Methods
     }
 }

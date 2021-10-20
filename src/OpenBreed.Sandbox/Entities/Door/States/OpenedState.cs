@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
-            commandsMan.Post(new SpriteOffCommand(entity.Id));
+            entity.SetSpriteOff();
             commandsMan.Post(new BodyOffCommand(entity.Id));
 
             var pos = entity.Get<PositionComponent>();

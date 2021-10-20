@@ -37,7 +37,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         public void EnterState(Entity entity)
         {
-            commandsMan.Post(new SpriteOffCommand(entity.Id));
+            entity.SetSpriteOff();
 
             var pos = entity.Get<PositionComponent>();
             commandsMan.Post(new PutStampCommand(entity.Id, 0, 0, pos.Value));

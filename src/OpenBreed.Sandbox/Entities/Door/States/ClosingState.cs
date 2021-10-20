@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
-            commandsMan.Post(new SpriteOnCommand(entity.Id));
+            entity.SetSpriteOn();
             commandsMan.Post(new BodyOnCommand(entity.Id));
 
             var className = entity.Get<ClassComponent>().Name;

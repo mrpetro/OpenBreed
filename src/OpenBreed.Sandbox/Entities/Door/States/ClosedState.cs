@@ -63,7 +63,7 @@ namespace OpenBreed.Sandbox.Components.States
             //var messaging = entity.Get<MessagingComponent>();
             //messaging.Messages.Add(new SpriteOffMsg());
 
-            commandsMan.Post(new SpriteOffCommand(entity.Id));
+            entity.SetSpriteOff();
 
             var pos = entity.Get<PositionComponent>();
 

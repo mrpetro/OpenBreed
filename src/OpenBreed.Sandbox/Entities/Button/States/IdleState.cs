@@ -47,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         public void EnterState(Entity entity)
         {
-            commandsMan.Post(new SpriteOnCommand(entity.Id));
+            entity.SetSpriteOn();
             commandsMan.Post(new PlayAnimCommand(entity.Id, "NotUsedYet", 0));
 
             entity.SetText(0, "Door - Opening");

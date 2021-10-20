@@ -9,6 +9,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
@@ -97,7 +98,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         private void OnFrameUpdate(Entity entity, int nextValue)
         {
-            commandsMan.Post(new SpriteSetCommand(entity.Id, nextValue));
+            entity.SetSpriteImageId(nextValue);
         }
 
         //private static void OnCollision(object sender, CollisionEventArgs args)

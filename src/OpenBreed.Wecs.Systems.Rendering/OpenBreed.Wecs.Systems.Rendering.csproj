@@ -66,12 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CameraFollowCommand.cs" />
     <Compile Include="Commands\PutStampCommand.cs" />
-    <Compile Include="Commands\SpriteOffCommand.cs" />
-    <Compile Include="Commands\SpriteOnCommand.cs" />
-    <Compile Include="Commands\SpriteSetAtlasCommand.cs" />
-    <Compile Include="Commands\SpriteSetCommand.cs" />
     <Compile Include="Commands\TileSetCommand.cs" />
     <Compile Include="Commands\ViewportResizeCommand.cs" />
     <Compile Include="Events\ViewportClickedEventArgs.cs" />

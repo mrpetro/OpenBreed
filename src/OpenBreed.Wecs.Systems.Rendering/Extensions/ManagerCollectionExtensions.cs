@@ -37,10 +37,6 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
 
             entityCommandHandler.BindCommand<ViewportResizeCommand, ViewportSystem>();
-            entityCommandHandler.BindCommand<SpriteOnCommand,SpriteSystem>();
-            entityCommandHandler.BindCommand<SpriteOffCommand,SpriteSystem>();
-            entityCommandHandler.BindCommand<SpriteSetCommand,SpriteSystem>();
-            entityCommandHandler.BindCommand<SpriteSetAtlasCommand, SpriteSystem>();
             entityCommandHandler.BindCommand<TileSetCommand, TileSystem>();
             entityCommandHandler.BindCommand<PutStampCommand, TileSystem>();
         }
