@@ -14,6 +14,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Fsm.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
@@ -34,7 +35,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState(Entity entity)
         {
             var currentStateNames = fsmMan.GetStateNames(entity);
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+
+            entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
             entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 

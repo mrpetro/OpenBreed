@@ -41,8 +41,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             RequireEntityWith<TextComponent>();
             RequireEntityWith<PositionComponent>();
-
-            RegisterHandler<TextSetCommand>(HandleTextSetCommand);
         }
 
         #endregion Internal Constructors
@@ -105,24 +103,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             GL.PopMatrix();
             GL.Disable(EnableCap.Texture2D);
-        }
-
-        private bool HandleTextSetCommand(TextSetCommand cmd)
-        {
-            var toModify = entityMan.GetById(cmd.EntityId);
-            if (toModify == null)
-                return false;
-
-            var text = toModify.Get<TextComponent>();
-
-            if (cmd.PartId < 0 || cmd.PartId >= text.Parts.Count)
-            {
-                logger.Error($"Unknown text part ID({cmd.PartId}) to modify.");
-            }
-
-            text.Parts[cmd.PartId].Text = cmd.Text;
-
-            return true;
         }
 
         #endregion Private Methods

@@ -64,7 +64,6 @@
     <Compile Include="AnimationSystem.cs" />
     <Compile Include="Commands\PauseAnimCommand.cs" />
     <Compile Include="Commands\PlayAnimCommand.cs" />
-    <Compile Include="Commands\SetAnimCommand.cs" />
     <Compile Include="Commands\StopAnimCommand.cs" />
     <Compile Include="Events\AnimStoppedEventArgs.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />

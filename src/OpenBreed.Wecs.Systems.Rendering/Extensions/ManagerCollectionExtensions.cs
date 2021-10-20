@@ -41,7 +41,6 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             entityCommandHandler.BindCommand<SpriteOffCommand,SpriteSystem>();
             entityCommandHandler.BindCommand<SpriteSetCommand,SpriteSystem>();
             entityCommandHandler.BindCommand<SpriteSetAtlasCommand, SpriteSystem>();
-            entityCommandHandler.BindCommand<TextSetCommand, TextSystem>();
             entityCommandHandler.BindCommand<TileSetCommand, TileSystem>();
             entityCommandHandler.BindCommand<PutStampCommand, TileSystem>();
         }

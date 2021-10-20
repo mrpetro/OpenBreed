@@ -36,7 +36,6 @@ namespace OpenBreed.Wecs.Systems.Animation
             this.logger = logger;
 
             RequireEntityWith<AnimationComponent>();
-            RegisterHandler<SetAnimCommand>(HandleSetAnimCommand);
             RegisterHandler<PlayAnimCommand>(HandlePlayAnimCommand);
             RegisterHandler<PauseAnimCommand>(HandlePauseAnimCommand);
             RegisterHandler<StopAnimCommand>(HandleStopAnimCommand);
@@ -146,21 +145,6 @@ namespace OpenBreed.Wecs.Systems.Animation
             var animator = ac.States[cmd.AnimatorId];
 
             Stop(entity, animator);
-
-            return true;
-        }
-
-        private bool HandleSetAnimCommand(SetAnimCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-            var ac = entity.Get<AnimationComponent>();
-
-            var animData = clipMan.GetByName(cmd.Id);
-
-            if (animData == null)
-                logger.Warning($"Animation with ID '{cmd.Id}' not found.");
-
-            Play(entity, ac.States[cmd.AnimatorId], animData.Id);
 
             return true;
         }

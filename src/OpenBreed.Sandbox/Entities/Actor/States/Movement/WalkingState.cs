@@ -16,6 +16,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Fsm.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -63,8 +64,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirPostfix}", 0));
 
             var currentStateNames = fsmMan.GetStateNames(entity);
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
+            entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
             entity.Subscribe<DirectionChangedEventArgs>(OnDirectionChanged);

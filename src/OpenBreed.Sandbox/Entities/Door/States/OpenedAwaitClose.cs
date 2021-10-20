@@ -15,6 +15,7 @@ using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -63,7 +64,8 @@ namespace OpenBreed.Sandbox.Components.States
             var stateName = fsmMan.GetStateName(FsmId, Id);
             var stampId = stampMan.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
             commandsMan.Post(new PutStampCommand(entity.Id, stampId, 0, pos.Value));
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));
+
+            entity.SetText(0, "Door - Opened");
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             entity.Subscribe<TimerUpdateEventArgs>(OnTimerUpdate);
@@ -91,7 +93,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var timer = tcp.Items.FirstOrDefault(item => item.TimerId == 0);
 
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, $"Door - {timer.Interval:F2}s"));
+            entity.SetText(0, $"Door - {timer.Interval:F2}s");
         }
 
         public void LeaveState(Entity entity)

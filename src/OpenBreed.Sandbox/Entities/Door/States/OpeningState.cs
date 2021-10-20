@@ -13,6 +13,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Fsm.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -54,7 +55,7 @@ namespace OpenBreed.Sandbox.Components.States
             var stateName = fsmMan.GetStateName(FsmId, Id);
             commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}.{className}.{stateName}", 0));
 
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
+            entity.SetText(0, "Door - Opening");
 
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }

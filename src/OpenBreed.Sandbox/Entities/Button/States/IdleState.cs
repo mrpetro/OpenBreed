@@ -7,6 +7,7 @@ using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
@@ -48,7 +49,8 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         {
             commandsMan.Post(new SpriteOnCommand(entity.Id));
             commandsMan.Post(new PlayAnimCommand(entity.Id, "NotUsedYet", 0));
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
+
+            entity.SetText(0, "Door - Opening");
 
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }

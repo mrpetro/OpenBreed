@@ -50,7 +50,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             //entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{movementStateName}/{animDirName}", 0));
 
             //var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
-            //entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             //entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Stop));
         }

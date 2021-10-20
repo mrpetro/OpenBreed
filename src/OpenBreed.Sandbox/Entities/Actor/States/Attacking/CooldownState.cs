@@ -7,6 +7,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using System;
 using System.Linq;
 using System.Timers;
@@ -45,7 +46,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState(Entity entity)
         {
             var currentStateNames = fsmMan.GetStateNames(entity);
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+
+            entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             commandsMan.Post(new TimerStartCommand(entity.Id, 0, 0.5));

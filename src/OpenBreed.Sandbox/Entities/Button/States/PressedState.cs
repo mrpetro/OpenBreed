@@ -3,6 +3,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
@@ -40,7 +41,8 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
             var pos = entity.Get<PositionComponent>();
             commandsMan.Post(new PutStampCommand(entity.Id, 0, 0, pos.Value));
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
+
+            entity.SetText(0, "Door - Closed");
 
             //entity.Subscribe<CollisionEventArgs>(OnCollision);
         }

@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
 {
@@ -43,7 +44,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
             var animDirName = AnimHelper.ToDirectionName(direction);
 
             commandsMan.Post(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Projectile - Fired"));
+
+            entity.SetText(0, "Projectile - Fired");
         }
 
         public void Initialize(Entity entity)

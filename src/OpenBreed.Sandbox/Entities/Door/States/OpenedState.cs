@@ -10,6 +10,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -59,8 +60,7 @@ namespace OpenBreed.Sandbox.Components.States
             var stampId = stampMan.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
             commandsMan.Post(new PutStampCommand(entity.Id, stampId, 0, pos.Value));
 
-
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));
+            entity.SetText(0, "Door - Opened");
         }
 
         public void LeaveState(Entity entity)

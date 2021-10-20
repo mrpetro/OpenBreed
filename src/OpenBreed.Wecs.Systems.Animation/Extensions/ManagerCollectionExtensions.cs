@@ -19,7 +19,6 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
 
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
 
-            entityCommandHandler.BindCommand<SetAnimCommand, AnimationSystem>();
             entityCommandHandler.BindCommand<PlayAnimCommand, AnimationSystem>();
             entityCommandHandler.BindCommand<PauseAnimCommand, AnimationSystem>();
             entityCommandHandler.BindCommand<StopAnimCommand, AnimationSystem>();

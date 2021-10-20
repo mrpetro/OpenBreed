@@ -11,6 +11,7 @@ using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Core.Managers;
 using OpenTK;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Jobs
 {
@@ -58,7 +59,7 @@ namespace OpenBreed.Sandbox.Jobs
             var indexPosX = (int)pos.X / 16;
             var indexPosY = (int)pos.Y / 16;
 
-            core.GetManager<ICommandsMan>().Post(new TextSetCommand(entity.Id, 0, $"Player Pos: ({pos.X.ToString("0.00", CultureInfo.InvariantCulture)},{pos.Y.ToString("0.00", CultureInfo.InvariantCulture)}) ({indexPosX}, {indexPosY})"));
+            entity.SetText(0, $"Player Pos: ({pos.X.ToString("0.00", CultureInfo.InvariantCulture)},{pos.Y.ToString("0.00", CultureInfo.InvariantCulture)}) ({indexPosX}, {indexPosY})");
         }
 
         public void Dispose()

@@ -11,6 +11,7 @@ using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
 using System;
 using System.Linq;
@@ -73,7 +74,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             //STAMP_DOOR_HORIZONTAL_CLOSED = $"{stampPrefix}/{className}/{stateName}";
 
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
+            entity.SetText(0, "Door - Closed");
 
             var bodyCmp = entity.Get<BodyComponent>();
 

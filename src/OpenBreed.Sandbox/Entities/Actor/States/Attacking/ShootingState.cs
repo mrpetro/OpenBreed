@@ -7,6 +7,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
 using System.Linq;
 
@@ -46,7 +47,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             var currentStateNames = fsmMan.GetStateNames(entity);
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
+
+            entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
             var pos = entity.Get<PositionComponent>().Value;
             pos += new Vector2(8, 8);
