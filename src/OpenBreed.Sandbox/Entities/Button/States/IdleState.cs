@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
@@ -64,7 +65,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
         {
             var entity = sender as Entity;
-            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Press));
+            entity.SetState(FsmId, (int)ButtonImpulse.Press);
         }
 
         #endregion Private Methods

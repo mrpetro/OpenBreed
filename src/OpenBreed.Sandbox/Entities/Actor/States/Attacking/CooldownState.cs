@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Commands;
@@ -47,7 +48,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            commandsMan.Post(new TimerStartCommand(entity.Id, 0, 0.2));
+            commandsMan.Post(new TimerStartCommand(entity.Id, 0, 0.5));
         }
 
         public void Initialize(Entity entity)
@@ -76,9 +77,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             var cc = entity.Get<AttackControlComponent>();
 
             if (cc.AttackPrimary)
-                commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+                entity.SetState(FsmId, (int)AttackingImpulse.Shoot);
             else
-                commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Stop));
+                entity.SetState(FsmId, (int)AttackingImpulse.Stop);
         }
 
         #endregion Private Methods

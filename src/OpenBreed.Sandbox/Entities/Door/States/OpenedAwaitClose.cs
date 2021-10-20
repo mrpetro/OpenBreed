@@ -14,6 +14,7 @@ using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Fsm.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -76,7 +77,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var entity = sender as Entity;
 
-            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Close));
+            entity.SetState(FsmId, (int)FunctioningImpulse.Close);
         }
 
         private void OnTimerUpdate(object sender, TimerUpdateEventArgs e)

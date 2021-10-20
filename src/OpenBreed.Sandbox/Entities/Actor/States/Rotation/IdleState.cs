@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
@@ -74,7 +75,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
                     var angularThrust = entity.Get<AngularVelocityComponent>();
                     angularThrust.Value = new Vector2(e.Direction.X, e.Direction.Y);
                     //dir.SetDirection(e.Direction);
-                    commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
+                    entity.SetState(FsmId, (int)RotationImpulse.Rotate);
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
@@ -54,9 +55,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             direction *= 100.0f;
             projectileHelper.AddProjectile(entity.WorldId, pos.X, pos.Y, direction.X, direction.Y);
 
-            //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
-            //entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));
-            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
+            entity.SetState(FsmId, (int)AttackingImpulse.Wait);
         }
 
         public void LeaveState(Entity entity)

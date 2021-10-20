@@ -12,6 +12,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Fsm.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -81,7 +82,7 @@ namespace OpenBreed.Sandbox.Components.States
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {
             var entity = sender as Entity;
-            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopOpening));
+            entity.SetState(FsmId, (int)FunctioningImpulse.StopOpening);
         }
 
         #endregion Private Methods

@@ -13,6 +13,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Fsm.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
@@ -47,7 +48,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             var entity = sender as Entity;
 
             if (eventArgs.Fire)
-                commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+                entity.SetState(FsmId, (int)AttackingImpulse.Shoot);
         }
 
     }

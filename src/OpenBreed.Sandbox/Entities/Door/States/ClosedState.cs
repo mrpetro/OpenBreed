@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities;
@@ -95,15 +96,10 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void DoorOpenTriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
         {
-            commandsMan.Post(new SetEntityStateCommand(entityB.Id, FsmId, (int)FunctioningImpulse.Open));
+            entityB.SetState(FsmId, (int)FunctioningImpulse.Open);
         }
 
         #endregion Private Methods
 
-        //private void OnCollision(object sender, CollisionEventArgs eventArgs)
-        //{
-        //    var entity = sender as Entity;
-        //    entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Open));
-        //}
     }
 }

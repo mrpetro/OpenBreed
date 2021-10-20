@@ -12,6 +12,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Fsm.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -87,7 +88,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             if (eventArgs.Direction != Vector2.Zero)
             {
-                commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
+                entity.SetState(FsmId, (int)MovementImpulse.Walk);
 
                 var angularThrust = entity.Get<AngularVelocityComponent>();
                 angularThrust.Value = new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y);
