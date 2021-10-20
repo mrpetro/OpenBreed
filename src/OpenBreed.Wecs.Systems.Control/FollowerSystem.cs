@@ -35,8 +35,6 @@ namespace OpenBreed.Wecs.Systems.Control
 
             RequireEntityWith<FollowerComponent>();
             RequireEntityWith<PositionComponent>();
-
-            RegisterHandler<FollowedAddFollowerCommand>(HandleFollowedAddFollowerCommand);
         }
 
         #endregion Public Constructors
@@ -129,15 +127,6 @@ namespace OpenBreed.Wecs.Systems.Control
         #endregion Protected Methods
 
         #region Private Methods
-
-        private bool HandleFollowedAddFollowerCommand(FollowedAddFollowerCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-            var fc = entity.Get<FollowerComponent>();
-            fc.FollowerIds.Add(cmd.FollowerEntityId);
-
-            return true;
-        }
 
         #endregion Private Methods
     }

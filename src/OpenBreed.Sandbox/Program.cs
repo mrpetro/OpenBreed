@@ -34,6 +34,7 @@ using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Components.Animation.Extensions;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Physics.Extensions;
 using OpenBreed.Wecs.Components.Rendering;
@@ -484,7 +485,7 @@ namespace OpenBreed.Sandbox
             var johnPlayerEntity = actorHelper.CreatePlayerActor(new Vector2(0, 0));
             johnPlayerEntity.Tag = "John";
 
-            commandsMan.Post(new FollowedAddFollowerCommand(johnPlayerEntity.Id, playerCamera.Id));
+            johnPlayerEntity.AddFollower(playerCamera);
 
             GetManager<IEventsMan>().Subscribe<WorldInitializedEventArgs>(GetManager<IWorldMan>(), (s, a) =>
             {

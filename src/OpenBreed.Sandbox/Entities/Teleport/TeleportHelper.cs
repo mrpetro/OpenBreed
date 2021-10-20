@@ -223,6 +223,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             var worldIdToRemoveFrom = actorEntity.WorldId;
 
+
+
             //Pause this world
             jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => commandsMan.Post(new PauseWorldCommand(worldIdToRemoveFrom, true))));
             //Fade out camera

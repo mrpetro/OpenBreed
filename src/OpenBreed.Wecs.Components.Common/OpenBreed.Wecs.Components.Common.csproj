@@ -69,6 +69,7 @@
     <Compile Include="AngularVelocityComponent.cs" />
     <Compile Include="ClassComponent.cs" />
     <Compile Include="EquipmentComponent.cs" />
+    <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="FollowerComponent.cs" />
     <Compile Include="GroupComponentEx.cs" />

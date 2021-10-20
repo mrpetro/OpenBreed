@@ -46,6 +46,9 @@ namespace OpenBreed.Wecs.Systems.Core
         public void Update(float dt)
         {
             ExecuteCommands();
+
+
+
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -62,15 +65,10 @@ namespace OpenBreed.Wecs.Systems.Core
             entities.Add(entity);
 
             InitializeComponent(entity);
-            //World.Subscribe<EntityAddedEventArgs>(OnEntityEnteredWorld);
-            //entity.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            //World.Unsubscribe<EntityAddedEventArgs>(OnEntityEnteredWorld);
-            //entity.Unsubscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
-
             var index = entities.IndexOf(entity);
 
             if (index < 0)

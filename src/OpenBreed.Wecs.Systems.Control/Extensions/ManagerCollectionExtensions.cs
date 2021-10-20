@@ -27,8 +27,6 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
 
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
 
-            entityCommandHandler.BindCommand<FollowedAddFollowerCommand, FollowerSystem>();
-
             entityCommandHandler.BindCommand<AttackControlCommand, WalkingControlSystem>();
         }
     }
