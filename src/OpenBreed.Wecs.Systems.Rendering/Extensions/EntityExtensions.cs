@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Rendering.Events;
 
 namespace OpenBreed.Wecs.Systems.Rendering.Extensions
 {
@@ -39,6 +40,19 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
         {
             var sprite = entity.Get<SpriteComponent>();
             sprite.AtlasId = atlasId;
+        }
+
+        public static void SetViewportSize(this Entity entity, float width, float height)
+        {
+            var vpc = entity.Get<ViewportComponent>();
+
+            if (vpc.Width == width && vpc.Height == height)
+                return;
+
+            vpc.Width = width;
+            vpc.Height = height;
+
+            entity.RaiseEvent(new ViewportResizedEventArgs(vpc.Width, vpc.Height));
         }
 
         #endregion Public Methods

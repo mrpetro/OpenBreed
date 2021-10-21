@@ -25,8 +25,6 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
 
-            entityCommandHandler.BindCommand<TimerStartCommand, TimerSystem>();
-            entityCommandHandler.BindCommand<TimerStopCommand, TimerSystem>();
             entityCommandHandler.BindCommand<TextCaretSetPosition, TextInputSystem>();
             entityCommandHandler.BindCommand<TextDataInsert, TextInputSystem>();
             entityCommandHandler.BindCommand<TextDataBackspace, TextInputSystem>();

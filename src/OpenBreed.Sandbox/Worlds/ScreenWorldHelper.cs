@@ -11,6 +11,7 @@ using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Events;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using System;
 
@@ -106,17 +107,17 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void ResizeGameViewport(Entity viewport, ClientResizedEventArgs args)
         {
-            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
+            viewport.SetViewportSize(args.Width, args.Height);
         }
 
         private void ResizeHudViewport(Entity viewport, ClientResizedEventArgs args)
         {
-            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
+            viewport.SetViewportSize(args.Width, args.Height);
         }
 
         private void ResizeTextViewport(Entity viewport, ClientResizedEventArgs args)
         {
-            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
+            viewport.SetViewportSize(args.Width, args.Height);
         }
 
         #endregion Private Methods

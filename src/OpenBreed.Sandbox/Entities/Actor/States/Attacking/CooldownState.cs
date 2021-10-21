@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Core.Events;
+using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using System;
@@ -50,7 +51,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            commandsMan.Post(new TimerStartCommand(entity.Id, 0, 0.5));
+
+            entity.StartTimer(0, 0.5);
         }
 
         public void Initialize(Entity entity)
@@ -62,7 +64,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            commandsMan.Post(new TimerStopCommand(entity.Id, 0));
+
+            entity.StopTimer(0);
         }
 
         #endregion Public Methods

@@ -9,7 +9,6 @@ using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Control.Commands;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
@@ -32,8 +31,6 @@ namespace OpenBreed.Wecs.Systems.Control
             this.entityMan = entityMan;
 
             RequireEntityWith<IControlComponent>();
-
-            RegisterHandler<AttackControlCommand>(HandleAttackControlCommand);
         }
 
         #endregion Public Constructors
@@ -73,21 +70,6 @@ namespace OpenBreed.Wecs.Systems.Control
         #endregion Protected Methods
 
         #region Private Methods
-
-        private bool HandleAttackControlCommand(AttackControlCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            var control = entity.Get<AttackControlComponent>();
-
-            if (control.AttackPrimary != cmd.Primary)
-            {
-                control.AttackPrimary = cmd.Primary;
-                entity.RaiseEvent(new ControlFireChangedEvenrArgs(control.AttackPrimary));
-            }
-
-            return true;
-        }
 
         #endregion Private Methods
     }

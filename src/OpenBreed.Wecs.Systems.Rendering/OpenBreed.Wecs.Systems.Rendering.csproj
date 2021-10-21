@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="Commands\PutStampCommand.cs" />
     <Compile Include="Commands\TileSetCommand.cs" />
-    <Compile Include="Commands\ViewportResizeCommand.cs" />
     <Compile Include="Events\ViewportClickedEventArgs.cs" />
     <Compile Include="Events\ViewportResizedEventArgs.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />

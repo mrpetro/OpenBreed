@@ -16,6 +16,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Core.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -69,7 +70,8 @@ namespace OpenBreed.Sandbox.Components.States
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             entity.Subscribe<TimerUpdateEventArgs>(OnTimerUpdate);
-            commandsMan.Post(new TimerStartCommand(entity.Id, 0, 5.0));
+
+            entity.StartTimer(0, 5.0);
         }
 
         private void OnTimerElapsed(object sender, TimerElapsedEventArgs e)
@@ -100,7 +102,8 @@ namespace OpenBreed.Sandbox.Components.States
         {
             entity.Unsubscribe<TimerUpdateEventArgs>(OnTimerUpdate);
             entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            commandsMan.Post(new TimerStopCommand(entity.Id, 0));
+
+            entity.StopTimer(0);
         }
 
         #endregion Public Methods

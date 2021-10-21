@@ -49,8 +49,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.viewClient = viewClient;
             RequireEntityWith<ViewportComponent>();
             RequireEntityWith<PositionComponent>();
-
-            RegisterHandler<ViewportResizeCommand>(HandleViewportResizeCommand);
         }
 
         #endregion Internal Constructors
@@ -167,26 +165,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Protected Methods
 
         #region Private Methods
-
-        private bool HandleViewportResizeCommand(ViewportResizeCommand cmd)
-        {
-            var toResize = entityMan.GetById(cmd.EntityId);
-
-            if (toResize != null)
-            {
-                var vpc = toResize.Get<ViewportComponent>();
-
-                if (vpc.Width == cmd.Width && vpc.Height == cmd.Height)
-                    return true;
-
-                vpc.Width = cmd.Width;
-                vpc.Height = cmd.Height;
-
-                toResize.RaiseEvent(new ViewportResizedEventArgs(vpc.Width, vpc.Height));
-            }
-
-            return true;
-        }
 
         private void GetVisibleRectangle(Entity camera, Matrix4 cameraT, out Box2 viewBox)
         {

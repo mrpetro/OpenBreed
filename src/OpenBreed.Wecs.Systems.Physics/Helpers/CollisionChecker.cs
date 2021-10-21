@@ -153,8 +153,6 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
 
         public static bool Check(Vector2 posA, IShape shapeA, Vector2 posB, IShape shapeB, out Vector2 projection)
         {
-            Console.WriteLine($"{shapeA.GetType()} {shapeB.GetType()}");
-
             if (shapeA is BoxShape && shapeB is BoxShape)
                 return Check(posA, (BoxShape)shapeA, posB, (BoxShape)shapeB, out projection);
             else if (shapeA is PointShape && shapeB is BoxShape)

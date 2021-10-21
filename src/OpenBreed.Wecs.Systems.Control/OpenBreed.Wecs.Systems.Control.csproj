@@ -74,7 +74,6 @@
   <ItemGroup>
     <Compile Include="Events\ControlFireChangedEvenrArgs.cs" />
     <Compile Include="Events\ControlDirectionChangedEventArgs.cs" />
-    <Compile Include="Commands\AttackControlCommand.cs" />
     <Compile Include="AiControlSystem.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />

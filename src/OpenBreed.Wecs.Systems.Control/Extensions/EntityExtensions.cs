@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Control.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,26 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
 {
     public static class EntityExtensions
     {
-        //public static void Attack(this Entity entity)
-        //{
-        //    var control = entity.Get<AttackControlComponent>();
+        public static void StartPrimaryAttack(this Entity entity)
+        {
+            var control = entity.Get<AttackControlComponent>();
 
-        //    if (control.AttackPrimary != cmd.Primary)
-        //    {
-        //        control.AttackPrimary = cmd.Primary;
-        //        entity.RaiseEvent(new ControlFireChangedEvenrArgs(control.AttackPrimary));
-        //    }
-        //}
+            if (control.AttackPrimary)
+                return;
+
+            control.AttackPrimary = true;
+            entity.RaiseEvent(new ControlFireChangedEvenrArgs(control.AttackPrimary));
+        }
+
+        public static void StopPrimaryAttack(this Entity entity)
+        {
+            var control = entity.Get<AttackControlComponent>();
+
+            if (!control.AttackPrimary)
+                return;
+
+            control.AttackPrimary = false;
+            entity.RaiseEvent(new ControlFireChangedEvenrArgs(control.AttackPrimary));
+        }
     }
 }

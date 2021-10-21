@@ -33,8 +33,6 @@ namespace OpenBreed.Wecs.Systems.Core
             this.logger = logger;
 
             RequireEntityWith<TimerComponent>();
-            RegisterHandler<TimerStartCommand>(HandleTimerStartCommand);
-            RegisterHandler<TimerStopCommand>(HandleTimerStopCommand);
         }
 
         #endregion Internal Constructors
@@ -88,55 +86,6 @@ namespace OpenBreed.Wecs.Systems.Core
         #endregion Protected Methods
 
         #region Private Methods
-
-        private bool HandleTimerStartCommand(TimerStartCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            var timerComponent = entity.Get<TimerComponent>();
-
-            if (timerComponent == null)
-            {
-                logger.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
-                return false;
-            }
-
-            var timerData = timerComponent.Items.FirstOrDefault(item => item.TimerId == cmd.TimerId);
-
-            if (timerData == null)
-            {
-                timerData = new TimerData(cmd.TimerId, cmd.Interval);
-                timerComponent.Items.Add(timerData);
-            }
-            else
-                timerData.Interval = cmd.Interval;
-
-            timerData.Enabled = true;
-
-            return true;
-        }
-
-        private bool HandleTimerStopCommand(TimerStopCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            var timerComponent = entity.Get<TimerComponent>();
-
-            if (timerComponent == null)
-            {
-                logger.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
-                return false;
-            }
-
-            var timerData = timerComponent.Items.FirstOrDefault(item => item.TimerId == cmd.TimerId);
-
-            if (timerData == null)
-                return true;
-
-            timerData.Enabled = false;
-
-            return true;
-        }
 
         private void Update(Entity entity, float dt)
         {

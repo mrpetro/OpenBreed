@@ -62,6 +62,11 @@ namespace OpenBreed.Wecs.Components.Physics
         /// </summary>
         public List<BodyFixture> Fixtures { get; }
 
+        /// <summary>
+        /// Flag for disabling/enabling this entity body collisions
+        /// </summary>
+        public bool Inactive { get; set; }
+
         #endregion Public Properties
     }
 

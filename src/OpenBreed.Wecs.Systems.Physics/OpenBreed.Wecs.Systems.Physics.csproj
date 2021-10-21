@@ -68,6 +68,7 @@
     <Compile Include="Commands\BodyOnCommand.cs" />
     <Compile Include="DirectionSystem.cs" />
     <Compile Include="DynamicBodiesAabbUpdaterSystem.cs" />
+    <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="Helpers\CollisionChecker.cs" />

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
-using OpenBreed.Wecs.Systems.Control.Commands;
 using OpenBreed.Input.Interface;
 
 namespace OpenBreed.Wecs.Systems.Control.Inputs
