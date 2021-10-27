@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace OpenBreed.Wecs.Entities
 {
@@ -58,7 +59,7 @@ namespace OpenBreed.Wecs.Entities
 
         public Entity Create(List<IEntityComponent> initialComponents = null)
         {
-            var newEntity = new Entity(eventsMan, initialComponents);
+            var newEntity = new Entity(this, initialComponents);
             newEntity.Id = entities.Add(newEntity);
             return newEntity;
         }
@@ -69,13 +70,42 @@ namespace OpenBreed.Wecs.Entities
             commandsMan.Post(new RemoveEntityCommand(entity.Id, entity.Id));
         }
 
-        #endregion Public Methods
+        public void Raise<T>(Entity entity, T eventArgs) where T : EventArgs
+        {
+            NotifyListeners(entity, eventArgs.GetType(), eventArgs);
 
-        //private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)
-        //{
-        //    var entity = GetById(e.EntityId);
-        //    worldMan.Unsubscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
-        //    entities.RemoveById(entity.Id);
-        //}
+            eventsMan.Raise<T>(entity, eventArgs);
+        }
+
+
+        private void NotifyListeners(object sender, Type eventType, EventArgs eventArgs)
+        {
+            List<(object Target, MethodInfo Method)> callbacks = null;
+
+            if (!eventTypes.TryGetValue(eventType, out callbacks))
+                return;
+
+            for (int i = 0; i < callbacks.Count; i++)
+            {
+                var item = callbacks[i];
+                item.Method.Invoke(item.Target, new object[] { sender, eventArgs });
+            }
+        }
+
+        private readonly Dictionary<Type, List<(object, MethodInfo)>> eventTypes = new Dictionary<Type, List<(object, MethodInfo)>>();
+
+        public void Subscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs
+        {
+
+
+            eventsMan.Subscribe<T>(entity, callback);
+        }
+
+        public void Unsubscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs
+        {
+            eventsMan.Unsubscribe<T>(entity, callback);
+        }
+
+        #endregion Public Methods
     }
 }

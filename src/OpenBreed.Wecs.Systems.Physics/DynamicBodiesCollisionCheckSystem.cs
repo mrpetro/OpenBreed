@@ -3,7 +3,6 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Worlds;
@@ -40,8 +39,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             RequireEntityWith<VelocityComponent>();
             RequireEntityWith<PositionComponent>();
 
-            RegisterHandler<BodyOnCommand>(HandleBodyOnCommand);
-            RegisterHandler<BodyOffCommand>(HandleBodyOffCommand);
+            //RegisterHandler<BodyOnCommand>(HandleBodyOnCommand);
+            //RegisterHandler<BodyOffCommand>(HandleBodyOffCommand);
         }
 
         #endregion Internal Constructors
@@ -97,41 +96,41 @@ namespace OpenBreed.Wecs.Systems.Physics
             return shape.GetAabb().Translated(pos.Value);
         }
 
-        private bool HandleBodyOnCommand(BodyOnCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
+        //private bool HandleBodyOnCommand(BodyOnCommand cmd)
+        //{
+        //    var entity = entityMan.GetById(cmd.EntityId);
 
-            if (!entity.Contains<VelocityComponent>())
-                return false;
+        //    if (!entity.Contains<VelocityComponent>())
+        //        return false;
 
-            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item == entity);
+        //    var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item == entity);
 
-            if (dynamicToActivate != null)
-            {
-                var aabb = GetAabb(entity);
-                broadphaseDynamic.InsertItem(entity.Id, aabb);
-                inactiveDynamics.Remove(dynamicToActivate);
-                entity.RaiseEvent(new BodyOnEventArgs(entity));
-                return true;
-            }
+        //    if (dynamicToActivate != null)
+        //    {
+        //        var aabb = GetAabb(entity);
+        //        broadphaseDynamic.InsertItem(entity.Id, aabb);
+        //        inactiveDynamics.Remove(dynamicToActivate);
+        //        entity.RaiseEvent(new BodyOnEventArgs(entity));
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
-        private bool HandleBodyOffCommand(BodyOffCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
+        //private bool HandleBodyOffCommand(BodyOffCommand cmd)
+        //{
+        //    var entity = entityMan.GetById(cmd.EntityId);
 
-            if (!entity.Contains<VelocityComponent>())
-                return false;
+        //    if (!entity.Contains<VelocityComponent>())
+        //        return false;
 
-            broadphaseDynamic.RemoveItem(entity.Id);
+        //    broadphaseDynamic.RemoveItem(entity.Id);
 
-            inactiveDynamics.Add(entity);
+        //    inactiveDynamics.Add(entity);
 
-            entity.RaiseEvent(new BodyOffEventArgs(entity));
-            return true;
-        }
+        //    entity.RaiseEvent(new BodyOffEventArgs(entity));
+        //    return true;
+        //}
 
         private void TestNarrowPhaseDynamic(BroadphaseDynamicElement nextCollider, BroadphaseDynamicElement currentCollider, float dt)
         {

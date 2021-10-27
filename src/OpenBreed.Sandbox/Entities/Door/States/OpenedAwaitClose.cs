@@ -7,7 +7,6 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Commands;
@@ -17,6 +16,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
+using OpenBreed.Wecs.Systems.Physics.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -55,7 +55,7 @@ namespace OpenBreed.Sandbox.Components.States
         public void EnterState(Entity entity)
         {
             entity.SetSpriteOff();
-            commandsMan.Post(new BodyOffCommand(entity.Id));
+            entity.SetBodyOff();
 
             var pos = entity.Get<PositionComponent>();
 

@@ -5,12 +5,12 @@ using OpenBreed.Sandbox.Entities.Door.States;
 using System;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Physics.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Components.States
         public void EnterState(Entity entity)
         {
             entity.SetSpriteOff();
-            commandsMan.Post(new BodyOffCommand(entity.Id));
+            entity.SetBodyOff();
 
             var pos = entity.Get<PositionComponent>();
 

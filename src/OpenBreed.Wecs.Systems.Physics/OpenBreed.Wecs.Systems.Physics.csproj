@@ -64,8 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\BodyOffCommand.cs" />
-    <Compile Include="Commands\BodyOnCommand.cs" />
     <Compile Include="DirectionSystem.cs" />
     <Compile Include="DynamicBodiesAabbUpdaterSystem.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />

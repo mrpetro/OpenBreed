@@ -20,5 +20,9 @@ namespace OpenBreed.Wecs.Entities
         Entity Create(List<IEntityComponent> initialComponents = null);
 
         void Destroy(Entity entity);
+
+        void Raise<T>(Entity entity, T eventArgs) where T : EventArgs;
+        void Subscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs;
+        void Unsubscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs;
     }
 }

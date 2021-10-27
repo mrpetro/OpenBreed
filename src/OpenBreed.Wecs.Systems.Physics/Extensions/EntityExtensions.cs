@@ -11,26 +11,26 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 {
     public static class EntityExtensions
     {
-        //public static void SetBodyOff(this Entity entity)
-        //{
-        //    var bodyCmp = entity.Get<BodyComponent>();
+        public static void SetBodyOff(this Entity entity)
+        {
+            var bodyCmp = entity.Get<BodyComponent>();
 
-        //    if (bodyCmp.Inactive)
-        //        return;
+            if (bodyCmp.Inactive)
+                return;
 
-        //    bodyCmp.Inactive = true;
-        //    entity.RaiseEvent(new BodyOffEventArgs(entity));
-        //}
+            bodyCmp.Inactive = true;
+            entity.RaiseEvent(new BodyOffEventArgs(entity));
+        }
 
-        //public static void SetBodyOn(this Entity entity)
-        //{
-        //    var bodyCmp = entity.Get<BodyComponent>();
+        public static void SetBodyOn(this Entity entity)
+        {
+            var bodyCmp = entity.Get<BodyComponent>();
 
-        //    if (!bodyCmp.Inactive)
-        //        return;
+            if (!bodyCmp.Inactive)
+                return;
 
-        //    bodyCmp.Inactive = false;
-        //    entity.RaiseEvent(new BodyOffEventArgs(entity));
-        //}
+            bodyCmp.Inactive = false;
+            entity.RaiseEvent(new BodyOffEventArgs(entity));
+        }
     }
 }

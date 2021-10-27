@@ -5,7 +5,6 @@ using OpenBreed.Sandbox.Entities.Door.States;
 using System;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Fsm;
@@ -14,6 +13,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Physics.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -50,7 +50,7 @@ namespace OpenBreed.Sandbox.Components.States
         public void EnterState(Entity entity)
         {
             entity.SetSpriteOn();
-            commandsMan.Post(new BodyOnCommand(entity.Id));
+            entity.SetBodyOn();
 
             var className = entity.Get<ClassComponent>().Name;
             var stateName = fsmMan.GetStateName(FsmId, Id);

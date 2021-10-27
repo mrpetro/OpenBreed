@@ -15,18 +15,18 @@ namespace OpenBreed.Wecs.Entities
     /// </summary>
     public class Entity
     {
-        private readonly IEventsMan eventsMan;
         #region Private Fields
 
+        private readonly IEntityMan entityMan;
         private readonly List<IEntityComponent> components = new List<IEntityComponent>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal Entity(IEventsMan eventsMan, List<IEntityComponent> initialComponents)
+        internal Entity(IEntityMan entityMan, List<IEntityComponent> initialComponents)
         {
-            this.eventsMan = eventsMan;
+            this.entityMan = entityMan;
 
             components = initialComponents ?? new List<IEntityComponent>();
             Components = new ReadOnlyCollection<IEntityComponent>(components);
@@ -101,7 +101,7 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="eventArgs">Arguments of event</param>
         public void RaiseEvent<T>(T eventArgs) where T : EventArgs
         {
-            eventsMan.Raise(this, eventArgs);
+            entityMan.Raise(this, eventArgs);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="callback">event callback</param>
         public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            eventsMan.Subscribe(this, callback);
+            entityMan.Subscribe(this, callback);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="callback">event callback to unsubscribe</param>
         public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            eventsMan.Unsubscribe(this, callback);
+            entityMan.Unsubscribe(this, callback);
         }
 
         /// <summary>

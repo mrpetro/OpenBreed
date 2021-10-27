@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -29,13 +29,15 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
                                                                                manCollection.GetManager<IShapeMan>(),
                                                                                manCollection.GetManager<ICollisionMan>()));
             systemFactory.Register(() => new StaticBodiesSystem(manCollection.GetManager<IEntityMan>(),
-                                                                manCollection.GetManager<IShapeMan>()));
+                                                                manCollection.GetManager<IShapeMan>(),
+                                                                manCollection.GetManager<IEventsMan>()));
+
             systemFactory.Register(() => new CollisionResponseSystem(manCollection.GetManager<IEntityMan>(),
                                                                      manCollection.GetManager<IWorldMan>(),
                                                                      manCollection.GetManager<ICollisionMan>()));
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
-            entityCommandHandler.BindCommand<BodyOffCommand, DynamicBodiesCollisionCheckSystem>();
-            entityCommandHandler.BindCommand<BodyOnCommand, DynamicBodiesCollisionCheckSystem>();
+            //entityCommandHandler.BindCommand<BodyOffCommand, DynamicBodiesCollisionCheckSystem>();
+            //entityCommandHandler.BindCommand<BodyOnCommand, DynamicBodiesCollisionCheckSystem>();
         }
     }
 }

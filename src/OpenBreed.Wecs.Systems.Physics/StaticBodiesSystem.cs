@@ -1,9 +1,9 @@
-﻿using OpenBreed.Physics.Interface;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
@@ -21,23 +21,21 @@ namespace OpenBreed.Wecs.Systems.Physics
         private readonly List<int> inactiveStatics = new List<int>();
         private readonly IEntityMan entityMan;
         private readonly IShapeMan shapeMan;
+        private readonly IEventsMan eventsMan;
         private IBroadphaseStatic broadphaseGrid;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal StaticBodiesSystem(IEntityMan entityMan, IShapeMan shapeMan)
+        internal StaticBodiesSystem(IEntityMan entityMan, IShapeMan shapeMan, IEventsMan eventsMan)
         {
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;
-
+            this.eventsMan = eventsMan;
             RequireEntityWith<BodyComponent>();
             RequireEntityWith<PositionComponent>();
             RequireEntityWithout<VelocityComponent>();
-
-            RegisterHandler<BodyOnCommand>(HandleBodyOnCommand);
-            RegisterHandler<BodyOffCommand>(HandleBodyOffCommand);
         }
 
         #endregion Internal Constructors
@@ -78,32 +76,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         #endregion Protected Methods
 
         #region Private Methods
-
-        private bool HandleBodyOnCommand(BodyOnCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            if (inactiveStatics.Contains(cmd.EntityId))
-            {
-                InsertToGrid(entity);
-                inactiveStatics.Remove(cmd.EntityId);
-                entity.RaiseEvent(new BodyOnEventArgs(entity));
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool HandleBodyOffCommand(BodyOffCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            RemoveFromGrid(entity);
-
-            inactiveStatics.Add(entity.Id);
-            entity.RaiseEvent(new BodyOffEventArgs(entity));
-            return true;
-        }
 
         private void InsertToGrid(Entity entity)
         {
