@@ -64,9 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\DestroyEntityCommand.cs" />
     <Compile Include="Commands\IEntityCommand.cs" />
-    <Compile Include="Commands\PauseWorldCommand.cs" />
     <Compile Include="Components\ComponentFactoryBase.cs" />
     <Compile Include="Components\ComponentsMan.cs" />
     <Compile Include="Components\IComponentFactory.cs" />

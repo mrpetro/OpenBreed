@@ -226,7 +226,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
 
             //Pause this world
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => commandsMan.Post(new PauseWorldCommand(worldIdToRemoveFrom, true))));
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Pause()));
             //Fade out camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => commandsMan.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
             //Remove entity from this world
@@ -234,7 +234,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(actorEntity, teleportEntity, true)));
             //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => commandsMan.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Unpause()));
             //Fade in camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => commandsMan.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
 

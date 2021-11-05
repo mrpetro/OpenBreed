@@ -33,6 +33,8 @@ namespace OpenBreed.Wecs.Worlds
         private readonly List<Entity> toRemove = new List<Entity>();
         private float timeMultiplier = 1.0f;
 
+        private IWorldMan worldMan;
+
         #endregion Private Fields
 
         #region Internal Constructors
@@ -116,6 +118,10 @@ namespace OpenBreed.Wecs.Worlds
                 throw new InvalidOperationException($"Module of type '{typeof(TModule)}' not found.");
         }
 
+        public void Pause() => SetPause(true);
+
+        public void Unpause() => SetPause(false);
+
         /// <summary>
         /// Method will add given entity to this world.
         /// Entity will not be added immediately but at the end of each world update.
@@ -174,6 +180,8 @@ namespace OpenBreed.Wecs.Worlds
 
         internal void Initialize(IWorldMan worldMan)
         {
+            this.worldMan = worldMan;
+
             //InitializeSystems();
             Cleanup(worldMan);
 
@@ -204,6 +212,19 @@ namespace OpenBreed.Wecs.Worlds
         #endregion Internal Methods
 
         #region Private Methods
+
+        private void SetPause(bool paused)
+        {
+            if (Paused == paused)
+                return;
+
+            Paused = paused;
+
+            if (Paused)
+                worldMan.RaiseEvent(new WorldPausedEventArgs(Id));
+            else
+                worldMan.RaiseEvent(new WorldUnpausedEventArgs(Id));
+        }
 
         private void DeinitializeEntity(IWorldMan worldMan, Entity entity)
         {

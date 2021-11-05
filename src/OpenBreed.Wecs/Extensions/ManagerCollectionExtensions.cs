@@ -25,7 +25,6 @@ namespace OpenBreed.Wecs.Extensions
             manCollection.AddSingleton<IEntityFactory>(() => new EntityFactory(manCollection.GetManager<IEntityMan>()));
 
             manCollection.AddSingleton<IWorldMan>(() => new WorldMan(manCollection.GetManager<IEntityMan>(),
-                                                                     manCollection.GetManager<ICommandsMan>(),
                                                                      manCollection.GetManager<IEventsMan>(),
                                                                      manCollection.GetManager<IScriptMan>(),
                                                                      manCollection.GetManager<ILogger>()));

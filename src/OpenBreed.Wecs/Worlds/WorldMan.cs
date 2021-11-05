@@ -28,7 +28,6 @@ namespace OpenBreed.Wecs.Worlds
         private readonly IdMap<World> worlds = new IdMap<World>();
         private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
         private readonly IEntityMan entityMan;
-        private readonly ICommandsMan commandsMan;
         private readonly IEventsMan eventsMan;
         private readonly IScriptMan scriptMan;
         private readonly ILogger logger;
@@ -37,16 +36,13 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Constructors
 
-        internal WorldMan(IEntityMan entityMan, ICommandsMan commandsMan, IEventsMan eventsMan, IScriptMan scriptMan, ILogger logger)
+        internal WorldMan(IEntityMan entityMan, IEventsMan eventsMan, IScriptMan scriptMan, ILogger logger)
         {
             this.entityMan = entityMan;
-            this.commandsMan = commandsMan;
             this.eventsMan = eventsMan;
             this.scriptMan = scriptMan;
             this.logger = logger;
             Items = worlds.Items;
-
-            commandsMan.Register<PauseWorldCommand>(HandlePauseWorld);
 
             entityMan.ComponentAdded += EntityMan_ComponentAdded;
             entityMan.ComponentRemoved += EntityMan_ComponentRemoved;
@@ -240,23 +236,6 @@ namespace OpenBreed.Wecs.Worlds
                 }
                 //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
             }
-        }
-
-        private bool HandlePauseWorld(PauseWorldCommand cmd)
-        {
-            var world = GetById(cmd.WorldId);
-
-            if (cmd.Pause == world.Paused)
-                return true;
-
-            world.Paused = cmd.Pause;
-
-            if (world.Paused)
-                RaiseEvent(new WorldPausedEventArgs(world.Id));
-            else
-                RaiseEvent(new WorldUnpausedEventArgs(world.Id));
-
-            return true;
         }
 
         #endregion Private Methods
