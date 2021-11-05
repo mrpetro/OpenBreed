@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems
@@ -14,6 +15,8 @@ namespace OpenBreed.Wecs.Systems
         #region Private Fields
 
         private readonly List<Entity> toAdd = new List<Entity>();
+
+        private readonly List<Entity> entities = new List<Entity>();
 
         private readonly List<Entity> toRemove = new List<Entity>();
 
@@ -25,6 +28,8 @@ namespace OpenBreed.Wecs.Systems
 
         private Dictionary<Type, Delegate> handlers = new Dictionary<Type, Delegate>();
 
+        public IReadOnlyCollection<Entity> Entities { get; }
+
         #endregion Private Fields
 
         #region Protected Constructors
@@ -32,6 +37,10 @@ namespace OpenBreed.Wecs.Systems
         protected SystemBase()
         {
             WorldId = World.NO_WORLD;
+
+            Entities = new ReadOnlyCollection<Entity>(entities);
+            RequiredComponentTypes = new ReadOnlyCollection<Type>(requiredComponentTypes);
+
         }
 
         #endregion Protected Constructors
@@ -47,6 +56,8 @@ namespace OpenBreed.Wecs.Systems
         /// Id of the phase in which system will be updated
         /// </summary>
         public int PhaseId { get; }
+
+        public IReadOnlyCollection<Type> RequiredComponentTypes { get; }
 
         #endregion Public Properties
 
@@ -79,13 +90,13 @@ namespace OpenBreed.Wecs.Systems
         {
             foreach (var type in forbiddenComponentTypes)
             {
-                if (entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
+                if (entity.ComponentTypes.Any(item => type.IsAssignableFrom(item)))
                     return false;
             }
 
             foreach (var type in requiredComponentTypes)
             {
-                if (!entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
+                if (!entity.ComponentTypes.Any(item => type.IsAssignableFrom(item)))
                     return false;
             }
 
@@ -114,7 +125,7 @@ namespace OpenBreed.Wecs.Systems
             {
                 //Process entities to remove
                 for (int i = 0; i < toRemove.Count; i++)
-                    OnRemoveEntity((Entity)toRemove[i]);
+                    DoRemoveEntity(toRemove[i]);
 
                 toRemove.Clear();
             }
@@ -123,7 +134,7 @@ namespace OpenBreed.Wecs.Systems
             {
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
-                    OnAddEntity((Entity)toAdd[i]);
+                    DoAddEntity(toAdd[i]);
 
                 toAdd.Clear();
             }
@@ -132,6 +143,11 @@ namespace OpenBreed.Wecs.Systems
         public bool HandleCommand(ICommand cmd)
         {
             return false;
+        }
+
+        public bool ContainsEntity(Entity entity)
+        {
+            return entities.Contains(entity);
         }
 
         #endregion Public Methods
@@ -202,5 +218,23 @@ namespace OpenBreed.Wecs.Systems
         }
 
         #endregion Protected Methods
+
+        #region Private Methods
+
+        private void DoRemoveEntity(Entity entity)
+        {
+            entities.Add(entity);
+
+            OnRemoveEntity(entity);
+        }
+
+        private void DoAddEntity(Entity entity)
+        {
+            entities.Remove(entity);
+
+            OnAddEntity(entity);
+        }
+
+        #endregion Private Methods
     }
 }

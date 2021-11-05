@@ -125,7 +125,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             tileComponentBuilder.SetImageIndex(gfxValue);
             teleportEntry.Add(tileComponentBuilder.Build());
 
-            commandsMan.Post(new AddEntityCommand(world.Id, teleportEntry.Id));
+            teleportEntry.EnterWorld(world.Id);
             return teleportEntry;
         }
 
@@ -150,8 +150,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             tileComponentBuilder.SetImageIndex(gfxValue);
             teleportExit.Add(tileComponentBuilder.Build());
 
-            commandsMan.Post(new AddEntityCommand(world.Id, teleportExit.Id));
-            //world.AddEntity(teleportExit);
+            teleportExit.EnterWorld(world.Id);
 
             return teleportExit;
         }

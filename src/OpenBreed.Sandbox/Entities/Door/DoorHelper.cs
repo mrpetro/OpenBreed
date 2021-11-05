@@ -62,7 +62,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
-            commandMan.Post(new AddEntityCommand(world.Id, door.Id));
+            door.EnterWorld(world.Id);
         }
 
         public void AddHorizontalDoor(World world, int x, int y)
@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
-            commandMan.Post(new AddEntityCommand(world.Id, door.Id));
+            door.EnterWorld(world.Id);
         }
 
         public void LoadStamps()

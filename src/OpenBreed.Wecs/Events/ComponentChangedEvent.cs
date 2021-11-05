@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Events;
+using OpenBreed.Wecs.Components;
 
 namespace OpenBreed.Wecs.Events
 {
@@ -11,7 +12,7 @@ namespace OpenBreed.Wecs.Events
         #endregion Public Properties
     }
 
-    public struct ComponentChangedEvent<TComponent> : IComponentChangedEvent
+    public struct ComponentChangedEvent<TComponent> : IComponentChangedEvent where TComponent : IEntityComponent
     {
         #region Public Constructors
 

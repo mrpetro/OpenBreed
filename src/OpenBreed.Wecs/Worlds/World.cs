@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Extensions;
+﻿using OpenBreed.Core.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;
@@ -148,6 +147,30 @@ namespace OpenBreed.Wecs.Worlds
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal void AddToSystems(Entity entity, Type componentType)
+        {
+            foreach (var system in Systems)
+            {
+                if (system.ContainsEntity(entity))
+                    continue;
+
+                if (system.Matches(entity))
+                    system.AddEntity(entity);
+            }
+        }
+
+        internal void RemoveFromSystems(Entity entity, Type componentType)
+        {
+            foreach (var system in Systems)
+            {
+                if (!system.ContainsEntity(entity))
+                    continue;
+
+                if (!system.Matches(entity))
+                    system.RemoveEntity(entity);
+            }
+        }
 
         internal void Initialize(IWorldMan worldMan)
         {

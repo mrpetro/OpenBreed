@@ -24,8 +24,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         private readonly ICollisionMan collisionMan;
 
-        private readonly ICommandsMan commandsMan;
-
         private readonly IEntityFactory entityFactory;
 
         private readonly DynamicResolver dynamicResolver;
@@ -34,11 +32,10 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         #region Public Constructors
 
-        public ProjectileHelper(IClipMan clipMan, ICollisionMan collisionMan, ICommandsMan commandsMan, IEntityFactory entityFactory, DynamicResolver dynamicResolver)
+        public ProjectileHelper(IClipMan clipMan, ICollisionMan collisionMan, IEntityFactory entityFactory, DynamicResolver dynamicResolver)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
-            this.commandsMan = commandsMan;
             this.entityFactory = entityFactory;
             this.dynamicResolver = dynamicResolver;
         }
@@ -88,8 +85,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             //var projectileFsm = core.GetManager<IFsmMan>().GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
-            commandsMan.Post(new AddEntityCommand(worldId, projectile.Id));
-            //world.AddEntity(projectile);
+            projectile.EnterWorld(worldId);
         }
 
         #endregion Public Methods

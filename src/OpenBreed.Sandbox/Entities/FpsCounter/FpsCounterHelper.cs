@@ -41,12 +41,8 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
             textBuilder.SetText("FPS: 0.0");
             textBuilder.SetOrder(100);
 
-
-
             fpsTextEntity.Add(textBuilder.Build());
-            core.Commands.Post(new AddEntityCommand(world.Id, fpsTextEntity.Id));
-            //world.AddEntity(fpsTextEntity);
-
+            fpsTextEntity.EnterWorld(world.Id);
 
             var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 

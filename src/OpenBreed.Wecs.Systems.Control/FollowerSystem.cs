@@ -102,7 +102,8 @@ namespace OpenBreed.Wecs.Systems.Control
                 if (follower == null)
                     continue;
 
-                commandsMan.Post(new AddEntityCommand(WorldId, follower.Id));
+                follower.EnterWorld(WorldId);
+                //commandsMan.Post(new AddEntityCommand(WorldId, follower.Id));
             }
         }
 
@@ -119,7 +120,8 @@ namespace OpenBreed.Wecs.Systems.Control
                 if (follower == null)
                     continue;
 
-                commandsMan.Post(new RemoveEntityCommand(WorldId, follower.Id));
+                follower.LeaveWorld();
+                //commandsMan.Post(new RemoveEntityCommand(WorldId, follower.Id));
             }
         }
 

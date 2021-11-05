@@ -18,17 +18,15 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
         private readonly ProjectileHelper projectileHelper;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ShootingState(IFsmMan fsmMan, ICommandsMan commandsMan, ProjectileHelper projectileHelper)
+        public ShootingState(IFsmMan fsmMan, ProjectileHelper projectileHelper)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
             this.projectileHelper = projectileHelper;
         }
 

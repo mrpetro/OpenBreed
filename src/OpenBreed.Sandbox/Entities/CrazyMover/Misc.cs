@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\CrazyMover\CrazyMover.xml");
             var crazyMover = entityFactory.Create(entityTemplate);
 
-            commandsMan.Post(new AddEntityCommand(world.Id, crazyMover.Id));
+            crazyMover.EnterWorld(world.Id);
 
             return crazyMover;
         }

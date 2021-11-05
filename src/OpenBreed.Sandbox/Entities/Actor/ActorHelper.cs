@@ -10,6 +10,7 @@ using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
@@ -24,8 +25,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private readonly ICollisionMan collisionMan;
 
-        private readonly ICommandsMan commandsMan;
-
         private readonly IPlayersMan playersMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
@@ -39,11 +38,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         #region Public Constructors
 
-        public ActorHelper(IClipMan clipMan, ICollisionMan collisionMan, ICommandsMan commandsMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, MapCellHelper mapCellHelper, DynamicResolver dynamicResolver, FixtureTypes fixtureTypes)
+        public ActorHelper(IClipMan clipMan, ICollisionMan collisionMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, MapCellHelper mapCellHelper, DynamicResolver dynamicResolver, FixtureTypes fixtureTypes)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
-            this.commandsMan = commandsMan;
             this.playersMan = playersMan;
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
@@ -128,7 +126,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             playerActor.Tag = "John";
 
-            commandsMan.Post(new AddEntityCommand(world.Id, playerActor.Id));
+            playerActor.EnterWorld(world.Id);
         }
 
         #endregion Internal Methods

@@ -52,7 +52,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = entityMan.GetById(entities[i]);
-                if (entity.Components.OfType<PauseImmuneComponent>().Any())
+                if (entity.ComponentValues.OfType<PauseImmuneComponent>().Any())
                     Animate(entity, dt);
             }
         }

@@ -180,7 +180,7 @@ namespace OpenBreed.Sandbox.Loaders
             if (unknown)
                 cellEntity.Tag = actionValue;
 
-            commandsMan.Post(new AddEntityCommand(world.Id, cellEntity.Id));
+            cellEntity.EnterWorld(world.Id);
         }
 
         private void LoadCellEntity(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
@@ -203,7 +203,7 @@ namespace OpenBreed.Sandbox.Loaders
 
             cellEntity.Add(new UnknownCodeComponent(actionValue));
 
-            commandsMan.Post(new AddEntityCommand(world.Id, cellEntity.Id));
+            cellEntity.EnterWorld(world.Id);
 
             visited[ix, iy] = true;
         }

@@ -85,11 +85,9 @@ namespace OpenBreed.Sandbox.Worlds
             renderingMan.ClientResized += (s, a) => ResizeHudViewport(hudViewport, a);
             renderingMan.ClientResized += (s, a) => ResizeTextViewport(hudViewport, a);
 
-            commandsMan.Post(new AddEntityCommand(world.Id, gameViewport.Id));
-            commandsMan.Post(new AddEntityCommand(world.Id, hudViewport.Id));
-            commandsMan.Post(new AddEntityCommand(world.Id, textViewport.Id));
-            //world.AddEntity(gameViewport);
-            //world.AddEntity(hudViewport);
+            gameViewport.EnterWorld(world.Id);
+            hudViewport.EnterWorld(world.Id);
+            textViewport.EnterWorld(world.Id);
 
             gameViewport.Subscribe<ViewportClickedEventArgs>(OnViewportClick);
 

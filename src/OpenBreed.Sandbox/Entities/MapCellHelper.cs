@@ -10,16 +10,14 @@ namespace OpenBreed.Sandbox.Entities
         #region Private Fields
 
         private readonly WorldBlockBuilder worldBlockBuilder;
-        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapCellHelper(WorldBlockBuilder worldBlockBuilder, ICommandsMan commandsMan)
+        public MapCellHelper(WorldBlockBuilder worldBlockBuilder)
         {
             this.worldBlockBuilder = worldBlockBuilder;
-            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -33,7 +31,7 @@ namespace OpenBreed.Sandbox.Entities
             worldBlockBuilder.HasBody = hasBody;
 
             var cellEntity = worldBlockBuilder.Build();
-            commandsMan.Post(new AddEntityCommand(world.Id, cellEntity.Id));
+            cellEntity.EnterWorld(world.Id);
         }
 
         #endregion Public Methods

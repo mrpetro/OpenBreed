@@ -84,8 +84,8 @@ namespace OpenBreed.Sandbox.Worlds
             cameraBuilder.SetFov(viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
-            commandsMan.Post(new AddEntityCommand(world.Id, hudCamera.Id));
-            //world.AddEntity(hudCamera);
+
+            hudCamera.EnterWorld(world.Id);
 
             FpsCounterHelper.AddToWorld(core, world);
             CursorCoordsHelper.AddToWorld(core, world);

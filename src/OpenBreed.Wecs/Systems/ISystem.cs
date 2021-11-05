@@ -3,6 +3,8 @@ using OpenBreed.Core;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
+using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems
 {
@@ -41,6 +43,8 @@ namespace OpenBreed.Wecs.Systems
 
         bool Matches(Entity entity);
 
+        bool ContainsEntity(Entity entity);
+
         void AddEntity(Entity entity);
 
         void RemoveEntity(Entity entity);
@@ -54,6 +58,11 @@ namespace OpenBreed.Wecs.Systems
         /// <param name="cmd">Command to recieve</param>
         /// <returns>True if command was handled, false otherwise</returns>
         bool EnqueueCommand(IEntityCommand command);
+
+        /// <summary>
+        /// Get types of entity components required by this system
+        /// </summary>
+        IReadOnlyCollection<Type> RequiredComponentTypes { get; }
 
         #endregion Public Methods
     }

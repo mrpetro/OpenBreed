@@ -43,12 +43,8 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
             textBuilder.SetText("Coords: (0.0, 0.0)");
             textBuilder.SetOrder(100);
 
-
-
             entity.Add(textBuilder.Build());
-            core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
-            //world.AddEntity(fpsTextEntity);
-
+            entity.EnterWorld(world.Id);
 
             var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 

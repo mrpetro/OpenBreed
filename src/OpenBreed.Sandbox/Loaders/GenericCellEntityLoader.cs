@@ -21,15 +21,12 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Fields
 
-        private readonly ICommandsMan commandsMan;
-
         #endregion Private Fields
 
         #region Public Constructors
 
-        public GenericCellEntityLoader(ICommandsMan commandsMan)
+        public GenericCellEntityLoader()
         {
-            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -74,7 +71,7 @@ namespace OpenBreed.Sandbox.Loaders
             if (unknown)
                 cellEntity.Tag = actionValue;
 
-            commandsMan.Post(new AddEntityCommand(world.Id, cellEntity.Id));
+            cellEntity.EnterWorld(world.Id);
         }
 
         #endregion Private Methods

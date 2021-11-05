@@ -59,7 +59,7 @@ namespace OpenBreed.Wecs.Systems.Core
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = entityMan.GetById(entities[i]);
-                if (entity.Components.OfType<PauseImmuneComponent>().Any())
+                if (entity.ComponentValues.OfType<PauseImmuneComponent>().Any())
                     Update(entity, dt);
             }
         }

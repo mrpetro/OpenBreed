@@ -28,6 +28,7 @@ using OpenBreed.Wecs.Events;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
+using OpenBreed.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -73,13 +74,9 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateExit.xml");
             var teleportEntity = entityFactory.Create(entityTemplate);
 
-
             teleportEntity.Tag = (worldName, entryId);
-
             teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-
-            commandsMan.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
-            //world.AddEntity(teleportEntity);
+            teleportEntity.EnterWorld(world.Id);
 
             return teleportEntity;
         }
@@ -112,7 +109,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Fade out camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => commandsMan.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
             //Remove entity from this world
-            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => commandsMan.Post(new RemoveEntityCommand(targetEntity.WorldId, targetEntity.Id))));
+            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => targetEntity.LeaveWorld() ));
             //Load next world if needed
             jobChain.Equeue(new EntityJob(() => TryLoadWorld(exitInfo.WorldName, exitInfo.EntryId)));
             //Add entity to next world
@@ -173,8 +170,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            commandsMan.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
-            //world.AddEntity(teleportEntity);
+            teleportEntity.EnterWorld(world.Id);
 
             return teleportEntity;
         }
@@ -226,13 +222,12 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         private void AddToWorld(Entity target, string worldName)
         {
             var world = worldMan.GetByName(worldName);
-            commandsMan.Post(new AddEntityCommand(world.Id, target.Id));
+            target.EnterWorld(world.Id);
         }
 
         private void AddToWorld(Entity target, int worldId)
         {
-            var world = worldMan.GetById(worldId);
-            commandsMan.Post(new AddEntityCommand(world.Id, target.Id));
+            target.EnterWorld(worldId);
         }
 
         private void TryLoadWorld(string worldName, int entryId)

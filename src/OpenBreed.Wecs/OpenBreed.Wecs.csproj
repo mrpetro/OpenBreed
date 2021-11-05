@@ -64,11 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AddEntityCommand.cs" />
     <Compile Include="Commands\DestroyEntityCommand.cs" />
     <Compile Include="Commands\IEntityCommand.cs" />
     <Compile Include="Commands\PauseWorldCommand.cs" />
-    <Compile Include="Commands\RemoveEntityCommand.cs" />
     <Compile Include="Components\ComponentFactoryBase.cs" />
     <Compile Include="Components\ComponentsMan.cs" />
     <Compile Include="Components\IComponentFactory.cs" />
@@ -95,6 +93,7 @@
     <Compile Include="Events\WorldInitializedEventArgs.cs" />
     <Compile Include="Events\WorldPausedEventArgs.cs" />
     <Compile Include="Events\WorldUnpausedEventArgs.cs" />
+    <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="IComponentController.cs" />
     <Compile Include="IControllerMan.cs" />

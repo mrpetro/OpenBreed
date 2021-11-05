@@ -173,20 +173,17 @@ namespace OpenBreed.Sandbox
             manCollection.SetupDynamicResolver();
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(manCollection.GetManager<IClipMan>(),
                                                                                     manCollection.GetManager<ICollisionMan>(),
-                                                                                    manCollection.GetManager<ICommandsMan>(),
                                                                                     manCollection.GetManager<IEntityFactory>(),
                                                                                     manCollection.GetManager<DynamicResolver>()));
             manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(manCollection.GetManager<IClipMan>(),
                                                                           manCollection.GetManager<ICollisionMan>(),
-                                                                          manCollection.GetManager<ICommandsMan>(),
                                                                           manCollection.GetManager<IPlayersMan>(),
                                                                           manCollection.GetManager<IDataLoaderFactory>(),
                                                                           manCollection.GetManager<IEntityFactory>(),
                                                                           manCollection.GetManager<MapCellHelper>(),
                                                                           manCollection.GetManager<DynamicResolver>(),
                                                                           manCollection.GetManager<FixtureTypes>()));
-            manCollection.AddSingleton<MapCellHelper>(() => new MapCellHelper(manCollection.GetManager<WorldBlockBuilder>(),
-                                                                              manCollection.GetManager<ICommandsMan>()));
+            manCollection.AddSingleton<MapCellHelper>(() => new MapCellHelper(manCollection.GetManager<WorldBlockBuilder>()));
 
             manCollection.SetupSpriteComponentAnimator();
 

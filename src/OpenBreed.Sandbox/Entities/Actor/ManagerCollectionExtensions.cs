@@ -24,7 +24,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             var stateMachine = fsmMan.Create<AttackingState, AttackingImpulse>("Actor.Attacking");
 
-            stateMachine.AddState(new States.Attacking.ShootingState(fsmMan, commandsMan, projectileHelper));
+            stateMachine.AddState(new States.Attacking.ShootingState(fsmMan, projectileHelper));
             stateMachine.AddState(new States.Attacking.IdleState(fsmMan, commandsMan));
             stateMachine.AddState(new States.Attacking.CooldownState(fsmMan, commandsMan));
 

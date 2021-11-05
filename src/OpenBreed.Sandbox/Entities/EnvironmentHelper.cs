@@ -52,7 +52,7 @@ namespace OpenBreed.Sandbox.Entities
             tileComponentBuilder.SetImageIndex(gfxValue);
             entity.Add(tileComponentBuilder.Build());
 
-            commandMan.Post(new AddEntityCommand(world.Id, entity.Id));
+            entity.EnterWorld(world.Id);
         }
 
         public void AddMonsterEating(World world, int x, int y, int atlasId, int gfxValue)
@@ -67,7 +67,7 @@ namespace OpenBreed.Sandbox.Entities
             tileComponentBuilder.SetImageIndex(gfxValue);
             entity.Add(tileComponentBuilder.Build());
 
-            commandMan.Post(new AddEntityCommand(world.Id, entity.Id));
+            entity.EnterWorld(world.Id);
         }
 
     }

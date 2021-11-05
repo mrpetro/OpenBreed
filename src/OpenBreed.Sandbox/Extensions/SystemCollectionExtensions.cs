@@ -110,8 +110,8 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<IBroadphaseFactory>(),
                                                               managerCollection.GetManager<ITileGridFactory>());
 
-                mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
-                mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
+                mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader());
+                mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader());
 
                 var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetManager<EnvironmentHelper>());
                 mapWorldDataLoader.Register(AnimatedCellLoader.TV_FLICKERING_CODE, environmentCellLoader);
