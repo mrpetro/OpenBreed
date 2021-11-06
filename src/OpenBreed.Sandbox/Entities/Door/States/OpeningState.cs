@@ -14,6 +14,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -22,18 +23,22 @@ namespace OpenBreed.Sandbox.Components.States
         #region Private Fields
 
         private readonly string animPrefix;
+        private readonly string stampPrefix;
         private readonly IFsmMan fsmMan;
         private readonly ICommandsMan commandsMan;
+        private readonly IStampMan stampMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpeningState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public OpeningState(IFsmMan fsmMan, ICommandsMan commandsMan, IStampMan stampMan)
         {
+            this.animPrefix = "Animations";
+            this.stampPrefix = "Tiles/Stamps";
             this.fsmMan = fsmMan;
             this.commandsMan = commandsMan;
-            animPrefix = "Animations";
+            this.stampMan = stampMan;
         }
 
         #endregion Public Constructors
@@ -51,10 +56,14 @@ namespace OpenBreed.Sandbox.Components.States
         {
             entity.SetSpriteOn();
 
+            var pos = entity.Get<PositionComponent>();
+
             var className = entity.Get<ClassComponent>().Name;
             var stateName = fsmMan.GetStateName(FsmId, Id);
             commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}.{className}.{stateName}", 0));
+            var stampId = stampMan.GetByName($"{stampPrefix}/{className}/Opened").Id;
 
+            entity.PutStamp(stampId, 0, pos.Value);
             entity.SetText(0, "Door - Opening");
 
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
@@ -62,6 +71,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void LeaveState(Entity entity)
         {
+            entity.SetSpriteOff();
+
             entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
 
             var bodyCmp = entity.Get<BodyComponent>();

@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Managers;
-using OpenBreed.Input.Interface;
+﻿using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Extensions;
@@ -14,6 +13,7 @@ namespace OpenBreed.Wecs.Systems.Control
         #region Private Fields
 
         private readonly IPlayersMan playersMan;
+
         private readonly List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
@@ -31,6 +31,8 @@ namespace OpenBreed.Wecs.Systems.Control
         #endregion Internal Constructors
 
         #region Public Methods
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         public void Update(float dt)
         {
@@ -77,7 +79,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
             if (input.Primary != input.OldPrimary)
             {
-                if(input.Primary)
+                if (input.Primary)
                     entity.StartPrimaryAttack();
                 else
                     entity.StopPrimaryAttack();

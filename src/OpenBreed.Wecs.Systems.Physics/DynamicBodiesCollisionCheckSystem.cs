@@ -3,11 +3,9 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,6 +49,8 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
+
+        public override bool ContainsEntity(Entity entity) => true;
 
         public override void Initialize(World world)
         {

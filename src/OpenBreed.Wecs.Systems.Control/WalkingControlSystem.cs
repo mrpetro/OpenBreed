@@ -1,17 +1,7 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Control;
+﻿using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Control.Events;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
@@ -24,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal WalkingControlSystem(IEntityMan entityMan)
         {
@@ -33,20 +23,21 @@ namespace OpenBreed.Wecs.Systems.Control
             RequireEntityWith<IControlComponent>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
         public void UpdatePauseImmuneOnly(float dt)
         {
             ExecuteCommands();
-
         }
 
         public void Update(float dt)
         {
             ExecuteCommands();
         }
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         #endregion Public Methods
 
@@ -68,9 +59,5 @@ namespace OpenBreed.Wecs.Systems.Control
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
-
-        #endregion Private Methods
     }
 }

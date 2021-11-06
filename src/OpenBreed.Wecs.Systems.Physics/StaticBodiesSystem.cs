@@ -49,6 +49,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             broadphaseGrid = world.GetModule<IBroadphaseStatic>();
         }
 
+        public override bool ContainsEntity(Entity entity) => true;
+
         public void UpdatePauseImmuneOnly(float dt)
         {
             ExecuteCommands();

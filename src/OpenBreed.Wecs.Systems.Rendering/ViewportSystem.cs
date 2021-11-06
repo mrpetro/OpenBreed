@@ -1,12 +1,9 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
@@ -54,6 +51,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Internal Constructors
 
         #region Public Methods
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         public Vector4 ClientToWorld(Vector4 coords, Entity viewport)
         {

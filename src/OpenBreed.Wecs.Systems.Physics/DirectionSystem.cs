@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         private const float FLOOR_FRICTION = 1.0f;
 
-        private readonly List<int> entities = new List<int>();
+        private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
 
         #endregion Private Fields
@@ -33,6 +33,8 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Public Methods
 
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
         public void UpdatePauseImmuneOnly(float dt)
         {
         }
@@ -40,12 +42,11 @@ namespace OpenBreed.Wecs.Systems.Physics
         public void Update(float dt)
         {
             for (int i = 0; i < entities.Count; i++)
-                UpdateEntity(dt, entities[i]);
+                UpdateEntity(entities[i], dt);
         }
 
-        public void UpdateEntity(float dt, int id)
+        public void UpdateEntity(Entity entity, float dt)
         {
-            var entity = entityMan.GetById(id);
             var angularPos = entity.Get<AngularPositionComponent>();
             var angularVel = entity.Get<AngularVelocityComponent>();
             var angularThrust = entity.Get<AngularThrustComponent>();
@@ -72,17 +73,12 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         protected override void OnAddEntity(Entity entity)
         {
-            entities.Add(entity.Id);
+            entities.Add(entity);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            var index = entities.IndexOf(entity.Id);
-
-            if (index < 0)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            entities.RemoveAt(index);
+            entities.Remove(entity);
         }
 
         #endregion Protected Methods

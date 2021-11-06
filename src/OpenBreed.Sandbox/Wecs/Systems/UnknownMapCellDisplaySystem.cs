@@ -1,25 +1,15 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
+﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Input.Interface;
-using OpenBreed.Wecs;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Components.Gui;
-using OpenBreed.Wecs.Components.Physics;
-
-using OpenBreed.Rendering.Interface;
+using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using OpenTK;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Sandbox.Wecs.Components;
+using System.Collections.Generic;
 
 namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 {
@@ -27,10 +17,13 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
     {
         #region Private Fields
 
-        private List<Entity> entities = new List<Entity>();
         private readonly IPrimitiveRenderer primitiveRenderer;
+
         private readonly IFontMan fontMan;
+
         private readonly IFont font;
+
+        private List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
@@ -51,6 +44,8 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
         #endregion Public Constructors
 
         #region Public Methods
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         public override void Initialize(World world)
         {
@@ -77,25 +72,10 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
         //        var pos = entities[i].Get<PositionComponent>();
 
-
         //        var coord = viewportSystem.ClientToWorld(new OpenTK.Vector4(e.X, e.Y, 0.0f, 1.0f), gameViewport);
         //        pos.Value = new OpenTK.Vector2(coord.X, coord.Y);
         //    }
         //}
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
-        protected override void OnAddEntity(Entity entity)
-        {
-            entities.Add(entity);
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
-        }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
@@ -113,6 +93,24 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void OnAddEntity(Entity entity)
+        {
+            entities.Add(entity);
+        }
+
+        protected override void OnRemoveEntity(Entity entity)
+        {
+            entities.Remove(entity);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         /// <summary>
         /// Draw this wireframe to given viewport
@@ -134,12 +132,8 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             if (posCmp.Value.Y > clipBox.Top)
                 return;
 
-
-
             var tileCmp = entity.Get<TileComponent>();
             var unknownCodeCmp = entity.Get<UnknownCodeComponent>();
-
-
 
             GL.PushMatrix();
 
@@ -165,6 +159,6 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             GL.PopMatrix();
         }
 
-        #endregion Protected Methods
+        #endregion Private Methods
     }
 }

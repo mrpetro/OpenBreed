@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Events;
+using OpenTK;
 
 namespace OpenBreed.Wecs.Systems.Rendering.Extensions
 {
@@ -53,6 +54,11 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             vpc.Height = height;
 
             entity.RaiseEvent(new ViewportResizedEventArgs(vpc.Width, vpc.Height));
+        }
+
+        public static void PutStamp(this Entity entity, int stampId, int layerNo, Vector2 position)
+        {
+            entity.Set(new StampPutterComponent(stampId, layerNo, position));
         }
 
         #endregion Public Methods

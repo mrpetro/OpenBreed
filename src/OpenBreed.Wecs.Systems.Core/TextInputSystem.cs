@@ -1,13 +1,8 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
+﻿using OpenBreed.Core.Events;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Events;
-using OpenBreed.Core.Managers;
-using System.Collections.Generic;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
 using OpenBreed.Wecs.Systems.Core.Commands;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -20,7 +15,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal TextInputSystem(IEntityMan entityMan)
         {
@@ -34,9 +29,11 @@ namespace OpenBreed.Wecs.Systems.Core
             RegisterHandler<TextDataBackspace>(HandleTextDataBackspace);
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         public void UpdatePauseImmuneOnly(float dt)
         {

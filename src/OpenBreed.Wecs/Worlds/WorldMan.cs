@@ -70,8 +70,6 @@ namespace OpenBreed.Wecs.Worlds
             var world = GetById(entity.WorldId);
 
             world.RemoveFromSystems(entity, componentType);
-
-            Console.WriteLine($"Entity({entity.Id}) {componentType} removed.");
         }
 
         private void EntityMan_ComponentAdded(Entity entity, Type componentType)
@@ -82,8 +80,6 @@ namespace OpenBreed.Wecs.Worlds
             var world = GetById(entity.WorldId);
 
             world.AddToSystems(entity, componentType);
-
-            Console.WriteLine($"Entity({entity.Id}) {componentType} added.");
         }
 
         #endregion Internal Constructors

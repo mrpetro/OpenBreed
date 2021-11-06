@@ -1,19 +1,11 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -40,6 +32,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Internal Constructors
 
         #region Public Methods
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         public void Render(Box2 clipBox, int depth, float dt)
         {

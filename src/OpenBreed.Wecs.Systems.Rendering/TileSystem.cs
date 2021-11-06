@@ -45,12 +45,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
             RequireEntityWith<PositionComponent>();
 
             RegisterHandler<TileSetCommand>(HandleTileSetCommand);
-            RegisterHandler<PutStampCommand>(HandlePutStampCommand);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         public override void Initialize(World world)
         {
@@ -97,13 +98,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var entity = entityMan.GetById(cmd.EntityId);
 
             tileGrid.ModifyTile(cmd.Position, cmd.AtlasId, cmd.ImageId);
-
-            return true;
-        }
-
-        private bool HandlePutStampCommand(PutStampCommand cmd)
-        {
-            tileGrid.ModifyTiles(cmd.Position, cmd.StampId);
 
             return true;
         }

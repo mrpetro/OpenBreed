@@ -1,24 +1,13 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Input.Interface;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Components.Gui;
-using OpenBreed.Wecs.Components.Physics;
-
+﻿using OpenBreed.Physics.Interface;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
+using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using OpenTK;
-using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Physics.Interface;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Gui
 {
@@ -26,9 +15,11 @@ namespace OpenBreed.Wecs.Systems.Gui
     {
         #region Private Fields
 
-        private List<Entity> entities = new List<Entity>();
-        private IBroadphaseDynamic broadphaseDynamic;
         private readonly IPrimitiveRenderer primitiveRenderer;
+
+        private List<Entity> entities = new List<Entity>();
+
+        private IBroadphaseDynamic broadphaseDynamic;
 
         #endregion Private Fields
 
@@ -45,6 +36,8 @@ namespace OpenBreed.Wecs.Systems.Gui
         #endregion Public Constructors
 
         #region Public Methods
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         public override void Initialize(World world)
         {
@@ -71,25 +64,10 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         //        var pos = entities[i].Get<PositionComponent>();
 
-
         //        var coord = viewportSystem.ClientToWorld(new OpenTK.Vector4(e.X, e.Y, 0.0f, 1.0f), gameViewport);
         //        pos.Value = new OpenTK.Vector2(coord.X, coord.Y);
         //    }
         //}
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
-        protected override void OnAddEntity(Entity entity)
-        {
-            entities.Add(entity);
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
-        }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
@@ -107,6 +85,24 @@ namespace OpenBreed.Wecs.Systems.Gui
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void OnAddEntity(Entity entity)
+        {
+            entities.Add(entity);
+        }
+
+        protected override void OnRemoveEntity(Entity entity)
+        {
+            entities.Remove(entity);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void DrawDynamicEntityAabb(Entity entity, Box2 clipBox)
         {
@@ -131,12 +127,11 @@ namespace OpenBreed.Wecs.Systems.Gui
             if (aabb.Bottom > clipBox.Top)
                 return;
 
-
             // Draw black box
             GL.Color4(Color4.Green);
             primitiveRenderer.DrawRectangle(aabb);
         }
 
-        #endregion Protected Methods
+        #endregion Private Methods
     }
 }

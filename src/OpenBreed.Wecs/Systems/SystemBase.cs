@@ -16,8 +16,6 @@ namespace OpenBreed.Wecs.Systems
 
         private readonly List<Entity> toAdd = new List<Entity>();
 
-        private readonly List<Entity> entities = new List<Entity>();
-
         private readonly List<Entity> toRemove = new List<Entity>();
 
         private readonly List<Type> requiredComponentTypes = new List<Type>();
@@ -28,8 +26,6 @@ namespace OpenBreed.Wecs.Systems
 
         private Dictionary<Type, Delegate> handlers = new Dictionary<Type, Delegate>();
 
-        public IReadOnlyCollection<Entity> Entities { get; }
-
         #endregion Private Fields
 
         #region Protected Constructors
@@ -38,9 +34,7 @@ namespace OpenBreed.Wecs.Systems
         {
             WorldId = World.NO_WORLD;
 
-            Entities = new ReadOnlyCollection<Entity>(entities);
             RequiredComponentTypes = new ReadOnlyCollection<Type>(requiredComponentTypes);
-
         }
 
         #endregion Protected Constructors
@@ -125,7 +119,7 @@ namespace OpenBreed.Wecs.Systems
             {
                 //Process entities to remove
                 for (int i = 0; i < toRemove.Count; i++)
-                    DoRemoveEntity(toRemove[i]);
+                    OnRemoveEntity(toRemove[i]);
 
                 toRemove.Clear();
             }
@@ -134,7 +128,7 @@ namespace OpenBreed.Wecs.Systems
             {
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
-                    DoAddEntity(toAdd[i]);
+                    OnAddEntity(toAdd[i]);
 
                 toAdd.Clear();
             }
@@ -145,10 +139,7 @@ namespace OpenBreed.Wecs.Systems
             return false;
         }
 
-        public bool ContainsEntity(Entity entity)
-        {
-            return entities.Contains(entity);
-        }
+        public abstract bool ContainsEntity(Entity entity);
 
         #endregion Public Methods
 
@@ -218,23 +209,5 @@ namespace OpenBreed.Wecs.Systems
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
-
-        private void DoRemoveEntity(Entity entity)
-        {
-            entities.Add(entity);
-
-            OnRemoveEntity(entity);
-        }
-
-        private void DoAddEntity(Entity entity)
-        {
-            entities.Remove(entity);
-
-            OnAddEntity(entity);
-        }
-
-        #endregion Private Methods
     }
 }

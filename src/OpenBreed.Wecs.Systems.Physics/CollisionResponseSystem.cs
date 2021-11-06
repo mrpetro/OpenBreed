@@ -1,9 +1,7 @@
-﻿using OpenBreed.Physics.Interface;
-using OpenBreed.Physics.Interface.Managers;
+﻿using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System.Collections.Generic;
@@ -16,13 +14,16 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+
         private readonly IEntityMan entityMan;
+
         private readonly IWorldMan worldMan;
+
         private readonly ICollisionMan collisionMan;
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public CollisionResponseSystem(IEntityMan entityMan, IWorldMan worldMan, ICollisionMan collisionMan)
         {
@@ -31,19 +32,14 @@ namespace OpenBreed.Wecs.Systems.Physics
             this.collisionMan = collisionMan;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
         public void UpdatePauseImmuneOnly(float dt)
         {
-
-        }
-
-        private IEnumerable<Entity> GetEntitiesWith<TComponent>()
-        {
-            var world = worldMan.GetById(WorldId);
-            return world.Entities.Where(entity => entity.Contains<TComponent>());
         }
 
         public void Update(float dt)
@@ -70,7 +66,6 @@ namespace OpenBreed.Wecs.Systems.Physics
                 }
 
                 //collisionMan.Resolve(entity, contactEntity, collisionComponent.Contacts);
-
 
                 foreach (var contact in collisionComponent.Contacts)
                 {
@@ -113,7 +108,11 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Private Methods
 
-
+        private IEnumerable<Entity> GetEntitiesWith<TComponent>()
+        {
+            var world = worldMan.GetById(WorldId);
+            return world.Entities.Where(entity => entity.Contains<TComponent>());
+        }
 
         #endregion Private Methods
     }

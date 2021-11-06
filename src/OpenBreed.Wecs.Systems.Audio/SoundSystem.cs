@@ -22,6 +22,11 @@ namespace OpenBreed.Wecs.Systems.Audio
             components = new List<IEntityComponent>();
         }
 
+        public override bool ContainsEntity(Entity entity)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void OnAddEntity(Entity entity)
         {
             throw new NotImplementedException();

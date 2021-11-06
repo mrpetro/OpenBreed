@@ -24,6 +24,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
                                                             manCollection.GetManager<IPrimitiveRenderer>(),
                                                             manCollection.GetManager<IViewClient>()));
             systemFactory.Register(() => new SpriteSystem(manCollection.GetManager<ISpriteMan>()));
+            systemFactory.Register(() => new StampSystem());
             systemFactory.Register(() => new TileSystem(manCollection.GetManager<IEntityMan>(),
                                                         manCollection.GetManager<ITileMan>(),
                                                         manCollection.GetManager<ITileGridFactory>(),
@@ -37,7 +38,6 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
 
             entityCommandHandler.BindCommand<TileSetCommand, TileSystem>();
-            entityCommandHandler.BindCommand<PutStampCommand, TileSystem>();
         }
     }
 }

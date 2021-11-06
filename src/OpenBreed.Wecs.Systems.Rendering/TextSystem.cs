@@ -1,22 +1,12 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
-using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -33,7 +23,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Internal Constructors
 
-        internal TextSystem(IEntityMan entityMan, IFontMan fontMan, ILogger logger )
+        internal TextSystem(IEntityMan entityMan, IFontMan fontMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.fontMan = fontMan;
@@ -65,6 +55,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         #endregion Public Methods
 

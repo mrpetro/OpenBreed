@@ -1,17 +1,12 @@
-﻿using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
+﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Logging;
-using OpenBreed.Core;
-using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Animation
@@ -20,9 +15,12 @@ namespace OpenBreed.Wecs.Systems.Animation
     {
         #region Private Fields
 
-        private readonly List<int> entities = new List<int>();
+        private readonly List<Entity> entities = new List<Entity>();
+
         private readonly IEntityMan entityMan;
+
         private readonly IClipMan clipMan;
+
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -45,15 +43,16 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Public Methods
 
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
         public void UpdatePauseImmuneOnly(float dt)
         {
             ExecuteCommands();
 
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = entityMan.GetById(entities[i]);
-                if (entity.ComponentValues.OfType<PauseImmuneComponent>().Any())
-                    Animate(entity, dt);
+                if (entities[i].ComponentValues.OfType<PauseImmuneComponent>().Any())
+                    Animate(entities[i], dt);
             }
         }
 
@@ -63,10 +62,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = entityMan.GetById(entities[i]);
-                Debug.Assert(entity != null);
-
-                Animate(entity, dt);
+                Animate(entities[i], dt);
             }
         }
 
@@ -110,24 +106,19 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         protected override void OnAddEntity(Entity entity)
         {
-            entities.Add(entity.Id);
+            entities.Add(entity);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            var index = entities.IndexOf(entity.Id);
-
-            if (index < 0)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            entities.RemoveAt(index);
+            entities.Remove(entity);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private  bool HandlePauseAnimCommand(PauseAnimCommand cmd)
+        private bool HandlePauseAnimCommand(PauseAnimCommand cmd)
         {
             var entity = entityMan.GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();

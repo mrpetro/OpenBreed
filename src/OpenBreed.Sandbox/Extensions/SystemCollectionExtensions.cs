@@ -184,6 +184,7 @@ namespace OpenBreed.Sandbox.Extensions
             //Video
             builder.AddSystem(systemFactory.Create<TileSystem>());
             builder.AddSystem(systemFactory.Create<SpriteSystem>());
+            builder.AddSystem(systemFactory.Create<StampSystem>());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(systemFactory.Create<TextSystem>());
 

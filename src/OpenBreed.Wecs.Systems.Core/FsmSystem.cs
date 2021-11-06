@@ -1,18 +1,9 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Events;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Fsm;
+using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
-using OpenBreed.Fsm;
-using OpenBreed.Common.Logging;
-using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -41,6 +32,8 @@ namespace OpenBreed.Wecs.Systems.Core
         #endregion Public Constructors
 
         #region Public Methods
+
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         public void Update(float dt)
         {
@@ -127,7 +120,6 @@ namespace OpenBreed.Wecs.Systems.Core
 
                 machineState.StateId = nextStateId;
                 fsmMan.EnterState(entity, machineState, impulseId);
-
             }
             finally
             {

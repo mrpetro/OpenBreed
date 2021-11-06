@@ -1,17 +1,7 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
+﻿using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Events;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Commands;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
@@ -40,6 +30,8 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Public Methods
 
+        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
         public void UpdatePauseImmuneOnly(float dt)
         {
             ExecuteCommands();
@@ -51,38 +43,6 @@ namespace OpenBreed.Wecs.Systems.Control
 
             for (int i = 0; i < entities.Count; i++)
                 Update(entities[i], dt);
-        }
-
-        private void Update(Entity entity, float dt)
-        {
-            var fc = entity.Get<FollowerComponent>();
-
-            for (int i = 0; i < fc.FollowerIds.Count; i++)
-            {
-                var followerEntity = entityMan.GetById(fc.FollowerIds[i]);
-
-                if (followerEntity == null)
-                    continue;
-
-                //Glue(entity, followerEntity);
-                Follow(entity, followerEntity);
-            }
-        }
-
-        private void Follow(Entity followed, Entity follower)
-        {
-            var followedPos = followed.Get<PositionComponent>();
-            var followerPos = follower.Get<PositionComponent>();
-            var difference = followedPos.Value - followerPos.Value;
-            followerPos.Value += difference / 10;
-        }
-
-        private void Glue(Entity followed, Entity follower)
-        {
-            var followedPos = followed.Get<PositionComponent>();
-            var followerPos = follower.Get<PositionComponent>();
-
-            followerPos.Value = followedPos.Value;
         }
 
         #endregion Public Methods
@@ -128,6 +88,38 @@ namespace OpenBreed.Wecs.Systems.Control
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void Update(Entity entity, float dt)
+        {
+            var fc = entity.Get<FollowerComponent>();
+
+            for (int i = 0; i < fc.FollowerIds.Count; i++)
+            {
+                var followerEntity = entityMan.GetById(fc.FollowerIds[i]);
+
+                if (followerEntity == null)
+                    continue;
+
+                //Glue(entity, followerEntity);
+                Follow(entity, followerEntity);
+            }
+        }
+
+        private void Follow(Entity followed, Entity follower)
+        {
+            var followedPos = followed.Get<PositionComponent>();
+            var followerPos = follower.Get<PositionComponent>();
+            var difference = followedPos.Value - followerPos.Value;
+            followerPos.Value += difference / 10;
+        }
+
+        private void Glue(Entity followed, Entity follower)
+        {
+            var followedPos = followed.Get<PositionComponent>();
+            var followerPos = follower.Get<PositionComponent>();
+
+            followerPos.Value = followedPos.Value;
+        }
 
         #endregion Private Methods
     }
