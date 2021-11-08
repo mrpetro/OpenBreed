@@ -64,7 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\IEntityCommand.cs" />
     <Compile Include="Components\ComponentFactoryBase.cs" />
     <Compile Include="Components\ComponentsMan.cs" />
     <Compile Include="Components\IComponentFactory.cs" />
@@ -81,7 +80,6 @@
     <Compile Include="Entities\EntityJob.cs" />
     <Compile Include="Entities\EntityMan.cs" />
     <Compile Include="Entities\IEntityMan.cs" />
-    <Compile Include="EntityCommandHandler.cs" />
     <Compile Include="Events\ComponentChangedEventHandler.cs" />
     <Compile Include="Events\EntityAddedEventArgs.cs" />
     <Compile Include="Events\ComponentChangedEvent.cs" />

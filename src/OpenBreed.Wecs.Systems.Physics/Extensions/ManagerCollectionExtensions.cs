@@ -35,9 +35,6 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             systemFactory.Register(() => new CollisionResponseSystem(manCollection.GetManager<IEntityMan>(),
                                                                      manCollection.GetManager<IWorldMan>(),
                                                                      manCollection.GetManager<ICollisionMan>()));
-            var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
-            //entityCommandHandler.BindCommand<BodyOffCommand, DynamicBodiesCollisionCheckSystem>();
-            //entityCommandHandler.BindCommand<BodyOnCommand, DynamicBodiesCollisionCheckSystem>();
         }
     }
 }

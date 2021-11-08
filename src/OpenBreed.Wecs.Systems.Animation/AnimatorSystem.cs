@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Logging;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
@@ -41,8 +40,6 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 if (entities[i].ComponentValues.OfType<PauseImmuneComponent>().Any())
@@ -52,8 +49,6 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         public void Update(float dt)
         {
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 Animate(entities[i], dt);
@@ -72,11 +67,6 @@ namespace OpenBreed.Wecs.Systems.Animation
         #region Protected Methods
 
         protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
-        protected override bool DenqueueCommand(IEntityCommand entityCommand)
-        {
-            return base.DenqueueCommand(entityCommand);
-        }
 
         protected override void OnAddEntity(Entity entity)
         {

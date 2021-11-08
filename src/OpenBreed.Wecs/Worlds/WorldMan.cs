@@ -5,7 +5,6 @@ using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;

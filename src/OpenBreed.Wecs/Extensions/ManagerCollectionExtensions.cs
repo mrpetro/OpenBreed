@@ -34,11 +34,6 @@ namespace OpenBreed.Wecs.Extensions
 
             manCollection.AddTransient<WorldBuilder>(() => new WorldBuilder(manCollection.GetManager<IWorldMan>(),
                                                                               manCollection.GetManager<ILogger>()));
-
-            manCollection.AddSingleton<EntityCommandHandler>(() => new EntityCommandHandler(manCollection.GetManager<IEntityMan>(),
-                                                                                            manCollection.GetManager<IWorldMan>(),
-                                                                                            manCollection.GetManager<ICommandsMan>(),
-                                                                                            manCollection.GetManager<IEventsMan>()));
         }
     }
 }

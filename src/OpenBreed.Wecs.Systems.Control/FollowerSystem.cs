@@ -32,13 +32,10 @@ namespace OpenBreed.Wecs.Systems.Control
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
         }
 
         public void Update(float dt)
         {
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
                 Update(entities[i], dt);
         }

@@ -139,8 +139,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             depth++;
 
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
                 RenderViewport(entities[i], clipBox, depth, dt);
         }

@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders

@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
@@ -22,8 +20,6 @@ namespace OpenBreed.Wecs.Systems
         private readonly List<Type> requiredComponentTypes = new List<Type>();
 
         private readonly List<Type> forbiddenComponentTypes = new List<Type>();
-
-        private readonly Queue<IEntityCommand> commandQueue = new Queue<IEntityCommand>();
 
         private Dictionary<Type, Delegate> handlers = new Dictionary<Type, Delegate>();
 
@@ -115,12 +111,6 @@ namespace OpenBreed.Wecs.Systems
             toRemove.Add(entity);
         }
 
-        public virtual bool EnqueueCommand(IEntityCommand command)
-        {
-            commandQueue.Enqueue(command);
-            return false;
-        }
-
         public void Cleanup()
         {
             if (toRemove.Any())
@@ -151,35 +141,6 @@ namespace OpenBreed.Wecs.Systems
         #region Protected Methods
 
         protected abstract bool ContainsEntity(Entity entity);
-
-        protected void RegisterHandler<TCommand>(Func<TCommand, bool> cmdHandler) where TCommand : IEntityCommand
-        {
-            handlers.Add(typeof(TCommand), cmdHandler);
-        }
-
-        protected virtual bool DenqueueCommand(IEntityCommand entityCommand)
-        {
-            if (handlers.TryGetValue(entityCommand.GetType(), out Delegate handler))
-            {
-                handler.DynamicInvoke(entityCommand);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        protected void ExecuteCommands()
-        {
-            while (commandQueue.Count > 0)
-            {
-                if (!DenqueueCommand(commandQueue.Dequeue()))
-                {
-                    //TODO: Log not handled command here
-                }
-            }
-        }
 
         protected abstract void OnRemoveEntity(Entity entity);
 

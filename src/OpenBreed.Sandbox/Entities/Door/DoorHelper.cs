@@ -22,7 +22,6 @@ using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;

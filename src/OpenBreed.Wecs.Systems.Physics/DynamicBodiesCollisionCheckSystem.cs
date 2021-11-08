@@ -60,13 +60,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
         }
 
         public void Update(float dt)
         {
-            ExecuteCommands();
-
             broadphaseDynamic.Solve(QueryStaticGrid, TestNarrowPhaseDynamic, dt);
         }
 

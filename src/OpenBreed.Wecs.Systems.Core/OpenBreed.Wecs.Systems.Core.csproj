@@ -64,9 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\TextCaretSetPosition.cs" />
-    <Compile Include="Commands\TextDataInsert.cs" />
-    <Compile Include="Commands\TextDataRemove.cs" />
     <Compile Include="Events\TimerElapsedEventArgs.cs" />
     <Compile Include="Events\TimerUpdateEventArgs.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />

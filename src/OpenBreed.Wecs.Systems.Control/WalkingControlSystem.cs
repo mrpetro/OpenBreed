@@ -29,12 +29,10 @@ namespace OpenBreed.Wecs.Systems.Control
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
         }
 
         public void Update(float dt)
         {
-            ExecuteCommands();
         }
 
         #endregion Public Methods

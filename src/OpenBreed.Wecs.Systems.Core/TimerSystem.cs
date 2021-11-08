@@ -33,8 +33,6 @@ namespace OpenBreed.Wecs.Systems.Core
 
         public void Update(float dt)
         {
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 Update(entities[i], dt);
@@ -43,8 +41,6 @@ namespace OpenBreed.Wecs.Systems.Core
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = entities[i];

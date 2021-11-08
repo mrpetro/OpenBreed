@@ -35,8 +35,6 @@ namespace OpenBreed.Wecs.Systems.Core
 
         public void Update(float dt)
         {
-            ExecuteCommands();
-
             foreach (var entity in entities)
             {
                 var fsmCmp = entity.Get<FsmComponent>();
@@ -52,7 +50,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
+
         }
 
         #endregion Public Methods

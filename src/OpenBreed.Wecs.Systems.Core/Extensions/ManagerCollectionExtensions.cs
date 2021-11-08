@@ -3,7 +3,6 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
@@ -20,15 +19,6 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
             systemFactory.Register(() => new TextInputSystem(manCollection.GetManager<IEntityMan>()));
             systemFactory.Register(() => new TimerSystem(manCollection.GetManager<IEntityMan>(),
                                                          manCollection.GetManager<ILogger>()));
-
-
-
-            var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
-
-            entityCommandHandler.BindCommand<TextCaretSetPosition, TextInputSystem>();
-            entityCommandHandler.BindCommand<TextDataInsert, TextInputSystem>();
-            entityCommandHandler.BindCommand<TextDataBackspace, TextInputSystem>();
-
         }
 
         #endregion Public Methods
