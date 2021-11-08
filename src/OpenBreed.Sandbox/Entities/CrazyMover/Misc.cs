@@ -17,11 +17,10 @@ namespace OpenBreed.Sandbox
 {
     public class Misc
     {
-        public Misc(IClipMan clipMan, IFontMan fontMan, ICommandsMan commandsMan, IEntityFactory entityFactory)
+        public Misc(IClipMan clipMan, IFontMan fontMan, IEntityFactory entityFactory)
         {
             this.clipMan = clipMan;
             this.fontMan = fontMan;
-            this.commandsMan = commandsMan;
             this.entityFactory = entityFactory;
         }
 
@@ -30,7 +29,6 @@ namespace OpenBreed.Sandbox
         public const string CRAZY_MOVE_ANIM = "Animations/Misc/CrazyMove";
         private readonly IClipMan clipMan;
         private readonly IFontMan fontMan;
-        private readonly ICommandsMan commandsMan;
         private readonly IEntityFactory entityFactory;
 
         #endregion Public Fields

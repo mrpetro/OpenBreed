@@ -18,12 +18,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
     public class IdleState : IState<AttackingState, AttackingImpulse>
     {
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
 
-        public IdleState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public IdleState(IFsmMan fsmMan)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
         }
 
         public int Id => (int)AttackingState.Idle;

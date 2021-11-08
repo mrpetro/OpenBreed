@@ -18,17 +18,15 @@ namespace OpenBreed.Sandbox.Entities
 {
     public class EnvironmentHelper
     {
-        public EnvironmentHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, ICommandsMan commandMan, IBuilderFactory builderFactory)
+        public EnvironmentHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, IBuilderFactory builderFactory)
         {
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
-            this.commandMan = commandMan;
             this.builderFactory = builderFactory;
         }
 
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
-        private readonly ICommandsMan commandMan;
         private readonly IBuilderFactory builderFactory;
 
         public void LoadAnimations()

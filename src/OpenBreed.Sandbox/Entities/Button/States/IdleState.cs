@@ -20,16 +20,14 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public IdleState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public IdleState(IFsmMan fsmMan)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors

@@ -1,28 +1,21 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Sandbox.Helpers;
-using System;
-using System.Linq;
-using OpenBreed.Fsm;
+﻿using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
     public class RotatingState : IState<RotationState, RotationImpulse>
     {
-        private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
         #region Private Fields
+
+        private readonly IFsmMan fsmMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RotatingState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public RotatingState(IFsmMan fsmMan)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors

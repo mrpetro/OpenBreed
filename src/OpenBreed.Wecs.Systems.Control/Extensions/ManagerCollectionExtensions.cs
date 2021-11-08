@@ -20,8 +20,7 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
             systemFactory.Register(() => new WalkingControlSystem(manCollection.GetManager<IEntityMan>()));
             systemFactory.Register(() => new WalkingControllerSystem(manCollection.GetManager<IPlayersMan>()));
             systemFactory.Register(() => new AttackControllerSystem(manCollection.GetManager<IPlayersMan>()));
-            systemFactory.Register(() => new FollowerSystem(manCollection.GetManager<IEntityMan>(),
-                                                            manCollection.GetManager<ICommandsMan>()));
+            systemFactory.Register(() => new FollowerSystem(manCollection.GetManager<IEntityMan>()));
         }
     }
 }

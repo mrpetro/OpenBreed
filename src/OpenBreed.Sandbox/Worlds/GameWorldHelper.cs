@@ -45,16 +45,14 @@ namespace OpenBreed.Sandbox.Worlds
     public class GameWorldHelper
     {
         private readonly IPlayersMan playersMan;
-        private readonly ICommandsMan commandsMan;
         private readonly IEntityMan entityMan;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         private readonly ILogger logger;
 
-        public GameWorldHelper(IPlayersMan playersMan, ICommandsMan commandsMan, IEntityMan entityMan, ISystemFactory systemFactory, IWorldMan worldMan, ILogger logger)
+        public GameWorldHelper(IPlayersMan playersMan, IEntityMan entityMan, ISystemFactory systemFactory, IWorldMan worldMan, ILogger logger)
         {
             this.playersMan = playersMan;
-            this.commandsMan = commandsMan;
             this.entityMan = entityMan;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;

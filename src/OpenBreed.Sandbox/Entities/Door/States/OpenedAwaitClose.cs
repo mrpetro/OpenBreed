@@ -24,18 +24,16 @@ namespace OpenBreed.Sandbox.Components.States
 
         private readonly string stampPrefix;
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
         private readonly IStampMan stampMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenedAwaitClose(IFsmMan fsmMan, ICommandsMan commandsMan, IStampMan stampMan)
+        public OpenedAwaitClose(IFsmMan fsmMan, IStampMan stampMan)
         {
             this.stampPrefix = "Tiles/Stamps";
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
             this.stampMan = stampMan;
         }
 

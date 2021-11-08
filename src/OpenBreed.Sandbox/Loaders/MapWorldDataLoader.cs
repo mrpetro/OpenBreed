@@ -38,7 +38,6 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         private readonly WorldBlockBuilder worldBlockBuilder;
-        private readonly ICommandsMan commandsMan;
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly IEntityFactoryProvider mapEntityFactory;
         private readonly IBroadphaseFactory broadphaseGridFactory;
@@ -55,7 +54,6 @@ namespace OpenBreed.Sandbox.Loaders
                                   ISystemFactory systemFactory,
                                   IWorldMan worldMan,
                                   WorldBlockBuilder worldBlockBuilder,
-                                  ICommandsMan commandsMan,
                                   PalettesDataProvider palettesDataProvider,
                                   IEntityFactoryProvider mapEntityFactory,
                                   IBroadphaseFactory broadphaseGridFactory,
@@ -67,7 +65,6 @@ namespace OpenBreed.Sandbox.Loaders
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             this.worldBlockBuilder = worldBlockBuilder;
-            this.commandsMan = commandsMan;
             this.palettesDataProvider = palettesDataProvider;
             this.mapEntityFactory = mapEntityFactory;
             this.broadphaseGridFactory = broadphaseGridFactory;

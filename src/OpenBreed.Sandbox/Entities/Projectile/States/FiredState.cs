@@ -14,17 +14,15 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         #region Private Fields
 
         private readonly string animPrefix;
-        private readonly ICommandsMan commandsMan;
         private readonly IClipMan clipMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FiredState(string animPrefix, ICommandsMan commandsMan, IClipMan clipMan)
+        public FiredState(string animPrefix, IClipMan clipMan)
         {
             this.animPrefix = animPrefix;
-            this.commandsMan = commandsMan;
             this.clipMan = clipMan;
         }
 

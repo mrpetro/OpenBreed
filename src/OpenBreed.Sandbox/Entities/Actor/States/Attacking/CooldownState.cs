@@ -18,17 +18,15 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
         private Timer timer;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public CooldownState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public CooldownState(IFsmMan fsmMan)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors

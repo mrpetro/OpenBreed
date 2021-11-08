@@ -22,7 +22,6 @@ namespace OpenBreed.Sandbox.Components.States
 
         private readonly string stampPrefix;
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
         private readonly ICollisionMan collisionMan;
         private readonly IStampMan stampMan;
 
@@ -30,10 +29,9 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Constructors
 
-        public ClosedState(IFsmMan fsmMan, ICommandsMan commandsMan, ICollisionMan collisionMan, IStampMan stampMan)
+        public ClosedState(IFsmMan fsmMan, ICollisionMan collisionMan, IStampMan stampMan)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
             this.collisionMan = collisionMan;
             this.stampMan = stampMan;
             stampPrefix = "Tiles/Stamps";

@@ -15,12 +15,10 @@ namespace OpenBreed.Sandbox.Entities.Button
         public static void SetupButtonStates(this IManagerCollection managerCollection)
         {
             var fsmMan = managerCollection.GetManager<IFsmMan>();
-            var commandsMan = managerCollection.GetManager<ICommandsMan>();
-
             var buttonFsm = fsmMan.Create<ButtonState, ButtonImpulse>("Button");
 
-            buttonFsm.AddState(new IdleState(fsmMan, commandsMan));
-            buttonFsm.AddState(new PressedState(fsmMan, commandsMan));
+            buttonFsm.AddState(new IdleState(fsmMan));
+            buttonFsm.AddState(new PressedState(fsmMan));
 
             buttonFsm.AddTransition(ButtonState.Pressed, ButtonImpulse.Unpress, ButtonState.Idle);
             buttonFsm.AddTransition(ButtonState.Idle, ButtonImpulse.Press, ButtonState.Pressed);

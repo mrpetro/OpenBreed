@@ -120,20 +120,17 @@ namespace OpenBreed.Sandbox
             var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
 
             manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(manCollection.GetManager<ISystemFactory>(),
-                                                                                            manCollection.GetManager<ICommandsMan>(),
                                                                                             manCollection.GetManager<IRenderingMan>(),
                                                                                             manCollection.GetManager<IWorldMan>(),
                                                                                             manCollection.GetManager<IEventsMan>(),
                                                                                             manCollection.GetManager<ViewportCreator>(),
                                                                                             manCollection.GetManager<IViewClient>()));
-            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(core, manCollection.GetManager<ICommandsMan>(),
-                                                                                      manCollection.GetManager<ISystemFactory>(),
+            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(core, manCollection.GetManager<ISystemFactory>(),
                                                                                       manCollection.GetManager<IWorldMan>(),
                                                                                       manCollection.GetManager<IViewClient>(),
                                                                                       manCollection.GetManager<IEntityMan>(),
                                                                                       manCollection.GetManager<CameraBuilder>()));
             manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(manCollection.GetManager<IPlayersMan>(),
-                                                                                  manCollection.GetManager<ICommandsMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
                                                                                   manCollection.GetManager<ISystemFactory>(),
                                                                                   manCollection.GetManager<IWorldMan>(),
@@ -144,16 +141,13 @@ namespace OpenBreed.Sandbox
                                                                                   manCollection.GetManager<IClipMan>(),
                                                                                   manCollection.GetManager<IEntityFactory>(),
                                                                                   manCollection.GetManager<IEventsMan>(),
-                                                                                  manCollection.GetManager<ICommandsMan>(),
                                                                                   manCollection.GetManager<ICollisionMan>(),
                                                                                   manCollection.GetManager<IJobsMan>(),
                                                                                   manCollection.GetManager<ViewportCreator>()));
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
-                                                                        manCollection.GetManager<IEntityFactory>(),
-                                                                        manCollection.GetManager<ICommandsMan>()));
+                                                                        manCollection.GetManager<IEntityFactory>()));
             manCollection.AddSingleton<EnvironmentHelper>(() => new EnvironmentHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                                       manCollection.GetManager<IEntityFactory>(),
-                                                                                      manCollection.GetManager<ICommandsMan>(),
                                                                                       manCollection.GetManager<IBuilderFactory>()));
 
             manCollection.AddSingleton<CameraHelper>(() => new CameraHelper(manCollection.GetManager<IClipMan>(),
@@ -164,7 +158,6 @@ namespace OpenBreed.Sandbox
                                                                                 manCollection.GetManager<IWorldMan>(),
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
-                                                                                manCollection.GetManager<ICommandsMan>(),
                                                                                 manCollection.GetManager<IEventsMan>(),
                                                                                 manCollection.GetManager<ICollisionMan>(),
                                                                                 manCollection.GetManager<IBuilderFactory>(),
@@ -325,8 +318,6 @@ namespace OpenBreed.Sandbox
         {
             GetManager<IEventQueue>().Fire();
 
-            Commands.ExecuteEnqueued();
-
             Worlds.Cleanup();
             renderingMan.Cleanup();
 
@@ -464,7 +455,6 @@ namespace OpenBreed.Sandbox
             var mapWorldLoader = dataLoaderFactory.GetLoader<World>();
 
             var cameraBuilder = GetManager<CameraBuilder>();
-            var commandsMan = GetManager<ICommandsMan>();
             var entityMan = GetManager<IEntityMan>();
 
             var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 1");

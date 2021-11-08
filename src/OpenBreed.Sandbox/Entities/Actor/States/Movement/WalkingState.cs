@@ -24,18 +24,16 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         private readonly string animPrefix;
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
         private readonly IClipMan clipMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WalkingState(IFsmMan fsmMan, ICommandsMan commandsMan, IClipMan clipMan)
+        public WalkingState(IFsmMan fsmMan, IClipMan clipMan)
         {
             this.animPrefix = "Animations";
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
             this.clipMan = clipMan;
         }
 

@@ -34,13 +34,11 @@ namespace OpenBreed.Sandbox.Entities.Door
     {
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
-        private readonly ICommandsMan commandMan;
 
-        public DoorHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, ICommandsMan commandMan)
+        public DoorHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
         {
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
-            this.commandMan = commandMan;
         }
 
         public void LoadAnimations()

@@ -68,8 +68,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         private readonly IEntityFactory entityFactory;
 
-        private readonly ICommandsMan commandsMan;
-
         private readonly IEventsMan eventsMan;
 
         private readonly ICollisionMan collisionMan;
@@ -81,13 +79,12 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Public Constructors
 
-        public TeleportHelper(IClipMan clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, ICommandsMan commandsMan, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IShapeMan shapeMan)
+        public TeleportHelper(IClipMan clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IShapeMan shapeMan)
         {
             this.clipMan = clipMan;
             this.worldMan = worldMan;
             this.entityMan = entityMan;
             this.entityFactory = entityFactory;
-            this.commandsMan = commandsMan;
             this.eventsMan = eventsMan;
             this.collisionMan = collisionMan;
             this.builderFactory = builderFactory;

@@ -25,19 +25,17 @@ namespace OpenBreed.Sandbox.Components.States
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         private readonly IClipMan clipMan;
-        private readonly ICommandsMan commandsMan;
         private readonly string stampPrefix;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosingState(IFsmMan fsmMan, ICommandsMan commandsMan, IStampMan stampMan, IClipMan clipMan)
+        public ClosingState(IFsmMan fsmMan, IStampMan stampMan, IClipMan clipMan)
         {
             this.animPrefix = "Animations";
             this.stampPrefix = "Tiles/Stamps";
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
             this.stampMan = stampMan;
             this.clipMan = clipMan;
         }

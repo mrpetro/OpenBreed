@@ -11,16 +11,14 @@ namespace OpenBreed.Wecs.Systems.Control
 
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
-        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FollowerSystem(IEntityMan entityMan, ICommandsMan commandsMan)
+        public FollowerSystem(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
-            this.commandsMan = commandsMan;
 
             RequireEntityWith<FollowerComponent>();
             RequireEntityWith<PositionComponent>();

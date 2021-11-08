@@ -30,7 +30,6 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private readonly ISystemFactory systemFactory;
-        private readonly ICommandsMan commandsMan;
         private readonly IRenderingMan renderingMan;
         private readonly IWorldMan worldMan;
         private readonly IEventsMan eventsMan;
@@ -41,10 +40,9 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Constructors
 
-        public ScreenWorldHelper(ISystemFactory systemFactory, ICommandsMan commandsMan, IRenderingMan renderingMan, IWorldMan worldMan, IEventsMan eventsMan, ViewportCreator viewportCreator, IViewClient viewClient)
+        public ScreenWorldHelper(ISystemFactory systemFactory, IRenderingMan renderingMan, IWorldMan worldMan, IEventsMan eventsMan, ViewportCreator viewportCreator, IViewClient viewClient)
         {
             this.systemFactory = systemFactory;
-            this.commandsMan = commandsMan;
             this.renderingMan = renderingMan;
             this.worldMan = worldMan;
             this.eventsMan = eventsMan;

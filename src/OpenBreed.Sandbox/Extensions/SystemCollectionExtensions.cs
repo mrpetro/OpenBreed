@@ -47,7 +47,6 @@ namespace OpenBreed.Sandbox.Extensions
 
             scriptMan.Expose("Worlds", manCollection.GetManager<IWorldMan>());
             scriptMan.Expose("Entities", manCollection.GetManager<IEntityMan>());
-            scriptMan.Expose("Commands", manCollection.GetManager<ICommandsMan>());
             scriptMan.Expose("Inputs", manCollection.GetManager<IInputsMan>());
             scriptMan.Expose("Logging", manCollection.GetManager<ILogger>());
             scriptMan.Expose("Players", manCollection.GetManager<IPlayersMan>());
@@ -104,7 +103,6 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<ISystemFactory>(),
                                                               managerCollection.GetManager<IWorldMan>(),
                                                               managerCollection.GetManager<WorldBlockBuilder>(),
-                                                              managerCollection.GetManager<ICommandsMan>(),
                                                               managerCollection.GetManager<PalettesDataProvider>(),
                                                               managerCollection.GetManager<IEntityFactoryProvider>(),
                                                               managerCollection.GetManager<IBroadphaseFactory>(),
@@ -227,8 +225,7 @@ namespace OpenBreed.Sandbox.Extensions
         public static void SetupSpriteComponentAnimator(this IManagerCollection managerCollection)
         {
             new SpriteComponentAnimator(managerCollection.GetManager<IFrameUpdaterMan>(),
-                                        managerCollection.GetManager<ISpriteMan>(),
-                                        managerCollection.GetManager<ICommandsMan>());
+                                        managerCollection.GetManager<ISpriteMan>());
         }
 
         #endregion Public Methods

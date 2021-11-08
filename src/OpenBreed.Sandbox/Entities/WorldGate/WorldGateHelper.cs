@@ -44,14 +44,13 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
     public class WorldGateHelper
     {
-        public WorldGateHelper(IWorldMan worldMan, IEntityMan entityMan, IClipMan clipMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICommandsMan commandsMan, ICollisionMan collisionMan, IJobsMan jobsMan, ViewportCreator viewportCreator)
+        public WorldGateHelper(IWorldMan worldMan, IEntityMan entityMan, IClipMan clipMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan collisionMan, IJobsMan jobsMan, ViewportCreator viewportCreator)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;
             this.clipMan = clipMan;
             this.entityFactory = entityFactory;
             this.eventsMan = eventsMan;
-            this.commandsMan = commandsMan;
             this.collisionMan = collisionMan;
             this.jobsMan = jobsMan;
             this.viewportCreator = viewportCreator;
@@ -64,7 +63,6 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         private readonly IClipMan clipMan;
         private readonly IEntityFactory entityFactory;
         private readonly IEventsMan eventsMan;
-        private readonly ICommandsMan commandsMan;
         private readonly ICollisionMan collisionMan;
         private readonly IJobsMan jobsMan;
         private readonly ViewportCreator viewportCreator;
