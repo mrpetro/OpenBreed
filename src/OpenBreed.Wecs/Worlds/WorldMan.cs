@@ -1,9 +1,10 @@
-﻿using OpenBreed.Common.Logging;
+﻿
+
+using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;
@@ -26,7 +27,6 @@ namespace OpenBreed.Wecs.Worlds
         private readonly IdMap<World> worlds = new IdMap<World>();
         private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
         private readonly IEntityMan entityMan;
-        private readonly ICommandsMan commandsMan;
         private readonly IEventsMan eventsMan;
         private readonly IScriptMan scriptMan;
         private readonly ILogger logger;
@@ -35,18 +35,54 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Constructors
 
-        internal WorldMan(IEntityMan entityMan, ICommandsMan commandsMan, IEventsMan eventsMan, IScriptMan scriptMan, ILogger logger)
+        internal WorldMan(IEntityMan entityMan, IEventsMan eventsMan, IScriptMan scriptMan, ILogger logger)
         {
             this.entityMan = entityMan;
-            this.commandsMan = commandsMan;
             this.eventsMan = eventsMan;
             this.scriptMan = scriptMan;
             this.logger = logger;
             Items = worlds.Items;
 
-            commandsMan.Register<PauseWorldCommand>(HandlePauseWorld);
-            commandsMan.Register<RemoveEntityCommand>(HandleRemoveEntity);
-            commandsMan.Register<AddEntityCommand>(HandleAddEntity);
+            entityMan.ComponentAdded += EntityMan_ComponentAdded;
+            entityMan.ComponentRemoved += EntityMan_ComponentRemoved;
+            entityMan.EnterWorldRequested += EntityMan_EnterWorldRequested;
+            entityMan.LeaveWorldRequested += EntityMan_LeaveWorldRequested;
+        }
+
+        private void EntityMan_EnterWorldRequested(Entity entity, int worldId)
+        {
+            var world = GetById(worldId);
+            world.AddEntity(entity);
+        }
+
+        private void EntityMan_LeaveWorldRequested(Entity entity)
+        {
+            var world = GetById(entity.WorldId);
+            world.RemoveEntity(entity);
+        }
+
+        private void EntityMan_ComponentRemoved(Entity entity, Type componentType)
+        {
+            if (entity.WorldId == World.NO_WORLD)
+                return;
+
+            var world = GetById(entity.WorldId);
+
+            world.UpdateRemove(entity, componentType);
+
+            //world.RemoveFromSystems(entity, componentType);
+        }
+
+        private void EntityMan_ComponentAdded(Entity entity, Type componentType)
+        {
+            if (entity.WorldId == World.NO_WORLD)
+                return;
+
+            var world = GetById(entity.WorldId);
+
+            world.UpdateAdd(entity, componentType);
+
+            //world.AddToSystems(entity, componentType);
         }
 
         #endregion Internal Constructors
@@ -199,39 +235,6 @@ namespace OpenBreed.Wecs.Worlds
                 }
                 //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
             }
-        }
-
-        private bool HandleRemoveEntity(RemoveEntityCommand cmd)
-        {
-            var world = GetById(cmd.WorldId);
-            var entity = entityMan.GetById(cmd.EntityId);
-            world.RemoveEntity(entity);
-            return true;
-        }
-
-        private bool HandleAddEntity(AddEntityCommand cmd)
-        {
-            var world = GetById(cmd.WorldId);
-            var entity = entityMan.GetById(cmd.EntityId);
-            world.AddEntity(entity);
-            return true;
-        }
-
-        private bool HandlePauseWorld(PauseWorldCommand cmd)
-        {
-            var world = GetById(cmd.WorldId);
-
-            if (cmd.Pause == world.Paused)
-                return true;
-
-            world.Paused = cmd.Pause;
-
-            if (world.Paused)
-                RaiseEvent(new WorldPausedEventArgs(world.Id));
-            else
-                RaiseEvent(new WorldUnpausedEventArgs(world.Id));
-
-            return true;
         }
 
         #endregion Private Methods

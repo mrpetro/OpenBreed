@@ -1,19 +1,10 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
+﻿using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
-using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -21,8 +12,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     {
         #region Private Fields
 
-        private readonly List<Entity> inactive = new List<Entity>();
-        private readonly List<Entity> active = new List<Entity>();
+        private readonly List<Entity> entities = new List<Entity>();
         private readonly ISpriteMan spriteMan;
 
         #endregion Private Fields
@@ -35,11 +25,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             RequireEntityWith<SpriteComponent>();
             RequireEntityWith<PositionComponent>();
-
-            RegisterHandler<SpriteOnCommand>(HandleSpriteOnCommand);
-            RegisterHandler<SpriteOffCommand>(HandleSpriteOffCommand);
-            RegisterHandler<SpriteSetCommand>(HandleSpriteSetCommand);
-            RegisterHandler<SpriteSetAtlasCommand>(HandleSpriteSetAtlasCommand);
         }
 
         #endregion Internal Constructors
@@ -48,8 +33,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            ExecuteCommands();
-
             //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
@@ -57,8 +40,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
             GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
             GL.Enable(EnableCap.Texture2D);
 
-            for (int i = 0; i < active.Count; i++)
-                RenderSprite(active[i], clipBox);
+            for (int i = 0; i < entities.Count; i++)
+                RenderSprite(entities[i], clipBox);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
@@ -69,69 +52,21 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Protected Methods
 
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
         protected override void OnAddEntity(Entity entity)
         {
-            active.Add(entity);
+            entities.Add(entity);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            active.Remove(entity);
+            entities.Remove(entity);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
-
-        private bool HandleSpriteOnCommand(SpriteOnCommand cmd)
-        {
-            var toActivate = inactive.FirstOrDefault(item => item.Id == cmd.EntityId);
-
-            if (toActivate != null)
-            {
-                active.Add(toActivate);
-                inactive.Remove(toActivate);
-            }
-
-            return true;
-        }
-
-        private bool HandleSpriteSetCommand(SpriteSetCommand cmd)
-        {
-            var toModify = active.FirstOrDefault(item => item.Id == cmd.EntityId);
-            if (toModify == null)
-                return false;
-
-            var sprite = toModify.Get<SpriteComponent>();
-            sprite.ImageId = cmd.ImageId;
-
-            return true;
-        }
-
-        private bool HandleSpriteSetAtlasCommand(SpriteSetAtlasCommand cmd)
-        {
-            var toModify = active.FirstOrDefault(item => item.Id == cmd.EntityId);
-            if (toModify == null)
-                return false;
-
-            var sprite = toModify.Get<SpriteComponent>();
-            sprite.AtlasId = cmd.AtlasId;
-
-            return true;
-        }
-
-        private bool HandleSpriteOffCommand(SpriteOffCommand cmd)
-        {
-            var toDeactivate = active.FirstOrDefault(item => item.Id == cmd.EntityId);
-
-            if (toDeactivate != null)
-            {
-                inactive.Add(toDeactivate);
-                active.Remove(toDeactivate);
-            }
-
-            return true;
-        }
 
         /// <summary>
         /// Draw this sprite to given viewport
@@ -139,14 +74,12 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         private void RenderSprite(Entity entity, Box2 clipBox)
         {
-            //var messaging = entity.TryGet<MessagingComponent>();
+            var spc = entity.Get<SpriteComponent>();
 
-            //if (messaging.Messages.Count > 0)
-            //{
-            //}
+            if (spc.Hidden)
+                return;
 
             var pos = entity.Get<PositionComponent>();
-            var spc = entity.Get<SpriteComponent>();
 
             spriteMan.Render(spc.AtlasId, spc.ImageId, spc.Origin, pos.Value, spc.Order, clipBox);
         }

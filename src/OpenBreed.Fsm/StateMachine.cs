@@ -122,7 +122,7 @@ namespace OpenBreed.Fsm
             if (stateData != null)
                 throw new InvalidOperationException("Initial state already set.");
 
-            stateData = new MachineState() { FsmId = Id, StateId = initialStateId };
+            stateData = new MachineState(Id, initialStateId);
             fsmComponent.States.Add(stateData);
 
             //var state = states[initialState];

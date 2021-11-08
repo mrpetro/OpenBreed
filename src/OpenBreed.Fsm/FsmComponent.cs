@@ -119,7 +119,7 @@ namespace OpenBreed.Fsm
 
             var stateId = fsm.GetStateIdByName(stateName);
 
-            States.Add(new MachineState() { FsmId = fsm.Id, StateId = stateId });
+            States.Add(new MachineState(fsm.Id, stateId));
         }
 
         #endregion Public Methods

@@ -1,34 +1,44 @@
 ﻿using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Core;
 using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace OpenBreed.Wecs.Entities
 {
-    public class EntityMan : IEntityMan
+    internal class EntityMan : IEntityMan
     {
         #region Private Fields
 
         private readonly IdMap<Entity> entities = new IdMap<Entity>();
-        private readonly ICommandsMan commandsMan;
         private readonly IEventsMan eventsMan;
 
+        private readonly Dictionary<Type, List<(object, MethodInfo)>> eventTypes = new Dictionary<Type, List<(object, MethodInfo)>>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal EntityMan(ICommandsMan commandsMan, IEventsMan eventsMan)
+        internal EntityMan(IEventsMan eventsMan)
         {
-            this.commandsMan = commandsMan;
             this.eventsMan = eventsMan;
         }
 
         #endregion Internal Constructors
+
+        #region Public Events
+
+        public event ComponentAdded ComponentAdded;
+
+        public event ComponentRemoved ComponentRemoved;
+
+        public event EnteringWorld EnterWorldRequested;
+
+        public event LeavingWorld LeaveWorldRequested;
+
+        #endregion Public Events
 
         #region Public Properties
 
@@ -58,24 +68,70 @@ namespace OpenBreed.Wecs.Entities
 
         public Entity Create(List<IEntityComponent> initialComponents = null)
         {
-            var newEntity = new Entity(eventsMan, initialComponents);
+            var newEntity = new Entity(this, initialComponents);
             newEntity.Id = entities.Add(newEntity);
             return newEntity;
         }
 
-        public void Destroy(Entity entity)
+        public void Subscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs
         {
-            //worldMan.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
-            commandsMan.Post(new RemoveEntityCommand(entity.Id, entity.Id));
+            eventsMan.Subscribe<T>(entity, callback);
+        }
+
+        public void Unsubscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs
+        {
+            eventsMan.Unsubscribe<T>(entity, callback);
         }
 
         #endregion Public Methods
 
-        //private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)
-        //{
-        //    var entity = GetById(e.EntityId);
-        //    worldMan.Unsubscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
-        //    entities.RemoveById(entity.Id);
-        //}
+        #region Internal Methods
+
+        internal void RequestLeaveWorld(Entity entity)
+        {
+            LeaveWorldRequested?.Invoke(entity);
+        }
+
+        internal void RequestEnterWorld(Entity entity, int worldId)
+        {
+            EnterWorldRequested?.Invoke(entity, worldId);
+        }
+
+        internal void OnComponentAdded(Entity entity, Type componentType)
+        {
+            ComponentAdded?.Invoke(entity, componentType);
+        }
+
+        internal void OnComponentRemoved(Entity entity, Type componentType)
+        {
+            ComponentRemoved?.Invoke(entity, componentType);
+        }
+
+        internal void Raise<T>(Entity entity, T eventArgs) where T : EventArgs
+        {
+            NotifyListeners(entity, eventArgs.GetType(), eventArgs);
+
+            eventsMan.Raise<T>(entity, eventArgs);
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        private void NotifyListeners(object sender, Type eventType, EventArgs eventArgs)
+        {
+            List<(object Target, MethodInfo Method)> callbacks = null;
+
+            if (!eventTypes.TryGetValue(eventType, out callbacks))
+                return;
+
+            for (int i = 0; i < callbacks.Count; i++)
+            {
+                var item = callbacks[i];
+                item.Method.Invoke(item.Target, new object[] { sender, eventArgs });
+            }
+        }
+
+        #endregion Private Methods
     }
 }

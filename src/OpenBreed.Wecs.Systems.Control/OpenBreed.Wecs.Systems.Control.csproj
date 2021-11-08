@@ -72,13 +72,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\FollowedAddFollowerCommand.cs" />
-    <Compile Include="Commands\FollowerSetTargetCommand.cs" />
     <Compile Include="Events\ControlFireChangedEvenrArgs.cs" />
     <Compile Include="Events\ControlDirectionChangedEventArgs.cs" />
-    <Compile Include="Commands\AttackControlCommand.cs" />
-    <Compile Include="Commands\WalkingControlCommand.cs" />
     <Compile Include="AiControlSystem.cs" />
+    <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Handlers\ButtonInputHandler.cs" />
     <Compile Include="AttackControllerSystem.cs" />

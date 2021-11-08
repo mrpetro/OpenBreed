@@ -1,16 +1,8 @@
 ﻿using OpenBreed.Common.Logging;
-using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Core.Events;
-using OpenBreed.Wecs.Worlds;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Core
@@ -19,7 +11,7 @@ namespace OpenBreed.Wecs.Systems.Core
     {
         #region Private Fields
 
-        private readonly List<int> entities = new List<int>();
+        private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
         private readonly ILogger logger;
 
@@ -33,8 +25,6 @@ namespace OpenBreed.Wecs.Systems.Core
             this.logger = logger;
 
             RequireEntityWith<TimerComponent>();
-            RegisterHandler<TimerStartCommand>(HandleTimerStartCommand);
-            RegisterHandler<TimerStopCommand>(HandleTimerStopCommand);
         }
 
         #endregion Internal Constructors
@@ -43,25 +33,18 @@ namespace OpenBreed.Wecs.Systems.Core
 
         public void Update(float dt)
         {
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = entityMan.GetById(entities[i]);
-                Debug.Assert(entity != null);
-
-                Update(entity, dt);
+                Update(entities[i], dt);
             }
         }
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = entityMan.GetById(entities[i]);
-                if (entity.Components.OfType<PauseImmuneComponent>().Any())
+                var entity = entities[i];
+                if (entity.ComponentValues.OfType<PauseImmuneComponent>().Any())
                     Update(entity, dt);
             }
         }
@@ -70,73 +53,21 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
         protected override void OnAddEntity(Entity entity)
         {
-            entities.Add(entity.Id);
+            entities.Add(entity);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            var index = entities.IndexOf(entity.Id);
-
-            if (index < 0)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            entities.RemoveAt(index);
+            entities.Remove(entity);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
-
-        private bool HandleTimerStartCommand(TimerStartCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            var timerComponent = entity.Get<TimerComponent>();
-
-            if (timerComponent == null)
-            {
-                logger.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
-                return false;
-            }
-
-            var timerData = timerComponent.Items.FirstOrDefault(item => item.TimerId == cmd.TimerId);
-
-            if (timerData == null)
-            {
-                timerData = new TimerData(cmd.TimerId, cmd.Interval);
-                timerComponent.Items.Add(timerData);
-            }
-            else
-                timerData.Interval = cmd.Interval;
-
-            timerData.Enabled = true;
-
-            return true;
-        }
-
-        private bool HandleTimerStopCommand(TimerStopCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            var timerComponent = entity.Get<TimerComponent>();
-
-            if (timerComponent == null)
-            {
-                logger.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
-                return false;
-            }
-
-            var timerData = timerComponent.Items.FirstOrDefault(item => item.TimerId == cmd.TimerId);
-
-            if (timerData == null)
-                return true;
-
-            timerData.Enabled = false;
-
-            return true;
-        }
 
         private void Update(Entity entity, float dt)
         {

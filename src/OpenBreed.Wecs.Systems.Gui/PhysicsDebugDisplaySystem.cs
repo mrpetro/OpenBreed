@@ -1,22 +1,13 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Input.Interface;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Components.Gui;
-using OpenBreed.Wecs.Components.Physics;
-
+﻿using OpenBreed.Physics.Interface;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
+using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using OpenTK;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Gui
 {
@@ -24,8 +15,11 @@ namespace OpenBreed.Wecs.Systems.Gui
     {
         #region Private Fields
 
-        private List<Entity> entities = new List<Entity>();
         private readonly IPrimitiveRenderer primitiveRenderer;
+
+        private List<Entity> entities = new List<Entity>();
+
+        private IBroadphaseDynamic broadphaseDynamic;
 
         #endregion Private Fields
 
@@ -47,8 +41,31 @@ namespace OpenBreed.Wecs.Systems.Gui
         {
             base.Initialize(world);
 
-            //inputsMan.MouseMove += Inputs_MouseMove;
+            broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
         }
+
+        public void Render(Box2 clipBox, int depth, float dt)
+        {
+            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
+            GL.Enable(EnableCap.Blend);
+            GL.Enable(EnableCap.AlphaTest);
+            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
+            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
+            GL.Enable(EnableCap.Texture2D);
+
+            for (int i = 0; i < entities.Count; i++)
+                DrawDynamicEntityAabb(entities[i], clipBox);
+
+            GL.Disable(EnableCap.Texture2D);
+            GL.Disable(EnableCap.AlphaTest);
+            GL.Disable(EnableCap.Blend);
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         //private void Inputs_MouseMove(object sender, OpenTK.Input.MouseMoveEventArgs e)
         //{
@@ -68,16 +85,10 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         //        var pos = entities[i].Get<PositionComponent>();
 
-
         //        var coord = viewportSystem.ClientToWorld(new OpenTK.Vector4(e.X, e.Y, 0.0f, 1.0f), gameViewport);
         //        pos.Value = new OpenTK.Vector2(coord.X, coord.Y);
         //    }
         //}
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
         protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
@@ -88,36 +99,19 @@ namespace OpenBreed.Wecs.Systems.Gui
             entities.Remove(entity);
         }
 
-        public void Render(Box2 clipBox, int depth, float dt)
-        {
-            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
-            GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
-            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
-            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
-            GL.Enable(EnableCap.Texture2D);
+        #endregion Protected Methods
 
-            for (int i = 0; i < entities.Count; i++)
-                DrawEntityAabb(entities[i], clipBox);
+        #region Private Methods
 
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
-            GL.Disable(EnableCap.Blend);
-        }
-
-        /// <summary>
-        /// Draw this wireframe to given viewport
-        /// </summary>
-        /// <param name="viewport">Viewport which entity wireframe will be rendered to</param>
-        private void DrawEntityAabb(Entity entity, Box2 clipBox)
+        private void DrawDynamicEntityAabb(Entity entity, Box2 clipBox)
         {
             var posCmp = entity.Get<PositionComponent>();
             var bodyCmp = entity.Get<BodyComponent>();
 
-            if (bodyCmp.Tag != "Dynamic")
+            if (!entity.Contains<VelocityComponent>())
                 return;
 
-            var aabb = bodyCmp.Aabb;
+            var aabb = broadphaseDynamic.GetAabb(entity.Id);
 
             //Test viewport for clippling here
             if (aabb.Right < clipBox.Left)
@@ -132,12 +126,11 @@ namespace OpenBreed.Wecs.Systems.Gui
             if (aabb.Bottom > clipBox.Top)
                 return;
 
-
             // Draw black box
             GL.Color4(Color4.Green);
-            primitiveRenderer.DrawRectangle(bodyCmp.Aabb);
+            primitiveRenderer.DrawRectangle(aabb);
         }
 
-        #endregion Protected Methods
+        #endregion Private Methods
     }
 }

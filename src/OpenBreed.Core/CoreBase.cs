@@ -20,7 +20,6 @@ namespace OpenBreed.Core
             this.manCollection = manCollection;
             manCollection.AddSingleton<ICore>(this);
 
-            Commands = manCollection.GetManager<ICommandsMan>();
             Events = manCollection.GetManager<IEventsMan>();
             Logging = manCollection.GetManager<ILogger>();
         }
@@ -29,7 +28,6 @@ namespace OpenBreed.Core
 
         #region Public Properties
 
-        public ICommandsMan Commands { get; }
         public IEventsMan Events { get; }
         public ILogger Logging { get; }
 

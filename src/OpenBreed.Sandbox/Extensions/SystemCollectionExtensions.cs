@@ -47,7 +47,6 @@ namespace OpenBreed.Sandbox.Extensions
 
             scriptMan.Expose("Worlds", manCollection.GetManager<IWorldMan>());
             scriptMan.Expose("Entities", manCollection.GetManager<IEntityMan>());
-            scriptMan.Expose("Commands", manCollection.GetManager<ICommandsMan>());
             scriptMan.Expose("Inputs", manCollection.GetManager<IInputsMan>());
             scriptMan.Expose("Logging", manCollection.GetManager<ILogger>());
             scriptMan.Expose("Players", manCollection.GetManager<IPlayersMan>());
@@ -59,7 +58,7 @@ namespace OpenBreed.Sandbox.Extensions
                                                                               manCollection.GetManager<IBuilderFactory>()));
 
             manCollection.AddTransient<WorldBlockBuilder>(() => new WorldBlockBuilder(manCollection.GetManager<ITileMan>(),
-                                                                                      manCollection.GetManager<IFixtureMan>(),
+                                                                                      manCollection.GetManager<IShapeMan>(),
                                                                                       manCollection.GetManager<IEntityMan>(),
                                                                                       manCollection.GetManager<IBuilderFactory>()));
         }
@@ -104,14 +103,13 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<ISystemFactory>(),
                                                               managerCollection.GetManager<IWorldMan>(),
                                                               managerCollection.GetManager<WorldBlockBuilder>(),
-                                                              managerCollection.GetManager<ICommandsMan>(),
                                                               managerCollection.GetManager<PalettesDataProvider>(),
                                                               managerCollection.GetManager<IEntityFactoryProvider>(),
-                                                              managerCollection.GetManager<IBroadphaseGridFactory>(),
+                                                              managerCollection.GetManager<IBroadphaseFactory>(),
                                                               managerCollection.GetManager<ITileGridFactory>());
 
-                mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
-                mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader(managerCollection.GetManager<ICommandsMan>()));
+                mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader());
+                mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader());
 
                 var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetManager<EnvironmentHelper>());
                 mapWorldDataLoader.Register(AnimatedCellLoader.TV_FLICKERING_CODE, environmentCellLoader);
@@ -173,7 +171,9 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<DynamicBodiesAabbUpdaterSystem>());
             builder.AddSystem(systemFactory.Create<DynamicBodiesCollisionCheckSystem>());
             builder.AddSystem(systemFactory.Create<StaticBodiesSystem>());
-            builder.AddSystem(systemFactory.Create<AnimationSystem>());
+            //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
+
+            builder.AddSystem(systemFactory.Create<AnimatorSystem>());
             builder.AddSystem(systemFactory.Create<TimerSystem>());
             builder.AddSystem(systemFactory.Create<FsmSystem>());
 
@@ -181,6 +181,7 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
+            builder.AddSystem(systemFactory.Create<StampSystem>());
             builder.AddSystem(systemFactory.Create<TileSystem>());
             builder.AddSystem(systemFactory.Create<SpriteSystem>());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
@@ -224,8 +225,7 @@ namespace OpenBreed.Sandbox.Extensions
         public static void SetupSpriteComponentAnimator(this IManagerCollection managerCollection)
         {
             new SpriteComponentAnimator(managerCollection.GetManager<IFrameUpdaterMan>(),
-                                        managerCollection.GetManager<ISpriteMan>(),
-                                        managerCollection.GetManager<ICommandsMan>());
+                                        managerCollection.GetManager<ISpriteMan>());
         }
 
         #endregion Public Methods

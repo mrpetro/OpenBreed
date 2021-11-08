@@ -1,11 +1,11 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
-using OpenBreed.Wecs.Systems.Core.Commands;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
@@ -20,16 +20,14 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public IdleState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public IdleState(IFsmMan fsmMan)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -45,26 +43,29 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         public void EnterState(Entity entity)
         {
-            commandsMan.Post(new SpriteOnCommand(entity.Id));
-            commandsMan.Post(new PlayAnimCommand(entity.Id, "NotUsedYet", 0));
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
+            entity.SetSpriteOn();
 
-            entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
+            //entity.PlayAnimation(0, "NotUsedYet");
+            //commandsMan.Post(new PlayAnimCommand(entity.Id, "NotUsedYet", 0));
+
+            entity.SetText(0, "Door - Opening");
+
+            entity.Subscribe<AnimFinishedEventArgs>(OnAnimStopped);
         }
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
+            entity.Unsubscribe<AnimFinishedEventArgs>(OnAnimStopped);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
+        private void OnAnimStopped(object sender, AnimFinishedEventArgs eventArgs)
         {
             var entity = sender as Entity;
-            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Press));
+            entity.SetState(FsmId, (int)ButtonImpulse.Press);
         }
 
         #endregion Private Methods

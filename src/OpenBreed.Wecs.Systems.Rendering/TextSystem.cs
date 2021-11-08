@@ -1,22 +1,12 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
-using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -33,7 +23,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Internal Constructors
 
-        internal TextSystem(IEntityMan entityMan, IFontMan fontMan, ILogger logger )
+        internal TextSystem(IEntityMan entityMan, IFontMan fontMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.fontMan = fontMan;
@@ -41,8 +31,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             RequireEntityWith<TextComponent>();
             RequireEntityWith<PositionComponent>();
-
-            RegisterHandler<TextSetCommand>(HandleTextSetCommand);
         }
 
         #endregion Internal Constructors
@@ -51,8 +39,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            ExecuteCommands();
-
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
@@ -71,6 +57,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {
@@ -105,24 +93,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             GL.PopMatrix();
             GL.Disable(EnableCap.Texture2D);
-        }
-
-        private bool HandleTextSetCommand(TextSetCommand cmd)
-        {
-            var toModify = entityMan.GetById(cmd.EntityId);
-            if (toModify == null)
-                return false;
-
-            var text = toModify.Get<TextComponent>();
-
-            if (cmd.PartId < 0 || cmd.PartId >= text.Parts.Count)
-            {
-                logger.Error($"Unknown text part ID({cmd.PartId}) to modify.");
-            }
-
-            text.Parts[cmd.PartId].Text = cmd.Text;
-
-            return true;
         }
 
         #endregion Private Methods

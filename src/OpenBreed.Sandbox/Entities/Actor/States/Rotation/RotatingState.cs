@@ -1,29 +1,21 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Sandbox.Helpers;
-using System;
-using System.Linq;
-using OpenBreed.Fsm;
+﻿using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
     public class RotatingState : IState<RotationState, RotationImpulse>
     {
-        private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
         #region Private Fields
+
+        private readonly IFsmMan fsmMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RotatingState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public RotatingState(IFsmMan fsmMan)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -50,7 +42,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             //entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{movementStateName}/{animDirName}", 0));
 
             //var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
-            //entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             //entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Stop));
         }

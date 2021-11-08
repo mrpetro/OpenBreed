@@ -1,15 +1,15 @@
-﻿using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenTK;
+﻿using OpenTK;
 using System.Linq;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Physics.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -19,18 +19,16 @@ namespace OpenBreed.Sandbox.Components.States
 
         private readonly string stampPrefix;
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
         private readonly IStampMan stampMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenedState(IFsmMan fsmMan, ICommandsMan commandsMan, IStampMan stampMan)
+        public OpenedState(IFsmMan fsmMan, IStampMan stampMan)
         {
             this.stampPrefix = "Tiles/Stamps";
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
             this.stampMan = stampMan;
         }
 
@@ -47,8 +45,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
-            commandsMan.Post(new SpriteOffCommand(entity.Id));
-            commandsMan.Post(new BodyOffCommand(entity.Id));
+            entity.SetSpriteOff();
+            entity.SetBodyOff();
 
             var pos = entity.Get<PositionComponent>();
 
@@ -57,10 +55,10 @@ namespace OpenBreed.Sandbox.Components.States
             var className = entity.Get<ClassComponent>().Name;
             var stateName = fsmMan.GetStateName(FsmId, Id);
             var stampId = stampMan.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
-            commandsMan.Post(new PutStampCommand(entity.Id, stampId, 0, pos.Value));
 
+            entity.PutStamp(stampId, 0, pos.Value);
 
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));
+            entity.SetText(0, "Door - Opened");
         }
 
         public void LeaveState(Entity entity)

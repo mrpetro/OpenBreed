@@ -17,8 +17,6 @@ namespace OpenBreed.Core
         {
             manCollection.AddSingleton<ILogger>(() => new DefaultLogger());
 
-            manCollection.AddSingleton<ICommandsMan>(() => new CommandsMan(manCollection.GetManager<ILogger>()));
-
             manCollection.AddSingleton<IEventsMan>(() => new EventsMan());
 
             manCollection.AddSingleton<IJobsMan>(() => new JobsMan());

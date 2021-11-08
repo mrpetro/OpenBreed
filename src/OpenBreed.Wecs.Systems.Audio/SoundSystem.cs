@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems;
+using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Audio
 {
@@ -15,11 +13,20 @@ namespace OpenBreed.Wecs.Systems.Audio
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal SoundSystem()
         {
             components = new List<IEntityComponent>();
+        }
+
+        #endregion Internal Constructors
+
+        #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity)
+        {
+            throw new NotImplementedException();
         }
 
         protected override void OnAddEntity(Entity entity)
@@ -32,7 +39,6 @@ namespace OpenBreed.Wecs.Systems.Audio
             throw new NotImplementedException();
         }
 
-        #endregion Public Constructors
-
+        #endregion Protected Methods
     }
 }

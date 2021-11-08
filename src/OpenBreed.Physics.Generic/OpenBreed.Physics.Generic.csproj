@@ -74,10 +74,10 @@
   <ItemGroup>
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\ColliderType.cs" />
-    <Compile Include="Managers\BroadphaseGrid.cs" />
-    <Compile Include="Managers\BroadphaseGridFactory.cs" />
+    <Compile Include="Managers\BroadphaseDynamicSwepAndPrune.cs" />
+    <Compile Include="Managers\BroadphaseStaticGrid.cs" />
+    <Compile Include="Managers\BroadphaseFactory.cs" />
     <Compile Include="Managers\CollisionMan.cs" />
-    <Compile Include="Managers\FixtureMan.cs" />
     <Compile Include="Managers\ShapeMan.cs" />
     <Compile Include="Helpers\MaterialTable.cs" />
     <Compile Include="Shapes\PointShape.cs" />

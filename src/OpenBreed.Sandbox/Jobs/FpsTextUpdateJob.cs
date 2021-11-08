@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Rendering.Interface;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Jobs
 {
@@ -46,7 +46,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            core.GetManager<ICommandsMan>().Post(new TextSetCommand(entity.Id, 0, $"FPS: {core.GetManager<IRenderingMan>().Fps.ToString("0.00")}"));
+            entity.SetText(0, $"FPS: {core.GetManager<IRenderingMan>().Fps.ToString("0.00")}");
         }
 
         public void Dispose()

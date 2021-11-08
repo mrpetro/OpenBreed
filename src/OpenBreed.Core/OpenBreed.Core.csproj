@@ -90,11 +90,9 @@
     <Compile Include="Managers\IEventHandler.cs" />
     <Compile Include="Managers\IEventQueue.cs" />
     <Compile Include="Managers\IEventsMan.cs" />
-    <Compile Include="Managers\ICommandsMan.cs" />
     <Compile Include="IJob.cs" />
     <Compile Include="Managers\EventsMan.cs" />
     <Compile Include="Helpers\MovementTools.cs" />
-    <Compile Include="Managers\CommandsMan.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="JobChain.cs" />
     <Compile Include="Managers\IJobsMan.cs" />

@@ -3,7 +3,6 @@ using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Components.States;
@@ -23,7 +22,6 @@ using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
@@ -36,13 +34,11 @@ namespace OpenBreed.Sandbox.Entities.Door
     {
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
-        private readonly ICommandsMan commandMan;
 
-        public DoorHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, ICommandsMan commandMan)
+        public DoorHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
         {
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
-            this.commandMan = commandMan;
         }
 
         public void LoadAnimations()
@@ -61,9 +57,8 @@ namespace OpenBreed.Sandbox.Entities.Door
             var door = entityFactory.Create(doorVerticalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            door.Add(new CollisionComponent());
 
-            commandMan.Post(new AddEntityCommand(world.Id, door.Id));
+            door.EnterWorld(world.Id);
         }
 
         public void AddHorizontalDoor(World world, int x, int y)
@@ -72,9 +67,8 @@ namespace OpenBreed.Sandbox.Entities.Door
             var door = entityFactory.Create(doorHorizontalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            door.Add(new CollisionComponent());
 
-            commandMan.Post(new AddEntityCommand(world.Id, door.Id));
+            door.EnterWorld(world.Id);
         }
 
         public void LoadStamps()

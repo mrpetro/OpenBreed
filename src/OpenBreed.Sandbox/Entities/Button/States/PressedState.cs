@@ -2,7 +2,7 @@
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
@@ -11,16 +11,14 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PressedState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public PressedState(IFsmMan fsmMan)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -36,11 +34,14 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         public void EnterState(Entity entity)
         {
-            commandsMan.Post(new SpriteOffCommand(entity.Id));
+            entity.SetSpriteOff();
 
             var pos = entity.Get<PositionComponent>();
-            commandsMan.Post(new PutStampCommand(entity.Id, 0, 0, pos.Value));
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
+
+            entity.PutStamp(0, 0, pos.Value);
+            //commandsMan.Post(new PutStampCommand(entity.Id, 0, 0, pos.Value));
+
+            entity.SetText(0, "Door - Closed");
 
             //entity.Subscribe<CollisionEventArgs>(OnCollision);
         }

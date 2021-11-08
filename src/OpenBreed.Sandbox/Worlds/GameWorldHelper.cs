@@ -27,8 +27,6 @@ using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Commands;
-using OpenBreed.Wecs.Systems.Control.Commands;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Input.Interface;
 using OpenBreed.Fsm;
@@ -47,16 +45,14 @@ namespace OpenBreed.Sandbox.Worlds
     public class GameWorldHelper
     {
         private readonly IPlayersMan playersMan;
-        private readonly ICommandsMan commandsMan;
         private readonly IEntityMan entityMan;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         private readonly ILogger logger;
 
-        public GameWorldHelper(IPlayersMan playersMan, ICommandsMan commandsMan, IEntityMan entityMan, ISystemFactory systemFactory, IWorldMan worldMan, ILogger logger)
+        public GameWorldHelper(IPlayersMan playersMan, IEntityMan entityMan, ISystemFactory systemFactory, IWorldMan worldMan, ILogger logger)
         {
             this.playersMan = playersMan;
-            this.commandsMan = commandsMan;
             this.entityMan = entityMan;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;

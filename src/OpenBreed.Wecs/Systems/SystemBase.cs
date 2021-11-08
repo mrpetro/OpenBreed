@@ -1,10 +1,10 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Commands;
+﻿using OpenBreed.Common;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems
@@ -13,15 +13,13 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Private Fields
 
-        private readonly List<Entity> toAdd = new List<Entity>();
+        private readonly HashSet<Entity> toAdd = new HashSet<Entity>();
 
-        private readonly List<Entity> toRemove = new List<Entity>();
+        private readonly HashSet<Entity> toRemove = new HashSet<Entity>();
 
         private readonly List<Type> requiredComponentTypes = new List<Type>();
 
         private readonly List<Type> forbiddenComponentTypes = new List<Type>();
-
-        private readonly Queue<IEntityCommand> commandQueue = new Queue<IEntityCommand>();
 
         private Dictionary<Type, Delegate> handlers = new Dictionary<Type, Delegate>();
 
@@ -32,6 +30,8 @@ namespace OpenBreed.Wecs.Systems
         protected SystemBase()
         {
             WorldId = World.NO_WORLD;
+
+            RequiredComponentTypes = new ReadOnlyCollection<Type>(requiredComponentTypes);
         }
 
         #endregion Protected Constructors
@@ -47,6 +47,8 @@ namespace OpenBreed.Wecs.Systems
         /// Id of the phase in which system will be updated
         /// </summary>
         public int PhaseId { get; }
+
+        public IReadOnlyCollection<Type> RequiredComponentTypes { get; }
 
         #endregion Public Properties
 
@@ -79,13 +81,13 @@ namespace OpenBreed.Wecs.Systems
         {
             foreach (var type in forbiddenComponentTypes)
             {
-                if (entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
+                if (entity.ComponentTypes.Any(item => type.IsAssignableFrom(item)))
                     return false;
             }
 
             foreach (var type in requiredComponentTypes)
             {
-                if (!entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
+                if (!entity.ComponentTypes.Any(item => type.IsAssignableFrom(item)))
                     return false;
             }
 
@@ -94,18 +96,19 @@ namespace OpenBreed.Wecs.Systems
 
         public void AddEntity(Entity entity)
         {
+            if (ContainsEntity(entity))
+            {
+                Console.WriteLine("Ass");
+            }
+
             toAdd.Add(entity);
         }
 
         public void RemoveEntity(Entity entity)
         {
-            toRemove.Add(entity);
-        }
 
-        public virtual bool EnqueueCommand(IEntityCommand command)
-        {
-            commandQueue.Enqueue(command);
-            return false;
+
+            toRemove.Add(entity);
         }
 
         public void Cleanup()
@@ -113,59 +116,31 @@ namespace OpenBreed.Wecs.Systems
             if (toRemove.Any())
             {
                 //Process entities to remove
-                for (int i = 0; i < toRemove.Count; i++)
-                    OnRemoveEntity((Entity)toRemove[i]);
-
+                toRemove.ForEach(entity => OnRemoveEntity(entity));
                 toRemove.Clear();
             }
 
             if (toAdd.Any())
             {
                 //Process entities to add
-                for (int i = 0; i < toAdd.Count; i++)
-                    OnAddEntity((Entity)toAdd[i]);
-
+                toAdd.ForEach(entity => OnAddEntity(entity));
                 toAdd.Clear();
             }
         }
 
-        public bool HandleCommand(ICommand cmd)
+        public bool HasEntity(Entity entity)
         {
-            return false;
+            if (toAdd.Contains(entity))
+                return true;
+
+            return ContainsEntity(entity);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected void RegisterHandler<TCommand>(Func<TCommand, bool> cmdHandler) where TCommand : IEntityCommand
-        {
-            handlers.Add(typeof(TCommand), cmdHandler);
-        }
-
-        protected virtual bool DenqueueCommand(IEntityCommand entityCommand)
-        {
-            if (handlers.TryGetValue(entityCommand.GetType(), out Delegate handler))
-            {
-                handler.DynamicInvoke(entityCommand);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        protected void ExecuteCommands()
-        {
-            while (commandQueue.Count > 0)
-            {
-                if (!DenqueueCommand(commandQueue.Dequeue()))
-                {
-                    //TODO: Log not handled command here
-                }
-            }
-        }
+        protected abstract bool ContainsEntity(Entity entity);
 
         protected abstract void OnRemoveEntity(Entity entity);
 

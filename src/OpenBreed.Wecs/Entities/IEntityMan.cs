@@ -1,16 +1,33 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components;
-using OpenBreed.Wecs.Entities;
+﻿using OpenBreed.Wecs.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Entities
 {
+    public delegate void ComponentAdded(Entity entity, Type componentType);
+
+    public delegate void ComponentRemoved(Entity entity, Type componentType);
+
+    public delegate void EnteringWorld(Entity entity, int worldId);
+
+    public delegate void LeavingWorld(Entity entity);
+
     public interface IEntityMan
     {
+        #region Public Events
+
+        event ComponentAdded ComponentAdded;
+
+        event ComponentRemoved ComponentRemoved;
+
+        event EnteringWorld EnterWorldRequested;
+
+        event LeavingWorld LeaveWorldRequested;
+
+        #endregion Public Events
+
+        #region Public Methods
+
         IEnumerable<Entity> GetByTag(object tag);
 
         IEnumerable<Entity> Where(Func<Entity, bool> predicate);
@@ -19,6 +36,10 @@ namespace OpenBreed.Wecs.Entities
 
         Entity Create(List<IEntityComponent> initialComponents = null);
 
-        void Destroy(Entity entity);
+        void Subscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs;
+
+        void Unsubscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs;
+
+        #endregion Public Methods
     }
 }

@@ -1,6 +1,4 @@
-﻿
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Sandbox.Helpers;
+﻿using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
 using System.Linq;
@@ -9,12 +7,14 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Fsm.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Animation.Interface;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -24,17 +24,17 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         private readonly string animPrefix;
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
+        private readonly IClipMan clipMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WalkingState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public WalkingState(IFsmMan fsmMan, IClipMan clipMan)
         {
             this.animPrefix = "Animations";
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
+            this.clipMan = clipMan;
         }
 
         #endregion Public Constructors
@@ -56,14 +56,13 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             entity.Get<ThrustComponent>().Value = control.Direction * movement.Acceleration;
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
-
             var stateName = fsmMan.GetStateName(FsmId, Id);
             var className = entity.Get<ClassComponent>().Name;
-            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirPostfix}", 0));
-
+            var clip = clipMan.GetByName($"{animPrefix}/{className}/{stateName}/{animDirPostfix}");
             var currentStateNames = fsmMan.GetStateNames(entity);
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
+            entity.PlayAnimation(0, clip.Id);
+            entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
             entity.Subscribe<DirectionChangedEventArgs>(OnDirectionChanged);
@@ -87,13 +86,14 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             var direction = entity.Get<AngularPositionComponent>();
             var movement = entity.Get<MotionComponent>();
-            //entity.Get<VelocityComponent>().Value = Vector2.Zero;
-            //entity.Get<ThrustComponent>().Value = direction.GetDirection() * movement.Acceleration;
             var animDirName = AnimHelper.ToDirectionName(direction.Value);
             var className = entity.Get<ClassComponent>().Name;
             var movementFsm = fsmMan.GetByName("Actor.Movement");
             var movementStateName = movementFsm.GetCurrentStateName(entity);
-            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{movementStateName}/{animDirName}", 0));
+
+            var clip = clipMan.GetByName($"{"Animations"}/{className}/{movementStateName}/{animDirName}");
+
+            entity.PlayAnimation(0, clip.Id);
         }
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
@@ -102,14 +102,15 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             if (e.Direction != Vector2.Zero)
             {
-                commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
+                entity.SetState(FsmId, (int)MovementImpulse.Walk);
+
                 var angularThrust = entity.Get<AngularVelocityComponent>();
                 angularThrust.Value = new Vector2(e.Direction.X, e.Direction.Y);
             }
             else
-                commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Stop));
-
-
+            {
+                entity.SetState(FsmId, (int)MovementImpulse.Stop);
+            }
         }
 
         #endregion Private Methods

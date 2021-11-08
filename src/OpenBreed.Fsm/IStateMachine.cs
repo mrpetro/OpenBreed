@@ -3,13 +3,22 @@ using System;
 
 namespace OpenBreed.Fsm
 {
-
     public class MachineState
     {
+        public const int NO_IMPULSE = -1;
+
+        public MachineState(int fsmId, int initialStateId)
+        {
+            FsmId = fsmId;
+            StateId = initialStateId;
+            ImpulseId = NO_IMPULSE;
+        }
+
         #region Public Fields
 
-        public int FsmId;
-        public int StateId;
+        public int FsmId { get; }
+        public int StateId { get; set; }
+        public int ImpulseId { get; set; }
 
         #endregion Public Fields
     }

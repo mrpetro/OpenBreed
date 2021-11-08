@@ -1,18 +1,7 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
+﻿using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Events;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Commands;
-using OpenBreed.Wecs.Systems.Control.Commands;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
@@ -22,21 +11,17 @@ namespace OpenBreed.Wecs.Systems.Control
 
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
-        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FollowerSystem(IEntityMan entityMan, ICommandsMan commandsMan)
+        public FollowerSystem(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
-            this.commandsMan = commandsMan;
 
             RequireEntityWith<FollowerComponent>();
             RequireEntityWith<PositionComponent>();
-
-            RegisterHandler<FollowedAddFollowerCommand>(HandleFollowedAddFollowerCommand);
         }
 
         #endregion Public Constructors
@@ -45,16 +30,59 @@ namespace OpenBreed.Wecs.Systems.Control
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
         }
 
         public void Update(float dt)
         {
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
                 Update(entities[i], dt);
         }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
+        protected override void OnAddEntity(Entity entity)
+        {
+            entities.Add(entity);
+
+            var fc = entity.Get<FollowerComponent>();
+
+            for (int i = 0; i < fc.FollowerIds.Count; i++)
+            {
+                var follower = entityMan.GetById(fc.FollowerIds[i]);
+
+                if (follower == null)
+                    continue;
+
+                follower.EnterWorld(WorldId);
+                //commandsMan.Post(new AddEntityCommand(WorldId, follower.Id));
+            }
+        }
+
+        protected override void OnRemoveEntity(Entity entity)
+        {
+            entities.Remove(entity);
+
+            var fc = entity.Get<FollowerComponent>();
+
+            for (int i = 0; i < fc.FollowerIds.Count; i++)
+            {
+                var follower = entityMan.GetById(fc.FollowerIds[i]);
+
+                if (follower == null)
+                    continue;
+
+                follower.LeaveWorld();
+                //commandsMan.Post(new RemoveEntityCommand(WorldId, follower.Id));
+            }
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void Update(Entity entity, float dt)
         {
@@ -86,57 +114,6 @@ namespace OpenBreed.Wecs.Systems.Control
             var followerPos = follower.Get<PositionComponent>();
 
             followerPos.Value = followedPos.Value;
-        }
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
-        protected override void OnAddEntity(Entity entity)
-        {
-            entities.Add(entity);
-
-            var fc = entity.Get<FollowerComponent>();
-
-            for (int i = 0; i < fc.FollowerIds.Count; i++)
-            {
-                var follower = entityMan.GetById(fc.FollowerIds[i]);
-
-                if (follower == null)
-                    continue;
-
-                commandsMan.Post(new AddEntityCommand(WorldId, follower.Id));
-            }
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
-
-            var fc = entity.Get<FollowerComponent>();
-
-            for (int i = 0; i < fc.FollowerIds.Count; i++)
-            {
-                var follower = entityMan.GetById(fc.FollowerIds[i]);
-
-                if (follower == null)
-                    continue;
-
-                commandsMan.Post(new RemoveEntityCommand(WorldId, follower.Id));
-            }
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private bool HandleFollowedAddFollowerCommand(FollowedAddFollowerCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-            var fc = entity.Get<FollowerComponent>();
-            fc.FollowerIds.Add(cmd.FollowerEntityId);
-
-            return true;
         }
 
         #endregion Private Methods

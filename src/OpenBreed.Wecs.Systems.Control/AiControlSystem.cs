@@ -18,7 +18,9 @@ namespace OpenBreed.Wecs.Systems.Control
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+
         private readonly List<AiControl> aiControlComps = new List<AiControl>();
+
         private readonly List<PositionComponent> positionComps = new List<PositionComponent>();
 
         #endregion Private Fields
@@ -48,6 +50,8 @@ namespace OpenBreed.Wecs.Systems.Control
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {

@@ -1,18 +1,9 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Events;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Fsm;
+using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
-using OpenBreed.Fsm;
-using OpenBreed.Common.Logging;
-using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -29,14 +20,13 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Constructors
 
-        public FsmSystem(IEntityMan entityMan, ICommandsMan commandsMan, IFsmMan fsmMan, ILogger logger)
+        public FsmSystem(IEntityMan entityMan, IFsmMan fsmMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.fsmMan = fsmMan;
             this.logger = logger;
 
             RequireEntityWith<FsmComponent>();
-            RegisterHandler<SetEntityStateCommand>(HandleSetStateCommand);
         }
 
         #endregion Public Constructors
@@ -45,32 +35,39 @@ namespace OpenBreed.Wecs.Systems.Core
 
         public void Update(float dt)
         {
-            ExecuteCommands();
+            foreach (var entity in entities)
+            {
+                var fsmCmp = entity.Get<FsmComponent>();
+
+                var toUpdate = fsmCmp.States.Where(state => state.ImpulseId != MachineState.NO_IMPULSE);
+
+                foreach (var machineState in toUpdate)
+                {
+                    UpdateWithImpulse(entity, machineState);
+                }
+            }
         }
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
+
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
         protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
 
             InitializeComponent(entity);
-            //World.Subscribe<EntityAddedEventArgs>(OnEntityEnteredWorld);
-            //entity.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            //World.Unsubscribe<EntityAddedEventArgs>(OnEntityEnteredWorld);
-            //entity.Unsubscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
-
             var index = entities.IndexOf(entity);
 
             if (index < 0)
@@ -99,44 +96,35 @@ namespace OpenBreed.Wecs.Systems.Core
                 fsmMan.EnterState(entity, state, 0);
         }
 
-        private bool HandleSetStateCommand(SetEntityStateCommand cmd)
+        private void UpdateWithImpulse(Entity entity, MachineState machineState)
         {
-            var entity = entityMan.GetById(cmd.EntityId);
+            var impulseId = machineState.ImpulseId;
 
-            var fsmComponent = entity.Get<FsmComponent>();
-
-            if (fsmComponent == null)
+            try
             {
-                logger.Warning($"Entity '{cmd.EntityId}' has missing FSM component.");
-                return false;
+                var fsm = fsmMan.GetById(machineState.FsmId);
+
+                fsmMan.LeaveState(entity, machineState, impulseId);
+                var nextStateId = fsm.GetNextStateId(machineState.StateId, impulseId);
+
+                if (nextStateId == -1)
+                {
+                    var fromStateName = fsm.GetStateName(machineState.StateId);
+                    var impulseName = fsm.GetImpulseName(impulseId);
+
+                    logger.Warning($"Entity '{entity.Id}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
+                    return;
+                }
+
+                machineState.StateId = nextStateId;
+                fsmMan.EnterState(entity, machineState, impulseId);
             }
-
-            var fsm = fsmMan.GetById(cmd.FsmId);
-
-            var fsmData = fsmComponent.States.FirstOrDefault(item => item.FsmId == cmd.FsmId);
-
-            if (fsmData == null)
+            finally
             {
-                logger.Warning($"Entity '{cmd.EntityId}' has missing data for FSM '{fsm.Name}'.");
-                return false;
+                //Check if impulse was changed already in EnterState
+                if (impulseId == machineState.ImpulseId)
+                    machineState.ImpulseId = MachineState.NO_IMPULSE;
             }
-
-            fsmMan.LeaveState(entity, fsmData, cmd.ImpulseId);
-            var nextStateId = fsm.GetNextStateId(fsmData.StateId, cmd.ImpulseId);
-
-            if (nextStateId == -1)
-            {
-                var fromStateName = fsm.GetStateName(fsmData.StateId);
-                var impulseName = fsm.GetImpulseName(cmd.ImpulseId);
-
-                logger.Warning($"Entity '{cmd.EntityId}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
-                return false;
-            }
-
-            fsmData.StateId = nextStateId;
-            fsmMan.EnterState(entity, fsmData, cmd.ImpulseId);
-
-            return true;
         }
 
         #endregion Private Methods

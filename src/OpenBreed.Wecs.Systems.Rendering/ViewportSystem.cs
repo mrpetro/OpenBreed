@@ -1,12 +1,9 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
@@ -49,8 +46,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.viewClient = viewClient;
             RequireEntityWith<ViewportComponent>();
             RequireEntityWith<PositionComponent>();
-
-            RegisterHandler<ViewportResizeCommand>(HandleViewportResizeCommand);
         }
 
         #endregion Internal Constructors
@@ -144,8 +139,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             depth++;
 
-            ExecuteCommands();
-
             for (int i = 0; i < entities.Count; i++)
                 RenderViewport(entities[i], clipBox, depth, dt);
         }
@@ -153,6 +146,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {
@@ -167,26 +162,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Protected Methods
 
         #region Private Methods
-
-        private bool HandleViewportResizeCommand(ViewportResizeCommand cmd)
-        {
-            var toResize = entityMan.GetById(cmd.EntityId);
-
-            if (toResize != null)
-            {
-                var vpc = toResize.Get<ViewportComponent>();
-
-                if (vpc.Width == cmd.Width && vpc.Height == cmd.Height)
-                    return true;
-
-                vpc.Width = cmd.Width;
-                vpc.Height = cmd.Height;
-
-                toResize.RaiseEvent(new ViewportResizedEventArgs(vpc.Width, vpc.Height));
-            }
-
-            return true;
-        }
 
         private void GetVisibleRectangle(Entity camera, Matrix4 cameraT, out Box2 viewBox)
         {

@@ -3,7 +3,6 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
@@ -43,9 +42,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.stampMan = stampMan;
             RequireEntityWith<TileComponent>();
             RequireEntityWith<PositionComponent>();
-
-            RegisterHandler<TileSetCommand>(HandleTileSetCommand);
-            RegisterHandler<PutStampCommand>(HandlePutStampCommand);
         }
 
         #endregion Internal Constructors
@@ -61,14 +57,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            ExecuteCommands();
-
             tileGrid.Render(clipBox);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {
@@ -89,25 +85,5 @@ namespace OpenBreed.Wecs.Systems.Rendering
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
-
-        private bool HandleTileSetCommand(TileSetCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            tileGrid.ModifyTile(cmd.Position, cmd.AtlasId, cmd.ImageId);
-
-            return true;
-        }
-
-        private bool HandlePutStampCommand(PutStampCommand cmd)
-        {
-            tileGrid.ModifyTiles(cmd.Position, cmd.StampId);
-
-            return true;
-        }
-
-        #endregion Private Methods
     }
 }

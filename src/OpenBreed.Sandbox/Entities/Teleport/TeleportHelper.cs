@@ -5,16 +5,15 @@ using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Camera;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Events;
-using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
@@ -62,47 +61,45 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         private const string ANIMATION_TELEPORT_ENTRY = "Animations/Teleport/Entry";
 
         private const string ANIMATION_TELEPORT_EXIT = "Animations/Teleport/Exit";
-
+        private readonly IClipMan clipMan;
         private readonly IWorldMan worldMan;
 
         private readonly IEntityMan entityMan;
 
         private readonly IEntityFactory entityFactory;
 
-        private readonly ICommandsMan commandsMan;
-
         private readonly IEventsMan eventsMan;
 
         private readonly ICollisionMan collisionMan;
         private readonly IBuilderFactory builderFactory;
         private readonly IJobsMan jobMan;
+        private readonly IShapeMan shapeMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TeleportHelper(IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, ICommandsMan commandsMan, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan)
+        public TeleportHelper(IClipMan clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IShapeMan shapeMan)
         {
+            this.clipMan = clipMan;
             this.worldMan = worldMan;
             this.entityMan = entityMan;
             this.entityFactory = entityFactory;
-            this.commandsMan = commandsMan;
             this.eventsMan = eventsMan;
             this.collisionMan = collisionMan;
             this.builderFactory = builderFactory;
             this.jobMan = jobMan;
+            this.shapeMan = shapeMan;
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public static void CreateAnimations(ICore core)
+        public void CreateAnimations()
         {
-            var animations = core.GetManager<IClipMan>();
-
-            var animationTeleportEntry = animations.CreateClip(ANIMATION_TELEPORT_ENTRY, 4.0f);
-            var te = animationTeleportEntry.AddTrack<int>(FrameInterpolation.None, (e, nv) => OnFrameUpdate(core, e, nv), 0);
+            var animationTeleportEntry = clipMan.CreateClip(ANIMATION_TELEPORT_ENTRY, 4.0f);
+            var te = animationTeleportEntry.AddTrack<int>(FrameInterpolation.None, (e, nv) => OnFrameUpdate(e, nv), 0);
             te.AddFrame(0, 1.0f);
             te.AddFrame(1, 2.0f);
             te.AddFrame(2, 3.0f);
@@ -117,21 +114,20 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportEntry.Tag = new TeleportPair { Id = pairId, Type = TeleportType.In };
 
             teleportEntry.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            teleportEntry.Add(new CollisionComponent(ColliderTypes.TeleportEntryTrigger));
 
             var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
             tileComponentBuilder.SetAtlasById(atlasId);
             tileComponentBuilder.SetImageIndex(gfxValue);
             teleportEntry.Add(tileComponentBuilder.Build());
 
-            commandsMan.Post(new AddEntityCommand(world.Id, teleportEntry.Id));
+            teleportEntry.EnterWorld(world.Id);
             return teleportEntry;
         }
 
         public void RegisterCollisionPairs()
         {
-
-            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallback);
+            //collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorTrigger, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallbackEx);
         }
 
         public Entity AddTeleportExit(World world, int x, int y, int pairId, int atlasId, int gfxValue)
@@ -149,9 +145,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             tileComponentBuilder.SetImageIndex(gfxValue);
             teleportExit.Add(tileComponentBuilder.Build());
 
-            commandsMan.Post(new AddEntityCommand(world.Id, teleportExit.Id));
-            //world.AddEntity(teleportExit);
-            
+            teleportExit.EnterWorld(world.Id);
+
             return teleportExit;
         }
 
@@ -166,7 +161,11 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             var exitPos = exitEntity.Get<PositionComponent>();
             var targetPos = target.Get<PositionComponent>();
-            var targetAabb = target.Get<BodyComponent>().Aabb;
+
+            var bodyCmp = target.Get<BodyComponent>();
+            var shape = shapeMan.GetById(bodyCmp.Fixtures.First().ShapeId);
+            var targetAabb = shape.GetAabb().Translated(targetPos.Value);
+
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
 
             var newPosition = exitPos.Value + offset;
@@ -189,16 +188,13 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        private static void OnFrameUpdate(ICore core, Entity entity, int nextValue)
+        private void OnFrameUpdate(Entity entity, int nextValue)
         {
-            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+            entity.SetSpriteImageId(nextValue);
         }
 
-        private void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
         {
-            if (colliderTypeA == ColliderTypes.TeleportEntryTrigger && colliderTypeB == ColliderTypes.ActorBody)
-                PerformEntityExit(entityB, entityA);
-            else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.TeleportEntryTrigger)
                 PerformEntityExit(entityA, entityB);
         }
 
@@ -216,6 +212,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             if (cameraEntity == null)
                 return;
 
+            var cameraFadeOutClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_OUT).Id;
+            var cameraFadeInClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_IN).Id;
+
+
             var pair = (TeleportPair)teleportEntity.Tag;
 
             var jobChain = new JobChain();
@@ -223,17 +223,17 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var worldIdToRemoveFrom = actorEntity.WorldId;
 
             //Pause this world
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => commandsMan.Post(new PauseWorldCommand(worldIdToRemoveFrom, true))));
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Pause()));
             //Fade out camera
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => commandsMan.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
+            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
             //Remove entity from this world
             //jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => commandsMan.Post(new RemoveEntityCommand(actorEntity.WorldId, actorEntity.Id))));
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(actorEntity, teleportEntity, true)));
             //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => commandsMan.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Unpause()));
             //Fade in camera
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => commandsMan.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
+            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
 
             jobMan.Execute(jobChain);
         }

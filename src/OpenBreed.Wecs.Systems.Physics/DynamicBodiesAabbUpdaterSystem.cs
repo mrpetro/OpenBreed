@@ -1,8 +1,10 @@
-﻿using OpenBreed.Physics.Interface.Managers;
+﻿using OpenBreed.Physics.Interface;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
+using OpenTK;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,18 +14,17 @@ namespace OpenBreed.Wecs.Systems.Physics
     {
         #region Private Fields
 
-        private const int CELL_SIZE = 16;
-
         private readonly List<Entity> entities = new List<Entity>();
-        private readonly IFixtureMan fixtureMan;
+        private readonly IShapeMan shapeMan;
+        private IBroadphaseDynamic broadphaseDynamic;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal DynamicBodiesAabbUpdaterSystem(IFixtureMan fixtureMan)
+        internal DynamicBodiesAabbUpdaterSystem(IShapeMan shapeMan)
         {
-            this.fixtureMan = fixtureMan;
+            this.shapeMan = shapeMan;
 
             RequireEntityWith<BodyComponent>();
             RequireEntityWith<PositionComponent>();
@@ -37,6 +38,8 @@ namespace OpenBreed.Wecs.Systems.Physics
         public override void Initialize(World world)
         {
             base.Initialize(world);
+
+            broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -49,7 +52,9 @@ namespace OpenBreed.Wecs.Systems.Physics
             {
                 var entity = entities[i];
 
-                UpdateAabb(entity.Get<BodyComponent>(), entity.Get<PositionComponent>());
+                var aabb = Calculate(entity);
+
+                broadphaseDynamic.UpdateItem(entity.Id, aabb);
             }
         }
 
@@ -57,24 +62,34 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
         protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
+
+            var aabb = Calculate(entity);
+
+            broadphaseDynamic.InsertItem(entity.Id, aabb);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
             entities.Remove(entity);
+
+            broadphaseDynamic.RemoveItem(entity.Id);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private void UpdateAabb(BodyComponent body, PositionComponent pos)
+        private Box2 Calculate(Entity entity)
         {
-            var fixture = fixtureMan.GetById(body.Fixtures.First());
-            body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
+            var body = entity.Get<BodyComponent>();
+            var pos = entity.Get<PositionComponent>();
+            var shape = shapeMan.GetById(body.Fixtures.First().ShapeId);
+            return shape.GetAabb().Translated(pos.Value);
         }
 
         #endregion Private Methods

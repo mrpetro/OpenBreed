@@ -1,11 +1,11 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Core.Commands;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
 using System.Linq;
 
@@ -16,17 +16,15 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
         private readonly ProjectileHelper projectileHelper;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ShootingState(IFsmMan fsmMan, ICommandsMan commandsMan, ProjectileHelper projectileHelper)
+        public ShootingState(IFsmMan fsmMan, ProjectileHelper projectileHelper)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
             this.projectileHelper = projectileHelper;
         }
 
@@ -45,18 +43,17 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             var currentStateNames = fsmMan.GetStateNames(entity);
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
+
+            entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
             var pos = entity.Get<PositionComponent>().Value;
             pos += new Vector2(8, 8);
             var direction = entity.Get<AngularPositionComponent>().Value;
             direction.Normalize();
-            direction *= 500.0f;
+            direction *= 100.0f;
             projectileHelper.AddProjectile(entity.WorldId, pos.X, pos.Y, direction.X, direction.Y);
 
-            //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
-            //entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));
-            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
+            entity.SetState(FsmId, (int)AttackingImpulse.Wait);
         }
 
         public void LeaveState(Entity entity)

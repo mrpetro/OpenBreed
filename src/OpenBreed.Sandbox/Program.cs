@@ -1,9 +1,7 @@
-﻿using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Generic.Extensions;
+﻿using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
-using OpenBreed.Common.Data;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
@@ -12,15 +10,12 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
-using OpenBreed.Fsm.Xml;
 using OpenBreed.Game;
-using OpenBreed.Input.Generic;
 using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
@@ -35,49 +30,32 @@ using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Extensions;
-using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
-using OpenBreed.Scripting.Lua;
 using OpenBreed.Scripting.Lua.Extensions;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Commands;
-using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Animation.Extensions;
-using OpenBreed.Wecs.Components.Animation.Xml;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Components.Common.Xml;
-using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Components.Physics.Extensions;
-using OpenBreed.Wecs.Components.Physics.Xml;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Components.Rendering.Extensions;
-using OpenBreed.Wecs.Components.Rendering.Xml;
-using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
-using OpenBreed.Wecs.Systems.Control;
-using OpenBreed.Wecs.Systems.Control.Commands;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Control.Handlers;
 using OpenBreed.Wecs.Systems.Control.Inputs;
-using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
-using OpenBreed.Wecs.Systems.Physics;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
-using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Input;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -90,7 +68,7 @@ namespace OpenBreed.Sandbox
 
         public ProgramFactory()
         {
-            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(640 , 480, "OpenBreed"));
+            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(640, 480, "OpenBreed"));
 
             manCollection.SetupBuilderFactory();
             manCollection.SetupVariableManager();
@@ -111,7 +89,6 @@ namespace OpenBreed.Sandbox
             manCollection.SetupAnimationSystems();
             manCollection.SetupPhysicsDebugSystem();
 
-
             manCollection.SetupCommonComponents();
             manCollection.SetupPhysicsComponents();
             manCollection.SetupRenderingComponents();
@@ -127,13 +104,12 @@ namespace OpenBreed.Sandbox
 
             //manCollection.SetupGameScriptingApi();
 
-
             manCollection.SetupSandboxBuilders();
+
+            manCollection.AddSingleton<FixtureTypes>(() => new FixtureTypes(manCollection.GetManager<IShapeMan>()));
 
             manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(manCollection.GetManager<IEntityMan>(), manCollection.GetManager<IEntityFactory>()));
         }
-
-
 
         #endregion Public Constructors
 
@@ -144,48 +120,64 @@ namespace OpenBreed.Sandbox
             var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
 
             manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(manCollection.GetManager<ISystemFactory>(),
-                                                                                            manCollection.GetManager<ICommandsMan>(), 
                                                                                             manCollection.GetManager<IRenderingMan>(),
-                                                                                            manCollection.GetManager<IWorldMan>(), 
+                                                                                            manCollection.GetManager<IWorldMan>(),
                                                                                             manCollection.GetManager<IEventsMan>(),
                                                                                             manCollection.GetManager<ViewportCreator>(),
                                                                                             manCollection.GetManager<IViewClient>()));
-            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(core, manCollection.GetManager<ICommandsMan>(),
-                                                                                      manCollection.GetManager<ISystemFactory>(),
+            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(core, manCollection.GetManager<ISystemFactory>(),
                                                                                       manCollection.GetManager<IWorldMan>(),
                                                                                       manCollection.GetManager<IViewClient>(),
-                                                                                      manCollection.GetManager<IEntityMan>()));
+                                                                                      manCollection.GetManager<IEntityMan>(),
+                                                                                      manCollection.GetManager<CameraBuilder>()));
             manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(manCollection.GetManager<IPlayersMan>(),
-                                                                                  manCollection.GetManager<ICommandsMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
                                                                                   manCollection.GetManager<ISystemFactory>(),
                                                                                   manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<WorldGateHelper>(() => new WorldGateHelper(core,
-                                                                                  manCollection.GetManager<IWorldMan>(),
+            manCollection.AddSingleton<WorldGateHelper>(() => new WorldGateHelper(manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
+                                                                                  manCollection.GetManager<IClipMan>(),
+                                                                                  manCollection.GetManager<IEntityFactory>(),
+                                                                                  manCollection.GetManager<IEventsMan>(),
+                                                                                  manCollection.GetManager<ICollisionMan>(),
+                                                                                  manCollection.GetManager<IJobsMan>(),
                                                                                   manCollection.GetManager<ViewportCreator>()));
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
-                                                                        manCollection.GetManager<IEntityFactory>(),
-                                                                        manCollection.GetManager<ICommandsMan>()));
+                                                                        manCollection.GetManager<IEntityFactory>()));
             manCollection.AddSingleton<EnvironmentHelper>(() => new EnvironmentHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                                       manCollection.GetManager<IEntityFactory>(),
-                                                                                      manCollection.GetManager<ICommandsMan>(),
                                                                                       manCollection.GetManager<IBuilderFactory>()));
-            manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IWorldMan>(),
+
+            manCollection.AddSingleton<CameraHelper>(() => new CameraHelper(manCollection.GetManager<IClipMan>(),
+                                                                                manCollection.GetManager<IFrameUpdaterMan>(),
+                                                                                manCollection.GetManager<IDataLoaderFactory>()));
+
+            manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IClipMan>(),
+                                                                                manCollection.GetManager<IWorldMan>(),
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
-                                                                                manCollection.GetManager<ICommandsMan>(),
                                                                                 manCollection.GetManager<IEventsMan>(),
                                                                                 manCollection.GetManager<ICollisionMan>(),
                                                                                 manCollection.GetManager<IBuilderFactory>(),
-                                                                                manCollection.GetManager<IJobsMan>()));
-            manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
-            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core, manCollection.GetManager<ICommandsMan>(),
-                                                                                manCollection.GetManager<MapCellHelper>()));
-            manCollection.AddSingleton<MapCellHelper>(() => new MapCellHelper(manCollection.GetManager<WorldBlockBuilder>(),
-                                                                              manCollection.GetManager<ICommandsMan>()));
+                                                                                manCollection.GetManager<IJobsMan>(),
+                                                                                manCollection.GetManager<IShapeMan>()));
+
+            manCollection.SetupDynamicResolver();
+            manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(manCollection.GetManager<IClipMan>(),
+                                                                                    manCollection.GetManager<ICollisionMan>(),
+                                                                                    manCollection.GetManager<IEntityFactory>(),
+                                                                                    manCollection.GetManager<DynamicResolver>()));
+            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(manCollection.GetManager<IClipMan>(),
+                                                                          manCollection.GetManager<ICollisionMan>(),
+                                                                          manCollection.GetManager<IPlayersMan>(),
+                                                                          manCollection.GetManager<IDataLoaderFactory>(),
+                                                                          manCollection.GetManager<IEntityFactory>(),
+                                                                          manCollection.GetManager<MapCellHelper>(),
+                                                                          manCollection.GetManager<DynamicResolver>(),
+                                                                          manCollection.GetManager<FixtureTypes>()));
+            manCollection.AddSingleton<MapCellHelper>(() => new MapCellHelper(manCollection.GetManager<WorldBlockBuilder>()));
 
             manCollection.SetupSpriteComponentAnimator();
 
@@ -194,7 +186,6 @@ namespace OpenBreed.Sandbox
             variables.RegisterVariable(typeof(string), gameFolderPath, "Cfg.Options.ABTA.GameFolderPath");
 
             manCollection.AddSingleton<IRepositoryProvider>(() => new XmlReadonlyDatabaseMan(variables, gameDbFilePath));
-
 
             return core;
         }
@@ -205,6 +196,7 @@ namespace OpenBreed.Sandbox
     public class Program : CoreBase
     {
         #region Private Fields
+
         private const string ABTA_PC_GAME_DB_FILE_NAME = "GameDatabase.ABTA.EPF.xml";
 
         private readonly IScriptMan scriptMan;
@@ -313,7 +305,6 @@ namespace OpenBreed.Sandbox
             var execFolderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var gameDbFilePath = Path.Combine(execFolderPath, gameDbFileName);
 
-
             var programFactory = new ProgramFactory();
 
             var program = programFactory.Create(gameDbFilePath, vanillaGameFolderPath);
@@ -327,16 +318,12 @@ namespace OpenBreed.Sandbox
         {
             GetManager<IEventQueue>().Fire();
 
-            Commands.ExecuteEnqueued();
-
             Worlds.Cleanup();
             renderingMan.Cleanup();
 
             Players.ResetInputs();
 
             Inputs.Update();
-
-            //StateMachine.Update((float)e.Time);
             Worlds.Update(dt);
             Jobs.Update(dt);
         }
@@ -373,14 +360,13 @@ namespace OpenBreed.Sandbox
             InitLua();
 
             RegisterShapes();
-            RegisterFixtures();
+
+            GetManager<FixtureTypes>().Register();
+
             RegisterInputs();
             RegisterPlayers();
 
-
             //var map = manCollection.GetManager<MapsDataProvider>().GetMap("CRASH LANDING SITE");
-
-
 
             var spriteMan = GetManager<ISpriteMan>();
             var tileMan = GetManager<ITileMan>();
@@ -428,29 +414,13 @@ namespace OpenBreed.Sandbox
                 .Build();
             //spriteMan.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
 
-            var turretTex = textureMan.Create("Textures/Sprites/Turret", @"Content\Graphics\TurretSpriteSet.png");
-            spriteMan.CreateAtlas()
-                .SetTexture(turretTex.Id)
-                .SetName(TurretHelper.SPRITE_TURRET)
-                .AppendCoordsFromGrid(32, 32, 8, 2)
-                .Build();
-
-            //spriteMan.Create(TurretHelper.SPRITE_TURRET, turretTex.Id, 32, 32, 8, 2);
-
-            var cursorsTex = textureMan.Create("Textures/Sprites/Cursors", @"Content\Graphics\Cursors.png");
-            spriteMan.CreateAtlas()
-                .SetTexture(cursorsTex.Id)
-                .SetName("Atlases/Sprites/Cursors")
-                .AppendCoordsFromGrid(16, 16, 1, 1)
-                .Build();
-            //spriteMan.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
-
             var worldGateHelper = GetManager<WorldGateHelper>();
             var doorHelper = GetManager<DoorHelper>();
             var environmentHelper = GetManager<EnvironmentHelper>();
             var projectileHelper = GetManager<ProjectileHelper>();
             var actorHelper = GetManager<ActorHelper>();
             var teleportHelper = GetManager<TeleportHelper>();
+            var cameraHelper = GetManager<CameraHelper>();
 
             ColliderTypes.Initialize(GetManager<ICollisionMan>());
             actorHelper.RegisterCollisionPairs();
@@ -458,15 +428,12 @@ namespace OpenBreed.Sandbox
             teleportHelper.RegisterCollisionPairs();
             projectileHelper.RegisterCollisionPairs();
 
-            CameraHelper.CreateAnimations(this);
-
+            cameraHelper.CreateAnimations();
             doorHelper.LoadAnimations();
             environmentHelper.LoadAnimations();
             actorHelper.CreateAnimations();
-            TurretHelper.CreateAnimations(this);
-            TeleportHelper.CreateAnimations(this);
+            teleportHelper.CreateAnimations();
             projectileHelper.CreateAnimations();
-            Misc.CreateAnimations(this);
 
             manCollection.SetupButtonStates();
             manCollection.SetupProjectileStates();
@@ -484,13 +451,10 @@ namespace OpenBreed.Sandbox
             var hudWorldHelper = GetManager<HudWorldHelper>();
             hudWorldHelper.Create();
 
-
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
             var mapWorldLoader = dataLoaderFactory.GetLoader<World>();
 
-
             var cameraBuilder = GetManager<CameraBuilder>();
-            var commandsMan = GetManager<ICommandsMan>();
             var entityMan = GetManager<IEntityMan>();
 
             var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 1");
@@ -508,8 +472,7 @@ namespace OpenBreed.Sandbox
             var johnPlayerEntity = actorHelper.CreatePlayerActor(new Vector2(0, 0));
             johnPlayerEntity.Tag = "John";
 
-            commandsMan.Post(new FollowedAddFollowerCommand(johnPlayerEntity.Id, playerCamera.Id));
-
+            johnPlayerEntity.AddFollower(playerCamera);
 
             GetManager<IEventsMan>().Subscribe<WorldInitializedEventArgs>(GetManager<IWorldMan>(), (s, a) =>
             {
@@ -517,7 +480,6 @@ namespace OpenBreed.Sandbox
                     return;
 
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Id, 0);
-
             });
 
             //var gameWorldHelper = GetManager<GameWorldHelper>();
@@ -542,23 +504,6 @@ namespace OpenBreed.Sandbox
             shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
             shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
             shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
-        }
-
-        private void RegisterFixtures()
-        {
-            var shapeMan = GetManager<IShapeMan>();
-            var fixtureMan = GetManager<IFixtureMan>();
-
-            fixtureMan.Create("Fixtures/GridCell", shapeMan.GetByTag("Shapes/Box_0_0_16_16"));
-            fixtureMan.Create("Fixtures/TeleportEntry", shapeMan.GetByTag("Shapes/Box_16_16_8_8"));
-            fixtureMan.Create("Fixtures/TeleportExit", shapeMan.GetByTag("Shapes/Box_16_16_8_8"));
-            fixtureMan.Create("Fixtures/Projectile", shapeMan.GetByTag("Shapes/Box_0_0_16_16"));
-            fixtureMan.Create("Fixtures/DoorVertical", shapeMan.GetByTag("Shapes/Box_0_0_16_32"));
-            fixtureMan.Create("Fixtures/DoorHorizontal", shapeMan.GetByTag("Shapes/Box_0_0_32_16"));
-            fixtureMan.Create("Fixtures/Arrow", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
-            fixtureMan.Create("Fixtures/HeroBody", shapeMan.GetByTag("Shapes/Box_0_0_28_28"));
-            fixtureMan.Create("Fixtures/HeroTrigger", shapeMan.GetByTag("Shapes/Point_14_14"));
-            fixtureMan.Create("Fixtures/Turret", shapeMan.GetByTag("Shapes/Box_0_0_32_32"));
         }
 
         #endregion Private Methods

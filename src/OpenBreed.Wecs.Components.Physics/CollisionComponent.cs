@@ -2,28 +2,24 @@
 using OpenBreed.Wecs.Components;
 using System.Collections.Generic;
 using System.Data;
+using OpenTK;
 
 namespace OpenBreed.Wecs.Components.Physics
 {
-    public class CollisionComponent : IEntityComponent
+    public class ResponseComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public CollisionComponent()
+        public ResponseComponent()
         {
-            ColliderTypes = new List<int>();
-        }
-
-        public CollisionComponent(int collisionTypeId)
-        {
-            ColliderTypes = new List<int>(new int[] { collisionTypeId });
+            Contacts = new List<CollisionContact>();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public List<int> ColliderTypes { get; }
+        public List<CollisionContact> Contacts { get; }
 
         #endregion Public Properties
     }

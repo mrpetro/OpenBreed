@@ -23,9 +23,14 @@
 		<Body>
 			<CofFactor>1.0</CofFactor>
 			<CorFactor>1.0</CorFactor>
-			<Type>Static</Type>
 			<Fixtures>
-				<Fixture>Fixtures/DoorHorizontal</Fixture>
+				<Fixture>
+					<ShapeName>Shapes/Box_0_0_32_16</ShapeName>
+					<Groups>
+						<Group>StaticObstacle</Group>
+						<Group>DoorOpenTrigger</Group>
+					</Groups>
+				</Fixture>
 			</Fixtures>
 		</Body>
 		<Sprite>

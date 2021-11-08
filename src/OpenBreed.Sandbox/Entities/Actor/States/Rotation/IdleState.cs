@@ -1,11 +1,11 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
-using OpenBreed.Wecs.Systems.Core.Commands;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
 using System;
 using System.Linq;
@@ -17,16 +17,14 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
-        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public IdleState(IFsmMan fsmMan, ICommandsMan commandsMan)
+        public IdleState(IFsmMan fsmMan)
         {
             this.fsmMan = fsmMan;
-            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -44,7 +42,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             var currentStateNames = fsmMan.GetStateNames(entity);
-            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+
+            entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
             //entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
@@ -74,7 +73,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
                     var angularThrust = entity.Get<AngularVelocityComponent>();
                     angularThrust.Value = new Vector2(e.Direction.X, e.Direction.Y);
                     //dir.SetDirection(e.Direction);
-                    commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
+                    entity.SetState(FsmId, (int)RotationImpulse.Rotate);
                 }
             }
         }

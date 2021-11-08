@@ -1,11 +1,8 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Input.Interface;
-using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Control.Inputs;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal WalkingControllerSystem(IPlayersMan playersMan)
         {
@@ -30,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Control
             RequireEntityWith<WalkingControlComponent>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
@@ -47,6 +44,8 @@ namespace OpenBreed.Wecs.Systems.Control
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {

@@ -4,7 +4,6 @@ using OpenBreed.Core;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
@@ -24,6 +23,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
                                                             manCollection.GetManager<IPrimitiveRenderer>(),
                                                             manCollection.GetManager<IViewClient>()));
             systemFactory.Register(() => new SpriteSystem(manCollection.GetManager<ISpriteMan>()));
+            systemFactory.Register(() => new StampSystem());
             systemFactory.Register(() => new TileSystem(manCollection.GetManager<IEntityMan>(),
                                                         manCollection.GetManager<ITileMan>(),
                                                         manCollection.GetManager<ITileGridFactory>(),
@@ -32,18 +32,6 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             systemFactory.Register(() => new TextSystem(manCollection.GetManager<IEntityMan>(),
                                                         manCollection.GetManager<IFontMan>(),
                                                         manCollection.GetManager<ILogger>()));
-
-
-            var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
-
-            entityCommandHandler.BindCommand<ViewportResizeCommand, ViewportSystem>();
-            entityCommandHandler.BindCommand<SpriteOnCommand,SpriteSystem>();
-            entityCommandHandler.BindCommand<SpriteOffCommand,SpriteSystem>();
-            entityCommandHandler.BindCommand<SpriteSetCommand,SpriteSystem>();
-            entityCommandHandler.BindCommand<SpriteSetAtlasCommand, SpriteSystem>();
-            entityCommandHandler.BindCommand<TextSetCommand, TextSystem>();
-            entityCommandHandler.BindCommand<TileSetCommand, TileSystem>();
-            entityCommandHandler.BindCommand<PutStampCommand, TileSystem>();
         }
     }
 }

@@ -15,21 +15,26 @@ namespace OpenBreed.Wecs.Entities
     /// </summary>
     public class Entity
     {
-        private readonly IEventsMan eventsMan;
         #region Private Fields
 
-        private readonly List<IEntityComponent> components = new List<IEntityComponent>();
+        private readonly EntityMan entityMan;
+        private readonly Dictionary<Type, IEntityComponent> components = new Dictionary<Type, IEntityComponent>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal Entity(IEventsMan eventsMan, List<IEntityComponent> initialComponents)
+        internal Entity(EntityMan entityMan, List<IEntityComponent> initialComponents)
         {
-            this.eventsMan = eventsMan;
+            this.entityMan = entityMan;
 
-            components = initialComponents ?? new List<IEntityComponent>();
-            Components = new ReadOnlyCollection<IEntityComponent>(components);
+            if (initialComponents is null)
+                components = new Dictionary<Type, IEntityComponent>();
+            else
+                components = initialComponents.ToDictionary(item => item.GetType());
+
+            ComponentValues = components.Values;
+            ComponentTypes = components.Keys;
         }
 
         #endregion Internal Constructors
@@ -39,7 +44,12 @@ namespace OpenBreed.Wecs.Entities
         /// <summary>
         /// Read-olny list of components for this entity
         /// </summary>
-        public ReadOnlyCollection<IEntityComponent> Components { get; }
+        public ICollection<IEntityComponent> ComponentValues { get; }
+
+        /// <summary>
+        /// Gets the collection of component types
+        /// </summary>
+        public ICollection<Type> ComponentTypes { get; }
 
         /// <summary>
         /// Property for user purpose data
@@ -59,11 +69,6 @@ namespace OpenBreed.Wecs.Entities
         /// </summary>
         public int Id { get; internal set; }
 
-        /// <summary>
-        /// Property for various debug data
-        /// </summary>
-        public object DebugData { get; set; }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -71,33 +76,36 @@ namespace OpenBreed.Wecs.Entities
         /// <summary>
         /// Gets component of specific type if it exists
         /// </summary>
-        /// <typeparam name="T">Type of component to get</typeparam>
+        /// <typeparam name="TComponent">Type of component to get</typeparam>
         /// <returns>Entity component if exists, null if not</returns>
-        public T TryGet<T>()
+        public TComponent TryGet<TComponent>()
         {
-            return components.OfType<T>().FirstOrDefault();
+            if (components.TryGetValue(typeof(TComponent), out IEntityComponent component))
+                return (TComponent)component;
+            else
+                return default(TComponent);
         }
 
         /// <summary>
         /// Checks if entity contains component of specific type
         /// </summary>
-        /// <typeparam name="T">Type of component to check</typeparam>
+        /// <typeparam name="TComponent">Type of component to check</typeparam>
         /// <returns>true if entity contains the component, false if not</returns>
-        public bool Contains<T>()
+        public bool Contains<TComponent>()
         {
-            return components.OfType<T>().Any();
+            return components.ContainsKey(typeof(TComponent));
         }
 
         /// <summary>
         /// Gets component of specific type
         /// </summary>
-        /// <typeparam name="T">Type of component to get </typeparam>
+        /// <typeparam name="TComponent">Type of component to get </typeparam>
         /// <returns>Entity component if exists, throws exception if not</returns>
-        public T Get<T>()
+        public TComponent Get<TComponent>()
         {
-            Debug.Assert(components.OfType<T>().Any(), $"Expected to get component '{typeof(T).Name}'.");
+            Debug.Assert(components.ContainsKey(typeof(TComponent)), $"Expected to get component '{typeof(TComponent).Name}'.");
 
-            return components.OfType<T>().First();
+            return (TComponent)components[typeof(TComponent)];
         }
 
         /// <summary>
@@ -106,7 +114,7 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="eventArgs">Arguments of event</param>
         public void RaiseEvent<T>(T eventArgs) where T : EventArgs
         {
-            eventsMan.Raise(this, eventArgs);
+            entityMan.Raise(this, eventArgs);
         }
 
         /// <summary>
@@ -115,7 +123,7 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="callback">event callback</param>
         public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            eventsMan.Subscribe(this, callback);
+            entityMan.Subscribe(this, callback);
         }
 
         /// <summary>
@@ -124,18 +132,42 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="callback">event callback to unsubscribe</param>
         public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            eventsMan.Unsubscribe(this, callback);
+            entityMan.Unsubscribe(this, callback);
+        }
+
+        public void Set<TComponent>(TComponent component) where TComponent : class, IEntityComponent
+        {
+            Debug.Assert(component != null, "Adding null component to entity is forbidden.");
+
+            var count = components.Count;
+            components[component.GetType()] = component;
+
+            if(components.Count != count)
+                entityMan.OnComponentAdded(this, typeof(TComponent));
         }
 
         /// <summary>
         /// Add component to entity
         /// </summary>
         /// <param name="component">Component to add</param>
-        public void Add(IEntityComponent component)
+        public void Add<TComponent>(TComponent component) where TComponent : class, IEntityComponent
         {
             Debug.Assert(component != null, "Adding null component to entity is forbidden.");
-            Debug.Assert(!components.Any(item => item.GetType() == component.GetType()), "Adding two components of same type to one entity is forbidden.");
-            components.Add(component);
+            Debug.Assert(!components.ContainsKey(typeof(TComponent)), "Adding two components of same type to one entity is forbidden.");
+            components.Add(typeof(TComponent), component);
+            entityMan.OnComponentAdded(this, typeof(TComponent));
+        }
+
+        /// <summary>
+        /// Remove component of specific type from entity
+        /// </summary>
+        /// <typeparam name="TComponent">Type of component to remove</typeparam>
+        /// <returns>True if component remove successfuly, false otherwise</returns>
+        public bool Remove<TComponent>()
+        {
+            var removed = components.Remove(typeof(TComponent));
+            entityMan.OnComponentRemoved(this, typeof(TComponent));
+            return removed;
         }
 
         /// <summary>
@@ -145,12 +177,34 @@ namespace OpenBreed.Wecs.Entities
         /// <returns>True if component remove successfuly, false otherwise</returns>
         public bool Remove(IEntityComponent component)
         {
-            return components.Remove(component);
+            return components.Remove(component.GetType());
         }
 
         public override string ToString()
         {
             return $"Entity({Id})";
+        }
+
+        public void LeaveWorld()
+        {
+            //If entity is already in limbo then do nothing
+            if (WorldId == World.NO_WORLD)
+                return;
+
+            entityMan.RequestLeaveWorld(this);
+        }
+
+        public void EnterWorld(int worldId)
+        {
+            //If entity is already is same world then do nothing
+            if (WorldId == worldId)
+                return;
+
+            //If entity is not in limbo then it's in different world.
+            if (WorldId != World.NO_WORLD)
+                throw new InvalidOperationException("Entity already in different world.");
+
+            entityMan.RequestEnterWorld(this, worldId);
         }
 
         #endregion Public Methods

@@ -16,7 +16,7 @@ namespace OpenBreed.Sandbox.Entities.Button
 
             //button.Get<PositionComponent>().Value = new Vector2(0, 0);
 
-            //world.Core.Commands.Post(new AddEntityCommand(world.Id, button.Id));
+            //button.EnterWorld(world.Id);
             //world.AddEntity(button);
         }
 

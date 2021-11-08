@@ -13,6 +13,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         int ImageIndex { get; set; }
         Vector2 Origin { get; set; }
         int Order { get; set; }
+        bool Hidden { get; set; }
 
         #endregion Public Properties
     }
@@ -33,6 +34,7 @@ namespace OpenBreed.Wecs.Components.Rendering
             ImageId = builder.ImageId;
             Origin = builder.Origin;
             Order = builder.Order;
+            Hidden = builder.Hidden;
         }
 
         #endregion Internal Constructors
@@ -58,6 +60,11 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// Order of drawing, higher value object is rendered on top of lower value objects
         /// </summary>
         public float Order { get; set; }
+
+        /// <summary>
+        /// Flag for making this sprite hidden or not
+        /// </summary>
+        public bool Hidden { get; set; }
 
         #endregion Public Properties
     }
@@ -88,6 +95,7 @@ namespace OpenBreed.Wecs.Components.Rendering
             builder.SetImageId(template.ImageIndex);
             builder.SetOrigin(template.Origin);
             builder.SetOrder(template.Order);
+            builder.SetHidden(template.Hidden);
             return builder.Build();
         }
 
@@ -117,6 +125,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         internal int ImageId { get; private set; }
         internal Vector2 Origin { get; private set; }
         internal float Order { get; private set; }
+        internal bool Hidden { get; private set; }
 
         #endregion Internal Properties
 
@@ -135,6 +144,11 @@ namespace OpenBreed.Wecs.Components.Rendering
         public void SetOrigin(Vector2 origin)
         {
             Origin = origin;
+        }
+
+        public void SetHidden(bool value)
+        {
+            Hidden = value;
         }
 
         public void SetImageId(int imageId)

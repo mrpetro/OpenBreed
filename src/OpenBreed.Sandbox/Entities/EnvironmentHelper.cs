@@ -2,7 +2,6 @@
 using OpenBreed.Common;
 using OpenBreed.Common.Tools;
 using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -19,17 +18,15 @@ namespace OpenBreed.Sandbox.Entities
 {
     public class EnvironmentHelper
     {
-        public EnvironmentHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, ICommandsMan commandMan, IBuilderFactory builderFactory)
+        public EnvironmentHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, IBuilderFactory builderFactory)
         {
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
-            this.commandMan = commandMan;
             this.builderFactory = builderFactory;
         }
 
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
-        private readonly ICommandsMan commandMan;
         private readonly IBuilderFactory builderFactory;
 
         public void LoadAnimations()
@@ -52,7 +49,7 @@ namespace OpenBreed.Sandbox.Entities
             tileComponentBuilder.SetImageIndex(gfxValue);
             entity.Add(tileComponentBuilder.Build());
 
-            commandMan.Post(new AddEntityCommand(world.Id, entity.Id));
+            entity.EnterWorld(world.Id);
         }
 
         public void AddMonsterEating(World world, int x, int y, int atlasId, int gfxValue)
@@ -67,7 +64,7 @@ namespace OpenBreed.Sandbox.Entities
             tileComponentBuilder.SetImageIndex(gfxValue);
             entity.Add(tileComponentBuilder.Build());
 
-            commandMan.Post(new AddEntityCommand(world.Id, entity.Id));
+            entity.EnterWorld(world.Id);
         }
 
     }

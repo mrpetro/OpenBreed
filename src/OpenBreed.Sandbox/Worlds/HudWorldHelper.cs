@@ -1,42 +1,60 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.CursorCoords;
 using OpenBreed.Sandbox.Entities.FpsCounter;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Animation;
+using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Systems.Rendering.Events;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System.Linq;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Commands;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Rendering;
-using OpenBreed.Wecs.Systems.Animation;
-using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Worlds
 {
-    public  class HudWorldHelper
+    public class HudWorldHelper
     {
+        #region Private Fields
+
         private readonly ICore core;
-        private readonly ICommandsMan commandsMan;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         private readonly IViewClient viewClient;
         private readonly IEntityMan entityMan;
-        #region Public Methods
+        private readonly CameraBuilder cameraBuilder;
 
-        public HudWorldHelper(ICore core, ICommandsMan commandsMan, ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan)
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public HudWorldHelper(ICore core, ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, CameraBuilder cameraBuilder)
         {
             this.core = core;
-            this.commandsMan = commandsMan;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             this.viewClient = viewClient;
             this.entityMan = entityMan;
+            this.cameraBuilder = cameraBuilder;
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void Create()
+        {
+            var builder = worldMan.Create().SetName("HUD");
+
+            AddSystems(builder);
+
+            Setup(builder.Build());
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void AddSystems(WorldBuilder builder)
         {
@@ -46,7 +64,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             //Action
             //builder.AddSystem(core.CreateMovementSystem().Build());
-            builder.AddSystem(systemFactory.Create<AnimationSystem>());
+            builder.AddSystem(systemFactory.Create<AnimatorSystem>());
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());
@@ -62,29 +80,15 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
-        public void Create()
-        {
-            var builder = worldMan.Create().SetName("HUD");
-
-            AddSystems(builder);
-
-            Setup(builder.Build());
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
         private void Setup(World world)
         {
-            var cameraBuilder = core.GetManager<CameraBuilder>();
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetFov(viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
-            commandsMan.Post(new AddEntityCommand(world.Id, hudCamera.Id));
-            //world.AddEntity(hudCamera);
+
+            hudCamera.EnterWorld(world.Id);
 
             FpsCounterHelper.AddToWorld(core, world);
             CursorCoordsHelper.AddToWorld(core, world);

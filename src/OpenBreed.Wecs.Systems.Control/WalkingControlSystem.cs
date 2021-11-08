@@ -1,18 +1,7 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Control;
+﻿using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Control.Commands;
-using OpenBreed.Wecs.Systems.Control.Events;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
@@ -25,35 +14,32 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal WalkingControlSystem(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
 
             RequireEntityWith<IControlComponent>();
-
-            RegisterHandler<AttackControlCommand>(HandleAttackControlCommand);
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            ExecuteCommands();
-
         }
 
         public void Update(float dt)
         {
-            ExecuteCommands();
         }
 
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {
@@ -71,24 +57,5 @@ namespace OpenBreed.Wecs.Systems.Control
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
-
-        private bool HandleAttackControlCommand(AttackControlCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            var control = entity.Get<AttackControlComponent>();
-
-            if (control.AttackPrimary != cmd.Primary)
-            {
-                control.AttackPrimary = cmd.Primary;
-                entity.RaiseEvent(new ControlFireChangedEvenrArgs(control.AttackPrimary));
-            }
-
-            return true;
-        }
-
-        #endregion Private Methods
     }
 }

@@ -8,6 +8,8 @@ using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenTK;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace OpenBreed.Physics.Generic.Managers
 {
@@ -16,8 +18,13 @@ namespace OpenBreed.Physics.Generic.Managers
         #region Private Fields
 
         private readonly Dictionary<string, int> aliases = new Dictionary<string, int>();
+
+        private readonly Dictionary<string, int> groupNames = new Dictionary<string, int>();
+        private readonly IdMap<string> groupIds = new IdMap<string>();
+
         private readonly ILogger logger;
-        private IdMap<ColliderType> list = new IdMap<ColliderType>();
+
+        private readonly Dictionary<(int, int), FixtureContactCallback> fixtureCallbacks = new Dictionary<(int, int), FixtureContactCallback>();
 
         #endregion Private Fields
 
@@ -32,25 +39,27 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #region Public Methods
 
-        public void RegisterCollisionPair(int colliderTypeA, int colliderTypeB, CollisionPairCallback callback)
+        public int RegisterGroup(string groupName)
         {
-            list[colliderTypeA].RegisterCallback(colliderTypeB, callback);
-            //list[colliderTypeB].RegisterCallback(colliderTypeA, callback);
+            if (groupNames.ContainsKey(groupName))
+                throw new InvalidOperationException($"Group name '{groupName}' already registered.");
+
+            var groupId = groupIds.Add(groupName);
+            groupNames.Add(groupName, groupId);
+            return groupId;
         }
 
-        public void UnregisterCollisionPair(int colliderTypeA, int colliderTypeB)
+        public int GetGroupId(string groupName)
         {
-            var callbacks = list[colliderTypeA];
-            callbacks.UnregisterCallback(colliderTypeB);
-            list.RemoveById(colliderTypeA);
+            if (!groupNames.TryGetValue(groupName, out int groupId))
+                throw new InvalidOperationException($"Group name '{groupName}' not registered.");
+
+            return groupId;
         }
 
-        public int CreateColliderType(string colliderTypeName)
+        public void RegisterFixturePair(int fixtureA, int fixtureB, FixtureContactCallback callback)
         {
-            var newColliderType = new ColliderType(colliderTypeName);
-            var id = list.Add(newColliderType);
-            aliases.Add(colliderTypeName, id);
-            return id;
+            fixtureCallbacks.Add((fixtureA, fixtureB), callback);
         }
 
         public int GetByName(string name)
@@ -60,30 +69,19 @@ namespace OpenBreed.Physics.Generic.Managers
             return result;
         }
 
-        public string GetNameById(int id)
+        public void Resolve(Entity entityA, Entity entityB, List<Interface.Managers.CollisionContact> contacts)
         {
-            return list[id].Name;
-        }
-
-        public void Callback(Entity entityA, Entity entityB, Vector2 projection)
-        {
-            var colCmpA = entityA.Get<CollisionComponent>();
-            var colCmpB = entityB.Get<CollisionComponent>();
-
-            for (int i = 0; i < colCmpA.ColliderTypes.Count; i++)
+            foreach (var contact in contacts)
             {
-                var colliderTypeId = colCmpA.ColliderTypes[i];
-                var colliderType = list[colliderTypeId];
-                for (int j = 0; j < colCmpB.ColliderTypes.Count; j++)
-                    colliderType.Callback(colliderTypeId, entityA, colCmpB.ColliderTypes[j], entityB, projection);
+                foreach (var groupIdA in contact.FixtureA.GroupIds)
+                {
+                    foreach (var groupIdB in contact.FixtureB.GroupIds)
+                    {
+                        if (fixtureCallbacks.TryGetValue((groupIdA, groupIdB), out FixtureContactCallback fixtureCallback))
+                            fixtureCallback.Invoke(contact.FixtureA, entityA, contact.FixtureB, entityB, contact.Projection);
+                    }
+                }
             }
-
-            //for (int i = 0; i < colCmpB.ColliderTypes.Count; i++)
-            //{
-            //    var colliderTypeId = colCmpB.ColliderTypes[i];
-            //    for (int j = 0; j < colCmpA.ColliderTypes.Count; j++)
-            //        list[colliderTypeId].Callback(colliderTypeId, entityB, colCmpA.ColliderTypes[i], entityA, projection);
-            //}
         }
 
         #endregion Public Methods

@@ -1,8 +1,7 @@
-﻿using OpenBreed.Core.Managers;
-using OpenBreed.Input.Interface;
+﻿using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Control.Commands;
+using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Control.Inputs;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +13,16 @@ namespace OpenBreed.Wecs.Systems.Control
         #region Private Fields
 
         private readonly IPlayersMan playersMan;
-        private readonly ICommandsMan commandsMan;
+
         private readonly List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AttackControllerSystem(IPlayersMan playersMan, ICommandsMan commandsMan)
+        internal AttackControllerSystem(IPlayersMan playersMan)
         {
             this.playersMan = playersMan;
-            this.commandsMan = commandsMan;
 
             RequireEntityWith<AttackInputComponent>();
             RequireEntityWith<AttackControlComponent>();
@@ -47,6 +45,8 @@ namespace OpenBreed.Wecs.Systems.Control
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {
@@ -77,7 +77,13 @@ namespace OpenBreed.Wecs.Systems.Control
             if (!input.Changed)
                 return;
 
-            commandsMan.Post(new AttackControlCommand(entity.Id, input.Primary, input.Secondary));
+            if (input.Primary != input.OldPrimary)
+            {
+                if (input.Primary)
+                    entity.StartPrimaryAttack();
+                else
+                    entity.StopPrimaryAttack();
+            }
         }
 
         #endregion Private Methods

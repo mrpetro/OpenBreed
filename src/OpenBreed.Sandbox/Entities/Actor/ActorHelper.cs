@@ -1,68 +1,67 @@
-﻿using OpenBreed.Common.Tools;
-using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Physics.Generic;
-using OpenBreed.Physics.Generic.Helpers;
-using OpenBreed.Physics.Interface;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Wecs.Systems.Physics.Helpers;
-using OpenTK;
-using OpenBreed.Animation.Interface;
-using OpenBreed.Wecs.Entities.Xml;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Wecs.Components.Control;
-using OpenBreed.Input.Generic;
-using OpenBreed.Input.Interface;
+﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
-using OpenBreed.Wecs.Worlds;
-using System;
+using OpenBreed.Common.Tools;
 using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Commands;
+using OpenBreed.Input.Interface;
+using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Control;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Systems.Physics.Helpers;
+using OpenBreed.Wecs.Worlds;
+using OpenTK;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
-    public  class ActorHelper
+    public class ActorHelper
     {
-        public ActorHelper(ICore core, ICommandsMan commandsMan, MapCellHelper mapCellHelper)
-        {
-            this.core = core;
-            this.commandsMan = commandsMan;
-            this.mapCellHelper = mapCellHelper;
-        }
+        #region Private Fields
 
-        #region Public Fields
+        private readonly IClipMan clipMan;
 
-        internal void AddHero(World world, int ix, int iy)
-        {
-            var playerActor = CreatePlayerActor(new Vector2(16 * ix, 16 * iy));
+        private readonly ICollisionMan collisionMan;
 
-            playerActor.Tag = "John";
+        private readonly IPlayersMan playersMan;
+        private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly IEntityFactory entityFactory;
 
-            commandsMan.Post(new AddEntityCommand(world.Id, playerActor.Id));
-        }
-
-        private readonly ICore core;
-        private readonly ICommandsMan commandsMan;
         private readonly MapCellHelper mapCellHelper;
 
-        #endregion Public Fields
+        private readonly DynamicResolver dynamicResolver;
+        private readonly FixtureTypes fixtureTypes;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public ActorHelper(IClipMan clipMan, ICollisionMan collisionMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, MapCellHelper mapCellHelper, DynamicResolver dynamicResolver, FixtureTypes fixtureTypes)
+        {
+            this.clipMan = clipMan;
+            this.collisionMan = collisionMan;
+            this.playersMan = playersMan;
+            this.dataLoaderFactory = dataLoaderFactory;
+            this.entityFactory = entityFactory;
+            this.mapCellHelper = mapCellHelper;
+            this.dynamicResolver = dynamicResolver;
+            this.fixtureTypes = fixtureTypes;
+        }
+
+        #endregion Public Constructors
 
         #region Public Methods
 
         public void RegisterCollisionPairs()
         {
-            var collisionMan = core.GetManager<ICollisionMan>();
+            //collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallback);
 
-            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallbackEx);
         }
 
         public void CreateAnimations()
         {
-            var animations = core.GetManager<IClipMan>();
-            var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
             var animationLoader = dataLoaderFactory.GetLoader<IClip>();
 
             animationLoader.Load("Animations/Actor/Standing/Up");
@@ -86,8 +85,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public Entity CreatePlayerActor(Vector2 pos)
         {
-            var playersMan = core.GetManager<IPlayersMan>();
-
             var actor = CreateActor(pos);
 
             var p1 = playersMan.GetByName("P1");
@@ -103,11 +100,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public Entity CreateActor(Vector2 pos)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Actor\John.xml");
-            var actor = core.GetManager<IEntityFactory>().Create(entityTemplate);
+            var actor = entityFactory.Create(entityTemplate);
 
             actor.Add(new AngularVelocityComponent(0));
             actor.Add(new AngularThrustComponent(0));
-            actor.Add(new CollisionComponent(ColliderTypes.ActorBody));
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
@@ -121,12 +117,32 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         #endregion Public Methods
 
+        #region Internal Methods
+
+        internal void AddHero(World world, int ix, int iy)
+        {
+            var playerActor = CreatePlayerActor(new Vector2(16 * ix, 16 * iy));
+
+            playerActor.Tag = "John";
+
+            playerActor.EnterWorld(world.Id);
+        }
+
+        #endregion Internal Methods
+
         #region Private Methods
 
         private void Dynamic2StaticCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         {
-            DynamicHelper.ResolveVsStatic(entityA, entityB, projection);
+            dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
         }
+
+        private void Dynamic2StaticCallbackEx(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
+        {
+            dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
+        }
+
+        #endregion Private Methods
 
         //private static void OnCollision(object sender, CollisionEventArgs args)
         //{
@@ -145,7 +161,5 @@ namespace OpenBreed.Sandbox.Entities.Actor
         //            break;
         //    }
         //}
-
-        #endregion Private Methods
     }
 }
