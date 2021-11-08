@@ -6,7 +6,6 @@ using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Commands;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
 using System.Linq;

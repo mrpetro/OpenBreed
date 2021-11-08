@@ -4,7 +4,6 @@ using OpenBreed.Core;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
@@ -33,11 +32,6 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             systemFactory.Register(() => new TextSystem(manCollection.GetManager<IEntityMan>(),
                                                         manCollection.GetManager<IFontMan>(),
                                                         manCollection.GetManager<ILogger>()));
-
-
-            var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
-
-            entityCommandHandler.BindCommand<TileSetCommand, TileSystem>();
         }
     }
 }

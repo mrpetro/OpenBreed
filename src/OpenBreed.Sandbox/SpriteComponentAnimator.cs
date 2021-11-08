@@ -2,7 +2,6 @@
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox

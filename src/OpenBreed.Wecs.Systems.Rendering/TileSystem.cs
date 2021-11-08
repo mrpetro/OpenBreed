@@ -3,7 +3,6 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
@@ -43,8 +42,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.stampMan = stampMan;
             RequireEntityWith<TileComponent>();
             RequireEntityWith<PositionComponent>();
-
-            RegisterHandler<TileSetCommand>(HandleTileSetCommand);
         }
 
         #endregion Internal Constructors
@@ -90,18 +87,5 @@ namespace OpenBreed.Wecs.Systems.Rendering
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
-
-        private bool HandleTileSetCommand(TileSetCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-
-            tileGrid.ModifyTile(cmd.Position, cmd.AtlasId, cmd.ImageId);
-
-            return true;
-        }
-
-        #endregion Private Methods
     }
 }

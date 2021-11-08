@@ -1,5 +1,4 @@
-﻿using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenTK;
+﻿using OpenTK;
 using System.Linq;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;

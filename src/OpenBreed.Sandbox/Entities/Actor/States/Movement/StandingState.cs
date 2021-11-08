@@ -5,7 +5,6 @@ using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;

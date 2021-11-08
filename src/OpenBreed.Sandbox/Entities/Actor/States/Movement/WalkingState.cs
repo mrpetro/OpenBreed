@@ -1,6 +1,4 @@
-﻿
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Sandbox.Helpers;
+﻿using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
 using System.Linq;

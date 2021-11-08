@@ -1,7 +1,5 @@
-﻿
-using NLua;
+﻿using NLua;
 using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenTK;
 using System;
 using System.Collections.Generic;

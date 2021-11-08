@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Rendering.Interface;
 using System;
 using System.Collections.Generic;
