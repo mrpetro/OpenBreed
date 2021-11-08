@@ -3,8 +3,8 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
+using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
@@ -48,23 +48,25 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         public void EnterState(Entity entity)
         {
             entity.SetSpriteOn();
-            commandsMan.Post(new PlayAnimCommand(entity.Id, "NotUsedYet", 0));
+
+            //entity.PlayAnimation(0, "NotUsedYet");
+            //commandsMan.Post(new PlayAnimCommand(entity.Id, "NotUsedYet", 0));
 
             entity.SetText(0, "Door - Opening");
 
-            entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
+            entity.Subscribe<AnimFinishedEventArgs>(OnAnimStopped);
         }
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
+            entity.Unsubscribe<AnimFinishedEventArgs>(OnAnimStopped);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
+        private void OnAnimStopped(object sender, AnimFinishedEventArgs eventArgs)
         {
             var entity = sender as Entity;
             entity.SetState(FsmId, (int)ButtonImpulse.Press);

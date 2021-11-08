@@ -18,6 +18,8 @@ namespace OpenBreed.Physics.Interface
 
         HashSet<int> QueryStatic(Box2 aabb);
 
+        bool ContainsItem(int itemId);
+
         #endregion Public Methods
     }
 }

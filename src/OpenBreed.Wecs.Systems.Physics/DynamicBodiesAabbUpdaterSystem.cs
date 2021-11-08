@@ -46,8 +46,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
         }
 
-        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
         public void Update(float dt)
         {
             for (int i = 0; i < entities.Count; i++)
@@ -63,6 +61,8 @@ namespace OpenBreed.Wecs.Systems.Physics
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {

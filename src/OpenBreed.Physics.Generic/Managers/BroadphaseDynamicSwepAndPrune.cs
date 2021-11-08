@@ -62,6 +62,8 @@ namespace OpenBreed.Physics.Generic.Managers
             return cell.Aabb;
         }
 
+        public bool ContainsItem(int itemId) => items.ContainsKey(itemId);
+
         public void InsertItem(int itemId, Box2 aabb)
         {
             if (items.ContainsKey(itemId))

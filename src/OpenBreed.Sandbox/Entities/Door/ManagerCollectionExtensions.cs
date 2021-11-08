@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Common;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Physics.Interface.Managers;
@@ -21,13 +22,13 @@ namespace OpenBreed.Sandbox.Entities.Door
             var commandsMan = managerCollection.GetManager<ICommandsMan>();
             var collisionMan = managerCollection.GetManager<ICollisionMan>();
             var stampMan = managerCollection.GetManager<IStampMan>();
-
+            var clipMan = managerCollection.GetManager<IClipMan>();
 
             var fsm = managerCollection.GetManager<IFsmMan>().Create<FunctioningState, FunctioningImpulse>("Door.Functioning");
 
-            fsm.AddState(new OpeningState(fsmMan, commandsMan, stampMan));
+            fsm.AddState(new OpeningState(fsmMan, commandsMan, stampMan, clipMan));
             fsm.AddState(new OpenedAwaitClose(fsmMan, commandsMan, stampMan));
-            fsm.AddState(new ClosingState(fsmMan, commandsMan, stampMan));
+            fsm.AddState(new ClosingState(fsmMan, commandsMan, stampMan, clipMan));
             fsm.AddState(new ClosedState(fsmMan, commandsMan, collisionMan, stampMan));
 
             fsm.AddTransition(FunctioningState.Closed, FunctioningImpulse.Open, FunctioningState.Opening);

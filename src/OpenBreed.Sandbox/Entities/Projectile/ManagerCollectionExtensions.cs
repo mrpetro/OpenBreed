@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Common;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Sandbox.Entities.Projectile.States;
@@ -13,9 +14,10 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         {
             var fsmMan = managerCollection.GetManager<IFsmMan>();
             var commandsMan = managerCollection.GetManager<ICommandsMan>();
+            var clipMan = managerCollection.GetManager<IClipMan>();
 
             var stateMachine = fsmMan.Create<AttackingState, AttackingImpulse>("Projectile");
-            stateMachine.AddState(new FiredState("Animations/Laser/Fired/", commandsMan));
+            stateMachine.AddState(new FiredState("Animations/Laser/Fired/", commandsMan, clipMan));
         }
 
         #endregion Public Methods

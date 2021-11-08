@@ -31,8 +31,6 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Methods
 
-        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
         public void Update(float dt)
         {
             ExecuteCommands();
@@ -58,6 +56,8 @@ namespace OpenBreed.Wecs.Systems.Core
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {

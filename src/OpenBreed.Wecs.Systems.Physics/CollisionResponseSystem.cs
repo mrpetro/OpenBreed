@@ -36,8 +36,6 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Public Methods
 
-        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
         public void UpdatePauseImmuneOnly(float dt)
         {
         }
@@ -94,6 +92,8 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+
         protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
@@ -111,7 +111,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         private IEnumerable<Entity> GetEntitiesWith<TComponent>()
         {
             var world = worldMan.GetById(WorldId);
-            return world.Entities.Where(entity => entity.Contains<TComponent>());
+            return entities.Where(entity => entity.Contains<TComponent>());
         }
 
         #endregion Private Methods

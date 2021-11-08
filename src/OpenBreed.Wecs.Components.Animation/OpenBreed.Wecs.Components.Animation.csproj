@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimationComponent.cs" />
+    <Compile Include="AnimationPlayerComponent.cs" />
     <Compile Include="Animator.cs" />
     <Compile Include="AnimatorBuilder.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />

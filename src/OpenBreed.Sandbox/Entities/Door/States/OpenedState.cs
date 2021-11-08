@@ -60,7 +60,6 @@ namespace OpenBreed.Sandbox.Components.States
             var stampId = stampMan.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
 
             entity.PutStamp(stampId, 0, pos.Value);
-            //commandsMan.Post(new PutStampCommand(entity.Id, stampId, 0, pos.Value));
 
             entity.SetText(0, "Door - Opened");
         }

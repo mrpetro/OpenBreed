@@ -50,8 +50,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
 
-        public override bool ContainsEntity(Entity entity) => true;
-
         public override void Initialize(World world)
         {
             base.Initialize(world);
@@ -75,6 +73,8 @@ namespace OpenBreed.Wecs.Systems.Physics
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => broadphaseDynamic.ContainsItem(entity.Id);
 
         protected override void OnAddEntity(Entity entity)
         {

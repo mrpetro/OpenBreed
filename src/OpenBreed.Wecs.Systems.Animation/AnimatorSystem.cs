@@ -4,14 +4,13 @@ using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Animation
 {
-    public class AnimationSystem : SystemBase, IUpdatableSystem
+    public class AnimatorSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 
@@ -27,23 +26,18 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Internal Constructors
 
-        internal AnimationSystem(IEntityMan entityMan, IClipMan clipMan, ILogger logger)
+        internal AnimatorSystem(IEntityMan entityMan, IClipMan clipMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.clipMan = clipMan;
             this.logger = logger;
 
             RequireEntityWith<AnimationComponent>();
-            RegisterHandler<PlayAnimCommand>(HandlePlayAnimCommand);
-            RegisterHandler<PauseAnimCommand>(HandlePauseAnimCommand);
-            RegisterHandler<StopAnimCommand>(HandleStopAnimCommand);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
-
-        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         public void UpdatePauseImmuneOnly(float dt)
         {
@@ -73,31 +67,11 @@ namespace OpenBreed.Wecs.Systems.Animation
             animator.Paused = false;
         }
 
-        public void Play(Entity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
-        {
-            if (animId != -1)
-                animator.ClipId = animId;
-
-            animator.ClipId = animId;
-            animator.Position = startPosition;
-            animator.Paused = false;
-        }
-
-        public void Pause(Entity entity, Animator animator)
-        {
-            animator.Paused = true;
-        }
-
-        public void Stop(Entity entity, Animator animator)
-        {
-            animator.Position = 0.0f;
-            animator.Paused = true;
-            RaiseAnimStoppedEvent(entity, animator);
-        }
-
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override bool DenqueueCommand(IEntityCommand entityCommand)
         {
@@ -118,53 +92,11 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Private Methods
 
-        private bool HandlePauseAnimCommand(PauseAnimCommand cmd)
+        private void Finish(Entity entity, Animator animator)
         {
-            var entity = entityMan.GetById(cmd.EntityId);
-            var ac = entity.Get<AnimationComponent>();
-            var animator = ac.States[cmd.AnimatorId];
-
-            Pause(entity, animator);
-
-            return true;
-        }
-
-        private bool HandleStopAnimCommand(StopAnimCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-            var ac = entity.Get<AnimationComponent>();
-            var animator = ac.States[cmd.AnimatorId];
-
-            Stop(entity, animator);
-
-            return true;
-        }
-
-        private bool HandlePlayAnimCommand(PlayAnimCommand cmd)
-        {
-            var entity = entityMan.GetById(cmd.EntityId);
-            var ac = entity.Get<AnimationComponent>();
-            var animator = ac.States[cmd.AnimatorId];
-
-            int animId = -1;
-
-            if (cmd.Id != null)
-            {
-                var data = clipMan.GetByName(cmd.Id);
-
-                if (data == null)
-                    logger.Warning($"Animation with ID = '{cmd.Id}' not found.");
-                else
-                    animId = data.Id;
-            }
-            else
-            {
-                animId = animator.ClipId;
-            }
-
-            Play(entity, animator, animId);
-
-            return true;
+            animator.Position = 0.0f;
+            animator.Paused = true;
+            RaiseAnimFinishedEvent(entity, animator);
         }
 
         private void Animate(Entity entity, float dt)
@@ -194,7 +126,7 @@ namespace OpenBreed.Wecs.Systems.Animation
                     animator.Position = animator.Position - data.Length;
                 else
                 {
-                    Stop(entity, animator);
+                    Finish(entity, animator);
                     return;
                 }
             }
@@ -202,9 +134,9 @@ namespace OpenBreed.Wecs.Systems.Animation
             data.UpdateWithNextFrame(entity, animator.Position);
         }
 
-        private void RaiseAnimStoppedEvent(Entity entity, Animator animator)
+        private void RaiseAnimFinishedEvent(Entity entity, Animator animator)
         {
-            entity.RaiseEvent(new AnimStoppedEventArgs(animator));
+            entity.RaiseEvent(new AnimFinishedEventArgs(animator));
         }
 
         #endregion Private Methods

@@ -45,14 +45,35 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
         #region Public Methods
 
-        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
         public override void Initialize(World world)
         {
             base.Initialize(world);
 
             //inputsMan.MouseMove += Inputs_MouseMove;
         }
+
+        public void Render(Box2 clipBox, int depth, float dt)
+        {
+            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
+            GL.Enable(EnableCap.Blend);
+            GL.Enable(EnableCap.AlphaTest);
+            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
+            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
+            GL.Enable(EnableCap.Texture2D);
+
+            for (int i = 0; i < entities.Count; i++)
+                DrawEntityAabb(entities[i], clipBox);
+
+            GL.Disable(EnableCap.Texture2D);
+            GL.Disable(EnableCap.AlphaTest);
+            GL.Disable(EnableCap.Blend);
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         //private void Inputs_MouseMove(object sender, OpenTK.Input.MouseMoveEventArgs e)
         //{
@@ -76,28 +97,6 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
         //        pos.Value = new OpenTK.Vector2(coord.X, coord.Y);
         //    }
         //}
-
-        public void Render(Box2 clipBox, int depth, float dt)
-        {
-            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
-            GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
-            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
-            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
-            GL.Enable(EnableCap.Texture2D);
-
-            for (int i = 0; i < entities.Count; i++)
-                DrawEntityAabb(entities[i], clipBox);
-
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
-            GL.Disable(EnableCap.Blend);
-        }
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
         protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);

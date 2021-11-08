@@ -43,13 +43,11 @@ namespace OpenBreed.Wecs.Systems
 
         bool Matches(Entity entity);
 
-        bool ContainsEntity(Entity entity);
+        bool HasEntity(Entity entity);
 
         void AddEntity(Entity entity);
 
         void RemoveEntity(Entity entity);
-
-        bool HandleCommand(ICommand cmd);
 
         /// <summary>
         /// Handle given command

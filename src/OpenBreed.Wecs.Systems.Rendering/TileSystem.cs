@@ -51,8 +51,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
         public override void Initialize(World world)
         {
             base.Initialize(world);
@@ -70,6 +68,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {

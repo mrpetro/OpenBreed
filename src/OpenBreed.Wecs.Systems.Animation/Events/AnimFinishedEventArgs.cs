@@ -5,13 +5,13 @@ using System;
 namespace OpenBreed.Wecs.Systems.Animation.Events
 {
     /// <summary>
-    /// Event args for event that occurs when animation is stopped
+    /// Event args for event that occurs when animation is finished
     /// </summary>
-    public class AnimStoppedEventArgs : EventArgs
+    public class AnimFinishedEventArgs : EventArgs
     {
         #region Public Constructors
 
-        public AnimStoppedEventArgs(Animator animator )
+        public AnimFinishedEventArgs(Animator animator )
         {
             Animator = animator;
         }

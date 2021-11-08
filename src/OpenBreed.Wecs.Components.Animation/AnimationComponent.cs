@@ -79,10 +79,13 @@ namespace OpenBreed.Wecs.Components.Animation
 
             foreach (var stateTemplate in template.States)
             {
-                builder.AddState()
-                            .SetClipByName(stateTemplate.ClipName)
-                            .SetLoop(stateTemplate.Loop)
-                            .SetSpeed(stateTemplate.Speed);
+                var stateBuilder = builder.AddState();
+
+                if (!string.IsNullOrEmpty(stateTemplate.ClipName))
+                    stateBuilder.SetClipByName(stateTemplate.ClipName);
+
+                stateBuilder.SetLoop(stateTemplate.Loop);
+                stateBuilder.SetSpeed(stateTemplate.Speed);
             }
 
             return builder.Build();

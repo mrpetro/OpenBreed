@@ -41,11 +41,11 @@ namespace OpenBreed.Wecs.Systems.Control
         {
         }
 
-        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {

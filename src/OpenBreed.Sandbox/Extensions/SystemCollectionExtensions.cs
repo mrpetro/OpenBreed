@@ -174,7 +174,8 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<DynamicBodiesCollisionCheckSystem>());
             builder.AddSystem(systemFactory.Create<StaticBodiesSystem>());
             //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
-            builder.AddSystem(systemFactory.Create<AnimationSystem>());
+
+            builder.AddSystem(systemFactory.Create<AnimatorSystem>());
             builder.AddSystem(systemFactory.Create<TimerSystem>());
             builder.AddSystem(systemFactory.Create<FsmSystem>());
 
@@ -182,9 +183,9 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
+            builder.AddSystem(systemFactory.Create<StampSystem>());
             builder.AddSystem(systemFactory.Create<TileSystem>());
             builder.AddSystem(systemFactory.Create<SpriteSystem>());
-            builder.AddSystem(systemFactory.Create<StampSystem>());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(systemFactory.Create<TextSystem>());
 

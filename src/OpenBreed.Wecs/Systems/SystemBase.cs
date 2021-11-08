@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Commands;
+﻿using OpenBreed.Common;
+using OpenBreed.Core.Commands;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
@@ -14,9 +15,9 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Private Fields
 
-        private readonly List<Entity> toAdd = new List<Entity>();
+        private readonly HashSet<Entity> toAdd = new HashSet<Entity>();
 
-        private readonly List<Entity> toRemove = new List<Entity>();
+        private readonly HashSet<Entity> toRemove = new HashSet<Entity>();
 
         private readonly List<Type> requiredComponentTypes = new List<Type>();
 
@@ -99,11 +100,18 @@ namespace OpenBreed.Wecs.Systems
 
         public void AddEntity(Entity entity)
         {
+            if (ContainsEntity(entity))
+            {
+                Console.WriteLine("Ass");
+            }
+
             toAdd.Add(entity);
         }
 
         public void RemoveEntity(Entity entity)
         {
+
+
             toRemove.Add(entity);
         }
 
@@ -118,32 +126,31 @@ namespace OpenBreed.Wecs.Systems
             if (toRemove.Any())
             {
                 //Process entities to remove
-                for (int i = 0; i < toRemove.Count; i++)
-                    OnRemoveEntity(toRemove[i]);
-
+                toRemove.ForEach(entity => OnRemoveEntity(entity));
                 toRemove.Clear();
             }
 
             if (toAdd.Any())
             {
                 //Process entities to add
-                for (int i = 0; i < toAdd.Count; i++)
-                    OnAddEntity(toAdd[i]);
-
+                toAdd.ForEach(entity => OnAddEntity(entity));
                 toAdd.Clear();
             }
         }
 
-        public bool HandleCommand(ICommand cmd)
+        public bool HasEntity(Entity entity)
         {
-            return false;
-        }
+            if (toAdd.Contains(entity))
+                return true;
 
-        public abstract bool ContainsEntity(Entity entity);
+            return ContainsEntity(entity);
+        }
 
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected abstract bool ContainsEntity(Entity entity);
 
         protected void RegisterHandler<TCommand>(Func<TCommand, bool> cmdHandler) where TCommand : IEntityCommand
         {

@@ -32,8 +32,9 @@ namespace OpenBreed.Physics.Interface
 
         Box2 GetAabb(int itemId);
 
-
         void Solve(Action<BroadphaseDynamicElement, float> staticPhase, Action<BroadphaseDynamicElement, BroadphaseDynamicElement, float> narrowPhase, float dt);
+ 
+        bool ContainsItem(int itemId);
 
         #endregion Public Methods
     }

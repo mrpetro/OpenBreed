@@ -39,11 +39,12 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             var fsmMan = managerCollection.GetManager<IFsmMan>();
             var commandsMan = managerCollection.GetManager<ICommandsMan>();
+            var clipMan = managerCollection.GetManager<IClipMan>();
 
             var stateMachine = fsmMan.Create<MovementState, MovementImpulse>("Actor.Movement");
 
-            stateMachine.AddState(new StandingState(fsmMan, commandsMan));
-            stateMachine.AddState(new WalkingState(fsmMan, commandsMan));
+            stateMachine.AddState(new StandingState(fsmMan, commandsMan, clipMan));
+            stateMachine.AddState(new WalkingState(fsmMan, commandsMan, clipMan));
 
             stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Stop, MovementState.Standing);
             stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);

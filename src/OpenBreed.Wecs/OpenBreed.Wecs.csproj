@@ -99,6 +99,7 @@
     <Compile Include="Systems\IRenderableSystem.cs" />
     <Compile Include="Systems\ISystemFactory.cs" />
     <Compile Include="Systems\ISystemFinder.cs" />
+    <Compile Include="Worlds\AnimationPlayerSystem.cs" />
     <Compile Include="Worlds\IWorldMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\SystemFinder.cs" />

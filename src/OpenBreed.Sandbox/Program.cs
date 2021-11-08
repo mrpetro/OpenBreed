@@ -141,6 +141,7 @@ namespace OpenBreed.Sandbox
 
             manCollection.AddSingleton<WorldGateHelper>(() => new WorldGateHelper(manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
+                                                                                  manCollection.GetManager<IClipMan>(),
                                                                                   manCollection.GetManager<IEntityFactory>(),
                                                                                   manCollection.GetManager<IEventsMan>(),
                                                                                   manCollection.GetManager<ICommandsMan>(),

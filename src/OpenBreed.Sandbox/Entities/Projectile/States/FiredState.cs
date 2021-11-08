@@ -1,11 +1,11 @@
 ﻿using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Helpers;
-using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Animation.Interface;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
 {
@@ -15,15 +15,17 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         private readonly string animPrefix;
         private readonly ICommandsMan commandsMan;
+        private readonly IClipMan clipMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FiredState(string animPrefix, ICommandsMan commandsMan)
+        public FiredState(string animPrefix, ICommandsMan commandsMan, IClipMan clipMan)
         {
             this.animPrefix = animPrefix;
             this.commandsMan = commandsMan;
+            this.clipMan = clipMan;
         }
 
         #endregion Public Constructors
@@ -43,7 +45,10 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
-            commandsMan.Post(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
+            var clipId = clipMan.GetByName(animPrefix + animDirName).Id;
+
+            entity.PlayAnimation(0, clipId);
+            //commandsMan.Post(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
 
             entity.SetText(0, "Projectile - Fired");
         }

@@ -42,8 +42,6 @@ namespace OpenBreed.Wecs.Systems.Physics
                 UpdateEntity(entities[i], dt);
         }
 
-        public override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
         public void UpdateEntity(Entity entity, float dt)
         {
             var position = entity.Get<PositionComponent>();
@@ -67,6 +65,8 @@ namespace OpenBreed.Wecs.Systems.Physics
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(Entity entity)
         {

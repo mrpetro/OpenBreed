@@ -18,7 +18,6 @@ using OpenBreed.Common.Tools;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Wecs.Systems.Animation.Events;
-using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Entities;
@@ -29,6 +28,8 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Animation.Interface;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -44,10 +45,11 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
     public class WorldGateHelper
     {
-        public WorldGateHelper(IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICommandsMan commandsMan, ICollisionMan collisionMan, IJobsMan jobsMan, ViewportCreator viewportCreator)
+        public WorldGateHelper(IWorldMan worldMan, IEntityMan entityMan, IClipMan clipMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICommandsMan commandsMan, ICollisionMan collisionMan, IJobsMan jobsMan, ViewportCreator viewportCreator)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;
+            this.clipMan = clipMan;
             this.entityFactory = entityFactory;
             this.eventsMan = eventsMan;
             this.commandsMan = commandsMan;
@@ -60,6 +62,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         public const string SPRITE_WORLD_EXIT = "Atlases/Sprites/World/Exit";
         private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
+        private readonly IClipMan clipMan;
         private readonly IEntityFactory entityFactory;
         private readonly IEventsMan eventsMan;
         private readonly ICommandsMan commandsMan;
@@ -102,12 +105,16 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             var jobChain = new JobChain();
 
+            var cameraFadeOutClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_OUT).Id;
+            var cameraFadeInClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_IN).Id;
+
+
             var worldIdToRemoveFrom = targetEntity.WorldId;
 
             //Pause this world
             jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Pause()));
             //Fade out camera
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => commandsMan.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
+            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
             //Remove entity from this world
             jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => targetEntity.LeaveWorld() ));
             //Load next world if needed
@@ -119,7 +126,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Unpause this world
             jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Unpause()));
             //Fade in camera
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => commandsMan.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
+            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
 
             jobsMan.Execute(jobChain);
         }

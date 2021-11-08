@@ -97,6 +97,8 @@ namespace OpenBreed.Physics.Generic.Managers
             items.Add(itemId, aabb);
         }
 
+        public bool ContainsItem(int itemId) => items.ContainsKey(itemId);
+
         public void RemoveStatic(int itemId)
         {
             int leftIndex;

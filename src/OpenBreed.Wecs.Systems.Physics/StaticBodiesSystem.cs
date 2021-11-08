@@ -4,9 +4,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -49,8 +47,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             broadphaseGrid = world.GetModule<IBroadphaseStatic>();
         }
 
-        public override bool ContainsEntity(Entity entity) => true;
-
         public void UpdatePauseImmuneOnly(float dt)
         {
             ExecuteCommands();
@@ -64,6 +60,8 @@ namespace OpenBreed.Wecs.Systems.Physics
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override bool ContainsEntity(Entity entity) => broadphaseGrid.ContainsItem(entity.Id);
 
         protected override void OnAddEntity(Entity entity)
         {
