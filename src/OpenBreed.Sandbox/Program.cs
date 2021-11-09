@@ -24,6 +24,7 @@ using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Button;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.Turret;
@@ -146,6 +147,9 @@ namespace OpenBreed.Sandbox
                                                                                   manCollection.GetManager<ViewportCreator>()));
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                         manCollection.GetManager<IEntityFactory>()));
+            manCollection.AddSingleton<PickableHelper>(() => new PickableHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                        manCollection.GetManager<IEntityFactory>()));
+
             manCollection.AddSingleton<EnvironmentHelper>(() => new EnvironmentHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                                       manCollection.GetManager<IEntityFactory>(),
                                                                                       manCollection.GetManager<IBuilderFactory>()));
@@ -416,6 +420,7 @@ namespace OpenBreed.Sandbox
 
             var worldGateHelper = GetManager<WorldGateHelper>();
             var doorHelper = GetManager<DoorHelper>();
+            var pickableHelper = GetManager<PickableHelper>();
             var environmentHelper = GetManager<EnvironmentHelper>();
             var projectileHelper = GetManager<ProjectileHelper>();
             var actorHelper = GetManager<ActorHelper>();
@@ -438,6 +443,7 @@ namespace OpenBreed.Sandbox
             manCollection.SetupButtonStates();
             manCollection.SetupProjectileStates();
             manCollection.SetupDoorStates();
+            manCollection.SetupPickableStates();
             manCollection.SetupActorAttackingStates();
             manCollection.SetupActorMovementStates();
             //manCollection.SetupActorRotationStates();
@@ -458,7 +464,9 @@ namespace OpenBreed.Sandbox
             var entityMan = GetManager<IEntityMan>();
 
             var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 1");
+
             doorHelper.LoadStamps();
+            pickableHelper.LoadStamps();
 
             cameraBuilder.SetupPlayerCamera();
 

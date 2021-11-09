@@ -83,7 +83,9 @@
     <Compile Include="Entities\FixtureTypes.cs" />
     <Compile Include="Entities\EnvironmentHelper.cs" />
     <Compile Include="Entities\MapCellHelper.cs" />
+    <Compile Include="Entities\Pickable\ManagerCollectionExtensions.cs" />
     <Compile Include="Loaders\AnimatedCellLoader.cs" />
+    <Compile Include="Loaders\ItemCellEntityLoader.cs" />
     <Compile Include="Loaders\DoorCellEntityLoader.cs" />
     <Compile Include="Loaders\LevelEntryCellLoader.cs" />
     <Compile Include="Loaders\GenericCellEntityLoader.cs" />
@@ -135,7 +137,7 @@
     <Compile Include="Entities\Pickable\PickableHelper.cs" />
     <Compile Include="Entities\Pickable\States\FunctioningState.cs" />
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
-    <Compile Include="Entities\Pickable\States\PickingState.cs" />
+    <Compile Include="Entities\Pickable\States\PickedState.cs" />
     <Compile Include="Entities\Projectile\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Projectile\States\AttackingState.cs" />
     <Compile Include="Entities\Teleport\TeleportHelper.cs" />
@@ -174,6 +176,42 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Actor\John.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\Ammo.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\KeycardStandard.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\SmartCard.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\PowerUpF.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\PowerUpA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\PowerUpS.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\ExtraLife.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\CreditsBig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\AreaScanner.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\MedkitSmall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\CreditsSmall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Pickables\MedkitBig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\CrazyMover\CrazyMover.xml">
@@ -411,7 +449,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sounds\" />
-    <Folder Include="Entities\Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\KeraLua.1.0.22\build\net45\KeraLua.targets" Condition="Exists('..\..\packages\KeraLua.1.0.22\build\net45\KeraLua.targets')" />

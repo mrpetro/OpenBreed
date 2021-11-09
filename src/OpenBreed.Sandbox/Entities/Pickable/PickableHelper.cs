@@ -1,74 +1,78 @@
-﻿//using System;
-//using OpenBreed.Core;
-//using OpenBreed.Core.Common;
-//using OpenBreed.Core.Common.Systems.Components;
-//using OpenBreed.Core.Entities;
-//using OpenBreed.Physics.Generic.Components;
-//using OpenBreed.Physics.Generic.Events;
-//using OpenBreed.Core.States;
-//using OpenBreed.Sandbox.Entities.Pickable.States;
-//using OpenBreed.Sandbox.Helpers;
-//using OpenTK;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Tools;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Worlds;
+using OpenTK;
 
-//namespace OpenBreed.Sandbox.Entities.Pickable
-//{
-//    public class PickableHelper
-//    {
-//        private const string STAMP_AMMO_LYING = "Tiles/Stamps/Items/Ammo/Lying";
-//        private const string STAMP_AMMO_PICKED = "Tiles/Stamps/Items/Ammo/Picked";
-//        #region Public Methods
+namespace OpenBreed.Sandbox.Entities.Pickable
+{
+    public class PickableHelper
+    {
+        #region Private Fields
 
-//        public static StateMachine CreateFSM(Entity entity)
-//        {
-//            var stateMachine = entity.AddFSM("Functioning");
+        private const string PICKABLE_PREFIX = @"Entities\Common\Pickables";
+        private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly IEntityFactory entityFactory;
 
-//            var lyingStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_AMMO_LYING);
-//            var pickedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_AMMO_PICKED);
+        #endregion Private Fields
 
-//            stateMachine.AddState(new LyingState("Lying", lyingStamp.Id));
-//            stateMachine.AddState(new PickingState("Picking", pickedStamp.Id));
+        #region Public Constructors
 
-//            return stateMachine;
-//        }
+        public PickableHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
+        {
+            this.dataLoaderFactory = dataLoaderFactory;
+            this.entityFactory = entityFactory;
+        }
 
-//        public static void AddItem(ICore core, World world, int x, int y)
-//        {
-//            var item = core.GetManager<IEntityMan>().Create();
+        #endregion Public Constructors
 
-//            //item.Add(new Animator(5.0f, false));
-//            item.Add(BodyComponent.Create(1.0f, 1.0f, "Trigger"));
-//            item.Add(Position.Create(x * 16, y * 16));
-//            item.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
-//            item.Add(TextHelper.Create(core, new Vector2(0, 20), "Ammo"));
+        #region Public Methods
 
-//            var doorSm = PickableHelper.CreateFSM(item);
-//            doorSm.SetInitialState("Lying");
-//            world.AddEntity(item);
-//        }
+        public void LoadStamps()
+        {
+            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStamp>();
 
-//        #endregion Public Methods
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/Ammo/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/Ammo/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/MedkitSmall/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/MedkitSmall/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/MedkitBig/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/MedkitBig/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/CreditsSmall/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/CreditsSmall/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/CreditsBig/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/CreditsBig/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/AreaScanner/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/AreaScanner/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/Smartcard/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/Smartcard/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardStandard/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardStandard/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/ExtraLife/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/ExtraLife/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/PowerUpS/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/PowerUpS/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/PowerUpA/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/PowerUpA/Picked");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/PowerUpF/Lying");
+            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/PowerUpF/Picked");
+        }
 
-//        #region Private Methods
+        public void AddItem(World world, int x, int y, string name)
+        {
+            var path = $@"{PICKABLE_PREFIX}\{name}.xml";
 
-//        public static void CreateStamps(ICore core)
-//        {
-//            var stampBuilder = core.Rendering.Stamps.Create();
+            var pickableTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(path);
+            var pickable = entityFactory.Create(pickableTemplate);
 
-//            stampBuilder.ClearTiles();
-//            stampBuilder.SetName(STAMP_AMMO_LYING);
-//            stampBuilder.SetSize(1, 1);
-//            stampBuilder.SetOrigin(0, 0);
-//            stampBuilder.AddTile(0, 0, 13);
-//            stampBuilder.Build();
+            pickable.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
-//            stampBuilder.ClearTiles();
-//            stampBuilder.SetName(STAMP_AMMO_PICKED);
-//            stampBuilder.SetSize(1, 1);
-//            stampBuilder.SetOrigin(0, 0);
-//            stampBuilder.AddTile(0, 0, 12);
-//            stampBuilder.Build();
-//        }
+            pickable.EnterWorld(world.Id);
+        }
 
-//        #endregion Private Methods
-//    }
-//}
+        #endregion Public Methods
+    }
+}

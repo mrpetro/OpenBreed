@@ -1,6 +1,4 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Managers;
-using OpenBreed.Fsm;
+﻿using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
@@ -20,7 +18,8 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private readonly string stampPrefix;
+        private const string STAMP_PREFIX = "Tiles/Stamps";
+
         private readonly IFsmMan fsmMan;
         private readonly ICollisionMan collisionMan;
         private readonly IStampMan stampMan;
@@ -34,7 +33,6 @@ namespace OpenBreed.Sandbox.Components.States
             this.fsmMan = fsmMan;
             this.collisionMan = collisionMan;
             this.stampMan = stampMan;
-            stampPrefix = "Tiles/Stamps";
             //collisionMan.RegisterCollisionPair(ColliderTypes.DoorOpenTrigger, ColliderTypes.ActorBody, DoorOpenTriggerCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.DoorOpenTrigger, DoorOpenTriggerCallbackEx);
         }
@@ -62,12 +60,9 @@ namespace OpenBreed.Sandbox.Components.States
 
             var className = entity.Get<ClassComponent>().Name;
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var stampId = stampMan.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
+            var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{stateName}").Id;
 
             entity.PutStamp(stampId, 0, pos.Value);
-
-            //STAMP_DOOR_HORIZONTAL_CLOSED = $"{stampPrefix}/{className}/{stateName}";
-
             entity.SetText(0, "Door - Closed");
 
             var bodyCmp = entity.Get<BodyComponent>();
@@ -95,6 +90,5 @@ namespace OpenBreed.Sandbox.Components.States
         }
 
         #endregion Private Methods
-
     }
 }

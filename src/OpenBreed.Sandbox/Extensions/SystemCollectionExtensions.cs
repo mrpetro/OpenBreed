@@ -14,6 +14,7 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Loaders;
@@ -118,6 +119,8 @@ namespace OpenBreed.Sandbox.Extensions
                 mapWorldDataLoader.Register(LevelEntryCellLoader.CODE, new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
                                                                          managerCollection.GetManager<WorldGateHelper>()));
                 mapWorldDataLoader.Register(DoorCellEntityLoader.CODE, new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>()));
+
+                mapWorldDataLoader.Register(ItemCellEntityLoader.CODE, new ItemCellEntityLoader(managerCollection.GetManager<PickableHelper>()));
 
                 var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetManager<TeleportHelper>(),
                                                         managerCollection.GetManager<ILogger>());
