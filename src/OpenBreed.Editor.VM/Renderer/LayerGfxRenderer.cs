@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.VM.Renderer
                     var x = xIndex * tileSize;
                     var y = yIndex * tileSize;
 
-                    tilesTool.Parent.DrawTile(Target, tileId, x, y, tileSize);
+                    tilesTool.Parent.DrawTile(Target, tileId, x, renderable.Width - y, tileSize);
                 }
             }
         }

@@ -19,8 +19,6 @@ namespace OpenBreed.Editor.VM.Tiles
         private string currentPaletteRef = null;
         private int _currentPaletteIndex = -1;
 
-        private int _tileSize;
-
         private TileSetModel model;
         private readonly TileAtlasDataProvider tileSetsDataProvider;
         private readonly PalettesDataProvider palettesDataProvider;
@@ -33,17 +31,15 @@ namespace OpenBreed.Editor.VM.Tiles
                                       PalettesDataProvider palettesDataProvider)
         {
             PaletteIds = new BindingList<string>();
-            Items = new BindingList<TileVM>();
-            Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
             this.tileSetsDataProvider = tileSetsDataProvider;
             this.palettesDataProvider = palettesDataProvider;
 
-            //Viewer = new TileSetViewerVM();
+            Viewer = new TileSetViewerVM();
         }
 
         #endregion Public Constructors
 
-        //public TileSetViewerVM Viewer { get; set; }
+        public TileSetViewerVM Viewer { get; set; }
 
         #region Public Properties
 
@@ -60,19 +56,6 @@ namespace OpenBreed.Editor.VM.Tiles
             get { return _currentPaletteIndex; }
             set { SetProperty(ref _currentPaletteIndex, value); }
         }
-
-        public BindingList<TileVM> Items { get; private set; }
-
-        public int TileSize
-        {
-            get { return _tileSize; }
-            set { SetProperty(ref _tileSize, value); }
-        }
-
-        public int TilesNoX => model.TilesNoY;
-        public int TilesNoY => model.TilesNoY;
-        public int Width => model.Bitmap.Width;
-        public int Height => model.Bitmap.Height;
 
         #endregion Public Properties
 
@@ -95,51 +78,9 @@ namespace OpenBreed.Editor.VM.Tiles
             if (model == null)
                 return;
 
-            TileSize = model.TileSize;
-            SetupTiles(model.Tiles);
+            Viewer.FromModel(model);
+
             SetupPaletteIds(entry.PaletteRefs);
-        }
-
-        public void Draw(Graphics gfx)
-        {
-            int xMax = TilesNoX;
-            int yMax = TilesNoY;
-
-            for (int j = 0; j < yMax; j++)
-            {
-                for (int i = 0; i < xMax; i++)
-                {
-                    int gfxId = i + xMax * j;
-                    DrawTile(gfx, gfxId, i * TileSize, j * TileSize, TileSize);
-                }
-            }
-        }
-
-        public void DrawTile(Graphics gfx, int tileId, float x, float y, int tileSize)
-        {
-            if (tileId >= Items.Count)
-                return;
-
-            var tileRect = Items[tileId].Rectangle;
-            gfx.DrawImage(model.Bitmap, (int)x, (int)y, tileRect, GraphicsUnit.Pixel);
-        }
-
-        public Point GetIndexCoords(Point point)
-        {
-            return new Point(point.X / TileSize, point.Y / TileSize);
-        }
-
-        public Point GetSnapCoords(Point point)
-        {
-            int x = point.X / TileSize;
-            int y = point.Y / TileSize;
-
-            return new Point(x * TileSize, y * TileSize);
-        }
-
-        public void LoadDefaultTiles()
-        {
-            RebuildTiles();
         }
 
         #endregion Public Methods
@@ -155,11 +96,7 @@ namespace OpenBreed.Editor.VM.Tiles
             });
 
             CurrentPaletteRef = PaletteIds.FirstOrDefault();
-        }
-
-        internal void SetupTiles(List<TileModel> tiles)
-        {
-            RebuildTiles();
+            Viewer.Palette = CurrentPalette;
         }
 
         #endregion Internal Methods
@@ -173,6 +110,7 @@ namespace OpenBreed.Editor.VM.Tiles
                 case nameof(CurrentPaletteRef):
                     UpdateCurrentPaletteIndex();
                     SwitchPalette();
+                    Viewer.Palette = CurrentPalette;
                     break;
 
                 case nameof(CurrentPaletteIndex):
@@ -207,24 +145,6 @@ namespace OpenBreed.Editor.VM.Tiles
         private void UpdateCurrentPaletteIndex()
         {
             CurrentPaletteIndex = PaletteIds.IndexOf(CurrentPaletteRef);
-        }
-
-        private void RebuildTiles()
-        {
-            Items.UpdateAfter(() => 
-            {
-                Items.Clear();
-
-                var tilesCount = TilesNoX * TilesNoY;
-
-                for (int tileId = 0; tileId < tilesCount; tileId++)
-                {
-                    int tileIndexX = tileId % TilesNoX;
-                    int tileIndexY = tileId / TilesNoX;
-                    var rectangle = new Rectangle(tileIndexX * TileSize, tileIndexY * TileSize, TileSize, TileSize);
-                    Items.Add(new TileVM(tileId, rectangle));
-                }
-            });
         }
 
         #endregion Private Methods

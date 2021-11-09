@@ -38,6 +38,8 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
 
         public bool IsEmpty { get { return SelectedIndexes.Count == 0; } }
 
+        public event EventHandler InfoChanged;
+
         public bool MultiSelect { get; set; }
 
         public EditorApplicationVM Root { get; }
@@ -58,15 +60,31 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
                 AddSelection(tileId);
         }
 
+        public string Info { get; private set; }
+
+        private void UpdateInfo()
+        {
+            if (SelectedIndexes.Count == 1)
+                Info = $"Index: {SelectedIndexes[0]}";
+            else
+                Info = "";
+
+            InfoChanged?.Invoke(this, new EventArgs());
+        }
+
         public void AddSelection(int tileId)
         {
             if (!SelectedIndexes.Contains(tileId))
+            {
                 SelectedIndexes.Add(tileId);
+                UpdateInfo();
+            }
         }
 
         public void ClearSelection()
         {
             SelectedIndexes.Clear();
+            UpdateInfo();
         }
 
         public void DrawSelection(Graphics gfx)

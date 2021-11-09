@@ -26,9 +26,12 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
             _vm = vm;
 
             cbxPalettes.DataSource = _vm.PaletteIds;
-            cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedIndex), _vm, nameof(_vm.CurrentPaletteIndex), false, DataSourceUpdateMode.OnPropertyChanged);
 
-            TileSetView.Initialize(_vm);
+            TileSetViewer.Initialize(_vm.Viewer);
+
+            cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedIndex), _vm, nameof(_vm.CurrentPaletteIndex), false, DataSourceUpdateMode.OnPropertyChanged);
+            CurrentIndexInfoLbl.DataBindings.Add(nameof(CurrentIndexInfoLbl.Text), _vm.Viewer, nameof(_vm.Viewer.Info), false, DataSourceUpdateMode.OnPropertyChanged);
+
         }
 
         private void btnImport_Click(object sender, EventArgs e)

@@ -46,7 +46,7 @@ namespace OpenBreed.Editor.VM.Renderer
                     var x = xIndex * tileSize;
                     var y = yIndex * tileSize;
 
-                    DrawAction(actionSet, propertyId, x, y, tileSize);
+                    DrawAction(actionSet, propertyId, x, renderable.Width - y, tileSize);
                 }
             }
         }

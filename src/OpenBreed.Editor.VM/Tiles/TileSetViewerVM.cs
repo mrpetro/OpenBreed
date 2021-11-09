@@ -25,6 +25,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Private Fields
 
+        private string info;
         private Bitmap _bitmap;
         private PaletteModel _palette;
 
@@ -35,13 +36,14 @@ namespace OpenBreed.Editor.VM.Tiles
         public TileSetViewerVM()
         {
             Selector = new TilesSelector(this);
+            Selector.InfoChanged += (s, a) => Info = Selector.Info;
 
             Items = new BindingList<TileVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
-            Bitmap = new Bitmap(1, 1, PixelFormat.Format8bppIndexed);
 
-            PropertyChanged += This_PropertyChanged;
+
+            Bitmap = new Bitmap(1, 1, PixelFormat.Format8bppIndexed);
         }
 
         #endregion Public Constructors
@@ -60,6 +62,12 @@ namespace OpenBreed.Editor.VM.Tiles
         {
             get { return _palette; }
             set { SetProperty(ref _palette, value); }
+        }
+
+        public string Info
+        {
+            get { return info; }
+            set { SetProperty(ref info, value); }
         }
 
         public TilesSelector Selector { get; }
@@ -258,17 +266,16 @@ namespace OpenBreed.Editor.VM.Tiles
             });
         }
 
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
                 case nameof(Palette):
                     BitmapHelper.SetPaletteColors(Bitmap, Palette.Data);
                     break;
-
-                default:
-                    break;
             }
+
+            base.OnPropertyChanged(name);
         }
 
         #endregion Private Methods

@@ -71,6 +71,8 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Animations\AnimationEditorVM.cs" />
+    <Compile Include="Animations\GenericAnimationEditorVM.cs" />
     <Compile Include="Database\Entries\DbDataSourceEntryVM.cs" />
     <Compile Include="Database\Entries\DbEntityTemplateEntryVM.cs" />
     <Compile Include="Database\Entries\DbScriptEntryVM.cs" />

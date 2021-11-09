@@ -374,12 +374,6 @@
     <Compile Include="Controls\Tiles\TileSetEditorCtrl.Designer.cs">
       <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tiles\TileSetViewCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Tiles\TileSetViewCtrl.Designer.cs">
-      <DependentUpon>TileSetViewCtrl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Tiles\TileSetViewerCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -668,9 +662,6 @@
     <EmbeddedResource Include="Controls\Tiles\TileSetEditorCtrl.resx">
       <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tiles\TileSetViewCtrl.resx">
-      <DependentUpon>TileSetViewCtrl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetViewerCtrl.resx">
       <DependentUpon>TileSetViewerCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -728,6 +719,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\Animations\" />
     <Folder Include="General\" />
   </ItemGroup>
   <ItemGroup>
