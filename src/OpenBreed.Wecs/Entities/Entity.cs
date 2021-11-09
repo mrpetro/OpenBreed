@@ -37,6 +37,11 @@ namespace OpenBreed.Wecs.Entities
             ComponentTypes = components.Keys;
         }
 
+        public void Destroy()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion Internal Constructors
 
         #region Public Properties
