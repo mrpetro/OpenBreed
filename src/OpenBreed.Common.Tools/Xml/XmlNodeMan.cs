@@ -4,7 +4,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace AVEVA.NET.Gateways.Components.Common
+namespace OpenBreed.Common.Tools.Xml
 {
     /// <summary>
     /// This is singleton class of Xml Node Manager which helps in (de)serialization of Xml nodes which object types not known at compilation time 
