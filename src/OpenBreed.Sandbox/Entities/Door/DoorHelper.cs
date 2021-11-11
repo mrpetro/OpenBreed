@@ -27,6 +27,8 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Common;
+using System.Globalization;
+using OpenBreed.Common.Tools.Xml;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
@@ -53,20 +55,24 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void AddVerticalDoor(World world, int x, int y)
         {
-            var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml");
-            var door = entityFactory.Create(doorVerticalTemplate);
+            var dictionary = new Dictionary<string, string>();
+            dictionary.Add("startX", (16 * x).ToString(CultureInfo.InvariantCulture));
+            dictionary.Add("startY", (16 * y).ToString(CultureInfo.InvariantCulture));
 
-            door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml", dictionary);
+            var door = entityFactory.Create(doorVerticalTemplate);
 
             door.EnterWorld(world.Id);
         }
 
         public void AddHorizontalDoor(World world, int x, int y)
         {
-            var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml");
-            var door = entityFactory.Create(doorHorizontalTemplate);
+            var dictionary = new Dictionary<string, string>();
+            dictionary.Add("startX", (16 * x).ToString(CultureInfo.InvariantCulture));
+            dictionary.Add("startY", (16 * y).ToString(CultureInfo.InvariantCulture));
 
-            door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml", dictionary);
+            var door = entityFactory.Create(doorHorizontalTemplate);
 
             door.EnterWorld(world.Id);
         }

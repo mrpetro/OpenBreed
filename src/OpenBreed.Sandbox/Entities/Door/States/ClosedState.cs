@@ -33,8 +33,8 @@ namespace OpenBreed.Sandbox.Components.States
             this.fsmMan = fsmMan;
             this.collisionMan = collisionMan;
             this.stampMan = stampMan;
-            //collisionMan.RegisterCollisionPair(ColliderTypes.DoorOpenTrigger, ColliderTypes.ActorBody, DoorOpenTriggerCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.DoorOpenTrigger, DoorOpenTriggerCallbackEx);
+
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.DoorOpenTrigger, DoorOpenTriggerCallback);
         }
 
         #endregion Public Constructors
@@ -84,7 +84,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Private Methods
 
-        private void DoorOpenTriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
+        private void DoorOpenTriggerCallback(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
         {
             entityB.SetState(FsmId, (int)FunctioningImpulse.Open);
         }

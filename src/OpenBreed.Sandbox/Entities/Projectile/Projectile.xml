@@ -14,9 +14,9 @@
 				</State>
 			</States>	
 		</Animation>
-		<Position x="0" y="0" />
-		<Thrust x="0" y="0" />
-		<Velocity x="0" y="0" />
+		<Position X="0" Y="0" />
+		<Thrust X="0" Y="0" />
+		<Velocity X="0" Y="0" />
 		<Body>
 			<CofFactor>0.0</CofFactor>
 			<CorFactor>1.0</CorFactor>

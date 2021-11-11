@@ -12,6 +12,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Common.Tools.Xml;
 
 namespace OpenBreed.Sandbox
 {

@@ -11,6 +11,7 @@ using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs;
 using OpenBreed.Fsm;
 using OpenBreed.Core.Managers;
+using OpenBreed.Common.Tools.Xml;
 
 namespace OpenBreed.Sandbox.Entities.Turret
 {

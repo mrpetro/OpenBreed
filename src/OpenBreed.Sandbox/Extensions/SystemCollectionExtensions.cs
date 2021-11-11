@@ -118,9 +118,18 @@ namespace OpenBreed.Sandbox.Extensions
 
                 mapWorldDataLoader.Register(LevelEntryCellLoader.CODE, new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
                                                                          managerCollection.GetManager<WorldGateHelper>()));
-                mapWorldDataLoader.Register(DoorCellEntityLoader.CODE, new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>()));
+                mapWorldDataLoader.Register(DoorCellEntityLoader.DOOR_STANDARD, new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>()));
 
-                mapWorldDataLoader.Register(ItemCellEntityLoader.CODE, new ItemCellEntityLoader(managerCollection.GetManager<PickableHelper>()));
+                var pickableCellEntityLoader = new ItemCellEntityLoader(managerCollection.GetManager<PickableHelper>());
+
+                mapWorldDataLoader.Register(ItemCellEntityLoader.GENERIC_ITEM, pickableCellEntityLoader);
+                mapWorldDataLoader.Register(ItemCellEntityLoader.KEYCARD_RED, pickableCellEntityLoader);
+                mapWorldDataLoader.Register(ItemCellEntityLoader.KEYCARD_GREEN, pickableCellEntityLoader);
+                mapWorldDataLoader.Register(ItemCellEntityLoader.KEYCARD_BLUE, pickableCellEntityLoader);
+                mapWorldDataLoader.Register(ItemCellEntityLoader.KEYCARD_SPECIAL, pickableCellEntityLoader);
+                mapWorldDataLoader.Register(ItemCellEntityLoader.SMARTCARD_1, pickableCellEntityLoader);
+                mapWorldDataLoader.Register(ItemCellEntityLoader.SMARTCARD_2, pickableCellEntityLoader);
+                mapWorldDataLoader.Register(ItemCellEntityLoader.SMARTCARD_3, pickableCellEntityLoader);
 
                 var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetManager<TeleportHelper>(),
                                                         managerCollection.GetManager<ILogger>());

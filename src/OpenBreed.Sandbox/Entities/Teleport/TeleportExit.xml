@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-        <Position x="0" y="0" />
+        <Position X="0" Y="0" />
 		<Text>
 			<Text>TeleportExit</Text>
 			<Offset X="0" Y="32" />

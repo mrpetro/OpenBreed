@@ -9,7 +9,10 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Fields
 
-        public static readonly int CODE = 62;
+        public const int DOOR_STANDARD = 62;
+        public const int DOOR_RED = 28;
+        public const int DOOR_GREEN = 29;
+        public const int DOOR_BLUE = 30;
 
         #endregion Public Fields
 
@@ -43,7 +46,7 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var rightValue = MapWorldDataLoader.GetActionCellValue(layout, ix + 1, iy);
 
-            if (rightValue == CODE)
+            if (rightValue == DOOR_STANDARD)
             {
                 doorHelper.AddHorizontalDoor(world, ix, iy);
                 visited[ix, iy] = true;
@@ -53,7 +56,7 @@ namespace OpenBreed.Sandbox.Loaders
 
             var downValue = MapWorldDataLoader.GetActionCellValue(layout, ix, iy + 1);
 
-            if (downValue == CODE)
+            if (downValue == DOOR_STANDARD)
             {
                 doorHelper.AddVerticalDoor(world, ix, iy);
                 visited[ix, iy] = true;

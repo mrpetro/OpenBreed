@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Tools;
+using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Core;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;

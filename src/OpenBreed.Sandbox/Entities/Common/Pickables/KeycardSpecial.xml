@@ -2,7 +2,7 @@
 <EntityTemplate>
 	<Components>
 		<Class>
-			<Name>CreditsBig</Name>
+			<Name>KeycardSpecial</Name>
 		</Class>
 		<Fsm>
 			<States>
