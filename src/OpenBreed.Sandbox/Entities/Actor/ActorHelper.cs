@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
 using OpenBreed.Common.Tools;
+using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;

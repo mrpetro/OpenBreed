@@ -1,11 +1,14 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Tools;
+using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace OpenBreed.Sandbox.Entities.Pickable
 {
@@ -73,10 +76,14 @@ namespace OpenBreed.Sandbox.Entities.Pickable
         {
             var path = $@"{PICKABLE_PREFIX}\{name}.xml";
 
-            var pickableTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(path);
+            var dictionary = new Dictionary<string, string>();
+            dictionary.Add("startX", (16 * x).ToString(CultureInfo.InvariantCulture));
+            dictionary.Add("startY", (16 * y).ToString(CultureInfo.InvariantCulture));
+
+            var pickableTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(path, dictionary);
             var pickable = entityFactory.Create(pickableTemplate);
 
-            pickable.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            //pickable.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
             pickable.EnterWorld(world.Id);
         }

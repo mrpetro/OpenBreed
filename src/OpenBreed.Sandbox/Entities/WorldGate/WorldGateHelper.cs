@@ -29,6 +29,7 @@ using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Common.Tools.Xml;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {

@@ -1,4 +1,4 @@
-﻿using AVEVA.NET.Gateways.Components.Common;
+﻿using OpenBreed.Common.Tools.Xml;
 using System;
 using System.Collections.Generic;
 using System.Xml;
