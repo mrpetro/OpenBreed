@@ -109,12 +109,12 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public Entity AddTeleportEntry(World world, int x, int y, int pairId, int atlasId, int gfxValue)
         {
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportEntry.xml");
-            var teleportEntry = entityFactory.Create(entityTemplate);
+            var teleportEntry = entityFactory.Create(@"Entities\Teleport\TeleportEntry.xml")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
             teleportEntry.Tag = new TeleportPair { Id = pairId, Type = TeleportType.In };
-
-            teleportEntry.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
             var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
             tileComponentBuilder.SetAtlasById(atlasId);
@@ -133,13 +133,12 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public Entity AddTeleportExit(World world, int x, int y, int pairId, int atlasId, int gfxValue)
         {
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportExit.xml");
-            var teleportExit = entityFactory.Create(entityTemplate);
-            //var teleportExit = core.GetManager<IEntityMan>().CreateFromTemplate("TeleportExit");
+            var teleportExit = entityFactory.Create(@"Entities\Teleport\TeleportExit.xml")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
             teleportExit.Tag = new TeleportPair { Id = pairId, Type = TeleportType.Out };
-
-            teleportExit.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
             var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
             tileComponentBuilder.SetAtlasById(atlasId);

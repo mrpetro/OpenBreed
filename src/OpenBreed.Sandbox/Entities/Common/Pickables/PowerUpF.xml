@@ -3,6 +3,7 @@
 	<Components>
 		<Class>
 			<Name>PowerUpF</Name>
+			<Flavor>$(flavor)</Flavor>
 		</Class>
 		<Fsm>
 			<States>

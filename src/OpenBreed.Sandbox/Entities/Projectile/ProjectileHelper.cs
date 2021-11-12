@@ -17,8 +17,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile
     {
         #region Private Fields
 
-        private IEntityTemplate projectileTemplate;
-
         private readonly IClipMan clipMan;
 
         private readonly ICollisionMan collisionMan;
@@ -71,19 +69,13 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         public void AddProjectile(int worldId, float x, float y, float vx, float vy)
         {
-            if (projectileTemplate == null)
-                projectileTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Projectile\Projectile.xml");
+            var projectile = entityFactory.Create(@"Entities\Projectile\Projectile.xml")
+                .SetParameter("startX", x)
+                .SetParameter("startY", y)
+                .Build();
 
-            var projectile = entityFactory.Create(projectileTemplate);
-            //var projectile = core.GetManager<IEntityMan>().CreateFromTemplate("Projectile");
-
-            //projectile.Add(new FsmComponent());
-
-            projectile.Get<PositionComponent>().Value = new Vector2(x, y);
             projectile.Get<VelocityComponent>().Value = new Vector2(vx, vy);
 
-            //var projectileFsm = core.GetManager<IFsmMan>().GetByName("Projectile");
-            //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
             projectile.EnterWorld(worldId);
         }
 

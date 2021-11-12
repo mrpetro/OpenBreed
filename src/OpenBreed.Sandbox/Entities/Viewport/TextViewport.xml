@@ -10,6 +10,6 @@
 			<ScalingType>FitBothPreserveAspectRatio</ScalingType>
 			<BackgroundColor R="0" G="0" B="0" A="255" />
 		</Viewport>
-        <Position X="0" Y="0" />
+		<Position X="$(startX)" Y="$(startY)" />
     </Components>
 </EntityTemplate>

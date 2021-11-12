@@ -72,11 +72,13 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         public Entity AddWorldExit(World world, int x, int y, string worldName, int entryId)
         {
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateExit.xml");
-            var teleportEntity = entityFactory.Create(entityTemplate);
+            var teleportEntity = entityFactory.Create(@"Entities\WorldGate\WorldGateExit.xml")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
             teleportEntity.Tag = (worldName, entryId);
-            teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+
             teleportEntity.EnterWorld(world.Id);
 
             return teleportEntity;
@@ -170,11 +172,13 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         public Entity AddWorldEntry(World world, int x, int y, int entryId)
         {
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateEntry.xml");
-            var teleportEntity = entityFactory.Create(entityTemplate);
+            var teleportEntity = entityFactory.Create(@"Entities\WorldGate\WorldGateEntry.xml")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
-            teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+
             teleportEntity.EnterWorld(world.Id);
 
             return teleportEntity;

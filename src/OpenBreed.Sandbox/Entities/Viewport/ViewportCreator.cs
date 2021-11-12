@@ -32,15 +32,16 @@ namespace OpenBreed.Sandbox.Entities.Viewport
 
         public Entity CreateViewportEntity(string name, float x, float y, float width, float height, string templateName)
         {
-            var viewportTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>($@"Entities\Viewport\{templateName}.xml");
-            var viewport = entityFactory.Create(viewportTemplate);
+            var viewport = entityFactory.Create($@"Entities\Viewport\{templateName}.xml")
+                .SetParameter("startX", x)
+                .SetParameter("startY", y)
+                .Build();
 
             //var viewport = entityMan.Create();
             viewport.Tag = name;
 
             viewport.Get<ViewportComponent>().Width = width;
             viewport.Get<ViewportComponent>().Height = height;
-            viewport.Get<PositionComponent>().Value = new OpenTK.Vector2(x, y);
 
             return viewport;
         }

@@ -69,7 +69,10 @@ namespace OpenBreed.Sandbox
 
         public ProgramFactory()
         {
-            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(640, 480, "OpenBreed"));
+            var appName = ProgramTools.AppProductName;
+            var infoVersion = ProgramTools.AppInfoVerion;
+
+            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(640, 480, $"{appName} v{infoVersion}"));
 
             manCollection.SetupBuilderFactory();
             manCollection.SetupVariableManager();
