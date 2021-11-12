@@ -77,6 +77,11 @@ namespace OpenBreed.Common
         /// </summary>
         public static string AppExe { get { return System.AppDomain.CurrentDomain.FriendlyName; } }
 
+        /// <summary>
+        /// Gets application informational version
+        /// </summary>
+        public static string AppInfoVerion { get { return GetAttributeValue<AssemblyInformationalVersionAttribute>(Assembly.GetEntryAssembly(), a => a.InformationalVersion); } }
+
         #endregion
 
         #region Public methods
