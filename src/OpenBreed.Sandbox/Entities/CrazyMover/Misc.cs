@@ -70,16 +70,16 @@ namespace OpenBreed.Sandbox
             pos.Value = new OpenTK.Vector2(pos.Value.X, nextValue);
         }
 
-        public Entity AddToWorld(World world)
+        public void AddCrazyMover(World world, int x, int y)
         {
             var arial12 = fontMan.Create("ARIAL", 10);
 
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\CrazyMover\CrazyMover.xml");
-            var crazyMover = entityFactory.Create(entityTemplate);
+            var crazyMover = entityFactory.Create(@"Entities\CrazyMover\CrazyMover.xml")
+                .SetParameter("startX", x * 16)
+                .SetParameter("startY", y * 16)
+                .Build();
 
             crazyMover.EnterWorld(world.Id);
-
-            return crazyMover;
         }
 
         #endregion Private Methods

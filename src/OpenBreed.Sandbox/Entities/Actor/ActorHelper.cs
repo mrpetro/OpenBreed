@@ -100,8 +100,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public Entity CreateActor(Vector2 pos)
         {
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Actor\John.xml");
-            var actor = entityFactory.Create(entityTemplate);
+            var actor = entityFactory.Create(@"Entities\Actor\John.xml")
+                .SetParameter("startX", pos.X)
+                .SetParameter("startY", pos.Y)
+                .Build();
 
             actor.Add(new AngularVelocityComponent(0));
             actor.Add(new AngularThrustComponent(0));
@@ -109,9 +111,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
             actor.Add(new FollowerComponent());
-            actor.Get<PositionComponent>().Value = pos;
-
-            //actor.Subscribe<CollisionEventArgs>(OnCollision);
 
             return actor;
         }

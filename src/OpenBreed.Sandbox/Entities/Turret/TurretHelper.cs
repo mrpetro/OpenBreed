@@ -76,12 +76,10 @@ namespace OpenBreed.Sandbox.Entities.Turret
 
         public Entity Create(Vector2 pos)
         {
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Turret\Turret.xml");
-            var entity = entityFactory.Create(entityTemplate);
-
-            entity.Get<PositionComponent>().Value = pos;
-            //entity.Add(new ColliderComponent(ColliderTypes.StaticObstacle));
-            //entity.Subscribe<CollisionEventArgs>(OnCollision);
+            var entity = entityFactory.Create(@"Entities\Turret\Turret.xml")
+                .SetParameter("startX", pos.X)
+                .SetParameter("startY", pos.Y)
+                .Build();
 
             return entity;
         }

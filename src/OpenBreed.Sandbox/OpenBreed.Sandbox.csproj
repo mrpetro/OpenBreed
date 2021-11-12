@@ -80,6 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Entities\FixtureTypes.cs" />
     <Compile Include="Entities\EnvironmentHelper.cs" />
     <Compile Include="Entities\MapCellHelper.cs" />
@@ -93,7 +96,6 @@
     <Compile Include="Loaders\SpriteAtlasDataLoader.cs" />
     <Compile Include="Loaders\TeleportCellEntityLoader.cs" />
     <Compile Include="Loaders\TileStampDataLoader.cs" />
-    <Compile Include="MapCellEntityFactory.cs" />
     <Compile Include="Loaders\TileAtlasDataLoader.cs" />
     <Compile Include="Commands\MoveToCommand.cs" />
     <None Include="Content\Graphics\Cursors.png">

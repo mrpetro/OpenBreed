@@ -74,7 +74,9 @@
     <Compile Include="Entities\Builders\EntityBuilder.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\IEntityBuilder.cs" />
+    <Compile Include="Entities\IEntityFactory.cs" />
     <Compile Include="Entities\IEntityTemplate.cs" />
+    <Compile Include="Entities\TemplateEntityBuilder.cs" />
     <Compile Include="Entities\Xml\XmlEntityTemplate.cs" />
     <Compile Include="Entities\EntityFactory.cs" />
     <Compile Include="Entities\EntityJob.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="IComponentController.cs" />
     <Compile Include="IControllerMan.cs" />
+    <Compile Include="Entities\ITemplateEntityBuilder.cs" />
     <Compile Include="Systems\DefaultSystemFactory.cs" />
     <Compile Include="Systems\IRenderableSystem.cs" />
     <Compile Include="Systems\ISystemFactory.cs" />

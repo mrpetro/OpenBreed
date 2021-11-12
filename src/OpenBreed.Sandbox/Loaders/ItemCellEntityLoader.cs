@@ -22,18 +22,47 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Fields
 
-        private const int MEDKIT_SMALL = 598;
-        private const int CREDITS_SMALL = 606;
-        private const int KEY_CARD_STANDARD = 608;
-        private const int POWERUP_S = 609;
-        private const int EXTRA_LIFE = 610;
-        private const int SMART_CARD = 611;
-        private const int CREDITS_BIG = 626;
-        private const int POWERUP_F = 627;
-        private const int MEDKIT_BIG = 628;
-        private const int POWERUP_A = 629;
-        private const int AMMO = 630;
-        private const int AREA_SCANNER = 631;
+        private const int MEDKIT_SMALL_F1 = 598;
+        private const int MEDKIT_SMALL_F2 = 649;
+        private const int MEDKIT_SMALL_F3 = 653;
+
+        private const int CREDITS_SMALL_F1 = 600;
+        private const int KEY_CARD_STANDARD_F1 = 602;
+        private const int POWERUP_S_F1 = 603;
+        private const int EXTRA_LIFE_F1 = 604;
+        private const int SMART_CARD_F1 = 605;
+        private const int CREDITS_BIG_F1 = 620;
+        private const int POWERUP_F_F1 = 621;
+        private const int MEDKIT_BIG_F1 = 622;
+        private const int POWERUP_A_F1 = 623;
+        private const int AMMO_F1 = 624;
+        private const int AREA_SCANNER_F1 = 625;
+
+        private const int CREDITS_SMALL_F2 = 606;
+        private const int KEY_CARD_STANDARD_F2 = 608;
+        private const int POWERUP_S_F2 = 609;
+        private const int EXTRA_LIFE_F2 = 610;
+        private const int SMART_CARD_F2 = 611;
+        private const int CREDITS_BIG_F2 = 626;
+        private const int POWERUP_F_F2 = 627;
+        private const int MEDKIT_BIG_F2 = 628;
+        private const int POWERUP_A_F2 = 629;
+        private const int AMMO_F2 = 630;
+        private const int AREA_SCANNER_F2 = 631;
+
+
+        private const int CREDITS_SMALL_F3 = 612;
+        private const int KEY_CARD_STANDARD_F3 = 614;
+        private const int POWERUP_S_F3 = 615;
+        private const int EXTRA_LIFE_F3 = 616;
+        private const int SMART_CARD_F3 = 617;
+        private const int CREDITS_BIG_F3 = 632;
+        private const int POWERUP_F_F3 = 633;
+        private const int MEDKIT_BIG_F3 = 634;
+        private const int POWERUP_A_F3 = 635;
+        private const int AMMO_F3 = 636;
+        private const int AREA_SCANNER_F3 = 637;
+
 
         private readonly PickableHelper pickableHelper;
 
@@ -100,16 +129,31 @@ namespace OpenBreed.Sandbox.Loaders
 
         private bool PutSmartCard(World world, int ix, int iy, int actionValue, int gfxValue)
         {
+            var flavor = default(string);
+
+            switch (gfxValue)
+            {
+                case SMART_CARD_F1:
+                    flavor = "F1";
+                    break;
+                case SMART_CARD_F2:
+                    flavor = "F2";
+                    break;
+                case SMART_CARD_F3:
+                    flavor = "F3";
+                    break;
+            }
+
             switch (actionValue)
             {
                 case SMARTCARD_1:
-                    pickableHelper.AddItem(world, ix, iy, "SmartCard");
+                    pickableHelper.AddItem(world, ix, iy, "SmartCard", flavor);
                     return true;
                 case SMARTCARD_2:
-                    pickableHelper.AddItem(world, ix, iy, "SmartCard");
+                    pickableHelper.AddItem(world, ix, iy, "SmartCard", flavor);
                     return true;
                 case SMARTCARD_3:
-                    pickableHelper.AddItem(world, ix, iy, "SmartCard");
+                    pickableHelper.AddItem(world, ix, iy, "SmartCard", flavor);
                     return true;
                 default:
                     return false;
@@ -120,50 +164,105 @@ namespace OpenBreed.Sandbox.Loaders
         {
             switch (gfxValue)
             {
-                case MEDKIT_SMALL:
-                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall");
+                case MEDKIT_SMALL_F1:
+                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall", "F1");
                     return true;
-
-                case CREDITS_SMALL:
-                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall");
+                case MEDKIT_SMALL_F2:
+                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall", "F2");
                     return true;
-
-                case KEY_CARD_STANDARD:
-                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard");
+                case MEDKIT_SMALL_F3:
+                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall", "F3");
                     return true;
-
-                case POWERUP_S:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpS");
+                case CREDITS_SMALL_F1:
+                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall", "F1");
                     return true;
-
-                case EXTRA_LIFE:
-                    pickableHelper.AddItem(world, ix, iy, "ExtraLife");
+                case CREDITS_SMALL_F2:
+                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall", "F2");
                     return true;
-
-                case POWERUP_F:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpF");
+                case CREDITS_SMALL_F3:
+                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall", "F3");
                     return true;
-
-                case MEDKIT_BIG:
-                    pickableHelper.AddItem(world, ix, iy, "MedkitBig");
+                case KEY_CARD_STANDARD_F1:
+                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard", "F1");
                     return true;
-
-                case CREDITS_BIG:
-                    pickableHelper.AddItem(world, ix, iy, "CreditsBig");
+                case KEY_CARD_STANDARD_F2:
+                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard", "F2");
                     return true;
-
-                case POWERUP_A:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpA");
+                case KEY_CARD_STANDARD_F3:
+                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard", "F3");
                     return true;
-
-                case AMMO:
-                    pickableHelper.AddItem(world, ix, iy, "Ammo");
+                case POWERUP_S_F1:
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpS", "F1");
                     return true;
-
-                case AREA_SCANNER:
-                    pickableHelper.AddItem(world, ix, iy, "AreaScanner");
+                case POWERUP_S_F2:
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpS", "F2");
                     return true;
-
+                case POWERUP_S_F3:
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpS", "F3");
+                    return true;
+                case EXTRA_LIFE_F1:
+                    pickableHelper.AddItem(world, ix, iy, "ExtraLife", "F1");
+                    return true;
+                case EXTRA_LIFE_F2:
+                    pickableHelper.AddItem(world, ix, iy, "ExtraLife", "F2");
+                    return true;
+                case EXTRA_LIFE_F3:
+                    pickableHelper.AddItem(world, ix, iy, "ExtraLife", "F3");
+                    return true;
+                case POWERUP_F_F1:
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpF", "F1");
+                    return true;
+                case POWERUP_F_F2:
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpF", "F2");
+                    return true;
+                case POWERUP_F_F3:
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpF", "F3");
+                    return true;
+                case MEDKIT_BIG_F1:
+                    pickableHelper.AddItem(world, ix, iy, "MedkitBig", "F1");
+                    return true;
+                case MEDKIT_BIG_F2:
+                    pickableHelper.AddItem(world, ix, iy, "MedkitBig", "F2");
+                    return true;
+                case MEDKIT_BIG_F3:
+                    pickableHelper.AddItem(world, ix, iy, "MedkitBig", "F3");
+                    return true;
+                case CREDITS_BIG_F1:
+                    pickableHelper.AddItem(world, ix, iy, "CreditsBig", "F1");
+                    return true;
+                case CREDITS_BIG_F2:
+                    pickableHelper.AddItem(world, ix, iy, "CreditsBig", "F2");
+                    return true;
+                case CREDITS_BIG_F3:
+                    pickableHelper.AddItem(world, ix, iy, "CreditsBig", "F3");
+                    return true;
+                case POWERUP_A_F1:
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpA", "F1");
+                    return true;
+                case POWERUP_A_F2:
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpA", "F2");
+                    return true;
+                case POWERUP_A_F3:
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpA", "F3");
+                    return true;
+                case AMMO_F1:
+                    pickableHelper.AddItem(world, ix, iy, "Ammo", "F1");
+                    return true;
+                case AMMO_F2:
+                    pickableHelper.AddItem(world, ix, iy, "Ammo", "F2");
+                    return true;
+                case AMMO_F3:
+                    pickableHelper.AddItem(world, ix, iy, "Ammo", "F3");
+                    return true;
+                case AREA_SCANNER_F1:
+                    pickableHelper.AddItem(world, ix, iy, "AreaScanner", "F1");
+                    return true;
+                case AREA_SCANNER_F2:
+                    pickableHelper.AddItem(world, ix, iy, "AreaScanner", "F2");
+                    return true;
+                case AREA_SCANNER_F3:
+                    pickableHelper.AddItem(world, ix, iy, "AreaScanner", "F3");
+                    return true;
                 default:
                     {
                         return false;

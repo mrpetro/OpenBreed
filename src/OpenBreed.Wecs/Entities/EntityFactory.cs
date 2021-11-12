@@ -1,21 +1,14 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Wecs.Entities.Xml;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace OpenBreed.Wecs.Entities
 {
-    public interface IEntityFactory
-    {
-        #region Public Methods
 
-        void RegisterComponentFactory<T>(IComponentFactory factory) where T : IComponentTemplate;
-
-        Entity Create(IEntityTemplate template);
-
-        #endregion Public Methods
-    }
 
     public class EntityFactory : IEntityFactory
     {
@@ -43,6 +36,11 @@ namespace OpenBreed.Wecs.Entities
             Debug.Assert(!componentFactories.ContainsKey(typeof(T)), $"Component '{typeof(T)}' factory already registered.");
 
             componentFactories.Add(typeof(T), factory);
+        }
+
+        public ITemplateEntityBuilder Create(string entityTemplateName)
+        {
+            return new TemplateEntityBuilder(this, entityTemplateName);
         }
 
         public Entity Create(IEntityTemplate template)

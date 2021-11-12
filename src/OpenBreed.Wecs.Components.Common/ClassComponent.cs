@@ -5,6 +5,7 @@
         #region Public Properties
 
         string Name { get; }
+        string Flavor { get; }
 
         #endregion Public Properties
     }
@@ -18,9 +19,10 @@
 
         #region Public Constructors
 
-        public ClassComponent(string name)
+        public ClassComponent(string name, string flavor)
         {
             Name = name;
+            Flavor = flavor;
         }
 
         #endregion Public Constructors
@@ -28,6 +30,7 @@
         #region Public Properties
 
         public string Name { get; }
+        public string Flavor { get; }
 
         #endregion Public Properties
     }
@@ -46,7 +49,7 @@
 
         protected override IEntityComponent Create(IClassComponentTemplate template)
         {
-            return new ClassComponent(template.Name);
+            return new ClassComponent(template.Name, template.Flavor);
         }
 
         #endregion Protected Methods

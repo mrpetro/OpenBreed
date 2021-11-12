@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-        <Position X="0" Y="0" />
+		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>
 			<CorFactor>1.0</CorFactor>

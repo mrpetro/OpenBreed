@@ -10,7 +10,7 @@
 				</State>
 			</States>
 		</Animation>
-        <Position X="0" Y="0" />
+		<Position X="$(startX)" Y="$(startY)" />
 		<Sprite>
 			<AtlasName>SpriteSets.SPR4B#0</AtlasName>
 			<ImageIndex>0</ImageIndex>

@@ -3,6 +3,7 @@
 	<Components>
 		<Class>
 			<Name>MedkitSmall</Name>
+			<Flavor>$(flavor)</Flavor>
 		</Class>
 		<Fsm>
 			<States>

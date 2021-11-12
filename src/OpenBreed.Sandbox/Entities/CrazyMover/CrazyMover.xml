@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-        <Position X="0" Y="0" />
+		<Position X="$(startX)" Y="$(startY)" />
         <Text> 
             <Text>Crazy Mover</Text>
             <Offset X="2" Y="6" />

@@ -14,7 +14,7 @@
 				</State>
 			</States>	
 		</Animation>
-		<Position X="0" Y="0" />
+		<Position X="$(startX)" Y="$(startY)" />
 		<Thrust X="0" Y="0" />
 		<Velocity X="0" Y="0" />
 		<Body>

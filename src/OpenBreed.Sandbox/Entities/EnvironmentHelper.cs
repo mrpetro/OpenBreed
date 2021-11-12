@@ -40,10 +40,10 @@ namespace OpenBreed.Sandbox.Entities
 
         public void AddTVFlickering(World world, int x, int y, int atlasId, int gfxValue)
         {
-            var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Level4\TVFlickering.xml");
-            var entity = entityFactory.Create(doorHorizontalTemplate);
-
-            entity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            var entity = entityFactory.Create(@"Entities\Level4\TVFlickering.xml")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
             var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
             tileComponentBuilder.SetAtlasById(atlasId);
@@ -55,10 +55,10 @@ namespace OpenBreed.Sandbox.Entities
 
         public void AddMonsterEating(World world, int x, int y, int atlasId, int gfxValue)
         {
-            var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Level4\MonsterEating.xml");
-            var entity = entityFactory.Create(doorHorizontalTemplate);
-
-            entity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            var entity = entityFactory.Create(@"Entities\Level4\MonsterEating.xml")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
             var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
             tileComponentBuilder.SetAtlasById(atlasId);

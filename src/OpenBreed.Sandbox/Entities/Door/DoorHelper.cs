@@ -55,24 +55,21 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void AddVerticalDoor(World world, int x, int y)
         {
-            var dictionary = new Dictionary<string, string>();
-            dictionary.Add("startX", (16 * x).ToString(CultureInfo.InvariantCulture));
-            dictionary.Add("startY", (16 * y).ToString(CultureInfo.InvariantCulture));
-
-            var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml", dictionary);
-            var door = entityFactory.Create(doorVerticalTemplate);
+            var door = entityFactory.Create(@"Entities\Door\DoorVertical.xml")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
             door.EnterWorld(world.Id);
         }
 
         public void AddHorizontalDoor(World world, int x, int y)
         {
-            var dictionary = new Dictionary<string, string>();
-            dictionary.Add("startX", (16 * x).ToString(CultureInfo.InvariantCulture));
-            dictionary.Add("startY", (16 * y).ToString(CultureInfo.InvariantCulture));
+            var door = entityFactory.Create(@"Entities\Door\DoorHorizontal.xml")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
-            var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml", dictionary);
-            var door = entityFactory.Create(doorHorizontalTemplate);
 
             door.EnterWorld(world.Id);
         }
