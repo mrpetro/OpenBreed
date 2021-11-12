@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -13,6 +12,12 @@ namespace OpenBreed.Common.Tools.Xml
     /// </summary>
     public static class XmlHelper
     {
+        #region Private Fields
+
+        private static readonly Regex variableRegexPattern = new Regex(@"\$\((\w+)\)");
+
+        #endregion Private Fields
+
         #region Public Methods
 
         /// <summary>
@@ -55,9 +60,9 @@ namespace OpenBreed.Common.Tools.Xml
         /// <summary>
         /// Deserializes object from stream
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Type of object to restore</typeparam>
+        /// <param name="stream">Stream instance</param>
+        /// <returns>Object instance</returns>
         public static T RestoreFromXml<T>(Stream stream)
         {
             // Verify input
@@ -71,11 +76,11 @@ namespace OpenBreed.Common.Tools.Xml
         }
 
         /// <summary>
-        /// Deserializes object from stream
+        /// Deserializes object from XML Reader
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Type of object to restore</typeparam>
+        /// <param name="xmlReader">XmlReader instance</param>
+        /// <returns>Object instance</returns>
         public static T RestoreFromXml<T>(XmlReader xmlReader)
         {
             // Verify input
@@ -89,11 +94,11 @@ namespace OpenBreed.Common.Tools.Xml
         }
 
         /// <summary>
-        /// Deserializes object from stream
+        /// Deserializes object from Text Reader
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Type of object to restore</typeparam>
+        /// <param name="textReader">TextReader instance</param>
+        /// <returns>Object instance</returns>
         public static T RestoreFromXml<T>(TextReader textReader)
         {
             // Verify input
@@ -107,11 +112,11 @@ namespace OpenBreed.Common.Tools.Xml
         }
 
         /// <summary>
-        /// Deserializes object from xml file
+        /// Deserializes object from file with given path
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Type of object to restore</typeparam>
+        /// <param name="path">Path to XML file</param>
+        /// <returns>Object instance</returns>
         public static T RestoreFromXml<T>(string path)
         {
             // Verify input
@@ -127,7 +132,49 @@ namespace OpenBreed.Common.Tools.Xml
             }
         }
 
-        private static readonly Regex variableRegexPattern = new Regex(@"\$\((\w+)\)");
+        /// <summary>
+        /// Deserializes object from file with given path
+        /// </summary>
+        /// <typeparam name="T">Type of object to restore</typeparam>
+        /// <param name="path">Path to XML file</param>
+        /// <param name="variables">Dictionary of variables</param>
+        /// <returns>Object instance</returns>
+        public static T RestoreFromXml<T>(string path, Dictionary<string, string> variables)
+        {
+            // Verify input
+            if (path == null)
+                throw new ArgumentNullException("path");
+
+            if (path == string.Empty)
+                throw new InvalidOperationException("path cannot be empty");
+
+            var xmlDoc = new XmlDocument();
+            xmlDoc.Load(path);
+
+            ReplaceVariablesWithValues(xmlDoc, variables);
+
+            return RestoreFromXml<T>(xmlDoc);
+        }
+
+        /// <summary>
+        /// Deserializes object from XmlDocument
+        /// </summary>
+        /// <typeparam name="T">Type of object to restore</typeparam>
+        /// <param name="xmlDocument">XmlDocument instance</param>
+        /// <returns>Object instance</returns>
+        public static T RestoreFromXml<T>(XmlDocument xmlDocument)
+        {
+            // Verify input
+            if (xmlDocument is null)
+                throw new ArgumentNullException("xmlDocument");
+
+            using (var reader = new XmlNodeReader(xmlDocument))
+                return RestoreFromXml<T>(reader);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private static string ReplaceVariablesWithValues(string input, Dictionary<string, string> variables)
         {
@@ -159,36 +206,6 @@ namespace OpenBreed.Common.Tools.Xml
                 ReplaceVariablesWithValues(childNode, variables);
         }
 
-        //private static void Search(XmlDocument xmlDocument, Dictionary<string, string> variables)
-        //{
-        //    foreach (XmlNode xmlNode in xmlDocument.ChildNodes)
-        //        Search(xmlNode, variables);
-        //}
-
-        /// <summary>
-        /// Deserializes object from xml file
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static T RestoreFromXml<T>(string path, Dictionary<string, string> variables)
-        {
-            // Verify input
-            if (path == null)
-                throw new ArgumentNullException("path");
-
-            if (path == string.Empty)
-                throw new InvalidOperationException("path cannot be empty");
-
-            var xmlDoc = new XmlDocument();
-            xmlDoc.Load(path);
-
-            ReplaceVariablesWithValues(xmlDoc, variables);
-
-            using (var reader = new XmlNodeReader(xmlDoc))
-                return RestoreFromXml<T>(reader);
-        }
-
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }
