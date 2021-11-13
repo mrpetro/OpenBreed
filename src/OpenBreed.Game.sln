@@ -98,6 +98,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Gui"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Components.Gui", "OpenBreed.Wecs.Components.Gui\OpenBreed.Wecs.Components.Gui.csproj", "{9A7295ED-F6E8-4C6A-9B89-F2ADFD501A04}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{E2B5FB9E-F179-4CA5-815E-55998F3A293B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
