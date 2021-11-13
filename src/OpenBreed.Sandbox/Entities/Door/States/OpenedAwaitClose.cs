@@ -22,7 +22,7 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private readonly string stampPrefix;
+        private const string STAMP_PREFIX = "L4";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
 
@@ -32,7 +32,6 @@ namespace OpenBreed.Sandbox.Components.States
 
         public OpenedAwaitClose(IFsmMan fsmMan, IStampMan stampMan)
         {
-            this.stampPrefix = "Tiles/Stamps";
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;
         }
@@ -57,9 +56,12 @@ namespace OpenBreed.Sandbox.Components.States
 
             //entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
-            var className = entity.Get<ClassComponent>().Name;
+            var metadata = entity.Get<ClassComponent>();
+            var className = metadata.Name;
+            var flavor = metadata.Flavor;
+
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var stampId = stampMan.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
+            var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
 
             entity.PutStamp(stampId, 0, pos.Value);
 

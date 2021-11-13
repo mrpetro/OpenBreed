@@ -2,7 +2,8 @@
 <EntityTemplate>
     <Components>
 		<Class>
-			<Name>DoorVertical</Name>
+			<Name>Door</Name>
+			<Flavor>Vertical</Flavor>
 		</Class>
 		<Timer>
 		</Timer>

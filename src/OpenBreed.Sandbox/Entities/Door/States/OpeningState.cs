@@ -22,7 +22,7 @@ namespace OpenBreed.Sandbox.Components.States
         #region Private Fields
 
         private readonly string animPrefix;
-        private readonly string stampPrefix;
+        private const string STAMP_PREFIX = "L4";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         private readonly IClipMan clipMan;
@@ -34,7 +34,6 @@ namespace OpenBreed.Sandbox.Components.States
         public OpeningState(IFsmMan fsmMan, IStampMan stampMan, IClipMan clipMan)
         {
             this.animPrefix = "Animations";
-            this.stampPrefix = "Tiles/Stamps";
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;
             this.clipMan = clipMan;
@@ -57,10 +56,13 @@ namespace OpenBreed.Sandbox.Components.States
 
             var pos = entity.Get<PositionComponent>();
 
-            var className = entity.Get<ClassComponent>().Name;
+            var metadata = entity.Get<ClassComponent>();
+            var className = metadata.Name;
+            var flavor = metadata.Flavor;
+
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var clipId = clipMan.GetByName($"{animPrefix}.{className}.{stateName}").Id;
-            var stampId = stampMan.GetByName($"{stampPrefix}/{className}/Opened").Id;
+            var clipId = clipMan.GetByName($"{animPrefix}/{className}/{stateName}/{flavor}").Id;
+            var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/Opened").Id;
 
             entity.PlayAnimation(0, clipId);
             entity.PutStamp(stampId, 0, pos.Value);

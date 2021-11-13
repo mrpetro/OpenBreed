@@ -13,7 +13,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
     {
         #region Private Fields
 
-        private const string STAMP_PREFIX = "Tiles/Stamps/Pickable/L4";
+        private const string STAMP_PREFIX = "L4";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         #endregion Private Fields

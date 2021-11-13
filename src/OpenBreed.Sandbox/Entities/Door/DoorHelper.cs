@@ -47,10 +47,10 @@ namespace OpenBreed.Sandbox.Entities.Door
         {
             var animationLoader = dataLoaderFactory.GetLoader<IClip>();
 
-            animationLoader.Load("Animations.DoorVertical.Opening");
-            animationLoader.Load("Animations.DoorVertical.Closing");
-            animationLoader.Load("Animations.DoorHorizontal.Opening");
-            animationLoader.Load("Animations.DoorHorizontal.Closing");
+            animationLoader.Load("Animations/Door/Opening/Vertical");
+            animationLoader.Load("Animations/Door/Closing/Vertical");
+            animationLoader.Load("Animations/Door/Opening/Horizontal");
+            animationLoader.Load("Animations/Door/Closing/Horizontal");
         }
 
         public void AddVerticalDoor(World world, int x, int y)
@@ -78,10 +78,10 @@ namespace OpenBreed.Sandbox.Entities.Door
         {
             var tileStampLoader = dataLoaderFactory.GetLoader<ITileStamp>();
 
-            tileStampLoader.Load("Tiles/Stamps/DoorHorizontal/Closed");
-            tileStampLoader.Load("Tiles/Stamps/DoorHorizontal/Opened");
-            tileStampLoader.Load("Tiles/Stamps/DoorVertical/Closed");
-            tileStampLoader.Load("Tiles/Stamps/DoorVertical/Opened");
+            tileStampLoader.Load("L4/Door/Horizontal/Closed");
+            tileStampLoader.Load("L4/Door/Horizontal/Opened");
+            tileStampLoader.Load("L4/Door/Vertical/Closed");
+            tileStampLoader.Load("L4/Door/Vertical/Opened");
         }
     }
 }
