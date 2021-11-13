@@ -67,7 +67,7 @@ namespace OpenBreed.Model.Maps
             {
                 for (int ix = 0; ix < Width; ix++)
                 {
-                    var cellValue = GetCellValue(layerIndex, ix,  iy);
+                    var cellValue = GetCellValue(layerIndex, ix, iy);
 
                     if (cellValue == value)
                         yield return (ix, iy);
@@ -77,8 +77,6 @@ namespace OpenBreed.Model.Maps
 
         public IEnumerable<(int X, int Y)> FindNeighbourCellsWithValue(int x, int y, int layerIndex, int value)
         {
-
-
             for (int iy = 0; iy < Height; iy++)
             {
                 for (int ix = 0; ix < Width; ix++)
@@ -98,7 +96,7 @@ namespace OpenBreed.Model.Maps
             if (y > Height)
                 throw new ArgumentOutOfRangeException(nameof(y), y, $"Expecting 0 <= y < {Height}");
 
-            var valueIndex = y * Width + x;
+            var valueIndex = GetCellIndex(x, y);
 
             return Layers[layerIndex].GetCellValue(valueIndex);
         }
@@ -110,7 +108,7 @@ namespace OpenBreed.Model.Maps
             if (y > Height)
                 throw new ArgumentOutOfRangeException(nameof(y), y, $"Expecting 0 <= y < {Height}");
 
-            var valueIndex = y * Width + x;
+            var valueIndex = GetCellIndex(x, y);
             var values = new int[Layers.Count];
 
             for (int i = 0; i < Layers.Count; i++)
@@ -120,5 +118,14 @@ namespace OpenBreed.Model.Maps
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private int GetCellIndex(int x, int y)
+        {
+            return (Height - y - 1) * Width + x;
+        }
+
+        #endregion Private Methods
     }
 }
