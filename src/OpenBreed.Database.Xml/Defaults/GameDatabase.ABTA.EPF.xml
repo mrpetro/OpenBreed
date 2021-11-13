@@ -1609,6 +1609,406 @@
 						<Cell X="0" Y="1" TsId="TileSets.L4" TsTi ="61" />
 					</Cells>
 				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="600" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="606" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="612" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardStandard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="602" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardStandard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardStandard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="608" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardStandard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardStandard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="614" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardStandard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpS/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="603" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpS/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpS/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="609" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpS/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpS/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="615" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpS/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/ExtraLife/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="604" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/ExtraLife/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/ExtraLife/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="610" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/ExtraLife/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/ExtraLife/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="616" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/ExtraLife/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="605" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="611" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="617" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="620" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="626" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="632" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/CreditsBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpF/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="621" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpF/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpF/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="627" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpF/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpF/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="633" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpF/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="622" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="628" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="634" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpA/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="623" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpA/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpA/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="629" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpA/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpA/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="635" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/PowerUpA/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/Ammo/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="624" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/Ammo/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/Ammo/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="630" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/Ammo/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/Ammo/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="636" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/Ammo/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/AreaScanner/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="625" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/AreaScanner/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/AreaScanner/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="631" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/AreaScanner/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/AreaScanner/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="637" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/AreaScanner/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="598" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="599" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="649" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="650" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="653" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/MedkitSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="654" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardRed/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="362" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardRed/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="363" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardGreen/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="534" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardGreen/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="535" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardBlue/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="638" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardBlue/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="639" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardSpecial/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="618" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Tiles/Stamps/Pickable/L4/KeycardSpecial/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="619" />
+					</Cells>
+				</TileStamp>
 			</Items>
 		</TileStamps>
 		<Maps>
@@ -4307,7 +4707,6 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-
 				<Animation Id="Animations/Actor/Standing/Up">
 					<Length>1.0</Length>
 					<Tracks>
@@ -4460,7 +4859,6 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-
 				<Animation Id="Animations/Camera/Effects/FadeOut">
 					<Length>10.0</Length>
 					<Tracks>
@@ -4485,6 +4883,54 @@
 								<Frame Time="10.0" Value="1.0" />
 							</Frames>
 						</FloatTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Animations/Environment/Level4/TVFlickering">
+					<Length>1.5</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="SpriteSets.SPR4B#4" />
+								<Frame Time="0.5" Value="SpriteSets.SPR4B#4" />
+								<Frame Time="1.0" Value="SpriteSets.SPR4B#5" />
+								<Frame Time="1.5" Value="SpriteSets.SPR4B#6" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Animations/Environment/Level4/MonsterEating">
+					<Length>3.5</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="SpriteSets.SPR4B#0" />
+								<Frame Time="0.5" Value="SpriteSets.SPR4B#0" />
+								<Frame Time="1.0" Value="SpriteSets.SPR4B#1" />
+								<Frame Time="1.5" Value="SpriteSets.SPR4B#2" />
+								<Frame Time="2.0" Value="SpriteSets.SPR4B#3" />
+								<Frame Time="2.5" Value="SpriteSets.SPR4B#2" />
+								<Frame Time="3.0" Value="SpriteSets.SPR4B#1" />
+								<Frame Time="3.5" Value="SpriteSets.SPR4B#0" />
+							</Frames>
+						</StringTrack>
 					</Tracks>
 				</Animation>
 			</Items>

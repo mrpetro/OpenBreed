@@ -10,6 +10,7 @@ using OpenBreed.Database.Xml.Tables;
 using OpenBreed.Database.Xml.Items.Images;
 using OpenBreed.Database.Xml.Items.Maps;
 using OpenBreed.Common.Tools;
+using OpenBreed.Common.Tools.Xml;
 
 namespace OpenBreed.Database.Xml
 {

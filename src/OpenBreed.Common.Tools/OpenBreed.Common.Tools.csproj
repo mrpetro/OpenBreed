@@ -76,7 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sounds\PCMPlayer.cs" />
     <Compile Include="Sounds\WaveMemoryStream.cs" />
-    <Compile Include="XmlHelper.cs" />
+    <Compile Include="Xml\XmlHelper.cs" />
     <Compile Include="Xml\XmlNodeMan.cs" />
   </ItemGroup>
   <ItemGroup />
