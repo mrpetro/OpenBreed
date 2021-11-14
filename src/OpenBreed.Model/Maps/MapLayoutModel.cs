@@ -23,43 +23,17 @@ namespace OpenBreed.Model.Maps
 
         #region Public Properties
 
+        public static bool FlippedY { get; set; }
         public RectangleF Bounds { get; }
-        public Rectangle IndexBounds { get; }
-
         public int CellSize { get; }
-        public int Width { get; }
         public int Height { get; }
-
+        public Rectangle IndexBounds { get; }
         public List<MapLayerModel> Layers { get; }
+        public int Width { get; }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public int GetLayerIndex(MapLayerType layerType)
-        {
-            var layer = Layers.First(item => item.LayerType == layerType);
-            return Layers.IndexOf(layer);
-        }
-
-        public Rectangle GetIndexRectangle(RectangleF rect)
-        {
-            return new Rectangle((int)(rect.X / CellSize), (int)(rect.Y / CellSize), (int)(rect.Width / CellSize), (int)(rect.Height / CellSize));
-        }
-
-        public Point GetIndexPoint(Point point)
-        {
-            var x = point.X / CellSize;
-            var y = point.Y / CellSize;
-
-            if (point.X < 0)
-                x--;
-
-            if (point.Y < 0)
-                y--;
-
-            return new Point(x, y);
-        }
 
         public IEnumerable<(int X, int Y)> FindCellsWithValue(int layerIndex, int value)
         {
@@ -96,9 +70,9 @@ namespace OpenBreed.Model.Maps
             if (y > Height)
                 throw new ArgumentOutOfRangeException(nameof(y), y, $"Expecting 0 <= y < {Height}");
 
-            var valueIndex = GetCellIndex(x, y);
+            var cellIndex = GetCellIndex(x, y);
 
-            return Layers[layerIndex].GetCellValue(valueIndex);
+            return Layers[layerIndex].GetCellValue(cellIndex);
         }
 
         public int[] GetCellValues(int x, int y)
@@ -108,22 +82,98 @@ namespace OpenBreed.Model.Maps
             if (y > Height)
                 throw new ArgumentOutOfRangeException(nameof(y), y, $"Expecting 0 <= y < {Height}");
 
-            var valueIndex = GetCellIndex(x, y);
+            var cellIndex = GetCellIndex(x, y);
             var values = new int[Layers.Count];
 
             for (int i = 0; i < Layers.Count; i++)
-                values[i] = Layers[i].GetCellValue(valueIndex);
+                values[i] = Layers[i].GetCellValue(cellIndex);
 
             return values;
+        }
+
+        public void GetClipIndices(RectangleF viewRect, out int xFrom, out int yFrom, out int xTo, out int yTo)
+        {
+            xFrom = 0;
+            yFrom = 0;
+            xTo = Width - 1;
+            yTo = Height - 1;
+
+            xFrom = Clamp(xFrom, 0, Width - 1);
+            yFrom = Clamp(yFrom, 0, Height - 1);
+            xTo = Clamp(xTo, 0, Width - 1);
+            yTo = Clamp(yTo, 0, Height - 1);
+        }
+
+        public Point GetIndexPoint(Point point)
+        {
+            var x = point.X / CellSize;
+            var y = point.Y / CellSize;
+
+            if (point.X < 0)
+                x--;
+
+            if (point.Y < 0)
+                y--;
+
+            return new Point(x, y);
+        }
+
+        public Rectangle GetIndexRectangle(RectangleF rect)
+        {
+            return new Rectangle((int)(rect.X / CellSize), (int)(rect.Y / CellSize), (int)(rect.Width / CellSize), (int)(rect.Height / CellSize));
+        }
+
+        public MapLayerModel GetLayer(MapLayerType layerType)
+        {
+            return Layers.First(layer => layer.LayerType == layerType);
+        }
+
+        public int GetLayerIndex(MapLayerType layerType)
+        {
+            var layer = Layers.First(item => item.LayerType == layerType);
+            return Layers.IndexOf(layer);
+        }
+
+        public void SetCellValue(int layerIndex, int x, int y, int value)
+        {
+            if (x < 0 || x >= Width)
+                throw new ArgumentOutOfRangeException(nameof(x), x, $"Expected in range from 0 to {Width - 1}");
+
+            if (y < 0 || y >= Height)
+                throw new ArgumentOutOfRangeException(nameof(y), y, $"Expected in range from 0 to {Height - 1}");
+
+            var cellIndex = GetCellIndex(x, y);
+
+            Layers[layerIndex].SetCellValue(cellIndex, value);
+        }
+
+        /// <summary>
+        /// TODO: Move this out
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        private int Clamp(int value, int min, int max)
+        {
+            if (value < min)
+                value = min;
+            else if (value > max)
+                value = max;
+
+            return value;
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private int GetCellIndex(int x, int y)
+        internal int GetCellIndex(int x, int y)
         {
-            return (Height - y - 1) * Width + x;
+            if (FlippedY)
+                return (Height - y - 1) * Width + x;
+            else
+                return y * Width + x;
         }
 
         #endregion Private Methods

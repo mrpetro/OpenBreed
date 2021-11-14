@@ -180,7 +180,9 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
             layout.SetCellSize(16);
             layout.SetSize(sizeX, sizeY);
             var gfxLayerBuilder = layout.AddLayer(MapLayerType.Gfx);
+            gfxLayerBuilder.SetVisible(true);
             var actionLayerBuilder = layout.AddLayer(MapLayerType.Action);
+            actionLayerBuilder.SetVisible(true);
 
             for (int i = 0; i < tilesNo; i++)
             {

@@ -54,8 +54,7 @@ namespace OpenBreed.Model.Maps
         public MapLayoutModel Build()
         {
             var groupLayerBuilder = AddLayer(MapLayerType.Group);
-
-
+            groupLayerBuilder.SetVisible(false);
             var actionLayer = Layers.First(item => item.LayerType == MapLayerType.Action);
 
             groupLayerBuilder.GenerateGroups(actionLayer);
