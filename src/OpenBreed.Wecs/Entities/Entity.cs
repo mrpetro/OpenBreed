@@ -1,12 +1,9 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Wecs.Components;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Components;
-using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Wecs.Entities
 {
@@ -37,11 +34,6 @@ namespace OpenBreed.Wecs.Entities
             ComponentTypes = components.Keys;
         }
 
-        public void Destroy()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Internal Constructors
 
         #region Public Properties
@@ -61,11 +53,10 @@ namespace OpenBreed.Wecs.Entities
         /// </summary>
         public object Tag { get; set; }
 
-
         public object State { get; set; }
 
         /// <summary>
-        /// Id of world which this entity is part of 
+        /// Id of world which this entity is part of
         /// </summary>
         public int WorldId { get; internal set; } = -1;
 
@@ -77,6 +68,11 @@ namespace OpenBreed.Wecs.Entities
         #endregion Public Properties
 
         #region Public Methods
+
+        public void Destroy()
+        {
+            entityMan.RequestDestroy(this);
+        }
 
         /// <summary>
         /// Gets component of specific type if it exists
@@ -147,7 +143,7 @@ namespace OpenBreed.Wecs.Entities
             var count = components.Count;
             components[component.GetType()] = component;
 
-            if(components.Count != count)
+            if (components.Count != count)
                 entityMan.OnComponentAdded(this, typeof(TComponent));
         }
 

@@ -58,14 +58,18 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
             var flavor = metadata.Flavor;
             var stateName = fsmMan.GetStateName(FsmId, Id);
 
-            int stampId;
+            if (flavor != "Trigger")
+            {
+                int stampId;
 
-            if(flavor is null)
-                stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{stateName}").Id;
-            else
-                stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
+                if (flavor is null)
+                    stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{stateName}").Id;
+                else
+                    stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
 
-            entity.PutStamp(stampId, 0, pos.Value);
+                entity.PutStamp(stampId, 0, pos.Value);
+            }
+
             entity.SetText(0, $"{className} - Lying");
 
             var bodyCmp = entity.Get<BodyComponent>();

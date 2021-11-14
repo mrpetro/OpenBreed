@@ -65,7 +65,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             entity.PutStamp(stampId, 0, pos.Value);
 
-            entity.SetText(0, "Door - Opened");
+            //entity.SetText(0, "Door - Opened");
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             entity.Subscribe<TimerUpdateEventArgs>(OnTimerUpdate);
@@ -94,7 +94,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var timer = tcp.Items.FirstOrDefault(item => item.TimerId == 0);
 
-            entity.SetText(0, $"Door - {timer.Interval:F2}s");
+            //entity.SetText(0, $"Door - {timer.Interval:F2}s");
         }
 
         public void LeaveState(Entity entity)

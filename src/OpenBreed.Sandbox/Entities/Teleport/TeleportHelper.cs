@@ -116,10 +116,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportEntry.Tag = new TeleportPair { Id = pairId, Type = TeleportType.In };
 
-            var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
-            tileComponentBuilder.SetAtlasById(atlasId);
-            tileComponentBuilder.SetImageIndex(gfxValue);
-            teleportEntry.Add(tileComponentBuilder.Build());
+            teleportEntry.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 
             teleportEntry.EnterWorld(world.Id);
             return teleportEntry;
@@ -140,10 +137,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportExit.Tag = new TeleportPair { Id = pairId, Type = TeleportType.Out };
 
-            var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
-            tileComponentBuilder.SetAtlasById(atlasId);
-            tileComponentBuilder.SetImageIndex(gfxValue);
-            teleportExit.Add(tileComponentBuilder.Build());
+            teleportExit.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 
             teleportExit.EnterWorld(world.Id);
 

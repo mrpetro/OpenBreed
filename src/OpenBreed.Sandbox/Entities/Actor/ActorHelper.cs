@@ -29,8 +29,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 
-        private readonly MapCellHelper mapCellHelper;
-
         private readonly DynamicResolver dynamicResolver;
         private readonly FixtureTypes fixtureTypes;
 
@@ -38,14 +36,13 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         #region Public Constructors
 
-        public ActorHelper(IClipMan clipMan, ICollisionMan collisionMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, MapCellHelper mapCellHelper, DynamicResolver dynamicResolver, FixtureTypes fixtureTypes)
+        public ActorHelper(IClipMan clipMan, ICollisionMan collisionMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, DynamicResolver dynamicResolver, FixtureTypes fixtureTypes)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
             this.playersMan = playersMan;
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
-            this.mapCellHelper = mapCellHelper;
             this.dynamicResolver = dynamicResolver;
             this.fixtureTypes = fixtureTypes;
         }

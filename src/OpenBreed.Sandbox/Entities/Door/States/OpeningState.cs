@@ -66,7 +66,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             entity.PlayAnimation(0, clipId);
             entity.PutStamp(stampId, 0, pos.Value);
-            entity.SetText(0, "Door - Opening");
+            //entity.SetText(0, "Door - Opening");
 
             entity.Subscribe<AnimFinishedEventArgs>(OnAnimStopped);
         }

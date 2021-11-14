@@ -23,7 +23,6 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
 
             builderFactory.Register<SpriteComponentBuilder>(() => new SpriteComponentBuilder(manCollection.GetManager<ISpriteMan>()));
             builderFactory.Register<TextComponentBuilder>(() => new TextComponentBuilder(manCollection.GetManager<IFontMan>()));
-            builderFactory.Register<TileComponentBuilder>(() => new TileComponentBuilder(manCollection.GetManager<ITileMan>()));
             builderFactory.Register<CameraComponentBuilder>(() => new CameraComponentBuilder());
             builderFactory.Register<ViewportComponentBuilder>(() => new ViewportComponentBuilder());
 

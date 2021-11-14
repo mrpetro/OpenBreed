@@ -65,7 +65,7 @@ namespace OpenBreed.Sandbox.Components.States
             var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/Closed").Id;
 
             entity.PlayAnimation(0, clipId);
-            entity.SetText(0, "Door - Closing");
+            //entity.SetText(0, "Door - Closing");
             entity.PutStamp(stampId, 0, pos.Value);
 
             entity.Subscribe<AnimFinishedEventArgs>(OnAnimStopped);

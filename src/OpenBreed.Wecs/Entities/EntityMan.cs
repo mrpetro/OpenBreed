@@ -78,6 +78,11 @@ namespace OpenBreed.Wecs.Entities
             eventsMan.Subscribe<T>(entity, callback);
         }
 
+        internal void RequestDestroy(Entity entity)
+        {
+
+        }
+
         public void Unsubscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs
         {
             eventsMan.Unsubscribe<T>(entity, callback);

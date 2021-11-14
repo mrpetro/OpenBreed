@@ -66,7 +66,7 @@ namespace OpenBreed.Sandbox.Components.States
             var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
 
             entity.PutStamp(stampId, 0, pos.Value);
-            entity.SetText(0, "Door - Closed");
+            //entity.SetText(0, "Door - Closed");
 
             var bodyCmp = entity.Get<BodyComponent>();
 

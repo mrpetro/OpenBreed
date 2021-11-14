@@ -30,14 +30,14 @@ using OpenBreed.Common;
 using System.Globalization;
 using OpenBreed.Common.Tools.Xml;
 
-namespace OpenBreed.Sandbox.Entities.Door
+namespace OpenBreed.Sandbox.Entities.ElectricGate
 {
-    public class DoorHelper
+    public class ElectricGateHelper
     {
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 
-        public DoorHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
+        public ElectricGateHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
         {
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
@@ -47,15 +47,13 @@ namespace OpenBreed.Sandbox.Entities.Door
         {
             var animationLoader = dataLoaderFactory.GetLoader<IClip>();
 
-            animationLoader.Load("Animations/Door/Opening/Vertical");
-            animationLoader.Load("Animations/Door/Closing/Vertical");
-            animationLoader.Load("Animations/Door/Opening/Horizontal");
-            animationLoader.Load("Animations/Door/Closing/Horizontal");
+            animationLoader.Load("Animations/ElectricGate/Working/Vertical");
+            animationLoader.Load("Animations/ElectricGate/Working/Horizontal");
         }
 
         public void AddVertical(World world, int x, int y)
         {
-            var door = entityFactory.Create(@"Entities\Door\DoorVertical.xml")
+            var door = entityFactory.Create(@"Entities\ElectricGate\ElectricGateVertical.xml")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();
@@ -65,23 +63,13 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void AddHorizontal(World world, int x, int y)
         {
-            var door = entityFactory.Create(@"Entities\Door\DoorHorizontal.xml")
+            var door = entityFactory.Create(@"Entities\ElectricGate\ElectricGateHorizontal.xml")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();
 
 
             door.EnterWorld(world.Id);
-        }
-
-        public void LoadStamps()
-        {
-            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStamp>();
-
-            tileStampLoader.Load("L4/Door/Horizontal/Closed");
-            tileStampLoader.Load("L4/Door/Horizontal/Opened");
-            tileStampLoader.Load("L4/Door/Vertical/Closed");
-            tileStampLoader.Load("L4/Door/Vertical/Opened");
         }
     }
 }

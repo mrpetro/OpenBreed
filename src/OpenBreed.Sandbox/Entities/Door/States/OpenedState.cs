@@ -57,7 +57,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             entity.PutStamp(stampId, 0, pos.Value);
 
-            entity.SetText(0, "Door - Opened");
+            //entity.SetText(0, "Door - Opened");
         }
 
         public void LeaveState(Entity entity)
