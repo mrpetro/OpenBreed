@@ -53,7 +53,7 @@ namespace OpenBreed.Editor.VM.Maps.Commands
                 Point tileCoords = Operations[i].IndexCoords;
                 int tileId = Operations[i].TileIdBefore;
 
-                Inserter.Layer.SetValue(tileCoords.X, tileCoords.Y, tileId);
+                Inserter.Layout.SetCellValue(Inserter.LayerIndex, tileCoords.X, tileCoords.Y, tileId);
             }
 
             //Inserter.Model.Update();

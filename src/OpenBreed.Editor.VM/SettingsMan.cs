@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
+using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Editor.Cfg;
 using System;
 using System.IO;

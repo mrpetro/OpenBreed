@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common.Data;
-using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Model.Actions;
@@ -7,7 +6,6 @@ using OpenBreed.Model.Maps;
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -34,18 +32,20 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
+        public MapLayoutModel Layout { get; private set; }
+        public int LayerIndex { get; private set; }
+
+        public MapEditorActionsSelectorVM ActionsSelector { get; }
+
         public string CurrentActionSetRef
         {
             get { return currentActionSetRef; }
             set { SetProperty(ref currentActionSetRef, value); }
         }
 
-        public EntryRefIdEditorVM RefIdEditor { get; }
-        public MapEditorActionsSelectorVM ActionsSelector { get; }
-        public MapEditorVM Parent { get; }
         public Action<string> ModelChangeAction { get; internal set; }
-
-        public MapLayerModel Layer { get; private set; }
+        public MapEditorVM Parent { get; }
+        public EntryRefIdEditorVM RefIdEditor { get; }
 
         #endregion Public Properties
 
@@ -57,27 +57,28 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Internal Methods
 
-        internal void SetValue(Point tileCoords, int value)
-        {
-            var oldValue = Layer.GetValue(tileCoords.X, tileCoords.Y);
-
-            if (oldValue == value)
-                return;
-
-            Layer.SetValue(tileCoords.X, tileCoords.Y, value);
-
-            Parent.IsModified = true;
-        }
-
         internal override void OnCursor(MapViewCursorVM cursor)
         {
             if ((cursor.Action == CursorActions.Move || cursor.Action == CursorActions.Down) && cursor.Buttons.HasFlag(CursorButtons.Left))
                 SetValue(cursor.WorldIndexCoords, ActionsSelector.SelectedIndex);
         }
 
+        internal void SetValue(Point tileCoords, int value)
+        {
+            var oldValue = Layout.GetCellValue(LayerIndex, tileCoords.X, tileCoords.Y);
+
+            if (oldValue == value)
+                return;
+
+            Layout.SetCellValue(LayerIndex, tileCoords.X, tileCoords.Y, value);
+
+            Parent.IsModified = true;
+        }
+
         internal void UpdateVM()
         {
-            Layer = Parent.Layout.Layers.FirstOrDefault(item => item.LayerType == Model.Maps.MapLayerType.Action);
+            Layout = Parent.Layout;
+            LayerIndex = Layout.GetLayerIndex(MapLayerType.Action);
         }
 
         #endregion Internal Methods
@@ -104,11 +105,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Methods
 
-        private void UpdateModel()
-        {
-            ModelChangeAction?.Invoke(CurrentActionSetRef);
-        }
-
         private void ActionEntryRef_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -120,6 +116,11 @@ namespace OpenBreed.Editor.VM.Maps
                 default:
                     break;
             }
+        }
+
+        private void UpdateModel()
+        {
+            ModelChangeAction?.Invoke(CurrentActionSetRef);
         }
 
         #endregion Private Methods
