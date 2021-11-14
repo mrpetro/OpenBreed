@@ -7,6 +7,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
@@ -45,10 +46,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("startY", 16 * y)
                 .Build();
 
-            var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
-            tileComponentBuilder.SetAtlasById(atlasId);
-            tileComponentBuilder.SetImageIndex(gfxValue);
-            entity.Add(tileComponentBuilder.Build());
+            entity.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 
             entity.EnterWorld(world.Id);
         }
@@ -60,10 +58,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("startY", 16 * y)
                 .Build();
 
-            var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
-            tileComponentBuilder.SetAtlasById(atlasId);
-            tileComponentBuilder.SetImageIndex(gfxValue);
-            entity.Add(tileComponentBuilder.Build());
+            entity.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 
             entity.EnterWorld(world.Id);
         }

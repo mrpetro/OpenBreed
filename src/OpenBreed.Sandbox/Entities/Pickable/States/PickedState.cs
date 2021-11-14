@@ -13,7 +13,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
     {
         #region Private Fields
 
-        private const string STAMP_PREFIX = "Tiles/Stamps/Pickable/L4";
+        private const string STAMP_PREFIX = "L4";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         #endregion Private Fields
@@ -49,18 +49,23 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
             var flavor = metadata.Flavor;
             var stateName = fsmMan.GetStateName(FsmId, Id);
 
-            int stampId;
+            if (flavor != "Trigger")
+            {
+                int stampId;
 
-            if (flavor is null)
-                stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{stateName}").Id;
-            else
-                stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
+                if (flavor is null)
+                    stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{stateName}").Id;
+                else
+                    stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
 
-            entity.PutStamp(stampId, 0, pos.Value);
+                entity.PutStamp(stampId, 0, pos.Value);
+            }
+
             entity.SetText(0, $"{className} - Picked");
 
             Console.WriteLine($"Picked up '{className}'.");
-            //TODO: Destroy item entity here
+
+            //entity.LeaveWorld();
             //entity.Destroy();
         }
 

@@ -1,50 +1,29 @@
 ﻿using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
-using System;
-using System.Collections;
-using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class TileSystem : SystemBase, IRenderableSystem
+    public class TileSystem : SystemBase, IUpdatableSystem, IRenderableSystem
     {
-        #region Public Fields
-
-        public const int TILE_SIZE = 16;
-        public int MAX_TILES_COUNT = 1024 * 1024;
-
-        #endregion Public Fields
-
         #region Private Fields
 
-        private readonly IEntityMan entityMan;
-        private readonly ITileMan tileMan;
-        private readonly ITileGridFactory tileGridMan;
-        private readonly IStampMan stampMan;
+        private readonly List<Entity> entities = new List<Entity>();
         private ITileGrid tileGrid;
-
-        private Hashtable entities = new Hashtable();
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal TileSystem(IEntityMan entityMan, ITileMan tileMan, ITileGridFactory tileGridMan, IStampMan stampMan)
+        public TileSystem()
         {
-            this.entityMan = entityMan;
-            this.tileMan = tileMan;
-            this.tileGridMan = tileGridMan;
-            this.stampMan = stampMan;
-            RequireEntityWith<TileComponent>();
-            RequireEntityWith<PositionComponent>();
+            RequireEntityWith<TilePutterComponent>();
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -60,6 +39,30 @@ namespace OpenBreed.Wecs.Systems.Rendering
             tileGrid.Render(clipBox);
         }
 
+        public void Update(float dt)
+        {
+            foreach (var entity in entities)
+            {
+                var tilePutterCmp = entity.Get<TilePutterComponent>();
+
+                try
+                {
+                    tileGrid.ModifyTile(tilePutterCmp.Position, tilePutterCmp.AtlasId, tilePutterCmp.TileId);
+                }
+                finally
+                {
+                    entity.Remove<TilePutterComponent>();
+                }
+            }
+        }
+
+        public void UpdatePauseImmuneOnly(float dt)
+        {
+            //foreach (var item in Entities)
+            //{
+            //}
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
@@ -68,20 +71,12 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         protected override void OnAddEntity(Entity entity)
         {
-            Debug.Assert(!entities.Contains(entity), "Entity already added!");
-
-            var pos = entity.Get<PositionComponent>();
-
-            var tile = entity.Get<TileComponent>();
-
-            tileGrid.ModifyTile(pos.Value, tile.AtlasId, tile.ImageId);
-
-            entities[entity] = tile;
+            entities.Add(entity);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            throw new NotImplementedException();
+            entities.Remove(entity);
         }
 
         #endregion Protected Methods

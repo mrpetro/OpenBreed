@@ -1,32 +1,32 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Entities.ElectricGate;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    public class DoorCellEntityLoader : IMapWorldEntityLoader
+    public class ElectricGateCellEntityLoader : IMapWorldEntityLoader
     {
         #region Public Fields
 
-        public const int DOOR_STANDARD = 62;
-        public const int DOOR_RED = 28;
-        public const int DOOR_GREEN = 29;
-        public const int DOOR_BLUE = 30;
+        public const int PASS_UP = 7;
+        public const int PASS_DOWN = 8;
+        public const int PASS_RIGHT = 12;
+        public const int PASS_LEFT = 13;
 
         #endregion Public Fields
 
         #region Private Fields
 
-        private readonly DoorHelper doorHelper;
+        private readonly ElectricGateHelper electricGateHelper;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DoorCellEntityLoader(DoorHelper doorHelper)
+        public ElectricGateCellEntityLoader(ElectricGateHelper electricGateHelper)
         {
-            this.doorHelper = doorHelper;
+            this.electricGateHelper = electricGateHelper;
         }
 
         #endregion Public Constructors
@@ -37,9 +37,9 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var rightValue = MapWorldDataLoader.GetActionCellValue(layout, ix + 1, iy);
 
-            if (rightValue == DOOR_STANDARD)
+            if (rightValue == actionValue)
             {
-                doorHelper.AddHorizontal(world, ix, iy);
+                electricGateHelper.AddHorizontal(world, ix, iy);
                 visited[ix, iy] = true;
                 visited[ix + 1, iy] = true;
                 return;
@@ -47,9 +47,9 @@ namespace OpenBreed.Sandbox.Loaders
 
             var downValue = MapWorldDataLoader.GetActionCellValue(layout, ix, iy + 1);
 
-            if (downValue == DOOR_STANDARD)
+            if (downValue == actionValue)
             {
-                doorHelper.AddVertical(world, ix, iy);
+                electricGateHelper.AddVertical(world, ix, iy);
                 visited[ix, iy] = true;
                 visited[ix, iy + 1] = true;
                 return;

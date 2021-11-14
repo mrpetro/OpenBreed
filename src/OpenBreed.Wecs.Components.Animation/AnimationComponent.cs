@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -41,11 +40,6 @@ namespace OpenBreed.Wecs.Components.Animation
         }
 
         #endregion Internal Constructors
-
-        //internal AnimationComponent(AnimationComponentBuilder builder)
-        //{
-        //    Items = builder.animatorBuilders.Select(item => item.Build()).ToList();
-        //}
 
         #region Public Properties
 
@@ -124,10 +118,6 @@ namespace OpenBreed.Wecs.Components.Animation
             return new AnimationComponent(this);
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
         public AnimationStateBuilder AddState()
         {
             var newAnimationStateBuilder = new AnimationStateBuilder(clipMan);
@@ -135,7 +125,7 @@ namespace OpenBreed.Wecs.Components.Animation
             return newAnimationStateBuilder;
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
     }
 
     public class AnimationStateBuilder

@@ -6,6 +6,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Input.Interface;
+using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
@@ -14,6 +15,7 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Entities.ElectricGate;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.WorldGate;
@@ -96,6 +98,9 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupMapWorldDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
+            //NOTE: Needed for correct display of map in this coordinate system
+            MapLayoutModel.FlippedY = true;
+
             dataLoaderFactory.Register<World>(() =>
             {
                 var mapWorldDataLoader = new MapWorldDataLoader(dataLoaderFactory,
@@ -109,8 +114,10 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<IBroadphaseFactory>(),
                                                               managerCollection.GetManager<ITileGridFactory>());
 
-                mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, new GenericCellEntityLoader());
-                mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, new GenericCellEntityLoader());
+                var genericCellEntityLoader = new GenericCellEntityLoader(managerCollection.GetManager<GenericCellHelper>());
+
+                mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, genericCellEntityLoader);
+                mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, genericCellEntityLoader);
 
                 var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetManager<EnvironmentHelper>());
                 mapWorldDataLoader.Register(AnimatedCellLoader.TV_FLICKERING_CODE, environmentCellLoader);
@@ -119,6 +126,12 @@ namespace OpenBreed.Sandbox.Extensions
                 mapWorldDataLoader.Register(LevelEntryCellLoader.CODE, new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
                                                                          managerCollection.GetManager<WorldGateHelper>()));
                 mapWorldDataLoader.Register(DoorCellEntityLoader.DOOR_STANDARD, new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>()));
+
+                var electricGateEntityLoader = new ElectricGateCellEntityLoader(managerCollection.GetManager<ElectricGateHelper>());
+                mapWorldDataLoader.Register(ElectricGateCellEntityLoader.PASS_UP, electricGateEntityLoader);
+                mapWorldDataLoader.Register(ElectricGateCellEntityLoader.PASS_DOWN, electricGateEntityLoader);
+                mapWorldDataLoader.Register(ElectricGateCellEntityLoader.PASS_RIGHT, electricGateEntityLoader);
+                mapWorldDataLoader.Register(ElectricGateCellEntityLoader.PASS_LEFT, electricGateEntityLoader);
 
                 var pickableCellEntityLoader = new ItemCellEntityLoader(managerCollection.GetManager<PickableHelper>());
 
@@ -190,7 +203,7 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<FsmSystem>());
 
             ////Audio
-            //builder.AddSystem(core.CreateSoundSystem().Build());
+            //builder.AddSystem(systemFactory.Create<SoundSystem>());
 
             //Video
             builder.AddSystem(systemFactory.Create<StampSystem>());

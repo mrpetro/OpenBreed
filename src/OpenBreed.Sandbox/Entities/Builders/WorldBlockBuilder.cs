@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Builders;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
 
 namespace OpenBreed.Sandbox.Entities.Builders
@@ -93,11 +94,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
                 entity.Add(bodyComponentBuilder.Build());
             }
 
-            var tileComponentBuilder = builderFactory.GetBuilder<TileComponentBuilder>();
-            tileComponentBuilder.SetAtlasById(atlasId);
-            tileComponentBuilder.SetImageIndex(tileId);
-
-            entity.Add(tileComponentBuilder.Build());
+            entity.PutTile(atlasId, tileId, 0, pos);
 
             return entity;
         }

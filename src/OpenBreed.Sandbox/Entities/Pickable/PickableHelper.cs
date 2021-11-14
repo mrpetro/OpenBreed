@@ -36,12 +36,12 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         private void LoadStamps(IDataLoader<ITileStamp> tileStampLoader, string name)
         {
-            tileStampLoader.Load($"Tiles/Stamps/Pickable/L4/{name}/F1/Lying");
-            tileStampLoader.Load($"Tiles/Stamps/Pickable/L4/{name}/F1/Picked");
-            tileStampLoader.Load($"Tiles/Stamps/Pickable/L4/{name}/F2/Lying");
-            tileStampLoader.Load($"Tiles/Stamps/Pickable/L4/{name}/F2/Picked");
-            tileStampLoader.Load($"Tiles/Stamps/Pickable/L4/{name}/F3/Lying");
-            tileStampLoader.Load($"Tiles/Stamps/Pickable/L4/{name}/F3/Picked");
+            tileStampLoader.Load($"L4/{name}/F1/Lying");
+            tileStampLoader.Load($"L4/{name}/F1/Picked");
+            tileStampLoader.Load($"L4/{name}/F2/Lying");
+            tileStampLoader.Load($"L4/{name}/F2/Picked");
+            tileStampLoader.Load($"L4/{name}/F3/Lying");
+            tileStampLoader.Load($"L4/{name}/F3/Picked");
         }
 
         public void LoadStamps()
@@ -61,14 +61,14 @@ namespace OpenBreed.Sandbox.Entities.Pickable
             LoadStamps(tileStampLoader, "PowerUpA");
             LoadStamps(tileStampLoader, "PowerUpF");
 
-            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardRed/Lying");
-            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardRed/Picked");
-            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardGreen/Lying");
-            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardGreen/Picked");
-            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardBlue/Lying");
-            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardBlue/Picked");
-            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardSpecial/Lying");
-            tileStampLoader.Load("Tiles/Stamps/Pickable/L4/KeycardSpecial/Picked");
+            tileStampLoader.Load("L4/KeycardRed/Lying");
+            tileStampLoader.Load("L4/KeycardRed/Picked");
+            tileStampLoader.Load("L4/KeycardGreen/Lying");
+            tileStampLoader.Load("L4/KeycardGreen/Picked");
+            tileStampLoader.Load("L4/KeycardBlue/Lying");
+            tileStampLoader.Load("L4/KeycardBlue/Picked");
+            tileStampLoader.Load("L4/KeycardSpecial/Lying");
+            tileStampLoader.Load("L4/KeycardSpecial/Picked");
         }
 
         public void AddItem(World world, int x, int y, string name, string flavor = null)

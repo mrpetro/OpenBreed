@@ -142,6 +142,9 @@ namespace OpenBreed.Sandbox.Loaders
                 case SMART_CARD_F3:
                     flavor = "F3";
                     break;
+                default:
+                    flavor = "Trigger";
+                    break;
             }
 
             switch (actionValue)

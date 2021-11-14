@@ -162,23 +162,6 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private void LoadUnknownCell(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, World world, int ix, int iy, int gfxValue, int actionValue, bool hasBody, bool unknown)
-        {
-            var groupLayerIndex = layout.GetLayerIndex(MapLayerType.Group);
-
-            worldBlockBuilder.SetPosition(ix * layout.CellSize, iy * layout.CellSize);
-            worldBlockBuilder.SetTileId(gfxValue);
-            worldBlockBuilder.SetGroupId(layout.GetCellValue(groupLayerIndex, ix, iy));
-            worldBlockBuilder.HasBody = hasBody;
-
-            var cellEntity = worldBlockBuilder.Build();
-
-            if (unknown)
-                cellEntity.Tag = actionValue;
-
-            cellEntity.EnterWorld(world.Id);
-        }
-
         private void LoadCellEntity(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             if (visited[ix, iy])
@@ -194,6 +177,8 @@ namespace OpenBreed.Sandbox.Loaders
             worldBlockBuilder.SetPosition(ix * layout.CellSize, iy * layout.CellSize);
             worldBlockBuilder.SetTileId(gfxValue);
             worldBlockBuilder.HasBody = false;
+
+
 
             var cellEntity = worldBlockBuilder.Build();
 

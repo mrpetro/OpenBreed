@@ -24,10 +24,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
                                                             manCollection.GetManager<IViewClient>()));
             systemFactory.Register(() => new SpriteSystem(manCollection.GetManager<ISpriteMan>()));
             systemFactory.Register(() => new StampSystem());
-            systemFactory.Register(() => new TileSystem(manCollection.GetManager<IEntityMan>(),
-                                                        manCollection.GetManager<ITileMan>(),
-                                                        manCollection.GetManager<ITileGridFactory>(),
-                                                        manCollection.GetManager<IStampMan>()));
+            systemFactory.Register(() => new TileSystem());
             systemFactory.Register(() => new TextPresenterSystem(manCollection.GetManager<IFontMan>()));
             systemFactory.Register(() => new TextSystem(manCollection.GetManager<IEntityMan>(),
                                                         manCollection.GetManager<IFontMan>(),

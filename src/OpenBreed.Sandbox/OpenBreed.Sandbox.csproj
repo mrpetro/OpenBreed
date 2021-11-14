@@ -83,11 +83,13 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Entities\ElectricGate\ElectricGateHelper.cs" />
     <Compile Include="Entities\FixtureTypes.cs" />
     <Compile Include="Entities\EnvironmentHelper.cs" />
-    <Compile Include="Entities\MapCellHelper.cs" />
+    <Compile Include="Entities\GenericCellHelper.cs" />
     <Compile Include="Entities\Pickable\ManagerCollectionExtensions.cs" />
     <Compile Include="Loaders\AnimatedCellLoader.cs" />
+    <Compile Include="Loaders\ElectricGateCellEntityLoader.cs" />
     <Compile Include="Loaders\ItemCellEntityLoader.cs" />
     <Compile Include="Loaders\DoorCellEntityLoader.cs" />
     <Compile Include="Loaders\LevelEntryCellLoader.cs" />
@@ -168,6 +170,21 @@
     <Compile Include="Loaders\MapWorldDataLoader.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
+    <Content Include="Entities\Common\Environment\Obstacle.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Environment\Void.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\ElectricGate\ElectricGateHorizontal.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\ElectricGate\ElectricGateVertical.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RunABTA.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -36,7 +36,6 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
             RequireEntityWith<PositionComponent>();
             RequireEntityWith<UnknownCodeComponent>();
-            RequireEntityWith<TileComponent>();
 
             font = fontMan.Create("ARIAL", 8);
         }
@@ -131,7 +130,6 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             if (posCmp.Value.Y > clipBox.Top)
                 return;
 
-            var tileCmp = entity.Get<TileComponent>();
             var unknownCodeCmp = entity.Get<UnknownCodeComponent>();
 
             GL.PushMatrix();

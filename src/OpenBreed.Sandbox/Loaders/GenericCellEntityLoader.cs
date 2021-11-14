@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Model.Maps;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Wecs.Worlds;
 
@@ -11,6 +12,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         public const int OBSTACLE_CODE = 63;
         public const int VOID_CODE = 0;
+        private readonly GenericCellHelper genericCellHelper;
 
         #endregion Public Fields
 
@@ -24,8 +26,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Constructors
 
-        public GenericCellEntityLoader()
+        public GenericCellEntityLoader(GenericCellHelper genericCellHelper)
         {
+            this.genericCellHelper = genericCellHelper;
         }
 
         #endregion Public Constructors
@@ -37,11 +40,11 @@ namespace OpenBreed.Sandbox.Loaders
             switch (actionValue)
             {
                 case OBSTACLE_CODE:
-                    PutGenericCell(worldBlockBuilder, layout, world, ix, iy, gfxValue, actionValue, hasBody: true, unknown: false);
+                    PutObstacleCell(worldBlockBuilder, layout, world, ix, iy, gfxValue);
                     break;
 
                 case VOID_CODE:
-                    PutGenericCell(worldBlockBuilder, layout, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
+                    PutVoidCell(worldBlockBuilder, layout, world, ix, iy, gfxValue);
                     break;
 
                 //default:
@@ -56,21 +59,14 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private void PutGenericCell(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, World world, int ix, int iy, int gfxValue, int actionValue, bool hasBody, bool unknown)
+        private void PutVoidCell(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, World world, int ix, int iy, int gfxValue)
         {
-            var groupLayerIndex = layout.GetLayerIndex(MapLayerType.Group);
+            genericCellHelper.AddVoidCell(world, ix, iy, worldBlockBuilder.atlasId, gfxValue);
+        }
 
-            worldBlockBuilder.SetPosition(ix * layout.CellSize, iy * layout.CellSize);
-            worldBlockBuilder.SetTileId(gfxValue);
-            worldBlockBuilder.SetGroupId(layout.GetCellValue(groupLayerIndex, ix, iy));
-            worldBlockBuilder.HasBody = hasBody;
-
-            var cellEntity = worldBlockBuilder.Build();
-
-            if (unknown)
-                cellEntity.Tag = actionValue;
-
-            cellEntity.EnterWorld(world.Id);
+        private void PutObstacleCell(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, World world, int ix, int iy, int gfxValue)
+        {
+            genericCellHelper.AddObstacleCell(world, ix, iy, worldBlockBuilder.atlasId, gfxValue);
         }
 
         #endregion Private Methods

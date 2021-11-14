@@ -24,6 +24,7 @@ using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Button;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Entities.ElectricGate;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
@@ -150,9 +151,12 @@ namespace OpenBreed.Sandbox
                                                                                   manCollection.GetManager<ViewportCreator>()));
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                         manCollection.GetManager<IEntityFactory>()));
+            manCollection.AddSingleton<ElectricGateHelper>(() => new ElectricGateHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                        manCollection.GetManager<IEntityFactory>()));
             manCollection.AddSingleton<PickableHelper>(() => new PickableHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                         manCollection.GetManager<IEntityFactory>()));
-
+            manCollection.AddSingleton<GenericCellHelper>(() => new GenericCellHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                        manCollection.GetManager<IEntityFactory>()));
             manCollection.AddSingleton<EnvironmentHelper>(() => new EnvironmentHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                                       manCollection.GetManager<IEntityFactory>(),
                                                                                       manCollection.GetManager<IBuilderFactory>()));
@@ -181,10 +185,8 @@ namespace OpenBreed.Sandbox
                                                                           manCollection.GetManager<IPlayersMan>(),
                                                                           manCollection.GetManager<IDataLoaderFactory>(),
                                                                           manCollection.GetManager<IEntityFactory>(),
-                                                                          manCollection.GetManager<MapCellHelper>(),
                                                                           manCollection.GetManager<DynamicResolver>(),
                                                                           manCollection.GetManager<FixtureTypes>()));
-            manCollection.AddSingleton<MapCellHelper>(() => new MapCellHelper(manCollection.GetManager<WorldBlockBuilder>()));
 
             manCollection.SetupSpriteComponentAnimator();
 
@@ -423,6 +425,7 @@ namespace OpenBreed.Sandbox
 
             var worldGateHelper = GetManager<WorldGateHelper>();
             var doorHelper = GetManager<DoorHelper>();
+            var electicGateHelper = GetManager<ElectricGateHelper>();
             var pickableHelper = GetManager<PickableHelper>();
             var environmentHelper = GetManager<EnvironmentHelper>();
             var projectileHelper = GetManager<ProjectileHelper>();
@@ -438,6 +441,8 @@ namespace OpenBreed.Sandbox
 
             cameraHelper.CreateAnimations();
             doorHelper.LoadAnimations();
+            electicGateHelper.LoadAnimations();
+
             environmentHelper.LoadAnimations();
             actorHelper.CreateAnimations();
             teleportHelper.CreateAnimations();
@@ -467,6 +472,7 @@ namespace OpenBreed.Sandbox
             var entityMan = GetManager<IEntityMan>();
 
             var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 1");
+            //var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 3");
 
             doorHelper.LoadStamps();
             pickableHelper.LoadStamps();
