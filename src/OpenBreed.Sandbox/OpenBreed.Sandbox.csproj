@@ -90,6 +90,7 @@
     <Compile Include="Entities\Pickable\ManagerCollectionExtensions.cs" />
     <Compile Include="Loaders\AnimatedCellLoader.cs" />
     <Compile Include="Loaders\ElectricGateCellEntityLoader.cs" />
+    <Compile Include="Loaders\UnknownCellEntityLoader.cs" />
     <Compile Include="Loaders\ItemCellEntityLoader.cs" />
     <Compile Include="Loaders\DoorCellEntityLoader.cs" />
     <Compile Include="Loaders\LevelEntryCellLoader.cs" />
@@ -119,7 +120,7 @@
     <Compile Include="Entities\Actor\States\Rotation\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Rotation\RotatingState.cs" />
     <Compile Include="Entities\Box\BoxHelper.cs" />
-    <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
+    <Compile Include="Entities\Builders\MapAssets.cs" />
     <Compile Include="Entities\Button\ButtonHelper.cs" />
     <Compile Include="Entities\Button\ButtonState.cs" />
     <Compile Include="Entities\Button\ManagerCollectionExtensions.cs" />
@@ -170,6 +171,9 @@
     <Compile Include="Loaders\MapWorldDataLoader.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
+    <Content Include="Entities\Common\Environment\Unknown.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Entities\Common\Environment\Obstacle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

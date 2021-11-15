@@ -5,12 +5,11 @@ using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    public class GenericCellEntityLoader : IMapWorldEntityLoader
+    public class UnknownCellEntityLoader : IMapWorldEntityLoader
     {
         #region Public Fields
 
-        public const int OBSTACLE_CODE = 63;
-        public const int VOID_CODE = 0;
+        public const int UNKNOWN_CODE = -1;
 
         #endregion Public Fields
 
@@ -22,7 +21,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Constructors
 
-        public GenericCellEntityLoader(GenericCellHelper genericCellHelper)
+        public UnknownCellEntityLoader(GenericCellHelper genericCellHelper)
         {
             this.genericCellHelper = genericCellHelper;
         }
@@ -33,20 +32,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         public void Load(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
-            switch (actionValue)
-            {
-                case OBSTACLE_CODE:
-                    genericCellHelper.AddObstacleCell(world, ix, iy, mapAssets.AtlasId, gfxValue);
-                    break;
-
-                case VOID_CODE:
-                    genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.AtlasId, gfxValue);
-                    break;
-
-                    //default:
-                    //    PutGenericCell(worldBlockBuilder, layout, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: true);
-                    //    break;
-            }
+            genericCellHelper.AddUnknownCell(world, ix, iy, actionValue, gfxValue);
 
             visited[ix, iy] = true;
         }

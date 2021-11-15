@@ -471,8 +471,8 @@ namespace OpenBreed.Sandbox
             var cameraBuilder = GetManager<CameraBuilder>();
             var entityMan = GetManager<IEntityMan>();
 
-            var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 1");
-            //var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 3");
+            var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 4");
+            //var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 2");
 
             doorHelper.LoadStamps();
             pickableHelper.LoadStamps();

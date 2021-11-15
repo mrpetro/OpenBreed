@@ -61,7 +61,7 @@ namespace OpenBreed.Sandbox.Loaders
 
             foreach (var cell in entry.Cells)
             {
-                var ts = tileMan.GetByAlias(cell.TsId);
+                var ts = tileMan.GetByName(cell.TsId);
                 stampBuilder.AddTile(cell.X, cell.Y, ts.Id, cell.TsTi);
             }
 

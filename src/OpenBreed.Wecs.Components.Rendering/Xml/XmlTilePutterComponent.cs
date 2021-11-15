@@ -5,8 +5,8 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Wecs.Components.Rendering.Xml
 {
-    [XmlRoot("Sprite")]
-    public class XmlSpriteComponent : XmlComponentTemplate, ISpriteComponentTemplate
+    [XmlRoot("TilePutter")]
+    public class XmlTilePutterComponent : XmlComponentTemplate, ITilePutterComponentTemplate
     {
         #region Public Properties
 
@@ -17,18 +17,14 @@ namespace OpenBreed.Wecs.Components.Rendering.Xml
         public int ImageIndex { get; set; }
 
         [XmlIgnore]
-        public Vector2 Origin
+        public Vector2 Position
         {
-            get => new Vector2(XmlOrigin.X, XmlOrigin.Y);
-            set => XmlOrigin = new XmlVector2() { X = value.X, Y = value.Y };
+            get => new Vector2(XmlPosition.X, XmlPosition.Y);
+            set => XmlPosition = new XmlVector2() { X = value.X, Y = value.Y };
         }
 
-        [XmlElement("Origin")]
-        public XmlVector2 XmlOrigin { get; set; }
-
-        public int Order { get; set; }
-
-        public bool Hidden { get; set; }
+        [XmlElement("Position")]
+        public XmlVector2 XmlPosition { get; set; }
 
         #endregion Public Properties
     }

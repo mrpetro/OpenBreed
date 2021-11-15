@@ -14,5 +14,10 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
+		<TilePutter>
+			<AtlasName>TileSets.L4</AtlasName>
+			<ImageIndex>$(imageIndex)</ImageIndex>
+			<Position X="$(startX)" Y="$(startY)" />
+		</TilePutter>
 	</Components>
 </EntityTemplate>

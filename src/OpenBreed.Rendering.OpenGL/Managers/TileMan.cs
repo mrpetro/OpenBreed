@@ -63,7 +63,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return items[id];
         }
 
-        public ITileAtlas GetByAlias(string alias)
+        public ITileAtlas GetByName(string alias)
         {
             TileAtlas result = null;
             names.TryGetValue(alias, out result);

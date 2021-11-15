@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             switch (actionValue)
             {
@@ -111,16 +111,16 @@ namespace OpenBreed.Sandbox.Loaders
             switch (actionValue)
             {
                 case KEYCARD_RED:
-                    pickableHelper.AddItem(world, ix, iy, "KeycardRed");
+                    pickableHelper.AddItem(world, ix, iy, "KeycardRed", gfxValue);
                     return true;
                 case KEYCARD_GREEN:
-                    pickableHelper.AddItem(world, ix, iy, "KeycardGreen");
+                    pickableHelper.AddItem(world, ix, iy, "KeycardGreen", gfxValue);
                     return true;
                 case KEYCARD_BLUE:
-                    pickableHelper.AddItem(world, ix, iy, "KeycardBlue");
+                    pickableHelper.AddItem(world, ix, iy, "KeycardBlue", gfxValue);
                     return true;
                 case KEYCARD_SPECIAL:
-                    pickableHelper.AddItem(world, ix, iy, "KeycardSpecial");
+                    pickableHelper.AddItem(world, ix, iy, "KeycardSpecial", gfxValue);
                     return true;
                 default:
                     return false;
@@ -150,13 +150,13 @@ namespace OpenBreed.Sandbox.Loaders
             switch (actionValue)
             {
                 case SMARTCARD_1:
-                    pickableHelper.AddItem(world, ix, iy, "SmartCard", flavor);
+                    pickableHelper.AddItem(world, ix, iy, "SmartCard", gfxValue, flavor);
                     return true;
                 case SMARTCARD_2:
-                    pickableHelper.AddItem(world, ix, iy, "SmartCard", flavor);
+                    pickableHelper.AddItem(world, ix, iy, "SmartCard", gfxValue, flavor);
                     return true;
                 case SMARTCARD_3:
-                    pickableHelper.AddItem(world, ix, iy, "SmartCard", flavor);
+                    pickableHelper.AddItem(world, ix, iy, "SmartCard", gfxValue, flavor);
                     return true;
                 default:
                     return false;
@@ -168,103 +168,103 @@ namespace OpenBreed.Sandbox.Loaders
             switch (gfxValue)
             {
                 case MEDKIT_SMALL_F1:
-                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall", gfxValue, "F1");
                     return true;
                 case MEDKIT_SMALL_F2:
-                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall", gfxValue, "F2");
                     return true;
                 case MEDKIT_SMALL_F3:
-                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "MedkitSmall", gfxValue, "F3");
                     return true;
                 case CREDITS_SMALL_F1:
-                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall", gfxValue, "F1");
                     return true;
                 case CREDITS_SMALL_F2:
-                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall", gfxValue, "F2");
                     return true;
                 case CREDITS_SMALL_F3:
-                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "CreditsSmall", gfxValue, "F3");
                     return true;
                 case KEY_CARD_STANDARD_F1:
-                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard", gfxValue, "F1");
                     return true;
                 case KEY_CARD_STANDARD_F2:
-                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard", gfxValue, "F2");
                     return true;
                 case KEY_CARD_STANDARD_F3:
-                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "KeycardStandard", gfxValue, "F3");
                     return true;
                 case POWERUP_S_F1:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpS", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpS", gfxValue, "F1");
                     return true;
                 case POWERUP_S_F2:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpS", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpS", gfxValue, "F2");
                     return true;
                 case POWERUP_S_F3:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpS", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpS", gfxValue, "F3");
                     return true;
                 case EXTRA_LIFE_F1:
-                    pickableHelper.AddItem(world, ix, iy, "ExtraLife", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "ExtraLife", gfxValue, "F1");
                     return true;
                 case EXTRA_LIFE_F2:
-                    pickableHelper.AddItem(world, ix, iy, "ExtraLife", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "ExtraLife", gfxValue, "F2");
                     return true;
                 case EXTRA_LIFE_F3:
-                    pickableHelper.AddItem(world, ix, iy, "ExtraLife", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "ExtraLife", gfxValue, "F3");
                     return true;
                 case POWERUP_F_F1:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpF", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpF", gfxValue, "F1");
                     return true;
                 case POWERUP_F_F2:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpF", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpF", gfxValue, "F2");
                     return true;
                 case POWERUP_F_F3:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpF", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpF", gfxValue, "F3");
                     return true;
                 case MEDKIT_BIG_F1:
-                    pickableHelper.AddItem(world, ix, iy, "MedkitBig", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "MedkitBig", gfxValue, "F1");
                     return true;
                 case MEDKIT_BIG_F2:
-                    pickableHelper.AddItem(world, ix, iy, "MedkitBig", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "MedkitBig", gfxValue, "F2");
                     return true;
                 case MEDKIT_BIG_F3:
-                    pickableHelper.AddItem(world, ix, iy, "MedkitBig", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "MedkitBig", gfxValue, "F3");
                     return true;
                 case CREDITS_BIG_F1:
-                    pickableHelper.AddItem(world, ix, iy, "CreditsBig", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "CreditsBig", gfxValue, "F1");
                     return true;
                 case CREDITS_BIG_F2:
-                    pickableHelper.AddItem(world, ix, iy, "CreditsBig", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "CreditsBig", gfxValue, "F2");
                     return true;
                 case CREDITS_BIG_F3:
-                    pickableHelper.AddItem(world, ix, iy, "CreditsBig", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "CreditsBig", gfxValue, "F3");
                     return true;
                 case POWERUP_A_F1:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpA", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpA", gfxValue, "F1");
                     return true;
                 case POWERUP_A_F2:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpA", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpA", gfxValue, "F2");
                     return true;
                 case POWERUP_A_F3:
-                    pickableHelper.AddItem(world, ix, iy, "PowerUpA", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "PowerUpA", gfxValue, "F3");
                     return true;
                 case AMMO_F1:
-                    pickableHelper.AddItem(world, ix, iy, "Ammo", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "Ammo", gfxValue, "F1");
                     return true;
                 case AMMO_F2:
-                    pickableHelper.AddItem(world, ix, iy, "Ammo", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "Ammo", gfxValue, "F2");
                     return true;
                 case AMMO_F3:
-                    pickableHelper.AddItem(world, ix, iy, "Ammo", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "Ammo", gfxValue, "F3");
                     return true;
                 case AREA_SCANNER_F1:
-                    pickableHelper.AddItem(world, ix, iy, "AreaScanner", "F1");
+                    pickableHelper.AddItem(world, ix, iy, "AreaScanner", gfxValue, "F1");
                     return true;
                 case AREA_SCANNER_F2:
-                    pickableHelper.AddItem(world, ix, iy, "AreaScanner", "F2");
+                    pickableHelper.AddItem(world, ix, iy, "AreaScanner", gfxValue, "F2");
                     return true;
                 case AREA_SCANNER_F3:
-                    pickableHelper.AddItem(world, ix, iy, "AreaScanner", "F3");
+                    pickableHelper.AddItem(world, ix, iy, "AreaScanner", gfxValue, "F3");
                     return true;
                 default:
                     {
