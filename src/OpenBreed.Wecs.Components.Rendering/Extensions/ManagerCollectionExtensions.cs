@@ -18,6 +18,7 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
             XmlComponentsList.RegisterComponentType<XmlSpriteComponent>();
             XmlComponentsList.RegisterComponentType<XmlTextComponent>();
             XmlComponentsList.RegisterComponentType<XmlViewportComponent>();
+            XmlComponentsList.RegisterComponentType<XmlCameraComponent>();
             XmlComponentsList.RegisterComponentType<XmlTilePutterComponent>();
 
             var builderFactory = manCollection.GetManager<IBuilderFactory>();
@@ -38,6 +39,7 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
             entityFactory.RegisterComponentFactory<XmlSpriteComponent>(manCollection.GetManager<SpriteComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlTextComponent>(manCollection.GetManager<TextComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlViewportComponent>(manCollection.GetManager<ViewportComponentFactory>());
+            entityFactory.RegisterComponentFactory<XmlCameraComponent>(manCollection.GetManager<CameraComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlTilePutterComponent>(manCollection.GetManager<TilePutterComponentFactory>());
         }
     }

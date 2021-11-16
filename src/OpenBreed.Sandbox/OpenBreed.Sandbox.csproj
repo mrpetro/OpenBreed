@@ -87,6 +87,7 @@
     <Compile Include="Entities\FixtureTypes.cs" />
     <Compile Include="Entities\EnvironmentHelper.cs" />
     <Compile Include="Entities\GenericCellHelper.cs" />
+    <Compile Include="Entities\Hud\HudHelper.cs" />
     <Compile Include="Entities\Pickable\ManagerCollectionExtensions.cs" />
     <Compile Include="Loaders\AnimatedCellLoader.cs" />
     <Compile Include="Loaders\ElectricGateCellEntityLoader.cs" />
@@ -126,7 +127,6 @@
     <Compile Include="Entities\Button\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Button\States\PressedState.cs" />
     <Compile Include="Entities\Button\States\IdleState.cs" />
-    <Compile Include="Entities\Camera\CameraBuilder.cs" />
     <Compile Include="Entities\Camera\CameraHelper.cs" />
     <Compile Include="Entities\ColliderTypes.cs" />
     <Compile Include="Entities\CursorCoords\CursorCoordsHelper.cs" />
@@ -138,7 +138,6 @@
     <Compile Include="Entities\Door\States\ClosedState.cs" />
     <Compile Include="Entities\Door\States\OpeningState.cs" />
     <Compile Include="Entities\Door\States\ClosingState.cs" />
-    <Compile Include="Entities\FpsCounter\FpsCounterHelper.cs" />
     <Compile Include="Entities\Pickable\PickableHelper.cs" />
     <Compile Include="Entities\Pickable\States\FunctioningState.cs" />
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
@@ -171,6 +170,9 @@
     <Compile Include="Loaders\MapWorldDataLoader.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
+    <Content Include="Entities\Common\Camera.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Entities\Common\Environment\Unknown.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

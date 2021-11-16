@@ -172,17 +172,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             viewBox = Box2.FromTLRB(y + cmc.Height / 2.0f, x - cmc.Width / 2.0f, x + cmc.Width / 2.0f, y - cmc.Height / 2.0f);
 
-            //var x = pos.Value.X * 0.5f;
-            //var y = pos.Value.Y * 0.5f;
-            ////var x = 0.0f;
-            ////var y = 0.0f;
-
-            //var pointLB = new Vector4(0.0f, 0.0f, 0.0f, -0.5f);
-            //var pointRT = new Vector4(-0.5f, -0.5f, 0.0f, -0.5f);
-            //pointLB = Vector4.Transform(pointLB, cameraT);
-            //pointRT = Vector4.Transform(pointRT, cameraT);
-            //cmc
-            //viewBox = Box2.FromTLRB(y - pointRT.Y, x - pointLB.X , x - pointRT.X, y - pointLB.Y);
+            //viewBox = viewBox.Inflate(-16.0f);
         }
 
         /// <summary>

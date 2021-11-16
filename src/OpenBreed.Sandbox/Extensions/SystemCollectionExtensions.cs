@@ -57,20 +57,11 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupSandboxBuilders(this IManagerCollection manCollection)
         {
-            manCollection.AddTransient<CameraBuilder>(() => new CameraBuilder(manCollection.GetManager<IEntityMan>(),
-                                                                              manCollection.GetManager<IBuilderFactory>()));
 
             //manCollection.AddTransient<WorldBlockBuilder>(() => new WorldBlockBuilder(manCollection.GetManager<ITileMan>(),
             //                                                                          manCollection.GetManager<IShapeMan>(),
             //                                                                          manCollection.GetManager<IEntityMan>(),
             //                                                                          manCollection.GetManager<IBuilderFactory>()));
-        }
-
-        public static void SetupPlayerCamera(this CameraBuilder cameraBuilder)
-        {
-            cameraBuilder.SetPosition(new Vector2(0, 0));
-            cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetFov(320, 240);
         }
 
         public static void SetupMapEntityFactory(this EntityFactoryProvider entityFactoryProvider, IManagerCollection manCollection)

@@ -1,23 +1,18 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Core.Managers;
-using OpenTK;
-using OpenBreed.Wecs.Systems.Rendering.Extensions;
 
 namespace OpenBreed.Sandbox.Jobs
 {
     public class JohnPositionTextUpdateJob : IJob
     {
-        private readonly ICore core;
         #region Private Fields
+
+        private readonly IEntityMan entityMan;
 
         private Entity entity;
 
@@ -25,9 +20,9 @@ namespace OpenBreed.Sandbox.Jobs
 
         #region Public Constructors
 
-        public JohnPositionTextUpdateJob(ICore core, Entity entity)
+        public JohnPositionTextUpdateJob(IEntityMan entityMan, Entity entity)
         {
-            this.core = core;
+            this.entityMan = entityMan;
             this.entity = entity;
         }
 
@@ -47,7 +42,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            var johnEntity = core.GetManager<IEntityMan>().GetByTag("John").FirstOrDefault();
+            var johnEntity = entityMan.GetByTag("John").FirstOrDefault();
 
             if (johnEntity == null)
                 return;
@@ -66,6 +61,5 @@ namespace OpenBreed.Sandbox.Jobs
         }
 
         #endregion Public Methods
-
     }
 }

@@ -1,21 +1,16 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Rendering.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using System;
 
 namespace OpenBreed.Sandbox.Jobs
 {
     public class FpsTextUpdateJob : IJob
     {
-        private readonly ICore core;
         #region Private Fields
+
+        private readonly IRenderingMan renderingMan;
 
         private Entity entity;
 
@@ -23,9 +18,9 @@ namespace OpenBreed.Sandbox.Jobs
 
         #region Public Constructors
 
-        public FpsTextUpdateJob(ICore core, Entity entity)
+        public FpsTextUpdateJob(IRenderingMan renderingMan, Entity entity)
         {
-            this.core = core;
+            this.renderingMan = renderingMan;
             this.entity = entity;
         }
 
@@ -46,7 +41,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            entity.SetText(0, $"FPS: {core.GetManager<IRenderingMan>().Fps.ToString("0.00")}");
+            entity.SetText(0, $"FPS: {renderingMan.Fps.ToString("0.00")}");
         }
 
         public void Dispose()
@@ -54,6 +49,5 @@ namespace OpenBreed.Sandbox.Jobs
         }
 
         #endregion Public Methods
-
     }
 }

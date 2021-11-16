@@ -83,6 +83,7 @@
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\TextDataChanged.cs" />
     <Compile Include="Events\TextCaretPositionChanged.cs" />
+    <Compile Include="Extensions\Box2Extensions.cs" />
     <Compile Include="Extensions\QuaternionExtension.cs" />
     <Compile Include="Extensions\Vector2Extension.cs" />
     <Compile Include="Extensions\Vector3Extension.cs" />

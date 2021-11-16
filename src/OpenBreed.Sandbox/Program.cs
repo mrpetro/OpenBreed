@@ -25,6 +25,7 @@ using OpenBreed.Sandbox.Entities.Button;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.ElectricGate;
+using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
@@ -134,7 +135,8 @@ namespace OpenBreed.Sandbox
                                                                                       manCollection.GetManager<IWorldMan>(),
                                                                                       manCollection.GetManager<IViewClient>(),
                                                                                       manCollection.GetManager<IEntityMan>(),
-                                                                                      manCollection.GetManager<CameraBuilder>()));
+                                                                                      manCollection.GetManager<IEntityFactory>(),
+                                                                                      manCollection.GetManager<HudHelper>()));
             manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(manCollection.GetManager<IPlayersMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
                                                                                   manCollection.GetManager<ISystemFactory>(),
@@ -151,6 +153,16 @@ namespace OpenBreed.Sandbox
                                                                                   manCollection.GetManager<ViewportCreator>()));
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                         manCollection.GetManager<IEntityFactory>()));
+
+            manCollection.AddSingleton<HudHelper>(() => new HudHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                      manCollection.GetManager<IEntityFactory>(),
+                                                                      manCollection.GetManager<IEntityMan>(),
+                                                                      manCollection.GetManager<IViewClient>(),
+                                                                      manCollection.GetManager<IBuilderFactory>(),
+                                                                      manCollection.GetManager<IFontMan>(),
+                                                                      manCollection.GetManager<IJobsMan>(),
+                                                                      manCollection.GetManager<IRenderingMan>()));
+
             manCollection.AddSingleton<ElectricGateHelper>(() => new ElectricGateHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                         manCollection.GetManager<IEntityFactory>()));
             manCollection.AddSingleton<PickableHelper>(() => new PickableHelper(manCollection.GetManager<IDataLoaderFactory>(),
@@ -468,21 +480,30 @@ namespace OpenBreed.Sandbox
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
             var mapWorldLoader = dataLoaderFactory.GetLoader<World>();
 
-            var cameraBuilder = GetManager<CameraBuilder>();
             var entityMan = GetManager<IEntityMan>();
 
-            var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 4");
+            var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 1");
             //var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 2");
 
             doorHelper.LoadStamps();
             pickableHelper.LoadStamps();
 
-            cameraBuilder.SetupPlayerCamera();
+            var playerCamera = EntityFactory.Create(@"Entities\Common\Camera.xml")
+                .SetParameter("posX", 0.0)
+                .SetParameter("posY", 0.0)
+                .SetParameter("width", 320)
+                .SetParameter("height", 240)
+                .Build();
 
-            var playerCamera = cameraBuilder.Build();
+            playerCamera.Add(new PauseImmuneComponent());
             playerCamera.Tag = "PlayerCamera";
+
+            //cameraBuilder.SetupPlayerCamera();
+
+            //var playerCamera = cameraBuilder.Build();
+
             var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
-            gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
+            gameViewport.SetViewportCamera(playerCamera.Id);
 
             //Follow John actor
             //var johnPlayerEntity = entityMan.GetByTag("John").First();

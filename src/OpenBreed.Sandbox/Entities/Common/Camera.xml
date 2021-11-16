@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Class>
+			<Name>Camera</Name>
+		</Class>
+		<Timer>
+		</Timer>
+		<Animation>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>false</Loop>		
+				</State>
+			</States>
+		</Animation>
+		<Position X="$(posX)" Y="$(posY)" />
+
+		<Camera>
+			<Width>$(width)</Width>
+			<Height>$(height)</Height>
+			<Brightness>1</Brightness>
+		</Camera>
+    </Components>
+</EntityTemplate>
