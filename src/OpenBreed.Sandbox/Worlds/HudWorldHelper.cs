@@ -1,13 +1,12 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Sandbox.Entities.Camera;
-using OpenBreed.Sandbox.Entities.CursorCoords;
-using OpenBreed.Sandbox.Entities.FpsCounter;
+using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System.Linq;
@@ -23,20 +22,22 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IWorldMan worldMan;
         private readonly IViewClient viewClient;
         private readonly IEntityMan entityMan;
-        private readonly CameraBuilder cameraBuilder;
+        private readonly IEntityFactory entityFactory;
+        private readonly HudHelper hudHelper;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public HudWorldHelper(ICore core, ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, CameraBuilder cameraBuilder)
+        public HudWorldHelper(ICore core, ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, IEntityFactory entityFactory, HudHelper hudHelper)
         {
             this.core = core;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             this.viewClient = viewClient;
             this.entityMan = entityMan;
-            this.cameraBuilder = cameraBuilder;
+            this.entityFactory = entityFactory;
+            this.hudHelper = hudHelper;
         }
 
         #endregion Public Constructors
@@ -82,19 +83,22 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(World world)
         {
-            cameraBuilder.SetPosition(new Vector2(0, 0));
-            cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetFov(viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height);
-            var hudCamera = cameraBuilder.Build();
+            var hudCamera = entityFactory.Create(@"Entities\Common\Camera.xml")
+                .SetParameter("posX", 0.0)
+                .SetParameter("posY", 0.0)
+                .SetParameter("width", viewClient.ClientRectangle.Width)
+                .SetParameter("height", viewClient.ClientRectangle.Height)
+                .Build();
+
             hudCamera.Tag = "HudCamera";
 
             hudCamera.EnterWorld(world.Id);
 
-            FpsCounterHelper.AddToWorld(core, world);
-            CursorCoordsHelper.AddToWorld(core, world);
+            hudHelper.AddFpsCounter(world);
+            hudHelper.AddPositionInfo(world);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
-            hudViewport.Get<ViewportComponent>().CameraEntityId = hudCamera.Id;
+            hudViewport.SetViewportCamera(hudCamera.Id);
 
             //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ClientResizedEventArgs)a));
             //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateCameraFov(hudCamera, (ClientResizedEventArgs)a));

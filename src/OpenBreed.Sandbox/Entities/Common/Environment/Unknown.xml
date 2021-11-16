@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0"?>
 <EntityTemplate>
 	<Components>
+		<Position X="$(startX)" Y="$(startY)" />
 		<TilePutter>
 			<AtlasName>TileSets.L4</AtlasName>
 			<ImageIndex>$(imageIndex)</ImageIndex>

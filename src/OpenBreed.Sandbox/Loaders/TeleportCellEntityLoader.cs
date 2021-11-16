@@ -37,7 +37,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(WorldBlockBuilder worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             if (actionValue == ENTRY_CODE)
             {
@@ -55,13 +55,13 @@ namespace OpenBreed.Sandbox.Loaders
                 foreach (var cell in cells)
                 {
                     var cellGfxValue = layout.GetCellValue(gfxLayerIdx, cell.X, cell.Y);
-                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix, worldBlockBuilder.atlasId, cellGfxValue);
+                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix, mapAssets.AtlasId, cellGfxValue);
                     visited[cell.X, cell.Y] = true;
                 }
 
                 var exitGfxValue = layout.GetCellValue(gfxLayerIdx, found.X, found.Y);
 
-                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, worldBlockBuilder.atlasId, exitGfxValue);
+                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, mapAssets.AtlasId, exitGfxValue);
                 visited[found.X, found.Y] = true;
             }
 

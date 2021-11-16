@@ -71,13 +71,14 @@ namespace OpenBreed.Sandbox.Entities.Pickable
             tileStampLoader.Load("L4/KeycardSpecial/Picked");
         }
 
-        public void AddItem(World world, int x, int y, string name, string flavor = null)
+        public void AddItem(World world, int x, int y, string name, int gfxValue, string flavor = null)
         {
             var path = $@"{PICKABLE_PREFIX}\{name}.xml";
 
             var pickable = entityFactory.Create(path)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
                 .SetParameter("flavor", flavor)
                 .Build();
 

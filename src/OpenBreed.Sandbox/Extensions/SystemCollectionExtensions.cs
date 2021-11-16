@@ -57,20 +57,11 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupSandboxBuilders(this IManagerCollection manCollection)
         {
-            manCollection.AddTransient<CameraBuilder>(() => new CameraBuilder(manCollection.GetManager<IEntityMan>(),
-                                                                              manCollection.GetManager<IBuilderFactory>()));
 
-            manCollection.AddTransient<WorldBlockBuilder>(() => new WorldBlockBuilder(manCollection.GetManager<ITileMan>(),
-                                                                                      manCollection.GetManager<IShapeMan>(),
-                                                                                      manCollection.GetManager<IEntityMan>(),
-                                                                                      manCollection.GetManager<IBuilderFactory>()));
-        }
-
-        public static void SetupPlayerCamera(this CameraBuilder cameraBuilder)
-        {
-            cameraBuilder.SetPosition(new Vector2(0, 0));
-            cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetFov(320, 240);
+            //manCollection.AddTransient<WorldBlockBuilder>(() => new WorldBlockBuilder(manCollection.GetManager<ITileMan>(),
+            //                                                                          manCollection.GetManager<IShapeMan>(),
+            //                                                                          manCollection.GetManager<IEntityMan>(),
+            //                                                                          manCollection.GetManager<IBuilderFactory>()));
         }
 
         public static void SetupMapEntityFactory(this EntityFactoryProvider entityFactoryProvider, IManagerCollection manCollection)
@@ -108,13 +99,15 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<MapsDataProvider>(),
                                                               managerCollection.GetManager<ISystemFactory>(),
                                                               managerCollection.GetManager<IWorldMan>(),
-                                                              managerCollection.GetManager<WorldBlockBuilder>(),
                                                               managerCollection.GetManager<PalettesDataProvider>(),
                                                               managerCollection.GetManager<IEntityFactoryProvider>(),
                                                               managerCollection.GetManager<IBroadphaseFactory>(),
-                                                              managerCollection.GetManager<ITileGridFactory>());
+                                                              managerCollection.GetManager<ITileGridFactory>(),
+                                                              managerCollection.GetManager<ITileMan>());
 
                 var genericCellEntityLoader = new GenericCellEntityLoader(managerCollection.GetManager<GenericCellHelper>());
+
+                mapWorldDataLoader.Register(UnknownCellEntityLoader.UNKNOWN_CODE, new UnknownCellEntityLoader(managerCollection.GetManager<GenericCellHelper>()));
 
                 mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, genericCellEntityLoader);
                 mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, genericCellEntityLoader);

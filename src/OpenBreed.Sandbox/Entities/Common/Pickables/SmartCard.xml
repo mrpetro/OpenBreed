@@ -31,5 +31,10 @@
 			<FontSize>6</FontSize>
 			<Order>0</Order>
 		</Text>
+		<TilePutter>
+			<AtlasName>TileSets.L4</AtlasName>
+			<ImageIndex>$(imageIndex)</ImageIndex>
+			<Position X="$(startX)" Y="$(startY)" />
+		</TilePutter>
 	</Components>
 </EntityTemplate>

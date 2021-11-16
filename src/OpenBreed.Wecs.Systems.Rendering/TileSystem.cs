@@ -47,7 +47,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
                 try
                 {
-                    tileGrid.ModifyTile(tilePutterCmp.Position, tilePutterCmp.AtlasId, tilePutterCmp.TileId);
+                    tileGrid.ModifyTile(tilePutterCmp.Position, tilePutterCmp.AtlasId, tilePutterCmp.ImageIndex);
                 }
                 finally
                 {

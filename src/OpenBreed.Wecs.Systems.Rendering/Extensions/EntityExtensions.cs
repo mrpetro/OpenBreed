@@ -56,6 +56,13 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             entity.RaiseEvent(new ViewportResizedEventArgs(vpc.Width, vpc.Height));
         }
 
+        public static void SetViewportCamera(this Entity entity, int cameraEntityId)
+        {
+            var vpc = entity.Get<ViewportComponent>();
+
+            vpc.CameraEntityId = cameraEntityId;
+        }
+
         public static void PutStamp(this Entity entity, int stampId, int layerNo, Vector2 position)
         {
             entity.Set(new StampPutterComponent(stampId, layerNo, position));

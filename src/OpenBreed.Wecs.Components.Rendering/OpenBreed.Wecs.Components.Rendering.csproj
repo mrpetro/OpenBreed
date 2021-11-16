@@ -75,6 +75,8 @@
     <Compile Include="TextPresentationComponent.cs" />
     <Compile Include="ViewportComponent.cs" />
     <Compile Include="Wireframe.cs" />
+    <Compile Include="Xml\XmlTilePutterComponent.cs" />
+    <Compile Include="Xml\XmlCameraComponent.cs" />
     <Compile Include="Xml\XmlViewportComponent.cs" />
     <Compile Include="Xml\XmlSpriteComponent.cs" />
     <Compile Include="Xml\XmlTextComponent.cs" />

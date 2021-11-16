@@ -18,9 +18,9 @@ namespace OpenBreed.Wecs.Components.Xml
 
         #region Public Methods
 
-        public static void RegisterComponentType<T>()
+        public static void RegisterComponentType<TComponent>() where TComponent : XmlComponentTemplate
         {
-            XmlNodeMan.Instance.RegisterNodeType(typeof(T));
+            XmlNodeMan.Instance.RegisterNodeType(typeof(TComponent));
         }
 
         public System.Xml.Schema.XmlSchema GetSchema()

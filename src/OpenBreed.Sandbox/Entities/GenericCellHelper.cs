@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
@@ -32,15 +33,17 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public void AddUnknownCell(World world, int x, int y, string name, string flavor = null)
+        public void AddUnknownCell(World world, int x, int y, int actionValue, int gfxValue)
         {
-            var path = $@"{PREFIX}\{name}.xml";
+            var path = $@"{PREFIX}\Unknown.xml";
 
             var pickable = entityFactory.Create(path)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
-                .SetParameter("flavor", flavor)
+                .SetParameter("imageIndex", gfxValue)
                 .Build();
+
+            pickable.Add(new UnknownCodeComponent(actionValue));
 
             pickable.EnterWorld(world.Id);
         }
@@ -52,9 +55,8 @@ namespace OpenBreed.Sandbox.Entities
             var pickable = entityFactory.Create(path)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
                 .Build();
-
-            pickable.PutTile(atlasId, gfxValue, 0, new OpenTK.Vector2(16 * x, 16 * y));
 
             pickable.EnterWorld(world.Id);
         }
@@ -66,9 +68,8 @@ namespace OpenBreed.Sandbox.Entities
             var pickable = entityFactory.Create(path)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
                 .Build();
-
-            pickable.PutTile(atlasId, gfxValue, 0, new OpenTK.Vector2(16 * x, 16 * y));
 
             pickable.EnterWorld(world.Id);
         }

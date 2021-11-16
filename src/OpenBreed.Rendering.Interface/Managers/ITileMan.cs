@@ -15,7 +15,7 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// <returns>True if exits, false otherwise</returns>
         bool Contains(string atlasName);
 
-        ITileAtlas GetByAlias(string alias);
+        ITileAtlas GetByName(string alias);
 
         /// <summary>
         /// Creates new sprite atlas
