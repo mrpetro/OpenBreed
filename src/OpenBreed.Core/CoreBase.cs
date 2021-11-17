@@ -1,37 +1,23 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Logging;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Core
 {
     public abstract class CoreBase : ICore
     {
-        #region Private Fields
+        #region Protected Fields
 
         protected readonly IManagerCollection manCollection;
 
-        #endregion Private Fields
+        #endregion Protected Fields
 
         #region Protected Constructors
 
         protected CoreBase(IManagerCollection manCollection)
         {
             this.manCollection = manCollection;
-            manCollection.AddSingleton<ICore>(this);
-
-            Events = manCollection.GetManager<IEventsMan>();
-            Logging = manCollection.GetManager<ILogger>();
         }
 
         #endregion Protected Constructors
-
-        #region Public Properties
-
-        public IEventsMan Events { get; }
-        public ILogger Logging { get; }
-
-        #endregion Public Properties
 
         #region Public Methods
 

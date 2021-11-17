@@ -97,10 +97,7 @@
     <Compile Include="Loaders\LevelEntryCellLoader.cs" />
     <Compile Include="Loaders\GenericCellEntityLoader.cs" />
     <Compile Include="Loaders\PaletteDataLoader.cs" />
-    <Compile Include="Loaders\SpriteAtlasDataLoader.cs" />
     <Compile Include="Loaders\TeleportCellEntityLoader.cs" />
-    <Compile Include="Loaders\TileStampDataLoader.cs" />
-    <Compile Include="Loaders\TileAtlasDataLoader.cs" />
     <Compile Include="Commands\MoveToCommand.cs" />
     <None Include="Content\Graphics\Cursors.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -170,6 +167,12 @@
     <Compile Include="Loaders\MapWorldDataLoader.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
+    <Content Include="Entities\Common\Hud\PositionInfo.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Hud\FpsCounter.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Entities\Common\Camera.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

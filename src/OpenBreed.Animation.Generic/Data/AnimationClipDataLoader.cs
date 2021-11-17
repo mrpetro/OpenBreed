@@ -1,31 +1,35 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
+using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
 using System;
 
 namespace OpenBreed.Animation.Generic.Data
 {
-    internal class AnimationDataLoader : IDataLoader<IClip>
+    internal class AnimationClipDataLoader : IDataLoader<IClip>
     {
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IClipMan clipMan;
         private readonly IFrameUpdaterMan frameUpdaterMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AnimationDataLoader(IRepositoryProvider repositoryProvider,
+        public AnimationClipDataLoader(IRepositoryProvider repositoryProvider,
                                    IClipMan clipMan,
-                                   IFrameUpdaterMan frameUpdaterMan)
+                                   IFrameUpdaterMan frameUpdaterMan,
+                                   ILogger logger)
         {
             this.repositoryProvider = repositoryProvider;
             this.clipMan = clipMan;
             this.frameUpdaterMan = frameUpdaterMan;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -34,11 +38,11 @@ namespace OpenBreed.Animation.Generic.Data
 
         public object LoadObject(string entryId) => Load(entryId);
 
-        public IClip Load(string entryId, params object[] args)
+        public IClip Load(string clipName, params object[] args)
         {
-            var entry = repositoryProvider.GetRepository<IDbAnimation>().GetById(entryId);
+            var entry = repositoryProvider.GetRepository<IDbAnimation>().GetById(clipName);
             if (entry == null)
-                throw new Exception("Animation error: " + entryId);
+                throw new Exception("Animation clip error: " + clipName);
 
             var totalTime = entry.Length;
 
@@ -46,6 +50,8 @@ namespace OpenBreed.Animation.Generic.Data
 
             foreach (var part in entry.Tracks)
                 LoadTrack(newClip, part);
+
+            logger.Verbose($"Animation clip '{clipName}' loaded.");
 
             return newClip;
         }

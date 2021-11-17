@@ -70,6 +70,9 @@
     <Compile Include="Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Builders\StampBuilder.cs" />
     <Compile Include="CoreExtensions.cs" />
+    <Compile Include="Data\SpriteAtlasDataLoader.cs" />
+    <Compile Include="Data\TileAtlasDataLoader.cs" />
+    <Compile Include="Data\TileStampDataLoader.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\FontAtlas.cs" />
     <Compile Include="Helpers\GridCell.cs" />
@@ -92,9 +95,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
+      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
+      <Name>OpenBreed.Common.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
       <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
       <Name>OpenBreed.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
+      <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
+      <Name>OpenBreed.Database.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj">
+      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
+      <Name>OpenBreed.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>

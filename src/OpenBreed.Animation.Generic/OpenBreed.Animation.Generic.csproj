@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\AnimationDataLoader.cs" />
+    <Compile Include="Data\AnimationClipDataLoader.cs" />
     <Compile Include="FrameUpdaterMan.cs" />
     <Compile Include="ClipMan.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />

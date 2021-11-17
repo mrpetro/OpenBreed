@@ -19,9 +19,10 @@ namespace OpenBreed.Animation.Generic.Extensions
 
         public static void SetupAnimationDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register<IClip>(() => new AnimationDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-                                                                               managerCollection.GetManager<IClipMan>(),
-                                                                               managerCollection.GetManager<IFrameUpdaterMan>()));
+            dataLoaderFactory.Register<IClip>(() => new AnimationClipDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+                                                                            managerCollection.GetManager<IClipMan>(),
+                                                                            managerCollection.GetManager<IFrameUpdaterMan>(),
+                                                                            managerCollection.GetManager<ILogger>()));
         }
 
         #endregion Public Methods

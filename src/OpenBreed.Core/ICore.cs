@@ -16,16 +16,6 @@ namespace OpenBreed.Core
 
         void Run();
 
-        /// <summary>
-        /// Object for logging functionality
-        /// </summary>
-        ILogger Logging { get; }
-
-        /// <summary>
-        /// Events manager
-        /// </summary>
-        IEventsMan Events { get; }
-
         #endregion Public Properties
 
         #region Public Methods
