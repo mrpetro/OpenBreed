@@ -17,7 +17,6 @@ namespace OpenBreed.Sandbox.Worlds
     {
         #region Private Fields
 
-        private readonly ICore core;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         private readonly IViewClient viewClient;
@@ -29,9 +28,8 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Constructors
 
-        public HudWorldHelper(ICore core, ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, IEntityFactory entityFactory, HudHelper hudHelper)
+        public HudWorldHelper(ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, IEntityFactory entityFactory, HudHelper hudHelper)
         {
-            this.core = core;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             this.viewClient = viewClient;

@@ -131,12 +131,12 @@ namespace OpenBreed.Sandbox
                                                                                             manCollection.GetManager<IEventsMan>(),
                                                                                             manCollection.GetManager<ViewportCreator>(),
                                                                                             manCollection.GetManager<IViewClient>()));
-            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(core, manCollection.GetManager<ISystemFactory>(),
-                                                                                      manCollection.GetManager<IWorldMan>(),
-                                                                                      manCollection.GetManager<IViewClient>(),
-                                                                                      manCollection.GetManager<IEntityMan>(),
-                                                                                      manCollection.GetManager<IEntityFactory>(),
-                                                                                      manCollection.GetManager<HudHelper>()));
+            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(manCollection.GetManager<ISystemFactory>(),
+                                                                                manCollection.GetManager<IWorldMan>(),
+                                                                                manCollection.GetManager<IViewClient>(),
+                                                                                manCollection.GetManager<IEntityMan>(),
+                                                                                manCollection.GetManager<IEntityFactory>(),
+                                                                                manCollection.GetManager<HudHelper>()));
             manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(manCollection.GetManager<IPlayersMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
                                                                                   manCollection.GetManager<ISystemFactory>(),
@@ -154,12 +154,9 @@ namespace OpenBreed.Sandbox
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                         manCollection.GetManager<IEntityFactory>()));
 
-            manCollection.AddSingleton<HudHelper>(() => new HudHelper(manCollection.GetManager<IDataLoaderFactory>(),
-                                                                      manCollection.GetManager<IEntityFactory>(),
+            manCollection.AddSingleton<HudHelper>(() => new HudHelper(manCollection.GetManager<IEntityFactory>(),
                                                                       manCollection.GetManager<IEntityMan>(),
                                                                       manCollection.GetManager<IViewClient>(),
-                                                                      manCollection.GetManager<IBuilderFactory>(),
-                                                                      manCollection.GetManager<IFontMan>(),
                                                                       manCollection.GetManager<IJobsMan>(),
                                                                       manCollection.GetManager<IRenderingMan>()));
 
@@ -260,7 +257,7 @@ namespace OpenBreed.Sandbox
             clientMan.UpdateFrameEvent += (s, a) => OnUpdateFrame(a);
             clientMan.LoadEvent += (s, a) => OnLoad();
 
-            logConsolePrinter = new LogConsolePrinter(Logging);
+            logConsolePrinter = new LogConsolePrinter(manCollection.GetManager<ILogger>());
             logConsolePrinter.StartPrinting();
         }
 
@@ -269,7 +266,7 @@ namespace OpenBreed.Sandbox
         #region Public Properties
 
         public IEntityFactory EntityFactory { get; }
-        public Animation.Interface.IClipMan Animations { get; }
+        public IClipMan Animations { get; }
 
         public IFsmMan StateMachines { get; }
 
@@ -472,7 +469,6 @@ namespace OpenBreed.Sandbox
             var screenWorldHelper = GetManager<ScreenWorldHelper>();
 
             renderingMan.ScreenWorld = screenWorldHelper.CreateWorld();
-            //TextWorldHelper.Create(this);
 
             var hudWorldHelper = GetManager<HudWorldHelper>();
             hudWorldHelper.Create();

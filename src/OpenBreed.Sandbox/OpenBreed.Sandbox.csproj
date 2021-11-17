@@ -170,6 +170,12 @@
     <Compile Include="Loaders\MapWorldDataLoader.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
+    <Content Include="Entities\Common\Hud\PositionInfo.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Common\Hud\FpsCounter.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Entities\Common\Camera.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
