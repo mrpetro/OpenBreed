@@ -494,10 +494,6 @@ namespace OpenBreed.Sandbox
             playerCamera.Add(new PauseImmuneComponent());
             playerCamera.Tag = "PlayerCamera";
 
-            //cameraBuilder.SetupPlayerCamera();
-
-            //var playerCamera = cameraBuilder.Build();
-
             var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
             gameViewport.SetViewportCamera(playerCamera.Id);
 

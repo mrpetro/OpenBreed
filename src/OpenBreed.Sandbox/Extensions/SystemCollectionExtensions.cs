@@ -10,6 +10,7 @@ using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
@@ -149,30 +150,13 @@ namespace OpenBreed.Sandbox.Extensions
 
         }
 
-        public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
-        {
-            dataLoaderFactory.Register<ITileAtlas>(() => new TileAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-                                                             managerCollection.GetManager<AssetsDataProvider>(),
-                                                             managerCollection.GetManager<ITextureMan>(),
-                                                             managerCollection.GetManager<ITileMan>()));
-        }
-
-        public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
-        {
-            dataLoaderFactory.Register<ITileStamp>(() => new TileStampDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-                                                             managerCollection.GetManager<AssetsDataProvider>(),
-                                                             managerCollection.GetManager<ITextureMan>(),
-                                                             managerCollection.GetManager<IStampMan>(),
-                                                             managerCollection.GetManager<ITileMan>()));
-        }
-
-        public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
-        {
-            dataLoaderFactory.Register<ISpriteAtlas>(() => new SpriteAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-                                                             managerCollection.GetManager<AssetsDataProvider>(),
-                                                             managerCollection.GetManager<ITextureMan>(),
-                                                             managerCollection.GetManager<ISpriteMan>()));
-        }
+        //public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
+        //{
+        //    dataLoaderFactory.Register<ISpriteAtlas>(() => new SpriteAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+        //                                                     managerCollection.GetManager<AssetsDataProvider>(),
+        //                                                     managerCollection.GetManager<ITextureMan>(),
+        //                                                     managerCollection.GetManager<ISpriteMan>()));
+        //}
 
         public static void SetupGameWorldSystems(this WorldBuilder builder, ISystemFactory systemFactory)
         {

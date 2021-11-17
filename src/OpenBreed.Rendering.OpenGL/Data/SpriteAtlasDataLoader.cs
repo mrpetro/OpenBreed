@@ -3,19 +3,20 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
-using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Sprites;
-using OpenBreed.Model.Tiles;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Sandbox.Loaders
+namespace OpenBreed.Rendering.OpenGL.Data
 {
     internal class SpriteAtlasDataLoader : IDataLoader<ISpriteAtlas>
     {

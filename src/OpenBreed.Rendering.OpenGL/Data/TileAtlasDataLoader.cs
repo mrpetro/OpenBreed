@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Tiles;
@@ -8,10 +9,12 @@ using OpenBreed.Model.Tiles;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using System;
-using System.Drawing;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Sandbox.Loaders
+namespace OpenBreed.Rendering.OpenGL.Data
 {
     internal class TileAtlasDataLoader : IDataLoader<ITileAtlas>
     {
@@ -21,6 +24,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly AssetsDataProvider assetsDataProvider;
         private readonly ITextureMan textureMan;
         private readonly ITileMan tileMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
@@ -29,12 +33,14 @@ namespace OpenBreed.Sandbox.Loaders
         public TileAtlasDataLoader(IRepositoryProvider repositoryProvider,
                                  AssetsDataProvider assetsDataProvider,
                                  ITextureMan textureMan,
-                                 ITileMan tileMan)
+                                 ITileMan tileMan,
+                                 ILogger logger)
         {
             this.repositoryProvider = repositoryProvider;
             this.assetsDataProvider = assetsDataProvider;
             this.textureMan = textureMan;
             this.tileMan = tileMan;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -43,33 +49,34 @@ namespace OpenBreed.Sandbox.Loaders
 
         public object LoadObject(string entryId) => Load(entryId);
 
-        public ITileAtlas Load(string entryId, params object[] args)
+        public ITileAtlas Load(string tileAtlasName, params object[] args)
         {
             var paletteModel = args.FirstOrDefault() as PaletteModel;
 
-            var entry = repositoryProvider.GetRepository<IDbTileAtlas>().GetById(entryId) as IDbTileAtlasFromBlk;
+            var entry = repositoryProvider.GetRepository<IDbTileAtlas>().GetById(tileAtlasName) as IDbTileAtlasFromBlk;
             if (entry == null)
-                throw new Exception("Tile atlas error: " + entryId);
+                throw new Exception("Tile atlas error: " + tileAtlasName);
 
-            var tileAtlas = assetsDataProvider.LoadModel(entry.DataRef) as TileSetModel;
+            var tileAtlasModel = assetsDataProvider.LoadModel(entry.DataRef) as TileSetModel;
 
-            if(paletteModel != null)
-                BitmapHelper.SetPaletteColors(tileAtlas.Bitmap, paletteModel.Data);
+            if (paletteModel != null)
+                BitmapHelper.SetPaletteColors(tileAtlasModel.Bitmap, paletteModel.Data);
 
-            var texture = textureMan.Create(entry.DataRef, tileAtlas.Bitmap);
+            var texture = textureMan.Create(entry.DataRef, tileAtlasModel.Bitmap);
 
             var builder = tileMan.CreateAtlas()
-                                 .SetName(entryId)
+                                 .SetName(tileAtlasName)
                                  .SetTexture(texture.Id)
-                                 .SetTileSize(tileAtlas.TileSize);
+                                 .SetTileSize(tileAtlasModel.TileSize);
 
-            foreach (var tile in tileAtlas.Tiles)
+            foreach (var tile in tileAtlasModel.Tiles)
                 builder.AppendCoords(tile.Rectangle.X, tile.Rectangle.Y);
 
-            return builder.Build();
+            var tileAtlas = builder.Build();
 
+            logger.Verbose($"Tile atlas '{tileAtlasName}' loaded.");
 
-            //return tileMan.Create(entryId, texture.Id, tileAtlas.TileSize, tileAtlas.Tiles.Select(tile => new Point(tile.Rectangle.X, tile.Rectangle.Y)).ToArray()); ;
+            return tileAtlas;
         }
 
         #endregion Public Methods
