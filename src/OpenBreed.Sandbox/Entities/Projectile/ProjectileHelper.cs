@@ -63,8 +63,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         public void RegisterCollisionPairs()
         {
-            //collisionMan.RegisterCollisionPair(ColliderTypes.Projectile, ColliderTypes.StaticObstacle, Projectile2StaticObstacle);
-            collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.StaticObstacle, Projectile2StaticObstacleEx);
+            collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.FullObstacle, Projectile2StaticObstacleEx);
         }
 
         public void AddProjectile(int worldId, float x, float y, float vx, float vy)
@@ -105,7 +104,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         //    //}
         //}
 
-        private void Projectile2StaticObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        private void Projectile2FullObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
         }

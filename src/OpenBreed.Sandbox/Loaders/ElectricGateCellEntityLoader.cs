@@ -33,18 +33,28 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private void PutPassUpDown(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             var rightValue = MapWorldDataLoader.GetActionCellValue(layout, ix + 1, iy);
 
-            if (rightValue == actionValue)
+            if (actionValue == rightValue)
             {
                 electricGateHelper.AddHorizontal(world, ix, iy);
                 visited[ix, iy] = true;
                 visited[ix + 1, iy] = true;
                 return;
             }
+            else
+            {
+                electricGateHelper.AddHorizontal(world, ix - 1, iy);
+                visited[ix, iy] = true;
+                visited[ix - 1, iy] = true;
+                return;
+            }
+        }
 
+        private void PutPassRightLeft(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        {
             var downValue = MapWorldDataLoader.GetActionCellValue(layout, ix, iy + 1);
 
             if (downValue == actionValue)
@@ -53,6 +63,30 @@ namespace OpenBreed.Sandbox.Loaders
                 visited[ix, iy] = true;
                 visited[ix, iy + 1] = true;
                 return;
+            }
+            else
+            {
+                electricGateHelper.AddVertical(world, ix, iy - 1);
+                visited[ix, iy] = true;
+                visited[ix, iy - 1] = true;
+                return;
+            }
+        }
+
+        public void Load(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        {
+            switch (actionValue)
+            {
+                case PASS_UP:
+                case PASS_DOWN:
+                    PutPassUpDown(mapAssets, layout, visited, ix, iy, gfxValue, actionValue, world);
+                    break;
+                case PASS_RIGHT:
+                case PASS_LEFT:
+                    PutPassRightLeft(mapAssets, layout, visited, ix, iy, gfxValue, actionValue, world);
+                    break;
+                default:
+                    break;
             }
         }
 

@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var fixture = bodyCmp.Fixtures.First();
             fixture.GroupIds.Clear();
-            fixture.GroupIds.Add(ColliderTypes.StaticObstacle);
+            fixture.GroupIds.Add(ColliderTypes.FullObstacle);
             fixture.GroupIds.Add(ColliderTypes.DoorOpenTrigger);
         }
 

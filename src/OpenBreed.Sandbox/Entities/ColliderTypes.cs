@@ -14,7 +14,8 @@ namespace OpenBreed.Sandbox.Entities
         public static int ActorTrigger { get; private set; }
         public static int DoorOpenTrigger { get; private set; }
         public static int ItemPickupTrigger { get; private set; }
-        public static int StaticObstacle { get; private set; }
+        public static int FullObstacle { get; private set; }
+        public static int ActorOnlyObstacle { get; private set; }
         public static int WorldExitTrigger { get; private set; }
         public static int TeleportEntryTrigger { get; private set; }
         public static int Projectile { get; private set; }
@@ -34,16 +35,10 @@ namespace OpenBreed.Sandbox.Entities
             DoorOpenTrigger = collisions.RegisterGroup("DoorOpenTrigger");
             ItemPickupTrigger = collisions.RegisterGroup("ItemPickupTrigger");
             Projectile = collisions.RegisterGroup("Projectile");
-            StaticObstacle = collisions.RegisterGroup("StaticObstacle");
+            FullObstacle = collisions.RegisterGroup("FullObstacle");
+            ActorOnlyObstacle = collisions.RegisterGroup("ActorOnlyObstacle");
             WorldExitTrigger = collisions.RegisterGroup("WorldExitTrigger");
             TeleportEntryTrigger = collisions.RegisterGroup("TeleportEntryTrigger");
-
-            //ActorBody = collisions.CreateColliderType("ActorBody");
-            //DoorOpenTrigger = collisions.CreateColliderType("Door");
-            //Projectile = collisions.CreateColliderType("Projectile");
-            //StaticObstacle = collisions.CreateColliderType("StaticObstacle");
-            //WorldExitTrigger = collisions.CreateColliderType("WorldExitTrigger");
-            //TeleportEntryTrigger = collisions.CreateColliderType("TeleportEntryTrigger");
         }
 
         #endregion Public Methods
