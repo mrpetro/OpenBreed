@@ -111,7 +111,8 @@ namespace OpenBreed.Sandbox.Extensions
                 mapWorldDataLoader.Register(UnknownCellEntityLoader.UNKNOWN_CODE, new UnknownCellEntityLoader(managerCollection.GetManager<GenericCellHelper>()));
 
                 mapWorldDataLoader.Register(GenericCellEntityLoader.VOID_CODE, genericCellEntityLoader);
-                mapWorldDataLoader.Register(GenericCellEntityLoader.OBSTACLE_CODE, genericCellEntityLoader);
+                mapWorldDataLoader.Register(GenericCellEntityLoader.FULL_OBSTACLE_CODE, genericCellEntityLoader);
+                mapWorldDataLoader.Register(GenericCellEntityLoader.ACTOR_ONLY_OBSTACLE_CODE, genericCellEntityLoader);
 
                 var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetManager<EnvironmentHelper>());
                 mapWorldDataLoader.Register(AnimatedCellLoader.TV_FLICKERING_CODE, environmentCellLoader);

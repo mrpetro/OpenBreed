@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var bodyCmp = entity.Get<BodyComponent>();
             var fixture = bodyCmp.Fixtures.First();
-            fixture.GroupIds.RemoveAll(id => id == ColliderTypes.StaticObstacle);
+            fixture.GroupIds.RemoveAll(id => id == ColliderTypes.FullObstacle);
         }
 
         #endregion Public Methods

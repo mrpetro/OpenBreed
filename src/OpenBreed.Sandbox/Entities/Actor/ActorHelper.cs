@@ -53,9 +53,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public void RegisterCollisionPairs()
         {
-            //collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallback);
-
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallbackEx);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, Dynamic2StaticCallbackEx);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, Dynamic2StaticCallbackEx);
         }
 
         public void CreateAnimations()

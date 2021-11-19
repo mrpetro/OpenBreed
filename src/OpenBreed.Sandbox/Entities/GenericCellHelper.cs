@@ -61,9 +61,22 @@ namespace OpenBreed.Sandbox.Entities
             pickable.EnterWorld(world.Id);
         }
 
-        internal void AddObstacleCell(World world, int x, int y, int atlasId, int gfxValue)
+        internal void AddFullObstacleCell(World world, int x, int y, int atlasId, int gfxValue)
         {
-            var path = $@"{PREFIX}\Obstacle.xml";
+            var path = $@"{PREFIX}\FullObstacle.xml";
+
+            var pickable = entityFactory.Create(path)
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
+                .Build();
+
+            pickable.EnterWorld(world.Id);
+        }
+
+        internal void AddActorOnlyObstacleCell(World world, int x, int y, int atlasId, int gfxValue)
+        {
+            var path = $@"{PREFIX}\ActorOnlyObstacle.xml";
 
             var pickable = entityFactory.Create(path)
                 .SetParameter("startX", 16 * x)

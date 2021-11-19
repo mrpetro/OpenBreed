@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenTK.Input;
 
 namespace OpenBreed.Input.Interface
 {

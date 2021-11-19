@@ -28,7 +28,7 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_16_32</ShapeName>
 					<Groups>
-						<Group>StaticObstacle</Group>
+						<Group>FullObstacle</Group>
 						<Group>DoorOpenTrigger</Group>
 					</Groups>
 				</Fixture>

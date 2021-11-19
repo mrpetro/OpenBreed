@@ -15,7 +15,7 @@
 		<Animation>
 			<States>
 				<State>
-					<Speed>10</Speed>
+					<Speed>15</Speed>
 					<Loop>true</Loop>
 					<ClipName>Animations/Teleport/Entry</ClipName>
 				</State>

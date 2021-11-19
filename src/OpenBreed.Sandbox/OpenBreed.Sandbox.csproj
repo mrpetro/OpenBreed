@@ -167,6 +167,9 @@
     <Compile Include="Loaders\MapWorldDataLoader.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
+    <Content Include="Entities\Common\Environment\ActorOnlyObstacle.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Entities\Common\Hud\PositionInfo.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -179,7 +182,7 @@
     <Content Include="Entities\Common\Environment\Unknown.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\Common\Environment\Obstacle.xml">
+    <Content Include="Entities\Common\Environment\FullObstacle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Common\Environment\Void.xml">

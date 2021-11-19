@@ -9,7 +9,9 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Fields
 
-        public const int OBSTACLE_CODE = 63;
+        public const int ACTOR_ONLY_OBSTACLE_CODE = 60;
+        public const int FULL_OBSTACLE_CODE = 63;
+
         public const int VOID_CODE = 0;
 
         #endregion Public Fields
@@ -35,10 +37,12 @@ namespace OpenBreed.Sandbox.Loaders
         {
             switch (actionValue)
             {
-                case OBSTACLE_CODE:
-                    genericCellHelper.AddObstacleCell(world, ix, iy, mapAssets.AtlasId, gfxValue);
+                case FULL_OBSTACLE_CODE:
+                    genericCellHelper.AddFullObstacleCell(world, ix, iy, mapAssets.AtlasId, gfxValue);
                     break;
-
+                case ACTOR_ONLY_OBSTACLE_CODE:
+                    genericCellHelper.AddActorOnlyObstacleCell(world, ix, iy, mapAssets.AtlasId, gfxValue);
+                    break;
                 case VOID_CODE:
                     genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.AtlasId, gfxValue);
                     break;
