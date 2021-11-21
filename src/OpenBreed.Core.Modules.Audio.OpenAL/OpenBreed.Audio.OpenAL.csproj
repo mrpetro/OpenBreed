@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\SoundSampleDataLoader.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Managers\SoundMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +76,14 @@
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
       <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
       <Name>OpenBreed.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
+      <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
+      <Name>OpenBreed.Database.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj">
+      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
+      <Name>OpenBreed.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj">
       <Project>{a281e554-e5b2-4198-96f6-f772a552c7d0}</Project>
@@ -92,9 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Builders\" />
-    <Folder Include="Components\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Systems\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

@@ -1,13 +1,12 @@
-﻿
-using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Components;
 
-namespace OpenBreed.Wecs.Components.Common
+namespace OpenBreed.Sandbox.Components
 {
-    public struct Slot
+    public struct EquipmentSlot
     {
         #region Public Constructors
 
-        public Slot(string name, int initItemId = -1)
+        public EquipmentSlot(string name, int initItemId = -1)
         {
             Name = name;
             ItemId = initItemId;
@@ -34,7 +33,7 @@ namespace OpenBreed.Wecs.Components.Common
     {
         #region Public Constructors
 
-        public EquipmentComponent(Slot[] slots)
+        public EquipmentComponent(EquipmentSlot[] slots)
         {
             Slots = slots;
         }
@@ -43,7 +42,7 @@ namespace OpenBreed.Wecs.Components.Common
 
         #region Public Properties
 
-        public Slot[] Slots { get; }
+        public EquipmentSlot[] Slots { get; }
 
         #endregion Public Properties
     }

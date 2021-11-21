@@ -1,17 +1,25 @@
-﻿using OpenBreed.Audio.Interface;
-using OpenBreed.Audio.Interface.Managers;
+﻿using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common.Logging;
 using OpenTK;
+using OpenTK.Audio;
 using OpenTK.Audio.OpenAL;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace OpenBreed.Audio.OpenAL.Managers
 {
-    public class SoundMan : ISoundMan
+    public class SoundMan : ISoundMan, IDisposable
     {
         #region Private Fields
 
+        private readonly Dictionary<int, int> alBuffers = new Dictionary<int, int>();
+        private readonly Dictionary<int, int> alSources = new Dictionary<int, int>();
         private readonly ILogger logger;
+        private AudioContext audioContext;
+
+        private bool disposedValue;
 
         #endregion Private Fields
 
@@ -19,83 +27,178 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         public SoundMan(ILogger logger)
         {
+            audioContext = new AudioContext();
+            audioContext.MakeCurrent();
             this.logger = logger;
+
+            ReportOpenAL();
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public ISound GetById(int id)
+        public int CreateSoundSource(float posX, float posY, float posZ)
         {
-            throw new NotImplementedException();
+            int alSource;
+            AL.GenSources(1, out alSource);
+
+            var pos = new Vector3(posX, posY, posZ);
+
+            AL.Source(alSource, ALSource3f.Position, ref pos);
+
+            alSources.Add(alSources.Count, alSource);
+            return alSources.Count - 1;
         }
 
-        public ISound Load(string filePath, string id = null)
+        public int CreateSoundSource()
         {
-            throw new NotImplementedException();
+            int alSource;
+            AL.GenSources(1, out alSource);
+
+            alSources.Add(alSources.Count, alSource);
+            return alSources.Count - 1;
         }
 
-        public void UnloadAll()
+        public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
 
-        public void PlaySound(int id)
+        public int LoadSample(string sampleFilePath, int sampleFreq)
         {
-            //Initialize
-            var device = Alc.OpenDevice(null);
-            var context = Alc.CreateContext(device, (int[])null);
+            var sampleData = File.ReadAllBytes(sampleFilePath);
+            return LoadSample(sampleData, sampleFreq);
+        }
 
-            Alc.MakeContextCurrent(context);
+        public int LoadSample(byte[] sampleData, int sampleFreq)
+        {
+            int sampleBuffer;
+            AL.GenBuffers(1, out sampleBuffer);
+            AL.BufferData(sampleBuffer, ALFormat.Mono8, sampleData, sampleData.Length, sampleFreq);
 
-            var version = AL.Get(ALGetString.Version);
-            var vendor = AL.Get(ALGetString.Vendor);
-            var renderer = AL.Get(ALGetString.Renderer);
-            Console.WriteLine(version);
-            Console.WriteLine(vendor);
-            Console.WriteLine(renderer);
-            Console.ReadKey();
+            alBuffers.Add(alBuffers.Count, sampleBuffer);
+            return alBuffers.Count - 1;
+        }
 
-            //Process
-            int buffers, source;
-            AL.GenBuffers(1, out buffers);
-            AL.GenSources(1, out source);
+        public void PlaySample(int sampleId)
+        {
+            var alBuffer = GetSampleBufferId(sampleId);
+            var alSource = GetFirstIdleSource();
 
-            int sampleFreq = 44100;
-            double dt = 2 * Math.PI / sampleFreq;
-            double amp = 0.5;
-
-            int freq = 440;
-            var dataCount = sampleFreq / freq;
-
-            var sinData = new short[dataCount];
-            for (int i = 0; i < sinData.Length; ++i)
+            if (alSource == -1)
             {
-                sinData[i] = (short)(amp * short.MaxValue * Math.Sin(i * dt * freq));
+                Console.WriteLine("No idle source available for playing.");
+                return;
             }
-            AL.BufferData(buffers, ALFormat.Mono16, sinData, sinData.Length, sampleFreq);
-            AL.Source(source, ALSourcei.Buffer, buffers);
-            AL.Source(source, ALSourceb.Looping, true);
 
-            AL.SourcePlay(source);
-            Console.ReadKey();
+            Console.WriteLine($"Playing sample '{sampleId}' at source '{alSource}'");
 
-            ///Dispose
-            if (context != ContextHandle.Zero)
+            AL.Source(alSource, ALSourcei.Buffer, alBuffer);
+            AL.Source(alSource, ALSourceb.Looping, false);
+
+            //AL.SourceQueueBuffer(alSource, alBuffer);
+            AL.SourcePlay(alSource);
+
+            //var state = AL.GetSourceState(alSource);
+
+            //while (state == ALSourceState.Playing)
+            //{
+            //    state = AL.GetSourceState(alSource);
+            //}
+
+            //Task.Run(() => AL.SourcePlay(alSource));
+        }
+
+        public void PlaySampleAtSource(int sampleId, int sourceId)
+        {
+            Console.WriteLine($"Playing sample '{sampleId}' at source '{sourceId}'");
+
+            var alBuffer = GetSampleBufferId(sampleId);
+            var alSource = GetSoundSourceId(sourceId);
+
+            AL.Source(alSource, ALSourcei.Buffer, alBuffer);
+            AL.Source(alSource, ALSourceb.Looping, false);
+
+            //AL.SourceQueueBuffer(alSource, alBuffer);
+            AL.SourcePlay(alSource);
+
+            var state = AL.GetSourceState(alSource);
+
+            while (state == ALSourceState.Playing)
             {
-                Alc.MakeContextCurrent(ContextHandle.Zero);
-                Alc.DestroyContext(context);
+                state = AL.GetSourceState(alSource);
             }
-            context = ContextHandle.Zero;
 
-            if (device != IntPtr.Zero)
-            {
-                Alc.CloseDevice(device);
-            }
-            device = IntPtr.Zero;
+            //Task.Run(() => AL.SourcePlay(alSource));
         }
 
         #endregion Public Methods
+
+        #region Protected Methods
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    audioContext.Dispose();
+                    audioContext = null;
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void ReportOpenAL()
+        {
+            var version = AL.Get(ALGetString.Version);
+            var vendor = AL.Get(ALGetString.Vendor);
+            var renderer = AL.Get(ALGetString.Renderer);
+
+            var reportBuilder = new StringBuilder();
+            reportBuilder.AppendLine("Open AL info:");
+            reportBuilder.AppendLine(version);
+            reportBuilder.AppendLine(vendor);
+            reportBuilder.AppendLine(renderer);
+            logger.Info(reportBuilder.ToString());
+        }
+
+        private int GetFirstIdleSource()
+        {
+            foreach (var alSource in alSources.Values)
+            {
+                var state = AL.GetSourceState(alSource);
+
+                if (state != ALSourceState.Playing)
+                    return alSource;
+            }
+
+            return -1;
+        }
+
+        private int GetSampleBufferId(int sampleId)
+        {
+            if (alBuffers.TryGetValue(sampleId, out int sampleBufferId))
+                return sampleBufferId;
+            else
+                throw new InvalidOperationException($"Unable to find OpenAL buffer ID for sample '{sampleId}'");
+        }
+
+        private int GetSoundSourceId(int soundSourceId)
+        {
+            if (alSources.TryGetValue(soundSourceId, out int sampleBufferId))
+                return sampleBufferId;
+            else
+                throw new InvalidOperationException($"Unable to find OpenAL source ID for sound source '{soundSourceId}'");
+        }
+
+        #endregion Private Methods
     }
 }

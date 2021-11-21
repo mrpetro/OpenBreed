@@ -8,7 +8,7 @@ using System;
 
 namespace OpenBreed.Animation.Generic.Data
 {
-    internal class AnimationClipDataLoader : IDataLoader<IClip>
+    internal class AnimationClipDataLoader : IAnimationClipDataLoader
     {
         #region Private Fields
 

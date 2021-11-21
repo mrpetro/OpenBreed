@@ -66,6 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\ISpriteAtlasDataLoader.cs" />
+    <Compile Include="Data\ITileAtlasDataLoader.cs" />
+    <Compile Include="Data\ITileStampDataLoader.cs" />
     <Compile Include="Events\ClientResizedEventArgs.cs" />
     <Compile Include="IFont.cs" />
     <Compile Include="IPrimitiveRenderer.cs" />
@@ -88,6 +91,10 @@
     <Compile Include="TileCell.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
+      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Name>OpenBreed.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95bdf122-fac8-4ac4-b9a8-b549d942e37d}</Project>
       <Name>OpenBreed.Core</Name>

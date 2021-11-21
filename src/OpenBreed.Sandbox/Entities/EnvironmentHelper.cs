@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Tools;
 using OpenBreed.Common.Tools.Xml;
@@ -33,7 +34,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public void LoadAnimations()
         {
-            var animationLoader = dataLoaderFactory.GetLoader<IClip>();
+            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
             animationLoader.Load("Animations/Environment/Level4/TVFlickering");
             animationLoader.Load("Animations/Environment/Level4/MonsterEating");

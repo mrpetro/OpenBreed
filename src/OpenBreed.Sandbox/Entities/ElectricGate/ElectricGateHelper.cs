@@ -29,6 +29,8 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Common;
 using System.Globalization;
 using OpenBreed.Common.Tools.Xml;
+using OpenBreed.Animation.Interface.Data;
+using OpenBreed.Audio.Interface.Data;
 
 namespace OpenBreed.Sandbox.Entities.ElectricGate
 {
@@ -45,10 +47,14 @@ namespace OpenBreed.Sandbox.Entities.ElectricGate
 
         public void LoadAnimations()
         {
-            var animationLoader = dataLoaderFactory.GetLoader<IClip>();
-
+            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
             animationLoader.Load("Animations/ElectricGate/Working/Vertical");
             animationLoader.Load("Animations/ElectricGate/Working/Horizontal");
+
+            var soundLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
+
+
+            var soundId = soundLoader.Load("Sounds.ALIEN1");
         }
 
         public void AddVertical(World world, int x, int y)

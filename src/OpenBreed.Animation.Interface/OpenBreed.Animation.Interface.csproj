@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\IAnimationTrackLoader.cs" />
+    <Compile Include="Data\IAnimationClipDataLoader.cs" />
     <Compile Include="IClip.cs" />
     <Compile Include="IAnimationLoader.cs" />
     <Compile Include="IAnimator.cs" />

@@ -29,6 +29,8 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Common;
 using System.Globalization;
 using OpenBreed.Common.Tools.Xml;
+using OpenBreed.Animation.Interface.Data;
+using OpenBreed.Rendering.Interface.Data;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
@@ -45,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void LoadAnimations()
         {
-            var animationLoader = dataLoaderFactory.GetLoader<IClip>();
+            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
             animationLoader.Load("Animations/Door/Opening/Vertical");
             animationLoader.Load("Animations/Door/Closing/Vertical");
@@ -76,7 +78,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void LoadStamps()
         {
-            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStamp>();
+            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
 
             tileStampLoader.Load("L4/Door/Horizontal/Closed");
             tileStampLoader.Load("L4/Door/Horizontal/Opened");

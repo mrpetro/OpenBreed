@@ -68,14 +68,12 @@
     <Compile Include="AngularThrustComponent.cs" />
     <Compile Include="AngularVelocityComponent.cs" />
     <Compile Include="ClassComponent.cs" />
-    <Compile Include="EquipmentComponent.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="FollowerComponent.cs" />
     <Compile Include="GroupComponentEx.cs" />
     <Compile Include="GroupComponent.cs" />
     <Compile Include="IControlComponent.cs" />
-    <Compile Include="InventoryComponent.cs" />
     <Compile Include="MessagingComponent.cs" />
     <Compile Include="PauseImmuneComponent.cs" />
     <Compile Include="GridPositionComponent.cs" />

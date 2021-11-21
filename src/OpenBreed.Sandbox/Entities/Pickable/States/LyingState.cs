@@ -2,6 +2,7 @@
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
@@ -93,6 +94,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         private void PickableCollisionCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
         {
             entityB.SetState(FsmId, (int)FunctioningImpulse.Pick);
+            //entityA.GiveItem(
         }
 
         #endregion Private Methods

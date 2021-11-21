@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -42,7 +43,7 @@ namespace OpenBreed.Sandbox.Entities.Camera
         {
             frameUpdaterMan.Register("Camera.Brightness", (FrameUpdater<float>)OnFrameUpdate);
 
-            var animationLoader = dataLoaderFactory.GetLoader<IClip>();
+            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
             var cameraFadeOut = animationLoader.Load("Animations/Camera/Effects/FadeOut");
             var cameraFadeIn = animationLoader.Load("Animations/Camera/Effects/FadeIn");

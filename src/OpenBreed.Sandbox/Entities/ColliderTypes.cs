@@ -21,14 +21,11 @@ namespace OpenBreed.Sandbox.Entities
         public static int Projectile { get; private set; }
         public static int Pickable { get; private set; }
 
-        //public static int Solid { get; private set; }
-        //public static int Sensor { get; private set; }
-
         #endregion Public Properties
 
         #region Public Methods
 
-        public static void Initialize(ICollisionMan collisions)
+        public static void RegisterAbtaColliders(this ICollisionMan collisions)
         {
             ActorBody = collisions.RegisterGroup("ActorBody");
             ActorTrigger = collisions.RegisterGroup("ActorTrigger");

@@ -2,6 +2,7 @@
 using OpenBreed.Common.Tools;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
@@ -46,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         public void LoadStamps()
         {
-            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStamp>();
+            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
 
             LoadStamps(tileStampLoader, "Ammo");
             LoadStamps(tileStampLoader, "MedkitSmall");
