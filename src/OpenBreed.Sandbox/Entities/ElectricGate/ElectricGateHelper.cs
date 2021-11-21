@@ -50,11 +50,6 @@ namespace OpenBreed.Sandbox.Entities.ElectricGate
             var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
             animationLoader.Load("Animations/ElectricGate/Working/Vertical");
             animationLoader.Load("Animations/ElectricGate/Working/Horizontal");
-
-            var soundLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
-
-
-            var soundId = soundLoader.Load("Sounds.ALIEN1");
         }
 
         public void AddVertical(World world, int x, int y)

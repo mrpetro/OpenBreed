@@ -60,7 +60,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
                     stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
 
                 entity.PutStamp(stampId, 0, pos.Value);
-                entity.EmitSound(0);
+                entity.EmitSound(PickableHelper.SOUND_PICK_KEYS);
             }
 
             entity.SetText(0, $"{className} - Picked");
