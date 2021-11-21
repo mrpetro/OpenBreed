@@ -2,6 +2,7 @@
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
 using System;
@@ -59,6 +60,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
                     stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
 
                 entity.PutStamp(stampId, 0, pos.Value);
+                entity.EmitSound(PickableHelper.SOUND_PICK_KEYS);
             }
 
             entity.SetText(0, $"{className} - Picked");

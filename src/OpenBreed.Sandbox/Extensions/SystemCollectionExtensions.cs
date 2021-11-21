@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
@@ -21,6 +22,7 @@ using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Loaders;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Sandbox.Worlds.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
@@ -31,6 +33,7 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
+using OpenBreed.Wecs.Systems.Audio;
 using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Gui;
@@ -88,12 +91,17 @@ namespace OpenBreed.Sandbox.Extensions
                                                                          manCollection.GetManager<IFontMan>()));
         }
 
+        public static void SetupItemManager(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<ItemsMan>(() => new ItemsMan(manCollection.GetManager<ILogger>()));
+        }
+
         public static void SetupMapWorldDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
             //NOTE: Needed for correct display of map in this coordinate system
             MapLayoutModel.FlippedY = true;
 
-            dataLoaderFactory.Register<World>(() =>
+            dataLoaderFactory.Register<MapWorldDataLoader>(() =>
             {
                 var mapWorldDataLoader = new MapWorldDataLoader(dataLoaderFactory,
                                                               managerCollection.GetManager<IRepositoryProvider>(),
@@ -181,7 +189,7 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<FsmSystem>());
 
             ////Audio
-            //builder.AddSystem(systemFactory.Create<SoundSystem>());
+            builder.AddSystem(systemFactory.Create<SoundSystem>());
 
             //Video
             builder.AddSystem(systemFactory.Create<StampSystem>());
@@ -220,6 +228,7 @@ namespace OpenBreed.Sandbox.Extensions
                 dataLoaderFactory.SetupTileSetDataLoader(managerCollection);
                 dataLoaderFactory.SetupTileStampDataLoader(managerCollection);
                 dataLoaderFactory.SetupSpriteSetDataLoader(managerCollection);
+                dataLoaderFactory.SetupSoundSampleDataLoader(managerCollection);
 
                 return dataLoaderFactory;
             });

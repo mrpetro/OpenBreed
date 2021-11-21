@@ -14,6 +14,8 @@ using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Wecs.Systems.Audio.Extensions;
+using OpenBreed.Sandbox.Entities.Door;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -67,6 +69,7 @@ namespace OpenBreed.Sandbox.Components.States
             entity.PlayAnimation(0, clipId);
             entity.PutStamp(stampId, 0, pos.Value);
             //entity.SetText(0, "Door - Opening");
+            entity.EmitSound(DoorHelper.SOUND_DOOR_OPEN);
 
             entity.Subscribe<AnimFinishedEventArgs>(OnAnimStopped);
         }

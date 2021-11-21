@@ -4,6 +4,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.OpenGL.Data
 {
-    internal class TileStampDataLoader : IDataLoader<ITileStamp>
+    internal class TileStampDataLoader : ITileStampDataLoader
     {
         #region Private Fields
 

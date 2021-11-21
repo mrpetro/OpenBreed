@@ -1,42 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenBreed.Audio.Interface.Managers
+﻿namespace OpenBreed.Audio.Interface.Managers
 {
     /// <summary>
-    /// Sounds manager interface  which handles creating sounds from various sources
-    /// Or just retrieving them by ID or name.
+    /// Sounds manager interface
     /// </summary>
     public interface ISoundMan
     {
-        /// <summary>
-        /// Get sound object by it's ID
-        /// </summary>
-        /// <param name="id">Given ID of sound</param>
-        /// <returns>Return ISound object if found, false otherwise</returns>
-        ISound GetById(int id);
+        #region Public Methods
 
         /// <summary>
-        /// Creates sound object from audio file path and return it
-        /// If id parameter is not set, sound ID will be set to file path
+        /// Loads sample from file path with given frequency
         /// </summary>
-        /// <param name="filePath">File path to audio file</param>
-        /// <param name="soundId">Optional name of sound to create</param>
-        /// <returns>ISound object</returns>
-        ISound Load(string filePath, string id = null);
+        /// <param name="sampleFilePath">Sound sample file path</param>
+        /// <param name="sampleFrequency">Sound sample frequency</param>
+        /// <returns>Sound sample ID</returns>
+        int LoadSample(string sampleFilePath, int sampleFrequency);
 
         /// <summary>
-        /// Unloads all sounds
+        /// Loads sample from file path with given frequency
         /// </summary>
-        void UnloadAll();
+        /// <param name="sampleData">Sound sample data</param>
+        /// <param name="sampleFrequency">Sound sample frequency</param>
+        /// <returns>Sound sample ID</returns>
+        int LoadSample(byte[] sampleData, int sampleFrequency);
 
         /// <summary>
-        /// Play sound with particular id
+        /// Play sound sample with particular ID
         /// </summary>
-        /// <param name="id">ID number of sound to play</param>
-        void PlaySound(int id);
+        /// <param name="id">ID of sound sample to play</param>
+        void PlaySample(int id);
+
+        /// <summary>
+        /// Create sound source
+        /// </summary>
+        /// <returns>Sound source ID</returns>
+        int CreateSoundSource();
+
+
+#endregion Public Methods
     }
 }

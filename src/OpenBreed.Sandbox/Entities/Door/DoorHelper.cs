@@ -29,11 +29,16 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Common;
 using System.Globalization;
 using OpenBreed.Common.Tools.Xml;
+using OpenBreed.Animation.Interface.Data;
+using OpenBreed.Rendering.Interface.Data;
+using OpenBreed.Audio.Interface.Data;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
     public class DoorHelper
     {
+        public static int SOUND_DOOR_OPEN { get; private set; }
+
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 
@@ -45,12 +50,15 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void LoadAnimations()
         {
-            var animationLoader = dataLoaderFactory.GetLoader<IClip>();
+            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
             animationLoader.Load("Animations/Door/Opening/Vertical");
             animationLoader.Load("Animations/Door/Closing/Vertical");
             animationLoader.Load("Animations/Door/Opening/Horizontal");
             animationLoader.Load("Animations/Door/Closing/Horizontal");
+
+            var soundSampleLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
+            SOUND_DOOR_OPEN = soundSampleLoader.Load("Sounds.DOOR1");
         }
 
         public void AddVertical(World world, int x, int y)
@@ -76,7 +84,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void LoadStamps()
         {
-            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStamp>();
+            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
 
             tileStampLoader.Load("L4/Door/Horizontal/Closed");
             tileStampLoader.Load("L4/Door/Horizontal/Opened");

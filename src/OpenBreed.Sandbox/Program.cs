@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Extensions;
@@ -33,6 +34,8 @@ using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Loaders;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
@@ -47,6 +50,7 @@ using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Control.Handlers;
 using OpenBreed.Wecs.Systems.Control.Inputs;
@@ -89,6 +93,7 @@ namespace OpenBreed.Sandbox
             manCollection.SetupOpenGLManagers();
             manCollection.SetupWecsManagers();
             manCollection.SetupRenderingSystems();
+            manCollection.SetupAudioSystems();
             manCollection.SetupPhysicsSystems();
             manCollection.SetupCoreSystems();
             manCollection.SetupControlSystems();
@@ -106,6 +111,7 @@ namespace OpenBreed.Sandbox
 
             manCollection.SetupUnknownMapCellDisplaySystem();
             manCollection.SetupGroupMapCellDisplaySystem();
+            manCollection.SetupItemManager();
             //manCollection.SetupAudioSystems();
 
             //manCollection.SetupGameScriptingApi();
@@ -389,6 +395,13 @@ namespace OpenBreed.Sandbox
             var spriteMan = GetManager<ISpriteMan>();
             var tileMan = GetManager<ITileMan>();
             var textureMan = GetManager<ITextureMan>();
+            var soundMan = GetManager<ISoundMan>();
+
+            //Create 4 sound sources, each one acting as a separate channel
+            soundMan.CreateSoundSource();
+            soundMan.CreateSoundSource();
+            soundMan.CreateSoundSource();
+            soundMan.CreateSoundSource();
 
             var tileTex = textureMan.Create("Textures/Tiles/16/Test", @"Content\Graphics\TileAtlasTest32bit.bmp");
             //tileMan.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
@@ -442,7 +455,9 @@ namespace OpenBreed.Sandbox
             var teleportHelper = GetManager<TeleportHelper>();
             var cameraHelper = GetManager<CameraHelper>();
 
-            ColliderTypes.Initialize(GetManager<ICollisionMan>());
+            GetManager<ICollisionMan>().RegisterAbtaColliders();
+            GetManager<ItemsMan>().RegisterAbtaItems();
+
             actorHelper.RegisterCollisionPairs();
             worldGateHelper.RegisterCollisionPairs();
             teleportHelper.RegisterCollisionPairs();
@@ -474,7 +489,7 @@ namespace OpenBreed.Sandbox
             hudWorldHelper.Create();
 
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
-            var mapWorldLoader = dataLoaderFactory.GetLoader<World>();
+            var mapWorldLoader = dataLoaderFactory.GetLoader<MapWorldDataLoader>();
 
             var entityMan = GetManager<IEntityMan>();
 

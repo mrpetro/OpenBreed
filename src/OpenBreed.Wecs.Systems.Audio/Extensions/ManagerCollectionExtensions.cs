@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Common;
 
 namespace OpenBreed.Wecs.Systems.Audio.Extensions
 {
@@ -9,7 +10,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Extensions
         public static void SetupAudioSystems(this IManagerCollection manCollection)
         {
             var systemFactory = manCollection.GetManager<ISystemFactory>();
-            systemFactory.Register(() => new SoundSystem());
+            systemFactory.Register(() => new SoundSystem(manCollection.GetManager<ISoundMan>()));
         }
 
         #endregion Public Methods

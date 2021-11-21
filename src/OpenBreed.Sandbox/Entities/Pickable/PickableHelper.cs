@@ -1,7 +1,9 @@
-﻿using OpenBreed.Common;
+﻿using OpenBreed.Audio.Interface.Data;
+using OpenBreed.Common;
 using OpenBreed.Common.Tools;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
@@ -14,6 +16,8 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 {
     public class PickableHelper
     {
+        public static int SOUND_PICK_KEYS { get; private set; }
+
         #region Private Fields
 
         private const string PICKABLE_PREFIX = @"Entities\Common\Pickables";
@@ -46,7 +50,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         public void LoadStamps()
         {
-            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStamp>();
+            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
 
             LoadStamps(tileStampLoader, "Ammo");
             LoadStamps(tileStampLoader, "MedkitSmall");
@@ -69,6 +73,11 @@ namespace OpenBreed.Sandbox.Entities.Pickable
             tileStampLoader.Load("L4/KeycardBlue/Picked");
             tileStampLoader.Load("L4/KeycardSpecial/Lying");
             tileStampLoader.Load("L4/KeycardSpecial/Picked");
+
+
+            var soundLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
+
+            SOUND_PICK_KEYS = soundLoader.Load("Sounds.KEYS");
         }
 
         public void AddItem(World world, int x, int y, string name, int gfxValue, string flavor = null)

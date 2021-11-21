@@ -83,12 +83,15 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Components\EquipmentComponent.cs" />
+    <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Entities\ElectricGate\ElectricGateHelper.cs" />
     <Compile Include="Entities\FixtureTypes.cs" />
     <Compile Include="Entities\EnvironmentHelper.cs" />
     <Compile Include="Entities\GenericCellHelper.cs" />
     <Compile Include="Entities\Hud\HudHelper.cs" />
     <Compile Include="Entities\Pickable\ManagerCollectionExtensions.cs" />
+    <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Loaders\AnimatedCellLoader.cs" />
     <Compile Include="Loaders\ElectricGateCellEntityLoader.cs" />
     <Compile Include="Loaders\UnknownCellEntityLoader.cs" />
@@ -154,6 +157,8 @@
     <Compile Include="Jobs\JohnPositionTextUpdateJob.cs" />
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Entities\CrazyMover\Misc.cs" />
+    <Compile Include="Managers\ItemsMan.cs" />
+    <Compile Include="Entities\ItemTypes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteComponentAnimator.cs" />
@@ -342,6 +347,10 @@
       <Project>{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}</Project>
       <Name>OpenBreed.Wecs.Components.Animation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Audio\OpenBreed.Wecs.Components.Audio.csproj">
+      <Project>{3d35afbe-7307-4f98-8a1b-4a39ae2b2690}</Project>
+      <Name>OpenBreed.Wecs.Components.Audio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
       <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
       <Name>OpenBreed.Wecs.Components.Common</Name>
@@ -377,6 +386,10 @@
     <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj">
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>
       <Name>OpenBreed.Physics.Generic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Audio\OpenBreed.Wecs.Systems.Audio.csproj">
+      <Project>{79edb034-9742-467f-9615-fedaf5448583}</Project>
+      <Name>OpenBreed.Wecs.Systems.Audio</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj">
       <Project>{cf689601-0842-497f-a05f-b31431697b4e}</Project>

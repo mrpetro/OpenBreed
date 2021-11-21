@@ -7,6 +7,7 @@ using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Tiles;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.OpenGL.Data
 {
-    internal class TileAtlasDataLoader : IDataLoader<ITileAtlas>
+    internal class TileAtlasDataLoader : ITileAtlasDataLoader
     {
         #region Private Fields
 

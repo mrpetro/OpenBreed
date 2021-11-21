@@ -6,6 +6,7 @@ using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
@@ -185,14 +186,14 @@ namespace OpenBreed.Sandbox.Loaders
         private void LoadReferencedTileSet(IDbMap entry)
         {
             var palette = palettesDataProvider.GetPalette(entry.PaletteRefs.First());
-            var tileAtlasLoader = dataLoaderFactory.GetLoader<ITileAtlas>();
+            var tileAtlasLoader = dataLoaderFactory.GetLoader<ITileAtlasDataLoader>();
             tileAtlasLoader.Load(entry.TileSetRef, palette);
         }
 
         private void LoadReferencedSpriteSets(IDbMap entry)
         {
             var palette = palettesDataProvider.GetPalette(entry.PaletteRefs.First());
-            var spriteAtlasLoader = dataLoaderFactory.GetLoader<ISpriteAtlas>();
+            var spriteAtlasLoader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
             foreach (var spriteSetRef in entry.SpriteSetRefs)
                 spriteAtlasLoader.Load(spriteSetRef, palette);

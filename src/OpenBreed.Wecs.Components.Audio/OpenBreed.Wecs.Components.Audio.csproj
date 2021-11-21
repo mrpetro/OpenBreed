@@ -64,6 +64,7 @@
     <Compile Include="GlobalSoundEmiter.cs" />
     <Compile Include="LocalSoundEmiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoundPlayerComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">

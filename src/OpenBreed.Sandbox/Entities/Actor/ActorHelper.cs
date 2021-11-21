@@ -1,10 +1,12 @@
 ﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Tools;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Sandbox.Components;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
@@ -59,7 +61,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public void CreateAnimations()
         {
-            var animationLoader = dataLoaderFactory.GetLoader<IClip>();
+            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
             animationLoader.Load("Animations/Actor/Standing/Up");
             animationLoader.Load("Animations/Actor/Standing/UpRight");
@@ -107,6 +109,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
             actor.Add(new FollowerComponent());
+
+            actor.Add(new InventoryComponent(16));
 
             return actor;
         }

@@ -6,6 +6,7 @@ using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Sprites;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.OpenGL.Data
 {
-    internal class SpriteAtlasDataLoader : IDataLoader<ISpriteAtlas>
+    internal class SpriteAtlasDataLoader : ISpriteAtlasDataLoader
     {
         #region Private Fields
 

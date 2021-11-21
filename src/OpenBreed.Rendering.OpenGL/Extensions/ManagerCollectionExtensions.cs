@@ -5,6 +5,7 @@ using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Data;
 using OpenBreed.Rendering.OpenGL.Managers;
@@ -45,7 +46,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 
         public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register<ISpriteAtlas>(() => new SpriteAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+            dataLoaderFactory.Register<ISpriteAtlasDataLoader>(() => new SpriteAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
                                                              managerCollection.GetManager<ITextureMan>(),
                                                              managerCollection.GetManager<ISpriteMan>()));
@@ -53,7 +54,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 
         public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register<ITileAtlas>(() => new TileAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+            dataLoaderFactory.Register<ITileAtlasDataLoader>(() => new TileAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
                                                              managerCollection.GetManager<ITextureMan>(),
                                                              managerCollection.GetManager<ITileMan>(),
@@ -62,7 +63,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 
         public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register<ITileStamp>(() => new TileStampDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+            dataLoaderFactory.Register<ITileStampDataLoader>(() => new TileStampDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
                                                              managerCollection.GetManager<ITextureMan>(),
                                                              managerCollection.GetManager<IStampMan>(),
