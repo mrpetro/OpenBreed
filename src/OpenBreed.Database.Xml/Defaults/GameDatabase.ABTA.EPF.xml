@@ -1068,7 +1068,7 @@
 				<Sound Id="Sounds.ALIEN4">
 					<DataRef>Assets.ALIEN4</DataRef>
 				</Sound>
-				<Sound Id="Sounds.AMMO">
+				<Sound Id="Common/Ammo/Picked">
 					<DataRef>Assets.AMMO</DataRef>
 				</Sound>
 				<Sound Id="Sounds.BACKING1">
@@ -1092,16 +1092,19 @@
 				<Sound Id="Sounds.COUNTDWN">
 					<DataRef>Assets.COUNTDWN</DataRef>
 				</Sound>
-				<Sound Id="Sounds.CREDITS">
+				<Sound Id="Common/CreditsSmall/Picked">
+					<DataRef>Assets.CREDITS</DataRef>
+				</Sound>
+				<Sound Id="Common/CreditsBig/Picked">
 					<DataRef>Assets.CREDITS</DataRef>
 				</Sound>
 				<Sound Id="Sounds.CURSOR">
 					<DataRef>Assets.CURSOR</DataRef>
 				</Sound>
-				<Sound Id="Sounds.DIE">
+				<Sound Id="Common/Hero/Dying">
 					<DataRef>Assets.DIE</DataRef>
 				</Sound>
-				<Sound Id="Sounds.DOOR1">
+				<Sound Id="Common/Door/Opening">
 					<DataRef>Assets.DOOR1</DataRef>
 				</Sound>
 				<Sound Id="Sounds.EAT1">
@@ -1128,10 +1131,22 @@
 				<Sound Id="Sounds.HATCH1">
 					<DataRef>Assets.HATCH1</DataRef>
 				</Sound>
-				<Sound Id="Sounds.HEALTH">
+				<Sound Id="Common/MedkitSmall/Picked">
 					<DataRef>Assets.HEALTH</DataRef>
 				</Sound>
-				<Sound Id="Sounds.KEYS">
+				<Sound Id="Common/MedkitBig/Picked">
+					<DataRef>Assets.HEALTH</DataRef>
+				</Sound>
+				<Sound Id="Common/KeycardStandard/Picked">
+					<DataRef>Assets.KEYS</DataRef>
+				</Sound>
+				<Sound Id="Common/KeycardRed/Picked">
+					<DataRef>Assets.KEYS</DataRef>
+				</Sound>
+				<Sound Id="Common/KeycardGreen/Picked">
+					<DataRef>Assets.KEYS</DataRef>
+				</Sound>
+				<Sound Id="Common/KeycardBlue/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
 				<Sound Id="Sounds.LAZER1">
@@ -1173,85 +1188,85 @@
 				<Sound Id="Sounds.SIREN">
 					<DataRef>Assets.SIREN</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH01">
+				<Sound Id="Common/Speech/Nash">
 					<DataRef>Assets.SPEECH01</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH02">
+				<Sound Id="Common/Speech/John">
 					<DataRef>Assets.SPEECH02</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH03">
+				<Sound Id="Common/Speech/IsDead">
 					<DataRef>Assets.SPEECH03</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH04">
+				<Sound Id="Common/Speech/YoureOnYourOwn">
 					<DataRef>Assets.SPEECH04</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH05">
+				<Sound Id="Common/Speech/AssaultFailed">
 					<DataRef>Assets.SPEECH05</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH06">
+				<Sound Id="Common/Speech/MissionComplete">
 					<DataRef>Assets.SPEECH06</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH07">
+				<Sound Id="Common/Speech/Hurry">
 					<DataRef>Assets.SPEECH07</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH08">
+				<Sound Id="Common/Speech/AlarmSystemsEnabled">
 					<DataRef>Assets.SPEECH08</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH09">
+				<Sound Id="Common/Speech/LocateExit">
 					<DataRef>Assets.SPEECH09</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH10">
+				<Sound Id="Common/Speech/DestructionImmanent">
 					<DataRef>Assets.SPEECH10</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH11">
+				<Sound Id="Common/Speech/Warning">
 					<DataRef>Assets.SPEECH11</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH12">
+				<Sound Id="Common/Speech/LazersOperational">
 					<DataRef>Assets.SPEECH12</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH13">
+				<Sound Id="Common/Speech/ScanDetectsLargeAlien">
 					<DataRef>Assets.SPEECH13</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH14">
+				<Sound Id="Common/Speech/PowerOut">
 					<DataRef>Assets.SPEECH14</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH15">
+				<Sound Id="Common/Speech/TorchActivated">
 					<DataRef>Assets.SPEECH15</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH16">
+				<Sound Id="Common/Speech/MinefieldDirectlyAhead">
 					<DataRef>Assets.SPEECH16</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH17">
+				<Sound Id="Common/Speech/EnergyLow">
 					<DataRef>Assets.SPEECH17</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH18">
+				<Sound Id="Common/Speech/IntexNetwork">
 					<DataRef>Assets.SPEECH18</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH19">
+				<Sound Id="Common/Speech/Online">
 					<DataRef>Assets.SPEECH19</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH20">
+				<Sound Id="Common/Speech/LoggingOff">
 					<DataRef>Assets.SPEECH20</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH21">
+				<Sound Id="Common/Speech/SmartCardMessageFollows">
 					<DataRef>Assets.SPEECH21</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH22">
+				<Sound Id="Common/Speech/LinkCorridor">
 					<DataRef>Assets.SPEECH22</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH23">
+				<Sound Id="Common/Speech/SurvivorRescued">
 					<DataRef>Assets.SPEECH23</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH24">
+				<Sound Id="Common/Speech/YouveFoundTheSecretLevel">
 					<DataRef>Assets.SPEECH24</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH25">
+				<Sound Id="Common/Speech/Entering">
 					<DataRef>Assets.SPEECH25</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH26">
+				<Sound Id="Common/Speech/MainTower">
 					<DataRef>Assets.SPEECH26</DataRef>
 				</Sound>
-				<Sound Id="Sounds.SPEECH27">
+				<Sound Id="Common/Speech/AreaScan">
 					<DataRef>Assets.SPEECH27</DataRef>
 				</Sound>
 				<Sound Id="Sounds.SPLAT1">
@@ -1269,7 +1284,7 @@
 				<Sound Id="Sounds.TURRET2">
 					<DataRef>Assets.TURRET2</DataRef>
 				</Sound>
-				<Sound Id="Sounds.XTRALIFE">
+				<Sound Id="Common/ExtraLife/Picked">
 					<DataRef>Assets.XTRALIFE</DataRef>
 				</Sound>
 			</Items>
