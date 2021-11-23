@@ -16,6 +16,7 @@ using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Audio.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -25,20 +26,23 @@ namespace OpenBreed.Sandbox.Components.States
 
         private readonly string animPrefix;
         private const string STAMP_PREFIX = "L4";
+        private const string SOUND_PREFIX = "Common";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         private readonly IClipMan clipMan;
+        private readonly ISoundMan soundMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpeningState(IFsmMan fsmMan, IStampMan stampMan, IClipMan clipMan)
+        public OpeningState(IFsmMan fsmMan, IStampMan stampMan, IClipMan clipMan, ISoundMan soundMan)
         {
             this.animPrefix = "Animations";
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;
             this.clipMan = clipMan;
+            this.soundMan = soundMan;
         }
 
         #endregion Public Constructors
@@ -65,11 +69,12 @@ namespace OpenBreed.Sandbox.Components.States
             var stateName = fsmMan.GetStateName(FsmId, Id);
             var clipId = clipMan.GetByName($"{animPrefix}/{className}/{stateName}/{flavor}").Id;
             var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/Opened").Id;
+            var soundId = soundMan.GetByName($"{SOUND_PREFIX}/{className}/{stateName}");
 
             entity.PlayAnimation(0, clipId);
             entity.PutStamp(stampId, 0, pos.Value);
             //entity.SetText(0, "Door - Opening");
-            entity.EmitSound(DoorHelper.SOUND_DOOR_OPEN);
+            entity.EmitSound(soundId);
 
             entity.Subscribe<AnimFinishedEventArgs>(OnAnimStopped);
         }

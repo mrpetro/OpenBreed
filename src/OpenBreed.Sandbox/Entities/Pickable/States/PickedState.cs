@@ -1,4 +1,5 @@
-﻿using OpenBreed.Fsm;
+﻿using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Fsm;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
@@ -15,16 +16,20 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         #region Private Fields
 
         private const string STAMP_PREFIX = "L4";
+        private const string SOUND_PREFIX = "Common";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
+        private readonly ISoundMan soundMan;
+
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PickedState(IFsmMan fsmMan, IStampMan stampMan)
+        public PickedState(IFsmMan fsmMan, IStampMan stampMan, ISoundMan soundMan)
         {
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;
+            this.soundMan = soundMan;
         }
 
         #endregion Public Constructors
@@ -60,7 +65,11 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
                     stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
 
                 entity.PutStamp(stampId, 0, pos.Value);
-                entity.EmitSound(PickableHelper.SOUND_PICK_KEYS);
+
+
+                var soundId = soundMan.GetByName($"{SOUND_PREFIX}/{className}/{stateName}");
+
+                entity.EmitSound(soundId);
             }
 
             entity.SetText(0, $"{className} - Picked");

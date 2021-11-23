@@ -15,6 +15,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
         #region Private Fields
 
         private readonly Dictionary<int, int> alBuffers = new Dictionary<int, int>();
+        private readonly Dictionary<string, int> sampleNames = new Dictionary<string, int>();
         private readonly Dictionary<int, int> alSources = new Dictionary<int, int>();
         private readonly ILogger logger;
         private AudioContext audioContext;
@@ -66,24 +67,29 @@ namespace OpenBreed.Audio.OpenAL.Managers
             GC.SuppressFinalize(this);
         }
 
-        public int LoadSample(string sampleFilePath, int sampleFreq)
+        public int LoadSample(string sampleName, string sampleFilePath, int sampleFreq)
         {
             var sampleData = File.ReadAllBytes(sampleFilePath);
-            return LoadSample(sampleData, sampleFreq);
+            return LoadSample(sampleName, sampleData, sampleFreq);
         }
 
-        public int LoadSample(byte[] sampleData, int sampleFreq)
+        public int LoadSample(string sampleName, byte[] sampleData, int sampleFreq)
         {
             int sampleBuffer;
             AL.GenBuffers(1, out sampleBuffer);
             AL.BufferData(sampleBuffer, ALFormat.Mono8, sampleData, sampleData.Length, sampleFreq);
 
             alBuffers.Add(alBuffers.Count, sampleBuffer);
+            sampleNames.Add(sampleName, alBuffers.Count - 1);
+
             return alBuffers.Count - 1;
         }
 
         public void PlaySample(int sampleId)
         {
+            if (sampleId == -1)
+                return;
+
             var alBuffer = GetSampleBufferId(sampleId);
             var alSource = GetFirstIdleSource();
 
@@ -197,6 +203,16 @@ namespace OpenBreed.Audio.OpenAL.Managers
                 return sampleBufferId;
             else
                 throw new InvalidOperationException($"Unable to find OpenAL source ID for sound source '{soundSourceId}'");
+        }
+
+        public int GetByName(string sampleName)
+        {
+            if (sampleNames.TryGetValue(sampleName, out int result))
+                return result;
+
+            logger.Error($"Unable to find sample ID with name '{sampleName}'");
+
+            return -1;
         }
 
         #endregion Private Methods

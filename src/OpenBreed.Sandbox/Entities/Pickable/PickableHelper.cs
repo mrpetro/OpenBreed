@@ -16,8 +16,6 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 {
     public class PickableHelper
     {
-        public static int SOUND_PICK_KEYS { get; private set; }
-
         #region Private Fields
 
         private const string PICKABLE_PREFIX = @"Entities\Common\Pickables";
@@ -77,7 +75,16 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
             var soundLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
 
-            SOUND_PICK_KEYS = soundLoader.Load("Sounds.KEYS");
+            soundLoader.Load("Common/Ammo/Picked");
+            soundLoader.Load("Common/CreditsSmall/Picked");
+            soundLoader.Load("Common/CreditsBig/Picked");
+            soundLoader.Load("Common/MedkitSmall/Picked");
+            soundLoader.Load("Common/MedkitBig/Picked");
+            soundLoader.Load("Common/KeycardStandard/Picked");
+            soundLoader.Load("Common/KeycardRed/Picked");
+            soundLoader.Load("Common/KeycardGreen/Picked");
+            soundLoader.Load("Common/KeycardBlue/Picked");
+            soundLoader.Load("Common/ExtraLife/Picked"); 
         }
 
         public void AddItem(World world, int x, int y, string name, int gfxValue, string flavor = null)

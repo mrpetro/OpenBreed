@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common;
 using OpenBreed.Fsm;
 using OpenBreed.Physics.Interface.Managers;
@@ -20,11 +21,12 @@ namespace OpenBreed.Sandbox.Entities.Pickable
             var collisionMan = managerCollection.GetManager<ICollisionMan>();
             var stampMan = managerCollection.GetManager<IStampMan>();
             var clipMan = managerCollection.GetManager<IClipMan>();
+            var soundMan = managerCollection.GetManager<ISoundMan>();
 
             var fsm = managerCollection.GetManager<IFsmMan>().Create<FunctioningState, FunctioningImpulse>("Pickable.Functioning");
 
             fsm.AddState(new LyingState(fsmMan, collisionMan, stampMan));
-            fsm.AddState(new PickedState(fsmMan, stampMan));
+            fsm.AddState(new PickedState(fsmMan, stampMan, soundMan));
 
             fsm.AddTransition(FunctioningState.Lying, FunctioningImpulse.Pick, FunctioningState.Picked);
         }
