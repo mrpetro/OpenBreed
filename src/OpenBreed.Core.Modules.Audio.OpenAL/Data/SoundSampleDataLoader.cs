@@ -20,6 +20,7 @@ namespace OpenBreed.Audio.OpenAL.Data
 
         private readonly IRepositoryProvider repositoryProvider;
         private readonly AssetsDataProvider assetsDataProvider;
+        private readonly IModelsProvider modelsProvider;
         private readonly ISoundMan soundMan;
         private readonly ILogger logger;
 
@@ -29,11 +30,13 @@ namespace OpenBreed.Audio.OpenAL.Data
 
         public SoundSampleDataLoader(IRepositoryProvider repositoryProvider,
                                    AssetsDataProvider assetsDataProvider,
+                                   IModelsProvider modelsProvider,
                                    ISoundMan soundMan,
                                    ILogger logger)
         {
             this.repositoryProvider = repositoryProvider;
             this.assetsDataProvider = assetsDataProvider;
+            this.modelsProvider = modelsProvider;
             this.soundMan = soundMan;
             this.logger = logger;
         }
@@ -50,9 +53,9 @@ namespace OpenBreed.Audio.OpenAL.Data
             if (entry == null)
                 throw new Exception("Sound sample error: " + sampleName);
 
-            var model = assetsDataProvider.LoadModel(entry.DataRef) as SoundModel;
+            modelsProvider.TryGetModel<SoundModel>(entry.DataRef, out SoundModel model, out string message);
 
-            var soundSampleId = soundMan.LoadSample(model.Data, model.SampleRate);
+            var soundSampleId = soundMan.LoadSample(sampleName, model.Data, model.SampleRate);
 
             logger.Verbose($"Sound sample '{sampleName}' loaded.");
 

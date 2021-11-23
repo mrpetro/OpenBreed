@@ -25,6 +25,7 @@ namespace OpenBreed.Audio.OpenAL.Extensions
         {
             dataLoaderFactory.Register<ISoundSampleDataLoader>(() => new SoundSampleDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
                                                              managerCollection.GetManager<AssetsDataProvider>(),
+                                                             managerCollection.GetManager<IModelsProvider>(),
                                                              managerCollection.GetManager<ISoundMan>(),
                                                              managerCollection.GetManager<ILogger>()));
         }

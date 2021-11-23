@@ -37,8 +37,6 @@ namespace OpenBreed.Sandbox.Entities.Door
 {
     public class DoorHelper
     {
-        public static int SOUND_DOOR_OPEN { get; private set; }
-
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 
@@ -58,7 +56,8 @@ namespace OpenBreed.Sandbox.Entities.Door
             animationLoader.Load("Animations/Door/Closing/Horizontal");
 
             var soundSampleLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
-            SOUND_DOOR_OPEN = soundSampleLoader.Load("Sounds.DOOR1");
+            
+            soundSampleLoader.Load("Common/Door/Opening");
         }
 
         public void AddVertical(World world, int x, int y)

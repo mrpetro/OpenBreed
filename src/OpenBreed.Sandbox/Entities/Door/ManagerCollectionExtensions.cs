@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
@@ -22,10 +23,11 @@ namespace OpenBreed.Sandbox.Entities.Door
             var collisionMan = managerCollection.GetManager<ICollisionMan>();
             var stampMan = managerCollection.GetManager<IStampMan>();
             var clipMan = managerCollection.GetManager<IClipMan>();
+            var soundMan = managerCollection.GetManager<ISoundMan>();
 
             var fsm = managerCollection.GetManager<IFsmMan>().Create<FunctioningState, FunctioningImpulse>("Door.Functioning");
 
-            fsm.AddState(new OpeningState(fsmMan, stampMan, clipMan));
+            fsm.AddState(new OpeningState(fsmMan, stampMan, clipMan, soundMan));
             fsm.AddState(new OpenedAwaitClose(fsmMan, stampMan));
             fsm.AddState(new ClosingState(fsmMan, stampMan, clipMan));
             fsm.AddState(new ClosedState(fsmMan, collisionMan, stampMan));
