@@ -4426,7 +4426,7 @@
 		</Scripts>
 		<Animations>
 			<Items>
-				<Animation Id="Animations/Door/Closing/Vertical">
+				<Animation Id="Vanilla/L4/Door/Closing/Vertical">
 					<Length>4.0</Length>
 					<Tracks>
 						<StringTrack>
@@ -4448,7 +4448,7 @@
 						</IntTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Door/Opening/Vertical">
+				<Animation Id="Vanilla/L4/Door/Opening/Vertical">
 					<Length>4.0</Length>
 					<Tracks>
 						<StringTrack>
@@ -4470,7 +4470,7 @@
 						</IntTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Door/Closing/Horizontal">
+				<Animation Id="Vanilla/L4/Door/Closing/Horizontal">
 					<Length>4.0</Length>
 					<Tracks>
 						<StringTrack>
@@ -4492,7 +4492,7 @@
 						</IntTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Door/Opening/Horizontal">
+				<Animation Id="Vanilla/L4/Door/Opening/Horizontal">
 					<Length>4.0</Length>
 					<Tracks>
 						<StringTrack>
@@ -4514,7 +4514,7 @@
 						</IntTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/ElectricGate/Working/Vertical">
+				<Animation Id="Vanilla/L4/ElectricGate/Working/Vertical">
 					<Length>4.0</Length>
 					<Tracks>
 						<StringTrack>
@@ -4536,7 +4536,7 @@
 						</IntTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/ElectricGate/Working/Horizontal">
+				<Animation Id="Vanilla/L4/ElectricGate/Working/Horizontal">
 					<Length>4.0</Length>
 					<Tracks>
 						<StringTrack>
@@ -4558,7 +4558,7 @@
 						</IntTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Walking/Up">
+				<Animation Id="Vanilla/Common/Actor/Walking/Up">
 					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
@@ -4584,7 +4584,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Walking/UpRight">
+				<Animation Id="Vanilla/Common/Actor/Walking/UpRight">
 					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
@@ -4610,7 +4610,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Walking/Right">
+				<Animation Id="Vanilla/Common/Actor/Walking/Right">
 					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
@@ -4636,7 +4636,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Walking/RightDown">
+				<Animation Id="Vanilla/Common/Actor/Walking/RightDown">
 					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
@@ -4662,7 +4662,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Walking/Down">
+				<Animation Id="Vanilla/Common/Actor/Walking/Down">
 					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
@@ -4688,7 +4688,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Walking/DownLeft">
+				<Animation Id="Vanilla/Common/Actor/Walking/DownLeft">
 					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
@@ -4714,7 +4714,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Walking/Left">
+				<Animation Id="Vanilla/Common/Actor/Walking/Left">
 					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
@@ -4740,7 +4740,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Walking/LeftUp">
+				<Animation Id="Vanilla/Common/Actor/Walking/LeftUp">
 					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
@@ -4766,7 +4766,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Standing/Up">
+				<Animation Id="Vanilla/Common/Actor/Standing/Up">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -4785,7 +4785,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Standing/UpRight">
+				<Animation Id="Vanilla/Common/Actor/Standing/UpRight">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -4804,7 +4804,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Standing/Right">
+				<Animation Id="Vanilla/Common/Actor/Standing/Right">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -4823,7 +4823,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Standing/RightDown">
+				<Animation Id="Vanilla/Common/Actor/Standing/RightDown">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -4842,7 +4842,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Standing/Down">
+				<Animation Id="Vanilla/Common/Actor/Standing/Down">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -4861,7 +4861,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Standing/DownLeft">
+				<Animation Id="Vanilla/Common/Actor/Standing/DownLeft">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -4880,7 +4880,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Standing/Left">
+				<Animation Id="Vanilla/Common/Actor/Standing/Left">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -4899,7 +4899,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Actor/Standing/LeftUp">
+				<Animation Id="Vanilla/Common/Actor/Standing/LeftUp">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -4918,7 +4918,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Camera/Effects/FadeOut">
+				<Animation Id="Vanilla/Common/Camera/Effects/FadeOut">
 					<Length>10.0</Length>
 					<Tracks>
 						<FloatTrack>
@@ -4931,7 +4931,7 @@
 						</FloatTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Camera/Effects/FadeIn">
+				<Animation Id="Vanilla/Common/Camera/Effects/FadeIn">
 					<Length>10.0</Length>
 					<Tracks>
 						<FloatTrack>
@@ -4944,7 +4944,7 @@
 						</FloatTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Environment/Level4/TVFlickering">
+				<Animation Id="Vanilla/L4/Environment/TVFlickering">
 					<Length>1.5</Length>
 					<Tracks>
 						<IntTrack>
@@ -4966,7 +4966,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Animations/Environment/Level4/MonsterEating">
+				<Animation Id="Vanilla/L4/Environment/MonsterEating">
 					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
