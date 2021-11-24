@@ -50,10 +50,10 @@ namespace OpenBreed.Sandbox.Entities.Door
         {
             var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
-            animationLoader.Load("Animations/Door/Opening/Vertical");
-            animationLoader.Load("Animations/Door/Closing/Vertical");
-            animationLoader.Load("Animations/Door/Opening/Horizontal");
-            animationLoader.Load("Animations/Door/Closing/Horizontal");
+            animationLoader.Load("Vanilla/L4/Door/Opening/Vertical");
+            animationLoader.Load("Vanilla/L4/Door/Closing/Vertical");
+            animationLoader.Load("Vanilla/L4/Door/Opening/Horizontal");
+            animationLoader.Load("Vanilla/L4/Door/Closing/Horizontal");
 
             var soundSampleLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
             

@@ -6,7 +6,7 @@
 				<State>
 					<Speed>20</Speed>
 					<Loop>true</Loop>
-					<ClipName>Animations/Environment/Level4/TVFlickering</ClipName>
+					<ClipName>Vanilla/L4/Environment/TVFlickering</ClipName>
 				</State>
 			</States>
 		</Animation>

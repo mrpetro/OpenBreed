@@ -24,7 +24,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
     {
         #region Private Fields
 
-        private readonly string animPrefix;
+        private const string ANIM_PREFIX = "Vanilla/Common";
         private readonly IFsmMan fsmMan;
         private readonly IClipMan clipMan;
 
@@ -36,7 +36,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         {
             this.fsmMan = fsmMan;
             this.clipMan = clipMan;
-            this.animPrefix = "Animations";
         }
 
         #endregion Public Constructors
@@ -61,7 +60,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             thrust.Value = Vector2.Zero;
 
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var clipId = clipMan.GetByName($"{animPrefix}/{className}/{stateName}/{animDirName}").Id;
+            var clipId = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{stateName}/{animDirName}").Id;
             var currentStateNames = fsmMan.GetStateNames(entity);
 
             entity.PlayAnimation(0, clipId);

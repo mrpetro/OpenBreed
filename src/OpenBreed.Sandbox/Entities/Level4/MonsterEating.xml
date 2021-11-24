@@ -6,7 +6,7 @@
 				<State>
 					<Speed>4</Speed>
 					<Loop>true</Loop>
-					<ClipName>Animations/Environment/Level4/MonsterEating</ClipName>
+					<ClipName>Vanilla/L4/Environment/MonsterEating</ClipName>
 				</State>
 			</States>
 		</Animation>

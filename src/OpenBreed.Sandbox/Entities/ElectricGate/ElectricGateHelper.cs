@@ -48,8 +48,8 @@ namespace OpenBreed.Sandbox.Entities.ElectricGate
         public void LoadAnimations()
         {
             var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
-            animationLoader.Load("Animations/ElectricGate/Working/Vertical");
-            animationLoader.Load("Animations/ElectricGate/Working/Horizontal");
+            animationLoader.Load("Vanilla/L4/ElectricGate/Working/Vertical");
+            animationLoader.Load("Vanilla/L4/ElectricGate/Working/Horizontal");
         }
 
         public void AddVertical(World world, int x, int y)
