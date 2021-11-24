@@ -3,7 +3,7 @@
 	<Components>
 		<Position X="$(startX)" Y="$(startY)" />
 		<TilePutter>
-			<AtlasName>TileSets.L4</AtlasName>
+			<AtlasName>$(tileSet)</AtlasName>
 			<ImageIndex>$(imageIndex)</ImageIndex>
 			<Position X="$(startX)" Y="$(startY)" />
 		</TilePutter>

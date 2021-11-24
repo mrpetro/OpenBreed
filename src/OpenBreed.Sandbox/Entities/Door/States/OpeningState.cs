@@ -25,8 +25,8 @@ namespace OpenBreed.Sandbox.Components.States
         #region Private Fields
 
         private readonly string animPrefix;
-        private const string STAMP_PREFIX = "L4";
-        private const string SOUND_PREFIX = "Common";
+        private const string STAMP_PREFIX = "Vanilla/L4";
+        private const string SOUND_PREFIX = "Vanilla/Common";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         private readonly IClipMan clipMan;

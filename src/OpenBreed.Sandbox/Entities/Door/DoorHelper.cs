@@ -57,7 +57,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             var soundSampleLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
             
-            soundSampleLoader.Load("Common/Door/Opening");
+            soundSampleLoader.Load("Vanilla/Common/Door/Opening");
         }
 
         public void AddVertical(World world, int x, int y)
@@ -85,10 +85,10 @@ namespace OpenBreed.Sandbox.Entities.Door
         {
             var tileStampLoader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
 
-            tileStampLoader.Load("L4/Door/Horizontal/Closed");
-            tileStampLoader.Load("L4/Door/Horizontal/Opened");
-            tileStampLoader.Load("L4/Door/Vertical/Closed");
-            tileStampLoader.Load("L4/Door/Vertical/Opened");
+            tileStampLoader.Load("Vanilla/L4/Door/Horizontal/Closed");
+            tileStampLoader.Load("Vanilla/L4/Door/Horizontal/Opened");
+            tileStampLoader.Load("Vanilla/L4/Door/Vertical/Closed");
+            tileStampLoader.Load("Vanilla/L4/Door/Vertical/Opened");
         }
     }
 }

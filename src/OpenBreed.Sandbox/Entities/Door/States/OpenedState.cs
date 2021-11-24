@@ -17,7 +17,7 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private const string STAMP_PREFIX = "L4";
+        private const string STAMP_PREFIX = "Vanilla/L4";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
 
