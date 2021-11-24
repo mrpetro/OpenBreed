@@ -1068,7 +1068,7 @@
 				<Sound Id="Sounds.ALIEN4">
 					<DataRef>Assets.ALIEN4</DataRef>
 				</Sound>
-				<Sound Id="Common/Ammo/Picked">
+				<Sound Id="Vanilla/Common/Ammo/Picked">
 					<DataRef>Assets.AMMO</DataRef>
 				</Sound>
 				<Sound Id="Sounds.BACKING1">
@@ -1092,19 +1092,19 @@
 				<Sound Id="Sounds.COUNTDWN">
 					<DataRef>Assets.COUNTDWN</DataRef>
 				</Sound>
-				<Sound Id="Common/CreditsSmall/Picked">
+				<Sound Id="Vanilla/Common/CreditsSmall/Picked">
 					<DataRef>Assets.CREDITS</DataRef>
 				</Sound>
-				<Sound Id="Common/CreditsBig/Picked">
+				<Sound Id="Vanilla/Common/CreditsBig/Picked">
 					<DataRef>Assets.CREDITS</DataRef>
 				</Sound>
 				<Sound Id="Sounds.CURSOR">
 					<DataRef>Assets.CURSOR</DataRef>
 				</Sound>
-				<Sound Id="Common/Hero/Dying">
+				<Sound Id="Vanilla/Common/Hero/Dying">
 					<DataRef>Assets.DIE</DataRef>
 				</Sound>
-				<Sound Id="Common/Door/Opening">
+				<Sound Id="Vanilla/Common/Door/Opening">
 					<DataRef>Assets.DOOR1</DataRef>
 				</Sound>
 				<Sound Id="Sounds.EAT1">
@@ -1131,22 +1131,22 @@
 				<Sound Id="Sounds.HATCH1">
 					<DataRef>Assets.HATCH1</DataRef>
 				</Sound>
-				<Sound Id="Common/MedkitSmall/Picked">
+				<Sound Id="Vanilla/Common/MedkitSmall/Picked">
 					<DataRef>Assets.HEALTH</DataRef>
 				</Sound>
-				<Sound Id="Common/MedkitBig/Picked">
+				<Sound Id="Vanilla/Common/MedkitBig/Picked">
 					<DataRef>Assets.HEALTH</DataRef>
 				</Sound>
-				<Sound Id="Common/KeycardStandard/Picked">
+				<Sound Id="Vanilla/Common/KeycardStandard/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
-				<Sound Id="Common/KeycardRed/Picked">
+				<Sound Id="Vanilla/Common/KeycardRed/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
-				<Sound Id="Common/KeycardGreen/Picked">
+				<Sound Id="Vanilla/Common/KeycardGreen/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
-				<Sound Id="Common/KeycardBlue/Picked">
+				<Sound Id="Vanilla/Common/KeycardBlue/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
 				<Sound Id="Sounds.LAZER1">
@@ -1188,85 +1188,85 @@
 				<Sound Id="Sounds.SIREN">
 					<DataRef>Assets.SIREN</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/Nash">
+				<Sound Id="Vanilla/Common/Speech/Nash">
 					<DataRef>Assets.SPEECH01</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/John">
+				<Sound Id="Vanilla/Common/Speech/John">
 					<DataRef>Assets.SPEECH02</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/IsDead">
+				<Sound Id="Vanilla/Common/Speech/IsDead">
 					<DataRef>Assets.SPEECH03</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/YoureOnYourOwn">
+				<Sound Id="Vanilla/Common/Speech/YoureOnYourOwn">
 					<DataRef>Assets.SPEECH04</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/AssaultFailed">
+				<Sound Id="Vanilla/Common/Speech/AssaultFailed">
 					<DataRef>Assets.SPEECH05</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/MissionComplete">
+				<Sound Id="Vanilla/Common/Speech/MissionComplete">
 					<DataRef>Assets.SPEECH06</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/Hurry">
+				<Sound Id="Vanilla/Common/Speech/Hurry">
 					<DataRef>Assets.SPEECH07</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/AlarmSystemsEnabled">
+				<Sound Id="Vanilla/Common/Speech/AlarmSystemsEnabled">
 					<DataRef>Assets.SPEECH08</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/LocateExit">
+				<Sound Id="Vanilla/Common/Speech/LocateExit">
 					<DataRef>Assets.SPEECH09</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/DestructionImmanent">
+				<Sound Id="Vanilla/Common/Speech/DestructionImmanent">
 					<DataRef>Assets.SPEECH10</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/Warning">
+				<Sound Id="Vanilla/Common/Speech/Warning">
 					<DataRef>Assets.SPEECH11</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/LazersOperational">
+				<Sound Id="Vanilla/Common/Speech/LazersOperational">
 					<DataRef>Assets.SPEECH12</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/ScanDetectsLargeAlien">
+				<Sound Id="Vanilla/Common/Speech/ScanDetectsLargeAlien">
 					<DataRef>Assets.SPEECH13</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/PowerOut">
+				<Sound Id="Vanilla/Common/Speech/PowerOut">
 					<DataRef>Assets.SPEECH14</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/TorchActivated">
+				<Sound Id="Vanilla/Common/Speech/TorchActivated">
 					<DataRef>Assets.SPEECH15</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/MinefieldDirectlyAhead">
+				<Sound Id="Vanilla/Common/Speech/MinefieldDirectlyAhead">
 					<DataRef>Assets.SPEECH16</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/EnergyLow">
+				<Sound Id="Vanilla/Common/Speech/EnergyLow">
 					<DataRef>Assets.SPEECH17</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/IntexNetwork">
+				<Sound Id="Vanilla/Common/Speech/IntexNetwork">
 					<DataRef>Assets.SPEECH18</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/Online">
+				<Sound Id="Vanilla/Common/Speech/Online">
 					<DataRef>Assets.SPEECH19</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/LoggingOff">
+				<Sound Id="Vanilla/Common/Speech/LoggingOff">
 					<DataRef>Assets.SPEECH20</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/SmartCardMessageFollows">
+				<Sound Id="Vanilla/Common/Speech/SmartCardMessageFollows">
 					<DataRef>Assets.SPEECH21</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/LinkCorridor">
+				<Sound Id="Vanilla/Common/Speech/LinkCorridor">
 					<DataRef>Assets.SPEECH22</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/SurvivorRescued">
+				<Sound Id="Vanilla/Common/Speech/SurvivorRescued">
 					<DataRef>Assets.SPEECH23</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/YouveFoundTheSecretLevel">
+				<Sound Id="Vanilla/Common/Speech/YouveFoundTheSecretLevel">
 					<DataRef>Assets.SPEECH24</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/Entering">
+				<Sound Id="Vanilla/Common/Speech/Entering">
 					<DataRef>Assets.SPEECH25</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/MainTower">
+				<Sound Id="Vanilla/Common/Speech/MainTower">
 					<DataRef>Assets.SPEECH26</DataRef>
 				</Sound>
-				<Sound Id="Common/Speech/AreaScan">
+				<Sound Id="Vanilla/Common/Speech/AreaScan">
 					<DataRef>Assets.SPEECH27</DataRef>
 				</Sound>
 				<Sound Id="Sounds.SPLAT1">
@@ -1284,7 +1284,7 @@
 				<Sound Id="Sounds.TURRET2">
 					<DataRef>Assets.TURRET2</DataRef>
 				</Sound>
-				<Sound Id="Common/ExtraLife/Picked">
+				<Sound Id="Vanilla/Common/ExtraLife/Picked">
 					<DataRef>Assets.XTRALIFE</DataRef>
 				</Sound>
 			</Items>
@@ -1540,56 +1540,56 @@
 		</SpriteSets>
 		<TileSets>
 			<Items>
-				<TileSetFromBLK Id="TileSets.L1">
+				<TileSetFromBLK Id="Vanilla/L1">
 					<DataRef>Assets.LEVEL1.BLK</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
 					</PaletteRefs>
 				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L3">
+				<TileSetFromBLK Id="Vanilla/L3">
 					<DataRef>Assets.LEVEL3.BLK</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
 					</PaletteRefs>
 				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L4">
+				<TileSetFromBLK Id="Vanilla/L4">
 					<DataRef>Assets.LEVEL4.BLK</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L5">
+				<TileSetFromBLK Id="Vanilla/L5">
 					<DataRef>Assets.LEVEL5.BLK</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
 					</PaletteRefs>
 				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L6">
+				<TileSetFromBLK Id="Vanilla/L6">
 					<DataRef>Assets.LEVEL6.BLK</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
 					</PaletteRefs>
 				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L7">
+				<TileSetFromBLK Id="Vanilla/L7">
 					<DataRef>Assets.LEVEL7.BLK</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
 					</PaletteRefs>
 				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L8">
+				<TileSetFromBLK Id="Vanilla/L8">
 					<DataRef>Assets.LEVEL8.BLK</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
 					</PaletteRefs>
 				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.LD">
+				<TileSetFromBLK Id="Vanilla/LD">
 					<DataRef>Assets.LEVELD.BLK</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
@@ -1600,428 +1600,428 @@
 		</TileSets>
 		<TileStamps>
 			<Items>
-				<TileStamp Id="L4/Door/Horizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Door/Horizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="88" />
-						<Cell X="1" Y="0" TsId="TileSets.L4" TsTi ="89" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="88" />
+						<Cell X="1" Y="0" TsId="Vanilla/L4" TsTi ="89" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/Door/Horizontal/Opened" Width="2" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Door/Horizontal/Opened" Width="2" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="40" />
-						<Cell X="1" Y="0" TsId="TileSets.L4" TsTi ="41" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="40" />
+						<Cell X="1" Y="0" TsId="Vanilla/L4" TsTi ="41" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/Door/Vertical/Closed" Width="1" Height="2" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Door/Vertical/Closed" Width="1" Height="2" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="28" />
-						<Cell X="0" Y="1" TsId="TileSets.L4" TsTi ="48" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="28" />
+						<Cell X="0" Y="1" TsId="Vanilla/L4" TsTi ="48" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/Door/Vertical/Opened" Width="1" Height="2" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Door/Vertical/Opened" Width="1" Height="2" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="81" />
-						<Cell X="0" Y="1" TsId="TileSets.L4" TsTi ="61" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="81" />
+						<Cell X="0" Y="1" TsId="Vanilla/L4" TsTi ="61" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="600" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="600" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="606" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="606" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="612" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="612" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardStandard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="602" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="602" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardStandard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardStandard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="608" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="608" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardStandard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardStandard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="614" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="614" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardStandard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpS/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpS/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="603" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="603" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpS/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpS/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpS/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="609" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="609" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpS/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpS/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="615" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="615" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpS/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/ExtraLife/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/ExtraLife/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="604" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="604" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/ExtraLife/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/ExtraLife/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/ExtraLife/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="610" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="610" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/ExtraLife/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/ExtraLife/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="616" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="616" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/ExtraLife/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="605" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="611" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="617" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="620" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="620" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="626" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="626" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="632" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="632" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/CreditsBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpF/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpF/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="621" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="621" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpF/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpF/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpF/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="627" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="627" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpF/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpF/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="633" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="633" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpF/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="622" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="622" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="628" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="628" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="634" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="634" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpA/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpA/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="623" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="623" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpA/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpA/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpA/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="629" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="629" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpA/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpA/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="635" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="635" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/PowerUpA/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/Ammo/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Ammo/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="624" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="624" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/Ammo/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Ammo/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/Ammo/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Ammo/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="630" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="630" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/Ammo/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Ammo/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/Ammo/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Ammo/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="636" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="636" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/Ammo/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Ammo/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/AreaScanner/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/AreaScanner/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="625" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="625" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/AreaScanner/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/AreaScanner/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/AreaScanner/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="631" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="631" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/AreaScanner/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/AreaScanner/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="637" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="637" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/AreaScanner/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="598" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="598" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="599" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="599" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="649" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="649" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="650" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="650" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="653" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="653" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/MedkitSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="654" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="654" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardRed/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardRed/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="362" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="362" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardRed/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardRed/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="363" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="363" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardGreen/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardGreen/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="534" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="534" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardGreen/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardGreen/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="535" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="535" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardBlue/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardBlue/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="638" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="638" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardBlue/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardBlue/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="639" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="639" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardSpecial/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardSpecial/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="618" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="618" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="L4/KeycardSpecial/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/KeycardSpecial/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="TileSets.L4" TsTi ="619" />
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="619" />
 					</Cells>
 				</TileStamp>
 			</Items>
@@ -2039,7 +2039,7 @@
 						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L1</TileSetRef>
+					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
 				<Map Id="CIVILIAN ZONE 1">
 					<DataRef>Assets.MAP.02</DataRef>
@@ -2054,7 +2054,7 @@
 						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L4</TileSetRef>
+					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
 				<Map Id="CIVILIAN ZONE 2">
 					<DataRef>Assets.MAP.03</DataRef>
@@ -2069,7 +2069,7 @@
 						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L4</TileSetRef>
+					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
 				<Map Id="CIVILIAN ZONE 3">
 					<DataRef>Assets.MAP.04</DataRef>
@@ -2084,7 +2084,7 @@
 						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L4</TileSetRef>
+					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
 				<Map Id="CIVILIAN ZONE 4">
 					<DataRef>Assets.MAP.05</DataRef>
@@ -2099,7 +2099,7 @@
 						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L4</TileSetRef>
+					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
 				<Map Id="OUTDOOR SECTOR 2">
 					<DataRef>Assets.MAP.06</DataRef>
@@ -2112,7 +2112,7 @@
 						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L1</TileSetRef>
+					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
 				<Map Id="STORES LEVEL 1">
 					<DataRef>Assets.MAP.07</DataRef>
@@ -2136,7 +2136,7 @@
 						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.LD</TileSetRef>
+					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
 				<Map Id="STORES LEVEL 2">
 					<DataRef>Assets.MAP.08</DataRef>
@@ -2149,7 +2149,7 @@
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.LD</TileSetRef>
+					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
 				<Map Id="STORES SECTOR 3">
 					<DataRef>Assets.MAP.09</DataRef>
@@ -2162,7 +2162,7 @@
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.LD</TileSetRef>
+					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
 				<Map Id="STORES SECTOR 4">
 					<DataRef>Assets.MAP.10</DataRef>
@@ -2175,7 +2175,7 @@
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.LD</TileSetRef>
+					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
 				<Map Id="OUTDOOR SECTOR 3">
 					<DataRef>Assets.MAP.11</DataRef>
@@ -2188,7 +2188,7 @@
 						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L1</TileSetRef>
+					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
 				<Map Id="MILITARY SECTOR 1">
 					<DataRef>Assets.MAP.12</DataRef>
@@ -2212,7 +2212,7 @@
 						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L7</TileSetRef>
+					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
 				<Map Id="MILITARY SECTOR 2">
 					<DataRef>Assets.MAP.13</DataRef>
@@ -2225,7 +2225,7 @@
 						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L7</TileSetRef>
+					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
 				<Map Id="MILITARY SECTOR 3">
 					<DataRef>Assets.MAP.14</DataRef>
@@ -2238,7 +2238,7 @@
 						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L7</TileSetRef>
+					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
 				<Map Id="MILITARY SECTOR 4">
 					<DataRef>Assets.MAP.15</DataRef>
@@ -2251,7 +2251,7 @@
 						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L7</TileSetRef>
+					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
 				<Map Id="SECURITY ZONE 1">
 					<DataRef>Assets.MAP.16</DataRef>
@@ -2276,7 +2276,7 @@
 						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L5</TileSetRef>
+					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
 				<Map Id="SECURITY ZONE 2">
 					<DataRef>Assets.MAP.17</DataRef>
@@ -2289,7 +2289,7 @@
 						<SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L5</TileSetRef>
+					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
 				<Map Id="SECURITY ZONE 3">
 					<DataRef>Assets.MAP.18</DataRef>
@@ -2302,7 +2302,7 @@
 						<SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L5</TileSetRef>
+					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
 				<Map Id="SECURITY ZONE 4">
 					<DataRef>Assets.MAP.19</DataRef>
@@ -2315,7 +2315,7 @@
 						<SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L5</TileSetRef>
+					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
 				<Map Id="COLONY GROUND SECTOR 3">
 					<DataRef>Assets.MAP.20</DataRef>
@@ -2328,7 +2328,7 @@
 						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L1</TileSetRef>
+					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
 				<Map Id="SCIENCE SECTOR 1">
 					<DataRef>Assets.MAP.21</DataRef>
@@ -2351,7 +2351,7 @@
 						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L6</TileSetRef>
+					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
 				<Map Id="SCIENCE SECTOR 2">
 					<DataRef>Assets.MAP.22</DataRef>
@@ -2363,7 +2363,7 @@
 						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L6</TileSetRef>
+					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
 				<Map Id="SCIENCE SECTOR 3">
 					<DataRef>Assets.MAP.23</DataRef>
@@ -2375,7 +2375,7 @@
 						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L6</TileSetRef>
+					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
 				<Map Id="SCIENCE SECTOR 4">
 					<DataRef>Assets.MAP.24</DataRef>
@@ -2387,7 +2387,7 @@
 						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L6</TileSetRef>
+					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
 				<Map Id="COLONY GROUND SECTOR 4">
 					<DataRef>Assets.MAP.25</DataRef>
@@ -2400,7 +2400,7 @@
 						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L1</TileSetRef>
+					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
 				<Map Id="ENGINEERING SECTOR 1">
 					<DataRef>Assets.MAP.26</DataRef>
@@ -2423,7 +2423,7 @@
 						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="ENGINEERING SECTOR 2">
 					<DataRef>Assets.MAP.27</DataRef>
@@ -2435,7 +2435,7 @@
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="ENGINEERING SECTOR 3">
 					<DataRef>Assets.MAP.28</DataRef>
@@ -2447,7 +2447,7 @@
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="ENGINEERING SECTOR 4">
 					<DataRef>Assets.MAP.29</DataRef>
@@ -2459,7 +2459,7 @@
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 1">
 					<DataRef>Assets.MAP.30</DataRef>
@@ -2471,7 +2471,7 @@
 						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L4</TileSetRef>
+					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR 2">
 					<DataRef>Assets.MAP.31</DataRef>
@@ -2483,7 +2483,7 @@
 						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L4</TileSetRef>
+					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR 3">
 					<DataRef>Assets.MAP.32</DataRef>
@@ -2495,7 +2495,7 @@
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.LD</TileSetRef>
+					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR 4">
 					<DataRef>Assets.MAP.33</DataRef>
@@ -2507,7 +2507,7 @@
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR 5">
 					<DataRef>Assets.MAP.34</DataRef>
@@ -2519,7 +2519,7 @@
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.LD</TileSetRef>
+					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 6">
 					<DataRef>Assets.MAP.35</DataRef>
@@ -2531,7 +2531,7 @@
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.LD</TileSetRef>
+					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 7">
 					<DataRef>Assets.MAP.36</DataRef>
@@ -2543,7 +2543,7 @@
 						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L4</TileSetRef>
+					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 8">
 					<DataRef>Assets.MAP.37</DataRef>
@@ -2555,7 +2555,7 @@
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.LD</TileSetRef>
+					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 9">
 					<DataRef>Assets.MAP.38</DataRef>
@@ -2567,7 +2567,7 @@
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.LD</TileSetRef>
+					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 10">
 					<DataRef>Assets.MAP.39</DataRef>
@@ -2579,7 +2579,7 @@
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 11">
 					<DataRef>Assets.MAP.40</DataRef>
@@ -2591,7 +2591,7 @@
 						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L4</TileSetRef>
+					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 12">
 					<DataRef>Assets.MAP.41</DataRef>
@@ -2603,7 +2603,7 @@
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 13">
 					<DataRef>Assets.MAP.42</DataRef>
@@ -2615,7 +2615,7 @@
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR ZONE 14">
 					<DataRef>Assets.MAP.43</DataRef>
@@ -2627,7 +2627,7 @@
 						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L7</TileSetRef>
+					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR 15">
 					<DataRef>Assets.MAP.44</DataRef>
@@ -2639,7 +2639,7 @@
 						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L7</TileSetRef>
+					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR 16">
 					<DataRef>Assets.MAP.45</DataRef>
@@ -2648,7 +2648,7 @@
 						<PaletteRef>Palettes.MAP.45.ALCM</PaletteRef>
 					</PaletteRefs>
 					<SpriteSetRefs />
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="CORRIDOR 17">
 					<DataRef>Assets.MAP.46</DataRef>
@@ -2660,7 +2660,7 @@
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L3</TileSetRef>
+					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
 				<Map Id="MAIN TOWER LEVEL 1">
 					<DataRef>Assets.MAP.47</DataRef>
@@ -2685,7 +2685,7 @@
 						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L8</TileSetRef>
+					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
 				<Map Id="MAIN TOWER LEVEL 2">
 					<DataRef>Assets.MAP.48</DataRef>
@@ -2697,7 +2697,7 @@
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L8</TileSetRef>
+					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
 				<Map Id="MAIN TOWER LEVEL 3">
 					<DataRef>Assets.MAP.49</DataRef>
@@ -2709,7 +2709,7 @@
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L8</TileSetRef>
+					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
 				<Map Id="MAIN TOWER LEVEL 4">
 					<DataRef>Assets.MAP.50</DataRef>
@@ -2721,7 +2721,7 @@
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L8</TileSetRef>
+					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
 				<Map Id="MAIN TOWER LEVEL 5">
 					<DataRef>Assets.MAP.51</DataRef>
@@ -2733,7 +2733,7 @@
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L8</TileSetRef>
+					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
 				<Map Id="TOWER LEVEL 6">
 					<DataRef>Assets.MAP.52</DataRef>
@@ -2745,7 +2745,7 @@
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L8</TileSetRef>
+					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
 				<Map Id="TOWER LEVEL 7">
 					<DataRef>Assets.MAP.53</DataRef>
@@ -2757,7 +2757,7 @@
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L8</TileSetRef>
+					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
 				<Map Id="Mission One(\?\?\?)">
 					<DataRef>Assets.MAP.54</DataRef>
@@ -2769,7 +2769,7 @@
 						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L6</TileSetRef>
+					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
 				<Map Id="OUTER COLONY SECTOR 5">
 					<DataRef>Assets.MAP.55</DataRef>
@@ -2782,7 +2782,7 @@
 						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
 					</SpriteSetRefs>
-					<TileSetRef>TileSets.L1</TileSetRef>
+					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
 			</Items>
 		</Maps>
