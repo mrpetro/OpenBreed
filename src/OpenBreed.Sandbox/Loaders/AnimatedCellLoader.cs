@@ -36,15 +36,15 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             switch (actionValue)
             {
                 case TV_FLICKERING_CODE:
-                    PutTVFlickering(mapAssets, layout, visited, world, ix, iy, gfxValue);
+                    PutTVFlickering(mapAssets, map, visited, world, ix, iy, gfxValue);
                     break;
                 case MONSTER_EATING_CODE:
-                    PutMonsterEating(mapAssets, layout, visited, world, ix, iy, gfxValue);
+                    PutMonsterEating(mapAssets, map, visited, world, ix, iy, gfxValue);
                     break;
                 default:
                     break;
@@ -57,13 +57,13 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private void PutTVFlickering(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, World world, int ix, int iy, int gfxValue)
+        private void PutTVFlickering(MapAssets mapAssets, MapModel map, bool[,] visited, World world, int ix, int iy, int gfxValue)
         {
             environmentHelper.AddTVFlickering(world, ix, iy, mapAssets.AtlasId, gfxValue);
             visited[ix, iy] = true;
         }
 
-        private void PutMonsterEating(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, World world, int ix, int iy, int gfxValue)
+        private void PutMonsterEating(MapAssets mapAssets, MapModel map, bool[,] visited, World world, int ix, int iy, int gfxValue)
         {
             environmentHelper.AddMonsterEating(world, ix, iy, mapAssets.AtlasId, gfxValue);
             visited[ix, iy] = true;

@@ -52,6 +52,12 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
         public ITileAtlas Load(string tileAtlasName, params object[] args)
         {
+            var tileAtlas = tileMan.GetByName(tileAtlasName);
+
+            //If atlas is already loaded then return it;
+            if (tileAtlas != null)
+                return tileAtlas;
+
             var paletteModel = args.FirstOrDefault() as PaletteModel;
 
             var entry = repositoryProvider.GetRepository<IDbTileAtlas>().GetById(tileAtlasName) as IDbTileAtlasFromBlk;
@@ -73,7 +79,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
             foreach (var tile in tileAtlasModel.Tiles)
                 builder.AppendCoords(tile.Rectangle.X, tile.Rectangle.Y);
 
-            var tileAtlas = builder.Build();
+            tileAtlas = builder.Build();
 
             logger.Verbose($"Tile atlas '{tileAtlasName}' loaded.");
 

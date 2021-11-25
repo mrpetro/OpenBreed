@@ -126,8 +126,20 @@ namespace OpenBreed.Sandbox.Extensions
                 mapWorldDataLoader.Register(AnimatedCellLoader.TV_FLICKERING_CODE, environmentCellLoader);
                 mapWorldDataLoader.Register(AnimatedCellLoader.MONSTER_EATING_CODE, environmentCellLoader);
 
-                mapWorldDataLoader.Register(LevelEntryCellLoader.CODE, new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
-                                                                         managerCollection.GetManager<WorldGateHelper>()));
+                var levelExitCellLoader = new LevelExitCellLoader(managerCollection.GetManager<ActorHelper>(),
+                                                                    managerCollection.GetManager<WorldGateHelper>());
+
+                mapWorldDataLoader.Register(LevelExitCellLoader.EXIT_1, levelExitCellLoader);
+                mapWorldDataLoader.Register(LevelExitCellLoader.EXIT_2, levelExitCellLoader);
+                mapWorldDataLoader.Register(LevelExitCellLoader.EXIT_3, levelExitCellLoader);
+
+                var levelEntryCellLoader = new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
+                                                                         managerCollection.GetManager<WorldGateHelper>());
+
+                mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_3, levelEntryCellLoader);
+                mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_1, levelEntryCellLoader);
+                mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_2, levelEntryCellLoader);
+
                 mapWorldDataLoader.Register(DoorCellEntityLoader.DOOR_STANDARD, new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>()));
 
                 var electricGateEntityLoader = new ElectricGateCellEntityLoader(managerCollection.GetManager<ElectricGateHelper>());

@@ -1,20 +1,21 @@
 ﻿using OpenBreed.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Wecs.Worlds;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    internal class LevelEntryCellLoader : IMapWorldEntityLoader
+    internal class LevelExitCellLoader : IMapWorldEntityLoader
     {
         #region Public Fields
 
-
-        public const int ENTRY_3 = 56;
-        public const int ENTRY_1 = 45;
-        public const int ENTRY_2 = 46;
+        public const int EXIT_1 = 54;
+        public const int EXIT_2 = 37;
+        public const int EXIT_3 = 38;
 
         #endregion Public Fields
 
@@ -27,7 +28,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Internal Constructors
 
-        internal LevelEntryCellLoader(ActorHelper actorHelper, WorldGateHelper worldGateHelper)
+        internal LevelExitCellLoader(ActorHelper actorHelper, WorldGateHelper worldGateHelper)
         {
             this.actorHelper = actorHelper;
             this.worldGateHelper = worldGateHelper;
@@ -39,26 +40,26 @@ namespace OpenBreed.Sandbox.Loaders
 
         public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
-            int entryId;
+            var missonBlock = map.Blocks.OfType<MapMissionBlock>().FirstOrDefault();
+
+            int exitId;
 
             switch (actionValue)
             {
-                case ENTRY_1:
-                    entryId = 0;
+                case EXIT_1:
+                    exitId = missonBlock.EXC1;
                     break;
-
-                case ENTRY_3:
-                    entryId = 2;
+                case EXIT_2:
+                    exitId = missonBlock.EXC2;
                     break;
-
-                case ENTRY_2:
-                    entryId = 1;
+                case EXIT_3:
+                    exitId = missonBlock.EXC3;
                     break;
                 default:
-                    throw new NotImplementedException("Entry type not implemented");
+                    throw new NotImplementedException("Exit type not implemented");
             }
 
-            worldGateHelper.AddWorldEntry(world, ix, iy, entryId, gfxValue);
+            worldGateHelper.AddWorldExit(world, ix, iy, exitId, mapAssets.AtlasId, gfxValue);
             visited[ix, iy] = true;
         }
 

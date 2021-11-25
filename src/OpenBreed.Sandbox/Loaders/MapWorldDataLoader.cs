@@ -4,6 +4,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
@@ -24,7 +25,7 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Methods
 
-        void Load(MapAssets worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world);
+        void Load(MapAssets worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world);
 
         #endregion Public Methods
     }
@@ -96,6 +97,11 @@ namespace OpenBreed.Sandbox.Loaders
 
         public World Load(string entryId, params object[] args)
         {
+            var world = worldMan.GetByName(entryId);
+
+            if (world != null)
+                return world;
+
             var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
             if (dbMap == null)
                 throw new Exception("Map error: " + entryId);
@@ -122,8 +128,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
 
             worldBuilder.SetupGameWorldSystems(systemFactory);
-            var newWorld = worldBuilder.Build();
-
+            world = worldBuilder.Build();
 
             var mapAssets = new MapAssets(tileMan);
 
@@ -140,7 +145,7 @@ namespace OpenBreed.Sandbox.Loaders
                     var gfxValue = cellValues[gfxLayer];
                     var actionValue = cellValues[actionLayer];
 
-                    LoadCellEntity(mapAssets, layout, visited, ix, iy, gfxValue, actionValue, newWorld);
+                    LoadCellEntity(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
                 }
             }
 
@@ -156,31 +161,31 @@ namespace OpenBreed.Sandbox.Loaders
                     var gfxValue = cellValues[gfxLayer];
                     var actionValue = cellValues[actionLayer];
 
-                    PutUnknownCodeCell(mapAssets, layout, visited, ix, iy, gfxValue, actionValue, newWorld);
+                    PutUnknownCodeCell(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
                     //LoadUnknownCell(worldBlockBuilder, layout, newWorld, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
                 }
             }
 
-            return newWorld;
+            return world;
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void LoadCellEntity(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private void LoadCellEntity(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             if (visited[ix, iy])
                 return;
 
             if (entityLoaders.TryGetValue(actionValue, out IMapWorldEntityLoader entityLoader))
-                entityLoader.Load(mapAssets, layout, visited, ix, iy, gfxValue, actionValue, world);
+                entityLoader.Load(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
         }
 
-        private void PutUnknownCodeCell(MapAssets worldBlockBuilder, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private void PutUnknownCodeCell(MapAssets worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             if (entityLoaders.TryGetValue(UnknownCellEntityLoader.UNKNOWN_CODE, out IMapWorldEntityLoader entityLoader))
-                entityLoader.Load(worldBlockBuilder, layout, visited, ix, iy, gfxValue, actionValue, world);
+                entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, gfxValue, actionValue, world);
         }
 
         private void LoadReferencedTileSet(IDbMap entry)

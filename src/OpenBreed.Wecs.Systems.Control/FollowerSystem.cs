@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Control
@@ -47,56 +48,44 @@ namespace OpenBreed.Wecs.Systems.Control
         protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
-
-            var fc = entity.Get<FollowerComponent>();
-
-            for (int i = 0; i < fc.FollowerIds.Count; i++)
-            {
-                var follower = entityMan.GetById(fc.FollowerIds[i]);
-
-                if (follower == null)
-                    continue;
-
-                follower.EnterWorld(WorldId);
-                //commandsMan.Post(new AddEntityCommand(WorldId, follower.Id));
-            }
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
             entities.Remove(entity);
-
-            var fc = entity.Get<FollowerComponent>();
-
-            for (int i = 0; i < fc.FollowerIds.Count; i++)
-            {
-                var follower = entityMan.GetById(fc.FollowerIds[i]);
-
-                if (follower == null)
-                    continue;
-
-                follower.LeaveWorld();
-                //commandsMan.Post(new RemoveEntityCommand(WorldId, follower.Id));
-            }
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private void Update(Entity entity, float dt)
+        private void Update(Entity followed, float dt)
         {
-            var fc = entity.Get<FollowerComponent>();
+            var fc = followed.Get<FollowerComponent>();
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
-                var followerEntity = entityMan.GetById(fc.FollowerIds[i]);
+                var follower = entityMan.GetById(fc.FollowerIds[i]);
 
-                if (followerEntity == null)
+                if (follower == null)
                     continue;
 
-                //Glue(entity, followerEntity);
-                Follow(entity, followerEntity);
+                //If follower is not in the same world as folloed then
+                //Make sure it will arrive there
+                if (follower.WorldId != followed.WorldId)
+                {
+                    //If follower is in limbo then enter same world as followed
+                    //Otherwise follower needs to leave its current world
+                    if(follower.WorldId == World.NO_WORLD)
+                        follower.EnterWorld(followed.WorldId);
+                    else
+                        follower.LeaveWorld();
+
+                    continue;
+                }
+
+                Glue(followed, follower);
+                //Follow(followed, follower);
             }
         }
 

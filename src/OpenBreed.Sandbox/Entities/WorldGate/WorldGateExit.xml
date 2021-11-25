@@ -1,34 +1,23 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
+		<Class>
+			<Name>WorldExit</Name>
+			<Flavor>$(exitId)</Flavor>
+		</Class>
 		<Position X="$(startX)" Y="$(startY)" />
-        <Animation>
-			<States>
-				<State>
-					<Speed>10</Speed>
-					<Loop>true</Loop>
-					<ClipName>Animations/Teleport/Entry</ClipName>
-				</State>
-			</States>
-        </Animation>
 		<Body>
 			<CofFactor>1.0</CofFactor>
 			<CorFactor>1.0</CorFactor>
 			<Fixtures>
 				<Fixture>
-					<ShapeName>Shapes/Box_16_16_8_8</ShapeName>
+					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
 					<Groups>
 						<Group>WorldExitTrigger</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>	
 		</Body>
-		<Sprite>
-			<AtlasName>Atlases/Sprites/World/Exit</AtlasName>
-			<ImageIndex>0</ImageIndex>
-			<Origin X="0" Y="0" />
-			<Order>0</Order>
-		</Sprite>
 		<Text>
 			<Text>WorldExit</Text>
 			<Offset X="0" Y="32" />
@@ -37,5 +26,10 @@
 			<FontSize>9</FontSize>
 			<Order>0</Order>
 		</Text>
+		<TilePutter>
+			<AtlasName>$(tileSet)</AtlasName>
+			<ImageIndex>$(imageIndex)</ImageIndex>
+			<Position X="$(startX)" Y="$(startY)" />
+		</TilePutter>
     </Components>
 </EntityTemplate>

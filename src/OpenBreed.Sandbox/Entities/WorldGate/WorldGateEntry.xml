@@ -1,22 +1,11 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
+		<Class>
+			<Name>WorldEntry</Name>
+			<Flavor>$(entryId)</Flavor>
+		</Class>
 		<Position X="$(startX)" Y="$(startY)" />
-        <Animation>
-			<States>
-				<State>
-					<Speed>10</Speed>
-					<Loop>true</Loop>
-					<ClipName>Animations/Teleport/Entry</ClipName>
-				</State>
-			</States>
-        </Animation>
-		<Sprite>
-			<AtlasName>Atlases/Sprites/World/Entry</AtlasName>
-			<ImageIndex>0</ImageIndex>
-			<Origin X="0" Y="0" />
-			<Order>0</Order>
-		</Sprite>
 		<Text>
 			<Text>WorldEntry</Text>
 			<Offset X="0" Y="32" />
@@ -25,5 +14,10 @@
 			<FontSize>9</FontSize>
 			<Order>0</Order>
 		</Text>
+		<TilePutter>
+			<AtlasName>$(tileSet)</AtlasName>
+			<ImageIndex>$(imageIndex)</ImageIndex>
+			<Position X="$(startX)" Y="$(startY)" />
+		</TilePutter>
     </Components>
 </EntityTemplate>
