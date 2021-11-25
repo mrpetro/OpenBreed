@@ -59,9 +59,14 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
             var spriteSet = assetsDataProvider.LoadModel(entry.DataRef) as SpriteSetModel;
 
+            //TODO: Produce one spriteatlas per each sprite set
             foreach (var sprite in spriteSet.Sprites)
             {
                 var spriteAtlasKey = $"{entryId}#{sprite.Index}";
+
+                if (spriteMan.GetByName(spriteAtlasKey) != null)
+                    continue;
+
                 var bitmap = ToBitmap(sprite.Width, sprite.Height, sprite.Data);
 
                 if (paletteModel != null)

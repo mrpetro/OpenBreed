@@ -38,6 +38,7 @@ namespace OpenBreed.Sandbox.Entities
             var path = $@"{PREFIX}\Unknown.xml";
 
             var pickable = entityFactory.Create(path)
+                .SetParameter("tileSet", "Vanilla/L4")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
@@ -53,6 +54,7 @@ namespace OpenBreed.Sandbox.Entities
             var path = $@"{PREFIX}\Void.xml";
 
             var pickable = entityFactory.Create(path)
+                .SetParameter("tileSet", "Vanilla/L4")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
@@ -66,6 +68,7 @@ namespace OpenBreed.Sandbox.Entities
             var path = $@"{PREFIX}\FullObstacle.xml";
 
             var pickable = entityFactory.Create(path)
+                .SetParameter("tileSet", "Vanilla/L4")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
@@ -79,6 +82,7 @@ namespace OpenBreed.Sandbox.Entities
             var path = $@"{PREFIX}\ActorOnlyObstacle.xml";
 
             var pickable = entityFactory.Create(path)
+                .SetParameter("tileSet", "Vanilla/L4")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)

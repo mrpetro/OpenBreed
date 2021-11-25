@@ -156,7 +156,8 @@ namespace OpenBreed.Sandbox
                                                                                   manCollection.GetManager<IEventsMan>(),
                                                                                   manCollection.GetManager<ICollisionMan>(),
                                                                                   manCollection.GetManager<IJobsMan>(),
-                                                                                  manCollection.GetManager<ViewportCreator>()));
+                                                                                  manCollection.GetManager<ViewportCreator>(),
+                                                                                  manCollection.GetManager<IDataLoaderFactory>()));
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
                                                                         manCollection.GetManager<IEntityFactory>()));
 
@@ -493,8 +494,7 @@ namespace OpenBreed.Sandbox
 
             var entityMan = GetManager<IEntityMan>();
 
-            var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 1");
-            //var gameWorld = mapWorldLoader.Load("CIVILIAN ZONE 2");
+            var gameWorld = mapWorldLoader.Load("Vanilla/2");
 
             doorHelper.LoadStamps();
             pickableHelper.LoadStamps();

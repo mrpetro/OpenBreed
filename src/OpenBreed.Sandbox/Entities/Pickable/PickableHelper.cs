@@ -38,12 +38,12 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         private void LoadStamps(IDataLoader<ITileStamp> tileStampLoader, string name)
         {
-            tileStampLoader.Load($"L4/{name}/F1/Lying");
-            tileStampLoader.Load($"L4/{name}/F1/Picked");
-            tileStampLoader.Load($"L4/{name}/F2/Lying");
-            tileStampLoader.Load($"L4/{name}/F2/Picked");
-            tileStampLoader.Load($"L4/{name}/F3/Lying");
-            tileStampLoader.Load($"L4/{name}/F3/Picked");
+            tileStampLoader.Load($"Vanilla/L4/{name}/F1/Lying");
+            tileStampLoader.Load($"Vanilla/L4/{name}/F1/Picked");
+            tileStampLoader.Load($"Vanilla/L4/{name}/F2/Lying");
+            tileStampLoader.Load($"Vanilla/L4/{name}/F2/Picked");
+            tileStampLoader.Load($"Vanilla/L4/{name}/F3/Lying");
+            tileStampLoader.Load($"Vanilla/L4/{name}/F3/Picked");
         }
 
         public void LoadStamps()
@@ -63,28 +63,28 @@ namespace OpenBreed.Sandbox.Entities.Pickable
             LoadStamps(tileStampLoader, "PowerUpA");
             LoadStamps(tileStampLoader, "PowerUpF");
 
-            tileStampLoader.Load("L4/KeycardRed/Lying");
-            tileStampLoader.Load("L4/KeycardRed/Picked");
-            tileStampLoader.Load("L4/KeycardGreen/Lying");
-            tileStampLoader.Load("L4/KeycardGreen/Picked");
-            tileStampLoader.Load("L4/KeycardBlue/Lying");
-            tileStampLoader.Load("L4/KeycardBlue/Picked");
-            tileStampLoader.Load("L4/KeycardSpecial/Lying");
-            tileStampLoader.Load("L4/KeycardSpecial/Picked");
+            tileStampLoader.Load("Vanilla/L4/KeycardRed/Lying");
+            tileStampLoader.Load("Vanilla/L4/KeycardRed/Picked");
+            tileStampLoader.Load("Vanilla/L4/KeycardGreen/Lying");
+            tileStampLoader.Load("Vanilla/L4/KeycardGreen/Picked");
+            tileStampLoader.Load("Vanilla/L4/KeycardBlue/Lying");
+            tileStampLoader.Load("Vanilla/L4/KeycardBlue/Picked");
+            tileStampLoader.Load("Vanilla/L4/KeycardSpecial/Lying");
+            tileStampLoader.Load("Vanilla/L4/KeycardSpecial/Picked");
 
 
             var soundLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
 
-            soundLoader.Load("Common/Ammo/Picked");
-            soundLoader.Load("Common/CreditsSmall/Picked");
-            soundLoader.Load("Common/CreditsBig/Picked");
-            soundLoader.Load("Common/MedkitSmall/Picked");
-            soundLoader.Load("Common/MedkitBig/Picked");
-            soundLoader.Load("Common/KeycardStandard/Picked");
-            soundLoader.Load("Common/KeycardRed/Picked");
-            soundLoader.Load("Common/KeycardGreen/Picked");
-            soundLoader.Load("Common/KeycardBlue/Picked");
-            soundLoader.Load("Common/ExtraLife/Picked"); 
+            soundLoader.Load("Vanilla/Common/Ammo/Picked");
+            soundLoader.Load("Vanilla/Common/CreditsSmall/Picked");
+            soundLoader.Load("Vanilla/Common/CreditsBig/Picked");
+            soundLoader.Load("Vanilla/Common/MedkitSmall/Picked");
+            soundLoader.Load("Vanilla/Common/MedkitBig/Picked");
+            soundLoader.Load("Vanilla/Common/KeycardStandard/Picked");
+            soundLoader.Load("Vanilla/Common/KeycardRed/Picked");
+            soundLoader.Load("Vanilla/Common/KeycardGreen/Picked");
+            soundLoader.Load("Vanilla/Common/KeycardBlue/Picked");
+            soundLoader.Load("Vanilla/Common/ExtraLife/Picked"); 
         }
 
         public void AddItem(World world, int x, int y, string name, int gfxValue, string flavor = null)
@@ -92,6 +92,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
             var path = $@"{PICKABLE_PREFIX}\{name}.xml";
 
             var pickable = entityFactory.Create(path)
+                .SetParameter("tileSet", "Vanilla/L4")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)

@@ -33,9 +33,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        private void PutPassUpDown(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private void PutPassUpDown(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
-            var rightValue = MapWorldDataLoader.GetActionCellValue(layout, ix + 1, iy);
+            var rightValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
 
             if (actionValue == rightValue)
             {
@@ -53,9 +53,9 @@ namespace OpenBreed.Sandbox.Loaders
             }
         }
 
-        private void PutPassRightLeft(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private void PutPassRightLeft(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
-            var downValue = MapWorldDataLoader.GetActionCellValue(layout, ix, iy + 1);
+            var downValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
 
             if (downValue == actionValue)
             {
@@ -73,17 +73,17 @@ namespace OpenBreed.Sandbox.Loaders
             }
         }
 
-        public void Load(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             switch (actionValue)
             {
                 case PASS_UP:
                 case PASS_DOWN:
-                    PutPassUpDown(mapAssets, layout, visited, ix, iy, gfxValue, actionValue, world);
+                    PutPassUpDown(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
                     break;
                 case PASS_RIGHT:
                 case PASS_LEFT:
-                    PutPassRightLeft(mapAssets, layout, visited, ix, iy, gfxValue, actionValue, world);
+                    PutPassRightLeft(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
                     break;
                 default:
                     break;

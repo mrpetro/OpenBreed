@@ -10,9 +10,9 @@ namespace OpenBreed.Sandbox.Entities.Camera
     {
         #region Public Fields
 
-        public const string CAMERA_FADE_OUT = "Animations/Camera/Effects/FadeOut";
+        public const string CAMERA_FADE_OUT = "Vanilla/Common/Camera/Effects/FadeOut";
 
-        public const string CAMERA_FADE_IN = "Animations/Camera/Effects/FadeIn";
+        public const string CAMERA_FADE_IN = "Vanilla/Common/Camera/Effects/FadeIn";
 
         #endregion Public Fields
 
@@ -45,8 +45,8 @@ namespace OpenBreed.Sandbox.Entities.Camera
 
             var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
-            var cameraFadeOut = animationLoader.Load("Animations/Camera/Effects/FadeOut");
-            var cameraFadeIn = animationLoader.Load("Animations/Camera/Effects/FadeIn");
+            var cameraFadeOut = animationLoader.Load("Vanilla/Common/Camera/Effects/FadeOut");
+            var cameraFadeIn = animationLoader.Load("Vanilla/Common/Camera/Effects/FadeIn");
         }
 
         #endregion Public Methods

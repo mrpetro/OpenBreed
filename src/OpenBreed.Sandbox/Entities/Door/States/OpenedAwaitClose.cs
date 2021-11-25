@@ -22,7 +22,7 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private const string STAMP_PREFIX = "L4";
+        private const string STAMP_PREFIX = "Vanilla/L4";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
 
@@ -49,22 +49,16 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
-            entity.SetSpriteOff();
-            entity.SetBodyOff();
-
             var pos = entity.Get<PositionComponent>();
-
-            //entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
-
             var metadata = entity.Get<ClassComponent>();
             var className = metadata.Name;
             var flavor = metadata.Flavor;
-
             var stateName = fsmMan.GetStateName(FsmId, Id);
             var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
 
+            entity.SetSpriteOff();
+            entity.SetBodyOff();
             entity.PutStamp(stampId, 0, pos.Value);
-
             //entity.SetText(0, "Door - Opened");
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);

@@ -36,8 +36,8 @@ namespace OpenBreed.Sandbox.Entities
         {
             var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
-            animationLoader.Load("Animations/Environment/Level4/TVFlickering");
-            animationLoader.Load("Animations/Environment/Level4/MonsterEating");
+            animationLoader.Load("Vanilla/L4/Environment/TVFlickering");
+            animationLoader.Load("Vanilla/L4/Environment/MonsterEating");
         }
 
         public void AddTVFlickering(World world, int x, int y, int atlasId, int gfxValue)

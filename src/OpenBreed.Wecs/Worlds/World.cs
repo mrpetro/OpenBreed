@@ -73,7 +73,7 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        public ReadOnlyCollection<Entity> Entities { get; }
+        public IEnumerable<Entity> Entities => entities;
 
         /// <summary>
         /// Id of this world

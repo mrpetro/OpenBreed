@@ -21,8 +21,8 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private const string STAMP_PREFIX = "L4";
-        private readonly string animPrefix;
+        private const string ANIM_PREFIX = "Vanilla/L4";
+        private const string STAMP_PREFIX = "Vanilla/L4";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         private readonly IClipMan clipMan;
@@ -33,7 +33,6 @@ namespace OpenBreed.Sandbox.Components.States
 
         public ClosingState(IFsmMan fsmMan, IStampMan stampMan, IClipMan clipMan)
         {
-            this.animPrefix = "Animations";
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;
             this.clipMan = clipMan;
@@ -52,18 +51,16 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
-            entity.SetSpriteOn();
-            entity.SetBodyOn();
             var pos = entity.Get<PositionComponent>();
-
             var metadata = entity.Get<ClassComponent>();
             var className = metadata.Name;
             var flavor = metadata.Flavor;
-
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var clipId = clipMan.GetByName($"{animPrefix}/{className}/{stateName}/{flavor}").Id;
+            var clipId = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{stateName}/{flavor}").Id;
             var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/Closed").Id;
 
+            entity.SetSpriteOn();
+            entity.SetBodyOn();
             entity.PlayAnimation(0, clipId);
             //entity.SetText(0, "Door - Closing");
             entity.PutStamp(stampId, 0, pos.Value);

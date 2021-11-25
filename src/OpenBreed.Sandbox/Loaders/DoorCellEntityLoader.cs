@@ -33,9 +33,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapAssets mapAssets, MapLayoutModel layout, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
-            var rightValue = MapWorldDataLoader.GetActionCellValue(layout, ix + 1, iy);
+            var rightValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
 
             if (rightValue == DOOR_STANDARD)
             {
@@ -45,7 +45,7 @@ namespace OpenBreed.Sandbox.Loaders
                 return;
             }
 
-            var downValue = MapWorldDataLoader.GetActionCellValue(layout, ix, iy + 1);
+            var downValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
 
             if (downValue == DOOR_STANDARD)
             {

@@ -63,23 +63,23 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
-            animationLoader.Load("Animations/Actor/Standing/Up");
-            animationLoader.Load("Animations/Actor/Standing/UpRight");
-            animationLoader.Load("Animations/Actor/Standing/Right");
-            animationLoader.Load("Animations/Actor/Standing/RightDown");
-            animationLoader.Load("Animations/Actor/Standing/Down");
-            animationLoader.Load("Animations/Actor/Standing/DownLeft");
-            animationLoader.Load("Animations/Actor/Standing/Left");
-            animationLoader.Load("Animations/Actor/Standing/LeftUp");
+            animationLoader.Load("Vanilla/Common/Actor/Standing/Up");
+            animationLoader.Load("Vanilla/Common/Actor/Standing/UpRight");
+            animationLoader.Load("Vanilla/Common/Actor/Standing/Right");
+            animationLoader.Load("Vanilla/Common/Actor/Standing/RightDown");
+            animationLoader.Load("Vanilla/Common/Actor/Standing/Down");
+            animationLoader.Load("Vanilla/Common/Actor/Standing/DownLeft");
+            animationLoader.Load("Vanilla/Common/Actor/Standing/Left");
+            animationLoader.Load("Vanilla/Common/Actor/Standing/LeftUp");
 
-            animationLoader.Load("Animations/Actor/Walking/Up");
-            animationLoader.Load("Animations/Actor/Walking/UpRight");
-            animationLoader.Load("Animations/Actor/Walking/Right");
-            animationLoader.Load("Animations/Actor/Walking/RightDown");
-            animationLoader.Load("Animations/Actor/Walking/Down");
-            animationLoader.Load("Animations/Actor/Walking/DownLeft");
-            animationLoader.Load("Animations/Actor/Walking/Left");
-            animationLoader.Load("Animations/Actor/Walking/LeftUp");
+            animationLoader.Load("Vanilla/Common/Actor/Walking/Up");
+            animationLoader.Load("Vanilla/Common/Actor/Walking/UpRight");
+            animationLoader.Load("Vanilla/Common/Actor/Walking/Right");
+            animationLoader.Load("Vanilla/Common/Actor/Walking/RightDown");
+            animationLoader.Load("Vanilla/Common/Actor/Walking/Down");
+            animationLoader.Load("Vanilla/Common/Actor/Walking/DownLeft");
+            animationLoader.Load("Vanilla/Common/Actor/Walking/Left");
+            animationLoader.Load("Vanilla/Common/Actor/Walking/LeftUp");
         }
 
         public Entity CreatePlayerActor(Vector2 pos)

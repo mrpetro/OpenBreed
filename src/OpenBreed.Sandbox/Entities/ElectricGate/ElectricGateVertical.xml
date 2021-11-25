@@ -17,7 +17,7 @@
 				<State>
 					<Speed>20</Speed>
 					<Loop>true</Loop>
-					<ClipName>Animations/ElectricGate/Working/Vertical</ClipName>
+					<ClipName>Vanilla/L4/ElectricGate/Working/Vertical</ClipName>
 				</State>
 			</States>
 		</Animation>

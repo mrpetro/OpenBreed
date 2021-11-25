@@ -22,7 +22,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
     {
         #region Private Fields
 
-        private readonly string animPrefix;
+        private const string ANIM_PREFIX = "Vanilla/Common";
         private readonly IFsmMan fsmMan;
         private readonly IClipMan clipMan;
 
@@ -32,7 +32,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public WalkingState(IFsmMan fsmMan, IClipMan clipMan)
         {
-            this.animPrefix = "Animations";
             this.fsmMan = fsmMan;
             this.clipMan = clipMan;
         }
@@ -58,7 +57,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
             var stateName = fsmMan.GetStateName(FsmId, Id);
             var className = entity.Get<ClassComponent>().Name;
-            var clip = clipMan.GetByName($"{animPrefix}/{className}/{stateName}/{animDirPostfix}");
+            var clip = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{stateName}/{animDirPostfix}");
             var currentStateNames = fsmMan.GetStateNames(entity);
 
             entity.PlayAnimation(0, clip.Id);
@@ -91,7 +90,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var movementFsm = fsmMan.GetByName("Actor.Movement");
             var movementStateName = movementFsm.GetCurrentStateName(entity);
 
-            var clip = clipMan.GetByName($"{"Animations"}/{className}/{movementStateName}/{animDirName}");
+            var clip = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{movementStateName}/{animDirName}");
 
             entity.PlayAnimation(0, clip.Id);
         }
