@@ -9,8 +9,12 @@ Open source reimplementation of classic Alien Breed 2D games:
 
 ## Project wiki
 [Over here](https://github.com/mrpetro/OpenBreed/wiki) - Not updating it that much... Sorry...
+
 Highlights:
-* [Roadmap] (https://github.com/mrpetro/OpenBreed/wiki/Road-map) 
+* [Tech demos](https://github.com/mrpetro/OpenBreed/wiki/Tech-demos)
+* [Engine architecture](https://github.com/mrpetro/OpenBreed/wiki/Engine-architecture)
+* [Asset Analysis](https://github.com/mrpetro/OpenBreed/wiki/Assets-analysis)
+* [Road Map](https://github.com/mrpetro/OpenBreed/wiki/Road-map)
 
 ## Obtaining game resources
  
