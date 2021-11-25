@@ -2028,7 +2028,7 @@
 		</TileStamps>
 		<Maps>
 			<Items>
-				<Map Id="CRASH LANDING SITE">
+				<Map Id="Vanilla/1" Description="CRASH LANDING SITE">
 					<DataRef>Assets.MAP.01</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
@@ -2041,7 +2041,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
-				<Map Id="CIVILIAN ZONE 1">
+				<Map Id="Vanilla/2" Description="CIVILIAN ZONE 1">
 					<DataRef>Assets.MAP.02</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
@@ -2056,7 +2056,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
-				<Map Id="CIVILIAN ZONE 2">
+				<Map Id="Vanilla/3" Description="CIVILIAN ZONE 2">
 					<DataRef>Assets.MAP.03</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.03.CMAP</PaletteRef>
@@ -2071,7 +2071,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
-				<Map Id="CIVILIAN ZONE 3">
+				<Map Id="Vanilla/4" Description="CIVILIAN ZONE 3">
 					<DataRef>Assets.MAP.04</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.04.CMAP</PaletteRef>
@@ -2086,7 +2086,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
-				<Map Id="CIVILIAN ZONE 4">
+				<Map Id="Vanilla/5" Description="CIVILIAN ZONE 4">
 					<DataRef>Assets.MAP.05</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.05.CMAP</PaletteRef>
@@ -2101,7 +2101,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
-				<Map Id="OUTDOOR SECTOR 2">
+				<Map Id="Vanilla/6" Description="OUTDOOR SECTOR 2">
 					<DataRef>Assets.MAP.06</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.06.CMAP</PaletteRef>
@@ -2114,7 +2114,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
-				<Map Id="STORES LEVEL 1">
+				<Map Id="Vanilla/7" Description="STORES LEVEL 1">
 					<DataRef>Assets.MAP.07</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
@@ -2138,7 +2138,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
-				<Map Id="STORES LEVEL 2">
+				<Map Id="Vanilla/8" Description="STORES LEVEL 2">
 					<DataRef>Assets.MAP.08</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.08.CMAP</PaletteRef>
@@ -2151,7 +2151,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
-				<Map Id="STORES SECTOR 3">
+				<Map Id="Vanilla/9" Description="STORES SECTOR 3">
 					<DataRef>Assets.MAP.09</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.09.CMAP</PaletteRef>
@@ -2164,7 +2164,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
-				<Map Id="STORES SECTOR 4">
+				<Map Id="Vanilla/10" Description="STORES SECTOR 4">
 					<DataRef>Assets.MAP.10</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.10.CMAP</PaletteRef>
@@ -2177,7 +2177,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
-				<Map Id="OUTDOOR SECTOR 3">
+				<Map Id="Vanilla/11" Description="OUTDOOR SECTOR 3">
 					<DataRef>Assets.MAP.11</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.11.CMAP</PaletteRef>
@@ -2190,7 +2190,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
-				<Map Id="MILITARY SECTOR 1">
+				<Map Id="Vanilla/12" Description="MILITARY SECTOR 1">
 					<DataRef>Assets.MAP.12</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
@@ -2214,7 +2214,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
-				<Map Id="MILITARY SECTOR 2">
+				<Map Id="Vanilla/13" Description="MILITARY SECTOR 2">
 					<DataRef>Assets.MAP.13</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.13.CMAP</PaletteRef>
@@ -2227,7 +2227,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
-				<Map Id="MILITARY SECTOR 3">
+				<Map Id="Vanilla/14" Description="MILITARY SECTOR 3">
 					<DataRef>Assets.MAP.14</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.14.CMAP</PaletteRef>
@@ -2240,7 +2240,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
-				<Map Id="MILITARY SECTOR 4">
+				<Map Id="Vanilla/15" Description="MILITARY SECTOR 4">
 					<DataRef>Assets.MAP.15</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.15.CMAP</PaletteRef>
@@ -2253,7 +2253,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
-				<Map Id="SECURITY ZONE 1">
+				<Map Id="Vanilla/16" Description="SECURITY ZONE 1">
 					<DataRef>Assets.MAP.16</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
@@ -2278,7 +2278,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
-				<Map Id="SECURITY ZONE 2">
+				<Map Id="Vanilla/17" Description="SECURITY ZONE 2">
 					<DataRef>Assets.MAP.17</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.17.CMAP</PaletteRef>
@@ -2291,7 +2291,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
-				<Map Id="SECURITY ZONE 3">
+				<Map Id="Vanilla/18" Description="SECURITY ZONE 3">
 					<DataRef>Assets.MAP.18</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.18.CMAP</PaletteRef>
@@ -2304,7 +2304,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
-				<Map Id="SECURITY ZONE 4">
+				<Map Id="Vanilla/19" Description="SECURITY ZONE 4">
 					<DataRef>Assets.MAP.19</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.19.CMAP</PaletteRef>
@@ -2317,7 +2317,7 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
-				<Map Id="COLONY GROUND SECTOR 3">
+				<Map Id="Vanilla/20" Description="COLONY GROUND SECTOR 3">
 					<DataRef>Assets.MAP.20</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.20.CMAP</PaletteRef>
@@ -2330,12 +2330,13 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
-				<Map Id="SCIENCE SECTOR 1">
+				<Map Id="Vanilla/21" Description="SCIENCE SECTOR 1">
 					<DataRef>Assets.MAP.21</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
@@ -2353,43 +2354,46 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
-				<Map Id="SCIENCE SECTOR 2">
+				<Map Id="Vanilla/22" Description="SCIENCE SECTOR 2">
 					<DataRef>Assets.MAP.22</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.22.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.22.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
-				<Map Id="SCIENCE SECTOR 3">
+				<Map Id="Vanilla/23" Description="SCIENCE SECTOR 3">
 					<DataRef>Assets.MAP.23</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.23.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.23.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
-				<Map Id="SCIENCE SECTOR 4">
+				<Map Id="Vanilla/24" Description="SCIENCE SECTOR 4">
 					<DataRef>Assets.MAP.24</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.24.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.24.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
-				<Map Id="COLONY GROUND SECTOR 4">
+				<Map Id="Vanilla/25" Description="COLONY GROUND SECTOR 4">
 					<DataRef>Assets.MAP.25</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.25.CMAP</PaletteRef>
@@ -2402,12 +2406,13 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
-				<Map Id="ENGINEERING SECTOR 1">
+				<Map Id="Vanilla/26" Description="ENGINEERING SECTOR 1">
 					<DataRef>Assets.MAP.26</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2425,249 +2430,270 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="ENGINEERING SECTOR 2">
+				<Map Id="Vanilla/27" Description="ENGINEERING SECTOR 2">
 					<DataRef>Assets.MAP.27</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.27.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.27.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="ENGINEERING SECTOR 3">
+				<Map Id="Vanilla/28" Description="ENGINEERING SECTOR 3">
 					<DataRef>Assets.MAP.28</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.28.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.28.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="ENGINEERING SECTOR 4">
+				<Map Id="Vanilla/29" Description="ENGINEERING SECTOR 4">
 					<DataRef>Assets.MAP.29</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.29.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.29.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 1">
+				<Map Id="Vanilla/30" Description="CORRIDOR ZONE 1">
 					<DataRef>Assets.MAP.30</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.30.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.30.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR 2">
+				<Map Id="Vanilla/31" Description="CORRIDOR 2">
 					<DataRef>Assets.MAP.31</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.31.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.31.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR 3">
+				<Map Id="Vanilla/32" Description="CORRIDOR 3">
 					<DataRef>Assets.MAP.32</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.32.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.32.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR 4">
+				<Map Id="Vanilla/33" Description="CORRIDOR 4">
 					<DataRef>Assets.MAP.33</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.33.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.33.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR 5">
+				<Map Id="Vanilla/34" Description="CORRIDOR 5">
 					<DataRef>Assets.MAP.34</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.34.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.34.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 6">
+				<Map Id="Vanilla/35" Description="CORRIDOR ZONE 6">
 					<DataRef>Assets.MAP.35</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.35.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.35.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 7">
+				<Map Id="Vanilla/36" Description="CORRIDOR ZONE 7">
 					<DataRef>Assets.MAP.36</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.36.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.36.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 8">
+				<Map Id="Vanilla/37" Description="CORRIDOR ZONE 8">
 					<DataRef>Assets.MAP.37</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.37.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.37.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 9">
+				<Map Id="Vanilla/38" Description="CORRIDOR ZONE 9">
 					<DataRef>Assets.MAP.38</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.38.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.38.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 10">
+				<Map Id="Vanilla/39" Description="CORRIDOR ZONE 10">
 					<DataRef>Assets.MAP.39</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.39.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.39.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 11">
+				<Map Id="Vanilla/40" Description="CORRIDOR ZONE 11">
 					<DataRef>Assets.MAP.40</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.40.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.40.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 12">
+				<Map Id="Vanilla/41" Description="CORRIDOR ZONE 12">
 					<DataRef>Assets.MAP.41</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.41.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.41.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 13">
+				<Map Id="Vanilla/42" Description="CORRIDOR ZONE 13">
 					<DataRef>Assets.MAP.42</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.42.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.42.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR ZONE 14">
+				<Map Id="Vanilla/43" Description="CORRIDOR ZONE 14">
 					<DataRef>Assets.MAP.43</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.43.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.43.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR 15">
+				<Map Id="Vanilla/44" Description="CORRIDOR 15">
 					<DataRef>Assets.MAP.44</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.44.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.44.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR 16">
+				<Map Id="Vanilla/45" Description="CORRIDOR 16">
 					<DataRef>Assets.MAP.45</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.45.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.45.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs />
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="CORRIDOR 17">
+				<Map Id="Vanilla/46" Description="CORRIDOR 17">
 					<DataRef>Assets.MAP.46</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.46.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.46.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
-				<Map Id="MAIN TOWER LEVEL 1">
+				<Map Id="Vanilla/47" Description="MAIN TOWER LEVEL 1">
 					<DataRef>Assets.MAP.47</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
@@ -2687,91 +2713,98 @@
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
-				<Map Id="MAIN TOWER LEVEL 2">
+				<Map Id="Vanilla/48" Description="MAIN TOWER LEVEL 2">
 					<DataRef>Assets.MAP.48</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.48.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.48.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
-				<Map Id="MAIN TOWER LEVEL 3">
+				<Map Id="Vanilla/49" Description="MAIN TOWER LEVEL 3">
 					<DataRef>Assets.MAP.49</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.49.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.49.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
-				<Map Id="MAIN TOWER LEVEL 4">
+				<Map Id="Vanilla/50" Description="MAIN TOWER LEVEL 4">
 					<DataRef>Assets.MAP.50</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.50.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.50.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
-				<Map Id="MAIN TOWER LEVEL 5">
+				<Map Id="Vanilla/51" Description="MAIN TOWER LEVEL 5">
 					<DataRef>Assets.MAP.51</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.51.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.51.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
-				<Map Id="TOWER LEVEL 6">
+				<Map Id="Vanilla/52" Description="TOWER LEVEL 6">
 					<DataRef>Assets.MAP.52</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.52.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.52.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
-				<Map Id="TOWER LEVEL 7">
+				<Map Id="Vanilla/53" Description="TOWER LEVEL 7">
 					<DataRef>Assets.MAP.53</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.53.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.53.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
-				<Map Id="Mission One(\?\?\?)">
+				<Map Id="Vanilla/54" Description="Mission One(\?\?\?)">
 					<DataRef>Assets.MAP.54</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.54.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.54.ALCM</PaletteRef>
 					</PaletteRefs>
+					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
 						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
-				<Map Id="OUTER COLONY SECTOR 5">
+				<Map Id="Vanilla/55" Description="OUTER COLONY SECTOR 5">
 					<DataRef>Assets.MAP.55</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.55.CMAP</PaletteRef>
