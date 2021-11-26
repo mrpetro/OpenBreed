@@ -145,13 +145,13 @@
     <Compile Include="Entities\Pickable\States\PickedState.cs" />
     <Compile Include="Entities\Projectile\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Projectile\States\AttackingState.cs" />
-    <Compile Include="Entities\Teleport\TeleportHelper.cs" />
+    <Compile Include="Entities\TeleportHelper.cs" />
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
     <Compile Include="Entities\Text\TextHelper.cs" />
     <Compile Include="Entities\Turret\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Turret\TurretHelper.cs" />
-    <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
+    <Compile Include="Entities\EntriesHelper.cs" />
     <Compile Include="Extensions\SystemCollectionExtensions.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
     <Compile Include="Entities\Viewport\ViewportCreator.cs" />
@@ -281,10 +281,10 @@
     <Content Include="Entities\Projectile\Projectile.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\Teleport\TeleportExit.xml">
+    <Content Include="Entities\Common\TeleportExit.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\Teleport\TeleportEntry.xml">
+    <Content Include="Entities\Common\TeleportEntry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Turret\Turret.xml">
@@ -299,10 +299,10 @@
     <Content Include="Entities\Viewport\GameViewport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\WorldGate\WorldGateExit.xml">
+    <Content Include="Entities\Common\MapExit.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\WorldGate\WorldGateEntry.xml">
+    <Content Include="Entities\Common\MapEntry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Button\Button.lua">

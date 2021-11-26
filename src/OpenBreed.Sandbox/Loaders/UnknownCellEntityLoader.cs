@@ -32,7 +32,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
-            genericCellHelper.AddUnknownCell(world, ix, iy, actionValue, gfxValue);
+            genericCellHelper.AddUnknownCell(world, ix, iy, actionValue, mapAssets.TileAtlasName, gfxValue);
 
             visited[ix, iy] = true;
         }

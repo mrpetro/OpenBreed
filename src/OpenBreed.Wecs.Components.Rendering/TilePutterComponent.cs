@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
+using System;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
@@ -132,6 +133,11 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetAtlasByName(string value)
         {
+            var tileAtlas = tileMan.GetByName(value);
+
+            if (tileAtlas is null)
+                throw new InvalidOperationException($"Tile atlas with name '{value}' is not loaded.");
+
             AtlasId = tileMan.GetByName(value).Id;
         }
 

@@ -45,13 +45,6 @@ namespace OpenBreed.Sandbox.Entities.ElectricGate
             this.entityFactory = entityFactory;
         }
 
-        public void LoadAnimations()
-        {
-            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
-            animationLoader.Load("Vanilla/L4/ElectricGate/Working/Vertical");
-            animationLoader.Load("Vanilla/L4/ElectricGate/Working/Horizontal");
-        }
-
         public void AddVertical(World world, int x, int y)
         {
             var door = entityFactory.Create(@"Entities\ElectricGate\ElectricGateVertical.xml")

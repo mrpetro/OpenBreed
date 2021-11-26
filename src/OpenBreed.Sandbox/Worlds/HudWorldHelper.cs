@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -23,12 +24,13 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IEntityMan entityMan;
         private readonly IEntityFactory entityFactory;
         private readonly HudHelper hudHelper;
+        private readonly CameraHelper cameraHelper;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public HudWorldHelper(ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, IEntityFactory entityFactory, HudHelper hudHelper)
+        public HudWorldHelper(ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, IEntityFactory entityFactory, HudHelper hudHelper, CameraHelper cameraHelper)
         {
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
@@ -36,6 +38,7 @@ namespace OpenBreed.Sandbox.Worlds
             this.entityMan = entityMan;
             this.entityFactory = entityFactory;
             this.hudHelper = hudHelper;
+            this.cameraHelper = cameraHelper;
         }
 
         #endregion Public Constructors
@@ -81,12 +84,10 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(World world)
         {
-            var hudCamera = entityFactory.Create(@"Entities\Common\Camera.xml")
-                .SetParameter("posX", 0.0)
-                .SetParameter("posY", 0.0)
-                .SetParameter("width", viewClient.ClientRectangle.Width)
-                .SetParameter("height", viewClient.ClientRectangle.Height)
-                .Build();
+            var hudCamera = cameraHelper.CreateCamera(0.0f,
+                                                      0.0f,
+                                                      viewClient.ClientRectangle.Width,
+                                                      viewClient.ClientRectangle.Height);
 
             hudCamera.Tag = "HudCamera";
 

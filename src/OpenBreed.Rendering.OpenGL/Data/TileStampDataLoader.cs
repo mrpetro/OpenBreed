@@ -52,6 +52,11 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
         public ITileStamp Load(string tileStampName, params object[] args)
         {
+            var tileStamp = stampMan.GetByName(tileStampName);
+
+            if (tileStamp != null)
+                return tileStamp;
+
             var entry = repositoryProvider.GetRepository<IDbTileStamp>().GetById(tileStampName);
             if (entry == null)
                 throw new Exception("Tilestamp error: " + tileStampName);
@@ -69,7 +74,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
                 stampBuilder.AddTile(cell.X, cell.Y, ts.Id, cell.TsTi);
             }
 
-            var tileStamp = stampBuilder.Build();
+            tileStamp = stampBuilder.Build();
 
             logger.Verbose($"Tile stamp '{tileStampName}' loaded.");
 

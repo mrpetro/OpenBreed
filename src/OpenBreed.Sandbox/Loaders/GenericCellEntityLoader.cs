@@ -38,13 +38,13 @@ namespace OpenBreed.Sandbox.Loaders
             switch (actionValue)
             {
                 case FULL_OBSTACLE_CODE:
-                    genericCellHelper.AddFullObstacleCell(world, ix, iy, mapAssets.AtlasId, gfxValue);
+                    genericCellHelper.AddFullObstacleCell(world, ix, iy, mapAssets.TileAtlasName, gfxValue);
                     break;
                 case ACTOR_ONLY_OBSTACLE_CODE:
-                    genericCellHelper.AddActorOnlyObstacleCell(world, ix, iy, mapAssets.AtlasId, gfxValue);
+                    genericCellHelper.AddActorOnlyObstacleCell(world, ix, iy, mapAssets.TileAtlasName, gfxValue);
                     break;
                 case VOID_CODE:
-                    genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.AtlasId, gfxValue);
+                    genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.TileAtlasName, gfxValue);
                     break;
 
                     //default:

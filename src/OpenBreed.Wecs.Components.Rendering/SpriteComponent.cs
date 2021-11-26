@@ -158,7 +158,12 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetAtlasByName(string atlasName)
         {
-            AtlasId = spriteMan.GetByName(atlasName).Id;
+            var spriteAtlas = spriteMan.GetByName(atlasName);
+
+            if (spriteAtlas is null)
+                throw new InvalidOperationException($"Sprite atlas with name '{atlasName}' is not loaded.");
+
+            AtlasId = spriteAtlas.Id;
         }
 
         #endregion Public Methods

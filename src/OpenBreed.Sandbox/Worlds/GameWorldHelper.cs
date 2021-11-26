@@ -12,7 +12,6 @@ using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Camera;
-using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Wecs.Systems.Physics;
 using OpenTK;

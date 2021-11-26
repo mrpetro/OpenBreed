@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Model.Maps.Blocks;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Linq;
@@ -22,16 +22,16 @@ namespace OpenBreed.Sandbox.Loaders
         #region Private Fields
 
         private readonly ActorHelper actorHelper;
-        private readonly WorldGateHelper worldGateHelper;
+        private readonly EntriesHelper entriesHelper;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal LevelExitCellLoader(ActorHelper actorHelper, WorldGateHelper worldGateHelper)
+        internal LevelExitCellLoader(ActorHelper actorHelper, EntriesHelper entriesHelper)
         {
             this.actorHelper = actorHelper;
-            this.worldGateHelper = worldGateHelper;
+            this.entriesHelper = entriesHelper;
         }
 
         #endregion Internal Constructors
@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Loaders
                     throw new NotImplementedException("Exit type not implemented");
             }
 
-            worldGateHelper.AddWorldExit(world, ix, iy, exitId, mapAssets.AtlasId, gfxValue);
+            entriesHelper.AddMapExit(world, ix, iy, exitId, mapAssets.TileAtlasName, gfxValue);
             visited[ix, iy] = true;
         }
 

@@ -209,10 +209,8 @@ namespace OpenBreed.Audio.OpenAL.Managers
         {
             if (sampleNames.TryGetValue(sampleName, out int result))
                 return result;
-
-            logger.Error($"Unable to find sample ID with name '{sampleName}'");
-
-            return -1;
+            else
+                return -1;
         }
 
         #endregion Private Methods
