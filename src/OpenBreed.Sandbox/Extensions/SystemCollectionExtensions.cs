@@ -19,8 +19,6 @@ using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.ElectricGate;
 using OpenBreed.Sandbox.Entities.Pickable;
-using OpenBreed.Sandbox.Entities.Teleport;
-using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
@@ -127,14 +125,14 @@ namespace OpenBreed.Sandbox.Extensions
                 mapWorldDataLoader.Register(AnimatedCellLoader.MONSTER_EATING_CODE, environmentCellLoader);
 
                 var levelExitCellLoader = new LevelExitCellLoader(managerCollection.GetManager<ActorHelper>(),
-                                                                    managerCollection.GetManager<WorldGateHelper>());
+                                                                    managerCollection.GetManager<EntriesHelper>());
 
                 mapWorldDataLoader.Register(LevelExitCellLoader.EXIT_1, levelExitCellLoader);
                 mapWorldDataLoader.Register(LevelExitCellLoader.EXIT_2, levelExitCellLoader);
                 mapWorldDataLoader.Register(LevelExitCellLoader.EXIT_3, levelExitCellLoader);
 
                 var levelEntryCellLoader = new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
-                                                                         managerCollection.GetManager<WorldGateHelper>());
+                                                                         managerCollection.GetManager<EntriesHelper>());
 
                 mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_3, levelEntryCellLoader);
                 mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_1, levelEntryCellLoader);

@@ -29,10 +29,9 @@ using OpenBreed.Sandbox.Entities.ElectricGate;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
-using OpenBreed.Sandbox.Entities.Teleport;
+
 using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.Viewport;
-using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
@@ -142,14 +141,15 @@ namespace OpenBreed.Sandbox
                                                                                 manCollection.GetManager<IViewClient>(),
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
-                                                                                manCollection.GetManager<HudHelper>()));
+                                                                                manCollection.GetManager<HudHelper>(),
+                                                                                manCollection.GetManager<CameraHelper>()));
             manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(manCollection.GetManager<IPlayersMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
                                                                                   manCollection.GetManager<ISystemFactory>(),
                                                                                   manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<WorldGateHelper>(() => new WorldGateHelper(manCollection.GetManager<IWorldMan>(),
+            manCollection.AddSingleton<EntriesHelper>(() => new EntriesHelper(manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
                                                                                   manCollection.GetManager<IClipMan>(),
                                                                                   manCollection.GetManager<IEntityFactory>(),
@@ -179,7 +179,8 @@ namespace OpenBreed.Sandbox
 
             manCollection.AddSingleton<CameraHelper>(() => new CameraHelper(manCollection.GetManager<IClipMan>(),
                                                                                 manCollection.GetManager<IFrameUpdaterMan>(),
-                                                                                manCollection.GetManager<IDataLoaderFactory>()));
+                                                                                manCollection.GetManager<IDataLoaderFactory>(),
+                                                                                manCollection.GetManager<IEntityFactory>()));
 
             manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IClipMan>(),
                                                                                 manCollection.GetManager<IWorldMan>(),
@@ -427,13 +428,13 @@ namespace OpenBreed.Sandbox
             //spriteMan.Create(TeleportHelper.SPRITE_TELEPORT_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 32);
             spriteMan.CreateAtlas()
                 .SetTexture(teleportTex.Id)
-                .SetName(WorldGateHelper.SPRITE_WORLD_ENTRY)
+                .SetName(EntriesHelper.SPRITE_WORLD_ENTRY)
                 .AppendCoordsFromGrid(32, 32, 4, 1, 0, 96)
                 .Build();
             //spriteMan.Create(WorldGateHelper.SPRITE_WORLD_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 96);
             spriteMan.CreateAtlas()
                 .SetTexture(teleportTex.Id)
-                .SetName(WorldGateHelper.SPRITE_WORLD_EXIT)
+                .SetName(EntriesHelper.SPRITE_WORLD_EXIT)
                 .AppendCoordsFromGrid(32, 32, 4, 1, 0, 64)
                 .Build();
             //spriteMan.Create(WorldGateHelper.SPRITE_WORLD_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 64);
@@ -446,7 +447,7 @@ namespace OpenBreed.Sandbox
                 .Build();
             //spriteMan.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
 
-            var worldGateHelper = GetManager<WorldGateHelper>();
+            var worldGateHelper = GetManager<EntriesHelper>();
             var doorHelper = GetManager<DoorHelper>();
             var electicGateHelper = GetManager<ElectricGateHelper>();
             var pickableHelper = GetManager<PickableHelper>();
@@ -465,12 +466,7 @@ namespace OpenBreed.Sandbox
             projectileHelper.RegisterCollisionPairs();
 
             cameraHelper.CreateAnimations();
-            doorHelper.LoadAnimations();
-            electicGateHelper.LoadAnimations();
 
-            environmentHelper.LoadAnimations();
-            actorHelper.CreateAnimations();
-            teleportHelper.CreateAnimations();
             projectileHelper.CreateAnimations();
 
             manCollection.SetupButtonStates();
@@ -495,16 +491,12 @@ namespace OpenBreed.Sandbox
             var entityMan = GetManager<IEntityMan>();
 
             var gameWorld = mapWorldLoader.Load("Vanilla/2");
+            //var gameWorld = mapWorldLoader.Load("Vanilla/8");
 
             doorHelper.LoadStamps();
             pickableHelper.LoadStamps();
 
-            var playerCamera = EntityFactory.Create(@"Entities\Common\Camera.xml")
-                .SetParameter("posX", 0.0)
-                .SetParameter("posY", 0.0)
-                .SetParameter("width", 320)
-                .SetParameter("height", 240)
-                .Build();
+            var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
 
             playerCamera.Add(new PauseImmuneComponent());
             playerCamera.Tag = "PlayerCamera";

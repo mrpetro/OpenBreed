@@ -46,20 +46,6 @@ namespace OpenBreed.Sandbox.Entities.Door
             this.entityFactory = entityFactory;
         }
 
-        public void LoadAnimations()
-        {
-            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
-
-            animationLoader.Load("Vanilla/L4/Door/Opening/Vertical");
-            animationLoader.Load("Vanilla/L4/Door/Closing/Vertical");
-            animationLoader.Load("Vanilla/L4/Door/Opening/Horizontal");
-            animationLoader.Load("Vanilla/L4/Door/Closing/Horizontal");
-
-            var soundSampleLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
-            
-            soundSampleLoader.Load("Vanilla/Common/Door/Opening");
-        }
-
         public void AddVertical(World world, int x, int y)
         {
             var door = entityFactory.Create(@"Entities\Door\DoorVertical.xml")

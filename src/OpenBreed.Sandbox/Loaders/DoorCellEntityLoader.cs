@@ -35,6 +35,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
+            //if (!mapAssets.TileAtlasName.EndsWith("L4"))
+            //    return;
+
             var rightValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
 
             if (rightValue == DOOR_STANDARD)

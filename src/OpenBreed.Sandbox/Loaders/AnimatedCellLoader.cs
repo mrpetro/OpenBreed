@@ -38,6 +38,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
+            //if (!mapAssets.TileAtlasName.EndsWith("L4"))
+            //    return;
+
             switch (actionValue)
             {
                 case TV_FLICKERING_CODE:
@@ -59,13 +62,13 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void PutTVFlickering(MapAssets mapAssets, MapModel map, bool[,] visited, World world, int ix, int iy, int gfxValue)
         {
-            environmentHelper.AddTVFlickering(world, ix, iy, mapAssets.AtlasId, gfxValue);
+            environmentHelper.AddTVFlickering(world, ix, iy, mapAssets.TileAtlasName, gfxValue);
             visited[ix, iy] = true;
         }
 
         private void PutMonsterEating(MapAssets mapAssets, MapModel map, bool[,] visited, World world, int ix, int iy, int gfxValue)
         {
-            environmentHelper.AddMonsterEating(world, ix, iy, mapAssets.AtlasId, gfxValue);
+            environmentHelper.AddMonsterEating(world, ix, iy, mapAssets.TileAtlasName, gfxValue);
             visited[ix, iy] = true;
         }
 

@@ -20,7 +20,7 @@ using OpenTK;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Sandbox.Entities.Teleport
+namespace OpenBreed.Sandbox.Entities
 {
     public enum TeleportType
     {
@@ -97,26 +97,16 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Public Methods
 
-        public void CreateAnimations()
+        public Entity AddTeleportEntry(World world, int x, int y, int pairId, string tileAtlasName, int gfxValue)
         {
-            var animationTeleportEntry = clipMan.CreateClip(ANIMATION_TELEPORT_ENTRY, 4.0f);
-            var te = animationTeleportEntry.AddTrack<int>(FrameInterpolation.None, (e, nv) => OnFrameUpdate(e, nv), 0);
-            te.AddFrame(0, 1.0f);
-            te.AddFrame(1, 2.0f);
-            te.AddFrame(2, 3.0f);
-            te.AddFrame(3, 4.0f);
-        }
-
-        public Entity AddTeleportEntry(World world, int x, int y, int pairId, int atlasId, int gfxValue)
-        {
-            var teleportEntry = entityFactory.Create(@"Entities\Teleport\TeleportEntry.xml")
+            var teleportEntry = entityFactory.Create(@"Entities\Common\TeleportEntry.xml")
+                .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
                 .Build();
 
             teleportEntry.Tag = new TeleportPair { Id = pairId, Type = TeleportType.In };
-
-            teleportEntry.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 
             teleportEntry.EnterWorld(world.Id);
             return teleportEntry;
@@ -128,16 +118,18 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             collisionMan.RegisterFixturePair(ColliderTypes.ActorTrigger, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallbackEx);
         }
 
-        public Entity AddTeleportExit(World world, int x, int y, int pairId, int atlasId, int gfxValue)
+        public Entity AddTeleportExit(World world, int x, int y, int pairId, string tileAtlasName, int gfxValue)
         {
-            var teleportExit = entityFactory.Create(@"Entities\Teleport\TeleportExit.xml")
+            var teleportExit = entityFactory.Create(@"Entities\Common\TeleportExit.xml")
+                .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
                 .Build();
 
             teleportExit.Tag = new TeleportPair { Id = pairId, Type = TeleportType.Out };
 
-            teleportExit.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
+            //teleportExit.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 
             teleportExit.EnterWorld(world.Id);
 

@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Model.Maps;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
@@ -57,13 +57,13 @@ namespace OpenBreed.Sandbox.Loaders
                 foreach (var cell in cells)
                 {
                     var cellGfxValue = layout.GetCellValue(gfxLayerIdx, cell.X, cell.Y);
-                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix, mapAssets.AtlasId, cellGfxValue);
+                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix, mapAssets.TileAtlasName, cellGfxValue);
                     visited[cell.X, cell.Y] = true;
                 }
 
                 var exitGfxValue = layout.GetCellValue(gfxLayerIdx, found.X, found.Y);
 
-                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, mapAssets.AtlasId, exitGfxValue);
+                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, mapAssets.TileAtlasName, exitGfxValue);
                 visited[found.X, found.Y] = true;
             }
 

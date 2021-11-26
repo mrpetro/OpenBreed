@@ -16,6 +16,7 @@ namespace OpenBreed.Animation.Generic
         #region Private Fields
 
         private readonly List<IClip> clips = new List<IClip>();
+        private readonly Dictionary<string, IClip> names = new Dictionary<string, IClip>(); 
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -43,6 +44,7 @@ namespace OpenBreed.Animation.Generic
         {
             var newClip = new Clip(clips.Count, name, length);
             clips.Add(newClip);
+            names.Add(name, newClip);
             return newClip;
         }
 
@@ -53,14 +55,8 @@ namespace OpenBreed.Animation.Generic
 
         public IClip GetByName(string name)
         {
-            var anim = clips.FirstOrDefault(item => item.Name == name);
-
-            if (anim != null)
-                return anim;
-
-            logger.Error($"Unable to find animation with name '{name}'");
-
-            return MissingAnim;
+            names.TryGetValue(name, out IClip result);
+            return result;
         }
 
         public void UnloadAll()

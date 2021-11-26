@@ -19,9 +19,9 @@ using OpenTK;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Sandbox.Entities.WorldGate
+namespace OpenBreed.Sandbox.Entities
 {
-    public class WorldGateHelper
+    public class EntriesHelper
     {
         #region Public Fields
 
@@ -54,7 +54,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         #region Public Constructors
 
-        public WorldGateHelper(IWorldMan worldMan, IEntityMan entityMan, IClipMan clipMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan collisionMan, IJobsMan jobsMan, ViewportCreator viewportCreator, IDataLoaderFactory dataLoaderFactory)
+        public EntriesHelper(IWorldMan worldMan, IEntityMan entityMan, IClipMan clipMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan collisionMan, IJobsMan jobsMan, ViewportCreator viewportCreator, IDataLoaderFactory dataLoaderFactory)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;
@@ -71,10 +71,10 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         #region Public Methods
 
-        public Entity AddWorldEntry(World world, int x, int y, int entryId, int gfxValue)
+        public Entity AddMapEntry(World world, int x, int y, int entryId, string tileAtlasName, int gfxValue)
         {
-            var entryEntity = entityFactory.Create(@"Entities\WorldGate\WorldGateEntry.xml")
-                .SetParameter("tileSet", "Vanilla/L4")
+            var entryEntity = entityFactory.Create(@"Entities\Common\MapEntry.xml")
+                .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("entryId", entryId)
                 .SetParameter("startX", 16 * x)
@@ -86,10 +86,10 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             return entryEntity;
         }
 
-        public void AddWorldExit(World world, int ix, int iy, int exitId, int atlasId, int gfxValue)
+        public void AddMapExit(World world, int ix, int iy, int exitId, string tileAtlasName, int gfxValue)
         {
-            var exitEntity = entityFactory.Create(@"Entities\WorldGate\WorldGateExit.xml")
-                .SetParameter("tileSet", "Vanilla/L4")
+            var exitEntity = entityFactory.Create(@"Entities\Common\MapExit.xml")
+                .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("exitId", exitId)
                 .SetParameter("startX", 16 * ix)

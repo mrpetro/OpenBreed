@@ -32,34 +32,26 @@ namespace OpenBreed.Sandbox.Entities
         private readonly IEntityFactory entityFactory;
         private readonly IBuilderFactory builderFactory;
 
-        public void LoadAnimations()
-        {
-            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
-
-            animationLoader.Load("Vanilla/L4/Environment/TVFlickering");
-            animationLoader.Load("Vanilla/L4/Environment/MonsterEating");
-        }
-
-        public void AddTVFlickering(World world, int x, int y, int atlasId, int gfxValue)
+        public void AddTVFlickering(World world, int x, int y, string tileAtlasName, int gfxValue)
         {
             var entity = entityFactory.Create(@"Entities\Level4\TVFlickering.xml")
+                .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
                 .Build();
-
-            entity.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 
             entity.EnterWorld(world.Id);
         }
 
-        public void AddMonsterEating(World world, int x, int y, int atlasId, int gfxValue)
+        public void AddMonsterEating(World world, int x, int y, string tileAtlasName, int gfxValue)
         {
             var entity = entityFactory.Create(@"Entities\Level4\MonsterEating.xml")
+                .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
                 .Build();
-
-            entity.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 
             entity.EnterWorld(world.Id);
         }

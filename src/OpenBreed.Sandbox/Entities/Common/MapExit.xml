@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
+		<Class>
+			<Name>WorldExit</Name>
+			<Flavor>$(exitId)</Flavor>
+		</Class>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>
@@ -9,10 +13,15 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
 					<Groups>
-						<Group>TeleportEntryTrigger</Group>
+						<Group>WorldExitTrigger</Group>
 					</Groups>
 				</Fixture>
-			</Fixtures>
+			</Fixtures>	
 		</Body>
+		<TilePutter>
+			<AtlasName>$(tileSet)</AtlasName>
+			<ImageIndex>$(imageIndex)</ImageIndex>
+			<Position X="$(startX)" Y="$(startY)" />
+		</TilePutter>
     </Components>
 </EntityTemplate>

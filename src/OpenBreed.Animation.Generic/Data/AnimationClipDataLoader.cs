@@ -40,20 +40,25 @@ namespace OpenBreed.Animation.Generic.Data
 
         public IClip Load(string clipName, params object[] args)
         {
+            var clip = clipMan.GetByName(clipName);
+
+            if (clip != null)
+                return clip;
+
             var entry = repositoryProvider.GetRepository<IDbAnimation>().GetById(clipName);
             if (entry == null)
                 throw new Exception("Animation clip error: " + clipName);
 
             var totalTime = entry.Length;
 
-            var newClip = clipMan.CreateClip(entry.Id, totalTime);
+            clip = clipMan.CreateClip(entry.Id, totalTime);
 
             foreach (var part in entry.Tracks)
-                LoadTrack(newClip, part);
+                LoadTrack(clip, part);
 
             logger.Verbose($"Animation clip '{clipName}' loaded.");
 
-            return newClip;
+            return clip;
         }
 
         #endregion Public Methods

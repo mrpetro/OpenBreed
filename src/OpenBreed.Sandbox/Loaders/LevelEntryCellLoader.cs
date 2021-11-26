@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Model.Maps;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Wecs.Worlds;
 using System;
 
@@ -21,16 +21,16 @@ namespace OpenBreed.Sandbox.Loaders
         #region Private Fields
 
         private readonly ActorHelper actorHelper;
-        private readonly WorldGateHelper worldGateHelper;
+        private readonly EntriesHelper entriesHelper;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal LevelEntryCellLoader(ActorHelper actorHelper, WorldGateHelper worldGateHelper)
+        internal LevelEntryCellLoader(ActorHelper actorHelper, EntriesHelper entriesHelper)
         {
             this.actorHelper = actorHelper;
-            this.worldGateHelper = worldGateHelper;
+            this.entriesHelper = entriesHelper;
         }
 
         #endregion Internal Constructors
@@ -58,7 +58,7 @@ namespace OpenBreed.Sandbox.Loaders
                     throw new NotImplementedException("Entry type not implemented");
             }
 
-            worldGateHelper.AddWorldEntry(world, ix, iy, entryId, gfxValue);
+            entriesHelper.AddMapEntry(world, ix, iy, entryId, mapAssets.TileAtlasName, gfxValue);
             visited[ix, iy] = true;
         }
 

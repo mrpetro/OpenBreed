@@ -4,12 +4,6 @@ namespace OpenBreed.Sandbox.Entities.Builders
 {
     public class MapAssets
     {
-        #region Public Fields
-
-        public int AtlasId;
-
-        #endregion Public Fields
-
         #region Private Fields
 
         private readonly ITileMan tileMan;
@@ -25,17 +19,17 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         #endregion Internal Constructors
 
+        #region Public Properties
+
+        public string TileAtlasName { get; private set; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
-        public void SetTileAtlas(string atlasAlias)
+        public void SetTileAtlas(string atlasName)
         {
-            var atlas = tileMan.GetByName(atlasAlias);
-            this.AtlasId = atlas.Id;
-        }
-
-        public void SetTileAtlas(int atlasId)
-        {
-            this.AtlasId = atlasId;
+            TileAtlasName = atlasName;
         }
 
         #endregion Public Methods

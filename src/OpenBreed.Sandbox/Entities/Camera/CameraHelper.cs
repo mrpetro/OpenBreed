@@ -3,6 +3,7 @@ using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using System;
 
 namespace OpenBreed.Sandbox.Entities.Camera
 {
@@ -19,20 +20,20 @@ namespace OpenBreed.Sandbox.Entities.Camera
         #region Private Fields
 
         private readonly IClipMan clipMan;
-
         private readonly IFrameUpdaterMan frameUpdaterMan;
-
         private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly IEntityFactory entityFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public CameraHelper(IClipMan clipMan, IFrameUpdaterMan frameUpdaterMan, IDataLoaderFactory dataLoaderFactory)
+        public CameraHelper(IClipMan clipMan, IFrameUpdaterMan frameUpdaterMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
         {
             this.clipMan = clipMan;
             this.frameUpdaterMan = frameUpdaterMan;
             this.dataLoaderFactory = dataLoaderFactory;
+            this.entityFactory = entityFactory;
         }
 
         #endregion Public Constructors
@@ -42,11 +43,6 @@ namespace OpenBreed.Sandbox.Entities.Camera
         public void CreateAnimations()
         {
             frameUpdaterMan.Register("Camera.Brightness", (FrameUpdater<float>)OnFrameUpdate);
-
-            var animationLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
-
-            var cameraFadeOut = animationLoader.Load("Vanilla/Common/Camera/Effects/FadeOut");
-            var cameraFadeIn = animationLoader.Load("Vanilla/Common/Camera/Effects/FadeIn");
         }
 
         #endregion Public Methods
@@ -57,6 +53,18 @@ namespace OpenBreed.Sandbox.Entities.Camera
         {
             var cameraCmp = entity.Get<CameraComponent>();
             cameraCmp.Brightness = nextValue;
+        }
+
+        public Entity CreateCamera(float x, float y, float width, float height)
+        {
+            var entity = entityFactory.Create(@"Entities\Common\Camera.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .SetParameter("width", width)
+                .SetParameter("height", height)
+                .Build();
+
+            return entity;
         }
 
         #endregion Private Methods

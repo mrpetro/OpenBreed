@@ -17,5 +17,10 @@
 			<Origin X="0" Y="-16" />
 			<Order>0</Order>
 		</Sprite>
+		<TilePutter>
+			<AtlasName>$(tileSet)</AtlasName>
+			<ImageIndex>$(imageIndex)</ImageIndex>
+			<Position X="$(startX)" Y="$(startY)" />
+		</TilePutter>
     </Components>
 </EntityTemplate>

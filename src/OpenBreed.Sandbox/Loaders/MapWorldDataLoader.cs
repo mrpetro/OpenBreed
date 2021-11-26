@@ -1,8 +1,13 @@
-﻿using OpenBreed.Common;
+﻿using OpenBreed.Animation.Interface.Data;
+using OpenBreed.Audio.Interface.Data;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Model.Maps;
 using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Physics.Interface.Managers;
@@ -108,6 +113,9 @@ namespace OpenBreed.Sandbox.Loaders
 
             LoadReferencedTileSet(dbMap);
             LoadReferencedSpriteSets(dbMap);
+            LoadReferencedAnimations(dbMap);
+            LoadReferencedTileStamps(dbMap);
+            LoadReferencedSounds(dbMap);
 
             var map = mapsDataProvider.GetMap(dbMap.Id);
 
@@ -188,20 +196,63 @@ namespace OpenBreed.Sandbox.Loaders
                 entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, gfxValue, actionValue, world);
         }
 
-        private void LoadReferencedTileSet(IDbMap entry)
+        private void LoadReferencedTileSet(IDbMap dbMap)
         {
-            var palette = palettesDataProvider.GetPalette(entry.PaletteRefs.First());
             var tileAtlasLoader = dataLoaderFactory.GetLoader<ITileAtlasDataLoader>();
-            tileAtlasLoader.Load(entry.TileSetRef, palette);
+
+            var palette = palettesDataProvider.GetPalette(dbMap.PaletteRefs.First());
+
+            tileAtlasLoader.Load(dbMap.TileSetRef, palette);
         }
 
-        private void LoadReferencedSpriteSets(IDbMap entry)
+        private void LoadReferencedSpriteSets(IDbMap dbMap)
         {
-            var palette = palettesDataProvider.GetPalette(entry.PaletteRefs.First());
-            var spriteAtlasLoader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
+            var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
-            foreach (var spriteSetRef in entry.SpriteSetRefs)
-                spriteAtlasLoader.Load(spriteSetRef, palette);
+            var palette = palettesDataProvider.GetPalette(dbMap.PaletteRefs.First());
+
+            foreach (var spriteSetRef in dbMap.SpriteSetRefs)
+                loader.Load(spriteSetRef, palette);
+        }
+
+        private void LoadReferencedAnimations(IDbMap dbMap)
+        {
+            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
+
+            //Load common animations
+            var dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
+            foreach (var dbAnim in dbAnims)
+                loader.Load(dbAnim.Id);
+
+            //Load level specific animations
+            dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
+            foreach (var dbAnim in dbAnims)
+                loader.Load(dbAnim.Id);
+        }
+
+        private void LoadReferencedTileStamps(IDbMap dbMap)
+        {
+            var loader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
+
+            var dbTileStamps = repositoryProvider.GetRepository<IDbTileStamp>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
+
+            foreach (var dbTileStamp in dbTileStamps)
+                loader.Load(dbTileStamp.Id);
+        }
+
+        private void LoadReferencedSounds(IDbMap dbMap)
+        {
+            var loader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
+
+            //Load common sounds
+            var dbSounds = repositoryProvider.GetRepository<IDbSound>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
+            foreach (var dbSound in dbSounds)
+                loader.Load(dbSound.Id);
+
+            //Load level specific sounds
+            dbSounds = repositoryProvider.GetRepository<IDbSound>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
+            foreach (var dbSound in dbSounds)
+                loader.Load(dbSound.Id);
         }
 
         #endregion Private Methods

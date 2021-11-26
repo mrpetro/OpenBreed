@@ -49,13 +49,18 @@ namespace OpenBreed.Audio.OpenAL.Data
 
         public int Load(string sampleName, params object[] args)
         {
+            var soundSampleId = soundMan.GetByName(sampleName);
+
+            if (soundSampleId != -1)
+                return soundSampleId;
+
             var entry = repositoryProvider.GetRepository<IDbSound>().GetById(sampleName);
             if (entry == null)
                 throw new Exception("Sound sample error: " + sampleName);
 
             modelsProvider.TryGetModel<SoundModel>(entry.DataRef, out SoundModel model, out string message);
 
-            var soundSampleId = soundMan.LoadSample(sampleName, model.Data, model.SampleRate);
+            soundSampleId = soundMan.LoadSample(sampleName, model.Data, model.SampleRate);
 
             logger.Verbose($"Sound sample '{sampleName}' loaded.");
 

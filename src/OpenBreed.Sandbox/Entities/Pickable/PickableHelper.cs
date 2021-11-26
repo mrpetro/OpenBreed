@@ -36,63 +36,29 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         #region Public Methods
 
-        private void LoadStamps(IDataLoader<ITileStamp> tileStampLoader, string name)
-        {
-            tileStampLoader.Load($"Vanilla/L4/{name}/F1/Lying");
-            tileStampLoader.Load($"Vanilla/L4/{name}/F1/Picked");
-            tileStampLoader.Load($"Vanilla/L4/{name}/F2/Lying");
-            tileStampLoader.Load($"Vanilla/L4/{name}/F2/Picked");
-            tileStampLoader.Load($"Vanilla/L4/{name}/F3/Lying");
-            tileStampLoader.Load($"Vanilla/L4/{name}/F3/Picked");
-        }
 
         public void LoadStamps()
         {
-            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
+            //var soundLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
 
-            LoadStamps(tileStampLoader, "Ammo");
-            LoadStamps(tileStampLoader, "MedkitSmall");
-            LoadStamps(tileStampLoader, "MedkitBig");
-            LoadStamps(tileStampLoader, "CreditsSmall");
-            LoadStamps(tileStampLoader, "CreditsBig");
-            LoadStamps(tileStampLoader, "AreaScanner");
-            LoadStamps(tileStampLoader, "SmartCard");
-            LoadStamps(tileStampLoader, "KeycardStandard");
-            LoadStamps(tileStampLoader, "ExtraLife");
-            LoadStamps(tileStampLoader, "PowerUpS");
-            LoadStamps(tileStampLoader, "PowerUpA");
-            LoadStamps(tileStampLoader, "PowerUpF");
-
-            tileStampLoader.Load("Vanilla/L4/KeycardRed/Lying");
-            tileStampLoader.Load("Vanilla/L4/KeycardRed/Picked");
-            tileStampLoader.Load("Vanilla/L4/KeycardGreen/Lying");
-            tileStampLoader.Load("Vanilla/L4/KeycardGreen/Picked");
-            tileStampLoader.Load("Vanilla/L4/KeycardBlue/Lying");
-            tileStampLoader.Load("Vanilla/L4/KeycardBlue/Picked");
-            tileStampLoader.Load("Vanilla/L4/KeycardSpecial/Lying");
-            tileStampLoader.Load("Vanilla/L4/KeycardSpecial/Picked");
-
-
-            var soundLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
-
-            soundLoader.Load("Vanilla/Common/Ammo/Picked");
-            soundLoader.Load("Vanilla/Common/CreditsSmall/Picked");
-            soundLoader.Load("Vanilla/Common/CreditsBig/Picked");
-            soundLoader.Load("Vanilla/Common/MedkitSmall/Picked");
-            soundLoader.Load("Vanilla/Common/MedkitBig/Picked");
-            soundLoader.Load("Vanilla/Common/KeycardStandard/Picked");
-            soundLoader.Load("Vanilla/Common/KeycardRed/Picked");
-            soundLoader.Load("Vanilla/Common/KeycardGreen/Picked");
-            soundLoader.Load("Vanilla/Common/KeycardBlue/Picked");
-            soundLoader.Load("Vanilla/Common/ExtraLife/Picked"); 
+            //soundLoader.Load("Vanilla/Common/Ammo/Picked");
+            //soundLoader.Load("Vanilla/Common/CreditsSmall/Picked");
+            //soundLoader.Load("Vanilla/Common/CreditsBig/Picked");
+            //soundLoader.Load("Vanilla/Common/MedkitSmall/Picked");
+            //soundLoader.Load("Vanilla/Common/MedkitBig/Picked");
+            //soundLoader.Load("Vanilla/Common/KeycardStandard/Picked");
+            //soundLoader.Load("Vanilla/Common/KeycardRed/Picked");
+            //soundLoader.Load("Vanilla/Common/KeycardGreen/Picked");
+            //soundLoader.Load("Vanilla/Common/KeycardBlue/Picked");
+            //soundLoader.Load("Vanilla/Common/ExtraLife/Picked"); 
         }
 
-        public void AddItem(World world, int x, int y, string name, int gfxValue, string flavor = null)
+        public void AddItem(World world, int x, int y, string name, string tileAtlasName, int gfxValue, string flavor = null)
         {
             var path = $@"{PICKABLE_PREFIX}\{name}.xml";
 
             var pickable = entityFactory.Create(path)
-                .SetParameter("tileSet", "Vanilla/L4")
+                .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
