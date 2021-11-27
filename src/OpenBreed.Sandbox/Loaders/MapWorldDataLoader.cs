@@ -7,6 +7,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Model.Maps;
 using OpenBreed.Model.Maps.Blocks;
@@ -211,8 +212,21 @@ namespace OpenBreed.Sandbox.Loaders
 
             var palette = palettesDataProvider.GetPalette(dbMap.PaletteRefs.First());
 
-            foreach (var spriteSetRef in dbMap.SpriteSetRefs)
-                loader.Load(spriteSetRef, palette);
+            //Load common sprites
+            var dbSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
+            foreach (var dbAnim in dbSpriteAtlas)
+                loader.Load(dbAnim.Id, palette);
+
+            //Load level specific sprites
+            dbSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
+            foreach (var dbAnim in dbSpriteAtlas)
+                loader.Load(dbAnim.Id, palette);
+
+
+            //var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
+
+            //foreach (var spriteSetRef in dbMap.SpriteSetRefs)
+            //    loader.Load(spriteSetRef, palette);
         }
 
         private void LoadReferencedAnimations(IDbMap dbMap)

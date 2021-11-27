@@ -4,7 +4,6 @@ using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Wecs.Components.Common;
@@ -73,7 +72,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public Entity AddMapEntry(World world, int x, int y, int entryId, string tileAtlasName, int gfxValue)
         {
-            var entryEntity = entityFactory.Create(@"Entities\Common\MapEntry.xml")
+            var entryEntity = entityFactory.Create(@"Defaults\Templates\ABTA\Common\MapEntry.xml")
                 .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("entryId", entryId)
@@ -88,7 +87,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public void AddMapExit(World world, int ix, int iy, int exitId, string tileAtlasName, int gfxValue)
         {
-            var exitEntity = entityFactory.Create(@"Entities\Common\MapExit.xml")
+            var exitEntity = entityFactory.Create(@"Defaults\Templates\ABTA\Common\MapExit.xml")
                 .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("exitId", exitId)

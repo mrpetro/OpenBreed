@@ -5,7 +5,6 @@ using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Components.Rendering;
@@ -99,7 +98,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public Entity AddTeleportEntry(World world, int x, int y, int pairId, string tileAtlasName, int gfxValue)
         {
-            var teleportEntry = entityFactory.Create(@"Entities\Common\TeleportEntry.xml")
+            var teleportEntry = entityFactory.Create(@"Defaults\Templates\ABTA\Common\TeleportEntry.xml")
                 .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -120,7 +119,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public Entity AddTeleportExit(World world, int x, int y, int pairId, string tileAtlasName, int gfxValue)
         {
-            var teleportExit = entityFactory.Create(@"Entities\Common\TeleportExit.xml")
+            var teleportExit = entityFactory.Create(@"Defaults\Templates\ABTA\Common\TeleportExit.xml")
                 .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)

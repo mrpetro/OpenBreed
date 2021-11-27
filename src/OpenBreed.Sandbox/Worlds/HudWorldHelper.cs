@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Sandbox.Entities.Camera;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;

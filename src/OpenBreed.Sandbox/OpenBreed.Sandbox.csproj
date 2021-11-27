@@ -85,7 +85,7 @@
     </Compile>
     <Compile Include="Components\EquipmentComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
-    <Compile Include="Entities\ElectricGate\ElectricGateHelper.cs" />
+    <Compile Include="Entities\ElectricGateHelper.cs" />
     <Compile Include="Entities\FixtureTypes.cs" />
     <Compile Include="Entities\EnvironmentHelper.cs" />
     <Compile Include="Entities\GenericCellHelper.cs" />
@@ -121,14 +121,13 @@
     <Compile Include="Entities\Actor\States\Rotation\RotationState.cs" />
     <Compile Include="Entities\Actor\States\Rotation\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Rotation\RotatingState.cs" />
-    <Compile Include="Entities\Box\BoxHelper.cs" />
     <Compile Include="Entities\Builders\MapAssets.cs" />
     <Compile Include="Entities\Button\ButtonHelper.cs" />
     <Compile Include="Entities\Button\ButtonState.cs" />
     <Compile Include="Entities\Button\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Button\States\PressedState.cs" />
     <Compile Include="Entities\Button\States\IdleState.cs" />
-    <Compile Include="Entities\Camera\CameraHelper.cs" />
+    <Compile Include="Entities\CameraHelper.cs" />
     <Compile Include="Entities\ColliderTypes.cs" />
     <Compile Include="Entities\CursorCoords\CursorCoordsHelper.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
@@ -148,7 +147,7 @@
     <Compile Include="Entities\TeleportHelper.cs" />
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
-    <Compile Include="Entities\Text\TextHelper.cs" />
+    <Compile Include="Entities\TextHelper.cs" />
     <Compile Include="Entities\Turret\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Turret\TurretHelper.cs" />
     <Compile Include="Entities\EntriesHelper.cs" />
@@ -173,33 +172,6 @@
     <Compile Include="Loaders\MapWorldDataLoader.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
-    <Content Include="Entities\Common\Environment\ActorOnlyObstacle.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Hud\PositionInfo.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Hud\FpsCounter.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Camera.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Environment\Unknown.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Environment\FullObstacle.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Environment\Void.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\ElectricGate\ElectricGateHorizontal.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\ElectricGate\ElectricGateVertical.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="RunABTA.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -212,79 +184,7 @@
     <Content Include="Entities\Actor\States\Attacking\IdleState.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\Actor\John.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\Ammo.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\KeycardBlue.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\KeycardGreen.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\KeycardRed.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\KeycardSpecial.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\KeycardStandard.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\SmartCard.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\PowerUpF.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\PowerUpA.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\PowerUpS.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\ExtraLife.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\CreditsBig.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\AreaScanner.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\MedkitSmall.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\CreditsSmall.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\Pickables\MedkitBig.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Entities\CrazyMover\CrazyMover.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Level4\MonsterEating.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Level4\TVFlickering.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Door\DoorVertical.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Door\DoorHorizontal.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Projectile\Projectile.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\TeleportExit.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\TeleportEntry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Turret\Turret.xml">
@@ -297,12 +197,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Viewport\GameViewport.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\MapExit.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Common\MapEntry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Button\Button.lua">
@@ -506,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sounds\" />
+    <Folder Include="Entities\ElectricGate\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\KeraLua.1.0.22\build\net45\KeraLua.targets" Condition="Exists('..\..\packages\KeraLua.1.0.22\build\net45\KeraLua.targets')" />
