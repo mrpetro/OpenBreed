@@ -1291,245 +1291,245 @@
 		</Sounds>
 		<SpriteSets>
 			<Items>
-				<SpriteSetFromSPR Id="SpriteSets.SPR1A">
+				<SpriteSetFromSPR Id="Vanilla/L1/A">
 					<DataRef>Assets.SPR1A.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR1B">
+				<SpriteSetFromSPR Id="Vanilla/L1/B">
 					<DataRef>Assets.SPR1B.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR3A">
+				<SpriteSetFromSPR Id="Vanilla/L3/A">
 					<DataRef>Assets.SPR3A.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR3B">
+				<SpriteSetFromSPR Id="Vanilla/L3/B">
 					<DataRef>Assets.SPR3B.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR4A">
+				<SpriteSetFromSPR Id="Vanilla/L4/A">
 					<DataRef>Assets.SPR4A.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR4B">
+				<SpriteSetFromSPR Id="Vanilla/L4/B">
 					<DataRef>Assets.SPR4B.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR5A">
+				<SpriteSetFromSPR Id="Vanilla/L5/A">
 					<DataRef>Assets.SPR5A.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR5B">
+				<SpriteSetFromSPR Id="Vanilla/L5/B">
 					<DataRef>Assets.SPR5B.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR6A">
+				<SpriteSetFromSPR Id="Vanilla/L6/A">
 					<DataRef>Assets.SPR6A.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR6B">
+				<SpriteSetFromSPR Id="Vanilla/L6/B">
 					<DataRef>Assets.SPR6B.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR7A">
+				<SpriteSetFromSPR Id="Vanilla/L7/A">
 					<DataRef>Assets.SPR7A.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR7B">
+				<SpriteSetFromSPR Id="Vanilla/L7/B">
 					<DataRef>Assets.SPR7B.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR8A">
+				<SpriteSetFromSPR Id="Vanilla/L8/A">
 					<DataRef>Assets.SPR8A.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPR8B">
+				<SpriteSetFromSPR Id="Vanilla/L8/B">
 					<DataRef>Assets.SPR8B.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPRDA">
+				<SpriteSetFromSPR Id="Vanilla/LD/A">
 					<DataRef>Assets.SPRDA.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.SPRDB">
+				<SpriteSetFromSPR Id="Vanilla/LD/B">
 					<DataRef>Assets.SPRDB.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.HERO1">
+				<SpriteSetFromSPR Id="Vanilla/Common/Hero/1">
 					<DataRef>Assets.HERO1.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.HERO2">
+				<SpriteSetFromSPR Id="Vanilla/Common/Hero/2">
 					<DataRef>Assets.HERO2.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.RESIDENT">
+				<SpriteSetFromSPR Id="Vanilla/Common/Resident">
 					<DataRef>Assets.RESIDENT.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_A">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/A">
 					<DataRef>Assets.ALIEN_A.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_B">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/B">
 					<DataRef>Assets.ALIEN_B.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_C">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/C">
 					<DataRef>Assets.ALIEN_C.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_E">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/E">
 					<DataRef>Assets.ALIEN_E.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_F">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/F">
 					<DataRef>Assets.ALIEN_F.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_G">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/G">
 					<DataRef>Assets.ALIEN_G.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_H">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/H">
 					<DataRef>Assets.ALIEN_H.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_I">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/I">
 					<DataRef>Assets.ALIEN_I.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_J">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/J">
 					<DataRef>Assets.ALIEN_J.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_K">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/K">
 					<DataRef>Assets.ALIEN_K.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.ALIEN_X">
+				<SpriteSetFromSPR Id="Vanilla/Common/Alien/X">
 					<DataRef>Assets.ALIEN_X.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.COMP1">
+				<SpriteSetFromSPR Id="Vanilla/Common/Computer/1">
 					<DataRef>Assets.COMP1.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.COMP2">
+				<SpriteSetFromSPR Id="Vanilla/Common/Computer/2">
 					<DataRef>Assets.COMP2.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.COMP3">
+				<SpriteSetFromSPR Id="Vanilla/Common/Computer/3">
 					<DataRef>Assets.COMP3.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.COMPFONT">
+				<SpriteSetFromSPR Id="Vanilla/Common/Computer/Font">
 					<DataRef>Assets.COMPFONT.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.TORCH">
+				<SpriteSetFromSPR Id="Vanilla/Common/Torch">
 					<DataRef>Assets.TORCH.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
@@ -2036,8 +2036,8 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
@@ -2049,10 +2049,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
@@ -2064,10 +2064,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
@@ -2079,10 +2079,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
@@ -2094,10 +2094,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
@@ -2109,10 +2109,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
@@ -2124,21 +2124,21 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/C</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/E</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/F</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/G</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/H</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/I</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/J</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/K</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/X</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
@@ -2150,10 +2150,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
@@ -2165,10 +2165,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
@@ -2180,10 +2180,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
@@ -2195,10 +2195,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
@@ -2210,21 +2210,21 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/C</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/E</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/F</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/G</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/H</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/I</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/J</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/K</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/X</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
@@ -2236,10 +2236,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
@@ -2251,10 +2251,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
@@ -2266,10 +2266,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
@@ -2281,22 +2281,22 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.RESIDENT</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L5/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L5/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Resident</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/C</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/E</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/F</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/G</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/H</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/I</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/J</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/K</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/X</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
@@ -2308,10 +2308,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
-							<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L5/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L5/B</SpriteSetRef>
+							<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
@@ -2323,10 +2323,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L5/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L5/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
@@ -2338,10 +2338,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L5/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L5/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L5</TileSetRef>
 				</Map>
@@ -2353,10 +2353,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
@@ -2368,21 +2368,21 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/C</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/E</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/F</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/G</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/H</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/I</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/J</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/K</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/X</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
@@ -2394,10 +2394,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
@@ -2409,10 +2409,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
@@ -2424,10 +2424,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
@@ -2439,10 +2439,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
@@ -2454,21 +2454,21 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/C</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/E</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/F</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/G</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/H</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/I</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/J</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/K</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/X</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2480,10 +2480,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2495,10 +2495,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2510,10 +2510,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2525,10 +2525,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
@@ -2540,10 +2540,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
@@ -2555,10 +2555,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
@@ -2570,10 +2570,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2585,10 +2585,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
@@ -2600,10 +2600,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
@@ -2615,10 +2615,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
@@ -2630,10 +2630,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
@@ -2645,10 +2645,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/LD</TileSetRef>
 				</Map>
@@ -2660,10 +2660,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2675,10 +2675,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L4</TileSetRef>
 				</Map>
@@ -2690,10 +2690,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2705,10 +2705,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2720,10 +2720,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
@@ -2735,10 +2735,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L7</TileSetRef>
 				</Map>
@@ -2750,8 +2750,8 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2763,10 +2763,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L3</TileSetRef>
 				</Map>
@@ -2778,21 +2778,21 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/C</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/E</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/F</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/G</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/H</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/I</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/J</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/K</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Alien/X</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
@@ -2804,10 +2804,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
@@ -2819,10 +2819,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
@@ -2834,10 +2834,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
@@ -2849,10 +2849,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
@@ -2864,10 +2864,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
@@ -2879,10 +2879,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L8</TileSetRef>
 				</Map>
@@ -2894,10 +2894,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Default</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L6</TileSetRef>
 				</Map>
@@ -2909,10 +2909,10 @@
 					</PaletteRefs>
 					<ActionSetRef>Actions.Level1</ActionSetRef>
 					<SpriteSetRefs>
-						<SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
-						<SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
+						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
 				</Map>
@@ -4565,10 +4565,10 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="SpriteSets.SPR4A#3" />
-								<Frame Time="2.0" Value="SpriteSets.SPR4A#2" />
-								<Frame Time="3.0" Value="SpriteSets.SPR4A#1" />
-								<Frame Time="4.0" Value="SpriteSets.SPR4A#0" />
+								<Frame Time="1.0" Value="Vanilla/L4/A#3" />
+								<Frame Time="2.0" Value="Vanilla/L4/A#2" />
+								<Frame Time="3.0" Value="Vanilla/L4/A#1" />
+								<Frame Time="4.0" Value="Vanilla/L4/A#0" />
 							</Frames>
 						</StringTrack>
 						<IntTrack>
@@ -4587,10 +4587,10 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="SpriteSets.SPR4A#0" />
-								<Frame Time="2.0" Value="SpriteSets.SPR4A#1" />
-								<Frame Time="3.0" Value="SpriteSets.SPR4A#2" />
-								<Frame Time="4.0" Value="SpriteSets.SPR4A#3" />
+								<Frame Time="1.0" Value="Vanilla/L4/A#0" />
+								<Frame Time="2.0" Value="Vanilla/L4/A#1" />
+								<Frame Time="3.0" Value="Vanilla/L4/A#2" />
+								<Frame Time="4.0" Value="Vanilla/L4/A#3" />
 							</Frames>
 						</StringTrack>
 						<IntTrack>
@@ -4609,10 +4609,10 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="SpriteSets.SPR4A#7" />
-								<Frame Time="2.0" Value="SpriteSets.SPR4A#6" />
-								<Frame Time="3.0" Value="SpriteSets.SPR4A#5" />
-								<Frame Time="4.0" Value="SpriteSets.SPR4A#4" />
+								<Frame Time="1.0" Value="Vanilla/L4/A#7" />
+								<Frame Time="2.0" Value="Vanilla/L4/A#6" />
+								<Frame Time="3.0" Value="Vanilla/L4/A#5" />
+								<Frame Time="4.0" Value="Vanilla/L4/A#4" />
 							</Frames>
 						</StringTrack>
 						<IntTrack>
@@ -4631,10 +4631,10 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="SpriteSets.SPR4A#4" />
-								<Frame Time="2.0" Value="SpriteSets.SPR4A#5" />
-								<Frame Time="3.0" Value="SpriteSets.SPR4A#6" />
-								<Frame Time="4.0" Value="SpriteSets.SPR4A#7" />
+								<Frame Time="1.0" Value="Vanilla/L4/A#4" />
+								<Frame Time="2.0" Value="Vanilla/L4/A#5" />
+								<Frame Time="3.0" Value="Vanilla/L4/A#6" />
+								<Frame Time="4.0" Value="Vanilla/L4/A#7" />
 							</Frames>
 						</StringTrack>
 						<IntTrack>
@@ -4653,10 +4653,10 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="SpriteSets.SPR4A#8" />
-								<Frame Time="2.0" Value="SpriteSets.SPR4A#9" />
-								<Frame Time="3.0" Value="SpriteSets.SPR4A#10" />
-								<Frame Time="4.0" Value="SpriteSets.SPR4A#11" />
+								<Frame Time="1.0" Value="Vanilla/L4/A#8" />
+								<Frame Time="2.0" Value="Vanilla/L4/A#9" />
+								<Frame Time="3.0" Value="Vanilla/L4/A#10" />
+								<Frame Time="4.0" Value="Vanilla/L4/A#11" />
 							</Frames>
 						</StringTrack>
 						<IntTrack>
@@ -4675,10 +4675,10 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="1.0" Value="SpriteSets.SPR4A#12" />
-								<Frame Time="2.0" Value="SpriteSets.SPR4A#13" />
-								<Frame Time="3.0" Value="SpriteSets.SPR4A#14" />
-								<Frame Time="4.0" Value="SpriteSets.SPR4A#15" />
+								<Frame Time="1.0" Value="Vanilla/L4/A#12" />
+								<Frame Time="2.0" Value="Vanilla/L4/A#13" />
+								<Frame Time="3.0" Value="Vanilla/L4/A#14" />
+								<Frame Time="4.0" Value="Vanilla/L4/A#15" />
 							</Frames>
 						</StringTrack>
 						<IntTrack>
@@ -4704,14 +4704,14 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#0" />
-								<Frame Time="0.5" Value="SpriteSets.HERO1#1" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#2" />
-								<Frame Time="1.5" Value="SpriteSets.HERO1#3" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#4" />
-								<Frame Time="2.5" Value="SpriteSets.HERO1#3" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#2" />
-								<Frame Time="3.5" Value="SpriteSets.HERO1#1" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#0" />
+								<Frame Time="0.5" Value="Vanilla/Common/Hero/1#1" />
+								<Frame Time="1.0" Value="Vanilla/Common/Hero/1#2" />
+								<Frame Time="1.5" Value="Vanilla/Common/Hero/1#3" />
+								<Frame Time="2.0" Value="Vanilla/Common/Hero/1#4" />
+								<Frame Time="2.5" Value="Vanilla/Common/Hero/1#3" />
+								<Frame Time="3.0" Value="Vanilla/Common/Hero/1#2" />
+								<Frame Time="3.5" Value="Vanilla/Common/Hero/1#1" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4730,14 +4730,14 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#5" />
-								<Frame Time="0.5" Value="SpriteSets.HERO1#6" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#7" />
-								<Frame Time="1.5" Value="SpriteSets.HERO1#8" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#9" />
-								<Frame Time="2.5" Value="SpriteSets.HERO1#8" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#7" />
-								<Frame Time="3.5" Value="SpriteSets.HERO1#6" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#5" />
+								<Frame Time="0.5" Value="Vanilla/Common/Hero/1#6" />
+								<Frame Time="1.0" Value="Vanilla/Common/Hero/1#7" />
+								<Frame Time="1.5" Value="Vanilla/Common/Hero/1#8" />
+								<Frame Time="2.0" Value="Vanilla/Common/Hero/1#9" />
+								<Frame Time="2.5" Value="Vanilla/Common/Hero/1#8" />
+								<Frame Time="3.0" Value="Vanilla/Common/Hero/1#7" />
+								<Frame Time="3.5" Value="Vanilla/Common/Hero/1#6" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4756,14 +4756,14 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#10" />
-								<Frame Time="0.5" Value="SpriteSets.HERO1#11" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#12" />
-								<Frame Time="1.5" Value="SpriteSets.HERO1#13" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#14" />
-								<Frame Time="2.5" Value="SpriteSets.HERO1#13" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#12" />
-								<Frame Time="3.5" Value="SpriteSets.HERO1#11" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#10" />
+								<Frame Time="0.5" Value="Vanilla/Common/Hero/1#11" />
+								<Frame Time="1.0" Value="Vanilla/Common/Hero/1#12" />
+								<Frame Time="1.5" Value="Vanilla/Common/Hero/1#13" />
+								<Frame Time="2.0" Value="Vanilla/Common/Hero/1#14" />
+								<Frame Time="2.5" Value="Vanilla/Common/Hero/1#13" />
+								<Frame Time="3.0" Value="Vanilla/Common/Hero/1#12" />
+								<Frame Time="3.5" Value="Vanilla/Common/Hero/1#11" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4782,14 +4782,14 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#15" />
-								<Frame Time="0.5" Value="SpriteSets.HERO1#16" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#17" />
-								<Frame Time="1.5" Value="SpriteSets.HERO1#18" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#19" />
-								<Frame Time="2.5" Value="SpriteSets.HERO1#18" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#17" />
-								<Frame Time="3.5" Value="SpriteSets.HERO1#16" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#15" />
+								<Frame Time="0.5" Value="Vanilla/Common/Hero/1#16" />
+								<Frame Time="1.0" Value="Vanilla/Common/Hero/1#17" />
+								<Frame Time="1.5" Value="Vanilla/Common/Hero/1#18" />
+								<Frame Time="2.0" Value="Vanilla/Common/Hero/1#19" />
+								<Frame Time="2.5" Value="Vanilla/Common/Hero/1#18" />
+								<Frame Time="3.0" Value="Vanilla/Common/Hero/1#17" />
+								<Frame Time="3.5" Value="Vanilla/Common/Hero/1#16" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4808,14 +4808,14 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#20" />
-								<Frame Time="0.5" Value="SpriteSets.HERO1#21" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#22" />
-								<Frame Time="1.5" Value="SpriteSets.HERO1#23" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#24" />
-								<Frame Time="2.5" Value="SpriteSets.HERO1#23" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#22" />
-								<Frame Time="3.5" Value="SpriteSets.HERO1#21" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#20" />
+								<Frame Time="0.5" Value="Vanilla/Common/Hero/1#21" />
+								<Frame Time="1.0" Value="Vanilla/Common/Hero/1#22" />
+								<Frame Time="1.5" Value="Vanilla/Common/Hero/1#23" />
+								<Frame Time="2.0" Value="Vanilla/Common/Hero/1#24" />
+								<Frame Time="2.5" Value="Vanilla/Common/Hero/1#23" />
+								<Frame Time="3.0" Value="Vanilla/Common/Hero/1#22" />
+								<Frame Time="3.5" Value="Vanilla/Common/Hero/1#21" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4834,14 +4834,14 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#25" />
-								<Frame Time="0.5" Value="SpriteSets.HERO1#26" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#27" />
-								<Frame Time="1.5" Value="SpriteSets.HERO1#28" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#29" />
-								<Frame Time="2.5" Value="SpriteSets.HERO1#28" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#27" />
-								<Frame Time="3.5" Value="SpriteSets.HERO1#26" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#25" />
+								<Frame Time="0.5" Value="Vanilla/Common/Hero/1#26" />
+								<Frame Time="1.0" Value="Vanilla/Common/Hero/1#27" />
+								<Frame Time="1.5" Value="Vanilla/Common/Hero/1#28" />
+								<Frame Time="2.0" Value="Vanilla/Common/Hero/1#29" />
+								<Frame Time="2.5" Value="Vanilla/Common/Hero/1#28" />
+								<Frame Time="3.0" Value="Vanilla/Common/Hero/1#27" />
+								<Frame Time="3.5" Value="Vanilla/Common/Hero/1#26" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4860,14 +4860,14 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#30" />
-								<Frame Time="0.5" Value="SpriteSets.HERO1#31" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#32" />
-								<Frame Time="1.5" Value="SpriteSets.HERO1#33" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#34" />
-								<Frame Time="2.5" Value="SpriteSets.HERO1#33" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#32" />
-								<Frame Time="3.5" Value="SpriteSets.HERO1#31" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#30" />
+								<Frame Time="0.5" Value="Vanilla/Common/Hero/1#31" />
+								<Frame Time="1.0" Value="Vanilla/Common/Hero/1#32" />
+								<Frame Time="1.5" Value="Vanilla/Common/Hero/1#33" />
+								<Frame Time="2.0" Value="Vanilla/Common/Hero/1#34" />
+								<Frame Time="2.5" Value="Vanilla/Common/Hero/1#33" />
+								<Frame Time="3.0" Value="Vanilla/Common/Hero/1#32" />
+								<Frame Time="3.5" Value="Vanilla/Common/Hero/1#31" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4886,14 +4886,14 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#35" />
-								<Frame Time="0.5" Value="SpriteSets.HERO1#36" />
-								<Frame Time="1.0" Value="SpriteSets.HERO1#37" />
-								<Frame Time="1.5" Value="SpriteSets.HERO1#38" />
-								<Frame Time="2.0" Value="SpriteSets.HERO1#39" />
-								<Frame Time="2.5" Value="SpriteSets.HERO1#38" />
-								<Frame Time="3.0" Value="SpriteSets.HERO1#37" />
-								<Frame Time="3.5" Value="SpriteSets.HERO1#36" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#35" />
+								<Frame Time="0.5" Value="Vanilla/Common/Hero/1#36" />
+								<Frame Time="1.0" Value="Vanilla/Common/Hero/1#37" />
+								<Frame Time="1.5" Value="Vanilla/Common/Hero/1#38" />
+								<Frame Time="2.0" Value="Vanilla/Common/Hero/1#39" />
+								<Frame Time="2.5" Value="Vanilla/Common/Hero/1#38" />
+								<Frame Time="3.0" Value="Vanilla/Common/Hero/1#37" />
+								<Frame Time="3.5" Value="Vanilla/Common/Hero/1#36" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4912,7 +4912,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#0" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#0" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4931,7 +4931,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#5" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#5" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4950,7 +4950,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#10" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#10" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4969,7 +4969,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#15" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#15" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -4988,7 +4988,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#20" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#20" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -5007,7 +5007,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#25" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#25" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -5026,7 +5026,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#30" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#30" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -5045,7 +5045,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.HERO1#35" />
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1#35" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -5090,10 +5090,10 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.SPR4B#4" />
-								<Frame Time="0.5" Value="SpriteSets.SPR4B#4" />
-								<Frame Time="1.0" Value="SpriteSets.SPR4B#5" />
-								<Frame Time="1.5" Value="SpriteSets.SPR4B#6" />
+								<Frame Time="0.0" Value="Vanilla/L4/B#4" />
+								<Frame Time="0.5" Value="Vanilla/L4/B#4" />
+								<Frame Time="1.0" Value="Vanilla/L4/B#5" />
+								<Frame Time="1.5" Value="Vanilla/L4/B#6" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -5112,14 +5112,14 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="SpriteSets.SPR4B#0" />
-								<Frame Time="0.5" Value="SpriteSets.SPR4B#0" />
-								<Frame Time="1.0" Value="SpriteSets.SPR4B#1" />
-								<Frame Time="1.5" Value="SpriteSets.SPR4B#2" />
-								<Frame Time="2.0" Value="SpriteSets.SPR4B#3" />
-								<Frame Time="2.5" Value="SpriteSets.SPR4B#2" />
-								<Frame Time="3.0" Value="SpriteSets.SPR4B#1" />
-								<Frame Time="3.5" Value="SpriteSets.SPR4B#0" />
+								<Frame Time="0.0" Value="Vanilla/L4/B#0" />
+								<Frame Time="0.5" Value="Vanilla/L4/B#0" />
+								<Frame Time="1.0" Value="Vanilla/L4/B#1" />
+								<Frame Time="1.5" Value="Vanilla/L4/B#2" />
+								<Frame Time="2.0" Value="Vanilla/L4/B#3" />
+								<Frame Time="2.5" Value="Vanilla/L4/B#2" />
+								<Frame Time="3.0" Value="Vanilla/L4/B#1" />
+								<Frame Time="3.5" Value="Vanilla/L4/B#0" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
