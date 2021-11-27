@@ -18,7 +18,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
     {
         #region Private Fields
 
-        private const string PICKABLE_PREFIX = @"Entities\Common\Pickables";
+        private const string PICKABLE_PREFIX = @"Defaults\Templates\ABTA\Common\Pickables";
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 

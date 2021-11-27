@@ -15,7 +15,7 @@ namespace OpenBreed.Sandbox.Entities
     {
         #region Private Fields
 
-        private const string PREFIX = @"Entities\Common\Environment";
+        private const string PREFIX = @"Defaults\Templates\ABTA\Common\Environment";
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 

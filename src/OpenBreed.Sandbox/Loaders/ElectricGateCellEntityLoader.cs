@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Model.Maps;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.ElectricGate;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders

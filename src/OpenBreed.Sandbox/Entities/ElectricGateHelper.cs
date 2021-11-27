@@ -32,7 +32,7 @@ using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Audio.Interface.Data;
 
-namespace OpenBreed.Sandbox.Entities.ElectricGate
+namespace OpenBreed.Sandbox.Entities
 {
     public class ElectricGateHelper
     {
@@ -47,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.ElectricGate
 
         public void AddVertical(World world, int x, int y)
         {
-            var door = entityFactory.Create(@"Entities\ElectricGate\ElectricGateVertical.xml")
+            var door = entityFactory.Create(@"Defaults\Templates\ABTA\L4\ElectricGateVertical.xml")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();
@@ -57,7 +57,7 @@ namespace OpenBreed.Sandbox.Entities.ElectricGate
 
         public void AddHorizontal(World world, int x, int y)
         {
-            var door = entityFactory.Create(@"Entities\ElectricGate\ElectricGateHorizontal.xml")
+            var door = entityFactory.Create(@"Defaults\Templates\ABTA\L4\ElectricGateHorizontal.xml")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();

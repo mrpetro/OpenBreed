@@ -34,7 +34,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public void AddTVFlickering(World world, int x, int y, string tileAtlasName, int gfxValue)
         {
-            var entity = entityFactory.Create(@"Entities\Level4\TVFlickering.xml")
+            var entity = entityFactory.Create(@"Defaults\Templates\ABTA\L4\TVFlickering.xml")
                 .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -46,7 +46,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public void AddMonsterEating(World world, int x, int y, string tileAtlasName, int gfxValue)
         {
-            var entity = entityFactory.Create(@"Entities\Level4\MonsterEating.xml")
+            var entity = entityFactory.Create(@"Defaults\Templates\ABTA\L4\MonsterEating.xml")
                 .SetParameter("tileSet", tileAtlasName)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)

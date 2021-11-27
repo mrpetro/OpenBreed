@@ -5,7 +5,7 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using System;
 
-namespace OpenBreed.Sandbox.Entities.Camera
+namespace OpenBreed.Sandbox.Entities
 {
     public class CameraHelper
     {
@@ -57,7 +57,7 @@ namespace OpenBreed.Sandbox.Entities.Camera
 
         public Entity CreateCamera(float x, float y, float width, float height)
         {
-            var entity = entityFactory.Create(@"Entities\Common\Camera.xml")
+            var entity = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Camera.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetParameter("width", width)

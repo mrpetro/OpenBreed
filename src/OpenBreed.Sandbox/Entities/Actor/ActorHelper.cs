@@ -75,7 +75,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public Entity CreateActor(Vector2 pos)
         {
-            var actor = entityFactory.Create(@"Entities\Actor\John.xml")
+            var actor = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Actors\John.xml")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .Build();
