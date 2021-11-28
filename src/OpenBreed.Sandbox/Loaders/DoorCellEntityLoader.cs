@@ -9,7 +9,6 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Fields
 
-        public const int DOOR_STANDARD = 62;
         public const int DOOR_RED = 28;
         public const int DOOR_GREEN = 29;
         public const int DOOR_BLUE = 30;
@@ -33,14 +32,12 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
-            //if (!mapAssets.TileAtlasName.EndsWith("L4"))
-            //    return;
-
             var rightValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
+            mapper.Map(rightValue, gfxValue, out string rightTemplateName, out flavor);
 
-            if (rightValue == DOOR_STANDARD)
+            if (rightTemplateName == templateName)
             {
                 doorHelper.AddHorizontal(world, ix, iy);
                 visited[ix, iy] = true;
@@ -49,8 +46,9 @@ namespace OpenBreed.Sandbox.Loaders
             }
 
             var downValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
+            mapper.Map(downValue, gfxValue, out string downTemplateName, out flavor);
 
-            if (downValue == DOOR_STANDARD)
+            if (downTemplateName == templateName)
             {
                 doorHelper.AddVertical(world, ix, iy);
                 visited[ix, iy] = true;

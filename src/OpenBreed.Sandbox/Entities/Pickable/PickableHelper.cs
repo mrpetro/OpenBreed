@@ -36,29 +36,12 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         #region Public Methods
 
-
-        public void LoadStamps()
-        {
-            //var soundLoader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
-
-            //soundLoader.Load("Vanilla/Common/Ammo/Picked");
-            //soundLoader.Load("Vanilla/Common/CreditsSmall/Picked");
-            //soundLoader.Load("Vanilla/Common/CreditsBig/Picked");
-            //soundLoader.Load("Vanilla/Common/MedkitSmall/Picked");
-            //soundLoader.Load("Vanilla/Common/MedkitBig/Picked");
-            //soundLoader.Load("Vanilla/Common/KeycardStandard/Picked");
-            //soundLoader.Load("Vanilla/Common/KeycardRed/Picked");
-            //soundLoader.Load("Vanilla/Common/KeycardGreen/Picked");
-            //soundLoader.Load("Vanilla/Common/KeycardBlue/Picked");
-            //soundLoader.Load("Vanilla/Common/ExtraLife/Picked"); 
-        }
-
-        public void AddItem(World world, int x, int y, string name, string tileAtlasName, int gfxValue, string flavor = null)
+        public void AddItem(World world, int x, int y, string name, string level, int gfxValue, string flavor = null)
         {
             var path = $@"{PICKABLE_PREFIX}\{name}.xml";
 
             var pickable = entityFactory.Create(path)
-                .SetParameter("tileSet", tileAtlasName)
+                .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)

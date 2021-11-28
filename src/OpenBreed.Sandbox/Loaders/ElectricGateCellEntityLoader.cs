@@ -9,10 +9,10 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Fields
 
-        public const int PASS_UP = 7;
-        public const int PASS_DOWN = 8;
-        public const int PASS_RIGHT = 12;
-        public const int PASS_LEFT = 13;
+        public const string PASS_UP = "ElectricGateUp";
+        public const string PASS_DOWN = "ElectricGateDown";
+        public const string PASS_RIGHT = "ElectricGateRight";
+        public const string PASS_LEFT = "ElectricGateLeft";
 
         #endregion Public Fields
 
@@ -33,11 +33,35 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        private void PutPassUpDown(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        {
+            switch (templateName)
+            {
+                case PASS_UP:
+                case PASS_DOWN:
+                    PutPassUpDown(mapAssets, map, visited, ix, iy, gfxValue, templateName, world);
+                    break;
+
+                case PASS_RIGHT:
+                case PASS_LEFT:
+                    PutPassRightLeft(mapAssets, map, visited, ix, iy, gfxValue, templateName, world);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void PutPassUpDown(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
         {
             var rightValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
+            mapper.Map(rightValue, gfxValue, out string rightTemplateName, out string flavor);
 
-            if (actionValue == rightValue)
+            if (rightTemplateName == templateName)
             {
                 electricGateHelper.AddHorizontal(world, ix, iy);
                 visited[ix, iy] = true;
@@ -53,11 +77,12 @@ namespace OpenBreed.Sandbox.Loaders
             }
         }
 
-        private void PutPassRightLeft(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private void PutPassRightLeft(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
         {
             var downValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
+            mapper.Map(downValue, gfxValue, out string downTemplateName, out string flavor);
 
-            if (downValue == actionValue)
+            if (downTemplateName == templateName)
             {
                 electricGateHelper.AddVertical(world, ix, iy);
                 visited[ix, iy] = true;
@@ -73,23 +98,6 @@ namespace OpenBreed.Sandbox.Loaders
             }
         }
 
-        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
-        {
-            switch (actionValue)
-            {
-                case PASS_UP:
-                case PASS_DOWN:
-                    PutPassUpDown(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
-                    break;
-                case PASS_RIGHT:
-                case PASS_LEFT:
-                    PutPassRightLeft(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

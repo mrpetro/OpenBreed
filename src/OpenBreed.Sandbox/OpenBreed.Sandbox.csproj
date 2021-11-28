@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Components\EquipmentComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
+    <Compile Include="Entities\Builders\MapCodesL4.cs" />
     <Compile Include="Entities\ElectricGateHelper.cs" />
     <Compile Include="Entities\FixtureTypes.cs" />
     <Compile Include="Entities\EnvironmentHelper.cs" />
@@ -121,7 +122,7 @@
     <Compile Include="Entities\Actor\States\Rotation\RotationState.cs" />
     <Compile Include="Entities\Actor\States\Rotation\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Rotation\RotatingState.cs" />
-    <Compile Include="Entities\Builders\MapAssets.cs" />
+    <Compile Include="Entities\Builders\MapMapper.cs" />
     <Compile Include="Entities\Button\ButtonHelper.cs" />
     <Compile Include="Entities\Button\ButtonState.cs" />
     <Compile Include="Entities\Button\ManagerCollectionExtensions.cs" />

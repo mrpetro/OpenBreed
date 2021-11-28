@@ -24,8 +24,6 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private const string ANIM_PREFIX = "Vanilla/L4";
-        private const string STAMP_PREFIX = "Vanilla/L4";
         private const string SOUND_PREFIX = "Vanilla/Common";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
@@ -59,12 +57,13 @@ namespace OpenBreed.Sandbox.Components.States
         {
             var pos = entity.Get<PositionComponent>();
             var metadata = entity.Get<ClassComponent>();
+            var level = metadata.Level;
             var className = metadata.Name;
             var flavor = metadata.Flavor;
 
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var clipId = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{stateName}/{flavor}").Id;
-            var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/Opened").Id;
+            var clipId = clipMan.GetByName($"{level}/{className}/{stateName}/{flavor}").Id;
+            var stampId = stampMan.GetByName($"{level}/{className}/{flavor}/Opened").Id;
             var soundId = soundMan.GetByName($"{SOUND_PREFIX}/{className}/{stateName}");
 
             entity.SetSpriteOn();

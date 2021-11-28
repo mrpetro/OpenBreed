@@ -11,7 +11,6 @@ namespace OpenBreed.Sandbox.Loaders
 
         public const int ACTOR_ONLY_OBSTACLE_CODE = 60;
         public const int FULL_OBSTACLE_CODE = 63;
-
         public const int VOID_CODE = 0;
 
         #endregion Public Fields
@@ -33,23 +32,19 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
-            switch (actionValue)
+            switch (templateName)
             {
-                case FULL_OBSTACLE_CODE:
-                    genericCellHelper.AddFullObstacleCell(world, ix, iy, mapAssets.TileAtlasName, gfxValue);
+                case "FullObstacle":
+                    genericCellHelper.AddFullObstacleCell(world, ix, iy, mapAssets.Level, gfxValue);
                     break;
-                case ACTOR_ONLY_OBSTACLE_CODE:
-                    genericCellHelper.AddActorOnlyObstacleCell(world, ix, iy, mapAssets.TileAtlasName, gfxValue);
+                case "ActorOnlyObstacle":
+                    genericCellHelper.AddActorOnlyObstacleCell(world, ix, iy, mapAssets.Level, gfxValue);
                     break;
-                case VOID_CODE:
-                    genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.TileAtlasName, gfxValue);
+                case "Void":
+                    genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.Level, gfxValue);
                     break;
-
-                    //default:
-                    //    PutGenericCell(worldBlockBuilder, layout, world, ix, iy, gfxValue, actionValue, hasBody: false, unknown: true);
-                    //    break;
             }
 
             visited[ix, iy] = true;

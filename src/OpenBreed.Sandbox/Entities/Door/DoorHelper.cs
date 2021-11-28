@@ -48,7 +48,8 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void AddVertical(World world, int x, int y)
         {
-            var door = entityFactory.Create(@"Defaults\Templates\ABTA\L4\DoorVertical.xml")
+            var door = entityFactory.Create(@"Defaults\Templates\ABTA\Common\DoorVertical.xml")
+                .SetParameter("level", "Vanilla/L4")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();
@@ -58,23 +59,13 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void AddHorizontal(World world, int x, int y)
         {
-            var door = entityFactory.Create(@"Defaults\Templates\ABTA\L4\DoorHorizontal.xml")
+            var door = entityFactory.Create(@"Defaults\Templates\ABTA\Common\DoorHorizontal.xml")
+                .SetParameter("level", "Vanilla/L4")
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();
 
-
             door.EnterWorld(world.Id);
-        }
-
-        public void LoadStamps()
-        {
-            var tileStampLoader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
-
-            tileStampLoader.Load("Vanilla/L4/Door/Horizontal/Closed");
-            tileStampLoader.Load("Vanilla/L4/Door/Horizontal/Opened");
-            tileStampLoader.Load("Vanilla/L4/Door/Vertical/Closed");
-            tileStampLoader.Load("Vanilla/L4/Door/Vertical/Opened");
         }
     }
 }

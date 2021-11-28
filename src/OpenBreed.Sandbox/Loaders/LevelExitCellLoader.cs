@@ -13,10 +13,6 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Fields
 
-        public const int EXIT_1 = 54;
-        public const int EXIT_2 = 37;
-        public const int EXIT_3 = 38;
-
         #endregion Public Fields
 
         #region Private Fields
@@ -38,28 +34,28 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
             var missonBlock = map.Blocks.OfType<MapMissionBlock>().FirstOrDefault();
 
             int exitId;
 
-            switch (actionValue)
+            switch (templateName)
             {
-                case EXIT_1:
+                case "MapExit1":
                     exitId = missonBlock.EXC1;
                     break;
-                case EXIT_2:
+                case "MapExit2":
                     exitId = missonBlock.EXC2;
                     break;
-                case EXIT_3:
+                case "MapExit3":
                     exitId = missonBlock.EXC3;
                     break;
                 default:
                     throw new NotImplementedException("Exit type not implemented");
             }
 
-            entriesHelper.AddMapExit(world, ix, iy, exitId, mapAssets.TileAtlasName, gfxValue);
+            entriesHelper.AddMapExit(world, ix, iy, exitId, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
         }
 

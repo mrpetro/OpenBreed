@@ -32,10 +32,10 @@ namespace OpenBreed.Sandbox.Entities
         private readonly IEntityFactory entityFactory;
         private readonly IBuilderFactory builderFactory;
 
-        public void AddTVFlickering(World world, int x, int y, string tileAtlasName, int gfxValue)
+        public void AddTVFlickering(World world, int x, int y, string level, int gfxValue)
         {
             var entity = entityFactory.Create(@"Defaults\Templates\ABTA\L4\TVFlickering.xml")
-                .SetParameter("tileSet", tileAtlasName)
+                .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
@@ -44,10 +44,10 @@ namespace OpenBreed.Sandbox.Entities
             entity.EnterWorld(world.Id);
         }
 
-        public void AddMonsterEating(World world, int x, int y, string tileAtlasName, int gfxValue)
+        public void AddMonsterEating(World world, int x, int y, string level, int gfxValue)
         {
             var entity = entityFactory.Create(@"Defaults\Templates\ABTA\L4\MonsterEating.xml")
-                .SetParameter("tileSet", tileAtlasName)
+                .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)

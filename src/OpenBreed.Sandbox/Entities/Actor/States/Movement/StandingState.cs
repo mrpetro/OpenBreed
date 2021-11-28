@@ -89,8 +89,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             {
                 entity.SetState(FsmId, (int)MovementImpulse.Walk);
 
-                var angularThrust = entity.Get<AngularVelocityComponent>();
-                angularThrust.Value = new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y);
+                var angularVelocity = entity.Get<AngularVelocityComponent>();
+                angularVelocity.Value = new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y);
             }
         }
 

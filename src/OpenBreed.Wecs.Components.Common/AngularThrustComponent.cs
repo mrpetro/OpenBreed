@@ -4,6 +4,11 @@ using System;
 
 namespace OpenBreed.Wecs.Components.Common
 {
+    public interface IAngularThrustComponentTemplate : IComponentTemplate
+    {
+        float Value { get; }
+    }
+
     public class AngularThrustComponent : IEntityComponent
     {
         #region Public Constructors
@@ -40,5 +45,18 @@ namespace OpenBreed.Wecs.Components.Common
         }
 
         #endregion Public Methods
+    }
+
+    public sealed class AngularThrustComponentFactory : ComponentFactoryBase<IAngularThrustComponentTemplate>
+    {
+        internal AngularThrustComponentFactory()
+        {
+
+        }
+
+        protected override IEntityComponent Create(IAngularThrustComponentTemplate template)
+        {
+            return new AngularThrustComponent(template.Value);
+        }
     }
 }

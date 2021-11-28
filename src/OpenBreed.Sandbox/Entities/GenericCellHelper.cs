@@ -33,12 +33,12 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public void AddUnknownCell(World world, int x, int y, int actionValue, string tileAtlasName, int gfxValue)
+        public void AddUnknownCell(World world, int x, int y, int actionValue, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\Unknown.xml";
 
             var pickable = entityFactory.Create(path)
-                .SetParameter("tileSet", tileAtlasName)
+                .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
@@ -49,12 +49,12 @@ namespace OpenBreed.Sandbox.Entities
             pickable.EnterWorld(world.Id);
         }
 
-        internal void AddVoidCell(World world, int x, int y, string tileAtlasName, int gfxValue)
+        internal void AddVoidCell(World world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\Void.xml";
 
             var pickable = entityFactory.Create(path)
-                .SetParameter("tileSet", tileAtlasName)
+                .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
@@ -63,12 +63,12 @@ namespace OpenBreed.Sandbox.Entities
             pickable.EnterWorld(world.Id);
         }
 
-        internal void AddFullObstacleCell(World world, int x, int y, string tileAtlasName, int gfxValue)
+        internal void AddFullObstacleCell(World world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\FullObstacle.xml";
 
             var pickable = entityFactory.Create(path)
-                .SetParameter("tileSet", tileAtlasName)
+                .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
@@ -77,12 +77,12 @@ namespace OpenBreed.Sandbox.Entities
             pickable.EnterWorld(world.Id);
         }
 
-        internal void AddActorOnlyObstacleCell(World world, int x, int y, string tileAtlasName, int gfxValue)
+        internal void AddActorOnlyObstacleCell(World world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\ActorOnlyObstacle.xml";
 
             var pickable = entityFactory.Create(path)
-                .SetParameter("tileSet", tileAtlasName)
+                .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
