@@ -2,6 +2,7 @@
 <EntityTemplate>
 	<Components>
 		<Class>
+			<Level>$(level)</Level>
 			<Name>CreditsSmall</Name>
 			<Flavor>$(flavor)</Flavor>	
 		</Class>

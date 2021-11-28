@@ -2,6 +2,7 @@
 <EntityTemplate>
 	<Components>
 		<Class>
+			<Level>$(level)</Level>
 			<Name>KeycardBlue</Name>
 		</Class>
 		<Fsm>

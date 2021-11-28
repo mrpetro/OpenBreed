@@ -1634,26 +1634,6 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="606" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="612" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
-					</Cells>
-				</TileStamp>
 				<TileStamp Id="Vanilla/L4/KeycardStandard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="602" />
@@ -1662,26 +1642,6 @@
 				<TileStamp Id="Vanilla/L4/KeycardStandard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="608" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="614" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
 				<TileStamp Id="Vanilla/L4/PowerUpS/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
@@ -1694,26 +1654,6 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="609" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="615" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
-					</Cells>
-				</TileStamp>
 				<TileStamp Id="Vanilla/L4/ExtraLife/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="604" />
@@ -1722,26 +1662,6 @@
 				<TileStamp Id="Vanilla/L4/ExtraLife/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="610" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="616" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
 				<TileStamp Id="Vanilla/L4/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
@@ -1754,26 +1674,6 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="611" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="617" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
-					</Cells>
-				</TileStamp>
 				<TileStamp Id="Vanilla/L4/CreditsBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="620" />
@@ -1782,26 +1682,6 @@
 				<TileStamp Id="Vanilla/L4/CreditsBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="626" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="632" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
 				<TileStamp Id="Vanilla/L4/PowerUpF/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
@@ -1814,26 +1694,6 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="627" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="633" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
-					</Cells>
-				</TileStamp>
 				<TileStamp Id="Vanilla/L4/MedkitBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="622" />
@@ -1842,26 +1702,6 @@
 				<TileStamp Id="Vanilla/L4/MedkitBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="628" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="634" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
 				<TileStamp Id="Vanilla/L4/PowerUpA/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
@@ -1874,26 +1714,6 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="629" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="635" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
-					</Cells>
-				</TileStamp>
 				<TileStamp Id="Vanilla/L4/Ammo/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="624" />
@@ -1902,26 +1722,6 @@
 				<TileStamp Id="Vanilla/L4/Ammo/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="630" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="636" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
 				<TileStamp Id="Vanilla/L4/AreaScanner/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
@@ -1934,26 +1734,6 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="631" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="637" />
-					</Cells>
-				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
-					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
-					</Cells>
-				</TileStamp>
 				<TileStamp Id="Vanilla/L4/MedkitSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="598" />
@@ -1964,6 +1744,116 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="599" />
 					</Cells>
 				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="606" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="608" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="609" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="610" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="611" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="626" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="627" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="628" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="629" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="630" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="631" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
 				<TileStamp Id="Vanilla/L4/MedkitSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="649" />
@@ -1972,6 +1862,116 @@
 				<TileStamp Id="Vanilla/L4/MedkitSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="650" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="612" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="614" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="615" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="616" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="617" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="632" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="633" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="634" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="635" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="636" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="637" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
 				<TileStamp Id="Vanilla/L4/MedkitSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
@@ -2024,6 +2024,458 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="619" />
 					</Cells>
 				</TileStamp>
+
+
+				<TileStamp Id="Vanilla/L3/Door/Horizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="20" />
+						<Cell X="1" Y="0" TsId="Vanilla/L3" TsTi ="21" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/Door/Horizontal/Opened" Width="2" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="40" />
+						<Cell X="1" Y="0" TsId="Vanilla/L3" TsTi ="41" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/Door/Vertical/Closed" Width="1" Height="2" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="60" />
+						<Cell X="0" Y="1" TsId="Vanilla/L3" TsTi ="80" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/Door/Vertical/Opened" Width="1" Height="2" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="61" />
+						<Cell X="0" Y="1" TsId="Vanilla/L3" TsTi ="81" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="600" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardStandard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="602" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardStandard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpS/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="603" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpS/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/ExtraLife/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="604" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/ExtraLife/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="605" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="620" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpF/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="621" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpF/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="622" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpA/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="623" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpA/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/Ammo/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="624" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/Ammo/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/AreaScanner/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="625" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/AreaScanner/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="582" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="583" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="606" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardStandard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="608" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardStandard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpS/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="609" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpS/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/ExtraLife/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="610" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/ExtraLife/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="611" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="626" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpF/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="627" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpF/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="628" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpA/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="629" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpA/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/Ammo/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="630" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/Ammo/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/AreaScanner/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="631" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/AreaScanner/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="726" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="727" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="612" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardStandard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="614" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardStandard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpS/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="615" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpS/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/ExtraLife/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="616" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/ExtraLife/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="617" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="632" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/CreditsBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpF/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="633" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpF/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="634" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpA/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="635" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/PowerUpA/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/Ammo/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="636" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/Ammo/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/AreaScanner/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="637" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/AreaScanner/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="591" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/MedkitSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="592" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardRed/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="831" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardRed/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="832" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardGreen/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="791" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardGreen/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="792" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardBlue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="811" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardBlue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="812" />
+					</Cells>
+				</TileStamp>
+
+
+				<TileStamp Id="Vanilla/L3/KeycardRed/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="834" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardRed/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="835" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardGreen/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="794" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardGreen/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="795" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardBlue/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="814" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L3/KeycardBlue/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="815" />
+					</Cells>
+				</TileStamp>
+				
+				
+				
+				
 			</Items>
 		</TileStamps>
 		<Maps>

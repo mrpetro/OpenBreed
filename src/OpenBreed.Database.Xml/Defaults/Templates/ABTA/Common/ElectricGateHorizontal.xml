@@ -2,8 +2,9 @@
 <EntityTemplate>
     <Components>
 		<Class>
+			<Level>$(level)</Level>
 			<Name>ElectricGate</Name>
-			<Flavor>Vertical</Flavor>
+			<Flavor>Horizontal</Flavor>
 		</Class>
 		<Timer>
 		</Timer>
@@ -17,7 +18,7 @@
 				<State>
 					<Speed>20</Speed>
 					<Loop>true</Loop>
-					<ClipName>Vanilla/L4/ElectricGate/Working/Vertical</ClipName>
+					<ClipName>$(level)/ElectricGate/Working/Horizontal</ClipName>
 				</State>
 			</States>
 		</Animation>
@@ -27,7 +28,7 @@
 			<CorFactor>1.0</CorFactor>
 			<Fixtures>
 				<Fixture>
-					<ShapeName>Shapes/Box_0_0_16_32</ShapeName>
+					<ShapeName>Shapes/Box_0_0_32_16</ShapeName>
 					<Groups>
 						<!--<Group>FullObstacle</Group>-->
 						<!--<Group>DoorOpenTrigger</Group>-->
@@ -36,7 +37,7 @@
 			</Fixtures>
 		</Body>
 		<Sprite>
-			<AtlasName>Vanilla/L4/A#8</AtlasName>
+			<AtlasName>Vanilla/L4/A#12</AtlasName>
 			<ImageIndex>0</ImageIndex>
 			<Origin X="0" Y="0" />
 			<Order>0</Order>
@@ -49,5 +50,7 @@
 			<FontSize>6</FontSize>
 			<Order>0</Order>
 		</Text>
+		<!--<Messaging>
+		</Messaging>-->
     </Components>
 </EntityTemplate>

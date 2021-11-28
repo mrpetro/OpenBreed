@@ -3,7 +3,7 @@
 	<Components>
 		<Class>
 			<Level>$(level)</Level>
-			<Name>MedkitSmall</Name>
+			<Name>SmartCard</Name>
 			<Flavor>$(flavor)</Flavor>
 		</Class>
 		<Fsm>
@@ -32,5 +32,10 @@
 			<FontSize>6</FontSize>
 			<Order>0</Order>
 		</Text>
+		<TilePutter>
+			<AtlasName>$(level)</AtlasName>
+			<ImageIndex>$(imageIndex)</ImageIndex>
+			<Position X="$(startX)" Y="$(startY)" />
+		</TilePutter>
 	</Components>
 </EntityTemplate>
