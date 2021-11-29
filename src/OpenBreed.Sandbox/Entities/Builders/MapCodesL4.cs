@@ -9,42 +9,48 @@ namespace OpenBreed.Sandbox.Entities.Builders
     public static class MapCodesL4
     {
         //Action codes
-        public const int ACTOR_ONLY_OBSTACLE_CODE = 60;
-        public const int FULL_OBSTACLE_CODE = 63;
+
         public const int VOID_CODE = 0;
 
-        public const int TELEPORT_ENTRY_CODE = 31;
-        public const int TELEPORT_EXIT_CODE = 36;
 
-        public const int MAP_ENTRY_3 = 56;
-        public const int MAP_ENTRY_1 = 45;
-        public const int MAP_ENTRY_2 = 46;
-
-        public const int MAP_EXIT_1 = 54;
-        public const int MAP_EXIT_2 = 37;
-        public const int MAP_EXIT_3 = 38;
-
-
-        public const int GENERIC_ITEM = 55;
-        public const int SMARTCARD_1 = 22;
-        public const int SMARTCARD_2 = 23;
-        public const int SMARTCARD_3 = 24;
-        public const int KEYCARD_RED = 33;
-        public const int KEYCARD_GREEN = 34;
-        public const int KEYCARD_BLUE = 35;
-        public const int KEYCARD_SPECIAL = 39;
-        public const int DOOR_STANDARD = 62;
-        public const int DOOR_RED = 28;
-        public const int DOOR_GREEN = 29;
-        public const int DOOR_BLUE = 30;
         public const int ELECTRIC_GATE_UP = 7;
         public const int ELECTRIC_GATE_DOWN = 8;
         public const int ELECTRIC_GATE_RIGHT = 12;
         public const int ELECTRIC_GATE_LEFT = 13;
-
-
         public const int TV_FLICKERING_CODE = 14;
+
+
+
+        public const int SMARTCARD_1 = 22;
+        public const int SMARTCARD_2 = 23;
+        public const int SMARTCARD_3 = 24;
+
+
+        public const int DOOR_RED = 28;
+        public const int DOOR_GREEN = 29;
+        public const int DOOR_BLUE = 30;
+        public const int TELEPORT_ENTRY_CODE = 31;
+        public const int KEYCARD_RED = 33;
+        public const int KEYCARD_GREEN = 34;
+        public const int KEYCARD_BLUE = 35;
+        public const int TELEPORT_EXIT_CODE = 36;
+        public const int MAP_EXIT_2 = 37;
+        public const int MAP_EXIT_3 = 38;
+
+        public const int KEYCARD_SPECIAL = 39;
         public const int MONSTER_EATING_CODE = 42;
+
+
+        public const int MAP_ENTRY_1 = 45;
+        public const int MAP_ENTRY_2 = 46;
+
+        public const int MAP_EXIT_1 = 54;
+        public const int GENERIC_ITEM = 55;
+        public const int MAP_ENTRY_3 = 56;
+
+        public const int ACTOR_ONLY_OBSTACLE_CODE = 60;
+        public const int DOOR_STANDARD = 62;
+        public const int FULL_OBSTACLE_CODE = 63;
 
 
         //GFX codes

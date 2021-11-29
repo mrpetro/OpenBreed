@@ -4,6 +4,7 @@ using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Sounds;
@@ -110,7 +111,11 @@ namespace OpenBreed.Sandbox.Loaders
 
             var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
             if (dbMap == null)
-                throw new Exception("Map error: " + entryId);
+                throw new Exception($"Missing Map: {entryId}");
+
+            var dbActionSet = repositoryProvider.GetRepository<IDbActionSet>().GetById(dbMap.ActionSetRef);
+            if (dbActionSet == null)
+                throw new Exception($"Missing Action set: { dbMap.ActionSetRef}");
 
             LoadReferencedTileSet(dbMap);
             LoadReferencedSpriteSets(dbMap);
