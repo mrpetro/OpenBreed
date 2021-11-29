@@ -2486,7 +2486,7 @@
 						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L1</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
@@ -2499,7 +2499,7 @@
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L4</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
@@ -2514,7 +2514,7 @@
 						<PaletteRef>Palettes.MAP.03.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.03.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L4</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
@@ -2529,7 +2529,7 @@
 						<PaletteRef>Palettes.MAP.04.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.04.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L4</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
@@ -2544,7 +2544,7 @@
 						<PaletteRef>Palettes.MAP.05.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.05.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L4</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
@@ -2559,7 +2559,7 @@
 						<PaletteRef>Palettes.MAP.06.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.06.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L1</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
@@ -2574,7 +2574,7 @@
 						<PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/LD</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
@@ -2600,7 +2600,7 @@
 						<PaletteRef>Palettes.MAP.08.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.08.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/LD</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
@@ -2615,7 +2615,7 @@
 						<PaletteRef>Palettes.MAP.09.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.09.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/LD</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
@@ -2630,7 +2630,7 @@
 						<PaletteRef>Palettes.MAP.10.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.10.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/LD</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
@@ -2645,7 +2645,7 @@
 						<PaletteRef>Palettes.MAP.11.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.11.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L1</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
@@ -2660,7 +2660,7 @@
 						<PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L7</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
@@ -2686,7 +2686,7 @@
 						<PaletteRef>Palettes.MAP.13.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.13.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L7</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
@@ -2701,7 +2701,7 @@
 						<PaletteRef>Palettes.MAP.14.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.14.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L7</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
@@ -2716,7 +2716,7 @@
 						<PaletteRef>Palettes.MAP.15.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.15.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L7</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
@@ -2731,7 +2731,7 @@
 						<PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L5</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L5/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L5/B</SpriteSetRef>
@@ -2758,7 +2758,7 @@
 						<PaletteRef>Palettes.MAP.17.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.17.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L5</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L5/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L5/B</SpriteSetRef>
@@ -2773,7 +2773,7 @@
 						<PaletteRef>Palettes.MAP.18.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.18.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L5</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L5/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L5/B</SpriteSetRef>
@@ -2788,7 +2788,7 @@
 						<PaletteRef>Palettes.MAP.19.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.19.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L5</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L5/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L5/B</SpriteSetRef>
@@ -2803,7 +2803,7 @@
 						<PaletteRef>Palettes.MAP.20.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.20.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L1</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
@@ -2818,7 +2818,7 @@
 						<PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L6</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
@@ -2844,7 +2844,7 @@
 						<PaletteRef>Palettes.MAP.22.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.22.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L6</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
@@ -2859,7 +2859,7 @@
 						<PaletteRef>Palettes.MAP.23.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.23.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L6</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
@@ -2874,7 +2874,7 @@
 						<PaletteRef>Palettes.MAP.24.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.24.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L6</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
@@ -2889,7 +2889,7 @@
 						<PaletteRef>Palettes.MAP.25.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.25.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L1</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
@@ -2904,7 +2904,7 @@
 						<PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
@@ -2930,7 +2930,7 @@
 						<PaletteRef>Palettes.MAP.27.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.27.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
@@ -2945,7 +2945,7 @@
 						<PaletteRef>Palettes.MAP.28.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.28.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
@@ -2960,7 +2960,7 @@
 						<PaletteRef>Palettes.MAP.29.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.29.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
@@ -2975,7 +2975,7 @@
 						<PaletteRef>Palettes.MAP.30.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.30.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L4</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
@@ -2990,7 +2990,7 @@
 						<PaletteRef>Palettes.MAP.31.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.31.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L4</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
@@ -3005,7 +3005,7 @@
 						<PaletteRef>Palettes.MAP.32.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.32.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/LD</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
@@ -3020,7 +3020,7 @@
 						<PaletteRef>Palettes.MAP.33.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.33.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
@@ -3035,7 +3035,7 @@
 						<PaletteRef>Palettes.MAP.34.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.34.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/LD</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
@@ -3050,7 +3050,7 @@
 						<PaletteRef>Palettes.MAP.35.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.35.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/LD</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
@@ -3065,7 +3065,7 @@
 						<PaletteRef>Palettes.MAP.36.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.36.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L4</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
@@ -3080,7 +3080,7 @@
 						<PaletteRef>Palettes.MAP.37.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.37.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/LD</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
@@ -3095,7 +3095,7 @@
 						<PaletteRef>Palettes.MAP.38.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.38.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/LD</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/LD/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/LD/B</SpriteSetRef>
@@ -3110,7 +3110,7 @@
 						<PaletteRef>Palettes.MAP.39.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.39.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
@@ -3125,7 +3125,7 @@
 						<PaletteRef>Palettes.MAP.40.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.40.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L4</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L4/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L4/B</SpriteSetRef>
@@ -3140,7 +3140,7 @@
 						<PaletteRef>Palettes.MAP.41.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.41.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3t</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
@@ -3155,7 +3155,7 @@
 						<PaletteRef>Palettes.MAP.42.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.42.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
@@ -3170,7 +3170,7 @@
 						<PaletteRef>Palettes.MAP.43.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.43.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L7</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
@@ -3185,7 +3185,7 @@
 						<PaletteRef>Palettes.MAP.44.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.44.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L7</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L7/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L7/B</SpriteSetRef>
@@ -3200,7 +3200,7 @@
 						<PaletteRef>Palettes.MAP.45.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.45.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
 						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
@@ -3213,7 +3213,7 @@
 						<PaletteRef>Palettes.MAP.46.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.46.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L3</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L3/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L3/B</SpriteSetRef>
@@ -3228,7 +3228,7 @@
 						<PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L8</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
@@ -3254,7 +3254,7 @@
 						<PaletteRef>Palettes.MAP.48.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.48.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L8</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
@@ -3269,7 +3269,7 @@
 						<PaletteRef>Palettes.MAP.49.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.49.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L8</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
@@ -3284,7 +3284,7 @@
 						<PaletteRef>Palettes.MAP.50.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.50.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L8</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
@@ -3299,7 +3299,7 @@
 						<PaletteRef>Palettes.MAP.51.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.51.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L8</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
@@ -3314,7 +3314,7 @@
 						<PaletteRef>Palettes.MAP.52.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.52.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L8</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
@@ -3329,7 +3329,7 @@
 						<PaletteRef>Palettes.MAP.53.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.53.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L8</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L8/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L8/B</SpriteSetRef>
@@ -3344,7 +3344,7 @@
 						<PaletteRef>Palettes.MAP.54.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.54.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Default</ActionSetRef>
+					<ActionSetRef>Vanilla/L6</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L6/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L6/B</SpriteSetRef>
@@ -3359,7 +3359,7 @@
 						<PaletteRef>Palettes.MAP.55.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.55.ALCM</PaletteRef>
 					</PaletteRefs>
-					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<ActionSetRef>Vanilla/L1</ActionSetRef>
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L1/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
@@ -3372,7 +3372,7 @@
 		</Maps>
 		<ActionSets>
 			<Items>
-				<ActionSet Id="Actions.Level1">
+				<ActionSet Id="Vanilla/L1">
 					<Actions>
 						<Action Id="0" Name="Air" Visibility="false">
 							<Color>#7F000000</Color>
@@ -4522,6 +4522,4067 @@
 							<Triggers />
 						</Action>
 						<Action Id="63" Name="Obstacle(for all)" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Collision, nothing can penetrate</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+					</Actions>
+				</ActionSet>
+
+				<ActionSet Id="Vanilla/LD">
+					<Actions>
+						<Action Id="0" Name="Void" Visibility="false">
+							<Color>#00000000</Color>
+							<Description>No collision, no action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="1" Name="Monster1" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 1</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="2" Name="Monster2" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 2</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="3" Name="Monster3" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 3</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="4" Name="Monster4" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 4</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="5" Name="Unknown 5" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="6" Name="Unknown 6" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="7" Name="ElectricGateUp" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="8" Name="ElectricGateDown" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="9" Name="Unknown 9" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="10" Name="Unknown 10" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="11" Name="Unknown 11" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="12" Name="ElectricGateRight" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="13" Name="ElectricGateLeft" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="14" Name="TVFlickering" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to right, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="15" Name="Directed gun (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to up, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="20" Name="Unknown 20" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="21" Name="Unknown 21" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="22" Name="SmartCard1" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 1</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="23" Name="SmartCard2" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 2</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="24" Name="SmartCard3" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 3</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="25" Name="Unknown 25" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="26" Name="Unknown 26" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="27" Name="Unknown 27" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="28" Name="DoorRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="29" Name="DoorGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="30" Name="DoorBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="31" Name="TeleportEntry" Visibility="true">
+							<Color>#200FF000</Color>
+							<Description>Teleports player from this location</Description>
+							<Presentation>
+								<Color>#200FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="32" Name="MonsterSpawner" Visibility="true">
+							<Color>#F0FF0000</Color>
+							<Description>Creates a hole where monsters are comming from</Description>
+							<Presentation>
+								<Color>#F0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="33" Name="KeycardRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="34" Name="KeycardGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="35" Name="KeycardBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="36" Name="TeleportExit" Visibility="true">
+							<Color>#40FF00FF</Color>
+							<Description>Teleports player to this location, the one that is furthest</Description>
+							<Presentation>
+								<Color>#40FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="37" Name="MapExit2" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="38" Name="MapExit3" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="39" Name="KeycardSpecial" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="40" Name="Unknown 40" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="41" Name="Unknown 41" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="42" Name="MonsterEating" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="43" Name="Unknown 43" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="44" Name="Unknown 44" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="45" Name="MapEntry1" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="46" Name="MapEntry2" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="47" Name="Unknown 47" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="48" Name="Unknown 48" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="49" Name="Radioactive area" Visibility="true">
+							<Color>#4FFF7F00</Color>
+							<Description>Radioactive area that hurts player if standing on it</Description>
+							<Presentation>
+								<Color>#4FFF7F00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="50" Name="Wall turrent (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing up</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="51" Name="Wall turrent (Right)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing right</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="52" Name="Wall turrent (Down)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing down</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="53" Name="Wall turrent (Left)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing left</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="54" Name="MapExit1" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="55" Name="GenericItem" Visibility="true">
+							<Color>#500000FF</Color>
+							<Description>Pickable item</Description>
+							<Presentation>
+								<Color>#500000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="56" Name="MapEntry3" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+							<Color>#20FF00FF</Color>
+							<Description>Player can walk trough it, movable enemies can't</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="58" Name="Unknown 58" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="59" Name="Unknown 59" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="60" Name="ActorOnlyObstacle" Visibility="true">
+							<Color>#32FFFF00</Color>
+							<Description>Collision, but weapon projectile can penetrate</Description>
+							<Presentation>
+								<Color>#32FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="61" Name="IntexTerminal" Visibility="true">
+							<Color>#7F0000FF</Color>
+							<Description>Terminal that player may use</Description>
+							<Presentation>
+								<Color>#7F0000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="62" Name="DoorStandard" Visibility="true">
+							<Color>#320FF000</Color>
+							<Description>Door with no color card required</Description>
+							<Presentation>
+								<Color>#320FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="63" Name="FullObstacle" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Collision, nothing can penetrate</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+					</Actions>
+				</ActionSet>
+				<ActionSet Id="Vanilla/L3">
+					<Actions>
+						<Action Id="0" Name="Void" Visibility="false">
+							<Color>#00000000</Color>
+							<Description>No collision, no action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="1" Name="Monster1" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 1</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="2" Name="Monster2" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 2</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="3" Name="Monster3" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 3</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="4" Name="Monster4" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 4</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="5" Name="Unknown 5" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="6" Name="Unknown 6" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="7" Name="ElectricGateUp" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="8" Name="ElectricGateDown" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="9" Name="Unknown 9" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="10" Name="Unknown 10" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="11" Name="Unknown 11" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="12" Name="ElectricGateRight" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="13" Name="ElectricGateLeft" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="14" Name="TVFlickering" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to right, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="15" Name="Directed gun (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to up, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="20" Name="Unknown 20" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="21" Name="Unknown 21" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="22" Name="SmartCard1" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 1</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="23" Name="SmartCard2" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 2</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="24" Name="SmartCard3" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 3</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="25" Name="Unknown 25" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="26" Name="Unknown 26" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="27" Name="Unknown 27" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="28" Name="DoorRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="29" Name="DoorGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="30" Name="DoorBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="31" Name="TeleportEntry" Visibility="true">
+							<Color>#200FF000</Color>
+							<Description>Teleports player from this location</Description>
+							<Presentation>
+								<Color>#200FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="32" Name="MonsterSpawner" Visibility="true">
+							<Color>#F0FF0000</Color>
+							<Description>Creates a hole where monsters are comming from</Description>
+							<Presentation>
+								<Color>#F0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="33" Name="KeycardRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="34" Name="KeycardGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="35" Name="KeycardBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="36" Name="TeleportExit" Visibility="true">
+							<Color>#40FF00FF</Color>
+							<Description>Teleports player to this location, the one that is furthest</Description>
+							<Presentation>
+								<Color>#40FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="37" Name="MapExit2" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="38" Name="MapExit3" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="39" Name="KeycardSpecial" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="40" Name="Unknown 40" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="41" Name="Unknown 41" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="42" Name="MonsterEating" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="43" Name="Unknown 43" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="44" Name="Unknown 44" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="45" Name="MapEntry1" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="46" Name="MapEntry2" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="47" Name="Unknown 47" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="48" Name="Unknown 48" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="49" Name="Radioactive area" Visibility="true">
+							<Color>#4FFF7F00</Color>
+							<Description>Radioactive area that hurts player if standing on it</Description>
+							<Presentation>
+								<Color>#4FFF7F00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="50" Name="Wall turrent (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing up</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="51" Name="Wall turrent (Right)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing right</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="52" Name="Wall turrent (Down)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing down</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="53" Name="Wall turrent (Left)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing left</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="54" Name="MapExit1" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="55" Name="GenericItem" Visibility="true">
+							<Color>#500000FF</Color>
+							<Description>Pickable item</Description>
+							<Presentation>
+								<Color>#500000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="56" Name="MapEntry3" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+							<Color>#20FF00FF</Color>
+							<Description>Player can walk trough it, movable enemies can't</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="58" Name="Unknown 58" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="59" Name="Unknown 59" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="60" Name="ActorOnlyObstacle" Visibility="true">
+							<Color>#32FFFF00</Color>
+							<Description>Collision, but weapon projectile can penetrate</Description>
+							<Presentation>
+								<Color>#32FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="61" Name="IntexTerminal" Visibility="true">
+							<Color>#7F0000FF</Color>
+							<Description>Terminal that player may use</Description>
+							<Presentation>
+								<Color>#7F0000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="62" Name="DoorStandard" Visibility="true">
+							<Color>#320FF000</Color>
+							<Description>Door with no color card required</Description>
+							<Presentation>
+								<Color>#320FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="63" Name="FullObstacle" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Collision, nothing can penetrate</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+					</Actions>
+				</ActionSet>
+				<ActionSet Id="Vanilla/L4">
+					<Actions>
+						<Action Id="0" Name="Void" Visibility="false">
+							<Color>#00000000</Color>
+							<Description>No collision, no action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="1" Name="Monster1" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 1</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="2" Name="Monster2" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 2</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="3" Name="Monster3" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 3</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="4" Name="Monster4" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 4</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="5" Name="Unknown 5" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="6" Name="Unknown 6" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="7" Name="ElectricGateUp" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="8" Name="ElectricGateDown" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="9" Name="Unknown 9" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="10" Name="Unknown 10" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="11" Name="Unknown 11" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="12" Name="ElectricGateRight" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="13" Name="ElectricGateLeft" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="14" Name="TVFlickering" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to right, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="15" Name="Directed gun (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to up, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="20" Name="Unknown 20" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="21" Name="Unknown 21" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="22" Name="SmartCard1" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 1</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="23" Name="SmartCard2" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 2</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="24" Name="SmartCard3" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 3</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="25" Name="Unknown 25" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="26" Name="Unknown 26" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="27" Name="Unknown 27" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="28" Name="DoorRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="29" Name="DoorGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="30" Name="DoorBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="31" Name="TeleportEntry" Visibility="true">
+							<Color>#200FF000</Color>
+							<Description>Teleports player from this location</Description>
+							<Presentation>
+								<Color>#200FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="32" Name="MonsterSpawner" Visibility="true">
+							<Color>#F0FF0000</Color>
+							<Description>Creates a hole where monsters are comming from</Description>
+							<Presentation>
+								<Color>#F0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="33" Name="KeycardRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="34" Name="KeycardGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="35" Name="KeycardBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="36" Name="TeleportExit" Visibility="true">
+							<Color>#40FF00FF</Color>
+							<Description>Teleports player to this location, the one that is furthest</Description>
+							<Presentation>
+								<Color>#40FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="37" Name="MapExit2" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="38" Name="MapExit3" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="39" Name="KeycardSpecial" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="40" Name="Unknown 40" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="41" Name="Unknown 41" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="42" Name="MonsterEating" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="43" Name="Unknown 43" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="44" Name="Unknown 44" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="45" Name="MapEntry1" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="46" Name="MapEntry2" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="47" Name="Unknown 47" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="48" Name="Unknown 48" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="49" Name="Radioactive area" Visibility="true">
+							<Color>#4FFF7F00</Color>
+							<Description>Radioactive area that hurts player if standing on it</Description>
+							<Presentation>
+								<Color>#4FFF7F00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="50" Name="Wall turrent (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing up</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="51" Name="Wall turrent (Right)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing right</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="52" Name="Wall turrent (Down)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing down</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="53" Name="Wall turrent (Left)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing left</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="54" Name="MapExit1" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="55" Name="GenericItem" Visibility="true">
+							<Color>#500000FF</Color>
+							<Description>Pickable item</Description>
+							<Presentation>
+								<Color>#500000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="56" Name="MapEntry3" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+							<Color>#20FF00FF</Color>
+							<Description>Player can walk trough it, movable enemies can't</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="58" Name="Unknown 58" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="59" Name="Unknown 59" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="60" Name="ActorOnlyObstacle" Visibility="true">
+							<Color>#32FFFF00</Color>
+							<Description>Collision, but weapon projectile can penetrate</Description>
+							<Presentation>
+								<Color>#32FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="61" Name="IntexTerminal" Visibility="true">
+							<Color>#7F0000FF</Color>
+							<Description>Terminal that player may use</Description>
+							<Presentation>
+								<Color>#7F0000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="62" Name="DoorStandard" Visibility="true">
+							<Color>#320FF000</Color>
+							<Description>Door with no color card required</Description>
+							<Presentation>
+								<Color>#320FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="63" Name="FullObstacle" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Collision, nothing can penetrate</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+					</Actions>
+				</ActionSet>
+				<ActionSet Id="Vanilla/L5">
+					<Actions>
+						<Action Id="0" Name="Void" Visibility="false">
+							<Color>#00000000</Color>
+							<Description>No collision, no action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="1" Name="Monster1" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 1</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="2" Name="Monster2" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 2</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="3" Name="Monster3" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 3</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="4" Name="Monster4" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 4</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="5" Name="Unknown 5" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="6" Name="Unknown 6" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="7" Name="ElectricGateUp" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="8" Name="ElectricGateDown" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="9" Name="Unknown 9" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="10" Name="Unknown 10" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="11" Name="Unknown 11" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="12" Name="ElectricGateRight" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="13" Name="ElectricGateLeft" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="14" Name="TVFlickering" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to right, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="15" Name="Directed gun (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to up, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="20" Name="Unknown 20" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="21" Name="Unknown 21" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="22" Name="SmartCard1" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 1</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="23" Name="SmartCard2" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 2</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="24" Name="SmartCard3" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 3</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="25" Name="Unknown 25" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="26" Name="Unknown 26" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="27" Name="Unknown 27" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="28" Name="DoorRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="29" Name="DoorGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="30" Name="DoorBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="31" Name="TeleportEntry" Visibility="true">
+							<Color>#200FF000</Color>
+							<Description>Teleports player from this location</Description>
+							<Presentation>
+								<Color>#200FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="32" Name="MonsterSpawner" Visibility="true">
+							<Color>#F0FF0000</Color>
+							<Description>Creates a hole where monsters are comming from</Description>
+							<Presentation>
+								<Color>#F0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="33" Name="KeycardRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="34" Name="KeycardGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="35" Name="KeycardBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="36" Name="TeleportExit" Visibility="true">
+							<Color>#40FF00FF</Color>
+							<Description>Teleports player to this location, the one that is furthest</Description>
+							<Presentation>
+								<Color>#40FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="37" Name="MapExit2" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="38" Name="MapExit3" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="39" Name="KeycardSpecial" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="40" Name="Unknown 40" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="41" Name="Unknown 41" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="42" Name="MonsterEating" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="43" Name="Unknown 43" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="44" Name="Unknown 44" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="45" Name="MapEntry1" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="46" Name="MapEntry2" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="47" Name="Unknown 47" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="48" Name="Unknown 48" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="49" Name="Radioactive area" Visibility="true">
+							<Color>#4FFF7F00</Color>
+							<Description>Radioactive area that hurts player if standing on it</Description>
+							<Presentation>
+								<Color>#4FFF7F00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="50" Name="Wall turrent (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing up</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="51" Name="Wall turrent (Right)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing right</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="52" Name="Wall turrent (Down)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing down</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="53" Name="Wall turrent (Left)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing left</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="54" Name="MapExit1" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="55" Name="GenericItem" Visibility="true">
+							<Color>#500000FF</Color>
+							<Description>Pickable item</Description>
+							<Presentation>
+								<Color>#500000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="56" Name="MapEntry3" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+							<Color>#20FF00FF</Color>
+							<Description>Player can walk trough it, movable enemies can't</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="58" Name="Unknown 58" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="59" Name="Unknown 59" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="60" Name="ActorOnlyObstacle" Visibility="true">
+							<Color>#32FFFF00</Color>
+							<Description>Collision, but weapon projectile can penetrate</Description>
+							<Presentation>
+								<Color>#32FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="61" Name="IntexTerminal" Visibility="true">
+							<Color>#7F0000FF</Color>
+							<Description>Terminal that player may use</Description>
+							<Presentation>
+								<Color>#7F0000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="62" Name="DoorStandard" Visibility="true">
+							<Color>#320FF000</Color>
+							<Description>Door with no color card required</Description>
+							<Presentation>
+								<Color>#320FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="63" Name="FullObstacle" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Collision, nothing can penetrate</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+					</Actions>
+				</ActionSet>
+				<ActionSet Id="Vanilla/L6">
+					<Actions>
+						<Action Id="0" Name="Void" Visibility="false">
+							<Color>#00000000</Color>
+							<Description>No collision, no action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="1" Name="Monster1" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 1</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="2" Name="Monster2" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 2</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="3" Name="Monster3" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 3</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="4" Name="Monster4" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 4</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="5" Name="Unknown 5" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="6" Name="Unknown 6" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="7" Name="ElectricGateUp" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="8" Name="ElectricGateDown" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="9" Name="Unknown 9" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="10" Name="Unknown 10" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="11" Name="Unknown 11" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="12" Name="ElectricGateRight" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="13" Name="ElectricGateLeft" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="14" Name="TVFlickering" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to right, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="15" Name="Directed gun (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to up, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="20" Name="Unknown 20" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="21" Name="Unknown 21" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="22" Name="SmartCard1" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 1</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="23" Name="SmartCard2" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 2</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="24" Name="SmartCard3" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 3</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="25" Name="Unknown 25" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="26" Name="Unknown 26" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="27" Name="Unknown 27" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="28" Name="DoorRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="29" Name="DoorGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="30" Name="DoorBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="31" Name="TeleportEntry" Visibility="true">
+							<Color>#200FF000</Color>
+							<Description>Teleports player from this location</Description>
+							<Presentation>
+								<Color>#200FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="32" Name="MonsterSpawner" Visibility="true">
+							<Color>#F0FF0000</Color>
+							<Description>Creates a hole where monsters are comming from</Description>
+							<Presentation>
+								<Color>#F0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="33" Name="KeycardRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="34" Name="KeycardGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="35" Name="KeycardBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="36" Name="TeleportExit" Visibility="true">
+							<Color>#40FF00FF</Color>
+							<Description>Teleports player to this location, the one that is furthest</Description>
+							<Presentation>
+								<Color>#40FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="37" Name="MapExit2" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="38" Name="MapExit3" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="39" Name="KeycardSpecial" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="40" Name="Unknown 40" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="41" Name="Unknown 41" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="42" Name="MonsterEating" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="43" Name="Unknown 43" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="44" Name="Unknown 44" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="45" Name="MapEntry1" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="46" Name="MapEntry2" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="47" Name="Unknown 47" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="48" Name="Unknown 48" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="49" Name="Radioactive area" Visibility="true">
+							<Color>#4FFF7F00</Color>
+							<Description>Radioactive area that hurts player if standing on it</Description>
+							<Presentation>
+								<Color>#4FFF7F00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="50" Name="Wall turrent (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing up</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="51" Name="Wall turrent (Right)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing right</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="52" Name="Wall turrent (Down)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing down</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="53" Name="Wall turrent (Left)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing left</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="54" Name="MapExit1" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="55" Name="GenericItem" Visibility="true">
+							<Color>#500000FF</Color>
+							<Description>Pickable item</Description>
+							<Presentation>
+								<Color>#500000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="56" Name="MapEntry3" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+							<Color>#20FF00FF</Color>
+							<Description>Player can walk trough it, movable enemies can't</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="58" Name="Unknown 58" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="59" Name="Unknown 59" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="60" Name="ActorOnlyObstacle" Visibility="true">
+							<Color>#32FFFF00</Color>
+							<Description>Collision, but weapon projectile can penetrate</Description>
+							<Presentation>
+								<Color>#32FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="61" Name="IntexTerminal" Visibility="true">
+							<Color>#7F0000FF</Color>
+							<Description>Terminal that player may use</Description>
+							<Presentation>
+								<Color>#7F0000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="62" Name="DoorStandard" Visibility="true">
+							<Color>#320FF000</Color>
+							<Description>Door with no color card required</Description>
+							<Presentation>
+								<Color>#320FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="63" Name="FullObstacle" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Collision, nothing can penetrate</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+					</Actions>
+				</ActionSet>
+				<ActionSet Id="Vanilla/L7">
+					<Actions>
+						<Action Id="0" Name="Void" Visibility="false">
+							<Color>#00000000</Color>
+							<Description>No collision, no action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="1" Name="Monster1" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 1</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="2" Name="Monster2" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 2</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="3" Name="Monster3" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 3</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="4" Name="Monster4" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 4</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="5" Name="Unknown 5" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="6" Name="Unknown 6" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="7" Name="ElectricGateUp" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="8" Name="ElectricGateDown" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="9" Name="Unknown 9" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="10" Name="Unknown 10" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="11" Name="Unknown 11" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="12" Name="ElectricGateRight" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="13" Name="ElectricGateLeft" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="14" Name="TVFlickering" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to right, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="15" Name="Directed gun (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to up, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="20" Name="Unknown 20" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="21" Name="Unknown 21" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="22" Name="SmartCard1" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 1</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="23" Name="SmartCard2" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 2</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="24" Name="SmartCard3" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 3</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="25" Name="Unknown 25" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="26" Name="Unknown 26" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="27" Name="Unknown 27" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="28" Name="DoorRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="29" Name="DoorGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="30" Name="DoorBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="31" Name="TeleportEntry" Visibility="true">
+							<Color>#200FF000</Color>
+							<Description>Teleports player from this location</Description>
+							<Presentation>
+								<Color>#200FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="32" Name="MonsterSpawner" Visibility="true">
+							<Color>#F0FF0000</Color>
+							<Description>Creates a hole where monsters are comming from</Description>
+							<Presentation>
+								<Color>#F0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="33" Name="KeycardRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="34" Name="KeycardGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="35" Name="KeycardBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="36" Name="TeleportExit" Visibility="true">
+							<Color>#40FF00FF</Color>
+							<Description>Teleports player to this location, the one that is furthest</Description>
+							<Presentation>
+								<Color>#40FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="37" Name="MapExit2" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="38" Name="MapExit3" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="39" Name="KeycardSpecial" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="40" Name="Unknown 40" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="41" Name="Unknown 41" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="42" Name="MonsterEating" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="43" Name="Unknown 43" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="44" Name="Unknown 44" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="45" Name="MapEntry1" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="46" Name="MapEntry2" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="47" Name="Unknown 47" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="48" Name="Unknown 48" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="49" Name="Radioactive area" Visibility="true">
+							<Color>#4FFF7F00</Color>
+							<Description>Radioactive area that hurts player if standing on it</Description>
+							<Presentation>
+								<Color>#4FFF7F00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="50" Name="Wall turrent (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing up</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="51" Name="Wall turrent (Right)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing right</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="52" Name="Wall turrent (Down)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing down</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="53" Name="Wall turrent (Left)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing left</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="54" Name="MapExit1" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="55" Name="GenericItem" Visibility="true">
+							<Color>#500000FF</Color>
+							<Description>Pickable item</Description>
+							<Presentation>
+								<Color>#500000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="56" Name="MapEntry3" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+							<Color>#20FF00FF</Color>
+							<Description>Player can walk trough it, movable enemies can't</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="58" Name="Unknown 58" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="59" Name="Unknown 59" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="60" Name="ActorOnlyObstacle" Visibility="true">
+							<Color>#32FFFF00</Color>
+							<Description>Collision, but weapon projectile can penetrate</Description>
+							<Presentation>
+								<Color>#32FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="61" Name="IntexTerminal" Visibility="true">
+							<Color>#7F0000FF</Color>
+							<Description>Terminal that player may use</Description>
+							<Presentation>
+								<Color>#7F0000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="62" Name="DoorStandard" Visibility="true">
+							<Color>#320FF000</Color>
+							<Description>Door with no color card required</Description>
+							<Presentation>
+								<Color>#320FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="63" Name="FullObstacle" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Collision, nothing can penetrate</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+					</Actions>
+				</ActionSet>
+				<ActionSet Id="Vanilla/L8">
+					<Actions>
+						<Action Id="0" Name="Void" Visibility="false">
+							<Color>#00000000</Color>
+							<Description>No collision, no action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="1" Name="Monster1" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 1</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="2" Name="Monster2" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 2</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="3" Name="Monster3" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 3</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="4" Name="Monster4" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Start position of monster type 4</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="5" Name="Unknown 5" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="6" Name="Unknown 6" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="7" Name="ElectricGateUp" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="8" Name="ElectricGateDown" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="9" Name="Unknown 9" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="10" Name="Unknown 10" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="11" Name="Unknown 11" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="12" Name="ElectricGateRight" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="13" Name="ElectricGateLeft" Visibility="true">
+							<Color>#80FFFF00</Color>
+							<Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="14" Name="TVFlickering" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to right, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="15" Name="Directed gun (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Gun directed to up, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+							<Color>#20FFFF00</Color>
+							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="20" Name="Unknown 20" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="21" Name="Unknown 21" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="22" Name="SmartCard1" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 1</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="23" Name="SmartCard2" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 2</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="24" Name="SmartCard3" Visibility="true">
+							<Color>#800000FF</Color>
+							<Description>This will show note message from smart card 3</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="25" Name="Unknown 25" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="26" Name="Unknown 26" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="27" Name="Unknown 27" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="28" Name="DoorRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="29" Name="DoorGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="30" Name="DoorBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="31" Name="TeleportEntry" Visibility="true">
+							<Color>#200FF000</Color>
+							<Description>Teleports player from this location</Description>
+							<Presentation>
+								<Color>#200FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="32" Name="MonsterSpawner" Visibility="true">
+							<Color>#F0FF0000</Color>
+							<Description>Creates a hole where monsters are comming from</Description>
+							<Presentation>
+								<Color>#F0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="33" Name="KeycardRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="34" Name="KeycardGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="35" Name="KeycardBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="36" Name="TeleportExit" Visibility="true">
+							<Color>#40FF00FF</Color>
+							<Description>Teleports player to this location, the one that is furthest</Description>
+							<Presentation>
+								<Color>#40FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="37" Name="MapExit2" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="38" Name="MapExit3" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="39" Name="KeycardSpecial" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="40" Name="Unknown 40" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="41" Name="Unknown 41" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="42" Name="MonsterEating" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="43" Name="Unknown 43" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="44" Name="Unknown 44" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="45" Name="MapEntry1" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="46" Name="MapEntry2" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="47" Name="Unknown 47" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="48" Name="Unknown 48" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="49" Name="Radioactive area" Visibility="true">
+							<Color>#4FFF7F00</Color>
+							<Description>Radioactive area that hurts player if standing on it</Description>
+							<Presentation>
+								<Color>#4FFF7F00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="50" Name="Wall turrent (Up)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing up</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="51" Name="Wall turrent (Right)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing right</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="52" Name="Wall turrent (Down)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing down</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="53" Name="Wall turrent (Left)" Visibility="true">
+							<Color>#A0FF0000</Color>
+							<Description>Wall turret facing left</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="54" Name="MapExit1" Visibility="true">
+							<Color>#500FF000</Color>
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="55" Name="GenericItem" Visibility="true">
+							<Color>#500000FF</Color>
+							<Description>Pickable item</Description>
+							<Presentation>
+								<Color>#500000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="56" Name="MapEntry3" Visibility="true">
+							<Color>#7FFF00FF</Color>
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+							<Color>#20FF00FF</Color>
+							<Description>Player can walk trough it, movable enemies can't</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="58" Name="Unknown 58" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="59" Name="Unknown 59" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="60" Name="ActorOnlyObstacle" Visibility="true">
+							<Color>#32FFFF00</Color>
+							<Description>Collision, but weapon projectile can penetrate</Description>
+							<Presentation>
+								<Color>#32FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="61" Name="IntexTerminal" Visibility="true">
+							<Color>#7F0000FF</Color>
+							<Description>Terminal that player may use</Description>
+							<Presentation>
+								<Color>#7F0000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="62" Name="DoorStandard" Visibility="true">
+							<Color>#320FF000</Color>
+							<Description>Door with no color card required</Description>
+							<Presentation>
+								<Color>#320FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="63" Name="FullObstacle" Visibility="true">
 							<Color>#50FFFF00</Color>
 							<Description>Collision, nothing can penetrate</Description>
 							<Presentation>
