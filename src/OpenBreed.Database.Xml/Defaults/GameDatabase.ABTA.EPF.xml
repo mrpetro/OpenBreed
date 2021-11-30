@@ -3869,7 +3869,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="55" Name="Item" Visibility="true">
+						<Action Id="55" Name="GenericItem" Visibility="true">
 							<Color>#500000FF</Color>
 							<Description>Pickable item</Description>
 							<Presentation>
@@ -4449,7 +4449,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="55" Name="Item" Visibility="true">
+						<Action Id="55" Name="GenericItem" Visibility="true">
 							<Color>#500000FF</Color>
 							<Description>Pickable item</Description>
 							<Presentation>
