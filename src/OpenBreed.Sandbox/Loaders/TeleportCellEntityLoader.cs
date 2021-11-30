@@ -57,8 +57,10 @@ namespace OpenBreed.Sandbox.Loaders
                 teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, mapAssets.Level, exitGfxValue);
                 visited[found.X, found.Y] = true;
             }
-            else if (templateName == "TeleportExit")
-                visited[ix, iy] = true;
+            //else if (templateName == "TeleportExit")
+            //{
+            //}
+            //visited[ix, iy] = true;
 
             return;
         }

@@ -108,25 +108,26 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<IEntityFactoryProvider>(),
                                                               managerCollection.GetManager<IBroadphaseFactory>(),
                                                               managerCollection.GetManager<ITileGridFactory>(),
-                                                              managerCollection.GetManager<ITileMan>());
+                                                              managerCollection.GetManager<ITileMan>(),
+                                                              managerCollection.GetManager<ILogger>());
 
   
-                mapWorldDataLoader.RegisterEx("Unknown", new UnknownCellEntityLoader(managerCollection.GetManager<GenericCellHelper>()));
+                mapWorldDataLoader.Register("Unknown", new UnknownCellEntityLoader(managerCollection.GetManager<GenericCellHelper>()));
 
                 var levelExitCellLoader = new LevelExitCellLoader(managerCollection.GetManager<ActorHelper>(),
                                                                     managerCollection.GetManager<EntriesHelper>());
 
-                mapWorldDataLoader.RegisterEx("MapExit1", levelExitCellLoader);
-                mapWorldDataLoader.RegisterEx("MapExit2", levelExitCellLoader);
-                mapWorldDataLoader.RegisterEx("MapExit3", levelExitCellLoader);
+                mapWorldDataLoader.Register("MapExit1", levelExitCellLoader);
+                mapWorldDataLoader.Register("MapExit2", levelExitCellLoader);
+                mapWorldDataLoader.Register("MapExit3", levelExitCellLoader);
 
                 var levelEntryCellLoader = new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
                                                                          managerCollection.GetManager<EntriesHelper>());
 
 
-                mapWorldDataLoader.RegisterEx("MapEntry1", levelEntryCellLoader);
-                mapWorldDataLoader.RegisterEx("MapEntry2", levelEntryCellLoader);
-                mapWorldDataLoader.RegisterEx("MapEntry3", levelEntryCellLoader);
+                mapWorldDataLoader.Register("MapEntry1", levelEntryCellLoader);
+                mapWorldDataLoader.Register("MapEntry2", levelEntryCellLoader);
+                mapWorldDataLoader.Register("MapEntry3", levelEntryCellLoader);
 
                 //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_3, levelEntryCellLoader);
                 //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_1, levelEntryCellLoader);
@@ -134,47 +135,44 @@ namespace OpenBreed.Sandbox.Extensions
 
                 var genericCellEntityLoader = new GenericCellEntityLoader(managerCollection.GetManager<GenericCellHelper>());
 
-                mapWorldDataLoader.RegisterEx("Void", genericCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("FullObstacle", genericCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("ActorOnlyObstacle", genericCellEntityLoader);
+                mapWorldDataLoader.Register("Void", genericCellEntityLoader);
+                mapWorldDataLoader.Register("FullObstacle", genericCellEntityLoader);
+                mapWorldDataLoader.Register("ActorOnlyObstacle", genericCellEntityLoader);
 
                 var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetManager<EnvironmentHelper>());
-                mapWorldDataLoader.RegisterEx("TVFlickering", environmentCellLoader);
-                mapWorldDataLoader.RegisterEx("MonsterEating", environmentCellLoader);
+                mapWorldDataLoader.Register("TVFlickering", environmentCellLoader);
+                mapWorldDataLoader.Register("MonsterEating", environmentCellLoader);
 
                 var doorCellEntityLoader = new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>());
-                mapWorldDataLoader.RegisterEx("DoorStandard", doorCellEntityLoader);
+                mapWorldDataLoader.Register("DoorStandard", doorCellEntityLoader);
 
                 var electricGateEntityLoader = new ElectricGateCellEntityLoader(managerCollection.GetManager<ElectricGateHelper>());
-                mapWorldDataLoader.RegisterEx("ElectricGateUp", electricGateEntityLoader);
-                mapWorldDataLoader.RegisterEx("ElectricGateDown", electricGateEntityLoader);
-                mapWorldDataLoader.RegisterEx("ElectricGateRight", electricGateEntityLoader);
-                mapWorldDataLoader.RegisterEx("ElectricGateLeft", electricGateEntityLoader);
+                mapWorldDataLoader.Register("ElectricGateUp", electricGateEntityLoader);
+                mapWorldDataLoader.Register("ElectricGateDown", electricGateEntityLoader);
+                mapWorldDataLoader.Register("ElectricGateRight", electricGateEntityLoader);
+                mapWorldDataLoader.Register("ElectricGateLeft", electricGateEntityLoader);
 
-                var pickableCellEntityLoader = new ItemCellEntityLoader(managerCollection.GetManager<PickableHelper>());
+                var genericItemEntityLoader = new GenericItemEntityLoader(managerCollection.GetManager<PickableHelper>());
 
-                mapWorldDataLoader.RegisterEx("MedkitSmall", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("MedkitBig", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("CreditsSmall", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("CreditsBig", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("KeycardStandard", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("PowerUpS", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("PowerUpA", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("PowerUpF", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("ExtraLife", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("AreaScanner", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("KeycardRed", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("KeycardGreen", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("KeycardBlue", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("KeycardSpecial", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("SmartCard1", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("SmartCard2", pickableCellEntityLoader);
-                mapWorldDataLoader.RegisterEx("SmartCard3", pickableCellEntityLoader);
+                mapWorldDataLoader.Register("GenericItem", genericItemEntityLoader);
+
+                var keycardCellEntityLoader = new KeycardEntityLoader(managerCollection.GetManager<PickableHelper>());
+                mapWorldDataLoader.Register("KeycardRed", keycardCellEntityLoader);
+                mapWorldDataLoader.Register("KeycardGreen", keycardCellEntityLoader);
+                mapWorldDataLoader.Register("KeycardBlue", keycardCellEntityLoader);
+                mapWorldDataLoader.Register("KeycardSpecial", keycardCellEntityLoader);
+
+                var smartCardCellEntityLoader = new SmartCardEntityLoader(managerCollection.GetManager<PickableHelper>());
+                mapWorldDataLoader.Register("SmartCard1", smartCardCellEntityLoader);
+                mapWorldDataLoader.Register("SmartCard2", smartCardCellEntityLoader);
+                mapWorldDataLoader.Register("SmartCard3", smartCardCellEntityLoader);
+
 
                 var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetManager<TeleportHelper>(),
                                                         managerCollection.GetManager<ILogger>());
 
-                mapWorldDataLoader.RegisterEx("TeleportEntry", teleportLoader);
+                mapWorldDataLoader.Register("TeleportEntry", teleportLoader);
+                mapWorldDataLoader.Register("TeleportExit", teleportLoader);
 
                 return mapWorldDataLoader;
 

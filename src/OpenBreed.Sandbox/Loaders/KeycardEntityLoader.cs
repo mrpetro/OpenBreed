@@ -5,7 +5,7 @@ using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    public class ItemCellEntityLoader : IMapWorldEntityLoader
+    public class KeycardEntityLoader : IMapWorldEntityLoader
     {
         #region Private Fields
 
@@ -15,7 +15,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Constructors
 
-        public ItemCellEntityLoader(PickableHelper pickableHelper)
+        public KeycardEntityLoader(PickableHelper pickableHelper)
         {
             this.pickableHelper = pickableHelper;
         }
@@ -24,9 +24,12 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public void Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
-            pickableHelper.AddItem(world, ix, iy, templateName, mapAssets.Level, gfxValue, flavor);
+            if (!mapper.TryGetFlavor(templateName, gfxValue, out flavor))
+                return;
+
+            pickableHelper.AddItem(world, ix, iy, templateName, mapper.Level, gfxValue, flavor);
             visited[ix, iy] = true;
         }
 

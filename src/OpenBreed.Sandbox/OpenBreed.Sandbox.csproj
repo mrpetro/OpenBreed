@@ -95,9 +95,11 @@
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Loaders\AnimatedCellLoader.cs" />
     <Compile Include="Loaders\ElectricGateCellEntityLoader.cs" />
+    <Compile Include="Loaders\KeycardEntityLoader.cs" />
+    <Compile Include="Loaders\SmartCardEntityLoader.cs" />
     <Compile Include="Loaders\LevelExitCellLoader.cs" />
     <Compile Include="Loaders\UnknownCellEntityLoader.cs" />
-    <Compile Include="Loaders\ItemCellEntityLoader.cs" />
+    <Compile Include="Loaders\GenericItemEntityLoader.cs" />
     <Compile Include="Loaders\DoorCellEntityLoader.cs" />
     <Compile Include="Loaders\LevelEntryCellLoader.cs" />
     <Compile Include="Loaders\GenericCellEntityLoader.cs" />

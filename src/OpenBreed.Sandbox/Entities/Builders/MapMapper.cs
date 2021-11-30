@@ -13,6 +13,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
         #region Private Fields
 
         private readonly Dictionary<(int, int), (string, string)> keyValuePairs = new Dictionary<(int, int), (string, string)>();
+        private readonly Dictionary<string, Dictionary<int, string>> keyValuePairsEx = new Dictionary<string, Dictionary<int, string>>();
 
         #endregion Private Fields
 
@@ -37,6 +38,24 @@ namespace OpenBreed.Sandbox.Entities.Builders
             Level = atlasName;
         }
 
+        public bool TryGetFlavor(string templateName, int gfxValue, out string flavor)
+        {
+            if (!keyValuePairsEx.TryGetValue(templateName, out Dictionary<int, string> subDict))
+            {
+                flavor = null;
+                return false;
+            }
+
+            if (subDict.TryGetValue(gfxValue, out flavor))
+                return true;
+
+            if (subDict.TryGetValue(GFX_ANY, out flavor))
+                return true;
+
+            flavor = null;
+            return true;
+        }
+
         public bool Map(int actionValue, int gfxValue, out string templateName, out string flavor)
         {
             if (keyValuePairs.TryGetValue((actionValue, gfxValue), out (string Name, string Flavor) item))
@@ -57,6 +76,17 @@ namespace OpenBreed.Sandbox.Entities.Builders
                 flavor = null;
                 return false;
             }
+        }
+
+        public void Register(string templateName, int gfxValue, string flavor)
+        {
+            if (!keyValuePairsEx.TryGetValue(templateName, out Dictionary<int, string> subDict))
+            {
+                subDict = new Dictionary<int, string>();
+                keyValuePairsEx.Add(templateName, subDict);
+            }
+
+            subDict[gfxValue] = flavor;
         }
 
         public void Register(int actionValue, int gfxValue, string templateName, string flavor)
