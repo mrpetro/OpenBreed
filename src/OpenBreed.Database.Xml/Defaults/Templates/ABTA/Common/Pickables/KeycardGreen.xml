@@ -4,6 +4,7 @@
 		<Class>
 			<Level>$(level)</Level>
 			<Name>KeycardGreen</Name>
+			<Flavor>$(flavor)</Flavor>
 		</Class>
 		<Fsm>
 			<States>

@@ -36,7 +36,7 @@
 			</Fixtures>
 		</Body>
 		<Sprite>
-			<AtlasName>Vanilla/L4/A#4</AtlasName>
+			<AtlasName></AtlasName>
 			<ImageIndex>0</ImageIndex>
 			<Origin X="0" Y="0" />
 			<Order>0</Order>

@@ -1600,431 +1600,450 @@
 		</TileSets>
 		<TileStamps>
 			<Items>
-				<TileStamp Id="Vanilla/L4/Door/Horizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Door/Horizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="88" />
-						<Cell X="1" Y="0" TsId="Vanilla/L4" TsTi ="89" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="946" />
+						<Cell X="1" Y="0" TsId="Vanilla/L1" TsTi ="947" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Door/Horizontal/Opened" Width="2" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Door/Horizontal/Opened" Width="2" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="40" />
-						<Cell X="1" Y="0" TsId="Vanilla/L4" TsTi ="41" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="255" />
+						<Cell X="1" Y="0" TsId="Vanilla/L1" TsTi ="256" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Door/Vertical/Closed" Width="1" Height="2" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Door/Vertical/Closed" Width="1" Height="2" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="28" />
-						<Cell X="0" Y="1" TsId="Vanilla/L4" TsTi ="48" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="60" />
+						<Cell X="0" Y="1" TsId="Vanilla/L1" TsTi ="80" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Door/Vertical/Opened" Width="1" Height="2" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Door/Vertical/Opened" Width="1" Height="2" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="81" />
-						<Cell X="0" Y="1" TsId="Vanilla/L4" TsTi ="61" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="61" />
+						<Cell X="0" Y="1" TsId="Vanilla/L1" TsTi ="81" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="600" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="600" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardStandard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="602" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="602" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardStandard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpS/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="603" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="603" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpS/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/ExtraLife/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="604" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="604" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/ExtraLife/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="605" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="620" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="620" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpF/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="621" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="621" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpF/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="622" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="622" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpA/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="623" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="623" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpA/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Ammo/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="624" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="624" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Ammo/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/AreaScanner/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="625" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="625" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/AreaScanner/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="598" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="543" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="599" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="544" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="606" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="581" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="582" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardStandard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="608" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="608" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardStandard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpS/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="609" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="609" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpS/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/ExtraLife/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="610" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="610" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/ExtraLife/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="611" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="626" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="626" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpF/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="627" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="627" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpF/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="628" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="628" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpA/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="629" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="629" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpA/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Ammo/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="630" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="630" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Ammo/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/AreaScanner/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="631" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="631" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/AreaScanner/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="649" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="726" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="650" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="727" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="612" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="612" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardStandard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="614" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="614" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardStandard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpS/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="615" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="615" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpS/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/ExtraLife/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="616" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="616" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/ExtraLife/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="617" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="632" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="632" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/CreditsBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpF/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="633" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="633" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpF/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="634" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="634" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpA/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="635" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="635" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/PowerUpA/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Ammo/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="636" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="636" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/Ammo/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Ammo/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/AreaScanner/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="637" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="637" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/AreaScanner/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="653" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="591" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/MedkitSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/MedkitSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="654" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="592" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardRed/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardRed/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="362" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="831" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardRed/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardRed/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="363" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="832" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardGreen/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardGreen/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="534" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="791" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardGreen/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardGreen/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="535" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="792" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardBlue/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardBlue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="638" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="811" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardBlue/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardBlue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="639" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="812" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardSpecial/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardRed/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="618" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="834" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardSpecial/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/KeycardRed/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
-						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="619" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="835" />
 					</Cells>
 				</TileStamp>
-
+				<TileStamp Id="Vanilla/L1/KeycardGreen/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="794" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L1/KeycardGreen/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="795" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L1/KeycardBlue/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="814" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L1/KeycardBlue/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="815" />
+					</Cells>
+				</TileStamp>
 
 				<TileStamp Id="Vanilla/L3/Door/Horizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
 					<Cells>
@@ -2473,9 +2492,430 @@
 					</Cells>
 				</TileStamp>
 				
-				
-				
-				
+				<TileStamp Id="Vanilla/L4/Door/Horizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="88" />
+						<Cell X="1" Y="0" TsId="Vanilla/L4" TsTi ="89" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Door/Horizontal/Opened" Width="2" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="40" />
+						<Cell X="1" Y="0" TsId="Vanilla/L4" TsTi ="41" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Door/Vertical/Closed" Width="1" Height="2" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="28" />
+						<Cell X="0" Y="1" TsId="Vanilla/L4" TsTi ="48" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Door/Vertical/Opened" Width="1" Height="2" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="81" />
+						<Cell X="0" Y="1" TsId="Vanilla/L4" TsTi ="61" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="600" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="602" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="603" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="604" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="605" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="620" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="621" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="622" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="623" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="624" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="625" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="598" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="599" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="606" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="608" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="609" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="610" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="611" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="626" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="627" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="628" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="629" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="630" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="631" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="649" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="650" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="612" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="614" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardStandard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="615" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpS/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="616" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/ExtraLife/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="617" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="632" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/CreditsBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="633" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpF/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="634" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitBig/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="635" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/PowerUpA/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="636" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/Ammo/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="637" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/AreaScanner/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="653" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/MedkitSmall/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="654" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardRed/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="362" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardRed/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="363" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardGreen/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="534" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardGreen/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="535" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardBlue/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="638" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardBlue/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="639" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardSpecial/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="618" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L4/KeycardSpecial/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+					<Cells>
+						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="619" />
+					</Cells>
+				</TileStamp>		
 			</Items>
 		</TileStamps>
 		<Maps>
@@ -3374,7 +3814,7 @@
 			<Items>
 				<ActionSet Id="Vanilla/L1">
 					<Actions>
-						<Action Id="0" Name="Air" Visibility="false">
+						<Action Id="0" Name="Void" Visibility="false">
 							<Color>#7F000000</Color>
 							<Description>No collision, no action</Description>
 							<Presentation>
@@ -3383,7 +3823,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="1" Name="Heavy turret" Visibility="true">
+						<Action Id="1" Name="HeavyTurret" Visibility="true">
 							<Color>#50FFFF00</Color>
 							<Description>Left up corner of turrent, insta-kill when when player collides</Description>
 							<Presentation>
@@ -3572,7 +4012,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="22" Name="Smart card 1" Visibility="true">
+						<Action Id="22" Name="SmartCard1" Visibility="true">
 							<Color>#800000FF</Color>
 							<Description>This will show message from smart card 1</Description>
 							<Presentation>
@@ -3581,7 +4021,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="23" Name="Smart card 2" Visibility="true">
+						<Action Id="23" Name="SmartCard2" Visibility="true">
 							<Color>#800000FF</Color>
 							<Description>This will show message from smart card 2</Description>
 							<Presentation>
@@ -3590,7 +4030,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="24" Name="Smart card 3" Visibility="true">
+						<Action Id="24" Name="SmartCard3" Visibility="true">
 							<Color>#800000FF</Color>
 							<Description>This will show message from smart card 3</Description>
 							<Presentation>
@@ -3653,7 +4093,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="31" Name="Local teleport (start)" Visibility="true">
+						<Action Id="31" Name="TeleportEntry" Visibility="true">
 							<Color>#200FF000</Color>
 							<Description>Teleports player from this location</Description>
 							<Presentation>
@@ -3698,7 +4138,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="36" Name="Local teleport (end)" Visibility="true">
+						<Action Id="36" Name="TeleportExit" Visibility="true">
 							<Color>#20FF00FF</Color>
 							<Description>Teleports player to this location, the one that is furthest</Description>
 							<Presentation>
@@ -3707,7 +4147,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="37" Name="Exit 1" Visibility="true">
+						<Action Id="37" Name="MapExit2" Visibility="true">
 							<Color>#500FF000</Color>
 							<Description>Collision, Finishes level</Description>
 							<Presentation>
@@ -3716,7 +4156,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="38" Name="Exit 2" Visibility="true">
+						<Action Id="38" Name="MapExit3" Visibility="true">
 							<Color>#500FF000</Color>
 							<Description>Collision, Finishes level</Description>
 							<Presentation>
@@ -3779,7 +4219,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="45" Name="Entrance 1" Visibility="true">
+						<Action Id="45" Name="MapEntry1" Visibility="true">
 							<Color>#7FFF00FF</Color>
 							<Description>No collision, spawns player here</Description>
 							<Presentation>
@@ -3788,7 +4228,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="46" Name="Entrance 2" Visibility="true">
+						<Action Id="46" Name="MapEntry2" Visibility="true">
 							<Color>#7FFF00FF</Color>
 							<Description>No collision, spawns player here</Description>
 							<Presentation>
@@ -3797,7 +4237,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="47" Name="Land mine" Visibility="true">
+						<Action Id="47" Name="LandMine" Visibility="true">
 							<Color>#50FFFF00</Color>
 							<Description>Explodes on stepping by player</Description>
 							<Presentation>
@@ -3860,7 +4300,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="54" Name="Exit 3" Visibility="true">
+						<Action Id="54" Name="MapExit1" Visibility="true">
 							<Color>#500FF000</Color>
 							<Description>Collision, Finishes level</Description>
 							<Presentation>
@@ -3878,7 +4318,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="56" Name="Entrance 3" Visibility="true">
+						<Action Id="56" Name="MapEntry3" Visibility="true">
 							<Color>#7FFF00FF</Color>
 							<Description>No collision, spawns player here</Description>
 							<Presentation>
@@ -3887,7 +4327,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+						<Action Id="57" Name="EnemiesOnlyObstacle" Visibility="true">
 							<Color>#20FF00FF</Color>
 							<Description>Player can walk trough it, movable enemies can't</Description>
 							<Presentation>
@@ -3914,7 +4354,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="60" Name="Obstacle(except projectiles)" Visibility="true">
+						<Action Id="60" Name="ActorOnlyObstacle" Visibility="true">
 							<Color>#32F00000</Color>
 							<Description>Collision, but weapon projectile can penetrate</Description>
 							<Presentation>
@@ -3932,7 +4372,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="62" Name="Door" Visibility="true">
+						<Action Id="62" Name="DoorStandard" Visibility="true">
 							<Color>#320FF000</Color>
 							<Description>Door with normal key card required</Description>
 							<Presentation>
@@ -3941,591 +4381,11 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="63" Name="Obstacle(for all)" Visibility="true">
+						<Action Id="63" Name="FullObstacle" Visibility="true">
 							<Color>#50F00000</Color>
 							<Description>Collision, nothing can penetrate</Description>
 							<Presentation>
 								<Color>#50F00000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-					</Actions>
-				</ActionSet>
-				<ActionSet Id="Actions.Default">
-					<Actions>
-						<Action Id="0" Name="Air" Visibility="false">
-							<Color>#00000000</Color>
-							<Description>No collision, no action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>false</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="1" Name="Monster (Type 1)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Start position of monster type 1</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="2" Name="Monster (Type 2)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Start position of monster type 2</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="3" Name="Monster (Type 3)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Start position of monster type 3</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="4" Name="Monster (Type 4)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Start position of monster type 4</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="5" Name="Unknown 5" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="6" Name="Unknown 6" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="7" Name="One way gate (Up)" Visibility="true">
-							<Color>#80FFFF00</Color>
-							<Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
-							<Presentation>
-								<Color>#80FFFF00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="8" Name="One way gate (Down)" Visibility="true">
-							<Color>#80FFFF00</Color>
-							<Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
-							<Presentation>
-								<Color>#80FFFF00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="9" Name="Unknown 9" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="10" Name="Unknown 10" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="11" Name="Unknown 11" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="12" Name="One way gate (Right)" Visibility="true">
-							<Color>#80FFFF00</Color>
-							<Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
-							<Presentation>
-								<Color>#80FFFF00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="13" Name="One way gate (Left)" Visibility="true">
-							<Color>#80FFFF00</Color>
-							<Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
-							<Presentation>
-								<Color>#80FFFF00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="14" Name="Directed gun (Right)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Gun directed to right, deals great damage to player</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="15" Name="Directed gun (Up)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Gun directed to up, deals great damage to player</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
-							<Color>#20FFFF00</Color>
-							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
-							<Presentation>
-								<Color>#20FFFF00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
-							<Color>#20FFFF00</Color>
-							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
-							<Presentation>
-								<Color>#20FFFF00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
-							<Color>#20FFFF00</Color>
-							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
-							<Presentation>
-								<Color>#20FFFF00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
-							<Color>#20FFFF00</Color>
-							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
-							<Presentation>
-								<Color>#20FFFF00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="20" Name="Unknown 20" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="21" Name="Unknown 21" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="22" Name="Smart card 1" Visibility="true">
-							<Color>#800000FF</Color>
-							<Description>This will show note message from smart card 1</Description>
-							<Presentation>
-								<Color>#800000FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="23" Name="Smart card 2" Visibility="true">
-							<Color>#800000FF</Color>
-							<Description>This will show note message from smart card 2</Description>
-							<Presentation>
-								<Color>#800000FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="24" Name="Smart card 3" Visibility="true">
-							<Color>#800000FF</Color>
-							<Description>This will show note message from smart card 3</Description>
-							<Presentation>
-								<Color>#800000FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="25" Name="Unknown 25" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="26" Name="Unknown 26" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="27" Name="Unknown 27" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="28" Name="Unknown 28" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="29" Name="Unknown 29" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="30" Name="Unknown 30" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="31" Name="Local teleport (start)" Visibility="true">
-							<Color>#200FF000</Color>
-							<Description>Teleports player from this location</Description>
-							<Presentation>
-								<Color>#200FF000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="32" Name="Monster spawner" Visibility="true">
-							<Color>#F0FF0000</Color>
-							<Description>Creates a hole where monsters are comming from</Description>
-							<Presentation>
-								<Color>#F0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="33" Name="Unknown 33" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="34" Name="Unknown 34" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="35" Name="Unknown 35" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="36" Name="Local teleport (end)" Visibility="true">
-							<Color>#40FF00FF</Color>
-							<Description>Teleports player to this location, the one that is furthest</Description>
-							<Presentation>
-								<Color>#40FF00FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="37" Name="Exit 1" Visibility="true">
-							<Color>#500FF000</Color>
-							<Description>Collision, Finishes level</Description>
-							<Presentation>
-								<Color>#500FF000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="38" Name="Exit 2" Visibility="true">
-							<Color>#500FF000</Color>
-							<Description>Collision, Finishes level</Description>
-							<Presentation>
-								<Color>#500FF000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="39" Name="Unknown 39" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="40" Name="Unknown 40" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="41" Name="Unknown 41" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="42" Name="Unknown 42" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="43" Name="Unknown 43" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="44" Name="Unknown 44" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="45" Name="Entrance 1" Visibility="true">
-							<Color>#7FFF00FF</Color>
-							<Description>No collision, spawns player here</Description>
-							<Presentation>
-								<Color>#7FFF00FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="46" Name="Entrance 2" Visibility="true">
-							<Color>#7FFF00FF</Color>
-							<Description>No collision, spawns player here</Description>
-							<Presentation>
-								<Color>#7FFF00FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="47" Name="Unknown 47" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="48" Name="Unknown 48" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="49" Name="Radioactive area" Visibility="true">
-							<Color>#4FFF7F00</Color>
-							<Description>Radioactive area that hurts player if standing on it</Description>
-							<Presentation>
-								<Color>#4FFF7F00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="50" Name="Wall turrent (Up)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Wall turret facing up</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="51" Name="Wall turrent (Right)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Wall turret facing right</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="52" Name="Wall turrent (Down)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Wall turret facing down</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="53" Name="Wall turrent (Left)" Visibility="true">
-							<Color>#A0FF0000</Color>
-							<Description>Wall turret facing left</Description>
-							<Presentation>
-								<Color>#A0FF0000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="54" Name="Exit 3" Visibility="true">
-							<Color>#500FF000</Color>
-							<Description>Collision, Finishes level</Description>
-							<Presentation>
-								<Color>#500FF000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="55" Name="GenericItem" Visibility="true">
-							<Color>#500000FF</Color>
-							<Description>Pickable item</Description>
-							<Presentation>
-								<Color>#500000FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="56" Name="Entrance 3" Visibility="true">
-							<Color>#7FFF00FF</Color>
-							<Description>No collision, spawns player here</Description>
-							<Presentation>
-								<Color>#7FFF00FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
-							<Color>#20FF00FF</Color>
-							<Description>Player can walk trough it, movable enemies can't</Description>
-							<Presentation>
-								<Color>#20FF00FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="58" Name="Unknown 58" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="59" Name="Unknown 59" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
-							<Presentation>
-								<Color>#00000000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="60" Name="Obstacle(except projectiles)" Visibility="true">
-							<Color>#32FFFF00</Color>
-							<Description>Collision, but weapon projectile can penetrate</Description>
-							<Presentation>
-								<Color>#32FFFF00</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="61" Name="Intex terminal" Visibility="true">
-							<Color>#7F0000FF</Color>
-							<Description>Terminal that player may use</Description>
-							<Presentation>
-								<Color>#7F0000FF</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="62" Name="Door" Visibility="true">
-							<Color>#320FF000</Color>
-							<Description>Door with no color card required</Description>
-							<Presentation>
-								<Color>#320FF000</Color>
-								<Visibility>true</Visibility>
-							</Presentation>
-							<Triggers />
-						</Action>
-						<Action Id="63" Name="Obstacle(for all)" Visibility="true">
-							<Color>#50FFFF00</Color>
-							<Description>Collision, nothing can penetrate</Description>
-							<Presentation>
-								<Color>#50FFFF00</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -5048,7 +4908,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+						<Action Id="57" Name="EnemiesOnlyObstacle" Visibility="true">
 							<Color>#20FF00FF</Color>
 							<Description>Player can walk trough it, movable enemies can't</Description>
 							<Presentation>
@@ -5241,7 +5101,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="14" Name="TVFlickering" Visibility="true">
+						<Action Id="14" Name="GunRight" Visibility="true">
 							<Color>#A0FF0000</Color>
 							<Description>Gun directed to right, deals great damage to player</Description>
 							<Presentation>
@@ -5493,7 +5353,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="42" Name="MonsterEating" Visibility="true">
+						<Action Id="42" Name="Unknown 42" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -5628,7 +5488,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+						<Action Id="57" Name="EnemiesOnlyObstacle" Visibility="true">
 							<Color>#20FF00FF</Color>
 							<Description>Player can walk trough it, movable enemies can't</Description>
 							<Presentation>
@@ -6208,7 +6068,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+						<Action Id="57" Name="EnemiesOnlyObstacle" Visibility="true">
 							<Color>#20FF00FF</Color>
 							<Description>Player can walk trough it, movable enemies can't</Description>
 							<Presentation>
@@ -6788,7 +6648,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+						<Action Id="57" Name="EnemiesOnlyObstacle" Visibility="true">
 							<Color>#20FF00FF</Color>
 							<Description>Player can walk trough it, movable enemies can't</Description>
 							<Presentation>
@@ -7368,7 +7228,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+						<Action Id="57" Name="EnemiesOnlyObstacle" Visibility="true">
 							<Color>#20FF00FF</Color>
 							<Description>Player can walk trough it, movable enemies can't</Description>
 							<Presentation>
@@ -7948,7 +7808,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+						<Action Id="57" Name="EnemiesOnlyObstacle" Visibility="true">
 							<Color>#20FF00FF</Color>
 							<Description>Player can walk trough it, movable enemies can't</Description>
 							<Presentation>
@@ -8528,7 +8388,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+						<Action Id="57" Name="EnemiesOnlyObstacle" Visibility="true">
 							<Color>#20FF00FF</Color>
 							<Description>Player can walk trough it, movable enemies can't</Description>
 							<Presentation>
@@ -9071,6 +8931,189 @@
 		</Scripts>
 		<Animations>
 			<Items>
+				<Animation Id="Vanilla/L1/Door/Closing/Horizontal">
+					<Length>6.0</Length>
+					<Tracks>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="Vanilla/L1/A#5" />
+								<Frame Time="2.0" Value="Vanilla/L1/A#4" />
+								<Frame Time="3.0" Value="Vanilla/L1/A#3" />
+								<Frame Time="4.0" Value="Vanilla/L1/A#2" />
+								<Frame Time="5.0" Value="Vanilla/L1/A#1" />
+								<Frame Time="6.0" Value="Vanilla/L1/A#0" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/L1/Door/Opening/Horizontal">
+					<Length>6.0</Length>
+					<Tracks>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="Vanilla/L1/A#0" />
+								<Frame Time="2.0" Value="Vanilla/L1/A#1" />
+								<Frame Time="3.0" Value="Vanilla/L1/A#2" />
+								<Frame Time="4.0" Value="Vanilla/L1/A#3" />
+								<Frame Time="5.0" Value="Vanilla/L1/A#4" />
+								<Frame Time="6.0" Value="Vanilla/L1/A#5" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/L3/ElectricGate/Working/Vertical">
+					<Length>4.0</Length>
+					<Tracks>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="Vanilla/L3/A#8" />
+								<Frame Time="2.0" Value="Vanilla/L3/A#9" />
+								<Frame Time="3.0" Value="Vanilla/L3/A#10" />
+								<Frame Time="4.0" Value="Vanilla/L3/A#11" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/L3/ElectricGate/Working/Horizontal">
+					<Length>4.0</Length>
+					<Tracks>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="Vanilla/L3/A#12" />
+								<Frame Time="2.0" Value="Vanilla/L3/A#13" />
+								<Frame Time="3.0" Value="Vanilla/L3/A#14" />
+								<Frame Time="4.0" Value="Vanilla/L3/A#15" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+					</Tracks>
+				</Animation>
+
+				<Animation Id="Vanilla/L3/Door/Closing/Vertical">
+					<Length>4.0</Length>
+					<Tracks>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="Vanilla/L3/A#3" />
+								<Frame Time="2.0" Value="Vanilla/L3/A#2" />
+								<Frame Time="3.0" Value="Vanilla/L3/A#1" />
+								<Frame Time="4.0" Value="Vanilla/L3/A#0" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/L3/Door/Opening/Vertical">
+					<Length>4.0</Length>
+					<Tracks>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="Vanilla/L3/A#0" />
+								<Frame Time="2.0" Value="Vanilla/L3/A#1" />
+								<Frame Time="3.0" Value="Vanilla/L3/A#2" />
+								<Frame Time="4.0" Value="Vanilla/L3/A#3" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/L3/Door/Closing/Horizontal">
+					<Length>4.0</Length>
+					<Tracks>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="Vanilla/L3/A#7" />
+								<Frame Time="2.0" Value="Vanilla/L3/A#6" />
+								<Frame Time="3.0" Value="Vanilla/L3/A#5" />
+								<Frame Time="4.0" Value="Vanilla/L3/A#4" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/L3/Door/Opening/Horizontal">
+					<Length>4.0</Length>
+					<Tracks>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="1.0" Value="Vanilla/L3/A#4" />
+								<Frame Time="2.0" Value="Vanilla/L3/A#5" />
+								<Frame Time="3.0" Value="Vanilla/L3/A#6" />
+								<Frame Time="4.0" Value="Vanilla/L3/A#7" />
+							</Frames>
+						</StringTrack>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0" />
+							</Frames>
+						</IntTrack>
+					</Tracks>
+				</Animation>
+				
+				
 				<Animation Id="Vanilla/L4/Door/Closing/Vertical">
 					<Length>4.0</Length>
 					<Tracks>
