@@ -21,8 +21,6 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private const string ANIM_PREFIX = "Vanilla/L4";
-        private const string STAMP_PREFIX = "Vanilla/L4";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         private readonly IClipMan clipMan;
@@ -52,12 +50,13 @@ namespace OpenBreed.Sandbox.Components.States
         public void EnterState(Entity entity)
         {
             var pos = entity.Get<PositionComponent>();
-            var metadata = entity.Get<ClassComponent>();
+            var metadata = entity.Get<MetadataComponent>();
+            var level = metadata.Level;
             var className = metadata.Name;
             var flavor = metadata.Flavor;
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var clipId = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{stateName}/{flavor}").Id;
-            var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/Closed").Id;
+            var clipId = clipMan.GetByName($"{level}/{className}/{stateName}/{flavor}").Id;
+            var stampId = stampMan.GetByName($"{level}/{className}/{flavor}/Closed").Id;
 
             entity.SetSpriteOn();
             entity.SetBodyOn();

@@ -491,9 +491,6 @@ namespace OpenBreed.Sandbox
             var gameWorld = mapWorldLoader.Load("Vanilla/2");
             //var gameWorld = mapWorldLoader.Load("Vanilla/8");
 
-            doorHelper.LoadStamps();
-            pickableHelper.LoadStamps();
-
             var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
 
             playerCamera.Add(new PauseImmuneComponent());

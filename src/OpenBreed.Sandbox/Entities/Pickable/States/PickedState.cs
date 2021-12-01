@@ -15,7 +15,6 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
     {
         #region Private Fields
 
-        private const string STAMP_PREFIX = "Vanilla/L4";
         private const string SOUND_PREFIX = "Vanilla/Common";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
@@ -50,7 +49,8 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         public void EnterState(Entity entity)
         {
             var pos = entity.Get<PositionComponent>();
-            var metadata = entity.Get<ClassComponent>();
+            var metadata = entity.Get<MetadataComponent>();
+            var level = metadata.Level;
             var className = metadata.Name;
             var flavor = metadata.Flavor;
             var stateName = fsmMan.GetStateName(FsmId, Id);
@@ -60,9 +60,9 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
                 int stampId;
 
                 if (flavor is null)
-                    stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{stateName}").Id;
+                    stampId = stampMan.GetByName($"{level}/{className}/{stateName}").Id;
                 else
-                    stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
+                    stampId = stampMan.GetByName($"{level}/{className}/{flavor}/{stateName}").Id;
 
                 entity.PutStamp(stampId, 0, pos.Value);
 

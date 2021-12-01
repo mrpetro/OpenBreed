@@ -4,20 +4,12 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
-using System;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Loaders
 {
     public class TeleportCellEntityLoader : IMapWorldEntityLoader
     {
-        #region Public Fields
-
-        public const int ENTRY_CODE = 31;
-        public const int EXIT_CODE = 36;
-
-        #endregion Public Fields
-
         #region Private Fields
 
         private readonly TeleportHelper teleportHelper;
@@ -37,11 +29,11 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
             var layout = map.Layout;
 
-            if (actionValue == ENTRY_CODE)
+            if (templateName == "TeleportEntry")
             {
                 if (!FindFarthestExit(layout, visited, ix, iy, out (int X, int Y) found))
                     return;
@@ -51,33 +43,38 @@ namespace OpenBreed.Sandbox.Loaders
 
                 var groupId = layout.GetCellValue(groupLayerIdx, ix, iy);
 
-
                 var cells = layout.FindCellsWithValue(groupLayerIdx, groupId);
 
                 foreach (var cell in cells)
                 {
                     var cellGfxValue = layout.GetCellValue(gfxLayerIdx, cell.X, cell.Y);
-                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix, mapAssets.TileAtlasName, cellGfxValue);
+                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix, mapAssets.Level, cellGfxValue);
                     visited[cell.X, cell.Y] = true;
                 }
 
                 var exitGfxValue = layout.GetCellValue(gfxLayerIdx, found.X, found.Y);
 
-                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, mapAssets.TileAtlasName, exitGfxValue);
+                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, mapAssets.Level, exitGfxValue);
                 visited[found.X, found.Y] = true;
             }
+            //else if (templateName == "TeleportExit")
+            //{
+            //}
+            //visited[ix, iy] = true;
 
             return;
         }
 
+        #endregion Public Methods
 
+        #region Private Methods
 
         private bool FindFarthestExit(MapLayoutModel layout, bool[,] visited, int inX, int inY, out (int X, int Y) found)
         {
             found = (0, 0);
             var layerIndex = layout.GetLayerIndex(MapLayerType.Action);
 
-            var cells = layout.FindCellsWithValue(layerIndex, EXIT_CODE).ToArray();
+            var cells = layout.FindCellsWithValue(layerIndex, 36).ToArray();
 
             cells = cells.Where(item => !visited[item.X, item.Y]).ToArray();
 
@@ -91,7 +88,6 @@ namespace OpenBreed.Sandbox.Loaders
 
                 return false;
             }
-
 
             var inP = new Vector2(inX, inY);
             var farthestIndex = 0;
@@ -113,6 +109,6 @@ namespace OpenBreed.Sandbox.Loaders
             return true;
         }
 
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

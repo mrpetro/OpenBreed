@@ -4,23 +4,20 @@
     {
         #region Public Properties
 
+        string Level { get; }
         string Name { get; }
         string Flavor { get; }
 
         #endregion Public Properties
     }
 
-    public class ClassComponent : IEntityComponent
+    public class MetadataComponent : IEntityComponent
     {
-        //public ClassComponent(ClassComponentBuilder builder)
-        //{
-        //    Name = builder.Name;
-        //}
-
         #region Public Constructors
 
-        public ClassComponent(string name, string flavor)
+        public MetadataComponent(string level, string name, string flavor)
         {
+            Level = level;
             Name = name;
             Flavor = flavor;
         }
@@ -29,6 +26,7 @@
 
         #region Public Properties
 
+        public string Level { get; }
         public string Name { get; }
         public string Flavor { get; }
 
@@ -49,7 +47,7 @@
 
         protected override IEntityComponent Create(IClassComponentTemplate template)
         {
-            return new ClassComponent(template.Name, template.Flavor);
+            return new MetadataComponent(template.Level, template.Name, template.Flavor);
         }
 
         #endregion Protected Methods

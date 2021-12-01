@@ -30,9 +30,11 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
-            genericCellHelper.AddUnknownCell(world, ix, iy, actionValue, mapAssets.TileAtlasName, gfxValue);
+            var actionValue = int.Parse(flavor);
+
+            genericCellHelper.AddUnknownCell(world, ix, iy, actionValue, mapAssets.Level, gfxValue);
 
             visited[ix, iy] = true;
         }

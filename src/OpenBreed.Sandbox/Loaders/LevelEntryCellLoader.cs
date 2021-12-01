@@ -11,11 +11,6 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Fields
 
-
-        public const int ENTRY_3 = 56;
-        public const int ENTRY_1 = 45;
-        public const int ENTRY_2 = 46;
-
         #endregion Public Fields
 
         #region Private Fields
@@ -37,28 +32,28 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
             int entryId;
 
-            switch (actionValue)
+            switch (templateName)
             {
-                case ENTRY_1:
+                case "MapEntry1":
                     entryId = 0;
                     break;
 
-                case ENTRY_3:
+                case "MapEntry3":
                     entryId = 2;
                     break;
 
-                case ENTRY_2:
+                case "MapEntry2":
                     entryId = 1;
                     break;
                 default:
                     throw new NotImplementedException("Entry type not implemented");
             }
 
-            entriesHelper.AddMapEntry(world, ix, iy, entryId, mapAssets.TileAtlasName, gfxValue);
+            entriesHelper.AddMapEntry(world, ix, iy, entryId, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
         }
 

@@ -54,7 +54,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var direction = entity.Get<AngularPositionComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
-            var className = entity.Get<ClassComponent>().Name;
+            var className = entity.Get<MetadataComponent>().Name;
             var thrust = entity.Get<ThrustComponent>();
 
             thrust.Value = Vector2.Zero;
@@ -89,8 +89,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             {
                 entity.SetState(FsmId, (int)MovementImpulse.Walk);
 
-                var angularThrust = entity.Get<AngularVelocityComponent>();
-                angularThrust.Value = new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y);
+                var angularVelocity = entity.Get<AngularVelocityComponent>();
+                angularVelocity.Value = new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y);
             }
         }
 

@@ -70,10 +70,10 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public Entity AddMapEntry(World world, int x, int y, int entryId, string tileAtlasName, int gfxValue)
+        public Entity AddMapEntry(World world, int x, int y, int entryId, string level, int gfxValue)
         {
             var entryEntity = entityFactory.Create(@"Defaults\Templates\ABTA\Common\MapEntry.xml")
-                .SetParameter("tileSet", tileAtlasName)
+                .SetParameter("level", level)
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("entryId", entryId)
                 .SetParameter("startX", 16 * x)
@@ -85,10 +85,10 @@ namespace OpenBreed.Sandbox.Entities
             return entryEntity;
         }
 
-        public void AddMapExit(World world, int ix, int iy, int exitId, string tileAtlasName, int gfxValue)
+        public void AddMapExit(World world, int ix, int iy, int exitId, string level, int gfxValue)
         {
             var exitEntity = entityFactory.Create(@"Defaults\Templates\ABTA\Common\MapExit.xml")
-                .SetParameter("tileSet", tileAtlasName)
+                .SetParameter("level", level)
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("exitId", exitId)
                 .SetParameter("startX", 16 * ix)
@@ -149,7 +149,7 @@ namespace OpenBreed.Sandbox.Entities
 
         private void PerformEntityExit(Entity targetEntity, Entity exitEntity)
         {
-            var cameraEntity = targetEntity.TryGet<FollowerComponent>()?.FollowerIds.
+            var cameraEntity = targetEntity.TryGet<FollowedComponent>()?.FollowerIds.
                                                                               Select(item => entityMan.GetById(item)).
                                                                               FirstOrDefault(item => item.Tag is "PlayerCamera");
 
@@ -157,7 +157,7 @@ namespace OpenBreed.Sandbox.Entities
                 return;
 
 
-            var exitClassCmp = exitEntity.Get<ClassComponent>();
+            var exitClassCmp = exitEntity.Get<MetadataComponent>();
 
             if (!int.TryParse(exitClassCmp.Flavor, out int exitId))
                 throw new InvalidOperationException("Expected exit number");
@@ -232,9 +232,9 @@ namespace OpenBreed.Sandbox.Entities
 
         private Entity FindEntryEntity(World world, int entryId)
         {
-            foreach (var entity in world.Entities.Where(e => e.Contains<ClassComponent>()))
+            foreach (var entity in world.Entities.Where(e => e.Contains<MetadataComponent>()))
             {
-                var cmpClass = entity.Get<ClassComponent>();
+                var cmpClass = entity.Get<MetadataComponent>();
 
                 if (cmpClass.Name != "WorldEntry")
                     continue;

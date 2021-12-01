@@ -2,13 +2,16 @@
 using OpenBreed.Audio.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.TileStamps;
+using OpenBreed.Model.Actions;
 using OpenBreed.Model.Maps;
 using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Physics.Interface.Managers;
@@ -31,7 +34,7 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Methods
 
-        void Load(MapAssets worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world);
+        void Load(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world);
 
         #endregion Public Methods
     }
@@ -51,7 +54,8 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly IBroadphaseFactory broadphaseGridFactory;
         private readonly ITileGridFactory tileGridFactory;
         private readonly ITileMan tileMan;
-        private readonly Dictionary<int, IMapWorldEntityLoader> entityLoaders = new Dictionary<int, IMapWorldEntityLoader>();
+        private readonly ILogger logger;
+        private readonly Dictionary<string, IMapWorldEntityLoader> entityLoaders = new Dictionary<string, IMapWorldEntityLoader>();
 
         #endregion Private Fields
 
@@ -66,7 +70,8 @@ namespace OpenBreed.Sandbox.Loaders
                                   IEntityFactoryProvider mapEntityFactory,
                                   IBroadphaseFactory broadphaseGridFactory,
                                   ITileGridFactory tileGridFactory,
-                                  ITileMan tileMan)
+                                  ITileMan tileMan,
+                                  ILogger logger)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
@@ -79,6 +84,7 @@ namespace OpenBreed.Sandbox.Loaders
             this.broadphaseGridFactory = broadphaseGridFactory;
             this.tileGridFactory = tileGridFactory;
             this.tileMan = tileMan;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -96,9 +102,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         public object LoadObject(string entryId) => Load(entryId);
 
-        public void Register(int entityType, IMapWorldEntityLoader entityLoader)
+        public void Register(string templateName, IMapWorldEntityLoader entityLoader)
         {
-            entityLoaders.Add(entityType, entityLoader);
+            entityLoaders.Add(templateName, entityLoader);
         }
 
         public World Load(string entryId, params object[] args)
@@ -110,7 +116,7 @@ namespace OpenBreed.Sandbox.Loaders
 
             var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
             if (dbMap == null)
-                throw new Exception("Map error: " + entryId);
+                throw new Exception($"Missing Map: {entryId}");
 
             LoadReferencedTileSet(dbMap);
             LoadReferencedSpriteSets(dbMap);
@@ -139,9 +145,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.SetupGameWorldSystems(systemFactory);
             world = worldBuilder.Build();
 
-            var mapAssets = new MapAssets(tileMan);
-
-            mapAssets.SetTileAtlas(dbMap.TileSetRef);
+            var mapper = new MapMapper(dbMap.TileSetRef);
 
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
@@ -154,7 +158,13 @@ namespace OpenBreed.Sandbox.Loaders
                     var gfxValue = cellValues[gfxLayer];
                     var actionValue = cellValues[actionLayer];
 
-                    LoadCellEntity(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
+                    var action = map.GetAction(actionValue);
+
+                    if(action != null)
+                        LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
+
+                    //if (mapper.Map(actionValue, gfxValue, out string templaneName, out string flavor))
+                    //    LoadCellEntity(mapper, map, visited, ix, iy, world, templaneName, flavor, gfxValue);
                 }
             }
 
@@ -170,7 +180,7 @@ namespace OpenBreed.Sandbox.Loaders
                     var gfxValue = cellValues[gfxLayer];
                     var actionValue = cellValues[actionLayer];
 
-                    PutUnknownCodeCell(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
+                    PutUnknownCodeCell(mapper, map, visited, ix, iy, gfxValue, actionValue, world);
                     //LoadUnknownCell(worldBlockBuilder, layout, newWorld, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
                 }
             }
@@ -182,19 +192,30 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private void LoadCellEntity(MapAssets mapAssets, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private void LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, ActionModel action, int gfxValue)
         {
             if (visited[ix, iy])
                 return;
 
-            if (entityLoaders.TryGetValue(actionValue, out IMapWorldEntityLoader entityLoader))
-                entityLoader.Load(mapAssets, map, visited, ix, iy, gfxValue, actionValue, world);
+            if (entityLoaders.TryGetValue(action.Name, out IMapWorldEntityLoader entityLoader))
+                entityLoader.Load(mapAssets, map, visited, ix, iy, action.Name, "", gfxValue, world);
+            else
+                logger.Warning($"Missing loader for action '{action}'");
         }
 
-        private void PutUnknownCodeCell(MapAssets worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private void LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, string templateName, string flavor, int gfxValue)
         {
-            if (entityLoaders.TryGetValue(UnknownCellEntityLoader.UNKNOWN_CODE, out IMapWorldEntityLoader entityLoader))
-                entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, gfxValue, actionValue, world);
+            if (visited[ix, iy])
+                return;
+
+            if (entityLoaders.TryGetValue(templateName, out IMapWorldEntityLoader entityLoader))
+                entityLoader.Load(mapAssets, map, visited, ix, iy, templateName, flavor, gfxValue, world);
+        }
+
+        private void PutUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        {
+            if (entityLoaders.TryGetValue("Unknown", out IMapWorldEntityLoader entityLoader))
+                entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, "Unknown", actionValue.ToString(), gfxValue, world);
         }
 
         private void LoadReferencedTileSet(IDbMap dbMap)

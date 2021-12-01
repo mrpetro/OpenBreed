@@ -21,7 +21,7 @@ namespace OpenBreed.Wecs.Systems.Control
         {
             this.entityMan = entityMan;
 
-            RequireEntityWith<FollowerComponent>();
+            RequireEntityWith<FollowedComponent>();
             RequireEntityWith<PositionComponent>();
         }
 
@@ -61,7 +61,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         private void Update(Entity followed, float dt)
         {
-            var fc = followed.Get<FollowerComponent>();
+            var fc = followed.Get<FollowedComponent>();
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {

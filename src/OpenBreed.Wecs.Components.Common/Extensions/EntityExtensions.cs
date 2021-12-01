@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
     {
         public static void AddFollower(this Entity entity, Entity followerEntity)
         {
-            var fc = entity.Get<FollowerComponent>();
+            var fc = entity.Get<FollowedComponent>();
             fc.FollowerIds.Add(followerEntity.Id);
         }
     }

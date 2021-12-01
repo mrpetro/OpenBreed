@@ -18,8 +18,6 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private const string STAMP_PREFIX = "Vanilla/L4";
-
         private readonly IFsmMan fsmMan;
         private readonly ICollisionMan collisionMan;
         private readonly IStampMan stampMan;
@@ -56,13 +54,14 @@ namespace OpenBreed.Sandbox.Components.States
         {
             var pos = entity.Get<PositionComponent>();
             var bodyCmp = entity.Get<BodyComponent>();
-            var metadata = entity.Get<ClassComponent>();
+            var metadata = entity.Get<MetadataComponent>();
+            var level = metadata.Level;
             var className = metadata.Name;
             var flavor = metadata.Flavor;
 
 
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var stampId = stampMan.GetByName($"{STAMP_PREFIX}/{className}/{flavor}/{stateName}").Id;
+            var stampId = stampMan.GetByName($"{level}/{className}/{flavor}/{stateName}").Id;
 
             entity.SetSpriteOff();
             entity.PutStamp(stampId, 0, pos.Value);

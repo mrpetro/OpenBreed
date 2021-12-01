@@ -70,8 +70,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
                     //var aPos3 = new Vector3(angularPos.GetDirection());
                     //var dPos3 = new Vector3(e.Direction);
                     //var newVec = Vector3Extension.RotateTowards(aPos3, dPos3, 0.4f, 1.0f);
-                    var angularThrust = entity.Get<AngularVelocityComponent>();
-                    angularThrust.Value = new Vector2(e.Direction.X, e.Direction.Y);
+                    var angularVelocity = entity.Get<AngularVelocityComponent>();
+                    angularVelocity.Value = new Vector2(e.Direction.X, e.Direction.Y);
                     //dir.SetDirection(e.Direction);
                     entity.SetState(FsmId, (int)RotationImpulse.Rotate);
                 }

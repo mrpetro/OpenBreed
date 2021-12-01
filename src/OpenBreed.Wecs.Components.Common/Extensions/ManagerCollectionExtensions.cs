@@ -21,7 +21,10 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             XmlComponentsList.RegisterComponentType<XmlVelocityComponent>();
             XmlComponentsList.RegisterComponentType<XmlTimerComponent>();
             XmlComponentsList.RegisterComponentType<XmlAngularPositionComponent>();
+            XmlComponentsList.RegisterComponentType<XmlAngularVelocityComponent>();
+            XmlComponentsList.RegisterComponentType<XmlAngularThrustComponent>();
             XmlComponentsList.RegisterComponentType<XmlMessagingComponent>();
+            XmlComponentsList.RegisterComponentType<XmlFollowedComponent>();
 
             manCollection.AddSingleton<PositionComponentFactory>(() => new PositionComponentFactory());
             manCollection.AddSingleton<GridPositionComponentFactory>(() => new GridPositionComponentFactory());
@@ -30,7 +33,10 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             manCollection.AddSingleton<TimerComponentFactory>(() => new TimerComponentFactory());
             manCollection.AddSingleton<ClassComponentFactory>(() => new ClassComponentFactory());
             manCollection.AddSingleton<AngularPositionComponentFactory>(() => new AngularPositionComponentFactory());
+            manCollection.AddSingleton<AngularVelocityComponentFactory>(() => new AngularVelocityComponentFactory());
+            manCollection.AddSingleton<AngularThrustComponentFactory>(() => new AngularThrustComponentFactory());
             manCollection.AddSingleton<MessagingComponentFactory>(() => new MessagingComponentFactory());
+            manCollection.AddSingleton<FollowedComponentFactory>(() => new FollowedComponentFactory());
 
             var entityFactory = manCollection.GetManager<IEntityFactory>();
             entityFactory.RegisterComponentFactory<XmlPositionComponent>(manCollection.GetManager<PositionComponentFactory>());
@@ -40,7 +46,10 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             entityFactory.RegisterComponentFactory<XmlVelocityComponent>(manCollection.GetManager<VelocityComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlTimerComponent>(manCollection.GetManager<TimerComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlAngularPositionComponent>(manCollection.GetManager<AngularPositionComponentFactory>());
+            entityFactory.RegisterComponentFactory<XmlAngularVelocityComponent>(manCollection.GetManager<AngularVelocityComponentFactory>());
+            entityFactory.RegisterComponentFactory<XmlAngularThrustComponent>(manCollection.GetManager<AngularThrustComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlMessagingComponent>(manCollection.GetManager<MessagingComponentFactory>());
+            entityFactory.RegisterComponentFactory<XmlFollowedComponent>(manCollection.GetManager<FollowedComponentFactory>());
         }
     }
 }

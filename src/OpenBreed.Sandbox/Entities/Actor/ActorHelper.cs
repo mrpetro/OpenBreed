@@ -63,6 +63,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             var actor = CreateActor(pos);
 
+            //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
+            //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
+            actor.Add(new InventoryComponent(16));
+
             var p1 = playersMan.GetByName("P1");
 
             actor.Add(new WalkingInputComponent(p1.Id, 0));
@@ -79,15 +83,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .Build();
-
-            actor.Add(new AngularVelocityComponent(0));
-            actor.Add(new AngularThrustComponent(0));
-            //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
-            //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
-            //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
-            actor.Add(new FollowerComponent());
-
-            actor.Add(new InventoryComponent(16));
 
             return actor;
         }

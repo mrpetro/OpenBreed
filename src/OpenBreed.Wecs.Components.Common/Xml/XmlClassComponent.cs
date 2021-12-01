@@ -11,6 +11,9 @@ namespace OpenBreed.Wecs.Components.Common.Xml
     [XmlRoot("Class")]
     public class XmlClassComponent : XmlComponentTemplate, IClassComponentTemplate
     {
+        [XmlElement("Level")]
+        public string Level { get; set; }
+
         [XmlElement("Name")]
         public string Name { get; set; }
 

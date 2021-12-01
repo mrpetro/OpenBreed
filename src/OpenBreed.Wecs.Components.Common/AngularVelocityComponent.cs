@@ -4,6 +4,11 @@ using System;
 
 namespace OpenBreed.Wecs.Components.Common
 {
+    public interface IAngularVelocityComponentTemplate : IComponentTemplate
+    {
+        float Value { get; }
+    }
+
     public class AngularVelocityComponent : IEntityComponent
     {
         #region Public Constructors
@@ -32,5 +37,19 @@ namespace OpenBreed.Wecs.Components.Common
         }
 
         #endregion Public Methods
+    }
+
+
+    public sealed class AngularVelocityComponentFactory : ComponentFactoryBase<IAngularVelocityComponentTemplate>
+    {
+        internal AngularVelocityComponentFactory()
+        {
+
+        }
+
+        protected override IEntityComponent Create(IAngularVelocityComponentTemplate template)
+        {
+            return new AngularVelocityComponent(template.Value);
+        }
     }
 }
