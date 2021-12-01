@@ -145,9 +145,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.SetupGameWorldSystems(systemFactory);
             world = worldBuilder.Build();
 
-            var mapper = new MapMapper();
-            mapper.SetupL4();
-            mapper.SetLevel(dbMap.TileSetRef);
+            var mapper = new MapMapper(dbMap.TileSetRef);
 
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);

@@ -5,7 +5,7 @@ using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    public class ElectricGateCellEntityLoader : IMapWorldEntityLoader
+    public class ElectricGateEntityLoader : IMapWorldEntityLoader
     {
         #region Public Fields
 
@@ -24,7 +24,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Constructors
 
-        public ElectricGateCellEntityLoader(ElectricGateHelper electricGateHelper)
+        public ElectricGateEntityLoader(ElectricGateHelper electricGateHelper)
         {
             this.electricGateHelper = electricGateHelper;
         }
@@ -59,18 +59,18 @@ namespace OpenBreed.Sandbox.Loaders
         private void PutPassUpDown(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
         {
             var rightValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
-            mapper.Map(rightValue, gfxValue, out string rightTemplateName, out string flavor);
+            var rightAction = map.GetAction(rightValue);
 
-            if (rightTemplateName == templateName)
+            if (rightAction?.Name == templateName)
             {
-                electricGateHelper.AddHorizontal(world, ix, iy);
+                electricGateHelper.AddHorizontal(world, ix, iy, mapper.Level);
                 visited[ix, iy] = true;
                 visited[ix + 1, iy] = true;
                 return;
             }
             else
             {
-                electricGateHelper.AddHorizontal(world, ix - 1, iy);
+                electricGateHelper.AddHorizontal(world, ix - 1, iy, mapper.Level);
                 visited[ix, iy] = true;
                 visited[ix - 1, iy] = true;
                 return;
@@ -80,18 +80,18 @@ namespace OpenBreed.Sandbox.Loaders
         private void PutPassRightLeft(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
         {
             var downValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
-            mapper.Map(downValue, gfxValue, out string downTemplateName, out string flavor);
+            var downAction = map.GetAction(downValue);
 
-            if (downTemplateName == templateName)
+            if (downAction?.Name == templateName)
             {
-                electricGateHelper.AddVertical(world, ix, iy);
+                electricGateHelper.AddVertical(world, ix, iy, mapper.Level);
                 visited[ix, iy] = true;
                 visited[ix, iy + 1] = true;
                 return;
             }
             else
             {
-                electricGateHelper.AddVertical(world, ix, iy - 1);
+                electricGateHelper.AddVertical(world, ix, iy - 1, mapper.Level);
                 visited[ix, iy] = true;
                 visited[ix, iy - 1] = true;
                 return;

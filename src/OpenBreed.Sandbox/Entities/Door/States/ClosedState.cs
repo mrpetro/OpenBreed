@@ -54,7 +54,7 @@ namespace OpenBreed.Sandbox.Components.States
         {
             var pos = entity.Get<PositionComponent>();
             var bodyCmp = entity.Get<BodyComponent>();
-            var metadata = entity.Get<ClassComponent>();
+            var metadata = entity.Get<MetadataComponent>();
             var level = metadata.Level;
             var className = metadata.Name;
             var flavor = metadata.Flavor;

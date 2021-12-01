@@ -26,6 +26,12 @@ namespace OpenBreed.Wecs.Components.Rendering
     /// </summary>
     public class SpriteComponent : IEntityComponent
     {
+        #region Public Fields
+
+        public const int NoAtlasId = -1;
+
+        #endregion Public Fields
+
         #region Internal Constructors
 
         internal SpriteComponent(SpriteComponentBuilder builder)
@@ -158,6 +164,12 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetAtlasByName(string atlasName)
         {
+            if (string.IsNullOrEmpty(atlasName))
+            {
+                AtlasId = SpriteComponent.NoAtlasId;
+                return;
+            }
+
             var spriteAtlas = spriteMan.GetByName(atlasName);
 
             if (spriteAtlas is null)

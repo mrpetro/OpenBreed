@@ -67,7 +67,7 @@
     <Compile Include="AngularPositionComponent.cs" />
     <Compile Include="AngularThrustComponent.cs" />
     <Compile Include="AngularVelocityComponent.cs" />
-    <Compile Include="ClassComponent.cs" />
+    <Compile Include="MetadataComponent.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="FollowedComponent.cs" />

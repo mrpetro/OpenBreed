@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Sandbox.Entities.Builders
 {
@@ -19,24 +20,40 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         #region Internal Constructors
 
-        internal MapMapper()
+        internal MapMapper(string level)
         {
+            Level = level;
+
+            SetupMapping();
+        }
+
+        private void SetupMapping()
+        {
+            switch (Level)
+            {
+                case "Vanilla/L1":
+                    this.SetupL1();
+                    break;
+                case "Vanilla/L3":
+                    this.SetupL3();
+                    break;
+                case "Vanilla/L4":
+                    this.SetupL4();
+                    break;
+                default:
+                    throw new NotImplementedException($"Mapping for level '{Level}'");
+            }
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public string Level { get; private set; }
+        public string Level { get; }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public void SetLevel(string atlasName)
-        {
-            Level = atlasName;
-        }
 
         public bool TryGetFlavor(string templateName, int gfxValue, out string flavor)
         {
@@ -87,11 +104,6 @@ namespace OpenBreed.Sandbox.Entities.Builders
             }
 
             subDict[gfxValue] = flavor;
-        }
-
-        public void Register(int actionValue, int gfxValue, string templateName, string flavor)
-        {
-            keyValuePairs.Add((actionValue, gfxValue), (templateName, flavor));
         }
 
         #endregion Public Methods

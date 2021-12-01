@@ -56,7 +56,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var className = entity.Get<ClassComponent>().Name;
+            var className = entity.Get<MetadataComponent>().Name;
             var clip = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{stateName}/{animDirPostfix}");
             var currentStateNames = fsmMan.GetStateNames(entity);
 
@@ -86,7 +86,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var direction = entity.Get<AngularPositionComponent>();
             var movement = entity.Get<MotionComponent>();
             var animDirName = AnimHelper.ToDirectionName(direction.Value);
-            var className = entity.Get<ClassComponent>().Name;
+            var className = entity.Get<MetadataComponent>().Name;
             var movementFsm = fsmMan.GetByName("Actor.Movement");
             var movementStateName = movementFsm.GetCurrentStateName(entity);
 

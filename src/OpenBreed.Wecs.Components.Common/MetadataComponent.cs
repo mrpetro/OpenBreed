@@ -11,11 +11,11 @@
         #endregion Public Properties
     }
 
-    public class ClassComponent : IEntityComponent
+    public class MetadataComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public ClassComponent(string level, string name, string flavor)
+        public MetadataComponent(string level, string name, string flavor)
         {
             Level = level;
             Name = name;
@@ -47,7 +47,7 @@
 
         protected override IEntityComponent Create(IClassComponentTemplate template)
         {
-            return new ClassComponent(template.Level, template.Name, template.Flavor);
+            return new MetadataComponent(template.Level, template.Name, template.Flavor);
         }
 
         #endregion Protected Methods

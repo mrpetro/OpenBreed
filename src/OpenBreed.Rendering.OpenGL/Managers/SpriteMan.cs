@@ -85,6 +85,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public void Render(int atlasId, int imageId, Vector2 origin, Vector2 pos, float order, Box2 clipBox)
         {
+            if (atlasId == -1)
+                return;
+
             var atlas = items[atlasId];
 
             if (imageId >= atlas.data.Count)

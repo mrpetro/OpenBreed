@@ -29,6 +29,9 @@ namespace OpenBreed.Sandbox.Loaders
             if (!mapper.TryGetFlavor(templateName, gfxValue, out flavor))
                 return;
 
+            if (flavor is null)
+                return;
+
             var split = flavor.Split('/');
 
             templateName = split[0];

@@ -143,10 +143,13 @@ namespace OpenBreed.Sandbox.Extensions
                 mapWorldDataLoader.Register("TVFlickering", environmentCellLoader);
                 mapWorldDataLoader.Register("MonsterEating", environmentCellLoader);
 
-                var doorCellEntityLoader = new DoorCellEntityLoader(managerCollection.GetManager<DoorHelper>());
+                var doorCellEntityLoader = new DoorEntityLoader(managerCollection.GetManager<DoorHelper>());
                 mapWorldDataLoader.Register("DoorStandard", doorCellEntityLoader);
+                mapWorldDataLoader.Register("DoorRed", doorCellEntityLoader);
+                mapWorldDataLoader.Register("DoorGreen", doorCellEntityLoader);
+                mapWorldDataLoader.Register("DoorBlue", doorCellEntityLoader);
 
-                var electricGateEntityLoader = new ElectricGateCellEntityLoader(managerCollection.GetManager<ElectricGateHelper>());
+                var electricGateEntityLoader = new ElectricGateEntityLoader(managerCollection.GetManager<ElectricGateHelper>());
                 mapWorldDataLoader.Register("ElectricGateUp", electricGateEntityLoader);
                 mapWorldDataLoader.Register("ElectricGateDown", electricGateEntityLoader);
                 mapWorldDataLoader.Register("ElectricGateRight", electricGateEntityLoader);

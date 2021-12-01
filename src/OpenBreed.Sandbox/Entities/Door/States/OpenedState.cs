@@ -44,7 +44,7 @@ namespace OpenBreed.Sandbox.Components.States
         public void EnterState(Entity entity)
         {
             var pos = entity.Get<PositionComponent>();
-            var metadata = entity.Get<ClassComponent>();
+            var metadata = entity.Get<MetadataComponent>();
             var level = metadata.Level;
             var className = metadata.Name;
             var flavor = metadata.Flavor;

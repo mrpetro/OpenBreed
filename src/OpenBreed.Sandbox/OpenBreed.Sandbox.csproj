@@ -85,6 +85,8 @@
     </Compile>
     <Compile Include="Components\EquipmentComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
+    <Compile Include="Entities\Builders\MapCodesL1.cs" />
+    <Compile Include="Entities\Builders\MapCodesL3.cs" />
     <Compile Include="Entities\Builders\MapCodesL4.cs" />
     <Compile Include="Entities\ElectricGateHelper.cs" />
     <Compile Include="Entities\FixtureTypes.cs" />
@@ -94,13 +96,13 @@
     <Compile Include="Entities\Pickable\ManagerCollectionExtensions.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Loaders\AnimatedCellLoader.cs" />
-    <Compile Include="Loaders\ElectricGateCellEntityLoader.cs" />
+    <Compile Include="Loaders\ElectricGateEntityLoader.cs" />
     <Compile Include="Loaders\KeycardEntityLoader.cs" />
     <Compile Include="Loaders\SmartCardEntityLoader.cs" />
     <Compile Include="Loaders\LevelExitCellLoader.cs" />
     <Compile Include="Loaders\UnknownCellEntityLoader.cs" />
     <Compile Include="Loaders\GenericItemEntityLoader.cs" />
-    <Compile Include="Loaders\DoorCellEntityLoader.cs" />
+    <Compile Include="Loaders\DoorEntityLoader.cs" />
     <Compile Include="Loaders\LevelEntryCellLoader.cs" />
     <Compile Include="Loaders\GenericCellEntityLoader.cs" />
     <Compile Include="Loaders\PaletteDataLoader.cs" />

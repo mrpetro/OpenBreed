@@ -54,7 +54,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var direction = entity.Get<AngularPositionComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
-            var className = entity.Get<ClassComponent>().Name;
+            var className = entity.Get<MetadataComponent>().Name;
             var thrust = entity.Get<ThrustComponent>();
 
             thrust.Value = Vector2.Zero;

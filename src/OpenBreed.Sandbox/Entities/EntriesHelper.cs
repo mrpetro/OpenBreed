@@ -157,7 +157,7 @@ namespace OpenBreed.Sandbox.Entities
                 return;
 
 
-            var exitClassCmp = exitEntity.Get<ClassComponent>();
+            var exitClassCmp = exitEntity.Get<MetadataComponent>();
 
             if (!int.TryParse(exitClassCmp.Flavor, out int exitId))
                 throw new InvalidOperationException("Expected exit number");
@@ -232,9 +232,9 @@ namespace OpenBreed.Sandbox.Entities
 
         private Entity FindEntryEntity(World world, int entryId)
         {
-            foreach (var entity in world.Entities.Where(e => e.Contains<ClassComponent>()))
+            foreach (var entity in world.Entities.Where(e => e.Contains<MetadataComponent>()))
             {
-                var cmpClass = entity.Get<ClassComponent>();
+                var cmpClass = entity.Get<MetadataComponent>();
 
                 if (cmpClass.Name != "WorldEntry")
                     continue;
