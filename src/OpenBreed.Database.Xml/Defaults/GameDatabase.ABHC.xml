@@ -1189,7 +1189,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="55" Name="Item">
+						<Action Id="55" Name="GenericItem">
 							<Description>Pickable item</Description>
 							<Presentation>
 								<Color>#500000FF</Color>
@@ -1705,7 +1705,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="55" Name="Item">
+						<Action Id="55" Name="GenericItem">
 							<Description>Pickable item</Description>
 							<Presentation>
 								<Color>#500000FF</Color>

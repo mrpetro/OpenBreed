@@ -256,7 +256,13 @@
     <Content Include="Defaults\Templates\ABTA\Common\Pickables\PowerUpS.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\SmartCard.xml">
+    <Content Include="Defaults\Templates\ABTA\Common\Pickables\SmartCard1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Pickables\SmartCard2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Pickables\SmartCard3.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Templates\ABTA\Common\Projectile.xml">
@@ -268,16 +274,16 @@
     <Content Include="Defaults\Templates\ABTA\Common\TeleportExit.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\L4\DoorHorizontal.xml">
+    <Content Include="Defaults\Templates\ABTA\Common\DoorHorizontal.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\L4\DoorVertical.xml">
+    <Content Include="Defaults\Templates\ABTA\Common\DoorVertical.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\L4\ElectricGateHorizontal.xml">
+    <Content Include="Defaults\Templates\ABTA\Common\ElectricGateHorizontal.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\L4\ElectricGateVertical.xml">
+    <Content Include="Defaults\Templates\ABTA\Common\ElectricGateVertical.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Templates\ABTA\L4\MonsterEating.xml">

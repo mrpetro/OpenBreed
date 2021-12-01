@@ -2,7 +2,9 @@
 <EntityTemplate>
 	<Components>
 		<Class>
+			<Level>$(level)</Level>
 			<Name>KeycardRed</Name>
+			<Flavor>$(flavor)</Flavor>
 		</Class>
 		<Fsm>
 			<States>

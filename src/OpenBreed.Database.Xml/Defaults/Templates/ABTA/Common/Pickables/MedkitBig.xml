@@ -2,6 +2,7 @@
 <EntityTemplate>
 	<Components>
 		<Class>
+			<Level>$(level)</Level>
 			<Name>MedkitBig</Name>
 			<Flavor>$(flavor)</Flavor>
 		</Class>

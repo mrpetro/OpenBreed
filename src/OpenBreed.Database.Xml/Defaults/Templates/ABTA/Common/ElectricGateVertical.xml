@@ -2,6 +2,7 @@
 <EntityTemplate>
     <Components>
 		<Class>
+			<Level>$(level)</Level>
 			<Name>ElectricGate</Name>
 			<Flavor>Vertical</Flavor>
 		</Class>
@@ -17,7 +18,7 @@
 				<State>
 					<Speed>20</Speed>
 					<Loop>true</Loop>
-					<ClipName>Vanilla/L4/ElectricGate/Working/Vertical</ClipName>
+					<ClipName>$(level)/ElectricGate/Working/Vertical</ClipName>
 				</State>
 			</States>
 		</Animation>
@@ -36,7 +37,7 @@
 			</Fixtures>
 		</Body>
 		<Sprite>
-			<AtlasName>Vanilla/L4/A#8</AtlasName>
+			<AtlasName>$(level)/A#8</AtlasName>
 			<ImageIndex>0</ImageIndex>
 			<Origin X="0" Y="0" />
 			<Order>0</Order>

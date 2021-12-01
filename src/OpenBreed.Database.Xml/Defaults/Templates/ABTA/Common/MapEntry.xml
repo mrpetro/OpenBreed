@@ -7,7 +7,7 @@
 		</Class>
 		<Position X="$(startX)" Y="$(startY)" />
 		<TilePutter>
-			<AtlasName>$(tileSet)</AtlasName>
+			<AtlasName>$(level)</AtlasName>
 			<ImageIndex>$(imageIndex)</ImageIndex>
 			<Position X="$(startX)" Y="$(startY)" />
 		</TilePutter>

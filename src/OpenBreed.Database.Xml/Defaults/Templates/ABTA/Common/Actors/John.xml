@@ -26,6 +26,13 @@
 		<AngularPosition>
 			<Value>0</Value>
 		</AngularPosition>
+		<AngularVelocity>
+			<Value>0</Value>
+		</AngularVelocity>
+		<AngularThrust>
+			<Value>0</Value>
+		</AngularThrust>
+		<Followed></Followed>
 		<Body>
 			<CofFactor>1.0</CofFactor>
 			<CorFactor>0.0</CorFactor>

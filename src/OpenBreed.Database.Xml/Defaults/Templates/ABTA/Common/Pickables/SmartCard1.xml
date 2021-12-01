@@ -2,6 +2,7 @@
 <EntityTemplate>
 	<Components>
 		<Class>
+			<Level>$(level)</Level>
 			<Name>SmartCard</Name>
 			<Flavor>$(flavor)</Flavor>
 		</Class>
@@ -32,7 +33,7 @@
 			<Order>0</Order>
 		</Text>
 		<TilePutter>
-			<AtlasName>$(tileSet)</AtlasName>
+			<AtlasName>$(level)</AtlasName>
 			<ImageIndex>$(imageIndex)</ImageIndex>
 			<Position X="$(startX)" Y="$(startY)" />
 		</TilePutter>
