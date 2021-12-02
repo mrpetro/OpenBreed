@@ -112,6 +112,41 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             }
         }
 
+
+        /// <summary>
+        /// Resolve collision of moving body vs static body. Simplified pseudo physics version.
+        /// </summary>
+        /// <param name="entityA">Given dynamic body</param>
+        /// <param name="entityB">Given static body</param>
+        /// <param name="projection">Given collision projection vector</param>
+        public void ResolveVsSlope(Entity entityA, Entity entityB, Vector2 projection, Vector2 slopeDirection)
+        {
+            var p = entityA.TryGet<PositionComponent>();
+            var v = entityA.TryGet<VelocityComponent>();
+            var body = entityA.TryGet<BodyComponent>();
+
+            p.Value += projection;
+
+            var normal = projection.Normalized();
+
+
+            //find component of velocity parallel to collision normal
+            var dp = Vector2.Dot(v.Value, normal);
+
+            //Apply collision response forces if the object is travelling into, and not out of, the collision
+            if (dp < 0)
+            {
+                var pushUp = slopeDirection * dp;
+
+                var cor = DynamicResolver.GENERIC_COR * body.CorFactor;
+
+                var vn = Vector2.Multiply(normal, dp) + pushUp * 0.1f;
+                var vt = v.Value - vn;
+
+                v.Value = vt - cor * vn - cor * pushUp;
+            }
+        }
+
         #endregion Internal Methods
     }
 }

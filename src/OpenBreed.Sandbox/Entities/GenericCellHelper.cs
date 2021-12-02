@@ -63,6 +63,21 @@ namespace OpenBreed.Sandbox.Entities
             pickable.EnterWorld(world.Id);
         }
 
+        internal void AddSlopeObstacleCell(World world, int x, int y, string level, int gfxValue, string slopeDir)
+        {
+            var path = $@"{PREFIX}\SlopeObstacle.xml";
+
+            var pickable = entityFactory.Create(path)
+                .SetParameter("slopeDir", slopeDir)
+                .SetParameter("level", level)
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
+                .Build();
+
+            pickable.EnterWorld(world.Id);
+        }
+
         internal void AddFullObstacleCell(World world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\FullObstacle.xml";

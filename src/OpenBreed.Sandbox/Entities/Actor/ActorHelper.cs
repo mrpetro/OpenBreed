@@ -55,8 +55,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public void RegisterCollisionPairs()
         {
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, Dynamic2StaticCallbackEx);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, Dynamic2StaticCallbackEx);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, FullObstableCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, FullObstableCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
         }
 
         public Entity CreatePlayerActor(Vector2 pos)
@@ -109,9 +110,37 @@ namespace OpenBreed.Sandbox.Entities.Actor
             dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
         }
 
-        private void Dynamic2StaticCallbackEx(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
+        private void FullObstableCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
+        }
+
+        private void SlopeObstacleCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
+        {
+            var metadata = entityB.Get<MetadataComponent>();
+
+            Vector2 slopeDirection;
+
+            switch (metadata.Flavor)
+            {
+                case "DownLeft":
+                    slopeDirection = new Vector2(0, 1);
+                        break;
+                case "UpLeft":
+                    slopeDirection = new Vector2(0, -1);
+                    break;
+                case "UpRight":
+                    slopeDirection = new Vector2(1, 0);
+                    break;
+                case "DownRight":
+                    slopeDirection = new Vector2(-1, 0);
+                    break;
+                default:
+                    slopeDirection = new Vector2(0, 0);
+                    break;
+            }
+
+            dynamicResolver.ResolveVsSlope(entityA, entityB, projection, slopeDirection);
         }
 
         #endregion Private Methods

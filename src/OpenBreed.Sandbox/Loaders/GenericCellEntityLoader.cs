@@ -45,6 +45,18 @@ namespace OpenBreed.Sandbox.Loaders
                 case "Void":
                     genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.Level, gfxValue);
                     break;
+                case "ObstacleDownLeft":
+                    genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "DownLeft");
+                    break;
+                case "ObstacleDownRight":
+                    genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "DownRight");
+                    break;
+                case "ObstacleUpLeft":
+                    genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "UpLeft");
+                    break;
+                case "ObstacleUpRight":
+                    genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "UpRight");
+                    break;
             }
 
             visited[ix, iy] = true;
