@@ -190,6 +190,9 @@
     <Content Include="Defaults\Templates\ABTA\Common\Environment\ActorOnlyObstacle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Environment\SlopeObstacle.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Defaults\Templates\ABTA\Common\Environment\FullObstacle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

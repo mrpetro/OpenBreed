@@ -3958,7 +3958,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+						<Action Id="16" Name="ObstacleDownLeft" Visibility="true">
 							<Color>#20FF0000</Color>
 							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -3967,7 +3967,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+						<Action Id="17" Name="ObstacleUpLeft" Visibility="true">
 							<Color>#20FF0000</Color>
 							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -3976,7 +3976,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+						<Action Id="18" Name="ObstacleUpRight" Visibility="true">
 							<Color>#20FF0000</Color>
 							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -3985,7 +3985,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+						<Action Id="19" Name="ObstacleDownRight" Visibility="true">
 							<Color>#20FF0000</Color>
 							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -4539,7 +4539,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+						<Action Id="16" Name="ObstacleDownLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -4548,7 +4548,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+						<Action Id="17" Name="ObstacleUpLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -4557,7 +4557,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+						<Action Id="18" Name="ObstacleUpRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -4566,7 +4566,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+						<Action Id="19" Name="ObstacleDownRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -5119,7 +5119,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+						<Action Id="16" Name="ObstacleDownLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -5128,7 +5128,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+						<Action Id="17" Name="ObstacleUpLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -5137,7 +5137,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+						<Action Id="18" Name="ObstacleUpRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -5146,7 +5146,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+						<Action Id="19" Name="ObstacleDownRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -5699,7 +5699,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+						<Action Id="16" Name="ObstacleDownLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -5708,7 +5708,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+						<Action Id="17" Name="ObstacleUpLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -5717,7 +5717,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+						<Action Id="18" Name="ObstacleUpRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -5726,7 +5726,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+						<Action Id="19" Name="ObstacleDownRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -6279,7 +6279,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+						<Action Id="16" Name="ObstacleDownLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -6288,7 +6288,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+						<Action Id="17" Name="ObstacleUpLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -6297,7 +6297,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+						<Action Id="18" Name="ObstacleUpRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -6306,7 +6306,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+						<Action Id="19" Name="ObstacleDownRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -6859,7 +6859,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+						<Action Id="16" Name="ObstacleDownLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -6868,7 +6868,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+						<Action Id="17" Name="ObstacleUpLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -6877,7 +6877,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+						<Action Id="18" Name="ObstacleUpRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -6886,7 +6886,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+						<Action Id="19" Name="ObstacleDownRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -7439,7 +7439,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+						<Action Id="16" Name="ObstacleDownLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -7448,7 +7448,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+						<Action Id="17" Name="ObstacleUpLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -7457,7 +7457,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+						<Action Id="18" Name="ObstacleUpRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -7466,7 +7466,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+						<Action Id="19" Name="ObstacleDownRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -8019,7 +8019,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
+						<Action Id="16" Name="ObstacleDownLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -8028,7 +8028,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
+						<Action Id="17" Name="ObstacleUpLeft" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
 							<Presentation>
@@ -8037,7 +8037,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
+						<Action Id="18" Name="ObstacleUpRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
@@ -8046,7 +8046,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
+						<Action Id="19" Name="ObstacleDownRight" Visibility="true">
 							<Color>#20FFFF00</Color>
 							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
 							<Presentation>
