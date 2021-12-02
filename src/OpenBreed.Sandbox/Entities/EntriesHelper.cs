@@ -98,20 +98,6 @@ namespace OpenBreed.Sandbox.Entities
             exitEntity.EnterWorld(world.Id);
         }
 
-        //public Entity AddWorldExit(World world, int x, int y, string worldName, int entryId)
-        //{
-        //    var teleportEntity = entityFactory.Create(@"Entities\WorldGate\WorldGateExit.xml")
-        //        .SetParameter("startX", 16 * x)
-        //        .SetParameter("startY", 16 * y)
-        //        .Build();
-
-        //    teleportEntity.Tag = (worldName, entryId);
-
-        //    teleportEntity.EnterWorld(world.Id);
-
-        //    return teleportEntity;
-        //}
-
         public void RegisterCollisionPairs()
         {
             //collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv ) => Actor2TriggerCallback(ca, ea, cb,eb, pv));
@@ -156,19 +142,15 @@ namespace OpenBreed.Sandbox.Entities
             if (cameraEntity == null)
                 return;
 
+            var matadataCmp = exitEntity.Get<MetadataComponent>();
 
-            var exitClassCmp = exitEntity.Get<MetadataComponent>();
-
-            if (!int.TryParse(exitClassCmp.Flavor, out int exitId))
+            if (!int.TryParse(matadataCmp.Flavor, out int exitId))
                 throw new InvalidOperationException("Expected exit number");
 
             var mapId = exitId % 64;
             var entryId = exitId / 64;
 
             var mapKey = $"Vanilla/{mapId}";
-
-           
-            //var exitInfo = ((string WorldName, int EntryId))("CIVILIAN ZONE 2", 0);
 
             var jobChain = new JobChain();
 

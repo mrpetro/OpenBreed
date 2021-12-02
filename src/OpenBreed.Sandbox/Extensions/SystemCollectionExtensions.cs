@@ -138,6 +138,10 @@ namespace OpenBreed.Sandbox.Extensions
                 mapWorldDataLoader.Register("Void", genericCellEntityLoader);
                 mapWorldDataLoader.Register("FullObstacle", genericCellEntityLoader);
                 mapWorldDataLoader.Register("ActorOnlyObstacle", genericCellEntityLoader);
+                mapWorldDataLoader.Register("ObstacleDownLeft", genericCellEntityLoader);
+                mapWorldDataLoader.Register("ObstacleUpLeft", genericCellEntityLoader);
+                mapWorldDataLoader.Register("ObstacleUpRight", genericCellEntityLoader);
+                mapWorldDataLoader.Register("ObstacleDownRight", genericCellEntityLoader);
 
                 var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetManager<EnvironmentHelper>());
                 mapWorldDataLoader.Register("TVFlickering", environmentCellLoader);

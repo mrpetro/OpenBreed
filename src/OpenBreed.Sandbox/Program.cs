@@ -488,8 +488,22 @@ namespace OpenBreed.Sandbox
 
             var entityMan = GetManager<IEntityMan>();
 
-            var gameWorld = mapWorldLoader.Load("Vanilla/2");
-            //var gameWorld = mapWorldLoader.Load("Vanilla/8");
+            //L1
+            var gameWorld = mapWorldLoader.Load("Vanilla/1");
+            //LD
+            //var gameWorld = mapWorldLoader.Load("Vanilla/7");
+            //L3
+            //var gameWorld = mapWorldLoader.Load("Vanilla/28");
+            //L4
+            //var gameWorld = mapWorldLoader.Load("Vanilla/2");
+            //L5
+            //var gameWorld = mapWorldLoader.Load("Vanilla/16");
+            //L6
+            //var gameWorld = mapWorldLoader.Load("Vanilla/21");
+            //L7
+            //var gameWorld = mapWorldLoader.Load("Vanilla/12");
+            //L8
+            //var gameWorld = mapWorldLoader.Load("Vanilla/47");
 
             var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
 
