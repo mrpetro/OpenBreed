@@ -73,6 +73,7 @@
     <Compile Include="Maps\MAP\MAPReader.cs" />
     <Compile Include="Palettes\PaletteReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sprites\SPR\ODDSPRReader.cs" />
     <Compile Include="Sprites\SPR\SPRReader.cs" />
     <Compile Include="Tiles\ACBM\ACBMTileSetReader.cs" />
     <Compile Include="Tiles\BLK\BLKReader.cs" />

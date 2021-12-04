@@ -292,9 +292,34 @@
 				<Asset Id="Assets.COMPFONT.SPR" DataSourceRef="DataSources.COMPFONT.SPR" FormatType="ABTASPR">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.STATUS.SPR" DataSourceRef="DataSources.STATUS.SPR" FormatType="ABTASPR">
+				<Asset Id="Assets.STATUS.SPR" DataSourceRef="DataSources.STATUS.SPR" FormatType="ABTAODDSPR">
 					<Parameters>
-						<Parameter Name="NO_SPRITE_SIZES" Type="System.Boolean">true</Parameter>
+						<Parameter Name="S1.W" Type="System.Int32">320</Parameter>
+						<Parameter Name="S1.H" Type="System.Int32">11</Parameter>
+						<Parameter Name="S2.W" Type="System.Int32">320</Parameter>
+						<Parameter Name="S2.H" Type="System.Int32">11</Parameter>
+						<Parameter Name="S3.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S3.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S4.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S4.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S5.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S5.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S6.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S6.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S7.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S7.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S8.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S8.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S9.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S9.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S10.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S10.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S11.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S11.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S12.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S12.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S13.W" Type="System.Int32">8</Parameter>
+						<Parameter Name="S13.H" Type="System.Int32">8</Parameter>
 					</Parameters>
 				</Asset>
 				<Asset Id="Assets.TORCH.SPR" DataSourceRef="DataSources.TORCH.SPR" FormatType="ABTASPR">
@@ -1531,7 +1556,7 @@
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
-				<SpriteSetFromSPR Id="SpriteSets.STATUS">
+				<SpriteSetFromSPR Id="Vanilla/Common/Status">
 					<DataRef>Assets.STATUS.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
