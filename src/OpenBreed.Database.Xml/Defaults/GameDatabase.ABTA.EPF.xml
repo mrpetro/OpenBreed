@@ -293,7 +293,9 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.STATUS.SPR" DataSourceRef="DataSources.STATUS.SPR" FormatType="ABTASPR">
-					<Parameters />
+					<Parameters>
+						<Parameter Name="NO_SPRITE_SIZES" Type="System.Boolean">true</Parameter>
+					</Parameters>
 				</Asset>
 				<Asset Id="Assets.TORCH.SPR" DataSourceRef="DataSources.TORCH.SPR" FormatType="ABTASPR">
 					<Parameters />
@@ -1524,6 +1526,13 @@
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/Font">
 					<DataRef>Assets.COMPFONT.SPR</DataRef>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+					</PaletteRefs>
+				</SpriteSetFromSPR>
+				<SpriteSetFromSPR Id="SpriteSets.STATUS">
+					<DataRef>Assets.STATUS.SPR</DataRef>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
