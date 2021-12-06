@@ -202,38 +202,61 @@ namespace OpenBreed.Wecs.Worlds
             worldMan.RaiseEvent(new WorldInitializedEventArgs(Id));
         }
 
-        internal void Cleanup(IWorldMan worldMan)
+        internal void RemovePendingEntities()
         {
-
             //Perform deinitialization of removed entities
             toRemove.ForEach(item => DeinitializeEntity(worldMan, item));
+            toRemove.Clear();
 
             if (toRemoveUpdate.Count > 0)
                 Console.WriteLine($"ToRemove: {toRemoveUpdate.Count}");
 
             toRemoveUpdate.ForEach(item => RemoveFromNonMatchingSystems(item));
+            toRemoveUpdate.Clear();
 
             //Perform cleanup on all world systems
             Systems.ForEach(item => item.Cleanup());
-
-            //Perform initialization of added entities
-            toAdd.ForEach(item => InitializeEntity(worldMan, item));
-
-            if (toAddUpdate.Count > 0)
-                Console.WriteLine($"ToAddUpate: {toAddUpdate.Count}");
-
-            toAddUpdate.ForEach(item => AddToSystems(item));
-
-            toRemoveUpdate.Clear();
-            toAddUpdate.Clear();
-            toRemove.Clear();
-            toAdd.Clear();
         }
 
         internal void InitializeSystems()
         {
             for (int i = 0; i < Systems.Length; i++)
                 Systems[i].Initialize(this);
+        }
+
+        private void AddPendingEntities()
+        {
+            //Perform initialization of added entities
+            toAdd.ForEach(item => InitializeEntity(worldMan, item));
+            toAdd.Clear();
+
+            if (toAddUpdate.Count > 0)
+                Console.WriteLine($"ToAddUpate: {toAddUpdate.Count}");
+
+            toAddUpdate.ForEach(item => AddToSystems(item));
+            toAddUpdate.Clear();
+        }
+
+        internal void Update(float dt)
+        {
+            AddPendingEntities();
+
+            if (Paused)
+            {
+                foreach (var item in Systems.OfType<IUpdatableSystem>())
+                {
+                    item.UpdatePauseImmuneOnly(dt * TimeMultiplier);
+                }
+            }
+            else
+            {
+                foreach (var item in Systems.OfType<IUpdatableSystem>())
+                {
+                    item.Update(dt * TimeMultiplier);
+                }
+            }
+
+            RemovePendingEntities();
         }
 
         #endregion Internal Methods

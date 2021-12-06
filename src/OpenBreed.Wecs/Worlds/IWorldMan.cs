@@ -9,8 +9,6 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Public Properties
 
-        ReadOnlyCollection<World> Items { get; }
-
         #endregion Public Properties
 
         #region Public Methods

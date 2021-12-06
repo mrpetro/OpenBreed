@@ -38,7 +38,6 @@ namespace OpenBreed.Wecs.Worlds
             this.eventsMan = eventsMan;
             this.scriptMan = scriptMan;
             this.logger = logger;
-            Items = worlds.Items;
 
             entityMan.ComponentAdded += EntityMan_ComponentAdded;
             entityMan.ComponentRemoved += EntityMan_ComponentRemoved;
@@ -49,11 +48,6 @@ namespace OpenBreed.Wecs.Worlds
         #endregion Internal Constructors
 
         #region Public Properties
-
-        /// <summary>
-        /// ReadOnly collection of all loaded worlds
-        /// </summary>
-        public ReadOnlyCollection<World> Items { get; }
 
         #endregion Public Properties
 
@@ -119,8 +113,8 @@ namespace OpenBreed.Wecs.Worlds
         {
             AddPendingWorlds();
 
-            for (int i = 0; i < Items.Count; i++)
-                UpdateWorld(Items[i], dt);
+            foreach (var world in worlds.Items)
+                world.Update(dt);
 
             RemovePendingWorlds();
         }
@@ -209,37 +203,12 @@ namespace OpenBreed.Wecs.Worlds
                 toAdd.Clear();
             }
 
-            //Do cleanups on remaining worlds
-            for (int i = 0; i < worlds.Items.Count; i++)
-                worlds.Items[i].Cleanup(this);
         }
 
         private void AddWorld(World world)
         {
             world.Initialize(this);
             scriptMan.TryInvokeFunction("WorldLoaded", world.Id);
-        }
-
-        private void UpdateWorld(World world, float dt)
-        {
-            if (world.Paused)
-            {
-                foreach (var item in world.Systems.OfType<IUpdatableSystem>())
-                {
-                    //commandsMan.ExecuteEnqueued();
-                    item.UpdatePauseImmuneOnly(dt * world.TimeMultiplier);
-                }
-                //systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
-            }
-            else
-            {
-                foreach (var item in world.Systems.OfType<IUpdatableSystem>())
-                {
-                    //commandsMan.ExecuteEnqueued();
-                    item.Update(dt * world.TimeMultiplier);
-                }
-                //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
-            }
         }
 
         #endregion Private Methods
