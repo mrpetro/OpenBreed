@@ -183,7 +183,7 @@ namespace OpenBreed.Wecs.Worlds
         private readonly HashSet<Entity> toAddUpdate = new HashSet<Entity>();
         private readonly HashSet<Entity> toRemoveUpdate = new HashSet<Entity>();
 
-        internal void RemoveFromSystems(Entity entity)
+        internal void RemoveFromNonMatchingSystems(Entity entity)
         {
             foreach (var system in Systems)
             {
@@ -199,9 +199,6 @@ namespace OpenBreed.Wecs.Worlds
         {
             this.worldMan = worldMan;
 
-            //InitializeSystems();
-            Cleanup(worldMan);
-
             worldMan.RaiseEvent(new WorldInitializedEventArgs(Id));
         }
 
@@ -214,7 +211,7 @@ namespace OpenBreed.Wecs.Worlds
             if (toRemoveUpdate.Count > 0)
                 Console.WriteLine($"ToRemove: {toRemoveUpdate.Count}");
 
-            toRemoveUpdate.ForEach(item => RemoveFromSystems(item));
+            toRemoveUpdate.ForEach(item => RemoveFromNonMatchingSystems(item));
 
             //Perform cleanup on all world systems
             Systems.ForEach(item => item.Cleanup());
@@ -258,17 +255,17 @@ namespace OpenBreed.Wecs.Worlds
 
         private void DeinitializeEntity(IWorldMan worldMan, Entity entity)
         {
-            entity.WorldId = NO_WORLD;
+            RemoveFromAllSystems(entity);
             entities.Remove(entity);
-            RemoveEntityFromSystems(entity);
+            entity.WorldId = NO_WORLD;
             OnEntityRemoved(worldMan, entity);
         }
 
         private void InitializeEntity(IWorldMan worldMan, Entity entity)
         {
+            AddEntityToSystems(entity);
             entities.Add(entity);
             entity.WorldId = Id;
-            AddEntityToSystems(entity);
             OnEntityAdded(worldMan, entity);
         }
 
@@ -291,7 +288,7 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        private void RemoveEntityFromSystems(Entity entity)
+        private void RemoveFromAllSystems(Entity entity)
         {
             foreach (var system in Systems)
             {

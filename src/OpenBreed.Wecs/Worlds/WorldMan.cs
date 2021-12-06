@@ -1,8 +1,5 @@
-﻿
-
-using OpenBreed.Common.Logging;
+﻿using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
@@ -22,8 +19,8 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Private Fields
 
-        private readonly List<World> toInitialize = new List<World>();
-        private readonly List<World> toRemove = new List<World>();
+        private readonly HashSet<World> toAdd = new HashSet<World>();
+        private readonly HashSet<World> toRemove = new HashSet<World>();
         private readonly IdMap<World> worlds = new IdMap<World>();
         private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
         private readonly IEntityMan entityMan;
@@ -47,42 +44,6 @@ namespace OpenBreed.Wecs.Worlds
             entityMan.ComponentRemoved += EntityMan_ComponentRemoved;
             entityMan.EnterWorldRequested += EntityMan_EnterWorldRequested;
             entityMan.LeaveWorldRequested += EntityMan_LeaveWorldRequested;
-        }
-
-        private void EntityMan_EnterWorldRequested(Entity entity, int worldId)
-        {
-            var world = GetById(worldId);
-            world.AddEntity(entity);
-        }
-
-        private void EntityMan_LeaveWorldRequested(Entity entity)
-        {
-            var world = GetById(entity.WorldId);
-            world.RemoveEntity(entity);
-        }
-
-        private void EntityMan_ComponentRemoved(Entity entity, Type componentType)
-        {
-            if (entity.WorldId == World.NO_WORLD)
-                return;
-
-            var world = GetById(entity.WorldId);
-
-            world.UpdateRemove(entity, componentType);
-
-            //world.RemoveFromSystems(entity, componentType);
-        }
-
-        private void EntityMan_ComponentAdded(Entity entity, Type componentType)
-        {
-            if (entity.WorldId == World.NO_WORLD)
-                return;
-
-            var world = GetById(entity.WorldId);
-
-            world.UpdateAdd(entity, componentType);
-
-            //world.AddToSystems(entity, componentType);
         }
 
         #endregion Internal Constructors
@@ -156,50 +117,12 @@ namespace OpenBreed.Wecs.Worlds
         /// <param name="dt">Delta time</param>
         public void Update(float dt)
         {
+            AddPendingWorlds();
+
             for (int i = 0; i < Items.Count; i++)
                 UpdateWorld(Items[i], dt);
-        }
 
-        private void DeinitializeWorld(World world)
-        {
-            RaiseEvent(new WorldDeinitializedEventArgs(world.Id));
-        }
-
-        /// <summary>
-        /// Initialize or remove any pending worlds
-        /// </summary>
-        public void Cleanup()
-        {
-            if (toRemove.Any())
-            {
-                //Process entities to remove
-                for (int i = 0; i < toRemove.Count; i++)
-                {
-                    DeinitializeWorld(toRemove[i]);
-                    worlds.RemoveById(toRemove[i].Id);
-                }
-
-                toRemove.Clear();
-            }
-
-            if (toInitialize.Any())
-            {
-                //Process entities for initialization
-                for (int i = 0; i < toInitialize.Count; i++)
-                    InitializeWorld(toInitialize[i]);
-
-                toInitialize.Clear();
-            }
-
-            //Do cleanups on remaining worlds
-            for (int i = 0; i < worlds.Items.Count; i++)
-                worlds.Items[i].Cleanup(this);
-        }
-
-        private void InitializeWorld(World world)
-        {
-            world.Initialize(this);
-            scriptMan.TryInvokeFunction("WorldLoaded", world.Id);
+            RemovePendingWorlds();
         }
 
         public void RegisterWorld(World newWorld)
@@ -208,12 +131,94 @@ namespace OpenBreed.Wecs.Worlds
             namesToIds.Add(newWorld.Name, newWorld.Id);
 
             newWorld.InitializeSystems();
-            toInitialize.Add(newWorld);
+            toAdd.Add(newWorld);
         }
 
         #endregion Public Methods
 
         #region Private Methods
+
+        private void EntityMan_EnterWorldRequested(Entity entity, int worldId)
+        {
+            var world = GetById(worldId);
+            world.AddEntity(entity);
+        }
+
+        private void EntityMan_LeaveWorldRequested(Entity entity)
+        {
+            var world = GetById(entity.WorldId);
+            world.RemoveEntity(entity);
+        }
+
+        private void EntityMan_ComponentRemoved(Entity entity, Type componentType)
+        {
+            if (entity.WorldId == World.NO_WORLD)
+                return;
+
+            var world = GetById(entity.WorldId);
+
+            world.UpdateRemove(entity, componentType);
+
+            //world.RemoveFromSystems(entity, componentType);
+        }
+
+        private void EntityMan_ComponentAdded(Entity entity, Type componentType)
+        {
+            if (entity.WorldId == World.NO_WORLD)
+                return;
+
+            var world = GetById(entity.WorldId);
+
+            world.UpdateAdd(entity, componentType);
+
+            //world.AddToSystems(entity, componentType);
+        }
+
+        private void DeinitializeWorld(World world)
+        {
+            RaiseEvent(new WorldDeinitializedEventArgs(world.Id));
+        }
+
+        private void RemoveWorld(World world)
+        {
+            DeinitializeWorld(world);
+            worlds.RemoveById(world.Id);
+        }
+
+        private void RemovePendingWorlds()
+        {
+            if (toRemove.Any())
+            {
+                foreach (var world in toRemove)
+                    RemoveWorld(world);
+
+                toRemove.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Initialize or remove any pending worlds
+        /// </summary>
+        private void AddPendingWorlds()
+        {
+            if (toAdd.Any())
+            {
+                foreach (var world in toAdd)
+                    AddWorld(world);
+
+                toAdd.Clear();
+            }
+
+            //Do cleanups on remaining worlds
+            for (int i = 0; i < worlds.Items.Count; i++)
+                worlds.Items[i].Cleanup(this);
+        }
+
+        private void AddWorld(World world)
+        {
+            world.Initialize(this);
+            scriptMan.TryInvokeFunction("WorldLoaded", world.Id);
+        }
 
         private void UpdateWorld(World world, float dt)
         {

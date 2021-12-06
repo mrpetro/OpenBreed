@@ -27,8 +27,6 @@ namespace OpenBreed.Wecs.Worlds
 
         void Update(float dt);
 
-        void Cleanup();
-
         void RegisterWorld(World newWorld);
 
         #endregion Public Methods

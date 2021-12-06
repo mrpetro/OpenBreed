@@ -96,11 +96,6 @@ namespace OpenBreed.Wecs.Systems
 
         public void AddEntity(Entity entity)
         {
-            if (ContainsEntity(entity))
-            {
-                Console.WriteLine("Ass");
-            }
-
             toAdd.Add(entity);
         }
 

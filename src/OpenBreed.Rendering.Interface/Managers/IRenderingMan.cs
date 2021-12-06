@@ -31,11 +31,5 @@ namespace OpenBreed.Rendering.Interface.Managers
         World ScreenWorld { get; set; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        void Cleanup();
-
-        #endregion Public Methods
     }
 }

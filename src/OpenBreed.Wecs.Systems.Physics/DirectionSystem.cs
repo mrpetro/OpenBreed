@@ -11,8 +11,6 @@ namespace OpenBreed.Wecs.Systems.Physics
     {
         #region Private Fields
 
-        private const float FLOOR_FRICTION = 1.0f;
-
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
 
