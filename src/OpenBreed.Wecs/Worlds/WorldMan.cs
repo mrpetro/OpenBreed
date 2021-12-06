@@ -135,13 +135,13 @@ namespace OpenBreed.Wecs.Worlds
         private void EntityMan_EnterWorldRequested(Entity entity, int worldId)
         {
             var world = GetById(worldId);
-            world.AddEntity(entity);
+            world.RequestAddEntity(entity);
         }
 
         private void EntityMan_LeaveWorldRequested(Entity entity)
         {
             var world = GetById(entity.WorldId);
-            world.RemoveEntity(entity);
+            world.RequestRemoveEntity(entity);
         }
 
         private void EntityMan_ComponentRemoved(Entity entity, Type componentType)

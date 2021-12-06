@@ -101,8 +101,6 @@ namespace OpenBreed.Wecs.Systems
 
         public void RemoveEntity(Entity entity)
         {
-
-
             toRemove.Add(entity);
         }
 
