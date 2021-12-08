@@ -151,9 +151,7 @@ namespace OpenBreed.Wecs.Worlds
 
             var world = GetById(entity.WorldId);
 
-            world.UpdateRemove(entity, componentType);
-
-            //world.RemoveFromSystems(entity, componentType);
+            world.CheckRemoveFromSystems(entity, componentType);
         }
 
         private void EntityMan_ComponentAdded(Entity entity, Type componentType)
@@ -163,9 +161,7 @@ namespace OpenBreed.Wecs.Worlds
 
             var world = GetById(entity.WorldId);
 
-            world.UpdateAdd(entity, componentType);
-
-            //world.AddToSystems(entity, componentType);
+            world.CheckAddToSystems(entity, componentType);
         }
 
         private void DeinitializeWorld(World world)
