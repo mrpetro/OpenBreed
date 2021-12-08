@@ -40,7 +40,10 @@ namespace OpenBreed.Wecs.Systems.Audio
         {
             foreach (var entity in entities)
             {
-                var soundPlayerComponent = entity.Get<SoundPlayerComponent>();
+                var soundPlayerComponent = entity.TryGet<SoundPlayerComponent>();
+
+                if (soundPlayerComponent is null)
+                    continue;
 
                 try
                 {

@@ -37,7 +37,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             foreach (var entity in entities)
             {
-                var stampPutterCmp = entity.Get<StampPutterComponent>();
+                var stampPutterCmp = entity.TryGet<StampPutterComponent>();
+
+                if (stampPutterCmp is null)
+                    continue;
 
                 try
                 {
