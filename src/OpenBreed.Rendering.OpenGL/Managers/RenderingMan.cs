@@ -2,12 +2,9 @@
 using OpenBreed.Core;
 
 //using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
@@ -54,17 +51,10 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Private Properties
 
-        private Box2 ClipBox { get { return Box2.FromTLRB(viewClient.ClientRectangle.Width, 0.0f, viewClient.ClientRectangle.Height, 0.0f); } }
+        private Box2 ClipBox
+        { get { return Box2.FromTLRB(viewClient.ClientRectangle.Width, 0.0f, viewClient.ClientRectangle.Height, 0.0f); } }
 
         #endregion Private Properties
-
-        #region Public Methods
-
-        public void Cleanup()
-        {
-        }
-
-        #endregion Public Methods
 
         #region Private Methods
 

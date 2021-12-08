@@ -342,9 +342,6 @@ namespace OpenBreed.Sandbox
         {
             GetManager<IEventQueue>().Fire();
 
-            Worlds.Cleanup();
-            renderingMan.Cleanup();
-
             Players.ResetInputs();
 
             Inputs.Update();
@@ -489,13 +486,13 @@ namespace OpenBreed.Sandbox
             var entityMan = GetManager<IEntityMan>();
 
             //L1
-            var gameWorld = mapWorldLoader.Load("Vanilla/1");
+            //var gameWorld = mapWorldLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapWorldLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapWorldLoader.Load("Vanilla/28");
             //L4
-            //var gameWorld = mapWorldLoader.Load("Vanilla/2");
+            var gameWorld = mapWorldLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapWorldLoader.Load("Vanilla/16");
             //L6
@@ -505,7 +502,8 @@ namespace OpenBreed.Sandbox
             //L8
             //var gameWorld = mapWorldLoader.Load("Vanilla/47");
 
-            var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
+            //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
+            var playerCamera = cameraHelper.CreateCamera(0, 0, 320, 240);
 
             playerCamera.Add(new PauseImmuneComponent());
             playerCamera.Tag = "PlayerCamera";

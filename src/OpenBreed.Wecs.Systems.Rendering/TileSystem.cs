@@ -43,7 +43,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             foreach (var entity in entities)
             {
-                var tilePutterCmp = entity.Get<TilePutterComponent>();
+                var tilePutterCmp = entity.TryGet<TilePutterComponent>();
+
+                if (tilePutterCmp is null)
+                    continue;
 
                 try
                 {

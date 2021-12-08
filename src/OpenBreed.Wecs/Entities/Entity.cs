@@ -171,16 +171,6 @@ namespace OpenBreed.Wecs.Entities
             return removed;
         }
 
-        /// <summary>
-        /// Remove component from entity
-        /// </summary>
-        /// <param name="component"></param>
-        /// <returns>True if component remove successfuly, false otherwise</returns>
-        public bool Remove(IEntityComponent component)
-        {
-            return components.Remove(component.GetType());
-        }
-
         public override string ToString()
         {
             if(Tag is null)

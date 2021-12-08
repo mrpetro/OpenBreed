@@ -9,8 +9,6 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Public Properties
 
-        ReadOnlyCollection<World> Items { get; }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -26,8 +24,6 @@ namespace OpenBreed.Wecs.Worlds
         void Remove(World world);
 
         void Update(float dt);
-
-        void Cleanup();
 
         void RegisterWorld(World newWorld);
 
