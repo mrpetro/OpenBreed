@@ -30,9 +30,9 @@ namespace OpenBreed.Wecs.Worlds
         private readonly HashSet<Entity> entities = new HashSet<Entity>();
         private readonly HashSet<Entity> toAdd = new HashSet<Entity>();
         private readonly HashSet<Entity> toRemove = new HashSet<Entity>();
-        private float timeMultiplier = 1.0f;
+        private readonly IWorldMan worldMan;
 
-        private IWorldMan worldMan;
+        private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
 
@@ -43,6 +43,7 @@ namespace OpenBreed.Wecs.Worlds
             Name = builder.name;
             modules = builder.modules;
             Systems = builder.systems.Values.ToArray();
+            worldMan = builder.worldMan;
         }
 
         #endregion Internal Constructors
@@ -115,7 +116,7 @@ namespace OpenBreed.Wecs.Worlds
         #region Internal Methods
 
         /// <summary>
-        /// Method will add given entity to this world.
+        /// Method will request to add given entity to this world.
         /// Entity will not be added immediately but at the end of each world update.
         /// An exception will be thrown if given entity already exists in world
         /// </summary>
@@ -129,7 +130,7 @@ namespace OpenBreed.Wecs.Worlds
         }
 
         /// <summary>
-        /// Method will remove given entity from this world.
+        /// Method will request to remove given entity from this world.
         /// Entity will not be removed immediately but at the end of each world update.
         /// An exception will be thrown if given entity does not exist in this world.
         /// </summary>
@@ -150,7 +151,7 @@ namespace OpenBreed.Wecs.Worlds
                     continue;
 
                 if (!system.Matches(entity))
-                    system.RemoveEntity(entity);
+                    system.RequestRemoveEntity(entity);
             }
         }
 
@@ -162,21 +163,14 @@ namespace OpenBreed.Wecs.Worlds
                     continue;
 
                 if (system.Matches(entity))
-                    system.AddEntity(entity);
+                    system.RequestAddEntity(entity);
             }
-        }
-
-        internal void Initialize(IWorldMan worldMan)
-        {
-            this.worldMan = worldMan;
-
-            worldMan.RaiseEvent(new WorldInitializedEventArgs(Id));
         }
 
         internal void RemovePendingEntities()
         {
             //Perform deinitialization of removed entities
-            toRemove.ForEach(item => DeinitializeEntity(worldMan, item));
+            toRemove.ForEach(item => RemoveEntity(item));
             toRemove.Clear();
 
             //Perform cleanup on all world systems
@@ -218,7 +212,7 @@ namespace OpenBreed.Wecs.Worlds
         private void AddPendingEntities()
         {
             //Perform initialization of added entities
-            toAdd.ForEach(item => InitializeEntity(worldMan, item));
+            toAdd.ForEach(item => AddEntity(item));
             toAdd.Clear();
         }
 
@@ -235,30 +229,30 @@ namespace OpenBreed.Wecs.Worlds
                 worldMan.RaiseEvent(new WorldUnpausedEventArgs(Id));
         }
 
-        private void DeinitializeEntity(IWorldMan worldMan, Entity entity)
+        private void RemoveEntity(Entity entity)
         {
             RemoveFromAllSystems(entity);
             entities.Remove(entity);
             entity.WorldId = NO_WORLD;
-            OnEntityRemoved(worldMan, entity);
+            OnEntityRemoved(entity);
         }
 
-        private void InitializeEntity(IWorldMan worldMan, Entity entity)
+        private void AddEntity(Entity entity)
         {
             AddEntityToSystems(entity);
             entities.Add(entity);
             entity.WorldId = Id;
-            OnEntityAdded(worldMan, entity);
+            OnEntityAdded(entity);
         }
 
-        private void OnEntityAdded(IWorldMan worldMan, Entity entity)
+        private void OnEntityAdded(Entity entity)
         {
-            worldMan.RaiseEvent(new EntityAddedEventArgs(Id, entity.Id));
+            worldMan.RaiseEvent(new EntityEnteredEventArgs(Id, entity.Id));
         }
 
-        private void OnEntityRemoved(IWorldMan worldMan, Entity entity)
+        private void OnEntityRemoved(Entity entity)
         {
-            worldMan.RaiseEvent(new EntityRemovedEventArgs(Id, entity.Id));
+            worldMan.RaiseEvent(new EntityLeftEventArgs(Id, entity.Id));
         }
 
         private void AddEntityToSystems(Entity entity)
@@ -266,7 +260,7 @@ namespace OpenBreed.Wecs.Worlds
             foreach (var system in Systems)
             {
                 if (system.Matches(entity))
-                    system.AddEntity(entity);
+                    system.RequestAddEntity(entity);
             }
         }
 
@@ -275,7 +269,7 @@ namespace OpenBreed.Wecs.Worlds
             foreach (var system in Systems)
             {
                 if (system.Matches(entity))
-                    system.RemoveEntity(entity);
+                    system.RequestRemoveEntity(entity);
             }
         }
 

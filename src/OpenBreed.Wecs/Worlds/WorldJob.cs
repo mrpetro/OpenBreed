@@ -42,7 +42,7 @@ namespace OpenBreed.Wecs.Worlds
 
         public void Execute()
         {
-            eventsMan.Subscribe<TEventArgs>(worldMan, OnEvent);
+            eventsMan.SubscribeEx<TEventArgs>(OnEvent);
             action.Invoke();
         }
 
@@ -59,7 +59,7 @@ namespace OpenBreed.Wecs.Worlds
             if (!triggerFunc.Invoke(sender, args))
                 return;
 
-            eventsMan.Unsubscribe<TEventArgs>(worldMan, OnEvent);
+            eventsMan.UnsubscribeEx<TEventArgs>(OnEvent);
             Complete(this);
         }
 

@@ -83,10 +83,10 @@
     <Compile Include="Entities\EntityMan.cs" />
     <Compile Include="Entities\IEntityMan.cs" />
     <Compile Include="Events\ComponentChangedEventHandler.cs" />
-    <Compile Include="Events\EntityAddedEventArgs.cs" />
+    <Compile Include="Events\EntityEnteredEventArgs.cs" />
     <Compile Include="Events\ComponentChangedEvent.cs" />
     <Compile Include="Events\EntityComponentChangedEventArgs.cs" />
-    <Compile Include="Events\EntityRemovedEventArgs.cs" />
+    <Compile Include="Events\EntityLeftEventArgs.cs" />
     <Compile Include="Events\WorldDeinitializedEventArgs.cs" />
     <Compile Include="Events\WorldInitializedEventArgs.cs" />
     <Compile Include="Events\WorldPausedEventArgs.cs" />

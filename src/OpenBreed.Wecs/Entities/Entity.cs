@@ -69,8 +69,12 @@ namespace OpenBreed.Wecs.Entities
 
         #region Public Methods
 
+        /// <summary>
+        /// Destroy entity - Leave world if at any, then remove from entities list
+        /// </summary>
         public void Destroy()
         {
+            LeaveWorld();
             entityMan.RequestDestroy(this);
         }
 

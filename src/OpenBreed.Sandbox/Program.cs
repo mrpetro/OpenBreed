@@ -518,7 +518,7 @@ namespace OpenBreed.Sandbox
 
             johnPlayerEntity.AddFollower(playerCamera);
 
-            GetManager<IEventsMan>().Subscribe<WorldInitializedEventArgs>(GetManager<IWorldMan>(), (s, a) =>
+            GetManager<IEventsMan>().SubscribeEx<WorldInitializedEventArgs>((s, a) =>
             {
                 if (a.WorldId != gameWorld.Id)
                     return;

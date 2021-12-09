@@ -1,15 +1,21 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Worlds;
+﻿using OpenBreed.Wecs.Entities;
 using System;
-using System.Collections.ObjectModel;
 
 namespace OpenBreed.Wecs.Worlds
 {
+    public delegate void EntitiyLeft(Entity entity, World world);
+
+    public delegate void EntitiyEntered(Entity entity, World world);
+
     public interface IWorldMan
     {
-        #region Public Properties
+        #region Public Events
 
-        #endregion Public Properties
+        event EntitiyEntered EntitiyEntered;
+
+        event EntitiyLeft EntitiyLeft;
+
+        #endregion Public Events
 
         #region Public Methods
 

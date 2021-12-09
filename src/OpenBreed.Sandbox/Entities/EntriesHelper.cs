@@ -118,7 +118,7 @@ namespace OpenBreed.Sandbox.Entities
             var jobChain = new JobChain();
 
             //Add entity to next world
-            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(worldMan, eventsMan, (s, a) => { return worldMan.GetById(a.WorldId).Id == worldId; }, () => heroEntity.EnterWorld(worldId)));
+            jobChain.Equeue(new WorldJob<EntityEnteredEventArgs>(worldMan, eventsMan, (s, a) => { return worldMan.GetById(a.WorldId).Id == worldId; }, () => heroEntity.EnterWorld(worldId)));
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(heroEntity, entryId, true)));
             //Unpause this world
@@ -164,11 +164,11 @@ namespace OpenBreed.Sandbox.Entities
             //Fade out camera
             jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
             //Remove entity from this world
-            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => targetEntity.LeaveWorld()));
+            jobChain.Equeue(new WorldJob<EntityLeftEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => targetEntity.LeaveWorld()));
             //Load next world if needed
             jobChain.Equeue(new EntityJob(() => TryLoadWorld(mapKey)));
             //Add entity to next world
-            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(worldMan, eventsMan, (s, a) => { return worldMan.GetById(a.WorldId).Name == mapKey; }, () => AddToWorld(targetEntity, mapKey)));
+            jobChain.Equeue(new WorldJob<EntityEnteredEventArgs>(worldMan, eventsMan, (s, a) => { return worldMan.GetById(a.WorldId).Name == mapKey; }, () => AddToWorld(targetEntity, mapKey)));
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, entryId, true)));
             //Unpause this world

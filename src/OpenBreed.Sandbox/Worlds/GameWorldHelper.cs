@@ -74,13 +74,13 @@ namespace OpenBreed.Sandbox.Worlds
             cameraEntity.Get<CameraComponent>().Height = a.Height;
         }
 
-        private void OnEntityAdded(object sender, EntityAddedEventArgs a)
+        private void OnEntityAdded(object sender, EntityEnteredEventArgs a)
         {
             var world = worldMan.GetById(a.WorldId);
             logger.Verbose($"Entity '{a.EntityId}' added to world '{world.Name}'.");
         }
 
-        private void OnEntityRemoved(object sender, EntityRemovedEventArgs a)
+        private void OnEntityRemoved(object sender, EntityLeftEventArgs a)
         {
             var world = worldMan.GetById(a.WorldId);
             logger.Verbose($"Entity '{a.EntityId}' removed from world '{world.Name}'.");

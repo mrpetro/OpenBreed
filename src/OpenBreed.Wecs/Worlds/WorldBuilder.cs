@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common.Logging;
-using OpenBreed.Core;
 using OpenBreed.Wecs.Systems;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,11 @@ namespace OpenBreed.Wecs.Worlds
 {
     public interface IBuilderModule
     {
+        #region Public Methods
+
         void Build(int code, World world, object[] args);
+
+        #endregion Public Methods
     }
 
     public class WorldBuilder
@@ -22,6 +25,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Fields
 
+        internal readonly IWorldMan worldMan;
         internal string name;
         internal Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
         internal Dictionary<Type, object> modules = new Dictionary<Type, object>();
@@ -29,8 +33,6 @@ namespace OpenBreed.Wecs.Worlds
         #endregion Internal Fields
 
         #region Private Fields
-
-        private readonly IWorldMan worldMan;
 
         private readonly ILogger logger;
 
@@ -57,7 +59,6 @@ namespace OpenBreed.Wecs.Worlds
 
             modules.Add(moduleType, module);
         }
-
 
         public void AddSystem(ISystem system)
         {
@@ -92,9 +93,5 @@ namespace OpenBreed.Wecs.Worlds
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        #endregion Private Methods
     }
 }

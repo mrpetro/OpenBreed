@@ -94,12 +94,12 @@ namespace OpenBreed.Wecs.Systems
             return true;
         }
 
-        public void AddEntity(Entity entity)
+        public void RequestAddEntity(Entity entity)
         {
             toAdd.Add(entity);
         }
 
-        public void RemoveEntity(Entity entity)
+        public void RequestRemoveEntity(Entity entity)
         {
             toRemove.Add(entity);
         }
