@@ -8,6 +8,8 @@ namespace OpenBreed.Common.Tools.Collections
     {
         #region Private Fields
 
+        private object _itemsLock = new object();
+
         private readonly List<T> items = new List<T>();
 
         private readonly Stack freeIdCache = new Stack();
@@ -56,29 +58,32 @@ namespace OpenBreed.Common.Tools.Collections
 
         public bool TryGetValue(int id, out T value)
         {
-            if (id < 0 || id > items.Count - 1)
+            lock (_itemsLock)
             {
-                value = default(T);
-                return false;
-            }
-            else
-            {
-                if (freeIdCache.Count == 0)
+                if (id < 0 || id > items.Count - 1)
                 {
-                    value = items[id];
-                    return true;
+                    value = default(T);
+                    return false;
                 }
                 else
                 {
-                    if (freeIdCache.Contains(id))
-                    {
-                        value = default(T);
-                        return false;
-                    }
-                    else
+                    if (freeIdCache.Count == 0)
                     {
                         value = items[id];
                         return true;
+                    }
+                    else
+                    {
+                        if (freeIdCache.Contains(id))
+                        {
+                            value = default(T);
+                            return false;
+                        }
+                        else
+                        {
+                            value = items[id];
+                            return true;
+                        }
                     }
                 }
             }
@@ -86,28 +91,34 @@ namespace OpenBreed.Common.Tools.Collections
 
         public int Add(T item)
         {
-            if (freeIdCache.Count == 0)
+            lock (_itemsLock)
             {
-                items.Add(item);
-                return items.Count - 1;
-            }
-            else
-            {
-                int freeId = (int)freeIdCache.Pop();
-                items[freeId] = item;
-                return freeId;
+                if (freeIdCache.Count == 0)
+                {
+                    items.Add(item);
+                    return items.Count - 1;
+                }
+                else
+                {
+                    int freeId = (int)freeIdCache.Pop();
+                    items[freeId] = item;
+                    return freeId;
+                }
             }
         }
 
         public void RemoveById(int id)
         {
-            if (id < freeIdCache.Count - 1)
+            lock (_itemsLock)
             {
-                freeIdCache.Push(id);
-                items[id] = default(T);
+                if (id < items.Count - 1)
+                {
+                    freeIdCache.Push(id);
+                    items[id] = default(T);
+                }
+                else
+                    items.RemoveAt(id);
             }
-            else
-                items.RemoveAt(id);
         }
 
         #endregion Public Methods
