@@ -44,9 +44,9 @@ namespace OpenBreed.Wecs.Systems
 
         bool HasEntity(Entity entity);
 
-        void AddEntity(Entity entity);
+        void RequestAddEntity(Entity entity);
 
-        void RemoveEntity(Entity entity);
+        void RequestRemoveEntity(Entity entity);
 
         /// <summary>
         /// Get types of entity components required by this system

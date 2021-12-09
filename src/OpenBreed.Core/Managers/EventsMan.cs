@@ -9,6 +9,7 @@ namespace OpenBreed.Core.Managers
         #region Private Fields
 
         private Dictionary<object, Dictionary<Type, List<(object, MethodInfo)>>> listeners = new Dictionary<object, Dictionary<Type, List<(object, MethodInfo)>>>();
+        private Dictionary<Type, List<(object, MethodInfo)>> listenersEx = new Dictionary<Type, List<(object, MethodInfo)>>();
 
         #endregion Private Fields
 
@@ -25,6 +26,22 @@ namespace OpenBreed.Core.Managers
         public void Raise<T>(object sender, T eventArgs) where T : EventArgs
         {
             NotifyListeners(sender, eventArgs.GetType(), eventArgs);
+
+            RaiseEx(sender, eventArgs);
+        }
+
+        public void SubscribeEx<T>(Action<object, T> callback) where T : EventArgs
+        {
+            var eventType = typeof(T);
+            List<(object, MethodInfo)> callbacks = null;
+
+            if (!listenersEx.TryGetValue(eventType, out callbacks))
+            {
+                callbacks = new List<(object, MethodInfo)>();
+                listenersEx.Add(eventType, callbacks);
+            }
+
+            callbacks.Add((callback.Target, callback.Method));
         }
 
         public void Subscribe<T>(object sender, Action<object, T> callback) where T : EventArgs
@@ -64,9 +81,40 @@ namespace OpenBreed.Core.Managers
             callbacks.Remove((callback.Target, callback.Method));
         }
 
+        public void UnsubscribeEx<T>(Action<object, T> callback) where T : EventArgs
+        {
+            var eventType = typeof(T);
+
+            List<(object, MethodInfo)> callbacks = null;
+
+            if (!listenersEx.TryGetValue(eventType, out callbacks))
+                return;
+
+            callbacks.Remove((callback.Target, callback.Method));
+        }
+
         #endregion Public Methods
 
         #region Private Methods
+
+        private void RaiseEx<T>(object sender, T eventArgs) where T : EventArgs
+        {
+            NotifyListenersEx(sender, eventArgs.GetType(), eventArgs);
+        }
+
+        private void NotifyListenersEx(object sender, Type eventType, EventArgs eventArgs)
+        {
+            List<(object Target, MethodInfo Method)> callbacks = null;
+
+            if (!listenersEx.TryGetValue(eventType, out callbacks))
+                return;
+
+            for (int i = 0; i < callbacks.Count; i++)
+            {
+                var item = callbacks[i];
+                item.Method.Invoke(item.Target, new object[] { sender, eventArgs });
+            }
+        }
 
         private void NotifyListeners(object sender, Type eventType, EventArgs eventArgs)
         {

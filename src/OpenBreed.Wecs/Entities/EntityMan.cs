@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Wecs.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace OpenBreed.Wecs.Entities
 {
@@ -14,8 +14,7 @@ namespace OpenBreed.Wecs.Entities
 
         private readonly IdMap<Entity> entities = new IdMap<Entity>();
         private readonly IEventsMan eventsMan;
-
-        private readonly Dictionary<Type, List<(object, MethodInfo)>> eventTypes = new Dictionary<Type, List<(object, MethodInfo)>>();
+        private readonly HashSet<Entity> toDestory = new HashSet<Entity>();
 
         #endregion Private Fields
 
@@ -24,6 +23,8 @@ namespace OpenBreed.Wecs.Entities
         internal EntityMan(IEventsMan eventsMan)
         {
             this.eventsMan = eventsMan;
+
+            this.eventsMan.SubscribeEx<EntityLeftEventArgs>(OnEntityLeftWorld);
         }
 
         #endregion Internal Constructors
@@ -50,7 +51,7 @@ namespace OpenBreed.Wecs.Entities
 
         public IEnumerable<Entity> GetByTag(object tag)
         {
-            return entities.Items.Where(item => item.Tag != null && item.Tag.Equals(tag));
+            return entities.Items.Where(item => item?.Tag != null && item.Tag.Equals(tag));
         }
 
         public IEnumerable<Entity> Where(Func<Entity, bool> predicate)
@@ -78,11 +79,6 @@ namespace OpenBreed.Wecs.Entities
             eventsMan.Subscribe<T>(entity, callback);
         }
 
-        internal void RequestDestroy(Entity entity)
-        {
-
-        }
-
         public void Unsubscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs
         {
             eventsMan.Unsubscribe<T>(entity, callback);
@@ -102,6 +98,11 @@ namespace OpenBreed.Wecs.Entities
             EnterWorldRequested?.Invoke(entity, worldId);
         }
 
+        internal void RequestDestroy(Entity entity)
+        {
+            toDestory.Add(entity);
+        }
+
         internal void OnComponentAdded(Entity entity, Type componentType)
         {
             ComponentAdded?.Invoke(entity, componentType);
@@ -114,8 +115,6 @@ namespace OpenBreed.Wecs.Entities
 
         internal void Raise<T>(Entity entity, T eventArgs) where T : EventArgs
         {
-            NotifyListeners(entity, eventArgs.GetType(), eventArgs);
-
             eventsMan.Raise<T>(entity, eventArgs);
         }
 
@@ -123,17 +122,14 @@ namespace OpenBreed.Wecs.Entities
 
         #region Private Methods
 
-        private void NotifyListeners(object sender, Type eventType, EventArgs eventArgs)
+        private void OnEntityLeftWorld(object sender, EntityLeftEventArgs e)
         {
-            List<(object Target, MethodInfo Method)> callbacks = null;
+            var entity = GetById(e.EntityId);
 
-            if (!eventTypes.TryGetValue(eventType, out callbacks))
-                return;
-
-            for (int i = 0; i < callbacks.Count; i++)
+            if (toDestory.Contains(entity))
             {
-                var item = callbacks[i];
-                item.Method.Invoke(item.Target, new object[] { sender, eventArgs });
+                entities.RemoveById(entity.Id);
+                toDestory.Remove(entity);
             }
         }
 

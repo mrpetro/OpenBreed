@@ -77,8 +77,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
             Console.WriteLine($"Picked up '{className}'.");
 
-            entity.LeaveWorld();
-            //entity.Destroy();
+            entity.Destroy();
         }
 
         public void LeaveState(Entity entity)

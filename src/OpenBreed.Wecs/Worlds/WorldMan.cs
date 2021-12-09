@@ -4,10 +4,8 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
-using OpenBreed.Wecs.Systems;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Worlds
@@ -47,9 +45,13 @@ namespace OpenBreed.Wecs.Worlds
 
         #endregion Internal Constructors
 
-        #region Public Properties
+        #region Public Events
 
-        #endregion Public Properties
+        public event EntitiyEntered EntitiyEntered;
+
+        public event EntitiyLeft EntitiyLeft;
+
+        #endregion Public Events
 
         #region Public Methods
 
@@ -164,14 +166,9 @@ namespace OpenBreed.Wecs.Worlds
             world.CheckAddToSystems(entity, componentType);
         }
 
-        private void DeinitializeWorld(World world)
-        {
-            RaiseEvent(new WorldDeinitializedEventArgs(world.Id));
-        }
-
         private void RemoveWorld(World world)
         {
-            DeinitializeWorld(world);
+            RaiseEvent(new WorldDeinitializedEventArgs(world.Id));
             worlds.RemoveById(world.Id);
         }
 
@@ -198,12 +195,11 @@ namespace OpenBreed.Wecs.Worlds
 
                 toAdd.Clear();
             }
-
         }
 
         private void AddWorld(World world)
         {
-            world.Initialize(this);
+            RaiseEvent(new WorldInitializedEventArgs(world.Id));
             scriptMan.TryInvokeFunction("WorldLoaded", world.Id);
         }
 

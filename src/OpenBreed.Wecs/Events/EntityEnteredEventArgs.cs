@@ -3,13 +3,13 @@
 namespace OpenBreed.Wecs.Events
 {
     /// <summary>
-    /// Event args for event that occurs when is removed from world
+    /// Event args for event that occurs when is added to world
     /// </summary>
-    public class EntityRemovedEventArgs : EventArgs
+    public class EntityEnteredEventArgs : EventArgs
     {
         #region Public Constructors
 
-        public EntityRemovedEventArgs(int worldId, int entityId)
+        public EntityEnteredEventArgs(int worldId, int entityId)
         {
             WorldId = worldId;
             EntityId = entityId;
