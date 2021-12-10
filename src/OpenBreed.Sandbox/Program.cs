@@ -400,40 +400,6 @@ namespace OpenBreed.Sandbox
             soundMan.CreateSoundSource();
             soundMan.CreateSoundSource();
 
-            var tileTex = textureMan.Create("Textures/Tiles/16/Test", @"Content\Graphics\TileAtlasTest32bit.bmp");
-            //tileMan.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
-            tileMan.CreateAtlas().SetName("Atlases/Tiles/16/Test")
-                                 .SetTexture(tileTex.Id)
-                                 .SetTileSize(16)
-                                 .AppendCoordsFromGrid(4, 4, 0, 0)
-                                 .Build();
-
-            var teleportTex = textureMan.Create("Textures/Sprites/Teleport", @"Content\Graphics\TeleportSpriteSet.png");
-            spriteMan.CreateAtlas()
-                .SetTexture(teleportTex.Id)
-                .SetName(TeleportHelper.SPRITE_TELEPORT_ENTRY)
-                .AppendCoordsFromGrid(32, 32, 4, 1, 0, 0)
-                .Build();
-            //spriteMan.Create(TeleportHelper.SPRITE_TELEPORT_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 0);
-            spriteMan.CreateAtlas()
-                .SetTexture(teleportTex.Id)
-                .SetName(TeleportHelper.SPRITE_TELEPORT_EXIT)
-                .AppendCoordsFromGrid(32, 32, 4, 1, 0, 32)
-                .Build();
-            //spriteMan.Create(TeleportHelper.SPRITE_TELEPORT_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 32);
-            spriteMan.CreateAtlas()
-                .SetTexture(teleportTex.Id)
-                .SetName(EntriesHelper.SPRITE_WORLD_ENTRY)
-                .AppendCoordsFromGrid(32, 32, 4, 1, 0, 96)
-                .Build();
-            //spriteMan.Create(WorldGateHelper.SPRITE_WORLD_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 96);
-            spriteMan.CreateAtlas()
-                .SetTexture(teleportTex.Id)
-                .SetName(EntriesHelper.SPRITE_WORLD_EXIT)
-                .AppendCoordsFromGrid(32, 32, 4, 1, 0, 64)
-                .Build();
-            //spriteMan.Create(WorldGateHelper.SPRITE_WORLD_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 64);
-
             var laserTex = textureMan.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
             spriteMan.CreateAtlas()
                 .SetTexture(laserTex.Id)
