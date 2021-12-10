@@ -115,7 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
-      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
+      <Project>{2f6f29fc-0824-4ef8-bdd8-f209869f1518}</Project>
       <Name>OpenBreed.Common.Tools</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
