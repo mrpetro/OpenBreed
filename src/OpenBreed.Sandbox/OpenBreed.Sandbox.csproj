@@ -72,6 +72,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -212,23 +215,23 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
-      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
+      <Project>{2f6f29fc-0824-4ef8-bdd8-f209869f1518}</Project>
       <Name>OpenBreed.Common.Tools</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
-      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Project>{4f85277e-6eb4-4b3c-87db-2df40be46224}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
-      <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
+      <Project>{D80521CC-7E57-47A9-8D08-BDEC78DCD480}</Project>
       <Name>OpenBreed.Database.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj">
-      <Project>{C4095745-E19C-4DE9-B2E4-37E55FA0D225}</Project>
+      <Project>{fcbe0182-eb0c-49d0-8ce4-438f9a47e3b6}</Project>
       <Name>OpenBreed.Database.Xml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj">
-      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
+      <Project>{2bdd055c-cc15-4bf2-9af2-4690a5c1c296}</Project>
       <Name>OpenBreed.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj">

@@ -71,11 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
-      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Project>{4f85277e-6eb4-4b3c-87db-2df40be46224}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
-      <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
+      <Project>{D80521CC-7E57-47A9-8D08-BDEC78DCD480}</Project>
       <Name>OpenBreed.Database.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Animation.Interface\OpenBreed.Animation.Interface.csproj">
