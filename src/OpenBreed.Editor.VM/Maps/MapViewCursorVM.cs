@@ -115,6 +115,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Hover()
         {
+            if (Parent.Model is null)
+                return;
+
             Visible = true;
             Action = CursorActions.Hover;
             UpdateAction?.Invoke(this);
@@ -122,6 +125,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Leave()
         {
+            if (Parent.Model is null)
+                return;
+
             Visible = false;
             Action = CursorActions.Leave;
             UpdateAction?.Invoke(this);
@@ -129,6 +135,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Move(CursorButtons buttons, Point location)
         {
+            if (Parent.Model is null)
+                return;
+
             Buttons = buttons;
             ViewCoords = location;
             Action = CursorActions.Move;
@@ -137,6 +146,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Click(CursorButtons buttons, Point location)
         {
+            if (Parent.Model is null)
+                return;
+
             Buttons = buttons;
             ViewCoords = location;
             Action = CursorActions.Click;
@@ -145,6 +157,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Down(CursorButtons buttons, Point location)
         {
+            if (Parent.Model is null)
+                return;
+
             Buttons = buttons;
             ViewCoords = location;
             Action = CursorActions.Down;
@@ -153,6 +168,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Up(CursorButtons buttons, Point location)
         {
+            if (Parent.Model is null)
+                return;
+
             Buttons = buttons;
             ViewCoords = location;
             Action = CursorActions.Up;

@@ -190,6 +190,12 @@ namespace OpenBreed.Editor.VM.Maps
 
             Model = mapsDataProvider.GetMap(entry.Id);
 
+            if (Model is null)
+            {
+                IsModified = false;
+                return;
+            }
+
             UpdateTileSets(entry.TileSetRef);
             UpdatePalettes(entry.PaletteRefs);
 
