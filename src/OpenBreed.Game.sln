@@ -22,8 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{FB7D9C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common", "..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj", "{9894E7F4-7C85-4173-9D05-F50CFD2E4163}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPFArchive", "..\EPFArchive\src\EPFArchive\EPFArchive.csproj", "{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Database.Interface", "..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj", "{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Database.Xml", "..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj", "{C4095745-E19C-4DE9-B2E4-37E55FA0D225}"
@@ -96,9 +94,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Reader.Interface"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Reader.Legacy", "..\OpenBreed.Common\src\OpenBreed.Reader.Legacy\OpenBreed.Reader.Legacy.csproj", "{99094BB5-EC75-4A06-AD60-5CA1E869040B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Writer.Interface", "..\OpenBreed.Common\src\OpenBreed.Writer.Interface\OpenBreed.Writer.Interface.csproj", "{0012C9FB-E86D-46D9-94B9-E29817027B67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Writer.Interface", "..\OpenBreed.Common\src\OpenBreed.Writer.Interface\OpenBreed.Writer.Interface.csproj", "{0012C9FB-E86D-46D9-94B9-E29817027B67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Writer.Legacy", "..\OpenBreed.Common\src\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj", "{E984F650-F395-46F8-A1E7-B96A1917D236}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Writer.Legacy", "..\OpenBreed.Common\src\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj", "{E984F650-F395-46F8-A1E7-B96A1917D236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPFArchive", "..\EPFArchive\src\EPFArchive\EPFArchive.csproj", "{F436D8C0-B0E8-4A4A-8699-1515A349A661}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -156,14 +156,6 @@ Global
 		{9894E7F4-7C85-4173-9D05-F50CFD2E4163}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9894E7F4-7C85-4173-9D05-F50CFD2E4163}.Release|x64.ActiveCfg = Release|Any CPU
 		{9894E7F4-7C85-4173-9D05-F50CFD2E4163}.Release|x64.Build.0 = Release|Any CPU
-		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Debug|x64.ActiveCfg = Debug|x64
-		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Debug|x64.Build.0 = Debug|x64
-		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Release|x64.ActiveCfg = Release|Any CPU
-		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Release|x64.Build.0 = Release|Any CPU
 		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|x64.ActiveCfg = Debug|x64
@@ -428,6 +420,14 @@ Global
 		{E984F650-F395-46F8-A1E7-B96A1917D236}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E984F650-F395-46F8-A1E7-B96A1917D236}.Release|x64.ActiveCfg = Release|Any CPU
 		{E984F650-F395-46F8-A1E7-B96A1917D236}.Release|x64.Build.0 = Release|Any CPU
+		{F436D8C0-B0E8-4A4A-8699-1515A349A661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F436D8C0-B0E8-4A4A-8699-1515A349A661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F436D8C0-B0E8-4A4A-8699-1515A349A661}.Debug|x64.ActiveCfg = Debug|x64
+		{F436D8C0-B0E8-4A4A-8699-1515A349A661}.Debug|x64.Build.0 = Debug|x64
+		{F436D8C0-B0E8-4A4A-8699-1515A349A661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F436D8C0-B0E8-4A4A-8699-1515A349A661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F436D8C0-B0E8-4A4A-8699-1515A349A661}.Release|x64.ActiveCfg = Release|Any CPU
+		{F436D8C0-B0E8-4A4A-8699-1515A349A661}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -437,7 +437,6 @@ Global
 		{CF689601-0842-497F-A05F-B31431697B4E} = {875B70CE-FA5D-4049-831A-A3F538EA25BD}
 		{82AF3D57-A4F4-4339-859A-7E82942B96DF} = {FDDE652A-F7BD-4EB9-9B75-96E5BB6702CC}
 		{9894E7F4-7C85-4173-9D05-F50CFD2E4163} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
-		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 		{C4095745-E19C-4DE9-B2E4-37E55FA0D225} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 		{4BF54E49-6BEA-4733-8189-0A9204819A11} = {117E35C5-A272-4591-A61E-4E42504AF6FE}
@@ -472,6 +471,7 @@ Global
 		{99094BB5-EC75-4A06-AD60-5CA1E869040B} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 		{0012C9FB-E86D-46D9-94B9-E29817027B67} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 		{E984F650-F395-46F8-A1E7-B96A1917D236} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
+		{F436D8C0-B0E8-4A4A-8699-1515A349A661} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36FCF31C-C702-49A1-8355-120BD345CF95}
