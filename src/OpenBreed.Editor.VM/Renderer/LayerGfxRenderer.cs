@@ -1,13 +1,14 @@
 ﻿using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Model.Maps;
-using System;
 using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Renderer
 {
-    public class LayerGfxRenderer : RendererBase<MapLayerModel>
+    public class LayerGfxRenderer : RendererBase<MapLayoutModel>
     {
         #region Private Fields
+
+        private const MapLayerType layerType = MapLayerType.Gfx;
 
         private MapEditorTilesToolVM tilesTool;
 
@@ -24,8 +25,10 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Methods
 
-        public override void Render(MapLayerModel renderable)
+        public override void Render(MapLayoutModel renderable)
         {
+            var layerIndex = renderable.GetLayerIndex(layerType);
+
             RectangleF viewRect = Target.ClipBounds;
 
             //TODO: Get this from model
@@ -37,7 +40,7 @@ namespace OpenBreed.Editor.VM.Renderer
             {
                 for (int yIndex = yFrom; yIndex <= yTo; yIndex++)
                 {
-                    var tileId = renderable.GetValue(xIndex, yIndex);
+                    var tileId = renderable.GetCellValue(layerIndex, xIndex, yIndex);
                     var x = xIndex * tileSize;
                     var y = yIndex * tileSize;
 

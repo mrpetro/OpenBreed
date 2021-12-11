@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.VM.Renderer
         #region Private Fields
 
         private MapEditorVM _editor;
-        private Dictionary<MapLayerType, RendererBase<MapLayerModel>> _layerRenderers;
+        private Dictionary<MapLayerType, RendererBase<MapLayoutModel>> _layerRenderers;
 
         #endregion Private Fields
 
@@ -25,7 +25,7 @@ namespace OpenBreed.Editor.VM.Renderer
         {
             _editor = editor;
 
-            _layerRenderers = new Dictionary<MapLayerType, RendererBase<MapLayerModel>>();
+            _layerRenderers = new Dictionary<MapLayerType, RendererBase<MapLayoutModel>>();
             _layerRenderers.Add(MapLayerType.Gfx, new LayerGfxRenderer(_editor.TilesTool, target));
             _layerRenderers.Add(MapLayerType.Action, new LayerActionRenderer(_editor.ActionsTool, target));
         }
@@ -39,7 +39,7 @@ namespace OpenBreed.Editor.VM.Renderer
             var visibleLayers = renderable.Layers.Where(item => item.IsVisible);
 
             foreach (var layer in visibleLayers)
-                _layerRenderers[layer.LayerType].Render(layer);
+                _layerRenderers[layer.LayerType].Render(renderable);
         }
 
         #endregion Public Methods

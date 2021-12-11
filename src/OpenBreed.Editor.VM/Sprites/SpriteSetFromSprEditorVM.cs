@@ -6,6 +6,7 @@ using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Sprites;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -63,8 +64,13 @@ namespace OpenBreed.Editor.VM.Sprites
             switch (name)
             {
                 case nameof(Palette):
+
+                    Palette.SetColors(64, Palette.Data.Skip(16).Take(16).ToArray());
+
                     foreach (var item in Items)
                         BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
+
+
                     break;
 
                 default:

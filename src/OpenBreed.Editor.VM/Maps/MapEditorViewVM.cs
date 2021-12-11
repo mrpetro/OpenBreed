@@ -100,7 +100,10 @@ namespace OpenBreed.Editor.VM.Maps
 
             invMatrix.TransformPoints(clipPoints);
 
-            return clipPoints[0];
+            var x = clipPoints[0].X;
+            var y = clipPoints[0].Y;
+
+            return new Point(x, (int)y);
         }
 
         public PointF ToWorldCoords(PointF viewCoords)
@@ -112,7 +115,10 @@ namespace OpenBreed.Editor.VM.Maps
 
             invMatrix.TransformPoints(clipPoints);
 
-            return clipPoints[0];
+            var x = clipPoints[0].X; 
+            var y =- clipPoints[0].Y;
+
+            return new PointF(x, y);
         }
 
         public void Render(Graphics graphics)

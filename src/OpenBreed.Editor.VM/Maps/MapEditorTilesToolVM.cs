@@ -58,12 +58,12 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void SetValue(Point tileCoords, int value)
         {
-            var oldValue = Layer.GetValue(tileCoords.X, tileCoords.Y);
+            var oldValue = Layout.GetCellValue(LayerIndex, tileCoords.X, tileCoords.Y);
 
             if (oldValue == value)
                 return;
 
-            Layer.SetValue(tileCoords.X, tileCoords.Y, value);
+            Layout.SetCellValue(LayerIndex, tileCoords.X, tileCoords.Y, value);
 
             Parent.IsModified = true;
         }
@@ -73,7 +73,9 @@ namespace OpenBreed.Editor.VM.Maps
         #region Public Properties
 
         public InsertModeEnum Mode { get; private set; }
-        public MapLayerModel Layer { get; private set; }
+
+        public MapLayoutModel Layout { get; private set; }
+        public int LayerIndex { get; private set; }
 
         public MapEditorVM Parent { get; }
         public MapEditorTileSetSelectorVM TileSetSelector { get; }
@@ -200,10 +202,10 @@ namespace OpenBreed.Editor.VM.Maps
                 tileInsertIndexX -= selectionCenter.X;
                 tileInsertIndexY -= selectionCenter.Y;
 
-                if (tileInsertIndexX < 0 || tileInsertIndexX >= Layer.Width)
+                if (tileInsertIndexX < 0 || tileInsertIndexX >= Layout.Width)
                     continue;
 
-                if (tileInsertIndexY < 0 || tileInsertIndexY >= Layer.Height)
+                if (tileInsertIndexY < 0 || tileInsertIndexY >= Layout.Height)
                     continue;
 
                 TilesCursor.Add(new MapEditorTileInsertOperation(new Point(tileInsertIndexX, tileInsertIndexY), 0, tileId));
@@ -221,8 +223,10 @@ namespace OpenBreed.Editor.VM.Maps
         internal void UpdateVM()
         {   
             TileSetSelector.CurrentItem = TileSetSelector.TileSetNames.FirstOrDefault();
-            Layer = Parent.Layout.Layers.FirstOrDefault(item => item.LayerType == Model.Maps.MapLayerType.Gfx);
-            InsertBuffer = new MapEditorTileInsertOperation[Layer.Width, Layer.Height];
+
+            Layout = Parent.Layout;
+            LayerIndex = Layout.GetLayerIndex(MapLayerType.Gfx);
+            InsertBuffer = new MapEditorTileInsertOperation[Layout.Width, Layout.Height];
         }
 
         public void DrawBuffer(RenderTarget renderTarget, int tileSize)
@@ -255,16 +259,16 @@ namespace OpenBreed.Editor.VM.Maps
                 tileInsertIndexX -= selectionCenter.X;
                 tileInsertIndexY -= selectionCenter.Y;
 
-                if (tileInsertIndexX < 0 || tileInsertIndexX >= Layer.Width)
+                if (tileInsertIndexX < 0 || tileInsertIndexX >= Layout.Width)
                     continue;
 
-                if (tileInsertIndexY < 0 || tileInsertIndexY >= Layer.Height)
+                if (tileInsertIndexY < 0 || tileInsertIndexY >= Layout.Height)
                     continue;
 
                 var tileReplacement = InsertBuffer[tileInsertIndexX, tileInsertIndexY];
                 if (tileReplacement == null)
                 {
-                    int oldTileId = Layer.GetValue(tileInsertIndexX, tileInsertIndexY);
+                    int oldTileId = Layout.GetCellValue(LayerIndex, tileInsertIndexX, tileInsertIndexY);
 
                     if (oldTileId != tileId)
                         InsertBuffer[tileInsertIndexX, tileInsertIndexY] = new MapEditorTileInsertOperation(new Point(tileInsertIndexX, tileInsertIndexY), oldTileId, tileId);
