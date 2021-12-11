@@ -75,7 +75,7 @@
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
-      <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
+      <Project>{D80521CC-7E57-47A9-8D08-BDEC78DCD480}</Project>
       <Name>OpenBreed.Database.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Animation.Interface\OpenBreed.Animation.Interface.csproj">
