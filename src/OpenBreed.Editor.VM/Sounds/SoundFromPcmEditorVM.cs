@@ -58,11 +58,11 @@ namespace OpenBreed.Editor.VM.Sounds
 
         public void Play()
         {
-            var pcmPlayer = new PCMPlayer(Data,
-                                          SampleRate,
-                                          BitsPerSample,
-                                          Channels);
-            pcmPlayer.PlaySync();
+            //var pcmPlayer = new PCMPlayer(Data,
+            //                              SampleRate,
+            //                              BitsPerSample,
+            //                              Channels);
+            //pcmPlayer.PlaySync();
         }
 
         public void UpdateEntry(IDbSound entry)
