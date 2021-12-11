@@ -82,7 +82,7 @@
       <Name>OpenBreed.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Reader.Legacy\OpenBreed.Reader.Legacy.csproj">
-      <Project>{9A47D236-1810-413A-B609-A38FDE119D3F}</Project>
+      <Project>{99094BB5-EC75-4A06-AD60-5CA1E869040B}</Project>
       <Name>OpenBreed.Reader.Legacy</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Writer.Interface\OpenBreed.Writer.Interface.csproj">
