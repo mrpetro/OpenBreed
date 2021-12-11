@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj">
-      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
+      <Project>{2bdd055c-cc15-4bf2-9af2-4690a5c1c296}</Project>
       <Name>OpenBreed.Model</Name>
     </ProjectReference>
   </ItemGroup>
