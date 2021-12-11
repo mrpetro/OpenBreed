@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Formats;
-using OpenBreed.Database.Interface.Items.Scripts;
+﻿using OpenBreed.Database.Interface.Items.Scripts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

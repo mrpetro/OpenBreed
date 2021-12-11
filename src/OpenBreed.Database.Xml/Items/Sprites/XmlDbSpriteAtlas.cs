@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Database.Xml.Items.Assets;
-using OpenBreed.Common.Formats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
