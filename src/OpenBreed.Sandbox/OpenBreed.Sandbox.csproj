@@ -227,7 +227,7 @@
       <Name>OpenBreed.Database.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj">
-      <Project>{C4095745-E19C-4DE9-B2E4-37E55FA0D225}</Project>
+      <Project>{fcbe0182-eb0c-49d0-8ce4-438f9a47e3b6}</Project>
       <Name>OpenBreed.Database.Xml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj">
