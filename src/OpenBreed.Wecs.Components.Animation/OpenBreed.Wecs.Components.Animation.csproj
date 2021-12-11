@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
-      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Project>{4F85277E-6EB4-4B3C-87DB-2DF40BE46224}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj">
