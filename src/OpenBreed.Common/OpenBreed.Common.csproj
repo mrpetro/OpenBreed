@@ -157,7 +157,7 @@
       <Name>OpenBreed.Reader.Legacy</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj">
-      <Project>{0B8B1C59-2BEC-45C3-BD7A-AEB955337407}</Project>
+      <Project>{E984F650-F395-46F8-A1E7-B96A1917D236}</Project>
       <Name>OpenBreed.Writer.Legacy</Name>
     </ProjectReference>
   </ItemGroup>
