@@ -1,5 +1,21 @@
-MAP.NAME DEMO_1
-MAP.BODY 32 32
+NAME HUB
+SIZE 32 32
+A_CODE S 56
+A_CODE O 63
+A_CODE D 62
+
+
+A_CODE ^ 16
+
+G_CODE 9 63
+G_CODE 7 62
+G_CODE 5 26
+G_CODE 4 464
+G_CODE 3 83
+G_CODE 2 443
+G_CODE 1 82
+G_CODE \ 109
+BODY
 O7O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O9
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
@@ -25,23 +41,14 @@ O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5V1 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5V2 5 5 5 5 5 5 5 5O4
-O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5}1 5 5 5 5 5 5 5 5 5 5 5 5 5{1 5O4
+O4^\ 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
+O4^\^\ 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
+O4O4^\^\ 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
+O4O5O4^\^\ 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5V2 5 5 5 5 5 5 5 5O4
+O4O5O5O4^\^\ 5 5 5 5 5 5 5 5 5S5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
+O4O5O5O5O4^\^\ 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5{1 5O4
 O1O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O3
-MAP.EXITS 1
-1 HUB 1
-MAP.VIEWPORTS 2
-1 256 128 PlayerCamera
-2 64 256 HubCamera
-----------------------------------------------------------------
+Legend:
 O - Obstacle
-S - Spawn point
-D - Door (V - Vertical, H - Horizontal)
-> - Teleport Entrance (Number - Number teleport of pair)
-< - Teleport Exit (Number - Number of teleport pair)
-} - Gate Exit (Number - Number of gate pair)
-{ - Gate Entry (Number - Number of gate pair)
+D - Door
+S - Player Spawn

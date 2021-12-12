@@ -1,7 +1,15 @@
 NAME HUB
 SIZE 16 32
+A_CODE S 56
 A_CODE O 63
 A_CODE D 62
+G_CODE 9 63
+G_CODE 7 62
+G_CODE 5 26
+G_CODE 4 464
+G_CODE 3 83
+G_CODE 2 443
+G_CODE 1 82
 BODY
 O7O2O2O2O2O2O2O2O2O2O2O2O2O2O2O9
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
@@ -32,21 +40,10 @@ O4 5 5 5D5 5 5A5 5 5 5 5 5 5 5O4
 O4{1 5 5DV 5 5 5 5 5 5T5 5 5 5O4
 O1O2O2O2O9 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
- 0 0 0 0O4 5 5<1 5 5 5 5 5 5 5O4
- 0 0 0 0O4 5 5 5 5 5 5}1 5 5 5O4
+ 0 0 0 0O4 5 5<1 5 5 5S5 5 5 5O4
+ 0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O1O2O2O2O2O2O2O2O2O2O2O3
-EXITS 3
-1 DEMO_1 1
-2 DEMO_2 1
-3 DEMO_3 1
-MAP.VIEWPORTS 1
-1 64 64 PlayerCamera
-----------------------------------------------------------------
+Legend:
 O - Obstacle
-S - Spawn point
-D - Door (V - Vertical, H - Horizontal)
-> - Teleport Entrance (Number - Number teleport of pair)
-< - Teleport Exit (Number - Number of teleport pair)
-} - World Entry (Number - Number of gate pair)
-{ - World Exit (Number - Number of gate pair)
-T - Turret
+D - Door
+S - Player Spawn

@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Components.Physics
         #region Private Fields
 
         private float speedPercent = 1.0f;
-        private float MAX_ACCELERATION = 1024.0f;
+        private float MAX_SPEED = 120.0f;
 
         #endregion Private Fields
 
@@ -38,7 +38,7 @@ namespace OpenBreed.Wecs.Components.Physics
             }
         }
 
-        public float Acceleration { get { return speedPercent * MAX_ACCELERATION; } }
+        public float Acceleration { get { return speedPercent * MAX_SPEED; } }
 
         #endregion Public Properties
     }

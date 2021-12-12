@@ -7,7 +7,10 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class DirectionSystem : SystemBase, IUpdatableSystem
+    /// <summary>
+    /// System which tries to replicate ABTA actor direction behavior
+    /// </summary>
+    public class DirectionSystemVanilla : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 
@@ -18,7 +21,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal DirectionSystem(IEntityMan entityMan)
+        internal DirectionSystemVanilla(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
 
@@ -45,7 +48,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             var angularPos = entity.Get<AngularPositionComponent>();
             var angularVel = entity.Get<AngularVelocityComponent>();
-            var angularThrust = entity.Get<AngularThrustComponent>();
 
             //Velocity equation
             //var newVel = angularVel.Value + angularThrust.Value * dt;
@@ -53,8 +55,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             var aPos = angularPos.Value;
             var dPos = angularVel.Value;
 
-            var newPos = aPos.RotateTowards(dPos, (float)Math.PI * 0.125f, 1.0f);
-            //newPos = MovementTools.SnapToCompass8Way(newPos);
+            var newPos = aPos.RotateTowards(dPos, (float)Math.PI * 0.25f, 1.0f);
 
             if (newPos == aPos)
                 return;

@@ -125,7 +125,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             var v = entityA.TryGet<VelocityComponent>();
             var body = entityA.TryGet<BodyComponent>();
 
-            p.Value += projection;
+            //p.Value += projection;
 
             var normal = projection.Normalized();
 
@@ -140,10 +140,9 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
 
                 var cor = DynamicResolver.GENERIC_COR * body.CorFactor;
 
-                var vn = Vector2.Multiply(normal, dp) + pushUp * 0.1f;
-                var vt = v.Value - vn;
+                var vn = v.Value - pushUp;
 
-                v.Value = vt - cor * vn - cor * pushUp;
+                v.Value = vn;
             }
         }
 

@@ -38,7 +38,8 @@ namespace OpenBreed.Sandbox.Loaders
         public int Height { get; private set; }
         private char[] gfxLayout;
         private char[] actionLayout;
-        private Dictionary<char, int> codes = new Dictionary<char, int>();
+        private Dictionary<char, int> actionCodes = new Dictionary<char, int>();
+        private Dictionary<char, int> gfxCodes = new Dictionary<char, int>();
 
         public void SetAction(int x, int y, char value)
         {
@@ -80,19 +81,27 @@ namespace OpenBreed.Sandbox.Loaders
                     var actionValue = GetAction(i, j);
                     var gfxValue = GetGfx(i, j);
 
-                    actionLayerBuilder.SetValue(i, j, GetCode(actionValue));
-                    gfxLayerBuilder.SetValue(i, j, gfxValue);
+                    actionLayerBuilder.SetValue(i, j, GetActionCode(actionValue));
+                    gfxLayerBuilder.SetValue(i, j, GetGfxCode(gfxValue));
                 }
             }
 
-            actionLayerBuilder.SetValue(4, 4, 56);
+            //actionLayerBuilder.SetValue(4, 4, 56);
 
             return mapBuilder.Build();
         }
 
-        public int GetCode(char ch)
+        public int GetActionCode(char ch)
         {
-            if (codes.TryGetValue(ch, out int code))
+            if (actionCodes.TryGetValue(ch, out int code))
+                return code;
+            else
+                return 0;
+        }
+
+        public int GetGfxCode(char ch)
+        {
+            if (gfxCodes.TryGetValue(ch, out int code))
                 return code;
             else
                 return 0;
@@ -136,7 +145,10 @@ namespace OpenBreed.Sandbox.Loaders
                         ReadBody(txtMap, lines, ref i);
                         break;
                     case "A_CODE":
-                        SetCode(txtMap, args);
+                        SetActionCode(txtMap, args);
+                        break;
+                    case "G_CODE":
+                        SetGfxCode(txtMap, args);
                         break;
                     default:
                         break;
@@ -147,10 +159,16 @@ namespace OpenBreed.Sandbox.Loaders
             return txtMap;
         }
 
-        public static void SetCode(TxtMap txtMap, string[] args)
+        public static void SetActionCode(TxtMap txtMap, string[] args)
         {
             var code = int.Parse(args[1]);
-            txtMap.codes.Add(args[0][0], code);
+            txtMap.actionCodes.Add(args[0][0], code);
+        }
+
+        public static void SetGfxCode(TxtMap txtMap, string[] args)
+        {
+            var code = int.Parse(args[1]);
+            txtMap.gfxCodes.Add(args[0][0], code);
         }
 
         public static void ReadBody(TxtMap txtMap, string[] lines, ref int lineNo)

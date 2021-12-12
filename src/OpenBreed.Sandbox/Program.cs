@@ -452,10 +452,10 @@ namespace OpenBreed.Sandbox
 
             var entityMan = GetManager<IEntityMan>();
 
-            var gameWorld = mapTxtLoader.Load(@"Content\Maps\hub.txt");
+            //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            //var gameWorld = mapWorldLoader.Load("Vanilla/1");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapWorldLoader.Load("Vanilla/7");
             //L3

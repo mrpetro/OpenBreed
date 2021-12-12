@@ -223,8 +223,8 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<AttackControllerSystem>());
 
             //Action
-            builder.AddSystem(systemFactory.Create<MovementSystem>());
-            builder.AddSystem(systemFactory.Create<DirectionSystem>());
+            builder.AddSystem(systemFactory.Create<MovementSystemVanilla>());
+            builder.AddSystem(systemFactory.Create<DirectionSystemVanilla>());
 
             //builder.AddSystem(new FollowerSystem(core));
             builder.AddSystem(systemFactory.Create<DynamicBodiesAabbUpdaterSystem>());
