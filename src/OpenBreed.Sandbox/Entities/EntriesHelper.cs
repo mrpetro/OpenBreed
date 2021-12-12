@@ -207,7 +207,7 @@ namespace OpenBreed.Sandbox.Entities
 
             if (world == null)
             {
-                var mapWorldDataLoader = dataLoaderFactory.GetLoader<MapWorldDataLoader>();
+                var mapWorldDataLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
                 mapWorldDataLoader.Load(worldName);
             }
         }

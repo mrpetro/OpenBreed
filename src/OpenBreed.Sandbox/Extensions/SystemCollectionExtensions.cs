@@ -92,14 +92,87 @@ namespace OpenBreed.Sandbox.Extensions
             manCollection.AddSingleton<ItemsMan>(() => new ItemsMan(manCollection.GetManager<ILogger>()));
         }
 
-        public static void SetupMapWorldDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
+
+        public static void RegisterEntityLoaders(this IMapDataLoader mapLegacyDataLoader, IManagerCollection managerCollection)
+        {
+            mapLegacyDataLoader.Register("Unknown", new UnknownCellEntityLoader(managerCollection.GetManager<GenericCellHelper>()));
+
+            var levelExitCellLoader = new LevelExitCellLoader(managerCollection.GetManager<ActorHelper>(),
+                                                                managerCollection.GetManager<EntriesHelper>());
+
+            mapLegacyDataLoader.Register("MapExit1", levelExitCellLoader);
+            mapLegacyDataLoader.Register("MapExit2", levelExitCellLoader);
+            mapLegacyDataLoader.Register("MapExit3", levelExitCellLoader);
+
+            var levelEntryCellLoader = new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
+                                                                     managerCollection.GetManager<EntriesHelper>());
+
+
+            mapLegacyDataLoader.Register("MapEntry1", levelEntryCellLoader);
+            mapLegacyDataLoader.Register("MapEntry2", levelEntryCellLoader);
+            mapLegacyDataLoader.Register("MapEntry3", levelEntryCellLoader);
+
+            //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_3, levelEntryCellLoader);
+            //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_1, levelEntryCellLoader);
+            //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_2, levelEntryCellLoader);
+
+            var genericCellEntityLoader = new GenericCellEntityLoader(managerCollection.GetManager<GenericCellHelper>());
+
+            mapLegacyDataLoader.Register("Void", genericCellEntityLoader);
+            mapLegacyDataLoader.Register("FullObstacle", genericCellEntityLoader);
+            mapLegacyDataLoader.Register("ActorOnlyObstacle", genericCellEntityLoader);
+            mapLegacyDataLoader.Register("ObstacleDownLeft", genericCellEntityLoader);
+            mapLegacyDataLoader.Register("ObstacleUpLeft", genericCellEntityLoader);
+            mapLegacyDataLoader.Register("ObstacleUpRight", genericCellEntityLoader);
+            mapLegacyDataLoader.Register("ObstacleDownRight", genericCellEntityLoader);
+
+            var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetManager<EnvironmentHelper>());
+            mapLegacyDataLoader.Register("TVFlickering", environmentCellLoader);
+            mapLegacyDataLoader.Register("MonsterEating", environmentCellLoader);
+
+            var doorCellEntityLoader = new DoorEntityLoader(managerCollection.GetManager<DoorHelper>());
+            mapLegacyDataLoader.Register("DoorStandard", doorCellEntityLoader);
+            mapLegacyDataLoader.Register("DoorRed", doorCellEntityLoader);
+            mapLegacyDataLoader.Register("DoorGreen", doorCellEntityLoader);
+            mapLegacyDataLoader.Register("DoorBlue", doorCellEntityLoader);
+
+            var electricGateEntityLoader = new ElectricGateEntityLoader(managerCollection.GetManager<ElectricGateHelper>());
+            mapLegacyDataLoader.Register("ElectricGateUp", electricGateEntityLoader);
+            mapLegacyDataLoader.Register("ElectricGateDown", electricGateEntityLoader);
+            mapLegacyDataLoader.Register("ElectricGateRight", electricGateEntityLoader);
+            mapLegacyDataLoader.Register("ElectricGateLeft", electricGateEntityLoader);
+
+            var genericItemEntityLoader = new GenericItemEntityLoader(managerCollection.GetManager<PickableHelper>());
+
+            mapLegacyDataLoader.Register("GenericItem", genericItemEntityLoader);
+
+            var keycardCellEntityLoader = new KeycardEntityLoader(managerCollection.GetManager<PickableHelper>());
+            mapLegacyDataLoader.Register("KeycardRed", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("KeycardGreen", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("KeycardBlue", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("KeycardSpecial", keycardCellEntityLoader);
+
+            var smartCardCellEntityLoader = new SmartCardEntityLoader(managerCollection.GetManager<PickableHelper>());
+            mapLegacyDataLoader.Register("SmartCard1", smartCardCellEntityLoader);
+            mapLegacyDataLoader.Register("SmartCard2", smartCardCellEntityLoader);
+            mapLegacyDataLoader.Register("SmartCard3", smartCardCellEntityLoader);
+
+
+            var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetManager<TeleportHelper>(),
+                                                    managerCollection.GetManager<ILogger>());
+
+            mapLegacyDataLoader.Register("TeleportEntry", teleportLoader);
+            mapLegacyDataLoader.Register("TeleportExit", teleportLoader);
+        }
+
+        public static void SetupMapLegacyDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
             //NOTE: Needed for correct display of map in this coordinate system
             MapLayoutModel.FlippedY = true;
 
-            dataLoaderFactory.Register<MapWorldDataLoader>(() =>
+            dataLoaderFactory.Register<MapLegacyDataLoader>(() =>
             {
-                var mapWorldDataLoader = new MapWorldDataLoader(dataLoaderFactory,
+                var mapLegacyDataLoader = new MapLegacyDataLoader(dataLoaderFactory,
                                                               managerCollection.GetManager<IRepositoryProvider>(),
                                                               managerCollection.GetManager<MapsDataProvider>(),
                                                               managerCollection.GetManager<ISystemFactory>(),
@@ -111,81 +184,27 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<ITileMan>(),
                                                               managerCollection.GetManager<ILogger>());
 
-  
-                mapWorldDataLoader.Register("Unknown", new UnknownCellEntityLoader(managerCollection.GetManager<GenericCellHelper>()));
-
-                var levelExitCellLoader = new LevelExitCellLoader(managerCollection.GetManager<ActorHelper>(),
-                                                                    managerCollection.GetManager<EntriesHelper>());
-
-                mapWorldDataLoader.Register("MapExit1", levelExitCellLoader);
-                mapWorldDataLoader.Register("MapExit2", levelExitCellLoader);
-                mapWorldDataLoader.Register("MapExit3", levelExitCellLoader);
-
-                var levelEntryCellLoader = new LevelEntryCellLoader(managerCollection.GetManager<ActorHelper>(),
-                                                                         managerCollection.GetManager<EntriesHelper>());
-
-
-                mapWorldDataLoader.Register("MapEntry1", levelEntryCellLoader);
-                mapWorldDataLoader.Register("MapEntry2", levelEntryCellLoader);
-                mapWorldDataLoader.Register("MapEntry3", levelEntryCellLoader);
-
-                //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_3, levelEntryCellLoader);
-                //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_1, levelEntryCellLoader);
-                //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_2, levelEntryCellLoader);
-
-                var genericCellEntityLoader = new GenericCellEntityLoader(managerCollection.GetManager<GenericCellHelper>());
-
-                mapWorldDataLoader.Register("Void", genericCellEntityLoader);
-                mapWorldDataLoader.Register("FullObstacle", genericCellEntityLoader);
-                mapWorldDataLoader.Register("ActorOnlyObstacle", genericCellEntityLoader);
-                mapWorldDataLoader.Register("ObstacleDownLeft", genericCellEntityLoader);
-                mapWorldDataLoader.Register("ObstacleUpLeft", genericCellEntityLoader);
-                mapWorldDataLoader.Register("ObstacleUpRight", genericCellEntityLoader);
-                mapWorldDataLoader.Register("ObstacleDownRight", genericCellEntityLoader);
-
-                var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetManager<EnvironmentHelper>());
-                mapWorldDataLoader.Register("TVFlickering", environmentCellLoader);
-                mapWorldDataLoader.Register("MonsterEating", environmentCellLoader);
-
-                var doorCellEntityLoader = new DoorEntityLoader(managerCollection.GetManager<DoorHelper>());
-                mapWorldDataLoader.Register("DoorStandard", doorCellEntityLoader);
-                mapWorldDataLoader.Register("DoorRed", doorCellEntityLoader);
-                mapWorldDataLoader.Register("DoorGreen", doorCellEntityLoader);
-                mapWorldDataLoader.Register("DoorBlue", doorCellEntityLoader);
-
-                var electricGateEntityLoader = new ElectricGateEntityLoader(managerCollection.GetManager<ElectricGateHelper>());
-                mapWorldDataLoader.Register("ElectricGateUp", electricGateEntityLoader);
-                mapWorldDataLoader.Register("ElectricGateDown", electricGateEntityLoader);
-                mapWorldDataLoader.Register("ElectricGateRight", electricGateEntityLoader);
-                mapWorldDataLoader.Register("ElectricGateLeft", electricGateEntityLoader);
-
-                var genericItemEntityLoader = new GenericItemEntityLoader(managerCollection.GetManager<PickableHelper>());
-
-                mapWorldDataLoader.Register("GenericItem", genericItemEntityLoader);
-
-                var keycardCellEntityLoader = new KeycardEntityLoader(managerCollection.GetManager<PickableHelper>());
-                mapWorldDataLoader.Register("KeycardRed", keycardCellEntityLoader);
-                mapWorldDataLoader.Register("KeycardGreen", keycardCellEntityLoader);
-                mapWorldDataLoader.Register("KeycardBlue", keycardCellEntityLoader);
-                mapWorldDataLoader.Register("KeycardSpecial", keycardCellEntityLoader);
-
-                var smartCardCellEntityLoader = new SmartCardEntityLoader(managerCollection.GetManager<PickableHelper>());
-                mapWorldDataLoader.Register("SmartCard1", smartCardCellEntityLoader);
-                mapWorldDataLoader.Register("SmartCard2", smartCardCellEntityLoader);
-                mapWorldDataLoader.Register("SmartCard3", smartCardCellEntityLoader);
-
-
-                var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetManager<TeleportHelper>(),
-                                                        managerCollection.GetManager<ILogger>());
-
-                mapWorldDataLoader.Register("TeleportEntry", teleportLoader);
-                mapWorldDataLoader.Register("TeleportExit", teleportLoader);
-
-                return mapWorldDataLoader;
-
+                mapLegacyDataLoader.RegisterEntityLoaders(managerCollection);
+                return mapLegacyDataLoader;
             });
 
+            dataLoaderFactory.Register<MapTxtDataLoader>(() =>
+            {
+                var mapTxtDataLoader = new MapTxtDataLoader(dataLoaderFactory,
+                                                              managerCollection.GetManager<IRepositoryProvider>(),
+                                                              managerCollection.GetManager<ISystemFactory>(),
+                                                              managerCollection.GetManager<IWorldMan>(),
+                                                              managerCollection.GetManager<PalettesDataProvider>(),
+                                                              managerCollection.GetManager<ActionSetsDataProvider>(),
+                                                              managerCollection.GetManager<IEntityFactoryProvider>(),
+                                                              managerCollection.GetManager<IBroadphaseFactory>(),
+                                                              managerCollection.GetManager<ITileGridFactory>(),
+                                                              managerCollection.GetManager<ITileMan>(),
+                                                              managerCollection.GetManager<ILogger>());
 
+                mapTxtDataLoader.RegisterEntityLoaders(managerCollection);
+                return mapTxtDataLoader;
+            });
         }
 
         //public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
@@ -255,7 +274,7 @@ namespace OpenBreed.Sandbox.Extensions
                 var dataLoaderFactory = new DataLoaderFactory();
 
                 dataLoaderFactory.SetupAnimationDataLoader(managerCollection);
-                dataLoaderFactory.SetupMapWorldDataLoader(managerCollection);
+                dataLoaderFactory.SetupMapLegacyDataLoader(managerCollection);
                 dataLoaderFactory.SetupTileSetDataLoader(managerCollection);
                 dataLoaderFactory.SetupTileStampDataLoader(managerCollection);
                 dataLoaderFactory.SetupSpriteSetDataLoader(managerCollection);

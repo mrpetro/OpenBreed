@@ -58,7 +58,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void PutPassUpDown(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
         {
-            var rightValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
+            var rightValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
             var rightAction = map.GetAction(rightValue);
 
             if (rightAction?.Name == templateName)
@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void PutPassRightLeft(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
         {
-            var downValue = MapWorldDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
+            var downValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
             var downAction = map.GetAction(downValue);
 
             if (downAction?.Name == templateName)

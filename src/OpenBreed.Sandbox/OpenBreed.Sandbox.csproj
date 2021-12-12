@@ -101,6 +101,7 @@
     <Compile Include="Loaders\AnimatedCellLoader.cs" />
     <Compile Include="Loaders\ElectricGateEntityLoader.cs" />
     <Compile Include="Loaders\KeycardEntityLoader.cs" />
+    <Compile Include="Loaders\MapTxtDataLoader.cs" />
     <Compile Include="Loaders\SmartCardEntityLoader.cs" />
     <Compile Include="Loaders\LevelExitCellLoader.cs" />
     <Compile Include="Loaders\UnknownCellEntityLoader.cs" />
@@ -177,7 +178,7 @@
     <Compile Include="Worlds\GameWorldHelper.cs" />
     <Compile Include="Worlds\HudWorldHelper.cs" />
     <Compile Include="Worlds\IEntityFactoryProvider.cs" />
-    <Compile Include="Loaders\MapWorldDataLoader.cs" />
+    <Compile Include="Loaders\MapLegacyDataLoader.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
     <Content Include="RunABTA.bat">

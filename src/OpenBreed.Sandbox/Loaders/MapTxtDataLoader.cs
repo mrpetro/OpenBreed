@@ -1,54 +1,193 @@
 ﻿using OpenBreed.Animation.Interface.Data;
-using OpenBreed.Audio.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
-using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.Maps;
-using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Model.Actions;
 using OpenBreed.Model.Maps;
-using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
-using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    public interface IMapWorldEntityLoader
+    internal class TxtMap
     {
-        #region Public Methods
+        public string[] PaletteRefs { get; internal set; }
+        public string TileSetRef { get; internal set; }
+        public string DataRef { get; internal set; }
+        public string[] SpriteSetRefs { get; internal set; }
+        public string ActionSetRef { get; internal set; }
+        public string Name { get; private set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+        private char[] gfxLayout;
+        private char[] actionLayout;
+        private Dictionary<char, int> codes = new Dictionary<char, int>();
 
-        void Load(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world);
+        public void SetAction(int x, int y, char value)
+        {
+            actionLayout[x + y * Width] = value;
+        }
 
-        #endregion Public Methods
+        public char GetAction(int x, int y)
+        {
+            return actionLayout[x + y * Width];
+        }
+
+        public char GetGfx(int x, int y)
+        {
+            return gfxLayout[x + y * Width];
+        }
+
+        public void SetGfx(int x, int y, char value)
+        {
+            gfxLayout[x + y * Width] = value;
+        }
+
+        internal MapModel GetModel()
+        {
+            var mapBuilder = MapBuilder.NewMapModel();
+            var layoutBuilder = mapBuilder.CreateLayout();
+            layoutBuilder.SetCellSize(16);
+            layoutBuilder.SetSize(Width, Height);
+
+            var gfxLayerBuilder = layoutBuilder.AddLayer(MapLayerType.Gfx);
+            gfxLayerBuilder.SetAllValues(2);
+
+            var actionLayerBuilder = layoutBuilder.AddLayer(MapLayerType.Action);
+            actionLayerBuilder.SetAllValues(0);
+
+            for (int j = 0; j < Height; j++)
+            {
+                for (int i = 0; i < Width; i++)
+                {
+                    var actionValue = GetAction(i, j);
+                    var gfxValue = GetGfx(i, j);
+
+                    actionLayerBuilder.SetValue(i, j, GetCode(actionValue));
+                    gfxLayerBuilder.SetValue(i, j, gfxValue);
+                }
+            }
+
+            actionLayerBuilder.SetValue(4, 4, 56);
+
+            return mapBuilder.Build();
+        }
+
+        public int GetCode(char ch)
+        {
+            if (codes.TryGetValue(ch, out int code))
+                return code;
+            else
+                return 0;
+        }
+
+        internal static TxtMap Read(string entryId)
+        {
+            var lines = File.ReadAllLines(entryId);
+
+            var txtMap = new TxtMap();
+            txtMap.PaletteRefs = new string[] { "Palettes.MAP.02.CMAP", "Palettes.MAP.02.ALCM" };
+            txtMap.TileSetRef = "Vanilla/L4";
+            txtMap.ActionSetRef = "Vanilla/L4";
+            txtMap.SpriteSetRefs = new string[] { "Vanilla/L4/A", "Vanilla/L4/B", "Vanilla/Common/Hero/1", "Vanilla/Common/Hero/2" };
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var line = lines[i];
+
+                if (string.IsNullOrEmpty(line))
+                    continue;
+
+                var split = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (split.Length == 0)
+                    continue;
+
+                var cmd = split[0];
+                var args = split.Skip(1).ToArray();
+
+                switch (cmd)
+                {
+                    case "NAME":
+                        txtMap.Name = args[0];
+                        break;
+                    case "SIZE":
+                        txtMap.Width = int.Parse(args[0]);
+                        txtMap.Height = int.Parse(args[1]);
+                        break;
+                    case "BODY":
+                        ReadBody(txtMap, lines, ref i);
+                        break;
+                    case "A_CODE":
+                        SetCode(txtMap, args);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            return txtMap;
+        }
+
+        public static void SetCode(TxtMap txtMap, string[] args)
+        {
+            var code = int.Parse(args[1]);
+            txtMap.codes.Add(args[0][0], code);
+        }
+
+        public static void ReadBody(TxtMap txtMap, string[] lines, ref int lineNo)
+        {
+            txtMap.gfxLayout = new char[txtMap.Width * txtMap.Height];
+            txtMap.actionLayout = new char[txtMap.Width * txtMap.Height];
+
+            lineNo++;
+
+            for (int j = 0; j < txtMap.Height; j++)
+            {
+                var row = lines[lineNo + j];
+
+                for (int i = 0; i < txtMap.Width; i++)
+                {
+                    var actionChar = row[i * 2];
+                    var gfxChar = row[i * 2 + 1];
+
+                    txtMap.SetAction(i,j, actionChar);
+                    txtMap.SetGfx(i, j, gfxChar);
+                }
+            }
+        }
     }
 
-    internal class MapWorldDataLoader : IDataLoader<World>
+
+    public class MapTxtDataLoader : IMapDataLoader
     {
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
-        private readonly MapsDataProvider mapsDataProvider;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         //private readonly WorldBlockBuilder worldBlockBuilder;
         private readonly PalettesDataProvider palettesDataProvider;
+        private readonly ActionSetsDataProvider actionSetsDataProvider;
         private readonly IEntityFactoryProvider mapEntityFactory;
         private readonly IBroadphaseFactory broadphaseGridFactory;
         private readonly ITileGridFactory tileGridFactory;
@@ -60,12 +199,12 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Constructors
 
-        public MapWorldDataLoader(IDataLoaderFactory dataLoaderFactory,
+        public MapTxtDataLoader(IDataLoaderFactory dataLoaderFactory,
                                   IRepositoryProvider repositoryProvider,
-                                  MapsDataProvider mapsDataProvider,
                                   ISystemFactory systemFactory,
                                   IWorldMan worldMan,
                                   PalettesDataProvider palettesDataProvider,
+                                  ActionSetsDataProvider actionSetsDataProvider,
                                   IEntityFactoryProvider mapEntityFactory,
                                   IBroadphaseFactory broadphaseGridFactory,
                                   ITileGridFactory tileGridFactory,
@@ -74,11 +213,11 @@ namespace OpenBreed.Sandbox.Loaders
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
-            this.mapsDataProvider = mapsDataProvider;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             //this.worldBlockBuilder = worldBlockBuilder;
             this.palettesDataProvider = palettesDataProvider;
+            this.actionSetsDataProvider = actionSetsDataProvider;
             this.mapEntityFactory = mapEntityFactory;
             this.broadphaseGridFactory = broadphaseGridFactory;
             this.tileGridFactory = tileGridFactory;
@@ -113,20 +252,19 @@ namespace OpenBreed.Sandbox.Loaders
             if (world != null)
                 return world;
 
-            var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
-            if (dbMap == null)
-                throw new Exception($"Missing Map: {entryId}");
+            var txtMap = TxtMap.Read(entryId);
 
-            LoadReferencedTileSet(dbMap);
-            LoadReferencedSpriteSets(dbMap);
-            LoadReferencedAnimations(dbMap);
-            LoadReferencedTileStamps(dbMap);
-            LoadReferencedSounds(dbMap);
+            LoadReferencedTileSet(txtMap);
+            LoadReferencedSpriteSets(txtMap);
+            LoadReferencedAnimations(txtMap);
+            LoadReferencedTileStamps(txtMap);
 
-            var map = mapsDataProvider.GetMap(dbMap.Id);
+            var map = txtMap.GetModel();
 
             if (map is null)
-                throw new Exception($"Map model  asset '{dbMap.DataRef}' could not be loaded.");
+                throw new Exception($"Map model  asset '{txtMap.DataRef}' could not be loaded.");
+
+            map.ActionSet = actionSetsDataProvider.GetActionSet(txtMap.ActionSetRef);
 
             var layout = map.Layout;
             var visited = new bool[layout.Width, layout.Height];
@@ -144,7 +282,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.SetupGameWorldSystems(systemFactory);
             world = worldBuilder.Build();
 
-            var mapper = new MapMapper(dbMap.TileSetRef);
+            var mapper = new MapMapper(txtMap.TileSetRef);
 
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
@@ -159,11 +297,8 @@ namespace OpenBreed.Sandbox.Loaders
 
                     var action = map.GetAction(actionValue);
 
-                    if(action != null)
+                    if (action != null)
                         LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
-
-                    //if (mapper.Map(actionValue, gfxValue, out string templaneName, out string flavor))
-                    //    LoadCellEntity(mapper, map, visited, ix, iy, world, templaneName, flavor, gfxValue);
                 }
             }
 
@@ -217,7 +352,7 @@ namespace OpenBreed.Sandbox.Loaders
                 entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, "Unknown", actionValue.ToString(), gfxValue, world);
         }
 
-        private void LoadReferencedTileSet(IDbMap dbMap)
+        private void LoadReferencedTileSet(TxtMap dbMap)
         {
             var tileAtlasLoader = dataLoaderFactory.GetLoader<ITileAtlasDataLoader>();
 
@@ -226,7 +361,7 @@ namespace OpenBreed.Sandbox.Loaders
             tileAtlasLoader.Load(dbMap.TileSetRef, palette);
         }
 
-        private void LoadReferencedSpriteSets(IDbMap dbMap)
+        private void LoadReferencedSpriteSets(TxtMap dbMap)
         {
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
@@ -242,14 +377,11 @@ namespace OpenBreed.Sandbox.Loaders
             foreach (var dbAnim in dbSpriteAtlas)
                 loader.Load(dbAnim.Id, palette);
 
-
-            //var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
-
-            //foreach (var spriteSetRef in dbMap.SpriteSetRefs)
-            //    loader.Load(spriteSetRef, palette);
+            foreach (var spriteSetRef in dbMap.SpriteSetRefs)
+                loader.Load(spriteSetRef, palette);
         }
 
-        private void LoadReferencedAnimations(IDbMap dbMap)
+        private void LoadReferencedAnimations(TxtMap dbMap)
         {
             var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
 
@@ -264,7 +396,7 @@ namespace OpenBreed.Sandbox.Loaders
                 loader.Load(dbAnim.Id);
         }
 
-        private void LoadReferencedTileStamps(IDbMap dbMap)
+        private void LoadReferencedTileStamps(TxtMap dbMap)
         {
             var loader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
 
@@ -274,20 +406,6 @@ namespace OpenBreed.Sandbox.Loaders
                 loader.Load(dbTileStamp.Id);
         }
 
-        private void LoadReferencedSounds(IDbMap dbMap)
-        {
-            var loader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
-
-            //Load common sounds
-            var dbSounds = repositoryProvider.GetRepository<IDbSound>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
-            foreach (var dbSound in dbSounds)
-                loader.Load(dbSound.Id);
-
-            //Load level specific sounds
-            dbSounds = repositoryProvider.GetRepository<IDbSound>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
-            foreach (var dbSound in dbSounds)
-                loader.Load(dbSound.Id);
-        }
 
         #endregion Private Methods
     }

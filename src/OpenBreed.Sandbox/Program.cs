@@ -447,9 +447,12 @@ namespace OpenBreed.Sandbox
             hudWorldHelper.Create();
 
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
-            var mapWorldLoader = dataLoaderFactory.GetLoader<MapWorldDataLoader>();
+            var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
+            var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
 
             var entityMan = GetManager<IEntityMan>();
+
+            var gameWorld = mapTxtLoader.Load(@"Content\Maps\hub.txt");
 
             //L1
             //var gameWorld = mapWorldLoader.Load("Vanilla/1");
@@ -458,7 +461,7 @@ namespace OpenBreed.Sandbox
             //L3
             //var gameWorld = mapWorldLoader.Load("Vanilla/28");
             //L4
-            var gameWorld = mapWorldLoader.Load("Vanilla/2");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapWorldLoader.Load("Vanilla/16");
             //L6
