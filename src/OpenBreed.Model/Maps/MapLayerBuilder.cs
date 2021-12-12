@@ -39,6 +39,12 @@ namespace OpenBreed.Model.Maps
             IsVisible = value;
         }
 
+        public void SetAllValues(int value)
+        {
+            for (int i = 0; i < CellValues.Length; i++)
+                CellValues[i] = value;
+        }
+
         public void SetValue(int x, int y, int value)
         {
             if (x < 0 || x >= Width)
