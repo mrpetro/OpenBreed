@@ -34,6 +34,9 @@ namespace OpenBreed.Sandbox.Entities.Builders
                 case "Vanilla/L1":
                     this.SetupL1();
                     break;
+                case "Vanilla/LD":
+                    this.SetupLD();
+                    break;
                 case "Vanilla/L3":
                     this.SetupL3();
                     break;

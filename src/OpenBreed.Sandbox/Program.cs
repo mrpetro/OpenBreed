@@ -457,7 +457,7 @@ namespace OpenBreed.Sandbox
             //L1
             //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
@@ -469,7 +469,7 @@ namespace OpenBreed.Sandbox
             //L7
             //var gameWorld = mapLegacyLoader.Load("Vanilla/12");
             //L8
-            var gameWorld = mapLegacyLoader.Load("Vanilla/47");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/47");
 
             //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
             var playerCamera = cameraHelper.CreateCamera(0, 0, 320, 240);
