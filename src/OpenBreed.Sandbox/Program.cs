@@ -463,9 +463,9 @@ namespace OpenBreed.Sandbox
             //L4
             //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
-            var gameWorld = mapLegacyLoader.Load("Vanilla/16");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/21");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/21");
             //L7
             //var gameWorld = mapLegacyLoader.Load("Vanilla/12");
             //L8
