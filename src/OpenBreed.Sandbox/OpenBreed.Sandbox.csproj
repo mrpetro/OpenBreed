@@ -90,6 +90,7 @@
     <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Entities\Builders\MapCodesL1.cs" />
     <Compile Include="Entities\Builders\MapCodesL3.cs" />
+    <Compile Include="Entities\Builders\MapCodesL7.cs" />
     <Compile Include="Entities\Builders\MapCodesL6.cs" />
     <Compile Include="Entities\Builders\MapCodesL5.cs" />
     <Compile Include="Entities\Builders\MapCodesL4.cs" />

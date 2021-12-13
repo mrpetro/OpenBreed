@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Builders
 {
-    public static class MapCodesL6
+    public static class MapCodesL7
     {
         //GFX codes
-        public const int GFX_MEDKIT_SMALL_F1 = 653;
-        public const int GFX_MEDKIT_SMALL_F2 = 655;
+        public const int GFX_MEDKIT_SMALL_F1 = 560;
+        public const int GFX_MEDKIT_SMALL_F2 = 450;
+        public const int GFX_MEDKIT_SMALL_F3 = 438;
         public const int GFX_CREDITS_SMALL_F1 = 600;
         public const int GFX_KEY_CARD_STANDARD_F1 = 602;
         public const int GFX_POWERUP_S_F1 = 603;
@@ -44,15 +45,16 @@ namespace OpenBreed.Sandbox.Entities.Builders
         public const int GFX_POWERUP_A_F3 = 635;
         public const int GFX_AMMO_F3 = 636;
         public const int GFX_AREA_SCANNER_F3 = 637;
-        public const int GFX_KEYCARD_BLUE_F2 = 649;
-        public const int GFX_KEYCARD_RED_F2 = 651;
-        public const int GFX_KEYCARD_GREEN_F2 = 647;
+        public const int GFX_KEYCARD_BLUE_F1 = 575;
+        public const int GFX_KEYCARD_RED_F1 = 638;
+        public const int GFX_KEYCARD_GREEN_F1 = 568;
 
 
-        public static void SetupL6(this MapMapper mapper)
+        public static void SetupL7(this MapMapper mapper)
         {
             mapper.Register("GenericItem", GFX_MEDKIT_SMALL_F1, "MedkitSmall/F1");
             mapper.Register("GenericItem", GFX_MEDKIT_SMALL_F2, "MedkitSmall/F2");
+            mapper.Register("GenericItem", GFX_MEDKIT_SMALL_F3, "MedkitSmall/F3");
             mapper.Register("GenericItem", GFX_CREDITS_SMALL_F1, "CreditsSmall/F1");
             mapper.Register("GenericItem", GFX_CREDITS_SMALL_F2, "CreditsSmall/F2");
             mapper.Register("GenericItem", GFX_CREDITS_SMALL_F3, "CreditsSmall/F3");
@@ -84,9 +86,9 @@ namespace OpenBreed.Sandbox.Entities.Builders
             mapper.Register("GenericItem", GFX_AREA_SCANNER_F2, "AreaScanner/F2");
             mapper.Register("GenericItem", GFX_AREA_SCANNER_F3, "AreaScanner/F3");
 
-            mapper.Register("KeycardRed", GFX_KEYCARD_RED_F2,  "F2");
-            mapper.Register("KeycardGreen", GFX_KEYCARD_GREEN_F2,  "F2");
-            mapper.Register("KeycardBlue", GFX_KEYCARD_BLUE_F2,  "F2");
+            mapper.Register("KeycardRed", GFX_KEYCARD_RED_F1,  "F1");
+            mapper.Register("KeycardGreen", GFX_KEYCARD_GREEN_F1,  "F1");
+            mapper.Register("KeycardBlue", GFX_KEYCARD_BLUE_F1,  "F1");
             mapper.Register("KeycardRed", MapMapper.GFX_ANY, "Trigger");
             mapper.Register("KeycardGreen", MapMapper.GFX_ANY,  "Trigger");
             mapper.Register("KeycardBlue", MapMapper.GFX_ANY,  "Trigger");
