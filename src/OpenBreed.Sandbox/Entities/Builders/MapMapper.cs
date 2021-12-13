@@ -40,6 +40,9 @@ namespace OpenBreed.Sandbox.Entities.Builders
                 case "Vanilla/L4":
                     this.SetupL4();
                     break;
+                case "Vanilla/L5":
+                    this.SetupL5();
+                    break;
                 default:
                     throw new NotImplementedException($"Mapping for level '{Level}'");
             }
