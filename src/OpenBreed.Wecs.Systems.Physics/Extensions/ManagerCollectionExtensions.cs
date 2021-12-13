@@ -22,8 +22,9 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
         public static void SetupPhysicsSystems(this IManagerCollection manCollection)
         {
             var systemFactory = manCollection.GetManager<ISystemFactory>();
-            systemFactory.Register(() => new DirectionSystem(manCollection.GetManager<IEntityMan>()));
+            systemFactory.Register(() => new DirectionSystemVanilla(manCollection.GetManager<IEntityMan>()));
             systemFactory.Register(() => new MovementSystem(manCollection.GetManager<IEntityMan>()));
+            systemFactory.Register(() => new MovementSystemVanilla(manCollection.GetManager<IEntityMan>()));
             systemFactory.Register(() => new DynamicBodiesAabbUpdaterSystem(manCollection.GetManager<IShapeMan>()));
             systemFactory.Register(() => new DynamicBodiesCollisionCheckSystem(manCollection.GetManager<IEntityMan>(),
                                                                                manCollection.GetManager<IShapeMan>(),

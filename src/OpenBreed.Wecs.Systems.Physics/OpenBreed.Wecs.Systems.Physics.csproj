@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectionSystem.cs" />
+    <Compile Include="DirectionSystemVanilla.cs" />
     <Compile Include="DynamicBodiesAabbUpdaterSystem.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
@@ -75,6 +75,7 @@
     <Compile Include="Events\BodyOnEventArgs.cs" />
     <Compile Include="Events\CollisionEventArgs.cs" />
     <Compile Include="Events\DirectionChangedEventArgs.cs" />
+    <Compile Include="MovementSystemVanilla.cs" />
     <Compile Include="MovementSystem.cs" />
     <Compile Include="CollisionResponseSystem.cs" />
     <Compile Include="StaticBodiesSystem.cs" />

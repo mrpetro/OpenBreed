@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Builders
 {
-    public static class MapCodesL4
+    public static class MapCodesL7
     {
         //GFX codes
-        public const int GFX_MEDKIT_SMALL_F1 = 598;
-        public const int GFX_MEDKIT_SMALL_F2 = 649;
-        public const int GFX_MEDKIT_SMALL_F3 = 653;
+        public const int GFX_MEDKIT_SMALL_F1 = 560;
+        public const int GFX_MEDKIT_SMALL_F2 = 450;
+        public const int GFX_MEDKIT_SMALL_F3 = 438;
         public const int GFX_CREDITS_SMALL_F1 = 600;
         public const int GFX_KEY_CARD_STANDARD_F1 = 602;
         public const int GFX_POWERUP_S_F1 = 603;
@@ -45,13 +45,12 @@ namespace OpenBreed.Sandbox.Entities.Builders
         public const int GFX_POWERUP_A_F3 = 635;
         public const int GFX_AMMO_F3 = 636;
         public const int GFX_AREA_SCANNER_F3 = 637;
-        public const int GFX_KEYCARD_SPECIAL_F2 = 618;
-        public const int GFX_KEYCARD_BLUE_F1 = 638;
-        public const int GFX_KEYCARD_RED_F1 = 362;
-        public const int GFX_KEYCARD_GREEN_F1 = 534;
+        public const int GFX_KEYCARD_BLUE_F1 = 575;
+        public const int GFX_KEYCARD_RED_F1 = 638;
+        public const int GFX_KEYCARD_GREEN_F1 = 568;
 
 
-        public static void SetupL4(this MapMapper mapper)
+        public static void SetupL7(this MapMapper mapper)
         {
             mapper.Register("GenericItem", GFX_MEDKIT_SMALL_F1, "MedkitSmall/F1");
             mapper.Register("GenericItem", GFX_MEDKIT_SMALL_F2, "MedkitSmall/F2");
@@ -93,7 +92,6 @@ namespace OpenBreed.Sandbox.Entities.Builders
             mapper.Register("KeycardRed", MapMapper.GFX_ANY, "Trigger");
             mapper.Register("KeycardGreen", MapMapper.GFX_ANY,  "Trigger");
             mapper.Register("KeycardBlue", MapMapper.GFX_ANY,  "Trigger");
-            mapper.Register("KeycardSpecial", GFX_KEYCARD_SPECIAL_F2,  "F2");
 
             mapper.Register("SmartCard1", GFX_SMART_CARD_F1, "F1");
             mapper.Register("SmartCard1", GFX_SMART_CARD_F2, "F2");
@@ -107,6 +105,8 @@ namespace OpenBreed.Sandbox.Entities.Builders
             mapper.Register("SmartCard1", MapMapper.GFX_ANY, "Trigger");
             mapper.Register("SmartCard2", MapMapper.GFX_ANY, "Trigger");
             mapper.Register("SmartCard3", MapMapper.GFX_ANY, "Trigger");
+
+
         }
     }
 }

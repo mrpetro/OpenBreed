@@ -1,16 +1,18 @@
 ﻿using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
-using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class MovementSystem : SystemBase, IUpdatableSystem
+    /// <summary>
+    /// System which tries to replicate ABTA actor movement behavior
+    /// </summary>
+    public class MovementSystemVanilla : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 
-        private const float FLOOR_FRICTION = 0.2f;
+        private const float FLOOR_FRICTION = 0.0f;
 
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
@@ -19,7 +21,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal MovementSystem(IEntityMan entityMan)
+        internal MovementSystemVanilla(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
 
@@ -51,7 +53,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             var dynamicBody = entity.Get<BodyComponent>();
 
             //Velocity equation
-            var newVel = velocity.Value + thrust.Value * dt;
+            var newVel = thrust.Value;
 
             //Apply friction force
             newVel += -newVel * FLOOR_FRICTION * dynamicBody.CofFactor;

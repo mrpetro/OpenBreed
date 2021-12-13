@@ -72,7 +72,6 @@
     <Compile Include="Builders\TileAtlasBuilder.cs" />
     <Compile Include="Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Builders\StampBuilder.cs" />
-    <Compile Include="CoreExtensions.cs" />
     <Compile Include="Data\SpriteAtlasDataLoader.cs" />
     <Compile Include="Data\TileAtlasDataLoader.cs" />
     <Compile Include="Data\TileStampDataLoader.cs" />

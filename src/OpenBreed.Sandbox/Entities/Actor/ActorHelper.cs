@@ -130,10 +130,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
                     slopeDirection = new Vector2(0, -1);
                     break;
                 case "UpRight":
-                    slopeDirection = new Vector2(1, 0);
+                    slopeDirection = new Vector2(0, -1);
                     break;
                 case "DownRight":
-                    slopeDirection = new Vector2(-1, 0);
+                    slopeDirection = new Vector2(0, 1);
                     break;
                 default:
                     slopeDirection = new Vector2(0, 0);
