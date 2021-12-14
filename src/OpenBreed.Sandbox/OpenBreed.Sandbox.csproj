@@ -100,6 +100,7 @@
     <Compile Include="Entities\FixtureTypes.cs" />
     <Compile Include="Entities\EnvironmentHelper.cs" />
     <Compile Include="Entities\GenericCellHelper.cs" />
+    <Compile Include="Entities\Hud\VanillaStatusBarHelper.cs" />
     <Compile Include="Entities\Hud\HudHelper.cs" />
     <Compile Include="Entities\Pickable\ManagerCollectionExtensions.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
@@ -180,12 +181,15 @@
     <Compile Include="Wecs\Components\UnknownCodeComponent.cs" />
     <Compile Include="Wecs\Systems\GroupMapCellDisplaySystem.cs" />
     <Compile Include="Wecs\Systems\UnknownMapCellDisplaySystem.cs" />
-    <Compile Include="Worlds\GameWorldHelper.cs" />
-    <Compile Include="Worlds\HudWorldHelper.cs" />
+    <Compile Include="Worlds\DebugHudWorldHelper.cs" />
+    <Compile Include="Worlds\GameHudWorldHelper.cs" />
     <Compile Include="Worlds\IEntityFactoryProvider.cs" />
     <Compile Include="Loaders\MapLegacyDataLoader.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
+    <Content Include="Entities\Viewport\GameHudViewport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="RunABTA.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -207,7 +211,7 @@
     <Content Include="Entities\Viewport\TextViewport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\Viewport\HUDViewport.xml">
+    <Content Include="Entities\Viewport\DebugHudViewport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Viewport\GameViewport.xml">

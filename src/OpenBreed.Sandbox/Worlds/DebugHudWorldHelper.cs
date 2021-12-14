@@ -1,4 +1,9 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common;
+using OpenBreed.Core;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Model.Palettes;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
@@ -14,40 +19,40 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Worlds
 {
-    public class HudWorldHelper
+    public class DebugHudWorldHelper
     {
         #region Private Fields
 
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
-        private readonly IViewClient viewClient;
         private readonly IEntityMan entityMan;
-        private readonly IEntityFactory entityFactory;
         private readonly HudHelper hudHelper;
         private readonly CameraHelper cameraHelper;
+        private readonly IViewClient viewClient;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public HudWorldHelper(ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, IEntityFactory entityFactory, HudHelper hudHelper, CameraHelper cameraHelper)
+        public DebugHudWorldHelper(ISystemFactory systemFactory, IWorldMan worldMan, IEntityMan entityMan, HudHelper hudHelper, CameraHelper cameraHelper, IViewClient viewClient)
         {
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
-            this.viewClient = viewClient;
             this.entityMan = entityMan;
-            this.entityFactory = entityFactory;
             this.hudHelper = hudHelper;
             this.cameraHelper = cameraHelper;
+            this.viewClient = viewClient;
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
+
+
         public void Create()
         {
-            var builder = worldMan.Create().SetName("HUD");
+            var builder = worldMan.Create().SetName("DebugHUD");
 
             AddSystems(builder);
 
@@ -60,25 +65,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void AddSystems(WorldBuilder builder)
         {
-            //Input
-            //builder.AddSystem(core.CreateWalkingControlSystem().Build());
-            //builder.AddSystem(core.CreateAiControlSystem().Build());
-
-            //Action
-            //builder.AddSystem(core.CreateMovementSystem().Build());
             builder.AddSystem(systemFactory.Create<AnimatorSystem>());
-
-            ////Audio
-            //builder.AddSystem(core.CreateSoundSystem().Build());
-
-            //Video
-            //builder.AddSystem(core.CreateTileSystem().SetGridSize(64, 64)
-            //                               .SetLayersNo(1)
-            //                               .SetTileSize(16)
-            //                               .SetGridVisible(false)
-            //                               .Build());
-
-            //builder.AddSystem(core.CreateSpriteSystem().Build());
             builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
@@ -89,14 +76,14 @@ namespace OpenBreed.Sandbox.Worlds
                                                       viewClient.ClientRectangle.Width,
                                                       viewClient.ClientRectangle.Height);
 
-            hudCamera.Tag = "HudCamera";
+            hudCamera.Tag = "DebugHudCamera";
 
             hudCamera.EnterWorld(world.Id);
 
             hudHelper.AddFpsCounter(world);
             hudHelper.AddPositionInfo(world);
 
-            var hudViewport = entityMan.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
+            var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
             hudViewport.SetViewportCamera(hudCamera.Id);
 
             //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ClientResizedEventArgs)a));

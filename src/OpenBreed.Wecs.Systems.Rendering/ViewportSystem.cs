@@ -208,8 +208,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             if (vpc.DrawBorder)
             {
-                GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
-                primitiveRenderer.DrawUnitRectangle();
+                //GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
+                //primitiveRenderer.DrawUnitRectangle();
             }
 
             var cameraEntity = entityMan.GetById(vpc.CameraEntityId);
