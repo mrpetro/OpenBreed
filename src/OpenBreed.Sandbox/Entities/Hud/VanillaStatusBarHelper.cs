@@ -1,21 +1,21 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Core;
+﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Sandbox.Jobs;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
-using OpenTK.Graphics;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Hud
 {
-    public class HudHelper
+    public class VanillaStatusBarHelper
     {
         #region Private Fields
 
@@ -29,7 +29,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         #region Public Constructors
 
-        public HudHelper(IEntityFactory entityFactory,
+        public VanillaStatusBarHelper(IEntityFactory entityFactory,
                          IEntityMan entityMan,
                          IViewClient viewClient,
                          IJobsMan jobsMan,
@@ -46,39 +46,14 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         #region Public Methods
 
-        public void AddFpsCounter(World world)
+        public void AddP1StatusBar(World world)
         {
-            var fpsCounter = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\FpsCounter.xml")
+            var p1StatusBarEntity = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml")
                 .SetParameter("posX", -viewClient.ClientRectangle.Width / 2.0f)
                 .SetParameter("posY", -viewClient.ClientRectangle.Height / 2.0f)
                 .Build();
 
-            fpsCounter.EnterWorld(world.Id);
-
-            var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
-
-            jobsMan.Execute(new FpsTextUpdateJob(renderingMan, fpsCounter));
-            hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsCounterPos(fpsCounter, a));
-        }
-
-        public void AddP1StatusBar(World world)
-        {
-            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml")
-                .SetParameter("posX", -160)
-                .SetParameter("posY", 109)
-                .Build();
-
-            p1StatusBar.EnterWorld(world.Id);
-        }
-
-        public void AddP2StatusBar(World world)
-        {
-            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml")
-                .SetParameter("posX", -160)
-                .SetParameter("posY", -120)
-                .Build();
-
-            p1StatusBar.EnterWorld(world.Id);
+            p1StatusBarEntity.EnterWorld(world.Id);
         }
 
         #endregion Public Methods
@@ -101,7 +76,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
 
-            jobsMan.Execute(new JohnPositionTextUpdateJob(entityMan, positionInfo));
+            //jobsMan.Execute(new JohnPositionTextUpdateJob(entityMan, positionInfo));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdatePositionInfoPos(positionInfo, a));
         }
 

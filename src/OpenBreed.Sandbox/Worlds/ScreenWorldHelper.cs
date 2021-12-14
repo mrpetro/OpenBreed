@@ -21,7 +21,8 @@ namespace OpenBreed.Sandbox.Worlds
 
         public const string GAME_VIEWPORT = "GameViewport";
 
-        public const string HUD_VIEWPORT = "HUDViewport";
+        public const string DEBUG_HUD_VIEWPORT = "DebugHudViewport";
+        public const string GAME_HUD_VIEWPORT = "GameHudViewport";
 
         public const string TEXT_VIEWPORT = "TextViewport";
 
@@ -71,18 +72,22 @@ namespace OpenBreed.Sandbox.Worlds
             var world = builder.Build();
 
             var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, GAME_VIEWPORT);
-            //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
-            //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
+            var gameHudViewport = viewportCreator.CreateViewportEntity(GAME_HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, GAME_HUD_VIEWPORT);
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
-            var hudViewport = viewportCreator.CreateViewportEntity(HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, HUD_VIEWPORT);
+            gameHudViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
+
+            var debugHudViewport = viewportCreator.CreateViewportEntity(DEBUG_HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, DEBUG_HUD_VIEWPORT);
+
             var textViewport = viewportCreator.CreateViewportEntity(TEXT_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, TEXT_VIEWPORT);
 
             renderingMan.ClientResized += (s, a) => ResizeGameViewport(gameViewport, a);
-            renderingMan.ClientResized += (s, a) => ResizeHudViewport(hudViewport, a);
-            renderingMan.ClientResized += (s, a) => ResizeTextViewport(hudViewport, a);
+            renderingMan.ClientResized += (s, a) => ResizeHudViewport(gameHudViewport, a);
+            renderingMan.ClientResized += (s, a) => ResizeHudViewport(debugHudViewport, a);
+            renderingMan.ClientResized += (s, a) => ResizeTextViewport(debugHudViewport, a);
 
             gameViewport.EnterWorld(world.Id);
-            hudViewport.EnterWorld(world.Id);
+            gameHudViewport.EnterWorld(world.Id);
+            debugHudViewport.EnterWorld(world.Id);
             textViewport.EnterWorld(world.Id);
 
             gameViewport.Subscribe<ViewportClickedEventArgs>(OnViewportClick);

@@ -134,18 +134,22 @@ namespace OpenBreed.Sandbox
                                                                                             manCollection.GetManager<IEventsMan>(),
                                                                                             manCollection.GetManager<ViewportCreator>(),
                                                                                             manCollection.GetManager<IViewClient>()));
-            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(manCollection.GetManager<ISystemFactory>(),
+            manCollection.AddSingleton<GameHudWorldHelper>(() => new GameHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
                                                                                 manCollection.GetManager<IWorldMan>(),
                                                                                 manCollection.GetManager<IViewClient>(),
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
                                                                                 manCollection.GetManager<HudHelper>(),
-                                                                                manCollection.GetManager<CameraHelper>()));
-            manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(manCollection.GetManager<IPlayersMan>(),
-                                                                                  manCollection.GetManager<IEntityMan>(),
-                                                                                  manCollection.GetManager<ISystemFactory>(),
-                                                                                  manCollection.GetManager<IWorldMan>(),
-                                                                                  manCollection.GetManager<ILogger>()));
+                                                                                manCollection.GetManager<CameraHelper>(),
+                                                                                manCollection.GetManager<IRepositoryProvider>(),
+                                                                                manCollection.GetManager<IDataLoaderFactory>()));
+
+            manCollection.AddSingleton<DebugHudWorldHelper>(() => new DebugHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
+                                                                                manCollection.GetManager<IWorldMan>(),
+                                                                                manCollection.GetManager<IEntityMan>(),
+                                                                                manCollection.GetManager<HudHelper>(),
+                                                                                manCollection.GetManager<CameraHelper>(),
+                                                                                manCollection.GetManager<IViewClient>()));
 
             manCollection.AddSingleton<EntriesHelper>(() => new EntriesHelper(manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
@@ -443,8 +447,11 @@ namespace OpenBreed.Sandbox
 
             renderingMan.ScreenWorld = screenWorldHelper.CreateWorld();
 
-            var hudWorldHelper = GetManager<HudWorldHelper>();
-            hudWorldHelper.Create();
+            var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
+            debugHudWorldHelper.Create();
+
+            var gameHudWorldHelper = GetManager<GameHudWorldHelper>();
+            gameHudWorldHelper.Create();
 
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
@@ -455,9 +462,9 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
-            var gameWorld = mapLegacyLoader.Load("Vanilla/7");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
