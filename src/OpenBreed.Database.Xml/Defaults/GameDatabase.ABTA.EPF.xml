@@ -320,6 +320,10 @@
 						<Parameter Name="S12.H" Type="System.Int32">8</Parameter>
 						<Parameter Name="S13.W" Type="System.Int32">8</Parameter>
 						<Parameter Name="S13.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S14.W" Type="System.Int32">32</Parameter>
+						<Parameter Name="S14.H" Type="System.Int32">8</Parameter>
+						<Parameter Name="S15.W" Type="System.Int32">32</Parameter>
+						<Parameter Name="S15.H" Type="System.Int32">8</Parameter>
 					</Parameters>
 				</Asset>
 				<Asset Id="Assets.TORCH.SPR" DataSourceRef="DataSources.TORCH.SPR" FormatType="ABTASPR">

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -25,6 +25,8 @@
     <None Remove="Defaults\Templates\ABTA\Common\Environment\Void.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Hud\FpsCounter.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Hud\PositionInfo.xml" />
+    <None Remove="Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml" />
+    <None Remove="Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\MapEntry.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\MapExit.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Pickables\Ammo.xml" />
@@ -107,6 +109,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Templates\ABTA\Common\Hud\FpsCounter.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Templates\ABTA\Common\Hud\PositionInfo.xml">
