@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="CameraComponent.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
+    <Compile Include="PaletteComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteComponent.cs" />
     <Compile Include="TilePutterComponent.cs" />

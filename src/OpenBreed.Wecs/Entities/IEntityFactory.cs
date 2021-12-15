@@ -10,6 +10,8 @@ namespace OpenBreed.Wecs.Entities
 
         ITemplateEntityBuilder Create(string entityTemplateName);
 
+        Entity Create();
+
         Entity Create(IEntityTemplate template);
 
         #endregion Public Methods

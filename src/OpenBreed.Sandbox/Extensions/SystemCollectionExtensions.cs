@@ -64,15 +64,6 @@ namespace OpenBreed.Sandbox.Extensions
             //                                                                          manCollection.GetManager<IBuilderFactory>()));
         }
 
-        public static void SetupMapEntityFactory(this EntityFactoryProvider entityFactoryProvider, IManagerCollection manCollection)
-        {
-            //entityFactoryProvider.Register<MapCellEntityFactory>(() => new MapCellEntityFactory());
-            //mapEntityFactory.Register<IEntityFactory>(() => new WorldBlockBuilder(manCollection.GetManager<ITileMan>(),
-            //                                                manCollection.GetManager<IFixtureMan>(),
-            //                                                manCollection.GetManager<IEntityMan>(),
-            //                                                manCollection.GetManager<BodyComponentBuilder>()));
-        }
-
         public static void SetupUnknownMapCellDisplaySystem(this IManagerCollection manCollection)
         {
             var systemFactory = manCollection.GetManager<ISystemFactory>();
@@ -173,12 +164,12 @@ namespace OpenBreed.Sandbox.Extensions
             dataLoaderFactory.Register<MapLegacyDataLoader>(() =>
             {
                 var mapLegacyDataLoader = new MapLegacyDataLoader(dataLoaderFactory,
+                                                              managerCollection.GetManager<IEntityMan>(),
                                                               managerCollection.GetManager<IRepositoryProvider>(),
                                                               managerCollection.GetManager<MapsDataProvider>(),
                                                               managerCollection.GetManager<ISystemFactory>(),
                                                               managerCollection.GetManager<IWorldMan>(),
                                                               managerCollection.GetManager<PalettesDataProvider>(),
-                                                              managerCollection.GetManager<IEntityFactoryProvider>(),
                                                               managerCollection.GetManager<IBroadphaseFactory>(),
                                                               managerCollection.GetManager<ITileGridFactory>(),
                                                               managerCollection.GetManager<ITileMan>(),
@@ -196,7 +187,6 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetManager<IWorldMan>(),
                                                               managerCollection.GetManager<PalettesDataProvider>(),
                                                               managerCollection.GetManager<ActionSetsDataProvider>(),
-                                                              managerCollection.GetManager<IEntityFactoryProvider>(),
                                                               managerCollection.GetManager<IBroadphaseFactory>(),
                                                               managerCollection.GetManager<ITileGridFactory>(),
                                                               managerCollection.GetManager<ITileMan>(),
@@ -255,16 +245,6 @@ namespace OpenBreed.Sandbox.Extensions
 
 
             //builder.AddModule(
-        }
-
-        public static void SetupMapEntityFactory(this IManagerCollection managerCollection)
-        {
-            managerCollection.AddSingleton<IEntityFactoryProvider>(() =>
-            {
-                var mapEntityFactory = new EntityFactoryProvider();
-                mapEntityFactory.SetupMapEntityFactory(managerCollection);
-                return mapEntityFactory;
-            });
         }
 
         public static void SetupDataLoaderFactory(this IManagerCollection managerCollection)

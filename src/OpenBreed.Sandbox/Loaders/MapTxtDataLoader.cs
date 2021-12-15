@@ -206,7 +206,6 @@ namespace OpenBreed.Sandbox.Loaders
         //private readonly WorldBlockBuilder worldBlockBuilder;
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly ActionSetsDataProvider actionSetsDataProvider;
-        private readonly IEntityFactoryProvider mapEntityFactory;
         private readonly IBroadphaseFactory broadphaseGridFactory;
         private readonly ITileGridFactory tileGridFactory;
         private readonly ITileMan tileMan;
@@ -223,7 +222,6 @@ namespace OpenBreed.Sandbox.Loaders
                                   IWorldMan worldMan,
                                   PalettesDataProvider palettesDataProvider,
                                   ActionSetsDataProvider actionSetsDataProvider,
-                                  IEntityFactoryProvider mapEntityFactory,
                                   IBroadphaseFactory broadphaseGridFactory,
                                   ITileGridFactory tileGridFactory,
                                   ITileMan tileMan,
@@ -236,7 +234,6 @@ namespace OpenBreed.Sandbox.Loaders
             //this.worldBlockBuilder = worldBlockBuilder;
             this.palettesDataProvider = palettesDataProvider;
             this.actionSetsDataProvider = actionSetsDataProvider;
-            this.mapEntityFactory = mapEntityFactory;
             this.broadphaseGridFactory = broadphaseGridFactory;
             this.tileGridFactory = tileGridFactory;
             this.tileMan = tileMan;

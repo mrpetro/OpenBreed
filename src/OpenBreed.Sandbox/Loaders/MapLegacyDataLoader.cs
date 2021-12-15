@@ -21,6 +21,8 @@ using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -54,9 +56,9 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly IWorldMan worldMan;
         //private readonly WorldBlockBuilder worldBlockBuilder;
         private readonly PalettesDataProvider palettesDataProvider;
-        private readonly IEntityFactoryProvider mapEntityFactory;
         private readonly IBroadphaseFactory broadphaseGridFactory;
         private readonly ITileGridFactory tileGridFactory;
+        private readonly IEntityMan entityMan;
         private readonly ITileMan tileMan;
         private readonly ILogger logger;
         private readonly Dictionary<string, IMapWorldEntityLoader> entityLoaders = new Dictionary<string, IMapWorldEntityLoader>();
@@ -66,12 +68,12 @@ namespace OpenBreed.Sandbox.Loaders
         #region Public Constructors
 
         public MapLegacyDataLoader(IDataLoaderFactory dataLoaderFactory,
+                                  IEntityMan entityMan,
                                   IRepositoryProvider repositoryProvider,
                                   MapsDataProvider mapsDataProvider,
                                   ISystemFactory systemFactory,
                                   IWorldMan worldMan,
                                   PalettesDataProvider palettesDataProvider,
-                                  IEntityFactoryProvider mapEntityFactory,
                                   IBroadphaseFactory broadphaseGridFactory,
                                   ITileGridFactory tileGridFactory,
                                   ITileMan tileMan,
@@ -79,14 +81,15 @@ namespace OpenBreed.Sandbox.Loaders
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
+            this.entityMan = entityMan;
             this.mapsDataProvider = mapsDataProvider;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             //this.worldBlockBuilder = worldBlockBuilder;
             this.palettesDataProvider = palettesDataProvider;
-            this.mapEntityFactory = mapEntityFactory;
             this.broadphaseGridFactory = broadphaseGridFactory;
             this.tileGridFactory = tileGridFactory;
+
             this.tileMan = tileMan;
             this.logger = logger;
         }
@@ -122,16 +125,17 @@ namespace OpenBreed.Sandbox.Loaders
             if (dbMap == null)
                 throw new Exception($"Missing Map: {entryId}");
 
+            var map = mapsDataProvider.GetMap(dbMap.Id);
+
+            if (map is null)
+                throw new Exception($"Map model asset '{dbMap.DataRef}' could not be loaded.");
+
+            LoadPalettes(map);
             LoadReferencedTileSet(dbMap);
             LoadReferencedSpriteSets(dbMap);
             LoadReferencedAnimations(dbMap);
             LoadReferencedTileStamps(dbMap);
             LoadReferencedSounds(dbMap);
-
-            var map = mapsDataProvider.GetMap(dbMap.Id);
-
-            if (map is null)
-                throw new Exception($"Map model  asset '{dbMap.DataRef}' could not be loaded.");
 
             var layout = map.Layout;
             var visited = new bool[layout.Width, layout.Height];
@@ -141,7 +145,6 @@ namespace OpenBreed.Sandbox.Loaders
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Width);
-
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
             worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
@@ -190,6 +193,36 @@ namespace OpenBreed.Sandbox.Loaders
             }
 
             return world;
+        }
+
+        private void LoadPalettes(MapModel mapModel)
+        {
+            foreach (var paletteModel in mapModel.Palettes)
+            {
+                var paletteEntityTag = $"GameWorld/Palette/{paletteModel.Name}";
+
+                var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
+
+                if (paletteEntity is null)
+                {
+                    paletteEntity = entityMan.Create();
+                    paletteEntity.Tag = paletteEntityTag;
+                }
+
+                var paletteComponent = paletteEntity.TryGet<PaletteComponent>();
+
+                if (paletteComponent is null)
+                {
+                    paletteComponent = new PaletteComponent();
+                    paletteEntity.Add(paletteComponent);
+                }
+
+                for (int i = 0; i < paletteModel.Length; i++)
+                {
+                    var c = paletteModel[i];
+                    paletteComponent.Colors[i] = new PaletteColor(c.R, c.G, c.B);
+                }
+            }
         }
 
         #endregion Public Methods
