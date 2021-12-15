@@ -1,30 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing.Imaging;
 using System.Drawing;
 
 namespace OpenBreed.Model.Palettes
 {
     public class PaletteBuilder
     {
+        #region Internal Fields
+
         internal string Name;
         internal Color[] Colors;
+
+        #endregion Internal Fields
+
+        #region Private Constructors
+
+        private PaletteBuilder()
+        {
+            Colors = new Color[256];
+        }
+
+        #endregion Private Constructors
+
+        #region Public Methods
 
         public static PaletteBuilder NewPaletteModel()
         {
             return new PaletteBuilder();
-        }
-
-        private static Color[] DefaultPalette()
-        {
-            Color[] colors = new Color[256];
-
-            for (int colorIndex = 0; colorIndex < colors.Length; colorIndex++)
-                colors[colorIndex] = Color.FromArgb(colorIndex, colorIndex, colorIndex);
-
-            return colors;
         }
 
         public PaletteBuilder SetName(string name)
@@ -62,5 +63,21 @@ namespace OpenBreed.Model.Palettes
         {
             return new PaletteModel(this);
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private static Color[] DefaultPalette()
+        {
+            Color[] colors = new Color[256];
+
+            for (int colorIndex = 0; colorIndex < colors.Length; colorIndex++)
+                colors[colorIndex] = Color.FromArgb(colorIndex, colorIndex, colorIndex);
+
+            return colors;
+        }
+
+        #endregion Private Methods
     }
 }
