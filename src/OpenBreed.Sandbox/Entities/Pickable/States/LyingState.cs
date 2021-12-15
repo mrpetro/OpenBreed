@@ -5,6 +5,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
@@ -71,7 +72,8 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
                 entity.PutStamp(stampId, 0, pos.Value);
             }
 
-            entity.SetText(0, $"{className} - Lying");
+            if(entity.Contains<TextComponent>())
+                entity.SetText(0, $"{className} - Lying");
 
             var bodyCmp = entity.Get<BodyComponent>();
 

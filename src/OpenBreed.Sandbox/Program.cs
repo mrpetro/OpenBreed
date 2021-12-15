@@ -103,7 +103,6 @@ namespace OpenBreed.Sandbox
             manCollection.SetupAnimationComponents();
             manCollection.SetupFsmComponents();
 
-            manCollection.SetupMapEntityFactory();
             manCollection.SetupDataLoaderFactory();
 
             manCollection.SetupUnknownMapCellDisplaySystem();
@@ -450,9 +449,6 @@ namespace OpenBreed.Sandbox
             var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
             debugHudWorldHelper.Create();
 
-            var gameHudWorldHelper = GetManager<GameHudWorldHelper>();
-            gameHudWorldHelper.Create();
-
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
             var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
@@ -502,8 +498,9 @@ namespace OpenBreed.Sandbox
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Id, 0);
             });
 
-            //var gameWorldHelper = GetManager<GameWorldHelper>();
-            //gameWorldHelper.Create(this);
+
+            var gameHudWorldHelper = GetManager<GameHudWorldHelper>();
+            gameHudWorldHelper.Create();
 
             OnEngineInitialized();
         }

@@ -178,9 +178,9 @@ namespace OpenBreed.Wecs.Entities
         public override string ToString()
         {
             if(Tag is null)
-                return $"Entity({Id})";
+                return $"{Id}";
             else
-                return $"{Tag}({Id})";
+                return $"{Id} ({Tag})";
         }
 
         public void LeaveWorld()

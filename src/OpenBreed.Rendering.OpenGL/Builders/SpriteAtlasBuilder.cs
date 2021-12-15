@@ -14,7 +14,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         internal readonly List<Box2> bounds = new List<Box2>();
 
-        internal Vector2 offset;
+        internal Vector2 offset = Vector2.Zero;
 
         #endregion Internal Fields
 

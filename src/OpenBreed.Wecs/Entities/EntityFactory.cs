@@ -38,6 +38,11 @@ namespace OpenBreed.Wecs.Entities
             componentFactories.Add(typeof(T), factory);
         }
 
+        public Entity Create()
+        {
+            return entityMan.Create();
+        }
+
         public ITemplateEntityBuilder Create(string entityTemplateName)
         {
             return new TemplateEntityBuilder(this, entityTemplateName);

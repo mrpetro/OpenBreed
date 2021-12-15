@@ -55,6 +55,30 @@ namespace OpenBreed.Sandbox.Worlds
         #region Public Methods
 
 
+        private PaletteModel GetPaletteModel(string paletteName)
+        {
+            var paletteEntity = entityMan.GetByTag(paletteName).FirstOrDefault();
+
+            if(paletteEntity is null)
+                return PaletteModel.NullPalette;
+
+            var paletteComponent = paletteEntity.TryGet<PaletteComponent>();
+
+            if (paletteComponent is null)
+                return PaletteModel.NullPalette;
+
+            var paletteBuilder = PaletteBuilder.NewPaletteModel();
+            paletteBuilder.SetName(paletteName);
+            for (int i = 0; i < paletteComponent.Colors.Length; i++)
+            {
+                var c = paletteComponent.Colors[i];
+
+                paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(255, c.R, c.G, c.B));
+            }
+
+            return paletteBuilder.Build();
+        }
+
 
         public void Create()
         {
@@ -63,7 +87,9 @@ namespace OpenBreed.Sandbox.Worlds
             //Load common sprites
             var dbStatusBarSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById("Vanilla/Common/Status");
 
-           loader.Load(dbStatusBarSpriteAtlas.Id, PaletteModel.NullPalette);
+            var paletteModel = GetPaletteModel("GameWorld/Palette/CMAP");
+
+            loader.Load(dbStatusBarSpriteAtlas.Id, paletteModel);
 
             var builder = worldMan.Create().SetName("GameHUD");
 

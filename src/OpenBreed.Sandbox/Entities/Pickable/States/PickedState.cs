@@ -2,6 +2,7 @@
 using OpenBreed.Fsm;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
@@ -73,7 +74,8 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
                 entity.EmitSound(soundId);
             }
 
-            entity.SetText(0, $"{className} - Picked");
+            if (entity.Contains<TextComponent>())
+                entity.SetText(0, $"{className} - Picked");
 
             Console.WriteLine($"Picked up '{className}'.");
 
