@@ -36,7 +36,8 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 
             manCollection.AddSingleton<IStampMan>(() => new StampMan());
 
-            manCollection.AddSingleton<IFontMan>(() => new FontMan(manCollection.GetManager<ITextureMan>()));
+            manCollection.AddSingleton<IFontMan>(() => new FontMan(manCollection.GetManager<ITextureMan>(),
+                                                                   manCollection.GetManager<ISpriteMan>()));
 
             manCollection.AddSingleton<IPrimitiveRenderer>(() => new PrimitiveRenderer());
 

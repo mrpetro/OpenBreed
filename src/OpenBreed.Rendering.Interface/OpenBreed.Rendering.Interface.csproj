@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\IFontAtlasBuilder.cs" />
     <Compile Include="Data\ISpriteAtlasDataLoader.cs" />
     <Compile Include="Data\ITileAtlasDataLoader.cs" />
     <Compile Include="Data\ITileStampDataLoader.cs" />

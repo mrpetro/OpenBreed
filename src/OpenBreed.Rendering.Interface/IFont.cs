@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Rendering.Interface
+﻿using OpenTK;
+
+namespace OpenBreed.Rendering.Interface
 {
     /// <summary>
     /// Interface for accessing font functionality
@@ -25,13 +27,13 @@
         /// Draw single character given in parameter
         /// </summary>
         /// <param name="character">Single character to draw</param>
-        void Draw(char character);
+        void Draw(char character, Box2 clipBox);
 
         /// <summary>
         /// Draw text given in parameter
         /// </summary>
         /// <param name="text">Text to draw</param>
-        void Draw(string text);
+        void Draw(string text, Box2 clipBox);
 
         /// <summary>
         /// Gets single character width

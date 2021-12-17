@@ -162,7 +162,6 @@
     <Compile Include="Entities\TeleportHelper.cs" />
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
-    <Compile Include="Entities\TextHelper.cs" />
     <Compile Include="Entities\Turret\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Turret\TurretHelper.cs" />
     <Compile Include="Entities\EntriesHelper.cs" />
@@ -171,7 +170,6 @@
     <Compile Include="Entities\Viewport\ViewportCreator.cs" />
     <Compile Include="Jobs\JohnPositionTextUpdateJob.cs" />
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
-    <Compile Include="Entities\CrazyMover\Misc.cs" />
     <Compile Include="Managers\ItemsMan.cs" />
     <Compile Include="Entities\ItemTypes.cs" />
     <Compile Include="Program.cs" />
@@ -199,9 +197,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Actor\States\Attacking\IdleState.lua">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\CrazyMover\CrazyMover.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Turret\Turret.xml">

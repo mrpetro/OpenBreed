@@ -192,8 +192,16 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetFont(string fontName, int fontSize)
         {
-            var font = fontMan.Create(fontName, fontSize);
-            SetFontById(font.Id);
+            if (fontSize == 0)
+            {
+                var font = fontMan.GetGfxFont(fontName);
+                SetFontById(font.Id);
+            }
+            else
+            {
+                var font = fontMan.GetOSFont(fontName, fontSize);
+                SetFontById(font.Id);
+            }
         }
 
         public void SetOffset(Vector2 offset)

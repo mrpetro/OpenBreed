@@ -1,9 +1,12 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Core;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Model.Palettes;
+using OpenBreed.Model.Sprites;
 using OpenBreed.Rendering.Interface.Data;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
@@ -25,6 +28,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
+        private readonly IFontMan fontMan;
         private readonly IViewClient viewClient;
         private readonly IEntityMan entityMan;
         private readonly IEntityFactory entityFactory;
@@ -32,15 +36,27 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly CameraHelper cameraHelper;
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public GameHudWorldHelper(ISystemFactory systemFactory, IWorldMan worldMan, IViewClient viewClient, IEntityMan entityMan, IEntityFactory entityFactory, HudHelper hudHelper, CameraHelper cameraHelper, IRepositoryProvider repositoryProvider, IDataLoaderFactory dataLoaderFactory )
+        public GameHudWorldHelper(ISystemFactory systemFactory, 
+                                  IWorldMan worldMan, 
+                                  IFontMan fontMan, 
+                                  IViewClient viewClient, 
+                                  IEntityMan entityMan,
+                                  IEntityFactory entityFactory,
+                                  HudHelper hudHelper, 
+                                  CameraHelper cameraHelper, 
+                                  IRepositoryProvider repositoryProvider, 
+                                  IDataLoaderFactory dataLoaderFactory,
+                                  SpriteAtlasDataProvider spriteAtlasDataProvider)
         {
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
+            this.fontMan = fontMan;
             this.viewClient = viewClient;
             this.entityMan = entityMan;
             this.entityFactory = entityFactory;
@@ -48,6 +64,7 @@ namespace OpenBreed.Sandbox.Worlds
             this.cameraHelper = cameraHelper;
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
+            this.spriteAtlasDataProvider = spriteAtlasDataProvider;
         }
 
         #endregion Public Constructors
@@ -79,7 +96,6 @@ namespace OpenBreed.Sandbox.Worlds
             return paletteBuilder.Build();
         }
 
-
         public void Create()
         {
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
@@ -87,9 +103,27 @@ namespace OpenBreed.Sandbox.Worlds
             //Load common sprites
             var dbStatusBarSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById("Vanilla/Common/Status");
 
-            var paletteModel = GetPaletteModel("GameWorld/Palette/CMAP");
+            var spriteSet = spriteAtlasDataProvider.GetSpriteSet(dbStatusBarSpriteAtlas.Id);
 
-            loader.Load(dbStatusBarSpriteAtlas.Id, paletteModel);
+            var paletteModel = GetPaletteModel("GameWorld/Palette/CMAP");
+            var spriteAtlas = loader.Load(dbStatusBarSpriteAtlas.Id, paletteModel);
+
+            //Create FontAtlas
+            var fontAtlas = fontMan.Create()
+                                     .SetName("StatusBar")
+                                     .AddCharacterFromSprite('0', "Vanilla/Common/Status#2", 0)
+                                     .AddCharacterFromSprite('1', "Vanilla/Common/Status#3", 0)
+                                     .AddCharacterFromSprite('2', "Vanilla/Common/Status#4", 0)
+                                     .AddCharacterFromSprite('3', "Vanilla/Common/Status#5", 0)
+                                     .AddCharacterFromSprite('4', "Vanilla/Common/Status#6", 0)
+                                     .AddCharacterFromSprite('5', "Vanilla/Common/Status#7", 0)
+                                     .AddCharacterFromSprite('6', "Vanilla/Common/Status#8", 0)
+                                     .AddCharacterFromSprite('7', "Vanilla/Common/Status#9", 0)
+                                     .AddCharacterFromSprite('8', "Vanilla/Common/Status#10", 0)
+                                     .AddCharacterFromSprite('9', "Vanilla/Common/Status#11", 0)
+                                     .Build();
+
+
 
             var builder = worldMan.Create().SetName("GameHUD");
 
@@ -106,6 +140,8 @@ namespace OpenBreed.Sandbox.Worlds
         {
             builder.AddSystem(systemFactory.Create<AnimatorSystem>());
             builder.AddSystem(systemFactory.Create<SpriteSystem>());
+            builder.AddSystem(systemFactory.Create<TextSystem>());
+
         }
 
         private void Setup(World world)
@@ -118,6 +154,14 @@ namespace OpenBreed.Sandbox.Worlds
 
             hudHelper.AddP1StatusBar(world);
             hudHelper.AddP2StatusBar(world);
+            hudHelper.AddLivesCounter(world, -24, 112);
+            hudHelper.AddLivesCounter(world, -24, -117);
+
+            hudHelper.AddAmmoCounter(world, 80, 112);
+            hudHelper.AddAmmoCounter(world, 80, -117);
+
+            hudHelper.AddKeysCounter(world, 128, 112);
+            hudHelper.AddKeysCounter(world, 128, -117);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
             hudViewport.SetViewportCamera(hudCamera.Id);

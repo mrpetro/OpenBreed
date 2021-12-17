@@ -1,33 +1,31 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
-    internal class FontAtlas : IFont
+    internal class FontFromSpritesAtlas : IFont
     {
-        //public const string Characters = @" qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789µ§½!""#¤%&/()=?^*@£€${[]}\~¨'-_.:,;<>|°©®±¥ł";
-
         #region Private Fields
 
-        private readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
-        private int ibo;
-        private List<int> vboList;
+        private readonly ISpriteMan spriteMan;
+        private readonly int atlasId;
+
+        private readonly Dictionary<int, (int, int, float)> Lookup = new Dictionary<int, (int, int, float)>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal FontAtlas(FontAtlasBuilder builder)
+        internal FontFromSpritesAtlas(FontFromSpritesAtlasBuilder builder)
         {
-            Characters = builder.Characters;
+            spriteMan = builder.SpriteMan;
             Id = builder.Id;
-            vboList = builder.vboList;
-            ibo = builder.ibo;
-            Height = builder.Height;
+            atlasId = builder.AtlasId;
             Lookup = builder.Lookup;
-            Texture = builder.Texture;
         }
 
         #endregion Internal Constructors
@@ -66,37 +64,38 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return totalWidth;
         }
 
-        public void Draw(char character)
+        public void Draw(char ch, Box2 clipBox)
         {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
-            RenderTools.Draw(vboList[Lookup[character].Item1], ibo, 6);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
+            (int, int, float) data;
+            if (Lookup.TryGetValue(ch, out data))
+            {
+                var atlasId = data.Item1;
+                var spriteIndex = data.Item2;
+                spriteMan.Render(atlasId, spriteIndex, Vector2.Zero, Vector2.Zero, 100, clipBox);
+            }
         }
 
-        public void Draw(string text)
+        public void Draw(string text, Box2 clipBox)
         {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
-
             var offset = 0.0f;
 
             for (int i = 0; i < text.Length; i++)
             {
                 var ch = text[i];
-                var key = Lookup[ch].Item1;
+                var atlasId = Lookup[ch].Item1;
+                var spriteIndex = Lookup[ch].Item2;
 
                 GL.Translate(offset, 0.0f, 0.0f);
-                RenderTools.Draw(vboList[key], ibo, 6);
-                offset = Lookup[ch].Item2 * 0.75f;
-            }
 
-            GL.BindTexture(TextureTarget.Texture2D, 0);
+                spriteMan.Render(atlasId, spriteIndex, Vector2.Zero, Vector2.Zero, 100, clipBox);
+
+                offset = Lookup[ch].Item3;
+            }
         }
 
         public void Draw(int spriteId)
         {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
-            RenderTools.Draw(vboList[spriteId], ibo, 6);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
+
         }
 
         #endregion Public Methods

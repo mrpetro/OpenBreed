@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace OpenBreed.Rendering.OpenGL.Builders
 {
-    public class FontAtlasBuilder
+    public class FontFromOSAtlasGenerator
     {
         #region Public Fields
 
@@ -26,10 +26,8 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         internal readonly List<Vector2> coords = new List<Vector2>();
 
         internal readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
-        internal FontMan FontMan;
         internal float Height;
         internal ITexture Texture;
-
         internal int ibo;
         internal List<int> vboList;
 
@@ -37,15 +35,18 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         #region Private Fields
 
+        private readonly TextMeasurer textMeasurer;
         private readonly ITextureMan textureMan;
+        private readonly FontMan fontMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal FontAtlasBuilder(FontMan fontMan, ITextureMan textureMan)
+        internal FontFromOSAtlasGenerator(FontMan fontMan, TextMeasurer textMeasurer, ITextureMan textureMan)
         {
-            FontMan = fontMan;
+            this.fontMan = fontMan;
+            this.textMeasurer = textMeasurer;
             this.textureMan = textureMan;
         }
 
@@ -78,10 +79,52 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
             Height = BuildCoords(FontName, FontSize);
 
-            return new FontAtlas(this);
+            return new FontFromOSAtlas(this);
         }
 
-        public Bitmap GenerateCharacters(Font font, out Size charSize)
+        public void SetName(string fontName)
+        {
+            FontName = fontName;
+        }
+
+        public void SetSize(int fontSize)
+        {
+            FontSize = fontSize;
+        }
+
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal Vertex[] CreateVertices(Vector2 fontCoord, float fontWidth, float fontHeight)
+        {
+            var uvSize = new Vector2(fontWidth, fontHeight);
+            uvSize = Vector2.Divide(uvSize, new Vector2(Texture.Width, Texture.Height));
+
+            var uvLD = fontCoord;
+            uvLD = Vector2.Divide(uvLD, new Vector2(Texture.Width, Texture.Height));
+            var uvRT = Vector2.Add(uvLD, uvSize);
+
+            Vertex[] vertices = {
+                                new Vertex(new Vector2(0,   0),              new Vector2(uvLD.X, uvRT.Y), Color4.White),
+                                new Vertex(new Vector2(fontWidth,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
+                                new Vertex(new Vector2(fontWidth,  fontHeight), new Vector2(uvRT.X, uvLD.Y), Color4.White),
+                                new Vertex(new Vector2(0,   fontHeight),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
+                            };
+
+            return vertices;
+        }
+
+        internal int GetNewId()
+        {
+            return fontMan.GenerateNewId();
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        private Bitmap GenerateCharacters(Font font, out Size charSize)
         {
             var characters = new List<Bitmap>();
 
@@ -112,84 +155,17 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             return charMap;
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal Vertex[] CreateVertices(Vector2 fontCoord, float fontWidth, float fontHeight)
-        {
-            var uvSize = new Vector2(fontWidth, fontHeight);
-            uvSize = Vector2.Divide(uvSize, new Vector2(Texture.Width, Texture.Height));
-
-            var uvLD = fontCoord;
-            uvLD = Vector2.Divide(uvLD, new Vector2(Texture.Width, Texture.Height));
-            var uvRT = Vector2.Add(uvLD, uvSize);
-
-            Vertex[] vertices = {
-                                new Vertex(new Vector2(0,   0),              new Vector2(uvLD.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(fontWidth,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(fontWidth,  fontHeight), new Vector2(uvRT.X, uvLD.Y), Color4.White),
-                                new Vertex(new Vector2(0,   fontHeight),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
-                            };
-
-            return vertices;
-        }
-
-        internal int GetNewId()
-        {
-            return FontMan.GenerateNewId();
-        }
-
-        internal void SetFontName(string fontName)
-        {
-            FontName = fontName;
-        }
-
-        internal void SetFontSize(int fontSize)
-        {
-            FontSize = fontSize;
-        }
-
-        #endregion Internal Methods
-
-        #region Private Methods
-
-        private SizeF MeasureSize(Font font, char c)
-        {
-            using (var bmp = new Bitmap(512, 512))
-            {
-                using (var gfx = Graphics.FromImage(bmp))
-                {
-                    return gfx.MeasureString(c.ToString(), font);
-                }
-            }
-        }
-
         private Bitmap GenerateCharacter(Font font, int intCh)
         {
             var ch = (char)intCh;
-            var size = MeasureSize(font, ch);
+            var size = textMeasurer.MeasureSize(font, ch);
             var bmp = new Bitmap((int)size.Width, (int)size.Height);
             using (var gfx = Graphics.FromImage(bmp))
             {
                 gfx.FillRectangle(Brushes.Black, 0, 0, bmp.Width, bmp.Height);
-                gfx.DrawRectangle(Pens.Blue, 0, 0, bmp.Width, bmp.Height);
                 gfx.DrawString(ch.ToString(), font, Brushes.White, 0, 0); ;
             }
             return bmp;
-        }
-
-        private float MeasureWidth(Font font, char c)
-        {
-            using (var bmp = new Bitmap(512, 512))
-            {
-                using (var gfx = Graphics.FromImage(bmp))
-                {
-                    var stringFormat = new StringFormat(StringFormat.GenericTypographic);
-                    stringFormat.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
-                    return gfx.MeasureString(c.ToString(), font, 0, stringFormat).Width;
-                }
-            }
         }
 
         private float BuildCoords(string fontName, int fontSize)
@@ -204,8 +180,8 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                 {
                     if (!Lookup.ContainsKey(Characters[i]))
                     {
-                        var charSize = MeasureSize(font, (char)Characters[i]);
-                        var charWidth = MeasureWidth(font, (char)Characters[i]);
+                        var charSize = textMeasurer.MeasureSize(font, (char)Characters[i]);
+                        var charWidth = textMeasurer.MeasureWidth(font, (char)Characters[i]);
 
                         var coord = new Vector2(i * maxCharSize.Width, 0);
                         var vertices = CreateVertices(coord, charSize.Width, charSize.Height);
@@ -218,18 +194,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                     }
                 }
 
-                return MeasureHeight(font);
-            }
-        }
-
-        private float MeasureHeight(Font font)
-        {
-            using (var bmp = new Bitmap(512, 512))
-            {
-                using (var gfx = Graphics.FromImage(bmp))
-                {
-                    return font.GetHeight(gfx);
-                }
+                return textMeasurer.MeasureHeight(font);
             }
         }
 

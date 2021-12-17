@@ -35,7 +35,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             RequireEntityWith<PositionComponent>();
             RequireEntityWith<GroupComponentEx>();
 
-            font = fontMan.Create("ARIAL", 8);
+            font = fontMan.GetOSFont("ARIAL", 8);
         }
 
         #endregion Public Constructors
@@ -124,7 +124,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
             GL.BlendColor(Color4.Black);
 
-            font.Draw(groupCmp.Id.ToString());
+            font.Draw(groupCmp.Id.ToString(), clipBox);
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);

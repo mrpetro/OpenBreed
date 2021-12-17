@@ -3,6 +3,7 @@ using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
@@ -135,13 +136,15 @@ namespace OpenBreed.Sandbox
                                                                                             manCollection.GetManager<IViewClient>()));
             manCollection.AddSingleton<GameHudWorldHelper>(() => new GameHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
                                                                                 manCollection.GetManager<IWorldMan>(),
+                                                                                manCollection.GetManager<IFontMan>(),
                                                                                 manCollection.GetManager<IViewClient>(),
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
                                                                                 manCollection.GetManager<HudHelper>(),
                                                                                 manCollection.GetManager<CameraHelper>(),
                                                                                 manCollection.GetManager<IRepositoryProvider>(),
-                                                                                manCollection.GetManager<IDataLoaderFactory>()));
+                                                                                manCollection.GetManager<IDataLoaderFactory>(),
+                                                                                manCollection.GetManager<SpriteAtlasDataProvider>()));
 
             manCollection.AddSingleton<DebugHudWorldHelper>(() => new DebugHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
                                                                                 manCollection.GetManager<IWorldMan>(),

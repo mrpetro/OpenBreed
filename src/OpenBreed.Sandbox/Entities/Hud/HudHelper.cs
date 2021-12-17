@@ -11,6 +11,7 @@ using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Hud
@@ -59,6 +60,46 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
             jobsMan.Execute(new FpsTextUpdateJob(renderingMan, fpsCounter));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsCounterPos(fpsCounter, a));
+        }
+
+        public void AddLivesCounter(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\LivesCounter.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddDestructTimer(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\DestructTimer.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddKeysCounter(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\KeysCounter.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddAmmoCounter(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\AmmoCounter.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
         }
 
         public void AddP1StatusBar(World world)

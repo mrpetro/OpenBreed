@@ -68,7 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\FontAtlasBuilder.cs" />
+    <Compile Include="Builders\FontFromSpritesAtlasBuilder.cs" />
+    <Compile Include="Builders\FontFromOSAtlasGenerator.cs" />
     <Compile Include="Builders\TileAtlasBuilder.cs" />
     <Compile Include="Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Builders\StampBuilder.cs" />
@@ -76,11 +77,13 @@
     <Compile Include="Data\TileAtlasDataLoader.cs" />
     <Compile Include="Data\TileStampDataLoader.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
-    <Compile Include="Helpers\FontAtlas.cs" />
+    <Compile Include="Helpers\FontFromSpritesAtlas.cs" />
+    <Compile Include="Helpers\FontFromOSAtlas.cs" />
     <Compile Include="Helpers\GridCell.cs" />
     <Compile Include="Helpers\RenderTools.cs" />
     <Compile Include="Helpers\SpriteAtlasEx.cs" />
     <Compile Include="Helpers\SpriteAtlas.cs" />
+    <Compile Include="Helpers\TextMeasurer.cs" />
     <Compile Include="Helpers\Texture.cs" />
     <Compile Include="Helpers\TileAtlas.cs" />
     <Compile Include="Helpers\TileGrid.cs" />

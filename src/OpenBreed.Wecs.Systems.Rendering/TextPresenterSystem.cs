@@ -102,7 +102,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
                         break;
                 }
 
-                font.Draw(ch);
+                font.Draw(ch, clipBox);
                 var width = font.GetWidth(ch);
                 caretPosX += width;
                 GL.Translate(width, 0.0f, 0.0f);
