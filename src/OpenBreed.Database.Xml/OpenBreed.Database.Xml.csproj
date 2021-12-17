@@ -23,7 +23,11 @@
     <None Remove="Defaults\Templates\ABTA\Common\Environment\SlopeObstacle.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Environment\Unknown.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Environment\Void.xml" />
+    <None Remove="Defaults\Templates\ABTA\Common\Hud\AmmoCounter.xml" />
+    <None Remove="Defaults\Templates\ABTA\Common\Hud\DestructTimer.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Hud\FpsCounter.xml" />
+    <None Remove="Defaults\Templates\ABTA\Common\Hud\KeysCounter.xml" />
+    <None Remove="Defaults\Templates\ABTA\Common\Hud\LivesCounter.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Hud\PositionInfo.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml" />
@@ -106,6 +110,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Templates\ABTA\Common\Environment\Void.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Hud\KeysCounter.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Hud\LivesCounter.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Hud\AmmoCounter.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Hud\DestructTimer.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Templates\ABTA\Common\Hud\FpsCounter.xml">
