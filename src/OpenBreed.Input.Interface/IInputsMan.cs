@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Input;
 using System;
 

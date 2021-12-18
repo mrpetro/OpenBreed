@@ -1,5 +1,4 @@
-﻿using OpenBreed.Wecs.Entities;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

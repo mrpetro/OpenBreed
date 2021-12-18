@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
 using OpenBreed.Input.Interface;
-using OpenBreed.Input.Generic;
 using OpenBreed.Wecs.Systems.Control.Inputs;
 
 namespace OpenBreed.Wecs.Systems.Control.Handlers

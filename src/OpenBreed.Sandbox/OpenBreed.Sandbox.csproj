@@ -247,8 +247,20 @@
       <Name>OpenBreed.Animation.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj">
-      <Project>{A281E554-E5B2-4198-96F6-F772A552C7D0}</Project>
+      <Project>{84DB1C84-A559-42B4-90E9-868012C8E254}</Project>
       <Name>OpenBreed.Audio.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj">
+      <Project>{a2428638-2ead-44d7-b70e-3936071e0121}</Project>
+      <Name>OpenBreed.Audio.OpenAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj">
+      <Project>{ad9d1ca5-695f-49e8-b25d-fda690cb13cd}</Project>
+      <Name>OpenBreed.Input.Generic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj">
+      <Project>{811C5542-3098-4F6D-B4C1-88BFBEF84930}</Project>
+      <Name>OpenBreed.Input.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Animation\OpenBreed.Wecs.Components.Animation.csproj">
       <Project>{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}</Project>
@@ -274,21 +286,9 @@
       <Project>{ea5c8b57-f636-45fc-b6d4-1344c6764352}</Project>
       <Name>OpenBreed.Wecs.Components.Physics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj">
-      <Project>{82af3d57-a4f4-4339-859a-7e82942b96df}</Project>
-      <Name>OpenBreed.Audio.OpenAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Fsm\OpenBreed.Fsm.csproj">
       <Project>{53D8026C-4C23-4BB7-B75A-03BE53F1F655}</Project>
       <Name>OpenBreed.Fsm</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj">
-      <Project>{4061AE76-DDD9-4FED-ACA3-1859A04F60C0}</Project>
-      <Name>OpenBreed.Input.Generic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj">
-      <Project>{7CD20CF7-1CB8-4351-BDA1-6376C7A1D5E2}</Project>
-      <Name>OpenBreed.Input.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj">
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>

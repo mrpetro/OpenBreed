@@ -78,10 +78,6 @@
       <Project>{95bdf122-fac8-4ac4-b9a8-b549d942e37d}</Project>
       <Name>OpenBreed.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj">
-      <Project>{7CD20CF7-1CB8-4351-BDA1-6376C7A1D5E2}</Project>
-      <Name>OpenBreed.Input.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj">
       <Project>{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}</Project>
       <Name>OpenBreed.Physics.Interface</Name>

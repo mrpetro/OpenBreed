@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core;
-
+﻿
 namespace OpenBreed.Input.Interface
 {
     public interface IInputHandler
