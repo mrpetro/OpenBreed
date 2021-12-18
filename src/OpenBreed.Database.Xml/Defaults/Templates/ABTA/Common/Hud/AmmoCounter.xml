@@ -2,15 +2,14 @@
 <EntityTemplate>
     <Components>
 		<Metadata>
-			<Name>FpsCounter</Name>
+			<Name>AmmoCounter</Name>
 		</Metadata>
 		<Position X="$(posX)" Y="$(posY)" />
 		<Text>
-			<Text>FPS: 0.0</Text>
+			<Text>0</Text>
 			<Offset X="0" Y="0" />
 			<Color R="255" G="255" B="255" A="255" />
-			<FontName>Arial</FontName>
-			<FontSize>10</FontSize>
+			<FontName>StatusBar</FontName>
 			<Order>100</Order>
 		</Text>
     </Components>

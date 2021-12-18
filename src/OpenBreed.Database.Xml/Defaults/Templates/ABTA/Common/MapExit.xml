@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-		<Class>
+		<Metadata>
 			<Name>WorldExit</Name>
 			<Flavor>$(exitId)</Flavor>
-		</Class>
+		</Metadata>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>

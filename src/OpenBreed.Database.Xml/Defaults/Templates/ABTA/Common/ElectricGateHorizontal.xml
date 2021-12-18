@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-		<Class>
+		<Metadata>
 			<Level>$(level)</Level>
 			<Name>ElectricGate</Name>
 			<Flavor>Horizontal</Flavor>
-		</Class>
+		</Metadata>
 		<Timer>
 		</Timer>
 		<!--<Fsm>

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <EntityTemplate>
 	<Components>
-		<Class>
+		<Metadata>
 			<Flavor>$(slopeDir)</Flavor>
-		</Class>
+		</Metadata>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>
