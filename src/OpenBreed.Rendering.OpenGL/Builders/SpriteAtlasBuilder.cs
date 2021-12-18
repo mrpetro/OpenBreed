@@ -21,7 +21,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         #region Private Fields
 
         private readonly ITextureMan textureMan;
-        private SpriteMan spriteMan;
+        private readonly SpriteMan spriteMan;
 
         #endregion Private Fields
 
@@ -123,11 +123,13 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             foreach (var bound in bounds)
             {
                 bound.Translate(offset);
-                var spriteData = new SpriteData();
-                spriteData.U = (int)bound.Left;
-                spriteData.V = (int)bound.Top;
-                spriteData.Width = (int)bound.Width;
-                spriteData.Height = (int)bound.Height;
+                var spriteData = new SpriteData
+                {
+                    U = (int)bound.Left,
+                    V = (int)bound.Top,
+                    Width = (int)bound.Width,
+                    Height = (int)bound.Height
+                };
 
                 spriteData.Vbo = spriteMan.CreateSpriteVertices(spriteData, Texture.Width, Texture.Height);
 

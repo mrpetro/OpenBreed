@@ -62,65 +62,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsCounterPos(fpsCounter, a));
         }
 
-        public void AddLivesCounter(World world, int x, int y)
-        {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\LivesCounter.xml")
-                .SetParameter("posX", x)
-                .SetParameter("posY", y)
-                .Build();
 
-            timer.EnterWorld(world.Id);
-        }
-
-        public void AddDestructTimer(World world, int x, int y)
-        {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\DestructTimer.xml")
-                .SetParameter("posX", x)
-                .SetParameter("posY", y)
-                .Build();
-
-            timer.EnterWorld(world.Id);
-        }
-
-        public void AddKeysCounter(World world, int x, int y)
-        {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\KeysCounter.xml")
-                .SetParameter("posX", x)
-                .SetParameter("posY", y)
-                .Build();
-
-            timer.EnterWorld(world.Id);
-        }
-
-        public void AddAmmoCounter(World world, int x, int y)
-        {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\AmmoCounter.xml")
-                .SetParameter("posX", x)
-                .SetParameter("posY", y)
-                .Build();
-
-            timer.EnterWorld(world.Id);
-        }
-
-        public void AddP1StatusBar(World world)
-        {
-            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml")
-                .SetParameter("posX", -160)
-                .SetParameter("posY", 109)
-                .Build();
-
-            p1StatusBar.EnterWorld(world.Id);
-        }
-
-        public void AddP2StatusBar(World world)
-        {
-            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml")
-                .SetParameter("posX", -160)
-                .SetParameter("posY", -120)
-                .Build();
-
-            p1StatusBar.EnterWorld(world.Id);
-        }
 
         #endregion Public Methods
 

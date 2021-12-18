@@ -32,7 +32,7 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IViewClient viewClient;
         private readonly IEntityMan entityMan;
         private readonly IEntityFactory entityFactory;
-        private readonly HudHelper hudHelper;
+        private readonly VanillaStatusBarHelper hudHelper;
         private readonly CameraHelper cameraHelper;
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Worlds
                                   IViewClient viewClient, 
                                   IEntityMan entityMan,
                                   IEntityFactory entityFactory,
-                                  HudHelper hudHelper, 
+                                  VanillaStatusBarHelper hudHelper, 
                                   CameraHelper cameraHelper, 
                                   IRepositoryProvider repositoryProvider, 
                                   IDataLoaderFactory dataLoaderFactory,
@@ -153,14 +153,17 @@ namespace OpenBreed.Sandbox.Worlds
             hudCamera.EnterWorld(world.Id);
 
             hudHelper.AddP1StatusBar(world);
-            hudHelper.AddP2StatusBar(world);
+            //hudHelper.AddAmmoBar(world, 20, 112);
+            //hudHelper.AddHealthBar(world, -124, 112);
             hudHelper.AddLivesCounter(world, -24, 112);
-            hudHelper.AddLivesCounter(world, -24, -117);
-
             hudHelper.AddAmmoCounter(world, 80, 112);
-            hudHelper.AddAmmoCounter(world, 80, -117);
-
             hudHelper.AddKeysCounter(world, 128, 112);
+
+            hudHelper.AddP2StatusBar(world);
+            //hudHelper.AddAmmoBar(world, 20, -117);
+            //hudHelper.AddHealthBar(world, -124, -117);
+            hudHelper.AddLivesCounter(world, -24, -117);
+            hudHelper.AddAmmoCounter(world, 80, -117);
             hudHelper.AddKeysCounter(world, 128, -117);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();

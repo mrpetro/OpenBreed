@@ -13,8 +13,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #region Private Fields
 
         private readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
-        private int ibo;
-        private List<int> vboList;
+        private readonly int ibo;
+        private readonly List<int> vboList;
 
         #endregion Private Fields
 

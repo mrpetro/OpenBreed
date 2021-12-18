@@ -1,17 +1,8 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Sandbox.Worlds;
-using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Hud
 {
@@ -46,45 +37,86 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         #region Public Methods
 
-        public void AddP1StatusBar(World world)
+        public void AddLivesCounter(World world, int x, int y)
         {
-            var p1StatusBarEntity = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml")
-                .SetParameter("posX", -viewClient.ClientRectangle.Width / 2.0f)
-                .SetParameter("posY", -viewClient.ClientRectangle.Height / 2.0f)
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\LivesCounter.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
                 .Build();
 
-            p1StatusBarEntity.EnterWorld(world.Id);
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddDestructTimer(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\DestructTimer.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddKeysCounter(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\KeysCounter.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddAmmoCounter(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\AmmoCounter.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddAmmoBar(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\AmmoBar.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddHealthBar(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\HealthBar.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddP1StatusBar(World world)
+        {
+            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml")
+                .SetParameter("posX", -160)
+                .SetParameter("posY", 109)
+                .Build();
+
+            p1StatusBar.EnterWorld(world.Id);
+        }
+
+        public void AddP2StatusBar(World world)
+        {
+            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml")
+                .SetParameter("posX", -160)
+                .SetParameter("posY", -120)
+                .Build();
+
+            p1StatusBar.EnterWorld(world.Id);
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private static void UpdateFpsCounterPos(Entity fpsTextEntity, ViewportResizedEventArgs a)
-        {
-            fpsTextEntity.Get<PositionComponent>().Value = new Vector2(-a.Width / 2.0f, -a.Height / 2.0f);
-        }
-
-        public void AddPositionInfo(World world)
-        {
-            var positionInfo = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\PositionInfo.xml")
-                .SetParameter("posX", viewClient.ClientRectangle.Width / 2.0f - 180.0f)
-                .SetParameter("posY", -viewClient.ClientRectangle.Height / 2.0f)
-                .Build();
-
-            positionInfo.EnterWorld(world.Id);
-
-            var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
-
-            //jobsMan.Execute(new JohnPositionTextUpdateJob(entityMan, positionInfo));
-            hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdatePositionInfoPos(positionInfo, a));
-        }
-
-        private static void UpdatePositionInfoPos(Entity fpsTextEntity, ViewportResizedEventArgs a)
-        {
-            fpsTextEntity.Get<PositionComponent>().Value = new Vector2(a.Width / 2.0f - 180.0f, -a.Height / 2.0f);
-        }
-
-        #endregion Private Methods
     }
 }

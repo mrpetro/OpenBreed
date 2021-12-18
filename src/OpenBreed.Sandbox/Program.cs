@@ -140,7 +140,7 @@ namespace OpenBreed.Sandbox
                                                                                 manCollection.GetManager<IViewClient>(),
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
-                                                                                manCollection.GetManager<HudHelper>(),
+                                                                                manCollection.GetManager<VanillaStatusBarHelper>(),
                                                                                 manCollection.GetManager<CameraHelper>(),
                                                                                 manCollection.GetManager<IRepositoryProvider>(),
                                                                                 manCollection.GetManager<IDataLoaderFactory>(),
@@ -166,6 +166,12 @@ namespace OpenBreed.Sandbox
                                                                         manCollection.GetManager<IEntityFactory>()));
 
             manCollection.AddSingleton<HudHelper>(() => new HudHelper(manCollection.GetManager<IEntityFactory>(),
+                                                                      manCollection.GetManager<IEntityMan>(),
+                                                                      manCollection.GetManager<IViewClient>(),
+                                                                      manCollection.GetManager<IJobsMan>(),
+                                                                      manCollection.GetManager<IRenderingMan>()));
+
+            manCollection.AddSingleton<VanillaStatusBarHelper>(() => new VanillaStatusBarHelper(manCollection.GetManager<IEntityFactory>(),
                                                                       manCollection.GetManager<IEntityMan>(),
                                                                       manCollection.GetManager<IViewClient>(),
                                                                       manCollection.GetManager<IJobsMan>(),
@@ -235,7 +241,7 @@ namespace OpenBreed.Sandbox
         private readonly LogConsolePrinter logConsolePrinter;
         //private GameWindow window;
 
-        private string appVersion;
+        private readonly string appVersion;
 
         #endregion Private Fields
 

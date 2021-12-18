@@ -8,8 +8,8 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Wecs.Components.Common.Xml
 {
-    [XmlRoot("Class")]
-    public class XmlClassComponent : XmlComponentTemplate, IClassComponentTemplate
+    [XmlRoot("Metadata")]
+    public class XmlMetadataComponent : XmlComponentTemplate, IMetadataComponentTemplate
     {
         [XmlElement("Level")]
         public string Level { get; set; }

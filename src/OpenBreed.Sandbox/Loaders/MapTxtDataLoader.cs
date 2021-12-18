@@ -38,8 +38,8 @@ namespace OpenBreed.Sandbox.Loaders
         public int Height { get; private set; }
         private char[] gfxLayout;
         private char[] actionLayout;
-        private Dictionary<char, int> actionCodes = new Dictionary<char, int>();
-        private Dictionary<char, int> gfxCodes = new Dictionary<char, int>();
+        private readonly Dictionary<char, int> actionCodes = new Dictionary<char, int>();
+        private readonly Dictionary<char, int> gfxCodes = new Dictionary<char, int>();
 
         public void SetAction(int x, int y, char value)
         {
@@ -111,11 +111,13 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var lines = File.ReadAllLines(entryId);
 
-            var txtMap = new TxtMap();
-            txtMap.PaletteRefs = new string[] { "Palettes.MAP.02.CMAP", "Palettes.MAP.02.ALCM" };
-            txtMap.TileSetRef = "Vanilla/L4";
-            txtMap.ActionSetRef = "Vanilla/L4";
-            txtMap.SpriteSetRefs = new string[] { "Vanilla/L4/A", "Vanilla/L4/B", "Vanilla/Common/Hero/1", "Vanilla/Common/Hero/2" };
+            var txtMap = new TxtMap
+            {
+                PaletteRefs = new string[] { "Palettes.MAP.02.CMAP", "Palettes.MAP.02.ALCM" },
+                TileSetRef = "Vanilla/L4",
+                ActionSetRef = "Vanilla/L4",
+                SpriteSetRefs = new string[] { "Vanilla/L4/A", "Vanilla/L4/B", "Vanilla/Common/Hero/1", "Vanilla/Common/Hero/2" }
+            };
 
             for (int i = 0; i < lines.Length; i++)
             {

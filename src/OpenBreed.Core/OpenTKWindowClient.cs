@@ -11,7 +11,7 @@ namespace OpenBreed.Game
     {
         #region Private Fields
 
-        private GameWindow window;
+        private readonly GameWindow window;
 
         #endregion Private Fields
 

@@ -26,7 +26,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly Dictionary<string, SpriteAtlas> names = new Dictionary<string, SpriteAtlas>();
         private readonly ITextureMan textureMan;
         private readonly ILogger logger;
-        private ISpriteAtlas MissingSpriteAtlas;
 
         #endregion Private Fields
 
@@ -80,7 +79,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             logger.Error($"Unable to find sprite with name '{name}'");
 
-            return MissingSpriteAtlas;
+            return null;
         }
 
         public void Render(int atlasId, int imageId, Vector2 origin, Vector2 pos, float order, Box2 clipBox)

@@ -37,8 +37,10 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         internal float MeasureWidth(Font font, char c)
         {
-            var stringFormat = new StringFormat(StringFormat.GenericTypographic);
-            stringFormat.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+            var stringFormat = new StringFormat(StringFormat.GenericTypographic)
+            {
+                FormatFlags = StringFormatFlags.MeasureTrailingSpaces
+            };
             return gfx.MeasureString(c.ToString(), font, 0, stringFormat).Width;
         }
 

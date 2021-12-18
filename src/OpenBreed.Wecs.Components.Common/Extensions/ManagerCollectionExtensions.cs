@@ -16,7 +16,7 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
         {
             XmlComponentsList.RegisterComponentType<XmlPositionComponent>();
             XmlComponentsList.RegisterComponentType<XmlGridPositionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlClassComponent>();
+            XmlComponentsList.RegisterComponentType<XmlMetadataComponent>();
             XmlComponentsList.RegisterComponentType<XmlThrustComponent>();
             XmlComponentsList.RegisterComponentType<XmlVelocityComponent>();
             XmlComponentsList.RegisterComponentType<XmlTimerComponent>();
@@ -31,7 +31,7 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             manCollection.AddSingleton<VelocityComponentFactory>(() => new VelocityComponentFactory());
             manCollection.AddSingleton<ThrustComponentFactory>(() => new ThrustComponentFactory());
             manCollection.AddSingleton<TimerComponentFactory>(() => new TimerComponentFactory());
-            manCollection.AddSingleton<ClassComponentFactory>(() => new ClassComponentFactory());
+            manCollection.AddSingleton<MetadataComponentFactory>(() => new MetadataComponentFactory());
             manCollection.AddSingleton<AngularPositionComponentFactory>(() => new AngularPositionComponentFactory());
             manCollection.AddSingleton<AngularVelocityComponentFactory>(() => new AngularVelocityComponentFactory());
             manCollection.AddSingleton<AngularThrustComponentFactory>(() => new AngularThrustComponentFactory());
@@ -41,7 +41,7 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             var entityFactory = manCollection.GetManager<IEntityFactory>();
             entityFactory.RegisterComponentFactory<XmlPositionComponent>(manCollection.GetManager<PositionComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlGridPositionComponent>(manCollection.GetManager<GridPositionComponentFactory>());
-            entityFactory.RegisterComponentFactory<XmlClassComponent>(manCollection.GetManager<ClassComponentFactory>());
+            entityFactory.RegisterComponentFactory<XmlMetadataComponent>(manCollection.GetManager<MetadataComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlThrustComponent>(manCollection.GetManager<ThrustComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlVelocityComponent>(manCollection.GetManager<VelocityComponentFactory>());
             entityFactory.RegisterComponentFactory<XmlTimerComponent>(manCollection.GetManager<TimerComponentFactory>());

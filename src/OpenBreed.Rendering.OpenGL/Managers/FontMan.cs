@@ -16,8 +16,8 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly ISpriteMan spriteMan;
         private readonly List<IFont> items = new List<IFont>();
         private readonly Dictionary<string, IFont> aliases = new Dictionary<string, IFont>();
-        private TextMeasurer textMeasurer = new TextMeasurer();
-        private Dictionary<string, FontFromOSAtlas> fonts = new Dictionary<string, FontFromOSAtlas>();
+        private readonly TextMeasurer textMeasurer = new TextMeasurer();
+        private readonly Dictionary<string, FontFromOSAtlas> fonts = new Dictionary<string, FontFromOSAtlas>();
 
         #endregion Private Fields
 

@@ -88,7 +88,7 @@
     <Compile Include="Xml\XmlAngularVelocityComponent.cs" />
     <Compile Include="Xml\XmlAngularThrustComponent.cs" />
     <Compile Include="Xml\XmlAngularPositionComponent.cs" />
-    <Compile Include="Xml\XmlClassComponent.cs" />
+    <Compile Include="Xml\XmlMetadataComponent.cs" />
     <Compile Include="Xml\XmlColor4.cs" />
     <Compile Include="Xml\XmlGridPositionComponent.cs" />
     <Compile Include="Xml\XmlPositionComponent.cs" />

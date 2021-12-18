@@ -94,8 +94,10 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         internal TextComponent(TextComponentBuilder builder)
         {
-            Parts = new List<TextPart>();
-            Parts.Add(new TextPart(builder.FontId, builder.Offset, builder.Color, builder.Text, builder.Order));
+            Parts = new List<TextPart>
+            {
+                new TextPart(builder.FontId, builder.Offset, builder.Color, builder.Text, builder.Order)
+            };
         }
 
         #endregion Internal Constructors
