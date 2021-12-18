@@ -79,11 +79,11 @@
       <Name>OpenBreed.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj">
-      <Project>{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}</Project>
+      <Project>{e25a4385-1f69-4eba-b31c-65f9957c6ed4}</Project>
       <Name>OpenBreed.Physics.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj">
-      <Project>{33b3eca4-715e-475e-b01e-80b6db0876fc}</Project>
+      <Project>{d0b562b0-82c7-4301-b84a-85d807509f71}</Project>
       <Name>OpenBreed.Rendering.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">

@@ -84,7 +84,7 @@
       <Name>OpenBreed.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj">
-      <Project>{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}</Project>
+      <Project>{e25a4385-1f69-4eba-b31c-65f9957c6ed4}</Project>
       <Name>OpenBreed.Physics.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">

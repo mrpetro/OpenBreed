@@ -89,7 +89,7 @@
       <Name>OpenBreed.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj">
-      <Project>{33B3ECA4-715E-475E-B01E-80B6DB0876FC}</Project>
+      <Project>{d0b562b0-82c7-4301-b84a-85d807509f71}</Project>
       <Name>OpenBreed.Rendering.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
