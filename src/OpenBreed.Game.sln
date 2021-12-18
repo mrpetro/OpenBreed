@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 15.0.28307.168
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Sandbox", "OpenBreed.Sandbox\OpenBreed.Sandbox.csproj", "{FB015343-45FD-4482-991D-90F21613E361}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{AC17BDB5-E1D1-4635-A7D5-065BCA642796}"
 	ProjectSection(SolutionItems) = preProject
 		TODO.txt = TODO.txt
@@ -86,19 +84,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Components.R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs", "OpenBreed.Wecs\OpenBreed.Wecs.csproj", "{8BE70A4E-F674-4549-9E15-521D4E112516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Animation", "OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj", "{57CC513F-4F83-4C42-9DF5-A35B99424A7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Animation", "OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj", "{57CC513F-4F83-4C42-9DF5-A35B99424A7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Audio", "OpenBreed.Wecs.Systems.Audio\OpenBreed.Wecs.Systems.Audio.csproj", "{9CF940BF-C697-4F5E-9D06-001A64290E43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Audio", "OpenBreed.Wecs.Systems.Audio\OpenBreed.Wecs.Systems.Audio.csproj", "{9CF940BF-C697-4F5E-9D06-001A64290E43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Control", "OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj", "{3E53B28B-1B59-4A30-A5ED-5C13ECF7F19D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Control", "OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj", "{3E53B28B-1B59-4A30-A5ED-5C13ECF7F19D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Core", "OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj", "{35B3216F-C626-49D3-8534-B9BA9BDDA950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Core", "OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj", "{35B3216F-C626-49D3-8534-B9BA9BDDA950}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Gui", "OpenBreed.Wecs.Systems.Gui\OpenBreed.Wecs.Systems.Gui.csproj", "{5649E69E-0377-4241-9FE3-3260A546CEBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Gui", "OpenBreed.Wecs.Systems.Gui\OpenBreed.Wecs.Systems.Gui.csproj", "{5649E69E-0377-4241-9FE3-3260A546CEBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Physics", "OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj", "{AD862E4F-FF40-463F-8E77-6D150589B221}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Physics", "OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj", "{AD862E4F-FF40-463F-8E77-6D150589B221}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Rendering", "OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj", "{6425BA60-B9D9-4AFF-ADD9-4EEE357020EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Rendering", "OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj", "{6425BA60-B9D9-4AFF-ADD9-4EEE357020EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Sandbox", "OpenBreed.Sandbox\OpenBreed.Sandbox.csproj", "{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,14 +108,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FB015343-45FD-4482-991D-90F21613E361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB015343-45FD-4482-991D-90F21613E361}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB015343-45FD-4482-991D-90F21613E361}.Debug|x64.ActiveCfg = Debug|x64
-		{FB015343-45FD-4482-991D-90F21613E361}.Debug|x64.Build.0 = Debug|x64
-		{FB015343-45FD-4482-991D-90F21613E361}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB015343-45FD-4482-991D-90F21613E361}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB015343-45FD-4482-991D-90F21613E361}.Release|x64.ActiveCfg = Release|x64
-		{FB015343-45FD-4482-991D-90F21613E361}.Release|x64.Build.0 = Release|x64
 		{2F6F29FC-0824-4EF8-BDD8-F209869F1518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F6F29FC-0824-4EF8-BDD8-F209869F1518}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F6F29FC-0824-4EF8-BDD8-F209869F1518}.Debug|x64.ActiveCfg = Debug|x64
@@ -428,6 +420,14 @@ Global
 		{6425BA60-B9D9-4AFF-ADD9-4EEE357020EE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6425BA60-B9D9-4AFF-ADD9-4EEE357020EE}.Release|x64.ActiveCfg = Release|Any CPU
 		{6425BA60-B9D9-4AFF-ADD9-4EEE357020EE}.Release|x64.Build.0 = Release|Any CPU
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|x64.Build.0 = Debug|Any CPU
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|x64.ActiveCfg = Release|Any CPU
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

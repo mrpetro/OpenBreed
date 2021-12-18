@@ -1,425 +1,144 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FB015343-45FD-4482-991D-90F21613E361}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>OpenBreed.Sandbox</RootNamespace>
-    <AssemblyName>OpenBreed.Sandbox</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.2</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.2</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="KeraLua, Version=1.3.1.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\KeraLua.1.3.1\lib\net46\KeraLua.dll</HintPath>
-    </Reference>
-    <Reference Include="NLua, Version=1.6.0.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NLua.1.6.0\lib\net46\NLua.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <None Remove="Content\Maps\demo_1.txt" />
+    <None Remove="Content\Maps\demo_2.txt" />
+    <None Remove="Content\Maps\demo_3.txt" />
+    <None Remove="Content\Maps\hub.txt" />
+    <None Remove="Content\Scripts\start.lua" />
+    <None Remove="Entities\Actor\States\Attacking\IdleState.lua" />
+    <None Remove="Entities\Button\Button.lua" />
+    <None Remove="Entities\Turret\Turret.xml" />
+    <None Remove="Entities\Viewport\DebugHudViewport.xml" />
+    <None Remove="Entities\Viewport\GameHudViewport.xml" />
+    <None Remove="Entities\Viewport\GameViewport.xml" />
+    <None Remove="Entities\Viewport\TextViewport.xml" />
+    <None Remove="RunABTA.bat" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\Shared\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Components\EquipmentComponent.cs" />
-    <Compile Include="Components\InventoryComponent.cs" />
-    <Compile Include="Entities\Builders\MapCodesL1.cs" />
-    <Compile Include="Entities\Builders\MapCodesL3.cs" />
-    <Compile Include="Entities\Builders\MapCodesLD.cs" />
-    <Compile Include="Entities\Builders\MapCodesL8.cs" />
-    <Compile Include="Entities\Builders\MapCodesL7.cs" />
-    <Compile Include="Entities\Builders\MapCodesL6.cs" />
-    <Compile Include="Entities\Builders\MapCodesL5.cs" />
-    <Compile Include="Entities\Builders\MapCodesL4.cs" />
-    <Compile Include="Entities\ElectricGateHelper.cs" />
-    <Compile Include="Entities\FixtureTypes.cs" />
-    <Compile Include="Entities\EnvironmentHelper.cs" />
-    <Compile Include="Entities\GenericCellHelper.cs" />
-    <Compile Include="Entities\Hud\VanillaStatusBarHelper.cs" />
-    <Compile Include="Entities\Hud\HudHelper.cs" />
-    <Compile Include="Entities\Pickable\ManagerCollectionExtensions.cs" />
-    <Compile Include="Extensions\EntityExtensions.cs" />
-    <Compile Include="Loaders\AnimatedCellLoader.cs" />
-    <Compile Include="Loaders\ElectricGateEntityLoader.cs" />
-    <Compile Include="Loaders\KeycardEntityLoader.cs" />
-    <Compile Include="Loaders\MapTxtDataLoader.cs" />
-    <Compile Include="Loaders\SmartCardEntityLoader.cs" />
-    <Compile Include="Loaders\LevelExitCellLoader.cs" />
-    <Compile Include="Loaders\UnknownCellEntityLoader.cs" />
-    <Compile Include="Loaders\GenericItemEntityLoader.cs" />
-    <Compile Include="Loaders\DoorEntityLoader.cs" />
-    <Compile Include="Loaders\LevelEntryCellLoader.cs" />
-    <Compile Include="Loaders\GenericCellEntityLoader.cs" />
-    <Compile Include="Loaders\PaletteDataLoader.cs" />
-    <Compile Include="Loaders\TeleportCellEntityLoader.cs" />
-    <Compile Include="Commands\MoveToCommand.cs" />
-    <None Include="Content\Graphics\Cursors.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Graphics\TurretSpriteSet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Compile Include="Entities\Actor\ManagerCollectionExtensions.cs" />
-    <Compile Include="Entities\Actor\States\Attacking\AttackingState.cs" />
-    <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
-    <Compile Include="Entities\Actor\States\Attacking\CooldownState.cs" />
-    <Compile Include="Entities\Actor\States\Attacking\ShootingState.cs" />
-    <Compile Include="Entities\Actor\States\Movement\MovementState.cs" />
-    <Compile Include="Entities\Actor\States\Movement\WalkingState.cs" />
-    <Compile Include="Entities\Actor\States\Movement\StandingState.cs" />
-    <Compile Include="Entities\Actor\ActorHelper.cs" />
-    <Compile Include="Entities\Actor\States\Rotation\RotationState.cs" />
-    <Compile Include="Entities\Actor\States\Rotation\IdleState.cs" />
-    <Compile Include="Entities\Actor\States\Rotation\RotatingState.cs" />
-    <Compile Include="Entities\Builders\MapMapper.cs" />
-    <Compile Include="Entities\Button\ButtonHelper.cs" />
-    <Compile Include="Entities\Button\ButtonState.cs" />
-    <Compile Include="Entities\Button\ManagerCollectionExtensions.cs" />
-    <Compile Include="Entities\Button\States\PressedState.cs" />
-    <Compile Include="Entities\Button\States\IdleState.cs" />
-    <Compile Include="Entities\CameraHelper.cs" />
-    <Compile Include="Entities\ColliderTypes.cs" />
-    <Compile Include="Entities\CursorCoords\CursorCoordsHelper.cs" />
-    <Compile Include="Entities\Door\DoorHelper.cs" />
-    <Compile Include="Entities\Door\ManagerCollectionExtensions.cs" />
-    <Compile Include="Entities\Door\States\FunctioningState.cs" />
-    <Compile Include="Entities\Door\States\OpenedAwaitClose.cs" />
-    <Compile Include="Entities\Door\States\OpenedState.cs" />
-    <Compile Include="Entities\Door\States\ClosedState.cs" />
-    <Compile Include="Entities\Door\States\OpeningState.cs" />
-    <Compile Include="Entities\Door\States\ClosingState.cs" />
-    <Compile Include="Entities\Pickable\PickableHelper.cs" />
-    <Compile Include="Entities\Pickable\States\FunctioningState.cs" />
-    <Compile Include="Entities\Pickable\States\LyingState.cs" />
-    <Compile Include="Entities\Pickable\States\PickedState.cs" />
-    <Compile Include="Entities\Projectile\ManagerCollectionExtensions.cs" />
-    <Compile Include="Entities\Projectile\States\AttackingState.cs" />
-    <Compile Include="Entities\TeleportHelper.cs" />
-    <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
-    <Compile Include="Entities\Projectile\States\FiredState.cs" />
-    <Compile Include="Entities\Turret\ManagerCollectionExtensions.cs" />
-    <Compile Include="Entities\Turret\TurretHelper.cs" />
-    <Compile Include="Entities\EntriesHelper.cs" />
-    <Compile Include="Extensions\SystemCollectionExtensions.cs" />
-    <Compile Include="Helpers\AnimHelper.cs" />
-    <Compile Include="Entities\Viewport\ViewportCreator.cs" />
-    <Compile Include="Jobs\JohnPositionTextUpdateJob.cs" />
-    <Compile Include="Jobs\FpsTextUpdateJob.cs" />
-    <Compile Include="Managers\ItemsMan.cs" />
-    <Compile Include="Entities\ItemTypes.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpriteComponentAnimator.cs" />
-    <Compile Include="Wecs\Components\ItemComponent.cs" />
-    <Compile Include="Wecs\Components\UnknownCodeComponent.cs" />
-    <Compile Include="Wecs\Systems\GroupMapCellDisplaySystem.cs" />
-    <Compile Include="Wecs\Systems\UnknownMapCellDisplaySystem.cs" />
-    <Compile Include="Worlds\DebugHudWorldHelper.cs" />
-    <Compile Include="Worlds\GameHudWorldHelper.cs" />
-    <Compile Include="Loaders\MapLegacyDataLoader.cs" />
-    <Compile Include="Worlds\MenuWorldHelper.cs" />
-    <Compile Include="Worlds\ScreenWorldHelper.cs" />
-    <Content Include="Entities\Viewport\GameHudViewport.xml">
+    <Content Include="Content\Maps\demo_1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="RunABTA.bat">
+    <Content Include="Content\Maps\demo_2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Content Include="Content\Maps\demo_3.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\hub.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Scripts\start.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Actor\States\Attacking\IdleState.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\Turret\Turret.xml">
+    <Content Include="Entities\Button\Button.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\Viewport\TextViewport.xml">
+    <Content Include="Entities\Turret\Turret.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Viewport\DebugHudViewport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Entities\Viewport\GameHudViewport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Entities\Viewport\GameViewport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Entities\Button\Button.lua">
+    <Content Include="Entities\Viewport\TextViewport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="OpenTK.dll.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
-      <Project>{2f6f29fc-0824-4ef8-bdd8-f209869f1518}</Project>
-      <Name>OpenBreed.Common.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
-      <Project>{4f85277e-6eb4-4b3c-87db-2df40be46224}</Project>
-      <Name>OpenBreed.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
-      <Project>{D80521CC-7E57-47A9-8D08-BDEC78DCD480}</Project>
-      <Name>OpenBreed.Database.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj">
-      <Project>{fcbe0182-eb0c-49d0-8ce4-438f9a47e3b6}</Project>
-      <Name>OpenBreed.Database.Xml</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj">
-      <Project>{2bdd055c-cc15-4bf2-9af2-4690a5c1c296}</Project>
-      <Name>OpenBreed.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj">
-      <Project>{85bd3195-0896-403b-9b7a-220a4d2aa531}</Project>
-      <Name>OpenBreed.Animation.Generic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Animation.Interface\OpenBreed.Animation.Interface.csproj">
-      <Project>{1E092B4A-9654-4DF8-937B-64CD9E72C810}</Project>
-      <Name>OpenBreed.Animation.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj">
-      <Project>{84DB1C84-A559-42B4-90E9-868012C8E254}</Project>
-      <Name>OpenBreed.Audio.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj">
-      <Project>{a2428638-2ead-44d7-b70e-3936071e0121}</Project>
-      <Name>OpenBreed.Audio.OpenAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
-      <Project>{ebbf3deb-2923-4710-858a-e523ca752909}</Project>
-      <Name>OpenBreed.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Fsm\OpenBreed.Fsm.csproj">
-      <Project>{e5557e57-295e-4709-be7a-b7fe9898610b}</Project>
-      <Name>OpenBreed.Fsm</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj">
-      <Project>{ad9d1ca5-695f-49e8-b25d-fda690cb13cd}</Project>
-      <Name>OpenBreed.Input.Generic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj">
-      <Project>{811C5542-3098-4F6D-B4C1-88BFBEF84930}</Project>
-      <Name>OpenBreed.Input.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj">
-      <Project>{88eb7b11-fc79-4138-87e2-6e4dc14b1980}</Project>
-      <Name>OpenBreed.Physics.Generic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj">
-      <Project>{e25a4385-1f69-4eba-b31c-65f9957c6ed4}</Project>
-      <Name>OpenBreed.Physics.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj">
-      <Project>{d0b562b0-82c7-4301-b84a-85d807509f71}</Project>
-      <Name>OpenBreed.Rendering.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj">
-      <Project>{e10454d7-1e57-45a8-bc47-80f59173b6dc}</Project>
-      <Name>OpenBreed.Rendering.OpenGL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Scripting.Interface\OpenBreed.Scripting.Interface.csproj">
-      <Project>{60e7fcdb-4709-49a6-97bc-cfc333a7a082}</Project>
-      <Name>OpenBreed.Scripting.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Scripting.Lua\OpenBreed.Scripting.Lua.csproj">
-      <Project>{a0fc96d9-6b0b-4444-99ec-6cae2e01b70d}</Project>
-      <Name>OpenBreed.Scripting.Lua</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Components.Animation\OpenBreed.Wecs.Components.Animation.csproj">
-      <Project>{4f567f27-8a32-42cb-80a4-13d3cf833370}</Project>
-      <Name>OpenBreed.Wecs.Components.Animation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Components.Audio\OpenBreed.Wecs.Components.Audio.csproj">
-      <Project>{86e2fb0f-6976-4ece-a915-41a2063b98f0}</Project>
-      <Name>OpenBreed.Wecs.Components.Audio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
-      <Project>{5f4796f9-abf5-4253-89c6-5f4c71dfadd3}</Project>
-      <Name>OpenBreed.Wecs.Components.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Components.Control\OpenBreed.Wecs.Components.Control.csproj">
-      <Project>{b017be8b-3452-4c30-b786-1d2e4f70c153}</Project>
-      <Name>OpenBreed.Wecs.Components.Control</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Components.Gui\OpenBreed.Wecs.Components.Gui.csproj">
-      <Project>{54a28d47-7759-44b6-bc8a-c77455b6a5c1}</Project>
-      <Name>OpenBreed.Wecs.Components.Gui</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Components.Physics\OpenBreed.Wecs.Components.Physics.csproj">
-      <Project>{4be17846-cb1e-4bba-aad3-67cff8b764d5}</Project>
-      <Name>OpenBreed.Wecs.Components.Physics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Components.Rendering\OpenBreed.Wecs.Components.Rendering.csproj">
-      <Project>{559839d4-c02b-4e7b-9d06-a8905d3f5eed}</Project>
-      <Name>OpenBreed.Wecs.Components.Rendering</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj">
-      <Project>{57cc513f-4f83-4c42-9df5-a35b99424a7c}</Project>
-      <Name>OpenBreed.Wecs.Systems.Animation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Audio\OpenBreed.Wecs.Systems.Audio.csproj">
-      <Project>{9cf940bf-c697-4f5e-9d06-001a64290e43}</Project>
-      <Name>OpenBreed.Wecs.Systems.Audio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj">
-      <Project>{3e53b28b-1b59-4a30-a5ed-5c13ecf7f19d}</Project>
-      <Name>OpenBreed.Wecs.Systems.Control</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj">
-      <Project>{35b3216f-c626-49d3-8534-b9ba9bdda950}</Project>
-      <Name>OpenBreed.Wecs.Systems.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Gui\OpenBreed.Wecs.Systems.Gui.csproj">
-      <Project>{5649e69e-0377-4241-9fe3-3260a546cebf}</Project>
-      <Name>OpenBreed.Wecs.Systems.Gui</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj">
-      <Project>{ad862e4f-ff40-463f-8e77-6d150589b221}</Project>
-      <Name>OpenBreed.Wecs.Systems.Physics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj">
-      <Project>{6425ba60-b9d9-4aff-add9-4eee357020ee}</Project>
-      <Name>OpenBreed.Wecs.Systems.Rendering</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
-      <Project>{8be70a4e-f674-4549-9e15-521d4e112516}</Project>
-      <Name>OpenBreed.Wecs</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Graphics\TexTest24bit.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Graphics\TexTest32bit.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Graphics\TexTest4bitIndexed.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Graphics\TexTest8bitIndexed.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Graphics\TileAtlasTest32bit.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Graphics\ArrowSpriteSet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Graphics\DoorSpriteSet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Maps\demo_3.txt">
+    <Content Include="RunABTA.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Maps\demo_2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Maps\demo_1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Maps\hub.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Content\Graphics\TeleportSpriteSet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Graphics\LaserSpriteSet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
+
   <ItemGroup>
-    <Folder Include="Content\Sounds\" />
-    <Folder Include="Entities\ElectricGate\" />
+    <Folder Include="Content\sounds\" />
+    <Folder Include="Entities\electricgate\" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\packages\KeraLua.1.3.1\build\net46\KeraLua.targets" Condition="Exists('..\..\packages\KeraLua.1.3.1\build\net46\KeraLua.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\KeraLua.1.3.1\build\net46\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\KeraLua.1.3.1\build\net46\KeraLua.targets'))" />
-  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj" />
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj" />
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj" />
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj" />
+    <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj" />
+    <ProjectReference Include="..\OpenBreed.Animation.Interface\OpenBreed.Animation.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj" />
+    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj" />
+    <ProjectReference Include="..\OpenBreed.Fsm\OpenBreed.Fsm.csproj" />
+    <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj" />
+    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj" />
+    <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj" />
+    <ProjectReference Include="..\OpenBreed.Scripting.Interface\OpenBreed.Scripting.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Scripting.Lua\OpenBreed.Scripting.Lua.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Animation\OpenBreed.Wecs.Components.Animation.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Audio\OpenBreed.Wecs.Components.Audio.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Control\OpenBreed.Wecs.Components.Control.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Gui\OpenBreed.Wecs.Components.Gui.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Physics\OpenBreed.Wecs.Components.Physics.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Rendering\OpenBreed.Wecs.Components.Rendering.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Audio\OpenBreed.Wecs.Systems.Audio.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Gui\OpenBreed.Wecs.Systems.Gui.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Content\Graphics\ArrowSpriteSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\Cursors.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\DoorSpriteSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\LaserSpriteSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\TeleportSpriteSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\TexTest24bit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\TexTest32bit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\TexTest4bitIndexed.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\TexTest8bitIndexed.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\TileAtlasTest32bit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Graphics\TurretSpriteSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
