@@ -88,7 +88,7 @@ namespace OpenBreed.Wecs.Entities
             if (components.TryGetValue(typeof(TComponent), out IEntityComponent component))
                 return (TComponent)component;
             else
-                return default(TComponent);
+                return default;
         }
 
         /// <summary>

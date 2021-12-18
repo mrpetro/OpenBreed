@@ -8,13 +8,13 @@ using System;
 
 namespace OpenBreed.Animation.Generic.Data
 {
-    internal class AnimationClipDataLoader : IAnimationClipDataLoader
+    internal class AnimationClipDataLoader<TObject> : IAnimationClipDataLoader<TObject>
     {
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
-        private readonly IClipMan clipMan;
-        private readonly IFrameUpdaterMan frameUpdaterMan;
+        private readonly IClipMan<TObject> clipMan;
+        private readonly IFrameUpdaterMan<TObject> frameUpdaterMan;
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -22,8 +22,8 @@ namespace OpenBreed.Animation.Generic.Data
         #region Public Constructors
 
         public AnimationClipDataLoader(IRepositoryProvider repositoryProvider,
-                                   IClipMan clipMan,
-                                   IFrameUpdaterMan frameUpdaterMan,
+                                   IClipMan<TObject> clipMan,
+                                   IFrameUpdaterMan<TObject> frameUpdaterMan,
                                    ILogger logger)
         {
             this.repositoryProvider = repositoryProvider;
@@ -38,7 +38,7 @@ namespace OpenBreed.Animation.Generic.Data
 
         public object LoadObject(string entryId) => Load(entryId);
 
-        public IClip Load(string clipName, params object[] args)
+        public IClip<TObject> Load(string clipName, params object[] args)
         {
             var clip = clipMan.GetByName(clipName);
 
@@ -80,7 +80,7 @@ namespace OpenBreed.Animation.Generic.Data
             }
         }
 
-        private void LoadTrack<TValue>(IClip clip, IDbAnimationTrack<TValue> entryTrack)
+        private void LoadTrack<TValue>(IClip<TObject> clip, IDbAnimationTrack<TValue> entryTrack)
         {
             var updater = frameUpdaterMan.GetByName<TValue>(entryTrack.Controller);
             var interpolation = GetFrameInterpolation(entryTrack.Interpolation);
@@ -90,7 +90,7 @@ namespace OpenBreed.Animation.Generic.Data
                 track.AddFrame(frame.Value, frame.Time);
         }
 
-        private void LoadTrack(IClip animation, IDbAnimationTrack entryTrack)
+        private void LoadTrack(IClip<TObject> animation, IDbAnimationTrack entryTrack)
         {
             if (entryTrack is IDbAnimationTrack<int>)
                 LoadTrack<int>(animation, (IDbAnimationTrack<int>)entryTrack);

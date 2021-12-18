@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
             var systemFactory = manCollection.GetManager<ISystemFactory>();
 
             systemFactory.Register(() => new AnimatorSystem(manCollection.GetManager<IEntityMan>(),
-                                                             manCollection.GetManager<IClipMan>(),
+                                                             manCollection.GetManager<IClipMan<Entity>>(),
                                                              manCollection.GetManager<ILogger>()));
         }
 

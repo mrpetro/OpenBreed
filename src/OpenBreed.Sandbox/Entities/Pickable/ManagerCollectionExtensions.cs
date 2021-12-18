@@ -5,6 +5,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Pickable.States;
+using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
             var fsmMan = managerCollection.GetManager<IFsmMan>();
             var collisionMan = managerCollection.GetManager<ICollisionMan>();
             var stampMan = managerCollection.GetManager<IStampMan>();
-            var clipMan = managerCollection.GetManager<IClipMan>();
+            var clipMan = managerCollection.GetManager<IClipMan<Entity>>();
             var soundMan = managerCollection.GetManager<ISoundMan>();
 
             var fsm = managerCollection.GetManager<IFsmMan>().Create<FunctioningState, FunctioningImpulse>("Pickable.Functioning");

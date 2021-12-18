@@ -24,13 +24,13 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         private const string ANIM_PREFIX = "Vanilla/Common";
         private readonly IFsmMan fsmMan;
-        private readonly IClipMan clipMan;
+        private readonly IClipMan<Entity> clipMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WalkingState(IFsmMan fsmMan, IClipMan clipMan)
+        public WalkingState(IFsmMan fsmMan, IClipMan<Entity> clipMan)
         {
             this.fsmMan = fsmMan;
             this.clipMan = clipMan;

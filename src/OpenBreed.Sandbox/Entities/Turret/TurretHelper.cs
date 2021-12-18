@@ -17,7 +17,7 @@ namespace OpenBreed.Sandbox.Entities.Turret
 {
     public class TurretHelper
     {
-        public TurretHelper(IClipMan clipMan, IEntityFactory entityFactory)
+        public TurretHelper(IClipMan<Entity> clipMan, IEntityFactory entityFactory)
         {
             this.clipMan = clipMan;
             this.entityFactory = entityFactory;
@@ -26,7 +26,7 @@ namespace OpenBreed.Sandbox.Entities.Turret
         #region Public Fields
 
         public const string SPRITE_TURRET = "Atlases/Sprites/Turret";
-        private readonly IClipMan clipMan;
+        private readonly IClipMan<Entity> clipMan;
         private readonly IEntityFactory entityFactory;
 
         public void CreateAnimations()

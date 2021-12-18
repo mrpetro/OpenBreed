@@ -1,9 +1,8 @@
-﻿using OpenBreed.Wecs.Entities;
-using System;
+﻿using System;
 
 namespace OpenBreed.Animation.Interface
 {
-    public delegate void FrameUpdater<TValue>(Entity entity, TValue value);
+    public delegate void FrameUpdater<TObject, TValue>(TObject obj, TValue value);
 
     /// <summary>
     /// Transition methods between frames
@@ -24,7 +23,7 @@ namespace OpenBreed.Animation.Interface
     /// <summary>
     /// Animation clip which represents collection of tracks
     /// </summary>
-    public interface IClip
+    public interface IClip<TObject>
     {
         #region Public Properties
 
@@ -36,23 +35,23 @@ namespace OpenBreed.Animation.Interface
 
         #region Public Methods
 
-        bool UpdateWithNextFrame(Entity entity, float time);
+        bool UpdateWithNextFrame(TObject obj, float time);
          
-        ITrack<TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue);
+        ITrack<TObject, TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TObject, TValue> frameUpdater, TValue initialValue);
 
         #endregion Public Methods
     }
 
-    public interface ITrack
+    public interface ITrack<TObject>
     {
         #region Public Methods
 
-        bool UpdateWithNextFrame(Entity entity, float time);
+        bool UpdateWithNextFrame(TObject obj, float time);
 
         #endregion Public Methods
     }
 
-    public interface ITrack<TValue> : ITrack
+    public interface ITrack<TObject, TValue> : ITrack<TObject>
     {
         #region Public Methods
 

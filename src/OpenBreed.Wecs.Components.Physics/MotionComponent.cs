@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Components.Physics
         #region Private Fields
 
         private float speedPercent = 1.0f;
-        private float MAX_SPEED = 120.0f;
+        private readonly float MAX_SPEED = 120.0f;
 
         #endregion Private Fields
 

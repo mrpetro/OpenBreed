@@ -43,7 +43,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
             GL.BlendColor(Color4.Black);
-            //GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
@@ -87,8 +86,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
             for (int i = 0; i < tcp.Parts.Count; i++)
             {
                 var part = tcp.Parts[i];
-                GL.Translate(part.Offset.X, part.Offset.Y, 0.0f);
-                fontMan.GetById(part.FontId).Draw(part.Text);
+
+                fontMan.Render(part.FontId, part.Text, part.Offset, 100, clipBox);
+
             }
 
             GL.PopMatrix();

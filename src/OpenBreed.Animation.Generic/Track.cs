@@ -1,25 +1,24 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Core;
-using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Animation.Generic
 {
-    internal class Track<TValue> : ITrack<TValue>
+    internal class Track<TObject, TValue> : ITrack<TObject, TValue>
     {
         #region Private Fields
 
         private SortedDictionary<float, TValue> frames = new SortedDictionary<float, TValue>();
         private readonly FrameInterpolation interpolation;
-        private FrameUpdater<TValue> frameUpdater;
+        private FrameUpdater<TObject, TValue> frameUpdater;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal Track(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue)
+        internal Track(FrameInterpolation interpolation, FrameUpdater<TObject, TValue> frameUpdater, TValue initialValue)
         {
             this.interpolation = interpolation;
             this.frameUpdater = frameUpdater;
@@ -30,7 +29,7 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Methods
 
-        public bool UpdateWithNextFrame(Entity entity, float time)
+        public bool UpdateWithNextFrame(TObject obj, float time)
         {
             //T cf = default(T);
 
@@ -43,7 +42,7 @@ namespace OpenBreed.Animation.Generic
 
             //if (update)
             //{
-            frameUpdater.Invoke(entity, nf);
+            frameUpdater.Invoke(obj, nf);
             //    animator.Frame = nf;
             //}
 

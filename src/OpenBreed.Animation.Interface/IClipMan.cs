@@ -1,15 +1,15 @@
 ﻿
 namespace OpenBreed.Animation.Interface
 {
-    public interface IClipMan
+    public interface IClipMan<TObject>
     {
         #region Public Methods
 
-        IClip CreateClip(string name, float length);
+        IClip<TObject> CreateClip(string name, float length);
 
-        IClip GetById(int id);
+        IClip<TObject> GetById(int id);
 
-        IClip GetByName(string name);
+        IClip<TObject> GetByName(string name);
 
         void UnloadAll();
 

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OpenBreed.Sandbox": {
+      "commandName": "Project",
+      "commandLineArgs": "\"Defaults\\GameDatabase.ABTA.EPF.xml\" \"D:\\Games\\Alien Breed - Tower Assault (DOSBOX)\\AlienBrT\""
+    }
+  }
+}

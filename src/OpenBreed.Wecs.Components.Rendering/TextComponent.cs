@@ -94,8 +94,10 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         internal TextComponent(TextComponentBuilder builder)
         {
-            Parts = new List<TextPart>();
-            Parts.Add(new TextPart(builder.FontId, builder.Offset, builder.Color, builder.Text, builder.Order));
+            Parts = new List<TextPart>
+            {
+                new TextPart(builder.FontId, builder.Offset, builder.Color, builder.Text, builder.Order)
+            };
         }
 
         #endregion Internal Constructors
@@ -192,8 +194,16 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetFont(string fontName, int fontSize)
         {
-            var font = fontMan.Create(fontName, fontSize);
-            SetFontById(font.Id);
+            if (fontSize == 0)
+            {
+                var font = fontMan.GetGfxFont(fontName);
+                SetFontById(font.Id);
+            }
+            else
+            {
+                var font = fontMan.GetOSFont(fontName, fontSize);
+                SetFontById(font.Id);
+            }
         }
 
         public void SetOffset(Vector2 offset)

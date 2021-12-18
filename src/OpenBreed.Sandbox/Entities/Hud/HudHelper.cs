@@ -11,6 +11,7 @@ using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Hud
@@ -61,25 +62,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsCounterPos(fpsCounter, a));
         }
 
-        public void AddP1StatusBar(World world)
-        {
-            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml")
-                .SetParameter("posX", -160)
-                .SetParameter("posY", 109)
-                .Build();
 
-            p1StatusBar.EnterWorld(world.Id);
-        }
-
-        public void AddP2StatusBar(World world)
-        {
-            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml")
-                .SetParameter("posX", -160)
-                .SetParameter("posY", -120)
-                .Build();
-
-            p1StatusBar.EnterWorld(world.Id);
-        }
 
         #endregion Public Methods
 

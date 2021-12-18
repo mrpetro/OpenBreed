@@ -253,7 +253,7 @@ namespace OpenBreed.Sandbox.Extensions
             {
                 var dataLoaderFactory = new DataLoaderFactory();
 
-                dataLoaderFactory.SetupAnimationDataLoader(managerCollection);
+                dataLoaderFactory.SetupAnimationDataLoader<Entity>(managerCollection);
                 dataLoaderFactory.SetupMapLegacyDataLoader(managerCollection);
                 dataLoaderFactory.SetupTileSetDataLoader(managerCollection);
                 dataLoaderFactory.SetupTileStampDataLoader(managerCollection);
@@ -266,7 +266,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupSpriteComponentAnimator(this IManagerCollection managerCollection)
         {
-            new SpriteComponentAnimator(managerCollection.GetManager<IFrameUpdaterMan>(),
+            new SpriteComponentAnimator(managerCollection.GetManager<IFrameUpdaterMan<Entity>>(),
                                         managerCollection.GetManager<ISpriteMan>());
         }
 

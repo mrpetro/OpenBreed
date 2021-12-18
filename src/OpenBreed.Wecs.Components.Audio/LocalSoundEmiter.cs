@@ -1,5 +1,4 @@
-﻿using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Components;
 using System;
 using System.Linq;
 

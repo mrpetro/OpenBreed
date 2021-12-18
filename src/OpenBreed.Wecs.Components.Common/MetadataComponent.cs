@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Wecs.Components.Common
 {
-    public interface IClassComponentTemplate : IComponentTemplate
+    public interface IMetadataComponentTemplate : IComponentTemplate
     {
         #region Public Properties
 
@@ -33,11 +33,11 @@
         #endregion Public Properties
     }
 
-    public sealed class ClassComponentFactory : ComponentFactoryBase<IClassComponentTemplate>
+    public sealed class MetadataComponentFactory : ComponentFactoryBase<IMetadataComponentTemplate>
     {
         #region Internal Constructors
 
-        internal ClassComponentFactory()
+        internal MetadataComponentFactory()
         {
         }
 
@@ -45,7 +45,7 @@
 
         #region Protected Methods
 
-        protected override IEntityComponent Create(IClassComponentTemplate template)
+        protected override IEntityComponent Create(IMetadataComponentTemplate template)
         {
             return new MetadataComponent(template.Level, template.Name, template.Flavor);
         }

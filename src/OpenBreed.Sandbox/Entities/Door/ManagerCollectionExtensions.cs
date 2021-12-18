@@ -7,6 +7,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Components.States;
 using OpenBreed.Sandbox.Entities.Door.States;
+using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var fsmMan = managerCollection.GetManager<IFsmMan>();
             var collisionMan = managerCollection.GetManager<ICollisionMan>();
             var stampMan = managerCollection.GetManager<IStampMan>();
-            var clipMan = managerCollection.GetManager<IClipMan>();
+            var clipMan = managerCollection.GetManager<IClipMan<Entity>>();
             var soundMan = managerCollection.GetManager<ISoundMan>();
 
             var fsm = managerCollection.GetManager<IFsmMan>().Create<FunctioningState, FunctioningImpulse>("Door.Functioning");

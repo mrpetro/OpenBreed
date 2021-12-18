@@ -20,7 +20,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         #region Private Fields
 
         private readonly ITextureMan textureMan;
-        private TileMan tileMan;
+        private readonly TileMan tileMan;
 
         #endregion Private Fields
 
@@ -142,9 +142,11 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             foreach (var bound in bounds)
             {
                 bound.Translate(offset);
-                var tileData = new TileData();
-                tileData.U = (int)bound.Left;
-                tileData.V = (int)bound.Top;
+                var tileData = new TileData
+                {
+                    U = (int)bound.Left,
+                    V = (int)bound.Top
+                };
 
                 tileData.Vbo = tileMan.CreateTileVertices(tileData, TileSize, Texture.Width, Texture.Height);
 

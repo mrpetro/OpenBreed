@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Input.Interface;
-using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Entities;
 

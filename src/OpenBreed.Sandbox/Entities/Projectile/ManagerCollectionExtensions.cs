@@ -3,6 +3,7 @@ using OpenBreed.Common;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Sandbox.Entities.Projectile.States;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {
@@ -13,7 +14,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         public static void SetupProjectileStates(this IManagerCollection managerCollection)
         {
             var fsmMan = managerCollection.GetManager<IFsmMan>();
-            var clipMan = managerCollection.GetManager<IClipMan>();
+            var clipMan = managerCollection.GetManager<IClipMan<Entity>>();
 
             var stateMachine = fsmMan.Create<AttackingState, AttackingImpulse>("Projectile");
             stateMachine.AddState(new FiredState("Animations/Laser/Fired/", clipMan));

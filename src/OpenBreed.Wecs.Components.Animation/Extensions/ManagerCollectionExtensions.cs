@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Components.Animation.Extensions
 
             var builderFactory = manCollection.GetManager<IBuilderFactory>();
 
-            builderFactory.Register<AnimationComponentBuilder>(() => new AnimationComponentBuilder(manCollection.GetManager<IClipMan>()));
+            builderFactory.Register<AnimationComponentBuilder>(() => new AnimationComponentBuilder(manCollection.GetManager<IClipMan<Entity>>()));
 
             manCollection.AddSingleton<AnimationComponentFactory>(() => new AnimationComponentFactory(builderFactory));
 
