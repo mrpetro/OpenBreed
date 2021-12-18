@@ -11,8 +11,8 @@ namespace OpenBreed.Core.Managers
     {
         #region Private Fields
 
-        private readonly List<IJob> running = new();
-        private readonly List<IJob> completed = new();
+        private readonly List<IJob> running = new List<IJob>();
+        private readonly List<IJob> completed = new List<IJob>();
 
         #endregion Private Fields
 

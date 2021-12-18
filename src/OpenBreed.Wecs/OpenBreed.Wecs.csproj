@@ -123,11 +123,11 @@
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
-      <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
+      <Project>{EBBF3DEB-2923-4710-858A-E523CA752909}</Project>
       <Name>OpenBreed.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Scripting.Interface\OpenBreed.Scripting.Interface.csproj">
-      <Project>{937DDE8D-E618-4620-BEEE-A834DA85FA97}</Project>
+      <Project>{60E7FCDB-4709-49A6-97BC-CFC333A7A082}</Project>
       <Name>OpenBreed.Scripting.Interface</Name>
     </ProjectReference>
   </ItemGroup>
