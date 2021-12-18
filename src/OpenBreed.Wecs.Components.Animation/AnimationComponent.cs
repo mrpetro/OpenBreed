@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
+using OpenBreed.Wecs.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -98,13 +99,13 @@ namespace OpenBreed.Wecs.Components.Animation
 
         #region Private Fields
 
-        private readonly IClipMan clipMan;
+        private readonly IClipMan<Entity> clipMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationComponentBuilder(IClipMan clipMan)
+        internal AnimationComponentBuilder(IClipMan<Entity> clipMan)
         {
             this.clipMan = clipMan;
         }
@@ -142,13 +143,13 @@ namespace OpenBreed.Wecs.Components.Animation
 
         #region Private Fields
 
-        private readonly IClipMan clipMan;
+        private readonly IClipMan<Entity> clipMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationStateBuilder(IClipMan clipMan)
+        internal AnimationStateBuilder(IClipMan<Entity> clipMan)
         {
             this.clipMan = clipMan;
         }

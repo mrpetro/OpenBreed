@@ -23,13 +23,13 @@ namespace OpenBreed.Sandbox.Components.States
 
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
-        private readonly IClipMan clipMan;
+        private readonly IClipMan<Entity> clipMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosingState(IFsmMan fsmMan, IStampMan stampMan, IClipMan clipMan)
+        public ClosingState(IFsmMan fsmMan, IStampMan stampMan, IClipMan<Entity> clipMan)
         {
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;

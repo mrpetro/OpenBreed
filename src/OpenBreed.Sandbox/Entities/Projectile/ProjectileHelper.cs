@@ -17,7 +17,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
     {
         #region Private Fields
 
-        private readonly IClipMan clipMan;
+        private readonly IClipMan<Entity> clipMan;
 
         private readonly ICollisionMan collisionMan;
 
@@ -29,7 +29,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         #region Public Constructors
 
-        public ProjectileHelper(IClipMan clipMan, ICollisionMan collisionMan, IEntityFactory entityFactory, DynamicResolver dynamicResolver)
+        public ProjectileHelper(IClipMan<Entity> clipMan, ICollisionMan collisionMan, IEntityFactory entityFactory, DynamicResolver dynamicResolver)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;

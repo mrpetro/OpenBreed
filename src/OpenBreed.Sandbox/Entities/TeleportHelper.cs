@@ -61,7 +61,7 @@ namespace OpenBreed.Sandbox.Entities
         private const string ANIMATION_TELEPORT_ENTRY = "Animations/Teleport/Entry";
 
         private const string ANIMATION_TELEPORT_EXIT = "Animations/Teleport/Exit";
-        private readonly IClipMan clipMan;
+        private readonly IClipMan<Entity> clipMan;
         private readonly IWorldMan worldMan;
 
         private readonly IEntityMan entityMan;
@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Constructors
 
-        public TeleportHelper(IClipMan clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IShapeMan shapeMan)
+        public TeleportHelper(IClipMan<Entity> clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IShapeMan shapeMan)
         {
             this.clipMan = clipMan;
             this.worldMan = worldMan;

@@ -17,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         private readonly IEntityMan entityMan;
 
-        private readonly IClipMan clipMan;
+        private readonly IClipMan<Entity> clipMan;
 
         private readonly ILogger logger;
 
@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Internal Constructors
 
-        internal AnimatorSystem(IEntityMan entityMan, IClipMan clipMan, ILogger logger)
+        internal AnimatorSystem(IEntityMan entityMan, IClipMan<Entity> clipMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.clipMan = clipMan;

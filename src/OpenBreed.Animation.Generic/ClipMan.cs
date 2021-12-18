@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OpenBreed.Animation.Generic
 {
-    public class ClipMan : IClipMan
+    public class ClipMan<TObject> : IClipMan<TObject>
     {
         #region Internal Fields
 
@@ -15,15 +15,15 @@ namespace OpenBreed.Animation.Generic
 
         #region Private Fields
 
-        private readonly List<IClip> clips = new List<IClip>();
-        private readonly Dictionary<string, IClip> names = new Dictionary<string, IClip>(); 
+        private readonly List<IClip<TObject>> clips = new List<IClip<TObject>>();
+        private readonly Dictionary<string, IClip<TObject>> names = new Dictionary<string, IClip<TObject>>(); 
         private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        private IClip MissingAnim;
+        private IClip<TObject> MissingAnim;
 
         public ClipMan(ILogger logger)
         {
@@ -40,22 +40,22 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Methods
 
-        public IClip CreateClip(string name, float length)
+        public IClip<TObject> CreateClip(string name, float length)
         {
-            var newClip = new Clip(clips.Count, name, length);
+            var newClip = new Clip<TObject>(clips.Count, name, length);
             clips.Add(newClip);
             names.Add(name, newClip);
             return newClip;
         }
 
-        public IClip GetById(int id)
+        public IClip<TObject> GetById(int id)
         {
             return clips[id];
         }
 
-        public IClip GetByName(string name)
+        public IClip<TObject> GetByName(string name)
         {
-            names.TryGetValue(name, out IClip result);
+            names.TryGetValue(name, out IClip<TObject> result);
             return result;
         }
 

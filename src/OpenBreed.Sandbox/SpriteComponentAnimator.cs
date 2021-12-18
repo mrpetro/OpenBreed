@@ -16,12 +16,12 @@ namespace OpenBreed.Sandbox
 
         #region Public Constructors
 
-        public SpriteComponentAnimator(IFrameUpdaterMan frameUpdaterMan, ISpriteMan spriteMan)
+        public SpriteComponentAnimator(IFrameUpdaterMan<Entity> frameUpdaterMan, ISpriteMan spriteMan)
         {
             this.spriteMan = spriteMan;
 
-            frameUpdaterMan.Register("Sprite.ImageId", (FrameUpdater<int>)OnImageIdUpdate);
-            frameUpdaterMan.Register("Sprite.AtlasId", (FrameUpdater<string>)OnAtlasIdUpdate);
+            frameUpdaterMan.Register("Sprite.ImageId", (FrameUpdater<Entity, int>)OnImageIdUpdate);
+            frameUpdaterMan.Register("Sprite.AtlasId", (FrameUpdater<Entity, string>)OnAtlasIdUpdate);
         }
 
         #endregion Public Constructors

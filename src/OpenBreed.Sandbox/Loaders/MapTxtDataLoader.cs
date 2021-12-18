@@ -15,6 +15,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -400,7 +401,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void LoadReferencedAnimations(TxtMap dbMap)
         {
-            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
+            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<Entity>>();
 
             //Load common animations
             var dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));

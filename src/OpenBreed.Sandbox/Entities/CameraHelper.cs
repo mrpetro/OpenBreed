@@ -19,8 +19,8 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Private Fields
 
-        private readonly IClipMan clipMan;
-        private readonly IFrameUpdaterMan frameUpdaterMan;
+        private readonly IClipMan<Entity> clipMan;
+        private readonly IFrameUpdaterMan<Entity> frameUpdaterMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Constructors
 
-        public CameraHelper(IClipMan clipMan, IFrameUpdaterMan frameUpdaterMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
+        public CameraHelper(IClipMan<Entity> clipMan, IFrameUpdaterMan<Entity> frameUpdaterMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
         {
             this.clipMan = clipMan;
             this.frameUpdaterMan = frameUpdaterMan;
@@ -42,7 +42,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public void CreateAnimations()
         {
-            frameUpdaterMan.Register("Camera.Brightness", (FrameUpdater<float>)OnFrameUpdate);
+            frameUpdaterMan.Register("Camera.Brightness", (FrameUpdater<Entity, float>)OnFrameUpdate);
         }
 
         #endregion Public Methods

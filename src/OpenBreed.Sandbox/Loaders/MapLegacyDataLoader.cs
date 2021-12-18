@@ -289,7 +289,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void LoadReferencedAnimations(IDbMap dbMap)
         {
-            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader>();
+            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<Entity>>();
 
             //Load common animations
             var dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));

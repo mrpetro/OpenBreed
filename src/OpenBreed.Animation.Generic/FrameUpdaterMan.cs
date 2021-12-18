@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OpenBreed.Animation.Generic
 {
-    public class FrameUpdaterMan : IFrameUpdaterMan
+    public class FrameUpdaterMan<TObject> : IFrameUpdaterMan<TObject>
     {
         #region Internal Fields
 
@@ -36,7 +36,7 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Methods
 
-        public int Register<TValue>(string name, FrameUpdater<TValue> frameUpdater)
+        public int Register<TValue>(string name, FrameUpdater<TObject, TValue> frameUpdater)
         {
             items.Add(frameUpdater);
             var id = items.Count - 1;
@@ -45,12 +45,12 @@ namespace OpenBreed.Animation.Generic
             return id;
         }
 
-        public FrameUpdater<TValue> GetById<TValue>(int id)
+        public FrameUpdater<TObject, TValue> GetById<TValue>(int id)
         {
-            return (FrameUpdater<TValue>)items[id];
+            return (FrameUpdater<TObject, TValue>)items[id];
         }
 
-        public FrameUpdater<TValue> GetByName<TValue>(string name)
+        public FrameUpdater<TObject, TValue> GetByName<TValue>(string name)
         {
             if (!namesToIds.TryGetValue(name, out int id))
             {

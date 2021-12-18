@@ -81,7 +81,7 @@ namespace OpenBreed.Sandbox
             manCollection.SetupBuilderFactory();
             manCollection.SetupVariableManager();
             manCollection.SetupABFormats();
-            manCollection.SetupAnimationManagers();
+            manCollection.SetupAnimationManagers<Entity>();
             manCollection.SetupModelProvider();
             manCollection.SetupLuaScripting();
             manCollection.SetupDataProviders();
@@ -155,7 +155,7 @@ namespace OpenBreed.Sandbox
 
             manCollection.AddSingleton<EntriesHelper>(() => new EntriesHelper(manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
-                                                                                  manCollection.GetManager<IClipMan>(),
+                                                                                  manCollection.GetManager<IClipMan<Entity>>(),
                                                                                   manCollection.GetManager<IEntityFactory>(),
                                                                                   manCollection.GetManager<IEventsMan>(),
                                                                                   manCollection.GetManager<ICollisionMan>(),
@@ -187,12 +187,12 @@ namespace OpenBreed.Sandbox
                                                                                       manCollection.GetManager<IEntityFactory>(),
                                                                                       manCollection.GetManager<IBuilderFactory>()));
 
-            manCollection.AddSingleton<CameraHelper>(() => new CameraHelper(manCollection.GetManager<IClipMan>(),
-                                                                                manCollection.GetManager<IFrameUpdaterMan>(),
+            manCollection.AddSingleton<CameraHelper>(() => new CameraHelper(manCollection.GetManager<IClipMan<Entity>>(),
+                                                                                manCollection.GetManager<IFrameUpdaterMan<Entity>>(),
                                                                                 manCollection.GetManager<IDataLoaderFactory>(),
                                                                                 manCollection.GetManager<IEntityFactory>()));
 
-            manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IClipMan>(),
+            manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IClipMan<Entity>>(),
                                                                                 manCollection.GetManager<IWorldMan>(),
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
@@ -203,11 +203,11 @@ namespace OpenBreed.Sandbox
                                                                                 manCollection.GetManager<IShapeMan>()));
 
             manCollection.SetupDynamicResolver();
-            manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(manCollection.GetManager<IClipMan>(),
+            manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(manCollection.GetManager<IClipMan<Entity>>(),
                                                                                     manCollection.GetManager<ICollisionMan>(),
                                                                                     manCollection.GetManager<IEntityFactory>(),
                                                                                     manCollection.GetManager<DynamicResolver>()));
-            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(manCollection.GetManager<IClipMan>(),
+            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(manCollection.GetManager<IClipMan<Entity>>(),
                                                                           manCollection.GetManager<ICollisionMan>(),
                                                                           manCollection.GetManager<IPlayersMan>(),
                                                                           manCollection.GetManager<IDataLoaderFactory>(),
@@ -253,7 +253,7 @@ namespace OpenBreed.Sandbox
             this.clientMan = clientMan;
             scriptMan = manCollection.GetManager<IScriptMan>();
             StateMachines = manCollection.GetManager<IFsmMan>();
-            Animations = manCollection.GetManager<Animation.Interface.IClipMan>();
+            Animations = manCollection.GetManager<Animation.Interface.IClipMan<Entity>>();
             Inputs = manCollection.GetManager<IInputsMan>();
             renderingMan = manCollection.GetManager<IRenderingMan>();
 
@@ -284,7 +284,7 @@ namespace OpenBreed.Sandbox
         #region Public Properties
 
         public IEntityFactory EntityFactory { get; }
-        public IClipMan Animations { get; }
+        public IClipMan<Entity> Animations { get; }
 
         public IFsmMan StateMachines { get; }
 

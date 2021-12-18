@@ -1,18 +1,15 @@
 ﻿using OpenBreed.Animation.Interface;
-using OpenBreed.Core;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Animation.Generic
 {
-    internal class Clip : IClip
+    internal class Clip<TObject> : IClip<TObject>
     {
         #region Private Fields
 
-        private readonly List<ITrack> tracks = new List<ITrack>();
+        private readonly List<ITrack<TObject>> tracks = new List<ITrack<TObject>>();
 
         #endregion Private Fields
 
@@ -37,17 +34,17 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Methods
 
-        public ITrack<TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue)
+        public ITrack<TObject, TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TObject, TValue> frameUpdater, TValue initialValue)
         {
-            var newPart = new Track<TValue>(interpolation, frameUpdater, initialValue);
+            var newPart = new Track<TObject, TValue>(interpolation, frameUpdater, initialValue);
             tracks.Add(newPart);
             return newPart;
         }
 
-        public bool UpdateWithNextFrame(Entity entity, float time)
+        public bool UpdateWithNextFrame(TObject obj, float time)
         {
             for (int i = 0; i < tracks.Count; i++)
-                tracks[i].UpdateWithNextFrame(entity, time);
+                tracks[i].UpdateWithNextFrame(obj, time);
 
             return true;
         }

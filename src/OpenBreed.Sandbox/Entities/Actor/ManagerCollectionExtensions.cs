@@ -9,6 +9,7 @@ using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -37,7 +38,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public static void SetupActorMovementStates(this IManagerCollection managerCollection)
         {
             var fsmMan = managerCollection.GetManager<IFsmMan>();
-            var clipMan = managerCollection.GetManager<IClipMan>();
+            var clipMan = managerCollection.GetManager<IClipMan<Entity>>();
 
             var stateMachine = fsmMan.Create<MovementState, MovementImpulse>("Actor.Movement");
 

@@ -27,14 +27,14 @@ namespace OpenBreed.Sandbox.Components.States
         private const string SOUND_PREFIX = "Vanilla/Common";
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
-        private readonly IClipMan clipMan;
+        private readonly IClipMan<Entity> clipMan;
         private readonly ISoundMan soundMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpeningState(IFsmMan fsmMan, IStampMan stampMan, IClipMan clipMan, ISoundMan soundMan)
+        public OpeningState(IFsmMan fsmMan, IStampMan stampMan, IClipMan<Entity> clipMan, ISoundMan soundMan)
         {
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;

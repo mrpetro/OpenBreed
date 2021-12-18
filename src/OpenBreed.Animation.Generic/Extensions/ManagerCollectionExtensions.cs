@@ -11,17 +11,17 @@ namespace OpenBreed.Animation.Generic.Extensions
     {
         #region Public Methods
 
-        public static void SetupAnimationManagers(this IManagerCollection manCollection)
+        public static void SetupAnimationManagers<TObject>(this IManagerCollection manCollection)
         {
-            manCollection.AddSingleton<Interface.IClipMan>(() => new ClipMan(manCollection.GetManager<ILogger>()));
-            manCollection.AddSingleton<IFrameUpdaterMan>(() => new FrameUpdaterMan(manCollection.GetManager<ILogger>()));
+            manCollection.AddSingleton<Interface.IClipMan<TObject>>(() => new ClipMan<TObject>(manCollection.GetManager<ILogger>()));
+            manCollection.AddSingleton<IFrameUpdaterMan<TObject>>(() => new FrameUpdaterMan<TObject>(manCollection.GetManager<ILogger>()));
         }
 
-        public static void SetupAnimationDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
+        public static void SetupAnimationDataLoader<TObject>(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
-            dataLoaderFactory.Register<IAnimationClipDataLoader>(() => new AnimationClipDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-                                                                            managerCollection.GetManager<IClipMan>(),
-                                                                            managerCollection.GetManager<IFrameUpdaterMan>(),
+            dataLoaderFactory.Register<IAnimationClipDataLoader<TObject>>(() => new AnimationClipDataLoader<TObject>(managerCollection.GetManager<IRepositoryProvider>(),
+                                                                            managerCollection.GetManager<IClipMan<TObject>>(),
+                                                                            managerCollection.GetManager<IFrameUpdaterMan<TObject>>(),
                                                                             managerCollection.GetManager<ILogger>()));
         }
 
