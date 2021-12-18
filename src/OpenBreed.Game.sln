@@ -98,7 +98,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Phys
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Rendering", "OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj", "{6425BA60-B9D9-4AFF-ADD9-4EEE357020EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Sandbox", "OpenBreed.Sandbox\OpenBreed.Sandbox.csproj", "{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Sandbox", "OpenBreed.Sandbox\OpenBreed.Sandbox.csproj", "{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -422,8 +422,8 @@ Global
 		{6425BA60-B9D9-4AFF-ADD9-4EEE357020EE}.Release|x64.Build.0 = Release|Any CPU
 		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|x64.Build.0 = Debug|Any CPU
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|x64.ActiveCfg = Debug|x64
+		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Debug|x64.Build.0 = Debug|x64
 		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|x64.ActiveCfg = Release|Any CPU
