@@ -88,11 +88,11 @@
       <Name>OpenBreed.Fsm</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
-      <Project>{983742fe-cb64-4bd9-bb24-90646172a0e2}</Project>
+      <Project>{5F4796F9-ABF5-4253-89C6-5F4C71DFADD3}</Project>
       <Name>OpenBreed.Wecs.Components.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
-      <Project>{d22d74e0-7fe4-4278-a93b-9983b788f40e}</Project>
+      <Project>{8be70a4e-f674-4549-9e15-521d4e112516}</Project>
       <Name>OpenBreed.Wecs</Name>
     </ProjectReference>
   </ItemGroup>

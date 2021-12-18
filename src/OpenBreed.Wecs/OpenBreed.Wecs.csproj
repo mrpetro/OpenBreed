@@ -1,140 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenBreed.Wecs</RootNamespace>
-    <AssemblyName>OpenBreed.Wecs</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj" />
+    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj" />
+    <ProjectReference Include="..\OpenBreed.Scripting.Interface\OpenBreed.Scripting.Interface.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Components\ComponentFactoryBase.cs" />
-    <Compile Include="Components\ComponentsMan.cs" />
-    <Compile Include="Components\IComponentFactory.cs" />
-    <Compile Include="Components\IComponentTemplate.cs" />
-    <Compile Include="Components\IEntityComponent.cs" />
-    <Compile Include="Components\Xml\XmlComponentsList.cs" />
-    <Compile Include="Components\Xml\XmlComponentTemplate.cs" />
-    <Compile Include="Entities\Builders\EntityBuilder.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\IEntityBuilder.cs" />
-    <Compile Include="Entities\IEntityFactory.cs" />
-    <Compile Include="Entities\IEntityTemplate.cs" />
-    <Compile Include="Entities\TemplateEntityBuilder.cs" />
-    <Compile Include="Entities\Xml\XmlEntityTemplate.cs" />
-    <Compile Include="Entities\EntityFactory.cs" />
-    <Compile Include="Entities\EntityJob.cs" />
-    <Compile Include="Entities\EntityMan.cs" />
-    <Compile Include="Entities\IEntityMan.cs" />
-    <Compile Include="Events\ComponentChangedEventHandler.cs" />
-    <Compile Include="Events\EntityEnteredEventArgs.cs" />
-    <Compile Include="Events\ComponentChangedEvent.cs" />
-    <Compile Include="Events\EntityComponentChangedEventArgs.cs" />
-    <Compile Include="Events\EntityLeftEventArgs.cs" />
-    <Compile Include="Events\WorldDeinitializedEventArgs.cs" />
-    <Compile Include="Events\WorldInitializedEventArgs.cs" />
-    <Compile Include="Events\WorldPausedEventArgs.cs" />
-    <Compile Include="Events\WorldUnpausedEventArgs.cs" />
-    <Compile Include="Extensions\EntityExtensions.cs" />
-    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
-    <Compile Include="IComponentController.cs" />
-    <Compile Include="IControllerMan.cs" />
-    <Compile Include="Entities\ITemplateEntityBuilder.cs" />
-    <Compile Include="Systems\DefaultSystemFactory.cs" />
-    <Compile Include="Systems\IRenderableSystem.cs" />
-    <Compile Include="Systems\ISystemFactory.cs" />
-    <Compile Include="Systems\ISystemFinder.cs" />
-    <Compile Include="Worlds\AnimationPlayerSystem.cs" />
-    <Compile Include="Worlds\IWorldMan.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Systems\SystemFinder.cs" />
-    <Compile Include="Systems\IUpdatableSystem.cs" />
-    <Compile Include="Systems\ISystem.cs" />
-    <Compile Include="Systems\ISystemBuilder.cs" />
-    <Compile Include="Systems\SystemBase.cs" />
-    <Compile Include="Worlds\World.cs" />
-    <Compile Include="Worlds\WorldBuilder.cs" />
-    <Compile Include="Worlds\WorldJob.cs" />
-    <Compile Include="Worlds\WorldMan.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
-      <Project>{2f6f29fc-0824-4ef8-bdd8-f209869f1518}</Project>
-      <Name>OpenBreed.Common.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
-      <Project>{4f85277e-6eb4-4b3c-87db-2df40be46224}</Project>
-      <Name>OpenBreed.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
-      <Project>{EBBF3DEB-2923-4710-858A-E523CA752909}</Project>
-      <Name>OpenBreed.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Scripting.Interface\OpenBreed.Scripting.Interface.csproj">
-      <Project>{60E7FCDB-4709-49A6-97BC-CFC333A7A082}</Project>
-      <Name>OpenBreed.Scripting.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="OpenTK.dll.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

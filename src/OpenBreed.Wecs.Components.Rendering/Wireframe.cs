@@ -1,5 +1,4 @@
-﻿using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Components;
 using OpenTK.Graphics;
 
 namespace OpenBreed.Wecs.Components.Rendering

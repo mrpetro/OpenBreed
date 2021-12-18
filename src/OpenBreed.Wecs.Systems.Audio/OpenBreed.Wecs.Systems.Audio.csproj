@@ -75,12 +75,16 @@
       <Project>{84DB1C84-A559-42B4-90E9-868012C8E254}</Project>
       <Name>OpenBreed.Audio.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Animation\OpenBreed.Wecs.Components.Animation.csproj">
+      <Project>{4f567f27-8a32-42cb-80a4-13d3cf833370}</Project>
+      <Name>OpenBreed.Wecs.Components.Animation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Audio\OpenBreed.Wecs.Components.Audio.csproj">
-      <Project>{3d35afbe-7307-4f98-8a1b-4a39ae2b2690}</Project>
+      <Project>{86e2fb0f-6976-4ece-a915-41a2063b98f0}</Project>
       <Name>OpenBreed.Wecs.Components.Audio</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
-      <Project>{983742fe-cb64-4bd9-bb24-90646172a0e2}</Project>
+      <Project>{5f4796f9-abf5-4253-89c6-5f4c71dfadd3}</Project>
       <Name>OpenBreed.Wecs.Components.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj">
@@ -88,7 +92,7 @@
       <Name>OpenBreed.Wecs.Systems.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
-      <Project>{d22d74e0-7fe4-4278-a93b-9983b788f40e}</Project>
+      <Project>{8be70a4e-f674-4549-9e15-521d4e112516}</Project>
       <Name>OpenBreed.Wecs</Name>
     </ProjectReference>
   </ItemGroup>

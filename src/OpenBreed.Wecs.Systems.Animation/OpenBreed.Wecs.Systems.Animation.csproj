@@ -77,11 +77,11 @@
       <Name>OpenBreed.Animation.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Animation\OpenBreed.Wecs.Components.Animation.csproj">
-      <Project>{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}</Project>
+      <Project>{4f567f27-8a32-42cb-80a4-13d3cf833370}</Project>
       <Name>OpenBreed.Wecs.Components.Animation</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
-      <Project>{983742fe-cb64-4bd9-bb24-90646172a0e2}</Project>
+      <Project>{5f4796f9-abf5-4253-89c6-5f4c71dfadd3}</Project>
       <Name>OpenBreed.Wecs.Components.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj">
@@ -89,7 +89,7 @@
       <Name>OpenBreed.Wecs.Systems.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
-      <Project>{d22d74e0-7fe4-4278-a93b-9983b788f40e}</Project>
+      <Project>{8be70a4e-f674-4549-9e15-521d4e112516}</Project>
       <Name>OpenBreed.Wecs</Name>
     </ProjectReference>
   </ItemGroup>

@@ -105,11 +105,11 @@
       <Name>OpenBreed.Input.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
-      <Project>{983742fe-cb64-4bd9-bb24-90646172a0e2}</Project>
+      <Project>{5f4796f9-abf5-4253-89c6-5f4c71dfadd3}</Project>
       <Name>OpenBreed.Wecs.Components.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Control\OpenBreed.Wecs.Components.Control.csproj">
-      <Project>{5710db62-0796-4683-b52e-0423a73830f0}</Project>
+      <Project>{b017be8b-3452-4c30-b786-1d2e4f70c153}</Project>
       <Name>OpenBreed.Wecs.Components.Control</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj">
@@ -117,7 +117,7 @@
       <Name>OpenBreed.Wecs.Systems.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
-      <Project>{d22d74e0-7fe4-4278-a93b-9983b788f40e}</Project>
+      <Project>{8be70a4e-f674-4549-9e15-521d4e112516}</Project>
       <Name>OpenBreed.Wecs</Name>
     </ProjectReference>
   </ItemGroup>
