@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-		<Class>
+		<Metadata>
 			<Name>FpsCounter</Name>
-		</Class>
+		</Metadata>
 		<Position X="$(posX)" Y="$(posY)" />
 		<Text>
 			<Text>FPS: 0.0</Text>

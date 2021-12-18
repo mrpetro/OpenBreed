@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-		<Class>
+		<Metadata>
 			<Name>StatusBar</Name>
-		</Class>
+		</Metadata>
 		<Position X="$(posX)" Y="$(posY)" />
 		<Sprite>
 			<AtlasName>Vanilla/Common/Status#1</AtlasName>

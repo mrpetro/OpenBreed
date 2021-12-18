@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0"?>
 <EntityTemplate>
 	<Components>
-		<Class>
+		<Metadata>
 			<Level>$(level)</Level>
 			<Name>KeycardStandard</Name>
 			<Flavor>$(flavor)</Flavor>
-		</Class>
+		</Metadata>
 		<Fsm>
 			<States>
 				<State FsmName="Pickable.Functioning" StateName="Lying" />

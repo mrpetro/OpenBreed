@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-		<Class>
+		<Metadata>
 			<Name>WorldEntry</Name>
 			<Flavor>$(entryId)</Flavor>
-		</Class>
+		</Metadata>
 		<Position X="$(startX)" Y="$(startY)" />
 		<TilePutter>
 			<AtlasName>$(level)</AtlasName>

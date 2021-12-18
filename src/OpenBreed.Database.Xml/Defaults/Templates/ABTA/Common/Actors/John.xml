@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-		<Class>
+		<Metadata>
 			<Name>Actor</Name>
-		</Class>
+		</Metadata>
 		<Timer>
 		</Timer>
 		<Fsm>
