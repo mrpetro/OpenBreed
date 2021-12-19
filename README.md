@@ -65,10 +65,10 @@ So the goal is to trace or rebuild data hardcoded in game executables and store 
 **C#**
 
 ### Platform
-**.NET Framework 4.8** for now
+**.NET 5.0** for now
 
 ### DevEnv
-**MSVS 2017** (Community or compatible)
+**MSVS 2019** (Community or compatible)
 
 ### Design architecture
 **Entity–Component–System(ECS)** for now
