@@ -23,6 +23,8 @@ namespace OpenBreed.Rendering.Interface
 
         #region Public Methods
 
+        void Render(string text, Box2 clipBox, Vector2 pos);
+
         /// <summary>
         /// Draw single character given in parameter
         /// </summary>

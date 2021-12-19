@@ -1,7 +1,10 @@
 ﻿using OpenTK;
+using System;
 
 namespace OpenBreed.Rendering.Interface.Managers
 {
+    public delegate void SpriteRenderer(Box2 box, float dt);
+
     /// <summary>
     /// Sprite manager interface
     /// </summary>
@@ -36,6 +39,8 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// <param name="atlasName">Name of atlas to check</param>
         /// <returns>True if exits, false otherwise</returns>
         bool Contains(string atlasName);
+
+        void Render(Box2 clipBox, float dt, SpriteRenderer spriteRenderer);
 
         /// <summary>
         /// Creates new sprite atlas

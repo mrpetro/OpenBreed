@@ -4,7 +4,6 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
-using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
@@ -41,19 +40,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
-            GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
-            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
-            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
-            GL.Enable(EnableCap.Texture2D);
-
-            for (int i = 0; i < entities.Count; i++)
-                RenderSprite(entities[i], clipBox);
-
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
-            GL.Disable(EnableCap.Blend);
+            spriteMan.Render(clipBox, dt, RenderSprites);
         }
 
         #endregion Public Methods
@@ -75,6 +62,17 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Protected Methods
 
         #region Private Methods
+
+        /// <summary>
+        /// Render all sprites in this system
+        /// </summary>
+        /// <param name="clipBox">clipBox</param>
+        /// <param name="dt">Delta time</param>
+        private void RenderSprites(Box2 clipBox, float dt)
+        {
+            for (int i = 0; i < entities.Count; i++)
+                RenderSprite(entities[i], clipBox);
+        }
 
         /// <summary>
         /// Draw this sprite to given viewport
