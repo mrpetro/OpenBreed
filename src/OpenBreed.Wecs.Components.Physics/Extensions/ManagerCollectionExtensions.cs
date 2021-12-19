@@ -21,7 +21,7 @@ namespace OpenBreed.Wecs.Components.Physics.Extensions
             var builderFactory = manCollection.GetManager<IBuilderFactory>();
 
             builderFactory.Register<BodyComponentBuilder>(() => new BodyComponentBuilder(manCollection.GetManager<IShapeMan>(),
-                                                                                         manCollection.GetManager<ICollisionMan>()));
+                                                                                         manCollection.GetManager<ICollisionMan<Entity>>()));
 
             manCollection.AddSingleton<BodyComponentFactory>(() => new BodyComponentFactory(builderFactory));
             manCollection.AddSingleton<MotionComponentFactory>(() => new MotionComponentFactory());

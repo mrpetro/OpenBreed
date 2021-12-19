@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;

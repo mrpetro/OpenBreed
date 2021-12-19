@@ -42,7 +42,7 @@ namespace OpenBreed.Sandbox.Entities
 
         private readonly IEventsMan eventsMan;
 
-        private readonly ICollisionMan collisionMan;
+        private readonly ICollisionMan<Entity> collisionMan;
 
         private readonly IJobsMan jobsMan;
 
@@ -53,7 +53,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Constructors
 
-        public EntriesHelper(IWorldMan worldMan, IEntityMan entityMan, IClipMan<Entity> clipMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan collisionMan, IJobsMan jobsMan, ViewportCreator viewportCreator, IDataLoaderFactory dataLoaderFactory)
+        public EntriesHelper(IWorldMan worldMan, IEntityMan entityMan, IClipMan<Entity> clipMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan<Entity> collisionMan, IJobsMan jobsMan, ViewportCreator viewportCreator, IDataLoaderFactory dataLoaderFactory)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;

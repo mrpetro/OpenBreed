@@ -19,13 +19,13 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         private readonly IWorldMan worldMan;
 
-        private readonly ICollisionMan collisionMan;
+        private readonly ICollisionMan<Entity> collisionMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public CollisionResponseSystem(IEntityMan entityMan, IWorldMan worldMan, ICollisionMan collisionMan)
+        public CollisionResponseSystem(IEntityMan entityMan, IWorldMan worldMan, ICollisionMan<Entity> collisionMan)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;

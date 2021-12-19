@@ -86,7 +86,7 @@ namespace OpenBreed.Sandbox
             manCollection.SetupLuaScripting();
             manCollection.SetupDataProviders();
             manCollection.SetupGenericInputManagers();
-            manCollection.SetupGenericPhysicsManagers();
+            manCollection.SetupGenericPhysicsManagers<Entity>();
             manCollection.SetupOpenALManagers();
             manCollection.SetupOpenGLManagers();
             manCollection.SetupWecsManagers();
@@ -162,7 +162,7 @@ namespace OpenBreed.Sandbox
                                                                                   manCollection.GetManager<IClipMan<Entity>>(),
                                                                                   manCollection.GetManager<IEntityFactory>(),
                                                                                   manCollection.GetManager<IEventsMan>(),
-                                                                                  manCollection.GetManager<ICollisionMan>(),
+                                                                                  manCollection.GetManager<ICollisionMan<Entity>>(),
                                                                                   manCollection.GetManager<IJobsMan>(),
                                                                                   manCollection.GetManager<ViewportCreator>(),
                                                                                   manCollection.GetManager<IDataLoaderFactory>()));
@@ -201,18 +201,18 @@ namespace OpenBreed.Sandbox
                                                                                 manCollection.GetManager<IEntityMan>(),
                                                                                 manCollection.GetManager<IEntityFactory>(),
                                                                                 manCollection.GetManager<IEventsMan>(),
-                                                                                manCollection.GetManager<ICollisionMan>(),
+                                                                                manCollection.GetManager<ICollisionMan<Entity>>(),
                                                                                 manCollection.GetManager<IBuilderFactory>(),
                                                                                 manCollection.GetManager<IJobsMan>(),
                                                                                 manCollection.GetManager<IShapeMan>()));
 
             manCollection.SetupDynamicResolver();
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(manCollection.GetManager<IClipMan<Entity>>(),
-                                                                                    manCollection.GetManager<ICollisionMan>(),
+                                                                                    manCollection.GetManager<ICollisionMan<Entity>>(),
                                                                                     manCollection.GetManager<IEntityFactory>(),
                                                                                     manCollection.GetManager<DynamicResolver>()));
             manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(manCollection.GetManager<IClipMan<Entity>>(),
-                                                                          manCollection.GetManager<ICollisionMan>(),
+                                                                          manCollection.GetManager<ICollisionMan<Entity>>(),
                                                                           manCollection.GetManager<IPlayersMan>(),
                                                                           manCollection.GetManager<IDataLoaderFactory>(),
                                                                           manCollection.GetManager<IEntityFactory>(),
@@ -434,7 +434,7 @@ namespace OpenBreed.Sandbox
             var teleportHelper = GetManager<TeleportHelper>();
             var cameraHelper = GetManager<CameraHelper>();
 
-            GetManager<ICollisionMan>().RegisterAbtaColliders();
+            GetManager<ICollisionMan<Entity>>().RegisterAbtaColliders();
             GetManager<ItemsMan>().RegisterAbtaItems();
 
             actorHelper.RegisterCollisionPairs();

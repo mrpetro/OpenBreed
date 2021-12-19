@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entities\electricgate\**" />
+    <EmbeddedResource Remove="Entities\electricgate\**" />
+    <None Remove="Entities\electricgate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Content\Maps\demo_1.txt" />
     <None Remove="Content\Maps\demo_2.txt" />
     <None Remove="Content\Maps\demo_3.txt" />
@@ -66,7 +72,6 @@
 
   <ItemGroup>
     <Folder Include="Content\sounds\" />
-    <Folder Include="Entities\electricgate\" />
   </ItemGroup>
 
   <ItemGroup>

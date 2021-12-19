@@ -10,8 +10,4 @@
     <PackageReference Include="OpenTK" Version="3.3.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
-  </ItemGroup>
-
 </Project>

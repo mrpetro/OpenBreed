@@ -19,14 +19,14 @@ namespace OpenBreed.Sandbox.Components.States
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
-        private readonly ICollisionMan collisionMan;
+        private readonly ICollisionMan<Entity> collisionMan;
         private readonly IStampMan stampMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosedState(IFsmMan fsmMan, ICollisionMan collisionMan, IStampMan stampMan)
+        public ClosedState(IFsmMan fsmMan, ICollisionMan<Entity> collisionMan, IStampMan stampMan)
         {
             this.fsmMan = fsmMan;
             this.collisionMan = collisionMan;

@@ -15,4 +15,8 @@
     <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
 </Project>
