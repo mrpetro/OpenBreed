@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         private readonly List<Entity> inactiveDynamics = new List<Entity>();
         private readonly IEntityMan entityMan;
         private readonly IShapeMan shapeMan;
-        private readonly ICollisionMan collisionMan;
+        private readonly ICollisionMan<Entity> collisionMan;
         private IBroadphaseStatic broadphaseGrid;
         private IBroadphaseDynamic broadphaseDynamic;
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal DynamicBodiesCollisionCheckSystem(IEntityMan entityMan, IShapeMan shapeMan, ICollisionMan collisionMan)
+        internal DynamicBodiesCollisionCheckSystem(IEntityMan entityMan, IShapeMan shapeMan, ICollisionMan<Entity> collisionMan)
         {
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;

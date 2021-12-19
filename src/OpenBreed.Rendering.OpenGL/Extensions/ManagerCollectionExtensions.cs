@@ -9,7 +9,6 @@ using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Data;
 using OpenBreed.Rendering.OpenGL.Managers;
-using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +30,8 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
                                                                            manCollection.GetManager<IStampMan>(),
                                                                            manCollection.GetManager<ILogger>()));
 
+            manCollection.AddSingleton<IRenderableFactory>(() => new RenderableFactory());
+
             manCollection.AddSingleton<ISpriteMan>(() => new SpriteMan(manCollection.GetManager<ITextureMan>(),
                                                                        manCollection.GetManager<ILogger>()));
 
@@ -41,8 +42,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 
             manCollection.AddSingleton<IPrimitiveRenderer>(() => new PrimitiveRenderer());
 
-            manCollection.AddSingleton<IRenderingMan>(() => new RenderingMan(manCollection.GetManager<IViewClient>(),
-                                                                             manCollection.GetManager<IWorldMan>()));
+            manCollection.AddSingleton<IRenderingMan>(() => new RenderingMan(manCollection.GetManager<IViewClient>()));
         }
 
         public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)

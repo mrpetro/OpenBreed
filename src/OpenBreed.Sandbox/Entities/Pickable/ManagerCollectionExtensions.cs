@@ -19,7 +19,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
         public static void SetupPickableStates(this IManagerCollection managerCollection)
         {
             var fsmMan = managerCollection.GetManager<IFsmMan>();
-            var collisionMan = managerCollection.GetManager<ICollisionMan>();
+            var collisionMan = managerCollection.GetManager<ICollisionMan<Entity>>();
             var stampMan = managerCollection.GetManager<IStampMan>();
             var clipMan = managerCollection.GetManager<IClipMan<Entity>>();
             var soundMan = managerCollection.GetManager<ISoundMan>();

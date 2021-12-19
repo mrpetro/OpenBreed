@@ -64,6 +64,42 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return totalWidth;
         }
 
+        public void Render(string text, Box2 clipBox, Vector2 pos)
+        {
+            GL.Enable(EnableCap.Texture2D);
+            GL.PushMatrix();
+
+            GL.Translate((int)pos.X, (int)pos.Y, 0.0f);
+
+            var caretPosX = 0.0f;
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                var ch = text[i];
+
+                switch (ch)
+                {
+                    case '\r':
+                        GL.Translate(-caretPosX, 0.0f, 0.0f);
+                        caretPosX = 0.0f;
+                        continue;
+                    case '\n':
+                        GL.Translate(0.0f, -Height, 0.0f);
+                        continue;
+                    default:
+                        break;
+                }
+
+                Draw(ch, clipBox);
+                var width = GetWidth(ch);
+                caretPosX += width;
+                GL.Translate(width, 0.0f, 0.0f);
+            }
+
+            GL.PopMatrix();
+            GL.Disable(EnableCap.Texture2D);
+        }
+
         public void Draw(char ch, Box2 clipBox)
         {
             (int, int, float) data;

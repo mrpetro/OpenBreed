@@ -28,14 +28,14 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             systemFactory.Register(() => new DynamicBodiesAabbUpdaterSystem(manCollection.GetManager<IShapeMan>()));
             systemFactory.Register(() => new DynamicBodiesCollisionCheckSystem(manCollection.GetManager<IEntityMan>(),
                                                                                manCollection.GetManager<IShapeMan>(),
-                                                                               manCollection.GetManager<ICollisionMan>()));
+                                                                               manCollection.GetManager<ICollisionMan<Entity>>()));
             systemFactory.Register(() => new StaticBodiesSystem(manCollection.GetManager<IEntityMan>(),
                                                                 manCollection.GetManager<IShapeMan>(),
                                                                 manCollection.GetManager<IEventsMan>()));
 
             systemFactory.Register(() => new CollisionResponseSystem(manCollection.GetManager<IEntityMan>(),
                                                                      manCollection.GetManager<IWorldMan>(),
-                                                                     manCollection.GetManager<ICollisionMan>()));
+                                                                     manCollection.GetManager<ICollisionMan<Entity>>()));
         }
     }
 }

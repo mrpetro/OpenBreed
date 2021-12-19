@@ -3,7 +3,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\electricgate\**" />
+    <EmbeddedResource Remove="Entities\electricgate\**" />
+    <None Remove="Entities\electricgate\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Content\Maps\demo_1.txt" />
@@ -65,7 +72,6 @@
 
   <ItemGroup>
     <Folder Include="Content\sounds\" />
-    <Folder Include="Entities\electricgate\" />
   </ItemGroup>
 
   <ItemGroup>

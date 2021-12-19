@@ -1,19 +1,16 @@
-﻿using OpenBreed.Wecs.Entities;
-using OpenTK;
+﻿using OpenTK;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Physics.Interface.Managers
 {
-    public delegate void FixtureContactCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection);
+    public delegate void FixtureContactCallback<TObject>(BodyFixture fixtureA, TObject objA, BodyFixture fixtureB, TObject objB, Vector2 projection);
 
-    public delegate void CollisionPairCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection);
-
-    public interface ICollisionMan
+    public interface ICollisionMan<TObject>
     {
         #region Public Methods
 
-        void RegisterFixturePair(int fixtureIdA, int fixtureIdB, FixtureContactCallback callback);
+        void RegisterFixturePair(int fixtureIdA, int fixtureIdB, FixtureContactCallback<TObject> callback);
 
         int RegisterGroup(string groupName);
 
@@ -21,7 +18,7 @@ namespace OpenBreed.Physics.Interface.Managers
 
         int GetByName(string name);
 
-        void Resolve(Entity entityA, Entity entityB, List<CollisionContact> contacts);
+        void Resolve(TObject objA, TObject objB, List<CollisionContact> contacts);
 
         #endregion Public Methods
     }

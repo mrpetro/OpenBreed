@@ -7,6 +7,7 @@ using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Sprites;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
@@ -27,6 +28,7 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private readonly ISystemFactory systemFactory;
+        private readonly IRenderableFactory renderableFactory;
         private readonly IWorldMan worldMan;
         private readonly IFontMan fontMan;
         private readonly IViewClient viewClient;
@@ -43,6 +45,7 @@ namespace OpenBreed.Sandbox.Worlds
         #region Public Constructors
 
         public GameHudWorldHelper(ISystemFactory systemFactory, 
+                                  IRenderableFactory renderableFactory,
                                   IWorldMan worldMan, 
                                   IFontMan fontMan, 
                                   IViewClient viewClient, 
@@ -55,6 +58,7 @@ namespace OpenBreed.Sandbox.Worlds
                                   SpriteAtlasDataProvider spriteAtlasDataProvider)
         {
             this.systemFactory = systemFactory;
+            this.renderableFactory = renderableFactory;
             this.worldMan = worldMan;
             this.fontMan = fontMan;
             this.viewClient = viewClient;
@@ -126,6 +130,9 @@ namespace OpenBreed.Sandbox.Worlds
 
 
             var builder = worldMan.Create().SetName("GameHUD");
+
+            builder.AddModule(renderableFactory.CreateRenderableBatch());
+
 
             AddSystems(builder);
 

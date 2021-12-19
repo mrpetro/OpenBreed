@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Managers;
-using OpenBreed.Physics.Interface;
+﻿using OpenBreed.Physics.Interface;
 using OpenTK;
 using System;
 

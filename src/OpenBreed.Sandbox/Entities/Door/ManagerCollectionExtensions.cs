@@ -21,7 +21,7 @@ namespace OpenBreed.Sandbox.Entities.Door
         public static void SetupDoorStates(this IManagerCollection managerCollection)
         {
             var fsmMan = managerCollection.GetManager<IFsmMan>();
-            var collisionMan = managerCollection.GetManager<ICollisionMan>();
+            var collisionMan = managerCollection.GetManager<ICollisionMan<Entity>>();
             var stampMan = managerCollection.GetManager<IStampMan>();
             var clipMan = managerCollection.GetManager<IClipMan<Entity>>();
             var soundMan = managerCollection.GetManager<ISoundMan>();

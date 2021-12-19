@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Physics.Interface;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
@@ -11,7 +12,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Gui
 {
-    public class PhysicsDebugDisplaySystem : SystemBase, IRenderableSystem
+    public class PhysicsDebugDisplaySystem : SystemBase, IRenderable
     {
         #region Private Fields
 

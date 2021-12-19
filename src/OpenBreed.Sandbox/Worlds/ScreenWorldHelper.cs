@@ -2,6 +2,7 @@
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Wecs.Components.Rendering;
@@ -31,6 +32,7 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private readonly ISystemFactory systemFactory;
+        private readonly IRenderableFactory renderableFactory;
         private readonly IRenderingMan renderingMan;
         private readonly IWorldMan worldMan;
         private readonly IEventsMan eventsMan;
@@ -41,9 +43,16 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Constructors
 
-        public ScreenWorldHelper(ISystemFactory systemFactory, IRenderingMan renderingMan, IWorldMan worldMan, IEventsMan eventsMan, ViewportCreator viewportCreator, IViewClient viewClient)
+        public ScreenWorldHelper(ISystemFactory systemFactory,
+                                 IRenderableFactory renderableFactory,
+                                 IRenderingMan renderingMan,
+                                 IWorldMan worldMan,
+                                 IEventsMan eventsMan,
+                                 ViewportCreator viewportCreator,
+                                 IViewClient viewClient)
         {
             this.systemFactory = systemFactory;
+            this.renderableFactory = renderableFactory;
             this.renderingMan = renderingMan;
             this.worldMan = worldMan;
             this.eventsMan = eventsMan;
@@ -67,6 +76,8 @@ namespace OpenBreed.Sandbox.Worlds
         public World CreateWorld()
         {
             var builder = worldMan.Create().SetName("ScreenWorld");
+            builder.AddModule(renderableFactory.CreateRenderableBatch());
+
             AddSystems(builder);
 
             var world = builder.Build();

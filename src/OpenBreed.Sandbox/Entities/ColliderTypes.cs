@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Generic;
-using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities
 {
@@ -26,7 +26,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public static void RegisterAbtaColliders(this ICollisionMan collisions)
+        public static void RegisterAbtaColliders(this ICollisionMan<Entity> collisions)
         {
             ActorBody = collisions.RegisterGroup("ActorBody");
             ActorTrigger = collisions.RegisterGroup("ActorTrigger");

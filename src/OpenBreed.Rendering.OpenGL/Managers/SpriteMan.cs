@@ -167,6 +167,22 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return vertices;
         }
 
+        public void Render(Box2 clipBox, float dt, SpriteRenderer spriteRenderer)
+        {
+            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
+            GL.Enable(EnableCap.Blend);
+            GL.Enable(EnableCap.AlphaTest);
+            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
+            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
+            GL.Enable(EnableCap.Texture2D);
+
+            spriteRenderer.Invoke(clipBox, dt);
+
+            GL.Disable(EnableCap.Texture2D);
+            GL.Disable(EnableCap.AlphaTest);
+            GL.Disable(EnableCap.Blend);
+        }
+
         #endregion Private Methods
     }
 }

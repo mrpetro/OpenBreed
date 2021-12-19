@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Wecs.Worlds;
 using System;
 
 namespace OpenBreed.Rendering.Interface.Managers
@@ -26,9 +25,9 @@ namespace OpenBreed.Rendering.Interface.Managers
         float Fps { get; }
 
         /// <summary>
-        /// World from which rendering will start
+        /// Object which will be rendered to client
         /// </summary>
-        World ScreenWorld { get; set; }
+        public IRenderableBatch Renderable { get; set; }
 
         #endregion Public Properties
     }

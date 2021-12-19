@@ -1,8 +1,5 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenTK;
@@ -12,7 +9,7 @@ using System;
 
 namespace OpenBreed.Physics.Generic.Managers
 {
-    internal class CollisionMan : ICollisionMan
+    internal class CollisionMan<TObject> : ICollisionMan<TObject>
     {
         #region Private Fields
 
@@ -23,7 +20,7 @@ namespace OpenBreed.Physics.Generic.Managers
 
         private readonly ILogger logger;
 
-        private readonly Dictionary<(int, int), FixtureContactCallback> fixtureCallbacks = new Dictionary<(int, int), FixtureContactCallback>();
+        private readonly Dictionary<(int, int), FixtureContactCallback<TObject>> fixtureCallbacks = new Dictionary<(int, int), FixtureContactCallback<TObject>>();
 
         #endregion Private Fields
 
@@ -56,7 +53,7 @@ namespace OpenBreed.Physics.Generic.Managers
             return groupId;
         }
 
-        public void RegisterFixturePair(int fixtureA, int fixtureB, FixtureContactCallback callback)
+        public void RegisterFixturePair(int fixtureA, int fixtureB, FixtureContactCallback<TObject> callback)
         {
             fixtureCallbacks.Add((fixtureA, fixtureB), callback);
         }
@@ -68,7 +65,7 @@ namespace OpenBreed.Physics.Generic.Managers
             return result;
         }
 
-        public void Resolve(Entity entityA, Entity entityB, List<Interface.Managers.CollisionContact> contacts)
+        public void Resolve(TObject objA, TObject objB, List<Interface.Managers.CollisionContact> contacts)
         {
             foreach (var contact in contacts)
             {
@@ -76,8 +73,8 @@ namespace OpenBreed.Physics.Generic.Managers
                 {
                     foreach (var groupIdB in contact.FixtureB.GroupIds)
                     {
-                        if (fixtureCallbacks.TryGetValue((groupIdA, groupIdB), out FixtureContactCallback fixtureCallback))
-                            fixtureCallback.Invoke(contact.FixtureA, entityA, contact.FixtureB, entityB, contact.Projection);
+                        if (fixtureCallbacks.TryGetValue((groupIdA, groupIdB), out FixtureContactCallback<TObject> fixtureCallback))
+                            fixtureCallback.Invoke(contact.FixtureA, objA, contact.FixtureB, objB, contact.Projection);
                     }
                 }
             }

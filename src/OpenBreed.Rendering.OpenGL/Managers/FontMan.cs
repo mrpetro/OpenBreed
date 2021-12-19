@@ -3,6 +3,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
 
@@ -49,6 +50,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GetById(fontId).Draw(text, clipBox);
         }
 
+        public void RenderAppend(int fontId, string text, Box2 clipBox, Vector2 value)
+        {
+            GetById(fontId).Draw(text, clipBox);
+        }
+
         public IFont GetGfxFont(string fontName)
         {
             var alias = $"Gfx/{fontName}";
@@ -90,6 +96,22 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         internal int GenerateNewId()
         {
             return items.Count;
+        }
+
+        public void Render(Box2 clipBox, float dt, FontRenderer fontRenderer)
+        {
+            GL.Enable(EnableCap.Blend);
+            GL.Enable(EnableCap.AlphaTest);
+            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
+            GL.BlendColor(Color4.Black);
+            //GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
+            GL.Enable(EnableCap.Texture2D);
+
+            fontRenderer.Invoke(clipBox, dt);
+
+            GL.Disable(EnableCap.Texture2D);
+            GL.Disable(EnableCap.AlphaTest);
+            GL.Disable(EnableCap.Blend);
         }
 
         #endregion Internal Methods

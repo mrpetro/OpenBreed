@@ -25,7 +25,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private readonly IClipMan<Entity> clipMan;
 
-        private readonly ICollisionMan collisionMan;
+        private readonly ICollisionMan<Entity> collisionMan;
 
         private readonly IPlayersMan playersMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
@@ -38,7 +38,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         #region Public Constructors
 
-        public ActorHelper(IClipMan<Entity> clipMan, ICollisionMan collisionMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, DynamicResolver dynamicResolver, FixtureTypes fixtureTypes)
+        public ActorHelper(IClipMan<Entity> clipMan, ICollisionMan<Entity> collisionMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, DynamicResolver dynamicResolver, FixtureTypes fixtureTypes)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;

@@ -20,14 +20,14 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         private readonly IFsmMan fsmMan;
 
-        private readonly ICollisionMan collisionMan;
+        private readonly ICollisionMan<Entity> collisionMan;
         private readonly IStampMan stampMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LyingState(IFsmMan fsmMan, ICollisionMan collisionMan, IStampMan stampMan)
+        public LyingState(IFsmMan fsmMan, ICollisionMan<Entity> collisionMan, IStampMan stampMan)
         {
             this.fsmMan = fsmMan;
             this.collisionMan = collisionMan;

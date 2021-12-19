@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Wecs.Entities;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -118,13 +119,13 @@ namespace OpenBreed.Wecs.Components.Physics
         #region Private Fields
 
         private readonly IShapeMan shapeMan;
-        private readonly ICollisionMan collisionMan;
+        private readonly ICollisionMan<Entity> collisionMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal BodyComponentBuilder(IShapeMan shapeMan, ICollisionMan collisionMan)
+        internal BodyComponentBuilder(IShapeMan shapeMan, ICollisionMan<Entity> collisionMan)
         {
             this.shapeMan = shapeMan;
             this.collisionMan = collisionMan;

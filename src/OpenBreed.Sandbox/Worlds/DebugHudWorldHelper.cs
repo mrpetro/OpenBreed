@@ -4,6 +4,8 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Rendering.Interface.Data;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
@@ -24,6 +26,7 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private readonly ISystemFactory systemFactory;
+        private readonly IRenderableFactory renderableFactory;
         private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
         private readonly HudHelper hudHelper;
@@ -34,9 +37,10 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Constructors
 
-        public DebugHudWorldHelper(ISystemFactory systemFactory, IWorldMan worldMan, IEntityMan entityMan, HudHelper hudHelper, CameraHelper cameraHelper, IViewClient viewClient)
+        public DebugHudWorldHelper(ISystemFactory systemFactory, IRenderableFactory renderableFactory, IWorldMan worldMan, IEntityMan entityMan, HudHelper hudHelper, CameraHelper cameraHelper, IViewClient viewClient)
         {
             this.systemFactory = systemFactory;
+            this.renderableFactory = renderableFactory;
             this.worldMan = worldMan;
             this.entityMan = entityMan;
             this.hudHelper = hudHelper;
@@ -53,6 +57,7 @@ namespace OpenBreed.Sandbox.Worlds
         public void Create()
         {
             var builder = worldMan.Create().SetName("DebugHUD");
+            builder.AddModule<IRenderableBatch>(renderableFactory.CreateRenderableBatch());
 
             AddSystems(builder);
 
