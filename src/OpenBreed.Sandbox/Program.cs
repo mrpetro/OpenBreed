@@ -129,29 +129,33 @@ namespace OpenBreed.Sandbox
             var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
 
             manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(manCollection.GetManager<ISystemFactory>(),
-                                                                                            manCollection.GetManager<IRenderingMan>(),
-                                                                                            manCollection.GetManager<IWorldMan>(),
-                                                                                            manCollection.GetManager<IEventsMan>(),
-                                                                                            manCollection.GetManager<ViewportCreator>(),
-                                                                                            manCollection.GetManager<IViewClient>()));
+                                                                                      manCollection.GetManager<IRenderableFactory>(),
+                                                                                      manCollection.GetManager<IRenderingMan>(),
+                                                                                      manCollection.GetManager<IWorldMan>(),
+                                                                                      manCollection.GetManager<IEventsMan>(),
+                                                                                      manCollection.GetManager<ViewportCreator>(),
+                                                                                      manCollection.GetManager<IViewClient>()));
+
             manCollection.AddSingleton<GameHudWorldHelper>(() => new GameHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
-                                                                                manCollection.GetManager<IWorldMan>(),
-                                                                                manCollection.GetManager<IFontMan>(),
-                                                                                manCollection.GetManager<IViewClient>(),
-                                                                                manCollection.GetManager<IEntityMan>(),
-                                                                                manCollection.GetManager<IEntityFactory>(),
-                                                                                manCollection.GetManager<VanillaStatusBarHelper>(),
-                                                                                manCollection.GetManager<CameraHelper>(),
-                                                                                manCollection.GetManager<IRepositoryProvider>(),
-                                                                                manCollection.GetManager<IDataLoaderFactory>(),
-                                                                                manCollection.GetManager<SpriteAtlasDataProvider>()));
+                                                                                        manCollection.GetManager<IRenderableFactory>(),
+                                                                                        manCollection.GetManager<IWorldMan>(),
+                                                                                        manCollection.GetManager<IFontMan>(),
+                                                                                        manCollection.GetManager<IViewClient>(),
+                                                                                        manCollection.GetManager<IEntityMan>(),
+                                                                                        manCollection.GetManager<IEntityFactory>(),
+                                                                                        manCollection.GetManager<VanillaStatusBarHelper>(),
+                                                                                        manCollection.GetManager<CameraHelper>(),
+                                                                                        manCollection.GetManager<IRepositoryProvider>(),
+                                                                                        manCollection.GetManager<IDataLoaderFactory>(),
+                                                                                        manCollection.GetManager<SpriteAtlasDataProvider>()));
 
             manCollection.AddSingleton<DebugHudWorldHelper>(() => new DebugHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
-                                                                                manCollection.GetManager<IWorldMan>(),
-                                                                                manCollection.GetManager<IEntityMan>(),
-                                                                                manCollection.GetManager<HudHelper>(),
-                                                                                manCollection.GetManager<CameraHelper>(),
-                                                                                manCollection.GetManager<IViewClient>()));
+                                                                                          manCollection.GetManager<IRenderableFactory>(),
+                                                                                          manCollection.GetManager<IWorldMan>(),
+                                                                                          manCollection.GetManager<IEntityMan>(),
+                                                                                          manCollection.GetManager<HudHelper>(),
+                                                                                          manCollection.GetManager<CameraHelper>(),
+                                                                                          manCollection.GetManager<IViewClient>()));
 
             manCollection.AddSingleton<EntriesHelper>(() => new EntriesHelper(manCollection.GetManager<IWorldMan>(),
                                                                                   manCollection.GetManager<IEntityMan>(),
@@ -453,7 +457,10 @@ namespace OpenBreed.Sandbox
 
             var screenWorldHelper = GetManager<ScreenWorldHelper>();
 
-            renderingMan.ScreenWorld = screenWorldHelper.CreateWorld();
+            var screenWorld = screenWorldHelper.CreateWorld();
+
+            renderingMan.Renderable = screenWorld.GetModule<IRenderableBatch>();
+            //renderingMan.ScreenWorld = screenWorldHelper.CreateWorld();
 
             var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
             debugHudWorldHelper.Create();

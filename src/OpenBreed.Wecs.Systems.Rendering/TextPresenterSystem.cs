@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class TextPresenterSystem : SystemBase, IRenderableSystem
+    public class TextPresenterSystem : SystemBase, IRenderable
     {
         #region Private Fields
 

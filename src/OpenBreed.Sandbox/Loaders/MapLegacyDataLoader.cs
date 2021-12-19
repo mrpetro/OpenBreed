@@ -17,6 +17,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Wecs.Components;
@@ -51,6 +52,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly IRenderableFactory renderableFactory;
         private readonly MapsDataProvider mapsDataProvider;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
@@ -68,19 +70,21 @@ namespace OpenBreed.Sandbox.Loaders
         #region Public Constructors
 
         public MapLegacyDataLoader(IDataLoaderFactory dataLoaderFactory,
-                                  IEntityMan entityMan,
-                                  IRepositoryProvider repositoryProvider,
-                                  MapsDataProvider mapsDataProvider,
-                                  ISystemFactory systemFactory,
-                                  IWorldMan worldMan,
-                                  PalettesDataProvider palettesDataProvider,
-                                  IBroadphaseFactory broadphaseGridFactory,
-                                  ITileGridFactory tileGridFactory,
-                                  ITileMan tileMan,
-                                  ILogger logger)
+                                   IRenderableFactory renderableFactory,
+                                   IEntityMan entityMan,
+                                   IRepositoryProvider repositoryProvider,
+                                   MapsDataProvider mapsDataProvider,
+                                   ISystemFactory systemFactory,
+                                   IWorldMan worldMan,
+                                   PalettesDataProvider palettesDataProvider,
+                                   IBroadphaseFactory broadphaseGridFactory,
+                                   ITileGridFactory tileGridFactory,
+                                   ITileMan tileMan,
+                                   ILogger logger)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
+            this.renderableFactory = renderableFactory;
             this.entityMan = entityMan;
             this.mapsDataProvider = mapsDataProvider;
             this.systemFactory = systemFactory;
@@ -148,8 +152,10 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
             worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
+            worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
             worldBuilder.SetupGameWorldSystems(systemFactory);
+
             world = worldBuilder.Build();
 
             var mapper = new MapMapper(dbMap.TileSetRef);

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 {
-    public class GroupMapCellDisplaySystem : SystemBase, IRenderableSystem
+    public class GroupMapCellDisplaySystem : SystemBase, IRenderable
     {
         #region Private Fields
 
@@ -45,6 +45,8 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
         public override void Initialize(World world)
         {
             base.Initialize(world);
+
+            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         public void Render(Box2 clipBox, int depth, float dt)

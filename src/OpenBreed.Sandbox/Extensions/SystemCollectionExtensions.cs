@@ -164,6 +164,7 @@ namespace OpenBreed.Sandbox.Extensions
             dataLoaderFactory.Register<MapLegacyDataLoader>(() =>
             {
                 var mapLegacyDataLoader = new MapLegacyDataLoader(dataLoaderFactory,
+                                                              managerCollection.GetManager<IRenderableFactory>(),
                                                               managerCollection.GetManager<IEntityMan>(),
                                                               managerCollection.GetManager<IRepositoryProvider>(),
                                                               managerCollection.GetManager<MapsDataProvider>(),
@@ -182,15 +183,16 @@ namespace OpenBreed.Sandbox.Extensions
             dataLoaderFactory.Register<MapTxtDataLoader>(() =>
             {
                 var mapTxtDataLoader = new MapTxtDataLoader(dataLoaderFactory,
-                                                              managerCollection.GetManager<IRepositoryProvider>(),
-                                                              managerCollection.GetManager<ISystemFactory>(),
-                                                              managerCollection.GetManager<IWorldMan>(),
-                                                              managerCollection.GetManager<PalettesDataProvider>(),
-                                                              managerCollection.GetManager<ActionSetsDataProvider>(),
-                                                              managerCollection.GetManager<IBroadphaseFactory>(),
-                                                              managerCollection.GetManager<ITileGridFactory>(),
-                                                              managerCollection.GetManager<ITileMan>(),
-                                                              managerCollection.GetManager<ILogger>());
+                                                            managerCollection.GetManager<IRenderableFactory>(),
+                                                            managerCollection.GetManager<IRepositoryProvider>(),
+                                                            managerCollection.GetManager<ISystemFactory>(),
+                                                            managerCollection.GetManager<IWorldMan>(),
+                                                            managerCollection.GetManager<PalettesDataProvider>(),
+                                                            managerCollection.GetManager<ActionSetsDataProvider>(),
+                                                            managerCollection.GetManager<IBroadphaseFactory>(),
+                                                            managerCollection.GetManager<ITileGridFactory>(),
+                                                            managerCollection.GetManager<ITileMan>(),
+                                                            managerCollection.GetManager<ILogger>());
 
                 mapTxtDataLoader.RegisterEntityLoaders(managerCollection);
                 return mapTxtDataLoader;

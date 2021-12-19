@@ -12,6 +12,7 @@ using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Worlds;
@@ -204,6 +205,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly IRenderableFactory renderableFactory;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         //private readonly WorldBlockBuilder worldBlockBuilder;
@@ -220,6 +222,7 @@ namespace OpenBreed.Sandbox.Loaders
         #region Public Constructors
 
         public MapTxtDataLoader(IDataLoaderFactory dataLoaderFactory,
+                                IRenderableFactory renderableFactory,
                                   IRepositoryProvider repositoryProvider,
                                   ISystemFactory systemFactory,
                                   IWorldMan worldMan,
@@ -232,6 +235,7 @@ namespace OpenBreed.Sandbox.Loaders
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
+            this.renderableFactory = renderableFactory;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             //this.worldBlockBuilder = worldBlockBuilder;
@@ -296,6 +300,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
             worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
+            worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
             worldBuilder.SetupGameWorldSystems(systemFactory);
             world = worldBuilder.Build();

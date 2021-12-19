@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -20,7 +21,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     /// - CameraComponent
     /// - Position
     /// </summary>
-    public class ViewportSystem : SystemBase, IRenderableSystem
+    public class ViewportSystem : SystemBase, IRenderable
     {
         #region Private Fields
 
@@ -51,6 +52,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Internal Constructors
 
         #region Public Methods
+
+        public override void Initialize(World world)
+        {
+            base.Initialize(world);
+
+            world.GetModule<IRenderableBatch>().Add(this);
+        }
 
         public Vector4 ClientToWorld(Vector4 coords, Entity viewport)
         {
@@ -264,7 +272,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 if (camera.WorldId != -1)
                 {
                     var world = worldMan.GetById(camera.WorldId);
-                    world.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
+
+                    world.GetModule<IRenderableBatch>().Render(clipBox, depth, dt);
+
+                    //world.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
                 }
 
                 if (vpc.Clipping)

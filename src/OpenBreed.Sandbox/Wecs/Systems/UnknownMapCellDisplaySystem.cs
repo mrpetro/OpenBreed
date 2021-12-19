@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 {
-    public class UnknownMapCellDisplaySystem : SystemBase, IRenderableSystem
+    public class UnknownMapCellDisplaySystem : SystemBase, IRenderable
     {
         #region Private Fields
 
@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
         {
             base.Initialize(world);
 
-            //inputsMan.MouseMove += Inputs_MouseMove;
+            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         public void Render(Box2 clipBox, int depth, float dt)

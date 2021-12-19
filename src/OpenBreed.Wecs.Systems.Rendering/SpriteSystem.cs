@@ -2,13 +2,14 @@
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class SpriteSystem : SystemBase, IRenderableSystem
+    public class SpriteSystem : SystemBase, IRenderable
     {
         #region Private Fields
 
@@ -30,6 +31,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Internal Constructors
 
         #region Public Methods
+
+        public override void Initialize(World world)
+        {
+            base.Initialize(world);
+
+            world.GetModule<IRenderableBatch>().Add(this);
+        }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {

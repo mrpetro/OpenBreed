@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class TileSystem : SystemBase, IUpdatableSystem, IRenderableSystem
+    public class TileSystem : SystemBase, IUpdatableSystem, IRenderable
     {
         #region Private Fields
 
@@ -32,6 +33,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
             base.Initialize(world);
 
             tileGrid = world.GetModule<ITileGrid>();
+
+            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         public void Render(Box2 clipBox, int depth, float dt)

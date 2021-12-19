@@ -1,11 +1,6 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Core;
-
-//using OpenBreed.Core.Extensions;
+﻿using OpenBreed.Core;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
@@ -18,16 +13,14 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Private Fields
 
         private readonly IViewClient viewClient;
-        private readonly IWorldMan worldMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RenderingMan(IViewClient viewClient, IWorldMan worldMan)
+        public RenderingMan(IViewClient viewClient)
         {
             this.viewClient = viewClient;
-            this.worldMan = worldMan;
 
             viewClient.ResizeEvent += (s, a) => OnResize(a.Width, a.Height);
             viewClient.RenderFrameEvent += (s, a) => OnRenderFrame(a);
@@ -43,7 +36,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Properties
 
-        public World ScreenWorld { get; set; }
+        public IRenderableBatch Renderable { get; set; }
 
         public float Fps { get; private set; }
 
@@ -68,7 +61,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             {
                 GL.PushMatrix();
 
-                ScreenWorld?.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(ClipBox, 0, dt));
+                Renderable?.Render(ClipBox, 0, dt);
             }
             finally
             {
