@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
@@ -10,6 +12,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public void DrawUnitRectangle()
         {
+            RenderTools.DrawUnitRectangle();
+        }
+
+        public void DrawUnitRectangle(Color4 color)
+        {
+            GL.Color4(color);
             RenderTools.DrawUnitRectangle();
         }
 
@@ -25,6 +33,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public void DrawUnitBox()
         {
+            RenderTools.DrawUnitBox();
+        }
+
+        public void DrawUnitBox(Color4 color)
+        {
+            GL.Color4(color);
             RenderTools.DrawUnitBox();
         }
 

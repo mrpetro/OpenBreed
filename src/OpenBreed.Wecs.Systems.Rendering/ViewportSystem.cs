@@ -25,7 +25,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
     {
         #region Private Fields
 
-        private const int RENDER_MAX_DEPTH = 3;
         private const float ZOOM_BASE = 1.0f / 512.0f;
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
 
@@ -75,7 +74,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var viewportX = GetViewportTransform(pos, vpc);
             x = Matrix4.Mult(viewportX, x);
 
-            var cameraX = GetCameraTransform(vpc, camera);
+            var cpos = camera.Get<PositionComponent>();
+            var cmc = camera.Get<CameraComponent>();
+
+            var cameraX = GetCameraTransform(vpc, cpos.Value, cmc.Size);
             x = Matrix4.Mult(cameraX, x);
 
             x.Invert();
@@ -98,21 +100,20 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// This will return camera tranformation matrix which includes aspect ratio correction
         /// </summary>
         /// <returns>Camera transformation matrix</returns>
-        public Matrix4 GetCameraTransform(ViewportComponent vpc, Entity camera)
+        public Matrix4 GetCameraTransform(ViewportComponent vpc, Vector2 pos, Vector2 size)
         {
-            var pos = camera.Get<PositionComponent>();
-            var cmc = camera.Get<CameraComponent>();
+            var cameraRatio = size.X / size.Y;
 
             var transform = Matrix4.Identity;
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-(int)pos.Value.X, -(int)pos.Value.Y, 0.0f));
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / cmc.Width, 1.0f / cmc.Height, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-(int)pos.X, -(int)pos.Y, 0.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / size.X, 1.0f / size.Y, 1.0f));
 
-            var vcRatio = vpc.Ratio / cmc.Ratio;
+            var vcRatio = vpc.Ratio / cameraRatio;
 
             switch (vpc.ScalingType)
             {
                 case ViewportScalingType.None:
-                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Width / vpc.Width, cmc.Height / vpc.Height, 1.0f));
+                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(size.X / vpc.Width, size.Y / vpc.Height, 1.0f));
                     break;
 
                 case ViewportScalingType.FitHeightPreserveAspectRatio:
@@ -142,11 +143,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            if (depth > RENDER_MAX_DEPTH)
-                return;
-
-            depth++;
-
             for (int i = 0; i < entities.Count; i++)
                 RenderViewport(entities[i], clipBox, depth, dt);
         }
@@ -171,16 +167,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Private Methods
 
-        private void GetVisibleRectangle(Entity camera, Matrix4 cameraT, out Box2 viewBox)
+        private void GetVisibleRectangle(Vector2 pos, Vector2 size, out Box2 viewBox)
         {
-            var pos = camera.Get<PositionComponent>();
-            var cmc = camera.Get<CameraComponent>();
-            var x = pos.Value.X;
-            var y = pos.Value.Y;
-
-            viewBox = Box2.FromTLRB(y + cmc.Height / 2.0f, x - cmc.Width / 2.0f, x + cmc.Width / 2.0f, y - cmc.Height / 2.0f);
-
-            //viewBox = viewBox.Inflate(-16.0f);
+            var x = pos.X;
+            var y = pos.Y;
+            viewBox = Box2.FromTLRB(y + size.Y / 2.0f, x - size.X / 2.0f, x + size.X / 2.0f, y - size.Y / 2.0f);
         }
 
         /// <summary>
@@ -205,20 +196,20 @@ namespace OpenBreed.Wecs.Systems.Rendering
             if (pos.Value.Y > clipBox.Top)
                 return;
 
-            GL.PushMatrix();
+
 
             //Apply viewport transformation matrix
             var transform = GetViewportTransform(pos, vpc);
+
+            GL.PushMatrix();
+
             GL.MultMatrix(ref transform);
 
             if (vpc.DrawBackgroud)
-                DrawBackground(vpc);
+                primitiveRenderer.DrawUnitBox(vpc.BackgroundColor);
 
             if (vpc.DrawBorder)
-            {
-                //GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
-                //primitiveRenderer.DrawUnitRectangle();
-            }
+                primitiveRenderer.DrawUnitRectangle(Color4.Red);
 
             var cameraEntity = entityMan.GetById(vpc.CameraEntityId);
 
@@ -234,77 +225,36 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// <param name="dt">Time step</param>
         private void DrawCameraView(int depth, float dt, ViewportComponent vpc, Entity camera)
         {
+            if (camera.WorldId == -1)
+                return;
+
+            var pos = camera.Get<PositionComponent>().Value;
+            var size = camera.Get<CameraComponent>().Size;
+            var brightness = camera.Get<CameraComponent>().Brightness;
+
+            //Apply camera transformation matrix
+            var transform = GetCameraTransform(vpc, pos, size);
+
+            var world = worldMan.GetById(camera.WorldId);
+            var renderable = world.GetModule<IRenderableBatch>();
+
+            GL.PushMatrix();
+
             try
             {
-                GL.PushMatrix();
-
-                //Apply camera transformation matrix
-                var transform = GetCameraTransform(vpc, camera);
-
                 GL.MultMatrix(ref transform);
 
-                GetVisibleRectangle(camera, transform, out Box2 clipBox);
+                GetVisibleRectangle(pos, size, out Box2 clipBox);
 
-                //GL.Color4(Color4.LightBlue);
-                //primitiveRenderer.DrawRectangle(clipBox);
-
-                if (vpc.Clipping)
-                {
-                    //Enable stencil buffer
-                    if (depth == 1)
-                        GL.Enable(EnableCap.StencilTest);
-
-                    GL.ColorMask(false, false, false, false);
-                    GL.DepthMask(false);
-                    GL.StencilFunc(StencilFunction.Always, depth, depth);
-                    GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
-
-                    // Draw black box
-                    GL.Color4(Color4.Black);
-                    primitiveRenderer.DrawBox(clipBox);
-
-                    GL.ColorMask(true, true, true, true);
-                    GL.DepthMask(true);
-                    GL.StencilFunc(StencilFunction.Equal, depth, depth);
-                    GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
-                }
-
-                if (camera.WorldId != -1)
-                {
-                    var world = worldMan.GetById(camera.WorldId);
-
-                    world.GetModule<IRenderableBatch>().Render(clipBox, depth, dt);
-
-                    //world.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
-                }
-
-                if (vpc.Clipping)
-                {
-                    GL.ColorMask(false, false, false, false);
-                    GL.DepthMask(false);
-                    GL.StencilFunc(StencilFunction.Always, depth, depth);
-                    GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
-
-                    // Draw black box
-                    GL.Color4(Color4.Black);
-                    primitiveRenderer.DrawBox(clipBox);
-
-                    GL.ColorMask(true, true, true, true);
-                    GL.DepthMask(true);
-
-                    if (depth == 1)
-                        GL.Disable(EnableCap.StencilTest);
-                }
+                renderable.Render(clipBox, depth, dt);
             }
             finally
             {
                 GL.PopMatrix();
             }
 
-            var cameraComponent = camera.Get<CameraComponent>();
-
             //Draw camera effects
-            DrawBrightnessEffect(cameraComponent.Brightness);
+            DrawBrightnessEffect(brightness);
         }
 
         private void DrawBrightnessEffect(float brightness)
@@ -324,13 +274,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
             primitiveRenderer.DrawUnitBox();
             GL.Disable(EnableCap.Blend);
-        }
-
-        private void DrawBackground(ViewportComponent vpc)
-        {
-            //Draw background for this viewport
-            GL.Color4(vpc.BackgroundColor);
-            primitiveRenderer.DrawUnitBox();
         }
 
         #endregion Private Methods

@@ -44,7 +44,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return new FontFromSpritesAtlasBuilder(this, spriteMan);
         }
 
-        public void Render(int fontId, string text, Vector2 origin, float order, Box2 clipBox)
+        public void RenderPart(int fontId, string text, Vector2 origin, float order, Box2 clipBox)
         {
             GL.Translate(origin.X, origin.Y, 0.0f);
             GetById(fontId).Draw(text, clipBox);
@@ -112,6 +112,21 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
+        }
+
+        public void RenderStart(Vector2 pos)
+        {
+            GL.Enable(EnableCap.Texture2D);
+            GL.PushMatrix();
+
+            GL.Translate(pos.X, pos.Y, 0.0f);
+
+        }
+
+        public void RenderEnd()
+        {
+            GL.PopMatrix();
+            GL.Disable(EnableCap.Texture2D);
         }
 
         #endregion Internal Methods

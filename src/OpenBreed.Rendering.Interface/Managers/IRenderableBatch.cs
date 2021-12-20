@@ -16,6 +16,7 @@ namespace OpenBreed.Rendering.Interface.Managers
         #region Public Methods
 
         public void Render(Box2 viewBox, int depth, float dt);
+
         void Add(IRenderable renderable);
 
         #endregion Public Methods

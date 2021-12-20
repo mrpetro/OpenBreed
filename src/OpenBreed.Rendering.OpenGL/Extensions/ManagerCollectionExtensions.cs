@@ -30,7 +30,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
                                                                            manCollection.GetManager<IStampMan>(),
                                                                            manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<IRenderableFactory>(() => new RenderableFactory());
+            manCollection.AddSingleton<IRenderableFactory>(() => new RenderableFactory(manCollection.GetManager<IPrimitiveRenderer>()));
 
             manCollection.AddSingleton<ISpriteMan>(() => new SpriteMan(manCollection.GetManager<ITextureMan>(),
                                                                        manCollection.GetManager<ILogger>()));

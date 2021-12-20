@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenTK;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
@@ -24,8 +25,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         internal CameraComponent(CameraComponentBuilder builder)
         {
-            Width = builder.Width;
-            Height = builder.Height;
+            Size = builder.Size;
             Brightness = builder.Brightness;
         }
 
@@ -34,19 +34,9 @@ namespace OpenBreed.Wecs.Components.Rendering
         #region Public Properties
 
         /// <summary>
-        /// Width value of camera
+        /// Width and Height of camera view
         /// </summary>
-        public float Width { get; set; }
-
-        /// <summary>
-        /// Height value of camera
-        /// </summary>
-        public float Height { get; set; }
-
-        /// <summary>
-        /// Aspect ratio of this camera
-        /// </summary>
-        public float Ratio { get { return Width / Height; } }
+        public Vector2 Size { get; set; }
 
         /// <summary>
         /// Brightness value of camera
@@ -90,8 +80,7 @@ namespace OpenBreed.Wecs.Components.Rendering
     {
         #region Internal Fields
 
-        internal float Width;
-        internal float Height;
+        internal Vector2 Size;
         internal float Brightness = 1.0f;
 
         #endregion Internal Fields
@@ -113,8 +102,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetSize(float width, float height)
         {
-            Width = width;
-            Height = height;
+            Size = new Vector2(width, height);
         }
 
         public void SetBrightness(float brightness)
