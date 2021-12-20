@@ -57,16 +57,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
-            try
-            {
-                GL.PushMatrix();
-
-                Renderable?.Render(ClipBox, 0, dt);
-            }
-            finally
-            {
-                GL.PopMatrix();
-            }
+            Renderable?.Render(Matrix4.Identity, ClipBox, 0, dt);
         }
 
         private void OnResize(float width, float height)

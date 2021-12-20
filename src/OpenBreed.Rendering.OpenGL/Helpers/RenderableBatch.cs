@@ -3,30 +3,32 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
     internal class RenderableBatch : IRenderableBatch
     {
-        public RenderableBatch(IPrimitiveRenderer primitiveRenderer)
-        {
-            this.primitiveRenderer = primitiveRenderer;
-
-        }
-
         #region Private Fields
 
         private const bool CLIPPING = true;
+
         private const int RENDER_MAX_DEPTH = 3;
+
         private readonly List<IRenderable> renderables = new List<IRenderable>();
+
         private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
+
+        #region Public Constructors
+
+        public RenderableBatch(IPrimitiveRenderer primitiveRenderer)
+        {
+            this.primitiveRenderer = primitiveRenderer;
+        }
+
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -35,7 +37,27 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             renderables.Add(renderable);
         }
 
-        public void Render(Box2 clipBox, int depth, float dt)
+        public void Render(Matrix4 transform, Box2 clipBox, int depth, float dt)
+        {
+            GL.PushMatrix();
+
+            try
+            {
+                GL.MultMatrix(ref transform);
+
+                Render(clipBox, depth, dt);
+            }
+            finally
+            {
+                GL.PopMatrix();
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void Render(Box2 clipBox, int depth, float dt)
         {
             if (CLIPPING)
             {
@@ -84,6 +106,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             }
         }
 
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

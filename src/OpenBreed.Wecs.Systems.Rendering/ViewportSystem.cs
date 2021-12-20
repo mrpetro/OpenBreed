@@ -167,11 +167,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Private Methods
 
-        private void GetVisibleRectangle(Vector2 pos, Vector2 size, out Box2 viewBox)
+        private Box2 GetVisibleRectangle(Vector2 pos, Vector2 size)
         {
             var x = pos.X;
             var y = pos.Y;
-            viewBox = Box2.FromTLRB(y + size.Y / 2.0f, x - size.X / 2.0f, x + size.X / 2.0f, y - size.Y / 2.0f);
+            return Box2.FromTLRB(y + size.Y / 2.0f, x - size.X / 2.0f, x + size.X / 2.0f, y - size.Y / 2.0f);
         }
 
         /// <summary>
@@ -230,6 +230,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             var pos = camera.Get<PositionComponent>().Value;
             var size = camera.Get<CameraComponent>().Size;
+            var clipBox = GetVisibleRectangle(pos, size);
+
             var brightness = camera.Get<CameraComponent>().Brightness;
 
             //Apply camera transformation matrix
@@ -238,20 +240,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var world = worldMan.GetById(camera.WorldId);
             var renderable = world.GetModule<IRenderableBatch>();
 
-            GL.PushMatrix();
-
-            try
-            {
-                GL.MultMatrix(ref transform);
-
-                GetVisibleRectangle(pos, size, out Box2 clipBox);
-
-                renderable.Render(clipBox, depth, dt);
-            }
-            finally
-            {
-                GL.PopMatrix();
-            }
+            renderable.Render(transform, clipBox, depth, dt);
 
             //Draw camera effects
             DrawBrightnessEffect(brightness);
