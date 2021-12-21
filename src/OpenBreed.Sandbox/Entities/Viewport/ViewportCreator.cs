@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
+using OpenTK;
 using OpenTK.Graphics;
 
 namespace OpenBreed.Sandbox.Entities.Viewport
@@ -40,8 +41,7 @@ namespace OpenBreed.Sandbox.Entities.Viewport
             //var viewport = entityMan.Create();
             viewport.Tag = name;
 
-            viewport.Get<ViewportComponent>().Width = width;
-            viewport.Get<ViewportComponent>().Height = height;
+            viewport.Get<ViewportComponent>().Size = new Vector2(width, height);
 
             return viewport;
         }

@@ -42,7 +42,8 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 
             manCollection.AddSingleton<IPrimitiveRenderer>(() => new PrimitiveRenderer());
 
-            manCollection.AddSingleton<IRenderingMan>(() => new RenderingMan(manCollection.GetManager<IViewClient>()));
+            manCollection.AddSingleton<IRenderingMan>(() => new RenderingMan(manCollection.GetManager<IViewClient>(),
+                                                                             manCollection.GetManager<IPrimitiveRenderer>()));
         }
 
         public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)

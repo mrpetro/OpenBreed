@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Extensions;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
@@ -7,10 +6,7 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -25,24 +21,23 @@ namespace OpenBreed.Wecs.Systems.Rendering
     {
         #region Private Fields
 
-        private const float ZOOM_BASE = 1.0f / 512.0f;
-        private const float BRIGHTNESS_Z_LEVEL = 50.0f;
-
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
+        private readonly IRenderingMan renderingMan;
         private readonly IViewClient viewClient;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal ViewportSystem(IEntityMan entityMan, IWorldMan worldMan, IPrimitiveRenderer primitiveRenderer, IViewClient viewClient)
+        internal ViewportSystem(IEntityMan entityMan, IWorldMan worldMan, IPrimitiveRenderer primitiveRenderer, IRenderingMan renderingMan, IViewClient viewClient)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;
             this.primitiveRenderer = primitiveRenderer;
+            this.renderingMan = renderingMan;
             this.viewClient = viewClient;
             RequireEntityWith<ViewportComponent>();
             RequireEntityWith<PositionComponent>();
@@ -71,13 +66,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var screenX = viewClient.ClientTransform;
             x = Matrix4.Mult(screenX, x);
 
-            var viewportX = GetViewportTransform(pos, vpc);
+            var viewportX = GetViewportTransform(pos.Value, vpc.Size);
             x = Matrix4.Mult(viewportX, x);
 
             var cpos = camera.Get<PositionComponent>();
             var cmc = camera.Get<CameraComponent>();
 
-            var cameraX = GetCameraTransform(vpc, cpos.Value, cmc.Size);
+            var cameraX = GetCameraTransform(vpc.ScalingType, vpc.Size, cpos.Value, cmc.Size);
             x = Matrix4.Mult(cameraX, x);
 
             x.Invert();
@@ -88,11 +83,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// <summary>
         /// Local transformation matrix of this viewport
         /// </summary>
-        public Matrix4 GetViewportTransform(PositionComponent pos, ViewportComponent vpc)
+        public Matrix4 GetViewportTransform(Vector2 pos, Vector2 size)
         {
             var transform = Matrix4.Identity;
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(vpc.Width, vpc.Height, 1.0f));
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation((int)pos.Value.X, (int)pos.Value.Y, 0.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(size.X, size.Y, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation((int)pos.X, (int)pos.Y, 0.0f));
             return transform;
         }
 
@@ -100,20 +95,20 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// This will return camera tranformation matrix which includes aspect ratio correction
         /// </summary>
         /// <returns>Camera transformation matrix</returns>
-        public Matrix4 GetCameraTransform(ViewportComponent vpc, Vector2 pos, Vector2 size)
+        public Matrix4 GetCameraTransform(ViewportScalingType viewportScalingType, Vector2 viewportSize, Vector2 cameraPos, Vector2 cameraSize)
         {
-            var cameraRatio = size.X / size.Y;
+            var viewportRatio = viewportSize.X / viewportSize.Y;
+            var cameraRatio = cameraSize.X / cameraSize.Y;
+            var vcRatio = viewportRatio / cameraRatio;
 
             var transform = Matrix4.Identity;
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-(int)pos.X, -(int)pos.Y, 0.0f));
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / size.X, 1.0f / size.Y, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-(int)cameraPos.X, -(int)cameraPos.Y, 0.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / cameraSize.X, 1.0f / cameraSize.Y, 1.0f));
 
-            var vcRatio = vpc.Ratio / cameraRatio;
-
-            switch (vpc.ScalingType)
+            switch (viewportScalingType)
             {
                 case ViewportScalingType.None:
-                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(size.X / vpc.Width, size.Y / vpc.Height, 1.0f));
+                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(cameraSize.X / viewportSize.X, cameraSize.Y / viewportSize.Y, 1.0f));
                     break;
 
                 case ViewportScalingType.FitHeightPreserveAspectRatio:
@@ -181,88 +176,48 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private void RenderViewport(Entity vpe, Box2 clipBox, int depth, float dt)
         {
             var vpc = vpe.Get<ViewportComponent>();
-            var pos = vpe.Get<PositionComponent>();
+            var viewportPos = vpe.Get<PositionComponent>().Value;
+            var viewportScalingType = vpc.ScalingType;
+            var viewportSize = vpc.Size;
 
             //Test viewport for clippling here
-            if (pos.Value.X + vpc.Width < clipBox.Left)
+            if (viewportPos.X + viewportSize.X < clipBox.Left)
                 return;
 
-            if (pos.Value.X > clipBox.Right)
+            if (viewportPos.X > clipBox.Right)
                 return;
 
-            if (pos.Value.Y + vpc.Height < clipBox.Bottom)
+            if (viewportPos.Y + viewportSize.Y < clipBox.Bottom)
                 return;
 
-            if (pos.Value.Y > clipBox.Top)
+            if (viewportPos.Y > clipBox.Top)
                 return;
-
-
 
             //Apply viewport transformation matrix
-            var transform = GetViewportTransform(pos, vpc);
+            var transform = GetViewportTransform(viewportPos, viewportSize);
 
-            GL.PushMatrix();
-
-            GL.MultMatrix(ref transform);
-
-            if (vpc.DrawBackgroud)
-                primitiveRenderer.DrawUnitBox(vpc.BackgroundColor);
-
-            if (vpc.DrawBorder)
-                primitiveRenderer.DrawUnitRectangle(Color4.Red);
-
-            var cameraEntity = entityMan.GetById(vpc.CameraEntityId);
-
-            if (cameraEntity != null)
-                DrawCameraView(depth, dt, vpc, cameraEntity);
-
-            GL.PopMatrix();
+            renderingMan.RenderViewport(vpc.DrawBorder, vpc.DrawBackgroud, vpc.BackgroundColor, transform, () => DrawCameraView(vpc.CameraEntityId, viewportSize, viewportScalingType, depth, dt));
         }
 
-        /// <summary>
-        /// This will render world part currently visible by the camera into given viewport
-        /// </summary>
-        /// <param name="dt">Time step</param>
-        private void DrawCameraView(int depth, float dt, ViewportComponent vpc, Entity camera)
+        private void DrawCameraView(int cameraEntityId, Vector2 viewportSize, ViewportScalingType viewportScalingType, int depth, float dt)
         {
-            if (camera.WorldId == -1)
-                return;
+            var camera = entityMan.GetById(cameraEntityId);
 
-            var pos = camera.Get<PositionComponent>().Value;
-            var size = camera.Get<CameraComponent>().Size;
-            var clipBox = GetVisibleRectangle(pos, size);
-
-            var brightness = camera.Get<CameraComponent>().Brightness;
-
-            //Apply camera transformation matrix
-            var transform = GetCameraTransform(vpc, pos, size);
-
-            var world = worldMan.GetById(camera.WorldId);
-            var renderable = world.GetModule<IRenderableBatch>();
-
-            renderable.Render(transform, clipBox, depth, dt);
-
-            //Draw camera effects
-            DrawBrightnessEffect(brightness);
-        }
-
-        private void DrawBrightnessEffect(float brightness)
-        {
-            GL.Enable(EnableCap.Blend);
-            if (brightness > 1.0)
+            if (camera != null && camera.WorldId != -1)
             {
-                GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.One);
-                GL.Color3(brightness - 1, brightness - 1, brightness - 1);
-            }
-            else
-            {
-                GL.BlendFunc(BlendingFactor.Zero, BlendingFactor.SrcColor);
-                GL.Color3(brightness, brightness, brightness);
-            }
+                var cameraPos = camera.Get<PositionComponent>().Value;
+                var cameraSize = camera.Get<CameraComponent>().Size;
+                var cameraBrightness = camera.Get<CameraComponent>().Brightness;
+                var cameraClipBox = GetVisibleRectangle(cameraPos, cameraSize);
+                var cameraTransform = GetCameraTransform(viewportScalingType, viewportSize, cameraPos, cameraSize);
 
-            GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
-            primitiveRenderer.DrawUnitBox();
-            GL.Disable(EnableCap.Blend);
+                var cameraWorld = worldMan.GetById(camera.WorldId);
+                var worldRenderable = cameraWorld.GetModule<IRenderableBatch>();
+                worldRenderable.Render(cameraTransform, cameraClipBox, depth, dt);
+
+                //Draw camera effects
+                primitiveRenderer.DrawBrightnessBox(cameraBrightness);
+            }
         }
 
         #endregion Private Methods

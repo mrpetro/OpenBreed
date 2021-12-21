@@ -47,13 +47,12 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
         {
             var vpc = entity.Get<ViewportComponent>();
 
-            if (vpc.Width == width && vpc.Height == height)
+            if (vpc.Size.X == width && vpc.Size.Y == height)
                 return;
 
-            vpc.Width = width;
-            vpc.Height = height;
+            vpc.Size = new Vector2(width, height);
 
-            entity.RaiseEvent(new ViewportResizedEventArgs(vpc.Width, vpc.Height));
+            entity.RaiseEvent(new ViewportResizedEventArgs(vpc.Size.X, vpc.Size.Y));
         }
 
         public static void SetViewportCamera(this Entity entity, int cameraEntityId)

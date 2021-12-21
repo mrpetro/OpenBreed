@@ -18,6 +18,7 @@ namespace OpenBreed.Rendering.Interface
         void DrawUnitBox();
 
         void DrawUnitBox(Color4 color);
+        void DrawBrightnessBox(float brightness);
 
         #endregion Public Methods
     }

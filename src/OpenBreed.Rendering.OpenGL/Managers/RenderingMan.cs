@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Linq;
@@ -13,15 +15,16 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Private Fields
 
         private readonly IViewClient viewClient;
+        private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RenderingMan(IViewClient viewClient)
+        public RenderingMan(IViewClient viewClient, IPrimitiveRenderer primitiveRenderer)
         {
             this.viewClient = viewClient;
-
+            this.primitiveRenderer = primitiveRenderer;
             viewClient.ResizeEvent += (s, a) => OnResize(a.Width, a.Height);
             viewClient.RenderFrameEvent += (s, a) => OnRenderFrame(a);
         }
@@ -48,6 +51,29 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         { get { return Box2.FromTLRB(viewClient.ClientRectangle.Width, 0.0f, viewClient.ClientRectangle.Height, 0.0f); } }
 
         #endregion Private Properties
+
+
+        public void RenderViewport(bool drawBorder, bool drawBackground, Color4 backgroundColor, Matrix4 viewportTransform, Action func)
+        {
+            GL.PushMatrix();
+
+            try
+            {
+                GL.MultMatrix(ref viewportTransform);
+
+                if (drawBackground)
+                    primitiveRenderer.DrawUnitBox(backgroundColor);
+
+                if (drawBorder)
+                    primitiveRenderer.DrawUnitRectangle(Color4.Red);
+
+                func.Invoke();
+            }
+            finally
+            {
+                GL.PopMatrix();
+            }
+        }
 
         #region Private Methods
 

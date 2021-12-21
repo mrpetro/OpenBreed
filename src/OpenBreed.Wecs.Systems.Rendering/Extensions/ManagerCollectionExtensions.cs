@@ -21,6 +21,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             systemFactory.Register(() => new ViewportSystem(manCollection.GetManager<IEntityMan>(),
                                                             manCollection.GetManager<IWorldMan>(),
                                                             manCollection.GetManager<IPrimitiveRenderer>(),
+                                                            manCollection.GetManager<IRenderingMan>(),
                                                             manCollection.GetManager<IViewClient>()));
             systemFactory.Register(() => new SpriteSystem(manCollection.GetManager<ISpriteMan>()));
             systemFactory.Register(() => new StampSystem());
