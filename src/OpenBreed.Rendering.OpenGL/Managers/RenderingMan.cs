@@ -90,7 +90,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             GL.LoadIdentity();
             GL.Viewport(0, 0, (int)width, (int)height);
-            GL.MatrixMode(MatrixMode.Modelview);
+            GL.MatrixMode(OpenTK.Graphics.OpenGL.MatrixMode.Modelview);
             var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, width, 0.0f, height, -100.0f, 100.0f);
             GL.LoadMatrix(ref ortho);
 

@@ -2,7 +2,7 @@
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using GL = OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
@@ -16,6 +16,37 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
+        public void PushMatrix()
+        {
+            GL.GL.PushMatrix();
+        }
+
+        public void PopMatrix()
+        {
+            GL.GL.PopMatrix();
+        }
+
+        public void MatrixMode(MatrixMode matrixMode)
+        {
+            switch (matrixMode)
+            {
+                case Interface.MatrixMode.ModelView:
+                    GL.GL.MatrixMode(GL.MatrixMode.Modelview);
+                    break;
+                case Interface.MatrixMode.Projection:
+                    GL.GL.MatrixMode(GL.MatrixMode.Projection);
+                    break;
+                case Interface.MatrixMode.Texture:
+                    GL.GL.MatrixMode(GL.MatrixMode.Texture);
+                    break;
+                case Interface.MatrixMode.Color:
+                    GL.GL.MatrixMode(GL.MatrixMode.Color);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void DrawUnitRectangle()
         {
             RenderTools.DrawUnitRectangle();
@@ -23,7 +54,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public void DrawUnitRectangle(Color4 color)
         {
-            GL.Color4(color);
+            GL.GL.Color4(color);
             RenderTools.DrawUnitRectangle();
         }
 
@@ -34,7 +65,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public void DrawRectangle(Box2 clipBox, Color4 color)
         {
-            GL.Color4(color);
+            GL.GL.Color4(color);
             RenderTools.DrawRectangle(clipBox);
         }
 
@@ -50,27 +81,27 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public void DrawUnitBox(Color4 color)
         {
-            GL.Color4(color);
+            GL.GL.Color4(color);
             RenderTools.DrawUnitBox();
         }
 
         public void DrawBrightnessBox(float brightness)
         {
-            GL.Enable(EnableCap.Blend);
+            GL.GL.Enable(GL.EnableCap.Blend);
             if (brightness > 1.0)
             {
-                GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.One);
-                GL.Color3(brightness - 1, brightness - 1, brightness - 1);
+                GL.GL.BlendFunc(GL.BlendingFactor.DstColor, GL.BlendingFactor.One);
+                GL.GL.Color3(brightness - 1, brightness - 1, brightness - 1);
             }
             else
             {
-                GL.BlendFunc(BlendingFactor.Zero, BlendingFactor.SrcColor);
-                GL.Color3(brightness, brightness, brightness);
+                GL.GL.BlendFunc(GL.BlendingFactor.Zero, GL.BlendingFactor.SrcColor);
+                GL.GL.Color3(brightness, brightness, brightness);
             }
 
-            GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
+            GL.GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
             DrawUnitBox();
-            GL.Disable(EnableCap.Blend);
+            GL.GL.Disable(GL.EnableCap.Blend);
         }
 
         #endregion Public Methods

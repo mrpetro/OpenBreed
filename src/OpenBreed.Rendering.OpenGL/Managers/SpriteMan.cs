@@ -5,7 +5,6 @@ using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +15,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly uint[] indicesArray = {
-                                            0,1,2,
-                                            0,2,3
-                                       };
-
-        private readonly int ibo;
         private readonly List<SpriteAtlas> items = new List<SpriteAtlas>();
         private readonly Dictionary<string, SpriteAtlas> names = new Dictionary<string, SpriteAtlas>();
         private readonly ITextureMan textureMan;
@@ -31,23 +24,14 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        internal SpriteMan(ITextureMan textureMan, ILogger logger)
+        internal SpriteMan(ITextureMan textureMan,
+                           ILogger logger)
         {
             this.textureMan = textureMan;
             this.logger = logger;
-
-            //MissingSpriteAtlas = Create("Animations/Missing", 1.0f);
-
-            RenderTools.CreateIndicesArray(indicesArray, out ibo);
         }
 
         #endregion Internal Constructors
-
-        #region Internal Properties
-
-        internal int Ibo => ibo;
-
-        #endregion Internal Properties
 
         #region Public Methods
 
@@ -56,9 +40,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return new SpriteAtlasBuilder(this, textureMan);
         }
 
-        public ISpriteAtlas GetById(int id)
+        public ISpriteAtlas GetById(int atlasId)
         {
-            return items[id];
+            return InternalGetById(atlasId);
         }
 
         public bool Contains(string atlasName)
@@ -82,42 +66,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return null;
         }
 
-        public void Render(int atlasId, int imageId, Vector2 origin, Vector2 pos, float order, Box2 clipBox)
-        {
-            if (atlasId == -1)
-                return;
-
-            var atlas = items[atlasId];
-
-            if (imageId >= atlas.data.Count)
-                return;
-
-            var spriteSize = atlas.GetSpriteSize(imageId);
-
-            //Test viewport for clippling here
-            if (pos.X + origin.X + spriteSize.X < clipBox.Left)
-                return;
-
-            if (pos.X + origin.X > clipBox.Right)
-                return;
-
-            if (pos.Y + origin.Y + spriteSize.Y < clipBox.Bottom)
-                return;
-
-            if (pos.Y + origin.Y > clipBox.Top)
-                return;
-
-            GL.PushMatrix();
-
-            GL.Translate((int)(pos.X + origin.X), (int)(pos.Y + origin.Y), order);
-
-            GL.BindTexture(TextureTarget.Texture2D, atlas.Texture.InternalId);
-            RenderTools.Draw(atlas.data[imageId].Vbo, ibo, 6);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-
-            GL.PopMatrix();
-        }
-
         public void UnloadAll()
         {
             throw new NotImplementedException();
@@ -126,6 +74,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal SpriteAtlas InternalGetById(int atlasId)
+        {
+            return items[atlasId];
+        }
 
         internal int Register(string name, SpriteAtlas spriteAtlas)
         {
@@ -165,22 +118,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                             };
 
             return vertices;
-        }
-
-        public void Render(Box2 clipBox, float dt, SpriteRenderer spriteRenderer)
-        {
-            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
-            GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
-            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
-            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
-            GL.Enable(EnableCap.Texture2D);
-
-            spriteRenderer.Invoke(clipBox, dt);
-
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
-            GL.Disable(EnableCap.Blend);
         }
 
         #endregion Private Methods

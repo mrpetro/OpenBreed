@@ -32,15 +32,18 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 
             manCollection.AddSingleton<IRenderableFactory>(() => new RenderableFactory(manCollection.GetManager<IPrimitiveRenderer>()));
 
-            manCollection.AddSingleton<ISpriteMan>(() => new SpriteMan(manCollection.GetManager<ITextureMan>(),
+            manCollection.AddSingleton<SpriteMan>(() => new SpriteMan(manCollection.GetManager<ITextureMan>(),
                                                                        manCollection.GetManager<ILogger>()));
+            manCollection.AddSingleton<ISpriteMan>(() => manCollection.GetManager<SpriteMan>());
 
             manCollection.AddSingleton<IStampMan>(() => new StampMan());
 
             manCollection.AddSingleton<IFontMan>(() => new FontMan(manCollection.GetManager<ITextureMan>(),
-                                                                   manCollection.GetManager<ISpriteMan>()));
+                                                                   manCollection.GetManager<ISpriteMan>(),
+                                                                   manCollection.GetManager<ISpriteRenderer>()));
 
             manCollection.AddSingleton<IPrimitiveRenderer>(() => new PrimitiveRenderer());
+            manCollection.AddSingleton<ISpriteRenderer>(() => new SpriteRenderer(manCollection.GetManager<SpriteMan>()));
 
             manCollection.AddSingleton<IRenderingMan>(() => new RenderingMan(manCollection.GetManager<IViewClient>(),
                                                                              manCollection.GetManager<IPrimitiveRenderer>()));

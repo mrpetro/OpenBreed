@@ -17,10 +17,12 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         #region Internal Constructors
 
         internal FontFromSpritesAtlasBuilder(FontMan fontMan,
-                                             ISpriteMan spriteMan)
+                                             ISpriteMan spriteMan,
+                                             ISpriteRenderer spriteRenderer)
         {
             this.fontMan = fontMan;
             SpriteMan = spriteMan;
+            SpriteRenderer = spriteRenderer;
         }
 
         #endregion Internal Constructors
@@ -31,6 +33,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         internal int AtlasId { get; private set; }
 
         internal ISpriteMan SpriteMan { get; }
+        internal ISpriteRenderer SpriteRenderer { get; }
         internal int[] Characters { get; private set; }
 
         internal int Id { get; private set; }

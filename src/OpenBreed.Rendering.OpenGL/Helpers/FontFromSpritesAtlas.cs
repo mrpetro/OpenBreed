@@ -12,6 +12,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #region Private Fields
 
         private readonly ISpriteMan spriteMan;
+        private readonly ISpriteRenderer spriteRenderer;
         private readonly int atlasId;
 
         private readonly Dictionary<int, (int, int, float)> Lookup = new Dictionary<int, (int, int, float)>();
@@ -23,6 +24,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         internal FontFromSpritesAtlas(FontFromSpritesAtlasBuilder builder)
         {
             spriteMan = builder.SpriteMan;
+            spriteRenderer = builder.SpriteRenderer;
             Id = builder.Id;
             atlasId = builder.AtlasId;
             Lookup = builder.Lookup;
@@ -107,7 +109,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             {
                 var atlasId = data.Item1;
                 var spriteIndex = data.Item2;
-                spriteMan.Render(atlasId, spriteIndex, Vector2.Zero, Vector2.Zero, 100, clipBox);
+                spriteRenderer.Render(new Vector3(0,0,100), atlasId, spriteIndex);
             }
         }
 
@@ -123,7 +125,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
                 GL.Translate(offset, 0.0f, 0.0f);
 
-                spriteMan.Render(atlasId, spriteIndex, Vector2.Zero, Vector2.Zero, 100, clipBox);
+                spriteRenderer.Render(new Vector3(0, 0, 100), atlasId, spriteIndex);
 
                 offset = Lookup[ch].Item3;
             }

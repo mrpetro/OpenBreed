@@ -3,9 +3,23 @@ using OpenTK.Graphics;
 
 namespace OpenBreed.Rendering.Interface
 {
+    public enum MatrixMode
+    {
+        ModelView,
+        Projection,
+        Texture,
+        Color
+    }
+
     public interface IPrimitiveRenderer
     {
         #region Public Methods
+
+        void PushMatrix();
+
+        void PopMatrix();
+
+        void MatrixMode(MatrixMode matrixMode);
 
         void DrawUnitRectangle();
 

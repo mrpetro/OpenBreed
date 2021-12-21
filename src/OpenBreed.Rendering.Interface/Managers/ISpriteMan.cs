@@ -3,8 +3,6 @@ using System;
 
 namespace OpenBreed.Rendering.Interface.Managers
 {
-    public delegate void SpriteRenderer(Box2 box, float dt);
-
     /// <summary>
     /// Sprite manager interface
     /// </summary>
@@ -40,8 +38,6 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// <returns>True if exits, false otherwise</returns>
         bool Contains(string atlasName);
 
-        void Render(Box2 clipBox, float dt, SpriteRenderer spriteRenderer);
-
         /// <summary>
         /// Creates new sprite atlas
         /// </summary>
@@ -52,15 +48,6 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// Unloads all textures
         /// </summary>
         void UnloadAll();
-
-        /// <summary>
-        /// Render particular sprite giving it's atlas ID, image ID and position
-        /// </summary>
-        /// <param name="atlasId">Atlas ID of rendered sprite</param>
-        /// <param name="imageId">Image ID of rendered sprite</param>
-        /// <param name="origin">Local origin point of sprite</param>
-        /// <param name="clipBox">Clip box to determine if sprite should be drawn or not</param>
-        void Render(int atlasId, int imageId, Vector2 origin, Vector2 pos, float order, Box2 clipBox);
 
         #endregion Public Methods
     }

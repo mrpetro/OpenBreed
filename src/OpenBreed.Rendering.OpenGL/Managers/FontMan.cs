@@ -15,6 +15,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private readonly ITextureMan textureMan;
         private readonly ISpriteMan spriteMan;
+        private readonly ISpriteRenderer spriteRenderer;
         private readonly List<IFont> items = new List<IFont>();
         private readonly Dictionary<string, IFont> aliases = new Dictionary<string, IFont>();
         private readonly TextMeasurer textMeasurer = new TextMeasurer();
@@ -24,10 +25,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        internal FontMan(ITextureMan textureMan, ISpriteMan spriteMan)
+        internal FontMan(ITextureMan textureMan, ISpriteMan spriteMan, ISpriteRenderer spriteRenderer)
         {
             this.textureMan = textureMan;
             this.spriteMan = spriteMan;
+            this.spriteRenderer = spriteRenderer;
         }
 
         #endregion Internal Constructors
@@ -41,7 +43,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public IFontAtlasBuilder Create()
         {
-            return new FontFromSpritesAtlasBuilder(this, spriteMan);
+            return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer);
         }
 
         public void RenderPart(int fontId, string text, Vector2 origin, float order, Box2 clipBox)

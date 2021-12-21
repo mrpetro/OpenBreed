@@ -20,6 +20,8 @@ namespace OpenBreed.Rendering.Interface
 
         Vector2 GetSpriteSize(int spriteId);
 
+        bool IsValid(int imageId);
+
         #endregion Public Methods
     }
 }
