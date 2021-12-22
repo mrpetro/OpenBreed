@@ -13,8 +13,6 @@ namespace OpenBreed.Core
 {
     public abstract class CoreFactory
     {
-        protected readonly DefaultManagerCollection manCollection = new DefaultManagerCollection();
-
         protected CoreFactory(IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -25,18 +23,6 @@ namespace OpenBreed.Core
                 services.AddSingleton<IEventQueue, EventQueue>();
                 services.AddSingleton<IMessagesMan, MessagesMan>();
             });
-
-            //manCollection.AddSingleton<ILogger>(() => new DefaultLogger());
-
-            //manCollection.AddSingleton<IEventsMan>(() => new EventsMan());
-
-            //manCollection.AddSingleton<IJobsMan>(() => new JobsMan());
-
-            //manCollection.AddSingleton<IEventQueue>(() => new EventQueue(manCollection.GetManager<ILogger>()));
-
-            //manCollection.AddSingleton<IMessagesMan>(() => new MessagesMan());
         }
-
-
     }
 }
