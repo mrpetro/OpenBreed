@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
+using OpenBreed.Common.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -50,11 +51,16 @@ namespace OpenBreed.Common.Extensions
             });
        }
 
-        public static void SetupVariableManager(this IHostBuilder hostBuilder)
+        public static void SetupVariableManager(this IHostBuilder hostBuilder, Action<IVariableMan, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IVariableMan, VariableMan>();
+                services.AddSingleton<IVariableMan>((sp) =>
+                {
+                    var variableMan = new VariableMan(sp.GetService<ILogger>());
+                    action.Invoke(variableMan, sp);
+                    return variableMan;
+                });
             });
         }
 
