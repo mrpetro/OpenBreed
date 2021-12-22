@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Xml;
+﻿using OpenBreed.Database.Interface;
+using OpenBreed.Database.Xml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace OpenBreed.Common.Database.Xml.Extensions
             managerCollection.AddSingleton<XmlDatabaseMan>(() => new XmlDatabaseMan(managerCollection.GetManager<IVariableMan>()));
         }
 
-        public static void SetupXmlReadonlyDatabase(this IManagerCollection managerCollection)
+        public static void SetupXmlReadonlyDatabase(this IManagerCollection managerCollection, string dbFilePath = null)
         {
-            managerCollection.AddSingleton<XmlReadonlyDatabaseMan>(() => new XmlReadonlyDatabaseMan(managerCollection.GetManager<IVariableMan>()));
+            managerCollection.AddSingleton<IRepositoryProvider>(() => new XmlReadonlyDatabaseMan(managerCollection.GetManager<IVariableMan>(), dbFilePath));
         }
     }
 }
