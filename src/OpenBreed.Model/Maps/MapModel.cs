@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Model.Actions;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Tiles;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Model.Maps
 {
@@ -38,6 +40,11 @@ namespace OpenBreed.Model.Maps
         public TileSetModel TileSet { get; set; }
 
         public ActionSetModel ActionSet { get; set; }
+
+        public ActionModel GetAction(int actionValue)
+        {
+            return ActionSet.Items.FirstOrDefault(item => item.Id == actionValue);
+        }
 
         #endregion Public Properties
     }

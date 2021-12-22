@@ -79,6 +79,7 @@ namespace OpenBreed.Common.Extensions
                 formatMan.RegisterFormat("ABTA_MAP", new ABTAMAPFormat());
                 formatMan.RegisterFormat("ABTABLK", new ABTABLKFormat());
                 formatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
+                formatMan.RegisterFormat("ABTAODDSPR", new ABTAODDSPRFormat());
                 formatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
                 formatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
                 formatMan.RegisterFormat("IFF_IMAGE", new IFFImageFormat());

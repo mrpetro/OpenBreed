@@ -1,163 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenBreed.Common</RootNamespace>
-    <AssemblyName>OpenBreed.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\Shared\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="BuilderFactory.cs" />
-    <Compile Include="DataLoaderFactory.cs" />
-    <Compile Include="Data\EntityTemplatesDataProvider.cs" />
-    <Compile Include="Data\EntityTemplatesDataHelper.cs" />
-    <Compile Include="Data\ActionSetsDataHelper.cs" />
-    <Compile Include="Data\IModelsProvider.cs" />
-    <Compile Include="Data\IWorkspaceMan.cs" />
-    <Compile Include="DefaultManagerCollection.cs" />
-    <Compile Include="Extensions\ManagerCollectionExtension.cs" />
-    <Compile Include="Formats\TextFormat.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Configs\BaseCfg.cs" />
-    <Compile Include="Configs\IConfig.cs" />
-    <Compile Include="Configs\IConfigCtrl.cs" />
-    <Compile Include="DataSources\DataSourceBase.cs" />
-    <Compile Include="DataSources\EPFArchiveFileDataSource.cs" />
-    <Compile Include="DataSources\FileDataSource.cs" />
-    <Compile Include="Data\ActionSetsDataProvider.cs" />
-    <Compile Include="Data\DataSourceProvider.cs" />
-    <Compile Include="Data\ModelsProvider.cs" />
-    <Compile Include="Data\AssetsDataProvider.cs" />
-    <Compile Include="Data\ImagesDataProvider.cs" />
-    <Compile Include="Data\SpriteAtlasDataHelper.cs" />
-    <Compile Include="Data\ScriptsDataProvider.cs" />
-    <Compile Include="Data\ScriptsDataHelper.cs" />
-    <Compile Include="Data\TileAtlasDataHelper.cs" />
-    <Compile Include="Data\TextsDataHelper.cs" />
-    <Compile Include="Data\PalettesDataHelper.cs" />
-    <Compile Include="Data\PalettesDataProvider.cs" />
-    <Compile Include="Data\SoundsDataProvider.cs" />
-    <Compile Include="Data\SpriteAtlasDataProvider.cs" />
-    <Compile Include="Data\TextsDataProvider.cs" />
-    <Compile Include="Data\TileAtlasDataProvider.cs" />
-    <Compile Include="Formats\IFFImageFormat.cs" />
-    <Compile Include="Formats\PCMSoundFormat.cs" />
-    <Compile Include="Data\MapsDataProvider.cs" />
-    <Compile Include="EnumerableExtensions.cs" />
-    <Compile Include="Formats\DataFormatMan.cs" />
-    <Compile Include="Formats\BinaryFormat.cs" />
-    <Compile Include="IBuilder.cs" />
-    <Compile Include="IBuilderFactory.cs" />
-    <Compile Include="IDataLoader.cs" />
-    <Compile Include="IDataLoaderFactory.cs" />
-    <Compile Include="IManagerCollection.cs" />
-    <Compile Include="IVariableMan.cs" />
-    <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\LogConsolePrinter.cs" />
-    <Compile Include="Logging\LogFile.cs" />
-    <Compile Include="Logging\DefaultLogger.cs" />
-    <Compile Include="Logging\LogLevel.cs" />
-    <Compile Include="VariableMan.cs" />
-    <Compile Include="ProgramTools.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Formats\ABHCMAPFormat.cs" />
-    <Compile Include="Formats\ABSEMAPFormat.cs" />
-    <Compile Include="Formats\ABTABLKFormat.cs" />
-    <Compile Include="Formats\ABTAMAPFormat.cs" />
-    <Compile Include="Formats\ABTASPRFormat.cs" />
-    <Compile Include="Formats\ACBMImageFormat.cs" />
-    <Compile Include="Formats\ACBMTileSetFormat.cs" />
-    <Compile Include="Formats\IDataFormatType.cs" />
+    <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj" />
+    <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj" />
+    <ProjectReference Include="..\OpenBreed.Reader.Legacy\OpenBreed.Reader.Legacy.csproj" />
+    <ProjectReference Include="..\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
-      <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
-      <Name>EPFArchive</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
-      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
-      <Name>OpenBreed.Common.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
-      <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
-      <Name>OpenBreed.Database.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj">
-      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
-      <Name>OpenBreed.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Reader.Interface\OpenBreed.Reader.Interface.csproj">
-      <Project>{CFDCF7E3-8EA1-4D17-8B16-C6BE157FE87C}</Project>
-      <Name>OpenBreed.Reader.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Reader.Legacy\OpenBreed.Reader.Legacy.csproj">
-      <Project>{9A47D236-1810-413A-B609-A38FDE119D3F}</Project>
-      <Name>OpenBreed.Reader.Legacy</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj">
-      <Project>{0B8B1C59-2BEC-45C3-BD7A-AEB955337407}</Project>
-      <Name>OpenBreed.Writer.Legacy</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

@@ -180,7 +180,9 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
             layout.SetCellSize(16);
             layout.SetSize(sizeX, sizeY);
             var gfxLayerBuilder = layout.AddLayer(MapLayerType.Gfx);
+            gfxLayerBuilder.SetVisible(true);
             var actionLayerBuilder = layout.AddLayer(MapLayerType.Action);
+            actionLayerBuilder.SetVisible(true);
 
             for (int i = 0; i < tilesNo; i++)
             {
@@ -202,19 +204,9 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
                 var x = i % sizeX;
                 var y = i / sizeX;
 
-                //Flipping map Y coordinates
-
-                gfxLayerBuilder.SetValue(x, sizeY - y - 1, gfxId);
-                actionLayerBuilder.SetValue(x, sizeY - y - 1, actionId);
-
-                //bodyBlock.Cells[i].GfxId = gfxId;
-                //bodyBlock.Cells[i].ActionId = actionId;
+                gfxLayerBuilder.SetValue(x, y, gfxId);
+                actionLayerBuilder.SetValue(x, y, actionId);
             }
-
-
-
-
-            //MapBuilder.AddBlock(bodyBlock);
         }
 
         private void ReadBytesBlock(string name, BigEndianBinaryReader binReader)

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Metadata>
+			<Name>WorldEntry</Name>
+			<Flavor>$(entryId)</Flavor>
+		</Metadata>
+		<Position X="$(startX)" Y="$(startY)" />
+		<TilePutter>
+			<AtlasName>$(level)</AtlasName>
+			<ImageIndex>$(imageIndex)</ImageIndex>
+			<Position X="$(startX)" Y="$(startY)" />
+		</TilePutter>
+    </Components>
+</EntityTemplate>

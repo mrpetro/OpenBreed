@@ -4,7 +4,7 @@
     {
         #region Public Methods
 
-        IDataLoader<TInterface> GetLoader<TInterface>();
+        TInterface GetLoader<TInterface>() where TInterface : IDataLoader;
 
         #endregion Public Methods
     }

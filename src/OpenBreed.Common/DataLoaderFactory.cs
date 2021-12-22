@@ -21,15 +21,15 @@ namespace OpenBreed.Common
 
         #region Public Methods
 
-        public IDataLoader<TInterface> GetLoader<TInterface>()
+        public TInterface GetLoader<TInterface>() where TInterface : IDataLoader
         {
             if (loaders.TryGetValue(typeof(TInterface), out Func<IDataLoader> loaderInitializer))
-                return (IDataLoader<TInterface>)loaderInitializer.Invoke();
+                return (TInterface)loaderInitializer.Invoke();
             else
                 throw new InvalidOperationException($"Loader for type '{typeof(TInterface)}' is not registered");
         }
 
-        public void Register<TInterface>(Func<IDataLoader> dataLoaderInitializer)
+        public void Register<TInterface>(Func<IDataLoader> dataLoaderInitializer) where TInterface : IDataLoader
         {
             loaders.Add(typeof(TInterface), dataLoaderInitializer);
         }

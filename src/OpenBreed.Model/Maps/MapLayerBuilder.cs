@@ -28,10 +28,22 @@ namespace OpenBreed.Model.Maps
         internal int[] CellValues { get; }
         internal int Width { get; }
         internal int Height { get; }
+        internal bool IsVisible { get; private set; }
 
         #endregion Internal Properties
 
         #region Public Methods
+
+        public void SetVisible(bool value)
+        {
+            IsVisible = value;
+        }
+
+        public void SetAllValues(int value)
+        {
+            for (int i = 0; i < CellValues.Length; i++)
+                CellValues[i] = value;
+        }
 
         public void SetValue(int x, int y, int value)
         {

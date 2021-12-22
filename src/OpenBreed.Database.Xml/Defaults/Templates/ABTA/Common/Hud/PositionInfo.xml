@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Metadata>
+			<Name>PositionInfo</Name>
+		</Metadata>
+		<Position X="$(posX)" Y="$(posY)" />
+		<Text>
+			<Text>Coords: (0.0, 0.0)</Text>
+			<Offset X="0" Y="0" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>10</FontSize>
+			<Order>100</Order>
+		</Text>
+    </Components>
+</EntityTemplate>
