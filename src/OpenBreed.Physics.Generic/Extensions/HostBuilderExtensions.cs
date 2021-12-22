@@ -14,11 +14,23 @@ namespace OpenBreed.Physics.Generic.Extensions
 {
     public static class HostBuilderExtensions
     {
+        public static void SetupShapeMan(this IHostBuilder hostBuilder, Action<IShapeMan, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IShapeMan>((sp) =>
+                {
+                    var shapeMan = new ShapeMan(sp.GetService<ILogger>());
+                    action.Invoke(shapeMan, sp);
+                    return shapeMan;
+                });
+            });
+        }
+
         public static void SetupGenericPhysicsManagers<TObject>(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IShapeMan, ShapeMan>();
                 services.AddSingleton<ICollisionMan<TObject>, CollisionMan<TObject>>();
                 services.AddSingleton<IBroadphaseFactory, BroadphaseFactory>();
             });

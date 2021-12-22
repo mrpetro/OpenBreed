@@ -1,19 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OpenBreed.Common;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Core.Extensions
 {
-    public abstract class CoreFactory
+    public static class HostBuilderExtensions
     {
-        protected CoreFactory(IHostBuilder hostBuilder)
+        #region Public Methods
+
+        public static void SetupCoreManagers(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
@@ -24,5 +20,7 @@ namespace OpenBreed.Core
                 services.AddSingleton<IMessagesMan, MessagesMan>();
             });
         }
+
+        #endregion Public Methods
     }
 }

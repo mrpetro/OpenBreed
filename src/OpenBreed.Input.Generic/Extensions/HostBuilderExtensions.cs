@@ -15,12 +15,30 @@ namespace OpenBreed.Input.Generic.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupGenericInputManagers(this IHostBuilder hostBuilder)
+        public static void SetupInputMan(this IHostBuilder hostBuilder, Action<IInputsMan, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IInputsMan, InputsMan>();
-                services.AddSingleton<IPlayersMan, PlayersMan>();
+                services.AddSingleton<IInputsMan>((sp) =>
+                {
+                    var inputsMan = new InputsMan(sp.GetService<IViewClient>());
+                    action.Invoke(inputsMan, sp);
+                    return inputsMan;
+                });
+            });
+        }
+
+        public static void SetupPlayersMan(this IHostBuilder hostBuilder, Action<IPlayersMan, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IPlayersMan>((sp) =>
+                {
+                    var playersMan = new PlayersMan(sp.GetService<ILogger>(),
+                                                    sp.GetService<IInputsMan>());
+                    action.Invoke(playersMan, sp);
+                    return playersMan;
+                });
             });
         }
     }

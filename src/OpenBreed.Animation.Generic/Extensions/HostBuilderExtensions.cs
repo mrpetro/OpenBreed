@@ -14,12 +14,24 @@ namespace OpenBreed.Animation.Generic.Extensions
     {
         #region Public Methods
 
-        public static void SetupAnimationManagers<TObject>(this IHostBuilder hostBuilder)
+        public static void SetupFrameUpdaterMan<TObject>(this IHostBuilder hostBuilder, Action<IFrameUpdaterMan<TObject>, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IFrameUpdaterMan<TObject>>((sp) =>
+                {
+                    var frameUpdaterMan = new FrameUpdaterMan<TObject>(sp.GetService<ILogger>());
+                    action.Invoke(frameUpdaterMan, sp);
+                    return frameUpdaterMan;
+                });
+            });
+        }
+
+        public static void SetupClipMan<TObject>(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IClipMan<TObject>, ClipMan<TObject>>();
-                services.AddSingleton<IFrameUpdaterMan<TObject>, FrameUpdaterMan<TObject>>();
             });
         }
 
