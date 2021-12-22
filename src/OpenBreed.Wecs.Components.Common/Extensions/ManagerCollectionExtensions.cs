@@ -14,18 +14,6 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
     {
         public static void SetupCommonComponents(this IManagerCollection manCollection)
         {
-            XmlComponentsList.RegisterComponentType<XmlPositionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlGridPositionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlMetadataComponent>();
-            XmlComponentsList.RegisterComponentType<XmlThrustComponent>();
-            XmlComponentsList.RegisterComponentType<XmlVelocityComponent>();
-            XmlComponentsList.RegisterComponentType<XmlTimerComponent>();
-            XmlComponentsList.RegisterComponentType<XmlAngularPositionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlAngularVelocityComponent>();
-            XmlComponentsList.RegisterComponentType<XmlAngularThrustComponent>();
-            XmlComponentsList.RegisterComponentType<XmlMessagingComponent>();
-            XmlComponentsList.RegisterComponentType<XmlFollowedComponent>();
-
             manCollection.AddSingleton<PositionComponentFactory>(() => new PositionComponentFactory());
             manCollection.AddSingleton<GridPositionComponentFactory>(() => new GridPositionComponentFactory());
             manCollection.AddSingleton<VelocityComponentFactory>(() => new VelocityComponentFactory());

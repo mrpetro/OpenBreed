@@ -23,10 +23,11 @@ namespace OpenBreed.Wecs.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IEntityMan, EntityMan>();
+                services.AddSingleton<ISystemFactory, DefaultSystemFactory>();
                 services.AddSingleton<IEntityFactory, EntityFactory>();
                 services.AddSingleton<IWorldMan, WorldMan>();
                 services.AddSingleton<ISystemFinder, SystemFinder>();
-                services.AddSingleton<WorldBuilder, WorldBuilder>();
+                services.AddTransient<WorldBuilder>();
             });
         }
 
@@ -39,6 +40,19 @@ namespace OpenBreed.Wecs.Extensions
                     var systemFactory = new DefaultSystemFactory();
                     action.Invoke(systemFactory, sp);
                     return systemFactory;
+                });
+            });
+        }
+
+        public static void SetupEntityFactory(this IHostBuilder hostBuilder, Action<IEntityFactory, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IEntityFactory>((sp) =>
+                {
+                    var entityFactory = new EntityFactory(sp.GetService<IEntityMan>());
+                    action.Invoke(entityFactory, sp);
+                    return entityFactory;
                 });
             });
         }

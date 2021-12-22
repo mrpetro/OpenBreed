@@ -15,12 +15,6 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
     {
         public static void SetupRenderingComponents(this IManagerCollection manCollection)
         {
-            XmlComponentsList.RegisterComponentType<XmlSpriteComponent>();
-            XmlComponentsList.RegisterComponentType<XmlTextComponent>();
-            XmlComponentsList.RegisterComponentType<XmlViewportComponent>();
-            XmlComponentsList.RegisterComponentType<XmlCameraComponent>();
-            XmlComponentsList.RegisterComponentType<XmlTilePutterComponent>();
-
             var builderFactory = manCollection.GetManager<IBuilderFactory>();
 
             builderFactory.Register<SpriteComponentBuilder>(() => new SpriteComponentBuilder(manCollection.GetManager<ISpriteMan>()));

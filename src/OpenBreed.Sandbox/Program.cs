@@ -85,7 +85,13 @@ namespace OpenBreed.Sandbox
             //hostBuilder.SetupViewClient(640, 480, $"{appName} v{infoVersion}");
             manCollection.SetupViewClient(640, 480, $"{appName} v{infoVersion}");
 
-            hostBuilder.SetupBuilderFactory();
+            hostBuilder.SetupBuilderFactory((builderFactory, sp) => 
+            {
+                builderFactory.SetupPhysicsBuilderFactories(sp);
+                builderFactory.SetupRenderingComponents(sp);
+                builderFactory.SetupAnimationBuilderFactories(sp);
+            });
+
             manCollection.SetupBuilderFactory();
 
             hostBuilder.SetupVariableManager();
@@ -118,7 +124,6 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupOpenGLManagers();
             manCollection.SetupOpenGLManagers();
 
-            hostBuilder.SetupWecsManagers();
             hostBuilder.SetupSystemFactory((systemFactory, sp) =>
             {
                 systemFactory.SetupRenderingSystems(sp);
@@ -132,6 +137,28 @@ namespace OpenBreed.Sandbox
                 systemFactory.SetupGroupMapCellDisplaySystem(sp);
             });
 
+            XmlCommonComponents.Setup();
+            XmlPhysicsComponents.Setup();
+            XmlRenderingComponents.Setup();
+            XmlAnimationComponents.Setup();
+            XmlFsmComponents.Setup();
+
+            hostBuilder.SetupCommonComponentFactories();
+            hostBuilder.SetupPhysicsComponentFactories();
+            hostBuilder.SetupRenderingComponentFactories();
+            hostBuilder.SetupAnimationComponentFactories();
+            hostBuilder.SetupFsmComponentFactories();
+
+            hostBuilder.SetupEntityFactory((entityFactory, sp) =>
+            {
+                entityFactory.SetupCommonComponents(sp);
+                entityFactory.SetupPhysicsComponents(sp);
+                entityFactory.SetupRenderingComponents(sp);
+                entityFactory.SetupAnimationComponents(sp);
+                entityFactory.SetupFsmComponents(sp);
+            });
+
+            hostBuilder.SetupWecsManagers();
             manCollection.SetupWecsManagers();
 
             hostBuilder.SetupItemManager();
@@ -143,7 +170,15 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupViewportCreator();
             manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(manCollection.GetManager<IEntityMan>(), manCollection.GetManager<IEntityFactory>()));
 
-            hostBuilder.SetupDataLoaderFactory();
+            hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
+            {
+                dataLoaderFactory.SetupAnimationDataLoader<Entity>(sp);
+                dataLoaderFactory.SetupMapLegacyDataLoader(sp);
+                dataLoaderFactory.SetupTileSetDataLoader(sp);
+                dataLoaderFactory.SetupTileStampDataLoader(sp);
+                dataLoaderFactory.SetupSpriteSetDataLoader(sp);
+                dataLoaderFactory.SetupSoundSampleDataLoader(sp);
+            });
             manCollection.SetupDataLoaderFactory();
 
 
@@ -158,6 +193,8 @@ namespace OpenBreed.Sandbox
             manCollection.SetupPhysicsDebugSystem();
             manCollection.SetupUnknownMapCellDisplaySystem();
             manCollection.SetupGroupMapCellDisplaySystem();
+
+
 
             manCollection.SetupCommonComponents();
             manCollection.SetupPhysicsComponents();

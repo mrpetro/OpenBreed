@@ -15,9 +15,6 @@ namespace OpenBreed.Wecs.Components.Physics.Extensions
     {
         public static void SetupPhysicsComponents(this IManagerCollection manCollection)
         {
-            XmlComponentsList.RegisterComponentType<XmlBodyComponent>();
-            XmlComponentsList.RegisterComponentType<XmlMotionComponent>();
-
             var builderFactory = manCollection.GetManager<IBuilderFactory>();
 
             builderFactory.Register<BodyComponentBuilder>(() => new BodyComponentBuilder(manCollection.GetManager<IShapeMan>(),

@@ -189,21 +189,14 @@ namespace OpenBreed.Sandbox.Extensions
         }
 
 
-        public static void SetupDataLoaderFactory(this IHostBuilder hostBuilder)
+        public static void SetupDataLoaderFactory(this IHostBuilder hostBuilder, Action<DataLoaderFactory, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IDataLoaderFactory>((sp) =>
                 {
                     var dataLoaderFactory = new DataLoaderFactory();
-
-                    dataLoaderFactory.SetupAnimationDataLoader<Entity>(sp);
-                    dataLoaderFactory.SetupMapLegacyDataLoader(sp);
-                    dataLoaderFactory.SetupTileSetDataLoader(sp);
-                    dataLoaderFactory.SetupTileStampDataLoader(sp);
-                    dataLoaderFactory.SetupSpriteSetDataLoader(sp);
-                    dataLoaderFactory.SetupSoundSampleDataLoader(sp);
-
+                    action.Invoke(dataLoaderFactory, sp);
                     return dataLoaderFactory;
                 });
             });
