@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
     {
         private readonly IEntityMan entityMan;
 
-        internal DynamicResolver(IEntityMan entityMan)
+        public DynamicResolver(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
         }

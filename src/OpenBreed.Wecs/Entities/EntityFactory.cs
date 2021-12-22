@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Entities
 {
 
 
-    public class EntityFactory : IEntityFactory
+    internal class EntityFactory : IEntityFactory
     {
         #region Private Fields
 
@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Entities
 
         #region Internal Constructors
 
-        internal EntityFactory(IEntityMan entityMan)
+        public EntityFactory(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
         }

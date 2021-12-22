@@ -37,7 +37,7 @@
     {
         #region Internal Constructors
 
-        internal MetadataComponentFactory()
+        public MetadataComponentFactory()
         {
         }
 

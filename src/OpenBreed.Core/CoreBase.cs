@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using OpenBreed.Common;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace OpenBreed.Core
 {
@@ -8,16 +9,14 @@ namespace OpenBreed.Core
         #region Protected Fields
 
         protected readonly IHost host;
-        protected readonly IManagerCollection manCollection;
 
         #endregion Protected Fields
 
         #region Protected Constructors
 
-        protected CoreBase(IHost host, IManagerCollection manCollection)
+        protected CoreBase(IHost host)
         {
             this.host = host;
-            this.manCollection = manCollection;
         }
 
         #endregion Protected Constructors
@@ -28,7 +27,7 @@ namespace OpenBreed.Core
 
         public abstract void Exit();
 
-        public TManager GetManager<TManager>() => manCollection.GetManager<TManager>();
+        public TManager GetManager<TManager>() => host.Services.GetService<TManager>();
 
         #endregion Public Methods
     }

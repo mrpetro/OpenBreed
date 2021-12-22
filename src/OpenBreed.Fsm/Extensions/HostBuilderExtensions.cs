@@ -10,11 +10,23 @@ namespace OpenBreed.Fsm.Extensions
 {
     public static class HostBuilderExtensions
     {
+        public static void SetupFsmManager(this IHostBuilder hostBuilder, Action<IFsmMan, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IFsmMan>((sp) =>
+                {
+                    var fsmMan = new FsmMan();
+                    action.Invoke(fsmMan, sp);
+                    return fsmMan;
+                });
+            });
+        }
+
         public static void SetupFsmComponentFactories(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IFsmMan, FsmMan>();
                 services.AddSingleton<FsmComponentFactory,FsmComponentFactory>();
                 services.AddTransient<FsmComponentBuilder, FsmComponentBuilder>();
             });

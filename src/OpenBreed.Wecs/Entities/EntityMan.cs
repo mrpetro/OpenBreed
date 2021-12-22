@@ -20,7 +20,7 @@ namespace OpenBreed.Wecs.Entities
 
         #region Internal Constructors
 
-        internal EntityMan(IEventsMan eventsMan)
+        public EntityMan(IEventsMan eventsMan)
         {
             this.eventsMan = eventsMan;
 

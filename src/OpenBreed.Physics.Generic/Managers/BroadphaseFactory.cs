@@ -4,7 +4,7 @@ using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Physics.Generic.Managers
 {
-    public class BroadphaseFactory : IBroadphaseFactory
+    internal class BroadphaseFactory : IBroadphaseFactory
     {
         #region Private Fields
 
@@ -14,7 +14,7 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #region Internal Constructors
 
-        internal BroadphaseFactory(ILogger logger)
+        public BroadphaseFactory(ILogger logger)
         {
             this.logger = logger;
         }

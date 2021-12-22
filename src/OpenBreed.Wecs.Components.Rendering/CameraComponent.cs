@@ -56,7 +56,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #region Internal Constructors
 
-        internal CameraComponentFactory(IBuilderFactory builderFactory)
+        public CameraComponentFactory(IBuilderFactory builderFactory)
         {
             this.builderFactory = builderFactory;
         }

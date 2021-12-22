@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace OpenBreed.Input.Generic
 {
-    public class PlayersMan : IPlayersMan
+    internal class PlayersMan : IPlayersMan
     {
         #region Private Fields
 
@@ -18,7 +18,7 @@ namespace OpenBreed.Input.Generic
 
         #region Internal Constructors
 
-        internal PlayersMan(ILogger logger, IInputsMan inputsMan)
+        public PlayersMan(ILogger logger, IInputsMan inputsMan)
         {
             this.logger = logger;
             this.inputsMan = inputsMan;

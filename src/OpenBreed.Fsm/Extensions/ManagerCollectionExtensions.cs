@@ -12,8 +12,7 @@ namespace OpenBreed.Fsm.Extensions
         public static void SetupFsmComponents(this IManagerCollection manCollection)
         {
             manCollection.AddSingleton<IFsmMan>(() => new FsmMan());
-            manCollection.AddSingleton<FsmComponentFactory>(() => new FsmComponentFactory(manCollection));
-            manCollection.AddTransient<FsmComponentBuilder>(() => new FsmComponentBuilder(manCollection.GetManager<IFsmMan>()));
+            manCollection.AddSingleton<FsmComponentFactory>(() => new FsmComponentFactory(manCollection.GetManager<IFsmMan>()));
 
             var entityFactory = manCollection.GetManager<IEntityFactory>();
             entityFactory.RegisterComponentFactory<XmlFsmComponent>(manCollection.GetManager<FsmComponentFactory>());

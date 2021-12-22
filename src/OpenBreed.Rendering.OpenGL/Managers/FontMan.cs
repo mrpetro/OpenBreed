@@ -25,7 +25,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        internal FontMan(ITextureMan textureMan, ISpriteMan spriteMan, ISpriteRenderer spriteRenderer)
+        public FontMan(ITextureMan textureMan, ISpriteMan spriteMan, ISpriteRenderer spriteRenderer)
         {
             this.textureMan = textureMan;
             this.spriteMan = spriteMan;

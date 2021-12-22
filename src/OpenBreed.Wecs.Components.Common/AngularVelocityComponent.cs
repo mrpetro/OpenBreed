@@ -42,7 +42,7 @@ namespace OpenBreed.Wecs.Components.Common
 
     public sealed class AngularVelocityComponentFactory : ComponentFactoryBase<IAngularVelocityComponentTemplate>
     {
-        internal AngularVelocityComponentFactory()
+        public AngularVelocityComponentFactory()
         {
 
         }

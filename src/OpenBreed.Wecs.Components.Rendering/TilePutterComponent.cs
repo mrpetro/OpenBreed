@@ -68,7 +68,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #region Internal Constructors
 
-        internal TilePutterComponentFactory(IBuilderFactory builderFactory)
+        public TilePutterComponentFactory(IBuilderFactory builderFactory)
         {
             this.builderFactory = builderFactory;
         }

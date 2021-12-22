@@ -1,4 +1,6 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using OpenBreed.Common;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
 using System;
@@ -13,17 +15,26 @@ namespace OpenBreed.Core
     {
         protected readonly DefaultManagerCollection manCollection = new DefaultManagerCollection();
 
-        protected CoreFactory()
+        protected CoreFactory(IHostBuilder hostBuilder)
         {
-            manCollection.AddSingleton<ILogger>(() => new DefaultLogger());
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ILogger, DefaultLogger>();
+                services.AddSingleton<IEventsMan, EventsMan>();
+                services.AddSingleton<IJobsMan, JobsMan>();
+                services.AddSingleton<IEventQueue, EventQueue>();
+                services.AddSingleton<IMessagesMan, MessagesMan>();
+            });
 
-            manCollection.AddSingleton<IEventsMan>(() => new EventsMan());
+            //manCollection.AddSingleton<ILogger>(() => new DefaultLogger());
 
-            manCollection.AddSingleton<IJobsMan>(() => new JobsMan());
+            //manCollection.AddSingleton<IEventsMan>(() => new EventsMan());
 
-            manCollection.AddSingleton<IEventQueue>(() => new EventQueue(manCollection.GetManager<ILogger>()));
+            //manCollection.AddSingleton<IJobsMan>(() => new JobsMan());
 
-            manCollection.AddSingleton<IMessagesMan>(() => new MessagesMan());
+            //manCollection.AddSingleton<IEventQueue>(() => new EventQueue(manCollection.GetManager<ILogger>()));
+
+            //manCollection.AddSingleton<IMessagesMan>(() => new MessagesMan());
         }
 
 

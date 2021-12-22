@@ -24,7 +24,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        internal SpriteMan(ITextureMan textureMan,
+        public SpriteMan(ITextureMan textureMan,
                            ILogger logger)
         {
             this.textureMan = textureMan;

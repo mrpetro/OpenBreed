@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Worlds
     /// <summary>
     /// Manager responsible for creating, removing and updating core worlds
     /// </summary>
-    public class WorldMan : IWorldMan
+    internal class WorldMan : IWorldMan
     {
         #region Private Fields
 
@@ -30,7 +30,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Constructors
 
-        internal WorldMan(IEntityMan entityMan, IEventsMan eventsMan, IScriptMan scriptMan, ILogger logger)
+        public WorldMan(IEntityMan entityMan, IEventsMan eventsMan, IScriptMan scriptMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;

@@ -26,7 +26,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        internal TextureMan(ILogger logger)
+        public TextureMan(ILogger logger)
         {
             this.logger = logger;
         }

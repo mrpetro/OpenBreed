@@ -17,7 +17,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        internal TileGridFactory(ITileMan tileMan, IStampMan stampMan, ILogger logger)
+        public TileGridFactory(ITileMan tileMan, IStampMan stampMan, ILogger logger)
         {
             this.tileMan = tileMan;
             this.stampMan = stampMan;

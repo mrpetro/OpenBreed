@@ -61,7 +61,7 @@ namespace OpenBreed.Wecs.Components.Common
     {
         #region Internal Constructors
 
-        internal GridPositionComponentFactory()
+        public GridPositionComponentFactory()
         {
         }
 
