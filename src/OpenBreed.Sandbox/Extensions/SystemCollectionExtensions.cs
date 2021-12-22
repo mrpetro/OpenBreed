@@ -4,8 +4,10 @@ using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
+using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
+using OpenBreed.Game;
 using OpenBreed.Input.Interface;
 using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
@@ -16,7 +18,10 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
+using OpenBreed.Sandbox.Entities.Projectile;
+using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
@@ -34,6 +39,7 @@ using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Gui;
 using OpenBreed.Wecs.Systems.Physics;
+using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
@@ -44,6 +50,11 @@ namespace OpenBreed.Sandbox.Extensions
     {
         #region Public Methods
 
+        public static void SetupViewClient(this IManagerCollection manCollection, int width, int height, string title)
+        {
+            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(width, height, title));
+        }
+
         public static void SetupGameScriptingApi(this IManagerCollection manCollection)
         {
             var scriptMan = manCollection.GetManager<IScriptMan>();
@@ -53,15 +64,6 @@ namespace OpenBreed.Sandbox.Extensions
             scriptMan.Expose("Inputs", manCollection.GetManager<IInputsMan>());
             scriptMan.Expose("Logging", manCollection.GetManager<ILogger>());
             scriptMan.Expose("Players", manCollection.GetManager<IPlayersMan>());
-        }
-
-        public static void SetupSandboxBuilders(this IManagerCollection manCollection)
-        {
-
-            //manCollection.AddTransient<WorldBlockBuilder>(() => new WorldBlockBuilder(manCollection.GetManager<ITileMan>(),
-            //                                                                          manCollection.GetManager<IShapeMan>(),
-            //                                                                          manCollection.GetManager<IEntityMan>(),
-            //                                                                          manCollection.GetManager<IBuilderFactory>()));
         }
 
         public static void SetupUnknownMapCellDisplaySystem(this IManagerCollection manCollection)
@@ -270,6 +272,161 @@ namespace OpenBreed.Sandbox.Extensions
         {
             new SpriteComponentAnimator(managerCollection.GetManager<IFrameUpdaterMan<Entity>>(),
                                         managerCollection.GetManager<ISpriteMan>());
+        }
+
+        public static void SetupTeleportHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IClipMan<Entity>>(),
+                                                                        manCollection.GetManager<IWorldMan>(),
+                                                                        manCollection.GetManager<IEntityMan>(),
+                                                                        manCollection.GetManager<IEntityFactory>(),
+                                                                        manCollection.GetManager<IEventsMan>(),
+                                                                        manCollection.GetManager<ICollisionMan<Entity>>(),
+                                                                        manCollection.GetManager<IBuilderFactory>(),
+                                                                        manCollection.GetManager<IJobsMan>(),
+                                                                        manCollection.GetManager<IShapeMan>()));
+        }
+
+        public static void SetupCameraHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<CameraHelper>(() => new CameraHelper(manCollection.GetManager<IClipMan<Entity>>(),
+                                                                                manCollection.GetManager<IFrameUpdaterMan<Entity>>(),
+                                                                                manCollection.GetManager<IDataLoaderFactory>(),
+                                                                                manCollection.GetManager<IEntityFactory>()));
+        }
+
+        public static void SetupEnvironmentHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<EnvironmentHelper>(() => new EnvironmentHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                                      manCollection.GetManager<IEntityFactory>(),
+                                                                                      manCollection.GetManager<IBuilderFactory>()));
+        }
+
+        public static void SetupGenericCellHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<GenericCellHelper>(() => new GenericCellHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                        manCollection.GetManager<IEntityFactory>()));
+        }
+
+        public static void SetupPickableHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<PickableHelper>(() => new PickableHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                        manCollection.GetManager<IEntityFactory>()));
+        }
+
+        public static void SetupElectricGateHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<ElectricGateHelper>(() => new ElectricGateHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                        manCollection.GetManager<IEntityFactory>()));
+        }
+
+        public static void SetupHudHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<HudHelper>(() => new HudHelper(manCollection.GetManager<IEntityFactory>(),
+                                                                      manCollection.GetManager<IEntityMan>(),
+                                                                      manCollection.GetManager<IViewClient>(),
+                                                                      manCollection.GetManager<IJobsMan>(),
+                                                                      manCollection.GetManager<IRenderingMan>()));
+
+
+        }
+
+        public static void SetupVanillaStatusBarHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<VanillaStatusBarHelper>(() => new VanillaStatusBarHelper(manCollection.GetManager<IEntityFactory>(),
+                                                                      manCollection.GetManager<IEntityMan>(),
+                                                                      manCollection.GetManager<IViewClient>(),
+                                                                      manCollection.GetManager<IJobsMan>(),
+                                                                      manCollection.GetManager<IRenderingMan>()));
+        }
+
+        public static void SetupEntriesHelper(this IManagerCollection manCollection)
+        {
+
+            manCollection.AddSingleton<EntriesHelper>(() => new EntriesHelper(manCollection.GetManager<IWorldMan>(),
+                                                                                  manCollection.GetManager<IEntityMan>(),
+                                                                                  manCollection.GetManager<IClipMan<Entity>>(),
+                                                                                  manCollection.GetManager<IEntityFactory>(),
+                                                                                  manCollection.GetManager<IEventsMan>(),
+                                                                                  manCollection.GetManager<ICollisionMan<Entity>>(),
+                                                                                  manCollection.GetManager<IJobsMan>(),
+                                                                                  manCollection.GetManager<ViewportCreator>(),
+                                                                                  manCollection.GetManager<IDataLoaderFactory>()));
+
+        }
+
+        public static void SetupDoorHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
+                                                                        manCollection.GetManager<IEntityFactory>()));
+        }
+
+
+
+
+
+        public static void SetupScreenWorldHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(manCollection.GetManager<ISystemFactory>(),
+                                                                                      manCollection.GetManager<IRenderableFactory>(),
+                                                                                      manCollection.GetManager<IRenderingMan>(),
+                                                                                      manCollection.GetManager<IWorldMan>(),
+                                                                                      manCollection.GetManager<IEventsMan>(),
+                                                                                      manCollection.GetManager<ViewportCreator>(),
+                                                                                      manCollection.GetManager<IViewClient>()));
+
+
+        }
+
+        public static void SetupGameHudWorldHelper(this IManagerCollection manCollection)
+        {
+
+            manCollection.AddSingleton<GameHudWorldHelper>(() => new GameHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
+                                                                                        manCollection.GetManager<IRenderableFactory>(),
+                                                                                        manCollection.GetManager<IWorldMan>(),
+                                                                                        manCollection.GetManager<IFontMan>(),
+                                                                                        manCollection.GetManager<IViewClient>(),
+                                                                                        manCollection.GetManager<IEntityMan>(),
+                                                                                        manCollection.GetManager<IEntityFactory>(),
+                                                                                        manCollection.GetManager<VanillaStatusBarHelper>(),
+                                                                                        manCollection.GetManager<CameraHelper>(),
+                                                                                        manCollection.GetManager<IRepositoryProvider>(),
+                                                                                        manCollection.GetManager<IDataLoaderFactory>(),
+                                                                                        manCollection.GetManager<SpriteAtlasDataProvider>()));
+
+
+
+        }
+
+        public static void SetupDebugHudWorldHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<DebugHudWorldHelper>(() => new DebugHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
+                                                                                          manCollection.GetManager<IRenderableFactory>(),
+                                                                                          manCollection.GetManager<IWorldMan>(),
+                                                                                          manCollection.GetManager<IEntityMan>(),
+                                                                                          manCollection.GetManager<HudHelper>(),
+                                                                                          manCollection.GetManager<CameraHelper>(),
+                                                                                          manCollection.GetManager<IViewClient>()));
+        }
+
+
+        public static void SetupProjectileHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(manCollection.GetManager<IClipMan<Entity>>(),
+                                                                                    manCollection.GetManager<ICollisionMan<Entity>>(),
+                                                                                    manCollection.GetManager<IEntityFactory>(),
+                                                                                    manCollection.GetManager<DynamicResolver>()));
+        }
+
+        public static void SetupActorHelper(this IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(manCollection.GetManager<IClipMan<Entity>>(),
+                                                                          manCollection.GetManager<ICollisionMan<Entity>>(),
+                                                                          manCollection.GetManager<IPlayersMan>(),
+                                                                          manCollection.GetManager<IDataLoaderFactory>(),
+                                                                          manCollection.GetManager<IEntityFactory>(),
+                                                                          manCollection.GetManager<DynamicResolver>(),
+                                                                          manCollection.GetManager<FixtureTypes>()));
         }
 
         #endregion Public Methods
