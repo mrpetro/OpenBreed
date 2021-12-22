@@ -211,8 +211,6 @@ namespace OpenBreed.Sandbox
 
         public ICore Create(string gameDbFilePath, string gameFolderPath)
         {
-            var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
-
             hostBuilder.SetupScreenWorldHelper();
             hostBuilder.SetupGameHudWorldHelper();
             hostBuilder.SetupDebugHudWorldHelper();
@@ -256,9 +254,12 @@ namespace OpenBreed.Sandbox
             variables.RegisterVariable(typeof(string), gameFolderPath, "Cfg.Options.ABTA.GameFolderPath");
 
 
+            //hostBuilder.SetupXmlReadonlyDatabase(gameDbFilePath);
             manCollection.SetupXmlReadonlyDatabase(gameDbFilePath);
 
-            return core;
+            //var host = hostBuilder.Build();
+
+            return new Program(null, manCollection, manCollection.GetManager<IViewClient>());
         }
 
         #endregion Public Methods
@@ -274,7 +275,6 @@ namespace OpenBreed.Sandbox
         private readonly IViewClient clientMan;
         private readonly IRenderingMan renderingMan;
         private readonly LogConsolePrinter logConsolePrinter;
-        //private GameWindow window;
 
         private readonly string appVersion;
 
@@ -282,13 +282,13 @@ namespace OpenBreed.Sandbox
 
         #region Public Constructors
 
-        public Program(IManagerCollection manCollection, IViewClient clientMan) :
-            base(manCollection)
+        public Program(IHost host, IManagerCollection manCollection, IViewClient clientMan) :
+            base(host, manCollection)
         {
+
+
             this.clientMan = clientMan;
             scriptMan = manCollection.GetManager<IScriptMan>();
-            StateMachines = manCollection.GetManager<IFsmMan>();
-            Animations = manCollection.GetManager<Animation.Interface.IClipMan<Entity>>();
             Inputs = manCollection.GetManager<IInputsMan>();
             renderingMan = manCollection.GetManager<IRenderingMan>();
 
@@ -319,9 +319,6 @@ namespace OpenBreed.Sandbox
         #region Public Properties
 
         public IEntityFactory EntityFactory { get; }
-        public IClipMan<Entity> Animations { get; }
-
-        public IFsmMan StateMachines { get; }
 
         public IPlayersMan Players { get; }
 

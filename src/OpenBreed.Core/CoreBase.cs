@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Hosting;
+using OpenBreed.Common;
 
 namespace OpenBreed.Core
 {
@@ -6,14 +7,16 @@ namespace OpenBreed.Core
     {
         #region Protected Fields
 
+        protected readonly IHost host;
         protected readonly IManagerCollection manCollection;
 
         #endregion Protected Fields
 
         #region Protected Constructors
 
-        protected CoreBase(IManagerCollection manCollection)
+        protected CoreBase(IHost host, IManagerCollection manCollection)
         {
+            this.host = host;
             this.manCollection = manCollection;
         }
 
