@@ -23,11 +23,23 @@ namespace OpenBreed.Wecs.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IEntityMan, EntityMan>();
-                services.AddSingleton<ISystemFactory, DefaultSystemFactory>();
                 services.AddSingleton<IEntityFactory, EntityFactory>();
                 services.AddSingleton<IWorldMan, WorldMan>();
                 services.AddSingleton<ISystemFinder, SystemFinder>();
                 services.AddSingleton<WorldBuilder, WorldBuilder>();
+            });
+        }
+
+        public static void SetupSystemFactory(this IHostBuilder hostBuilder, Action<ISystemFactory, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ISystemFactory>((sp) =>
+                {
+                    var systemFactory = new DefaultSystemFactory();
+                    action.Invoke(systemFactory, sp);
+                    return systemFactory;
+                });
             });
         }
     }

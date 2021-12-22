@@ -6,6 +6,7 @@ using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
+using System;
 
 namespace OpenBreed.Animation.Generic.Extensions
 {
@@ -22,13 +23,13 @@ namespace OpenBreed.Animation.Generic.Extensions
             });
         }
 
-        //public static void SetupAnimationDataLoader<TObject>(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
-        //{
-        //    dataLoaderFactory.Register<IAnimationClipDataLoader<TObject>>(() => new AnimationClipDataLoader<TObject>(managerCollection.GetManager<IRepositoryProvider>(),
-        //                                                                    managerCollection.GetManager<IClipMan<TObject>>(),
-        //                                                                    managerCollection.GetManager<IFrameUpdaterMan<TObject>>(),
-        //                                                                    managerCollection.GetManager<ILogger>()));
-        //}
+        public static void SetupAnimationDataLoader<TObject>(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        {
+            dataLoaderFactory.Register<IAnimationClipDataLoader<TObject>>(() => new AnimationClipDataLoader<TObject>(managerCollection.GetService<IRepositoryProvider>(),
+                                                                            managerCollection.GetService<IClipMan<TObject>>(),
+                                                                            managerCollection.GetService<IFrameUpdaterMan<TObject>>(),
+                                                                            managerCollection.GetService<ILogger>()));
+        }
 
         #endregion Public Methods
     }

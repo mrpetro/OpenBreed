@@ -40,31 +40,31 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
             });
         }
 
-        //public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
-        //{
-        //    dataLoaderFactory.Register<ISpriteAtlasDataLoader>(() => new SpriteAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-        //                                                     managerCollection.GetManager<AssetsDataProvider>(),
-        //                                                     managerCollection.GetManager<ITextureMan>(),
-        //                                                     managerCollection.GetManager<ISpriteMan>()));
-        //}
+        public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        {
+            dataLoaderFactory.Register<ISpriteAtlasDataLoader>(() => new SpriteAtlasDataLoader(managerCollection.GetService<IRepositoryProvider>(),
+                                                             managerCollection.GetService<AssetsDataProvider>(),
+                                                             managerCollection.GetService<ITextureMan>(),
+                                                             managerCollection.GetService<ISpriteMan>()));
+        }
 
-        //public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
-        //{
-        //    dataLoaderFactory.Register<ITileAtlasDataLoader>(() => new TileAtlasDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-        //                                                     managerCollection.GetManager<AssetsDataProvider>(),
-        //                                                     managerCollection.GetManager<ITextureMan>(),
-        //                                                     managerCollection.GetManager<ITileMan>(),
-        //                                                     managerCollection.GetManager<ILogger>()));
-        //}
+        public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        {
+            dataLoaderFactory.Register<ITileAtlasDataLoader>(() => new TileAtlasDataLoader(managerCollection.GetService<IRepositoryProvider>(),
+                                                             managerCollection.GetService<AssetsDataProvider>(),
+                                                             managerCollection.GetService<ITextureMan>(),
+                                                             managerCollection.GetService<ITileMan>(),
+                                                             managerCollection.GetService<ILogger>()));
+        }
 
-        //public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
-        //{
-        //    dataLoaderFactory.Register<ITileStampDataLoader>(() => new TileStampDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-        //                                                     managerCollection.GetManager<AssetsDataProvider>(),
-        //                                                     managerCollection.GetManager<ITextureMan>(),
-        //                                                     managerCollection.GetManager<IStampMan>(),
-        //                                                     managerCollection.GetManager<ITileMan>(),
-        //                                                     managerCollection.GetManager<ILogger>()));
-        //}
+        public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        {
+            dataLoaderFactory.Register<ITileStampDataLoader>(() => new TileStampDataLoader(managerCollection.GetService<IRepositoryProvider>(),
+                                                             managerCollection.GetService<AssetsDataProvider>(),
+                                                             managerCollection.GetService<ITextureMan>(),
+                                                             managerCollection.GetService<IStampMan>(),
+                                                             managerCollection.GetService<ITileMan>(),
+                                                             managerCollection.GetService<ILogger>()));
+        }
     }
 }

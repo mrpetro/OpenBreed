@@ -23,5 +23,24 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
                 services.AddSingleton<DynamicResolver>();
             });
         }
+
+        public static void SetupPhysicsSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
+        {
+            systemFactory.Register(() => new DirectionSystemVanilla(serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register(() => new MovementSystem(serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register(() => new MovementSystemVanilla(serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register(() => new DynamicBodiesAabbUpdaterSystem(serviceProvider.GetService<IShapeMan>()));
+            systemFactory.Register(() => new DynamicBodiesCollisionCheckSystem(serviceProvider.GetService<IEntityMan>(),
+                                                                               serviceProvider.GetService<IShapeMan>(),
+                                                                               serviceProvider.GetService<ICollisionMan<Entity>>()));
+            systemFactory.Register(() => new StaticBodiesSystem(serviceProvider.GetService<IEntityMan>(),
+                                                                serviceProvider.GetService<IShapeMan>(),
+                                                                serviceProvider.GetService<IEventsMan>()));
+
+            systemFactory.Register(() => new CollisionResponseSystem(serviceProvider.GetService<IEntityMan>(),
+                                                                     serviceProvider.GetService<IWorldMan>(),
+                                                                     serviceProvider.GetService<ICollisionMan<Entity>>()));
+        }
+
     }
 }

@@ -26,13 +26,13 @@ namespace OpenBreed.Audio.OpenAL.Extensions
             });
         }
 
-        //public static void SetupSoundSampleDataLoader(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
-        //{
-        //    dataLoaderFactory.Register<ISoundSampleDataLoader>(() => new SoundSampleDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-        //                                                     managerCollection.GetManager<AssetsDataProvider>(),
-        //                                                     managerCollection.GetManager<IModelsProvider>(),
-        //                                                     managerCollection.GetManager<ISoundMan>(),
-        //                                                     managerCollection.GetManager<ILogger>()));
-        //}
+        public static void SetupSoundSampleDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        {
+            dataLoaderFactory.Register<ISoundSampleDataLoader>(() => new SoundSampleDataLoader(managerCollection.GetService<IRepositoryProvider>(),
+                                                             managerCollection.GetService<AssetsDataProvider>(),
+                                                             managerCollection.GetService<IModelsProvider>(),
+                                                             managerCollection.GetService<ISoundMan>(),
+                                                             managerCollection.GetService<ILogger>()));
+        }
     }
 }

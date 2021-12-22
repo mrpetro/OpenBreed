@@ -17,6 +17,7 @@ namespace OpenBreed.Animation.Generic.Extensions
             manCollection.AddSingleton<IFrameUpdaterMan<TObject>>(() => new FrameUpdaterMan<TObject>(manCollection.GetManager<ILogger>()));
         }
 
+
         public static void SetupAnimationDataLoader<TObject>(this DataLoaderFactory dataLoaderFactory, IManagerCollection managerCollection)
         {
             dataLoaderFactory.Register<IAnimationClipDataLoader<TObject>>(() => new AnimationClipDataLoader<TObject>(managerCollection.GetManager<IRepositoryProvider>(),

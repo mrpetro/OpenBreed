@@ -119,6 +119,19 @@ namespace OpenBreed.Sandbox
             manCollection.SetupOpenGLManagers();
 
             hostBuilder.SetupWecsManagers();
+            hostBuilder.SetupSystemFactory((systemFactory, sp) =>
+            {
+                systemFactory.SetupRenderingSystems(sp);
+                systemFactory.SetupAudioSystems(sp);
+                systemFactory.SetupPhysicsSystems(sp);
+                systemFactory.SetupCoreSystems(sp);
+                systemFactory.SetupControlSystems(sp);
+                systemFactory.SetupAnimationSystems(sp);
+                systemFactory.SetupPhysicsDebugSystem(sp);
+                systemFactory.SetupUnknownMapCellDisplaySystem(sp);
+                systemFactory.SetupGroupMapCellDisplaySystem(sp);
+            });
+
             manCollection.SetupWecsManagers();
 
             hostBuilder.SetupItemManager();
@@ -130,9 +143,11 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupViewportCreator();
             manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(manCollection.GetManager<IEntityMan>(), manCollection.GetManager<IEntityFactory>()));
 
-
-
+            hostBuilder.SetupDataLoaderFactory();
             manCollection.SetupDataLoaderFactory();
+
+
+
 
             manCollection.SetupRenderingSystems();
             manCollection.SetupAudioSystems();
