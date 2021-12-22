@@ -10,11 +10,16 @@ namespace OpenBreed.Common.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupBuilderFactory(this IHostBuilder hostBuilder)
+        public static void SetupBuilderFactory(this IHostBuilder hostBuilder, Action<IBuilderFactory, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IBuilderFactory, BuilderFactory>();
+                services.AddSingleton<IBuilderFactory>((sp) =>
+                {
+                    var entityFactory = new BuilderFactory();
+                    action.Invoke(entityFactory, sp);
+                    return entityFactory;
+                });
             });
         }
 
