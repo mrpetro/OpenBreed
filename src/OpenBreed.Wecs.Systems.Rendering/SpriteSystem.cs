@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Interface.Managers;
+﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -14,15 +15,16 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         private readonly List<Entity> entities = new List<Entity>();
         private readonly ISpriteMan spriteMan;
+        private readonly ISpriteRenderer spriteRenderer;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal SpriteSystem(ISpriteMan spriteMan)
+        internal SpriteSystem(ISpriteMan spriteMan, ISpriteRenderer spriteRenderer)
         {
             this.spriteMan = spriteMan;
-
+            this.spriteRenderer = spriteRenderer;
             RequireEntityWith<SpriteComponent>();
             RequireEntityWith<PositionComponent>();
         }
@@ -40,7 +42,17 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            spriteMan.Render(clipBox, dt, RenderSprites);
+            spriteRenderer.RenderBegin();
+
+            try
+            {
+                for (int i = 0; i < entities.Count; i++)
+                    RenderSprite(entities[i], clipBox);
+            }
+            finally
+            {
+                spriteRenderer.RenderEnd();
+            }
         }
 
         #endregion Public Methods
@@ -64,17 +76,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Private Methods
 
         /// <summary>
-        /// Render all sprites in this system
-        /// </summary>
-        /// <param name="clipBox">clipBox</param>
-        /// <param name="dt">Delta time</param>
-        private void RenderSprites(Box2 clipBox, float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
-                RenderSprite(entities[i], clipBox);
-        }
-
-        /// <summary>
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
@@ -85,36 +86,34 @@ namespace OpenBreed.Wecs.Systems.Rendering
             if (spc.Hidden)
                 return;
 
-            var pos = entity.Get<PositionComponent>();
+            if(spc.AtlasId == -1)
+                return;
 
-            spriteMan.Render(spc.AtlasId, spc.ImageId, spc.Origin, pos.Value, spc.Order, clipBox);
+            var atlas = spriteMan.GetById(spc.AtlasId);
+
+            if (!atlas.IsValid(spc.ImageId))
+                return;
+
+            var pos = entity.Get<PositionComponent>().Value;
+            pos += spc.Origin;
+            var size = atlas.GetSpriteSize(spc.ImageId);
+
+            //Test viewport for clippling here
+            if (pos.X + size.X < clipBox.Left)
+                return;
+
+            if (pos.X > clipBox.Right)
+                return;
+
+            if (pos.Y + size.Y < clipBox.Bottom)
+                return;
+
+            if (pos.Y > clipBox.Top)
+                return;
+
+            spriteRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, spc.Order), spc.AtlasId, spc.ImageId);
         }
 
         #endregion Private Methods
-
-        ///// <summary>
-        ///// Draw this sprite to given viewport
-        ///// </summary>
-        ///// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        //private void DrawDebug(SpritePack pack, IViewport viewport)
-        //{
-        //    var entity = Core.GetManager<IEntityMan>().GetById(pack.EntityId);
-
-        //    var body = entity.GetComponent<Body>().FirstOrDefault();
-
-        //    if (body == null)
-        //        return;
-
-        //    if (body.Boxes != null)
-        //    {
-        //        foreach (var item in body.Boxes)
-        //        {
-        //            RenderTools.DrawRectangle(item.Item1 * 16.0f,
-        //                                      item.Item2 * 16.0f,
-        //                                      item.Item1 * 16.0f + 16.0f,
-        //                                      item.Item2 * 16.0f + 16.0f);
-        //        }
-        //    }
-        //}
     }
 }

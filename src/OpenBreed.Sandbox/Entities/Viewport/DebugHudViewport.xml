@@ -4,7 +4,7 @@
 		<Viewport>
 			<Width>32</Width>
 			<Height>32</Height>
-			<DrawBorder>true</DrawBorder>
+			<DrawBorder>false</DrawBorder>
 			<Clipping>true</Clipping>
 			<DrawBackgroud>false</DrawBackgroud>
 			<ScalingType>FitBothPreserveAspectRatio</ScalingType>

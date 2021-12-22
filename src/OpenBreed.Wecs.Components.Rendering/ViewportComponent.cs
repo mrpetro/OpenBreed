@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenTK;
 using OpenTK.Graphics;
 
 namespace OpenBreed.Wecs.Components.Rendering
@@ -89,8 +90,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// <param name="builder"></param>
         internal ViewportComponent(ViewportComponentBuilder builder)
         {
-            Width = builder.Width;
-            Height = builder.Height;
+            Size = new Vector2(builder.Width, builder.Height);
             CameraEntityId = -1;
             DrawBorder = builder.DrawBorder;
             DrawBackgroud = builder.DrawBackground;
@@ -103,14 +103,9 @@ namespace OpenBreed.Wecs.Components.Rendering
         #region Public Properties
 
         /// <summary>
-        /// Width of this viewport
+        /// Width and height of this viewport
         /// </summary>
-        public float Width { get; set; }
-
-        /// <summary>
-        /// Height of this viewport
-        /// </summary>
-        public float Height { get; set; }
+        public Vector2 Size { get; set; }
 
         /// <summary>
         ///  Flag to draw border box of viewport
@@ -136,11 +131,6 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// Draw viewport background if this flag is true
         /// </summary>
         public bool DrawBackgroud { get; set; }
-
-        /// <summary>
-        /// Aspect ratio of this viewport
-        /// </summary>
-        public float Ratio { get { return Width / Height; } }
 
         /// <summary>
         /// Type of scaling strategy for camera display

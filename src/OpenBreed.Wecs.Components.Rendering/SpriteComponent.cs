@@ -85,7 +85,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #region Internal Constructors
 
-        internal SpriteComponentFactory(IBuilderFactory builderFactory)
+        public SpriteComponentFactory(IBuilderFactory builderFactory)
         {
             this.builderFactory = builderFactory;
         }

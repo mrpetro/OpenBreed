@@ -30,7 +30,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        internal TileMan(ITextureMan textureMan, ILogger logger)
+        public TileMan(ITextureMan textureMan, ILogger logger)
         {
             this.textureMan = textureMan;
             this.logger = logger;

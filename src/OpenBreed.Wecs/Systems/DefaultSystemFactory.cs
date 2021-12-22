@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems
 {
-    public class DefaultSystemFactory : ISystemFactory
+    internal class DefaultSystemFactory : ISystemFactory
     {
         #region Private Fields
 
@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Systems
 
         #region Internal Constructors
 
-        internal DefaultSystemFactory()
+        public DefaultSystemFactory()
         {
         }
 

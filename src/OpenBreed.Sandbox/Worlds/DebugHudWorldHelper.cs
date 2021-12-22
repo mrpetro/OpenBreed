@@ -99,8 +99,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)
         {
-            cameraEntity.Get<CameraComponent>().Width = a.Width;
-            cameraEntity.Get<CameraComponent>().Height = a.Height;
+            cameraEntity.Get<CameraComponent>().Size = new Vector2(a.Width, a.Height);
         }
 
         #endregion Private Methods

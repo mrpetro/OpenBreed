@@ -1,37 +1,29 @@
-﻿using OpenBreed.Rendering.Interface.Managers;
-using OpenTK;
-using System.Collections.Generic;
+﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.OpenGL.Helpers;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    internal class RenderableBatch : IRenderableBatch
+    internal class RenderableFactory : IRenderableFactory
     {
         #region Private Fields
 
-        private readonly List<IRenderable> renderables = new List<IRenderable>();
+        private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
-        #region Public Methods
+        #region Public Constructors
 
-        public void Add(IRenderable renderable)
+        public RenderableFactory(IPrimitiveRenderer primitiveRenderer)
         {
-            renderables.Add(renderable);
+            this.primitiveRenderer = primitiveRenderer;
         }
 
-        public void Render(Box2 viewBox, int depth, float dt)
-        {
-            renderables.ForEach(renderable => renderable.Render(viewBox, depth, dt));
-        }
+        #endregion Public Constructors
 
-        #endregion Public Methods
-    }
-
-    internal class RenderableFactory : IRenderableFactory
-    {
         #region Public Methods
 
-        public IRenderableBatch CreateRenderableBatch() => new RenderableBatch();
+        public IRenderableBatch CreateRenderableBatch() => new RenderableBatch(primitiveRenderer);
 
         #endregion Public Methods
     }

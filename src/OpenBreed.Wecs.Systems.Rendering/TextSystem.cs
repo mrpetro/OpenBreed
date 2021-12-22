@@ -5,8 +5,6 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
@@ -47,18 +45,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
-            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
-            GL.BlendColor(Color4.Black);
-            GL.Enable(EnableCap.Texture2D);
-
-            for (int i = 0; i < entities.Count; i++)
-                RenderText(entities[i], clipBox);
-
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
-            GL.Disable(EnableCap.Blend);
+            fontMan.Render(clipBox, dt, RenderTexts);
         }
 
         #endregion Public Methods
@@ -81,26 +68,31 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Private Methods
 
+        private void RenderTexts(Box2 clipBox, float dt)
+        {
+            for (int i = 0; i < entities.Count; i++)
+                RenderText(entities[i], clipBox);
+        }
+
         private void RenderText(Entity entity, Box2 clipBox)
         {
             var pos = entity.Get<PositionComponent>();
             var tcp = entity.Get<TextComponent>();
 
-            GL.Enable(EnableCap.Texture2D);
-            GL.PushMatrix();
+            fontMan.RenderStart(pos.Value);
 
-            GL.Translate(pos.Value.X, pos.Value.Y, 0.0f);
-
-            for (int i = 0; i < tcp.Parts.Count; i++)
+            try
             {
-                var part = tcp.Parts[i];
-
-                fontMan.Render(part.FontId, part.Text, part.Offset, 100, clipBox);
-
+                for (int i = 0; i < tcp.Parts.Count; i++)
+                {
+                    var part = tcp.Parts[i];
+                    fontMan.RenderPart(part.FontId, part.Text, part.Offset, 100, clipBox);
+                }
             }
-
-            GL.PopMatrix();
-            GL.Disable(EnableCap.Texture2D);
+            finally
+            {
+                fontMan.RenderEnd();
+            }
         }
 
         #endregion Private Methods

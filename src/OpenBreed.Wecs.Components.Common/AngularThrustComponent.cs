@@ -49,7 +49,7 @@ namespace OpenBreed.Wecs.Components.Common
 
     public sealed class AngularThrustComponentFactory : ComponentFactoryBase<IAngularThrustComponentTemplate>
     {
-        internal AngularThrustComponentFactory()
+        public AngularThrustComponentFactory()
         {
 
         }

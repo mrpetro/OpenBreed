@@ -1,9 +1,13 @@
-﻿using OpenBreed.Animation.Generic.Extensions;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Database.Xml.Extensions;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
@@ -64,60 +68,19 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using OpenBreed.Core.Extensions;
 
 namespace OpenBreed.Sandbox
 {
-    public class ProgramFactory : CoreFactory
+    public class ProgramFactory
     {
+        private readonly IHostBuilder hostBuilder;
         #region Public Constructors
 
-        public ProgramFactory()
+        public ProgramFactory(IHostBuilder hostBuilder)
         {
-            var appName = ProgramTools.AppProductName;
-            var infoVersion = ProgramTools.AppInfoVerion;
-
-            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(640, 480, $"{appName} v{infoVersion}"));
-
-            manCollection.SetupBuilderFactory();
-            manCollection.SetupVariableManager();
-            manCollection.SetupABFormats();
-            manCollection.SetupAnimationManagers<Entity>();
-            manCollection.SetupModelProvider();
-            manCollection.SetupLuaScripting();
-            manCollection.SetupDataProviders();
-            manCollection.SetupGenericInputManagers();
-            manCollection.SetupGenericPhysicsManagers<Entity>();
-            manCollection.SetupOpenALManagers();
-            manCollection.SetupOpenGLManagers();
-            manCollection.SetupWecsManagers();
-            manCollection.SetupRenderingSystems();
-            manCollection.SetupAudioSystems();
-            manCollection.SetupPhysicsSystems();
-            manCollection.SetupCoreSystems();
-            manCollection.SetupControlSystems();
-            manCollection.SetupAnimationSystems();
-            manCollection.SetupPhysicsDebugSystem();
-
-            manCollection.SetupCommonComponents();
-            manCollection.SetupPhysicsComponents();
-            manCollection.SetupRenderingComponents();
-            manCollection.SetupAnimationComponents();
-            manCollection.SetupFsmComponents();
-
-            manCollection.SetupDataLoaderFactory();
-
-            manCollection.SetupUnknownMapCellDisplaySystem();
-            manCollection.SetupGroupMapCellDisplaySystem();
-            manCollection.SetupItemManager();
-            //manCollection.SetupAudioSystems();
-
-            //manCollection.SetupGameScriptingApi();
-
-            manCollection.SetupSandboxBuilders();
-
-            manCollection.AddSingleton<FixtureTypes>(() => new FixtureTypes(manCollection.GetManager<IShapeMan>()));
-
-            manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(manCollection.GetManager<IEntityMan>(), manCollection.GetManager<IEntityFactory>()));
+            this.hostBuilder = hostBuilder;
         }
 
         #endregion Public Constructors
@@ -126,108 +89,160 @@ namespace OpenBreed.Sandbox
 
         public ICore Create(string gameDbFilePath, string gameFolderPath)
         {
-            var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
+            var appName = ProgramTools.AppProductName;
+            var infoVersion = ProgramTools.AppInfoVerion;
 
-            manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(manCollection.GetManager<ISystemFactory>(),
-                                                                                      manCollection.GetManager<IRenderableFactory>(),
-                                                                                      manCollection.GetManager<IRenderingMan>(),
-                                                                                      manCollection.GetManager<IWorldMan>(),
-                                                                                      manCollection.GetManager<IEventsMan>(),
-                                                                                      manCollection.GetManager<ViewportCreator>(),
-                                                                                      manCollection.GetManager<IViewClient>()));
+            hostBuilder.SetupCoreManagers();
 
-            manCollection.AddSingleton<GameHudWorldHelper>(() => new GameHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
-                                                                                        manCollection.GetManager<IRenderableFactory>(),
-                                                                                        manCollection.GetManager<IWorldMan>(),
-                                                                                        manCollection.GetManager<IFontMan>(),
-                                                                                        manCollection.GetManager<IViewClient>(),
-                                                                                        manCollection.GetManager<IEntityMan>(),
-                                                                                        manCollection.GetManager<IEntityFactory>(),
-                                                                                        manCollection.GetManager<VanillaStatusBarHelper>(),
-                                                                                        manCollection.GetManager<CameraHelper>(),
-                                                                                        manCollection.GetManager<IRepositoryProvider>(),
-                                                                                        manCollection.GetManager<IDataLoaderFactory>(),
-                                                                                        manCollection.GetManager<SpriteAtlasDataProvider>()));
+            hostBuilder.SetupViewClient(640, 480, $"{appName} v{infoVersion}");
 
-            manCollection.AddSingleton<DebugHudWorldHelper>(() => new DebugHudWorldHelper(manCollection.GetManager<ISystemFactory>(),
-                                                                                          manCollection.GetManager<IRenderableFactory>(),
-                                                                                          manCollection.GetManager<IWorldMan>(),
-                                                                                          manCollection.GetManager<IEntityMan>(),
-                                                                                          manCollection.GetManager<HudHelper>(),
-                                                                                          manCollection.GetManager<CameraHelper>(),
-                                                                                          manCollection.GetManager<IViewClient>()));
+            hostBuilder.SetupBuilderFactory((builderFactory, sp) =>
+            {
+                builderFactory.SetupPhysicsBuilderFactories(sp);
+                builderFactory.SetupRenderingComponents(sp);
+                builderFactory.SetupAnimationBuilderFactories(sp);
+            });
 
-            manCollection.AddSingleton<EntriesHelper>(() => new EntriesHelper(manCollection.GetManager<IWorldMan>(),
-                                                                                  manCollection.GetManager<IEntityMan>(),
-                                                                                  manCollection.GetManager<IClipMan<Entity>>(),
-                                                                                  manCollection.GetManager<IEntityFactory>(),
-                                                                                  manCollection.GetManager<IEventsMan>(),
-                                                                                  manCollection.GetManager<ICollisionMan<Entity>>(),
-                                                                                  manCollection.GetManager<IJobsMan>(),
-                                                                                  manCollection.GetManager<ViewportCreator>(),
-                                                                                  manCollection.GetManager<IDataLoaderFactory>()));
-            manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(manCollection.GetManager<IDataLoaderFactory>(),
-                                                                        manCollection.GetManager<IEntityFactory>()));
+            hostBuilder.SetupABFormats();
+            hostBuilder.SetupModelProvider();
+            hostBuilder.SetupDataProviders();
 
-            manCollection.AddSingleton<HudHelper>(() => new HudHelper(manCollection.GetManager<IEntityFactory>(),
-                                                                      manCollection.GetManager<IEntityMan>(),
-                                                                      manCollection.GetManager<IViewClient>(),
-                                                                      manCollection.GetManager<IJobsMan>(),
-                                                                      manCollection.GetManager<IRenderingMan>()));
+            hostBuilder.SetupFrameUpdaterMan<Entity>((frameUpdaterMan, sp) =>
+            {
+                new SpriteComponentAnimator(frameUpdaterMan, sp.GetService<ISpriteMan>());
+            });
 
-            manCollection.AddSingleton<VanillaStatusBarHelper>(() => new VanillaStatusBarHelper(manCollection.GetManager<IEntityFactory>(),
-                                                                      manCollection.GetManager<IEntityMan>(),
-                                                                      manCollection.GetManager<IViewClient>(),
-                                                                      manCollection.GetManager<IJobsMan>(),
-                                                                      manCollection.GetManager<IRenderingMan>()));
+            hostBuilder.SetupClipMan<Entity>();
 
-            manCollection.AddSingleton<ElectricGateHelper>(() => new ElectricGateHelper(manCollection.GetManager<IDataLoaderFactory>(),
-                                                                        manCollection.GetManager<IEntityFactory>()));
-            manCollection.AddSingleton<PickableHelper>(() => new PickableHelper(manCollection.GetManager<IDataLoaderFactory>(),
-                                                                        manCollection.GetManager<IEntityFactory>()));
-            manCollection.AddSingleton<GenericCellHelper>(() => new GenericCellHelper(manCollection.GetManager<IDataLoaderFactory>(),
-                                                                        manCollection.GetManager<IEntityFactory>()));
-            manCollection.AddSingleton<EnvironmentHelper>(() => new EnvironmentHelper(manCollection.GetManager<IDataLoaderFactory>(),
-                                                                                      manCollection.GetManager<IEntityFactory>(),
-                                                                                      manCollection.GetManager<IBuilderFactory>()));
+            hostBuilder.SetupLuaScripting();
 
-            manCollection.AddSingleton<CameraHelper>(() => new CameraHelper(manCollection.GetManager<IClipMan<Entity>>(),
-                                                                                manCollection.GetManager<IFrameUpdaterMan<Entity>>(),
-                                                                                manCollection.GetManager<IDataLoaderFactory>(),
-                                                                                manCollection.GetManager<IEntityFactory>()));
+            hostBuilder.SetupInputMan((inpitsMan, sp) =>
+            {
+                inpitsMan.RegisterHandler(new DigitalJoyInputHandler());
+                inpitsMan.RegisterHandler(new ButtonInputHandler());
+            });
 
-            manCollection.AddSingleton<TeleportHelper>(() => new TeleportHelper(manCollection.GetManager<IClipMan<Entity>>(),
-                                                                                manCollection.GetManager<IWorldMan>(),
-                                                                                manCollection.GetManager<IEntityMan>(),
-                                                                                manCollection.GetManager<IEntityFactory>(),
-                                                                                manCollection.GetManager<IEventsMan>(),
-                                                                                manCollection.GetManager<ICollisionMan<Entity>>(),
-                                                                                manCollection.GetManager<IBuilderFactory>(),
-                                                                                manCollection.GetManager<IJobsMan>(),
-                                                                                manCollection.GetManager<IShapeMan>()));
+            hostBuilder.SetupPlayersMan((playersMan, sp) =>
+            {
+                var p1 = playersMan.AddPlayer("P1");
+                p1.RegisterInput(new ButtonPlayerInput());
+                p1.RegisterInput(new DigitalJoyPlayerInput());
+                p1.AddKeyBinding("Attacking", "Primary", Key.ControlRight);
+                p1.AddKeyBinding("Walking", "Left", Key.Left);
+                p1.AddKeyBinding("Walking", "Right", Key.Right);
+                p1.AddKeyBinding("Walking", "Up", Key.Up);
+                p1.AddKeyBinding("Walking", "Down", Key.Down);
 
-            manCollection.SetupDynamicResolver();
-            manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(manCollection.GetManager<IClipMan<Entity>>(),
-                                                                                    manCollection.GetManager<ICollisionMan<Entity>>(),
-                                                                                    manCollection.GetManager<IEntityFactory>(),
-                                                                                    manCollection.GetManager<DynamicResolver>()));
-            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(manCollection.GetManager<IClipMan<Entity>>(),
-                                                                          manCollection.GetManager<ICollisionMan<Entity>>(),
-                                                                          manCollection.GetManager<IPlayersMan>(),
-                                                                          manCollection.GetManager<IDataLoaderFactory>(),
-                                                                          manCollection.GetManager<IEntityFactory>(),
-                                                                          manCollection.GetManager<DynamicResolver>(),
-                                                                          manCollection.GetManager<FixtureTypes>()));
+                var p2 = playersMan.AddPlayer("P2");
+                p2.RegisterInput(new DigitalJoyPlayerInput());
+                p2.AddKeyBinding("Walking", "Left", Key.A);
+                p2.AddKeyBinding("Walking", "Right", Key.D);
+                p2.AddKeyBinding("Walking", "Up", Key.W);
+                p2.AddKeyBinding("Walking", "Down", Key.S);
+            });
 
-            manCollection.SetupSpriteComponentAnimator();
+            hostBuilder.SetupGenericPhysicsManagers<Entity>();
 
-            var variables = manCollection.GetManager<IVariableMan>();
+            hostBuilder.SetupShapeMan((shapeMan, sp) =>
+            {
+                shapeMan.Register("Shapes/Point_14_14", new PointShape(14, 14));
+                shapeMan.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
+                shapeMan.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
+                shapeMan.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
+                shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
+                shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
+                shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
+            });
 
-            variables.RegisterVariable(typeof(string), gameFolderPath, "Cfg.Options.ABTA.GameFolderPath");
+            hostBuilder.SetupOpenALManagers();
+            hostBuilder.SetupOpenGLManagers();
 
-            manCollection.AddSingleton<IRepositoryProvider>(() => new XmlReadonlyDatabaseMan(variables, gameDbFilePath));
+            hostBuilder.SetupSystemFactory((systemFactory, sp) =>
+            {
+                systemFactory.SetupRenderingSystems(sp);
+                systemFactory.SetupAudioSystems(sp);
+                systemFactory.SetupPhysicsSystems(sp);
+                systemFactory.SetupCoreSystems(sp);
+                systemFactory.SetupControlSystems(sp);
+                systemFactory.SetupAnimationSystems(sp);
+                systemFactory.SetupPhysicsDebugSystem(sp);
+                systemFactory.SetupUnknownMapCellDisplaySystem(sp);
+                systemFactory.SetupGroupMapCellDisplaySystem(sp);
+            });
 
-            return core;
+            XmlCommonComponents.Setup();
+            XmlPhysicsComponents.Setup();
+            XmlRenderingComponents.Setup();
+            XmlAnimationComponents.Setup();
+            XmlFsmComponents.Setup();
+
+            hostBuilder.SetupCommonComponentFactories();
+            hostBuilder.SetupPhysicsComponentFactories();
+            hostBuilder.SetupRenderingComponentFactories();
+            hostBuilder.SetupAnimationComponentFactories();
+            hostBuilder.SetupFsmComponentFactories();
+
+            hostBuilder.SetupEntityFactory((entityFactory, sp) =>
+            {
+                entityFactory.SetupCommonComponents(sp);
+                entityFactory.SetupPhysicsComponents(sp);
+                entityFactory.SetupRenderingComponents(sp);
+                entityFactory.SetupAnimationComponents(sp);
+                entityFactory.SetupFsmComponents(sp);
+            });
+
+            hostBuilder.SetupWecsManagers();
+            hostBuilder.SetupItemManager();
+            hostBuilder.SetupFixtureTypes();
+            hostBuilder.SetupViewportCreator();
+
+            hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
+            {
+                dataLoaderFactory.SetupAnimationDataLoader<Entity>(sp);
+                dataLoaderFactory.SetupMapLegacyDataLoader(sp);
+                dataLoaderFactory.SetupTileSetDataLoader(sp);
+                dataLoaderFactory.SetupTileStampDataLoader(sp);
+                dataLoaderFactory.SetupSpriteSetDataLoader(sp);
+                dataLoaderFactory.SetupSoundSampleDataLoader(sp);
+            });
+
+            hostBuilder.SetupFsmManager((fsmMan, sp) => {
+                //fsmMan.SetupButtonStates(sp);
+                //fsmMan.SetupProjectileStates(sp);
+                //fsmMan.SetupDoorStates(sp);
+                //fsmMan.SetupPickableStates(sp);
+                //fsmMan.SetupActorAttackingStates(sp);
+                //fsmMan.SetupActorMovementStates(sp);
+                //fsmMan.CreateTurretRotationStates(sp);
+            });
+
+            hostBuilder.SetupScreenWorldHelper();
+            hostBuilder.SetupGameHudWorldHelper();
+            hostBuilder.SetupDebugHudWorldHelper();
+            hostBuilder.SetupEntriesHelper();
+            hostBuilder.SetupDoorHelper();
+            hostBuilder.SetupHudHelper();
+            hostBuilder.SetupVanillaStatusBarHelper();
+            hostBuilder.SetupElectricGateHelper();
+            hostBuilder.SetupPickableHelper();
+            hostBuilder.SetupGenericCellHelper();
+            hostBuilder.SetupEnvironmentHelper();
+            hostBuilder.SetupCameraHelper();
+            hostBuilder.SetupTeleportHelper();
+            hostBuilder.SetupProjectileHelper();
+            hostBuilder.SetupActorHelper();
+            hostBuilder.SetupDynamicResolver();
+
+            hostBuilder.SetupVariableManager((variableMan, serviceProvider) =>
+            {
+                variableMan.RegisterVariable(typeof(string), gameFolderPath, "Cfg.Options.ABTA.GameFolderPath");
+            });
+
+            hostBuilder.SetupXmlReadonlyDatabase(gameDbFilePath);
+
+            var host = hostBuilder.Build();
+
+            return new Program(host, host.Services.GetService<IViewClient>());
         }
 
         #endregion Public Methods
@@ -243,64 +258,41 @@ namespace OpenBreed.Sandbox
         private readonly IViewClient clientMan;
         private readonly IRenderingMan renderingMan;
         private readonly LogConsolePrinter logConsolePrinter;
-        //private GameWindow window;
-
-        private readonly string appVersion;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public Program(IManagerCollection manCollection, IViewClient clientMan) :
-            base(manCollection)
+        public Program(IHost host, IViewClient clientMan) :
+            base(host)
         {
             this.clientMan = clientMan;
-            scriptMan = manCollection.GetManager<IScriptMan>();
-            StateMachines = manCollection.GetManager<IFsmMan>();
-            Animations = manCollection.GetManager<Animation.Interface.IClipMan<Entity>>();
-            Inputs = manCollection.GetManager<IInputsMan>();
-            renderingMan = manCollection.GetManager<IRenderingMan>();
 
-            //clientMan.KeyDownEvent += (s, a) => Inputs.OnKeyDown(a);
-            //clientMan.KeyUpEvent += (s, a) => Inputs.OnKeyUp(a);
-            //clientMan.KeyPressEvent += (s, a) => Inputs.OnKeyPress(a);
-            //clientMan.MouseMoveEvent += (s, a) => Inputs.OnMouseMove(a);
-            //clientMan.MouseDownEvent += (s, a) => Inputs.OnMouseDown(a);
-            //clientMan.MouseUpEvent += (s, a) => Inputs.OnMouseUp(a);
-            //clientMan.MouseWheelEvent += (s, a) => Inputs.OnMouseWheel(a);
+            scriptMan = GetManager<IScriptMan>();
+            renderingMan = GetManager<IRenderingMan>();
 
-            Players = manCollection.GetManager<IPlayersMan>();
-            Worlds = manCollection.GetManager<IWorldMan>();
-            Jobs = manCollection.GetManager<IJobsMan>();
-            EntityFactory = manCollection.GetManager<IEntityFactory>();
+            GetManager<ICollisionMan<Entity>>().RegisterAbtaColliders();
+            GetManager<ItemsMan>().RegisterAbtaItems();
 
-            appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            var fsmMan = host.Services.GetService<IFsmMan>();
+            fsmMan.SetupButtonStates(host.Services);
+            fsmMan.SetupProjectileStates(host.Services);
+            fsmMan.SetupDoorStates(host.Services);
+            fsmMan.SetupPickableStates(host.Services);
+            fsmMan.SetupActorAttackingStates(host.Services);
+            fsmMan.SetupActorMovementStates(host.Services);
+            fsmMan.CreateTurretRotationStates(host.Services);
 
             clientMan.UpdateFrameEvent += (s, a) => OnUpdateFrame(a);
             clientMan.LoadEvent += (s, a) => OnLoad();
 
-            logConsolePrinter = new LogConsolePrinter(manCollection.GetManager<ILogger>());
+            logConsolePrinter = new LogConsolePrinter(GetManager<ILogger>());
             logConsolePrinter.StartPrinting();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public IEntityFactory EntityFactory { get; }
-        public IClipMan<Entity> Animations { get; }
-
-        public IFsmMan StateMachines { get; }
-
-        public IPlayersMan Players { get; }
-
-        public IWorldMan Worlds { get; }
-
-        public IEntityMan Entities { get; }
-
-        public IJobsMan Jobs { get; }
-
-        public IInputsMan Inputs { get; }
 
         #endregion Public Properties
 
@@ -332,6 +324,10 @@ namespace OpenBreed.Sandbox
         [STAThread]
         private static void Main(string[] args)
         {
+
+            //RunWithHostBuilder(args).Wait();
+
+
             if (args.Length < 2)
             {
                 Console.WriteLine("Not enough arguments.");
@@ -345,7 +341,7 @@ namespace OpenBreed.Sandbox
             var execFolderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var gameDbFilePath = Path.Combine(execFolderPath, gameDbFileName);
 
-            var programFactory = new ProgramFactory();
+            var programFactory = new ProgramFactory(new HostBuilder());
 
             var program = programFactory.Create(gameDbFilePath, vanillaGameFolderPath);
 
@@ -354,56 +350,52 @@ namespace OpenBreed.Sandbox
             program.Run();
         }
 
+        private static async Task RunWithHostBuilder(string[] args)
+        {
+            var builder = new HostBuilder()
+              .ConfigureAppConfiguration((hostingContext, config) =>
+              {
+                  config.AddJsonFile("appsettings.json", optional: true);
+                  config.AddEnvironmentVariables();
+
+                  if (args != null)
+                  {
+                      config.AddCommandLine(args);
+                  }
+              });
+              //.ConfigureServices((hostContext, services) =>
+              //{
+              //    services.AddOptions();
+              //    services.Configure<AppConfig>(hostContext.Configuration.GetSection("AppConfig"));
+//
+              //    services.AddSingleton<IHostedService, PrintTextToConsoleService>();
+              //});
+              //.ConfigureLogging((hostingContext, logging) => {
+              //    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+              //    logging.AddConsole();
+              //});
+
+            await builder.RunConsoleAsync();
+        }
+
         private void OnUpdateFrame(float dt)
         {
             GetManager<IEventQueue>().Fire();
 
-            Players.ResetInputs();
+            GetManager<IPlayersMan>().ResetInputs();
 
-            Inputs.Update();
-            Worlds.Update(dt);
-            Jobs.Update(dt);
-        }
+            GetManager<IInputsMan>().Update();
 
-        private void RegisterInputs()
-        {
-            Inputs.RegisterHandler(new DigitalJoyInputHandler());
-            Inputs.RegisterHandler(new ButtonInputHandler());
-        }
+            GetManager<IWorldMan>().Update(dt);
 
-        private void RegisterPlayers()
-        {
-            var p1 = Players.AddPlayer("P1");
-            p1.RegisterInput(new ButtonPlayerInput());
-            p1.RegisterInput(new DigitalJoyPlayerInput());
-            p1.AddKeyBinding("Attacking", "Primary", Key.ControlRight);
-            p1.AddKeyBinding("Walking", "Left", Key.Left);
-            p1.AddKeyBinding("Walking", "Right", Key.Right);
-            p1.AddKeyBinding("Walking", "Up", Key.Up);
-            p1.AddKeyBinding("Walking", "Down", Key.Down);
-
-            var p2 = Players.AddPlayer("P2");
-            p2.RegisterInput(new DigitalJoyPlayerInput());
-            p2.AddKeyBinding("Walking", "Left", Key.A);
-            p2.AddKeyBinding("Walking", "Right", Key.D);
-            p2.AddKeyBinding("Walking", "Up", Key.W);
-            p2.AddKeyBinding("Walking", "Down", Key.S);
+            GetManager<IJobsMan>().Update(dt);
         }
 
         private void OnLoad()
         {
-            //Client.Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {window.VSync})";
-
             InitLua();
 
-            RegisterShapes();
-
             GetManager<FixtureTypes>().Register();
-
-            RegisterInputs();
-            RegisterPlayers();
-
-            //var map = manCollection.GetManager<MapsDataProvider>().GetMap("CRASH LANDING SITE");
 
             var spriteMan = GetManager<ISpriteMan>();
             var tileMan = GetManager<ITileMan>();
@@ -422,7 +414,6 @@ namespace OpenBreed.Sandbox
                 .SetName("Atlases/Sprites/Projectiles/Laser")
                 .AppendCoordsFromGrid(16, 16, 8, 1, 0, 0)
                 .Build();
-            //spriteMan.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
 
             var worldGateHelper = GetManager<EntriesHelper>();
             var doorHelper = GetManager<DoorHelper>();
@@ -434,26 +425,21 @@ namespace OpenBreed.Sandbox
             var teleportHelper = GetManager<TeleportHelper>();
             var cameraHelper = GetManager<CameraHelper>();
 
-            GetManager<ICollisionMan<Entity>>().RegisterAbtaColliders();
-            GetManager<ItemsMan>().RegisterAbtaItems();
-
             actorHelper.RegisterCollisionPairs();
             worldGateHelper.RegisterCollisionPairs();
             teleportHelper.RegisterCollisionPairs();
             projectileHelper.RegisterCollisionPairs();
 
             cameraHelper.CreateAnimations();
-
             projectileHelper.CreateAnimations();
 
-            manCollection.SetupButtonStates();
-            manCollection.SetupProjectileStates();
-            manCollection.SetupDoorStates();
-            manCollection.SetupPickableStates();
-            manCollection.SetupActorAttackingStates();
-            manCollection.SetupActorMovementStates();
-            //manCollection.SetupActorRotationStates();
-            manCollection.CreateTurretRotationStates();
+            //manCollection.SetupButtonStates();
+            //manCollection.SetupProjectileStates();
+            //manCollection.SetupDoorStates();
+            //manCollection.SetupPickableStates();
+            //manCollection.SetupActorAttackingStates();
+            //manCollection.SetupActorMovementStates();
+            //manCollection.CreateTurretRotationStates();
 
             var screenWorldHelper = GetManager<ScreenWorldHelper>();
 
@@ -524,19 +510,6 @@ namespace OpenBreed.Sandbox
         private void InitLua()
         {
             //scriptMan.RunFile(@"Content\Scripts\start.lua");
-        }
-
-        private void RegisterShapes()
-        {
-            var shapeMan = GetManager<IShapeMan>();
-
-            shapeMan.Register("Shapes/Point_14_14", new PointShape(14, 14));
-            shapeMan.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
-            shapeMan.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
-            shapeMan.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
-            shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
-            shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
-            shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
         }
 
         #endregion Private Methods

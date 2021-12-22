@@ -42,7 +42,7 @@ namespace OpenBreed.Input.Generic
         #endregion Public Methods
     }
 
-    public class InputsMan : IInputsMan
+    internal class InputsMan : IInputsMan
     {
         #region Private Fields
 
@@ -58,7 +58,7 @@ namespace OpenBreed.Input.Generic
 
         #region Internal Constructors
 
-        internal InputsMan(IViewClient clientMan)
+        public InputsMan(IViewClient clientMan)
         {
             this.clientMan = clientMan;
 

@@ -6,6 +6,20 @@
 		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <None Remove="Shaders\defaultShader.frag" />
+	  <None Remove="Shaders\defaultShader.vert" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Shaders\defaultShader.frag">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\defaultShader.vert">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="3.3.2" />
   </ItemGroup>

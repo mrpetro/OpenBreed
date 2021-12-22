@@ -32,7 +32,7 @@ namespace OpenBreed.Wecs.Components.Common
     {
         #region Internal Constructors
 
-        internal FollowedComponentFactory()
+        public FollowedComponentFactory()
         {
         }
 

@@ -91,6 +91,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return data[spriteId].Size;
         }
 
+        public bool IsValid(int imageId)
+        {
+            if (imageId < 0)
+                return false;
+
+            if (imageId >= data.Count)
+                return false;
+
+            return true;
+        }
+
         #endregion Public Methods
     }
 }

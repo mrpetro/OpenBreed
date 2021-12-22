@@ -15,6 +15,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private readonly ITextureMan textureMan;
         private readonly ISpriteMan spriteMan;
+        private readonly ISpriteRenderer spriteRenderer;
         private readonly List<IFont> items = new List<IFont>();
         private readonly Dictionary<string, IFont> aliases = new Dictionary<string, IFont>();
         private readonly TextMeasurer textMeasurer = new TextMeasurer();
@@ -24,10 +25,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        internal FontMan(ITextureMan textureMan, ISpriteMan spriteMan)
+        public FontMan(ITextureMan textureMan, ISpriteMan spriteMan, ISpriteRenderer spriteRenderer)
         {
             this.textureMan = textureMan;
             this.spriteMan = spriteMan;
+            this.spriteRenderer = spriteRenderer;
         }
 
         #endregion Internal Constructors
@@ -41,10 +43,10 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public IFontAtlasBuilder Create()
         {
-            return new FontFromSpritesAtlasBuilder(this, spriteMan);
+            return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer);
         }
 
-        public void Render(int fontId, string text, Vector2 origin, float order, Box2 clipBox)
+        public void RenderPart(int fontId, string text, Vector2 origin, float order, Box2 clipBox)
         {
             GL.Translate(origin.X, origin.Y, 0.0f);
             GetById(fontId).Draw(text, clipBox);
@@ -112,6 +114,21 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
+        }
+
+        public void RenderStart(Vector2 pos)
+        {
+            GL.Enable(EnableCap.Texture2D);
+            GL.PushMatrix();
+
+            GL.Translate(pos.X, pos.Y, 0.0f);
+
+        }
+
+        public void RenderEnd()
+        {
+            GL.PopMatrix();
+            GL.Disable(EnableCap.Texture2D);
         }
 
         #endregion Internal Methods

@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,32 +51,41 @@ namespace OpenBreed.Fsm
     {
         #region Private Fields
 
-        private readonly IManagerCollection managerCollection;
+        private readonly IFsmMan fsmMan;
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal FsmComponentFactory(IManagerCollection managerCollection)
+        public FsmComponentFactory(IFsmMan fsmMan)
         {
-            this.managerCollection = managerCollection;
+            this.fsmMan = fsmMan;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Protected Methods
 
         protected override IEntityComponent Create(IFsmComponentTemplate template)
         {
-            var builder = managerCollection.GetManager<FsmComponentBuilder>();
+            var fsmComponentBuilder = Create();
 
             foreach (var state in template.States)
-                builder.AddState(state.FsmName, state.StateName);
+                fsmComponentBuilder.AddState(state.FsmName, state.StateName);
 
-            return builder.Build();
+            return fsmComponentBuilder.Build();
         }
 
         #endregion Protected Methods
+
+        #region Private Methods
+
+        private FsmComponentBuilder Create()
+        {
+            return new FsmComponentBuilder(fsmMan);
+        }
+
+        #endregion Private Methods
     }
 
     public class FsmComponentBuilder
@@ -94,14 +102,14 @@ namespace OpenBreed.Fsm
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal FsmComponentBuilder(IFsmMan fsmMan)
+        public FsmComponentBuilder(IFsmMan fsmMan)
         {
             this.fsmMan = fsmMan;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 

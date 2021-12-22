@@ -19,7 +19,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        internal StampMan()
+        public StampMan()
         {
         }
 
