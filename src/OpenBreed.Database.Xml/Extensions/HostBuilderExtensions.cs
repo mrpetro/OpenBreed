@@ -16,7 +16,15 @@ namespace OpenBreed.Common.Database.Xml.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<XmlDatabaseMan, XmlDatabaseMan>();
+                services.AddSingleton<XmlDatabaseMan>();
+            });
+        }
+
+        public static void SetupXmlReadonlyDatabase(this IHostBuilder hostBuilder, string dbFilePath = null)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IRepositoryProvider>((sp) => new XmlReadonlyDatabaseMan(sp.GetService<IVariableMan>(), dbFilePath));
             });
         }
     }
