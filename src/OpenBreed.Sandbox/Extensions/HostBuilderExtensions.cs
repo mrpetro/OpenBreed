@@ -41,11 +41,16 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-        public static void SetupItemManager(this IHostBuilder hostBuilder)
+        public static void SetupItemManager(this IHostBuilder hostBuilder, Action<ItemsMan, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ItemsMan>();
+                services.AddSingleton<ItemsMan>((sp) =>
+                {
+                    var itemsMan = new ItemsMan(sp.GetService<ILogger>());
+                    action.Invoke(itemsMan, sp);
+                    return itemsMan;
+                });
             });
         }
 

@@ -100,6 +100,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Wecs.Systems.Rend
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Sandbox", "OpenBreed.Sandbox\OpenBreed.Sandbox.csproj", "{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Audio.LibOpenMpt", "..\OpenBreed.Common\src\OpenBreed.Audio.LibOpenMpt\OpenBreed.Audio.LibOpenMpt.csproj", "{418B7153-0619-4336-BCBF-37E5C63601AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -428,6 +430,14 @@ Global
 		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|x64.ActiveCfg = Release|Any CPU
 		{0CEC882B-65CA-4F60-AD83-E7B7AA20EE89}.Release|x64.Build.0 = Release|Any CPU
+		{418B7153-0619-4336-BCBF-37E5C63601AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{418B7153-0619-4336-BCBF-37E5C63601AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{418B7153-0619-4336-BCBF-37E5C63601AD}.Debug|x64.ActiveCfg = Debug|x64
+		{418B7153-0619-4336-BCBF-37E5C63601AD}.Debug|x64.Build.0 = Debug|x64
+		{418B7153-0619-4336-BCBF-37E5C63601AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{418B7153-0619-4336-BCBF-37E5C63601AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{418B7153-0619-4336-BCBF-37E5C63601AD}.Release|x64.ActiveCfg = Release|Any CPU
+		{418B7153-0619-4336-BCBF-37E5C63601AD}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

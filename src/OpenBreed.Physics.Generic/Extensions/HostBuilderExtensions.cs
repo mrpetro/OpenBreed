@@ -27,11 +27,24 @@ namespace OpenBreed.Physics.Generic.Extensions
             });
         }
 
-        public static void SetupGenericPhysicsManagers<TObject>(this IHostBuilder hostBuilder)
+        public static void SetupCollisionMan<TObject>(this IHostBuilder hostBuilder, Action<ICollisionMan<TObject>, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ICollisionMan<TObject>, CollisionMan<TObject>>();
+                services.AddSingleton<ICollisionMan<TObject>>((sp) =>
+                {
+                    var collisionMan = new CollisionMan<TObject>(sp.GetService<ILogger>());
+                    action.Invoke(collisionMan, sp);
+                    return collisionMan;
+                });
+            });
+        }
+
+
+        public static void SetupBroadphaseFactory<TObject>(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
                 services.AddSingleton<IBroadphaseFactory, BroadphaseFactory>();
             });
         }
