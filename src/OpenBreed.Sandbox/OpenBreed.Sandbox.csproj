@@ -79,7 +79,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\test_mptsharp-master\OpenMpt\OpenMpt\OpenBreed.Audio.LibOpenMpt.csproj" />
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Audio.LibOpenMpt\OpenBreed.Audio.LibOpenMpt.csproj" />
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj" />
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj" />
