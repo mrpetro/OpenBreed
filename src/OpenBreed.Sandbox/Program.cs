@@ -396,8 +396,6 @@ namespace OpenBreed.Sandbox
 
         private void OnUpdateFrame(float dt)
         {
-            GetManager<IEventQueue>().Fire();
-
             GetManager<IPlayersMan>().ResetInputs();
 
             GetManager<IInputsMan>().Update();

@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Extensions
                 services.AddSingleton<ILogger, DefaultLogger>();
                 services.AddSingleton<IEventsMan, EventsMan>();
                 services.AddSingleton<IJobsMan, JobsMan>();
-                services.AddSingleton<IEventQueue, EventQueue>();
+                //services.AddSingleton<IEventQueue, EventQueue>();
                 services.AddSingleton<IMessagesMan, MessagesMan>();
             });
         }

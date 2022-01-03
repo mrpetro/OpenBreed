@@ -25,7 +25,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             this.viewClient = viewClient;
             this.primitiveRenderer = primitiveRenderer;
-            viewClient.ResizeEvent += (s, a) => OnResize(a.Width, a.Height);
+            viewClient.ResizeEvent += (s, a) => OnResize(a.X, a.Y);
             viewClient.RenderFrameEvent += (s, a) => OnRenderFrame(a);
         }
 

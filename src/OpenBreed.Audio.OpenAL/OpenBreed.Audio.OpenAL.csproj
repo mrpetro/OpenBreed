@@ -8,10 +8,14 @@
 
   <ItemGroup>
     <None Remove="openal32.dll" />
+    <None Remove="openal32.license.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="openal32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="openal32.license.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

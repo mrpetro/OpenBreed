@@ -1,11 +1,12 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Rendering.Interface;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Input;
 using System;
 using System.Drawing;
 
-namespace OpenBreed.Game
+namespace OpenBreed.Sandbox
 {
     public class OpenTKWindowClient : IViewClient
     {
@@ -80,7 +81,7 @@ namespace OpenBreed.Game
 
         public event EventHandler LoadEvent;
 
-        public event EventHandler<Size> ResizeEvent;
+        public event EventHandler<Vector2> ResizeEvent;
 
         #endregion Public Events
 
@@ -121,7 +122,7 @@ namespace OpenBreed.Game
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
 
-            ResizeEvent?.Invoke(sender, new Size(ClientRectangle.Width, ClientRectangle.Height));
+            ResizeEvent?.Invoke(sender, new Vector2(ClientRectangle.Width, ClientRectangle.Height));
         }
 
         private void Window_UpdateFrame(object sender, FrameEventArgs e)

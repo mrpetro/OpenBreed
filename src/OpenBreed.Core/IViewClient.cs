@@ -29,7 +29,7 @@ namespace OpenBreed.Core
 
         event EventHandler LoadEvent;
 
-        event EventHandler<Size> ResizeEvent;
+        event EventHandler<Vector2> ResizeEvent;
 
         #endregion Public Events
 

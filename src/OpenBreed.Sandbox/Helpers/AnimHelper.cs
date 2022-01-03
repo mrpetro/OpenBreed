@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Helpers;
+﻿using OpenBreed.Wecs.Systems.Control;
 using OpenTK;
 using System;
 using System.Collections.Generic;

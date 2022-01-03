@@ -3,7 +3,6 @@ using System.Linq;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
