@@ -252,9 +252,7 @@ namespace OpenBreed.Sandbox
 
         private const string ABTA_PC_GAME_DB_FILE_NAME = "GameDatabase.ABTA.EPF.xml";
 
-        private readonly IScriptMan scriptMan;
         private readonly IViewClient clientMan;
-        private readonly IRenderingMan renderingMan;
         private readonly LogConsolePrinter logConsolePrinter;
 
         #endregion Private Fields
@@ -265,9 +263,6 @@ namespace OpenBreed.Sandbox
             base(host)
         {
             this.clientMan = clientMan;
-
-            scriptMan = GetManager<IScriptMan>();
-            renderingMan = GetManager<IRenderingMan>();
 
             var fsmMan = host.Services.GetService<IFsmMan>();
             fsmMan.SetupButtonStates(host.Services);
@@ -305,7 +300,7 @@ namespace OpenBreed.Sandbox
 
         protected void OnEngineInitialized()
         {
-            scriptMan.TryInvokeFunction("EngineInitialized");
+            GetManager<IScriptMan>().TryInvokeFunction("EngineInitialized");
         }
 
         #endregion Protected Methods
@@ -468,7 +463,7 @@ namespace OpenBreed.Sandbox
 
             var screenWorld = screenWorldHelper.CreateWorld();
 
-            renderingMan.Renderable = screenWorld.GetModule<IRenderableBatch>();
+            GetManager<IRenderingMan>().Renderable = screenWorld.GetModule<IRenderableBatch>();
 
             var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
             debugHudWorldHelper.Create();
