@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 
 namespace OpenBreed.Wecs.Components.Rendering

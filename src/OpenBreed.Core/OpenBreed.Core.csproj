@@ -5,11 +5,12 @@
 		<TargetFramework>net5.0</TargetFramework>
 		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="OpenTK" Version="3.3.2" />
-  </ItemGroup>
-
+	
+	<ItemGroup>
+		<PackageReference Include="OpenTK" Version="4.6.7" />
+		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+	</ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj" />
   </ItemGroup>

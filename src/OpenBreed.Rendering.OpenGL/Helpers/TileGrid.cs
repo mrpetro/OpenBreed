@@ -3,6 +3,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using System;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
@@ -93,10 +94,10 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Render(Box2 clipBox)
         {
-            int leftIndex = (int)clipBox.Left / CellSize;
-            int bottomIndex = (int)clipBox.Bottom / CellSize;
-            int rightIndex = (int)clipBox.Right / CellSize + 1;
-            int topIndex = (int)clipBox.Top / CellSize + 1;
+            int leftIndex = (int)clipBox.Min.X / CellSize;
+            int bottomIndex = (int)clipBox.Min.Y / CellSize;
+            int rightIndex = (int)clipBox.Max.X / CellSize + 1;
+            int topIndex = (int)clipBox.Max.Y / CellSize + 1;
 
             leftIndex = MathHelper.Clamp(leftIndex, 0, Width);
             rightIndex = MathHelper.Clamp(rightIndex, 0, Width);

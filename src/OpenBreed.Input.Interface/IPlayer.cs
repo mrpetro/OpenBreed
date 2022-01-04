@@ -1,4 +1,5 @@
 ﻿using OpenTK.Input;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,6 @@ namespace OpenBreed.Input.Interface
         ReadOnlyCollection<IPlayerInput> Inputs { get; }
 
         void RegisterInput(IPlayerInput input);
-        void AddKeyBinding(string controlType, string controlAction, Key key);
+        void AddKeyBinding(string controlType, string controlAction, Keys key);
     }
 }

@@ -10,6 +10,7 @@ using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {

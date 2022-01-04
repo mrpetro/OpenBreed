@@ -3,6 +3,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 
@@ -144,8 +145,8 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                 bound.Translate(offset);
                 var tileData = new TileData
                 {
-                    U = (int)bound.Left,
-                    V = (int)bound.Top
+                    U = (int)bound.Min.X,
+                    V = (int)bound.Max.Y
                 };
 
                 tileData.Vbo = tileMan.CreateTileVertices(tileData, TileSize, Texture.Width, Texture.Height);

@@ -5,6 +5,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using System;
 using System.Linq;
 
@@ -25,8 +26,8 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             this.viewClient = viewClient;
             this.primitiveRenderer = primitiveRenderer;
-            viewClient.ResizeEvent += (s, a) => OnResize(a.X, a.Y);
-            viewClient.RenderFrameEvent += (s, a) => OnRenderFrame(a);
+            viewClient.ResizeEvent += (a) => OnResize(a.X, a.Y);
+            viewClient.RenderFrameEvent += (a) => OnRenderFrame(a);
         }
 
         #endregion Public Constructors
@@ -48,7 +49,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Private Properties
 
         private Box2 ClipBox
-        { get { return Box2.FromTLRB(viewClient.ClientRectangle.Width, 0.0f, viewClient.ClientRectangle.Height, 0.0f); } }
+        { get { return new Box2(0.0f, 0.0f, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y); } }
 
         #endregion Private Properties
 

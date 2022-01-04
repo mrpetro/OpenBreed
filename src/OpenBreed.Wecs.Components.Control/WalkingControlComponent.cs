@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Wecs.Components.Common;
 using OpenTK;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Control
 {

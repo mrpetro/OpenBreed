@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Physics.Interface;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,9 +114,9 @@ namespace OpenBreed.Physics.Generic.Managers
                 {
                     var currentCollider = xActiveList[j];
 
-                    if (nextCollider.Aabb.Left < currentCollider.Aabb.Right)
+                    if (nextCollider.Aabb.Min.X < currentCollider.Aabb.Max.X)
                     {
-                        if (nextCollider.Aabb.Bottom <= currentCollider.Aabb.Top && nextCollider.Aabb.Top > currentCollider.Aabb.Bottom)
+                        if (nextCollider.Aabb.Min.Y <= currentCollider.Aabb.Max.Y && nextCollider.Aabb.Max.Y > currentCollider.Aabb.Min.Y)
                         {
                             narrowPhase(nextCollider, currentCollider, dt);
                         }
@@ -143,9 +144,9 @@ namespace OpenBreed.Physics.Generic.Managers
             var xAabb = x.Aabb;
             var yAabb = y.Aabb;
 
-            if (xAabb.Left < yAabb.Left)
+            if (xAabb.Min.X < yAabb.Min.X)
                 return -1;
-            if (xAabb.Left == yAabb.Left)
+            if (xAabb.Min.X == yAabb.Min.X)
                 return 0;
             else
                 return 1;

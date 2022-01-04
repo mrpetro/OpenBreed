@@ -50,6 +50,8 @@ using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Input;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -114,18 +116,18 @@ namespace OpenBreed.Sandbox
                 var p1 = playersMan.AddPlayer("P1");
                 p1.RegisterInput(new ButtonPlayerInput());
                 p1.RegisterInput(new DigitalJoyPlayerInput());
-                p1.AddKeyBinding("Attacking", "Primary", Key.ControlRight);
-                p1.AddKeyBinding("Walking", "Left", Key.Left);
-                p1.AddKeyBinding("Walking", "Right", Key.Right);
-                p1.AddKeyBinding("Walking", "Up", Key.Up);
-                p1.AddKeyBinding("Walking", "Down", Key.Down);
+                p1.AddKeyBinding("Attacking", "Primary", Keys.RightControl);
+                p1.AddKeyBinding("Walking", "Left", Keys.Left);
+                p1.AddKeyBinding("Walking", "Right", Keys.Right);
+                p1.AddKeyBinding("Walking", "Up", Keys.Up);
+                p1.AddKeyBinding("Walking", "Down", Keys.Down);
 
                 var p2 = playersMan.AddPlayer("P2");
                 p2.RegisterInput(new DigitalJoyPlayerInput());
-                p2.AddKeyBinding("Walking", "Left", Key.A);
-                p2.AddKeyBinding("Walking", "Right", Key.D);
-                p2.AddKeyBinding("Walking", "Up", Key.W);
-                p2.AddKeyBinding("Walking", "Down", Key.S);
+                p2.AddKeyBinding("Walking", "Left", Keys.A);
+                p2.AddKeyBinding("Walking", "Right", Keys.D);
+                p2.AddKeyBinding("Walking", "Up", Keys.W);
+                p2.AddKeyBinding("Walking", "Down", Keys.S);
             });
 
             hostBuilder.SetupCollisionMan<Entity>((collisionMan, sp) =>
@@ -273,8 +275,8 @@ namespace OpenBreed.Sandbox
             fsmMan.SetupActorMovementStates(host.Services);
             fsmMan.CreateTurretRotationStates(host.Services);
 
-            clientMan.UpdateFrameEvent += (s, a) => OnUpdateFrame(a);
-            clientMan.LoadEvent += (s, a) => OnLoad();
+            clientMan.UpdateFrameEvent += (a) => OnUpdateFrame(a);
+            clientMan.LoadEvent += () => OnLoad();
 
             logConsolePrinter = new LogConsolePrinter(GetManager<ILogger>());
             logConsolePrinter.StartPrinting();
@@ -474,11 +476,10 @@ namespace OpenBreed.Sandbox
 
             var entityMan = GetManager<IEntityMan>();
 
-            //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
+            var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
-
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3

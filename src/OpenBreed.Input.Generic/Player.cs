@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Input.Interface;
 using OpenTK.Input;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -53,7 +54,7 @@ namespace OpenBreed.Input.Generic
             inputs.Add(input);
         }
 
-        public void AddKeyBinding(string controlType, string controlAction, Key key)
+        public void AddKeyBinding(string controlType, string controlAction, Keys key)
         {
             inputsMan.AddPlayerKeyBinding(this, controlType, controlAction, key);
         }

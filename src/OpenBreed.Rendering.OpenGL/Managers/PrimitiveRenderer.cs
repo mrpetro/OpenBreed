@@ -2,6 +2,7 @@
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Mathematics;
 using GL = OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Rendering.OpenGL.Managers

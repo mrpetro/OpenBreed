@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking

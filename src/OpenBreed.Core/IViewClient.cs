@@ -1,5 +1,8 @@
 ﻿using OpenTK;
 using OpenTK.Input;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Drawing;
 
@@ -9,27 +12,27 @@ namespace OpenBreed.Core
     {
         #region Public Events
 
-        event EventHandler<MouseButtonEventArgs> MouseDownEvent;
+        event Action<MouseButtonEventArgs> MouseDownEvent;
 
-        event EventHandler<MouseButtonEventArgs> MouseUpEvent;
+        event Action<MouseButtonEventArgs> MouseUpEvent;
 
-        event EventHandler<MouseMoveEventArgs> MouseMoveEvent;
+        event Action<MouseMoveEventArgs> MouseMoveEvent;
 
-        event EventHandler<MouseWheelEventArgs> MouseWheelEvent;
+        event Action<MouseWheelEventArgs> MouseWheelEvent;
 
-        event EventHandler<KeyboardKeyEventArgs> KeyDownEvent;
+        event Action<KeyboardKeyEventArgs> KeyDownEvent;
 
-        event EventHandler<KeyboardKeyEventArgs> KeyUpEvent;
+        event Action<KeyboardKeyEventArgs> KeyUpEvent;
 
-        event EventHandler<KeyPressEventArgs> KeyPressEvent;
+        //event EventHandler<KeyPressEventArgs> KeyPressEvent;
 
-        event EventHandler<float> UpdateFrameEvent;
+        event Action<float> UpdateFrameEvent;
 
-        event EventHandler<float> RenderFrameEvent;
+        event Action<float> RenderFrameEvent;
 
-        event EventHandler LoadEvent;
+        event Action LoadEvent;
 
-        event EventHandler<Vector2> ResizeEvent;
+        event Action<Vector2> ResizeEvent;
 
         #endregion Public Events
 
@@ -48,7 +51,9 @@ namespace OpenBreed.Core
         /// <summary>
         /// Client display rectangle
         /// </summary>
-        Rectangle ClientRectangle { get; }
+        Box2i ClientRectangle { get; }
+
+        KeyboardState KeyboardState { get; }
 
         #endregion Public Properties
 

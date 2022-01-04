@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Physics.Interface;
 using OpenTK;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Physics.Generic.Shapes
 {

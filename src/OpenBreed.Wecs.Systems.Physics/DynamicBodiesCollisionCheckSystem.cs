@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 using System.Linq;
 

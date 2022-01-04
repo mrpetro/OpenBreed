@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Wecs.Components.Common.Xml;
 using OpenBreed.Wecs.Components.Xml;
 using OpenTK.Graphics;
+using OpenTK.Mathematics;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Wecs.Components.Rendering.Xml

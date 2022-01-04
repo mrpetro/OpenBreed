@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Rendering.Interface.Events;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Mathematics;
 using System;
 
 namespace OpenBreed.Rendering.Interface.Managers

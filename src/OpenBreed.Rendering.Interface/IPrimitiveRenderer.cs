@@ -1,5 +1,6 @@
 ﻿using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Rendering.Interface
 {

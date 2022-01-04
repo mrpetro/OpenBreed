@@ -9,6 +9,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
@@ -118,16 +119,16 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
         {
             var posCmp = entity.Get<PositionComponent>();
 
-            if (posCmp.Value.X + 16 < clipBox.Left)
+            if (posCmp.Value.X + 16 < clipBox.Min.X)
                 return;
 
-            if (posCmp.Value.X > clipBox.Right)
+            if (posCmp.Value.X > clipBox.Max.X)
                 return;
 
-            if (posCmp.Value.Y + 16 < clipBox.Bottom)
+            if (posCmp.Value.Y + 16 < clipBox.Min.Y)
                 return;
 
-            if (posCmp.Value.Y > clipBox.Top)
+            if (posCmp.Value.Y > clipBox.Max.Y)
                 return;
 
             var unknownCodeCmp = entity.Get<UnknownCodeComponent>();
@@ -136,7 +137,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
             GL.Translate((int)posCmp.Value.X, (int)posCmp.Value.Y, 0.0f);
 
-            var aabb = Box2.FromTLRB(0, 0, 16, 16);
+            var aabb = new Box2(0, 0, 16, 16);
 
             // Draw black box
             GL.Color4(Color4.Yellow);

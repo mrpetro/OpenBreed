@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
@@ -89,20 +90,20 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public static void DrawRectangle(Box2 box)
         {
             GL.Begin(PrimitiveType.LineLoop);
-            GL.Vertex3(box.Left, box.Top, 0.0f);
-            GL.Vertex3(box.Left, box.Bottom, 0.0f);
-            GL.Vertex3(box.Right, box.Bottom, 0.0f);
-            GL.Vertex3(box.Right, box.Top, 0.0f);
+            GL.Vertex3(box.Min.X, box.Max.Y, 0.0f);
+            GL.Vertex3(box.Min.X, box.Min.Y, 0.0f);
+            GL.Vertex3(box.Max.X, box.Min.Y, 0.0f);
+            GL.Vertex3(box.Max.X, box.Max.Y, 0.0f);
             GL.End();
         }
 
         public static void DrawBox(Box2 box)
         {
             GL.Begin(PrimitiveType.Polygon);
-            GL.Vertex3(box.Left, box.Top, 0.0f);
-            GL.Vertex3(box.Left, box.Bottom, 0.0f);
-            GL.Vertex3(box.Right, box.Bottom, 0.0f);
-            GL.Vertex3(box.Right, box.Top, 0.0f);
+            GL.Vertex3(box.Min.X, box.Max.Y, 0.0f);
+            GL.Vertex3(box.Min.X, box.Min.Y, 0.0f);
+            GL.Vertex3(box.Max.X, box.Min.Y, 0.0f);
+            GL.Vertex3(box.Max.X, box.Max.Y, 0.0f);
             GL.End();
         }
 

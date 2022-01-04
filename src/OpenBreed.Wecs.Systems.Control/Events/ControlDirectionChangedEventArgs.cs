@@ -1,5 +1,6 @@
 ﻿
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Control.Events

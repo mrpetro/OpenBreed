@@ -12,6 +12,7 @@ using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Animation.Interface;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {

@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenTK;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Systems.Rendering.Extensions
 {

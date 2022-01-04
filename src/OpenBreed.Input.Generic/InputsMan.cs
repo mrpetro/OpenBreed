@@ -2,6 +2,9 @@
 using OpenBreed.Input.Interface;
 using OpenTK;
 using OpenTK.Input;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,12 +32,12 @@ namespace OpenBreed.Input.Generic
 
         #region Public Methods
 
-        public bool IsKeyDown(Key key)
+        public bool IsKeyDown(Keys key)
         {
             return !OldState[key] && NewState[key];
         }
 
-        public bool IsKeyUp(Key key)
+        public bool IsKeyUp(Keys key)
         {
             return OldState[key] && !NewState[key];
         }
@@ -46,7 +49,7 @@ namespace OpenBreed.Input.Generic
     {
         #region Private Fields
 
-        private readonly Dictionary<Key, KeyBinding> keyBindings = new Dictionary<Key, KeyBinding>();
+        private readonly Dictionary<Keys, KeyBinding> keyBindings = new Dictionary<Keys, KeyBinding>();
         private readonly IViewClient clientMan;
         private Dictionary<string, IInputHandler> controlHandlers = new Dictionary<string, IInputHandler>();
         private float oldWheelPos;
@@ -62,15 +65,17 @@ namespace OpenBreed.Input.Generic
         {
             this.clientMan = clientMan;
 
-            clientMan.KeyDownEvent += (s, a) => OnKeyDown(a);
-            clientMan.KeyUpEvent += (s, a) => OnKeyUp(a);
-            clientMan.KeyPressEvent += (s, a) => OnKeyPress(a);
-            clientMan.MouseMoveEvent += (s, a) => OnMouseMove(a);
-            clientMan.MouseDownEvent += (s, a) => OnMouseDown(a);
-            clientMan.MouseUpEvent += (s, a) => OnMouseUp(a);
-            clientMan.MouseWheelEvent += (s, a) => OnMouseWheel(a);
+            clientMan.KeyDownEvent += (a) => OnKeyDown(a);
+            clientMan.KeyUpEvent += (a) => OnKeyUp(a);
+            //clientMan.KeyPressEvent += (s, a) => OnKeyPress(a);
+            clientMan.MouseMoveEvent += (a) => OnMouseMove(a);
+            clientMan.MouseDownEvent += (a) => OnMouseDown(a);
+            clientMan.MouseUpEvent += (a) => OnMouseUp(a);
+            clientMan.MouseWheelEvent += (a) => OnMouseWheel(a);
 
             KeyboardStateChanged += InputsMan_KeyboardStateChanged;
+
+            oldKeyboardState = clientMan.KeyboardState.GetSnapshot();
         }
 
         #endregion Internal Constructors
@@ -85,7 +90,7 @@ namespace OpenBreed.Input.Generic
 
         public event EventHandler<KeyboardKeyEventArgs> KeyUp;
 
-        public event EventHandler<KeyPressEventArgs> KeyPress;
+        //public event EventHandler<KeyPressEventArgs> KeyPress;
 
         public event EventHandler<MouseMoveEventArgs> MouseMove;
 
@@ -144,7 +149,7 @@ namespace OpenBreed.Input.Generic
 
         public void Update()
         {
-            var newKeyboardState = Keyboard.GetState();
+            var newKeyboardState = clientMan.KeyboardState.GetSnapshot();
 
             try
             {
@@ -165,7 +170,7 @@ namespace OpenBreed.Input.Generic
             }
         }
 
-        public void AddPlayerKeyBinding(IPlayer player, string controlType, string controlAction, Key key)
+        public void AddPlayerKeyBinding(IPlayer player, string controlType, string controlAction, Keys key)
         {
             var controlHandler = GetHandler(controlType);
 
@@ -189,7 +194,7 @@ namespace OpenBreed.Input.Generic
         {
             MouseWheel?.Invoke(this, e);
 
-            UpdateWheelPos(e.ValuePrecise);
+            UpdateWheelPos(e.OffsetY);
         }
 
         private void OnKeyDown(KeyboardKeyEventArgs e)
@@ -202,10 +207,10 @@ namespace OpenBreed.Input.Generic
             KeyUp?.Invoke(this, e);
         }
 
-        private void OnKeyPress(KeyPressEventArgs e)
-        {
-            KeyPress?.Invoke(this, e);
-        }
+        //private void OnKeyPress(KeyPressEventArgs e)
+        //{
+        //    KeyPress?.Invoke(this, e);
+        //}
 
         private void OnMouseDown(MouseButtonEventArgs e)
         {

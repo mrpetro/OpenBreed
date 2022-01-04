@@ -16,6 +16,7 @@ using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {

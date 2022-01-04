@@ -7,6 +7,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Gui
@@ -83,16 +84,16 @@ namespace OpenBreed.Wecs.Systems.Gui
             var aabb = broadphaseDynamic.GetAabb(entity.Id);
 
             //Test viewport for clippling here
-            if (aabb.Right < clipBox.Left)
+            if (aabb.Max.X < clipBox.Min.X)
                 return;
 
-            if (aabb.Left > clipBox.Right)
+            if (aabb.Min.X > clipBox.Max.X)
                 return;
 
-            if (aabb.Top < clipBox.Bottom)
+            if (aabb.Max.Y < clipBox.Min.Y)
                 return;
 
-            if (aabb.Bottom > clipBox.Top)
+            if (aabb.Min.Y > clipBox.Max.Y)
                 return;
 
             primitiveRenderer.DrawRectangle(aabb, Color4.Green);

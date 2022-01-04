@@ -1,4 +1,5 @@
 ﻿using OpenTK;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Core.Extensions
 {
@@ -8,7 +9,7 @@ namespace OpenBreed.Core.Extensions
 
         public static Box2 Inflate(this Box2 box, float value)
         {
-            return Box2.FromTLRB(box.Top + value, box.Left - value, box.Right + value, box.Bottom - value);
+            return new Box2(box.Min.X - value, box.Min.Y - value, box.Max.Y + value, box.Max.X + value);
         }
 
         #endregion Public Methods

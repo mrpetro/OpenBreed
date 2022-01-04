@@ -41,7 +41,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
         {
             var dataLength = soundStreamReader.Invoke(BUFFER_SIZE, readerBuffer);
   
-            AL.BufferData(bufferId, ALFormat.Stereo16, readerBuffer, dataLength * 2, 48000);
+            AL.BufferData(bufferId, ALFormat.Stereo16, ref readerBuffer[0], dataLength * 2, 48000);
 
             return dataLength;
         }

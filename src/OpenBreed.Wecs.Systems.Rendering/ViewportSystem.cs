@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
@@ -77,7 +78,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             x.Invert();
 
-            return Vector4.Transform(coords, x);
+            return Vector4.TransformRow(coords, x);
         }
 
         /// <summary>
@@ -166,7 +167,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             var x = pos.X;
             var y = pos.Y;
-            return Box2.FromTLRB(y + size.Y / 2.0f, x - size.X / 2.0f, x + size.X / 2.0f, y - size.Y / 2.0f);
+            return new Box2(x - size.X / 2.0f, y - size.Y / 2.0f, y + size.Y / 2.0f, x + size.X / 2.0f);
         }
 
         /// <summary>
@@ -181,16 +182,16 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var viewportSize = vpc.Size;
 
             //Test viewport for clippling here
-            if (viewportPos.X + viewportSize.X < clipBox.Left)
+            if (viewportPos.X + viewportSize.X < clipBox.Min.X)
                 return;
 
-            if (viewportPos.X > clipBox.Right)
+            if (viewportPos.X > clipBox.Max.X)
                 return;
 
-            if (viewportPos.Y + viewportSize.Y < clipBox.Bottom)
+            if (viewportPos.Y + viewportSize.Y < clipBox.Min.Y)
                 return;
 
-            if (viewportPos.Y > clipBox.Top)
+            if (viewportPos.Y > clipBox.Max.Y)
                 return;
 
             //Apply viewport transformation matrix

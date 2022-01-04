@@ -2,6 +2,7 @@
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,12 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             aabbB.Translate(posB - posA);
 
             var aPos = aabbA.GetCenter();
-            var aHalfWidth = aabbA.Width / 2.0f;
-            var aHalfHeight = aabbA.Height / 2.0f;
+            var aHalfWidth = aabbA.Size.X / 2.0f;
+            var aHalfHeight = aabbA.Size.Y / 2.0f;
 
             var bPos = aabbB.GetCenter();
-            var bHalfWidth = aabbB.Width / 2.0f;
-            var bHalfHeight = aabbB.Height / 2.0f;
+            var bHalfWidth = aabbB.Size.X / 2.0f;
+            var bHalfHeight = aabbB.Size.Y / 2.0f;
 
             var dx = aPos.X - bPos.X;
 
@@ -93,8 +94,8 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             //var aHalfHeight = aabbA.Height / 2.0f;
 
             var bPos = aabbB.GetCenter();
-            var bHalfWidth = aabbB.Width / 2.0f;
-            var bHalfHeight = aabbB.Height / 2.0f;
+            var bHalfWidth = aabbB.Size.X / 2.0f;
+            var bHalfHeight = aabbB.Size.Y / 2.0f;
 
             var dx = aPos.X - bPos.X;
 

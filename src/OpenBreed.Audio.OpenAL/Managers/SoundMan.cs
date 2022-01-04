@@ -3,6 +3,7 @@ using OpenBreed.Common.Logging;
 using OpenTK;
 using OpenTK.Audio;
 using OpenTK.Audio.OpenAL;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,7 +22,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         private readonly ILogger logger;
         private readonly List<SoundSource> streamSources = new List<SoundSource>();
-        private AudioContext audioContext;
+        private ALContext audioContext;
 
         private bool disposedValue;
 
@@ -31,8 +32,8 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         public SoundMan(ILogger logger)
         {
-            audioContext = new AudioContext();
-            audioContext.MakeCurrent();
+            audioContext = new ALContext();
+            ALC.MakeContextCurrent(audioContext);
             this.logger = logger;
 
             ReportOpenAL();
@@ -44,8 +45,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         public int CreateSoundSource(float posX, float posY, float posZ)
         {
-            int alSource;
-            AL.GenSources(1, out alSource);
+            var alSource = AL.GenSource();
 
             var pos = new Vector3(posX, posY, posZ);
 
@@ -66,9 +66,9 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         public int LoadSample(string sampleName, byte[] sampleData, int sampleFreq)
         {
-            int sampleBuffer;
-            AL.GenBuffers(1, out sampleBuffer);
-            AL.BufferData(sampleBuffer, ALFormat.Mono8, sampleData, sampleData.Length, sampleFreq);
+            var sampleBuffer = AL.GenBuffer();
+
+            AL.BufferData(sampleBuffer, ALFormat.Mono8, ref sampleData[0], sampleData.Length, sampleFreq);
 
             alBuffers.Add(alBuffers.Count, sampleBuffer);
             sampleNames.Add(sampleName, alBuffers.Count - 1);
@@ -78,9 +78,8 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         public int LoadSample(string sampleName, short[] sampleData, int sampleFreq)
         {
-            int sampleBuffer;
-            AL.GenBuffers(1, out sampleBuffer);
-            AL.BufferData(sampleBuffer, ALFormat.Stereo16, sampleData, sampleData.Length * 2, sampleFreq);
+            var sampleBuffer = AL.GenBuffer();
+            AL.BufferData(sampleBuffer, ALFormat.Stereo16, ref sampleData[0], sampleData.Length * 2, sampleFreq);
 
             alBuffers.Add(alBuffers.Count, sampleBuffer);
             sampleNames.Add(sampleName, alBuffers.Count - 1);
@@ -212,8 +211,8 @@ namespace OpenBreed.Audio.OpenAL.Managers
             {
                 if (disposing)
                 {
-                    audioContext.Dispose();
-                    audioContext = null;
+                    //audioContext.Dispose();
+                    //audioContext = null;
                 }
 
                 disposedValue = true;
