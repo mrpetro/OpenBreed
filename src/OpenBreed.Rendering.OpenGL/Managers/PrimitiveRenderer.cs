@@ -53,7 +53,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             RenderTools.DrawUnitRectangle();
         }
 
-        public void DrawUnitRectangle(Color4 color)
+        public void DrawUnitRectangle(Matrix4 model, Color4 color)
         {
             GL.GL.Color4(color);
             RenderTools.DrawUnitRectangle();
@@ -80,7 +80,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             RenderTools.DrawUnitBox();
         }
 
-        public void DrawUnitBox(Color4 color)
+        public void DrawUnitBox(Matrix4 model, Color4 color)
         {
             GL.GL.Color4(color);
             RenderTools.DrawUnitBox();
@@ -103,6 +103,41 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
             DrawUnitBox();
             GL.GL.Disable(GL.EnableCap.Blend);
+        }
+
+        public void MultMatrix(Matrix4 transform)
+        {
+            GL.GL.MultMatrix(ref transform);
+        }
+
+        public void DrawTriangle()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetProjection(Matrix4 matrix4)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Load()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int CreateVertexArray(float[] vertices)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Translate(Vector3 pos)
+        {
+            GL.GL.Translate(pos);
+        }
+
+        public void DrawSprite(int vbo, Matrix4 model)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion Public Methods

@@ -61,6 +61,24 @@ namespace OpenBreed.Sandbox.Entities.Actor
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
         }
 
+        public Entity CreateDummyActor(Vector2 pos)
+        {
+            var actor = CreateDummy(pos);
+
+            //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
+            //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
+            actor.Add(new InventoryComponent(16));
+
+            var p1 = playersMan.GetByName("P1");
+
+            actor.Add(new WalkingInputComponent(p1.Id, 0));
+            actor.Add(new AttackInputComponent(p1.Id, 0));
+            actor.Add(new WalkingControlComponent());
+            actor.Add(new AttackControlComponent());
+
+            return actor;
+        }
+
         public Entity CreatePlayerActor(Vector2 pos)
         {
             var actor = CreateActor(pos);
@@ -82,6 +100,16 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public Entity CreateActor(Vector2 pos)
         {
             var actor = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Actors\John.xml")
+                .SetParameter("startX", pos.X)
+                .SetParameter("startY", pos.Y)
+                .Build();
+
+            return actor;
+        }
+
+        public Entity CreateDummy(Vector2 pos)
+        {
+            var actor = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Actors\Dummy.xml")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .Build();

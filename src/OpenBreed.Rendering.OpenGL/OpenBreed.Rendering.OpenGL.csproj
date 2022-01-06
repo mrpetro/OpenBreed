@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
@@ -9,9 +9,25 @@
 	<ItemGroup>
 	  <None Remove="Shaders\defaultShader.frag" />
 	  <None Remove="Shaders\defaultShader.vert" />
+	  <None Remove="Shaders\shader.frag" />
+	  <None Remove="Shaders\shader.vert" />
+	  <None Remove="Shaders\shaderA.frag" />
+	  <None Remove="Shaders\shaderA.vert" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Shaders\shader.frag">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\shader.vert">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\shaderA.vert">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\shaderA.frag">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="Shaders\defaultShader.frag">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>

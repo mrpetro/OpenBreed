@@ -10,22 +10,25 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly uint[] indicesArray = {
-                                            0,1,2,
-                                            0,2,3
-                                       };
+        //private readonly uint[] indicesArray = {
+        //                                    0,1,2,
+        //                                    0,2,3
+        //                               };
 
-        private readonly int ibo;
+        // private readonly int ibo;
         private readonly SpriteMan spriteMan;
+        private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteRenderer(SpriteMan spriteMan)
+        public SpriteRenderer(SpriteMan spriteMan,
+                              IPrimitiveRenderer primitiveRenderer)
         {
-            RenderTools.CreateIndicesArray(indicesArray, out ibo);
+            //RenderTools.CreateIndicesArray(indicesArray, out ibo);
             this.spriteMan = spriteMan;
+            this.primitiveRenderer = primitiveRenderer;
         }
 
         #endregion Public Constructors
@@ -38,15 +41,22 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             var textureId = spriteAtlas.Texture.InternalId;
             var vbo = spriteAtlas.data[imageId].Vbo;
 
-            GL.GL.PushMatrix();
+            primitiveRenderer.PushMatrix();
 
-            GL.GL.Translate(pos);
+            try
+            {
+                primitiveRenderer.Translate(pos);
 
-            GL.GL.BindTexture(GL.TextureTarget.Texture2D, textureId);
-            RenderTools.Draw(vbo, ibo, 6);
-            GL.GL.BindTexture(GL.TextureTarget.Texture2D, 0);
+                primitiveRenderer.DrawSprite(vbo, Matrix4.Identity);
 
-            GL.GL.PopMatrix();
+                //GL.GL.BindTexture(GL.TextureTarget.Texture2D, textureId);
+                //RenderTools.Draw(vbo, ibo, 6);
+                //GL.GL.BindTexture(GL.TextureTarget.Texture2D, 0);
+            }
+            finally
+            {
+                primitiveRenderer.PopMatrix();
+            }
         }
 
         public void RenderBegin()

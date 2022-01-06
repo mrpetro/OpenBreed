@@ -20,11 +20,11 @@ namespace OpenBreed.Rendering.Interface
 
         void PopMatrix();
 
-        void MatrixMode(MatrixMode matrixMode);
+        void DrawTriangle();
 
         void DrawUnitRectangle();
 
-        void DrawUnitRectangle(Color4 red);
+        void DrawUnitRectangle(Matrix4 model, Color4 red);
 
         void DrawRectangle(Box2 clipBox); 
         void DrawRectangle(Box2 clipBox, Color4 color);
@@ -33,8 +33,15 @@ namespace OpenBreed.Rendering.Interface
 
         void DrawUnitBox();
 
-        void DrawUnitBox(Color4 color);
+        void DrawUnitBox(Matrix4 model, Color4 color);
         void DrawBrightnessBox(float brightness);
+
+        void MultMatrix(Matrix4 transform);
+        void SetProjection(Matrix4 matrix4);
+        void Load();
+        int CreateVertexArray(float[] vs);
+        void Translate(Vector3 pos);
+        void DrawSprite(int vbo, Matrix4 model);
 
         #endregion Public Methods
     }

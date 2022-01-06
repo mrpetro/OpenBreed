@@ -275,6 +275,9 @@ namespace OpenBreed.Sandbox
             fsmMan.SetupActorMovementStates(host.Services);
             fsmMan.CreateTurretRotationStates(host.Services);
 
+            GetManager<IRenderingMan>();
+
+
             clientMan.UpdateFrameEvent += (a) => OnUpdateFrame(a);
             clientMan.LoadEvent += () => OnLoad();
 
@@ -421,15 +424,22 @@ namespace OpenBreed.Sandbox
             GetManager<FixtureTypes>().Register();
 
             var spriteMan = GetManager<ISpriteMan>();
+
+
             var tileMan = GetManager<ITileMan>();
+
             var textureMan = GetManager<ITextureMan>();
+
             var soundMan = GetManager<ISoundMan>();
+
+
 
             //Create 4 sound sources, each one acting as a separate channel
             soundMan.CreateSoundSource();
             soundMan.CreateSoundSource();
             soundMan.CreateSoundSource();
             soundMan.CreateSoundSource();
+
 
             //var amfFilePath = @"D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)\extract\TITLE.AMF";
             //var mod = OpenMod(amfFilePath);
@@ -442,6 +452,8 @@ namespace OpenBreed.Sandbox
                 .SetName("Atlases/Sprites/Projectiles/Laser")
                 .AppendCoordsFromGrid(16, 16, 8, 1, 0, 0)
                 .Build();
+
+
 
             var worldGateHelper = GetManager<EntriesHelper>();
             var doorHelper = GetManager<DoorHelper>();
@@ -458,6 +470,7 @@ namespace OpenBreed.Sandbox
             teleportHelper.RegisterCollisionPairs();
             projectileHelper.RegisterCollisionPairs();
 
+
             cameraHelper.CreateAnimations();
             projectileHelper.CreateAnimations();
 
@@ -467,8 +480,10 @@ namespace OpenBreed.Sandbox
 
             GetManager<IRenderingMan>().Renderable = screenWorld.GetModule<IRenderableBatch>();
 
+
             var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
             debugHudWorldHelper.Create();
+
 
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
@@ -501,15 +516,21 @@ namespace OpenBreed.Sandbox
             playerCamera.Add(new PauseImmuneComponent());
             playerCamera.Tag = "PlayerCamera";
 
+
+
             var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
             gameViewport.SetViewportCamera(playerCamera.Id);
 
+
+
             //Follow John actor
             //var johnPlayerEntity = entityMan.GetByTag("John").First();
-            var johnPlayerEntity = actorHelper.CreatePlayerActor(new Vector2(0, 0));
+            var johnPlayerEntity = actorHelper.CreateDummyActor(new Vector2(0, 0));
             johnPlayerEntity.Tag = "John";
 
+
             johnPlayerEntity.AddFollower(playerCamera);
+
 
             GetManager<IEventsMan>().SubscribeEx<WorldInitializedEventArgs>((s, a) =>
             {
@@ -518,6 +539,9 @@ namespace OpenBreed.Sandbox
 
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Id, 0);
             });
+
+            //return;
+
 
             var gameHudWorldHelper = GetManager<GameHudWorldHelper>();
             gameHudWorldHelper.Create();

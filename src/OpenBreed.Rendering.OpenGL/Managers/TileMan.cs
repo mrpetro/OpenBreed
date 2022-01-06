@@ -36,7 +36,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             this.textureMan = textureMan;
             this.logger = logger;
 
-            RenderTools.CreateIndicesArray(indicesArray, out ibo);
+            //RenderTools.CreateIndicesArray(indicesArray, out ibo);
         }
 
         #endregion Internal Constructors

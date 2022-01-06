@@ -111,7 +111,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         internal ITexture InternalCreate(string name, Bitmap bitmap)
         {
-            var texture = Texture.CreateFromBitmap(bitmap);
+            var texture = Texture4.CreateFromBitmap(bitmap);
             texture.Id = items.Count;
             items.Add(texture);
             aliases.Add(name, texture);

@@ -167,7 +167,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             var x = pos.X;
             var y = pos.Y;
-            return new Box2(x - size.X / 2.0f, y - size.Y / 2.0f, y + size.Y / 2.0f, x + size.X / 2.0f);
+            return new Box2(x - size.X / 2.0f, y - size.Y / 2.0f, x + size.X / 2.0f, y + size.Y / 2.0f);
         }
 
         /// <summary>

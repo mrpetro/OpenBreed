@@ -19,6 +19,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly List<SpriteAtlas> items = new List<SpriteAtlas>();
         private readonly Dictionary<string, SpriteAtlas> names = new Dictionary<string, SpriteAtlas>();
         private readonly ITextureMan textureMan;
+        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -26,9 +27,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Internal Constructors
 
         public SpriteMan(ITextureMan textureMan,
-                           ILogger logger)
+                         IPrimitiveRenderer primitiveRenderer,
+                         ILogger logger)
         {
             this.textureMan = textureMan;
+            this.primitiveRenderer = primitiveRenderer;
             this.logger = logger;
         }
 
@@ -94,8 +97,18 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         internal int CreateSpriteVertices(SpriteData spriteData, int width, int height)
         {
             var vertices = CreateVertices(spriteData, width, height);
-            int vbo;
-            RenderTools.CreateVertexArray(vertices, out vbo);
+
+            var verticesList = new List<float>();
+
+            foreach (var item in vertices)
+            {
+                verticesList.Add(item.position.X);
+                verticesList.Add(item.position.Y);
+                verticesList.Add(0.0f);
+            }
+
+            int vbo = primitiveRenderer.CreateVertexArray(verticesList.ToArray());
+            //RenderTools.CreateVertexArray(vertices, out vbo);
             return vbo;
         }
 

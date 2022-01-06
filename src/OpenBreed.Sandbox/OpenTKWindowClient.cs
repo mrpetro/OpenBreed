@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Input;
@@ -39,7 +40,8 @@ namespace OpenBreed.Sandbox
                 AlphaBits = 8,
                 DepthBits = 24,
                 StencilBits = 8,
-                Title = title
+                Title = title,
+                Flags = ContextFlags.ForwardCompatible,
             };
 
             window = new GameWindow(gameWindowSettings, nativeWindowSettings);
@@ -105,7 +107,7 @@ namespace OpenBreed.Sandbox
 
         public event Action LoadEvent;
 
-        public event Action<Vector2> ResizeEvent;
+        public event Action<Vector2i> ResizeEvent;
 
         #endregion Public Events
 
@@ -148,7 +150,7 @@ namespace OpenBreed.Sandbox
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Size.Y, 0.0f));
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
 
-            ResizeEvent?.Invoke(new Vector2(ClientRectangle.Size.X, ClientRectangle.Size.Y));
+            ResizeEvent?.Invoke(new Vector2i(ClientRectangle.Size.X, ClientRectangle.Size.Y));
         }
 
         private void Window_UpdateFrame(FrameEventArgs e)

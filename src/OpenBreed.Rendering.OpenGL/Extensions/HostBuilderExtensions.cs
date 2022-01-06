@@ -34,7 +34,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
                 services.AddSingleton<ISpriteMan>((sp) => sp.GetService<SpriteMan>());
                 services.AddSingleton<IStampMan, StampMan>();
                 services.AddSingleton<IFontMan, FontMan>();
-                services.AddSingleton<IPrimitiveRenderer, PrimitiveRenderer>();
+                services.AddSingleton<IPrimitiveRenderer, PrimitiveRenderer4>();
                 services.AddSingleton<ISpriteRenderer, SpriteRenderer>();
                 services.AddSingleton<IRenderingMan, RenderingMan>();
             });

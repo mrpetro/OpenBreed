@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Worlds
         private void AddSystems(WorldBuilder builder)
         {
             builder.AddSystem(systemFactory.Create<AnimatorSystem>());
-            builder.AddSystem(systemFactory.Create<TextSystem>());
+            //builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
         private void Setup(World world)
@@ -86,8 +86,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             hudCamera.EnterWorld(world.Id);
 
-            hudHelper.AddFpsCounter(world);
-            hudHelper.AddPositionInfo(world);
+            //hudHelper.AddFpsCounter(world);
+            //hudHelper.AddPositionInfo(world);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
             hudViewport.SetViewportCamera(hudCamera.Id);

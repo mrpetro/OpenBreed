@@ -12,7 +12,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
     {
         #region Private Fields
 
-        private const bool CLIPPING = true;
+        private const bool CLIPPING = false;
 
         private const int RENDER_MAX_DEPTH = 3;
 
@@ -40,17 +40,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Render(Matrix4 transform, Box2 clipBox, int depth, float dt)
         {
-            GL.PushMatrix();
+            primitiveRenderer.PushMatrix();
 
             try
             {
-                GL.MultMatrix(ref transform);
+                primitiveRenderer.MultMatrix(transform);
 
                 Render(clipBox, depth, dt);
             }
             finally
             {
-                GL.PopMatrix();
+                primitiveRenderer.PopMatrix();
             }
         }
 

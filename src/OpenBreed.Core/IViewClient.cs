@@ -32,7 +32,7 @@ namespace OpenBreed.Core
 
         event Action LoadEvent;
 
-        event Action<Vector2> ResizeEvent;
+        event Action<Vector2i> ResizeEvent;
 
         #endregion Public Events
 
