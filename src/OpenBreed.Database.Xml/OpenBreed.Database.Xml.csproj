@@ -12,6 +12,7 @@
     <None Remove="Defaults\Scripts\Entry.lua" />
     <None Remove="Defaults\Scripts\Exit.lua" />
     <None Remove="Defaults\Scripts\simpleEntry.lua" />
+    <None Remove="Defaults\Templates\ABTA\Common\Actors\Dummy.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Actors\John.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Camera.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\DoorHorizontal.xml" />
@@ -79,6 +80,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Scripts\simpleEntry.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\Templates\ABTA\Common\Actors\Dummy.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Templates\ABTA\Common\Actors\John.xml">
