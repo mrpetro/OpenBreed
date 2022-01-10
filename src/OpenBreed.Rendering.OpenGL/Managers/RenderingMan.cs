@@ -91,14 +91,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
-           
-            //primitiveRenderer.DrawSprite(0, Matrix4.Identity);
-            //primitiveRenderer.DrawSprite(1, Matrix4.Identity);
 
-
-            //primitiveRenderer.DrawUnitBox(Color4.Red);
-
-            //primitiveRenderer.DrawTriangle();
             Renderable?.Render(Matrix4.Identity, ClipBox, 0, dt);
         }
 

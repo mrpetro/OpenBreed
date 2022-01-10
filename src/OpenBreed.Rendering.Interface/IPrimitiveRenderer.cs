@@ -30,7 +30,7 @@ namespace OpenBreed.Rendering.Interface
         void DrawRectangle(Box2 clipBox); 
         void DrawRectangle(Box2 clipBox, Color4 color);
 
-        void DrawBox(Box2 clipBox);
+        void DrawBox(Box2 clipBox, Color4 color);
 
         void DrawUnitBox();
 

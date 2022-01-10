@@ -111,8 +111,19 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
         }
 
-        public void DrawBox(Box2 clipBox)
+        public void DrawBox(Box2 clipBox, Color4 color)
         {
+            var w = clipBox.Size.X;
+            var h = clipBox.Size.Y;
+            var pos = new Vector3(clipBox.Min.X, clipBox.Min.Y, 0.0f);
+
+            var model = Matrix4.CreateTranslation(pos);
+            model = Matrix4.CreateTranslation(-w / 2.0f, -h / 2.0f, 0.0f) * model;
+            model = Matrix4.CreateScale(w, h, 1.0f) * model;
+            model = model * Matrix4.CreateTranslation(w / 2.0f, h / 2.0f, 0.0f);
+
+            DrawRect(model, PrimitiveType.Triangles, _unitBoxEbo, _unitBoxIndices.Length, color);
+
             //RenderTools.DrawBox(clipBox);
         }
 

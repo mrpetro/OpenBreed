@@ -70,7 +70,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             RenderTools.DrawRectangle(clipBox);
         }
 
-        public void DrawBox(Box2 clipBox)
+        public void DrawBox(Box2 clipBox, Color4 color)
         {
             RenderTools.DrawBox(clipBox);
         }

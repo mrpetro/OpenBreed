@@ -2,7 +2,7 @@
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
 
@@ -12,7 +12,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
     {
         #region Private Fields
 
-        private const bool CLIPPING = false;
+        private const bool CLIPPING = true;
 
         private const int RENDER_MAX_DEPTH = 3;
 
@@ -72,8 +72,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
 
                 // Draw black box
-                GL.Color4(Color4.Black);
-                primitiveRenderer.DrawBox(clipBox);
+                primitiveRenderer.DrawBox(clipBox, Color4.Black);
 
                 GL.ColorMask(true, true, true, true);
                 GL.DepthMask(true);
@@ -96,8 +95,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
 
                 // Draw black box
-                GL.Color4(Color4.Black);
-                primitiveRenderer.DrawBox(clipBox);
+                primitiveRenderer.DrawBox(clipBox, Color4.Black);
 
                 GL.ColorMask(true, true, true, true);
                 GL.DepthMask(true);
