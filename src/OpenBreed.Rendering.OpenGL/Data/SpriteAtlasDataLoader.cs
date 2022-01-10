@@ -69,6 +69,8 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
                 var bitmap = ToBitmap(sprite.Width, sprite.Height, sprite.Data);
 
+                bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
                 if (paletteModel != null)
                 {
                     //BitmapHelper.DumpColors(@"D:\c4pal.pal", paletteModel.Data);

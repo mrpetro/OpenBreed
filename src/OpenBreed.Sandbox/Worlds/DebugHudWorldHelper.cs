@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Worlds
         private void AddSystems(WorldBuilder builder)
         {
             builder.AddSystem(systemFactory.Create<AnimatorSystem>());
-            //builder.AddSystem(systemFactory.Create<TextSystem>());
+            builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
         private void Setup(World world)
@@ -86,14 +86,11 @@ namespace OpenBreed.Sandbox.Worlds
 
             hudCamera.EnterWorld(world.Id);
 
-            //hudHelper.AddFpsCounter(world);
-            //hudHelper.AddPositionInfo(world);
+            hudHelper.AddFpsCounter(world);
+            hudHelper.AddPositionInfo(world);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
             hudViewport.SetViewportCamera(hudCamera.Id);
-
-            //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ClientResizedEventArgs)a));
-            //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateCameraFov(hudCamera, (ClientResizedEventArgs)a));
 
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));
         }

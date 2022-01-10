@@ -146,7 +146,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                 var tileData = new TileData
                 {
                     U = (int)bound.Min.X,
-                    V = (int)bound.Max.Y
+                    V = (int)bound.Min.Y
                 };
 
                 tileData.Vbo = tileMan.CreateTileVertices(tileData, TileSize, Texture.Width, Texture.Height);

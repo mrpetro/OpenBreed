@@ -7,15 +7,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Shaders\container.png" />
 	  <None Remove="Shaders\defaultShader.frag" />
 	  <None Remove="Shaders\defaultShader.vert" />
 	  <None Remove="Shaders\shader.frag" />
 	  <None Remove="Shaders\shader.vert" />
 	  <None Remove="Shaders\shaderA.frag" />
 	  <None Remove="Shaders\shaderA.vert" />
+	  <None Remove="Shaders\sprite.frag" />
+	  <None Remove="Shaders\sprite.vert" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Shaders\container.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="Shaders\shader.frag">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
@@ -32,6 +38,12 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Shaders\defaultShader.vert">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\sprite.frag">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\sprite.vert">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>

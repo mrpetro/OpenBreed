@@ -135,7 +135,22 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.GL.Translate(pos);
         }
 
-        public void DrawSprite(int vbo, Matrix4 model)
+        public void DrawSprite(ITexture texture, Vector3 pos, Vector2 size)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetView(Matrix4 matrix4)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int CreateVao(float[] vertexArray)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size)
         {
             throw new System.NotImplementedException();
         }

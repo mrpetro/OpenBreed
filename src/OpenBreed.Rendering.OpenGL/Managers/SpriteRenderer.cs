@@ -35,7 +35,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public void Render(Vector3 pos, int atlasId, int imageId)
+        public void Render(Vector3 pos, Vector2 size, int atlasId, int imageId)
         {
             var spriteAtlas = spriteMan.InternalGetById(atlasId);
             var textureId = spriteAtlas.Texture.InternalId;
@@ -45,9 +45,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             try
             {
-                primitiveRenderer.Translate(pos);
+                //primitiveRenderer.Translate(pos);
 
-                primitiveRenderer.DrawSprite(vbo, Matrix4.Identity);
+                //primitiveRenderer.DrawUnitBox(Matrix4.Identity, Color4.Red);
+
+
+                primitiveRenderer.DrawSprite(spriteAtlas.Texture, pos, size);
 
                 //GL.GL.BindTexture(GL.TextureTarget.Texture2D, textureId);
                 //RenderTools.Draw(vbo, ibo, 6);

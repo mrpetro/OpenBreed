@@ -15,7 +15,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         private readonly ISpriteRenderer spriteRenderer;
         private readonly int atlasId;
 
-        private readonly Dictionary<int, (int, int, float)> Lookup = new Dictionary<int, (int, int, float)>();
+        private readonly Dictionary<int, (int, int, float, float)> Lookup = new Dictionary<int, (int, int, float, float)>();
 
         #endregion Private Fields
 
@@ -104,30 +104,31 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Draw(char ch, Box2 clipBox)
         {
-            (int, int, float) data;
+            (int, int, float, float) data;
             if (Lookup.TryGetValue(ch, out data))
             {
                 var atlasId = data.Item1;
                 var spriteIndex = data.Item2;
-                spriteRenderer.Render(new Vector3(0,0,100), atlasId, spriteIndex);
+                spriteRenderer.Render(new Vector3(0,0,100), new Vector2(data.Item3, data.Item4), atlasId, spriteIndex);
             }
         }
 
         public void Draw(string text, Box2 clipBox)
         {
-            var offset = 0.0f;
+            var posX = 0.0f;
 
             for (int i = 0; i < text.Length; i++)
             {
                 var ch = text[i];
-                var atlasId = Lookup[ch].Item1;
-                var spriteIndex = Lookup[ch].Item2;
+                var data = Lookup[ch];
+                var atlasId = data.Item1;
+                var spriteIndex = data.Item2;
+                var w = data.Item3;
+                var h = data.Item4;
 
-                GL.Translate(offset, 0.0f, 0.0f);
+                spriteRenderer.Render(new Vector3(posX, 0, 100), new Vector2(w, h), atlasId, spriteIndex);
 
-                spriteRenderer.Render(new Vector3(0, 0, 100), atlasId, spriteIndex);
-
-                offset = Lookup[ch].Item3;
+                posX += w;
             }
         }
 

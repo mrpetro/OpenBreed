@@ -84,7 +84,10 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 throw new InvalidOperationException($"File '{filePath}' doesn't exist.");
 
             using (var bitmap = new Bitmap(filePath))
+            {
+                bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 return InternalCreate(alias, bitmap);
+            }
         }
 
         /// <summary>
@@ -111,7 +114,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         internal ITexture InternalCreate(string name, Bitmap bitmap)
         {
-            var texture = Texture4.CreateFromBitmap(bitmap);
+            var texture = Texture.CreateFromBitmap(bitmap);
             texture.Id = items.Count;
             items.Add(texture);
             aliases.Add(name, texture);

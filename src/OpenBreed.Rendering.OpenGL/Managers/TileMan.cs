@@ -26,17 +26,17 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly Dictionary<string, TileAtlas> names = new Dictionary<string, TileAtlas>();
         private readonly ITextureMan textureMan;
         private readonly ILogger logger;
+        private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        public TileMan(ITextureMan textureMan, ILogger logger)
+        public TileMan(ITextureMan textureMan, ILogger logger, IPrimitiveRenderer primitiveRenderer)
         {
             this.textureMan = textureMan;
             this.logger = logger;
-
-            //RenderTools.CreateIndicesArray(indicesArray, out ibo);
+            this.primitiveRenderer = primitiveRenderer;
         }
 
         #endregion Internal Constructors
@@ -79,10 +79,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void Render(int atlasId, int imageId)
         {
             var atlas = items[atlasId];
-
-            GL.BindTexture(TextureTarget.Texture2D, atlas.Texture.InternalId);
-            RenderTools.Draw(atlas.data[imageId].Vbo, ibo, 6);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
+            var size = atlas.TileSize;
+            var vao = atlas.data[imageId].Vbo;
+            primitiveRenderer.DrawSprite(atlas.Texture, vao, new Vector3(0,0,0), new Vector2(size, size));
         }
 
         #endregion Public Methods
@@ -99,12 +98,30 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return items.Count - 1;
         }
 
-        internal int CreateTileVertices(TileData spriteData, int tileSize, int width, int height)
+
+        private static void Append(List<float> list, Vertex vertex)
         {
-            var vertices = CreateVertices(spriteData, tileSize, width, height);
-            int vbo;
-            RenderTools.CreateVertexArray(vertices, out vbo);
-            return vbo;
+            list.Add(vertex.position.X);
+            list.Add(vertex.position.Y);
+            list.Add(0.0f);
+            list.Add(vertex.texCoord.X);
+            list.Add(vertex.texCoord.Y);
+        }
+
+        internal int CreateTileVertices(TileData tileData, int tileSize, int width, int height)
+        {
+            var vertices = CreateVertices(tileData, tileSize, width, height);
+           
+            var vtx = new List<float>();
+
+            Append(vtx, vertices[0]);
+            Append(vtx, vertices[1]);
+            Append(vtx, vertices[3]);
+            Append(vtx, vertices[1]);
+            Append(vtx, vertices[2]);
+            Append(vtx, vertices[3]);
+
+            return primitiveRenderer.CreateVao(vtx.ToArray());
         }
 
         #endregion Internal Methods

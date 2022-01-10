@@ -480,7 +480,6 @@ namespace OpenBreed.Sandbox
 
             GetManager<IRenderingMan>().Renderable = screenWorld.GetModule<IRenderableBatch>();
 
-
             var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
             debugHudWorldHelper.Create();
 
@@ -491,7 +490,8 @@ namespace OpenBreed.Sandbox
 
             var entityMan = GetManager<IEntityMan>();
 
-            var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
+
+            //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
             //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
@@ -500,7 +500,7 @@ namespace OpenBreed.Sandbox
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6

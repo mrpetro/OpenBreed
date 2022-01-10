@@ -44,11 +44,12 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         #region Internal Constructors
 
-        internal FontFromOSAtlasGenerator(FontMan fontMan, TextMeasurer textMeasurer, ITextureMan textureMan)
+        internal FontFromOSAtlasGenerator(FontMan fontMan, TextMeasurer textMeasurer, ITextureMan textureMan, IPrimitiveRenderer primitiveRenderer)
         {
             this.fontMan = fontMan;
             this.textMeasurer = textMeasurer;
             this.textureMan = textureMan;
+            PrimitiveRenderer = primitiveRenderer;
         }
 
         #endregion Internal Constructors
@@ -62,6 +63,8 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         internal string FontName { get; private set; }
 
         internal int Id { get; private set; }
+
+        internal IPrimitiveRenderer PrimitiveRenderer { get; }
 
         #endregion Internal Properties
 
@@ -175,28 +178,48 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             {
                 var bitmap = GenerateCharacters(font, out Size maxCharSize);
 
+                //bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
                 Texture = textureMan.Create($"Textures/Fonts/{fontName}/{fontSize}", bitmap);
 
-                for (int i = 0; i < Characters.Length; i++)
+                for (int ci = 0; ci < Characters.Length; ci++)
                 {
-                    if (!Lookup.ContainsKey(Characters[i]))
+                    if (!Lookup.ContainsKey(Characters[ci]))
                     {
-                        var charSize = textMeasurer.MeasureSize(font, (char)Characters[i]);
-                        var charWidth = textMeasurer.MeasureWidth(font, (char)Characters[i]);
+                        var charSize = textMeasurer.MeasureSize(font, (char)Characters[ci]);
+                        var charWidth = textMeasurer.MeasureWidth(font, (char)Characters[ci]);
 
-                        var coord = new Vector2(i * maxCharSize.Width, 0);
-                        var vertices = CreateVertices(coord, charSize.Width, charSize.Height);
+                        var texCoord = new Vector2(ci * maxCharSize.Width, 0);
+                        var vertices = CreateVertices(texCoord, charSize.Width, charSize.Height);
 
-                        int vbo;
-                        RenderTools.CreateVertexArray(vertices, out vbo);
-                        vboList.Add(vbo);
+                        var vtx = new List<float>();
 
-                        Lookup.Add(Characters[i], (i, charWidth));
+                        Append(vtx, vertices[0]);
+                        Append(vtx, vertices[1]);
+                        Append(vtx, vertices[3]);
+                        Append(vtx, vertices[1]);
+                        Append(vtx, vertices[2]);
+                        Append(vtx, vertices[3]);
+
+                        var vao = PrimitiveRenderer.CreateVao(vtx.ToArray());
+
+                        vboList.Add(vao);
+
+                        Lookup.Add(Characters[ci], (ci, charWidth));
                     }
                 }
 
                 return textMeasurer.MeasureHeight(font);
             }
+        }
+
+        private static void Append(List<float> list, Vertex vertex)
+        {
+            list.Add(vertex.position.X);
+            list.Add(vertex.position.Y);
+            list.Add(0.0f);
+            list.Add(vertex.texCoord.X);
+            list.Add(vertex.texCoord.Y);
         }
 
         #endregion Private Methods

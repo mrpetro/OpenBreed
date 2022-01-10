@@ -29,7 +29,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         #region Internal Properties
 
-        internal Dictionary<int, (int, int, float)> Lookup { get; } = new Dictionary<int, (int, int, float)>();
+        internal Dictionary<int, (int, int, float, float)> Lookup { get; } = new Dictionary<int, (int, int, float, float)>();
         internal int AtlasId { get; private set; }
 
         internal ISpriteMan SpriteMan { get; }
@@ -62,7 +62,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         {
             var sptiteAtlas = SpriteMan.GetByName(spriteAtlasName);
             var sprite = sptiteAtlas.GetSpriteSize(spriteIndex);
-            Lookup.Add(ch, (sptiteAtlas.Id, spriteIndex, sprite.X));
+            Lookup.Add(ch, (sptiteAtlas.Id, spriteIndex, sprite.X, sprite.Y));
 
             return this;
         }

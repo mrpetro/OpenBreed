@@ -1,6 +1,7 @@
 ﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;
+using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.Interface
 {
@@ -41,7 +42,11 @@ namespace OpenBreed.Rendering.Interface
         void Load();
         int CreateVertexArray(float[] vs);
         void Translate(Vector3 pos);
-        void DrawSprite(int vbo, Matrix4 model);
+        void DrawSprite(ITexture texture, Vector3 pos, Vector2 size);
+        void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size);
+        void SetView(Matrix4 matrix4);
+
+        int CreateVao(float[] vertexArray);
 
         #endregion Public Methods
     }

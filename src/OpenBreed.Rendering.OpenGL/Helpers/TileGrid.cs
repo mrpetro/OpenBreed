@@ -2,7 +2,7 @@
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
 
@@ -13,15 +13,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #region Private Fields
 
         private readonly ITileMan tileMan;
+        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly IStampMan stampMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileGrid(ITileMan tileMan, IStampMan stampMan, int width, int height, int layersNo, int cellSize)
+        public TileGrid(ITileMan tileMan, IPrimitiveRenderer primitiveRenderer, IStampMan stampMan, int width, int height, int layersNo, int cellSize)
         {
             this.tileMan = tileMan;
+            this.primitiveRenderer = primitiveRenderer;
             this.stampMan = stampMan;
             Width = width;
             Height = height;
@@ -104,19 +106,19 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             bottomIndex = MathHelper.Clamp(bottomIndex, 0, Height);
             topIndex = MathHelper.Clamp(topIndex, 0, Height);
 
-            if (CellBordersVisible)
-                DrawCellBorders(leftIndex, bottomIndex, rightIndex, topIndex);
+            //if (CellBordersVisible)
+            //    DrawCellBorders(leftIndex, bottomIndex, rightIndex, topIndex);
 
             GL.Enable(EnableCap.Texture2D);
 
             for (int layerNo = 0; layerNo < LayersNo; layerNo++)
             {
-                GL.PushMatrix();
-                GL.Translate(leftIndex * CellSize, bottomIndex * CellSize, 0.0f);
+                primitiveRenderer.PushMatrix();
+                primitiveRenderer.Translate(new Vector3(leftIndex * CellSize, bottomIndex * CellSize, 0.0f));
 
                 for (int j = bottomIndex; j < topIndex; j++)
                 {
-                    GL.PushMatrix();
+                    primitiveRenderer.PushMatrix();
 
                     for (int i = leftIndex; i < rightIndex; i++)
                     {
@@ -126,14 +128,14 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
                         RenderCellTile(cellTile);
 
-                        GL.Translate(CellSize, 0.0f, 0.0f);
+                        primitiveRenderer.Translate(new Vector3(CellSize, 0.0f, 0.0f));
                     }
 
-                    GL.PopMatrix();
-                    GL.Translate(0.0f, CellSize, 0.0f);
+                    primitiveRenderer.PopMatrix();
+                    primitiveRenderer.Translate(new Vector3(0.0f, CellSize, 0.0f));
                 }
 
-                GL.PopMatrix();
+                primitiveRenderer.PopMatrix();
             }
 
             GL.Disable(EnableCap.Texture2D);
@@ -152,33 +154,33 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return cells;
         }
 
-        /// <summary>
-        /// Draw debug grid
-        /// </summary>
-        /// <param name="leftIndex">Left border index of grid</param>
-        /// <param name="bottomIndex">Bottom border index of grid</param>
-        /// <param name="rightIndex">Right border index of grid</param>
-        /// <param name="topIndex">Top border index of grid</param>
-        private void DrawCellBorders(int leftIndex, int bottomIndex, int rightIndex, int topIndex)
-        {
-            GL.Color4(Color4.Green);
+        ///// <summary>
+        ///// Draw debug grid
+        ///// </summary>
+        ///// <param name="leftIndex">Left border index of grid</param>
+        ///// <param name="bottomIndex">Bottom border index of grid</param>
+        ///// <param name="rightIndex">Right border index of grid</param>
+        ///// <param name="topIndex">Top border index of grid</param>
+        //private void DrawCellBorders(int leftIndex, int bottomIndex, int rightIndex, int topIndex)
+        //{
+        //    GL.Color4(Color4.Green);
 
-            for (int j = bottomIndex; j < topIndex; j++)
-            {
-                GL.Begin(PrimitiveType.Lines);
-                GL.Vertex2(leftIndex * CellSize, j * CellSize);
-                GL.Vertex2(rightIndex * CellSize, j * CellSize);
-                GL.End();
-            }
+        //    for (int j = bottomIndex; j < topIndex; j++)
+        //    {
+        //        GL.Begin(PrimitiveType.Lines);
+        //        GL.Vertex2(leftIndex * CellSize, j * CellSize);
+        //        GL.Vertex2(rightIndex * CellSize, j * CellSize);
+        //        GL.End();
+        //    }
 
-            for (int i = leftIndex; i < rightIndex; i++)
-            {
-                GL.Begin(PrimitiveType.Lines);
-                GL.Vertex2(i * CellSize, bottomIndex * CellSize);
-                GL.Vertex2(i * CellSize, topIndex * CellSize);
-                GL.End();
-            }
-        }
+        //    for (int i = leftIndex; i < rightIndex; i++)
+        //    {
+        //        GL.Begin(PrimitiveType.Lines);
+        //        GL.Vertex2(i * CellSize, bottomIndex * CellSize);
+        //        GL.Vertex2(i * CellSize, topIndex * CellSize);
+        //        GL.End();
+        //    }
+        //}
 
         private bool TryGetGridIndices(Vector2 point, out int xIndex, out int yIndex)
         {

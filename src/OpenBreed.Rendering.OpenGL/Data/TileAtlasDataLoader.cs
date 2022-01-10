@@ -11,6 +11,7 @@ using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,6 +69,8 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
             if (paletteModel != null)
                 BitmapHelper.SetPaletteColors(tileAtlasModel.Bitmap, paletteModel.Data);
+
+            //tileAtlasModel.Bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
             var texture = textureMan.Create(entry.DataRef, tileAtlasModel.Bitmap);
 

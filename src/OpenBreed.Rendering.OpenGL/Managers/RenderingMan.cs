@@ -91,6 +91,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
+           
+            //primitiveRenderer.DrawSprite(0, Matrix4.Identity);
+            //primitiveRenderer.DrawSprite(1, Matrix4.Identity);
+
+
             //primitiveRenderer.DrawUnitBox(Color4.Red);
 
             //primitiveRenderer.DrawTriangle();
@@ -99,14 +104,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private void OnResize(int width, int height)
         {
-            primitiveRenderer.SetProjection(Matrix4.CreateOrthographicOffCenter(0.0f, width, 0.0f, height, -100.0f, 100.0f));
+            primitiveRenderer.SetProjection(Matrix4.Identity);
             GL.Viewport(0, 0, width, height);
 
-            //GL.LoadIdentity();
-            //GL.Viewport(0, 0, width, height);
-            //GL.MatrixMode(OpenTK.Graphics.OpenGL.MatrixMode.Modelview);
-            //var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, width, 0.0f, height, -100.0f, 100.0f);
-            //GL.LoadMatrix(ref ortho);
+            primitiveRenderer.SetView(Matrix4.CreateOrthographicOffCenter(0.0f, width, 0.0f, height, -100.0f, 100.0f));
+
             ClientResized?.Invoke(this, new ClientResizedEventArgs(width, height));
         }
 
