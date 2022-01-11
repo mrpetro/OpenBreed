@@ -117,9 +117,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
             var aabb = new Box2(0, 0, 16, 16);
 
-            // Draw black box
-            GL.Color4(Color4.Yellow);
-            primitiveRenderer.DrawRectangle(aabb);
+            primitiveRenderer.DrawRectangle(aabb, Color4.Yellow);
 
             GL.Enable(EnableCap.Texture2D);
             GL.Enable(EnableCap.Blend);

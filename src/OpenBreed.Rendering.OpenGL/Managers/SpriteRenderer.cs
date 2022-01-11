@@ -38,7 +38,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void Render(Vector3 pos, Vector2 size, int atlasId, int imageId)
         {
             var spriteAtlas = spriteMan.InternalGetById(atlasId);
-            var textureId = spriteAtlas.Texture.InternalId;
             var vbo = spriteAtlas.data[imageId].Vbo;
 
             primitiveRenderer.PushMatrix();
@@ -50,7 +49,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 //primitiveRenderer.DrawUnitBox(Matrix4.Identity, Color4.Red);
 
 
-                primitiveRenderer.DrawSprite(spriteAtlas.Texture, pos, size);
+                primitiveRenderer.DrawSprite(spriteAtlas.Texture, vbo, pos, size);
 
                 //GL.GL.BindTexture(GL.TextureTarget.Texture2D, textureId);
                 //RenderTools.Draw(vbo, ibo, 6);

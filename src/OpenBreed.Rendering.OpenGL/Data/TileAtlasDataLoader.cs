@@ -70,8 +70,6 @@ namespace OpenBreed.Rendering.OpenGL.Data
             if (paletteModel != null)
                 BitmapHelper.SetPaletteColors(tileAtlasModel.Bitmap, paletteModel.Data);
 
-            //tileAtlasModel.Bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
-
             var texture = textureMan.Create(entry.DataRef, tileAtlasModel.Bitmap);
 
             var builder = tileMan.CreateAtlas()

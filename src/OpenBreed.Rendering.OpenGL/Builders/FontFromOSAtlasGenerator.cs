@@ -29,7 +29,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         internal readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
         internal float Height;
         internal ITexture Texture;
-        internal int ibo;
         internal List<int> vboList;
 
         #endregion Internal Fields
@@ -78,8 +77,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             Characters = new int[256];
             for (int i = 0; i < 256; i++)
                 Characters[i] = i;
-
-            RenderTools.CreateIndicesArray(indices, out ibo);
 
             Height = BuildCoords(FontName, FontSize);
 
@@ -192,16 +189,16 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                         var texCoord = new Vector2(ci * maxCharSize.Width, 0);
                         var vertices = CreateVertices(texCoord, charSize.Width, charSize.Height);
 
-                        var vtx = new List<float>();
+                        var vertexArrayBuilder = PrimitiveRenderer.CreatePosTexCoordArray();
+                        vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
+                        vertexArrayBuilder.AddVertex(vertices[1].position, vertices[1].texCoord);
+                        vertexArrayBuilder.AddVertex(vertices[2].position, vertices[2].texCoord);
+                        vertexArrayBuilder.AddVertex(vertices[3].position, vertices[3].texCoord);
 
-                        Append(vtx, vertices[0]);
-                        Append(vtx, vertices[1]);
-                        Append(vtx, vertices[3]);
-                        Append(vtx, vertices[1]);
-                        Append(vtx, vertices[2]);
-                        Append(vtx, vertices[3]);
+                        vertexArrayBuilder.AddTriangleIndices(0, 1, 3);
+                        vertexArrayBuilder.AddTriangleIndices(1, 2, 3);
 
-                        var vao = PrimitiveRenderer.CreateVao(vtx.ToArray());
+                        var vao = vertexArrayBuilder.CreateTexturedVao();
 
                         vboList.Add(vao);
 
@@ -211,15 +208,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
                 return textMeasurer.MeasureHeight(font);
             }
-        }
-
-        private static void Append(List<float> list, Vertex vertex)
-        {
-            list.Add(vertex.position.X);
-            list.Add(vertex.position.Y);
-            list.Add(0.0f);
-            list.Add(vertex.texCoord.X);
-            list.Add(vertex.texCoord.Y);
         }
 
         #endregion Private Methods

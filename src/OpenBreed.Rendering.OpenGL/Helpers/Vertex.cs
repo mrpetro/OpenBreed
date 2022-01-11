@@ -17,6 +17,13 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Public Constructors
 
+        public Vertex(float x, float y)
+        {
+            this.position = new Vector2(x, y);
+            this.texCoord = new Vector2(0,0);
+            this.color = new Vector4();
+        }
+
         public Vertex(Vector2 position, Vector2 texCoord, Vector4 color)
         {
             this.position = position;

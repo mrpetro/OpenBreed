@@ -98,18 +98,17 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             var vertices = CreateVertices(spriteData, width, height);
 
-            var verticesList = new List<float>();
 
-            foreach (var item in vertices)
-            {
-                verticesList.Add(item.position.X);
-                verticesList.Add(item.position.Y);
-                verticesList.Add(0.0f);
-            }
+            var vertexArrayBuilder = primitiveRenderer.CreatePosTexCoordArray();
+            vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[1].position, vertices[1].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[2].position, vertices[2].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[3].position, vertices[3].texCoord);
 
-            int vbo = primitiveRenderer.CreateVertexArray(verticesList.ToArray());
-            //RenderTools.CreateVertexArray(vertices, out vbo);
-            return vbo;
+            vertexArrayBuilder.AddTriangleIndices(0, 1, 3);
+            vertexArrayBuilder.AddTriangleIndices(1, 2, 3);
+
+            return vertexArrayBuilder.CreateTexturedVao();
         }
 
         #endregion Internal Methods

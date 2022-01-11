@@ -14,7 +14,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #region Private Fields
 
         private readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
-        private readonly int ibo;
         private readonly List<int> vboList;
         private readonly IPrimitiveRenderer primitiveRenderer;
 
@@ -28,7 +27,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             Characters = builder.Characters;
             Id = builder.Id;
             vboList = builder.vboList;
-            ibo = builder.ibo;
             Height = builder.Height;
             Lookup = builder.Lookup;
             Texture = builder.Texture;
@@ -73,9 +71,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Draw(char character, Box2 clipBox)
         {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
-            RenderTools.Draw(vboList[Lookup[character].Item1], ibo, 6);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
+            var found = Lookup[character];
+            primitiveRenderer.DrawSprite(Texture, vboList[found.Item1], new Vector3(0, 0, 0), new Vector2(found.Item2, Height));
         }
 
         public void Draw(string text, Box2 clipBox)
@@ -91,17 +88,9 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
                 primitiveRenderer.DrawSprite(Texture, vboList[key], new Vector3((int)offsetX, 0.0f, 0.0f), new Vector2(Lookup[ch].Item2, Height));
 
-                //RenderTools.Draw(vboList[key], ibo, 6);
                 offsetX += Lookup[ch].Item2;
             }
 
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-        }
-
-        public void Draw(int spriteId)
-        {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
-            RenderTools.Draw(vboList[spriteId], ibo, 6);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
