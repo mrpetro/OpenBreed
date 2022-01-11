@@ -194,21 +194,23 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public void DrawBrightnessBox(float brightness)
         {
-            //GL.Enable(EnableCap.Blend);
-            //if (brightness > 1.0)
-            //{
-            //    GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.One);
-            //    GL.Color3(brightness - 1, brightness - 1, brightness - 1);
-            //}
-            //else
-            //{
-            //    GL.BlendFunc(BlendingFactor.Zero, BlendingFactor.SrcColor);
-            //    GL.Color3(brightness, brightness, brightness);
-            //}
+            Color4 color;
 
-            //Translate(0, 0, BRIGHTNESS_Z_LEVEL);
-            //DrawUnitBox();
-            //GL.Disable(EnableCap.Blend);
+            GL.Enable(EnableCap.Blend);
+            if (brightness > 1.0)
+            {
+                GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.One);
+                color = new Color4(brightness - 1, brightness - 1, brightness - 1, 1.0f);
+            }
+            else
+            {
+                GL.BlendFunc(BlendingFactor.Zero, BlendingFactor.SrcColor);
+                color = new Color4(brightness, brightness, brightness, 1.0f);
+            }
+
+            Translate(0, 0, BRIGHTNESS_Z_LEVEL);
+            DrawUnitBox(Matrix4.Identity, color);
+            GL.Disable(EnableCap.Blend);
         }
 
         public void DrawTriangle()

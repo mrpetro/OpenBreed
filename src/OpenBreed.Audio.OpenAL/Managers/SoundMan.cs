@@ -22,7 +22,9 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         private readonly ILogger logger;
         private readonly List<SoundSource> streamSources = new List<SoundSource>();
-        private ALContext audioContext;
+
+        private readonly ALDevice alDevice;
+        private ALContext alContext;
 
         private bool disposedValue;
 
@@ -32,10 +34,11 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         public SoundMan(ILogger logger)
         {
-            audioContext = new ALContext();
-            ALC.MakeContextCurrent(audioContext);
+            alDevice = ALC.OpenDevice(null);
+            alContext = ALC.CreateContext(alDevice, new ALContextAttributes());
             this.logger = logger;
 
+            ALC.MakeContextCurrent(alContext);
             ReportOpenAL();
         }
 
