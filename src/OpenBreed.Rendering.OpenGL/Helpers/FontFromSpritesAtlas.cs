@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
 
@@ -13,6 +13,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         private readonly ISpriteMan spriteMan;
         private readonly ISpriteRenderer spriteRenderer;
+        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly int atlasId;
 
         private readonly Dictionary<int, (int, int, float, float)> Lookup = new Dictionary<int, (int, int, float, float)>();
@@ -25,6 +26,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         {
             spriteMan = builder.SpriteMan;
             spriteRenderer = builder.SpriteRenderer;
+            primitiveRenderer = builder.PrimitiveRenderer; 
             Id = builder.Id;
             atlasId = builder.AtlasId;
             Lookup = builder.Lookup;
@@ -69,9 +71,9 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public void Render(string text, Box2 clipBox, Vector2 pos)
         {
             GL.Enable(EnableCap.Texture2D);
-            GL.PushMatrix();
+            primitiveRenderer.PushMatrix();
 
-            GL.Translate((int)pos.X, (int)pos.Y, 0.0f);
+            primitiveRenderer.Translate((int)pos.X, (int)pos.Y, 0.0f);
 
             var caretPosX = 0.0f;
 
@@ -82,11 +84,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 switch (ch)
                 {
                     case '\r':
-                        GL.Translate(-caretPosX, 0.0f, 0.0f);
+                        primitiveRenderer.Translate(-caretPosX, 0.0f, 0.0f);
                         caretPosX = 0.0f;
                         continue;
                     case '\n':
-                        GL.Translate(0.0f, -Height, 0.0f);
+                        primitiveRenderer.Translate(0.0f, -Height, 0.0f);
                         continue;
                     default:
                         break;
@@ -95,10 +97,10 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 Draw(ch, clipBox);
                 var width = GetWidth(ch);
                 caretPosX += width;
-                GL.Translate(width, 0.0f, 0.0f);
+                primitiveRenderer.Translate(width, 0.0f, 0.0f);
             }
 
-            GL.PopMatrix();
+            primitiveRenderer.PopMatrix();
             GL.Disable(EnableCap.Texture2D);
         }
 

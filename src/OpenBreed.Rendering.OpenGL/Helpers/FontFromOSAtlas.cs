@@ -9,8 +9,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 {
     internal class FontFromOSAtlas : IFont
     {
-        //public const string Characters = @" qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789µ§½!""#¤%&/()=?^*@£€${[]}\~¨'-_.:,;<>|°©®±¥ł";
-
         #region Private Fields
 
         private readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();

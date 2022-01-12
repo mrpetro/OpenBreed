@@ -8,7 +8,7 @@ using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
 
@@ -54,18 +54,13 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
             GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
-            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
                 DrawEntityAabb(entities[i], clipBox);
 
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 
@@ -75,28 +70,6 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
         protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 
-        //private void Inputs_MouseMove(object sender, OpenTK.Input.MouseMoveEventArgs e)
-        //{
-        //    for (int i = 0; i < entities.Count; i++)
-        //    {
-        //        var icc = entities[i].Get<CursorInputComponent>();
-
-        //        if (icc.CursorId != 0)
-        //            return;
-
-        //        var viewportSystem = renderingModule.ScreenWorld.Systems.OfType<ViewportSystem>().FirstOrDefault();
-
-        //        var gameViewport = renderingModule.ScreenWorld.Entities.FirstOrDefault( item => object.Equals(item.Tag, "GameViewport"));
-
-        //        if (gameViewport == null)
-        //            return;
-
-        //        var pos = entities[i].Get<PositionComponent>();
-
-        //        var coord = viewportSystem.ClientToWorld(new OpenTK.Vector4(e.X, e.Y, 0.0f, 1.0f), gameViewport);
-        //        pos.Value = new OpenTK.Vector2(coord.X, coord.Y);
-        //    }
-        //}
         protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
@@ -133,26 +106,22 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
             var unknownCodeCmp = entity.Get<UnknownCodeComponent>();
 
-            GL.PushMatrix();
+            primitiveRenderer.PushMatrix();
 
-            GL.Translate((int)posCmp.Value.X, (int)posCmp.Value.Y, 0.0f);
+            primitiveRenderer.Translate((int)posCmp.Value.X, (int)posCmp.Value.Y, 0.0f);
 
             var aabb = new Box2(0, 0, 16, 16);
 
             primitiveRenderer.DrawRectangle(aabb, Color4.Yellow);
 
-            GL.Enable(EnableCap.Texture2D);
             GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
             GL.BlendColor(Color4.Black);
 
             font.Draw(unknownCodeCmp.Code.ToString(), clipBox);
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
 
-            GL.PopMatrix();
+            primitiveRenderer.PopMatrix();
         }
 
         #endregion Private Methods

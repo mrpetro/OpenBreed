@@ -46,7 +46,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public IFontAtlasBuilder Create()
         {
-            return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer);
+            return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer, primitiveRenderer);
         }
 
         public void RenderPart(int fontId, string text, Vector2 origin, float order, Box2 clipBox)

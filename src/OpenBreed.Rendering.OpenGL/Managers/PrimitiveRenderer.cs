@@ -190,9 +190,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return newVao;
         }
 
-        public IPosArrayBuilder CreatePosArray() => new VertexArrayBuilder(this);
+        public IPosArrayBuilder CreatePosArray() => new PosArrayBuilder(this);
 
-        public IPosTexCoordArrayBuilder CreatePosTexCoordArray() => new PosAndTexCoordArrayBuilder(this);
+        public IPosTexCoordArrayBuilder CreatePosTexCoordArray() => new PosTexCoordArrayBuilder(this);
 
         #endregion Public Methods
 

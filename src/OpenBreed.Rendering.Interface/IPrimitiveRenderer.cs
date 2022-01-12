@@ -20,6 +20,7 @@ namespace OpenBreed.Rendering.Interface
         void PushMatrix();
         void PopMatrix();
         void Translate(Vector3 pos);
+        void Translate(float x, float y, float z);
 
         void DrawUnitRectangle(Matrix4 model, Color4 red);
 

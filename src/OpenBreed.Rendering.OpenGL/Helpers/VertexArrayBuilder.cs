@@ -5,11 +5,15 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
-    internal class PosAndTexCoordArrayBuilder : IPosTexCoordArrayBuilder
+    internal abstract class VertexArrayBuilder
     {
-        #region Private Fields
+        #region Protected Fields
 
-        private readonly List<Vertex> vertices = new List<Vertex>();
+        protected readonly List<Vertex> vertices = new List<Vertex>();
+
+        #endregion Protected Fields
+
+        #region Private Fields
 
         private readonly PrimitiveRenderer primitiveRenderer;
 
@@ -17,21 +21,16 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Protected Constructors
 
-        public PosAndTexCoordArrayBuilder(PrimitiveRenderer primitiveRenderer)
+        protected VertexArrayBuilder(PrimitiveRenderer primitiveRenderer)
         {
             this.primitiveRenderer = primitiveRenderer;
         }
 
-        #endregion Public Constructors
+        #endregion Protected Constructors
 
         #region Public Methods
-
-        public void AddVertex(Vector2 pos, Vector2 texCoord)
-        {
-            vertices.Add(new Vertex(pos, texCoord, Color4.White));
-        }
 
         public void AddTriangleIndices(int v1, int v2, int v3)
         {
@@ -49,16 +48,13 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #endregion Public Methods
 
-        #region Private Methods
+        #region Protected Methods
 
-        private static void Append(List<float> list, Vertex vertex)
-        {
-            list.Add(vertex.position.X);
-            list.Add(vertex.position.Y);
-            list.Add(0.0f);
-            list.Add(vertex.texCoord.X);
-            list.Add(vertex.texCoord.Y);
-        }
+        protected abstract void Append(List<float> list, Vertex vertex);
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private float[] GetFloats()
         {
@@ -76,24 +72,45 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #endregion Private Methods
     }
 
-
-    internal class VertexArrayBuilder : IPosArrayBuilder
+    internal class PosTexCoordArrayBuilder : VertexArrayBuilder, IPosTexCoordArrayBuilder
     {
-        #region Private Fields
-
-        private readonly List<Vertex> vertices = new List<Vertex>();
-
-        private readonly PrimitiveRenderer primitiveRenderer;
-
-        private readonly List<int[]> loopIndices = new List<int[]>();
-
-        #endregion Private Fields
-
         #region Public Constructors
 
-        public VertexArrayBuilder(PrimitiveRenderer primitiveRenderer)
+        public PosTexCoordArrayBuilder(PrimitiveRenderer primitiveRenderer) : base(primitiveRenderer)
         {
-            this.primitiveRenderer = primitiveRenderer;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void AddVertex(Vector2 pos, Vector2 texCoord)
+        {
+            vertices.Add(new Vertex(pos, texCoord, Color4.White));
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void Append(List<float> list, Vertex vertex)
+        {
+            list.Add(vertex.position.X);
+            list.Add(vertex.position.Y);
+            list.Add(0.0f);
+            list.Add(vertex.texCoord.X);
+            list.Add(vertex.texCoord.Y);
+        }
+
+        #endregion Protected Methods
+    }
+
+    internal class PosArrayBuilder : VertexArrayBuilder, IPosArrayBuilder
+    {
+        #region Public Constructors
+
+        public PosArrayBuilder(PrimitiveRenderer primitiveRenderer) : base(primitiveRenderer)
+        {
         }
 
         #endregion Public Constructors
@@ -110,44 +127,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             vertices.Add(new Vertex(x, y));
         }
 
-        public void AddTriangleIndices(int v1, int v2, int v3)
-        {
-            loopIndices.Add(new int[] { v1, v2, v3 });
-        }
-
-        public void AddLoopIndices(int v1, int v2, int v3, int v4)
-        {
-            loopIndices.Add(new int[] { v1, v2, v3, v4 });
-        }
-
-        public int CreateTexturedVao() => primitiveRenderer.CreateTexturedVao(GetFloats());
-
-        public int CreateVao() => primitiveRenderer.CreateVao(GetFloats());
-
         #endregion Public Methods
 
-        #region Private Methods
+        #region Protected Methods
 
-        private static void Append(List<float> list, Vertex vertex)
+        protected override void Append(List<float> list, Vertex vertex)
         {
             list.Add(vertex.position.X);
             list.Add(vertex.position.Y);
             list.Add(0.0f);
         }
 
-        private float[] GetFloats()
-        {
-            var floats = new List<float>();
-
-            foreach (var loop in loopIndices)
-            {
-                for (int i = 0; i < loop.Length; i++)
-                    Append(floats, vertices[loop[i]]);
-            }
-
-            return floats.ToArray();
-        }
-
-        #endregion Private Methods
+        #endregion Protected Methods
     }
 }
