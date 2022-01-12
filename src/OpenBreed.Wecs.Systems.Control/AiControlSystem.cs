@@ -1,9 +1,9 @@
-﻿using OpenBreed.Core.Helpers;
-using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -4,6 +4,7 @@ using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 using System.Linq;
 

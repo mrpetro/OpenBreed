@@ -6,7 +6,8 @@ using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
@@ -51,18 +52,12 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
             GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
-            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
-            GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
                 DrawEntityAabb(entities[i], clipBox);
 
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 
@@ -98,40 +93,35 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             if (groupCmp.Id == -1)
                 return;
 
-            if (posCmp.Value.X + 16 < clipBox.Left)
+            if (posCmp.Value.X + 16 < clipBox.Min.X)
                 return;
 
-            if (posCmp.Value.X > clipBox.Right)
+            if (posCmp.Value.X > clipBox.Max.X)
                 return;
 
-            if (posCmp.Value.Y + 16 < clipBox.Bottom)
+            if (posCmp.Value.Y + 16 < clipBox.Min.Y)
                 return;
 
-            if (posCmp.Value.Y > clipBox.Top)
+            if (posCmp.Value.Y > clipBox.Max.Y)
                 return;
 
-            GL.PushMatrix();
+            primitiveRenderer.PushMatrix();
 
-            GL.Translate((int)posCmp.Value.X, (int)posCmp.Value.Y, 0.0f);
+            primitiveRenderer.Translate((int)posCmp.Value.X, (int)posCmp.Value.Y, 0.0f);
 
-            var aabb = Box2.FromTLRB(0, 0, 16, 16);
+            var aabb = new Box2(0, 0, 16, 16);
 
-            // Draw black box
-            GL.Color4(Color4.Yellow);
-            primitiveRenderer.DrawRectangle(aabb);
+            primitiveRenderer.DrawRectangle(aabb, Color4.Yellow);
 
-            GL.Enable(EnableCap.Texture2D);
             GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
             GL.BlendColor(Color4.Black);
 
             font.Draw(groupCmp.Id.ToString(), clipBox);
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
+
             GL.Disable(EnableCap.Blend);
 
-            GL.PopMatrix();
+            primitiveRenderer.PopMatrix();
         }
 
         #endregion Private Methods

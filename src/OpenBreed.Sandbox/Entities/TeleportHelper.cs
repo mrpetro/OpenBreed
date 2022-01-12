@@ -16,6 +16,7 @@ using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 using System.Linq;
 
@@ -151,7 +152,7 @@ namespace OpenBreed.Sandbox.Entities
             var shape = shapeMan.GetById(bodyCmp.Fixtures.First().ShapeId);
             var targetAabb = shape.GetAabb().Translated(targetPos.Value);
 
-            var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
+            var offset = new Vector2((32 - targetAabb.Size.X) / 2.0f, (32 - targetAabb.Size.Y) / 2.0f);
 
             var newPosition = exitPos.Value + offset;
 

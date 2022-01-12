@@ -2,6 +2,7 @@
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Rendering

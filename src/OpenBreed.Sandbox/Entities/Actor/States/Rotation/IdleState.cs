@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Components.Common;
@@ -7,6 +6,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 using System.Linq;
 

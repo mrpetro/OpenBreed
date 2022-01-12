@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(systemFactory.Create<TextSystem>());
 
-            builder.AddSystem(systemFactory.Create<PhysicsDebugDisplaySystem>());
+            //builder.AddSystem(systemFactory.Create<PhysicsDebugDisplaySystem>());
             builder.AddSystem(systemFactory.Create<UnknownMapCellDisplaySystem>());
             //builder.AddSystem(systemFactory.Create<GroupMapCellDisplaySystem>());
             builder.AddSystem(systemFactory.Create<ViewportSystem>());

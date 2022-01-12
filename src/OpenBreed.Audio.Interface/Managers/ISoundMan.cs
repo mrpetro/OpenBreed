@@ -1,5 +1,8 @@
 ﻿namespace OpenBreed.Audio.Interface.Managers
 {
+    public delegate int SoundStreamReader(int size, short[] buffer);
+
+
     /// <summary>
     /// Sounds manager interface
     /// </summary>
@@ -18,10 +21,10 @@
         /// Loads sample from file path with given frequency
         /// </summary>
         /// <param name="sampleName">Name of sample to be assigned to</param>
-        /// <param name="sampleFilePath">Sound sample file path</param>
+        /// <param name="sampleData">Sound sample data</param>
         /// <param name="sampleFrequency">Sound sample frequency</param>
         /// <returns>Sound sample ID</returns>
-        int LoadSample(string sampleName, string sampleFilePath, int sampleFrequency);
+        int LoadSample(string sampleName, byte[] sampleData, int sampleFrequency);
 
         /// <summary>
         /// Loads sample from file path with given frequency
@@ -30,19 +33,30 @@
         /// <param name="sampleData">Sound sample data</param>
         /// <param name="sampleFrequency">Sound sample frequency</param>
         /// <returns>Sound sample ID</returns>
-        int LoadSample(string sampleName, byte[] sampleData, int sampleFrequency);
+        int LoadSample(string sampleName, short[] sampleData, int sampleFrequency);
+
+        int CreateStream(string streamName, SoundStreamReader reader);
 
         /// <summary>
         /// Play sound sample with particular ID
         /// </summary>
         /// <param name="id">ID of sound sample to play</param>
-        void PlaySample(int id);
+        void PlaySample(int sampleId);
+
+        /// <summary>
+        /// Play sample from stream using particular ID
+        /// </summary>
+        /// <param name="sampleStreamId">ID of sample stream to play</param>
+        void PlayStream(int sampleStreamId);
 
         /// <summary>
         /// Create sound source
         /// </summary>
         /// <returns>Sound source ID</returns>
         int CreateSoundSource();
+
+
+        void Update();
 
         #endregion Public Methods
     }

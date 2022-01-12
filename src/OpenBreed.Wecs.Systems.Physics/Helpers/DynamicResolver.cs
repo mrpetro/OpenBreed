@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Entities;
 using OpenTK;
 using System;
 using System.Linq;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Systems.Physics.Helpers
 {

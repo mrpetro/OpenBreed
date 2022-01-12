@@ -18,22 +18,25 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         internal FontFromSpritesAtlasBuilder(FontMan fontMan,
                                              ISpriteMan spriteMan,
-                                             ISpriteRenderer spriteRenderer)
+                                             ISpriteRenderer spriteRenderer,
+                                             IPrimitiveRenderer primitiveRenderer)
         {
             this.fontMan = fontMan;
             SpriteMan = spriteMan;
             SpriteRenderer = spriteRenderer;
+            PrimitiveRenderer = primitiveRenderer;
         }
 
         #endregion Internal Constructors
 
         #region Internal Properties
 
-        internal Dictionary<int, (int, int, float)> Lookup { get; } = new Dictionary<int, (int, int, float)>();
+        internal Dictionary<int, (int, int, float, float)> Lookup { get; } = new Dictionary<int, (int, int, float, float)>();
         internal int AtlasId { get; private set; }
 
         internal ISpriteMan SpriteMan { get; }
         internal ISpriteRenderer SpriteRenderer { get; }
+        internal IPrimitiveRenderer PrimitiveRenderer { get; }
         internal int[] Characters { get; private set; }
 
         internal int Id { get; private set; }
@@ -62,7 +65,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         {
             var sptiteAtlas = SpriteMan.GetByName(spriteAtlasName);
             var sprite = sptiteAtlas.GetSpriteSize(spriteIndex);
-            Lookup.Add(ch, (sptiteAtlas.Id, spriteIndex, sprite.X));
+            Lookup.Add(ch, (sptiteAtlas.Id, spriteIndex, sprite.X, sprite.Y));
 
             return this;
         }

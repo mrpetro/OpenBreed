@@ -7,10 +7,10 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Database.Interface;
-using OpenBreed.Game;
 using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -41,11 +41,16 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-        public static void SetupItemManager(this IHostBuilder hostBuilder)
+        public static void SetupItemManager(this IHostBuilder hostBuilder, Action<ItemsMan, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ItemsMan>();
+                services.AddSingleton<ItemsMan>((sp) =>
+                {
+                    var itemsMan = new ItemsMan(sp.GetService<ILogger>());
+                    action.Invoke(itemsMan, sp);
+                    return itemsMan;
+                });
             });
         }
 

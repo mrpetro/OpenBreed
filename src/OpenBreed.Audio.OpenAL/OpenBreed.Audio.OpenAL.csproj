@@ -8,16 +8,21 @@
 
   <ItemGroup>
     <None Remove="openal32.dll" />
+    <None Remove="openal32.license.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="openal32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="openal32.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTK" Version="3.3.2" />
+    <PackageReference Include="OpenTK" Version="4.6.7" />
+	<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

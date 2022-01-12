@@ -17,6 +17,7 @@ using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Worlds
@@ -78,8 +79,8 @@ namespace OpenBreed.Sandbox.Worlds
         {
             var hudCamera = cameraHelper.CreateCamera(0.0f,
                                                       0.0f,
-                                                      viewClient.ClientRectangle.Width,
-                                                      viewClient.ClientRectangle.Height);
+                                                      viewClient.ClientRectangle.Size.X,
+                                                      viewClient.ClientRectangle.Size.Y);
 
             hudCamera.Tag = "DebugHudCamera";
 
@@ -90,9 +91,6 @@ namespace OpenBreed.Sandbox.Worlds
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
             hudViewport.SetViewportCamera(hudCamera.Id);
-
-            //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ClientResizedEventArgs)a));
-            //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateCameraFov(hudCamera, (ClientResizedEventArgs)a));
 
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));
         }

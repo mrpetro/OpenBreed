@@ -1,5 +1,8 @@
 ﻿using OpenTK;
 using OpenTK.Input;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 
 namespace OpenBreed.Input.Interface
@@ -12,7 +15,7 @@ namespace OpenBreed.Input.Interface
 
         event EventHandler<KeyboardKeyEventArgs> KeyUp;
 
-        event EventHandler<KeyPressEventArgs> KeyPress;
+        //event EventHandler<KeyPressEventArgs> KeyPress;
 
         event EventHandler<MouseMoveEventArgs> MouseMove;
 
@@ -44,7 +47,7 @@ namespace OpenBreed.Input.Interface
 
         #region Public Methods
 
-        void AddPlayerKeyBinding(IPlayer player, string controlType, string controlAction, Key key);
+        void AddPlayerKeyBinding(IPlayer player, string controlType, string controlAction, Keys key);
 
         void RegisterHandler(IInputHandler handler);
 

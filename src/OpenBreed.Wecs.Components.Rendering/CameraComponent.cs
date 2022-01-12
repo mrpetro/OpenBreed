@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenTK;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {

@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Physics.Interface;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 
@@ -178,13 +179,13 @@ namespace OpenBreed.Physics.Generic.Managers
 
         private void GetAabbIndices(Box2 aabb, out int left, out int right, out int bottom, out int top)
         {
-            int xMod = (int)aabb.Right % CellSize;
-            int yMod = (int)aabb.Top % CellSize;
+            int xMod = (int)aabb.Max.X % CellSize;
+            int yMod = (int)aabb.Max.Y % CellSize;
 
-            left = (int)aabb.Left >> 4;
-            right = (int)aabb.Right >> 4;
-            bottom = (int)aabb.Bottom >> 4;
-            top = (int)aabb.Top >> 4;
+            left = (int)aabb.Min.X >> 4;
+            right = (int)aabb.Max.X >> 4;
+            bottom = (int)aabb.Min.Y >> 4;
+            top = (int)aabb.Max.Y >> 4;
 
             if (xMod > 0)
                 right++;

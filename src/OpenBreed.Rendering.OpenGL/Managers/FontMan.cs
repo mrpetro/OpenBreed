@@ -4,7 +4,8 @@ using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
@@ -16,6 +17,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly ITextureMan textureMan;
         private readonly ISpriteMan spriteMan;
         private readonly ISpriteRenderer spriteRenderer;
+        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly List<IFont> items = new List<IFont>();
         private readonly Dictionary<string, IFont> aliases = new Dictionary<string, IFont>();
         private readonly TextMeasurer textMeasurer = new TextMeasurer();
@@ -25,11 +27,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Constructors
 
-        public FontMan(ITextureMan textureMan, ISpriteMan spriteMan, ISpriteRenderer spriteRenderer)
+        public FontMan(ITextureMan textureMan, ISpriteMan spriteMan, ISpriteRenderer spriteRenderer, IPrimitiveRenderer primitiveRenderer)
         {
             this.textureMan = textureMan;
             this.spriteMan = spriteMan;
             this.spriteRenderer = spriteRenderer;
+            this.primitiveRenderer = primitiveRenderer;
         }
 
         #endregion Internal Constructors
@@ -43,12 +46,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public IFontAtlasBuilder Create()
         {
-            return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer);
+            return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer, primitiveRenderer);
         }
 
         public void RenderPart(int fontId, string text, Vector2 origin, float order, Box2 clipBox)
         {
-            GL.Translate(origin.X, origin.Y, 0.0f);
+            primitiveRenderer.Translate(new Vector3(origin.X, origin.Y, 0.0f));
             GetById(fontId).Draw(text, clipBox);
         }
 
@@ -77,7 +80,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             if (aliases.TryGetValue(alias, out result))
                 return result;
 
-            var fontGenerator = new FontFromOSAtlasGenerator(this, textMeasurer, textureMan);
+            var fontGenerator = new FontFromOSAtlasGenerator(this, textMeasurer, textureMan, primitiveRenderer);
             fontGenerator.SetName(fontName);
             fontGenerator.SetSize(fontSize);
             var font = fontGenerator.Build();
@@ -103,32 +106,23 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void Render(Box2 clipBox, float dt, FontRenderer fontRenderer)
         {
             GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
             GL.BlendColor(Color4.Black);
-            //GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
-            GL.Enable(EnableCap.Texture2D);
 
             fontRenderer.Invoke(clipBox, dt);
 
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 
         public void RenderStart(Vector2 pos)
         {
-            GL.Enable(EnableCap.Texture2D);
-            GL.PushMatrix();
-
-            GL.Translate(pos.X, pos.Y, 0.0f);
-
+            primitiveRenderer.PushMatrix();
+            primitiveRenderer.Translate(new Vector3(pos.X, pos.Y, 0.0f));
         }
 
         public void RenderEnd()
         {
-            GL.PopMatrix();
-            GL.Disable(EnableCap.Texture2D);
+            primitiveRenderer.PopMatrix();
         }
 
         #endregion Internal Methods

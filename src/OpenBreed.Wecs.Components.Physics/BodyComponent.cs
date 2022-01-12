@@ -2,6 +2,7 @@
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;

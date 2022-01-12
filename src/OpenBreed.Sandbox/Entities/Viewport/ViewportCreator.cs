@@ -7,6 +7,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Sandbox.Entities.Viewport
 {

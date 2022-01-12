@@ -1,6 +1,4 @@
 using OpenBreed.Common.Logging;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenTK;
 using System.Drawing;

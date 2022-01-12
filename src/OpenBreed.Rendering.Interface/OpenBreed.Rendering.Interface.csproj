@@ -7,7 +7,8 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTK" Version="3.3.2" />
+    <PackageReference Include="OpenTK" Version="4.6.7" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

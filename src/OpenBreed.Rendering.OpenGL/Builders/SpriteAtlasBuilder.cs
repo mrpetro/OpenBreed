@@ -3,6 +3,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 
@@ -125,10 +126,10 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                 bound.Translate(offset);
                 var spriteData = new SpriteData
                 {
-                    U = (int)bound.Left,
-                    V = (int)bound.Top,
-                    Width = (int)bound.Width,
-                    Height = (int)bound.Height
+                    U = (int)bound.Min.X,
+                    V = (int)bound.Max.Y,
+                    Width = (int)bound.Size.X,
+                    Height = (int)bound.Size.Y
                 };
 
                 spriteData.Vbo = spriteMan.CreateSpriteVertices(spriteData, Texture.Width, Texture.Height);

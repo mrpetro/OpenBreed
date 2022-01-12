@@ -1,20 +1,25 @@
 ﻿using OpenBreed.Rendering.Interface;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
 using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
     public class Texture : ITexture, IDisposable
     {
-        #region Private Constructors
+        #region Public Fields
 
-        private Texture(int id)
+        #endregion Public Fields
+
+        #region Public Constructors
+
+        public Texture(int id)
         {
             InternalId = id;
         }
 
-        #endregion Private Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 
@@ -33,48 +38,70 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             {
                 case System.Drawing.Imaging.PixelFormat.Indexed:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Gdi:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Alpha:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.PAlpha:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Extended:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Canonical:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Undefined:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format1bppIndexed:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format4bppIndexed:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format8bppIndexed:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format16bppGrayScale:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format16bppRgb555:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format16bppRgb565:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format16bppArgb1555:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format24bppRgb:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format32bppRgb:
                     return PixelInternalFormat.Rgb;
+
                 case System.Drawing.Imaging.PixelFormat.Format32bppArgb:
                     return PixelInternalFormat.Rgba;
+
                 case System.Drawing.Imaging.PixelFormat.Format32bppPArgb:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format48bppRgb:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format64bppArgb:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Format64bppPArgb:
                     break;
+
                 case System.Drawing.Imaging.PixelFormat.Max:
                     break;
+
                 default:
                     break;
             }
@@ -82,77 +109,24 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             throw new NotSupportedException();
         }
 
-        private static System.Drawing.Imaging.PixelFormat GetSupportedPixelFormat(System.Drawing.Imaging.PixelFormat pixelFormat)
-        {
-            switch (pixelFormat)
-            {
-                case System.Drawing.Imaging.PixelFormat.Indexed:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Gdi:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Alpha:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.PAlpha:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Extended:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Canonical:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Undefined:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format1bppIndexed:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format4bppIndexed:
-                    return System.Drawing.Imaging.PixelFormat.Format32bppArgb;
-                case System.Drawing.Imaging.PixelFormat.Format8bppIndexed:
-                    return System.Drawing.Imaging.PixelFormat.Format32bppArgb;
-                case System.Drawing.Imaging.PixelFormat.Format16bppGrayScale:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format16bppRgb555:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format16bppRgb565:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format16bppArgb1555:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format24bppRgb:
-                    return System.Drawing.Imaging.PixelFormat.Format32bppArgb;
-                case System.Drawing.Imaging.PixelFormat.Format32bppRgb:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format32bppArgb:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format32bppPArgb:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format48bppRgb:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format64bppArgb:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Format64bppPArgb:
-                    break;
-                case System.Drawing.Imaging.PixelFormat.Max:
-                    break;
-                default:
-                    break;
-            }
-
-            return pixelFormat;
-        }
-
         public static Texture CreateFromBitmap(Bitmap bitmap)
-        {   
-            //Generate empty texture
-            var textureId = GL.GenTexture();
-            //Link empty texture to texture2d
+        {
+            // Generate handle
+            int textureId = GL.GenTexture();
+
+            // Bind the handle
             GL.BindTexture(TextureTarget.Texture2D, textureId);
 
             var supportedPixelFormat = GetSupportedPixelFormat(bitmap.PixelFormat);
-            //Lock pixel data to memory and prepare for pass through
+
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                             System.Drawing.Imaging.ImageLockMode.ReadOnly,
-                                             supportedPixelFormat);
+                                      ImageLockMode.ReadOnly,
+                                      supportedPixelFormat);
 
             var glPixelFormat = ToGlPixelFormat(supportedPixelFormat);
 
-            GL.TexImage2D(TextureTarget.Texture2D, 0, glPixelFormat, bitmap.Width, bitmap.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, glPixelFormat, bitmap.Width, bitmap.Height, 0, OpenTK.Graphics.OpenGL4.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
 
@@ -166,11 +140,104 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return texture;
         }
 
+        public static Texture LoadFromFile(string path)
+        {
+            using (var image = new Bitmap(path))
+                return CreateFromBitmap(image);
+        }
+
+        public void Use(TextureUnit unit)
+        {
+            GL.ActiveTexture(unit);
+            GL.BindTexture(TextureTarget.Texture2D, InternalId);
+        }
+
         public void Dispose()
         {
             GL.DeleteTexture(InternalId);
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private static System.Drawing.Imaging.PixelFormat GetSupportedPixelFormat(System.Drawing.Imaging.PixelFormat pixelFormat)
+        {
+            switch (pixelFormat)
+            {
+                case System.Drawing.Imaging.PixelFormat.Indexed:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Gdi:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Alpha:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.PAlpha:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Extended:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Canonical:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Undefined:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format1bppIndexed:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format4bppIndexed:
+                    return System.Drawing.Imaging.PixelFormat.Format32bppArgb;
+
+                case System.Drawing.Imaging.PixelFormat.Format8bppIndexed:
+                    return System.Drawing.Imaging.PixelFormat.Format32bppArgb;
+
+                case System.Drawing.Imaging.PixelFormat.Format16bppGrayScale:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format16bppRgb555:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format16bppRgb565:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format16bppArgb1555:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format24bppRgb:
+                    return System.Drawing.Imaging.PixelFormat.Format32bppArgb;
+
+                case System.Drawing.Imaging.PixelFormat.Format32bppRgb:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format32bppArgb:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format32bppPArgb:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format48bppRgb:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format64bppArgb:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Format64bppPArgb:
+                    break;
+
+                case System.Drawing.Imaging.PixelFormat.Max:
+                    break;
+
+                default:
+                    break;
+            }
+
+            return pixelFormat;
+        }
+
+        #endregion Private Methods
     }
 }

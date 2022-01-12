@@ -4,6 +4,7 @@ using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -28,7 +29,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         internal readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
         internal float Height;
         internal ITexture Texture;
-        internal int ibo;
         internal List<int> vboList;
 
         #endregion Internal Fields
@@ -43,11 +43,12 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         #region Internal Constructors
 
-        internal FontFromOSAtlasGenerator(FontMan fontMan, TextMeasurer textMeasurer, ITextureMan textureMan)
+        internal FontFromOSAtlasGenerator(FontMan fontMan, TextMeasurer textMeasurer, ITextureMan textureMan, IPrimitiveRenderer primitiveRenderer)
         {
             this.fontMan = fontMan;
             this.textMeasurer = textMeasurer;
             this.textureMan = textureMan;
+            PrimitiveRenderer = primitiveRenderer;
         }
 
         #endregion Internal Constructors
@@ -62,6 +63,8 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         internal int Id { get; private set; }
 
+        internal IPrimitiveRenderer PrimitiveRenderer { get; }
+
         #endregion Internal Properties
 
         #region Public Methods
@@ -74,8 +77,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             Characters = new int[256];
             for (int i = 0; i < 256; i++)
                 Characters[i] = i;
-
-            RenderTools.CreateIndicesArray(indices, out ibo);
 
             Height = BuildCoords(FontName, FontSize);
 
@@ -174,23 +175,34 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             {
                 var bitmap = GenerateCharacters(font, out Size maxCharSize);
 
+                //bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
                 Texture = textureMan.Create($"Textures/Fonts/{fontName}/{fontSize}", bitmap);
 
-                for (int i = 0; i < Characters.Length; i++)
+                for (int ci = 0; ci < Characters.Length; ci++)
                 {
-                    if (!Lookup.ContainsKey(Characters[i]))
+                    if (!Lookup.ContainsKey(Characters[ci]))
                     {
-                        var charSize = textMeasurer.MeasureSize(font, (char)Characters[i]);
-                        var charWidth = textMeasurer.MeasureWidth(font, (char)Characters[i]);
+                        var charSize = textMeasurer.MeasureSize(font, (char)Characters[ci]);
+                        var charWidth = textMeasurer.MeasureWidth(font, (char)Characters[ci]);
 
-                        var coord = new Vector2(i * maxCharSize.Width, 0);
-                        var vertices = CreateVertices(coord, charSize.Width, charSize.Height);
+                        var texCoord = new Vector2(ci * maxCharSize.Width, 0);
+                        var vertices = CreateVertices(texCoord, charSize.Width, charSize.Height);
 
-                        int vbo;
-                        RenderTools.CreateVertexArray(vertices, out vbo);
-                        vboList.Add(vbo);
+                        var vertexArrayBuilder = PrimitiveRenderer.CreatePosTexCoordArray();
+                        vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
+                        vertexArrayBuilder.AddVertex(vertices[1].position, vertices[1].texCoord);
+                        vertexArrayBuilder.AddVertex(vertices[2].position, vertices[2].texCoord);
+                        vertexArrayBuilder.AddVertex(vertices[3].position, vertices[3].texCoord);
 
-                        Lookup.Add(Characters[i], (i, charWidth));
+                        vertexArrayBuilder.AddTriangleIndices(0, 1, 3);
+                        vertexArrayBuilder.AddTriangleIndices(1, 2, 3);
+
+                        var vao = vertexArrayBuilder.CreateTexturedVao();
+
+                        vboList.Add(vao);
+
+                        Lookup.Add(Characters[ci], (ci, charWidth));
                     }
                 }
 

@@ -5,7 +5,7 @@ using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 
@@ -25,17 +25,17 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly Dictionary<string, TileAtlas> names = new Dictionary<string, TileAtlas>();
         private readonly ITextureMan textureMan;
         private readonly ILogger logger;
+        private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        public TileMan(ITextureMan textureMan, ILogger logger)
+        public TileMan(ITextureMan textureMan, ILogger logger, IPrimitiveRenderer primitiveRenderer)
         {
             this.textureMan = textureMan;
             this.logger = logger;
-
-            RenderTools.CreateIndicesArray(indicesArray, out ibo);
+            this.primitiveRenderer = primitiveRenderer;
         }
 
         #endregion Internal Constructors
@@ -78,10 +78,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void Render(int atlasId, int imageId)
         {
             var atlas = items[atlasId];
-
-            GL.BindTexture(TextureTarget.Texture2D, atlas.Texture.InternalId);
-            RenderTools.Draw(atlas.data[imageId].Vbo, ibo, 6);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
+            var size = atlas.TileSize;
+            var vao = atlas.data[imageId].Vbo;
+            primitiveRenderer.DrawSprite(atlas.Texture, vao, new Vector3(0,0,0), new Vector2(size, size));
         }
 
         #endregion Public Methods
@@ -98,12 +97,20 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return items.Count - 1;
         }
 
-        internal int CreateTileVertices(TileData spriteData, int tileSize, int width, int height)
+        internal int CreateTileVertices(TileData tileData, int tileSize, int width, int height)
         {
-            var vertices = CreateVertices(spriteData, tileSize, width, height);
-            int vbo;
-            RenderTools.CreateVertexArray(vertices, out vbo);
-            return vbo;
+            var vertices = CreateVertices(tileData, tileSize, width, height);
+
+            var vertexArrayBuilder = primitiveRenderer.CreatePosTexCoordArray();
+            vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[1].position, vertices[1].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[2].position, vertices[2].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[3].position, vertices[3].texCoord);
+
+            vertexArrayBuilder.AddTriangleIndices(0, 1, 3);
+            vertexArrayBuilder.AddTriangleIndices(1, 2, 3);
+
+            return vertexArrayBuilder.CreateTexturedVao();
         }
 
         #endregion Internal Methods

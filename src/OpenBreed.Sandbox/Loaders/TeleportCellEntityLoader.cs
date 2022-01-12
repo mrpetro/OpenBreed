@@ -4,6 +4,7 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Loaders

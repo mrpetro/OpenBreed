@@ -1,4 +1,5 @@
 ﻿using OpenTK;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Systems.Physics.Helpers
 {
@@ -17,16 +18,16 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
         /// <returns>True if boxes are colliding, false otherwise</returns>
         public static bool CollidesWith(this Box2 thisBox, Box2 otherBox)
         {
-            if (thisBox.Left > otherBox.Right)
+            if (thisBox.Min.X > otherBox.Max.X)
                 return false;
 
-            if (thisBox.Right < otherBox.Left)
+            if (thisBox.Max.X < otherBox.Min.X)
                 return false;
 
-            if (thisBox.Bottom > otherBox.Top)
+            if (thisBox.Min.Y > otherBox.Max.Y)
                 return false;
 
-            if (thisBox.Top < otherBox.Bottom)
+            if (thisBox.Max.Y < otherBox.Min.Y)
                 return false;
 
             return true;
@@ -39,8 +40,8 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
         /// <returns>Center point</returns>
         public static Vector2 GetCenter(this Box2 thisBox)
         {
-            return new Vector2((thisBox.Left + thisBox.Right) / 2.0f,
-                               (thisBox.Bottom + thisBox.Top) / 2.0f);
+            return new Vector2((thisBox.Min.X + thisBox.Max.X) / 2.0f,
+                               (thisBox.Min.Y + thisBox.Max.Y) / 2.0f);
         }
 
         #endregion Public Methods

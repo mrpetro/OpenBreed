@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Components;
 using OpenTK;
 using System.Collections.Generic;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Control
 {

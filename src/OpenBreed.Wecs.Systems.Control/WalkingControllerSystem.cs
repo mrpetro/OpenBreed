@@ -3,6 +3,7 @@ using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Control.Inputs;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -76,7 +77,7 @@ namespace OpenBreed.Wecs.Systems.Control
             if (!input.Changed)
                 return;
 
-            walkingControl.Direction = new OpenTK.Vector2(input.AxisX, input.AxisY);
+            walkingControl.Direction = new Vector2(input.AxisX, input.AxisY);
             entity.RaiseEvent(new ControlDirectionChangedEventArgs(walkingControl.Direction));
         }
 

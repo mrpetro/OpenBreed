@@ -2,7 +2,8 @@
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
@@ -39,17 +40,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Render(Matrix4 transform, Box2 clipBox, int depth, float dt)
         {
-            GL.PushMatrix();
+            primitiveRenderer.PushMatrix();
 
             try
             {
-                GL.MultMatrix(ref transform);
+                primitiveRenderer.MultMatrix(transform);
 
                 Render(clipBox, depth, dt);
             }
             finally
             {
-                GL.PopMatrix();
+                primitiveRenderer.PopMatrix();
             }
         }
 
@@ -71,8 +72,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
 
                 // Draw black box
-                GL.Color4(Color4.Black);
-                primitiveRenderer.DrawBox(clipBox);
+                primitiveRenderer.DrawBox(clipBox, Color4.Black);
 
                 GL.ColorMask(true, true, true, true);
                 GL.DepthMask(true);
@@ -95,8 +95,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
 
                 // Draw black box
-                GL.Color4(Color4.Black);
-                primitiveRenderer.DrawBox(clipBox);
+                primitiveRenderer.DrawBox(clipBox, Color4.Black);
 
                 GL.ColorMask(true, true, true, true);
                 GL.DepthMask(true);

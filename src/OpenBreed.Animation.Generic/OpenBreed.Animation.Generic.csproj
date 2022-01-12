@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Animation.Interface\OpenBreed.Animation.Interface.csproj" />
-    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj" />
   </ItemGroup>
 
 </Project>

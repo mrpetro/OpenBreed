@@ -3,6 +3,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering

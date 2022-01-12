@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
@@ -13,9 +13,10 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         private readonly ISpriteMan spriteMan;
         private readonly ISpriteRenderer spriteRenderer;
+        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly int atlasId;
 
-        private readonly Dictionary<int, (int, int, float)> Lookup = new Dictionary<int, (int, int, float)>();
+        private readonly Dictionary<int, (int, int, float, float)> Lookup = new Dictionary<int, (int, int, float, float)>();
 
         #endregion Private Fields
 
@@ -25,6 +26,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         {
             spriteMan = builder.SpriteMan;
             spriteRenderer = builder.SpriteRenderer;
+            primitiveRenderer = builder.PrimitiveRenderer; 
             Id = builder.Id;
             atlasId = builder.AtlasId;
             Lookup = builder.Lookup;
@@ -69,9 +71,9 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public void Render(string text, Box2 clipBox, Vector2 pos)
         {
             GL.Enable(EnableCap.Texture2D);
-            GL.PushMatrix();
+            primitiveRenderer.PushMatrix();
 
-            GL.Translate((int)pos.X, (int)pos.Y, 0.0f);
+            primitiveRenderer.Translate((int)pos.X, (int)pos.Y, 0.0f);
 
             var caretPosX = 0.0f;
 
@@ -82,11 +84,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 switch (ch)
                 {
                     case '\r':
-                        GL.Translate(-caretPosX, 0.0f, 0.0f);
+                        primitiveRenderer.Translate(-caretPosX, 0.0f, 0.0f);
                         caretPosX = 0.0f;
                         continue;
                     case '\n':
-                        GL.Translate(0.0f, -Height, 0.0f);
+                        primitiveRenderer.Translate(0.0f, -Height, 0.0f);
                         continue;
                     default:
                         break;
@@ -95,39 +97,40 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 Draw(ch, clipBox);
                 var width = GetWidth(ch);
                 caretPosX += width;
-                GL.Translate(width, 0.0f, 0.0f);
+                primitiveRenderer.Translate(width, 0.0f, 0.0f);
             }
 
-            GL.PopMatrix();
+            primitiveRenderer.PopMatrix();
             GL.Disable(EnableCap.Texture2D);
         }
 
         public void Draw(char ch, Box2 clipBox)
         {
-            (int, int, float) data;
+            (int, int, float, float) data;
             if (Lookup.TryGetValue(ch, out data))
             {
                 var atlasId = data.Item1;
                 var spriteIndex = data.Item2;
-                spriteRenderer.Render(new Vector3(0,0,100), atlasId, spriteIndex);
+                spriteRenderer.Render(new Vector3(0,0,100), new Vector2(data.Item3, data.Item4), atlasId, spriteIndex);
             }
         }
 
         public void Draw(string text, Box2 clipBox)
         {
-            var offset = 0.0f;
+            var posX = 0.0f;
 
             for (int i = 0; i < text.Length; i++)
             {
                 var ch = text[i];
-                var atlasId = Lookup[ch].Item1;
-                var spriteIndex = Lookup[ch].Item2;
+                var data = Lookup[ch];
+                var atlasId = data.Item1;
+                var spriteIndex = data.Item2;
+                var w = data.Item3;
+                var h = data.Item4;
 
-                GL.Translate(offset, 0.0f, 0.0f);
+                spriteRenderer.Render(new Vector3(posX, 0, 100), new Vector2(w, h), atlasId, spriteIndex);
 
-                spriteRenderer.Render(new Vector3(0, 0, 100), atlasId, spriteIndex);
-
-                offset = Lookup[ch].Item3;
+                posX += w;
             }
         }
 

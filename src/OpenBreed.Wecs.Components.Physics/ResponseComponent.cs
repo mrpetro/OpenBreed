@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using OpenTK;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Physics
 {

@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Sandbox.Entities.Projectile;
@@ -7,6 +6,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking

@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Components;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Common

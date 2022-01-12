@@ -5,6 +5,7 @@ using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly List<SpriteAtlas> items = new List<SpriteAtlas>();
         private readonly Dictionary<string, SpriteAtlas> names = new Dictionary<string, SpriteAtlas>();
         private readonly ITextureMan textureMan;
+        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -25,9 +27,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Internal Constructors
 
         public SpriteMan(ITextureMan textureMan,
-                           ILogger logger)
+                         IPrimitiveRenderer primitiveRenderer,
+                         ILogger logger)
         {
             this.textureMan = textureMan;
+            this.primitiveRenderer = primitiveRenderer;
             this.logger = logger;
         }
 
@@ -93,9 +97,18 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         internal int CreateSpriteVertices(SpriteData spriteData, int width, int height)
         {
             var vertices = CreateVertices(spriteData, width, height);
-            int vbo;
-            RenderTools.CreateVertexArray(vertices, out vbo);
-            return vbo;
+
+
+            var vertexArrayBuilder = primitiveRenderer.CreatePosTexCoordArray();
+            vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[1].position, vertices[1].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[2].position, vertices[2].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[3].position, vertices[3].texCoord);
+
+            vertexArrayBuilder.AddTriangleIndices(0, 1, 3);
+            vertexArrayBuilder.AddTriangleIndices(1, 2, 3);
+
+            return vertexArrayBuilder.CreateTexturedVao();
         }
 
         #endregion Internal Methods

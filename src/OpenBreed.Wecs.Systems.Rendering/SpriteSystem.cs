@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
@@ -99,19 +100,19 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var size = atlas.GetSpriteSize(spc.ImageId);
 
             //Test viewport for clippling here
-            if (pos.X + size.X < clipBox.Left)
+            if (pos.X + size.X < clipBox.Min.X)
                 return;
 
-            if (pos.X > clipBox.Right)
+            if (pos.X > clipBox.Max.X)
                 return;
 
-            if (pos.Y + size.Y < clipBox.Bottom)
+            if (pos.Y + size.Y < clipBox.Min.Y)
                 return;
 
-            if (pos.Y > clipBox.Top)
+            if (pos.Y > clipBox.Max.Y)
                 return;
 
-            spriteRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, spc.Order), spc.AtlasId, spc.ImageId);
+            spriteRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, spc.Order), size, spc.AtlasId, spc.ImageId);
         }
 
         #endregion Private Methods

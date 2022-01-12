@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
@@ -7,21 +7,50 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Shaders\container.png" />
 	  <None Remove="Shaders\defaultShader.frag" />
 	  <None Remove="Shaders\defaultShader.vert" />
+	  <None Remove="Shaders\nontextured.frag" />
+	  <None Remove="Shaders\nontextured.vert" />
+	  <None Remove="Shaders\shader.frag" />
+	  <None Remove="Shaders\shader.vert" />
+	  <None Remove="Shaders\textured.frag" />
+	  <None Remove="Shaders\textured.vert" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Shaders\container.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\shader.frag">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\shader.vert">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\nontextured.vert">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\nontextured.frag">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="Shaders\defaultShader.frag">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Shaders\defaultShader.vert">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="Shaders\textured.frag">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Shaders\textured.vert">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTK" Version="3.3.2" />
+    <PackageReference Include="OpenTK" Version="4.6.7" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

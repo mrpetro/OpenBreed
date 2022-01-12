@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace OpenBreed.Wecs.Worlds
 
             set
             {
-                timeMultiplier = OpenTK.MathHelper.Clamp(value, 0, MAX_TIME_MULTIPLIER);
+                timeMultiplier = MathHelper.Clamp(value, 0, MAX_TIME_MULTIPLIER);
             }
         }
 

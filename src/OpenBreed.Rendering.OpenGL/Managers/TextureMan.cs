@@ -84,7 +84,10 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 throw new InvalidOperationException($"File '{filePath}' doesn't exist.");
 
             using (var bitmap = new Bitmap(filePath))
+            {
+                bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 return InternalCreate(alias, bitmap);
+            }
         }
 
         /// <summary>
