@@ -34,6 +34,7 @@ namespace OpenBreed.Database.Xml
         XmlArrayItem("TileStamps", typeof(XmlDbTileStampTableDef)),
         XmlArrayItem("SpriteSets", typeof(XmlDbSpriteAtlasTableDef)),
         XmlArrayItem("Sounds", typeof(XmlDbSoundTableDef)),
+        XmlArrayItem("Songs", typeof(XmlDbSongTableDef)),
         XmlArrayItem("Images", typeof(XmlDbImageTableDef)),
         XmlArrayItem("Scripts", typeof(XmlDbScriptTableDef)),
         XmlArrayItem("Animations", typeof(XmlDbAnimationTableDef)),

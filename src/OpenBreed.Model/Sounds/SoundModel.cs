@@ -8,7 +8,6 @@ namespace OpenBreed.Model.Sounds
 {
     public class SoundModel
     {
-
         #region Public Properties
 
         public int BitsPerSample { get; set; }
