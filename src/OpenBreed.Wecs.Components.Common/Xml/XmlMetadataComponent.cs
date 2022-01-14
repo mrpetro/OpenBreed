@@ -17,6 +17,9 @@ namespace OpenBreed.Wecs.Components.Common.Xml
         [XmlElement("Name")]
         public string Name { get; set; }
 
+        [XmlElement("Option")]
+        public string Option { get; set; }
+
         [XmlElement("Flavor")]
         public string Flavor { get; set; }
     }

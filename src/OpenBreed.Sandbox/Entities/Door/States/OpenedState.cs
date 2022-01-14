@@ -13,7 +13,7 @@ using OpenBreed.Wecs.Systems.Physics.Extensions;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class OpenedState : IState
+    public class OpenedState : IState<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
@@ -54,7 +54,6 @@ namespace OpenBreed.Sandbox.Components.States
             entity.SetSpriteOff();
             entity.SetBodyOff();
             entity.PutStamp(stampId, 0, pos.Value);
-            //entity.SetText(0, "Door - Opened");
         }
 
         public void LeaveState(Entity entity)

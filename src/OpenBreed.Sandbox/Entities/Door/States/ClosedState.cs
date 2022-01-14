@@ -4,6 +4,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Door.States;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
@@ -22,17 +23,18 @@ namespace OpenBreed.Sandbox.Components.States
         private readonly IFsmMan fsmMan;
         private readonly ICollisionMan<Entity> collisionMan;
         private readonly IStampMan stampMan;
+        private readonly ItemsMan itemsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosedState(IFsmMan fsmMan, ICollisionMan<Entity> collisionMan, IStampMan stampMan)
+        public ClosedState(IFsmMan fsmMan, ICollisionMan<Entity> collisionMan, IStampMan stampMan, ItemsMan itemsMan )
         {
             this.fsmMan = fsmMan;
             this.collisionMan = collisionMan;
             this.stampMan = stampMan;
-
+            this.itemsMan = itemsMan;
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.DoorOpenTrigger, DoorOpenTriggerCallback);
         }
 
@@ -86,9 +88,28 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Private Methods
 
-        private void DoorOpenTriggerCallback(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
+        private void DoorOpenTriggerCallback(BodyFixture colliderTypeA, Entity actorEntity, BodyFixture colliderTypeB, Entity doorEntity, Vector2 projection)
         {
-            entityB.SetState(FsmId, (int)FunctioningImpulse.Open);
+            var metaData = doorEntity.Get<MetadataComponent>();
+
+            //Check if door requires special key
+            if (!string.IsNullOrEmpty(metaData.Option))
+            {
+                var keycardItemId = itemsMan.GetItemId(metaData.Option);
+
+                if (keycardItemId != -1)
+                {
+                    var actorInventory = actorEntity.Get<InventoryComponent>();
+
+                    var itemSlot = actorInventory.GetItemSlot(keycardItemId);
+
+                    //No keycard item then door can't be opened
+                    if (itemSlot == null)
+                        return;
+                }
+            }
+
+            doorEntity.SetState(FsmId, (int)FunctioningImpulse.Open);
         }
 
         #endregion Private Methods

@@ -3,6 +3,7 @@ using OpenBreed.Fsm.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Components.Rendering;
@@ -23,16 +24,18 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         private readonly ICollisionMan<Entity> collisionMan;
         private readonly IStampMan stampMan;
+        private readonly ItemsMan itemsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LyingState(IFsmMan fsmMan, ICollisionMan<Entity> collisionMan, IStampMan stampMan)
+        public LyingState(IFsmMan fsmMan, ICollisionMan<Entity> collisionMan, IStampMan stampMan, ItemsMan itemsMan)
         {
             this.fsmMan = fsmMan;
             this.collisionMan = collisionMan;
             this.stampMan = stampMan;
+            this.itemsMan = itemsMan;
 
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ItemPickupTrigger, PickableCollisionCallback);
         }
@@ -96,8 +99,16 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         private void PickableCollisionCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
         {
+            var metaData = entityB.Get<MetadataComponent>();
+
+            var itemId = itemsMan.GetItemId($"{metaData.Name}{metaData.Option}");
+
+            //Unknown item
+            if (itemId == -1)
+                return;
+
             entityB.SetState(FsmId, (int)FunctioningImpulse.Pick);
-            //entityA.GiveItem(
+            entityA.GiveItem(itemId, 1);
         }
 
         #endregion Private Methods

@@ -34,12 +34,30 @@ namespace OpenBreed.Sandbox.Loaders
 
         public void Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
+            var key = default(string);
+
+            switch (templateName)
+            {
+                case "DoorStandard":
+                    key = "";
+                    break;
+                case "DoorRed":
+                    key = "KeycardRed";
+                    break;
+                case "DoorGreen":
+                    key = "KeycardGreen";
+                    break;
+                case "DoorBlue":
+                    key = "KeycardBlue";
+                    break;
+            }
+
             var rightValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
             var rightAction = map.GetAction(rightValue);
 
             if (rightAction?.Name == templateName)
             {
-                doorHelper.AddHorizontal(world, ix, iy, mapper.Level);
+                doorHelper.AddHorizontal(world, ix, iy, mapper.Level, key);
                 visited[ix, iy] = true;
                 visited[ix + 1, iy] = true;
                 return;
@@ -50,7 +68,7 @@ namespace OpenBreed.Sandbox.Loaders
 
             if (downAction?.Name == templateName)
             {
-                doorHelper.AddVertical(world, ix, iy, mapper.Level);
+                doorHelper.AddVertical(world, ix, iy, mapper.Level, key);
                 visited[ix, iy] = true;
                 visited[ix, iy + 1] = true;
                 return;

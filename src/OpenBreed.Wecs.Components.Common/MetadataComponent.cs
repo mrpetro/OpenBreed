@@ -6,6 +6,7 @@
 
         string Level { get; }
         string Name { get; }
+        string Option { get; }
         string Flavor { get; }
 
         #endregion Public Properties
@@ -15,10 +16,11 @@
     {
         #region Public Constructors
 
-        public MetadataComponent(string level, string name, string flavor)
+        public MetadataComponent(string level, string name, string option, string flavor)
         {
             Level = level;
             Name = name;
+            Option = option;
             Flavor = flavor;
         }
 
@@ -28,6 +30,7 @@
 
         public string Level { get; }
         public string Name { get; }
+        public string Option { get; }
         public string Flavor { get; }
 
         #endregion Public Properties
@@ -47,7 +50,7 @@
 
         protected override IEntityComponent Create(IMetadataComponentTemplate template)
         {
-            return new MetadataComponent(template.Level, template.Name, template.Flavor);
+            return new MetadataComponent(template.Level, template.Name, template.Option, template.Flavor);
         }
 
         #endregion Protected Methods

@@ -6,6 +6,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Projectile;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
@@ -42,13 +43,15 @@ namespace OpenBreed.Sandbox.Extensions
             var stampMan = serviceProvider.GetService<IStampMan>();
             var clipMan = serviceProvider.GetService<IClipMan<Entity>>();
             var soundMan = serviceProvider.GetService<ISoundMan>();
+            var itemsMan = serviceProvider.GetService<ItemsMan>();
 
             var fsm = fsmMan.Create<Entities.Door.States.FunctioningState, Entities.Door.States.FunctioningImpulse>("Door.Functioning");
 
             fsm.AddState(new Components.States.OpeningState(fsmMan, stampMan, clipMan, soundMan));
-            fsm.AddState(new Components.States.OpenedAwaitClose(fsmMan, stampMan));
+            //fsm.AddState(new Components.States.OpenedAwaitClose(fsmMan, stampMan));
+            fsm.AddState(new Components.States.OpenedState(fsmMan, stampMan));
             fsm.AddState(new Components.States.ClosingState(fsmMan, stampMan, clipMan));
-            fsm.AddState(new Components.States.ClosedState(fsmMan, collisionMan, stampMan));
+            fsm.AddState(new Components.States.ClosedState(fsmMan, collisionMan, stampMan, itemsMan));
 
             fsm.AddTransition(Entities.Door.States.FunctioningState.Closed, Entities.Door.States.FunctioningImpulse.Open, Entities.Door.States.FunctioningState.Opening);
             fsm.AddTransition(Entities.Door.States.FunctioningState.Opening, Entities.Door.States.FunctioningImpulse.StopOpening, Entities.Door.States.FunctioningState.Opened);
@@ -62,10 +65,11 @@ namespace OpenBreed.Sandbox.Extensions
             var stampMan = serviceProvider.GetService<IStampMan>();
             var clipMan = serviceProvider.GetService<IClipMan<Entity>>();
             var soundMan = serviceProvider.GetService<ISoundMan>();
+            var itemsMan = serviceProvider.GetService<ItemsMan>();
 
             var fsm = fsmMan.Create<Entities.Pickable.States.FunctioningState, Entities.Pickable.States.FunctioningImpulse>("Pickable.Functioning");
 
-            fsm.AddState(new Entities.Pickable.States.LyingState(fsmMan, collisionMan, stampMan));
+            fsm.AddState(new Entities.Pickable.States.LyingState(fsmMan, collisionMan, stampMan, itemsMan));
             fsm.AddState(new Entities.Pickable.States.PickedState(fsmMan, stampMan, soundMan));
 
             fsm.AddTransition(Entities.Pickable.States.FunctioningState.Lying, Entities.Pickable.States.FunctioningImpulse.Pick, Entities.Pickable.States.FunctioningState.Picked);

@@ -8,6 +8,7 @@ namespace OpenBreed.Sandbox.Managers
         #region Private Fields
 
         private readonly Dictionary<int, string> itemTypes = new Dictionary<int, string>();
+        private readonly Dictionary<string, int> itemNames = new Dictionary<string, int>();
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -25,13 +26,23 @@ namespace OpenBreed.Sandbox.Managers
 
         public int RegisterItemType(string name)
         {
-            itemTypes.Add(itemTypes.Count, name);
-            return itemTypes.Count - 1;
+            var newItemId = itemTypes.Count;
+            itemTypes.Add(newItemId, name);
+            itemNames.Add(name, newItemId);
+            return newItemId;
         }
 
         public string GetItemName(int itemId)
         {
             return itemTypes[itemId];
+        }
+
+        public int GetItemId(string itemName)
+        {
+            if (itemNames.TryGetValue(itemName, out int itemId))
+                return itemId;
+            else
+                return -1;
         }
 
         #endregion Public Methods
