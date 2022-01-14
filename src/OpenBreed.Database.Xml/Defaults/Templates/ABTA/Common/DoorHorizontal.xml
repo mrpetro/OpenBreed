@@ -4,6 +4,7 @@
 		<Metadata>
 			<Level>$(level)</Level>
 			<Name>Door</Name>
+			<Option>$(key)</Option>
 			<Flavor>Horizontal</Flavor>
 		</Metadata>
 		<Timer>

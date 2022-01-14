@@ -4,6 +4,7 @@
 		<Metadata>
 			<Level>$(level)</Level>
 			<Name>SmartCard</Name>
+			<Option>3</Option>
 			<Flavor>$(flavor)</Flavor>
 		</Metadata>
 		<Fsm>

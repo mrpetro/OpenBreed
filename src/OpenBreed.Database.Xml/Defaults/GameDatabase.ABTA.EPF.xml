@@ -1182,6 +1182,9 @@
 				<Sound Id="Vanilla/Common/KeycardStandard/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
+				<Sound Id="Vanilla/Common/KeycardSpecial/Picked">
+					<DataRef>Assets.KEYS</DataRef>
+				</Sound>
 				<Sound Id="Vanilla/Common/KeycardRed/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
