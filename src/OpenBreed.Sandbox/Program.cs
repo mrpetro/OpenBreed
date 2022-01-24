@@ -83,6 +83,11 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupCoreManagers();
 
+            hostBuilder.SetupTriggerMan((triggerMan, sp) =>
+            {
+                triggerMan.RegisterGameTriggers();
+            });
+
             hostBuilder.SetupViewClient(640, 480, $"{appName} v{infoVersion}");
 
             hostBuilder.SetupBuilderFactory((builderFactory, sp) =>
@@ -218,6 +223,7 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupScreenWorldHelper();
             hostBuilder.SetupGameHudWorldHelper();
+            hostBuilder.SetupGameSmartcardWorldHelper();
             hostBuilder.SetupDebugHudWorldHelper();
             hostBuilder.SetupEntriesHelper();
             hostBuilder.SetupDoorHelper();
@@ -545,6 +551,9 @@ namespace OpenBreed.Sandbox
 
             var gameHudWorldHelper = GetManager<GameHudWorldHelper>();
             gameHudWorldHelper.Create();
+
+            var gameSmartcardWorldHelper = GetManager<GameSmartcardWorldHelper>();
+            gameSmartcardWorldHelper.Create();
 
             OnEngineInitialized();
         }

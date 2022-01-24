@@ -22,17 +22,17 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
     {
         public static void SetupRenderingSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register(() => new ViewportSystem(serviceProvider.GetService<IEntityMan>(),
+            systemFactory.Register<ViewportSystem>(() => new ViewportSystem(serviceProvider.GetService<IEntityMan>(),
                                                             serviceProvider.GetService<IWorldMan>(),
                                                             serviceProvider.GetService<IPrimitiveRenderer>(),
                                                             serviceProvider.GetService<IRenderingMan>(),
                                                             serviceProvider.GetService<IViewClient>()));
-            systemFactory.Register(() => new SpriteSystem(serviceProvider.GetService<ISpriteMan>(),
+            systemFactory.Register<SpriteSystem>(() => new SpriteSystem(serviceProvider.GetService<ISpriteMan>(),
                                                           serviceProvider.GetService<ISpriteRenderer>()));
-            systemFactory.Register(() => new StampSystem());
-            systemFactory.Register(() => new TileSystem());
-            systemFactory.Register(() => new TextPresenterSystem(serviceProvider.GetService<IFontMan>()));
-            systemFactory.Register(() => new TextSystem(serviceProvider.GetService<IEntityMan>(),
+            systemFactory.Register<StampSystem>(() => new StampSystem());
+            systemFactory.Register<TileSystem>(() => new TileSystem());
+            systemFactory.Register<TextPresenterSystem>(() => new TextPresenterSystem(serviceProvider.GetService<IFontMan>()));
+            systemFactory.Register<TextSystem>(() => new TextSystem(serviceProvider.GetService<IEntityMan>(),
                                                         serviceProvider.GetService<IFontMan>(),
                                                         serviceProvider.GetService<ILogger>()));
         }

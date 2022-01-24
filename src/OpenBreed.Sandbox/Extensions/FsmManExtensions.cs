@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
@@ -66,11 +67,12 @@ namespace OpenBreed.Sandbox.Extensions
             var clipMan = serviceProvider.GetService<IClipMan<Entity>>();
             var soundMan = serviceProvider.GetService<ISoundMan>();
             var itemsMan = serviceProvider.GetService<ItemsMan>();
+            var triggerMan = serviceProvider.GetService<ITriggerMan>();
 
             var fsm = fsmMan.Create<Entities.Pickable.States.FunctioningState, Entities.Pickable.States.FunctioningImpulse>("Pickable.Functioning");
 
-            fsm.AddState(new Entities.Pickable.States.LyingState(fsmMan, collisionMan, stampMan, itemsMan));
-            fsm.AddState(new Entities.Pickable.States.PickedState(fsmMan, stampMan, soundMan));
+            fsm.AddState(new Entities.Pickable.States.LyingState(fsmMan, collisionMan, stampMan, itemsMan, triggerMan));
+            fsm.AddState(new Entities.Pickable.States.PickedState(fsmMan, stampMan, soundMan, triggerMan));
 
             fsm.AddTransition(Entities.Pickable.States.FunctioningState.Lying, Entities.Pickable.States.FunctioningImpulse.Pick, Entities.Pickable.States.FunctioningState.Picked);
         }

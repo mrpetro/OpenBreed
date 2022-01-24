@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace OpenBreed.Core.Managers
 {
-    public class EventsMan : IEventsMan
+    internal class DefaultEventsMan : IEventsMan
     {
         #region Private Fields
 
@@ -15,7 +15,7 @@ namespace OpenBreed.Core.Managers
 
         #region Public Constructors
 
-        public EventsMan()
+        public DefaultEventsMan()
         {
         }
 

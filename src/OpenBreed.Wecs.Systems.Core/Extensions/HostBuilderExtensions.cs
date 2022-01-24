@@ -14,11 +14,11 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 
         public static void SetupCoreSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register(() => new FsmSystem(serviceProvider.GetService<IEntityMan>(),
+            systemFactory.Register<FsmSystem>(() => new FsmSystem(serviceProvider.GetService<IEntityMan>(),
                                                        serviceProvider.GetService<IFsmMan>(),
                                                        serviceProvider.GetService<ILogger>()));
-            systemFactory.Register(() => new TextInputSystem(serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register(() => new TimerSystem(serviceProvider.GetService<IEntityMan>(),
+            systemFactory.Register<TextInputSystem>(() => new TextInputSystem(serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register<TimerSystem>(() => new TimerSystem(serviceProvider.GetService<IEntityMan>(),
                                                          serviceProvider.GetService<ILogger>()));
         }
 

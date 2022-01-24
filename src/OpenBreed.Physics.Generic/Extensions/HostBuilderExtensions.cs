@@ -40,7 +40,6 @@ namespace OpenBreed.Physics.Generic.Extensions
             });
         }
 
-
         public static void SetupBroadphaseFactory<TObject>(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>

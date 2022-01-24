@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems
@@ -7,7 +8,7 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Private Fields
 
-        private readonly Dictionary<Type, Delegate> systemInitializers = new Dictionary<Type, Delegate>();
+        private readonly Dictionary<Type, Func<ISystem>> systemInitializers = new Dictionary<Type, Func<ISystem>>();
 
         #endregion Private Fields
 
@@ -15,13 +16,14 @@ namespace OpenBreed.Wecs.Systems
 
         public DefaultSystemFactory()
         {
+
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
 
-        public void Register<TSystem>(Func<TSystem> initializer) where TSystem : ISystem
+        public void Register<TSystem>(Func<ISystem> initializer) where TSystem : ISystem
         {
             var systemType = typeof(TSystem);
 
@@ -35,10 +37,10 @@ namespace OpenBreed.Wecs.Systems
         {
             var systemType = typeof(TSystem);
 
-            if (!systemInitializers.TryGetValue(systemType, out Delegate initializer))
+            if (!systemInitializers.TryGetValue(systemType, out Func<ISystem> initializer))
                 throw new InvalidOperationException($"System '{systemType}' not registered.");
 
-            return (TSystem)initializer.DynamicInvoke();
+            return (TSystem)initializer.Invoke();
         }
 
         #endregion Public Methods

@@ -168,6 +168,14 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
+        public static void SetupGameSmartcardWorldHelper(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<GameSmartcardWorldHelper>();
+            });
+        }
+
         public static void SetupDebugHudWorldHelper(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>

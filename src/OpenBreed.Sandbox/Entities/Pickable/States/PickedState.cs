@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
@@ -21,16 +22,18 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         private readonly ISoundMan soundMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PickedState(IFsmMan fsmMan, IStampMan stampMan, ISoundMan soundMan)
+        public PickedState(IFsmMan fsmMan, IStampMan stampMan, ISoundMan soundMan, ITriggerMan triggerMan)
         {
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;
             this.soundMan = soundMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors

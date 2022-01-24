@@ -43,6 +43,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             Name = builder.name;
             modules = builder.modules;
+
             Systems = builder.systems.Values.ToArray();
             worldMan = builder.worldMan;
         }

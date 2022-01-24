@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
+using System;
 
 namespace OpenBreed.Core.Extensions
 {
@@ -14,10 +15,24 @@ namespace OpenBreed.Core.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<ILogger, DefaultLogger>();
-                services.AddSingleton<IEventsMan, EventsMan>();
+                services.AddSingleton<IEventsMan, DefaultEventsMan>();
+
                 services.AddSingleton<IJobsMan, JobsMan>();
                 //services.AddSingleton<IEventQueue, EventQueue>();
                 services.AddSingleton<IMessagesMan, MessagesMan>();
+            });
+        }
+
+        public static void SetupTriggerMan(this IHostBuilder hostBuilder, Action<ITriggerMan, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ITriggerMan>((sp) =>
+                {
+                    var collisionMan = new DefaultTriggerMan(sp.GetService<ILogger>());
+                    action.Invoke(collisionMan, sp);
+                    return collisionMan;
+                });
             });
         }
 

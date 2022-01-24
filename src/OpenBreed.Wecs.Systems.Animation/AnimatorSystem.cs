@@ -51,6 +51,8 @@ namespace OpenBreed.Wecs.Systems.Animation
         {
             for (int i = 0; i < entities.Count; i++)
             {
+
+
                 Animate(entities[i], dt);
             }
         }

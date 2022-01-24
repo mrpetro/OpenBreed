@@ -14,6 +14,8 @@ namespace OpenBreed.Sandbox.Entities
         public static int Ammo { get; private set; }
         public static int CreditsSmall { get; private set; }
         public static int CreditsBig { get; private set; }
+        public static int MedkitSmall { get; private set; }
+        public static int MedkitBig { get; private set; }
         public static int SmartCard1 { get; private set; }
         public static int SmartCard2 { get; private set; }
         public static int SmartCard3 { get; private set; }
@@ -31,6 +33,8 @@ namespace OpenBreed.Sandbox.Entities
             Ammo = itemsMan.RegisterItemType("Ammo");
             CreditsSmall = itemsMan.RegisterItemType("CreditsSmall");
             CreditsBig = itemsMan.RegisterItemType("CreditsBig");
+            MedkitSmall = itemsMan.RegisterItemType("MedkitSmall");
+            MedkitBig = itemsMan.RegisterItemType("MedkitBig");
             SmartCard1 = itemsMan.RegisterItemType("SmartCard1");
             SmartCard2 = itemsMan.RegisterItemType("SmartCard2");
             SmartCard3 = itemsMan.RegisterItemType("SmartCard3");

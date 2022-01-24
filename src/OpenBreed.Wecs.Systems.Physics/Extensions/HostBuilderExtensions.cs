@@ -26,18 +26,18 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 
         public static void SetupPhysicsSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register(() => new DirectionSystemVanilla(serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register(() => new MovementSystem(serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register(() => new MovementSystemVanilla(serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register(() => new DynamicBodiesAabbUpdaterSystem(serviceProvider.GetService<IShapeMan>()));
-            systemFactory.Register(() => new DynamicBodiesCollisionCheckSystem(serviceProvider.GetService<IEntityMan>(),
+            systemFactory.Register<DirectionSystemVanilla>(() => new DirectionSystemVanilla(serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register<MovementSystem>(() => new MovementSystem(serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register<MovementSystemVanilla>(() => new MovementSystemVanilla(serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register<DynamicBodiesAabbUpdaterSystem>(() => new DynamicBodiesAabbUpdaterSystem(serviceProvider.GetService<IShapeMan>()));
+            systemFactory.Register<DynamicBodiesCollisionCheckSystem>(() => new DynamicBodiesCollisionCheckSystem(serviceProvider.GetService<IEntityMan>(),
                                                                                serviceProvider.GetService<IShapeMan>(),
                                                                                serviceProvider.GetService<ICollisionMan<Entity>>()));
-            systemFactory.Register(() => new StaticBodiesSystem(serviceProvider.GetService<IEntityMan>(),
+            systemFactory.Register<StaticBodiesSystem>(() => new StaticBodiesSystem(serviceProvider.GetService<IEntityMan>(),
                                                                 serviceProvider.GetService<IShapeMan>(),
                                                                 serviceProvider.GetService<IEventsMan>()));
 
-            systemFactory.Register(() => new CollisionResponseSystem(serviceProvider.GetService<IEntityMan>(),
+            systemFactory.Register<CollisionResponseSystem>(() => new CollisionResponseSystem(serviceProvider.GetService<IEntityMan>(),
                                                                      serviceProvider.GetService<IWorldMan>(),
                                                                      serviceProvider.GetService<ICollisionMan<Entity>>()));
         }

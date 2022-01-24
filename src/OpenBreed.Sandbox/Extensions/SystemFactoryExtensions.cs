@@ -13,13 +13,13 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupUnknownMapCellDisplaySystem(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register(() => new UnknownMapCellDisplaySystem(serviceProvider.GetService<IPrimitiveRenderer>(),
+            systemFactory.Register<UnknownMapCellDisplaySystem>(() => new UnknownMapCellDisplaySystem(serviceProvider.GetService<IPrimitiveRenderer>(),
                                                                          serviceProvider.GetService<IFontMan>()));
         }
 
         public static void SetupGroupMapCellDisplaySystem(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register(() => new GroupMapCellDisplaySystem(serviceProvider.GetService<IPrimitiveRenderer>(),
+            systemFactory.Register<GroupMapCellDisplaySystem>(() => new GroupMapCellDisplaySystem(serviceProvider.GetService<IPrimitiveRenderer>(),
                                                                        serviceProvider.GetService<IFontMan>()));
         }
 
