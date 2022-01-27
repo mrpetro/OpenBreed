@@ -8,11 +8,9 @@ namespace OpenBreed.Core.Managers
 
         void Raise<T>(object sender, T eventArgs) where T : EventArgs;
 
-        void Subscribe<T>(object sender, Action<object, T> callback) where T : EventArgs;
-        void SubscribeEx<T>(Action<object, T> callback) where T : EventArgs;
+        void Subscribe<T>(Action<object, T> callback) where T : EventArgs;
 
-        void Unsubscribe<T>(object sender, Action<object, T> callback) where T : EventArgs;
-        void UnsubscribeEx<T>(Action<object, T> callback) where T : EventArgs;
+        void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs;
 
         #endregion Public Methods
     }

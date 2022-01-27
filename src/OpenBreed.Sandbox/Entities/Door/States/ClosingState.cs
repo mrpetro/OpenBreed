@@ -23,16 +23,18 @@ namespace OpenBreed.Sandbox.Components.States
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         private readonly IClipMan<Entity> clipMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosingState(IFsmMan fsmMan, IStampMan stampMan, IClipMan<Entity> clipMan)
+        public ClosingState(IFsmMan fsmMan, IStampMan stampMan, IClipMan<Entity> clipMan, ITriggerMan triggerMan)
         {
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;
             this.clipMan = clipMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -63,19 +65,16 @@ namespace OpenBreed.Sandbox.Components.States
             //entity.SetText(0, "Door - Closing");
             entity.PutStamp(stampId, 0, pos.Value);
 
-            entity.Subscribe<AnimFinishedEventArgs>(OnAnimStopped);
+            triggerMan.OnEntityAnimFinished(entity, OnAnimStopped, singleTime: true);
         }
 
         public void LeaveState(Entity entity)
         {
             entity.SetSpriteOff();
-
-            entity.Unsubscribe<AnimFinishedEventArgs>(OnAnimStopped);
         }
 
-        private void OnAnimStopped(object sender, AnimFinishedEventArgs e)
+        private void OnAnimStopped(Entity entity, AnimFinishedEventArgs e)
         {
-            var entity = sender as Entity;
             entity.SetState(FsmId, (int)FunctioningImpulse.StopClosing);
         }
 

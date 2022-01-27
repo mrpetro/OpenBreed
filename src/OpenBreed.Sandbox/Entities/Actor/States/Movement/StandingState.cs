@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Core.Managers;
@@ -16,10 +17,6 @@ using OpenTK.Mathematics;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
-    public interface ITriggerMan
-    {
-    }
-
     public class StandingState : IState<MovementState, MovementImpulse>
     {
         #region Private Fields
@@ -27,15 +24,17 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         private const string ANIM_PREFIX = "Vanilla/Common";
         private readonly IFsmMan fsmMan;
         private readonly IClipMan<Entity> clipMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public StandingState(IFsmMan fsmMan, IClipMan<Entity> clipMan)
+        public StandingState(IFsmMan fsmMan, IClipMan<Entity> clipMan, ITriggerMan triggerMan)
         {
             this.fsmMan = fsmMan;
             this.clipMan = clipMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -66,25 +65,19 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             entity.PlayAnimation(0, clipId);
             entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
-            entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
-
-
-            //triggerMan.OnTrigger<ControlDirectionChangedEventArgs>(entity, OnControlDirectionChanged);
+            triggerMan.OnEntityControlDirectionChanged(entity, OnControlDirectionChanged, singleTime: true);
         }
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs eventArgs)
+        private void OnControlDirectionChanged(Entity entity, ControlDirectionChangedEventArgs eventArgs)
         {
-            var entity = sender as Entity;
-
             if (eventArgs.Direction != Vector2.Zero)
             {
                 entity.SetState(FsmId, (int)MovementImpulse.Walk);

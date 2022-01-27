@@ -24,7 +24,7 @@ namespace OpenBreed.Wecs.Entities
         {
             this.eventsMan = eventsMan;
 
-            this.eventsMan.SubscribeEx<EntityLeftEventArgs>(OnEntityLeftWorld);
+            this.eventsMan.Subscribe<EntityLeftEventArgs>(OnEntityLeftWorld);
         }
 
         #endregion Internal Constructors
@@ -72,16 +72,6 @@ namespace OpenBreed.Wecs.Entities
             var newEntity = new Entity(this, initialComponents);
             newEntity.Id = entities.Add(newEntity);
             return newEntity;
-        }
-
-        public void Subscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs
-        {
-            eventsMan.Subscribe<T>(entity, callback);
-        }
-
-        public void Unsubscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs
-        {
-            eventsMan.Unsubscribe<T>(entity, callback);
         }
 
         #endregion Public Methods

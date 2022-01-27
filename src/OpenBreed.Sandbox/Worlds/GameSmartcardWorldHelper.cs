@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
-        private readonly ITriggerMan triggerMan;
+        private readonly IEventsManEx triggerMan;
 
         #endregion Private Fields
 
@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Worlds
                                   IRepositoryProvider repositoryProvider, 
                                   IDataLoaderFactory dataLoaderFactory,
                                   SpriteAtlasDataProvider spriteAtlasDataProvider,
-                                  ITriggerMan triggerMan)
+                                  IEventsManEx triggerMan)
         {
             this.systemFactory = systemFactory;
             this.renderableFactory = renderableFactory;
@@ -107,7 +107,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void Create()
         {
-            triggerMan.OnEachAction(GameTriggerTypes.HeroPickedItem, PerformShowSmartcardReader);
+            triggerMan.OnEachAction(GameEventTypes.HeroPickedItem, PerformShowSmartcardReader);
 
 
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();

@@ -87,11 +87,6 @@ namespace OpenBreed.Wecs.Worlds
             return worlds[worldId];
         }
 
-        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
-        {
-            eventsMan.Raise(this, eventArgs);
-        }
-
         /// <summary>
         /// Marks given world to be removed from Core, it will be removed at nearest Manager Update
         /// </summary>
@@ -132,7 +127,36 @@ namespace OpenBreed.Wecs.Worlds
 
         #endregion Public Methods
 
+        #region Internal Methods
+
+        internal void OnWorldPaused(int worldId)
+        {
+            RaiseEvent(new WorldPausedEventArgs(worldId));
+        }
+
+        internal void OnWorldUnpaused(int worldId)
+        {
+            RaiseEvent(new WorldUnpausedEventArgs(worldId));
+        }
+
+        internal void OnEntityAdded(Entity entity, int worldId)
+        {
+            RaiseEvent(new EntityEnteredEventArgs(worldId, entity.Id));
+        }
+
+        internal void OnEntityRemoved(Entity entity, int worldId)
+        {
+            RaiseEvent(new EntityLeftEventArgs(worldId, entity.Id));
+        }
+
+        #endregion Internal Methods
+
         #region Private Methods
+
+        private void RaiseEvent<T>(T eventArgs) where T : EventArgs
+        {
+            eventsMan.Raise(this, eventArgs);
+        }
 
         private void EntityMan_EnterWorldRequested(Entity entity, int worldId)
         {

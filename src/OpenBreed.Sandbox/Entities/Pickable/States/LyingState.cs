@@ -26,13 +26,13 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         private readonly ICollisionMan<Entity> collisionMan;
         private readonly IStampMan stampMan;
         private readonly ItemsMan itemsMan;
-        private readonly ITriggerMan triggerMan;
+        private readonly IEventsManEx triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LyingState(IFsmMan fsmMan, ICollisionMan<Entity> collisionMan, IStampMan stampMan, ItemsMan itemsMan, ITriggerMan triggerMan)
+        public LyingState(IFsmMan fsmMan, ICollisionMan<Entity> collisionMan, IStampMan stampMan, ItemsMan itemsMan, IEventsManEx triggerMan)
         {
             this.fsmMan = fsmMan;
             this.collisionMan = collisionMan;
@@ -112,7 +112,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
             entityB.SetState(FsmId, (int)FunctioningImpulse.Pick);
             entityA.GiveItem(itemId, 1);
 
-            triggerMan.Fire(GameTriggerTypes.HeroPickedItem, entityA.Id, itemId);
+            triggerMan.Fire(GameEventTypes.HeroPickedItem, entityA.Id, itemId);
         }
 
         #endregion Private Methods

@@ -70,7 +70,7 @@ namespace OpenBreed.Sandbox.Entities
         private readonly IEntityFactory entityFactory;
 
         private readonly IEventsMan eventsMan;
-
+        private readonly ITriggerMan triggerMan;
         private readonly ICollisionMan<Entity> collisionMan;
         private readonly IBuilderFactory builderFactory;
         private readonly IJobsMan jobMan;
@@ -80,13 +80,14 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Constructors
 
-        public TeleportHelper(IClipMan<Entity> clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan<Entity> collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IShapeMan shapeMan)
+        public TeleportHelper(IClipMan<Entity> clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, IEventsMan eventsMan, ITriggerMan triggerMan, ICollisionMan<Entity> collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IShapeMan shapeMan)
         {
             this.clipMan = clipMan;
             this.worldMan = worldMan;
             this.entityMan = entityMan;
             this.entityFactory = entityFactory;
             this.eventsMan = eventsMan;
+            this.triggerMan = triggerMan;
             this.collisionMan = collisionMan;
             this.builderFactory = builderFactory;
             this.jobMan = jobMan;
@@ -209,17 +210,17 @@ namespace OpenBreed.Sandbox.Entities
             var worldIdToRemoveFrom = actorEntity.WorldId;
 
             //Pause this world
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Pause()));
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Pause()));
             //Fade out camera
-            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
+            jobChain.Equeue(new AnimStoppedEntityJob(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
             //Remove entity from this world
             //jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => commandsMan.Post(new RemoveEntityCommand(actorEntity.WorldId, actorEntity.Id))));
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(actorEntity, teleportEntity, true)));
             //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Unpause()));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Unpause()));
             //Fade in camera
-            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
+            jobChain.Equeue(new AnimStoppedEntityJob(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
 
             jobMan.Execute(jobChain);
         }

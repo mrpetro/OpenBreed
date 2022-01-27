@@ -23,15 +23,17 @@ namespace OpenBreed.Sandbox.Components.States
 
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenedAwaitClose(IFsmMan fsmMan, IStampMan stampMan)
+        public OpenedAwaitClose(IFsmMan fsmMan, IStampMan stampMan, ITriggerMan triggerMan)
         {
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -60,28 +62,24 @@ namespace OpenBreed.Sandbox.Components.States
             entity.PutStamp(stampId, 0, pos.Value);
             //entity.SetText(0, "Door - Opened");
 
-            entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            entity.Subscribe<TimerUpdateEventArgs>(OnTimerUpdate);
+            triggerMan.OnEntityTimerElapsed(entity, OnTimerElapsed, singleTime: true);
+            triggerMan.OnEntityTimerUpdate(entity, OnTimerUpdate, singleTime: true);
 
             entity.StartTimer(0, 5.0);
         }
 
-        private void OnTimerElapsed(object sender, TimerElapsedEventArgs e)
+        private void OnTimerElapsed(Entity entity, TimerElapsedEventArgs e)
         {
             if (e.TimerId != 0)
                 return;
-
-            var entity = sender as Entity;
 
             entity.SetState(FsmId, (int)FunctioningImpulse.Close);
         }
 
-        private void OnTimerUpdate(object sender, TimerUpdateEventArgs e)
+        private void OnTimerUpdate(Entity entity, TimerUpdateEventArgs e)
         {
             if (e.TimerId != 0)
                 return;
-
-            var entity = sender as Entity;
 
             var tcp = entity.Get<TimerComponent>();
 
@@ -92,9 +90,6 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<TimerUpdateEventArgs>(OnTimerUpdate);
-            entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-
             entity.StopTimer(0);
         }
 

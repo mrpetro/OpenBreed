@@ -31,7 +31,7 @@ namespace OpenBreed.Wecs.Worlds
         private readonly HashSet<Entity> entities = new HashSet<Entity>();
         private readonly HashSet<Entity> toAdd = new HashSet<Entity>();
         private readonly HashSet<Entity> toRemove = new HashSet<Entity>();
-        private readonly IWorldMan worldMan;
+        private readonly WorldMan worldMan;
 
         private float timeMultiplier = 1.0f;
 
@@ -226,9 +226,9 @@ namespace OpenBreed.Wecs.Worlds
             Paused = paused;
 
             if (Paused)
-                worldMan.RaiseEvent(new WorldPausedEventArgs(Id));
+                worldMan.OnWorldPaused(Id);
             else
-                worldMan.RaiseEvent(new WorldUnpausedEventArgs(Id));
+                worldMan.OnWorldUnpaused(Id);
         }
 
         private void RemoveEntity(Entity entity)
@@ -236,7 +236,7 @@ namespace OpenBreed.Wecs.Worlds
             RemoveFromAllSystems(entity);
             entities.Remove(entity);
             entity.WorldId = NO_WORLD;
-            OnEntityRemoved(entity);
+            worldMan.OnEntityRemoved(entity, Id);
         }
 
         private void AddEntity(Entity entity)
@@ -244,17 +244,7 @@ namespace OpenBreed.Wecs.Worlds
             AddEntityToSystems(entity);
             entities.Add(entity);
             entity.WorldId = Id;
-            OnEntityAdded(entity);
-        }
-
-        private void OnEntityAdded(Entity entity)
-        {
-            worldMan.RaiseEvent(new EntityEnteredEventArgs(Id, entity.Id));
-        }
-
-        private void OnEntityRemoved(Entity entity)
-        {
-            worldMan.RaiseEvent(new EntityLeftEventArgs(Id, entity.Id));
+            worldMan.OnEntityAdded(entity, Id);
         }
 
         private void AddEntityToSystems(Entity entity)

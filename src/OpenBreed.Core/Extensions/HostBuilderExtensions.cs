@@ -16,6 +16,7 @@ namespace OpenBreed.Core.Extensions
             {
                 services.AddSingleton<ILogger, DefaultLogger>();
                 services.AddSingleton<IEventsMan, DefaultEventsMan>();
+                services.AddSingleton<ITriggerMan, DefaultTriggerMan>();
 
                 services.AddSingleton<IJobsMan, JobsMan>();
                 //services.AddSingleton<IEventQueue, EventQueue>();
@@ -23,13 +24,13 @@ namespace OpenBreed.Core.Extensions
             });
         }
 
-        public static void SetupTriggerMan(this IHostBuilder hostBuilder, Action<ITriggerMan, IServiceProvider> action)
+        public static void SetupEventsManEx(this IHostBuilder hostBuilder, Action<IEventsManEx, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ITriggerMan>((sp) =>
+                services.AddSingleton<IEventsManEx>((sp) =>
                 {
-                    var collisionMan = new DefaultTriggerMan(sp.GetService<ILogger>());
+                    var collisionMan = new DefaultEventsManEx(sp.GetService<ILogger>());
                     action.Invoke(collisionMan, sp);
                     return collisionMan;
                 });

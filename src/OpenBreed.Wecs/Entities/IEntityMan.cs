@@ -36,10 +36,6 @@ namespace OpenBreed.Wecs.Entities
 
         Entity Create(List<IEntityComponent> initialComponents = null);
 
-        void Subscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs;
-
-        void Unsubscribe<T>(Entity entity, Action<object, T> callback) where T : EventArgs;
-
         #endregion Public Methods
     }
 }

@@ -2,7 +2,7 @@
 
 namespace OpenBreed.Sandbox.Entities
 {
-    public static class GameTriggerTypes
+    public static class GameEventTypes
     {
         #region Public Properties
 
@@ -12,7 +12,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public static void RegisterGameTriggers(this ITriggerMan triggerMan)
+        public static void RegisterGameEvents(this IEventsManEx triggerMan)
         {
             HeroPickedItem = triggerMan.Register("Game/Hero/Picked");
         }

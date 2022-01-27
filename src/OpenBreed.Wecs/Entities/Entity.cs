@@ -122,24 +122,6 @@ namespace OpenBreed.Wecs.Entities
             entityMan.Raise(this, eventArgs);
         }
 
-        /// <summary>
-        /// Subscribe to particular event
-        /// </summary>
-        /// <param name="callback">event callback</param>
-        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
-        {
-            entityMan.Subscribe(this, callback);
-        }
-
-        /// <summary>
-        /// Unsubscribe from particular event
-        /// </summary>
-        /// <param name="callback">event callback to unsubscribe</param>
-        public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
-        {
-            entityMan.Unsubscribe(this, callback);
-        }
-
         public void Set<TComponent>(TComponent component) where TComponent : class, IEntityComponent
         {
             Debug.Assert(component != null, "Adding null component to entity is forbidden.");

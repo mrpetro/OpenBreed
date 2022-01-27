@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Fields
 
-        internal readonly IWorldMan worldMan;
+        internal readonly WorldMan worldMan;
         internal string name;
         internal Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
         internal Dictionary<Type, object> modules = new Dictionary<Type, object>();
@@ -40,7 +40,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Constructors
 
-        internal WorldBuilder(IWorldMan worldMan, ILogger logger)
+        internal WorldBuilder(WorldMan worldMan, ILogger logger)
         {
             this.worldMan = worldMan;
             this.logger = logger;

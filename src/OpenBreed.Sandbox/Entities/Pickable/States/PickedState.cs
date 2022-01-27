@@ -22,13 +22,13 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         private readonly IFsmMan fsmMan;
         private readonly IStampMan stampMan;
         private readonly ISoundMan soundMan;
-        private readonly ITriggerMan triggerMan;
+        private readonly IEventsManEx triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PickedState(IFsmMan fsmMan, IStampMan stampMan, ISoundMan soundMan, ITriggerMan triggerMan)
+        public PickedState(IFsmMan fsmMan, IStampMan stampMan, ISoundMan soundMan, IEventsManEx triggerMan)
         {
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;

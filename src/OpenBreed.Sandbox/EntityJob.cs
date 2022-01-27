@@ -1,8 +1,11 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Animation.Events;
+using OpenBreed.Wecs.Systems.Animation.Extensions;
 using System;
 
-namespace OpenBreed.Wecs.Entities
+namespace OpenBreed.Sandbox
 {
     public class EntityJob : IJob
     {
@@ -46,19 +49,21 @@ namespace OpenBreed.Wecs.Entities
         #endregion Public Methods
     }
 
-    public class EntityJob<TEventArgs> : IJob where TEventArgs : EventArgs
+    public class AnimStoppedEntityJob : IJob
     {
         #region Private Fields
 
-        private Entity entity;
-        private Action action;
+        private readonly ITriggerMan triggerMan;
+        private readonly Entity entity;
+        private readonly Action action;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntityJob(Entity entity, Action action)
+        public AnimStoppedEntityJob(ITriggerMan triggerMan, Entity entity, Action action)
         {
+            this.triggerMan = triggerMan;
             this.entity = entity;
             this.action = action;
         }
@@ -79,7 +84,8 @@ namespace OpenBreed.Wecs.Entities
 
         public void Execute()
         {
-            entity.Subscribe<TEventArgs>(OnTrigger);
+            triggerMan.OnEntityAnimFinished(entity, OnTrigger, singleTime: true);
+
             action.Invoke();
         }
 
@@ -91,9 +97,8 @@ namespace OpenBreed.Wecs.Entities
 
         #region Private Methods
 
-        private void OnTrigger(object sender, TEventArgs args)
+        private void OnTrigger(Entity e, AnimFinishedEventArgs args)
         {
-            entity.Unsubscribe<TEventArgs>(OnTrigger);
             Complete(this);
         }
 

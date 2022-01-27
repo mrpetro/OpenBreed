@@ -83,9 +83,9 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupCoreManagers();
 
-            hostBuilder.SetupTriggerMan((triggerMan, sp) =>
+            hostBuilder.SetupEventsManEx((triggerMan, sp) =>
             {
-                triggerMan.RegisterGameTriggers();
+                triggerMan.RegisterGameEvents();
             });
 
             hostBuilder.SetupViewClient(640, 480, $"{appName} v{infoVersion}");
@@ -538,7 +538,7 @@ namespace OpenBreed.Sandbox
             johnPlayerEntity.AddFollower(playerCamera);
 
 
-            GetManager<IEventsMan>().SubscribeEx<WorldInitializedEventArgs>((s, a) =>
+            GetManager<IEventsMan>().Subscribe<WorldInitializedEventArgs>((s, a) =>
             {
                 if (a.WorldId != gameWorld.Id)
                     return;

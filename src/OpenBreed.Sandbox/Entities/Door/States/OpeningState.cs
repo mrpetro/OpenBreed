@@ -28,17 +28,19 @@ namespace OpenBreed.Sandbox.Components.States
         private readonly IStampMan stampMan;
         private readonly IClipMan<Entity> clipMan;
         private readonly ISoundMan soundMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpeningState(IFsmMan fsmMan, IStampMan stampMan, IClipMan<Entity> clipMan, ISoundMan soundMan)
+        public OpeningState(IFsmMan fsmMan, IStampMan stampMan, IClipMan<Entity> clipMan, ISoundMan soundMan, ITriggerMan triggerMan)
         {
             this.fsmMan = fsmMan;
             this.stampMan = stampMan;
             this.clipMan = clipMan;
             this.soundMan = soundMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -71,14 +73,12 @@ namespace OpenBreed.Sandbox.Components.States
             //entity.SetText(0, "Door - Opening");
             entity.EmitSound(soundId);
 
-            entity.Subscribe<AnimFinishedEventArgs>(OnAnimStopped);
+            triggerMan.OnEntityAnimFinished(entity, OnAnimStopped, singleTime: true);
         }
 
         public void LeaveState(Entity entity)
         {
             entity.SetSpriteOff();
-
-            entity.Unsubscribe<AnimFinishedEventArgs>(OnAnimStopped);
 
             var bodyCmp = entity.Get<BodyComponent>();
             var fixture = bodyCmp.Fixtures.First();
@@ -89,16 +89,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Private Methods
 
-        //private void OnAnimChanged(object sender, AnimChangedEventArgs e)
-        //{
-        //    var entity = sender as Entity;
-
-        //    entity.PostCommand(new SpriteSetCommand(entity.Id, (int)e.Frame));
-        //}
-
-        private void OnAnimStopped(object sender, AnimFinishedEventArgs e)
+        private void OnAnimStopped(Entity entity, AnimFinishedEventArgs e)
         {
-            var entity = sender as Entity;
             entity.SetState(FsmId, (int)FunctioningImpulse.StopOpening);
         }
 

@@ -101,7 +101,7 @@ namespace OpenBreed.Sandbox.Worlds
             debugHudViewport.EnterWorld(world.Id);
             textViewport.EnterWorld(world.Id);
 
-            gameViewport.Subscribe<ViewportClickedEventArgs>(OnViewportClick);
+            //gameViewport.Subscribe<ViewportClickedEventArgs>(OnViewportClick);
 
             return world;
         }
@@ -110,10 +110,10 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Private Methods
 
-        private void OnViewportClick(object sender, ViewportClickedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
+        //private void OnViewportClick(object sender, ViewportClickedEventArgs args)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         private void ResizeGameViewport(Entity viewport, ClientResizedEventArgs args)
         {
