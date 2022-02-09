@@ -1,16 +1,14 @@
-﻿using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
-using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
-    public class FollowerSystem : SystemBase, IUpdatableSystem
+    public class FollowerSystem : UpdatableSystemBase
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
 
         #endregion Private Fields
@@ -27,41 +25,11 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #endregion Public Constructors
 
-        #region Public Methods
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-        }
-
-        public void Update(float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
-                Update(entities[i], dt);
-        }
-
-        #endregion Public Methods
-
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
-        protected override void OnAddEntity(Entity entity)
+        protected override void UpdateEntity(Entity entity, float dt)
         {
-            entities.Add(entity);
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private void Update(Entity followed, float dt)
-        {
-            var fc = followed.Get<FollowedComponent>();
+            var fc = entity.Get<FollowedComponent>();
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
@@ -72,22 +40,26 @@ namespace OpenBreed.Wecs.Systems.Control
 
                 //If follower is not in the same world as folloed then
                 //Make sure it will arrive there
-                if (follower.WorldId != followed.WorldId)
+                if (follower.WorldId != entity.WorldId)
                 {
                     //If follower is in limbo then enter same world as followed
                     //Otherwise follower needs to leave its current world
-                    if(follower.WorldId == World.NO_WORLD)
-                        follower.EnterWorld(followed.WorldId);
+                    if (follower.WorldId == World.NO_WORLD)
+                        follower.EnterWorld(entity.WorldId);
                     else
                         follower.LeaveWorld();
 
                     continue;
                 }
 
-                Glue(followed, follower);
+                Glue(entity, follower);
                 //Follow(followed, follower);
             }
         }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void Follow(Entity followed, Entity follower)
         {

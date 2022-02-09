@@ -1,18 +1,16 @@
 ﻿using OpenBreed.Audio.Interface.Managers;
-using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Components.Audio;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
-using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Audio
 {
-    public class SoundSystem : SystemBase, IUpdatableSystem
+    public class SoundSystem : UpdatableSystemBase
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
         private readonly ISoundMan soundMan;
 
         #endregion Private Fields
@@ -21,10 +19,9 @@ namespace OpenBreed.Wecs.Systems.Audio
 
         public SoundSystem(ISoundMan soundMan)
         {
-            RequireEntityWith<SoundPlayerComponent>();
-
-
             this.soundMan = soundMan;
+
+            RequireEntityWith<SoundPlayerComponent>();
         }
 
         #endregion Public Constructors
@@ -36,47 +33,25 @@ namespace OpenBreed.Wecs.Systems.Audio
             base.Initialize(world);
         }
 
-        public void Update(float dt)
-        {
-            foreach (var entity in entities)
-            {
-                var soundPlayerComponent = entity.TryGet<SoundPlayerComponent>();
-
-                if (soundPlayerComponent is null)
-                    continue;
-
-                try
-                {
-                    soundMan.PlaySample(soundPlayerComponent.SampleId);
-                }
-                finally
-                {
-                    entity.Remove<SoundPlayerComponent>();
-                }
-            }
-        }
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-            //foreach (var item in Entities)
-            //{
-            //}
-        }
-
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
-        protected override void OnAddEntity(Entity entity)
+        protected override void UpdateEntity(Entity entity, float dt)
         {
-            entities.Add(entity);
-        }
+            var soundPlayerComponent = entity.TryGet<SoundPlayerComponent>();
 
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
+            if (soundPlayerComponent is null)
+                return;
+
+            try
+            {
+                soundMan.PlaySample(soundPlayerComponent.SampleId);
+            }
+            finally
+            {
+                entity.Remove<SoundPlayerComponent>();
+            }
         }
 
         #endregion Protected Methods

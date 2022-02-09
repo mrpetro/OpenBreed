@@ -5,7 +5,7 @@ namespace OpenBreed.Wecs.Components.Control
     /// <summary>
     /// Placeholder class for attack control
     /// </summary>
-    public class AttackControlComponent : IControlComponent
+    public class AttackControlComponent : IEntityComponent
     {
         #region Public Properties
 

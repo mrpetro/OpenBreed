@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
                 return;
 
             control.AttackPrimary = true;
-            entity.RaiseEvent(new ControlFireChangedEvenrArgs(control.AttackPrimary));
+            entity.RaiseEvent(new ControlFireChangedEventArgs(control.AttackPrimary));
         }
 
         public static void StopPrimaryAttack(this Entity entity)
@@ -30,7 +30,7 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
                 return;
 
             control.AttackPrimary = false;
-            entity.RaiseEvent(new ControlFireChangedEvenrArgs(control.AttackPrimary));
+            entity.RaiseEvent(new ControlFireChangedEventArgs(control.AttackPrimary));
         }
     }
 }

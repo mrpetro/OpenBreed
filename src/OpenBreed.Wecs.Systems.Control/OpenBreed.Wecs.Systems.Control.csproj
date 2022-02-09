@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
@@ -15,6 +15,7 @@
     <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Control\OpenBreed.Wecs.Components.Control.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 

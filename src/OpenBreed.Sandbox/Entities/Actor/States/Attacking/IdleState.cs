@@ -42,7 +42,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         {
         }
 
-        private void OnControlFireChanged(Entity entity, ControlFireChangedEvenrArgs eventArgs)
+        private void OnControlFireChanged(Entity entity, ControlFireChangedEventArgs eventArgs)
         {
             if (eventArgs.Fire)
                 entity.SetState(FsmId, (int)AttackingImpulse.Shoot);

@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class StaticBodiesSystem : SystemBase, IUpdatableSystem
+    public class StaticBodiesSystem : SystemBase
     {
         #region Private Fields
 
@@ -45,14 +45,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             base.Initialize(world);
 
             broadphaseGrid = world.GetModule<IBroadphaseStatic>();
-        }
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-        }
-
-        public void Update(float dt)
-        {
         }
 
         #endregion Public Methods

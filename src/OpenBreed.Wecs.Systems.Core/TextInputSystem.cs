@@ -1,15 +1,12 @@
-﻿using OpenBreed.Core.Events;
-using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
-using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class TextInputSystem : SystemBase, IUpdatableSystem
+    public class TextInputSystem : UpdatableSystemBase
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
 
         #endregion Private Fields
@@ -26,35 +23,13 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Internal Constructors
 
-        #region Public Methods
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-        }
-
-        public void Update(float dt)
-        {
-        }
-
-        #endregion Public Methods
-
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
-        protected override void OnAddEntity(Entity entity)
+        protected override void UpdateEntity(Entity entity, float dt)
         {
-            entities.Add(entity);
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
 
         //private bool HandleTextDataInsert(TextDataInsert cmd)
         //{
@@ -129,7 +104,5 @@ namespace OpenBreed.Wecs.Systems.Core
 
         //    return true;
         //}
-
-        #endregion Private Methods
     }
 }

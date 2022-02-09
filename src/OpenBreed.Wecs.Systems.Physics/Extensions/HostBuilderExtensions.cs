@@ -37,9 +37,9 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
                                                                 serviceProvider.GetService<IShapeMan>(),
                                                                 serviceProvider.GetService<IEventsMan>()));
 
-            systemFactory.Register<CollisionResponseSystem>(() => new CollisionResponseSystem(serviceProvider.GetService<IEntityMan>(),
-                                                                     serviceProvider.GetService<IWorldMan>(),
-                                                                     serviceProvider.GetService<ICollisionMan<Entity>>()));
+            //systemFactory.Register<CollisionResponseSystem>(() => new CollisionResponseSystem(serviceProvider.GetService<IEntityMan>(),
+            //                                                         serviceProvider.GetService<IWorldMan>(),
+            //                                                         serviceProvider.GetService<ICollisionMan<Entity>>()));
         }
 
     }

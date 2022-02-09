@@ -2,16 +2,13 @@
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class TimerSystem : SystemBase, IUpdatableSystem
+    public class TimerSystem : UpdatableSystemBase
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
         private readonly ILogger logger;
 
@@ -29,47 +26,9 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Internal Constructors
 
-        #region Public Methods
-
-        public void Update(float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                Update(entities[i], dt);
-            }
-        }
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                var entity = entities[i];
-                if (entity.ComponentValues.OfType<PauseImmuneComponent>().Any())
-                    Update(entity, dt);
-            }
-        }
-
-        #endregion Public Methods
-
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
-        protected override void OnAddEntity(Entity entity)
-        {
-            entities.Add(entity);
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private void Update(Entity entity, float dt)
+        protected override void UpdateEntity(Entity entity, float dt)
         {
             var tc = entity.Get<TimerComponent>();
 
@@ -77,6 +36,10 @@ namespace OpenBreed.Wecs.Systems.Core
             for (int i = 0; i < tc.Items.Count; i++)
                 UpdateTimer(entity, tc.Items[i], dt);
         }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void UpdateTimer(Entity entity, TimerData timerData, float dt)
         {

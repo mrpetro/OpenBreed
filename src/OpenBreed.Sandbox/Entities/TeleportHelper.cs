@@ -6,6 +6,7 @@ using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -19,6 +20,7 @@ using OpenTK;
 using OpenTK.Mathematics;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities
 {
@@ -187,6 +189,7 @@ namespace OpenBreed.Sandbox.Entities
 
         private void PerformEntityExit(Entity actorEntity, Entity teleportEntity)
         {
+            // For preventing running rest of the code when actor will hit couple of teleporter blocks at same time
             if (Equals(actorEntity.State, "Teleporting"))
                 return;
 
@@ -207,18 +210,28 @@ namespace OpenBreed.Sandbox.Entities
 
             var jobChain = new JobChain();
 
-            var worldIdToRemoveFrom = actorEntity.WorldId;
+            var targetWorldId = actorEntity.WorldId;
+
+            //triggerMan.OnWorldEvent<WorldPausedEventArgs>(currentWorld, (world, args) => Console.WriteLine($"World {world} paused."), singleTime: true);
+
+
+
+
+            //currentWorld.Pause();
+
+
+
+
+
 
             //Pause this world
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Pause()));
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == targetWorldId; }, () => cameraEntity.PauseWorld(targetWorldId)));
             //Fade out camera
             jobChain.Equeue(new AnimStoppedEntityJob(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
-            //Remove entity from this world
-            //jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => commandsMan.Post(new RemoveEntityCommand(actorEntity.WorldId, actorEntity.Id))));
-            //Set position of entity to entry position in next world
+            //Set position of entity to teleport exit
             jobChain.Equeue(new EntityJob(() => SetPosition(actorEntity, teleportEntity, true)));
             //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Unpause()));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == targetWorldId; }, () => cameraEntity.UnpauseWorld(targetWorldId)));
             //Fade in camera
             jobChain.Equeue(new AnimStoppedEntityJob(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
 

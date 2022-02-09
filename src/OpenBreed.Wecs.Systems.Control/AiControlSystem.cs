@@ -2,10 +2,9 @@
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
-using OpenTK;
+using OpenBreed.Wecs.Systems.Core;
 using OpenTK.Mathematics;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Control
@@ -13,18 +12,8 @@ namespace OpenBreed.Wecs.Systems.Control
     /// <summary>
     /// Control system should be used to control actions
     /// </summary>
-    public class AiControlSystem : SystemBase, IUpdatableSystem
+    public class AiControlSystem : UpdatableSystemBase
     {
-        #region Private Fields
-
-        private readonly List<Entity> entities = new List<Entity>();
-
-        private readonly List<AiControl> aiControlComps = new List<AiControl>();
-
-        private readonly List<PositionComponent> positionComps = new List<PositionComponent>();
-
-        #endregion Private Fields
-
         #region Internal Constructors
 
         internal AiControlSystem()
@@ -35,52 +24,12 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #endregion Internal Constructors
 
-        #region Public Methods
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-        }
-
-        public void Update(float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
-                ControlEntity(dt, i);
-        }
-
-        #endregion Public Methods
-
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
-        protected override void OnAddEntity(Entity entity)
+        protected override void UpdateEntity(Entity entity, float dt)
         {
-            entities.Add(entity);
-            aiControlComps.Add(entity.Get<AiControl>());
-            positionComps.Add(entity.Get<PositionComponent>());
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            var index = entities.IndexOf(entity);
-
-            if (index < 0)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            entities.RemoveAt(index);
-            aiControlComps.RemoveAt(index);
-            positionComps.RemoveAt(index);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private void ControlEntity(float dt, int index)
-        {
-            var entity = entities[index];
-            var control = aiControlComps[index];
-            var position = positionComps[index];
+            var control = entity.Get<AiControl>();
+            var position = entity.Get<PositionComponent>();
 
             var direction = Vector2.Zero;
 
@@ -112,6 +61,6 @@ namespace OpenBreed.Wecs.Systems.Control
             entity.RaiseEvent(new ControlDirectionChangedEventArgs(control.Direction));
         }
 
-        #endregion Private Methods
+        #endregion Protected Methods
     }
 }

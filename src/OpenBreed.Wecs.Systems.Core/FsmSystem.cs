@@ -1,18 +1,15 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class FsmSystem : SystemBase, IUpdatableSystem
+    public class FsmSystem : UpdatableSystemBase
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
-        private readonly IEntityMan entityMan;
         private readonly IFsmMan fsmMan;
         private readonly ILogger logger;
 
@@ -20,9 +17,8 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Constructors
 
-        public FsmSystem(IEntityMan entityMan, IFsmMan fsmMan, ILogger logger)
+        public FsmSystem(IFsmMan fsmMan, ILogger logger)
         {
-            this.entityMan = entityMan;
             this.fsmMan = fsmMan;
             this.logger = logger;
 
@@ -31,49 +27,32 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Public Constructors
 
-        #region Public Methods
+        #region Protected Methods
 
-        public void Update(float dt)
+        protected override void UpdateEntity(Entity entity, float dt)
         {
-            foreach (var entity in entities)
+            var fsmCmp = entity.Get<FsmComponent>();
+
+            var toUpdate = fsmCmp.States.Where(state => state.ImpulseId != MachineState.NO_IMPULSE);
+
+            foreach (var machineState in toUpdate)
             {
-                var fsmCmp = entity.Get<FsmComponent>();
-
-                var toUpdate = fsmCmp.States.Where(state => state.ImpulseId != MachineState.NO_IMPULSE);
-
-                foreach (var machineState in toUpdate)
-                {
-                    UpdateWithImpulse(entity, machineState);
-                }
+                UpdateEntityWithImpulse(entity, machineState);
             }
         }
 
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-
-        }
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
         protected override void OnAddEntity(Entity entity)
         {
-            entities.Add(entity);
+            base.OnAddEntity(entity);
 
             InitializeComponent(entity);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            var index = entities.IndexOf(entity);
+            DeinitializeComponent(entity);
 
-            if (index < 0)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            entities.RemoveAt(index);
+            base.OnRemoveEntity(entity);
         }
 
         #endregion Protected Methods
@@ -96,7 +75,7 @@ namespace OpenBreed.Wecs.Systems.Core
                 fsmMan.EnterState(entity, state, 0);
         }
 
-        private void UpdateWithImpulse(Entity entity, MachineState machineState)
+        private void UpdateEntityWithImpulse(Entity entity, MachineState machineState)
         {
             var impulseId = machineState.ImpulseId;
 

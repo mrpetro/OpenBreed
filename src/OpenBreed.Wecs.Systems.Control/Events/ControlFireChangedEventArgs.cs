@@ -5,11 +5,11 @@ namespace OpenBreed.Wecs.Systems.Control.Events
     /// <summary>
     /// Event args for event that occurs when control fire flag changes
     /// </summary>
-    public class ControlFireChangedEvenrArgs : EventArgs
+    public class ControlFireChangedEventArgs : EventArgs
     {
         #region Public Constructors
 
-        public ControlFireChangedEvenrArgs(bool fire)
+        public ControlFireChangedEventArgs(bool fire)
         {
             Fire = fire;
         }

@@ -14,6 +14,7 @@ using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenTK.Mathematics;
+using OpenBreed.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -64,6 +65,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             entity.PlayAnimation(0, clipId);
             entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
+
+            //triggerMan.ForEntity(entity).OnControlDirectionChanged().RunFunction;
+            //triggerMan.OnEntity(entity).OnControlDirectionChanged().RunAction(OnControlDirectionChanged, singleTime: true);
+
 
             triggerMan.OnEntityControlDirectionChanged(entity, OnControlDirectionChanged, singleTime: true);
         }

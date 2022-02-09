@@ -3,19 +3,17 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
 using OpenTK.Mathematics;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class DynamicBodiesAabbUpdaterSystem : SystemBase, IUpdatableSystem
+    public class DynamicBodiesAabbUpdaterSystem : UpdatableSystemBase
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
         private readonly IShapeMan shapeMan;
         private IBroadphaseDynamic broadphaseDynamic;
 
@@ -43,40 +41,28 @@ namespace OpenBreed.Wecs.Systems.Physics
             broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
         }
 
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-        }
-
-        public void Update(float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                var entity = entities[i];
-
-                var aabb = Calculate(entity);
-
-                broadphaseDynamic.UpdateItem(entity.Id, aabb);
-            }
-        }
-
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+        protected override void UpdateEntity(Entity entity, float dt)
+        {
+            var aabb = Calculate(entity);
+
+            broadphaseDynamic.UpdateItem(entity.Id, aabb);
+        }
 
         protected override void OnAddEntity(Entity entity)
         {
-            entities.Add(entity);
+            base.OnAddEntity(entity);
 
             var aabb = Calculate(entity);
-
             broadphaseDynamic.InsertItem(entity.Id, aabb);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            entities.Remove(entity);
+            base.OnRemoveEntity(entity);
 
             broadphaseDynamic.RemoveItem(entity.Id);
         }

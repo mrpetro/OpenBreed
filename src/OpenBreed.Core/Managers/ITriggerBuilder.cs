@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Managers
 {
-    public interface ITriggerMan
+    public interface ITriggerBuilder
     {
-        IEventsMan EventsMan { get; }
-
-        ITriggerBuilder NewTrigger();
+        ITriggerMan TriggerMan { get; }
     }
 }

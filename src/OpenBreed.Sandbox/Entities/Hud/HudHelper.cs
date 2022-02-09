@@ -92,6 +92,8 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
             jobsMan.Execute(new JohnPositionTextUpdateJob(entityMan, positionInfo));
 
+
+
             triggerMan.OnEntityViewportResized(hudViewport, (s, a) => UpdatePositionInfoPos(positionInfo, a));
         }
 

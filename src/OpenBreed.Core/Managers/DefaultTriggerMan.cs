@@ -15,6 +15,18 @@
 
         public IEventsMan EventsMan { get; }
 
+        public ITriggerBuilder NewTrigger() => new TriggerBuilder(this);
+
         #endregion Public Properties
+    }
+
+    internal class TriggerBuilder : ITriggerBuilder
+    {
+        public TriggerBuilder(ITriggerMan triggerMan)
+        {
+            TriggerMan = triggerMan;
+        }
+
+        public ITriggerMan TriggerMan { get; }
     }
 }

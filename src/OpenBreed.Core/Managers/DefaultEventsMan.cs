@@ -8,7 +8,7 @@ namespace OpenBreed.Core.Managers
     {
         #region Private Fields
 
-        private Dictionary<Type, List<(object, MethodInfo)>> listeners = new Dictionary<Type, List<(object, MethodInfo)>>();
+        private readonly Dictionary<Type, List<(object, MethodInfo)>> listeners = new Dictionary<Type, List<(object, MethodInfo)>>();
 
         #endregion Private Fields
 
