@@ -16,19 +16,24 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Methods
 
-        public void Update(float dt)
+        public void Update(IWorldContext context)
         {
-            for (int i = 0; i < entities.Count; i++)
-                UpdateEntity(entities[i], dt);
-        }
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
+            if (context.Paused)
             {
-                if (entities[i].Contains<PauseImmuneComponent>())
-                    UpdateEntity(entities[i], dt);
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i].Contains<PauseImmuneComponent>())
+                        UpdateEntity(entities[i], context.Dt);
+                }
             }
+            else
+            {
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    UpdateEntity(entities[i], context.Dt);
+                }
+            }
+
         }
 
         #endregion Public Methods

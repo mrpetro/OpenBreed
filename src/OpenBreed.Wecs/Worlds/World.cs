@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Extensions;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;
 using OpenTK.Mathematics;
 using System;
@@ -32,7 +31,7 @@ namespace OpenBreed.Wecs.Worlds
         private readonly HashSet<Entity> toAdd = new HashSet<Entity>();
         private readonly HashSet<Entity> toRemove = new HashSet<Entity>();
         private readonly WorldMan worldMan;
-
+        private readonly WorldContext context;
         private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
@@ -43,9 +42,9 @@ namespace OpenBreed.Wecs.Worlds
         {
             Name = builder.name;
             modules = builder.modules;
-
-            Systems = builder.systems.Values.ToArray();
             worldMan = builder.worldMan;
+            context = new WorldContext(this);
+            Systems = builder.systems.Values.ToArray();
         }
 
         #endregion Internal Constructors
@@ -62,7 +61,7 @@ namespace OpenBreed.Wecs.Worlds
         /// <summary>
         /// Time "speed" control value, can't be negative but can be 0 (Basicaly stops time).
         /// </summary>
-        public float TimeMultiplier
+        public float DtMultiplier
         {
             get
             {
@@ -189,20 +188,12 @@ namespace OpenBreed.Wecs.Worlds
         {
             AddPendingEntities();
 
-            if (Paused)
-            {
-                foreach (var item in Systems.OfType<IUpdatableSystem>())
-                {
-                    item.UpdatePauseImmuneOnly(dt * TimeMultiplier);
-                }
-            }
-            else
-            {
-                foreach (var item in Systems.OfType<IUpdatableSystem>())
-                {
-                    item.Update(dt * TimeMultiplier);
-                }
-            }
+            context.DtMultiplier = DtMultiplier;
+            context.Paused = Paused;
+            context.UpdateDeltaTime(dt);
+
+            foreach (var item in Systems.OfType<IUpdatableSystem>())
+                item.Update(context);
 
             RemovePendingEntities();
         }

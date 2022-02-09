@@ -59,13 +59,9 @@ namespace OpenBreed.Wecs.Systems.Physics
             broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
         }
 
-        public void UpdatePauseImmuneOnly(float dt)
+        public void Update(IWorldContext context)
         {
-        }
-
-        public void Update(float dt)
-        {
-            broadphaseDynamic.Solve(QueryStaticGrid, TestNarrowPhaseDynamic, dt);
+            broadphaseDynamic.Solve(QueryStaticGrid, TestNarrowPhaseDynamic, context.Dt);
         }
 
         #endregion Public Methods
@@ -93,42 +89,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             var shape = shapeMan.GetById(body.Fixtures.First().ShapeId);
             return shape.GetAabb().Translated(pos.Value);
         }
-
-        //private bool HandleBodyOnCommand(BodyOnCommand cmd)
-        //{
-        //    var entity = entityMan.GetById(cmd.EntityId);
-
-        //    if (!entity.Contains<VelocityComponent>())
-        //        return false;
-
-        //    var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item == entity);
-
-        //    if (dynamicToActivate != null)
-        //    {
-        //        var aabb = GetAabb(entity);
-        //        broadphaseDynamic.InsertItem(entity.Id, aabb);
-        //        inactiveDynamics.Remove(dynamicToActivate);
-        //        entity.RaiseEvent(new BodyOnEventArgs(entity));
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
-
-        //private bool HandleBodyOffCommand(BodyOffCommand cmd)
-        //{
-        //    var entity = entityMan.GetById(cmd.EntityId);
-
-        //    if (!entity.Contains<VelocityComponent>())
-        //        return false;
-
-        //    broadphaseDynamic.RemoveItem(entity.Id);
-
-        //    inactiveDynamics.Add(entity);
-
-        //    entity.RaiseEvent(new BodyOffEventArgs(entity));
-        //    return true;
-        //}
 
         private void TestNarrowPhaseDynamic(BroadphaseDynamicElement nextCollider, BroadphaseDynamicElement currentCollider, float dt)
         {

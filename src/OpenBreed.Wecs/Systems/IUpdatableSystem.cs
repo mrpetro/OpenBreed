@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Wecs.Worlds;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,13 +15,7 @@ namespace OpenBreed.Wecs.Systems
         /// <summary>
         /// Update all entities in this system using given time step
         /// </summary>
-        /// <param name="dt">Time step</param>
-        void Update(float dt);
-
-        /// <summary>
-        /// Update only enitites immune from pausing in this system using given time step
-        /// </summary>
-        /// <param name="dt">Time step</param>
-        void UpdatePauseImmuneOnly(float dt);
+        /// <param name="context">World context</param>
+        void Update(IWorldContext context);
     }
 }
