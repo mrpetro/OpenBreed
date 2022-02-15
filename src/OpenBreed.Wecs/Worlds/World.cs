@@ -54,11 +54,6 @@ namespace OpenBreed.Wecs.Worlds
         public ISystem[] Systems { get; }
 
         /// <summary>
-        /// Pauses or unpauses this world
-        /// </summary>
-        public bool Paused { get; internal set; }
-
-        /// <summary>
         /// Time "speed" control value, can't be negative but can be 0 (Basicaly stops time).
         /// </summary>
         public float DtMultiplier
@@ -108,9 +103,9 @@ namespace OpenBreed.Wecs.Worlds
                 throw new InvalidOperationException($"Module of type '{typeof(TModule)}' not found.");
         }
 
-        public void Pause() => SetPause(true);
+        //public void Pause() => SetPause(true);
 
-        public void Unpause() => SetPause(false);
+        //public void Unpause() => SetPause(false);
 
         #endregion Public Methods
 
@@ -189,7 +184,6 @@ namespace OpenBreed.Wecs.Worlds
             AddPendingEntities();
 
             context.DtMultiplier = DtMultiplier;
-            context.Paused = Paused;
             context.UpdateDeltaTime(dt);
 
             foreach (var item in Systems.OfType<IUpdatableSystem>())
@@ -209,18 +203,18 @@ namespace OpenBreed.Wecs.Worlds
             toAdd.Clear();
         }
 
-        private void SetPause(bool paused)
-        {
-            if (Paused == paused)
-                return;
+        //private void SetPause(bool paused)
+        //{
+        //    if (Paused == paused)
+        //        return;
 
-            Paused = paused;
+        //    Paused = paused;
 
-            if (Paused)
-                worldMan.OnWorldPaused(Id);
-            else
-                worldMan.OnWorldUnpaused(Id);
-        }
+            //if (Paused)
+            //    worldMan.OnWorldPaused(Id);
+            //else
+            //    worldMan.OnWorldUnpaused(Id);
+        //}
 
         private void RemoveEntity(Entity entity)
         {

@@ -14,6 +14,7 @@ using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
@@ -212,28 +213,17 @@ namespace OpenBreed.Sandbox.Entities
 
             var targetWorldId = actorEntity.WorldId;
 
-            //triggerMan.OnWorldEvent<WorldPausedEventArgs>(currentWorld, (world, args) => Console.WriteLine($"World {world} paused."), singleTime: true);
-
-
-
-
-            //currentWorld.Pause();
-
-
-
-
-
 
             //Pause this world
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == targetWorldId; }, () => cameraEntity.PauseWorld(targetWorldId)));
+            jobChain.Equeue(new EntityJob<WorldPausedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PauseWorld()));
             //Fade out camera
-            jobChain.Equeue(new AnimStoppedEntityJob(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
+            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
             //Set position of entity to teleport exit
-            jobChain.Equeue(new EntityJob(() => SetPosition(actorEntity, teleportEntity, true)));
+            jobChain.Equeue(new InstantJob(() => SetPosition(actorEntity, teleportEntity, true)));
             //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == targetWorldId; }, () => cameraEntity.UnpauseWorld(targetWorldId)));
+            jobChain.Equeue(new EntityJob<WorldUnpausedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.UnpauseWorld()));
             //Fade in camera
-            jobChain.Equeue(new AnimStoppedEntityJob(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
+            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
 
             jobMan.Execute(jobChain);
         }

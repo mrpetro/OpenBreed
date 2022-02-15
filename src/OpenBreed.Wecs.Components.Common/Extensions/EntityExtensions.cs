@@ -15,14 +15,14 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             fc.FollowerIds.Add(followerEntity.Id);
         }
 
-        public static void PauseWorld(this Entity entity, int worldId)
+        public static void PauseWorld(this Entity entity)
         {
-            entity.Set(new PauserComponent(worldId, pause: true));
+            entity.Set(new PauserComponent(pause: true));
         }
 
-        public static void UnpauseWorld(this Entity entity, int worldId)
+        public static void UnpauseWorld(this Entity entity)
         {
-            entity.Set(new PauserComponent(worldId, pause: false));
+            entity.Set(new PauserComponent(pause: false));
         }
     }
 }

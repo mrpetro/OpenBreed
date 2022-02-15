@@ -17,7 +17,7 @@
 
         public float DtMultiplier { get; internal set; } = 1.0f;
 
-        public bool Paused { get; internal set; }
+        public bool Paused { get; set; }
 
         public World World { get; }
 

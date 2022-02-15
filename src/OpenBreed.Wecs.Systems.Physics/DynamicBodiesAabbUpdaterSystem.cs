@@ -45,7 +45,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, float dt)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
             var aabb = Calculate(entity);
 

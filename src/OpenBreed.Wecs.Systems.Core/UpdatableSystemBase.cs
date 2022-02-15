@@ -23,14 +23,14 @@ namespace OpenBreed.Wecs.Systems.Core
                 for (int i = 0; i < entities.Count; i++)
                 {
                     if (entities[i].Contains<PauseImmuneComponent>())
-                        UpdateEntity(entities[i], context.Dt);
+                        UpdateEntity(entities[i], context);
                 }
             }
             else
             {
                 for (int i = 0; i < entities.Count; i++)
                 {
-                    UpdateEntity(entities[i], context.Dt);
+                    UpdateEntity(entities[i], context);
                 }
             }
 
@@ -40,7 +40,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected abstract void UpdateEntity(Entity entity, float dt);
+        protected abstract void UpdateEntity(Entity entity, IWorldContext context);
 
         protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
 

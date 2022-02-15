@@ -7,7 +7,7 @@ using System;
 
 namespace OpenBreed.Sandbox
 {
-    public class EntityJob : IJob
+    public class InstantJob : IJob
     {
         #region Private Fields
 
@@ -17,7 +17,7 @@ namespace OpenBreed.Sandbox
 
         #region Public Constructors
 
-        public EntityJob(Action action)
+        public InstantJob(Action action)
         {
             this.action = action;
         }
@@ -49,7 +49,8 @@ namespace OpenBreed.Sandbox
         #endregion Public Methods
     }
 
-    public class AnimStoppedEntityJob : IJob
+
+    public class EntityJob<TEventArgs> : IJob where TEventArgs : EventArgs
     {
         #region Private Fields
 
@@ -61,7 +62,7 @@ namespace OpenBreed.Sandbox
 
         #region Public Constructors
 
-        public AnimStoppedEntityJob(ITriggerMan triggerMan, Entity entity, Action action)
+        public EntityJob(ITriggerMan triggerMan, Entity entity, Action action)
         {
             this.triggerMan = triggerMan;
             this.entity = entity;
@@ -84,7 +85,7 @@ namespace OpenBreed.Sandbox
 
         public void Execute()
         {
-            triggerMan.OnEntityAnimFinished(entity, OnTrigger, singleTime: true);
+            triggerMan.OnEntityEvent<TEventArgs>(entity, OnTrigger, singleTime: true);
 
             action.Invoke();
         }
@@ -97,7 +98,7 @@ namespace OpenBreed.Sandbox
 
         #region Private Methods
 
-        private void OnTrigger(Entity e, AnimFinishedEventArgs args)
+        private void OnTrigger(Entity e, TEventArgs args)
         {
             Complete(this);
         }

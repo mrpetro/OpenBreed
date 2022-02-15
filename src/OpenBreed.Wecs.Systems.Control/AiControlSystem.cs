@@ -3,6 +3,7 @@ using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, float dt)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
             var control = entity.Get<AiControl>();
             var position = entity.Get<PositionComponent>();

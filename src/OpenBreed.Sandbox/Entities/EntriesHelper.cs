@@ -7,11 +7,13 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
@@ -122,7 +124,7 @@ namespace OpenBreed.Sandbox.Entities
             //Add entity to next world
             jobChain.Equeue(new WorldJob<EntityEnteredEventArgs>(worldMan, eventsMan, (a) => { return worldMan.GetById(a.WorldId).Id == worldId; }, () => heroEntity.EnterWorld(worldId)));
             //Set position of entity to entry position in next world
-            jobChain.Equeue(new EntityJob(() => SetPosition(heroEntity, entryId, true)));
+            jobChain.Equeue(new InstantJob(() => SetPosition(heroEntity, entryId, true)));
             //Unpause this world
             //jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
             //Fade in camera
@@ -135,9 +137,15 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Private Methods
 
-        private void PerformEntityExit(Entity targetEntity, Entity exitEntity)
+        private void PerformEntityExit(Entity actorEntity, Entity exitEntity)
         {
-            var cameraEntity = targetEntity.TryGet<FollowedComponent>()?.FollowerIds.
+            // For preventing running rest of the code when actor will hit couple of teleporter blocks at same time
+            if (Equals(actorEntity.State, "Exiting"))
+                return;
+
+            actorEntity.State = "Exiting";
+
+            var cameraEntity = actorEntity.TryGet<FollowedComponent>()?.FollowerIds.
                                                                               Select(item => entityMan.GetById(item)).
                                                                               FirstOrDefault(item => item.Tag is "PlayerCamera");
 
@@ -159,24 +167,26 @@ namespace OpenBreed.Sandbox.Entities
             var cameraFadeOutClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_OUT).Id;
             var cameraFadeInClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_IN).Id;
 
-            var worldIdToRemoveFrom = targetEntity.WorldId;
+            var worldIdToRemoveFrom = actorEntity.WorldId;
+
+
+            var actorWorld = worldMan.GetById(actorEntity.WorldId);
+            var cameraWorld = worldMan.GetById(cameraEntity.WorldId);
 
             //Pause this world
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Pause()));
+            jobChain.Equeue(new EntityJob<WorldPausedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PauseWorld()));
             //Fade out camera
-            jobChain.Equeue(new AnimStoppedEntityJob(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
+            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
             //Remove entity from this world
-            jobChain.Equeue(new WorldJob<EntityLeftEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == worldIdToRemoveFrom; }, () => targetEntity.LeaveWorld()));
+            jobChain.Equeue(new WorldJob<EntityLeftEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == worldIdToRemoveFrom; }, () => actorEntity.LeaveWorld()));
             //Load next world if needed
-            jobChain.Equeue(new EntityJob(() => TryLoadWorld(mapKey)));
-            //Add entity to next world
-            jobChain.Equeue(new WorldJob<EntityEnteredEventArgs>(worldMan, eventsMan, (a) => { return worldMan.GetById(a.WorldId).Name == mapKey; }, () => AddToWorld(targetEntity, mapKey)));
+            jobChain.Equeue(new InstantJob(() => TryLoadWorld(mapKey)));
+            //Add actor entity to next world, wait for follower camera entity to enter after it
+            jobChain.Equeue(new WorldJob<EntityEnteredEventArgs>(worldMan, eventsMan, (a) => { return cameraEntity.Id == a.EntityId; }, () => AddToWorld(actorEntity, mapKey)));
             //Set position of entity to entry position in next world
-            jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, entryId, true)));
-            //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (a) => { return a.WorldId == worldIdToRemoveFrom; }, () => worldMan.GetById(worldIdToRemoveFrom).Unpause()));
+            jobChain.Equeue(new InstantJob(() => SetPosition(actorEntity, entryId, true)));
             //Fade in camera
-            jobChain.Equeue(new AnimStoppedEntityJob(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
+            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
 
             jobsMan.Execute(jobChain);
         }
@@ -266,6 +276,8 @@ namespace OpenBreed.Sandbox.Entities
                 var walkingControlCmp = target.Get<WalkingControlComponent>();
                 walkingControlCmp.Direction = new Vector2(0, 0);
             }
+
+            target.State = null;
         }
 
         #endregion Private Methods

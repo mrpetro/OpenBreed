@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, float dt)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
             var fc = entity.Get<FollowedComponent>();
 

@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
@@ -31,7 +32,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, float dt)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
             var position = entity.Get<PositionComponent>();
             var thrust = entity.Get<ThrustComponent>();
@@ -39,13 +40,13 @@ namespace OpenBreed.Wecs.Systems.Physics
             var dynamicBody = entity.Get<BodyComponent>();
 
             //Velocity equation
-            var newVel = velocity.Value + thrust.Value * dt;
+            var newVel = velocity.Value + thrust.Value * context.Dt;
 
             //Apply friction force
             newVel += -newVel * FLOOR_FRICTION * dynamicBody.CofFactor;
 
             //Verlet integration
-            var newPos = position.Value + (velocity.Value + newVel) * 0.5f * dt;
+            var newPos = position.Value + (velocity.Value + newVel) * 0.5f * context.Dt;
 
             velocity.Value = newVel;
             position.Value = newPos;

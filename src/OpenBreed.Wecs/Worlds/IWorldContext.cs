@@ -8,7 +8,7 @@
 
         float DtMultiplier { get; }
 
-        bool Paused { get; }
+        bool Paused { get; set; }
 
         World World { get; }
 

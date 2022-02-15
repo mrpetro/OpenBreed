@@ -4,6 +4,7 @@ using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Animation
 {
@@ -45,13 +46,13 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, float dt)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
             var ac = entity.Get<AnimationComponent>();
 
             //Update all animators with delta time
             for (int i = 0; i < ac.States.Count; i++)
-                UpdateAnimator(entity, ac.States[i], dt);
+                UpdateAnimator(entity, ac.States[i], context.Dt);
         }
 
         #endregion Protected Methods

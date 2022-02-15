@@ -21,7 +21,8 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
             systemFactory.Register<TimerSystem>(() => new TimerSystem(serviceProvider.GetService<IEntityMan>(),
                                                                       serviceProvider.GetService<ILogger>()));
 
-            systemFactory.Register<PausingSystem>(() => new PausingSystem(serviceProvider.GetService<IWorldMan>()));
+            systemFactory.Register<PausingSystem>(() => new PausingSystem(serviceProvider.GetService<IWorldMan>(),
+                                                                          serviceProvider.GetService<IEventsMan>()));
         }
 
         #endregion Public Methods

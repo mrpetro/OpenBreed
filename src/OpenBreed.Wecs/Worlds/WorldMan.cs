@@ -129,15 +129,15 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Methods
 
-        internal void OnWorldPaused(int worldId)
-        {
-            RaiseEvent(new WorldPausedEventArgs(worldId));
-        }
+        //internal void OnWorldPaused(int worldId)
+        //{
+        //    RaiseEvent(new WorldPausedEventArgs(worldId));
+        //}
 
-        internal void OnWorldUnpaused(int worldId)
-        {
-            RaiseEvent(new WorldUnpausedEventArgs(worldId));
-        }
+        //internal void OnWorldUnpaused(int worldId)
+        //{
+        //    RaiseEvent(new WorldUnpausedEventArgs(worldId));
+        //}
 
         internal void OnEntityAdded(Entity entity, int worldId)
         {

@@ -1,5 +1,8 @@
-﻿using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Core
@@ -9,14 +12,16 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Private Fields
 
         private readonly IWorldMan worldMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PausingSystem(IWorldMan worldMan)
+        public PausingSystem(IWorldMan worldMan, IEventsMan eventsMan)
         {
             this.worldMan = worldMan;
+            this.eventsMan = eventsMan;
 
             RequireEntityWith<PauserComponent>();
         }
@@ -25,7 +30,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, float dt)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
             var pauserComponent = entity.TryGet<PauserComponent>();
 
@@ -34,24 +39,32 @@ namespace OpenBreed.Wecs.Systems.Core
 
             try
             {
-                var world = worldMan.GetById(pauserComponent.WorldId);
-
-                if (world is null)
+                if (pauserComponent.Pause == context.Paused)
                     return;
 
-                if (pauserComponent.Pause == world.Paused)
-                    return;
+                context.Paused = pauserComponent.Pause;
 
                 if (pauserComponent.Pause)
-                    world.Pause();
+                    OnWorldPaused(entity, WorldId);
                 else
-                    world.Unpause();
+                    OnWorldUnpaused(entity, WorldId);
             }
             finally
             {
                 entity.Remove<PauserComponent>();
             }
         }
+
+        internal void OnWorldPaused(Entity entity, int worldId)
+        {
+            eventsMan.Raise(entity, new WorldPausedEventArgs(worldId));
+        }
+
+        internal void OnWorldUnpaused(Entity entity, int worldId)
+        {
+            eventsMan.Raise(entity, new WorldUnpausedEventArgs(worldId));
+        }
+
 
         #endregion Protected Methods
     }

@@ -4,9 +4,8 @@
     {
         #region Public Constructors
 
-        public PauserComponent(int worldId, bool pause)
+        public PauserComponent(bool pause)
         {
-            WorldId = worldId;
             Pause = pause;
         }
 
@@ -14,7 +13,6 @@
 
         #region Public Properties        
         
-        public int WorldId { get; }
         public bool Pause { get; }
 
         #endregion Public Properties

@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -28,13 +29,13 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, float dt)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
             var tc = entity.Get<TimerComponent>();
 
             //Update all timers with delta time
             for (int i = 0; i < tc.Items.Count; i++)
-                UpdateTimer(entity, tc.Items[i], dt);
+                UpdateTimer(entity, tc.Items[i], context.Dt);
         }
 
         #endregion Protected Methods
