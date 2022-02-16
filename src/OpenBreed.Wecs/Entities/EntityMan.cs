@@ -114,7 +114,7 @@ namespace OpenBreed.Wecs.Entities
 
         private void OnEntityLeftWorld(object sender, EntityLeftEventArgs e)
         {
-            var entity = GetById(e.EntityId);
+            var entity = (Entity)sender;
 
             if (toDestory.Contains(entity))
             {

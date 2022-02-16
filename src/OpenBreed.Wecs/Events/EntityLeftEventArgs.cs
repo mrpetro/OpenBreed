@@ -9,10 +9,9 @@ namespace OpenBreed.Wecs.Events
     {
         #region Public Constructors
 
-        public EntityLeftEventArgs(int worldId, int entityId)
+        public EntityLeftEventArgs(int worldId)
         {
             WorldId = worldId;
-            EntityId = entityId;
         }
 
         #endregion Public Constructors
@@ -20,7 +19,6 @@ namespace OpenBreed.Wecs.Events
         #region Public Properties
 
         public int WorldId { get; }
-        public int EntityId { get; }
 
         #endregion Public Properties
     }

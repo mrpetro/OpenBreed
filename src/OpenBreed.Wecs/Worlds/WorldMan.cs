@@ -141,12 +141,12 @@ namespace OpenBreed.Wecs.Worlds
 
         internal void OnEntityAdded(Entity entity, int worldId)
         {
-            RaiseEvent(new EntityEnteredEventArgs(worldId, entity.Id));
+            eventsMan.Raise(entity, new EntityEnteredEventArgs(worldId));
         }
 
         internal void OnEntityRemoved(Entity entity, int worldId)
         {
-            RaiseEvent(new EntityLeftEventArgs(worldId, entity.Id));
+            eventsMan.Raise(entity, new EntityLeftEventArgs(worldId));
         }
 
         #endregion Internal Methods
