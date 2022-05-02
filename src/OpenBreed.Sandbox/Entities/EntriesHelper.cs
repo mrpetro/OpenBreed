@@ -172,6 +172,21 @@ namespace OpenBreed.Sandbox.Entities
 
             var actorWorld = worldMan.GetById(actorEntity.WorldId);
             var cameraWorld = worldMan.GetById(cameraEntity.WorldId);
+            //var doorOpening = PerformFunction(() => door.TryOpen(key));
+            //var doorClosing = doorOpening.OnFinishResult((result) => result == "Matching").PerformAction(() => door.Close())
+            //door.Wait(5).OnFinish((door) => door.Close()) 
+            //door.Close()
+
+
+            var jobBuilder = jobsMan.Create();
+            
+            jobBuilder.DoAction(() => cameraEntity.PauseWorld())
+                      .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeOutClipId))
+                      .OnFinish().DoAction(() => actorEntity.LeaveWorld())
+                      .OnFinish().DoAction(() => TryLoadWorld(mapKey))
+                      .OnFinish().DoAction(() => AddToWorld(actorEntity, mapKey))
+                      .OnFinish().DoAction(() => SetPosition(actorEntity, entryId, true))
+                      .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeInClipId));
 
             //Pause this world
             jobChain.Equeue(new EntityJob<WorldPausedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PauseWorld()));

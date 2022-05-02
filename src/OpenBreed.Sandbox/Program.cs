@@ -500,13 +500,13 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
-            var gameWorld = mapLegacyLoader.Load("Vanilla/2");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6

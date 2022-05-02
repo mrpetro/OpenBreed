@@ -140,6 +140,7 @@ namespace OpenBreed.Sandbox.Loaders
             LoadReferencedAnimations(dbMap);
             LoadReferencedTileStamps(dbMap);
             LoadReferencedSounds(dbMap);
+            LoadReferencedScripts(dbMap);
 
             var layout = map.Layout;
             var visited = new bool[layout.Width, layout.Height];
@@ -331,6 +332,14 @@ namespace OpenBreed.Sandbox.Loaders
             dbSounds = repositoryProvider.GetRepository<IDbSound>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
             foreach (var dbSound in dbSounds)
                 loader.Load(dbSound.Id);
+        }
+
+        private void LoadReferencedScripts(IDbMap dbMap)
+        {
+            //TODO: Placeholder for loading map script
+
+            //var loader = dataLoaderFactory.GetLoader<IScript>();
+
         }
 
         #endregion Private Methods
