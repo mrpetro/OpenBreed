@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenBreed.Common
+namespace OpenBreed.Common.Interface
 {
     public interface IVariableMan
     {

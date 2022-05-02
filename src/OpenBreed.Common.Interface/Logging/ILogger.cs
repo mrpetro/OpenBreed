@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Common.Logging
+﻿namespace OpenBreed.Common.Interface.Logging
 {
     public delegate void Message(LogLevel type, int channel, string msg);
 

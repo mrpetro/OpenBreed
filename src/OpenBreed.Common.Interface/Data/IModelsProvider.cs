@@ -2,7 +2,7 @@
 using OpenBreed.Database.Interface.Items;
 using System;
 
-namespace OpenBreed.Common.Data
+namespace OpenBreed.Common.Interface.Data
 {
     public interface IModelsProvider
     {

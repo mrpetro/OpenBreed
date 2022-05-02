@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenBreed.Common.Interface;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using System;

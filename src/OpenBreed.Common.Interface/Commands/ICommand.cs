@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OpenBreed.Common.Commands
+namespace OpenBreed.Common.Interface.Commands
 {
     public interface ICommand
     {

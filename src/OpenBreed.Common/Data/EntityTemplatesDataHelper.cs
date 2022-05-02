@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Model.Texts;
+using OpenBreed.Common.Interface.Data;
 
 namespace OpenBreed.Common.Data
 {

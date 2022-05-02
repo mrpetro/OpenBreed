@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Interface;
+using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Common

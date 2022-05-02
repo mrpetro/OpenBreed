@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Common
+﻿namespace OpenBreed.Common.Interface
 {
     public interface IDataLoaderFactory
     {

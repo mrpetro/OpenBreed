@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common.Interface.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Model.Tiles;
 using System;

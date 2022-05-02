@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Database.Interface;
 
-namespace OpenBreed.Common.Data
+namespace OpenBreed.Common.Interface.Data
 {
     public interface IWorkspaceMan : IRepositoryProvider
     {
