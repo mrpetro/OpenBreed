@@ -4,6 +4,8 @@ using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Database.Interface;

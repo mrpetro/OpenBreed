@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Logging;
+﻿using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;

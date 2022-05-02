@@ -29,6 +29,7 @@ using OpenBreed.Common;
 using System.Globalization;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Animation.Interface.Data;
+using OpenBreed.Common.Interface;
 
 namespace OpenBreed.Sandbox.Entities
 {

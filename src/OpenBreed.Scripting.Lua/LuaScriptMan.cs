@@ -1,4 +1,5 @@
 ﻿using NLua;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Scripting.Interface;
 

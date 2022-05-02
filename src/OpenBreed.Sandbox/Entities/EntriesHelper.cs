@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface;
@@ -178,15 +179,17 @@ namespace OpenBreed.Sandbox.Entities
             //door.Close()
 
 
-            var jobBuilder = jobsMan.Create();
+            //var jobBuilder = jobsMan.Create();
             
-            jobBuilder.DoAction(() => cameraEntity.PauseWorld())
-                      .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeOutClipId))
-                      .OnFinish().DoAction(() => actorEntity.LeaveWorld())
-                      .OnFinish().DoAction(() => TryLoadWorld(mapKey))
-                      .OnFinish().DoAction(() => AddToWorld(actorEntity, mapKey))
-                      .OnFinish().DoAction(() => SetPosition(actorEntity, entryId, true))
-                      .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeInClipId));
+            //jobBuilder.DoAction(() => cameraEntity.PauseWorld())
+            //          .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeOutClipId))
+            //          .OnFinish().DoAction(() => actorEntity.LeaveWorld())
+            //          .OnFinish().DoAction(() => TryLoadWorld(mapKey))
+            //          .OnFinish().DoAction(() => AddToWorld(actorEntity, mapKey))
+            //          .OnFinish().DoAction(() => SetPosition(actorEntity, entryId, true))
+            //          .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeInClipId));
+
+
 
             //Pause this world
             jobChain.Equeue(new EntityJob<WorldPausedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PauseWorld()));

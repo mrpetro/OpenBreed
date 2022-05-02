@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Common.Interface;
 
 namespace OpenBreed.Wecs.Components.Rendering.Extensions
 {

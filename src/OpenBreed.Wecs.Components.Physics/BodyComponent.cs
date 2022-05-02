@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
 using OpenTK;

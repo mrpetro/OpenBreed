@@ -30,6 +30,7 @@ using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Audio.Interface.Data;
+using OpenBreed.Common.Interface;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {

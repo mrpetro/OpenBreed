@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Common.Logging;
 using OpenBreed.Wecs.Entities;
 using System;
+using OpenBreed.Common.Interface.Logging;
 
 namespace OpenBreed.Wecs.Systems.Animation.Extensions
 {
