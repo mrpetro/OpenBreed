@@ -2,6 +2,8 @@
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Scripting.Interface;
+using System;
+using System.Reflection;
 
 namespace OpenBreed.Scripting.Lua
 {
@@ -45,6 +47,11 @@ namespace OpenBreed.Scripting.Lua
         public void Expose(string apiName, object apiObj)
         {
             luaState[apiName] = apiObj;
+        }
+
+        public void ExposeMethod(object apiObj, string methodName, MethodInfo methodInfo)
+        {
+            luaState.RegisterFunction(methodName, apiObj, methodInfo);
         }
 
         public object GetObject(string objectName)

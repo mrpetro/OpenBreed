@@ -9,6 +9,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.TileStamps;
@@ -24,8 +25,10 @@ using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -65,6 +68,8 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly IEntityMan entityMan;
         private readonly ITileMan tileMan;
         private readonly ILogger logger;
+        private readonly ITriggerMan triggerMan;
+        private readonly IScriptMan scriptMan;
         private readonly Dictionary<string, IMapWorldEntityLoader> entityLoaders = new Dictionary<string, IMapWorldEntityLoader>();
 
         #endregion Private Fields
@@ -82,7 +87,9 @@ namespace OpenBreed.Sandbox.Loaders
                                    IBroadphaseFactory broadphaseGridFactory,
                                    ITileGridFactory tileGridFactory,
                                    ITileMan tileMan,
-                                   ILogger logger)
+                                   ILogger logger,
+                                   ITriggerMan triggerMan,
+                                   IScriptMan scriptMan)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
@@ -98,6 +105,8 @@ namespace OpenBreed.Sandbox.Loaders
 
             this.tileMan = tileMan;
             this.logger = logger;
+            this.triggerMan = triggerMan;
+            this.scriptMan = scriptMan;
         }
 
         #endregion Public Constructors
@@ -200,6 +209,11 @@ namespace OpenBreed.Sandbox.Loaders
                     //LoadUnknownCell(worldBlockBuilder, layout, newWorld, ix, iy, gfxValue, actionValue, hasBody: false, unknown: false);
                 }
             }
+
+            triggerMan.OnWorldInitialized(world, () =>
+            {
+                scriptMan.TryInvokeFunction("MapLoaded", world.Id);
+            }, singleTime: true);
 
             return world;
         }
@@ -338,10 +352,12 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void LoadReferencedScripts(IDbMap dbMap)
         {
-            //TODO: Placeholder for loading map script
+            var loader = dataLoaderFactory.GetLoader<IScriptDataLoader>();
 
-            //var loader = dataLoaderFactory.GetLoader<IScript>();
+            //Load level specific sounds
+            var dbScript = repositoryProvider.GetRepository<IDbScript>().GetById(dbMap.ScriptRef);
 
+            loader.Load(dbScript.Id);
         }
 
         #endregion Private Methods

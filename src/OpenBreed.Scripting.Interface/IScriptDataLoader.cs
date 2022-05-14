@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Scripting.Interface
 {
-    //internal class IScriptLoader : IDataLoader<int>
-    //{
-    //}
+    public interface IScriptDataLoader : IDataLoader<string>
+    {
+    }
 }

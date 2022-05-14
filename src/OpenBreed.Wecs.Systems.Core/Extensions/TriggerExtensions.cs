@@ -12,6 +12,14 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
     public static class TriggerExtensions
     {
+        public static void AfterDelay(this ITriggerMan triggerMan, TimeSpan timeSpan, object func)
+        {
+            Task.Delay((int)timeSpan.TotalMilliseconds).Wait();
+
+            var method = func.GetType().GetMethod("Call", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            method.Invoke(func, new object[] { new object[0] });
+        }
+
         public static void OnEntityTimerElapsed(this ITriggerMan triggerMan, Entity entity, Action<Entity, TimerElapsedEventArgs> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<TimerElapsedEventArgs>(ConditionalAction);

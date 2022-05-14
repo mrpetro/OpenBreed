@@ -110,7 +110,16 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupClipMan<Entity>();
 
-            hostBuilder.SetupLuaScripting();
+            hostBuilder.SetupLuaScripting((scriptMan, sp) =>
+            {
+                scriptMan.Expose("Entities", sp.GetService<IEntityMan>());
+                scriptMan.Expose("Sounds", sp.GetService<ISoundMan>());
+                scriptMan.Expose("Triggers", sp.GetService<ITriggerMan>());
+                scriptMan.Expose("Logging", sp.GetService<ILogger>());
+
+                var res = scriptMan.RunString(@"import('System')");
+                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Core', 'OpenBreed.Wecs.Systems.Core.Extensions')");
+            });
 
             hostBuilder.SetupInputMan((inpitsMan, sp) =>
             {
@@ -210,6 +219,7 @@ namespace OpenBreed.Sandbox
                 dataLoaderFactory.SetupTileStampDataLoader(sp);
                 dataLoaderFactory.SetupSpriteSetDataLoader(sp);
                 dataLoaderFactory.SetupSoundSampleDataLoader(sp);
+                dataLoaderFactory.SetupScriptDataLoader(sp);
             });
 
             hostBuilder.SetupFsmManager((fsmMan, sp) =>
@@ -497,6 +507,7 @@ namespace OpenBreed.Sandbox
             var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
 
             var entityMan = GetManager<IEntityMan>();
+            var triggerMan = GetManager<ITriggerMan>();
 
 
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
@@ -539,14 +550,19 @@ namespace OpenBreed.Sandbox
 
             johnPlayerEntity.AddFollower(playerCamera);
 
-
-            GetManager<IEventsMan>().Subscribe<WorldInitializedEventArgs>((s, a) =>
+            triggerMan.OnWorldInitialized(gameWorld, () =>
             {
-                if (a.WorldId != gameWorld.Id)
-                    return;
-
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Id, 0);
             });
+
+
+            //GetManager<IEventsMan>().Subscribe<WorldInitializedEventArgs>((s, a) =>
+            //{
+            //    if (a.WorldId != gameWorld.Id)
+            //        return;
+
+            //    worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Id, 0);
+            //});
 
             //return;
 
