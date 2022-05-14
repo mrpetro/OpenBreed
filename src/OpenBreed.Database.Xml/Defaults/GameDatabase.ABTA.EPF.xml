@@ -183,9 +183,10 @@
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/SMARTPIC.LBM" EntryName="SMARTPIC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\Scripts\entry.lua" />
-				<FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\Scripts\SimpleEntry.lua" />
-				<FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\Scripts\Exit.lua" />
+				<FileDataSource Id="Extension/Scripts/Maps/MAP.01.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Maps\MAP.01.lua" />
+				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
+				<FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\SimpleEntry.lua" />
+				<FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Exit.lua" />
 				<FileDataSource Id="Extension/Templates/Logo1.lua" FilePath="%Db.Current.FolderPath%\Templates\Logo1.lua" />
 			</Items>
 		</DataSources>
@@ -1048,6 +1049,9 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.TITLE.AMF" DataSourceRef="Vanilla/EPF/TITLE.AMF" FormatType="AMF_MUSIC">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Maps.MAP.01.lua" DataSourceRef="Extension/Scripts/Maps/MAP.01.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="Extension/Scripts/Entry.lua" FormatType="TEXT">
@@ -4982,6 +4986,7 @@
 						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
+					<ScriptRef>Scripts.Maps.MAP.01.lua</ScriptRef>
 				</Map>
 				<Map Id="Vanilla/2" Description="CIVILIAN ZONE 1">
 					<DataRef>Assets.MAP.02</DataRef>
@@ -10971,6 +10976,9 @@
 		</Texts>
 		<Scripts>
 			<Items>
+				<ScriptFromFile Id="Scripts.Maps.MAP.01.lua">
+					<DataRef>Assets.Scripts.Maps.MAP.01.lua</DataRef>
+				</ScriptFromFile>
 				<ScriptFromFile Id="Scripts.Entry.lua">
 					<DataRef>Assets.Scripts.Entry.lua</DataRef>
 				</ScriptFromFile>

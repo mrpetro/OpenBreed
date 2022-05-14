@@ -6,12 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Defaults\ABTA\Scripts\MAP.01.lua" />
     <None Remove="Defaults\GameDatabase.ABHC.xml" />
     <None Remove="Defaults\GameDatabase.ABSE.xml" />
     <None Remove="Defaults\GameDatabase.ABTA.EPF.xml" />
-    <None Remove="Defaults\Scripts\Entry.lua" />
-    <None Remove="Defaults\Scripts\Exit.lua" />
-    <None Remove="Defaults\Scripts\simpleEntry.lua" />
+    <None Remove="Defaults\ABTA\Scripts\Entry.lua" />
+    <None Remove="Defaults\ABTA\Scripts\Exit.lua" />
+    <None Remove="Defaults\ABTA\Scripts\simpleEntry.lua" />
     <None Remove="Defaults\Templates\ABTA\Common\Actors\Dummy.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Actors\John.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\Camera.xml" />
@@ -63,6 +64,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Defaults\ABTA\Scripts\Maps\MAP.01.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Defaults\GameDatabase.ABHC.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -73,13 +77,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Defaults\Scripts\Entry.lua">
+    <Content Include="Defaults\ABTA\Scripts\Entry.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Scripts\Exit.lua">
+    <Content Include="Defaults\ABTA\Scripts\Exit.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Scripts\simpleEntry.lua">
+    <Content Include="Defaults\ABTA\Scripts\simpleEntry.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Templates\ABTA\Common\Actors\Dummy.xml">
