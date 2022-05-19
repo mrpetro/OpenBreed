@@ -10,7 +10,7 @@ namespace OpenBreed.Core.Managers
     {
         IEventsMan EventsMan { get; }
 
-        void CreateTrigger<TEventArgs>(Func<TEventArgs, bool> conditionFunction, Action action, bool singleTime) where TEventArgs : EventArgs;
+        void CreateTrigger<TEventArgs>(Func<TEventArgs, bool> conditionFunction, Action<TEventArgs> action, bool singleTime) where TEventArgs : EventArgs;
         
         ITriggerBuilder NewTrigger();
     }

@@ -1,17 +1,19 @@
-﻿using System;
+﻿using OpenBreed.Wecs.Events;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Core.Events
 {
-    public class WorldUnpausedEventArgs : EventArgs
+    public class WorldPausedEventArgs : EntityEvent
     {
-        #region Public Constructors
+        #region Private Constructors
 
-        public WorldUnpausedEventArgs(int worldId)
+        public WorldPausedEventArgs(int entityId, int worldId)
+            : base(entityId)
         {
             WorldId = worldId;
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 

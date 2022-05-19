@@ -13,40 +13,19 @@ namespace OpenBreed.Wecs.Extensions
 {
     public static class TriggerExtensions
     {
-        //public static void OnWorldInitialized(this ITriggerMan triggerMan, World world, Action<World, WorldInitializedEventArgs> action, bool singleTime = false)
-        //{
-        //    //var guid = Guid.NewGuid();
+        public static void OnEntityEnteredWorld(this ITriggerMan triggerMan, Entity entity, Action action, bool singleTime = false)
+        {
+            triggerMan.CreateTrigger<EntityEnteredEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
+        }
 
-        //    triggerMan.EventsMan.Subscribe<WorldInitializedEventArgs>(ConditionalAction);
-
-        //    void ConditionalAction(object sender, WorldInitializedEventArgs args)
-        //    {
-        //        if (!Equals(world.Id, args.WorldId))
-        //            return;
-
-        //        if (singleTime)
-        //            triggerMan.EventsMan.Unsubscribe<WorldInitializedEventArgs>(ConditionalAction);
-
-        //        action.Invoke(world, args);
-        //    }
-        //}
+        public static void OnEntityLeftWorld(this ITriggerMan triggerMan, Entity entity, Action action, bool singleTime = false)
+        {
+            triggerMan.CreateTrigger<EntityLeftEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
+        }
 
         public static void OnWorldInitialized(this ITriggerMan triggerMan, World world, Action action, bool singleTime = false)
         {
-            //var guid = Guid.NewGuid();
-
-            triggerMan.CreateTrigger<WorldInitializedEventArgs>((args) => Equals(world.Id, args.WorldId), action, singleTime);
-
-            //void ConditionalAction(object sender, WorldInitializedEventArgs args)
-            //{
-            //    if (!Equals(world.Id, args.WorldId))
-            //        return;
-
-            //    if (singleTime)
-            //        triggerMan.EventsMan.Unsubscribe<WorldInitializedEventArgs>(ConditionalAction);
-
-            //    action.Invoke();
-            //}
+            triggerMan.CreateTrigger<WorldInitializedEventArgs>((args) => Equals(world.Id, args.WorldId), (args) => action.Invoke(), singleTime);
         }
 
         public static ITriggerBuilder OnEntity(this ITriggerMan triggerMan, Entity entity)

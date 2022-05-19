@@ -12,9 +12,11 @@ using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Core.Events;
+using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
@@ -180,7 +182,7 @@ namespace OpenBreed.Sandbox.Entities
 
 
             //var jobBuilder = jobsMan.Create();
-            
+
             //jobBuilder.DoAction(() => cameraEntity.PauseWorld())
             //          .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeOutClipId))
             //          .OnFinish().DoAction(() => actorEntity.LeaveWorld())
@@ -189,25 +191,114 @@ namespace OpenBreed.Sandbox.Entities
             //          .OnFinish().DoAction(() => SetPosition(actorEntity, entryId, true))
             //          .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeInClipId));
 
+            var context = new Context()
+            {
+                actorEntity = actorEntity,
+                cameraEntity = cameraEntity,
+                cameraFadeInClipId = cameraFadeInClipId,
+                cameraFadeOutClipId = cameraFadeOutClipId,
+                mapKey = mapKey,
+                entryId = entryId
+            };
 
-
-            //Pause this world
-            jobChain.Equeue(new EntityJob<WorldPausedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PauseWorld()));
-            //Fade out camera
-            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
-            //Remove entity from this world
-            jobChain.Equeue(new EntityJob<EntityLeftEventArgs>(triggerMan, actorEntity, () => actorEntity.LeaveWorld()));
-            //Load next world if needed
-            jobChain.Equeue(new InstantJob(() => TryLoadWorld(mapKey)));
-            //Add actor entity to next world, wait for follower camera entity to enter after it
-            jobChain.Equeue(new EntityJob<EntityEnteredEventArgs>(triggerMan, actorEntity, () => AddToWorld(actorEntity, mapKey)));
-            //Set position of entity to entry position in next world
-            jobChain.Equeue(new InstantJob(() => SetPosition(actorEntity, entryId, true)));
-            //Fade in camera
-            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
-
-            jobsMan.Execute(jobChain);
+            PauseWorld(context);
+            //    .Then(FadeOut)
+            //    .Then(RemoveFromWorld);
         }
+
+        class Context
+        {
+            public Entity cameraEntity { get; set; }
+            public Entity actorEntity { get; set; }
+            public int cameraFadeOutClipId { get; set; }
+            public int cameraFadeInClipId { get; set; }
+            public string mapKey { get; set; }
+            public int entryId { get; set; }
+            public World targetWorld { get; internal set; }
+
+            public Context Then(Func<Context, Context> function)
+            {
+                return function.Invoke(this);
+            }
+
+        }
+
+        private Context PauseWorld(Context context)
+        {
+            triggerMan.OnPausedWorld(context.cameraEntity, (e, a) =>
+            {
+                FadeOut(context);
+            }, singleTime: true);
+
+            context.cameraEntity.PauseWorld();
+
+            return context;
+        }
+
+        private Context FadeOut(Context context)
+        {
+            triggerMan.OnEntityAnimFinished(context.cameraEntity, (e, a) =>
+            {
+                RemoveFromWorld(context);
+
+            }, singleTime: true);
+
+            context.cameraEntity.PlayAnimation(0, context.cameraFadeOutClipId);
+
+            return context;
+        }
+
+        private Context RemoveFromWorld(Context context)
+        {
+            triggerMan.OnEntityLeftWorld(context.actorEntity, () =>
+            {
+                var jobChain = new JobChain();
+                jobChain.Equeue(new InstantJob(() => LoadWorld(context)));
+                jobsMan.Execute(jobChain);
+
+                //LoadWorld(context);
+            }, singleTime: true);
+
+            context.actorEntity.LeaveWorld();
+
+            return context;
+        }
+
+        private void LoadWorld(Context context)
+        {
+            context.targetWorld = TryLoadWorld(context.mapKey);
+
+            triggerMan.OnWorldInitialized(context.targetWorld, () =>
+            {
+                AddToWorld(context);
+            }, singleTime: true);
+        }
+
+        private void AddToWorld(Context context)
+        {
+            triggerMan.OnEntityEnteredWorld(context.actorEntity, () =>
+            {
+                SetPosition(context);
+            }, singleTime: true);
+
+            AddToWorld(context.actorEntity, context.mapKey);
+        }
+
+        private void SetPosition(Context context)
+        {
+            SetPosition(context.actorEntity, context.entryId, true);
+
+            FadeIn(context);
+        }
+
+        private void FadeIn(Context context)
+        {
+            triggerMan.OnEntityEnteredWorld(context.cameraEntity, () =>
+            {
+                context.cameraEntity.PlayAnimation(0, context.cameraFadeInClipId);
+            }, singleTime: true);
+        }
+
 
         //private void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         //{
@@ -231,15 +322,17 @@ namespace OpenBreed.Sandbox.Entities
             target.EnterWorld(world.Id);
         }
 
-        private void TryLoadWorld(string worldName)
+        private World TryLoadWorld(string worldName)
         {
             var world = worldMan.GetByName(worldName);
 
-            if (world == null)
+            if (world is null)
             {
                 var mapWorldDataLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
-                mapWorldDataLoader.Load(worldName);
+                world = mapWorldDataLoader.Load(worldName);
             }
+
+            return world;
         }
 
         private Entity FindEntryEntity(World world, int entryId)

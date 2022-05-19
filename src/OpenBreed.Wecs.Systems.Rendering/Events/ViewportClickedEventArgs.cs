@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Wecs.Events;
+using OpenTK;
 using OpenTK.Mathematics;
 using System;
 
@@ -7,11 +8,12 @@ namespace OpenBreed.Wecs.Systems.Rendering.Events
     /// <summary>
     /// Event args for event that occurs when rendering viewport was clicked with cursor
     /// </summary>
-    public class ViewportClickedEventArgs : EventArgs
+    public class ViewportClickedEventArgs : EntityEvent
     {
         #region Public Constructors
 
-        public ViewportClickedEventArgs(Vector2 location)
+        public ViewportClickedEventArgs(int entityId, Vector2 location)
+            : base(entityId)
         {
             Location = location;
         }

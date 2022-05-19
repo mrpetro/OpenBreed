@@ -19,8 +19,10 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
             systemFactory.Register<FsmSystem>(() => new FsmSystem(serviceProvider.GetService<IFsmMan>(),
                                                                   serviceProvider.GetService<ILogger>()));
             systemFactory.Register<TextInputSystem>(() => new TextInputSystem(serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register<TimerSystem>(() => new TimerSystem(serviceProvider.GetService<IEntityMan>(),
-                                                                      serviceProvider.GetService<ILogger>()));
+            systemFactory.Register<TimerSystem>(() => new TimerSystem(
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IEventsMan>(),
+                serviceProvider.GetService<ILogger>()));
 
             systemFactory.Register<PausingSystem>(() => new PausingSystem(serviceProvider.GetService<IWorldMan>(),
                                                                           serviceProvider.GetService<IEventsMan>()));

@@ -53,7 +53,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
 
             vpc.Size = new Vector2(width, height);
 
-            entity.RaiseEvent(new ViewportResizedEventArgs(vpc.Size.X, vpc.Size.Y));
+            entity.RaiseEvent(new ViewportResizedEventArgs(entity.Id, vpc.Size.X, vpc.Size.Y));
         }
 
         public static void SetViewportCamera(this Entity entity, int cameraEntityId)

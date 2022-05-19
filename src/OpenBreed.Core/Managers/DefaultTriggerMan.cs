@@ -5,6 +5,12 @@ namespace OpenBreed.Core.Managers
 {
     internal class DefaultTriggerMan : ITriggerMan
     {
+        #region Private Fields
+
+        private Dictionary<Type, List<(Delegate ConditionFunction, Delegate Action, bool OneTime)>> logics = new Dictionary<Type, List<(Delegate ConditionFunction, Delegate Action, bool OneTime)>>();
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public DefaultTriggerMan(IEventsMan eventsMan)
@@ -18,14 +24,16 @@ namespace OpenBreed.Core.Managers
 
         public IEventsMan EventsMan { get; }
 
-        private Dictionary<Type, List<(Delegate ConditionFunction, Action Action, bool OneTime)>> logics = new Dictionary<Type, List<(Delegate ConditionFunction, Action Action, bool OneTime)>>();
+        #endregion Public Properties
 
-        public void CreateTrigger<TEventArgs>(Func<TEventArgs, bool> conditionFunction, Action action, bool singleTime) where TEventArgs : EventArgs
+        #region Public Methods
+
+        public void CreateTrigger<TEventArgs>(Func<TEventArgs, bool> conditionFunction, Action<TEventArgs> action, bool singleTime) where TEventArgs : EventArgs
         {
             var eventType = typeof(TEventArgs);
-            if(!logics.TryGetValue(eventType, out List<(Delegate ConditionFunction, Action Action, bool OneTime)> list))
+            if (!logics.TryGetValue(eventType, out List<(Delegate ConditionFunction, Delegate Action, bool OneTime)> list))
             {
-                list = new List<(Delegate ConditionFunction, Action Action, bool OneTime)>();
+                list = new List<(Delegate ConditionFunction, Delegate Action, bool OneTime)>();
                 logics.Add(eventType, list);
                 EventsMan.Subscribe<TEventArgs>(ConditionalAction);
             }
@@ -33,46 +41,60 @@ namespace OpenBreed.Core.Managers
             list.Add((conditionFunction, action, singleTime));
         }
 
-        void ConditionalAction<TEventArgs>(object sender, TEventArgs args) where TEventArgs : EventArgs
+        public ITriggerBuilder NewTrigger() => new TriggerBuilder(this);
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void ConditionalAction<TEventArgs>(object sender, TEventArgs args) where TEventArgs : EventArgs
         {
             var eventType = typeof(TEventArgs);
 
-            if (!logics.TryGetValue(eventType, out List<(Delegate ConditionFunction, Action Action, bool OneTime)> list))
+            if (!logics.TryGetValue(eventType, out List<(Delegate ConditionFunction, Delegate Action, bool OneTime)> list))
                 return;
 
-            var toRemove = new List<(Delegate ConditionFunction, Action Action, bool OneTime)>();
+            var toRemove = new List<(Delegate ConditionFunction, Delegate Action, bool OneTime)>();
 
-            foreach (var item in list)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (ConditionalAction<TEventArgs>(sender, args, (Func<TEventArgs, bool>)item.ConditionFunction, item.Action, item.OneTime))
+                var item = list[i];
+
+                if (ConditionalAction<TEventArgs>(sender, args, (Func<TEventArgs, bool>)item.ConditionFunction, (Action<TEventArgs>)item.Action, item.OneTime))
                     toRemove.Add(item);
             }
 
             toRemove.ForEach(item => list.Remove(item));
         }
 
-        bool ConditionalAction<TEventArgs>(object sender, TEventArgs args, Func<TEventArgs, bool> conditionFunction, Action action, bool singleTime)
+        private bool ConditionalAction<TEventArgs>(object sender, TEventArgs args, Func<TEventArgs, bool> conditionFunction, Action<TEventArgs> action, bool singleTime)
         {
             if (!conditionFunction.Invoke(args))
                 return false;
 
-            action.Invoke();
+            action.Invoke(args);
 
             return singleTime;
         }
 
-        public ITriggerBuilder NewTrigger() => new TriggerBuilder(this);
-
-        #endregion Public Properties
+        #endregion Private Methods
     }
 
     internal class TriggerBuilder : ITriggerBuilder
     {
+        #region Public Constructors
+
         public TriggerBuilder(ITriggerMan triggerMan)
         {
             TriggerMan = triggerMan;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
         public ITriggerMan TriggerMan { get; }
+
+        #endregion Public Properties
     }
 }

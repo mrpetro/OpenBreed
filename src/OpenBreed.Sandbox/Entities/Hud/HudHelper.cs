@@ -65,7 +65,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
             jobsMan.Execute(new FpsTextUpdateJob(renderingMan, fpsCounter));
 
-            triggerMan.OnEntityViewportResized(hudViewport, (s, a) => UpdateFpsCounterPos(fpsCounter, a));
+            triggerMan.OnEntityViewportResized(hudViewport, (a) => UpdateFpsCounterPos(fpsCounter, a));
         }
 
 
@@ -94,7 +94,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
 
 
-            triggerMan.OnEntityViewportResized(hudViewport, (s, a) => UpdatePositionInfoPos(positionInfo, a));
+            triggerMan.OnEntityViewportResized(hudViewport, (a) => UpdatePositionInfoPos(positionInfo, a));
         }
 
         private static void UpdatePositionInfoPos(Entity fpsTextEntity, ViewportResizedEventArgs a)

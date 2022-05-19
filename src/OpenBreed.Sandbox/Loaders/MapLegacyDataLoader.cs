@@ -354,7 +354,9 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var loader = dataLoaderFactory.GetLoader<IScriptDataLoader>();
 
-            //Load level specific sounds
+            if (dbMap.ScriptRef is null)
+                return;
+
             var dbScript = repositoryProvider.GetRepository<IDbScript>().GetById(dbMap.ScriptRef);
 
             loader.Load(dbScript.Id);

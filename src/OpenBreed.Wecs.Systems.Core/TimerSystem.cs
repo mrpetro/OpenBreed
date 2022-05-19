@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
+using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
@@ -12,15 +13,17 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Private Fields
 
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal TimerSystem(IEntityMan entityMan, ILogger logger)
+        internal TimerSystem(IEntityMan entityMan, IEventsMan eventsMan, ILogger logger)
         {
             this.entityMan = entityMan;
+            this.eventsMan = eventsMan;
             this.logger = logger;
 
             RequireEntityWith<TimerComponent>();
@@ -62,14 +65,12 @@ namespace OpenBreed.Wecs.Systems.Core
 
         private void RaiseTimerUpdateEvent(Entity entity, TimerData timerData)
         {
-            //eventQueue.Enqueue(new ComponentChangedEvent<TimerComponent>(entity.Id,
-
-            entity.RaiseEvent(new TimerUpdateEventArgs(timerData.TimerId));
+            eventsMan.Raise(entity, new TimerUpdateEventArgs(entity.Id, timerData.TimerId));
         }
 
         private void RaiseTimerElapsedEvent(Entity entity, TimerData timerData)
         {
-            entity.RaiseEvent(new TimerElapsedEventArgs(timerData.TimerId));
+            eventsMan.Raise(entity, new TimerElapsedEventArgs(entity.Id, timerData.TimerId));
         }
 
         #endregion Private Methods

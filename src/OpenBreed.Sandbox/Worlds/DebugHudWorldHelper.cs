@@ -95,7 +95,7 @@ namespace OpenBreed.Sandbox.Worlds
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
             hudViewport.SetViewportCamera(hudCamera.Id);
 
-            triggerMan.OnEntityViewportResized(hudViewport, (s, a) => UpdateCameraFov(hudCamera, a));
+            triggerMan.OnEntityViewportResized(hudViewport, (a) => UpdateCameraFov(hudCamera, a));
         }
 
         private void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)

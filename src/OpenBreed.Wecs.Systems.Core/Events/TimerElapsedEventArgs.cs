@@ -1,15 +1,17 @@
-﻿using System;
+﻿using OpenBreed.Wecs.Events;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Core.Events
 {
     /// <summary>
     /// Event args for event that occurs when timer has elapsed
     /// </summary>
-    public class TimerElapsedEventArgs : EventArgs
+    public class TimerElapsedEventArgs : EntityEvent
     {
         #region Public Constructors
 
-        public TimerElapsedEventArgs(int timerId)
+        public TimerElapsedEventArgs(int entityId, int timerId)
+            : base(entityId)
         {
             TimerId = timerId;
         }

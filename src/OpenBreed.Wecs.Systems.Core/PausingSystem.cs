@@ -57,12 +57,12 @@ namespace OpenBreed.Wecs.Systems.Core
 
         internal void OnWorldPaused(Entity entity, int worldId)
         {
-            eventsMan.Raise(entity, new WorldPausedEventArgs(worldId));
+            eventsMan.Raise(entity, new WorldPausedEventArgs(entity.Id, worldId));
         }
 
         internal void OnWorldUnpaused(Entity entity, int worldId)
         {
-            eventsMan.Raise(entity, new WorldUnpausedEventArgs(worldId));
+            eventsMan.Raise(entity, new WorldUnpausedEventArgs(entity.Id, worldId));
         }
 
 
