@@ -102,7 +102,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Sandbox", "OpenBr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Audio.LibOpenMpt", "..\OpenBreed.Common\src\OpenBreed.Audio.LibOpenMpt\OpenBreed.Audio.LibOpenMpt.csproj", "{418B7153-0619-4336-BCBF-37E5C63601AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common.Interface", "..\OpenBreed.Common\src\OpenBreed.Common.Interface\OpenBreed.Common.Interface.csproj", "{8002C076-0F23-47D3-A9B9-0215A168CBD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Common.Interface", "..\OpenBreed.Common\src\OpenBreed.Common.Interface\OpenBreed.Common.Interface.csproj", "{8002C076-0F23-47D3-A9B9-0215A168CBD5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{36AFE221-2153-478A-ADEB-E7AF73957D7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

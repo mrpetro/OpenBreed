@@ -7,6 +7,7 @@ using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
@@ -38,6 +39,7 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IEventsMan eventsMan;
         private readonly ViewportCreator viewportCreator;
         private readonly IViewClient viewClient;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
@@ -49,7 +51,8 @@ namespace OpenBreed.Sandbox.Worlds
                                  IWorldMan worldMan,
                                  IEventsMan eventsMan,
                                  ViewportCreator viewportCreator,
-                                 IViewClient viewClient)
+                                 IViewClient viewClient,
+                                 ITriggerMan triggerMan)
         {
             this.systemFactory = systemFactory;
             this.renderableFactory = renderableFactory;
@@ -58,6 +61,7 @@ namespace OpenBreed.Sandbox.Worlds
             this.eventsMan = eventsMan;
             this.viewportCreator = viewportCreator;
             this.viewClient = viewClient;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -96,10 +100,17 @@ namespace OpenBreed.Sandbox.Worlds
             renderingMan.ClientResized += (s, a) => ResizeHudViewport(debugHudViewport, a);
             renderingMan.ClientResized += (s, a) => ResizeTextViewport(debugHudViewport, a);
 
-            gameViewport.EnterWorld(world.Id);
-            gameHudViewport.EnterWorld(world.Id);
-            debugHudViewport.EnterWorld(world.Id);
-            textViewport.EnterWorld(world.Id);
+            triggerMan.OnWorldInitialized(
+                world, () =>
+                {
+                    gameViewport.EnterWorld(world.Id);
+                    gameHudViewport.EnterWorld(world.Id);
+                    debugHudViewport.EnterWorld(world.Id);
+                    textViewport.EnterWorld(world.Id);
+                }, singleTime: true);
+
+
+
 
             //gameViewport.Subscribe<ViewportClickedEventArgs>(OnViewportClick);
 

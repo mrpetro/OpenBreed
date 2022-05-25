@@ -15,6 +15,7 @@ using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Rendering;
@@ -42,7 +43,7 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
-        private readonly IEventsManEx triggerMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
@@ -60,7 +61,7 @@ namespace OpenBreed.Sandbox.Worlds
                                   IRepositoryProvider repositoryProvider, 
                                   IDataLoaderFactory dataLoaderFactory,
                                   SpriteAtlasDataProvider spriteAtlasDataProvider,
-                                  IEventsManEx triggerMan)
+                                  ITriggerMan triggerMan)
         {
             this.systemFactory = systemFactory;
             this.renderableFactory = renderableFactory;
@@ -108,7 +109,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void Create()
         {
-            triggerMan.OnEachAction(GameEventTypes.HeroPickedItem, PerformShowSmartcardReader);
+            //triggerMan.OnEachAction(GameEventTypes.HeroPickedItem, PerformShowSmartcardReader);
 
 
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
@@ -174,24 +175,31 @@ namespace OpenBreed.Sandbox.Worlds
 
             hudCamera.Tag = "GameHudCamera";
 
-            hudCamera.EnterWorld(world.Id);
 
-            hudHelper.AddP1StatusBar(world);
-            //hudHelper.AddAmmoBar(world, 20, 112);
-            //hudHelper.AddHealthBar(world, -124, 112);
-            hudHelper.AddLivesCounter(world, -24, 112);
-            hudHelper.AddAmmoCounter(world, 80, 112);
-            hudHelper.AddKeysCounter(world, 128, 112);
+            triggerMan.OnWorldInitialized(world, () =>
+            {
+                hudCamera.EnterWorld(world.Id);
 
-            hudHelper.AddP2StatusBar(world);
-            //hudHelper.AddAmmoBar(world, 20, -117);
-            //hudHelper.AddHealthBar(world, -124, -117);
-            hudHelper.AddLivesCounter(world, -24, -117);
-            hudHelper.AddAmmoCounter(world, 80, -117);
-            hudHelper.AddKeysCounter(world, 128, -117);
+                hudHelper.AddP1StatusBar(world);
+                //hudHelper.AddAmmoBar(world, 20, 112);
+                //hudHelper.AddHealthBar(world, -124, 112);
+                hudHelper.AddLivesCounter(world, -24, 112);
+                hudHelper.AddAmmoCounter(world, 80, 112);
+                hudHelper.AddKeysCounter(world, 128, 112);
 
-            var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
-            hudViewport.SetViewportCamera(hudCamera.Id);
+                hudHelper.AddP2StatusBar(world);
+                //hudHelper.AddAmmoBar(world, 20, -117);
+                //hudHelper.AddHealthBar(world, -124, -117);
+                hudHelper.AddLivesCounter(world, -24, -117);
+                hudHelper.AddAmmoCounter(world, 80, -117);
+                hudHelper.AddKeysCounter(world, 128, -117);
+
+                var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
+                hudViewport.SetViewportCamera(hudCamera.Id);
+
+            }, singleTime: true);
+
+
         }
 
         #endregion Private Methods

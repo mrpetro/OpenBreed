@@ -203,6 +203,7 @@ namespace OpenBreed.Sandbox.Entities
 
             PauseWorld(context);
             //    .Then(FadeOut)
+           //     .Then(RemoveFromWorld)
             //    .Then(RemoveFromWorld);
         }
 
@@ -252,9 +253,11 @@ namespace OpenBreed.Sandbox.Entities
         {
             triggerMan.OnEntityLeftWorld(context.actorEntity, () =>
             {
-                var jobChain = new JobChain();
-                jobChain.Equeue(new InstantJob(() => LoadWorld(context)));
-                jobsMan.Execute(jobChain);
+                LoadWorld(context);
+
+                //var jobChain = new JobChain();
+                //jobChain.Equeue(new InstantJob(() => LoadWorld(context)));
+                //jobsMan.Execute(jobChain);
 
                 //LoadWorld(context);
             }, singleTime: true);

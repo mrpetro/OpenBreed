@@ -112,6 +112,11 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupLuaScripting((scriptMan, sp) =>
             {
+                var eventsMan = sp.GetService<IEventsMan>();
+
+                eventsMan.Subscribe<WorldInitializedEventArgs>(
+                    (s,a) => scriptMan.TryInvokeFunction("WorldLoaded", a.WorldId));
+
                 scriptMan.Expose("Entities", sp.GetService<IEntityMan>());
                 scriptMan.Expose("Sounds", sp.GetService<ISoundMan>());
                 scriptMan.Expose("Triggers", sp.GetService<ITriggerMan>());

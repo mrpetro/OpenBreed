@@ -11,6 +11,7 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Rendering;
@@ -87,8 +88,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             hudCamera.Tag = "DebugHudCamera";
 
-            hudCamera.EnterWorld(world.Id);
-
+            triggerMan.OnWorldInitialized(world, () => hudCamera.EnterWorld(world.Id), singleTime: true);
+ 
             hudHelper.AddFpsCounter(world);
             hudHelper.AddPositionInfo(world);
 

@@ -7,6 +7,7 @@ using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
@@ -59,7 +60,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
                 .SetParameter("posY", -viewClient.ClientRectangle.Size.Y / 2.0f)
                 .Build();
 
-            fpsCounter.EnterWorld(world.Id);
+            triggerMan.OnWorldInitialized(world, () => fpsCounter.EnterWorld(world.Id), singleTime: true);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
 
@@ -86,7 +87,8 @@ namespace OpenBreed.Sandbox.Entities.Hud
                 .SetParameter("posY", -viewClient.ClientRectangle.Size.Y / 2.0f)
                 .Build();
 
-            positionInfo.EnterWorld(world.Id);
+
+            triggerMan.OnWorldInitialized(world, () => positionInfo.EnterWorld(world.Id), singleTime: true);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
 
