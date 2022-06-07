@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Scripting.Interface
 {
-    public interface IScriptDataLoader : IDataLoader<string>
+    public interface IScriptDataLoader : IDataLoader<IScriptFunc>
     {
     }
 }

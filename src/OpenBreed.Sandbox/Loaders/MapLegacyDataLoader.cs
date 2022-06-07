@@ -143,7 +143,7 @@ namespace OpenBreed.Sandbox.Loaders
             LoadReferencedAnimations(dbMap);
             LoadReferencedTileStamps(dbMap);
             LoadReferencedSounds(dbMap);
-            LoadReferencedScripts(dbMap);
+            var mapScript = LoadReferencedScripts(dbMap, world);
 
             var layout = map.Layout;
             var visited = new bool[layout.Width, layout.Height];
@@ -169,6 +169,9 @@ namespace OpenBreed.Sandbox.Loaders
 
             triggerMan.OnWorldInitialized(world, () =>
             {
+                if(mapScript != null)
+                    mapScript.Invoke();
+
                 for (int iy = 0; iy < layout.Height; iy++)
                 {
                     for (int ix = 0; ix < layout.Width; ix++)
@@ -286,16 +289,16 @@ namespace OpenBreed.Sandbox.Loaders
                 loader.Load(dbAnim.Id);
         }
 
-        private void LoadReferencedScripts(IDbMap dbMap)
+        private IScriptFunc LoadReferencedScripts(IDbMap dbMap, World world)
         {
             var loader = dataLoaderFactory.GetLoader<IScriptDataLoader>();
 
             if (dbMap.ScriptRef is null)
-                return;
+                return null;
 
             var dbScript = repositoryProvider.GetRepository<IDbScript>().GetById(dbMap.ScriptRef);
 
-            loader.Load(dbScript.Id);
+            return loader.Load(dbScript.Id);
         }
 
         private void LoadReferencedSounds(IDbMap dbMap)

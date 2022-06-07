@@ -1,19 +1,20 @@
-﻿namespace OpenBreed.Wecs.Components.Audio
+﻿using System.Collections.Generic;
+
+namespace OpenBreed.Wecs.Components.Audio
 {
     public class SoundPlayerComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public SoundPlayerComponent(int sampleId)
+        public SoundPlayerComponent()
         {
-            SampleId = sampleId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int SampleId { get; }
+        public List<int> ToPlay { get; } = new List<int>();
 
         #endregion Public Properties
     }

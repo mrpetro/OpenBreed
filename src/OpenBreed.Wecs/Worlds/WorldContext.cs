@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Wecs.Worlds
+﻿using System;
+
+namespace OpenBreed.Wecs.Worlds
 {
     internal class WorldContext : IWorldContext
     {
@@ -27,6 +29,10 @@
 
         internal void UpdateDeltaTime(float dt)
         {
+            //NOTE: DT hoops limiter
+            //if (dt > 0.1f)
+            //    dt = 0.1f;
+
             Dt = dt * DtMultiplier;
         }
 

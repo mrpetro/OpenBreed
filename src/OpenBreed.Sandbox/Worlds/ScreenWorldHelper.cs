@@ -5,10 +5,13 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Audio;
+using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
@@ -38,8 +41,10 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IWorldMan worldMan;
         private readonly IEventsMan eventsMan;
         private readonly ViewportCreator viewportCreator;
+        private readonly IEntityFactory entityFactory;
         private readonly IViewClient viewClient;
         private readonly ITriggerMan triggerMan;
+        private readonly IScriptMan scriptMan;
 
         #endregion Private Fields
 
@@ -51,8 +56,10 @@ namespace OpenBreed.Sandbox.Worlds
                                  IWorldMan worldMan,
                                  IEventsMan eventsMan,
                                  ViewportCreator viewportCreator,
+                                 IEntityFactory entityFactory,
                                  IViewClient viewClient,
-                                 ITriggerMan triggerMan)
+                                 ITriggerMan triggerMan,
+                                 IScriptMan scriptMan)
         {
             this.systemFactory = systemFactory;
             this.renderableFactory = renderableFactory;
@@ -60,8 +67,10 @@ namespace OpenBreed.Sandbox.Worlds
             this.worldMan = worldMan;
             this.eventsMan = eventsMan;
             this.viewportCreator = viewportCreator;
+            this.entityFactory = entityFactory;
             this.viewClient = viewClient;
             this.triggerMan = triggerMan;
+            this.scriptMan = scriptMan;
         }
 
         #endregion Public Constructors
@@ -72,6 +81,8 @@ namespace OpenBreed.Sandbox.Worlds
         {
             //Video
             builder.AddSystem(systemFactory.Create<ViewportSystem>());
+            builder.AddSystem(systemFactory.Create<SoundSystem>());
+            builder.AddSystem(systemFactory.Create<TimerSystem>());
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             //builder.AddSystem(core.CreateTextSystem().Build());
@@ -85,6 +96,11 @@ namespace OpenBreed.Sandbox.Worlds
             AddSystems(builder);
 
             var world = builder.Build();
+
+            var gameCommentatorBuilder = entityFactory.Create($@"Entities\Commentator\GameCommentator.xml");
+            var gameCommentator = gameCommentatorBuilder.Build();
+
+            scriptMan.Expose("Commentator", gameCommentator);
 
             var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, GAME_VIEWPORT);
             var gameHudViewport = viewportCreator.CreateViewportEntity(GAME_HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, GAME_HUD_VIEWPORT);
@@ -103,6 +119,7 @@ namespace OpenBreed.Sandbox.Worlds
             triggerMan.OnWorldInitialized(
                 world, () =>
                 {
+                    gameCommentator.EnterWorld(world.Id);
                     gameViewport.EnterWorld(world.Id);
                     gameHudViewport.EnterWorld(world.Id);
                     debugHudViewport.EnterWorld(world.Id);

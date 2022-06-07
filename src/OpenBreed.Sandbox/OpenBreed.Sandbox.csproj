@@ -20,6 +20,7 @@
     <None Remove="Content\Scripts\start.lua" />
     <None Remove="Entities\Actor\States\Attacking\IdleState.lua" />
     <None Remove="Entities\Button\Button.lua" />
+    <None Remove="Entities\Commentator\GameCommentator.xml" />
     <None Remove="Entities\Turret\Turret.xml" />
     <None Remove="Entities\Viewport\DebugHudViewport.xml" />
     <None Remove="Entities\Viewport\GameHudViewport.xml" />
@@ -48,6 +49,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Button\Button.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Commentator\GameCommentator.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Turret\Turret.xml">

@@ -30,7 +30,7 @@ namespace OpenBreed.Scripting.Lua
 
         #region Public Methods
 
-        public string Load(string entryId, params object[] args)
+        public IScriptFunc Load(string entryId, params object[] args)
         {
             var entry = repositoryProvider.GetRepository<IDbScript>().GetById(entryId);
             if (entry == null)
@@ -39,9 +39,7 @@ namespace OpenBreed.Scripting.Lua
             modelsProvider.TryGetModel<TextModel>(entry.DataRef, out TextModel model, out string message);
 
 
-            var scriptFunc = scriptMan.CompileString(model.Text, entryId);
-            scriptFunc.Invoke();
-            return model.Text;
+            return scriptMan.CompileString(model.Text, entryId);
         }
 
         public object LoadObject(string entryId) => Load(entryId);

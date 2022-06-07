@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Worlds;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Core
 {

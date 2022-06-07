@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components.Audio;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Audio.Events;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
@@ -12,15 +14,16 @@ namespace OpenBreed.Wecs.Systems.Audio
         #region Private Fields
 
         private readonly ISoundMan soundMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SoundSystem(ISoundMan soundMan)
+        public SoundSystem(ISoundMan soundMan, IEventsMan eventsMan)
         {
             this.soundMan = soundMan;
-
+            this.eventsMan = eventsMan;
             RequireEntityWith<SoundPlayerComponent>();
         }
 
@@ -44,14 +47,23 @@ namespace OpenBreed.Wecs.Systems.Audio
             if (soundPlayerComponent is null)
                 return;
 
-            try
+            var toPlay = soundPlayerComponent.ToPlay;
+
+            //try
+            //{
+            for (int i = 0; i < toPlay.Count; i++)
             {
-                soundMan.PlaySample(soundPlayerComponent.SampleId);
+                soundMan.PlaySample(toPlay[i]);
+                eventsMan.Raise(null, new SoundPlayEvent(entity.Id, toPlay[i]));
             }
-            finally
-            {
-                entity.Remove<SoundPlayerComponent>();
-            }
+
+            toPlay.Clear();
+
+            //}
+            //finally
+            //{
+            //    entity.Remove<SoundPlayerComponent>();
+            //}
         }
 
         #endregion Protected Methods

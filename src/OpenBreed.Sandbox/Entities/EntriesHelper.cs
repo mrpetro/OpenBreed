@@ -22,6 +22,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities
@@ -201,9 +202,9 @@ namespace OpenBreed.Sandbox.Entities
                 entryId = entryId
             };
 
-            PauseWorld(context);
+            PauseWorld(context); 
             //    .Then(FadeOut)
-           //     .Then(RemoveFromWorld)
+            //    .Then(RemoveFromWorld)
             //    .Then(RemoveFromWorld);
         }
 
@@ -338,7 +339,7 @@ namespace OpenBreed.Sandbox.Entities
             return world;
         }
 
-        private Entity FindEntryEntity(World world, int entryId)
+        private IEnumerable<Entity> FindEntryEntities(World world, int entryId)
         {
             foreach (var entity in world.Entities.Where(e => e.Contains<MetadataComponent>()))
             {
@@ -350,20 +351,51 @@ namespace OpenBreed.Sandbox.Entities
                 if (cmpClass.Flavor != entryId.ToString())
                     continue;
 
-                return entity;
+                yield return entity;
+            }
+        }
+
+        /// <summary>
+        /// This function should emulate scanline method from vanilla ABTA for searching 
+        /// Entities
+        /// </summary>
+        /// <param name="entities">Entities to check coordinates</param>
+        /// <returns></returns>
+        private Entity GetTopLeftMostEntity(IEnumerable<Entity> entities)
+        {
+            Entity topMostEntity = null;
+            var topMostPosX = float.MaxValue;
+            var topMostPosY = 0.0f;
+
+            foreach (var entity in entities)
+            {
+                var pos = entity.Get<PositionComponent>().Value;
+
+                if (pos.Y < topMostPosY)
+                    continue;
+
+                if(pos.Y == topMostPosY)
+                {
+                    if (pos.X > topMostPosX)
+                        continue;
+                }
+
+                topMostPosX = pos.X;
+                topMostPosY = pos.Y;
+                topMostEntity = entity;
             }
 
-            return null;
+            return topMostEntity;
         }
 
         private void SetPosition(Entity target, int entryId, bool cancelMovement)
         {
             var world = worldMan.GetById(target.WorldId);
 
-            var entryEntity = FindEntryEntity(world, entryId);
+            var entryEntity = GetTopLeftMostEntity(FindEntryEntities(world, entryId));
 
-            if(entryEntity == null)
-                entryEntity = FindEntryEntity(world, 2);
+            if(entryEntity is null)
+                entryEntity = GetTopLeftMostEntity(FindEntryEntities(world, 2));
 
             if (entryEntity == null)
                 throw new Exception($"No entry with ID '{entryId}' found.");

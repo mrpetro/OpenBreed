@@ -123,7 +123,10 @@ namespace OpenBreed.Sandbox
                 scriptMan.Expose("Logging", sp.GetService<ILogger>());
 
                 var res = scriptMan.RunString(@"import('System')");
+                res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Core', 'OpenBreed.Wecs.Systems.Core.Extensions')");
+                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Audio', 'OpenBreed.Wecs.Systems.Audio.Extensions')");
+
             });
 
             hostBuilder.SetupInputMan((inpitsMan, sp) =>
@@ -447,8 +450,7 @@ namespace OpenBreed.Sandbox
             GetManager<FixtureTypes>().Register();
 
             var spriteMan = GetManager<ISpriteMan>();
-
-
+            var scriptMan = GetManager<IScriptMan>();
             var tileMan = GetManager<ITileMan>();
 
             var textureMan = GetManager<ITextureMan>();
@@ -551,6 +553,8 @@ namespace OpenBreed.Sandbox
             //var johnPlayerEntity = entityMan.GetByTag("John").First();
             var johnPlayerEntity = actorHelper.CreateDummyActor(new Vector2(0, 0));
             johnPlayerEntity.Tag = "John";
+
+            scriptMan.Expose("JohnPlayer", johnPlayerEntity);
 
 
             johnPlayerEntity.AddFollower(playerCamera);
