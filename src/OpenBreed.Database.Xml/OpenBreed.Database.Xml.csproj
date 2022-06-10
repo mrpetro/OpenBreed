@@ -58,13 +58,17 @@
     <None Remove="Defaults\Templates\ABTA\Common\Projectile.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\TeleportEntry.xml" />
     <None Remove="Defaults\Templates\ABTA\Common\TeleportExit.xml" />
+    <None Remove="Defaults\Templates\ABTA\L1\LandMine.xml" />
     <None Remove="Defaults\Templates\ABTA\L4\MonsterEating.xml" />
     <None Remove="Defaults\Templates\ABTA\L4\TVFlickering.xml" />
     <None Remove="Defaults\Templates\Logo1.lua" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Defaults\ABTA\Scripts\Maps\MAP.01.lua">
+    <Content Include="Defaults\ABTA\Scripts\L1\LandMineExplode.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\GameDatabase.ABHC.xml">
@@ -221,13 +225,16 @@
     <Content Include="Defaults\Templates\ABTA\Common\TeleportExit.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Defaults\Templates\ABTA\L1\LandMine.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Defaults\Templates\ABTA\L4\MonsterEating.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Defaults\Templates\ABTA\L4\TVFlickering.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\Logo1.lua">
+    <Content Include="Defaults\ABTA\Scripts\Logo1.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -236,6 +243,10 @@
     <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj" />
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
     <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Defaults\ABTA\Templates\" />
   </ItemGroup>
 
 </Project>

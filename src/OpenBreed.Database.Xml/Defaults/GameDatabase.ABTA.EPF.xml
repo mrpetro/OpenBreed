@@ -183,7 +183,8 @@
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/SMARTPIC.LBM" EntryName="SMARTPIC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-				<FileDataSource Id="Extension/Scripts/Maps/MAP.01.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Maps\MAP.01.lua" />
+				<FileDataSource Id="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua" />
+				<FileDataSource Id="Extension/Scripts/L1/LandMineExplode.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\LandMineExplode.lua" />
 				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
 				<FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\SimpleEntry.lua" />
 				<FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Exit.lua" />
@@ -1051,7 +1052,10 @@
 				<Asset Id="Assets.TITLE.AMF" DataSourceRef="Vanilla/EPF/TITLE.AMF" FormatType="AMF_MUSIC">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Maps.MAP.01.lua" DataSourceRef="Extension/Scripts/Maps/MAP.01.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.L1.MAP.01.PlayerEntry.lua" DataSourceRef="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.L1.LandMineExplode.lua" DataSourceRef="Extension/Scripts/L1/LandMineExplode.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="Extension/Scripts/Entry.lua" FormatType="TEXT">
@@ -1156,7 +1160,7 @@
 				<Sound Id="Sounds.EAT1">
 					<DataRef>Assets.EAT1</DataRef>
 				</Sound>
-				<Sound Id="Sounds.EXPLOS">
+				<Sound Id="Vanilla/Common/LandMine/Explosion">
 					<DataRef>Assets.EXPLOS</DataRef>
 				</Sound>
 				<Sound Id="Sounds.FLAMEOFF">
@@ -2098,6 +2102,34 @@
 				<TileStamp Id="Vanilla/L1/KeycardBlue/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="815" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L1/MineCrater" Width="3" Height="3" CenterX="1" CenterY="1">
+					<Cells>
+						<Cell X="0" Y="2" TsId="Vanilla/L1" TsTi ="323" />
+						<Cell X="1" Y="2" TsId="Vanilla/L1" TsTi ="324" />
+						<Cell X="2" Y="2" TsId="Vanilla/L1" TsTi ="325" />
+						<Cell X="0" Y="1" TsId="Vanilla/L1" TsTi ="343" />
+						<Cell X="1" Y="1" TsId="Vanilla/L1" TsTi ="344" />
+						<Cell X="2" Y="1" TsId="Vanilla/L1" TsTi ="345" />
+						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="363" />
+						<Cell X="1" Y="0" TsId="Vanilla/L1" TsTi ="364" />
+						<Cell X="2" Y="0" TsId="Vanilla/L1" TsTi ="365" />
+					</Cells>
+				</TileStamp>
+				<TileStamp Id="Vanilla/L1/DeadPilot" Width="4" Height="3" CenterX="1" CenterY="1">
+					<Cells>
+						<Cell X="1" Y="0" TsId="Vanilla/L1" TsTi ="544" />
+						<Cell X="2" Y="0" TsId="Vanilla/L1" TsTi ="545" />
+						<Cell X="3" Y="0" TsId="Vanilla/L1" TsTi ="546" />
+						<Cell X="0" Y="1" TsId="Vanilla/L1" TsTi ="563" />
+						<Cell X="1" Y="1" TsId="Vanilla/L1" TsTi ="564" />
+						<Cell X="2" Y="1" TsId="Vanilla/L1" TsTi ="565" />
+						<Cell X="3" Y="1" TsId="Vanilla/L1" TsTi ="566" />
+						<Cell X="0" Y="2" TsId="Vanilla/L1" TsTi ="583" />
+						<Cell X="1" Y="2" TsId="Vanilla/L1" TsTi ="584" />
+						<Cell X="2" Y="2" TsId="Vanilla/L1" TsTi ="585" />
+						<Cell X="3" Y="2" TsId="Vanilla/L1" TsTi ="586" />
 					</Cells>
 				</TileStamp>
 
@@ -4986,7 +5018,7 @@
 						<SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L1</TileSetRef>
-					<ScriptRef>Scripts.Maps.MAP.01.lua</ScriptRef>
+					<ScriptRef>Vanilla/L1/MAP.01/PlayerEntry</ScriptRef>
 				</Map>
 				<Map Id="Vanilla/2" Description="CIVILIAN ZONE 1">
 					<DataRef>Assets.MAP.02</DataRef>
@@ -10976,8 +11008,11 @@
 		</Texts>
 		<Scripts>
 			<Items>
-				<ScriptFromFile Id="Scripts.Maps.MAP.01.lua">
-					<DataRef>Assets.Scripts.Maps.MAP.01.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/L1/MAP.01/PlayerEntry">
+					<DataRef>Assets.Scripts.L1.MAP.01.PlayerEntry.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/L1/LandMine/Explode">
+					<DataRef>Assets.Scripts.L1.LandMineExplode.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Scripts.Entry.lua">
 					<DataRef>Assets.Scripts.Entry.lua</DataRef>

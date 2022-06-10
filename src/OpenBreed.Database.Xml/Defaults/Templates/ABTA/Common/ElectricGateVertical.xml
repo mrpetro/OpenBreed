@@ -8,11 +8,8 @@
 		</Metadata>
 		<Timer>
 		</Timer>
-		<!--<Fsm>
-			<States>
-				<State FsmName="Door.Functioning" StateName="Closed" />
-			</States>
-		</Fsm>-->
+		<SoundPlayer>
+		</SoundPlayer>
 		<Animation>
 			<States>
 				<State>

@@ -12,6 +12,8 @@
 				<State FsmName="Actor.Attacking" StateName="Idle" />
 			</States>
 		</Fsm>
+		<SoundPlayer>
+		</SoundPlayer>
 		<Animation>
 			<States>
 				<State>

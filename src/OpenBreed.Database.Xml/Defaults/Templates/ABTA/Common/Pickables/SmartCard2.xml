@@ -12,6 +12,8 @@
 				<State FsmName="Pickable.Functioning" StateName="Lying" />
 			</States>
 		</Fsm>
+		<SoundPlayer>
+		</SoundPlayer>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>
