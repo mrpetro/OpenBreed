@@ -335,6 +335,11 @@ namespace OpenBreed.Sandbox.Extensions
 
             mapLegacyDataLoader.Register("TeleportEntry", teleportLoader);
             mapLegacyDataLoader.Register("TeleportExit", teleportLoader);
+
+            var landMineEntityLoader = new LandMineEntityLoader(managerCollection.GetService<GenericCellHelper>(),
+                                        managerCollection.GetService<ILogger>());
+
+            mapLegacyDataLoader.Register("LandMine", landMineEntityLoader);
         }
 
 

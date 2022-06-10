@@ -12,13 +12,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Extensions
     {
         public static void EmitSound(this Entity entity, int soundId)
         {
-            var soundPlayer = entity.TryGet<SoundPlayerComponent>();
-
-            if(soundPlayer is null)
-            {
-                soundPlayer = new SoundPlayerComponent();
-                entity.Set(soundPlayer);
-            }
+            var soundPlayer = entity.Get<SoundPlayerComponent>();
 
             if (soundPlayer.ToPlay.Contains(soundId))
                 return;

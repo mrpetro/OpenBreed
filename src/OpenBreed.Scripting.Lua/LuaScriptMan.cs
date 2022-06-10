@@ -3,6 +3,7 @@ using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Scripting.Interface;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace OpenBreed.Scripting.Lua
@@ -83,6 +84,16 @@ namespace OpenBreed.Scripting.Lua
             return new LuaScriptFunc(luaState.LoadString(script, name));
         }
 
+        private Dictionary<string, IScriptFunc> functionLookup = new Dictionary<string, IScriptFunc>();
+
+        public void RegisterFunction(string functionName, IScriptFunc func)
+        {
+            if (functionLookup.ContainsKey(functionName))
+                throw new InvalidOperationException($"Function '{functionName}' already registered.");
+
+            functionLookup.Add(functionName, func);
+        }
+
         public IScriptFunc CompileFile(string filePath)
         {
             return new LuaScriptFunc(luaState.LoadFile(filePath));
@@ -97,6 +108,17 @@ namespace OpenBreed.Scripting.Lua
 
             func.Call(funcArgs);
             return true;
+        }
+
+        public IScriptFunc GetFunction(string funcName)
+        {
+            functionLookup.TryGetValue(funcName, out IScriptFunc func);
+            return func;
+        }
+
+        public bool FunctionExists(string funcName)
+        {
+            return functionLookup.ContainsKey(funcName);
         }
 
         public bool TryInvokeFunction(string funcName, out object funcResult, params object[] funcArgs)

@@ -38,7 +38,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
             var pos = entity.Get<PositionComponent>();
 
-            entity.PutStamp(0, 0, pos.Value);
+            entity.PutStampAtPosition(0, 0, pos.Value);
             //commandsMan.Post(new PutStampCommand(entity.Id, 0, 0, pos.Value));
 
             entity.SetText(0, "Door - Closed");

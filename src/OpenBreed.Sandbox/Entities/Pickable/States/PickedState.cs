@@ -69,7 +69,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
                 else
                     stampId = stampMan.GetByName($"{level}/{className}/{flavor}/{stateName}").Id;
 
-                entity.PutStamp(stampId, 0, pos.Value);
+                entity.PutStampAtPosition(stampId, 0, pos.Value);
 
 
                 var soundId = soundMan.GetByName($"{SOUND_PREFIX}/{className}/{stateName}");

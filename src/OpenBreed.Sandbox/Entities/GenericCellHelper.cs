@@ -17,6 +17,8 @@ namespace OpenBreed.Sandbox.Entities
         #region Private Fields
 
         private const string PREFIX = @"Defaults\Templates\ABTA\Common\Environment";
+        private const string PREFIX_L1 = @"Defaults\Templates\ABTA\L1";
+
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 
@@ -82,6 +84,20 @@ namespace OpenBreed.Sandbox.Entities
         internal void AddFullObstacleCell(World world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\FullObstacle.xml";
+
+            var pickable = entityFactory.Create(path)
+                .SetParameter("level", level)
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
+                .Build();
+
+            pickable.EnterWorld(world.Id);
+        }
+
+        internal void AddLandMineCell(World world, int x, int y, string level, int gfxValue)
+        {
+            var path = $@"{PREFIX_L1}\LandMine.xml";
 
             var pickable = entityFactory.Create(path)
                 .SetParameter("level", level)

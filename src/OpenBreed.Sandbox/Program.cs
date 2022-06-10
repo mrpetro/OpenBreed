@@ -33,10 +33,12 @@ using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Components.Animation.Extensions;
+using OpenBreed.Wecs.Components.Audio.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Physics.Extensions;
 using OpenBreed.Wecs.Components.Rendering.Extensions;
+using OpenBreed.Wecs.Components.Scripting.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
@@ -121,12 +123,13 @@ namespace OpenBreed.Sandbox
                 scriptMan.Expose("Sounds", sp.GetService<ISoundMan>());
                 scriptMan.Expose("Triggers", sp.GetService<ITriggerMan>());
                 scriptMan.Expose("Logging", sp.GetService<ILogger>());
+                scriptMan.Expose("Stamps", sp.GetService<IStampMan>());
 
                 var res = scriptMan.RunString(@"import('System')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Core', 'OpenBreed.Wecs.Systems.Core.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Audio', 'OpenBreed.Wecs.Systems.Audio.Extensions')");
-
+                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Rendering', 'OpenBreed.Wecs.Systems.Rendering.Extensions')");
             });
 
             hostBuilder.SetupInputMan((inpitsMan, sp) =>
@@ -192,13 +195,17 @@ namespace OpenBreed.Sandbox
             XmlPhysicsComponents.Setup();
             XmlRenderingComponents.Setup();
             XmlAnimationComponents.Setup();
+            XmlAudioComponents.Setup();
             XmlFsmComponents.Setup();
+            XmlScriptingComponents.Setup();
 
             hostBuilder.SetupCommonComponentFactories();
             hostBuilder.SetupPhysicsComponentFactories();
             hostBuilder.SetupRenderingComponentFactories();
             hostBuilder.SetupAnimationComponentFactories();
+            hostBuilder.SetupAudioComponentFactories();
             hostBuilder.SetupFsmComponentFactories();
+            hostBuilder.SetupScriptingComponentFactories();
 
             hostBuilder.SetupEntityFactory((entityFactory, sp) =>
             {
@@ -206,7 +213,9 @@ namespace OpenBreed.Sandbox
                 entityFactory.SetupPhysicsComponents(sp);
                 entityFactory.SetupRenderingComponents(sp);
                 entityFactory.SetupAnimationComponents(sp);
+                entityFactory.SetupAudioComponents(sp);
                 entityFactory.SetupFsmComponents(sp);
+                entityFactory.SetupScriptingComponents(sp);
             });
 
             hostBuilder.SetupWecsManagers();

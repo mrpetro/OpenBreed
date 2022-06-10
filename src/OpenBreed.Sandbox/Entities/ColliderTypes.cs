@@ -21,6 +21,7 @@ namespace OpenBreed.Sandbox.Entities
         public static int TeleportEntryTrigger { get; private set; }
         public static int Projectile { get; private set; }
         public static int Pickable { get; private set; }
+        public static int ScriptRunTrigger { get; private set; }
 
         #endregion Public Properties
 
@@ -38,6 +39,7 @@ namespace OpenBreed.Sandbox.Entities
             ActorOnlyObstacle = collisions.RegisterGroup("ActorOnlyObstacle");
             WorldExitTrigger = collisions.RegisterGroup("WorldExitTrigger");
             TeleportEntryTrigger = collisions.RegisterGroup("TeleportEntryTrigger");
+            ScriptRunTrigger = collisions.RegisterGroup("ScriptRunTrigger");
         }
 
         #endregion Public Methods

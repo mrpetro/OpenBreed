@@ -2,6 +2,11 @@
 
 namespace OpenBreed.Wecs.Components.Audio
 {
+    public interface ISoundPlayerComponentTemplate : IComponentTemplate
+    {
+
+    }
+
     public class SoundPlayerComponent : IEntityComponent
     {
         #region Public Constructors
@@ -17,5 +22,25 @@ namespace OpenBreed.Wecs.Components.Audio
         public List<int> ToPlay { get; } = new List<int>();
 
         #endregion Public Properties
+    }
+
+    public sealed class SoundPlayerComponentFactory : ComponentFactoryBase<ISoundPlayerComponentTemplate>
+    {
+        #region Internal Constructors
+
+        public SoundPlayerComponentFactory()
+        {
+        }
+
+        #endregion Internal Constructors
+
+        #region Protected Methods
+
+        protected override IEntityComponent Create(ISoundPlayerComponentTemplate template)
+        {
+            return new SoundPlayerComponent();
+        }
+
+        #endregion Protected Methods
     }
 }

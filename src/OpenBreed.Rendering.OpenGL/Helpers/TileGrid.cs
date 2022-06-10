@@ -82,7 +82,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
             for (int j = 0; j < stamp.Height; j++)
             {
-                var cellIndex = xIndex + Width * (yIndex + j);
+                var cellIndex = xIndex - stamp.OriginX + Width * (yIndex + j - stamp.OriginY);
 
                 for (int i = 0; i < stamp.Width; i++)
                 {

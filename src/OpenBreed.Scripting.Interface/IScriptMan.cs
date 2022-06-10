@@ -12,6 +12,9 @@ namespace OpenBreed.Scripting.Interface
 
         IScriptFunc CompileString(string script, string name);
 
+        void RegisterFunction(string functionName, IScriptFunc func);
+        IScriptFunc GetFunction(string funcName);
+
         IScriptFunc CompileFile(string filePath);
 
         object RunString(string script);
@@ -28,6 +31,8 @@ namespace OpenBreed.Scripting.Interface
 
         void Expose(string apiName, object apiObj);
         void ExposeMethod(object apiObj, string methodName, MethodInfo methodInfo);
+
+        bool FunctionExists(string funcName);
 
         #endregion Public Methods
     }

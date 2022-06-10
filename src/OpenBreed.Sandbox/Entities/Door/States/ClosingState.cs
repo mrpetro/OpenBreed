@@ -63,7 +63,7 @@ namespace OpenBreed.Sandbox.Components.States
             entity.SetBodyOn();
             entity.PlayAnimation(0, clipId);
             //entity.SetText(0, "Door - Closing");
-            entity.PutStamp(stampId, 0, pos.Value);
+            entity.PutStampAtPosition(stampId, 0, pos.Value);
 
             triggerMan.OnEntityAnimFinished(entity, OnAnimStopped, singleTime: true);
         }

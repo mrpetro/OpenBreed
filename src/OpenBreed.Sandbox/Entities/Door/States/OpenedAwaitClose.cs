@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             entity.SetSpriteOff();
             entity.SetBodyOff();
-            entity.PutStamp(stampId, 0, pos.Value);
+            entity.PutStampAtPosition(stampId, 0, pos.Value);
             //entity.SetText(0, "Door - Opened");
 
             triggerMan.OnEntityTimerElapsed(entity, OnTimerElapsed, singleTime: true);
