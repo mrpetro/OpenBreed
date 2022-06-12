@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Defaults\ABTA\Scripts\Common\ItemPickup.lua" />
+    <None Remove="Defaults\ABTA\Scripts\Common\TeleporterTeleport.lua" />
     <None Remove="Defaults\ABTA\Scripts\MAP.01.lua" />
     <None Remove="Defaults\GameDatabase.ABHC.xml" />
     <None Remove="Defaults\GameDatabase.ABSE.xml" />
@@ -65,6 +67,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Defaults\ABTA\Scripts\Common\TeleporterTeleport.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\ABTA\Scripts\Common\ItemPickup.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Defaults\ABTA\Scripts\L1\LandMineExplode.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -6,13 +6,16 @@
 			<Name>AreaScanner</Name>
 			<Flavor>$(flavor)</Flavor>
 		</Metadata>
-		<Fsm>
-			<States>
-				<State FsmName="Pickable.Functioning" StateName="Lying" />
-			</States>
-		</Fsm>
 		<SoundPlayer>
 		</SoundPlayer>
+		<ScriptRunner>
+			<Runs>
+				<Run>
+					<ScriptId>Vanilla/Common/Item/Pickup</ScriptId>
+					<TriggerName>ScriptRunTrigger</TriggerName>
+				</Run>
+			</Runs>
+		</ScriptRunner>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>
@@ -21,10 +24,15 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
 					<Groups>
-						<Group>ItemPickupTrigger</Group>
+						<Group>ScriptRunTrigger</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>
 		</Body>
+		<TilePutter>
+			<AtlasName>$(level)</AtlasName>
+			<ImageIndex>$(imageIndex)</ImageIndex>
+			<Position X="$(startX)" Y="$(startY)" />
+		</TilePutter>
 	</Components>
 </EntityTemplate>

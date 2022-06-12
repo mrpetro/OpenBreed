@@ -14,6 +14,14 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
+		<ScriptRunner>
+			<Runs>
+				<Run>
+					<ScriptId>Vanilla/Common/Teleporter/Teleport</ScriptId>
+					<TriggerName>ScriptRunTrigger</TriggerName>
+				</Run>
+			</Runs>
+		</ScriptRunner>
 		<TilePutter>
 			<AtlasName>$(level)</AtlasName>
 			<ImageIndex>$(imageIndex)</ImageIndex>

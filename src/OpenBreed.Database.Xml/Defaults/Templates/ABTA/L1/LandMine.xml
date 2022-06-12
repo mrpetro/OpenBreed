@@ -29,13 +29,5 @@
 			<ImageIndex>$(imageIndex)</ImageIndex>
 			<Position X="$(startX)" Y="$(startY)" />
 		</TilePutter>
-		<Text>
-			<Text>Mine</Text>
-			<Offset X="-10" Y="10" />
-			<Color R="255" G="255" B="255" A="255" />
-			<FontName>Arial</FontName>
-			<FontSize>6</FontSize>
-			<Order>0</Order>
-		</Text>
     </Components>
 </EntityTemplate>

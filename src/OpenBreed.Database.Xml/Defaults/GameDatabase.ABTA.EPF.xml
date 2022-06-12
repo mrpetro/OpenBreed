@@ -185,6 +185,8 @@
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<FileDataSource Id="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua" />
 				<FileDataSource Id="Extension/Scripts/L1/LandMineExplode.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\LandMineExplode.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/ItemPickup.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\ItemPickup.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/TeleporterTeleport.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\TeleporterTeleport.lua" />
 				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
 				<FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\SimpleEntry.lua" />
 				<FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Exit.lua" />
@@ -1056,6 +1058,12 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.L1.LandMineExplode.lua" DataSourceRef="Extension/Scripts/L1/LandMineExplode.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.ItemPickup.lua" DataSourceRef="Extension/Scripts/Common/ItemPickup.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.TeleporterTeleport.lua" DataSourceRef="Extension/Scripts/Common/TeleporterTeleport.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="Extension/Scripts/Entry.lua" FormatType="TEXT">
@@ -11013,6 +11021,12 @@
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/L1/LandMine/Explode">
 					<DataRef>Assets.Scripts.L1.LandMineExplode.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Item/Pickup">
+					<DataRef>Assets.Scripts.Common.ItemPickup.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Teleporter/Teleport">
+					<DataRef>Assets.Scripts.Common.TeleporterTeleport.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Scripts.Entry.lua">
 					<DataRef>Assets.Scripts.Entry.lua</DataRef>
