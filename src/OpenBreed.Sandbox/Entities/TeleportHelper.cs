@@ -26,31 +26,6 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities
 {
-    public enum TeleportType
-    {
-        In,
-        Out
-    }
-
-    public struct TeleportPair : IEquatable<TeleportPair>
-    {
-        #region Public Fields
-
-        public int Id;
-        public TeleportType Type;
-
-        #endregion Public Fields
-
-        #region Public Methods
-
-        public bool Equals(TeleportPair other)
-        {
-            return Type == other.Type && Id == other.Id;
-        }
-
-        #endregion Public Methods
-    }
-
     public class TeleportHelper
     {
         #region Public Fields
@@ -111,7 +86,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            teleportEntry.Tag = new TeleportPair { Id = pairId, Type = TeleportType.In };
+            teleportEntry.Tag = $"TeleportEntry/{pairId}";
 
             teleportEntry.EnterWorld(world.Id);
             return teleportEntry;
@@ -132,7 +107,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            teleportExit.Tag = new TeleportPair { Id = pairId, Type = TeleportType.Out };
+            teleportExit.Tag = $"TeleportExit/{pairId}";
 
             //teleportExit.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 
@@ -143,11 +118,11 @@ namespace OpenBreed.Sandbox.Entities
 
         public void SetPosition(Entity target, Entity entryEntity, bool cancelMovement)
         {
-            var pair = (TeleportPair)entryEntity.Tag;
-            pair.Type = TeleportType.Out;
-            var exitEntity = entityMan.GetByTag(pair).FirstOrDefault(item => item != entryEntity);
+            var pairId = entryEntity.Tag.Split('/')[1];
+            // Search for all exits from same world as entry with same pair ID 
+            var exitEntity = entityMan.GetByTag($"TeleportExit/{pairId}").FirstOrDefault(item => item.WorldId == entryEntity.WorldId);
 
-            if (exitEntity == null)
+            if (exitEntity is null)
                 throw new Exception("No exit entity found");
 
             var exitPos = exitEntity.Get<PositionComponent>();
@@ -206,9 +181,6 @@ namespace OpenBreed.Sandbox.Entities
 
             var cameraFadeOutClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_OUT).Id;
             var cameraFadeInClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_IN).Id;
-
-
-            var pair = (TeleportPair)teleportEntity.Tag;
 
             var jobChain = new JobChain();
 

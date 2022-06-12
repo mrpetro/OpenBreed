@@ -24,5 +24,10 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
         {
             entity.Set(new PauserComponent(pause: false));
         }
+
+        public static MetadataComponent GetMetadata(this Entity entity)
+        {
+            return entity.Get<MetadataComponent>();
+        }
     }
 }

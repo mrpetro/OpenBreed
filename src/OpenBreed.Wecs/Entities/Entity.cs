@@ -49,9 +49,9 @@ namespace OpenBreed.Wecs.Entities
         public ICollection<Type> ComponentTypes { get; }
 
         /// <summary>
-        /// Property for user purpose data
+        /// Entity tag information, useful for finding
         /// </summary>
-        public object Tag { get; set; }
+        public string Tag { get; set; }
 
         public object State { get; set; }
 

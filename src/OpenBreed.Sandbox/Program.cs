@@ -127,6 +127,7 @@ namespace OpenBreed.Sandbox
 
                 var res = scriptMan.RunString(@"import('System')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
+                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Components.Common', 'OpenBreed.Wecs.Components.Common.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Core', 'OpenBreed.Wecs.Systems.Core.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Audio', 'OpenBreed.Wecs.Systems.Audio.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Rendering', 'OpenBreed.Wecs.Systems.Rendering.Extensions')");
@@ -529,13 +530,13 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6

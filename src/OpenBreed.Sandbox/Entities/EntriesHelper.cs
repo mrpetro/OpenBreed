@@ -166,8 +166,6 @@ namespace OpenBreed.Sandbox.Entities
 
             var mapKey = $"Vanilla/{mapId}";
 
-            var jobChain = new JobChain();
-
             var cameraFadeOutClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_OUT).Id;
             var cameraFadeInClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_IN).Id;
 
