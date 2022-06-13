@@ -9,7 +9,7 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
 					<Groups>
-						<Group>TeleportEntryTrigger</Group>
+						<Group>ScriptRunTrigger</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>
