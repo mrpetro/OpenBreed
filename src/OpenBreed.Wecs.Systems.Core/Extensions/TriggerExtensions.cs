@@ -12,27 +12,13 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
     public static class TriggerExtensions
     {
-        //public static void AfterDelay(this ITriggerMan triggerMan, TimeSpan timeSpan, object func)
-        //{
-        //    Task.Delay((int)timeSpan.TotalMilliseconds).Wait();
-
-        //    var method = func.GetType().GetMethod("Call", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-        //    method.Invoke(func, new object[] { new object[0] });
-        //}
-
-        private static void CallScript(object func)
-        {
-            var method = func.GetType().GetMethod("Call", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            method.Invoke(func, new object[] { new object[0] });
-        }
-
-        public static void AfterDelay(this ITriggerMan triggerMan, Entity entity, TimeSpan timeSpan, object func, bool singleTime = false)
+        public static void AfterDelay(this ITriggerMan triggerMan, Entity entity, TimeSpan timeSpan, Action action, bool singleTime = false)
         {
             var rnd = new Random();
             var timerId = rnd.Next();
             triggerMan.CreateTrigger<TimerElapsedEventArgs>(
                 (args) => Equals(entity.Id, args.EntityId) && Equals(timerId, args.TimerId),
-                (args) => CallScript(func),
+                (args) => action.Invoke(),
                 singleTime);
 
             entity.StartTimer(timerId, timeSpan.TotalSeconds);

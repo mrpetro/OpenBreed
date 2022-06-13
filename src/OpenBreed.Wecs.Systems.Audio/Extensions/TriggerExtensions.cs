@@ -13,17 +13,11 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
     public static class TriggerExtensions
     {
-        private static void CallScript(object func)
-        {
-            var method = func.GetType().GetMethod("Call", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            method.Invoke(func, new object[] { new object[0] });
-        }
-
-        public static void OnSoundPlayed(this ITriggerMan triggerMan, Entity entity, int soundId, object func, bool singleTime = false)
+        public static void OnSoundPlayed(this ITriggerMan triggerMan, Entity entity, int soundId, Action action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<SoundPlayEvent>(
                 (args) => Equals(entity.Id, args.EntityId) && Equals(soundId, args.SoundId),
-                (args) => CallScript(func),
+                (args) => action.Invoke(),
                 singleTime);
         }
     }

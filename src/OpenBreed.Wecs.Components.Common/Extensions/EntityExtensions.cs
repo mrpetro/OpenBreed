@@ -29,5 +29,10 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
         {
             return entity.Get<MetadataComponent>();
         }
+
+        public static FollowedComponent GetFollowers(this Entity entity)
+        {
+            return entity.Get<FollowedComponent>();
+        }
     }
 }

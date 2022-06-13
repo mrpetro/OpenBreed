@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Animation.Generic.Extensions;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Audio.LibOpenMpt;
 using OpenBreed.Audio.OpenAL.Extensions;
@@ -124,6 +125,7 @@ namespace OpenBreed.Sandbox
                 scriptMan.Expose("Triggers", sp.GetService<ITriggerMan>());
                 scriptMan.Expose("Logging", sp.GetService<ILogger>());
                 scriptMan.Expose("Stamps", sp.GetService<IStampMan>());
+                scriptMan.Expose("Clips", sp.GetService<IClipMan<Entity>>());
 
                 var res = scriptMan.RunString(@"import('System')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
@@ -131,6 +133,8 @@ namespace OpenBreed.Sandbox
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Core', 'OpenBreed.Wecs.Systems.Core.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Audio', 'OpenBreed.Wecs.Systems.Audio.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Rendering', 'OpenBreed.Wecs.Systems.Rendering.Extensions')");
+
+                res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
             });
 
             hostBuilder.SetupInputMan((inpitsMan, sp) =>
@@ -530,13 +534,13 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
-            var gameWorld = mapLegacyLoader.Load("Vanilla/2");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6

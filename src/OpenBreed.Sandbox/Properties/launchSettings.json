@@ -2,7 +2,7 @@
   "profiles": {
     "OpenBreed.Sandbox": {
       "commandName": "Project",
-      "commandLineArgs": "\"D:\\Projects\\Programing\\GIT\\OpenBreed\\OpenBreed.Common\\src\\OpenBreed.Database.Xml\\Defaults\\GameDatabase.ABTA.EPF.xml\" \"D:\\Games\\Alien Breed - Tower Assault (DOSBOX)\\AlienBrT\""
+      "commandLineArgs": "\"D:\\Projects\\Programing\\GIT\\OpenBreed\\OpenBreed.Common\\src\\OpenBreed.Database.Xml\\Vanilla\\GameDatabase.ABTA.EPF.xml\" \"D:\\Games\\Alien Breed - Tower Assault (DOSBOX)\\AlienBrT\""
     }
   }
 }

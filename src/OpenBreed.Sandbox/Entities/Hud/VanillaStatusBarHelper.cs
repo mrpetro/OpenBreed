@@ -39,7 +39,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddLivesCounter(World world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\LivesCounter.xml")
+            var timer = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Hud\LivesCounter.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .Build();
@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddDestructTimer(World world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\DestructTimer.xml")
+            var timer = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Hud\DestructTimer.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .Build();
@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddKeysCounter(World world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\KeysCounter.xml")
+            var timer = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Hud\KeysCounter.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .Build();
@@ -69,7 +69,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddAmmoCounter(World world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\AmmoCounter.xml")
+            var timer = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Hud\AmmoCounter.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .Build();
@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddAmmoBar(World world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\AmmoBar.xml")
+            var timer = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Hud\AmmoBar.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .Build();
@@ -89,7 +89,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddHealthBar(World world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\HealthBar.xml")
+            var timer = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Hud\HealthBar.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .Build();
@@ -99,7 +99,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddP1StatusBar(World world)
         {
-            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml")
+            var p1StatusBar = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Hud\StatusBarP1.xml")
                 .SetParameter("posX", -160)
                 .SetParameter("posY", 109)
                 .Build();
@@ -109,7 +109,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddP2StatusBar(World world)
         {
-            var p1StatusBar = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml")
+            var p1StatusBar = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Hud\StatusBarP2.xml")
                 .SetParameter("posX", -160)
                 .SetParameter("posY", -120)
                 .Build();

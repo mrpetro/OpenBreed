@@ -80,7 +80,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public Entity AddMapEntry(World world, int x, int y, int entryId, string level, int gfxValue)
         {
-            var entryEntity = entityFactory.Create(@"Defaults\Templates\ABTA\Common\MapEntry.xml")
+            var entryEntity = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\MapEntry.xml")
                 .SetParameter("level", level)
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("entryId", entryId)
@@ -95,7 +95,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public void AddMapExit(World world, int ix, int iy, int exitId, string level, int gfxValue)
         {
-            var exitEntity = entityFactory.Create(@"Defaults\Templates\ABTA\Common\MapExit.xml")
+            var exitEntity = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\MapExit.xml")
                 .SetParameter("level", level)
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("exitId", exitId)

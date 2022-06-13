@@ -46,7 +46,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public void AddVertical(World world, int x, int y, string level)
         {
-            var door = entityFactory.Create(@"Defaults\Templates\ABTA\Common\ElectricGateVertical.xml")
+            var door = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\ElectricGateVertical.xml")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -57,7 +57,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public void AddHorizontal(World world, int x, int y, string level)
         {
-            var door = entityFactory.Create(@"Defaults\Templates\ABTA\Common\ElectricGateHorizontal.xml")
+            var door = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\ElectricGateHorizontal.xml")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)

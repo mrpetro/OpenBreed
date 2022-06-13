@@ -35,6 +35,9 @@ namespace OpenBreed.Scripting.Lua
             luaState.NewTable("Templates.Entities");
             //Define table placeholder for viewport templates namespace
             luaState.NewTable("Templates.Viewports");
+
+            //Allow C# Action delgates to be called from Lua
+            luaState.RegisterLuaDelegateType(typeof(Action), typeof(LuaActionHandler));
         }
 
         #endregion Public Constructors
@@ -140,5 +143,16 @@ namespace OpenBreed.Scripting.Lua
         }
 
         #endregion Public Methods
+    }
+
+    internal class LuaActionHandler : NLua.Method.LuaDelegate
+    {
+        void CallFunction()
+        {
+            object[] args = new object[] { };
+            object[] inArgs = new object[] { };
+            int[] outArgs = new int[] { };
+            base.CallFunction(args, inArgs, outArgs);
+        }
     }
 }

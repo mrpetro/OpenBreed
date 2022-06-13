@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Sandbox.Components;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,5 +22,12 @@ namespace OpenBreed.Sandbox.Extensions
 
             itemSlot.AddItem(itemId, quantity);
         }
+
+        public static Entity GetPlayerCamera(this Entity entity, IEntityMan entityMan)
+        {
+            return entity.Get<FollowedComponent>().FollowerIds.Select(item => entityMan.GetById(item)).
+                                                                              FirstOrDefault(item => item.Tag is "PlayerCamera");
+        }
+
     }
 }

@@ -13,16 +13,9 @@ namespace OpenBreed.Wecs.Extensions
 {
     public static class TriggerExtensions
     {
-
-        private static void CallScript(object func)
+        public static void OnEntityEnteredWorld2(this ITriggerMan triggerMan, Entity entity, Action action, bool singleTime = false)
         {
-            var method = func.GetType().GetMethod("Call", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            method.Invoke(func, new object[] { new object[0] });
-        }
-
-        public static void OnEntityEnteredWorld2(this ITriggerMan triggerMan, Entity entity, object action, bool singleTime = false)
-        {
-            triggerMan.CreateTrigger<EntityEnteredEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => CallScript(action), singleTime);
+            triggerMan.CreateTrigger<EntityEnteredEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
         }
 
         public static void OnEntityEnteredWorld(this ITriggerMan triggerMan, Entity entity, Action action, bool singleTime = false)

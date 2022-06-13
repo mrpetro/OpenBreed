@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public Entity AddTeleportEntry(World world, int x, int y, int pairId, string level, int gfxValue)
         {
-            var teleportEntry = entityFactory.Create(@"Defaults\Templates\ABTA\Common\TeleportEntry.xml")
+            var teleportEntry = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\TeleportEntry.xml")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -100,7 +100,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public Entity AddTeleportExit(World world, int x, int y, int pairId, string level, int gfxValue)
         {
-            var teleportExit = entityFactory.Create(@"Defaults\Templates\ABTA\Common\TeleportExit.xml")
+            var teleportExit = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\TeleportExit.xml")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -172,7 +172,7 @@ namespace OpenBreed.Sandbox.Entities
 
             actorEntity.State = "Teleporting";
 
-            var cameraEntity = actorEntity.TryGet<FollowedComponent>()?.FollowerIds.
+            var cameraEntity = actorEntity.GetFollowers().FollowerIds.
                                                                               Select(item => entityMan.GetById(item)).
                                                                               FirstOrDefault(item => item.Tag is "PlayerCamera");
 

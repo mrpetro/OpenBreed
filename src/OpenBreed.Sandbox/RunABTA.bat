@@ -1,1 +1,1 @@
-OpenBreed.Sandbox.exe "Defaults\GameDatabase.ABTA.EPF.xml" "D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)"
+OpenBreed.Sandbox.exe "Vanilla\GameDatabase.ABTA.EPF.xml" "D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)"
