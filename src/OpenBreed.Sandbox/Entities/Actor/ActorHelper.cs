@@ -114,7 +114,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public Entity CreateActor(Vector2 pos)
         {
-            var actor = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Actors\John.xml")
+            var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\John.xml")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .Build();
@@ -124,7 +124,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public Entity CreateDummy(Vector2 pos)
         {
-            var actor = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Actors\Dummy.xml")
+            var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\Dummy.xml")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .Build();

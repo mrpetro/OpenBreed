@@ -69,7 +69,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         public void AddProjectile(int worldId, float x, float y, float vx, float vy)
         {
-            var projectile = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\Projectile.xml")
+            var projectile = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Projectile.xml")
                 .SetParameter("startX", x)
                 .SetParameter("startY", y)
                 .Build();

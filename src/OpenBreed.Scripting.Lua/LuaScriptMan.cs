@@ -48,6 +48,11 @@ namespace OpenBreed.Scripting.Lua
 
         #region Public Methods
 
+        public void RegisterDelegateType(Type delegateType, Type scriptDelegateType )
+        {
+            luaState.RegisterLuaDelegateType(delegateType, scriptDelegateType);
+        }
+
         public void Expose(string apiName, object apiObj)
         {
             luaState[apiName] = apiObj;

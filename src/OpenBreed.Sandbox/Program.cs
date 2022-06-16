@@ -21,6 +21,7 @@ using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
@@ -43,11 +44,13 @@ using OpenBreed.Wecs.Components.Scripting.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Control.Handlers;
 using OpenBreed.Wecs.Systems.Control.Inputs;
+using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
@@ -66,6 +69,29 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox
 {
+    internal class LuaEntityEventHandler<TEvent> : NLua.Method.LuaDelegate
+    {
+        void CallFunction(Entity entity, TEvent eventArgs)
+        {
+            object[] args = new object[] { entity, eventArgs };
+            object[] inArgs = new object[] { entity, eventArgs };
+            int[] outArgs = new int[] { };
+            base.CallFunction(args, inArgs, outArgs);
+        }
+    }
+
+    internal class LuaEntitySpecialEventHandler : NLua.Method.LuaDelegate
+    {
+        void CallFunction(Entity entity, WorldUnpausedEventArgs eventArgs)
+        {
+            object[] args = new object[] { entity, eventArgs };
+            object[] inArgs = new object[] { entity, eventArgs };
+            int[] outArgs = new int[] { };
+            base.CallFunction(args, inArgs, outArgs);
+        }
+    }
+
+
     public class ProgramFactory
     {
         private readonly IHostBuilder hostBuilder;
@@ -120,12 +146,18 @@ namespace OpenBreed.Sandbox
                 eventsMan.Subscribe<WorldInitializedEventArgs>(
                     (s,a) => scriptMan.TryInvokeFunction("WorldLoaded", a.WorldId));
 
+
+                scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldPausedEventArgs>), typeof(LuaEntityEventHandler<WorldPausedEventArgs>));
+                scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldUnpausedEventArgs>), typeof(LuaEntitySpecialEventHandler));
+                scriptMan.RegisterDelegateType(typeof(Action<Entity, AnimFinishedEventArgs>), typeof(LuaEntityEventHandler<AnimFinishedEventArgs>));
+
                 scriptMan.Expose("Entities", sp.GetService<IEntityMan>());
                 scriptMan.Expose("Sounds", sp.GetService<ISoundMan>());
                 scriptMan.Expose("Triggers", sp.GetService<ITriggerMan>());
                 scriptMan.Expose("Logging", sp.GetService<ILogger>());
                 scriptMan.Expose("Stamps", sp.GetService<IStampMan>());
                 scriptMan.Expose("Clips", sp.GetService<IClipMan<Entity>>());
+                scriptMan.Expose("Shapes", sp.GetService<IShapeMan>());
 
                 var res = scriptMan.RunString(@"import('System')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
@@ -133,7 +165,7 @@ namespace OpenBreed.Sandbox
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Core', 'OpenBreed.Wecs.Systems.Core.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Audio', 'OpenBreed.Wecs.Systems.Audio.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Rendering', 'OpenBreed.Wecs.Systems.Rendering.Extensions')");
-
+                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Animation', 'OpenBreed.Wecs.Systems.Animation.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
             });
 
@@ -506,7 +538,6 @@ namespace OpenBreed.Sandbox
 
             actorHelper.RegisterCollisionPairs();
             worldGateHelper.RegisterCollisionPairs();
-            teleportHelper.RegisterCollisionPairs();
             projectileHelper.RegisterCollisionPairs();
 
 
@@ -534,13 +565,13 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6

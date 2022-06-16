@@ -12,6 +12,8 @@ namespace OpenBreed.Scripting.Interface
 
         IScriptFunc CompileString(string script, string name);
 
+        void RegisterDelegateType(Type delegateType, Type scriptDelegateType);
+
         void RegisterFunction(string functionName, IScriptFunc func);
         IScriptFunc GetFunction(string funcName);
 

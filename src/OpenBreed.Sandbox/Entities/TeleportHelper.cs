@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public Entity AddTeleportEntry(World world, int x, int y, int pairId, string level, int gfxValue)
         {
-            var teleportEntry = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\TeleportEntry.xml")
+            var teleportEntry = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\TeleportEntry.xml")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -92,15 +92,9 @@ namespace OpenBreed.Sandbox.Entities
             return teleportEntry;
         }
 
-        public void RegisterCollisionPairs()
-        {
-            //collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorTrigger, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallbackEx);
-        }
-
         public Entity AddTeleportExit(World world, int x, int y, int pairId, string level, int gfxValue)
         {
-            var teleportExit = entityFactory.Create(@"Vanilla\Templates\ABTA\Common\TeleportExit.xml")
+            var teleportExit = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\TeleportExit.xml")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -157,48 +151,6 @@ namespace OpenBreed.Sandbox.Entities
         private void OnFrameUpdate(Entity entity, int nextValue)
         {
             entity.SetSpriteImageId(nextValue);
-        }
-
-        private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
-        {
-                PerformEntityExit(entityA, entityB);
-        }
-
-        private void PerformEntityExit(Entity actorEntity, Entity teleportEntity)
-        {
-            // For preventing running rest of the code when actor will hit couple of teleporter blocks at same time
-            if (Equals(actorEntity.State, "Teleporting"))
-                return;
-
-            actorEntity.State = "Teleporting";
-
-            var cameraEntity = actorEntity.GetFollowers().FollowerIds.
-                                                                              Select(item => entityMan.GetById(item)).
-                                                                              FirstOrDefault(item => item.Tag is "PlayerCamera");
-
-            if (cameraEntity == null)
-                return;
-
-            var cameraFadeOutClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_OUT).Id;
-            var cameraFadeInClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_IN).Id;
-
-            var jobChain = new JobChain();
-
-            var targetWorldId = actorEntity.WorldId;
-
-
-            //Pause this world
-            jobChain.Equeue(new EntityJob<WorldPausedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PauseWorld()));
-            //Fade out camera
-            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeOutClipId)));
-            //Set position of entity to teleport exit
-            jobChain.Equeue(new InstantJob(() => SetPosition(actorEntity, teleportEntity, true)));
-            //Unpause this world
-            jobChain.Equeue(new EntityJob<WorldUnpausedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.UnpauseWorld()));
-            //Fade in camera
-            jobChain.Equeue(new EntityJob<AnimFinishedEventArgs>(triggerMan, cameraEntity, () => cameraEntity.PlayAnimation(0, cameraFadeInClipId)));
-
-            jobMan.Execute(jobChain);
         }
 
         #endregion Private Methods
