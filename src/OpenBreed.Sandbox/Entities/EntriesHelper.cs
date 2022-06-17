@@ -114,27 +114,19 @@ namespace OpenBreed.Sandbox.Entities
             //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
         }
 
-        public void ExecuteHeroEnter(Entity heroEntity, int worldId, int entryId)
+        public void ExecuteHeroEnter(Entity heroEntity, string worldName, int entryId)
         {
-            //var cameraEntity = heroEntity.TryGet<FollowerComponent>()?.FollowerIds.
-            //                                                                  Select(item => core.GetManager<IEntityMan>().GetById(item)).
-            //                                                                  FirstOrDefault(item => item.Tag is "PlayerCamera");
+            var context = new Context()
+            {
+                actorEntity = heroEntity,
+                //cameraEntity = cameraEntity,
+                //cameraFadeInClipId = cameraFadeInClipId,
+                //cameraFadeOutClipId = cameraFadeOutClipId,
+                mapKey = worldName,
+                entryId = entryId
+            };
 
-            //if (cameraEntity == null)
-            //    return;
-
-            var jobChain = new JobChain();
-
-            //Add entity to next world
-            jobChain.Equeue(new EntityJob<EntityEnteredEventArgs>(triggerMan, heroEntity, () => heroEntity.EnterWorld(worldId)));
-            //Set position of entity to entry position in next world
-            jobChain.Equeue(new InstantJob(() => SetPosition(heroEntity, entryId, true)));
-            //Unpause this world
-            //jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
-            //Fade in camera
-            //jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
-
-            jobsMan.Execute(jobChain);
+            AddToWorld(context);
         }
 
         #endregion Public Methods
@@ -178,17 +170,6 @@ namespace OpenBreed.Sandbox.Entities
             //var doorClosing = doorOpening.OnFinishResult((result) => result == "Matching").PerformAction(() => door.Close())
             //door.Wait(5).OnFinish((door) => door.Close()) 
             //door.Close()
-
-
-            //var jobBuilder = jobsMan.Create();
-
-            //jobBuilder.DoAction(() => cameraEntity.PauseWorld())
-            //          .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeOutClipId))
-            //          .OnFinish().DoAction(() => actorEntity.LeaveWorld())
-            //          .OnFinish().DoAction(() => TryLoadWorld(mapKey))
-            //          .OnFinish().DoAction(() => AddToWorld(actorEntity, mapKey))
-            //          .OnFinish().DoAction(() => SetPosition(actorEntity, entryId, true))
-            //          .OnFinish().DoAction(() => cameraEntity.PlayAnimation(0, cameraFadeInClipId));
 
             var context = new Context()
             {
@@ -253,12 +234,6 @@ namespace OpenBreed.Sandbox.Entities
             triggerMan.OnEntityLeftWorld(context.actorEntity, () =>
             {
                 LoadWorld(context);
-
-                //var jobChain = new JobChain();
-                //jobChain.Equeue(new InstantJob(() => LoadWorld(context)));
-                //jobsMan.Execute(jobChain);
-
-                //LoadWorld(context);
             }, singleTime: true);
 
             context.actorEntity.LeaveWorld();
@@ -288,33 +263,24 @@ namespace OpenBreed.Sandbox.Entities
 
         private void SetPosition(Context context)
         {
-            SetPosition(context.actorEntity, context.entryId, true);
+            SetPosition(context.actorEntity, context.entryId);
 
             FadeIn(context);
         }
 
         private void FadeIn(Context context)
         {
+            if (context.cameraEntity is null)
+                return;
+
             triggerMan.OnEntityEnteredWorld(context.cameraEntity, () =>
             {
                 context.cameraEntity.PlayAnimation(0, context.cameraFadeInClipId);
             }, singleTime: true);
         }
 
-
-        //private void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
-        //{
-        //    if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
-        //        PerformEntityExit(entityB, entityA);
-        //    else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
-        //        PerformEntityExit(entityA, entityB);
-        //}
-
         private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
         {
-            //if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
-            //    PerformEntityExit(entityB, entityA);
-            //else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
             PerformEntityExit(entityA, entityB);
         }
 
@@ -386,7 +352,7 @@ namespace OpenBreed.Sandbox.Entities
             return topMostEntity;
         }
 
-        private void SetPosition(Entity target, int entryId, bool cancelMovement)
+        private void SetPosition(Entity target, int entryId)
         {
             var world = worldMan.GetById(target.WorldId);
 
@@ -395,7 +361,7 @@ namespace OpenBreed.Sandbox.Entities
             if(entryEntity is null)
                 entryEntity = GetTopLeftMostEntity(FindEntryEntities(world, 2));
 
-            if (entryEntity == null)
+            if (entryEntity is null)
                 throw new Exception($"No entry with ID '{entryId}' found.");
 
             var broadphase = world.GetModule<IBroadphaseDynamic>();
@@ -409,17 +375,14 @@ namespace OpenBreed.Sandbox.Entities
 
             targetPos.Value = newPosition;
 
-            if (cancelMovement)
-            {
-                var velocityCmp = target.Get<VelocityComponent>();
-                velocityCmp.Value = Vector2.Zero;
+            var velocityCmp = target.Get<VelocityComponent>();
+            velocityCmp.Value = Vector2.Zero;
 
-                var thrustCmp = target.Get<ThrustComponent>();
-                thrustCmp.Value = Vector2.Zero;
+            var thrustCmp = target.Get<ThrustComponent>();
+            thrustCmp.Value = Vector2.Zero;
 
-                var walkingControlCmp = target.Get<WalkingControlComponent>();
-                walkingControlCmp.Direction = new Vector2(0, 0);
-            }
+            var walkingControlCmp = target.Get<WalkingControlComponent>();
+            walkingControlCmp.Direction = new Vector2(0, 0);
 
             target.State = null;
         }

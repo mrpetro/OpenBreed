@@ -80,18 +80,6 @@ namespace OpenBreed.Sandbox
         }
     }
 
-    internal class LuaEntitySpecialEventHandler : NLua.Method.LuaDelegate
-    {
-        void CallFunction(Entity entity, WorldUnpausedEventArgs eventArgs)
-        {
-            object[] args = new object[] { entity, eventArgs };
-            object[] inArgs = new object[] { entity, eventArgs };
-            int[] outArgs = new int[] { };
-            base.CallFunction(args, inArgs, outArgs);
-        }
-    }
-
-
     public class ProgramFactory
     {
         private readonly IHostBuilder hostBuilder;
@@ -148,7 +136,7 @@ namespace OpenBreed.Sandbox
 
 
                 scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldPausedEventArgs>), typeof(LuaEntityEventHandler<WorldPausedEventArgs>));
-                scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldUnpausedEventArgs>), typeof(LuaEntitySpecialEventHandler));
+                scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldUnpausedEventArgs>), typeof(LuaEntityEventHandler<WorldUnpausedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<Entity, AnimFinishedEventArgs>), typeof(LuaEntityEventHandler<AnimFinishedEventArgs>));
 
                 scriptMan.Expose("Entities", sp.GetService<IEntityMan>());
@@ -565,13 +553,13 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
-            var gameWorld = mapLegacyLoader.Load("Vanilla/2");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6
@@ -606,7 +594,7 @@ namespace OpenBreed.Sandbox
 
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
-                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Id, 0);
+                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
             });
 
 
