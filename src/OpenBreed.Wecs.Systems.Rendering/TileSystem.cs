@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -47,19 +48,18 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
-            var tilePutterCmp = entity.TryGet<TilePutterComponent>();
+            var tp = entity.Get<TilePutterComponent>();
 
-            if (tilePutterCmp is null)
-                return;
+            //Update all tiles
+            for (int i = 0; i < tp.Items.Count; i++)
+                ModifyTile(tp.Items[i]);
 
-            try
-            {
-                tileGrid.ModifyTile(tilePutterCmp.Position, tilePutterCmp.AtlasId, tilePutterCmp.ImageIndex);
-            }
-            finally
-            {
-                entity.Remove<TilePutterComponent>();
-            }
+            tp.Items.Clear();
+        }
+
+        private void ModifyTile(TileData tileData)
+        {
+            tileGrid.ModifyTile(tileData.Position, tileData.AtlasId, tileData.ImageIndex);
         }
 
         #endregion Protected Methods

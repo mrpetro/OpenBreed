@@ -67,6 +67,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly IScriptMan scriptMan;
         private readonly ISystemFactory systemFactory;
         private readonly ITileGridFactory tileGridFactory;
+        private readonly IDataGridFactory dataGridFactory;
         private readonly ITileMan tileMan;
         private readonly ITriggerMan triggerMan;
         private readonly IWorldMan worldMan;
@@ -85,6 +86,7 @@ namespace OpenBreed.Sandbox.Loaders
                                    PalettesDataProvider palettesDataProvider,
                                    IBroadphaseFactory broadphaseGridFactory,
                                    ITileGridFactory tileGridFactory,
+                                   IDataGridFactory dataGridFactory,
                                    ITileMan tileMan,
                                    ILogger logger,
                                    ITriggerMan triggerMan,
@@ -101,6 +103,7 @@ namespace OpenBreed.Sandbox.Loaders
             this.palettesDataProvider = palettesDataProvider;
             this.broadphaseGridFactory = broadphaseGridFactory;
             this.tileGridFactory = tileGridFactory;
+            this.dataGridFactory = dataGridFactory;
 
             this.tileMan = tileMan;
             this.logger = logger;
@@ -153,6 +156,7 @@ namespace OpenBreed.Sandbox.Loaders
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Width);
+            worldBuilder.AddModule(dataGridFactory.Create<Entity>(layout.Width, layout.Height));
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
             worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));

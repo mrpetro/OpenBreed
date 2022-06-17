@@ -11,6 +11,14 @@ namespace OpenBreed.Core.Extensions
     {
         #region Public Methods
 
+        public static void SetupDataGridFactory(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IDataGridFactory, DefaultDataGridFactory>();
+            });
+        }
+
         public static void SetupCoreManagers(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>

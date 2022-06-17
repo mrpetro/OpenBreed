@@ -236,6 +236,7 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetService<PalettesDataProvider>(),
                                                               managerCollection.GetService<IBroadphaseFactory>(),
                                                               managerCollection.GetService<ITileGridFactory>(),
+                                                              managerCollection.GetService<IDataGridFactory>(),
                                                               managerCollection.GetService<ITileMan>(),
                                                               managerCollection.GetService<ILogger>(),
                                                               managerCollection.GetService<ITriggerMan>(),

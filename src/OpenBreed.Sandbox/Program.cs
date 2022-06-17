@@ -101,6 +101,7 @@ namespace OpenBreed.Sandbox
             var infoVersion = ProgramTools.AppInfoVerion;
 
             hostBuilder.SetupCoreManagers();
+            hostBuilder.SetupDataGridFactory();
 
             hostBuilder.SetupEventsManEx((triggerMan, sp) =>
             {

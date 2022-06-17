@@ -77,7 +77,8 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
 
         public static void PutTile(this Entity entity, int atlasId, int tileId, int layerNo, Vector2 position)
         {
-            entity.Set(new TilePutterComponent(atlasId, tileId, layerNo, position));
+            var tp = entity.Get<TilePutterComponent>();
+            tp.Items.Add(new TileData(atlasId, tileId, layerNo, position));
         }
 
         #endregion Public Methods

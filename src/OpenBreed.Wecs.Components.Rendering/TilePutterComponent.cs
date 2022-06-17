@@ -1,16 +1,13 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Interface;
+﻿using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenTK;
 using OpenTK.Mathematics;
 using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
-    public interface ITilePutterComponentTemplate : IComponentTemplate
+    public interface ITileDataTemplate
     {
-        #region Public Properties
-
         /// <summary>
         /// Name of tile atlas
         /// </summary>
@@ -25,22 +22,25 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// Tile postion
         /// </summary>
         Vector2 Position { get; set; }
+    }
+
+    public interface ITilePutterComponentTemplate : IComponentTemplate
+    {
+        #region Public Properties
+
+        /// <summary>
+        /// Tiles to put
+        /// </summary>
+        IEnumerable<ITileDataTemplate> Items { get; }
 
         #endregion Public Properties
     }
 
-    public class TilePutterComponent : IEntityComponent
+    public class TileData
     {
         #region Public Constructors
 
-        public TilePutterComponent(TilePutterComponentBuilder builder)
-        {
-            AtlasId = builder.AtlasId;
-            ImageIndex = builder.ImageIndex;
-            Position = builder.Position;
-        }
-
-        public TilePutterComponent(int atlasId, int imageIndex, int layerNo, Vector2 position)
+        public TileData(int atlasId, int imageIndex, int layerNo, Vector2 position)
         {
             AtlasId = atlasId;
             ImageIndex = imageIndex;
@@ -60,35 +60,66 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Public Properties
     }
 
-    public sealed class TilePutterComponentFactory : ComponentFactoryBase<ITilePutterComponentTemplate>
+    public class TilePutterComponent : IEntityComponent
     {
-        #region Private Fields
+        #region Public Constructors
 
-        private readonly IBuilderFactory builderFactory;
-
-        #endregion Private Fields
-
-        #region Internal Constructors
-
-        public TilePutterComponentFactory(IBuilderFactory builderFactory)
+        public TilePutterComponent(TilePutterComponentBuilder builder)
         {
-            this.builderFactory = builderFactory;
+            Items = builder.Items;
         }
 
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ITilePutterComponentTemplate template)
+        public TilePutterComponent()
         {
-            var builder = builderFactory.GetBuilder<TilePutterComponentBuilder>();
-            builder.SetAtlasByName(template.AtlasName);
-            builder.SetImageIndex(template.ImageIndex);
-            builder.SetPosition(template.Position);
-            return builder.Build();
+            Items = new List<TileData>();
         }
 
-        #endregion Protected Methods
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public List<TileData> Items { get; }
+
+        #endregion Public Properties
+    }
+
+    public class TileDataBuilder
+    {
+        private ITileMan tileMan;
+
+        public TileDataBuilder(ITileMan tileMan)
+        {
+            this.tileMan = tileMan;
+        }
+
+        public int AtlasId { get; private set; }
+        public int ImageIndex { get; private set; }
+        public Vector2 Position { get; private set; }
+
+        public void SetAtlasByName(string value)
+        {
+            var tileAtlas = tileMan.GetByName(value);
+
+            if (tileAtlas is null)
+                throw new InvalidOperationException($"Tile atlas with name '{value}' is not loaded.");
+
+            AtlasId = tileMan.GetByName(value).Id;
+        }
+
+        public void SetImageIndex(int value)
+        {
+            ImageIndex = value;
+        }
+
+        public void SetPosition(Vector2 value)
+        {
+            Position = value;
+        }
+
+        public TileData Build()
+        {
+            return new TileData(AtlasId, ImageIndex, 0, Position);
+        }
     }
 
     public class TilePutterComponentBuilder : IBuilder<TilePutterComponent>
@@ -104,17 +135,12 @@ namespace OpenBreed.Wecs.Components.Rendering
         internal TilePutterComponentBuilder(ITileMan tileMan)
         {
             this.tileMan = tileMan;
+            Items = new List<TileData>();
         }
 
+        internal List<TileData> Items { get; }
+
         #endregion Internal Constructors
-
-        #region Internal Properties
-
-        internal int AtlasId { get; private set; }
-        internal int ImageIndex { get; private set; }
-        internal Vector2 Position { get; private set; }
-
-        #endregion Internal Properties
 
         #region Public Methods
 
@@ -123,26 +149,56 @@ namespace OpenBreed.Wecs.Components.Rendering
             return new TilePutterComponent(this);
         }
 
-        public void SetPosition(Vector2 value)
+        public TileDataBuilder CreateData()
         {
-            Position = value;
+            return new TileDataBuilder(tileMan);
         }
 
-        public void SetImageIndex(int value)
+        public void AddData(TileData data)
         {
-            ImageIndex = value;
-        }
-
-        public void SetAtlasByName(string value)
-        {
-            var tileAtlas = tileMan.GetByName(value);
-
-            if (tileAtlas is null)
-                throw new InvalidOperationException($"Tile atlas with name '{value}' is not loaded.");
-
-            AtlasId = tileMan.GetByName(value).Id;
+            Items.Add(data);
         }
 
         #endregion Public Methods
+    }
+
+    public sealed class TilePutterComponentFactory : ComponentFactoryBase<ITilePutterComponentTemplate>
+    {
+        #region Private Fields
+
+        private readonly IBuilderFactory builderFactory;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public TilePutterComponentFactory(IBuilderFactory builderFactory)
+        {
+            this.builderFactory = builderFactory;
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
+
+        protected override IEntityComponent Create(ITilePutterComponentTemplate template)
+        {
+            var tilePutterBuilder = builderFactory.GetBuilder<TilePutterComponentBuilder>();
+
+            var dataBuilder = tilePutterBuilder.CreateData();
+
+            foreach (var item in template.Items)
+            {
+                dataBuilder.SetAtlasByName(item.AtlasName);
+                dataBuilder.SetImageIndex(item.ImageIndex);
+                dataBuilder.SetPosition(item.Position);
+
+                tilePutterBuilder.AddData(dataBuilder.Build());
+            }
+
+            return tilePutterBuilder.Build();
+        }
+
+        #endregion Protected Methods
     }
 }
