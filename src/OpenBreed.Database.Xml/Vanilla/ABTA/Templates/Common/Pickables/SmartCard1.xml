@@ -36,9 +36,13 @@
 			<Order>0</Order>
 		</Text>
 		<TilePutter>
-			<AtlasName>$(level)</AtlasName>
-			<ImageIndex>$(imageIndex)</ImageIndex>
-			<Position X="$(startX)" Y="$(startY)" />
+			<Items>
+				<Item>
+					<AtlasName>$(level)</AtlasName>
+					<ImageIndex>$(imageIndex)</ImageIndex>
+					<Position X="$(startX)" Y="$(startY)" />
+				</Item>
+			</Items>
 		</TilePutter>
 	</Components>
 </EntityTemplate>
