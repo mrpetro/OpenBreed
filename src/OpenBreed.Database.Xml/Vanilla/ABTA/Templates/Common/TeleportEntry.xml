@@ -22,14 +22,5 @@
 				</Run>
 			</Runs>
 		</ScriptRunner>
-		<TilePutter>
-			<Items>
-				<Item>
-					<AtlasName>$(level)</AtlasName>
-					<ImageIndex>$(imageIndex)</ImageIndex>
-					<Position X="$(startX)" Y="$(startY)" />
-				</Item>
-			</Items>
-		</TilePutter>
     </Components>
 </EntityTemplate>

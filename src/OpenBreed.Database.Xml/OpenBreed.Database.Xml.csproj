@@ -72,7 +72,7 @@
     <Content Include="Vanilla\ABTA\Scripts\Common\ItemPickup.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Scripts\L1\LandMineExplode.lua">
+    <Content Include="Vanilla\ABTA\Scripts\Common\LandMineExplode.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua">
@@ -232,7 +232,7 @@
     <Content Include="Vanilla\ABTA\Templates\Common\TeleportExit.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Templates\L1\LandMine.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\LandMine.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\L4\MonsterEating.xml">
@@ -250,6 +250,10 @@
     <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj" />
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
     <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Vanilla\ABTA\Templates\L1\" />
   </ItemGroup>
 
 </Project>

@@ -2,14 +2,5 @@
 <EntityTemplate>
     <Components>
 		<Position X="$(startX)" Y="$(startY)" />
-		<TilePutter>
-			<Items>
-				<Item>
-					<AtlasName>$(level)</AtlasName>
-					<ImageIndex>$(imageIndex)</ImageIndex>
-					<Position X="$(startX)" Y="$(startY)" />
-				</Item>
-			</Items>
-		</TilePutter>
     </Components>
 </EntityTemplate>

@@ -184,7 +184,7 @@
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<FileDataSource Id="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua" />
-				<FileDataSource Id="Extension/Scripts/L1/LandMineExplode.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\LandMineExplode.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/LandMineExplode.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMineExplode.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/ItemPickup.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\ItemPickup.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/TeleporterTeleport.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\TeleporterTeleport.lua" />
 				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
@@ -1057,7 +1057,7 @@
 				<Asset Id="Assets.Scripts.L1.MAP.01.PlayerEntry.lua" DataSourceRef="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.L1.LandMineExplode.lua" DataSourceRef="Extension/Scripts/L1/LandMineExplode.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.LandMineExplode.lua" DataSourceRef="Extension/Scripts/Common/LandMineExplode.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.ItemPickup.lua" DataSourceRef="Extension/Scripts/Common/ItemPickup.lua" FormatType="TEXT">
@@ -6913,11 +6913,11 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="47" Name="Unknown 47" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+						<Action Id="47" Name="LandMine" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Explodes on stepping by player</Description>
 							<Presentation>
-								<Color>#00000000</Color>
+								<Color>#50FFFF00</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -7493,11 +7493,11 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="47" Name="Unknown 47" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+						<Action Id="47" Name="LandMine" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Explodes on stepping by player</Description>
 							<Presentation>
-								<Color>#00000000</Color>
+								<Color>#50FFFF00</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -8073,11 +8073,11 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="47" Name="Unknown 47" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+						<Action Id="47" Name="LandMine" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Explodes on stepping by player</Description>
 							<Presentation>
-								<Color>#00000000</Color>
+								<Color>#50FFFF00</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -8653,11 +8653,11 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="47" Name="Unknown 47" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+						<Action Id="47" Name="LandMine" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Explodes on stepping by player</Description>
 							<Presentation>
-								<Color>#00000000</Color>
+								<Color>#50FFFF00</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -9233,11 +9233,11 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="47" Name="Unknown 47" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+						<Action Id="47" Name="LandMine" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Explodes on stepping by player</Description>
 							<Presentation>
-								<Color>#00000000</Color>
+								<Color>#50FFFF00</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -9813,11 +9813,11 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="47" Name="Unknown 47" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+						<Action Id="47" Name="LandMine" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Explodes on stepping by player</Description>
 							<Presentation>
-								<Color>#00000000</Color>
+								<Color>#50FFFF00</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -10393,11 +10393,11 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="47" Name="Unknown 47" Visibility="true">
-							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+						<Action Id="47" Name="LandMine" Visibility="true">
+							<Color>#50FFFF00</Color>
+							<Description>Explodes on stepping by player</Description>
 							<Presentation>
-								<Color>#00000000</Color>
+								<Color>#50FFFF00</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -11019,8 +11019,8 @@
 				<ScriptFromFile Id="Vanilla/L1/MAP.01/PlayerEntry">
 					<DataRef>Assets.Scripts.L1.MAP.01.PlayerEntry.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/L1/LandMine/Explode">
-					<DataRef>Assets.Scripts.L1.LandMineExplode.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/LandMine/Explode">
+					<DataRef>Assets.Scripts.Common.LandMineExplode.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/Common/Item/Pickup">
 					<DataRef>Assets.Scripts.Common.ItemPickup.lua</DataRef>

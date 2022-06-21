@@ -17,7 +17,7 @@
 		<ScriptRunner>
 			<Runs>
 				<Run>
-					<ScriptId>Vanilla/L1/LandMine/Explode</ScriptId>
+					<ScriptId>Vanilla/Common/LandMine/Explode</ScriptId>
 					<TriggerName>ScriptRunTrigger</TriggerName>
 				</Run>
 			</Runs>
