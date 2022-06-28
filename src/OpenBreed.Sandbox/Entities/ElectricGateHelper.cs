@@ -44,27 +44,31 @@ namespace OpenBreed.Sandbox.Entities
             this.entityFactory = entityFactory;
         }
 
-        public void AddVertical(World world, int x, int y, string level)
+        public Entity AddVertical(World world, int x, int y, string level)
         {
-            var door = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\ElectricGateVertical.xml")
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\ElectricGateVertical.xml")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();
 
-            door.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
 
-        public void AddHorizontal(World world, int x, int y, string level)
+        public Entity AddHorizontal(World world, int x, int y, string level)
         {
-            var door = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\ElectricGateHorizontal.xml")
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\ElectricGateHorizontal.xml")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();
 
 
-            door.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
     }
 }

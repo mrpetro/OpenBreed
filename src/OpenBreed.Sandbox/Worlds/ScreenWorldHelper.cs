@@ -97,7 +97,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var world = builder.Build();
 
-            var gameCommentatorBuilder = entityFactory.Create($@"Entities\Commentator\GameCommentator.xml");
+            var gameCommentatorBuilder = entityFactory.Create($@"Vanilla\ABTA\Templates\Common\GameCommentator.xml");
             var gameCommentator = gameCommentatorBuilder.Build();
 
             scriptMan.Expose("Commentator", gameCommentator);

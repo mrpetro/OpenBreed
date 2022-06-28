@@ -3,6 +3,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -31,16 +32,19 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public Entity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
+            var entity = default(Entity);
+
             switch (templateName)
             {
                 case "LandMine":
-                    genericCellHelper.AddLandMineCell(world, ix, iy, mapAssets.Level, gfxValue);
+                    entity = genericCellHelper.AddLandMineCell(world, ix, iy, mapAssets.Level, gfxValue);
                     break;
             }
 
             visited[ix, iy] = true;
+            return entity;
         }
 
         #endregion Public Methods

@@ -37,11 +37,11 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         #region Public Methods
 
-        public void AddItem(World world, int x, int y, string name, string level, int gfxValue, string flavor = null)
+        public Entity AddItem(World world, int x, int y, string name, string level, int gfxValue, string flavor = null)
         {
             var path = $@"{PICKABLE_PREFIX}\{name}.xml";
 
-            var pickable = entityFactory.Create(path)
+            var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -49,7 +49,9 @@ namespace OpenBreed.Sandbox.Entities.Pickable
                 .SetParameter("flavor", flavor)
                 .Build();
 
-            pickable.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
 
         #endregion Public Methods

@@ -72,7 +72,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             var pos = entity.Get<PositionComponent>();
             var body = entity.Get<BodyComponent>();
 
-            var shape = shapeMan.GetById(body.Fixtures.First().ShapeId);
+            var shape = body.Fixtures.First().Shape;
             var aabb = shape.GetAabb().Translated(pos.Value);
 
             broadphaseGrid.InsertItem(entity.Id, aabb);

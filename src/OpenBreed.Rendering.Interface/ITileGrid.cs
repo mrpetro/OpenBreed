@@ -22,12 +22,20 @@ namespace OpenBreed.Rendering.Interface
         void Render(Box2 clipBox);
 
         /// <summary>
-        /// Modify single tile grid cell with new tile data
+        /// Modify single tile grid cell with new tile data using real world position
         /// </summary>
         /// <param name="pos">Position of tile grid cell to modify</param>
         /// <param name="tileAtlasId">ID of tile atlas which will be set on found cell</param>
         /// <param name="tileImageId">ID of tile image which will be set on found cell</param>
         void ModifyTile(Vector2 pos, int tileAtlasId, int tileImageId);
+
+        /// <summary>
+        /// Modify single tile grid cell with new tile data using tile grid index position
+        /// </summary>
+        /// <param name="pos">Index position of tile grid cell to modify</param>
+        /// <param name="tileAtlasId">ID of tile atlas which will be set on found cell</param>
+        /// <param name="tileImageId">ID of tile image which will be set on found cell</param>
+        void ModifyTile(Vector2i pos, int tileAtlasId, int tileImageId);
 
         /// <summary>
         /// Modify multiple tile grid cells with tile stamp

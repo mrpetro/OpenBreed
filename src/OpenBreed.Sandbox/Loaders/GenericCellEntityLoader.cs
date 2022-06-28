@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
@@ -32,34 +33,37 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public Entity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
+            Entity entity = null;
+
             switch (templateName)
             {
                 case "FullObstacle":
-                    genericCellHelper.AddFullObstacleCell(world, ix, iy, mapAssets.Level, gfxValue);
+                    entity = genericCellHelper.AddFullObstacleCell(world, ix, iy, mapAssets.Level, gfxValue);
                     break;
                 case "ActorOnlyObstacle":
-                    genericCellHelper.AddActorOnlyObstacleCell(world, ix, iy, mapAssets.Level, gfxValue);
+                    entity = genericCellHelper.AddActorOnlyObstacleCell(world, ix, iy, mapAssets.Level, gfxValue);
                     break;
                 case "Void":
-                    genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.Level, gfxValue);
+                    entity = genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.Level, gfxValue);
                     break;
                 case "ObstacleDownLeft":
-                    genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "DownLeft");
+                    entity = genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "DownLeft");
                     break;
                 case "ObstacleDownRight":
-                    genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "DownRight");
+                    entity = genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "DownRight");
                     break;
                 case "ObstacleUpLeft":
-                    genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "UpLeft");
+                    entity = genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "UpLeft");
                     break;
                 case "ObstacleUpRight":
-                    genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "UpRight");
+                    entity = genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "UpRight");
                     break;
             }
 
             visited[ix, iy] = true;
+            return entity;
         }
 
         #endregion Public Methods

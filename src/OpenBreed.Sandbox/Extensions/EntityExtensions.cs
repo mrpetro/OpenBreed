@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Extensions
             var targetPos = target.Get<PositionComponent>();
 
             var bodyCmp = target.Get<BodyComponent>();
-            var shape = shapeMan.GetById(bodyCmp.Fixtures.First().ShapeId);
+            var shape = bodyCmp.Fixtures.First().Shape;
             var targetAabb = shape.GetAabb().Translated(targetPos.Value);
 
             var offset = new Vector2((32 - targetAabb.Size.X) / 2.0f, (32 - targetAabb.Size.Y) / 2.0f);

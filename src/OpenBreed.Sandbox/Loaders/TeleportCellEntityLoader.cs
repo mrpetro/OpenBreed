@@ -3,6 +3,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -31,14 +32,14 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public Entity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
             var layout = map.Layout;
 
             if (templateName == "TeleportEntry")
             {
                 if (!FindFarthestExit(layout, visited, ix, iy, out (int X, int Y) found))
-                    return;
+                    return null;
 
                 var groupLayerIdx = layout.GetLayerIndex(MapLayerType.Group);
                 var gfxLayerIdx = layout.GetLayerIndex(MapLayerType.Gfx);
@@ -56,15 +57,17 @@ namespace OpenBreed.Sandbox.Loaders
 
                 var exitGfxValue = layout.GetCellValue(gfxLayerIdx, found.X, found.Y);
 
-                teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, mapAssets.Level, exitGfxValue);
+                var entity = teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, mapAssets.Level, exitGfxValue);
                 visited[found.X, found.Y] = true;
+
+                return entity;
             }
             //else if (templateName == "TeleportExit")
             //{
             //}
             //visited[ix, iy] = true;
 
-            return;
+            return null;
         }
 
         #endregion Public Methods

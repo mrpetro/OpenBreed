@@ -86,7 +86,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             var body = entity.Get<BodyComponent>();
             var pos = entity.Get<PositionComponent>();
-            var shape = shapeMan.GetById(body.Fixtures.First().ShapeId);
+            var shape = body.Fixtures.First().Shape;
             return shape.GetAabb().Translated(pos.Value);
         }
 
@@ -151,11 +151,11 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             foreach (var fixtureA in bodyA.Fixtures)
             {
-                var shapeA = shapeMan.GetById(fixtureA.ShapeId);
+                var shapeA = fixtureA.Shape;
 
                 foreach (var fixtureB in bodyB.Fixtures)
                 {
-                    var shapeB = shapeMan.GetById(fixtureB.ShapeId);
+                    var shapeB = fixtureB.Shape;
 
                     if (CollisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
                         contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(fixtureA, fixtureB, projection));
@@ -189,11 +189,11 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             foreach (var fixtureA in bodyA.Fixtures)
             {
-                var shapeA = shapeMan.GetById(fixtureA.ShapeId);
+                var shapeA = fixtureA.Shape;
 
                 foreach (var fixtureB in bodyB.Fixtures)
                 {
-                    var shapeB = shapeMan.GetById(fixtureB.ShapeId);
+                    var shapeB = fixtureB.Shape;
 
                     if (CollisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
                         contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(fixtureA, fixtureB, projection));

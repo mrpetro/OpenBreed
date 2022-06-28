@@ -190,6 +190,8 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupBroadphaseFactory<Entity>();
 
+            hostBuilder.SetupFixtureMan((s, a)=> { });
+
             hostBuilder.SetupShapeMan((shapeMan, sp) =>
             {
                 shapeMan.Register("Shapes/Point_14_14", new PointShape(14, 14));

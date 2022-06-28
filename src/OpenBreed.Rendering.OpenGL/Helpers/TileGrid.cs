@@ -53,6 +53,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Public Methods
 
+        public void ModifyTile(Vector2i pos, int tileAtlasId, int tileImageId)
+        {
+            if(!ValidateGridIndices(pos.X, pos.Y))
+                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
+
+            var cellIndex = pos.X + Width * pos.Y;
+            var tileCell = Cells[cellIndex];
+            tileCell.AtlasId = tileAtlasId;
+            tileCell.ImageId = tileImageId;
+        }
+
         public void ModifyTile(Vector2 pos, int tileAtlasId, int tileImageId)
         {
             int xIndex;
@@ -181,6 +192,20 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         //        GL.End();
         //    }
         //}
+
+        private bool ValidateGridIndices(int xIndex, int yIndex)
+        {
+            if (xIndex < 0)
+                return false;
+            if (yIndex < 0)
+                return false;
+            if (xIndex >= Width)
+                return false;
+            if (yIndex >= Height)
+                return false;
+
+            return true;
+        }
 
         private bool TryGetGridIndices(Vector2 point, out int xIndex, out int yIndex)
         {

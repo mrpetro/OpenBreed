@@ -75,7 +75,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             var body = entity.Get<BodyComponent>();
             var pos = entity.Get<PositionComponent>();
-            var shape = shapeMan.GetById(body.Fixtures.First().ShapeId);
+            var shape = body.Fixtures.First().Shape;
             return shape.GetAabb().Translated(pos.Value);
         }
 

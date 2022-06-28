@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
@@ -32,8 +33,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public Entity Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
+            var entity = default(Entity);
             var key = default(string);
 
             switch (templateName)
@@ -57,10 +59,10 @@ namespace OpenBreed.Sandbox.Loaders
 
             if (rightAction?.Name == templateName)
             {
-                doorHelper.AddHorizontal(world, ix, iy, mapper.Level, key);
+                entity = doorHelper.AddHorizontal(world, ix, iy, mapper.Level, key);
                 visited[ix, iy] = true;
                 visited[ix + 1, iy] = true;
-                return;
+                return entity;
             }
 
             var downValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
@@ -68,11 +70,13 @@ namespace OpenBreed.Sandbox.Loaders
 
             if (downAction?.Name == templateName)
             {
-                doorHelper.AddVertical(world, ix, iy, mapper.Level, key);
+                entity = doorHelper.AddVertical(world, ix, iy, mapper.Level, key);
                 visited[ix, iy] = true;
                 visited[ix, iy + 1] = true;
-                return;
+                return entity;
             }
+
+            return entity;
         }
 
         #endregion Public Methods

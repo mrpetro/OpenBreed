@@ -93,9 +93,9 @@ namespace OpenBreed.Sandbox.Entities
             return entryEntity;
         }
 
-        public void AddMapExit(World world, int ix, int iy, int exitId, string level, int gfxValue)
+        public Entity AddMapExit(World world, int ix, int iy, int exitId, string level, int gfxValue)
         {
-            var exitEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MapExit.xml")
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MapExit.xml")
                 .SetParameter("level", level)
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("exitId", exitId)
@@ -103,7 +103,8 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("startY", 16 * iy)
                 .Build();
 
-            exitEntity.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+            return entity;
         }
 
         public void RegisterCollisionPairs()
