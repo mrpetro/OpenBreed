@@ -89,6 +89,36 @@ namespace OpenBreed.Common.Tools.Collections
             }
         }
 
+        public int NewId()
+        {
+            lock (_itemsLock)
+            {
+                if (freeIdCache.Count == 0)
+                    return items.Count;
+
+                return (int)freeIdCache.Peek();
+            }
+        }
+
+        public bool Insert(int id, T item)
+        {
+            lock (_itemsLock)
+            {
+                if(freeIdCache.Count == 0 && id == items.Count)
+                {
+                    items.Add(item);
+                    return true;
+                }
+
+                if (id != (int)freeIdCache.Peek())
+                    return false;
+
+                freeIdCache.Pop();
+                items[id] = item;
+                return true;
+            }
+        }
+
         public int Add(T item)
         {
             lock (_itemsLock)
