@@ -24,7 +24,6 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static Entity GetEntityByDataGrid(this Entity entity, IWorldMan worldMan, int ox, int oy)
         {
-            var thisdata = entity.Get<MetadataComponent>();
             var pos = entity.Get<PositionComponent>();
             var world = worldMan.GetById(entity.WorldId);
             var dataGrid = world.GetModule<IDataGrid<Entity>>();
