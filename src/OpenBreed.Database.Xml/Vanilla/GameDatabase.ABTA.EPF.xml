@@ -185,6 +185,7 @@
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<FileDataSource Id="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/LandMineExplode.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMineExplode.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/DoorOpen.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\DoorOpen.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/ItemPickup.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\ItemPickup.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/TeleporterTeleport.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\TeleporterTeleport.lua" />
 				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
@@ -1058,6 +1059,9 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.LandMineExplode.lua" DataSourceRef="Extension/Scripts/Common/LandMineExplode.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.DoorOpen.lua" DataSourceRef="Extension/Scripts/Common/DoorOpen.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.ItemPickup.lua" DataSourceRef="Extension/Scripts/Common/ItemPickup.lua" FormatType="TEXT">
@@ -11021,6 +11025,9 @@
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/Common/LandMine/Explode">
 					<DataRef>Assets.Scripts.Common.LandMineExplode.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Door/Open">
+					<DataRef>Assets.Scripts.Common.DoorOpen.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/Common/Item/Pickup">
 					<DataRef>Assets.Scripts.Common.ItemPickup.lua</DataRef>
