@@ -14,5 +14,25 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             var fc = entity.Get<FollowedComponent>();
             fc.FollowerIds.Add(followerEntity.Id);
         }
+
+        public static void PauseWorld(this Entity entity)
+        {
+            entity.Set(new PauserComponent(pause: true));
+        }
+
+        public static void UnpauseWorld(this Entity entity)
+        {
+            entity.Set(new PauserComponent(pause: false));
+        }
+
+        public static MetadataComponent GetMetadata(this Entity entity)
+        {
+            return entity.Get<MetadataComponent>();
+        }
+
+        public static FollowedComponent GetFollowers(this Entity entity)
+        {
+            return entity.Get<FollowedComponent>();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace OpenBreed.Wecs.Components.Control
     /// <summary>
     /// Placeholder class for walking controls
     /// </summary>
-    public class WalkingControlComponent : IControlComponent
+    public class WalkingControlComponent : IEntityComponent
     {
         #region Public Properties
 

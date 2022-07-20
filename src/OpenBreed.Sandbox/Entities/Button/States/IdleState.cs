@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using System;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
@@ -19,14 +20,16 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public IdleState(IFsmMan fsmMan)
+        public IdleState(IFsmMan fsmMan, ITriggerMan triggerMan)
         {
             this.fsmMan = fsmMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -49,21 +52,19 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
             entity.SetText(0, "Door - Opening");
 
-            entity.Subscribe<AnimFinishedEventArgs>(OnAnimStopped);
+            triggerMan.OnEntityAnimFinished(entity, OnAnimStopped, singleTime: true);
         }
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<AnimFinishedEventArgs>(OnAnimStopped);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnAnimStopped(object sender, AnimFinishedEventArgs eventArgs)
+        private void OnAnimStopped(Entity entity, AnimFinishedEventArgs e)
         {
-            var entity = sender as Entity;
             entity.SetState(FsmId, (int)ButtonImpulse.Press);
         }
 

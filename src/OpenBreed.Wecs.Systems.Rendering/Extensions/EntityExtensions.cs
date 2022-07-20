@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Components.Rendering;
+﻿using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenTK;
@@ -53,7 +54,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
 
             vpc.Size = new Vector2(width, height);
 
-            entity.RaiseEvent(new ViewportResizedEventArgs(vpc.Size.X, vpc.Size.Y));
+            entity.RaiseEvent(new ViewportResizedEventArgs(entity.Id, vpc.Size.X, vpc.Size.Y));
         }
 
         public static void SetViewportCamera(this Entity entity, int cameraEntityId)
@@ -63,14 +64,21 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             vpc.CameraEntityId = cameraEntityId;
         }
 
-        public static void PutStamp(this Entity entity, int stampId, int layerNo, Vector2 position)
+        public static void PutStamp(this Entity entity, int stampId, int layerNo)
+        {
+            var position = entity.Get<PositionComponent>().Value;
+            PutStampAtPosition(entity, stampId, layerNo, position);
+        }
+
+        public static void PutStampAtPosition(this Entity entity, int stampId, int layerNo, Vector2 position)
         {
             entity.Set(new StampPutterComponent(stampId, layerNo, position));
         }
 
         public static void PutTile(this Entity entity, int atlasId, int tileId, int layerNo, Vector2 position)
         {
-            entity.Set(new TilePutterComponent(atlasId, tileId, layerNo, position));
+            var tp = entity.Get<TilePutterComponent>();
+            tp.Items.Add(new TileData(atlasId, tileId, layerNo, position));
         }
 
         #endregion Public Methods

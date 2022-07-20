@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Core;
+using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Model.Palettes;
@@ -10,6 +11,7 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Rendering;
@@ -33,12 +35,13 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly HudHelper hudHelper;
         private readonly CameraHelper cameraHelper;
         private readonly IViewClient viewClient;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DebugHudWorldHelper(ISystemFactory systemFactory, IRenderableFactory renderableFactory, IWorldMan worldMan, IEntityMan entityMan, HudHelper hudHelper, CameraHelper cameraHelper, IViewClient viewClient)
+        public DebugHudWorldHelper(ISystemFactory systemFactory, IRenderableFactory renderableFactory, IWorldMan worldMan, IEntityMan entityMan, HudHelper hudHelper, CameraHelper cameraHelper, IViewClient viewClient, ITriggerMan triggerMan)
         {
             this.systemFactory = systemFactory;
             this.renderableFactory = renderableFactory;
@@ -47,6 +50,7 @@ namespace OpenBreed.Sandbox.Worlds
             this.hudHelper = hudHelper;
             this.cameraHelper = cameraHelper;
             this.viewClient = viewClient;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -84,15 +88,15 @@ namespace OpenBreed.Sandbox.Worlds
 
             hudCamera.Tag = "DebugHudCamera";
 
-            hudCamera.EnterWorld(world.Id);
-
+            triggerMan.OnWorldInitialized(world, () => hudCamera.EnterWorld(world.Id), singleTime: true);
+ 
             hudHelper.AddFpsCounter(world);
             hudHelper.AddPositionInfo(world);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
             hudViewport.SetViewportCamera(hudCamera.Id);
 
-            hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));
+            triggerMan.OnEntityViewportResized(hudViewport, (a) => UpdateCameraFov(hudCamera, a));
         }
 
         private void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)

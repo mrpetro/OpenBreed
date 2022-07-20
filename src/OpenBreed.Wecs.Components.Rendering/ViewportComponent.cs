@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;

@@ -55,6 +55,12 @@
         /// <returns>Sound source ID</returns>
         int CreateSoundSource();
 
+        /// <summary>
+        /// Get duration (in milliseconds) of sample with given ID
+        /// </summary>
+        /// <param name="sampleId">ID of sample</param>
+        /// <returns>Sample duration in milliseconds</returns>
+        int GetDuration(int sampleId);
 
         void Update();
 

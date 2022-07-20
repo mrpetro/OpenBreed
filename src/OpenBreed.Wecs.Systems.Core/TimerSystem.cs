@@ -1,27 +1,30 @@
-﻿using OpenBreed.Common.Logging;
+﻿using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Common.Logging;
+using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
-using System.Collections.Generic;
-using System.Linq;
+using OpenBreed.Wecs.Worlds;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class TimerSystem : SystemBase, IUpdatableSystem
+    public class TimerSystem : UpdatableSystemBase
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal TimerSystem(IEntityMan entityMan, ILogger logger)
+        internal TimerSystem(IEntityMan entityMan, IEventsMan eventsMan, ILogger logger)
         {
             this.entityMan = entityMan;
+            this.eventsMan = eventsMan;
             this.logger = logger;
 
             RequireEntityWith<TimerComponent>();
@@ -29,54 +32,20 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Internal Constructors
 
-        #region Public Methods
-
-        public void Update(float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                Update(entities[i], dt);
-            }
-        }
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                var entity = entities[i];
-                if (entity.ComponentValues.OfType<PauseImmuneComponent>().Any())
-                    Update(entity, dt);
-            }
-        }
-
-        #endregion Public Methods
-
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
-        protected override void OnAddEntity(Entity entity)
-        {
-            entities.Add(entity);
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private void Update(Entity entity, float dt)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
             var tc = entity.Get<TimerComponent>();
 
             //Update all timers with delta time
             for (int i = 0; i < tc.Items.Count; i++)
-                UpdateTimer(entity, tc.Items[i], dt);
+                UpdateTimer(entity, tc.Items[i], context.Dt);
         }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void UpdateTimer(Entity entity, TimerData timerData, float dt)
         {
@@ -97,14 +66,12 @@ namespace OpenBreed.Wecs.Systems.Core
 
         private void RaiseTimerUpdateEvent(Entity entity, TimerData timerData)
         {
-            //eventQueue.Enqueue(new ComponentChangedEvent<TimerComponent>(entity.Id,
-
-            entity.RaiseEvent(new TimerUpdateEventArgs(timerData.TimerId));
+            eventsMan.Raise(entity, new TimerUpdateEventArgs(entity.Id, timerData.TimerId));
         }
 
         private void RaiseTimerElapsedEvent(Entity entity, TimerData timerData)
         {
-            entity.RaiseEvent(new TimerElapsedEventArgs(timerData.TimerId));
+            eventsMan.Raise(entity, new TimerElapsedEventArgs(entity.Id, timerData.TimerId));
         }
 
         #endregion Private Methods

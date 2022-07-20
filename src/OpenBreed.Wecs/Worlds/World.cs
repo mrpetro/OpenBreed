@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Extensions;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;
 using OpenTK.Mathematics;
 using System;
@@ -31,8 +30,8 @@ namespace OpenBreed.Wecs.Worlds
         private readonly HashSet<Entity> entities = new HashSet<Entity>();
         private readonly HashSet<Entity> toAdd = new HashSet<Entity>();
         private readonly HashSet<Entity> toRemove = new HashSet<Entity>();
-        private readonly IWorldMan worldMan;
-
+        private readonly WorldMan worldMan;
+        private readonly WorldContext context;
         private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
@@ -43,8 +42,9 @@ namespace OpenBreed.Wecs.Worlds
         {
             Name = builder.name;
             modules = builder.modules;
-            Systems = builder.systems.Values.ToArray();
             worldMan = builder.worldMan;
+            context = new WorldContext(this);
+            Systems = builder.systems.Values.ToArray();
         }
 
         #endregion Internal Constructors
@@ -54,14 +54,9 @@ namespace OpenBreed.Wecs.Worlds
         public ISystem[] Systems { get; }
 
         /// <summary>
-        /// Pauses or unpauses this world
-        /// </summary>
-        public bool Paused { get; internal set; }
-
-        /// <summary>
         /// Time "speed" control value, can't be negative but can be 0 (Basicaly stops time).
         /// </summary>
-        public float TimeMultiplier
+        public float DtMultiplier
         {
             get
             {
@@ -108,9 +103,9 @@ namespace OpenBreed.Wecs.Worlds
                 throw new InvalidOperationException($"Module of type '{typeof(TModule)}' not found.");
         }
 
-        public void Pause() => SetPause(true);
+        //public void Pause() => SetPause(true);
 
-        public void Unpause() => SetPause(false);
+        //public void Unpause() => SetPause(false);
 
         #endregion Public Methods
 
@@ -188,20 +183,11 @@ namespace OpenBreed.Wecs.Worlds
         {
             AddPendingEntities();
 
-            if (Paused)
-            {
-                foreach (var item in Systems.OfType<IUpdatableSystem>())
-                {
-                    item.UpdatePauseImmuneOnly(dt * TimeMultiplier);
-                }
-            }
-            else
-            {
-                foreach (var item in Systems.OfType<IUpdatableSystem>())
-                {
-                    item.Update(dt * TimeMultiplier);
-                }
-            }
+            context.DtMultiplier = DtMultiplier;
+            context.UpdateDeltaTime(dt);
+
+            foreach (var item in Systems.OfType<IUpdatableSystem>())
+                item.Update(context);
 
             RemovePendingEntities();
         }
@@ -217,25 +203,25 @@ namespace OpenBreed.Wecs.Worlds
             toAdd.Clear();
         }
 
-        private void SetPause(bool paused)
-        {
-            if (Paused == paused)
-                return;
+        //private void SetPause(bool paused)
+        //{
+        //    if (Paused == paused)
+        //        return;
 
-            Paused = paused;
+        //    Paused = paused;
 
-            if (Paused)
-                worldMan.RaiseEvent(new WorldPausedEventArgs(Id));
-            else
-                worldMan.RaiseEvent(new WorldUnpausedEventArgs(Id));
-        }
+            //if (Paused)
+            //    worldMan.OnWorldPaused(Id);
+            //else
+            //    worldMan.OnWorldUnpaused(Id);
+        //}
 
         private void RemoveEntity(Entity entity)
         {
             RemoveFromAllSystems(entity);
             entities.Remove(entity);
             entity.WorldId = NO_WORLD;
-            OnEntityRemoved(entity);
+            worldMan.OnEntityRemoved(entity, Id);
         }
 
         private void AddEntity(Entity entity)
@@ -243,17 +229,7 @@ namespace OpenBreed.Wecs.Worlds
             AddEntityToSystems(entity);
             entities.Add(entity);
             entity.WorldId = Id;
-            OnEntityAdded(entity);
-        }
-
-        private void OnEntityAdded(Entity entity)
-        {
-            worldMan.RaiseEvent(new EntityEnteredEventArgs(Id, entity.Id));
-        }
-
-        private void OnEntityRemoved(Entity entity)
-        {
-            worldMan.RaiseEvent(new EntityLeftEventArgs(Id, entity.Id));
+            worldMan.OnEntityAdded(entity, Id);
         }
 
         private void AddEntityToSystems(Entity entity)

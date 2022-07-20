@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Audio\OpenBreed.Wecs.Components.Audio.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 

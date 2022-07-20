@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Logging;
+﻿using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Common.Logging;
 using OpenBreed.Input.Interface;
 using OpenTK.Input;
 using OpenTK.Windowing.GraphicsLibraryFramework;

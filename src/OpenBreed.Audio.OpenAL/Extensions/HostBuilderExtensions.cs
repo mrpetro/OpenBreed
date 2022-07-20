@@ -6,6 +6,8 @@ using OpenBreed.Audio.OpenAL.Data;
 using OpenBreed.Audio.OpenAL.Managers;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using System;

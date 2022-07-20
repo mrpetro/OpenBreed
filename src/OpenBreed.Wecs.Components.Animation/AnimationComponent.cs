@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenBreed.Wecs.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

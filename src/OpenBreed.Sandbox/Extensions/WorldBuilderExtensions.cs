@@ -17,7 +17,6 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupGameWorldSystems(this WorldBuilder builder, ISystemFactory systemFactory)
         {
-            builder.AddSystem(systemFactory.Create<WalkingControlSystem>());
             builder.AddSystem(systemFactory.Create<AiControlSystem>());
             builder.AddSystem(systemFactory.Create<WalkingControllerSystem>());
             builder.AddSystem(systemFactory.Create<AttackControllerSystem>());
@@ -36,6 +35,7 @@ namespace OpenBreed.Sandbox.Extensions
 
             builder.AddSystem(systemFactory.Create<AnimatorSystem>());
             builder.AddSystem(systemFactory.Create<TimerSystem>());
+            builder.AddSystem(systemFactory.Create<PausingSystem>());
             builder.AddSystem(systemFactory.Create<FsmSystem>());
 
             ////Audio

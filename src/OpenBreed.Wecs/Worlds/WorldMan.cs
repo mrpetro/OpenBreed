@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Logging;
+﻿using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
@@ -17,18 +17,19 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Private Fields
 
-        private readonly HashSet<World> toAdd = new HashSet<World>();
-        private readonly HashSet<World> toRemove = new HashSet<World>();
-        private readonly IdMap<World> worlds = new IdMap<World>();
-        private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
-        private readonly IScriptMan scriptMan;
+        private readonly IdMap<World> IdsToWorldsLookup = new IdMap<World>();
         private readonly ILogger logger;
+        private readonly Dictionary<string, int> namesToIdsLookup = new Dictionary<string, int>();
+        private readonly IScriptMan scriptMan;
+        private readonly HashSet<World> toDeinitialize = new HashSet<World>();
+        private readonly HashSet<World> toInitialize = new HashSet<World>();
+        private readonly List<World> worlds = new List<World>();
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public WorldMan(IEntityMan entityMan, IEventsMan eventsMan, IScriptMan scriptMan, ILogger logger)
         {
@@ -43,7 +44,7 @@ namespace OpenBreed.Wecs.Worlds
             entityMan.LeaveWorldRequested += EntityMan_LeaveWorldRequested;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Events
 
@@ -67,7 +68,7 @@ namespace OpenBreed.Wecs.Worlds
         /// <returns>World reference</returns>
         public World GetById(int id)
         {
-            if (worlds.TryGetValue(id, out World world))
+            if (IdsToWorldsLookup.TryGetValue(id, out World world))
                 return world;
             else
                 throw new InvalidOperationException($"World with ID '{id}' not found.");
@@ -81,15 +82,19 @@ namespace OpenBreed.Wecs.Worlds
         public World GetByName(string name)
         {
             int worldId;
-            if (!namesToIds.TryGetValue(name, out worldId))
+            if (!namesToIdsLookup.TryGetValue(name, out worldId))
                 return null;
 
-            return worlds[worldId];
+            return IdsToWorldsLookup[worldId];
         }
 
-        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
+        public void RegisterWorld(World newWorld)
         {
-            eventsMan.Raise(this, eventArgs);
+            newWorld.Id = IdsToWorldsLookup.Add(newWorld);
+            namesToIdsLookup.Add(newWorld.Name, newWorld.Id);
+
+            newWorld.InitializeSystems();
+            toInitialize.Add(newWorld);
         }
 
         /// <summary>
@@ -98,13 +103,13 @@ namespace OpenBreed.Wecs.Worlds
         /// <param name="world">World to be removed</param>
         public void Remove(World world)
         {
-            if (toRemove.Contains(world))
+            if (toDeinitialize.Contains(world))
             {
                 logger.Warning($"World '{world}' already pending removing.");
                 return;
             }
 
-            toRemove.Add(world);
+            toDeinitialize.Add(world);
         }
 
         /// <summary>
@@ -113,26 +118,79 @@ namespace OpenBreed.Wecs.Worlds
         /// <param name="dt">Delta time</param>
         public void Update(float dt)
         {
-            AddPendingWorlds();
+            InitializePendingWorlds();
 
-            foreach (var world in worlds.Items)
+            foreach (var world in worlds)
                 world.Update(dt);
 
-            RemovePendingWorlds();
-        }
-
-        public void RegisterWorld(World newWorld)
-        {
-            newWorld.Id = worlds.Add(newWorld);
-            namesToIds.Add(newWorld.Name, newWorld.Id);
-
-            newWorld.InitializeSystems();
-            toAdd.Add(newWorld);
+            DeinitializePendingWorlds();
         }
 
         #endregion Public Methods
 
+        //internal void OnWorldPaused(int worldId)
+        //{
+        //    RaiseEvent(new WorldPausedEventArgs(worldId));
+        //}
+
+        //internal void OnWorldUnpaused(int worldId)
+        //{
+        //    RaiseEvent(new WorldUnpausedEventArgs(worldId));
+        //}
+
+        #region Internal Methods
+
+        internal void OnEntityAdded(Entity entity, int worldId)
+        {
+            eventsMan.Raise(entity, new EntityEnteredEventArgs(entity.Id, worldId));
+        }
+
+        internal void OnEntityRemoved(Entity entity, int worldId)
+        {
+            eventsMan.Raise(entity, new EntityLeftEventArgs(entity.Id, worldId));
+        }
+
+        #endregion Internal Methods
+
         #region Private Methods
+
+        private void DeinitializePendingWorlds()
+        {
+            if (toDeinitialize.Any())
+            {
+                foreach (var world in toDeinitialize)
+                    DeinitializeWorld(world);
+
+                toDeinitialize.Clear();
+            }
+        }
+
+        private void DeinitializeWorld(World world)
+        {
+            worlds.Remove(world);
+
+            eventsMan.Raise(this, new WorldDeinitializedEventArgs(world.Id));
+        }
+
+        private void EntityMan_ComponentAdded(Entity entity, Type componentType)
+        {
+            if (entity.WorldId == World.NO_WORLD)
+                return;
+
+            var world = GetById(entity.WorldId);
+
+            world.CheckAddToSystems(entity, componentType);
+        }
+
+        private void EntityMan_ComponentRemoved(Entity entity, Type componentType)
+        {
+            if (entity.WorldId == World.NO_WORLD)
+                return;
+
+            var world = GetById(entity.WorldId);
+
+            world.CheckRemoveFromSystems(entity, componentType);
+        }
 
         private void EntityMan_EnterWorldRequested(Entity entity, int worldId)
         {
@@ -146,61 +204,25 @@ namespace OpenBreed.Wecs.Worlds
             world.RequestRemoveEntity(entity);
         }
 
-        private void EntityMan_ComponentRemoved(Entity entity, Type componentType)
-        {
-            if (entity.WorldId == World.NO_WORLD)
-                return;
-
-            var world = GetById(entity.WorldId);
-
-            world.CheckRemoveFromSystems(entity, componentType);
-        }
-
-        private void EntityMan_ComponentAdded(Entity entity, Type componentType)
-        {
-            if (entity.WorldId == World.NO_WORLD)
-                return;
-
-            var world = GetById(entity.WorldId);
-
-            world.CheckAddToSystems(entity, componentType);
-        }
-
-        private void RemoveWorld(World world)
-        {
-            RaiseEvent(new WorldDeinitializedEventArgs(world.Id));
-            worlds.RemoveById(world.Id);
-        }
-
-        private void RemovePendingWorlds()
-        {
-            if (toRemove.Any())
-            {
-                foreach (var world in toRemove)
-                    RemoveWorld(world);
-
-                toRemove.Clear();
-            }
-        }
-
         /// <summary>
         /// Initialize or remove any pending worlds
         /// </summary>
-        private void AddPendingWorlds()
+        private void InitializePendingWorlds()
         {
-            if (toAdd.Any())
+            if (toInitialize.Any())
             {
-                foreach (var world in toAdd)
-                    AddWorld(world);
+                foreach (var world in toInitialize)
+                    InitializeWorld(world);
 
-                toAdd.Clear();
+                toInitialize.Clear();
             }
         }
 
-        private void AddWorld(World world)
+        private void InitializeWorld(World world)
         {
-            RaiseEvent(new WorldInitializedEventArgs(world.Id));
-            scriptMan.TryInvokeFunction("WorldLoaded", world.Id);
+            worlds.Add(world);
+
+            eventsMan.Raise(this, new WorldInitializedEventArgs(world.Id));
         }
 
         #endregion Private Methods

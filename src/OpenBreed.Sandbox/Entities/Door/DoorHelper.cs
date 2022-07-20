@@ -4,8 +4,6 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Components;
-using OpenBreed.Sandbox.Components.States;
-using OpenBreed.Sandbox.Entities.Door.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
@@ -30,6 +28,8 @@ using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Audio.Interface.Data;
+using OpenBreed.Common.Interface;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
@@ -44,26 +44,93 @@ namespace OpenBreed.Sandbox.Entities.Door
             this.entityFactory = entityFactory;
         }
 
-        public void AddVertical(World world, int x, int y, string level)
+        public Entity AddVertical(World world, int x, int y, string level, string key)
         {
-            var door = entityFactory.Create(@"Defaults\Templates\ABTA\Common\DoorVertical.xml")
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\DoorVertical.xml")
                 .SetParameter("level", level)
+                .SetParameter("key", key)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();
 
-            door.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
 
-        public void AddHorizontal(World world, int x, int y, string level)
+        public static Entity GetEntityByDataGrid(Entity entity, IWorldMan worldMan, Vector2i indexOffset)
         {
-            var door = entityFactory.Create(@"Defaults\Templates\ABTA\Common\DoorHorizontal.xml")
+            var thisdata = entity.Get<MetadataComponent>();
+            var pos = entity.Get<PositionComponent>();
+            var world = worldMan.GetById(entity.WorldId);
+            var dataGrid = world.GetModule<IDataGrid<Entity>>();
+            var indexPos = new Vector2i((int)pos.Value.X / 16, (int)pos.Value.Y / 16);
+            var thisEntity = dataGrid.Get(indexPos);
+            var indexIndexPos = Vector2i.Add(indexPos, indexOffset);
+            var resultEntity = dataGrid.Get(indexIndexPos);
+
+            return resultEntity;
+        }
+
+        public static Entity GetDoorSecondPart(Entity entity, IWorldMan worldMan, out string type)
+        {
+            var thisdata = entity.Get<MetadataComponent>();
+            var pos = entity.Get<PositionComponent>();
+            var world = worldMan.GetById(entity.WorldId);
+            var dataGrid = world.GetModule<IDataGrid<Entity>>();
+            var indexPos = new Vector2i((int)pos.Value.X / 16, (int)pos.Value.Y / 16);
+            var thisEntity = dataGrid.Get(indexPos);
+            var downIndexPos = Vector2i.Add(indexPos, new Vector2i(0, 1));
+            var downEntity = dataGrid.Get(downIndexPos);
+
+            var downMeta = downEntity.TryGet<MetadataComponent>();
+
+            if (downMeta is not null && downMeta.Name == thisdata.Name)
+            {
+                type = "Vertical";
+                return downEntity;
+            }
+
+            var rightIndexPos = Vector2i.Add(indexPos, new Vector2i(1, 0));
+            var rightEntity = dataGrid.Get(rightIndexPos);
+            var rightMeta = rightEntity.TryGet<MetadataComponent>();
+
+            if (rightMeta is not null && rightMeta.Name == thisdata.Name)
+            {
+                type = "Horizontal";
+                return rightEntity;
+            }
+
+            type = null;
+            return null;
+        }
+
+        public Entity AddDoor(World world, int x, int y, string level, string key)
+        {
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Door.xml")
                 .SetParameter("level", level)
+                .SetParameter("key", key)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .Build();
 
-            door.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
+        }
+
+        public Entity AddHorizontal(World world, int x, int y, string level, string key)
+        {
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\DoorHorizontal.xml")
+                .SetParameter("level", level)
+                .SetParameter("key", key)
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
+
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
     }
 }

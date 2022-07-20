@@ -34,7 +34,7 @@ namespace OpenBreed.Sandbox.Entities.Viewport
 
         public Entity CreateViewportEntity(string name, float x, float y, float width, float height, string templateName)
         {
-            var viewport = entityFactory.Create($@"Entities\Viewport\{templateName}.xml")
+            var viewport = entityFactory.Create($@"Vanilla\ABTA\Templates\Common\Viewports\{templateName}.xml")
                 .SetParameter("startX", x)
                 .SetParameter("startY", y)
                 .Build();

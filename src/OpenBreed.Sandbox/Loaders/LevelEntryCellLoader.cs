@@ -2,6 +2,7 @@
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System;
 
@@ -32,7 +33,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public Entity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
             int entryId;
 
@@ -53,8 +54,9 @@ namespace OpenBreed.Sandbox.Loaders
                     throw new NotImplementedException("Entry type not implemented");
             }
 
-            entriesHelper.AddMapEntry(world, ix, iy, entryId, mapAssets.Level, gfxValue);
+            var entity = entriesHelper.AddMapEntry(world, ix, iy, entryId, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
+            return entity;
         }
 
         #endregion Public Methods

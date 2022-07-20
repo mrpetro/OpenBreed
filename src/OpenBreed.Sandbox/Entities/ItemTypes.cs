@@ -6,13 +6,19 @@ namespace OpenBreed.Sandbox.Entities
     {
         #region Public Properties
 
-        public static int KeyCardStandard { get; private set; }
-        public static int KeyCardRed { get; private set; }
-        public static int KeyCardGreen { get; private set; }
-        public static int KeyCardBlue { get; private set; }
+        public static int KeycardStandard { get; private set; }
+        public static int KeycardSpecial { get; private set; }
+        public static int KeycardRed { get; private set; }
+        public static int KeycardGreen { get; private set; }
+        public static int KeycardBlue { get; private set; }
         public static int Ammo { get; private set; }
         public static int CreditsSmall { get; private set; }
         public static int CreditsBig { get; private set; }
+        public static int MedkitSmall { get; private set; }
+        public static int MedkitBig { get; private set; }
+        public static int SmartCard1 { get; private set; }
+        public static int SmartCard2 { get; private set; }
+        public static int SmartCard3 { get; private set; }
 
         #endregion Public Properties
 
@@ -20,13 +26,22 @@ namespace OpenBreed.Sandbox.Entities
 
         public static void RegisterAbtaItems(this ItemsMan itemsMan)
         {
-            KeyCardStandard = itemsMan.RegisterItemType("KeyCardStandard");
-            KeyCardRed = itemsMan.RegisterItemType("KeyCardRed");
-            KeyCardGreen = itemsMan.RegisterItemType("KeyCardGreen");
-            KeyCardBlue = itemsMan.RegisterItemType("KeyCardBlue");
+            KeycardStandard = itemsMan.RegisterItemType("KeycardStandard");
+            KeycardRed = itemsMan.RegisterItemType("KeycardRed");
+            KeycardGreen = itemsMan.RegisterItemType("KeycardGreen");
+            KeycardBlue = itemsMan.RegisterItemType("KeycardBlue");
             Ammo = itemsMan.RegisterItemType("Ammo");
             CreditsSmall = itemsMan.RegisterItemType("CreditsSmall");
             CreditsBig = itemsMan.RegisterItemType("CreditsBig");
+            MedkitSmall = itemsMan.RegisterItemType("MedkitSmall");
+            MedkitBig = itemsMan.RegisterItemType("MedkitBig");
+            SmartCard1 = itemsMan.RegisterItemType("SmartCard1");
+            SmartCard2 = itemsMan.RegisterItemType("SmartCard2");
+            SmartCard3 = itemsMan.RegisterItemType("SmartCard3");
+
+
+
+            KeycardSpecial = itemsMan.RegisterItemType("KeycardSpecial");
         }
 
         #endregion Public Methods

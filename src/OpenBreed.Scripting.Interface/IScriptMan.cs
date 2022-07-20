@@ -1,4 +1,7 @@
-﻿namespace OpenBreed.Scripting.Interface
+﻿using System;
+using System.Reflection;
+
+namespace OpenBreed.Scripting.Interface
 {
     /// <summary>
     /// Script manager interface
@@ -8,6 +11,11 @@
         #region Public Methods
 
         IScriptFunc CompileString(string script, string name);
+
+        void RegisterDelegateType(Type delegateType, Type scriptDelegateType);
+
+        void RegisterFunction(string functionName, IScriptFunc func);
+        IScriptFunc GetFunction(string funcName);
 
         IScriptFunc CompileFile(string filePath);
 
@@ -24,6 +32,9 @@
         void SetObject(string objectName, object value);
 
         void Expose(string apiName, object apiObj);
+        void ExposeMethod(object apiObj, string methodName, MethodInfo methodInfo);
+
+        bool FunctionExists(string funcName);
 
         #endregion Public Methods
     }

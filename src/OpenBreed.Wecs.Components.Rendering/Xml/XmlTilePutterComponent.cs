@@ -2,15 +2,13 @@
 using OpenBreed.Wecs.Components.Xml;
 using OpenTK;
 using OpenTK.Mathematics;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Wecs.Components.Rendering.Xml
 {
-    [XmlRoot("TilePutter")]
-    public class XmlTilePutterComponent : XmlComponentTemplate, ITilePutterComponentTemplate
+    public class XmlTileDataTemplate : ITileDataTemplate
     {
-        #region Public Properties
-
         [XmlElement("AtlasName")]
         public string AtlasName { get; set; }
 
@@ -26,6 +24,19 @@ namespace OpenBreed.Wecs.Components.Rendering.Xml
 
         [XmlElement("Position")]
         public XmlVector2 XmlPosition { get; set; }
+    }
+
+    [XmlRoot("TilePutter")]
+    public class XmlTilePutterComponent : XmlComponentTemplate, ITilePutterComponentTemplate
+    {
+        #region Public Properties
+
+        [XmlArray("Items")]
+        [XmlArrayItem("Item")]
+        public List<XmlTileDataTemplate> XmlItems { get; set; }
+
+        [XmlIgnore]
+        public IEnumerable<ITileDataTemplate> Items => XmlItems;
 
         #endregion Public Properties
     }

@@ -11,16 +11,19 @@ using OpenBreed.Fsm;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Control.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
     public class IdleState : IState<AttackingState, AttackingImpulse>
     {
         private readonly IFsmMan fsmMan;
+        private readonly ITriggerMan triggerMan;
 
-        public IdleState(IFsmMan fsmMan)
+        public IdleState(IFsmMan fsmMan, ITriggerMan triggerMan)
         {
             this.fsmMan = fsmMan;
+            this.triggerMan = triggerMan;
         }
 
         public int Id => (int)AttackingState.Idle;
@@ -31,18 +34,16 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             var currentStateNames = fsmMan.GetStateNames(entity);
 
             entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
-            entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
+
+            triggerMan.OnEntityControlFireChanged(entity, OnControlFireChanged, singleTime: true);
         }
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
-        private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
+        private void OnControlFireChanged(Entity entity, ControlFireChangedEventArgs eventArgs)
         {
-            var entity = sender as Entity;
-
             if (eventArgs.Fire)
                 entity.SetState(FsmId, (int)AttackingImpulse.Shoot);
         }

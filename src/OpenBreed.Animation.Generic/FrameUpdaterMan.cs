@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using System;
 using System.Collections.Generic;

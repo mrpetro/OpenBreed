@@ -4,8 +4,11 @@ using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
+using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
@@ -22,6 +25,7 @@ using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
@@ -168,6 +172,14 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
+        public static void SetupGameSmartcardWorldHelper(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<GameSmartcardWorldHelper>();
+            });
+        }
+
         public static void SetupDebugHudWorldHelper(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -224,8 +236,11 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetService<PalettesDataProvider>(),
                                                               managerCollection.GetService<IBroadphaseFactory>(),
                                                               managerCollection.GetService<ITileGridFactory>(),
+                                                              managerCollection.GetService<IDataGridFactory>(),
                                                               managerCollection.GetService<ITileMan>(),
-                                                              managerCollection.GetService<ILogger>());
+                                                              managerCollection.GetService<ILogger>(),
+                                                              managerCollection.GetService<ITriggerMan>(),
+                                                              managerCollection.GetService<IScriptMan>());
 
                 mapLegacyDataLoader.RegisterEntityLoaders(managerCollection);
                 return mapLegacyDataLoader;
@@ -321,6 +336,11 @@ namespace OpenBreed.Sandbox.Extensions
 
             mapLegacyDataLoader.Register("TeleportEntry", teleportLoader);
             mapLegacyDataLoader.Register("TeleportExit", teleportLoader);
+
+            var landMineEntityLoader = new LandMineEntityLoader(managerCollection.GetService<GenericCellHelper>(),
+                                        managerCollection.GetService<ILogger>());
+
+            mapLegacyDataLoader.Register("LandMine", landMineEntityLoader);
         }
 
 

@@ -109,7 +109,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
             mapper.Register("SmartCard2", MapMapper.GFX_ANY, "Trigger");
             mapper.Register("SmartCard3", MapMapper.GFX_ANY, "Trigger");
 
-
+            mapper.Register("LandMine", MapMapper.GFX_ANY, "Trigger");
         }
     }
 }

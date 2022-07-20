@@ -1,6 +1,9 @@
-﻿using OpenBreed.Model.Maps;
+﻿using OpenBreed.Core;
+using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
@@ -32,17 +35,62 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public Entity Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
+            var key = default(string);
+
+            switch (templateName)
+            {
+                case "DoorStandard":
+                    key = "";
+                    break;
+                case "DoorRed":
+                    key = "KeycardRed";
+                    break;
+                case "DoorGreen":
+                    key = "KeycardGreen";
+                    break;
+                case "DoorBlue":
+                    key = "KeycardBlue";
+                    break;
+            }
+
+            var entity = doorHelper.AddDoor(world, ix, iy, mapper.Level, key);
+            visited[ix, iy] = true;
+
+            return entity;
+        }
+
+        public Entity LoadOld(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        {
+            var entity = default(Entity);
+            var key = default(string);
+
+            switch (templateName)
+            {
+                case "DoorStandard":
+                    key = "";
+                    break;
+                case "DoorRed":
+                    key = "KeycardRed";
+                    break;
+                case "DoorGreen":
+                    key = "KeycardGreen";
+                    break;
+                case "DoorBlue":
+                    key = "KeycardBlue";
+                    break;
+            }
+
             var rightValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
             var rightAction = map.GetAction(rightValue);
 
             if (rightAction?.Name == templateName)
             {
-                doorHelper.AddHorizontal(world, ix, iy, mapper.Level);
+                entity = doorHelper.AddHorizontal(world, ix, iy, mapper.Level, key);
                 visited[ix, iy] = true;
                 visited[ix + 1, iy] = true;
-                return;
+                return entity;
             }
 
             var downValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
@@ -50,11 +98,13 @@ namespace OpenBreed.Sandbox.Loaders
 
             if (downAction?.Name == templateName)
             {
-                doorHelper.AddVertical(world, ix, iy, mapper.Level);
+                entity = doorHelper.AddVertical(world, ix, iy, mapper.Level, key);
                 visited[ix, iy] = true;
                 visited[ix, iy + 1] = true;
-                return;
+                return entity;
             }
+
+            return entity;
         }
 
         #endregion Public Methods

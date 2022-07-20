@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Interface;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
@@ -15,7 +17,10 @@ namespace OpenBreed.Sandbox.Entities
     {
         #region Private Fields
 
-        private const string PREFIX = @"Defaults\Templates\ABTA\Common\Environment";
+        private const string PREFIX = @"Vanilla\ABTA\Templates\Common\Environment";
+        private const string PREFIX_L1 = @"Vanilla\ABTA\Templates\L1";
+        private const string PREFIX_COMMON = @"Vanilla\ABTA\Templates\Common";
+
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 
@@ -33,41 +38,45 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public void AddUnknownCell(World world, int x, int y, int actionValue, string level, int gfxValue)
+        public Entity AddUnknownCell(World world, int x, int y, int actionValue, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\Unknown.xml";
 
-            var pickable = entityFactory.Create(path)
+            var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            pickable.Add(new UnknownCodeComponent(actionValue));
+            entity.Add(new UnknownCodeComponent(actionValue));
 
-            pickable.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
 
-        internal void AddVoidCell(World world, int x, int y, string level, int gfxValue)
+        internal Entity AddVoidCell(World world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\Void.xml";
 
-            var pickable = entityFactory.Create(path)
+            var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            pickable.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
 
-        internal void AddSlopeObstacleCell(World world, int x, int y, string level, int gfxValue, string slopeDir)
+        internal Entity AddSlopeObstacleCell(World world, int x, int y, string level, int gfxValue, string slopeDir)
         {
             var path = $@"{PREFIX}\SlopeObstacle.xml";
 
-            var pickable = entityFactory.Create(path)
+            var entity = entityFactory.Create(path)
                 .SetParameter("slopeDir", slopeDir)
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
@@ -75,35 +84,57 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            pickable.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
 
-        internal void AddFullObstacleCell(World world, int x, int y, string level, int gfxValue)
+        internal Entity AddFullObstacleCell(World world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\FullObstacle.xml";
 
-            var pickable = entityFactory.Create(path)
+            var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            pickable.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
 
-        internal void AddActorOnlyObstacleCell(World world, int x, int y, string level, int gfxValue)
+        internal Entity AddLandMineCell(World world, int x, int y, string level, int gfxValue)
+        {
+            var path = $@"{PREFIX_COMMON}\LandMine.xml";
+
+            var entity = entityFactory.Create(path)
+                .SetParameter("level", level)
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
+                .Build();
+
+            entity.EnterWorld(world.Id);
+
+            return entity;
+        }
+
+        internal Entity AddActorOnlyObstacleCell(World world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\ActorOnlyObstacle.xml";
 
-            var pickable = entityFactory.Create(path)
+            var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            pickable.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
 
         #endregion Public Methods

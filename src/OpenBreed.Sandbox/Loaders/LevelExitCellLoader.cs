@@ -3,6 +3,7 @@ using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public void Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public Entity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
             var missonBlock = map.Blocks.OfType<MapMissionBlock>().FirstOrDefault();
 
@@ -55,8 +56,9 @@ namespace OpenBreed.Sandbox.Loaders
                     throw new NotImplementedException("Exit type not implemented");
             }
 
-            entriesHelper.AddMapExit(world, ix, iy, exitId, mapAssets.Level, gfxValue);
+            var entity = entriesHelper.AddMapExit(world, ix, iy, exitId, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
+            return entity;
         }
 
         #endregion Public Methods

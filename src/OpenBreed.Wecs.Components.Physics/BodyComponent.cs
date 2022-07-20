@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Wecs.Components.Physics.Builders;
 using OpenBreed.Wecs.Entities;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -93,71 +95,24 @@ namespace OpenBreed.Wecs.Components.Physics
 
         protected override IEntityComponent Create(IBodyComponentTemplate template)
         {
-            var builder = builderFactory.GetBuilder<BodyComponentBuilder>();
+            var bodyComponentBuilder = builderFactory.GetBuilder<BodyComponentBuilder>();
 
-            builder.SetCofFactor(template.CofFactor);
-            builder.SetCorFactor(template.CorFactor);
+            var fixtureBuilder = builderFactory.GetBuilder<BodyFixtureBuilder>();
+
+            bodyComponentBuilder.SetCofFactor(template.CofFactor);
+            bodyComponentBuilder.SetCorFactor(template.CorFactor);
 
             foreach (var fixture in template.Fixtures)
-                builder.AddFixture(fixture.ShapeName, fixture.Groups);
+            {
+                fixtureBuilder.SetShape(fixture.ShapeName);
+                fixtureBuilder.SetGroups(fixture.Groups);
 
-            return builder.Build();
+                bodyComponentBuilder.AddFixture(fixtureBuilder.Build());
+            }
+
+            return bodyComponentBuilder.Build();
         }
 
         #endregion Protected Methods
-    }
-
-    public class BodyComponentBuilder : IBuilder<BodyComponent>
-    {
-        #region Internal Fields
-
-        internal readonly List<BodyFixture> Fixtures = new List<BodyFixture>();
-        internal float CofFactor;
-        internal float CorFactor;
-
-        #endregion Internal Fields
-
-        #region Private Fields
-
-        private readonly IShapeMan shapeMan;
-        private readonly ICollisionMan<Entity> collisionMan;
-
-        #endregion Private Fields
-
-        #region Internal Constructors
-
-        internal BodyComponentBuilder(IShapeMan shapeMan, ICollisionMan<Entity> collisionMan)
-        {
-            this.shapeMan = shapeMan;
-            this.collisionMan = collisionMan;
-        }
-
-        #endregion Internal Constructors
-
-        #region Public Methods
-
-        public BodyComponent Build()
-        {
-            return new BodyComponent(this);
-        }
-
-        public void SetCofFactor(float cofFactor)
-        {
-            CofFactor = cofFactor;
-        }
-
-        public void SetCorFactor(float corFactor)
-        {
-            CorFactor = corFactor;
-        }
-
-        public void AddFixture(string shapeName, IEnumerable<string> groupNames)
-        {
-            var shapeId = shapeMan.GetIdByTag(shapeName);
-            var groupIds = groupNames.Select(item => collisionMan.GetGroupId(item));
-            Fixtures.Add(new BodyFixture(shapeId, groupIds));
-        }
-
-        #endregion Public Methods
     }
 }

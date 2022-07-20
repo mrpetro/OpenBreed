@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenTK;
 using OpenTK.Audio;
@@ -140,6 +141,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
                 return;
 
             var alBuffer = GetSampleBufferId(sampleId);
+
             var soundSource = GetFirstIdleSource();
 
             if (soundSource is null)
@@ -182,6 +184,26 @@ namespace OpenBreed.Audio.OpenAL.Managers
             }
 
             //Task.Run(() => AL.SourcePlay(alSource));
+        }
+
+        public int GetDuration(int sampleId)
+        {
+            if (sampleId == -1)
+                return 0;
+
+            var alBuffer = GetSampleBufferId(sampleId);
+
+            AL.GetBuffer(alBuffer, ALGetBufferi.Size, out int sizeInBytes);
+            AL.GetBuffer(alBuffer, ALGetBufferi.Channels, out int channels);
+            AL.GetBuffer(alBuffer, ALGetBufferi.Bits, out int bits);
+
+            var lengthInSamples = sizeInBytes * 8 / (channels * bits);
+
+            AL.GetBuffer(alBuffer, ALGetBufferi.Frequency, out int frequency);
+
+            var durationInSeconds = (float)lengthInSamples / (float)frequency;
+
+            return (int)(durationInSeconds * 1000.0f);
         }
 
         public int GetByName(string sampleName)

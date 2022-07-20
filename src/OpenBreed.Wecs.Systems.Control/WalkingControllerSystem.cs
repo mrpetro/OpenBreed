@@ -3,18 +3,18 @@ using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Control.Inputs;
+using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
-    public class WalkingControllerSystem : SystemBase, IUpdatableSystem
+    public class WalkingControllerSystem : UpdatableSystemBase
     {
         #region Private Fields
 
         private readonly IPlayersMan playersMan;
-        private readonly List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
@@ -30,39 +30,9 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #endregion Internal Constructors
 
-        #region Public Methods
-
-        public void Update(float dt)
-        {
-            for (int i = 0; i < entities.Count; i++)
-                UpdateEntity(dt, entities[i]);
-        }
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-        }
-
-        #endregion Public Methods
-
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
-        protected override void OnAddEntity(Entity entity)
-        {
-            entities.Add(entity);
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private void UpdateEntity(float dt, Entity entity)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
             var controlComponent = entity.Get<WalkingInputComponent>();
             var walkingControl = entity.Get<WalkingControlComponent>();
@@ -81,6 +51,6 @@ namespace OpenBreed.Wecs.Systems.Control
             entity.RaiseEvent(new ControlDirectionChangedEventArgs(walkingControl.Direction));
         }
 
-        #endregion Private Methods
+        #endregion Protected Methods
     }
 }

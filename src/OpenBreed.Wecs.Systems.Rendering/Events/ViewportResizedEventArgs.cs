@@ -1,15 +1,17 @@
-﻿using System;
+﻿using OpenBreed.Wecs.Events;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Rendering.Events
 {
     /// <summary>
     /// Event args for event that occurs when rendering viewport was resized
     /// </summary>
-    public class ViewportResizedEventArgs : EventArgs
+    public class ViewportResizedEventArgs : EntityEvent
     {
         #region Public Constructors
 
-        public ViewportResizedEventArgs(float width, float height)
+        public ViewportResizedEventArgs(int entityId, float width, float height)
+            : base(entityId)
         {
             Width = width;
             Height = height;

@@ -1,16 +1,15 @@
 ﻿using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
-using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class StampSystem : SystemBase, IUpdatableSystem
+    public class StampSystem : UpdatableSystemBase
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
         private ITileGrid tileGrid;
 
         #endregion Private Fields
@@ -33,47 +32,25 @@ namespace OpenBreed.Wecs.Systems.Rendering
             tileGrid = world.GetModule<ITileGrid>();
         }
 
-        public void Update(float dt)
-        {
-            foreach (var entity in entities)
-            {
-                var stampPutterCmp = entity.TryGet<StampPutterComponent>();
-
-                if (stampPutterCmp is null)
-                    continue;
-
-                try
-                {
-                    tileGrid.ModifyTiles(stampPutterCmp.Position, stampPutterCmp.StampId);
-                }
-                finally
-                {
-                    entity.Remove<StampPutterComponent>();
-                }
-            }
-        }
-
-        public void UpdatePauseImmuneOnly(float dt)
-        {
-            //foreach (var item in Entities)
-            //{
-            //}
-        }
-
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
-
-        protected override void OnAddEntity(Entity entity)
+        protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
-            entities.Add(entity);
-        }
+            var stampPutterCmp = entity.TryGet<StampPutterComponent>();
 
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            entities.Remove(entity);
+            if (stampPutterCmp is null)
+                return;
+
+            try
+            {
+                tileGrid.ModifyTiles(stampPutterCmp.Position, stampPutterCmp.StampId);
+            }
+            finally
+            {
+                entity.Remove<StampPutterComponent>();
+            }
         }
 
         #endregion Protected Methods

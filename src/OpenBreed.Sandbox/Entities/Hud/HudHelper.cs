@@ -7,7 +7,9 @@ using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Events;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
@@ -26,6 +28,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
         private readonly IViewClient viewClient;
         private readonly IJobsMan jobsMan;
         private readonly IRenderingMan renderingMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
@@ -35,13 +38,15 @@ namespace OpenBreed.Sandbox.Entities.Hud
                          IEntityMan entityMan,
                          IViewClient viewClient,
                          IJobsMan jobsMan,
-                         IRenderingMan renderingMan)
+                         IRenderingMan renderingMan, 
+                         ITriggerMan triggerMan)
         {
             this.entityFactory = entityFactory;
             this.entityMan = entityMan;
             this.viewClient = viewClient;
             this.jobsMan = jobsMan;
             this.renderingMan = renderingMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -50,17 +55,18 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddFpsCounter(World world)
         {
-            var fpsCounter = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\FpsCounter.xml")
+            var fpsCounter = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\FpsCounter.xml")
                 .SetParameter("posX", -viewClient.ClientRectangle.Size.X / 2.0f)
                 .SetParameter("posY", -viewClient.ClientRectangle.Size.Y / 2.0f)
                 .Build();
 
-            fpsCounter.EnterWorld(world.Id);
+            triggerMan.OnWorldInitialized(world, () => fpsCounter.EnterWorld(world.Id), singleTime: true);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
 
             jobsMan.Execute(new FpsTextUpdateJob(renderingMan, fpsCounter));
-            hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsCounterPos(fpsCounter, a));
+
+            triggerMan.OnEntityViewportResized(hudViewport, (a) => UpdateFpsCounterPos(fpsCounter, a));
         }
 
 
@@ -76,17 +82,21 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddPositionInfo(World world)
         {
-            var positionInfo = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Hud\PositionInfo.xml")
+            var positionInfo = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\PositionInfo.xml")
                 .SetParameter("posX", viewClient.ClientRectangle.Size.X / 2.0f - 180.0f)
                 .SetParameter("posY", -viewClient.ClientRectangle.Size.Y / 2.0f)
                 .Build();
 
-            positionInfo.EnterWorld(world.Id);
+
+            triggerMan.OnWorldInitialized(world, () => positionInfo.EnterWorld(world.Id), singleTime: true);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
 
             jobsMan.Execute(new JohnPositionTextUpdateJob(entityMan, positionInfo));
-            hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdatePositionInfoPos(positionInfo, a));
+
+
+
+            triggerMan.OnEntityViewportResized(hudViewport, (a) => UpdatePositionInfoPos(positionInfo, a));
         }
 
         private static void UpdatePositionInfoPos(Entity fpsTextEntity, ViewportResizedEventArgs a)

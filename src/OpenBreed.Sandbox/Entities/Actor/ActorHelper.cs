@@ -1,12 +1,14 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenBreed.Common.Tools;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Sandbox.Components;
+using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
@@ -14,9 +16,11 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
+using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
+using System;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -34,12 +38,21 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private readonly DynamicResolver dynamicResolver;
         private readonly FixtureTypes fixtureTypes;
+        private readonly IScriptMan scriptMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ActorHelper(IClipMan<Entity> clipMan, ICollisionMan<Entity> collisionMan, IPlayersMan playersMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, DynamicResolver dynamicResolver, FixtureTypes fixtureTypes)
+        public ActorHelper(
+            IClipMan<Entity> clipMan,           
+            ICollisionMan<Entity> collisionMan,
+            IPlayersMan playersMan,
+            IDataLoaderFactory dataLoaderFactory,
+            IEntityFactory entityFactory,
+            DynamicResolver dynamicResolver,
+            FixtureTypes fixtureTypes,
+            IScriptMan scriptMan)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
@@ -48,6 +61,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             this.entityFactory = entityFactory;
             this.dynamicResolver = dynamicResolver;
             this.fixtureTypes = fixtureTypes;
+            this.scriptMan = scriptMan;
         }
 
         #endregion Public Constructors
@@ -59,6 +73,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ScriptRunTrigger, ScriptRunCallback);
         }
 
         public Entity CreateDummyActor(Vector2 pos)
@@ -99,7 +114,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public Entity CreateActor(Vector2 pos)
         {
-            var actor = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Actors\John.xml")
+            var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\John.xml")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .Build();
@@ -109,7 +124,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public Entity CreateDummy(Vector2 pos)
         {
-            var actor = entityFactory.Create(@"Defaults\Templates\ABTA\Common\Actors\Dummy.xml")
+            var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\Dummy.xml")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .Build();
@@ -142,6 +157,21 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private void FullObstableCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
+        }
+
+        private void ScriptRunCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
+        {
+            var scriptId = entityB.GetScriptId("ScriptRunTrigger");
+
+            if (scriptId is null)
+                return;
+
+            var func = scriptMan.GetFunction(scriptId);
+
+            if (func is null)
+                return;
+
+            func.Invoke(entityB, entityA);
         }
 
         private void SlopeObstacleCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)

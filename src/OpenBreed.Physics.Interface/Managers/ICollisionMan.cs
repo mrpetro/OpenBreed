@@ -1,5 +1,4 @@
-﻿using OpenTK;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,35 +10,40 @@ namespace OpenBreed.Physics.Interface.Managers
     {
         #region Public Methods
 
-        void RegisterFixturePair(int fixtureIdA, int fixtureIdB, FixtureContactCallback<TObject> callback);
-
-        int RegisterGroup(string groupName);
+        int GetByName(string name);
 
         int GetGroupId(string item);
 
-        int GetByName(string name);
+        void RegisterFixturePair(int fixtureIdA, int fixtureIdB, FixtureContactCallback<TObject> callback);
+
+        int RegisterGroup(string groupName);
 
         void Resolve(TObject objA, TObject objB, List<CollisionContact> contacts);
 
         #endregion Public Methods
     }
 
-    public class BodyFixture
+    public class BodyFixture : IFixture
     {
-        #region Public Constructors
+        #region Internal Constructors
 
-        public BodyFixture(int shapeId, IEnumerable<int> groupIds)
+        public BodyFixture(
+            int id,
+            IShape shape,
+            IEnumerable<int> groupIds)
         {
-            ShapeId = shapeId;
+            Id = id;
+            Shape = shape;
             GroupIds = groupIds.ToList();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
-        public int ShapeId { get; set; }
         public List<int> GroupIds { get; }
+        public int Id { get; }
+        public IShape Shape { get; set; }
 
         #endregion Public Properties
     }

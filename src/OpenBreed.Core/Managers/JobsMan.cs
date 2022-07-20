@@ -26,6 +26,11 @@ namespace OpenBreed.Core.Managers
         {
         }
 
+        public IJobBuilder Create()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion Public Constructors
 
         #region Public Properties

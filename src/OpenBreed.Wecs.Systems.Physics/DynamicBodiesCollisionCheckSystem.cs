@@ -59,13 +59,9 @@ namespace OpenBreed.Wecs.Systems.Physics
             broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
         }
 
-        public void UpdatePauseImmuneOnly(float dt)
+        public void Update(IWorldContext context)
         {
-        }
-
-        public void Update(float dt)
-        {
-            broadphaseDynamic.Solve(QueryStaticGrid, TestNarrowPhaseDynamic, dt);
+            broadphaseDynamic.Solve(QueryStaticGrid, TestNarrowPhaseDynamic, context.Dt);
         }
 
         #endregion Public Methods
@@ -90,45 +86,9 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             var body = entity.Get<BodyComponent>();
             var pos = entity.Get<PositionComponent>();
-            var shape = shapeMan.GetById(body.Fixtures.First().ShapeId);
+            var shape = body.Fixtures.First().Shape;
             return shape.GetAabb().Translated(pos.Value);
         }
-
-        //private bool HandleBodyOnCommand(BodyOnCommand cmd)
-        //{
-        //    var entity = entityMan.GetById(cmd.EntityId);
-
-        //    if (!entity.Contains<VelocityComponent>())
-        //        return false;
-
-        //    var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item == entity);
-
-        //    if (dynamicToActivate != null)
-        //    {
-        //        var aabb = GetAabb(entity);
-        //        broadphaseDynamic.InsertItem(entity.Id, aabb);
-        //        inactiveDynamics.Remove(dynamicToActivate);
-        //        entity.RaiseEvent(new BodyOnEventArgs(entity));
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
-
-        //private bool HandleBodyOffCommand(BodyOffCommand cmd)
-        //{
-        //    var entity = entityMan.GetById(cmd.EntityId);
-
-        //    if (!entity.Contains<VelocityComponent>())
-        //        return false;
-
-        //    broadphaseDynamic.RemoveItem(entity.Id);
-
-        //    inactiveDynamics.Add(entity);
-
-        //    entity.RaiseEvent(new BodyOffEventArgs(entity));
-        //    return true;
-        //}
 
         private void TestNarrowPhaseDynamic(BroadphaseDynamicElement nextCollider, BroadphaseDynamicElement currentCollider, float dt)
         {
@@ -191,11 +151,11 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             foreach (var fixtureA in bodyA.Fixtures)
             {
-                var shapeA = shapeMan.GetById(fixtureA.ShapeId);
+                var shapeA = fixtureA.Shape;
 
                 foreach (var fixtureB in bodyB.Fixtures)
                 {
-                    var shapeB = shapeMan.GetById(fixtureB.ShapeId);
+                    var shapeB = fixtureB.Shape;
 
                     if (CollisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
                         contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(fixtureA, fixtureB, projection));
@@ -229,11 +189,11 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             foreach (var fixtureA in bodyA.Fixtures)
             {
-                var shapeA = shapeMan.GetById(fixtureA.ShapeId);
+                var shapeA = fixtureA.Shape;
 
                 foreach (var fixtureB in bodyB.Fixtures)
                 {
-                    var shapeB = shapeMan.GetById(fixtureB.ShapeId);
+                    var shapeB = fixtureB.Shape;
 
                     if (CollisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
                         contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(fixtureA, fixtureB, projection));

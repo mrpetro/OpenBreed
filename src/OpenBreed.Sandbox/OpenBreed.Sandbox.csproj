@@ -21,10 +21,6 @@
     <None Remove="Entities\Actor\States\Attacking\IdleState.lua" />
     <None Remove="Entities\Button\Button.lua" />
     <None Remove="Entities\Turret\Turret.xml" />
-    <None Remove="Entities\Viewport\DebugHudViewport.xml" />
-    <None Remove="Entities\Viewport\GameHudViewport.xml" />
-    <None Remove="Entities\Viewport\GameViewport.xml" />
-    <None Remove="Entities\Viewport\TextViewport.xml" />
     <None Remove="RunABTA.bat" />
   </ItemGroup>
 
@@ -51,18 +47,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Turret\Turret.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Viewport\DebugHudViewport.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Viewport\GameHudViewport.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Viewport\GameViewport.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Viewport\TextViewport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="RunABTA.bat">
@@ -107,6 +91,7 @@
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Gui\OpenBreed.Wecs.Components.Gui.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Physics\OpenBreed.Wecs.Components.Physics.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Rendering\OpenBreed.Wecs.Components.Rendering.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Scripting\OpenBreed.Wecs.Components.Scripting.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Audio\OpenBreed.Wecs.Systems.Audio.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj" />
@@ -114,6 +99,7 @@
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Gui\OpenBreed.Wecs.Systems.Gui.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Scripting\OpenBreed.Wecs.Systems.Scripting.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 

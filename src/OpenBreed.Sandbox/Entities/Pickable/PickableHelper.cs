@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Audio.Interface.Data;
 using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenBreed.Common.Tools;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Rendering.Interface;
@@ -18,7 +19,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
     {
         #region Private Fields
 
-        private const string PICKABLE_PREFIX = @"Defaults\Templates\ABTA\Common\Pickables";
+        private const string PICKABLE_PREFIX = @"Vanilla\ABTA\Templates\Common\Pickables";
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 
@@ -36,11 +37,11 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         #region Public Methods
 
-        public void AddItem(World world, int x, int y, string name, string level, int gfxValue, string flavor = null)
+        public Entity AddItem(World world, int x, int y, string name, string level, int gfxValue, string flavor = null)
         {
             var path = $@"{PICKABLE_PREFIX}\{name}.xml";
 
-            var pickable = entityFactory.Create(path)
+            var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -48,7 +49,9 @@ namespace OpenBreed.Sandbox.Entities.Pickable
                 .SetParameter("flavor", flavor)
                 .Build();
 
-            pickable.EnterWorld(world.Id);
+            entity.EnterWorld(world.Id);
+
+            return entity;
         }
 
         #endregion Public Methods

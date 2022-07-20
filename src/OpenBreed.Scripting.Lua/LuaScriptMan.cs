@@ -1,6 +1,10 @@
 ﻿using NLua;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Scripting.Interface;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace OpenBreed.Scripting.Lua
 {
@@ -31,6 +35,9 @@ namespace OpenBreed.Scripting.Lua
             luaState.NewTable("Templates.Entities");
             //Define table placeholder for viewport templates namespace
             luaState.NewTable("Templates.Viewports");
+
+            //Allow C# Action delgates to be called from Lua
+            luaState.RegisterLuaDelegateType(typeof(Action), typeof(LuaActionHandler));
         }
 
         #endregion Public Constructors
@@ -41,9 +48,19 @@ namespace OpenBreed.Scripting.Lua
 
         #region Public Methods
 
+        public void RegisterDelegateType(Type delegateType, Type scriptDelegateType )
+        {
+            luaState.RegisterLuaDelegateType(delegateType, scriptDelegateType);
+        }
+
         public void Expose(string apiName, object apiObj)
         {
             luaState[apiName] = apiObj;
+        }
+
+        public void ExposeMethod(object apiObj, string methodName, MethodInfo methodInfo)
+        {
+            luaState.RegisterFunction(methodName, apiObj, methodInfo);
         }
 
         public object GetObject(string objectName)
@@ -75,6 +92,16 @@ namespace OpenBreed.Scripting.Lua
             return new LuaScriptFunc(luaState.LoadString(script, name));
         }
 
+        private Dictionary<string, IScriptFunc> functionLookup = new Dictionary<string, IScriptFunc>();
+
+        public void RegisterFunction(string functionName, IScriptFunc func)
+        {
+            if (functionLookup.ContainsKey(functionName))
+                throw new InvalidOperationException($"Function '{functionName}' already registered.");
+
+            functionLookup.Add(functionName, func);
+        }
+
         public IScriptFunc CompileFile(string filePath)
         {
             return new LuaScriptFunc(luaState.LoadFile(filePath));
@@ -89,6 +116,17 @@ namespace OpenBreed.Scripting.Lua
 
             func.Call(funcArgs);
             return true;
+        }
+
+        public IScriptFunc GetFunction(string funcName)
+        {
+            functionLookup.TryGetValue(funcName, out IScriptFunc func);
+            return func;
+        }
+
+        public bool FunctionExists(string funcName)
+        {
+            return functionLookup.ContainsKey(funcName);
         }
 
         public bool TryInvokeFunction(string funcName, out object funcResult, params object[] funcArgs)
@@ -110,5 +148,16 @@ namespace OpenBreed.Scripting.Lua
         }
 
         #endregion Public Methods
+    }
+
+    internal class LuaActionHandler : NLua.Method.LuaDelegate
+    {
+        void CallFunction()
+        {
+            object[] args = new object[] { };
+            object[] inArgs = new object[] { };
+            int[] outArgs = new int[] { };
+            base.CallFunction(args, inArgs, outArgs);
+        }
     }
 }

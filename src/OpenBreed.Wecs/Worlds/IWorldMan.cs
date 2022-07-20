@@ -25,8 +25,6 @@ namespace OpenBreed.Wecs.Worlds
 
         World GetByName(string name);
 
-        void RaiseEvent<T>(T eventArgs) where T : EventArgs;
-
         void Remove(World world);
 
         void Update(float dt);

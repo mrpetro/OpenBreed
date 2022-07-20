@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Common;
 using System;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Wecs.Systems.Audio.Extensions
 {
@@ -11,7 +12,10 @@ namespace OpenBreed.Wecs.Systems.Audio.Extensions
 
         public static void SetupAudioSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register(() => new SoundSystem(serviceProvider.GetService<ISoundMan>()));
+            systemFactory.Register<SoundSystem>(
+                () => new SoundSystem(
+                    serviceProvider.GetService<ISoundMan>(),
+                    serviceProvider.GetService<IEventsMan>()));
         }
 
         #endregion Public Methods

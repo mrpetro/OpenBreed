@@ -10,6 +10,8 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
     public static class EntityExtensions
     {
+
+
         public static void StartTimer(this Entity entity, int timerId, double interval)
         {
             var timerCmp = entity.Get<TimerComponent>();
