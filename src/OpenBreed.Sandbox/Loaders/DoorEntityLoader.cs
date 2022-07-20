@@ -1,6 +1,8 @@
-﻿using OpenBreed.Model.Maps;
+﻿using OpenBreed.Core;
+using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 
@@ -34,6 +36,32 @@ namespace OpenBreed.Sandbox.Loaders
         #region Public Methods
 
         public Entity Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        {
+            var key = default(string);
+
+            switch (templateName)
+            {
+                case "DoorStandard":
+                    key = "";
+                    break;
+                case "DoorRed":
+                    key = "KeycardRed";
+                    break;
+                case "DoorGreen":
+                    key = "KeycardGreen";
+                    break;
+                case "DoorBlue":
+                    key = "KeycardBlue";
+                    break;
+            }
+
+            var entity = doorHelper.AddDoor(world, ix, iy, mapper.Level, key);
+            visited[ix, iy] = true;
+
+            return entity;
+        }
+
+        public Entity LoadOld(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
             var entity = default(Entity);
             var key = default(string);

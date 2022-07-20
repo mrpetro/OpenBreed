@@ -31,6 +31,7 @@ using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Loaders;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
@@ -147,6 +148,7 @@ namespace OpenBreed.Sandbox
                 scriptMan.Expose("Stamps", sp.GetService<IStampMan>());
                 scriptMan.Expose("Clips", sp.GetService<IClipMan<Entity>>());
                 scriptMan.Expose("Shapes", sp.GetService<IShapeMan>());
+                scriptMan.Expose("Items", sp.GetService<ItemsMan>());
 
                 var res = scriptMan.RunString(@"import('System')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
@@ -155,6 +157,8 @@ namespace OpenBreed.Sandbox
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Audio', 'OpenBreed.Wecs.Systems.Audio.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Rendering', 'OpenBreed.Wecs.Systems.Rendering.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Animation', 'OpenBreed.Wecs.Systems.Animation.Extensions')");
+                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Physics', 'OpenBreed.Wecs.Systems.Physics.Extensions')");
+                
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
             });
 
@@ -332,13 +336,14 @@ namespace OpenBreed.Sandbox
             var fsmMan = host.Services.GetService<IFsmMan>();
             fsmMan.SetupButtonStates(host.Services);
             fsmMan.SetupProjectileStates(host.Services);
-            fsmMan.SetupDoorStates(host.Services);
             fsmMan.SetupPickableStates(host.Services);
             fsmMan.SetupActorAttackingStates(host.Services);
             fsmMan.SetupActorMovementStates(host.Services);
             fsmMan.CreateTurretRotationStates(host.Services);
 
             GetManager<IRenderingMan>();
+
+            GetManager<IScriptMan>().Expose("Worlds", GetManager<IWorldMan>());
 
 
             clientMan.UpdateFrameEvent += (a) => OnUpdateFrame(a);
@@ -556,13 +561,13 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6

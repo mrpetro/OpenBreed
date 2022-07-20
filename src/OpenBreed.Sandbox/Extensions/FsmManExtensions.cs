@@ -11,6 +11,7 @@ using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Worlds;
 using System;
 
 namespace OpenBreed.Sandbox.Extensions
@@ -38,29 +39,6 @@ namespace OpenBreed.Sandbox.Extensions
 
             var stateMachine = fsmMan.Create<Entities.Projectile.States.AttackingState, Entities.Projectile.States.AttackingImpulse>("Projectile");
             stateMachine.AddState(new Entities.Projectile.States.FiredState("Animations/Laser/Fired/", clipMan));
-        }
-
-        public static void SetupDoorStates(this IFsmMan fsmMan, IServiceProvider serviceProvider)
-        {
-            var collisionMan = serviceProvider.GetService<ICollisionMan<Entity>>();
-            var stampMan = serviceProvider.GetService<IStampMan>();
-            var clipMan = serviceProvider.GetService<IClipMan<Entity>>();
-            var soundMan = serviceProvider.GetService<ISoundMan>();
-            var itemsMan = serviceProvider.GetService<ItemsMan>();
-            var triggerMan = serviceProvider.GetService<ITriggerMan>();
-
-            var fsm = fsmMan.Create<Entities.Door.States.FunctioningState, Entities.Door.States.FunctioningImpulse>("Door.Functioning");
-
-            fsm.AddState(new Components.States.OpeningState(fsmMan, stampMan, clipMan, soundMan, triggerMan));
-            fsm.AddState(new Components.States.OpenedAwaitClose(fsmMan, stampMan, triggerMan));
-            //fsm.AddState(new Components.States.OpenedState(fsmMan, stampMan));
-            fsm.AddState(new Components.States.ClosingState(fsmMan, stampMan, clipMan, triggerMan));
-            fsm.AddState(new Components.States.ClosedState(fsmMan, collisionMan, stampMan, itemsMan));
-
-            fsm.AddTransition(Entities.Door.States.FunctioningState.Closed, Entities.Door.States.FunctioningImpulse.Open, Entities.Door.States.FunctioningState.Opening);
-            fsm.AddTransition(Entities.Door.States.FunctioningState.Opening, Entities.Door.States.FunctioningImpulse.StopOpening, Entities.Door.States.FunctioningState.Opened);
-            fsm.AddTransition(Entities.Door.States.FunctioningState.Opened, Entities.Door.States.FunctioningImpulse.Close, Entities.Door.States.FunctioningState.Closing);
-            fsm.AddTransition(Entities.Door.States.FunctioningState.Closing, Entities.Door.States.FunctioningImpulse.StopClosing, Entities.Door.States.FunctioningState.Closed);
         }
 
         public static void SetupPickableStates(this IFsmMan fsmMan, IServiceProvider serviceProvider)

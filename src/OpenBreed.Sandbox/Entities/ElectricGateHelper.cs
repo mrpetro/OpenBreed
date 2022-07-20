@@ -4,8 +4,6 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Components;
-using OpenBreed.Sandbox.Components.States;
-using OpenBreed.Sandbox.Entities.Door.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;

@@ -17,6 +17,18 @@ namespace OpenBreed.Fsm.Extensions
                 state.ImpulseId = impulseId;
         }
 
+        public static int GetState(this Entity entity, int fsmId)
+        {
+            var fsmComponent = entity.Get<FsmComponent>();
+
+            var state = fsmComponent.States.FirstOrDefault(item => item.FsmId == fsmId);
+
+            if (state != null)
+                return state.StateId;
+
+            return -1;
+        }
+
         #endregion Public Methods
     }
 }

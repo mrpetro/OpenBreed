@@ -31,7 +31,8 @@
         public string Level { get; }
         public string Name { get; }
         public string Option { get; }
-        public string Flavor { get; }
+        public string Flavor { get; set; }
+        public string State { get; set; }
 
         #endregion Public Properties
     }
