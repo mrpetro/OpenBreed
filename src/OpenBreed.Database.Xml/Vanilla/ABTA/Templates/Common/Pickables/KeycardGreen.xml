@@ -1,0 +1,30 @@
+﻿<?xml version="1.0"?>
+<EntityTemplate>
+	<Components>
+		<Metadata>
+			<Level>$(level)</Level>
+			<Name>KeycardGreen</Name>
+			<Flavor>$(flavor)</Flavor>
+		</Metadata>
+		<Fsm>
+			<States>
+				<State FsmName="Pickable.Functioning" StateName="Lying" />
+			</States>
+		</Fsm>
+		<SoundPlayer>
+		</SoundPlayer>
+		<Position X="$(startX)" Y="$(startY)" />
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Fixtures>
+				<Fixture>
+					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
+					<Groups>
+						<Group>ItemPickupTrigger</Group>
+					</Groups>
+				</Fixture>
+			</Fixtures>
+		</Body>
+	</Components>
+</EntityTemplate>

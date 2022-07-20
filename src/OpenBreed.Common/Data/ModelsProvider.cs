@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Common.Formats;
+using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using System;

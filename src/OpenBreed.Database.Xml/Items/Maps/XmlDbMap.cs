@@ -34,6 +34,9 @@ namespace OpenBreed.Database.Xml.Items.Maps
         [XmlElement("TileSetRef")]
         public string TileSetRef { get; set; }
 
+        [XmlElement("ScriptRef")]
+        public string ScriptRef { get; set; }
+
         public override IDbEntry Copy()
         {
             throw new NotImplementedException();
