@@ -11,6 +11,10 @@ Development progress can be followed here:
 
 [Open Breed Sandbox Dev Demos](https://www.youtube.com/playlist?list=PLJkKyk7ZrnWJGoFTAFFN0nItfKI7cyHDO)
 
+## Project status
+
+Development is on **hiatus**, it should return once I'll gather more experiance on things. 
+
 ## Project wiki
 [Over here](https://github.com/mrpetro/OpenBreed/wiki) - Not updating it that much... Sorry...
 
