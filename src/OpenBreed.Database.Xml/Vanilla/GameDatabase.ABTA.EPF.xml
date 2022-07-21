@@ -6473,7 +6473,7 @@
 						</Action>
 						<Action Id="62" Name="DoorStandard" Visibility="true">
 							<Color>#320FF000</Color>
-							<Description>Door with normal key card required</Description>
+							<Description>Door (No Keycard Required)</Description>
 							<Presentation>
 								<Color>#320FF000</Color>
 								<Visibility>true</Visibility>
@@ -6748,7 +6748,7 @@
 						</Action>
 						<Action Id="28" Name="DoorRed" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Red Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -6757,7 +6757,7 @@
 						</Action>
 						<Action Id="29" Name="DoorGreen" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Green Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -6766,7 +6766,7 @@
 						</Action>
 						<Action Id="30" Name="DoorBlue" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Blue Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7054,7 +7054,7 @@
 						</Action>
 						<Action Id="62" Name="DoorStandard" Visibility="true">
 							<Color>#320FF000</Color>
-							<Description>Door with no color card required</Description>
+							<Description>Door (No Keycard Required)</Description>
 							<Presentation>
 								<Color>#320FF000</Color>
 								<Visibility>true</Visibility>
@@ -7328,7 +7328,7 @@
 						</Action>
 						<Action Id="28" Name="DoorRed" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Red Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7337,7 +7337,7 @@
 						</Action>
 						<Action Id="29" Name="DoorGreen" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Green Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7346,7 +7346,7 @@
 						</Action>
 						<Action Id="30" Name="DoorBlue" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Blue Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7634,7 +7634,7 @@
 						</Action>
 						<Action Id="62" Name="DoorStandard" Visibility="true">
 							<Color>#320FF000</Color>
-							<Description>Door with no color card required</Description>
+							<Description>Door (No Keycard Required)</Description>
 							<Presentation>
 								<Color>#320FF000</Color>
 								<Visibility>true</Visibility>
@@ -7908,7 +7908,7 @@
 						</Action>
 						<Action Id="28" Name="DoorRed" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Red Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7917,7 +7917,7 @@
 						</Action>
 						<Action Id="29" Name="DoorGreen" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Green Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7926,7 +7926,7 @@
 						</Action>
 						<Action Id="30" Name="DoorBlue" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Blue Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7953,7 +7953,7 @@
 						</Action>
 						<Action Id="33" Name="KeycardRed" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Red)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7962,7 +7962,7 @@
 						</Action>
 						<Action Id="34" Name="KeycardGreen" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Green)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7971,7 +7971,7 @@
 						</Action>
 						<Action Id="35" Name="KeycardBlue" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Blue)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -8214,7 +8214,7 @@
 						</Action>
 						<Action Id="62" Name="DoorStandard" Visibility="true">
 							<Color>#320FF000</Color>
-							<Description>Door with no color card required</Description>
+							<Description>Door (No Keycard Required)</Description>
 							<Presentation>
 								<Color>#320FF000</Color>
 								<Visibility>true</Visibility>
@@ -8488,7 +8488,7 @@
 						</Action>
 						<Action Id="28" Name="DoorRed" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Red Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -8497,7 +8497,7 @@
 						</Action>
 						<Action Id="29" Name="DoorGreen" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Green Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -8506,7 +8506,7 @@
 						</Action>
 						<Action Id="30" Name="DoorBlue" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Blue Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -8794,7 +8794,7 @@
 						</Action>
 						<Action Id="62" Name="DoorStandard" Visibility="true">
 							<Color>#320FF000</Color>
-							<Description>Door with no color card required</Description>
+							<Description>Door (No Keycard Required)</Description>
 							<Presentation>
 								<Color>#320FF000</Color>
 								<Visibility>true</Visibility>
@@ -9068,7 +9068,7 @@
 						</Action>
 						<Action Id="28" Name="DoorRed" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Red Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9077,7 +9077,7 @@
 						</Action>
 						<Action Id="29" Name="DoorGreen" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Green Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9086,7 +9086,7 @@
 						</Action>
 						<Action Id="30" Name="DoorBlue" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Blue Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9374,7 +9374,7 @@
 						</Action>
 						<Action Id="62" Name="DoorStandard" Visibility="true">
 							<Color>#320FF000</Color>
-							<Description>Door with no color card required</Description>
+							<Description>Door (No Keycard Required)</Description>
 							<Presentation>
 								<Color>#320FF000</Color>
 								<Visibility>true</Visibility>
@@ -9648,7 +9648,7 @@
 						</Action>
 						<Action Id="28" Name="DoorRed" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Red Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9657,7 +9657,7 @@
 						</Action>
 						<Action Id="29" Name="DoorGreen" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Green Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9666,7 +9666,7 @@
 						</Action>
 						<Action Id="30" Name="DoorBlue" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Blue Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9954,7 +9954,7 @@
 						</Action>
 						<Action Id="62" Name="DoorStandard" Visibility="true">
 							<Color>#320FF000</Color>
-							<Description>Door with no color card required</Description>
+							<Description>Door (No Keycard Required)</Description>
 							<Presentation>
 								<Color>#320FF000</Color>
 								<Visibility>true</Visibility>
@@ -10228,7 +10228,7 @@
 						</Action>
 						<Action Id="28" Name="DoorRed" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Red Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -10237,7 +10237,7 @@
 						</Action>
 						<Action Id="29" Name="DoorGreen" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Green Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -10246,7 +10246,7 @@
 						</Action>
 						<Action Id="30" Name="DoorBlue" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Door (Blue Keycard Required)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -10534,7 +10534,7 @@
 						</Action>
 						<Action Id="62" Name="DoorStandard" Visibility="true">
 							<Color>#320FF000</Color>
-							<Description>Door with no color card required</Description>
+							<Description>Door (No Keycard Required)</Description>
 							<Presentation>
 								<Color>#320FF000</Color>
 								<Visibility>true</Visibility>

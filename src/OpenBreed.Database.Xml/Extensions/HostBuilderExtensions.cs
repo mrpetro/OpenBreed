@@ -17,7 +17,9 @@ namespace OpenBreed.Common.Database.Xml.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<XmlDatabaseMan>();
+                services.AddSingleton<XmlDatabaseMan>(
+                    (sp) => new XmlDatabaseMan(
+                        sp.GetService<IVariableMan>()));
             });
         }
 

@@ -100,6 +100,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Common.Interface\OpenBreed.Common.Interface.csproj">
+      <Project>{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}</Project>
+      <Name>OpenBreed.Common.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj">
       <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
       <Name>OpenBreed.Common</Name>
