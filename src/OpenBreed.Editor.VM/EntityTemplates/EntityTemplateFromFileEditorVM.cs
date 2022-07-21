@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Editor.VM.Base;
@@ -7,7 +8,7 @@ using OpenBreed.Model.Texts;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
 {
-    public class EntityTemplateFromFileEditorVM : BaseViewModel, IEntryEditor<IDbEntityTemplate>
+    public class EntityTemplateFromFileEditorVM : BaseViewModel, IEntryEditor<IDbEntityTemplate>, IEntryEditor<IDbEntityTemplateFromFile>
     {
         #region Private Fields
 
@@ -55,7 +56,18 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         #region Public Methods
 
-        public void UpdateVM(IDbEntityTemplate entry)
+        public void UpdateVM(IDbEntityTemplate entry) => UpdateVM((IDbEntityTemplateFromFile)entry);
+
+        public void UpdateEntry(IDbEntityTemplate entry) => UpdateEntry((IDbEntityTemplateFromFile)entry);
+
+        public void UpdateEntry(IDbEntityTemplateFromFile entry)
+        {
+            var model = dataProvider.GetModel<TextModel>(DataRef);
+            model.Text = EntityTemplate;
+            entry.DataRef = DataRef;
+        }
+
+        public void UpdateVM(IDbEntityTemplateFromFile entry)
         {
             var model = entityTemplatesDataProvider.GetEntityTemplate(entry.Id);
 
@@ -63,13 +75,6 @@ namespace OpenBreed.Editor.VM.EntityTemplates
                 EntityTemplate = model.EntityTemplate;
 
             DataRef = entry.DataRef;
-        }
-
-        public void UpdateEntry(IDbEntityTemplate entry)
-        {
-            var model = dataProvider.GetModel<TextModel>(DataRef);
-            model.Text = EntityTemplate;
-            entry.DataRef = DataRef;
         }
 
         #endregion Public Methods

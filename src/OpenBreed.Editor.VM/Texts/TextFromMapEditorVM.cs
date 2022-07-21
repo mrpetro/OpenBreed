@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Maps;
@@ -9,7 +10,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Texts
 {
-    public class TextFromMapEditorVM : BaseViewModel, IEntryEditor<IDbText>
+    public class TextFromMapEditorVM : BaseViewModel, IEntryEditor<IDbText>, IEntryEditor<IDbTextFromMap>
     {
         #region Private Fields
 
@@ -71,22 +72,11 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Methods
 
-        public virtual void UpdateVM(IDbText entry)
-        {
-            var textFromMapEntry = (IDbTextFromMap)entry;
+        public virtual void UpdateVM(IDbText entry) => UpdateVM((IDbTextFromMap)entry);
 
-            UpdateTextBlocksList(textFromMapEntry);
+        public virtual void UpdateEntry(IDbText entry) => UpdateEntry((IDbTextFromMap)entry);
 
-            var model = textsDataProvider.GetText(entry.Id);
-
-            if (model != null)
-                Text = model.Text;
-
-            DataRef = textFromMapEntry.DataRef;
-            BlockName = textFromMapEntry.BlockName;
-        }
-
-        public virtual void UpdateEntry(IDbText entry)
+        public void UpdateEntry(IDbTextFromMap entry)
         {
             var textFromMapEntry = (IDbTextFromMap)entry;
 
@@ -101,6 +91,21 @@ namespace OpenBreed.Editor.VM.Texts
 
             textFromMapEntry.DataRef = DataRef;
             textFromMapEntry.BlockName = BlockName;
+        }
+
+        public void UpdateVM(IDbTextFromMap entry)
+        {
+            var textFromMapEntry = (IDbTextFromMap)entry;
+
+            UpdateTextBlocksList(textFromMapEntry);
+
+            var model = textsDataProvider.GetText(entry.Id);
+
+            if (model != null)
+                Text = model.Text;
+
+            DataRef = textFromMapEntry.DataRef;
+            BlockName = textFromMapEntry.BlockName;
         }
 
         #endregion Public Methods

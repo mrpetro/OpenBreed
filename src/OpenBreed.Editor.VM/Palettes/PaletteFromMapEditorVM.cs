@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
@@ -11,7 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteFromMapEditorVM : PaletteEditorExVM
+    public class PaletteFromMapEditorVM : PaletteEditorExVM, IEntryEditor<IDbPaletteFromMap>
     {
         #region Private Fields
 
@@ -145,6 +146,16 @@ namespace OpenBreed.Editor.VM.Palettes
                 return false;
 
             return true;
+        }
+
+        void IEntryEditor<IDbPaletteFromMap>.UpdateEntry(IDbPaletteFromMap entry)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IEntryEditor<IDbPaletteFromMap>.UpdateVM(IDbPaletteFromMap entry)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion Private Methods

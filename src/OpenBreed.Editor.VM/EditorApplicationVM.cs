@@ -1,5 +1,7 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Base;
@@ -28,7 +30,7 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
-        private readonly IManagerCollection managerCollection;
+        private readonly IServiceProvider managerCollection;
         private readonly IWorkspaceMan workspaceMan;
 
         private readonly SettingsMan settings;
@@ -46,7 +48,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorApplicationVM(EditorApplication application, IManagerCollection managerCollection, IWorkspaceMan workspaceMan, SettingsMan settings, DbEntryEditorFactory dbEntryEditorFactory, IDialogProvider dialogProvider)
+        public EditorApplicationVM(EditorApplication application, IServiceProvider managerCollection, IWorkspaceMan workspaceMan, SettingsMan settings, DbEntryEditorFactory dbEntryEditorFactory, IDialogProvider dialogProvider)
         {
             this.application = application;
             this.managerCollection = managerCollection;
@@ -55,7 +57,7 @@ namespace OpenBreed.Editor.VM
             this.dbEntryEditorFactory = dbEntryEditorFactory;
             this.dialogProvider = dialogProvider;
 
-            lazyDbEditor = new Lazy<DbEditorVM>(() => managerCollection.GetManager<DbEditorVM>());
+            lazyDbEditor = new Lazy<DbEditorVM>(() => managerCollection.GetService<DbEditorVM>());
 
             MenuItems = new BindingList<MenuItemVM>();
 
@@ -153,7 +155,7 @@ namespace OpenBreed.Editor.VM
         public void ToggleLogger(bool toggle)
         {
             if (logger == null)
-                logger = managerCollection.GetManager<LoggerVM>();
+                logger = managerCollection.GetService<LoggerVM>();
 
             ToggleLoggerAction?.Invoke(logger, toggle);
         }

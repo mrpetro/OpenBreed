@@ -5,6 +5,45 @@ using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
+    public class PCMPlayer
+    {
+        private readonly System.Media.SoundPlayer _soundPlayer;
+
+        public PCMPlayer(byte[] pcmSampleBytes, int samplingRate, int bitsPerSample, int channels)
+        {
+            using (WaveMemoryStream waveStream = new WaveMemoryStream(pcmSampleBytes, samplingRate, bitsPerSample, channels))
+            {
+                _soundPlayer = new System.Media.SoundPlayer(waveStream);
+            }
+        }
+
+        public PCMPlayer(string pcmFilePath, int samplingRate, ushort bitsPerSample, ushort channels)
+        {
+            using (System.IO.FileStream pcmSampleStream = System.IO.File.Open(pcmFilePath, System.IO.FileMode.Open))
+            {
+                byte[] pcmSampleBytes = null;
+                System.IO.BinaryReader br = new System.IO.BinaryReader(pcmSampleStream);
+                long numBytes = new System.IO.FileInfo(pcmFilePath).Length;
+                pcmSampleBytes = br.ReadBytes((int)numBytes);
+                using (WaveMemoryStream waveStream = new WaveMemoryStream(pcmSampleBytes, samplingRate, bitsPerSample, channels))
+                {
+                    _soundPlayer = new System.Media.SoundPlayer(waveStream);
+                }
+            }
+        }
+
+        public void Play()
+        {
+            _soundPlayer.Play();
+        }
+
+        public void PlaySync()
+        {
+            _soundPlayer.PlaySync();
+        }
+    }
+
+
     public class SoundFromPcmEditorVM : BaseViewModel, IEntryEditor<IDbSound>
     {
         private readonly SoundsDataProvider soundsDataProvider;
@@ -58,11 +97,11 @@ namespace OpenBreed.Editor.VM.Sounds
 
         public void Play()
         {
-            //var pcmPlayer = new PCMPlayer(Data,
-            //                              SampleRate,
-            //                              BitsPerSample,
-            //                              Channels);
-            //pcmPlayer.PlaySync();
+            var pcmPlayer = new PCMPlayer(Data,
+                                          SampleRate,
+                                          BitsPerSample,
+                                          Channels);
+            pcmPlayer.PlaySync();
         }
 
         public void UpdateEntry(IDbSound entry)

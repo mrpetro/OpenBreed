@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Editor.VM", "OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj", "{4E57CB0D-A13B-48A9-9D47-52B96D75F283}"
 EndProject
@@ -34,6 +34,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Writer.Interface", "..\OpenBreed.Common\src\OpenBreed.Writer.Interface\OpenBreed.Writer.Interface.csproj", "{0AD35C65-4CF1-4F80-8719-714CF4133166}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Writer.Legacy", "..\OpenBreed.Common\src\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj", "{0B8B1C59-2BEC-45C3-BD7A-AEB955337407}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Common.Interface", "..\OpenBreed.Common\src\OpenBreed.Common.Interface\OpenBreed.Common.Interface.csproj", "{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -324,6 +326,26 @@ Global
 		{0B8B1C59-2BEC-45C3-BD7A-AEB955337407}.Release|x64.Build.0 = Release|Any CPU
 		{0B8B1C59-2BEC-45C3-BD7A-AEB955337407}.Release|x86.ActiveCfg = Release|Any CPU
 		{0B8B1C59-2BEC-45C3-BD7A-AEB955337407}.Release|x86.Build.0 = Release|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|Mixed Platforms.Build.0 = Debug|x64
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|Win32.Build.0 = Debug|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|x64.ActiveCfg = Debug|x64
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|x64.Build.0 = Debug|x64
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Debug|x86.Build.0 = Debug|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|Mixed Platforms.ActiveCfg = Release|x64
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|Mixed Platforms.Build.0 = Release|x64
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|Win32.ActiveCfg = Release|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|Win32.Build.0 = Release|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|x64.ActiveCfg = Release|x64
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|x64.Build.0 = Release|x64
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|x86.ActiveCfg = Release|Any CPU
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -340,6 +362,7 @@ Global
 		{B4E4CD19-64AF-42A5-8713-0D0DE35853B6} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
 		{0AD35C65-4CF1-4F80-8719-714CF4133166} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
 		{0B8B1C59-2BEC-45C3-BD7A-AEB955337407} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
+		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E7F78DD2-AA67-4DDC-824E-6BCF925446B0}

@@ -4,7 +4,7 @@ using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
-    public class ScriptEmbeddedEditorVM : BaseViewModel, IEntryEditor<IDbScript>
+    public class ScriptEmbeddedEditorVM : BaseViewModel, IEntryEditor<IDbScript>, IEntryEditor<IDbScriptEmbedded>
     {
         #region Private Fields
 
@@ -42,7 +42,16 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Methods
 
-        public void UpdateVM(IDbScript entry)
+        public void UpdateVM(IDbScript entry) => UpdateVM((IDbScriptEmbedded)entry);
+
+        public void UpdateEntry(IDbScript entry) => UpdateEntry((IDbScriptEmbedded)entry);
+
+        public void UpdateEntry(IDbScriptEmbedded entry)
+        {
+            entry.DataRef = DataRef;
+        }
+
+        public void UpdateVM(IDbScriptEmbedded entry)
         {
             var model = scriptsDataProvider.GetScript(entry.Id);
 
@@ -50,11 +59,6 @@ namespace OpenBreed.Editor.VM.Scripts
                 Script = model.Script;
 
             DataRef = entry.DataRef;
-        }
-
-        public void UpdateEntry(IDbScript entry)
-        {
-            entry.DataRef = DataRef;
         }
 
         #endregion Public Methods

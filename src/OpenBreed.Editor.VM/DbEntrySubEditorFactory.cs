@@ -10,13 +10,13 @@ namespace OpenBreed.Editor.VM
 
         private readonly Dictionary<Type, Dictionary<Type, Type>> creators = new Dictionary<Type, Dictionary<Type, Type>>();
 
-        private readonly IManagerCollection managerCollection;
+        private readonly IServiceProvider managerCollection;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbEntrySubEditorFactory(IManagerCollection managerCollection)
+        public DbEntrySubEditorFactory(IServiceProvider managerCollection)
         {
             this.managerCollection = managerCollection;
         }
@@ -47,7 +47,7 @@ namespace OpenBreed.Editor.VM
             foreach (var interfaceType in subType.GetInterfaces())
             {
                 if (subEditorTypes.TryGetValue(interfaceType, out Type subEditorType))
-                    return (IEntryEditor<E>)managerCollection.GetManager(subEditorType);
+                    return (IEntryEditor<E>)managerCollection.GetService(subEditorType);
             }
 
             throw new Exception("Editor not registered.");

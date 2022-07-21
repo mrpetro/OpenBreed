@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetFromBlkEditorVM : BaseViewModel, IEntryEditor<IDbTileAtlas>
+    public class TileSetFromBlkEditorVM : BaseViewModel, IEntryEditor<IDbTileAtlas>, IEntryEditor<IDbTileAtlasFromBlk>
     {
         #region Private Fields
 
@@ -67,11 +67,12 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Methods
 
-        public virtual void UpdateEntry(IDbTileAtlas entry)
+        public void UpdateEntry(IDbTileAtlasFromBlk entry) 
         {
+
         }
 
-        public virtual void UpdateVM(IDbTileAtlas entry)
+        public void UpdateVM(IDbTileAtlasFromBlk entry)
         {
             model = tileSetsDataProvider.GetTileAtlas(entry.Id);
 
@@ -82,6 +83,10 @@ namespace OpenBreed.Editor.VM.Tiles
 
             SetupPaletteIds(entry.PaletteRefs);
         }
+
+        public virtual void UpdateEntry(IDbTileAtlas entry) => UpdateEntry((IDbTileAtlasFromBlk)entry);
+
+        public virtual void UpdateVM(IDbTileAtlas entry) => UpdateVM((IDbTileAtlasFromBlk)entry);
 
         #endregion Public Methods
 
