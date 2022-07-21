@@ -6300,9 +6300,9 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="Unknown 43" Visibility="true">
+						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
 							<Color>#C0000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Slowdown movement</Description>
 							<Presentation>
 								<Color>#C0000000</Color>
 								<Visibility>true</Visibility>
@@ -6881,9 +6881,9 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="Unknown 43" Visibility="true">
+						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Slowdown movement</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7461,9 +7461,9 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="Unknown 43" Visibility="true">
+						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Slowdown movement</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -8041,9 +8041,9 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="Unknown 43" Visibility="true">
+						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Slowdown movement</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -8614,16 +8614,16 @@
 						</Action>
 						<Action Id="42" Name="MonsterEating" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Monster eating</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="Unknown 43" Visibility="true">
+						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Slowdown movement</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9201,9 +9201,9 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="Unknown 43" Visibility="true">
+						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Slowdown movement</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9781,9 +9781,9 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="Unknown 43" Visibility="true">
+						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Slowdown movement</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -10361,9 +10361,9 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="Unknown 43" Visibility="true">
+						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Slowdown movement</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
