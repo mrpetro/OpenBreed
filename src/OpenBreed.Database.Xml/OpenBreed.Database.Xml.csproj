@@ -6,220 +6,270 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Defaults\GameDatabase.ABHC.xml" />
-    <None Remove="Defaults\GameDatabase.ABSE.xml" />
-    <None Remove="Defaults\GameDatabase.ABTA.EPF.xml" />
-    <None Remove="Defaults\Scripts\Entry.lua" />
-    <None Remove="Defaults\Scripts\Exit.lua" />
-    <None Remove="Defaults\Scripts\simpleEntry.lua" />
-    <None Remove="Defaults\Templates\ABTA\Common\Actors\John.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Camera.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\DoorHorizontal.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\DoorVertical.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\ElectricGateHorizontal.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\ElectricGateVertical.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Environment\ActorOnlyObstacle.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Environment\FullObstacle.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Environment\SlopeObstacle.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Environment\Unknown.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Environment\Void.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\AmmoBar.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\AmmoCounter.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\DestructTimer.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\FpsCounter.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\HealthBar.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\KeysCounter.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\LivesCounter.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\PositionInfo.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\MapEntry.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\MapExit.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\Ammo.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\AreaScanner.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\CreditsBig.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\CreditsSmall.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\ExtraLife.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\KeycardBlue.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\KeycardGreen.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\KeycardRed.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\KeycardSpecial.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\KeycardStandard.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\MedkitBig.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\MedkitSmall.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\PowerUpA.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\PowerUpF.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\PowerUpS.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\SmartCard1.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\SmartCard2.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Pickables\SmartCard3.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\Projectile.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\TeleportEntry.xml" />
-    <None Remove="Defaults\Templates\ABTA\Common\TeleportExit.xml" />
-    <None Remove="Defaults\Templates\ABTA\L4\MonsterEating.xml" />
-    <None Remove="Defaults\Templates\ABTA\L4\TVFlickering.xml" />
-    <None Remove="Defaults\Templates\Logo1.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\DoorOpen.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\ItemPickup.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\TeleporterTeleport.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\MAP.01.lua" />
+    <None Remove="Vanilla\ABTA\Templates\Common\GameCommentator.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Viewports\DebugHudViewport.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Viewports\Door.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Viewports\GameHudViewport.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Viewports\GameViewport.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Viewports\TextViewport.xml" />
+    <None Remove="Vanilla\GameDatabase.ABHC.xml" />
+    <None Remove="Vanilla\GameDatabase.ABSE.xml" />
+    <None Remove="Vanilla\GameDatabase.ABTA.EPF.xml" />
+    <None Remove="Vanilla\ABTA\Scripts\Entry.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Exit.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\simpleEntry.lua" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Actors\Dummy.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Actors\John.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Camera.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\DoorHorizontal.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\DoorVertical.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\ElectricGateHorizontal.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\ElectricGateVertical.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Environment\ActorOnlyObstacle.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Environment\FullObstacle.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Environment\SlopeObstacle.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Environment\Unknown.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Environment\Void.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\AmmoBar.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\AmmoCounter.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\DestructTimer.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\FpsCounter.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\HealthBar.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\KeysCounter.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\LivesCounter.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\PositionInfo.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\StatusBarP1.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\StatusBarP2.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\MapEntry.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\MapExit.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\Ammo.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\AreaScanner.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\CreditsBig.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\CreditsSmall.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\ExtraLife.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardBlue.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardGreen.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardRed.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardSpecial.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\MedkitBig.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\MedkitSmall.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpA.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpF.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpS.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard1.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard2.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard3.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Projectile.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\TeleportEntry.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\TeleportExit.xml" />
+    <None Remove="Vanilla\ABTA\Templates\L1\LandMine.xml" />
+    <None Remove="Vanilla\ABTA\Templates\L4\MonsterEating.xml" />
+    <None Remove="Vanilla\ABTA\Templates\L4\TVFlickering.xml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Defaults\GameDatabase.ABHC.xml">
+    <Content Include="Vanilla\ABTA\Scripts\Common\DoorOpen.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\GameDatabase.ABSE.xml">
+    <Content Include="Vanilla\ABTA\Scripts\Common\TeleporterTeleport.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\GameDatabase.ABTA.EPF.xml">
+    <Content Include="Vanilla\ABTA\Scripts\Common\ItemPickup.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Scripts\Common\LandMineExplode.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\GameCommentator.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Viewports\DebugHudViewport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Door.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Viewports\GameHudViewport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Viewports\GameViewport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Viewports\TextViewport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\GameDatabase.ABHC.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\GameDatabase.ABSE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\GameDatabase.ABTA.EPF.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Defaults\Scripts\Entry.lua">
+    <Content Include="Vanilla\ABTA\Scripts\Entry.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Scripts\Exit.lua">
+    <Content Include="Vanilla\ABTA\Scripts\Exit.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Scripts\simpleEntry.lua">
+    <Content Include="Vanilla\ABTA\Scripts\simpleEntry.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Actors\John.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Actors\Dummy.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Camera.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Actors\John.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\DoorHorizontal.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Camera.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\DoorVertical.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\DoorHorizontal.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\ElectricGateHorizontal.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\DoorVertical.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\ElectricGateVertical.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\ElectricGateHorizontal.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Environment\ActorOnlyObstacle.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\ElectricGateVertical.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Environment\FullObstacle.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Environment\ActorOnlyObstacle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Environment\SlopeObstacle.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Environment\FullObstacle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Environment\Unknown.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Environment\SlopeObstacle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Environment\Void.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Environment\Unknown.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\AmmoBar.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Environment\Void.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\KeysCounter.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\AmmoBar.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\HealthBar.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\KeysCounter.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\LivesCounter.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\HealthBar.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\AmmoCounter.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\LivesCounter.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\DestructTimer.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\AmmoCounter.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\FpsCounter.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\DestructTimer.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\StatusBarP2.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\FpsCounter.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\StatusBarP1.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\StatusBarP2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Hud\PositionInfo.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\StatusBarP1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\MapEntry.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\PositionInfo.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\MapExit.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\MapEntry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\Ammo.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\MapExit.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\AreaScanner.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\Ammo.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\CreditsBig.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\AreaScanner.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\CreditsSmall.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\CreditsBig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\ExtraLife.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\CreditsSmall.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\KeycardBlue.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\ExtraLife.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\KeycardGreen.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardBlue.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\KeycardRed.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardGreen.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\KeycardSpecial.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardRed.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\KeycardStandard.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardSpecial.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\MedkitBig.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\MedkitSmall.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\MedkitBig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\PowerUpA.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\MedkitSmall.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\PowerUpF.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\PowerUpA.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\PowerUpS.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\PowerUpF.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\SmartCard1.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\PowerUpS.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\SmartCard2.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Pickables\SmartCard3.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\Projectile.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard3.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\TeleportEntry.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Projectile.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\Common\TeleportExit.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\TeleportEntry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\L4\MonsterEating.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\TeleportExit.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\ABTA\L4\TVFlickering.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\LandMine.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Defaults\Templates\Logo1.lua">
+    <Content Include="Vanilla\ABTA\Templates\L4\MonsterEating.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\L4\TVFlickering.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Scripts\Logo1.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -228,6 +278,10 @@
     <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj" />
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
     <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Vanilla\ABTA\Templates\L1\" />
   </ItemGroup>
 
 </Project>

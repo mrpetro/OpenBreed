@@ -13,6 +13,7 @@ namespace OpenBreed.Database.Interface.Items.Maps
 
         string TileSetRef { get; }
         string ActionSetRef { get; set; }
+        string ScriptRef { get; set; }
 
         List<string> SpriteSetRefs { get; }
         List<string> PaletteRefs { get; }

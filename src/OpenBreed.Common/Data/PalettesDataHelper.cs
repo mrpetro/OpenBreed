@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Model;
 using OpenBreed.Reader.Legacy.Palettes;
+using OpenBreed.Common.Interface.Data;
 
 namespace OpenBreed.Common.Data
 {

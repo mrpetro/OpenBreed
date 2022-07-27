@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Metadata>
+			<Level>$(level)</Level>
+			<Name>Door</Name>
+			<Option>$(key)</Option>
+			<Flavor>Vertical</Flavor>
+		</Metadata>
+		<Timer>
+		</Timer>
+		<Fsm>
+			<States>
+				<State FsmName="Door.Functioning" StateName="Closed" />
+			</States>
+		</Fsm>
+		<SoundPlayer>
+		</SoundPlayer>
+		<Animation>
+			<States>
+				<State>
+					<Speed>5</Speed>
+					<Loop>false</Loop>
+				</State>
+			</States>
+		</Animation>
+		<Position X="$(startX)" Y="$(startY)" />
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Fixtures>
+				<Fixture>
+					<ShapeName>Shapes/Box_0_0_16_32</ShapeName>
+					<Groups>
+						<Group>FullObstacle</Group>
+						<Group>DoorOpenTrigger</Group>
+					</Groups>
+				</Fixture>
+			</Fixtures>
+		</Body>
+		<Sprite>
+			<AtlasName></AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Origin X="0" Y="0" />
+			<Order>0</Order>
+		</Sprite>
+		<!--<Text>
+			<Text>Door</Text>
+			<Offset X="-10" Y="10" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>6</FontSize>
+			<Order>0</Order>
+		</Text>-->
+    </Components>
+</EntityTemplate>

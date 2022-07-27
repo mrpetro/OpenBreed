@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Xml;
@@ -55,6 +56,7 @@ namespace OpenBreed.Database.Xml
             RegisterTable(GetTable<XmlDbTextTableDef>());
             RegisterTable(GetTable<XmlDbMapTableDef>());
             RegisterTable(GetTable<XmlDbSoundTableDef>());
+            RegisterTable(GetTable<XmlDbSongTableDef>());
             RegisterTable(GetTable<XmlDbScriptTableDef>());
             RegisterTable(GetTable<XmlDbAnimationTableDef>());
             RegisterTable(GetTable<XmlDbEntityTemplateTableDef>());
@@ -73,6 +75,7 @@ namespace OpenBreed.Database.Xml
             RegisterRepository(new XmlTextsRepository(GetTable<XmlDbTextTableDef>()));
             RegisterRepository(new XmlMapsRepository(GetTable<XmlDbMapTableDef>()));
             RegisterRepository(new XmlSoundsRepository(GetTable<XmlDbSoundTableDef>()));
+            RegisterRepository(new XmlSongsRepository(GetTable<XmlDbSongTableDef>()));
             RegisterRepository(new XmlScriptsRepository(GetTable<XmlDbScriptTableDef>()));
             RegisterRepository(new XmlAnimationsRepository(GetTable<XmlDbAnimationTableDef>()));
             RegisterRepository(new XmlEntityTemplatesRepository(GetTable<XmlDbEntityTemplateTableDef>()));

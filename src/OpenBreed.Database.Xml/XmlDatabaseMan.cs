@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml.Tables;
 using System;

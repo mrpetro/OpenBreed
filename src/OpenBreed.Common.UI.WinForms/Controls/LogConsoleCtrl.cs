@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OpenBreed.Common.Logging;
+using OpenBreed.Common.Interface.Logging;
 
 namespace OpenBreed.Common.UI.WinForms.Controls
 {

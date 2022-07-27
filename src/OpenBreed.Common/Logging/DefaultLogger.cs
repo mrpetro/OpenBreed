@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Interface.Logging;
+using System;
 
 namespace OpenBreed.Common.Logging
 {

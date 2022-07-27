@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<EntityTemplate>
+	<Components>
+		<Metadata>
+			<Flavor>$(slopeDir)</Flavor>
+		</Metadata>
+		<Position X="$(startX)" Y="$(startY)" />
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Fixtures>
+				<Fixture>
+					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
+					<Groups>
+						<Group>SlopeObstacle</Group>
+					</Groups>
+				</Fixture>
+			</Fixtures>
+		</Body>
+	</Components>
+</EntityTemplate>

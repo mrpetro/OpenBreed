@@ -1,0 +1,42 @@
+﻿<?xml version="1.0"?>
+<EntityTemplate>
+	<Components>
+		<Metadata>
+			<Level>$(level)</Level>
+			<Name>MedkitSmall</Name>
+			<Flavor>$(flavor)</Flavor>
+		</Metadata>
+		<SoundPlayer>
+		</SoundPlayer>
+		<ScriptRunner>
+			<Runs>
+				<Run>
+					<ScriptId>Vanilla/Common/Item/Pickup</ScriptId>
+					<TriggerName>ScriptRunTrigger</TriggerName>
+				</Run>
+			</Runs>
+		</ScriptRunner>
+		<Position X="$(startX)" Y="$(startY)" />
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Fixtures>
+				<Fixture>
+					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
+					<Groups>
+						<Group>ScriptRunTrigger</Group>
+					</Groups>
+				</Fixture>
+			</Fixtures>
+		</Body>
+		<TilePutter>
+			<Items>
+				<Item>
+					<AtlasName>$(level)</AtlasName>
+					<ImageIndex>$(imageIndex)</ImageIndex>
+					<Position X="$(startX)" Y="$(startY)" />
+				</Item>
+			</Items>
+		</TilePutter>
+	</Components>
+</EntityTemplate>

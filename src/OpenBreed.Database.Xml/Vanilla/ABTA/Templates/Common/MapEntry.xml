@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Metadata>
+			<Name>WorldEntry</Name>
+			<Flavor>$(entryId)</Flavor>
+		</Metadata>
+		<Position X="$(startX)" Y="$(startY)" />
+    </Components>
+</EntityTemplate>

@@ -1,5 +1,7 @@
 ﻿using EPF;
 using OpenBreed.Common.DataSources;
+using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;

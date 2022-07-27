@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Metadata>
+			<Name>Actor</Name>
+		</Metadata>
+		<Timer>
+		</Timer>
+		<Fsm>
+			<States>
+				<State FsmName="Actor.Movement" StateName="Standing" />
+				<State FsmName="Actor.Attacking" StateName="Idle" />
+			</States>
+		</Fsm>
+		<SoundPlayer>
+		</SoundPlayer>
+		<Animation>
+			<States>
+				<State>
+					<Speed>15</Speed>
+					<Loop>true</Loop>
+				</State>
+			</States>
+		</Animation>
+		<Position X="$(startX)" Y="$(startY)" />
+		<Thrust X="0" Y="0" />
+		<Velocity X="0" Y="0" />
+		<AngularPosition>
+			<Value>0</Value>
+		</AngularPosition>
+		<AngularVelocity>
+			<Value>0</Value>
+		</AngularVelocity>
+		<AngularThrust>
+			<Value>0</Value>
+		</AngularThrust>
+		<Followed></Followed>
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>0.0</CorFactor>
+			<Fixtures>
+				<Fixture>
+					<ShapeName>Shapes/Box_0_0_28_28</ShapeName>
+					<Groups>
+						<Group>ActorBody</Group>
+					</Groups>
+				</Fixture>
+				<Fixture>
+					<ShapeName>Shapes/Point_14_14</ShapeName>
+					<Groups>
+						<Group>ActorTrigger</Group>
+					</Groups>
+				</Fixture>
+			</Fixtures>
+		</Body>
+		<Motion></Motion>
+		<Sprite>
+			<AtlasName>Vanilla/Common/Hero/1#0</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Origin X="-2" Y="-2" />
+			<Order>100</Order>
+		</Sprite>
+		<Text>
+			<Text>Hero</Text>
+			<Offset X="0" Y="32" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>6</FontSize>
+			<Order>0</Order>
+		</Text>
+    </Components>
+</EntityTemplate>
