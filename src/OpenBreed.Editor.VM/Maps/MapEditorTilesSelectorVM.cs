@@ -85,6 +85,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Render(Graphics graphics)
         {
+            if (Parent.Parent.Model is null)
+                return;
+
             renderer.Render(this);
             RenderTarget.Flush(graphics);
         }
