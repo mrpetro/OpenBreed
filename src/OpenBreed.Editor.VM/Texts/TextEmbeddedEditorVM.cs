@@ -4,7 +4,7 @@ using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.Texts
 {
-    public class TextEmbeddedEditorVM : BaseViewModel, IEntryEditor<IDbText>
+    public class TextEmbeddedEditorVM : BaseViewModel, IEntryEditor<IDbText>, IEntryEditor<IDbTextEmbedded>
     {
         #region Private Fields
 
@@ -43,14 +43,18 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Methods
 
-        public virtual void UpdateEntry(IDbText entry)
+        public virtual void UpdateEntry(IDbText entry) => UpdateEntry((IDbTextEmbedded)entry);
+
+        public virtual void UpdateVM(IDbText entry) => UpdateVM((IDbTextEmbedded)entry);
+
+        public void UpdateEntry(IDbTextEmbedded entry)
         {
             var model = textsDataProvider.GetText(entry.Id);
             model.Text = Text;
             entry.DataRef = DataRef;
         }
 
-        public virtual void UpdateVM(IDbText entry)
+        public void UpdateVM(IDbTextEmbedded entry)
         {
             var model = textsDataProvider.GetText(entry.Id);
 

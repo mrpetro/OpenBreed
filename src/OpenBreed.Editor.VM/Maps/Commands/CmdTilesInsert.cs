@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using OpenBreed.Common.Commands;
 using OpenBreed.Model.Maps;
+using OpenBreed.Common.Interface.Commands;
 
 namespace OpenBreed.Editor.VM.Maps.Commands
 {

@@ -1,11 +1,12 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteFromBinaryEditorVM : PaletteEditorExVM
+    public class PaletteFromBinaryEditorVM : PaletteEditorExVM, IEntryEditor<IDbPaletteFromBinary>
     {
         #region Public Constructors
 
@@ -58,6 +59,16 @@ namespace OpenBreed.Editor.VM.Palettes
         private void UpdateEntry(IDbPaletteFromBinary entry)
         {
             entry.DataRef = DataRef;
+        }
+
+        void IEntryEditor<IDbPaletteFromBinary>.UpdateEntry(IDbPaletteFromBinary entry)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IEntryEditor<IDbPaletteFromBinary>.UpdateVM(IDbPaletteFromBinary entry)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion Private Methods

@@ -11,13 +11,13 @@ namespace OpenBreed.Editor.VM
         #region Private Fields
 
         private readonly Dictionary<Type, Type> creators = new Dictionary<Type, Type>();
-        private readonly IManagerCollection managerCollection;
+        private readonly IServiceProvider managerCollection;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbEntryEditorFactory(IManagerCollection managerCollection)
+        public DbEntryEditorFactory(IServiceProvider managerCollection)
         {
             this.managerCollection = managerCollection;
         }
@@ -43,7 +43,7 @@ namespace OpenBreed.Editor.VM
         internal EntryEditorVM Create(IRepository repository)
         {
             var type = GetEditorType(repository);
-            return (EntryEditorVM)managerCollection.GetManager(type);
+            return (EntryEditorVM)managerCollection.GetService(type);
         }
 
         #endregion Internal Methods

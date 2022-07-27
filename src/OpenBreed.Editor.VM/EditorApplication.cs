@@ -1,6 +1,9 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
+using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
@@ -26,7 +29,7 @@ namespace OpenBreed.Editor.VM
         private readonly Lazy<IDialogProvider> dialogProvider;
         private readonly IWorkspaceMan workspaceMan;
         private readonly IModelsProvider dataProvider;
-        private readonly IManagerCollection managerCollection;
+        private readonly IServiceProvider managerCollection;
         private readonly DataSourceProvider dataSources;
         private bool disposedValue;
 
@@ -34,14 +37,13 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorApplication(IManagerCollection managerCollection, DataSourceProvider dataSources)
+        public EditorApplication(IServiceProvider managerCollection, DataSourceProvider dataSources)
         {
-
-            logger = managerCollection.GetManager<ILogger>();
-            settings = managerCollection.GetManager<SettingsMan>();
-            dataProvider = managerCollection.GetManager<IModelsProvider>();
-            workspaceMan = managerCollection.GetManager<IWorkspaceMan>();
-            dialogProvider = new Lazy<IDialogProvider>(() => managerCollection.GetManager<IDialogProvider>());
+            logger = managerCollection.GetService<ILogger>();
+            settings = managerCollection.GetService<SettingsMan>();
+            dataProvider = managerCollection.GetService<IModelsProvider>();
+            workspaceMan = managerCollection.GetService<IWorkspaceMan>();
+            dialogProvider = new Lazy<IDialogProvider>(() => managerCollection.GetService<IDialogProvider>());
             //DialogProvider = managerCollection.GetManager<IDialogProvider>();
 
             settings.Restore();
@@ -104,7 +106,7 @@ namespace OpenBreed.Editor.VM
 
         public EditorApplicationVM CreateEditorApplicationVm()
         {
-            return new EditorApplicationVM(this, managerCollection, workspaceMan, settings, managerCollection.GetManager<DbEntryEditorFactory>(), DialogProvider);
+            return new EditorApplicationVM(this, managerCollection, workspaceMan, settings, managerCollection.GetService<DbEntryEditorFactory>(), DialogProvider);
         }
 
         #endregion Public Methods

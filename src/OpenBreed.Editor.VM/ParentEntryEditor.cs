@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface.Items;
 
 namespace OpenBreed.Editor.VM

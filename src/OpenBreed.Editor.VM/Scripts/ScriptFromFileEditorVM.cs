@@ -6,10 +6,11 @@ using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
+using OpenBreed.Common.Interface.Data;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
-    public class ScriptFromFileEditorVM : BaseViewModel, IEntryEditor<IDbScript>
+    public class ScriptFromFileEditorVM : BaseViewModel, IEntryEditor<IDbScript>, IEntryEditor<IDbScriptFromFile>
     {
         #region Private Fields
 
@@ -63,7 +64,17 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Methods
 
-        public void UpdateVM(IDbScript entry)
+        public void UpdateEntry(IDbScriptFromFile entry)
+        {
+            var scriptFromFileEntry = (IDbScriptFromFile)entry;
+
+            var model = dataProvider.GetModel<TextModel>(DataRef);
+
+            model.Text = Script;
+            scriptFromFileEntry.DataRef = DataRef;
+        }
+
+        public void UpdateVM(IDbScriptFromFile entry)
         {
             var scriptFromFileEntry = (IDbScriptFromFile)entry;
 
@@ -75,15 +86,9 @@ namespace OpenBreed.Editor.VM.Scripts
             DataRef = scriptFromFileEntry.DataRef;
         }
 
-        public void UpdateEntry(IDbScript entry)
-        {
-            var scriptFromFileEntry = (IDbScriptFromFile)entry;
+        public void UpdateVM(IDbScript entry) => UpdateVM((IDbScriptFromFile)entry);
 
-            var model = dataProvider.GetModel<TextModel>(DataRef);
-
-            model.Text = Script;
-            scriptFromFileEntry.DataRef = DataRef;
-        }
+        public void UpdateEntry(IDbScript entry) => UpdateEntry((IDbScriptFromFile)entry);
 
         #endregion Public Methods
 

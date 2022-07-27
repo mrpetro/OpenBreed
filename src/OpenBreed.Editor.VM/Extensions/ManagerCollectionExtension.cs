@@ -1,6 +1,10 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
+using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
@@ -28,6 +32,7 @@ using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Editor.VM.Tiles;
+using System;
 
 namespace OpenBreed.Editor.VM.Extensions
 {
@@ -35,164 +40,228 @@ namespace OpenBreed.Editor.VM.Extensions
     {
         #region Public Methods
 
-
-        public static void SetupDbEntrySubEditors(this IManagerCollection managerCollection)
+        public static void SetupDbEntrySubEditors(this IHostBuilder hostBuilder)
         {
-            managerCollection.AddTransient<IEntryEditor<IDbTileAtlasFromBlk>>(() => new TileSetFromBlkEditorVM(managerCollection.GetManager<TileAtlasDataProvider>(),
-                                                                                                                managerCollection.GetManager<PalettesDataProvider>()));
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbActionSet>>(() => new ActionSetEmbeddedEditorVM(managerCollection.GetManager<ActionSetsDataProvider>()));
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbFileDataSource>>(() => new FileDataSourceEditorVM());
-
-            managerCollection.AddTransient<IEntryEditor<IDbEpfArchiveDataSource>>(() => new EpfArchiveFileDataSourceEditorVM());
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbEntityTemplateFromFile>>(() => new EntityTemplateFromFileEditorVM(managerCollection.GetManager<EntityTemplatesDataProvider>(),
-                                                                                                                                managerCollection.GetManager<IModelsProvider>()));
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbImage>>(() => new ImageFromFileEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                                                managerCollection.GetManager<IDialogProvider>(),
-                                                                                                                managerCollection.GetManager<IModelsProvider>()));
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbSpriteAtlasFromSpr>>(() => new SpriteSetFromSprEditorVM(managerCollection.GetManager<SpriteAtlasDataProvider>(),
-                                                                                                                managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<IModelsProvider>()));
-
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbSpriteAtlasFromImage>>(() => new SpriteSetFromImageEditorVM(managerCollection.GetManager<SpriteAtlasDataProvider>(),
-                                                                                                                managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<IModelsProvider>()));
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbPaletteFromBinary>>(() => new PaletteFromBinaryEditorVM(managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<IModelsProvider>()));
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbPaletteFromMap>>(() => new PaletteFromMapEditorVM(managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<IModelsProvider>()));
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbTextEmbedded>>(() => new TextEmbeddedEditorVM(managerCollection.GetManager<TextsDataProvider>()));
-
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbTextFromMap>>(() => new TextFromMapEditorVM(managerCollection.GetManager<TextsDataProvider>(),
-                                                                                                          managerCollection.GetManager<IModelsProvider>()));
-
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbSound>>(() => new SoundFromPcmEditorVM(managerCollection.GetManager<SoundsDataProvider>()));
-
-            managerCollection.AddTransient<IEntryEditor<IDbScriptEmbedded>>(() => new ScriptEmbeddedEditorVM(managerCollection.GetManager<ScriptsDataProvider>()));
-
-
-            managerCollection.AddTransient<IEntryEditor<IDbScriptFromFile>>(() => new ScriptFromFileEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                                                managerCollection.GetManager<ScriptsDataProvider>(),
-                                                                                                                managerCollection.GetManager<IModelsProvider>()));
-
-
-
-        }
-
-        public static void SetupCommonViewModels(this IManagerCollection managerCollection)
-        {
-            managerCollection.AddTransient<LoggerVM>(() => new LoggerVM(managerCollection.GetManager<ILogger>()));
-        }
-
-        public static void SetupDbEntryEditors(this IManagerCollection managerCollection)
-        {
-            managerCollection.AddTransient<DbEditorVM>(() => new DbEditorVM(managerCollection,
-                                                                            managerCollection.GetManager<DbEntryEditorFactory>(),
-                                                                            managerCollection.GetManager<IRepositoryProvider>()));
-            managerCollection.AddTransient<DbTablesEditorVM>(() => new DbTablesEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                        managerCollection.GetManager<DbEntryFactory>()));
-            managerCollection.AddTransient<TileSetEditorVM>(() => new TileSetEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                      managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                      managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<SpriteSetEditorVM>(() => new SpriteSetEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                          managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                           managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<ActionSetEditorVM>(() => new ActionSetEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                          managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                          managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<PaletteEditorVM>(() => new PaletteEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                      managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                      managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<TextEditorVM>(() => new TextEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<ScriptEditorVM>(() => new ScriptEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                    managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                    managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<EntityTemplateEditorVM>(() => new EntityTemplateEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                                    managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<ImageEditorVM>(() => new ImageEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                  managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                  managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<SoundEditorVM>(() => new SoundEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                  managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                  managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<MapEditorVM>(() => new MapEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
-                                                                              managerCollection.GetManager<MapsDataProvider>(),
-                                                                              managerCollection.GetManager<PalettesDataProvider>(),
-                                                                              managerCollection.GetManager<ActionSetsDataProvider>(),
-                                                                              managerCollection.GetManager<TileAtlasDataProvider>(),
-                                                                              managerCollection.GetManager<IDialogProvider>()));
-            managerCollection.AddTransient<DataSourceEditorVM>(() => new DataSourceEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
-                                                                                            managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                            managerCollection.GetManager<IDialogProvider>()));
-        }
-
-        public static void SetupDbEntryEditorFactory(this IManagerCollection managerCollection)
-        {
-            managerCollection.AddSingleton<DbEntryEditorFactory>(() =>
+            hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                var entryEditorFactory = new DbEntryEditorFactory(managerCollection);
-                entryEditorFactory.Register<IRepository<IDbTileAtlas>, TileSetEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbSpriteAtlas>, SpriteSetEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbActionSet>, ActionSetEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbPalette>, PaletteEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbText>, TextEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbScript>, ScriptEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbEntityTemplate>, EntityTemplateEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbImage>, ImageEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbSound>, SoundEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbMap>, MapEditorVM>();
-                entryEditorFactory.Register<IRepository<IDbDataSource>, DataSourceEditorVM>();
-                return entryEditorFactory;
+                services.AddTransient<IEntryEditor<IDbTileAtlasFromBlk>, TileSetFromBlkEditorVM>(
+                    (sp) => new TileSetFromBlkEditorVM(
+                        sp.GetService<TileAtlasDataProvider>(),                                                                                         
+                        sp.GetService<PalettesDataProvider>()));
+
+
+                services.AddTransient<IEntryEditor<IDbActionSet>, ActionSetEmbeddedEditorVM>(
+                    (sp) => new ActionSetEmbeddedEditorVM(sp.GetService<ActionSetsDataProvider>()));
+
+
+                services.AddTransient<IEntryEditor<IDbFileDataSource>, FileDataSourceEditorVM>(
+                    (sp) => new FileDataSourceEditorVM());
+
+                services.AddTransient<IEntryEditor<IDbEpfArchiveDataSource>, EpfArchiveFileDataSourceEditorVM>(
+                    (sp) => new EpfArchiveFileDataSourceEditorVM());
+
+
+                services.AddTransient<IEntryEditor<IDbEntityTemplateFromFile>, EntityTemplateFromFileEditorVM>(
+                    (sp) => new EntityTemplateFromFileEditorVM(
+                        sp.GetService<EntityTemplatesDataProvider>(),                                                                                                         
+                        sp.GetService<IModelsProvider>()));
+
+                services.AddTransient<IEntryEditor<IDbImage>, ImageFromFileEditorVM>(
+                    (sp) => new ImageFromFileEditorVM(
+                        sp.GetService<IWorkspaceMan>(),                                                                                        
+                        sp.GetService<IDialogProvider>(),                                                                                           
+                        sp.GetService<IModelsProvider>()));
+
+                services.AddTransient<IEntryEditor<IDbSpriteAtlasFromSpr>, SpriteSetFromSprEditorVM>(
+                    (sp) => new SpriteSetFromSprEditorVM(
+                        sp.GetService<SpriteAtlasDataProvider>(),                                                                                          
+                        sp.GetService<PalettesDataProvider>(),                                                                                         
+                        sp.GetService<IModelsProvider>()));
+
+                services.AddTransient<IEntryEditor<IDbSpriteAtlasFromImage>, SpriteSetFromImageEditorVM>(
+                    (sp) => new SpriteSetFromImageEditorVM(
+                        sp.GetService<SpriteAtlasDataProvider>(),                                                                                          
+                        sp.GetService<PalettesDataProvider>(),                                                                                        
+                        sp.GetService<IModelsProvider>()));
+
+
+                services.AddTransient<IEntryEditor<IDbPaletteFromBinary>, PaletteFromBinaryEditorVM>(
+                    (sp) => new PaletteFromBinaryEditorVM(
+                        sp.GetService<PalettesDataProvider>(),                                                                                             
+                        sp.GetService<IModelsProvider>()));
+
+
+                services.AddTransient<IEntryEditor<IDbPaletteFromMap>, PaletteFromMapEditorVM>(
+                    (sp) => new PaletteFromMapEditorVM(
+                        sp.GetService<PalettesDataProvider>(),                                                                                          
+                        sp.GetService<IModelsProvider>()));
+
+                services.AddTransient<IEntryEditor<IDbTextEmbedded>, TextEmbeddedEditorVM>(
+                    (sp) => new TextEmbeddedEditorVM(
+                        sp.GetService<TextsDataProvider>()));
+
+                services.AddTransient<IEntryEditor<IDbTextFromMap>, TextFromMapEditorVM>(
+                    (sp) => new TextFromMapEditorVM(
+                        sp.GetService<TextsDataProvider>(),                                                                                          
+                        sp.GetService<IModelsProvider>()));
+
+                services.AddTransient<IEntryEditor<IDbSound>, SoundFromPcmEditorVM>(
+                    (sp) => new SoundFromPcmEditorVM(
+                        sp.GetService<SoundsDataProvider>()));
+
+                services.AddTransient<IEntryEditor<IDbScriptEmbedded>, ScriptEmbeddedEditorVM>(
+                    (sp) => new ScriptEmbeddedEditorVM(
+                        sp.GetService<ScriptsDataProvider>()));
+
+                services.AddTransient<IEntryEditor<IDbScriptFromFile>, ScriptFromFileEditorVM>(
+                    (sp) => new ScriptFromFileEditorVM(
+                        sp.GetService<IWorkspaceMan>(),                                                                                                 
+                        sp.GetService<ScriptsDataProvider>(),                                                                                         
+                        sp.GetService<IModelsProvider>()));
             });
         }
 
-        public static void SetupDbEntrySubEditorFactory(this IManagerCollection managerCollection)
+        public static void SetupCommonViewModels(this IHostBuilder hostBuilder)
         {
-            managerCollection.AddSingleton<DbEntrySubEditorFactory>(() =>
+            hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                var subEditorFactory = new DbEntrySubEditorFactory(managerCollection);
-                subEditorFactory.Register<IDbActionSet, IDbActionSet>();
-                subEditorFactory.Register<IDbFileDataSource, IDbDataSource>();
-                subEditorFactory.Register<IDbEpfArchiveDataSource, IDbDataSource>();
-                subEditorFactory.Register<IDbEntityTemplateFromFile, IDbEntityTemplate>();
-                subEditorFactory.Register<IDbImage, IDbImage>();
-                subEditorFactory.Register<IDbPaletteFromBinary, IDbPalette>();
-                subEditorFactory.Register<IDbPaletteFromMap, IDbPalette>();
-                subEditorFactory.Register<IDbScriptEmbedded, IDbScript>();
-                subEditorFactory.Register<IDbScriptFromFile, IDbScript>();
-                subEditorFactory.Register<IDbSound, IDbSound>();
-                subEditorFactory.Register<IDbSpriteAtlasFromSpr, IDbSpriteAtlas>();
-                subEditorFactory.Register<IDbSpriteAtlasFromImage, IDbSpriteAtlas>();
-                subEditorFactory.Register<IDbTextEmbedded, IDbText>();
-                subEditorFactory.Register<IDbTextFromMap, IDbText>();
-                subEditorFactory.Register<IDbTileAtlasFromBlk, IDbTileAtlas>();
-
-                return subEditorFactory;
+                services.AddTransient<LoggerVM>((sp) => new LoggerVM(sp.GetService<ILogger>()));
             });
+        }
+
+        public static void SetupDbEntryEditors(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddTransient<DbEditorVM>(
+                    (sp) => new DbEditorVM(
+                        sp,                                                    
+                        sp.GetService<DbEntryEditorFactory>(),                                                      
+                        sp.GetService<IRepositoryProvider>()));
+
+                services.AddTransient<DbTablesEditorVM>(
+                    (sp) => new DbTablesEditorVM(
+                        sp.GetService<IWorkspaceMan>(),                                                                   
+                        sp.GetService<DbEntryFactory>()));
+
+                services.AddTransient<TileSetEditorVM>(
+                    (sp) => new TileSetEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),                                                                 
+                        sp.GetService<IWorkspaceMan>(),                                                                 
+                        sp.GetService<IDialogProvider>()));
+
+                services.AddTransient<SpriteSetEditorVM>(
+                    (sp) => new SpriteSetEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),                                                                    
+                        sp.GetService<IWorkspaceMan>(),
+                        sp.GetService<IDialogProvider>()));
+
+                services.AddTransient<ActionSetEditorVM>(
+                    (sp) => new ActionSetEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),
+                        sp.GetService<IWorkspaceMan>(),
+                        sp.GetService<IDialogProvider>()));
+
+                services.AddTransient<PaletteEditorVM>(
+                    (sp) => new PaletteEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),                                                                  
+                        sp.GetService<IWorkspaceMan>(),                                                                 
+                        sp.GetService<IDialogProvider>()));
+                services.AddTransient<TextEditorVM>(
+                    (sp) => new TextEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),
+                        sp.GetService<IWorkspaceMan>(),
+                        sp.GetService<IDialogProvider>()));
+
+                services.AddTransient<ScriptEditorVM>(
+                    (sp) => new ScriptEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),
+                        sp.GetService<IWorkspaceMan>(),
+                        sp.GetService<IDialogProvider>()));
+
+                services.AddTransient<EntityTemplateEditorVM>(
+                    (sp) => new EntityTemplateEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),
+                        sp.GetService<IWorkspaceMan>(),
+                        sp.GetService<IDialogProvider>()));
+
+                services.AddTransient<ImageEditorVM>(
+                    (sp) => new ImageEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),
+                        sp.GetService<IWorkspaceMan>(),
+                        sp.GetService<IDialogProvider>()));
+                services.AddTransient<SoundEditorVM>(
+                    (sp) => new SoundEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),                                                            
+                        sp.GetService<IWorkspaceMan>(),                                                            
+                        sp.GetService<IDialogProvider>()));
+                services.AddTransient<MapEditorVM>(
+                    (sp) => new MapEditorVM(
+                        sp.GetService<IWorkspaceMan>(),                                                        
+                        sp.GetService<MapsDataProvider>(),                                                      
+                        sp.GetService<PalettesDataProvider>(),                                                      
+                        sp.GetService<ActionSetsDataProvider>(),                                                        
+                        sp.GetService<TileAtlasDataProvider>(),                                                    
+                        sp.GetService<IDialogProvider>()));
+                services.AddTransient<DataSourceEditorVM>(
+                    (sp) => new DataSourceEditorVM(
+                        sp.GetService<DbEntrySubEditorFactory>(),
+                        sp.GetService<IWorkspaceMan>(),
+                        sp.GetService<IDialogProvider>()));
+            });
+        }
+
+        public static void SetupDbEntryEditorFactory(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<DbEntryEditorFactory>((sp) =>
+                {
+                    var entryEditorFactory = new DbEntryEditorFactory(sp);
+                    entryEditorFactory.Register<IRepository<IDbTileAtlas>, TileSetEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbSpriteAtlas>, SpriteSetEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbActionSet>, ActionSetEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbPalette>, PaletteEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbText>, TextEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbScript>, ScriptEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbEntityTemplate>, EntityTemplateEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbImage>, ImageEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbSound>, SoundEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbMap>, MapEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbDataSource>, DataSourceEditorVM>();
+                    return entryEditorFactory;
+                });
+            });
+        }
+
+        public static void SetupDbEntrySubEditorFactory(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<DbEntrySubEditorFactory>((sp) =>
+                {
+                    var subEditorFactory = new DbEntrySubEditorFactory(sp);
+                    subEditorFactory.Register<IDbActionSet, IDbActionSet>();
+                    subEditorFactory.Register<IDbFileDataSource, IDbDataSource>();
+                    subEditorFactory.Register<IDbEpfArchiveDataSource, IDbDataSource>();
+                    subEditorFactory.Register<IDbEntityTemplateFromFile, IDbEntityTemplate>();
+                    subEditorFactory.Register<IDbImage, IDbImage>();
+                    subEditorFactory.Register<IDbPaletteFromBinary, IDbPalette>();
+                    subEditorFactory.Register<IDbPaletteFromMap, IDbPalette>();
+                    subEditorFactory.Register<IDbScriptEmbedded, IDbScript>();
+                    subEditorFactory.Register<IDbScriptFromFile, IDbScript>();
+                    subEditorFactory.Register<IDbSound, IDbSound>();
+                    subEditorFactory.Register<IDbSpriteAtlasFromSpr, IDbSpriteAtlas>();
+                    subEditorFactory.Register<IDbSpriteAtlasFromImage, IDbSpriteAtlas>();
+                    subEditorFactory.Register<IDbTextEmbedded, IDbText>();
+                    subEditorFactory.Register<IDbTextFromMap, IDbText>();
+                    subEditorFactory.Register<IDbTileAtlasFromBlk, IDbTileAtlas>();
+
+                    return subEditorFactory;
+                });
+            });
+
+
         }
 
         #endregion Public Methods

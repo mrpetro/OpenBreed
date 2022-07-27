@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Editor.VM.Base;
@@ -11,7 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetFromImageEditorVM : SpriteSetEditorExVM
+    public class SpriteSetFromImageEditorVM : SpriteSetEditorExVM, IEntryEditor<IDbSpriteAtlasFromImage>
     {
         #region Private Fields
 
@@ -165,6 +166,16 @@ namespace OpenBreed.Editor.VM.Sprites
             });
 
             CurrentSpriteIndex = 0;
+        }
+
+        void IEntryEditor<IDbSpriteAtlasFromImage>.UpdateEntry(IDbSpriteAtlasFromImage entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IEntryEditor<IDbSpriteAtlasFromImage>.UpdateVM(IDbSpriteAtlasFromImage entry)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Private Methods

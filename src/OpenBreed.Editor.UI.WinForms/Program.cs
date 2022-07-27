@@ -32,6 +32,11 @@ using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Editor.VM.Tiles;
 using System;
 using OpenBreed.Common.Database.Xml.Extensions;
+using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Logging;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace OpenBreed.Editor.UI.WinForms
 {
@@ -50,37 +55,70 @@ namespace OpenBreed.Editor.UI.WinForms
 
             //Application.Run(new GLTestForm());
 
-            var managerCollection = new DefaultManagerCollection();
+            var builder = new HostBuilder();
 
-            managerCollection.SetupABFormats();
-            managerCollection.SetupDataProviders();
-            managerCollection.SetupModelProvider();
+            builder.SetupABFormats();
+            builder.SetupDataProviders();
+            builder.SetupModelProvider();
 
-            managerCollection.AddSingleton<ILogger>(() => new DefaultLogger());
+            builder.ConfigureServices((hostContext, services) =>
+                 {
+                     services.AddSingleton<ILogger>(
+                         (sp) => new DefaultLogger());
 
-            managerCollection.AddSingleton<IVariableMan>(() => new VariableMan(managerCollection.GetManager<ILogger>()));
+                     services.AddSingleton<IVariableMan>(
+                         (sp) => new VariableMan(
+                             sp.GetService<ILogger>()));
 
-            managerCollection.AddSingleton<SettingsMan>(() => new SettingsMan(managerCollection.GetManager<IVariableMan>(),
-                                                                              managerCollection.GetManager<ILogger>()));
-            managerCollection.AddSingleton<DbEntryFactory>(() => new DbEntryFactory());
+                     services.AddSingleton<SettingsMan>(
+                         (sp) => new SettingsMan(
+                             sp.GetService<IVariableMan>(),                                                         
+                             sp.GetService<ILogger>()));
 
-            managerCollection.AddSingleton<EditorApplication>(() => new EditorApplication(managerCollection, managerCollection.GetManager<DataSourceProvider>()));
+                     services.AddSingleton<DbEntryFactory>(
+                         (sp) => new DbEntryFactory());
 
-            managerCollection.AddSingleton<IDialogProvider>(() => new DialogProvider(managerCollection.GetManager<EditorApplication>()));
+                     services.AddSingleton<EditorApplication>(
+                         (sp) => new EditorApplication(
+                             sp,
+                             sp.GetService<DataSourceProvider>()));
 
-            managerCollection.AddSingleton<IWorkspaceMan>(() => new EditorWorkspaceMan(managerCollection.GetManager<XmlDatabaseMan>(),
-                                                                                       managerCollection.GetManager<ILogger>()));
-            managerCollection.AddSingleton<IRepositoryProvider>(() => managerCollection.GetManager<IWorkspaceMan>());
+                     services.AddSingleton<IDialogProvider>(
+                         (sp) => new DialogProvider(
+                             sp.GetService<EditorApplication>()));
 
-            managerCollection.SetupXmlDatabase();
-            managerCollection.SetupCommonViewModels();
-            managerCollection.SetupDbEntryEditors();
-            managerCollection.SetupDbEntrySubEditors();
-            managerCollection.SetupDbEntryEditorFactory();
-            managerCollection.SetupDbEntrySubEditorFactory();
+                     services.AddSingleton<IWorkspaceMan>(
+                         (sp) => new EditorWorkspaceMan(
+                             sp.GetService<XmlDatabaseMan>(),                                                              
+                             sp.GetService<ILogger>()));
 
-            var application = managerCollection.GetManager<EditorApplication>();
-            application.Run();
+                     services.AddSingleton<IRepositoryProvider>(
+                         (sp) => sp.GetService<IWorkspaceMan>());
+
+                 });
+
+            builder.SetupXmlDatabase();
+            builder.SetupCommonViewModels();
+            builder.SetupDbEntryEditors();
+            builder.SetupDbEntrySubEditors();
+            builder.SetupDbEntryEditorFactory();
+            builder.SetupDbEntrySubEditorFactory();
+
+            var host = builder.Build();
+
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var services = serviceScope.ServiceProvider;
+                try
+                {
+                    var application = services.GetService<EditorApplication>();
+                    application.Run();
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Error Occured");
+                }
+            }
         }
 
         #endregion Private Methods

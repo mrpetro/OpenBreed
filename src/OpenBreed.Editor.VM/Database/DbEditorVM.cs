@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
@@ -15,7 +16,7 @@ namespace OpenBreed.Editor.VM.Database
         #region Private Fields
 
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
-        private readonly IManagerCollection managerCollection;
+        private readonly IServiceProvider managerCollection;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IRepositoryProvider repositoryProvider;
 
@@ -23,7 +24,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Constructors
 
-        public DbEditorVM(IManagerCollection managerCollection,
+        public DbEditorVM(IServiceProvider managerCollection,
                           DbEntryEditorFactory dbEntryEditorFactory,
                           IRepositoryProvider repositoryProvider)
         {
@@ -92,7 +93,7 @@ namespace OpenBreed.Editor.VM.Database
         {
             if (dbTablesEditor == null)
             {
-                dbTablesEditor = managerCollection.GetManager<DbTablesEditorVM>();
+                dbTablesEditor = managerCollection.GetService<DbTablesEditorVM>();
                 dbTablesEditor.EntryEditorOpener = OpenEntryEditor;
                 InitDbTablesEditorAction?.Invoke(dbTablesEditor);
 
