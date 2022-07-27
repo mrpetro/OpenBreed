@@ -1,113 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9827DEDA-205F-465E-B8DF-E0E3FF9CD8D1}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenBreed.Common.UI.WinForms</RootNamespace>
-    <AssemblyName>OpenBreed.Common.UI.WinForms</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\Shared\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Controls\BaseCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\BaseCtrl.Designer.cs">
-      <DependentUpon>BaseCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ComboBoxEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\DataGridViewEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\IConfigCtrl.cs" />
-    <Compile Include="Controls\LogConsoleCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\LogConsoleCtrl.Designer.cs">
-      <DependentUpon>LogConsoleCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TextBoxEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\TextConsoleCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TextConsoleCtrl.Designer.cs">
-      <DependentUpon>TextConsoleCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ToolStripButtonEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ToolStripMenuItemEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ToolStripProgressBarEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ToolStripStatusLabelEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Reference Include="System.Windows.Forms">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Windows.Forms.dll</HintPath>
+    </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\LogConsoleCtrl.resx">
-      <DependentUpon>LogConsoleCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TextConsoleCtrl.resx">
-      <DependentUpon>TextConsoleCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OpenBreed.Common.Interface\OpenBreed.Common.Interface.csproj">
-      <Project>{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1}</Project>
-      <Name>OpenBreed.Common.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj">
-      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
-      <Name>OpenBreed.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
