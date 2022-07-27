@@ -7,13 +7,13 @@ namespace OpenBreed.Editor.VM.Sounds
 {
     public class PCMPlayer
     {
-        private readonly System.Media.SoundPlayer _soundPlayer;
+        //private readonly System.Media.SoundPlayer _soundPlayer;
 
         public PCMPlayer(byte[] pcmSampleBytes, int samplingRate, int bitsPerSample, int channels)
         {
             using (WaveMemoryStream waveStream = new WaveMemoryStream(pcmSampleBytes, samplingRate, bitsPerSample, channels))
             {
-                _soundPlayer = new System.Media.SoundPlayer(waveStream);
+                //_soundPlayer = new System.Media.SoundPlayer(waveStream);
             }
         }
 
@@ -27,19 +27,19 @@ namespace OpenBreed.Editor.VM.Sounds
                 pcmSampleBytes = br.ReadBytes((int)numBytes);
                 using (WaveMemoryStream waveStream = new WaveMemoryStream(pcmSampleBytes, samplingRate, bitsPerSample, channels))
                 {
-                    _soundPlayer = new System.Media.SoundPlayer(waveStream);
+                    //_soundPlayer = new System.Media.SoundPlayer(waveStream);
                 }
             }
         }
 
         public void Play()
         {
-            _soundPlayer.Play();
+            //_soundPlayer.Play();
         }
 
         public void PlaySync()
         {
-            _soundPlayer.PlaySync();
+            //_soundPlayer.PlaySync();
         }
     }
 

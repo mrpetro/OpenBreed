@@ -72,32 +72,33 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 
         private void DGV_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                var menu = new ContextMenu();
-                menu.MenuItems.Add(new MenuItem("New", (s,a) => _vm.OpenNewEntryCreator()));
+            //TODO: Fix this
+            //if (e.Button == MouseButtons.Right)
+            //{
+            //    var menu = new ContextMenu();
+            //    menu.MenuItems.Add(new MenuItem("New", (s,a) => _vm.OpenNewEntryCreator()));
 
-                int rowUnderMouse = DGV.HitTest(e.X, e.Y).RowIndex;
+            //    int rowUnderMouse = DGV.HitTest(e.X, e.Y).RowIndex;
 
-                if (rowUnderMouse >= 0)
-                {
-                    var item = DGV.Rows[rowUnderMouse].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
+            //    if (rowUnderMouse >= 0)
+            //    {
+            //        var item = DGV.Rows[rowUnderMouse].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
 
-                    if (DGV.SelectedRows.Count < 2)
-                    {
-                        DGV.CurrentCell = DGV.Rows[rowUnderMouse].Cells[0];
-                        if (DGV.SelectedRows.Count == 0)
-                            DGV.CurrentRow.Selected = true;
+            //        if (DGV.SelectedRows.Count < 2)
+            //        {
+            //            DGV.CurrentCell = DGV.Rows[rowUnderMouse].Cells[0];
+            //            if (DGV.SelectedRows.Count == 0)
+            //                DGV.CurrentRow.Selected = true;
 
-                        menu.MenuItems.Add(new MenuItem("Edit", (s, a) => _vm.EditEntry(item.Id)));
-                    }
+            //            menu.MenuItems.Add(new MenuItem("Edit", (s, a) => _vm.EditEntry(item.Id)));
+            //        }
 
-                    menu.MenuItems.Add(new MenuItem("Clone", (s, a) => MessageBox.Show("Not implemented yet.")));
-                    menu.MenuItems.Add(new MenuItem("Delete", (s, a) => MessageBox.Show("Not implemented yet.")));
-                }
+            //        menu.MenuItems.Add(new MenuItem("Clone", (s, a) => MessageBox.Show("Not implemented yet.")));
+            //        menu.MenuItems.Add(new MenuItem("Delete", (s, a) => MessageBox.Show("Not implemented yet.")));
+            //    }
 
-                menu.Show(DGV, new Point(e.X, e.Y));
-            }
+            //    menu.Show(DGV, new Point(e.X, e.Y));
+            //}
         }
 
         private void OnCloseNewEntryCreator()

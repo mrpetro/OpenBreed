@@ -17,6 +17,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public DbTablesEditorView()
         {
             InitializeComponent();
+
+          
         }
 
         public void Initialize(DbTablesEditorVM vm)

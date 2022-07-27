@@ -90,6 +90,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _viewFactory.Register<EntityTemplateEditorVM, EntryEditorView<EntityTemplateEditorCtrl>>();
             _viewFactory.Register<MapEditorVM, EntryEditorView<MapEditorCtrl>>();
             _viewFactory.Register<DataSourceEditorVM, EntryEditorView<DataSourceEditorCtrl>>();
+
+            Theme = new WeifenLuo.WinFormsUI.Docking.VS2015LightTheme();
         }
 
         #endregion Public Constructors
