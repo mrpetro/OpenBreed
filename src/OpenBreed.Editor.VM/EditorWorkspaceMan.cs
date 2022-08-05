@@ -21,10 +21,10 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorWorkspaceMan(XmlDatabaseMan databaseMan,
+        public EditorWorkspaceMan(IDatabase databaseMan,
                                   ILogger logger)
         {
-            this.databaseMan = databaseMan;
+            this.databaseMan = (XmlDatabaseMan)databaseMan;
             this.logger = logger;
         }
 

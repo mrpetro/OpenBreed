@@ -37,6 +37,10 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Database.Xml.Repositories;
+using OpenBreed.Database.Xml.Tables;
+using OpenBreed.Database.EFCore;
+using OpenBreed.Database.EFCore.Extensions;
 
 namespace OpenBreed.Editor.UI.WinForms
 {
@@ -89,7 +93,7 @@ namespace OpenBreed.Editor.UI.WinForms
 
                      services.AddSingleton<IWorkspaceMan>(
                          (sp) => new EditorWorkspaceMan(
-                             sp.GetService<XmlDatabaseMan>(),                                                              
+                             sp.GetService<IDatabase>(),                                                              
                              sp.GetService<ILogger>()));
 
                      services.AddSingleton<IRepositoryProvider>(
@@ -97,7 +101,40 @@ namespace OpenBreed.Editor.UI.WinForms
 
                  });
 
-            builder.SetupXmlDatabase();
+            builder.SetupEFDatabaseContext((efDatabaseContext, sp) =>
+            {
+            });
+
+            builder.SetupXmlDatabase((databaseMan, sp) =>
+            {
+            });
+
+            builder.SetupXmlUnitOfWork((unitOfWork, sp) =>
+            {
+                var database = sp.GetService<IDatabase>();
+                var context = sp.GetService<OpenBreedDbContext>();
+
+                //unitOfWork.RegisterRepository(new DataSourcesRepository(context, database.GetTable<XmlDbDataSourceTableDef>()));
+                //unitOfWork.RegisterRepository(new AssetsRepository(context, database.GetTable<XmlDbAssetTableDef>()));
+                //unitOfWork.RegisterRepository(new TileAtlasRepository(context, database.GetTable<XmlDbTileAtlasTableDef>()));
+
+                unitOfWork.RegisterRepository(new XmlDataSourcesRepository(database.GetTable<XmlDbDataSourceTableDef>()));
+                unitOfWork.RegisterRepository(new XmlAssetsRepository(database.GetTable<XmlDbAssetTableDef>()));
+                unitOfWork.RegisterRepository(new XmlTileAtlasRepository(database.GetTable<XmlDbTileAtlasTableDef>()));
+                unitOfWork.RegisterRepository(new XmlTileStampsRepository(database.GetTable<XmlDbTileStampTableDef>()));
+                unitOfWork.RegisterRepository(new XmlSpriteAtlasRepository(database.GetTable<XmlDbSpriteAtlasTableDef>()));
+                unitOfWork.RegisterRepository(new XmlActionSetsRepository(database.GetTable<XmlDbActionSetTableDef>()));
+                unitOfWork.RegisterRepository(new XmlImagesRepository(database.GetTable<XmlDbImageTableDef>()));
+                unitOfWork.RegisterRepository(new XmlPalettesRepository(database.GetTable<XmlDbPaletteTableDef>()));
+                unitOfWork.RegisterRepository(new XmlTextsRepository(database.GetTable<XmlDbTextTableDef>()));
+                unitOfWork.RegisterRepository(new XmlMapsRepository(database.GetTable<XmlDbMapTableDef>()));
+                unitOfWork.RegisterRepository(new XmlSoundsRepository(database.GetTable<XmlDbSoundTableDef>()));
+                unitOfWork.RegisterRepository(new XmlSongsRepository(database.GetTable<XmlDbSongTableDef>()));
+                unitOfWork.RegisterRepository(new XmlScriptsRepository(database.GetTable<XmlDbScriptTableDef>()));
+                unitOfWork.RegisterRepository(new XmlAnimationsRepository(database.GetTable<XmlDbAnimationTableDef>()));
+                unitOfWork.RegisterRepository(new XmlEntityTemplatesRepository(database.GetTable<XmlDbEntityTemplateTableDef>()));
+            });
+
             builder.SetupCommonViewModels();
             builder.SetupDbEntryEditors();
             builder.SetupDbEntrySubEditors();
