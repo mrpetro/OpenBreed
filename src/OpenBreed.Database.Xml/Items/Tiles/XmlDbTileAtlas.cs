@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Items.Tiles
 {
+
     [Serializable]
     public abstract class XmlDbTileAtlas : XmlDbEntry, IDbTileAtlas
     {

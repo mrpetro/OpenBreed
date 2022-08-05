@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Platforms>AnyCPU;x64</Platforms>
+	  <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +17,7 @@
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\TextViewport.xml" />
     <None Remove="Vanilla\GameDatabase.ABHC.xml" />
     <None Remove="Vanilla\GameDatabase.ABSE.xml" />
+    <None Remove="Vanilla\GameDatabase.ABTA.EPF.db" />
     <None Remove="Vanilla\GameDatabase.ABTA.EPF.xml" />
     <None Remove="Vanilla\ABTA\Scripts\Entry.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Exit.lua" />
@@ -110,6 +110,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\GameDatabase.ABSE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\GameDatabase.ABTA.EPF.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\GameDatabase.ABTA.EPF.xml">
@@ -277,6 +280,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj" />
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
+    <ProjectReference Include="..\OpenBreed.Database.EFCore\OpenBreed.Database.EFCore.csproj" />
     <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
   </ItemGroup>
 

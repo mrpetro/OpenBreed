@@ -1,19 +1,16 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Database.Interface;
+﻿using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
-using OpenBreed.Database.Xml.Repositories;
-using OpenBreed.Database.Xml.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Database.Xml
 {
-    internal class XmlUnitOfWork : IUnitOfWork
+    public class XmlUnitOfWork : IUnitOfWork
     {
         #region Private Fields
 
-        private readonly XmlDatabaseMan context;
+        private readonly IDatabase database;
 
         private readonly Dictionary<Type, IRepository> _repositories = new Dictionary<Type, IRepository>();
 
@@ -21,20 +18,20 @@ namespace OpenBreed.Database.Xml
 
         #region Internal Constructors
 
-        internal XmlUnitOfWork(XmlDatabaseMan context)
+        public XmlUnitOfWork(IDatabase database)
         {
-            this.context = context;
-
-            RegisterRepos();
+            this.database = database;
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public string Name { get { return context.Name; } }
+        public string Name
+        { get { return database.Name; } }
 
-        public IEnumerable<IRepository> Repositories { get { return _repositories.Values; } }
+        public IEnumerable<IRepository> Repositories
+        { get { return _repositories.Values; } }
 
         #endregion Public Properties
 
@@ -60,43 +57,16 @@ namespace OpenBreed.Database.Xml
             return foundRepo;
         }
 
-        public void Save()
-        {
-            context.Save();
-        }
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
-        protected void RegisterRepository<T>(IRepository<T> repository) where T : IDbEntry
+        public void RegisterRepository<T>(IRepository<T> repository) where T : IDbEntry
         {
             _repositories.Add(typeof(T), repository);
         }
 
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private void RegisterRepos()
+        public void Save()
         {
-            RegisterRepository(new XmlDataSourcesRepository(context.GetTable<XmlDbDataSourceTableDef>()));
-            RegisterRepository(new XmlAssetsRepository(context.GetTable<XmlDbAssetTableDef>()));
-            RegisterRepository(new XmlTileAtlasRepository(context.GetTable<XmlDbTileAtlasTableDef>()));
-            RegisterRepository(new XmlTileStampsRepository(context.GetTable<XmlDbTileStampTableDef>()));
-            RegisterRepository(new XmlSpriteAtlasRepository(context.GetTable<XmlDbSpriteAtlasTableDef>()));
-            RegisterRepository(new XmlActionSetsRepository(context.GetTable<XmlDbActionSetTableDef>()));
-            RegisterRepository(new XmlImagesRepository(context.GetTable<XmlDbImageTableDef>()));
-            RegisterRepository(new XmlPalettesRepository(context.GetTable<XmlDbPaletteTableDef>()));
-            RegisterRepository(new XmlTextsRepository(context.GetTable<XmlDbTextTableDef>()));
-            RegisterRepository(new XmlMapsRepository(context.GetTable<XmlDbMapTableDef>()));
-            RegisterRepository(new XmlSoundsRepository(context.GetTable<XmlDbSoundTableDef>()));
-            RegisterRepository(new XmlSongsRepository(context.GetTable<XmlDbSongTableDef>()));
-            RegisterRepository(new XmlScriptsRepository(context.GetTable<XmlDbScriptTableDef>()));
-            RegisterRepository(new XmlAnimationsRepository(context.GetTable<XmlDbAnimationTableDef>()));
-            RegisterRepository(new XmlEntityTemplatesRepository(context.GetTable<XmlDbEntityTemplateTableDef>()));
+            database.Save();
         }
 
-        #endregion Private Methods
+        #endregion Public Methods
     }
 }
