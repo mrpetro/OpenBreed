@@ -41,24 +41,6 @@ namespace OpenBreed.Sandbox.Extensions
             stateMachine.AddState(new Entities.Projectile.States.FiredState("Animations/Laser/Fired/", clipMan));
         }
 
-        public static void SetupPickableStates(this IFsmMan fsmMan, IServiceProvider serviceProvider)
-        {
-            var collisionMan = serviceProvider.GetService<ICollisionMan<Entity>>();
-            var stampMan = serviceProvider.GetService<IStampMan>();
-            var clipMan = serviceProvider.GetService<IClipMan<Entity>>();
-            var soundMan = serviceProvider.GetService<ISoundMan>();
-            var itemsMan = serviceProvider.GetService<ItemsMan>();
-            var triggerMan = serviceProvider.GetService<IEventsManEx>();
-
-            var fsm = fsmMan.Create<Entities.Pickable.States.FunctioningState, Entities.Pickable.States.FunctioningImpulse>("Pickable.Functioning");
-
-            fsm.AddState(new Entities.Pickable.States.LyingState(fsmMan, collisionMan, stampMan, itemsMan, triggerMan));
-            fsm.AddState(new Entities.Pickable.States.PickedState(fsmMan, stampMan, soundMan, triggerMan));
-
-            fsm.AddTransition(Entities.Pickable.States.FunctioningState.Lying, Entities.Pickable.States.FunctioningImpulse.Pick, Entities.Pickable.States.FunctioningState.Picked);
-        }
-
-
         public static void SetupActorAttackingStates(this IFsmMan fsmMan, IServiceProvider serviceProvider)
         {
             var triggerMan = serviceProvider.GetService<ITriggerMan>();

@@ -336,7 +336,6 @@ namespace OpenBreed.Sandbox
             var fsmMan = host.Services.GetService<IFsmMan>();
             fsmMan.SetupButtonStates(host.Services);
             fsmMan.SetupProjectileStates(host.Services);
-            fsmMan.SetupPickableStates(host.Services);
             fsmMan.SetupActorAttackingStates(host.Services);
             fsmMan.SetupActorMovementStates(host.Services);
             fsmMan.CreateTurretRotationStates(host.Services);
