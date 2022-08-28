@@ -188,6 +188,7 @@
 				<FileDataSource Id="Extension/Scripts/Common/DoorOpen.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\DoorOpen.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/ItemPickup.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\ItemPickup.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/TeleporterTeleport.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\TeleporterTeleport.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/SmartCardShow.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\SmartCardShow.lua" />
 				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
 				<FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\SimpleEntry.lua" />
 				<FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Exit.lua" />
@@ -1068,6 +1069,9 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.TeleporterTeleport.lua" DataSourceRef="Extension/Scripts/Common/TeleporterTeleport.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.SmartCardShow.lua" DataSourceRef="Extension/Scripts/Common/SmartCardShow.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="Extension/Scripts/Entry.lua" FormatType="TEXT">
@@ -11034,6 +11038,9 @@
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/Common/Teleporter/Teleport">
 					<DataRef>Assets.Scripts.Common.TeleporterTeleport.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/SmartCard/Show">
+					<DataRef>Assets.Scripts.Common.SmartCardShow.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Scripts.Entry.lua">
 					<DataRef>Assets.Scripts.Entry.lua</DataRef>
