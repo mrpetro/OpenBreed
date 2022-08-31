@@ -37,10 +37,11 @@ namespace OpenBreed.Sandbox.Entities.Viewport
             var viewport = entityFactory.Create($@"Vanilla\ABTA\Templates\Common\Viewports\{templateName}.xml")
                 .SetParameter("startX", x)
                 .SetParameter("startY", y)
+                .SetTag(name)
                 .Build();
 
             //var viewport = entityMan.Create();
-            viewport.Tag = name;
+            //viewport.Tag = name;
 
             viewport.Get<ViewportComponent>().Size = new Vector2(width, height);
 

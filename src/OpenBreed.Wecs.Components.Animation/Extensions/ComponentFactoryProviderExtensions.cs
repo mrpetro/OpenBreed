@@ -10,11 +10,11 @@ using OpenBreed.Wecs.Components.Animation.Xml;
 
 namespace OpenBreed.Wecs.Components.Animation.Extensions
 {
-    public static class EntityFactoryExtensions
+    public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupAnimationComponents(this IEntityFactory entityFactory, IServiceProvider serviceProvider)
+        public static void SetupAnimationComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
-            entityFactory.RegisterComponentFactory<XmlAnimationComponent>(serviceProvider.GetService<AnimationComponentFactory>());
+            provider.RegisterComponentFactory<XmlAnimationComponent>(serviceProvider.GetService<AnimationComponentFactory>());
         }
     }
 }

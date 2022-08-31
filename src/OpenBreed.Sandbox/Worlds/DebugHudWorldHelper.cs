@@ -81,12 +81,12 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(World world)
         {
-            var hudCamera = cameraHelper.CreateCamera(0.0f,
-                                                      0.0f,
-                                                      viewClient.ClientRectangle.Size.X,
-                                                      viewClient.ClientRectangle.Size.Y);
-
-            hudCamera.Tag = "DebugHudCamera";
+            var hudCamera = cameraHelper.CreateCamera(
+                "DebugHudCamera",
+                0.0f,                                     
+                0.0f,                                     
+                viewClient.ClientRectangle.Size.X,                                        
+                viewClient.ClientRectangle.Size.Y);
 
             triggerMan.OnWorldInitialized(world, () => hudCamera.EnterWorld(world.Id), singleTime: true);
  

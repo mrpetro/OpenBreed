@@ -8,6 +8,8 @@ namespace OpenBreed.Wecs.Entities
 {
     public interface IEntityBuilder
     {
+        IEntityBuilder SetTag(string entityTag);
+
         Entity Build();
     }
 }

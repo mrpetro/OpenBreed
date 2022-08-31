@@ -10,11 +10,11 @@ using OpenBreed.Wecs.Components.Scripting.Xml;
 
 namespace OpenBreed.Wecs.Components.Scripting.Extensions
 {
-    public static class EntityFactoryExtensions
+    public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupScriptingComponents(this IEntityFactory entityFactory, IServiceProvider serviceProvider)
+        public static void SetupScriptingComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
-            entityFactory.RegisterComponentFactory<XmlScriptRunnerComponent>(serviceProvider.GetService<ScriptRunnerComponentFactory>());
+            provider.RegisterComponentFactory<XmlScriptRunnerComponent>(serviceProvider.GetService<ScriptRunnerComponentFactory>());
         }
     }
 }

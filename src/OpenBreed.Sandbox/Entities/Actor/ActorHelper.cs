@@ -76,9 +76,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ScriptRunTrigger, ScriptRunCallback);
         }
 
-        public Entity CreateDummyActor(Vector2 pos)
+        public Entity CreateDummyActor(string name, Vector2 pos)
         {
-            var actor = CreateDummy(pos);
+            var actor = CreateDummy(name, pos);
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
@@ -94,9 +94,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return actor;
         }
 
-        public Entity CreatePlayerActor(Vector2 pos)
+        public Entity CreatePlayerActor(string name, Vector2 pos)
         {
-            var actor = CreateActor(pos);
+            var actor = CreateActor(name, pos);
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
@@ -112,21 +112,23 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return actor;
         }
 
-        public Entity CreateActor(Vector2 pos)
+        public Entity CreateActor(string name, Vector2 pos)
         {
             var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\John.xml")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
+                .SetTag(name)
                 .Build();
 
             return actor;
         }
 
-        public Entity CreateDummy(Vector2 pos)
+        public Entity CreateDummy(string name, Vector2 pos)
         {
             var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\Dummy.xml")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
+                .SetTag(name)
                 .Build();
 
             return actor;
@@ -138,9 +140,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         internal void AddHero(World world, int ix, int iy)
         {
-            var playerActor = CreatePlayerActor(new Vector2(16 * ix, 16 * iy));
-
-            playerActor.Tag = "John";
+            var playerActor = CreatePlayerActor("John", new Vector2(16 * ix, 16 * iy));
 
             playerActor.EnterWorld(world.Id);
         }

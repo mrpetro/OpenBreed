@@ -10,11 +10,11 @@ using OpenBreed.Fsm.Xml;
 
 namespace OpenBreed.Fsm.Extensions
 {
-    public static class EntityFactoryExtensions
+    public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupFsmComponents(this IEntityFactory entityFactory, IServiceProvider serviceProvider)
+        public static void SetupFsmComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
-            entityFactory.RegisterComponentFactory<XmlFsmComponent>(serviceProvider.GetService<FsmComponentFactory>());
+            provider.RegisterComponentFactory<XmlFsmComponent>(serviceProvider.GetService<FsmComponentFactory>());
         }
     }
 }

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Components.Audio.Extensions
 {
-    public static class EntityFactoryExtensions
+    public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupAudioComponents(this IEntityFactory entityFactory, IServiceProvider serviceProvider)
+        public static void SetupAudioComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
-            entityFactory.RegisterComponentFactory<XmlSoundPlayerComponent>(serviceProvider.GetService<SoundPlayerComponentFactory>());
+            provider.RegisterComponentFactory<XmlSoundPlayerComponent>(serviceProvider.GetService<SoundPlayerComponentFactory>());
         }
     }
 }

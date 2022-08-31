@@ -239,15 +239,19 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupFsmComponentFactories();
             hostBuilder.SetupScriptingComponentFactories();
 
+            hostBuilder.SetupComponentFactoryProvider((provider, sp) =>
+            {
+                provider.SetupCommonComponents(sp);
+                provider.SetupPhysicsComponents(sp);
+                provider.SetupRenderingComponents(sp);
+                provider.SetupAnimationComponents(sp);
+                provider.SetupAudioComponents(sp);
+                provider.SetupFsmComponents(sp);
+                provider.SetupScriptingComponents(sp);
+            });
+
             hostBuilder.SetupEntityFactory((entityFactory, sp) =>
             {
-                entityFactory.SetupCommonComponents(sp);
-                entityFactory.SetupPhysicsComponents(sp);
-                entityFactory.SetupRenderingComponents(sp);
-                entityFactory.SetupAnimationComponents(sp);
-                entityFactory.SetupAudioComponents(sp);
-                entityFactory.SetupFsmComponents(sp);
-                entityFactory.SetupScriptingComponents(sp);
             });
 
             hostBuilder.SetupWecsManagers();
@@ -577,12 +581,9 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapLegacyLoader.Load("Vanilla/47");
 
             //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
-            var playerCamera = cameraHelper.CreateCamera(0, 0, 320, 240);
+            var playerCamera = cameraHelper.CreateCamera("PlayerCamera", 0, 0, 320, 240);
 
             playerCamera.Add(new PauseImmuneComponent());
-            playerCamera.Tag = "PlayerCamera";
-
-
 
             var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
             gameViewport.SetViewportCamera(playerCamera.Id);
@@ -591,8 +592,7 @@ namespace OpenBreed.Sandbox
 
             //Follow John actor
             //var johnPlayerEntity = entityMan.GetByTag("John").First();
-            var johnPlayerEntity = actorHelper.CreateDummyActor(new Vector2(0, 0));
-            johnPlayerEntity.Tag = "John";
+            var johnPlayerEntity = actorHelper.CreateDummyActor("John", new Vector2(0, 0));
 
             scriptMan.Expose("JohnPlayer", johnPlayerEntity);
 

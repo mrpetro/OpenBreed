@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Content\sounds\**" />
     <Compile Remove="Entities\electricgate\**" />
+    <EmbeddedResource Remove="Content\sounds\**" />
     <EmbeddedResource Remove="Entities\electricgate\**" />
+    <None Remove="Content\sounds\**" />
     <None Remove="Entities\electricgate\**" />
   </ItemGroup>
 
@@ -52,10 +55,6 @@
     <Content Include="RunABTA.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Content\sounds\" />
   </ItemGroup>
 
   <ItemGroup>

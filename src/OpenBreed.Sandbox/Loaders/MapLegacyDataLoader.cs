@@ -278,8 +278,7 @@ namespace OpenBreed.Sandbox.Loaders
 
                 if (paletteEntity is null)
                 {
-                    paletteEntity = entityMan.Create();
-                    paletteEntity.Tag = paletteEntityTag;
+                    paletteEntity = entityMan.Create(tag: paletteEntityTag);
                 }
 
                 var paletteComponent = paletteEntity.TryGet<PaletteComponent>();

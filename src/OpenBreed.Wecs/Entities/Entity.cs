@@ -21,9 +21,13 @@ namespace OpenBreed.Wecs.Entities
 
         #region Internal Constructors
 
-        internal Entity(EntityMan entityMan, List<IEntityComponent> initialComponents)
+        internal Entity(
+            EntityMan entityMan,
+            string tag,
+            List<IEntityComponent> initialComponents)
         {
             this.entityMan = entityMan;
+            Tag = tag;
 
             if (initialComponents is null)
                 components = new Dictionary<Type, IEntityComponent>();
@@ -51,7 +55,7 @@ namespace OpenBreed.Wecs.Entities
         /// <summary>
         /// Entity tag information, useful for finding
         /// </summary>
-        public string Tag { get; set; }
+        public string Tag { get; }
 
         public object State { get; set; }
 

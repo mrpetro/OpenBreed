@@ -56,13 +56,14 @@ namespace OpenBreed.Sandbox.Entities
             cameraCmp.Brightness = nextValue;
         }
 
-        public Entity CreateCamera(float x, float y, float width, float height)
+        public Entity CreateCamera(string name, float x, float y, float width, float height)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Camera.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetParameter("width", width)
                 .SetParameter("height", height)
+                .SetTag(name)
                 .Build();
 
             return entity;
