@@ -96,7 +96,7 @@ end
 
 actorEntity.State = "Teleporting"
 
-cameraEntity = actorEntity:GetPlayerCamera(Entities)
+cameraEntity = Entities:GetPlayerCamera(actorEntity)
 
 if (cameraEntity == nil)
 then

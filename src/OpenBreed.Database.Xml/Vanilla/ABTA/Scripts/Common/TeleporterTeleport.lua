@@ -1,6 +1,8 @@
 ﻿-- Variable definitions
 local teleportEntity, actorEntity = ...
 local cameraEntity
+local hudCameraEntity = Entities:GetHudCamera()
+
 local cameraFadeOutClipId;
 local cameraFadeInClipId;
 
@@ -33,6 +35,7 @@ FadeOut = function(entity, args)
         true)
 
     cameraEntity:PlayAnimation(0, cameraFadeOutClipId)
+    hudCameraEntity:PlayAnimation(0, cameraFadeOutClipId)
 end
 
 SetPosition = function(entity, args)
@@ -58,6 +61,7 @@ FadeIn = function(entity, args)
     Logging:Info("FadeIn...")
 
     cameraEntity:PlayAnimation(0, cameraFadeInClipId)
+    hudCameraEntity:PlayAnimation(0, cameraFadeInClipId)
 end
 
 -- Execution
@@ -72,7 +76,7 @@ end
 
 actorEntity.State = "Teleporting"
 
-cameraEntity = actorEntity:GetPlayerCamera(Entities)
+cameraEntity = Entities:GetPlayerCamera(actorEntity)
 
 if (cameraEntity == nil)
 then
