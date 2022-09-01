@@ -24,12 +24,10 @@ namespace OpenBreed.Sandbox.Worlds
     {
         #region Public Fields
 
-        public const string GAME_VIEWPORT = "GameViewport";
-
-        public const string DEBUG_HUD_VIEWPORT = "DebugHudViewport";
-        public const string GAME_HUD_VIEWPORT = "GameHudViewport";
-
-        public const string TEXT_VIEWPORT = "TextViewport";
+        public const string GAME_VIEWPORT = "Viewport.Game";
+        public const string DEBUG_HUD_VIEWPORT = "Viewport.DebugHud";
+        public const string GAME_HUD_VIEWPORT = "Viewport.GameHud";
+        public const string TEXT_VIEWPORT = "Viewport.Text";
 
         #endregion Public Fields
 
@@ -102,14 +100,14 @@ namespace OpenBreed.Sandbox.Worlds
 
             scriptMan.Expose("Commentator", gameCommentator);
 
-            var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, GAME_VIEWPORT);
-            var gameHudViewport = viewportCreator.CreateViewportEntity(GAME_HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, GAME_HUD_VIEWPORT);
+            var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "GameViewport");
+            var gameHudViewport = viewportCreator.CreateViewportEntity(GAME_HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "GameHudViewport");
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             gameHudViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
 
-            var debugHudViewport = viewportCreator.CreateViewportEntity(DEBUG_HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, DEBUG_HUD_VIEWPORT);
+            var debugHudViewport = viewportCreator.CreateViewportEntity(DEBUG_HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "DebugHudViewport");
 
-            var textViewport = viewportCreator.CreateViewportEntity(TEXT_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, TEXT_VIEWPORT);
+            var textViewport = viewportCreator.CreateViewportEntity(TEXT_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "TextViewport");
 
             renderingMan.ClientResized += (s, a) => ResizeGameViewport(gameViewport, a);
             renderingMan.ClientResized += (s, a) => ResizeHudViewport(gameHudViewport, a);

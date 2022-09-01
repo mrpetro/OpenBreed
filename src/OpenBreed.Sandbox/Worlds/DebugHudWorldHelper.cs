@@ -82,7 +82,7 @@ namespace OpenBreed.Sandbox.Worlds
         private void Setup(World world)
         {
             var hudCamera = cameraHelper.CreateCamera(
-                "DebugHudCamera",
+                "Camera.DebugHud",
                 0.0f,                                     
                 0.0f,                                     
                 viewClient.ClientRectangle.Size.X,                                        

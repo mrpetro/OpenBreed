@@ -7,6 +7,7 @@ using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Audio.LibOpenMpt;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Database.Xml.Extensions;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Interface;
@@ -15,13 +16,17 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
+using OpenBreed.Model.Palettes;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
@@ -30,6 +35,7 @@ using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
@@ -311,6 +317,8 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupXmlReadonlyDatabase(gameDbFilePath);
 
+            hostBuilder.ConfigureServices((sc) => sc.AddSingleton<FontHelper>());
+
             var host = hostBuilder.Build();
 
             return new Program(host, host.Services.GetService<IViewClient>());
@@ -493,6 +501,7 @@ namespace OpenBreed.Sandbox
             InitLua();
 
             GetManager<FixtureTypes>().Register();
+            GetManager<FontHelper>().SetupGameFont();
 
             var spriteMan = GetManager<ISpriteMan>();
             var scriptMan = GetManager<IScriptMan>();
@@ -522,8 +531,6 @@ namespace OpenBreed.Sandbox
                 .SetName("Atlases/Sprites/Projectiles/Laser")
                 .AppendCoordsFromGrid(16, 16, 8, 1, 0, 0)
                 .Build();
-
-
 
             var worldGateHelper = GetManager<EntriesHelper>();
             var doorHelper = GetManager<DoorHelper>();
@@ -564,13 +571,13 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
             //L1
-            var gameWorld = mapLegacyLoader.Load("Vanilla/1");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/1");
             //LD
             //var gameWorld = mapLegacyLoader.Load("Vanilla/7");
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
-            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
+            var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6
@@ -581,7 +588,7 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapLegacyLoader.Load("Vanilla/47");
 
             //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
-            var playerCamera = cameraHelper.CreateCamera("PlayerCamera", 0, 0, 320, 240);
+            var playerCamera = cameraHelper.CreateCamera("Camera.Player", 0, 0, 320, 240);
 
             playerCamera.Add(new PauseImmuneComponent());
 

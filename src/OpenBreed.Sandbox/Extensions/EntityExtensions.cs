@@ -120,12 +120,6 @@ namespace OpenBreed.Sandbox.Extensions
             itemSlot.AddItem(itemId, quantity);
         }
 
-        public static Entity GetPlayerCamera(this Entity entity, IEntityMan entityMan)
-        {
-            return entity.Get<FollowedComponent>().FollowerIds.Select(item => entityMan.GetById(item)).
-                                                                              FirstOrDefault(item => item.Tag is "PlayerCamera");
-        }
-
         public static void SetPosition(this Entity target,
                                        IEntityMan entityMan,
                                        IShapeMan shapeMan,

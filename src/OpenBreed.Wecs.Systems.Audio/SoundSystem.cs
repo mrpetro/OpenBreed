@@ -53,7 +53,7 @@ namespace OpenBreed.Wecs.Systems.Audio
             //{
             for (int i = 0; i < toPlay.Count; i++)
             {
-                soundMan.PlaySample(toPlay[i]);
+                //soundMan.PlaySample(toPlay[i]);
                 eventsMan.Raise(null, new SoundPlayEvent(entity.Id, toPlay[i]));
             }
 

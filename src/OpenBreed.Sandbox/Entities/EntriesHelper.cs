@@ -144,7 +144,7 @@ namespace OpenBreed.Sandbox.Entities
 
             var cameraEntity = actorEntity.TryGet<FollowedComponent>()?.FollowerIds.
                                                                               Select(item => entityMan.GetById(item)).
-                                                                              FirstOrDefault(item => item.Tag is "PlayerCamera");
+                                                                              FirstOrDefault(item => item.Tag is "Camera.Player");
 
             if (cameraEntity == null)
                 return;

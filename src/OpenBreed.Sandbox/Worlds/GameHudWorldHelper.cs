@@ -159,7 +159,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(World world)
         {
-            var hudCamera = cameraHelper.CreateCamera("GameHudCamera", 0, 0, 320, 240);
+            var hudCamera = cameraHelper.CreateCamera("Camera.GameHud", 0, 0, 320, 240);
 
             triggerMan.OnWorldInitialized(world, () =>
             {

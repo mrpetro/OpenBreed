@@ -82,58 +82,8 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Methods
 
-
-        private PaletteModel GetPaletteModel(string paletteName)
-        {
-            var paletteEntity = entityMan.GetByTag(paletteName).FirstOrDefault();
-
-            if(paletteEntity is null)
-                return PaletteModel.NullPalette;
-
-            var paletteComponent = paletteEntity.TryGet<PaletteComponent>();
-
-            if (paletteComponent is null)
-                return PaletteModel.NullPalette;
-
-            var paletteBuilder = PaletteBuilder.NewPaletteModel();
-            paletteBuilder.SetName(paletteName);
-            for (int i = 0; i < paletteComponent.Colors.Length; i++)
-            {
-                var c = paletteComponent.Colors[i];
-
-                paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(255, c.R, c.G, c.B));
-            }
-
-            return paletteBuilder.Build();
-        }
-
         public void Create()
         {
-            //triggerMan.OnEachAction(GameEventTypes.HeroPickedItem, PerformShowSmartcardReader);
-
-
-            var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
-
-            //Load common sprites
-            var dbStatusBarSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById("Vanilla/Common/Computer/Font");
-
-            var spriteSet = spriteAtlasDataProvider.GetSpriteSet(dbStatusBarSpriteAtlas.Id);
-
-            var paletteModel = GetPaletteModel("GameWorld/Palette/CMAP");
-            var spriteAtlas = loader.Load(dbStatusBarSpriteAtlas.Id, paletteModel);
-
-            //Create FontAtlas
-            var fontAtlasBuilder = fontMan.Create()
-                                     .SetName("ComputerFont");
-
-            for (int i = 0; i < 59; i++)
-            {
-                var ch = 32 + (char)i;
-                fontAtlasBuilder.AddCharacterFromSprite(ch, $"Vanilla/Common/Computer/Font#{i}", 0);
-            }
-
-            var fontAtlas = fontAtlasBuilder.Build();
-
             var builder = worldMan.Create().SetName("SmartCardScreen");
 
             builder.AddModule(renderableFactory.CreateRenderableBatch());
@@ -171,53 +121,17 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(World world)
         {
-            var hudCamera = cameraHelper.CreateCamera("GameHudCamera", 0, 0, 320, 240);
+            var smartCardCamera = cameraHelper.CreateCamera("Camera.SmartcardReader", 0, 0, 320, 240);
 
             triggerMan.OnWorldInitialized(world, () =>
             {
-                hudCamera.EnterWorld(world.Id);
+                smartCardCamera.EnterWorld(world.Id);
 
-                var p1StatusBar = hudHelper.CreateHudElement("StatusBarP1", "P1.StatusBar", -160, 109);
-                p1StatusBar.EnterWorld(world.Id);
+                //var p2KeysCounter = hudHelper.CreateHudElement("KeysCounter", "P2.KeysCounter", 128, -117);
+                //p2KeysCounter.EnterWorld(world.Id);
 
-                var p1AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P1.AmmoBar", 20, 112);
-                p1AmmoBar.EnterWorld(world.Id);
-
-                var p1HealthBar = hudHelper.CreateHudElement("HealthBar", "P1.HealthBar", -124, 112);
-                p1HealthBar.EnterWorld(world.Id);
-
-                var p1LivesCounter = hudHelper.CreateHudElement("LivesCounter", "P1.LivesCounter", -24, 112);
-                p1LivesCounter.EnterWorld(world.Id);
-
-                var p1AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "P1.AmmoCounter", 80, 112);
-                p1AmmoCounter.EnterWorld(world.Id);
-
-                var p1KeysCounter = hudHelper.CreateHudElement("KeysCounter", "P1.KeysCounter", 128, 112);
-                p1KeysCounter.EnterWorld(world.Id);
-
-                var p2StatusBar = hudHelper.CreateHudElement("StatusBarP2", "P2.StatusBar", -160, -120);
-                p2StatusBar.EnterWorld(world.Id);
-
-                var p2AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P2.AmmoBar", 20, -117);
-                p2AmmoBar.EnterWorld(world.Id);
-
-                var p2HealthBar = hudHelper.CreateHudElement("HealthBar", "P2.HealthBar", -124, -117);
-                p2HealthBar.EnterWorld(world.Id);
-
-                var p2LivesCounter = hudHelper.CreateHudElement("LivesCounter", "P2.LivesCounter", -24, -117);
-                p2LivesCounter.EnterWorld(world.Id);
-
-                var p2AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "P2.AmmoCounter", 80, -117);
-                p2AmmoCounter.EnterWorld(world.Id);
-
-                var p2KeysCounter = hudHelper.CreateHudElement("KeysCounter", "P2.KeysCounter", 128, -117);
-                p2KeysCounter.EnterWorld(world.Id);
-
-
-
-
-                var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
-                hudViewport.SetViewportCamera(hudCamera.Id);
+                //var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
+                //hudViewport.SetViewportCamera(smartCardCamera.Id);
 
             }, singleTime: true);
 
