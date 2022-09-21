@@ -41,6 +41,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         internal int Id { get; private set; }
         internal string Name { get; private set; }
+        internal float Height { get; private set; }
 
         #endregion Internal Properties
 
@@ -61,12 +62,27 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             return newFont;
         }
 
-        public IFontAtlasBuilder AddCharacterFromSprite(int ch, string spriteAtlasName, int spriteIndex)
+        public IFontAtlasBuilder AddCharacterFromSprite(int ch, string spriteAtlasName, int spriteIndex, float width = 0.0f)
         {
             var sptiteAtlas = SpriteMan.GetByName(spriteAtlasName);
-            var sprite = sptiteAtlas.GetSpriteSize(spriteIndex);
-            Lookup.Add(ch, (sptiteAtlas.Id, spriteIndex, sprite.X, sprite.Y));
+            var size = sptiteAtlas.GetSpriteSize(spriteIndex);
+            Lookup.Add(ch, (sptiteAtlas.Id, spriteIndex, width == 0.0f ? size.X : width, size.Y));
 
+            return this;
+        }
+
+        //public IFontAtlasBuilder AddWhiteChar(int ch, float width)
+        //{
+        //    var sptiteAtlas = SpriteMan.GetByName(spriteAtlasName);
+        //    var size = sptiteAtlas.GetSpriteSize(spriteIndex);
+        //    Lookup.Add(ch, (sptiteAtlas.Id, spriteIndex, size.X, size.Y));
+
+        //    return this;
+        //}
+
+        public IFontAtlasBuilder SetHeight(float height)
+        {
+            Height = height;
             return this;
         }
 

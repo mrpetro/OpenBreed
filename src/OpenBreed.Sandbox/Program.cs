@@ -277,6 +277,7 @@ namespace OpenBreed.Sandbox
                 dataLoaderFactory.SetupTileSetDataLoader(sp);
                 dataLoaderFactory.SetupTileStampDataLoader(sp);
                 dataLoaderFactory.SetupSpriteSetDataLoader(sp);
+                dataLoaderFactory.SetupPictureDataLoader(sp);
                 dataLoaderFactory.SetupSoundSampleDataLoader(sp);
                 dataLoaderFactory.SetupScriptDataLoader(sp);
             });
@@ -496,77 +497,18 @@ namespace OpenBreed.Sandbox
             return new InterleavedStereoModule(moduleFilePath);
         }
 
-        private void OnLoad()
+        private void LoadGameWorld()
         {
-            InitLua();
-
-            GetManager<FixtureTypes>().Register();
-            GetManager<FontHelper>().SetupGameFont();
-
-            var spriteMan = GetManager<ISpriteMan>();
-            var scriptMan = GetManager<IScriptMan>();
-            var tileMan = GetManager<ITileMan>();
-
-            var textureMan = GetManager<ITextureMan>();
-
-            var soundMan = GetManager<ISoundMan>();
-
-
-
-            //Create 4 sound sources, each one acting as a separate channel
-            soundMan.CreateSoundSource();
-            soundMan.CreateSoundSource();
-            soundMan.CreateSoundSource();
-            soundMan.CreateSoundSource();
-
-
-            //var amfFilePath = @"D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)\extract\TITLE.AMF";
-            //var mod = OpenMod(amfFilePath);
-            //var musicId = soundMan.CreateStream("MUSIC", (bufferSize, buffer) => ReadStream(mod, bufferSize, buffer));
-            //soundMan.PlayStream(musicId);
-
-            var laserTex = textureMan.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
-            spriteMan.CreateAtlas()
-                .SetTexture(laserTex.Id)
-                .SetName("Atlases/Sprites/Projectiles/Laser")
-                .AppendCoordsFromGrid(16, 16, 8, 1, 0, 0)
-                .Build();
-
-            var worldGateHelper = GetManager<EntriesHelper>();
-            var doorHelper = GetManager<DoorHelper>();
-            var electicGateHelper = GetManager<ElectricGateHelper>();
-            var pickableHelper = GetManager<PickableHelper>();
-            var environmentHelper = GetManager<EnvironmentHelper>();
-            var projectileHelper = GetManager<ProjectileHelper>();
-            var actorHelper = GetManager<ActorHelper>();
-            var teleportHelper = GetManager<TeleportHelper>();
-            var cameraHelper = GetManager<CameraHelper>();
-
-            actorHelper.RegisterCollisionPairs();
-            worldGateHelper.RegisterCollisionPairs();
-            projectileHelper.RegisterCollisionPairs();
-
-
-            cameraHelper.CreateAnimations();
-            projectileHelper.CreateAnimations();
-
-            var screenWorldHelper = GetManager<ScreenWorldHelper>();
-
-            var screenWorld = screenWorldHelper.CreateWorld();
-
-            GetManager<IRenderingMan>().Renderable = screenWorld.GetModule<IRenderableBatch>();
-
-            var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
-            debugHudWorldHelper.Create();
-
-
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
+            var cameraHelper = GetManager<CameraHelper>();
+            var entityMan = GetManager<IEntityMan>();
+            var actorHelper = GetManager<ActorHelper>();
+            var scriptMan = GetManager<IScriptMan>();
+            var triggerMan = GetManager<ITriggerMan>();
+            var worldGateHelper = GetManager<EntriesHelper>();
+
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
             var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
-
-            var entityMan = GetManager<IEntityMan>();
-            var triggerMan = GetManager<ITriggerMan>();
-
 
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
@@ -595,8 +537,6 @@ namespace OpenBreed.Sandbox
             var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
             gameViewport.SetViewportCamera(playerCamera.Id);
 
-
-
             //Follow John actor
             //var johnPlayerEntity = entityMan.GetByTag("John").First();
             var johnPlayerEntity = actorHelper.CreateDummyActor("John", new Vector2(0, 0));
@@ -610,24 +550,93 @@ namespace OpenBreed.Sandbox
             {
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
             });
+        }
 
+        private void OnLoad()
+        {
+            var dataLoaderFactory = GetManager<IDataLoaderFactory>();
+            var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
 
-            //GetManager<IEventsMan>().Subscribe<WorldInitializedEventArgs>((s, a) =>
-            //{
-            //    if (a.WorldId != gameWorld.Id)
-            //        return;
+            var picture = pictureDataLoader.Load("Images.SMARTPIC.LBM");
 
-            //    worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Id, 0);
-            //});
+            InitLua();
 
-            //return;
+            GetManager<FixtureTypes>().Register();
+            GetManager<FontHelper>().SetupGameFont();
 
-
+            var spriteMan = GetManager<ISpriteMan>();
+            var worldMan = GetManager<IWorldMan>();
+            var scriptMan = GetManager<IScriptMan>();
+            var tileMan = GetManager<ITileMan>();
+            var textureMan = GetManager<ITextureMan>();
+            var soundMan = GetManager<ISoundMan>();
+            var worldGateHelper = GetManager<EntriesHelper>();
+            var doorHelper = GetManager<DoorHelper>();
+            var electicGateHelper = GetManager<ElectricGateHelper>();
+            var pickableHelper = GetManager<PickableHelper>();
+            var environmentHelper = GetManager<EnvironmentHelper>();
+            var projectileHelper = GetManager<ProjectileHelper>();
+            var actorHelper = GetManager<ActorHelper>();
+            var teleportHelper = GetManager<TeleportHelper>();
+            var cameraHelper = GetManager<CameraHelper>();
+            var entityMan = GetManager<IEntityMan>();
+            var triggerMan = GetManager<ITriggerMan>();
+            var screenWorldHelper = GetManager<ScreenWorldHelper>();
             var gameHudWorldHelper = GetManager<GameHudWorldHelper>();
+            var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
+            var gameSmartcardWorldHelper = GetManager<GameSmartcardWorldHelper>();
+            var renderingMan = GetManager<IRenderingMan>();
+
+            //Create 4 sound sources, each one acting as a separate channel
+            soundMan.CreateSoundSource();
+            soundMan.CreateSoundSource();
+            soundMan.CreateSoundSource();
+            soundMan.CreateSoundSource();
+
+
+            //var amfFilePath = @"D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)\extract\TITLE.AMF";
+            //var mod = OpenMod(amfFilePath);
+            //var musicId = soundMan.CreateStream("MUSIC", (bufferSize, buffer) => ReadStream(mod, bufferSize, buffer));
+            //soundMan.PlayStream(musicId);
+
+            var laserTex = textureMan.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
+            spriteMan.CreateAtlas()
+                .SetTexture(laserTex.Id)
+                .SetName("Atlases/Sprites/Projectiles/Laser")
+                .AppendCoordsFromGrid(16, 16, 8, 1, 0, 0)
+                .Build();
+
+            actorHelper.RegisterCollisionPairs();
+            worldGateHelper.RegisterCollisionPairs();
+            projectileHelper.RegisterCollisionPairs();
+
+            cameraHelper.CreateAnimations();
+            projectileHelper.CreateAnimations();
+
+            var screenWorld = screenWorldHelper.CreateWorld();
+
+            renderingMan.Renderable = screenWorld.GetModule<IRenderableBatch>();
+
+            debugHudWorldHelper.Create();
+
+            //LoadGameWorld();
+
             gameHudWorldHelper.Create();
 
-            var gameSmartcardWorldHelper = GetManager<GameSmartcardWorldHelper>();
             gameSmartcardWorldHelper.Create();
+
+
+            var hudWorld = worldMan.GetByName("GameHUD");
+
+            triggerMan.OnWorldInitialized(hudWorld, () =>
+            {
+                var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.SmartcardReader").First();
+
+                var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
+                gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
+
+
+            }, singleTime: true);
 
             OnEngineInitialized();
         }

@@ -1,29 +1,23 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
+﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Sprites;
-using OpenBreed.Model.Palettes;
-using OpenBreed.Model.Sprites;
-using OpenBreed.Rendering.Interface.Data;
+using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Model.Texts;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
-using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
-using System.Linq;
+using System;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -31,37 +25,39 @@ namespace OpenBreed.Sandbox.Worlds
     {
         #region Private Fields
 
-        private readonly ISystemFactory systemFactory;
-        private readonly IRenderableFactory renderableFactory;
-        private readonly IWorldMan worldMan;
-        private readonly IFontMan fontMan;
-        private readonly IViewClient viewClient;
-        private readonly IEntityMan entityMan;
-        private readonly IEntityFactory entityFactory;
-        private readonly VanillaStatusBarHelper hudHelper;
         private readonly CameraHelper cameraHelper;
-        private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly IEntityFactory entityFactory;
+        private readonly IEntityMan entityMan;
+        private readonly IFontMan fontMan;
+        private readonly VanillaStatusBarHelper hudHelper;
+        private readonly IRenderableFactory renderableFactory;
+        private readonly IRepositoryProvider repositoryProvider;
         private readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
+        private readonly ISystemFactory systemFactory;
         private readonly ITriggerMan triggerMan;
+        private readonly TextsDataProvider textsDataProvider;
+        private readonly IViewClient viewClient;
+        private readonly IWorldMan worldMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public GameSmartcardWorldHelper(ISystemFactory systemFactory, 
+        public GameSmartcardWorldHelper(ISystemFactory systemFactory,
                                   IRenderableFactory renderableFactory,
-                                  IWorldMan worldMan, 
-                                  IFontMan fontMan, 
-                                  IViewClient viewClient, 
+                                  IWorldMan worldMan,
+                                  IFontMan fontMan,
+                                  IViewClient viewClient,
                                   IEntityMan entityMan,
                                   IEntityFactory entityFactory,
-                                  VanillaStatusBarHelper hudHelper, 
-                                  CameraHelper cameraHelper, 
-                                  IRepositoryProvider repositoryProvider, 
+                                  VanillaStatusBarHelper hudHelper,
+                                  CameraHelper cameraHelper,
+                                  IRepositoryProvider repositoryProvider,
                                   IDataLoaderFactory dataLoaderFactory,
                                   SpriteAtlasDataProvider spriteAtlasDataProvider,
-                                  ITriggerMan triggerMan)
+                                  ITriggerMan triggerMan,
+                                  TextsDataProvider textsDataProvider)
         {
             this.systemFactory = systemFactory;
             this.renderableFactory = renderableFactory;
@@ -76,11 +72,34 @@ namespace OpenBreed.Sandbox.Worlds
             this.dataLoaderFactory = dataLoaderFactory;
             this.spriteAtlasDataProvider = spriteAtlasDataProvider;
             this.triggerMan = triggerMan;
+            this.textsDataProvider = textsDataProvider;
         }
 
         #endregion Public Constructors
 
         #region Public Methods
+
+        public void AddBackground(World world, int x, int y)
+        {
+            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardBackground.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+            timer.EnterWorld(world.Id);
+        }
+
+        public void AddText(World world, string text, int x, int y)
+        {
+            var textEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderText.xml")
+                .SetParameter("posX", x)
+                .SetParameter("posY", y)
+                .Build();
+
+
+            textEntity.SetText(0, text);
+            textEntity.EnterWorld(world.Id);
+        }
 
         public void Create()
         {
@@ -88,24 +107,10 @@ namespace OpenBreed.Sandbox.Worlds
 
             builder.AddModule(renderableFactory.CreateRenderableBatch());
 
-
             AddSystems(builder);
 
             Setup(builder.Build());
         }
-
-
-        private void PerformShowSmartcardReader(params object[] args)
-        {
-            //Pause game world
-            //Fade out player camera
-            //Switch viewport to SmartcardWorld camera
-            //Fade in SmartcardWorld camera
-            //Start printing text at screen
-            //Wait 
-
-        }
-
 
         #endregion Public Methods
 
@@ -115,27 +120,34 @@ namespace OpenBreed.Sandbox.Worlds
         {
             builder.AddSystem(systemFactory.Create<AnimatorSystem>());
             builder.AddSystem(systemFactory.Create<SpriteSystem>());
+            builder.AddSystem(systemFactory.Create<PictureSystem>());
             builder.AddSystem(systemFactory.Create<TextSystem>());
+        }
 
+        private void PerformShowSmartcardReader(params object[] args)
+        {
+            //Pause game world
+            //Fade out player camera
+            //Switch viewport to SmartcardWorld camera
+            //Fade in SmartcardWorld camera
+            //Start printing text at screen
+            //Wait
         }
 
         private void Setup(World world)
         {
+            var entryId = "Texts.MAP.01.NOT1";
+
+            var model = textsDataProvider.GetText(entryId);
+
             var smartCardCamera = cameraHelper.CreateCamera("Camera.SmartcardReader", 0, 0, 320, 240);
 
             triggerMan.OnWorldInitialized(world, () =>
             {
                 smartCardCamera.EnterWorld(world.Id);
-
-                //var p2KeysCounter = hudHelper.CreateHudElement("KeysCounter", "P2.KeysCounter", 128, -117);
-                //p2KeysCounter.EnterWorld(world.Id);
-
-                //var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
-                //hudViewport.SetViewportCamera(smartCardCamera.Id);
-
+                AddBackground(world, 0, 0);
+                AddText(world, model.Text, - 320 / 2 + 20 , 240 / 2 - 38 - 16);
             }, singleTime: true);
-
-
         }
 
         #endregion Private Methods

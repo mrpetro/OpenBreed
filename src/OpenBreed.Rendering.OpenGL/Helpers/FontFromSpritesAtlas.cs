@@ -30,6 +30,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             Id = builder.Id;
             atlasId = builder.AtlasId;
             Lookup = builder.Lookup;
+            Height = builder.Height;
         }
 
         #endregion Internal Constructors
@@ -117,7 +118,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Draw(string text, Box2 clipBox)
         {
-            var posX = 0.0f;
+            var caretPosX = 0.0f;
+            var caretPosY = 0.0f;
 
             for (int i = 0; i < text.Length; i++)
             {
@@ -128,9 +130,23 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 var w = data.Item3;
                 var h = data.Item4;
 
-                spriteRenderer.Render(new Vector3(posX, 0, 100), new Vector2(w, h), atlasId, spriteIndex);
+                switch (ch)
+                {
+                    case '\r':
+                        //primitiveRenderer.Translate(-caretPosX, 0.0f, 0.0f);
+                        caretPosX = 0.0f;
+                        continue;
+                    case '\n':
+                        caretPosY -= Height;
+                        //primitiveRenderer.Translate(0.0f, Height, 0.0f);
+                        continue;
+                    default:
+                        break;
+                }
 
-                posX += w;
+                spriteRenderer.Render(new Vector3(caretPosX, caretPosY, 100), new Vector2(w, h), atlasId, spriteIndex);
+
+                caretPosX += w;
             }
         }
 

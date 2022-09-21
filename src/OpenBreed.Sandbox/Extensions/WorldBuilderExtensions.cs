@@ -45,6 +45,7 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<StampSystem>());
             builder.AddSystem(systemFactory.Create<TileSystem>());
             builder.AddSystem(systemFactory.Create<SpriteSystem>());
+            builder.AddSystem(systemFactory.Create<PictureSystem>());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(systemFactory.Create<TextSystem>());
 

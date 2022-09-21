@@ -11,6 +11,12 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
     {
         #region Public Methods
 
+        public static void SetBrightness(this Entity entity, float brightness)
+        {
+            var cameraComponent = entity.Get<CameraComponent>();
+            cameraComponent.Brightness = brightness;
+        }
+
         public static void SetText(this Entity entity, int textPartId, string text)
         {
             var textCmp = entity.Get<TextComponent>();

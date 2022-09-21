@@ -6,27 +6,21 @@ using GL = OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    internal class SpriteRenderer : ISpriteRenderer
+    internal class PictureRenderer : IPictureRenderer
     {
         #region Private Fields
 
-        //private readonly uint[] indicesArray = {
-        //                                    0,1,2,
-        //                                    0,2,3
-        //                               };
-
-        // private readonly int ibo;
-        private readonly SpriteMan spriteMan;
+        private readonly PictureMan pictureMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteRenderer(SpriteMan spriteMan,
+        public PictureRenderer(PictureMan pictureMan,
                               IPrimitiveRenderer primitiveRenderer)
         {
-            this.spriteMan = spriteMan;
+            this.pictureMan = pictureMan;
             this.primitiveRenderer = primitiveRenderer;
         }
 
@@ -34,10 +28,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public void Render(Vector3 pos, Vector2 size, int atlasId, int imageId)
+        public void Render(Vector3 pos, Vector2 size, int imageId)
         {
-            var spriteAtlas = spriteMan.InternalGetById(atlasId);
-            var vbo = spriteAtlas.data[imageId].Vbo;
+            var picture = pictureMan.InternalGetById(imageId);
 
             primitiveRenderer.PushMatrix();
 
@@ -48,7 +41,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 //primitiveRenderer.DrawUnitBox(Matrix4.Identity, Color4.Red);
 
 
-                primitiveRenderer.DrawSprite(spriteAtlas.Texture, vbo, pos, size);
+                primitiveRenderer.DrawSprite(picture.Texture, picture.Vbo, pos, size);
 
                 //GL.GL.BindTexture(GL.TextureTarget.Texture2D, textureId);
                 //RenderTools.Draw(vbo, ibo, 6);

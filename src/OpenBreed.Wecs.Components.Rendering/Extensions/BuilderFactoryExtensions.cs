@@ -15,6 +15,7 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
     {
         public static void SetupRenderingComponents(this IBuilderFactory builderFactory, IServiceProvider serviceProvider)
         {
+            builderFactory.Register<PictureComponentBuilder>(() => new PictureComponentBuilder(serviceProvider.GetService<IPictureMan>()));
             builderFactory.Register<SpriteComponentBuilder>(() => new SpriteComponentBuilder(serviceProvider.GetService<ISpriteMan>()));
             builderFactory.Register<TextComponentBuilder>(() => new TextComponentBuilder(serviceProvider.GetService<IFontMan>()));
             builderFactory.Register<CameraComponentBuilder>(() => new CameraComponentBuilder());

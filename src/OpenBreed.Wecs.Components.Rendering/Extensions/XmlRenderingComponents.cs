@@ -12,6 +12,7 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
     {
         public static void Setup()
         {
+            XmlComponentsList.RegisterComponentType<XmlPictureComponent>();
             XmlComponentsList.RegisterComponentType<XmlSpriteComponent>();
             XmlComponentsList.RegisterComponentType<XmlTextComponent>();
             XmlComponentsList.RegisterComponentType<XmlViewportComponent>();

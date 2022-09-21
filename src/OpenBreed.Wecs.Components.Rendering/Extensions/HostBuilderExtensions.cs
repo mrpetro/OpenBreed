@@ -14,6 +14,7 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
+                services.AddSingleton<PictureComponentFactory>();
                 services.AddSingleton<SpriteComponentFactory>();
                 services.AddSingleton<ViewportComponentFactory>();
                 services.AddSingleton<TextComponentFactory>();
