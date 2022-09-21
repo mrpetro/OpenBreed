@@ -146,7 +146,7 @@ namespace OpenBreed.Sandbox.Worlds
             {
                 smartCardCamera.EnterWorld(world.Id);
                 AddBackground(world, 0, 0);
-                AddText(world, model.Text, - 320 / 2 + 20 , 240 / 2 - 38 - 16);
+                AddText(world, model.Text, - 320 / 2 + 20 , 240 / 2 - 38);
             }, singleTime: true);
         }
 

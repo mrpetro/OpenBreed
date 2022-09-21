@@ -133,18 +133,16 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 switch (ch)
                 {
                     case '\r':
-                        //primitiveRenderer.Translate(-caretPosX, 0.0f, 0.0f);
                         caretPosX = 0.0f;
                         continue;
                     case '\n':
                         caretPosY -= Height;
-                        //primitiveRenderer.Translate(0.0f, Height, 0.0f);
                         continue;
                     default:
                         break;
                 }
 
-                spriteRenderer.Render(new Vector3(caretPosX, caretPosY, 100), new Vector2(w, h), atlasId, spriteIndex);
+                spriteRenderer.Render(new Vector3(caretPosX, caretPosY - h, 100), new Vector2(w, h), atlasId, spriteIndex);
 
                 caretPosX += w;
             }
