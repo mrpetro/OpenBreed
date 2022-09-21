@@ -42,7 +42,7 @@
 		<ScriptRunner>
 			<Runs>
 				<Run>
-					<ScriptId>Vanilla/Common/Item/Pickup</ScriptId>
+					<ScriptId>Vanilla/Common/SmartCard/Show</ScriptId>
 					<TriggerName>ScriptRunTrigger</TriggerName>
 				</Run>
 			</Runs>

@@ -1,16 +1,21 @@
 ﻿-- Variable definitions
 local smartCardEntity, actorEntity = ...
-local cameraEntity
-local cameraFadeOutClipId;
-local cameraFadeInClipId;
+local gameCameraEntity = Entities:GetPlayerCamera(actorEntity)
+local smartCardReaderCameraEntity = Entities:GetSmartcardReaderCamera()
+local hudCameraEntity = Entities:GetHudCamera()
+local hudViewportEntity = Entities:GetHudViewport()
+local gameViewportEntity = Entities:GetGameViewport()
+local cameraFadeOutClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeOut").Id
+local cameraFadeInClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeIn").Id
 
 --functions
 local GameWorldPause
 local GameWorldFadeOut
 local SwitchViewToSmartCardWorld
-local SmartCardWorldUnpause
-local SmartCardWorldFadeIn
 local SmartCardWorldShowText
+local SmartCardWorldFadeOut
+local SwitchViewToGameWorld
+local GameWorldUnpause
 
 -- Functions
 
@@ -18,70 +23,82 @@ GameWorldPause = function()
     Logging:Info("Game world pause...")
 
 	Triggers:OnPausedWorld(
-        cameraEntity,
+        gameCameraEntity,
         GameWorldFadeOut,
         true)
 
-    cameraEntity:PauseWorld()
+    gameCameraEntity:PauseWorld()
 end
 
 GameWorldFadeOut = function(entity, args)
     Logging:Info("Game world fade out...")
 
     Triggers:OnEntityAnimFinished(
-        cameraEntity,                      
+        gameCameraEntity,                      
         SwitchViewToSmartCardWorld,
         true)
 
-    cameraEntity:PlayAnimation(0, cameraFadeOutClipId)
+    gameCameraEntity:PlayAnimation(0, cameraFadeOutClipId)
+
+    Logging:Info("gameCameraEntity: " .. tostring(gameCameraEntity.Id))
 end
 
 SwitchViewToSmartCardWorld = function(entity, args)
     Logging:Info("Switch view to smart card world camera...")
 
+    smartCardReaderCameraEntity:SetBrightness(0)
+    hudViewportEntity:SetViewportCamera(smartCardReaderCameraEntity.Id)
     --actorEntity:SetPosition(Entities, Shapes, smartCardEntity)
 
-    SmartCardWorldUnpause()
-end
+    Triggers:OnEntityAnimFinished(
+        smartCardReaderCameraEntity,                      
+        SmartCardWorldShowText,
+        true)
 
-SmartCardWorldUnpause = function(entity, args)
-    Logging:Info("Smart card world unpause...")
-
-    --actorEntity:SetPosition(Entities, Shapes, smartCardEntity)
-
-    SmartCardWorldFadeIn()
-end
-
-SmartCardWorldFadeIn = function(entity, args)
-    Logging:Info("Smart card world fade in...")
-
-    --actorEntity:SetPosition(Entities, Shapes, smartCardEntity)
-
-    SmartCardWorldShowText()
+    smartCardReaderCameraEntity:PlayAnimation(0, cameraFadeInClipId)
 end
 
 SmartCardWorldShowText = function(entity, args)
     Logging:Info("Smart card world show text...")
 
-    --actorEntity:SetPosition(Entities, Shapes, smartCardEntity)
-
+    --TODO: Show text here and wait for button
+    Triggers:AfterDelay(Commentator, TimeSpan.FromMilliseconds(2000), SmartCardWorldFadeOut)
 end
 
-WorldUnpause = function()
-    Logging:Info("WorldUnpause...")
 
-	Triggers:OnUnpausedWorld(
-        cameraEntity,
-        FadeIn,
+SmartCardWorldFadeOut = function(entity, args)
+    Logging:Info("Smart card world fade out...")
+
+    Triggers:OnEntityAnimFinished(
+        smartCardReaderCameraEntity,                      
+        SwitchViewToGameWorld,
         true)
 
-    cameraEntity:UnpauseWorld()
+    smartCardReaderCameraEntity:PlayAnimation(0, cameraFadeOutClipId)
 end
 
-FadeIn = function(entity, args)
-    Logging:Info("FadeIn...")
+SwitchViewToGameWorld = function(entity, args)
+    Logging:Info("Switch view to game world camera...")
 
-    cameraEntity:PlayAnimation(0, cameraFadeInClipId)
+    gameCameraEntity:SetBrightness(0)
+    hudViewportEntity:SetViewportCamera(hudCameraEntity.Id)
+    --actorEntity:SetPosition(Entities, Shapes, smartCardEntity)
+
+    Triggers:OnEntityAnimFinished(
+        gameCameraEntity,                      
+        GameWorldUnpause,
+        true)
+
+    gameCameraEntity:PlayAnimation(0, cameraFadeInClipId)
+end
+
+
+GameWorldUnpause = function()
+    Logging:Info("GameWorldUnpause...")
+
+    actorEntity.State = nil
+
+    gameCameraEntity:UnpauseWorld()
 end
 
 -- Execution
@@ -89,25 +106,20 @@ end
 --Logging:Info("TeleportEntityId:" .. tostring(smartCardEntity.Id) .. "(" .. smartCardEntity.Tag .. ")")
 --Logging:Info("ActorEntityId:" .. tostring(actorEntity.Id) .. "(" .. actorEntity.Tag .. ")")
 
-if (tostring(actorEntity.State) == "Teleporting")
+if (tostring(actorEntity.State) == "SmartCardReading")
 then
 	return
 end
 
-actorEntity.State = "Teleporting"
+actorEntity.State = "SmartCardReading"
 
-cameraEntity = Entities:GetPlayerCamera(actorEntity)
-
-if (cameraEntity == nil)
+if (gameCameraEntity == nil)
 then
 	return
 end
 
-
-cameraFadeOutClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeOut").Id;
-cameraFadeInClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeIn").Id;
-
-GameWorldPause(); 
+smartCardEntity:Destroy()
+GameWorldPause()
 
 
 

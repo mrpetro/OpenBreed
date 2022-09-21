@@ -7,6 +7,7 @@ Logging:Info("ActorEntityId:" .. tostring(actorEntity.Id))
 
 local itemName
 
+
 if(metaData.Option == nil)
 then
     itemName = tostring(metaData.Name)
