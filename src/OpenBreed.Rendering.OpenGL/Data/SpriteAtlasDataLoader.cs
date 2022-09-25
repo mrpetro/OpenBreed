@@ -99,9 +99,18 @@ namespace OpenBreed.Rendering.OpenGL.Data
             //Create a BitmapData and Lock all pixels to be written
             var bmpData = bitmap.LockBits(new Rectangle(0, 0, width, height),
                                                     ImageLockMode.WriteOnly, bitmap.PixelFormat);
+            
+            //Copy the data from the byte array into BitmapData.Scan0    
+            IntPtr ptr = bmpData.Scan0;
+            for (int y = 0; y < height; y++)
+            {
+                int ptrOffset = y * bmpData.Stride;
 
-            //Copy the data from the byte array into BitmapData.Scan0
-            Marshal.Copy(data, 0, bmpData.Scan0, data.Length);
+                int lineBytes = width;
+                int bufferOffset = y * lineBytes;
+
+                Marshal.Copy(data, bufferOffset, ptr + ptrOffset, lineBytes);
+            }
 
             //Unlock the pixels
             bitmap.UnlockBits(bmpData);
