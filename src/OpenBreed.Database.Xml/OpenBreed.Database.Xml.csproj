@@ -106,7 +106,7 @@
     <Content Include="Vanilla\ABTA\Templates\Common\MonsterEating.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardBackground.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderBackground.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderText.xml">

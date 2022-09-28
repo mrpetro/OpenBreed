@@ -2,6 +2,8 @@
 local smartCardEntity, actorEntity = ...
 local gameCameraEntity = Entities:GetPlayerCamera(actorEntity)
 local smartCardReaderCameraEntity = Entities:GetSmartcardReaderCamera()
+local smartCardReaderTextEntity = Entities:GetSmartCardReaderText()
+local gameWorld = Worlds:GetWorld(smartCardEntity);
 local hudCameraEntity = Entities:GetHudCamera()
 local hudViewportEntity = Entities:GetHudViewport()
 local gameViewportEntity = Entities:GetGameViewport()
@@ -62,6 +64,8 @@ SmartCardWorldShowText = function(entity, args)
     Logging:Info("Smart card world show text...")
 
     --TODO: Show text here and wait for button
+
+    --Triggers:AnyKeyPressed(actorEntity, SmartCardWorldFadeOut)
     Triggers:AfterDelay(Commentator, TimeSpan.FromMilliseconds(2000), SmartCardWorldFadeOut)
 end
 
@@ -118,7 +122,17 @@ then
 	return
 end
 
+local smartCardMetadata = smartCardEntity:GetMetadata()
+
+local textId = gameWorld.Name .. "/" .. smartCardMetadata.Name .. tostring(smartCardMetadata.Option)
+Logging:Info("Text Id: " .. textId)
+
+local text = Texts:GetTextString(textId);
+
+smartCardReaderTextEntity:SetText(0, text);
+
 smartCardEntity:Destroy()
+
 GameWorldPause()
 
 

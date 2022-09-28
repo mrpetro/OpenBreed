@@ -11004,20 +11004,964 @@
 		</Palettes>
 		<Texts>
 			<Items>
-				<TextFromMAP Id="Texts.MAP.01.MTXT">
+				<TextFromMAP Id="Vanilla/1/MTXT">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Texts.MAP.01.NOT1">
+				<TextFromMAP Id="Vanilla/1/SmartCard1">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Texts.MAP.01.NOT2">
+				<TextFromMAP Id="Vanilla/1/SmartCard2">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Texts.MAP.01.NOT3">
+				<TextFromMAP Id="Vanilla/1/SmartCard3">
 					<DataRef>Assets.MAP.01</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/MTXT">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/LCTX">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/SmartCard1">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/SmartCard2">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/SmartCard3">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/MTXT">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/LCTX">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/SmartCard1">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/SmartCard2">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/SmartCard3">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/MTXT">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/LCTX">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/SmartCard1">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/SmartCard2">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/SmartCard3">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/MTXT">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/LCTX">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/SmartCard1">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/SmartCard2">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/SmartCard3">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/MTXT">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/LCTX">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/SmartCard1">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/SmartCard2">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/SmartCard3">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/6/MTXT">
+					<DataRef>Assets.MAP.06</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/6/SmartCard1">
+					<DataRef>Assets.MAP.06</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/6/SmartCard2">
+					<DataRef>Assets.MAP.06</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/6/SmartCard3">
+					<DataRef>Assets.MAP.06</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/MTXT">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/LCTX">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/SmartCard1">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/SmartCard2">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/SmartCard3">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/MTXT">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/LCTX">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/SmartCard1">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/SmartCard2">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/SmartCard3">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/MTXT">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/LCTX">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/SmartCard1">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/SmartCard2">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/SmartCard3">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/MTXT">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/LCTX">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/SmartCard1">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/SmartCard2">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/SmartCard3">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/11/MTXT">
+					<DataRef>Assets.MAP.11</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/11/SmartCard1">
+					<DataRef>Assets.MAP.11</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/11/SmartCard2">
+					<DataRef>Assets.MAP.11</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/11/SmartCard3">
+					<DataRef>Assets.MAP.11</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/MTXT">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/LCTX">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/SmartCard1">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/SmartCard2">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/SmartCard3">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/MTXT">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/LCTX">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/SmartCard1">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/SmartCard2">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/SmartCard3">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/MTXT">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/LCTX">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/SmartCard1">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/SmartCard2">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/SmartCard3">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/MTXT">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/LCTX">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/SmartCard1">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/SmartCard2">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/SmartCard3">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/MTXT">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/LCTX">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/SmartCard1">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/SmartCard2">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/SmartCard3">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/MTXT">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/LCTX">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/SmartCard1">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/SmartCard2">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/SmartCard3">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/MTXT">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/LCTX">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/SmartCard1">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/SmartCard2">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/SmartCard3">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/MTXT">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/LCTX">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/SmartCard1">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/SmartCard2">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/SmartCard3">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/MTXT">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/LCTX">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/SmartCard1">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/SmartCard2">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/SmartCard3">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/MTXT">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/LCTX">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/SmartCard1">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/SmartCard2">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/SmartCard3">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/MTXT">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/LCTX">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/SmartCard1">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/SmartCard2">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/SmartCard3">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/23/MTXT">
+					<DataRef>Assets.Map.23</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/23/LCTX">
+					<DataRef>Assets.Map.23</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/23/SmartCard1">
+					<DataRef>Assets.Map.23</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/MTXT">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/LCTX">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/SmartCard1">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/SmartCard2">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/SmartCard3">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/MTXT">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/LCTX">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/SmartCard1">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/SmartCard2">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/SmartCard3">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/MTXT">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/LCTX">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/SmartCard1">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/SmartCard2">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/SmartCard3">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/MTXT">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/LCTX">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/SmartCard1">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/SmartCard2">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/SmartCard3">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/MTXT">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/LCTX">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/SmartCard1">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/SmartCard2">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/SmartCard3">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/MTXT">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/LCTX">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/SmartCard1">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/SmartCard2">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/SmartCard3">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/30/MTXT">
+					<DataRef>Assets.Map.30</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/30/SmartCard3">
+					<DataRef>Assets.Map.30</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/MTXT">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/LCTX">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/SmartCard1">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/SmartCard2">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/SmartCard3">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/MTXT">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/LCTX">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/SmartCard1">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/SmartCard2">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/SmartCard3">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/MTXT">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/LCTX">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/SmartCard1">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/SmartCard2">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/SmartCard3">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/MTXT">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/LCTX">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/SmartCard1">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/SmartCard2">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/SmartCard3">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/35/MTXT">
+					<DataRef>Assets.Map.35</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/35/SmartCard3">
+					<DataRef>Assets.Map.35</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/36/MTXT">
+					<DataRef>Assets.Map.36</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/36/SmartCard3">
+					<DataRef>Assets.Map.36</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/37/MTXT">
+					<DataRef>Assets.Map.37</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/37/SmartCard3">
+					<DataRef>Assets.Map.37</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/38/MTXT">
+					<DataRef>Assets.Map.38</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/38/SmartCard3">
+					<DataRef>Assets.Map.38</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/39/MTXT">
+					<DataRef>Assets.Map.39</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/39/SmartCard3">
+					<DataRef>Assets.Map.39</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/40/MTXT">
+					<DataRef>Assets.Map.40</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/40/SmartCard3">
+					<DataRef>Assets.Map.40</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/41/MTXT">
+					<DataRef>Assets.Map.41</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/41/SmartCard3">
+					<DataRef>Assets.Map.41</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/42/MTXT">
+					<DataRef>Assets.Map.42</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/42/SmartCard3">
+					<DataRef>Assets.Map.42</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/43/MTXT">
+					<DataRef>Assets.Map.43</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/43/SmartCard3">
+					<DataRef>Assets.Map.43</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/MTXT">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/LCTX">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/SmartCard1">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/SmartCard2">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/SmartCard3">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/MTXT">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/LCTX">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/SmartCard1">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/SmartCard2">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/SmartCard3">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/MTXT">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/LCTX">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/SmartCard1">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/SmartCard2">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/SmartCard3">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/47/MTXT">
+					<DataRef>Assets.Map.47</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/47/LCTX">
+					<DataRef>Assets.Map.47</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/47/SmartCard1">
+					<DataRef>Assets.Map.47</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/47/SmartCard2">
+					<DataRef>Assets.Map.47</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/MTXT">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/LCTX">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/SmartCard1">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/SmartCard2">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/SmartCard3">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/MTXT">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/LCTX">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/SmartCard1">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/SmartCard2">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/SmartCard3">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/MTXT">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/LCTX">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/SmartCard1">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/SmartCard2">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/SmartCard3">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/MTXT">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/LCTX">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/SmartCard1">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/SmartCard2">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/SmartCard3">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/MTXT">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/LCTX">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/SmartCard1">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/SmartCard2">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/SmartCard3">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/MTXT">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/LCTX">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/SmartCard1">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/SmartCard2">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/SmartCard3">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/54/MTXT">
+					<DataRef>Assets.Map.54</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/MTXT">
+					<DataRef>Assets.Map.55</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/LCTX">
+					<DataRef>Assets.Map.55</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/SmartCard1">
+					<DataRef>Assets.Map.55</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/SmartCard2">
+					<DataRef>Assets.Map.55</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/SmartCard3">
+					<DataRef>Assets.Map.55</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
 			</Items>
