@@ -155,6 +155,8 @@ namespace OpenBreed.Sandbox
                 scriptMan.Expose("Clips", sp.GetService<IClipMan<Entity>>());
                 scriptMan.Expose("Shapes", sp.GetService<IShapeMan>());
                 scriptMan.Expose("Items", sp.GetService<ItemsMan>());
+                scriptMan.Expose("Texts", sp.GetService<TextsDataProvider>());
+                scriptMan.Expose("Inputs", sp.GetService<IInputsMan>());
 
                 var res = scriptMan.RunString(@"import('System')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
@@ -164,7 +166,8 @@ namespace OpenBreed.Sandbox
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Rendering', 'OpenBreed.Wecs.Systems.Rendering.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Animation', 'OpenBreed.Wecs.Systems.Animation.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Physics', 'OpenBreed.Wecs.Systems.Physics.Extensions')");
-                
+                res = scriptMan.RunString(@"import('OpenBreed.Common', 'OpenBreed.Common.Extensions')");
+
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
             });
 
@@ -619,24 +622,24 @@ namespace OpenBreed.Sandbox
 
             debugHudWorldHelper.Create();
 
-            //LoadGameWorld();
+            LoadGameWorld();
 
             gameHudWorldHelper.Create();
 
             gameSmartcardWorldHelper.Create();
 
 
-            var hudWorld = worldMan.GetByName("GameHUD");
+            //var hudWorld = worldMan.GetByName("GameHUD");
 
-            triggerMan.OnWorldInitialized(hudWorld, () =>
-            {
-                var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.SmartcardReader").First();
+            //triggerMan.OnWorldInitialized(hudWorld, () =>
+            //{
+            //    var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.SmartcardReader").First();
 
-                var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
-                gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
+            //    var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
+            //    gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
 
 
-            }, singleTime: true);
+            //}, singleTime: true);
 
             OnEngineInitialized();
         }

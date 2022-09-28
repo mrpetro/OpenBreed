@@ -81,23 +81,23 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void AddBackground(World world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardBackground.xml")
+            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderBackground.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
+                .SetTag("SmartCardReader/Background")
                 .Build();
 
             timer.EnterWorld(world.Id);
         }
 
-        public void AddText(World world, string text, int x, int y)
+        public void AddText(World world, int x, int y)
         {
             var textEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderText.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
+                .SetTag("SmartCardReader/Text")
                 .Build();
-
-
-            textEntity.SetText(0, text);
+            textEntity.SetText(0, string.Empty);
             textEntity.EnterWorld(world.Id);
         }
 
@@ -136,9 +136,9 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(World world)
         {
-            var entryId = "Texts.MAP.01.NOT1";
+            //var entryId = "Texts.MAP.01.NOT1";
 
-            var model = textsDataProvider.GetText(entryId);
+            //var model = textsDataProvider.GetText(entryId);
 
             var smartCardCamera = cameraHelper.CreateCamera("Camera.SmartcardReader", 0, 0, 320, 240);
 
@@ -146,7 +146,7 @@ namespace OpenBreed.Sandbox.Worlds
             {
                 smartCardCamera.EnterWorld(world.Id);
                 AddBackground(world, 0, 0);
-                AddText(world, model.Text, - 320 / 2 + 20 , 240 / 2 - 38);
+                AddText(world, - 320 / 2 + 20 , 240 / 2 - 38);
             }, singleTime: true);
         }
 

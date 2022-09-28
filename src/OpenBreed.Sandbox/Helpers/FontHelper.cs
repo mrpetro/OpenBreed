@@ -50,9 +50,16 @@ namespace OpenBreed.Sandbox.Helpers
             //Load common sprites
             var dbStatusBarSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById("Vanilla/Common/Computer/Font");
 
-            var spriteSet = spriteAtlasDataProvider.GetSpriteSet(dbStatusBarSpriteAtlas.Id);
+            //var paletteModel = GetPaletteModel("GameWorld/Palette/CMAP");
+            var paletteBuilder = PaletteBuilder.NewPaletteModel();
 
-            var paletteModel = GetPaletteModel("GameWorld/Palette/CMAP");
+            for (int i = 1; i < 256; i++)
+            {
+                paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(0, 170, 170));
+            }
+
+            var paletteModel = paletteBuilder.Build();
+
             var spriteAtlas = loader.Load(dbStatusBarSpriteAtlas.Id, paletteModel);
 
             //Create FontAtlas

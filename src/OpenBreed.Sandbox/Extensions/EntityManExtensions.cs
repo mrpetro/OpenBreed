@@ -11,6 +11,11 @@ namespace OpenBreed.Sandbox.Extensions
 {
     public static class EntityManExtensions
     {
+        public static Entity GetSmartCardReaderText(this IEntityMan entityMan)
+        {
+            return entityMan.GetByTag("SmartCardReader/Text").FirstOrDefault();
+        }
+
         public static Entity GetHudCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.GameHud").FirstOrDefault();

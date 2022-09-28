@@ -42,18 +42,18 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            var johnEntity = entityMan.GetByTag("John").FirstOrDefault();
+            //var johnEntity = entityMan.GetByTag("John").FirstOrDefault();
 
-            if (johnEntity == null)
-                return;
+            //if (johnEntity == null)
+            //    return;
 
-            var playerPos = johnEntity.Get<PositionComponent>();
+            //var playerPos = johnEntity.Get<PositionComponent>();
 
-            var pos = playerPos.Value;
-            var indexPosX = (int)pos.X / 16;
-            var indexPosY = (int)pos.Y / 16;
+            //var pos = playerPos.Value;
+            //var indexPosX = (int)pos.X / 16;
+            //var indexPosY = (int)pos.Y / 16;
 
-            entity.SetText(0, $"Player Pos: ({pos.X.ToString("0.00", CultureInfo.InvariantCulture)},{pos.Y.ToString("0.00", CultureInfo.InvariantCulture)}) ({indexPosX}, {indexPosY})");
+            //entity.SetText(0, $"Player Pos: ({pos.X.ToString("0.00", CultureInfo.InvariantCulture)},{pos.Y.ToString("0.00", CultureInfo.InvariantCulture)}) ({indexPosX}, {indexPosY})");
         }
 
         public void Dispose()
