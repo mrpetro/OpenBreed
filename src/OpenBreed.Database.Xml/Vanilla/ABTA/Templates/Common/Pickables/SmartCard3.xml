@@ -3,7 +3,7 @@
 	<Components>
 		<Metadata>
 			<Level>$(level)</Level>
-			<Name>SmartCard</Name>
+			<Name>NOT</Name>
 			<Option>3</Option>
 			<Flavor>$(flavor)</Flavor>
 		</Metadata>

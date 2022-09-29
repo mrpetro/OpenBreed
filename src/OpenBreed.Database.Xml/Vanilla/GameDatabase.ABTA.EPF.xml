@@ -11008,15 +11008,15 @@
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/1/SmartCard1">
+				<TextFromMAP Id="Vanilla/1/NOT1">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/1/SmartCard2">
+				<TextFromMAP Id="Vanilla/1/NOT2">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/1/SmartCard3">
+				<TextFromMAP Id="Vanilla/1/NOT3">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11028,15 +11028,15 @@
 					<DataRef>Assets.MAP.02</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/2/SmartCard1">
+				<TextFromMAP Id="Vanilla/2/NOT1">
 					<DataRef>Assets.MAP.02</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/2/SmartCard2">
+				<TextFromMAP Id="Vanilla/2/NOT2">
 					<DataRef>Assets.MAP.02</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/2/SmartCard3">
+				<TextFromMAP Id="Vanilla/2/NOT3">
 					<DataRef>Assets.MAP.02</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11048,15 +11048,15 @@
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/3/SmartCard1">
+				<TextFromMAP Id="Vanilla/3/NOT1">
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/3/SmartCard2">
+				<TextFromMAP Id="Vanilla/3/NOT2">
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/3/SmartCard3">
+				<TextFromMAP Id="Vanilla/3/NOT3">
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11068,15 +11068,15 @@
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/3/SmartCard1">
+				<TextFromMAP Id="Vanilla/3/NOT1">
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/3/SmartCard2">
+				<TextFromMAP Id="Vanilla/3/NOT2">
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/3/SmartCard3">
+				<TextFromMAP Id="Vanilla/3/NOT3">
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11088,15 +11088,15 @@
 					<DataRef>Assets.MAP.04</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/4/SmartCard1">
+				<TextFromMAP Id="Vanilla/4/NOT1">
 					<DataRef>Assets.MAP.04</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/4/SmartCard2">
+				<TextFromMAP Id="Vanilla/4/NOT2">
 					<DataRef>Assets.MAP.04</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/4/SmartCard3">
+				<TextFromMAP Id="Vanilla/4/NOT3">
 					<DataRef>Assets.MAP.04</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11108,15 +11108,15 @@
 					<DataRef>Assets.MAP.05</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/5/SmartCard1">
+				<TextFromMAP Id="Vanilla/5/NOT1">
 					<DataRef>Assets.MAP.05</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/5/SmartCard2">
+				<TextFromMAP Id="Vanilla/5/NOT2">
 					<DataRef>Assets.MAP.05</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/5/SmartCard3">
+				<TextFromMAP Id="Vanilla/5/NOT3">
 					<DataRef>Assets.MAP.05</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11124,15 +11124,15 @@
 					<DataRef>Assets.MAP.06</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/6/SmartCard1">
+				<TextFromMAP Id="Vanilla/6/NOT1">
 					<DataRef>Assets.MAP.06</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/6/SmartCard2">
+				<TextFromMAP Id="Vanilla/6/NOT2">
 					<DataRef>Assets.MAP.06</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/6/SmartCard3">
+				<TextFromMAP Id="Vanilla/6/NOT3">
 					<DataRef>Assets.MAP.06</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11144,15 +11144,15 @@
 					<DataRef>Assets.MAP.07</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/7/SmartCard1">
+				<TextFromMAP Id="Vanilla/7/NOT1">
 					<DataRef>Assets.MAP.07</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/7/SmartCard2">
+				<TextFromMAP Id="Vanilla/7/NOT2">
 					<DataRef>Assets.MAP.07</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/7/SmartCard3">
+				<TextFromMAP Id="Vanilla/7/NOT3">
 					<DataRef>Assets.MAP.07</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11164,15 +11164,15 @@
 					<DataRef>Assets.MAP.08</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/8/SmartCard1">
+				<TextFromMAP Id="Vanilla/8/NOT1">
 					<DataRef>Assets.MAP.08</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/8/SmartCard2">
+				<TextFromMAP Id="Vanilla/8/NOT2">
 					<DataRef>Assets.MAP.08</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/8/SmartCard3">
+				<TextFromMAP Id="Vanilla/8/NOT3">
 					<DataRef>Assets.MAP.08</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11184,15 +11184,15 @@
 					<DataRef>Assets.MAP.09</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/9/SmartCard1">
+				<TextFromMAP Id="Vanilla/9/NOT1">
 					<DataRef>Assets.MAP.09</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/9/SmartCard2">
+				<TextFromMAP Id="Vanilla/9/NOT2">
 					<DataRef>Assets.MAP.09</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/9/SmartCard3">
+				<TextFromMAP Id="Vanilla/9/NOT3">
 					<DataRef>Assets.MAP.09</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11204,15 +11204,15 @@
 					<DataRef>Assets.MAP.10</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/10/SmartCard1">
+				<TextFromMAP Id="Vanilla/10/NOT1">
 					<DataRef>Assets.MAP.10</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/10/SmartCard2">
+				<TextFromMAP Id="Vanilla/10/NOT2">
 					<DataRef>Assets.MAP.10</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/10/SmartCard3">
+				<TextFromMAP Id="Vanilla/10/NOT3">
 					<DataRef>Assets.MAP.10</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11220,15 +11220,15 @@
 					<DataRef>Assets.MAP.11</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/11/SmartCard1">
+				<TextFromMAP Id="Vanilla/11/NOT1">
 					<DataRef>Assets.MAP.11</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/11/SmartCard2">
+				<TextFromMAP Id="Vanilla/11/NOT2">
 					<DataRef>Assets.MAP.11</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/11/SmartCard3">
+				<TextFromMAP Id="Vanilla/11/NOT3">
 					<DataRef>Assets.MAP.11</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11240,15 +11240,15 @@
 					<DataRef>Assets.MAP.12</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/12/SmartCard1">
+				<TextFromMAP Id="Vanilla/12/NOT1">
 					<DataRef>Assets.MAP.12</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/12/SmartCard2">
+				<TextFromMAP Id="Vanilla/12/NOT2">
 					<DataRef>Assets.MAP.12</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/12/SmartCard3">
+				<TextFromMAP Id="Vanilla/12/NOT3">
 					<DataRef>Assets.MAP.12</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11260,15 +11260,15 @@
 					<DataRef>Assets.MAP.13</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/13/SmartCard1">
+				<TextFromMAP Id="Vanilla/13/NOT1">
 					<DataRef>Assets.MAP.13</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/13/SmartCard2">
+				<TextFromMAP Id="Vanilla/13/NOT2">
 					<DataRef>Assets.MAP.13</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/13/SmartCard3">
+				<TextFromMAP Id="Vanilla/13/NOT3">
 					<DataRef>Assets.MAP.13</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11280,15 +11280,15 @@
 					<DataRef>Assets.MAP.14</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/14/SmartCard1">
+				<TextFromMAP Id="Vanilla/14/NOT1">
 					<DataRef>Assets.MAP.14</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/14/SmartCard2">
+				<TextFromMAP Id="Vanilla/14/NOT2">
 					<DataRef>Assets.MAP.14</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/14/SmartCard3">
+				<TextFromMAP Id="Vanilla/14/NOT3">
 					<DataRef>Assets.MAP.14</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11300,15 +11300,15 @@
 					<DataRef>Assets.MAP.15</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/15/SmartCard1">
+				<TextFromMAP Id="Vanilla/15/NOT1">
 					<DataRef>Assets.MAP.15</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/15/SmartCard2">
+				<TextFromMAP Id="Vanilla/15/NOT2">
 					<DataRef>Assets.MAP.15</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/15/SmartCard3">
+				<TextFromMAP Id="Vanilla/15/NOT3">
 					<DataRef>Assets.MAP.15</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11320,15 +11320,15 @@
 					<DataRef>Assets.MAP.16</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/16/SmartCard1">
+				<TextFromMAP Id="Vanilla/16/NOT1">
 					<DataRef>Assets.MAP.16</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/16/SmartCard2">
+				<TextFromMAP Id="Vanilla/16/NOT2">
 					<DataRef>Assets.MAP.16</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/16/SmartCard3">
+				<TextFromMAP Id="Vanilla/16/NOT3">
 					<DataRef>Assets.MAP.16</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11340,15 +11340,15 @@
 					<DataRef>Assets.MAP.17</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/17/SmartCard1">
+				<TextFromMAP Id="Vanilla/17/NOT1">
 					<DataRef>Assets.MAP.17</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/17/SmartCard2">
+				<TextFromMAP Id="Vanilla/17/NOT2">
 					<DataRef>Assets.MAP.17</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/17/SmartCard3">
+				<TextFromMAP Id="Vanilla/17/NOT3">
 					<DataRef>Assets.MAP.17</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11360,15 +11360,15 @@
 					<DataRef>Assets.MAP.18</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/18/SmartCard1">
+				<TextFromMAP Id="Vanilla/18/NOT1">
 					<DataRef>Assets.MAP.18</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/18/SmartCard2">
+				<TextFromMAP Id="Vanilla/18/NOT2">
 					<DataRef>Assets.MAP.18</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/18/SmartCard3">
+				<TextFromMAP Id="Vanilla/18/NOT3">
 					<DataRef>Assets.MAP.18</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11380,15 +11380,15 @@
 					<DataRef>Assets.MAP.19</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/19/SmartCard1">
+				<TextFromMAP Id="Vanilla/19/NOT1">
 					<DataRef>Assets.MAP.19</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/19/SmartCard2">
+				<TextFromMAP Id="Vanilla/19/NOT2">
 					<DataRef>Assets.MAP.19</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/19/SmartCard3">
+				<TextFromMAP Id="Vanilla/19/NOT3">
 					<DataRef>Assets.MAP.19</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11400,15 +11400,15 @@
 					<DataRef>Assets.Map.20</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/20/SmartCard1">
+				<TextFromMAP Id="Vanilla/20/NOT1">
 					<DataRef>Assets.Map.20</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/20/SmartCard2">
+				<TextFromMAP Id="Vanilla/20/NOT2">
 					<DataRef>Assets.Map.20</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/20/SmartCard3">
+				<TextFromMAP Id="Vanilla/20/NOT3">
 					<DataRef>Assets.Map.20</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11420,15 +11420,15 @@
 					<DataRef>Assets.Map.21</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/21/SmartCard1">
+				<TextFromMAP Id="Vanilla/21/NOT1">
 					<DataRef>Assets.Map.21</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/21/SmartCard2">
+				<TextFromMAP Id="Vanilla/21/NOT2">
 					<DataRef>Assets.Map.21</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/21/SmartCard3">
+				<TextFromMAP Id="Vanilla/21/NOT3">
 					<DataRef>Assets.Map.21</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11440,15 +11440,15 @@
 					<DataRef>Assets.Map.22</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/22/SmartCard1">
+				<TextFromMAP Id="Vanilla/22/NOT1">
 					<DataRef>Assets.Map.22</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/22/SmartCard2">
+				<TextFromMAP Id="Vanilla/22/NOT2">
 					<DataRef>Assets.Map.22</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/22/SmartCard3">
+				<TextFromMAP Id="Vanilla/22/NOT3">
 					<DataRef>Assets.Map.22</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11460,7 +11460,7 @@
 					<DataRef>Assets.Map.23</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/23/SmartCard1">
+				<TextFromMAP Id="Vanilla/23/NOT1">
 					<DataRef>Assets.Map.23</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
@@ -11472,15 +11472,15 @@
 					<DataRef>Assets.Map.24</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/24/SmartCard1">
+				<TextFromMAP Id="Vanilla/24/NOT1">
 					<DataRef>Assets.Map.24</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/24/SmartCard2">
+				<TextFromMAP Id="Vanilla/24/NOT2">
 					<DataRef>Assets.Map.24</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/24/SmartCard3">
+				<TextFromMAP Id="Vanilla/24/NOT3">
 					<DataRef>Assets.Map.24</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11492,15 +11492,15 @@
 					<DataRef>Assets.Map.25</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/25/SmartCard1">
+				<TextFromMAP Id="Vanilla/25/NOT1">
 					<DataRef>Assets.Map.25</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/25/SmartCard2">
+				<TextFromMAP Id="Vanilla/25/NOT2">
 					<DataRef>Assets.Map.25</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/25/SmartCard3">
+				<TextFromMAP Id="Vanilla/25/NOT3">
 					<DataRef>Assets.Map.25</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11512,15 +11512,15 @@
 					<DataRef>Assets.Map.26</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/26/SmartCard1">
+				<TextFromMAP Id="Vanilla/26/NOT1">
 					<DataRef>Assets.Map.26</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/26/SmartCard2">
+				<TextFromMAP Id="Vanilla/26/NOT2">
 					<DataRef>Assets.Map.26</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/26/SmartCard3">
+				<TextFromMAP Id="Vanilla/26/NOT3">
 					<DataRef>Assets.Map.26</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11532,15 +11532,15 @@
 					<DataRef>Assets.Map.27</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/27/SmartCard1">
+				<TextFromMAP Id="Vanilla/27/NOT1">
 					<DataRef>Assets.Map.27</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/27/SmartCard2">
+				<TextFromMAP Id="Vanilla/27/NOT2">
 					<DataRef>Assets.Map.27</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/27/SmartCard3">
+				<TextFromMAP Id="Vanilla/27/NOT3">
 					<DataRef>Assets.Map.27</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11552,15 +11552,15 @@
 					<DataRef>Assets.Map.28</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/28/SmartCard1">
+				<TextFromMAP Id="Vanilla/28/NOT1">
 					<DataRef>Assets.Map.28</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/28/SmartCard2">
+				<TextFromMAP Id="Vanilla/28/NOT2">
 					<DataRef>Assets.Map.28</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/28/SmartCard3">
+				<TextFromMAP Id="Vanilla/28/NOT3">
 					<DataRef>Assets.Map.28</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11572,15 +11572,15 @@
 					<DataRef>Assets.Map.29</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/29/SmartCard1">
+				<TextFromMAP Id="Vanilla/29/NOT1">
 					<DataRef>Assets.Map.29</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/29/SmartCard2">
+				<TextFromMAP Id="Vanilla/29/NOT2">
 					<DataRef>Assets.Map.29</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/29/SmartCard3">
+				<TextFromMAP Id="Vanilla/29/NOT3">
 					<DataRef>Assets.Map.29</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11588,7 +11588,7 @@
 					<DataRef>Assets.Map.30</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/30/SmartCard3">
+				<TextFromMAP Id="Vanilla/30/NOT3">
 					<DataRef>Assets.Map.30</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11600,15 +11600,15 @@
 					<DataRef>Assets.Map.31</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/31/SmartCard1">
+				<TextFromMAP Id="Vanilla/31/NOT1">
 					<DataRef>Assets.Map.31</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/31/SmartCard2">
+				<TextFromMAP Id="Vanilla/31/NOT2">
 					<DataRef>Assets.Map.31</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/31/SmartCard3">
+				<TextFromMAP Id="Vanilla/31/NOT3">
 					<DataRef>Assets.Map.31</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11620,15 +11620,15 @@
 					<DataRef>Assets.Map.32</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/32/SmartCard1">
+				<TextFromMAP Id="Vanilla/32/NOT1">
 					<DataRef>Assets.Map.32</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/32/SmartCard2">
+				<TextFromMAP Id="Vanilla/32/NOT2">
 					<DataRef>Assets.Map.32</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/32/SmartCard3">
+				<TextFromMAP Id="Vanilla/32/NOT3">
 					<DataRef>Assets.Map.32</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11640,15 +11640,15 @@
 					<DataRef>Assets.Map.33</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/33/SmartCard1">
+				<TextFromMAP Id="Vanilla/33/NOT1">
 					<DataRef>Assets.Map.33</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/33/SmartCard2">
+				<TextFromMAP Id="Vanilla/33/NOT2">
 					<DataRef>Assets.Map.33</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/33/SmartCard3">
+				<TextFromMAP Id="Vanilla/33/NOT3">
 					<DataRef>Assets.Map.33</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11660,15 +11660,15 @@
 					<DataRef>Assets.Map.34</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/34/SmartCard1">
+				<TextFromMAP Id="Vanilla/34/NOT1">
 					<DataRef>Assets.Map.34</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/34/SmartCard2">
+				<TextFromMAP Id="Vanilla/34/NOT2">
 					<DataRef>Assets.Map.34</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/34/SmartCard3">
+				<TextFromMAP Id="Vanilla/34/NOT3">
 					<DataRef>Assets.Map.34</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11676,7 +11676,7 @@
 					<DataRef>Assets.Map.35</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/35/SmartCard3">
+				<TextFromMAP Id="Vanilla/35/NOT3">
 					<DataRef>Assets.Map.35</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11684,7 +11684,7 @@
 					<DataRef>Assets.Map.36</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/36/SmartCard3">
+				<TextFromMAP Id="Vanilla/36/NOT3">
 					<DataRef>Assets.Map.36</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11692,7 +11692,7 @@
 					<DataRef>Assets.Map.37</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/37/SmartCard3">
+				<TextFromMAP Id="Vanilla/37/NOT3">
 					<DataRef>Assets.Map.37</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11700,7 +11700,7 @@
 					<DataRef>Assets.Map.38</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/38/SmartCard3">
+				<TextFromMAP Id="Vanilla/38/NOT3">
 					<DataRef>Assets.Map.38</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11708,7 +11708,7 @@
 					<DataRef>Assets.Map.39</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/39/SmartCard3">
+				<TextFromMAP Id="Vanilla/39/NOT3">
 					<DataRef>Assets.Map.39</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11716,7 +11716,7 @@
 					<DataRef>Assets.Map.40</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/40/SmartCard3">
+				<TextFromMAP Id="Vanilla/40/NOT3">
 					<DataRef>Assets.Map.40</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11724,7 +11724,7 @@
 					<DataRef>Assets.Map.41</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/41/SmartCard3">
+				<TextFromMAP Id="Vanilla/41/NOT3">
 					<DataRef>Assets.Map.41</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11732,7 +11732,7 @@
 					<DataRef>Assets.Map.42</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/42/SmartCard3">
+				<TextFromMAP Id="Vanilla/42/NOT3">
 					<DataRef>Assets.Map.42</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11740,7 +11740,7 @@
 					<DataRef>Assets.Map.43</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/43/SmartCard3">
+				<TextFromMAP Id="Vanilla/43/NOT3">
 					<DataRef>Assets.Map.43</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11752,15 +11752,15 @@
 					<DataRef>Assets.Map.44</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/44/SmartCard1">
+				<TextFromMAP Id="Vanilla/44/NOT1">
 					<DataRef>Assets.Map.44</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/44/SmartCard2">
+				<TextFromMAP Id="Vanilla/44/NOT2">
 					<DataRef>Assets.Map.44</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/44/SmartCard3">
+				<TextFromMAP Id="Vanilla/44/NOT3">
 					<DataRef>Assets.Map.44</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11772,15 +11772,15 @@
 					<DataRef>Assets.Map.45</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/45/SmartCard1">
+				<TextFromMAP Id="Vanilla/45/NOT1">
 					<DataRef>Assets.Map.45</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/45/SmartCard2">
+				<TextFromMAP Id="Vanilla/45/NOT2">
 					<DataRef>Assets.Map.45</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/45/SmartCard3">
+				<TextFromMAP Id="Vanilla/45/NOT3">
 					<DataRef>Assets.Map.45</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11792,15 +11792,15 @@
 					<DataRef>Assets.Map.46</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/46/SmartCard1">
+				<TextFromMAP Id="Vanilla/46/NOT1">
 					<DataRef>Assets.Map.46</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/46/SmartCard2">
+				<TextFromMAP Id="Vanilla/46/NOT2">
 					<DataRef>Assets.Map.46</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/46/SmartCard3">
+				<TextFromMAP Id="Vanilla/46/NOT3">
 					<DataRef>Assets.Map.46</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11812,11 +11812,11 @@
 					<DataRef>Assets.Map.47</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/47/SmartCard1">
+				<TextFromMAP Id="Vanilla/47/NOT1">
 					<DataRef>Assets.Map.47</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/47/SmartCard2">
+				<TextFromMAP Id="Vanilla/47/NOT2">
 					<DataRef>Assets.Map.47</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
@@ -11828,15 +11828,15 @@
 					<DataRef>Assets.Map.48</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/48/SmartCard1">
+				<TextFromMAP Id="Vanilla/48/NOT1">
 					<DataRef>Assets.Map.48</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/48/SmartCard2">
+				<TextFromMAP Id="Vanilla/48/NOT2">
 					<DataRef>Assets.Map.48</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/48/SmartCard3">
+				<TextFromMAP Id="Vanilla/48/NOT3">
 					<DataRef>Assets.Map.48</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11848,15 +11848,15 @@
 					<DataRef>Assets.Map.49</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/49/SmartCard1">
+				<TextFromMAP Id="Vanilla/49/NOT1">
 					<DataRef>Assets.Map.49</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/49/SmartCard2">
+				<TextFromMAP Id="Vanilla/49/NOT2">
 					<DataRef>Assets.Map.49</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/49/SmartCard3">
+				<TextFromMAP Id="Vanilla/49/NOT3">
 					<DataRef>Assets.Map.49</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11868,15 +11868,15 @@
 					<DataRef>Assets.Map.50</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/50/SmartCard1">
+				<TextFromMAP Id="Vanilla/50/NOT1">
 					<DataRef>Assets.Map.50</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/50/SmartCard2">
+				<TextFromMAP Id="Vanilla/50/NOT2">
 					<DataRef>Assets.Map.50</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/50/SmartCard3">
+				<TextFromMAP Id="Vanilla/50/NOT3">
 					<DataRef>Assets.Map.50</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11888,15 +11888,15 @@
 					<DataRef>Assets.Map.51</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/51/SmartCard1">
+				<TextFromMAP Id="Vanilla/51/NOT1">
 					<DataRef>Assets.Map.51</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/51/SmartCard2">
+				<TextFromMAP Id="Vanilla/51/NOT2">
 					<DataRef>Assets.Map.51</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/51/SmartCard3">
+				<TextFromMAP Id="Vanilla/51/NOT3">
 					<DataRef>Assets.Map.51</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11908,15 +11908,15 @@
 					<DataRef>Assets.Map.52</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/52/SmartCard1">
+				<TextFromMAP Id="Vanilla/52/NOT1">
 					<DataRef>Assets.Map.52</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/52/SmartCard2">
+				<TextFromMAP Id="Vanilla/52/NOT2">
 					<DataRef>Assets.Map.52</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/52/SmartCard3">
+				<TextFromMAP Id="Vanilla/52/NOT3">
 					<DataRef>Assets.Map.52</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11928,15 +11928,15 @@
 					<DataRef>Assets.Map.53</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/53/SmartCard1">
+				<TextFromMAP Id="Vanilla/53/NOT1">
 					<DataRef>Assets.Map.53</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/53/SmartCard2">
+				<TextFromMAP Id="Vanilla/53/NOT2">
 					<DataRef>Assets.Map.53</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/53/SmartCard3">
+				<TextFromMAP Id="Vanilla/53/NOT3">
 					<DataRef>Assets.Map.53</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
@@ -11952,15 +11952,15 @@
 					<DataRef>Assets.Map.55</DataRef>
 					<BlockName>LCTX</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/55/SmartCard1">
+				<TextFromMAP Id="Vanilla/55/NOT1">
 					<DataRef>Assets.Map.55</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/55/SmartCard2">
+				<TextFromMAP Id="Vanilla/55/NOT2">
 					<DataRef>Assets.Map.55</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/55/SmartCard3">
+				<TextFromMAP Id="Vanilla/55/NOT3">
 					<DataRef>Assets.Map.55</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
