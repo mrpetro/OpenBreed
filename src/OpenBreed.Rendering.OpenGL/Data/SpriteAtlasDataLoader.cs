@@ -67,7 +67,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
                 if (spriteMan.GetByName(spriteAtlasKey) != null)
                     continue;
 
-                var bitmap = ToBitmap(sprite.Width, sprite.Height, sprite.Data);
+                var bitmap = BitmapHelper.FromBytes(sprite.Width, sprite.Height, sprite.Data);
 
                 if (paletteModel != null)
                 {
@@ -90,31 +90,6 @@ namespace OpenBreed.Rendering.OpenGL.Data
             }
 
             return null;
-        }
-
-        public static Bitmap ToBitmap(int width, int height, byte[] data)
-        {
-            var bitmap = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
-
-            //Create a BitmapData and Lock all pixels to be written
-            var bmpData = bitmap.LockBits(new Rectangle(0, 0, width, height),
-                                                    ImageLockMode.WriteOnly, bitmap.PixelFormat);
-            
-            //Copy the data from the byte array into BitmapData.Scan0    
-            IntPtr ptr = bmpData.Scan0;
-            for (int y = 0; y < height; y++)
-            {
-                int ptrOffset = y * bmpData.Stride;
-
-                int lineBytes = width;
-                int bufferOffset = y * lineBytes;
-
-                Marshal.Copy(data, bufferOffset, ptr + ptrOffset, lineBytes);
-            }
-
-            //Unlock the pixels
-            bitmap.UnlockBits(bmpData);
-            return bitmap;
         }
 
         #endregion Public Methods
