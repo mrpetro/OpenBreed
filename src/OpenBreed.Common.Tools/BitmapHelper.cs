@@ -54,7 +54,19 @@ namespace OpenBreed.Common.Tools
         {
             Bitmap bmp = new Bitmap(width,height,PixelFormat.Format8bppIndexed);
             BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
-            Marshal.Copy(bytes, 0, bmpData.Scan0, bmp.Width * bmp.Height);
+
+            //Copy the data from the byte array into BitmapData.Scan0    
+            IntPtr ptr = bmpData.Scan0;
+            for (int y = 0; y < height; y++)
+            {
+                int ptrOffset = y * bmpData.Stride;
+
+                int lineBytes = width;
+                int bufferOffset = y * lineBytes;
+
+                Marshal.Copy(bytes, bufferOffset, ptr + ptrOffset, lineBytes);
+            }
+
             bmp.UnlockBits(bmpData);
             return bmp;
         }
