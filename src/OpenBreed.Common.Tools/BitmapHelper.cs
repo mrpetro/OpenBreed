@@ -52,8 +52,8 @@ namespace OpenBreed.Common.Tools
 
         public static Bitmap FromBytes(int width, int height, byte[] bytes)
         {
-            Bitmap bmp = new Bitmap(width,height,PixelFormat.Format8bppIndexed);
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
+            var bmp = new Bitmap(width,height,PixelFormat.Format8bppIndexed);
+            var bmpData = bmp.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
 
             //Copy the data from the byte array into BitmapData.Scan0    
             IntPtr ptr = bmpData.Scan0;
