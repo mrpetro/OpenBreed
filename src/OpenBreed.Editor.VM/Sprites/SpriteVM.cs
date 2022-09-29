@@ -3,6 +3,7 @@ using OpenBreed.Editor.VM.Base;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -43,18 +44,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public void UpdateBitmap(int width, int height, byte[] data)
         {
-            var bitmap = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
-
-            //Create a BitmapData and Lock all pixels to be written
-            var bmpData = bitmap.LockBits(new Rectangle(0, 0, width, height),
-                                                    ImageLockMode.WriteOnly, bitmap.PixelFormat);
-
-            //Copy the data from the byte array into BitmapData.Scan0
-            Marshal.Copy(data, 0, bmpData.Scan0, data.Length);
-
-            //Unlock the pixels
-            bitmap.UnlockBits(bmpData);
-            Image = bitmap;
+            Image = BitmapHelper.FromBytes(width, height, data);
         }
 
         public void FromModel(SpriteModel model)
