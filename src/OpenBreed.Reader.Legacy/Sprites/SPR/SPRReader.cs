@@ -52,10 +52,7 @@ namespace OpenBreed.Reader.Legacy.Sprites.SPR
 
             //Read sprite header data(width, height and sprite bitmap data offset)
             int width = binReader.ReadInt16();
-            width = MathHelper.ToNextPowOf2(width);
             int height = binReader.ReadInt16();
-            height = MathHelper.ToNextPowOf2(height);
-
             var offset = binReader.ReadUInt16();
 
             //Remember sprites headers data position
