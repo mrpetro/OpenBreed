@@ -79,10 +79,13 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void CreateTurretRotationStates(this IFsmMan fsmMan, IServiceProvider serviceProvider)
         {
+            var clipMan = serviceProvider.GetService<IClipMan<Entity>>();
+            var triggerMan = serviceProvider.GetService<ITriggerMan>();
+
             var stateMachine = fsmMan.Create<Entities.Actor.States.Rotation.RotationState, Entities.Actor.States.Rotation.RotationImpulse>("Turret.Rotation");
 
-            stateMachine.AddState(new Entities.Actor.States.Rotation.IdleState(fsmMan));
-            stateMachine.AddState(new Entities.Actor.States.Rotation.RotatingState(fsmMan));
+            stateMachine.AddState(new Entities.Actor.States.Rotation.IdleState(fsmMan, triggerMan));
+            stateMachine.AddState(new Entities.Actor.States.Rotation.RotatingState(clipMan, fsmMan, triggerMan));
 
             stateMachine.AddTransition(Entities.Actor.States.Rotation.RotationState.Rotating, Entities.Actor.States.Rotation.RotationImpulse.Stop, Entities.Actor.States.Rotation.RotationState.Idle);
             stateMachine.AddTransition(Entities.Actor.States.Rotation.RotationState.Idle, Entities.Actor.States.Rotation.RotationImpulse.Rotate, Entities.Actor.States.Rotation.RotationState.Rotating);

@@ -1,5 +1,18 @@
-﻿using OpenBreed.Fsm;
+﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Core.Managers;
+using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
+using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Wecs.Systems.Physics.Events;
+using OpenBreed.Wecs.Systems.Physics.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenTK.Mathematics;
+using System;
+using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
@@ -7,15 +20,23 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
     {
         #region Private Fields
 
+        private const string ANIM_PREFIX = "Vanilla/Common";
+        private readonly IClipMan<Entity> clipMan;
         private readonly IFsmMan fsmMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RotatingState(IFsmMan fsmMan)
+        public RotatingState(
+            IClipMan<Entity> clipMan,
+            IFsmMan fsmMan,
+            ITriggerMan triggerMan)
         {
+            this.clipMan = clipMan;
             this.fsmMan = fsmMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -31,23 +52,49 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         public void EnterState(Entity entity)
         {
-            //var direction = entity.Get<DirectionComponent>();
-            //var movement = entity.Get<MotionComponent>();
-            //entity.Get<ThrustComponent>().Value = direction.GetDirection() * movement.Acceleration;
+            Console.WriteLine("Rot -> Enter");
+            var currentStateNames = fsmMan.GetStateNames(entity);
+            entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
-            //var animDirName = AnimHelper.ToDirectionName(direction.GetDirection());
-            //var className = entity.Get<ClassComponent>().Name;
-            //var movementFsm = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Movement");
-            //var movementStateName = movementFsm.GetCurrentStateName(entity);
-            //entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{movementStateName}/{animDirName}", 0));
+            var direction = entity.Get<AngularPositionComponent>();
+            var animDirName = AnimHelper.ToDirectionName(direction.Value);
+            var className = entity.Get<MetadataComponent>().Name;
+            var movementFsm = fsmMan.GetByName("Actor.Movement");
+            var movementStateName = movementFsm.GetCurrentStateName(entity);
 
-            //var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
+            var clip = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{movementStateName}/{animDirName}");
 
-            //entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Stop));
+            entity.PlayAnimation(0, clip.Id);
+
+            triggerMan.OnEntityDirectionChanged(entity, OnDirectionChanged);
+        }
+
+        private bool OnDirectionChanged(Entity entity, DirectionChangedEventArgs args)
+        {
+            var angularVelocity = entity.Get<AngularVelocityComponent>();
+            var angularPosition = entity.Get<AngularPositionComponent>();
+
+
+            var animDirName = AnimHelper.ToDirectionName(angularPosition.Value);
+            var className = entity.Get<MetadataComponent>().Name;
+            var movementFsm = fsmMan.GetByName("Actor.Movement");
+            var movementStateName = movementFsm.GetCurrentStateName(entity);
+
+            var clip = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{movementStateName}/{animDirName}");
+
+            entity.PlayAnimation(0, clip.Id);
+
+
+            if (angularVelocity.Value != angularPosition.Value)
+                return false;
+
+            entity.SetState(FsmId, (int)RotationImpulse.Stop);
+            return true;
         }
 
         public void LeaveState(Entity entity)
         {
+            Console.WriteLine("Rot -> Leave");
         }
 
         #endregion Public Methods

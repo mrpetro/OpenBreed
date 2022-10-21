@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OpenBreed.Physics.Interface.Managers
 {
-    public delegate void FixtureContactCallback<TObject>(BodyFixture fixtureA, TObject objA, BodyFixture fixtureB, TObject objB, Vector2 projection);
+    public delegate void FixtureContactCallback<TObject>(BodyFixture fixtureA, TObject objA, BodyFixture fixtureB, TObject objB, float dt, Vector2 projection);
 
     public interface ICollisionMan<TObject>
     {
@@ -18,7 +18,7 @@ namespace OpenBreed.Physics.Interface.Managers
 
         int RegisterGroup(string groupName);
 
-        void Resolve(TObject objA, TObject objB, List<CollisionContact> contacts);
+        void Resolve(TObject objA, TObject objB, float dt, List<CollisionContact> contacts);
 
         #endregion Public Methods
     }

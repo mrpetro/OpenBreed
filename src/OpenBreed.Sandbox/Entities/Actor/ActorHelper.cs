@@ -5,9 +5,13 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Common.Tools;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Core.Managers;
+using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Sandbox.Components;
+using OpenBreed.Sandbox.Entities.Actor.States.Movement;
+using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
@@ -15,6 +19,8 @@ using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenBreed.Wecs.Worlds;
@@ -39,6 +45,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private readonly DynamicResolver dynamicResolver;
         private readonly FixtureTypes fixtureTypes;
         private readonly IScriptMan scriptMan;
+        private readonly IFsmMan fsmMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
@@ -52,7 +60,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
             IEntityFactory entityFactory,
             DynamicResolver dynamicResolver,
             FixtureTypes fixtureTypes,
-            IScriptMan scriptMan)
+            IScriptMan scriptMan,
+            IFsmMan fsmMan,
+            ITriggerMan triggerMan)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
@@ -62,6 +72,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
             this.dynamicResolver = dynamicResolver;
             this.fixtureTypes = fixtureTypes;
             this.scriptMan = scriptMan;
+            this.fsmMan = fsmMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -90,6 +102,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
             actor.Add(new AttackInputComponent(p1.Id, 0));
             actor.Add(new WalkingControlComponent());
             actor.Add(new AttackControlComponent());
+
+            triggerMan.OnEntityControlDirectionChanged(actor, OnControlDirectionChanged, singleTime: false);
+
+
 
             return actor;
         }
@@ -145,21 +161,42 @@ namespace OpenBreed.Sandbox.Entities.Actor
             playerActor.EnterWorld(world.Id);
         }
 
+        private void OnControlDirectionChanged(Entity entity, ControlDirectionChangedEventArgs e)
+        {
+            var angularVelocity = entity.Get<AngularVelocityComponent>();
+
+            if (e.Direction != Vector2.Zero)
+            {
+                var movement = entity.Get<MotionComponent>();
+                entity.Get<ThrustComponent>().Value = e.Direction * movement.Acceleration;
+                angularVelocity.Value = new Vector2(e.Direction.X, e.Direction.Y);
+            }
+            else
+            {
+                var thrust = entity.Get<ThrustComponent>();
+                thrust.Value = Vector2.Zero;
+
+                var angularPosition = entity.Get<AngularPositionComponent>();
+                angularVelocity.Value = angularPosition.Value;
+            }
+        }
+
+
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void Dynamic2StaticCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        private void Dynamic2StaticCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, float dt, Vector2 projection)
         {
-            dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
+            dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
-        private void FullObstableCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
+        private void FullObstableCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
         {
-            dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
+            dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
-        private void ScriptRunCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
+        private void ScriptRunCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
         {
             var scriptId = entityB.GetScriptId("ScriptRunTrigger");
 
@@ -174,7 +211,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             func.Invoke(entityB, entityA);
         }
 
-        private void SlopeObstacleCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, Vector2 projection)
+        private void SlopeObstacleCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
         {
             var metadata = entityB.Get<MetadataComponent>();
 

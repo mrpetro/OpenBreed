@@ -3,7 +3,8 @@ using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Systems.Physics.Events;
+using OpenBreed.Wecs.Systems.Physics.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -17,14 +18,18 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         #region Private Fields
 
         private readonly IFsmMan fsmMan;
+        private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public IdleState(IFsmMan fsmMan)
+        public IdleState(
+            IFsmMan fsmMan,
+            ITriggerMan triggerMan)
         {
             this.fsmMan = fsmMan;
+            this.triggerMan = triggerMan;
         }
 
         #endregion Public Constructors
@@ -40,43 +45,36 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         public void EnterState(Entity entity)
         {
-            // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            var currentStateNames = fsmMan.GetStateNames(entity);
+            Console.WriteLine("RotIdle -> Enter");
 
+            var currentStateNames = fsmMan.GetStateNames(entity);
             entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
-            //entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+            triggerMan.OnEntityDirectionChanged(entity, OnDirectionChanged);
+        }
+
+        private bool OnDirectionChanged(Entity entity, DirectionChangedEventArgs args)
+        {
+            var angularVelocity = entity.Get<AngularVelocityComponent>();
+            var angularPosition = entity.Get<AngularPositionComponent>();
+
+            if (angularVelocity.Value == angularPosition.Value)
+                return false;
+
+            entity.SetState(FsmId, (int)RotationImpulse.Rotate);
+            return true;
         }
 
         public void LeaveState(Entity entity)
         {
-            //entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+            Console.WriteLine("RotIdle -> Leave");
+
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
-        {
-            var entity = sender as Entity;
-
-            if (e.Direction != Vector2.Zero)
-            {
-                var angularPos = entity.Get<AngularPositionComponent>();
-
-                if (angularPos.Value != e.Direction)
-                {
-                    //var aPos3 = new Vector3(angularPos.GetDirection());
-                    //var dPos3 = new Vector3(e.Direction);
-                    //var newVec = Vector3Extension.RotateTowards(aPos3, dPos3, 0.4f, 1.0f);
-                    var angularVelocity = entity.Get<AngularVelocityComponent>();
-                    angularVelocity.Value = new Vector2(e.Direction.X, e.Direction.Y);
-                    //dir.SetDirection(e.Direction);
-                    entity.SetState(FsmId, (int)RotationImpulse.Rotate);
-                }
-            }
-        }
 
         #endregion Private Methods
     }

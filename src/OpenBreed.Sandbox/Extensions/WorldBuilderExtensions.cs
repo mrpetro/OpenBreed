@@ -39,6 +39,8 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem(systemFactory.Create<PausingSystem>());
             builder.AddSystem(systemFactory.Create<FsmSystem>());
 
+            builder.AddSystem(systemFactory.Create<VelocityChangedSystem>());
+
             //Audio Stage
             builder.AddSystem(systemFactory.Create<SoundSystem>());
 

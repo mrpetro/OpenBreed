@@ -96,13 +96,13 @@ namespace OpenBreed.Wecs.Systems.Physics
             var entityB = entityMan.GetById(currentCollider.ItemId);
 
             if (TestVsDynamic(entityA, entityB, dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts))
-                collisionMan.Resolve(entityA, entityB, contacts);
+                collisionMan.Resolve(entityA, entityB, dt, contacts);
         }
 
         private void TestNarrowPhaseStatic(Entity dynamicEntity, Entity staticEntity, float dt)
         {
             if (TestVsStatic(dynamicEntity, staticEntity, dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts))
-                collisionMan.Resolve(dynamicEntity, staticEntity, contacts);
+                collisionMan.Resolve(dynamicEntity, staticEntity, dt, contacts);
             //{
             //    var projection = manifolds.First().Projection;
             //    //var collisionDynamic = dynamicEntity.TryGet<CollisionComponent>();

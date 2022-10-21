@@ -45,7 +45,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             var aPos = angularPos.Value;
             var dPos = angularVel.Value;
 
-            var newPos = aPos.RotateTowards(dPos, (float)Math.PI * 0.25f, 1.0f);
+            var newPos = aPos.RotateTowards(dPos, (float)Math.PI * 0.125f, 1.0f);
 
             if (newPos == aPos)
                 return;

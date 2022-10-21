@@ -4,6 +4,7 @@ using OpenBreed.Common;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -28,6 +29,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
         {
             systemFactory.Register<DirectionSystemVanilla>(() => new DirectionSystemVanilla(serviceProvider.GetService<IEntityMan>()));
             systemFactory.Register<MovementSystem>(() => new MovementSystem(serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register<VelocityChangedSystem>(() => new VelocityChangedSystem(serviceProvider.GetService<IEntityMan>()));
             systemFactory.Register<MovementSystemVanilla>(() => new MovementSystemVanilla(serviceProvider.GetService<IEntityMan>()));
             systemFactory.Register<DynamicBodiesAabbUpdaterSystem>(() => new DynamicBodiesAabbUpdaterSystem(serviceProvider.GetService<IShapeMan>()));
             systemFactory.Register<DynamicBodiesCollisionCheckSystem>(() => new DynamicBodiesCollisionCheckSystem(serviceProvider.GetService<IEntityMan>(),
