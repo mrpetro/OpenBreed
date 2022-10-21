@@ -9,7 +9,7 @@
 		<Fsm>
 			<States>
 				<State FsmName="Actor.Movement" StateName="Standing" />
-				<State FsmName="Actor.Attacking" StateName="Idle" />
+				<State FsmName="Turret.Rotation" StateName="Idle" />
 			</States>
 		</Fsm>
 		<Animation>

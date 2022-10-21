@@ -75,10 +75,21 @@ SmartCardWorldFadeOut = function(entity, args)
 
     Triggers:OnEntityAnimFinished(
         smartCardReaderCameraEntity,                      
-        SwitchViewToGameWorld,
+        GameWorldUnpause,
         true)
 
     smartCardReaderCameraEntity:PlayAnimation(0, cameraFadeOutClipId)
+end
+
+GameWorldUnpause = function()
+    Logging:Info("Game world unpause...")
+
+	Triggers:OnUnpausedWorld(
+        gameCameraEntity,
+        SwitchViewToGameWorld,
+        true)
+
+    gameCameraEntity:UnpauseWorld()
 end
 
 SwitchViewToGameWorld = function(entity, args)
@@ -88,22 +99,16 @@ SwitchViewToGameWorld = function(entity, args)
     hudViewportEntity:SetViewportCamera(hudCameraEntity.Id)
     --actorEntity:SetPosition(Entities, Shapes, smartCardEntity)
 
-    Triggers:OnEntityAnimFinished(
-        gameCameraEntity,                      
-        GameWorldUnpause,
-        true)
+    --Triggers:OnEntityAnimFinished(
+    --    gameCameraEntity,                      
+    --    GameWorldUnpause,
+    --    true)
 
     gameCameraEntity:PlayAnimation(0, cameraFadeInClipId)
-end
-
-
-GameWorldUnpause = function()
-    Logging:Info("GameWorldUnpause...")
 
     actorEntity.State = nil
-
-    gameCameraEntity:UnpauseWorld()
 end
+
 
 -- Execution
 
