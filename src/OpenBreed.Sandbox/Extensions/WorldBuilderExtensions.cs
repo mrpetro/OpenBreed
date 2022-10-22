@@ -17,11 +17,6 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupGameWorldSystems(this WorldBuilder builder, ISystemFactory systemFactory)
         {
-            //Input Stage
-            builder.AddSystem(systemFactory.Create<AiControlSystem>());
-            builder.AddSystem(systemFactory.Create<WalkingControllerSystem>());
-            builder.AddSystem(systemFactory.Create<AttackControllerSystem>());
-
             //Update Stage
             builder.AddSystem(systemFactory.Create<MovementSystemVanilla>());
             builder.AddSystem(systemFactory.Create<DirectionSystemVanilla>());

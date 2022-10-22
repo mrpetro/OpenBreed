@@ -27,6 +27,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -37,7 +38,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private readonly IClipMan<Entity> clipMan;
 
         private readonly ICollisionMan<Entity> collisionMan;
-
+        private readonly IEntityMan entityMan;
         private readonly IPlayersMan playersMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
@@ -55,6 +56,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public ActorHelper(
             IClipMan<Entity> clipMan,           
             ICollisionMan<Entity> collisionMan,
+            IEntityMan entityMan,
             IPlayersMan playersMan,
             IDataLoaderFactory dataLoaderFactory,
             IEntityFactory entityFactory,
@@ -66,6 +68,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
+            this.entityMan = entityMan;
             this.playersMan = playersMan;
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
@@ -96,16 +99,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             actor.Add(new InventoryComponent(16));
 
-            var p1 = playersMan.GetByName("P1");
+            var p1Controller = entityMan.GetByTag("Controllers.P1").First();
 
-            actor.Add(new WalkingInputComponent(p1.Id, 0));
-            actor.Add(new AttackInputComponent(p1.Id, 0));
-            actor.Add(new WalkingControlComponent());
-            actor.Add(new AttackControlComponent());
-
-            triggerMan.OnEntityControlDirectionChanged(actor, OnControlDirectionChanged, singleTime: false);
-
-
+            p1Controller.Get<WalkingControlComponent>().ControlledEntityId = actor.Id;
 
             return actor;
         }
@@ -114,16 +110,20 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             var actor = CreateActor(name, pos);
 
+            var p1Controller = entityMan.GetByTag("Controllers.P1").First();
+            p1Controller.Get<WalkingControlComponent>().ControlledEntityId = actor.Id;
+
+
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             actor.Add(new InventoryComponent(16));
 
-            var p1 = playersMan.GetByName("P1");
+            //var p1 = playersMan.GetByName("P1");
 
-            actor.Add(new WalkingInputComponent(p1.Id, 0));
-            actor.Add(new AttackInputComponent(p1.Id, 0));
-            actor.Add(new WalkingControlComponent());
-            actor.Add(new AttackControlComponent());
+            //actor.Add(new WalkingInputComponent(p1.Id, 0));
+            //actor.Add(new AttackInputComponent(p1.Id, 0));
+            //actor.Add(new WalkingControlComponent());
+            //actor.Add(new AttackControlComponent());
 
             return actor;
         }
@@ -160,27 +160,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             playerActor.EnterWorld(world.Id);
         }
-
-        private void OnControlDirectionChanged(Entity entity, ControlDirectionChangedEventArgs e)
-        {
-            var angularVelocity = entity.Get<AngularVelocityComponent>();
-
-            if (e.Direction != Vector2.Zero)
-            {
-                var movement = entity.Get<MotionComponent>();
-                entity.Get<ThrustComponent>().Value = e.Direction * movement.Acceleration;
-                angularVelocity.Value = new Vector2(e.Direction.X, e.Direction.Y);
-            }
-            else
-            {
-                var thrust = entity.Get<ThrustComponent>();
-                thrust.Value = Vector2.Zero;
-
-                var angularPosition = entity.Get<AngularPositionComponent>();
-                angularVelocity.Value = angularPosition.Value;
-            }
-        }
-
 
         #endregion Internal Methods
 

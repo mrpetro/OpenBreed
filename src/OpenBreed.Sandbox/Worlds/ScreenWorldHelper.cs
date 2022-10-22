@@ -1,16 +1,20 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Sandbox.Systems;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Audio;
+using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
@@ -38,6 +42,8 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IRenderingMan renderingMan;
         private readonly IWorldMan worldMan;
         private readonly IEventsMan eventsMan;
+        private readonly IEntityMan entityMan;
+        private readonly IPlayersMan playersMan;
         private readonly ViewportCreator viewportCreator;
         private readonly IEntityFactory entityFactory;
         private readonly IViewClient viewClient;
@@ -53,6 +59,8 @@ namespace OpenBreed.Sandbox.Worlds
                                  IRenderingMan renderingMan,
                                  IWorldMan worldMan,
                                  IEventsMan eventsMan,
+                                 IEntityMan entityMan,
+                                 IPlayersMan playersMan,
                                  ViewportCreator viewportCreator,
                                  IEntityFactory entityFactory,
                                  IViewClient viewClient,
@@ -64,6 +72,8 @@ namespace OpenBreed.Sandbox.Worlds
             this.renderingMan = renderingMan;
             this.worldMan = worldMan;
             this.eventsMan = eventsMan;
+            this.entityMan = entityMan;
+            this.playersMan = playersMan;
             this.viewportCreator = viewportCreator;
             this.entityFactory = entityFactory;
             this.viewClient = viewClient;
@@ -77,13 +87,32 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void AddSystems(WorldBuilder builder)
         {
+            //Input Stage
+            builder.AddSystem(systemFactory.Create<ActorMovementByPlayerControlSystem>());
+            builder.AddSystem(systemFactory.Create<AttackControllerSystem>());
+
+
             //Video
+
             builder.AddSystem(systemFactory.Create<ViewportSystem>());
             builder.AddSystem(systemFactory.Create<SoundSystem>());
             builder.AddSystem(systemFactory.Create<TimerSystem>());
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             //builder.AddSystem(core.CreateTextSystem().Build());
+        }
+
+        public Entity CreateController(string player)
+        {
+            var p1Controller = entityMan.Create($"Controllers.{player}");
+            var p1 = playersMan.GetByName(player);
+
+            p1Controller.Add(new WalkingInputComponent(p1.Id, 0));
+            p1Controller.Add(new AttackInputComponent(p1.Id, 0));
+            p1Controller.Add(new WalkingControlComponent());
+            p1Controller.Add(new AttackControlComponent());
+
+            return p1Controller;
         }
 
         public World CreateWorld()
@@ -97,6 +126,10 @@ namespace OpenBreed.Sandbox.Worlds
 
             var gameCommentatorBuilder = entityFactory.Create($@"Vanilla\ABTA\Templates\Common\GameCommentator.xml");
             var gameCommentator = gameCommentatorBuilder.Build();
+
+
+            var p1Controller = CreateController("P1");
+
 
             scriptMan.Expose("Commentator", gameCommentator);
 
@@ -122,6 +155,7 @@ namespace OpenBreed.Sandbox.Worlds
                     gameHudViewport.EnterWorld(world.Id);
                     debugHudViewport.EnterWorld(world.Id);
                     textViewport.EnterWorld(world.Id);
+                    p1Controller.EnterWorld(world.Id);
                 }, singleTime: true);
 
 

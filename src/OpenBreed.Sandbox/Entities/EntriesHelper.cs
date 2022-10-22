@@ -382,9 +382,6 @@ namespace OpenBreed.Sandbox.Entities
             var thrustCmp = target.Get<ThrustComponent>();
             thrustCmp.Value = Vector2.Zero;
 
-            var walkingControlCmp = target.Get<WalkingControlComponent>();
-            walkingControlCmp.Direction = new Vector2(0, 0);
-
             target.State = null;
         }
 

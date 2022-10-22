@@ -45,6 +45,7 @@ using OpenBreed.Wecs.Components.Animation.Extensions;
 using OpenBreed.Wecs.Components.Audio.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
+using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics.Extensions;
 using OpenBreed.Wecs.Components.Rendering.Extensions;
 using OpenBreed.Wecs.Components.Scripting.Extensions;
@@ -228,8 +229,7 @@ namespace OpenBreed.Sandbox
                 systemFactory.SetupControlSystems(sp);
                 systemFactory.SetupAnimationSystems(sp);
                 systemFactory.SetupPhysicsDebugSystem(sp);
-                systemFactory.SetupUnknownMapCellDisplaySystem(sp);
-                systemFactory.SetupGroupMapCellDisplaySystem(sp);
+                systemFactory.SetupGameSystems(sp);
             });
 
             XmlCommonComponents.Setup();

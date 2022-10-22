@@ -13,6 +13,8 @@ namespace OpenBreed.Wecs.Components.Control
 
         public Vector2 Direction { get; set; }
 
+        public int ControlledEntityId { get; set; }
+
         #endregion Public Properties
     }
 }
