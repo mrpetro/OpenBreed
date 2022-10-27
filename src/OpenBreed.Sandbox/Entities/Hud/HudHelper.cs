@@ -61,24 +61,11 @@ namespace OpenBreed.Sandbox.Entities.Hud
                 .Build();
 
             triggerMan.OnWorldInitialized(world, () => fpsCounter.EnterWorld(world.Id), singleTime: true);
-
-            var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
-
-            jobsMan.Execute(new FpsTextUpdateJob(renderingMan, fpsCounter));
-
-            triggerMan.OnEntityViewportResized(hudViewport, (a) => UpdateFpsCounterPos(fpsCounter, a));
         }
-
-
 
         #endregion Public Methods
 
         #region Private Methods
-
-        private static void UpdateFpsCounterPos(Entity fpsTextEntity, ViewportResizedEventArgs a)
-        {
-            fpsTextEntity.Get<PositionComponent>().Value = new Vector2(-a.Width / 2.0f, -a.Height / 2.0f);
-        }
 
         public void AddPositionInfo(World world)
         {
@@ -96,7 +83,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
 
 
-            triggerMan.OnEntityViewportResized(hudViewport, (a) => UpdatePositionInfoPos(positionInfo, a));
+            triggerMan.OnEntityViewportResized(hudViewport, (e, a) => UpdatePositionInfoPos(positionInfo, a));
         }
 
         private static void UpdatePositionInfoPos(Entity fpsTextEntity, ViewportResizedEventArgs a)

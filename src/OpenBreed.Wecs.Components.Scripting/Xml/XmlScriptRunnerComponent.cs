@@ -12,6 +12,9 @@ namespace OpenBreed.Wecs.Components.Scripting.Xml
 
         [XmlElement("TriggerName")]
         public string TriggerName { get; set; }
+
+        [XmlElement("ScriptFunction")]
+        public string ScriptFunction { get; set; }
     }
 
     [XmlRoot("ScriptRunner")]

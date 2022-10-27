@@ -118,6 +118,16 @@ namespace OpenBreed.Scripting.Lua
             return true;
         }
 
+        public IScriptFunc GetTableFunction(string funcName)
+        {
+            var t = luaState[funcName];
+
+            if (t is not LuaFunction)
+                return null;
+
+            return new LuaScriptFunc((LuaFunction)t);
+        }
+
         public IScriptFunc GetFunction(string funcName)
         {
             functionLookup.TryGetValue(funcName, out IScriptFunc func);

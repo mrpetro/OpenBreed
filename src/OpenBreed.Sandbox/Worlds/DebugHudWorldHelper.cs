@@ -17,6 +17,7 @@ using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Scripting;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -77,6 +78,7 @@ namespace OpenBreed.Sandbox.Worlds
         {
             builder.AddSystem(systemFactory.Create<AnimatorSystem>());
             builder.AddSystem(systemFactory.Create<TextSystem>());
+            builder.AddSystem(systemFactory.Create<ScriptRunningSystem>());
         }
 
         private void Setup(World world)
@@ -96,7 +98,7 @@ namespace OpenBreed.Sandbox.Worlds
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
             hudViewport.SetViewportCamera(hudCamera.Id);
 
-            triggerMan.OnEntityViewportResized(hudViewport, (a) => UpdateCameraFov(hudCamera, a));
+            triggerMan.OnEntityViewportResized(hudViewport, (e, a) => UpdateCameraFov(hudCamera, a));
         }
 
         private void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)

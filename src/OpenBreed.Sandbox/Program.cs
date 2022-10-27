@@ -27,6 +27,7 @@ using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Data;
+using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
@@ -63,6 +64,7 @@ using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Input;
@@ -147,11 +149,13 @@ namespace OpenBreed.Sandbox
                 scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldPausedEventArgs>), typeof(LuaEntityEventHandler<WorldPausedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldUnpausedEventArgs>), typeof(LuaEntityEventHandler<WorldUnpausedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<Entity, AnimFinishedEventArgs>), typeof(LuaEntityEventHandler<AnimFinishedEventArgs>));
+                scriptMan.RegisterDelegateType(typeof(Action<Entity, ClientResizedEventArgs>), typeof(LuaEntityEventHandler<ClientResizedEventArgs>));
 
                 scriptMan.Expose("Entities", sp.GetService<IEntityMan>());
                 scriptMan.Expose("Sounds", sp.GetService<ISoundMan>());
                 scriptMan.Expose("Triggers", sp.GetService<ITriggerMan>());
                 scriptMan.Expose("Logging", sp.GetService<ILogger>());
+                scriptMan.Expose("Rendering", sp.GetService<IRenderingMan>());
                 scriptMan.Expose("Stamps", sp.GetService<IStampMan>());
                 scriptMan.Expose("Clips", sp.GetService<IClipMan<Entity>>());
                 scriptMan.Expose("Shapes", sp.GetService<IShapeMan>());
@@ -170,6 +174,15 @@ namespace OpenBreed.Sandbox
                 res = scriptMan.RunString(@"import('OpenBreed.Common', 'OpenBreed.Common.Extensions')");
 
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
+
+
+                res = scriptMan.RunString(@"EntityTypes = {}");
+
+                //var result = scriptMan.RunFile(@"D:\Projects\Programing\GIT\OpenBreed\OpenBreed.Common\src\OpenBreed.Database.Xml\Vanilla\Common\Scripts\Hud\FpsCounter.lua");
+
+
+                //res = scriptMan.RunString(@"EntityTypes.FpsCounter.UpdateValue()");
+
             });
 
             hostBuilder.SetupInputMan((inpitsMan, sp) =>
@@ -223,6 +236,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupSystemFactory((systemFactory, sp) =>
             {
                 systemFactory.SetupRenderingSystems(sp);
+                systemFactory.SetupScriptingSystems(sp);
                 systemFactory.SetupAudioSystems(sp);
                 systemFactory.SetupPhysicsSystems(sp);
                 systemFactory.SetupCoreSystems(sp);

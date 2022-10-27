@@ -10,6 +10,7 @@ namespace OpenBreed.Wecs.Components.Scripting
     {
         string ScriptId { get; set; }
         string TriggerName { get; set; }
+        string ScriptFunction { get; set; }
     }
 
     public interface IScriptRunnerComponentTemplate : IComponentTemplate
@@ -23,14 +24,19 @@ namespace OpenBreed.Wecs.Components.Scripting
 
     public class ScriptRun
     {
-        public ScriptRun(string scriptId, string triggerName)
+        public ScriptRun(
+            string scriptId,
+            string triggerName,
+            string scriptFunction)
         {
             ScriptId = scriptId;
             TriggerName = triggerName;
+            ScriptFunction = scriptFunction;
         }
 
         public string ScriptId { get; }
         public string TriggerName { get; }
+        public string ScriptFunction { get; }
     }
 
     public class ScriptRunnerComponent : IEntityComponent
@@ -77,13 +83,22 @@ namespace OpenBreed.Wecs.Components.Scripting
 
             foreach (var runTemplate in template.Runs)
             {
-                if(!scriptMan.FunctionExists(runTemplate.ScriptId))
+                if (!scriptMan.FunctionExists(runTemplate.ScriptId))
                 {
                     var func = scriptLoader.Load(runTemplate.ScriptId);
-                    scriptMan.RegisterFunction(runTemplate.ScriptId, func);
+
+                    if(runTemplate.ScriptFunction is not null)
+                    {
+                        func.Invoke();
+                    }
+                    else
+                        scriptMan.RegisterFunction(runTemplate.ScriptId, func);
                 }
 
-                runs.Add(new ScriptRun(runTemplate.ScriptId, runTemplate.TriggerName));
+                runs.Add(new ScriptRun(
+                    runTemplate.ScriptId,
+                    runTemplate.TriggerName,
+                    runTemplate.ScriptFunction));
             }
 
             return new ScriptRunnerComponent(runs);
