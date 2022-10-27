@@ -189,6 +189,8 @@
 				<FileDataSource Id="Extension/Scripts/Common/ItemPickup.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\ItemPickup.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/TeleporterTeleport.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\TeleporterTeleport.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/SmartCardShow.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\SmartCardShow.lua" />
+				<FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
+				<FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
 				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
 				<FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\SimpleEntry.lua" />
 				<FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Exit.lua" />
@@ -1072,6 +1074,12 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.SmartCardShow.lua" DataSourceRef="Extension/Scripts/Common/SmartCardShow.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Hud.FpsUpdate.lua" DataSourceRef="Extension/Scripts/Hud/FpsUpdate.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Hud.FpsCounter.lua" DataSourceRef="Extension/Scripts/Hud/FpsCounter.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="Extension/Scripts/Entry.lua" FormatType="TEXT">
@@ -11985,6 +11993,12 @@
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/Common/SmartCard/Show">
 					<DataRef>Assets.Scripts.Common.SmartCardShow.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Common/Hud/Fps/Update">
+					<DataRef>Assets.Scripts.Common.Hud.FpsUpdate.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="EntityTypes.FpsCounter">
+					<DataRef>Assets.Scripts.Common.Hud.FpsCounter.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Scripts.Entry.lua">
 					<DataRef>Assets.Scripts.Entry.lua</DataRef>

@@ -5,6 +5,15 @@
 			<Name>FpsCounter</Name>
 		</Metadata>
 		<Position X="$(posX)" Y="$(posY)" />
+		<ScriptRunner>
+			<Runs>
+				<Run>
+					<ScriptId>EntityTypes.FpsCounter</ScriptId>
+					<ScriptFunction>UpdateText</ScriptFunction>			
+					<TriggerName>OnWorldUpdate</TriggerName>
+				</Run>
+			</Runs>
+		</ScriptRunner>
 		<Text>
 			<Text>FPS: 0.0</Text>
 			<Offset X="0" Y="0" />
