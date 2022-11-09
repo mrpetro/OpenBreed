@@ -11,10 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Vanilla\ABTA\Scripts\Common\DoorOpen.lua" />
-    <None Remove="Vanilla\ABTA\Scripts\Common\ItemPickup.lua" />
-    <None Remove="Vanilla\ABTA\Scripts\Common\SmartCardShow.lua" />
-    <None Remove="Vanilla\ABTA\Scripts\Common\TeleporterTeleport.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\Door.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\Item.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\SmartCard.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\Teleporter.lua" />
     <None Remove="Vanilla\ABTA\Scripts\FpsUpdate.lua" />
     <None Remove="Vanilla\ABTA\Scripts\MAP.01.lua" />
     <None Remove="Vanilla\ABTA\Templates\Common\GameCommentator.xml" />
@@ -84,19 +84,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Vanilla\ABTA\Scripts\Common\SmartCardShow.lua">
+    <Content Include="Vanilla\ABTA\Scripts\Common\SmartCard.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Scripts\Common\DoorOpen.lua">
+    <Content Include="Vanilla\ABTA\Scripts\Common\Door.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Scripts\Common\TeleporterTeleport.lua">
+    <Content Include="Vanilla\ABTA\Scripts\Common\Teleporter.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Scripts\Common\ItemPickup.lua">
+    <Content Include="Vanilla\ABTA\Scripts\Common\Item.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Scripts\Common\LandMineExplode.lua">
+    <Content Include="Vanilla\ABTA\Scripts\Common\LandMine.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\Common\Scripts\Hud\FpsCounter.lua">

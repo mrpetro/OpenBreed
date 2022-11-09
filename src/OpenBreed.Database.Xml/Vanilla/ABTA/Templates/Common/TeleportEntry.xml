@@ -15,11 +15,8 @@
 			</Fixtures>
 		</Body>
 		<ScriptRunner>
+			<ScriptId>Vanilla/Common/Teleporter</ScriptId>
 			<Runs>
-				<Run>
-					<ScriptId>Vanilla/Common/Teleporter/Teleport</ScriptId>
-					<TriggerName>ScriptRunTrigger</TriggerName>
-				</Run>
 			</Runs>
 		</ScriptRunner>
     </Components>

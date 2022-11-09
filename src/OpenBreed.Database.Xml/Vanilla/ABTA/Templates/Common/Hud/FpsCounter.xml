@@ -6,12 +6,8 @@
 		</Metadata>
 		<Position X="$(posX)" Y="$(posY)" />
 		<ScriptRunner>
+			<ScriptId>EntityTypes.FpsCounter</ScriptId>
 			<Runs>
-				<Run>
-					<ScriptId>EntityTypes.FpsCounter</ScriptId>
-					<ScriptFunction>UpdateText</ScriptFunction>			
-					<TriggerName>OnWorldUpdate</TriggerName>
-				</Run>
 			</Runs>
 		</ScriptRunner>
 		<Text>

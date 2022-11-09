@@ -33,11 +33,8 @@
 			</Fixtures>
 		</Body>
 		<ScriptRunner>
+			<ScriptId>Vanilla/Common/Door</ScriptId>
 			<Runs>
-				<Run>
-					<ScriptId>Vanilla/Common/Door/Open</ScriptId>
-					<TriggerName>ScriptRunTrigger</TriggerName>
-				</Run>
 			</Runs>
 		</ScriptRunner>
 		<Sprite>

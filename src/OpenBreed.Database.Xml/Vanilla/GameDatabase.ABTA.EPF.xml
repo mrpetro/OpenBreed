@@ -184,11 +184,11 @@
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<FileDataSource Id="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua" />
-				<FileDataSource Id="Extension/Scripts/Common/LandMineExplode.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMineExplode.lua" />
-				<FileDataSource Id="Extension/Scripts/Common/DoorOpen.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\DoorOpen.lua" />
-				<FileDataSource Id="Extension/Scripts/Common/ItemPickup.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\ItemPickup.lua" />
-				<FileDataSource Id="Extension/Scripts/Common/TeleporterTeleport.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\TeleporterTeleport.lua" />
-				<FileDataSource Id="Extension/Scripts/Common/SmartCardShow.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\SmartCardShow.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/LandMine.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMine.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Door.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Door.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Item.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Item.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Teleporter.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Teleporter.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/SmartCard.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\SmartCard.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
 				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
@@ -1061,19 +1061,19 @@
 				<Asset Id="Assets.Scripts.L1.MAP.01.PlayerEntry.lua" DataSourceRef="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Common.LandMineExplode.lua" DataSourceRef="Extension/Scripts/Common/LandMineExplode.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.LandMine.lua" DataSourceRef="Extension/Scripts/Common/LandMine.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Common.DoorOpen.lua" DataSourceRef="Extension/Scripts/Common/DoorOpen.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.Door.lua" DataSourceRef="Extension/Scripts/Common/Door.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Common.ItemPickup.lua" DataSourceRef="Extension/Scripts/Common/ItemPickup.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.Item.lua" DataSourceRef="Extension/Scripts/Common/Item.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Common.TeleporterTeleport.lua" DataSourceRef="Extension/Scripts/Common/TeleporterTeleport.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.Teleporter.lua" DataSourceRef="Extension/Scripts/Common/Teleporter.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Common.SmartCardShow.lua" DataSourceRef="Extension/Scripts/Common/SmartCardShow.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.SmartCard.lua" DataSourceRef="Extension/Scripts/Common/SmartCard.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.Hud.FpsUpdate.lua" DataSourceRef="Extension/Scripts/Hud/FpsUpdate.lua" FormatType="TEXT">
@@ -11979,20 +11979,20 @@
 				<ScriptFromFile Id="Vanilla/L1/MAP.01/PlayerEntry">
 					<DataRef>Assets.Scripts.L1.MAP.01.PlayerEntry.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/Common/LandMine/Explode">
-					<DataRef>Assets.Scripts.Common.LandMineExplode.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/LandMine">
+					<DataRef>Assets.Scripts.Common.LandMine.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/Common/Door/Open">
-					<DataRef>Assets.Scripts.Common.DoorOpen.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/Door">
+					<DataRef>Assets.Scripts.Common.Door.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/Common/Item/Pickup">
-					<DataRef>Assets.Scripts.Common.ItemPickup.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/Item">
+					<DataRef>Assets.Scripts.Common.Item.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/Common/Teleporter/Teleport">
-					<DataRef>Assets.Scripts.Common.TeleporterTeleport.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/Teleporter">
+					<DataRef>Assets.Scripts.Common.Teleporter.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/Common/SmartCard/Show">
-					<DataRef>Assets.Scripts.Common.SmartCardShow.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/SmartCard">
+					<DataRef>Assets.Scripts.Common.SmartCard.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Common/Hud/Fps/Update">
 					<DataRef>Assets.Scripts.Common.Hud.FpsUpdate.lua</DataRef>

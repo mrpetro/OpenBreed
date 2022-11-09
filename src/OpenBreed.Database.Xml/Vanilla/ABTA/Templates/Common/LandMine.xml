@@ -15,11 +15,8 @@
 			</Fixtures>
 		</Body>
 		<ScriptRunner>
+			<ScriptId>Vanilla/Common/LandMine</ScriptId>
 			<Runs>
-				<Run>
-					<ScriptId>Vanilla/Common/LandMine/Explode</ScriptId>
-					<TriggerName>ScriptRunTrigger</TriggerName>
-				</Run>
 			</Runs>
 		</ScriptRunner>
 		<SoundPlayer>

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Options;
+using OpenBreed.Common;
 using OpenBreed.Common.Interface;
 using OpenBreed.Database.EFCore;
 using OpenBreed.Database.Interface;
@@ -31,13 +32,13 @@ namespace OpenBreed.Database.Xml
         public XmlReadonlyDatabaseMan(
             OpenBreedDbContext openBreedDbContext,
             IVariableMan variableMan,
-            string dbFilePath = null)
+            IOptions<XmlDbSettings> dbSettings)
         {
             this.openBreedDbContext = openBreedDbContext;
             this.variables = variableMan;
 
-            if(dbFilePath != null)
-                Open(dbFilePath);
+            if(dbSettings.Value.DbFilePath != null)
+                Open(dbSettings.Value.DbFilePath);
 
             RegisterTables();
             RegisterRepos();

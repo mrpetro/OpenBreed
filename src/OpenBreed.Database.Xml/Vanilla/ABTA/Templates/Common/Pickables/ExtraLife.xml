@@ -9,11 +9,8 @@
 		<SoundPlayer>
 		</SoundPlayer>
 		<ScriptRunner>
+			<ScriptId>Vanilla/Common/Item</ScriptId>
 			<Runs>
-				<Run>
-					<ScriptId>Vanilla/Common/Item/Pickup</ScriptId>
-					<TriggerName>ScriptRunTrigger</TriggerName>
-				</Run>
 			</Runs>
 		</ScriptRunner>
 		<Position X="$(startX)" Y="$(startY)" />

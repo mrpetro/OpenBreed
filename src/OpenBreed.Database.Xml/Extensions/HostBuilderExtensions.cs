@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using OpenBreed.Common.Interface;
 using OpenBreed.Database.EFCore;
 using OpenBreed.Database.Interface;
@@ -40,13 +41,14 @@ namespace OpenBreed.Common.Database.Xml.Extensions
             });
         }
 
-        public static void SetupXmlReadonlyDatabase(this IHostBuilder hostBuilder, string dbFilePath = null)
+        public static void SetupXmlReadonlyDatabase(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IRepositoryProvider>((sp) => new XmlReadonlyDatabaseMan(
                     sp.GetService<OpenBreedDbContext>(),
-                    sp.GetService<IVariableMan>(), dbFilePath));
+                    sp.GetService<IVariableMan>(),
+                    sp.GetService<IOptions<XmlDbSettings>>()));
             });
         }
     }
