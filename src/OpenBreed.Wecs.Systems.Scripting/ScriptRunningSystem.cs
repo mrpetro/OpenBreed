@@ -1,10 +1,12 @@
-﻿using OpenBreed.Scripting.Interface;
+﻿using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Scripting
 {
@@ -13,14 +15,18 @@ namespace OpenBreed.Wecs.Systems.Scripting
         #region Private Fields
 
         private readonly IScriptMan scriptMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal ScriptRunningSystem(IScriptMan scriptMan)
+        internal ScriptRunningSystem(
+            IScriptMan scriptMan,
+            ILogger logger)
         {
             this.scriptMan = scriptMan;
+            this.logger = logger;
 
             RequireEntityWith<ScriptRunnerComponent>();
         }
@@ -29,19 +35,37 @@ namespace OpenBreed.Wecs.Systems.Scripting
 
         #region Protected Methods
 
+        private void TryInvoke(Entity entity, string triggerName)
+        {
+            var component = entity.TryGet<ScriptRunnerComponent>();
+
+            var hook = component.SystemHooks.FirstOrDefault(item => item.TriggerName == triggerName);
+
+            if (hook is null)
+                return;
+
+            var initFunction = scriptMan.GetFunction(hook.FunctionId);
+
+            if (initFunction is null)
+            {
+                logger.Error($"Script function '{hook.FunctionId}' for trigger '{triggerName}' doesn't exist.");
+                return;
+            }
+
+            initFunction.Invoke(entity);
+        }
+
         protected override void OnAddEntity(Entity entity)
         {
             base.OnAddEntity(entity);
 
-
-            var metadata = entity.TryGet<MetadataComponent>();
-
-            var initFunc = scriptMan.GetTableFunction($"EntityTypes.{metadata.Name}.Initialize");
-            initFunc.Invoke(entity);
+            TryInvoke(entity, "onInit");
         }
 
         protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
+            TryInvoke(entity, "onUpdate");
+
             var sc = entity.Get<ScriptRunnerComponent>();
 
             for (int i = 0; i < sc.Runs.Count; i++)

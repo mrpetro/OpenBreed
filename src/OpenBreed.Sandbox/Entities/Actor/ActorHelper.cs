@@ -177,17 +177,30 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private void ScriptRunCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
         {
-            var scriptId = entityB.GetScriptId("ScriptRunTrigger");
+            var functionId = entityB.GetFunctionId("ScriptRunTrigger");
 
-            if (scriptId is null)
+            if(functionId is null)
+            {
+                var scriptId = entityB.GetScriptId("ScriptRunTrigger");
+
+                if (scriptId is null)
+                    return;
+
+                var func = scriptMan.GetFunction(scriptId);
+
+                if (func is null)
+                    return;
+
+                func.Invoke(entityB, entityA);
+                return;
+            }
+
+            var scriptFunction = scriptMan.GetFunction(functionId);
+
+            if (scriptFunction is null)
                 return;
 
-            var func = scriptMan.GetFunction(scriptId);
-
-            if (func is null)
-                return;
-
-            func.Invoke(entityB, entityA);
+            scriptFunction.Invoke(entityB, entityA);
         }
 
         private void SlopeObstacleCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)

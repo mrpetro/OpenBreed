@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.Interface.Managers;
@@ -64,6 +65,7 @@ using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Scripting;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
@@ -72,10 +74,12 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
+using System.CommandLine;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace OpenBreed.Sandbox
 {
@@ -105,7 +109,7 @@ namespace OpenBreed.Sandbox
 
         #region Public Methods
 
-        public ICore Create(string gameDbFilePath, string gameFolderPath)
+        public ICore Create()
         {
             var appName = ProgramTools.AppProductName;
             var infoVersion = ProgramTools.AppInfoVerion;
@@ -330,10 +334,11 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupVariableManager((variableMan, serviceProvider) =>
             {
-                variableMan.RegisterVariable(typeof(string), gameFolderPath, "Cfg.Options.ABTA.GameFolderPath");
+                var folderOptions = serviceProvider.GetService<IOptions<EnvironmentSettings>>();
+                variableMan.RegisterVariable(typeof(string), folderOptions.Value.LegacyFolderPath, "Cfg.Options.ABTA.GameFolderPath");
             });
 
-            hostBuilder.SetupXmlReadonlyDatabase(gameDbFilePath);
+            hostBuilder.SetupXmlReadonlyDatabase();
 
             hostBuilder.ConfigureServices((sc) => sc.AddSingleton<FontHelper>());
 
@@ -431,64 +436,24 @@ namespace OpenBreed.Sandbox
             //    var amf = amfReader.Read(file);
             //}
 
+            //SetupCommandLine(args);
+
+
             var hostBuilder = new HostBuilder().ConfigureAppConfiguration((hostingContext, config) =>
             {
                 config.AddJsonFile("appsettings.json", optional: true);
                 config.AddEnvironmentVariables();
-
-                if (args != null)
-                {
-                    config.AddCommandLine(args);
-                }
             });
 
-            if (args.Length < 2)
-            {
-                Console.WriteLine("Not enough arguments.");
-                Console.WriteLine($"Usage:");
-                Console.WriteLine($"{System.AppDomain.CurrentDomain.FriendlyName} <database XML file path> <vanilla game folder path>");
-                return;
-            }
+            hostBuilder.SetupCommandLine(args);
 
             var asm = Assembly.GetExecutingAssembly();
-            var gameDbFileName = args[0];
-            var vanillaGameFolderPath = args[1];
-            var execFolderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var gameDbFilePath = Path.Combine(execFolderPath, gameDbFileName);
 
             var programFactory = new ProgramFactory(hostBuilder);
 
-            var program = programFactory.Create(gameDbFilePath, vanillaGameFolderPath);
+            var program = programFactory.Create();
 
             program.Run();
-        }
-
-        private static async Task RunWithHostBuilder(string[] args)
-        {
-            var builder = new HostBuilder()
-              .ConfigureAppConfiguration((hostingContext, config) =>
-              {
-                  config.AddJsonFile("appsettings.json", optional: true);
-                  config.AddEnvironmentVariables();
-
-                  if (args != null)
-                  {
-                      config.AddCommandLine(args);
-                  }
-              });
-            //.ConfigureServices((hostContext, services) =>
-            //{
-            //    services.AddOptions();
-            //    services.Configure<AppConfig>(hostContext.Configuration.GetSection("AppConfig"));
-            //
-            //    services.AddSingleton<IHostedService, PrintTextToConsoleService>();
-            //});
-            //.ConfigureLogging((hostingContext, logging) => {
-            //    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-            //    logging.AddConsole();
-            //});
-
-            await builder.RunConsoleAsync();
         }
 
         private void OnUpdateFrame(float dt)
@@ -523,9 +488,14 @@ namespace OpenBreed.Sandbox
             var scriptMan = GetManager<IScriptMan>();
             var triggerMan = GetManager<ITriggerMan>();
             var worldGateHelper = GetManager<EntriesHelper>();
+            var gameSettings = GetManager<IOptions<GameSettings>>();
 
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
             var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
+
+
+            var levelName = gameSettings.Value.StartingLevelName;
+            var gameWorld = mapLegacyLoader.Load(levelName);
 
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
@@ -536,7 +506,7 @@ namespace OpenBreed.Sandbox
             //L3
             //var gameWorld = mapLegacyLoader.Load("Vanilla/28");
             //L4
-            var gameWorld = mapLegacyLoader.Load("Vanilla/2");
+            //var gameWorld = mapLegacyLoader.Load("Vanilla/2");
             //L5
             //var gameWorld = mapLegacyLoader.Load("Vanilla/16");
             //L6

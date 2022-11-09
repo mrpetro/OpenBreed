@@ -22,6 +22,9 @@ namespace OpenBreed.Wecs.Components.Scripting.Xml
     {
         #region Public Properties
 
+        [XmlElement("ScriptId")]
+        public string ScriptId { get; set; }
+
         [XmlIgnore]
         public IEnumerable<IScriptRunTemplate> Runs => XmlRuns.Cast<IScriptRunTemplate>();
 

@@ -14,7 +14,7 @@ namespace OpenBreed.Scripting.Interface
         /// <summary>
         /// Function invoke method
         /// </summary>
-        /// <param name="args">collection of arguments to be passed when invoking</param>
+        /// <param name="args">Collection of arguments to be passed when invoking</param>
         /// <returns>Return object if any</returns>
         object Invoke(params object[] args);
     }
