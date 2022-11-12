@@ -89,6 +89,7 @@ namespace OpenBreed.Sandbox.Worlds
         {
             //Input Stage
             builder.AddSystem(systemFactory.Create<ActorMovementByPlayerControlSystem>());
+            builder.AddSystem(systemFactory.Create<ActorScriptByPlayerControlSystem>());
             builder.AddSystem(systemFactory.Create<AttackControllerSystem>());
 
 
@@ -109,7 +110,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             p1Controller.Add(new WalkingInputComponent(p1.Id, 0));
             p1Controller.Add(new AttackInputComponent(p1.Id, 0));
-            p1Controller.Add(new WalkingControlComponent());
+            p1Controller.Add(new ControlComponent());
             p1Controller.Add(new AttackControlComponent());
 
             return p1Controller;

@@ -4,6 +4,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Linq;
@@ -28,70 +29,23 @@ namespace OpenBreed.Wecs.Systems.Scripting
             this.scriptMan = scriptMan;
             this.logger = logger;
 
-            RequireEntityWith<ScriptRunnerComponent>();
+            RequireEntityWith<ScriptComponent>();
         }
 
         #endregion Internal Constructors
 
         #region Protected Methods
 
-        private void TryInvoke(Entity entity, string triggerName)
-        {
-            var component = entity.TryGet<ScriptRunnerComponent>();
-
-            var hook = component.SystemHooks.FirstOrDefault(item => item.TriggerName == triggerName);
-
-            if (hook is null)
-                return;
-
-            var initFunction = scriptMan.GetFunction(hook.FunctionId);
-
-            if (initFunction is null)
-            {
-                logger.Error($"Script function '{hook.FunctionId}' for trigger '{triggerName}' doesn't exist.");
-                return;
-            }
-
-            initFunction.Invoke(entity);
-        }
-
         protected override void OnAddEntity(Entity entity)
         {
             base.OnAddEntity(entity);
 
-            TryInvoke(entity, "onInit");
+            entity.TryInvoke(scriptMan, logger, "onInit");
         }
 
         protected override void UpdateEntity(Entity entity, IWorldContext context)
         {
-            TryInvoke(entity, "onUpdate");
-
-            var sc = entity.Get<ScriptRunnerComponent>();
-
-            for (int i = 0; i < sc.Runs.Count; i++)
-            {
-                var scriptAction = sc.Runs[i];
-
-                if (scriptAction.TriggerName != "OnWorldUpdate")
-                    continue;
-
-                IScriptFunc func = null;
-
-                if(scriptAction.ScriptFunction is not null)
-                {
-                    func = scriptMan.GetTableFunction($"{scriptAction.ScriptId}.{scriptAction.ScriptFunction}");
-
-                    if (func is not null)
-                        func.Invoke(entity);
-
-                    continue;
-                }
-
-                func = scriptMan.GetFunction(scriptAction.ScriptId);
-
-                if (func is not null)
-                    func.Invoke(entity);
-            }
+            entity.TryInvoke(scriptMan, logger, "onUpdate");
         }
 
         #endregion Protected Methods

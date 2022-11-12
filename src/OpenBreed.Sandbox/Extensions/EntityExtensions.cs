@@ -120,7 +120,7 @@ namespace OpenBreed.Sandbox.Extensions
             itemSlot.AddItem(itemId, quantity);
         }
 
-        public static void SetPosition(this Entity target,
+        public static void SetPositionToExit(this Entity target,
                                        IEntityMan entityMan,
                                        IShapeMan shapeMan,
                                        Entity entryEntity)

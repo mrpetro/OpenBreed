@@ -10,20 +10,11 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Components.Scripting
 {
-    public interface IScriptRunTemplate
-    {
-        string ScriptId { get; set; }
-        string TriggerName { get; set; }
-        string ScriptFunction { get; set; }
-    }
-
-    public interface IScriptRunnerComponentTemplate : IComponentTemplate
+    public interface IScriptComponentTemplate : IComponentTemplate
     {
         #region Public Properties
 
         string ScriptId { get; }
-
-        IEnumerable<IScriptRunTemplate> Runs { get; }
 
         #endregion Public Properties
     }
@@ -43,37 +34,16 @@ namespace OpenBreed.Wecs.Components.Scripting
         public string FunctionId { get; }
     }
 
-    public class ScriptRun
-    {
-        public ScriptRun(
-            string scriptId,
-            string triggerName,
-            string scriptFunction)
-        {
-            ScriptId = scriptId;
-            TriggerName = triggerName;
-            ScriptFunction = scriptFunction;
-        }
-
-        public string ScriptId { get; }
-        public string TriggerName { get; }
-        public string ScriptFunction { get; }
-    }
-
-
-
-    public class ScriptRunnerComponent : IEntityComponent
+    public class ScriptComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public ScriptRunnerComponent(
+        public ScriptComponent(
             string scriptId,
-            ScriptHook[] scriptHooks,
-            List<ScriptRun> runs)
+            ScriptHook[] scriptHooks)
         {
             ScriptId = scriptId;
             SystemHooks = scriptHooks;
-            Runs = runs;
         }
 
         #endregion Public Constructors
@@ -84,18 +54,16 @@ namespace OpenBreed.Wecs.Components.Scripting
 
         public ScriptHook[] SystemHooks { get; }
 
-        public List<ScriptRun> Runs { get; }
-
         #endregion Public Properties
     }
 
-    public sealed class ScriptRunnerComponentFactory : ComponentFactoryBase<IScriptRunnerComponentTemplate>
+    public sealed class ScriptComponentFactory : ComponentFactoryBase<IScriptComponentTemplate>
     {
         private readonly IScriptMan scriptMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
         #region Internal Constructors
 
-        public ScriptRunnerComponentFactory(
+        public ScriptComponentFactory(
             IScriptMan scriptMan,
             IDataLoaderFactory dataLoaderFactory)
         {
@@ -106,10 +74,6 @@ namespace OpenBreed.Wecs.Components.Scripting
         #endregion Internal Constructors
 
         #region Protected Methods
-
-        public void RegisterEngineHook<TSystem>(string hookName, Func<TSystem, Action<Entity>> func) where TSystem : ISystem
-        {
-        }
 
         private ScriptHook[] GetSystemHooks(string scriptId, Dictionary<object, object> engineHooks)
         {
@@ -134,7 +98,7 @@ namespace OpenBreed.Wecs.Components.Scripting
             return systemHooks.ToArray();
         }
 
-        protected override IEntityComponent Create(IScriptRunnerComponentTemplate template)
+        protected override IEntityComponent Create(IScriptComponentTemplate template)
         {
             var scriptLoader = dataLoaderFactory.GetLoader<IScriptDataLoader>();
 
@@ -162,41 +126,11 @@ namespace OpenBreed.Wecs.Components.Scripting
                         }
                     }
                 }
-
-
-                //var result = scriptFunc.Invoke<EntityValueWrapper, EntityScript>();
-                //var s = scriptMan.GetFunction($"EntityTypes.{metadata.Name}");
-
-                //var result = s.Invoke(entity);
-                //scriptMan.RegisterFunction(template.ScriptId, scriptFunc);
             }
 
-            var runs = new List<ScriptRun>();
-
-            foreach (var runTemplate in template.Runs)
-            {
-                if (!scriptMan.FunctionExists(runTemplate.ScriptId))
-                {
-                    var func = scriptLoader.Load(runTemplate.ScriptId);
-
-                    if(runTemplate.ScriptFunction is not null)
-                    {
-                        func.Invoke();
-                    }
-                    else
-                        scriptMan.RegisterFunction(runTemplate.ScriptId, func);
-                }
-
-                runs.Add(new ScriptRun(
-                    runTemplate.ScriptId,
-                    runTemplate.TriggerName,
-                    runTemplate.ScriptFunction));
-            }
-
-            return new ScriptRunnerComponent(
+            return new ScriptComponent(
                 template.ScriptId,
-                systemHooks,
-                runs);
+                systemHooks);
         }
 
         #endregion Protected Methods

@@ -16,7 +16,7 @@ namespace OpenBreed.Wecs.Components.Scripting.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ScriptRunnerComponentFactory>();
+                services.AddSingleton<ScriptComponentFactory>();
             });
         }
     }

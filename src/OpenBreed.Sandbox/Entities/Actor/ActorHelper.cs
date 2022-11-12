@@ -101,7 +101,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             var p1Controller = entityMan.GetByTag("Controllers.P1").First();
 
-            p1Controller.Get<WalkingControlComponent>().ControlledEntityId = actor.Id;
+            p1Controller.Get<ControlComponent>().ControlledEntityId = actor.Id;
 
             return actor;
         }
@@ -111,7 +111,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             var actor = CreateActor(name, pos);
 
             var p1Controller = entityMan.GetByTag("Controllers.P1").First();
-            p1Controller.Get<WalkingControlComponent>().ControlledEntityId = actor.Id;
+            p1Controller.Get<ControlComponent>().ControlledEntityId = actor.Id;
 
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
@@ -178,22 +178,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private void ScriptRunCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
         {
             var functionId = entityB.GetFunctionId("ScriptRunTrigger");
-
-            if(functionId is null)
-            {
-                var scriptId = entityB.GetScriptId("ScriptRunTrigger");
-
-                if (scriptId is null)
-                    return;
-
-                var func = scriptMan.GetFunction(scriptId);
-
-                if (func is null)
-                    return;
-
-                func.Invoke(entityB, entityA);
-                return;
-            }
 
             var scriptFunction = scriptMan.GetFunction(functionId);
 

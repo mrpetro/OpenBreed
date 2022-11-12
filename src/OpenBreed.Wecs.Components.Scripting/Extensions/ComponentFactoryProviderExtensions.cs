@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Components.Scripting.Extensions
     {
         public static void SetupScriptingComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
-            provider.RegisterComponentFactory<XmlScriptRunnerComponent>(serviceProvider.GetService<ScriptRunnerComponentFactory>());
+            provider.RegisterComponentFactory<XmlScriptComponent>(serviceProvider.GetService<ScriptComponentFactory>());
         }
     }
 }
