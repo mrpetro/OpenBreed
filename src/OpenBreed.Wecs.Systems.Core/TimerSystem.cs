@@ -38,6 +38,8 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             var tc = entity.Get<TimerComponent>();
 
+            RaiseUpdateEvent(entity);
+
             //Update all timers with delta time
             for (int i = 0; i < tc.Items.Count; i++)
                 UpdateTimer(entity, tc.Items[i], context.Dt);
@@ -62,6 +64,11 @@ namespace OpenBreed.Wecs.Systems.Core
 
             timerData.Enabled = false;
             RaiseTimerElapsedEvent(entity, timerData);
+        }
+
+        private void RaiseUpdateEvent(Entity entity)
+        {
+            eventsMan.Raise(entity, new WorldUpdateEvent(entity.Id));
         }
 
         private void RaiseTimerUpdateEvent(Entity entity, TimerData timerData)

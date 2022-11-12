@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems.Core.Events;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,14 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
     public static class TriggerExtensions
     {
+        public static void EveryUpdate(this ITriggerMan triggerMan, World world, Action action, bool singleTime = false)
+        {
+            triggerMan.CreateTrigger<WorldUpdateEvent>(
+                (args) => Equals(world.Id, args.WorldId),
+                (args) => action.Invoke(),
+                singleTime);
+        }
+
         public static void AfterDelay(this ITriggerMan triggerMan, Entity entity, TimeSpan timeSpan, Action action, bool singleTime = false)
         {
             var rnd = new Random();

@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
+using OpenBreed.Input.Interface;
+using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
 using System;
@@ -11,6 +13,19 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
 {
     public static class TriggerExtensions
     {
+        public static void AnyKeyPressed(this ITriggerMan triggerMan, Action<KeyDownEvent> action, bool singleTime = false)
+        {
+            triggerMan.EventsMan.Subscribe<KeyDownEvent>(ConditionalAction);
+
+            void ConditionalAction(object sender, KeyDownEvent args)
+            {
+                if (singleTime)
+                    triggerMan.EventsMan.Unsubscribe<KeyDownEvent>(ConditionalAction);
+
+                action.Invoke(args);
+            }
+        }
+
         public static void OnEntityControlFireChanged(this ITriggerMan triggerMan, Entity entity, Action<Entity, ControlFireChangedEventArgs> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<ControlFireChangedEventArgs>(ConditionalAction);

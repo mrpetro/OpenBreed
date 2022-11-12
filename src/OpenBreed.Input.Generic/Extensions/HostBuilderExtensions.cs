@@ -22,7 +22,9 @@ namespace OpenBreed.Input.Generic.Extensions
             {
                 services.AddSingleton<IInputsMan>((sp) =>
                 {
-                    var inputsMan = new InputsMan(sp.GetService<IViewClient>());
+                    var inputsMan = new InputsMan(
+                        sp.GetService<IViewClient>(),
+                        sp.GetService<IEventsMan>());
                     action.Invoke(inputsMan, sp);
                     return inputsMan;
                 });

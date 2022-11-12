@@ -4,6 +4,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Systems.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,7 +122,10 @@ namespace OpenBreed.Wecs.Worlds
             InitializePendingWorlds();
 
             foreach (var world in worlds)
+            {
+                eventsMan.Raise(world, new WorldUpdateEvent(world.Id));
                 world.Update(dt);
+            }
 
             DeinitializePendingWorlds();
         }

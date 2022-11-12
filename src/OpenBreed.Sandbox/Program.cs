@@ -94,6 +94,17 @@ namespace OpenBreed.Sandbox
         }
     }
 
+    internal class LuaEventHandler<TEvent> : NLua.Method.LuaDelegate
+    {
+        void CallFunction(TEvent eventArgs)
+        {
+            object[] args = new object[] { eventArgs };
+            object[] inArgs = new object[] { eventArgs };
+            int[] outArgs = new int[] { };
+            base.CallFunction(args, inArgs, outArgs);
+        }
+    }
+
     public class ProgramFactory
     {
         private readonly IHostBuilder hostBuilder;
@@ -116,11 +127,6 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupCoreManagers();
             hostBuilder.SetupDataGridFactory();
-
-            hostBuilder.SetupEventsManEx((triggerMan, sp) =>
-            {
-                triggerMan.RegisterGameEvents();
-            });
 
             hostBuilder.SetupViewClient(640, 480, $"{appName} v{infoVersion}");
 
@@ -154,6 +160,8 @@ namespace OpenBreed.Sandbox
                 scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldUnpausedEventArgs>), typeof(LuaEntityEventHandler<WorldUnpausedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<Entity, AnimFinishedEventArgs>), typeof(LuaEntityEventHandler<AnimFinishedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<Entity, ClientResizedEventArgs>), typeof(LuaEntityEventHandler<ClientResizedEventArgs>));
+                scriptMan.RegisterDelegateType(typeof(Action<KeyDownEvent>), typeof(LuaEventHandler<KeyDownEvent>));
+                scriptMan.RegisterDelegateType(typeof(Action<KeyUpEvent>), typeof(LuaEventHandler<KeyUpEvent>));
 
                 scriptMan.Expose("Entities", sp.GetService<IEntityMan>());
                 scriptMan.Expose("Sounds", sp.GetService<ISoundMan>());
@@ -171,6 +179,7 @@ namespace OpenBreed.Sandbox
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Components.Common', 'OpenBreed.Wecs.Components.Common.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Core', 'OpenBreed.Wecs.Systems.Core.Extensions')");
+                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Control', 'OpenBreed.Wecs.Systems.Control.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Audio', 'OpenBreed.Wecs.Systems.Audio.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Rendering', 'OpenBreed.Wecs.Systems.Rendering.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Animation', 'OpenBreed.Wecs.Systems.Animation.Extensions')");
