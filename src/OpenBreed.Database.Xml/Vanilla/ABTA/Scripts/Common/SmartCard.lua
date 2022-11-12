@@ -11,6 +11,12 @@
     local gameViewportEntity = Entities:GetGameViewport()
     local cameraFadeOutClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeOut").Id
     local cameraFadeInClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeIn").Id
+    local smartCardMetadata = smartCardEntity:GetMetadata()
+    local textId = gameWorld.Name .. "/" .. smartCardMetadata.Name .. tostring(smartCardMetadata.Option)
+    Logging:Info("Text Id: " .. textId)
+    local text = Texts:GetTextString(textId)
+    local currentCharacter = 0
+    local textLength = string.len(text)
 
     --functions
     local GameWorldPause
@@ -20,6 +26,8 @@
     local SmartCardWorldFadeOut
     local SwitchViewToGameWorld
     local GameWorldUnpause
+    local PrintNextCharacter
+    local ShowAllTextIfNeeded
 
     -- Functions
 
@@ -60,19 +68,61 @@
             true)
 
         smartCardReaderCameraEntity:PlayAnimation(0, cameraFadeInClipId)
+
+        DisplayTextToNextCharacter(gameWorld, nil)
+    end
+
+
+    DisplayTextToNextCharacter = function(world, args)
+
+       if( currentCharacter > textLength)
+       then
+            return
+       end
+
+       local textPart = string.sub(text,0, currentCharacter)
+
+       smartCardReaderTextEntity:SetText(0, textPart)
+
+       --Triggers:EveryUpdate(
+       --     gameWorld,
+       --     DisplayTextToNextCharacter,
+       --     true)
+
+       Triggers:AfterDelay(
+            Commentator,
+            TimeSpan.FromMilliseconds(60),
+            DisplayTextToNextCharacter,
+            true)
+
+       currentCharacter = currentCharacter + 1
     end
 
     SmartCardWorldShowText = function(entity, args)
         Logging:Info("Smart card world show text...")
 
-        --TODO: Show text here and wait for button
-
-        --Triggers:AnyKeyPressed(actorEntity, SmartCardWorldFadeOut)
-        Triggers:AfterDelay(Commentator, TimeSpan.FromMilliseconds(2000), SmartCardWorldFadeOut)
+        Triggers:AnyKeyPressed(
+            ShowAllTextIfNeeded,
+            true)
     end
 
+    ShowAllTextIfNeeded = function(args)
 
-    SmartCardWorldFadeOut = function(entity, args)
+        --If all text is shown, go straight to fade out
+        if( currentCharacter > textLength)
+        then
+            SmartCardWorldFadeOut(nil)
+            return
+        --Else show all text and wait for button to be pressed
+        else
+            currentCharacter = textLength
+            Triggers:AnyKeyPressed(
+                SmartCardWorldFadeOut,
+                true)
+        end
+    end
+
+    SmartCardWorldFadeOut = function(args)
         Logging:Info("Smart card world fade out...")
 
         Triggers:OnEntityAnimFinished(
@@ -127,15 +177,6 @@
     then
 	    return
     end
-
-    local smartCardMetadata = smartCardEntity:GetMetadata()
-
-    local textId = gameWorld.Name .. "/" .. smartCardMetadata.Name .. tostring(smartCardMetadata.Option)
-    Logging:Info("Text Id: " .. textId)
-
-    local text = Texts:GetTextString(textId)
-
-    smartCardReaderTextEntity:SetText(0, text)
 
     smartCardEntity:Destroy()
 
