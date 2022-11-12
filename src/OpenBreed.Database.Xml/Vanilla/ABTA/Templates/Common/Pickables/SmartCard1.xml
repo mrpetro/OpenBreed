@@ -39,10 +39,8 @@
 				</Item>
 			</Items>
 		</TilePutter>
-		<ScriptRunner>
+		<Script>
 			<ScriptId>Vanilla/Common/SmartCard</ScriptId>
-			<Runs>
-			</Runs>
-		</ScriptRunner>
+		</Script>
 	</Components>
 </EntityTemplate>

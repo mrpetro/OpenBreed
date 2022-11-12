@@ -102,9 +102,6 @@
     <Content Include="Vanilla\Common\Scripts\Hud\FpsCounter.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\Common\Scripts\Hud\FpsUpdate.lua">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Vanilla\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

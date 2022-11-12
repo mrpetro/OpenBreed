@@ -14,11 +14,9 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
-		<ScriptRunner>
+		<Script>
 			<ScriptId>Vanilla/Common/LandMine</ScriptId>
-			<Runs>
-			</Runs>
-		</ScriptRunner>
+		</Script>
 		<SoundPlayer>
 		</SoundPlayer>
 		<TilePutter>

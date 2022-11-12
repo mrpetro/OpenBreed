@@ -5,11 +5,9 @@
 			<Name>FpsCounter</Name>
 		</Metadata>
 		<Position X="$(posX)" Y="$(posY)" />
-		<ScriptRunner>
+		<Script>
 			<ScriptId>EntityTypes.FpsCounter</ScriptId>
-			<Runs>
-			</Runs>
-		</ScriptRunner>
+		</Script>
 		<Text>
 			<Text>FPS: 0.0</Text>
 			<Offset X="0" Y="0" />

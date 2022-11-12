@@ -12,6 +12,8 @@
 				<State FsmName="Turret.Rotation" StateName="Idle" />
 			</States>
 		</Fsm>
+		<Script>
+		</Script>
 		<Animation>
 			<States>
 				<State>

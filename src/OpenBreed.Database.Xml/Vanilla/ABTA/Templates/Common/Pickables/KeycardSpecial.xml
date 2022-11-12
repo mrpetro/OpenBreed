@@ -7,11 +7,9 @@
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>
-		<ScriptRunner>
+		<Script>
 			<ScriptId>Vanilla/Common/Item</ScriptId>
-			<Runs>
-			</Runs>
-		</ScriptRunner>
+		</Script>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>

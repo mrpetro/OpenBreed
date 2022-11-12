@@ -37,13 +37,13 @@
             true)
 
         cameraEntity:PlayAnimation(0, cameraFadeOutClipId)
-        hudCameraEntity:PlayAnimation(0, cameraFadeOutClipId)
+        --hudCameraEntity:PlayAnimation(0, cameraFadeOutClipId)
     end
 
     SetPosition = function(entity, args)
-        Logging:Info("SetPosition...")
+        Logging:Info("SetPosition to exit...")
 
-        actorEntity:SetPosition(Entities, Shapes, teleportEntity)
+        actorEntity:SetPositionToExit(Entities, Shapes, teleportEntity)
 
         WorldUnpause()
     end

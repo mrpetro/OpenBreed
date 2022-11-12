@@ -1,4 +1,8 @@
-﻿local function onUpdate(entity, dt)
+﻿
+local updateFpsCounterPos
+local fpsCounter
+
+local function onUpdate(entity, dt)
 
 	local fps = Rendering.Fps
 	local text = "FPS: " .. string.format("%.2f", fps)
@@ -13,15 +17,14 @@ local function onInit(entity)
 
 	Triggers:OnEntityViewportResized(hudViewport, updateFpsCounterPos)
 	Logging:Info("Initialize")
-
+	fpsCounter = entity;
 end
 
-local updateFpsCounterPos = function(v, a)
-
-	Logging:Info(tostring(a))
-
-	Logging:Info("Set FPSPosition")
-	entity:SetPosition(-a.Width / 2.0, -a.Height / 2.0)
+updateFpsCounterPos = function(v, a)
+	--Logging:Info("Width: " .. tostring(a.Width))
+	--Logging:Info("Height: " .. tostring(a.Height))
+	--Logging:Info("Set FPSPosition")
+	fpsCounter:SetPosition(-a.Width / 2.0, -a.Height / 2.0)
 end
 
 return {

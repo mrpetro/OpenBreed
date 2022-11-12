@@ -14,10 +14,8 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
-		<ScriptRunner>
+		<Script>
 			<ScriptId>Vanilla/Common/Teleporter</ScriptId>
-			<Runs>
-			</Runs>
-		</ScriptRunner>
+		</Script>
     </Components>
 </EntityTemplate>
