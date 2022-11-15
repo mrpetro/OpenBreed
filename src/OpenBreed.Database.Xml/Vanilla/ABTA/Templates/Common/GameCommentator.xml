@@ -3,6 +3,8 @@
     <Components>
 		<Timer>
 		</Timer>
+		<Frame>
+		</Frame>
 		<SoundPlayer></SoundPlayer>
 	</Components>
 </EntityTemplate>

@@ -26,8 +26,10 @@
     local SmartCardWorldFadeOut
     local SwitchViewToGameWorld
     local GameWorldUnpause
-    local PrintNextCharacter
+    local DisplayTextWithNextCharacter
     local ShowAllTextIfNeeded
+    local RemoveSmartcard
+
 
     -- Functions
 
@@ -60,7 +62,6 @@
 
         smartCardReaderCameraEntity:SetBrightness(0)
         hudViewportEntity:SetViewportCamera(smartCardReaderCameraEntity.Id)
-        --actorEntity:SetPosition(Entities, Shapes, smartCardEntity)
 
         Triggers:OnEntityAnimFinished(
             smartCardReaderCameraEntity,                      
@@ -69,33 +70,31 @@
 
         smartCardReaderCameraEntity:PlayAnimation(0, cameraFadeInClipId)
 
-        DisplayTextToNextCharacter(gameWorld, nil)
+        Triggers:EveryFrame(
+            Commentator,
+            DisplayTextWithNextCharacter,
+            0,
+            true)
     end
 
+    DisplayTextWithNextCharacter = function(entity, args)
 
-    DisplayTextToNextCharacter = function(world, args)
-
-       if( currentCharacter > textLength)
-       then
+        if( currentCharacter > textLength)
+        then
             return
-       end
+        end
 
-       local textPart = string.sub(text,0, currentCharacter)
+        local textPart = string.sub(text,0, currentCharacter)
 
-       smartCardReaderTextEntity:SetText(0, textPart)
+        smartCardReaderTextEntity:SetText(0, textPart)
 
-       --Triggers:EveryUpdate(
-       --     gameWorld,
-       --     DisplayTextToNextCharacter,
-       --     true)
+        currentCharacter = currentCharacter + 1
 
-       Triggers:AfterDelay(
+        Triggers:EveryFrame(
             Commentator,
-            TimeSpan.FromMilliseconds(60),
-            DisplayTextToNextCharacter,
+            DisplayTextWithNextCharacter,
+            0,
             true)
-
-       currentCharacter = currentCharacter + 1
     end
 
     SmartCardWorldShowText = function(entity, args)
@@ -161,10 +160,22 @@
         actorEntity.State = nil
     end
 
-    -- Execution
+    RemoveSmartcard = function(entity)
 
-    --Logging:Info("TeleportEntityId:" .. tostring(smartCardEntity.Id) .. "(" .. smartCardEntity.Tag .. ")")
-    --Logging:Info("ActorEntityId:" .. tostring(actorEntity.Id) .. "(" .. actorEntity.Tag .. ")")
+        local metaData = entity:GetMetadata()
+
+        if (metaData.Flavor ~= "Trigger")
+        then
+            local stampName = tostring(metaData.Level) .. "/" .. tostring(metaData.Name) .. "/" .. tostring(metaData.Flavor) .. "/Picked"
+            Logging:Info("StampName: " .. stampName)
+            local stampId = Stamps:GetByName(stampName).Id
+            Logging:Info("StampId: " .. tostring(stampId))
+            entity:PutStamp(stampId, 0)
+        end
+
+        entity:Destroy()
+
+    end
 
     if (tostring(actorEntity.State) == "SmartCardReading")
     then
@@ -178,11 +189,21 @@
 	    return
     end
 
-    smartCardEntity:Destroy()
+    Entities:ForEachEntity(
+        gameWorld.Id,
+        "NOT",
+        smartCardMetadata.Option,
+        RemoveSmartcard)
+
+    local soundName = "Vanilla/Common/Speech/SmartCardMessageFollows"
+    local soundId = Sounds:GetByName(soundName)
+    Commentator:EmitSound(soundId)
 
     GameWorldPause()
 
 end
+
+
 
 return {
     systemHooks = {
