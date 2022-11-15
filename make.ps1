@@ -18,17 +18,39 @@ param (
 	Write-Host ("Building using '" + $Configuration + "' configuration...") -ForegroundColor Blue
 	
 	Push-Location
-	Set-Location -Path ".\src"
+	
+	try
+	{
+		Set-Location -Path ".\src"
+		
 		dotnet build -c $Configuration --nologo -p:TargetPlatform=win-x64
-	Pop-Location
-
-	if ($lastexitcode -ne 0)
-	{
-		Write-Host "Make all failed. Check logs for details." -ForegroundColor Red
+		
+		if ($lastexitcode -ne 0)
+		{
+			Write-Host "dotnet build failed." -ForegroundColor Red
+			return
+		}	
+		
+		dotnet publish "OpenBreed.Sandbox\OpenBreed.Sandbox.csproj" -c $Configuration -r win-x64 -o ".\..\build"
+		
+		if ($lastexitcode -ne 0)
+		{
+			Write-Host "dotnet publish failed." -ForegroundColor Red
+			return
+		}
 	}
-	else
+	finally
 	{
-		Write-Host "Make all succeeded." -ForegroundColor Green
+		Pop-Location
+		
+		if ($lastexitcode -ne 0)
+		{
+			Write-Host "Make all failed. Check logs for details." -ForegroundColor Red
+		}
+		else
+		{
+			Write-Host "Make all succeeded." -ForegroundColor Green
+		}	
 	}
 }
 
@@ -42,9 +64,17 @@ function Make-Clean
 	Write-Host ("Cleaning...") -ForegroundColor Blue
 
 	Push-Location
-	Set-Location -Path ".\src"
+	
+	try
+	{
+		Set-Location -Path ".\src"
+		
 		dotnet clean /nologo
-	Pop-Location
+	}
+	finally
+	{
+		Pop-Location
+	}
 	
 	Write-Host "Clean finished." -ForegroundColor Green
 }
