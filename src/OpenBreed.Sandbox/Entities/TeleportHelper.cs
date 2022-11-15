@@ -84,9 +84,10 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
+                .SetTag($"TeleportEntry/{pairId}")
                 .Build();
 
-            teleportEntry.Tag = $"TeleportEntry/{pairId}";
+            //teleportEntry.Tag = $"TeleportEntry/{pairId}";
 
             teleportEntry.EnterWorld(world.Id);
             return teleportEntry;
@@ -99,9 +100,8 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
+                .SetTag($"TeleportExit/{pairId}")
                 .Build();
-
-            teleportExit.Tag = $"TeleportExit/{pairId}";
 
             //teleportExit.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
 

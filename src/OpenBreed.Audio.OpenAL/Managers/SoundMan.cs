@@ -35,9 +35,10 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         public SoundMan(ILogger logger)
         {
+            this.logger = logger;
+
             alDevice = ALC.OpenDevice(null);
             alContext = ALC.CreateContext(alDevice, new ALContextAttributes());
-            this.logger = logger;
 
             ALC.MakeContextCurrent(alContext);
             ReportOpenAL();

@@ -42,13 +42,28 @@ namespace OpenBreed.Wecs.Extensions
             });
         }
 
+        public static void SetupComponentFactoryProvider(this IHostBuilder hostBuilder, Action<IComponentFactoryProvider, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IComponentFactoryProvider>((sp) =>
+                {
+                    var provider = new ComponentFactoryProvider();
+                    action.Invoke(provider, sp);
+                    return provider;
+                });
+            });
+        }
+
         public static void SetupEntityFactory(this IHostBuilder hostBuilder, Action<IEntityFactory, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IEntityFactory>((sp) =>
                 {
-                    var entityFactory = new EntityFactory(sp.GetService<IEntityMan>());
+                    var entityFactory = new EntityFactory(
+                        sp.GetService<IEntityMan>(),
+                        sp.GetService<IComponentFactoryProvider>());
                     action.Invoke(entityFactory, sp);
                     return entityFactory;
                 });

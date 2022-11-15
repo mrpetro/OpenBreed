@@ -6,13 +6,7 @@ namespace OpenBreed.Wecs.Entities
     {
         #region Public Methods
 
-        void RegisterComponentFactory<T>(IComponentFactory factory) where T : IComponentTemplate;
-
         ITemplateEntityBuilder Create(string entityTemplateName);
-
-        Entity Create();
-
-        Entity Create(IEntityTemplate template);
 
         #endregion Public Methods
     }

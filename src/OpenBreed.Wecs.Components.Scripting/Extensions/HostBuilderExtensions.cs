@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenBreed.Common.Interface;
+using OpenBreed.Scripting.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ namespace OpenBreed.Wecs.Components.Scripting.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ScriptRunnerComponentFactory>();
+                services.AddSingleton<ScriptComponentFactory>();
             });
         }
     }

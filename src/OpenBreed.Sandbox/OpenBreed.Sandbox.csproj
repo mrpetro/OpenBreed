@@ -1,14 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Content\sounds\**" />
     <Compile Remove="Entities\electricgate\**" />
+    <EmbeddedResource Remove="Content\sounds\**" />
     <EmbeddedResource Remove="Entities\electricgate\**" />
+    <None Remove="Content\sounds\**" />
     <None Remove="Entities\electricgate\**" />
   </ItemGroup>
 
@@ -55,12 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Content\sounds\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-	<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+	<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

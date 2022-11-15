@@ -37,16 +37,6 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         #region Public Methods
 
-        public void AddLivesCounter(World world, int x, int y)
-        {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\LivesCounter.xml")
-                .SetParameter("posX", x)
-                .SetParameter("posY", y)
-                .Build();
-
-            timer.EnterWorld(world.Id);
-        }
-
         public void AddDestructTimer(World world, int x, int y)
         {
             var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\DestructTimer.xml")
@@ -57,64 +47,17 @@ namespace OpenBreed.Sandbox.Entities.Hud
             timer.EnterWorld(world.Id);
         }
 
-        public void AddKeysCounter(World world, int x, int y)
+        public Entity CreateHudElement(
+            string elementName,
+            string entityTag,
+            int x,
+            int y)
         {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\KeysCounter.xml")
+            return entityFactory.Create(@$"Vanilla\ABTA\Templates\Common\Hud\{elementName}.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
+                .SetTag(entityTag)
                 .Build();
-
-            timer.EnterWorld(world.Id);
-        }
-
-        public void AddAmmoCounter(World world, int x, int y)
-        {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\AmmoCounter.xml")
-                .SetParameter("posX", x)
-                .SetParameter("posY", y)
-                .Build();
-
-            timer.EnterWorld(world.Id);
-        }
-
-        public void AddAmmoBar(World world, int x, int y)
-        {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\AmmoBar.xml")
-                .SetParameter("posX", x)
-                .SetParameter("posY", y)
-                .Build();
-
-            timer.EnterWorld(world.Id);
-        }
-
-        public void AddHealthBar(World world, int x, int y)
-        {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\HealthBar.xml")
-                .SetParameter("posX", x)
-                .SetParameter("posY", y)
-                .Build();
-
-            timer.EnterWorld(world.Id);
-        }
-
-        public void AddP1StatusBar(World world)
-        {
-            var p1StatusBar = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\StatusBarP1.xml")
-                .SetParameter("posX", -160)
-                .SetParameter("posY", 109)
-                .Build();
-
-            p1StatusBar.EnterWorld(world.Id);
-        }
-
-        public void AddP2StatusBar(World world)
-        {
-            var p1StatusBar = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\StatusBarP2.xml")
-                .SetParameter("posX", -160)
-                .SetParameter("posY", -120)
-                .Build();
-
-            p1StatusBar.EnterWorld(world.Id);
         }
 
         #endregion Public Methods

@@ -18,6 +18,7 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             XmlComponentsList.RegisterComponentType<XmlThrustComponent>();
             XmlComponentsList.RegisterComponentType<XmlVelocityComponent>();
             XmlComponentsList.RegisterComponentType<XmlTimerComponent>();
+            XmlComponentsList.RegisterComponentType<XmlFrameComponent>();
             XmlComponentsList.RegisterComponentType<XmlAngularPositionComponent>();
             XmlComponentsList.RegisterComponentType<XmlAngularVelocityComponent>();
             XmlComponentsList.RegisterComponentType<XmlAngularThrustComponent>();

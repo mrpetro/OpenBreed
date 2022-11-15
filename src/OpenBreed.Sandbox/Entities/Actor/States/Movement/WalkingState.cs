@@ -6,7 +6,6 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Core.Managers;
@@ -53,10 +52,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public void EnterState(Entity entity)
         {
+            Console.WriteLine("Walking -> Enter");
+
             var direction = entity.Get<AngularPositionComponent>();
-            var movement = entity.Get<MotionComponent>();
-            var control = entity.Get<WalkingControlComponent>();
-            entity.Get<ThrustComponent>().Value = control.Direction * movement.Acceleration;
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
             var stateName = fsmMan.GetStateName(FsmId, Id);
@@ -67,12 +65,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             entity.PlayAnimation(0, clip.Id);
             entity.SetText(0, string.Join(", ", currentStateNames.ToArray()));
 
-            triggerMan.OnEntityControlDirectionChanged(entity, OnControlDirectionChanged, singleTime: true);
-            triggerMan.OnEntityDirectionChanged(entity, OnDirectionChanged, singleTime: true);
+            triggerMan.OnEntityVelocityChanged(entity, OnVelocityChanged);
         }
 
         public void LeaveState(Entity entity)
         {
+            Console.WriteLine("Leave -> Enter");
 
         }
 
@@ -80,39 +78,15 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         #region Private Methods
 
-        private void OnDirectionChanged(Entity entity, DirectionChangedEventArgs args)
+        private bool OnVelocityChanged(Entity entity, VelocityChangedEventArgs args)
         {
-            var direction = entity.Get<AngularPositionComponent>();
-            var movement = entity.Get<MotionComponent>();
-            var animDirName = AnimHelper.ToDirectionName(direction.Value);
-            var className = entity.Get<MetadataComponent>().Name;
-            var movementFsm = fsmMan.GetByName("Actor.Movement");
-            var movementStateName = movementFsm.GetCurrentStateName(entity);
+            var velocityComponent = entity.Get<VelocityComponent>();
 
-            var clip = clipMan.GetByName($"{ANIM_PREFIX}/{className}/{movementStateName}/{animDirName}");
+            if (velocityComponent.Value != Vector2.Zero)
+                return false;
 
-            entity.PlayAnimation(0, clip.Id);
-        }
-
-        private void OnControlDirectionChanged(Entity entity, ControlDirectionChangedEventArgs e)
-        {
-            if (e.Direction != Vector2.Zero)
-            {
-                entity.SetState(FsmId, (int)MovementImpulse.Walk);
-
-                var angularVelocity = entity.Get<AngularVelocityComponent>();
-                angularVelocity.Value = new Vector2(e.Direction.X, e.Direction.Y);
-
-                triggerMan.OnEntityControlDirectionChanged(entity, OnControlDirectionChanged, singleTime: true);
-                triggerMan.OnEntityDirectionChanged(entity, OnDirectionChanged, singleTime: true);
-            }
-            else
-            {
-                entity.SetState(FsmId, (int)MovementImpulse.Stop);
-
-                triggerMan.OnEntityControlDirectionChanged(entity, OnControlDirectionChanged, singleTime: true);
-                triggerMan.OnEntityDirectionChanged(entity, OnDirectionChanged, singleTime: true);
-            }
+            entity.SetState(FsmId, (int)MovementImpulse.Stop);
+            return true;
         }
 
         #endregion Private Methods

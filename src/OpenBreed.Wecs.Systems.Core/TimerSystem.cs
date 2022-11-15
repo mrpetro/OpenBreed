@@ -64,6 +64,11 @@ namespace OpenBreed.Wecs.Systems.Core
             RaiseTimerElapsedEvent(entity, timerData);
         }
 
+        private void RaiseUpdateEvent(Entity entity)
+        {
+            eventsMan.Raise(entity, new EntityFrameEvent(entity.Id));
+        }
+
         private void RaiseTimerUpdateEvent(Entity entity, TimerData timerData)
         {
             eventsMan.Raise(entity, new TimerUpdateEventArgs(entity.Id, timerData.TimerId));

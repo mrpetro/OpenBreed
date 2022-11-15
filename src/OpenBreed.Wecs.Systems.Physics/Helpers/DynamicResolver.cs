@@ -88,7 +88,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
         /// <param name="entityA">Given dynamic body</param>
         /// <param name="entityB">Given static body</param>
         /// <param name="projection">Given collision projection vector</param>
-        public void ResolveVsStatic(Entity entityA, Entity entityB, Vector2 projection)
+        public void ResolveVsStatic(Entity entityA, Entity entityB, float dt, Vector2 projection)
         {
             var p = entityA.TryGet<PositionComponent>();
             var v = entityA.TryGet<VelocityComponent>();
@@ -110,6 +110,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
                 var vt = v.Value - vn;
 
                 v.Value = vt - cor * vn;
+                v.Value = new Vector2((int)v.Value.X, (int)v.Value.Y);
             }
         }
 

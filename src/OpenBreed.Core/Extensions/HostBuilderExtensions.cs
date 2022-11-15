@@ -28,21 +28,7 @@ namespace OpenBreed.Core.Extensions
                 services.AddSingleton<ITriggerMan, DefaultTriggerMan>();
 
                 services.AddSingleton<IJobsMan, JobsMan>();
-                //services.AddSingleton<IEventQueue, EventQueue>();
                 services.AddSingleton<IMessagesMan, MessagesMan>();
-            });
-        }
-
-        public static void SetupEventsManEx(this IHostBuilder hostBuilder, Action<IEventsManEx, IServiceProvider> action)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<IEventsManEx>((sp) =>
-                {
-                    var collisionMan = new DefaultEventsManEx(sp.GetService<ILogger>());
-                    action.Invoke(collisionMan, sp);
-                    return collisionMan;
-                });
             });
         }
 

@@ -4,6 +4,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Systems.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -8,59 +8,31 @@ using System.Globalization;
 
 namespace OpenBreed.Wecs.Entities
 {
-
-
     internal class EntityFactory : IEntityFactory
     {
         #region Private Fields
 
         private readonly IEntityMan entityMan;
-
+        private readonly IComponentFactoryProvider componentFactoryProvider;
         private readonly Dictionary<Type, IComponentFactory> componentFactories = new Dictionary<Type, IComponentFactory>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        public EntityFactory(IEntityMan entityMan)
+        public EntityFactory(IEntityMan entityMan, IComponentFactoryProvider componentFactoryProvider)
         {
             this.entityMan = entityMan;
+            this.componentFactoryProvider = componentFactoryProvider;
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
 
-        public void RegisterComponentFactory<T>(IComponentFactory factory) where T : IComponentTemplate
-        {
-            Debug.Assert(!componentFactories.ContainsKey(typeof(T)), $"Component '{typeof(T)}' factory already registered.");
-
-            componentFactories.Add(typeof(T), factory);
-        }
-
-        public Entity Create()
-        {
-            return entityMan.Create();
-        }
-
         public ITemplateEntityBuilder Create(string entityTemplateName)
         {
-            return new TemplateEntityBuilder(this, entityTemplateName);
-        }
-
-        public Entity Create(IEntityTemplate template)
-        {
-            var components = new List<IEntityComponent>();
-
-            foreach (var componentTemplate in template.Components)
-            {
-                if (componentFactories.TryGetValue(componentTemplate.GetType(), out IComponentFactory componentFactory))
-                    components.Add(componentFactory.Create(componentTemplate));
-                else
-                    throw new Exception($"Don't know how to create component based on template '{componentTemplate.GetType()}'");
-            }
-
-            return entityMan.Create(components);
+            return new TemplateEntityBuilder(this, entityMan, componentFactoryProvider, entityTemplateName);
         }
 
         #endregion Public Methods

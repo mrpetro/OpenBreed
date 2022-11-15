@@ -26,7 +26,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public SpriteRenderer(SpriteMan spriteMan,
                               IPrimitiveRenderer primitiveRenderer)
         {
-            //RenderTools.CreateIndicesArray(indicesArray, out ibo);
             this.spriteMan = spriteMan;
             this.primitiveRenderer = primitiveRenderer;
         }

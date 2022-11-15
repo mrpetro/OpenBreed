@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Components.Scripting.Extensions
     {
         public static void Setup()
         {
-            XmlComponentsList.RegisterComponentType<XmlScriptRunnerComponent>();
+            XmlComponentsList.RegisterComponentType<XmlScriptComponent>();
         }
     }
 }

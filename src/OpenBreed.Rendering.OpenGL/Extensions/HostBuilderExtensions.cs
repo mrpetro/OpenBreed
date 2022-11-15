@@ -32,11 +32,14 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
                 services.AddSingleton<IRenderableFactory, RenderableFactory>();
                 services.AddSingleton<ITileGridFactory, TileGridFactory>();
                 services.AddSingleton<SpriteMan, SpriteMan>();
+                services.AddSingleton<PictureMan, PictureMan>();
                 services.AddSingleton<ISpriteMan>((sp) => sp.GetService<SpriteMan>());
+                services.AddSingleton<IPictureMan>((sp) => sp.GetService<PictureMan>());
                 services.AddSingleton<IStampMan, StampMan>();
                 services.AddSingleton<IFontMan, FontMan>();
                 services.AddSingleton<IPrimitiveRenderer, PrimitiveRenderer>();
                 services.AddSingleton<ISpriteRenderer, SpriteRenderer>();
+                services.AddSingleton<IPictureRenderer, PictureRenderer>();
                 services.AddSingleton<IRenderingMan, RenderingMan>();
             });
         }
@@ -47,6 +50,14 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
                                                              managerCollection.GetService<AssetsDataProvider>(),
                                                              managerCollection.GetService<ITextureMan>(),
                                                              managerCollection.GetService<ISpriteMan>()));
+        }
+
+        public static void SetupPictureDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        {
+            dataLoaderFactory.Register<IPictureDataLoader>(() => new PictureDataLoader(managerCollection.GetService<IRepositoryProvider>(),
+                                                             managerCollection.GetService<AssetsDataProvider>(),
+                                                             managerCollection.GetService<ITextureMan>(),
+                                                             managerCollection.GetService<IPictureMan>()));
         }
 
         public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)

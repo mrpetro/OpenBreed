@@ -105,14 +105,14 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         //    //}
         //}
 
-        private void Projectile2FullObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        private void Projectile2FullObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, float dt, Vector2 projection)
         {
-            dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
+            dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
-        private void Projectile2StaticObstacleEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
+        private void Projectile2StaticObstacleEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, float dt, Vector2 projection)
         {
-            dynamicResolver.ResolveVsStatic(entityA, entityB, projection);
+            dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
         #endregion Private Methods

@@ -34,5 +34,15 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
         {
             return entity.Get<FollowedComponent>();
         }
+
+        public static PositionComponent GetPosition(this Entity entity)
+        {
+            return entity.Get<PositionComponent>();
+        }
+
+        public static void SetPosition(this Entity entity, float x, float y)
+        {
+            entity.Get<PositionComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
+        }
     }
 }

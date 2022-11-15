@@ -16,6 +16,9 @@ namespace OpenBreed.Wecs.Entities
         private readonly IEventsMan eventsMan;
         private readonly HashSet<Entity> toDestory = new HashSet<Entity>();
 
+        private readonly HashSet<Entity> entityByNoTagLookup = new HashSet<Entity>();
+        private readonly Dictionary<string, HashSet<Entity>> entityByTagLookup = new Dictionary<string, HashSet<Entity>>();
+
         #endregion Private Fields
 
         #region Internal Constructors
@@ -49,9 +52,15 @@ namespace OpenBreed.Wecs.Entities
 
         #region Public Methods
 
-        public IEnumerable<Entity> GetByTag(object tag)
+        public IEnumerable<Entity> GetByTag(string tag)
         {
-            return entities.Items.Where(item => item?.Tag != null && item.Tag.Equals(tag));
+            if (tag is null)
+                return entityByNoTagLookup;
+
+            if (entityByTagLookup.TryGetValue(tag, out HashSet<Entity> found))
+                return found;
+
+            return Enumerable.Empty<Entity>();
         }
 
         public IEnumerable<Entity> Where(Func<Entity, bool> predicate)
@@ -67,10 +76,13 @@ namespace OpenBreed.Wecs.Entities
                 return null;
         }
 
-        public Entity Create(List<IEntityComponent> initialComponents = null)
+        public Entity Create(string tag, List<IEntityComponent> initialComponents = null)
         {
-            var newEntity = new Entity(this, initialComponents);
+            var newEntity = new Entity(this, tag, initialComponents);
             newEntity.Id = entities.Add(newEntity);
+
+            AddToLookup(tag, newEntity);
+
             return newEntity;
         }
 
@@ -119,8 +131,45 @@ namespace OpenBreed.Wecs.Entities
             if (toDestory.Contains(entity))
             {
                 entities.RemoveById(entity.Id);
+                RemoveFromLookup(entity.Tag, entity);
                 toDestory.Remove(entity);
             }
+        }
+
+        private void AddToLookup(string tag, Entity entity)
+        {
+            if(tag is null)
+            {
+                entityByNoTagLookup.Add(entity);
+                return;
+            }
+
+            if (!entityByTagLookup.TryGetValue(tag, out HashSet<Entity> foundEntities))
+            {
+                foundEntities = new HashSet<Entity>();
+                entityByTagLookup.Add(tag, foundEntities);
+            }
+
+            foundEntities.Add(entity);
+        }
+
+        private void RemoveFromLookup(string tag, Entity entity)
+        {
+            if (tag is null)
+            {
+                entityByNoTagLookup.Remove(entity);
+                return;
+            }
+
+            if (!entityByTagLookup.TryGetValue(tag, out HashSet<Entity> foundEntities))
+                return;
+
+            foundEntities.Remove(entity);
+
+            if (foundEntities.Any())
+                return;
+
+            entityByTagLookup.Remove(tag);
         }
 
         #endregion Private Methods

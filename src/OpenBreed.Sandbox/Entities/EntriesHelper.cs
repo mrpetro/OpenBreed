@@ -110,7 +110,7 @@ namespace OpenBreed.Sandbox.Entities
         public void RegisterCollisionPairs()
         {
             //collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv ) => Actor2TriggerCallback(ca, ea, cb,eb, pv));
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv) => Actor2TriggerCallbackEx(ca, ea, cb, eb, pv));
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, dt, pv) => Actor2TriggerCallbackEx(ca, ea, cb, eb, dt, pv));
 
             //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
         }
@@ -144,7 +144,7 @@ namespace OpenBreed.Sandbox.Entities
 
             var cameraEntity = actorEntity.TryGet<FollowedComponent>()?.FollowerIds.
                                                                               Select(item => entityMan.GetById(item)).
-                                                                              FirstOrDefault(item => item.Tag is "PlayerCamera");
+                                                                              FirstOrDefault(item => item.Tag is "Camera.Player");
 
             if (cameraEntity == null)
                 return;
@@ -280,7 +280,7 @@ namespace OpenBreed.Sandbox.Entities
             }, singleTime: true);
         }
 
-        private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, Vector2 projection)
+        private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, float dt, Vector2 projection)
         {
             PerformEntityExit(entityA, entityB);
         }
@@ -381,9 +381,6 @@ namespace OpenBreed.Sandbox.Entities
 
             var thrustCmp = target.Get<ThrustComponent>();
             thrustCmp.Value = Vector2.Zero;
-
-            var walkingControlCmp = target.Get<WalkingControlComponent>();
-            walkingControlCmp.Direction = new Vector2(0, 0);
 
             target.State = null;
         }

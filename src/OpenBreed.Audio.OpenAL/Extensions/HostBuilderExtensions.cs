@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.VisualBasic.FileIO;
+using OpenBreed.Audio.Interface;
 using OpenBreed.Audio.Interface.Data;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Audio.OpenAL.Data;
@@ -13,6 +16,7 @@ using OpenBreed.Database.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +28,15 @@ namespace OpenBreed.Audio.OpenAL.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ISoundMan, SoundMan>();
+                services.AddSingleton<ISoundMan>((sp) =>
+                {
+                    var audioOptions = sp.GetService<IOptions<AudioSettings>>();
+
+                    if (audioOptions.Value.DisableSound)
+                        return NullSoundMan.Instance;
+                    else
+                        return new SoundMan(sp.GetService<ILogger>());
+                });
             });
         }
 

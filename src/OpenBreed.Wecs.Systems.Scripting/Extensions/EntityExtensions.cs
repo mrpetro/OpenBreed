@@ -1,25 +1,53 @@
-﻿using OpenBreed.Wecs.Components.Scripting;
+﻿using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems.Scripting.Extensions
 {
     public static class EntityExtensions
     {
-        public static string GetScriptId(this Entity entity, string triggerName)
+        #region Public Methods
+
+        public static string GetFunctionId(this Entity entity, string triggerName)
         {
-            var sc = entity.Get<ScriptRunnerComponent>();
+            var sc = entity.Get<ScriptComponent>();
 
-            var script = sc.Runs.FirstOrDefault(item => item.TriggerName == triggerName);
+            var hook = sc.SystemHooks.FirstOrDefault(item => item.TriggerName == triggerName);
 
-            if (script is null)
+            if (hook is null)
                 return null;
 
-            return script.ScriptId;
+            return hook.FunctionId;
         }
+
+        public static void TryInvoke(this Entity entity,
+            IScriptMan scriptMan,
+            ILogger logger,
+            string triggerName)
+        {
+            var component = entity.TryGet<ScriptComponent>();
+
+            if (component is null)
+                return;
+
+            var hook = component.SystemHooks.FirstOrDefault(item => item.TriggerName == triggerName);
+
+            if (hook is null)
+                return;
+
+            var initFunction = scriptMan.GetFunction(hook.FunctionId);
+
+            if (initFunction is null)
+            {
+                logger.Error($"Script function '{hook.FunctionId}' for trigger '{triggerName}' doesn't exist.");
+                return;
+            }
+
+            initFunction.Invoke(entity);
+        }
+
+        #endregion Public Methods
     }
 }

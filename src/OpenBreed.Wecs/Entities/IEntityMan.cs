@@ -28,13 +28,13 @@ namespace OpenBreed.Wecs.Entities
 
         #region Public Methods
 
-        IEnumerable<Entity> GetByTag(object tag);
+        IEnumerable<Entity> GetByTag(string tag);
 
         IEnumerable<Entity> Where(Func<Entity, bool> predicate);
 
         Entity GetById(int id);
 
-        Entity Create(List<IEntityComponent> initialComponents = null);
+        Entity Create(string tag, List<IEntityComponent> initialComponents = null);
 
         #endregion Public Methods
     }

@@ -5,6 +5,7 @@
         #region Protected Fields
 
         protected readonly IEntityMan entityMan;
+        protected string tag;
 
         #endregion Protected Fields
 
@@ -20,6 +21,12 @@
         #region Public Methods
 
         public abstract Entity Build();
+
+        public IEntityBuilder SetTag(string tag)
+        {
+            this.tag = tag;
+            return this;
+        }
 
         #endregion Public Methods
     }

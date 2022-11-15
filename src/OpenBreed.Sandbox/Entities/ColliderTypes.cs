@@ -13,7 +13,6 @@ namespace OpenBreed.Sandbox.Entities
         public static int ActorBody { get; private set; }
         public static int ActorTrigger { get; private set; }
         public static int DoorOpenTrigger { get; private set; }
-        public static int ItemPickupTrigger { get; private set; }
         public static int FullObstacle { get; private set; }
         public static int SlopeObstacle { get; private set; }
         public static int ActorOnlyObstacle { get; private set; }
@@ -32,7 +31,6 @@ namespace OpenBreed.Sandbox.Entities
             ActorBody = collisions.RegisterGroup("ActorBody");
             ActorTrigger = collisions.RegisterGroup("ActorTrigger");
             DoorOpenTrigger = collisions.RegisterGroup("DoorOpenTrigger");
-            ItemPickupTrigger = collisions.RegisterGroup("ItemPickupTrigger");
             Projectile = collisions.RegisterGroup("Projectile");
             FullObstacle = collisions.RegisterGroup("FullObstacle");
             SlopeObstacle = collisions.RegisterGroup("SlopeObstacle");
