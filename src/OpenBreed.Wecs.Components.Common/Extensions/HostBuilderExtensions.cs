@@ -19,6 +19,7 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
                 services.AddSingleton<VelocityComponentFactory>();
                 services.AddSingleton<ThrustComponentFactory>();
                 services.AddSingleton<TimerComponentFactory>();
+                services.AddSingleton<FrameComponentFactory>();
                 services.AddSingleton<MetadataComponentFactory>();
                 services.AddSingleton<AngularPositionComponentFactory>();
                 services.AddSingleton<AngularVelocityComponentFactory>();

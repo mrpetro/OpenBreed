@@ -6,16 +6,16 @@ namespace OpenBreed.Wecs.Systems.Core.Events
     /// <summary>
     /// Event args for event that occurs every update
     /// </summary>
-    public class WorldUpdateEvent : EventArgs
+    public class EntityFrameEvent : EventArgs
     {
         #region Public Constructors
 
-        public WorldUpdateEvent(int worldId)
+        public EntityFrameEvent(int entityId)
         {
-            WorldId = worldId;
+            EntityId = entityId;
         }
 
-        public int WorldId { get; }
+        public int EntityId { get; }
 
         #endregion Public Constructors
     }

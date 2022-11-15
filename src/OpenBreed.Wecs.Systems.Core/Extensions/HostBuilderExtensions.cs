@@ -23,6 +23,10 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
                 serviceProvider.GetService<IEntityMan>(),
                 serviceProvider.GetService<IEventsMan>(),
                 serviceProvider.GetService<ILogger>()));
+            systemFactory.Register<FrameSystem>(() => new FrameSystem(
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IEventsMan>(),
+                serviceProvider.GetService<ILogger>()));
 
             systemFactory.Register<PausingSystem>(() => new PausingSystem(serviceProvider.GetService<IWorldMan>(),
                                                                           serviceProvider.GetService<IEventsMan>()));

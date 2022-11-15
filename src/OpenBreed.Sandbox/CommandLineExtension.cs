@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenBreed.Audio.Interface;
 using OpenBreed.Database.Xml;
 using System;
 using System.CommandLine;
@@ -27,11 +28,15 @@ namespace OpenBreed.Sandbox
                 var startingLevelOption = new Option<string>
                     ("--startingLevelName", "Name of the starting level.");
 
+                var disableAudioOption = new Option<bool>
+                    ("--disableAudio", "Disable all game audio.");
+
                 var rootCommand = new RootCommand
                 {
                     dbFilePathOption,
                     legacyFolderPathOption,
-                    startingLevelOption
+                    startingLevelOption,
+                    disableAudioOption
                 };
 
                 ConfigureXmlDbSettings(rootCommand, args, (result) =>
@@ -41,14 +46,19 @@ namespace OpenBreed.Sandbox
                         xmlDbSettings.DbFilePath = result.GetValueForOption(dbFilePathOption);
                     });
 
-                    sc.Configure<EnvironmentSettings>(environmentSettings =>
+                    sc.Configure<EnvironmentSettings>(settings =>
                     {
-                        environmentSettings.LegacyFolderPath = result.GetValueForOption(legacyFolderPathOption);
+                        settings.LegacyFolderPath = result.GetValueForOption(legacyFolderPathOption);
                     });
 
-                    sc.Configure<GameSettings>(sameSettings =>
+                    sc.Configure<GameSettings>(settings =>
                     {
-                        sameSettings.StartingLevelName = result.GetValueForOption(startingLevelOption);
+                        settings.StartingLevelName = result.GetValueForOption(startingLevelOption);
+                    });
+
+                    sc.Configure<AudioSettings>(settings =>
+                    {
+                        settings.DisableSound = result.GetValueForOption(disableAudioOption);
                     });
                 });
             });

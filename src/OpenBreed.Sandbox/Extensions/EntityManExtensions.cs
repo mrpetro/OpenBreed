@@ -11,6 +11,35 @@ namespace OpenBreed.Sandbox.Extensions
 {
     public static class EntityManExtensions
     {
+        public static void ForEachEntity(this IEntityMan entityMan, int worldId, string entityType, string option, Action<Entity> action)
+        {
+
+            var nullOnes = entityMan.Where(entity => entity == null).ToArray();
+
+            var entities = entityMan.Where(entity =>
+            {
+                if(entity.WorldId != worldId)
+                    return false;
+
+                var meta = entity.TryGet<MetadataComponent>();
+
+                if (meta is null)
+                    return false;
+
+                if(meta.Name != entityType)
+                    return false;
+
+                if(meta.Option != option)
+                    return false;
+
+                return true;
+
+            }).ToArray();
+
+            foreach (var entity in entities)
+                action.Invoke(entity);
+        }
+
         public static Entity GetSmartCardReaderText(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("SmartCardReader/Text").FirstOrDefault();

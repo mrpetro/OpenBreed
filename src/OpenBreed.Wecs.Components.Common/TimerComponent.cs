@@ -38,11 +38,6 @@ namespace OpenBreed.Wecs.Components.Common
 
         #endregion Public Constructors
 
-        //public TimerComponent(TimerComponentBuilder builder)
-        //{
-        //    Items = builder.Items.ToList();
-        //}
-
         #region Public Properties
 
         public List<TimerData> Items { get; }

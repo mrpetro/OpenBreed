@@ -98,6 +98,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<ViewportSystem>());
             builder.AddSystem(systemFactory.Create<SoundSystem>());
             builder.AddSystem(systemFactory.Create<TimerSystem>());
+            builder.AddSystem(systemFactory.Create<FrameSystem>());
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             //builder.AddSystem(core.CreateTextSystem().Build());

@@ -122,10 +122,7 @@ namespace OpenBreed.Wecs.Worlds
             InitializePendingWorlds();
 
             foreach (var world in worlds)
-            {
-                eventsMan.Raise(world, new WorldUpdateEvent(world.Id));
                 world.Update(dt);
-            }
 
             DeinitializePendingWorlds();
         }

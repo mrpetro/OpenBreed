@@ -31,6 +31,7 @@ namespace OpenBreed.Sandbox.Extensions
 
             builder.AddSystem(systemFactory.Create<AnimatorSystem>());
             builder.AddSystem(systemFactory.Create<TimerSystem>());
+            builder.AddSystem(systemFactory.Create<FrameSystem>());
             builder.AddSystem(systemFactory.Create<PausingSystem>());
             builder.AddSystem(systemFactory.Create<FsmSystem>());
 
