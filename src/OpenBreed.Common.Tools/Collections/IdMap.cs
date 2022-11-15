@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace OpenBreed.Common.Tools.Collections
 {
@@ -20,14 +21,13 @@ namespace OpenBreed.Common.Tools.Collections
 
         public IdMap()
         {
-            Items = new ReadOnlyCollection<T>(items);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ReadOnlyCollection<T> Items { get; }
+        public IEnumerable<T> Items => items.Where(item => item is not null);
 
         public int Count
         {

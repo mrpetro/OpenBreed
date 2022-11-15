@@ -8,14 +8,9 @@
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>
-		<ScriptRunner>
-			<Runs>
-				<Run>
-					<ScriptId>Vanilla/Common/Item/Pickup</ScriptId>
-					<TriggerName>ScriptRunTrigger</TriggerName>
-				</Run>
-			</Runs>
-		</ScriptRunner>
+		<Script>
+			<ScriptId>Vanilla/Common/SmartCard</ScriptId>
+		</Script>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>

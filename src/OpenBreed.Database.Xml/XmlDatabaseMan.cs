@@ -1,5 +1,6 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Common.Interface;
+using OpenBreed.Database.EFCore;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -14,15 +15,16 @@ namespace OpenBreed.Database.Xml
 
         private const string DB_CURRENT_FOLDER_PATH = "Db.Current.FolderPath";
         private const string DB_CURRENT_FILE_NAME = "Db.Current.FileName";
-
+        private readonly IServiceScopeFactory serviceScopeFactory;
         private readonly IVariableMan variables;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal XmlDatabaseMan(IVariableMan variableMan, string dbFilePath = null)
+        internal XmlDatabaseMan(IServiceScopeFactory serviceScopeFactory, IVariableMan variableMan, string dbFilePath = null)
         {
+            this.serviceScopeFactory = serviceScopeFactory;
             this.variables = variableMan;
 
             if (dbFilePath != null)
@@ -35,7 +37,8 @@ namespace OpenBreed.Database.Xml
 
         public DatabaseMode Mode { get; private set; }
 
-        public string Name { get { return XmlFilePath; } }
+        public string Name
+        { get { return XmlFilePath; } }
 
         public string XmlFilePath { get; private set; }
 
@@ -55,9 +58,17 @@ namespace OpenBreed.Database.Xml
             Mode = mode;
 
             if (Mode == DatabaseMode.Create)
+            {
                 Data = new XmlDatabase();
+            }
             else
+            {
                 Data = XmlDatabase.Load(XmlFilePath);
+
+                var dir = Path.GetDirectoryName(XmlFilePath);
+                var file = Path.GetFileNameWithoutExtension(XmlFilePath);
+                var dbFilePath = Path.Combine(dir, file + ".db");
+            }
 
             var directoryPath = Path.GetDirectoryName(XmlFilePath);
             var fileName = Path.GetFileName(XmlFilePath);
@@ -68,7 +79,7 @@ namespace OpenBreed.Database.Xml
 
         public IUnitOfWork CreateUnitOfWork()
         {
-            return new XmlUnitOfWork(this);
+            return serviceScopeFactory.CreateScope().ServiceProvider.GetService<IUnitOfWork>();
         }
 
         public void Save()
@@ -88,21 +99,17 @@ namespace OpenBreed.Database.Xml
             Mode = DatabaseMode.Unset;
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal T GetTable<T>() where T : XmlDbTableDef, new()
+        public T GetTable<T>() where T : new()
         {
             var table = Data.Tables.OfType<T>().FirstOrDefault();
             if (table == null)
             {
                 table = new T();
-                Data.Tables.Add(table);
+                Data.Tables.Add((XmlDbTableDef)(object)table);
             }
             return table;
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
     }
 }

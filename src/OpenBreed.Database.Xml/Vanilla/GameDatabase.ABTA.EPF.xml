@@ -184,10 +184,13 @@
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<FileDataSource Id="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua" />
-				<FileDataSource Id="Extension/Scripts/Common/LandMineExplode.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMineExplode.lua" />
-				<FileDataSource Id="Extension/Scripts/Common/DoorOpen.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\DoorOpen.lua" />
-				<FileDataSource Id="Extension/Scripts/Common/ItemPickup.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\ItemPickup.lua" />
-				<FileDataSource Id="Extension/Scripts/Common/TeleporterTeleport.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\TeleporterTeleport.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/LandMine.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMine.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Door.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Door.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Item.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Item.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Teleporter.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Teleporter.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/SmartCard.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\SmartCard.lua" />
+				<FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
+				<FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
 				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
 				<FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\SimpleEntry.lua" />
 				<FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Exit.lua" />
@@ -1058,16 +1061,25 @@
 				<Asset Id="Assets.Scripts.L1.MAP.01.PlayerEntry.lua" DataSourceRef="Extension/Scripts/L1/MAP.01.PlayerEntry.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Common.LandMineExplode.lua" DataSourceRef="Extension/Scripts/Common/LandMineExplode.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.LandMine.lua" DataSourceRef="Extension/Scripts/Common/LandMine.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Common.DoorOpen.lua" DataSourceRef="Extension/Scripts/Common/DoorOpen.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.Door.lua" DataSourceRef="Extension/Scripts/Common/Door.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Common.ItemPickup.lua" DataSourceRef="Extension/Scripts/Common/ItemPickup.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.Item.lua" DataSourceRef="Extension/Scripts/Common/Item.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
-				<Asset Id="Assets.Scripts.Common.TeleporterTeleport.lua" DataSourceRef="Extension/Scripts/Common/TeleporterTeleport.lua" FormatType="TEXT">
+				<Asset Id="Assets.Scripts.Common.Teleporter.lua" DataSourceRef="Extension/Scripts/Common/Teleporter.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.SmartCard.lua" DataSourceRef="Extension/Scripts/Common/SmartCard.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Hud.FpsUpdate.lua" DataSourceRef="Extension/Scripts/Hud/FpsUpdate.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Hud.FpsCounter.lua" DataSourceRef="Extension/Scripts/Hud/FpsCounter.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="Extension/Scripts/Entry.lua" FormatType="TEXT">
@@ -1736,12 +1748,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/NOT/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/NOT/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="601" />
 					</Cells>
@@ -1856,12 +1868,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/NOT/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/NOT/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="607" />
 					</Cells>
@@ -1976,12 +1988,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/NOT/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/NOT/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="613" />
 					</Cells>
@@ -2209,12 +2221,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/NOT/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/NOT/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="601" />
 					</Cells>
@@ -2329,12 +2341,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/NOT/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/NOT/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="607" />
 					</Cells>
@@ -2449,12 +2461,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/NOT/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/NOT/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="613" />
 					</Cells>
@@ -2654,12 +2666,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/NOT/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/NOT/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="601" />
 					</Cells>
@@ -2774,12 +2786,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/NOT/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/NOT/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="607" />
 					</Cells>
@@ -2894,12 +2906,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/NOT/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/NOT/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="613" />
 					</Cells>
@@ -3078,12 +3090,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/NOT/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/NOT/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="601" />
 					</Cells>
@@ -3198,12 +3210,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/NOT/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/NOT/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="607" />
 					</Cells>
@@ -3318,12 +3330,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/NOT/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/NOT/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="613" />
 					</Cells>
@@ -3492,12 +3504,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/NOT/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/NOT/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="601" />
 					</Cells>
@@ -3612,12 +3624,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/NOT/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/NOT/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="607" />
 					</Cells>
@@ -3732,12 +3744,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/NOT/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/NOT/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="613" />
 					</Cells>
@@ -3896,12 +3908,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/NOT/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/NOT/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="601" />
 					</Cells>
@@ -4016,12 +4028,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/NOT/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/NOT/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="607" />
 					</Cells>
@@ -4136,12 +4148,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/NOT/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/NOT/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="613" />
 					</Cells>
@@ -4310,12 +4322,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/NOT/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/NOT/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="601" />
 					</Cells>
@@ -4430,12 +4442,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/NOT/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/NOT/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="607" />
 					</Cells>
@@ -4550,12 +4562,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/NOT/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/NOT/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="613" />
 					</Cells>
@@ -4724,12 +4736,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="601" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/LD/SmartCard/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/LD/NOT/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="605" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/LD/SmartCard/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/LD/NOT/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="601" />
 					</Cells>
@@ -4834,12 +4846,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="607" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/LD/SmartCard/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/LD/NOT/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="611" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/LD/SmartCard/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/LD/NOT/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="607" />
 					</Cells>
@@ -4944,12 +4956,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/LD/SmartCard/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/LD/NOT/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="617" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/LD/SmartCard/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/LD/NOT/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="613" />
 					</Cells>
@@ -11000,20 +11012,964 @@
 		</Palettes>
 		<Texts>
 			<Items>
-				<TextFromMAP Id="Texts.MAP.01.MTXT">
+				<TextFromMAP Id="Vanilla/1/MTXT">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Texts.MAP.01.NOT1">
+				<TextFromMAP Id="Vanilla/1/NOT1">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Texts.MAP.01.NOT2">
+				<TextFromMAP Id="Vanilla/1/NOT2">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Texts.MAP.01.NOT3">
+				<TextFromMAP Id="Vanilla/1/NOT3">
 					<DataRef>Assets.MAP.01</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/MTXT">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/LCTX">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/NOT1">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/NOT2">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/2/NOT3">
+					<DataRef>Assets.MAP.02</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/MTXT">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/LCTX">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/NOT1">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/NOT2">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/NOT3">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/MTXT">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/LCTX">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/NOT1">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/NOT2">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/3/NOT3">
+					<DataRef>Assets.MAP.03</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/MTXT">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/LCTX">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/NOT1">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/NOT2">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/4/NOT3">
+					<DataRef>Assets.MAP.04</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/MTXT">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/LCTX">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/NOT1">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/NOT2">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/5/NOT3">
+					<DataRef>Assets.MAP.05</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/6/MTXT">
+					<DataRef>Assets.MAP.06</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/6/NOT1">
+					<DataRef>Assets.MAP.06</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/6/NOT2">
+					<DataRef>Assets.MAP.06</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/6/NOT3">
+					<DataRef>Assets.MAP.06</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/MTXT">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/LCTX">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/NOT1">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/NOT2">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/7/NOT3">
+					<DataRef>Assets.MAP.07</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/MTXT">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/LCTX">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/NOT1">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/NOT2">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/8/NOT3">
+					<DataRef>Assets.MAP.08</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/MTXT">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/LCTX">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/NOT1">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/NOT2">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/9/NOT3">
+					<DataRef>Assets.MAP.09</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/MTXT">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/LCTX">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/NOT1">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/NOT2">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/10/NOT3">
+					<DataRef>Assets.MAP.10</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/11/MTXT">
+					<DataRef>Assets.MAP.11</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/11/NOT1">
+					<DataRef>Assets.MAP.11</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/11/NOT2">
+					<DataRef>Assets.MAP.11</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/11/NOT3">
+					<DataRef>Assets.MAP.11</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/MTXT">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/LCTX">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/NOT1">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/NOT2">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/12/NOT3">
+					<DataRef>Assets.MAP.12</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/MTXT">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/LCTX">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/NOT1">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/NOT2">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/13/NOT3">
+					<DataRef>Assets.MAP.13</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/MTXT">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/LCTX">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/NOT1">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/NOT2">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/14/NOT3">
+					<DataRef>Assets.MAP.14</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/MTXT">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/LCTX">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/NOT1">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/NOT2">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/15/NOT3">
+					<DataRef>Assets.MAP.15</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/MTXT">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/LCTX">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/NOT1">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/NOT2">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/16/NOT3">
+					<DataRef>Assets.MAP.16</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/MTXT">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/LCTX">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/NOT1">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/NOT2">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/17/NOT3">
+					<DataRef>Assets.MAP.17</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/MTXT">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/LCTX">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/NOT1">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/NOT2">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/18/NOT3">
+					<DataRef>Assets.MAP.18</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/MTXT">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/LCTX">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/NOT1">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/NOT2">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/19/NOT3">
+					<DataRef>Assets.MAP.19</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/MTXT">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/LCTX">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/NOT1">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/NOT2">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/20/NOT3">
+					<DataRef>Assets.Map.20</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/MTXT">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/LCTX">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/NOT1">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/NOT2">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/21/NOT3">
+					<DataRef>Assets.Map.21</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/MTXT">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/LCTX">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/NOT1">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/NOT2">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/22/NOT3">
+					<DataRef>Assets.Map.22</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/23/MTXT">
+					<DataRef>Assets.Map.23</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/23/LCTX">
+					<DataRef>Assets.Map.23</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/23/NOT1">
+					<DataRef>Assets.Map.23</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/MTXT">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/LCTX">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/NOT1">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/NOT2">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/24/NOT3">
+					<DataRef>Assets.Map.24</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/MTXT">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/LCTX">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/NOT1">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/NOT2">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/25/NOT3">
+					<DataRef>Assets.Map.25</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/MTXT">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/LCTX">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/NOT1">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/NOT2">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/26/NOT3">
+					<DataRef>Assets.Map.26</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/MTXT">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/LCTX">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/NOT1">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/NOT2">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/27/NOT3">
+					<DataRef>Assets.Map.27</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/MTXT">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/LCTX">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/NOT1">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/NOT2">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/28/NOT3">
+					<DataRef>Assets.Map.28</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/MTXT">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/LCTX">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/NOT1">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/NOT2">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/29/NOT3">
+					<DataRef>Assets.Map.29</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/30/MTXT">
+					<DataRef>Assets.Map.30</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/30/NOT3">
+					<DataRef>Assets.Map.30</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/MTXT">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/LCTX">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/NOT1">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/NOT2">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/31/NOT3">
+					<DataRef>Assets.Map.31</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/MTXT">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/LCTX">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/NOT1">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/NOT2">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/32/NOT3">
+					<DataRef>Assets.Map.32</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/MTXT">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/LCTX">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/NOT1">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/NOT2">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/33/NOT3">
+					<DataRef>Assets.Map.33</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/MTXT">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/LCTX">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/NOT1">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/NOT2">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/34/NOT3">
+					<DataRef>Assets.Map.34</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/35/MTXT">
+					<DataRef>Assets.Map.35</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/35/NOT3">
+					<DataRef>Assets.Map.35</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/36/MTXT">
+					<DataRef>Assets.Map.36</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/36/NOT3">
+					<DataRef>Assets.Map.36</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/37/MTXT">
+					<DataRef>Assets.Map.37</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/37/NOT3">
+					<DataRef>Assets.Map.37</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/38/MTXT">
+					<DataRef>Assets.Map.38</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/38/NOT3">
+					<DataRef>Assets.Map.38</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/39/MTXT">
+					<DataRef>Assets.Map.39</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/39/NOT3">
+					<DataRef>Assets.Map.39</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/40/MTXT">
+					<DataRef>Assets.Map.40</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/40/NOT3">
+					<DataRef>Assets.Map.40</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/41/MTXT">
+					<DataRef>Assets.Map.41</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/41/NOT3">
+					<DataRef>Assets.Map.41</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/42/MTXT">
+					<DataRef>Assets.Map.42</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/42/NOT3">
+					<DataRef>Assets.Map.42</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/43/MTXT">
+					<DataRef>Assets.Map.43</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/43/NOT3">
+					<DataRef>Assets.Map.43</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/MTXT">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/LCTX">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/NOT1">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/NOT2">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/44/NOT3">
+					<DataRef>Assets.Map.44</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/MTXT">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/LCTX">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/NOT1">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/NOT2">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/45/NOT3">
+					<DataRef>Assets.Map.45</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/MTXT">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/LCTX">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/NOT1">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/NOT2">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/46/NOT3">
+					<DataRef>Assets.Map.46</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/47/MTXT">
+					<DataRef>Assets.Map.47</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/47/LCTX">
+					<DataRef>Assets.Map.47</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/47/NOT1">
+					<DataRef>Assets.Map.47</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/47/NOT2">
+					<DataRef>Assets.Map.47</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/MTXT">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/LCTX">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/NOT1">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/NOT2">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/48/NOT3">
+					<DataRef>Assets.Map.48</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/MTXT">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/LCTX">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/NOT1">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/NOT2">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/49/NOT3">
+					<DataRef>Assets.Map.49</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/MTXT">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/LCTX">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/NOT1">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/NOT2">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/50/NOT3">
+					<DataRef>Assets.Map.50</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/MTXT">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/LCTX">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/NOT1">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/NOT2">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/51/NOT3">
+					<DataRef>Assets.Map.51</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/MTXT">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/LCTX">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/NOT1">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/NOT2">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/52/NOT3">
+					<DataRef>Assets.Map.52</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/MTXT">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/LCTX">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/NOT1">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/NOT2">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/53/NOT3">
+					<DataRef>Assets.Map.53</DataRef>
+					<BlockName>NOT3</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/54/MTXT">
+					<DataRef>Assets.Map.54</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/MTXT">
+					<DataRef>Assets.Map.55</DataRef>
+					<BlockName>MTXT</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/LCTX">
+					<DataRef>Assets.Map.55</DataRef>
+					<BlockName>LCTX</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/NOT1">
+					<DataRef>Assets.Map.55</DataRef>
+					<BlockName>NOT1</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/NOT2">
+					<DataRef>Assets.Map.55</DataRef>
+					<BlockName>NOT2</BlockName>
+				</TextFromMAP>
+				<TextFromMAP Id="Vanilla/55/NOT3">
+					<DataRef>Assets.Map.55</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
 			</Items>
@@ -11023,17 +11979,26 @@
 				<ScriptFromFile Id="Vanilla/L1/MAP.01/PlayerEntry">
 					<DataRef>Assets.Scripts.L1.MAP.01.PlayerEntry.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/Common/LandMine/Explode">
-					<DataRef>Assets.Scripts.Common.LandMineExplode.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/LandMine">
+					<DataRef>Assets.Scripts.Common.LandMine.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/Common/Door/Open">
-					<DataRef>Assets.Scripts.Common.DoorOpen.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/Door">
+					<DataRef>Assets.Scripts.Common.Door.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/Common/Item/Pickup">
-					<DataRef>Assets.Scripts.Common.ItemPickup.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/Item">
+					<DataRef>Assets.Scripts.Common.Item.lua</DataRef>
 				</ScriptFromFile>
-				<ScriptFromFile Id="Vanilla/Common/Teleporter/Teleport">
-					<DataRef>Assets.Scripts.Common.TeleporterTeleport.lua</DataRef>
+				<ScriptFromFile Id="Vanilla/Common/Teleporter">
+					<DataRef>Assets.Scripts.Common.Teleporter.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/SmartCard">
+					<DataRef>Assets.Scripts.Common.SmartCard.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Common/Hud/Fps/Update">
+					<DataRef>Assets.Scripts.Common.Hud.FpsUpdate.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="EntityTypes.FpsCounter">
+					<DataRef>Assets.Scripts.Common.Hud.FpsCounter.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Scripts.Entry.lua">
 					<DataRef>Assets.Scripts.Entry.lua</DataRef>

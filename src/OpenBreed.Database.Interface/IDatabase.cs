@@ -28,6 +28,8 @@ namespace OpenBreed.Database.Interface
 
         IUnitOfWork CreateUnitOfWork();
 
+        T GetTable<T>() where T : new();
+
         void Save();
 
         #endregion Public Methods

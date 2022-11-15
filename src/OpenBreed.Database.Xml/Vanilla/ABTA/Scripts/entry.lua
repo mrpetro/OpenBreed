@@ -2,7 +2,7 @@
 WorldLoaded = function(world)
 	camera = Entities.GetByName("MainCamera")
 
-	logo = Entities.CreateFromTemplate("Logo1");
+	logo = Entities.CreateFromTemplate("Logo1")
 	world.Add(logo);
 
 	Trigger.Add(Camera.Events.FadeIn, camera, Logo1FadedIn)

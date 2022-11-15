@@ -1,5 +1,7 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Options;
+using OpenBreed.Common;
 using OpenBreed.Common.Interface;
+using OpenBreed.Database.EFCore;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Xml;
@@ -18,7 +20,7 @@ namespace OpenBreed.Database.Xml
 
         private const string DB_CURRENT_FOLDER_PATH = "Db.Current.FolderPath";
         private const string DB_CURRENT_FILE_NAME = "Db.Current.FileName";
-
+        private readonly OpenBreedDbContext openBreedDbContext;
         private readonly IVariableMan variables;
         private readonly Dictionary<Type, IRepository> repositories = new Dictionary<Type, IRepository>();
         private readonly Dictionary<string, XmlDbTableDef> tables = new Dictionary<string, XmlDbTableDef>();
@@ -27,12 +29,16 @@ namespace OpenBreed.Database.Xml
 
         #region Public Constructors
 
-        public XmlReadonlyDatabaseMan(IVariableMan variableMan, string dbFilePath = null)
+        public XmlReadonlyDatabaseMan(
+            OpenBreedDbContext openBreedDbContext,
+            IVariableMan variableMan,
+            IOptions<XmlDbSettings> dbSettings)
         {
+            this.openBreedDbContext = openBreedDbContext;
             this.variables = variableMan;
 
-            if(dbFilePath != null)
-                Open(dbFilePath);
+            if(dbSettings.Value.DbFilePath != null)
+                Open(dbSettings.Value.DbFilePath);
 
             RegisterTables();
             RegisterRepos();
@@ -64,6 +70,9 @@ namespace OpenBreed.Database.Xml
 
         private void RegisterRepos()
         {
+            //RegisterRepository(new DataSourcesRepository(openBreedDbContext, GetTable<XmlDbDataSourceTableDef>()));
+            //RegisterRepository(new AssetsRepository(openBreedDbContext, GetTable<XmlDbAssetTableDef>()));
+
             RegisterRepository(new XmlDataSourcesRepository(GetTable<XmlDbDataSourceTableDef>()));
             RegisterRepository(new XmlAssetsRepository(GetTable<XmlDbAssetTableDef>()));
             RegisterRepository(new XmlTileAtlasRepository(GetTable<XmlDbTileAtlasTableDef>()));

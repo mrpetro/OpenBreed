@@ -67,9 +67,13 @@ namespace OpenBreed.Common.UI.WinForms.Controls
                 {
                     FirstDisplayedScrollingRowIndex = rowToShow;
                 }
-                else if (rowToShow >= firstVisible + countVisible)
+                else if (rowToShow > firstVisible + countVisible)
                 {
                     FirstDisplayedScrollingRowIndex = rowToShow - countVisible + 1;
+                }
+                else
+                {
+                    FirstDisplayedScrollingRowIndex = rowToShow;
                 }
             }
         }

@@ -32,14 +32,9 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
-		<ScriptRunner>
-			<Runs>
-				<Run>
-					<ScriptId>Vanilla/Common/Door/Open</ScriptId>
-					<TriggerName>ScriptRunTrigger</TriggerName>
-				</Run>
-			</Runs>
-		</ScriptRunner>
+		<Script>
+			<ScriptId>Vanilla/Common/Door</ScriptId>
+		</Script>
 		<Sprite>
 			<AtlasName></AtlasName>
 			<ImageIndex>0</ImageIndex>

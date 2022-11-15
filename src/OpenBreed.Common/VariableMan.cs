@@ -81,13 +81,19 @@ namespace OpenBreed.Common
             string varName = match.ToString().Trim(new char[] { '%' });
             object varValue = null;
 
-            if (variables.TryGetValue(varName, out varValue))
-                return varValue.ToString();
-            else
+            if (!variables.TryGetValue(varName, out varValue))
             {
                 logger.Warning("Unknown Cfg variable: " + varName);
                 return string.Empty;
             }
+
+            if(varValue is null)
+            {
+                logger.Error($"Cfg variable '{varName}' is unset.");
+                return string.Empty;
+            }
+
+            return varValue.ToString();
         }
 
         #endregion Private Methods

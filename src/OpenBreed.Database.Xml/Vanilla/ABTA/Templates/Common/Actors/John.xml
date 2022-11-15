@@ -9,11 +9,14 @@
 		<Fsm>
 			<States>
 				<State FsmName="Actor.Movement" StateName="Standing" />
+				<State FsmName="Turret.Rotation" StateName="Idle" />		
 				<State FsmName="Actor.Attacking" StateName="Idle" />
 			</States>
 		</Fsm>
 		<SoundPlayer>
 		</SoundPlayer>
+		<Script>	
+		</Script>
 		<Animation>
 			<States>
 				<State>
