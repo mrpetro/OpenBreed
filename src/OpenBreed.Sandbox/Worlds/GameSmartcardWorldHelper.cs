@@ -136,10 +136,6 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(World world)
         {
-            //var entryId = "Texts.MAP.01.NOT1";
-
-            //var model = textsDataProvider.GetText(entryId);
-
             var smartCardCamera = cameraHelper.CreateCamera("Camera.SmartcardReader", 0, 0, 320, 240);
 
             triggerMan.OnWorldInitialized(world, () =>
