@@ -21,6 +21,7 @@
     <None Remove="Vanilla\ABTA\Templates\Common\MonsterEating.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\Keycard.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\SmartCardBackground.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderText.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\DebugHudViewport.xml" />
@@ -70,9 +71,6 @@
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpA.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpF.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpS.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard1.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard2.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard3.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Projectile.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\TeleportEntry.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\TeleportExit.xml" />
@@ -259,13 +257,7 @@
     <Content Include="Vanilla\ABTA\Templates\Common\Pickables\PowerUpS.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard3.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\Projectile.xml">

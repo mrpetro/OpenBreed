@@ -12,7 +12,7 @@
     local cameraFadeOutClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeOut").Id
     local cameraFadeInClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeIn").Id
     local smartCardMetadata = smartCardEntity:GetMetadata()
-    local textId = gameWorld.Name .. "/" .. smartCardMetadata.Name .. tostring(smartCardMetadata.Option)
+    local textId = gameWorld.Name .. "/" .. smartCardMetadata.Name .. "/" .. tostring(smartCardMetadata.Option)
     Logging:Info("Text Id: " .. textId)
     local text = Texts:GetTextString(textId)
     local currentCharacter = 0
@@ -191,7 +191,7 @@
 
     Entities:ForEachEntity(
         gameWorld.Id,
-        "NOT",
+        "SmartCard",
         smartCardMetadata.Option,
         RemoveSmartcard)
 

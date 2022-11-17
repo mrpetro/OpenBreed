@@ -3,8 +3,8 @@
 	<Components>
 		<Metadata>
 			<Level>$(level)</Level>
-			<Name>NOT</Name>
-			<Option>2</Option>
+			<Name>SmartCard</Name>
+			<Option>$(option)</Option>
 			<Flavor>$(flavor)</Flavor>
 		</Metadata>
 		<SoundPlayer>
@@ -23,7 +23,7 @@
 			</Fixtures>
 		</Body>
 		<Text>
-			<Text>SmartCard2</Text>
+			<Text>SmartCard$(option)</Text>
 			<Offset X="-10" Y="10" />
 			<Color R="255" G="255" B="255" A="255" />
 			<FontName>Arial</FontName>
