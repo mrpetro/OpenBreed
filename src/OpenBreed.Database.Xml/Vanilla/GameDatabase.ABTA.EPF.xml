@@ -1217,13 +1217,13 @@
 				<Sound Id="Vanilla/Common/KeycardSpecial/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
-				<Sound Id="Vanilla/Common/KeycardRed/Picked">
+				<Sound Id="Vanilla/Common/Keycard1/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
-				<Sound Id="Vanilla/Common/KeycardGreen/Picked">
+				<Sound Id="Vanilla/Common/Keycard2/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
-				<Sound Id="Vanilla/Common/KeycardBlue/Picked">
+				<Sound Id="Vanilla/Common/Keycard3/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
 				<Sound Id="Sounds.LAZER1">
@@ -2068,62 +2068,62 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="592" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardRed/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Red/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="831" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardRed/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Red/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="832" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardGreen/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Green/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="791" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardGreen/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Green/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="792" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardBlue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Blue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="811" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardBlue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Blue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="812" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardRed/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Red/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="834" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardRed/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Red/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="835" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardGreen/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Green/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="794" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardGreen/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Green/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="795" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardBlue/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Blue/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="814" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L1/KeycardBlue/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L1/Keycard/Blue/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L1" TsTi ="815" />
 					</Cells>
@@ -2541,62 +2541,62 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="592" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardRed/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Red/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="831" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardRed/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Red/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="832" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardGreen/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Green/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="791" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardGreen/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Green/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="792" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardBlue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Blue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="811" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardBlue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Blue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="812" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardRed/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Red/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="834" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardRed/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Red/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="835" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardGreen/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Green/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="794" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardGreen/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Green/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="795" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardBlue/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Blue/F3/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="814" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L3/KeycardBlue/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L3/Keycard/Blue/F3/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="815" />
 					</Cells>
@@ -2986,12 +2986,12 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="654" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardRed/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Keycard/Red/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="362" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardRed/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Keycard/Red/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="363" />
 					</Cells>
@@ -3001,27 +3001,27 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="534" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardGreen/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Keycard/Green/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="535" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardBlue/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Keycard/Blue/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="638" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardBlue/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Keycard/Blue/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="639" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardSpecial/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Keycard/Special/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="618" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L4/KeycardSpecial/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L4/Keycard/Special/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="619" />
 					</Cells>
@@ -3410,32 +3410,32 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="401" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/KeycardRed/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/Keycard/Red/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="638" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/KeycardRed/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/Keycard/Red/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="639" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/KeycardGreen/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/Keycard/Green/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="598" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/KeycardGreen/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/Keycard/Green/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="599" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/KeycardBlue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/Keycard/Blue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="618" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L5/KeycardBlue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L5/Keycard/Blue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L5" TsTi ="619" />
 					</Cells>
@@ -3814,32 +3814,32 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="613" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/KeycardRed/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/Keycard/Red/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="362" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/KeycardRed/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/Keycard/Red/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="363" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/KeycardGreen/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/Keycard/Green/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="534" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/KeycardGreen/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/Keycard/Green/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="535" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/KeycardBlue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/Keycard/Blue/F2/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="638" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L6/KeycardBlue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L6/Keycard/Blue/F2/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L6" TsTi ="639" />
 					</Cells>
@@ -4228,32 +4228,32 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="439" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/KeycardRed/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/Keycard/Red/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="638" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/KeycardRed/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/Keycard/Red/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="639" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/KeycardGreen/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/Keycard/Green/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="568" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/KeycardGreen/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/Keycard/Green/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="569" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/KeycardBlue/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/Keycard/Blue/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="575" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L7/KeycardBlue/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L7/Keycard/Blue/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L7" TsTi ="576" />
 					</Cells>
@@ -4642,32 +4642,32 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="577" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/KeycardRed/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/Keycard/Red/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="554" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/KeycardRed/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/Keycard/Red/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="555" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/KeycardGreen/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/Keycard/Green/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="594" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/KeycardGreen/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/Keycard/Green/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="595" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/KeycardBlue/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/Keycard/Blue/F1/Lying" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="534" />
 					</Cells>
 				</TileStamp>
-				<TileStamp Id="Vanilla/L8/KeycardBlue/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
+				<TileStamp Id="Vanilla/L8/Keycard/Blue/F1/Picked" Width="1" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L8" TsTi ="535" />
 					</Cells>
@@ -6803,7 +6803,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="KeycardRed" Visibility="true">
+						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -6812,7 +6812,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="34" Name="KeycardGreen" Visibility="true">
+						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -6821,7 +6821,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="35" Name="KeycardBlue" Visibility="true">
+						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -7383,7 +7383,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="KeycardRed" Visibility="true">
+						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -7392,7 +7392,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="34" Name="KeycardGreen" Visibility="true">
+						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -7401,7 +7401,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="35" Name="KeycardBlue" Visibility="true">
+						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -7963,7 +7963,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="KeycardRed" Visibility="true">
+						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Keycard (Red)</Description>
 							<Presentation>
@@ -7972,7 +7972,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="34" Name="KeycardGreen" Visibility="true">
+						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Keycard (Green)</Description>
 							<Presentation>
@@ -7981,7 +7981,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="35" Name="KeycardBlue" Visibility="true">
+						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Keycard (Blue)</Description>
 							<Presentation>
@@ -8543,7 +8543,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="KeycardRed" Visibility="true">
+						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -8552,7 +8552,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="34" Name="KeycardGreen" Visibility="true">
+						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -8561,7 +8561,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="35" Name="KeycardBlue" Visibility="true">
+						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -9123,7 +9123,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="KeycardRed" Visibility="true">
+						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -9132,7 +9132,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="34" Name="KeycardGreen" Visibility="true">
+						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -9141,7 +9141,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="35" Name="KeycardBlue" Visibility="true">
+						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -9703,7 +9703,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="KeycardRed" Visibility="true">
+						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -9712,7 +9712,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="34" Name="KeycardGreen" Visibility="true">
+						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -9721,7 +9721,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="35" Name="KeycardBlue" Visibility="true">
+						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -10283,7 +10283,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="KeycardRed" Visibility="true">
+						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -10292,7 +10292,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="34" Name="KeycardGreen" Visibility="true">
+						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>
@@ -10301,7 +10301,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="35" Name="KeycardBlue" Visibility="true">
+						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>

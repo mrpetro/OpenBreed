@@ -19,6 +19,8 @@
     <None Remove="Vanilla\ABTA\Scripts\MAP.01.lua" />
     <None Remove="Vanilla\ABTA\Templates\Common\GameCommentator.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\MonsterEating.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\Keycard.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\SmartCardBackground.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderText.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\DebugHudViewport.xml" />
@@ -63,11 +65,6 @@
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\CreditsBig.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\CreditsSmall.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\ExtraLife.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardBlue.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardGreen.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardRed.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardSpecial.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\MedkitBig.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\MedkitSmall.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpA.xml" />
@@ -97,6 +94,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Scripts\Common\LandMine.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\Common\Scripts\Hud\FpsCounter.lua">
@@ -241,19 +241,7 @@
     <Content Include="Vanilla\ABTA\Templates\Common\Pickables\ExtraLife.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardBlue.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardGreen.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardRed.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardSpecial.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\Keycard.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\Pickables\MedkitBig.xml">

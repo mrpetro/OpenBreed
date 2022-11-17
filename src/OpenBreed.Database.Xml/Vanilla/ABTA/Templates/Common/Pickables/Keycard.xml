@@ -3,7 +3,9 @@
 	<Components>
 		<Metadata>
 			<Level>$(level)</Level>
-			<Name>KeycardSpecial</Name>
+			<Name>Keycard</Name>
+			<Flavor>$(flavor)</Flavor>
+			<Option>$(option)</Option>
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>
