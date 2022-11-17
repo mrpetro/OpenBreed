@@ -40,7 +40,7 @@ namespace OpenBreed.Sandbox.Loaders
             templateName = split[0];
             flavor = split[1];
 
-            entity = pickableHelper.AddItem(world, ix, iy, templateName, mapper.Level, gfxValue, flavor);
+            entity = pickableHelper.AddItem(world, ix, iy, templateName, mapper.Level, gfxValue, null, flavor);
             visited[ix, iy] = true;
             return entity;
         }

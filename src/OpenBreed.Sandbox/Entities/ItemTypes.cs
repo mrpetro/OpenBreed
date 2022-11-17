@@ -8,9 +8,9 @@ namespace OpenBreed.Sandbox.Entities
 
         public static int KeycardStandard { get; private set; }
         public static int KeycardSpecial { get; private set; }
-        public static int KeycardRed { get; private set; }
-        public static int KeycardGreen { get; private set; }
-        public static int KeycardBlue { get; private set; }
+        public static int Keycard1 { get; private set; }
+        public static int Keycard2 { get; private set; }
+        public static int Keycard3 { get; private set; }
         public static int Ammo { get; private set; }
         public static int CreditsSmall { get; private set; }
         public static int CreditsBig { get; private set; }
@@ -27,9 +27,9 @@ namespace OpenBreed.Sandbox.Entities
         public static void RegisterAbtaItems(this ItemsMan itemsMan)
         {
             KeycardStandard = itemsMan.RegisterItemType("KeycardStandard");
-            KeycardRed = itemsMan.RegisterItemType("KeycardRed");
-            KeycardGreen = itemsMan.RegisterItemType("KeycardGreen");
-            KeycardBlue = itemsMan.RegisterItemType("KeycardBlue");
+            Keycard1 = itemsMan.RegisterItemType("Keycard1");
+            Keycard2 = itemsMan.RegisterItemType("Keycard2");
+            Keycard3 = itemsMan.RegisterItemType("Keycard3");
             Ammo = itemsMan.RegisterItemType("Ammo");
             CreditsSmall = itemsMan.RegisterItemType("CreditsSmall");
             CreditsBig = itemsMan.RegisterItemType("CreditsBig");

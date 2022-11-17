@@ -30,7 +30,7 @@ namespace OpenBreed.Sandbox.Loaders
             if (!mapper.TryGetFlavor(templateName, gfxValue, out flavor))
                 return null;
 
-            var entity = pickableHelper.AddItem(world, ix, iy, templateName, mapper.Level, gfxValue, flavor);
+            var entity = pickableHelper.AddItem(world, ix, iy, templateName, mapper.Level, gfxValue, null, flavor);
             visited[ix, iy] = true;
             return entity;
         }

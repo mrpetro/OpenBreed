@@ -88,17 +88,16 @@ namespace OpenBreed.Sandbox.Entities.Builders
             mapper.Register("GenericItem", GFX_AREA_SCANNER_F2, "AreaScanner/F2");
             mapper.Register("GenericItem", GFX_AREA_SCANNER_F3, "AreaScanner/F3");
 
-            mapper.Register("KeycardRed", GFX_KEYCARD_RED_F2,  "F2");
-            mapper.Register("KeycardGreen", GFX_KEYCARD_GREEN_F2,  "F2");
-            mapper.Register("KeycardBlue", GFX_KEYCARD_BLUE_F2,  "F2");
-
-            mapper.Register("KeycardRed", GFX_KEYCARD_RED_F3, "F3");
-            mapper.Register("KeycardGreen", GFX_KEYCARD_GREEN_F3, "F3");
-            mapper.Register("KeycardBlue", GFX_KEYCARD_BLUE_F3, "F3");
-
-            mapper.Register("KeycardRed", MapMapper.GFX_ANY, "Trigger");
-            mapper.Register("KeycardGreen", MapMapper.GFX_ANY,  "Trigger");
-            mapper.Register("KeycardBlue", MapMapper.GFX_ANY,  "Trigger");
+            mapper.Register("Keycard", GFX_KEYCARD_RED_F2, "Red/F2");
+            mapper.Register("Keycard", GFX_KEYCARD_GREEN_F2, "Green/F2");
+            mapper.Register("Keycard", GFX_KEYCARD_BLUE_F2, "Blue/F2");
+            mapper.Register("Keycard", GFX_KEYCARD_RED_F3, "Red/F3");
+            mapper.Register("Keycard", GFX_KEYCARD_GREEN_F3, "Green/F3");
+            mapper.Register("Keycard", GFX_KEYCARD_BLUE_F3, "Blue/F3");
+            mapper.Register("Keycard", MapMapper.GFX_ANY, "Trigger");
+            mapper.RegisterAction("Keycard1", "Keycard", "1");
+            mapper.RegisterAction("Keycard2", "Keycard", "2");
+            mapper.RegisterAction("Keycard3", "Keycard", "3");
 
             mapper.Register("SmartCard1", GFX_SMART_CARD_F1, "F1");
             mapper.Register("SmartCard1", GFX_SMART_CARD_F2, "F2");

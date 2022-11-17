@@ -320,9 +320,9 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("GenericItem", genericItemEntityLoader);
 
             var keycardCellEntityLoader = new KeycardEntityLoader(managerCollection.GetService<PickableHelper>());
-            mapLegacyDataLoader.Register("KeycardRed", keycardCellEntityLoader);
-            mapLegacyDataLoader.Register("KeycardGreen", keycardCellEntityLoader);
-            mapLegacyDataLoader.Register("KeycardBlue", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("Keycard1", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("Keycard2", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("Keycard3", keycardCellEntityLoader);
             mapLegacyDataLoader.Register("KeycardSpecial", keycardCellEntityLoader);
 
             var smartCardCellEntityLoader = new SmartCardEntityLoader(managerCollection.GetService<PickableHelper>());
