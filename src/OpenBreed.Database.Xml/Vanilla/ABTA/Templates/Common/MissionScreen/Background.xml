@@ -3,7 +3,7 @@
     <Components>
 		<Position X="$(posX)" Y="$(posX)" />
 		<Picture>
-			<ImageName>Images.SMARTPIC.LBM</ImageName>
+			<ImageName>Vanilla/Common/MissionScreen/Background</ImageName>
 			<Origin X="-160" Y="-136" />
 			<Order>0</Order>
 		</Picture>

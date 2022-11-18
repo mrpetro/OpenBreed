@@ -1095,29 +1095,29 @@
 		</Assets>
 		<Images>
 			<Items>
-				<Image Description="East Point Software logo 1 image" Id="Images.EPSLOGO1.LBM">
+				<Image Id="Vanilla/Title/EPS1/Logo" Description="East Point Software logo 1 image" >
 					<DataRef>Assets.EPSLOGO1.LBM</DataRef>
 				</Image>
-				<Image Description="East Point Software logo 2 image" Id="Images.EPSLOGO2.LBM">
+				<Image Id="Vanilla/Title/EPS2/Logo" Description="East Point Software logo 2 image" >
 					<DataRef>Assets.EPSLOGO2.LBM</DataRef>
 				</Image>
-				<Image Description="Outro image" Id="Images.OUTRO.LBM">
-					<DataRef>Assets.OUTRO.LBM</DataRef>
-				</Image>
-				<Image Description="Team 17 logo image" Id="Images.T17LOGO.LBM">
+				<Image Id="Vanilla/Title/Teams17/Logo" Description="Team 17 logo image" >
 					<DataRef>Assets.T17LOGO.LBM</DataRef>
 				</Image>
-				<Image Description="Intex network computer screen image" Id="Images.COMPUTER.LBM">
+				<Image Id="Vanilla/Title/Menu/Background" Description="Title screen background image" >
+					<DataRef>Assets.TITLEBAC.LBM</DataRef>
+				</Image>
+				<Image Id="Vanilla/Common/OutroScreen/Background" Description="Outro image" >
+					<DataRef>Assets.OUTRO.LBM</DataRef>
+				</Image>
+				<Image Id="Vanilla/Common/IntexNetworkScreen/Background" Description="Intex network computer screen image" >
 					<DataRef>Assets.COMPUTER.LBM</DataRef>
 				</Image>
-				<Image Description="IPC message screen image" Id="Images.IPC.LBM">
+				<Image Id="Vanilla/Common/MissionScreen/Background" Description="IPC message screen image" >
 					<DataRef>Assets.IPC.LBM</DataRef>
 				</Image>
-				<Image Description="Smart card message screen image" Id="Images.SMARTPIC.LBM">
+				<Image Id="Vanilla/Common/SmartCardScreen/Background" Description="Smart card message screen image" >
 					<DataRef>Assets.SMARTPIC.LBM</DataRef>
-				</Image>
-				<Image Description="Title screen background image" Id="Images.TITLEBAC.LBM">
-					<DataRef>Assets.TITLEBAC.LBM</DataRef>
 				</Image>
 			</Items>
 		</Images>

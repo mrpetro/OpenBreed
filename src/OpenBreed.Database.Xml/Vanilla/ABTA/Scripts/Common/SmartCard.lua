@@ -3,8 +3,8 @@
     -- Variable definitions
     --local smartCardEntity, actorEntity = ...
     local gameCameraEntity = Entities:GetPlayerCamera(actorEntity)
-    local smartCardReaderCameraEntity = Entities:GetSmartcardReaderCamera()
-    local smartCardReaderTextEntity = Entities:GetSmartCardReaderText()
+    local smartCardScreenCameraEntity = Entities:GetSmartCardScreenCamera()
+    local smartCardScreenTextEntity = Entities:GetSmartCardScreenText()
     local gameWorld = Worlds:GetWorld(smartCardEntity)
     local hudCameraEntity = Entities:GetHudCamera()
     local hudViewportEntity = Entities:GetHudViewport()
@@ -60,15 +60,15 @@
     SwitchViewToSmartCardWorld = function(entity, args)
         Logging:Info("Switch view to smart card world camera...")
 
-        smartCardReaderCameraEntity:SetBrightness(0)
-        hudViewportEntity:SetViewportCamera(smartCardReaderCameraEntity.Id)
+        smartCardScreenCameraEntity:SetBrightness(0)
+        hudViewportEntity:SetViewportCamera(smartCardScreenCameraEntity.Id)
 
         Triggers:OnEntityAnimFinished(
-            smartCardReaderCameraEntity,                      
+            smartCardScreenCameraEntity,                      
             SmartCardWorldShowText,
             true)
 
-        smartCardReaderCameraEntity:PlayAnimation(0, cameraFadeInClipId)
+        smartCardScreenCameraEntity:PlayAnimation(0, cameraFadeInClipId)
 
         Triggers:EveryFrame(
             Commentator,
@@ -86,7 +86,7 @@
 
         local textPart = string.sub(text,0, currentCharacter)
 
-        smartCardReaderTextEntity:SetText(0, textPart)
+        smartCardScreenTextEntity:SetText(0, textPart)
 
         currentCharacter = currentCharacter + 1
 
@@ -125,11 +125,11 @@
         Logging:Info("Smart card world fade out...")
 
         Triggers:OnEntityAnimFinished(
-            smartCardReaderCameraEntity,                      
+            smartCardScreenCameraEntity,                      
             GameWorldUnpause,
             true)
 
-        smartCardReaderCameraEntity:PlayAnimation(0, cameraFadeOutClipId)
+        smartCardScreenCameraEntity:PlayAnimation(0, cameraFadeOutClipId)
     end
 
     GameWorldUnpause = function()
