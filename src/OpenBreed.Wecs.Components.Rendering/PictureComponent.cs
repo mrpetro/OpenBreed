@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Interface;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK.Mathematics;
 using System;
@@ -140,14 +141,18 @@ namespace OpenBreed.Wecs.Components.Rendering
         #region Private Fields
 
         private readonly IBuilderFactory builderFactory;
+        private readonly IDataLoaderFactory dataLoaderFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PictureComponentFactory(IBuilderFactory builderFactory)
+        public PictureComponentFactory(
+            IBuilderFactory builderFactory,
+            IDataLoaderFactory dataLoaderFactory)
         {
             this.builderFactory = builderFactory;
+            this.dataLoaderFactory = dataLoaderFactory;
         }
 
         #endregion Public Constructors
@@ -156,6 +161,10 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         protected override IEntityComponent Create(IPictureComponentTemplate template)
         {
+            var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
+
+            pictureDataLoader.Load(template.ImageName);
+
             var builder = builderFactory.GetBuilder<PictureComponentBuilder>();
             builder.SetImageByName(template.ImageName);
             builder.SetOrigin(template.Origin);

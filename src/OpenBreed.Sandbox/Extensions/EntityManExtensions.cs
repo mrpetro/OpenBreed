@@ -40,9 +40,9 @@ namespace OpenBreed.Sandbox.Extensions
                 action.Invoke(entity);
         }
 
-        public static Entity GetSmartCardReaderText(this IEntityMan entityMan)
+        public static Entity GetSmartCardScreenText(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag("SmartCardReader/Text").FirstOrDefault();
+            return entityMan.GetByTag("SmartCardScreen/Text").FirstOrDefault();
         }
 
         public static Entity GetHudCamera(this IEntityMan entityMan)
@@ -50,9 +50,9 @@ namespace OpenBreed.Sandbox.Extensions
             return entityMan.GetByTag("Camera.GameHud").FirstOrDefault();
         }
 
-        public static Entity GetSmartcardReaderCamera(this IEntityMan entityMan)
+        public static Entity GetSmartCardScreenCamera(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag("Camera.SmartcardReader").FirstOrDefault();
+            return entityMan.GetByTag("Camera.SmartCardScreen").FirstOrDefault();
         }
 
         public static Entity GetPlayerCamera(this IEntityMan entityMan, Entity playerEntity)

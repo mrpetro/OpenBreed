@@ -38,16 +38,16 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
         public IPicture Load(string entryId, params object[] args)
         {
+            var picture = pictureMan.GetByName(entryId);
+
+            if (picture is not null)
+                return picture;
+
             var entry = repositoryProvider.GetRepository<IDbImage>().GetById(entryId);
             if (entry is null)
                 throw new Exception("Image error: " + entryId);
 
             var bitmap = assetsDataProvider.LoadModel(entry.DataRef) as Bitmap;
-
-            var picture = pictureMan.GetByName(entryId);
-
-            if (picture is not null)
-                return picture;
 
             var texture = textureMan.Create(entryId, bitmap);
 

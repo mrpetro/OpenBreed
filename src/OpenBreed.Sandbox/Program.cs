@@ -326,6 +326,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupScreenWorldHelper();
             hostBuilder.SetupGameHudWorldHelper();
             hostBuilder.SetupGameSmartcardWorldHelper();
+            hostBuilder.SetupMissionScreenWorldHelper();
             hostBuilder.SetupDebugHudWorldHelper();
             hostBuilder.SetupEntriesHelper();
             hostBuilder.SetupDoorHelper();
@@ -551,9 +552,9 @@ namespace OpenBreed.Sandbox
         private void OnLoad()
         {
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
-            var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
+            //var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
 
-            var picture = pictureDataLoader.Load("Images.SMARTPIC.LBM");
+            //var picture = pictureDataLoader.Load("Images.SMARTPIC.LBM");
 
             InitLua();
 
@@ -580,7 +581,8 @@ namespace OpenBreed.Sandbox
             var screenWorldHelper = GetManager<ScreenWorldHelper>();
             var gameHudWorldHelper = GetManager<GameHudWorldHelper>();
             var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
-            var gameSmartcardWorldHelper = GetManager<GameSmartcardWorldHelper>();
+            var smartCardScreenWorldHelper = GetManager<SmartcardScreenWorldHelper>();
+            var missionScreenWorldHelper = GetManager<MissionScreenWorldHelper>();
             var renderingMan = GetManager<IRenderingMan>();
 
             //Create 4 sound sources, each one acting as a separate channel
@@ -618,23 +620,21 @@ namespace OpenBreed.Sandbox
             LoadGameWorld();
 
             gameHudWorldHelper.Create();
-
-            gameSmartcardWorldHelper.Create();
+            smartCardScreenWorldHelper.Create();
+            missionScreenWorldHelper.Create();
 
 
             //var hudWorld = worldMan.GetByName("GameHUD");
 
             //triggerMan.OnWorldInitialized(hudWorld, () =>
             //{
-            //    var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.SmartcardReader").First();
+            //    var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.MissionScreen").First();
 
             //    var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
             //    gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
-
-
             //}, singleTime: true);
 
-            OnEngineInitialized();
+            //OnEngineInitialized();
         }
 
         private void InitLua()

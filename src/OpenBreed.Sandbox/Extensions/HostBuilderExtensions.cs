@@ -176,7 +176,15 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<GameSmartcardWorldHelper>();
+                services.AddSingleton<SmartcardScreenWorldHelper>();
+            });
+        }
+
+        public static void SetupMissionScreenWorldHelper(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<MissionScreenWorldHelper>();
             });
         }
 
