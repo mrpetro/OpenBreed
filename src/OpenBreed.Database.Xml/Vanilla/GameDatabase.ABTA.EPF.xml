@@ -1211,19 +1211,7 @@
 				<Sound Id="Vanilla/Common/MedkitBig/Picked">
 					<DataRef>Assets.HEALTH</DataRef>
 				</Sound>
-				<Sound Id="Vanilla/Common/KeycardStandard/Picked">
-					<DataRef>Assets.KEYS</DataRef>
-				</Sound>
-				<Sound Id="Vanilla/Common/KeycardSpecial/Picked">
-					<DataRef>Assets.KEYS</DataRef>
-				</Sound>
-				<Sound Id="Vanilla/Common/Keycard1/Picked">
-					<DataRef>Assets.KEYS</DataRef>
-				</Sound>
-				<Sound Id="Vanilla/Common/Keycard2/Picked">
-					<DataRef>Assets.KEYS</DataRef>
-				</Sound>
-				<Sound Id="Vanilla/Common/Keycard3/Picked">
+				<Sound Id="Vanilla/Common/Keycard/Picked">
 					<DataRef>Assets.KEYS</DataRef>
 				</Sound>
 				<Sound Id="Sounds.LAZER1">
