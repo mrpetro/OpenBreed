@@ -15,7 +15,8 @@
 		</Fsm>
 		<SoundPlayer>
 		</SoundPlayer>
-		<Script>	
+		<Script>
+			<ScriptId>Vanilla/Common/Actor</ScriptId>
 		</Script>
 		<Animation>
 			<States>

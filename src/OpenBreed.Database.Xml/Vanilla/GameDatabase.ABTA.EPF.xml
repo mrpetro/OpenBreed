@@ -187,6 +187,7 @@
 				<FileDataSource Id="Extension/Scripts/Common/LandMine.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMine.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Door.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Door.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Item.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Item.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Actor.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Actor.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Teleporter.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Teleporter.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/SmartCard.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\SmartCard.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
@@ -1068,6 +1069,9 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.Item.lua" DataSourceRef="Extension/Scripts/Common/Item.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Actor.lua" DataSourceRef="Extension/Scripts/Common/Actor.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.Teleporter.lua" DataSourceRef="Extension/Scripts/Common/Teleporter.lua" FormatType="TEXT">
@@ -11000,7 +11004,7 @@
 		</Palettes>
 		<Texts>
 			<Items>
-				<TextFromMAP Id="Vanilla/1/MTXT">
+				<TextFromMAP Id="Vanilla/1/Mission">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11016,7 +11020,7 @@
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/2/MTXT">
+				<TextFromMAP Id="Vanilla/2/Mission">
 					<DataRef>Assets.MAP.02</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11036,7 +11040,7 @@
 					<DataRef>Assets.MAP.02</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/3/MTXT">
+				<TextFromMAP Id="Vanilla/3/Mission">
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11056,7 +11060,7 @@
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/3/MTXT">
+				<TextFromMAP Id="Vanilla/3/Mission">
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11076,7 +11080,7 @@
 					<DataRef>Assets.MAP.03</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/4/MTXT">
+				<TextFromMAP Id="Vanilla/4/Mission">
 					<DataRef>Assets.MAP.04</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11096,7 +11100,7 @@
 					<DataRef>Assets.MAP.04</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/5/MTXT">
+				<TextFromMAP Id="Vanilla/5/Mission">
 					<DataRef>Assets.MAP.05</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11116,7 +11120,7 @@
 					<DataRef>Assets.MAP.05</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/6/MTXT">
+				<TextFromMAP Id="Vanilla/6/Mission">
 					<DataRef>Assets.MAP.06</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11132,7 +11136,7 @@
 					<DataRef>Assets.MAP.06</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/7/MTXT">
+				<TextFromMAP Id="Vanilla/7/Mission">
 					<DataRef>Assets.MAP.07</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11152,7 +11156,7 @@
 					<DataRef>Assets.MAP.07</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/8/MTXT">
+				<TextFromMAP Id="Vanilla/8/Mission">
 					<DataRef>Assets.MAP.08</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11172,7 +11176,7 @@
 					<DataRef>Assets.MAP.08</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/9/MTXT">
+				<TextFromMAP Id="Vanilla/9/Mission">
 					<DataRef>Assets.MAP.09</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11192,7 +11196,7 @@
 					<DataRef>Assets.MAP.09</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/10/MTXT">
+				<TextFromMAP Id="Vanilla/10/Mission">
 					<DataRef>Assets.MAP.10</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11212,7 +11216,7 @@
 					<DataRef>Assets.MAP.10</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/11/MTXT">
+				<TextFromMAP Id="Vanilla/11/Mission">
 					<DataRef>Assets.MAP.11</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11228,7 +11232,7 @@
 					<DataRef>Assets.MAP.11</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/12/MTXT">
+				<TextFromMAP Id="Vanilla/12/Mission">
 					<DataRef>Assets.MAP.12</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11248,7 +11252,7 @@
 					<DataRef>Assets.MAP.12</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/13/MTXT">
+				<TextFromMAP Id="Vanilla/13/Mission">
 					<DataRef>Assets.MAP.13</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11268,7 +11272,7 @@
 					<DataRef>Assets.MAP.13</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/14/MTXT">
+				<TextFromMAP Id="Vanilla/14/Mission">
 					<DataRef>Assets.MAP.14</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11288,7 +11292,7 @@
 					<DataRef>Assets.MAP.14</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/15/MTXT">
+				<TextFromMAP Id="Vanilla/15/Mission">
 					<DataRef>Assets.MAP.15</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11308,7 +11312,7 @@
 					<DataRef>Assets.MAP.15</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/16/MTXT">
+				<TextFromMAP Id="Vanilla/16/Mission">
 					<DataRef>Assets.MAP.16</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11328,7 +11332,7 @@
 					<DataRef>Assets.MAP.16</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/17/MTXT">
+				<TextFromMAP Id="Vanilla/17/Mission">
 					<DataRef>Assets.MAP.17</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11348,7 +11352,7 @@
 					<DataRef>Assets.MAP.17</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/18/MTXT">
+				<TextFromMAP Id="Vanilla/18/Mission">
 					<DataRef>Assets.MAP.18</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11368,7 +11372,7 @@
 					<DataRef>Assets.MAP.18</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/19/MTXT">
+				<TextFromMAP Id="Vanilla/19/Mission">
 					<DataRef>Assets.MAP.19</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11388,7 +11392,7 @@
 					<DataRef>Assets.MAP.19</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/20/MTXT">
+				<TextFromMAP Id="Vanilla/20/Mission">
 					<DataRef>Assets.Map.20</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11408,7 +11412,7 @@
 					<DataRef>Assets.Map.20</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/21/MTXT">
+				<TextFromMAP Id="Vanilla/21/Mission">
 					<DataRef>Assets.Map.21</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11428,7 +11432,7 @@
 					<DataRef>Assets.Map.21</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/22/MTXT">
+				<TextFromMAP Id="Vanilla/22/Mission">
 					<DataRef>Assets.Map.22</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11448,7 +11452,7 @@
 					<DataRef>Assets.Map.22</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/23/MTXT">
+				<TextFromMAP Id="Vanilla/23/Mission">
 					<DataRef>Assets.Map.23</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11460,7 +11464,7 @@
 					<DataRef>Assets.Map.23</DataRef>
 					<BlockName>NOT1</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/24/MTXT">
+				<TextFromMAP Id="Vanilla/24/Mission">
 					<DataRef>Assets.Map.24</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11480,7 +11484,7 @@
 					<DataRef>Assets.Map.24</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/25/MTXT">
+				<TextFromMAP Id="Vanilla/25/Mission">
 					<DataRef>Assets.Map.25</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11500,7 +11504,7 @@
 					<DataRef>Assets.Map.25</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/26/MTXT">
+				<TextFromMAP Id="Vanilla/26/Mission">
 					<DataRef>Assets.Map.26</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11520,7 +11524,7 @@
 					<DataRef>Assets.Map.26</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/27/MTXT">
+				<TextFromMAP Id="Vanilla/27/Mission">
 					<DataRef>Assets.Map.27</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11540,7 +11544,7 @@
 					<DataRef>Assets.Map.27</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/28/MTXT">
+				<TextFromMAP Id="Vanilla/28/Mission">
 					<DataRef>Assets.Map.28</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11560,7 +11564,7 @@
 					<DataRef>Assets.Map.28</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/29/MTXT">
+				<TextFromMAP Id="Vanilla/29/Mission">
 					<DataRef>Assets.Map.29</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11580,7 +11584,7 @@
 					<DataRef>Assets.Map.29</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/30/MTXT">
+				<TextFromMAP Id="Vanilla/30/Mission">
 					<DataRef>Assets.Map.30</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11588,7 +11592,7 @@
 					<DataRef>Assets.Map.30</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/31/MTXT">
+				<TextFromMAP Id="Vanilla/31/Mission">
 					<DataRef>Assets.Map.31</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11608,7 +11612,7 @@
 					<DataRef>Assets.Map.31</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/32/MTXT">
+				<TextFromMAP Id="Vanilla/32/Mission">
 					<DataRef>Assets.Map.32</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11628,7 +11632,7 @@
 					<DataRef>Assets.Map.32</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/33/MTXT">
+				<TextFromMAP Id="Vanilla/33/Mission">
 					<DataRef>Assets.Map.33</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11648,7 +11652,7 @@
 					<DataRef>Assets.Map.33</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/34/MTXT">
+				<TextFromMAP Id="Vanilla/34/Mission">
 					<DataRef>Assets.Map.34</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11668,7 +11672,7 @@
 					<DataRef>Assets.Map.34</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/35/MTXT">
+				<TextFromMAP Id="Vanilla/35/Mission">
 					<DataRef>Assets.Map.35</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11676,7 +11680,7 @@
 					<DataRef>Assets.Map.35</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/36/MTXT">
+				<TextFromMAP Id="Vanilla/36/Mission">
 					<DataRef>Assets.Map.36</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11684,7 +11688,7 @@
 					<DataRef>Assets.Map.36</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/37/MTXT">
+				<TextFromMAP Id="Vanilla/37/Mission">
 					<DataRef>Assets.Map.37</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11692,7 +11696,7 @@
 					<DataRef>Assets.Map.37</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/38/MTXT">
+				<TextFromMAP Id="Vanilla/38/Mission">
 					<DataRef>Assets.Map.38</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11700,7 +11704,7 @@
 					<DataRef>Assets.Map.38</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/39/MTXT">
+				<TextFromMAP Id="Vanilla/39/Mission">
 					<DataRef>Assets.Map.39</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11708,7 +11712,7 @@
 					<DataRef>Assets.Map.39</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/40/MTXT">
+				<TextFromMAP Id="Vanilla/40/Mission">
 					<DataRef>Assets.Map.40</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11716,7 +11720,7 @@
 					<DataRef>Assets.Map.40</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/41/MTXT">
+				<TextFromMAP Id="Vanilla/41/Mission">
 					<DataRef>Assets.Map.41</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11724,7 +11728,7 @@
 					<DataRef>Assets.Map.41</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/42/MTXT">
+				<TextFromMAP Id="Vanilla/42/Mission">
 					<DataRef>Assets.Map.42</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11732,7 +11736,7 @@
 					<DataRef>Assets.Map.42</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/43/MTXT">
+				<TextFromMAP Id="Vanilla/43/Mission">
 					<DataRef>Assets.Map.43</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11740,7 +11744,7 @@
 					<DataRef>Assets.Map.43</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/44/MTXT">
+				<TextFromMAP Id="Vanilla/44/Mission">
 					<DataRef>Assets.Map.44</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11760,7 +11764,7 @@
 					<DataRef>Assets.Map.44</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/45/MTXT">
+				<TextFromMAP Id="Vanilla/45/Mission">
 					<DataRef>Assets.Map.45</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11780,7 +11784,7 @@
 					<DataRef>Assets.Map.45</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/46/MTXT">
+				<TextFromMAP Id="Vanilla/46/Mission">
 					<DataRef>Assets.Map.46</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11800,7 +11804,7 @@
 					<DataRef>Assets.Map.46</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/47/MTXT">
+				<TextFromMAP Id="Vanilla/47/Mission">
 					<DataRef>Assets.Map.47</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11816,7 +11820,7 @@
 					<DataRef>Assets.Map.47</DataRef>
 					<BlockName>NOT2</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/48/MTXT">
+				<TextFromMAP Id="Vanilla/48/Mission">
 					<DataRef>Assets.Map.48</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11836,7 +11840,7 @@
 					<DataRef>Assets.Map.48</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/49/MTXT">
+				<TextFromMAP Id="Vanilla/49/Mission">
 					<DataRef>Assets.Map.49</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11856,7 +11860,7 @@
 					<DataRef>Assets.Map.49</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/50/MTXT">
+				<TextFromMAP Id="Vanilla/50/Mission">
 					<DataRef>Assets.Map.50</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11876,7 +11880,7 @@
 					<DataRef>Assets.Map.50</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/51/MTXT">
+				<TextFromMAP Id="Vanilla/51/Mission">
 					<DataRef>Assets.Map.51</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11896,7 +11900,7 @@
 					<DataRef>Assets.Map.51</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/52/MTXT">
+				<TextFromMAP Id="Vanilla/52/Mission">
 					<DataRef>Assets.Map.52</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11916,7 +11920,7 @@
 					<DataRef>Assets.Map.52</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/53/MTXT">
+				<TextFromMAP Id="Vanilla/53/Mission">
 					<DataRef>Assets.Map.53</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11936,11 +11940,11 @@
 					<DataRef>Assets.Map.53</DataRef>
 					<BlockName>NOT3</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/54/MTXT">
+				<TextFromMAP Id="Vanilla/54/Mission">
 					<DataRef>Assets.Map.54</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
-				<TextFromMAP Id="Vanilla/55/MTXT">
+				<TextFromMAP Id="Vanilla/55/Mission">
 					<DataRef>Assets.Map.55</DataRef>
 					<BlockName>MTXT</BlockName>
 				</TextFromMAP>
@@ -11975,6 +11979,9 @@
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/Common/Item">
 					<DataRef>Assets.Scripts.Common.Item.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Actor">
+					<DataRef>Assets.Scripts.Common.Actor.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/Common/Teleporter">
 					<DataRef>Assets.Scripts.Common.Teleporter.lua</DataRef>
