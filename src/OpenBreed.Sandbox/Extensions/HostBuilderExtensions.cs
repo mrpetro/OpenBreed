@@ -248,7 +248,8 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetService<ITileMan>(),
                                                               managerCollection.GetService<ILogger>(),
                                                               managerCollection.GetService<ITriggerMan>(),
-                                                              managerCollection.GetService<IScriptMan>());
+                                                              managerCollection.GetService<IScriptMan>(),
+                                                              managerCollection.GetService<IEntityFactory>());
 
                 mapLegacyDataLoader.RegisterEntityLoaders(managerCollection);
                 return mapLegacyDataLoader;

@@ -18,6 +18,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Scripting.Interface;
@@ -30,6 +31,7 @@ using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Loaders
 {
@@ -68,6 +70,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly IRenderableFactory renderableFactory;
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IScriptMan scriptMan;
+        private readonly IEntityFactory entityFactory;
         private readonly ISystemFactory systemFactory;
         private readonly ITileGridFactory tileGridFactory;
         private readonly IDataGridFactory dataGridFactory;
@@ -93,7 +96,8 @@ namespace OpenBreed.Sandbox.Loaders
                                    ITileMan tileMan,
                                    ILogger logger,
                                    ITriggerMan triggerMan,
-                                   IScriptMan scriptMan)
+                                   IScriptMan scriptMan,
+                                   IEntityFactory entityFactory)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
@@ -112,6 +116,7 @@ namespace OpenBreed.Sandbox.Loaders
             this.logger = logger;
             this.triggerMan = triggerMan;
             this.scriptMan = scriptMan;
+            this.entityFactory = entityFactory;
         }
 
         #endregion Public Constructors
@@ -230,10 +235,21 @@ namespace OpenBreed.Sandbox.Loaders
                     }
                 }
 
+                AddMission(world);
+
                 scriptMan.TryInvokeFunction("MapLoaded", world.Id);
             }, singleTime: true);
 
             return world;
+        }
+
+        private void AddMission(World world)
+        {
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Mission.xml")
+                .SetTag("Mission")
+                .Build();
+
+            entity.EnterWorld(world.Id);
         }
 
         public object LoadObject(string entryId) => Load(entryId);

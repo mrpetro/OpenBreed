@@ -45,14 +45,29 @@ namespace OpenBreed.Sandbox.Extensions
             return entityMan.GetByTag("SmartCardScreen/Text").FirstOrDefault();
         }
 
+        public static Entity GetMissionScreenText(this IEntityMan entityMan)
+        {
+            return entityMan.GetByTag("MissionScreen/Text").FirstOrDefault();
+        }
+
         public static Entity GetHudCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.GameHud").FirstOrDefault();
         }
 
+        public static Entity GetMission(this IEntityMan entityMan, int worldId)
+        {
+            return entityMan.GetByTag("Mission").FirstOrDefault(entity => entity.WorldId == worldId);
+        }
+
         public static Entity GetSmartCardScreenCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.SmartCardScreen").FirstOrDefault();
+        }
+
+        public static Entity GetMissionScreenCamera(this IEntityMan entityMan)
+        {
+            return entityMan.GetByTag("Camera.MissionScreen").FirstOrDefault();
         }
 
         public static Entity GetPlayerCamera(this IEntityMan entityMan, Entity playerEntity)

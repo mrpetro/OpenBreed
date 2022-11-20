@@ -90,14 +90,14 @@ namespace OpenBreed.Sandbox.Worlds
             timer.EnterWorld(world.Id);
         }
 
-        public void AddText(World world, int x, int y)
+        public void AddText(World world, int x, int y, string text = "")
         {
             var textEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MissionScreen\Text.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetTag("MissionScreen/Text")
                 .Build();
-            textEntity.SetText(0, string.Empty);
+            textEntity.SetText(0, text);
             textEntity.EnterWorld(world.Id);
         }
 
@@ -132,7 +132,7 @@ namespace OpenBreed.Sandbox.Worlds
             {
                 missionScreenCamera.EnterWorld(world.Id);
                 AddBackground(world, 0, 0);
-                AddText(world, - 320 / 2 + 20 , 240 / 2 - 38);
+                AddText(world, - 320 / 2 + 48 , 240 / 2 - 24, "CRASH LANDING SITE...");
             }, singleTime: true);
         }
 

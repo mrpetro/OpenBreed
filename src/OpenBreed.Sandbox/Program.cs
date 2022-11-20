@@ -503,7 +503,6 @@ namespace OpenBreed.Sandbox
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
             var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
 
-
             var levelName = gameSettings.Value.StartingLevelName;
             var gameWorld = mapLegacyLoader.Load(levelName);
 
@@ -536,6 +535,7 @@ namespace OpenBreed.Sandbox
 
             //Follow John actor
             //var johnPlayerEntity = entityMan.GetByTag("John").First();
+
             var johnPlayerEntity = actorHelper.CreateDummyActor("John", new Vector2(0, 0));
 
             scriptMan.Expose("JohnPlayer", johnPlayerEntity);
@@ -545,9 +545,11 @@ namespace OpenBreed.Sandbox
 
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
-                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
+                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, playerCamera, gameWorld.Name, 0);
             });
         }
+
+
 
         private void OnLoad()
         {
@@ -617,24 +619,24 @@ namespace OpenBreed.Sandbox
 
             debugHudWorldHelper.Create();
 
-            LoadGameWorld();
+            //LoadGameWorld();
 
             gameHudWorldHelper.Create();
             smartCardScreenWorldHelper.Create();
             missionScreenWorldHelper.Create();
 
 
-            //var hudWorld = worldMan.GetByName("GameHUD");
+            var hudWorld = worldMan.GetByName("GameHUD");
 
-            //triggerMan.OnWorldInitialized(hudWorld, () =>
-            //{
-            //    var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.MissionScreen").First();
+            triggerMan.OnWorldInitialized(hudWorld, () =>
+            {
+                var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.MissionScreen").First();
 
-            //    var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
-            //    gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
-            //}, singleTime: true);
+                var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
+                gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
+            }, singleTime: true);
 
-            //OnEngineInitialized();
+            OnEngineInitialized();
         }
 
         private void InitLua()

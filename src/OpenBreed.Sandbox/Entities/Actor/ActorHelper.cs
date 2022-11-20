@@ -91,6 +91,15 @@ namespace OpenBreed.Sandbox.Entities.Actor
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ScriptRunTrigger, ScriptRunCallback);
         }
 
+        public Entity CreateMission(string name)
+        {
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Mission.xml")
+                .SetTag(name)
+                .Build();
+
+            return entity;
+        }
+
         public Entity CreateDummyActor(string name, Vector2 pos)
         {
             var actor = CreateDummy(name, pos);
