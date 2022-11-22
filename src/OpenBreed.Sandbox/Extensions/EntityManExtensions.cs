@@ -50,6 +50,11 @@ namespace OpenBreed.Sandbox.Extensions
             return entityMan.GetByTag("MissionScreen/Text").FirstOrDefault();
         }
 
+        public static Entity GetMissionScreenBackground(this IEntityMan entityMan)
+        {
+            return entityMan.GetByTag("MissionScreen/Background").FirstOrDefault();
+        }
+
         public static Entity GetHudCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.GameHud").FirstOrDefault();

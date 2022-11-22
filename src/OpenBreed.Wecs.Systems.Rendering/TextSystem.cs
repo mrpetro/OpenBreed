@@ -88,7 +88,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 for (int i = 0; i < tcp.Parts.Count; i++)
                 {
                     var part = tcp.Parts[i];
-                    fontMan.RenderPart(part.FontId, part.Text, part.Offset, 100, clipBox);
+                    fontMan.RenderPart(part.FontId, part.Text, part.Offset, part.Color, part.Order, clipBox);
                 }
             }
             finally

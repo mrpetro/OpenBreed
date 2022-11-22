@@ -24,7 +24,7 @@ namespace OpenBreed.Rendering.Interface
 
         #region Public Methods
 
-        void Render(string text, Box2 clipBox, Vector2 pos);
+        void Render(string text, Box2 clipBox, Vector2 pos, float order);
 
         /// <summary>
         /// Draw single character given in parameter
@@ -36,7 +36,9 @@ namespace OpenBreed.Rendering.Interface
         /// Draw text given in parameter
         /// </summary>
         /// <param name="text">Text to draw</param>
-        void Draw(string text, Box2 clipBox);
+        /// <param name="color">Color of text</param>
+        /// <param name="clipBox">Clip box</param>
+        void Draw(string text, Color4 color, Box2 clipBox);
 
         /// <summary>
         /// Gets single character width

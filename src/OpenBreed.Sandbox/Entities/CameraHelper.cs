@@ -43,17 +43,56 @@ namespace OpenBreed.Sandbox.Entities
 
         public void CreateAnimations()
         {
-            frameUpdaterMan.Register("Camera.Brightness", (FrameUpdater<Entity, float>)OnFrameUpdate);
+            frameUpdaterMan.Register("Camera.Brightness", (FrameUpdater<Entity, float>)UpdateCameraBrightness);
+            frameUpdaterMan.Register("Text.Color.A", (FrameUpdater<Entity, float>)UpdateTextColorA);
+            frameUpdaterMan.Register("Picture.Color.R", (FrameUpdater<Entity, float>)UpdatePictureColorR);
+            frameUpdaterMan.Register("Picture.Color.G", (FrameUpdater<Entity, float>)UpdatePictureColorG);
+            frameUpdaterMan.Register("Picture.Color.B", (FrameUpdater<Entity, float>)UpdatePictureColorB);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnFrameUpdate(Entity entity, float nextValue)
+        private void UpdateCameraBrightness(Entity entity, float nextValue)
         {
             var cameraCmp = entity.Get<CameraComponent>();
             cameraCmp.Brightness = nextValue;
+        }
+
+        private void UpdateTextColorA(Entity entity, float nextValue)
+        {
+            var textCmp = entity.Get<TextComponent>();
+            var c = textCmp.Parts[0].Color;
+            textCmp.Parts[0].Color = new OpenTK.Mathematics.Color4(c.R, c.G, c.B, nextValue);
+        }
+
+        private void UpdatePictureColorA(Entity entity, float nextValue)
+        {
+            var picCmp = entity.Get<PictureComponent>();
+            var c = picCmp.Color;
+            picCmp.Color = new OpenTK.Mathematics.Color4(c.R, c.G, c.B, nextValue);
+        }
+
+        private void UpdatePictureColorR(Entity entity, float nextValue)
+        {
+            var picCmp = entity.Get<PictureComponent>();
+            var c = picCmp.Color;
+            picCmp.Color = new OpenTK.Mathematics.Color4(nextValue, c.G, c.B, c.A);
+        }
+
+        private void UpdatePictureColorG(Entity entity, float nextValue)
+        {
+            var picCmp = entity.Get<PictureComponent>();
+            var c = picCmp.Color;
+            picCmp.Color = new OpenTK.Mathematics.Color4(c.R, nextValue, c.B, c.A);
+        }
+
+        private void UpdatePictureColorB(Entity entity, float nextValue)
+        {
+            var picCmp = entity.Get<PictureComponent>();
+            var c = picCmp.Color;
+            picCmp.Color = new OpenTK.Mathematics.Color4(c.R, c.G, nextValue, c.A);
         }
 
         public Entity CreateCamera(string name, float x, float y, float width, float height)

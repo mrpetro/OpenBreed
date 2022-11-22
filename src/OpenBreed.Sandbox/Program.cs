@@ -619,22 +619,22 @@ namespace OpenBreed.Sandbox
 
             debugHudWorldHelper.Create();
 
-            //LoadGameWorld();
+            LoadGameWorld();
 
             gameHudWorldHelper.Create();
             smartCardScreenWorldHelper.Create();
             missionScreenWorldHelper.Create();
 
 
-            var hudWorld = worldMan.GetByName("GameHUD");
+            //var hudWorld = worldMan.GetByName("GameHUD");
 
-            triggerMan.OnWorldInitialized(hudWorld, () =>
-            {
-                var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.MissionScreen").First();
+            //triggerMan.OnWorldInitialized(hudWorld, () =>
+            //{
+            //    var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.MissionScreen").First();
 
-                var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
-                gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
-            }, singleTime: true);
+            //    var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
+            //    gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
+            //}, singleTime: true);
 
             OnEngineInitialized();
         }

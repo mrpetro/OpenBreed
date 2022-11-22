@@ -99,7 +99,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             DrawUnitBox(model, color);
         }
 
-        public void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size)
+        public void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size, Color4 color)
         {
             ((Texture)texture).Use(TextureUnit.Texture0);
             texturedShader.Use();
@@ -109,7 +109,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             texturedShader.SetMatrix4("model", model);
             texturedShader.SetMatrix4("view", view);
             texturedShader.SetMatrix4("projection", projection);
-            //_spriteShader.SetVector3("spriteColor", new Vector3(1.0f, 1.0f, 0.0f));
+            texturedShader.SetVector4("aColor", ((Vector4)color));//; new Vector4(1.0f, 0.0f, 0.0f, 1.0f)); ;
 
             GL.BindVertexArray(vao);
             GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
