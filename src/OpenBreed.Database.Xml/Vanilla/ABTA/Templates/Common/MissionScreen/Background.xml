@@ -5,7 +5,16 @@
 		<Picture>
 			<ImageName>Vanilla/Common/MissionScreen/Background</ImageName>
 			<Origin X="-160" Y="-136" />
+			<Color R="1.0" G="1.0" B="1.0" A="1.0" />
 			<Order>0</Order>
 		</Picture>
+		<Animation>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>false</Loop>
+				</State>
+			</States>
+		</Animation>
     </Components>
 </EntityTemplate>

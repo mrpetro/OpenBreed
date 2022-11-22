@@ -13322,6 +13322,61 @@
 						</FloatTrack>
 					</Tracks>
 				</Animation>
+				<Animation Id="Vanilla/Common/Text/Effects/FadeOut">
+					<Length>10.0</Length>
+					<Tracks>
+						<FloatTrack>
+							<Interpolation>Linear</Interpolation>
+							<Controller>Text.Color.A</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="1.0" />
+								<Frame Time="10.0" Value="0.0" />
+							</Frames>
+						</FloatTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Text/Effects/FadeIn">
+					<Length>10.0</Length>
+					<Tracks>
+						<FloatTrack>
+							<Interpolation>Linear</Interpolation>
+							<Controller>Text.Color.A</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="0.0" />
+								<Frame Time="10.0" Value="1.0" />
+							</Frames>
+						</FloatTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Picture/Effects/Darken">
+					<Length>5.0</Length>
+					<Tracks>
+						<FloatTrack>
+							<Interpolation>Linear</Interpolation>
+							<Controller>Picture.Color.R</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="1.0" />
+								<Frame Time="5.0" Value="0.4" />
+							</Frames>
+						</FloatTrack>
+						<FloatTrack>
+							<Interpolation>Linear</Interpolation>
+							<Controller>Picture.Color.G</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="1.0" />
+								<Frame Time="5.0" Value="0.4" />
+							</Frames>
+						</FloatTrack>
+						<FloatTrack>
+							<Interpolation>Linear</Interpolation>
+							<Controller>Picture.Color.B</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="1.0" />
+								<Frame Time="5.0" Value="0.4" />
+							</Frames>
+						</FloatTrack>
+					</Tracks>
+				</Animation>
 				<Animation Id="Vanilla/L4/Environment/TVFlickering">
 					<Length>1.5</Length>
 					<Tracks>
