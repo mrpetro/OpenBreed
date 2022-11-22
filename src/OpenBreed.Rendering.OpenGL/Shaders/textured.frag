@@ -13,7 +13,12 @@ uniform sampler2D texture0;
 
 void main()
 {
+    vec4 c = texture(texture0, texCoord);
+
+    if(c.a == 0.0)
+        discard;
+
     // To use a texture, you call the texture() function.
     // It takes two parameters: the sampler to use, and a vec2, used as texture coordinates.
-    outputColor = aColor * texture(texture0, texCoord);
+    outputColor = aColor * c;
 }

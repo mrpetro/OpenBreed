@@ -122,6 +122,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
             GL.BlendColor(Color4.Black);
         }
 
