@@ -2,7 +2,7 @@
 <EntityTemplate>
     <Components>
 		<Metadata>
-			<Name>Mission</Name>
+			<Name>Director</Name>
 		</Metadata>
 		<Script>
 			<ScriptId>$(scriptId)</ScriptId>
