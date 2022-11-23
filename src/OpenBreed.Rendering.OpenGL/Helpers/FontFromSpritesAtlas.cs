@@ -69,12 +69,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return totalWidth;
         }
 
-        public void Render(string text, Box2 clipBox, Vector2 pos)
+        public void Render(string text, Box2 clipBox, Vector2 pos, float order)
         {
             GL.Enable(EnableCap.Texture2D);
             primitiveRenderer.PushMatrix();
 
-            primitiveRenderer.Translate((int)pos.X, (int)pos.Y, 0.0f);
+            primitiveRenderer.Translate((int)pos.X, (int)pos.Y, order);
 
             var caretPosX = 0.0f;
 
@@ -112,11 +112,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             {
                 var atlasId = data.Item1;
                 var spriteIndex = data.Item2;
-                spriteRenderer.Render(new Vector3(0,0,100), new Vector2(data.Item3, data.Item4), atlasId, spriteIndex);
+                spriteRenderer.Render(new Vector3(0, 0, 0), new Vector2(data.Item3, data.Item4), Color4.White, atlasId, spriteIndex);
             }
         }
 
-        public void Draw(string text, Box2 clipBox)
+        public void Draw(string text, Color4 color, Box2 clipBox)
         {
             var caretPosX = 0.0f;
             var caretPosY = 0.0f;
@@ -142,7 +142,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                         break;
                 }
 
-                spriteRenderer.Render(new Vector3(caretPosX, caretPosY - h, 100), new Vector2(w, h), atlasId, spriteIndex);
+                spriteRenderer.Render(new Vector3(caretPosX, caretPosY - h, 0.0f), new Vector2(w, h), color, atlasId, spriteIndex);
 
                 caretPosX += w;
             }

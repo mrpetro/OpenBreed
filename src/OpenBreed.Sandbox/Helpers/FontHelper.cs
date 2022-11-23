@@ -55,8 +55,13 @@ namespace OpenBreed.Sandbox.Helpers
 
             for (int i = 1; i < 256; i++)
             {
-                paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(0, 170, 170));
+                paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(255, 255, 255));
             }
+
+            //for (int i = 1; i < 256; i++)
+            //{
+            //    paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(0, 170, 170));
+            //}
 
             var paletteModel = paletteBuilder.Build();
 

@@ -70,11 +70,13 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public void Draw(char character, Box2 clipBox)
         {
             var found = Lookup[character];
-            primitiveRenderer.DrawSprite(Texture, vboList[found.Item1], new Vector3(0, 0, 0), new Vector2(found.Item2, Height));
+            primitiveRenderer.DrawSprite(Texture, vboList[found.Item1], new Vector3(0, 0, 0), new Vector2(found.Item2, Height), Color4.White);
         }
 
-        public void Draw(string text, Box2 clipBox)
+        public void Draw(string text, Color4 color, Box2 clipBox)
         {
+            //TODO: include color in text rendering
+
             GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
 
             var offsetX = 0.0f;
@@ -84,7 +86,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 var ch = text[i];
                 var key = Lookup[ch].Item1;
 
-                primitiveRenderer.DrawSprite(Texture, vboList[key], new Vector3((int)offsetX, 0.0f, 0.0f), new Vector2(Lookup[ch].Item2, Height));
+                primitiveRenderer.DrawSprite(Texture, vboList[key], new Vector3((int)offsetX, 0.0f, 0.0f), new Vector2(Lookup[ch].Item2, Height), color);
 
                 offsetX += Lookup[ch].Item2;
             }
@@ -92,7 +94,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
-        public void Render(string text, Box2 clipBox, Vector2 pos)
+        public void Render(string text, Box2 clipBox, Vector2 pos, float order)
         {
             GL.Enable(EnableCap.Texture2D);
 

@@ -15,6 +15,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         private readonly Dictionary<(int, int), (string, string)> keyValuePairs = new Dictionary<(int, int), (string, string)>();
         private readonly Dictionary<string, Dictionary<int, string>> keyValuePairsEx = new Dictionary<string, Dictionary<int, string>>();
+        private readonly Dictionary<string, (string, string)> actionsToEntityTypesMap = new Dictionary<string, (string, string)>();
 
         #endregion Private Fields
 
@@ -70,6 +71,20 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         #region Public Methods
 
+        public bool TryGetEntityType(string actionName, out string entityType, out string option)
+        {
+            if (!actionsToEntityTypesMap.TryGetValue(actionName, out (string, string) result))
+            {
+                entityType = default;
+                option = default;
+                return false;
+            }
+
+            entityType = result.Item1;
+            option = result.Item2;
+            return true;
+        }
+
         public bool TryGetFlavor(string templateName, int gfxValue, out string flavor)
         {
             if (!keyValuePairsEx.TryGetValue(templateName, out Dictionary<int, string> subDict))
@@ -108,6 +123,15 @@ namespace OpenBreed.Sandbox.Entities.Builders
                 flavor = null;
                 return false;
             }
+        }
+
+        public void RegisterAction(string actionName, string entityType, string option)
+        {
+            if (actionsToEntityTypesMap.ContainsKey(actionName))
+                throw new InvalidOperationException($"Action '{actionName}' already registered.");
+
+            var result = (entityType, option);
+            actionsToEntityTypesMap.Add(actionName, result);
         }
 
         public void Register(string templateName, int gfxValue, string flavor)

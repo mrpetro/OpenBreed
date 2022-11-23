@@ -17,6 +17,22 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             cameraComponent.Brightness = brightness;
         }
 
+        public static void SetPictureColor(this Entity entity, float r, float g, float b, float a)
+        {
+            var cmp = entity.Get<PictureComponent>();
+            cmp.Color = new Color4(r, g, b, a);
+        }
+
+        public static void SetTextColor(this Entity entity, int textPartId, float r, float g, float b, float a)
+        {
+            var textCmp = entity.Get<TextComponent>();
+
+            if (textPartId < 0 || textPartId >= textCmp.Parts.Count)
+                return;
+
+            textCmp.Parts[textPartId].Color = new Color4(r,g,b,a);
+        }
+
         public static void SetText(this Entity entity, int textPartId, string text)
         {
             var textCmp = entity.Get<TextComponent>();

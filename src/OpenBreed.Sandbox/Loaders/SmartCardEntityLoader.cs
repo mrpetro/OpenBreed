@@ -25,12 +25,15 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public Entity Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public Entity Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string actionName, string flavor, int gfxValue, World world)
         {
-            if (!mapper.TryGetFlavor(templateName, gfxValue, out flavor))
+            if (!mapper.TryGetEntityType(actionName, out string entityType, out string option))
                 return null;
 
-            var entity = pickableHelper.AddItem(world, ix, iy, templateName, mapper.Level, gfxValue, flavor);
+            if (!mapper.TryGetFlavor(entityType, gfxValue, out flavor))
+                return null;
+
+            var entity = pickableHelper.AddItem(world, ix, iy, entityType, mapper.Level, gfxValue, option, flavor);
             visited[ix, iy] = true;
             return entity;
         }

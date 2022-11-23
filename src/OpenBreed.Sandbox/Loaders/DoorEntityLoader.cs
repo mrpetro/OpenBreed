@@ -45,13 +45,13 @@ namespace OpenBreed.Sandbox.Loaders
                     key = "";
                     break;
                 case "DoorRed":
-                    key = "KeycardRed";
+                    key = "Keycard1";
                     break;
                 case "DoorGreen":
-                    key = "KeycardGreen";
+                    key = "Keycard2";
                     break;
                 case "DoorBlue":
-                    key = "KeycardBlue";
+                    key = "Keycard3";
                     break;
             }
 
@@ -72,13 +72,13 @@ namespace OpenBreed.Sandbox.Loaders
                     key = "";
                     break;
                 case "DoorRed":
-                    key = "KeycardRed";
+                    key = "Keycard1";
                     break;
                 case "DoorGreen":
-                    key = "KeycardGreen";
+                    key = "Keycard2";
                     break;
                 case "DoorBlue":
-                    key = "KeycardBlue";
+                    key = "Keycard3";
                     break;
             }
 

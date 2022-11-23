@@ -14,7 +14,7 @@ namespace OpenBreed.Rendering.Interface.Managers
 
         IFontAtlasBuilder Create();
 
-        void RenderPart(int fontId, string text, Vector2 origin, float order, Box2 clipBox);
+        void RenderPart(int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox);
 
         void RenderAppend(int fontId, string text, Box2 clipBox, Vector2 value);
 

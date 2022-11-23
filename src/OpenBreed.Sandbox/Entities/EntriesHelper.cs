@@ -1,15 +1,19 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Loaders;
+using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Control;
+using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
@@ -18,6 +22,7 @@ using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -55,12 +60,26 @@ namespace OpenBreed.Sandbox.Entities
 
         private readonly ViewportCreator viewportCreator;
         private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly IScriptMan scriptMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntriesHelper(IWorldMan worldMan, IEntityMan entityMan, ITriggerMan triggerMan, IClipMan<Entity> clipMan, IEntityFactory entityFactory, IEventsMan eventsMan, ICollisionMan<Entity> collisionMan, IJobsMan jobsMan, ViewportCreator viewportCreator, IDataLoaderFactory dataLoaderFactory)
+        public EntriesHelper(
+            IWorldMan worldMan,
+            IEntityMan entityMan,
+            ITriggerMan triggerMan,
+            IClipMan<Entity> clipMan,
+            IEntityFactory entityFactory,
+            IEventsMan eventsMan,
+            ICollisionMan<Entity> collisionMan,
+            IJobsMan jobsMan,
+            ViewportCreator viewportCreator,
+            IDataLoaderFactory dataLoaderFactory,
+            IScriptMan scriptMan,
+            ILogger logger)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;
@@ -72,6 +91,8 @@ namespace OpenBreed.Sandbox.Entities
             this.jobsMan = jobsMan;
             this.viewportCreator = viewportCreator;
             this.dataLoaderFactory = dataLoaderFactory;
+            this.scriptMan = scriptMan;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -115,12 +136,12 @@ namespace OpenBreed.Sandbox.Entities
             //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
         }
 
-        public void ExecuteHeroEnter(Entity heroEntity, string worldName, int entryId)
+        public void ExecuteHeroEnter(Entity heroEntity, Entity cameraEntity, string worldName, int entryId)
         {
             var context = new Context()
             {
                 actorEntity = heroEntity,
-                //cameraEntity = cameraEntity,
+                cameraEntity = cameraEntity,
                 //cameraFadeInClipId = cameraFadeInClipId,
                 //cameraFadeOutClipId = cameraFadeOutClipId,
                 mapKey = worldName,
@@ -254,30 +275,24 @@ namespace OpenBreed.Sandbox.Entities
 
         private void AddToWorld(Context context)
         {
-            triggerMan.OnEntityEnteredWorld(context.actorEntity, () =>
+            triggerMan.OnEntityEnteredWorld(context.cameraEntity, () =>
             {
+                PlayerCharacterEnter(context);
                 SetPosition(context);
+                //FadeIn(context);
             }, singleTime: true);
 
             AddToWorld(context.actorEntity, context.mapKey);
         }
 
+        private void PlayerCharacterEnter(Context context)
+        {
+            context.actorEntity.TryInvoke(scriptMan, logger, "OnEnter");
+        }
+
         private void SetPosition(Context context)
         {
             SetPosition(context.actorEntity, context.entryId);
-
-            FadeIn(context);
-        }
-
-        private void FadeIn(Context context)
-        {
-            if (context.cameraEntity is null)
-                return;
-
-            triggerMan.OnEntityEnteredWorld(context.cameraEntity, () =>
-            {
-                context.cameraEntity.PlayAnimation(0, context.cameraFadeInClipId);
-            }, singleTime: true);
         }
 
         private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, float dt, Vector2 projection)

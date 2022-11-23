@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Interface;
+using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK.Mathematics;
 using System;
@@ -9,7 +10,7 @@ namespace OpenBreed.Wecs.Components.Rendering
     {
         #region Public Properties
 
-        bool Hidden { get; set; }
+        Color4 Color { get; set; }
         string ImageName { get; set; }
         int Order { get; set; }
         Vector2 Origin { get; set; }
@@ -38,7 +39,7 @@ namespace OpenBreed.Wecs.Components.Rendering
             ImageId = builder.ImageId;
             Origin = builder.Origin;
             Order = builder.Order;
-            Hidden = builder.Hidden;
+            Color = builder.Color;
         }
 
         #endregion Internal Constructors
@@ -46,9 +47,9 @@ namespace OpenBreed.Wecs.Components.Rendering
         #region Public Properties
 
         /// <summary>
-        /// Flag for making this sprite hidden or not
+        /// Color of this picture
         /// </summary>
-        public bool Hidden { get; set; }
+        public Color4 Color { get; set; }
 
         /// <summary>
         /// Id of image from the atlas
@@ -87,7 +88,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #region Internal Properties
 
-        internal bool Hidden { get; private set; }
+        internal Color4 Color { get; private set; }
         internal int ImageId { get; private set; }
         internal float Order { get; private set; }
         internal Vector2 Origin { get; private set; }
@@ -101,9 +102,9 @@ namespace OpenBreed.Wecs.Components.Rendering
             return new PictureComponent(this);
         }
 
-        public void SetHidden(bool value)
+        public void SetColor(Color4 value)
         {
-            Hidden = value;
+            Color = value;
         }
 
         public void SetImageByName(string imageName)
@@ -140,14 +141,18 @@ namespace OpenBreed.Wecs.Components.Rendering
         #region Private Fields
 
         private readonly IBuilderFactory builderFactory;
+        private readonly IDataLoaderFactory dataLoaderFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PictureComponentFactory(IBuilderFactory builderFactory)
+        public PictureComponentFactory(
+            IBuilderFactory builderFactory,
+            IDataLoaderFactory dataLoaderFactory)
         {
             this.builderFactory = builderFactory;
+            this.dataLoaderFactory = dataLoaderFactory;
         }
 
         #endregion Public Constructors
@@ -156,11 +161,15 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         protected override IEntityComponent Create(IPictureComponentTemplate template)
         {
+            var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
+
+            pictureDataLoader.Load(template.ImageName);
+
             var builder = builderFactory.GetBuilder<PictureComponentBuilder>();
             builder.SetImageByName(template.ImageName);
             builder.SetOrigin(template.Origin);
             builder.SetOrder(template.Order);
-            builder.SetHidden(template.Hidden);
+            builder.SetColor(template.Color);
             return builder.Build();
         }
 

@@ -28,7 +28,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public void Render(Vector3 pos, Vector2 size, int imageId)
+        public void Render(Vector3 pos, Vector2 size, Color4 color, int imageId)
         {
             var picture = pictureMan.InternalGetById(imageId);
 
@@ -36,16 +36,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             try
             {
-                //primitiveRenderer.Translate(pos);
-
-                //primitiveRenderer.DrawUnitBox(Matrix4.Identity, Color4.Red);
-
-
-                primitiveRenderer.DrawSprite(picture.Texture, picture.Vbo, pos, size);
-
-                //GL.GL.BindTexture(GL.TextureTarget.Texture2D, textureId);
-                //RenderTools.Draw(vbo, ibo, 6);
-                //GL.GL.BindTexture(GL.TextureTarget.Texture2D, 0);
+                primitiveRenderer.DrawSprite(picture.Texture, picture.Vbo, pos, size, color);
             }
             finally
             {
@@ -56,7 +47,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void RenderBegin()
         {
             GL.GL.Enable(GL.EnableCap.Blend);
-            GL.GL.Enable(GL.EnableCap.AlphaTest);
             GL.GL.BlendFunc(GL.BlendingFactor.One, GL.BlendingFactor.OneMinusSrcAlpha);
             GL.GL.AlphaFunc(GL.AlphaFunction.Greater, 0.0f);
             GL.GL.Enable(GL.EnableCap.Texture2D);
@@ -65,7 +55,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void RenderEnd()
         {
             GL.GL.Disable(GL.EnableCap.Texture2D);
-            GL.GL.Disable(GL.EnableCap.AlphaTest);
             GL.GL.Disable(GL.EnableCap.Blend);
         }
 

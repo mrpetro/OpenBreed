@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
         public static void TryInvoke(this Entity entity,
             IScriptMan scriptMan,
             ILogger logger,
-            string triggerName)
+            string triggerName, object arg = null)
         {
             var component = entity.TryGet<ScriptComponent>();
 
@@ -45,7 +45,10 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
                 return;
             }
 
-            initFunction.Invoke(entity);
+            if(arg is null)
+                initFunction.Invoke(entity);
+            else
+                initFunction.Invoke(entity, arg);
         }
 
         #endregion Public Methods

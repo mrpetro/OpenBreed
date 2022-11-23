@@ -176,7 +176,15 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<GameSmartcardWorldHelper>();
+                services.AddSingleton<SmartcardScreenWorldHelper>();
+            });
+        }
+
+        public static void SetupMissionScreenWorldHelper(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<MissionScreenWorldHelper>();
             });
         }
 
@@ -240,7 +248,8 @@ namespace OpenBreed.Sandbox.Extensions
                                                               managerCollection.GetService<ITileMan>(),
                                                               managerCollection.GetService<ILogger>(),
                                                               managerCollection.GetService<ITriggerMan>(),
-                                                              managerCollection.GetService<IScriptMan>());
+                                                              managerCollection.GetService<IScriptMan>(),
+                                                              managerCollection.GetService<IEntityFactory>());
 
                 mapLegacyDataLoader.RegisterEntityLoaders(managerCollection);
                 return mapLegacyDataLoader;
@@ -320,9 +329,9 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("GenericItem", genericItemEntityLoader);
 
             var keycardCellEntityLoader = new KeycardEntityLoader(managerCollection.GetService<PickableHelper>());
-            mapLegacyDataLoader.Register("KeycardRed", keycardCellEntityLoader);
-            mapLegacyDataLoader.Register("KeycardGreen", keycardCellEntityLoader);
-            mapLegacyDataLoader.Register("KeycardBlue", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("Keycard1", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("Keycard2", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("Keycard3", keycardCellEntityLoader);
             mapLegacyDataLoader.Register("KeycardSpecial", keycardCellEntityLoader);
 
             var smartCardCellEntityLoader = new SmartCardEntityLoader(managerCollection.GetService<PickableHelper>());

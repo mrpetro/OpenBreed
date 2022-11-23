@@ -117,7 +117,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
             GL.BlendColor(Color4.Black);
 
-            font.Draw(groupCmp.Id.ToString(), clipBox);
+            font.Draw(groupCmp.Id.ToString(), Color4.White, clipBox);
 
             GL.Disable(EnableCap.Blend);
 

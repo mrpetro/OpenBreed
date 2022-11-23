@@ -66,8 +66,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             if (names.TryGetValue(pictureName, out Picture result))
                 return result;
 
-            logger.Error($"Unable to find picture with name '{pictureName}'");
-
             return null;
         }
 

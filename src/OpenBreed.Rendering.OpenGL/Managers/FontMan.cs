@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Interface;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Helpers;
@@ -49,15 +50,15 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer, primitiveRenderer);
         }
 
-        public void RenderPart(int fontId, string text, Vector2 origin, float order, Box2 clipBox)
+        public void RenderPart(int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox)
         {
-            primitiveRenderer.Translate(new Vector3(origin.X, origin.Y, 0.0f));
-            GetById(fontId).Draw(text, clipBox);
+            primitiveRenderer.Translate(new Vector3(origin.X, origin.Y, order));
+            GetById(fontId).Draw(text, color, clipBox);
         }
 
         public void RenderAppend(int fontId, string text, Box2 clipBox, Vector2 value)
         {
-            GetById(fontId).Draw(text, clipBox);
+            GetById(fontId).Draw(text, Color4.White, clipBox);
         }
 
         public IFont GetGfxFont(string fontName)
@@ -118,11 +119,18 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             primitiveRenderer.PushMatrix();
             primitiveRenderer.Translate(new Vector3(pos.X, pos.Y, 0.0f));
+
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
+            GL.BlendColor(Color4.Black);
         }
 
         public void RenderEnd()
         {
             primitiveRenderer.PopMatrix();
+
+            GL.Disable(EnableCap.Blend);
         }
 
         #endregion Internal Methods

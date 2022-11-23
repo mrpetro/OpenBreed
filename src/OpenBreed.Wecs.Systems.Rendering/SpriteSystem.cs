@@ -112,7 +112,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             if (pos.Y > clipBox.Max.Y)
                 return;
 
-            spriteRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, spc.Order), size, spc.AtlasId, spc.ImageId);
+            spriteRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, spc.Order), size, Color4.White, spc.AtlasId, spc.ImageId);
         }
 
         #endregion Private Methods

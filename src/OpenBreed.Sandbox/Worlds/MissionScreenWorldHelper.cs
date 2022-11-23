@@ -21,7 +21,7 @@ using System;
 
 namespace OpenBreed.Sandbox.Worlds
 {
-    public class GameSmartcardWorldHelper
+    public class MissionScreenWorldHelper
     {
         #region Private Fields
 
@@ -44,7 +44,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Constructors
 
-        public GameSmartcardWorldHelper(ISystemFactory systemFactory,
+        public MissionScreenWorldHelper(ISystemFactory systemFactory,
                                   IRenderableFactory renderableFactory,
                                   IWorldMan worldMan,
                                   IFontMan fontMan,
@@ -81,29 +81,29 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void AddBackground(World world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderBackground.xml")
+            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MissionScreen\Background.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
-                .SetTag("SmartCardReader/Background")
+                .SetTag("MissionScreen/Background")
                 .Build();
 
             timer.EnterWorld(world.Id);
         }
 
-        public void AddText(World world, int x, int y)
+        public void AddText(World world, int x, int y, string text = "")
         {
-            var textEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderText.xml")
+            var textEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MissionScreen\Text.xml")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
-                .SetTag("SmartCardReader/Text")
+                .SetTag("MissionScreen/Text")
                 .Build();
-            textEntity.SetText(0, string.Empty);
+            textEntity.SetText(0, text);
             textEntity.EnterWorld(world.Id);
         }
 
         public void Create()
         {
-            var builder = worldMan.Create().SetName("SmartCardScreen");
+            var builder = worldMan.Create().SetName("MissionScreen");
 
             builder.AddModule(renderableFactory.CreateRenderableBatch());
 
@@ -124,29 +124,15 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
-        private void PerformShowSmartcardReader(params object[] args)
-        {
-            //Pause game world
-            //Fade out player camera
-            //Switch viewport to SmartcardWorld camera
-            //Fade in SmartcardWorld camera
-            //Start printing text at screen
-            //Wait
-        }
-
         private void Setup(World world)
         {
-            //var entryId = "Texts.MAP.01.NOT1";
-
-            //var model = textsDataProvider.GetText(entryId);
-
-            var smartCardCamera = cameraHelper.CreateCamera("Camera.SmartcardReader", 0, 0, 320, 240);
+            var missionScreenCamera = cameraHelper.CreateCamera("Camera.MissionScreen", 0, 0, 320, 240);
 
             triggerMan.OnWorldInitialized(world, () =>
             {
-                smartCardCamera.EnterWorld(world.Id);
+                missionScreenCamera.EnterWorld(world.Id);
                 AddBackground(world, 0, 0);
-                AddText(world, - 320 / 2 + 20 , 240 / 2 - 38);
+                AddText(world, - 320 / 2 + 48 , 240 / 2 - 24, "CRASH LANDING SITE...");
             }, singleTime: true);
         }
 

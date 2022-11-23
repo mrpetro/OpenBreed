@@ -144,7 +144,9 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             var charMap = new Bitmap(charMapWidth, charMapHeight);
             using (var gfx = Graphics.FromImage(charMap))
             {
-                gfx.FillRectangle(Brushes.Black, 0, 0, charMap.Width, charMap.Height);
+                var backgroundBrush = new SolidBrush(Color.FromArgb(0, Color.Black));
+
+                gfx.FillRectangle(backgroundBrush, 0, 0, charMap.Width, charMap.Height);
                 for (int i = 0; i < characters.Count; i++)
                 {
                     var c = characters[i];
@@ -158,12 +160,14 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         private Bitmap GenerateCharacter(Font font, int intCh)
         {
+            var backgroundBrush = new SolidBrush(Color.FromArgb(0, Color.Black));
+
             var ch = (char)intCh;
             var size = textMeasurer.MeasureSize(font, ch);
             var bmp = new Bitmap((int)size.Width, (int)size.Height);
             using (var gfx = Graphics.FromImage(bmp))
             {
-                gfx.FillRectangle(Brushes.Black, 0, 0, bmp.Width, bmp.Height);
+                gfx.FillRectangle(backgroundBrush, 0, 0, bmp.Width, bmp.Height);
                 gfx.DrawString(ch.ToString(), font, Brushes.White, 0, 0); ;
             }
             return bmp;

@@ -184,6 +184,7 @@ namespace OpenBreed.Sandbox
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Rendering', 'OpenBreed.Wecs.Systems.Rendering.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Animation', 'OpenBreed.Wecs.Systems.Animation.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Physics', 'OpenBreed.Wecs.Systems.Physics.Extensions')");
+                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Scripting', 'OpenBreed.Wecs.Systems.Scripting.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Common', 'OpenBreed.Common.Extensions')");
 
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
@@ -326,6 +327,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupScreenWorldHelper();
             hostBuilder.SetupGameHudWorldHelper();
             hostBuilder.SetupGameSmartcardWorldHelper();
+            hostBuilder.SetupMissionScreenWorldHelper();
             hostBuilder.SetupDebugHudWorldHelper();
             hostBuilder.SetupEntriesHelper();
             hostBuilder.SetupDoorHelper();
@@ -502,7 +504,6 @@ namespace OpenBreed.Sandbox
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
             var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
 
-
             var levelName = gameSettings.Value.StartingLevelName;
             var gameWorld = mapLegacyLoader.Load(levelName);
 
@@ -535,6 +536,7 @@ namespace OpenBreed.Sandbox
 
             //Follow John actor
             //var johnPlayerEntity = entityMan.GetByTag("John").First();
+
             var johnPlayerEntity = actorHelper.CreateDummyActor("John", new Vector2(0, 0));
 
             scriptMan.Expose("JohnPlayer", johnPlayerEntity);
@@ -544,16 +546,18 @@ namespace OpenBreed.Sandbox
 
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
-                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
+                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, playerCamera, gameWorld.Name, 0);
             });
         }
+
+
 
         private void OnLoad()
         {
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
-            var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
+            //var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
 
-            var picture = pictureDataLoader.Load("Images.SMARTPIC.LBM");
+            //var picture = pictureDataLoader.Load("Images.SMARTPIC.LBM");
 
             InitLua();
 
@@ -580,7 +584,8 @@ namespace OpenBreed.Sandbox
             var screenWorldHelper = GetManager<ScreenWorldHelper>();
             var gameHudWorldHelper = GetManager<GameHudWorldHelper>();
             var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
-            var gameSmartcardWorldHelper = GetManager<GameSmartcardWorldHelper>();
+            var smartCardScreenWorldHelper = GetManager<SmartcardScreenWorldHelper>();
+            var missionScreenWorldHelper = GetManager<MissionScreenWorldHelper>();
             var renderingMan = GetManager<IRenderingMan>();
 
             //Create 4 sound sources, each one acting as a separate channel
@@ -618,20 +623,18 @@ namespace OpenBreed.Sandbox
             LoadGameWorld();
 
             gameHudWorldHelper.Create();
-
-            gameSmartcardWorldHelper.Create();
+            smartCardScreenWorldHelper.Create();
+            missionScreenWorldHelper.Create();
 
 
             //var hudWorld = worldMan.GetByName("GameHUD");
 
             //triggerMan.OnWorldInitialized(hudWorld, () =>
             //{
-            //    var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.SmartcardReader").First();
+            //    var smartcardReaderCameraEntity = entityMan.GetByTag("Camera.MissionScreen").First();
 
             //    var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
             //    gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
-
-
             //}, singleTime: true);
 
             OnEngineInitialized();
