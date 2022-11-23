@@ -11,16 +11,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Vanilla\ABTA\Scripts\Common\Actor.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Door.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Item.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\Mission.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\SmartCard.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Teleporter.lua" />
     <None Remove="Vanilla\ABTA\Scripts\FpsUpdate.lua" />
     <None Remove="Vanilla\ABTA\Scripts\MAP.01.lua" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Director.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\GameCommentator.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Mission.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\MissionScreen\Background.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\MissionScreen\Text.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\MonsterEating.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\Keycard.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\SmartCardBackground.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderText.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\SmartCardScreen\Text.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\DebugHudViewport.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\Door.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\GameHudViewport.xml" />
@@ -63,19 +72,11 @@
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\CreditsBig.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\CreditsSmall.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\ExtraLife.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardBlue.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardGreen.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardRed.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardSpecial.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\MedkitBig.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\MedkitSmall.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpA.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpF.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpS.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard1.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard2.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard3.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Projectile.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\TeleportEntry.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\TeleportExit.xml" />
@@ -84,6 +85,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Vanilla\ABTA\Scripts\Common\Mission.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Scripts\Common\Actor.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vanilla\ABTA\Scripts\Common\SmartCard.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -99,10 +106,25 @@
     <Content Include="Vanilla\ABTA\Scripts\Common\LandMine.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Director.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Mission.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\MissionScreen\Background.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\MissionScreen\Text.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vanilla\Common\Scripts\Hud\FpsCounter.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Scripts\L1\MAP.01.PlayerEntry.lua">
+    <Content Include="Vanilla\ABTA\Scripts\L1\MAP.01.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\GameCommentator.xml">
@@ -111,10 +133,10 @@
     <Content Include="Vanilla\ABTA\Templates\Common\MonsterEating.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderBackground.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\SmartCardScreen\Background.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\SmartcardReader\SmartCardReaderText.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\SmartCardScreen\Text.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\Viewports\DebugHudViewport.xml">
@@ -241,19 +263,7 @@
     <Content Include="Vanilla\ABTA\Templates\Common\Pickables\ExtraLife.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardBlue.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardGreen.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardRed.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardSpecial.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\Keycard.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\Pickables\MedkitBig.xml">
@@ -271,13 +281,7 @@
     <Content Include="Vanilla\ABTA\Templates\Common\Pickables\PowerUpS.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard3.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\Projectile.xml">

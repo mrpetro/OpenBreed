@@ -13,6 +13,7 @@
 			</States>
 		</Fsm>
 		<Script>
+			<ScriptId>Vanilla/Common/Actor</ScriptId>
 		</Script>
 		<Animation>
 			<States>

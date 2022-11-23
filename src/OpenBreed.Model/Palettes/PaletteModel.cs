@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Linq;
 
 namespace OpenBreed.Model.Palettes
 {
@@ -71,8 +73,16 @@ namespace OpenBreed.Model.Palettes
 
         #region Public Methods
 
+        public Color[] GetColors(int startIndex, int size)
+        {
+            return Data.Skip(startIndex).Take(size).ToArray();
+        }
+
         public void SetColors(int startIndex, Color[] sourceArray)
         {
+            if (startIndex + sourceArray.Length > Data.Length)
+                throw new InvalidOperationException("Start index and colors array length are surpassing size of palette.");
+
             for (int i = 0; i < sourceArray.Length; i++)
             {
                 Data[startIndex + i] = sourceArray[i];

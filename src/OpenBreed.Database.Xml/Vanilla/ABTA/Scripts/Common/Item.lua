@@ -25,18 +25,22 @@
     end
 
     actorEntity:GiveItem(itemId, 1)
-    Logging:Info("Picked up '" .. metaData.Name .. "'")
+    Logging:Info("Picked up '" .. itemName .. "'")
 
     if (metaData.Flavor ~= "Trigger")
     then
-        local stampId = -1
+        local stampName = nil
 
         if (metaData.Flavor == nil)
         then
-            stampId = Stamps:GetByName(tostring(metaData.Level) .. "/" .. tostring(metaData.Name) .. "/Picked").Id
+            stampName = tostring(metaData.Level) .. "/" .. tostring(metaData.Name) .. "/Picked"
         else
-            stampId = Stamps:GetByName(tostring(metaData.Level) .. "/" .. tostring(metaData.Name) .. "/" .. tostring(metaData.Flavor) .. "/Picked").Id
+            stampName = tostring(metaData.Level) .. "/" .. tostring(metaData.Name) .. "/" .. tostring(metaData.Flavor) .. "/Picked"
         end
+
+        Logging:Info("Stamp name: " .. stampName)
+
+        local stampId = Stamps:GetByName(stampName).Id
 
         itemEntity:PutStamp(stampId, 0)
 
