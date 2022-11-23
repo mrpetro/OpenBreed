@@ -38,6 +38,8 @@ namespace OpenBreed.Scripting.Lua
 
             //Allow C# Action delgates to be called from Lua
             luaState.RegisterLuaDelegateType(typeof(Action), typeof(LuaActionHandler));
+
+            Expose("Scripting", this);
         }
 
         #endregion Public Constructors

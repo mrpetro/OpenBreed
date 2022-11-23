@@ -277,7 +277,7 @@ namespace OpenBreed.Sandbox.Entities
         {
             triggerMan.OnEntityEnteredWorld(context.cameraEntity, () =>
             {
-                DiplayMission(context);
+                PlayerCharacterEnter(context);
                 SetPosition(context);
                 //FadeIn(context);
             }, singleTime: true);
@@ -285,26 +285,15 @@ namespace OpenBreed.Sandbox.Entities
             AddToWorld(context.actorEntity, context.mapKey);
         }
 
-        private void DiplayMission(Context context)
+        private void PlayerCharacterEnter(Context context)
         {
-            context.actorEntity.TryInvoke(scriptMan, logger, "onEnter");
+            context.actorEntity.TryInvoke(scriptMan, logger, "OnEnter");
         }
 
         private void SetPosition(Context context)
         {
             SetPosition(context.actorEntity, context.entryId);
         }
-
-        //private void FadeIn(Context context)
-        //{
-        //    if (context.cameraEntity is null)
-        //        return;
-
-        //    triggerMan.OnEntityEnteredWorld(context.cameraEntity, () =>
-        //    {
-        //        context.cameraEntity.PlayAnimation(0, context.cameraFadeInClipId);
-        //    }, singleTime: true);
-        //}
 
         private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, float dt, Vector2 projection)
         {

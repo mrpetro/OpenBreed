@@ -154,7 +154,6 @@ namespace OpenBreed.Sandbox.Loaders
             LoadReferencedAnimations(dbMap);
             LoadReferencedTileStamps(dbMap);
             LoadReferencedSounds(dbMap);
-            var mapScript = LoadReferencedScripts(dbMap, world);
 
             var layout = map.Layout;
             var visited = new bool[layout.Width, layout.Height];
@@ -185,9 +184,6 @@ namespace OpenBreed.Sandbox.Loaders
 
             triggerMan.OnWorldInitialized(world, () =>
             {
-                if(mapScript != null)
-                    mapScript.Invoke();
-
                 for (int iy = 0; iy < layout.Height; iy++)
                 {
                     for (int ix = 0; ix < layout.Width; ix++)
@@ -236,8 +232,8 @@ namespace OpenBreed.Sandbox.Loaders
                 }
 
                 AddMission(world);
+                AddDirector(world, dbMap.ScriptRef);
 
-                scriptMan.TryInvokeFunction("MapLoaded", world.Id);
             }, singleTime: true);
 
             return world;
@@ -246,7 +242,18 @@ namespace OpenBreed.Sandbox.Loaders
         private void AddMission(World world)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Mission.xml")
+                .SetParameter("scriptId", "Vanilla/Common/Mission")
                 .SetTag("Mission")
+                .Build();
+
+            entity.EnterWorld(world.Id);
+        }
+
+        private void AddDirector(World world, string scriptId)
+        {
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Director.xml")
+                .SetParameter("scriptId", scriptId)
+                .SetTag("Director")
                 .Build();
 
             entity.EnterWorld(world.Id);
@@ -326,18 +333,6 @@ namespace OpenBreed.Sandbox.Loaders
             dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
             foreach (var dbAnim in dbAnims)
                 loader.Load(dbAnim.Id);
-        }
-
-        private IScriptFunc LoadReferencedScripts(IDbMap dbMap, World world)
-        {
-            var loader = dataLoaderFactory.GetLoader<IScriptDataLoader>();
-
-            if (dbMap.ScriptRef is null)
-                return null;
-
-            var dbScript = repositoryProvider.GetRepository<IDbScript>().GetById(dbMap.ScriptRef);
-
-            return loader.Load(dbScript.Id);
         }
 
         private void LoadReferencedSounds(IDbMap dbMap)

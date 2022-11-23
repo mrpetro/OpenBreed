@@ -65,6 +65,11 @@ namespace OpenBreed.Sandbox.Extensions
             return entityMan.GetByTag("Mission").FirstOrDefault(entity => entity.WorldId == worldId);
         }
 
+        public static Entity GetDirector(this IEntityMan entityMan, int worldId)
+        {
+            return entityMan.GetByTag("Director").FirstOrDefault(entity => entity.WorldId == worldId);
+        }
+
         public static Entity GetSmartCardScreenCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.SmartCardScreen").FirstOrDefault();

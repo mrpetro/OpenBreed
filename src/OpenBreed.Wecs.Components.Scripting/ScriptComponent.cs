@@ -104,7 +104,7 @@ namespace OpenBreed.Wecs.Components.Scripting
 
             var systemHooks = Array.Empty<ScriptHook>();
 
-            if (template.ScriptId is not null)
+            if (!string.IsNullOrEmpty(template.ScriptId))
             {
                 var scriptFunc = scriptLoader.Load(template.ScriptId);
                 var result =  scriptFunc.Invoke();

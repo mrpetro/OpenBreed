@@ -2,7 +2,7 @@
   "profiles": {
     "OpenBreed.Sandbox": {
       "commandName": "Project",
-      "commandLineArgs": "--dbFilePath \"D:\\Projects\\Programing\\GIT\\OpenBreed\\OpenBreed.Common\\src\\OpenBreed.Database.Xml\\Vanilla\\GameDatabase.ABTA.EPF.xml\" --legacyFolderPath \"D:\\Games\\Alien Breed - Tower Assault (DOSBOX)\\AlienBrT\" --disableAudio --startingLevelName \"Vanilla/1\""
+      "commandLineArgs": "--dbFilePath \"D:\\Projects\\Programing\\GIT\\OpenBreed\\OpenBreed.Common\\src\\OpenBreed.Database.Xml\\Vanilla\\GameDatabase.ABTA.EPF.xml\" --legacyFolderPath \"D:\\Games\\Alien Breed - Tower Assault (DOSBOX)\\AlienBrT\" --startingLevelName \"Vanilla/1\""
     }
   }
 }
