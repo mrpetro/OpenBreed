@@ -2,13 +2,9 @@
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Rendering.OpenGL.Helpers;
-using OpenTK;
-using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
-using System.Linq;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
@@ -16,8 +12,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly IViewClient viewClient;
+        private const int fpsSamplesNo = 60;
         private readonly IPrimitiveRenderer primitiveRenderer;
+        private readonly IViewClient viewClient;
+        private int fpsSampleIndex = 0;
+        private float[] fpsSamples = new float[fpsSamplesNo];
+        private float fpsSamplesSum = 0;
 
         #endregion Private Fields
 
@@ -42,9 +42,8 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Properties
 
-        public IRenderableBatch Renderable { get; set; }
-
         public float Fps { get; private set; }
+        public IRenderableBatch Renderable { get; set; }
 
         #endregion Public Properties
 
@@ -55,6 +54,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #endregion Private Properties
 
+        #region Public Methods
 
         public void RenderViewport(bool drawBorder, bool drawBackground, Color4 backgroundColor, Matrix4 viewportTransform, Action func)
         {
@@ -78,7 +78,20 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             }
         }
 
+        #endregion Public Methods
+
         #region Private Methods
+
+        private float CalculateMovingAvarage(float newSample)
+        {
+            fpsSamplesSum -= fpsSamples[fpsSampleIndex];
+            fpsSamplesSum += newSample;
+            fpsSamples[fpsSampleIndex] = newSample;
+            if (++fpsSampleIndex == fpsSamplesNo)
+                fpsSampleIndex = 0;
+
+            return fpsSamplesSum / fpsSamplesNo;
+        }
 
         private void OnLoad()
         {
@@ -87,10 +100,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private void OnRenderFrame(float dt)
         {
-            Fps = 1.0f / dt;
+            Fps = CalculateMovingAvarage(1.0f / dt);
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
-
 
             Renderable?.Render(Matrix4.Identity, ClipBox, 0, dt);
         }
