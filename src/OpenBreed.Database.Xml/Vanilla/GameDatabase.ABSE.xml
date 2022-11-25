@@ -792,7 +792,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="Unknown 33" Visibility="true">
+						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Unknown action</Description>
 							<Presentation>

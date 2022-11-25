@@ -1013,7 +1013,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="Special key card 1">
+						<Action Id="33" Name="Keycard1">
 							<Description>key card opening special door 1</Description>
 							<Presentation>
 								<Color>#503000FF</Color>
@@ -1529,7 +1529,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="Unknown 33">
+						<Action Id="33" Name="Keycard1">
 							<Description>Unknown action</Description>
 							<Presentation>
 								<Color>#00000000</Color>

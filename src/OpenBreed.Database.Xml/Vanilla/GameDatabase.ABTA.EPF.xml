@@ -6173,29 +6173,29 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="28" Name="Special door 1" Visibility="true">
-							<Color>#2030FF00</Color>
-							<Description>Door opened with special key card 1</Description>
+						<Action Id="28" Name="DoorRed" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Door (Red Keycard Required)</Description>
 							<Presentation>
-								<Color>#2030FF00</Color>
+								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="29" Name="Special door 2" Visibility="true">
-							<Color>#2030FF00</Color>
-							<Description>Door opened with special key card 2</Description>
+						<Action Id="29" Name="DoorGreen" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Door (Green Keycard Required)</Description>
 							<Presentation>
-								<Color>#2030FF00</Color>
+								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="30" Name="Unknown 30" Visibility="true">
-							<Color>#C0000000</Color>
-							<Description>Unknown action</Description>
+						<Action Id="30" Name="DoorBlue" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Door (Blue Keycard Required)</Description>
 							<Presentation>
-								<Color>#C0000000</Color>
+								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -6218,29 +6218,29 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="33" Name="Special key card 1" Visibility="true">
-							<Color>#503000FF</Color>
-							<Description>key card opening special door 1</Description>
+						<Action Id="33" Name="Keycard1" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Keycard (Red)</Description>
 							<Presentation>
-								<Color>#503000FF</Color>
+								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="34" Name="Special key card 2" Visibility="true">
-							<Color>#503000FF</Color>
-							<Description>key card opening special door 2</Description>
+						<Action Id="34" Name="Keycard2" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Keycard (Green)</Description>
 							<Presentation>
-								<Color>#503000FF</Color>
+								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="35" Name="Unknown 35" Visibility="true">
-							<Color>#C0000000</Color>
-							<Description>Unknown action</Description>
+						<Action Id="35" Name="Keycard3" Visibility="true">
+							<Color>#00000000</Color>
+							<Description>Keycard (Blue)</Description>
 							<Presentation>
-								<Color>#C0000000</Color>
+								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
@@ -6308,7 +6308,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
+						<Action Id="43" Name="SlowdownObstacle" Visibility="true">
 							<Color>#C0000000</Color>
 							<Description>Slowdown movement</Description>
 							<Presentation>
@@ -6801,7 +6801,7 @@
 						</Action>
 						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Red)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -6810,7 +6810,7 @@
 						</Action>
 						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Green)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -6819,7 +6819,7 @@
 						</Action>
 						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Blue)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -6889,7 +6889,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
+						<Action Id="43" Name="SlowdownObstacle" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Slowdown movement</Description>
 							<Presentation>
@@ -7381,7 +7381,7 @@
 						</Action>
 						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Red)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7390,7 +7390,7 @@
 						</Action>
 						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Green)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7399,7 +7399,7 @@
 						</Action>
 						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Blue)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -7469,7 +7469,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
+						<Action Id="43" Name="SlowdownObstacle" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Slowdown movement</Description>
 							<Presentation>
@@ -8049,7 +8049,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
+						<Action Id="43" Name="SlowdownObstacle" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Slowdown movement</Description>
 							<Presentation>
@@ -8541,7 +8541,7 @@
 						</Action>
 						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Red)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -8550,7 +8550,7 @@
 						</Action>
 						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Green)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -8559,7 +8559,7 @@
 						</Action>
 						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Blue)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -8629,7 +8629,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
+						<Action Id="43" Name="SlowdownObstacle" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Slowdown movement</Description>
 							<Presentation>
@@ -9121,7 +9121,7 @@
 						</Action>
 						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Red)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9130,7 +9130,7 @@
 						</Action>
 						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Green)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9139,7 +9139,7 @@
 						</Action>
 						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Blue)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9209,7 +9209,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
+						<Action Id="43" Name="SlowdownObstacle" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Slowdown movement</Description>
 							<Presentation>
@@ -9701,7 +9701,7 @@
 						</Action>
 						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Red)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9710,7 +9710,7 @@
 						</Action>
 						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Green)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9719,7 +9719,7 @@
 						</Action>
 						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Blue)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -9789,7 +9789,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
+						<Action Id="43" Name="SlowdownObstacle" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Slowdown movement</Description>
 							<Presentation>
@@ -10281,7 +10281,7 @@
 						</Action>
 						<Action Id="33" Name="Keycard1" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Red)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -10290,7 +10290,7 @@
 						</Action>
 						<Action Id="34" Name="Keycard2" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Green)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -10299,7 +10299,7 @@
 						</Action>
 						<Action Id="35" Name="Keycard3" Visibility="true">
 							<Color>#00000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Keycard (Blue)</Description>
 							<Presentation>
 								<Color>#00000000</Color>
 								<Visibility>true</Visibility>
@@ -10369,7 +10369,7 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="43" Name="ObstacleSlowdown" Visibility="true">
+						<Action Id="43" Name="SlowdownObstacle" Visibility="true">
 							<Color>#00000000</Color>
 							<Description>Slowdown movement</Description>
 							<Presentation>

@@ -19,6 +19,8 @@
 		do
 			local nextDoorCell = mineEntity:GetEntityByDataGrid(Worlds, i, j)
 
+			Factory:CreateSlowdown(mineEntity, mineEntity.WorldId, i, j)
+
 			if(nextDoorCell ~= nil)
 			then
 				nextDoorCell:Destroy()
