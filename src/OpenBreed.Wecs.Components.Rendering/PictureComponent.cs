@@ -1,6 +1,8 @@
-﻿using OpenBreed.Common.Interface;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Scripting.Interface;
 using OpenTK.Mathematics;
 using System;
 
@@ -73,15 +75,16 @@ namespace OpenBreed.Wecs.Components.Rendering
     {
         #region Private Fields
 
-        private readonly IPictureMan imageMan;
+        private readonly IPictureDataLoader pictureDataLoader;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal PictureComponentBuilder(IPictureMan imageMan)
+        internal PictureComponentBuilder(
+            IPictureDataLoader pictureDataLoader)
         {
-            this.imageMan = imageMan;
+            this.pictureDataLoader = pictureDataLoader;
         }
 
         #endregion Internal Constructors
@@ -115,7 +118,7 @@ namespace OpenBreed.Wecs.Components.Rendering
                 return;
             }
 
-            var image = imageMan.GetByName(imageName);
+            var image = pictureDataLoader.Load(imageName);
 
             if (image is null)
                 throw new InvalidOperationException($"Image with name '{imageName}' is not loaded.");

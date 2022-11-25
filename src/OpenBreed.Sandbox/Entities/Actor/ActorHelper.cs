@@ -88,6 +88,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlowdownObstacle, SlowdownObstacleCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ScriptRunTrigger, ScriptRunCallback);
         }
 
@@ -206,7 +207,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             {
                 case "DownLeft":
                     slopeDirection = new Vector2(0, 1);
-                        break;
+                    break;
                 case "UpLeft":
                     slopeDirection = new Vector2(0, -1);
                     break;
@@ -222,6 +223,20 @@ namespace OpenBreed.Sandbox.Entities.Actor
             }
 
             dynamicResolver.ResolveVsSlope(entityA, entityB, projection, slopeDirection);
+        }
+
+        private void SlowdownObstacleCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
+        {
+            //if (entityA.State is "Slowdown")
+            //    return;
+
+            var velCmp = entityA.Get<VelocityComponent>();
+
+            velCmp.Value = Vector2.Multiply(velCmp.Value, 0.5f);
+
+            //entityA.State = "Slowdown";
+
+            Console.WriteLine("Slowdown");
         }
 
         #endregion Private Methods

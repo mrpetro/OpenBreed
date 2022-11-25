@@ -54,6 +54,7 @@ using OpenBreed.Wecs.Components.Scripting.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
@@ -78,6 +79,7 @@ using System.CommandLine;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -551,6 +553,74 @@ namespace OpenBreed.Sandbox
         }
 
 
+        private void LoadSandboxWorld(int width, int height)
+        {
+            var dataLoaderFactory = GetManager<IDataLoaderFactory>();
+            var cameraHelper = GetManager<CameraHelper>();
+            var entityMan = GetManager<IEntityMan>();
+            var actorHelper = GetManager<ActorHelper>();
+            var scriptMan = GetManager<IScriptMan>();
+            var triggerMan = GetManager<ITriggerMan>();
+            var worldMan = GetManager<IWorldMan>();
+            var worldGateHelper = GetManager<EntriesHelper>();
+            var gameSettings = GetManager<IOptions<GameSettings>>();
+            var systemFactory = GetManager<ISystemFactory>();
+            var renderableFactory = GetManager<IRenderableFactory>();
+            var tileGridFactory = GetManager<ITileGridFactory>();
+            var broadphaseGridFactory = GetManager<IBroadphaseFactory>();
+            var dataGridFactory = GetManager<IDataGridFactory>();
+            var palettesDataProvider = GetManager<PalettesDataProvider>();
+            var repositoryProvider = GetManager<IRepositoryProvider>();
+            var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
+            var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
+
+
+            var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
+
+            var palette = PaletteModel.NullPalette;//  palettesDataProvider.GetPalette(dbMap.PaletteRefs.First());
+
+            //Load common sprites
+            var dbSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
+            foreach (var dbAnim in dbSpriteAtlas)
+                loader.Load(dbAnim.Id, palette);
+
+
+            var worldBuilder = worldMan.Create();
+            worldBuilder.SetName("Dummy");
+            worldBuilder.SetSize(width, height);
+            worldBuilder.AddModule(dataGridFactory.Create<Entity>(width, height));
+            worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(width, height, 16));
+            worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
+            worldBuilder.AddModule(tileGridFactory.CreateGrid(width, height, 1, 16));
+            worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
+
+            worldBuilder.SetupGameWorldSystems(systemFactory);
+
+            var gameWorld = worldBuilder.Build();
+
+            //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
+            var playerCamera = cameraHelper.CreateCamera("Camera.Player", 0, 0, 320, 240);
+
+            playerCamera.Add(new PauseImmuneComponent());
+
+            var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
+            gameViewport.SetViewportCamera(playerCamera.Id);
+
+            //Follow John actor
+            //var johnPlayerEntity = entityMan.GetByTag("John").First();
+
+            var johnPlayerEntity = actorHelper.CreateDummyActor("John", new Vector2(0, 0));
+
+            scriptMan.Expose("JohnPlayer", johnPlayerEntity);
+
+            johnPlayerEntity.AddFollower(playerCamera);
+
+            triggerMan.OnWorldInitialized(gameWorld, () =>
+            {
+                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, playerCamera, gameWorld.Name, 0);
+            });
+        }
+
 
         private void OnLoad()
         {
@@ -620,6 +690,9 @@ namespace OpenBreed.Sandbox
 
             debugHudWorldHelper.Create();
 
+            GetManager<IScriptMan>().Expose("Factory", GetManager<IEntityFactory>());
+
+            //LoadSandboxWorld(40, 40);
             LoadGameWorld();
 
             gameHudWorldHelper.Create();

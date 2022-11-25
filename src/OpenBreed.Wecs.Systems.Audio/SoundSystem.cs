@@ -31,11 +31,6 @@ namespace OpenBreed.Wecs.Systems.Audio
 
         #region Public Methods
 
-        public override void Initialize(World world)
-        {
-            base.Initialize(world);
-        }
-
         #endregion Public Methods
 
         #region Protected Methods

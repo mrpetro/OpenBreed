@@ -8,19 +8,29 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Common.Interface;
+using OpenBreed.Rendering.Interface.Data;
 
 namespace OpenBreed.Wecs.Components.Rendering.Extensions
 {
     public static class BuilderFactoryExtensions
     {
-        public static void SetupRenderingComponents(this IBuilderFactory builderFactory, IServiceProvider serviceProvider)
+        public static void SetupRenderingComponents(this IBuilderFactory builderFactory, IServiceProvider sp)
         {
-            builderFactory.Register<PictureComponentBuilder>(() => new PictureComponentBuilder(serviceProvider.GetService<IPictureMan>()));
-            builderFactory.Register<SpriteComponentBuilder>(() => new SpriteComponentBuilder(serviceProvider.GetService<ISpriteMan>()));
-            builderFactory.Register<TextComponentBuilder>(() => new TextComponentBuilder(serviceProvider.GetService<IFontMan>()));
-            builderFactory.Register<CameraComponentBuilder>(() => new CameraComponentBuilder());
-            builderFactory.Register<ViewportComponentBuilder>(() => new ViewportComponentBuilder());
-            builderFactory.Register<TilePutterComponentBuilder>(() => new TilePutterComponentBuilder(serviceProvider.GetService<ITileMan>()));
+            var dataLoderFactory = sp.GetService<IDataLoaderFactory>();
+
+            builderFactory.Register<PictureComponentBuilder>(
+                () => new PictureComponentBuilder(
+                    dataLoderFactory.GetLoader<IPictureDataLoader>()));
+            builderFactory.Register<SpriteComponentBuilder>(
+                () => new SpriteComponentBuilder(sp.GetService<ISpriteMan>()));
+            builderFactory.Register<TextComponentBuilder>(
+                () => new TextComponentBuilder(sp.GetService<IFontMan>()));
+            builderFactory.Register<CameraComponentBuilder>(
+                () => new CameraComponentBuilder());
+            builderFactory.Register<ViewportComponentBuilder>(
+                () => new ViewportComponentBuilder());
+            builderFactory.Register<TilePutterComponentBuilder>(
+                () => new TilePutterComponentBuilder(sp.GetService<ITileMan>()));
         }
     }
 }

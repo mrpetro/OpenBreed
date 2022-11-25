@@ -15,16 +15,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
-        private readonly IPictureMan imageMan;
         private readonly IPictureRenderer imageRenderer;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal PictureSystem(IPictureMan imageMan, IPictureRenderer imageRenderer)
+        internal PictureSystem(IPictureRenderer imageRenderer)
         {
-            this.imageMan = imageMan;
             this.imageRenderer = imageRenderer;
             RequireEntityWith<PictureComponent>();
             RequireEntityWith<PositionComponent>();

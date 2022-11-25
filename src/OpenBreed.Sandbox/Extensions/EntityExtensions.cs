@@ -9,7 +9,11 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.CommandLine;
+using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +24,25 @@ namespace OpenBreed.Sandbox.Extensions
         public static InventoryComponent GetInventory(this Entity entity)
         {
             return entity.Get<InventoryComponent>();
+        }
+
+        public static void CreateSlowdown(this IEntityFactory entityFactory, Entity entity, int worldId, int ox, int oy)
+        {
+            var indexPos = entity.GetIndexPos(ox, oy);
+
+            var toCreate = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Environment\SlowdownObstacle.xml")
+                .SetParameter("startX", 16 * indexPos.X)
+                .SetParameter("startY", 16 * indexPos.Y)
+                .Build();
+
+            toCreate.EnterWorld(worldId);
+        }
+
+        public static Vector2i GetIndexPos(this Entity entity, int ox, int oy)
+        {
+            var pos = entity.Get<PositionComponent>();
+            var indexPos = new Vector2i((int)pos.Value.X / 16, (int)pos.Value.Y / 16);
+            return Vector2i.Add(indexPos, new Vector2i(ox, oy));
         }
 
         public static Entity GetEntityByDataGrid(this Entity entity, IWorldMan worldMan, int ox, int oy)
