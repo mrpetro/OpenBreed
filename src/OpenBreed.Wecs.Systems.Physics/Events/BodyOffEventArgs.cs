@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Events
     {
         #region Public Constructors
 
-        public BodyOffEventArgs(Entity entity)
+        public BodyOffEventArgs(IEntity entity)
         {
             Entity = entity;
         }
@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Events
 
         #region Public Properties
 
-        public Entity Entity { get; }
+        public IEntity Entity { get; }
 
         #endregion Public Properties
     }

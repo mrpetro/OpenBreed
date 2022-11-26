@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
     public static class TriggerExtensions
     {
-        public static void EveryFrame(this ITriggerMan triggerMan, Entity entity, Action<Entity, EntityFrameEvent> action, int framesNo, bool singleTime = false)
+        public static void EveryFrame(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityFrameEvent> action, int framesNo, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<EntityFrameEvent>(ConditionalAction);
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
             entity.Get<FrameComponent>().Target = framesNo;
         }
 
-        public static void AfterDelay(this ITriggerMan triggerMan, Entity entity, TimeSpan timeSpan, Action action, bool singleTime = false)
+        public static void AfterDelay(this ITriggerMan triggerMan, IEntity entity, TimeSpan timeSpan, Action action, bool singleTime = false)
         {
             var rnd = new Random();
             var timerId = rnd.Next();
@@ -44,7 +44,7 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
             entity.StartTimer(timerId, timeSpan.TotalSeconds);
         }
 
-        public static void OnEntityTimerElapsed(this ITriggerMan triggerMan, Entity entity, Action<Entity, TimerElapsedEventArgs> action, bool singleTime = false)
+        public static void OnEntityTimerElapsed(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TimerElapsedEventArgs> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<TimerElapsedEventArgs>(
                 (args) => Equals(entity.Id, args.EntityId),
@@ -52,7 +52,7 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
                 singleTime);
         }
 
-        public static void OnEntityTimerUpdate(this ITriggerMan triggerMan, Entity entity, Action<Entity, TimerUpdateEventArgs> action, bool singleTime = false)
+        public static void OnEntityTimerUpdate(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TimerUpdateEventArgs> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<TimerUpdateEventArgs>(
                 (args) => Equals(entity.Id, args.EntityId),
@@ -60,7 +60,7 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
                 singleTime);
         }
 
-        public static void OnPausedWorld(this ITriggerMan triggerMan, Entity entity, Action<Entity, WorldPausedEventArgs> action, bool singleTime = false)
+        public static void OnPausedWorld(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, WorldPausedEventArgs> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<WorldPausedEventArgs>(
                 (args) => Equals(entity.Id, args.EntityId),
@@ -68,7 +68,7 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
                 singleTime);
         }
 
-        public static void OnUnpausedWorld(this ITriggerMan triggerMan, Entity entity, Action<Entity, WorldUnpausedEventArgs> action, bool singleTime = false)
+        public static void OnUnpausedWorld(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, WorldUnpausedEventArgs> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<WorldUnpausedEventArgs>(
                 (args) => Equals(entity.Id, args.EntityId),

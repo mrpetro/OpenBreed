@@ -31,7 +31,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var fsmCmp = entity.Get<FsmComponent>();
 
@@ -43,14 +43,14 @@ namespace OpenBreed.Wecs.Systems.Core
             }
         }
 
-        protected override void OnAddEntity(Entity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             base.OnAddEntity(entity);
 
             InitializeComponent(entity);
         }
 
-        protected override void OnRemoveEntity(Entity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             DeinitializeComponent(entity);
 
@@ -61,7 +61,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Private Methods
 
-        private void InitializeComponent(Entity entity)
+        private void InitializeComponent(IEntity entity)
         {
             var fsmComponent = entity.Get<FsmComponent>();
 
@@ -69,7 +69,7 @@ namespace OpenBreed.Wecs.Systems.Core
                 fsmMan.EnterState(entity, state, 0);
         }
 
-        private void DeinitializeComponent(Entity entity)
+        private void DeinitializeComponent(IEntity entity)
         {
             var fsmComponent = entity.Get<FsmComponent>();
 
@@ -77,7 +77,7 @@ namespace OpenBreed.Wecs.Systems.Core
                 fsmMan.EnterState(entity, state, 0);
         }
 
-        private void UpdateEntityWithImpulse(Entity entity, MachineState machineState)
+        private void UpdateEntityWithImpulse(IEntity entity, MachineState machineState)
         {
             var impulseId = machineState.ImpulseId;
 

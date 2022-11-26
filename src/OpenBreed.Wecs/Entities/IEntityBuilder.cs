@@ -10,6 +10,6 @@ namespace OpenBreed.Wecs.Entities
     {
         IEntityBuilder SetTag(string entityTag);
 
-        Entity Build();
+        IEntity Build();
     }
 }

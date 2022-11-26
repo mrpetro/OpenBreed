@@ -16,7 +16,7 @@ namespace OpenBreed.Wecs.Extensions
         /// <param name="worldMan">This world manager</param>
         /// <param name="entity">Entity to get world from</param>
         /// <returns>World object</returns>
-        public static World GetWorld(this IWorldMan worldMan, Entity entity)
+        public static World GetWorld(this IWorldMan worldMan, IEntity entity)
         {
             return worldMan.GetById(entity.WorldId);
         }

@@ -49,7 +49,7 @@ namespace OpenBreed.Fsm
             return GetStateName(state.FsmId, state.StateId);
         }
 
-        public IEnumerable<string> GetStateNames(Entity entity)
+        public IEnumerable<string> GetStateNames(IEntity entity)
         {
             var fsmComponent = entity.Get<FsmComponent>();
             return fsmComponent.States.Select(item => GetStateName(item));
@@ -62,12 +62,12 @@ namespace OpenBreed.Fsm
             return newFsm;
         }
 
-        public void EnterState(Entity entity, MachineState state, int withImpulseId)
+        public void EnterState(IEntity entity, MachineState state, int withImpulseId)
         {
             list[state.FsmId].EnterState(entity, state.StateId, withImpulseId);
         }
 
-        public void LeaveState(Entity entity, MachineState state, int withImpulseId)
+        public void LeaveState(IEntity entity, MachineState state, int withImpulseId)
         {
             list[state.FsmId].LeaveState(entity, state.StateId, withImpulseId);
         }

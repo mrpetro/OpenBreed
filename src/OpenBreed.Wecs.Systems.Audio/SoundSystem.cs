@@ -35,7 +35,7 @@ namespace OpenBreed.Wecs.Systems.Audio
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var soundPlayerComponent = entity.TryGet<SoundPlayerComponent>();
 

@@ -86,7 +86,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
             triggerMan.OnEntityViewportResized(hudViewport, (e, a) => UpdatePositionInfoPos(positionInfo, a));
         }
 
-        private static void UpdatePositionInfoPos(Entity fpsTextEntity, ViewportResizedEventArgs a)
+        private static void UpdatePositionInfoPos(IEntity fpsTextEntity, ViewportResizedEventArgs a)
         {
             fpsTextEntity.Get<PositionComponent>().Value = new Vector2(a.Width / 2.0f - 180.0f, -a.Height / 2.0f);
         }

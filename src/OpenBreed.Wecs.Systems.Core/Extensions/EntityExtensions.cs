@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
     {
 
 
-        public static void StartTimer(this Entity entity, int timerId, double interval)
+        public static void StartTimer(this IEntity entity, int timerId, double interval)
         {
             var timerCmp = entity.Get<TimerComponent>();
 
@@ -29,7 +29,7 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
             timerData.Enabled = true;
         }
 
-        public static void StopTimer(this Entity entity, int timerId)
+        public static void StopTimer(this IEntity entity, int timerId)
         {
             var timerCmp = entity.Get<TimerComponent>();
 

@@ -15,7 +15,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         private readonly IEntityMan entityMan;
 
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
 
         private readonly ILogger logger;
 
@@ -23,7 +23,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Internal Constructors
 
-        internal AnimatorSystem(IEntityMan entityMan, IClipMan<Entity> clipMan, ILogger logger)
+        internal AnimatorSystem(IEntityMan entityMan, IClipMan<IEntity> clipMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.clipMan = clipMan;
@@ -36,7 +36,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Public Methods
 
-        public void Set(Entity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
+        public void Set(IEntity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
         {
             animator.ClipId = animId;
             animator.Position = startPosition;
@@ -47,7 +47,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var ac = entity.Get<AnimationComponent>();
 
@@ -60,14 +60,14 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Private Methods
 
-        private void Finish(Entity entity, Animator animator)
+        private void Finish(IEntity entity, Animator animator)
         {
             animator.Position = 0.0f;
             animator.Paused = true;
             RaiseAnimFinishedEvent(entity, animator);
         }
 
-        private void UpdateAnimator(Entity entity, Animator animator, float dt)
+        private void UpdateAnimator(IEntity entity, Animator animator, float dt)
         {
             if (animator.Paused)
                 return;
@@ -93,7 +93,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             data.UpdateWithNextFrame(entity, animator.Position);
         }
 
-        private void RaiseAnimFinishedEvent(Entity entity, Animator animator)
+        private void RaiseAnimFinishedEvent(IEntity entity, Animator animator)
         {
             entity.RaiseEvent(new AnimFinishedEventArgs(entity.Id, animator));
         }

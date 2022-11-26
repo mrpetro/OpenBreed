@@ -11,7 +11,7 @@ namespace OpenBreed.Sandbox.Extensions
 {
     public static class EntityManExtensions
     {
-        public static void ForEachEntity(this IEntityMan entityMan, int worldId, string entityType, string option, Action<Entity> action)
+        public static void ForEachEntity(this IEntityMan entityMan, int worldId, string entityType, string option, Action<IEntity> action)
         {
 
             var nullOnes = entityMan.Where(entity => entity == null).ToArray();
@@ -40,58 +40,58 @@ namespace OpenBreed.Sandbox.Extensions
                 action.Invoke(entity);
         }
 
-        public static Entity GetSmartCardScreenText(this IEntityMan entityMan)
+        public static IEntity GetSmartCardScreenText(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("SmartCardScreen/Text").FirstOrDefault();
         }
 
-        public static Entity GetMissionScreenText(this IEntityMan entityMan)
+        public static IEntity GetMissionScreenText(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("MissionScreen/Text").FirstOrDefault();
         }
 
-        public static Entity GetMissionScreenBackground(this IEntityMan entityMan)
+        public static IEntity GetMissionScreenBackground(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("MissionScreen/Background").FirstOrDefault();
         }
 
-        public static Entity GetHudCamera(this IEntityMan entityMan)
+        public static IEntity GetHudCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.GameHud").FirstOrDefault();
         }
 
-        public static Entity GetMission(this IEntityMan entityMan, int worldId)
+        public static IEntity GetMission(this IEntityMan entityMan, int worldId)
         {
             return entityMan.GetByTag("Mission").FirstOrDefault(entity => entity.WorldId == worldId);
         }
 
-        public static Entity GetDirector(this IEntityMan entityMan, int worldId)
+        public static IEntity GetDirector(this IEntityMan entityMan, int worldId)
         {
             return entityMan.GetByTag("Director").FirstOrDefault(entity => entity.WorldId == worldId);
         }
 
-        public static Entity GetSmartCardScreenCamera(this IEntityMan entityMan)
+        public static IEntity GetSmartCardScreenCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.SmartCardScreen").FirstOrDefault();
         }
 
-        public static Entity GetMissionScreenCamera(this IEntityMan entityMan)
+        public static IEntity GetMissionScreenCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.MissionScreen").FirstOrDefault();
         }
 
-        public static Entity GetPlayerCamera(this IEntityMan entityMan, Entity playerEntity)
+        public static IEntity GetPlayerCamera(this IEntityMan entityMan, IEntity playerEntity)
         {
             return playerEntity.Get<FollowedComponent>().FollowerIds.Select(item => entityMan.GetById(item)).
                                                                               FirstOrDefault(item => item.Tag is "Camera.Player");
         }
 
-        public static Entity GetHudViewport(this IEntityMan entityMan)
+        public static IEntity GetHudViewport(this IEntityMan entityMan)
         {
             return entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
         }
 
-        public static Entity GetGameViewport(this IEntityMan entityMan)
+        public static IEntity GetGameViewport(this IEntityMan entityMan)
         {
             return entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
         }

@@ -15,7 +15,7 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
         public static void SetupAnimationSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
             systemFactory.Register<AnimatorSystem>(() => new AnimatorSystem(serviceProvider.GetService<IEntityMan>(),
-                                                             serviceProvider.GetService<IClipMan<Entity>>(),
+                                                             serviceProvider.GetService<IClipMan<IEntity>>(),
                                                              serviceProvider.GetService<ILogger>()));
         }
 

@@ -33,7 +33,7 @@ namespace OpenBreed.Sandbox.Entities
         private readonly IEntityFactory entityFactory;
         private readonly IBuilderFactory builderFactory;
 
-        public Entity AddTVFlickering(World world, int x, int y, string level, int gfxValue)
+        public IEntity AddTVFlickering(World world, int x, int y, string level, int gfxValue)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\L4\TVFlickering.xml")
                 .SetParameter("level", level)
@@ -47,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
-        public Entity AddMonsterEating(World world, int x, int y, string level, int gfxValue)
+        public IEntity AddMonsterEating(World world, int x, int y, string level, int gfxValue)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\L4\MonsterEating.xml")
                 .SetParameter("level", level)

@@ -26,7 +26,7 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
             }
         }
 
-        public static void OnEntityControlFireChanged(this ITriggerMan triggerMan, Entity entity, Action<Entity, ControlFireChangedEventArgs> action, bool singleTime = false)
+        public static void OnEntityControlFireChanged(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, ControlFireChangedEventArgs> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<ControlFireChangedEventArgs>(ConditionalAction);
 

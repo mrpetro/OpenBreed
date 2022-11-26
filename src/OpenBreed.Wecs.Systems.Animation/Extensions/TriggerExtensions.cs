@@ -28,7 +28,7 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
             }
         }
 
-        public static void OnEntityEvent<TEventArgs>(this ITriggerMan triggerMan, Entity entity, Action<Entity, TEventArgs> action, bool singleTime = false) where TEventArgs : EventArgs
+        public static void OnEntityEvent<TEventArgs>(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TEventArgs> action, bool singleTime = false) where TEventArgs : EventArgs
         {
             triggerMan.EventsMan.Subscribe<TEventArgs>(ConditionalAction);
 
@@ -44,7 +44,7 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
             }
         }
 
-        public static void OnEntityAnimFinished(this ITriggerMan triggerMan, Entity entity, Action<Entity, AnimFinishedEventArgs> action, bool singleTime = false)
+        public static void OnEntityAnimFinished(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, AnimFinishedEventArgs> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<AnimFinishedEventArgs>(
                 (args) => Equals(entity.Id, args.EntityId),

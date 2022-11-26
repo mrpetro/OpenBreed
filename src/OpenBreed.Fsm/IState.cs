@@ -14,9 +14,9 @@ namespace OpenBreed.Fsm
 
         #region Public Methods
 
-        void EnterState(Entity entity);
+        void EnterState(IEntity entity);
 
-        void LeaveState(Entity entity);
+        void LeaveState(IEntity entity);
 
         #endregion Public Methods
     }

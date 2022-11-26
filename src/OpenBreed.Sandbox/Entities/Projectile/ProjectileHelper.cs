@@ -18,9 +18,9 @@ namespace OpenBreed.Sandbox.Entities.Projectile
     {
         #region Private Fields
 
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
 
-        private readonly ICollisionMan<Entity> collisionMan;
+        private readonly ICollisionMan<IEntity> collisionMan;
 
         private readonly IEntityFactory entityFactory;
 
@@ -30,7 +30,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         #region Public Constructors
 
-        public ProjectileHelper(IClipMan<Entity> clipMan, ICollisionMan<Entity> collisionMan, IEntityFactory entityFactory, DynamicResolver dynamicResolver)
+        public ProjectileHelper(IClipMan<IEntity> clipMan, ICollisionMan<IEntity> collisionMan, IEntityFactory entityFactory, DynamicResolver dynamicResolver)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
@@ -83,7 +83,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         #region Private Methods
 
-        private void OnFrameUpdate(Entity entity, int nextValue)
+        private void OnFrameUpdate(IEntity entity, int nextValue)
         {
             entity.SetSpriteImageId(nextValue);
         }
@@ -105,12 +105,12 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         //    //}
         //}
 
-        private void Projectile2FullObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, float dt, Vector2 projection)
+        private void Projectile2FullObstacle(int colliderTypeA, IEntity entityA, int colliderTypeB, IEntity entityB, float dt, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
-        private void Projectile2StaticObstacleEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, float dt, Vector2 projection)
+        private void Projectile2StaticObstacleEx(BodyFixture colliderTypeA, IEntity entityA, BodyFixture colliderTypeB, IEntity entityB, float dt, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }

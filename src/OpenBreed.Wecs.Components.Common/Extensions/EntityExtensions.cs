@@ -9,38 +9,38 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
 {
     public static class EntityExtensions
     {
-        public static void AddFollower(this Entity entity, Entity followerEntity)
+        public static void AddFollower(this IEntity entity, IEntity followerEntity)
         {
             var fc = entity.Get<FollowedComponent>();
             fc.FollowerIds.Add(followerEntity.Id);
         }
 
-        public static void PauseWorld(this Entity entity)
+        public static void PauseWorld(this IEntity entity)
         {
             entity.Set(new PauserComponent(pause: true));
         }
 
-        public static void UnpauseWorld(this Entity entity)
+        public static void UnpauseWorld(this IEntity entity)
         {
             entity.Set(new PauserComponent(pause: false));
         }
 
-        public static MetadataComponent GetMetadata(this Entity entity)
+        public static MetadataComponent GetMetadata(this IEntity entity)
         {
             return entity.Get<MetadataComponent>();
         }
 
-        public static FollowedComponent GetFollowers(this Entity entity)
+        public static FollowedComponent GetFollowers(this IEntity entity)
         {
             return entity.Get<FollowedComponent>();
         }
 
-        public static PositionComponent GetPosition(this Entity entity)
+        public static PositionComponent GetPosition(this IEntity entity)
         {
             return entity.Get<PositionComponent>();
         }
 
-        public static void SetPosition(this Entity entity, float x, float y)
+        public static void SetPosition(this IEntity entity, float x, float y)
         {
             entity.Get<PositionComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
         }

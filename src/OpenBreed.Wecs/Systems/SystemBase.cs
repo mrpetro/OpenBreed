@@ -13,9 +13,9 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Private Fields
 
-        private readonly HashSet<Entity> toAdd = new HashSet<Entity>();
+        private readonly HashSet<IEntity> toAdd = new HashSet<IEntity>();
 
-        private readonly HashSet<Entity> toRemove = new HashSet<Entity>();
+        private readonly HashSet<IEntity> toRemove = new HashSet<IEntity>();
 
         private readonly List<Type> requiredComponentTypes = new List<Type>();
 
@@ -77,7 +77,7 @@ namespace OpenBreed.Wecs.Systems
             WorldId = World.NO_WORLD;
         }
 
-        public bool Matches(Entity entity)
+        public bool Matches(IEntity entity)
         {
             foreach (var type in forbiddenComponentTypes)
             {
@@ -94,12 +94,12 @@ namespace OpenBreed.Wecs.Systems
             return true;
         }
 
-        public void RequestAddEntity(Entity entity)
+        public void RequestAddEntity(IEntity entity)
         {
             toAdd.Add(entity);
         }
 
-        public void RequestRemoveEntity(Entity entity)
+        public void RequestRemoveEntity(IEntity entity)
         {
             toRemove.Add(entity);
         }
@@ -121,7 +121,7 @@ namespace OpenBreed.Wecs.Systems
             }
         }
 
-        public bool HasEntity(Entity entity)
+        public bool HasEntity(IEntity entity)
         {
             if (toAdd.Contains(entity))
                 return true;
@@ -133,11 +133,11 @@ namespace OpenBreed.Wecs.Systems
 
         #region Protected Methods
 
-        protected abstract bool ContainsEntity(Entity entity);
+        protected abstract bool ContainsEntity(IEntity entity);
 
-        protected abstract void OnRemoveEntity(Entity entity);
+        protected abstract void OnRemoveEntity(IEntity entity);
 
-        protected abstract void OnAddEntity(Entity entity);
+        protected abstract void OnAddEntity(IEntity entity);
 
         protected int RequireEntityWith<TComponent>() where TComponent : IEntityComponent
         {

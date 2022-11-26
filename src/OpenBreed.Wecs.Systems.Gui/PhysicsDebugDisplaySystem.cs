@@ -18,7 +18,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         private readonly IPrimitiveRenderer primitiveRenderer;
 
-        private List<Entity> entities = new List<Entity>();
+        private List<IEntity> entities = new List<IEntity>();
 
         private IBroadphaseDynamic broadphaseDynamic;
 
@@ -57,14 +57,14 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+        protected override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        protected override void OnAddEntity(Entity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void OnRemoveEntity(Entity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             entities.Remove(entity);
         }
@@ -73,7 +73,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Private Methods
 
-        private void DrawDynamicEntityAabb(Entity entity, Box2 clipBox)
+        private void DrawDynamicEntityAabb(IEntity entity, Box2 clipBox)
         {
             var posCmp = entity.Get<PositionComponent>();
             var bodyCmp = entity.Get<BodyComponent>();

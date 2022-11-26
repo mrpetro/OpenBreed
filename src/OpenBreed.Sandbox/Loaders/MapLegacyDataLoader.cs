@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Methods
 
-        Entity Load(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world);
+        IEntity Load(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world);
 
         #endregion Public Methods
     }
@@ -163,7 +163,7 @@ namespace OpenBreed.Sandbox.Loaders
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Height);
-            worldBuilder.AddModule(dataGridFactory.Create<Entity>(layout.Width, layout.Height));
+            worldBuilder.AddModule(dataGridFactory.Create<IEntity>(layout.Width, layout.Height));
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
             worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
@@ -177,7 +177,7 @@ namespace OpenBreed.Sandbox.Loaders
 
             var atlasId = tileMan.GetByName(mapper.Level).Id;
             var tileGrid = world.GetModule<ITileGrid>();
-            var entityGrid = world.GetModule<IDataGrid<Entity>>();
+            var entityGrid = world.GetModule<IDataGrid<IEntity>>();
 
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
@@ -270,7 +270,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private Entity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, ActionModel action, int gfxValue)
+        private IEntity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, ActionModel action, int gfxValue)
         {
             if (visited[ix, iy])
                 return null;
@@ -322,7 +322,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void LoadReferencedAnimations(IDbMap dbMap)
         {
-            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<Entity>>();
+            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<IEntity>>();
 
             //Load common animations
             var dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
@@ -391,7 +391,7 @@ namespace OpenBreed.Sandbox.Loaders
                 loader.Load(dbTileStamp.Id);
         }
 
-        private Entity LoadUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private IEntity LoadUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             if (entityLoaders.TryGetValue("Unknown", out IMapWorldEntityLoader entityLoader))
                 return entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, "Unknown", actionValue.ToString(), gfxValue, world);

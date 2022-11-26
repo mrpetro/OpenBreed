@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
+        private readonly List<IEntity> entities = new List<IEntity>();
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
@@ -55,7 +55,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             world.GetModule<IRenderableBatch>().Add(this);
         }
 
-        public Vector4 ClientToWorld(Vector4 coords, Entity viewport)
+        public Vector4 ClientToWorld(Vector4 coords, IEntity viewport)
         {
             var vpc = viewport.Get<ViewportComponent>();
             var pos = viewport.Get<PositionComponent>();
@@ -147,14 +147,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+        protected override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        protected override void OnAddEntity(Entity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void OnRemoveEntity(Entity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             entities.Remove(entity);
         }
@@ -174,7 +174,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// Render this viewport content to the client
         /// </summary>
         /// <param name="dt">Time step</param>
-        private void RenderViewport(Entity vpe, Box2 clipBox, int depth, float dt)
+        private void RenderViewport(IEntity vpe, Box2 clipBox, int depth, float dt)
         {
             var vpc = vpe.Get<ViewportComponent>();
             var viewportPos = vpe.Get<PositionComponent>().Value;

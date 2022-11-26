@@ -35,7 +35,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public Entity Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public IEntity Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
             var key = default(string);
 
@@ -61,9 +61,9 @@ namespace OpenBreed.Sandbox.Loaders
             return entity;
         }
 
-        public Entity LoadOld(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public IEntity LoadOld(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
-            var entity = default(Entity);
+            var entity = default(IEntity);
             var key = default(string);
 
             switch (templateName)

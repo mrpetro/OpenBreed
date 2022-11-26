@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
+        private readonly List<IEntity> entities = new List<IEntity>();
         private readonly ISpriteMan spriteMan;
         private readonly ISpriteRenderer spriteRenderer;
 
@@ -60,14 +60,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+        protected override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        protected override void OnAddEntity(Entity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void OnRemoveEntity(Entity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             entities.Remove(entity);
         }
@@ -80,7 +80,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        private void RenderSprite(Entity entity, Box2 clipBox)
+        private void RenderSprite(IEntity entity, Box2 clipBox)
         {
             var spc = entity.Get<SpriteComponent>();
 

@@ -21,12 +21,12 @@ namespace OpenBreed.Sandbox.Extensions
 {
     public static class EntityExtensions
     {
-        public static InventoryComponent GetInventory(this Entity entity)
+        public static InventoryComponent GetInventory(this IEntity entity)
         {
             return entity.Get<InventoryComponent>();
         }
 
-        public static void CreateSlowdown(this IEntityFactory entityFactory, Entity entity, int worldId, int ox, int oy)
+        public static void CreateSlowdown(this IEntityFactory entityFactory, IEntity entity, int worldId, int ox, int oy)
         {
             var indexPos = entity.GetIndexPos(ox, oy);
 
@@ -38,18 +38,18 @@ namespace OpenBreed.Sandbox.Extensions
             toCreate.EnterWorld(worldId);
         }
 
-        public static Vector2i GetIndexPos(this Entity entity, int ox, int oy)
+        public static Vector2i GetIndexPos(this IEntity entity, int ox, int oy)
         {
             var pos = entity.Get<PositionComponent>();
             var indexPos = new Vector2i((int)pos.Value.X / 16, (int)pos.Value.Y / 16);
             return Vector2i.Add(indexPos, new Vector2i(ox, oy));
         }
 
-        public static Entity GetEntityByDataGrid(this Entity entity, IWorldMan worldMan, int ox, int oy)
+        public static IEntity GetEntityByDataGrid(this IEntity entity, IWorldMan worldMan, int ox, int oy)
         {
             var pos = entity.Get<PositionComponent>();
             var world = worldMan.GetById(entity.WorldId);
-            var dataGrid = world.GetModule<IDataGrid<Entity>>();
+            var dataGrid = world.GetModule<IDataGrid<IEntity>>();
             var indexPos = new Vector2i((int)pos.Value.X / 16, (int)pos.Value.Y / 16);
             var thisEntity = dataGrid.Get(indexPos);
             var indexIndexPos = Vector2i.Add(indexPos, new Vector2i(ox, oy));
@@ -58,7 +58,7 @@ namespace OpenBreed.Sandbox.Extensions
             return resultEntity;
         }
 
-        public static bool IsSameCellType(this Entity entity, IWorldMan worldMan, int ox, int oy)
+        public static bool IsSameCellType(this IEntity entity, IWorldMan worldMan, int ox, int oy)
         {
             var nextCell = entity.GetEntityByDataGrid(worldMan, ox, oy);
 
@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Extensions
             return nextCellMeta.Name == thisData.Name && nextCellMeta.Option == thisData.Option;
         }
 
-        public static Entity FindVerticalDoorCell(this Entity entity, IWorldMan worldMan)
+        public static IEntity FindVerticalDoorCell(this IEntity entity, IWorldMan worldMan)
         {
             var foundCell = entity;
 
@@ -98,7 +98,7 @@ namespace OpenBreed.Sandbox.Extensions
             return foundCell;
         }
 
-        public static Entity FindHorizontalDoorCell(this Entity entity, IWorldMan worldMan)
+        public static IEntity FindHorizontalDoorCell(this IEntity entity, IWorldMan worldMan)
         {
             var foundCell = entity;
 
@@ -124,14 +124,14 @@ namespace OpenBreed.Sandbox.Extensions
             return foundCell;
         }
 
-        public static void SetBodyOffEx(this Entity entity)
+        public static void SetBodyOffEx(this IEntity entity)
         {
             var bodyCmp = entity.Get<BodyComponent>();
             var fixture = bodyCmp.Fixtures.First();
             fixture.GroupIds.RemoveAll(id => id == ColliderTypes.FullObstacle);
         }
 
-        public static void GiveItem(this Entity entity, int itemId, int quantity = 1)
+        public static void GiveItem(this IEntity entity, int itemId, int quantity = 1)
         {
             var inventoryCmp = entity.Get<InventoryComponent>();
 
@@ -143,10 +143,10 @@ namespace OpenBreed.Sandbox.Extensions
             itemSlot.AddItem(itemId, quantity);
         }
 
-        public static void SetPositionToExit(this Entity target,
+        public static void SetPositionToExit(this IEntity target,
                                        IEntityMan entityMan,
                                        IShapeMan shapeMan,
-                                       Entity entryEntity)
+                                       IEntity entryEntity)
         {
             var pairId = entryEntity.Tag.Split('/')[1];
             // Search for all exits from same world as entry with same pair ID 

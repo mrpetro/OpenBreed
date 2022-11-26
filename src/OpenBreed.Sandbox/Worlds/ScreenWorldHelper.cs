@@ -104,7 +104,7 @@ namespace OpenBreed.Sandbox.Worlds
             //builder.AddSystem(core.CreateTextSystem().Build());
         }
 
-        public Entity CreateController(string player)
+        public IEntity CreateController(string player)
         {
             var p1Controller = entityMan.Create($"Controllers.{player}");
             var p1 = playersMan.GetByName(player);
@@ -177,17 +177,17 @@ namespace OpenBreed.Sandbox.Worlds
         //    throw new NotImplementedException();
         //}
 
-        private void ResizeGameViewport(Entity viewport, ClientResizedEventArgs args)
+        private void ResizeGameViewport(IEntity viewport, ClientResizedEventArgs args)
         {
             viewport.SetViewportSize(args.Width, args.Height);
         }
 
-        private void ResizeHudViewport(Entity viewport, ClientResizedEventArgs args)
+        private void ResizeHudViewport(IEntity viewport, ClientResizedEventArgs args)
         {
             viewport.SetViewportSize(args.Width, args.Height);
         }
 
-        private void ResizeTextViewport(Entity viewport, ClientResizedEventArgs args)
+        private void ResizeTextViewport(IEntity viewport, ClientResizedEventArgs args)
         {
             viewport.SetViewportSize(args.Width, args.Height);
         }

@@ -43,7 +43,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         #region Public Methods
 
-        public void EnterState(Entity entity)
+        public void EnterState(IEntity entity)
         {
             Console.WriteLine("RotIdle -> Enter");
 
@@ -53,7 +53,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             triggerMan.OnEntityDirectionChanged(entity, OnDirectionChanged);
         }
 
-        private bool OnDirectionChanged(Entity entity, DirectionChangedEventArgs args)
+        private bool OnDirectionChanged(IEntity entity, DirectionChangedEventArgs args)
         {
             var angularVelocity = entity.Get<AngularVelocityComponent>();
             var angularPosition = entity.Get<AngularPositionComponent>();
@@ -65,7 +65,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             return true;
         }
 
-        public void LeaveState(Entity entity)
+        public void LeaveState(IEntity entity)
         {
             Console.WriteLine("RotIdle -> Leave");
 

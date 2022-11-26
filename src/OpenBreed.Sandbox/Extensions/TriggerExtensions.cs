@@ -13,7 +13,7 @@ namespace OpenBreed.Sandbox.Extensions
 {
     public static class TriggerExtensions
     {
-        public static void AnyKeyPressed(this ITriggerMan triggerMan, Entity entity, Action<Entity, ControlFireChangedEventArgs> action, bool singleTime = false)
+        public static void AnyKeyPressed(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, ControlFireChangedEventArgs> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<ControlFireChangedEventArgs>(ConditionalAction);
 

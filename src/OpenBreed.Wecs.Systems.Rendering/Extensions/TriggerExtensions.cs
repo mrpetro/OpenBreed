@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
 {
     public static class TriggerExtensions
     {
-        public static void OnEntityViewportResized(this ITriggerMan triggerMan, Entity entity, Action<Entity, ViewportResizedEventArgs> action, bool singleTime = false)
+        public static void OnEntityViewportResized(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, ViewportResizedEventArgs> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<ViewportResizedEventArgs>(ConditionalAction);
 

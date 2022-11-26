@@ -39,13 +39,13 @@ namespace OpenBreed.Wecs.Systems
         /// </summary>
         void Deinitialize();
 
-        bool Matches(Entity entity);
+        bool Matches(IEntity entity);
 
-        bool HasEntity(Entity entity);
+        bool HasEntity(IEntity entity);
 
-        void RequestAddEntity(Entity entity);
+        void RequestAddEntity(IEntity entity);
 
-        void RequestRemoveEntity(Entity entity);
+        void RequestRemoveEntity(IEntity entity);
 
         /// <summary>
         /// Get types of entity components required by this system

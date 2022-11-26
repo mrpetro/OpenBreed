@@ -35,7 +35,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public Entity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public IEntity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
             var missonBlock = map.Blocks.OfType<MapMissionBlock>().FirstOrDefault();
 

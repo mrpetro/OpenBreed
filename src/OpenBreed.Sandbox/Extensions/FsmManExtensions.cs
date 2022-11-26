@@ -35,7 +35,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupProjectileStates(this IFsmMan fsmMan, IServiceProvider serviceProvider)
         {
-            var clipMan = serviceProvider.GetService<IClipMan<Entity>>();
+            var clipMan = serviceProvider.GetService<IClipMan<IEntity>>();
 
             var stateMachine = fsmMan.Create<Entities.Projectile.States.AttackingState, Entities.Projectile.States.AttackingImpulse>("Projectile");
             stateMachine.AddState(new Entities.Projectile.States.FiredState("Animations/Laser/Fired/", clipMan));
@@ -64,7 +64,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             var triggerMan = serviceProvider.GetService<ITriggerMan>();
 
-            var clipMan = serviceProvider.GetService<IClipMan<Entity>>();
+            var clipMan = serviceProvider.GetService<IClipMan<IEntity>>();
 
             var stateMachine = fsmMan.Create<Entities.Actor.States.Movement.MovementState, Entities.Actor.States.Movement.MovementImpulse>("Actor.Movement");
 
@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void CreateTurretRotationStates(this IFsmMan fsmMan, IServiceProvider serviceProvider)
         {
-            var clipMan = serviceProvider.GetService<IClipMan<Entity>>();
+            var clipMan = serviceProvider.GetService<IClipMan<IEntity>>();
             var triggerMan = serviceProvider.GetService<ITriggerMan>();
 
             var stateMachine = fsmMan.Create<Entities.Actor.States.Rotation.RotationState, Entities.Actor.States.Rotation.RotationImpulse>("Turret.Rotation");

@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Entities
 {
-    public delegate void ComponentAdded(Entity entity, Type componentType);
+    public delegate void ComponentAdded(IEntity entity, Type componentType);
 
-    public delegate void ComponentRemoved(Entity entity, Type componentType);
+    public delegate void ComponentRemoved(IEntity entity, Type componentType);
 
-    public delegate void EnteringWorld(Entity entity, int worldId);
+    public delegate void EnteringWorld(IEntity entity, int worldId);
 
-    public delegate void LeavingWorld(Entity entity);
+    public delegate void LeavingWorld(IEntity entity);
 
     public interface IEntityMan
     {
@@ -28,13 +28,13 @@ namespace OpenBreed.Wecs.Entities
 
         #region Public Methods
 
-        IEnumerable<Entity> GetByTag(string tag);
+        IEnumerable<IEntity> GetByTag(string tag);
 
-        IEnumerable<Entity> Where(Func<Entity, bool> predicate);
+        IEnumerable<IEntity> Where(Func<IEntity, bool> predicate);
 
-        Entity GetById(int id);
+        IEntity GetById(int id);
 
-        Entity Create(string tag, List<IEntityComponent> initialComponents = null);
+        IEntity Create(string tag, List<IEntityComponent> initialComponents = null);
 
         #endregion Public Methods
     }

@@ -90,7 +90,7 @@ namespace OpenBreed.Fsm
             transition[impulse] = toState;
         }
 
-        public void EnterState(Entity entity, int stateId, int withImpulseId)
+        public void EnterState(IEntity entity, int stateId, int withImpulseId)
         {
             states[ToState(stateId)].EnterState(entity);
 
@@ -100,7 +100,7 @@ namespace OpenBreed.Fsm
             //        callback.Invoke(Core, entity.Id, Id, stateId, withImpulseId);
         }
 
-        public void LeaveState(Entity entity, int stateId, int withImpulseId)
+        public void LeaveState(IEntity entity, int stateId, int withImpulseId)
         {
             states[ToState(stateId)].LeaveState(entity);
 
@@ -110,7 +110,7 @@ namespace OpenBreed.Fsm
             //        action.Invoke(Core, entity.Id, Id, stateId, withImpulseId);
         }
 
-        public void SetInitialState(Entity entity, int initialStateId)
+        public void SetInitialState(IEntity entity, int initialStateId)
         {
             Debug.Assert(entity.Contains<FsmComponent>(), $"Entity is missing {nameof(FsmComponent)}");
 
@@ -129,7 +129,7 @@ namespace OpenBreed.Fsm
             //state.EnterState(entity);
         }
 
-        public string GetCurrentStateName(Entity entity)
+        public string GetCurrentStateName(IEntity entity)
         {
             var fsmComponent = entity.Get<FsmComponent>();
             var stateData = fsmComponent.States.FirstOrDefault(item => item.FsmId == Id);

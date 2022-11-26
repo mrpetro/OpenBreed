@@ -45,14 +45,14 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var aabb = Calculate(entity);
 
             broadphaseDynamic.UpdateItem(entity.Id, aabb);
         }
 
-        protected override void OnAddEntity(Entity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             base.OnAddEntity(entity);
 
@@ -60,7 +60,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             broadphaseDynamic.InsertItem(entity.Id, aabb);
         }
 
-        protected override void OnRemoveEntity(Entity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             base.OnRemoveEntity(entity);
 
@@ -71,7 +71,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Private Methods
 
-        private Box2 Calculate(Entity entity)
+        private Box2 Calculate(IEntity entity)
         {
             var body = entity.Get<BodyComponent>();
             var pos = entity.Get<PositionComponent>();

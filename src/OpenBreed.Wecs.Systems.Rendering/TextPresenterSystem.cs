@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
+        private readonly List<IEntity> entities = new List<IEntity>();
         private readonly IFontMan fontMan;
 
         #endregion Private Fields
@@ -41,14 +41,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+        protected override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        protected override void OnAddEntity(Entity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void OnRemoveEntity(Entity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             entities.Remove(entity);
         }
@@ -63,7 +63,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 RenderText(entities[i], clipBox);
         }
 
-        private void RenderText(Entity entity, Box2 clipBox)
+        private void RenderText(IEntity entity, Box2 clipBox)
         {
             var pos = entity.Get<PositionComponent>();
             var tp = entity.Get<TextPresentationComponent>();

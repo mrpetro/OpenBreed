@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 {
     public static class EntityExtensions
     {
-        public static void SetBodyOff(this Entity entity)
+        public static void SetBodyOff(this IEntity entity)
         {
             var bodyCmp = entity.Get<BodyComponent>();
 
@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             entity.RaiseEvent(new BodyOffEventArgs(entity));
         }
 
-        public static void SetBodyOn(this Entity entity)
+        public static void SetBodyOn(this IEntity entity)
         {
             var bodyCmp = entity.Get<BodyComponent>();
 

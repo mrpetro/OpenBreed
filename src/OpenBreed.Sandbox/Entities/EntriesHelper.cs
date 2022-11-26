@@ -48,13 +48,13 @@ namespace OpenBreed.Sandbox.Entities
 
         private readonly IEntityMan entityMan;
         private readonly ITriggerMan triggerMan;
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
 
         private readonly IEntityFactory entityFactory;
 
         private readonly IEventsMan eventsMan;
 
-        private readonly ICollisionMan<Entity> collisionMan;
+        private readonly ICollisionMan<IEntity> collisionMan;
 
         private readonly IJobsMan jobsMan;
 
@@ -71,10 +71,10 @@ namespace OpenBreed.Sandbox.Entities
             IWorldMan worldMan,
             IEntityMan entityMan,
             ITriggerMan triggerMan,
-            IClipMan<Entity> clipMan,
+            IClipMan<IEntity> clipMan,
             IEntityFactory entityFactory,
             IEventsMan eventsMan,
-            ICollisionMan<Entity> collisionMan,
+            ICollisionMan<IEntity> collisionMan,
             IJobsMan jobsMan,
             ViewportCreator viewportCreator,
             IDataLoaderFactory dataLoaderFactory,
@@ -99,7 +99,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public Entity AddMapEntry(World world, int x, int y, int entryId, string level, int gfxValue)
+        public IEntity AddMapEntry(World world, int x, int y, int entryId, string level, int gfxValue)
         {
             var entryEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MapEntry.xml")
                 .SetParameter("level", level)
@@ -114,7 +114,7 @@ namespace OpenBreed.Sandbox.Entities
             return entryEntity;
         }
 
-        public Entity AddMapExit(World world, int ix, int iy, int exitId, string level, int gfxValue)
+        public IEntity AddMapExit(World world, int ix, int iy, int exitId, string level, int gfxValue)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MapExit.xml")
                 .SetParameter("level", level)
@@ -136,7 +136,7 @@ namespace OpenBreed.Sandbox.Entities
             //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
         }
 
-        public void ExecuteHeroEnter(Entity heroEntity, Entity cameraEntity, string worldName, int entryId)
+        public void ExecuteHeroEnter(IEntity heroEntity, IEntity cameraEntity, string worldName, int entryId)
         {
             var context = new Context()
             {
@@ -155,7 +155,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Private Methods
 
-        private void PerformEntityExit(Entity actorEntity, Entity exitEntity)
+        private void PerformEntityExit(IEntity actorEntity, IEntity exitEntity)
         {
             // For preventing running rest of the code when actor will hit couple of teleporter blocks at same time
             if (Equals(actorEntity.State, "Exiting"))
@@ -211,8 +211,8 @@ namespace OpenBreed.Sandbox.Entities
 
         class Context
         {
-            public Entity cameraEntity { get; set; }
-            public Entity actorEntity { get; set; }
+            public IEntity cameraEntity { get; set; }
+            public IEntity actorEntity { get; set; }
             public int cameraFadeOutClipId { get; set; }
             public int cameraFadeInClipId { get; set; }
             public string mapKey { get; set; }
@@ -295,12 +295,12 @@ namespace OpenBreed.Sandbox.Entities
             SetPosition(context.actorEntity, context.entryId);
         }
 
-        private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, Entity entityA, BodyFixture colliderTypeB, Entity entityB, float dt, Vector2 projection)
+        private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, IEntity entityA, BodyFixture colliderTypeB, IEntity entityB, float dt, Vector2 projection)
         {
             PerformEntityExit(entityA, entityB);
         }
 
-        private void AddToWorld(Entity target, string worldName)
+        private void AddToWorld(IEntity target, string worldName)
         {
             var world = worldMan.GetByName(worldName);
             target.EnterWorld(world.Id);
@@ -319,7 +319,7 @@ namespace OpenBreed.Sandbox.Entities
             return world;
         }
 
-        private IEnumerable<Entity> FindEntryEntities(World world, int entryId)
+        private IEnumerable<IEntity> FindEntryEntities(World world, int entryId)
         {
             foreach (var entity in world.Entities.Where(e => e.Contains<MetadataComponent>()))
             {
@@ -341,9 +341,9 @@ namespace OpenBreed.Sandbox.Entities
         /// </summary>
         /// <param name="entities">Entities to check coordinates</param>
         /// <returns></returns>
-        private Entity GetTopLeftMostEntity(IEnumerable<Entity> entities)
+        private IEntity GetTopLeftMostEntity(IEnumerable<IEntity> entities)
         {
-            Entity topMostEntity = null;
+            IEntity topMostEntity = null;
             var topMostPosX = float.MaxValue;
             var topMostPosY = 0.0f;
 
@@ -368,7 +368,7 @@ namespace OpenBreed.Sandbox.Entities
             return topMostEntity;
         }
 
-        private void SetPosition(Entity target, int entryId)
+        private void SetPosition(IEntity target, int entryId)
         {
             var world = worldMan.GetById(target.WorldId);
 

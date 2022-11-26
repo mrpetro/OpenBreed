@@ -47,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
             timer.EnterWorld(world.Id);
         }
 
-        public Entity CreateHudElement(
+        public IEntity CreateHudElement(
             string elementName,
             string entityTag,
             int x,

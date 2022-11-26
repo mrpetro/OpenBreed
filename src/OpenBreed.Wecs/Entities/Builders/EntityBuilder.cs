@@ -20,7 +20,7 @@
 
         #region Public Methods
 
-        public abstract Entity Build();
+        public abstract IEntity Build();
 
         public IEntityBuilder SetTag(string tag)
         {

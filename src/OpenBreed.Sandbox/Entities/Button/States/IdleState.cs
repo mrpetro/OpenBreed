@@ -43,7 +43,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         #region Public Methods
 
-        public void EnterState(Entity entity)
+        public void EnterState(IEntity entity)
         {
             entity.SetSpriteOn();
 
@@ -55,7 +55,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             triggerMan.OnEntityAnimFinished(entity, OnAnimStopped, singleTime: true);
         }
 
-        public void LeaveState(Entity entity)
+        public void LeaveState(IEntity entity)
         {
         }
 
@@ -63,7 +63,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         #region Private Methods
 
-        private void OnAnimStopped(Entity entity, AnimFinishedEventArgs e)
+        private void OnAnimStopped(IEntity entity, AnimFinishedEventArgs e)
         {
             entity.SetState(FsmId, (int)ButtonImpulse.Press);
         }

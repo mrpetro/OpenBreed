@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Components.Physics.Builders
     {
         #region Private Fields
 
-        private readonly ICollisionMan<Entity> collisionMan;
+        private readonly ICollisionMan<IEntity> collisionMan;
         private readonly IFixtureMan fixtureMan;
         private readonly List<int> groupIds = new List<int>();
         private readonly IShapeMan shapeMan;
@@ -24,7 +24,7 @@ namespace OpenBreed.Wecs.Components.Physics.Builders
         public BodyFixtureBuilder(
             IFixtureMan fixtureMan,
             IShapeMan shapeMan,
-            ICollisionMan<Entity> collisionMan)
+            ICollisionMan<IEntity> collisionMan)
         {
             this.fixtureMan = fixtureMan;
             this.shapeMan = shapeMan;

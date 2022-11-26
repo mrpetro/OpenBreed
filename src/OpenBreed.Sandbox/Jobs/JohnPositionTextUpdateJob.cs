@@ -14,13 +14,13 @@ namespace OpenBreed.Sandbox.Jobs
 
         private readonly IEntityMan entityMan;
 
-        private Entity entity;
+        private IEntity entity;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public JohnPositionTextUpdateJob(IEntityMan entityMan, Entity entity)
+        public JohnPositionTextUpdateJob(IEntityMan entityMan, IEntity entity)
         {
             this.entityMan = entityMan;
             this.entity = entity;

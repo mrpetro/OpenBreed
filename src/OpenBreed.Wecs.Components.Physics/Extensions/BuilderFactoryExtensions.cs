@@ -18,12 +18,12 @@ namespace OpenBreed.Wecs.Components.Physics.Extensions
         {
             builderFactory.Register<BodyComponentBuilder>(() => new BodyComponentBuilder(
                 serviceProvider.GetService<IShapeMan>(),                                                                         
-                serviceProvider.GetService<ICollisionMan<Entity>>()));
+                serviceProvider.GetService<ICollisionMan<IEntity>>()));
 
             builderFactory.Register<BodyFixtureBuilder>(() => new BodyFixtureBuilder(
                 serviceProvider.GetService<IFixtureMan>(),
                 serviceProvider.GetService<IShapeMan>(),                                                                
-                serviceProvider.GetService<ICollisionMan<Entity>>()));
+                serviceProvider.GetService<ICollisionMan<IEntity>>()));
         }
     }
 }

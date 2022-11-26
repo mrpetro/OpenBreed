@@ -141,12 +141,12 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Methods
 
-        internal void OnEntityAdded(Entity entity, int worldId)
+        internal void OnEntityAdded(IEntity entity, int worldId)
         {
             eventsMan.Raise(entity, new EntityEnteredEventArgs(entity.Id, worldId));
         }
 
-        internal void OnEntityRemoved(Entity entity, int worldId)
+        internal void OnEntityRemoved(IEntity entity, int worldId)
         {
             eventsMan.Raise(entity, new EntityLeftEventArgs(entity.Id, worldId));
         }
@@ -173,7 +173,7 @@ namespace OpenBreed.Wecs.Worlds
             eventsMan.Raise(this, new WorldDeinitializedEventArgs(world.Id));
         }
 
-        private void EntityMan_ComponentAdded(Entity entity, Type componentType)
+        private void EntityMan_ComponentAdded(IEntity entity, Type componentType)
         {
             if (entity.WorldId == World.NO_WORLD)
                 return;
@@ -183,7 +183,7 @@ namespace OpenBreed.Wecs.Worlds
             world.CheckAddToSystems(entity, componentType);
         }
 
-        private void EntityMan_ComponentRemoved(Entity entity, Type componentType)
+        private void EntityMan_ComponentRemoved(IEntity entity, Type componentType)
         {
             if (entity.WorldId == World.NO_WORLD)
                 return;
@@ -193,13 +193,13 @@ namespace OpenBreed.Wecs.Worlds
             world.CheckRemoveFromSystems(entity, componentType);
         }
 
-        private void EntityMan_EnterWorldRequested(Entity entity, int worldId)
+        private void EntityMan_EnterWorldRequested(IEntity entity, int worldId)
         {
             var world = GetById(worldId);
             world.RequestAddEntity(entity);
         }
 
-        private void EntityMan_LeaveWorldRequested(Entity entity)
+        private void EntityMan_LeaveWorldRequested(IEntity entity)
         {
             var world = GetById(entity.WorldId);
             world.RequestRemoveEntity(entity);

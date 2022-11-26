@@ -22,13 +22,13 @@ namespace OpenBreed.Wecs.Components.Physics.Builders
         #region Private Fields
 
         private readonly IShapeMan shapeMan;
-        private readonly ICollisionMan<Entity> collisionMan;
+        private readonly ICollisionMan<IEntity> collisionMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal BodyComponentBuilder(IShapeMan shapeMan, ICollisionMan<Entity> collisionMan)
+        internal BodyComponentBuilder(IShapeMan shapeMan, ICollisionMan<IEntity> collisionMan)
         {
             this.shapeMan = shapeMan;
             this.collisionMan = collisionMan;

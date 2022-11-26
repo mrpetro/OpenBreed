@@ -51,14 +51,14 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => broadphaseGrid.ContainsItem(entity.Id);
+        protected override bool ContainsEntity(IEntity entity) => broadphaseGrid.ContainsItem(entity.Id);
 
-        protected override void OnAddEntity(Entity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             InsertToGrid(entity);
         }
 
-        protected override void OnRemoveEntity(Entity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             RemoveFromGrid(entity);
         }
@@ -67,7 +67,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Private Methods
 
-        private void InsertToGrid(Entity entity)
+        private void InsertToGrid(IEntity entity)
         {
             var pos = entity.Get<PositionComponent>();
             var body = entity.Get<BodyComponent>();
@@ -78,7 +78,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             broadphaseGrid.InsertItem(entity.Id, aabb);
         }
 
-        private void RemoveFromGrid(Entity entity)
+        private void RemoveFromGrid(IEntity entity)
         {
             broadphaseGrid.RemoveStatic(entity.Id);
         }

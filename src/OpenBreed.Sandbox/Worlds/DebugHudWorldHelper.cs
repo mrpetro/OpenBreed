@@ -101,7 +101,7 @@ namespace OpenBreed.Sandbox.Worlds
             triggerMan.OnEntityViewportResized(hudViewport, (e, a) => UpdateCameraFov(hudCamera, a));
         }
 
-        private void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)
+        private void UpdateCameraFov(IEntity cameraEntity, ViewportResizedEventArgs a)
         {
             cameraEntity.Get<CameraComponent>().Size = new Vector2(a.Width, a.Height);
         }

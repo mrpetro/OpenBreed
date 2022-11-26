@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var fc = entity.Get<FollowedComponent>();
 
@@ -61,7 +61,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Private Methods
 
-        private void Follow(Entity followed, Entity follower)
+        private void Follow(IEntity followed, IEntity follower)
         {
             var followedPos = followed.Get<PositionComponent>();
             var followerPos = follower.Get<PositionComponent>();
@@ -69,7 +69,7 @@ namespace OpenBreed.Wecs.Systems.Control
             followerPos.Value += difference / 10;
         }
 
-        private void Glue(Entity followed, Entity follower)
+        private void Glue(IEntity followed, IEntity follower)
         {
             var followedPos = followed.Get<PositionComponent>();
             var followerPos = follower.Get<PositionComponent>();

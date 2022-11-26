@@ -34,9 +34,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public Entity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public IEntity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
-            var entity = default(Entity);
+            var entity = default(IEntity);
 
             switch (templateName)
             {
@@ -61,9 +61,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private Entity PutPassUpDown(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
+        private IEntity PutPassUpDown(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
         {
-            var entity = default(Entity);
+            var entity = default(IEntity);
 
             var rightValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
             var rightAction = map.GetAction(rightValue);
@@ -86,9 +86,9 @@ namespace OpenBreed.Sandbox.Loaders
             return entity;
         }
 
-        private Entity PutPassRightLeft(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
+        private IEntity PutPassRightLeft(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
         {
-            var entity = default(Entity);
+            var entity = default(IEntity);
 
             var downValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
             var downAction = map.GetAction(downValue);

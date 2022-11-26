@@ -30,7 +30,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var pauserComponent = entity.TryGet<PauserComponent>();
 
@@ -55,12 +55,12 @@ namespace OpenBreed.Wecs.Systems.Core
             }
         }
 
-        internal void OnWorldPaused(Entity entity, int worldId)
+        internal void OnWorldPaused(IEntity entity, int worldId)
         {
             eventsMan.Raise(entity, new WorldPausedEventArgs(entity.Id, worldId));
         }
 
-        internal void OnWorldUnpaused(Entity entity, int worldId)
+        internal void OnWorldUnpaused(IEntity entity, int worldId)
         {
             eventsMan.Raise(entity, new WorldUnpausedEventArgs(entity.Id, worldId));
         }

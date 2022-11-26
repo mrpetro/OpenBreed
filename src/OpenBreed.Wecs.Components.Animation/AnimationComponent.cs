@@ -100,13 +100,13 @@ namespace OpenBreed.Wecs.Components.Animation
 
         #region Private Fields
 
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationComponentBuilder(IClipMan<Entity> clipMan)
+        internal AnimationComponentBuilder(IClipMan<IEntity> clipMan)
         {
             this.clipMan = clipMan;
         }
@@ -144,13 +144,13 @@ namespace OpenBreed.Wecs.Components.Animation
 
         #region Private Fields
 
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationStateBuilder(IClipMan<Entity> clipMan)
+        internal AnimationStateBuilder(IClipMan<IEntity> clipMan)
         {
             this.clipMan = clipMan;
         }

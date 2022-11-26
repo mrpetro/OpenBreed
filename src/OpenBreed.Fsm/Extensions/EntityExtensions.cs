@@ -7,7 +7,7 @@ namespace OpenBreed.Fsm.Extensions
     {
         #region Public Methods
 
-        public static void SetState(this Entity entity, int fsmId, int impulseId)
+        public static void SetState(this IEntity entity, int fsmId, int impulseId)
         {
             var fsmComponent = entity.Get<FsmComponent>();
 
@@ -17,7 +17,7 @@ namespace OpenBreed.Fsm.Extensions
                 state.ImpulseId = impulseId;
         }
 
-        public static int GetState(this Entity entity, int fsmId)
+        public static int GetState(this IEntity entity, int fsmId)
         {
             var fsmComponent = entity.Get<FsmComponent>();
 

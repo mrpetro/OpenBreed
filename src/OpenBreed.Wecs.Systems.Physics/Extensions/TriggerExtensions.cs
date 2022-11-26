@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 {
     public static class TriggerExtensions
     {
-        public static void OnEntityDirectionChanged(this ITriggerMan triggerMan, Entity entity, Action<Entity, DirectionChangedEventArgs> action, bool singleTime = false)
+        public static void OnEntityDirectionChanged(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, DirectionChangedEventArgs> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<DirectionChangedEventArgs>(ConditionalAction);
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             }
         }
 
-        public static void OnEntityDirectionChanged(this ITriggerMan triggerMan, Entity entity, Func<Entity, DirectionChangedEventArgs, bool> action)
+        public static void OnEntityDirectionChanged(this ITriggerMan triggerMan, IEntity entity, Func<IEntity, DirectionChangedEventArgs, bool> action)
         {
             triggerMan.EventsMan.Subscribe<DirectionChangedEventArgs>(ConditionalAction);
 
@@ -43,7 +43,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             }
         }
 
-        public static void OnEntityPositionChanged(this ITriggerMan triggerMan, Entity entity, Action<Entity, PositionChangedEventArgs> action, bool singleTime = false)
+        public static void OnEntityPositionChanged(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, PositionChangedEventArgs> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<PositionChangedEventArgs>(ConditionalAction);
 
@@ -59,7 +59,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             }
         }
 
-        public static void OnEntityPositionChanged(this ITriggerMan triggerMan, Entity entity, Func<Entity, PositionChangedEventArgs, bool> action)
+        public static void OnEntityPositionChanged(this ITriggerMan triggerMan, IEntity entity, Func<IEntity, PositionChangedEventArgs, bool> action)
         {
             triggerMan.EventsMan.Subscribe<PositionChangedEventArgs>(ConditionalAction);
 
@@ -75,7 +75,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             }
         }
 
-        public static void OnEntityVelocityChanged(this ITriggerMan triggerMan, Entity entity, Func<Entity, VelocityChangedEventArgs, bool> action)
+        public static void OnEntityVelocityChanged(this ITriggerMan triggerMan, IEntity entity, Func<IEntity, VelocityChangedEventArgs, bool> action)
         {
             triggerMan.EventsMan.Subscribe<VelocityChangedEventArgs>(ConditionalAction);
 

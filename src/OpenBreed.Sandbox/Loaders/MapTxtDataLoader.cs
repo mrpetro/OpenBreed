@@ -359,7 +359,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private Entity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, ActionModel action, int gfxValue)
+        private IEntity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, ActionModel action, int gfxValue)
         {
             if (visited[ix, iy])
                 return null;
@@ -380,7 +380,7 @@ namespace OpenBreed.Sandbox.Loaders
                 entityLoader.Load(mapAssets, map, visited, ix, iy, templateName, flavor, gfxValue, world);
         }
 
-        private Entity PutUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private IEntity PutUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
         {
             if (entityLoaders.TryGetValue("Unknown", out IMapWorldEntityLoader entityLoader))
                 return entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, "Unknown", actionValue.ToString(), gfxValue, world);
@@ -419,7 +419,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void LoadReferencedAnimations(TxtMap dbMap)
         {
-            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<Entity>>();
+            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<IEntity>>();
 
             //Load common animations
             var dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));

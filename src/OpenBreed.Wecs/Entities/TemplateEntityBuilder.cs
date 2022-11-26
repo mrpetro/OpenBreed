@@ -51,7 +51,7 @@ namespace OpenBreed.Wecs.Entities
         }
 
 
-        public Entity Build()
+        public IEntity Build()
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(templateName, templateParameters);
 

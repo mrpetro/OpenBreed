@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
     public static class TriggerExtensions
     {
-        public static void OnSoundPlayed(this ITriggerMan triggerMan, Entity entity, int soundId, Action action, bool singleTime = false)
+        public static void OnSoundPlayed(this ITriggerMan triggerMan, IEntity entity, int soundId, Action action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<SoundPlayEvent>(
                 (args) => Equals(entity.Id, args.EntityId) && Equals(soundId, args.SoundId),

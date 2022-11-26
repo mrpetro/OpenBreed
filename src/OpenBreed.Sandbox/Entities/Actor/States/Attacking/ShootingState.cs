@@ -39,7 +39,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         #region Public Methods
 
-        public void EnterState(Entity entity)
+        public void EnterState(IEntity entity)
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             var currentStateNames = fsmMan.GetStateNames(entity);
@@ -56,24 +56,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             entity.SetState(FsmId, (int)AttackingImpulse.Wait);
         }
 
-        public void LeaveState(Entity entity)
+        public void LeaveState(IEntity entity)
         {
-            //Entity.Unsubscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
+
         }
 
         #endregion Public Methods
 
-        //private void OnControlFireChanged(object sender, IEvent e)
-        //{
-        //    HandleControlFireChangedEvent((ControlFireChangedEvent)e);
-        //}
-
-        //private void HandleControlFireChangedEvent(ControlFireChangedEvent systemEvent)
-        //{
-        //    if (systemEvent.Fire)
-        //        Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Stop"));
-        //    else
-        //        Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Cooldown"));
-        //}
     }
 }

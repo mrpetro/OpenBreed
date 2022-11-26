@@ -2,7 +2,9 @@
 using NUnit.Framework;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Components.Audio;
 using OpenBreed.Wecs.Systems.Audio;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Audio.Test
 {
@@ -35,6 +37,8 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
         {
             // Arrange
             var soundSystem = this.CreateSoundSystem();
+
+            //soundSystem.
             // Act
 
 

@@ -20,7 +20,7 @@
 
 //        #region Public Properties
 
-//        public Entity Entity { get; }
+//        public IEntity Entity { get; }
 
 //        public Vector2 Projection { get; }
 

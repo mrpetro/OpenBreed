@@ -34,7 +34,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var tc = entity.Get<TimerComponent>();
 
@@ -47,7 +47,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Private Methods
 
-        private void UpdateTimer(Entity entity, TimerData timerData, float dt)
+        private void UpdateTimer(IEntity entity, TimerData timerData, float dt)
         {
             if (!timerData.Enabled)
                 return;
@@ -64,17 +64,17 @@ namespace OpenBreed.Wecs.Systems.Core
             RaiseTimerElapsedEvent(entity, timerData);
         }
 
-        private void RaiseUpdateEvent(Entity entity)
+        private void RaiseUpdateEvent(IEntity entity)
         {
             eventsMan.Raise(entity, new EntityFrameEvent(entity.Id));
         }
 
-        private void RaiseTimerUpdateEvent(Entity entity, TimerData timerData)
+        private void RaiseTimerUpdateEvent(IEntity entity, TimerData timerData)
         {
             eventsMan.Raise(entity, new TimerUpdateEventArgs(entity.Id, timerData.TimerId));
         }
 
-        private void RaiseTimerElapsedEvent(Entity entity, TimerData timerData)
+        private void RaiseTimerElapsedEvent(IEntity entity, TimerData timerData)
         {
             eventsMan.Raise(entity, new TimerElapsedEventArgs(entity.Id, timerData.TimerId));
         }

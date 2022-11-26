@@ -21,7 +21,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         #region Private Fields
 
         private const string ANIM_PREFIX = "Vanilla/Common";
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
         private readonly IFsmMan fsmMan;
         private readonly ITriggerMan triggerMan;
 
@@ -30,7 +30,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         #region Public Constructors
 
         public RotatingState(
-            IClipMan<Entity> clipMan,
+            IClipMan<IEntity> clipMan,
             IFsmMan fsmMan,
             ITriggerMan triggerMan)
         {
@@ -50,7 +50,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         #region Public Methods
 
-        public void EnterState(Entity entity)
+        public void EnterState(IEntity entity)
         {
             Console.WriteLine("Rot -> Enter");
             var currentStateNames = fsmMan.GetStateNames(entity);
@@ -69,7 +69,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             triggerMan.OnEntityDirectionChanged(entity, OnDirectionChanged);
         }
 
-        private bool OnDirectionChanged(Entity entity, DirectionChangedEventArgs args)
+        private bool OnDirectionChanged(IEntity entity, DirectionChangedEventArgs args)
         {
             var angularVelocity = entity.Get<AngularVelocityComponent>();
             var angularPosition = entity.Get<AngularPositionComponent>();
@@ -92,7 +92,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             return true;
         }
 
-        public void LeaveState(Entity entity)
+        public void LeaveState(IEntity entity)
         {
             Console.WriteLine("Rot -> Leave");
         }

@@ -24,7 +24,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
         private readonly IFont font;
 
-        private List<Entity> entities = new List<Entity>();
+        private List<IEntity> entities = new List<IEntity>();
 
         #endregion Private Fields
 
@@ -68,14 +68,14 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+        protected override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        protected override void OnAddEntity(Entity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void OnRemoveEntity(Entity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             entities.Remove(entity);
         }
@@ -88,7 +88,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
         /// Draw this wireframe to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which entity wireframe will be rendered to</param>
-        private void DrawEntityAabb(Entity entity, Box2 clipBox)
+        private void DrawEntityAabb(IEntity entity, Box2 clipBox)
         {
             var posCmp = entity.Get<PositionComponent>();
 

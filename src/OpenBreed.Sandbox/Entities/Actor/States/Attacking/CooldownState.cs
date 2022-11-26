@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         #region Public Methods
 
-        public void EnterState(Entity entity)
+        public void EnterState(IEntity entity)
         {
             var currentStateNames = fsmMan.GetStateNames(entity);
 
@@ -52,13 +52,13 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             entity.StartTimer(0, 0.5);
         }
 
-        public void Initialize(Entity entity)
+        public void Initialize(IEntity entity)
         {
             timer = new Timer(100);
             timer.AutoReset = false;
         }
 
-        public void LeaveState(Entity entity)
+        public void LeaveState(IEntity entity)
         {
             entity.StopTimer(0);
         }
@@ -67,7 +67,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         #region Private Methods
 
-        private void OnTimerElapsed(Entity entity, TimerElapsedEventArgs e)
+        private void OnTimerElapsed(IEntity entity, TimerElapsedEventArgs e)
         {
             if (e.TimerId != 0)
                 return;

@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Extensions
 {
     public static class EntityExtensions
     {
-        public static void EmitSound(this Entity entity, int soundId)
+        public static void EmitSound(this IEntity entity, int soundId)
         {
             var soundPlayer = entity.Get<SoundPlayerComponent>();
 

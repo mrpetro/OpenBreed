@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Entities
         private const string ANIMATION_TELEPORT_ENTRY = "Animations/Teleport/Entry";
 
         private const string ANIMATION_TELEPORT_EXIT = "Animations/Teleport/Exit";
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
         private readonly IWorldMan worldMan;
 
         private readonly IEntityMan entityMan;
@@ -50,7 +50,7 @@ namespace OpenBreed.Sandbox.Entities
 
         private readonly IEventsMan eventsMan;
         private readonly ITriggerMan triggerMan;
-        private readonly ICollisionMan<Entity> collisionMan;
+        private readonly ICollisionMan<IEntity> collisionMan;
         private readonly IBuilderFactory builderFactory;
         private readonly IJobsMan jobMan;
         private readonly IShapeMan shapeMan;
@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Constructors
 
-        public TeleportHelper(IClipMan<Entity> clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, IEventsMan eventsMan, ITriggerMan triggerMan, ICollisionMan<Entity> collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IShapeMan shapeMan)
+        public TeleportHelper(IClipMan<IEntity> clipMan, IWorldMan worldMan, IEntityMan entityMan, IEntityFactory entityFactory, IEventsMan eventsMan, ITriggerMan triggerMan, ICollisionMan<IEntity> collisionMan, IBuilderFactory builderFactory, IJobsMan jobMan, IShapeMan shapeMan)
         {
             this.clipMan = clipMan;
             this.worldMan = worldMan;
@@ -77,7 +77,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public Entity AddTeleportEntry(World world, int x, int y, int pairId, string level, int gfxValue)
+        public IEntity AddTeleportEntry(World world, int x, int y, int pairId, string level, int gfxValue)
         {
             var teleportEntry = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\TeleportEntry.xml")
                 .SetParameter("level", level)
@@ -93,7 +93,7 @@ namespace OpenBreed.Sandbox.Entities
             return teleportEntry;
         }
 
-        public Entity AddTeleportExit(World world, int x, int y, int pairId, string level, int gfxValue)
+        public IEntity AddTeleportExit(World world, int x, int y, int pairId, string level, int gfxValue)
         {
             var teleportExit = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\TeleportExit.xml")
                 .SetParameter("level", level)
@@ -110,7 +110,7 @@ namespace OpenBreed.Sandbox.Entities
             return teleportExit;
         }
 
-        public void SetPosition(Entity target, Entity entryEntity, bool cancelMovement)
+        public void SetPosition(IEntity target, IEntity entryEntity, bool cancelMovement)
         {
             var pairId = entryEntity.Tag.Split('/')[1];
             // Search for all exits from same world as entry with same pair ID 
@@ -148,7 +148,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Private Methods
 
-        private void OnFrameUpdate(Entity entity, int nextValue)
+        private void OnFrameUpdate(IEntity entity, int nextValue)
         {
             entity.SetSpriteImageId(nextValue);
         }

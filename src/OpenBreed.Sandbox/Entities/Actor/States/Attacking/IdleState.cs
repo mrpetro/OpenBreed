@@ -29,7 +29,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public int Id => (int)AttackingState.Idle;
         public int FsmId { get; set; }
 
-        public void EnterState(Entity entity)
+        public void EnterState(IEntity entity)
         {
             var currentStateNames = fsmMan.GetStateNames(entity);
 
@@ -38,11 +38,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             triggerMan.OnEntityControlFireChanged(entity, OnControlFireChanged, singleTime: true);
         }
 
-        public void LeaveState(Entity entity)
+        public void LeaveState(IEntity entity)
         {
         }
 
-        private void OnControlFireChanged(Entity entity, ControlFireChangedEventArgs eventArgs)
+        private void OnControlFireChanged(IEntity entity, ControlFireChangedEventArgs eventArgs)
         {
             if (eventArgs.Fire)
                 entity.SetState(FsmId, (int)AttackingImpulse.Shoot);

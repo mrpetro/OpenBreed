@@ -13,17 +13,17 @@ namespace OpenBreed.Wecs.Extensions
 {
     public static class TriggerExtensions
     {
-        public static void OnEntityEnteredWorld2(this ITriggerMan triggerMan, Entity entity, Action action, bool singleTime = false)
+        public static void OnEntityEnteredWorld2(this ITriggerMan triggerMan, IEntity entity, Action action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<EntityEnteredEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
         }
 
-        public static void OnEntityEnteredWorld(this ITriggerMan triggerMan, Entity entity, Action action, bool singleTime = false)
+        public static void OnEntityEnteredWorld(this ITriggerMan triggerMan, IEntity entity, Action action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<EntityEnteredEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
         }
 
-        public static void OnEntityLeftWorld(this ITriggerMan triggerMan, Entity entity, Action action, bool singleTime = false)
+        public static void OnEntityLeftWorld(this ITriggerMan triggerMan, IEntity entity, Action action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<EntityLeftEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
         }
@@ -33,7 +33,7 @@ namespace OpenBreed.Wecs.Extensions
             triggerMan.CreateTrigger<WorldInitializedEventArgs>((args) => Equals(world.Id, args.WorldId), (args) => action.Invoke(), singleTime);
         }
 
-        public static ITriggerBuilder OnEntity(this ITriggerMan triggerMan, Entity entity)
+        public static ITriggerBuilder OnEntity(this ITriggerMan triggerMan, IEntity entity)
         {
             //triggerMan.AddEqualsCondition(entity);
 
@@ -50,7 +50,7 @@ namespace OpenBreed.Wecs.Extensions
 
     public static class TriggerBuilderExtensions
     {
-        public static ITriggerBuilder OnEntity(this ITriggerBuilder triggerBuilder, Entity entity)
+        public static ITriggerBuilder OnEntity(this ITriggerBuilder triggerBuilder, IEntity entity)
         {
             //triggerBuilder.AddEqualsCondition(entity);
 

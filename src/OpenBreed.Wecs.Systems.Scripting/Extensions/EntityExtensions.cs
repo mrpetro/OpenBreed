@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
     {
         #region Public Methods
 
-        public static string GetFunctionId(this Entity entity, string triggerName)
+        public static string GetFunctionId(this IEntity entity, string triggerName)
         {
             var sc = entity.Get<ScriptComponent>();
 
@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
             return hook.FunctionId;
         }
 
-        public static void TryInvoke(this Entity entity,
+        public static void TryInvoke(this IEntity entity,
             IScriptMan scriptMan,
             ILogger logger,
             string triggerName, object arg = null)

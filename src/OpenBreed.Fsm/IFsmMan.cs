@@ -13,9 +13,9 @@ namespace OpenBreed.Fsm
         IStateMachine GetByName(string name);
         string GetStateName(int fsmId, int stateId);
         string GetStateName(MachineState state);
-        IEnumerable<string> GetStateNames(Entity entity);
+        IEnumerable<string> GetStateNames(IEntity entity);
         IStateMachine<TState, TImpulse> Create<TState, TImpulse>(string name) where TState : Enum where TImpulse : Enum;
-        void EnterState(Entity entity, MachineState state, int withImpulseId);
-        void LeaveState(Entity entity, MachineState state, int withImpulseId);
+        void EnterState(IEntity entity, MachineState state, int withImpulseId);
+        void LeaveState(IEntity entity, MachineState state, int withImpulseId);
     }
 }

@@ -34,7 +34,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var tc = entity.Get<FrameComponent>();
 
@@ -54,7 +54,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Private Methods
 
-        private void RaiseUpdateEvent(Entity entity)
+        private void RaiseUpdateEvent(IEntity entity)
         {
             eventsMan.Raise(entity, new EntityFrameEvent(entity.Id));
         }

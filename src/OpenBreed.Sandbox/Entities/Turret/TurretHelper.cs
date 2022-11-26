@@ -18,7 +18,7 @@ namespace OpenBreed.Sandbox.Entities.Turret
 {
     public class TurretHelper
     {
-        public TurretHelper(IClipMan<Entity> clipMan, IEntityFactory entityFactory)
+        public TurretHelper(IClipMan<IEntity> clipMan, IEntityFactory entityFactory)
         {
             this.clipMan = clipMan;
             this.entityFactory = entityFactory;
@@ -27,7 +27,7 @@ namespace OpenBreed.Sandbox.Entities.Turret
         #region Public Fields
 
         public const string SPRITE_TURRET = "Atlases/Sprites/Turret";
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
         private readonly IEntityFactory entityFactory;
 
         public void CreateAnimations()
@@ -70,12 +70,12 @@ namespace OpenBreed.Sandbox.Entities.Turret
             Console.WriteLine("Rotation -> Stopped");
         }
 
-        private void OnFrameUpdate(Entity entity, int nextValue)
+        private void OnFrameUpdate(IEntity entity, int nextValue)
         {
             //entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-        public Entity Create(Vector2 pos)
+        public IEntity Create(Vector2 pos)
         {
             var entity = entityFactory.Create(@"Entities\Turret\Turret.xml")
                 .SetParameter("startX", pos.X)

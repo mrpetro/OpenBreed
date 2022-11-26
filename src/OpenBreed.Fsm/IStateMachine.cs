@@ -40,15 +40,15 @@ namespace OpenBreed.Fsm
 
         #region Public Methods
 
-        void EnterState(Entity entity, int stateId, int withImpulseId);
+        void EnterState(IEntity entity, int stateId, int withImpulseId);
 
-        void LeaveState(Entity entity, int stateId, int withImpulseId);
+        void LeaveState(IEntity entity, int stateId, int withImpulseId);
 
         int GetNextStateId(int currentStateId, int impulseId, params object[] arguments);
 
-        void SetInitialState(Entity entity, int initialStateId);
+        void SetInitialState(IEntity entity, int initialStateId);
 
-        string GetCurrentStateName(Entity entity);
+        string GetCurrentStateName(IEntity entity);
 
         string GetStateName(int stateId);
 

@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
 {
     public static class EntityExtensions
     {
-        public static void StartPrimaryAttack(this Entity entity)
+        public static void StartPrimaryAttack(this IEntity entity)
         {
             var control = entity.Get<AttackControlComponent>();
 
@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
             entity.RaiseEvent(new ControlFireChangedEventArgs(control.AttackPrimary));
         }
 
-        public static void StopPrimaryAttack(this Entity entity)
+        public static void StopPrimaryAttack(this IEntity entity)
         {
             var control = entity.Get<AttackControlComponent>();
 

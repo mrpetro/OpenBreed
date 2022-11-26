@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Entities
     /// <summary>
     /// Entity interface implementation
     /// </summary>
-    public class Entity
+    internal class Entity : IEntity
     {
         #region Private Fields
 

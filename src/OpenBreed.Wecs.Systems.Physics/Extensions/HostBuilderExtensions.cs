@@ -34,7 +34,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             systemFactory.Register<DynamicBodiesAabbUpdaterSystem>(() => new DynamicBodiesAabbUpdaterSystem(serviceProvider.GetService<IShapeMan>()));
             systemFactory.Register<DynamicBodiesCollisionCheckSystem>(() => new DynamicBodiesCollisionCheckSystem(serviceProvider.GetService<IEntityMan>(),
                                                                                serviceProvider.GetService<IShapeMan>(),
-                                                                               serviceProvider.GetService<ICollisionMan<Entity>>()));
+                                                                               serviceProvider.GetService<ICollisionMan<IEntity>>()));
             systemFactory.Register<StaticBodiesSystem>(() => new StaticBodiesSystem(serviceProvider.GetService<IEntityMan>(),
                                                                 serviceProvider.GetService<IShapeMan>(),
                                                                 serviceProvider.GetService<IEventsMan>()));

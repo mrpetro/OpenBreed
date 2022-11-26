@@ -27,7 +27,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public static void RegisterAbtaColliders(this ICollisionMan<Entity> collisions)
+        public static void RegisterAbtaColliders(this ICollisionMan<IEntity> collisions)
         {
             ActorBody = collisions.RegisterGroup("ActorBody");
             ActorTrigger = collisions.RegisterGroup("ActorTrigger");

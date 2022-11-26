@@ -35,7 +35,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var velocity = entity.Get<VelocityComponent>();
             entity.RaiseEvent(new VelocityChangedEventArgs(velocity.Value));

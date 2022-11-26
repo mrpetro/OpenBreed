@@ -28,9 +28,9 @@ namespace OpenBreed.Wecs.Worlds
         #region Private Fields
 
         private readonly Dictionary<Type, object> modules = new Dictionary<Type, object>();
-        private readonly HashSet<Entity> entities = new HashSet<Entity>();
-        private readonly HashSet<Entity> toAdd = new HashSet<Entity>();
-        private readonly HashSet<Entity> toRemove = new HashSet<Entity>();
+        private readonly HashSet<IEntity> entities = new HashSet<IEntity>();
+        private readonly HashSet<IEntity> toAdd = new HashSet<IEntity>();
+        private readonly HashSet<IEntity> toRemove = new HashSet<IEntity>();
         private readonly WorldMan worldMan;
         private readonly WorldContext context;
         private float timeMultiplier = 1.0f;
@@ -70,7 +70,7 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        public IEnumerable<Entity> Entities => entities;
+        public IEnumerable<IEntity> Entities => entities;
 
         /// <summary>
         /// Id of this world
@@ -118,7 +118,7 @@ namespace OpenBreed.Wecs.Worlds
         /// An exception will be thrown if given entity already exists in world
         /// </summary>
         /// <param name="entity">Entity to be added to this world</param>
-        internal void RequestAddEntity(Entity entity)
+        internal void RequestAddEntity(IEntity entity)
         {
             if (entity.WorldId != NO_WORLD)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
@@ -132,7 +132,7 @@ namespace OpenBreed.Wecs.Worlds
         /// An exception will be thrown if given entity does not exist in this world.
         /// </summary>
         /// <param name="entity">Entity to be removed from this world</param>
-        internal void RequestRemoveEntity(Entity entity)
+        internal void RequestRemoveEntity(IEntity entity)
         {
             if (entity.WorldId != Id)
                 throw new InvalidOperationException("Entity doesn't exist in this world");
@@ -140,7 +140,7 @@ namespace OpenBreed.Wecs.Worlds
             toRemove.Add(entity);
         }
 
-        internal void CheckRemoveFromSystems(Entity entity, Type componentType)
+        internal void CheckRemoveFromSystems(IEntity entity, Type componentType)
         {
             foreach (var system in Systems)
             {
@@ -152,7 +152,7 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        internal void CheckAddToSystems(Entity entity, Type componentType)
+        internal void CheckAddToSystems(IEntity entity, Type componentType)
         {
             foreach (var system in Systems)
             {
@@ -217,23 +217,23 @@ namespace OpenBreed.Wecs.Worlds
             //    worldMan.OnWorldUnpaused(Id);
         //}
 
-        private void RemoveEntity(Entity entity)
+        private void RemoveEntity(IEntity entity)
         {
             RemoveFromAllSystems(entity);
             entities.Remove(entity);
-            entity.WorldId = NO_WORLD;
+            ((Entity)entity).WorldId = NO_WORLD;
             worldMan.OnEntityRemoved(entity, Id);
         }
 
-        private void AddEntity(Entity entity)
+        private void AddEntity(IEntity entity)
         {
             AddEntityToSystems(entity);
             entities.Add(entity);
-            entity.WorldId = Id;
+            ((Entity)entity).WorldId = Id;
             worldMan.OnEntityAdded(entity, Id);
         }
 
-        private void AddEntityToSystems(Entity entity)
+        private void AddEntityToSystems(IEntity entity)
         {
             foreach (var system in Systems)
             {
@@ -242,7 +242,7 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        private void RemoveFromAllSystems(Entity entity)
+        private void RemoveFromAllSystems(IEntity entity)
         {
             foreach (var system in Systems)
             {

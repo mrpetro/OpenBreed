@@ -25,7 +25,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public Entity Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string actionName, string flavor, int gfxValue, World world)
+        public IEntity Load(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string actionName, string flavor, int gfxValue, World world)
         {
             if (!mapper.TryGetEntityType(actionName, out string entityType, out string option))
                 return null;

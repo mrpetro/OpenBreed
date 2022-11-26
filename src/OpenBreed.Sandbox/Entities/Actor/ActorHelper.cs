@@ -35,9 +35,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
     {
         #region Private Fields
 
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
 
-        private readonly ICollisionMan<Entity> collisionMan;
+        private readonly ICollisionMan<IEntity> collisionMan;
         private readonly IEntityMan entityMan;
         private readonly IPlayersMan playersMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
@@ -54,8 +54,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
         #region Public Constructors
 
         public ActorHelper(
-            IClipMan<Entity> clipMan,           
-            ICollisionMan<Entity> collisionMan,
+            IClipMan<IEntity> clipMan,           
+            ICollisionMan<IEntity> collisionMan,
             IEntityMan entityMan,
             IPlayersMan playersMan,
             IDataLoaderFactory dataLoaderFactory,
@@ -92,7 +92,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ScriptRunTrigger, ScriptRunCallback);
         }
 
-        public Entity CreateMission(string name)
+        public IEntity CreateMission(string name)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Mission.xml")
                 .SetTag(name)
@@ -101,7 +101,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return entity;
         }
 
-        public Entity CreateDummyActor(string name, Vector2 pos)
+        public IEntity CreateDummyActor(string name, Vector2 pos)
         {
             var actor = CreateDummy(name, pos);
 
@@ -116,7 +116,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return actor;
         }
 
-        public Entity CreatePlayerActor(string name, Vector2 pos)
+        public IEntity CreatePlayerActor(string name, Vector2 pos)
         {
             var actor = CreateActor(name, pos);
 
@@ -138,7 +138,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return actor;
         }
 
-        public Entity CreateActor(string name, Vector2 pos)
+        public IEntity CreateActor(string name, Vector2 pos)
         {
             var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\John.xml")
                 .SetParameter("startX", pos.X)
@@ -149,7 +149,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return actor;
         }
 
-        public Entity CreateDummy(string name, Vector2 pos)
+        public IEntity CreateDummy(string name, Vector2 pos)
         {
             var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\Dummy.xml")
                 .SetParameter("startX", pos.X)
@@ -175,17 +175,17 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         #region Private Methods
 
-        private void Dynamic2StaticCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, float dt, Vector2 projection)
+        private void Dynamic2StaticCallback(int colliderTypeA, IEntity entityA, int colliderTypeB, IEntity entityB, float dt, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
-        private void FullObstableCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
+        private void FullObstableCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
-        private void ScriptRunCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
+        private void ScriptRunCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             var functionId = entityB.GetFunctionId("ScriptRunTrigger");
 
@@ -197,7 +197,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             scriptFunction.Invoke(entityB, entityA);
         }
 
-        private void SlopeObstacleCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
+        private void SlopeObstacleCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             var metadata = entityB.Get<MetadataComponent>();
 
@@ -225,7 +225,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             dynamicResolver.ResolveVsSlope(entityA, entityB, projection, slopeDirection);
         }
 
-        private void SlowdownObstacleCallback(BodyFixture fixtureA, Entity entityA, BodyFixture fixtureB, Entity entityB, float dt, Vector2 projection)
+        private void SlowdownObstacleCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             //if (entityA.State is "Slowdown")
             //    return;

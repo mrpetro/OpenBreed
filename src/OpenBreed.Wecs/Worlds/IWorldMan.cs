@@ -3,9 +3,9 @@ using System;
 
 namespace OpenBreed.Wecs.Worlds
 {
-    public delegate void EntitiyLeft(Entity entity, World world);
+    public delegate void EntitiyLeft(IEntity entity, World world);
 
-    public delegate void EntitiyEntered(Entity entity, World world);
+    public delegate void EntitiyEntered(IEntity entity, World world);
 
     public interface IWorldMan
     {

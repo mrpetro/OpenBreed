@@ -34,7 +34,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var angularPos = entity.Get<AngularPositionComponent>();
             var angularVel = entity.Get<AngularVelocityComponent>();

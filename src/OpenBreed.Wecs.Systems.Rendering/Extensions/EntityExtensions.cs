@@ -11,19 +11,19 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
     {
         #region Public Methods
 
-        public static void SetBrightness(this Entity entity, float brightness)
+        public static void SetBrightness(this IEntity entity, float brightness)
         {
             var cameraComponent = entity.Get<CameraComponent>();
             cameraComponent.Brightness = brightness;
         }
 
-        public static void SetPictureColor(this Entity entity, float r, float g, float b, float a)
+        public static void SetPictureColor(this IEntity entity, float r, float g, float b, float a)
         {
             var cmp = entity.Get<PictureComponent>();
             cmp.Color = new Color4(r, g, b, a);
         }
 
-        public static void SetTextColor(this Entity entity, int textPartId, float r, float g, float b, float a)
+        public static void SetTextColor(this IEntity entity, int textPartId, float r, float g, float b, float a)
         {
             var textCmp = entity.Get<TextComponent>();
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             textCmp.Parts[textPartId].Color = new Color4(r,g,b,a);
         }
 
-        public static void SetText(this Entity entity, int textPartId, string text)
+        public static void SetText(this IEntity entity, int textPartId, string text)
         {
             var textCmp = entity.Get<TextComponent>();
 
@@ -43,31 +43,31 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             textCmp.Parts[textPartId].Text = text;
         }
 
-        public static void SetSpriteOn(this Entity entity)
+        public static void SetSpriteOn(this IEntity entity)
         {
             var sprite = entity.Get<SpriteComponent>();
             sprite.Hidden = false;
         }
 
-        public static void SetSpriteOff(this Entity entity)
+        public static void SetSpriteOff(this IEntity entity)
         {
             var sprite = entity.Get<SpriteComponent>();
             sprite.Hidden = true;
         }
 
-        public static void SetSpriteImageId(this Entity entity, int imageId)
+        public static void SetSpriteImageId(this IEntity entity, int imageId)
         {
             var sprite = entity.Get<SpriteComponent>();
             sprite.ImageId = imageId;
         }
 
-        public static void SetSpriteAtlas(this Entity entity, int atlasId)
+        public static void SetSpriteAtlas(this IEntity entity, int atlasId)
         {
             var sprite = entity.Get<SpriteComponent>();
             sprite.AtlasId = atlasId;
         }
 
-        public static void SetViewportSize(this Entity entity, float width, float height)
+        public static void SetViewportSize(this IEntity entity, float width, float height)
         {
             var vpc = entity.Get<ViewportComponent>();
 
@@ -79,25 +79,25 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             entity.RaiseEvent(new ViewportResizedEventArgs(entity.Id, vpc.Size.X, vpc.Size.Y));
         }
 
-        public static void SetViewportCamera(this Entity entity, int cameraEntityId)
+        public static void SetViewportCamera(this IEntity entity, int cameraEntityId)
         {
             var vpc = entity.Get<ViewportComponent>();
 
             vpc.CameraEntityId = cameraEntityId;
         }
 
-        public static void PutStamp(this Entity entity, int stampId, int layerNo)
+        public static void PutStamp(this IEntity entity, int stampId, int layerNo)
         {
             var position = entity.Get<PositionComponent>().Value;
             PutStampAtPosition(entity, stampId, layerNo, position);
         }
 
-        public static void PutStampAtPosition(this Entity entity, int stampId, int layerNo, Vector2 position)
+        public static void PutStampAtPosition(this IEntity entity, int stampId, int layerNo, Vector2 position)
         {
             entity.Set(new StampPutterComponent(stampId, layerNo, position));
         }
 
-        public static void PutTile(this Entity entity, int atlasId, int tileId, int layerNo, Vector2 position)
+        public static void PutTile(this IEntity entity, int atlasId, int tileId, int layerNo, Vector2 position)
         {
             var tp = entity.Get<TilePutterComponent>();
             tp.Items.Add(new TileData(atlasId, tileId, layerNo, position));

@@ -31,7 +31,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Protected Methods
 
-        protected override void UpdateEntity(Entity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var inputComponent = entity.Get<AttackInputComponent>();
             var control = entity.Get<AttackControlComponent>();

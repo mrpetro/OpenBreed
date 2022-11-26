@@ -24,14 +24,14 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         private const string ANIM_PREFIX = "Vanilla/Common";
         private readonly IFsmMan fsmMan;
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
         private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public StandingState(IFsmMan fsmMan, IClipMan<Entity> clipMan, ITriggerMan triggerMan)
+        public StandingState(IFsmMan fsmMan, IClipMan<IEntity> clipMan, ITriggerMan triggerMan)
         {
             this.fsmMan = fsmMan;
             this.clipMan = clipMan;
@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         #region Public Methods
 
-        public void EnterState(Entity entity)
+        public void EnterState(IEntity entity)
         {
             Console.WriteLine("Standing -> Enter");
 
@@ -69,12 +69,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             triggerMan.OnEntityVelocityChanged(entity, OnVelocityChanged);
         }
 
-        public void LeaveState(Entity entity)
+        public void LeaveState(IEntity entity)
         {
             Console.WriteLine("Standing -> Leave");
         }
 
-        private bool OnVelocityChanged(Entity entity, VelocityChangedEventArgs args)
+        private bool OnVelocityChanged(IEntity entity, VelocityChangedEventArgs args)
         {
             var velocityComponent = entity.Get<VelocityComponent>();
 

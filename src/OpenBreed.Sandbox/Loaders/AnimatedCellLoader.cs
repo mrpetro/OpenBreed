@@ -34,9 +34,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public Entity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public IEntity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
         {
-            Entity entity = null;
+            IEntity entity = null;
 
             switch (templateName)
             {
@@ -57,14 +57,14 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private Entity PutTVFlickering(MapMapper mapAssets, MapModel map, bool[,] visited, World world, int ix, int iy, int gfxValue)
+        private IEntity PutTVFlickering(MapMapper mapAssets, MapModel map, bool[,] visited, World world, int ix, int iy, int gfxValue)
         {
             var entity = environmentHelper.AddTVFlickering(world, ix, iy, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
             return entity;
         }
 
-        private Entity PutMonsterEating(MapMapper mapAssets, MapModel map, bool[,] visited, World world, int ix, int iy, int gfxValue)
+        private IEntity PutMonsterEating(MapMapper mapAssets, MapModel map, bool[,] visited, World world, int ix, int iy, int gfxValue)
         {
             var entity = environmentHelper.AddMonsterEating(world, ix, iy, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;

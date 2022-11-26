@@ -17,10 +17,10 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Private Fields
 
         private const int CELL_SIZE = 16;
-        private readonly List<Entity> inactiveDynamics = new List<Entity>();
+        private readonly List<IEntity> inactiveDynamics = new List<IEntity>();
         private readonly IEntityMan entityMan;
         private readonly IShapeMan shapeMan;
-        private readonly ICollisionMan<Entity> collisionMan;
+        private readonly ICollisionMan<IEntity> collisionMan;
         private IBroadphaseStatic broadphaseGrid;
         private IBroadphaseDynamic broadphaseDynamic;
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal DynamicBodiesCollisionCheckSystem(IEntityMan entityMan, IShapeMan shapeMan, ICollisionMan<Entity> collisionMan)
+        internal DynamicBodiesCollisionCheckSystem(IEntityMan entityMan, IShapeMan shapeMan, ICollisionMan<IEntity> collisionMan)
         {
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;
@@ -68,13 +68,13 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(Entity entity) => broadphaseDynamic.ContainsItem(entity.Id);
+        protected override bool ContainsEntity(IEntity entity) => broadphaseDynamic.ContainsItem(entity.Id);
 
-        protected override void OnAddEntity(Entity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
         }
 
-        protected override void OnRemoveEntity(Entity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
         }
 
@@ -82,7 +82,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Private Methods
 
-        private Box2 GetAabb(Entity entity)
+        private Box2 GetAabb(IEntity entity)
         {
             var body = entity.Get<BodyComponent>();
             var pos = entity.Get<PositionComponent>();
@@ -99,7 +99,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                 collisionMan.Resolve(entityA, entityB, dt, contacts);
         }
 
-        private void TestNarrowPhaseStatic(Entity dynamicEntity, Entity staticEntity, float dt)
+        private void TestNarrowPhaseStatic(IEntity dynamicEntity, IEntity staticEntity, float dt)
         {
             if (TestVsStatic(dynamicEntity, staticEntity, dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts))
                 collisionMan.Resolve(dynamicEntity, staticEntity, dt, contacts);
@@ -127,7 +127,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             //}
         }
 
-        private bool TestVsDynamic(Entity entityA, Entity entityB, float dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts)
+        private bool TestVsDynamic(IEntity entityA, IEntity entityB, float dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts)
         {
             var bodyA = entityA.Get<BodyComponent>();
             var posA = entityA.Get<PositionComponent>();
@@ -165,7 +165,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             return contacts.Count > 0;
         }
 
-        private bool TestVsStatic(Entity dynamicEntity, Entity staticEntity, float dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts)
+        private bool TestVsStatic(IEntity dynamicEntity, IEntity staticEntity, float dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts)
         {
             var bodyA = dynamicEntity.Get<BodyComponent>();
             var posA = dynamicEntity.Get<PositionComponent>();

@@ -14,13 +14,13 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         #region Private Fields
 
         private readonly string animPrefix;
-        private readonly IClipMan<Entity> clipMan;
+        private readonly IClipMan<IEntity> clipMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FiredState(string animPrefix, IClipMan<Entity> clipMan)
+        public FiredState(string animPrefix, IClipMan<IEntity> clipMan)
         {
             this.animPrefix = animPrefix;
             this.clipMan = clipMan;
@@ -37,7 +37,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         #region Public Methods
 
-        public void EnterState(Entity entity)
+        public void EnterState(IEntity entity)
         {
             var direction = entity.Get<VelocityComponent>().Value;
 
@@ -51,11 +51,11 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
             entity.SetText(0, "Projectile - Fired");
         }
 
-        public void Initialize(Entity entity)
+        public void Initialize(IEntity entity)
         {
         }
 
-        public void LeaveState(Entity entity)
+        public void LeaveState(IEntity entity)
         {
         }
 

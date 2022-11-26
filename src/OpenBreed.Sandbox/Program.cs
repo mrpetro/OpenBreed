@@ -87,7 +87,7 @@ namespace OpenBreed.Sandbox
 {
     internal class LuaEntityEventHandler<TEvent> : NLua.Method.LuaDelegate
     {
-        void CallFunction(Entity entity, TEvent eventArgs)
+        void CallFunction(IEntity entity, TEvent eventArgs)
         {
             object[] args = new object[] { entity, eventArgs };
             object[] inArgs = new object[] { entity, eventArgs };
@@ -143,12 +143,12 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupModelProvider();
             hostBuilder.SetupDataProviders();
 
-            hostBuilder.SetupFrameUpdaterMan<Entity>((frameUpdaterMan, sp) =>
+            hostBuilder.SetupFrameUpdaterMan<IEntity>((frameUpdaterMan, sp) =>
             {
                 new SpriteComponentAnimator(frameUpdaterMan, sp.GetService<ISpriteMan>());
             });
 
-            hostBuilder.SetupClipMan<Entity>();
+            hostBuilder.SetupClipMan<IEntity>();
 
             hostBuilder.SetupLuaScripting((scriptMan, sp) =>
             {
@@ -158,10 +158,10 @@ namespace OpenBreed.Sandbox
                     (s,a) => scriptMan.TryInvokeFunction("WorldLoaded", a.WorldId));
 
 
-                scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldPausedEventArgs>), typeof(LuaEntityEventHandler<WorldPausedEventArgs>));
-                scriptMan.RegisterDelegateType(typeof(Action<Entity, WorldUnpausedEventArgs>), typeof(LuaEntityEventHandler<WorldUnpausedEventArgs>));
-                scriptMan.RegisterDelegateType(typeof(Action<Entity, AnimFinishedEventArgs>), typeof(LuaEntityEventHandler<AnimFinishedEventArgs>));
-                scriptMan.RegisterDelegateType(typeof(Action<Entity, ClientResizedEventArgs>), typeof(LuaEntityEventHandler<ClientResizedEventArgs>));
+                scriptMan.RegisterDelegateType(typeof(Action<IEntity, WorldPausedEventArgs>), typeof(LuaEntityEventHandler<WorldPausedEventArgs>));
+                scriptMan.RegisterDelegateType(typeof(Action<IEntity, WorldUnpausedEventArgs>), typeof(LuaEntityEventHandler<WorldUnpausedEventArgs>));
+                scriptMan.RegisterDelegateType(typeof(Action<IEntity, AnimFinishedEventArgs>), typeof(LuaEntityEventHandler<AnimFinishedEventArgs>));
+                scriptMan.RegisterDelegateType(typeof(Action<IEntity, ClientResizedEventArgs>), typeof(LuaEntityEventHandler<ClientResizedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<KeyDownEvent>), typeof(LuaEventHandler<KeyDownEvent>));
                 scriptMan.RegisterDelegateType(typeof(Action<KeyUpEvent>), typeof(LuaEventHandler<KeyUpEvent>));
 
@@ -171,7 +171,7 @@ namespace OpenBreed.Sandbox
                 scriptMan.Expose("Logging", sp.GetService<ILogger>());
                 scriptMan.Expose("Rendering", sp.GetService<IRenderingMan>());
                 scriptMan.Expose("Stamps", sp.GetService<IStampMan>());
-                scriptMan.Expose("Clips", sp.GetService<IClipMan<Entity>>());
+                scriptMan.Expose("Clips", sp.GetService<IClipMan<IEntity>>());
                 scriptMan.Expose("Shapes", sp.GetService<IShapeMan>());
                 scriptMan.Expose("Items", sp.GetService<ItemsMan>());
                 scriptMan.Expose("Texts", sp.GetService<TextsDataProvider>());
@@ -226,12 +226,12 @@ namespace OpenBreed.Sandbox
                 p2.AddKeyBinding("Walking", "Down", Keys.S);
             });
 
-            hostBuilder.SetupCollisionMan<Entity>((collisionMan, sp) =>
+            hostBuilder.SetupCollisionMan<IEntity>((collisionMan, sp) =>
             {
                 collisionMan.RegisterAbtaColliders();
             });
 
-            hostBuilder.SetupBroadphaseFactory<Entity>();
+            hostBuilder.SetupBroadphaseFactory<IEntity>();
 
             hostBuilder.SetupFixtureMan((s, a)=> { });
 
@@ -305,7 +305,7 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
             {
-                dataLoaderFactory.SetupAnimationDataLoader<Entity>(sp);
+                dataLoaderFactory.SetupAnimationDataLoader<IEntity>(sp);
                 dataLoaderFactory.SetupMapLegacyDataLoader(sp);
                 dataLoaderFactory.SetupTileSetDataLoader(sp);
                 dataLoaderFactory.SetupTileStampDataLoader(sp);
@@ -588,7 +588,7 @@ namespace OpenBreed.Sandbox
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName("Dummy");
             worldBuilder.SetSize(width, height);
-            worldBuilder.AddModule(dataGridFactory.Create<Entity>(width, height));
+            worldBuilder.AddModule(dataGridFactory.Create<IEntity>(width, height));
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(width, height, 16));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
             worldBuilder.AddModule(tileGridFactory.CreateGrid(width, height, 1, 16));

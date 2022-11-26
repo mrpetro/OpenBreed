@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Systems.Core
     {
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
+        private readonly List<IEntity> entities = new List<IEntity>();
 
         #endregion Private Fields
 
@@ -40,13 +40,13 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected abstract void UpdateEntity(Entity entity, IWorldContext context);
+        protected abstract void UpdateEntity(IEntity entity, IWorldContext context);
 
-        protected override bool ContainsEntity(Entity entity) => entities.Contains(entity);
+        protected override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        protected override void OnAddEntity(Entity entity) => entities.Add(entity);
+        protected override void OnAddEntity(IEntity entity) => entities.Add(entity);
 
-        protected override void OnRemoveEntity(Entity entity) => entities.Remove(entity);
+        protected override void OnRemoveEntity(IEntity entity) => entities.Remove(entity);
 
         #endregion Protected Methods
     }

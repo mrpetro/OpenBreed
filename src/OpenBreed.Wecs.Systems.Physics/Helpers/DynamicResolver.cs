@@ -41,7 +41,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
         /// <param name="bodyB">Second dynamic body</param>
         /// <param name="projection">Given collision projection vector</param>
         /// <param name="dt">Delta time</param>
-        public void ResolveVsDynamic(Entity entityA, Entity entityB, Vector2 projection, float dt)
+        public void ResolveVsDynamic(IEntity entityA, IEntity entityB, Vector2 projection, float dt)
         {
             var bodyA = entityA.Get<BodyComponent>();
             var posA = entityA.Get<PositionComponent>();
@@ -88,7 +88,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
         /// <param name="entityA">Given dynamic body</param>
         /// <param name="entityB">Given static body</param>
         /// <param name="projection">Given collision projection vector</param>
-        public void ResolveVsStatic(Entity entityA, Entity entityB, float dt, Vector2 projection)
+        public void ResolveVsStatic(IEntity entityA, IEntity entityB, float dt, Vector2 projection)
         {
             var p = entityA.TryGet<PositionComponent>();
             var v = entityA.TryGet<VelocityComponent>();
@@ -121,7 +121,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
         /// <param name="entityA">Given dynamic body</param>
         /// <param name="entityB">Given static body</param>
         /// <param name="projection">Given collision projection vector</param>
-        public void ResolveVsSlope(Entity entityA, Entity entityB, Vector2 projection, Vector2 slopeDirection)
+        public void ResolveVsSlope(IEntity entityA, IEntity entityB, Vector2 projection, Vector2 slopeDirection)
         {
             var p = entityA.TryGet<PositionComponent>();
             var v = entityA.TryGet<VelocityComponent>();

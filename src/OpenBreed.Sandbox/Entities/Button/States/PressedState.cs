@@ -32,7 +32,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         #region Public Methods
 
-        public void EnterState(Entity entity)
+        public void EnterState(IEntity entity)
         {
             entity.SetSpriteOff();
 
@@ -46,7 +46,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             //entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public void LeaveState(Entity entity)
+        public void LeaveState(IEntity entity)
         {
             //entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
