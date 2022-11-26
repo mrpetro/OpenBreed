@@ -117,7 +117,7 @@ namespace OpenBreed.Sandbox.Worlds
             return p1Controller;
         }
 
-        public World CreateWorld()
+        public IWorld CreateWorld()
         {
             var builder = worldMan.Create().SetName("ScreenWorld");
             builder.AddModule(renderableFactory.CreateRenderableBatch());

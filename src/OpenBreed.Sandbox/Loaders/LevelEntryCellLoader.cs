@@ -33,7 +33,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public IEntity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public IEntity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, IWorld world)
         {
             int entryId;
 

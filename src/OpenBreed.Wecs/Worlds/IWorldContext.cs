@@ -1,5 +1,7 @@
 ﻿namespace OpenBreed.Wecs.Worlds
 {
+
+
     public interface IWorldContext
     {
         #region Public Properties
@@ -10,7 +12,7 @@
 
         bool Paused { get; set; }
 
-        World World { get; }
+        IWorld World { get; }
 
         #endregion Public Properties
     }

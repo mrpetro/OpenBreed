@@ -81,7 +81,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<ScriptRunningSystem>());
         }
 
-        private void Setup(World world)
+        private void Setup(IWorld world)
         {
             var hudCamera = cameraHelper.CreateCamera(
                 "Camera.DebugHud",

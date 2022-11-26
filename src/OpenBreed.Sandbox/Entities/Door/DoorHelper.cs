@@ -44,7 +44,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             this.entityFactory = entityFactory;
         }
 
-        public IEntity AddVertical(World world, int x, int y, string level, string key)
+        public IEntity AddVertical(IWorld world, int x, int y, string level, string key)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\DoorVertical.xml")
                 .SetParameter("level", level)
@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             return null;
         }
 
-        public IEntity AddDoor(World world, int x, int y, string level, string key)
+        public IEntity AddDoor(IWorld world, int x, int y, string level, string key)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Door.xml")
                 .SetParameter("level", level)
@@ -119,7 +119,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             return entity;
         }
 
-        public IEntity AddHorizontal(World world, int x, int y, string level, string key)
+        public IEntity AddHorizontal(IWorld world, int x, int y, string level, string key)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\DoorHorizontal.xml")
                 .SetParameter("level", level)

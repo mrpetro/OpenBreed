@@ -37,7 +37,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         #region Public Methods
 
-        public IEntity AddItem(World world, int x, int y, string name, string level, int gfxValue, string option, string flavor = null)
+        public IEntity AddItem(IWorld world, int x, int y, string name, string level, int gfxValue, string option, string flavor = null)
         {
             var path = $@"{PICKABLE_PREFIX}\{name}.xml";
 

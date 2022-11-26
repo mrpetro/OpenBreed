@@ -77,7 +77,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public IEntity AddTeleportEntry(World world, int x, int y, int pairId, string level, int gfxValue)
+        public IEntity AddTeleportEntry(IWorld world, int x, int y, int pairId, string level, int gfxValue)
         {
             var teleportEntry = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\TeleportEntry.xml")
                 .SetParameter("level", level)
@@ -93,7 +93,7 @@ namespace OpenBreed.Sandbox.Entities
             return teleportEntry;
         }
 
-        public IEntity AddTeleportExit(World world, int x, int y, int pairId, string level, int gfxValue)
+        public IEntity AddTeleportExit(IWorld world, int x, int y, int pairId, string level, int gfxValue)
         {
             var teleportExit = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\TeleportExit.xml")
                 .SetParameter("level", level)

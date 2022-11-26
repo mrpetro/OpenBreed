@@ -164,7 +164,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         #region Internal Methods
 
-        internal void AddHero(World world, int ix, int iy)
+        internal void AddHero(IWorld world, int ix, int iy)
         {
             var playerActor = CreatePlayerActor("John", new Vector2(16 * ix, 16 * iy));
 

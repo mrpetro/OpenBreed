@@ -34,7 +34,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Public Methods
 
-        public IEntity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world)
+        public IEntity Load(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, IWorld world)
         {
             var entity = default(IEntity);
 
@@ -61,7 +61,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private IEntity PutPassUpDown(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
+        private IEntity PutPassUpDown(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, IWorld world)
         {
             var entity = default(IEntity);
 
@@ -86,7 +86,7 @@ namespace OpenBreed.Sandbox.Loaders
             return entity;
         }
 
-        private IEntity PutPassRightLeft(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, World world)
+        private IEntity PutPassRightLeft(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, IWorld world)
         {
             var entity = default(IEntity);
 

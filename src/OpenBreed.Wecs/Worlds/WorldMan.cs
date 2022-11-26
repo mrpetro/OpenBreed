@@ -67,7 +67,7 @@ namespace OpenBreed.Wecs.Worlds
         /// </summary>
         /// <param name="id">If of world to be returned</param>
         /// <returns>World reference</returns>
-        public World GetById(int id)
+        public IWorld GetById(int id)
         {
             if (IdsToWorldsLookup.TryGetValue(id, out World world))
                 return world;
@@ -80,7 +80,7 @@ namespace OpenBreed.Wecs.Worlds
         /// </summary>
         /// <param name="name">Name of world to find</param>
         /// <returns>World object if found, null otherwise</returns>
-        public World GetByName(string name)
+        public IWorld GetByName(string name)
         {
             int worldId;
             if (!namesToIdsLookup.TryGetValue(name, out worldId))
@@ -102,7 +102,7 @@ namespace OpenBreed.Wecs.Worlds
         /// Marks given world to be removed from Core, it will be removed at nearest Manager Update
         /// </summary>
         /// <param name="world">World to be removed</param>
-        public void Remove(World world)
+        public void Remove(IWorld world)
         {
             if (toDeinitialize.Contains(world))
             {
@@ -110,7 +110,7 @@ namespace OpenBreed.Wecs.Worlds
                 return;
             }
 
-            toDeinitialize.Add(world);
+            toDeinitialize.Add((World)world);
         }
 
         /// <summary>
@@ -166,42 +166,42 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        private void DeinitializeWorld(World world)
+        private void DeinitializeWorld(IWorld world)
         {
-            worlds.Remove(world);
+            worlds.Remove((World)world);
 
             eventsMan.Raise(this, new WorldDeinitializedEventArgs(world.Id));
         }
 
         private void EntityMan_ComponentAdded(IEntity entity, Type componentType)
         {
-            if (entity.WorldId == World.NO_WORLD)
+            if (entity.WorldId == WecsConsts.NO_WORLD_ID)
                 return;
 
-            var world = GetById(entity.WorldId);
+            var world = (World)GetById(entity.WorldId);
 
             world.CheckAddToSystems(entity, componentType);
         }
 
         private void EntityMan_ComponentRemoved(IEntity entity, Type componentType)
         {
-            if (entity.WorldId == World.NO_WORLD)
+            if (entity.WorldId == WecsConsts.NO_WORLD_ID)
                 return;
 
-            var world = GetById(entity.WorldId);
+            var world = (World)GetById(entity.WorldId);
 
             world.CheckRemoveFromSystems(entity, componentType);
         }
 
         private void EntityMan_EnterWorldRequested(IEntity entity, int worldId)
         {
-            var world = GetById(worldId);
+            var world = (World)GetById(worldId);
             world.RequestAddEntity(entity);
         }
 
         private void EntityMan_LeaveWorldRequested(IEntity entity)
         {
-            var world = GetById(entity.WorldId);
+            var world = (World)GetById(entity.WorldId);
             world.RequestRemoveEntity(entity);
         }
 
@@ -219,9 +219,9 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        private void InitializeWorld(World world)
+        private void InitializeWorld(IWorld world)
         {
-            worlds.Add(world);
+            worlds.Add((World)world);
 
             eventsMan.Raise(this, new WorldInitializedEventArgs(world.Id));
         }

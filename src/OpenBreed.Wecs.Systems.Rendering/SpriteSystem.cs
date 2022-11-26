@@ -34,7 +34,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public override void Initialize(IWorld world)
         {
             base.Initialize(world);
 

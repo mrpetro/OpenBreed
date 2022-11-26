@@ -269,7 +269,7 @@ namespace OpenBreed.Sandbox.Loaders
             entityLoaders.Add(templateName, entityLoader);
         }
 
-        public World Load(string entryId, params object[] args)
+        public IWorld Load(string entryId, params object[] args)
         {
             var world = worldMan.GetByName(entryId);
 
@@ -359,7 +359,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private IEntity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, ActionModel action, int gfxValue)
+        private IEntity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, IWorld world, ActionModel action, int gfxValue)
         {
             if (visited[ix, iy])
                 return null;
@@ -371,7 +371,7 @@ namespace OpenBreed.Sandbox.Loaders
             return null;
         }
 
-        private void LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, string templateName, string flavor, int gfxValue)
+        private void LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, IWorld world, string templateName, string flavor, int gfxValue)
         {
             if (visited[ix, iy])
                 return;
@@ -380,7 +380,7 @@ namespace OpenBreed.Sandbox.Loaders
                 entityLoader.Load(mapAssets, map, visited, ix, iy, templateName, flavor, gfxValue, world);
         }
 
-        private IEntity PutUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private IEntity PutUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, IWorld world)
         {
             if (entityLoaders.TryGetValue("Unknown", out IMapWorldEntityLoader entityLoader))
                 return entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, "Unknown", actionValue.ToString(), gfxValue, world);

@@ -51,7 +51,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
 
-        public override void Initialize(World world)
+        public override void Initialize(IWorld world)
         {
             base.Initialize(world);
 

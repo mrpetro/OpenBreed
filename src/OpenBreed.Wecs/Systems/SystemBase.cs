@@ -29,7 +29,7 @@ namespace OpenBreed.Wecs.Systems
 
         protected SystemBase()
         {
-            WorldId = World.NO_WORLD;
+            WorldId = WecsConsts.NO_WORLD_ID;
 
             RequiredComponentTypes = new ReadOnlyCollection<Type>(requiredComponentTypes);
         }
@@ -58,9 +58,9 @@ namespace OpenBreed.Wecs.Systems
         /// Initialize the system when world is created
         /// </summary>
         /// <param name="world">World that this system is initialized on</param>
-        public virtual void Initialize(World world)
+        public virtual void Initialize(IWorld world)
         {
-            if (WorldId != World.NO_WORLD)
+            if (WorldId != WecsConsts.NO_WORLD_ID)
                 throw new InvalidOperationException("World sytem already initialized.");
 
             WorldId = world.Id;
@@ -71,10 +71,10 @@ namespace OpenBreed.Wecs.Systems
         /// </summary>
         public virtual void Deinitialize()
         {
-            if (WorldId == World.NO_WORLD)
+            if (WorldId == WecsConsts.NO_WORLD_ID)
                 throw new InvalidOperationException("World sytem already deinitialized.");
 
-            WorldId = World.NO_WORLD;
+            WorldId = WecsConsts.NO_WORLD_ID;
         }
 
         public bool Matches(IEntity entity)

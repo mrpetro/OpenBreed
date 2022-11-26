@@ -162,7 +162,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         }
 
-        private void Setup(World world)
+        private void Setup(IWorld world)
         {
             var hudCamera = cameraHelper.CreateCamera("Camera.GameHud", 0, 0, 320, 240);
 

@@ -45,7 +45,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public override void Initialize(IWorld world)
         {
             base.Initialize(world);
 

@@ -38,7 +38,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public override void Initialize(IWorld world)
         {
             base.Initialize(world);
 

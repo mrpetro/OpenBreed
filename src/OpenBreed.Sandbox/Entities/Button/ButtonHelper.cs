@@ -10,7 +10,7 @@ namespace OpenBreed.Sandbox.Entities.Button
     {
         #region Public Methods
 
-        public static void AddButton(World world, int x, int y)
+        public static void AddButton(IWorld world, int x, int y)
         {
             //var button = core.GetManager<IEntityMan>().CreateFromTemplate("Button");
 

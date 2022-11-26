@@ -3,9 +3,9 @@ using System;
 
 namespace OpenBreed.Wecs.Worlds
 {
-    public delegate void EntitiyLeft(IEntity entity, World world);
+    public delegate void EntitiyLeft(IEntity entity, IWorld world);
 
-    public delegate void EntitiyEntered(IEntity entity, World world);
+    public delegate void EntitiyEntered(IEntity entity, IWorld world);
 
     public interface IWorldMan
     {
@@ -21,15 +21,15 @@ namespace OpenBreed.Wecs.Worlds
 
         WorldBuilder Create();
 
-        World GetById(int id);
+        IWorld GetById(int id);
 
-        World GetByName(string name);
+        IWorld GetByName(string name);
 
-        void Remove(World world);
+        void Remove(IWorld world);
 
         void Update(float dt);
 
-        void RegisterWorld(World newWorld);
+        //void RegisterWorld(IWorld newWorld);
 
         #endregion Public Methods
     }

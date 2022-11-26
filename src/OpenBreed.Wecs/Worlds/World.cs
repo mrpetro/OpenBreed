@@ -15,11 +15,9 @@ namespace OpenBreed.Wecs.Worlds
     /// Enqueues events:
     /// WorldInitializedEvent - when world is initialized
     /// </summary>
-    public sealed class World
+    internal sealed class World : IWorld
     {
         #region Public Fields
-
-        public const int NO_WORLD = -1;
 
         public const float MAX_TIME_MULTIPLIER = 10.0f;
 
@@ -120,7 +118,7 @@ namespace OpenBreed.Wecs.Worlds
         /// <param name="entity">Entity to be added to this world</param>
         internal void RequestAddEntity(IEntity entity)
         {
-            if (entity.WorldId != NO_WORLD)
+            if (entity.WorldId != WecsConsts.NO_WORLD_ID)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
 
             toAdd.Add(entity);
@@ -221,7 +219,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             RemoveFromAllSystems(entity);
             entities.Remove(entity);
-            ((Entity)entity).WorldId = NO_WORLD;
+            ((Entity)entity).WorldId = WecsConsts.NO_WORLD_ID;
             worldMan.OnEntityRemoved(entity, Id);
         }
 

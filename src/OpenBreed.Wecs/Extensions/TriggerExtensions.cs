@@ -28,7 +28,7 @@ namespace OpenBreed.Wecs.Extensions
             triggerMan.CreateTrigger<EntityLeftEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
         }
 
-        public static void OnWorldInitialized(this ITriggerMan triggerMan, World world, Action action, bool singleTime = false)
+        public static void OnWorldInitialized(this ITriggerMan triggerMan, IWorld world, Action action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<WorldInitializedEventArgs>((args) => Equals(world.Id, args.WorldId), (args) => action.Invoke(), singleTime);
         }

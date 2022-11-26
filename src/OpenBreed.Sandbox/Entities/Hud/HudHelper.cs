@@ -53,7 +53,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         #region Public Methods
 
-        public void AddFpsCounter(World world)
+        public void AddFpsCounter(IWorld world)
         {
             var fpsCounter = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\FpsCounter.xml")
                 .SetParameter("posX", -viewClient.ClientRectangle.Size.X / 2.0f)
@@ -67,7 +67,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         #region Private Methods
 
-        public void AddPositionInfo(World world)
+        public void AddPositionInfo(IWorld world)
         {
             var positionInfo = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\PositionInfo.xml")
                 .SetParameter("posX", viewClient.ClientRectangle.Size.X / 2.0f - 180.0f)

@@ -37,7 +37,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         #region Public Methods
 
-        public void AddDestructTimer(World world, int x, int y)
+        public void AddDestructTimer(IWorld world, int x, int y)
         {
             var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\DestructTimer.xml")
                 .SetParameter("posX", x)

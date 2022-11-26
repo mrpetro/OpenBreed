@@ -35,7 +35,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Loaders
 {
-    public interface IMapDataLoader : IDataLoader<World>
+    public interface IMapDataLoader : IDataLoader<IWorld>
     {
         #region Public Methods
 
@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Public Methods
 
-        IEntity Load(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, World world);
+        IEntity Load(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, IWorld world);
 
         #endregion Public Methods
     }
@@ -132,7 +132,7 @@ namespace OpenBreed.Sandbox.Loaders
             return values[actionLayer];
         }
 
-        public World Load(string entryId, params object[] args)
+        public IWorld Load(string entryId, params object[] args)
         {
             var world = worldMan.GetByName(entryId);
 
@@ -239,7 +239,7 @@ namespace OpenBreed.Sandbox.Loaders
             return world;
         }
 
-        private void AddMission(World world)
+        private void AddMission(IWorld world)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Mission.xml")
                 .SetParameter("scriptId", "Vanilla/Common/Mission")
@@ -249,7 +249,7 @@ namespace OpenBreed.Sandbox.Loaders
             entity.EnterWorld(world.Id);
         }
 
-        private void AddDirector(World world, string scriptId)
+        private void AddDirector(IWorld world, string scriptId)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Director.xml")
                 .SetParameter("scriptId", scriptId)
@@ -270,7 +270,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Methods
 
-        private IEntity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, ActionModel action, int gfxValue)
+        private IEntity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, IWorld world, ActionModel action, int gfxValue)
         {
             if (visited[ix, iy])
                 return null;
@@ -282,7 +282,7 @@ namespace OpenBreed.Sandbox.Loaders
             return null;
         }
 
-        private void LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, World world, string templateName, string flavor, int gfxValue)
+        private void LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, IWorld world, string templateName, string flavor, int gfxValue)
         {
             if (visited[ix, iy])
                 return;
@@ -391,7 +391,7 @@ namespace OpenBreed.Sandbox.Loaders
                 loader.Load(dbTileStamp.Id);
         }
 
-        private IEntity LoadUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, World world)
+        private IEntity LoadUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, IWorld world)
         {
             if (entityLoaders.TryGetValue("Unknown", out IMapWorldEntityLoader entityLoader))
                 return entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, "Unknown", actionValue.ToString(), gfxValue, world);

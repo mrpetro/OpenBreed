@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Methods
 
-        public void AddBackground(World world, int x, int y)
+        public void AddBackground(IWorld world, int x, int y)
         {
             var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartCardScreen\Background.xml")
                 .SetParameter("posX", x)
@@ -90,7 +90,7 @@ namespace OpenBreed.Sandbox.Worlds
             timer.EnterWorld(world.Id);
         }
 
-        public void AddText(World world, int x, int y)
+        public void AddText(IWorld world, int x, int y)
         {
             var textEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartCardScreen\Text.xml")
                 .SetParameter("posX", x)
@@ -124,7 +124,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
-        private void Setup(World world)
+        private void Setup(IWorld world)
         {
             var smartCardCamera = cameraHelper.CreateCamera("Camera.SmartCardScreen", 0, 0, 320, 240);
 

@@ -42,7 +42,7 @@ namespace OpenBreed.Sandbox.Entities
             this.entityFactory = entityFactory;
         }
 
-        public IEntity AddVertical(World world, int x, int y, string level)
+        public IEntity AddVertical(IWorld world, int x, int y, string level)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\ElectricGateVertical.xml")
                 .SetParameter("level", level)
@@ -55,7 +55,7 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
-        public IEntity AddHorizontal(World world, int x, int y, string level)
+        public IEntity AddHorizontal(IWorld world, int x, int y, string level)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\ElectricGateHorizontal.xml")
                 .SetParameter("level", level)

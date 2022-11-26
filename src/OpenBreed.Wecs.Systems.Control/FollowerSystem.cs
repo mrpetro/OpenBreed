@@ -44,7 +44,7 @@ namespace OpenBreed.Wecs.Systems.Control
                 {
                     //If follower is in limbo then enter same world as followed
                     //Otherwise follower needs to leave its current world
-                    if (follower.WorldId == World.NO_WORLD)
+                    if (follower.WorldId == WecsConsts.NO_WORLD_ID)
                         follower.EnterWorld(entity.WorldId);
                     else
                         follower.LeaveWorld();

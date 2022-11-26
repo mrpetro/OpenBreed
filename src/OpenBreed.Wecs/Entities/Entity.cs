@@ -172,7 +172,7 @@ namespace OpenBreed.Wecs.Entities
         public void LeaveWorld()
         {
             //If entity is already in limbo then do nothing
-            if (WorldId == World.NO_WORLD)
+            if (WorldId == WecsConsts.NO_WORLD_ID)
                 return;
 
             entityMan.RequestLeaveWorld(this);
@@ -185,7 +185,7 @@ namespace OpenBreed.Wecs.Entities
                 return;
 
             //If entity is not in limbo then it's in different world.
-            if (WorldId != World.NO_WORLD)
+            if (WorldId != WecsConsts.NO_WORLD_ID)
                 throw new InvalidOperationException("Entity already in different world.");
 
             entityMan.RequestEnterWorld(this, worldId);

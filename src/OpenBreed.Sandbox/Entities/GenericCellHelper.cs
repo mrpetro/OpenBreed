@@ -38,7 +38,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public IEntity AddUnknownCell(World world, int x, int y, int actionValue, string level, int gfxValue)
+        public IEntity AddUnknownCell(IWorld world, int x, int y, int actionValue, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\Unknown.xml";
 
@@ -56,7 +56,7 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
-        internal IEntity AddVoidCell(World world, int x, int y, string level, int gfxValue)
+        internal IEntity AddVoidCell(IWorld world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\Void.xml";
 
@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
-        internal IEntity AddSlopeObstacleCell(World world, int x, int y, string level, int gfxValue, string slopeDir)
+        internal IEntity AddSlopeObstacleCell(IWorld world, int x, int y, string level, int gfxValue, string slopeDir)
         {
             var path = $@"{PREFIX}\SlopeObstacle.xml";
 
@@ -89,7 +89,7 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
-        internal IEntity AddFullObstacleCell(World world, int x, int y, string level, int gfxValue)
+        internal IEntity AddFullObstacleCell(IWorld world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\FullObstacle.xml";
 
@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
-        internal IEntity AddLandMineCell(World world, int x, int y, string level, int gfxValue)
+        internal IEntity AddLandMineCell(IWorld world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX_COMMON}\LandMine.xml";
 
@@ -121,7 +121,7 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
-        internal IEntity AddActorOnlyObstacleCell(World world, int x, int y, string level, int gfxValue)
+        internal IEntity AddActorOnlyObstacleCell(IWorld world, int x, int y, string level, int gfxValue)
         {
             var path = $@"{PREFIX}\ActorOnlyObstacle.xml";
 

@@ -99,7 +99,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public IEntity AddMapEntry(World world, int x, int y, int entryId, string level, int gfxValue)
+        public IEntity AddMapEntry(IWorld world, int x, int y, int entryId, string level, int gfxValue)
         {
             var entryEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MapEntry.xml")
                 .SetParameter("level", level)
@@ -114,7 +114,7 @@ namespace OpenBreed.Sandbox.Entities
             return entryEntity;
         }
 
-        public IEntity AddMapExit(World world, int ix, int iy, int exitId, string level, int gfxValue)
+        public IEntity AddMapExit(IWorld world, int ix, int iy, int exitId, string level, int gfxValue)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MapExit.xml")
                 .SetParameter("level", level)
@@ -217,7 +217,7 @@ namespace OpenBreed.Sandbox.Entities
             public int cameraFadeInClipId { get; set; }
             public string mapKey { get; set; }
             public int entryId { get; set; }
-            public World targetWorld { get; internal set; }
+            public IWorld targetWorld { get; internal set; }
 
             public Context Then(Func<Context, Context> function)
             {
@@ -306,7 +306,7 @@ namespace OpenBreed.Sandbox.Entities
             target.EnterWorld(world.Id);
         }
 
-        private World TryLoadWorld(string worldName)
+        private IWorld TryLoadWorld(string worldName)
         {
             var world = worldMan.GetByName(worldName);
 
@@ -319,7 +319,7 @@ namespace OpenBreed.Sandbox.Entities
             return world;
         }
 
-        private IEnumerable<IEntity> FindEntryEntities(World world, int entryId)
+        private IEnumerable<IEntity> FindEntryEntities(IWorld world, int entryId)
         {
             foreach (var entity in world.Entities.Where(e => e.Contains<MetadataComponent>()))
             {

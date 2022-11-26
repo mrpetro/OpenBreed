@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Systems
         /// Initialize the system when world is created
         /// </summary>
         /// <param name="world">World that this system is initialized on</param>
-        void Initialize(World world);
+        void Initialize(IWorld world);
 
         /// <summary>
         /// Perform cleanup of entites and their components related with this system

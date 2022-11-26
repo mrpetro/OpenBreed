@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
 {
     public static class TriggerExtensions
     {
-        public static void OnWorldEvent<TEventArgs>(this ITriggerMan triggerMan, World world, Action<World, TEventArgs> action, bool singleTime = false) where TEventArgs : EventArgs
+        public static void OnWorldEvent<TEventArgs>(this ITriggerMan triggerMan, IWorld world, Action<IWorld, TEventArgs> action, bool singleTime = false) where TEventArgs : EventArgs
         {
             triggerMan.EventsMan.Subscribe<TEventArgs>(ConditionalAction);
 

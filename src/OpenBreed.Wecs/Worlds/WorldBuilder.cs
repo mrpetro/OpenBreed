@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Public Methods
 
-        void Build(int code, World world, object[] args);
+        void Build(int code, IWorld world, object[] args);
 
         #endregion Public Methods
     }
@@ -71,7 +71,7 @@ namespace OpenBreed.Wecs.Worlds
             systems.Add(systemType, system);
         }
 
-        public World Build()
+        public IWorld Build()
         {
             if (worldMan.GetByName(name) != null)
                 throw new InvalidOperationException($"World with name '{name}' already exist.");

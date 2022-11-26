@@ -6,7 +6,7 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Public Constructors
 
-        public WorldContext(World world)
+        public WorldContext(IWorld world)
         {
             World = world;
         }
@@ -21,7 +21,7 @@ namespace OpenBreed.Wecs.Worlds
 
         public bool Paused { get; set; }
 
-        public World World { get; }
+        public IWorld World { get; }
 
         #endregion Public Properties
 
