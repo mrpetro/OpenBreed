@@ -16,21 +16,17 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Constructors
 
-        public StampSystem()
+        public StampSystem(IWorld world) :
+            base(world)
         {
             RequireEntityWith<StampPutterComponent>();
+
+            tileGrid = world.GetModule<ITileGrid>();
         }
 
         #endregion Public Constructors
 
         #region Public Methods
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            tileGrid = world.GetModule<ITileGrid>();
-        }
 
         #endregion Public Methods
 

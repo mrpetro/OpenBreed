@@ -21,7 +21,12 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Internal Constructors
 
-        internal TimerSystem(IEntityMan entityMan, IEventsMan eventsMan, ILogger logger)
+        internal TimerSystem(
+            IWorld world,
+            IEntityMan entityMan,
+            IEventsMan eventsMan,
+            ILogger logger) :
+            base(world)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;

@@ -19,8 +19,10 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Internal Constructors
 
-        internal AttackControllerSystem(IPlayersMan playersMan)
+        internal AttackControllerSystem(IWorld world, IPlayersMan playersMan) :
+            base(world)
         {
+
             this.playersMan = playersMan;
 
             RequireEntityWith<AttackInputComponent>();

@@ -21,15 +21,13 @@ namespace OpenBreed.Wecs.Systems
 
         private readonly List<Type> forbiddenComponentTypes = new List<Type>();
 
-        private Dictionary<Type, Delegate> handlers = new Dictionary<Type, Delegate>();
-
         #endregion Private Fields
 
         #region Protected Constructors
 
-        protected SystemBase()
+        protected SystemBase(IWorld world)
         {
-            WorldId = WecsConsts.NO_WORLD_ID;
+            World = world;
 
             RequiredComponentTypes = new ReadOnlyCollection<Type>(requiredComponentTypes);
         }
@@ -39,9 +37,9 @@ namespace OpenBreed.Wecs.Systems
         #region Public Properties
 
         /// <summary>
-        /// ID of world which owns this system
+        /// World which owns this system
         /// </summary>
-        public int WorldId { get; private set; }
+        public IWorld World { get; }
 
         /// <summary>
         /// Id of the phase in which system will be updated
@@ -53,29 +51,6 @@ namespace OpenBreed.Wecs.Systems
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Initialize the system when world is created
-        /// </summary>
-        /// <param name="world">World that this system is initialized on</param>
-        public virtual void Initialize(IWorld world)
-        {
-            if (WorldId != WecsConsts.NO_WORLD_ID)
-                throw new InvalidOperationException("World sytem already initialized.");
-
-            WorldId = world.Id;
-        }
-
-        /// <summary>
-        /// Deinitialize the system when world is destroyed
-        /// </summary>
-        public virtual void Deinitialize()
-        {
-            if (WorldId == WecsConsts.NO_WORLD_ID)
-                throw new InvalidOperationException("World sytem already deinitialized.");
-
-            WorldId = WecsConsts.NO_WORLD_ID;
-        }
 
         public bool Matches(IEntity entity)
         {

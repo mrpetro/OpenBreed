@@ -19,25 +19,14 @@ namespace OpenBreed.Wecs.Systems
         int PhaseId { get; }
 
         /// <summary>
-        /// ID of world which owns this system
+        /// world which owns this system
         /// </summary>
-        int WorldId { get; }
-
-        /// <summary>
-        /// Initialize the system when world is created
-        /// </summary>
-        /// <param name="world">World that this system is initialized on</param>
-        void Initialize(IWorld world);
+        IWorld World { get; }
 
         /// <summary>
         /// Perform cleanup of entites and their components related with this system
         /// </summary>
         void Cleanup();
-
-        /// <summary>
-        /// Deinitialize the system when world is destroyed
-        /// </summary>
-        void Deinitialize();
 
         bool Matches(IEntity entity);
 

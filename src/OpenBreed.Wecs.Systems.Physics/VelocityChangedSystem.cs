@@ -24,7 +24,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal VelocityChangedSystem(IEntityMan entityMan)
+        internal VelocityChangedSystem(
+            IWorld world, 
+            IEntityMan entityMan) :
+            base(world)
         {
             this.entityMan = entityMan;
 

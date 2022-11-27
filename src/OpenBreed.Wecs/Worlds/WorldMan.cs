@@ -4,6 +4,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Core.Events;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace OpenBreed.Wecs.Worlds
 
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
+        private readonly ISystemFactory systemFactory;
         private readonly IdMap<World> IdsToWorldsLookup = new IdMap<World>();
         private readonly ILogger logger;
         private readonly Dictionary<string, int> namesToIdsLookup = new Dictionary<string, int>();
@@ -32,10 +34,16 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Public Constructors
 
-        public WorldMan(IEntityMan entityMan, IEventsMan eventsMan, IScriptMan scriptMan, ILogger logger)
+        public WorldMan(
+            IEntityMan entityMan,
+            IEventsMan eventsMan,
+            ISystemFactory systemFactory,
+            IScriptMan scriptMan,
+            ILogger logger)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;
+            this.systemFactory = systemFactory;
             this.scriptMan = scriptMan;
             this.logger = logger;
 
@@ -47,19 +55,11 @@ namespace OpenBreed.Wecs.Worlds
 
         #endregion Public Constructors
 
-        #region Public Events
-
-        public event EntitiyEntered EntitiyEntered;
-
-        public event EntitiyLeft EntitiyLeft;
-
-        #endregion Public Events
-
         #region Public Methods
 
         public WorldBuilder Create()
         {
-            return new WorldBuilder(this, logger);
+            return new WorldBuilder(this, logger, systemFactory);
         }
 
         /// <summary>
@@ -93,8 +93,6 @@ namespace OpenBreed.Wecs.Worlds
         {
             newWorld.Id = IdsToWorldsLookup.Add(newWorld);
             namesToIdsLookup.Add(newWorld.Name, newWorld.Id);
-
-            newWorld.InitializeSystems();
             toInitialize.Add(newWorld);
         }
 
@@ -128,16 +126,6 @@ namespace OpenBreed.Wecs.Worlds
         }
 
         #endregion Public Methods
-
-        //internal void OnWorldPaused(int worldId)
-        //{
-        //    RaiseEvent(new WorldPausedEventArgs(worldId));
-        //}
-
-        //internal void OnWorldUnpaused(int worldId)
-        //{
-        //    RaiseEvent(new WorldUnpausedEventArgs(worldId));
-        //}
 
         #region Internal Methods
 

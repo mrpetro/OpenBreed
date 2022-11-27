@@ -88,17 +88,17 @@ namespace OpenBreed.Sandbox.Worlds
         public void AddSystems(WorldBuilder builder)
         {
             //Input Stage
-            builder.AddSystem(systemFactory.Create<ActorMovementByPlayerControlSystem>());
-            builder.AddSystem(systemFactory.Create<ActorScriptByPlayerControlSystem>());
-            builder.AddSystem(systemFactory.Create<AttackControllerSystem>());
+            builder.AddSystem<ActorMovementByPlayerControlSystem>();
+            builder.AddSystem<ActorScriptByPlayerControlSystem>();
+            builder.AddSystem<AttackControllerSystem>();
 
 
             //Video
 
-            builder.AddSystem(systemFactory.Create<ViewportSystem>());
-            builder.AddSystem(systemFactory.Create<SoundSystem>());
-            builder.AddSystem(systemFactory.Create<TimerSystem>());
-            builder.AddSystem(systemFactory.Create<FrameSystem>());
+            builder.AddSystem<ViewportSystem>();
+            builder.AddSystem<SoundSystem>();
+            builder.AddSystem<TimerSystem>();
+            builder.AddSystem<FrameSystem>();
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             //builder.AddSystem(core.CreateTextSystem().Build());

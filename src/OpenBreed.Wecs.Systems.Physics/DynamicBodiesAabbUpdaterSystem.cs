@@ -21,25 +21,23 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal DynamicBodiesAabbUpdaterSystem(IShapeMan shapeMan)
+        internal DynamicBodiesAabbUpdaterSystem(
+            IWorld world,
+            IShapeMan shapeMan) :
+            base(world)
         {
             this.shapeMan = shapeMan;
 
             RequireEntityWith<BodyComponent>();
             RequireEntityWith<PositionComponent>();
             RequireEntityWith<VelocityComponent>();
+
+            broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
-        }
 
         #endregion Public Methods
 

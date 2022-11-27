@@ -28,7 +28,12 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal DynamicBodiesCollisionCheckSystem(IEntityMan entityMan, IShapeMan shapeMan, ICollisionMan<IEntity> collisionMan)
+        internal DynamicBodiesCollisionCheckSystem(
+            IWorld world,
+            IEntityMan entityMan,
+            IShapeMan shapeMan,
+            ICollisionMan<IEntity> collisionMan) :
+            base(world)
         {
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;
@@ -38,8 +43,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             RequireEntityWith<VelocityComponent>();
             RequireEntityWith<PositionComponent>();
 
-            //RegisterHandler<BodyOnCommand>(HandleBodyOnCommand);
-            //RegisterHandler<BodyOffCommand>(HandleBodyOffCommand);
+            broadphaseGrid = world.GetModule<IBroadphaseStatic>();
+            broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
         }
 
         #endregion Internal Constructors
@@ -49,14 +54,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         public static Vector2 GetCellCenter(PositionComponent pos)
         {
             return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
-        }
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            broadphaseGrid = world.GetModule<IBroadphaseStatic>();
-            broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
         }
 
         public void Update(IWorldContext context)

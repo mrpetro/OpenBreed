@@ -19,23 +19,18 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Constructors
 
-        public TileSystem()
+        public TileSystem(IWorld world) :
+            base(world)
         {
+            tileGrid = world.GetModule<ITileGrid>();
+            world.GetModule<IRenderableBatch>().Add(this);
+
             RequireEntityWith<TilePutterComponent>();
         }
 
         #endregion Public Constructors
 
         #region Public Methods
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            tileGrid = world.GetModule<ITileGrid>();
-
-            world.GetModule<IRenderableBatch>().Add(this);
-        }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {

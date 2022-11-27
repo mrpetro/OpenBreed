@@ -23,7 +23,12 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Internal Constructors
 
-        internal AnimatorSystem(IEntityMan entityMan, IClipMan<IEntity> clipMan, ILogger logger)
+        internal AnimatorSystem(
+            IWorld world,
+            IEntityMan entityMan,
+            IClipMan<IEntity> clipMan,
+            ILogger logger) :
+            base(world)
         {
             this.entityMan = entityMan;
             this.clipMan = clipMan;

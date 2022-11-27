@@ -21,23 +21,21 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Internal Constructors
 
-        internal PictureSystem(IPictureRenderer imageRenderer)
+        internal PictureSystem(
+            IWorld world,
+            IPictureRenderer imageRenderer) :
+            base(world)
         {
             this.imageRenderer = imageRenderer;
             RequireEntityWith<PictureComponent>();
             RequireEntityWith<PositionComponent>();
+
+            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            world.GetModule<IRenderableBatch>().Add(this);
-        }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {

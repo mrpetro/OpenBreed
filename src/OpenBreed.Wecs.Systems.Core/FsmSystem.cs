@@ -19,7 +19,11 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Constructors
 
-        public FsmSystem(IFsmMan fsmMan, ILogger logger)
+        public FsmSystem(
+            IWorld world,
+            IFsmMan fsmMan,
+            ILogger logger) :
+            base(world)
         {
             this.fsmMan = fsmMan;
             this.logger = logger;

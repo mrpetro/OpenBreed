@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Wecs.Worlds;
+using System;
 
 namespace OpenBreed.Wecs.Systems
 {
@@ -6,9 +7,9 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Public Methods
 
-        void Register<TSystem>(Func<ISystem> initializer) where TSystem : ISystem;
+        void Register<TSystem>(Func<IWorld, ISystem> initializer) where TSystem : ISystem;
 
-        TSystem Create<TSystem>() where TSystem : ISystem;
+        ISystem Create<TSystem>(IWorld world) where TSystem : ISystem;
 
         #endregion Public Methods
     }

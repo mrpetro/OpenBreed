@@ -43,7 +43,7 @@ namespace OpenBreed.Wecs.Worlds
             modules = builder.modules;
             worldMan = builder.worldMan;
             context = new WorldContext(this);
-            Systems = builder.systems.Values.ToArray();
+            Systems = builder.CreateSystems(this).ToArray();
         }
 
         #endregion Internal Constructors
@@ -170,12 +170,6 @@ namespace OpenBreed.Wecs.Worlds
 
             //Perform cleanup on all world systems
             Systems.ForEach(item => item.Cleanup());
-        }
-
-        internal void InitializeSystems()
-        {
-            for (int i = 0; i < Systems.Length; i++)
-                Systems[i].Initialize(this);
         }
 
         internal void Update(float dt)

@@ -28,7 +28,8 @@ namespace OpenBreed.Wecs.Worlds
 
         internal readonly WorldMan worldMan;
         internal string name;
-        internal Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
+        internal Dictionary<Type, Func<IWorld, ISystem>> systemInitializers = new Dictionary<Type, Func<IWorld, ISystem>>();
+
         internal Dictionary<Type, object> modules = new Dictionary<Type, object>();
 
         #endregion Internal Fields
@@ -36,39 +37,53 @@ namespace OpenBreed.Wecs.Worlds
         #region Private Fields
 
         private readonly ILogger logger;
+        private readonly ISystemFactory systemFactory;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal WorldBuilder(WorldMan worldMan, ILogger logger)
+        internal WorldBuilder(
+            WorldMan worldMan,
+            ILogger logger,
+            ISystemFactory systemFactory)
         {
             this.worldMan = worldMan;
             this.logger = logger;
+            this.systemFactory = systemFactory;
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
 
+        internal IEnumerable<ISystem> CreateSystems(IWorld world)
+        {
+            foreach (var initializer in systemInitializers.Values)
+                yield return initializer.Invoke(world);
+        }
+
         public void AddModule<TModule>(TModule module)
         {
             var moduleType = typeof(TModule);
 
-            if (systems.ContainsKey(moduleType))
+            if (modules.ContainsKey(moduleType))
                 throw new InvalidOperationException($"Module with type '{moduleType}' already added.");
 
             modules.Add(moduleType, module);
         }
 
-        public void AddSystem(ISystem system)
+        public void AddSystem<TSystem>(Func<IWorld, ISystem> initializer = null) where TSystem : ISystem
         {
-            var systemType = system.GetType();
+            var systemType = typeof(TSystem);
 
-            if (systems.ContainsKey(systemType))
+            if (systemInitializers.ContainsKey(systemType))
                 throw new InvalidOperationException($"System with type '{systemType}' already added.");
 
-            systems.Add(systemType, system);
+            if (initializer is null)
+                initializer = systemFactory.Create<TSystem>;
+
+            systemInitializers.Add(systemType, initializer);
         }
 
         public IWorld Build()

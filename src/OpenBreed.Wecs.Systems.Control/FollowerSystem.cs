@@ -15,7 +15,10 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Public Constructors
 
-        public FollowerSystem(IEntityMan entityMan)
+        public FollowerSystem(
+            IWorld world,
+            IEntityMan entityMan) :
+            base(world)
         {
             this.entityMan = entityMan;
 

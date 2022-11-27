@@ -76,9 +76,9 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void AddSystems(WorldBuilder builder)
         {
-            builder.AddSystem(systemFactory.Create<AnimatorSystem>());
-            builder.AddSystem(systemFactory.Create<TextSystem>());
-            builder.AddSystem(systemFactory.Create<ScriptRunningSystem>());
+            builder.AddSystem<AnimatorSystem>();
+            builder.AddSystem<TextSystem >();
+            builder.AddSystem<ScriptRunningSystem>();
         }
 
         private void Setup(IWorld world)

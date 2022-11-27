@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
@@ -19,7 +20,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Internal Constructors
 
-        internal TextPresenterSystem(IFontMan fontMan)
+        internal TextPresenterSystem(
+            IWorld world,
+            IFontMan fontMan) :
+            base(world)
         {
             this.fontMan = fontMan;
 

@@ -23,8 +23,10 @@ namespace OpenBreed.Wecs.Systems.Scripting
         #region Internal Constructors
 
         internal ScriptRunningSystem(
+            IWorld world,
             IScriptMan scriptMan,
-            ILogger logger)
+            ILogger logger) :
+            base(world)
         {
             this.scriptMan = scriptMan;
             this.logger = logger;

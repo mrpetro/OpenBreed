@@ -30,7 +30,11 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 
         #region Public Constructors
 
-        public UnknownMapCellDisplaySystem(IPrimitiveRenderer primitiveRenderer, IFontMan fontMan)
+        public UnknownMapCellDisplaySystem(
+            IWorld world,
+            IPrimitiveRenderer primitiveRenderer,
+            IFontMan fontMan) :
+            base(world)
         {
             this.primitiveRenderer = primitiveRenderer;
             this.fontMan = fontMan;
@@ -39,18 +43,12 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             RequireEntityWith<UnknownCodeComponent>();
 
             font = fontMan.GetOSFont("ARIAL", 8);
+            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Public Constructors
 
         #region Public Methods
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            world.GetModule<IRenderableBatch>().Add(this);
-        }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {

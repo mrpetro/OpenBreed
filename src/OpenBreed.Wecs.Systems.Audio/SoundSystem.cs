@@ -20,7 +20,11 @@ namespace OpenBreed.Wecs.Systems.Audio
 
         #region Public Constructors
 
-        public SoundSystem(ISoundMan soundMan, IEventsMan eventsMan)
+        public SoundSystem(
+            IWorld world,
+            ISoundMan soundMan,
+            IEventsMan eventsMan) :
+            base(world)
         {
             this.soundMan = soundMan;
             this.eventsMan = eventsMan;

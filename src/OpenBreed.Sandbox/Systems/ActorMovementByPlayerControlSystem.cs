@@ -24,8 +24,10 @@ namespace OpenBreed.Sandbox.Systems
         #region Internal Constructors
 
         internal ActorMovementByPlayerControlSystem(
+            IWorld world,
             IEntityMan entityMan,
-            IPlayersMan playersMan)
+            IPlayersMan playersMan) :
+            base(world)
         {
             this.entityMan = entityMan;
             this.playersMan = playersMan;

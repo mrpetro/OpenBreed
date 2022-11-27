@@ -22,24 +22,23 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Internal Constructors
 
-        internal SpriteSystem(ISpriteMan spriteMan, ISpriteRenderer spriteRenderer)
+        internal SpriteSystem(
+            IWorld world, 
+            ISpriteMan spriteMan,
+            ISpriteRenderer spriteRenderer) :
+            base(world)
         {
             this.spriteMan = spriteMan;
             this.spriteRenderer = spriteRenderer;
             RequireEntityWith<SpriteComponent>();
             RequireEntityWith<PositionComponent>();
+
+            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            world.GetModule<IRenderableBatch>().Add(this);
-        }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {

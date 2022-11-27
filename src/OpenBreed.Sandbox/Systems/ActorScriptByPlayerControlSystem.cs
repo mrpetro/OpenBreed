@@ -30,10 +30,12 @@ namespace OpenBreed.Sandbox.Systems
         #region Internal Constructors
 
         internal ActorScriptByPlayerControlSystem(
+            IWorld world,
             IEntityMan entityMan,
             IPlayersMan playersMan,
             IScriptMan scriptMan,
-            ILogger logger)
+            ILogger logger) :
+            base(world)
         {
             this.entityMan = entityMan;
             this.playersMan = playersMan;

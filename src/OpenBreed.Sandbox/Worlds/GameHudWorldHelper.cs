@@ -156,9 +156,9 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void AddSystems(WorldBuilder builder)
         {
-            builder.AddSystem(systemFactory.Create<AnimatorSystem>());
-            builder.AddSystem(systemFactory.Create<SpriteSystem>());
-            builder.AddSystem(systemFactory.Create<TextSystem>());
+            builder.AddSystem<AnimatorSystem>();
+            builder.AddSystem<SpriteSystem>();
+            builder.AddSystem<TextSystem>();
 
         }
 

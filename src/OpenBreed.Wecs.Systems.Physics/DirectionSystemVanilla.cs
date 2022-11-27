@@ -21,7 +21,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal DirectionSystemVanilla(IEntityMan entityMan)
+        internal DirectionSystemVanilla(
+            IWorld world,
+            IEntityMan entityMan) :
+            base(world)
         {
             this.entityMan = entityMan;
 

@@ -12,7 +12,8 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
 
         public static void SetupPhysicsDebugSystem(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register<PhysicsDebugDisplaySystem>(() => new PhysicsDebugDisplaySystem(serviceProvider.GetService<IPrimitiveRenderer>()));
+            systemFactory.Register<PhysicsDebugDisplaySystem>(
+                (world) => new PhysicsDebugDisplaySystem(world, serviceProvider.GetService<IPrimitiveRenderer>()));
         }
 
         #endregion Public Methods

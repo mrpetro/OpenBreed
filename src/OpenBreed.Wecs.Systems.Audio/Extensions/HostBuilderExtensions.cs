@@ -13,7 +13,8 @@ namespace OpenBreed.Wecs.Systems.Audio.Extensions
         public static void SetupAudioSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
             systemFactory.Register<SoundSystem>(
-                () => new SoundSystem(
+                (world) => new SoundSystem(
+                    world,
                     serviceProvider.GetService<ISoundMan>(),
                     serviceProvider.GetService<IEventsMan>()));
         }

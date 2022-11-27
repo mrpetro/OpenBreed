@@ -12,7 +12,8 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
         public static void SetupScriptingSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
             systemFactory.Register<ScriptRunningSystem>(
-                () => new ScriptRunningSystem(
+                (world) => new ScriptRunningSystem(
+                    world,
                     serviceProvider.GetService<IScriptMan>(),
                     serviceProvider.GetService<ILogger>()));
         }

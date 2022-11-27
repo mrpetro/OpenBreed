@@ -20,13 +20,18 @@ namespace OpenBreed.Wecs.Systems.Physics
         private readonly IEntityMan entityMan;
         private readonly IShapeMan shapeMan;
         private readonly IEventsMan eventsMan;
-        private IBroadphaseStatic broadphaseGrid;
+        private readonly IBroadphaseStatic broadphaseGrid;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal StaticBodiesSystem(IEntityMan entityMan, IShapeMan shapeMan, IEventsMan eventsMan)
+        internal StaticBodiesSystem(
+            IWorld world,
+            IEntityMan entityMan,
+            IShapeMan shapeMan,
+            IEventsMan eventsMan) :
+            base(world)
         {
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;
@@ -34,18 +39,13 @@ namespace OpenBreed.Wecs.Systems.Physics
             RequireEntityWith<BodyComponent>();
             RequireEntityWith<PositionComponent>();
             RequireEntityWithout<VelocityComponent>();
+
+            broadphaseGrid = world.GetModule<IBroadphaseStatic>();
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            broadphaseGrid = world.GetModule<IBroadphaseStatic>();
-        }
 
         #endregion Public Methods
 

@@ -14,7 +14,10 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Internal Constructors
 
-        internal TextInputSystem(IEntityMan entityMan)
+        internal TextInputSystem(
+            IWorld world,
+            IEntityMan entityMan) :
+            base(world)
         {
             this.entityMan = entityMan;
 

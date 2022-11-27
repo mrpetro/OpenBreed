@@ -26,26 +26,23 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Public Constructors
 
-        public PhysicsDebugDisplaySystem(IPrimitiveRenderer primitiveRenderer)
+        public PhysicsDebugDisplaySystem(
+            IWorld world,
+            IPrimitiveRenderer primitiveRenderer) :
+            base(world)
         {
             this.primitiveRenderer = primitiveRenderer;
 
             RequireEntityWith<BodyComponent>();
             RequireEntityWith<PositionComponent>();
+
+            broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
+            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Public Constructors
 
         #region Public Methods
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
-
-            world.GetModule<IRenderableBatch>().Add(this);
-        }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {

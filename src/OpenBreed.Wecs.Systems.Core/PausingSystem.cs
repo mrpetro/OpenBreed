@@ -18,7 +18,11 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Constructors
 
-        public PausingSystem(IWorldMan worldMan, IEventsMan eventsMan)
+        public PausingSystem(
+            IWorld world,
+            IWorldMan worldMan,
+            IEventsMan eventsMan) :
+            base(world)
         {
             this.worldMan = worldMan;
             this.eventsMan = eventsMan;
@@ -45,9 +49,9 @@ namespace OpenBreed.Wecs.Systems.Core
                 context.Paused = pauserComponent.Pause;
 
                 if (pauserComponent.Pause)
-                    OnWorldPaused(entity, WorldId);
+                    OnWorldPaused(entity, World.Id);
                 else
-                    OnWorldUnpaused(entity, WorldId);
+                    OnWorldUnpaused(entity, World.Id);
             }
             finally
             {

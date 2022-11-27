@@ -27,17 +27,31 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 
         public static void SetupPhysicsSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register<DirectionSystemVanilla>(() => new DirectionSystemVanilla(serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register<MovementSystem>(() => new MovementSystem(serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register<VelocityChangedSystem>(() => new VelocityChangedSystem(serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register<MovementSystemVanilla>(() => new MovementSystemVanilla(serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register<DynamicBodiesAabbUpdaterSystem>(() => new DynamicBodiesAabbUpdaterSystem(serviceProvider.GetService<IShapeMan>()));
-            systemFactory.Register<DynamicBodiesCollisionCheckSystem>(() => new DynamicBodiesCollisionCheckSystem(serviceProvider.GetService<IEntityMan>(),
-                                                                               serviceProvider.GetService<IShapeMan>(),
-                                                                               serviceProvider.GetService<ICollisionMan<IEntity>>()));
-            systemFactory.Register<StaticBodiesSystem>(() => new StaticBodiesSystem(serviceProvider.GetService<IEntityMan>(),
-                                                                serviceProvider.GetService<IShapeMan>(),
-                                                                serviceProvider.GetService<IEventsMan>()));
+            systemFactory.Register<DirectionSystemVanilla>((world) => new DirectionSystemVanilla(
+                world,
+                serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register<MovementSystem>((world) => new MovementSystem(
+                world,
+                serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register<VelocityChangedSystem>((world) => new VelocityChangedSystem(
+                world,
+                serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register<MovementSystemVanilla>((world) => new MovementSystemVanilla(
+                world,
+                serviceProvider.GetService<IEntityMan>()));
+            systemFactory.Register<DynamicBodiesAabbUpdaterSystem>((world) => new DynamicBodiesAabbUpdaterSystem(
+                world,
+                serviceProvider.GetService<IShapeMan>()));
+            systemFactory.Register<DynamicBodiesCollisionCheckSystem>((world) => new DynamicBodiesCollisionCheckSystem(
+                world,
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IShapeMan>(),
+                serviceProvider.GetService<ICollisionMan<IEntity>>()));
+            systemFactory.Register<StaticBodiesSystem>((world) => new StaticBodiesSystem(
+                world,
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IShapeMan>(),
+                serviceProvider.GetService<IEventsMan>()));
 
             //systemFactory.Register<CollisionResponseSystem>(() => new CollisionResponseSystem(serviceProvider.GetService<IEntityMan>(),
             //                                                         serviceProvider.GetService<IWorldMan>(),

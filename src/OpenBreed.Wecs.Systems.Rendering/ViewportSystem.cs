@@ -33,7 +33,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Internal Constructors
 
-        internal ViewportSystem(IEntityMan entityMan, IWorldMan worldMan, IPrimitiveRenderer primitiveRenderer, IRenderingMan renderingMan, IViewClient viewClient)
+        internal ViewportSystem(
+            IWorld world,
+            IEntityMan entityMan,
+            IWorldMan worldMan,
+            IPrimitiveRenderer primitiveRenderer,
+            IRenderingMan renderingMan,
+            IViewClient viewClient) :
+            base(world)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;
@@ -42,18 +49,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.viewClient = viewClient;
             RequireEntityWith<ViewportComponent>();
             RequireEntityWith<PositionComponent>();
+
+            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
-
-        public override void Initialize(IWorld world)
-        {
-            base.Initialize(world);
-
-            world.GetModule<IRenderableBatch>().Add(this);
-        }
 
         public Vector4 ClientToWorld(Vector4 coords, IEntity viewport)
         {

@@ -18,39 +18,39 @@ namespace OpenBreed.Sandbox.Extensions
         public static void SetupGameWorldSystems(this WorldBuilder builder, ISystemFactory systemFactory)
         {
             //Update Stage
-            builder.AddSystem(systemFactory.Create<MovementSystemVanilla>());
-            builder.AddSystem(systemFactory.Create<DirectionSystemVanilla>());
+            builder.AddSystem<MovementSystemVanilla>();
+            builder.AddSystem<DirectionSystemVanilla>();
 
             //builder.AddSystem(new FollowerSystem(core));
-            builder.AddSystem(systemFactory.Create<DynamicBodiesAabbUpdaterSystem>());
-            builder.AddSystem(systemFactory.Create<DynamicBodiesCollisionCheckSystem>());
-            builder.AddSystem(systemFactory.Create<StaticBodiesSystem>());
+            builder.AddSystem<DynamicBodiesAabbUpdaterSystem>();
+            builder.AddSystem<DynamicBodiesCollisionCheckSystem>();
+            builder.AddSystem<StaticBodiesSystem>();
             //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
 
-            builder.AddSystem(systemFactory.Create<FollowerSystem>());
+            builder.AddSystem<FollowerSystem>();
 
-            builder.AddSystem(systemFactory.Create<AnimatorSystem>());
-            builder.AddSystem(systemFactory.Create<TimerSystem>());
-            builder.AddSystem(systemFactory.Create<FrameSystem>());
-            builder.AddSystem(systemFactory.Create<PausingSystem>());
-            builder.AddSystem(systemFactory.Create<FsmSystem>());
+            builder.AddSystem<AnimatorSystem>();
+            builder.AddSystem<TimerSystem>();
+            builder.AddSystem<FrameSystem>();
+            builder.AddSystem<PausingSystem>();
+            builder.AddSystem<FsmSystem>();
 
-            builder.AddSystem(systemFactory.Create<VelocityChangedSystem>());
+            builder.AddSystem<VelocityChangedSystem>();
 
             //Audio Stage
-            builder.AddSystem(systemFactory.Create<SoundSystem>());
+            builder.AddSystem<SoundSystem>();
 
             //Video Stage
-            builder.AddSystem(systemFactory.Create<StampSystem>());
-            builder.AddSystem(systemFactory.Create<TileSystem>());
-            builder.AddSystem(systemFactory.Create<SpriteSystem>());
-            builder.AddSystem(systemFactory.Create<PictureSystem>());
+            builder.AddSystem<StampSystem>();
+            builder.AddSystem<TileSystem>();
+            builder.AddSystem<SpriteSystem>();
+            builder.AddSystem<PictureSystem>();
             //builder.AddSystem(core.CreateWireframeSystem().Build());
-            builder.AddSystem(systemFactory.Create<TextSystem>());
+            builder.AddSystem<TextSystem>();
             //builder.AddSystem(systemFactory.Create<PhysicsDebugDisplaySystem>());
-            builder.AddSystem(systemFactory.Create<UnknownMapCellDisplaySystem>());
+            builder.AddSystem<UnknownMapCellDisplaySystem>();
             //builder.AddSystem(systemFactory.Create<GroupMapCellDisplaySystem>());
-            builder.AddSystem(systemFactory.Create<ViewportSystem>());
+            builder.AddSystem<ViewportSystem>();
         }
 
         #endregion Public Methods

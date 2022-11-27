@@ -2,7 +2,6 @@
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -13,6 +12,15 @@ namespace OpenBreed.Wecs.Systems.Core
         private readonly List<IEntity> entities = new List<IEntity>();
 
         #endregion Private Fields
+
+        #region Protected Constructors
+
+        protected UpdatableSystemBase(IWorld world) :
+                    base(world)
+        {
+        }
+
+        #endregion Protected Constructors
 
         #region Public Methods
 
@@ -33,20 +41,19 @@ namespace OpenBreed.Wecs.Systems.Core
                     UpdateEntity(entities[i], context);
                 }
             }
-
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected abstract void UpdateEntity(IEntity entity, IWorldContext context);
-
         protected override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
         protected override void OnAddEntity(IEntity entity) => entities.Add(entity);
 
         protected override void OnRemoveEntity(IEntity entity) => entities.Remove(entity);
+
+        protected abstract void UpdateEntity(IEntity entity, IWorldContext context);
 
         #endregion Protected Methods
     }

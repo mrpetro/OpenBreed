@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +9,7 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Private Fields
 
-        private readonly Dictionary<Type, Func<ISystem>> systemInitializers = new Dictionary<Type, Func<ISystem>>();
+        private readonly Dictionary<Type, Func<IWorld, ISystem>> systemInitializers = new Dictionary<Type, Func<IWorld, ISystem>>();
 
         #endregion Private Fields
 
@@ -23,7 +24,7 @@ namespace OpenBreed.Wecs.Systems
 
         #region Public Methods
 
-        public void Register<TSystem>(Func<ISystem> initializer) where TSystem : ISystem
+        public void Register<TSystem>(Func<IWorld, ISystem> initializer) where TSystem : ISystem
         {
             var systemType = typeof(TSystem);
 
@@ -33,14 +34,24 @@ namespace OpenBreed.Wecs.Systems
             systemInitializers.Add(systemType, initializer);
         }
 
-        public TSystem Create<TSystem>() where TSystem : ISystem
+        //public TSystem Create<TSystem>() where TSystem : ISystem
+        //{
+        //    var systemType = typeof(TSystem);
+
+        //    if (!systemInitializers.TryGetValue(systemType, out Func<IWorld, ISystem> initializer))
+        //        throw new InvalidOperationException($"System '{systemType}' not registered.");
+
+        //    return (TSystem)initializer.Invoke();
+        //}
+
+        public ISystem Create<TSystem>(IWorld world) where TSystem : ISystem
         {
             var systemType = typeof(TSystem);
 
-            if (!systemInitializers.TryGetValue(systemType, out Func<ISystem> initializer))
+            if (!systemInitializers.TryGetValue(systemType, out Func<IWorld, ISystem> initializer))
                 throw new InvalidOperationException($"System '{systemType}' not registered.");
 
-            return (TSystem)initializer.Invoke();
+            return (TSystem)initializer.Invoke(world);
         }
 
         #endregion Public Methods

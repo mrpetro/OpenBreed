@@ -23,21 +23,30 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
     {
         public static void SetupRenderingSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register<ViewportSystem>(() => new ViewportSystem(serviceProvider.GetService<IEntityMan>(),
-                                                            serviceProvider.GetService<IWorldMan>(),
-                                                            serviceProvider.GetService<IPrimitiveRenderer>(),
-                                                            serviceProvider.GetService<IRenderingMan>(),
-                                                            serviceProvider.GetService<IViewClient>()));
-            systemFactory.Register<SpriteSystem>(() => new SpriteSystem(serviceProvider.GetService<ISpriteMan>(),
-                                                          serviceProvider.GetService<ISpriteRenderer>()));
-            systemFactory.Register<PictureSystem>(() => new PictureSystem(
-                                                          serviceProvider.GetService<IPictureRenderer>()));
-            systemFactory.Register<StampSystem>(() => new StampSystem());
-            systemFactory.Register<TileSystem>(() => new TileSystem());
-            systemFactory.Register<TextPresenterSystem>(() => new TextPresenterSystem(serviceProvider.GetService<IFontMan>()));
-            systemFactory.Register<TextSystem>(() => new TextSystem(serviceProvider.GetService<IEntityMan>(),
-                                                        serviceProvider.GetService<IFontMan>(),
-                                                        serviceProvider.GetService<ILogger>()));
+            systemFactory.Register<ViewportSystem>((world) => new ViewportSystem(
+                world,
+                serviceProvider.GetService<IEntityMan>(),                                        
+                serviceProvider.GetService<IWorldMan>(),
+                serviceProvider.GetService<IPrimitiveRenderer>(),
+                serviceProvider.GetService<IRenderingMan>(),
+                serviceProvider.GetService<IViewClient>()));
+            systemFactory.Register<SpriteSystem>((world) => new SpriteSystem(
+                world,
+                serviceProvider.GetService<ISpriteMan>(),
+                serviceProvider.GetService<ISpriteRenderer>()));
+            systemFactory.Register<PictureSystem>((world) => new PictureSystem(
+                world,
+                serviceProvider.GetService<IPictureRenderer>()));
+            systemFactory.Register<StampSystem>((world) => new StampSystem(world));
+            systemFactory.Register<TileSystem>((world) => new TileSystem(world));
+            systemFactory.Register<TextPresenterSystem>((world) => new TextPresenterSystem(
+                world,
+                serviceProvider.GetService<IFontMan>()));
+            systemFactory.Register<TextSystem>((world) => new TextSystem(
+                world,
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IFontMan>(),
+                serviceProvider.GetService<ILogger>()));
         }
     }
 }
