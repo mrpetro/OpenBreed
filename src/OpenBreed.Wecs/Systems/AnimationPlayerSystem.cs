@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Wecs.Worlds
+﻿namespace OpenBreed.Wecs.Systems
 {
     internal class AnimationPlayerSystem
     {

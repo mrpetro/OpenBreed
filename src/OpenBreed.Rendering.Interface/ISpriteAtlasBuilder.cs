@@ -31,6 +31,16 @@
         ISpriteAtlasBuilder AppendCoordsFromGrid(int cellWidth, int cellHeight, int columnsNo, int rowsNo, int offsetX = 0, int offsetY = 0);
 
         /// <summary>
+        /// Appends single sprite coordinates
+        /// </summary>
+        /// <param name="cellX">X position of cell</param>
+        /// <param name="cellY">>Y position of cell</param>
+        /// <param name="cellWidth">Width of cell</param>
+        /// <param name="cellHeight">Height of cell</param>
+        /// <returns>This builder instance</returns>
+        ISpriteAtlasBuilder AppendCoord(int cellX, int cellY, int cellWidth, int cellHeight);
+
+        /// <summary>
         /// Build sprite atlas
         /// </summary>
         /// <returns>Sprite atlas</returns>

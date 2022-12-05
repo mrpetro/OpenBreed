@@ -6,6 +6,7 @@ using OpenTK;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace OpenBreed.Rendering.OpenGL.Builders
 {
@@ -52,6 +53,31 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                 throw new InvalidOperationException($"Atlas with name '{name}' already exists.");
 
             Name = name;
+            return this;
+        }
+
+        public ISpriteAtlasBuilder AppendCoord(int cellX, int cellY, int cellWidth, int cellHeight)
+        {
+            if (cellX < 0)
+                throw new InvalidOperationException("Appended X coordinate is less or equal zero.");
+
+            if (cellY < 0)
+                throw new InvalidOperationException("Appended Y coordinate is less or equal zero.");
+
+            if (cellX + cellWidth > Texture.Width)
+                throw new InvalidOperationException("Appended X coordinate of sprite in texture is greater than texture width.");
+
+            if (cellY + cellHeight > Texture.Height)
+                throw new InvalidOperationException("Appended Y coordinate of sprite in texture is greater than texture height.");
+
+            if (cellWidth <= 0)
+                throw new InvalidOperationException("Appended grid cell width are less or equal zero.");
+
+            if (cellHeight <= 0)
+                throw new InvalidOperationException("Appended grid cell height are less or equal zero.");
+
+            bounds.Add(new Box2(cellX, cellY, cellX + cellWidth, cellY + cellHeight));
+
             return this;
         }
 
@@ -127,7 +153,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                 var spriteData = new SpriteData
                 {
                     U = (int)bound.Min.X,
-                    V = (int)bound.Max.Y,
+                    V = (int)bound.Min.Y,
                     Width = (int)bound.Size.X,
                     Height = (int)bound.Size.Y
                 };

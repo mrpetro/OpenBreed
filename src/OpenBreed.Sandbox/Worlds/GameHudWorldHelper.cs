@@ -126,16 +126,16 @@ namespace OpenBreed.Sandbox.Worlds
             //Create FontAtlas
             var fontAtlas = fontMan.Create()
                                      .SetName("StatusBar")
-                                     .AddCharacterFromSprite('0', "Vanilla/Common/Status#2", 0)
-                                     .AddCharacterFromSprite('1', "Vanilla/Common/Status#3", 0)
-                                     .AddCharacterFromSprite('2', "Vanilla/Common/Status#4", 0)
-                                     .AddCharacterFromSprite('3', "Vanilla/Common/Status#5", 0)
-                                     .AddCharacterFromSprite('4', "Vanilla/Common/Status#6", 0)
-                                     .AddCharacterFromSprite('5', "Vanilla/Common/Status#7", 0)
-                                     .AddCharacterFromSprite('6', "Vanilla/Common/Status#8", 0)
-                                     .AddCharacterFromSprite('7', "Vanilla/Common/Status#9", 0)
-                                     .AddCharacterFromSprite('8', "Vanilla/Common/Status#10", 0)
-                                     .AddCharacterFromSprite('9', "Vanilla/Common/Status#11", 0)
+                                     .AddCharacterFromSprite('0', "Vanilla/Common/Status", 2)
+                                     .AddCharacterFromSprite('1', "Vanilla/Common/Status", 3)
+                                     .AddCharacterFromSprite('2', "Vanilla/Common/Status", 4)
+                                     .AddCharacterFromSprite('3', "Vanilla/Common/Status", 5)
+                                     .AddCharacterFromSprite('4', "Vanilla/Common/Status", 6)
+                                     .AddCharacterFromSprite('5', "Vanilla/Common/Status", 7)
+                                     .AddCharacterFromSprite('6', "Vanilla/Common/Status", 8)
+                                     .AddCharacterFromSprite('7', "Vanilla/Common/Status", 9)
+                                     .AddCharacterFromSprite('8', "Vanilla/Common/Status", 10)
+                                     .AddCharacterFromSprite('9', "Vanilla/Common/Status", 11)
                                      .Build();
 
 

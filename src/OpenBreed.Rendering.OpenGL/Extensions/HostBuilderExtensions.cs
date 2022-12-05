@@ -7,6 +7,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
+using OpenBreed.Model;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
@@ -44,39 +45,44 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
             });
         }
 
-        public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
         {
-            dataLoaderFactory.Register<ISpriteAtlasDataLoader>(() => new SpriteAtlasDataLoader(managerCollection.GetService<IRepositoryProvider>(),
-                                                             managerCollection.GetService<AssetsDataProvider>(),
-                                                             managerCollection.GetService<ITextureMan>(),
-                                                             managerCollection.GetService<ISpriteMan>()));
+            dataLoaderFactory.Register<ISpriteAtlasDataLoader>(() => new SpriteAtlasDataLoader(
+                sp.GetService<IRepositoryProvider>(),                                           
+                sp.GetService<AssetsDataProvider>(),                                            
+                sp.GetService<ITextureMan>(),                                            
+                sp.GetService<ISpriteMan>(),                                             
+                sp.GetService<ISpriteMerger>()));
         }
 
-        public static void SetupPictureDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        public static void SetupPictureDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
         {
-            dataLoaderFactory.Register<IPictureDataLoader>(() => new PictureDataLoader(managerCollection.GetService<IRepositoryProvider>(),
-                                                             managerCollection.GetService<AssetsDataProvider>(),
-                                                             managerCollection.GetService<ITextureMan>(),
-                                                             managerCollection.GetService<IPictureMan>()));
+            dataLoaderFactory.Register<IPictureDataLoader>(() => new PictureDataLoader(
+                sp.GetService<IRepositoryProvider>(),                                           
+                sp.GetService<AssetsDataProvider>(),                                            
+                sp.GetService<ITextureMan>(),                                          
+                sp.GetService<IPictureMan>()));
         }
 
-        public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
         {
-            dataLoaderFactory.Register<ITileAtlasDataLoader>(() => new TileAtlasDataLoader(managerCollection.GetService<IRepositoryProvider>(),
-                                                             managerCollection.GetService<AssetsDataProvider>(),
-                                                             managerCollection.GetService<ITextureMan>(),
-                                                             managerCollection.GetService<ITileMan>(),
-                                                             managerCollection.GetService<ILogger>()));
+            dataLoaderFactory.Register<ITileAtlasDataLoader>(() => new TileAtlasDataLoader(
+                sp.GetService<IRepositoryProvider>(),                                            
+                sp.GetService<AssetsDataProvider>(),                                              
+                sp.GetService<ITextureMan>(),                                             
+                sp.GetService<ITileMan>(),                                           
+                sp.GetService<ILogger>()));
         }
 
-        public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
         {
-            dataLoaderFactory.Register<ITileStampDataLoader>(() => new TileStampDataLoader(managerCollection.GetService<IRepositoryProvider>(),
-                                                             managerCollection.GetService<AssetsDataProvider>(),
-                                                             managerCollection.GetService<ITextureMan>(),
-                                                             managerCollection.GetService<IStampMan>(),
-                                                             managerCollection.GetService<ITileMan>(),
-                                                             managerCollection.GetService<ILogger>()));
+            dataLoaderFactory.Register<ITileStampDataLoader>(() => new TileStampDataLoader(
+                sp.GetService<IRepositoryProvider>(),                                            
+                sp.GetService<AssetsDataProvider>(),                                              
+                sp.GetService<ITextureMan>(),                                           
+                sp.GetService<IStampMan>(),                                              
+                sp.GetService<ITileMan>(),                                             
+                sp.GetService<ILogger>()));
         }
     }
 }

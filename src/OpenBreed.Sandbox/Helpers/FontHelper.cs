@@ -74,12 +74,12 @@ namespace OpenBreed.Sandbox.Helpers
             for (int i = 0; i < 59; i++)
             {
                 var ch = 32 + (char)i;
-                fontAtlasBuilder.AddCharacterFromSprite(ch, $"Vanilla/Common/Computer/Font#{i}", 0, 8);
+                fontAtlasBuilder.AddCharacterFromSprite(ch, $"Vanilla/Common/Computer/Font", i, 8);
             }
 
-            fontAtlasBuilder.AddCharacterFromSprite('\0', $"Vanilla/Common/Computer/Font#{0}", 0, 8);
-            fontAtlasBuilder.AddCharacterFromSprite('\r', $"Vanilla/Common/Computer/Font#{0}", 0, 8);
-            fontAtlasBuilder.AddCharacterFromSprite('\n', $"Vanilla/Common/Computer/Font#{0}", 0, 8);
+            fontAtlasBuilder.AddCharacterFromSprite('\0', $"Vanilla/Common/Computer/Font", 0, 8);
+            fontAtlasBuilder.AddCharacterFromSprite('\r', $"Vanilla/Common/Computer/Font", 0, 8);
+            fontAtlasBuilder.AddCharacterFromSprite('\n', $"Vanilla/Common/Computer/Font", 0, 8);
             fontAtlasBuilder.SetHeight(12);
 
             var fontAtlas = fontAtlasBuilder.Build();

@@ -14,6 +14,7 @@ using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
+using OpenBreed.Common.Tools;
 using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
@@ -23,10 +24,14 @@ using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
+using OpenBreed.Model;
+using OpenBreed.Model.Extensions;
 using OpenBreed.Model.Palettes;
+using OpenBreed.Model.Sprites;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Reader.Legacy.Sprites.SPR;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
@@ -76,6 +81,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -234,6 +240,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupBroadphaseFactory<IEntity>();
 
             hostBuilder.SetupFixtureMan((s, a)=> { });
+            hostBuilder.SetupModelTools();
 
             hostBuilder.SetupShapeMan((shapeMan, sp) =>
             {
@@ -430,6 +437,36 @@ namespace OpenBreed.Sandbox
         [STAThread]
         private static void Main(string[] args)
         {
+            //var spriteMerger = new SpriteMarger();
+            //var spriteSetBuilder = new SpriteSetBuilder();
+            //var sprReader = new SPRReader(spriteSetBuilder);
+
+            //var inputFileName = @"D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)\extract\COMPFONT.SPR";
+
+            //var fileStream = File.OpenRead(inputFileName);
+            //var model = sprReader.Read(fileStream);
+            //byte[] outData = default;
+            //int width = -1;
+            //int height = -1;
+            //List<(int X, int Y, int Width, int Height)> bounds = default;
+            //spriteMerger.Merge(model.Sprites, out outData, out width, out height, out bounds);
+
+            //var bitmap = BitmapHelper.FromBytes(width, height, outData);
+
+            //var outputFileName = Path.Combine(Path.GetDirectoryName(inputFileName), $"{Path.GetFileNameWithoutExtension(inputFileName)}.png");
+
+            //bitmap.Save(outputFileName);
+
+            //return;
+
+
+
+
+
+
+
+
+
             //            var amfFilePath = @"D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)\extract\TITLE.AMF";
             //            var module = new OpenMpt.Module(amfFilePath);
 
