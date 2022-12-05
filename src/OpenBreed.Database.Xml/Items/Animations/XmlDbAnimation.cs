@@ -23,7 +23,7 @@ namespace OpenBreed.Database.Xml.Items.Animations
         public float Length { get; set; }
 
         [XmlArray("Tracks")]
-        [XmlArrayItem(ElementName = "IntegerTrack", Type = typeof(XmlDbAnimationTrack<int>))]
+        [XmlArrayItem(ElementName = "IntTrack", Type = typeof(XmlDbAnimationTrack<int>))]
         [XmlArrayItem(ElementName = "FloatTrack", Type = typeof(XmlDbAnimationTrack<float>))]
         [XmlArrayItem(ElementName = "StringTrack", Type = typeof(XmlDbAnimationTrack<string>))]
         public List<XmlDbAnimationTrack> XmlTracks { get; set; }

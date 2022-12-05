@@ -56,7 +56,7 @@
 		</Body>
 		<Motion></Motion>
 		<Sprite>
-			<AtlasName>Vanilla/Common/Hero/1#0</AtlasName>
+			<AtlasName>Vanilla/Common/Hero/1</AtlasName>
 			<ImageIndex>0</ImageIndex>
 			<Origin X="-2" Y="-2" />
 			<Order>100</Order>

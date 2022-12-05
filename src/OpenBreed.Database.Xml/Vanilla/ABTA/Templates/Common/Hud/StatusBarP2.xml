@@ -6,8 +6,8 @@
 		</Metadata>
 		<Position X="$(posX)" Y="$(posY)" />
 		<Sprite>
-			<AtlasName>Vanilla/Common/Status#1</AtlasName>
-			<ImageIndex>0</ImageIndex>
+			<AtlasName>Vanilla/Common/Status</AtlasName>
+			<ImageIndex>1</ImageIndex>
 			<Origin X="0" Y="0" />
 			<Order>0</Order>
 		</Sprite>

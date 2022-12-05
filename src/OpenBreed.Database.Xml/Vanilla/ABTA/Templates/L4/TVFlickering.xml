@@ -12,8 +12,8 @@
 		</Animation>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Sprite>
-			<AtlasName>Vanilla/L4/B#4</AtlasName>
-			<ImageIndex>0</ImageIndex>
+			<AtlasName>Vanilla/L4/B</AtlasName>
+			<ImageIndex>4</ImageIndex>
 			<Origin X="0" Y="-16" />
 			<Order>0</Order>
 		</Sprite>

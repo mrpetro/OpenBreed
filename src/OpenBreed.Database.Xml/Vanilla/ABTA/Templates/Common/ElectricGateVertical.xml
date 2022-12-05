@@ -34,8 +34,8 @@
 			</Fixtures>
 		</Body>
 		<Sprite>
-			<AtlasName>$(level)/A#8</AtlasName>
-			<ImageIndex>0</ImageIndex>
+			<AtlasName>$(level)/A</AtlasName>
+			<ImageIndex>8</ImageIndex>
 			<Origin X="0" Y="0" />
 			<Order>0</Order>
 		</Sprite>

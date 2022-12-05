@@ -12,7 +12,7 @@
 		</Animation>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Sprite>
-			<AtlasName>Vanilla/L4/B#0</AtlasName>
+			<AtlasName>Vanilla/L4/B</AtlasName>
 			<ImageIndex>0</ImageIndex>
 			<Origin X="0" Y="-16" />
 			<Order>0</Order>
