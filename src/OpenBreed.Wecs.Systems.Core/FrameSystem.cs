@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
@@ -9,7 +10,8 @@ using System;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class FrameSystem : UpdatableSystemBase
+    [RequireEntityWith(typeof(FrameComponent))]
+    public class FrameSystem : UpdatableSystemBase<FrameSystem>
     {
         #region Private Fields
 
@@ -32,7 +34,6 @@ namespace OpenBreed.Wecs.Systems.Core
             this.eventsMan = eventsMan;
             this.logger = logger;
 
-            RequireEntityWith<FrameComponent>();
         }
 
         #endregion Internal Constructors

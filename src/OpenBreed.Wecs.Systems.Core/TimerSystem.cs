@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
@@ -9,7 +10,8 @@ using System;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class TimerSystem : UpdatableSystemBase
+    [RequireEntityWith(typeof(TimerComponent))]
+    public class TimerSystem : UpdatableSystemBase<TimerSystem>
     {
         #region Private Fields
 
@@ -31,8 +33,6 @@ namespace OpenBreed.Wecs.Systems.Core
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;
             this.logger = logger;
-
-            RequireEntityWith<TimerComponent>();
         }
 
         #endregion Internal Constructors

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Extensions;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
@@ -11,7 +12,12 @@ namespace OpenBreed.Wecs.Systems.Physics
     /// <summary>
     /// System which tries to replicate ABTA actor direction behavior
     /// </summary>
-    public class DirectionSystemVanilla : UpdatableSystemBase
+    [RequireEntityWith(
+        typeof(AngularPositionComponent),
+        typeof(AngularVelocityComponent),
+        typeof(AngularThrustComponent))]
+
+    public class DirectionSystemVanilla : UpdatableSystemBase<DirectionSystemVanilla>
     {
         #region Private Fields
 
@@ -27,10 +33,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             base(world)
         {
             this.entityMan = entityMan;
-
-            RequireEntityWith<AngularPositionComponent>();
-            RequireEntityWith<AngularVelocityComponent>();
-            RequireEntityWith<AngularThrustComponent>();
         }
 
         #endregion Internal Constructors

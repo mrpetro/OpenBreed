@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Events;
@@ -9,7 +10,8 @@ using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Animation
 {
-    public class AnimatorSystem : UpdatableSystemBase
+    [RequireEntityWith(typeof(AnimationComponent))]
+    public class AnimatorSystem : UpdatableSystemBase<AnimatorSystem>
     {
         #region Private Fields
 
@@ -33,8 +35,6 @@ namespace OpenBreed.Wecs.Systems.Animation
             this.entityMan = entityMan;
             this.clipMan = clipMan;
             this.logger = logger;
-
-            RequireEntityWith<AnimationComponent>();
         }
 
         #endregion Internal Constructors

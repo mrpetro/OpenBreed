@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Sandbox.Worlds.Wecs.Systems;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Audio;
@@ -28,7 +29,6 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
 
             builder.AddSystem<FollowerSystem>();
-
             builder.AddSystem<AnimatorSystem>();
             builder.AddSystem<TimerSystem>();
             builder.AddSystem<FrameSystem>();
@@ -38,6 +38,7 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<VelocityChangedSystem>();
 
             //Audio Stage
+            //builder.AddSequenceUpdateSystem<SoundSystem>();
             builder.AddSystem<SoundSystem>();
 
             //Video Stage

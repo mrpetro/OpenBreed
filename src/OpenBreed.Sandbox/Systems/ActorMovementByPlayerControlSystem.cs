@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Input.Interface;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
@@ -11,7 +12,10 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Systems
 {
-    internal class ActorMovementByPlayerControlSystem : UpdatableSystemBase
+    [RequireEntityWith(
+        typeof(WalkingInputComponent),
+        typeof(ControlComponent))]
+    internal class ActorMovementByPlayerControlSystem : UpdatableSystemBase<ActorMovementByPlayerControlSystem>
     {
         #region Private Fields
 
@@ -31,9 +35,6 @@ namespace OpenBreed.Sandbox.Systems
         {
             this.entityMan = entityMan;
             this.playersMan = playersMan;
-
-            RequireEntityWith<WalkingInputComponent>();
-            RequireEntityWith<ControlComponent>();
         }
 
         #endregion Internal Constructors

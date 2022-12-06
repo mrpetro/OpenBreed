@@ -32,7 +32,7 @@
 //            this.worldMan = worldMan;
 //            this.collisionMan = collisionMan;
 
-//            RequireEntityWith<CollisionComponent>();
+//            [RequireEntityWith(typeof(CollisionComponent>();
 //        }
 
 //        #endregion Public Constructors

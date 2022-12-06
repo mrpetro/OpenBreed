@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
@@ -6,7 +7,8 @@ using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class StampSystem : UpdatableSystemBase
+    [RequireEntityWith(typeof(StampPutterComponent))]
+    public class StampSystem : UpdatableSystemBase<StampSystem>
     {
         #region Private Fields
 
@@ -19,8 +21,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         public StampSystem(IWorld world) :
             base(world)
         {
-            RequireEntityWith<StampPutterComponent>();
-
             tileGrid = world.GetModule<ITileGrid>();
         }
 

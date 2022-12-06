@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -18,7 +19,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
     /// - CameraComponent
     /// - Position
     /// </summary>
-    public class ViewportSystem : SystemBase, IRenderable
+    [RequireEntityWith(
+        typeof(ViewportComponent),
+        typeof(PositionComponent))]
+    public class ViewportSystem : SystemBase<ViewportSystem>, IRenderable
     {
         #region Private Fields
 
@@ -47,8 +51,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.primitiveRenderer = primitiveRenderer;
             this.renderingMan = renderingMan;
             this.viewClient = viewClient;
-            RequireEntityWith<ViewportComponent>();
-            RequireEntityWith<PositionComponent>();
 
             world.GetModule<IRenderableBatch>().Add(this);
         }

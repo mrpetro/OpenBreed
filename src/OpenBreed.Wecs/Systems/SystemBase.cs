@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
@@ -9,6 +10,95 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems
 {
+    public abstract class SystemBase<TSystem> : SystemBase where TSystem : ISystem
+    {
+        private static readonly List<Type> requiredComponentTypes = new List<Type>();
+
+        private static readonly List<Type> forbiddenComponentTypes = new List<Type>();
+
+        static SystemBase()
+        {
+            var systemType = typeof(TSystem);
+
+            var attributes = systemType.GetCustomAttributes(inherit: true);
+
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                switch (attributes[i])
+                {
+                    case RequireEntityWithAttribute requireEntityWithAttribute:
+                        foreach (var componentType in requireEntityWithAttribute.ComponentTypes)
+                            RequireEntityWith(componentType);
+                        break;
+                    case RequireEntityWithoutAttribute requireEntityWithoutAttribute:
+                        foreach (var componentType in requireEntityWithoutAttribute.ComponentTypes)
+                            RequireEntityWithout(componentType);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        protected SystemBase(IWorld world) : base(world)
+        {
+        }
+
+
+        public override bool Matches(IEntity entity)
+        {
+            foreach (var type in forbiddenComponentTypes)
+            {
+                if (entity.ComponentTypes.Any(item => type.IsAssignableFrom(item)))
+                    return false;
+            }
+
+            foreach (var type in requiredComponentTypes)
+            {
+                if (!entity.ComponentTypes.Any(item => type.IsAssignableFrom(item)))
+                    return false;
+            }
+
+            return true;
+        }
+
+        //protected static int RequireEntityWith<TComponent>() where TComponent : IEntityComponent
+        //{
+        //    return RequireEntityWith(typeof(TComponent));
+        //}
+
+        //protected static int RequireEntityWithout<TComponent>() where TComponent : IEntityComponent
+        //{
+        //    return RequireEntityWithout(typeof(TComponent));
+        //}
+
+        protected static int RequireEntityWith(Type componentType)
+        {
+            var typeIndex = requiredComponentTypes.IndexOf(componentType);
+
+            if (typeIndex >= 0)
+                return typeIndex;
+            else
+            {
+                requiredComponentTypes.Add(componentType);
+                return requiredComponentTypes.Count - 1;
+            }
+        }
+
+        protected static int RequireEntityWithout(Type componentType)
+        {
+            var typeIndex = forbiddenComponentTypes.IndexOf(componentType);
+
+            if (typeIndex >= 0)
+                return typeIndex;
+            else
+            {
+                forbiddenComponentTypes.Add(componentType);
+                return forbiddenComponentTypes.Count - 1;
+            }
+        }
+    }
+
     public abstract class SystemBase : ISystem
     {
         #region Private Fields
@@ -17,9 +107,6 @@ namespace OpenBreed.Wecs.Systems
 
         private readonly HashSet<IEntity> toRemove = new HashSet<IEntity>();
 
-        private readonly List<Type> requiredComponentTypes = new List<Type>();
-
-        private readonly List<Type> forbiddenComponentTypes = new List<Type>();
 
         #endregion Private Fields
 
@@ -29,7 +116,6 @@ namespace OpenBreed.Wecs.Systems
         {
             World = world;
 
-            RequiredComponentTypes = new ReadOnlyCollection<Type>(requiredComponentTypes);
         }
 
         #endregion Protected Constructors
@@ -46,28 +132,11 @@ namespace OpenBreed.Wecs.Systems
         /// </summary>
         public int PhaseId { get; }
 
-        public IReadOnlyCollection<Type> RequiredComponentTypes { get; }
-
         #endregion Public Properties
 
         #region Public Methods
 
-        public bool Matches(IEntity entity)
-        {
-            foreach (var type in forbiddenComponentTypes)
-            {
-                if (entity.ComponentTypes.Any(item => type.IsAssignableFrom(item)))
-                    return false;
-            }
-
-            foreach (var type in requiredComponentTypes)
-            {
-                if (!entity.ComponentTypes.Any(item => type.IsAssignableFrom(item)))
-                    return false;
-            }
-
-            return true;
-        }
+        public abstract bool Matches(IEntity entity);
 
         public void RequestAddEntity(IEntity entity)
         {
@@ -113,36 +182,6 @@ namespace OpenBreed.Wecs.Systems
         protected abstract void OnRemoveEntity(IEntity entity);
 
         protected abstract void OnAddEntity(IEntity entity);
-
-        protected int RequireEntityWith<TComponent>() where TComponent : IEntityComponent
-        {
-            var type = typeof(TComponent);
-
-            var typeIndex = requiredComponentTypes.IndexOf(type);
-
-            if (typeIndex >= 0)
-                return typeIndex;
-            else
-            {
-                requiredComponentTypes.Add(type);
-                return requiredComponentTypes.Count - 1;
-            }
-        }
-
-        protected int RequireEntityWithout<TComponent>() where TComponent : IEntityComponent
-        {
-            var type = typeof(TComponent);
-
-            var typeIndex = forbiddenComponentTypes.IndexOf(type);
-
-            if (typeIndex >= 0)
-                return typeIndex;
-            else
-            {
-                forbiddenComponentTypes.Add(type);
-                return forbiddenComponentTypes.Count - 1;
-            }
-        }
 
         #endregion Protected Methods
     }

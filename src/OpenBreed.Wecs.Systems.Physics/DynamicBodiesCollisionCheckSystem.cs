@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
@@ -12,7 +13,11 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class DynamicBodiesCollisionCheckSystem : SystemBase, IUpdatableSystem
+    [RequireEntityWith(
+        typeof(BodyComponent),
+        typeof(VelocityComponent),
+        typeof(PositionComponent))]
+    public class DynamicBodiesCollisionCheckSystem : SystemBase<DynamicBodiesCollisionCheckSystem>, IUpdatableSystem
     {
         #region Private Fields
 
@@ -38,10 +43,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;
             this.collisionMan = collisionMan;
-
-            RequireEntityWith<BodyComponent>();
-            RequireEntityWith<VelocityComponent>();
-            RequireEntityWith<PositionComponent>();
 
             broadphaseGrid = world.GetModule<IBroadphaseStatic>();
             broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();

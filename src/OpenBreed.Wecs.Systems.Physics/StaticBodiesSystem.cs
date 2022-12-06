@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
@@ -10,7 +11,11 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class StaticBodiesSystem : SystemBase
+    [RequireEntityWith(
+        typeof(BodyComponent),
+        typeof(PositionComponent))]
+    [RequireEntityWithout(typeof(VelocityComponent))]
+    public class StaticBodiesSystem : SystemBase<StaticBodiesSystem>
     {
         #region Private Fields
 
@@ -36,9 +41,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;
             this.eventsMan = eventsMan;
-            RequireEntityWith<BodyComponent>();
-            RequireEntityWith<PositionComponent>();
-            RequireEntityWithout<VelocityComponent>();
+
 
             broadphaseGrid = world.GetModule<IBroadphaseStatic>();
         }

@@ -1,27 +1,27 @@
-﻿using OpenBreed.Wecs.Attributes;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Entities;
+﻿using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 
-namespace OpenBreed.Wecs.Systems.Core
+namespace OpenBreed.Wecs.Systems
 {
-    public abstract class UpdatableSystemBase<TSystem> : SystemBase<TSystem>, IUpdatableSystem where TSystem : ISystem
+    public class SequenceUpdateSystem : SystemBase<SequenceUpdateSystem>, IUpdatableSystem
     {
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly IEntityUpdateSystem entityUpdateSystem;
 
         #endregion Private Fields
 
-        #region Protected Constructors
+        #region Public Constructors
 
-        protected UpdatableSystemBase(IWorld world) :
+        public SequenceUpdateSystem(IWorld world, IEntityUpdateSystem entityUpdateSystem) :
                     base(world)
         {
+            this.entityUpdateSystem = entityUpdateSystem;
         }
 
-        #endregion Protected Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -29,17 +29,17 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             if (context.Paused)
             {
-                for (int i = 0; i < entities.Count; i++)
-                {
-                    if (entities[i].Contains<PauseImmuneComponent>())
-                        UpdateEntity(entities[i], context);
-                }
+                //for (int i = 0; i < entities.Count; i++)
+                //{
+                //    if (entities[i].Contains<PauseImmuneComponent>())
+                //        entityUpdateSystem.Update(entities[i], context);
+                //}
             }
             else
             {
                 for (int i = 0; i < entities.Count; i++)
                 {
-                    UpdateEntity(entities[i], context);
+                    entityUpdateSystem.Update(entities[i], context);
                 }
             }
         }
@@ -53,8 +53,6 @@ namespace OpenBreed.Wecs.Systems.Core
         protected override void OnAddEntity(IEntity entity) => entities.Add(entity);
 
         protected override void OnRemoveEntity(IEntity entity) => entities.Remove(entity);
-
-        protected abstract void UpdateEntity(IEntity entity, IWorldContext context);
 
         #endregion Protected Methods
     }

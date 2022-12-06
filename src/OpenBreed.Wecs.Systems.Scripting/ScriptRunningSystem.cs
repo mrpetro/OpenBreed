@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
@@ -11,7 +12,8 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Scripting
 {
-    public class ScriptRunningSystem : UpdatableSystemBase
+    [RequireEntityWith(typeof(ScriptComponent))]
+    public class ScriptRunningSystem : UpdatableSystemBase<ScriptRunningSystem>
     {
         #region Private Fields
 
@@ -30,8 +32,6 @@ namespace OpenBreed.Wecs.Systems.Scripting
         {
             this.scriptMan = scriptMan;
             this.logger = logger;
-
-            RequireEntityWith<ScriptComponent>();
         }
 
         #endregion Internal Constructors

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Input.Interface;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
@@ -16,7 +17,10 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Systems
 {
-    internal class ActorScriptByPlayerControlSystem : UpdatableSystemBase
+    [RequireEntityWith(
+        typeof(AttackInputComponent),
+        typeof(ControlComponent))]
+    internal class ActorScriptByPlayerControlSystem : UpdatableSystemBase<ActorScriptByPlayerControlSystem>
     {
         #region Private Fields
 
@@ -41,8 +45,7 @@ namespace OpenBreed.Sandbox.Systems
             this.playersMan = playersMan;
             this.scriptMan = scriptMan;
             this.logger = logger;
-            RequireEntityWith<AttackInputComponent>();
-            RequireEntityWith<ControlComponent>();
+
         }
 
         #endregion Internal Constructors

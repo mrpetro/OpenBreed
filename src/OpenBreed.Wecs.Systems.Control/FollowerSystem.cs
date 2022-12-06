@@ -1,11 +1,15 @@
-﻿using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
-    public class FollowerSystem : UpdatableSystemBase
+    [RequireEntityWith(
+        typeof(FollowedComponent),
+        typeof(PositionComponent))]
+    public class FollowerSystem : UpdatableSystemBase<FollowerSystem>
     {
         #region Private Fields
 
@@ -22,8 +26,6 @@ namespace OpenBreed.Wecs.Systems.Control
         {
             this.entityMan = entityMan;
 
-            RequireEntityWith<FollowedComponent>();
-            RequireEntityWith<PositionComponent>();
         }
 
         #endregion Public Constructors

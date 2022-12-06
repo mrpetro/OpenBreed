@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Physics.Interface;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
@@ -12,7 +13,10 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Gui
 {
-    public class PhysicsDebugDisplaySystem : SystemBase, IRenderable
+    [RequireEntityWith(
+        typeof(BodyComponent),
+        typeof(PositionComponent))]
+    public class PhysicsDebugDisplaySystem : SystemBase<PhysicsDebugDisplaySystem>, IRenderable
     {
         #region Private Fields
 
@@ -32,10 +36,6 @@ namespace OpenBreed.Wecs.Systems.Gui
             base(world)
         {
             this.primitiveRenderer = primitiveRenderer;
-
-            RequireEntityWith<BodyComponent>();
-            RequireEntityWith<PositionComponent>();
-
             broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
             world.GetModule<IRenderableBatch>().Add(this);
         }

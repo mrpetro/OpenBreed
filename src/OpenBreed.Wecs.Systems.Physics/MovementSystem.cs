@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
@@ -7,7 +8,12 @@ using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class MovementSystem : UpdatableSystemBase
+    [RequireEntityWith(
+        typeof(ThrustComponent),
+        typeof(PositionComponent),
+        typeof(VelocityComponent),
+        typeof(BodyComponent))]
+    public class MovementSystem : UpdatableSystemBase<MovementSystem>
     {
         #region Private Fields
 
@@ -24,11 +30,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             base(world)
         {
             this.entityMan = entityMan;
-
-            RequireEntityWith<ThrustComponent>();
-            RequireEntityWith<PositionComponent>();
-            RequireEntityWith<VelocityComponent>();
-            RequireEntityWith<BodyComponent>();
         }
 
         #endregion Internal Constructors

@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -10,7 +11,10 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class SpriteSystem : SystemBase, IRenderable
+    [RequireEntityWith(
+        typeof(SpriteComponent),
+        typeof(PositionComponent))]
+    public class SpriteSystem : SystemBase<SpriteSystem>, IRenderable
     {
         #region Private Fields
 
@@ -30,8 +34,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             this.spriteMan = spriteMan;
             this.spriteRenderer = spriteRenderer;
-            RequireEntityWith<SpriteComponent>();
-            RequireEntityWith<PositionComponent>();
 
             world.GetModule<IRenderableBatch>().Add(this);
         }

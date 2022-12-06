@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Audio;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Audio.Events;
@@ -9,7 +10,8 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Audio
 {
-    public class SoundSystem : UpdatableSystemBase
+    [RequireEntityWith(typeof(SoundPlayerComponent))]
+    public class SoundSystem : UpdatableSystemBase<SoundSystem>
     {
         #region Private Fields
 
@@ -28,7 +30,7 @@ namespace OpenBreed.Wecs.Systems.Audio
         {
             this.soundMan = soundMan;
             this.eventsMan = eventsMan;
-            RequireEntityWith<SoundPlayerComponent>();
+
         }
 
         #endregion Public Constructors

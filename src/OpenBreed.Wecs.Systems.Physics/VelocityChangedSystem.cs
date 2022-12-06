@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Events;
@@ -12,7 +13,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    public class VelocityChangedSystem : UpdatableSystemBase
+    [RequireEntityWith(typeof(VelocityComponent))]
+    public class VelocityChangedSystem : UpdatableSystemBase<VelocityChangedSystem>
     {
         #region Private Fields
 
@@ -30,8 +32,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             base(world)
         {
             this.entityMan = entityMan;
-
-            RequireEntityWith<VelocityComponent>();
         }
 
         #endregion Internal Constructors

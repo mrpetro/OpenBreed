@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -9,7 +10,11 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class TextPresenterSystem : SystemBase, IRenderable
+    [RequireEntityWith(
+        typeof(TextDataComponent),
+        typeof(TextPresentationComponent),
+        typeof(PositionComponent))]
+    public class TextPresenterSystem : SystemBase<TextPresenterSystem>, IRenderable
     {
         #region Private Fields
 
@@ -26,10 +31,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             base(world)
         {
             this.fontMan = fontMan;
-
-            RequireEntityWith<TextDataComponent>();
-            RequireEntityWith<TextPresentationComponent>();
-            RequireEntityWith<PositionComponent>();
         }
 
         #endregion Internal Constructors

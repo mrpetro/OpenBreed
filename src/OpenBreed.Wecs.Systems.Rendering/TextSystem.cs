@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -11,7 +12,10 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class TextSystem : SystemBase, IRenderable
+    [RequireEntityWith(
+        typeof(TextComponent),
+        typeof(PositionComponent))]
+    public class TextSystem : SystemBase<TextSystem>, IRenderable
     {
         #region Private Fields
 
@@ -34,9 +38,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.entityMan = entityMan;
             this.fontMan = fontMan;
             this.logger = logger;
-
-            RequireEntityWith<TextComponent>();
-            RequireEntityWith<PositionComponent>();
 
             world.GetModule<IRenderableBatch>().Add(this);
         }

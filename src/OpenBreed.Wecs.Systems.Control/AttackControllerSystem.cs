@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Input.Interface;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Extensions;
@@ -9,7 +10,10 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
-    public class AttackControllerSystem : UpdatableSystemBase
+    [RequireEntityWith(
+        typeof(AttackInputComponent),
+        typeof(AttackControlComponent))]
+    public class AttackControllerSystem : UpdatableSystemBase<AttackControllerSystem>
     {
         #region Private Fields
 
@@ -22,11 +26,7 @@ namespace OpenBreed.Wecs.Systems.Control
         internal AttackControllerSystem(IWorld world, IPlayersMan playersMan) :
             base(world)
         {
-
             this.playersMan = playersMan;
-
-            RequireEntityWith<AttackInputComponent>();
-            RequireEntityWith<AttackControlComponent>();
         }
 
         #endregion Internal Constructors

@@ -1,10 +1,14 @@
-﻿using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class TextInputSystem : UpdatableSystemBase
+    [RequireEntityWith(
+        typeof(TextCaretComponent),
+        typeof(TextDataComponent))]
+    public class TextInputSystem : UpdatableSystemBase<TextInputSystem>
     {
         #region Private Fields
 
@@ -21,8 +25,6 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             this.entityMan = entityMan;
 
-            RequireEntityWith<TextCaretComponent>();
-            RequireEntityWith<TextDataComponent>();
         }
 
         #endregion Internal Constructors

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Wecs.Components;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -14,7 +15,10 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
 {
-    public class UnknownMapCellDisplaySystem : SystemBase, IRenderable
+    [RequireEntityWith(
+        typeof(PositionComponent),
+        typeof(UnknownCodeComponent))]
+    public class UnknownMapCellDisplaySystem : SystemBase<UnknownMapCellDisplaySystem>, IRenderable
     {
         #region Private Fields
 
@@ -39,8 +43,6 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
             this.primitiveRenderer = primitiveRenderer;
             this.fontMan = fontMan;
 
-            RequireEntityWith<PositionComponent>();
-            RequireEntityWith<UnknownCodeComponent>();
 
             font = fontMan.GetOSFont("ARIAL", 8);
             world.GetModule<IRenderableBatch>().Add(this);

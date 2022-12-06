@@ -28,7 +28,7 @@ namespace OpenBreed.Wecs.Worlds
 
         internal readonly WorldMan worldMan;
         internal string name;
-        internal Dictionary<Type, Func<IWorld, ISystem>> systemInitializers = new Dictionary<Type, Func<IWorld, ISystem>>();
+        internal Dictionary<Type, Func<ISystemFactory, IWorld, ISystem>> systemInitializers = new Dictionary<Type, Func<ISystemFactory, IWorld, ISystem>>();
 
         internal Dictionary<Type, object> modules = new Dictionary<Type, object>();
 
@@ -60,7 +60,7 @@ namespace OpenBreed.Wecs.Worlds
         internal IEnumerable<ISystem> CreateSystems(IWorld world)
         {
             foreach (var initializer in systemInitializers.Values)
-                yield return initializer.Invoke(world);
+                yield return initializer.Invoke(systemFactory, world);
         }
 
         public void AddModule<TModule>(TModule module)
@@ -73,7 +73,7 @@ namespace OpenBreed.Wecs.Worlds
             modules.Add(moduleType, module);
         }
 
-        public void AddSystem<TSystem>(Func<IWorld, ISystem> initializer = null) where TSystem : ISystem
+        public void AddSystem<TSystem>(Func<ISystemFactory, IWorld, ISystem> initializer = null) where TSystem : ISystem
         {
             var systemType = typeof(TSystem);
 
@@ -81,7 +81,7 @@ namespace OpenBreed.Wecs.Worlds
                 throw new InvalidOperationException($"System with type '{systemType}' already added.");
 
             if (initializer is null)
-                initializer = systemFactory.Create<TSystem>;
+                initializer = (systemFactory, world) => systemFactory.Create<TSystem>(world);
 
             systemInitializers.Add(systemType, initializer);
         }

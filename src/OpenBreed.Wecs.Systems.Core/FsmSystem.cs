@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Fsm;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
@@ -8,7 +9,8 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class FsmSystem : UpdatableSystemBase
+    [RequireEntityWith(typeof(FsmComponent))]
+    public class FsmSystem : UpdatableSystemBase<FsmSystem>
     {
         #region Private Fields
 
@@ -27,8 +29,6 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             this.fsmMan = fsmMan;
             this.logger = logger;
-
-            RequireEntityWith<FsmComponent>();
         }
 
         #endregion Public Constructors

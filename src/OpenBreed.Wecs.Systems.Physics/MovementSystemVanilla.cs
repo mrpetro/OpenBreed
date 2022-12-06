@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
@@ -11,7 +12,12 @@ namespace OpenBreed.Wecs.Systems.Physics
     /// <summary>
     /// System which tries to replicate ABTA actor movement behavior
     /// </summary>
-    public class MovementSystemVanilla : UpdatableSystemBase
+    [RequireEntityWith(
+        typeof(ThrustComponent),
+        typeof(PositionComponent),
+        typeof(VelocityComponent),
+        typeof(BodyComponent))]
+    public class MovementSystemVanilla : UpdatableSystemBase<MovementSystemVanilla>
     {
         #region Private Fields
 
@@ -29,11 +35,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             base(world)
         {
             this.entityMan = entityMan;
-
-            RequireEntityWith<ThrustComponent>();
-            RequireEntityWith<PositionComponent>();
-            RequireEntityWith<VelocityComponent>();
-            RequireEntityWith<BodyComponent>();
         }
 
         #endregion Internal Constructors

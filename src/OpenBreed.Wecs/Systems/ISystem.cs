@@ -36,11 +36,6 @@ namespace OpenBreed.Wecs.Systems
 
         void RequestRemoveEntity(IEntity entity);
 
-        /// <summary>
-        /// Get types of entity components required by this system
-        /// </summary>
-        IReadOnlyCollection<Type> RequiredComponentTypes { get; }
-
         #endregion Public Methods
     }
 }

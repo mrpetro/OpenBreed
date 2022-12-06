@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -10,7 +11,10 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    public class PictureSystem : SystemBase, IRenderable
+    [RequireEntityWith(
+        typeof(PictureComponent),
+        typeof(PositionComponent))]
+    public class PictureSystem : SystemBase<PictureSystem>, IRenderable
     {
         #region Private Fields
 
@@ -27,8 +31,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             base(world)
         {
             this.imageRenderer = imageRenderer;
-            RequireEntityWith<PictureComponent>();
-            RequireEntityWith<PositionComponent>();
 
             world.GetModule<IRenderableBatch>().Add(this);
         }

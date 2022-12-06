@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
@@ -7,7 +8,8 @@ using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class PausingSystem : UpdatableSystemBase
+    [RequireEntityWith(typeof(PauserComponent))]
+    public class PausingSystem : UpdatableSystemBase<PausingSystem>
     {
         #region Private Fields
 
@@ -26,8 +28,6 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             this.worldMan = worldMan;
             this.eventsMan = eventsMan;
-
-            RequireEntityWith<PauserComponent>();
         }
 
         #endregion Public Constructors
