@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Public Methods
 
-        WorldBuilder Create();
+        IWorldBuilder Create();
 
         IWorld GetById(int id);
 

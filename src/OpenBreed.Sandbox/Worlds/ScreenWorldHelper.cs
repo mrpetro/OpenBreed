@@ -16,6 +16,7 @@ using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Audio;
 using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
@@ -85,7 +86,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Methods
 
-        public void AddSystems(WorldBuilder builder)
+        public void AddSystems(IWorldBuilder builder)
         {
             //Input Stage
             builder.AddSystem<ActorMovementByPlayerControlSystem>();
@@ -96,6 +97,7 @@ namespace OpenBreed.Sandbox.Worlds
             //Video
 
             builder.AddSystem<ViewportSystem>();
+            //builder.AddSystem<SoundSystem>();
             builder.AddSystem<SoundSystem>();
             builder.AddSystem<TimerSystem>();
             builder.AddSystem<FrameSystem>();

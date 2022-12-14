@@ -44,8 +44,6 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             var soundSystem = this.CreateSoundSystem();
             SetupMockEntity(mockEntity, null);
             SetupWorldContext(mockContext, paused: false);
-            soundSystem.RequestAddEntity(mockEntity.Object);
-            soundSystem.Cleanup();
 
             // Act
             soundSystem.Update(mockContext.Object);
@@ -61,8 +59,6 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             var soundSystem = this.CreateSoundSystem();
             SetupMockEntity(mockEntity, new SoundPlayerComponent());
             SetupWorldContext(mockContext, paused: false);
-            soundSystem.RequestAddEntity(mockEntity.Object);
-            soundSystem.Cleanup();
 
             // Act
             soundSystem.Update(mockContext.Object);
@@ -81,7 +77,6 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             component.ToPlay.AddRange(sampleIds);
             SetupMockEntity(mockEntity, component);
             SetupWorldContext(mockContext, paused: false);
-            soundSystem.RequestAddEntity(mockEntity.Object);
             soundSystem.Cleanup();
 
             // Act

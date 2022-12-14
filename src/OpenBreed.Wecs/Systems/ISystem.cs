@@ -7,6 +7,14 @@ using System.Collections.Generic;
 namespace OpenBreed.Wecs.Systems
 {
     /// <summary>
+    /// Interface to subsystem
+    /// </summary>
+    public interface ISubsystem
+    {
+
+    }
+
+    /// <summary>
     /// Interface to system which is part of some world
     /// </summary>
     public interface ISystem
@@ -28,7 +36,7 @@ namespace OpenBreed.Wecs.Systems
         /// </summary>
         void Cleanup();
 
-        bool Matches(IEntity entity);
+        //bool Matches(IEntity entity);
 
         bool HasEntity(IEntity entity);
 

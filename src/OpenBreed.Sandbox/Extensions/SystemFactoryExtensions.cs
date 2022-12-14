@@ -18,21 +18,21 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupGameSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
-            systemFactory.Register<ActorMovementByPlayerControlSystem>((world) => new ActorMovementByPlayerControlSystem(
+            systemFactory.RegisterSystem<ActorMovementByPlayerControlSystem>((world) => new ActorMovementByPlayerControlSystem(
                 world,
                 sp.GetService<IEntityMan>(),
                 sp.GetService<IPlayersMan>()));
-            systemFactory.Register<ActorScriptByPlayerControlSystem>((world) => new ActorScriptByPlayerControlSystem(
+            systemFactory.RegisterSystem<ActorScriptByPlayerControlSystem>((world) => new ActorScriptByPlayerControlSystem(
                 world,
                 sp.GetService<IEntityMan>(),
                 sp.GetService<IPlayersMan>(),
                 sp.GetService<IScriptMan>(),
                 sp.GetService<ILogger>()));
-            systemFactory.Register<UnknownMapCellDisplaySystem>((world) => new UnknownMapCellDisplaySystem(
+            systemFactory.RegisterSystem<UnknownMapCellDisplaySystem>((world) => new UnknownMapCellDisplaySystem(
                 world,
                 sp.GetService<IPrimitiveRenderer>(),
                 sp.GetService<IFontMan>()));
-            systemFactory.Register<GroupMapCellDisplaySystem>((world) => new GroupMapCellDisplaySystem(
+            systemFactory.RegisterSystem<GroupMapCellDisplaySystem>((world) => new GroupMapCellDisplaySystem(
                 world,
                 sp.GetService<IPrimitiveRenderer>(),
                 sp.GetService<IFontMan>()));

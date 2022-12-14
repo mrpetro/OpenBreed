@@ -16,21 +16,21 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 
         public static void SetupCoreSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register<FsmSystem>((world) => new FsmSystem(world, serviceProvider.GetService<IFsmMan>(),
+            systemFactory.RegisterSystem<FsmSystem>((world) => new FsmSystem(world, serviceProvider.GetService<IFsmMan>(),
                                                                   serviceProvider.GetService<ILogger>()));
-            systemFactory.Register<TextInputSystem>((world) => new TextInputSystem(world, serviceProvider.GetService<IEntityMan>()));
-            systemFactory.Register<TimerSystem>((world) => new TimerSystem(
+            systemFactory.RegisterSystem<TextInputSystem>((world) => new TextInputSystem(world, serviceProvider.GetService<IEntityMan>()));
+            systemFactory.RegisterSystem<TimerSystem>((world) => new TimerSystem(
                 world,
                 serviceProvider.GetService<IEntityMan>(),
                 serviceProvider.GetService<IEventsMan>(),
                 serviceProvider.GetService<ILogger>()));
-            systemFactory.Register<FrameSystem>((world) => new FrameSystem(
+            systemFactory.RegisterSystem<FrameSystem>((world) => new FrameSystem(
                 world,
                 serviceProvider.GetService<IEntityMan>(),
                 serviceProvider.GetService<IEventsMan>(),
                 serviceProvider.GetService<ILogger>()));
 
-            systemFactory.Register<PausingSystem>((world) => new PausingSystem(
+            systemFactory.RegisterSystem<PausingSystem>((world) => new PausingSystem(
                 world,
                 serviceProvider.GetService<IWorldMan>(),                                                    
                 serviceProvider.GetService<IEventsMan>()));

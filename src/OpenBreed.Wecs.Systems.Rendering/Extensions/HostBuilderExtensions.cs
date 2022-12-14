@@ -23,26 +23,26 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
     {
         public static void SetupRenderingSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
-            systemFactory.Register<ViewportSystem>((world) => new ViewportSystem(
+            systemFactory.RegisterSystem<ViewportSystem>((world) => new ViewportSystem(
                 world,
                 serviceProvider.GetService<IEntityMan>(),                                        
                 serviceProvider.GetService<IWorldMan>(),
                 serviceProvider.GetService<IPrimitiveRenderer>(),
                 serviceProvider.GetService<IRenderingMan>(),
                 serviceProvider.GetService<IViewClient>()));
-            systemFactory.Register<SpriteSystem>((world) => new SpriteSystem(
+            systemFactory.RegisterSystem<SpriteSystem>((world) => new SpriteSystem(
                 world,
                 serviceProvider.GetService<ISpriteMan>(),
                 serviceProvider.GetService<ISpriteRenderer>()));
-            systemFactory.Register<PictureSystem>((world) => new PictureSystem(
+            systemFactory.RegisterSystem<PictureSystem>((world) => new PictureSystem(
                 world,
                 serviceProvider.GetService<IPictureRenderer>()));
-            systemFactory.Register<StampSystem>((world) => new StampSystem(world));
-            systemFactory.Register<TileSystem>((world) => new TileSystem(world));
-            systemFactory.Register<TextPresenterSystem>((world) => new TextPresenterSystem(
+            systemFactory.RegisterSystem<StampSystem>((world) => new StampSystem(world));
+            systemFactory.RegisterSystem<TileSystem>((world) => new TileSystem(world));
+            systemFactory.RegisterSystem<TextPresenterSystem>((world) => new TextPresenterSystem(
                 world,
                 serviceProvider.GetService<IFontMan>()));
-            systemFactory.Register<TextSystem>((world) => new TextSystem(
+            systemFactory.RegisterSystem<TextSystem>((world) => new TextSystem(
                 world,
                 serviceProvider.GetService<IEntityMan>(),
                 serviceProvider.GetService<IFontMan>(),

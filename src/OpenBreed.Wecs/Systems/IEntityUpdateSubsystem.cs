@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace OpenBreed.Wecs.Systems
 {
     /// <summary>
-    /// System that state will be updated during core update phase
+    /// Interface of subsystem that updates single entity
     /// </summary>
-    public interface IEntityUpdateSystem : ISystem
+    public interface IEntityUpdateSubsystem : ISubsystem
     {
         /// <summary>
         /// Update entity using given world context

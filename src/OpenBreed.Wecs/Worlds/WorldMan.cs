@@ -22,6 +22,7 @@ namespace OpenBreed.Wecs.Worlds
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
         private readonly ISystemFactory systemFactory;
+        private readonly IEntityToSystemMatcher entityToSystemMatcher;
         private readonly IdMap<World> IdsToWorldsLookup = new IdMap<World>();
         private readonly ILogger logger;
         private readonly Dictionary<string, int> namesToIdsLookup = new Dictionary<string, int>();
@@ -38,12 +39,14 @@ namespace OpenBreed.Wecs.Worlds
             IEntityMan entityMan,
             IEventsMan eventsMan,
             ISystemFactory systemFactory,
+            IEntityToSystemMatcher entityToSystemMatcher,
             IScriptMan scriptMan,
             ILogger logger)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;
             this.systemFactory = systemFactory;
+            this.entityToSystemMatcher = entityToSystemMatcher;
             this.scriptMan = scriptMan;
             this.logger = logger;
 
@@ -57,9 +60,9 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Public Methods
 
-        public WorldBuilder Create()
+        public IWorldBuilder Create()
         {
-            return new WorldBuilder(this, logger, systemFactory);
+            return new WorldBuilder(this, entityToSystemMatcher, logger, systemFactory);
         }
 
         /// <summary>

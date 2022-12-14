@@ -35,10 +35,27 @@ namespace OpenBreed.Wecs.Extensions
             {
                 services.AddSingleton<ISystemFactory>((sp) =>
                 {
-                    var systemFactory = new DefaultSystemFactory();
+                    var systemFactory = new DefaultSystemFactory(
+                        sp.GetRequiredService<ISystemRequirementsProvider>());
                     action.Invoke(systemFactory, sp);
                     return systemFactory;
                 });
+            });
+        }
+
+        public static void SetupDefaultSystemRequirementsProvider(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ISystemRequirementsProvider, DefaultSystemRequirementsProvider>();
+            });
+        }
+
+        public static void SetupDefaultEntityToSystemMatcher(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IEntityToSystemMatcher, DefaultEntityToSystemMatcher>();
             });
         }
 

@@ -169,7 +169,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
             worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
-            worldBuilder.SetupGameWorldSystems(systemFactory);
+            worldBuilder.SetupGameWorldSystems();
 
             world = worldBuilder.Build();
 

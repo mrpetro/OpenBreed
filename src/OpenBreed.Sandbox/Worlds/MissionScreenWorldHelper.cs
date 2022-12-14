@@ -14,6 +14,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
+using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
@@ -116,7 +117,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Private Methods
 
-        private void AddSystems(WorldBuilder builder)
+        private void AddSystems(IWorldBuilder builder)
         {
             builder.AddSystem<AnimatorSystem>();
             builder.AddSystem<SpriteSystem>();

@@ -256,6 +256,10 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupOpenALManagers();
             hostBuilder.SetupOpenGLManagers();
 
+            hostBuilder.SetupDefaultTypeAttributesProvider();
+            hostBuilder.SetupDefaultSystemRequirementsProvider();
+            hostBuilder.SetupDefaultEntityToSystemMatcher();
+
             hostBuilder.SetupSystemFactory((systemFactory, sp) =>
             {
                 systemFactory.SetupRenderingSystems(sp);
@@ -631,7 +635,7 @@ namespace OpenBreed.Sandbox
             worldBuilder.AddModule(tileGridFactory.CreateGrid(width, height, 1, 16));
             worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
-            worldBuilder.SetupGameWorldSystems(systemFactory);
+            worldBuilder.SetupGameWorldSystems();
 
             var gameWorld = worldBuilder.Build();
 

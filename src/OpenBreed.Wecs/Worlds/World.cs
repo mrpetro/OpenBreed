@@ -30,6 +30,7 @@ namespace OpenBreed.Wecs.Worlds
         private readonly HashSet<IEntity> toAdd = new HashSet<IEntity>();
         private readonly HashSet<IEntity> toRemove = new HashSet<IEntity>();
         private readonly WorldMan worldMan;
+        private readonly IEntityToSystemMatcher entityToSystemMatcher;
         private readonly WorldContext context;
         private float timeMultiplier = 1.0f;
 
@@ -42,6 +43,7 @@ namespace OpenBreed.Wecs.Worlds
             Name = builder.name;
             modules = builder.modules;
             worldMan = builder.worldMan;
+            entityToSystemMatcher = builder.entityToSystemMatcher;
             context = new WorldContext(this);
             Systems = builder.CreateSystems(this).ToArray();
         }
@@ -145,7 +147,7 @@ namespace OpenBreed.Wecs.Worlds
                 if (!system.HasEntity(entity))
                     continue;
 
-                if (!system.Matches(entity))
+                if (!entityToSystemMatcher.AreMatch(system, entity))
                     system.RequestRemoveEntity(entity);
             }
         }
@@ -157,7 +159,7 @@ namespace OpenBreed.Wecs.Worlds
                 if (system.HasEntity(entity))
                     continue;
 
-                if (system.Matches(entity))
+                if (entityToSystemMatcher.AreMatch(system, entity))
                     system.RequestAddEntity(entity);
             }
         }
@@ -229,7 +231,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             foreach (var system in Systems)
             {
-                if (system.Matches(entity))
+                if (entityToSystemMatcher.AreMatch(system, entity))
                     system.RequestAddEntity(entity);
             }
         }
@@ -238,7 +240,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             foreach (var system in Systems)
             {
-                if (system.Matches(entity))
+                if (entityToSystemMatcher.AreMatch(system, entity))
                     system.RequestRemoveEntity(entity);
             }
         }

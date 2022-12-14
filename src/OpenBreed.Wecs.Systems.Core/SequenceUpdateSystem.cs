@@ -1,21 +1,22 @@
-﻿using OpenBreed.Wecs.Entities;
+﻿using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 
-namespace OpenBreed.Wecs.Systems
+namespace OpenBreed.Wecs.Systems.Core
 {
-    public class SequenceUpdateSystem : SystemBase<SequenceUpdateSystem>, IUpdatableSystem
+    public class SequenceUpdateSystem<TSystem> : SystemBase<SequenceUpdateSystem<TSystem>>, IUpdatableSystem where TSystem :IEntityUpdateSubsystem
     {
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly IEntityUpdateSystem entityUpdateSystem;
+        private readonly IEntityUpdateSubsystem entityUpdateSystem;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SequenceUpdateSystem(IWorld world, IEntityUpdateSystem entityUpdateSystem) :
+        public SequenceUpdateSystem(IWorld world, IEntityUpdateSubsystem entityUpdateSystem) :
                     base(world)
         {
             this.entityUpdateSystem = entityUpdateSystem;
@@ -29,11 +30,11 @@ namespace OpenBreed.Wecs.Systems
         {
             if (context.Paused)
             {
-                //for (int i = 0; i < entities.Count; i++)
-                //{
-                //    if (entities[i].Contains<PauseImmuneComponent>())
-                //        entityUpdateSystem.Update(entities[i], context);
-                //}
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i].Contains<PauseImmuneComponent>())
+                        entityUpdateSystem.Update(entities[i], context);
+                }
             }
             else
             {

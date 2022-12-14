@@ -15,7 +15,7 @@ namespace OpenBreed.Wecs.Worlds
         #endregion Public Methods
     }
 
-    public class WorldBuilder
+    internal class WorldBuilder : IWorldBuilder
     {
         #region Public Fields
 
@@ -27,8 +27,9 @@ namespace OpenBreed.Wecs.Worlds
         #region Internal Fields
 
         internal readonly WorldMan worldMan;
+        internal readonly IEntityToSystemMatcher entityToSystemMatcher;
         internal string name;
-        internal Dictionary<Type, Func<ISystemFactory, IWorld, ISystem>> systemInitializers = new Dictionary<Type, Func<ISystemFactory, IWorld, ISystem>>();
+        internal Dictionary<Type, Func<IWorld, ISystem>> systemInitializers = new Dictionary<Type, Func<IWorld, ISystem>>();
 
         internal Dictionary<Type, object> modules = new Dictionary<Type, object>();
 
@@ -45,10 +46,12 @@ namespace OpenBreed.Wecs.Worlds
 
         internal WorldBuilder(
             WorldMan worldMan,
+            IEntityToSystemMatcher entityToSystemMatcher,
             ILogger logger,
             ISystemFactory systemFactory)
         {
             this.worldMan = worldMan;
+            this.entityToSystemMatcher = entityToSystemMatcher;
             this.logger = logger;
             this.systemFactory = systemFactory;
         }
@@ -60,10 +63,10 @@ namespace OpenBreed.Wecs.Worlds
         internal IEnumerable<ISystem> CreateSystems(IWorld world)
         {
             foreach (var initializer in systemInitializers.Values)
-                yield return initializer.Invoke(systemFactory, world);
+                yield return initializer.Invoke(world);
         }
 
-        public void AddModule<TModule>(TModule module)
+        public IWorldBuilder AddModule<TModule>(TModule module)
         {
             var moduleType = typeof(TModule);
 
@@ -71,19 +74,18 @@ namespace OpenBreed.Wecs.Worlds
                 throw new InvalidOperationException($"Module with type '{moduleType}' already added.");
 
             modules.Add(moduleType, module);
+            return this;
         }
 
-        public void AddSystem<TSystem>(Func<ISystemFactory, IWorld, ISystem> initializer = null) where TSystem : ISystem
+        public IWorldBuilder AddSystem<TSystem>() where TSystem : ISystem
         {
             var systemType = typeof(TSystem);
 
             if (systemInitializers.ContainsKey(systemType))
                 throw new InvalidOperationException($"System with type '{systemType}' already added.");
 
-            if (initializer is null)
-                initializer = (systemFactory, world) => systemFactory.Create<TSystem>(world);
-
-            systemInitializers.Add(systemType, initializer);
+            systemInitializers.Add(systemType, systemFactory.CreateSystem<TSystem>);
+            return this;
         }
 
         public IWorld Build()
@@ -96,16 +98,17 @@ namespace OpenBreed.Wecs.Worlds
             return newWorld;
         }
 
-        public WorldBuilder SetName(string name)
+        public IWorldBuilder SetName(string name)
         {
             this.name = name;
             return this;
         }
 
-        public void SetSize(int width, int height)
+        public IWorldBuilder SetSize(int width, int height)
         {
             this.width = width;
             this.height = height;
+            return this;
         }
 
         #endregion Public Methods
