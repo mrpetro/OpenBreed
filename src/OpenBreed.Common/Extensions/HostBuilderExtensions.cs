@@ -27,6 +27,14 @@ namespace OpenBreed.Common.Extensions
             });
         }
 
+        public static void SetupDefaultTypeAttributesProvider(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ITypeAttributesProvider, DefaultTypeAttributesProvider>();
+            });
+        }
+
         public static void SetupModelProvider(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
