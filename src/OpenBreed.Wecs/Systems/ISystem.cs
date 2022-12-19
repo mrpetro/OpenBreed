@@ -31,18 +31,12 @@ namespace OpenBreed.Wecs.Systems
         /// </summary>
         IWorld World { get; }
 
-        /// <summary>
-        /// Perform cleanup of entites and their components related with this system
-        /// </summary>
-        void Cleanup();
+        bool ContainsEntity(IEntity entity);
 
-        //bool Matches(IEntity entity);
+        void AddEntity(IEntity entity);
 
-        bool HasEntity(IEntity entity);
+        void RemoveEntity(IEntity entity);
 
-        void RequestAddEntity(IEntity entity);
-
-        void RequestRemoveEntity(IEntity entity);
 
         #endregion Public Methods
     }

@@ -66,13 +66,13 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(IEntity entity) => broadphaseDynamic.ContainsItem(entity.Id);
+        public override bool ContainsEntity(IEntity entity) => broadphaseDynamic.ContainsItem(entity.Id);
 
-        protected override void OnAddEntity(IEntity entity)
+        public override void AddEntity(IEntity entity)
         {
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        public override void RemoveEntity(IEntity entity)
         {
         }
 

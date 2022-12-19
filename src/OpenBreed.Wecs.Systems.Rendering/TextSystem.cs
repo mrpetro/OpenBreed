@@ -55,14 +55,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
+        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        protected override void OnAddEntity(IEntity entity)
+        public override void AddEntity(IEntity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        public override void RemoveEntity(IEntity entity)
         {
             entities.Remove(entity);
         }

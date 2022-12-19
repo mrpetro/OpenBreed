@@ -21,10 +21,6 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Private Fields
 
-        private readonly HashSet<IEntity> toAdd = new HashSet<IEntity>();
-
-        private readonly HashSet<IEntity> toRemove = new HashSet<IEntity>();
-
         #endregion Private Fields
 
         #region Protected Constructors
@@ -52,50 +48,15 @@ namespace OpenBreed.Wecs.Systems
 
         #region Public Methods
 
-        public void Cleanup()
-        {
-            if (toRemove.Any())
-            {
-                //Process entities to remove
-                toRemove.ForEach(entity => OnRemoveEntity(entity));
-                toRemove.Clear();
-            }
-
-            if (toAdd.Any())
-            {
-                //Process entities to add
-                toAdd.ForEach(entity => OnAddEntity(entity));
-                toAdd.Clear();
-            }
-        }
-
-        public bool HasEntity(IEntity entity)
-        {
-            if (toAdd.Contains(entity))
-                return true;
-
-            return ContainsEntity(entity);
-        }
-
-        public void RequestAddEntity(IEntity entity)
-        {
-            toAdd.Add(entity);
-        }
-
-        public void RequestRemoveEntity(IEntity entity)
-        {
-            toRemove.Add(entity);
-        }
-
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected abstract bool ContainsEntity(IEntity entity);
+        public abstract bool ContainsEntity(IEntity entity);
 
-        protected abstract void OnAddEntity(IEntity entity);
+        public abstract void AddEntity(IEntity entity);
 
-        protected abstract void OnRemoveEntity(IEntity entity);
+        public abstract void RemoveEntity(IEntity entity);
 
         #endregion Protected Methods
     }

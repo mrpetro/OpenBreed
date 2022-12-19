@@ -77,7 +77,6 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             component.ToPlay.AddRange(sampleIds);
             SetupMockEntity(mockEntity, component);
             SetupWorldContext(mockContext, paused: false);
-            soundSystem.Cleanup();
 
             // Act
             soundSystem.Update(mockContext.Object);

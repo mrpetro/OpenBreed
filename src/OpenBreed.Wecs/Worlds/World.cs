@@ -26,10 +26,7 @@ namespace OpenBreed.Wecs.Worlds
         #region Private Fields
 
         private readonly Dictionary<Type, object> modules = new Dictionary<Type, object>();
-        private readonly HashSet<IEntity> entities = new HashSet<IEntity>();
-        private readonly HashSet<IEntity> toAdd = new HashSet<IEntity>();
-        private readonly HashSet<IEntity> toRemove = new HashSet<IEntity>();
-        private readonly WorldMan worldMan;
+        private readonly Dictionary<IEntity, HashSet<ISystem>> entities = new Dictionary<IEntity, HashSet<ISystem>>();
         private readonly IEntityToSystemMatcher entityToSystemMatcher;
         private readonly WorldContext context;
         private float timeMultiplier = 1.0f;
@@ -42,7 +39,6 @@ namespace OpenBreed.Wecs.Worlds
         {
             Name = builder.name;
             modules = builder.modules;
-            worldMan = builder.worldMan;
             entityToSystemMatcher = builder.entityToSystemMatcher;
             context = new WorldContext(this);
             Systems = builder.CreateSystems(this).ToArray();
@@ -70,7 +66,7 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        public IEnumerable<IEntity> Entities => entities;
+        public IEnumerable<IEntity> Entities => entities.Keys;
 
         /// <summary>
         /// Id of this world
@@ -112,151 +108,56 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Methods
 
-        /// <summary>
-        /// Method will request to add given entity to this world.
-        /// Entity will not be added immediately but at the end of each world update.
-        /// An exception will be thrown if given entity already exists in world
-        /// </summary>
-        /// <param name="entity">Entity to be added to this world</param>
-        internal void RequestAddEntity(IEntity entity)
-        {
-            if (entity.WorldId != WecsConsts.NO_WORLD_ID)
-                throw new InvalidOperationException("Entity can't exist in more than one world.");
-
-            toAdd.Add(entity);
-        }
-
-        /// <summary>
-        /// Method will request to remove given entity from this world.
-        /// Entity will not be removed immediately but at the end of each world update.
-        /// An exception will be thrown if given entity does not exist in this world.
-        /// </summary>
-        /// <param name="entity">Entity to be removed from this world</param>
-        internal void RequestRemoveEntity(IEntity entity)
-        {
-            if (entity.WorldId != Id)
-                throw new InvalidOperationException("Entity doesn't exist in this world");
-
-            toRemove.Add(entity);
-        }
-
-        internal void CheckRemoveFromSystems(IEntity entity, Type componentType)
-        {
-            foreach (var system in Systems)
-            {
-                if (!system.HasEntity(entity))
-                    continue;
-
-                if (!entityToSystemMatcher.AreMatch(system, entity))
-                    system.RequestRemoveEntity(entity);
-            }
-        }
-
-        internal void CheckAddToSystems(IEntity entity, Type componentType)
-        {
-            foreach (var system in Systems)
-            {
-                if (system.HasEntity(entity))
-                    continue;
-
-                if (entityToSystemMatcher.AreMatch(system, entity))
-                    system.RequestAddEntity(entity);
-            }
-        }
-
-        internal void RemovePendingEntities()
-        {
-            //Perform deinitialization of removed entities
-            toRemove.ForEach(item => RemoveEntity(item));
-            toRemove.Clear();
-
-            //Perform cleanup on all world systems
-            Systems.ForEach(item => item.Cleanup());
-        }
-
         internal void Update(float dt)
         {
-            AddPendingEntities();
-
             context.DtMultiplier = DtMultiplier;
             context.UpdateDeltaTime(dt);
 
             foreach (var item in Systems.OfType<IUpdatableSystem>())
                 item.Update(context);
-
-            RemovePendingEntities();
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void AddPendingEntities()
-        {
-            //Perform initialization of added entities
-            toAdd.ForEach(item => AddEntity(item));
-            toAdd.Clear();
-        }
-
-        //private void SetPause(bool paused)
-        //{
-        //    if (Paused == paused)
-        //        return;
-
-        //    Paused = paused;
-
-            //if (Paused)
-            //    worldMan.OnWorldPaused(Id);
-            //else
-            //    worldMan.OnWorldUnpaused(Id);
-        //}
-
-        private void RemoveEntity(IEntity entity)
+        public void RemoveEntity(IEntity entity)
         {
             RemoveFromAllSystems(entity);
             entities.Remove(entity);
             ((Entity)entity).WorldId = WecsConsts.NO_WORLD_ID;
-            worldMan.OnEntityRemoved(entity, Id);
         }
 
-        private void AddEntity(IEntity entity)
+        public void AddEntity(IEntity entity)
         {
-            AddEntityToSystems(entity);
-            entities.Add(entity);
+            var matchingSystems = GetMatchingSystems(entity).ToHashSet();
+
+            entities.Add(entity, matchingSystems);
+
+            foreach (var system in matchingSystems)
+                system.AddEntity(entity);
+
             ((Entity)entity).WorldId = Id;
-            worldMan.OnEntityAdded(entity, Id);
         }
 
-        private void AddEntityToSystems(IEntity entity)
+        private IEnumerable<ISystem> GetMatchingSystems(IEntity entity)
         {
             foreach (var system in Systems)
             {
                 if (entityToSystemMatcher.AreMatch(system, entity))
-                    system.RequestAddEntity(entity);
+                    yield return system;
             }
         }
 
         private void RemoveFromAllSystems(IEntity entity)
         {
-            foreach (var system in Systems)
-            {
-                if (entityToSystemMatcher.AreMatch(system, entity))
-                    system.RequestRemoveEntity(entity);
-            }
+            if (!entities.TryGetValue(entity, out HashSet<ISystem> systems))
+                throw new InvalidOperationException();
+
+            foreach (var system in systems)
+                system.RemoveEntity(entity);
         }
 
         #endregion Private Methods
-
-        //private void InitializeSystems()
-        //{
-        //    for (int i = 0; i < systems.Count; i++)
-        //        systems[i].Initialize(this);
-        //}
-
-        //private void DeinitializeSystems()
-        //{
-        //    for (int i = 0; i < systems.Count; i++)
-        //        systems[i].Deinitialize();
-        //}
     }
 }

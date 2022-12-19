@@ -38,9 +38,9 @@ namespace OpenBreed.Wecs.Systems.Scripting
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        public override void AddEntity(IEntity entity)
         {
-            base.OnAddEntity(entity);
+            base.AddEntity(entity);
 
             entity.TryInvoke(scriptMan, logger, "onInit");
         }

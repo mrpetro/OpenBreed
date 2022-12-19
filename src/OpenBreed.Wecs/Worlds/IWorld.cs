@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Worlds
 {
-
-
-
     /// <summary>
     /// World interface
     ///
@@ -19,6 +16,9 @@ namespace OpenBreed.Wecs.Worlds
         /// </summary>
         float DtMultiplier { get; set; }
 
+        /// <summary>
+        /// All world entitites
+        /// </summary>
         IEnumerable<IEntity> Entities { get; }
 
         /// <summary>
@@ -31,14 +31,39 @@ namespace OpenBreed.Wecs.Worlds
         /// </summary>
         string Name { get; }
 
+        /// <summary>
+        /// All world systems
+        /// </summary>
         ISystem[] Systems { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
+        /// <summary>
+        /// Remove given entity from this world
+        /// </summary>
+        /// <param name="entity">Entity to remove</param>
+        void RemoveEntity(IEntity entity);
+
+        /// <summary>
+        /// Add given entity to this world
+        /// </summary>
+        /// <param name="entity">Entity to add</param>
+        void AddEntity(IEntity entity);
+
+        /// <summary>
+        /// Get specific module from this world
+        /// </summary>
+        /// <typeparam name="TModule">Type of module to get</typeparam>
+        /// <returns>World module of specific type</returns>
         TModule GetModule<TModule>();
 
+        /// <summary>
+        /// Get specific system from this world
+        /// </summary>
+        /// <typeparam name="T">Type of system to get</typeparam>
+        /// <returns>World system of specific type</returns>
         T GetSystem<T>() where T : ISystem;
 
         #endregion Public Methods

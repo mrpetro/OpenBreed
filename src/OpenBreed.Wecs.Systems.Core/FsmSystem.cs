@@ -47,18 +47,18 @@ namespace OpenBreed.Wecs.Systems.Core
             }
         }
 
-        protected override void OnAddEntity(IEntity entity)
+        public override void AddEntity(IEntity entity)
         {
-            base.OnAddEntity(entity);
+            base.AddEntity(entity);
 
             InitializeComponent(entity);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        public override void RemoveEntity(IEntity entity)
         {
             DeinitializeComponent(entity);
 
-            base.OnRemoveEntity(entity);
+            base.RemoveEntity(entity);
         }
 
         #endregion Protected Methods

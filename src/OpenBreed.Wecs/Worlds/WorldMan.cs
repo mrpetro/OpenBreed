@@ -5,7 +5,6 @@ using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +18,19 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Private Fields
 
+        private readonly Dictionary<IWorld, HashSet<IEntity>> entitiesToAdd = new Dictionary<IWorld, HashSet<IEntity>>();
+        private readonly Dictionary<IWorld, HashSet<IEntity>> entitiesToRemove = new Dictionary<IWorld, HashSet<IEntity>>();
+        private readonly HashSet<IEntity> entitiesToUpdate = new HashSet<IEntity>();
         private readonly IEntityMan entityMan;
-        private readonly IEventsMan eventsMan;
-        private readonly ISystemFactory systemFactory;
         private readonly IEntityToSystemMatcher entityToSystemMatcher;
+        private readonly IEventsMan eventsMan;
         private readonly IdMap<World> IdsToWorldsLookup = new IdMap<World>();
         private readonly ILogger logger;
         private readonly Dictionary<string, int> namesToIdsLookup = new Dictionary<string, int>();
-        private readonly IScriptMan scriptMan;
+
+        //private readonly HashSet<IEntity> entitiesToUpdate = new HashSet<IEntity>();
+        private readonly ISystemFactory systemFactory;
+
         private readonly HashSet<World> toDeinitialize = new HashSet<World>();
         private readonly HashSet<World> toInitialize = new HashSet<World>();
         private readonly List<World> worlds = new List<World>();
@@ -40,14 +44,12 @@ namespace OpenBreed.Wecs.Worlds
             IEventsMan eventsMan,
             ISystemFactory systemFactory,
             IEntityToSystemMatcher entityToSystemMatcher,
-            IScriptMan scriptMan,
             ILogger logger)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;
             this.systemFactory = systemFactory;
             this.entityToSystemMatcher = entityToSystemMatcher;
-            this.scriptMan = scriptMan;
             this.logger = logger;
 
             entityMan.ComponentAdded += EntityMan_ComponentAdded;
@@ -122,8 +124,14 @@ namespace OpenBreed.Wecs.Worlds
         {
             InitializePendingWorlds();
 
+            RemovePendingEntities();
+
             foreach (var world in worlds)
                 world.Update(dt);
+
+            UpdateSystems();
+
+            AddPendingEntities();
 
             DeinitializePendingWorlds();
         }
@@ -132,19 +140,96 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Methods
 
-        internal void OnEntityAdded(IEntity entity, int worldId)
+        /// <summary>
+        /// Method will request to add given entity to this world.
+        /// Entity will not be added immediately but at the end of each world update.
+        /// An exception will be thrown if given entity already exists in world
+        /// </summary>
+        /// <param name="entity">Entity to be added to this world</param>
+        internal void RequestAddEntity(IEntity entity, IWorld world)
         {
-            eventsMan.Raise(entity, new EntityEnteredEventArgs(entity.Id, worldId));
+            if (entity.WorldId != WecsConsts.NO_WORLD_ID)
+                throw new InvalidOperationException("Entity can't exist in more than one world.");
+
+            if (!entitiesToAdd.TryGetValue(world, out HashSet<IEntity> entities))
+            {
+                entities = new HashSet<IEntity>();
+                entitiesToAdd.Add(world, entities);
+            }
+
+            entities.Add(entity);
         }
 
-        internal void OnEntityRemoved(IEntity entity, int worldId)
+        /// <summary>
+        /// Method will request to remove given entity from this world.
+        /// Entity will not be removed immediately but at the end of each world update.
+        /// An exception will be thrown if given entity does not exist in this world.
+        /// </summary>
+        /// <param name="entity">Entity to be removed from this world</param>
+        internal void RequestRemoveEntity(IEntity entity, IWorld world)
         {
-            eventsMan.Raise(entity, new EntityLeftEventArgs(entity.Id, worldId));
+            if (entity.WorldId != world.Id)
+                throw new InvalidOperationException("Entity doesn't exist in this world");
+
+            if (!entitiesToRemove.TryGetValue(world, out HashSet<IEntity> entities))
+            {
+                entities = new HashSet<IEntity>();
+                entitiesToRemove.Add(world, entities);
+            }
+
+            entities.Add(entity);
+        }
+
+        internal void RequestUpdateEntity(IEntity entity)
+        {
+            entitiesToUpdate.Add(entity);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
+
+        private void AddPendingEntities()
+        {
+            foreach (var keyValuePair in entitiesToAdd)
+                AddPendingEntities(keyValuePair.Key, keyValuePair.Value);
+
+            entitiesToAdd.Clear();
+        }
+
+        private void AddPendingEntities(IWorld world, HashSet<IEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                world.AddEntity(entity);
+                OnEntityAdded(entity, world.Id);
+            }
+        }
+
+        private void CheckUpdateAddToSystems(IWorld world, IEntity entity)
+        {
+            foreach (var system in world.Systems)
+            {
+                var areMatching = entityToSystemMatcher.AreMatch(system, entity);
+
+                if (system.ContainsEntity(entity))
+                {
+                    if (!areMatching)
+                    {
+                        system.RemoveEntity(entity);
+                        continue;
+                    }
+                }
+                else
+                {
+                    if (areMatching)
+                    {
+                        system.AddEntity(entity);
+                        continue;
+                    }
+                }
+            }
+        }
 
         private void DeinitializePendingWorlds()
         {
@@ -166,34 +251,24 @@ namespace OpenBreed.Wecs.Worlds
 
         private void EntityMan_ComponentAdded(IEntity entity, Type componentType)
         {
-            if (entity.WorldId == WecsConsts.NO_WORLD_ID)
-                return;
-
-            var world = (World)GetById(entity.WorldId);
-
-            world.CheckAddToSystems(entity, componentType);
+            RequestUpdateEntity(entity);
         }
 
         private void EntityMan_ComponentRemoved(IEntity entity, Type componentType)
         {
-            if (entity.WorldId == WecsConsts.NO_WORLD_ID)
-                return;
-
-            var world = (World)GetById(entity.WorldId);
-
-            world.CheckRemoveFromSystems(entity, componentType);
+            RequestUpdateEntity(entity);
         }
 
         private void EntityMan_EnterWorldRequested(IEntity entity, int worldId)
         {
             var world = (World)GetById(worldId);
-            world.RequestAddEntity(entity);
+            RequestAddEntity(entity, world);
         }
 
         private void EntityMan_LeaveWorldRequested(IEntity entity)
         {
             var world = (World)GetById(entity.WorldId);
-            world.RequestRemoveEntity(entity);
+            RequestRemoveEntity(entity, world);
         }
 
         /// <summary>
@@ -215,6 +290,48 @@ namespace OpenBreed.Wecs.Worlds
             worlds.Add((World)world);
 
             eventsMan.Raise(this, new WorldInitializedEventArgs(world.Id));
+        }
+
+        private void OnEntityAdded(IEntity entity, int worldId)
+        {
+            eventsMan.Raise(entity, new EntityEnteredEventArgs(entity.Id, worldId));
+        }
+
+        private void OnEntityRemoved(IEntity entity, int worldId)
+        {
+            eventsMan.Raise(entity, new EntityLeftEventArgs(entity.Id, worldId));
+        }
+
+        private void RemovePendingEntities()
+        {
+            foreach (var keyValuePair in entitiesToRemove)
+                RemovePendingEntities(keyValuePair.Key, keyValuePair.Value);
+
+            entitiesToRemove.Clear();
+        }
+
+        private void RemovePendingEntities(IWorld world, HashSet<IEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                world.RemoveEntity(entity);
+                OnEntityRemoved(entity, world.Id);
+            }
+        }
+
+        private void UpdateSystems()
+        {
+            foreach (var entity in entitiesToUpdate)
+            {
+                if (entity.WorldId == WecsConsts.NO_WORLD_ID)
+                    continue;
+
+                var world = (World)GetById(entity.WorldId);
+
+                CheckUpdateAddToSystems(world, entity);
+            }
+
+            entitiesToUpdate.Clear();
         }
 
         #endregion Private Methods

@@ -49,9 +49,9 @@ namespace OpenBreed.Wecs.Systems.Core
                 context.Paused = pauserComponent.Pause;
 
                 if (pauserComponent.Pause)
-                    OnWorldPaused(entity, World.Id);
+                    OnWorldPaused(entity, context.World.Id);
                 else
-                    OnWorldUnpaused(entity, World.Id);
+                    OnWorldUnpaused(entity, context.World.Id);
             }
             finally
             {

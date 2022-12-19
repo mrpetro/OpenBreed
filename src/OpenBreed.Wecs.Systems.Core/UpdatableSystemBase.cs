@@ -48,11 +48,11 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
+        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        protected override void OnAddEntity(IEntity entity) => entities.Add(entity);
+        public override void AddEntity(IEntity entity) => entities.Add(entity);
 
-        protected override void OnRemoveEntity(IEntity entity) => entities.Remove(entity);
+        public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
         protected abstract void UpdateEntity(IEntity entity, IWorldContext context);
 

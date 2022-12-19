@@ -51,17 +51,17 @@ namespace OpenBreed.Wecs.Systems.Physics
             broadphaseDynamic.UpdateItem(entity.Id, aabb);
         }
 
-        protected override void OnAddEntity(IEntity entity)
+        public override void AddEntity(IEntity entity)
         {
-            base.OnAddEntity(entity);
+            base.AddEntity(entity);
 
             var aabb = Calculate(entity);
             broadphaseDynamic.InsertItem(entity.Id, aabb);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        public override void RemoveEntity(IEntity entity)
         {
-            base.OnRemoveEntity(entity);
+            base.RemoveEntity(entity);
 
             broadphaseDynamic.RemoveItem(entity.Id);
         }
