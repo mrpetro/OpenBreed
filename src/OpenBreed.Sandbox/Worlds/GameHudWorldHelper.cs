@@ -169,10 +169,10 @@ namespace OpenBreed.Sandbox.Worlds
 
             triggerMan.OnWorldInitialized(world, () =>
             {
-                hudCamera.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(hudCamera, world.Id);
 
                 var p1StatusBar = hudHelper.CreateHudElement("StatusBarP1", "P1.StatusBar", -160, 109);
-                p1StatusBar.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(p1StatusBar, world.Id);
 
                 //var p1AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P1.AmmoBar", 20, 112);
                 //p1AmmoBar.EnterWorld(world.Id);
@@ -181,16 +181,17 @@ namespace OpenBreed.Sandbox.Worlds
                 //p1HealthBar.EnterWorld(world.Id);
 
                 var p1LivesCounter = hudHelper.CreateHudElement("LivesCounter", "P1.LivesCounter", -24, 120);
-                p1LivesCounter.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(p1LivesCounter, world.Id);
 
                 var p1AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "P1.AmmoCounter", 80, 120);
-                p1AmmoCounter.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(p1AmmoCounter, world.Id);
 
                 var p1KeysCounter = hudHelper.CreateHudElement("KeysCounter", "P1.KeysCounter", 128, 120);
-                p1KeysCounter.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(p1KeysCounter, world.Id);
 
                 var p2StatusBar = hudHelper.CreateHudElement("StatusBarP2", "P2.StatusBar", -160, -120);
-                p2StatusBar.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(p2StatusBar, world.Id);
+
 
                 //var p2AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P2.AmmoBar", 20, -117);
                 //p2AmmoBar.EnterWorld(world.Id);
@@ -199,13 +200,13 @@ namespace OpenBreed.Sandbox.Worlds
                 //p2HealthBar.EnterWorld(world.Id);
 
                 var p2LivesCounter = hudHelper.CreateHudElement("LivesCounter", "P2.LivesCounter", -24, -109);
-                p2LivesCounter.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(p2LivesCounter, world.Id);
 
                 var p2AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "P2.AmmoCounter", 80, -109);
-                p2AmmoCounter.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(p2AmmoCounter, world.Id);
 
                 var p2KeysCounter = hudHelper.CreateHudElement("KeysCounter", "P2.KeysCounter", 128, -109);
-                p2KeysCounter.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(p2KeysCounter, world.Id);
 
                 var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
                 hudViewport.SetViewportCamera(hudCamera.Id);

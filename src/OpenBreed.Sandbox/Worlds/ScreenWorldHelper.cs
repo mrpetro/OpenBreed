@@ -154,12 +154,12 @@ namespace OpenBreed.Sandbox.Worlds
             triggerMan.OnWorldInitialized(
                 world, () =>
                 {
-                    gameCommentator.EnterWorld(world.Id);
-                    gameViewport.EnterWorld(world.Id);
-                    gameHudViewport.EnterWorld(world.Id);
-                    debugHudViewport.EnterWorld(world.Id);
-                    textViewport.EnterWorld(world.Id);
-                    p1Controller.EnterWorld(world.Id);
+                    worldMan.RequestAddEntity(gameCommentator, world.Id);
+                    worldMan.RequestAddEntity(gameViewport, world.Id);
+                    worldMan.RequestAddEntity(gameHudViewport, world.Id);
+                    worldMan.RequestAddEntity(debugHudViewport, world.Id);
+                    worldMan.RequestAddEntity(textViewport, world.Id);
+                    worldMan.RequestAddEntity(p1Controller, world.Id);
                 }, singleTime: true);
 
 

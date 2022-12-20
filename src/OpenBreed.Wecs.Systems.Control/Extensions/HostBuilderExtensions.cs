@@ -9,18 +9,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Control.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupControlSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
+        public static void SetupControlSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
             systemFactory.RegisterSystem<AttackControllerSystem>((world) => new AttackControllerSystem(
-                world, serviceProvider.GetService<IPlayersMan>()));
+                world, sp.GetRequiredService<IPlayersMan>()));
             systemFactory.RegisterSystem<FollowerSystem>((world) => new FollowerSystem(
                 world,
-                serviceProvider.GetService<IEntityMan>()));
+                sp.GetRequiredService<IWorldMan>(),
+                sp.GetRequiredService<IEntityMan>()));
         }
     }
 }

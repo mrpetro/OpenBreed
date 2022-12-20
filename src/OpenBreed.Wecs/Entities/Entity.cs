@@ -74,15 +74,6 @@ namespace OpenBreed.Wecs.Entities
         #region Public Methods
 
         /// <summary>
-        /// Destroy entity - Leave world if at any, then remove from entities list
-        /// </summary>
-        public void Destroy()
-        {
-            LeaveWorld();
-            entityMan.RequestDestroy(this);
-        }
-
-        /// <summary>
         /// Gets component of specific type if it exists
         /// </summary>
         /// <typeparam name="TComponent">Type of component to get</typeparam>
@@ -167,28 +158,6 @@ namespace OpenBreed.Wecs.Entities
                 return $"{Id}";
             else
                 return $"{Id} ({Tag})";
-        }
-
-        public void LeaveWorld()
-        {
-            //If entity is already in limbo then do nothing
-            if (WorldId == WecsConsts.NO_WORLD_ID)
-                return;
-
-            entityMan.RequestLeaveWorld(this);
-        }
-
-        public void EnterWorld(int worldId)
-        {
-            //If entity is already is same world then do nothing
-            if (WorldId == worldId)
-                return;
-
-            //If entity is not in limbo then it's in different world.
-            if (WorldId != WecsConsts.NO_WORLD_ID)
-                throw new InvalidOperationException("Entity already in different world.");
-
-            entityMan.RequestEnterWorld(this, worldId);
         }
 
         #endregion Public Methods

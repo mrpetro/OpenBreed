@@ -13,15 +13,14 @@ namespace OpenBreed.Wecs.Entities
         #region Private Fields
 
         private readonly IdMap<IEntity> entities = new IdMap<IEntity>();
+        private readonly HashSet<IEntity> entityByNoTagLookup = new HashSet<IEntity>();
+        private readonly Dictionary<string, HashSet<IEntity>> entityByTagLookup = new Dictionary<string, HashSet<IEntity>>();
         private readonly IEventsMan eventsMan;
         private readonly HashSet<IEntity> toDestory = new HashSet<IEntity>();
 
-        private readonly HashSet<IEntity> entityByNoTagLookup = new HashSet<IEntity>();
-        private readonly Dictionary<string, HashSet<IEntity>> entityByTagLookup = new Dictionary<string, HashSet<IEntity>>();
-
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public EntityMan(IEventsMan eventsMan)
         {
@@ -30,17 +29,13 @@ namespace OpenBreed.Wecs.Entities
             this.eventsMan.Subscribe<EntityLeftEventArgs>(OnEntityLeftWorld);
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Events
 
         public event ComponentAdded ComponentAdded;
 
         public event ComponentRemoved ComponentRemoved;
-
-        public event EnteringWorld EnterWorldRequested;
-
-        public event LeavingWorld LeaveWorldRequested;
 
         #endregion Public Events
 
@@ -51,6 +46,24 @@ namespace OpenBreed.Wecs.Entities
         #endregion Public Properties
 
         #region Public Methods
+
+        public IEntity Create(string tag, List<IEntityComponent> initialComponents = null)
+        {
+            var newEntity = new Entity(this, tag, initialComponents);
+            newEntity.Id = entities.Add(newEntity);
+
+            AddToLookup(tag, newEntity);
+
+            return newEntity;
+        }
+
+        public IEntity GetById(int id)
+        {
+            if (entities.TryGetValue(id, out IEntity entity))
+                return entity;
+            else
+                return null;
+        }
 
         public IEnumerable<IEntity> GetByTag(string tag)
         {
@@ -63,47 +76,19 @@ namespace OpenBreed.Wecs.Entities
             return Enumerable.Empty<IEntity>();
         }
 
+        public void RequestDestroy(IEntity entity)
+        {
+            toDestory.Add(entity);
+        }
+
         public IEnumerable<IEntity> Where(Func<IEntity, bool> predicate)
         {
             return entities.Items.Where(predicate);
         }
 
-        public IEntity GetById(int id)
-        {
-            if (entities.TryGetValue(id, out IEntity entity))
-                return entity;
-            else
-                return null;
-        }
-
-        public IEntity Create(string tag, List<IEntityComponent> initialComponents = null)
-        {
-            var newEntity = new Entity(this, tag, initialComponents);
-            newEntity.Id = entities.Add(newEntity);
-
-            AddToLookup(tag, newEntity);
-
-            return newEntity;
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
-
-        internal void RequestLeaveWorld(IEntity entity)
-        {
-            LeaveWorldRequested?.Invoke(entity);
-        }
-
-        internal void RequestEnterWorld(IEntity entity, int worldId)
-        {
-            EnterWorldRequested?.Invoke(entity, worldId);
-        }
-
-        internal void RequestDestroy(IEntity entity)
-        {
-            toDestory.Add(entity);
-        }
 
         internal void OnComponentAdded(IEntity entity, Type componentType)
         {
@@ -124,21 +109,9 @@ namespace OpenBreed.Wecs.Entities
 
         #region Private Methods
 
-        private void OnEntityLeftWorld(object sender, EntityLeftEventArgs e)
-        {
-            var entity = (IEntity)sender;
-
-            if (toDestory.Contains(entity))
-            {
-                entities.RemoveById(entity.Id);
-                RemoveFromLookup(entity.Tag, entity);
-                toDestory.Remove(entity);
-            }
-        }
-
         private void AddToLookup(string tag, IEntity entity)
         {
-            if(tag is null)
+            if (tag is null)
             {
                 entityByNoTagLookup.Add(entity);
                 return;
@@ -151,6 +124,18 @@ namespace OpenBreed.Wecs.Entities
             }
 
             foundEntities.Add(entity);
+        }
+
+        private void OnEntityLeftWorld(object sender, EntityLeftEventArgs e)
+        {
+            var entity = (IEntity)sender;
+
+            if (toDestory.Contains(entity))
+            {
+                entities.RemoveById(entity.Id);
+                RemoveFromLookup(entity.Tag, entity);
+                toDestory.Remove(entity);
+            }
         }
 
         private void RemoveFromLookup(string tag, IEntity entity)

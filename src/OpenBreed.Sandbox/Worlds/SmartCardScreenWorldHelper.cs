@@ -88,7 +88,7 @@ namespace OpenBreed.Sandbox.Worlds
                 .SetTag("SmartCardScreen/Background")
                 .Build();
 
-            timer.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(timer, world.Id);
         }
 
         public void AddText(IWorld world, int x, int y)
@@ -99,7 +99,7 @@ namespace OpenBreed.Sandbox.Worlds
                 .SetTag("SmartCardScreen/Text")
                 .Build();
             textEntity.SetText(0, string.Empty);
-            textEntity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(textEntity, world.Id);
         }
 
         public void Create()
@@ -131,7 +131,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             triggerMan.OnWorldInitialized(world, () =>
             {
-                smartCardCamera.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(smartCardCamera, world.Id);
                 AddBackground(world, 0, 0);
                 AddText(world, - 320 / 2 + 20 , 240 / 2 - 38);
             }, singleTime: true);

@@ -26,7 +26,7 @@ namespace OpenBreed.Sandbox.Extensions
             return entity.Get<InventoryComponent>();
         }
 
-        public static void CreateSlowdown(this IEntityFactory entityFactory, IEntity entity, int worldId, int ox, int oy)
+        public static void CreateSlowdown(this IEntityFactory entityFactory, IWorldMan worldMan, IEntity entity, int worldId, int ox, int oy)
         {
             var indexPos = entity.GetIndexPos(ox, oy);
 
@@ -35,7 +35,7 @@ namespace OpenBreed.Sandbox.Extensions
                 .SetParameter("startY", 16 * indexPos.Y)
                 .Build();
 
-            toCreate.EnterWorld(worldId);
+            worldMan.RequestAddEntity(toCreate, worldId);
         }
 
         public static Vector2i GetIndexPos(this IEntity entity, int ox, int oy)

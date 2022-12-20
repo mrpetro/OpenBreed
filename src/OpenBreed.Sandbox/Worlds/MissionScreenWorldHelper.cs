@@ -88,7 +88,7 @@ namespace OpenBreed.Sandbox.Worlds
                 .SetTag("MissionScreen/Background")
                 .Build();
 
-            timer.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(timer, world.Id);
         }
 
         public void AddText(IWorld world, int x, int y, string text = "")
@@ -99,7 +99,7 @@ namespace OpenBreed.Sandbox.Worlds
                 .SetTag("MissionScreen/Text")
                 .Build();
             textEntity.SetText(0, text);
-            textEntity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(textEntity, world.Id);
         }
 
         public void Create()
@@ -131,7 +131,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             triggerMan.OnWorldInitialized(world, () =>
             {
-                missionScreenCamera.EnterWorld(world.Id);
+                worldMan.RequestAddEntity(missionScreenCamera, world.Id);
                 AddBackground(world, 0, 0);
                 AddText(world, - 320 / 2 + 48 , 240 / 2 - 24, "CRASH LANDING SITE...");
             }, singleTime: true);

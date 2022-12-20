@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Managers;
-using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;
@@ -18,19 +17,15 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Private Fields
 
-        private readonly Dictionary<IWorld, HashSet<IEntity>> entitiesToAdd = new Dictionary<IWorld, HashSet<IEntity>>();
-        private readonly Dictionary<IWorld, HashSet<IEntity>> entitiesToRemove = new Dictionary<IWorld, HashSet<IEntity>>();
+        private readonly Dictionary<int, HashSet<IEntity>> entitiesToAdd = new Dictionary<int, HashSet<IEntity>>();
+        private readonly Dictionary<int, HashSet<IEntity>> entitiesToRemove = new Dictionary<int, HashSet<IEntity>>();
         private readonly HashSet<IEntity> entitiesToUpdate = new HashSet<IEntity>();
-        private readonly IEntityMan entityMan;
         private readonly IEntityToSystemMatcher entityToSystemMatcher;
         private readonly IEventsMan eventsMan;
         private readonly IdMap<World> IdsToWorldsLookup = new IdMap<World>();
         private readonly ILogger logger;
         private readonly Dictionary<string, int> namesToIdsLookup = new Dictionary<string, int>();
-
-        //private readonly HashSet<IEntity> entitiesToUpdate = new HashSet<IEntity>();
         private readonly ISystemFactory systemFactory;
-
         private readonly HashSet<World> toDeinitialize = new HashSet<World>();
         private readonly HashSet<World> toInitialize = new HashSet<World>();
         private readonly List<World> worlds = new List<World>();
@@ -40,22 +35,15 @@ namespace OpenBreed.Wecs.Worlds
         #region Public Constructors
 
         public WorldMan(
-            IEntityMan entityMan,
             IEventsMan eventsMan,
             ISystemFactory systemFactory,
             IEntityToSystemMatcher entityToSystemMatcher,
             ILogger logger)
         {
-            this.entityMan = entityMan;
             this.eventsMan = eventsMan;
             this.systemFactory = systemFactory;
             this.entityToSystemMatcher = entityToSystemMatcher;
             this.logger = logger;
-
-            entityMan.ComponentAdded += EntityMan_ComponentAdded;
-            entityMan.ComponentRemoved += EntityMan_ComponentRemoved;
-            entityMan.EnterWorldRequested += EntityMan_EnterWorldRequested;
-            entityMan.LeaveWorldRequested += EntityMan_LeaveWorldRequested;
         }
 
         #endregion Public Constructors
@@ -116,6 +104,39 @@ namespace OpenBreed.Wecs.Worlds
             toDeinitialize.Add((World)world);
         }
 
+        public void RequestAddEntity(IEntity entity, int worldId)
+        {
+            //If entity is already is same world then do nothing
+            if (entity.WorldId == worldId)
+                return;
+
+            if (entity.WorldId != WecsConsts.NO_WORLD_ID)
+                throw new InvalidOperationException("Entity can't exist in more than one world.");
+
+            if (!entitiesToAdd.TryGetValue(worldId, out HashSet<IEntity> entities))
+            {
+                entities = new HashSet<IEntity>();
+                entitiesToAdd.Add(worldId, entities);
+            }
+
+            entities.Add(entity);
+        }
+
+        public void RequestRemoveEntity(IEntity entity)
+        {
+            //If entity is already in limbo then do nothing
+            if (entity.WorldId == WecsConsts.NO_WORLD_ID)
+                return;
+
+            if (!entitiesToRemove.TryGetValue(entity.WorldId, out HashSet<IEntity> entities))
+            {
+                entities = new HashSet<IEntity>();
+                entitiesToRemove.Add(entity.WorldId, entities);
+            }
+
+            entities.Add(entity);
+        }
+
         /// <summary>
         /// Updates all worlds
         /// </summary>
@@ -140,46 +161,6 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Methods
 
-        /// <summary>
-        /// Method will request to add given entity to this world.
-        /// Entity will not be added immediately but at the end of each world update.
-        /// An exception will be thrown if given entity already exists in world
-        /// </summary>
-        /// <param name="entity">Entity to be added to this world</param>
-        internal void RequestAddEntity(IEntity entity, IWorld world)
-        {
-            if (entity.WorldId != WecsConsts.NO_WORLD_ID)
-                throw new InvalidOperationException("Entity can't exist in more than one world.");
-
-            if (!entitiesToAdd.TryGetValue(world, out HashSet<IEntity> entities))
-            {
-                entities = new HashSet<IEntity>();
-                entitiesToAdd.Add(world, entities);
-            }
-
-            entities.Add(entity);
-        }
-
-        /// <summary>
-        /// Method will request to remove given entity from this world.
-        /// Entity will not be removed immediately but at the end of each world update.
-        /// An exception will be thrown if given entity does not exist in this world.
-        /// </summary>
-        /// <param name="entity">Entity to be removed from this world</param>
-        internal void RequestRemoveEntity(IEntity entity, IWorld world)
-        {
-            if (entity.WorldId != world.Id)
-                throw new InvalidOperationException("Entity doesn't exist in this world");
-
-            if (!entitiesToRemove.TryGetValue(world, out HashSet<IEntity> entities))
-            {
-                entities = new HashSet<IEntity>();
-                entitiesToRemove.Add(world, entities);
-            }
-
-            entities.Add(entity);
-        }
-
         internal void RequestUpdateEntity(IEntity entity)
         {
             entitiesToUpdate.Add(entity);
@@ -197,12 +178,14 @@ namespace OpenBreed.Wecs.Worlds
             entitiesToAdd.Clear();
         }
 
-        private void AddPendingEntities(IWorld world, HashSet<IEntity> entities)
+        private void AddPendingEntities(int worldId, HashSet<IEntity> entities)
         {
+            var world = GetById(worldId);
+
             foreach (var entity in entities)
             {
                 world.AddEntity(entity);
-                OnEntityAdded(entity, world.Id);
+                OnEntityAdded(entity, worldId);
             }
         }
 
@@ -249,28 +232,6 @@ namespace OpenBreed.Wecs.Worlds
             eventsMan.Raise(this, new WorldDeinitializedEventArgs(world.Id));
         }
 
-        private void EntityMan_ComponentAdded(IEntity entity, Type componentType)
-        {
-            RequestUpdateEntity(entity);
-        }
-
-        private void EntityMan_ComponentRemoved(IEntity entity, Type componentType)
-        {
-            RequestUpdateEntity(entity);
-        }
-
-        private void EntityMan_EnterWorldRequested(IEntity entity, int worldId)
-        {
-            var world = (World)GetById(worldId);
-            RequestAddEntity(entity, world);
-        }
-
-        private void EntityMan_LeaveWorldRequested(IEntity entity)
-        {
-            var world = (World)GetById(entity.WorldId);
-            RequestRemoveEntity(entity, world);
-        }
-
         /// <summary>
         /// Initialize or remove any pending worlds
         /// </summary>
@@ -310,12 +271,14 @@ namespace OpenBreed.Wecs.Worlds
             entitiesToRemove.Clear();
         }
 
-        private void RemovePendingEntities(IWorld world, HashSet<IEntity> entities)
+        private void RemovePendingEntities(int worldId, HashSet<IEntity> entities)
         {
+            var world = GetById(worldId);
+
             foreach (var entity in entities)
             {
                 world.RemoveEntity(entity);
-                OnEntityRemoved(entity, world.Id);
+                OnEntityRemoved(entity, worldId);
             }
         }
 

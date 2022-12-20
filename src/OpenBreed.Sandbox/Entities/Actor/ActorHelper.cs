@@ -39,6 +39,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private readonly ICollisionMan<IEntity> collisionMan;
         private readonly IEntityMan entityMan;
+        private readonly IWorldMan worldMan;
         private readonly IPlayersMan playersMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
@@ -57,6 +58,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             IClipMan<IEntity> clipMan,           
             ICollisionMan<IEntity> collisionMan,
             IEntityMan entityMan,
+            IWorldMan worldMan,
             IPlayersMan playersMan,
             IDataLoaderFactory dataLoaderFactory,
             IEntityFactory entityFactory,
@@ -69,6 +71,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
             this.entityMan = entityMan;
+            this.worldMan = worldMan;
             this.playersMan = playersMan;
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
@@ -168,7 +171,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             var playerActor = CreatePlayerActor("John", new Vector2(16 * ix, 16 * iy));
 
-            playerActor.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(playerActor, world.Id);
         }
 
         #endregion Internal Methods

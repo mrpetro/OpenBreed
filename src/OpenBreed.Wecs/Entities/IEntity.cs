@@ -85,22 +85,6 @@ namespace OpenBreed.Wecs.Entities
         /// <returns></returns>
         bool Remove<TComponent>();
 
-        /// <summary>
-        /// Destroy entity - Leave world if at any, then remove from entities list
-        /// </summary>
-        void Destroy();
-
-        /// <summary>
-        /// Enter world given in argument
-        /// </summary>
-        /// <param name="worldId">World Id to which entity will enter</param>
-        void EnterWorld(int worldId);
-
-        /// <summary>
-        /// Leave current world
-        /// </summary>
-        void LeaveWorld();
-
         #endregion Public Properties
     }
 }

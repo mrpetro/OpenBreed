@@ -89,7 +89,7 @@ namespace OpenBreed.Sandbox.Entities
 
             //teleportEntry.Tag = $"TeleportEntry/{pairId}";
 
-            teleportEntry.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(teleportEntry, world.Id);
             return teleportEntry;
         }
 
@@ -104,8 +104,7 @@ namespace OpenBreed.Sandbox.Entities
                 .Build();
 
             //teleportExit.PutTile(atlasId, gfxValue, 0, new Vector2(16 * x, 16 * y));
-
-            teleportExit.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(teleportExit, world.Id);
 
             return teleportExit;
         }

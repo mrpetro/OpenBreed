@@ -29,6 +29,7 @@ using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static OpenBreed.Wecs.Components.Animation.AnimationPlayerComponent;
 
 namespace OpenBreed.Sandbox.Entities
 {
@@ -106,10 +107,10 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .SetParameter("entryId", entryId)
                 .SetParameter("startX", 16 * x)
-                .SetParameter("startY", 16 * y)
+            .SetParameter("startY", 16 * y)
                 .Build();
 
-            entryEntity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entryEntity, world.Id);
 
             return entryEntity;
         }
@@ -124,7 +125,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("startY", 16 * iy)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
             return entity;
         }
 
@@ -258,7 +259,7 @@ namespace OpenBreed.Sandbox.Entities
                 LoadWorld(context);
             }, singleTime: true);
 
-            context.actorEntity.LeaveWorld();
+            worldMan.RequestRemoveEntity(context.actorEntity);
 
             return context;
         }
@@ -303,7 +304,8 @@ namespace OpenBreed.Sandbox.Entities
         private void AddToWorld(IEntity target, string worldName)
         {
             var world = worldMan.GetByName(worldName);
-            target.EnterWorld(world.Id);
+
+            worldMan.RequestAddEntity(target, world.Id);
         }
 
         private IWorld TryLoadWorld(string worldName)

@@ -22,15 +22,20 @@ namespace OpenBreed.Sandbox.Entities.Pickable
         private const string PICKABLE_PREFIX = @"Vanilla\ABTA\Templates\Common\Pickables";
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
+        private readonly IWorldMan worldMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PickableHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
+        public PickableHelper(
+            IDataLoaderFactory dataLoaderFactory,
+            IEntityFactory entityFactory,
+            IWorldMan worldMan)
         {
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
+            this.worldMan = worldMan;
         }
 
         #endregion Public Constructors
@@ -50,7 +55,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
                 .SetParameter("option", option)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }

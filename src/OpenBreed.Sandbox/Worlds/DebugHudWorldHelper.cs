@@ -91,7 +91,7 @@ namespace OpenBreed.Sandbox.Worlds
                 viewClient.ClientRectangle.Size.X,                                        
                 viewClient.ClientRectangle.Size.Y);
 
-            triggerMan.OnWorldInitialized(world, () => hudCamera.EnterWorld(world.Id), singleTime: true);
+            triggerMan.OnWorldInitialized(world, () => worldMan.RequestAddEntity(hudCamera, world.Id), singleTime: true);
  
             hudHelper.AddFpsCounter(world);
             hudHelper.AddPositionInfo(world);

@@ -12,6 +12,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         private readonly IEntityFactory entityFactory;
         private readonly IEntityMan entityMan;
+        private readonly IWorldMan worldMan;
         private readonly IViewClient viewClient;
         private readonly IJobsMan jobsMan;
         private readonly IRenderingMan renderingMan;
@@ -22,12 +23,14 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public VanillaStatusBarHelper(IEntityFactory entityFactory,
                          IEntityMan entityMan,
+                         IWorldMan worldMan,
                          IViewClient viewClient,
                          IJobsMan jobsMan,
                          IRenderingMan renderingMan)
         {
             this.entityFactory = entityFactory;
             this.entityMan = entityMan;
+            this.worldMan = worldMan;
             this.viewClient = viewClient;
             this.jobsMan = jobsMan;
             this.renderingMan = renderingMan;
@@ -44,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
                 .SetParameter("posY", y)
                 .Build();
 
-            timer.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(timer, world.Id);
         }
 
         public IEntity CreateHudElement(

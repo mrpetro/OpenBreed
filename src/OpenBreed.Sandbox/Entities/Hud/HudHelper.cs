@@ -25,6 +25,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         private readonly IEntityFactory entityFactory;
         private readonly IEntityMan entityMan;
+        private readonly IWorldMan worldMan;
         private readonly IViewClient viewClient;
         private readonly IJobsMan jobsMan;
         private readonly IRenderingMan renderingMan;
@@ -36,6 +37,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public HudHelper(IEntityFactory entityFactory,
                          IEntityMan entityMan,
+                         IWorldMan worldMan,
                          IViewClient viewClient,
                          IJobsMan jobsMan,
                          IRenderingMan renderingMan, 
@@ -43,6 +45,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
         {
             this.entityFactory = entityFactory;
             this.entityMan = entityMan;
+            this.worldMan = worldMan;
             this.viewClient = viewClient;
             this.jobsMan = jobsMan;
             this.renderingMan = renderingMan;
@@ -60,7 +63,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
                 .SetParameter("posY", -viewClient.ClientRectangle.Size.Y / 2.0f)
                 .Build();
 
-            triggerMan.OnWorldInitialized(world, () => fpsCounter.EnterWorld(world.Id), singleTime: true);
+            triggerMan.OnWorldInitialized(world, () => worldMan.RequestAddEntity(fpsCounter, world.Id), singleTime: true);
         }
 
         #endregion Public Methods
@@ -75,7 +78,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
                 .Build();
 
 
-            triggerMan.OnWorldInitialized(world, () => positionInfo.EnterWorld(world.Id), singleTime: true);
+            triggerMan.OnWorldInitialized(world, () => worldMan.RequestAddEntity(positionInfo, world.Id), singleTime: true);
 
             var hudViewport = entityMan.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
 

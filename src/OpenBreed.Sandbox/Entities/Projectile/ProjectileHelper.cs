@@ -9,6 +9,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
 
@@ -25,17 +26,24 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         private readonly IEntityFactory entityFactory;
 
         private readonly DynamicResolver dynamicResolver;
+        private readonly IWorldMan worldMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ProjectileHelper(IClipMan<IEntity> clipMan, ICollisionMan<IEntity> collisionMan, IEntityFactory entityFactory, DynamicResolver dynamicResolver)
+        public ProjectileHelper(
+            IClipMan<IEntity> clipMan,
+            ICollisionMan<IEntity> collisionMan,
+            IEntityFactory entityFactory,
+            DynamicResolver dynamicResolver,
+            IWorldMan worldMan)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
             this.entityFactory = entityFactory;
             this.dynamicResolver = dynamicResolver;
+            this.worldMan = worldMan;
         }
 
         #endregion Public Constructors
@@ -76,7 +84,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             projectile.Get<VelocityComponent>().Value = new Vector2(vx, vy);
 
-            projectile.EnterWorld(worldId);
+            worldMan.RequestAddEntity(projectile, worldId);
         }
 
         #endregion Public Methods

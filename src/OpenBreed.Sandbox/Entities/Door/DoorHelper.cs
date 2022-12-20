@@ -37,11 +37,16 @@ namespace OpenBreed.Sandbox.Entities.Door
     {
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
+        private readonly IWorldMan worldMan;
 
-        public DoorHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
+        public DoorHelper(
+            IDataLoaderFactory dataLoaderFactory,
+            IEntityFactory entityFactory,
+            IWorldMan worldMan)
         {
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
+            this.worldMan = worldMan;
         }
 
         public IEntity AddVertical(IWorld world, int x, int y, string level, string key)
@@ -53,7 +58,7 @@ namespace OpenBreed.Sandbox.Entities.Door
                 .SetParameter("startY", 16 * y)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }
@@ -114,7 +119,7 @@ namespace OpenBreed.Sandbox.Entities.Door
                 .SetParameter("startY", 16 * y)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }
@@ -128,7 +133,7 @@ namespace OpenBreed.Sandbox.Entities.Door
                 .SetParameter("startY", 16 * y)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }

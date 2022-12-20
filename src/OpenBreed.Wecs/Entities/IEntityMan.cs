@@ -8,10 +8,6 @@ namespace OpenBreed.Wecs.Entities
 
     public delegate void ComponentRemoved(IEntity entity, Type componentType);
 
-    public delegate void EnteringWorld(IEntity entity, int worldId);
-
-    public delegate void LeavingWorld(IEntity entity);
-
     public interface IEntityMan
     {
         #region Public Events
@@ -19,10 +15,6 @@ namespace OpenBreed.Wecs.Entities
         event ComponentAdded ComponentAdded;
 
         event ComponentRemoved ComponentRemoved;
-
-        event EnteringWorld EnterWorldRequested;
-
-        event LeavingWorld LeaveWorldRequested;
 
         #endregion Public Events
 
@@ -35,6 +27,12 @@ namespace OpenBreed.Wecs.Entities
         IEntity GetById(int id);
 
         IEntity Create(string tag, List<IEntityComponent> initialComponents = null);
+
+        /// <summary>
+        /// Request to destroy given entity
+        /// </summary>
+        /// <param name="entity">Entity to destroy</param>
+        void RequestDestroy(IEntity entity);
 
         #endregion Public Methods
     }

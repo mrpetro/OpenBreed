@@ -246,7 +246,7 @@ namespace OpenBreed.Sandbox.Loaders
                 .SetTag("Mission")
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
         }
 
         private void AddDirector(IWorld world, string scriptId)
@@ -256,7 +256,7 @@ namespace OpenBreed.Sandbox.Loaders
                 .SetTag("Director")
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
         }
 
         public object LoadObject(string entryId) => Load(entryId);

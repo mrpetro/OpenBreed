@@ -23,15 +23,20 @@ namespace OpenBreed.Sandbox.Entities
 
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
+        private readonly IWorldMan worldMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public GenericCellHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
+        public GenericCellHelper(
+            IDataLoaderFactory dataLoaderFactory,
+            IEntityFactory entityFactory,
+            IWorldMan worldMan)
         {
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
+            this.worldMan = worldMan;
         }
 
         #endregion Public Constructors
@@ -51,7 +56,7 @@ namespace OpenBreed.Sandbox.Entities
 
             entity.Add(new UnknownCodeComponent(actionValue));
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }
@@ -67,7 +72,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }
@@ -84,7 +89,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }
@@ -100,7 +105,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }
@@ -116,7 +121,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }
@@ -132,7 +137,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }

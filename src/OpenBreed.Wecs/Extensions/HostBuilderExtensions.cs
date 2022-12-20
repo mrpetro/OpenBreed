@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Common;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
@@ -23,7 +24,22 @@ namespace OpenBreed.Wecs.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IEntityMan, EntityMan>();
-                services.AddSingleton<IWorldMan, WorldMan>();
+                services.AddSingleton<IWorldMan, WorldMan>((sp) =>
+                {
+                    var entityMan = sp.GetRequiredService<IEntityMan>();
+
+                    var worldMan = new WorldMan(
+                        sp.GetRequiredService<IEventsMan>(),
+                        sp.GetRequiredService<ISystemFactory>(),
+                        sp.GetRequiredService<IEntityToSystemMatcher>(),
+                        sp.GetRequiredService<ILogger>());
+
+                    entityMan.ComponentAdded += (entity, componentType) => worldMan.RequestUpdateEntity(entity);
+                    entityMan.ComponentRemoved += (entity, componentType) => worldMan.RequestUpdateEntity(entity);
+
+                    return worldMan;
+                });
+
                 services.AddSingleton<ISystemFinder, SystemFinder>();
                 services.AddTransient<WorldBuilder>();
             });

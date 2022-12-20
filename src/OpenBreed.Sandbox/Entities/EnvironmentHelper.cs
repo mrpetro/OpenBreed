@@ -22,16 +22,22 @@ namespace OpenBreed.Sandbox.Entities
 {
     public class EnvironmentHelper
     {
-        public EnvironmentHelper(IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory, IBuilderFactory builderFactory)
+        public EnvironmentHelper(
+            IDataLoaderFactory dataLoaderFactory,
+            IEntityFactory entityFactory,
+            IBuilderFactory builderFactory,
+            IWorldMan worldMan)
         {
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
             this.builderFactory = builderFactory;
+            this.worldMan = worldMan;
         }
 
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
         private readonly IBuilderFactory builderFactory;
+        private readonly IWorldMan worldMan;
 
         public IEntity AddTVFlickering(IWorld world, int x, int y, string level, int gfxValue)
         {
@@ -42,7 +48,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }
@@ -56,7 +62,7 @@ namespace OpenBreed.Sandbox.Entities
                 .SetParameter("imageIndex", gfxValue)
                 .Build();
 
-            entity.EnterWorld(world.Id);
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }
