@@ -50,8 +50,8 @@
 
     end
 
-    itemEntity:Destroy()
-
+    Worlds:RequestRemoveEntity(itemEntity)
+    Entities:RequestDestroy(itemEntity)
 end
 
 return {

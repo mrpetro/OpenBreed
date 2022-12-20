@@ -19,17 +19,19 @@
 		do
 			local nextDoorCell = mineEntity:GetEntityByDataGrid(Worlds, i, j)
 
-			Factory:CreateSlowdown(mineEntity, mineEntity.WorldId, i, j)
+			Factory:CreateSlowdown(Worlds, mineEntity, mineEntity.WorldId, i, j)
 
 			if(nextDoorCell ~= nil)
 			then
-				nextDoorCell:Destroy()
+				Worlds:RequestRemoveEntity(nextDoorCell)
+				Entities:RequestDestroy(nextDoorCell)
 			end
 
 		end
 	end
 
-	--mineEntity:Destroy()
+	--Worlds:RequestRemoveEntity(mineEntity)
+	--Entities:RequestDestroy(mineEntity)
 	Logging:Info("Boom!")
 end
 

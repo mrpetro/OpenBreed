@@ -150,7 +150,8 @@
     --local duration = Sounds:GetDuration(soundId)
     --mineEntity:EmitSound(soundId)	
 
-    --mineEntity:Destroy()
+	--Worlds:RequestRemoveEntity(mineEntity)
+    --Entities:RequestDestroy(mineEntity)
     Logging:Info("Door Open!")
 
 end

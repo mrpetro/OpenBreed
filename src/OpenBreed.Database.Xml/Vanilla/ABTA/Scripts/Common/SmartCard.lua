@@ -173,8 +173,8 @@
             entity:PutStamp(stampId, 0)
         end
 
-        entity:Destroy()
-
+	    Worlds:RequestRemoveEntity(entity)
+	    Entities:RequestDestroy(entity)
     end
 
     if (tostring(actorEntity.State) == "SmartCardReading")
