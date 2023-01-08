@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Metadata>
+			<Name>Cursor</Name>
+		</Metadata>
+		<Position X="$(posX)" Y="$(posY)" />
+		<Script>
+			<ScriptId>EntityTypes.Cursor</ScriptId>
+		</Script>
+		<Cursor>
+		</Cursor>
+		<Text>
+			<Text>------------</Text>
+			<Offset X="0" Y="0" />
+			<Color R="1.0" G="1.0" B="1.0" A="1.0" />
+			<FontName>Arial</FontName>
+			<FontSize>8</FontSize>
+			<Order>100</Order>
+		</Text>
+    </Components>
+</EntityTemplate>

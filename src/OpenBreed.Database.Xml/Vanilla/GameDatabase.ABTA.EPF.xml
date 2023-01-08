@@ -193,6 +193,7 @@
 				<FileDataSource Id="Extension/Scripts/Common/SmartCard.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\SmartCard.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
+				<FileDataSource Id="Extension/Scripts/Hud/Cursor.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\Cursor.lua" />
 				<FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
 				<FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\SimpleEntry.lua" />
 				<FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Exit.lua" />
@@ -1088,6 +1089,9 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.Hud.FpsCounter.lua" DataSourceRef="Extension/Scripts/Hud/FpsCounter.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Hud.Cursor.lua" DataSourceRef="Extension/Scripts/Hud/Cursor.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="Extension/Scripts/Entry.lua" FormatType="TEXT">
@@ -12002,6 +12006,9 @@
 				<ScriptFromFile Id="EntityTypes.FpsCounter">
 					<DataRef>Assets.Scripts.Common.Hud.FpsCounter.lua</DataRef>
 				</ScriptFromFile>
+				<ScriptFromFile Id="EntityTypes.Cursor">
+					<DataRef>Assets.Scripts.Common.Hud.Cursor.lua</DataRef>
+				</ScriptFromFile>
 				<ScriptFromFile Id="Scripts.Entry.lua">
 					<DataRef>Assets.Scripts.Entry.lua</DataRef>
 				</ScriptFromFile>
@@ -13382,6 +13389,1530 @@
 								<Frame Time="5.0" Value="0.4" />
 							</Frames>
 						</FloatTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/90">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="71" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/112.5">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="72" />
+
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Hero/1" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/135">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="73" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/157.5">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="74" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/180">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="75" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/202.5">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="76" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/225">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="77" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/247.5">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="78" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/270">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="79" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/292.5">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="80" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/315">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="81" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/337.5">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="82" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/0">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="83" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/22.5">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="84" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/45">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="85" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/67.5">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="86" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/Low/90">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="101" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/Low/135">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="102" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/Low/180">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="103" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/Low/225">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="104" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/Low/270">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="105" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/Low/315">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="106" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/Low/0">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="107" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/Low/45">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="108" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/High/90">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="109" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/High/135">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="110" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/High/180">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="111" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/High/225">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="112" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/High/270">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="113" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/High/315">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="114" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/High/0">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="115" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/High/45">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="116" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				
+		
+
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/90">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="23" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/135">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="24" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/180">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="25" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/225">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="26" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/270">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="27" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/315">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="28" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/0">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="29" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/45">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="30" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Medium/90">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="31" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Medium/135">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="32" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Medium/180">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="33" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Medium/225">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="34" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Medium/270">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="35" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Medium/315">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="36" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Medium/0">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="37" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Medium/45">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="38" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/High/90">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="39" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/High/135">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="40" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/High/180">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="41" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/High/225">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="42" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/High/270">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="43" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/High/315">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="44" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/High/0">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="45" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/AssaultGun/High/45">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="46" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Low/90">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="47" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Low/135">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="48" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Low/180">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="49" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Low/225">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="50" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Low/270">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="51" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Low/315">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="52" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Low/0">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="53" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Low/45">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="54" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Medium/90">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="55" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Medium/135">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="56" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Medium/180">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="57" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Medium/225">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="58" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Medium/270">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="59" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Medium/315">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="60" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Medium/0">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="61" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/Medium/45">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="62" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>			
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/High/90">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="63" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/High/135">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="64" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/High/180">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="65" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/High/225">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="66" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/High/270">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="67" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/High/315">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="68" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/High/0">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="69" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Projectile/Trilazer/High/45">
+					<Length>1.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="70" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
 					</Tracks>
 				</Animation>
 				<Animation Id="Vanilla/L4/Environment/TVFlickering">

@@ -22,6 +22,7 @@
     <None Remove="Vanilla\ABTA\Templates\Common\Director.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Environment\SlowdownObstacle.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\GameCommentator.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Hud\Cursor.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Mission.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\MissionScreen\Background.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\MissionScreen\Text.xml" />
@@ -36,6 +37,7 @@
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\GameHudViewport.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\GameViewport.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\TextViewport.xml" />
+    <None Remove="Vanilla\Common\Scripts\Hud\Cursor.lua" />
     <None Remove="Vanilla\Common\Scripts\Hud\FpsCounter.lua" />
     <None Remove="Vanilla\GameDatabase.ABHC.xml" />
     <None Remove="Vanilla\GameDatabase.ABSE.xml" />
@@ -113,6 +115,9 @@
     <Content Include="Vanilla\ABTA\Templates\Common\Environment\SlowdownObstacle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Hud\Cursor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\Mission.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -123,6 +128,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\Common\Scripts\Hud\Cursor.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\Common\Scripts\Hud\FpsCounter.lua">
