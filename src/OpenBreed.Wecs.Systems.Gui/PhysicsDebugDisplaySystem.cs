@@ -32,8 +32,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         public PhysicsDebugDisplaySystem(
             IWorld world,
-            IPrimitiveRenderer primitiveRenderer) :
-            base(world)
+            IPrimitiveRenderer primitiveRenderer)
         {
             this.primitiveRenderer = primitiveRenderer;
             broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();

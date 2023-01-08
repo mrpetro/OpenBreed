@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
 {
     public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupRenderingComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
+        public static void SetupXmlRenderingComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
             provider.RegisterComponentFactory<XmlPictureComponent>(serviceProvider.GetService<PictureComponentFactory>());
             provider.RegisterComponentFactory<XmlSpriteComponent>(serviceProvider.GetService<SpriteComponentFactory>());

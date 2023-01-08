@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Protected Constructors
 
-        protected SystemBase(IWorld world) : base(world)
+        protected SystemBase()
         {
         }
 
@@ -25,9 +25,8 @@ namespace OpenBreed.Wecs.Systems
 
         #region Protected Constructors
 
-        protected SystemBase(IWorld world)
+        protected SystemBase()
         {
-            World = world;
         }
 
         #endregion Protected Constructors
@@ -38,11 +37,6 @@ namespace OpenBreed.Wecs.Systems
         /// Id of the phase in which system will be updated
         /// </summary>
         public int PhaseId { get; }
-
-        /// <summary>
-        /// World which owns this system
-        /// </summary>
-        public IWorld World { get; }
 
         #endregion Public Properties
 

@@ -16,8 +16,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Constructors
 
-        protected UpdatableSystemBase(IWorld world) :
-                    base(world)
+        protected UpdatableSystemBase(IWorld world)
         {
         }
 

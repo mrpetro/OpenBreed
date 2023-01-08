@@ -39,6 +39,7 @@ using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Extensions;
@@ -53,6 +54,7 @@ using OpenBreed.Wecs.Components.Audio.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Control;
+using OpenBreed.Wecs.Components.Gui.Extensions;
 using OpenBreed.Wecs.Components.Physics.Extensions;
 using OpenBreed.Wecs.Components.Rendering.Extensions;
 using OpenBreed.Wecs.Components.Scripting.Extensions;
@@ -70,6 +72,7 @@ using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
+using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Scripting;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
@@ -156,6 +159,12 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupClipMan<IEntity>();
 
+            hostBuilder.ConfigureServices(sc =>
+            {
+                sc.AddSingleton<CoordsTransformer>();
+            });
+
+
             hostBuilder.SetupLuaScripting((scriptMan, sp) =>
             {
                 var eventsMan = sp.GetService<IEventsMan>();
@@ -182,6 +191,8 @@ namespace OpenBreed.Sandbox
                 scriptMan.Expose("Items", sp.GetService<ItemsMan>());
                 scriptMan.Expose("Texts", sp.GetService<TextsDataProvider>());
                 scriptMan.Expose("Inputs", sp.GetService<IInputsMan>());
+                scriptMan.Expose("Worlds", sp.GetService<IWorldMan>());
+                scriptMan.Expose("Coords", sp.GetService<CoordsTransformer>());
 
                 var res = scriptMan.RunString(@"import('System')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
@@ -269,7 +280,7 @@ namespace OpenBreed.Sandbox
                 systemFactory.SetupCoreSystems(sp);
                 systemFactory.SetupControlSystems(sp);
                 systemFactory.SetupAnimationSystems(sp);
-                systemFactory.SetupPhysicsDebugSystem(sp);
+                systemFactory.SetupGuiSystems(sp);
                 systemFactory.SetupGameSystems(sp);
             });
 
@@ -280,6 +291,7 @@ namespace OpenBreed.Sandbox
             XmlAudioComponents.Setup();
             XmlFsmComponents.Setup();
             XmlScriptingComponents.Setup();
+            XmlGuiComponents.Setup();
 
             hostBuilder.SetupCommonComponentFactories();
             hostBuilder.SetupPhysicsComponentFactories();
@@ -288,16 +300,18 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupAudioComponentFactories();
             hostBuilder.SetupFsmComponentFactories();
             hostBuilder.SetupScriptingComponentFactories();
+            hostBuilder.SetupGuiComponentFactories();
 
             hostBuilder.SetupComponentFactoryProvider((provider, sp) =>
             {
-                provider.SetupCommonComponents(sp);
-                provider.SetupPhysicsComponents(sp);
-                provider.SetupRenderingComponents(sp);
-                provider.SetupAnimationComponents(sp);
-                provider.SetupAudioComponents(sp);
-                provider.SetupFsmComponents(sp);
-                provider.SetupScriptingComponents(sp);
+                provider.SetupXmlCommonComponents(sp);
+                provider.SetupXmlPhysicsComponents(sp);
+                provider.SetupXmlRenderingComponents(sp);
+                provider.SetupXmlAnimationComponents(sp);
+                provider.SetupXmlAudioComponents(sp);
+                provider.SetupXmlFsmComponents(sp);
+                provider.SetupXmlScriptingComponents(sp);
+                provider.SetupXmlGuiComponents(sp);
             });
 
             hostBuilder.SetupEntityFactory((entityFactory, sp) =>
@@ -400,9 +414,6 @@ namespace OpenBreed.Sandbox
             fsmMan.CreateTurretRotationStates(host.Services);
 
             GetManager<IRenderingMan>();
-
-            GetManager<IScriptMan>().Expose("Worlds", GetManager<IWorldMan>());
-
 
             clientMan.UpdateFrameEvent += (a) => OnUpdateFrame(a);
             clientMan.LoadEvent += () => OnLoad();
@@ -543,6 +554,7 @@ namespace OpenBreed.Sandbox
             var triggerMan = GetManager<ITriggerMan>();
             var worldGateHelper = GetManager<EntriesHelper>();
             var gameSettings = GetManager<IOptions<GameSettings>>();
+            var hudHelper = GetManager<HudHelper>();
 
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
             var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
@@ -584,6 +596,7 @@ namespace OpenBreed.Sandbox
 
             scriptMan.Expose("JohnPlayer", johnPlayerEntity);
 
+            //hudHelper.AddCursor(gameWorld);
 
             johnPlayerEntity.AddFollower(playerCamera);
 
@@ -705,18 +718,10 @@ namespace OpenBreed.Sandbox
             soundMan.CreateSoundSource();
             soundMan.CreateSoundSource();
 
-
             //var amfFilePath = @"D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)\extract\TITLE.AMF";
             //var mod = OpenMod(amfFilePath);
             //var musicId = soundMan.CreateStream("MUSIC", (bufferSize, buffer) => ReadStream(mod, bufferSize, buffer));
             //soundMan.PlayStream(musicId);
-
-            var laserTex = textureMan.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
-            spriteMan.CreateAtlas()
-                .SetTexture(laserTex.Id)
-                .SetName("Atlases/Sprites/Projectiles/Laser")
-                .AppendCoordsFromGrid(16, 16, 8, 1, 0, 0)
-                .Build();
 
             actorHelper.RegisterCollisionPairs();
             worldGateHelper.RegisterCollisionPairs();

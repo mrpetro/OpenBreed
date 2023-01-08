@@ -26,11 +26,6 @@ namespace OpenBreed.Wecs.Systems
         /// </summary>
         int PhaseId { get; }
 
-        /// <summary>
-        /// world which owns this system
-        /// </summary>
-        IWorld World { get; }
-
         bool ContainsEntity(IEntity entity);
 
         void AddEntity(IEntity entity);

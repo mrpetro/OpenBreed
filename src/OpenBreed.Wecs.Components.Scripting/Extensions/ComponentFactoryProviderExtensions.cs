@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Components.Scripting.Extensions
 {
     public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupScriptingComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
+        public static void SetupXmlScriptingComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
             provider.RegisterComponentFactory<XmlScriptComponent>(serviceProvider.GetService<ScriptComponentFactory>());
         }

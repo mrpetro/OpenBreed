@@ -37,8 +37,7 @@ namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
         public UnknownMapCellDisplaySystem(
             IWorld world,
             IPrimitiveRenderer primitiveRenderer,
-            IFontMan fontMan) :
-            base(world)
+            IFontMan fontMan)
         {
             this.primitiveRenderer = primitiveRenderer;
             this.fontMan = fontMan;

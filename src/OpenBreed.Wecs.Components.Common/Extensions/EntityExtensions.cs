@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Wecs.Entities;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +36,9 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             return entity.Get<FollowedComponent>();
         }
 
-        public static PositionComponent GetPosition(this IEntity entity)
+        public static Vector2 GetPosition(this IEntity entity)
         {
-            return entity.Get<PositionComponent>();
+            return entity.Get<PositionComponent>().Value;
         }
 
         public static void SetPosition(this IEntity entity, float x, float y)

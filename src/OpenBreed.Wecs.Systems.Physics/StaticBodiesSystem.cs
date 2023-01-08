@@ -35,8 +35,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             IWorld world,
             IEntityMan entityMan,
             IShapeMan shapeMan,
-            IEventsMan eventsMan) :
-            base(world)
+            IEventsMan eventsMan)
         {
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;

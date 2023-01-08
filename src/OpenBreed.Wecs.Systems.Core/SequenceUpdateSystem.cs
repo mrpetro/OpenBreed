@@ -16,8 +16,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Constructors
 
-        public SequenceUpdateSystem(IWorld world, IEntityUpdateSubsystem entityUpdateSystem) :
-                    base(world)
+        public SequenceUpdateSystem(IEntityUpdateSubsystem entityUpdateSystem)
         {
             this.entityUpdateSystem = entityUpdateSystem;
         }

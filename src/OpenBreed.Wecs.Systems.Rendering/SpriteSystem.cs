@@ -29,8 +29,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         internal SpriteSystem(
             IWorld world, 
             ISpriteMan spriteMan,
-            ISpriteRenderer spriteRenderer) :
-            base(world)
+            ISpriteRenderer spriteRenderer)
         {
             this.spriteMan = spriteMan;
             this.spriteRenderer = spriteRenderer;

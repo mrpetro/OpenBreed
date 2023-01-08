@@ -27,8 +27,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         internal TextPresenterSystem(
             IWorld world,
-            IFontMan fontMan) :
-            base(world)
+            IFontMan fontMan)
         {
             this.fontMan = fontMan;
         }

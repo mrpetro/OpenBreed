@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Components.Audio.Extensions
 {
     public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupAudioComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
+        public static void SetupXmlAudioComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
             provider.RegisterComponentFactory<XmlSoundPlayerComponent>(serviceProvider.GetService<SoundPlayerComponentFactory>());
         }

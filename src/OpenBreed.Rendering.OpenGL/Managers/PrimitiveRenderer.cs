@@ -85,6 +85,20 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             DrawUnitRectangle(model, color);
         }
 
+        public void DrawPoint(Vector4 pos, Color4 color)
+        {
+            var w = 5.0f;
+            var h = 5.0f;
+            var pos3 = new Vector3(pos.X, pos.Y, pos.Z);
+
+            var model = Matrix4.CreateTranslation(pos3);
+            model = Matrix4.CreateTranslation(-w / 2.0f, -h / 2.0f, 0.0f) * model;
+            model = Matrix4.CreateScale(w, h, 1.0f) * model;
+            model = model * Matrix4.CreateTranslation(w / 2.0f, h / 2.0f, 0.0f);
+
+            DrawUnitBox(model, color);
+        }
+
         public void DrawBox(Box2 box, Color4 color)
         {
             var w = box.Size.X;
@@ -188,6 +202,21 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.BindVertexArray(0);
 
             return newVao;
+        }
+
+        public Vector4 GetScreenToWorldCoords(Vector4 coords)
+        {
+            var mat = view * projection;
+            mat.Invert();
+
+            var coordsT = coords * mat;
+            coordsT.W = 1.0f / coordsT.W;
+
+            coordsT.X *= coordsT.W;
+            coordsT.Y *= coordsT.W;
+            coordsT.Z *= coordsT.W;
+
+            return coordsT;
         }
 
         public IPosArrayBuilder CreatePosArray() => new PosArrayBuilder(this);

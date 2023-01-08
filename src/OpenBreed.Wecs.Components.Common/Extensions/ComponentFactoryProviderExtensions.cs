@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
 {
     public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupCommonComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
+        public static void SetupXmlCommonComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
             provider.RegisterComponentFactory<XmlPositionComponent>(serviceProvider.GetService<PositionComponentFactory>());
             provider.RegisterComponentFactory<XmlGridPositionComponent>(serviceProvider.GetService<GridPositionComponentFactory>());

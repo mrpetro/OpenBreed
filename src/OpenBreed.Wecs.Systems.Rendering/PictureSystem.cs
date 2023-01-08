@@ -27,8 +27,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         internal PictureSystem(
             IWorld world,
-            IPictureRenderer imageRenderer) :
-            base(world)
+            IPictureRenderer imageRenderer)
         {
             this.imageRenderer = imageRenderer;
 

@@ -54,6 +54,7 @@ namespace OpenBreed.Input.Generic
         private Dictionary<string, IInputHandler> controlHandlers = new Dictionary<string, IInputHandler>();
         private Vector2 oldCursorPos;
         private KeyboardState oldKeyboardState;
+        private MouseState oldMouseState;
         private float oldWheelPos;
 
         #endregion Private Fields
@@ -154,7 +155,7 @@ namespace OpenBreed.Input.Generic
         public void Update()
         {
             var newKeyboardState = clientMan.KeyboardState.GetSnapshot();
-
+            var newMouseState = clientMan.MouseState.GetSnapshot();
             try
             {
                 CheckKeysPressed(newKeyboardState);
@@ -171,6 +172,7 @@ namespace OpenBreed.Input.Generic
             finally
             {
                 oldKeyboardState = newKeyboardState;
+                oldMouseState = newMouseState;
             }
         }
 

@@ -32,8 +32,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             IWorld world,
             IEntityMan entityMan,
             IFontMan fontMan,
-            ILogger logger) :
-            base(world)
+            ILogger logger)
         {
             this.entityMan = entityMan;
             this.fontMan = fontMan;

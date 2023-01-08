@@ -1,20 +1,37 @@
 ﻿namespace OpenBreed.Wecs.Components.Gui
 {
+    public interface ICursorInputComponentTemplate : IComponentTemplate
+    {
+    }
+
     public class CursorInputComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public CursorInputComponent(int cursorId)
+        public CursorInputComponent()
         {
-            CursorId = cursorId;
+        }
+
+        #endregion Public Constructors
+    }
+
+    public sealed class CursorInputComponentFactory : ComponentFactoryBase<ICursorInputComponentTemplate>
+    {
+        #region Public Constructors
+
+        public CursorInputComponentFactory()
+        {
         }
 
         #endregion Public Constructors
 
-        #region Public Properties
+        #region Protected Methods
 
-        public int CursorId { get; set; }
+        protected override IEntityComponent Create(ICursorInputComponentTemplate template)
+        {
+            return new CursorInputComponent();
+        }
 
-        #endregion Public Properties
+        #endregion Protected Methods
     }
 }

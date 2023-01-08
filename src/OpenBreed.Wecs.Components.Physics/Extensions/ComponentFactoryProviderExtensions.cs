@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Components.Physics.Extensions
 {
     public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupPhysicsComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
+        public static void SetupXmlPhysicsComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
             provider.RegisterComponentFactory<XmlBodyComponent>(serviceProvider.GetService<BodyComponentFactory>());
             provider.RegisterComponentFactory<XmlMotionComponent>(serviceProvider.GetService<MotionComponentFactory>());

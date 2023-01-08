@@ -9,6 +9,7 @@ using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui;
 using OpenBreed.Wecs.Systems.Physics;
 using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Systems.Scripting;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Extensions
@@ -35,7 +36,6 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<FrameSystem>();
             builder.AddSystem<PausingSystem>();
             builder.AddSystem<FsmSystem>();
-
             builder.AddSystem<VelocityChangedSystem>();
 
             //Audio Stage
@@ -53,6 +53,12 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<UnknownMapCellDisplaySystem>();
             //builder.AddSystem(systemFactory.Create<GroupMapCellDisplaySystem>());
             builder.AddSystem<ViewportSystem>();
+
+            builder.AddSystem<ScriptRunningSystem>();
+
+
+            //GUI Stage
+            builder.AddSystem<CursorSystem>();
         }
 
         #endregion Public Methods

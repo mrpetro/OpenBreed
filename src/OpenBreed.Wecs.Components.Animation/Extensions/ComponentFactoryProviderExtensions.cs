@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Components.Animation.Extensions
 {
     public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupAnimationComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
+        public static void SetupXmlAnimationComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
             provider.RegisterComponentFactory<XmlAnimationComponent>(serviceProvider.GetService<AnimationComponentFactory>());
         }

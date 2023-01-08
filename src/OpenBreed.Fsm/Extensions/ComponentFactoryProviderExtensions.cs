@@ -12,7 +12,7 @@ namespace OpenBreed.Fsm.Extensions
 {
     public static class ComponentFactoryProviderExtensions
     {
-        public static void SetupFsmComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
+        public static void SetupXmlFsmComponents(this IComponentFactoryProvider provider, IServiceProvider serviceProvider)
         {
             provider.RegisterComponentFactory<XmlFsmComponent>(serviceProvider.GetService<FsmComponentFactory>());
         }

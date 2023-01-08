@@ -121,6 +121,8 @@ namespace OpenBreed.Sandbox
 
         public KeyboardState KeyboardState => window.KeyboardState;
 
+        public MouseState MouseState => window.MouseState;
+
         #endregion Public Properties
 
         #region Public Methods
@@ -148,7 +150,8 @@ namespace OpenBreed.Sandbox
         {
             ClientTransform = Matrix4.Identity;
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Size.Y, 0.0f));
-            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
+            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(-ClientRectangle.Size.X / 2.0f, ClientRectangle.Size.Y / 2.0f, 0.0f));
+            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(2.0f / ClientRectangle.Size.X, -2.0f / ClientRectangle.Size.Y, 1.0f));
 
             ResizeEvent?.Invoke(new Vector2i(ClientRectangle.Size.X, ClientRectangle.Size.Y));
         }

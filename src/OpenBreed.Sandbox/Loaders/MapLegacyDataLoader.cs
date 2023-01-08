@@ -20,6 +20,7 @@ using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Rendering;
@@ -234,9 +235,21 @@ namespace OpenBreed.Sandbox.Loaders
                 AddMission(world);
                 AddDirector(world, dbMap.ScriptRef);
 
+                //DEBUG entities
+                AddCursor(world);
             }, singleTime: true);
 
             return world;
+        }
+
+        private void AddCursor(IWorld world)
+        {
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\Cursor.xml")
+                .SetParameter("posX", 0.0f)
+                .SetParameter("posY", 0.0f)
+                .Build();
+
+            worldMan.RequestAddEntity(entity, world.Id);
         }
 
         private void AddMission(IWorld world)

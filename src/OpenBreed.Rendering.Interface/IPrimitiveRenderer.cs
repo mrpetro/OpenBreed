@@ -27,12 +27,15 @@ namespace OpenBreed.Rendering.Interface
         void DrawRectangle(Box2 clipBox, Color4 color);
 
         void DrawBox(Box2 clipBox, Color4 color);
-
+        void DrawPoint(Vector4 pos, Color4 color);
         void DrawUnitBox(Matrix4 model, Color4 color);
         void DrawBrightnessBox(float brightness);
 
         void MultMatrix(Matrix4 transform);
         void SetProjection(Matrix4 matrix4);
+
+        Vector4 GetScreenToWorldCoords(Vector4 coords);
+
         void Load();
 
         void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size, Color4 color);

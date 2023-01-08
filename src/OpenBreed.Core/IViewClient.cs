@@ -55,6 +55,8 @@ namespace OpenBreed.Core
 
         KeyboardState KeyboardState { get; }
 
+        MouseState MouseState { get; }
+
         #endregion Public Properties
 
         #region Public Methods

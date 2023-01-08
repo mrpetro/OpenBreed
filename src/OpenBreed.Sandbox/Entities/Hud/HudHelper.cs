@@ -66,6 +66,16 @@ namespace OpenBreed.Sandbox.Entities.Hud
             triggerMan.OnWorldInitialized(world, () => worldMan.RequestAddEntity(fpsCounter, world.Id), singleTime: true);
         }
 
+        public void AddCursor(IWorld world)
+        {
+            var fpsCounter = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\Cursor.xml")
+                .SetParameter("posX", 0.0f)
+                .SetParameter("posY", 0.0f)
+                .Build();
+
+            triggerMan.OnWorldInitialized(world, () => worldMan.RequestAddEntity(fpsCounter, world.Id), singleTime: true);
+        }
+
         #endregion Public Methods
 
         #region Private Methods
