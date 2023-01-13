@@ -8,6 +8,24 @@ end
 
 local function onInit(entity)
 
+    Triggers:OnCursorMoved(
+        entity,
+        Print1,
+        false)
+
+    Triggers:OnCursorKeyPressed(
+        entity,
+        Print2,
+        false)
+
+end
+
+Print1 = function(cursor, args)
+    Logging:Info("Moved")
+end
+
+Print2 = function(cursor, args)
+    Logging:Info("Pressed")
 end
 
 return {
