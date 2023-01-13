@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
@@ -6,6 +7,7 @@ using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Gui;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Gui.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
@@ -20,9 +22,10 @@ namespace OpenBreed.Wecs.Systems.Gui
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly IEventsMan eventsMan;
+        private readonly IInputsMan inputsMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly IViewClient viewClient;
-        private readonly IInputsMan inputsMan;
 
         #endregion Private Fields
 
@@ -32,11 +35,13 @@ namespace OpenBreed.Wecs.Systems.Gui
             IWorld world,
             IViewClient viewClient,
             IInputsMan inputsMan,
-            IPrimitiveRenderer primitiveRenderer)
+            IPrimitiveRenderer primitiveRenderer,
+            IEventsMan eventsMan)
         {
             this.viewClient = viewClient;
             this.inputsMan = inputsMan;
             this.primitiveRenderer = primitiveRenderer;
+            this.eventsMan = eventsMan;
 
             world.GetModule<IRenderableBatch>().Add(this);
         }
@@ -69,16 +74,39 @@ namespace OpenBreed.Wecs.Systems.Gui
 
             for (int i = 0; i < entities.Count; i++)
             {
-                Render(entities[i], viewBox, depth, cursorPos4, dt);
+                Update(entities[i], viewBox, depth, cursorPos4, dt);
             }
         }
 
-        public void Render(IEntity entity, Box2 viewBox, int depth, Vector4 cursorPos, float dt)
+        public void Update(IEntity entity, Box2 viewBox, int depth, Vector4 cursorPos, float dt)
         {
             var posCmp = entity.Get<PositionComponent>();
+            var cursorCmp = entity.Get<CursorInputComponent>();
+            var lastPos = posCmp.Value;
             posCmp.Value = new Vector2(cursorPos.X, cursorPos.Y);
+            var delta = posCmp.Value - lastPos;
+
+            if (delta.X != 0.0f || delta.Y != 0.0f)
+                RaiseCursorMovedEvent(entity);
+
+            if(viewClient.MouseState.IsAnyButtonDown)
+                RaiseCursorKeyPressedEvent(entity, 0);
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void RaiseCursorMovedEvent(IEntity entity)
+        {
+            eventsMan.Raise(entity, new CursorMovedEntityEvent(entity.Id));
+        }
+
+        private void RaiseCursorKeyPressedEvent(IEntity entity, int keyId)
+        {
+            eventsMan.Raise(entity, new CursorKeyPressedEntityEvent(entity.Id, keyId));
+        }
+
+        #endregion Private Methods
     }
 }

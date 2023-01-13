@@ -21,6 +21,7 @@ using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Core.Extensions;
+using OpenBreed.Wecs.Systems.Gui.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenBreed.Wecs.Worlds;

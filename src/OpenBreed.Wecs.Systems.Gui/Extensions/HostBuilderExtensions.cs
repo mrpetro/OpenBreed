@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Entities;
 using System;
 using OpenBreed.Core;
 using OpenBreed.Input.Interface;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Wecs.Systems.Gui.Extensions
 {
@@ -24,7 +25,8 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
                     world,
                     sp.GetRequiredService<IViewClient>(),
                     sp.GetRequiredService<IInputsMan>(),
-                    sp.GetService<IPrimitiveRenderer>()));
+                    sp.GetRequiredService<IPrimitiveRenderer>(),
+                    sp.GetRequiredService<IEventsMan>()));
         }
 
         #endregion Public Methods

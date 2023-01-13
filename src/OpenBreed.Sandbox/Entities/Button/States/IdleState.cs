@@ -4,6 +4,7 @@ using OpenBreed.Fsm.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Wecs.Systems.Gui.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using System;
 
