@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Physics
     /// </summary>
     [RequireEntityWith(
         typeof(AngularPositionComponent),
-        typeof(AngularVelocityComponent),
+        typeof(AngularPositionTargetComponent),
         typeof(AngularThrustComponent))]
 
     public class DirectionSystemVanilla : UpdatableSystemBase<DirectionSystemVanilla>
@@ -42,7 +42,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var angularPos = entity.Get<AngularPositionComponent>();
-            var angularVel = entity.Get<AngularVelocityComponent>();
+            var angularVel = entity.Get<AngularPositionTargetComponent>();
 
             //Velocity equation
             //var newVel = angularVel.Value + angularThrust.Value * dt;

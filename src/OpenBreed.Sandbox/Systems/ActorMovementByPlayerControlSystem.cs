@@ -4,24 +4,23 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Control.Inputs;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Systems
 {
     [RequireEntityWith(
-        typeof(WalkingInputComponent),
-        typeof(ControlComponent))]
+        typeof(ThrustControlComponent),
+        typeof(ControllerComponent))]
     internal class ActorMovementByPlayerControlSystem : UpdatableSystemBase<ActorMovementByPlayerControlSystem>
     {
         #region Private Fields
 
         private readonly IEntityMan entityMan;
-
-        private readonly IPlayersMan playersMan;
+        private readonly IInputsMan inputsMan;
 
         #endregion Private Fields
 
@@ -30,11 +29,11 @@ namespace OpenBreed.Sandbox.Systems
         internal ActorMovementByPlayerControlSystem(
             IWorld world,
             IEntityMan entityMan,
-            IPlayersMan playersMan) :
+            IInputsMan inputsMan) :
             base(world)
         {
             this.entityMan = entityMan;
-            this.playersMan = playersMan;
+            this.inputsMan = inputsMan;
         }
 
         #endregion Internal Constructors
@@ -43,27 +42,24 @@ namespace OpenBreed.Sandbox.Systems
 
         protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
-            var inputComponent = entity.Get<WalkingInputComponent>();
-            var controlComponent = entity.Get<ControlComponent>();
+            var thrustControlComponent = entity.Get<ThrustControlComponent>();
+            var controllerComponent = entity.Get<ControllerComponent>();
 
-            var player = playersMan.GetById(inputComponent.PlayerId);
+            var dx = 0.0f;
+            var dy = 0.0f;
+            if (inputsMan.IsPressed(thrustControlComponent.RightCode)) dx = 1.0f;
+            else if (inputsMan.IsPressed(thrustControlComponent.LeftCode)) dx = -1.0f;
+            if (inputsMan.IsPressed(thrustControlComponent.DownCode)) dy = -1.0f;
+            else if (inputsMan.IsPressed(thrustControlComponent.UpCode)) dy = 1.0f;
 
-            var input = player.Inputs.OfType<DigitalJoyPlayerInput>().FirstOrDefault();
+            var direction = new Vector2(dx, dy);
 
-            if (input is null)
+            if (controllerComponent.ControlledEntityId == -1)
                 return;
 
-            if (!input.Changed)
-                return;
+            var controlledEntity = entityMan.GetById(controllerComponent.ControlledEntityId);
 
-            if (controlComponent.ControlledEntityId == -1)
-                return;
-
-            var controlledEntity = entityMan.GetById(controlComponent.ControlledEntityId);
-
-            var angularVelocity = controlledEntity.Get<AngularVelocityComponent>();
-
-            var direction = new Vector2(input.AxisX, input.AxisY);
+            var angularVelocity = controlledEntity.Get<AngularPositionTargetComponent>();
 
             if (direction != Vector2.Zero)
             {

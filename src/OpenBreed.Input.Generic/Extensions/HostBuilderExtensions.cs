@@ -16,6 +16,32 @@ namespace OpenBreed.Input.Generic.Extensions
 {
     public static class HostBuilderExtensions
     {
+        public static void SetupBinder(this IHostBuilder hostBuilder, Action<IActionBinder, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IActionBinder>((sp) =>
+                {
+                var keyBinder = default(IActionBinder);
+                    action.Invoke(keyBinder, sp);
+                    return keyBinder;
+                });
+            });
+        }
+
+        public static void SetupDefaultActionCodeProvider(this IHostBuilder hostBuilder, Action<DefaultActionCodeProvider, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IActionCodeProvider>((sp) =>
+                {
+                    var keyBinder = new DefaultActionCodeProvider();
+                    action.Invoke(keyBinder, sp);
+                    return keyBinder;
+                });
+            });
+        }
+
         public static void SetupInputMan(this IHostBuilder hostBuilder, Action<IInputsMan, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -27,20 +53,6 @@ namespace OpenBreed.Input.Generic.Extensions
                         sp.GetService<IEventsMan>());
                     action.Invoke(inputsMan, sp);
                     return inputsMan;
-                });
-            });
-        }
-
-        public static void SetupPlayersMan(this IHostBuilder hostBuilder, Action<IPlayersMan, IServiceProvider> action)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<IPlayersMan>((sp) =>
-                {
-                    var playersMan = new PlayersMan(sp.GetService<ILogger>(),
-                                                    sp.GetService<IInputsMan>());
-                    action.Invoke(playersMan, sp);
-                    return playersMan;
                 });
             });
         }

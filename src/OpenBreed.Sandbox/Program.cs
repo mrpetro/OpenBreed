@@ -66,8 +66,6 @@ using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Control.Extensions;
-using OpenBreed.Wecs.Systems.Control.Handlers;
-using OpenBreed.Wecs.Systems.Control.Inputs;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
@@ -221,27 +219,21 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupInputMan((inpitsMan, sp) =>
             {
-                inpitsMan.RegisterHandler(new DigitalJoyInputHandler());
-                inpitsMan.RegisterHandler(new ButtonInputHandler());
             });
 
-            hostBuilder.SetupPlayersMan((playersMan, sp) =>
-            {
-                var p1 = playersMan.AddPlayer("P1");
-                p1.RegisterInput(new ButtonPlayerInput());
-                p1.RegisterInput(new DigitalJoyPlayerInput());
-                p1.AddKeyBinding("Attacking", "Primary", Keys.RightControl);
-                p1.AddKeyBinding("Walking", "Left", Keys.Left);
-                p1.AddKeyBinding("Walking", "Right", Keys.Right);
-                p1.AddKeyBinding("Walking", "Up", Keys.Up);
-                p1.AddKeyBinding("Walking", "Down", Keys.Down);
 
-                var p2 = playersMan.AddPlayer("P2");
-                p2.RegisterInput(new DigitalJoyPlayerInput());
-                p2.AddKeyBinding("Walking", "Left", Keys.A);
-                p2.AddKeyBinding("Walking", "Right", Keys.D);
-                p2.AddKeyBinding("Walking", "Up", Keys.W);
-                p2.AddKeyBinding("Walking", "Down", Keys.S);
+            hostBuilder.SetupDefaultActionCodeProvider((codeProvider, sp) =>
+            {
+                codeProvider.Register(PlayerActions.Fire);
+            });
+
+            hostBuilder.SetupBinder((keyBinder, sp) =>
+            {
+                keyBinder.Bind(PlayerActions.MoveLeft, Keys.Left);
+                keyBinder.Bind(PlayerActions.MoveRight, Keys.Right);
+                keyBinder.Bind(PlayerActions.MoveDown, Keys.Down);
+                keyBinder.Bind(PlayerActions.MoveUp, Keys.Up);
+                keyBinder.Bind(PlayerActions.Fire, Keys.RightControl);
             });
 
             hostBuilder.SetupCollisionMan<IEntity>((collisionMan, sp) =>
@@ -524,8 +516,6 @@ namespace OpenBreed.Sandbox
 
         private void OnUpdateFrame(float dt)
         {
-            GetManager<IPlayersMan>().ResetInputs();
-
             GetManager<IInputsMan>().Update();
 
             GetManager<IWorldMan>().Update(dt);

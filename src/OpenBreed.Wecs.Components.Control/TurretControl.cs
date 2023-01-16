@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Components.Control
     /// </summary>
     public class TurretControl : BaseControl
     {
-        public bool TurnLeft;
-        public bool TurnRight;
+        public int TurnLeft;
+        public int TurnRight;
     }
 }

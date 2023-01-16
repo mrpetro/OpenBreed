@@ -72,12 +72,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             if (e.TimerId != 0)
                 return;
 
-            var cc = entity.Get<AttackControlComponent>();
+            var cc = entity.Get<ActionControlComponent>();
 
-            if (cc.AttackPrimary)
-                entity.SetState(FsmId, (int)AttackingImpulse.Shoot);
-            else
-                entity.SetState(FsmId, (int)AttackingImpulse.Stop);
+            //if (cc.Primary)
+            //    entity.SetState(FsmId, (int)AttackingImpulse.Shoot);
+            //else
+            //    entity.SetState(FsmId, (int)AttackingImpulse.Stop);
         }
 
         #endregion Private Methods

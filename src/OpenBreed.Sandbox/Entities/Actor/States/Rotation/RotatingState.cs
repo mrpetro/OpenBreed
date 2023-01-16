@@ -71,7 +71,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         private bool OnDirectionChanged(IEntity entity, DirectionChangedEventArgs args)
         {
-            var angularVelocity = entity.Get<AngularVelocityComponent>();
+            var angularVelocity = entity.Get<AngularPositionTargetComponent>();
             var angularPosition = entity.Get<AngularPositionComponent>();
 
 

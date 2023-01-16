@@ -21,11 +21,11 @@ namespace OpenBreed.Sandbox.Extensions
             systemFactory.RegisterSystem<ActorMovementByPlayerControlSystem>((world) => new ActorMovementByPlayerControlSystem(
                 world,
                 sp.GetService<IEntityMan>(),
-                sp.GetService<IPlayersMan>()));
+                sp.GetService<IInputsMan>()));
             systemFactory.RegisterSystem<ActorScriptByPlayerControlSystem>((world) => new ActorScriptByPlayerControlSystem(
                 world,
                 sp.GetService<IEntityMan>(),
-                sp.GetService<IPlayersMan>(),
+                sp.GetRequiredService<IInputsMan>(),
                 sp.GetService<IScriptMan>(),
                 sp.GetService<ILogger>()));
             systemFactory.RegisterSystem<UnknownMapCellDisplaySystem>((world) => new UnknownMapCellDisplaySystem(

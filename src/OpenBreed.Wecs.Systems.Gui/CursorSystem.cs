@@ -90,7 +90,15 @@ namespace OpenBreed.Wecs.Systems.Gui
                 RaiseCursorMovedEvent(entity);
 
             if(viewClient.MouseState.IsAnyButtonDown)
+            {
+                //cursorCmp.
+
+
                 RaiseCursorKeyPressedEvent(entity, 0);
+
+                //if(viewClient.MouseState.IsButtonPressed()
+            }
+
         }
 
         #endregion Public Methods

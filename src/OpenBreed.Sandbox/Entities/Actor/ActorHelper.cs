@@ -40,7 +40,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private readonly ICollisionMan<IEntity> collisionMan;
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
-        private readonly IPlayersMan playersMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
 
@@ -59,7 +58,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
             ICollisionMan<IEntity> collisionMan,
             IEntityMan entityMan,
             IWorldMan worldMan,
-            IPlayersMan playersMan,
             IDataLoaderFactory dataLoaderFactory,
             IEntityFactory entityFactory,
             DynamicResolver dynamicResolver,
@@ -72,7 +70,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
             this.collisionMan = collisionMan;
             this.entityMan = entityMan;
             this.worldMan = worldMan;
-            this.playersMan = playersMan;
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
             this.dynamicResolver = dynamicResolver;
@@ -114,7 +111,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             var p1Controller = entityMan.GetByTag("Controllers.P1").First();
 
-            p1Controller.Get<ControlComponent>().ControlledEntityId = actor.Id;
+            p1Controller.Get<ControllerComponent>().ControlledEntityId = actor.Id;
 
             return actor;
         }
@@ -124,7 +121,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             var actor = CreateActor(name, pos);
 
             var p1Controller = entityMan.GetByTag("Controllers.P1").First();
-            p1Controller.Get<ControlComponent>().ControlledEntityId = actor.Id;
+            p1Controller.Get<ControllerComponent>().ControlledEntityId = actor.Id;
 
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));

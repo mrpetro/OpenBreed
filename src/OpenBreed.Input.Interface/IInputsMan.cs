@@ -39,13 +39,9 @@ namespace OpenBreed.Input.Interface
 
         #region Public Methods
 
-        void AddPlayerKeyBinding(IPlayer player, string controlType, string controlAction, Keys key);
-
-        IInputHandler GetHandler(string controlType);
-
-        void RegisterHandler(IInputHandler handler);
-
         void Update();
+
+        bool IsPressed(int inputCode);
 
         #endregion Public Methods
     }

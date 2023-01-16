@@ -5,16 +5,16 @@ using System;
 
 namespace OpenBreed.Wecs.Components.Common
 {
-    public interface IAngularVelocityComponentTemplate : IComponentTemplate
+    public interface IAngularPositionTargetComponentTemplate : IComponentTemplate
     {
         float Value { get; }
     }
 
-    public class AngularVelocityComponent : IEntityComponent
+    public class AngularPositionTargetComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public AngularVelocityComponent(float angleValue)
+        public AngularPositionTargetComponent(float angleValue)
         {
             Value = GetDirection(angleValue);
         }
@@ -41,16 +41,16 @@ namespace OpenBreed.Wecs.Components.Common
     }
 
 
-    public sealed class AngularVelocityComponentFactory : ComponentFactoryBase<IAngularVelocityComponentTemplate>
+    public sealed class AngularPositionTargetComponentFactory : ComponentFactoryBase<IAngularPositionTargetComponentTemplate>
     {
-        public AngularVelocityComponentFactory()
+        public AngularPositionTargetComponentFactory()
         {
 
         }
 
-        protected override IEntityComponent Create(IAngularVelocityComponentTemplate template)
+        protected override IEntityComponent Create(IAngularPositionTargetComponentTemplate template)
         {
-            return new AngularVelocityComponent(template.Value);
+            return new AngularPositionTargetComponent(template.Value);
         }
     }
 }

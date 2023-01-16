@@ -24,7 +24,7 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             provider.RegisterComponentFactory<XmlTimerComponent>(serviceProvider.GetService<TimerComponentFactory>());
             provider.RegisterComponentFactory<XmlFrameComponent>(serviceProvider.GetService<FrameComponentFactory>());
             provider.RegisterComponentFactory<XmlAngularPositionComponent>(serviceProvider.GetService<AngularPositionComponentFactory>());
-            provider.RegisterComponentFactory<XmlAngularVelocityComponent>(serviceProvider.GetService<AngularVelocityComponentFactory>());
+            provider.RegisterComponentFactory<XmlAngularVelocityComponent>(serviceProvider.GetService<AngularPositionTargetComponentFactory>());
             provider.RegisterComponentFactory<XmlAngularThrustComponent>(serviceProvider.GetService<AngularThrustComponentFactory>());
             provider.RegisterComponentFactory<XmlMessagingComponent>(serviceProvider.GetService<MessagingComponentFactory>());
             provider.RegisterComponentFactory<XmlFollowedComponent>(serviceProvider.GetService<FollowedComponentFactory>());

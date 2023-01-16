@@ -1,48 +1,58 @@
-﻿using System.Collections.Generic;
+﻿using OpenBreed.Input.Interface;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Gui
 {
+    public interface ICursorAction
+    {
+        #region Public Properties
+
+        string Name { get; }
+        string Type { get; }
+
+        #endregion Public Properties
+    }
+
     public interface ICursorInputComponentTemplate : IComponentTemplate
     {
+        #region Public Properties
+
+        //ICursorAction[] Actions { get; }
+
+        #endregion Public Properties
     }
 
     public class CursorInputComponent : IEntityComponent
     {
+        #region Public Constructors
+
+        public CursorInputComponent(List<int> actions)
+        {
+            //Actions = actions;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        //public List<int> Actions { get; }
+
+        #endregion Public Properties
+    }
+
+    public sealed class CursorInputComponentFactory : ComponentFactoryBase<ICursorInputComponentTemplate>
+    {
         #region Private Fields
 
-        private readonly Dictionary<int, int> bindings = new Dictionary<int, int>();
+        private readonly IActionCodeProvider actionCodeProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public CursorInputComponent()
+        public CursorInputComponentFactory(IActionCodeProvider actionCodeProvider)
         {
-        }
-
-        #endregion Public Constructors
-
-        #region Public Methods
-
-        public void RemoveBinding(int id)
-        {
-            bindings.Remove(id);
-        }
-
-        public void SetBinding(int id, int keyId)
-        {
-            bindings[id] = keyId;
-        }
-
-        #endregion Public Methods
-    }
-
-    public sealed class CursorInputComponentFactory : ComponentFactoryBase<ICursorInputComponentTemplate>
-    {
-        #region Public Constructors
-
-        public CursorInputComponentFactory()
-        {
+            this.actionCodeProvider = actionCodeProvider;
         }
 
         #endregion Public Constructors
@@ -51,7 +61,15 @@ namespace OpenBreed.Wecs.Components.Gui
 
         protected override IEntityComponent Create(ICursorInputComponentTemplate template)
         {
-            return new CursorInputComponent();
+            var actions = new List<int>();
+
+            //foreach (var action in template.Actions)
+            //{
+            //    if (actionCodeProvider.TryGetCode(action.Type, action.Name, out int code))
+            //        actions.Add(code);
+            //}
+
+            return new CursorInputComponent(actions);
         }
 
         #endregion Protected Methods

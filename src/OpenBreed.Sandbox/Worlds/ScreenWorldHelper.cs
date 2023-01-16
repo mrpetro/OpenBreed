@@ -21,6 +21,7 @@ using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 
 namespace OpenBreed.Sandbox.Worlds
@@ -44,7 +45,6 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IWorldMan worldMan;
         private readonly IEventsMan eventsMan;
         private readonly IEntityMan entityMan;
-        private readonly IPlayersMan playersMan;
         private readonly ViewportCreator viewportCreator;
         private readonly IEntityFactory entityFactory;
         private readonly IViewClient viewClient;
@@ -61,7 +61,6 @@ namespace OpenBreed.Sandbox.Worlds
                                  IWorldMan worldMan,
                                  IEventsMan eventsMan,
                                  IEntityMan entityMan,
-                                 IPlayersMan playersMan,
                                  ViewportCreator viewportCreator,
                                  IEntityFactory entityFactory,
                                  IViewClient viewClient,
@@ -74,7 +73,6 @@ namespace OpenBreed.Sandbox.Worlds
             this.worldMan = worldMan;
             this.eventsMan = eventsMan;
             this.entityMan = entityMan;
-            this.playersMan = playersMan;
             this.viewportCreator = viewportCreator;
             this.entityFactory = entityFactory;
             this.viewClient = viewClient;
@@ -91,7 +89,7 @@ namespace OpenBreed.Sandbox.Worlds
             //Input Stage
             builder.AddSystem<ActorMovementByPlayerControlSystem>();
             builder.AddSystem<ActorScriptByPlayerControlSystem>();
-            builder.AddSystem<AttackControllerSystem>();
+            builder.AddSystem<ActionControlSystem>();
 
 
             //Video
@@ -109,12 +107,19 @@ namespace OpenBreed.Sandbox.Worlds
         public IEntity CreateController(string player)
         {
             var p1Controller = entityMan.Create($"Controllers.{player}");
-            var p1 = playersMan.GetByName(player);
 
-            p1Controller.Add(new WalkingInputComponent(p1.Id, 0));
-            p1Controller.Add(new AttackInputComponent(p1.Id, 0));
-            p1Controller.Add(new ControlComponent());
-            p1Controller.Add(new AttackControlComponent());
+            var thrustControl = new ThrustControlComponent();
+            thrustControl.UpCode = (int)Keys.Up;
+            thrustControl.DownCode = (int)Keys.Down;
+            thrustControl.LeftCode = (int)Keys.Left;
+            thrustControl.RightCode = (int)Keys.Right;
+
+            var actionControl = new ActionControlComponent();
+            actionControl.Primiary = (int)Keys.RightControl;
+
+            p1Controller.Add(actionControl);
+            p1Controller.Add(thrustControl);
+            p1Controller.Add(new ControllerComponent());
 
             return p1Controller;
         }

@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
                 services.AddSingleton<FrameComponentFactory>();
                 services.AddSingleton<MetadataComponentFactory>();
                 services.AddSingleton<AngularPositionComponentFactory>();
-                services.AddSingleton<AngularVelocityComponentFactory>();
+                services.AddSingleton<AngularPositionTargetComponentFactory>();
                 services.AddSingleton<AngularThrustComponentFactory>();
                 services.AddSingleton<MessagingComponentFactory>();
                 services.AddSingleton<FollowedComponentFactory>();

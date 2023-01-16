@@ -5,9 +5,9 @@ using OpenTK.Mathematics;
 namespace OpenBreed.Wecs.Components.Control
 {
     /// <summary>
-    /// Component for storing information about controller entity
+    /// Component which stores information about controlled entity
     /// </summary>
-    public class ControlComponent : IEntityComponent
+    public class ControllerComponent : IEntityComponent
     {
         #region Public Properties
 

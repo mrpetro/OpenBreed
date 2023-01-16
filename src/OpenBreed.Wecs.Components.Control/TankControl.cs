@@ -11,9 +11,9 @@ namespace OpenBreed.Wecs.Components.Control
     /// </summary>
     public class TankControl : BaseControl
     {
-        public bool TurnLeft;
-        public bool TurnRight;
-        public bool MoveForward;
-        public bool MoveBackward;
+        public int TurnLeft;
+        public int TurnRight;
+        public int MoveForward;
+        public int MoveBackward;
     }
 }

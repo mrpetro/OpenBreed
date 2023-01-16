@@ -50,8 +50,6 @@ namespace OpenBreed.Input.Generic
 
         private readonly IViewClient clientMan;
         private readonly IEventsMan eventsMan;
-        private readonly Dictionary<Keys, KeyBinding> keyBindings = new Dictionary<Keys, KeyBinding>();
-        private Dictionary<string, IInputHandler> controlHandlers = new Dictionary<string, IInputHandler>();
         private Vector2 oldCursorPos;
         private KeyboardState oldKeyboardState;
         private MouseState oldMouseState;
@@ -75,8 +73,6 @@ namespace OpenBreed.Input.Generic
             clientMan.MouseDownEvent += (a) => OnMouseDown(a);
             clientMan.MouseUpEvent += (a) => OnMouseUp(a);
             clientMan.MouseWheelEvent += (a) => OnMouseWheel(a);
-
-            KeyboardStateChanged += InputsMan_KeyboardStateChanged;
 
             oldKeyboardState = clientMan.KeyboardState.GetSnapshot();
         }
@@ -124,32 +120,9 @@ namespace OpenBreed.Input.Generic
 
         #region Public Methods
 
-        public void AddPlayerKeyBinding(IPlayer player, string controlType, string controlAction, Keys key)
+        public bool IsPressed(int inputCode)
         {
-            var controlHandler = GetHandler(controlType);
-
-            keyBindings.Add(key, new KeyBinding(player, controlHandler, controlAction));
-        }
-
-        public IInputHandler GetHandler(string controlType)
-        {
-            Debug.Assert(controlType != null, "Control type is null");
-
-            IInputHandler handler;
-
-            controlHandlers.TryGetValue(controlType, out handler);
-
-            return handler;
-        }
-
-        public void RegisterHandler(IInputHandler handler)
-        {
-            var controlType = handler.InputType;
-
-            if (controlHandlers.ContainsKey(controlType))
-                throw new InvalidOperationException($"Control type handler '{controlType}' already registered.");
-
-            controlHandlers.Add(controlType, handler);
+            return clientMan.KeyboardState.IsKeyDown((Keys)inputCode);
         }
 
         public void Update()
@@ -158,8 +131,6 @@ namespace OpenBreed.Input.Generic
             var newMouseState = clientMan.MouseState.GetSnapshot();
             try
             {
-                CheckKeysPressed(newKeyboardState);
-
                 if (!newKeyboardState.Equals(oldKeyboardState))
                     OnKeyboardStateChanged(newKeyboardState);
 
@@ -188,26 +159,6 @@ namespace OpenBreed.Input.Generic
         #endregion Protected Methods
 
         #region Private Methods
-
-        private void CheckKeysPressed(KeyboardState state)
-        {
-            foreach (var keyBinding in keyBindings)
-            {
-                if (state[keyBinding.Key])
-                    keyBinding.Value.OnKeyPressed();
-            }
-        }
-
-        private void InputsMan_KeyboardStateChanged(object sender, KeyboardStateEventArgs e)
-        {
-            foreach (var keyBinding in keyBindings)
-            {
-                if (e.IsKeyDown(keyBinding.Key))
-                    keyBinding.Value.OnKeyDown(1.0f);
-                else if (e.IsKeyUp(keyBinding.Key))
-                    keyBinding.Value.OnKeyUp(0.0f);
-            }
-        }
 
         private void OnKeyDown(KeyboardKeyEventArgs e)
         {

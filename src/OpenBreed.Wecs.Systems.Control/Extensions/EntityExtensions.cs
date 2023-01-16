@@ -11,26 +11,6 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
 {
     public static class EntityExtensions
     {
-        public static void StartPrimaryAttack(this IEntity entity)
-        {
-            var control = entity.Get<AttackControlComponent>();
 
-            if (control.AttackPrimary)
-                return;
-
-            control.AttackPrimary = true;
-            entity.RaiseEvent(new ControlFireChangedEventArgs(control.AttackPrimary));
-        }
-
-        public static void StopPrimaryAttack(this IEntity entity)
-        {
-            var control = entity.Get<AttackControlComponent>();
-
-            if (!control.AttackPrimary)
-                return;
-
-            control.AttackPrimary = false;
-            entity.RaiseEvent(new ControlFireChangedEventArgs(control.AttackPrimary));
-        }
     }
 }
