@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Wecs.Components
 {
-    public abstract class ComponentFactoryBase<TComponentTemplate> : IComponentFactory where TComponentTemplate : IComponentTemplate
+    public abstract class ComponentFactoryBase<TComponentTemplate> : IComponentFactory<TComponentTemplate> where TComponentTemplate : IComponentTemplate
     {
         #region Public Methods
 

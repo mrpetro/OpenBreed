@@ -10,4 +10,8 @@ namespace OpenBreed.Wecs.Components
     {
         IEntityComponent Create(IComponentTemplate data);
     }
+
+    public interface IComponentFactory<TComponentTemplate> : IComponentFactory where TComponentTemplate : IComponentTemplate
+    {
+    }
 }

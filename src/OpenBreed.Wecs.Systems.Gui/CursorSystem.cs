@@ -91,7 +91,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
             if(viewClient.MouseState.IsAnyButtonDown)
             {
-                //cursorCmp.
+
 
 
                 RaiseCursorKeyPressedEvent(entity, 0);

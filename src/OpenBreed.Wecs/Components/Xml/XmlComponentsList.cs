@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Common.Tools.Xml;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -18,9 +20,16 @@ namespace OpenBreed.Wecs.Components.Xml
 
         #region Public Methods
 
-        public static void RegisterComponentType<TComponent>() where TComponent : XmlComponentTemplate
+        public static void RegisterAllAssemblyComponentTypes()
         {
-            XmlNodeMan.Instance.RegisterNodeType(typeof(TComponent));
+            var callingAssembly = Assembly.GetCallingAssembly();
+
+            foreach (var type in callingAssembly
+                .DefinedTypes
+                .Where(type => type.BaseType == typeof(XmlComponentTemplate)))
+            {
+                XmlNodeMan.Instance.RegisterNodeType(type);
+            }
         }
 
         public System.Xml.Schema.XmlSchema GetSchema()

@@ -1,7 +1,8 @@
-﻿using OpenBreed.Wecs.Components;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Wecs.Components;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Linq;
 
 namespace OpenBreed.Wecs.Entities
 {
@@ -15,8 +16,25 @@ namespace OpenBreed.Wecs.Entities
 
         #region Public Constructors
 
-        public ComponentFactoryProvider()
+        public ComponentFactoryProvider(IServiceCollection serviceCollection, IServiceProvider serviceProvider)
         {
+            var serviceDescriptors = serviceCollection.Where(service => service.ServiceType.IsAssignableTo(typeof(IComponentFactory))).ToList();
+
+            foreach (var descriptor in serviceDescriptors)
+            {
+                var factoryInterface = descriptor.ServiceType.GetInterfaces().FirstOrDefault(item => item.GenericTypeArguments.Any());
+
+                if (factoryInterface is null)
+                    continue;
+
+                var templateType = factoryInterface.GenericTypeArguments.FirstOrDefault(type => type.IsAssignableTo(typeof(IComponentTemplate)));
+
+                if (templateType is null)
+                    continue;
+
+                var componentService = (IComponentFactory)serviceProvider.GetService(descriptor.ImplementationType);
+                RegisterComponentFactory(templateType, componentService);
+            }
         }
 
         #endregion Public Constructors
@@ -28,16 +46,24 @@ namespace OpenBreed.Wecs.Entities
             if (factories.TryGetValue(componentType, out IComponentFactory componentFactory))
                 return componentFactory;
 
+            foreach (var componentInterface in componentType.GetInterfaces())
+            {
+                if (factories.TryGetValue(componentInterface, out componentFactory))
+                    return componentFactory;
+            }
+
             return null;
         }
 
-        public void RegisterComponentFactory<T>(IComponentFactory factory) where T : IComponentTemplate
-        {
-            Debug.Assert(!factories.ContainsKey(typeof(T)), $"Component '{typeof(T)}' factory already registered.");
+        #endregion Public Methods
 
-            factories.Add(typeof(T), factory);
+        #region Private Methods
+
+        private void RegisterComponentFactory(Type componentTemplateType, IComponentFactory componentFactory)
+        {
+            factories.Add(componentTemplateType, componentFactory);
         }
 
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

@@ -1,15 +1,21 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenBreed.Wecs.Components.Xml;
+using OpenBreed.Wecs.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Fsm.Extensions
 {
     public static class HostBuilderExtensions
     {
+        #region Public Methods
+
+        public static void SetupFsmComponents(this IHostBuilder hostBuilder)
+        {
+            XmlComponentsList.RegisterAllAssemblyComponentTypes();
+            hostBuilder.SetupAssemblyComponentFactories();
+        }
+
         public static void SetupFsmManager(this IHostBuilder hostBuilder, Action<IFsmMan, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -23,13 +29,6 @@ namespace OpenBreed.Fsm.Extensions
             });
         }
 
-        public static void SetupFsmComponentFactories(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<FsmComponentFactory,FsmComponentFactory>();
-                services.AddTransient<FsmComponentBuilder, FsmComponentBuilder>();
-            });
-        }
+        #endregion Public Methods
     }
 }

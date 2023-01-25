@@ -10,7 +10,11 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
     public static class EntityExtensions
     {
-
+        public static void Emit(this IEntity entity, string templateName)
+        {
+            var emitComponent = entity.Get<EntityEmitterComponent>();
+            emitComponent.ToEmit.Add(templateName);
+        }
 
         public static void StartTimer(this IEntity entity, int timerId, double interval)
         {

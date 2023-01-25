@@ -6,12 +6,14 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,16 +77,33 @@ namespace OpenBreed.Wecs.Extensions
             });
         }
 
-        public static void SetupComponentFactoryProvider(this IHostBuilder hostBuilder, Action<IComponentFactoryProvider, IServiceProvider> action)
+        public static void SetupComponentFactoryProvider(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IComponentFactoryProvider>((sp) =>
+                services.AddSingleton<IComponentFactoryProvider>((sp) => new ComponentFactoryProvider(services, sp));
+            });
+        }
+
+        public static void SetupAssemblyComponentFactories(this IHostBuilder hostBuilder)
+        {
+            var callingAssembly = Assembly.GetCallingAssembly();
+
+            var componentFactoryServiceTypes = new List<Type>();
+
+            foreach (var type in callingAssembly
+                .DefinedTypes
+                .Where(type => type.ImplementedInterfaces.Any(item => item == typeof(IComponentFactory))))
+            {
+                componentFactoryServiceTypes.Add(type);
+            }
+
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                foreach (var type in componentFactoryServiceTypes)
                 {
-                    var provider = new ComponentFactoryProvider();
-                    action.Invoke(provider, sp);
-                    return provider;
-                });
+                    services.AddSingleton(type);
+                }
             });
         }
 

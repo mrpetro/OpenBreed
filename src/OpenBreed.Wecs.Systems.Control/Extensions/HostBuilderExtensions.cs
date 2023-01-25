@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Systems.Core;
 
 namespace OpenBreed.Wecs.Systems.Control.Extensions
 {
@@ -25,6 +26,10 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
                 world,
                 sp.GetRequiredService<IWorldMan>(),
                 sp.GetRequiredService<IEntityMan>()));
+            systemFactory.RegisterSystem<EntityEmitterSystem>((world) => new EntityEmitterSystem(
+                world,
+                sp.GetRequiredService<IEntityFactory>(),
+                sp.GetRequiredService<IEventsMan>()));
         }
     }
 }

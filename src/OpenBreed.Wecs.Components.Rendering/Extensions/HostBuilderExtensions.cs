@@ -1,26 +1,20 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenBreed.Wecs.Components.Xml;
+using OpenBreed.Wecs.Extensions;
 
 namespace OpenBreed.Wecs.Components.Rendering.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupRenderingComponentFactories(this IHostBuilder hostBuilder)
+        #region Public Methods
+
+        public static void SetupRenderingComponents(this IHostBuilder hostBuilder)
         {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<PictureComponentFactory>();
-                services.AddSingleton<SpriteComponentFactory>();
-                services.AddSingleton<ViewportComponentFactory>();
-                services.AddSingleton<TextComponentFactory>();
-                services.AddSingleton<CameraComponentFactory>();
-                services.AddSingleton<TilePutterComponentFactory>();
-            });
+            XmlComponentsList.RegisterAllAssemblyComponentTypes();
+            hostBuilder.SetupAssemblyComponentFactories();
         }
+
+        #endregion Public Methods
     }
 }

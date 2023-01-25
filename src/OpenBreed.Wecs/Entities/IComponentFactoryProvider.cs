@@ -9,8 +9,6 @@ namespace OpenBreed.Wecs.Entities
 {
     public interface IComponentFactoryProvider
     {
-        void RegisterComponentFactory<T>(IComponentFactory factory) where T : IComponentTemplate;
-
         IComponentFactory GetFactory(Type componentType);
     }
 }

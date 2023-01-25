@@ -50,8 +50,6 @@ namespace OpenBreed.Wecs.Systems.Audio
 
             var toPlay = soundPlayerComponent.ToPlay;
 
-            //try
-            //{
             for (int i = 0; i < toPlay.Count; i++)
             {
                 soundMan.PlaySample(toPlay[i]);
@@ -59,12 +57,6 @@ namespace OpenBreed.Wecs.Systems.Audio
             }
 
             toPlay.Clear();
-
-            //}
-            //finally
-            //{
-            //    entity.Remove<SoundPlayerComponent>();
-            //}
         }
 
         #endregion Protected Methods

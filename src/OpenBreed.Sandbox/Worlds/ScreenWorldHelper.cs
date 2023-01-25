@@ -116,6 +116,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var actionControl = new ActionControlComponent();
             actionControl.Primiary = (int)Keys.RightControl;
+            actionControl.Secondary = (int)Keys.RightShift;
 
             p1Controller.Add(actionControl);
             p1Controller.Add(thrustControl);

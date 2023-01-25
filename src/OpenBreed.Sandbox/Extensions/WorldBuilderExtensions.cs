@@ -30,6 +30,8 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<StaticBodiesSystem>();
             //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
 
+            builder.AddSystem<EntityEmitterSystem>();
+
             builder.AddSystem<FollowerSystem>();
             builder.AddSystem<AnimatorSystem>();
             builder.AddSystem<TimerSystem>();

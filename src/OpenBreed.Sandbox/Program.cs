@@ -277,35 +277,16 @@ namespace OpenBreed.Sandbox
                 systemFactory.SetupGameSystems(sp);
             });
 
-            XmlCommonComponents.Setup();
-            XmlPhysicsComponents.Setup();
-            XmlRenderingComponents.Setup();
-            XmlAnimationComponents.Setup();
-            XmlAudioComponents.Setup();
-            XmlFsmComponents.Setup();
-            XmlScriptingComponents.Setup();
-            XmlGuiComponents.Setup();
+            hostBuilder.SetupCommonComponents();
+            hostBuilder.SetupPhysicsComponents();
+            hostBuilder.SetupRenderingComponents();
+            hostBuilder.SetupAnimationComponents();
+            hostBuilder.SetupAudioComponents();
+            hostBuilder.SetupFsmComponents();
+            hostBuilder.SetupScriptingComponents();
+            hostBuilder.SetupGuiComponents();
 
-            hostBuilder.SetupCommonComponentFactories();
-            hostBuilder.SetupPhysicsComponentFactories();
-            hostBuilder.SetupRenderingComponentFactories();
-            hostBuilder.SetupAnimationComponentFactories();
-            hostBuilder.SetupAudioComponentFactories();
-            hostBuilder.SetupFsmComponentFactories();
-            hostBuilder.SetupScriptingComponentFactories();
-            hostBuilder.SetupGuiComponentFactories();
-
-            hostBuilder.SetupComponentFactoryProvider((provider, sp) =>
-            {
-                provider.SetupXmlCommonComponents(sp);
-                provider.SetupXmlPhysicsComponents(sp);
-                provider.SetupXmlRenderingComponents(sp);
-                provider.SetupXmlAnimationComponents(sp);
-                provider.SetupXmlAudioComponents(sp);
-                provider.SetupXmlFsmComponents(sp);
-                provider.SetupXmlScriptingComponents(sp);
-                provider.SetupXmlGuiComponents(sp);
-            });
+            hostBuilder.SetupComponentFactoryProvider();
 
             hostBuilder.SetupEntityFactory((entityFactory, sp) =>
             {

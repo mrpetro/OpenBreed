@@ -1,30 +1,58 @@
-﻿using OpenBreed.Wecs.Entities;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Worlds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class EntityEmitterSystem : ISystem
+    [RequireEntityWith(typeof(EntityEmitterComponent))]
+    public class EntityEmitterSystem : UpdatableSystemBase<EntityEmitterSystem>
     {
-        public int PhaseId => throw new NotImplementedException();
+        #region Private Fields
 
-        public void AddEntity(IEntity entity)
+        private readonly IEntityFactory entityFactory;
+        private readonly IEventsMan eventsMan;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public EntityEmitterSystem(
+            IWorld world,
+            IEntityFactory entityFactory,
+            IEventsMan eventsMan) : base(world)
         {
-            throw new NotImplementedException();
+            this.entityFactory = entityFactory;
+            this.eventsMan = eventsMan;
         }
 
-        public bool ContainsEntity(IEntity entity)
+        #endregion Public Constructors
+
+        #region Protected Methods
+
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
-            throw new NotImplementedException();
+            var emitEntityComponent = entity.Get<EntityEmitterComponent>();
+
+            if (emitEntityComponent is null)
+                return;
+
+            var toEmit = emitEntityComponent.ToEmit;
+
+            for (int i = 0; i < toEmit.Count; i++)
+            {
+                //var entityTemplate = entityFactory.Create(toEmit[i]);
+
+                //entityTemplate.Se
+                //soundMan.PlaySample(toEmit[i]);
+                eventsMan.Raise(null, new EmitEntityEvent(entity.Id, 0));
+            }
+
+            toEmit.Clear();
         }
 
-        public void RemoveEntity(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion Protected Methods
     }
 }
