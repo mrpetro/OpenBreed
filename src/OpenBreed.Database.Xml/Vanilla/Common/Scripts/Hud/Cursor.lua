@@ -8,24 +8,23 @@ end
 
 local function onInit(entity)
 
-    Triggers:OnCursorMoved(
-        entity,
-        Print1,
-        false)
-
     Triggers:OnCursorKeyPressed(
         entity,
-        Print2,
+        Fire,
         false)
 
+    Triggers:OnEmitEntity(
+        entity,
+        SetupNew,
+        false)
 end
 
-Print1 = function(cursor, args)
-    Logging:Info("Moved")
+Fire = function(entity, args)
+    entity:Emit("FFF")
 end
 
-Print2 = function(cursor, args)
-    Logging:Info("Pressed")
+SetupNew = function(entity, args)
+    Logging:Info("Setting up new...")
 end
 
 return {
