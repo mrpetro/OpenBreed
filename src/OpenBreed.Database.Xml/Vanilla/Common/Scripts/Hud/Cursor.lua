@@ -12,15 +12,10 @@ local function onInit(entity)
         entity,
         Fire,
         false)
-
-    Triggers:OnEmitEntity(
-        entity,
-        SetupNew,
-        false)
 end
 
 Fire = function(entity, args)
-    entity:Emit("FFF")
+    entity:Emit("Vanilla\\ABTA\\Templates\\Common\\Bullet.xml")
 end
 
 SetupNew = function(entity, args)

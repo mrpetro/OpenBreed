@@ -191,6 +191,7 @@
 				<FileDataSource Id="Extension/Scripts/Common/Actor.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Actor.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Teleporter.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Teleporter.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/SmartCard.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\SmartCard.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Bullet.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Bullet.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/Cursor.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\Cursor.lua" />
@@ -1083,6 +1084,9 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.SmartCard.lua" DataSourceRef="Extension/Scripts/Common/SmartCard.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Bullet.lua" DataSourceRef="Extension/Scripts/Common/Bullet.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.Hud.FpsUpdate.lua" DataSourceRef="Extension/Scripts/Hud/FpsUpdate.lua" FormatType="TEXT">
@@ -12008,6 +12012,9 @@
 				</ScriptFromFile>
 				<ScriptFromFile Id="EntityTypes.Cursor">
 					<DataRef>Assets.Scripts.Common.Hud.Cursor.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="EntityTypes.Bullet">
+					<DataRef>Assets.Scripts.Common.Bullet.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Scripts.Entry.lua">
 					<DataRef>Assets.Scripts.Entry.lua</DataRef>

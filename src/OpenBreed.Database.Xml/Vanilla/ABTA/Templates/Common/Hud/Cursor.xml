@@ -10,7 +10,8 @@
 		</Script>
 		<Cursor>
 		</Cursor>
-		<EntityEmitter></EntityEmitter>
+		<EntityEmitter>
+		</EntityEmitter>
 		<Text>
 			<Text>------------</Text>
 			<Offset X="0" Y="0" />
