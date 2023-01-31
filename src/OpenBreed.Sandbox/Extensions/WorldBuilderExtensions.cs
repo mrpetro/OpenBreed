@@ -31,6 +31,7 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
 
             builder.AddSystem<EntityEmitterSystem>();
+            builder.AddSystem<LifetimeSystem>();
 
             builder.AddSystem<FollowerSystem>();
             builder.AddSystem<AnimatorSystem>();

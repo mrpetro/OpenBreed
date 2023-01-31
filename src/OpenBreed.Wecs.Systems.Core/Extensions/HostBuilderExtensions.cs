@@ -14,26 +14,45 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
     {
         #region Public Methods
 
-        public static void SetupCoreSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
+        public static void SetupCoreSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
-            systemFactory.RegisterSystem<FsmSystem>((world) => new FsmSystem(world, serviceProvider.GetService<IFsmMan>(),
-                                                                  serviceProvider.GetService<ILogger>()));
-            systemFactory.RegisterSystem<TextInputSystem>((world) => new TextInputSystem(world, serviceProvider.GetService<IEntityMan>()));
+            systemFactory.RegisterSystem<FsmSystem>((world) => new FsmSystem(
+                world,
+                sp.GetService<IFsmMan>(),
+                sp.GetService<ILogger>()));
+
+            systemFactory.RegisterSystem<TextInputSystem>((world) => new TextInputSystem(
+                world,
+                sp.GetService<IEntityMan>()));
+            
             systemFactory.RegisterSystem<TimerSystem>((world) => new TimerSystem(
                 world,
-                serviceProvider.GetService<IEntityMan>(),
-                serviceProvider.GetService<IEventsMan>(),
-                serviceProvider.GetService<ILogger>()));
+                sp.GetService<IEntityMan>(),
+                sp.GetService<IEventsMan>(),
+                sp.GetService<ILogger>()));
+
             systemFactory.RegisterSystem<FrameSystem>((world) => new FrameSystem(
                 world,
-                serviceProvider.GetService<IEntityMan>(),
-                serviceProvider.GetService<IEventsMan>(),
-                serviceProvider.GetService<ILogger>()));
+                sp.GetService<IEntityMan>(),
+                sp.GetService<IEventsMan>(),
+                sp.GetService<ILogger>()));
 
             systemFactory.RegisterSystem<PausingSystem>((world) => new PausingSystem(
                 world,
-                serviceProvider.GetService<IWorldMan>(),                                                    
-                serviceProvider.GetService<IEventsMan>()));
+                sp.GetService<IWorldMan>(),                                                    
+                sp.GetService<IEventsMan>()));
+
+            systemFactory.RegisterSystem<EntityEmitterSystem>((world) => new EntityEmitterSystem(
+                world,
+                sp.GetRequiredService<IEntityFactory>(),
+                sp.GetRequiredService<IEventsMan>(),
+                sp.GetRequiredService<ITriggerMan>(),
+                sp.GetRequiredService<IWorldMan>()));
+
+            systemFactory.RegisterSystem<LifetimeSystem>((world) => new LifetimeSystem(
+                world,
+                sp.GetRequiredService<IWorldMan>(),
+                sp.GetRequiredService<IEntityMan>()));
         }
 
         #endregion Public Methods

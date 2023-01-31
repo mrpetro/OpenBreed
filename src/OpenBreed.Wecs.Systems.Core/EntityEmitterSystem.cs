@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Worlds;
 
@@ -14,6 +15,8 @@ namespace OpenBreed.Wecs.Systems.Core
 
         private readonly IEntityFactory entityFactory;
         private readonly IEventsMan eventsMan;
+        private readonly ITriggerMan triggerMan;
+        private readonly IWorldMan worldMan;
 
         #endregion Private Fields
 
@@ -22,10 +25,14 @@ namespace OpenBreed.Wecs.Systems.Core
         public EntityEmitterSystem(
             IWorld world,
             IEntityFactory entityFactory,
-            IEventsMan eventsMan) : base(world)
+            IEventsMan eventsMan,
+            ITriggerMan triggerMan,
+            IWorldMan worldMan) : base(world)
         {
             this.entityFactory = entityFactory;
             this.eventsMan = eventsMan;
+            this.triggerMan = triggerMan;
+            this.worldMan = worldMan;
         }
 
         #endregion Public Constructors
@@ -43,11 +50,31 @@ namespace OpenBreed.Wecs.Systems.Core
 
             for (int i = 0; i < toEmit.Count; i++)
             {
-                //var entityTemplate = entityFactory.Create(toEmit[i]);
+                var entityEmit = toEmit[i];
 
-                //entityTemplate.Se
-                //soundMan.PlaySample(toEmit[i]);
-                eventsMan.Raise(null, new EmitEntityEvent(entity.Id, 0));
+                var pc = entity.Get<PositionComponent>();
+
+                var templateBuilder = entityFactory.Create(entityEmit.TemplateName)
+                .SetParameter("startX", 0.0)
+                .SetParameter("startY", 0.0);
+                //.SetParameter("startX", pc.Value.X)
+                //.SetParameter("startY", pc.Value.Y);
+                //foreach (var option in entityEmit.Options)
+                //{
+                //    templateBuilder.SetParameter(option.Key, option.Value);
+                //}
+
+                var newEntity = templateBuilder.Build();
+
+                triggerMan.OnEntityEnteredWorld(newEntity, () =>
+                {
+                    eventsMan.Raise(entity, new EmitEntityEvent(newEntity.Id, entity.Id));
+
+                }, singleTime: true);
+
+                worldMan.RequestAddEntity(newEntity, context.World.Id);
+
+                
             }
 
             toEmit.Clear();

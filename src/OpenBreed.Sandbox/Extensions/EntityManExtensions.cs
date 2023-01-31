@@ -40,6 +40,11 @@ namespace OpenBreed.Sandbox.Extensions
                 action.Invoke(entity);
         }
 
+        public static IEntity GetFirstFound(this IEntityMan entityMan, string tag)
+        {
+            return entityMan.GetByTag(tag).FirstOrDefault();
+        }
+
         public static IEntity GetSmartCardScreenText(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("SmartCardScreen/Text").FirstOrDefault();

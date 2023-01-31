@@ -26,10 +26,6 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
                 world,
                 sp.GetRequiredService<IWorldMan>(),
                 sp.GetRequiredService<IEntityMan>()));
-            systemFactory.RegisterSystem<EntityEmitterSystem>((world) => new EntityEmitterSystem(
-                world,
-                sp.GetRequiredService<IEntityFactory>(),
-                sp.GetRequiredService<IEventsMan>()));
         }
     }
 }

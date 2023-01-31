@@ -10,14 +10,28 @@ namespace OpenBreed.Wecs.Components.Common
     {
     }
 
+    public class EntityEmit
+    {
+        public EntityEmit(string templateName, Dictionary<string, object> options)
+        {
+            TemplateName = templateName;
+            Options = options;
+        }
+
+        public string TemplateName { get; }
+        public Dictionary<string, object> Options { get; }
+    }
+
+
+
     public class EntityEmitterComponent : IEntityComponent
     {
         public EntityEmitterComponent()
         {
-            ToEmit = new List<string>();
+            ToEmit = new List<EntityEmit>();
         }
 
-        public List<string> ToEmit { get; }
+        public List<EntityEmit> ToEmit { get; }
     }
 
     public sealed class EntityEmitterComponentFactory : ComponentFactoryBase<IEntityEmitterComponentTemplate>
