@@ -17,24 +17,32 @@
 			</Fixtures>
 		</Body>
 		<Lifetime>
-			<TimeLeft>1.0</TimeLeft>
+			<TimeLeft>5.0</TimeLeft>
 		</Lifetime>
 		<Script>
 			<ScriptId>EntityTypes.Bullet</ScriptId>
 		</Script>
 		<Sprite>
 			<AtlasName>Vanilla/Common/Resident</AtlasName>
-			<ImageIndex>0</ImageIndex>
-			<Origin X="0" Y="0" />
+			<ImageIndex>23</ImageIndex>
+			<Origin X="8" Y="8" />
 			<Order>0</Order>
 		</Sprite>
-		<Text>
+		<Animation>
+			<States>
+				<State>
+					<Speed>5</Speed>
+					<Loop>false</Loop>
+				</State>
+			</States>
+		</Animation>
+		<!--<Text>
 			<Text>Bullet</Text>
 			<Offset X="-10" Y="10" />
 			<Color R="255" G="255" B="255" A="255" />
 			<FontName>Arial</FontName>
 			<FontSize>6</FontSize>
 			<Order>0</Order>
-		</Text>
+		</Text>-->
     </Components>
 </EntityTemplate>

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
-		<Position X="$(posX)" Y="$(posX)" />
+		<Position X="$(posX)" Y="$(posY)" />
 		<Picture>
 			<ImageName>Vanilla/Common/SmartCardScreen/Background</ImageName>
-			<Origin X="-160" Y="-136" />
+			<Origin X="160" Y="136" />
 			<Color R="1.0" G="1.0" B="1.0" A="1.0" />
 			<Order>0</Order>
 		</Picture>

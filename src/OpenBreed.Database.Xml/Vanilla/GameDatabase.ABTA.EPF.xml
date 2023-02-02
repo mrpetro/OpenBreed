@@ -13398,7 +13398,7 @@
 						</FloatTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/Missile/High/90">
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/90.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -13437,7 +13437,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/Missile/High/135">
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/135.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -13475,7 +13475,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/Missile/High/180">
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/180.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -13513,7 +13513,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/Missile/High/225">
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/225.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -13551,7 +13551,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/Missile/High/270">
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/270.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -13589,7 +13589,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/Missile/High/315">
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/315.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -13627,7 +13627,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/Missile/High/0">
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/0.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -13665,7 +13665,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/Missile/High/45">
+				<Animation Id="Vanilla/Common/Projectile/Missile/High/45.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>

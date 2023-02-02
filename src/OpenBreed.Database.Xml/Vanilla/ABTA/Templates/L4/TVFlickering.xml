@@ -14,7 +14,7 @@
 		<Sprite>
 			<AtlasName>Vanilla/L4/B</AtlasName>
 			<ImageIndex>4</ImageIndex>
-			<Origin X="0" Y="-16" />
+			<Origin X="0" Y="16" />
 			<Order>0</Order>
 		</Sprite>
     </Components>
