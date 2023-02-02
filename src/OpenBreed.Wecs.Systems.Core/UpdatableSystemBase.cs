@@ -14,14 +14,6 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Private Fields
 
-        #region Protected Constructors
-
-        protected UpdatableSystemBase(IWorld world)
-        {
-        }
-
-        #endregion Protected Constructors
-
         #region Public Methods
 
         public void Update(IWorldContext context)

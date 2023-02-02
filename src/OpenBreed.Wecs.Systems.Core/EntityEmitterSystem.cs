@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Core
             IEntityFactory entityFactory,
             IEventsMan eventsMan,
             ITriggerMan triggerMan,
-            IWorldMan worldMan) : base(world)
+            IWorldMan worldMan)
         {
             this.entityFactory = entityFactory;
             this.eventsMan = eventsMan;
@@ -64,15 +64,15 @@ namespace OpenBreed.Wecs.Systems.Core
                 //    templateBuilder.SetParameter(option.Key, option.Value);
                 //}
 
-                var newEntity = templateBuilder.Build();
+                var emittedEntity = templateBuilder.Build();
 
-                triggerMan.OnEntityEnteredWorld(newEntity, () =>
+                triggerMan.OnEntityEnteredWorld(emittedEntity, () =>
                 {
-                    eventsMan.Raise(entity, new EmitEntityEvent(newEntity.Id, entity.Id));
+                    eventsMan.Raise(entity, new EmitEntityEvent(emittedEntity.Id, entity.Id));
 
                 }, singleTime: true);
 
-                worldMan.RequestAddEntity(newEntity, context.World.Id);
+                worldMan.RequestAddEntity(emittedEntity, context.World.Id);
 
                 
             }

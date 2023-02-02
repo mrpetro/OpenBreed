@@ -28,8 +28,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         internal DynamicBodiesAabbUpdaterSystem(
             IWorld world,
-            IShapeMan shapeMan) :
-            base(world)
+            IShapeMan shapeMan)
         {
             this.shapeMan = shapeMan;
 

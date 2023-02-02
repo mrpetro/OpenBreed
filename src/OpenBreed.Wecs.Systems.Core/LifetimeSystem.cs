@@ -21,7 +21,7 @@ namespace OpenBreed.Wecs.Systems.Core
         public LifetimeSystem(
             IWorld world,
             IWorldMan worldMan,
-            IEntityMan entityMan) : base(world)
+            IEntityMan entityMan)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;

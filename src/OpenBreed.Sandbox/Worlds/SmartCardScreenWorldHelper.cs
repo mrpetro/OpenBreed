@@ -132,7 +132,7 @@ namespace OpenBreed.Sandbox.Worlds
             triggerMan.OnWorldInitialized(world, () =>
             {
                 worldMan.RequestAddEntity(smartCardCamera, world.Id);
-                AddBackground(world, 0, 0);
+                AddBackground(world, -320, -272);
                 AddText(world, - 320 / 2 + 20 , 240 / 2 - 38);
             }, singleTime: true);
         }

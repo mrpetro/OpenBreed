@@ -24,8 +24,7 @@ namespace OpenBreed.Wecs.Systems.Core
         public FsmSystem(
             IWorld world,
             IFsmMan fsmMan,
-            ILogger logger) :
-            base(world)
+            ILogger logger)
         {
             this.fsmMan = fsmMan;
             this.logger = logger;

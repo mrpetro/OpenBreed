@@ -23,8 +23,7 @@ namespace OpenBreed.Wecs.Systems.Control
         public FollowerSystem(
             IWorld world,
             IWorldMan worldMan,
-            IEntityMan entityMan) :
-            base(world)
+            IEntityMan entityMan)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;

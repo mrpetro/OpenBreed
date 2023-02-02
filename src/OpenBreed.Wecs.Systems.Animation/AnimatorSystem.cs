@@ -29,8 +29,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             IWorld world,
             IEntityMan entityMan,
             IClipMan<IEntity> clipMan,
-            ILogger logger) :
-            base(world)
+            ILogger logger)
         {
             this.entityMan = entityMan;
             this.clipMan = clipMan;

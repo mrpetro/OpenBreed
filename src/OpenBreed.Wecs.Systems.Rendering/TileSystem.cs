@@ -21,8 +21,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Constructors
 
-        public TileSystem(IWorld world) :
-            base(world)
+        public TileSystem(IWorld world)
         {
             tileGrid = world.GetModule<ITileGrid>();
             world.GetModule<IRenderableBatch>().Add(this);

@@ -29,8 +29,7 @@ namespace OpenBreed.Sandbox.Systems
         internal ActorMovementByPlayerControlSystem(
             IWorld world,
             IEntityMan entityMan,
-            IInputsMan inputsMan) :
-            base(world)
+            IInputsMan inputsMan)
         {
             this.entityMan = entityMan;
             this.inputsMan = inputsMan;

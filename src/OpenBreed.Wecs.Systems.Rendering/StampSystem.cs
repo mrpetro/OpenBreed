@@ -18,8 +18,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Constructors
 
-        public StampSystem(IWorld world) :
-            base(world)
+        public StampSystem(IWorld world)
         {
             tileGrid = world.GetModule<ITileGrid>();
         }

@@ -28,8 +28,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         internal VelocityChangedSystem(
             IWorld world, 
-            IEntityMan entityMan) :
-            base(world)
+            IEntityMan entityMan)
         {
             this.entityMan = entityMan;
         }

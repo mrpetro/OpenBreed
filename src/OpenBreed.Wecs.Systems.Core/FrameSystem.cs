@@ -27,8 +27,7 @@ namespace OpenBreed.Wecs.Systems.Core
             IWorld world, 
             IEntityMan entityMan,
             IEventsMan eventsMan,
-            ILogger logger) :
-            base(world)
+            ILogger logger)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;

@@ -20,8 +20,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         internal TextInputSystem(
             IWorld world,
-            IEntityMan entityMan) :
-            base(world)
+            IEntityMan entityMan)
         {
             this.entityMan = entityMan;
 

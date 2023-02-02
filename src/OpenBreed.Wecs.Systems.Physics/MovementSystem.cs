@@ -26,8 +26,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Internal Constructors
 
         internal MovementSystem(
-            IWorld world, IEntityMan entityMan) :
-            base(world)
+            IWorld world, IEntityMan entityMan)
         {
             this.entityMan = entityMan;
         }

@@ -132,8 +132,8 @@ namespace OpenBreed.Sandbox.Worlds
             triggerMan.OnWorldInitialized(world, () =>
             {
                 worldMan.RequestAddEntity(missionScreenCamera, world.Id);
-                AddBackground(world, 0, 0);
-                AddText(world, - 320 / 2 + 48 , 240 / 2 - 24, "CRASH LANDING SITE...");
+                AddBackground(world, -320, -272);
+                AddText(world, - 320 / 2 + 48 , 240 / 2 - 24);
             }, singleTime: true);
         }
 

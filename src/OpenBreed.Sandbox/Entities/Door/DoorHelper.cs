@@ -77,39 +77,6 @@ namespace OpenBreed.Sandbox.Entities.Door
             return resultEntity;
         }
 
-        public static IEntity GetDoorSecondPart(IEntity entity, IWorldMan worldMan, out string type)
-        {
-            var thisdata = entity.Get<MetadataComponent>();
-            var pos = entity.Get<PositionComponent>();
-            var world = worldMan.GetById(entity.WorldId);
-            var dataGrid = world.GetModule<IDataGrid<IEntity>>();
-            var indexPos = new Vector2i((int)pos.Value.X / 16, (int)pos.Value.Y / 16);
-            var thisEntity = dataGrid.Get(indexPos);
-            var downIndexPos = Vector2i.Add(indexPos, new Vector2i(0, 1));
-            var downEntity = dataGrid.Get(downIndexPos);
-
-            var downMeta = downEntity.TryGet<MetadataComponent>();
-
-            if (downMeta is not null && downMeta.Name == thisdata.Name)
-            {
-                type = "Vertical";
-                return downEntity;
-            }
-
-            var rightIndexPos = Vector2i.Add(indexPos, new Vector2i(1, 0));
-            var rightEntity = dataGrid.Get(rightIndexPos);
-            var rightMeta = rightEntity.TryGet<MetadataComponent>();
-
-            if (rightMeta is not null && rightMeta.Name == thisdata.Name)
-            {
-                type = "Horizontal";
-                return rightEntity;
-            }
-
-            type = null;
-            return null;
-        }
-
         public IEntity AddDoor(IWorld world, int x, int y, string level, string key)
         {
             var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Door.xml")

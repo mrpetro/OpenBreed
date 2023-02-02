@@ -96,7 +96,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 return;
 
             var pos = entity.Get<PositionComponent>().Value;
-            pos += spc.Origin;
+            pos -= spc.Origin;
             var size = atlas.GetSpriteSize(spc.ImageId);
 
             //Test viewport for clippling here

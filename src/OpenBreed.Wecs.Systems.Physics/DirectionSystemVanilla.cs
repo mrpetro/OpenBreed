@@ -29,8 +29,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         internal DirectionSystemVanilla(
             IWorld world,
-            IEntityMan entityMan) :
-            base(world)
+            IEntityMan entityMan)
         {
             this.entityMan = entityMan;
         }

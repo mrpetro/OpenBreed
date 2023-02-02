@@ -26,8 +26,7 @@ namespace OpenBreed.Wecs.Systems.Control
         internal ActionControlSystem(
             IWorld world,
             IEntityMan entityMan,
-            IInputsMan inputsMan) :
-            base(world)
+            IInputsMan inputsMan)
         {
             this.entityMan = entityMan;
             this.inputsMan = inputsMan;

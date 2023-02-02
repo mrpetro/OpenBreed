@@ -23,8 +23,7 @@ namespace OpenBreed.Wecs.Systems.Core
         public PausingSystem(
             IWorld world,
             IWorldMan worldMan,
-            IEventsMan eventsMan) :
-            base(world)
+            IEventsMan eventsMan)
         {
             this.worldMan = worldMan;
             this.eventsMan = eventsMan;

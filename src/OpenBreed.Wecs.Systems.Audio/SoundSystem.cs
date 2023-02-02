@@ -25,8 +25,7 @@ namespace OpenBreed.Wecs.Systems.Audio
         public SoundSystem(
             IWorld world,
             ISoundMan soundMan,
-            IEventsMan eventsMan) :
-            base(world)
+            IEventsMan eventsMan)
         {
             this.soundMan = soundMan;
             this.eventsMan = eventsMan;

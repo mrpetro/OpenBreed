@@ -38,8 +38,7 @@ namespace OpenBreed.Sandbox.Systems
             IEntityMan entityMan,
             IInputsMan inputsMan,
             IScriptMan scriptMan,
-            ILogger logger) :
-            base(world)
+            ILogger logger)
         {
             this.entityMan = entityMan;
             this.inputsMan = inputsMan;
