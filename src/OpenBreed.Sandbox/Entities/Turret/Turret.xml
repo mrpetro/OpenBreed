@@ -6,11 +6,6 @@
 		</Metadata>
 		<Timer>
 		</Timer>
-		<Fsm>
-			<States>
-				<State FsmName="Turret.Rotation" StateName="Idle" />
-			</States>
-		</Fsm>
 		<Animation>
 			<States>
 				<State>

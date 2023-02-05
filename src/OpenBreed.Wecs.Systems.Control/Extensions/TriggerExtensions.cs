@@ -41,5 +41,13 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
                 action.Invoke(entity, args);
             }
         }
+
+        public static void OnEntityAction(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityActionEvent> action, bool singleTime = false)
+        {
+            triggerMan.CreateTrigger<EntityActionEvent>(
+                (args) => Equals(entity.Id, args.EntityId),
+                (args) => action.Invoke(entity, args),
+                singleTime);
+        }
     }
 }

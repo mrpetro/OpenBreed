@@ -2,7 +2,6 @@
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Core;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenTK;
 using System;
 using OpenBreed.Animation.Interface;

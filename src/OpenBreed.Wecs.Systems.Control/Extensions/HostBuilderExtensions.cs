@@ -21,7 +21,8 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
             systemFactory.RegisterSystem<ActionControlSystem>((world) => new ActionControlSystem(
                 world,
                 sp.GetRequiredService<IEntityMan>(),
-                sp.GetRequiredService<IInputsMan>()));
+                sp.GetRequiredService<IInputsMan>(),
+            sp.GetRequiredService<IEventsMan>()));
             systemFactory.RegisterSystem<FollowerSystem>((world) => new FollowerSystem(
                 world,
                 sp.GetRequiredService<IWorldMan>(),

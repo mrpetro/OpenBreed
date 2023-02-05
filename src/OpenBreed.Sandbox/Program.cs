@@ -383,13 +383,6 @@ namespace OpenBreed.Sandbox
         {
             this.clientMan = clientMan;
 
-            var fsmMan = host.Services.GetService<IFsmMan>();
-            fsmMan.SetupButtonStates(host.Services);
-            fsmMan.SetupProjectileStates(host.Services);
-            fsmMan.SetupActorAttackingStates(host.Services);
-            fsmMan.SetupActorMovementStates(host.Services);
-            fsmMan.CreateTurretRotationStates(host.Services);
-
             GetManager<IRenderingMan>();
 
             clientMan.UpdateFrameEvent += (a) => OnUpdateFrame(a);

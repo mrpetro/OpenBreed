@@ -51,9 +51,34 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             return entity.Get<VelocityComponent>().Value;
         }
 
+        public static bool IsMoving(this IEntity entity)
+        {
+            return entity.Get<VelocityComponent>().Value != Vector2.Zero;
+        }
+
         public static void SetVelocity(this IEntity entity, float x, float y)
         {
             entity.Get<VelocityComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
+        }
+
+        public static Vector2 GetTargetDirection(this IEntity entity)
+        {
+            return entity.Get<AngularPositionTargetComponent>().Value;
+        }
+
+        public static void SetTargetDirection(this IEntity entity, float x, float y)
+        {
+            entity.Get<AngularPositionTargetComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
+        }
+
+        public static Vector2 GetDirection(this IEntity entity)
+        {
+            return entity.Get<AngularPositionComponent>().Value;
+        }
+
+        public static void SetDirection(this IEntity entity, float x, float y)
+        {
+            entity.Get<AngularPositionComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
         }
 
         public static Vector2 GetThrust(this IEntity entity)

@@ -58,7 +58,7 @@ namespace OpenBreed.Wecs.Systems.Control
             return compass16Degrees[index];
         }
 
-        //public static float SnapToCompass16Degree(Vector2 direction) => SnapToCompass16Degree(direction.X, direction.Y);
+        public static float SnapToCompass16Degree(Vector2 direction) => SnapToCompass16Degree(direction.X, direction.Y);
 
         public static float SnapToCompass8Degree(float x, float y)
         {

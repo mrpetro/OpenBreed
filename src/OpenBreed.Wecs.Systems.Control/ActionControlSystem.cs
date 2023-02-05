@@ -1,12 +1,11 @@
-﻿using OpenBreed.Input.Interface;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Control.Extensions;
+using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
-using System;
-using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
@@ -17,6 +16,7 @@ namespace OpenBreed.Wecs.Systems.Control
         #region Private Fields
 
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
         private readonly IInputsMan inputsMan;
 
         #endregion Private Fields
@@ -26,10 +26,12 @@ namespace OpenBreed.Wecs.Systems.Control
         internal ActionControlSystem(
             IWorld world,
             IEntityMan entityMan,
-            IInputsMan inputsMan)
+            IInputsMan inputsMan,
+            IEventsMan eventsMan)
         {
             this.entityMan = entityMan;
             this.inputsMan = inputsMan;
+            this.eventsMan = eventsMan;
         }
 
         #endregion Internal Constructors
@@ -41,16 +43,24 @@ namespace OpenBreed.Wecs.Systems.Control
             var actionControlComponent = entity.Get<ActionControlComponent>();
             var controllerComponent = entity.Get<ControllerComponent>();
 
-
             if (controllerComponent.ControlledEntityId == -1)
                 return;
 
             var controlledEntity = entityMan.GetById(controllerComponent.ControlledEntityId);
 
-            if (inputsMan.IsPressed(actionControlComponent.Primiary)) Console.WriteLine("Primary action");
-            if (inputsMan.IsPressed(actionControlComponent.Secondary)) Console.WriteLine("Secondary action");
+            if (inputsMan.IsPressed(actionControlComponent.Primiary)) RaiseEntityActionEvent(controlledEntity, 0);
+            if (inputsMan.IsPressed(actionControlComponent.Secondary)) RaiseEntityActionEvent(controlledEntity, 1);
         }
 
         #endregion Protected Methods
+
+        #region Private Methods
+
+        private void RaiseEntityActionEvent(IEntity entity, int actionId)
+        {
+            eventsMan.Raise(entity, new EntityActionEvent(entity.Id, actionId));
+        }
+
+        #endregion Private Methods
     }
 }

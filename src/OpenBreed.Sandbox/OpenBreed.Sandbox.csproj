@@ -21,8 +21,6 @@
     <None Remove="Content\Maps\demo_3.txt" />
     <None Remove="Content\Maps\hub.txt" />
     <None Remove="Content\Scripts\start.lua" />
-    <None Remove="Entities\Actor\States\Attacking\IdleState.lua" />
-    <None Remove="Entities\Button\Button.lua" />
     <None Remove="Entities\Turret\Turret.xml" />
     <None Remove="RunABTA.bat" />
   </ItemGroup>
@@ -41,12 +39,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Scripts\start.lua">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Actor\States\Attacking\IdleState.lua">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Entities\Button\Button.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Turret\Turret.xml">

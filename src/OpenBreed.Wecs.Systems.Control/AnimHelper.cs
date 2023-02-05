@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Sandbox.Helpers
+namespace OpenBreed.Wecs.Systems.Control
 {
     public static class AnimHelper
     {
