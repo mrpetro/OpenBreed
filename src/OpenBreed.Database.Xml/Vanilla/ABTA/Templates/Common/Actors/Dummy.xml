@@ -8,8 +8,7 @@
 		</Timer>
 		<Fsm>
 			<States>
-				<State FsmName="Actor.Movement" StateName="Standing" />
-				<State FsmName="Turret.Rotation" StateName="Idle" />
+				<!--<State FsmName="Actor.Movement" StateName="Standing" />-->
 			</States>
 		</Fsm>
 		<Script>
@@ -55,6 +54,8 @@
 			</Fixtures>
 		</Body>
 		<Motion></Motion>
+		<EntityEmitter>
+		</EntityEmitter>
 		<Sprite>
 			<AtlasName>Vanilla/Common/Hero/1</AtlasName>
 			<ImageIndex>0</ImageIndex>
