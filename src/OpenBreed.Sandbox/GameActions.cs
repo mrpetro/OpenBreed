@@ -29,4 +29,12 @@ namespace OpenBreed.Sandbox
         MoveDown,
         Fire
     }
+
+    public static class GameActions
+    {
+        public const string Fire = "Fire";
+        public const string Secondary = "Secondary";
+        public const string PreviousWeapon = "PreviousWeapon";
+        public const string NextWeapon = "NextWeapon";
+    }
 }

@@ -41,13 +41,11 @@ namespace OpenBreed.Animation.Generic.Data
 
         public IClip<TObject> Load(string clipName, params object[] args)
         {
-            var clip = clipMan.GetByName(clipName);
-
-            if (clip != null)
+            if(clipMan.TryGetByName(clipName, out IClip<TObject> clip))
                 return clip;
 
             var entry = repositoryProvider.GetRepository<IDbAnimation>().GetById(clipName);
-            if (entry == null)
+            if (entry is null)
                 throw new Exception("Animation clip error: " + clipName);
 
             var totalTime = entry.Length;

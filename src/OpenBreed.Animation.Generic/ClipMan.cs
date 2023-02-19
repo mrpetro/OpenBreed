@@ -1,43 +1,41 @@
-﻿using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
+﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenBreed.Animation.Generic
 {
+    /// <summary>
+    /// Default animation clip manager implementation
+    /// </summary>
+    /// <typeparam name="TObject">Type of object which is animated</typeparam>
     public class ClipMan<TObject> : IClipMan<TObject>
     {
-        #region Internal Fields
+        private readonly ILogger logger;
+        #region Protected Fields
 
-        #endregion Internal Fields
+        protected readonly IClip<TObject> missingClip;
+
+        #endregion Protected Fields
 
         #region Private Fields
 
         private readonly List<IClip<TObject>> clips = new List<IClip<TObject>>();
-        private readonly Dictionary<string, IClip<TObject>> names = new Dictionary<string, IClip<TObject>>(); 
-        private readonly ILogger logger;
+        private readonly Dictionary<string, IClip<TObject>> names = new Dictionary<string, IClip<TObject>>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        private IClip<TObject> MissingAnim;
-
         public ClipMan(ILogger logger)
         {
-            this.logger = logger;
+            ArgumentNullException.ThrowIfNull(logger);
 
-            MissingAnim = CreateClip("Animations/Missing", 1.0f);
+            this.logger = logger;
+            this.missingClip = CreateClip("Animations/Missing", 1.0f);
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        #endregion Public Properties
 
         #region Public Methods
 
@@ -54,15 +52,24 @@ namespace OpenBreed.Animation.Generic
             return clips[id];
         }
 
+        /// <summary>
+        /// Get animation clip by it's name or missingClip instance if given name was not found
+        /// This method will also log missing animation clip occurrence.
+        /// </summary>
+        /// <param name="name">Name of clip to return</param>
+        /// <returns>Animation clip</returns>
         public IClip<TObject> GetByName(string name)
         {
-            names.TryGetValue(name, out IClip<TObject> result);
-            return result;
+            if (TryGetByName(name, out IClip<TObject> clip))
+                return clip;
+
+            logger.Error($"Clip with name '{name}' doesn't exist.");
+            return missingClip;
         }
 
-        public void UnloadAll()
+        public bool TryGetByName(string name, out IClip<TObject> clip)
         {
-            throw new NotImplementedException();
+            return names.TryGetValue(name, out clip);
         }
 
         #endregion Public Methods

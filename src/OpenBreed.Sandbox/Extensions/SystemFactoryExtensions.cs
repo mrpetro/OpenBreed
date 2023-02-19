@@ -22,12 +22,6 @@ namespace OpenBreed.Sandbox.Extensions
                 world,
                 sp.GetService<IEntityMan>(),
                 sp.GetService<IInputsMan>()));
-            systemFactory.RegisterSystem<ActorScriptByPlayerControlSystem>((world) => new ActorScriptByPlayerControlSystem(
-                world,
-                sp.GetService<IEntityMan>(),
-                sp.GetRequiredService<IInputsMan>(),
-                sp.GetService<IScriptMan>(),
-                sp.GetService<ILogger>()));
             systemFactory.RegisterSystem<UnknownMapCellDisplaySystem>((world) => new UnknownMapCellDisplaySystem(
                 world,
                 sp.GetService<IPrimitiveRenderer>(),

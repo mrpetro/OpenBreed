@@ -367,7 +367,7 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
-            var palette = palettesDataProvider.GetPalette(dbMap.PaletteRefs.First());
+            var palette = palettesDataProvider.GetPalette("Palettes.COMMON");
 
             //Load common sprites
             var dbSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));

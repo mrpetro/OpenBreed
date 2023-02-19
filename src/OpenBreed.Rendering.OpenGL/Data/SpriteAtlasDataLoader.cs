@@ -79,7 +79,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
                 //TODO: Pass mask color with SpriteSetModel
                 paletteModel.Data[0] = Color.FromArgb(0, 0, 0, 0);
 
-                paletteModel.SetColors(64, paletteModel.Data.Skip(16).Take(32).ToArray());
+                //paletteModel.SetColors(0, paletteModel.Data.Skip(16).Take(32).ToArray());
 
                 BitmapHelper.SetPaletteColors(bitmap, paletteModel.Data);
             }

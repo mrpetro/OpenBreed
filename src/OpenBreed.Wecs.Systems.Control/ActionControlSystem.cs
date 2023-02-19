@@ -48,17 +48,22 @@ namespace OpenBreed.Wecs.Systems.Control
 
             var controlledEntity = entityMan.GetById(controllerComponent.ControlledEntityId);
 
-            if (inputsMan.IsPressed(actionControlComponent.Primiary)) RaiseEntityActionEvent(controlledEntity, 0);
-            if (inputsMan.IsPressed(actionControlComponent.Secondary)) RaiseEntityActionEvent(controlledEntity, 1);
+            for (int i = 0; i < actionControlComponent.Mappings.Count; i++)
+            {
+                var mapping = actionControlComponent.Mappings[i];
+
+                if (inputsMan.IsPressed(mapping.Code))
+                    RaiseEntityActionEvent(controlledEntity, mapping.Action);
+            }
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private void RaiseEntityActionEvent(IEntity entity, int actionId)
+        private void RaiseEntityActionEvent(IEntity entity, string actionType)
         {
-            eventsMan.Raise(entity, new EntityActionEvent(entity.Id, actionId));
+            eventsMan.Raise(entity, new EntityActionEvent(entity.Id, actionType));
         }
 
         #endregion Private Methods

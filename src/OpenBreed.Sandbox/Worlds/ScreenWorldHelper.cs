@@ -88,7 +88,6 @@ namespace OpenBreed.Sandbox.Worlds
         {
             //Input Stage
             builder.AddSystem<ActorMovementByPlayerControlSystem>();
-            builder.AddSystem<ActorScriptByPlayerControlSystem>();
             builder.AddSystem<ActionControlSystem>();
 
 
@@ -115,8 +114,11 @@ namespace OpenBreed.Sandbox.Worlds
             thrustControl.RightCode = (int)Keys.Right;
 
             var actionControl = new ActionControlComponent();
-            actionControl.Primiary = (int)Keys.RightControl;
-            actionControl.Secondary = (int)Keys.RightShift;
+            actionControl.Mappings.Add(new ControlMapping((int)Keys.RightControl, GameActions.Fire));
+            actionControl.Mappings.Add(new ControlMapping((int)Keys.RightShift, GameActions.Secondary));
+
+            actionControl.Mappings.Add(new ControlMapping((int)Keys.PageDown, GameActions.PreviousWeapon));
+            actionControl.Mappings.Add(new ControlMapping((int)Keys.PageUp, GameActions.NextWeapon));
 
             p1Controller.Add(actionControl);
             p1Controller.Add(thrustControl);

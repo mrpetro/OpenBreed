@@ -9,17 +9,17 @@ namespace OpenBreed.Wecs.Systems.Control.Events
     {
         #region Public Constructors
 
-        public EntityActionEvent(int entityId, int actionId)
+        public EntityActionEvent(int entityId, string actionType)
             : base(entityId)
         {
-            ActionId = actionId;
+            ActionType = actionType;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int ActionId { get; }
+        public string ActionType { get; }
 
         #endregion Public Properties
     }
