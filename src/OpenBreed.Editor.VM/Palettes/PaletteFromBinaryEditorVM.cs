@@ -1,8 +1,12 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Database.EFCore.DbEntries;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
+using System;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
@@ -10,16 +14,42 @@ namespace OpenBreed.Editor.VM.Palettes
     {
         #region Public Constructors
 
-        private string _dataRef;
+        private string dataRef;
+        private int dataStart;
+        private int colorsNo;
+        private PaletteMode paletteMode;
+        private readonly IRepositoryProvider repositoryProvider;
 
-        public PaletteFromBinaryEditorVM(PalettesDataProvider palettesDataProvider,
-                                         IModelsProvider dataProvider) : base(palettesDataProvider, dataProvider)
+        public PaletteFromBinaryEditorVM(
+            PalettesDataProvider palettesDataProvider,
+            IRepositoryProvider repositoryProvider,
+            IModelsProvider dataProvider) : base(palettesDataProvider, dataProvider)
         {
+            this.repositoryProvider = repositoryProvider;
         }
+
         public string DataRef
         {
-            get { return _dataRef; }
-            set { SetProperty(ref _dataRef, value); }
+            get { return dataRef; }
+            set { SetProperty(ref dataRef, value); }
+        }
+
+        public int DataStart
+        {
+            get { return dataStart; }
+            set { SetProperty(ref dataStart, value); }
+        }
+
+        public int ColorsNo
+        {
+            get { return colorsNo; }
+            set { SetProperty(ref colorsNo, value); }
+        }
+
+        public PaletteMode PaletteMode
+        {
+            get { return paletteMode; }
+            set { SetProperty(ref paletteMode, value); }
         }
 
         #endregion Public Constructors
@@ -29,6 +59,8 @@ namespace OpenBreed.Editor.VM.Palettes
         #endregion Public Properties
 
         #region Public Methods
+
+        private IDbPalette currentEntry;
 
         public override void UpdateVM(IDbPalette entry)
         {
@@ -53,7 +85,12 @@ namespace OpenBreed.Editor.VM.Palettes
             if (model != null)
                 UpdateVMColors(model);
 
-            DataRef = entry.DataRef;
+            dataRef = entry.DataRef;
+            dataStart = entry.DataStart;
+            paletteMode = entry.Mode;
+            colorsNo = entry.ColorsNo;
+
+            UpdatePalette();
         }
 
         private void UpdateEntry(IDbPaletteFromBinary entry)
@@ -72,5 +109,35 @@ namespace OpenBreed.Editor.VM.Palettes
         }
 
         #endregion Private Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(DataStart):
+                case nameof(DataRef):
+                    UpdatePalette();
+                    break;
+                default:
+                    break;
+            }
+
+
+            base.OnPropertyChanged(name);
+        }
+
+        private void UpdatePalette()
+        {
+            //var entry = repositoryProvider.GetRepository<IDbAsset>().GetById(DataRef) as IDbPaletteFromBinary;
+
+            //if (entry is null)
+           //     return;
+            var model = PalettesDataHelper.FromBinary(dataProvider, dataRef, DataStart, colorsNo, PaletteMode);
+
+            if (model != null)
+                UpdateVMColors(model);
+
+
+        }
     }
 }

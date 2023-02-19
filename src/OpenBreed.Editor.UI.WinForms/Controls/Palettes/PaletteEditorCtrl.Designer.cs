@@ -37,28 +37,31 @@
             this.ColorSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ColorSelector.Location = new System.Drawing.Point(3, 109);
+            this.ColorSelector.Location = new System.Drawing.Point(4, 126);
+            this.ColorSelector.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.ColorSelector.Name = "ColorSelector";
-            this.ColorSelector.Size = new System.Drawing.Size(543, 91);
+            this.ColorSelector.Size = new System.Drawing.Size(634, 105);
             this.ColorSelector.TabIndex = 12;
             // 
             // ColorEditor
             // 
             this.ColorEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ColorEditor.Location = new System.Drawing.Point(3, 3);
+            this.ColorEditor.Location = new System.Drawing.Point(4, 3);
+            this.ColorEditor.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.ColorEditor.Name = "ColorEditor";
-            this.ColorEditor.Size = new System.Drawing.Size(543, 100);
+            this.ColorEditor.Size = new System.Drawing.Size(634, 138);
             this.ColorEditor.TabIndex = 11;
             // 
-            // PaletteCtrl
+            // PaletteEditorCtrl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ColorSelector);
             this.Controls.Add(this.ColorEditor);
-            this.Name = "PaletteCtrl";
-            this.Size = new System.Drawing.Size(549, 203);
+            this.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.Name = "PaletteEditorCtrl";
+            this.Size = new System.Drawing.Size(640, 234);
             this.ResumeLayout(false);
 
         }

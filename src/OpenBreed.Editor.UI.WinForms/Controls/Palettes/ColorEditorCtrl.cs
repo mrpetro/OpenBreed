@@ -50,6 +50,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
                 case nameof(vm.CurrentColor):
                     SetupWithColor(vm.CurrentColorIndex, vm.CurrentColor);
                     break;
+                case nameof(vm.Colors):
+                    SetupWithColor(vm.CurrentColorIndex, vm.CurrentColor);
+                    break;
                 default:
                     break;
             }

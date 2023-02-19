@@ -8,22 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.DataSources;
-using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Palettes;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 {
-    public partial class PaletteFromBinaryCtrl : EntryEditorInnerCtrl
+    public partial class PaletteFromLbmCtrl : EntryEditorInnerCtrl
     {
         #region Private Fields
 
-        private PaletteFromBinaryEditorVM _vm;
+        private PaletteFromLbmEditorVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PaletteFromBinaryCtrl()
+        public PaletteFromLbmCtrl()
         {
             InitializeComponent();
         }
@@ -32,16 +31,17 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         #region Public Methods
 
-        public void Initialize(PaletteFromBinaryEditorVM vm)
+        public void Initialize(PaletteFromLbmEditorVM vm)
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
             ColorEditor.Initialize(_vm);
             ColorSelector.Initialize(_vm);
 
-            tbxBinaryDataRef.DataBindings.Add(nameof(tbxBinaryDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);
+            tbxLbmDataRef.DataBindings.Add(nameof(tbxLbmDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);
 
-            numUpDown.DataBindings.Add(nameof(numUpDown.Value), _vm, nameof(_vm.DataStart), false, DataSourceUpdateMode.OnPropertyChanged);
+            ColorEditor.DataBindings.Add(nameof(ColorEditor.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
+            ColorSelector.DataBindings.Add(nameof(ColorSelector.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         #endregion Public Methods

@@ -25,4 +25,10 @@
     <ProjectReference Include="..\OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Controls\Palettes\PaletteFromLbmCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -64,6 +64,13 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
                 control.Dock = DockStyle.Fill;
                 Controls.Add(control);
             }
+            else if (subeditor is PaletteFromLbmEditorVM)
+            {
+                var control = new PaletteFromLbmCtrl();
+                control.Initialize((PaletteFromLbmEditorVM)subeditor);
+                control.Dock = DockStyle.Fill;
+                Controls.Add(control);
+            }
         }
 
 

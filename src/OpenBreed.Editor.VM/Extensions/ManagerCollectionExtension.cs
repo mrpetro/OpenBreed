@@ -87,13 +87,19 @@ namespace OpenBreed.Editor.VM.Extensions
 
                 services.AddTransient<IEntryEditor<IDbPaletteFromBinary>, PaletteFromBinaryEditorVM>(
                     (sp) => new PaletteFromBinaryEditorVM(
-                        sp.GetService<PalettesDataProvider>(),                                                                                             
+                        sp.GetService<PalettesDataProvider>(),
+                        sp.GetService<IRepositoryProvider>(),
                         sp.GetService<IModelsProvider>()));
 
 
                 services.AddTransient<IEntryEditor<IDbPaletteFromMap>, PaletteFromMapEditorVM>(
                     (sp) => new PaletteFromMapEditorVM(
                         sp.GetService<PalettesDataProvider>(),                                                                                          
+                        sp.GetService<IModelsProvider>()));
+
+                services.AddTransient<IEntryEditor<IDbPaletteFromLbm>, PaletteFromLbmEditorVM>(
+                    (sp) => new PaletteFromLbmEditorVM(
+                        sp.GetService<PalettesDataProvider>(),
                         sp.GetService<IModelsProvider>()));
 
                 services.AddTransient<IEntryEditor<IDbTextEmbedded>, TextEmbeddedEditorVM>(
@@ -248,6 +254,7 @@ namespace OpenBreed.Editor.VM.Extensions
                     subEditorFactory.Register<IDbImage, IDbImage>();
                     subEditorFactory.Register<IDbPaletteFromBinary, IDbPalette>();
                     subEditorFactory.Register<IDbPaletteFromMap, IDbPalette>();
+                    subEditorFactory.Register<IDbPaletteFromLbm, IDbPalette>();
                     subEditorFactory.Register<IDbScriptEmbedded, IDbScript>();
                     subEditorFactory.Register<IDbScriptFromFile, IDbScript>();
                     subEditorFactory.Register<IDbSound, IDbSound>();
