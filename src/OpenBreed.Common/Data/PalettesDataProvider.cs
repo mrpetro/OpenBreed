@@ -51,6 +51,11 @@ namespace OpenBreed.Common.Data
             return PalettesDataHelper.FromBinary(dataProvider, entry);
         }
 
+        private PaletteModel GetModelImpl(IDbPaletteFromLbm entry)
+        {
+            return PalettesDataHelper.FromLbmImage(dataProvider, entry);
+        }
+
         private PaletteModel GetModel(dynamic entry)
         {
             return GetModelImpl(entry);

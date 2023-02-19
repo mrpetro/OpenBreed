@@ -183,6 +183,7 @@
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/SMARTPIC.LBM" EntryName="SMARTPIC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+				<FileDataSource Id="Vanilla/TA.EXE" FilePath="%Cfg.Options.ABTA.GameFolderPath%\ta.exe" />
 				<FileDataSource Id="Extension/Scripts/Common/Mission.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Mission.lua" />
 				<FileDataSource Id="Extension/Scripts/L1/MAP.01.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/LandMine.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMine.lua" />
@@ -1107,6 +1108,9 @@
 				<Asset Id="Assets.Templates.Logo1.lua" DataSourceRef="Extension/Templates/Logo1.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
+				<Asset Id="Assets.TA.EXE" DataSourceRef="Vanilla/TA.EXE" FormatType="BINARY">
+					<Parameters />
+				</Asset>
 			</Items>
 		</Assets>
 		<Images>
@@ -1487,141 +1491,121 @@
 				<SpriteSetFromSPR Id="Vanilla/Common/Hero/1">
 					<DataRef>Assets.HERO1.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Hero/2">
 					<DataRef>Assets.HERO2.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Resident">
 					<DataRef>Assets.RESIDENT.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/A">
 					<DataRef>Assets.ALIEN_A.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/B">
 					<DataRef>Assets.ALIEN_B.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/C">
 					<DataRef>Assets.ALIEN_C.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/E">
 					<DataRef>Assets.ALIEN_E.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/F">
 					<DataRef>Assets.ALIEN_F.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/G">
 					<DataRef>Assets.ALIEN_G.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/H">
 					<DataRef>Assets.ALIEN_H.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/I">
 					<DataRef>Assets.ALIEN_I.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/J">
 					<DataRef>Assets.ALIEN_J.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/K">
 					<DataRef>Assets.ALIEN_K.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Alien/X">
 					<DataRef>Assets.ALIEN_X.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/1">
 					<DataRef>Assets.COMP1.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/2">
 					<DataRef>Assets.COMP2.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/3">
 					<DataRef>Assets.COMP3.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/Font">
 					<DataRef>Assets.COMPFONT.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Status">
 					<DataRef>Assets.STATUS.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Torch">
 					<DataRef>Assets.TORCH.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
-						<PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+						<PaletteRef>Palettes.COMMON</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 			</Items>
@@ -10572,6 +10556,9 @@
 		</ActionSets>
 		<Palettes>
 			<Items>
+				<PaletteFromLBM Id="Palettes.COMPUTER.LBM">
+					<DataRef>Assets.COMPUTER.LBM</DataRef>
+				</PaletteFromLBM>
 				<PaletteFromMAP Id="Palettes.MAP.01.CMAP">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>CMAP</BlockName>
@@ -11012,6 +10999,12 @@
 					<DataRef>Assets.MAP.55</DataRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
+				<PaletteFromBinary Id="Palettes.COMMON">
+					<DataRef>Assets.TA.EXE</DataRef>
+					<Mode>VGA_24BIT</Mode>
+					<ColorsNo>256</ColorsNo>
+					<DataStart>235563</DataStart>
+				</PaletteFromBinary>
 			</Items>
 		</Palettes>
 		<Texts>

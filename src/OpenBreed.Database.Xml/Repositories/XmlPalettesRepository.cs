@@ -39,6 +39,7 @@ namespace OpenBreed.Database.Xml.Repositories
             {
                 yield return typeof(XmlDbPaletteFromBinary);
                 yield return typeof(XmlDbPaletteFromMap);
+                yield return typeof(XmlDbPaletteFromLbm);
             }
         }
 
