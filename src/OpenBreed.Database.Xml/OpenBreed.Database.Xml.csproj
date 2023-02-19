@@ -22,7 +22,6 @@
     <None Remove="Vanilla\ABTA\Scripts\Common\TrilazerGun.lua" />
     <None Remove="Vanilla\ABTA\Scripts\FpsUpdate.lua" />
     <None Remove="Vanilla\ABTA\Scripts\MAP.01.lua" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Bullet.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Director.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Environment\SlowdownObstacle.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\GameCommentator.xml" />

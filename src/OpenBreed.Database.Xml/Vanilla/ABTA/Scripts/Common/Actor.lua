@@ -1,6 +1,63 @@
 ﻿
-local function FireBullet(entity, args)
-    entity:Emit("Vanilla\\ABTA\\Templates\\Common\\Bullet.xml")
+local currentWeaponNo = 1
+local weapons =
+{
+  --[1] = "AssaultGun",
+  [1] = "Missile",
+  [2] = "TrilazerGun",
+  [3] = "RefractionLazer",
+  --[5] = "Firewall",
+}
+
+
+local function FireBullet(entity)
+
+    local currentWeaponName = weapons[currentWeaponNo]
+
+    if(currentWeaponName)
+    then
+        entity:Emit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeaponName .. ".xml")
+    end
+end
+
+local function SwitchToPreviousWeapon(entity)
+    currentWeaponNo = currentWeaponNo - 1
+
+    if(currentWeaponNo < 1)
+    then
+        currentWeaponNo = 3
+    end
+
+    local currentWeaponName = weapons[currentWeaponNo]
+    Logging:Info("Switching weapon to: " .. currentWeaponName)
+end
+
+local function SwitchToNextWeapon(entity)
+    currentWeaponNo = currentWeaponNo + 1
+
+    if(currentWeaponNo > 3)
+    then
+        currentWeaponNo = 1
+    end
+
+    local currentWeaponName = weapons[currentWeaponNo]
+    Logging:Info("Switching weapon to: " .. currentWeaponName)
+end
+
+local actions =
+{
+  [GameActions.Fire] = FireBullet,
+  [GameActions.PreviousWeapon] = SwitchToPreviousWeapon,
+  [GameActions.NextWeapon] = SwitchToNextWeapon,
+}
+
+local function CheckAction(entity, args)  
+    local func = actions[args.ActionType]
+    if(func) then
+        func(entity)
+    else
+        Logging:Error("Missing implementation for action: " .. args.ActionType)
+    end
 end
 
 local function OnDirectionChanged(entity, args)
@@ -60,7 +117,7 @@ end
 local function onInit(entity)
     Triggers:OnEntityAction(
         entity,
-        FireBullet,
+        CheckAction,
         false)
 
     Triggers:OnEntityDirectionChanged(
