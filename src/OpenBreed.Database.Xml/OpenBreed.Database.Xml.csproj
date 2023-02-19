@@ -12,12 +12,14 @@
 
   <ItemGroup>
     <None Remove="Vanilla\ABTA\Scripts\Common\Actor.lua" />
-    <None Remove="Vanilla\ABTA\Scripts\Common\Bullet.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Door.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Item.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\Missile.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Mission.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\RefractionLazer.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\SmartCard.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Teleporter.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\TrilazerGun.lua" />
     <None Remove="Vanilla\ABTA\Scripts\FpsUpdate.lua" />
     <None Remove="Vanilla\ABTA\Scripts\MAP.01.lua" />
     <None Remove="Vanilla\ABTA\Templates\Common\Bullet.xml" />
@@ -32,6 +34,10 @@
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\Keycard.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\SmartCard.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Projectiles\AssaultGun.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Projectiles\Firewall.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Projectiles\RefractionLazer.xml" />
+    <None Remove="Vanilla\ABTA\Templates\Common\Projectiles\TrilazerGun.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\SmartCardBackground.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\SmartCardScreen\Text.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\DebugHudViewport.xml" />
@@ -90,7 +96,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Vanilla\ABTA\Scripts\Common\Bullet.lua">
+    <Content Include="Vanilla\ABTA\Scripts\Common\RefractionLazer.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Scripts\Common\Missile.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Scripts\Common\TrilazerGun.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Scripts\Common\Mission.lua">
@@ -135,7 +147,19 @@
     <Content Include="Vanilla\ABTA\Templates\Common\Pickables\KeycardStandard.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Bullet.xml">
+    <Content Include="Vanilla\ABTA\Templates\Common\Projectiles\AssaultGun.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Projectiles\RefractionLazer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Projectiles\Firewall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Projectiles\TrilazerGun.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\Common\Projectiles\Missile.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\Common\Scripts\Hud\Cursor.lua">

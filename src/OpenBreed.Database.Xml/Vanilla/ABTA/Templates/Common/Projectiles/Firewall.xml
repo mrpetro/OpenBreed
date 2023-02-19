@@ -20,7 +20,7 @@
 			<TimeLeft>5.0</TimeLeft>
 		</Lifetime>
 		<Script>
-			<ScriptId>EntityTypes.Bullet</ScriptId>
+			<ScriptId>EntityTypes.Firewall</ScriptId>
 		</Script>
 		<Sprite>
 			<AtlasName>Vanilla/Common/Resident</AtlasName>
