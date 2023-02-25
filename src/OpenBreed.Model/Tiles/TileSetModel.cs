@@ -27,7 +27,7 @@ namespace OpenBreed.Model.Tiles
 
         #region Public Properties
 
-        public Bitmap Bitmap { get; }
+        public byte[] Bitmap { get; }
 
         public TilePixelFormat PixelFormat { get; private set; }
 
@@ -71,14 +71,14 @@ namespace OpenBreed.Model.Tiles
             if (left < 0)
                 left = 0;
 
-            if (right > Bitmap.Width)
-                right = Bitmap.Width;
+            if (right > TileSize * TilesNoX)
+                right = TileSize * TilesNoX;
 
             if (top < 0)
                 top = 0;
 
-            if (bottom > Bitmap.Height)
-                bottom = Bitmap.Height;
+            if (bottom > TileSize * TilesNoY)
+                bottom = TileSize * TilesNoY;
 
             rectangle = new Rectangle(left, top, right - left, bottom - top);
 

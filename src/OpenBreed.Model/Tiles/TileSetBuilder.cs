@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -12,7 +13,7 @@ namespace OpenBreed.Model.Tiles
         internal int TileSize;
         internal List<TileModel> Tiles;
         internal TilePixelFormat PixelFormat;
-        internal Bitmap Bitmap;
+        internal byte[] Bitmap;
         internal int TilesNoX;
         internal int TilesNoY;
 
@@ -74,66 +75,71 @@ namespace OpenBreed.Model.Tiles
             }
         }
 
-        private void CreateDefaultBitmap()
-        {
-            Bitmap = new Bitmap(320, 768, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+        //private void CreateDefaultBitmap()
+        //{
+        //    Bitmap = new Bitmap(320, 768, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
-            TileSize = 16;
-            TilesNoX = Bitmap.Width / TileSize;
-            TilesNoY = Bitmap.Height / TileSize;
+        //    TileSize = 16;
+        //    TilesNoX = Bitmap.Width / TileSize;
+        //    TilesNoY = Bitmap.Height / TileSize;
 
-            using (Graphics gfx = Graphics.FromImage(Bitmap))
-            {
-                Font font = new Font("Arial", 5);
+        //    using (Graphics gfx = Graphics.FromImage(Bitmap))
+        //    {
+        //        Font font = new Font("Arial", 5);
 
-                for (int j = 0; j < TilesNoY; j++)
-                {
-                    for (int i = 0; i < TilesNoX; i++)
-                    {
-                        int tileId = i + j * TilesNoX;
+        //        for (int j = 0; j < TilesNoY; j++)
+        //        {
+        //            for (int i = 0; i < TilesNoX; i++)
+        //            {
+        //                int tileId = i + j * TilesNoX;
 
-                        var rectangle = new Rectangle(i * TileSize, j * TileSize, TileSize - 1, TileSize - 1);
+        //                var rectangle = new Rectangle(i * TileSize, j * TileSize, TileSize - 1, TileSize - 1);
 
-                        Color c = Color.Black;
-                        Pen tileColor = new Pen(c);
-                        Brush brush = new SolidBrush(c);
+        //                Color c = Color.Black;
+        //                Pen tileColor = new Pen(c);
+        //                Brush brush = new SolidBrush(c);
 
-                        gfx.FillRectangle(brush, rectangle);
+        //                gfx.FillRectangle(brush, rectangle);
 
-                        c = Color.White;
-                        tileColor = new Pen(c);
-                        brush = new SolidBrush(c);
+        //                c = Color.White;
+        //                tileColor = new Pen(c);
+        //                brush = new SolidBrush(c);
 
-                        gfx.DrawRectangle(tileColor, rectangle);
-                        gfx.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, i * TileSize + 2, j * TileSize + 1);
-                        gfx.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, i * TileSize + 2, j * TileSize + 7);
-                    }
-                }
-            }
-        }
+        //                gfx.DrawRectangle(tileColor, rectangle);
+        //                gfx.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, i * TileSize + 2, j * TileSize + 1);
+        //                gfx.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, i * TileSize + 2, j * TileSize + 7);
+        //            }
+        //        }
+        //    }
+        //}
 
-        private Bitmap ToBitmap(List<TileModel> tiles)
+        private byte[] ToBitmap(List<TileModel> tiles)
         {
             int bmpWidth = 320;
             TilesNoX = bmpWidth / TileSize;
             TilesNoY = tiles.Count / TilesNoX;
             int bmpHeight = TilesNoY * TileSize;
-            var bitmap = new Bitmap(bmpWidth, bmpHeight, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
+            var bitmap = new byte[bmpWidth * bmpHeight];
 
             for (int j = 0; j < TilesNoY; j++)
             {
                 for (int i = 0; i < TilesNoX; i++)
                 {
-                    //Create a BitmapData and Lock all pixels to be written
-                    BitmapData bmpData = bitmap.LockBits(new Rectangle(i * TileSize, j * TileSize, TileSize, TileSize),
-                                                         ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                    var srcTileIndex = i + j * TilesNoX;
+                    var dx = i * TileSize;
+                    var dy = j * TileSize;
 
-                    //Copy the data from the byte array into BitmapData.Scan0
                     for (int k = 0; k < TileSize; k++)
-                        Marshal.Copy(tiles[i + j * TilesNoX].Data, k * TileSize, bmpData.Scan0 + k * bmpData.Stride, TileSize);
+                    {
+                        var dstBitmapIndex = bmpWidth * (dy + k) + dx;
 
-                    //Unlock the pixels
-                    bitmap.UnlockBits(bmpData);
+                        Array.Copy(
+                            tiles[srcTileIndex].Data,
+                            k * TileSize,
+                            bitmap,
+                            dstBitmapIndex,
+                            TileSize);
+                    }
                 }
             }
 
