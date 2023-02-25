@@ -10567,6 +10567,15 @@
 				<PaletteFromLBM Id="Palettes.COMPUTER.LBM">
 					<DataRef>Assets.COMPUTER.LBM</DataRef>
 				</PaletteFromLBM>
+				<PaletteFromLBM Id="Palettes.IPC.LBM">
+					<DataRef>Assets.IPC.LBM</DataRef>
+				</PaletteFromLBM>
+				<PaletteFromLBM Id="Palettes.SMARTPIC.LBM">
+					<DataRef>Assets.SMARTPIC.LBM</DataRef>
+				</PaletteFromLBM>
+				<PaletteFromLBM Id="Palettes.TITLEBAC.LBM">
+					<DataRef>Assets.TITLEBAC.LBM</DataRef>
+				</PaletteFromLBM>
 				<PaletteFromMAP Id="Palettes.MAP.01.CMAP">
 					<DataRef>Assets.MAP.01</DataRef>
 					<BlockName>CMAP</BlockName>
@@ -11013,6 +11022,24 @@
 					<ColorsNo>256</ColorsNo>
 					<DataStart>235563</DataStart>
 				</PaletteFromBinary>
+				<PaletteFromBinary Id="Palettes.COMMON_EXTA">
+					<DataRef>Assets.TA.EXE</DataRef>
+					<Mode>VGA_24BIT</Mode>
+					<ColorsNo>256</ColorsNo>
+					<DataStart>275902</DataStart>
+				</PaletteFromBinary>
+				<PaletteFromBinary Id="Palettes.COMMON_EXTB">
+					<DataRef>Assets.TA.EXE</DataRef>
+					<Mode>VGA_24BIT</Mode>
+					<ColorsNo>32</ColorsNo>
+					<DataStart>204214</DataStart>
+				</PaletteFromBinary>
+				<PaletteFromBinary Id="Palettes.COMMON_B">
+					<DataRef>Assets.TA.EXE</DataRef>
+					<Mode>VGA_24BIT</Mode>
+					<ColorsNo>32</ColorsNo>
+					<DataStart>235755</DataStart>
+				</PaletteFromBinary>	
 			</Items>
 		</Palettes>
 		<Texts>
