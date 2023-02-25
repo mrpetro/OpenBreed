@@ -13,7 +13,9 @@ using OpenBreed.Model.Tiles;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -240,7 +242,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             TileSet = tileAtlasDataProvider.GetTileAtlas(tileSetRef);
 
-            CurrentTilesBitmap = (Bitmap)TileSet.Bitmap.Clone();
+            CurrentTilesBitmap = BitmapHelper.FromBytes(TileSet.TilesNoX * TileSet.TileSize, TileSet.TilesNoY * TileSet.TileSize, TileSet.Bitmap);
 
             BitmapHelper.SetPaletteColors(CurrentTilesBitmap, Model.Palettes.First().Data);
         }

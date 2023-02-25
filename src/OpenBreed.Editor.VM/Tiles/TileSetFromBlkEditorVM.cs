@@ -136,7 +136,6 @@ namespace OpenBreed.Editor.VM.Tiles
         private void SwitchPalette()
         {
             CurrentPalette = palettesDataProvider.GetPalette(CurrentPaletteRef);
-            BitmapHelper.SetPaletteColors(model.Bitmap, CurrentPalette.Data);
         }
 
         private void UpdateCurrentPaletteRef()
