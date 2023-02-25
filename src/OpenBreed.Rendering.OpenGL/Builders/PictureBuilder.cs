@@ -49,7 +49,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         public IPictureBuilder SetName(string name)
         {
             if (pictureMan.Contains(name))
-                throw new InvalidOperationException($"Atlas with name '{name}' already exists.");
+                throw new InvalidOperationException($"Picture with name '{name}' already exists.");
 
             Name = name;
             return this;

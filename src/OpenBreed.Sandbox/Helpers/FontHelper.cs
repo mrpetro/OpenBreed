@@ -1,13 +1,9 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Sprites;
-using OpenBreed.Model.Palettes;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
-using System.Linq;
 
 namespace OpenBreed.Sandbox.Helpers
 {
@@ -47,25 +43,7 @@ namespace OpenBreed.Sandbox.Helpers
         {
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
-            //Load common sprites
-            var dbStatusBarSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById("Vanilla/Common/Computer/Font");
-
-            //var paletteModel = GetPaletteModel("GameWorld/Palette/CMAP");
-            var paletteBuilder = PaletteBuilder.NewPaletteModel();
-
-            for (int i = 1; i < 256; i++)
-            {
-                paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(255, 255, 255));
-            }
-
-            //for (int i = 1; i < 256; i++)
-            //{
-            //    paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(0, 170, 170));
-            //}
-
-            var paletteModel = paletteBuilder.Build();
-
-            var spriteAtlas = loader.Load(dbStatusBarSpriteAtlas.Id, paletteModel);
+            var spriteAtlas = loader.Load("Vanilla/Common/Computer/Font");
 
             //Create FontAtlas
             var fontAtlasBuilder = fontMan.Create()
@@ -86,33 +64,5 @@ namespace OpenBreed.Sandbox.Helpers
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private PaletteModel GetPaletteModel(string paletteName)
-        {
-            var paletteEntity = entityMan.GetByTag(paletteName).FirstOrDefault();
-
-            if (paletteEntity is null)
-                return PaletteModel.NullPalette;
-
-            var paletteComponent = paletteEntity.TryGet<PaletteComponent>();
-
-            if (paletteComponent is null)
-                return PaletteModel.NullPalette;
-
-            var paletteBuilder = PaletteBuilder.NewPaletteModel();
-            paletteBuilder.SetName(paletteName);
-            for (int i = 0; i < paletteComponent.Colors.Length; i++)
-            {
-                var c = paletteComponent.Colors[i];
-
-                paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(255, c.R, c.G, c.B));
-            }
-
-            return paletteBuilder.Build();
-        }
-
-        #endregion Private Methods
     }
 }

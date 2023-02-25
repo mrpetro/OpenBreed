@@ -14,6 +14,7 @@ using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Model.Actions;
 using OpenBreed.Model.Maps;
+using OpenBreed.Model.Palettes;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
@@ -31,6 +32,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -76,6 +78,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly ITileGridFactory tileGridFactory;
         private readonly IDataGridFactory dataGridFactory;
         private readonly ITileMan tileMan;
+        private readonly IPaletteMan paletteMan;
         private readonly ITriggerMan triggerMan;
         private readonly IWorldMan worldMan;
 
@@ -95,6 +98,7 @@ namespace OpenBreed.Sandbox.Loaders
                                    ITileGridFactory tileGridFactory,
                                    IDataGridFactory dataGridFactory,
                                    ITileMan tileMan,
+                                   IPaletteMan paletteMan,
                                    ILogger logger,
                                    ITriggerMan triggerMan,
                                    IScriptMan scriptMan,
@@ -114,6 +118,7 @@ namespace OpenBreed.Sandbox.Loaders
             this.dataGridFactory = dataGridFactory;
 
             this.tileMan = tileMan;
+            this.paletteMan = paletteMan;
             this.logger = logger;
             this.triggerMan = triggerMan;
             this.scriptMan = scriptMan;
@@ -185,6 +190,11 @@ namespace OpenBreed.Sandbox.Loaders
 
             triggerMan.OnWorldInitialized(world, () =>
             {
+                var paletteEntity = entityMan.GetByTag($"GameWorld/Palette/Common").FirstOrDefault();
+
+                if(paletteEntity is not null)
+                    worldMan.RequestAddEntity(paletteEntity, world.Id);
+
                 for (int iy = 0; iy < layout.Height; iy++)
                 {
                     for (int ix = 0; ix < layout.Width; ix++)
@@ -306,31 +316,48 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void LoadPalettes(MapModel mapModel)
         {
-            foreach (var paletteModel in mapModel.Palettes)
+            var paletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
+
+            var paletteEntityTag = $"GameWorld/Palette/Common";
+
+            var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
+
+            if (paletteEntity is not null)
             {
-                var paletteEntityTag = $"GameWorld/Palette/{paletteModel.Name}";
+                return;
+            }   
 
-                var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
+            paletteEntity = entityMan.Create(tag: paletteEntityTag);
 
-                if (paletteEntity is null)
-                {
-                    paletteEntity = entityMan.Create(tag: paletteEntityTag);
-                }
+            var paletteComponent = paletteEntity.TryGet<PaletteComponent>();
 
-                var paletteComponent = paletteEntity.TryGet<PaletteComponent>();
-
-                if (paletteComponent is null)
-                {
-                    paletteComponent = new PaletteComponent();
-                    paletteEntity.Add(paletteComponent);
-                }
-
-                for (int i = 0; i < paletteModel.Length; i++)
-                {
-                    var c = paletteModel[i];
-                    paletteComponent.Colors[i] = new PaletteColor(c.R, c.G, c.B);
-                }
+            if (paletteComponent is null)
+            {
+                paletteComponent = new PaletteComponent();
+                paletteEntity.Add(paletteComponent);
             }
+
+            for (int i = 0; i < paletteModel.Length; i++)
+            {
+                var c = paletteModel[i];
+                paletteComponent.Colors[i] = new PaletteColor(c.R, c.G, c.B);
+            }
+
+            var builder = paletteMan.CreatePalette()
+                .SetName($"GameWorld/Palette/Common")
+                .SetLength(256);
+
+            for (int i = 0; i < 256; i++)
+            {
+                var c = paletteModel[i];
+                builder.SetColor(i, new Color4(c.R / 255.0f, c.G / 255.0f, c.B / 255.0f, c.A / 255.0f));
+            }
+
+
+            var cb = paletteModel[0];
+            builder.SetColor(0, new Color4(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));
+
+            builder.Build();
         }
 
         private void LoadReferencedAnimations(IDbMap dbMap)
@@ -367,17 +394,15 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
-            var palette = palettesDataProvider.GetPalette("Palettes.COMMON");
-
             //Load common sprites
             var dbSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
             foreach (var dbAnim in dbSpriteAtlas)
-                loader.Load(dbAnim.Id, palette);
+                loader.Load(dbAnim.Id);
 
             //Load level specific sprites
             dbSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
             foreach (var dbAnim in dbSpriteAtlas)
-                loader.Load(dbAnim.Id, palette);
+                loader.Load(dbAnim.Id);
 
             //var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
@@ -389,9 +414,7 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var tileAtlasLoader = dataLoaderFactory.GetLoader<ITileAtlasDataLoader>();
 
-            var palette = palettesDataProvider.GetPalette(dbMap.PaletteRefs.First());
-
-            tileAtlasLoader.Load(dbMap.TileSetRef, palette);
+            tileAtlasLoader.Load(dbMap.TileSetRef);
         }
 
         private void LoadReferencedTileStamps(IDbMap dbMap)

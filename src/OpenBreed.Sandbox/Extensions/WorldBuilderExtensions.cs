@@ -46,6 +46,7 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem<SoundSystem>();
 
             //Video Stage
+            builder.AddSystem<PaletteSystem>();
             builder.AddSystem<StampSystem>();
             builder.AddSystem<TileSystem>();
             builder.AddSystem<SpriteSystem>();

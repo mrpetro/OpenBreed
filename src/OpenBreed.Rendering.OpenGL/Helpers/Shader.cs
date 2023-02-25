@@ -70,6 +70,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
             // First, we have to get the number of active uniforms in the shader.
             GL.GetProgram(Handle, GetProgramParameterName.ActiveUniforms, out var numberOfUniforms);
+            GL.GetProgram(Handle, GetProgramParameterName.ActiveUniformBlocks, out var numberOfUniformss);
 
             // Next, allocate the dictionary to hold the locations.
             _uniformLocations = new Dictionary<string, int>();
@@ -78,7 +79,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             for (var i = 0; i < numberOfUniforms; i++)
             {
                 // get the name of this uniform,
-                var key = GL.GetActiveUniform(Handle, i, out _, out _);
+                var key = GL.GetActiveUniform(Handle, i, out int size, out ActiveUniformType type);
+
+                var arrayTokenIdx = key.IndexOf('[');
+                if (arrayTokenIdx >= 1)
+                    key = key.Substring(0, arrayTokenIdx);
 
                 // get the location,
                 var location = GL.GetUniformLocation(Handle, key);
@@ -197,6 +202,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         {
             GL.UseProgram(Handle);
             GL.Uniform4(_uniformLocations[name], data);
+        }
+
+        /// <summary>
+        /// Set a uniform Vector4 on this shader.
+        /// </summary>
+        /// <param name="name">The name of the uniform</param>
+        /// <param name="data">The data to set</param>
+        public void SetVector4Array(string name, float[] data)
+        {
+            GL.UseProgram(Handle);
+            GL.Uniform4(_uniformLocations[name], data.Length / 4, data);
         }
     }
 }

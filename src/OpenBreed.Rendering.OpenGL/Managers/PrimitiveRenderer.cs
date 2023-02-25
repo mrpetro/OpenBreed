@@ -2,7 +2,9 @@
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
@@ -12,17 +14,16 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
 
+        private IPalette currentPalette;
+        private Stack<Matrix4> modelMatrixStack = new Stack<Matrix4>();
         private Shader nontexturedShader;
 
-        private Matrix4 view;
         private Matrix4 projection;
-
-        private Stack<Matrix4> modelMatrixStack = new Stack<Matrix4>();
-
         private Shader texturedShader;
-
+        private Shader texturedWithPaletteShader;
         private int unitBoxVao;
         private int unitRectVao;
+        private Matrix4 view;
 
         #endregion Private Fields
 
@@ -30,157 +31,16 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public PrimitiveRenderer()
         {
+
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public void PushMatrix()
-        {
-            modelMatrixStack.Push(view);
-        }
+        public IPosArrayBuilder CreatePosArray() => new PosArrayBuilder(this);
 
-        public void PopMatrix()
-        {
-            view = modelMatrixStack.Pop();
-        }
-
-        public void MultMatrix(Matrix4 transform)
-        {
-            view = transform * view;
-        }
-
-        public void Translate(Vector3 vec)
-        {
-            view = Matrix4.CreateTranslation(vec) * view;
-        }
-
-        public void Translate(float x, float y, float z) => Translate(new Vector3(x, y, z));
-
-        public void DrawUnitRectangle(Matrix4 model, Color4 color)
-        {
-            nontexturedShader.Use();
-            nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
-            nontexturedShader.SetMatrix4("model", model);
-            nontexturedShader.SetMatrix4("view", view);
-            nontexturedShader.SetMatrix4("projection", projection);
-
-            GL.BindVertexArray(unitRectVao);
-            GL.DrawArrays(PrimitiveType.LineLoop, 0, 4);
-            GL.BindVertexArray(0);
-        }
-
-        public void DrawRectangle(Box2 rect, Color4 color)
-        {
-            var w = rect.Size.X;
-            var h = rect.Size.Y;
-            var pos = new Vector3(rect.Min.X, rect.Min.Y, 0.0f);
-
-            var model = Matrix4.CreateTranslation(pos);
-            model = Matrix4.CreateTranslation(-w / 2.0f, -h / 2.0f, 0.0f) * model;
-            model = Matrix4.CreateScale(w, h, 1.0f) * model;
-            model = model * Matrix4.CreateTranslation(w / 2.0f, h / 2.0f, 0.0f);
-
-            DrawUnitRectangle(model, color);
-        }
-
-        public void DrawPoint(Vector4 pos, Color4 color)
-        {
-            var w = 5.0f;
-            var h = 5.0f;
-            var pos3 = new Vector3(pos.X, pos.Y, pos.Z);
-
-            var model = Matrix4.CreateTranslation(pos3);
-            model = Matrix4.CreateTranslation(-w / 2.0f, -h / 2.0f, 0.0f) * model;
-            model = Matrix4.CreateScale(w, h, 1.0f) * model;
-            model = model * Matrix4.CreateTranslation(w / 2.0f, h / 2.0f, 0.0f);
-
-            DrawUnitBox(model, color);
-        }
-
-        public void DrawBox(Box2 box, Color4 color)
-        {
-            var w = box.Size.X;
-            var h = box.Size.Y;
-            var pos = new Vector3(box.Min.X, box.Min.Y, 0.0f);
-
-            var model = Matrix4.CreateTranslation(pos);
-            model = Matrix4.CreateTranslation(-w / 2.0f, -h / 2.0f, 0.0f) * model;
-            model = Matrix4.CreateScale(w, h, 1.0f) * model;
-            model = model * Matrix4.CreateTranslation(w / 2.0f, h / 2.0f, 0.0f);
-
-            DrawUnitBox(model, color);
-        }
-
-        public void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size, Color4 color)
-        {
-            ((Texture)texture).Use(TextureUnit.Texture0);
-            texturedShader.Use();
-
-            var model = Matrix4.CreateTranslation(pos);
-
-            texturedShader.SetMatrix4("model", model);
-            texturedShader.SetMatrix4("view", view);
-            texturedShader.SetMatrix4("projection", projection);
-            texturedShader.SetVector4("aColor", ((Vector4)color));//; new Vector4(1.0f, 0.0f, 0.0f, 1.0f)); ;
-
-            GL.BindVertexArray(vao);
-            GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
-            GL.BindVertexArray(0);
-        }
-
-        public void DrawUnitBox(Matrix4 model, Color4 color)
-        {
-            nontexturedShader.Use();
-            nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
-            nontexturedShader.SetMatrix4("model", model);
-            nontexturedShader.SetMatrix4("view", view);
-            nontexturedShader.SetMatrix4("projection", projection);
-
-            GL.BindVertexArray(unitBoxVao);
-            GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
-            GL.BindVertexArray(0);
-        }
-
-        public void DrawBrightnessBox(float brightness)
-        {
-            Color4 color;
-
-            GL.Enable(EnableCap.Blend);
-            if (brightness > 1.0)
-            {
-                GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.One);
-                color = new Color4(brightness - 1, brightness - 1, brightness - 1, 1.0f);
-            }
-            else
-            {
-                GL.BlendFunc(BlendingFactor.Zero, BlendingFactor.SrcColor);
-                color = new Color4(brightness, brightness, brightness, 1.0f);
-            }
-
-            Translate(0, 0, BRIGHTNESS_Z_LEVEL);
-            DrawUnitBox(Matrix4.Identity, color);
-            GL.Disable(EnableCap.Blend);
-        }
-
-        public void SetProjection(Matrix4 matrix)
-        {
-            projection = matrix;
-        }
-
-        public void SetView(Matrix4 matrix)
-        {
-            view = matrix;
-        }
-
-        public void Load()
-        {
-            SetupShaders();
-            SetupDefaultVertices();
-
-            view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
-        }
+        public IPosTexCoordArrayBuilder CreatePosTexCoordArray() => new PosTexCoordArrayBuilder(this);
 
         public int CreateVao(float[] vertexArray)
         {
@@ -204,6 +64,130 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return newVao;
         }
 
+        public void DrawBox(Box2 box, Color4 color)
+        {
+            var w = box.Size.X;
+            var h = box.Size.Y;
+            var pos = new Vector3(box.Min.X, box.Min.Y, 0.0f);
+
+            var model = Matrix4.CreateTranslation(pos);
+            model = Matrix4.CreateTranslation(-w / 2.0f, -h / 2.0f, 0.0f) * model;
+            model = Matrix4.CreateScale(w, h, 1.0f) * model;
+            model = model * Matrix4.CreateTranslation(w / 2.0f, h / 2.0f, 0.0f);
+
+            DrawUnitBox(model, color);
+        }
+
+        public void DrawBrightnessBox(float brightness)
+        {
+            Color4 color;
+
+            GL.Enable(EnableCap.Blend);
+            if (brightness > 1.0)
+            {
+                GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.One);
+                color = new Color4(brightness - 1, brightness - 1, brightness - 1, 1.0f);
+            }
+            else
+            {
+                GL.BlendFunc(BlendingFactor.Zero, BlendingFactor.SrcColor);
+                color = new Color4(brightness, brightness, brightness, 1.0f);
+            }
+
+            Translate(0, 0, BRIGHTNESS_Z_LEVEL);
+            DrawUnitBox(Matrix4.Identity, color);
+            GL.Disable(EnableCap.Blend);
+        }
+
+        public void DrawPoint(Vector4 pos, Color4 color)
+        {
+            var w = 5.0f;
+            var h = 5.0f;
+            var pos3 = new Vector3(pos.X, pos.Y, pos.Z);
+
+            var model = Matrix4.CreateTranslation(pos3);
+            model = Matrix4.CreateTranslation(-w / 2.0f, -h / 2.0f, 0.0f) * model;
+            model = Matrix4.CreateScale(w, h, 1.0f) * model;
+            model = model * Matrix4.CreateTranslation(w / 2.0f, h / 2.0f, 0.0f);
+
+            DrawUnitBox(model, color);
+        }
+
+        public void DrawRectangle(Box2 rect, Color4 color)
+        {
+            var w = rect.Size.X;
+            var h = rect.Size.Y;
+            var pos = new Vector3(rect.Min.X, rect.Min.Y, 0.0f);
+
+            var model = Matrix4.CreateTranslation(pos);
+            model = Matrix4.CreateTranslation(-w / 2.0f, -h / 2.0f, 0.0f) * model;
+            model = Matrix4.CreateScale(w, h, 1.0f) * model;
+            model = model * Matrix4.CreateTranslation(w / 2.0f, h / 2.0f, 0.0f);
+
+            DrawUnitRectangle(model, color);
+        }
+
+        public void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size, Color4 color)
+        {
+            ((Texture)texture).Use(TextureUnit.Texture0);
+
+            var model = Matrix4.CreateTranslation(pos);
+
+            if(texture.DataMode == TextureDataMode.Rgba)
+            {
+                texturedShader.Use();
+                texturedShader.SetMatrix4("model", model);
+                texturedShader.SetMatrix4("view", view);
+                texturedShader.SetMatrix4("projection", projection);
+                texturedShader.SetVector4("aColor", ((Vector4)color));
+            }
+            else if(texture.DataMode == TextureDataMode.Index)
+            {
+                Debug.Assert(currentPalette is not null, "Palette is not set");
+
+                texturedWithPaletteShader.Use();
+                texturedWithPaletteShader.SetMatrix4("model", model);
+                texturedWithPaletteShader.SetMatrix4("view", view);
+                texturedWithPaletteShader.SetMatrix4("projection", projection);
+                texturedWithPaletteShader.SetVector4("aColor", ((Vector4)color));
+                texturedWithPaletteShader.SetVector4Array("palette", currentPalette.DirectData);
+            }
+            else
+            {
+                throw new Exception($"Data mode '{texture.DataMode}' is not implemented.");
+            }
+
+            GL.BindVertexArray(vao);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+            GL.BindVertexArray(0);
+        }
+
+        public void DrawUnitBox(Matrix4 model, Color4 color)
+        {
+            nontexturedShader.Use();
+            nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
+            nontexturedShader.SetMatrix4("model", model);
+            nontexturedShader.SetMatrix4("view", view);
+            nontexturedShader.SetMatrix4("projection", projection);
+
+            GL.BindVertexArray(unitBoxVao);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+            GL.BindVertexArray(0);
+        }
+
+        public void DrawUnitRectangle(Matrix4 model, Color4 color)
+        {
+            nontexturedShader.Use();
+            nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
+            nontexturedShader.SetMatrix4("model", model);
+            nontexturedShader.SetMatrix4("view", view);
+            nontexturedShader.SetMatrix4("projection", projection);
+
+            GL.BindVertexArray(unitRectVao);
+            GL.DrawArrays(PrimitiveType.LineLoop, 0, 4);
+            GL.BindVertexArray(0);
+        }
+
         public Vector4 GetScreenToWorldCoords(Vector4 coords)
         {
             var mat = view * projection;
@@ -219,9 +203,50 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return coordsT;
         }
 
-        public IPosArrayBuilder CreatePosArray() => new PosArrayBuilder(this);
+        public void Load()
+        {
+            SetupShaders();
+            SetupDefaultVertices();
 
-        public IPosTexCoordArrayBuilder CreatePosTexCoordArray() => new PosTexCoordArrayBuilder(this);
+            view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
+        }
+
+        public void MultMatrix(Matrix4 transform)
+        {
+            view = transform * view;
+        }
+
+        public void PopMatrix()
+        {
+            view = modelMatrixStack.Pop();
+        }
+
+        public void PushMatrix()
+        {
+            modelMatrixStack.Push(view);
+        }
+
+        public void SetProjection(Matrix4 matrix)
+        {
+            projection = matrix;
+        }
+
+        public void SetView(Matrix4 matrix)
+        {
+            view = matrix;
+        }
+
+        public void SetPalette(IPalette palette)
+        {
+            currentPalette = palette;
+        }
+
+        public void Translate(Vector3 vec)
+        {
+            view = Matrix4.CreateTranslation(vec) * view;
+        }
+
+        public void Translate(float x, float y, float z) => Translate(new Vector3(x, y, z));
 
         #endregion Public Methods
 
@@ -257,14 +282,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Private Methods
 
-        private void SetupShaders()
-        {
-            texturedShader = new Shader("Shaders/textured.vert", "Shaders/textured.frag");
-            texturedShader.Use();
-            nontexturedShader = new Shader("Shaders/nontextured.vert", "Shaders/nontextured.frag");
-            nontexturedShader.Use();
-        }
-
         private void SetupDefaultVertices()
         {
             var unitBoxBuilder = CreatePosArray();
@@ -286,6 +303,16 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             unitRectBuilder.AddLoopIndices(0, 1, 2, 3);
 
             unitRectVao = unitRectBuilder.CreateVao();
+        }
+
+        private void SetupShaders()
+        {
+            texturedShader = new Shader("Shaders/textured.vert", "Shaders/textured.frag");
+            texturedShader.Use();
+            texturedWithPaletteShader = new Shader("Shaders/textured.vert", "Shaders/texturedWithPalette.frag");
+            texturedWithPaletteShader.Use();
+            nontexturedShader = new Shader("Shaders/nontextured.vert", "Shaders/nontextured.frag");
+            nontexturedShader.Use();
         }
 
         #endregion Private Methods

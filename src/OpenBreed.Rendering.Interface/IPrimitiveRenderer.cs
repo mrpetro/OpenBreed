@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Rendering.Interface.Managers;
+using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
@@ -39,6 +40,8 @@ namespace OpenBreed.Rendering.Interface
         void Load();
 
         void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size, Color4 color);
+
+        void SetPalette(IPalette palette);
         void SetView(Matrix4 matrix4);
 
         IPosTexCoordArrayBuilder CreatePosTexCoordArray();

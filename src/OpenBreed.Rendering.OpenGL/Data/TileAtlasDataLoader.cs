@@ -57,21 +57,28 @@ namespace OpenBreed.Rendering.OpenGL.Data
             var tileAtlas = tileMan.GetByName(tileAtlasName);
 
             //If atlas is already loaded then return it;
-            if (tileAtlas != null)
+            if (tileAtlas is not null)
+            {
                 return tileAtlas;
-
-            var paletteModel = args.FirstOrDefault() as PaletteModel;
+            }
 
             var entry = repositoryProvider.GetRepository<IDbTileAtlas>().GetById(tileAtlasName) as IDbTileAtlasFromBlk;
-            if (entry == null)
+
+            if (entry is null)
+            {
                 throw new Exception("Tile atlas error: " + tileAtlasName);
+            }
 
             var tileAtlasModel = assetsDataProvider.LoadModel(entry.DataRef) as TileSetModel;
 
-            if (paletteModel != null)
-                BitmapHelper.SetPaletteColors(tileAtlasModel.Bitmap, paletteModel.Data);
+            var textureWidth = tileAtlasModel.TilesNoX * tileAtlasModel.TileSize;
+            var textureHeight = tileAtlasModel.TilesNoY * tileAtlasModel.TileSize;
 
-            var texture = textureMan.Create(entry.DataRef, tileAtlasModel.Bitmap);
+            var texture = textureMan.Create(
+                entry.DataRef,
+                textureWidth,
+                textureHeight,
+                tileAtlasModel.Bitmap);
 
             var builder = tileMan.CreateAtlas()
                                  .SetName(tileAtlasName)

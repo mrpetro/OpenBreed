@@ -43,6 +43,8 @@
 
         public PaletteColor[] Colors { get; }
 
+        public int PaletteId { get; set; }
+
         #endregion Public Properties
     }
 }

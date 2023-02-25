@@ -116,7 +116,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var spriteSet = spriteAtlasDataProvider.GetSpriteSet(dbStatusBarSpriteAtlas.Id);
 
-            var paletteModel = GetPaletteModel("GameWorld/Palette/CMAP");
+            var paletteModel = GetPaletteModel("GameWorld/Palette/Common");
 
             var colors = paletteModel.GetColors(0, 64);
 

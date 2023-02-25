@@ -34,8 +34,10 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
                 services.AddSingleton<ITileGridFactory, TileGridFactory>();
                 services.AddSingleton<SpriteMan, SpriteMan>();
                 services.AddSingleton<PictureMan, PictureMan>();
+                services.AddSingleton<PaletteMan, PaletteMan>();
                 services.AddSingleton<ISpriteMan>((sp) => sp.GetService<SpriteMan>());
                 services.AddSingleton<IPictureMan>((sp) => sp.GetService<PictureMan>());
+                services.AddSingleton<IPaletteMan>((sp) => sp.GetService<PaletteMan>());
                 services.AddSingleton<IStampMan, StampMan>();
                 services.AddSingleton<IFontMan, FontMan>();
                 services.AddSingleton<IPrimitiveRenderer, PrimitiveRenderer>();

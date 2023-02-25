@@ -47,6 +47,9 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
                 serviceProvider.GetService<IEntityMan>(),
                 serviceProvider.GetService<IFontMan>(),
                 serviceProvider.GetService<ILogger>()));
+            systemFactory.RegisterSystem<PaletteSystem>((world) => new PaletteSystem(
+                serviceProvider.GetService<IPaletteMan>(),
+                serviceProvider.GetService<IPrimitiveRenderer>()));
         }
     }
 }

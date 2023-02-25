@@ -392,9 +392,7 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var tileAtlasLoader = dataLoaderFactory.GetLoader<ITileAtlasDataLoader>();
 
-            var palette = palettesDataProvider.GetPalette(dbMap.PaletteRefs.First());
-
-            tileAtlasLoader.Load(dbMap.TileSetRef, palette);
+            tileAtlasLoader.Load(dbMap.TileSetRef);
         }
 
         private void LoadReferencedSpriteSets(TxtMap dbMap)

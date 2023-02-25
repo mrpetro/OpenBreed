@@ -227,7 +227,7 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-        public static void SetupMapLegacyDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
+        public static void SetupMapLegacyDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
         {
             //NOTE: Needed for correct display of map in this coordinate system
             MapLayoutModel.FlippedY = true;
@@ -235,41 +235,42 @@ namespace OpenBreed.Sandbox.Extensions
             dataLoaderFactory.Register<MapLegacyDataLoader>(() =>
             {
                 var mapLegacyDataLoader = new MapLegacyDataLoader(dataLoaderFactory,
-                                                              managerCollection.GetService<IRenderableFactory>(),
-                                                              managerCollection.GetService<IEntityMan>(),
-                                                              managerCollection.GetService<IRepositoryProvider>(),
-                                                              managerCollection.GetService<MapsDataProvider>(),
-                                                              managerCollection.GetService<ISystemFactory>(),
-                                                              managerCollection.GetService<IWorldMan>(),
-                                                              managerCollection.GetService<PalettesDataProvider>(),
-                                                              managerCollection.GetService<IBroadphaseFactory>(),
-                                                              managerCollection.GetService<ITileGridFactory>(),
-                                                              managerCollection.GetService<IDataGridFactory>(),
-                                                              managerCollection.GetService<ITileMan>(),
-                                                              managerCollection.GetService<ILogger>(),
-                                                              managerCollection.GetService<ITriggerMan>(),
-                                                              managerCollection.GetService<IScriptMan>(),
-                                                              managerCollection.GetService<IEntityFactory>());
+                                                              sp.GetService<IRenderableFactory>(),
+                                                              sp.GetService<IEntityMan>(),
+                                                              sp.GetService<IRepositoryProvider>(),
+                                                              sp.GetService<MapsDataProvider>(),
+                                                              sp.GetService<ISystemFactory>(),
+                                                              sp.GetService<IWorldMan>(),
+                                                              sp.GetService<PalettesDataProvider>(),
+                                                              sp.GetService<IBroadphaseFactory>(),
+                                                              sp.GetService<ITileGridFactory>(),
+                                                              sp.GetService<IDataGridFactory>(),
+                                                              sp.GetService<ITileMan>(),
+                                                              sp.GetService<IPaletteMan>(),
+                                                              sp.GetService<ILogger>(),
+                                                              sp.GetService<ITriggerMan>(),
+                                                              sp.GetService<IScriptMan>(),
+                                                              sp.GetService<IEntityFactory>());
 
-                mapLegacyDataLoader.RegisterEntityLoaders(managerCollection);
+                mapLegacyDataLoader.RegisterEntityLoaders(sp);
                 return mapLegacyDataLoader;
             });
 
             dataLoaderFactory.Register<MapTxtDataLoader>(() =>
             {
                 var mapTxtDataLoader = new MapTxtDataLoader(dataLoaderFactory,
-                                                            managerCollection.GetService<IRenderableFactory>(),
-                                                            managerCollection.GetService<IRepositoryProvider>(),
-                                                            managerCollection.GetService<ISystemFactory>(),
-                                                            managerCollection.GetService<IWorldMan>(),
-                                                            managerCollection.GetService<PalettesDataProvider>(),
-                                                            managerCollection.GetService<ActionSetsDataProvider>(),
-                                                            managerCollection.GetService<IBroadphaseFactory>(),
-                                                            managerCollection.GetService<ITileGridFactory>(),
-                                                            managerCollection.GetService<ITileMan>(),
-                                                            managerCollection.GetService<ILogger>());
+                                                            sp.GetService<IRenderableFactory>(),
+                                                            sp.GetService<IRepositoryProvider>(),
+                                                            sp.GetService<ISystemFactory>(),
+                                                            sp.GetService<IWorldMan>(),
+                                                            sp.GetService<PalettesDataProvider>(),
+                                                            sp.GetService<ActionSetsDataProvider>(),
+                                                            sp.GetService<IBroadphaseFactory>(),
+                                                            sp.GetService<ITileGridFactory>(),
+                                                            sp.GetService<ITileMan>(),
+                                                            sp.GetService<ILogger>());
 
-                mapTxtDataLoader.RegisterEntityLoaders(managerCollection);
+                mapTxtDataLoader.RegisterEntityLoaders(sp);
                 return mapTxtDataLoader;
             });
         }

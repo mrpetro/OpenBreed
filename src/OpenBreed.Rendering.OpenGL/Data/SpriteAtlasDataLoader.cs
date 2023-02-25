@@ -58,35 +58,24 @@ namespace OpenBreed.Rendering.OpenGL.Data
             if (spriteMan.GetByName(entryId) != null)
                 return null;
 
-            var paletteModel = args.FirstOrDefault() as PaletteModel;
-
             var entry = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById(entryId) as IDbSpriteAtlasFromSpr;
-            if (entry == null)
+
+            if (entry is null)
                 throw new Exception("Sprite atlas error: " + entryId);
 
             var spriteSet = assetsDataProvider.LoadModel(entry.DataRef) as SpriteSetModel;
 
-            byte[] outData = default;
-            int outWidth = -1;
-            int outHeight = -1;
-            List<(int X, int Y, int Width, int Height)> bounds = default;
-            spriteMerger.Merge(spriteSet.Sprites, out outData, out outWidth, out outHeight, out bounds);
+            spriteMerger.Merge(
+                spriteSet.Sprites,
+                out byte[] outData,
+                out int outWidth,
+                out int outHeight,
+                out List<(int X, int Y, int Width, int Height)> bounds);
 
-            var bitmap = BitmapHelper.FromBytes(outWidth, outHeight, outData);
-            if (paletteModel != null)
-            {
-                //BitmapHelper.DumpColors(@"D:\c4pal.pal", paletteModel.Data);
-                //TODO: Pass mask color with SpriteSetModel
-                paletteModel.Data[0] = Color.FromArgb(0, 0, 0, 0);
+            var texture = textureMan.Create(entryId, outWidth, outHeight, outData);
 
-                //paletteModel.SetColors(0, paletteModel.Data.Skip(16).Take(32).ToArray());
-
-                BitmapHelper.SetPaletteColors(bitmap, paletteModel.Data);
-            }
-
-            var texture = textureMan.Create(entryId, bitmap);
-
-            var atlasBuilder = spriteMan.CreateAtlas().SetName(entryId)
+            var atlasBuilder = spriteMan.CreateAtlas()
+                .SetName(entryId)
                 .SetTexture(texture.Id);
 
             for (int i = 0; i < bounds.Count; i++)
@@ -98,10 +87,9 @@ namespace OpenBreed.Rendering.OpenGL.Data
                     bound.Y,
                     bound.Width,
                     bound.Height);
-
             }
 
-            return atlasBuilder.Build(); ;
+            return atlasBuilder.Build();
         }
 
         #endregion Public Methods

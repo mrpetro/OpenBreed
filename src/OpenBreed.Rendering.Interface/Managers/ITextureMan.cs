@@ -22,7 +22,7 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// </summary>
         /// <param name="alias">Alias name</param>
         /// <returns>Return ITexture object if found, null otherwise</returns>
-        ITexture GetByAlias(string alias);
+        ITexture GetByName(string alias);
 
         /// <summary>
         /// Creates texture object from given bitmap and return it
@@ -31,6 +31,16 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// <param name="bitmap">Bitmap to create texture from</param>
         /// <returns>ITexture object</returns>
         ITexture Create(string alias, Bitmap bitmap);
+
+        /// <summary>
+        /// Creates texture object from given byte array of indices and return it
+        /// </summary>
+        /// <param name="alias">Alias name to access the texture</param>
+        /// <param name="width">Width of texture</param>
+        /// <param name="height">Height of texture</param>
+        /// <param name="data">Byte array of indices</param>
+        /// <returns>ITexture object</returns>
+        ITexture Create(string alias, int width, int height, byte[] data);
 
         /// <summary>
         /// Creates texture object from image file path and return it
