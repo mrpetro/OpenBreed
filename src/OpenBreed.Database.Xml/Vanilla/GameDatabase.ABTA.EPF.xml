@@ -1152,7 +1152,7 @@
 		<Songs>
 			<Items>
 				<Song Id="Vanilla/Menu/Title" >
-					<DataRef>Assets.TITLE.AMF</DataRef>	
+					<DataRef>Assets.TITLE.AMF</DataRef>
 				</Song>
 			</Items>
 		</Songs>
@@ -1583,25 +1583,25 @@
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/1">
 					<DataRef>Assets.COMP1.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.COMMON</PaletteRef>
+						<PaletteRef>Palettes.COMPUTER.LBM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/2">
 					<DataRef>Assets.COMP2.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.COMMON</PaletteRef>
+						<PaletteRef>Palettes.COMPUTER.LBM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/3">
 					<DataRef>Assets.COMP3.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.COMMON</PaletteRef>
+						<PaletteRef>Palettes.COMPUTER.LBM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/Font">
 					<DataRef>Assets.COMPFONT.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.COMMON</PaletteRef>
+						<PaletteRef>Palettes.COMPUTER.LBM</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Status">
@@ -2597,7 +2597,7 @@
 						<Cell X="0" Y="0" TsId="Vanilla/L3" TsTi ="815" />
 					</Cells>
 				</TileStamp>
-				
+
 				<TileStamp Id="Vanilla/L4/Door/Horizontal/Closed" Width="2" Height="1" CenterX="0" CenterY="0">
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/L4" TsTi ="88" />
@@ -5021,7 +5021,7 @@
 					<Cells>
 						<Cell X="0" Y="0" TsId="Vanilla/LD" TsTi ="613" />
 					</Cells>
-				</TileStamp>		
+				</TileStamp>
 			</Items>
 		</TileStamps>
 		<Maps>
@@ -5309,7 +5309,7 @@
 					<SpriteSetRefs>
 						<SpriteSetRef>Vanilla/L5/A</SpriteSetRef>
 						<SpriteSetRef>Vanilla/L5/B</SpriteSetRef>
-							<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
+						<SpriteSetRef>Vanilla/Common/Hero/1</SpriteSetRef>
 						<SpriteSetRef>Vanilla/Common/Hero/2</SpriteSetRef>
 					</SpriteSetRefs>
 					<TileSetRef>Vanilla/L5</TileSetRef>
@@ -11022,6 +11022,18 @@
 					<ColorsNo>256</ColorsNo>
 					<DataStart>235563</DataStart>
 				</PaletteFromBinary>
+				<PaletteFromBinary Id="Palettes.COMMON_A">
+					<DataRef>Assets.TA.EXE</DataRef>
+					<Mode>VGA_24BIT</Mode>
+					<ColorsNo>256</ColorsNo>
+					<DataStart>235659</DataStart>
+				</PaletteFromBinary>
+				<PaletteFromBinary Id="Palettes.COMMON_B">
+					<DataRef>Assets.TA.EXE</DataRef>
+					<Mode>VGA_24BIT</Mode>
+					<ColorsNo>32</ColorsNo>
+					<DataStart>235755</DataStart>
+				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.COMMON_EXTA">
 					<DataRef>Assets.TA.EXE</DataRef>
 					<Mode>VGA_24BIT</Mode>
@@ -11034,12 +11046,7 @@
 					<ColorsNo>32</ColorsNo>
 					<DataStart>204214</DataStart>
 				</PaletteFromBinary>
-				<PaletteFromBinary Id="Palettes.COMMON_B">
-					<DataRef>Assets.TA.EXE</DataRef>
-					<Mode>VGA_24BIT</Mode>
-					<ColorsNo>32</ColorsNo>
-					<DataStart>235755</DataStart>
-				</PaletteFromBinary>	
+
 			</Items>
 		</Palettes>
 		<Texts>
@@ -12241,8 +12248,8 @@
 						</IntTrack>
 					</Tracks>
 				</Animation>
-				
-				
+
+
 				<Animation Id="Vanilla/L4/Door/Closing/Vertical">
 					<Length>4.0</Length>
 					<Tracks>
@@ -12990,7 +12997,7 @@
 							</Frames>
 						</IntTrack>
 					</Tracks>
-				</Animation>	
+				</Animation>
 				<Animation Id="Vanilla/Common/Actor/Walking/Up">
 					<Length>4.0</Length>
 					<Tracks>
@@ -14041,8 +14048,8 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				
-		
+
+
 
 				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/90.0">
 					<Length>1.0</Length>
@@ -14803,7 +14810,7 @@
 							</Frames>
 						</StringTrack>
 					</Tracks>
-				</Animation>			
+				</Animation>
 				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/90.0">
 					<Length>1.0</Length>
 					<Tracks>
