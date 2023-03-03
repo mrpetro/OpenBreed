@@ -35,7 +35,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public ITexture Create(string name, int width, int height, byte[] data)
+        public ITexture Create(string name, int width, int height, byte[] data, int maskIndex = -1)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(name), "Name is empty!");
             Debug.Assert(width > 0, "Width is zero!");
@@ -46,7 +46,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             if (names.TryGetValue(name, out result))
                 return result;
 
-            var texture = Texture.CreateFromIndexArray(width, height, data);
+            var texture = Texture.CreateFromIndexArray(width, height, data, maskIndex);
             texture.Id = items.Count;
             items.Add(texture);
             names.Add(name, texture);

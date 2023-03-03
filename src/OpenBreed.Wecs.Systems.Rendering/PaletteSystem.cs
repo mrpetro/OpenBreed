@@ -38,7 +38,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             var paletteComponent = entity.Get<PaletteComponent>();
             var palette = paletteMan.GetById(paletteComponent.PaletteId);
-            primitiveRenderer.SetPalette(palette);
+            //primitiveRenderer.SetPalette(palette);
+
+            context.World.GetModule<IRenderablePalette>().SetPalette(palette);
         }
 
         #endregion Public Methods

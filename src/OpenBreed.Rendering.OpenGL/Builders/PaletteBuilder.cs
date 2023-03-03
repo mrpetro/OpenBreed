@@ -46,7 +46,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         {
             if (index < 0)
             {
-                throw new IndexOutOfRangeException($"Trying to set less than zero color with index ({index}).");
+                throw new IndexOutOfRangeException($"Trying to set color with negative index ({index}).");
             }
 
             if (index >= colors.Count)
@@ -55,6 +55,46 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             }
 
             colors[index] = color;
+
+            return this;
+        }
+
+        public IPaletteBuilder SetColors(Color4[] colors, int startIndex = 0, int length = 0)
+        {
+            ArgumentNullException.ThrowIfNull(colors);
+
+            if (length == 0)
+            {
+                if(this.colors.Count > colors.Length)
+                    length = colors.Length - startIndex;
+                else
+                    length = colors.Length;
+            }
+
+            if (startIndex < 0)
+            {
+                throw new IndexOutOfRangeException($"Trying to use negative starting index ({startIndex}) for setting multiple colors.");
+            }
+
+            if (startIndex >= this.colors.Count)
+            {
+                throw new IndexOutOfRangeException($"Trying to use starting index ({startIndex}) bigger than palette size ({this.colors.Count}).");
+            }
+
+            if (length > colors.Length)
+            {
+                throw new IndexOutOfRangeException($"Length exceeds input colors array size ({length}).");
+            }
+
+            if (startIndex + length > this.colors.Count)
+            {
+                throw new IndexOutOfRangeException($"Stating index and length exceeds palette length ({length}).");
+            }
+
+            for (int i = 0; i < length; i++)
+            {
+                this.colors[startIndex + i] = colors[i];
+            }
 
             return this;
         }

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Rendering.Interface;
@@ -49,7 +50,9 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
             var bitmap = assetsDataProvider.LoadModel(entry.DataRef) as Bitmap;
 
-            var texture = textureMan.Create(entryId, bitmap);
+            var bytes = BitmapHelper.ToBytes(bitmap);
+
+            var texture = textureMan.Create(entryId, bitmap.Width, bitmap.Height, bytes);
 
             return pictureMan.CreatePicture()
                 .SetName(entryId)

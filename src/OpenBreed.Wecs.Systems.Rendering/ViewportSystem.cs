@@ -132,7 +132,26 @@ namespace OpenBreed.Wecs.Systems.Rendering
  
                 var cameraWorld = worldMan.GetById(camera.WorldId);
                 var worldRenderable = cameraWorld.GetModule<IRenderableBatch>();
-                worldRenderable.Render(cameraTransform, cameraClipBox, depth, dt);
+
+                if (cameraWorld.TryGetModule(out IRenderablePalette paletteModule))
+                {
+                    primitiveRenderer.PushPalette();
+
+                    primitiveRenderer.SetPalette(paletteModule.CurrentPalette);
+
+                    try
+                    {
+                        worldRenderable.Render(cameraTransform, cameraClipBox, depth, dt);
+                    }
+                    finally
+                    {
+                        primitiveRenderer.PopPalette();
+                    }
+                }
+                else
+                {
+                    worldRenderable.Render(cameraTransform, cameraClipBox, depth, dt);
+                }
 
                 //Draw camera effects
                 primitiveRenderer.DrawBrightnessBox(cameraBrightness);

@@ -10,6 +10,11 @@ namespace OpenBreed.Rendering.Interface
         #region Public Properties
 
         /// <summary>
+        /// ID of this palette
+        /// </summary>
+        int Id { get; }
+
+        /// <summary>
         /// Provides direct access to color floats array which looks as follows
         /// [C1.R, C1.G, C1.B, C1.A, C2.R, C2.G, C2.B, C2.A, ...]
         /// </summary>

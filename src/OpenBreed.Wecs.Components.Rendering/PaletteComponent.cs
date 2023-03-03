@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Wecs.Components.Rendering
+﻿using OpenTK.Mathematics;
+
+namespace OpenBreed.Wecs.Components.Rendering
 {
     public struct PaletteColor
     {
@@ -34,16 +36,19 @@
 
         public PaletteComponent()
         {
-            Colors = new PaletteColor[256];
+            PaletteId = -1;
+
+            Colors = new Color4[256];
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public PaletteColor[] Colors { get; }
-
         public int PaletteId { get; set; }
+
+
+        public Color4[] Colors { get; }
 
         #endregion Public Properties
     }

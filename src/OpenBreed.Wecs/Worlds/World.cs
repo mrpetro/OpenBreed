@@ -100,6 +100,18 @@ namespace OpenBreed.Wecs.Worlds
                 throw new InvalidOperationException($"Module of type '{typeof(TModule)}' not found.");
         }
 
+        public bool TryGetModule<TModule>(out TModule module)
+        {
+            if (!modules.TryGetValue(typeof(TModule), out object moduleObj))
+            {
+                module = default;
+                return false;
+            }
+
+            module = (TModule)moduleObj;
+            return true;
+        }
+
         //public void Pause() => SetPause(true);
 
         //public void Unpause() => SetPause(false);

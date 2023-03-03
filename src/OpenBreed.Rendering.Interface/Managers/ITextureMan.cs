@@ -39,8 +39,9 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// <param name="width">Width of texture</param>
         /// <param name="height">Height of texture</param>
         /// <param name="data">Byte array of indices</param>
+        /// <param name="maskIndex">Index that will be not drawn</param>
         /// <returns>ITexture object</returns>
-        ITexture Create(string alias, int width, int height, byte[] data);
+        ITexture Create(string alias, int width, int height, byte[] data, int maskIndex = -1);
 
         /// <summary>
         /// Creates texture object from image file path and return it

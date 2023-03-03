@@ -42,6 +42,8 @@ namespace OpenBreed.Rendering.Interface
         void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size, Color4 color);
 
         void SetPalette(IPalette palette);
+        void PushPalette();
+        void PopPalette();
         void SetView(Matrix4 matrix4);
 
         IPosTexCoordArrayBuilder CreatePosTexCoordArray();

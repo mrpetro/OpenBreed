@@ -25,12 +25,21 @@ namespace OpenBreed.Rendering.Interface
         IPaletteBuilder SetLength(int length);
 
         /// <summary>
-        /// Sets color for specific palette index
+        /// Sets color with specific palette index
         /// </summary>
         /// <param name="index">Index of palette color to set</param>
         /// <param name="color">Color to set</param>
         /// <returns>This builder instance</returns>
         IPaletteBuilder SetColor(int index, Color4 color);
+
+        /// <summary>
+        /// Sets multiple palette colors
+        /// </summary>
+        /// <param name="colors">Colors to set</param>
+        /// <param name="startIndex">Optional starting index of color to modify</param>
+        /// <param name="startIndex">Optional length of colors array to modify</param>
+        /// <returns>This builder instance</returns>
+        IPaletteBuilder SetColors(Color4[] colors, int startIndex = 0, int length = 0);
 
         /// <summary>
         /// Build palette

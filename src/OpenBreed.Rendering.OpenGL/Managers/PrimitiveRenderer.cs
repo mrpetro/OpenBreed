@@ -16,6 +16,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private IPalette currentPalette;
         private Stack<Matrix4> modelMatrixStack = new Stack<Matrix4>();
+        private Stack<IPalette> paletteStack = new Stack<IPalette>();
         private Shader nontexturedShader;
 
         private Matrix4 projection;
@@ -150,6 +151,8 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 texturedWithPaletteShader.SetMatrix4("view", view);
                 texturedWithPaletteShader.SetMatrix4("projection", projection);
                 texturedWithPaletteShader.SetVector4("aColor", ((Vector4)color));
+                texturedWithPaletteShader.SetUInt("maskIndex", (uint)texture.MaskIndex);
+
                 texturedWithPaletteShader.SetVector4Array("palette", currentPalette.DirectData);
             }
             else
@@ -239,6 +242,16 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void SetPalette(IPalette palette)
         {
             currentPalette = palette;
+        }
+
+        public void PopPalette()
+        {
+            currentPalette = paletteStack.Pop();
+        }
+
+        public void PushPalette()
+        {
+            paletteStack.Push(currentPalette);
         }
 
         public void Translate(Vector3 vec)

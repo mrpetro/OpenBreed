@@ -4,12 +4,15 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Model.Texts;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
+using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
@@ -18,7 +21,10 @@ using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
+using OpenTK.Mathematics;
 using System;
+using System.Drawing;
+using System.Linq;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -27,6 +33,8 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private readonly CameraHelper cameraHelper;
+        private readonly PalettesDataProvider palettesDataProvider;
+        private readonly IPaletteMan paletteMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
         private readonly IEntityMan entityMan;
@@ -54,6 +62,8 @@ namespace OpenBreed.Sandbox.Worlds
                                   IEntityFactory entityFactory,
                                   VanillaStatusBarHelper hudHelper,
                                   CameraHelper cameraHelper,
+                                  PalettesDataProvider palettesDataProvider,
+                                  IPaletteMan paletteMan,
                                   IRepositoryProvider repositoryProvider,
                                   IDataLoaderFactory dataLoaderFactory,
                                   SpriteAtlasDataProvider spriteAtlasDataProvider,
@@ -69,6 +79,8 @@ namespace OpenBreed.Sandbox.Worlds
             this.entityFactory = entityFactory;
             this.hudHelper = hudHelper;
             this.cameraHelper = cameraHelper;
+            this.palettesDataProvider = palettesDataProvider;
+            this.paletteMan = paletteMan;
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
             this.spriteAtlasDataProvider = spriteAtlasDataProvider;
@@ -107,6 +119,8 @@ namespace OpenBreed.Sandbox.Worlds
             var builder = worldMan.Create().SetName("SmartCardScreen");
 
             builder.AddModule(renderableFactory.CreateRenderableBatch());
+            builder.AddModule(renderableFactory.CreateRenderablePalette());
+
 
             AddSystems(builder);
 
@@ -117,12 +131,34 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Private Methods
 
+        private void AddPalette(IWorld world)
+        {
+            var commonPaletteModel = palettesDataProvider.GetPalette("Vanilla/Common/SmartCardScreen/Palette");
+
+            var paletteEntity = entityMan.Create(tag: $"SmartCardScreen/Palette/Main");
+            var paletteComponent = new PaletteComponent();
+            paletteEntity.Add(paletteComponent);
+
+            var builder = paletteMan.CreatePalette()
+                .SetName(paletteEntity.Tag)
+                .SetLength(256)
+                .SetColors(commonPaletteModel.Data.Select(color => PaletteHelper.ToColor4(color)).ToArray())
+                .SetColors(Enumerable.Range(0, 64).Select(idx => PaletteHelper.ToColor4(Color.FromArgb(255, 0, 168, 168))).ToArray(), 32);
+
+            var palette = builder.Build();
+
+            paletteComponent.PaletteId = palette.Id;
+
+            worldMan.RequestAddEntity(paletteEntity, world.Id);
+        }
+
         private void AddSystems(IWorldBuilder builder)
         {
             builder.AddSystem<AnimatorSystem>();
             builder.AddSystem<SpriteSystem>();
             builder.AddSystem<PictureSystem>();
             builder.AddSystem<TextSystem>();
+            builder.AddSystem<PaletteSystem>();
         }
 
         private void Setup(IWorld world)
@@ -131,6 +167,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             triggerMan.OnWorldInitialized(world, () =>
             {
+                AddPalette(world);
                 worldMan.RequestAddEntity(smartCardCamera, world.Id);
                 AddBackground(world, -320, -272);
                 AddText(world, - 320 / 2 + 20 , 240 / 2 - 38);

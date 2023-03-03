@@ -23,6 +23,7 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -146,7 +147,7 @@ namespace OpenBreed.Sandbox.Loaders
                 return world;
 
             var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
-            if (dbMap == null)
+            if (dbMap is null)
                 throw new Exception($"Missing Map: {entryId}");
 
             var map = mapsDataProvider.GetMap(dbMap.Id);
@@ -154,7 +155,7 @@ namespace OpenBreed.Sandbox.Loaders
             if (map is null)
                 throw new Exception($"Map model asset '{dbMap.DataRef}' could not be loaded.");
 
-            LoadPalettes(map);
+            LoadPalettes(map, dbMap.Id);
             LoadReferencedTileSet(dbMap);
             LoadReferencedSpriteSets(dbMap);
             LoadReferencedAnimations(dbMap);
@@ -173,6 +174,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
             worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
+            worldBuilder.AddModule(renderableFactory.CreateRenderablePalette());
             worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
             worldBuilder.SetupGameWorldSystems();
@@ -190,10 +192,12 @@ namespace OpenBreed.Sandbox.Loaders
 
             triggerMan.OnWorldInitialized(world, () =>
             {
-                var paletteEntity = entityMan.GetByTag($"GameWorld/Palette/Common").FirstOrDefault();
+                var paletteEntityTag = $"GameWorld/Palette/{dbMap.Id}";
+                var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
 
                 if(paletteEntity is not null)
                     worldMan.RequestAddEntity(paletteEntity, world.Id);
+
 
                 for (int iy = 0; iy < layout.Height; iy++)
                 {
@@ -314,11 +318,12 @@ namespace OpenBreed.Sandbox.Loaders
                 entityLoader.Load(mapAssets, map, visited, ix, iy, templateName, flavor, gfxValue, world);
         }
 
-        private void LoadPalettes(MapModel mapModel)
+        private void LoadPalettes(MapModel mapModel, string mapId)
         {
-            var paletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
+            var commonPaletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
+            var mapPaletteModel = mapModel.Palettes.First();
 
-            var paletteEntityTag = $"GameWorld/Palette/Common";
+            var paletteEntityTag = $"GameWorld/Palette/{mapId}";
 
             var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
 
@@ -337,27 +342,26 @@ namespace OpenBreed.Sandbox.Loaders
                 paletteEntity.Add(paletteComponent);
             }
 
-            for (int i = 0; i < paletteModel.Length; i++)
-            {
-                var c = paletteModel[i];
-                paletteComponent.Colors[i] = new PaletteColor(c.R, c.G, c.B);
-            }
-
             var builder = paletteMan.CreatePalette()
-                .SetName($"GameWorld/Palette/Common")
-                .SetLength(256);
+                .SetName(paletteEntityTag)
+                .SetLength(256)
+                .SetColors(commonPaletteModel.Data.Select(color => PaletteHelper.ToColor4(color)).ToArray())
+                .SetColors(mapPaletteModel.Data.Take(64).Select(color => PaletteHelper.ToColor4(color)).ToArray());
 
-            for (int i = 0; i < 256; i++)
-            {
-                var c = paletteModel[i];
-                builder.SetColor(i, new Color4(c.R / 255.0f, c.G / 255.0f, c.B / 255.0f, c.A / 255.0f));
-            }
+            //for (int i = 0; i < 256; i++)
+            //{
+            //    var c = commonPaletteModel[i];
+            //    builder.SetColor(i, new Color4(c.R / 255.0f, c.G / 255.0f, c.B / 255.0f, c.A / 255.0f));
+            //}
 
 
-            var cb = paletteModel[0];
+            var cb = commonPaletteModel[0];
             builder.SetColor(0, new Color4(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));
 
-            builder.Build();
+            var palette = builder.Build();
+
+            paletteComponent.PaletteId = palette.Id;
+
         }
 
         private void LoadReferencedAnimations(IDbMap dbMap)

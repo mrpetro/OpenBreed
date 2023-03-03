@@ -4,6 +4,7 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Sprites;
@@ -12,6 +13,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
+using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
@@ -23,6 +25,7 @@ using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
+using OpenTK.Mathematics;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Worlds
@@ -42,6 +45,8 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly VanillaStatusBarHelper hudHelper;
         private readonly CameraHelper cameraHelper;
         private readonly IRepositoryProvider repositoryProvider;
+        private readonly IPaletteMan paletteMan;
+        private readonly PalettesDataProvider palettesDataProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
 
@@ -60,6 +65,8 @@ namespace OpenBreed.Sandbox.Worlds
                                   VanillaStatusBarHelper hudHelper, 
                                   CameraHelper cameraHelper, 
                                   IRepositoryProvider repositoryProvider, 
+                                  IPaletteMan paletteMan,
+                                  PalettesDataProvider palettesDataProvider,
                                   IDataLoaderFactory dataLoaderFactory,
                                   SpriteAtlasDataProvider spriteAtlasDataProvider)
         {
@@ -74,6 +81,8 @@ namespace OpenBreed.Sandbox.Worlds
             this.hudHelper = hudHelper;
             this.cameraHelper = cameraHelper;
             this.repositoryProvider = repositoryProvider;
+            this.paletteMan = paletteMan;
+            this.palettesDataProvider = palettesDataProvider;
             this.dataLoaderFactory = dataLoaderFactory;
             this.spriteAtlasDataProvider = spriteAtlasDataProvider;
         }
@@ -83,29 +92,29 @@ namespace OpenBreed.Sandbox.Worlds
         #region Public Methods
 
 
-        private PaletteModel GetPaletteModel(string paletteName)
+        private void AddPalette(IWorld world)
         {
-            var paletteEntity = entityMan.GetByTag(paletteName).FirstOrDefault();
+            var commonPaletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
 
-            if(paletteEntity is null)
-                return PaletteModel.NullPalette;
+            var paletteEntity = entityMan.Create(tag: $"GameHUD/Palette/Main");
+            var paletteComponent = new PaletteComponent();
+            paletteEntity.Add(paletteComponent);
 
-            var paletteComponent = paletteEntity.TryGet<PaletteComponent>();
+            var builder = paletteMan.CreatePalette()
+                .SetName(paletteEntity.Tag)
+                .SetLength(256)
+                .SetColors(commonPaletteModel.Data.Select(color => PaletteHelper.ToColor4(color)).ToArray());
 
-            if (paletteComponent is null)
-                return PaletteModel.NullPalette;
+            var cb = commonPaletteModel[0];
+            builder.SetColor(0, new Color4(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));
 
-            var paletteBuilder = PaletteBuilder.NewPaletteModel();
-            paletteBuilder.SetName(paletteName);
-            for (int i = 0; i < paletteComponent.Colors.Length; i++)
-            {
-                var c = paletteComponent.Colors[i];
+            var palette = builder.Build();
 
-                paletteBuilder.SetColor(i, System.Drawing.Color.FromArgb(255, c.R, c.G, c.B));
-            }
+            paletteComponent.PaletteId = palette.Id;
 
-            return paletteBuilder.Build();
+            worldMan.RequestAddEntity(paletteEntity, world.Id);
         }
+
 
         public void Create()
         {
@@ -116,13 +125,11 @@ namespace OpenBreed.Sandbox.Worlds
 
             var spriteSet = spriteAtlasDataProvider.GetSpriteSet(dbStatusBarSpriteAtlas.Id);
 
-            var paletteModel = GetPaletteModel("GameWorld/Palette/Common");
+            //var colors = paletteModel.GetColors(0, 64);
 
-            var colors = paletteModel.GetColors(0, 64);
+            //paletteModel.SetColors(64, colors);
 
-            paletteModel.SetColors(64, colors);
-
-            var spriteAtlas = loader.Load(dbStatusBarSpriteAtlas.Id, paletteModel);
+            var spriteAtlas = loader.Load(dbStatusBarSpriteAtlas.Id);
 
             //Create FontAtlas
             var fontAtlas = fontMan.Create()
@@ -143,6 +150,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var builder = worldMan.Create().SetName("GameHUD");
 
+            builder.AddModule(renderableFactory.CreateRenderablePalette());
             builder.AddModule(renderableFactory.CreateRenderableBatch());
 
 
@@ -160,7 +168,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem<AnimatorSystem>();
             builder.AddSystem<SpriteSystem>();
             builder.AddSystem<TextSystem>();
-
+            builder.AddSystem<PaletteSystem>();
         }
 
         private void Setup(IWorld world)
@@ -169,6 +177,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             triggerMan.OnWorldInitialized(world, () =>
             {
+                AddPalette(world);
+
                 worldMan.RequestAddEntity(hudCamera, world.Id);
 
                 var p1StatusBar = hudHelper.CreateHudElement("StatusBarP1", "P1.StatusBar", -160, 109);

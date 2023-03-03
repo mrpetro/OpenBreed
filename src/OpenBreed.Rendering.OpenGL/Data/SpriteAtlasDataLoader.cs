@@ -72,7 +72,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
                 out int outHeight,
                 out List<(int X, int Y, int Width, int Height)> bounds);
 
-            var texture = textureMan.Create(entryId, outWidth, outHeight, outData);
+            var texture = textureMan.Create(entryId, outWidth, outHeight, outData, maskIndex: 0);
 
             var atlasBuilder = spriteMan.CreateAtlas()
                 .SetName(entryId)

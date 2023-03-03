@@ -25,6 +25,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public int InternalId { get; }
         public int Width { get; private set; }
 
+        public int MaskIndex { get; private set; }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -62,7 +64,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return texture;
         }
 
-        public static Texture CreateFromIndexArray(int width, int height, byte[] data)
+        public static Texture CreateFromIndexArray(int width, int height, byte[] data, int maskIndex = -1)
         {
             PixelInternalFormat internalPixelFormat = PixelInternalFormat.R8ui;
             OpenTK.Graphics.OpenGL4.PixelFormat pixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat.RedInteger;
@@ -83,6 +85,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             texture.Width = width;
             texture.Height = height;
             texture.DataMode = TextureDataMode.Index;
+            texture.MaskIndex = maskIndex;
 
             return texture;
         }

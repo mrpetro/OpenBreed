@@ -647,9 +647,6 @@ namespace OpenBreed.Sandbox
         private void OnLoad()
         {
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
-            //var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
-
-            //var picture = pictureDataLoader.Load("Images.SMARTPIC.LBM");
 
             InitLua();
 

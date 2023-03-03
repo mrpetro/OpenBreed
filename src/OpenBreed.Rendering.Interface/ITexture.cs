@@ -40,6 +40,12 @@ namespace OpenBreed.Rendering.Interface
         /// </summary>
         TextureDataMode DataMode { get; }
 
+        /// <summary>
+        /// Palette index to be used as invisible
+        /// Used only when DataMode is set to Index
+        /// </summary>
+        int MaskIndex { get; }
+
         #endregion Public Properties
     }
 }

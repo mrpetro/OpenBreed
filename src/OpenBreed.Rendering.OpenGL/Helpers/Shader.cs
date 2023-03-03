@@ -156,6 +156,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         }
 
         /// <summary>
+        /// Set a uniform int on this shader.
+        /// </summary>
+        /// <param name="name">The name of the uniform</param>
+        /// <param name="data">The data to set</param>
+        public void SetUInt(string name, uint data)
+        {
+            GL.UseProgram(Handle);
+            GL.Uniform1(_uniformLocations[name], data);
+        }
+
+        /// <summary>
         /// Set a uniform float on this shader.
         /// </summary>
         /// <param name="name">The name of the uniform</param>
