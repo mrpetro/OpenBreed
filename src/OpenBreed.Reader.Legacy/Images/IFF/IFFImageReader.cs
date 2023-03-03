@@ -24,11 +24,10 @@ namespace OpenBreed.Common.Readers.Images.IFF
     {
         #region Private Fields
 
-        private string formatId;
-
+        private readonly ImageBuilder builder;
         private BMHDBlock bmhdBlock;
-
         private Color[] cmapBlock;
+        private string formatId;
 
         #endregion Private Fields
 
@@ -36,16 +35,10 @@ namespace OpenBreed.Common.Readers.Images.IFF
 
         public LBMImageReader(ImageBuilder builder)
         {
-            Builder = builder;
+            this.builder = builder;
         }
 
         #endregion Public Constructors
-
-        #region Internal Properties
-
-        internal ImageBuilder Builder { get; }
-
-        #endregion Internal Properties
 
         #region Public Methods
 
@@ -64,83 +57,36 @@ namespace OpenBreed.Common.Readers.Images.IFF
             while (!IsEOF(binReader))
                 ReadBlock(binReader);
 
-            return Builder.Build();
+            return builder.Build();
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private string ReadString(BigEndianBinaryReader binReader, int size)
+        private byte[] ExpandBytes(byte[] bytes)
         {
-            var data = binReader.ReadBytes(size);
-            return Encoding.ASCII.GetString(data);
+            switch (bmhdBlock.Compression)
+            {
+                case CompressionEnum.Uncompressed:
+                    return bytes;
+
+                case CompressionEnum.RLECompressed:
+                    return RLEDecompress(bytes);
+
+                default:
+                    throw new NotImplementedException($"Compression '{bmhdBlock.Compression}'");
+            }
+        }
+
+        private void IgnoreUnknownBlock(BigEndianBinaryReader binReader, int blockLength)
+        {
+            binReader.ReadBytes(blockLength);
         }
 
         private bool IsEOF(BigEndianBinaryReader binReader)
         {
             return binReader.BaseStream.Position == binReader.BaseStream.Length;
-        }
-
-        private void ReadCMAPBlock(BigEndianBinaryReader binReader, int blockLength)
-        {
-            int colorsNo = (Int32)blockLength / 3;
-            cmapBlock = new Color[colorsNo];
-
-            for (int i = 0; i < colorsNo; i++)
-            {
-                var colorBytes = binReader.ReadBytes(3);
-                cmapBlock[i] = Color.FromArgb(colorBytes[0],
-                                              colorBytes[1],
-                                              colorBytes[2]);
-            }
-        }
-
-        private void ReadBMHDBlock(BigEndianBinaryReader binReader, int blockLength)
-        {
-            bmhdBlock = new BMHDBlock();
-            bmhdBlock.Width = binReader.ReadUInt16();
-            bmhdBlock.Height = binReader.ReadUInt16();
-            bmhdBlock.Xorigin = binReader.ReadInt16();
-            bmhdBlock.Yorigin = binReader.ReadInt16();
-            bmhdBlock.NumPlanes = binReader.ReadByte();
-            bmhdBlock.Mask = (MaskEnum)binReader.ReadByte();
-            bmhdBlock.Compression = (CompressionEnum)binReader.ReadByte();
-            bmhdBlock.Pad1 = binReader.ReadByte();
-            bmhdBlock.TransClr = binReader.ReadUInt16();
-            bmhdBlock.Xaspect = binReader.ReadByte();
-            bmhdBlock.Yaspect = binReader.ReadByte();
-            bmhdBlock.PageWidth = binReader.ReadInt16();
-            bmhdBlock.PageHeight = binReader.ReadInt16();
-        }
-
-        private void ReadBlock(BigEndianBinaryReader binReader)
-        {
-            string blockName = ReadString(binReader, 4);
-            int blockLength = binReader.ReadInt32();
-
-            switch (blockName)
-            {
-                case "BMHD":
-                    ReadBMHDBlock(binReader, blockLength);
-                    break;
-
-                case "CMAP":
-                    ReadCMAPBlock(binReader, blockLength);
-                    break;
-
-                case "BODY":
-                    ReadBODYBlock(binReader, blockLength);
-                    break;
-
-                default:
-                    IgnoreUnknownBlock(binReader, blockLength);
-                    break;
-            }
-
-            //Read optional padding byte, only present if lenChunk is not a multiple of 2.
-            if (blockLength % 2 != 0)
-                binReader.ReadByte();
         }
 
         private void ProcessILBM(byte[] bytes)
@@ -172,33 +118,65 @@ namespace OpenBreed.Common.Readers.Images.IFF
 
             imageData = imageData.Reverse().ToArray();
 
-            Builder.SetSize(bmhdBlock.Width, bmhdBlock.Height);
-            Builder.SetPixelFormat(PixelFormat.Format8bppIndexed);
-            Builder.SetData(imageData);
-            Builder.SetPalette(cmapBlock);
-        }
-
-        private byte[] ExpandBytes(byte[] bytes)
-        {
-            switch (bmhdBlock.Compression)
-            {
-                case CompressionEnum.Uncompressed:
-                    return bytes;
-
-                case CompressionEnum.RLECompressed:
-                    return RLEDecompress(bytes);
-
-                default:
-                    throw new NotImplementedException($"Compression '{bmhdBlock.Compression}'");
-            }
+            builder.SetSize(bmhdBlock.Width, bmhdBlock.Height);
+            builder.SetPixelFormat(PixelFormat.Format8bppIndexed);
+            builder.SetData(imageData);
+            builder.SetPalette(cmapBlock);
         }
 
         private void ProcessPBM(byte[] bytes)
         {
-            Builder.SetSize(bmhdBlock.Width, bmhdBlock.Height);
-            Builder.SetPixelFormat(PixelFormat.Format8bppIndexed);
-            Builder.SetData(bytes);
-            Builder.SetPalette(cmapBlock);
+            builder.SetSize(bmhdBlock.Width, bmhdBlock.Height);
+            builder.SetPixelFormat(PixelFormat.Format8bppIndexed);
+            builder.SetData(bytes);
+            builder.SetPalette(cmapBlock);
+        }
+
+        private void ReadBlock(BigEndianBinaryReader binReader)
+        {
+            string blockName = ReadString(binReader, 4);
+            int blockLength = binReader.ReadInt32();
+
+            switch (blockName)
+            {
+                case "BMHD":
+                    ReadBMHDBlock(binReader, blockLength);
+                    break;
+
+                case "CMAP":
+                    ReadCMAPBlock(binReader, blockLength);
+                    break;
+
+                case "BODY":
+                    ReadBODYBlock(binReader, blockLength);
+                    break;
+
+                default:
+                    IgnoreUnknownBlock(binReader, blockLength);
+                    break;
+            }
+
+            //Read optional padding byte, only present if lenChunk is not a multiple of 2.
+            if (blockLength % 2 != 0)
+                binReader.ReadByte();
+        }
+
+        private void ReadBMHDBlock(BigEndianBinaryReader binReader, int blockLength)
+        {
+            bmhdBlock = new BMHDBlock();
+            bmhdBlock.Width = binReader.ReadUInt16();
+            bmhdBlock.Height = binReader.ReadUInt16();
+            bmhdBlock.Xorigin = binReader.ReadInt16();
+            bmhdBlock.Yorigin = binReader.ReadInt16();
+            bmhdBlock.NumPlanes = binReader.ReadByte();
+            bmhdBlock.Mask = (MaskEnum)binReader.ReadByte();
+            bmhdBlock.Compression = (CompressionEnum)binReader.ReadByte();
+            bmhdBlock.Pad1 = binReader.ReadByte();
+            bmhdBlock.TransClr = binReader.ReadUInt16();
+            bmhdBlock.Xaspect = binReader.ReadByte();
+            bmhdBlock.Yaspect = binReader.ReadByte();
+            bmhdBlock.PageWidth = binReader.ReadInt16();
+            bmhdBlock.PageHeight = binReader.ReadInt16();
         }
 
         private void ReadBODYBlock(BigEndianBinaryReader binReader, int blockLength)
@@ -222,6 +200,41 @@ namespace OpenBreed.Common.Readers.Images.IFF
                 ProcessPBM(bytes);
             else
                 throw new NotImplementedException(formatId);
+        }
+
+        private void ReadCMAPBlock(BigEndianBinaryReader binReader, int blockLength)
+        {
+            int colorsNo = (Int32)blockLength / 3;
+            cmapBlock = new Color[colorsNo];
+
+            for (int i = 0; i < colorsNo; i++)
+            {
+                var colorBytes = binReader.ReadBytes(3);
+                cmapBlock[i] = Color.FromArgb(colorBytes[0],
+                                              colorBytes[1],
+                                              colorBytes[2]);
+            }
+        }
+
+        private void ReadHeader(BigEndianBinaryReader binReader)
+        {
+            var chunkId = ReadString(binReader, 4);
+
+            if (chunkId != "FORM")
+                throw new InvalidDataException("Expected 'FORM' header");
+
+            var lenChunk = binReader.ReadUInt32();
+
+            formatId = ReadString(binReader, 4);
+
+            if (formatId != "ILBM" && formatId != "PBM ")
+                throw new InvalidDataException("Expected 'ILBM' or 'PBM ' format id");
+        }
+
+        private string ReadString(BigEndianBinaryReader binReader, int size)
+        {
+            var data = binReader.ReadBytes(size);
+            return Encoding.ASCII.GetString(data);
         }
 
         private byte[] RLEDecompress(byte[] bytes)
@@ -253,26 +266,6 @@ namespace OpenBreed.Common.Readers.Images.IFF
             }
 
             return result.ToArray();
-        }
-
-        private void IgnoreUnknownBlock(BigEndianBinaryReader binReader, int blockLength)
-        {
-            binReader.ReadBytes(blockLength);
-        }
-
-        private void ReadHeader(BigEndianBinaryReader binReader)
-        {
-            var chunkId = ReadString(binReader, 4);
-
-            if (chunkId != "FORM")
-                throw new InvalidDataException("Expected 'FORM' header");
-
-            var lenChunk = binReader.ReadUInt32();
-
-            formatId = ReadString(binReader, 4);
-
-            if (formatId != "ILBM" && formatId != "PBM ")
-                throw new InvalidDataException("Expected 'ILBM' or 'PBM ' format id");
         }
 
         #endregion Private Methods

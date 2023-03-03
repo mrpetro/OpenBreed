@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Model.Images
 {
-    public class ImageBuilder
+    public class ImageBuilder : IImageBuilder
     {
         internal int Width;
         internal int Height;
