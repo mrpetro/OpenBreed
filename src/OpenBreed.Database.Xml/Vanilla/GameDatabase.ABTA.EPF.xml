@@ -10564,17 +10564,29 @@
 		</ActionSets>
 		<Palettes>
 			<Items>
-				<PaletteFromLBM Id="Palettes.COMPUTER.LBM">
+				<PaletteFromLBM Id="Vanilla/Title/EPS1/Logo/Palette">
+					<DataRef>Assets.EPSLOGO1.LBM</DataRef>
+				</PaletteFromLBM>
+				<PaletteFromLBM Id="Vanilla/Title/EPS2/Logo/Palette">
+					<DataRef>Assets.EPSLOGO2.LBM</DataRef>
+				</PaletteFromLBM>
+				<PaletteFromLBM Id="Vanilla/Title/Teams17/Logo/Palette">
+					<DataRef>Assets.T17LOGO.LBM</DataRef>
+				</PaletteFromLBM>
+				<PaletteFromLBM Id="Vanilla/Title/Menu/Palette">
+					<DataRef>Assets.TITLEBAC.LBM</DataRef>
+				</PaletteFromLBM>
+				<PaletteFromLBM Id="Vanilla/Common/OutroScreen/Palette">
+					<DataRef>Assets.OUTRO.LBM</DataRef>
+				</PaletteFromLBM>
+				<PaletteFromLBM Id="Vanilla/Common/IntexNetworkScreen/Palette">
 					<DataRef>Assets.COMPUTER.LBM</DataRef>
 				</PaletteFromLBM>
-				<PaletteFromLBM Id="Palettes.IPC.LBM">
+				<PaletteFromLBM Id="Vanilla/Common/MissionScreen/Palette">
 					<DataRef>Assets.IPC.LBM</DataRef>
 				</PaletteFromLBM>
-				<PaletteFromLBM Id="Palettes.SMARTPIC.LBM">
+				<PaletteFromLBM Id="Vanilla/Common/SmartCardScreen/Palette">
 					<DataRef>Assets.SMARTPIC.LBM</DataRef>
-				</PaletteFromLBM>
-				<PaletteFromLBM Id="Palettes.TITLEBAC.LBM">
-					<DataRef>Assets.TITLEBAC.LBM</DataRef>
 				</PaletteFromLBM>
 				<PaletteFromMAP Id="Palettes.MAP.01.CMAP">
 					<DataRef>Assets.MAP.01</DataRef>
