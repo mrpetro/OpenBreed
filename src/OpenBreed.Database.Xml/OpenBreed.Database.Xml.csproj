@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Vanilla\ABTA\Templates\L1\**" />
-    <EmbeddedResource Remove="Vanilla\ABTA\Templates\L1\**" />
-    <None Remove="Vanilla\ABTA\Templates\L1\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Vanilla\ABTA\Scripts\Common\Actor.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Door.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Item.lua" />
@@ -44,6 +38,7 @@
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\GameHudViewport.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\GameViewport.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Viewports\TextViewport.xml" />
+    <None Remove="Vanilla\ABTA\Templates\L4\TVFlickering - Copy.xml" />
     <None Remove="Vanilla\Common\Scripts\Hud\Cursor.lua" />
     <None Remove="Vanilla\Common\Scripts\Hud\FpsCounter.lua" />
     <None Remove="Vanilla\GameDatabase.ABHC.xml" />
@@ -159,6 +154,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\Projectiles\Missile.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Templates\L1\ShipSmoke.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\Common\Scripts\Hud\Cursor.lua">

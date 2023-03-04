@@ -5948,18 +5948,18 @@
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="3" Name="Unknown 3" Visibility="true">
+						<Action Id="3" Name="EngineHeat" Visibility="true">
 							<Color>#C0000000</Color>
-							<Description>Unknown action</Description>
+							<Description>Engine heat from crashed ship</Description>
 							<Presentation>
 								<Color>#C0000000</Color>
 								<Visibility>true</Visibility>
 							</Presentation>
 							<Triggers />
 						</Action>
-						<Action Id="4" Name="Animated sprite" Visibility="true">
+						<Action Id="4" Name="L1/ShipSmoke" Visibility="true">
 							<Color>#50AAAAAA</Color>
-							<Description>Left up corner of sprite</Description>
+							<Description>Crashed ship smoke</Description>
 							<Presentation>
 								<Color>#50AAAAAA</Color>
 								<Visibility>true</Visibility>
@@ -13451,6 +13451,65 @@
 						</FloatTrack>
 					</Tracks>
 				</Animation>
+				
+				<Animation Id="Vanilla/Common/Explosion/Large">
+					<Length>7.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.5" Value="1" />
+								<Frame Time="1.0" Value="2" />
+								<Frame Time="1.5" Value="3" />
+								<Frame Time="2.0" Value="4" />
+								<Frame Time="2.5" Value="5" />
+								<Frame Time="3.0" Value="6" />
+								<Frame Time="3.5" Value="7" />
+								<Frame Time="4.0" Value="8" />
+								<Frame Time="4.5" Value="9" />
+								<Frame Time="5.0" Value="10" />
+								<Frame Time="5.5" Value="11" />
+								<Frame Time="6.0" Value="12" />
+								<Frame Time="6.5" Value="13" />
+								<Frame Time="7.0" Value="14" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+				<Animation Id="Vanilla/Common/Explosion/Small">
+					<Length>4.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.5" Value="15" />
+								<Frame Time="1.0" Value="16" />
+								<Frame Time="1.5" Value="17" />
+								<Frame Time="2.0" Value="18" />
+								<Frame Time="2.5" Value="19" />
+								<Frame Time="3.0" Value="20" />
+								<Frame Time="3.5" Value="21" />
+								<Frame Time="4.0" Value="22" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/Common/Resident" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
 				<Animation Id="Vanilla/Common/Projectile/Missile/High/0.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -14975,6 +15034,61 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+				
+				<Animation Id="Vanilla/L1/Environment/ShipSmoke">
+					<Length>9.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="1.5" Value="64" />
+								<Frame Time="3.0" Value="65" />
+								<Frame Time="4.5" Value="66" />
+								<Frame Time="6.0" Value="67" />
+								<Frame Time="7.5" Value="68" />
+								<Frame Time="9.0" Value="69" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/L1/A" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>	
+			
+				<Animation Id="Vanilla/L1/Environment/MeteorDrop">
+					<Length>5.0</Length>
+					<Tracks>
+						<IntTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.ImageId</Controller>
+							<Frames>
+								<Frame Time="0.5" Value="70" />
+								<Frame Time="1.0" Value="71" />
+								<Frame Time="1.5" Value="72" />
+								<Frame Time="2.0" Value="73" />
+								<Frame Time="2.5" Value="74" />
+								<Frame Time="3.0" Value="75" />
+								<Frame Time="3.5" Value="76" />
+								<Frame Time="4.0" Value="77" />
+								<Frame Time="4.5" Value="78" />
+								<Frame Time="5.0" Value="79" />
+							</Frames>
+						</IntTrack>
+						<StringTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.AtlasId</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="Vanilla/L1/A" />
+							</Frames>
+						</StringTrack>
+					</Tracks>
+				</Animation>
+					
 				<Animation Id="Vanilla/L4/Environment/TVFlickering">
 					<Length>1.5</Length>
 					<Tracks>
