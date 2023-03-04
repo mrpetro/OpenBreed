@@ -46,6 +46,9 @@ namespace OpenBreed.Sandbox.Loaders
                 case "MonsterEating":
                     entity = PutMonsterEating(mapAssets, map, visited, world, ix, iy, gfxValue);
                     break;
+                case "L1/ShipSmoke":
+                    entity = PutEngineSmoke(mapAssets, map, visited, world, ix, iy, gfxValue);
+                    break;
                 default:
                     break;
             }
@@ -67,6 +70,13 @@ namespace OpenBreed.Sandbox.Loaders
         private IEntity PutMonsterEating(MapMapper mapAssets, MapModel map, bool[,] visited, IWorld world, int ix, int iy, int gfxValue)
         {
             var entity = environmentHelper.AddMonsterEating(world, ix, iy, mapAssets.Level, gfxValue);
+            visited[ix, iy] = true;
+            return entity;
+        }
+
+        private IEntity PutEngineSmoke(MapMapper mapAssets, MapModel map, bool[,] visited, IWorld world, int ix, int iy, int gfxValue)
+        {
+            var entity = environmentHelper.AddShipSmoke(world, ix, iy, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
             return entity;
         }

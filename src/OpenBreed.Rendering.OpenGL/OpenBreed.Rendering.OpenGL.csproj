@@ -7,7 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Shaders\container.png" />
 	  <None Remove="Shaders\defaultShader.frag" />
 	  <None Remove="Shaders\defaultShader.vert" />
 	  <None Remove="Shaders\nontextured.frag" />
@@ -20,9 +19,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Shaders\container.png">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
 	  <Content Include="Shaders\shader.frag">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>

@@ -67,5 +67,19 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
+        public IEntity AddShipSmoke(IWorld world, int x, int y, string level, int gfxValue)
+        {
+            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\L1\ShipSmoke.xml")
+                .SetParameter("level", level)
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
+                .Build();
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
+            return entity;
+        }
+
     }
 }
