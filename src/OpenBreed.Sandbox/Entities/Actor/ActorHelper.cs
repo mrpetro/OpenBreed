@@ -19,6 +19,7 @@ using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Control.Extensions;
+using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenBreed.Wecs.Worlds;
@@ -102,6 +103,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public IEntity CreateDummyActor(string name, Vector2 pos)
         {
             var actor = CreateDummy(name, pos);
+            actor.CreateTimer("CooldownDelay");
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));

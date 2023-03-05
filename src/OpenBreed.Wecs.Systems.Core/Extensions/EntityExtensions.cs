@@ -16,20 +16,36 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
             emitComponent.ToEmit.Add(new EntityEmit(templateName, new Dictionary<string, object>()));
         }
 
-        public static void StartTimer(this IEntity entity, int timerId, double interval)
+        public static int GetTimerId(this IEntity entity, string timerName)
         {
             var timerCmp = entity.Get<TimerComponent>();
 
-            var timerData = timerCmp.Items.FirstOrDefault(item => item.TimerId == timerId);
+            var timerId = timerCmp.Items.FindIndex(timer => timer.Name == timerName);
 
-            if (timerData == null)
-            {
-                timerData = new TimerData(timerId, interval);
-                timerCmp.Items.Add(timerData);
-            }
-            else
-                timerData.Interval = interval;
+            if (timerId == -1)
+                throw new InvalidOperationException($"Timer with name '{timerName}' not found.");
 
+            return timerId;
+        }
+
+        public static int CreateTimer(this IEntity entity, string timerName)
+        {
+            var timerCmp = entity.Get<TimerComponent>();
+
+            if (timerCmp.Items.Any(timer => timer.Name == timerName))
+                throw new InvalidOperationException($"Timer with name '{timerName}' already exists.");
+
+            var timerData = new TimerData(timerName, timerCmp.Items.Count, 0);
+            timerData.Enabled = false;
+            timerCmp.Items.Add(timerData);
+            return timerData.TimerId;
+        }
+
+        public static void StartTimerEx(this IEntity entity, int timerId, double interval)
+        {
+            var timerCmp = entity.Get<TimerComponent>();
+            var timerData = timerCmp.Items[timerId];
+            timerData.Interval = interval;
             timerData.Enabled = true;
         }
 
@@ -39,8 +55,8 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 
             var timerData = timerCmp.Items.FirstOrDefault(item => item.TimerId == timerId);
 
-            if (timerData == null)
-                return;
+            if (timerData is null)
+                throw new InvalidOperationException($"Timer with ID '{timerId}' not found.");
 
             timerData.Enabled = false;
         }
