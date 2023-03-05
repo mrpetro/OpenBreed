@@ -1,5 +1,9 @@
 ﻿
+local cooldownTimerId
 local currentWeaponNo = 1
+local fireReady = true
+local fireCooldownTime = 1000
+
 local weapons =
 {
   --[1] = "AssaultGun",
@@ -9,14 +13,26 @@ local weapons =
   --[5] = "Firewall",
 }
 
+local function CooldownFinish()
+    fireReady = true
+end
 
 local function FireBullet(entity)
+
+    if(not(fireReady))
+    then
+        return
+    end
 
     local currentWeaponName = weapons[currentWeaponNo]
 
     if(currentWeaponName)
     then
         entity:Emit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeaponName .. ".xml")
+        fireReady = false
+
+		Triggers:AfterDelay(entity, cooldownTimerId, TimeSpan.FromMilliseconds(fireCooldownTime), CooldownFinish)
+
     end
 end
 
@@ -115,6 +131,9 @@ local function ShowMission(actorEntity)
 end
 
 local function onInit(entity)
+
+    cooldownTimerId = entity:GetTimerId("CooldownDelay")
+
     Triggers:OnEntityAction(
         entity,
         CheckAction,

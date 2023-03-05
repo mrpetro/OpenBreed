@@ -1,5 +1,7 @@
 ﻿local function Welcome(director, playerCharacterEntity)
 
+	local speechTimerId = Commentator:GetTimerId("SpeechDelay")
+
 	PlaySound = function(sampleName)
 		local soundId = Sounds:GetByName(sampleName)
 		local duration = Sounds:GetDuration(soundId)
@@ -10,13 +12,13 @@
 	SayNash = function()
 		local delay = PlaySound("Vanilla/Common/Speech/Nash")
 		local soundId = Sounds:GetByName("Vanilla/Common/Speech/Nash")
-		Triggers:AfterDelay(Commentator, TimeSpan.FromMilliseconds(delay), SayIsDead)
+		Triggers:AfterDelay(Commentator, speechTimerId, TimeSpan.FromMilliseconds(delay), SayIsDead, true)
 	end
 
 	SayIsDead = function()
 		local delay = PlaySound("Vanilla/Common/Speech/IsDead")
 		local soundId = Sounds:GetByName("Vanilla/Common/Speech/IsDead")
-		Triggers:AfterDelay(Commentator, TimeSpan.FromMilliseconds(delay), SayYoureOnYourOwn)
+		Triggers:AfterDelay(Commentator, speechTimerId, TimeSpan.FromMilliseconds(delay), SayYoureOnYourOwn, true)
 	end
 
 	SayYoureOnYourOwn = function()

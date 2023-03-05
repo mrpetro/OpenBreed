@@ -21,6 +21,7 @@
     local text = Texts:GetTextString(textId)
     local currentCharacter = 0
     local textLength = string.len(text)
+    local delayTimer = 0
 
     --functions
     local GameWorldPause
@@ -95,8 +96,10 @@
 
 	    Triggers:AfterDelay(
             Commentator,
+            delayTimer,
             TimeSpan.FromMilliseconds(2000),
-            DarkenBackground)
+            DarkenBackground,
+            true)
     end
 
     DarkenBackground = function()
