@@ -6,7 +6,9 @@
 
   <ItemGroup>
     <None Remove="Vanilla\ABTA\Scripts\Common\Actor.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\AssaultGun.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Door.lua" />
+    <None Remove="Vanilla\ABTA\Scripts\Common\Firewall.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Item.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Missile.lua" />
     <None Remove="Vanilla\ABTA\Scripts\Common\Mission.lua" />
@@ -90,6 +92,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Vanilla\ABTA\Scripts\Common\Firewall.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vanilla\ABTA\Scripts\Common\AssaultGun.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vanilla\ABTA\Scripts\Common\RefractionLazer.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

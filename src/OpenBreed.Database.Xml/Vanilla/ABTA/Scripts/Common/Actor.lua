@@ -7,10 +7,36 @@ local fireCooldownTime = 1000
 local weapons =
 {
   --[1] = "AssaultGun",
-  [1] = "Missile",
-  [2] = "TrilazerGun",
-  [3] = "RefractionLazer",
-  --[5] = "Firewall",
+  [1] = {
+      Name = "AssaultGun",
+      Projectile = "AssaultGun",
+      FireRate = 100,
+      MuzzleFlash = ""
+  },
+  [2] = {
+      Name = "MissileLauncher",
+      Projectile = "Missile",
+      FireRate = 1,
+      MuzzleFlash = ""
+  },
+  [3] = {
+      Name = "TrilazerGun",
+      Projectile = "TrilazerGun",
+      FireRate = 7,
+      MuzzleFlash = ""
+  },
+  [4] = {
+      Name = "Firewall",
+      Projectile = "Firewall",
+      FireRate = 25,
+      MuzzleFlash = ""
+  },
+  [5] = {
+      Name = "RefractionLazer",
+      Projectile = "RefractionLazer",
+      FireRate = 10,
+      MuzzleFlash = ""
+  }
 }
 
 local function CooldownFinish()
@@ -24,14 +50,14 @@ local function FireBullet(entity)
         return
     end
 
-    local currentWeaponName = weapons[currentWeaponNo]
+    local currentWeapon = weapons[currentWeaponNo]
 
-    if(currentWeaponName)
+    if(currentWeapon)
     then
-        entity:Emit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeaponName .. ".xml")
+        entity:Emit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeapon.Projectile .. ".xml")
         fireReady = false
 
-		Triggers:AfterDelay(entity, cooldownTimerId, TimeSpan.FromMilliseconds(fireCooldownTime), CooldownFinish)
+		Triggers:AfterDelay(entity, cooldownTimerId, TimeSpan.FromMilliseconds(1000 / currentWeapon.FireRate), CooldownFinish)
 
     end
 end
@@ -41,23 +67,23 @@ local function SwitchToPreviousWeapon(entity)
 
     if(currentWeaponNo < 1)
     then
-        currentWeaponNo = 3
+        currentWeaponNo = 5
     end
 
-    local currentWeaponName = weapons[currentWeaponNo]
-    Logging:Info("Switching weapon to: " .. currentWeaponName)
+    local currentWeapon = weapons[currentWeaponNo]
+    Logging:Info("Switching weapon to: " .. currentWeapon.Name)
 end
 
 local function SwitchToNextWeapon(entity)
     currentWeaponNo = currentWeaponNo + 1
 
-    if(currentWeaponNo > 3)
+    if(currentWeaponNo > 5)
     then
         currentWeaponNo = 1
     end
 
-    local currentWeaponName = weapons[currentWeaponNo]
-    Logging:Info("Switching weapon to: " .. currentWeaponName)
+    local currentWeapon = weapons[currentWeaponNo]
+    Logging:Info("Switching weapon to: " .. currentWeapon.Name)
 end
 
 local actions =

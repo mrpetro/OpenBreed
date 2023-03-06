@@ -192,8 +192,10 @@
 				<FileDataSource Id="Extension/Scripts/Common/Actor.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Actor.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Teleporter.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Teleporter.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/SmartCard.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\SmartCard.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/AssaultGun.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\AssaultGun.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Missile.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Missile.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/TrilazerGun.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\TrilazerGun.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Firewall.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Firewall.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/RefractionLazer.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\RefractionLazer.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
@@ -1089,10 +1091,16 @@
 				<Asset Id="Assets.Scripts.Common.SmartCard.lua" DataSourceRef="Extension/Scripts/Common/SmartCard.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
+				<Asset Id="Assets.Scripts.Common.AssaultGun.lua" DataSourceRef="Extension/Scripts/Common/AssaultGun.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
 				<Asset Id="Assets.Scripts.Common.Missile.lua" DataSourceRef="Extension/Scripts/Common/Missile.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.TrilazerGun.lua" DataSourceRef="Extension/Scripts/Common/TrilazerGun.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Firewall.lua" DataSourceRef="Extension/Scripts/Common/Firewall.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.RefractionLazer.lua" DataSourceRef="Extension/Scripts/Common/RefractionLazer.lua" FormatType="TEXT">
@@ -12060,6 +12068,9 @@
 				<ScriptFromFile Id="EntityTypes.Cursor">
 					<DataRef>Assets.Scripts.Common.Hud.Cursor.lua</DataRef>
 				</ScriptFromFile>
+				<ScriptFromFile Id="EntityTypes.AssaultGun">
+					<DataRef>Assets.Scripts.Common.AssaultGun.lua</DataRef>
+				</ScriptFromFile>
 				<ScriptFromFile Id="EntityTypes.Missile">
 					<DataRef>Assets.Scripts.Common.Missile.lua</DataRef>
 				</ScriptFromFile>
@@ -12068,6 +12079,9 @@
 				</ScriptFromFile>
 				<ScriptFromFile Id="EntityTypes.RefractionLazer">
 					<DataRef>Assets.Scripts.Common.RefractionLazer.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="EntityTypes.Firewall">
+					<DataRef>Assets.Scripts.Common.Firewall.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Scripts.Entry.lua">
 					<DataRef>Assets.Scripts.Entry.lua</DataRef>
@@ -13484,6 +13498,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+				
 				<Animation Id="Vanilla/Common/Explosion/Small">
 					<Length>4.0</Length>
 					<Tracks>
@@ -13510,6 +13525,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+				
 				<Animation Id="Vanilla/Common/Projectile/Missile/High/0.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -13815,6 +13831,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+				
 				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/Low/90.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -13967,6 +13984,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+				
 				<Animation Id="Vanilla/Common/Projectile/RefractionLazer/High/90.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -14120,8 +14138,7 @@
 					</Tracks>
 				</Animation>
 
-
-
+				
 				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Low/90.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -14148,7 +14165,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="24" />
+								<Frame Time="0.0" Value="30" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14167,7 +14184,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="25" />
+								<Frame Time="0.0" Value="29" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14186,7 +14203,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="26" />
+								<Frame Time="0.0" Value="28" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14224,7 +14241,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="28" />
+								<Frame Time="0.0" Value="26" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14243,7 +14260,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="29" />
+								<Frame Time="0.0" Value="25" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14262,7 +14279,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="30" />
+								<Frame Time="0.0" Value="24" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14274,6 +14291,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+				
 				<Animation Id="Vanilla/Common/Projectile/AssaultGun/Medium/90.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -14300,7 +14318,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="32" />
+								<Frame Time="0.0" Value="38" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14319,7 +14337,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="33" />
+								<Frame Time="0.0" Value="37" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14338,7 +14356,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="34" />
+								<Frame Time="0.0" Value="36" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14376,7 +14394,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="36" />
+								<Frame Time="0.0" Value="34" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14395,7 +14413,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="37" />
+								<Frame Time="0.0" Value="33" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14414,7 +14432,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="38" />
+								<Frame Time="0.0" Value="32" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14426,6 +14444,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+				
 				<Animation Id="Vanilla/Common/Projectile/AssaultGun/High/90.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -14452,7 +14471,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="40" />
+								<Frame Time="0.0" Value="46" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14471,7 +14490,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="41" />
+								<Frame Time="0.0" Value="45" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14490,7 +14509,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="42" />
+								<Frame Time="0.0" Value="44" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14528,7 +14547,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="44" />
+								<Frame Time="0.0" Value="42" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14547,7 +14566,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="45" />
+								<Frame Time="0.0" Value="41" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14566,7 +14585,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="46" />
+								<Frame Time="0.0" Value="40" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14578,6 +14597,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+						
 				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/Low/90.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -14604,7 +14624,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="48" />
+								<Frame Time="0.0" Value="54" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14623,7 +14643,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="49" />
+								<Frame Time="0.0" Value="53" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14642,7 +14662,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="50" />
+								<Frame Time="0.0" Value="52" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14680,7 +14700,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="52" />
+								<Frame Time="0.0" Value="50" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14699,7 +14719,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="53" />
+								<Frame Time="0.0" Value="49" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14718,7 +14738,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="54" />
+								<Frame Time="0.0" Value="48" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14730,6 +14750,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+				
 				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/Medium/90.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -14756,7 +14777,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="56" />
+								<Frame Time="0.0" Value="62" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14775,7 +14796,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="57" />
+								<Frame Time="0.0" Value="61" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14794,7 +14815,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="58" />
+								<Frame Time="0.0" Value="60" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14832,7 +14853,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="60" />
+								<Frame Time="0.0" Value="58" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14851,7 +14872,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="61" />
+								<Frame Time="0.0" Value="57" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14870,7 +14891,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="62" />
+								<Frame Time="0.0" Value="56" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14882,6 +14903,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
+
 				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/90.0">
 					<Length>1.0</Length>
 					<Tracks>
@@ -14901,7 +14923,8 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/135.0">
+
+				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/45.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -14920,7 +14943,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/180.0">
+				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/0.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -14939,7 +14962,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/225.0">
+				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/315.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -14977,7 +15000,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/315.0">
+				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/225.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -14996,7 +15019,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/0.0">
+				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/180.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -15015,7 +15038,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/45.0">
+				<Animation Id="Vanilla/Common/Projectile/TrilazerGun/High/135.0">
 					<Length>1.0</Length>
 					<Tracks>
 						<IntTrack>
@@ -15034,7 +15057,7 @@
 						</StringTrack>
 					</Tracks>
 				</Animation>
-				
+
 				<Animation Id="Vanilla/L1/Environment/ShipSmoke">
 					<Length>9.0</Length>
 					<Tracks>
