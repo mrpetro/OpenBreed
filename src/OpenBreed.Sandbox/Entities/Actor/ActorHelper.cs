@@ -89,6 +89,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlowdownObstacle, SlowdownObstacleCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ScriptRunTrigger, ScriptRunCallback);
+
+            collisionMan.RegisterFixturePair(ColliderTypes.ScriptRunTrigger, ColliderTypes.FullObstacle, ScriptRunCallback2);
+
+
         }
 
         public IEntity CreateMission(string name)
@@ -187,7 +191,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private void ScriptRunCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
-            var functionId = entityB.GetFunctionId("ScriptRunTrigger");
+            var functionId = entityB.GetFunctionId("OnCollision");
 
             var scriptFunction = scriptMan.GetFunction(functionId);
 
@@ -195,6 +199,18 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 return;
 
             scriptFunction.Invoke(entityB, entityA);
+        }
+
+        private void ScriptRunCallback2(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
+        {
+            var functionId = entityA.GetFunctionId("OnCollision");
+
+            var scriptFunction = scriptMan.GetFunction(functionId);
+
+            if (scriptFunction is null)
+                return;
+
+            scriptFunction.Invoke(entityA, entityB);
         }
 
         private void SlopeObstacleCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)

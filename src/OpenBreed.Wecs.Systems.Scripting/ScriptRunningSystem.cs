@@ -41,12 +41,12 @@ namespace OpenBreed.Wecs.Systems.Scripting
         {
             base.AddEntity(entity);
 
-            entity.TryInvoke(scriptMan, logger, "onInit");
+            entity.TryInvoke(scriptMan, logger, "OnInit");
         }
 
         protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
-            entity.TryInvoke(scriptMan, logger, "onUpdate");
+            entity.TryInvoke(scriptMan, logger, "OnUpdate");
         }
 
         #endregion Protected Methods
