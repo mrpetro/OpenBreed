@@ -26,13 +26,13 @@ local weapons =
       MuzzleFlash = ""
   },
   [4] = {
-      Name = "Firewall",
+      Name = "Flamethrower",
       Projectile = "Firewall",
       FireRate = 25,
       MuzzleFlash = ""
   },
   [5] = {
-      Name = "RefractionLazer",
+      Name = "RefractionGun",
       Projectile = "RefractionLazer",
       FireRate = 10,
       MuzzleFlash = ""
@@ -156,7 +156,7 @@ local function ShowMission(actorEntity)
     missionEntity:TryInvoke(Scripting, Logging, "OnShow", actorEntity)
 end
 
-local function onInit(entity)
+local function OnInit(entity)
 
     cooldownTimerId = entity:GetTimerId("CooldownDelay")
 
@@ -179,7 +179,7 @@ end
 return {
     systemHooks = {
         OnEnter = ShowMission,
-        onInit = onInit
+        OnInit = OnInit
     }
 }
 

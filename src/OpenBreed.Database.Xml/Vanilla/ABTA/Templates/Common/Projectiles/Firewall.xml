@@ -11,7 +11,7 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
 					<Groups>
-						<Group>Projectile</Group>
+						<Group>ScriptRunTrigger</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>
@@ -20,8 +20,10 @@
 			<TimeLeft>5.0</TimeLeft>
 		</Lifetime>
 		<Script>
-			<ScriptId>EntityTypes.Firewall</ScriptId>
+			<ScriptId>Vanilla/Common/Weapons/Firewall</ScriptId>
 		</Script>
+		<EntityEmitter>
+		</EntityEmitter>
 		<Sprite>
 			<AtlasName>Vanilla/Common/Resident</AtlasName>
 			<ImageIndex>23</ImageIndex>

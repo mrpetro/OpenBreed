@@ -37,7 +37,7 @@ end
 
 return {
     systemHooks = {
-        ScriptRunTrigger = Explode
+        OnCollision = Explode
     }
 }
 

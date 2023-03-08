@@ -158,7 +158,7 @@ end
 
 return {
     systemHooks = {
-        ScriptRunTrigger = Open
+        OnCollision = Open
     }
 }
 

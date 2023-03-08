@@ -83,7 +83,7 @@ end
 
 return {
     systemHooks = {
-        ScriptRunTrigger = Teleport
+        OnCollision = Teleport
     }
 }
 

@@ -56,7 +56,7 @@ end
 
 return {
     systemHooks = {
-        ScriptRunTrigger = Pickup
+        OnCollision = Pickup
     }
 }
 

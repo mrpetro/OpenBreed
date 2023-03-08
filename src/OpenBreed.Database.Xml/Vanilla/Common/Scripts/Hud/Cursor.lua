@@ -1,4 +1,4 @@
-﻿local function onUpdate(entity, dt)
+﻿local function OnUpdate(entity, dt)
 
 	local pos = entity:GetPosition()
 	local text = "(" .. string.format("%.0f", pos.X) .. ", " .. string.format("%.0f", pos.Y) .. ")"
@@ -6,7 +6,7 @@
 
 end
 
-local function onInit(entity)
+local function OnInit(entity)
 
     Triggers:OnCursorKeyPressed(
         entity,
@@ -24,7 +24,7 @@ end
 
 return {
     systemHooks = {
-        onUpdate = onUpdate,
-        onInit = onInit
+        OnUpdate = OnUpdate,
+        OnInit = OnInit
     }
 }

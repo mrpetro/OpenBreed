@@ -2,7 +2,7 @@
 local updateFpsCounterPos
 local fpsCounter
 
-local function onUpdate(entity, dt)
+local function OnUpdate(entity, dt)
 
 	local fps = Rendering.Fps
 	local text = "FPS: " .. string.format("%.2f", fps)
@@ -11,7 +11,7 @@ local function onUpdate(entity, dt)
 
 end
 
-local function onInit(entity)
+local function OnInit(entity)
 
 	local hudViewport = Entities:GetHudViewport()
 
@@ -29,7 +29,7 @@ end
 
 return {
     systemHooks = {
-        onUpdate = onUpdate,
-        onInit = onInit
+        OnUpdate = OnUpdate,
+        OnInit = OnInit
     }
 }

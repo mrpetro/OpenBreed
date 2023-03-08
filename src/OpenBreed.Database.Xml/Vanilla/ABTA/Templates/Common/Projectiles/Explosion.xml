@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Timer>
+		</Timer>
+		<SoundPlayer>		
+		</SoundPlayer>
+		<Animation>
+			<States>
+				<State>
+					<Speed>5</Speed>
+					<Loop>false</Loop>		
+				</State>
+			</States>
+		</Animation>
+		<Position X="$(startX)" Y="$(startY)" />
+		<Script>
+			<ScriptId>Vanilla/Common/Explosion</ScriptId>
+		</Script>
+		<Sprite>
+			<AtlasName></AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Origin X="8" Y="8" />
+			<Order>0</Order>
+		</Sprite>
+    </Components>
+</EntityTemplate>
