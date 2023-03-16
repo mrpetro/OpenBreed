@@ -41,7 +41,6 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
-using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
@@ -343,7 +342,6 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupEnvironmentHelper();
             hostBuilder.SetupCameraHelper();
             hostBuilder.SetupTeleportHelper();
-            hostBuilder.SetupProjectileHelper();
             hostBuilder.SetupActorHelper();
             hostBuilder.SetupDynamicResolver();
 
@@ -664,7 +662,6 @@ namespace OpenBreed.Sandbox
             var electicGateHelper = GetManager<ElectricGateHelper>();
             var pickableHelper = GetManager<PickableHelper>();
             var environmentHelper = GetManager<EnvironmentHelper>();
-            var projectileHelper = GetManager<ProjectileHelper>();
             var actorHelper = GetManager<ActorHelper>();
             var teleportHelper = GetManager<TeleportHelper>();
             var cameraHelper = GetManager<CameraHelper>();
@@ -690,10 +687,8 @@ namespace OpenBreed.Sandbox
 
             actorHelper.RegisterCollisionPairs();
             worldGateHelper.RegisterCollisionPairs();
-            projectileHelper.RegisterCollisionPairs();
 
             cameraHelper.CreateAnimations();
-            projectileHelper.CreateAnimations();
 
             var screenWorld = screenWorldHelper.CreateWorld();
 

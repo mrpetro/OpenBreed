@@ -12,7 +12,10 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
 
         public static string GetFunctionId(this IEntity entity, string triggerName)
         {
-            var sc = entity.Get<ScriptComponent>();
+            var sc = entity.TryGet<ScriptComponent>();
+
+            if (sc is null)
+                return null;
 
             var hook = sc.SystemHooks.FirstOrDefault(item => item.TriggerName == triggerName);
 

@@ -59,10 +59,10 @@ namespace OpenBreed.Wecs.Systems.Core
                 .SetParameter("startY", 0.0);
                 //.SetParameter("startX", pc.Value.X)
                 //.SetParameter("startY", pc.Value.Y);
-                //foreach (var option in entityEmit.Options)
-                //{
-                //    templateBuilder.SetParameter(option.Key, option.Value);
-                //}
+                foreach (var option in entityEmit.Options)
+                {
+                    templateBuilder.SetParameter(option.Key, option.Value);
+                }
 
                 var emittedEntity = templateBuilder.Build();
 

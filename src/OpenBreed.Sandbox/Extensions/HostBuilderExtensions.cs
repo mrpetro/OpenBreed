@@ -20,7 +20,6 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
-using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
@@ -193,15 +192,6 @@ namespace OpenBreed.Sandbox.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<DebugHudWorldHelper>();
-            });
-        }
-
-
-        public static void SetupProjectileHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<ProjectileHelper>();
             });
         }
 
