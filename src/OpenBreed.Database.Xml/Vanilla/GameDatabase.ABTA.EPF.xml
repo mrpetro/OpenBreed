@@ -13474,27 +13474,27 @@
 					</Tracks>
 				</Animation>
 				
-				<Animation Id="Vanilla/Common/Explosion/Large">
-					<Length>7.0</Length>
+				<Animation Id="Vanilla/Common/Explosion/Big">
+					<Length>3.5</Length>
 					<Tracks>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.5" Value="1" />
-								<Frame Time="1.0" Value="2" />
-								<Frame Time="1.5" Value="3" />
-								<Frame Time="2.0" Value="4" />
-								<Frame Time="2.5" Value="5" />
-								<Frame Time="3.0" Value="6" />
-								<Frame Time="3.5" Value="7" />
-								<Frame Time="4.0" Value="8" />
-								<Frame Time="4.5" Value="9" />
-								<Frame Time="5.0" Value="10" />
-								<Frame Time="5.5" Value="11" />
-								<Frame Time="6.0" Value="12" />
-								<Frame Time="6.5" Value="13" />
-								<Frame Time="7.0" Value="14" />
+								<Frame Time="0.25" Value="1" />
+								<Frame Time="0.5" Value="2" />
+								<Frame Time="0.75" Value="3" />
+								<Frame Time="1.0" Value="4" />
+								<Frame Time="1.25" Value="5" />
+								<Frame Time="1.5" Value="6" />
+								<Frame Time="1.75" Value="7" />
+								<Frame Time="2.0" Value="8" />
+								<Frame Time="2.25" Value="9" />
+								<Frame Time="2.5" Value="10" />
+								<Frame Time="2.75" Value="11" />
+								<Frame Time="3.0" Value="12" />
+								<Frame Time="3.25" Value="13" />
+								<Frame Time="3.5" Value="14" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>

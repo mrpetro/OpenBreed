@@ -8,10 +8,11 @@ local function Animate(entity, args)
 
     local emiterEntity = Entities:GetById(args.EmiterEntityId)
     local emiterPos = emiterEntity:GetPosition()
+    local entityMetadata = entity:GetMetadata()
 
     entity:SetPosition(emiterPos.X, emiterPos.Y)
 
-    local clipName = "Vanilla/Common/Explosion/Small"
+    local clipName = "Vanilla/Common/Explosion/" .. entityMetadata.Flavor
 
     local clipId = Clips:GetByName(clipName).Id
 

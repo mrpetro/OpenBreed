@@ -11,7 +11,7 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
 					<Groups>
-						<Group>ScriptRunTrigger</Group>
+						<Group>Projectile</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>

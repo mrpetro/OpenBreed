@@ -1,7 +1,7 @@
 ﻿
 local function Hit(missileEntity, targetEntity)
 
-     missileEntity:Emit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+     missileEntity:EmitWithFlavor("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml", "Small")
 	
      Worlds:RequestRemoveEntity(missileEntity)
      Entities:RequestDestroy(missileEntity)

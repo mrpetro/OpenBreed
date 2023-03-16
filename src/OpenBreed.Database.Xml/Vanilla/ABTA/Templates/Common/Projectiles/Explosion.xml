@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
+		<Metadata>
+			<Flavor>$(flavor)</Flavor>
+		</Metadata>
 		<Timer>
 		</Timer>
 		<SoundPlayer>		

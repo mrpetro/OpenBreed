@@ -1,17 +1,13 @@
 ﻿local function Explode(mineEntity, actorEntity)
 
-	Logging:Info("MineEntityId:" .. tostring(mineEntity.Id))
-	Logging:Info("ActorEntityId:" .. tostring(actorEntity.Id))
-
 	local stampId = Stamps:GetByName("Vanilla/L1/MineCrater").Id
 
 	mineEntity:PutStamp(stampId, 0)
 
 	local soundId = Sounds:GetByName("Vanilla/Common/LandMine/Explosion")
 	local duration = Sounds:GetDuration(soundId)
-	mineEntity:EmitSound(soundId)	
-
-
+	mineEntity:EmitSound(soundId)
+	mineEntity:EmitWithFlavor("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml", "Big")
 
 	for i = -1,1,1 
 	do
@@ -30,14 +26,25 @@
 		end
 	end
 
-	--Worlds:RequestRemoveEntity(mineEntity)
-	--Entities:RequestDestroy(mineEntity)
 	Logging:Info("Boom!")
+end
+
+local function CheckExplode(mineEntity, actorEntity)
+
+    local metadata = actorEntity:GetMetadata()
+
+	if(metadata.Name ~= "Actor") then
+		return
+	end
+
+	Logging:Info("ActorEntityId:" .. tostring(actorEntity.Id))
+
+	Explode(mineEntity, actorEntity)
 end
 
 return {
     systemHooks = {
-        OnCollision = Explode
+        OnCollision = CheckExplode
     }
 }
 
