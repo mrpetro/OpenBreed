@@ -86,7 +86,6 @@
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpA.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpF.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\Pickables\PowerUpS.xml" />
-    <None Remove="Vanilla\ABTA\Templates\Common\Projectile.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\TeleportEntry.xml" />
     <None Remove="Vanilla\ABTA\Templates\Common\TeleportExit.xml" />
     <None Remove="Vanilla\ABTA\Templates\L4\MonsterEating.xml" />
@@ -339,9 +338,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\Pickables\SmartCard.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Vanilla\ABTA\Templates\Common\Projectile.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vanilla\ABTA\Templates\Common\TeleportEntry.xml">

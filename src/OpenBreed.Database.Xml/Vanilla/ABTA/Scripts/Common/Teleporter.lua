@@ -1,4 +1,4 @@
-﻿local function Teleport(teleportEntity, actorEntity)
+﻿local function Teleport(teleportEntity, actorEntity, projection)
 
     -- Variable definitions
     local cameraEntity = Entities:GetPlayerCamera(actorEntity)

@@ -2,7 +2,7 @@
 <EntityTemplate>
     <Components>
 		<Position X="$(startX)" Y="$(startY)" />
-		<Thrust X="0" Y="0" />
+		<Thrust X="$(thrustX)" Y="$(thrustY)" />
 		<Velocity X="0" Y="0" />
 		<Body>
 			<CofFactor>1.0</CofFactor>

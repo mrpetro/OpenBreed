@@ -11,31 +11,36 @@ local weapons =
       Name = "AssaultGun",
       Projectile = "AssaultGun",
       FireRate = 100,
-      MuzzleFlash = ""
+      MuzzleFlash = "",
+      Speed = 500
   },
   [2] = {
       Name = "MissileLauncher",
       Projectile = "Missile",
       FireRate = 1,
-      MuzzleFlash = ""
+      MuzzleFlash = "",
+      Speed = 500
   },
   [3] = {
       Name = "TrilazerGun",
       Projectile = "TrilazerGun",
       FireRate = 7,
-      MuzzleFlash = ""
+      MuzzleFlash = "",
+      Speed = 500
   },
   [4] = {
       Name = "Flamethrower",
       Projectile = "Firewall",
       FireRate = 25,
-      MuzzleFlash = ""
+      MuzzleFlash = "",
+      Speed = 500
   },
   [5] = {
       Name = "RefractionGun",
       Projectile = "RefractionLazer",
       FireRate = 10,
-      MuzzleFlash = ""
+      MuzzleFlash = "",
+      Speed = 200
   }
 }
 
@@ -52,14 +57,48 @@ local function FireBullet(entity)
 
     local currentWeapon = weapons[currentWeaponNo]
 
-    if(currentWeapon)
+    if(not(currentWeapon))
     then
-        entity:Emit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeapon.Projectile .. ".xml")
-        fireReady = false
-
-		Triggers:AfterDelay(entity, cooldownTimerId, TimeSpan.FromMilliseconds(1000 / currentWeapon.FireRate), CooldownFinish)
-
+        return
     end
+     
+    local pos = entity:GetPosition()
+    local dir = entity:GetDirection() * currentWeapon.Speed
+
+
+    local emitter = entity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeapon.Projectile .. ".xml")
+        :SetOption("startX", pos.X)
+        :SetOption("startY", pos.Y)
+
+    if(currentWeapon.Name == "TrilazerGun")
+    then
+        emitter:SetOption("thrustX", dir.X)
+            :SetOption("thrustY", dir.Y)
+            :Finish()
+
+        local perp = Vector2(dir.Y, -dir.X)
+        perp:Normalize()
+
+        local p1Dir = dir + perp * 30
+
+        emitter:SetOption("thrustX", p1Dir.X)
+            :SetOption("thrustY", p1Dir.Y)
+            :Finish()
+
+        local p2Dir = dir - perp * 30
+
+        emitter:SetOption("thrustX", p2Dir.X)
+            :SetOption("thrustY", p2Dir.Y)
+            :Finish()
+    else
+        emitter:SetOption("thrustX", dir.X)
+            :SetOption("thrustY", dir.Y)
+            :Finish()
+    end
+
+    fireReady = false
+
+	Triggers:AfterDelay(entity, cooldownTimerId, TimeSpan.FromMilliseconds(1000 / currentWeapon.FireRate), CooldownFinish)
 end
 
 local function SwitchToPreviousWeapon(entity)

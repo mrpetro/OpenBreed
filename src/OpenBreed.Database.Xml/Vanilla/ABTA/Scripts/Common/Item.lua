@@ -1,4 +1,4 @@
-﻿local function Pickup(itemEntity, actorEntity)
+﻿local function Pickup(itemEntity, actorEntity, projection)
 
     local metaData = itemEntity:GetMetadata()
 

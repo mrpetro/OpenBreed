@@ -1,4 +1,4 @@
-﻿local function Open(doorEntity, actorEntity)
+﻿local function Open(doorEntity, actorEntity, projection)
 
     local metaData = doorEntity:GetMetadata()
 

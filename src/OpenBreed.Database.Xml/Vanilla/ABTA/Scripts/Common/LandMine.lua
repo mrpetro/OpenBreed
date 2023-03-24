@@ -1,4 +1,4 @@
-﻿local function Explode(mineEntity, actorEntity)
+﻿local function Explode(mineEntity, actorEntity, projection)
 
 	local stampId = Stamps:GetByName("Vanilla/L1/MineCrater").Id
 
@@ -7,7 +7,10 @@
 	local soundId = Sounds:GetByName("Vanilla/Common/LandMine/Explosion")
 	local duration = Sounds:GetDuration(soundId)
 	mineEntity:EmitSound(soundId)
-	mineEntity:EmitWithFlavor("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml", "Big")
+
+	mineEntity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+		:SetOption("flavor", "Big")
+		:Finish()
 
 	for i = -1,1,1 
 	do

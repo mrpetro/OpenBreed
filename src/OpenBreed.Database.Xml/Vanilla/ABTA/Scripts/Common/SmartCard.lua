@@ -1,4 +1,4 @@
-﻿local function Show(smartCardEntity, actorEntity)
+﻿local function Show(smartCardEntity, actorEntity, projection)
 
     -- Variable definitions
     --local smartCardEntity, actorEntity = ...

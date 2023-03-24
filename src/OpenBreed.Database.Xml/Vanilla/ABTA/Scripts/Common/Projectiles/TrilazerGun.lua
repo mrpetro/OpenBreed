@@ -1,26 +1,19 @@
 ﻿
-local function Hit(missileEntity, targetEntity)
+local function Hit(projectileEntity, targetEntity, projection)
 
-     missileEntity:EmitWithFlavor("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml", "Small")
+     projectileEntity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+        :SetOption("flavor", "Small")
+        :Finish()
 	
-     Worlds:RequestRemoveEntity(missileEntity)
-     Entities:RequestDestroy(missileEntity)
+     Worlds:RequestRemoveEntity(projectileEntity)
+     Entities:RequestDestroy(projectileEntity)
 end
 
 local function Fire(entity, args)
 
-    local emiterEntity = Entities:GetById(args.EmiterEntityId)
-    local emiterPos = emiterEntity:GetPosition()
-    local emiterDir = emiterEntity:GetDirection()
+    local dir = entity:GetThrust():Normalized()
+    local degree = MovementTools.SnapToCompass8Degree(dir.X, dir.Y)
 
-    entity:SetPosition(emiterPos.X, emiterPos.Y)
-
-    local dx = emiterDir.X * 500.0
-    local dy = emiterDir.Y * 500.0
-
-    entity:SetThrust(dx , dy)
-
-    local degree = MovementTools.SnapToCompass8Degree(dx, dy)
     local animName = "Vanilla/Common/Projectile/TrilazerGun/High/" .. tostring(degree)
 
     local animId = Clips:GetByName(animName).Id
@@ -29,10 +22,26 @@ local function Fire(entity, args)
 
 end
 
+local function Explode(entity, args)
+
+    local pos = entity:GetPosition()
+
+    entity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+        :SetOption("startX", pos.X)
+        :SetOption("startY", pos.Y)
+        :SetOption("flavor", "Small")
+        :Finish()
+end
+
 local function OnInit(entity)
     Triggers:OnEmitEntity(
         entity,
         Fire,
+        true)
+
+    Triggers:OnLifetimeEnd(
+        entity,
+        Explode,
         true)
 
 end
