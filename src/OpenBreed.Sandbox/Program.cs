@@ -192,6 +192,7 @@ namespace OpenBreed.Sandbox
                 scriptMan.Expose("Coords", sp.GetService<CoordsTransformer>());
 
                 var res = scriptMan.RunString(@"import('System')");
+                res = scriptMan.RunString(@"import('OpenTK.Mathematics')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Components.Common', 'OpenBreed.Wecs.Components.Common.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Core', 'OpenBreed.Wecs.Systems.Core.Extensions')");

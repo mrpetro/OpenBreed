@@ -10,19 +10,40 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
     public static class EntityExtensions
     {
+        public class EmitBuilder
+        {
+            private readonly EntityEmitterComponent emitterComponent;
+            private readonly string templateName;
+            private readonly Dictionary<string, object> options = new Dictionary<string, object>();
+
+            internal EmitBuilder(EntityEmitterComponent emitterComponent, string templateName)
+            {
+                this.emitterComponent = emitterComponent;
+                this.templateName = templateName;
+            }
+
+            public EmitBuilder SetOption(string name, object value)
+            {
+                options[name] = value;
+                return this;
+            }
+
+            public void Finish()
+            {
+                emitterComponent.ToEmit.Add(new EntityEmit(templateName, options.ToDictionary(item => item.Key, item => item.Value)));
+            }
+        }
+
+        public static EmitBuilder StartEmit(this IEntity entity, string templateName)
+        {
+            var emitterComponent = entity.Get<EntityEmitterComponent>();
+            return new EmitBuilder(emitterComponent, templateName);
+        }
+
         public static void Emit(this IEntity entity, string templateName)
         {
             var emitComponent = entity.Get<EntityEmitterComponent>();
             emitComponent.ToEmit.Add(new EntityEmit(templateName, new Dictionary<string, object>()));
-        }
-
-        public static void EmitWithFlavor(this IEntity entity, string templateName, string flavor)
-        {
-            var emitComponent = entity.Get<EntityEmitterComponent>();
-
-            var options = new Dictionary<string, object>();
-            options.Add("flavor", flavor);
-            emitComponent.ToEmit.Add(new EntityEmit(templateName, options));
         }
 
         public static int GetTimerId(this IEntity entity, string timerName)

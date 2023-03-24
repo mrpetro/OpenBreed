@@ -57,8 +57,7 @@ namespace OpenBreed.Wecs.Systems.Core
                 var templateBuilder = entityFactory.Create(entityEmit.TemplateName)
                 .SetParameter("startX", 0.0)
                 .SetParameter("startY", 0.0);
-                //.SetParameter("startX", pc.Value.X)
-                //.SetParameter("startY", pc.Value.Y);
+
                 foreach (var option in entityEmit.Options)
                 {
                     templateBuilder.SetParameter(option.Key, option.Value);

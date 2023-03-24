@@ -52,7 +52,8 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
             systemFactory.RegisterSystem<LifetimeSystem>((world) => new LifetimeSystem(
                 world,
                 sp.GetRequiredService<IWorldMan>(),
-                sp.GetRequiredService<IEntityMan>()));
+                sp.GetRequiredService<IEntityMan>(),
+                sp.GetRequiredService<IEventsMan>()));
         }
 
         #endregion Public Methods

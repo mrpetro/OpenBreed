@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Core
@@ -11,8 +12,9 @@ namespace OpenBreed.Wecs.Systems.Core
     {
         #region Private Fields
 
-        private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
+        private readonly IWorldMan worldMan;
 
         #endregion Private Fields
 
@@ -21,10 +23,12 @@ namespace OpenBreed.Wecs.Systems.Core
         public LifetimeSystem(
             IWorld world,
             IWorldMan worldMan,
-            IEntityMan entityMan)
+            IEntityMan entityMan,
+            IEventsMan eventsMan)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;
+            this.eventsMan = eventsMan;
         }
 
         #endregion Public Constructors
@@ -43,10 +47,22 @@ namespace OpenBreed.Wecs.Systems.Core
             }
 
             lc.TimeLeft = 0.0f;
+
+            RaiseLifetimeEndEvent(entity);
+
             worldMan.RequestRemoveEntity(entity);
             entityMan.RequestDestroy(entity);
         }
 
         #endregion Protected Methods
+
+        #region Private Methods
+
+        private void RaiseLifetimeEndEvent(IEntity entity)
+        {
+            eventsMan.Raise(entity, new LifetimeEndEvent(entity.Id));
+        }
+
+        #endregion Private Methods
     }
 }
