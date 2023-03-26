@@ -11,12 +11,9 @@ end
 
 local function Fire(entity, args)
 
-    local dir = entity:GetThrust():Normalized()
-    local degree = MovementTools.SnapToCompass8Degree(dir.X, dir.Y)
+    local clipName = "Vanilla/Common/Explosion/Small"
 
-    local animName = "Vanilla/Common/Projectile/AssaultGun/High/" .. tostring(degree)
-
-    local animId = Clips:GetByName(animName).Id
+    local animId = Clips:GetByName(clipName).Id
 
     entity:PlayAnimation(0, animId)
 

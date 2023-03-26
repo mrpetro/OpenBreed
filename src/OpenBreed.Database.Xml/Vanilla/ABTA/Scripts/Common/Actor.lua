@@ -1,8 +1,24 @@
 ﻿
 local cooldownTimerId
 local currentWeaponNo = 1
+local flamethrowerOffsetIndex = 0
 local fireReady = true
 local fireCooldownTime = 1000
+
+local speedFactor = 30
+
+local flamethrowerOffsets =
+{
+    0,
+    1,
+    2,
+    1,
+    0,
+    -1,
+    -2,
+    -1
+}
+
 
 local weapons =
 {
@@ -12,35 +28,35 @@ local weapons =
       Projectile = "AssaultGun",
       FireRate = 100,
       MuzzleFlash = "",
-      Speed = 500
+      Speed = 20 * speedFactor
   },
   [2] = {
       Name = "MissileLauncher",
       Projectile = "Missile",
       FireRate = 1,
       MuzzleFlash = "",
-      Speed = 500
+      Speed = 10 * speedFactor
   },
   [3] = {
       Name = "TrilazerGun",
       Projectile = "TrilazerGun",
       FireRate = 7,
       MuzzleFlash = "",
-      Speed = 500
+      Speed = 12 * speedFactor
   },
   [4] = {
       Name = "Flamethrower",
       Projectile = "Firewall",
       FireRate = 25,
       MuzzleFlash = "",
-      Speed = 500
+      Speed = 10 * speedFactor
   },
   [5] = {
       Name = "RefractionGun",
       Projectile = "RefractionLazer",
       FireRate = 10,
       MuzzleFlash = "",
-      Speed = 200
+      Speed = 8 * speedFactor
   }
 }
 
@@ -65,7 +81,6 @@ local function FireBullet(entity)
     local pos = entity:GetPosition()
     local dir = entity:GetDirection() * currentWeapon.Speed
 
-
     local emitter = entity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeapon.Projectile .. ".xml")
         :SetOption("startX", pos.X)
         :SetOption("startY", pos.Y)
@@ -79,18 +94,39 @@ local function FireBullet(entity)
         local perp = Vector2(dir.Y, -dir.X)
         perp:Normalize()
 
-        local p1Dir = dir + perp * 30
+        local p1Dir = dir + perp * 2 * speedFactor
 
         emitter:SetOption("thrustX", p1Dir.X)
             :SetOption("thrustY", p1Dir.Y)
             :Finish()
 
-        local p2Dir = dir - perp * 30
+        local p2Dir = dir - perp * 2 * speedFactor
 
         emitter:SetOption("thrustX", p2Dir.X)
             :SetOption("thrustY", p2Dir.Y)
             :Finish()
+    elseif(currentWeapon.Name == "Flamethrower")
+    then
+
+        flamethrowerOffsetIndex = flamethrowerOffsetIndex + 1
+
+        if(flamethrowerOffsetIndex > 8)
+        then
+            flamethrowerOffsetIndex = 1
+        end
+
+        local flamethrowerOffset = flamethrowerOffsets[flamethrowerOffsetIndex]
+
+        local perp = Vector2(dir.Y, -dir.X)
+        perp:Normalize()
+
+        dir = dir + perp * flamethrowerOffset * speedFactor
+
+        emitter:SetOption("thrustX", dir.X)
+            :SetOption("thrustY", dir.Y)
+            :Finish()
     else
+
         emitter:SetOption("thrustX", dir.X)
             :SetOption("thrustY", dir.Y)
             :Finish()
