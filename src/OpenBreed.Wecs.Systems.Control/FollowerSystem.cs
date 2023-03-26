@@ -1,20 +1,22 @@
-﻿using OpenBreed.Wecs.Attributes;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
     [RequireEntityWith(
-        typeof(FollowedComponent),
-        typeof(PositionComponent))]
+        typeof(FollowedComponent))]
     public class FollowerSystem : UpdatableSystemBase<FollowerSystem>
     {
-        private readonly IWorldMan worldMan;
         #region Private Fields
 
+        private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
@@ -23,11 +25,12 @@ namespace OpenBreed.Wecs.Systems.Control
         public FollowerSystem(
             IWorld world,
             IWorldMan worldMan,
-            IEntityMan entityMan)
+            IEntityMan entityMan,
+            IEventsMan eventsMan)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;
-
+            this.eventsMan = eventsMan;
         }
 
         #endregion Public Constructors
@@ -42,10 +45,10 @@ namespace OpenBreed.Wecs.Systems.Control
             {
                 var follower = entityMan.GetById(fc.FollowerIds[i]);
 
-                if (follower == null)
+                if (follower is null)
                     continue;
 
-                //If follower is not in the same world as folloed then
+                //If follower is not in the same world as followed then
                 //Make sure it will arrive there
                 if (follower.WorldId != entity.WorldId)
                 {
@@ -59,8 +62,7 @@ namespace OpenBreed.Wecs.Systems.Control
                     continue;
                 }
 
-                Glue(entity, follower);
-                //Follow(followed, follower);
+                RaiseEntityFollowEvent(entity, follower.Id);
             }
         }
 
@@ -68,20 +70,9 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Private Methods
 
-        private void Follow(IEntity followed, IEntity follower)
+        private void RaiseEntityFollowEvent(IEntity entity, int followerId)
         {
-            var followedPos = followed.Get<PositionComponent>();
-            var followerPos = follower.Get<PositionComponent>();
-            var difference = followedPos.Value - followerPos.Value;
-            followerPos.Value += difference / 10;
-        }
-
-        private void Glue(IEntity followed, IEntity follower)
-        {
-            var followedPos = followed.Get<PositionComponent>();
-            var followerPos = follower.Get<PositionComponent>();
-
-            followerPos.Value = followedPos.Value;
+            eventsMan.Raise(entity, new EntityFollowEvent(entity.Id, followerId));
         }
 
         #endregion Private Methods

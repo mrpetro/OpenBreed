@@ -49,5 +49,13 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
                 (args) => action.Invoke(entity, args),
                 singleTime);
         }
+
+        public static void OnEntityFollow(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityFollowEvent> action, bool singleTime = false)
+        {
+            triggerMan.CreateTrigger<EntityFollowEvent>(
+                (args) => Equals(entity.Id, args.EntityId),
+                (args) => action.Invoke(entity, args),
+                singleTime);
+        }
     }
 }

@@ -152,12 +152,25 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             return false;
         }
 
+        public static bool Check(Vector2 posA, PointShape pointShapeA, Vector2 posB, PointShape pointShapeB, out Vector2 projection)
+        {
+            var aPos = new Vector2(pointShapeA.X, pointShapeA.Y);
+            var bPos = new Vector2(pointShapeB.X, pointShapeB.Y);
+            projection = Vector2.Zero;
+            if (aPos == bPos)
+                return true;
+
+            return false;
+        }
+
         public static bool Check(Vector2 posA, IShape shapeA, Vector2 posB, IShape shapeB, out Vector2 projection)
         {
             if (shapeA is BoxShape && shapeB is BoxShape)
                 return Check(posA, (BoxShape)shapeA, posB, (BoxShape)shapeB, out projection);
             else if (shapeA is PointShape && shapeB is BoxShape)
                 return Check(posA, (PointShape)shapeA, posB, (BoxShape)shapeB, out projection);
+            else if (shapeA is PointShape && shapeB is PointShape)
+                return Check(posA, (PointShape)shapeA, posB, (PointShape)shapeB, out projection);
             else if (shapeA is BoxShape && shapeB is PointShape)
                 return Check(posB, (PointShape)shapeB, posA, (BoxShape)shapeA, out projection);
             else

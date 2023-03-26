@@ -492,6 +492,8 @@ namespace OpenBreed.Sandbox
 
         private void OnUpdateFrame(float dt)
         {
+            dt = Math.Min(1.0f/30.0f, dt);
+
             GetManager<IInputsMan>().Update();
 
             GetManager<IWorldMan>().Update(dt);
@@ -567,12 +569,25 @@ namespace OpenBreed.Sandbox
 
             johnPlayerEntity.AddFollower(playerCamera);
 
+            triggerMan.OnEntityFollow(johnPlayerEntity, (s, a) =>
+            {
+                var followerEntity = entityMan.GetById(a.FollowerId);
+                Glue(johnPlayerEntity, followerEntity);
+            });
+
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, playerCamera, gameWorld.Name, 0);
             });
         }
 
+        private void Glue(IEntity followed, IEntity follower)
+        {
+            var followedPos = followed.Get<PositionComponent>();
+            var followerPos = follower.Get<PositionComponent>();
+
+            followerPos.Value = followedPos.Value;
+        }
 
         private void LoadSandboxWorld(int width, int height)
         {
@@ -635,6 +650,12 @@ namespace OpenBreed.Sandbox
             scriptMan.Expose("JohnPlayer", johnPlayerEntity);
 
             johnPlayerEntity.AddFollower(playerCamera);
+
+            triggerMan.OnEntityFollow(johnPlayerEntity, (s, a) =>
+            {
+                var followerEntity = entityMan.GetById(a.FollowerId);
+                Glue(johnPlayerEntity, followerEntity);
+            });
 
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
