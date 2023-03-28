@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Sandbox.Components
+namespace OpenBreed.Sandbox.Wecs.Components
 {
     public class InventorySlot
     {

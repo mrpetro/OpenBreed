@@ -10,7 +10,7 @@ using OpenTK.Mathematics;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Sandbox.Systems
+namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(ThrustControlComponent),

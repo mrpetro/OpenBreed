@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Sandbox.Components;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
@@ -24,6 +24,12 @@ namespace OpenBreed.Sandbox.Extensions
         public static InventoryComponent GetInventory(this IEntity entity)
         {
             return entity.Get<InventoryComponent>();
+        }
+
+        public static void InflictDamage(this IEntity entity, int amount, int targetEntityId)
+        {
+            var damageComponent = entity.Get<DamagerComponent>();
+            damageComponent.Distributions.Add(new DamageDistribution(amount, new[] { targetEntityId }));
         }
 
         public static void CreateSlowdown(this IEntityFactory entityFactory, IWorldMan worldMan, IEntity entity, int worldId, int ox, int oy)

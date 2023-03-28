@@ -13,7 +13,7 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
 
-namespace OpenBreed.Sandbox.Worlds.Wecs.Systems
+namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(PositionComponent),

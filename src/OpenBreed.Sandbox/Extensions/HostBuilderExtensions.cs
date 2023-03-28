@@ -25,7 +25,9 @@ using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -203,6 +205,11 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
+        public static void SetupSandboxComponents(this IHostBuilder hostBuilder)
+        {
+            XmlComponentsList.RegisterAllAssemblyComponentTypes();
+            hostBuilder.SetupAssemblyComponentFactories();
+        }
 
         public static void SetupDataLoaderFactory(this IHostBuilder hostBuilder, Action<DataLoaderFactory, IServiceProvider> action)
         {

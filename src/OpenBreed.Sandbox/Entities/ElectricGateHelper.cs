@@ -3,7 +3,6 @@ using OpenBreed.Core;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;

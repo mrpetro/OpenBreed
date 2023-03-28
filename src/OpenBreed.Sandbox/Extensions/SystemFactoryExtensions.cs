@@ -3,8 +3,7 @@ using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Sandbox.Systems;
-using OpenBreed.Sandbox.Worlds.Wecs.Systems;
+using OpenBreed.Sandbox.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
@@ -30,6 +29,10 @@ namespace OpenBreed.Sandbox.Extensions
                 world,
                 sp.GetService<IPrimitiveRenderer>(),
                 sp.GetService<IFontMan>()));
+
+            systemFactory.RegisterSystem<DamageOnHealthDistributionSystem>((world) => new DamageOnHealthDistributionSystem(
+                world,
+                sp.GetService<IEntityMan>()));
         }
 
         #endregion Public Methods

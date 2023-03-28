@@ -6,7 +6,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
-using OpenBreed.Sandbox.Systems;
+using OpenBreed.Sandbox.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Rendering;

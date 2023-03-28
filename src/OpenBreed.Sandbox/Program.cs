@@ -288,6 +288,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupFsmComponents();
             hostBuilder.SetupScriptingComponents();
             hostBuilder.SetupGuiComponents();
+            hostBuilder.SetupSandboxComponents();
 
             hostBuilder.SetupComponentFactoryProvider();
 

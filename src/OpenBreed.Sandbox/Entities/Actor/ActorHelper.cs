@@ -9,7 +9,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Sandbox.Components;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;

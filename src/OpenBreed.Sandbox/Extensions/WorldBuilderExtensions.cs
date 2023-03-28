@@ -1,4 +1,4 @@
-﻿using OpenBreed.Sandbox.Worlds.Wecs.Systems;
+﻿using OpenBreed.Sandbox.Wecs.Systems;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
@@ -30,6 +30,7 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<StaticBodiesSystem>();
             //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
 
+            builder.AddSystem<DamageOnHealthDistributionSystem>();
             builder.AddSystem<LifetimeSystem>();
             builder.AddSystem<EntityEmitterSystem>();
 

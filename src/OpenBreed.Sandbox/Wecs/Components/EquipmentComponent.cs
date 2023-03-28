@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Wecs.Components;
 
-namespace OpenBreed.Sandbox.Components
+namespace OpenBreed.Sandbox.Wecs.Components
 {
     public struct EquipmentSlot
     {
