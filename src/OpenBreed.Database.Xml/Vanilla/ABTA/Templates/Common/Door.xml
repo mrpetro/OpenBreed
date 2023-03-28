@@ -8,6 +8,10 @@
 		</Metadata>
 		<Timer>
 		</Timer>
+		<Health>
+			<Maximum>100</Maximum>
+			<Current>100</Current>
+		</Health>
 		<SoundPlayer>		
 		</SoundPlayer>
 		<Animation>

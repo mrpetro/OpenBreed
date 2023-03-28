@@ -26,9 +26,9 @@ local weapons =
   [1] = {
       Name = "AssaultGun",
       Projectile = "AssaultGun",
-      FireRate = 100,
+      FireRate = 50,
       MuzzleFlash = "",
-      Speed = 20 * speedFactor
+      Speed = 15 * speedFactor
   },
   [2] = {
       Name = "MissileLauncher",
@@ -79,7 +79,10 @@ local function FireBullet(entity)
     end
      
     local pos = entity:GetPosition()
-    local dir = entity:GetDirection() * currentWeapon.Speed
+    local dir = MovementTools.SnapToCompass8Way(entity:GetDirection())
+
+    pos = pos + dir * 16
+    local thrust = dir * currentWeapon.Speed
 
     local emitter = entity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeapon.Projectile .. ".xml")
         :SetOption("startX", pos.X)
@@ -87,23 +90,22 @@ local function FireBullet(entity)
 
     if(currentWeapon.Name == "TrilazerGun")
     then
-        emitter:SetOption("thrustX", dir.X)
-            :SetOption("thrustY", dir.Y)
+        emitter:SetOption("thrustX", thrust.X)
+            :SetOption("thrustY", thrust.Y)
             :Finish()
 
         local perp = Vector2(dir.Y, -dir.X)
-        perp:Normalize()
 
-        local p1Dir = dir + perp * 2 * speedFactor
+        local p1Thrust = thrust + perp * 2 * speedFactor
 
-        emitter:SetOption("thrustX", p1Dir.X)
-            :SetOption("thrustY", p1Dir.Y)
+        emitter:SetOption("thrustX", p1Thrust.X)
+            :SetOption("thrustY", p1Thrust.Y)
             :Finish()
 
-        local p2Dir = dir - perp * 2 * speedFactor
+        local p2Thrust = thrust - perp * 2 * speedFactor
 
-        emitter:SetOption("thrustX", p2Dir.X)
-            :SetOption("thrustY", p2Dir.Y)
+        emitter:SetOption("thrustX", p2Thrust.X)
+            :SetOption("thrustY", p2Thrust.Y)
             :Finish()
     elseif(currentWeapon.Name == "Flamethrower")
     then
@@ -117,18 +119,18 @@ local function FireBullet(entity)
 
         local flamethrowerOffset = flamethrowerOffsets[flamethrowerOffsetIndex]
 
-        local perp = Vector2(dir.Y, -dir.X)
+        local perp = Vector2(thrust.Y, -thrust.X)
         perp:Normalize()
 
-        dir = dir + perp * flamethrowerOffset * speedFactor
+        thrust = thrust + perp * flamethrowerOffset * speedFactor
 
-        emitter:SetOption("thrustX", dir.X)
-            :SetOption("thrustY", dir.Y)
+        emitter:SetOption("thrustX", thrust.X)
+            :SetOption("thrustY", thrust.Y)
             :Finish()
     else
 
-        emitter:SetOption("thrustX", dir.X)
-            :SetOption("thrustY", dir.Y)
+        emitter:SetOption("thrustX", thrust.X)
+            :SetOption("thrustY", thrust.Y)
             :Finish()
     end
 

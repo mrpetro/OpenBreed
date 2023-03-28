@@ -16,6 +16,7 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
+		<Damager></Damager>
 		<Lifetime>
 			<TimeLeft>2.2</TimeLeft>
 		</Lifetime>

@@ -16,6 +16,7 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
+		<Damager></Damager>
 		<Lifetime>
 			<TimeLeft>5.0</TimeLeft>
 		</Lifetime>
@@ -24,12 +25,6 @@
 		</Script>
 		<EntityEmitter>
 		</EntityEmitter>
-		<Sprite>
-			<AtlasName>Vanilla/Common/Resident</AtlasName>
-			<ImageIndex>23</ImageIndex>
-			<Origin X="8" Y="8" />
-			<Order>0</Order>
-		</Sprite>
 		<Animation>
 			<States>
 				<State>

@@ -367,4 +367,8 @@
     <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Vanilla\ABTA\Templates\Common\Weapons\" />
+  </ItemGroup>
+
 </Project>
