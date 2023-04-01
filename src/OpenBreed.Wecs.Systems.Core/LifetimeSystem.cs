@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Worlds;
@@ -50,8 +51,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
             RaiseLifetimeEndEvent(entity);
 
-            worldMan.RequestRemoveEntity(entity);
-            entityMan.RequestDestroy(entity);
+            entity.Expunge();
         }
 
         #endregion Protected Methods

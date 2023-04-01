@@ -62,6 +62,12 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public override void RemoveEntity(IEntity entity)
         {
+            if(entity.Id == 4881)
+            {
+
+            }
+
+
             RemoveFromGrid(entity);
         }
 

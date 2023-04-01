@@ -16,6 +16,11 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             fc.FollowerIds.Add(followerEntity.Id);
         }
 
+        public static void Expunge(this IEntity entity)
+        {
+            entity.Set(new ExpungeComponent());
+        }
+
         public static void PauseWorld(this IEntity entity)
         {
             entity.Set(new PauserComponent(pause: true));

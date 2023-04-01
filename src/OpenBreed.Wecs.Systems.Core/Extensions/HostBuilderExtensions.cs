@@ -54,6 +54,12 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
                 sp.GetRequiredService<IWorldMan>(),
                 sp.GetRequiredService<IEntityMan>(),
                 sp.GetRequiredService<IEventsMan>()));
+
+            systemFactory.RegisterSystem<ExpungeSystem>((world) => new ExpungeSystem(
+                world,
+                sp.GetService<IWorldMan>(),
+                sp.GetService<IEventsMan>()));
+
         }
 
         #endregion Public Methods

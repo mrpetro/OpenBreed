@@ -82,6 +82,14 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
                 singleTime);
         }
 
+        public static void OnExpunge(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, ExpungeEvent> action, bool singleTime = false)
+        {
+            triggerMan.CreateTrigger<ExpungeEvent>(
+                (args) => Equals(entity.Id, args.EntityId),
+                (args) => action.Invoke(entity, args),
+                singleTime);
+        }
+
         public static void OnLifetimeEnd(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, LifetimeEndEvent> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<LifetimeEndEvent>(

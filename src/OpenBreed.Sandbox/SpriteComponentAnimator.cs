@@ -22,6 +22,8 @@ namespace OpenBreed.Sandbox
 
             frameUpdaterMan.Register("Sprite.ImageId", (FrameUpdater<IEntity, int>)OnImageIdUpdate);
             frameUpdaterMan.Register("Sprite.AtlasId", (FrameUpdater<IEntity, string>)OnAtlasIdUpdate);
+            frameUpdaterMan.Register("Sprite.OriginX", (FrameUpdater<IEntity, float>)OnOriginXUpdate);
+            frameUpdaterMan.Register("Sprite.OriginY", (FrameUpdater<IEntity, float>)OnOriginYUpdate);
         }
 
         #endregion Public Constructors
@@ -31,6 +33,16 @@ namespace OpenBreed.Sandbox
         private void OnImageIdUpdate(IEntity entity, int nextValue)
         {
             entity.SetSpriteImageId(nextValue);
+        }
+
+        private void OnOriginXUpdate(IEntity entity, float nextValue)
+        {
+            entity.SetSpriteOriginX(nextValue);
+        }
+
+        private void OnOriginYUpdate(IEntity entity, float nextValue)
+        {
+            entity.SetSpriteOriginY(nextValue);
         }
 
         private void OnAtlasIdUpdate(IEntity entity, string nextValue)

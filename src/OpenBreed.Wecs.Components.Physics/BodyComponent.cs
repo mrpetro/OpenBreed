@@ -47,11 +47,6 @@ namespace OpenBreed.Wecs.Components.Physics
         #region Public Properties
 
         /// <summary>
-        /// Axis-aligned bounding box of this body
-        /// </summary>
-        public Box2 Aabb { get; set; }
-
-        /// <summary>
         /// Coefficient of friction factor for this body.
         /// </summary>
         public float CofFactor { get; set; }

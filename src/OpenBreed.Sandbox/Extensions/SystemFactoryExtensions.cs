@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
@@ -7,6 +8,7 @@ using OpenBreed.Sandbox.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Worlds;
 using System;
 
 namespace OpenBreed.Sandbox.Extensions
@@ -32,7 +34,16 @@ namespace OpenBreed.Sandbox.Extensions
 
             systemFactory.RegisterSystem<DamageOnHealthDistributionSystem>((world) => new DamageOnHealthDistributionSystem(
                 world,
-                sp.GetService<IEntityMan>()));
+                sp.GetService<IEntityMan>(),
+                sp.GetService<IEventsMan>(),
+                sp.GetService<ILogger>()));
+
+            systemFactory.RegisterSystem<DestroyOnZeroHealthSystem>((world) => new DestroyOnZeroHealthSystem(
+                world,
+                sp.GetService<IWorldMan>(),
+                sp.GetService<IEntityMan>(),
+                sp.GetService<IEventsMan>(),
+                sp.GetService<ILogger>()));
         }
 
         #endregion Public Methods
