@@ -1,15 +1,33 @@
 ﻿
 local function Hit(projectileEntity, targetEntity, projection)
 
+    local pos = projectileEntity:GetPosition()
      projectileEntity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
         :SetOption("flavor", "Small")
+        :SetOption("startX", pos.X)
+        :SetOption("startY", pos.Y)
         :Finish()
 	
-     Worlds:RequestRemoveEntity(projectileEntity)
+     if(targetEntity:HasHealth())
+     then
+        projectileEntity:InflictDamage(10, targetEntity.Id)
+     end
+
+     projectileEntity:Expunge()
+end
+
+local function Destroy(entity)
+
      Entities:RequestDestroy(projectileEntity)
+
 end
 
 local function OnInit(entity)
+
+    Triggers:OnExpunge(
+        entity,
+        Destroy,
+        true)
 
 end
 

@@ -4,16 +4,10 @@ local function Destroy(entity)
 	Entities:RequestDestroy(entity)
 end
 
-local function Animate(entity, args)
+local function OnInit(entity)
 
-    local emiterEntity = Entities:GetById(args.EmiterEntityId)
-    local emiterPos = emiterEntity:GetPosition()
     local entityMetadata = entity:GetMetadata()
-
-    entity:SetPosition(emiterPos.X, emiterPos.Y)
-
     local clipName = "Vanilla/Common/Explosion/" .. entityMetadata.Flavor
-
     local clipId = Clips:GetByName(clipName).Id
 
     entity:SetSpriteOn()
@@ -24,15 +18,6 @@ local function Animate(entity, args)
         true)
 
     entity:PlayAnimation(0, clipId)
-end
-
-
-
-local function OnInit(entity)
-    Triggers:OnEmitEntity(
-        entity,
-        Animate,
-        true)
 
 end
 

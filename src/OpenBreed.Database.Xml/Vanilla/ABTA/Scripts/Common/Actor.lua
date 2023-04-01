@@ -26,9 +26,9 @@ local weapons =
   [1] = {
       Name = "AssaultGun",
       Projectile = "AssaultGun",
-      FireRate = 50,
+      FireRate = 40,
       MuzzleFlash = "",
-      Speed = 15 * speedFactor
+      Speed = 12 * speedFactor
   },
   [2] = {
       Name = "MissileLauncher",

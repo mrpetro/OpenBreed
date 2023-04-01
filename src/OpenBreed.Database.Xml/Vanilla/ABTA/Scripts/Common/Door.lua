@@ -1,4 +1,48 @@
-﻿local function Open(doorEntity, actorEntity, projection)
+﻿
+local function RemoveHorizontalDoorObstacle(doorCell)
+    Logging:Info("Removing Horizontal Door Obstacle...")
+
+    doorCell:SetSpriteOff()
+    doorCell:SetBodyOffEx()
+
+    local doorCellMeta = doorCell:GetMetadata()
+    doorCellMeta.State = "Opened"
+
+    local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 1, 0)
+   
+    nextDoorCell:SetBodyOffEx()
+
+    local nextDoorCellMeta = nextDoorCell:GetMetadata()
+    nextDoorCellMeta.State = "Opened"
+
+    Entities:RequestDestroy(doorCell)
+    Entities:RequestDestroy(nextDoorCell)
+
+end
+
+local function RemoveVerticalDoorObstacle(doorCell)
+    Logging:Info("Removing Vertical Door Obstacle...")
+
+    doorCell:SetSpriteOff()
+    doorCell:SetBodyOffEx()
+
+    local doorCellMeta = doorCell:GetMetadata()
+    doorCellMeta.State = "Opened"
+
+    local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 0, 1) 
+    nextDoorCell:SetBodyOffEx()
+
+    local nextDoorCellMeta = nextDoorCell:GetMetadata()
+    nextDoorCellMeta.State = "Opened"
+
+    Entities:RequestDestroy(doorCell)
+    Entities:RequestDestroy(nextDoorCell)
+
+end
+
+
+
+local function Open(doorEntity, actorEntity, projection)
 
     local metaData = doorEntity:GetMetadata()
 
@@ -49,41 +93,6 @@
         nextDoorCellMeta.State = "Opening"
     end
 
-    RemoveHorizontalDoorObstacle = function(doorCell)
-        Logging:Info("Removing Horizontal Door Obstacle...")
-
-        doorCell:SetSpriteOff()
-        doorCell:SetBodyOffEx()
-
-        local doorCellMeta = doorCell:GetMetadata()
-        doorCellMeta.State = "Opened"
-
-        local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 1, 0)
-   
-        nextDoorCell:SetBodyOffEx()
-
-        local nextDoorCellMeta = nextDoorCell:GetMetadata()
-        nextDoorCellMeta.State = "Opened"
-
-    end
-
-    RemoveVerticalDoorObstacle = function(doorCell)
-        Logging:Info("Removing Vertical Door Obstacle...")
-
-        doorCell:SetSpriteOff()
-        doorCell:SetBodyOffEx()
-
-        local doorCellMeta = doorCell:GetMetadata()
-        doorCellMeta.State = "Opened"
-
-        local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 0, 1) 
-        nextDoorCell:SetBodyOffEx()
-
-        local nextDoorCellMeta = nextDoorCell:GetMetadata()
-        nextDoorCellMeta.State = "Opened"
-
-    end
-
     Logging:Info("DoorEntityId:" .. tostring(doorEntity.Id))
     Logging:Info("ActorEntityId:" .. tostring(actorEntity.Id))
 
@@ -129,35 +138,86 @@
         end
     end
 
-    --local doorState = doorEntity.GetState("Door");
-
-    --doorEntity.AddStateImpulse("Door", "Open");
-
-
-    --Triggers:OnStateChanged(
-    --    doorEntity,
-    --    FadeOut,
-    --    false)
-
-
-
-
-    --local stampId = Stamps:GetByName("Vanilla/L1/MineCrater").Id;
-
-    --mineEntity:PutStamp(stampId, 0)
-
-    --local soundId = Sounds:GetByName("Vanilla/Common/LandMine/Explosion")
-    --local duration = Sounds:GetDuration(soundId)
-    --mineEntity:EmitSound(soundId)	
-
-	--Worlds:RequestRemoveEntity(mineEntity)
-    --Entities:RequestDestroy(mineEntity)
     Logging:Info("Door Open!")
+end
+
+local function DestroyDoor(doorCell, nextDoorCell, flavor)
+    Logging:Info("Destroying " .. flavor .. " Door...")
+
+    local metaData = doorCell:GetMetadata()
+    local stampName = metaData.Level .. "/" .. metaData.Name .. "/" .. flavor .. "/Opened"
+    local stampId = Stamps:GetByName(stampName).Id
+
+    doorCell:PutStamp(stampId, 0)
+
+    if(flavor == "Horizontal")
+    then
+        RemoveHorizontalDoorObstacle(doorCell)
+    else
+        RemoveVerticalDoorObstacle(doorCell)
+    end
+
+    local doorCellMeta = doorCell:GetMetadata()
+    doorCellMeta.State = "Destroying"
+
+    local nextDoorCellMeta = nextDoorCell:GetMetadata()
+    nextDoorCellMeta.State = "Destroying"
+
+
+    local c1 = doorCell:GetAabb().Center
+    local c2 = nextDoorCell:GetAabb().Center
+
+    local midPos = (c1 + c2) / 2.0
+    Logging:Info(tostring(c1))
+    Logging:Info(tostring(c2))
+    Logging:Info(tostring(midPos))
+
+    doorCell:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+        :SetOption("flavor", "Big")
+        :SetOption("startX", midPos.X)
+        :SetOption("startY", midPos.Y)
+        :Finish()
+end
+
+
+local function Destroy(doorEntity)
+   
+    local doorCell = doorEntity:FindHorizontalDoorCell(Worlds)
+
+    if(doorCell ~= doorEntity)
+    then
+        --Logging:Info("Open from right!")
+        local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 1, 0)
+        DestroyDoor(doorCell, nextDoorCell, "Horizontal")
+    else
+        if(doorCell:IsSameCellType(Worlds, 1, 0))
+        then
+            --Logging:Info("Open from left!")
+            local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 1, 0)
+            DestroyDoor(doorCell, nextDoorCell, "Horizontal")
+        else
+            -- Single cell horizontally, might be vertical Door
+            doorCell = doorEntity:FindVerticalDoorCell(Worlds)
+            local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 0, 1)
+            DestroyDoor(doorCell, nextDoorCell, "Vertical")
+        end
+    end
+
+    Logging:Info("Door Destroyed!")
+end
+
+local function OnInit(entity)
+
+    Triggers:OnExpunge(
+        entity,
+        Destroy,
+        true)
 
 end
 
 return {
     systemHooks = {
+        OnInit = OnInit,
         OnCollision = Open
     }
 }

@@ -13477,6 +13477,20 @@
 				<Animation Id="Vanilla/Common/Explosion/Big">
 					<Length>3.5</Length>
 					<Tracks>
+						<FloatTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.OriginX</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="16" />
+							</Frames>
+						</FloatTrack>
+						<FloatTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.OriginY</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="16" />
+							</Frames>
+						</FloatTrack>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
@@ -13510,6 +13524,20 @@
 				<Animation Id="Vanilla/Common/Explosion/Small">
 					<Length>2.0</Length>
 					<Tracks>
+						<FloatTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.OriginX</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="8" />
+							</Frames>
+						</FloatTrack>
+						<FloatTrack>
+							<Interpolation>None</Interpolation>
+							<Controller>Sprite.OriginY</Controller>
+							<Frames>
+								<Frame Time="0.0" Value="8" />
+							</Frames>
+						</FloatTrack>
 						<IntTrack>
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>

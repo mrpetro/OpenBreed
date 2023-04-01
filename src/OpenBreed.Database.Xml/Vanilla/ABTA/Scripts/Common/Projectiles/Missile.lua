@@ -5,21 +5,7 @@ local function Hit(projectileEntity, targetEntity, projection)
         :SetOption("flavor", "Small")
         :Finish()
 
-     Worlds:RequestRemoveEntity(projectileEntity)
-     Entities:RequestDestroy(projectileEntity)
-end
-
-local function Fire(entity, args)
-
-    local dir = entity:GetThrust():Normalized()
-    local degree = MovementTools.SnapToCompass16Degree(dir.X, dir.Y)
-
-    local animName = "Vanilla/Common/Projectile/Missile/High/" .. tostring(degree)
-
-    local animId = Clips:GetByName(animName).Id
-
-    entity:PlayAnimation(0, animId)
-
+     projectileEntity:Expunge()
 end
 
 local function Explode(entity, args)
@@ -33,15 +19,28 @@ local function Explode(entity, args)
         :Finish()
 end
 
+local function Destroy(entity)
+
+     Entities:RequestDestroy(projectileEntity)
+
+end
+
 local function OnInit(entity)
-    Triggers:OnEmitEntity(
-        entity,
-        Fire,
-        true)
+
+    local dir = entity:GetThrust():Normalized()
+    local degree = MovementTools.SnapToCompass16Degree(dir.X, dir.Y)
+    local animName = "Vanilla/Common/Projectile/Missile/High/" .. tostring(degree)
+    local animId = Clips:GetByName(animName).Id
+    entity:PlayAnimation(0, animId)
 
     Triggers:OnLifetimeEnd(
         entity,
         Explode,
+        true)
+
+    Triggers:OnExpunge(
+        entity,
+        Destroy,
         true)
 
 end

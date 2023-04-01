@@ -5,24 +5,24 @@ local function Hit(projectileEntity, targetEntity, projection)
         :SetOption("flavor", "Small")
         :Finish()
 
-     Worlds:RequestRemoveEntity(projectileEntity)
-     Entities:RequestDestroy(projectileEntity)
+     projectileEntity:Expunge()
 end
 
-local function Fire(entity, args)
+local function Destroy(entity)
 
-    local clipName = "Vanilla/Common/Explosion/Small"
-
-    local animId = Clips:GetByName(clipName).Id
-
-    entity:PlayAnimation(0, animId)
+     Entities:RequestDestroy(projectileEntity)
 
 end
 
 local function OnInit(entity)
-    Triggers:OnEmitEntity(
+
+    local clipName = "Vanilla/Common/Explosion/Small"
+    local animId = Clips:GetByName(clipName).Id
+    entity:PlayAnimation(0, animId)
+
+    Triggers:OnExpunge(
         entity,
-        Fire,
+        Destroy,
         true)
 
 end

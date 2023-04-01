@@ -39,6 +39,8 @@
 		<Script>
 			<ScriptId>Vanilla/Common/Door</ScriptId>
 		</Script>
+		<EntityEmitter>
+		</EntityEmitter>
 		<Sprite>
 			<AtlasName></AtlasName>
 			<ImageIndex>0</ImageIndex>

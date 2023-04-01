@@ -20,19 +20,6 @@ local function Hit(projectileEntity, targetEntity, projection)
     projectileEntity:PlayAnimation(0, animId)
 end
 
-local function Fire(entity, args)
-
-    local dir = entity:GetThrust():Normalized()
-    local degree = MovementTools.SnapToCompass8Degree(dir.X, dir.Y)
-
-    local animName = "Vanilla/Common/Projectile/RefractionLazer/High/" .. tostring(degree)
-
-    local animId = Clips:GetByName(animName).Id
-
-    entity:PlayAnimation(0, animId)
-
-end
-
 local function Explode(entity, args)
 
     local pos = entity:GetPosition()
@@ -44,15 +31,28 @@ local function Explode(entity, args)
         :Finish()
 end
 
+local function Destroy(entity)
+
+     Entities:RequestDestroy(projectileEntity)
+
+end
+
 local function OnInit(entity)
-    Triggers:OnEmitEntity(
-        entity,
-        Fire,
-        true)
+
+    local dir = entity:GetThrust():Normalized()
+    local degree = MovementTools.SnapToCompass8Degree(dir.X, dir.Y)
+    local animName = "Vanilla/Common/Projectile/RefractionLazer/High/" .. tostring(degree)
+    local animId = Clips:GetByName(animName).Id
+    entity:PlayAnimation(0, animId)
 
     Triggers:OnLifetimeEnd(
         entity,
         Explode,
+        true)
+
+    Triggers:OnExpunge(
+        entity,
+        Destroy,
         true)
 
 end
