@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
@@ -115,10 +116,19 @@ namespace OpenBreed.Wecs.Extensions
                 {
                     var entityFactory = new EntityFactory(
                         sp.GetService<IEntityMan>(),
-                        sp.GetService<IComponentFactoryProvider>());
+                        sp.GetService<IComponentFactoryProvider>(),
+                        sp.GetService<IEntityTemplateLoader>());
                     action.Invoke(entityFactory, sp);
                     return entityFactory;
                 });
+            });
+        }
+
+        public static void SetupXmlEntityTemplateLoader(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IEntityTemplateLoader>((sp) => new XmlEntityTemplateLoader(sp.GetService<IOptions<XmlEntityTemplateLoaderSettings>>()));
             });
         }
     }

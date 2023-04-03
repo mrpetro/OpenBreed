@@ -54,9 +54,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
                 var pc = entity.Get<PositionComponent>();
 
-                var templateBuilder = entityFactory.Create(entityEmit.TemplateName)
-                .SetParameter("startX", 0.0)
-                .SetParameter("startY", 0.0);
+                var templateBuilder = entityFactory.Create(entityEmit.TemplateName);
 
                 foreach (var option in entityEmit.Options)
                 {

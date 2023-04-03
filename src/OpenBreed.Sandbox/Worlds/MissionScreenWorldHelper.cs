@@ -102,7 +102,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void AddBackground(IWorld world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MissionScreen\Background.xml")
+            var timer = entityFactory.Create(@"ABTA\Templates\Common\MissionScreen\Background")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetTag("MissionScreen/Background")
@@ -143,7 +143,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void AddText(IWorld world, int x, int y, string text = "")
         {
-            var textEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\MissionScreen\Text.xml")
+            var textEntity = entityFactory.Create(@"ABTA\Templates\Common\MissionScreen\Text")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetTag("MissionScreen/Text")

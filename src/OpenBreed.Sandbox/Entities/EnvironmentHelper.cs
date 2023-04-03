@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public IEntity AddTVFlickering(IWorld world, int x, int y, string level, int gfxValue)
         {
-            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\L4\TVFlickering.xml")
+            var entity = entityFactory.Create(@"ABTA\Templates\L4\TVFlickering")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -55,7 +55,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public IEntity AddMonsterEating(IWorld world, int x, int y, string level, int gfxValue)
         {
-            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\L4\MonsterEating.xml")
+            var entity = entityFactory.Create(@"ABTA\Templates\L4\MonsterEating")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -69,7 +69,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public IEntity AddShipSmoke(IWorld world, int x, int y, string level, int gfxValue)
         {
-            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\L1\ShipSmoke.xml")
+            var entity = entityFactory.Create(@"ABTA\Templates\L1\ShipSmoke")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)

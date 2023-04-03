@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             var indexPos = entity.GetIndexPos(ox, oy);
 
-            var toCreate = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Environment\SlowdownObstacle.xml")
+            var toCreate = entityFactory.Create(@"ABTA\Templates\Common\Environment\SlowdownObstacle")
                 .SetParameter("startX", 16 * indexPos.X)
                 .SetParameter("startY", 16 * indexPos.Y)
                 .Build();

@@ -20,6 +20,7 @@ using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Database.Xml;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Generic.Extensions;
@@ -291,6 +292,8 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupSandboxComponents();
 
             hostBuilder.SetupComponentFactoryProvider();
+
+            hostBuilder.SetupXmlEntityTemplateLoader();
 
             hostBuilder.SetupEntityFactory((entityFactory, sp) =>
             {

@@ -94,7 +94,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void AddBackground(IWorld world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartCardScreen\Background.xml")
+            var timer = entityFactory.Create(@"ABTA\Templates\Common\SmartCardScreen\Background")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetTag("SmartCardScreen/Background")
@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void AddText(IWorld world, int x, int y)
         {
-            var textEntity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\SmartCardScreen\Text.xml")
+            var textEntity = entityFactory.Create(@"ABTA\Templates\Common\SmartCardScreen\Text")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetTag("SmartCardScreen/Text")

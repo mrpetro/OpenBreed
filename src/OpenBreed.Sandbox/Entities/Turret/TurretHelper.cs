@@ -76,7 +76,7 @@ namespace OpenBreed.Sandbox.Entities.Turret
 
         public IEntity Create(Vector2 pos)
         {
-            var entity = entityFactory.Create(@"Entities\Turret\Turret.xml")
+            var entity = entityFactory.Create(@"Entities\Turret\Turret")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .Build();

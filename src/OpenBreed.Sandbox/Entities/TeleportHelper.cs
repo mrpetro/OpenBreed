@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public IEntity AddTeleportEntry(IWorld world, int x, int y, int pairId, string level, int gfxValue)
         {
-            var teleportEntry = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\TeleportEntry.xml")
+            var teleportEntry = entityFactory.Create(@"ABTA\Templates\Common\TeleportEntry")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
@@ -95,7 +95,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public IEntity AddTeleportExit(IWorld world, int x, int y, int pairId, string level, int gfxValue)
         {
-            var teleportExit = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\TeleportExit.xml")
+            var teleportExit = entityFactory.Create(@"ABTA\Templates\Common\TeleportExit")
                 .SetParameter("level", level)
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)

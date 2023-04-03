@@ -258,7 +258,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void AddCursor(IWorld world)
         {
-            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\Cursor.xml")
+            var entity = entityFactory.Create(@"ABTA\Templates\Common\Hud\Cursor")
                 .SetParameter("posX", 0.0f)
                 .SetParameter("posY", 0.0f)
                 .Build();
@@ -268,7 +268,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void AddMission(IWorld world)
         {
-            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Mission.xml")
+            var entity = entityFactory.Create(@"ABTA\Templates\Common\Mission")
                 .SetParameter("scriptId", "Vanilla/Common/Mission")
                 .SetTag("Mission")
                 .Build();
@@ -278,7 +278,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void AddDirector(IWorld world, string scriptId)
         {
-            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Director.xml")
+            var entity = entityFactory.Create(@"ABTA\Templates\Common\Director")
                 .SetParameter("scriptId", scriptId)
                 .SetTag("Director")
                 .Build();

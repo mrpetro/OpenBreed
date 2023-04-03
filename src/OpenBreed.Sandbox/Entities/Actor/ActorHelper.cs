@@ -97,7 +97,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public IEntity CreateMission(string name)
         {
-            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Mission.xml")
+            var entity = entityFactory.Create(@"ABTA\Templates\Common\Mission")
                 .SetTag(name)
                 .Build();
 
@@ -144,7 +144,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public IEntity CreateActor(string name, Vector2 pos)
         {
-            var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\John.xml")
+            var actor = entityFactory.Create(@"ABTA\Templates\Common\Actors\John")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .SetTag(name)
@@ -155,7 +155,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public IEntity CreateDummy(string name, Vector2 pos)
         {
-            var actor = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Actors\Dummy.xml")
+            var actor = entityFactory.Create(@"ABTA\Templates\Common\Actors\Dummy")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .SetTag(name)

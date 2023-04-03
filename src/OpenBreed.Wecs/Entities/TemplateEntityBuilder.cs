@@ -14,6 +14,7 @@ namespace OpenBreed.Wecs.Entities
         private readonly EntityFactory entityFactory;
         private readonly IEntityMan entityMan;
         private readonly IComponentFactoryProvider componentFactoryProvider;
+        private readonly IEntityTemplateLoader entityTemplateLoader;
         private readonly string templateName;
         private string tag;
         private readonly Dictionary<string, string> templateParameters = new Dictionary<string, string>();
@@ -26,11 +27,13 @@ namespace OpenBreed.Wecs.Entities
             EntityFactory entityFactory,
             IEntityMan entityMan,
             IComponentFactoryProvider componentFactoryProvider,
+            IEntityTemplateLoader entityTemplateLoader,
             string templateName)
         {
             this.entityFactory = entityFactory;
             this.entityMan = entityMan;
             this.componentFactoryProvider = componentFactoryProvider;
+            this.entityTemplateLoader = entityTemplateLoader;
             this.templateName = templateName;
         }
 
@@ -50,10 +53,9 @@ namespace OpenBreed.Wecs.Entities
             return this;
         }
 
-
         public IEntity Build()
         {
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(templateName, templateParameters);
+            var entityTemplate = entityTemplateLoader.Load(templateName, templateParameters);
 
             var components = new List<IEntityComponent>();
 

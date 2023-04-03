@@ -19,7 +19,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
     {
         #region Private Fields
 
-        private const string PICKABLE_PREFIX = @"Vanilla\ABTA\Templates\Common\Pickables";
+        private const string PICKABLE_PREFIX = @"ABTA\Templates\Common\Pickables";
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
         private readonly IWorldMan worldMan;
@@ -44,7 +44,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         public IEntity AddItem(IWorld world, int x, int y, string name, string level, int gfxValue, string option, string flavor = null)
         {
-            var path = $@"{PICKABLE_PREFIX}\{name}.xml";
+            var path = $@"{PICKABLE_PREFIX}\{name}";
 
             var entity = entityFactory.Create(path)
                 .SetParameter("level", level)

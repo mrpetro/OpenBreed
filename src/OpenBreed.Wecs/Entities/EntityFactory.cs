@@ -14,16 +14,21 @@ namespace OpenBreed.Wecs.Entities
 
         private readonly IEntityMan entityMan;
         private readonly IComponentFactoryProvider componentFactoryProvider;
+        private readonly IEntityTemplateLoader entityTemplateLoader;
         private readonly Dictionary<Type, IComponentFactory> componentFactories = new Dictionary<Type, IComponentFactory>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        public EntityFactory(IEntityMan entityMan, IComponentFactoryProvider componentFactoryProvider)
+        public EntityFactory(
+            IEntityMan entityMan,
+            IComponentFactoryProvider componentFactoryProvider,
+            IEntityTemplateLoader entityTemplateLoader)
         {
             this.entityMan = entityMan;
             this.componentFactoryProvider = componentFactoryProvider;
+            this.entityTemplateLoader = entityTemplateLoader;
         }
 
         #endregion Internal Constructors
@@ -32,7 +37,12 @@ namespace OpenBreed.Wecs.Entities
 
         public ITemplateEntityBuilder Create(string entityTemplateName)
         {
-            return new TemplateEntityBuilder(this, entityMan, componentFactoryProvider, entityTemplateName);
+            return new TemplateEntityBuilder(
+                this,
+                entityMan,
+                componentFactoryProvider,
+                entityTemplateLoader,
+                entityTemplateName);
         }
 
         #endregion Public Methods

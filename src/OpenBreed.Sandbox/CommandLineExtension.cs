@@ -2,10 +2,12 @@
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Audio.Interface;
 using OpenBreed.Database.Xml;
+using OpenBreed.Wecs.Entities;
 using System;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
+using System.IO;
 
 namespace OpenBreed.Sandbox
 {
@@ -44,6 +46,11 @@ namespace OpenBreed.Sandbox
                     sc.Configure<XmlDbSettings>(xmlDbSettings =>
                     {
                         xmlDbSettings.DbFilePath = result.GetValueForOption(dbFilePathOption);
+                    });
+
+                    sc.Configure<XmlEntityTemplateLoaderSettings>(xmlDbSettings =>
+                    {
+                        xmlDbSettings.DataDirPath = Path.GetDirectoryName(result.GetValueForOption(dbFilePathOption));
                     });
 
                     sc.Configure<EnvironmentSettings>(settings =>

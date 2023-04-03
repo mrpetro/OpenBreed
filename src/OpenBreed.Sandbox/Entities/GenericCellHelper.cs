@@ -17,9 +17,9 @@ namespace OpenBreed.Sandbox.Entities
     {
         #region Private Fields
 
-        private const string PREFIX = @"Vanilla\ABTA\Templates\Common\Environment";
-        private const string PREFIX_L1 = @"Vanilla\ABTA\Templates\L1";
-        private const string PREFIX_COMMON = @"Vanilla\ABTA\Templates\Common";
+        private const string PREFIX = @"ABTA\Templates\Common\Environment";
+        private const string PREFIX_L1 = @"ABTA\Templates\L1";
+        private const string PREFIX_COMMON = @"ABTA\Templates\Common";
 
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
@@ -45,7 +45,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public IEntity AddUnknownCell(IWorld world, int x, int y, int actionValue, string level, int gfxValue)
         {
-            var path = $@"{PREFIX}\Unknown.xml";
+            var path = $@"{PREFIX}\Unknown";
 
             var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
@@ -63,7 +63,7 @@ namespace OpenBreed.Sandbox.Entities
 
         internal IEntity AddVoidCell(IWorld world, int x, int y, string level, int gfxValue)
         {
-            var path = $@"{PREFIX}\Void.xml";
+            var path = $@"{PREFIX}\Void";
 
             var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Entities
 
         internal IEntity AddSlopeObstacleCell(IWorld world, int x, int y, string level, int gfxValue, string slopeDir)
         {
-            var path = $@"{PREFIX}\SlopeObstacle.xml";
+            var path = $@"{PREFIX}\SlopeObstacle";
 
             var entity = entityFactory.Create(path)
                 .SetParameter("slopeDir", slopeDir)
@@ -96,7 +96,7 @@ namespace OpenBreed.Sandbox.Entities
 
         internal IEntity AddFullObstacleCell(IWorld world, int x, int y, string level, int gfxValue)
         {
-            var path = $@"{PREFIX}\FullObstacle.xml";
+            var path = $@"{PREFIX}\FullObstacle";
 
             var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
@@ -112,7 +112,7 @@ namespace OpenBreed.Sandbox.Entities
 
         internal IEntity AddLandMineCell(IWorld world, int x, int y, string level, int gfxValue)
         {
-            var path = $@"{PREFIX_COMMON}\LandMine.xml";
+            var path = $@"{PREFIX_COMMON}\LandMine";
 
             var entity = entityFactory.Create(path)
                 .SetParameter("level", level)
@@ -128,7 +128,7 @@ namespace OpenBreed.Sandbox.Entities
 
         internal IEntity AddActorOnlyObstacleCell(IWorld world, int x, int y, string level, int gfxValue)
         {
-            var path = $@"{PREFIX}\ActorOnlyObstacle.xml";
+            var path = $@"{PREFIX}\ActorOnlyObstacle";
 
             var entity = entityFactory.Create(path)
                 .SetParameter("level", level)

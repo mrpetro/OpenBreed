@@ -97,7 +97,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public IEntity CreateCamera(string name, float x, float y, float width, float height)
         {
-            var entity = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Camera.xml")
+            var entity = entityFactory.Create(@"ABTA\Templates\Common\Camera")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetParameter("width", width)

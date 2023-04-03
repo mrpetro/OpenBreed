@@ -42,7 +42,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
 
         public void AddDestructTimer(IWorld world, int x, int y)
         {
-            var timer = entityFactory.Create(@"Vanilla\ABTA\Templates\Common\Hud\DestructTimer.xml")
+            var timer = entityFactory.Create(@"ABTA\Templates\Common\Hud\DestructTimer")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .Build();
@@ -56,7 +56,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
             int x,
             int y)
         {
-            return entityFactory.Create(@$"Vanilla\ABTA\Templates\Common\Hud\{elementName}.xml")
+            return entityFactory.Create(@$"ABTA\Templates\Common\Hud\{elementName}")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetTag(entityTag)
