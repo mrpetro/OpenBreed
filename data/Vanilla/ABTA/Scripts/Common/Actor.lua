@@ -27,7 +27,7 @@ local weapons =
       Name = "AssaultGun",
       Projectile = "AssaultGun",
       FireRate = 40,
-      MuzzleFlash = "",
+      MuzzleFlash = "AssaultGun",
       Speed = 12 * speedFactor
   },
   [2] = {
@@ -84,7 +84,7 @@ local function FireBullet(entity)
     pos = pos + dir * 16
     local thrust = dir * currentWeapon.Speed
 
-    local emitter = entity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeapon.Projectile .. ".xml")
+    local emitter = entity:StartEmit("ABTA\\Templates\\Common\\Projectiles\\" ..  currentWeapon.Projectile)
         :SetOption("startX", pos.X)
         :SetOption("startY", pos.Y)
 

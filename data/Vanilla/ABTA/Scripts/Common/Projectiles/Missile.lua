@@ -1,18 +1,26 @@
 ﻿
 local function Hit(projectileEntity, targetEntity, projection)
 
-     projectileEntity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+    local pos = projectileEntity:GetPosition()
+    projectileEntity:StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
         :SetOption("flavor", "Small")
+        :SetOption("startX", pos.X)
+        :SetOption("startY", pos.Y)
         :Finish()
-	
-     projectileEntity:Expunge()
+
+    if(targetEntity:HasHealth())
+    then
+        projectileEntity:InflictDamage(10, targetEntity.Id)
+    end
+
+    projectileEntity:Expunge()
 end
 
 local function Explode(entity, args)
 
     local pos = entity:GetPosition()
 
-    entity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+    entity:StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
         :SetOption("startX", pos.X)
         :SetOption("startY", pos.Y)
         :SetOption("flavor", "Small")
@@ -28,8 +36,8 @@ end
 local function OnInit(entity)
 
     local dir = entity:GetThrust():Normalized()
-    local degree = MovementTools.SnapToCompass8Degree(dir.X, dir.Y)
-    local animName = "Vanilla/Common/Projectile/TrilazerGun/High/" .. tostring(degree)
+    local degree = MovementTools.SnapToCompass16Degree(dir.X, dir.Y)
+    local animName = "Vanilla/Common/Projectile/Missile/High/" .. tostring(degree)
     local animId = Clips:GetByName(animName).Id
     entity:PlayAnimation(0, animId)
 

@@ -185,7 +185,8 @@ namespace OpenBreed.Common.Tools.Xml
                     return varValue;
                 else
                 {
-                    //TODO: Log this
+                    Console.WriteLine($"Error: Variable '{varName}' not set.");
+
                     return varName;
                 }
             });

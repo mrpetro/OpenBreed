@@ -15,7 +15,7 @@ local function OnInit(entity)
 end
 
 Fire = function(entity, args)
-    --entity:Emit("Vanilla\\ABTA\\Templates\\Common\\Bullet.xml")
+    --entity:Emit("ABTA\\Templates\\Common\\Bullet")
 end
 
 SetupNew = function(entity, args)

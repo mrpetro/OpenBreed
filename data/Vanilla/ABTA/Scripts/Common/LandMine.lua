@@ -8,7 +8,7 @@
 	local duration = Sounds:GetDuration(soundId)
 	mineEntity:EmitSound(soundId)
 
-	mineEntity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+	mineEntity:StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
 		:SetOption("flavor", "Big")
 		:Finish()
 

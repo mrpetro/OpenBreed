@@ -18,13 +18,18 @@ local function Hit(projectileEntity, targetEntity, projection)
 
     local animId = Clips:GetByName(animName).Id
     projectileEntity:PlayAnimation(0, animId)
+
+     if(targetEntity:HasHealth())
+     then
+        projectileEntity:InflictDamage(10, targetEntity.Id)
+     end
 end
 
 local function Explode(entity, args)
 
     local pos = entity:GetPosition()
 
-    entity:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+    entity:StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
         :SetOption("startX", pos.X)
         :SetOption("startY", pos.Y)
         :SetOption("flavor", "Small")

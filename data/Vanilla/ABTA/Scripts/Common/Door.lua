@@ -172,7 +172,7 @@ local function DestroyDoor(doorCell, nextDoorCell, flavor)
     Logging:Info(tostring(c2))
     Logging:Info(tostring(midPos))
 
-    doorCell:StartEmit("Vanilla\\ABTA\\Templates\\Common\\Projectiles\\Explosion.xml")
+    doorCell:StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
         :SetOption("flavor", "Big")
         :SetOption("startX", midPos.X)
         :SetOption("startY", midPos.Y)
