@@ -73,6 +73,18 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             sprite.Origin = new Vector2(sprite.Origin.X, value);
         }
 
+        public static void SetSpriteOrigin(this IEntity entity, Vector2 value)
+        {
+            var sprite = entity.Get<SpriteComponent>();
+            sprite.Origin = value;
+        }
+
+        public static void SetSpriteScale(this IEntity entity, Vector2 value)
+        {
+            var sprite = entity.Get<SpriteComponent>();
+            sprite.Scale = value;
+        }
+
         public static void SetSpriteAtlas(this IEntity entity, int atlasId)
         {
             var sprite = entity.Get<SpriteComponent>();

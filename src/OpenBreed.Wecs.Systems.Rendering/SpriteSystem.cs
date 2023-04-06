@@ -98,6 +98,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var pos = entity.Get<PositionComponent>().Value;
             pos -= spc.Origin;
             var size = atlas.GetSpriteSize(spc.ImageId);
+            size *= spc.Scale;
 
             //Test viewport for clippling here
             if (pos.X + size.X < clipBox.Min.X)
@@ -112,7 +113,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             if (pos.Y > clipBox.Max.Y)
                 return;
 
-            spriteRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, spc.Order), size, Color4.White, spc.AtlasId, spc.ImageId);
+            spriteRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, spc.Order), spc.Scale, Color4.White, spc.AtlasId, spc.ImageId);
         }
 
         #endregion Private Methods

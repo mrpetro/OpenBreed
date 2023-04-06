@@ -70,7 +70,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public void Draw(char character, Box2 clipBox)
         {
             var found = Lookup[character];
-            primitiveRenderer.DrawSprite(Texture, vboList[found.Item1], new Vector3(0, 0, 0), new Vector2(found.Item2, Height), Color4.White);
+            primitiveRenderer.DrawSprite(
+                Texture,
+                vboList[found.Item1],
+                new Vector3(0, 0, 0),
+                Vector2.One,
+                Color4.White);
         }
 
         public void Draw(string text, Color4 color, Box2 clipBox)
@@ -86,7 +91,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 var ch = text[i];
                 var key = Lookup[ch].Item1;
 
-                primitiveRenderer.DrawSprite(Texture, vboList[key], new Vector3((int)offsetX, 0.0f, 0.0f), new Vector2(Lookup[ch].Item2, Height), color);
+                primitiveRenderer.DrawSprite(
+                    Texture,
+                    vboList[key],
+                    new Vector3((int)offsetX, 0.0f, 0.0f),
+                    Vector2.One,
+                    color);
 
                 offsetX += Lookup[ch].Item2;
             }

@@ -81,7 +81,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             var atlas = items[atlasId];
             var size = atlas.TileSize;
             var vao = atlas.data[imageId].Vbo;
-            primitiveRenderer.DrawSprite(atlas.Texture, vao, new Vector3(0,0,0), new Vector2(size, size), Color4.White);
+            primitiveRenderer.DrawSprite(
+                atlas.Texture,
+                vao,
+                new Vector3(0,0,0),
+                Vector2.One,
+                Color4.White);
         }
 
         #endregion Public Methods

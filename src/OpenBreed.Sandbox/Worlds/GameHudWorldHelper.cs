@@ -3,6 +3,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Sprites;
@@ -10,6 +11,7 @@ using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Sprites;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
@@ -49,32 +51,38 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
+        private readonly ITextureMan textureMan;
+        private readonly ISpriteMan spriteMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public GameHudWorldHelper(ISystemFactory systemFactory, 
-                                  IRenderableFactory renderableFactory,
-                                  IWorldMan worldMan, 
-                                  IFontMan fontMan, 
-                                  IViewClient viewClient, 
-                                  IEntityMan entityMan,
-                                  ITriggerMan triggerMan,
-                                  IEntityFactory entityFactory,
-                                  VanillaStatusBarHelper hudHelper, 
-                                  CameraHelper cameraHelper, 
-                                  IRepositoryProvider repositoryProvider, 
-                                  IPaletteMan paletteMan,
-                                  PalettesDataProvider palettesDataProvider,
-                                  IDataLoaderFactory dataLoaderFactory,
-                                  SpriteAtlasDataProvider spriteAtlasDataProvider)
+        public GameHudWorldHelper(
+            ISystemFactory systemFactory, 
+            IRenderableFactory renderableFactory,
+            IWorldMan worldMan, 
+            IFontMan fontMan, 
+            IViewClient viewClient, 
+            IEntityMan entityMan,
+            ITriggerMan triggerMan,
+            IEntityFactory entityFactory,
+            VanillaStatusBarHelper hudHelper, 
+            CameraHelper cameraHelper, 
+            IRepositoryProvider repositoryProvider, 
+            IPaletteMan paletteMan,
+            PalettesDataProvider palettesDataProvider,
+            IDataLoaderFactory dataLoaderFactory,
+            SpriteAtlasDataProvider spriteAtlasDataProvider,
+            ITextureMan textureMan,
+            ISpriteMan spriteMan)
         {
             this.systemFactory = systemFactory;
             this.renderableFactory = renderableFactory;
             this.worldMan = worldMan;
             this.fontMan = fontMan;
             this.viewClient = viewClient;
+
             this.entityMan = entityMan;
             this.triggerMan = triggerMan;
             this.entityFactory = entityFactory;
@@ -85,6 +93,8 @@ namespace OpenBreed.Sandbox.Worlds
             this.palettesDataProvider = palettesDataProvider;
             this.dataLoaderFactory = dataLoaderFactory;
             this.spriteAtlasDataProvider = spriteAtlasDataProvider;
+            this.textureMan = textureMan;
+            this.spriteMan = spriteMan;
         }
 
         #endregion Public Constructors
@@ -118,6 +128,13 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void Create()
         {
+            var statusBarTexture = textureMan.Create(
+            "StatusBarPixel",
+            1,
+            1,
+            new byte[] { 0x4D } );
+
+
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
             //Load common sprites
@@ -147,6 +164,11 @@ namespace OpenBreed.Sandbox.Worlds
                                      .Build();
 
 
+            var healthBarPixel = spriteMan.CreateAtlas()
+                .SetName("StatusBarPixel")
+                .SetTexture(statusBarTexture.Id)
+                .AppendCoord(0, 0, 1, 1)
+                .Build();
 
             var builder = worldMan.Create().SetName("GameHUD");
 
@@ -184,11 +206,11 @@ namespace OpenBreed.Sandbox.Worlds
                 var p1StatusBar = hudHelper.CreateHudElement("StatusBarP1", "P1.StatusBar", -160, 109);
                 worldMan.RequestAddEntity(p1StatusBar, world.Id);
 
-                //var p1AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P1.AmmoBar", 20, 112);
-                //p1AmmoBar.EnterWorld(world.Id);
+                var p1AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P1.AmmoBar", 40, 115);
+                worldMan.RequestAddEntity(p1AmmoBar, world.Id);
 
-                //var p1HealthBar = hudHelper.CreateHudElement("HealthBar", "P1.HealthBar", -124, 112);
-                //p1HealthBar.EnterWorld(world.Id);
+                var p1HealthBar = hudHelper.CreateHudElement("HealthBar", "P1.HealthBar", -128, 115);
+                worldMan.RequestAddEntity(p1HealthBar, world.Id);
 
                 var p1LivesCounter = hudHelper.CreateHudElement("LivesCounter", "P1.LivesCounter", -24, 120);
                 worldMan.RequestAddEntity(p1LivesCounter, world.Id);
@@ -202,12 +224,11 @@ namespace OpenBreed.Sandbox.Worlds
                 var p2StatusBar = hudHelper.CreateHudElement("StatusBarP2", "P2.StatusBar", -160, -120);
                 worldMan.RequestAddEntity(p2StatusBar, world.Id);
 
+                var p2AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P2.AmmoBar", 40, -114);
+                worldMan.RequestAddEntity(p2AmmoBar, world.Id);
 
-                //var p2AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P2.AmmoBar", 20, -117);
-                //p2AmmoBar.EnterWorld(world.Id);
-
-                //var p2HealthBar = hudHelper.CreateHudElement("HealthBar", "P2.HealthBar", -124, -117);
-                //p2HealthBar.EnterWorld(world.Id);
+                var p2HealthBar = hudHelper.CreateHudElement("HealthBar", "P2.HealthBar", -128, -114);
+                worldMan.RequestAddEntity(p2HealthBar, world.Id);
 
                 var p2LivesCounter = hudHelper.CreateHudElement("LivesCounter", "P2.LivesCounter", -24, -109);
                 worldMan.RequestAddEntity(p2LivesCounter, world.Id);

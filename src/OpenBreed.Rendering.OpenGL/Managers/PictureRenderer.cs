@@ -28,7 +28,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public void Render(Vector3 pos, Vector2 size, Color4 color, int imageId)
+        public void Render(Vector3 pos, Vector2 scale, Color4 color, int imageId)
         {
             var picture = pictureMan.InternalGetById(imageId);
 
@@ -36,7 +36,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             try
             {
-                primitiveRenderer.DrawSprite(picture.Texture, picture.Vbo, pos, size, color);
+                primitiveRenderer.DrawSprite(
+                    picture.Texture,
+                    picture.Vbo,
+                    pos,
+                    scale,
+                    color);
             }
             finally
             {

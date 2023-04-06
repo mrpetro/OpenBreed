@@ -14,6 +14,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         string AtlasName { get; set; }
         int ImageIndex { get; set; }
         Vector2 Origin { get; set; }
+        Vector2 Scale { get; set; }
         int Order { get; set; }
         bool Hidden { get; set; }
 
@@ -41,6 +42,7 @@ namespace OpenBreed.Wecs.Components.Rendering
             AtlasId = builder.AtlasId;
             ImageId = builder.ImageId;
             Origin = builder.Origin;
+            Scale = builder.Scale;
             Order = builder.Order;
             Hidden = builder.Hidden;
         }
@@ -63,6 +65,11 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// Local origin of sprite coordinates
         /// </summary>
         public Vector2 Origin { get; set; }
+
+        /// <summary>
+        /// Scale of sprite
+        /// </summary>
+        public Vector2 Scale { get; set; }
 
         /// <summary>
         /// Order of drawing, higher value object is rendered on top of lower value objects
@@ -102,6 +109,7 @@ namespace OpenBreed.Wecs.Components.Rendering
             builder.SetAtlasByName(template.AtlasName);
             builder.SetImageId(template.ImageIndex);
             builder.SetOrigin(template.Origin);
+            builder.SetScale(template.Scale);
             builder.SetOrder(template.Order);
             builder.SetHidden(template.Hidden);
             return builder.Build();
@@ -132,6 +140,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         internal int AtlasId { get; private set; }
         internal int ImageId { get; private set; }
         internal Vector2 Origin { get; private set; }
+        internal Vector2 Scale { get; private set; }
         internal float Order { get; private set; }
         internal bool Hidden { get; private set; }
 
@@ -152,6 +161,11 @@ namespace OpenBreed.Wecs.Components.Rendering
         public void SetOrigin(Vector2 origin)
         {
             Origin = origin;
+        }
+
+        public void SetScale(Vector2 value)
+        {
+            Scale = value;
         }
 
         public void SetHidden(bool value)

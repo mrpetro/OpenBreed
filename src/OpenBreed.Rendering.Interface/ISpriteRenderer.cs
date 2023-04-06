@@ -10,7 +10,7 @@ namespace OpenBreed.Rendering.Interface
         void RenderBegin();
 
         void RenderEnd();
-        void Render(Vector3 pos3, Vector2 size, Color4 color, int atlasId, int imageId);
+        void Render(Vector3 pos3, Vector2 scale, Color4 color, int atlasId, int imageId);
 
         #endregion Public Methods
     }

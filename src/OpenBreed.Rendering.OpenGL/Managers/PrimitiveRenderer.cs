@@ -128,13 +128,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             DrawUnitRectangle(model, color);
         }
 
-        public void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 size, Color4 color)
+        public void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 scale, Color4 color)
         {
             ((Texture)texture).Use(TextureUnit.Texture0);
 
-            var model = Matrix4.CreateTranslation(pos);
+            var model = Matrix4.CreateScale(scale.X, scale.Y, 1.0f) * Matrix4.CreateTranslation(pos) ;
 
-            if(texture.DataMode == TextureDataMode.Rgba)
+            if (texture.DataMode == TextureDataMode.Rgba)
             {
                 texturedShader.Use();
                 texturedShader.SetMatrix4("model", model);

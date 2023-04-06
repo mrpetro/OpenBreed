@@ -112,7 +112,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             {
                 var atlasId = data.Item1;
                 var spriteIndex = data.Item2;
-                spriteRenderer.Render(new Vector3(0, 0, 0), new Vector2(data.Item3, data.Item4), Color4.White, atlasId, spriteIndex);
+                spriteRenderer.Render(new Vector3(0, 0, 0), Vector2.One, Color4.White, atlasId, spriteIndex);
             }
         }
 
@@ -142,7 +142,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                         break;
                 }
 
-                spriteRenderer.Render(new Vector3(caretPosX, caretPosY - h, 0.0f), new Vector2(w, h), color, atlasId, spriteIndex);
+                spriteRenderer.Render(new Vector3(caretPosX, caretPosY - h, 0.0f), Vector2.One, color, atlasId, spriteIndex);
 
                 caretPosX += w;
             }

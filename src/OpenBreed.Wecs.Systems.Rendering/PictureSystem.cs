@@ -84,9 +84,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var pos = entity.Get<PositionComponent>().Value;
             pos += picComponent.Origin;
 
-            var size = new Vector2();
-
-            imageRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, picComponent.Order), size, picComponent.Color, picComponent.ImageId);
+            imageRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, picComponent.Order), Vector2.One, picComponent.Color, picComponent.ImageId);
         }
 
         #endregion Private Methods

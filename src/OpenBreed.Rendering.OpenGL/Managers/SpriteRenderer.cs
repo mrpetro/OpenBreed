@@ -34,7 +34,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public void Render(Vector3 pos, Vector2 size, Color4 color, int atlasId, int imageId)
+        public void Render(Vector3 pos, Vector2 scale, Color4 color, int atlasId, int imageId)
         {
             var spriteAtlas = spriteMan.InternalGetById(atlasId);
             var vbo = spriteAtlas.data[imageId].Vbo;
@@ -43,7 +43,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             try
             {
-                primitiveRenderer.DrawSprite(spriteAtlas.Texture, vbo, pos, size, color);
+                primitiveRenderer.DrawSprite(
+                    spriteAtlas.Texture,
+                    vbo,
+                    pos,
+                    scale,
+                    color);
             }
             finally
             {

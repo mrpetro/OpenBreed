@@ -82,6 +82,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -422,6 +423,36 @@ namespace OpenBreed.Sandbox
 
         #region Private Methods
 
+        private void LuaConsoleInput(IScriptMan scriptMan)
+        {
+            var command = default(string);
+
+            do
+            {
+                Console.SetCursorPosition(0, Console.BufferHeight - 1);
+                Console.Write("Command: ");
+                command = Console.ReadLine();
+
+                if(string.Equals(command, "EXIT", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    break;
+                };
+
+                try
+                {
+                    scriptMan.RunString(command);
+                }
+
+                catch (NLua.Exceptions.LuaException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            while (true);
+
+            Exit();
+        }
+
         [STAThread]
         private static void Main(string[] args)
         {
@@ -743,6 +774,12 @@ namespace OpenBreed.Sandbox
             //}, singleTime: true);
 
             OnEngineInitialized();
+            StartLuaConsoleInput();
+        }
+
+        private void StartLuaConsoleInput()
+        {
+            Task.Run(() => LuaConsoleInput(GetManager<IScriptMan>()));
         }
 
         private void InitLua()
