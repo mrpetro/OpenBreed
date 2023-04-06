@@ -1596,25 +1596,25 @@
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/1">
 					<DataRef>Assets.COMP1.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.COMPUTER.LBM</PaletteRef>
+						<PaletteRef>Palettes.COMMON_A</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/2">
 					<DataRef>Assets.COMP2.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.COMPUTER.LBM</PaletteRef>
+						<PaletteRef>Palettes.COMMON_A</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/3">
 					<DataRef>Assets.COMP3.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.COMPUTER.LBM</PaletteRef>
+						<PaletteRef>Palettes.COMMON_A</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Computer/Font">
 					<DataRef>Assets.COMPFONT.SPR</DataRef>
 					<PaletteRefs>
-						<PaletteRef>Palettes.COMPUTER.LBM</PaletteRef>
+						<PaletteRef>Palettes.COMMON_A</PaletteRef>
 					</PaletteRefs>
 				</SpriteSetFromSPR>
 				<SpriteSetFromSPR Id="Vanilla/Common/Status">

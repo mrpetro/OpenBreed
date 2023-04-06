@@ -5,12 +5,12 @@
 			<Name>AmmoBar</Name>
 		</Metadata>
 		<Position X="$(posX)" Y="$(posY)" />
-		<Text>
-			<Text>01</Text>
-			<Offset X="0" Y="0" />
-			<Color R="1.0" G="1.0" B="1.0" A="1.0" />
-			<FontName>StatusBar</FontName>
+		<Sprite>
+			<AtlasName>StatusBarPixel</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Origin X="0" Y="0" />
+			<Scale X="32" Y="1" />	
 			<Order>100</Order>
-		</Text>
+		</Sprite>
     </Components>
 </EntityTemplate>

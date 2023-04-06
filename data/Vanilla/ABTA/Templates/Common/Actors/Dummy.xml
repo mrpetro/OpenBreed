@@ -53,6 +53,10 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
+		<Health>
+			<Maximum>64</Maximum>
+			<Current>64</Current>
+		</Health>
 		<Motion></Motion>
 		<EntityEmitter>
 		</EntityEmitter>
