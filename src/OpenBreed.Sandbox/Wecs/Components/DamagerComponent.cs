@@ -15,7 +15,7 @@ namespace OpenBreed.Sandbox.Wecs.Components
         /// <summary>
         /// Damage distributions
         /// </summary>
-        public List<DamageDistribution> Distributions { get; } = new List<DamageDistribution>();
+        public List<DamageInfliction> Inflictions { get; } = new List<DamageInfliction>();
 
         #endregion Public Properties
     }
@@ -40,11 +40,11 @@ namespace OpenBreed.Sandbox.Wecs.Components
         #endregion Protected Methods
     }
 
-    public class DamageDistribution
+    public class DamageInfliction
     {
         #region Public Constructors
 
-        public DamageDistribution(
+        public DamageInfliction(
             int amount,
             ICollection<int> targets)
         {

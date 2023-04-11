@@ -43,7 +43,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         {
             var damageComponent = entity.Get<DamagerComponent>();
 
-            var toDistribute = damageComponent.Distributions;
+            var toDistribute = damageComponent.Inflictions;
 
             for (int i = 0; i < toDistribute.Count; i++)
             {
@@ -53,7 +53,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             toDistribute.Clear();
         }
 
-        private void Inflict(IEntity damagingEntity, DamageDistribution damageDistribution)
+        private void Inflict(IEntity damagingEntity, DamageInfliction damageDistribution)
         {
             for (int i = 0; i < damageDistribution.Targets.Length; i++)
             {
@@ -79,8 +79,8 @@ namespace OpenBreed.Sandbox.Wecs.Systems
                 return;
             }
 
-            healthComponent.Current -= damage;
-            eventsMan.Raise(null, new DamagedEvent(targetEntityId, damage, damagingEntity.Id));
+            healthComponent.Value -= damage;
+            eventsMan.Raise(targetEntity, new DamagedEvent(targetEntityId, damage, damagingEntity.Id));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
+using OpenBreed.Sandbox.Wecs.Events;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenTK.Windowing.Common;
@@ -13,6 +14,22 @@ namespace OpenBreed.Sandbox.Extensions
 {
     public static class TriggerExtensions
     {
+        public static void OnDamagedEntity(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, DamagedEvent> action, bool singleTime = false)
+        {
+            triggerMan.EventsMan.Subscribe<DamagedEvent>(ConditionalAction);
+
+            void ConditionalAction(object sender, DamagedEvent args)
+            {
+                if (!Equals(entity, sender))
+                    return;
+
+                if (singleTime)
+                    triggerMan.EventsMan.Unsubscribe<DamagedEvent>(ConditionalAction);
+
+                action.Invoke(entity, args);
+            }
+        }
+
         public static void AnyKeyPressed(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, ControlFireChangedEventArgs> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<ControlFireChangedEventArgs>(ConditionalAction);

@@ -34,7 +34,7 @@ namespace OpenBreed.Sandbox.Extensions
         public static void InflictDamage(this IEntity entity, int amount, int targetEntityId)
         {
             var damageComponent = entity.Get<DamagerComponent>();
-            damageComponent.Distributions.Add(new DamageDistribution(amount, new[] { targetEntityId }));
+            damageComponent.Inflictions.Add(new DamageInfliction(amount, new[] { targetEntityId }));
         }
 
         public static void CreateSlowdown(this IEntityFactory entityFactory, IWorldMan worldMan, IEntity entity, int worldId, int ox, int oy)

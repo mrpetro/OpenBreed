@@ -47,7 +47,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         {
             var healthComponent = entity.Get<HealthComponent>();
 
-            if (healthComponent.Current > 0)
+            if (healthComponent.Value > 0)
             {
                 return;
             }

@@ -15,16 +15,21 @@ using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Sandbox.Wecs.Components;
+using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
+using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Scripting;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -191,8 +196,30 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem<SpriteSystem>();
             builder.AddSystem<TextSystem>();
             builder.AddSystem<PaletteSystem>();
+            builder.AddSystem<ScriptRunningSystem>();
         }
 
+        private void BindHealth(IEntity statusBarEntity)
+        {
+            var player1Entity = entityMan.GetByTag("Players/P1").FirstOrDefault();
+
+            if (player1Entity is null)
+                return;
+
+            var controlledEntityId = player1Entity.GetControlledEntityId();
+            var controlledEntity = entityMan.GetById(controlledEntityId);
+
+            triggerMan.OnDamagedEntity(controlledEntity, (s, a) =>
+            {
+                var spriteComponent = statusBarEntity.Get<SpriteComponent>();
+
+                var percent = controlledEntity.Get<HealthComponent>().GetPercent();
+
+                spriteComponent.Scale = new Vector2((int)(64 * percent), 1);
+            });
+        }
+
+       
         private void Setup(IWorld world)
         {
             var hudCamera = cameraHelper.CreateCamera("Camera.GameHud", 0, 0, 320, 240);
@@ -203,40 +230,42 @@ namespace OpenBreed.Sandbox.Worlds
 
                 worldMan.RequestAddEntity(hudCamera, world.Id);
 
-                var p1StatusBar = hudHelper.CreateHudElement("StatusBarP1", "P1.StatusBar", -160, 109);
+                var p1StatusBar = hudHelper.CreateHudElement("StatusBarP1", "Hud/StatusBar/P1", -160, 109);
                 worldMan.RequestAddEntity(p1StatusBar, world.Id);
 
-                var p1AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P1.AmmoBar", 40, 115);
+                var p1AmmoBar = hudHelper.CreateHudElement("AmmoBar", "Hud/AmmoBar/P1", 40, 115);
                 worldMan.RequestAddEntity(p1AmmoBar, world.Id);
 
-                var p1HealthBar = hudHelper.CreateHudElement("HealthBar", "P1.HealthBar", -128, 115);
+                var p1HealthBar = hudHelper.CreateHudElement("HealthBar", "Hud/HealthBar/P1", -128, 115);
                 worldMan.RequestAddEntity(p1HealthBar, world.Id);
 
-                var p1LivesCounter = hudHelper.CreateHudElement("LivesCounter", "P1.LivesCounter", -24, 120);
+                BindHealth(p1HealthBar);
+
+                var p1LivesCounter = hudHelper.CreateHudElement("LivesCounter", "Hud/LivesCounter/P1", -24, 120);
                 worldMan.RequestAddEntity(p1LivesCounter, world.Id);
 
-                var p1AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "P1.AmmoCounter", 80, 120);
+                var p1AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "Hud/AmmoCounter/P1", 80, 120);
                 worldMan.RequestAddEntity(p1AmmoCounter, world.Id);
 
-                var p1KeysCounter = hudHelper.CreateHudElement("KeysCounter", "P1.KeysCounter", 128, 120);
+                var p1KeysCounter = hudHelper.CreateHudElement("KeysCounter", "Hud/KeysCounter/P1", 128, 120);
                 worldMan.RequestAddEntity(p1KeysCounter, world.Id);
 
-                var p2StatusBar = hudHelper.CreateHudElement("StatusBarP2", "P2.StatusBar", -160, -120);
+                var p2StatusBar = hudHelper.CreateHudElement("StatusBarP2", "Hud/StatusBar/P2", -160, -120);
                 worldMan.RequestAddEntity(p2StatusBar, world.Id);
 
-                var p2AmmoBar = hudHelper.CreateHudElement("AmmoBar", "P2.AmmoBar", 40, -114);
+                var p2AmmoBar = hudHelper.CreateHudElement("AmmoBar", "Hud/AmmoBar/P2", 40, -114);
                 worldMan.RequestAddEntity(p2AmmoBar, world.Id);
 
-                var p2HealthBar = hudHelper.CreateHudElement("HealthBar", "P2.HealthBar", -128, -114);
+                var p2HealthBar = hudHelper.CreateHudElement("HealthBar", "Hud/HealthBar/P2", -128, -114);
                 worldMan.RequestAddEntity(p2HealthBar, world.Id);
 
-                var p2LivesCounter = hudHelper.CreateHudElement("LivesCounter", "P2.LivesCounter", -24, -109);
+                var p2LivesCounter = hudHelper.CreateHudElement("LivesCounter", "Hud/LivesCounter/P2", -24, -109);
                 worldMan.RequestAddEntity(p2LivesCounter, world.Id);
 
-                var p2AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "P2.AmmoCounter", 80, -109);
+                var p2AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "Hud/AmmoCounter/P2", 80, -109);
                 worldMan.RequestAddEntity(p2AmmoCounter, world.Id);
 
-                var p2KeysCounter = hudHelper.CreateHudElement("KeysCounter", "P2.KeysCounter", 128, -109);
+                var p2KeysCounter = hudHelper.CreateHudElement("KeysCounter", "Hud/KeysCounter/P2", 128, -109);
                 worldMan.RequestAddEntity(p2KeysCounter, world.Id);
 
                 var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();

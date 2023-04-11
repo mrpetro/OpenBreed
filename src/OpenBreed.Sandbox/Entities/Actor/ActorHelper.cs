@@ -104,58 +104,24 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return entity;
         }
 
-        public IEntity CreateDummyActor(string name, Vector2 pos)
+
+
+        public IEntity CreatePlayerActor(string name, Vector2 pos)
         {
-            var actor = CreateDummy(name, pos);
+            var actor = CreateActor(name, pos);
             actor.CreateTimer("CooldownDelay");
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             actor.Add(new InventoryComponent(16));
-
-            var p1Controller = entityMan.GetByTag("Controllers.P1").First();
-
-            p1Controller.Get<ControllerComponent>().ControlledEntityId = actor.Id;
-
-            return actor;
-        }
-
-        public IEntity CreatePlayerActor(string name, Vector2 pos)
-        {
-            var actor = CreateActor(name, pos);
-
-            var p1Controller = entityMan.GetByTag("Controllers.P1").First();
-            p1Controller.Get<ControllerComponent>().ControlledEntityId = actor.Id;
-
-
-            //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
-            //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
-            actor.Add(new InventoryComponent(16));
-
-            //var p1 = playersMan.GetByName("P1");
-
-            //actor.Add(new WalkingInputComponent(p1.Id, 0));
-            //actor.Add(new AttackInputComponent(p1.Id, 0));
-            //actor.Add(new WalkingControlComponent());
-            //actor.Add(new AttackControlComponent());
+            actor.Add(new CreditsComponent(0));
 
             return actor;
         }
 
         public IEntity CreateActor(string name, Vector2 pos)
         {
-            var actor = entityFactory.Create(@"ABTA\Templates\Common\Actors\John")
-                .SetParameter("startX", pos.X)
-                .SetParameter("startY", pos.Y)
-                .SetTag(name)
-                .Build();
-
-            return actor;
-        }
-
-        public IEntity CreateDummy(string name, Vector2 pos)
-        {
-            var actor = entityFactory.Create(@"ABTA\Templates\Common\Actors\Dummy")
+            var actor = entityFactory.Create($@"ABTA\Templates\Common\Actors\{name}")
                 .SetParameter("startX", pos.X)
                 .SetParameter("startY", pos.Y)
                 .SetTag(name)
@@ -167,13 +133,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
         #endregion Public Methods
 
         #region Internal Methods
-
-        internal void AddHero(IWorld world, int ix, int iy)
-        {
-            var playerActor = CreatePlayerActor("John", new Vector2(16 * ix, 16 * iy));
-
-            worldMan.RequestAddEntity(playerActor, world.Id);
-        }
 
         #endregion Internal Methods
 

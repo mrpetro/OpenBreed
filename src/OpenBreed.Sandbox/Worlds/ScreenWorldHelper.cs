@@ -6,6 +6,7 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Control;
@@ -23,6 +24,7 @@ using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
+using System.Numerics;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -103,9 +105,9 @@ namespace OpenBreed.Sandbox.Worlds
             //builder.AddSystem(core.CreateTextSystem().Build());
         }
 
-        public IEntity CreateController(string player)
+        public IEntity CreatePlayer(string player)
         {
-            var p1Controller = entityMan.Create($"Controllers.{player}");
+            var player1Entity = entityMan.Create($"Players/{player}");
 
             var thrustControl = new ThrustControlComponent();
             thrustControl.UpCode = (int)Keys.Up;
@@ -120,11 +122,11 @@ namespace OpenBreed.Sandbox.Worlds
             actionControl.Mappings.Add(new ControlMapping((int)Keys.PageDown, GameActions.PreviousWeapon));
             actionControl.Mappings.Add(new ControlMapping((int)Keys.PageUp, GameActions.NextWeapon));
 
-            p1Controller.Add(actionControl);
-            p1Controller.Add(thrustControl);
-            p1Controller.Add(new ControllerComponent());
+            player1Entity.Add(actionControl);
+            player1Entity.Add(thrustControl);
+            player1Entity.Add(new ControllerComponent());
 
-            return p1Controller;
+            return player1Entity;
         }
 
         public IWorld CreateWorld()
@@ -142,7 +144,7 @@ namespace OpenBreed.Sandbox.Worlds
             gameCommentator.CreateTimer("SpeechDelay");
             gameCommentator.CreateTimer("MissionDelay");
 
-            var p1Controller = CreateController("P1");
+            var player1Entity = CreatePlayer("P1");
 
 
             scriptMan.Expose("Commentator", gameCommentator);
@@ -169,7 +171,7 @@ namespace OpenBreed.Sandbox.Worlds
                     worldMan.RequestAddEntity(gameHudViewport, world.Id);
                     worldMan.RequestAddEntity(debugHudViewport, world.Id);
                     worldMan.RequestAddEntity(textViewport, world.Id);
-                    worldMan.RequestAddEntity(p1Controller, world.Id);
+                    worldMan.RequestAddEntity(player1Entity, world.Id);
                 }, singleTime: true);
 
 

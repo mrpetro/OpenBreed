@@ -1,9 +1,13 @@
 ﻿using OpenBreed.Wecs.Components;
-using OpenBreed.Wecs.Components.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Wecs.Components
 {
-    public interface IHealthComponentTemplate : IComponentTemplate
+    public interface IAmmoComponentTemplate : IComponentTemplate
     {
         #region Public Properties
 
@@ -13,9 +17,9 @@ namespace OpenBreed.Sandbox.Wecs.Components
         #endregion Public Properties
     }
 
-    public class HealthComponent : IEntityComponent
+    public class AmmoComponent : IEntityComponent
     {
-        public HealthComponent(
+        public AmmoComponent(
             int maximumValue,
             int value)
         {
@@ -28,17 +32,14 @@ namespace OpenBreed.Sandbox.Wecs.Components
         public int MaximumValue { get; set; }
         public int Value { get; set; }
 
-
-        public float GetPercent() => (float)Value / (float)MaximumValue;
-
         #endregion Public Properties
     }
 
-    public sealed class HealthComponentFactory : ComponentFactoryBase<IHealthComponentTemplate>
+    public sealed class AmmoComponentFactory : ComponentFactoryBase<IAmmoComponentTemplate>
     {
         #region Internal Constructors
 
-        public HealthComponentFactory()
+        public AmmoComponentFactory()
         {
         }
 
@@ -46,9 +47,9 @@ namespace OpenBreed.Sandbox.Wecs.Components
 
         #region Protected Methods
 
-        protected override IEntityComponent Create(IHealthComponentTemplate template)
+        protected override IEntityComponent Create(IAmmoComponentTemplate template)
         {
-            return new HealthComponent(
+            return new AmmoComponent(
                 template.MaximumValue,
                 template.Value);
         }

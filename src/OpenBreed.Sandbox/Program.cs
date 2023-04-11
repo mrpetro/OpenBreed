@@ -548,7 +548,12 @@ namespace OpenBreed.Sandbox
             return new InterleavedStereoModule(moduleFilePath);
         }
 
-        private void LoadGameWorld()
+        private void InitPlayers()
+        {
+
+        }
+
+        private void InitGameWorld()
         {
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
             var cameraHelper = GetManager<CameraHelper>();
@@ -596,7 +601,11 @@ namespace OpenBreed.Sandbox
             //Follow John actor
             //var johnPlayerEntity = entityMan.GetByTag("John").First();
 
-            var johnPlayerEntity = actorHelper.CreateDummyActor("John", new Vector2(0, 0));
+            var player1Entity = entityMan.GetByTag("Players/P1").First();
+
+            var johnPlayerEntity = actorHelper.CreatePlayerActor("John", new Vector2(0, 0));
+
+            player1Entity.SetControlledEntity(johnPlayerEntity.Id);
 
             scriptMan.Expose("JohnPlayer", johnPlayerEntity);
 
@@ -678,9 +687,12 @@ namespace OpenBreed.Sandbox
             gameViewport.SetViewportCamera(playerCamera.Id);
 
             //Follow John actor
-            //var johnPlayerEntity = entityMan.GetByTag("John").First();
 
-            var johnPlayerEntity = actorHelper.CreateDummyActor("John", new Vector2(0, 0));
+            var player1Entity = entityMan.GetByTag("Players/P1").First();
+
+            var johnPlayerEntity = actorHelper.CreatePlayerActor("John", new Vector2(0, 0));
+
+            player1Entity.SetControlledEntity(johnPlayerEntity.Id);
 
             scriptMan.Expose("JohnPlayer", johnPlayerEntity);
 
@@ -756,7 +768,10 @@ namespace OpenBreed.Sandbox
             GetManager<IScriptMan>().Expose("Factory", GetManager<IEntityFactory>());
 
             //LoadSandboxWorld(40, 40);
-            LoadGameWorld();
+
+            InitPlayers();
+
+            InitGameWorld();
 
             gameHudWorldHelper.Create();
             smartCardScreenWorldHelper.Create();
