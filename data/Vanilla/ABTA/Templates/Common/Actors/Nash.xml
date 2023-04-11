@@ -2,7 +2,7 @@
 <EntityTemplate>
     <Components>
 		<Metadata>
-			<Name>Actor</Name>
+			<Name>Nash</Name>
 		</Metadata>
 		<Timer>
 		</Timer>
@@ -14,6 +14,8 @@
 		<Script>
 			<ScriptId>Vanilla/Common/Actor</ScriptId>
 		</Script>
+		<SoundPlayer>		
+		</SoundPlayer>
 		<Animation>
 			<States>
 				<State>
@@ -54,8 +56,8 @@
 			</Fixtures>
 		</Body>
 		<Health>
-			<Maximum>64</Maximum>
-			<Current>64</Current>
+			<MaximumValue>64</MaximumValue>
+			<Value>64</Value>
 		</Health>
 		<Motion></Motion>
 		<EntityEmitter>
@@ -66,13 +68,5 @@
 			<Origin X="18" Y="18" />
 			<Order>100</Order>
 		</Sprite>
-		<Text>
-			<Text>Hero</Text>
-			<Offset X="0" Y="32" />
-			<Color R="255" G="255" B="255" A="255" />
-			<FontName>Arial</FontName>
-			<FontSize>6</FontSize>
-			<Order>0</Order>
-		</Text>
     </Components>
 </EntityTemplate>

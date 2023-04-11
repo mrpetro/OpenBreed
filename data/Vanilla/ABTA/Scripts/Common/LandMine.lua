@@ -1,7 +1,8 @@
 ﻿local function Explode(mineEntity, actorEntity, projection)
 
 	local stampId = Stamps:GetByName("Vanilla/L1/MineCrater").Id
-
+    local pos = mineEntity:GetPosition()
+	
 	mineEntity:PutStamp(stampId, 0)
 
 	local soundId = Sounds:GetByName("Vanilla/Common/LandMine/Explosion")
@@ -10,6 +11,8 @@
 
 	mineEntity:StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
 		:SetOption("flavor", "Big")
+        :SetOption("startX", pos.X + 8)
+        :SetOption("startY", pos.Y + 8)
 		:Finish()
 
 	for i = -1,1,1 
@@ -29,14 +32,17 @@
 		end
 	end
 
+    if(actorEntity:HasHealth())
+    then
+        mineEntity:InflictDamage(10, actorEntity.Id)
+    end
+
 	Logging:Info("Boom!")
 end
 
 local function CheckExplode(mineEntity, actorEntity)
 
-    local metadata = actorEntity:GetMetadata()
-
-	if(metadata.Name ~= "Actor") then
+	if(not(actorEntity:HasHealth())) then
 		return
 	end
 

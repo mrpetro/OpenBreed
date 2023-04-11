@@ -9,8 +9,8 @@
 		<Timer>
 		</Timer>
 		<Health>
-			<Maximum>100</Maximum>
-			<Current>100</Current>
+			<MaximumValue>100</MaximumValue>
+			<Value>100</Value>
 		</Health>
 		<SoundPlayer>		
 		</SoundPlayer>

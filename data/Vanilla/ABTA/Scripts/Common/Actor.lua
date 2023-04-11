@@ -182,8 +182,6 @@ end
 local function OnDirectionChanged(entity, args)
     local targetDirection = entity:GetTargetDirection()
     local direction = entity:GetDirection()
-    local metadata = entity:GetMetadata()
-    local className = metadata.Name
     local animDirName = AnimHelper.ToDirectionName(direction)
 
     local isMoving = entity:IsMoving()
@@ -196,7 +194,7 @@ local function OnDirectionChanged(entity, args)
         movementStateName = "Standing"
     end
         
-    local clip = Clips:GetByName("Vanilla/Common/" .. className .. "/" .. movementStateName .. "/" .. animDirName)
+    local clip = Clips:GetByName("Vanilla/Common/Actor/" .. movementStateName .. "/" .. animDirName)
 
     entity:PlayAnimation(0, clip.Id)
 end
@@ -204,8 +202,6 @@ end
 local function OnVelocityChanged(entity, args)
     local targetDirection = entity:GetTargetDirection()
     local direction = entity:GetDirection()
-    local metadata = entity:GetMetadata()
-    local className = metadata.Name
     local animDirName = AnimHelper.ToDirectionName(direction)
 
     local isMoving = entity:IsMoving()
@@ -214,12 +210,12 @@ local function OnVelocityChanged(entity, args)
     if(isMoving)
     then
         movementStateName = "Walking"
-        local clip = Clips:GetByName("Vanilla/Common/" .. className .. "/" .. movementStateName .. "/" .. animDirName)
+        local clip = Clips:GetByName("Vanilla/Common/Actor/" .. movementStateName .. "/" .. animDirName)
         entity:PlayAnimation(0, clip.Id)
     else
         movementStateName = "Standing"
 
-        local clip = Clips:GetByName("Vanilla/Common/" .. className .. "/" .. movementStateName .. "/" .. animDirName)
+        local clip = Clips:GetByName("Vanilla/Common/Actor/" .. movementStateName .. "/" .. animDirName)
 
         entity:StopAnimation(0)
     end
@@ -231,6 +227,14 @@ local function ShowMission(actorEntity)
     local gameWorld = Worlds:GetWorld(actorEntity)
     local missionEntity = Entities:GetMission(gameWorld.Id)
     missionEntity:TryInvoke(Scripting, Logging, "OnShow", actorEntity)
+end
+
+local function Die(entity)
+   
+    local soundId = Sounds:GetByName("Vanilla/Common/Hero/Dying")
+    entity:EmitSound(soundId)
+
+    Logging:Info("Player Died!")
 end
 
 local function OnInit(entity)
@@ -251,6 +255,12 @@ local function OnInit(entity)
         entity,
         OnVelocityChanged,
         false)
+		
+    Triggers:OnExpunge(
+        entity,
+        Die,
+        true)	
+		
 end
 
 return {
