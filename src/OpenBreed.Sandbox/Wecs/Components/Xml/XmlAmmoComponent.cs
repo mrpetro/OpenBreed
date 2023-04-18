@@ -10,12 +10,15 @@ using System.Xml.Serialization;
 namespace OpenBreed.Sandbox.Wecs.Components.Xml
 {
     [XmlRoot("Ammo")]
-    public class XmlAmmoComponent : XmlComponentTemplate, IHealthComponentTemplate
+    public class XmlAmmoComponent : XmlComponentTemplate, IAmmoComponentTemplate
     {
-        [XmlElement("MaximumValue")]
-        public int MaximumValue { get; set; }
+        [XmlElement("MaximumRoundsCount")]
+        public int MaximumRoundsCount { get; set; }
 
-        [XmlElement("Value")]
-        public int Value { get; set; }
+        [XmlElement("RoundsCount")]
+        public int RoundsCount { get; set; }
+
+        [XmlElement("MagazinesCount")]
+        public int MagazinesCount { get; set; }
     }
 }

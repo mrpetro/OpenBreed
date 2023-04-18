@@ -145,13 +145,7 @@ namespace OpenBreed.Sandbox.Extensions
         public static void GiveItem(this IEntity entity, int itemId, int quantity = 1)
         {
             var inventoryCmp = entity.Get<InventoryComponent>();
-
-            var itemSlot = inventoryCmp.GetItemSlot(itemId);
-
-            if (itemSlot is null)
-                itemSlot = inventoryCmp.GetFirstEmptySlot();
-
-            itemSlot.AddItem(itemId, quantity);
+            inventoryCmp.ToAdd.Add((itemId, quantity));
         }
 
         public static void SetPositionToExit(this IEntity target,

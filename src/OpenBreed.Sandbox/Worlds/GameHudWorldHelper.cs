@@ -17,6 +17,7 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Rendering;
@@ -58,6 +59,7 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
         private readonly ITextureMan textureMan;
         private readonly ISpriteMan spriteMan;
+        private readonly ItemsMan itemsMan;
 
         #endregion Private Fields
 
@@ -80,7 +82,8 @@ namespace OpenBreed.Sandbox.Worlds
             IDataLoaderFactory dataLoaderFactory,
             SpriteAtlasDataProvider spriteAtlasDataProvider,
             ITextureMan textureMan,
-            ISpriteMan spriteMan)
+            ISpriteMan spriteMan,
+            ItemsMan itemsMan)
         {
             this.systemFactory = systemFactory;
             this.renderableFactory = renderableFactory;
@@ -100,6 +103,7 @@ namespace OpenBreed.Sandbox.Worlds
             this.spriteAtlasDataProvider = spriteAtlasDataProvider;
             this.textureMan = textureMan;
             this.spriteMan = spriteMan;
+            this.itemsMan = itemsMan;
         }
 
         #endregion Public Constructors
@@ -166,6 +170,7 @@ namespace OpenBreed.Sandbox.Worlds
                                      .AddCharacterFromSprite('7', "Vanilla/Common/Status", 9)
                                      .AddCharacterFromSprite('8', "Vanilla/Common/Status", 10)
                                      .AddCharacterFromSprite('9', "Vanilla/Common/Status", 11)
+                                     .AddCharacterFromSprite('+', "Vanilla/Common/Status", 12)
                                      .Build();
 
 
@@ -199,27 +204,85 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem<ScriptRunningSystem>();
         }
 
-        private void BindHealth(IEntity statusBarEntity)
+        private void BindHealthBar(IEntity statusBarEntity, IEntity targetActor)
         {
-            var player1Entity = entityMan.GetByTag("Players/P1").FirstOrDefault();
-
-            if (player1Entity is null)
-                return;
-
-            var controlledEntityId = player1Entity.GetControlledEntityId();
-            var controlledEntity = entityMan.GetById(controlledEntityId);
-
-            triggerMan.OnDamagedEntity(controlledEntity, (s, a) =>
+            triggerMan.OnDamagedEntity(targetActor, (s, a) =>
             {
                 var spriteComponent = statusBarEntity.Get<SpriteComponent>();
 
-                var percent = controlledEntity.Get<HealthComponent>().GetPercent();
+                var percent = targetActor.Get<HealthComponent>().GetPercent();
 
                 spriteComponent.Scale = new Vector2((int)(64 * percent), 1);
             });
         }
 
-       
+        private void BindAmmoBar(IEntity statusBarEntity, IEntity targetActor)
+        {
+            triggerMan.OnInventoryChanged(targetActor, (s, a) =>
+            {
+                var spriteComponent = statusBarEntity.Get<SpriteComponent>();
+
+                var percent = targetActor.Get<AmmoComponent>().GetRoundsPercent();
+
+                spriteComponent.Scale = new Vector2((int)(32 * percent), 1);
+            });
+        }
+
+        private void BindLivesCounter(IEntity statusCounterEntity, IEntity targetActor)
+        {
+            triggerMan.OnDamagedEntity(targetActor, (s, a) =>
+            {
+                var livesCount = targetActor.Get<LivesComponent>().Value;
+                statusCounterEntity.SetText(0, livesCount.ToString().PadLeft(2, '0'));
+            });
+        }
+
+        private void BindAmmoCounter(IEntity statusCounterEntity, IEntity targetActor)
+        {
+            triggerMan.OnInventoryChanged(targetActor, (s, a) =>
+            {
+                if (a.ItemId != ItemTypes.Ammo)
+                    return;
+
+                var inventoryComponent = targetActor.Get<InventoryComponent>();
+
+                var slot = inventoryComponent.GetItemSlot(ItemTypes.Ammo);
+                var quantity = slot.GetItemQuantity(ItemTypes.Ammo);
+
+                if(quantity > 9)
+                    statusCounterEntity.SetText(0, "+");
+                else
+                    statusCounterEntity.SetText(0, quantity.ToString());
+            });
+        }
+
+        private void BindKeysCounter(IEntity statusCounterEntity, IEntity targetActor)
+        {
+            triggerMan.OnInventoryChanged(targetActor, (s, a) =>
+            {
+                if (a.ItemId != ItemTypes.KeycardStandard)
+                    return;
+
+                var inventoryComponent = targetActor.Get<InventoryComponent>();
+
+                var slot = inventoryComponent.GetItemSlot(ItemTypes.KeycardStandard);
+                var quantity = slot.GetItemQuantity(ItemTypes.KeycardStandard);
+
+                statusCounterEntity.SetText(0, quantity.ToString().PadLeft(2, '0'));
+            });
+        }
+
+        private IEntity GetPlayerControlledEntity(string playerName)
+        {
+            var player1Entity = entityMan.GetByTag($"Players/{playerName}").FirstOrDefault();
+
+            if (player1Entity is null)
+                return null;
+
+            var controlledEntityId = player1Entity.GetControlledEntityId();
+            return entityMan.GetById(controlledEntityId);
+        }
+
         private void Setup(IWorld world)
         {
             var hudCamera = cameraHelper.CreateCamera("Camera.GameHud", 0, 0, 320, 240);
@@ -238,8 +301,6 @@ namespace OpenBreed.Sandbox.Worlds
 
                 var p1HealthBar = hudHelper.CreateHudElement("HealthBar", "Hud/HealthBar/P1", -128, 115);
                 worldMan.RequestAddEntity(p1HealthBar, world.Id);
-
-                BindHealth(p1HealthBar);
 
                 var p1LivesCounter = hudHelper.CreateHudElement("LivesCounter", "Hud/LivesCounter/P1", -24, 120);
                 worldMan.RequestAddEntity(p1LivesCounter, world.Id);
@@ -270,6 +331,17 @@ namespace OpenBreed.Sandbox.Worlds
 
                 var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
                 hudViewport.SetViewportCamera(hudCamera.Id);
+
+                var p1Actor = GetPlayerControlledEntity("P1");
+
+                if (p1Actor is not null)
+                {
+                    BindHealthBar(p1HealthBar, p1Actor);
+                    BindAmmoBar(p1AmmoBar, p1Actor);
+                    BindLivesCounter(p1LivesCounter, p1Actor);
+                    BindAmmoCounter(p1AmmoCounter, p1Actor);
+                    BindKeysCounter(p1KeysCounter, p1Actor);
+                }
 
             }, singleTime: true);
 

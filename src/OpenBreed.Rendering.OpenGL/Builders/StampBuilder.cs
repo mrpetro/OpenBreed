@@ -46,31 +46,36 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             return new TileStamp(this);
         }
 
-        public void SetName(string name)
+        public IStampBuilder SetName(string name)
         {
             this.name = name;
+            return this;
         }
 
-        public void SetSize(int width, int height)
+        public IStampBuilder SetSize(int width, int height)
         {
             this.width = width;
             this.height = height;
+            return this;
         }
 
-        public void SetOrigin(int originX, int originY)
+        public IStampBuilder SetOrigin(int originX, int originY)
         {
             this.originX = originX;
             this.originY = originY;
+            return this;
         }
 
-        public void ClearTiles()
+        public IStampBuilder ClearTiles()
         {
             cells.Clear();
+            return this;
         }
 
-        public void AddTile(int x, int y, int atlasId, int tileId)
+        public IStampBuilder AddTile(int x, int y, int atlasId, int tileId)
         {
             cells.Add(new StampCellData() { X = x, Y = y, AtlasId = atlasId, TileId = tileId });
+            return this;
         }
 
         #endregion Public Methods

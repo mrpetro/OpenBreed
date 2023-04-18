@@ -209,6 +209,7 @@ namespace OpenBreed.Sandbox
                 res = scriptMan.RunString(@"import('OpenBreed.Common', 'OpenBreed.Common.Extensions')");
 
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
+                res = scriptMan.RunString(@"import(' OpenBreed.Sandbox.Entities', ' OpenBreed.Sandbox.Entities')");
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox')");
 
                 res = scriptMan.RunString(@"EntityTypes = {}");

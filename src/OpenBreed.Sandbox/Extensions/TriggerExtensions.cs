@@ -30,6 +30,22 @@ namespace OpenBreed.Sandbox.Extensions
             }
         }
 
+        public static void OnInventoryChanged(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, InventoryChangedEvent> action, bool singleTime = false)
+        {
+            triggerMan.EventsMan.Subscribe<InventoryChangedEvent>(ConditionalAction);
+
+            void ConditionalAction(object sender, InventoryChangedEvent args)
+            {
+                if (!Equals(entity, sender))
+                    return;
+
+                if (singleTime)
+                    triggerMan.EventsMan.Unsubscribe<InventoryChangedEvent>(ConditionalAction);
+
+                action.Invoke(entity, args);
+            }
+        }
+
         public static void AnyKeyPressed(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, ControlFireChangedEventArgs> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<ControlFireChangedEventArgs>(ConditionalAction);

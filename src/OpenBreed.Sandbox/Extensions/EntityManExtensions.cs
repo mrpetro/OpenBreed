@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
@@ -83,6 +84,27 @@ namespace OpenBreed.Sandbox.Extensions
         public static IEntity GetMissionScreenCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.MissionScreen").FirstOrDefault();
+        }
+
+        public static IEntity GetControllerPlayer(this IEntityMan entityMan, IEntity controlledEntity)
+        {
+            var player1Entity = entityMan.GetByTag("Players/P1").FirstOrDefault();
+
+            if(player1Entity is not null)
+            {
+                if (player1Entity.Get<ControllerComponent>().ControlledEntityId == controlledEntity.Id)
+                    return player1Entity;
+            }
+
+            var player2Entity = entityMan.GetByTag("Players/P2").FirstOrDefault();
+
+            if (player2Entity is not null)
+            {
+                if (player2Entity.Get<ControllerComponent>().ControlledEntityId == controlledEntity.Id)
+                    return player2Entity;
+            }
+
+            return null;
         }
 
         public static IEntity GetPlayerCamera(this IEntityMan entityMan, IEntity playerEntity)

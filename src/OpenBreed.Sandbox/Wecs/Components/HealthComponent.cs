@@ -7,8 +7,8 @@ namespace OpenBreed.Sandbox.Wecs.Components
     {
         #region Public Properties
 
-        int Value { get; }
-        int MaximumValue { get; }
+        int RoundsCount { get; }
+        int MaximumRoundsCount { get; }
 
         #endregion Public Properties
     }
@@ -49,8 +49,8 @@ namespace OpenBreed.Sandbox.Wecs.Components
         protected override IEntityComponent Create(IHealthComponentTemplate template)
         {
             return new HealthComponent(
-                template.MaximumValue,
-                template.Value);
+                template.MaximumRoundsCount,
+                template.RoundsCount);
         }
 
         #endregion Protected Methods

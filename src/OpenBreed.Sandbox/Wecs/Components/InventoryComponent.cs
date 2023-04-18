@@ -32,6 +32,8 @@ namespace OpenBreed.Sandbox.Wecs.Components
 
         #region Public Methods
 
+        public int GetItemQuantity(int itemId) => items[itemId];
+
         public bool ContainsItem(int itemId) => items.ContainsKey(itemId);
 
         public bool IsEmpty => items.Count == 0;
@@ -85,6 +87,8 @@ namespace OpenBreed.Sandbox.Wecs.Components
         {
             return Slots.FirstOrDefault(slot => slot.IsEmpty);
         }
+
+        public List<(int, int)> ToAdd { get; } = new List<(int, int)>();
 
         #endregion Public Methods
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Wecs.Components
 {
-    public interface ILifesComponentTemplate : IComponentTemplate
+    public interface ILivesComponentTemplate : IComponentTemplate
     {
         #region Public Properties
 
@@ -16,9 +16,9 @@ namespace OpenBreed.Sandbox.Wecs.Components
         #endregion Public Properties
     }
 
-    public class LifesComponent : IEntityComponent
+    public class LivesComponent : IEntityComponent
     {
-        public LifesComponent(int value)
+        public LivesComponent(int value)
         {
             Value = value;
         }
@@ -30,11 +30,11 @@ namespace OpenBreed.Sandbox.Wecs.Components
         #endregion Public Properties
     }
 
-    public sealed class LifesComponentFactory : ComponentFactoryBase<ILifesComponentTemplate>
+    public sealed class LivesComponentFactory : ComponentFactoryBase<ILivesComponentTemplate>
     {
         #region Internal Constructors
 
-        public LifesComponentFactory()
+        public LivesComponentFactory()
         {
         }
 
@@ -42,9 +42,9 @@ namespace OpenBreed.Sandbox.Wecs.Components
 
         #region Protected Methods
 
-        protected override IEntityComponent Create(ILifesComponentTemplate template)
+        protected override IEntityComponent Create(ILivesComponentTemplate template)
         {
-            return new LifesComponent(
+            return new LivesComponent(
                 template.Value);
         }
 

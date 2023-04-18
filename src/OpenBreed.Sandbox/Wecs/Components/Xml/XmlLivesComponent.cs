@@ -9,13 +9,10 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Sandbox.Wecs.Components.Xml
 {
-    [XmlRoot("Health")]
-    public class XmlHealthComponent : XmlComponentTemplate, IHealthComponentTemplate
+    [XmlRoot("Lives")]
+    public class XmlLivesComponent : XmlComponentTemplate, ILivesComponentTemplate
     {
-        [XmlElement("MaximumValue")]
-        public int MaximumRoundsCount { get; set; }
-
         [XmlElement("Value")]
-        public int RoundsCount { get; set; }
+        public int Value { get; set; }
     }
 }

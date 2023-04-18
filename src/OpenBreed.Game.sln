@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FDDE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wecs", "Wecs", "{6D181003-D8D4-46F6-9293-3B778CD94FBB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{E2B5FB9E-F179-4CA5-815E-55998F3A293B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Common.Tools", "..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj", "{2F6F29FC-0824-4EF8-BDD8-F209869F1518}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Model", "..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj", "{2BDD055C-CC15-4BF2-9AF2-4690A5C1C296}"

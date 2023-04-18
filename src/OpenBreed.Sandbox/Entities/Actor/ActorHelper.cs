@@ -112,9 +112,12 @@ namespace OpenBreed.Sandbox.Entities.Actor
             actor.CreateTimer("CooldownDelay");
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
-            //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
+            actor.Add(new EquipmentComponent(
+                new []{
+                    new EquipmentSlot("Torso"),
+                    new EquipmentSlot("Hands")
+                }));
             actor.Add(new InventoryComponent(16));
-            actor.Add(new CreditsComponent(0));
 
             return actor;
         }

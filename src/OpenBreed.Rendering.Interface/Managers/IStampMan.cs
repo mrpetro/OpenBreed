@@ -20,6 +20,13 @@
         ITileStamp GetByName(string name);
 
         /// <summary>
+        /// Checks if stamp with specified name exists
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>True if exists, false otherwise</returns>
+        bool Contains(string name);
+
+        /// <summary>
         /// Create a stamp
         /// </summary>
         /// <returns>Stamp builder</returns>

@@ -4,6 +4,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
@@ -42,6 +43,12 @@ namespace OpenBreed.Sandbox.Extensions
                 world,
                 sp.GetService<IWorldMan>(),
                 sp.GetService<IEntityMan>(),
+                sp.GetService<IEventsMan>(),
+                sp.GetService<ILogger>()));
+
+            systemFactory.RegisterSystem<ItemManagingSystem>((world) => new ItemManagingSystem(
+                world,
+                sp.GetService<ItemsMan>(),
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
         }
