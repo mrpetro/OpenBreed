@@ -1,4 +1,52 @@
-﻿local function Pickup(itemEntity, actorEntity, projection)
+﻿local pickups =
+{
+  [ItemTypes.Ammo] = {
+      Name = "Ammo"
+  },
+  [ItemTypes.CreditsSmall] = {
+      Name = "CreditsSmall"
+  },
+  [ItemTypes.CreditsBig] = {
+      Name = "CreditsBig"
+  },
+  [ItemTypes.MedkitSmall] = {
+      Name = "MedkitSmall"
+  },
+  [ItemTypes.MedkitBig] = {
+      Name = "MedkitBig"
+  },
+  [ItemTypes.KeycardStandard] = {
+      Name = "KeycardStandard"
+  }
+}
+
+local function GiveItem(itemId, actorEntry)
+
+    local item = pickups[itemId]
+
+    if(not(item))
+    then
+        return
+    end
+
+    Logging:Info("Picked up '" .. item.Name .. "'")
+
+end
+
+local function GiveItem(itemId, actorEntry)
+
+    local item = pickups[itemId]
+
+    if(not(item))
+    then
+        return
+    end
+
+    Logging:Info("Picked up '" .. item.Name .. "'")
+
+end
+
+local function Pickup(itemEntity, actorEntity, projection)
 
     local metaData = itemEntity:GetMetadata()
 
@@ -24,8 +72,12 @@
         return
     end
 
-    actorEntity:GiveItem(itemId, 1)
-    Logging:Info("Picked up '" .. itemName .. "'")
+
+    GiveItem(itemId, actorEntity)
+    --actorEntity:GiveItem(itemId, 1)
+	
+
+    --Logging:Info("Picked up '" .. itemName .. "'")
 
     if (metaData.Flavor ~= "Trigger")
     then

@@ -197,6 +197,15 @@
 				<FileDataSource Id="Extension/Scripts/Common/Projectiles/TrilazerGun.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\TrilazerGun.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Projectiles/Firewall.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\Firewall.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Projectiles/RefractionLazer.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\RefractionLazer.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Pickables/Ammo.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Pickables\Ammo.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Pickables/Credits.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Pickables\Credits.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Pickables/ExtraLife.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Pickables\ExtraLife.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Pickables/Medkit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Pickables\Medkit.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Pickables/AreaScanner.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Pickables\AreaScanner.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Pickables/PowerUp.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Pickables\PowerUp.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Pickables/Keycard.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Pickables\Keycard.lua" />
+				<FileDataSource Id="Extension/Scripts/Common/Pickables/SmartCard.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Pickables\SmartCard.lua" />
+
 				<FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
 				<FileDataSource Id="Extension/Scripts/Hud/Cursor.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\Cursor.lua" />
@@ -1110,6 +1119,30 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.Explosion.lua" DataSourceRef="Extension/Scripts/Common/Explosion.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Pickables.Ammo.lua" DataSourceRef="Extension/Scripts/Common/Pickables/Ammo.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Pickables.Credits.lua" DataSourceRef="Extension/Scripts/Common/Pickables/Credits.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Pickables.ExtraLife.lua" DataSourceRef="Extension/Scripts/Common/Pickables/ExtraLife.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Pickables.Medkit.lua" DataSourceRef="Extension/Scripts/Common/Pickables/Medkit.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Pickables.AreaScanner.lua" DataSourceRef="Extension/Scripts/Common/Pickables/AreaScanner.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Pickables.Keycard.lua" DataSourceRef="Extension/Scripts/Common/Pickables/Keycard.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Pickables.PowerUp.lua" DataSourceRef="Extension/Scripts/Common/Pickables/PowerUp.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.Common.Pickables.SmartCard.lua" DataSourceRef="Extension/Scripts/Common/Pickables/SmartCard.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.Hud.FpsUpdate.lua" DataSourceRef="Extension/Scripts/Hud/FpsUpdate.lua" FormatType="TEXT">
@@ -12071,6 +12104,30 @@
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/Common/Explosion">
 					<DataRef>Assets.Scripts.Common.Explosion.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Pickables/Ammo">
+					<DataRef>Assets.Scripts.Common.Pickables.Ammo.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Pickables/Credits">
+					<DataRef>Assets.Scripts.Common.Pickables.Credits.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Pickables/ExtraLife">
+					<DataRef>Assets.Scripts.Common.Pickables.ExtraLife.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Pickables/Medkit">
+					<DataRef>Assets.Scripts.Common.Pickables.Medkit.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Pickables/AreaScanner">
+					<DataRef>Assets.Scripts.Common.Pickables.AreaScanner.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Pickables/Keycard">
+					<DataRef>Assets.Scripts.Common.Pickables.Keycard.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Pickables/PowerUp">
+					<DataRef>Assets.Scripts.Common.Pickables.PowerUp.lua</DataRef>
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/Common/Pickables/SmartCard">
+					<DataRef>Assets.Scripts.Common.Pickables.SmartCard.lua</DataRef>
 				</ScriptFromFile>
 				<ScriptFromFile Id="Common/Hud/Fps/Update">
 					<DataRef>Assets.Scripts.Common.Hud.FpsUpdate.lua</DataRef>

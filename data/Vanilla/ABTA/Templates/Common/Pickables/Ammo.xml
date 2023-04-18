@@ -3,13 +3,12 @@
 	<Components>
 		<Metadata>
 			<Level>$(level)</Level>
-			<Name>Ammo</Name>
 			<Flavor>$(flavor)</Flavor>	
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>
 		<Script>
-			<ScriptId>Vanilla/Common/Item</ScriptId>
+			<ScriptId>Vanilla/Common/Pickables/Ammo</ScriptId>
 		</Script>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>

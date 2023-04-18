@@ -3,13 +3,12 @@
 	<Components>
 		<Metadata>
 			<Level>$(level)</Level>
-			<Name>KeycardStandard</Name>
 			<Flavor>$(flavor)</Flavor>
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>
 		<Script>
-			<ScriptId>Vanilla/Common/Item</ScriptId>
+			<ScriptId>Vanilla/Common/Pickables/Keycard</ScriptId>
 		</Script>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>

@@ -55,10 +55,6 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
-		<Health>
-			<MaximumValue>64</MaximumValue>
-			<Value>64</Value>
-		</Health>
 		<Motion></Motion>
 		<EntityEmitter>
 		</EntityEmitter>
@@ -68,5 +64,23 @@
 			<Origin X="18" Y="18" />
 			<Order>100</Order>
 		</Sprite>
+		<Health>
+			<MaximumValue>64</MaximumValue>
+			<Value>64</Value>
+		</Health>
+		<Credits>
+			<Value>0</Value>
+		</Credits>
+		<Lives>
+			<Value>3</Value>
+		</Lives>
+		<Ammo>
+			<MaximumRoundsCount>32</MaximumRoundsCount>
+			<RoundsCount>32</RoundsCount>
+			<MagazinesCount>3</MagazinesCount>
+		</Ammo>
+		<Keys>
+			<GeneralCount>15</GeneralCount>
+		</Keys>
     </Components>
 </EntityTemplate>
