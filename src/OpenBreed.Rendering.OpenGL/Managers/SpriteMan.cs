@@ -66,7 +66,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             if (names.TryGetValue(name, out SpriteAtlas result))
                 return result;
 
-            logger.Error($"Unable to find sprite with name '{name}'");
+            logger.Error($"Unable to find sprite atlas with name '{name}'");
 
             return null;
         }

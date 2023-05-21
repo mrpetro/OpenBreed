@@ -46,6 +46,11 @@ namespace OpenBreed.Sandbox.Extensions
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
+            systemFactory.RegisterSystem<LivesSystem>((world) => new LivesSystem(
+                world,
+                sp.GetService<IEventsMan>(),
+                sp.GetService<ILogger>()));
+
             systemFactory.RegisterSystem<ItemManagingSystem>((world) => new ItemManagingSystem(
                 world,
                 sp.GetService<ItemsMan>(),

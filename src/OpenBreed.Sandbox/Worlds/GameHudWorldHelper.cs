@@ -206,45 +206,56 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void BindHealthBar(IEntity statusBarEntity, IEntity targetActor)
         {
+            var spriteComponent = statusBarEntity.Get<SpriteComponent>();
+            var healthComponent = targetActor.Get<HealthComponent>();
+
+            var percent = healthComponent.GetPercent();
+            spriteComponent.Scale = new Vector2((int)(64 * percent), 1);
+
             triggerMan.OnDamagedEntity(targetActor, (s, a) =>
             {
-                var spriteComponent = statusBarEntity.Get<SpriteComponent>();
-
-                var percent = targetActor.Get<HealthComponent>().GetPercent();
-
+                var percent = healthComponent.GetPercent();
                 spriteComponent.Scale = new Vector2((int)(64 * percent), 1);
             });
         }
 
         private void BindAmmoBar(IEntity statusBarEntity, IEntity targetActor)
         {
+            var spriteComponent = statusBarEntity.Get<SpriteComponent>();
+            var ammoComponent = targetActor.Get<AmmoComponent>();
+
+            var percent = ammoComponent.GetRoundsPercent();
+            spriteComponent.Scale = new Vector2((int)(32 * percent), 1);
+
             triggerMan.OnInventoryChanged(targetActor, (s, a) =>
             {
-                var spriteComponent = statusBarEntity.Get<SpriteComponent>();
-
-                var percent = targetActor.Get<AmmoComponent>().GetRoundsPercent();
-
+                var percent = ammoComponent.GetRoundsPercent();
                 spriteComponent.Scale = new Vector2((int)(32 * percent), 1);
             });
         }
 
         private void BindLivesCounter(IEntity statusCounterEntity, IEntity targetActor)
         {
-            triggerMan.OnDamagedEntity(targetActor, (s, a) =>
+            var livesComponent = targetActor.Get<LivesComponent>();
+
+            var livesCount = livesComponent.Value;
+            statusCounterEntity.SetText(0, livesCount.ToString().PadLeft(2, '0'));
+
+            triggerMan.OnEntityLivesChanged(targetActor, (s, a) =>
             {
-                var livesCount = targetActor.Get<LivesComponent>().Value;
+                var livesCount = livesComponent.Value;
                 statusCounterEntity.SetText(0, livesCount.ToString().PadLeft(2, '0'));
             });
         }
 
         private void BindAmmoCounter(IEntity statusCounterEntity, IEntity targetActor)
         {
+            var inventoryComponent = targetActor.Get<InventoryComponent>();
+
             triggerMan.OnInventoryChanged(targetActor, (s, a) =>
             {
                 if (a.ItemId != ItemTypes.Ammo)
                     return;
-
-                var inventoryComponent = targetActor.Get<InventoryComponent>();
 
                 var slot = inventoryComponent.GetItemSlot(ItemTypes.Ammo);
                 var quantity = slot.GetItemQuantity(ItemTypes.Ammo);

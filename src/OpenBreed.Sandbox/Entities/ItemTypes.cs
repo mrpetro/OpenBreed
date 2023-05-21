@@ -19,6 +19,7 @@ namespace OpenBreed.Sandbox.Entities
         public static int SmartCard1 { get; private set; }
         public static int SmartCard2 { get; private set; }
         public static int SmartCard3 { get; private set; }
+        public static int ExtraLife { get; private set; }
 
         #endregion Public Properties
 
@@ -38,8 +39,7 @@ namespace OpenBreed.Sandbox.Entities
             SmartCard1 = itemsMan.RegisterItemType("SmartCard1");
             SmartCard2 = itemsMan.RegisterItemType("SmartCard2");
             SmartCard3 = itemsMan.RegisterItemType("SmartCard3");
-
-
+            ExtraLife = itemsMan.RegisterItemType("ExtraLife");
 
             KeycardSpecial = itemsMan.RegisterItemType("KeycardSpecial");
         }

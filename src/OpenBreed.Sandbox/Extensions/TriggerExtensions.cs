@@ -14,6 +14,22 @@ namespace OpenBreed.Sandbox.Extensions
 {
     public static class TriggerExtensions
     {
+        public static void OnEntityLivesChanged(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, LivesChangedEvent> action, bool singleTime = false)
+        {
+            triggerMan.EventsMan.Subscribe<LivesChangedEvent>(ConditionalAction);
+
+            void ConditionalAction(object sender, LivesChangedEvent args)
+            {
+                if (!Equals(entity, sender))
+                    return;
+
+                if (singleTime)
+                    triggerMan.EventsMan.Unsubscribe<LivesChangedEvent>(ConditionalAction);
+
+                action.Invoke(entity, args);
+            }
+        }
+
         public static void OnDamagedEntity(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, DamagedEvent> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<DamagedEvent>(ConditionalAction);

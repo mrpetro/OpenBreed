@@ -31,6 +31,16 @@ namespace OpenBreed.Sandbox.Extensions
             return entity.Contains<HealthComponent>();
         }
 
+        public static int GetLives(this IEntity entity)
+        {
+            return entity.Get<LivesComponent>().Value;
+        }
+
+        public static void AddLives(this IEntity entity, int value)
+        {
+            entity.Get<LivesComponent>().ToAdd.Add(value);
+        }
+
         public static void InflictDamage(this IEntity entity, int amount, int targetEntityId)
         {
             var damageComponent = entity.Get<DamagerComponent>();

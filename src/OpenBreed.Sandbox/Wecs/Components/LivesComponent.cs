@@ -27,6 +27,8 @@ namespace OpenBreed.Sandbox.Wecs.Components
 
         public int Value { get; set; }
 
+        public List<int> ToAdd { get; } = new List<int>();
+
         #endregion Public Properties
     }
 

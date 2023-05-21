@@ -31,6 +31,7 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
 
             builder.AddSystem<ItemManagingSystem>();
+            builder.AddSystem<LivesSystem>();
             builder.AddSystem<DamageOnHealthDistributionSystem>();
             builder.AddSystem<DestroyOnZeroHealthSystem>();
             builder.AddSystem<ExpungeSystem>();
