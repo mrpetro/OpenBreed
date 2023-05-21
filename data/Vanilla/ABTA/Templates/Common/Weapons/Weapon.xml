@@ -2,29 +2,32 @@
 <EntityTemplate>
     <Components>
 		<Metadata>
-			<Flavor>$(flavor)</Flavor>
+			<Name>Weapon</Name>
 		</Metadata>
 		<Timer>
 		</Timer>
+		<Script>
+			<ScriptId>Vanilla/Common/Weapon</ScriptId>
+		</Script>
 		<SoundPlayer>		
 		</SoundPlayer>
 		<Animation>
 			<States>
 				<State>
-					<Speed>5</Speed>
-					<Loop>false</Loop>		
+					<Speed>15</Speed>
+					<Loop>true</Loop>
 				</State>
 			</States>
 		</Animation>
 		<Position X="$(startX)" Y="$(startY)" />
-		<Script>
-			<ScriptId>Vanilla/Common/Explosion</ScriptId>
-		</Script>
+		<AngularPosition>
+			<Value>0</Value>
+		</AngularPosition>
+		<EntityEmitter>
+		</EntityEmitter>
 		<Sprite>
 			<AtlasName></AtlasName>
 			<ImageIndex>-1</ImageIndex>
-			<Origin X="0" Y="0" />
-			<Order>0</Order>
 		</Sprite>
     </Components>
 </EntityTemplate>

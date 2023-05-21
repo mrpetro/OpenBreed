@@ -27,7 +27,7 @@
 		</EntityEmitter>
 		<Sprite>
 			<AtlasName>Vanilla/Common/Resident</AtlasName>
-			<ImageIndex>23</ImageIndex>
+			<ImageIndex>-1</ImageIndex>
 			<Origin X="8" Y="8" />
 			<Order>0</Order>
 		</Sprite>

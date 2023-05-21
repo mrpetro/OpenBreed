@@ -9,7 +9,7 @@
 		<SoundPlayer>
 		</SoundPlayer>
 		<Script>
-			<ScriptId>Vanilla/Common/Item</ScriptId>
+			<ScriptId>Vanilla/Common/Pickables/Credits</ScriptId>
 		</Script>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
