@@ -27,7 +27,8 @@ namespace OpenBreed.Sandbox
         MoveLeft,
         MoveUp,
         MoveDown,
-        Fire
+        Fire,
+        SwitchWeapon
     }
 
     public static class GameActions

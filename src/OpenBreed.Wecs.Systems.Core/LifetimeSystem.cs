@@ -8,6 +8,9 @@ using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
+    /// <summary>
+    /// Updates entity life time and when it's down to zero, it removes it from the world.
+    /// </summary>
     [RequireEntityWith(typeof(LifetimeComponent))]
     public class LifetimeSystem : UpdatableSystemBase<LifetimeSystem>
     {
@@ -49,9 +52,8 @@ namespace OpenBreed.Wecs.Systems.Core
 
             lc.TimeLeft = 0.0f;
 
+            worldMan.RequestRemoveEntity(entity);
             RaiseLifetimeEndEvent(entity);
-
-            entity.Expunge();
         }
 
         #endregion Protected Methods

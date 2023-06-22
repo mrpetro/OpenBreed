@@ -10,27 +10,27 @@ namespace OpenBreed.Wecs.Systems.Core
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly HashSet<IEntity> entities = new HashSet<IEntity>();
 
         #endregion Private Fields
 
         #region Public Methods
 
-        public void Update(IWorldContext context)
+        public virtual void Update(IWorldContext context)
         {
             if (context.Paused)
             {
-                for (int i = 0; i < entities.Count; i++)
+                foreach (var entity in entities)
                 {
-                    if (entities[i].Contains<PauseImmuneComponent>())
-                        UpdateEntity(entities[i], context);
+                    if (entity.Contains<PauseImmuneComponent>())
+                        UpdateEntity(entity, context);
                 }
             }
             else
             {
-                for (int i = 0; i < entities.Count; i++)
+                foreach (var entity in entities)
                 {
-                    UpdateEntity(entities[i], context);
+                    UpdateEntity(entity, context);
                 }
             }
         }

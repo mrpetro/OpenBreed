@@ -30,6 +30,15 @@ namespace OpenBreed.Sandbox.Extensions
             }
         }
 
+        public static void OnEntityAction(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityActionEvent<PlayerActions>> action, bool singleTime = false)
+        {
+            triggerMan.CreateTrigger<EntityActionEvent<PlayerActions>>(
+                (args) => Equals(entity.Id, args.EntityId),
+                (args) => action.Invoke(entity, args),
+                singleTime);
+        }
+
+
         public static void OnDamagedEntity(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, DamagedEvent> action, bool singleTime = false)
         {
             triggerMan.EventsMan.Subscribe<DamagedEvent>(ConditionalAction);

@@ -12,6 +12,7 @@ using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Audio.Events;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,14 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(HealthComponent))]
-    internal class DestroyOnZeroHealthSystem : UpdatableSystemBase<DestroyOnZeroHealthSystem>
+    internal class DieOnZeroHealthSystem : UpdatableSystemBase<DieOnZeroHealthSystem>
     {
         private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
 
-        internal DestroyOnZeroHealthSystem(
+        internal DieOnZeroHealthSystem(
             IWorld world,
             IWorldMan worldMan,
             IEntityMan entityMan,
@@ -51,8 +52,8 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             {
                 return;
             }
-
-            entity.Expunge();
+            
+            worldMan.RequestRemoveEntity(entity);
         }
     }
 }

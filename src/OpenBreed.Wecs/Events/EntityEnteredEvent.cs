@@ -5,11 +5,11 @@ namespace OpenBreed.Wecs.Events
     /// <summary>
     /// Event args for event that occurs when is added to world
     /// </summary>
-    public class EntityEnteredEventArgs : EntityEvent
+    public class EntityEnteredEvent : EntityEvent
     {
         #region Public Constructors
 
-        public EntityEnteredEventArgs(int entityId, int worldId)
+        public EntityEnteredEvent(int entityId, int worldId)
             : base(entityId)
         {
             WorldId = worldId;

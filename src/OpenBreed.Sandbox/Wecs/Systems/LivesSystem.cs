@@ -42,22 +42,30 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         {
             var livesComponent = entity.Get<LivesComponent>();
 
+            var previousLivesNo = livesComponent.Value;
+
             var toAdd = livesComponent.ToAdd;
 
             if (toAdd.Any())
             {
-                var previousLivesNo = livesComponent.Value;
-
                 for (int i = 0; i < toAdd.Count; i++)
-                {
                     livesComponent.Value += toAdd[i];
-                }
 
                 toAdd.Clear();
-
-                if (previousLivesNo != livesComponent.Value)
-                    eventsMan.Raise(entity, new LivesChangedEvent(entity.Id, livesComponent.Value));
             }
+
+            var toRemove = livesComponent.ToRemove;
+
+            if (toRemove.Any())
+            {
+                for (int i = 0; i < toRemove.Count; i++)
+                    livesComponent.Value -= toRemove[i];
+
+                toRemove.Clear();
+            }
+
+            if (previousLivesNo != livesComponent.Value)
+                eventsMan.Raise(entity, new LivesChangedEvent(entity.Id, livesComponent.Value));
         }
 
         #endregion Protected Methods

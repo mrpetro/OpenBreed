@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace OpenBreed.Wecs.Extensions
 {
@@ -15,17 +16,27 @@ namespace OpenBreed.Wecs.Extensions
     {
         public static void OnEntityEnteredWorld2(this ITriggerMan triggerMan, IEntity entity, Action action, bool singleTime = false)
         {
-            triggerMan.CreateTrigger<EntityEnteredEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
+            triggerMan.CreateTrigger<EntityEnteredEvent>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
         }
 
         public static void OnEntityEnteredWorld(this ITriggerMan triggerMan, IEntity entity, Action action, bool singleTime = false)
         {
-            triggerMan.CreateTrigger<EntityEnteredEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
+            triggerMan.CreateTrigger<EntityEnteredEvent>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
         }
 
-        public static void OnEntityLeftWorld(this ITriggerMan triggerMan, IEntity entity, Action action, bool singleTime = false)
+        public static void OnEntityLeavingWorld(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityLeavingEvent> action, bool singleTime = false)
         {
-            triggerMan.CreateTrigger<EntityLeftEventArgs>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
+            triggerMan.CreateTrigger<EntityLeavingEvent>(
+                (args) => Equals(entity.Id, args.EntityId),
+                (args) => action.Invoke(entity, args),
+            singleTime);
+        }
+
+        public static void OnEntityLeftWorld(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityLeftEvent> action, bool singleTime = false)
+        {
+            triggerMan.CreateTrigger<EntityLeftEvent>(
+                (args) => Equals(entity.Id, args.EntityId),
+                (args) => action.Invoke(entity, args), singleTime);
         }
 
         public static void OnWorldInitialized(this ITriggerMan triggerMan, IWorld world, Action action, bool singleTime = false)

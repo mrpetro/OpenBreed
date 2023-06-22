@@ -1,25 +1,26 @@
 ﻿using OpenBreed.Wecs.Events;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Control.Events
 {
     /// <summary>
     /// Entity event on action 
     /// </summary>
-    public class EntityActionEvent : EntityEvent
+    public class EntityActionEvent<TActionType> : EntityEvent where TActionType : Enum
     {
         #region Public Constructors
 
-        public EntityActionEvent(int entityId, string actionType)
+        public EntityActionEvent(int entityId, TActionType actionCode)
             : base(entityId)
         {
-            ActionType = actionType;
+            ActionCode = actionCode;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string ActionType { get; }
+        public TActionType ActionCode { get; }
 
         #endregion Public Properties
     }

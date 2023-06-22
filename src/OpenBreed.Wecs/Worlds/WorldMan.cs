@@ -75,6 +75,9 @@ namespace OpenBreed.Wecs.Worlds
         /// <returns>World object if found, null otherwise</returns>
         public IWorld GetByName(string name)
         {
+            if (name is null)
+                return null;
+
             int worldId;
             if (!namesToIdsLookup.TryGetValue(name, out worldId))
                 return null;
@@ -134,7 +137,8 @@ namespace OpenBreed.Wecs.Worlds
                 entitiesToRemove.Add(entity.WorldId, entities);
             }
 
-            entities.Add(entity);
+            if(entities.Add(entity))
+                eventsMan.Raise(null, new EntityLeavingEvent(entity.Id));
         }
 
         /// <summary>
@@ -255,12 +259,12 @@ namespace OpenBreed.Wecs.Worlds
 
         private void OnEntityAdded(IEntity entity, int worldId)
         {
-            eventsMan.Raise(entity, new EntityEnteredEventArgs(entity.Id, worldId));
+            eventsMan.Raise(entity, new EntityEnteredEvent(entity.Id, worldId));
         }
 
         private void OnEntityRemoved(IEntity entity, int worldId)
         {
-            eventsMan.Raise(entity, new EntityLeftEventArgs(entity.Id, worldId));
+            eventsMan.Raise(entity, new EntityLeftEvent(entity.Id, worldId));
         }
 
         private void RemovePendingEntities()

@@ -231,7 +231,7 @@ namespace OpenBreed.Sandbox
                 codeProvider.Register(PlayerActions.Fire);
             });
 
-            hostBuilder.SetupBinder((keyBinder, sp) =>
+            hostBuilder.SetupDefaultActionTriggerBinder((keyBinder, sp) =>
             {
                 keyBinder.Bind(PlayerActions.MoveLeft, Keys.Left);
                 keyBinder.Bind(PlayerActions.MoveRight, Keys.Right);
@@ -666,18 +666,18 @@ namespace OpenBreed.Sandbox
                 loader.Load(dbAnim.Id, palette);
 
 
-            var worldBuilder = worldMan.Create();
-            worldBuilder.SetName("Dummy");
-            worldBuilder.SetSize(width, height);
-            worldBuilder.AddModule(dataGridFactory.Create<IEntity>(width, height));
-            worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(width, height, 16));
-            worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
-            worldBuilder.AddModule(tileGridFactory.CreateGrid(width, height, 1, 16));
-            worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
+            var gameWorldBuilder = worldMan.Create();
+            gameWorldBuilder.SetName("Dummy");
+            gameWorldBuilder.SetSize(width, height);
+            gameWorldBuilder.AddModule(dataGridFactory.Create<IEntity>(width, height));
+            gameWorldBuilder.AddModule(broadphaseGridFactory.CreateStatic(width, height, 16));
+            gameWorldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
+            gameWorldBuilder.AddModule(tileGridFactory.CreateGrid(width, height, 1, 16));
+            gameWorldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
-            worldBuilder.SetupGameWorldSystems();
+            gameWorldBuilder.SetupGameWorldSystems();
 
-            var gameWorld = worldBuilder.Build();
+            var gameWorld = gameWorldBuilder.Build();
 
             //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
             var playerCamera = cameraHelper.CreateCamera("Camera.Player", 0, 0, 320, 240);
@@ -711,6 +711,15 @@ namespace OpenBreed.Sandbox
             });
         }
 
+        private void InitLimboWorld()
+        {
+            var worldMan = GetManager<IWorldMan>();
+            var worldBuilder = worldMan.Create();
+            worldBuilder.SetName("Limbo");
+            worldBuilder.SetupLimboWorldSystems();
+
+            var gameWorld = worldBuilder.Build();
+        }
 
         private void OnLoad()
         {
@@ -771,7 +780,7 @@ namespace OpenBreed.Sandbox
             //LoadSandboxWorld(40, 40);
 
             InitPlayers();
-
+            InitLimboWorld();
             InitGameWorld();
 
             gameHudWorldHelper.Create();

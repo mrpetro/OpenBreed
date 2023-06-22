@@ -255,7 +255,7 @@ namespace OpenBreed.Sandbox.Entities
 
         private Context RemoveFromWorld(Context context)
         {
-            triggerMan.OnEntityLeftWorld(context.actorEntity, () =>
+            triggerMan.OnEntityLeftWorld(context.actorEntity, (s,a) =>
             {
                 LoadWorld(context);
             }, singleTime: true);

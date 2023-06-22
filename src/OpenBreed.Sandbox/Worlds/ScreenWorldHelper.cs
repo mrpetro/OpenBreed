@@ -89,9 +89,7 @@ namespace OpenBreed.Sandbox.Worlds
         public void AddSystems(IWorldBuilder builder)
         {
             //Input Stage
-            builder.AddSystem<ActorMovementByPlayerControlSystem>();
-            builder.AddSystem<ActionControlSystem>();
-
+            builder.AddSystem<ActorMovementByPlayerInputsSystem>();
 
             //Video
 
@@ -109,21 +107,15 @@ namespace OpenBreed.Sandbox.Worlds
         {
             var player1Entity = entityMan.Create($"Players/{player}");
 
-            var thrustControl = new ThrustControlComponent();
-            thrustControl.UpCode = (int)Keys.Up;
-            thrustControl.DownCode = (int)Keys.Down;
-            thrustControl.LeftCode = (int)Keys.Left;
-            thrustControl.RightCode = (int)Keys.Right;
+            var playerInputs = new PlayerInputsComponent();
+            playerInputs.Up = Keys.Up;
+            playerInputs.Down =Keys.Down;
+            playerInputs.Left = Keys.Left;
+            playerInputs.Right = Keys.Right;
+            playerInputs.Fire = Keys.RightControl;
+            playerInputs.SwitchWeapon = Keys.PageDown;
 
-            var actionControl = new ActionControlComponent();
-            actionControl.Mappings.Add(new ControlMapping((int)Keys.RightControl, GameActions.Fire));
-            actionControl.Mappings.Add(new ControlMapping((int)Keys.RightShift, GameActions.Secondary));
-
-            actionControl.Mappings.Add(new ControlMapping((int)Keys.PageDown, GameActions.PreviousWeapon));
-            actionControl.Mappings.Add(new ControlMapping((int)Keys.PageUp, GameActions.NextWeapon));
-
-            player1Entity.Add(actionControl);
-            player1Entity.Add(thrustControl);
+            player1Entity.Add(playerInputs);
             player1Entity.Add(new ControllerComponent());
 
             return player1Entity;
@@ -144,7 +136,11 @@ namespace OpenBreed.Sandbox.Worlds
             gameCommentator.CreateTimer("SpeechDelay");
             gameCommentator.CreateTimer("MissionDelay");
 
+
+
             var player1Entity = CreatePlayer("P1");
+
+
 
 
             scriptMan.Expose("Commentator", gameCommentator);

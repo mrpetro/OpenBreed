@@ -18,6 +18,11 @@ namespace OpenBreed.Sandbox.Extensions
     {
         #region Public Methods
 
+        public static void SetupLimboWorldSystems(this IWorldBuilder builder)
+        {
+            builder.AddSystem<ResurrectionSystem>();
+        }
+
         public static void SetupGameWorldSystems(this IWorldBuilder builder)
         {
             //Update Stage
@@ -33,8 +38,7 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<ItemManagingSystem>();
             builder.AddSystem<LivesSystem>();
             builder.AddSystem<DamageOnHealthDistributionSystem>();
-            builder.AddSystem<DestroyOnZeroHealthSystem>();
-            builder.AddSystem<ExpungeSystem>();
+            builder.AddSystem<DieOnZeroHealthSystem>();
             builder.AddSystem<LifetimeSystem>();
             builder.AddSystem<EntityEmitterSystem>();
 

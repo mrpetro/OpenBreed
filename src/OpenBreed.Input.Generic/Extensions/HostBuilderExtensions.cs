@@ -16,13 +16,13 @@ namespace OpenBreed.Input.Generic.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupBinder(this IHostBuilder hostBuilder, Action<IActionBinder, IServiceProvider> action)
+        public static void SetupDefaultActionTriggerBinder(this IHostBuilder hostBuilder, Action<DefaultActionTriggerBinder, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IActionBinder>((sp) =>
+                services.AddSingleton<IActionTriggerBinder>((sp) =>
                 {
-                var keyBinder = default(IActionBinder);
+                var keyBinder = new DefaultActionTriggerBinder(sp.GetService<IInputsMan>());
                     action.Invoke(keyBinder, sp);
                     return keyBinder;
                 });

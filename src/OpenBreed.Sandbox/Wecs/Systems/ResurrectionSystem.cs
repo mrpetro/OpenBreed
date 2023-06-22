@@ -1,7 +1,10 @@
-﻿using OpenBreed.Sandbox.Wecs.Components;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -13,12 +16,20 @@ using System.Threading.Tasks;
 namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
-        typeof(HealthComponent),
+        typeof(ResurrectableComponent),
         typeof(LivesComponent))]
-    public class ResurrectionSystem : UpdatableSystemBase<ResurrectionSystem>
+    public class ResurrectionSystem : EntityEventSystem<ResurrectionSystem, EntityEnteredEvent>
     {
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        public ResurrectionSystem(IEventsMan eventsMan) : base(eventsMan)
         {
+        }
+
+        protected override void UpdateEntity(IEntity entity, EntityEnteredEvent e)
+        {
+            var livesComponent = entity.Get<LivesComponent>();
+
+            if (livesComponent.Value > 0)
+                return;
 
         }
     }

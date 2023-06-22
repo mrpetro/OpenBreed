@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Wecs.Systems.Core.Events
+namespace OpenBreed.Wecs.Events
 {    
     /// <summary>  
-    /// Event fired when entity is expunged from world  
+    /// Event fired when entity is leaving the world  
     /// </summary>
-    public class ExpungeEvent : EntityEvent
+    public class EntityLeavingEvent : EntityEvent
     {
         #region Public Constructors
 
-        public ExpungeEvent(int entityId)
+        public EntityLeavingEvent(int entityId)
             : base(entityId)
         {
         }

@@ -5,9 +5,67 @@ using System;
 
 namespace OpenBreed.Input.Interface
 {
+    public class KeyDownEvent : EventArgs
+    {
+        #region Public Constructors
+
+        public KeyDownEvent()
+        {
+        }
+
+        #endregion Public Constructors
+    }
+
+    public class KeyUpEvent : EventArgs
+    {
+        #region Public Constructors
+
+        public KeyUpEvent()
+        {
+        }
+
+        #endregion Public Constructors
+    }
+
+    public class KeyboardStateEventArgs : EventArgs
+    {
+        #region Public Constructors
+
+        public KeyboardStateEventArgs(KeyboardState oldState, KeyboardState newState)
+        {
+            OldState = oldState;
+            NewState = newState;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public KeyboardState NewState { get; }
+        public KeyboardState OldState { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public bool IsKeyDown(Keys key)
+        {
+            return !OldState[key] && NewState[key];
+        }
+
+        public bool IsKeyUp(Keys key)
+        {
+            return OldState[key] && !NewState[key];
+        }
+
+        #endregion Public Methods
+    }
+
     public interface IInputsMan
     {
         #region Public Events
+
+        event EventHandler<KeyboardStateEventArgs> KeyboardStateChanged;
 
         event EventHandler<MouseMoveEventArgs> MouseMove;
 
@@ -44,27 +102,5 @@ namespace OpenBreed.Input.Interface
         bool IsPressed(int inputCode);
 
         #endregion Public Methods
-    }
-
-    public class KeyDownEvent : EventArgs
-    {
-        #region Public Constructors
-
-        public KeyDownEvent()
-        {
-        }
-
-        #endregion Public Constructors
-    }
-
-    public class KeyUpEvent : EventArgs
-    {
-        #region Public Constructors
-
-        public KeyUpEvent()
-        {
-        }
-
-        #endregion Public Constructors
     }
 }

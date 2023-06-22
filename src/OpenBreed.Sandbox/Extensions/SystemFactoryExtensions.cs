@@ -20,10 +20,11 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupGameSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
-            systemFactory.RegisterSystem<ActorMovementByPlayerControlSystem>((world) => new ActorMovementByPlayerControlSystem(
-                world,
+            systemFactory.RegisterSystem<ActorMovementByPlayerInputsSystem>((world) => new ActorMovementByPlayerInputsSystem(
+                sp.GetService<IInputsMan>(),
                 sp.GetService<IEntityMan>(),
-                sp.GetService<IInputsMan>()));
+                sp.GetService<IEventsMan>()));
+
             systemFactory.RegisterSystem<UnknownMapCellDisplaySystem>((world) => new UnknownMapCellDisplaySystem(
                 world,
                 sp.GetService<IPrimitiveRenderer>(),
@@ -39,7 +40,7 @@ namespace OpenBreed.Sandbox.Extensions
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<DestroyOnZeroHealthSystem>((world) => new DestroyOnZeroHealthSystem(
+            systemFactory.RegisterSystem<DieOnZeroHealthSystem>((world) => new DieOnZeroHealthSystem(
                 world,
                 sp.GetService<IWorldMan>(),
                 sp.GetService<IEntityMan>(),
@@ -50,6 +51,8 @@ namespace OpenBreed.Sandbox.Extensions
                 world,
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
+
+            systemFactory.RegisterSystem<ResurrectionSystem>((world) => new ResurrectionSystem(sp.GetService<IEventsMan>()));
 
             systemFactory.RegisterSystem<ItemManagingSystem>((world) => new ItemManagingSystem(
                 world,

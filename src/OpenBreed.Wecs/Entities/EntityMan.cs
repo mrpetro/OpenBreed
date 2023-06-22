@@ -26,7 +26,7 @@ namespace OpenBreed.Wecs.Entities
         {
             this.eventsMan = eventsMan;
 
-            this.eventsMan.Subscribe<EntityLeftEventArgs>(OnEntityLeftWorld);
+            this.eventsMan.Subscribe<EntityLeftEvent>(OnEntityLeftWorld);
         }
 
         #endregion Public Constructors
@@ -126,7 +126,7 @@ namespace OpenBreed.Wecs.Entities
             foundEntities.Add(entity);
         }
 
-        private void OnEntityLeftWorld(object sender, EntityLeftEventArgs e)
+        private void OnEntityLeftWorld(object sender, EntityLeftEvent e)
         {
             var entity = (IEntity)sender;
 
