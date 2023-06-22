@@ -139,18 +139,6 @@ local function FireBullet(entity)
 	Triggers:AfterDelay(entity, cooldownTimerId, TimeSpan.FromMilliseconds(1000 / currentWeapon.FireRate), CooldownFinish)
 end
 
-local function SwitchToPreviousWeapon(entity)
-    currentWeaponNo = currentWeaponNo - 1
-
-    if(currentWeaponNo < 1)
-    then
-        currentWeaponNo = 5
-    end
-
-    local currentWeapon = weapons[currentWeaponNo]
-    Logging:Info("Switching weapon to: " .. currentWeapon.Name)
-end
-
 local function SwitchToNextWeapon(entity)
     currentWeaponNo = currentWeaponNo + 1
 
@@ -165,17 +153,16 @@ end
 
 local actions =
 {
-  [GameActions.Fire] = FireBullet,
-  [GameActions.PreviousWeapon] = SwitchToPreviousWeapon,
-  [GameActions.NextWeapon] = SwitchToNextWeapon,
+  [PlayerActions.Fire] = FireBullet,
+  [PlayerActions.SwitchWeapon] = SwitchToNextWeapon,
 }
 
-local function CheckAction(entity, args)  
-    local func = actions[args.ActionType]
+local function CheckAction(entity, args)
+    local func = actions[args.ActionCode]
     if(func) then
         func(entity)
     else
-        Logging:Error("Missing implementation for action: " .. args.ActionType)
+        Logging:Error("Missing implementation for action: " .. args.ActionCode)
     end
 end
 
@@ -229,13 +216,50 @@ local function ShowMission(actorEntity)
     missionEntity:TryInvoke(Scripting, Logging, "OnShow", actorEntity)
 end
 
-local function Die(entity)
+local function SendToLimbo(entity)
    
+    Logging:Info("Sending to Limbo!") 
+   
+    local health = entity:GetHealth()
+   
+    if(health.Value > 0)
+	then
+		return
+	end
+   
+	local limboWorld = Worlds:GetByName("Limbo")
+	
+	Worlds:RequestAddEntity(entity, limboWorld.Id)
+end
+
+local function CheckDead(entity)
+   
+    local health = entity:GetHealth()
+   
+    if(health.Value > 0)
+	then
+		return
+	end
+   
+    local pos = entity:GetPosition()
+    entity:StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
+        :SetOption("flavor", "Small")
+        :SetOption("startX", pos.X)
+        :SetOption("startY", pos.Y)
+        :Finish()
+     
     local soundId = Sounds:GetByName("Vanilla/Common/Hero/Dying")
     entity:EmitSound(soundId)
 
     Logging:Info("Player Died!")
+	
+    Triggers:OnEntityLeftWorld(
+        entity,
+        SendToLimbo,
+        true)	
+
 end
+
 
 local function OnInit(entity)
 
@@ -256,10 +280,10 @@ local function OnInit(entity)
         OnVelocityChanged,
         false)
 		
-    Triggers:OnExpunge(
+    Triggers:OnEntityLeavingWorld(
         entity,
-        Die,
-        true)	
+        CheckDead,
+        false)
 		
 end
 

@@ -55,7 +55,7 @@ local function OnInit(entity)
         Explode,
         true)
 
-    Triggers:OnExpunge(
+    Triggers:OnLifetimeEnd(
         entity,
         Destroy,
         true)

@@ -13,12 +13,8 @@ local function Hit(projectileEntity, targetEntity, projection)
         projectileEntity:InflictDamage(10, targetEntity.Id)
     end
 
-    projectileEntity:Expunge()
-end
-
-local function Destroy(entity)
-
-     Entities:RequestDestroy(projectileEntity)
+	Worlds:RequestRemoveEntity(projectileEntity)
+    Entities:RequestDestroy(projectileEntity)
 
 end
 
@@ -27,11 +23,6 @@ local function OnInit(entity)
     local clipName = "Vanilla/Common/Explosion/Small"
     local animId = Clips:GetByName(clipName).Id
     entity:PlayAnimation(0, animId)
-
-    Triggers:OnExpunge(
-        entity,
-        Destroy,
-        true)
 
 end
 

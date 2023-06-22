@@ -62,30 +62,24 @@ namespace OpenBreed.Common.Tools.Collections
             {
                 if (id < 0 || id > items.Count - 1)
                 {
-                    value = default(T);
+                    value = default;
                     return false;
                 }
-                else
+
+                if (freeIdCache.Count == 0)
                 {
-                    if (freeIdCache.Count == 0)
-                    {
-                        value = items[id];
-                        return true;
-                    }
-                    else
-                    {
-                        if (freeIdCache.Contains(id))
-                        {
-                            value = default(T);
-                            return false;
-                        }
-                        else
-                        {
-                            value = items[id];
-                            return true;
-                        }
-                    }
+                    value = items[id];
+                    return true;
                 }
+
+                if (freeIdCache.Contains(id))
+                {
+                    value = default;
+                    return false;
+                }
+
+                value = items[id];
+                return true;
             }
         }
 
@@ -128,12 +122,10 @@ namespace OpenBreed.Common.Tools.Collections
                     items.Add(item);
                     return items.Count - 1;
                 }
-                else
-                {
-                    int freeId = (int)freeIdCache.Pop();
-                    items[freeId] = item;
-                    return freeId;
-                }
+
+                int freeId = (int)freeIdCache.Pop();
+                items[freeId] = item;
+                return freeId;
             }
         }
 

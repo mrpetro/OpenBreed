@@ -171,11 +171,11 @@ local actions =
 }
 
 local function CheckAction(entity, args)  
-    local func = actions[args.ActionType]
+    local func = actions[args.ActionCode]
     if(func) then
         func(entity)
     else
-        Logging:Error("Missing implementation for action: " .. args.ActionType)
+        Logging:Error("Missing implementation for action: " .. args.ActionCode)
     end
 end
 
@@ -256,7 +256,7 @@ local function OnInit(entity)
         OnVelocityChanged,
         false)
 		
-    Triggers:OnExpunge(
+    Triggers:OnEntityLeavingWorld(
         entity,
         Die,
         true)	

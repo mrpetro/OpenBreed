@@ -13,7 +13,8 @@ local function Hit(projectileEntity, targetEntity, projection)
         projectileEntity:InflictDamage(10, targetEntity.Id)
     end
 
-    projectileEntity:Expunge()
+	Worlds:RequestRemoveEntity(projectileEntity)
+    Entities:RequestDestroy(projectileEntity)
 end
 
 local function Explode(entity, args)
@@ -27,12 +28,6 @@ local function Explode(entity, args)
         :Finish()
 end
 
-local function Destroy(entity)
-
-     Entities:RequestDestroy(projectileEntity)
-
-end
-
 local function OnInit(entity)
 
     local dir = entity:GetThrust():Normalized()
@@ -44,11 +39,6 @@ local function OnInit(entity)
     Triggers:OnLifetimeEnd(
         entity,
         Explode,
-        true)
-
-    Triggers:OnExpunge(
-        entity,
-        Destroy,
         true)
 
 end

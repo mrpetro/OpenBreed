@@ -13,21 +13,11 @@ local function Hit(projectileEntity, targetEntity, projection)
         projectileEntity:InflictDamage(10, targetEntity.Id)
     end
 
-    projectileEntity:Expunge()
-end
-
-local function Destroy(entity)
-
-     Entities:RequestDestroy(projectileEntity)
-
+	Worlds:RequestRemoveEntity(projectileEntity)
+    Entities:RequestDestroy(projectileEntity)
 end
 
 local function OnInit(entity)
-
-    Triggers:OnExpunge(
-        entity,
-        Destroy,
-        true)
 
 end
 

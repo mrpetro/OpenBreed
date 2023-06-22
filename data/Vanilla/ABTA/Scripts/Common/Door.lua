@@ -208,7 +208,7 @@ end
 
 local function OnInit(entity)
 
-    Triggers:OnExpunge(
+    Triggers:OnEntityLeavingWorld(
         entity,
         Destroy,
         true)
