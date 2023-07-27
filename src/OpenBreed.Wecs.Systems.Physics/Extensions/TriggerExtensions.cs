@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using System;
 using System.Collections.Generic;
@@ -11,21 +12,11 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 {
     public static class TriggerExtensions
     {
-        public static void OnEntityDirectionChanged(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, DirectionChangedEventArgs> action, bool singleTime = false)
-        {
-            triggerMan.EventsMan.Subscribe<DirectionChangedEventArgs>(ConditionalAction);
-
-            void ConditionalAction(object sender, DirectionChangedEventArgs args)
-            {
-                if (!Equals(entity, sender))
-                    return;
-
-                if (singleTime)
-                    triggerMan.EventsMan.Unsubscribe<DirectionChangedEventArgs>(ConditionalAction);
-
-                action.Invoke(entity, args);
-            }
-        }
+        public static void OnEntityDirectionChanged(
+            this ITriggerMan triggerMan,
+            IEntity entity,
+            Action<IEntity, DirectionChangedEventArgs> action,
+            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
 
         public static void OnEntityDirectionChangedEx(this ITriggerMan triggerMan, IEntity entity, Func<IEntity, DirectionChangedEventArgs, bool> action)
         {
@@ -43,21 +34,11 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             }
         }
 
-        public static void OnEntityPositionChanged(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, PositionChangedEventArgs> action, bool singleTime = false)
-        {
-            triggerMan.EventsMan.Subscribe<PositionChangedEventArgs>(ConditionalAction);
-
-            void ConditionalAction(object sender, PositionChangedEventArgs args)
-            {
-                if (!Equals(entity, sender))
-                    return;
-
-                if (singleTime)
-                    triggerMan.EventsMan.Unsubscribe<PositionChangedEventArgs>(ConditionalAction);
-
-                action.Invoke(entity, args);
-            }
-        }
+        public static void OnEntityPositionChanged(
+            this ITriggerMan triggerMan,
+            IEntity entity,
+            Action<IEntity, PositionChangedEventArgs> action,
+            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
 
         public static void OnEntityPositionChanged(this ITriggerMan triggerMan, IEntity entity, Func<IEntity, PositionChangedEventArgs, bool> action)
         {

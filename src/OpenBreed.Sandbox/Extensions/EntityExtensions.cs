@@ -46,6 +46,11 @@ namespace OpenBreed.Sandbox.Extensions
             entity.Get<LivesComponent>().ToAdd.Add(value);
         }
 
+        public static void Resurect(this IEntity entity, int worldId)
+        {
+            entity.Set<ResurrectableComponent>(new ResurrectableComponent(worldId));
+        }
+
         public static void InflictDamage(this IEntity entity, int amount, int targetEntityId)
         {
             var damageComponent = entity.Get<DamagerComponent>();

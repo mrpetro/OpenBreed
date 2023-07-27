@@ -40,7 +40,7 @@ namespace OpenBreed.Sandbox.Extensions
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<DieOnZeroHealthSystem>((world) => new DieOnZeroHealthSystem(
+            systemFactory.RegisterSystem<DestroyOnZeroHealthSystem>((world) => new DestroyOnZeroHealthSystem(
                 world,
                 sp.GetService<IWorldMan>(),
                 sp.GetService<IEntityMan>(),

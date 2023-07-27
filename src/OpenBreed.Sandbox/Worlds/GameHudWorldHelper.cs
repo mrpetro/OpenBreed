@@ -212,7 +212,7 @@ namespace OpenBreed.Sandbox.Worlds
             var percent = healthComponent.GetPercent();
             spriteComponent.Scale = new Vector2((int)(64 * percent), 1);
 
-            triggerMan.OnDamagedEntity(targetActor, (s, a) =>
+            triggerMan.OnDamaged(targetActor, (s, a) =>
             {
                 var percent = healthComponent.GetPercent();
                 spriteComponent.Scale = new Vector2((int)(64 * percent), 1);

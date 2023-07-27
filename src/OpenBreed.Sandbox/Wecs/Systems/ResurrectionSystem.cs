@@ -31,6 +31,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             if (livesComponent.Value > 0)
                 return;
 
+
         }
     }
 }

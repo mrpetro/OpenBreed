@@ -16,7 +16,7 @@ namespace OpenBreed.Wecs.Entities
         private readonly HashSet<IEntity> entityByNoTagLookup = new HashSet<IEntity>();
         private readonly Dictionary<string, HashSet<IEntity>> entityByTagLookup = new Dictionary<string, HashSet<IEntity>>();
         private readonly IEventsMan eventsMan;
-        private readonly HashSet<IEntity> toDestory = new HashSet<IEntity>();
+        private readonly HashSet<IEntity> toErase = new HashSet<IEntity>();
 
         #endregion Private Fields
 
@@ -76,9 +76,9 @@ namespace OpenBreed.Wecs.Entities
             return Enumerable.Empty<IEntity>();
         }
 
-        public void RequestDestroy(IEntity entity)
+        public void RequestErase(IEntity entity)
         {
-            toDestory.Add(entity);
+            toErase.Add(entity);
         }
 
         public IEnumerable<IEntity> Where(Func<IEntity, bool> predicate)
@@ -130,11 +130,11 @@ namespace OpenBreed.Wecs.Entities
         {
             var entity = (IEntity)sender;
 
-            if (toDestory.Contains(entity))
+            if (toErase.Contains(entity))
             {
                 entities.RemoveById(entity.Id);
                 RemoveFromLookup(entity.Tag, entity);
-                toDestory.Remove(entity);
+                toErase.Remove(entity);
             }
         }
 

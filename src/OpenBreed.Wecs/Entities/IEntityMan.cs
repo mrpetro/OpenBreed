@@ -29,10 +29,10 @@ namespace OpenBreed.Wecs.Entities
         IEntity Create(string tag, List<IEntityComponent> initialComponents = null);
 
         /// <summary>
-        /// Request to destroy given entity
+        /// Request to erase given entity from existance
         /// </summary>
-        /// <param name="entity">Entity to destroy</param>
-        void RequestDestroy(IEntity entity);
+        /// <param name="entity">Entity to erase</param>
+        void RequestErase(IEntity entity);
 
         #endregion Public Methods
     }

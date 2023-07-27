@@ -38,7 +38,7 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<ItemManagingSystem>();
             builder.AddSystem<LivesSystem>();
             builder.AddSystem<DamageOnHealthDistributionSystem>();
-            builder.AddSystem<DieOnZeroHealthSystem>();
+            builder.AddSystem<DestroyOnZeroHealthSystem>();
             builder.AddSystem<LifetimeSystem>();
             builder.AddSystem<EntityEmitterSystem>();
 

@@ -24,14 +24,14 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(HealthComponent))]
-    internal class DieOnZeroHealthSystem : UpdatableSystemBase<DieOnZeroHealthSystem>
+    internal class DestroyOnZeroHealthSystem : UpdatableSystemBase<DestroyOnZeroHealthSystem>
     {
         private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
 
-        internal DieOnZeroHealthSystem(
+        internal DestroyOnZeroHealthSystem(
             IWorld world,
             IWorldMan worldMan,
             IEntityMan entityMan,
@@ -54,6 +54,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             }
             
             worldMan.RequestRemoveEntity(entity);
+            eventsMan.Raise(entity, new DestroyedEvent(entity.Id));
         }
     }
 }

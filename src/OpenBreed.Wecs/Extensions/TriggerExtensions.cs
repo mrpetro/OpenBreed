@@ -14,14 +14,28 @@ namespace OpenBreed.Wecs.Extensions
 {
     public static class TriggerExtensions
     {
-        public static void OnEntityEnteredWorld2(this ITriggerMan triggerMan, IEntity entity, Action action, bool singleTime = false)
+        public static void OnEvent<TEvent>(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TEvent> action, bool singleTime = false) where TEvent : EventArgs
         {
-            triggerMan.CreateTrigger<EntityEnteredEvent>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
+            triggerMan.EventsMan.Subscribe<TEvent>(ConditionalAction);
+
+            void ConditionalAction(object sender, TEvent args)
+            {
+                if (!Equals(entity, sender))
+                    return;
+
+                if (singleTime)
+                    triggerMan.EventsMan.Unsubscribe<TEvent>(ConditionalAction);
+
+                action.Invoke(entity, args);
+            }
         }
 
         public static void OnEntityEnteredWorld(this ITriggerMan triggerMan, IEntity entity, Action action, bool singleTime = false)
         {
-            triggerMan.CreateTrigger<EntityEnteredEvent>((args) => Equals(entity.Id, args.EntityId), (args) => action.Invoke(), singleTime);
+            triggerMan.CreateTrigger<EntityEnteredEvent>(
+                (args) => Equals(entity.Id, args.EntityId),
+                (args) => action.Invoke(),
+                singleTime);
         }
 
         public static void OnEntityLeavingWorld(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityLeavingEvent> action, bool singleTime = false)
@@ -29,19 +43,23 @@ namespace OpenBreed.Wecs.Extensions
             triggerMan.CreateTrigger<EntityLeavingEvent>(
                 (args) => Equals(entity.Id, args.EntityId),
                 (args) => action.Invoke(entity, args),
-            singleTime);
+                singleTime);
         }
 
         public static void OnEntityLeftWorld(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityLeftEvent> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<EntityLeftEvent>(
                 (args) => Equals(entity.Id, args.EntityId),
-                (args) => action.Invoke(entity, args), singleTime);
+                (args) => action.Invoke(entity, args),
+                singleTime);
         }
 
         public static void OnWorldInitialized(this ITriggerMan triggerMan, IWorld world, Action action, bool singleTime = false)
         {
-            triggerMan.CreateTrigger<WorldInitializedEventArgs>((args) => Equals(world.Id, args.WorldId), (args) => action.Invoke(), singleTime);
+            triggerMan.CreateTrigger<WorldInitializedEventArgs>(
+                (args) => Equals(world.Id, args.WorldId),
+                (args) => action.Invoke(),
+                singleTime);
         }
 
         public static ITriggerBuilder OnEntity(this ITriggerMan triggerMan, IEntity entity)
