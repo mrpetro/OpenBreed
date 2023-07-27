@@ -1,7 +1,7 @@
 ﻿
-local function Destroy(entity)
+local function Erase(entity)
     Worlds:RequestRemoveEntity(entity)
-	Entities:RequestDestroy(entity)
+	Entities:RequestErase(entity)
 end
 
 local function OnInit(entity)
@@ -17,7 +17,7 @@ local function OnInit(entity)
 
     --Triggers:OnEntityAnimFinished(
     --    entity,
-    --    Destroy,
+    --    Erase,
     --    true)
 	
 

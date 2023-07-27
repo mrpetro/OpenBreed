@@ -251,6 +251,12 @@ local function CheckDead(entity)
     local soundId = Sounds:GetByName("Vanilla/Common/Hero/Dying")
     entity:EmitSound(soundId)
 
+	-- Wait 3 seconds
+	
+	-- Appear
+	-- Enable grace period for 3 seconds
+
+
     Logging:Info("Player Died!")
 	
     Triggers:OnEntityLeftWorld(

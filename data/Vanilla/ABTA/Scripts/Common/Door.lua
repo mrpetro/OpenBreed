@@ -15,8 +15,8 @@ local function RemoveHorizontalDoorObstacle(doorCell)
     local nextDoorCellMeta = nextDoorCell:GetMetadata()
     nextDoorCellMeta.State = "Opened"
 
-    Entities:RequestDestroy(doorCell)
-    Entities:RequestDestroy(nextDoorCell)
+    Entities:RequestErase(doorCell)
+    Entities:RequestErase(nextDoorCell)
 
 end
 
@@ -35,8 +35,8 @@ local function RemoveVerticalDoorObstacle(doorCell)
     local nextDoorCellMeta = nextDoorCell:GetMetadata()
     nextDoorCellMeta.State = "Opened"
 
-    Entities:RequestDestroy(doorCell)
-    Entities:RequestDestroy(nextDoorCell)
+    Entities:RequestErase(doorCell)
+    Entities:RequestErase(nextDoorCell)
 
 end
 
@@ -180,7 +180,7 @@ local function DestroyDoor(doorCell, nextDoorCell, flavor)
 end
 
 
-local function Destroy(doorEntity)
+local function Erase(doorEntity)
    
     local doorCell = doorEntity:FindHorizontalDoorCell(Worlds)
 
@@ -210,7 +210,7 @@ local function OnInit(entity)
 
     Triggers:OnEntityLeavingWorld(
         entity,
-        Destroy,
+        Erase,
         true)
 
 end

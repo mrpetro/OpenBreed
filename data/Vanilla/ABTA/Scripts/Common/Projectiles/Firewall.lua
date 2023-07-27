@@ -14,7 +14,7 @@ local function Hit(projectileEntity, targetEntity, projection)
     end
 
 	Worlds:RequestRemoveEntity(projectileEntity)
-    Entities:RequestDestroy(projectileEntity)
+    Entities:RequestErase(projectileEntity)
 
 end
 

@@ -26,7 +26,7 @@
 			if(nextDoorCell ~= nil)
 			then
 				Worlds:RequestRemoveEntity(nextDoorCell)
-				Entities:RequestDestroy(nextDoorCell)
+				Entities:RequestErase(nextDoorCell)
 			end
 
 		end

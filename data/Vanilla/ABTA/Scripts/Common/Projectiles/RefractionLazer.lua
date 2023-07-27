@@ -36,9 +36,9 @@ local function Explode(entity, args)
         :Finish()
 end
 
-local function Destroy(entity)
+local function Erase(entity)
 
-     Entities:RequestDestroy(projectileEntity)
+     Entities:RequestErase(projectileEntity)
 
 end
 
@@ -57,7 +57,7 @@ local function OnInit(entity)
 
     Triggers:OnLifetimeEnd(
         entity,
-        Destroy,
+        Erase,
         true)
 
 end

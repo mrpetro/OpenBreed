@@ -174,7 +174,7 @@
         end
 
 	    Worlds:RequestRemoveEntity(entity)
-	    Entities:RequestDestroy(entity)
+	    Entities:RequestErase(entity)
     end
 
     if (tostring(actorEntity.State) == "SmartCardReading")

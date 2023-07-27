@@ -21,7 +21,7 @@
 	itemEntity:EmitSound(soundId)
 
     Worlds:RequestRemoveEntity(itemEntity)
-    Entities:RequestDestroy(itemEntity)
+    Entities:RequestErase(itemEntity)
 end
 
 return {

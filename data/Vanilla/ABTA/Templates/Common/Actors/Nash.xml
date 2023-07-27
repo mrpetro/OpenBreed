@@ -74,8 +74,6 @@
 		<Lives>
 			<Value>3</Value>
 		</Lives>
-		<Resurrectable>
-		</Resurrectable>
 		<Ammo>
 			<MaximumRoundsCount>32</MaximumRoundsCount>
 			<RoundsCount>32</RoundsCount>

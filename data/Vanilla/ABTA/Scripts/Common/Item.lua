@@ -103,7 +103,7 @@ local function Pickup(itemEntity, actorEntity, projection)
     end
 
     Worlds:RequestRemoveEntity(itemEntity)
-    Entities:RequestDestroy(itemEntity)
+    Entities:RequestErase(itemEntity)
 end
 
 return {
