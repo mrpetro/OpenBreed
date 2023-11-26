@@ -1,5 +1,6 @@
 ﻿
 local cooldownTimerId
+local delayTimerId
 local currentWeaponNo = 1
 local flamethrowerOffsetIndex = 0
 local fireReady = true
@@ -60,7 +61,7 @@ local weapons =
   }
 }
 
-local function CooldownFinish()
+local function CooldownFinish(entity, args)
     fireReady = true
 end
 
@@ -216,31 +217,42 @@ local function ShowMission(actorEntity)
     missionEntity:TryInvoke(Scripting, Logging, "OnShow", actorEntity)
 end
 
-local function SendToLimbo(entity)
-   
-    Logging:Info("Sending to Limbo!") 
-   
-    local health = entity:GetHealth()
-   
-    if(health.Value > 0)
-	then
-		return
-	end
-   
-	local limboWorld = Worlds:GetByName("Limbo")
+local function Resurrect(entity, args)
+	Logging:Info("Resurrect...")
+	entity:RestoreFillHealth()
+	entity:Resurrect()
 	
-	Worlds:RequestAddEntity(entity, limboWorld.Id)
 end
 
-local function CheckDead(entity)
-   
-    local health = entity:GetHealth()
-   
-    if(health.Value > 0)
-	then
-		return
-	end
-   
+local function Wait3Seconds(entity, args)
+	Logging:Info("Wait 3 seconds...")
+
+	Triggers:AfterDelay(
+		entity,
+		delayTimerId,
+		TimeSpan.FromMilliseconds(3000),
+		Resurrect,
+		true)
+end
+
+local function PostEnter(entity, args)
+    
+	local w = Worlds:GetById(args.WorldId)
+
+    Logging:Info("Entering " .. w.Name)
+	
+	if(w.Name == "Limbo")
+    then
+		Wait3Seconds(entity, args)
+    else
+	
+    end
+	
+end
+
+
+local function SendToLimbo(entity)
+    
     local pos = entity:GetPosition()
     entity:StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
         :SetOption("flavor", "Small")
@@ -251,6 +263,8 @@ local function CheckDead(entity)
     local soundId = Sounds:GetByName("Vanilla/Common/Hero/Dying")
     entity:EmitSound(soundId)
 
+	entity:SetResurrectable(entity.WorldId)
+
 	-- Wait 3 seconds
 	
 	-- Appear
@@ -259,17 +273,25 @@ local function CheckDead(entity)
 
     Logging:Info("Player Died!")
 	
-    Triggers:OnEntityLeftWorld(
+	local limboWorld = Worlds:GetByName("Limbo")
+	
+	Worlds:RequestAddEntity(entity, limboWorld.Id)
+	
+    Triggers:OnEntityEnteredWorld(
         entity,
-        SendToLimbo,
-        true)	
-
+        PostEnter,
+        true)
+	
+	
 end
-
 
 local function OnInit(entity)
 
+    Logging:Info("Initializing " .. entity.Id)
+
     cooldownTimerId = entity:GetTimerId("CooldownDelay")
+    delayTimerId = entity:GetTimerId("ActionDeley")
+
 
     Triggers:OnEntityAction(
         entity,
@@ -286,11 +308,11 @@ local function OnInit(entity)
         OnVelocityChanged,
         false)
 		
-    Triggers:OnEntityLeavingWorld(
+    Triggers:OnDestroyed(
         entity,
-        CheckDead,
+        SendToLimbo,
         false)
-		
+			
 end
 
 return {

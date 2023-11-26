@@ -15,13 +15,13 @@
 		Triggers:AfterDelay(Commentator, speechTimerId, TimeSpan.FromMilliseconds(delay), SayIsDead, true)
 	end
 
-	SayIsDead = function()
+	SayIsDead = function(entity, args)
 		local delay = PlaySound("Vanilla/Common/Speech/IsDead")
 		local soundId = Sounds:GetByName("Vanilla/Common/Speech/IsDead")
 		Triggers:AfterDelay(Commentator, speechTimerId, TimeSpan.FromMilliseconds(delay), SayYoureOnYourOwn, true)
 	end
 
-	SayYoureOnYourOwn = function()
+	SayYoureOnYourOwn = function(entity, args)
 		local delay = PlaySound("Vanilla/Common/Speech/YoureOnYourOwn")
 		local soundId = Sounds:GetByName("Vanilla/Common/Speech/YoureOnYourOwn")
 	end

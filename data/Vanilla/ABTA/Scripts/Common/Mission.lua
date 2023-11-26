@@ -102,7 +102,7 @@
             true)
     end
 
-    DarkenBackground = function()
+    DarkenBackground = function(entity, args)
         Logging:Info("Darken background...")
 
         Triggers:OnEntityAnimFinished(

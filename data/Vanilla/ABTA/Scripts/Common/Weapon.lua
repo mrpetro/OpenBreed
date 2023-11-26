@@ -60,7 +60,7 @@ local weapons =
   }
 }
 
-local function CooldownFinish()
+local function CooldownFinish(entity, args)
     fireReady = true
 end
 
