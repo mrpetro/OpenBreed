@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Sandbox.Wecs.Components;
+using OpenBreed.Sandbox.Wecs.Events;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
@@ -16,22 +17,29 @@ using System.Threading.Tasks;
 namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
-        typeof(ResurrectableComponent),
-        typeof(LivesComponent))]
-    public class ResurrectionSystem : EntityEventSystem<ResurrectionSystem, EntityEnteredEvent>
+        typeof(ResurrectCommandComponent),
+        typeof(ResurrectableComponent))]
+    public class ResurrectionSystem : UpdatableSystemBase<ResurrectionSystem>
     {
-        public ResurrectionSystem(IEventsMan eventsMan) : base(eventsMan)
+        private readonly IWorldMan worldMan;
+
+        public ResurrectionSystem(IWorldMan worldMan)
         {
+            this.worldMan = worldMan;
         }
 
-        protected override void UpdateEntity(IEntity entity, EntityEnteredEvent e)
+        protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
-            var livesComponent = entity.Get<LivesComponent>();
+            try
+            {
+                var resurectableCmp = entity.Get<ResurrectableComponent>();
 
-            if (livesComponent.Value > 0)
-                return;
-
-
+                worldMan.RequestAddEntity(entity, resurectableCmp.WorldId);
+            }
+            finally
+            {
+                entity.Remove<ResurrectCommandComponent>();
+            }
         }
     }
 }

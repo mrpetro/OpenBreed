@@ -63,7 +63,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
                 var emittedEntity = templateBuilder.Build();
 
-                triggerMan.OnEntityEnteredWorld(emittedEntity, () =>
+                triggerMan.OnEntityEnteredWorld(emittedEntity, (e,args) =>
                 {
                     eventsMan.Raise(entity, new EmitEntityEvent(emittedEntity.Id, entity.Id));
 

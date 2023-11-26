@@ -110,6 +110,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             var actor = CreateActor(name, pos);
             actor.CreateTimer("CooldownDelay");
+            actor.CreateTimer("ActionDeley");
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             actor.Add(new EquipmentComponent(

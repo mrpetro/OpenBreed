@@ -52,7 +52,7 @@ namespace OpenBreed.Sandbox.Extensions
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<ResurrectionSystem>((world) => new ResurrectionSystem(sp.GetService<IEventsMan>()));
+            systemFactory.RegisterSystem<ResurrectionSystem>((world) => new ResurrectionSystem(sp.GetService<IWorldMan>()));
 
             systemFactory.RegisterSystem<ItemManagingSystem>((world) => new ItemManagingSystem(
                 world,

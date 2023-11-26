@@ -12,29 +12,36 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace OpenBreed.Wecs.Extensions
 {
-    public static class TriggerExtensions
+    public static class TriggerBuilderExtensions
     {
-        public static void OnEvent<TEvent>(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TEvent> action, bool singleTime = false) where TEvent : EventArgs
+        #region Public Methods
+
+        public static ITriggerBuilder OnEntity(this ITriggerBuilder triggerBuilder, IEntity entity)
         {
-            triggerMan.EventsMan.Subscribe<TEvent>(ConditionalAction);
+            //triggerBuilder.AddEqualsCondition(entity);
 
-            void ConditionalAction(object sender, TEvent args)
-            {
-                if (!Equals(entity, sender))
-                    return;
-
-                if (singleTime)
-                    triggerMan.EventsMan.Unsubscribe<TEvent>(ConditionalAction);
-
-                action.Invoke(entity, args);
-            }
+            return triggerBuilder;
         }
 
-        public static void OnEntityEnteredWorld(this ITriggerMan triggerMan, IEntity entity, Action action, bool singleTime = false)
+        #endregion Public Methods
+    }
+
+    public static class TriggerExtensions
+    {
+        #region Public Methods
+
+        public static ITriggerBuilder OnEntity(this ITriggerMan triggerMan, IEntity entity)
+        {
+            //triggerMan.AddEqualsCondition(entity);
+
+            return triggerMan.NewTrigger();
+        }
+
+        public static void OnEntityEnteredWorld(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityEnteredEvent> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<EntityEnteredEvent>(
                 (args) => Equals(entity.Id, args.EntityId),
-                (args) => action.Invoke(),
+                (args) => action.Invoke(entity, args),
                 singleTime);
         }
 
@@ -54,6 +61,21 @@ namespace OpenBreed.Wecs.Extensions
                 singleTime);
         }
 
+        public static void OnEvent<TEvent>(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TEvent> action, bool singleTime = false) where TEvent : EventArgs
+        {
+            triggerMan.EventsMan.Subscribe<TEvent>(ConditionalAction);
+
+            void ConditionalAction(object sender, TEvent args)
+            {
+                if (!Equals(entity, sender))
+                    return;
+
+                if (singleTime)
+                    triggerMan.EventsMan.Unsubscribe<TEvent>(ConditionalAction);
+
+                action.Invoke(entity, args);
+            }
+        }
         public static void OnWorldInitialized(this ITriggerMan triggerMan, IWorld world, Action action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<WorldInitializedEventArgs>(
@@ -61,29 +83,13 @@ namespace OpenBreed.Wecs.Extensions
                 (args) => action.Invoke(),
                 singleTime);
         }
-
-        public static ITriggerBuilder OnEntity(this ITriggerMan triggerMan, IEntity entity)
-        {
-            //triggerMan.AddEqualsCondition(entity);
-
-            return triggerMan.NewTrigger();
-        }
-
         public static ITriggerBuilder RunAction(this ITriggerBuilder triggerBuilder, Action action, bool singleTime = false)
         {
             //triggerMan.AddEqualsCondition(entity);
 
             return triggerBuilder;
         }
-    }
 
-    public static class TriggerBuilderExtensions
-    {
-        public static ITriggerBuilder OnEntity(this ITriggerBuilder triggerBuilder, IEntity entity)
-        {
-            //triggerBuilder.AddEqualsCondition(entity);
-
-            return triggerBuilder;
-        }
+        #endregion Public Methods
     }
 }

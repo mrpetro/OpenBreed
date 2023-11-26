@@ -31,6 +31,12 @@ namespace OpenBreed.Sandbox.Extensions
             return entity.Contains<HealthComponent>();
         }
 
+        public static void RestoreFillHealth(this IEntity entity)
+        {
+            var cmp = entity.Get<HealthComponent>();
+            cmp.Value = cmp.MaximumValue;
+        }
+
         public static HealthComponent GetHealth(this IEntity entity)
         {
             return entity.Get<HealthComponent>();
@@ -46,9 +52,14 @@ namespace OpenBreed.Sandbox.Extensions
             entity.Get<LivesComponent>().ToAdd.Add(value);
         }
 
-        public static void Resurect(this IEntity entity, int worldId)
+        public static void SetResurrectable(this IEntity entity, int worldId)
         {
             entity.Set<ResurrectableComponent>(new ResurrectableComponent(worldId));
+        }
+
+        public static void Resurrect(this IEntity entity)
+        {
+            entity.Set<ResurrectCommandComponent>(new ResurrectCommandComponent());
         }
 
         public static void InflictDamage(this IEntity entity, int amount, int targetEntityId)

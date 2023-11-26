@@ -137,7 +137,9 @@ namespace OpenBreed.Wecs.Worlds
         {
             RemoveFromAllSystems(entity);
             entities.Remove(entity);
-            ((Entity)entity).WorldId = WecsConsts.NO_WORLD_ID;
+
+            if(((Entity)entity).WorldId == Id )
+                ((Entity)entity).WorldId = WecsConsts.NO_WORLD_ID;
         }
 
         public void AddEntity(IEntity entity)

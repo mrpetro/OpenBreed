@@ -13,6 +13,11 @@ namespace OpenBreed.Sandbox.Wecs.Components
         #endregion Public Properties
     }
 
+    public class ResurrectCommandComponent : IEntityComponent
+    {
+
+    }
+
     public class ResurrectableComponent : IEntityComponent
     {
         #region Public Constructors

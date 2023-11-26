@@ -21,6 +21,7 @@ namespace OpenBreed.Sandbox.Extensions
         public static void SetupLimboWorldSystems(this IWorldBuilder builder)
         {
             builder.AddSystem<ResurrectionSystem>();
+            builder.AddSystem<TimerSystem>();
         }
 
         public static void SetupGameWorldSystems(this IWorldBuilder builder)

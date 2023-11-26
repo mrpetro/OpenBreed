@@ -53,7 +53,6 @@ namespace OpenBreed.Sandbox.Wecs.Systems
                 return;
             }
             
-            worldMan.RequestRemoveEntity(entity);
             eventsMan.Raise(entity, new DestroyedEvent(entity.Id));
         }
     }

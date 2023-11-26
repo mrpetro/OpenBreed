@@ -1,27 +1,19 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems
 {
-    public abstract class EntityEventSystem<TSystem, TEntityEvent> : SystemBase<TSystem>, IEventSystem<TEntityEvent> where TSystem : ISystem where TEntityEvent :EntityEvent
+    public abstract class EntityEventSystem<TSystem, TEntityEvent> : SystemBase<TSystem>, IEventSystem<TEntityEvent> where TSystem : ISystem where TEntityEvent : EntityEvent
     {
         #region Protected Fields
 
         protected readonly HashSet<IEntity> entities = new HashSet<IEntity>();
 
+        protected readonly IEventsMan eventsMan;
+
         #endregion Protected Fields
-
-        #region Private Fields
-
-        private readonly IEventsMan eventsMan;
-
-        #endregion Private Fields
 
         #region Protected Constructors
 

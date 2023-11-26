@@ -277,7 +277,7 @@ namespace OpenBreed.Sandbox.Entities
 
         private void AddToWorld(Context context)
         {
-            triggerMan.OnEntityEnteredWorld(context.cameraEntity, () =>
+            triggerMan.OnEntityEnteredWorld(context.cameraEntity, (e, args) =>
             {
                 PlayerCharacterEnter(context);
                 SetPosition(context);

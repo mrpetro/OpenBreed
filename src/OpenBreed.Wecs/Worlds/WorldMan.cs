@@ -113,8 +113,9 @@ namespace OpenBreed.Wecs.Worlds
             if (entity.WorldId == worldId)
                 return;
 
+            //If entity exists in another world then request remove it
             if (entity.WorldId != WecsConsts.NO_WORLD_ID)
-                throw new InvalidOperationException("Entity can't exist in more than one world.");
+                RequestRemoveEntity(entity);
 
             if (!entitiesToAdd.TryGetValue(worldId, out HashSet<IEntity> entities))
             {
