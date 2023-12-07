@@ -107,6 +107,11 @@ namespace OpenBreed.Sandbox.Extensions
             return null;
         }
 
+        public static IEntity GetMapEntity(this IEntityMan entityMan, int worldId)
+        {
+            return entityMan.GetByTag("Maps").Where(e => e.WorldId == worldId).FirstOrDefault();
+        }
+
         public static IEntity GetPlayerCamera(this IEntityMan entityMan, IEntity playerEntity)
         {
             return playerEntity.Get<FollowedComponent>().FollowerIds.Select(item => entityMan.GetById(item)).

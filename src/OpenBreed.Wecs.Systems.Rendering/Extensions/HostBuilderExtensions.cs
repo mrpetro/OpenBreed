@@ -37,8 +37,9 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             systemFactory.RegisterSystem<PictureSystem>((world) => new PictureSystem(
                 world,
                 serviceProvider.GetService<IPictureRenderer>()));
-            systemFactory.RegisterSystem<StampSystem>((world) => new StampSystem(world));
-            systemFactory.RegisterSystem<TileSystem>((world) => new TileSystem(world));
+            systemFactory.RegisterSystem<StampPutterSystem>((world) => new StampPutterSystem(world));
+            systemFactory.RegisterSystem<TilePutterSystem>((world) => new TilePutterSystem(world));
+            systemFactory.RegisterSystem<TileRenderSystem>((world) => new TileRenderSystem(world));
             systemFactory.RegisterSystem<TextPresenterSystem>((world) => new TextPresenterSystem(
                 world,
                 serviceProvider.GetService<IFontMan>()));

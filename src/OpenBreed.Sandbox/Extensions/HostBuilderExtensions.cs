@@ -247,7 +247,8 @@ namespace OpenBreed.Sandbox.Extensions
                                                               sp.GetService<ILogger>(),
                                                               sp.GetService<ITriggerMan>(),
                                                               sp.GetService<IScriptMan>(),
-                                                              sp.GetService<IEntityFactory>());
+                                                              sp.GetService<IEntityFactory>(),
+                                                              sp.GetService<IBuilderFactory>());
 
                 mapLegacyDataLoader.RegisterEntityLoaders(sp);
                 return mapLegacyDataLoader;

@@ -75,6 +75,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IScriptMan scriptMan;
         private readonly IEntityFactory entityFactory;
+        private readonly IBuilderFactory builderFactory;
         private readonly ISystemFactory systemFactory;
         private readonly ITileGridFactory tileGridFactory;
         private readonly IDataGridFactory dataGridFactory;
@@ -103,7 +104,8 @@ namespace OpenBreed.Sandbox.Loaders
                                    ILogger logger,
                                    ITriggerMan triggerMan,
                                    IScriptMan scriptMan,
-                                   IEntityFactory entityFactory)
+                                   IEntityFactory entityFactory,
+                                   IBuilderFactory builderFactory)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
@@ -112,18 +114,17 @@ namespace OpenBreed.Sandbox.Loaders
             this.mapsDataProvider = mapsDataProvider;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
-            //this.worldBlockBuilder = worldBlockBuilder;
             this.palettesDataProvider = palettesDataProvider;
             this.broadphaseGridFactory = broadphaseGridFactory;
             this.tileGridFactory = tileGridFactory;
             this.dataGridFactory = dataGridFactory;
-
             this.tileMan = tileMan;
             this.paletteMan = paletteMan;
             this.logger = logger;
             this.triggerMan = triggerMan;
             this.scriptMan = scriptMan;
             this.entityFactory = entityFactory;
+            this.builderFactory = builderFactory;
         }
 
         #endregion Public Constructors
@@ -137,6 +138,11 @@ namespace OpenBreed.Sandbox.Loaders
             var values = layout.GetCellValues(ix, iy);
 
             return values[actionLayer];
+        }
+
+        public IEntity CreateMapEntity()
+        {
+            return entityMan.Create($"Maps");
         }
 
         public IWorld Load(string entryId, params object[] args)
@@ -162,10 +168,20 @@ namespace OpenBreed.Sandbox.Loaders
             LoadReferencedTileStamps(dbMap);
             LoadReferencedSounds(dbMap);
 
+            var mapEntity = CreateMapEntity();
+
             var layout = map.Layout;
             var visited = new bool[layout.Width, layout.Height];
 
             var cellSize = layout.CellSize;
+
+            var tileGridComponentBuilder = builderFactory.GetBuilder<TileGridComponentBuilder>();
+            tileGridComponentBuilder.SetGrid(layout.Width, layout.Height, 1, cellSize);
+
+            var tileGridComponent = tileGridComponentBuilder.Build();
+
+            mapEntity.Add(new StampPutterComponent());
+            mapEntity.Add(tileGridComponent);
 
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
@@ -173,7 +189,6 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddModule(dataGridFactory.Create<IEntity>(layout.Width, layout.Height));
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
-            worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
             worldBuilder.AddModule(renderableFactory.CreateRenderablePalette());
             worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
@@ -184,7 +199,7 @@ namespace OpenBreed.Sandbox.Loaders
             var mapper = new MapMapper(dbMap.TileSetRef);
 
             var atlasId = tileMan.GetByName(mapper.Level).Id;
-            var tileGrid = world.GetModule<ITileGrid>();
+            //var tileGrid = world.GetModule<ITileGrid>();
             var entityGrid = world.GetModule<IDataGrid<IEntity>>();
 
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
@@ -192,12 +207,13 @@ namespace OpenBreed.Sandbox.Loaders
 
             triggerMan.OnWorldInitialized(world, () =>
             {
+                worldMan.RequestAddEntity(mapEntity, world.Id);
+
                 var paletteEntityTag = $"GameWorld/Palette/{dbMap.Id}";
                 var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
 
                 if(paletteEntity is not null)
                     worldMan.RequestAddEntity(paletteEntity, world.Id);
-
 
                 for (int iy = 0; iy < layout.Height; iy++)
                 {
@@ -211,7 +227,7 @@ namespace OpenBreed.Sandbox.Loaders
 
                         var indexPos = new Vector2i(ix, iy);
 
-                        tileGrid.ModifyTile(indexPos, atlasId, gfxValue);
+                        tileGridComponent.Grid.ModifyTile(indexPos, atlasId, gfxValue);
 
                         if (action != null)
                         {

@@ -31,6 +31,10 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
                 () => new ViewportComponentBuilder());
             builderFactory.Register<TilePutterComponentBuilder>(
                 () => new TilePutterComponentBuilder(sp.GetService<ITileMan>()));
+            builderFactory.Register<TileGridComponentBuilder>(
+                () => new TileGridComponentBuilder(
+                    sp.GetService<ITileMan>(),
+                    sp.GetService<ITileGridFactory>()));
         }
     }
 }

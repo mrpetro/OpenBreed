@@ -47,18 +47,18 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<AnimatorSystem>();
             builder.AddSystem<TimerSystem>();
             builder.AddSystem<FrameSystem>();
-            builder.AddSystem<PausingSystem>();
             builder.AddSystem<FsmSystem>();
             builder.AddSystem<VelocityChangedSystem>();
+            builder.AddSystem<PaletteSystem>();
+            builder.AddSystem<StampPutterSystem>();
+            builder.AddSystem<TilePutterSystem>();
 
             //Audio Stage
             builder.AddSystem<SoundSystem>();
             //builder.AddSystem<SoundSystem>();
 
             //Video Stage
-            builder.AddSystem<PaletteSystem>();
-            builder.AddSystem<StampSystem>();
-            builder.AddSystem<TileSystem>();
+            builder.AddSystem<TileRenderSystem>();
             builder.AddSystem<SpriteSystem>();
             builder.AddSystem<PictureSystem>();
             //builder.AddSystem(core.CreateWireframeSystem().Build());
@@ -73,6 +73,8 @@ namespace OpenBreed.Sandbox.Extensions
 
             //GUI Stage
             builder.AddSystem<CursorSystem>();
+
+            builder.AddSystem<PausingSystem>();
         }
 
         #endregion Public Methods

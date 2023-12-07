@@ -10,33 +10,20 @@ using System;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
-    [RequireEntityWith(typeof(TilePutterComponent))]
-    public class TileSystem : UpdatableSystemBase<TileSystem>, IRenderable
+    [RequireEntityWith(
+        typeof(TilePutterComponent),
+        typeof(TileGridComponent))]
+
+    public class TilePutterSystem : UpdatableSystemBase<TilePutterSystem>
     {
-        #region Private Fields
-
-        private ITileGrid tileGrid;
-
-        #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSystem(IWorld world)
+        public TilePutterSystem(IWorld world)
         {
-            tileGrid = world.GetModule<ITileGrid>();
-            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Public Constructors
-
-        #region Public Methods
-
-        public void Render(Box2 clipBox, int depth, float dt)
-        {
-            tileGrid.Render(clipBox);
-        }
-
-        #endregion Public Methods
 
         #region Protected Methods
 
@@ -44,14 +31,16 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             var tp = entity.Get<TilePutterComponent>();
 
+            var grid = entity.Get<TileGridComponent>().Grid;
+
             //Update all tiles
             for (int i = 0; i < tp.Items.Count; i++)
-                ModifyTile(tp.Items[i]);
+                ModifyTile(grid, tp.Items[i]);
 
             tp.Items.Clear();
         }
 
-        private void ModifyTile(TileData tileData)
+        private void ModifyTile(ITileGrid tileGrid, TileData tileData)
         {
             tileGrid.ModifyTile(tileData.Position, tileData.AtlasId, tileData.ImageIndex);
         }

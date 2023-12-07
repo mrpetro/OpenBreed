@@ -110,15 +110,16 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             vpc.CameraEntityId = cameraEntityId;
         }
 
-        public static void PutStamp(this IEntity entity, int stampId, int layerNo)
+        public static void PutStampAtEntityPosition(this IEntity entity, IEntity otherEntity, int stampId, int layerNo)
         {
-            var position = entity.Get<PositionComponent>().Value;
+            var position = otherEntity.Get<PositionComponent>().Value;
             PutStampAtPosition(entity, stampId, layerNo, position);
         }
 
         public static void PutStampAtPosition(this IEntity entity, int stampId, int layerNo, Vector2 position)
         {
-            entity.Set(new StampPutterComponent(stampId, layerNo, position));
+            var items = entity.Get<StampPutterComponent>().Items;
+            items.Add(new StampData(stampId, layerNo, position));
         }
 
         public static void PutTile(this IEntity entity, int atlasId, int tileId, int layerNo, Vector2 position)
