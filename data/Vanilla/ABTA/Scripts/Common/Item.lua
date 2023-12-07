@@ -48,6 +48,7 @@ end
 
 local function Pickup(itemEntity, actorEntity, projection)
 
+	local mapEntity = Entities:GetMapEntity(itemEntity.WorldId)
     local metaData = itemEntity:GetMetadata()
 
     Logging:Info("ItemEntityId:" .. tostring(itemEntity.Id))
@@ -94,7 +95,7 @@ local function Pickup(itemEntity, actorEntity, projection)
 
         local stampId = Stamps:GetByName(stampName).Id
 
-        itemEntity:PutStamp(stampId, 0)
+        mapEntity:PutStampAtEntityPosition(itemEntity, stampId, 0)
 
         local soundName = "Vanilla/Common/" .. metaData.Name .. "/Picked"
         local soundId = Sounds:GetByName(soundName)

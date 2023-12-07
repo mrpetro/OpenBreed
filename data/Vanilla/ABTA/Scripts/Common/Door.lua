@@ -60,6 +60,8 @@ local function Open(doorEntity, actorEntity, projection)
     OpenDoor = function(doorCell, nextDoorCell, flavor)
         Logging:Info("Opening " .. flavor .. " Door...")
 
+		local mapEntity = Entities:GetMapEntity(doorCell.WorldId)
+
         local clipName = metaData.Level .. "/" .. metaData.Name .. "/Opening/" .. flavor
         local stampName = metaData.Level .. "/" .. metaData.Name .. "/" .. flavor .. "/Opened"
         local soundName = "Vanilla/Common/" .. metaData.Name .. "/Opening"
@@ -70,7 +72,7 @@ local function Open(doorEntity, actorEntity, projection)
 
         doorCell:SetSpriteOn()
         doorCell:PlayAnimation(0, clipId)
-        doorCell:PutStamp(stampId, 0)
+        mapEntity:PutStampAtEntityPosition(doorCell, stampId, 0)
         doorCell:EmitSound(soundId)
 
         if(flavor == "Horizontal")
@@ -144,11 +146,12 @@ end
 local function DestroyDoor(doorCell, nextDoorCell, flavor)
     Logging:Info("Destroying " .. flavor .. " Door...")
 
+	local mapEntity = Entities:GetMapEntity(doorCell.WorldId)
     local metaData = doorCell:GetMetadata()
     local stampName = metaData.Level .. "/" .. metaData.Name .. "/" .. flavor .. "/Opened"
     local stampId = Stamps:GetByName(stampName).Id
 
-    doorCell:PutStamp(stampId, 0)
+    mapEntity:PutStampAtEntityPosition(doorCell, stampId, 0)
 
     if(flavor == "Horizontal")
     then

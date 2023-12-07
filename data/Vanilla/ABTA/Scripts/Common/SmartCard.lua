@@ -162,6 +162,7 @@
 
     RemoveSmartcard = function(entity)
 
+		local mapEntity = Entities:GetMapEntity(entity.WorldId)
         local metaData = entity:GetMetadata()
 
         if (metaData.Flavor ~= "Trigger")
@@ -170,7 +171,7 @@
             Logging:Info("StampName: " .. stampName)
             local stampId = Stamps:GetByName(stampName).Id
             Logging:Info("StampId: " .. tostring(stampId))
-            entity:PutStamp(stampId, 0)
+            mapEntity:PutStampAtEntityPosition(entity, stampId, 0)
         end
 
 	    Worlds:RequestRemoveEntity(entity)

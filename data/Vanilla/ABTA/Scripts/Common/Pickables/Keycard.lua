@@ -1,5 +1,6 @@
 ﻿local function Pickup(itemEntity, actorEntity, projection)
 
+	local mapEntity = Entities:GetMapEntity(itemEntity.WorldId)
     local metaData = itemEntity:GetMetadata()
 
     Logging:Info("ItemEntityId:" .. tostring(itemEntity.Id))
@@ -17,7 +18,7 @@
 	local stampId = Stamps:GetByName(stampName).Id
 	local soundId = Sounds:GetByName(soundName)
 	
-	itemEntity:PutStamp(stampId, 0)
+	mapEntity:PutStampAtEntityPosition(itemEntity, stampId, 0)
 	itemEntity:EmitSound(soundId)
 
     Worlds:RequestRemoveEntity(itemEntity)

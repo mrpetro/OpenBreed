@@ -1,9 +1,10 @@
 ﻿local function Explode(mineEntity, actorEntity, projection)
 
+	local mapEntity = Entities:GetMapEntity(mineEntity.WorldId)
 	local stampId = Stamps:GetByName("Vanilla/L1/MineCrater").Id
     local pos = mineEntity:GetPosition()
 	
-	mineEntity:PutStamp(stampId, 0)
+	mapEntity:PutStampAtEntityPosition(mineEntity, stampId, 0)
 
 	local soundId = Sounds:GetByName("Vanilla/Common/LandMine/Explosion")
 	local duration = Sounds:GetDuration(soundId)
