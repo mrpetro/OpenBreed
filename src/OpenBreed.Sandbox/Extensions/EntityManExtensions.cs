@@ -1,4 +1,5 @@
-﻿using OpenBreed.Sandbox.Worlds;
+﻿using OpenBreed.Sandbox.Entities;
+using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
@@ -48,22 +49,22 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static IEntity GetSmartCardScreenText(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag("SmartCardScreen/Text").FirstOrDefault();
+            return entityMan.GetByTag($"{WorldNames.SMARTCARD_SCREEN}/Text").FirstOrDefault();
         }
 
         public static IEntity GetMissionScreenText(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag("MissionScreen/Text").FirstOrDefault();
+            return entityMan.GetByTag($"{WorldNames.MISSION_SCREEN}/Text").FirstOrDefault();
         }
 
         public static IEntity GetMissionScreenBackground(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag("MissionScreen/Background").FirstOrDefault();
+            return entityMan.GetByTag($"{WorldNames.MISSION_SCREEN}/Background").FirstOrDefault();
         }
 
         public static IEntity GetHudCamera(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag("Camera.GameHud").FirstOrDefault();
+            return entityMan.GetByTag($"Camera.{WorldNames.GAME_HUD}").FirstOrDefault();
         }
 
         public static IEntity GetMission(this IEntityMan entityMan, int worldId)

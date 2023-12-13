@@ -1,7 +1,14 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenBreed.Common.Interface;
+using OpenBreed.Rendering.Interface.Data;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
+    public interface IPaletteComponentTemplate : IComponentTemplate
+    {
+    }
+
+
     public struct PaletteColor
     {
         #region Public Fields
@@ -51,5 +58,33 @@ namespace OpenBreed.Wecs.Components.Rendering
         public Color4[] Colors { get; }
 
         #endregion Public Properties
+    }
+
+
+    public sealed class PaletteComponentFactory : ComponentFactoryBase<IPaletteComponentTemplate>
+    {
+        #region Private Fields
+
+        private readonly IBuilderFactory builderFactory;
+        private readonly IDataLoaderFactory dataLoaderFactory;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public PaletteComponentFactory()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
+
+        protected override IEntityComponent Create(IPaletteComponentTemplate template)
+        {
+            return new PaletteComponent();
+        }
+
+        #endregion Protected Methods
     }
 }

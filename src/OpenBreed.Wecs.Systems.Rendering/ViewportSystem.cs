@@ -30,6 +30,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
+        private readonly IPaletteMan paletteMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly IRenderingMan renderingMan;
         private readonly IViewClient viewClient;
@@ -42,12 +43,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
             IWorld world,
             IEntityMan entityMan,
             IWorldMan worldMan,
+            IPaletteMan paletteMan,
             IPrimitiveRenderer primitiveRenderer,
             IRenderingMan renderingMan,
             IViewClient viewClient)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;
+            this.paletteMan = paletteMan;
             this.primitiveRenderer = primitiveRenderer;
             this.renderingMan = renderingMan;
             this.viewClient = viewClient;
@@ -124,23 +127,25 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             if (camera != null && camera.WorldId != -1)
             {
+                var cameraPalette = camera.Get<PaletteComponent>();
                 var cameraPos = camera.Get<PositionComponent>().Value;
                 var cameraSize = camera.Get<CameraComponent>().Size;
                 var cameraBrightness = camera.Get<CameraComponent>().Brightness;
                 var cameraClipBox = TransformHelper.GetVisibleRectangle(cameraPos, cameraSize);
                 var cameraTransform = TransformHelper.GetCameraTransform(viewportScalingType, viewportSize, cameraPos, cameraSize);
- 
+
                 var cameraWorld = worldMan.GetById(camera.WorldId);
                 var worldRenderable = cameraWorld.GetModule<IRenderableBatch>();
 
-                if (cameraWorld.TryGetModule(out IRenderablePalette paletteModule))
+                if (cameraPalette.PaletteId != -1)
                 {
                     primitiveRenderer.PushPalette();
 
-                    primitiveRenderer.SetPalette(paletteModule.CurrentPalette);
-
                     try
                     {
+                        var palette = paletteMan.GetById(cameraPalette.PaletteId);
+                        primitiveRenderer.SetPalette(palette);
+
                         worldRenderable.Render(cameraTransform, cameraClipBox, depth, dt);
                     }
                     finally

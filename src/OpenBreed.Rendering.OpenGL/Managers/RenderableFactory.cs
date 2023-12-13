@@ -25,8 +25,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public IRenderableBatch CreateRenderableBatch() => new RenderableBatch(primitiveRenderer);
 
-        public IRenderablePalette CreateRenderablePalette() => new RenderablePalette();
-
         #endregion Public Methods
     }
 }

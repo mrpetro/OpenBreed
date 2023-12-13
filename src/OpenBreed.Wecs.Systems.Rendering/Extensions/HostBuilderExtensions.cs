@@ -27,6 +27,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
                 world,
                 serviceProvider.GetService<IEntityMan>(),                                        
                 serviceProvider.GetService<IWorldMan>(),
+                serviceProvider.GetService<IPaletteMan>(),
                 serviceProvider.GetService<IPrimitiveRenderer>(),
                 serviceProvider.GetService<IRenderingMan>(),
                 serviceProvider.GetService<IViewClient>()));
@@ -48,9 +49,6 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
                 serviceProvider.GetService<IEntityMan>(),
                 serviceProvider.GetService<IFontMan>(),
                 serviceProvider.GetService<ILogger>()));
-            systemFactory.RegisterSystem<PaletteSystem>((world) => new PaletteSystem(
-                serviceProvider.GetService<IPaletteMan>(),
-                serviceProvider.GetService<IPrimitiveRenderer>()));
         }
     }
 }

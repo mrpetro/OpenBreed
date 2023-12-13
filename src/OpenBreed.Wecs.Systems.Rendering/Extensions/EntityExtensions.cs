@@ -17,6 +17,16 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             cameraComponent.Brightness = brightness;
         }
 
+        public static int GetPaletteId(this IEntity entity)
+        {
+            return entity.Get<PaletteComponent>().PaletteId;
+        }
+
+        public static void SetPaletteId(this IEntity entity, int paletteId)
+        {
+            entity.Get<PaletteComponent>().PaletteId = paletteId;
+        }
+
         public static void SetPictureColor(this IEntity entity, float r, float g, float b, float a)
         {
             var cmp = entity.Get<PictureComponent>();

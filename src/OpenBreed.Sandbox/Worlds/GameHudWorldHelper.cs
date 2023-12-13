@@ -111,11 +111,11 @@ namespace OpenBreed.Sandbox.Worlds
         #region Public Methods
 
 
-        private void AddPalette(IWorld world)
+        private int AddWorldPalette(IWorld world)
         {
             var commonPaletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
 
-            var paletteEntity = entityMan.Create(tag: $"GameHUD/Palette/Main");
+            var paletteEntity = entityMan.Create(tag: $"Palettes/{WorldNames.GAME_HUD}");
             var paletteComponent = new PaletteComponent();
             paletteEntity.Add(paletteComponent);
 
@@ -132,6 +132,8 @@ namespace OpenBreed.Sandbox.Worlds
             paletteComponent.PaletteId = palette.Id;
 
             worldMan.RequestAddEntity(paletteEntity, world.Id);
+
+            return palette.Id;
         }
 
 
@@ -180,9 +182,8 @@ namespace OpenBreed.Sandbox.Worlds
                 .AppendCoord(0, 0, 1, 1)
                 .Build();
 
-            var builder = worldMan.Create().SetName("GameHUD");
+            var builder = worldMan.Create().SetName(WorldNames.GAME_HUD);
 
-            builder.AddModule(renderableFactory.CreateRenderablePalette());
             builder.AddModule(renderableFactory.CreateRenderableBatch());
 
 
@@ -200,7 +201,6 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem<AnimatorSystem>();
             builder.AddSystem<SpriteSystem>();
             builder.AddSystem<TextSystem>();
-            builder.AddSystem<PaletteSystem>();
             builder.AddSystem<ScriptRunningSystem>();
         }
 
@@ -296,11 +296,11 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(IWorld world)
         {
-            var hudCamera = cameraHelper.CreateCamera("Camera.GameHud", 0, 0, 320, 240);
+            var hudCamera = cameraHelper.CreateCamera($"Camera.{WorldNames.GAME_HUD}", 0, 0, 320, 240);
 
             triggerMan.OnWorldInitialized(world, () =>
             {
-                AddPalette(world);
+                hudCamera.Get<PaletteComponent>().PaletteId = AddWorldPalette(world);
 
                 worldMan.RequestAddEntity(hudCamera, world.Id);
 

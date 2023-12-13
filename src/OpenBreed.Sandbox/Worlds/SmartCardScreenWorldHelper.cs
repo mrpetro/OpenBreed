@@ -116,11 +116,9 @@ namespace OpenBreed.Sandbox.Worlds
 
         public void Create()
         {
-            var builder = worldMan.Create().SetName("SmartCardScreen");
+            var builder = worldMan.Create().SetName(WorldNames.SMARTCARD_SCREEN);
 
             builder.AddModule(renderableFactory.CreateRenderableBatch());
-            builder.AddModule(renderableFactory.CreateRenderablePalette());
-
 
             AddSystems(builder);
 
@@ -131,11 +129,11 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Private Methods
 
-        private void AddPalette(IWorld world)
+        private int AddWorldPalette(IWorld world)
         {
             var commonPaletteModel = palettesDataProvider.GetPalette("Vanilla/Common/SmartCardScreen/Palette");
 
-            var paletteEntity = entityMan.Create(tag: $"SmartCardScreen/Palette/Main");
+            var paletteEntity = entityMan.Create(tag: $"Palettes/{WorldNames.SMARTCARD_SCREEN}");
             var paletteComponent = new PaletteComponent();
             paletteEntity.Add(paletteComponent);
 
@@ -150,6 +148,8 @@ namespace OpenBreed.Sandbox.Worlds
             paletteComponent.PaletteId = palette.Id;
 
             worldMan.RequestAddEntity(paletteEntity, world.Id);
+
+            return palette.Id;
         }
 
         private void AddSystems(IWorldBuilder builder)
@@ -158,16 +158,16 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem<SpriteSystem>();
             builder.AddSystem<PictureSystem>();
             builder.AddSystem<TextSystem>();
-            builder.AddSystem<PaletteSystem>();
         }
 
         private void Setup(IWorld world)
         {
-            var smartCardCamera = cameraHelper.CreateCamera("Camera.SmartCardScreen", 0, 0, 320, 240);
+            var smartCardCamera = cameraHelper.CreateCamera($"Camera.{WorldNames.SMARTCARD_SCREEN}", 0, 0, 320, 240);
 
             triggerMan.OnWorldInitialized(world, () =>
             {
-                AddPalette(world);
+                smartCardCamera.Get<PaletteComponent>().PaletteId = AddWorldPalette(world);
+
                 worldMan.RequestAddEntity(smartCardCamera, world.Id);
                 AddBackground(world, -320, -272);
                 AddText(world, - 320 / 2 + 20 , 240 / 2 - 38);

@@ -788,7 +788,7 @@ namespace OpenBreed.Sandbox
             missionScreenWorldHelper.Create();
 
 
-            //var hudWorld = worldMan.GetByName("GameHUD");
+            //var hudWorld = worldMan.GetByName(GameHudWorldHelper.WorldName);
 
             //triggerMan.OnWorldInitialized(hudWorld, () =>
             //{

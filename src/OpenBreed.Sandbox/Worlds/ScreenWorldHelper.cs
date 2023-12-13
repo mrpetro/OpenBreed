@@ -4,6 +4,7 @@ using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Wecs.Components;
@@ -33,8 +34,8 @@ namespace OpenBreed.Sandbox.Worlds
         #region Public Fields
 
         public const string GAME_VIEWPORT = "Viewport.Game";
-        public const string DEBUG_HUD_VIEWPORT = "Viewport.DebugHud";
-        public const string GAME_HUD_VIEWPORT = "Viewport.GameHud";
+        public const string DEBUG_HUD_VIEWPORT = $"Viewport.{WorldNames.DEBUG_HUD}";
+        public const string GAME_HUD_VIEWPORT = $"Viewport.{WorldNames.GAME_HUD}";
         public const string TEXT_VIEWPORT = "Viewport.Text";
 
         #endregion Public Fields

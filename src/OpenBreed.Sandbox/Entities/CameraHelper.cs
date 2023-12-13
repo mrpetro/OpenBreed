@@ -2,9 +2,15 @@
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Worlds;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities
 {
@@ -24,17 +30,33 @@ namespace OpenBreed.Sandbox.Entities
         private readonly IFrameUpdaterMan<IEntity> frameUpdaterMan;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IEntityFactory entityFactory;
+        private readonly ITriggerMan triggerMan;
+        private readonly IEntityMan entityMan;
+        private readonly IWorldMan worldMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public CameraHelper(IClipMan<IEntity> clipMan, IFrameUpdaterMan<IEntity> frameUpdaterMan, IDataLoaderFactory dataLoaderFactory, IEntityFactory entityFactory)
+        public CameraHelper(
+            IClipMan<IEntity> clipMan,
+            IFrameUpdaterMan<IEntity> frameUpdaterMan,
+            IDataLoaderFactory dataLoaderFactory,
+            IEntityFactory entityFactory,
+            ITriggerMan triggerMan,
+            IEntityMan entityMan,
+            IWorldMan worldMan,
+            ILogger logger)
         {
             this.clipMan = clipMan;
             this.frameUpdaterMan = frameUpdaterMan;
             this.dataLoaderFactory = dataLoaderFactory;
             this.entityFactory = entityFactory;
+            this.triggerMan = triggerMan;
+            this.entityMan = entityMan;
+            this.worldMan = worldMan;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -97,15 +119,37 @@ namespace OpenBreed.Sandbox.Entities
 
         public IEntity CreateCamera(string name, float x, float y, float width, float height)
         {
-            var entity = entityFactory.Create(@"ABTA\Templates\Common\Camera")
+            var camera = entityFactory.Create(@"ABTA\Templates\Common\Camera")
                 .SetParameter("posX", x)
                 .SetParameter("posY", y)
                 .SetParameter("width", width)
                 .SetParameter("height", height)
                 .SetTag(name)
-                .Build();
+            .Build();
 
-            return entity;
+            triggerMan.OnEntityEnteredWorld(camera, (e, args) =>
+            {
+                var world = worldMan.GetById(camera.WorldId);
+
+                var paletteEntityTag = $"Palettes/{world.Name}";
+
+                var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
+
+                if (paletteEntity is null)
+                {
+                    logger.Error($"Unable to set palette '{paletteEntityTag}' on camera '{camera.Tag}'.");
+                    return;
+                }
+
+                var pid = paletteEntity.GetPaletteId();
+                camera.SetPaletteId(pid);
+
+                logger.Verbose($"Palette '{paletteEntityTag}' set on camera '{camera.Tag}'.");
+
+            }, singleTime: false);
+
+
+            return camera;
         }
 
         #endregion Private Methods

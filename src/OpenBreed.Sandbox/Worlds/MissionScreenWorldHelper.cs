@@ -88,7 +88,6 @@ namespace OpenBreed.Sandbox.Worlds
         {
             var builder = worldMan.Create().SetName("MissionScreen");
 
-            builder.AddModule(renderableFactory.CreateRenderablePalette());
             builder.AddModule(renderableFactory.CreateRenderableBatch());
 
             AddSystems(builder);
@@ -111,11 +110,11 @@ namespace OpenBreed.Sandbox.Worlds
             worldMan.RequestAddEntity(timer, world.Id);
         }
 
-        private void AddPalette(IWorld world)
+        private int AddWorldPalette(IWorld world)
         {
             var commonPaletteModel = palettesDataProvider.GetPalette("Vanilla/Common/MissionScreen/Palette");
 
-            var paletteEntity = entityMan.Create(tag: $"MissionScreen/Palette/Main");
+            var paletteEntity = entityMan.Create(tag: $"Palettes/{WorldNames.MISSION_SCREEN}");
             var paletteComponent = new PaletteComponent();
             paletteEntity.Add(paletteComponent);
 
@@ -130,12 +129,13 @@ namespace OpenBreed.Sandbox.Worlds
             paletteComponent.PaletteId = palette.Id;
 
             worldMan.RequestAddEntity(paletteEntity, world.Id);
+
+            return palette.Id;
         }
 
         private void AddSystems(IWorldBuilder builder)
         {
             builder.AddSystem<AnimatorSystem>();
-            builder.AddSystem<PaletteSystem>();
             builder.AddSystem<SpriteSystem>();
             builder.AddSystem<PictureSystem>();
             builder.AddSystem<TextSystem>();
@@ -158,8 +158,10 @@ namespace OpenBreed.Sandbox.Worlds
 
             triggerMan.OnWorldInitialized(world, () =>
             {
+                missionScreenCamera.Get<PaletteComponent>().PaletteId = AddWorldPalette(world);
+
                 worldMan.RequestAddEntity(missionScreenCamera, world.Id);
-                AddPalette(world);
+
                 AddBackground(world, -320, -272);
                 AddText(world, -320 / 2 + 48, 240 / 2 - 24);
             }, singleTime: true);

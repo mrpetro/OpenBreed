@@ -7,8 +7,6 @@ namespace OpenBreed.Rendering.Interface.Managers
 
         IRenderableBatch CreateRenderableBatch();
 
-        IRenderablePalette CreateRenderablePalette();
-
         #endregion Public Methods
     }
 }

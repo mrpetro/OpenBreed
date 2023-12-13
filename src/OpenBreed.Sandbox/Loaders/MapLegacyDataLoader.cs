@@ -189,7 +189,6 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddModule(dataGridFactory.Create<IEntity>(layout.Width, layout.Height));
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
-            worldBuilder.AddModule(renderableFactory.CreateRenderablePalette());
             worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
             worldBuilder.SetupGameWorldSystems();
@@ -209,7 +208,7 @@ namespace OpenBreed.Sandbox.Loaders
             {
                 worldMan.RequestAddEntity(mapEntity, world.Id);
 
-                var paletteEntityTag = $"GameWorld/Palette/{dbMap.Id}";
+                var paletteEntityTag = $"Palettes/{dbMap.Id}";
                 var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
 
                 if(paletteEntity is not null)
@@ -339,7 +338,7 @@ namespace OpenBreed.Sandbox.Loaders
             var commonPaletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
             var mapPaletteModel = mapModel.Palettes.First();
 
-            var paletteEntityTag = $"GameWorld/Palette/{mapId}";
+            var paletteEntityTag = $"Palettes/{mapId}";
 
             var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
 
