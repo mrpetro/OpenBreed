@@ -15,7 +15,7 @@
 			</States>
 		</Animation>
 		<Position X="$(posX)" Y="$(posY)" />
-
+		<Palette/>
 		<Camera>
 			<Width>$(width)</Width>
 			<Height>$(height)</Height>
