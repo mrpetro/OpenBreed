@@ -56,6 +56,7 @@ using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Gui.Extensions;
 using OpenBreed.Wecs.Components.Physics.Extensions;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Components.Rendering.Extensions;
 using OpenBreed.Wecs.Components.Scripting.Extensions;
 using OpenBreed.Wecs.Entities;
@@ -654,6 +655,7 @@ namespace OpenBreed.Sandbox
             var repositoryProvider = GetManager<IRepositoryProvider>();
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
             var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
+            var builderFactory = GetManager<IBuilderFactory>();
 
 
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
@@ -665,15 +667,24 @@ namespace OpenBreed.Sandbox
             foreach (var dbAnim in dbSpriteAtlas)
                 loader.Load(dbAnim.Id, palette);
 
-
             var gameWorldBuilder = worldMan.Create();
             gameWorldBuilder.SetName("Dummy");
             gameWorldBuilder.SetSize(width, height);
             gameWorldBuilder.AddModule(dataGridFactory.Create<IEntity>(width, height));
             gameWorldBuilder.AddModule(broadphaseGridFactory.CreateStatic(width, height, 16));
             gameWorldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
-            gameWorldBuilder.AddModule(tileGridFactory.CreateGrid(width, height, 1, 16));
             gameWorldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
+
+            var mapEntity = entityMan.Create($"Maps");
+
+            var tileGridComponentBuilder = builderFactory.GetBuilder<TileGridComponentBuilder>();
+            tileGridComponentBuilder.SetGrid(width, height, 1, 16);
+
+            var tileGridComponent = tileGridComponentBuilder.Build();
+
+            mapEntity.Add(new StampPutterComponent());
+            mapEntity.Add(tileGridComponent);
+
 
             gameWorldBuilder.SetupGameWorldSystems();
 
@@ -707,6 +718,8 @@ namespace OpenBreed.Sandbox
 
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
+                worldMan.RequestAddEntity(mapEntity, gameWorld.Id);
+
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, playerCamera, gameWorld.Name, 0);
             });
         }

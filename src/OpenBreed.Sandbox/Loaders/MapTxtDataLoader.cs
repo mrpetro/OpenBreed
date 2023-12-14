@@ -18,6 +18,7 @@ using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
@@ -210,11 +211,14 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly IRenderableFactory renderableFactory;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
+        private readonly IEntityMan entityMan;
+
         //private readonly WorldBlockBuilder worldBlockBuilder;
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly ActionSetsDataProvider actionSetsDataProvider;
         private readonly IBroadphaseFactory broadphaseGridFactory;
         private readonly ITileGridFactory tileGridFactory;
+        private readonly IBuilderFactory builderFactory;
         private readonly ITileMan tileMan;
         private readonly ILogger logger;
         private readonly Dictionary<string, IMapWorldEntityLoader> entityLoaders = new Dictionary<string, IMapWorldEntityLoader>();
@@ -228,10 +232,12 @@ namespace OpenBreed.Sandbox.Loaders
                                   IRepositoryProvider repositoryProvider,
                                   ISystemFactory systemFactory,
                                   IWorldMan worldMan,
+                                  IEntityMan entityMan,
                                   PalettesDataProvider palettesDataProvider,
                                   ActionSetsDataProvider actionSetsDataProvider,
                                   IBroadphaseFactory broadphaseGridFactory,
                                   ITileGridFactory tileGridFactory,
+                                  IBuilderFactory builderFactory,
                                   ITileMan tileMan,
                                   ILogger logger)
         {
@@ -240,11 +246,13 @@ namespace OpenBreed.Sandbox.Loaders
             this.renderableFactory = renderableFactory;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
+            this.entityMan = entityMan;
             //this.worldBlockBuilder = worldBlockBuilder;
             this.palettesDataProvider = palettesDataProvider;
             this.actionSetsDataProvider = actionSetsDataProvider;
             this.broadphaseGridFactory = broadphaseGridFactory;
             this.tileGridFactory = tileGridFactory;
+            this.builderFactory = builderFactory;
             this.tileMan = tileMan;
             this.logger = logger;
         }
@@ -260,6 +268,11 @@ namespace OpenBreed.Sandbox.Loaders
             var values = layout.GetCellValues(ix, iy);
 
             return values[actionLayer];
+        }
+
+        public IEntity CreateMapEntity()
+        {
+            return entityMan.Create($"Maps");
         }
 
         public object LoadObject(string entryId) => Load(entryId);
@@ -290,10 +303,20 @@ namespace OpenBreed.Sandbox.Loaders
 
             map.ActionSet = actionSetsDataProvider.GetActionSet(txtMap.ActionSetRef);
 
+            var mapEntity = CreateMapEntity();
+
             var layout = map.Layout;
             var visited = new bool[layout.Width, layout.Height];
 
             var cellSize = layout.CellSize;
+
+            var tileGridComponentBuilder = builderFactory.GetBuilder<TileGridComponentBuilder>();
+            tileGridComponentBuilder.SetGrid(layout.Width, layout.Height, 1, cellSize);
+
+            var tileGridComponent = tileGridComponentBuilder.Build();
+
+            mapEntity.Add(new StampPutterComponent());
+            mapEntity.Add(tileGridComponent);
 
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
@@ -301,7 +324,6 @@ namespace OpenBreed.Sandbox.Loaders
 
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
-            worldBuilder.AddModule(tileGridFactory.CreateGrid(layout.Width, layout.Height, 1, cellSize));
             worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
             worldBuilder.SetupGameWorldSystems();
@@ -351,6 +373,8 @@ namespace OpenBreed.Sandbox.Loaders
                         continue;
                 }
             }
+
+            worldMan.RequestAddEntity(mapEntity, world.Id);
 
             return world;
         }

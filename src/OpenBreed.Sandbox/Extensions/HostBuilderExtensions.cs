@@ -261,10 +261,12 @@ namespace OpenBreed.Sandbox.Extensions
                                                             sp.GetService<IRepositoryProvider>(),
                                                             sp.GetService<ISystemFactory>(),
                                                             sp.GetService<IWorldMan>(),
+                                                            sp.GetService<IEntityMan>(),
                                                             sp.GetService<PalettesDataProvider>(),
                                                             sp.GetService<ActionSetsDataProvider>(),
                                                             sp.GetService<IBroadphaseFactory>(),
                                                             sp.GetService<ITileGridFactory>(),
+                                                            sp.GetService<IBuilderFactory>(),
                                                             sp.GetService<ITileMan>(),
                                                             sp.GetService<ILogger>());
 
