@@ -11,15 +11,4 @@ namespace OpenBreed.Rendering.Interface.Managers
 
         #endregion Public Methods
     }
-
-    public interface IRenderableBatch
-    {
-        #region Public Methods
-
-        public void Render(Matrix4 transform, Box2 viewBox, int depth, float dt);
-
-        void Add(IRenderable renderable);
-
-        #endregion Public Methods
-    }
 }

@@ -37,8 +37,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.entityMan = entityMan;
             this.fontMan = fontMan;
             this.logger = logger;
-
-            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Internal Constructors

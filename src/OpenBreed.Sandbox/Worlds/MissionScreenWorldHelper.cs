@@ -88,8 +88,6 @@ namespace OpenBreed.Sandbox.Worlds
         {
             var builder = worldMan.Create().SetName("MissionScreen");
 
-            builder.AddModule(renderableFactory.CreateRenderableBatch());
-
             AddSystems(builder);
 
             Setup(builder.Build());

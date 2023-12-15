@@ -10,6 +10,7 @@ using OpenTK;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -54,8 +55,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.primitiveRenderer = primitiveRenderer;
             this.renderingMan = renderingMan;
             this.viewClient = viewClient;
-
-            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Internal Constructors
@@ -135,27 +134,33 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 var cameraTransform = TransformHelper.GetCameraTransform(viewportScalingType, viewportSize, cameraPos, cameraSize);
 
                 var cameraWorld = worldMan.GetById(camera.WorldId);
-                var worldRenderable = cameraWorld.GetModule<IRenderableBatch>();
 
-                if (cameraPalette.PaletteId != -1)
+                var palette = (cameraPalette.PaletteId != -1) ? paletteMan.GetById(cameraPalette.PaletteId) : null;
+
+                if (palette is not null) primitiveRenderer.PushPalette();
+                primitiveRenderer.PushMatrix();
+
+                try
                 {
-                    primitiveRenderer.PushPalette();
+                    if (palette is not null) primitiveRenderer.SetPalette(palette);
+                    primitiveRenderer.MultMatrix(cameraTransform);
 
-                    try
+                    void OnRenderFrame(Box2 viewBox, int depth, float dt)
                     {
-                        var palette = paletteMan.GetById(cameraPalette.PaletteId);
-                        primitiveRenderer.SetPalette(palette);
+                        var renderable = cameraWorld.Systems.OfType<IRenderable>().ToArray();
 
-                        worldRenderable.Render(cameraTransform, cameraClipBox, depth, dt);
+                        for (int i = 0; i < renderable.Length; i++)
+                        {
+                            renderable[i].Render(viewBox, depth, dt);
+                        }
                     }
-                    finally
-                    {
-                        primitiveRenderer.PopPalette();
-                    }
+
+                    primitiveRenderer.DrawNested(cameraClipBox, depth, dt, OnRenderFrame);
                 }
-                else
+                finally
                 {
-                    worldRenderable.Render(cameraTransform, cameraClipBox, depth, dt);
+                    primitiveRenderer.PopMatrix();
+                    if (palette is not null) primitiveRenderer.PopPalette();
                 }
 
                 //Draw camera effects

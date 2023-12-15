@@ -2,6 +2,7 @@
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.Interface
@@ -26,6 +27,8 @@ namespace OpenBreed.Rendering.Interface
         void DrawUnitRectangle(Matrix4 model, Color4 red);
 
         void DrawRectangle(Box2 clipBox, Color4 color);
+
+        void DrawNested(Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction);
 
         void DrawBox(Box2 clipBox, Color4 color);
         void DrawPoint(Vector4 pos, Color4 color);

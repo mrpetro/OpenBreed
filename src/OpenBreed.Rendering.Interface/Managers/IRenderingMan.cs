@@ -6,6 +6,8 @@ using System;
 
 namespace OpenBreed.Rendering.Interface.Managers
 {
+    public delegate void RenderDelegate(Matrix4 transform, Box2 viewBox, int depth, float dt);
+
     /// <summary>
     /// Rendering manager interface
     /// </summary>
@@ -28,9 +30,9 @@ namespace OpenBreed.Rendering.Interface.Managers
         float Fps { get; }
 
         /// <summary>
-        /// Object which will be rendered to client
+        /// Renderer delegate
         /// </summary>
-        public IRenderableBatch Renderable { get; set; }
+        public RenderDelegate Renderer { get; set; }
 
         /// <summary>
         /// Render viewport

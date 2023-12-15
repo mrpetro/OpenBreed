@@ -184,9 +184,6 @@ namespace OpenBreed.Sandbox.Worlds
 
             var builder = worldMan.Create().SetName(WorldNames.GAME_HUD);
 
-            builder.AddModule(renderableFactory.CreateRenderableBatch());
-
-
             AddSystems(builder);
 
             Setup(builder.Build());

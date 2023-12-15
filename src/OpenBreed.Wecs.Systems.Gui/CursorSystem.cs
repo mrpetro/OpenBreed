@@ -42,8 +42,6 @@ namespace OpenBreed.Wecs.Systems.Gui
             this.inputsMan = inputsMan;
             this.primitiveRenderer = primitiveRenderer;
             this.eventsMan = eventsMan;
-
-            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Public Constructors

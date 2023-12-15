@@ -64,7 +64,6 @@ namespace OpenBreed.Sandbox.Worlds
         public void Create()
         {
             var builder = worldMan.Create().SetName("DebugHUD");
-            builder.AddModule<IRenderableBatch>(renderableFactory.CreateRenderableBatch());
 
             AddSystems(builder);
 

@@ -5,8 +5,6 @@ namespace OpenBreed.Rendering.Interface.Managers
     {
         #region Public Methods
 
-        IRenderableBatch CreateRenderableBatch();
-
         #endregion Public Methods
     }
 }

@@ -673,7 +673,6 @@ namespace OpenBreed.Sandbox
             gameWorldBuilder.AddModule(dataGridFactory.Create<IEntity>(width, height));
             gameWorldBuilder.AddModule(broadphaseGridFactory.CreateStatic(width, height, 16));
             gameWorldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
-            gameWorldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
             var mapEntity = entityMan.Create($"Maps");
 
@@ -784,7 +783,17 @@ namespace OpenBreed.Sandbox
 
             var screenWorld = screenWorldHelper.CreateWorld();
 
-            renderingMan.Renderable = screenWorld.GetModule<IRenderableBatch>();
+            void OnRenderFrame(Matrix4 transform, Box2 viewBox, int depth, float dt)
+            {
+                var renderable = screenWorld.Systems.OfType<IRenderable>().ToArray();
+
+                for (int i = 0; i < renderable.Length; i++)
+                {
+                    renderable[i].Render(viewBox, depth, dt);
+                }
+            }
+
+            renderingMan.Renderer = OnRenderFrame;
 
             debugHudWorldHelper.Create();
 

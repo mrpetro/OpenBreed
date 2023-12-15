@@ -118,8 +118,6 @@ namespace OpenBreed.Sandbox.Worlds
         {
             var builder = worldMan.Create().SetName(WorldNames.SMARTCARD_SCREEN);
 
-            builder.AddModule(renderableFactory.CreateRenderableBatch());
-
             AddSystems(builder);
 
             Setup(builder.Build());

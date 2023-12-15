@@ -33,8 +33,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             this.spriteMan = spriteMan;
             this.spriteRenderer = spriteRenderer;
-
-            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Internal Constructors

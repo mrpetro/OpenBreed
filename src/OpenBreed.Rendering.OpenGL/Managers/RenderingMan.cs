@@ -44,7 +44,8 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Public Properties
 
         public float Fps { get; private set; }
-        public IRenderableBatch Renderable { get; set; }
+
+        public RenderDelegate Renderer { get; set; }
 
         #endregion Public Properties
 
@@ -105,7 +106,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
-            Renderable?.Render(Matrix4.Identity, ClipBox, 0, dt);
+            Renderer?.Invoke(Matrix4.Identity, ClipBox, 0, dt);
         }
 
         private void OnResize(int width, int height)

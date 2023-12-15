@@ -30,8 +30,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             IPictureRenderer imageRenderer)
         {
             this.imageRenderer = imageRenderer;
-
-            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Internal Constructors

@@ -100,6 +100,24 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.Disable(EnableCap.Blend);
         }
 
+        private const bool CLIPPING = true;
+
+        private const int RENDER_MAX_DEPTH = 3;
+
+        public void DrawNested(Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction)
+        {
+            RenderBefore(clipBox, depth, dt);
+
+            if (depth > RENDER_MAX_DEPTH)
+                return;
+
+            depth++;
+
+            nestedRenderAction.Invoke(clipBox, depth, dt);
+
+            RenderAfter(clipBox, depth, dt);
+        }
+
         public void DrawPoint(Vector4 pos, Color4 color)
         {
             var w = 5.0f;
@@ -294,6 +312,49 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #endregion Internal Methods
 
         #region Private Methods
+
+        private void RenderBefore(Box2 clipBox, int depth, float dt)
+        {
+            if (CLIPPING)
+            {
+                //Enable stencil buffer
+                if (depth == 1)
+                    GL.Enable(EnableCap.StencilTest);
+
+                GL.ColorMask(false, false, false, false);
+                GL.DepthMask(false);
+                GL.StencilFunc(StencilFunction.Always, depth, depth);
+                GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
+
+                // Draw black box
+                DrawBox(clipBox, Color4.Black);
+
+                GL.ColorMask(true, true, true, true);
+                GL.DepthMask(true);
+                GL.StencilFunc(StencilFunction.Equal, depth, depth);
+                GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
+            }
+        }
+
+        private void RenderAfter(Box2 clipBox, int depth, float dt)
+        {
+            if (CLIPPING)
+            {
+                GL.ColorMask(false, false, false, false);
+                GL.DepthMask(false);
+                GL.StencilFunc(StencilFunction.Always, depth, depth);
+                GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
+
+                // Draw black box
+                DrawBox(clipBox, Color4.Black);
+
+                GL.ColorMask(true, true, true, true);
+                GL.DepthMask(true);
+
+                if (depth == 1)
+                    GL.Disable(EnableCap.StencilTest);
+            }
+        }
 
         private void SetupDefaultVertices()
         {

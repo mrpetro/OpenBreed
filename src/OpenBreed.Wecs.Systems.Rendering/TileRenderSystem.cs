@@ -26,7 +26,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public TileRenderSystem(IWorld world)
         {
-            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Public Constructors

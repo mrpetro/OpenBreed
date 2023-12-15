@@ -42,9 +42,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             this.primitiveRenderer = primitiveRenderer;
             this.fontMan = fontMan;
 
-
             font = fontMan.GetOSFont("ARIAL", 8);
-            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Public Constructors

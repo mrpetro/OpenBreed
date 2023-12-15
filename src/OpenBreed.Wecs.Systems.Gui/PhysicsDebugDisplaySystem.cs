@@ -36,7 +36,6 @@ namespace OpenBreed.Wecs.Systems.Gui
         {
             this.primitiveRenderer = primitiveRenderer;
             broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
-            world.GetModule<IRenderableBatch>().Add(this);
         }
 
         #endregion Public Constructors

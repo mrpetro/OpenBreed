@@ -189,7 +189,6 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddModule(dataGridFactory.Create<IEntity>(layout.Width, layout.Height));
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
-            worldBuilder.AddModule(renderableFactory.CreateRenderableBatch());
 
             worldBuilder.SetupGameWorldSystems();
 

@@ -125,7 +125,6 @@ namespace OpenBreed.Sandbox.Worlds
         public IWorld CreateWorld()
         {
             var builder = worldMan.Create().SetName("ScreenWorld");
-            builder.AddModule(renderableFactory.CreateRenderableBatch());
 
             AddSystems(builder);
 
