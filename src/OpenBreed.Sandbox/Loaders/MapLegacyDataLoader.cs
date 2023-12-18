@@ -186,7 +186,7 @@ namespace OpenBreed.Sandbox.Loaders
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Height);
-            worldBuilder.AddModule(dataGridFactory.Create<IEntity>(layout.Width, layout.Height));
+            worldBuilder.AddModule(dataGridFactory.Create<int>(layout.Width, layout.Height));
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
 
@@ -198,7 +198,7 @@ namespace OpenBreed.Sandbox.Loaders
 
             var atlasId = tileMan.GetByName(mapper.Level).Id;
             //var tileGrid = world.GetModule<ITileGrid>();
-            var entityGrid = world.GetModule<IDataGrid<IEntity>>();
+            var dataGrid = world.GetModule<IDataGrid<int>>();
 
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
@@ -232,7 +232,7 @@ namespace OpenBreed.Sandbox.Loaders
                             var cellEntity = LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
 
                             if (cellEntity is not null)
-                                entityGrid.Set(indexPos, cellEntity);
+                                dataGrid.Set(indexPos, cellEntity.Id);
                         }
 
                         //if (mapper.Map(actionValue, gfxValue, out string templaneName, out string flavor))
@@ -256,7 +256,7 @@ namespace OpenBreed.Sandbox.Loaders
                         var cellEntity = LoadUnknownCodeCell(mapper, map, visited, ix, iy, gfxValue, actionValue, world);
                     
                         if(cellEntity is not null)
-                            entityGrid.Set(indexPos, cellEntity);
+                            dataGrid.Set(indexPos, cellEntity.Id);
                     }
                 }
 

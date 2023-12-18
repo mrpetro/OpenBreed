@@ -63,20 +63,6 @@ namespace OpenBreed.Sandbox.Entities.Door
             return entity;
         }
 
-        public static IEntity GetEntityByDataGrid(IEntity entity, IWorldMan worldMan, Vector2i indexOffset)
-        {
-            var thisdata = entity.Get<MetadataComponent>();
-            var pos = entity.Get<PositionComponent>();
-            var world = worldMan.GetById(entity.WorldId);
-            var dataGrid = world.GetModule<IDataGrid<IEntity>>();
-            var indexPos = new Vector2i((int)pos.Value.X / 16, (int)pos.Value.Y / 16);
-            var thisEntity = dataGrid.Get(indexPos);
-            var indexIndexPos = Vector2i.Add(indexPos, indexOffset);
-            var resultEntity = dataGrid.Get(indexIndexPos);
-
-            return resultEntity;
-        }
-
         public IEntity AddDoor(IWorld world, int x, int y, string level, string key)
         {
             var entity = entityFactory.Create(@"ABTA\Templates\Common\Door")

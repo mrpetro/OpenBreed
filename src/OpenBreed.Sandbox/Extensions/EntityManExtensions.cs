@@ -1,8 +1,11 @@
-﻿using OpenBreed.Sandbox.Entities;
+﻿using OpenBreed.Core;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +53,84 @@ namespace OpenBreed.Sandbox.Extensions
         public static IEntity GetSmartCardScreenText(this IEntityMan entityMan)
         {
             return entityMan.GetByTag($"{WorldNames.SMARTCARD_SCREEN}/Text").FirstOrDefault();
+        }
+
+        public static IEntity GetEntityByDataGrid(this IEntityMan entityMan, IWorldMan worldMan, IEntity entity, int ox, int oy)
+        {
+            var pos = entity.Get<PositionComponent>();
+            var world = worldMan.GetById(entity.WorldId);
+            var dataGrid = world.GetModule<IDataGrid<int>>();
+            var indexPos = new Vector2i((int)pos.Value.X / 16, (int)pos.Value.Y / 16);
+            var thisEntity = dataGrid.Get(indexPos);
+            var indexIndexPos = Vector2i.Add(indexPos, new Vector2i(ox, oy));
+            var resultEntityId = dataGrid.Get(indexIndexPos);
+            return entityMan.GetById(resultEntityId);
+        }
+
+        public static IEntity FindVerticalDoorCell(this IEntityMan entityMan, IWorldMan worldMan, IEntity entity)
+        {
+            var foundCell = entity;
+
+            var thisData = entity.Get<MetadataComponent>();
+
+            var nextCell = foundCell;
+
+            while (nextCell is not null)
+            {
+                var nextCellMeta = nextCell.TryGet<MetadataComponent>();
+
+                if (nextCellMeta is null)
+                    break;
+
+                if (!(nextCellMeta.Name == thisData.Name && nextCellMeta.Option == thisData.Option))
+                    break;
+
+                foundCell = nextCell;
+
+                nextCell = entityMan.GetEntityByDataGrid(worldMan, nextCell, 0, -1);
+            }
+
+            return foundCell;
+        }
+
+        public static bool IsSameCellType(this IEntityMan entityMan, IWorldMan worldMan, IEntity entity, int ox, int oy)
+        {
+            var nextCell = entityMan.GetEntityByDataGrid(worldMan, entity, ox, oy);
+
+            var nextCellMeta = nextCell.TryGet<MetadataComponent>();
+
+            if (nextCellMeta is null)
+                return false;
+
+            var thisData = entity.Get<MetadataComponent>();
+
+            return nextCellMeta.Name == thisData.Name && nextCellMeta.Option == thisData.Option;
+        }
+
+        public static IEntity FindHorizontalDoorCell(this IEntityMan entityMan, IWorldMan worldMan, IEntity entity)
+        {
+            var foundCell = entity;
+
+            var thisData = entity.Get<MetadataComponent>();
+
+            var nextCell = foundCell;
+
+            while (nextCell is not null)
+            {
+                var nextCellMeta = nextCell.TryGet<MetadataComponent>();
+
+                if (nextCellMeta is null)
+                    break;
+
+                if (!(nextCellMeta.Name == thisData.Name && nextCellMeta.Option == thisData.Option))
+                    break;
+
+                foundCell = nextCell;
+
+                nextCell = entityMan.GetEntityByDataGrid(worldMan, nextCell, -1, 0);
+            }
+
+            return foundCell;
         }
 
         public static IEntity GetMissionScreenText(this IEntityMan entityMan)

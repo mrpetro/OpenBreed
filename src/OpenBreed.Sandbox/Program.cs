@@ -670,7 +670,7 @@ namespace OpenBreed.Sandbox
             var gameWorldBuilder = worldMan.Create();
             gameWorldBuilder.SetName("Dummy");
             gameWorldBuilder.SetSize(width, height);
-            gameWorldBuilder.AddModule(dataGridFactory.Create<IEntity>(width, height));
+            gameWorldBuilder.AddModule(dataGridFactory.Create<int>(width, height));
             gameWorldBuilder.AddModule(broadphaseGridFactory.CreateStatic(width, height, 16));
             gameWorldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
 
