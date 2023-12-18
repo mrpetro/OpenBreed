@@ -8,7 +8,7 @@ local function RemoveHorizontalDoorObstacle(doorCell)
     local doorCellMeta = doorCell:GetMetadata()
     doorCellMeta.State = "Opened"
 
-    local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 1, 0)
+    local nextDoorCell = Entities:GetEntityByDataGrid(Worlds, doorCell, 1, 0)
    
     nextDoorCell:SetBodyOffEx()
 
@@ -29,7 +29,7 @@ local function RemoveVerticalDoorObstacle(doorCell)
     local doorCellMeta = doorCell:GetMetadata()
     doorCellMeta.State = "Opened"
 
-    local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 0, 1) 
+    local nextDoorCell = Entities:GetEntityByDataGrid(Worlds, doorCell, 0, 1) 
     nextDoorCell:SetBodyOffEx()
 
     local nextDoorCellMeta = nextDoorCell:GetMetadata()
@@ -119,23 +119,23 @@ local function Open(doorEntity, actorEntity, projection)
         end
     end
 
-    local doorCell = doorEntity:FindHorizontalDoorCell(Worlds)
+    local doorCell = Entities:FindHorizontalDoorCell(Worlds, doorEntity)
 
     if(doorCell ~= doorEntity)
     then
         --Logging:Info("Open from right!")
-        local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 1, 0)
+        local nextDoorCell = Entities:GetEntityByDataGrid(Worlds, doorCell, 1, 0)
         OpenDoor(doorCell, nextDoorCell, "Horizontal")
     else
-        if(doorCell:IsSameCellType(Worlds, 1, 0))
+        if(Entities:IsSameCellType(Worlds, doorCell, 1, 0))
         then
             --Logging:Info("Open from left!")
-            local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 1, 0)
+            local nextDoorCell = Entities:GetEntityByDataGrid(Worlds, doorCell, 1, 0)
             OpenDoor(doorCell, nextDoorCell, "Horizontal")
         else
             -- Single cell horizontally, might be vertical Door
-            doorCell = doorEntity:FindVerticalDoorCell(Worlds)
-            local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 0, 1)
+            doorCell = Entities:FindVerticalDoorCell(Worlds, doorEntity)
+            local nextDoorCell = Entities:GetEntityByDataGrid(Worlds, doorCell, 0, 1)
             OpenDoor(doorCell, nextDoorCell, "Vertical")
         end
     end
@@ -185,23 +185,23 @@ end
 
 local function Erase(doorEntity)
    
-    local doorCell = doorEntity:FindHorizontalDoorCell(Worlds)
+    local doorCell = Entities:FindHorizontalDoorCell(Worlds, doorEntity)
 
     if(doorCell ~= doorEntity)
     then
         --Logging:Info("Open from right!")
-        local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 1, 0)
+        local nextDoorCell = Entities:GetEntityByDataGrid(Worlds, doorCell, 1, 0)
         DestroyDoor(doorCell, nextDoorCell, "Horizontal")
     else
-        if(doorCell:IsSameCellType(Worlds, 1, 0))
+        if(Entities:IsSameCellType(Worlds, doorCell, 1, 0))
         then
             --Logging:Info("Open from left!")
-            local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 1, 0)
+            local nextDoorCell = Entities:GetEntityByDataGrid(Worlds, doorCell, 1, 0)
             DestroyDoor(doorCell, nextDoorCell, "Horizontal")
         else
             -- Single cell horizontally, might be vertical Door
-            doorCell = doorEntity:FindVerticalDoorCell(Worlds)
-            local nextDoorCell = doorCell:GetEntityByDataGrid(Worlds, 0, 1)
+            doorCell = Entities:FindVerticalDoorCell(Worlds, doorEntity)
+            local nextDoorCell = Entities:GetEntityByDataGrid(Worlds, doorCell, 0, 1)
             DestroyDoor(doorCell, nextDoorCell, "Vertical")
         end
     end

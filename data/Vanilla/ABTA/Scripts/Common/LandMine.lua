@@ -20,7 +20,7 @@
 	do
 		for j = -1,1,1 
 		do
-			local nextDoorCell = mineEntity:GetEntityByDataGrid(Worlds, i, j)
+			local nextDoorCell = Entities:GetEntityByDataGrid(Worlds, mineEntity, i, j)
 
 			Factory:CreateSlowdown(Worlds, mineEntity, mineEntity.WorldId, i, j)
 
