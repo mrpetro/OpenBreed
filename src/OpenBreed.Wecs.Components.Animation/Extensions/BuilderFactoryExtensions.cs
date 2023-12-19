@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Components.Animation.Extensions
 {
     public static class BuilderFactoryExtensions
     {
-        public static void SetupAnimationBuilderFactories(this IBuilderFactory builderFactory, IServiceProvider serviceProvider)
+        public static void SetupAnimationBuilders(this IBuilderFactory builderFactory, IServiceProvider serviceProvider)
         {
             builderFactory.Register<AnimationComponentBuilder>(() => new AnimationComponentBuilder(serviceProvider.GetService<IClipMan<IEntity>>()));
         }

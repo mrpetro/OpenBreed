@@ -72,4 +72,8 @@
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\Xml\" />
+  </ItemGroup>
+
 </Project>

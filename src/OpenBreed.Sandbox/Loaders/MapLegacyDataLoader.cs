@@ -19,6 +19,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Hud;
@@ -175,18 +176,21 @@ namespace OpenBreed.Sandbox.Loaders
 
             var cellSize = layout.CellSize;
 
-            var tileGridComponentBuilder = builderFactory.GetBuilder<TileGridComponentBuilder>();
-            tileGridComponentBuilder.SetGrid(layout.Width, layout.Height, 1, cellSize);
+            var tileGridComponent = builderFactory.GetBuilder<TileGridComponentBuilder>()
+                .SetGrid(layout.Width, layout.Height, 1, cellSize)
+                .Build();
 
-            var tileGridComponent = tileGridComponentBuilder.Build();
+            var dataGridComponent = builderFactory.GetBuilder<DataGridComponentBuilder>()
+                .SetGrid(layout.Width, layout.Height)
+                .Build();
 
             mapEntity.Add(new StampPutterComponent());
             mapEntity.Add(tileGridComponent);
+            mapEntity.Add(dataGridComponent);
 
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Height);
-            worldBuilder.AddModule(dataGridFactory.Create<int>(layout.Width, layout.Height));
             worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
             worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
 
@@ -197,9 +201,6 @@ namespace OpenBreed.Sandbox.Loaders
             var mapper = new MapMapper(dbMap.TileSetRef);
 
             var atlasId = tileMan.GetByName(mapper.Level).Id;
-            //var tileGrid = world.GetModule<ITileGrid>();
-            var dataGrid = world.GetModule<IDataGrid<int>>();
-
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
 
@@ -232,7 +233,7 @@ namespace OpenBreed.Sandbox.Loaders
                             var cellEntity = LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
 
                             if (cellEntity is not null)
-                                dataGrid.Set(indexPos, cellEntity.Id);
+                                dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
                         }
 
                         //if (mapper.Map(actionValue, gfxValue, out string templaneName, out string flavor))
@@ -256,7 +257,7 @@ namespace OpenBreed.Sandbox.Loaders
                         var cellEntity = LoadUnknownCodeCell(mapper, map, visited, ix, iy, gfxValue, actionValue, world);
                     
                         if(cellEntity is not null)
-                            dataGrid.Set(indexPos, cellEntity.Id);
+                            dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
                     }
                 }
 

@@ -86,9 +86,10 @@ namespace OpenBreed.Wecs.Components.Rendering
             return new TileGridComponent(this);
         }
 
-        public void SetGrid(int width, int height, int layersNo, int cellSize)
+        public TileGridComponentBuilder SetGrid(int width, int height, int layersNo, int cellSize)
         {
             Grid = tileGridFactory.CreateGrid(width, height, layersNo, cellSize);
+            return this;
         }
 
         #endregion Public Methods

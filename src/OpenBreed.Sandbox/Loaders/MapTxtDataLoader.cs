@@ -15,6 +15,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
+using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Worlds;
@@ -310,13 +311,17 @@ namespace OpenBreed.Sandbox.Loaders
 
             var cellSize = layout.CellSize;
 
-            var tileGridComponentBuilder = builderFactory.GetBuilder<TileGridComponentBuilder>();
-            tileGridComponentBuilder.SetGrid(layout.Width, layout.Height, 1, cellSize);
+            var tileGridComponent = builderFactory.GetBuilder<TileGridComponentBuilder>()
+                .SetGrid(layout.Width, layout.Height, 1, cellSize)
+                .Build();
 
-            var tileGridComponent = tileGridComponentBuilder.Build();
+            var dataGridComponent = builderFactory.GetBuilder<DataGridComponentBuilder>()
+                .SetGrid(layout.Width, layout.Height)
+                .Build();
 
             mapEntity.Add(new StampPutterComponent());
             mapEntity.Add(tileGridComponent);
+            mapEntity.Add(dataGridComponent);
 
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);

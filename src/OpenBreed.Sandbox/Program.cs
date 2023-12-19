@@ -37,6 +37,7 @@ using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
+using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Door;
@@ -143,9 +144,10 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupBuilderFactory((builderFactory, sp) =>
             {
-                builderFactory.SetupPhysicsBuilderFactories(sp);
-                builderFactory.SetupRenderingComponents(sp);
-                builderFactory.SetupAnimationBuilderFactories(sp);
+                builderFactory.SetupPhysicsBuilders(sp);
+                builderFactory.SetupRenderingBuilders(sp);
+                builderFactory.SetupAnimationBuilders(sp);
+                builderFactory.SetupSandboxBuilders(sp);
             });
 
             hostBuilder.SetupABFormats();
@@ -650,7 +652,6 @@ namespace OpenBreed.Sandbox
             var renderableFactory = GetManager<IRenderableFactory>();
             var tileGridFactory = GetManager<ITileGridFactory>();
             var broadphaseGridFactory = GetManager<IBroadphaseFactory>();
-            var dataGridFactory = GetManager<IDataGridFactory>();
             var palettesDataProvider = GetManager<PalettesDataProvider>();
             var repositoryProvider = GetManager<IRepositoryProvider>();
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
@@ -670,20 +671,22 @@ namespace OpenBreed.Sandbox
             var gameWorldBuilder = worldMan.Create();
             gameWorldBuilder.SetName("Dummy");
             gameWorldBuilder.SetSize(width, height);
-            gameWorldBuilder.AddModule(dataGridFactory.Create<int>(width, height));
             gameWorldBuilder.AddModule(broadphaseGridFactory.CreateStatic(width, height, 16));
             gameWorldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
 
             var mapEntity = entityMan.Create($"Maps");
 
-            var tileGridComponentBuilder = builderFactory.GetBuilder<TileGridComponentBuilder>();
-            tileGridComponentBuilder.SetGrid(width, height, 1, 16);
+            var tileGridComponent = builderFactory.GetBuilder<TileGridComponentBuilder>()
+                .SetGrid(width, height, 1, 16)
+                .Build();
 
-            var tileGridComponent = tileGridComponentBuilder.Build();
+            var dataGridComponent = builderFactory.GetBuilder<DataGridComponentBuilder>()
+                .SetGrid(width, height)
+                .Build();
 
             mapEntity.Add(new StampPutterComponent());
             mapEntity.Add(tileGridComponent);
-
+            mapEntity.Add(dataGridComponent);
 
             gameWorldBuilder.SetupGameWorldSystems();
 

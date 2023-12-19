@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
 {
     public static class BuilderFactoryExtensions
     {
-        public static void SetupRenderingComponents(this IBuilderFactory builderFactory, IServiceProvider sp)
+        public static void SetupRenderingBuilders(this IBuilderFactory builderFactory, IServiceProvider sp)
         {
             var dataLoderFactory = sp.GetService<IDataLoaderFactory>();
 
