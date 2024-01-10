@@ -31,9 +31,13 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<DirectionSystemVanilla>();
 
             //builder.AddSystem(new FollowerSystem(core));
-            builder.AddSystem<DynamicBodiesAabbUpdaterSystem>();
+            builder.AddSystem<AddDynamicBodySystem>();
+            builder.AddSystem<RemoveDynamicBodySystem>();
+            builder.AddSystem<UpdateDynamicBodySystem>();
             builder.AddSystem<DynamicBodiesCollisionCheckSystem>();
-            builder.AddSystem<StaticBodiesSystem>();
+            builder.AddSystem<AddStaticBodySystem>();
+            builder.AddSystem<RemoveStaticBodySystem>();
+            //builder.AddSystem<StaticBodiesSystem>();
             //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
 
             builder.AddSystem<ItemManagingSystem>();

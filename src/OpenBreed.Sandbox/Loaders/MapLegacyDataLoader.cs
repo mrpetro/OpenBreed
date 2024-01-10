@@ -26,10 +26,13 @@ using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Physics.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
@@ -182,17 +185,25 @@ namespace OpenBreed.Sandbox.Loaders
 
             var dataGridComponent = builderFactory.GetBuilder<DataGridComponentBuilder>()
                 .SetGrid(layout.Width, layout.Height)
+            .Build();
+
+            var broadphaseStaticComponent = builderFactory.GetBuilder<BroadphaseStaticComponentBuilder>()
+                .SetGrid(layout.Width, layout.Height, cellSize)
+                .Build();
+
+            var broadphaseDynamicComponent = builderFactory.GetBuilder<BroadphaseDynamicComponentBuilder>()
+                .Set()
                 .Build();
 
             mapEntity.Add(new StampPutterComponent());
             mapEntity.Add(tileGridComponent);
             mapEntity.Add(dataGridComponent);
+            mapEntity.Add(broadphaseStaticComponent);
+            mapEntity.Add(broadphaseDynamicComponent);
 
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Height);
-            worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
-            worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
 
             worldBuilder.SetupGameWorldSystems();
 
@@ -228,13 +239,28 @@ namespace OpenBreed.Sandbox.Loaders
 
                         tileGridComponent.Grid.ModifyTile(indexPos, atlasId, gfxValue);
 
-                        if (action != null)
-                        {
-                            var cellEntity = LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
+                        if (action is null)
+                            continue;
 
-                            if (cellEntity is not null)
-                                dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
+                        var cellEntity = LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
+
+                        if (cellEntity is null)
+                            continue;
+
+                        if (cellEntity.Id == 5476)
+                        {
+                            var d = entityMan.GetById(5476);
                         }
+
+                        dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
+
+                        //Check if cell entity has static body
+                        //if (cellEntity.Contains<PositionComponent>() &&
+                        //    cellEntity.Contains<BodyComponent>() &&
+                        //    !cellEntity.Contains<VelocityComponent>())
+                        //{
+                        //    mapEntity.AddEntityToStatics(cellEntity);
+                        //}
 
                         //if (mapper.Map(actionValue, gfxValue, out string templaneName, out string flavor))
                         //    LoadCellEntity(mapper, map, visited, ix, iy, world, templaneName, flavor, gfxValue);

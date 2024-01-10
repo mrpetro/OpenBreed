@@ -18,6 +18,8 @@ namespace OpenBreed.Physics.Interface
     }
 
 
+    public delegate Box2 UpdateDynamicDelegate(int itemId);
+
     /// <summary>
     /// Interface for dynamic collision detection
     /// </summary>
@@ -28,6 +30,8 @@ namespace OpenBreed.Physics.Interface
         void InsertItem(int itemId, Box2 aabb);
 
         void UpdateItem(int itemId, Box2 aabb);
+
+        void UpdateItems(UpdateDynamicDelegate updater);
 
         void RemoveItem(int itemId);
 

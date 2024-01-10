@@ -24,6 +24,12 @@ namespace OpenBreed.Wecs.Components.Physics.Extensions
                 serviceProvider.GetService<IFixtureMan>(),
                 serviceProvider.GetService<IShapeMan>(),                                                                
                 serviceProvider.GetService<ICollisionMan<IEntity>>()));
+
+            builderFactory.Register<BroadphaseStaticComponentBuilder>(() => new BroadphaseStaticComponentBuilder(
+                serviceProvider.GetService<IBroadphaseFactory>()));
+
+            builderFactory.Register<BroadphaseDynamicComponentBuilder>(() => new BroadphaseDynamicComponentBuilder(
+                serviceProvider.GetService<IBroadphaseFactory>()));
         }
     }
 }

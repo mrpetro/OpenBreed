@@ -84,6 +84,14 @@ namespace OpenBreed.Physics.Generic.Managers
             cell.Aabb = aabb;
         }
 
+        public void UpdateItems(UpdateDynamicDelegate updater)
+        {
+            foreach (var item in items)
+            {
+                item.Value.Aabb = updater.Invoke(item.Key);
+            }
+        }
+
         public void RemoveItem(int itemId)
         {
             if (!items.TryGetValue(itemId, out BroadphaseDynamicElement cell))
@@ -100,10 +108,12 @@ namespace OpenBreed.Physics.Generic.Managers
 
             cells.Sort(Xcomparison);
 
+            var prevCount = 0;
+
             for (int i = 0; i < cells.Count - 1; i++)
             {
                 var activeDynamic = cells[i];
-
+                prevCount = cells.Count;
                 staticPhase(activeDynamic, dt);
 
                 nextCollider = cells[i + 1];

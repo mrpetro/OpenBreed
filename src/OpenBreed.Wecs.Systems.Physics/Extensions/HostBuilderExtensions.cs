@@ -39,19 +39,42 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             systemFactory.RegisterSystem<MovementSystemVanilla>((world) => new MovementSystemVanilla(
                 world,
                 serviceProvider.GetService<IEntityMan>()));
-            systemFactory.RegisterSystem<DynamicBodiesAabbUpdaterSystem>((world) => new DynamicBodiesAabbUpdaterSystem(
-                world,
-                serviceProvider.GetService<IShapeMan>()));
             systemFactory.RegisterSystem<DynamicBodiesCollisionCheckSystem>((world) => new DynamicBodiesCollisionCheckSystem(
                 world,
                 serviceProvider.GetService<IEntityMan>(),
                 serviceProvider.GetService<IShapeMan>(),
                 serviceProvider.GetService<ICollisionMan<IEntity>>()));
-            systemFactory.RegisterSystem<StaticBodiesSystem>((world) => new StaticBodiesSystem(
-                world,
+
+            systemFactory.RegisterSystem<AddDynamicBodySystem>((world) => new AddDynamicBodySystem(
+                serviceProvider.GetService<IEventsMan>(),
                 serviceProvider.GetService<IEntityMan>(),
-                serviceProvider.GetService<IShapeMan>(),
-                serviceProvider.GetService<IEventsMan>()));
+                serviceProvider.GetService<IWorldMan>()));
+
+            systemFactory.RegisterSystem<RemoveDynamicBodySystem>((world) => new RemoveDynamicBodySystem(
+                serviceProvider.GetService<IEventsMan>(),
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IWorldMan>()));
+
+            systemFactory.RegisterSystem<UpdateDynamicBodySystem>((world) => new UpdateDynamicBodySystem(
+                serviceProvider.GetService<IEventsMan>(),
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IWorldMan>()));
+
+            systemFactory.RegisterSystem<AddStaticBodySystem>((world) => new AddStaticBodySystem(
+                serviceProvider.GetService<IEventsMan>(),
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IWorldMan>()));
+
+            systemFactory.RegisterSystem<RemoveStaticBodySystem>((world) => new RemoveStaticBodySystem(
+                serviceProvider.GetService<IEventsMan>(),
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IWorldMan>()));
+
+            //systemFactory.RegisterSystem<StaticBodiesSystem>((world) => new StaticBodiesSystem(
+            //    world,
+            //    serviceProvider.GetService<IEntityMan>(),
+            //    serviceProvider.GetService<IShapeMan>(),
+            //    serviceProvider.GetService<IEventsMan>()));
 
             //systemFactory.Register<CollisionResponseSystem>(() => new CollisionResponseSystem(serviceProvider.GetService<IEntityMan>(),
             //                                                         serviceProvider.GetService<IWorldMan>(),

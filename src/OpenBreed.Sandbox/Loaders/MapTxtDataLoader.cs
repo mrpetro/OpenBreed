@@ -327,8 +327,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.SetName(entryId);
             worldBuilder.SetSize(layout.Width, layout.Width);
 
-            worldBuilder.AddModule(broadphaseGridFactory.CreateStatic(layout.Width, layout.Height, cellSize));
-            worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
+            //worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
 
             worldBuilder.SetupGameWorldSystems();
             world = worldBuilder.Build();

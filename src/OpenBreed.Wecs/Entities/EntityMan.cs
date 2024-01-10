@@ -2,6 +2,7 @@
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,6 @@ namespace OpenBreed.Wecs.Entities
         public EntityMan(IEventsMan eventsMan)
         {
             this.eventsMan = eventsMan;
-
-            this.eventsMan.Subscribe<EntityLeftEvent>(OnEntityLeftWorld);
         }
 
         #endregion Public Constructors
@@ -86,6 +85,23 @@ namespace OpenBreed.Wecs.Entities
             return entities.Items.Where(predicate);
         }
 
+        public void Cleanup()
+        {
+            foreach (var entity in toErase)
+            {
+                //Erase only entities that have no world 
+                if (entity.HasWorld())
+                {
+                    continue;
+                }
+
+                entities.RemoveById(entity.Id);
+                RemoveFromLookup(entity.Tag, entity);
+            }
+
+            toErase.Clear();
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -124,18 +140,6 @@ namespace OpenBreed.Wecs.Entities
             }
 
             foundEntities.Add(entity);
-        }
-
-        private void OnEntityLeftWorld(object sender, EntityLeftEvent e)
-        {
-            var entity = (IEntity)sender;
-
-            if (toErase.Contains(entity))
-            {
-                entities.RemoveById(entity.Id);
-                RemoveFromLookup(entity.Tag, entity);
-                toErase.Remove(entity);
-            }
         }
 
         private void RemoveFromLookup(string tag, IEntity entity)

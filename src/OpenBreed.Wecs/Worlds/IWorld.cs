@@ -53,21 +53,6 @@ namespace OpenBreed.Wecs.Worlds
         void AddEntity(IEntity entity);
 
         /// <summary>
-        /// Get specific module from this world
-        /// </summary>
-        /// <typeparam name="TModule">Type of module to get</typeparam>
-        /// <returns>World module of specific type</returns>
-        TModule GetModule<TModule>();
-
-        /// <summary>
-        /// Try get specific module from this world
-        /// </summary>
-        /// <typeparam name="TModule">Type of module to get</typeparam>
-        /// <param name="module">World module of specific type</param>
-        /// <returns>True if module was found, false otherwise</returns>
-        bool TryGetModule<TModule>( out TModule module);
-
-        /// <summary>
         /// Get specific system from this world
         /// </summary>
         /// <typeparam name="T">Type of system to get</typeparam>

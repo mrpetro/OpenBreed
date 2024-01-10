@@ -383,8 +383,6 @@ namespace OpenBreed.Sandbox.Entities
             if (entryEntity is null)
                 throw new Exception($"No entry with ID '{entryId}' found.");
 
-            var broadphase = world.GetModule<IBroadphaseDynamic>();
-
             var entryPos = entryEntity.Get<PositionComponent>();
             var targetPos = target.Get<PositionComponent>();
             //var targetAabb = broadphase.GetAabb(target.Id);

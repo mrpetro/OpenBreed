@@ -31,8 +31,6 @@ namespace OpenBreed.Wecs.Worlds
         internal string name;
         internal Dictionary<Type, Func<IWorld, ISystem>> systemInitializers = new Dictionary<Type, Func<IWorld, ISystem>>();
 
-        internal Dictionary<Type, object> modules = new Dictionary<Type, object>();
-
         #endregion Internal Fields
 
         #region Private Fields
@@ -64,17 +62,6 @@ namespace OpenBreed.Wecs.Worlds
         {
             foreach (var initializer in systemInitializers.Values)
                 yield return initializer.Invoke(world);
-        }
-
-        public IWorldBuilder AddModule<TModule>(TModule module)
-        {
-            var moduleType = typeof(TModule);
-
-            if (modules.ContainsKey(moduleType))
-                throw new InvalidOperationException($"Module with type '{moduleType}' already added.");
-
-            modules.Add(moduleType, module);
-            return this;
         }
 
         public IWorldBuilder AddSystem<TSystem>() where TSystem : ISystem

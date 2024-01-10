@@ -533,6 +533,7 @@ namespace OpenBreed.Sandbox
         {
             dt = Math.Min(1.0f/30.0f, dt);
 
+
             GetManager<IInputsMan>().Update();
 
             GetManager<IWorldMan>().Update(dt);
@@ -540,6 +541,9 @@ namespace OpenBreed.Sandbox
             GetManager<IJobsMan>().Update(dt);
 
             GetManager<ISoundMan>().Update();
+
+            GetManager<IEntityMan>().Cleanup();
+
         }
 
         private int ReadStream(InterleavedStereoModule module, int bufferSize, short[] buffer)
@@ -671,8 +675,7 @@ namespace OpenBreed.Sandbox
             var gameWorldBuilder = worldMan.Create();
             gameWorldBuilder.SetName("Dummy");
             gameWorldBuilder.SetSize(width, height);
-            gameWorldBuilder.AddModule(broadphaseGridFactory.CreateStatic(width, height, 16));
-            gameWorldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
+            //gameWorldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
 
             var mapEntity = entityMan.Create($"Maps");
 

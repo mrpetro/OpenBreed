@@ -139,7 +139,7 @@ namespace OpenBreed.Wecs.Worlds
             }
 
             if(entities.Add(entity))
-                eventsMan.Raise(null, new EntityLeavingEvent(entity.Id));
+                eventsMan.Raise(null, new EntityLeavingEvent(entity.Id, entity.WorldId));
         }
 
         /// <summary>

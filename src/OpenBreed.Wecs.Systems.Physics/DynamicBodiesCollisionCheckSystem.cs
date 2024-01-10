@@ -22,12 +22,9 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Private Fields
 
         private const int CELL_SIZE = 16;
-        private readonly List<IEntity> inactiveDynamics = new List<IEntity>();
         private readonly IEntityMan entityMan;
         private readonly IShapeMan shapeMan;
         private readonly ICollisionMan<IEntity> collisionMan;
-        private IBroadphaseStatic broadphaseGrid;
-        private IBroadphaseDynamic broadphaseDynamic;
 
         #endregion Private Fields
 
@@ -42,9 +39,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;
             this.collisionMan = collisionMan;
-
-            broadphaseGrid = world.GetModule<IBroadphaseStatic>();
-            broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
         }
 
         #endregion Internal Constructors
@@ -58,14 +52,22 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public void Update(IWorldContext context)
         {
-            broadphaseDynamic.Solve(QueryStaticGrid, TestNarrowPhaseDynamic, context.Dt);
+            var mapEntity = entityMan.GetByTag("Maps").Where(e => e.WorldId == context.World.Id).FirstOrDefault();
+
+            if (mapEntity is null)
+                return;
+
+            var staticPhase = mapEntity.Get<BroadphaseStaticComponent>();
+            var dynamicPhase = mapEntity.Get<BroadphaseDynamicComponent>();
+
+            dynamicPhase.Dynamic.Solve((be, dt) => QueryStaticGrid(staticPhase.Grid, be, dt), TestNarrowPhaseDynamic, context.Dt);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        public override bool ContainsEntity(IEntity entity) => broadphaseDynamic.ContainsItem(entity.Id);
+        public override bool ContainsEntity(IEntity entity) => false;
 
         public override void AddEntity(IEntity entity)
         {
@@ -200,11 +202,11 @@ namespace OpenBreed.Wecs.Systems.Physics
             return contacts.Count > 0;
         }
 
-        private void QueryStaticGrid(BroadphaseDynamicElement cell, float dt)
+        private void QueryStaticGrid(IBroadphaseStatic grid, BroadphaseDynamicElement cell, float dt)
         {
             var dynamicAabb = cell.Aabb;
 
-            var idSet = broadphaseGrid.QueryStatic(dynamicAabb);
+            var idSet = grid.QueryStatic(dynamicAabb);
 
             if (idSet.Count == 0)
                 return;

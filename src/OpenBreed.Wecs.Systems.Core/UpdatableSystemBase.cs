@@ -8,13 +8,19 @@ namespace OpenBreed.Wecs.Systems.Core
 {
     public abstract class UpdatableSystemBase<TSystem> : SystemBase<TSystem>, IUpdatableSystem where TSystem : ISystem
     {
-        #region Private Fields
+        #region Protected Fields
 
-        private readonly HashSet<IEntity> entities = new HashSet<IEntity>();
+        protected readonly HashSet<IEntity> entities = new HashSet<IEntity>();
 
-        #endregion Private Fields
+        #endregion Protected Fields
 
         #region Public Methods
+
+        public override void AddEntity(IEntity entity) => entities.Add(entity);
+
+        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
+
+        public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
         public virtual void Update(IWorldContext context)
         {
@@ -38,12 +44,6 @@ namespace OpenBreed.Wecs.Systems.Core
         #endregion Public Methods
 
         #region Protected Methods
-
-        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public override void AddEntity(IEntity entity) => entities.Add(entity);
-
-        public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
         protected abstract void UpdateEntity(IEntity entity, IWorldContext context);
 

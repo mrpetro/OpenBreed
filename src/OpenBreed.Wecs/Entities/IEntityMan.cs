@@ -34,6 +34,11 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="entity">Entity to erase</param>
         void RequestErase(IEntity entity);
 
+        /// <summary>
+        /// Perform cleanup
+        /// </summary>
+        void Cleanup();
+
         #endregion Public Methods
     }
 }

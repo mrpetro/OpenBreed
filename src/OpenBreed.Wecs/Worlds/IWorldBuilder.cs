@@ -10,7 +10,6 @@ namespace OpenBreed.Wecs.Worlds
         IWorld Build();
 
         IWorldBuilder AddSystem<TSystem>() where TSystem : ISystem;
-        IWorldBuilder AddModule<TModule>(TModule module);
         IWorldBuilder SetName(string name);
         IWorldBuilder SetSize(int width, int height);
 
