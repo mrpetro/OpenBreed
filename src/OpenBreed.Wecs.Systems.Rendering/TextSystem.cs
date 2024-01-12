@@ -15,7 +15,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(TextComponent),
         typeof(PositionComponent))]
-    public class TextSystem : SystemBase<TextSystem>, IRenderable
+    public class TextSystem : MatchingSystemBase<TextSystem>, IRenderable
     {
         #region Private Fields
 

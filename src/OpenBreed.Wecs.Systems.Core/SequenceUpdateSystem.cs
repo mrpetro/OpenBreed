@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class SequenceUpdateSystem<TSystem> : SystemBase<SequenceUpdateSystem<TSystem>>, IUpdatableSystem where TSystem :IEntityUpdateSubsystem
+    public class SequenceUpdateSystem<TSystem> : MatchingSystemBase<SequenceUpdateSystem<TSystem>>, IUpdatableSystem where TSystem :IEntityUpdateSubsystem
     {
         #region Private Fields
 

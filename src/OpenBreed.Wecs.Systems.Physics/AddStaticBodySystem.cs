@@ -17,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(BroadphaseStaticComponent))]
-    public class AddStaticBodySystem : EventSystem<EntityEnteredEvent, AddStaticBodySystem>
+    public class AddStaticBodySystem : EventMatchingSystem<EntityEnteredEvent, AddStaticBodySystem>
     {
         #region Private Fields
 

@@ -16,7 +16,7 @@ namespace OpenBreed.Wecs.Worlds
         /// <param name="system">System that is being matched</param>
         /// <param name="entity">Entity that is being matched</param>
         /// <returns>True if system and entity are matching, false otherwise</returns>
-        bool AreMatch(ISystem system, IEntity entity);
+        bool AreMatch(IMatchingSystem system, IEntity entity);
 
         #endregion Public Methods
     }

@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Systems
 
         #region Public Methods
 
-        public T GetSystemByEntityId<T>(int entityId) where T : ISystem
+        public T GetSystemByEntityId<T>(int entityId) where T : IMatchingSystem
         {
             var entity = entityMan.GetById(entityId);
             if (entity.WorldId == -1)
@@ -40,7 +40,7 @@ namespace OpenBreed.Wecs.Systems
             return system;
         }
 
-        public T GetSystemByWorldId<T>(int worldId) where T : ISystem
+        public T GetSystemByWorldId<T>(int worldId) where T : IMatchingSystem
         {
             var world = worldMan.GetById(worldId);
             if (world == null)

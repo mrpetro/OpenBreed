@@ -57,7 +57,7 @@ namespace OpenBreed.Wecs.Worlds
         /// </summary>
         /// <typeparam name="T">Type of system to get</typeparam>
         /// <returns>World system of specific type</returns>
-        T GetSystem<T>() where T : ISystem;
+        T GetSystem<T>() where T : IMatchingSystem;
 
         #endregion Public Methods
     }

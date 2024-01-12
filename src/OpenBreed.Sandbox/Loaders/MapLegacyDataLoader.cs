@@ -19,12 +19,12 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
@@ -203,7 +203,6 @@ namespace OpenBreed.Sandbox.Loaders
 
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
-            worldBuilder.SetSize(layout.Width, layout.Height);
 
             worldBuilder.SetupGameWorldSystems();
 

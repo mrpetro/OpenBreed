@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Wecs.Systems
 {
-    public interface ISystemBuilder<T> where T : ISystem
+    public interface ISystemBuilder<T> where T : IMatchingSystem
     {
         #region Public Methods
 

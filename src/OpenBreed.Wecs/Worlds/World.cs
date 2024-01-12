@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Fields
 
-        private readonly Dictionary<IEntity, HashSet<ISystem>> entities = new Dictionary<IEntity, HashSet<ISystem>>();
+        private readonly Dictionary<IEntity, HashSet<IMatchingSystem>> entities = new Dictionary<IEntity, HashSet<IMatchingSystem>>();
         private readonly IEntityToSystemMatcher entityToSystemMatcher;
         private readonly WorldContext context;
         private float timeMultiplier = 1.0f;
@@ -85,7 +85,7 @@ namespace OpenBreed.Wecs.Worlds
             return $"World:{Name}";
         }
 
-        public T GetSystem<T>() where T : ISystem
+        public T GetSystem<T>() where T : IMatchingSystem
         {
             return Systems.OfType<T>().FirstOrDefault();
         }
@@ -112,8 +112,10 @@ namespace OpenBreed.Wecs.Worlds
             RemoveFromAllSystems(entity);
             entities.Remove(entity);
 
-            if(((Entity)entity).WorldId == Id )
+            if (((Entity)entity).WorldId == Id)
+            {
                 ((Entity)entity).WorldId = WecsConsts.NO_WORLD_ID;
+            }
         }
 
         public void AddEntity(IEntity entity)
@@ -128,9 +130,9 @@ namespace OpenBreed.Wecs.Worlds
             ((Entity)entity).WorldId = Id;
         }
 
-        private IEnumerable<ISystem> GetMatchingSystems(IEntity entity)
+        private IEnumerable<IMatchingSystem> GetMatchingSystems(IEntity entity)
         {
-            foreach (var system in Systems)
+            foreach (var system in Systems.OfType<IMatchingSystem>())
             {
                 if (entityToSystemMatcher.AreMatch(system, entity))
                     yield return system;
@@ -139,7 +141,7 @@ namespace OpenBreed.Wecs.Worlds
 
         private void RemoveFromAllSystems(IEntity entity)
         {
-            if (!entities.TryGetValue(entity, out HashSet<ISystem> systems))
+            if (!entities.TryGetValue(entity, out HashSet<IMatchingSystem> systems))
                 throw new InvalidOperationException();
 
             foreach (var system in systems)

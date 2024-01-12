@@ -15,9 +15,9 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
-using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -325,8 +325,7 @@ namespace OpenBreed.Sandbox.Loaders
 
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);
-            worldBuilder.SetSize(layout.Width, layout.Width);
-
+ 
             //worldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
 
             worldBuilder.SetupGameWorldSystems();

@@ -40,6 +40,7 @@ namespace OpenBreed.Sandbox.Extensions
             //builder.AddSystem<StaticBodiesSystem>();
             //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
 
+            builder.AddSystem<ItemPickupSystem>();
             builder.AddSystem<ItemManagingSystem>();
             builder.AddSystem<LivesSystem>();
             builder.AddSystem<DamageOnHealthDistributionSystem>();

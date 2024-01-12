@@ -28,7 +28,7 @@ namespace OpenBreed.Wecs.Systems
 
         #region Public Methods
 
-        public bool AreMatch(ISystem system, IEntity entity)
+        public bool AreMatch(IMatchingSystem system, IEntity entity)
         {
             if (!systemRequirementsProvider.TryGetRequirements(system.GetType(), out (HashSet<Type> Allowed, HashSet<Type> Forbidden) requirements))
                 return true;

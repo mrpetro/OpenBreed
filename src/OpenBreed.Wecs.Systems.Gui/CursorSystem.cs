@@ -17,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Gui
     [RequireEntityWith(
         typeof(CursorInputComponent),
         typeof(PositionComponent))]
-    public class CursorSystem : SystemBase<CursorSystem>, IRenderable
+    public class CursorSystem : MatchingSystemBase<CursorSystem>, IRenderable
     {
         #region Private Fields
 

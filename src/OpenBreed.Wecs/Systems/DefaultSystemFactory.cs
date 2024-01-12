@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace OpenBreed.Wecs.Systems
 {
@@ -42,7 +43,11 @@ namespace OpenBreed.Wecs.Systems
                 throw new InvalidOperationException($"System '{systemType}' already registered.");
 
             systemInitializers.Add(systemType, initializer);
-            systemRequirementsProvider.RegisterRequirements(systemType);
+
+            if (typeof(IMatchingSystem).IsAssignableFrom(systemType))
+            {
+                systemRequirementsProvider.RegisterRequirements(systemType);
+            }
         }
 
         #endregion Public Methods

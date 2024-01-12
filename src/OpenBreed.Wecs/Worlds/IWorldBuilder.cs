@@ -11,7 +11,6 @@ namespace OpenBreed.Wecs.Worlds
 
         IWorldBuilder AddSystem<TSystem>() where TSystem : ISystem;
         IWorldBuilder SetName(string name);
-        IWorldBuilder SetSize(int width, int height);
 
         #endregion Public Methods
     }

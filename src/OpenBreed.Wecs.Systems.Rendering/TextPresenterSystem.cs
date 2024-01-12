@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         typeof(TextDataComponent),
         typeof(TextPresentationComponent),
         typeof(PositionComponent))]
-    public class TextPresenterSystem : SystemBase<TextPresenterSystem>, IRenderable
+    public class TextPresenterSystem : MatchingSystemBase<TextPresenterSystem>, IRenderable
     {
         #region Private Fields
 

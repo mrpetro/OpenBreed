@@ -19,12 +19,15 @@ namespace OpenBreed.Wecs.Systems
     /// </summary>
     public interface ISystem
     {
-        #region Public Methods
 
-        /// <summary>
-        /// Id of the phase in which system will be updated
-        /// </summary>
-        int PhaseId { get; }
+    }
+
+    /// <summary>
+    /// Interface to system that matches entities based on their components
+    /// </summary>
+    public interface IMatchingSystem : ISystem
+    {
+        #region Public Methods
 
         bool ContainsEntity(IEntity entity);
 

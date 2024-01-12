@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public abstract class UpdatableSystemBase<TSystem> : SystemBase<TSystem>, IUpdatableSystem where TSystem : ISystem
+    public abstract class UpdatableSystemBase<TSystem> : MatchingSystemBase<TSystem>, IUpdatableSystem where TSystem : IMatchingSystem
     {
         #region Protected Fields
 

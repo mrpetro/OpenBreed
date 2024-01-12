@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(PictureComponent),
         typeof(PositionComponent))]
-    public class PictureSystem : SystemBase<PictureSystem>, IRenderable
+    public class PictureSystem : MatchingSystemBase<PictureSystem>, IRenderable
     {
         #region Private Fields
 

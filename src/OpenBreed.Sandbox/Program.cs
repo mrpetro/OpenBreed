@@ -37,7 +37,6 @@ using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
-using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Door;
@@ -47,6 +46,7 @@ using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
@@ -674,8 +674,6 @@ namespace OpenBreed.Sandbox
 
             var gameWorldBuilder = worldMan.Create();
             gameWorldBuilder.SetName("Dummy");
-            gameWorldBuilder.SetSize(width, height);
-            //gameWorldBuilder.AddModule(broadphaseGridFactory.CreateDynamic());
 
             var mapEntity = entityMan.Create($"Maps");
 

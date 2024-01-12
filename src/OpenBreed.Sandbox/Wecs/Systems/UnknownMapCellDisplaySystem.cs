@@ -18,7 +18,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
     [RequireEntityWith(
         typeof(PositionComponent),
         typeof(UnknownCodeComponent))]
-    public class UnknownMapCellDisplaySystem : SystemBase<UnknownMapCellDisplaySystem>, IRenderable
+    public class UnknownMapCellDisplaySystem : MatchingSystemBase<UnknownMapCellDisplaySystem>, IRenderable
     {
         #region Private Fields
 

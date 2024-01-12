@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(SpriteComponent),
         typeof(PositionComponent))]
-    public class SpriteSystem : SystemBase<SpriteSystem>, IRenderable
+    public class SpriteSystem : MatchingSystemBase<SpriteSystem>, IRenderable
     {
         #region Private Fields
 

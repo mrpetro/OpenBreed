@@ -196,7 +196,7 @@ namespace OpenBreed.Wecs.Worlds
 
         private void CheckUpdateAddToSystems(IWorld world, IEntity entity)
         {
-            foreach (var system in world.Systems)
+            foreach (var system in world.Systems.OfType<IMatchingSystem>())
             {
                 var areMatching = entityToSystemMatcher.AreMatch(system, entity);
 

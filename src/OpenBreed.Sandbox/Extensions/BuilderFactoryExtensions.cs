@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Interface.Data;
-using OpenBreed.Sandbox.Components;
 using OpenBreed.Core.Managers;
+using OpenBreed.Sandbox.Wecs.Components;
 
 namespace OpenBreed.Sandbox.Extensions
 {

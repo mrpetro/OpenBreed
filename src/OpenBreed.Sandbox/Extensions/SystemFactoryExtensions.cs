@@ -59,6 +59,10 @@ namespace OpenBreed.Sandbox.Extensions
                 sp.GetService<ItemsMan>(),
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
+
+            systemFactory.RegisterSystem<ItemPickupSystem>((world) => new ItemPickupSystem(
+                sp.GetService<IEventsMan>(),
+                sp.GetService<IEntityMan>()));
         }
 
         #endregion Public Methods

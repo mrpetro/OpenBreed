@@ -10,6 +10,7 @@ using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Sandbox.Wecs.Components;
+using OpenBreed.Sandbox.Wecs.Events;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
@@ -47,6 +48,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private readonly IScriptMan scriptMan;
         private readonly IFsmMan fsmMan;
         private readonly ITriggerMan triggerMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
@@ -63,7 +65,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
             FixtureTypes fixtureTypes,
             IScriptMan scriptMan,
             IFsmMan fsmMan,
-            ITriggerMan triggerMan)
+            ITriggerMan triggerMan,
+            IEventsMan eventsMan)
         {
             this.clipMan = clipMan;
             this.collisionMan = collisionMan;
@@ -76,6 +79,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             this.scriptMan = scriptMan;
             this.fsmMan = fsmMan;
             this.triggerMan = triggerMan;
+            this.eventsMan = eventsMan;
         }
 
         #endregion Public Constructors
@@ -174,6 +178,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private void TriggerCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
+            eventsMan.Raise<ActorCollisionEvent>(null, new ActorCollisionEvent(entityA.Id, entityB.Id));
+
             TryOnCollision(entityA, entityB, projection);
             TryOnCollision(entityB, entityA, projection);
         }

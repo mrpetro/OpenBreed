@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems
 {
-    public abstract class EntityEventSystem<TSystem, TEntityEvent> : SystemBase<TSystem>, IEventSystem<TEntityEvent> where TSystem : ISystem where TEntityEvent : EntityEvent
+    public abstract class EntityEventSystem<TSystem, TEntityEvent> : MatchingSystemBase<TSystem>, IEventSystem<TEntityEvent> where TSystem : IMatchingSystem where TEntityEvent : EntityEvent
     {
         #region Protected Fields
 

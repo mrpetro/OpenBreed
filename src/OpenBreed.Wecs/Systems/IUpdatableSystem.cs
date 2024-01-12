@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Systems
     /// <summary>
     /// System that state will be updated during core update phase
     /// </summary>
-    public interface IUpdatableSystem : ISystem
+    public interface IUpdatableSystem : IMatchingSystem
     {
         /// <summary>
         /// Update all entities in this system using given time step

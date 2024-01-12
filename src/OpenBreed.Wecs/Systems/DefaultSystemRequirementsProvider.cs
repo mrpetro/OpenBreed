@@ -34,8 +34,8 @@ namespace OpenBreed.Wecs.Systems
         {
             ArgumentNullException.ThrowIfNull(systemType);
 
-            if (!typeof(ISystem).IsAssignableFrom(systemType))
-                throw new ArgumentException($"Expected type of {nameof(ISystem)}.");
+            if (!typeof(IMatchingSystem).IsAssignableFrom(systemType))
+                throw new ArgumentException($"Expected type of {nameof(IMatchingSystem)}.");
 
             var attributes = typeAttributesProvider.GetAttributes(systemType);
 

@@ -17,13 +17,6 @@ namespace OpenBreed.Wecs.Worlds
 
     internal class WorldBuilder : IWorldBuilder
     {
-        #region Public Fields
-
-        public int height;
-        public int width;
-
-        #endregion Public Fields
-
         #region Internal Fields
 
         internal readonly WorldMan worldMan;
@@ -88,13 +81,6 @@ namespace OpenBreed.Wecs.Worlds
         public IWorldBuilder SetName(string name)
         {
             this.name = name;
-            return this;
-        }
-
-        public IWorldBuilder SetSize(int width, int height)
-        {
-            this.width = width;
-            this.height = height;
             return this;
         }
 

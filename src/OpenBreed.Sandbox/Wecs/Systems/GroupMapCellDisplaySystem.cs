@@ -16,7 +16,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
     [RequireEntityWith(
         typeof(PositionComponent),
         typeof(GroupComponentEx))]
-    public class GroupMapCellDisplaySystem : SystemBase<GroupMapCellDisplaySystem>, IRenderable
+    public class GroupMapCellDisplaySystem : MatchingSystemBase<GroupMapCellDisplaySystem>, IRenderable
     {
         #region Private Fields
 

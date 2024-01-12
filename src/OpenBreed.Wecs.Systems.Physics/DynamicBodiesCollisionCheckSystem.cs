@@ -17,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         typeof(BodyComponent),
         typeof(VelocityComponent),
         typeof(PositionComponent))]
-    public class DynamicBodiesCollisionCheckSystem : SystemBase<DynamicBodiesCollisionCheckSystem>, IUpdatableSystem
+    public class DynamicBodiesCollisionCheckSystem : MatchingSystemBase<DynamicBodiesCollisionCheckSystem>, IUpdatableSystem
     {
         #region Private Fields
 

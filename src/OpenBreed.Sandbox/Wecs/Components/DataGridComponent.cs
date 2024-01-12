@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Sandbox.Components
+namespace OpenBreed.Sandbox.Wecs.Components
 {
     public interface IDataGridComponentTemplate : IComponentTemplate
     {

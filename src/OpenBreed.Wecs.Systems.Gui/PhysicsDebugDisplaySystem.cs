@@ -16,7 +16,7 @@ namespace OpenBreed.Wecs.Systems.Gui
     [RequireEntityWith(
         typeof(BodyComponent),
         typeof(PositionComponent))]
-    public class PhysicsDebugDisplaySystem : SystemBase<PhysicsDebugDisplaySystem>, IRenderable
+    public class PhysicsDebugDisplaySystem : MatchingSystemBase<PhysicsDebugDisplaySystem>, IRenderable
     {
         #region Private Fields
 

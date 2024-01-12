@@ -5,9 +5,11 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public abstract class EventSystem<TEvent, TSystem> : SystemBase<TSystem>, IEventSystem<TEvent> where TEvent : EventArgs where TSystem : ISystem
+    public abstract class EventMatchingSystem<TEvent, TSystem> : MatchingSystemBase<TSystem>, IEventSystem<TEvent> where TEvent : EventArgs where TSystem : IMatchingSystem
     {
         #region Private Fields
+
+        protected readonly HashSet<IEntity> entities = new HashSet<IEntity>();
 
         private readonly IEventsMan eventsMan;
 
@@ -15,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Constructors
 
-        protected EventSystem(IEventsMan eventsMan)
+        protected EventMatchingSystem(IEventsMan eventsMan)
         {
             this.eventsMan = eventsMan;
 
@@ -25,6 +27,12 @@ namespace OpenBreed.Wecs.Systems.Core
         #endregion Protected Constructors
 
         #region Public Methods
+
+        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
+
+        public override void AddEntity(IEntity entity) => entities.Add(entity);
+
+        public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
         public abstract void Update(object sender, TEvent e);
 

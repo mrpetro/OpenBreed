@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities;
+using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;

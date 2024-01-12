@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 {
     [RequireEntityWith(
         typeof(TileGridComponent))]
-    public class TileRenderSystem : SystemBase<TileRenderSystem>, IRenderable
+    public class TileRenderSystem : MatchingSystemBase<TileRenderSystem>, IRenderable
     {
         #region Private Fields
 
