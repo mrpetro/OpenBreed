@@ -25,5 +25,6 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
+		<Pickable/>
 	</Components>
 </EntityTemplate>

@@ -33,5 +33,6 @@
 				</Item>
 			</Items>
 		</TilePutter>
+		<Pickable/>
 	</Components>
 </EntityTemplate>
