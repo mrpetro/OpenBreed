@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Attributes;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
@@ -20,15 +21,18 @@ namespace OpenBreed.Wecs.Systems.Physics
         private const float FLOOR_FRICTION = 0.2f;
 
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
         internal MovementSystem(
-            IWorld world, IEntityMan entityMan)
+            IEntityMan entityMan,
+            IEventsMan eventsMan)
         {
             this.entityMan = entityMan;
+            this.eventsMan = eventsMan;
         }
 
         #endregion Internal Constructors
@@ -57,7 +61,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                 return;
 
             position.Value = newPos;
-            entity.RaiseEvent(new PositionChangedEventArgs(position.Value));
+            eventsMan.Raise(null, new PositionChangedEvent(entity.Id, position.Value));
         }
 
         #endregion Protected Methods

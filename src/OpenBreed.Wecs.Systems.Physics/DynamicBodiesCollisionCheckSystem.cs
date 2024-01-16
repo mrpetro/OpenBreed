@@ -31,7 +31,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Internal Constructors
 
         internal DynamicBodiesCollisionCheckSystem(
-            IWorld world,
             IEntityMan entityMan,
             IShapeMan shapeMan,
             ICollisionMan<IEntity> collisionMan)

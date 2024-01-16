@@ -1,4 +1,5 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenBreed.Wecs.Events;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems.Physics.Events
 {
-    public class PositionChangedEventArgs : EventArgs
+    public class PositionChangedEvent : EntityEvent
     {
         #region Public Constructors
 
-        public PositionChangedEventArgs(Vector2 position)
+        public PositionChangedEvent(int entityId, Vector2 position)
+            : base(entityId)
         {
             Position = position;
         }

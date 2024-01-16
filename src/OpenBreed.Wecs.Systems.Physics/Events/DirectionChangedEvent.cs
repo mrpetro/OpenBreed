@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Wecs.Events;
+using OpenTK;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems.Physics.Events
 {
-    public class DirectionChangedEventArgs : EventArgs
+    public class DirectionChangedEvent : EntityEvent
     {
         #region Public Constructors
 
-        public DirectionChangedEventArgs(Vector2 direction)
+        public DirectionChangedEvent(int entityId, Vector2 direction)
+            : base(entityId)
         {
             Direction = direction;
         }

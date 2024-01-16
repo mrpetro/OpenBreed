@@ -11,6 +11,7 @@ namespace OpenBreed.Sandbox.Entities
         #region Public Properties
 
         public static int ActorBody { get; private set; }
+        public static int EnemyBody { get; private set; }
         public static int ActorTrigger { get; private set; }
         public static int DoorOpenTrigger { get; private set; }
         public static int FullObstacle { get; private set; }
@@ -30,6 +31,7 @@ namespace OpenBreed.Sandbox.Entities
         public static void RegisterAbtaColliders(this ICollisionMan<IEntity> collisions)
         {
             ActorBody = collisions.RegisterGroup("ActorBody");
+            EnemyBody = collisions.RegisterGroup("EnemyBody");
             ActorTrigger = collisions.RegisterGroup("ActorTrigger");
             DoorOpenTrigger = collisions.RegisterGroup("DoorOpenTrigger");
             Projectile = collisions.RegisterGroup("Projectile");

@@ -61,6 +61,14 @@ namespace OpenBreed.Wecs.Extensions
                 singleTime);
         }
 
+        public static void OnEventEx<TEvent>(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TEvent> action, bool singleTime = false) where TEvent : EntityEvent
+        {
+            triggerMan.CreateTrigger<TEvent>(
+                (args) => Equals(entity.Id, args.EntityId),
+                (args) => action.Invoke(entity, args),
+                singleTime);
+        }
+
         public static void OnEvent<TEvent>(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TEvent> action, bool singleTime = false) where TEvent : EventArgs
         {
             triggerMan.EventsMan.Subscribe<TEvent>(ConditionalAction);

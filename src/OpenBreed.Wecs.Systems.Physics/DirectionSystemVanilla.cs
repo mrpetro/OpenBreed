@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
@@ -22,16 +23,18 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Private Fields
 
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
         internal DirectionSystemVanilla(
-            IWorld world,
-            IEntityMan entityMan)
+            IEntityMan entityMan,
+            IEventsMan eventsMan)
         {
             this.entityMan = entityMan;
+            this.eventsMan = eventsMan;
         }
 
         #endregion Internal Constructors
@@ -55,7 +58,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                 return;
 
             angularPos.Value = newPos;
-            entity.RaiseEvent(new DirectionChangedEventArgs(angularPos.Value));
+            eventsMan.Raise(null, new DirectionChangedEvent(entity.Id, angularPos.Value));
         }
 
         #endregion Protected Methods

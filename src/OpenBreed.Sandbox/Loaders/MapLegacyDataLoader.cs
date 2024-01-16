@@ -246,11 +246,6 @@ namespace OpenBreed.Sandbox.Loaders
                         if (cellEntity is null)
                             continue;
 
-                        if (cellEntity.Id == 5476)
-                        {
-                            var d = entityMan.GetById(5476);
-                        }
-
                         dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
 
                         //Check if cell entity has static body

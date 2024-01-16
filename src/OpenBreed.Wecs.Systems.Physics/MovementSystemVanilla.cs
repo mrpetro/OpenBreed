@@ -30,7 +30,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Internal Constructors
 
         internal MovementSystemVanilla(
-            IWorld world,
             IEntityMan entityMan)
         {
             this.entityMan = entityMan;

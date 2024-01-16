@@ -15,20 +15,20 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
         public static void OnEntityDirectionChanged(
             this ITriggerMan triggerMan,
             IEntity entity,
-            Action<IEntity, DirectionChangedEventArgs> action,
-            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
+            Action<IEntity, DirectionChangedEvent> action,
+            bool singleTime = false) => triggerMan.OnEventEx(entity, action, singleTime);
 
         public static void OnEntityPositionChanged(
             this ITriggerMan triggerMan,
             IEntity entity,
-            Action<IEntity, PositionChangedEventArgs> action,
-            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
+            Action<IEntity, PositionChangedEvent> action,
+            bool singleTime = false) => triggerMan.OnEventEx(entity, action, singleTime);
 
 
         public static void OnEntityVelocityChanged(
             this ITriggerMan triggerMan,
             IEntity entity,
-            Action<IEntity, VelocityChangedEventArgs> action,
-            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
+            Action<IEntity, VelocityChangedEvent> action,
+            bool singleTime = false) => triggerMan.OnEventEx(entity, action, singleTime);
     }
 }

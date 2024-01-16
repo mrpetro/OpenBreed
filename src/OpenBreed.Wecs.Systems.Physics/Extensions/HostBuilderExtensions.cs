@@ -28,19 +28,17 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
         public static void SetupPhysicsSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
         {
             systemFactory.RegisterSystem<DirectionSystemVanilla>((world) => new DirectionSystemVanilla(
-                world,
-                serviceProvider.GetService<IEntityMan>()));
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IEventsMan>()));
             systemFactory.RegisterSystem<MovementSystem>((world) => new MovementSystem(
-                world,
-                serviceProvider.GetService<IEntityMan>()));
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IEventsMan>()));
             systemFactory.RegisterSystem<VelocityChangedSystem>((world) => new VelocityChangedSystem(
-                world,
-                serviceProvider.GetService<IEntityMan>()));
+                serviceProvider.GetService<IEntityMan>(),
+                serviceProvider.GetService<IEventsMan>()));
             systemFactory.RegisterSystem<MovementSystemVanilla>((world) => new MovementSystemVanilla(
-                world,
                 serviceProvider.GetService<IEntityMan>()));
             systemFactory.RegisterSystem<DynamicBodiesCollisionCheckSystem>((world) => new DynamicBodiesCollisionCheckSystem(
-                world,
                 serviceProvider.GetService<IEntityMan>(),
                 serviceProvider.GetService<IShapeMan>(),
                 serviceProvider.GetService<ICollisionMan<IEntity>>()));

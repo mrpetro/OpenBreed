@@ -352,6 +352,12 @@ namespace OpenBreed.Sandbox.Extensions
                                         managerCollection.GetService<ILogger>());
 
             mapLegacyDataLoader.Register("LandMine", landMineEntityLoader);
+
+            var heavyTurretEntityLoader = new TurretEntryLoader(
+                managerCollection.GetService<ActorHelper>(),
+                managerCollection.GetService<EntriesHelper>());
+
+            mapLegacyDataLoader.Register("HeavyTurret", heavyTurretEntityLoader);
         }
 
 

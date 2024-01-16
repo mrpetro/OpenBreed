@@ -28,6 +28,7 @@ using OpenTK;
 using OpenTK.Mathematics;
 using System;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -89,12 +90,14 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public void RegisterCollisionPairs()
         {
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, FullObstableCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.EnemyBody, FullObstableCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorBody, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, FullObstableCallback);
-
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlowdownObstacle, SlowdownObstacleCallback);
             
             collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.FullObstacle, ProjectileTriggerCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.EnemyBody, ProjectileTriggerCallback);
 
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.Trigger, TriggerCallback);
         }
@@ -108,7 +111,16 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return entity;
         }
 
+        public IEntity AddHeavyTurret(IWorld world, int x, int y)
+        {
+            var entity = entityFactory.Create($@"ABTA\Templates\L1\Turret")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
+            worldMan.RequestAddEntity(entity, world.Id);
+            return entity;
+        }
 
         public IEntity CreatePlayerActor(string name, Vector2 pos)
         {

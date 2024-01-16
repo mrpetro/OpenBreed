@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Attributes;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
@@ -21,16 +22,18 @@ namespace OpenBreed.Wecs.Systems.Physics
         private const float FLOOR_FRICTION = 0.2f;
 
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
         internal VelocityChangedSystem(
-            IWorld world, 
-            IEntityMan entityMan)
+            IEntityMan entityMan,
+            IEventsMan eventsMan)
         {
             this.entityMan = entityMan;
+            this.eventsMan = eventsMan;
         }
 
         #endregion Internal Constructors
@@ -40,7 +43,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         protected override void UpdateEntity(IEntity entity, IWorldContext context)
         {
             var velocity = entity.Get<VelocityComponent>();
-            entity.RaiseEvent(new VelocityChangedEventArgs(velocity.Value));
+            eventsMan.Raise(null, new VelocityChangedEvent(entity.Id, velocity.Value));
         }
 
         #endregion Protected Methods

@@ -1,13 +1,15 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenBreed.Wecs.Events;
+using OpenTK.Mathematics;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Physics.Events
 {
-    public class VelocityChangedEventArgs : EventArgs
+    public class VelocityChangedEvent : EntityEvent
     {
         #region Public Constructors
 
-        public VelocityChangedEventArgs(Vector2 value)
+        public VelocityChangedEvent(int entityId, Vector2 value)
+            : base(entityId)
         {
             Value = value;
         }
