@@ -188,6 +188,7 @@ local function OnDirectionChanged(entity, args)
 end
 
 local function OnVelocityChanged(entity, args)
+
     local targetDirection = entity:GetTargetDirection()
     local direction = entity:GetDirection()
     local animDirName = AnimHelper.ToDirectionName(direction)
