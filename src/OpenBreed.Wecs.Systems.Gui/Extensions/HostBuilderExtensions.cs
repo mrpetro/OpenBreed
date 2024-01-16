@@ -16,13 +16,11 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
         public static void SetupGuiSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
             systemFactory.RegisterSystem<PhysicsDebugDisplaySystem>(
-                (world) => new PhysicsDebugDisplaySystem(
-                    world,
+                () => new PhysicsDebugDisplaySystem(
                     sp.GetService<IPrimitiveRenderer>()));
 
             systemFactory.RegisterSystem<CursorSystem>(
-                (world) => new CursorSystem(
-                    world,
+                () => new CursorSystem(
                     sp.GetRequiredService<IViewClient>(),
                     sp.GetRequiredService<IInputsMan>(),
                     sp.GetRequiredService<IPrimitiveRenderer>(),

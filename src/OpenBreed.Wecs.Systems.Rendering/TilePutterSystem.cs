@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Constructors
 
-        public TilePutterSystem(IWorld world)
+        public TilePutterSystem()
         {
         }
 

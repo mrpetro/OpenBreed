@@ -29,7 +29,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Internal Constructors
 
         internal TextSystem(
-            IWorld world,
             IEntityMan entityMan,
             IFontMan fontMan,
             ILogger logger)

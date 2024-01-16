@@ -16,41 +16,35 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 
         public static void SetupCoreSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
-            systemFactory.RegisterSystem<FsmSystem>((world) => new FsmSystem(
-                world,
+            systemFactory.RegisterSystem<FsmSystem>(() => new FsmSystem(
                 sp.GetService<IFsmMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<TextInputSystem>((world) => new TextInputSystem(
-                world,
-                sp.GetService<IEntityMan>()));
+            systemFactory.RegisterSystem<TextInputSystem>(() => new TextInputSystem(
+                sp.GetService<IEntityMan>(),
+                sp.GetService<IEventsMan>()));
             
-            systemFactory.RegisterSystem<TimerSystem>((world) => new TimerSystem(
-                world,
+            systemFactory.RegisterSystem<TimerSystem>(() => new TimerSystem(
                 sp.GetService<IEntityMan>(),
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<FrameSystem>((world) => new FrameSystem(
-                world,
+            systemFactory.RegisterSystem<FrameSystem>(() => new FrameSystem(
                 sp.GetService<IEntityMan>(),
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<PausingSystem>((world) => new PausingSystem(
-                world,
+            systemFactory.RegisterSystem<PausingSystem>(() => new PausingSystem(
                 sp.GetService<IWorldMan>(),                                                    
                 sp.GetService<IEventsMan>()));
 
-            systemFactory.RegisterSystem<EntityEmitterSystem>((world) => new EntityEmitterSystem(
-                world,
+            systemFactory.RegisterSystem<EntityEmitterSystem>(() => new EntityEmitterSystem(
                 sp.GetRequiredService<IEntityFactory>(),
                 sp.GetRequiredService<IEventsMan>(),
                 sp.GetRequiredService<ITriggerMan>(),
                 sp.GetRequiredService<IWorldMan>()));
 
-            systemFactory.RegisterSystem<LifetimeSystem>((world) => new LifetimeSystem(
-                world,
+            systemFactory.RegisterSystem<LifetimeSystem>(() => new LifetimeSystem(
                 sp.GetRequiredService<IWorldMan>(),
                 sp.GetRequiredService<IEntityMan>(),
                 sp.GetRequiredService<IEventsMan>()));

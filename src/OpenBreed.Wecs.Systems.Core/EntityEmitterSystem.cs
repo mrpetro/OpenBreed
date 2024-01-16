@@ -23,7 +23,6 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Public Constructors
 
         public EntityEmitterSystem(
-            IWorld world,
             IEntityFactory entityFactory,
             IEventsMan eventsMan,
             ITriggerMan triggerMan,

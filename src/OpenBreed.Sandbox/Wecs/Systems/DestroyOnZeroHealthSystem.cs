@@ -32,7 +32,6 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         private readonly ILogger logger;
 
         internal DestroyOnZeroHealthSystem(
-            IWorld world,
             IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan,

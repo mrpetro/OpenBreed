@@ -26,7 +26,6 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         #region Public Constructors
 
         public LivesSystem(
-            IWorld world,
             IEventsMan eventsMan,
             ILogger logger)
         {

@@ -44,9 +44,9 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
             }
         }
 
-        public static void OnEntityAnimFinished(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, AnimFinishedEventArgs> action, bool singleTime = false)
+        public static void OnEntityAnimFinished(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, AnimFinishedEvent> action, bool singleTime = false)
         {
-            triggerMan.CreateTrigger<AnimFinishedEventArgs>(
+            triggerMan.CreateTrigger<AnimFinishedEvent>(
                 (args) => Equals(entity.Id, args.EntityId),
                 (args) => action.Invoke(entity, args),
                 singleTime);

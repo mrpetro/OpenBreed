@@ -32,7 +32,6 @@ namespace OpenBreed.Wecs.Systems.Gui
         #region Public Constructors
 
         public CursorSystem(
-            IWorld world,
             IViewClient viewClient,
             IInputsMan inputsMan,
             IPrimitiveRenderer primitiveRenderer,

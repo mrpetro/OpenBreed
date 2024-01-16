@@ -5,6 +5,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Wecs.Entities;
 using System;
 using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Wecs.Systems.Animation.Extensions
 {
@@ -12,13 +13,13 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
     {
         #region Public Methods
 
-        public static void SetupAnimationSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
+        public static void SetupAnimationSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
-            systemFactory.RegisterSystem<AnimatorSystem>((world) => new AnimatorSystem(
-                world,
-                serviceProvider.GetService<IEntityMan>(),
-                serviceProvider.GetService<IClipMan<IEntity>>(),
-                serviceProvider.GetService<ILogger>()));
+            systemFactory.RegisterSystem<AnimatorSystem>(() => new AnimatorSystem(
+                sp.GetService<IEntityMan>(),
+                sp.GetService<IEventsMan>(),
+                sp.GetService<IClipMan<IEntity>>(),
+                sp.GetService<ILogger>()));
         }
 
         #endregion Public Methods

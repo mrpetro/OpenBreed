@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Systems
         #region Private Fields
 
         private readonly ISystemRequirementsProvider systemRequirementsProvider;
-        private readonly Dictionary<Type, Func<IWorld, ISystem>> systemInitializers = new Dictionary<Type, Func<IWorld, ISystem>>();
+        private readonly Dictionary<Type, Func<ISystem>> systemInitializers = new Dictionary<Type, Func<ISystem>>();
 
         #endregion Private Fields
 
@@ -25,17 +25,17 @@ namespace OpenBreed.Wecs.Systems
 
         #region Public Methods
 
-        public ISystem CreateSystem<TSystem>(IWorld world) where TSystem : ISystem
+        public ISystem CreateSystem<TSystem>() where TSystem : ISystem
         {
             var systemType = typeof(TSystem);
 
-            if (!systemInitializers.TryGetValue(systemType, out Func<IWorld, ISystem> initializer))
+            if (!systemInitializers.TryGetValue(systemType, out Func<ISystem> initializer))
                 throw new InvalidOperationException($"System '{systemType}' not registered.");
 
-            return (TSystem)initializer.Invoke(world);
+            return (TSystem)initializer.Invoke();
         }
 
-        public void RegisterSystem<TSystem>(Func<IWorld, ISystem> initializer) where TSystem : ISystem
+        public void RegisterSystem<TSystem>(Func<ISystem> initializer) where TSystem : ISystem
         {
             var systemType = typeof(TSystem);
 

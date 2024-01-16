@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Worlds
         internal readonly WorldMan worldMan;
         internal readonly IEntityToSystemMatcher entityToSystemMatcher;
         internal string name;
-        internal Dictionary<Type, Func<IWorld, ISystem>> systemInitializers = new Dictionary<Type, Func<IWorld, ISystem>>();
+        internal Dictionary<Type, Func<ISystem>> systemInitializers = new Dictionary<Type, Func<ISystem>>();
 
         #endregion Internal Fields
 
@@ -54,7 +54,7 @@ namespace OpenBreed.Wecs.Worlds
         internal IEnumerable<ISystem> CreateSystems(IWorld world)
         {
             foreach (var initializer in systemInitializers.Values)
-                yield return initializer.Invoke(world);
+                yield return initializer.Invoke();
         }
 
         public IWorldBuilder AddSystem<TSystem>() where TSystem : ISystem

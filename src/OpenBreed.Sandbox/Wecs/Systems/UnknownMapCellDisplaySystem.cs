@@ -35,7 +35,6 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         #region Public Constructors
 
         public UnknownMapCellDisplaySystem(
-            IWorld world,
             IPrimitiveRenderer primitiveRenderer,
             IFontMan fontMan)
         {

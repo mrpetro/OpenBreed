@@ -25,7 +25,6 @@ namespace OpenBreed.Wecs.Systems.Scripting
         #region Internal Constructors
 
         internal ScriptRunningSystem(
-            IWorld world,
             IScriptMan scriptMan,
             ILogger logger)
         {

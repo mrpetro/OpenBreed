@@ -177,7 +177,7 @@ namespace OpenBreed.Sandbox
 
                 scriptMan.RegisterDelegateType(typeof(Action<IEntity, WorldPausedEventArgs>), typeof(LuaEntityEventHandler<WorldPausedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<IEntity, WorldUnpausedEventArgs>), typeof(LuaEntityEventHandler<WorldUnpausedEventArgs>));
-                scriptMan.RegisterDelegateType(typeof(Action<IEntity, AnimFinishedEventArgs>), typeof(LuaEntityEventHandler<AnimFinishedEventArgs>));
+                scriptMan.RegisterDelegateType(typeof(Action<IEntity, AnimFinishedEvent>), typeof(LuaEntityEventHandler<AnimFinishedEvent>));
                 scriptMan.RegisterDelegateType(typeof(Action<IEntity, ClientResizedEventArgs>), typeof(LuaEntityEventHandler<ClientResizedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<KeyDownEvent>), typeof(LuaEventHandler<KeyDownEvent>));
                 scriptMan.RegisterDelegateType(typeof(Action<KeyUpEvent>), typeof(LuaEventHandler<KeyUpEvent>));

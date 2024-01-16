@@ -29,7 +29,6 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         private readonly ILogger logger;
 
         internal DamageOnHealthDistributionSystem(
-            IWorld world,
             IEntityMan entityMan,
             IEventsMan eventsMan,
             ILogger logger)

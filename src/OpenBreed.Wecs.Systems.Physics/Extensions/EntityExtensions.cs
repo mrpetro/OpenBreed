@@ -1,4 +1,5 @@
-﻿using OpenBreed.Physics.Interface;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Physics.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
@@ -69,28 +70,6 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             var aabb = shape.GetAabb().Translated(pos.Value);
 
             grid.InsertItem(bodyEntity.Id, aabb);
-        }
-
-        public static void SetBodyOff(this IEntity entity)
-        {
-            var bodyCmp = entity.Get<BodyComponent>();
-
-            if (bodyCmp.Inactive)
-                return;
-
-            bodyCmp.Inactive = true;
-            entity.RaiseEvent(new BodyOffEventArgs(entity));
-        }
-
-        public static void SetBodyOn(this IEntity entity)
-        {
-            var bodyCmp = entity.Get<BodyComponent>();
-
-            if (!bodyCmp.Inactive)
-                return;
-
-            bodyCmp.Inactive = false;
-            entity.RaiseEvent(new BodyOffEventArgs(entity));
         }
     }
 }

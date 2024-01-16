@@ -24,7 +24,6 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Internal Constructors
 
         internal FrameSystem(
-            IWorld world, 
             IEntityMan entityMan,
             IEventsMan eventsMan,
             ILogger logger)

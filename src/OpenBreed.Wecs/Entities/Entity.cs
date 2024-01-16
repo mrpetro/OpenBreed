@@ -108,15 +108,6 @@ namespace OpenBreed.Wecs.Entities
             return (TComponent)components[typeof(TComponent)];
         }
 
-        /// <summary>
-        /// Enqueue an event of specific type and arguments
-        /// </summary>
-        /// <param name="eventArgs">Arguments of event</param>
-        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
-        {
-            entityMan.Raise(this, eventArgs);
-        }
-
         public void Set<TComponent>(TComponent component) where TComponent : class, IEntityComponent
         {
             Debug.Assert(component != null, "Adding null component to entity is forbidden.");

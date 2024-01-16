@@ -18,8 +18,7 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
     {
         public static void SetupControlSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
-            systemFactory.RegisterSystem<FollowerSystem>((world) => new FollowerSystem(
-                world,
+            systemFactory.RegisterSystem<FollowerSystem>(() => new FollowerSystem(
                 sp.GetRequiredService<IWorldMan>(),
                 sp.GetRequiredService<IEntityMan>(),
                 sp.GetRequiredService<IEventsMan>()));

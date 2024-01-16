@@ -8,11 +8,11 @@ namespace OpenBreed.Wecs.Systems.Animation.Events
     /// <summary>
     /// Event args for event that occurs when animation is finished
     /// </summary>
-    public class AnimFinishedEventArgs : EntityEvent
+    public class AnimFinishedEvent : EntityEvent
     {
         #region Public Constructors
 
-        public AnimFinishedEventArgs(int entityId, Animator animator )
+        public AnimFinishedEvent(int entityId, Animator animator )
             : base(entityId)
         {
             Animator = animator;

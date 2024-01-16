@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Events;
@@ -101,7 +102,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             sprite.AtlasId = atlasId;
         }
 
-        public static void SetViewportSize(this IEntity entity, float width, float height)
+        public static void SetViewportSize(this IEntity entity, IEventsMan eventsMan, float width, float height)
         {
             var vpc = entity.Get<ViewportComponent>();
 
@@ -110,7 +111,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
 
             vpc.Size = new Vector2(width, height);
 
-            entity.RaiseEvent(new ViewportResizedEventArgs(entity.Id, vpc.Size.X, vpc.Size.Y));
+            eventsMan.Raise(null, new ViewportResizedEvent(entity.Id, vpc.Size.X, vpc.Size.Y));
         }
 
         public static void SetViewportCamera(this IEntity entity, int cameraEntityId)

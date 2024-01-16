@@ -10,9 +10,9 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Public Methods
 
-        ISystem CreateSystem<TSystem>(IWorld world) where TSystem : ISystem;
+        ISystem CreateSystem<TSystem>() where TSystem : ISystem;
 
-        void RegisterSystem<TSystem>(Func<IWorld, ISystem> initializer) where TSystem : ISystem;
+        void RegisterSystem<TSystem>(Func<ISystem> initializer) where TSystem : ISystem;
 
         #endregion Public Methods
     }

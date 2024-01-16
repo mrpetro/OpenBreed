@@ -189,17 +189,17 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void ResizeGameViewport(IEntity viewport, ClientResizedEventArgs args)
         {
-            viewport.SetViewportSize(args.Width, args.Height);
+            viewport.SetViewportSize(eventsMan, args.Width, args.Height);
         }
 
         private void ResizeHudViewport(IEntity viewport, ClientResizedEventArgs args)
         {
-            viewport.SetViewportSize(args.Width, args.Height);
+            viewport.SetViewportSize(eventsMan, args.Width, args.Height);
         }
 
         private void ResizeTextViewport(IEntity viewport, ClientResizedEventArgs args)
         {
-            viewport.SetViewportSize(args.Width, args.Height);
+            viewport.SetViewportSize(eventsMan, args.Width, args.Height);
         }
 
         #endregion Private Methods

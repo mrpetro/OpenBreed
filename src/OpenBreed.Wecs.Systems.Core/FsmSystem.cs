@@ -22,7 +22,6 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Public Constructors
 
         public FsmSystem(
-            IWorld world,
             IFsmMan fsmMan,
             ILogger logger)
         {

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
+using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Entities;
@@ -16,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Animation
         #region Private Fields
 
         private readonly IEntityMan entityMan;
-
+        private readonly IEventsMan eventsMan;
         private readonly IClipMan<IEntity> clipMan;
 
         private readonly ILogger logger;
@@ -26,12 +27,13 @@ namespace OpenBreed.Wecs.Systems.Animation
         #region Internal Constructors
 
         internal AnimatorSystem(
-            IWorld world,
             IEntityMan entityMan,
+            IEventsMan eventsMan,
             IClipMan<IEntity> clipMan,
             ILogger logger)
         {
             this.entityMan = entityMan;
+            this.eventsMan = eventsMan;
             this.clipMan = clipMan;
             this.logger = logger;
         }
@@ -99,7 +101,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         private void RaiseAnimFinishedEvent(IEntity entity, Animator animator)
         {
-            entity.RaiseEvent(new AnimFinishedEventArgs(entity.Id, animator));
+            eventsMan.Raise(null, new AnimFinishedEvent(entity.Id, animator));
         }
 
         #endregion Private Methods

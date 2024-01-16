@@ -26,7 +26,6 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         #region Public Constructors
 
         public ItemManagingSystem(
-            IWorld world,
             ItemsMan itemsMan,
             IEventsMan eventsMan,
             ILogger logger)

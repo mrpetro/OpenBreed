@@ -23,7 +23,6 @@ namespace OpenBreed.Wecs.Systems.Control
         #region Public Constructors
 
         public FollowerSystem(
-            IWorld world,
             IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan)

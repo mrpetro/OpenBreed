@@ -27,7 +27,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Internal Constructors
 
         internal SpriteSystem(
-            IWorld world, 
             ISpriteMan spriteMan,
             ISpriteRenderer spriteRenderer)
         {

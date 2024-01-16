@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     {
         #region Public Constructors
 
-        public StampPutterSystem(IWorld world)
+        public StampPutterSystem()
         {
         }
 

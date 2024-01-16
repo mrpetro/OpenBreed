@@ -21,7 +21,6 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Public Constructors
 
         public PausingSystem(
-            IWorld world,
             IWorldMan worldMan,
             IEventsMan eventsMan)
         {

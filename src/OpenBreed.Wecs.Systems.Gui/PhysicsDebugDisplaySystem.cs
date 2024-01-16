@@ -31,7 +31,6 @@ namespace OpenBreed.Wecs.Systems.Gui
         #region Public Constructors
 
         public PhysicsDebugDisplaySystem(
-            IWorld world,
             IPrimitiveRenderer primitiveRenderer)
         {
             this.primitiveRenderer = primitiveRenderer;

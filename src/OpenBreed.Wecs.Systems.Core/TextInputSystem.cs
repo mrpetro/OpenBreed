@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Attributes;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
@@ -13,17 +14,18 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Private Fields
 
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
         internal TextInputSystem(
-            IWorld world,
-            IEntityMan entityMan)
+            IEntityMan entityMan,
+            IEventsMan eventsMan)
         {
             this.entityMan = entityMan;
-
+            this.eventsMan = eventsMan;
         }
 
         #endregion Internal Constructors
@@ -51,8 +53,8 @@ namespace OpenBreed.Wecs.Systems.Core
         //    textCmp.Insert(caretCmp.Position, cmd.Text);
         //    caretCmp.Position += cmd.Text.Length;
 
-        //    toModify.RaiseEvent(new TextDataChanged(textCmp.Data, TextDataChanged.ChangeType.Inserted, caretCmp.Position - cmd.Text.Length, cmd.Text.Length));
-        //    toModify.RaiseEvent(new TextCaretPositionChanged(caretCmp.Position));
+        //    eventsMan.Raise(null, new TextDataChanged(textCmp.Data, TextDataChanged.ChangeType.Inserted, caretCmp.Position - cmd.Text.Length, cmd.Text.Length));
+        //    eventsMan.Raise(null, new TextCaretPositionChanged(caretCmp.Position));
 
         //    return true;
         //}
@@ -75,8 +77,8 @@ namespace OpenBreed.Wecs.Systems.Core
         //    textCmp.Remove(caretCmp.Position - 1, 1);
         //    caretCmp.Position -= 1;
 
-        //    toModify.RaiseEvent(new TextDataChanged(textCmp.Data, TextDataChanged.ChangeType.Removed, caretCmp.Position + 1, 1));
-        //    toModify.RaiseEvent(new TextCaretPositionChanged(caretCmp.Position));
+        //    eventsMan.Raise(null, new TextDataChanged(textCmp.Data, TextDataChanged.ChangeType.Removed, caretCmp.Position + 1, 1));
+        //    eventsMan.Raise(null, new TextCaretPositionChanged(caretCmp.Position));
 
         //    return true;
         //}
@@ -105,7 +107,7 @@ namespace OpenBreed.Wecs.Systems.Core
         //        return true;
 
         //    caretCmp.Position = cmd.NewPosition;
-        //    toModify.RaiseEvent(new TextCaretPositionChanged(caretCmp.Position));
+        //    eventsMan.Raise(null, new TextCaretPositionChanged(caretCmp.Position));
 
         //    return true;
         //}

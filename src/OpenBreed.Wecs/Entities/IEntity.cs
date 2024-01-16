@@ -41,8 +41,6 @@ namespace OpenBreed.Wecs.Entities
         /// </summary>
         object State { get; set; }
 
-        void RaiseEvent<T>(T eventArgs) where T : EventArgs;
-
         /// <summary>
         /// Gets component of specific type if it exists
         /// </summary>

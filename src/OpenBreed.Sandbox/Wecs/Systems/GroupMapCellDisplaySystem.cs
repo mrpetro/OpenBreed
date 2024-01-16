@@ -33,7 +33,6 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         #region Public Constructors
 
         public GroupMapCellDisplaySystem(
-            IWorld world,
             IPrimitiveRenderer primitiveRenderer,
             IFontMan fontMan)
         {

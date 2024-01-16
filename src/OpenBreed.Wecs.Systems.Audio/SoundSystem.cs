@@ -23,7 +23,6 @@ namespace OpenBreed.Wecs.Systems.Audio
         #region Public Constructors
 
         public SoundSystem(
-            IWorld world,
             ISoundMan soundMan,
             IEventsMan eventsMan)
         {

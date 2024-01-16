@@ -105,7 +105,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
 
         private SoundSystem CreateSoundSystem()
         {
-            return new SoundSystem(null,
+            return new SoundSystem(
                 this.mockSoundMan.Object,
                 this.mockEventsMan.Object);
         }

@@ -20,47 +20,42 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void SetupGameSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
-            systemFactory.RegisterSystem<ActorMovementByPlayerInputsSystem>((world) => new ActorMovementByPlayerInputsSystem(
+            systemFactory.RegisterSystem<ActorMovementByPlayerInputsSystem>(() => new ActorMovementByPlayerInputsSystem(
                 sp.GetService<IInputsMan>(),
                 sp.GetService<IEntityMan>(),
                 sp.GetService<IEventsMan>()));
 
-            systemFactory.RegisterSystem<UnknownMapCellDisplaySystem>((world) => new UnknownMapCellDisplaySystem(
-                world,
+            systemFactory.RegisterSystem<UnknownMapCellDisplaySystem>(() => new UnknownMapCellDisplaySystem(
                 sp.GetService<IPrimitiveRenderer>(),
                 sp.GetService<IFontMan>()));
-            systemFactory.RegisterSystem<GroupMapCellDisplaySystem>((world) => new GroupMapCellDisplaySystem(
-                world,
+            systemFactory.RegisterSystem<GroupMapCellDisplaySystem>(() => new GroupMapCellDisplaySystem(
                 sp.GetService<IPrimitiveRenderer>(),
                 sp.GetService<IFontMan>()));
 
-            systemFactory.RegisterSystem<DamageOnHealthDistributionSystem>((world) => new DamageOnHealthDistributionSystem(
-                world,
+            systemFactory.RegisterSystem<DamageOnHealthDistributionSystem>(() => new DamageOnHealthDistributionSystem(
                 sp.GetService<IEntityMan>(),
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<DestroyOnZeroHealthSystem>((world) => new DestroyOnZeroHealthSystem(
-                world,
+            systemFactory.RegisterSystem<DestroyOnZeroHealthSystem>(() => new DestroyOnZeroHealthSystem(
                 sp.GetService<IWorldMan>(),
                 sp.GetService<IEntityMan>(),
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<LivesSystem>((world) => new LivesSystem(
-                world,
+            systemFactory.RegisterSystem<LivesSystem>(() => new LivesSystem(
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<ResurrectionSystem>((world) => new ResurrectionSystem(sp.GetService<IWorldMan>()));
+            systemFactory.RegisterSystem<ResurrectionSystem>(() => new ResurrectionSystem(
+                sp.GetService<IWorldMan>()));
 
-            systemFactory.RegisterSystem<ItemManagingSystem>((world) => new ItemManagingSystem(
-                world,
+            systemFactory.RegisterSystem<ItemManagingSystem>(() => new ItemManagingSystem(
                 sp.GetService<ItemsMan>(),
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
-            systemFactory.RegisterSystem<ItemPickupSystem>((world) => new ItemPickupSystem(
+            systemFactory.RegisterSystem<ItemPickupSystem>(() => new ItemPickupSystem(
                 sp.GetService<IEventsMan>(),
                 sp.GetService<IEntityMan>()));
         }

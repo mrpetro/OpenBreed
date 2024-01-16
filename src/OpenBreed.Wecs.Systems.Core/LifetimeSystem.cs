@@ -25,7 +25,6 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Public Constructors
 
         public LifetimeSystem(
-            IWorld world,
             IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan)

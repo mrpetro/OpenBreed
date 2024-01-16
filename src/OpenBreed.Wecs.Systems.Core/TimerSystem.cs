@@ -24,7 +24,6 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Internal Constructors
 
         internal TimerSystem(
-            IWorld world,
             IEntityMan entityMan,
             IEventsMan eventsMan,
             ILogger logger)
