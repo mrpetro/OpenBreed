@@ -21,6 +21,12 @@
 						<Group>EnemyBody</Group>
 					</Groups>
 				</Fixture>
+				<Fixture>
+					<ShapeName>Shapes/Circle_24_24_480</ShapeName>
+					<Groups>
+						<Group>EnemyVisibityRange</Group>
+					</Groups>
+				</Fixture>
 			</Fixtures>
 		</Body>
 		<EntityEmitter>
