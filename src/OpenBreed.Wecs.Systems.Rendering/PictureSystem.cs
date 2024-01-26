@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(PictureComponent),
         typeof(PositionComponent))]
-    public class PictureSystem : MatchingSystemBase<PictureSystem>, IRenderable
+    public class PictureSystem : MatchingSystemBase<PictureSystem>, IRenderableSystem
     {
         #region Private Fields
 
@@ -35,14 +35,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(Box2 clipBox, int depth, float dt)
+        public void Render(IRenderContext context)
         {
             imageRenderer.RenderBegin();
 
             try
             {
                 for (int i = 0; i < entities.Count; i++)
-                    RenderPicture(entities[i], clipBox);
+                    RenderPicture(entities[i], context.ViewBox);
             }
             finally
             {

@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +17,6 @@ namespace OpenBreed.Wecs.Systems
         /// </summary>
         /// <param name="entity">Entity to update</param>
         /// <param name="context">World context</param>
-        void Update(IEntity entity, IWorldContext context);
+        void Update(IEntity entity, IUpdateContext context);
     }
 }

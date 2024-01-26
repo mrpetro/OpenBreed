@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Physics.Interface;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Attributes;
@@ -9,75 +10,78 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace OpenBreed.Wecs.Systems.Gui
 {
-    [RequireEntityWith(
-        typeof(BodyComponent),
-        typeof(PositionComponent))]
-    public class PhysicsDebugDisplaySystem : MatchingSystemBase<PhysicsDebugDisplaySystem>, IRenderable
+    public class PhysicsDebugDisplaySystem : SystemBase<PhysicsDebugDisplaySystem>, IRenderableSystem
     {
         #region Private Fields
 
+        private readonly ICollisionMan<IEntity> collisionMan;
+        private readonly IEntityMan entityMan;
+
+        private readonly Dictionary<int, Color4> groupsToColors = new Dictionary<int, Color4>();
         private readonly IPrimitiveRenderer primitiveRenderer;
-
-        private List<IEntity> entities = new List<IEntity>();
-
-        private IBroadphaseDynamic broadphaseDynamic;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public PhysicsDebugDisplaySystem(
-            IPrimitiveRenderer primitiveRenderer)
+            IEntityMan entityMan,
+            IPrimitiveRenderer primitiveRenderer,
+            ICollisionMan<IEntity> collisionMan)
         {
+            this.entityMan = entityMan;
             this.primitiveRenderer = primitiveRenderer;
+            this.collisionMan = collisionMan;
 
-            //TODO: Replace this with component
-            //broadphaseDynamic = world.GetModule<IBroadphaseDynamic>();
+            SetupColors();
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public void Render(Box2 clipBox, int depth, float dt)
+        public void Render(IRenderContext context)
         {
-            for (int i = 0; i < entities.Count; i++)
-                DrawDynamicEntityAabb(entities[i], clipBox);
+            primitiveRenderer.EnableAlpha();
+
+            try
+            {
+                var mapEntity = entityMan.GetByTag("Maps").Where(e => e.WorldId == context.World.Id).FirstOrDefault();
+
+                if (mapEntity is null)
+                    return;
+
+                var dynamics = mapEntity.Get<BroadphaseDynamicComponent>().Dynamic;
+
+                DrawDynamics(dynamics, context.ViewBox);
+
+                var statics = mapEntity.Get<BroadphaseStaticComponent>().Grid;
+
+                DrawStatics(statics, context.ViewBox);
+            }
+            finally
+            {
+                primitiveRenderer.DisableAlpha();
+            }
         }
 
         #endregion Public Methods
 
-        #region Protected Methods
-
-        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public override void AddEntity(IEntity entity)
-        {
-            entities.Add(entity);
-        }
-
-        public override void RemoveEntity(IEntity entity)
-        {
-            entities.Remove(entity);
-        }
-
-        #endregion Protected Methods
-
         #region Private Methods
 
-        private void DrawDynamicEntityAabb(IEntity entity, Box2 clipBox)
+        private void DrawDynamicEntityAabb(IBroadphaseDynamicElement item, Box2 clipBox)
         {
-            var posCmp = entity.Get<PositionComponent>();
-            var bodyCmp = entity.Get<BodyComponent>();
+            var entity = entityMan.GetById(item.ItemId);
 
-            if (!entity.Contains<VelocityComponent>())
-                return;
-
-            var aabb = broadphaseDynamic.GetAabb(entity.Id);
+            var aabb = item.Aabb;
 
             //Test viewport for clippling here
             if (aabb.Max.X < clipBox.Min.X)
@@ -92,7 +96,104 @@ namespace OpenBreed.Wecs.Systems.Gui
             if (aabb.Min.Y > clipBox.Max.Y)
                 return;
 
+            DrawEntityFixtures(entity);
+
             primitiveRenderer.DrawRectangle(aabb, Color4.Green);
+
+            //primitiveRenderer.DrawRectangle(new Box2(0,0, 100, 100), Color4.Red, filled: false);
+        }
+
+        private void DrawDynamics(IBroadphaseDynamic dynamics, Box2 viewBox)
+        {
+            foreach (var item in dynamics.Items)
+            {
+                DrawDynamicEntityAabb(item, viewBox);
+            }
+        }
+
+        private void DrawEntityFixtures(IEntity entity)
+        {
+            var posCmp = entity.Get<PositionComponent>();
+            var bodyCmp = entity.Get<BodyComponent>();
+
+            primitiveRenderer.PushMatrix();
+            primitiveRenderer.Translate(new Vector3(posCmp.Value));
+
+            for (int i = 0; i < bodyCmp.Fixtures.Count; i++)
+            {
+                var fixture = bodyCmp.Fixtures[i];
+                RenderShape(fixture.Shape, fixture.GroupIds.FirstOrDefault());
+            }
+
+            primitiveRenderer.PopMatrix();
+        }
+
+        private void DrawStatics(IBroadphaseStatic statics, Box2 viewBox)
+        {
+            var itemIds = statics.QueryStatic(viewBox);
+
+            foreach (var itemId in itemIds)
+            {
+                var entity = entityMan.GetById(itemId);
+
+                DrawEntityFixtures(entity);
+            }
+        }
+
+        private void RenderShape(IShape shape, int groupId)
+        {
+            var color = groupsToColors[groupId];
+
+
+            switch (shape)
+            {
+                case IPolygonShape polygon:
+                    throw new NotImplementedException("Polygon shape not implemented yet.");
+                    break;
+
+                case IBoxShape box:
+                    primitiveRenderer.DrawRectangle(new Box2(box.X, box.Y, box.X + box.Width, box.Y + box.Height), color, filled: true);
+                    break;
+
+                case ICircleShape circle:
+                    primitiveRenderer.DrawCircle(circle.Center, circle.Radius, color, filled: true);
+                    break;
+
+                case IPointShape point:
+                    primitiveRenderer.DrawPoint(new Vector2(point.X, point.Y), color, PointType.Circle);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void SetupColors()
+        {
+            foreach (var groupName in collisionMan.GroupNames)
+            {
+                var result = groupName switch
+                {
+                    "ActorBody" => new Color4(0, 255, 255, 50),
+                    "EnemyBody" => new Color4(255, 0, 0, 50),
+                    "EnemyVisibityRange" => new Color4(255, 255, 0, 50),
+                    "ActorTrigger" => new Color4(0, 255, 0, 50),
+                    "DoorOpenTrigger" => new Color4(0, 255, 0, 50),
+                    "Projectile" => new Color4(255, 0, 0, 50),
+                    "FullObstacle" => new Color4(255, 255, 255, 50),
+                    "SlopeObstacle" => new Color4(255, 255, 255, 50),
+                    "ActorOnlyObstacle" => new Color4(255, 255, 255, 50),
+                    "SlowdownObstacle" => new Color4(255, 255, 255, 50),
+                    "WorldExitTrigger" => new Color4(0, 255, 0, 50),
+                    "TeleportEntryTrigger" => new Color4(0, 255, 0, 50),
+                    "Trigger" => new Color4(0, 255, 0, 50),
+                    _ => new Color4(255, 255, 255, 50)
+                };
+
+                var groupId = collisionMan.GetGroupId(groupName);
+
+                groupsToColors.Add(groupId, result);
+            }
         }
 
         #endregion Private Methods

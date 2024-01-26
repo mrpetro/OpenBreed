@@ -6,7 +6,6 @@ using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
-using OpenBreed.Wecs.Worlds;
 using System;
 using System.Linq;
 
@@ -43,7 +42,7 @@ namespace OpenBreed.Wecs.Systems.Scripting
             entity.TryInvoke(scriptMan, logger, "OnInit");
         }
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             entity.TryInvoke(scriptMan, logger, "OnUpdate");
         }

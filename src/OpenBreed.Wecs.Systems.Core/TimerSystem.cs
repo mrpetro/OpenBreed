@@ -5,7 +5,6 @@ using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
-using OpenBreed.Wecs.Worlds;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Core
@@ -37,7 +36,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var tc = entity.Get<TimerComponent>();
 

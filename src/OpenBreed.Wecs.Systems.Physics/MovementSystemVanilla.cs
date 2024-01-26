@@ -5,7 +5,6 @@ using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Systems.Physics
@@ -43,7 +42,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var position = entity.Get<PositionComponent>();
             var thrust = entity.Get<ThrustComponent>();

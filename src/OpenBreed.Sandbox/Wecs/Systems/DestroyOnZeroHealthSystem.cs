@@ -10,6 +10,7 @@ using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Audio.Events;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Core.Events;
@@ -43,7 +44,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             this.logger = logger;
         }
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var healthComponent = entity.Get<HealthComponent>();
 

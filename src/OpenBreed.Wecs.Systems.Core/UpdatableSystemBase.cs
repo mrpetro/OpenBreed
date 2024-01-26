@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
@@ -22,7 +21,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
-        public virtual void Update(IWorldContext context)
+        public virtual void Update(IUpdateContext context)
         {
             if (context.Paused)
             {
@@ -45,7 +44,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected abstract void UpdateEntity(IEntity entity, IWorldContext context);
+        protected abstract void UpdateEntity(IEntity entity, IUpdateContext context);
 
         #endregion Protected Methods
     }

@@ -42,6 +42,16 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             loopIndices.Add(new int[] { v1, v2, v3, v4 });
         }
 
+        public void AddLoopIndices(int[] vArray)
+        {
+            loopIndices.Add(vArray);
+        }
+
+        public void ClearLoopIndices()
+        {
+            loopIndices.Clear();
+        }
+
         public int CreateTexturedVao() => primitiveRenderer.CreateTexturedVao(GetFloats());
 
         public int CreateVao() => primitiveRenderer.CreateVao(GetFloats());
@@ -60,8 +70,10 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         {
             var floats = new List<float>();
 
-            foreach (var loop in loopIndices)
+            for (int j = 0; j < loopIndices.Count; j++)
             {
+                var loop = loopIndices[j];
+
                 for (int i = 0; i < loop.Length; i++)
                     Append(floats, vertices[loop[i]]);
             }

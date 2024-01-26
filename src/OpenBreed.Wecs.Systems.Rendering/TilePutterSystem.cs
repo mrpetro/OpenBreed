@@ -4,7 +4,6 @@ using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 
@@ -27,7 +26,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var tp = entity.Get<TilePutterComponent>();
 

@@ -5,8 +5,8 @@ using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Wecs.Events;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Wecs.Systems
 {
@@ -39,7 +39,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var inventoryComponent = entity.Get<InventoryComponent>();
 

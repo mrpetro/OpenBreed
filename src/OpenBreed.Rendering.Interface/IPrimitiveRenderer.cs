@@ -7,6 +7,14 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.Interface
 {
+    public enum PointType
+    {
+        Rectangle,
+        Circle,
+        Cross,
+        Ex
+    }
+
     public enum MatrixMode
     {
         ModelView,
@@ -24,19 +32,24 @@ namespace OpenBreed.Rendering.Interface
         void Translate(Vector3 pos);
         void Translate(float x, float y, float z);
 
-        void DrawUnitRectangle(Matrix4 model, Color4 red);
 
-        void DrawRectangle(Box2 clipBox, Color4 color);
+        void DrawRectangle(Vector2 center, Vector2 size, Color4 color, bool filled = false);
+        void DrawRectangle(Box2 clipBox, Color4 color, bool filled = false);
+        void DrawCircle(Vector2 pos, float radius, Color4 color, bool filled = false);
+        void DrawBox(Box2 clipBox, Color4 color);
+        void DrawPoint(Vector2 pos, Color4 color, PointType type);
 
         void DrawNested(Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction);
 
-        void DrawBox(Box2 clipBox, Color4 color);
-        void DrawPoint(Vector4 pos, Color4 color);
+        void DrawUnitRectangle(Matrix4 model, Color4 red, bool filled = false);
         void DrawUnitBox(Matrix4 model, Color4 color);
+        void DrawUnitCircle(Matrix4 model, Color4 color, bool filled = false);
         void DrawBrightnessBox(float brightness);
-
         void MultMatrix(Matrix4 transform);
         void SetProjection(Matrix4 matrix4);
+
+        void EnableAlpha();
+        void DisableAlpha();
 
         Vector4 GetScreenToWorldCoords(Vector4 coords);
 

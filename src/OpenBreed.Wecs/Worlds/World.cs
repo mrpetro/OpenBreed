@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Worlds
 
         private readonly Dictionary<IEntity, HashSet<IMatchingSystem>> entities = new Dictionary<IEntity, HashSet<IMatchingSystem>>();
         private readonly IEntityToSystemMatcher entityToSystemMatcher;
-        private readonly WorldContext context;
+        private readonly UpdateContext context;
         private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
@@ -38,7 +38,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             Name = builder.name;
             entityToSystemMatcher = builder.entityToSystemMatcher;
-            context = new WorldContext(this);
+            context = new UpdateContext(this);
             Systems = builder.CreateSystems(this).ToArray();
         }
 

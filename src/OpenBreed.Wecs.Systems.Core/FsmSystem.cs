@@ -3,7 +3,6 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,7 +32,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var fsmCmp = entity.Get<FsmComponent>();
 

@@ -67,10 +67,10 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 primitiveRenderer.MultMatrix(viewportTransform);
 
                 if (drawBackground)
-                    primitiveRenderer.DrawUnitBox(Matrix4.Identity, backgroundColor);
+                    primitiveRenderer.DrawUnitRectangle(Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f), backgroundColor, filled: true);
 
                 if (drawBorder)
-                    primitiveRenderer.DrawUnitRectangle(Matrix4.Identity, Color4.Red);
+                    primitiveRenderer.DrawUnitRectangle(Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f), Color4.Red, filled: false);
 
                 func.Invoke();
             }

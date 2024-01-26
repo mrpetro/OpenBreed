@@ -7,7 +7,6 @@ using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Animation
 {
@@ -53,7 +52,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var ac = entity.Get<AnimationComponent>();
 

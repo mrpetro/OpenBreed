@@ -15,7 +15,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(TextComponent),
         typeof(PositionComponent))]
-    public class TextSystem : MatchingSystemBase<TextSystem>, IRenderable
+    public class TextSystem : MatchingSystemBase<TextSystem>, IRenderableSystem
     {
         #region Private Fields
 
@@ -42,9 +42,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(Box2 clipBox, int depth, float dt)
+        public void Render(IRenderContext context)
         {
-            fontMan.Render(clipBox, dt, RenderTexts);
+            fontMan.Render(context.ViewBox, context.Dt, RenderTexts);
         }
 
         #endregion Public Methods

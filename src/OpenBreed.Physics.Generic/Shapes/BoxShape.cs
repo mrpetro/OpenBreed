@@ -7,7 +7,7 @@ namespace OpenBreed.Physics.Generic.Shapes
     /// <summary>
     /// Place holder implementation for fixture box shape
     /// </summary>
-    public class BoxShape : IShape
+    public class BoxShape : IBoxShape
     {
         public BoxShape(float x, float y, float width, float height)
         {

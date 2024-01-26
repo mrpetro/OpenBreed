@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(SpriteComponent),
         typeof(PositionComponent))]
-    public class SpriteSystem : MatchingSystemBase<SpriteSystem>, IRenderable
+    public class SpriteSystem : MatchingSystemBase<SpriteSystem>, IRenderableSystem
     {
         #region Private Fields
 
@@ -38,14 +38,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(Box2 clipBox, int depth, float dt)
+        public void Render(IRenderContext context)
         {
             spriteRenderer.RenderBegin();
 
             try
             {
                 for (int i = 0; i < entities.Count; i++)
-                    RenderSprite(entities[i], clipBox);
+                    RenderSprite(entities[i], context.ViewBox);
             }
             finally
             {

@@ -7,35 +7,6 @@ using System.Linq;
 
 namespace OpenBreed.Physics.Generic.Managers
 {
-    //internal class BroadphaseCell
-    //{
-    //    #region Private Fields
-
-    //    private readonly List<int> items = new List<int>();
-
-    //    #endregion Private Fields
-
-    //    #region Internal Methods
-
-    //    internal void AddItem(int itemId)
-    //    {
-    //        items.Add(itemId);
-    //    }
-
-    //    internal void RemoveItem(int itemId)
-    //    {
-    //        items.Remove(itemId);
-    //    }
-
-    //    internal void InsertTo(HashSet<int> result)
-    //    {
-    //        foreach (var item in items)
-    //            result.Add(item);
-    //    }
-
-    //    #endregion Internal Methods
-    //}
-
     internal class BroadphaseDynamicSwepAndPrune : IBroadphaseDynamic
     {
         #region Private Fields
@@ -53,7 +24,15 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        public IEnumerable<IBroadphaseDynamicElement> Items => cells;
+
+        #endregion Public Properties
+
         #region Public Methods
+
+        public bool ContainsItem(int itemId) => items.ContainsKey(itemId);
 
         public Box2 GetAabb(int itemId)
         {
@@ -62,8 +41,6 @@ namespace OpenBreed.Physics.Generic.Managers
 
             return cell.Aabb;
         }
-
-        public bool ContainsItem(int itemId) => items.ContainsKey(itemId);
 
         public void InsertItem(int itemId, Box2 aabb)
         {
@@ -74,22 +51,6 @@ namespace OpenBreed.Physics.Generic.Managers
 
             cells.Add(newCell);
             items.Add(itemId, newCell);
-        }
-
-        public void UpdateItem(int itemId, Box2 aabb)
-        {
-            if (!items.TryGetValue(itemId, out BroadphaseDynamicElement cell))
-                throw new InvalidOperationException($"Item with ID '{itemId}' was not inserted.");
-
-            cell.Aabb = aabb;
-        }
-
-        public void UpdateItems(UpdateDynamicDelegate updater)
-        {
-            foreach (var item in items)
-            {
-                item.Value.Aabb = updater.Invoke(item.Key);
-            }
         }
 
         public void RemoveItem(int itemId)
@@ -142,6 +103,22 @@ namespace OpenBreed.Physics.Generic.Managers
             if (cells.Count > 0)
             {
                 staticPhase(cells.Last(), dt);
+            }
+        }
+
+        public void UpdateItem(int itemId, Box2 aabb)
+        {
+            if (!items.TryGetValue(itemId, out BroadphaseDynamicElement cell))
+                throw new InvalidOperationException($"Item with ID '{itemId}' was not inserted.");
+
+            cell.Aabb = aabb;
+        }
+
+        public void UpdateItems(UpdateDynamicDelegate updater)
+        {
+            foreach (var item in items)
+            {
+                item.Value.Aabb = updater.Invoke(item.Key);
             }
         }
 

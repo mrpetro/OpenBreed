@@ -24,7 +24,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(ViewportComponent),
         typeof(PositionComponent))]
-    public class ViewportSystem : MatchingSystemBase<ViewportSystem>, IRenderable
+    public class ViewportSystem : MatchingSystemBase<ViewportSystem>, IRenderableSystem
     {
         #region Private Fields
 
@@ -60,10 +60,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(Box2 clipBox, int depth, float dt)
+        public void Render(IRenderContext context)
         {
             for (int i = 0; i < entities.Count; i++)
-                RenderViewport(entities[i], clipBox, depth, dt);
+                RenderViewport(entities[i], context.ViewBox, context.Depth, context.Dt);
         }
 
         #endregion Public Methods
@@ -136,7 +136,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
                 var palette = (cameraPalette.PaletteId != -1) ? paletteMan.GetById(cameraPalette.PaletteId) : null;
 
-                if (palette is not null) primitiveRenderer.PushPalette();
+                if (palette is not null)
+                {
+                    primitiveRenderer.PushPalette();
+                }
+
                 primitiveRenderer.PushMatrix();
 
                 try
@@ -146,11 +150,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
                     void OnRenderFrame(Box2 viewBox, int depth, float dt)
                     {
-                        var renderable = cameraWorld.Systems.OfType<IRenderable>().ToArray();
-
+                        var renderable = cameraWorld.Systems.OfType<IRenderableSystem>().ToArray();
+                        var renderContext = new RenderContext(depth, dt, viewBox, cameraWorld);
                         for (int i = 0; i < renderable.Length; i++)
                         {
-                            renderable[i].Render(viewBox, depth, dt);
+                            renderable[i].Render(renderContext);
                         }
                     }
 
@@ -159,7 +163,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 finally
                 {
                     primitiveRenderer.PopMatrix();
-                    if (palette is not null) primitiveRenderer.PopPalette();
+
+                    if (palette is not null)
+                    {
+                        primitiveRenderer.PopPalette();
+                    }
                 }
 
                 //Draw camera effects

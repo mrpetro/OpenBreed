@@ -38,7 +38,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var emitEntityComponent = entity.Get<EntityEmitterComponent>();
 

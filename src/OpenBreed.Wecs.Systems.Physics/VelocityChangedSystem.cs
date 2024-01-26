@@ -4,7 +4,6 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -40,7 +39,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var velocity = entity.Get<VelocityComponent>();
             eventsMan.Raise(null, new VelocityChangedEvent(entity.Id, velocity.Value));

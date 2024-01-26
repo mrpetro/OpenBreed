@@ -6,6 +6,7 @@ using System;
 using OpenBreed.Core;
 using OpenBreed.Input.Interface;
 using OpenBreed.Core.Managers;
+using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Gui.Extensions
 {
@@ -17,7 +18,9 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
         {
             systemFactory.RegisterSystem<PhysicsDebugDisplaySystem>(
                 () => new PhysicsDebugDisplaySystem(
-                    sp.GetService<IPrimitiveRenderer>()));
+                    sp.GetService<IEntityMan>(),
+                    sp.GetService<IPrimitiveRenderer>(),
+                    sp.GetService<ICollisionMan<IEntity>>()));
 
             systemFactory.RegisterSystem<CursorSystem>(
                 () => new CursorSystem(

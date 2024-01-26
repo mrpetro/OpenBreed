@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         typeof(TextDataComponent),
         typeof(TextPresentationComponent),
         typeof(PositionComponent))]
-    public class TextPresenterSystem : MatchingSystemBase<TextPresenterSystem>, IRenderable
+    public class TextPresenterSystem : MatchingSystemBase<TextPresenterSystem>, IRenderableSystem
     {
         #region Private Fields
 
@@ -35,9 +35,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(Box2 clipBox, int depth, float dt)
+        public void Render(IRenderContext context)
         {
-            fontMan.Render(clipBox, dt, RenderTexts);
+            fontMan.Render(context.ViewBox, context.Dt, RenderTexts);
         }
 
         #endregion Public Methods

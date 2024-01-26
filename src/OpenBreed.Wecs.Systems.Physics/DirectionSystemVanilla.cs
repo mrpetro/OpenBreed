@@ -5,7 +5,6 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenBreed.Wecs.Worlds;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Physics
@@ -41,7 +40,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var angularPos = entity.Get<AngularPositionComponent>();
             var angularVel = entity.Get<AngularPositionTargetComponent>();

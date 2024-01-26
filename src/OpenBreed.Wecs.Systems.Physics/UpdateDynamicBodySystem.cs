@@ -52,7 +52,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Public Methods
 
-        public void Update(IWorldContext context)
+        public void Update(IUpdateContext context)
         {
             foreach (var entity in entities)
             {

@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 {
     [RequireEntityWith(
         typeof(TileGridComponent))]
-    public class TileRenderSystem : MatchingSystemBase<TileRenderSystem>, IRenderable
+    public class TileRenderSystem : MatchingSystemBase<TileRenderSystem>, IRenderableSystem
     {
         #region Private Fields
 
@@ -38,20 +38,20 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
-        public void Render(Box2 clipBox, int depth, float dt)
+        public void Render(IRenderContext context)
         {
             foreach (var item in entities)
             {
-                RenderEntity(item, clipBox, depth, dt);
+                RenderEntity(item, context);
             }
 
             //tileGrid.Render(clipBox);
         }
 
-        public void RenderEntity(IEntity entity, Box2 clipBox, int depth, float dt)
+        public void RenderEntity(IEntity entity, IRenderContext context)
         {
             var tgc = entity.Get<TileGridComponent>();
-            tgc.Grid.Render(clipBox);
+            tgc.Grid.Render(context.ViewBox);
         }
 
         #endregion Public Methods

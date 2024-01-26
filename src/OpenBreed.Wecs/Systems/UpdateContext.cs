@@ -1,12 +1,13 @@
 ﻿using System;
+using OpenBreed.Wecs.Worlds;
 
-namespace OpenBreed.Wecs.Worlds
+namespace OpenBreed.Wecs.Systems
 {
-    internal class WorldContext : IWorldContext
+    internal class UpdateContext : IUpdateContext
     {
         #region Public Constructors
 
-        public WorldContext(IWorld world)
+        public UpdateContext(IWorld world)
         {
             World = world;
         }

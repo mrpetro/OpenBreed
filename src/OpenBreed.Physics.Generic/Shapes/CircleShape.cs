@@ -7,8 +7,18 @@ namespace OpenBreed.Physics.Generic.Shapes
     /// <summary>
     /// Place holder implementation for fixture circle shape
     /// </summary>
-    public class CircleShape : IShape
+    public class CircleShape : ICircleShape
     {
+        #region Public Constructors
+
+        public CircleShape(Vector2 center, float radius)
+        {
+            Center = center;
+            Radius = radius;
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
 
         public Vector2 Center { get; set; }

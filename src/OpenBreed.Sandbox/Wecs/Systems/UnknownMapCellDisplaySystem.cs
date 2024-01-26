@@ -18,7 +18,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
     [RequireEntityWith(
         typeof(PositionComponent),
         typeof(UnknownCodeComponent))]
-    public class UnknownMapCellDisplaySystem : MatchingSystemBase<UnknownMapCellDisplaySystem>, IRenderable
+    public class UnknownMapCellDisplaySystem : MatchingSystemBase<UnknownMapCellDisplaySystem>, IRenderableSystem
     {
         #region Private Fields
 
@@ -48,14 +48,14 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 
         #region Public Methods
 
-        public void Render(Box2 clipBox, int depth, float dt)
+        public void Render(IRenderContext context)
         {
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawEntityAabb(entities[i], clipBox);
+                DrawEntityAabb(entities[i], context.ViewBox);
 
             GL.Disable(EnableCap.Blend);
         }

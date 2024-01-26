@@ -16,12 +16,10 @@ namespace OpenBreed.Physics.Generic.Managers
 
         private readonly Dictionary<string, int> aliases = new Dictionary<string, int>();
 
-        private readonly Dictionary<string, int> groupNames = new Dictionary<string, int>();
-        private readonly IdMap<string> groupIds = new IdMap<string>();
-
-        private readonly ILogger logger;
-
         private readonly Dictionary<(int, int), FixtureContactCallback<TObject>> fixtureCallbacks = new Dictionary<(int, int), FixtureContactCallback<TObject>>();
+        private readonly IdMap<string> groupIds = new IdMap<string>();
+        private readonly Dictionary<string, int> groupNames = new Dictionary<string, int>();
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
@@ -34,16 +32,19 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        public IEnumerable<string> GroupNames => groupNames.Keys;
+
+        #endregion Public Properties
+
         #region Public Methods
 
-        public int RegisterGroup(string groupName)
+        public int GetByName(string name)
         {
-            if (groupNames.ContainsKey(groupName))
-                throw new InvalidOperationException($"Group name '{groupName}' already registered.");
-
-            var groupId = groupIds.Add(groupName);
-            groupNames.Add(groupName, groupId);
-            return groupId;
+            int result;
+            aliases.TryGetValue(name, out result);
+            return result;
         }
 
         public int GetGroupId(string groupName)
@@ -59,11 +60,14 @@ namespace OpenBreed.Physics.Generic.Managers
             fixtureCallbacks.Add((fixtureA, fixtureB), callback);
         }
 
-        public int GetByName(string name)
+        public int RegisterGroup(string groupName)
         {
-            int result;
-            aliases.TryGetValue(name, out result);
-            return result;
+            if (groupNames.ContainsKey(groupName))
+                throw new InvalidOperationException($"Group name '{groupName}' already registered.");
+
+            var groupId = groupIds.Add(groupName);
+            groupNames.Add(groupName, groupId);
+            return groupId;
         }
 
         public void Resolve(TObject objA, TObject objB, float dt, List<Interface.Managers.CollisionContact> contacts)

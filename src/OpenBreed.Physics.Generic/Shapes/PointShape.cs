@@ -7,7 +7,7 @@ namespace OpenBreed.Physics.Generic.Shapes
     /// <summary>
     /// Place holder implementation for fixture point shape
     /// </summary>
-    public class PointShape : IShape
+    public class PointShape : IPointShape
     {
         public PointShape(float x, float y)
         {

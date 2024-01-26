@@ -23,6 +23,8 @@ namespace OpenBreed.Rendering.Interface
         void AddVertex(float x, float y, float z);
         void AddTriangleIndices(int v1, int v2, int v3);
         void AddLoopIndices(int v1, int v2, int v3, int v4);
+        void AddLoopIndices(int[] vArray);
+        void ClearLoopIndices();
 
         int CreateTexturedVao();
         int CreateVao();

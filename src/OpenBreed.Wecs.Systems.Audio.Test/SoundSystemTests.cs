@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
     {
         #region Private Fields
 
-        private Mock<IWorldContext> mockContext;
+        private Mock<IUpdateContext> mockContext;
         private Mock<IEntity> mockEntity;
         private Mock<IEventsMan> mockEventsMan;
         private MockRepository mockRepository;
@@ -34,7 +34,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             this.mockEventsMan = this.mockRepository.Create<IEventsMan>(MockBehavior.Loose);
             this.mockWorld = this.mockRepository.Create<IWorld>();
             this.mockEntity = this.mockRepository.Create<IEntity>();
-            this.mockContext = this.mockRepository.Create<IWorldContext>();
+            this.mockContext = this.mockRepository.Create<IUpdateContext>();
         }
 
         [Test]
@@ -98,7 +98,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             mock.Setup(item => item.Id).Returns(0);
         }
 
-        private static void SetupWorldContext(Mock<IWorldContext> mock, bool paused)
+        private static void SetupWorldContext(Mock<IUpdateContext> mock, bool paused)
         {
             mock.Setup(item => item.Paused).Returns(paused);
         }

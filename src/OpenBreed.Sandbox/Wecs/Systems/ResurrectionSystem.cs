@@ -28,7 +28,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             this.worldMan = worldMan;
         }
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             try
             {

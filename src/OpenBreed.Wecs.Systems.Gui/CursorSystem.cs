@@ -17,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Gui
     [RequireEntityWith(
         typeof(CursorInputComponent),
         typeof(PositionComponent))]
-    public class CursorSystem : MatchingSystemBase<CursorSystem>, IRenderable
+    public class CursorSystem : MatchingSystemBase<CursorSystem>, IRenderableSystem
     {
         #region Private Fields
 
@@ -59,7 +59,7 @@ namespace OpenBreed.Wecs.Systems.Gui
             entities.Remove(entity);
         }
 
-        public void Render(Box2 viewBox, int depth, float dt)
+        public void Render(IRenderContext context)
         {
             var cursorPos4 = new Vector4(
                 inputsMan.CursorPos.X,
@@ -71,7 +71,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
             for (int i = 0; i < entities.Count; i++)
             {
-                Update(entities[i], viewBox, depth, cursorPos4, dt);
+                Update(entities[i], context.ViewBox, context.Depth, cursorPos4, context.Dt);
             }
         }
 

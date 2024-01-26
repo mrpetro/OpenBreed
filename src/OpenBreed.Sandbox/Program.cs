@@ -265,6 +265,7 @@ namespace OpenBreed.Sandbox
                 shapeMan.Register("Shapes/Box_0_0_48_48", new BoxShape(0, 0, 48, 48));
                 shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
                 shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
+                shapeMan.Register("Shapes/Circle_24_24_480", new CircleShape(new Vector2(24,24), 480));
             });
 
             hostBuilder.SetupOpenALManagers();
@@ -790,11 +791,11 @@ namespace OpenBreed.Sandbox
 
             void OnRenderFrame(Matrix4 transform, Box2 viewBox, int depth, float dt)
             {
-                var renderable = screenWorld.Systems.OfType<IRenderable>().ToArray();
-
+                var renderable = screenWorld.Systems.OfType<IRenderableSystem>().ToArray();
+                var renderContext = new RenderContext(depth, dt, viewBox, screenWorld);
                 for (int i = 0; i < renderable.Length; i++)
                 {
-                    renderable[i].Render(viewBox, depth, dt);
+                    renderable[i].Render(renderContext);
                 }
             }
 

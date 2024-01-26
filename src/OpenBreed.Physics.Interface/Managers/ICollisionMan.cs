@@ -8,6 +8,12 @@ namespace OpenBreed.Physics.Interface.Managers
 
     public interface ICollisionMan<TObject>
     {
+        #region Public Properties
+
+        IEnumerable<string> GroupNames { get; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
         int GetByName(string name);
@@ -25,7 +31,7 @@ namespace OpenBreed.Physics.Interface.Managers
 
     public class BodyFixture : IFixture
     {
-        #region Internal Constructors
+        #region Public Constructors
 
         public BodyFixture(
             int id,
@@ -37,7 +43,7 @@ namespace OpenBreed.Physics.Interface.Managers
             GroupIds = groupIds.ToList();
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 

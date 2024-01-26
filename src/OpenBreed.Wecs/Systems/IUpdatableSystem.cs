@@ -1,5 +1,4 @@
-﻿using OpenBreed.Wecs.Worlds;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +15,6 @@ namespace OpenBreed.Wecs.Systems
         /// Update all entities in this system using given time step
         /// </summary>
         /// <param name="context">World context</param>
-        void Update(IWorldContext context);
+        void Update(IUpdateContext context);
     }
 }

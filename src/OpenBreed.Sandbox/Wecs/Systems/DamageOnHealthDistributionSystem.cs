@@ -9,9 +9,9 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Audio.Events;
 using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +38,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             this.logger = logger;
         }
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var damageComponent = entity.Get<DamagerComponent>();
 

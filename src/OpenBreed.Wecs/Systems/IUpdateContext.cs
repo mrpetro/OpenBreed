@@ -1,8 +1,10 @@
-﻿namespace OpenBreed.Wecs.Worlds
+﻿using OpenBreed.Wecs.Worlds;
+
+namespace OpenBreed.Wecs.Systems
 {
 
 
-    public interface IWorldContext
+    public interface IUpdateContext
     {
         #region Public Properties
 

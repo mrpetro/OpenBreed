@@ -5,7 +5,6 @@ using OpenBreed.Wecs.Components.Audio;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Audio.Events;
 using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Audio
@@ -39,7 +38,7 @@ namespace OpenBreed.Wecs.Systems.Audio
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, IWorldContext context)
+        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var soundPlayerComponent = entity.TryGet<SoundPlayerComponent>();
 

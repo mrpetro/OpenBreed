@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
 {
     public static class CollisionChecker
     {
-        public static bool Check(Vector2 posA, BoxShape shapeA, Vector2 posB, BoxShape shapeB, out Vector2 projection)
+        public static bool Check(Vector2 posA, IBoxShape shapeA, Vector2 posB, IBoxShape shapeB, out Vector2 projection)
         {
             var aabbA = shapeA.GetAabb();
             var aabbB = shapeB.GetAabb();
@@ -82,7 +82,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             return false;
         }
 
-        public static bool Check(Vector2 posA, PointShape pointShape, Vector2 posB, BoxShape shapeB, out Vector2 projection)
+        public static bool Check(Vector2 posA, IPointShape pointShape, Vector2 posB, IBoxShape shapeB, out Vector2 projection)
         {
             //var aabbA = pointShape.GetAabb();
             var aabbB = shapeB.GetAabb();
@@ -152,7 +152,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             return false;
         }
 
-        public static bool Check(Vector2 posA, PointShape pointShapeA, Vector2 posB, PointShape pointShapeB, out Vector2 projection)
+        public static bool Check(Vector2 posA, IPointShape pointShapeA, Vector2 posB, IPointShape pointShapeB, out Vector2 projection)
         {
             var aPos = new Vector2(pointShapeA.X, pointShapeA.Y);
             var bPos = new Vector2(pointShapeB.X, pointShapeB.Y);
@@ -163,16 +163,32 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
             return false;
         }
 
+        public static bool Check(Vector2 posA, IPointShape shapeA, Vector2 posB, ICircleShape shapeB, out Vector2 projection)
+        {
+            //var aPos = new Vector2(pointShapeA.X, pointShapeA.Y);
+            //var bPos = new Vector2(pointShapeB.X, pointShapeB.Y);
+            //projection = Vector2.Zero;
+            //if (aPos == bPos)
+            //    return true;
+
+            projection = Vector2.Zero;
+            return false;
+        }
+
         public static bool Check(Vector2 posA, IShape shapeA, Vector2 posB, IShape shapeB, out Vector2 projection)
         {
-            if (shapeA is BoxShape && shapeB is BoxShape)
-                return Check(posA, (BoxShape)shapeA, posB, (BoxShape)shapeB, out projection);
-            else if (shapeA is PointShape && shapeB is BoxShape)
-                return Check(posA, (PointShape)shapeA, posB, (BoxShape)shapeB, out projection);
-            else if (shapeA is PointShape && shapeB is PointShape)
-                return Check(posA, (PointShape)shapeA, posB, (PointShape)shapeB, out projection);
-            else if (shapeA is BoxShape && shapeB is PointShape)
-                return Check(posB, (PointShape)shapeB, posA, (BoxShape)shapeA, out projection);
+            if (shapeA is IBoxShape && shapeB is IBoxShape)
+                return Check(posA, (IBoxShape)shapeA, posB, (IBoxShape)shapeB, out projection);
+            else if (shapeA is IPointShape && shapeB is IBoxShape)
+                return Check(posA, (IPointShape)shapeA, posB, (IBoxShape)shapeB, out projection);
+            else if (shapeA is IPointShape && shapeB is IPointShape)
+                return Check(posA, (IPointShape)shapeA, posB, (IPointShape)shapeB, out projection);
+            else if (shapeA is IBoxShape && shapeB is IPointShape)
+                return Check(posB, (IPointShape)shapeB, posA, (IBoxShape)shapeA, out projection);
+            else if (shapeA is IPointShape && shapeB is ICircleShape)
+                return Check(posB, (ICircleShape)shapeB, posA, (IPointShape)shapeA, out projection);
+            else if (shapeA is ICircleShape && shapeB is IPointShape)
+                return Check(posB, (IPointShape)shapeB, posA, (ICircleShape)shapeA, out projection);
             else
                 throw new NotImplementedException();
         }

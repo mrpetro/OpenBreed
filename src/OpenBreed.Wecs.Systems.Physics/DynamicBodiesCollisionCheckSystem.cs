@@ -5,7 +5,6 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
-using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
@@ -49,7 +48,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
 
-        public void Update(IWorldContext context)
+        public void Update(IUpdateContext context)
         {
             var mapEntity = entityMan.GetByTag("Maps").Where(e => e.WorldId == context.World.Id).FirstOrDefault();
 

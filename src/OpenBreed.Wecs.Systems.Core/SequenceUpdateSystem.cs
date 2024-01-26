@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
@@ -25,7 +24,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Methods
 
-        public void Update(IWorldContext context)
+        public void Update(IUpdateContext context)
         {
             if (context.Paused)
             {
