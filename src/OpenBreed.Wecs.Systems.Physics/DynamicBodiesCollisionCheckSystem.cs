@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Physics.Interface;
+using OpenBreed.Physics.Interface.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
@@ -8,6 +9,7 @@ using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenTK;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics
@@ -24,6 +26,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         private readonly IEntityMan entityMan;
         private readonly IShapeMan shapeMan;
         private readonly ICollisionMan<IEntity> collisionMan;
+        private readonly ICollisionChecker collisionChecker;
 
         #endregion Private Fields
 
@@ -32,11 +35,13 @@ namespace OpenBreed.Wecs.Systems.Physics
         internal DynamicBodiesCollisionCheckSystem(
             IEntityMan entityMan,
             IShapeMan shapeMan,
-            ICollisionMan<IEntity> collisionMan)
+            ICollisionMan<IEntity> collisionMan,
+            ICollisionChecker collisionChecker)
         {
             this.entityMan = entityMan;
             this.shapeMan = shapeMan;
             this.collisionMan = collisionMan;
+            this.collisionChecker = collisionChecker;
         }
 
         #endregion Internal Constructors
@@ -58,7 +63,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             var staticPhase = mapEntity.Get<BroadphaseStaticComponent>();
             var dynamicPhase = mapEntity.Get<BroadphaseDynamicComponent>();
 
-            dynamicPhase.Dynamic.Solve((be, dt) => QueryStaticGrid(staticPhase.Grid, be, dt), TestNarrowPhaseDynamic, context.Dt);
+            dynamicPhase.ContactPairs.Clear();
+            dynamicPhase.Dynamic.Solve(QueryStaticGrid, TestNarrowPhaseDynamic, staticPhase.Grid, dynamicPhase.ContactPairs, context.Dt);
         }
 
         #endregion Public Methods
@@ -87,41 +93,31 @@ namespace OpenBreed.Wecs.Systems.Physics
             return shape.GetAabb().Translated(pos.Value);
         }
 
-        private void TestNarrowPhaseDynamic(BroadphaseDynamicElement nextCollider, BroadphaseDynamicElement currentCollider, float dt)
+        private void TestNarrowPhaseDynamic(
+            BroadphaseDynamicElement nextCollider,
+            BroadphaseDynamicElement currentCollider,
+            List<ContactPair> result,
+            float dt)
         {
             var entityA = entityMan.GetById(nextCollider.ItemId);
             var entityB = entityMan.GetById(currentCollider.ItemId);
 
             if (TestVsDynamic(entityA, entityB, dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts))
+            {
+                result.Add(new ContactPair(nextCollider.ItemId, currentCollider.ItemId, contacts));
                 collisionMan.Resolve(entityA, entityB, dt, contacts);
+            }
         }
 
-        private void TestNarrowPhaseStatic(IEntity dynamicEntity, IEntity staticEntity, float dt)
+        private List<OpenBreed.Physics.Interface.Managers.CollisionContact> TestNarrowPhaseStatic(IEntity dynamicEntity, IEntity staticEntity, float dt)
         {
             if (TestVsStatic(dynamicEntity, staticEntity, dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts))
+            {
                 collisionMan.Resolve(dynamicEntity, staticEntity, dt, contacts);
-            //{
-            //    var projection = manifolds.First().Projection;
-            //    //var collisionDynamic = dynamicEntity.TryGet<CollisionComponent>();
-            //    //if (collisionDynamic == null)
-            //    //{
-            //    //    collisionDynamic = new CollisionComponent();
-            //    //    dynamicEntity.Add(collisionDynamic);
-            //    //}
+                return contacts;
+            }
 
-            //    //var collisionStatic = staticEntity.TryGet<CollisionComponent>();
-            //    //if (collisionStatic == null)
-            //    //{
-            //    //    collisionStatic = new CollisionComponent();
-            //    //    staticEntity.Add(collisionStatic);
-            //    //}
-
-            //    //collisionDynamic.Contacts.Add(new CollisionContact(staticEntity.Id, projection));
-            //    //collisionStatic.Contacts.Add(new CollisionContact(dynamicEntity.Id, -projection));
-
-            //    collisionMan.Callback(dynamicEntity, staticEntity, projection);
-            //    //collisionMan.Callback(staticEntity, dynamicEntity, -projection);
-            //}
+            return null;
         }
 
         private bool TestVsDynamic(IEntity entityA, IEntity entityB, float dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts)
@@ -154,7 +150,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                 {
                     var shapeB = fixtureB.Shape;
 
-                    if (CollisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
+                    if (collisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
                         contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(fixtureA, fixtureB, projection));
                 }
             }
@@ -192,7 +188,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                 {
                     var shapeB = fixtureB.Shape;
 
-                    if (CollisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
+                    if (collisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
                         contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(fixtureA, fixtureB, projection));
                 }
             }
@@ -200,14 +196,16 @@ namespace OpenBreed.Wecs.Systems.Physics
             return contacts.Count > 0;
         }
 
-        private void QueryStaticGrid(IBroadphaseStatic grid, BroadphaseDynamicElement cell, float dt)
+        private void QueryStaticGrid(IBroadphaseStatic grid, BroadphaseDynamicElement cell, List<ContactPair> contactPairs, float dt)
         {
             var dynamicAabb = cell.Aabb;
 
             var idSet = grid.QueryStatic(dynamicAabb);
 
             if (idSet.Count == 0)
+            {
                 return;
+            }
 
             var entity = entityMan.GetById(cell.ItemId);
 
@@ -217,9 +215,17 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             entitySet.Sort((a, b) => ShortestDistanceComparer(pos, GetCellCenter(a.Get<PositionComponent>()), GetCellCenter(b.Get<PositionComponent>())));
 
+
             //Iterate all collected static bodies for detail test
             foreach (var staticEntity in entitySet)
-                TestNarrowPhaseStatic(entity, staticEntity, dt);
+            {
+                var contacts = TestNarrowPhaseStatic(entity, staticEntity, dt);
+
+                if (contacts is not null)
+                {
+                    contactPairs.Add(new ContactPair(entity.Id, staticEntity.Id, contacts));
+                }
+            }
         }
 
         private int ShortestDistanceComparer(Vector2 pos, Vector2 a, Vector2 b)

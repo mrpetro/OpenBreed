@@ -24,6 +24,7 @@ namespace OpenBreed.Wecs.Components.Physics
         public BroadphaseDynamicComponent(BroadphaseDynamicComponentBuilder builder)
         {
             Dynamic = builder.Dynamic;
+            ContactPairs = new List<ContactPair>();
         }
 
         #endregion Public Constructors
@@ -31,6 +32,8 @@ namespace OpenBreed.Wecs.Components.Physics
         #region Public Properties
 
         public IBroadphaseDynamic Dynamic { get; }
+
+        public List<ContactPair> ContactPairs { get; }
 
         #endregion Public Properties
     }

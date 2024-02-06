@@ -4,6 +4,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace OpenBreed.Wecs.Components.Physics.Builders
 {
@@ -49,11 +50,15 @@ namespace OpenBreed.Wecs.Components.Physics.Builders
             return newFixture;
         }
 
-        public void SetGroups(IEnumerable<string> groupNames)
+        public void ClearGroups()
         {
-            var groupIds = groupNames.Select(item => collisionMan.GetGroupId(item));
+            this.groupIds.Clear();
+        }
 
-            this.groupIds.AddRange(groupIds);
+        public void AddGroup(string groupName)
+        {
+            var groupId = collisionMan.GetGroupId(groupName);
+            this.groupIds.Add(groupId);
         }
 
         public void SetShape(string shapeName)

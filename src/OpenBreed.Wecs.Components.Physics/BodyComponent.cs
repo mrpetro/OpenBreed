@@ -99,8 +99,14 @@ namespace OpenBreed.Wecs.Components.Physics
 
             foreach (var fixture in template.Fixtures)
             {
+                fixtureBuilder.ClearGroups();
+
                 fixtureBuilder.SetShape(fixture.ShapeName);
-                fixtureBuilder.SetGroups(fixture.Groups);
+
+                foreach (var groupName in fixture.Groups)
+                {
+                    fixtureBuilder.AddGroup(groupName);
+                }
 
                 bodyComponentBuilder.AddFixture(fixtureBuilder.Build());
             }

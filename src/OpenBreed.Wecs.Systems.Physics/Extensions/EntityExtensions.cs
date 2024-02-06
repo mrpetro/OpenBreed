@@ -1,5 +1,7 @@
-﻿using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface;
+using OpenBreed.Physics.Interface.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
@@ -66,8 +68,15 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             var pos = bodyEntity.Get<PositionComponent>();
             var body = bodyEntity.Get<BodyComponent>();
 
-            var shape = body.Fixtures.First().Shape;
-            var aabb = shape.GetAabb().Translated(pos.Value);
+
+            var aabb = body.Fixtures[0].Shape.GetAabb();
+
+            for (int i = 1; i < body.Fixtures.Count; i++)
+            {
+                aabb = aabb.Inflated(body.Fixtures[i].Shape.GetAabb());
+            }
+
+            aabb = aabb.Translated(pos.Value);
 
             grid.InsertItem(bodyEntity.Id, aabb);
         }

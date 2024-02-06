@@ -12,13 +12,15 @@ using OpenTK.Graphics;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace OpenBreed.Wecs.Systems.Gui
 {
-    public class PhysicsDebugDisplaySystem : SystemBase<PhysicsDebugDisplaySystem>, IRenderableSystem
+    public class CollisionVisualizingSystem : SystemBase<CollisionVisualizingSystem>, IRenderableSystem
     {
         #region Private Fields
 
@@ -32,7 +34,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Public Constructors
 
-        public PhysicsDebugDisplaySystem(
+        public CollisionVisualizingSystem(
             IEntityMan entityMan,
             IPrimitiveRenderer primitiveRenderer,
             ICollisionMan<IEntity> collisionMan)
@@ -59,13 +61,17 @@ namespace OpenBreed.Wecs.Systems.Gui
                 if (mapEntity is null)
                     return;
 
-                var dynamics = mapEntity.Get<BroadphaseDynamicComponent>().Dynamic;
+                var dynamicComponent = mapEntity.Get<BroadphaseDynamicComponent>();
+                var staticsComponent = mapEntity.Get<BroadphaseStaticComponent>();
 
-                DrawDynamics(dynamics, context.ViewBox);
 
-                var statics = mapEntity.Get<BroadphaseStaticComponent>().Grid;
+                DrawDynamics(dynamicComponent.Dynamic, context.ViewBox);
+                DrawStatics(staticsComponent.Grid, context.ViewBox);
 
-                DrawStatics(statics, context.ViewBox);
+                if (dynamicComponent.ContactPairs.Any())
+                {
+                    DrawContacts(dynamicComponent.ContactPairs);
+                }
             }
             finally
             {
@@ -76,6 +82,46 @@ namespace OpenBreed.Wecs.Systems.Gui
         #endregion Public Methods
 
         #region Private Methods
+
+        private void DrawContacts(List<ContactPair> contactPairs)
+        {
+            for (int i = 0; i < contactPairs.Count; i++)
+            {
+                DrawContact(contactPairs[i]);
+            }
+        }
+
+        private void DrawContact(ContactPair contactPair)
+        {
+            var entityA = entityMan.GetById(contactPair.ItemA);
+            var posA = entityA.Get<PositionComponent>().Value;
+
+            var entityB = entityMan.GetById(contactPair.ItemB);
+            var posB = entityB.Get<PositionComponent>().Value;
+
+
+            primitiveRenderer.PushMatrix();
+            primitiveRenderer.Translate(new Vector3(posA));
+
+            for (int i = 0; i < contactPair.Contacts.Count; i++)
+            {
+                var contact = contactPair.Contacts[i];
+                RenderShape(contact.FixtureA.Shape, new Color4(255,0,0,80));
+            }
+
+            primitiveRenderer.PopMatrix();
+            primitiveRenderer.PushMatrix();
+
+            primitiveRenderer.Translate(new Vector3(posB));
+
+            for (int i = 0; i < contactPair.Contacts.Count; i++)
+            {
+                var contact = contactPair.Contacts[i];
+                RenderShape(contact.FixtureB.Shape, new Color4(255, 0, 0, 80));
+            }
+
+            primitiveRenderer.PopMatrix();
+        }
 
         private void DrawDynamicEntityAabb(IBroadphaseDynamicElement item, Box2 clipBox)
         {
@@ -122,7 +168,8 @@ namespace OpenBreed.Wecs.Systems.Gui
             for (int i = 0; i < bodyCmp.Fixtures.Count; i++)
             {
                 var fixture = bodyCmp.Fixtures[i];
-                RenderShape(fixture.Shape, fixture.GroupIds.FirstOrDefault());
+                var color = groupsToColors[fixture.GroupIds.FirstOrDefault()];
+                RenderShape(fixture.Shape, color);
             }
 
             primitiveRenderer.PopMatrix();
@@ -140,11 +187,8 @@ namespace OpenBreed.Wecs.Systems.Gui
             }
         }
 
-        private void RenderShape(IShape shape, int groupId)
+        private void RenderShape(IShape shape, Color4 color)
         {
-            var color = groupsToColors[groupId];
-
-
             switch (shape)
             {
                 case IPolygonShape polygon:

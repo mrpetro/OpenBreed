@@ -16,8 +16,8 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
 
         public static void SetupGuiSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
-            systemFactory.RegisterSystem<PhysicsDebugDisplaySystem>(
-                () => new PhysicsDebugDisplaySystem(
+            systemFactory.RegisterSystem<CollisionVisualizingSystem>(
+                () => new CollisionVisualizingSystem(
                     sp.GetService<IEntityMan>(),
                     sp.GetService<IPrimitiveRenderer>(),
                     sp.GetService<ICollisionMan<IEntity>>()));

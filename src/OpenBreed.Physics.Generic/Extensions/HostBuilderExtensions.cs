@@ -54,6 +54,19 @@ namespace OpenBreed.Physics.Generic.Extensions
             });
         }
 
+        public static void SetupCollisionChecker(this IHostBuilder hostBuilder, Action<ICollisionChecker, IServiceProvider> action = null)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ICollisionChecker>((sp) =>
+                {
+                    var collisionChecker = new CollisionChecker();
+                    action?.Invoke(collisionChecker, sp);
+                    return collisionChecker;
+                });
+            });
+        }
+
         public static void SetupFixtureMan<TObject>(this IHostBuilder hostBuilder, Action<IFixtureMan, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>

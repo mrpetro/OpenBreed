@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Physics.Interface;
+using OpenBreed.Physics.Interface.Managers;
 using OpenTK;
 using OpenTK.Mathematics;
 using System;
@@ -62,7 +63,12 @@ namespace OpenBreed.Physics.Generic.Managers
             items.Remove(itemId);
         }
 
-        public void Solve(Action<BroadphaseDynamicElement, float> staticPhase, Action<BroadphaseDynamicElement, BroadphaseDynamicElement, float> narrowPhase, float dt)
+        public void Solve(
+            Action<IBroadphaseStatic, BroadphaseDynamicElement, List<ContactPair>, float> staticPhase,
+            Action<BroadphaseDynamicElement, BroadphaseDynamicElement, List<ContactPair>, float> narrowPhase,
+            IBroadphaseStatic grid,
+            List<ContactPair> result,
+            float dt)
         {
             var xActiveList = new List<BroadphaseDynamicElement>();
             BroadphaseDynamicElement nextCollider;
@@ -75,7 +81,8 @@ namespace OpenBreed.Physics.Generic.Managers
             {
                 var activeDynamic = cells[i];
                 prevCount = cells.Count;
-                staticPhase(activeDynamic, dt);
+
+                staticPhase(grid, activeDynamic, result, dt);
 
                 nextCollider = cells[i + 1];
 
@@ -89,7 +96,7 @@ namespace OpenBreed.Physics.Generic.Managers
                     {
                         if (nextCollider.Aabb.Min.Y <= currentCollider.Aabb.Max.Y && nextCollider.Aabb.Max.Y > currentCollider.Aabb.Min.Y)
                         {
-                            narrowPhase(nextCollider, currentCollider, dt);
+                            narrowPhase(nextCollider, currentCollider, result, dt);
                         }
                     }
                     else
@@ -102,7 +109,7 @@ namespace OpenBreed.Physics.Generic.Managers
 
             if (cells.Count > 0)
             {
-                staticPhase(cells.Last(), dt);
+                staticPhase(grid, cells.Last(), result, dt);
             }
         }
 

@@ -1,11 +1,12 @@
-﻿using OpenTK;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Wecs.Systems.Physics.Helpers
+namespace OpenBreed.Physics.Interface.Extensions
 {
-    /// <summary>
-    /// Extension methods for OpenTK.Box2 class
-    /// </summary>
     public static class Box2Extensions
     {
         #region Public Methods
@@ -42,6 +43,13 @@ namespace OpenBreed.Wecs.Systems.Physics.Helpers
         {
             return new Vector2((thisBox.Min.X + thisBox.Max.X) / 2.0f,
                                (thisBox.Min.Y + thisBox.Max.Y) / 2.0f);
+        }
+
+        public static Box2 Inflated(this Box2 box, Box2 otherBox)
+        {
+            box.Inflate(otherBox.Min);
+            box.Inflate(otherBox.Max);
+            return box;
         }
 
         #endregion Public Methods

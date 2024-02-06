@@ -1,10 +1,28 @@
-﻿using OpenTK;
+﻿using OpenBreed.Physics.Interface.Managers;
+using OpenTK;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Physics.Interface
 {
+    public class ContactPair
+    {
+        public ContactPair(
+            int itemA,
+            int itemB,
+            List<CollisionContact> contacts)
+        {
+            ItemA = itemA;
+            ItemB = itemB;
+            Contacts = contacts;
+        }
+
+        public int ItemA { get; }
+        public int ItemB { get; }
+        public List<CollisionContact> Contacts { get; }
+    }
+
     public delegate Box2 UpdateDynamicDelegate(int itemId);
 
     /// <summary>
@@ -28,7 +46,12 @@ namespace OpenBreed.Physics.Interface
 
         void RemoveItem(int itemId);
 
-        void Solve(Action<BroadphaseDynamicElement, float> staticPhase, Action<BroadphaseDynamicElement, BroadphaseDynamicElement, float> narrowPhase, float dt);
+        public void Solve(
+            Action<IBroadphaseStatic, BroadphaseDynamicElement, List<ContactPair>, float> staticPhase,
+            Action<BroadphaseDynamicElement, BroadphaseDynamicElement, List<ContactPair>, float> narrowPhase,
+            IBroadphaseStatic grid,
+            List<ContactPair> result,
+            float dt);
 
         void UpdateItem(int itemId, Box2 aabb);
 

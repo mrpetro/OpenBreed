@@ -32,7 +32,6 @@ using OpenBreed.Model.Sprites;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Reader.Legacy.Sprites.SPR;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
@@ -243,6 +242,8 @@ namespace OpenBreed.Sandbox
                 keyBinder.Bind(PlayerActions.Fire, Keys.RightControl);
             });
 
+            hostBuilder.SetupCollisionChecker();
+
             hostBuilder.SetupCollisionMan<IEntity>((collisionMan, sp) =>
             {
                 collisionMan.RegisterAbtaColliders();
@@ -266,6 +267,8 @@ namespace OpenBreed.Sandbox
                 shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
                 shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
                 shapeMan.Register("Shapes/Circle_24_24_480", new CircleShape(new Vector2(24,24), 480));
+                shapeMan.Register("Shapes/Circle_24_24_320", new CircleShape(new Vector2(24, 24), 320));
+                shapeMan.Register("Shapes/Circle_24_24_160", new CircleShape(new Vector2(24, 24), 160));
             });
 
             hostBuilder.SetupOpenALManagers();
