@@ -18,13 +18,13 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_48_48</ShapeName>
 					<Groups>
-						<Group>EnemyBody</Group>
+						<Group>ActorBody</Group>
 					</Groups>
 				</Fixture>
 				<Fixture>
-					<ShapeName>Shapes/Circle_24_24_480</ShapeName>
+					<ShapeName>Shapes/Circle_24_24_240</ShapeName>
 					<Groups>
-						<Group>EnemyVisibityRange</Group>
+						<Group>ActorSight</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>
