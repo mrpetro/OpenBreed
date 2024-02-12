@@ -142,7 +142,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void DrawCircle(Vector2 center, float radius, Color4 color, bool filled = false)
         {
             var model = Matrix4.CreateTranslation(center.X, center.Y, 0.0f);
-            model = Matrix4.CreateScale(radius, radius, 1.0f) * model;
+            model = Matrix4.CreateScale(2.0f * radius, 2.0f * radius, 1.0f) * model;
 
             DrawUnitCircle(model, color, filled);
         }

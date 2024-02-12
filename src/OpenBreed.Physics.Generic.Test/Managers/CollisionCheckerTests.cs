@@ -28,27 +28,37 @@ namespace OpenBreed.Physics.Generic.Test.Managers
 
         #region Public Methods
 
-        public static TheoryData<Vector2, Box2, Vector2, Box2, bool> CheckBoxVsBoxData()
+        public static TheoryData<Vector2, IBoxShape, Vector2, IBoxShape, bool> CheckBoxVsBoxData()
         {
-            return new TheoryData<Vector2, Box2, Vector2, Box2, bool>
+            return new TheoryData<Vector2, IBoxShape, Vector2, IBoxShape, bool>
             {
-                { new Vector2(1,2), new Box2(-5,-10,20,4),new Vector2(1,2), new Box2(-5,-10,20,4), true },
-                { new Vector2(-15,0), new Box2(-5,-10,20,4),new Vector2(1,2), new Box2(-5,-10,20,4), false }
+                {
+                    new Vector2(0,0),
+                    MockBoxShape(-5,-10,20,4),
+                    new Vector2(0,0),
+                    MockBoxShape(-5,-10,20,4),
+                    true
+                },
+                {
+                    new Vector2(0,0),
+                    MockBoxShape(-10,-10,-5,4),
+                    new Vector2(0,0),
+                    MockBoxShape(-5,-10,20,4),
+                    false
+                }
             };
         }
 
         [Theory, MemberData(nameof(CheckBoxVsBoxData))]
         public void CheckBoxVsBox_TestInput_ExpectedResult(
             Vector2 posA,
-            Box2 boxA,
+            IBoxShape shapeA,
             Vector2 posB,
-            Box2 boxB,
+            IBoxShape shapeB,
             bool expectedResult)
         {
             // Arrange
             var collisionChecker = this.CreateCollisionChecker();
-            var shapeA = MockBoxShape(boxA.Min, boxA.Size);
-            var shapeB = MockBoxShape(boxB.Min, boxB.Size);
             Vector2 projection = default;
 
             // Act
@@ -63,16 +73,39 @@ namespace OpenBreed.Physics.Generic.Test.Managers
             Assert.True(result == expectedResult);
         }
 
-        [Fact]
-        public void CheckCircleVsBox_StateUnderTest_ExpectedBehavior()
+        public static TheoryData<Vector2, ICircleShape, Vector2, IBoxShape, bool> CheckCircleVsBoxData()
+        {
+            return new TheoryData<Vector2, ICircleShape, Vector2, IBoxShape, bool>
+            {
+                {
+                    new Vector2(0,0),
+                    MockCircleShape(-10, 0, 5),
+                    new Vector2(0,0),
+                    MockBoxShape(-5, -10, 20, 10),
+                    false
+                },
+                {
+                    new Vector2(0,0),
+                    MockCircleShape(-9, 0, 5),
+                    new Vector2(0,0),
+                    MockBoxShape(-5, -10, 20, 10),
+                    true
+                }
+            };
+        }
+
+        [Theory, MemberData(nameof(CheckCircleVsBoxData))]
+        public void CheckCircleVsBox_TestInput_ExpectedResult(
+            Vector2 posA,
+            ICircleShape shapeA,
+            Vector2 posB,
+            IBoxShape shapeB,
+            bool expectedResult)
         {
             // Arrange
             var collisionChecker = this.CreateCollisionChecker();
-            Vector2 posA = default(global::OpenTK.Mathematics.Vector2);
-            ICircleShape shapeA = null;
-            Vector2 posB = default(global::OpenTK.Mathematics.Vector2);
-            IBoxShape shapeB = null;
-            Vector2 projection = default(global::OpenTK.Mathematics.Vector2);
+
+            Vector2 projection = default;
 
             // Act
             var result = collisionChecker.CheckCircleVsBox(
@@ -83,20 +116,42 @@ namespace OpenBreed.Physics.Generic.Test.Managers
                 out projection);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.True(result == expectedResult);
         }
 
-        [Fact]
-        public void CheckCircleVsCircle_StateUnderTest_ExpectedBehavior()
+        public static TheoryData<Vector2, ICircleShape, Vector2, ICircleShape, bool> CheckCircleVsCircleData()
+        {
+            return new TheoryData<Vector2, ICircleShape, Vector2, ICircleShape, bool>
+            {
+                {
+                    new Vector2(0,0),
+                    MockCircleShape(new Vector2(0,0), 2.5f),
+                    new Vector2(0,0),
+                    MockCircleShape(new Vector2(5,0), 2.5f),
+                    false
+                },
+                {
+                    new Vector2(0,0),
+                    MockCircleShape(new Vector2(0,0), 2.501f),
+                    new Vector2(0,0),
+                    MockCircleShape(new Vector2(5,0), 2.5f),
+                    true
+                }
+            };
+        }
+
+        [Theory, MemberData(nameof(CheckCircleVsCircleData))]
+        public void CheckCircleVsCircle_TestInput_ExpectedResult(
+            Vector2 posA,
+            ICircleShape shapeA,
+            Vector2 posB,
+            ICircleShape shapeB,
+            bool expectedResult)
         {
             // Arrange
             var collisionChecker = this.CreateCollisionChecker();
-            Vector2 posA = default(global::OpenTK.Mathematics.Vector2);
-            ICircleShape shapeA = null;
-            Vector2 posB = default(global::OpenTK.Mathematics.Vector2);
-            ICircleShape shapeB = null;
-            Vector2 projection = default(global::OpenTK.Mathematics.Vector2);
+
+            Vector2 projection = default;
 
             // Act
             var result = collisionChecker.CheckCircleVsCircle(
@@ -107,31 +162,40 @@ namespace OpenBreed.Physics.Generic.Test.Managers
                 out projection);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.True(result == expectedResult);
         }
 
-        public static TheoryData<Vector2, Vector2, Vector2, Box2, bool> CheckPointVsBoxData()
+        public static TheoryData<Vector2, IPointShape, Vector2, IBoxShape, bool> CheckPointVsBoxData()
         {
-            return new TheoryData<Vector2, Vector2, Vector2, Box2, bool>
+            return new TheoryData<Vector2, IPointShape, Vector2, IBoxShape, bool>
             {
-                { new Vector2(1,2), new Vector2(2,1),new Vector2(1,2), new Box2(-5,-10,20,4), true },
-                { new Vector2(-15,0), new Vector2(2,1),new Vector2(1,2), new Box2(-5,-10,20,4), false }
+                {
+                    new Vector2(1,2),
+                    MockPointShape(2,1),
+                    new Vector2(1,2),
+                    MockBoxShape(-5,-10,20,4),
+                    true
+                },
+                {
+                    new Vector2(-15,0),
+                    MockPointShape(2,1),
+                    new Vector2(1,2),
+                    MockBoxShape(-5,-10,20,4),
+                    false
+                }
             };
         }
 
         [Theory, MemberData(nameof(CheckPointVsBoxData))]
         public void CheckPointVsBox_TestInput_ExpectedResult(
             Vector2 posA,
-            Vector2 pointOffset,
+            IPointShape shapeA,
             Vector2 posB,
-            Box2 box,
+            IBoxShape shapeB,
             bool expectedResult)
         {
             // Arrange
             var collisionChecker = this.CreateCollisionChecker();
-            var shapeA = MockPointShape(pointOffset);
-            var shapeB = MockBoxShape(box.Min, box.Size);
             Vector2 projection = default;
 
             // Act
@@ -146,28 +210,37 @@ namespace OpenBreed.Physics.Generic.Test.Managers
             Assert.True(result == expectedResult);
         }
 
-        public static TheoryData<Vector2, Vector2, Vector2, Vector2, float, bool> CheckPointVsCircleData()
+        public static TheoryData<Vector2, IPointShape, Vector2, ICircleShape, bool> CheckPointVsCircleData()
         {
-            return new TheoryData<Vector2, Vector2, Vector2, Vector2, float, bool>
+            return new TheoryData<Vector2, IPointShape, Vector2, ICircleShape, bool>
             {
-                { new Vector2(1,2), new Vector2(2,1),new Vector2(1,2),new Vector2(1,0), 5.0f, true },
-                { new Vector2(-15,0), new Vector2(2,1),new Vector2(1,2),new Vector2(0,0), 5.0f, false }
+                {
+                    new Vector2(1,2),
+                    MockPointShape(2,1),
+                    new Vector2(1,2),
+                    MockCircleShape( new Vector2(1,0), 5.0f),
+                    true
+                },
+                {
+                    new Vector2(-15,0),
+                    MockPointShape(2,1),
+                    new Vector2(1,2),
+                    MockCircleShape( new Vector2(0,0), 5.0f),
+                    false
+                }
             };
         }
 
         [Theory, MemberData(nameof(CheckPointVsCircleData))]
         public void CheckPointVsCircle_TestInput_ExpectedResult(
             Vector2 posA,
-            Vector2 pointOffset,
+            IPointShape shapeA,
             Vector2 posB,
-            Vector2 circleOffset,
-            float circleRadius,
+            ICircleShape shapeB,
             bool expectedResult)
         {
             // Arrange
             var collisionChecker = this.CreateCollisionChecker();
-            var shapeA = MockPointShape(pointOffset);
-            var shapeB = MockCircleShape(circleOffset, circleRadius);
             Vector2 projection = default;
 
             // Act
@@ -182,28 +255,44 @@ namespace OpenBreed.Physics.Generic.Test.Managers
             Assert.True(result == expectedResult);
         }
 
-        public static TheoryData<Vector2, Vector2, Vector2, Vector2, bool> CheckPointVsPointData()
+        public static TheoryData<Vector2, IPointShape, Vector2, IPointShape, bool> CheckPointVsPointData()
         {
-            return new TheoryData<Vector2, Vector2, Vector2, Vector2, bool>
+            return new TheoryData<Vector2, IPointShape, Vector2, IPointShape, bool>
             {
-                { new Vector2(1,2), new Vector2(2,1),new Vector2(2,1),new Vector2(1,2), true },
-                { new Vector2(2,2), new Vector2(2,2),new Vector2(2,2),new Vector2(2,2), true },
-                { new Vector2(-15,0), new Vector2(2,1),new Vector2(1,2),new Vector2(0,0), false }
+                {
+                    new Vector2(1,2),
+                    MockPointShape(2,1),
+                    new Vector2(2,1),
+                    MockPointShape(1,2),
+                    true
+                },
+                {
+                    new Vector2(2,2),
+                    MockPointShape(2,2),
+                    new Vector2(2,2),
+                    MockPointShape(2,2),
+                    true
+                },
+                {
+                    new Vector2(-15,0),
+                    MockPointShape(2,1),
+                    new Vector2(1,2),
+                    MockPointShape(0,0),
+                    false
+                }
             };
         }
 
         [Theory, MemberData(nameof(CheckPointVsPointData))]
         public void CheckPointVsPoint_TestInput_ExpectedResult(
             Vector2 posA,
-            Vector2 pointOffsetA,
+            IPointShape shapeA,
             Vector2 posB,
-            Vector2 pointOffsetB,
+            IPointShape shapeB,
             bool expectedResult)
         {
             // Arrange
             var collisionChecker = this.CreateCollisionChecker();
-            var shapeA = MockPointShape(pointOffsetA);
-            var shapeB = MockPointShape(pointOffsetB);
             Vector2 projection = default;
 
             // Act
@@ -227,29 +316,35 @@ namespace OpenBreed.Physics.Generic.Test.Managers
             return new CollisionChecker();
         }
 
-        private IBoxShape MockBoxShape(Vector2 pos, Vector2 size)
+        private static IBoxShape MockBoxShape(float minX, float minY, float maxX, float maxY)
         {
-            var shapeMock = mockRepository.Create<IBoxShape>();
-            shapeMock.Setup(item => item.X).Returns(pos.X);
-            shapeMock.Setup(item => item.Y).Returns(pos.Y);
-            shapeMock.Setup(item => item.Width).Returns(size.X);
-            shapeMock.Setup(item => item.Height).Returns(size.Y);
+            var shapeMock = new Mock<IBoxShape>(MockBehavior.Loose);
+            shapeMock.Setup(item => item.X).Returns(minX);
+            shapeMock.Setup(item => item.Y).Returns(minY);
+            shapeMock.Setup(item => item.Width).Returns(maxX - minX);
+            shapeMock.Setup(item => item.Height).Returns(maxY - minY);
             return shapeMock.Object;
         }
 
-        private ICircleShape MockCircleShape(Vector2 center, float radius)
+        private static IBoxShape MockBoxShape(Vector2 pos, Vector2 size) => MockBoxShape(pos.X, pos.Y, size.X, size.Y);
+
+        private static ICircleShape MockCircleShape(float posX, float posY, float radius) => MockCircleShape(new Vector2(posX, posY), radius);
+
+        private static ICircleShape MockCircleShape(Vector2 center, float radius)
         {
-            var shapeMock = mockRepository.Create<ICircleShape>();
+            var shapeMock = new Mock<ICircleShape>(MockBehavior.Loose);
             shapeMock.Setup(item => item.Center).Returns(center);
             shapeMock.Setup(item => item.Radius).Returns(radius);
             return shapeMock.Object;
         }
 
-        private IPointShape MockPointShape(Vector2 pos)
+        private static IPointShape MockPointShape(Vector2 pos) => MockPointShape(pos.X, pos.Y);
+
+        private static IPointShape MockPointShape(float x, float y)
         {
-            var shapeMock = mockRepository.Create<IPointShape>();
-            shapeMock.Setup(item => item.X).Returns(pos.X);
-            shapeMock.Setup(item => item.Y).Returns(pos.Y);
+            var shapeMock = new Mock<IPointShape>(MockBehavior.Loose);
+            shapeMock.Setup(item => item.X).Returns(x);
+            shapeMock.Setup(item => item.Y).Returns(y);
             return shapeMock.Object;
         }
 

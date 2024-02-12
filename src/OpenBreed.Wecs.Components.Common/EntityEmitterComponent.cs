@@ -22,8 +22,6 @@ namespace OpenBreed.Wecs.Components.Common
         public Dictionary<string, object> Options { get; }
     }
 
-
-
     public class EntityEmitterComponent : IEntityComponent
     {
         public EntityEmitterComponent()

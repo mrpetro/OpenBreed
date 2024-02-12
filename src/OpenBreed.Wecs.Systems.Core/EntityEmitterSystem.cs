@@ -61,6 +61,7 @@ namespace OpenBreed.Wecs.Systems.Core
                 }
 
                 var emittedEntity = templateBuilder.Build();
+                emittedEntity.Add(SourceEntityComponent.Create(entity.Id));
 
                 triggerMan.OnEntityEnteredWorld(emittedEntity, (e,args) =>
                 {

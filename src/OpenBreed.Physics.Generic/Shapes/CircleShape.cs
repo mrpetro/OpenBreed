@@ -30,10 +30,10 @@ namespace OpenBreed.Physics.Generic.Shapes
 
         public Box2 GetAabb()
         {
-            return new Box2(Center.X - Radius / 2,
-                            Center.Y + Radius / 2,
-                            Center.X + Radius / 2,
-                            Center.Y - Radius / 2);
+            return new Box2(Center.X - Radius,
+                            Center.Y + Radius,
+                            Center.X + Radius,
+                            Center.Y - Radius);
         }
 
         #endregion Public Methods

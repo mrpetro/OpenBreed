@@ -79,7 +79,7 @@ namespace OpenBreed.Physics.Generic.Managers
                     foreach (var groupIdB in contact.FixtureB.GroupIds)
                     {
                         if (fixtureCallbacks.TryGetValue((groupIdA, groupIdB), out FixtureContactCallback<TObject> fixtureCallback))
-                            fixtureCallback.Invoke(contact.FixtureA, objA, contact.FixtureB, objB, dt, contact.Projection);
+                        fixtureCallback.Invoke(contact.FixtureA, objA, contact.FixtureB, objB, dt, contact.Projection);
                     }
                 }
             }

@@ -3,6 +3,7 @@ using OpenBreed.Physics.Generic;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
+using System.Runtime.CompilerServices;
 
 namespace OpenBreed.Sandbox.Entities
 {
@@ -11,8 +12,7 @@ namespace OpenBreed.Sandbox.Entities
         #region Public Properties
 
         public static int ActorBody { get; private set; }
-        public static int EnemyBody { get; private set; }
-        public static int EnemyVisibityRange { get; private set; }
+        public static int ActorSight { get; private set; }
         public static int ActorTrigger { get; private set; }
         public static int DoorOpenTrigger { get; private set; }
         public static int FullObstacle { get; private set; }
@@ -31,19 +31,18 @@ namespace OpenBreed.Sandbox.Entities
 
         public static void RegisterAbtaColliders(this ICollisionMan<IEntity> collisions)
         {
-            ActorBody = collisions.RegisterGroup("ActorBody");
-            EnemyBody = collisions.RegisterGroup("EnemyBody");
-            EnemyVisibityRange = collisions.RegisterGroup("EnemyVisibityRange");
-            ActorTrigger = collisions.RegisterGroup("ActorTrigger");
-            DoorOpenTrigger = collisions.RegisterGroup("DoorOpenTrigger");
-            Projectile = collisions.RegisterGroup("Projectile");
-            FullObstacle = collisions.RegisterGroup("FullObstacle");
-            SlopeObstacle = collisions.RegisterGroup("SlopeObstacle");
-            ActorOnlyObstacle = collisions.RegisterGroup("ActorOnlyObstacle");
-            SlowdownObstacle = collisions.RegisterGroup("SlowdownObstacle");
-            WorldExitTrigger = collisions.RegisterGroup("WorldExitTrigger");
-            TeleportEntryTrigger = collisions.RegisterGroup("TeleportEntryTrigger");
-            Trigger = collisions.RegisterGroup("Trigger");
+            ActorBody = collisions.RegisterGroup(nameof(ActorBody));
+            ActorSight = collisions.RegisterGroup(nameof(ActorSight));
+            ActorTrigger = collisions.RegisterGroup(nameof(ActorTrigger));
+            DoorOpenTrigger = collisions.RegisterGroup(nameof(DoorOpenTrigger));
+            Projectile = collisions.RegisterGroup(nameof(Projectile));
+            FullObstacle = collisions.RegisterGroup(nameof(FullObstacle));
+            SlopeObstacle = collisions.RegisterGroup(nameof(SlopeObstacle));
+            ActorOnlyObstacle = collisions.RegisterGroup(nameof(ActorOnlyObstacle));
+            SlowdownObstacle = collisions.RegisterGroup(nameof(SlowdownObstacle));
+            WorldExitTrigger = collisions.RegisterGroup(nameof(WorldExitTrigger));
+            TeleportEntryTrigger = collisions.RegisterGroup(nameof(TeleportEntryTrigger));
+            Trigger = collisions.RegisterGroup(nameof(Trigger));
         }
 
         #endregion Public Methods

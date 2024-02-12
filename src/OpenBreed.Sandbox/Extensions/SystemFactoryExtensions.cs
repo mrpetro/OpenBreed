@@ -47,6 +47,11 @@ namespace OpenBreed.Sandbox.Extensions
                 sp.GetService<IEventsMan>(),
                 sp.GetService<ILogger>()));
 
+            systemFactory.RegisterSystem<TurretTargetingSystem>(() => new TurretTargetingSystem(
+                sp.GetService<IEventsMan>(),
+                sp.GetService<IEntityMan>(),
+                sp.GetService<ILogger>()));
+
             systemFactory.RegisterSystem<ResurrectionSystem>(() => new ResurrectionSystem(
                 sp.GetService<IWorldMan>()));
 

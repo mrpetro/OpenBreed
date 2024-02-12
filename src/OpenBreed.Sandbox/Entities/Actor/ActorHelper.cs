@@ -90,14 +90,15 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public void RegisterCollisionPairs()
         {
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, FullObstableCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.EnemyBody, FullObstableCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorSight, ActorSightCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorSight, ColliderTypes.ActorBody, ActorSightCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorBody, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlowdownObstacle, SlowdownObstacleCallback);
             
             collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.FullObstacle, ProjectileTriggerCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.EnemyBody, ProjectileTriggerCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.ActorBody, ProjectileTriggerCallback);
 
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.Trigger, TriggerCallback);
         }
@@ -166,6 +167,11 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private void FullObstableCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
+        }
+
+        private void ActorSightCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
+        {
+            //dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
         private void TryOnCollision(IEntity entityA, IEntity entityB, Vector2 projection)

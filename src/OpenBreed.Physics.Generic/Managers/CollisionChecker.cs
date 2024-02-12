@@ -1,4 +1,5 @@
-﻿using OpenBreed.Physics.Interface;
+﻿using OpenBreed.Physics.Generic.Shapes;
+using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenTK;
@@ -35,8 +36,8 @@ namespace OpenBreed.Physics.Generic.Managers
 
         public bool CheckBoxVsBox(Vector2 posA, IBoxShape shapeA, Vector2 posB, IBoxShape shapeB, out Vector2 projection)
         {
-            var aabbA = shapeA.GetAabb();
-            var aabbB = shapeB.GetAabb();
+            var aabbA = shapeA.ToBox2();
+            var aabbB = shapeB.ToBox2();
             aabbB.Translate(posB - posA);
 
             var aPos = aabbA.GetCenter();
@@ -104,48 +105,79 @@ namespace OpenBreed.Physics.Generic.Managers
 
         public bool CheckCircleVsBox(Vector2 posA, ICircleShape shapeA, Vector2 posB, IBoxShape shapeB, out Vector2 projection)
         {
-            var posDiff = posB - posA;
-
-            //ar bPos = shapeB.Center;
-            //var aPos = new Vector2(shapeA.X, shapeA.Y);
-
-            //var aPos = new Vector2(pointShapeA.X, pointShapeA.Y);
-            //var bPos = new Vector2(pointShapeB.X, pointShapeB.Y);
-            //projection = Vector2.Zero;
-            //if (aPos == bPos)
-            //    return true;
-
             projection = Vector2.Zero;
+            var aabbB = shapeB.ToBox2();
+            aabbB.Translate(posB);
+
+            var cDiff = shapeA.Center + posA;
+
+            // temporary variables to set edges for testing
+            var testX = cDiff.X;
+            var testY = cDiff.Y;
+            var cx = cDiff.X;
+            var cy = cDiff.Y;
+            var rx = aabbB.Min.X;
+            var ry = aabbB.Min.Y;
+            var rw = aabbB.Size.X;
+            var rh = aabbB.Size.Y;
+            var radius = shapeA.Radius;
+
+            if (cx < rx)
+            {
+                testX = rx;
+            }
+            else if (cx > rx + rw)
+            {
+                testX = rx + rw;
+            }
+
+            if (cy < ry)
+            {
+                testY = ry;
+            }
+            else if (cy > ry + rh)
+            {
+                testY = ry + rh;
+            }
+
+
+            var distX = cx - testX;
+            var distY = cy - testY;
+            var distance = Math.Sqrt((distX * distX) + (distY * distY));
+
+            if (distance < radius)
+            {
+                return true;
+            }
+
             return false;
         }
 
-        public bool CheckCircleVsCircle(Vector2 posA, ICircleShape shapeA, Vector2 posB, ICircleShape shapeB, out Vector2 projection)
+        public bool CheckCircleVsCircle(
+            Vector2 posA,
+            ICircleShape shapeA,
+            Vector2 posB,
+            ICircleShape shapeB,
+            out Vector2 projection)
         {
-            var posDiff = posB - posA;
+            var posDelta = posB - posA;
 
-            var bPos = shapeB.Center;
-            //var aPos = new Vector2(shapeA.X, shapeA.Y);
+            var centerBt = shapeB.Center + posDelta;
 
-            //var aPos = new Vector2(pointShapeA.X, pointShapeA.Y);
-            //var bPos = new Vector2(pointShapeB.X, pointShapeB.Y);
-            //projection = Vector2.Zero;
-            //if (aPos == bPos)
-            //    return true;
+            var radiusSum = shapeA.Radius + shapeB.Radius;
+
+            var distance = centerBt.Length;
 
             projection = Vector2.Zero;
-            return false;
+            return radiusSum > distance;
         }
 
-        public bool CheckPointVsBox(Vector2 posA, IPointShape pointShape, Vector2 posB, IBoxShape shapeB, out Vector2 projection)
+        public bool CheckPointVsBox(Vector2 posA, IPointShape shapeA, Vector2 posB, IBoxShape shapeB, out Vector2 projection)
         {
-            //var aabbA = pointShape.GetAabb();
-            var aabbB = new Box2(shapeB.X, shapeB.Y, shapeB.X + shapeB.Width, shapeB.Y + shapeB.Height);
+            var aabbB = shapeB.ToBox2();
             aabbB.Translate(posB - posA);
 
-            //var aPos = new Vector2(pointShape.X, pointShape.Y);
-            var aPos = new Vector2(pointShape.X, pointShape.Y);
-            //var aHalfWidth = aabbA.Width / 2.0f;
-            //var aHalfHeight = aabbA.Height / 2.0f;
+            var aPos = shapeA.ToVector2();
 
             var bPos = aabbB.GetCenter();
             var bHalfWidth = aabbB.Size.X / 2.0f;
@@ -213,7 +245,7 @@ namespace OpenBreed.Physics.Generic.Managers
 
             var pointPosT = pointPos - circlePos;
 
-            var areColliding = pointPosT.Length <= shapeB.Radius / 2;
+            var areColliding = pointPosT.Length <= shapeB.Radius;
 
             projection = Vector2.Zero;
 

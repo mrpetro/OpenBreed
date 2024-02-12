@@ -219,8 +219,7 @@ namespace OpenBreed.Wecs.Systems.Gui
                 var result = groupName switch
                 {
                     "ActorBody" => new Color4(0, 255, 255, 50),
-                    "EnemyBody" => new Color4(255, 0, 0, 50),
-                    "EnemyVisibityRange" => new Color4(255, 255, 0, 50),
+                    "ActorSight" => new Color4(255, 255, 0, 50),
                     "ActorTrigger" => new Color4(0, 255, 0, 50),
                     "DoorOpenTrigger" => new Color4(0, 255, 0, 50),
                     "Projectile" => new Color4(255, 0, 0, 50),

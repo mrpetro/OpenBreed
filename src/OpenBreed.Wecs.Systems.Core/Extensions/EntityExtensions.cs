@@ -46,6 +46,11 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
             emitComponent.ToEmit.Add(new EntityEmit(templateName, new Dictionary<string, object>()));
         }
 
+        public static int GetSourceEntityId(this IEntity entity)
+        {
+            return entity.Get<SourceEntityComponent>().EntityId;
+        }
+
         public static int GetTimerId(this IEntity entity, string timerName)
         {
             var timerCmp = entity.Get<TimerComponent>();
