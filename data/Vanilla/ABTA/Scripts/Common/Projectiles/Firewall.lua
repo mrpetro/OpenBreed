@@ -1,6 +1,14 @@
 ﻿
 local function Hit(projectileEntity, targetEntity, projection)
 
+	local sourceEntityId = projectileEntity:GetSourceEntityId()
+	
+	-- Ignore hitting source entity 
+    if (sourceEntityId == targetEntity.Id)
+    then
+	    return
+    end
+
     local pos = projectileEntity:GetPosition()
     projectileEntity:StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
         :SetOption("flavor", "Small")

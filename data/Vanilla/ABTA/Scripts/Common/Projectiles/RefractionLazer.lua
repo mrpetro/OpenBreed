@@ -1,7 +1,14 @@
 ﻿
 local function Hit(projectileEntity, targetEntity, projection)
 
-
+	local sourceEntityId = projectileEntity:GetSourceEntityId()
+	
+	-- Ignore hitting source entity 
+    if (sourceEntityId == targetEntity.Id)
+    then
+	    return
+    end
+	
     local pos = projectileEntity:GetPosition() + projection
     projectileEntity:SetPosition(pos.X, pos.Y)
 
