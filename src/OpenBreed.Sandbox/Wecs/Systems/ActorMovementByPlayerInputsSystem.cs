@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Sandbox.Wecs.Components;
+using OpenBreed.Wecs;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
@@ -52,7 +53,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             var playerInputsComponent = entity.Get<PlayerInputsComponent>();
             var controllerComponent = entity.Get<ControllerComponent>();
 
-            if (controllerComponent.ControlledEntityId == -1)
+            if (controllerComponent.ControlledEntityId == WecsConsts.NO_ENTITY_ID)
                 return;
 
             var controlledEntity = entityMan.GetById(controllerComponent.ControlledEntityId);

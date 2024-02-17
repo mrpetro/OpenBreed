@@ -33,6 +33,11 @@ namespace OpenBreed.Physics.Generic.Shapes
             return new Box2(X, Y + Height, X + Width, Y);
         }
 
+        public override string ToString()
+        {
+            return $"Box (X: {X}, CY: {Y}, Width: {Width}, Height: {Height})";
+        }
+
         #endregion Public Methods
     }
 }

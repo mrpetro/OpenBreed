@@ -9,5 +9,6 @@ namespace OpenBreed.Wecs
     public class WecsConsts
     {
         public const int NO_WORLD_ID = -1;
+        public const int NO_ENTITY_ID = -1;
     }
 }

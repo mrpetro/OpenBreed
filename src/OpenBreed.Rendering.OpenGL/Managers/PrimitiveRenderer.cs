@@ -15,7 +15,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Private Fields
 
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
-
+        private const int CIRCLE_PARTS_NO = 16;
         private const bool CLIPPING = true;
         private const int RENDER_MAX_DEPTH = 3;
         private IPalette currentPalette;
@@ -230,12 +230,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             if (filled)
             {
                 GL.BindVertexArray(unitCircleFilledVao);
-                GL.DrawArrays(PrimitiveType.TriangleFan, 0, 18);
+                GL.DrawArrays(PrimitiveType.TriangleFan, 0, CIRCLE_PARTS_NO + 2);
             }
             else
             {
                 GL.BindVertexArray(unitCircleVao);
-                GL.DrawArrays(PrimitiveType.LineLoop, 0, 16);
+                GL.DrawArrays(PrimitiveType.LineLoop, 0, CIRCLE_PARTS_NO + 1);
             }
 
             GL.BindVertexArray(0);
@@ -449,9 +449,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             unitCircleBuilder.AddVertex(0.0f, 0.0f, 0.0f);
 
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < CIRCLE_PARTS_NO; i++)
             {
-                var step = (float)i / 16;
+                var step = (float)i / CIRCLE_PARTS_NO;
 
                 var x = 0.5f * (float)Math.Cos(2 * Math.PI * step);
                 var y = 0.5f * (float)Math.Sin(2 * Math.PI * step);
@@ -459,13 +459,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 unitCircleBuilder.AddVertex(x, y, 0.0f);
             }
 
-            unitCircleBuilder.AddLoopIndices(Enumerable.Range(1, 16).ToArray());
+            unitCircleBuilder.AddLoopIndices(Enumerable.Range(1, CIRCLE_PARTS_NO).ToArray());
 
             unitCircleVao = unitCircleBuilder.CreateVao();
 
             unitCircleBuilder.ClearLoopIndices();
 
-            unitCircleBuilder.AddLoopIndices(Enumerable.Range(0, 17).Append(1).ToArray());
+            unitCircleBuilder.AddLoopIndices(Enumerable.Range(0, CIRCLE_PARTS_NO + 1).Append(1).ToArray());
 
             unitCircleFilledVao = unitCircleBuilder.CreateVao();
         }

@@ -35,7 +35,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         public IEntity Load(MapMapper mapMapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, IWorld world)
         {
-            var entity = actorHelper.AddHeavyTurret(world, ix, iy - 2);
+            var entity = actorHelper.AddHeavyTurret(world, (ix + 1) * 16 + 8 , iy * 16 - 8);
             visited[ix, iy] = true;
             return entity;
         }

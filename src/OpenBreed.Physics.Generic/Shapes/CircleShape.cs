@@ -36,6 +36,11 @@ namespace OpenBreed.Physics.Generic.Shapes
                             Center.Y - Radius);
         }
 
+        public override string ToString()
+        {
+            return $"Circle (CX: {Center.X}, CY: {Center.Y}, Radius: {Radius})";
+        }
+
         #endregion Public Methods
     }
 }

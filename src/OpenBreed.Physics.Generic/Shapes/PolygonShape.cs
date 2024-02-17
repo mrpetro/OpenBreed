@@ -23,6 +23,11 @@ namespace OpenBreed.Physics.Generic.Shapes
             throw new NotImplementedException();
         }
 
+        public override string ToString()
+        {
+            return $"Polygon (Vertices: {Vertices.Length})";
+        }
+
         #endregion Public Methods
     }
 }

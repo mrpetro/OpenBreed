@@ -29,6 +29,11 @@ namespace OpenBreed.Physics.Generic.Shapes
             return new Box2(X, Y, X, Y);
         }
 
+        public override string ToString()
+        {
+            return $"Point (X: {X}, Y: {Y})";
+        }
+
         #endregion Public Methods
     }
 }

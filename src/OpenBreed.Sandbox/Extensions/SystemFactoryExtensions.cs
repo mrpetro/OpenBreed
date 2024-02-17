@@ -50,6 +50,7 @@ namespace OpenBreed.Sandbox.Extensions
             systemFactory.RegisterSystem<TurretTargetingSystem>(() => new TurretTargetingSystem(
                 sp.GetService<IEventsMan>(),
                 sp.GetService<IEntityMan>(),
+                sp.GetService<IWorldMan>(),
                 sp.GetService<ILogger>()));
 
             systemFactory.RegisterSystem<ResurrectionSystem>(() => new ResurrectionSystem(

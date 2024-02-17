@@ -71,6 +71,12 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             entity.Get<AngularPositionTargetComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
         }
 
+        public static void SetTargetDirectionToCoordinates(this IEntity entity, Vector2 coordinates)
+        {
+            var direction = Vector2.Subtract(coordinates, entity.GetPosition());
+            entity.Get<AngularPositionTargetComponent>().Value = direction.Normalized();
+        }
+
         public static Vector2 GetDirection(this IEntity entity)
         {
             return entity.Get<AngularPositionComponent>().Value;

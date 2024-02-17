@@ -9,6 +9,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Sandbox.Wecs.Events;
 using OpenBreed.Scripting.Interface;
@@ -91,7 +92,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorSight, ActorSightCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorSight, ColliderTypes.ActorBody, ActorSightCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorBody, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
@@ -112,12 +112,14 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return entity;
         }
 
-        public IEntity AddHeavyTurret(IWorld world, int x, int y)
+        public IEntity AddHeavyTurret(IWorld world, float x, float y)
         {
             var entity = entityFactory.Create($@"ABTA\Templates\L1\Turret")
-                .SetParameter("startX", 16 * x)
-                .SetParameter("startY", 16 * y)
+                .SetParameter("startX", x)
+                .SetParameter("startY", y)
                 .Build();
+
+            entity.Add(new TurretTargetComponent());
 
             worldMan.RequestAddEntity(entity, world.Id);
             return entity;
@@ -171,6 +173,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private void ActorSightCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
+            entityB.SetTargetEntityId(entityA.Id);
+
             //dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
