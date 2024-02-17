@@ -16,7 +16,7 @@
 			<CorFactor>0.0</CorFactor>
 			<Fixtures>
 				<Fixture>
-					<ShapeName>Shapes/Box_0_0_48_48</ShapeName>
+					<ShapeName>Shapes/Box_-24_-24_48_48</ShapeName>
 					<Groups>
 						<Group>ActorBody</Group>
 					</Groups>
@@ -35,10 +35,19 @@
 			<ScriptId>Vanilla/L1/Turret</ScriptId>
 		</Script>
 		<Position X="$(startX)" Y="$(startY)" />
+		<AngularPosition>
+			<Value>0</Value>
+		</AngularPosition>
+		<AngularVelocity>
+			<Value>0</Value>
+		</AngularVelocity>
+		<AngularThrust>
+			<Value>0</Value>
+		</AngularThrust>
 		<Sprite>
 			<AtlasName>Vanilla/L1/B</AtlasName>
 			<ImageIndex>0</ImageIndex>
-			<Origin X="0" Y="0" />
+			<Origin X="24" Y="24" />
 			<Order>0</Order>
 		</Sprite>
 		<Health>
