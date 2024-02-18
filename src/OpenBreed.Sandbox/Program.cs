@@ -266,11 +266,11 @@ namespace OpenBreed.Sandbox
                 shapeMan.Register("Shapes/Box_-24_-24_48_48", new BoxShape(-24, -24, 48, 48));
                 shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
                 shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
-                shapeMan.Register("Shapes/Circle_24_24_240", new CircleShape(new Vector2(24, 24), 240));
-                shapeMan.Register("Shapes/Circle_24_24_480", new CircleShape(new Vector2(24,24), 480));
-                shapeMan.Register("Shapes/Circle_24_24_40", new CircleShape(new Vector2(24, 24), 40));
-                shapeMan.Register("Shapes/Circle_24_24_320", new CircleShape(new Vector2(24, 24), 320));
-                shapeMan.Register("Shapes/Circle_24_24_160", new CircleShape(new Vector2(24, 24), 160));
+                shapeMan.Register("Shapes/Circle_0_0_240", new CircleShape(new Vector2(0, 0), 240));
+                shapeMan.Register("Shapes/Circle_0_0_480", new CircleShape(new Vector2(0,0), 480));
+                shapeMan.Register("Shapes/Circle_0_0_40", new CircleShape(new Vector2(0, 0), 40));
+                shapeMan.Register("Shapes/Circle_0_0_320", new CircleShape(new Vector2(0, 0), 320));
+                shapeMan.Register("Shapes/Circle_0_0_160", new CircleShape(new Vector2(0, 0), 160));
             });
 
             hostBuilder.SetupOpenALManagers();
