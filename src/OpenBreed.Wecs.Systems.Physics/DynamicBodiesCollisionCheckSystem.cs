@@ -63,10 +63,9 @@ namespace OpenBreed.Wecs.Systems.Physics
             var collisionComponent = mapEntity.Get<CollisionComponent>();
 
             collisionComponent.ContactPairs.Clear();
-            collisionComponent.Dynamic.Solve(
+            collisionComponent.Broadphase.Solve(
                 QueryStaticGrid,
                 TestNarrowPhaseDynamic,
-                collisionComponent.Grid,
                 collisionComponent.ContactPairs,
                 context.Dt);
         }
@@ -98,8 +97,8 @@ namespace OpenBreed.Wecs.Systems.Physics
         }
 
         private void TestNarrowPhaseDynamic(
-            BroadphaseDynamicElement nextCollider,
-            BroadphaseDynamicElement currentCollider,
+            BroadphaseItem nextCollider,
+            BroadphaseItem currentCollider,
             List<ContactPair> result,
             float dt)
         {
@@ -200,7 +199,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             return contacts.Count > 0;
         }
 
-        private void QueryStaticGrid(IBroadphaseStatic grid, BroadphaseDynamicElement cell, List<ContactPair> contactPairs, float dt)
+        private void QueryStaticGrid(IBroadphase grid, BroadphaseItem cell, List<ContactPair> contactPairs, float dt)
         {
             var dynamicAabb = cell.Aabb;
 

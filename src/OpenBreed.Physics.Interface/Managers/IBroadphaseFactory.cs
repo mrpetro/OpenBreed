@@ -12,18 +12,12 @@ namespace OpenBreed.Physics.Interface.Managers
     public interface IBroadphaseFactory
     {
         /// <summary>
-        /// Create a static broadphase grid giving it's properties and return it's ID
+        /// Create broadphase
         /// </summary>
-        /// <param name="width">Width of grid</param>
-        /// <param name="height">Height of grid</param>
-        /// <param name="cellSize">Grid cell size</param>
+        /// <param name="width">Width of static grid</param>
+        /// <param name="height">Height of static grid</param>
+        /// <param name="cellSize">Static grid cell size</param>
         /// <returns></returns>
-        IBroadphaseStatic CreateStatic(int width, int height, int cellSize);
-
-        /// <summary>
-        /// Create dynamic broadphase
-        /// </summary>
-        /// <returns></returns>
-        IBroadphaseDynamic CreateDynamic();
+        IBroadphase CreateDynamic(int width, int height, int cellSize);
     }
 }

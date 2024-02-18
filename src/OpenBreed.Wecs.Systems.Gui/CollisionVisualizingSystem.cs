@@ -63,8 +63,8 @@ namespace OpenBreed.Wecs.Systems.Gui
 
                 var collisionComponent = mapEntity.Get<CollisionComponent>();
 
-                DrawDynamics(collisionComponent.Dynamic, context.ViewBox);
-                DrawStatics(collisionComponent.Grid, context.ViewBox);
+                DrawDynamics(collisionComponent.Broadphase, context.ViewBox);
+                DrawStatics(collisionComponent.Broadphase, context.ViewBox);
 
                 if (collisionComponent.ContactPairs.Any())
                 {
@@ -121,7 +121,7 @@ namespace OpenBreed.Wecs.Systems.Gui
             primitiveRenderer.PopMatrix();
         }
 
-        private void DrawDynamicEntityAabb(IBroadphaseDynamicElement item, Box2 clipBox)
+        private void DrawDynamicEntityAabb(IBroadphaseItem item, Box2 clipBox)
         {
             var entity = entityMan.GetById(item.ItemId);
 
@@ -147,9 +147,9 @@ namespace OpenBreed.Wecs.Systems.Gui
             //primitiveRenderer.DrawRectangle(new Box2(0,0, 100, 100), Color4.Red, filled: false);
         }
 
-        private void DrawDynamics(IBroadphaseDynamic dynamics, Box2 viewBox)
+        private void DrawDynamics(IBroadphase dynamics, Box2 viewBox)
         {
-            foreach (var item in dynamics.Items)
+            foreach (var item in dynamics.DynamicItems)
             {
                 DrawDynamicEntityAabb(item, viewBox);
             }
@@ -173,7 +173,7 @@ namespace OpenBreed.Wecs.Systems.Gui
             primitiveRenderer.PopMatrix();
         }
 
-        private void DrawStatics(IBroadphaseStatic statics, Box2 viewBox)
+        private void DrawStatics(IBroadphase statics, Box2 viewBox)
         {
             var itemIds = statics.QueryStatic(viewBox);
 

@@ -6,6 +6,7 @@ using OpenTK.Mathematics;
 using OpenBreed.Common.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Physics.Interface;
+using System.Runtime.CompilerServices;
 
 namespace OpenBreed.Wecs.Components.Physics
 {
@@ -22,8 +23,7 @@ namespace OpenBreed.Wecs.Components.Physics
 
         public CollisionComponent(CollisionComponentBuilder builder)
         {
-            Dynamic = builder.Dynamic;
-            Grid = builder.Grid;
+            Broadphase = builder.GetBroadphase();
             ContactPairs = new List<ContactPair>();
         }
 
@@ -31,8 +31,7 @@ namespace OpenBreed.Wecs.Components.Physics
 
         #region Public Properties
 
-        public IBroadphaseDynamic Dynamic { get; }
-        public IBroadphaseStatic Grid { get; }
+        public IBroadphase Broadphase { get; }
 
         public List<ContactPair> ContactPairs { get; }
 
@@ -56,15 +55,20 @@ namespace OpenBreed.Wecs.Components.Physics
 
         }
 
-        public CollisionComponentBuilder SetGrid(int width, int height, int cellSize)
+        internal int Width;
+        internal int Height;
+        internal int CellSize;
+
+        internal IBroadphase GetBroadphase()
         {
-            Grid = broadphaseFactory.CreateStatic(width, height, cellSize);
-            return this;
+            return broadphaseFactory.CreateDynamic(Width, Height, CellSize);
         }
 
-        public CollisionComponentBuilder Set()
+        public CollisionComponentBuilder SetStaticGrid(int width, int height, int cellSize)
         {
-            Dynamic = broadphaseFactory.CreateDynamic();
+            Width = width;
+            Height = height;
+            CellSize = cellSize;
             return this;
         }
 
@@ -72,8 +76,7 @@ namespace OpenBreed.Wecs.Components.Physics
 
         #region Internal Properties
 
-        internal IBroadphaseDynamic Dynamic { get; private set; }
-        internal IBroadphaseStatic Grid { get; private set; }
+        internal IBroadphase Dynamic { get; private set; }
 
         #endregion Internal Properties
 
@@ -85,37 +88,5 @@ namespace OpenBreed.Wecs.Components.Physics
         }
 
         #endregion Public Methods
-    }
-
-    public sealed class CollisionComponentFactory : ComponentFactoryBase<ICollisionComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public CollisionComponentFactory(IBuilderFactory builderFactory)
-        {
-            this.builderFactory = builderFactory;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ICollisionComponentTemplate template)
-        {
-            var builder = builderFactory.GetBuilder<CollisionComponentBuilder>();
-
-            builder.Set();
-
-
-            return builder.Build();
-        }
-
-        #endregion Protected Methods
     }
 }

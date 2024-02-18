@@ -188,8 +188,7 @@ namespace OpenBreed.Sandbox.Loaders
             .Build();
 
             var collisionComponent = builderFactory.GetBuilder<CollisionComponentBuilder>()
-                .Set()
-                .SetGrid(layout.Width, layout.Height, cellSize)
+                .SetStaticGrid(layout.Width, layout.Height, cellSize)
                 .Build();
 
             mapEntity.Add(new StampPutterComponent());

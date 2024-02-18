@@ -2,6 +2,7 @@
 using OpenBreed.Common.Logging;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
+using System.Runtime.CompilerServices;
 
 namespace OpenBreed.Physics.Generic.Managers
 {
@@ -24,14 +25,9 @@ namespace OpenBreed.Physics.Generic.Managers
 
         #region Public Methods
 
-        public IBroadphaseStatic CreateStatic(int width, int height, int cellSize)
+        public IBroadphase CreateDynamic(int width, int height, int cellSize)
         {
-            return new BroadphaseStaticGrid(width, height, cellSize);
-        }
-
-        public IBroadphaseDynamic CreateDynamic()
-        {
-            return new BroadphaseDynamicSwepAndPrune();
+            return new Broadphase(width, height, cellSize);
         }
 
         #endregion Public Methods
