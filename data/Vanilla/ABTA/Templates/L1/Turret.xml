@@ -22,7 +22,7 @@
 					</Groups>
 				</Fixture>
 				<Fixture>
-					<ShapeName>Shapes/Circle_24_24_240</ShapeName>
+					<ShapeName>Shapes/Circle_0_0_240</ShapeName>
 					<Groups>
 						<Group>ActorSight</Group>
 					</Groups>
