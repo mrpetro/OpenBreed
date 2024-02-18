@@ -61,16 +61,14 @@ namespace OpenBreed.Wecs.Systems.Gui
                 if (mapEntity is null)
                     return;
 
-                var dynamicComponent = mapEntity.Get<BroadphaseDynamicComponent>();
-                var staticsComponent = mapEntity.Get<BroadphaseStaticComponent>();
+                var collisionComponent = mapEntity.Get<CollisionComponent>();
 
+                DrawDynamics(collisionComponent.Dynamic, context.ViewBox);
+                DrawStatics(collisionComponent.Grid, context.ViewBox);
 
-                DrawDynamics(dynamicComponent.Dynamic, context.ViewBox);
-                DrawStatics(staticsComponent.Grid, context.ViewBox);
-
-                if (dynamicComponent.ContactPairs.Any())
+                if (collisionComponent.ContactPairs.Any())
                 {
-                    DrawContacts(dynamicComponent.ContactPairs);
+                    DrawContacts(collisionComponent.ContactPairs);
                 }
             }
             finally

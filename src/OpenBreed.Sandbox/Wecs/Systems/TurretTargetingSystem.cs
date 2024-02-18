@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Wecs.Worlds;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,13 +50,19 @@ namespace OpenBreed.Sandbox.Wecs.Systems
                     continue;
                 }
 
+                var turretPos = turret.GetPosition();
+
+                var distance = Vector2.Distance(entityPos, turretPos);
+
+                if (distance > 260)
+                {
+                    logger.Verbose($"Tuuret '{turret.Id}' stops tracking '{ttc.TargetEntityId}'.");
+                    ttc.TargetEntityId = -1;
+                    continue;
+                }
+
                 turret.SetTargetDirectionToCoordinates(entityPos);
             }
-
-
-            logger.Verbose($"Entity {e.EntityId} position changed");
-
-            //throw new NotImplementedException();
         }
     }
 }

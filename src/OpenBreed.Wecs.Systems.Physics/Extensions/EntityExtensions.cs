@@ -28,13 +28,13 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 
         public static void RemoveEntityFromStatics(this IEntity entity, IEntity bodyEntity)
         {
-            var grid = entity.Get<BroadphaseStaticComponent>().Grid;
+            var grid = entity.Get<CollisionComponent>().Grid;
             grid.RemoveStatic(bodyEntity.Id);
         }
 
         public static void UpdateDynamics(this IEntity entity, IEntityMan entityMan)
         {
-            var dynamic = entity.Get<BroadphaseDynamicComponent>().Dynamic;
+            var dynamic = entity.Get<CollisionComponent>().Dynamic;
             dynamic.UpdateItems((itemId) => CalculateAabb(entityMan.GetById(itemId)));
         }
 
@@ -51,20 +51,20 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
         {
             var aabb = CalculateAabb(bodyEntity);
 
-            var dynamic = entity.Get<BroadphaseDynamicComponent>().Dynamic;
+            var dynamic = entity.Get<CollisionComponent>().Dynamic;
             dynamic.InsertItem(bodyEntity.Id, aabb);
 
         }
 
         public static void RemoveEntityFromDynamic(this IEntity entity, IEntity bodyEntity)
         {
-            var dynamic = entity.Get<BroadphaseDynamicComponent>().Dynamic;
+            var dynamic = entity.Get<CollisionComponent>().Dynamic;
             dynamic.RemoveItem(bodyEntity.Id);
         }
 
         public static void AddEntityToStatics(this IEntity entity, IEntity bodyEntity )
         {
-            var grid = entity.Get<BroadphaseStaticComponent>().Grid;
+            var grid = entity.Get<CollisionComponent>().Grid;
             var pos = bodyEntity.Get<PositionComponent>();
             var body = bodyEntity.Get<BodyComponent>();
 

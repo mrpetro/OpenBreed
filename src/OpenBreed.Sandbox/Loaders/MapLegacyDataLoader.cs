@@ -187,19 +187,15 @@ namespace OpenBreed.Sandbox.Loaders
                 .SetGrid(layout.Width, layout.Height)
             .Build();
 
-            var broadphaseStaticComponent = builderFactory.GetBuilder<BroadphaseStaticComponentBuilder>()
-                .SetGrid(layout.Width, layout.Height, cellSize)
-                .Build();
-
-            var broadphaseDynamicComponent = builderFactory.GetBuilder<BroadphaseDynamicComponentBuilder>()
+            var collisionComponent = builderFactory.GetBuilder<CollisionComponentBuilder>()
                 .Set()
+                .SetGrid(layout.Width, layout.Height, cellSize)
                 .Build();
 
             mapEntity.Add(new StampPutterComponent());
             mapEntity.Add(tileGridComponent);
             mapEntity.Add(dataGridComponent);
-            mapEntity.Add(broadphaseStaticComponent);
-            mapEntity.Add(broadphaseDynamicComponent);
+            mapEntity.Add(collisionComponent);
 
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(entryId);

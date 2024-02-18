@@ -60,11 +60,15 @@ namespace OpenBreed.Wecs.Systems.Physics
             if (mapEntity is null)
                 return;
 
-            var staticPhase = mapEntity.Get<BroadphaseStaticComponent>();
-            var dynamicPhase = mapEntity.Get<BroadphaseDynamicComponent>();
+            var collisionComponent = mapEntity.Get<CollisionComponent>();
 
-            dynamicPhase.ContactPairs.Clear();
-            dynamicPhase.Dynamic.Solve(QueryStaticGrid, TestNarrowPhaseDynamic, staticPhase.Grid, dynamicPhase.ContactPairs, context.Dt);
+            collisionComponent.ContactPairs.Clear();
+            collisionComponent.Dynamic.Solve(
+                QueryStaticGrid,
+                TestNarrowPhaseDynamic,
+                collisionComponent.Grid,
+                collisionComponent.ContactPairs,
+                context.Dt);
         }
 
         #endregion Public Methods

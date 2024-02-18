@@ -17,7 +17,7 @@ using System.Reflection.Metadata.Ecma335;
 namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
-        typeof(BroadphaseDynamicComponent))]
+        typeof(CollisionComponent))]
     public class UpdateDynamicBodySystem : IUpdatableSystem
     {
         #region Private Fields

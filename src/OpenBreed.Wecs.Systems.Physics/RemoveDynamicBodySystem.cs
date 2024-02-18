@@ -16,7 +16,7 @@ using System.Reflection.Metadata.Ecma335;
 namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
-        typeof(BroadphaseDynamicComponent))]
+        typeof(CollisionComponent))]
     public class RemoveDynamicBodySystem : EventMatchingSystem<EntityLeftEvent, RemoveDynamicBodySystem>
     {
         #region Private Fields

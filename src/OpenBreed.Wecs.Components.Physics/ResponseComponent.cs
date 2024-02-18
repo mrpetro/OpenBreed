@@ -8,21 +8,29 @@ namespace OpenBreed.Wecs.Components.Physics
 {
     public class CollisionContact
     {
+        #region Public Constructors
+
         public CollisionContact(int entityId, Vector2 projection)
         {
             EntityId = entityId;
             Projection = projection;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
         public int EntityId { get; }
         public Vector2 Projection { get; }
+
+        #endregion Public Properties
     }
 
-    public class CollisionComponent : IEntityComponent
+    public class ResponseComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public CollisionComponent()
+        public ResponseComponent()
         {
             Contacts = new List<CollisionContact>();
         }

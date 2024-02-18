@@ -16,7 +16,7 @@ using System.Reflection.Metadata.Ecma335;
 namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
-        typeof(BroadphaseStaticComponent))]
+        typeof(CollisionComponent))]
     public class RemoveStaticBodySystem : EventMatchingSystem<EntityLeavingEvent, RemoveStaticBodySystem>
     {
         #region Private Fields
