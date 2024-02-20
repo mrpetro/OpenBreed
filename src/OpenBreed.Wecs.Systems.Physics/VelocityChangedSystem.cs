@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(typeof(VelocityComponent))]
-    public class VelocityChangedSystem : UpdatableSystemBase<VelocityChangedSystem>
+    public class VelocityChangedSystem : UpdatableMatchingSystemBase<VelocityChangedSystem>
     {
         #region Private Fields
 

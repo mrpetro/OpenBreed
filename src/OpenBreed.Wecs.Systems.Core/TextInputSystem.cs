@@ -8,7 +8,7 @@ namespace OpenBreed.Wecs.Systems.Core
     [RequireEntityWith(
         typeof(TextCaretComponent),
         typeof(TextDataComponent))]
-    public class TextInputSystem : UpdatableSystemBase<TextInputSystem>
+    public class TextInputSystem : UpdatableMatchingSystemBase<TextInputSystem>
     {
         #region Private Fields
 

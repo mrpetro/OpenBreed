@@ -21,7 +21,6 @@ namespace OpenBreed.Wecs.Systems.Gui
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
         private readonly IEventsMan eventsMan;
         private readonly IInputsMan inputsMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
@@ -46,18 +45,6 @@ namespace OpenBreed.Wecs.Systems.Gui
         #endregion Public Constructors
 
         #region Public Methods
-
-        public override void AddEntity(IEntity entity)
-        {
-            entities.Add(entity);
-        }
-
-        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public override void RemoveEntity(IEntity entity)
-        {
-            entities.Remove(entity);
-        }
 
         public void Render(IRenderContext context)
         {

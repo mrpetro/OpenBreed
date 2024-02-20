@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Systems.Core
     /// Updates entity life time and when it's down to zero, it removes it from the world.
     /// </summary>
     [RequireEntityWith(typeof(LifetimeComponent))]
-    public class LifetimeSystem : UpdatableSystemBase<LifetimeSystem>
+    public class LifetimeSystem : UpdatableMatchingSystemBase<LifetimeSystem>
     {
         #region Private Fields
 

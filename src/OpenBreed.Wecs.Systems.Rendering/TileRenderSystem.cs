@@ -16,12 +16,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         typeof(TileGridComponent))]
     public class TileRenderSystem : MatchingSystemBase<TileRenderSystem>, IRenderableSystem
     {
-        #region Private Fields
-
-        private readonly HashSet<IEntity> entities = new HashSet<IEntity>();
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public TileRenderSystem()
@@ -31,12 +25,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Public Constructors
 
         #region Public Methods
-
-        public override void AddEntity(IEntity entity) => entities.Add(entity);
-
-        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
         public void Render(IRenderContext context)
         {

@@ -9,7 +9,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(StampPutterComponent),
         typeof(TileGridComponent))]
-    public class StampPutterSystem : UpdatableSystemBase<StampPutterSystem>
+    public class StampPutterSystem : UpdatableMatchingSystemBase<StampPutterSystem>
     {
         #region Public Constructors
 

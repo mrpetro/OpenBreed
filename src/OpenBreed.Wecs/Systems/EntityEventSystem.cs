@@ -9,8 +9,6 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Protected Fields
 
-        protected readonly HashSet<IEntity> entities = new HashSet<IEntity>();
-
         protected readonly IEventsMan eventsMan;
 
         #endregion Protected Fields
@@ -27,12 +25,6 @@ namespace OpenBreed.Wecs.Systems
         #endregion Protected Constructors
 
         #region Public Methods
-
-        public override void AddEntity(IEntity entity) => entities.Add(entity);
-
-        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
         public void Update(object sender, TEntityEvent e)
         {

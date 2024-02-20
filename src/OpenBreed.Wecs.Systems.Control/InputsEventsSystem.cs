@@ -6,12 +6,6 @@ namespace OpenBreed.Wecs.Systems.Control
 {
     public abstract class InputsEventSystem<TSystem> : MatchingSystemBase<TSystem>, IEventSystem<KeyboardStateEventArgs> where TSystem : IMatchingSystem
     {
-        #region Protected Fields
-
-        protected readonly HashSet<IEntity> entities = new HashSet<IEntity>();
-
-        #endregion Protected Fields
-
         #region Private Fields
 
         private readonly IInputsMan inputsMan;
@@ -30,12 +24,6 @@ namespace OpenBreed.Wecs.Systems.Control
         #endregion Protected Constructors
 
         #region Public Methods
-
-        public override void AddEntity(IEntity entity) => entities.Add(entity);
-
-        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
         public void Update(object sender, KeyboardStateEventArgs e)
         {

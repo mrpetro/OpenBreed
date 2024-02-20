@@ -26,8 +26,6 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 
         private readonly IFont font;
 
-        private List<IEntity> entities = new List<IEntity>();
-
         #endregion Private Fields
 
         #region Public Constructors
@@ -58,22 +56,6 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         }
 
         #endregion Public Methods
-
-        #region Protected Methods
-
-        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public override void AddEntity(IEntity entity)
-        {
-            entities.Add(entity);
-        }
-
-        public override void RemoveEntity(IEntity entity)
-        {
-            entities.Remove(entity);
-        }
-
-        #endregion Protected Methods
 
         #region Private Methods
 

@@ -9,7 +9,7 @@ using OpenBreed.Wecs.Worlds;
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(EntityEmitterComponent))]
-    public class EntityEmitterSystem : UpdatableSystemBase<EntityEmitterSystem>
+    public class EntityEmitterSystem : UpdatableMatchingSystemBase<EntityEmitterSystem>
     {
         #region Private Fields
 

@@ -19,7 +19,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
     [RequireEntityWith(
         typeof(ResurrectCommandComponent),
         typeof(ResurrectableComponent))]
-    public class ResurrectionSystem : UpdatableSystemBase<ResurrectionSystem>
+    public class ResurrectionSystem : UpdatableMatchingSystemBase<ResurrectionSystem>
     {
         private readonly IWorldMan worldMan;
 

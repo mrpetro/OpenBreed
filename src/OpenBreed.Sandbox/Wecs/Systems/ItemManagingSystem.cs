@@ -12,7 +12,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(InventoryComponent))]
-    public class ItemManagingSystem : UpdatableSystemBase<ItemManagingSystem>
+    public class ItemManagingSystem : UpdatableMatchingSystemBase<ItemManagingSystem>
     {
         #region Private Fields
 

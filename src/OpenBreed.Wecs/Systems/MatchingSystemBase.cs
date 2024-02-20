@@ -19,6 +19,12 @@ namespace OpenBreed.Wecs.Systems
 
     public abstract class MatchingSystemBase : IMatchingSystem
     {
+        #region Protected Fields
+
+        protected readonly List<IEntity> entities = new List<IEntity>();
+
+        #endregion Protected Fields
+
         #region Protected Constructors
 
         protected MatchingSystemBase()
@@ -29,11 +35,11 @@ namespace OpenBreed.Wecs.Systems
 
         #region Public Methods
 
-        public abstract void AddEntity(IEntity entity);
+        public virtual void AddEntity(IEntity entity) => entities.Add(entity);
 
-        public abstract bool ContainsEntity(IEntity entity);
+        public virtual bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        public abstract void RemoveEntity(IEntity entity);
+        public virtual void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
         #endregion Public Methods
     }

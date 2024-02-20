@@ -25,7 +25,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(HealthComponent))]
-    internal class DestroyOnZeroHealthSystem : UpdatableSystemBase<DestroyOnZeroHealthSystem>
+    internal class DestroyOnZeroHealthSystem : UpdatableMatchingSystemBase<DestroyOnZeroHealthSystem>
     {
         private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;

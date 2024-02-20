@@ -13,7 +13,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(LivesComponent))]
-    public class LivesSystem : UpdatableSystemBase<LivesSystem>
+    public class LivesSystem : UpdatableMatchingSystemBase<LivesSystem>
     {
         #region Private Fields
 

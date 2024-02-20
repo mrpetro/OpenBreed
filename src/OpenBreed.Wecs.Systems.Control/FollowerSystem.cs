@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Systems.Control
 {
     [RequireEntityWith(
         typeof(FollowedComponent))]
-    public class FollowerSystem : UpdatableSystemBase<FollowerSystem>
+    public class FollowerSystem : UpdatableMatchingSystemBase<FollowerSystem>
     {
         #region Private Fields
 

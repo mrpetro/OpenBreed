@@ -5,21 +5,14 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public abstract class UpdatableSystemBase<TSystem> : MatchingSystemBase<TSystem>, IUpdatableSystem where TSystem : IMatchingSystem
+    public abstract class UpdatableMatchingSystemBase<TSystem> : MatchingSystemBase<TSystem>, IUpdatableSystem, IMatchingSystem where TSystem : IMatchingSystem
     {
         #region Protected Fields
 
-        protected readonly HashSet<IEntity> entities = new HashSet<IEntity>();
 
         #endregion Protected Fields
 
         #region Public Methods
-
-        public override void AddEntity(IEntity entity) => entities.Add(entity);
-
-        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public override void RemoveEntity(IEntity entity) => entities.Remove(entity);
 
         public virtual void Update(IUpdateContext context)
         {

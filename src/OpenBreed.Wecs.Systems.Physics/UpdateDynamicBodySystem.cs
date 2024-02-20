@@ -18,11 +18,9 @@ namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(CollisionComponent))]
-    public class UpdateDynamicBodySystem : IUpdatableSystem
+    public class UpdateDynamicBodySystem : MatchingSystemBase<UpdateDynamicBodySystem>, IUpdatableSystem
     {
         #region Private Fields
-
-        private readonly HashSet<IEntity> entities = new HashSet<IEntity>();
 
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
@@ -42,12 +40,6 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public int PhaseId => throw new System.NotImplementedException();
 
-        public void AddEntity(IEntity entity) => entities.Add(entity);
-
-        public bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public void RemoveEntity(IEntity entity) => entities.Remove(entity);
-
         #endregion Internal Constructors
 
         #region Public Methods
@@ -62,18 +54,6 @@ namespace OpenBreed.Wecs.Systems.Physics
                 entity.UpdateDynamics(entityMan);
             }
         }
-
-        //protected override void UpdateEntity(IEntity entity, IWorldContext context)
-        //{
-        //    var entityIds = entity.Get<BroadphaseStaticPutterComponent>().Ids;
-        //    var grid = entity.Get<BroadphaseStaticComponent>().Grid;
-
-        //    //Update all tiles
-        //    for (int i = 0; i < entityIds.Count; i++)
-        //        entity.AddEntityToStatics(entityMan.GetById(entityIds[i]));
-
-        //    entityIds.Clear();
-        //}
 
         #endregion Public Methods
     }

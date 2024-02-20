@@ -9,7 +9,7 @@ using OpenBreed.Wecs.Worlds;
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(PauserComponent))]
-    public class PausingSystem : UpdatableSystemBase<PausingSystem>
+    public class PausingSystem : UpdatableMatchingSystemBase<PausingSystem>
     {
         #region Private Fields
 

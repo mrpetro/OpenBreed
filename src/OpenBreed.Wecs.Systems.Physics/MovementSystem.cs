@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         typeof(PositionComponent),
         typeof(VelocityComponent),
         typeof(BodyComponent))]
-    public class MovementSystem : UpdatableSystemBase<MovementSystem>
+    public class MovementSystem : UpdatableMatchingSystemBase<MovementSystem>
     {
         #region Private Fields
 

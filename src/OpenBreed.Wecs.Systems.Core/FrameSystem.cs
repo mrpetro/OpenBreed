@@ -10,7 +10,7 @@ using System;
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(FrameComponent))]
-    public class FrameSystem : UpdatableSystemBase<FrameSystem>
+    public class FrameSystem : UpdatableMatchingSystemBase<FrameSystem>
     {
         #region Private Fields
 

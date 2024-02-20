@@ -10,7 +10,7 @@ using System;
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(TimerComponent))]
-    public class TimerSystem : UpdatableSystemBase<TimerSystem>
+    public class TimerSystem : UpdatableMatchingSystemBase<TimerSystem>
     {
         #region Private Fields
 

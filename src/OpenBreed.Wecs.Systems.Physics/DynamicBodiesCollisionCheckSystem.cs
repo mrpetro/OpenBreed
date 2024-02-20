@@ -14,19 +14,15 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
-    [RequireEntityWith(
-        typeof(BodyComponent),
-        typeof(VelocityComponent),
-        typeof(PositionComponent))]
-    public class DynamicBodiesCollisionCheckSystem : MatchingSystemBase<DynamicBodiesCollisionCheckSystem>, IUpdatableSystem
+    public class DynamicBodiesCollisionCheckSystem : IUpdatableSystem
     {
         #region Private Fields
 
         private const int CELL_SIZE = 16;
+        private readonly ICollisionChecker collisionChecker;
+        private readonly ICollisionMan<IEntity> collisionMan;
         private readonly IEntityMan entityMan;
         private readonly IShapeMan shapeMan;
-        private readonly ICollisionMan<IEntity> collisionMan;
-        private readonly ICollisionChecker collisionChecker;
 
         #endregion Private Fields
 
@@ -72,20 +68,6 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #endregion Public Methods
 
-        #region Protected Methods
-
-        public override bool ContainsEntity(IEntity entity) => false;
-
-        public override void AddEntity(IEntity entity)
-        {
-        }
-
-        public override void RemoveEntity(IEntity entity)
-        {
-        }
-
-        #endregion Protected Methods
-
         #region Private Methods
 
         private Box2 GetAabb(IEntity entity)
@@ -96,8 +78,52 @@ namespace OpenBreed.Wecs.Systems.Physics
             return shape.GetAabb().Translated(pos.Value);
         }
 
+        private void QueryStaticGrid(IBroadphase grid, BroadphaseItem cell, List<ContactPair> contactPairs, float dt)
+        {
+            var dynamicAabb = cell.Aabb;
+
+            var idSet = grid.QueryStatic(dynamicAabb);
+
+            if (idSet.Count == 0)
+            {
+                return;
+            }
+
+            var entity = entityMan.GetById(cell.ItemId);
+
+            var entitySet = idSet.Select(id => entityMan.GetById(id)).ToList();
+
+            var pos = dynamicAabb.GetCenter();
+
+            entitySet.Sort((a, b) => ShortestDistanceComparer(pos, GetCellCenter(a.Get<PositionComponent>()), GetCellCenter(b.Get<PositionComponent>())));
+
+            //Iterate all collected static bodies for detail test
+            foreach (var staticEntity in entitySet)
+            {
+                var contacts = TestNarrowPhaseStatic(entity, staticEntity, dt);
+
+                if (contacts is not null)
+                {
+                    contactPairs.Add(new ContactPair(entity.Id, staticEntity.Id, contacts));
+                }
+            }
+        }
+
+        private int ShortestDistanceComparer(Vector2 pos, Vector2 a, Vector2 b)
+        {
+            var lx = Vector2.Distance(pos, a);
+            var ly = Vector2.Distance(pos, b);
+
+            if (lx < ly)
+                return -1;
+            if (lx == ly)
+                return 0;
+            else
+                return 1;
+        }
+
         private void TestNarrowPhaseDynamic(
-            BroadphaseItem nextCollider,
+                            BroadphaseItem nextCollider,
             BroadphaseItem currentCollider,
             List<ContactPair> result,
             float dt)
@@ -197,51 +223,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             }
 
             return contacts.Count > 0;
-        }
-
-        private void QueryStaticGrid(IBroadphase grid, BroadphaseItem cell, List<ContactPair> contactPairs, float dt)
-        {
-            var dynamicAabb = cell.Aabb;
-
-            var idSet = grid.QueryStatic(dynamicAabb);
-
-            if (idSet.Count == 0)
-            {
-                return;
-            }
-
-            var entity = entityMan.GetById(cell.ItemId);
-
-            var entitySet = idSet.Select(id => entityMan.GetById(id)).ToList();
-
-            var pos = dynamicAabb.GetCenter();
-
-            entitySet.Sort((a, b) => ShortestDistanceComparer(pos, GetCellCenter(a.Get<PositionComponent>()), GetCellCenter(b.Get<PositionComponent>())));
-
-
-            //Iterate all collected static bodies for detail test
-            foreach (var staticEntity in entitySet)
-            {
-                var contacts = TestNarrowPhaseStatic(entity, staticEntity, dt);
-
-                if (contacts is not null)
-                {
-                    contactPairs.Add(new ContactPair(entity.Id, staticEntity.Id, contacts));
-                }
-            }
-        }
-
-        private int ShortestDistanceComparer(Vector2 pos, Vector2 a, Vector2 b)
-        {
-            var lx = Vector2.Distance(pos, a);
-            var ly = Vector2.Distance(pos, b);
-
-            if (lx < ly)
-                return -1;
-            if (lx == ly)
-                return 0;
-            else
-                return 1;
         }
 
         #endregion Private Methods

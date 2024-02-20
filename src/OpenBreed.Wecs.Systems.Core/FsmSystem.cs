@@ -9,7 +9,7 @@ using System.Linq;
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(FsmComponent))]
-    public class FsmSystem : UpdatableSystemBase<FsmSystem>
+    public class FsmSystem : UpdatableMatchingSystemBase<FsmSystem>
     {
         #region Private Fields
 

@@ -17,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         typeof(AngularPositionTargetComponent),
         typeof(AngularThrustComponent))]
 
-    public class DirectionSystemVanilla : UpdatableSystemBase<DirectionSystemVanilla>
+    public class DirectionSystemVanilla : UpdatableMatchingSystemBase<DirectionSystemVanilla>
     {
         #region Private Fields
 

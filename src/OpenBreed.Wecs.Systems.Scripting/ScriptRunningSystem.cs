@@ -12,7 +12,7 @@ using System.Linq;
 namespace OpenBreed.Wecs.Systems.Scripting
 {
     [RequireEntityWith(typeof(ScriptComponent))]
-    public class ScriptRunningSystem : UpdatableSystemBase<ScriptRunningSystem>
+    public class ScriptRunningSystem : UpdatableMatchingSystemBase<ScriptRunningSystem>
     {
         #region Private Fields
 

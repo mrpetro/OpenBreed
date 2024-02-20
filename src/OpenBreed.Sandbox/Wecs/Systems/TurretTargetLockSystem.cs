@@ -15,13 +15,13 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Wecs.Systems
 {
-    public class TurretTargetingSystem : EventSystem<PositionChangedEvent, TurretTargetingSystem>
+    public class TurretTargetLockSystem : EventSystem<PositionChangedEvent, TurretTargetLockSystem>
     {
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
         private readonly ILogger logger;
 
-        public TurretTargetingSystem(
+        public TurretTargetLockSystem(
             IEventsMan eventsMan,
             IEntityMan entityMan,
             IWorldMan worldMan,

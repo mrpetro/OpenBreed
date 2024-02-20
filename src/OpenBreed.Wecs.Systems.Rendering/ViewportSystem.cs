@@ -28,7 +28,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
         private readonly IPaletteMan paletteMan;
@@ -69,18 +68,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #endregion Public Methods
 
         #region Protected Methods
-
-        public override bool ContainsEntity(IEntity entity) => entities.Contains(entity);
-
-        public override void AddEntity(IEntity entity)
-        {
-            entities.Add(entity);
-        }
-
-        public override void RemoveEntity(IEntity entity)
-        {
-            entities.Remove(entity);
-        }
 
         #endregion Protected Methods
 

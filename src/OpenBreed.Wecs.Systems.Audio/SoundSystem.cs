@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace OpenBreed.Wecs.Systems.Audio
 {
     [RequireEntityWith(typeof(SoundPlayerComponent))]
-    public class SoundSystem : UpdatableSystemBase<SoundSystem>
+    public class SoundSystem : UpdatableMatchingSystemBase<SoundSystem>
     {
         #region Private Fields
 

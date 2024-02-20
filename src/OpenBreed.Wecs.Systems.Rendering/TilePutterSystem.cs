@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         typeof(TilePutterComponent),
         typeof(TileGridComponent))]
 
-    public class TilePutterSystem : UpdatableSystemBase<TilePutterSystem>
+    public class TilePutterSystem : UpdatableMatchingSystemBase<TilePutterSystem>
     {
 
         #region Public Constructors

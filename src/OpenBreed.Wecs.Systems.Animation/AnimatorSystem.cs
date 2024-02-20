@@ -11,7 +11,7 @@ using OpenBreed.Wecs.Systems.Core;
 namespace OpenBreed.Wecs.Systems.Animation
 {
     [RequireEntityWith(typeof(AnimationComponent))]
-    public class AnimatorSystem : UpdatableSystemBase<AnimatorSystem>
+    public class AnimatorSystem : UpdatableMatchingSystemBase<AnimatorSystem>
     {
         #region Private Fields
 

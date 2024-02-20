@@ -43,7 +43,7 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<ItemPickupSystem>();
             builder.AddSystem<ItemManagingSystem>();
             builder.AddSystem<LivesSystem>();
-            builder.AddSystem<TurretTargetingSystem>();
+            builder.AddSystem<TurretTargetLockSystem>();
             builder.AddSystem<DamageOnHealthDistributionSystem>();
             builder.AddSystem<DestroyOnZeroHealthSystem>();
             builder.AddSystem<LifetimeSystem>();

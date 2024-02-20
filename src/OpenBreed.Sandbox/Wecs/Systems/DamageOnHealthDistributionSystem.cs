@@ -22,7 +22,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(DamagerComponent))]
-    internal class DamageOnHealthDistributionSystem : UpdatableSystemBase<DamageOnHealthDistributionSystem>
+    internal class DamageOnHealthDistributionSystem : UpdatableMatchingSystemBase<DamageOnHealthDistributionSystem>
     {
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
