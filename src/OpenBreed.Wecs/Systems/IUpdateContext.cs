@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems
 
         bool Paused { get; set; }
 
-        IWorld World { get; }
+        int WorldId { get; }
 
         #endregion Public Properties
     }

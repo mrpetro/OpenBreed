@@ -38,7 +38,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             Name = builder.name;
             entityToSystemMatcher = builder.entityToSystemMatcher;
-            context = new UpdateContext(this);
+            context = new UpdateContext();
             Systems = builder.CreateSystems(this).ToArray();
         }
 
@@ -96,6 +96,7 @@ namespace OpenBreed.Wecs.Worlds
 
         internal void Update(float dt)
         {
+            context.WorldId = Id;
             context.DtMultiplier = DtMultiplier;
             context.UpdateDeltaTime(dt);
 

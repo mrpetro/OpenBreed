@@ -48,7 +48,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         {
             foreach (var entity in entities)
             {
-                if (entity.WorldId != context.World.Id)
+                if (entity.WorldId != context.WorldId)
                     continue;
 
                 entity.UpdateDynamics(entityMan);

@@ -2,6 +2,7 @@
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -64,6 +65,10 @@ namespace OpenBreed.Wecs.Components.Physics.Builders
         public void SetShape(string shapeName)
         {
             this.shape = shapeMan.GetByTag(shapeName);
+
+            if (shape is null)
+                throw new InvalidOperationException($"Shape with name '{shapeName}' is not registered.");
+
         }
 
         #endregion Public Methods

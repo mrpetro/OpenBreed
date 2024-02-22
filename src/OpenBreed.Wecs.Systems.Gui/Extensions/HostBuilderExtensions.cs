@@ -7,6 +7,7 @@ using OpenBreed.Core;
 using OpenBreed.Input.Interface;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
+using Microsoft.Extensions.Hosting;
 
 namespace OpenBreed.Wecs.Systems.Gui.Extensions
 {
@@ -14,13 +15,22 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
     {
         #region Public Methods
 
+        public static void SetupCollisionVisualizingOptions(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<CollisionVisualizingOptions>();
+            });
+        }
+
         public static void SetupGuiSystems(this ISystemFactory systemFactory, IServiceProvider sp)
         {
             systemFactory.RegisterSystem<CollisionVisualizingSystem>(
                 () => new CollisionVisualizingSystem(
                     sp.GetService<IEntityMan>(),
                     sp.GetService<IPrimitiveRenderer>(),
-                    sp.GetService<ICollisionMan<IEntity>>()));
+                    sp.GetService<ICollisionMan<IEntity>>(),
+                    sp.GetService<CollisionVisualizingOptions>()));
 
             systemFactory.RegisterSystem<CursorSystem>(
                 () => new CursorSystem(

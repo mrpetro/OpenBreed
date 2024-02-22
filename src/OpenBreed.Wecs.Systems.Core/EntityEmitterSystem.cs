@@ -69,7 +69,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
                 }, singleTime: true);
 
-                worldMan.RequestAddEntity(emittedEntity, context.World.Id);
+                worldMan.RequestAddEntity(emittedEntity, context.WorldId);
 
                 
             }

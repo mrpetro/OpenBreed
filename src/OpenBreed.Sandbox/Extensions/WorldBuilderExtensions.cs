@@ -43,7 +43,6 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<ItemPickupSystem>();
             builder.AddSystem<ItemManagingSystem>();
             builder.AddSystem<LivesSystem>();
-            builder.AddSystem<TurretTargetLockSystem>();
             builder.AddSystem<DamageOnHealthDistributionSystem>();
             builder.AddSystem<DestroyOnZeroHealthSystem>();
             builder.AddSystem<LifetimeSystem>();
@@ -80,6 +79,8 @@ namespace OpenBreed.Sandbox.Extensions
 
             //GUI Stage
             builder.AddSystem<CursorSystem>();
+
+            //Reset Stage
         }
 
         #endregion Public Methods

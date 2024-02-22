@@ -30,6 +30,7 @@ using OpenTK.Mathematics;
 using System;
 using System.Linq;
 using System.Xml.Linq;
+using OpenBreed.Wecs.Components.Common.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -91,7 +92,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public void RegisterCollisionPairs()
         {
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, FullObstableCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorSight, ActorSightCallback);
+            collisionMan.RegisterFixturePair(ColliderTypes.ActorSight, ColliderTypes.ActorBody, ActorSightCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorBody, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
@@ -118,8 +119,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 .SetParameter("startX", x)
                 .SetParameter("startY", y)
                 .Build();
-
-            entity.Add(new TurretTargetComponent());
 
             worldMan.RequestAddEntity(entity, world.Id);
             return entity;
@@ -171,11 +170,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
             dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
-        private void ActorSightCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
+        private void ActorSightCallback(BodyFixture fixtureA, IEntity seekerEntity, BodyFixture spottedFixture, IEntity spottedEntity, float dt, Vector2 projection)
         {
-            entityB.SetTargetEntityId(entityA.Id);
-
-            //dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
+            var spottedPos = spottedEntity.GetPosition();
+            seekerEntity.SetTargetDirectionToCoordinates(spottedPos);
         }
 
         private void TryOnCollision(IEntity entityA, IEntity entityB, Vector2 projection)
@@ -198,12 +196,12 @@ namespace OpenBreed.Sandbox.Entities.Actor
             TryOnCollision(entityA, entityB, projection);
         }
 
-        private void TriggerCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
+        private void TriggerCallback(BodyFixture actorFixture, IEntity actorEntity, BodyFixture triggerFixture, IEntity triggerEntity, float dt, Vector2 projection)
         {
-            eventsMan.Raise<ActorCollisionEvent>(null, new ActorCollisionEvent(entityA.Id, entityB.Id));
+            eventsMan.Raise<ActorCollisionEvent>(null, new ActorCollisionEvent(actorEntity.Id, triggerEntity.Id));
 
-            TryOnCollision(entityA, entityB, projection);
-            TryOnCollision(entityB, entityA, projection);
+            TryOnCollision(actorEntity, triggerEntity, projection);
+            TryOnCollision(triggerEntity, actorEntity, projection);
         }
 
         private void SlopeObstacleCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)

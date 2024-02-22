@@ -7,9 +7,8 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Public Constructors
 
-        public UpdateContext(IWorld world)
+        public UpdateContext()
         {
-            World = world;
         }
 
         #endregion Public Constructors
@@ -22,7 +21,7 @@ namespace OpenBreed.Wecs.Systems
 
         public bool Paused { get; set; }
 
-        public IWorld World { get; }
+        public int WorldId { get; internal set; }
 
         #endregion Public Properties
 

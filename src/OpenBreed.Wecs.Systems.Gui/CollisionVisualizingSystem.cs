@@ -20,11 +20,17 @@ using System.Text.RegularExpressions;
 
 namespace OpenBreed.Wecs.Systems.Gui
 {
+    public class CollisionVisualizingOptions
+    {
+        public bool Enabled { get; set; } = true;
+    }
+
     public class CollisionVisualizingSystem : SystemBase<CollisionVisualizingSystem>, IRenderableSystem
     {
         #region Private Fields
 
         private readonly ICollisionMan<IEntity> collisionMan;
+        private readonly CollisionVisualizingOptions visualizingOptions;
         private readonly IEntityMan entityMan;
 
         private readonly Dictionary<int, Color4> groupsToColors = new Dictionary<int, Color4>();
@@ -37,11 +43,13 @@ namespace OpenBreed.Wecs.Systems.Gui
         public CollisionVisualizingSystem(
             IEntityMan entityMan,
             IPrimitiveRenderer primitiveRenderer,
-            ICollisionMan<IEntity> collisionMan)
+            ICollisionMan<IEntity> collisionMan,
+            CollisionVisualizingOptions collisionVisualizingOptions)
         {
             this.entityMan = entityMan;
             this.primitiveRenderer = primitiveRenderer;
             this.collisionMan = collisionMan;
+            this.visualizingOptions = collisionVisualizingOptions;
 
             SetupColors();
         }
@@ -52,6 +60,11 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         public void Render(IRenderContext context)
         {
+            if (!visualizingOptions.Enabled)
+            {
+                return;
+            }
+
             primitiveRenderer.EnableAlpha();
 
             try

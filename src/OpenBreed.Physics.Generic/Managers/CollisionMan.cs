@@ -57,13 +57,25 @@ namespace OpenBreed.Physics.Generic.Managers
 
         public void RegisterFixturePair(int fixtureA, int fixtureB, FixtureContactCallback<TObject> callback)
         {
+            if (fixtureCallbacks.ContainsKey((fixtureA, fixtureB)))
+            {
+                throw new InvalidOperationException($"Fixture pair '{fixtureA} <=> {fixtureB}' already registered.");
+            }
+
+            if (fixtureCallbacks.ContainsKey((fixtureB, fixtureA)))
+            {
+                throw new InvalidOperationException($"Fixture pair '{fixtureA} <=> {fixtureB}' already registered.");
+            }
+
             fixtureCallbacks.Add((fixtureA, fixtureB), callback);
         }
 
         public int RegisterGroup(string groupName)
         {
             if (groupNames.ContainsKey(groupName))
+            {
                 throw new InvalidOperationException($"Group name '{groupName}' already registered.");
+            }
 
             var groupId = groupIds.Add(groupName);
             groupNames.Add(groupName, groupId);
@@ -79,7 +91,13 @@ namespace OpenBreed.Physics.Generic.Managers
                     foreach (var groupIdB in contact.FixtureB.GroupIds)
                     {
                         if (fixtureCallbacks.TryGetValue((groupIdA, groupIdB), out FixtureContactCallback<TObject> fixtureCallback))
-                        fixtureCallback.Invoke(contact.FixtureA, objA, contact.FixtureB, objB, dt, contact.Projection);
+                        {
+                            fixtureCallback.Invoke(contact.FixtureA, objA, contact.FixtureB, objB, dt, contact.Projection);
+                        }
+                        else if (fixtureCallbacks.TryGetValue((groupIdB, groupIdA), out fixtureCallback))
+                        {
+                            fixtureCallback.Invoke(contact.FixtureB, objB, contact.FixtureA, objA, dt, contact.Projection);
+                        }
                     }
                 }
             }

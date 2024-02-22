@@ -69,6 +69,7 @@ using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Core.Extensions;
+using OpenBreed.Wecs.Systems.Gui;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
 using OpenBreed.Wecs.Systems.Rendering;
@@ -267,6 +268,7 @@ namespace OpenBreed.Sandbox
                 shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
                 shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
                 shapeMan.Register("Shapes/Circle_0_0_240", new CircleShape(new Vector2(0, 0), 240));
+                shapeMan.Register("Shapes/Circle_0_0_120", new CircleShape(new Vector2(0, 0), 120));
                 shapeMan.Register("Shapes/Circle_0_0_480", new CircleShape(new Vector2(0,0), 480));
                 shapeMan.Register("Shapes/Circle_0_0_40", new CircleShape(new Vector2(0, 0), 40));
                 shapeMan.Register("Shapes/Circle_0_0_320", new CircleShape(new Vector2(0, 0), 320));
@@ -279,6 +281,9 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupDefaultTypeAttributesProvider();
             hostBuilder.SetupDefaultSystemRequirementsProvider();
             hostBuilder.SetupDefaultEntityToSystemMatcher();
+
+
+            hostBuilder.SetupCollisionVisualizingOptions();
 
             hostBuilder.SetupSystemFactory((systemFactory, sp) =>
             {
@@ -434,17 +439,61 @@ namespace OpenBreed.Sandbox
 
         #region Private Methods
 
-        private void LuaConsoleInput(IScriptMan scriptMan)
+        private void LuaConsoleInput(
+            IScriptMan scriptMan,
+            CollisionVisualizingOptions visualizingOptions)
         {
-            var command = default(string);
 
             do
             {
                 Console.SetCursorPosition(0, Console.BufferHeight - 1);
                 Console.Write("Command: ");
-                command = Console.ReadLine();
+                var commandLine = Console.ReadLine().Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
-                if(string.Equals(command, "EXIT", StringComparison.InvariantCultureIgnoreCase))
+
+                if (!commandLine.Any())
+                {
+                    continue;
+
+                }
+
+                var command = commandLine.First();
+
+                var exit = false;
+
+                switch (command.ToLower())
+                {
+                    case "exit":
+                        exit = true;
+                        break;
+                    case "collisions":
+                        var options = commandLine.Skip(1).Take(1);
+
+                        if (!options.Any())
+                        {
+                            Console.WriteLine("Missing option to 'collisions' command.");
+                            continue;
+                        }
+
+                        var option = options.First().ToLower();
+
+                        switch (option)
+                        {
+                            case "show":
+                                visualizingOptions.Enabled = true;
+                                continue;
+                            case "hide":
+                                visualizingOptions.Enabled = false;
+                                continue;
+                            default:
+                                Console.WriteLine($"Invalid option ('{option}'). Accepted options: show, hide");
+                                continue;
+                        }
+                    default:
+                        break;
+                }
+
+                if (exit)
                 {
                     break;
                 };
@@ -837,7 +886,9 @@ namespace OpenBreed.Sandbox
 
         private void StartLuaConsoleInput()
         {
-            Task.Run(() => LuaConsoleInput(GetManager<IScriptMan>()));
+            Task.Run(() => LuaConsoleInput(
+                GetManager<IScriptMan>(),
+                GetManager<CollisionVisualizingOptions>()));
         }
 
         private void InitLua()

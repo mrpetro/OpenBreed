@@ -94,11 +94,6 @@ namespace OpenBreed.Sandbox.Extensions
             fixture.GroupIds.RemoveAll(id => id == ColliderTypes.FullObstacle);
         }
 
-        public static void SetTargetEntityId(this IEntity entity, int targetEntityId)
-        {
-            entity.Get<TurretTargetComponent>().TargetEntityId = targetEntityId;
-        }
-
         public static void GiveItem(this IEntity entity, int itemId, int quantity = 1)
         {
             var inventoryCmp = entity.Get<InventoryComponent>();

@@ -51,7 +51,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public void Update(IUpdateContext context)
         {
-            var mapEntity = entityMan.GetByTag("Maps").Where(e => e.WorldId == context.World.Id).FirstOrDefault();
+            var mapEntity = entityMan.GetByTag("Maps").Where(e => e.WorldId == context.WorldId).FirstOrDefault();
 
             if (mapEntity is null)
                 return;
