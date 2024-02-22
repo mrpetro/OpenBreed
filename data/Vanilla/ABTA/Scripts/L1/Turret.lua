@@ -1,5 +1,7 @@
 ﻿-- In 2 player game, turret locks on first player spotted and stays locked utill loosing sight.
 
+local previousDegree = 0
+
 local function Explode(entity)
     
     local pos = entity:GetPosition()
@@ -26,11 +28,18 @@ local function OnDirectionChanged(entity, args)
 
 
     local degree = MovementTools.SnapToCompass16Degree(direction.X, direction.Y)
-    local animName = "Vanilla/L1/Turret/Tracking/" .. tostring(degree)
-   
-    local clip = Clips:GetByName(animName)
 
-    entity:PlayAnimation(0, clip.Id)
+    if (degree ~= previousDegree)
+    then
+		local soundId = Sounds:GetByName("Vanilla/Common/Turret/Turn")
+		entity:EmitSound(soundId)
+		
+	    local animName = "Vanilla/L1/Turret/Tracking/" .. tostring(degree)	
+		local clip = Clips:GetByName(animName)
+		entity:PlayAnimation(0, clip.Id)
+    end
+	
+	previousDegree = degree
 end
 
 local function OnInit(entity)

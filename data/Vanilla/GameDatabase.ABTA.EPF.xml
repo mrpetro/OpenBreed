@@ -1426,10 +1426,10 @@
 				<Sound Id="Sounds.TELE">
 					<DataRef>Assets.TELE</DataRef>
 				</Sound>
-				<Sound Id="Sounds.TURRET1">
+				<Sound Id="Vanilla/Common/Turret/Fire">
 					<DataRef>Assets.TURRET1</DataRef>
 				</Sound>
-				<Sound Id="Sounds.TURRET2">
+				<Sound Id="Vanilla/Common/Turret/Turn">
 					<DataRef>Assets.TURRET2</DataRef>
 				</Sound>
 				<Sound Id="Vanilla/Common/ExtraLife/Picked">
