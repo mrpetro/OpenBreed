@@ -23,9 +23,7 @@ local function OnDirectionChanged(entity, args)
     local direction = entity:GetDirection()
 	
 	--Logging:Info("TURRET.POS: (" .. tostring(pos.X) .. ", " .. tostring(pos.Y) .. ")" )
-
 	--Logging:Info("TURRET.DIR : (" .. tostring(direction.X) .. ", " .. tostring(direction.Y) .. ")" )
-
 
     local degree = MovementTools.SnapToCompass16Degree(direction.X, direction.Y)
 
@@ -37,9 +35,9 @@ local function OnDirectionChanged(entity, args)
 	    local animName = "Vanilla/L1/Turret/Tracking/" .. tostring(degree)	
 		local clip = Clips:GetByName(animName)
 		entity:PlayAnimation(0, clip.Id)
+		
+		previousDegree = degree
     end
-	
-	previousDegree = degree
 end
 
 local function OnInit(entity)
