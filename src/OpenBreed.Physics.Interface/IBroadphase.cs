@@ -3,24 +3,14 @@ using OpenTK;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace OpenBreed.Physics.Interface
 {
-    public class ContactPair
+    public class BroadphaseResult
     {
-        public ContactPair(
-            int itemA,
-            int itemB,
-            List<CollisionContact> contacts)
-        {
-            ItemA = itemA;
-            ItemB = itemB;
-            Contacts = contacts;
-        }
-
-        public int ItemA { get; }
-        public int ItemB { get; }
-        public List<CollisionContact> Contacts { get; }
+        public List<CollisionContact> Contacts { get; init; }
     }
 
     public delegate Box2 UpdateDynamicDelegate(int itemId);
@@ -49,9 +39,9 @@ namespace OpenBreed.Physics.Interface
         HashSet<int> QueryStatic(Box2 aabb);
 
         public void Solve(
-            Action<IBroadphase, BroadphaseItem, List<ContactPair>, float> staticPhase,
-            Action<BroadphaseItem, BroadphaseItem, List<ContactPair>, float> narrowPhase,
-            List<ContactPair> result,
+            Action<IBroadphase, BroadphaseItem, BroadphaseResult, float> staticPhase,
+            Action<BroadphaseItem, BroadphaseItem, BroadphaseResult, float> narrowPhase,
+            BroadphaseResult result,
             float dt);
 
         void UpdateItem(int itemId, Box2 aabb);

@@ -31,6 +31,7 @@ using System;
 using System.Linq;
 using System.Xml.Linq;
 using OpenBreed.Wecs.Components.Common.Extensions;
+using OpenBreed.Physics.Interface;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -92,7 +93,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public void RegisterCollisionPairs()
         {
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, FullObstableCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorSight, ColliderTypes.ActorBody, ActorSightCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorBody, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, FullObstableCallback);
             collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
@@ -119,6 +119,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 .SetParameter("startX", x)
                 .SetParameter("startY", y)
                 .Build();
+
+            entity.Add(new TrackingComponent(-1));
 
             worldMan.RequestAddEntity(entity, world.Id);
             return entity;
@@ -165,15 +167,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
             dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
         }
 
-        private void FullObstableCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
+        private void FullObstableCallback(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
-        }
-
-        private void ActorSightCallback(BodyFixture fixtureA, IEntity seekerEntity, BodyFixture spottedFixture, IEntity spottedEntity, float dt, Vector2 projection)
-        {
-            var spottedPos = spottedEntity.GetPosition();
-            seekerEntity.SetTargetDirectionToCoordinates(spottedPos);
         }
 
         private void TryOnCollision(IEntity entityA, IEntity entityB, Vector2 projection)
@@ -191,12 +187,12 @@ namespace OpenBreed.Sandbox.Entities.Actor
             scriptFunction.Invoke(entityA, entityB, projection);
         }
 
-        private void ProjectileTriggerCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
+        private void ProjectileTriggerCallback(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             TryOnCollision(entityA, entityB, projection);
         }
 
-        private void TriggerCallback(BodyFixture actorFixture, IEntity actorEntity, BodyFixture triggerFixture, IEntity triggerEntity, float dt, Vector2 projection)
+        private void TriggerCallback(IFixture actorFixture, IEntity actorEntity, IFixture triggerFixture, IEntity triggerEntity, float dt, Vector2 projection)
         {
             eventsMan.Raise<ActorCollisionEvent>(null, new ActorCollisionEvent(actorEntity.Id, triggerEntity.Id));
 
@@ -204,7 +200,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             TryOnCollision(triggerEntity, actorEntity, projection);
         }
 
-        private void SlopeObstacleCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
+        private void SlopeObstacleCallback(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             var metadata = entityB.Get<MetadataComponent>();
 
@@ -232,7 +228,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             dynamicResolver.ResolveVsSlope(entityA, entityB, projection, slopeDirection);
         }
 
-        private void SlowdownObstacleCallback(BodyFixture fixtureA, IEntity entityA, BodyFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
+        private void SlowdownObstacleCallback(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             //if (entityA.State is "Slowdown")
             //    return;

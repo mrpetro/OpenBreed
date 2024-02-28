@@ -47,6 +47,9 @@ namespace OpenBreed.Sandbox.Extensions
             builder.AddSystem<DestroyOnZeroHealthSystem>();
             builder.AddSystem<LifetimeSystem>();
             builder.AddSystem<EntityEmitterSystem>();
+            builder.AddSystem<TurretTrackingSystem>();
+            builder.AddSystem<TurretTrackLockingSystem>();
+            builder.AddSystem<TurretTrackUnlockingSystem>();
 
             builder.AddSystem<FollowerSystem>();
             builder.AddSystem<AnimatorSystem>();

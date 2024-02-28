@@ -24,7 +24,12 @@ namespace OpenBreed.Wecs.Components.Physics
         public CollisionComponent(CollisionComponentBuilder builder)
         {
             Broadphase = builder.GetBroadphase();
-            ContactPairs = new List<ContactPair>();
+
+            Result = new BroadphaseResult()
+            {
+                Contacts = new List<CollisionContact>()
+                //ContactPairs = new List<ContactPair>()
+            };
         }
 
         #endregion Public Constructors
@@ -33,7 +38,7 @@ namespace OpenBreed.Wecs.Components.Physics
 
         public IBroadphase Broadphase { get; }
 
-        public List<ContactPair> ContactPairs { get; }
+        public BroadphaseResult Result;
 
         #endregion Public Properties
     }

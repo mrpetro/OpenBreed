@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems
 {
-    public abstract class EntityEventSystem<TSystem, TEntityEvent> : MatchingSystemBase<TSystem>, IEventSystem<TEntityEvent> where TSystem : IMatchingSystem where TEntityEvent : EntityEvent
+    public abstract class EntityEventSystem<TSystem, TEntityEvent> : IEventSystem<TEntityEvent> where TEntityEvent : EntityEvent
     {
         #region Protected Fields
 
@@ -26,20 +26,8 @@ namespace OpenBreed.Wecs.Systems
 
         #region Public Methods
 
-        public void Update(object sender, TEntityEvent e)
-        {
-            foreach (var entity in entities)
-            {
-                UpdateEntity(entity, e);
-            }
-        }
+        public abstract void Update(object sender, TEntityEvent e);
 
         #endregion Public Methods
-
-        #region Protected Methods
-
-        protected abstract void UpdateEntity(IEntity entity, TEntityEvent e);
-
-        #endregion Protected Methods
     }
 }

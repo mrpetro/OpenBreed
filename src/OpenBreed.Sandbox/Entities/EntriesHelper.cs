@@ -297,7 +297,7 @@ namespace OpenBreed.Sandbox.Entities
             SetPosition(context.actorEntity, context.entryId);
         }
 
-        private void Actor2TriggerCallbackEx(BodyFixture colliderTypeA, IEntity entityA, BodyFixture colliderTypeB, IEntity entityB, float dt, Vector2 projection)
+        private void Actor2TriggerCallbackEx(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
         {
             PerformEntityExit(entityA, entityB);
         }

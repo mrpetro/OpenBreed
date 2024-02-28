@@ -1,13 +1,16 @@
-﻿using OpenBreed.Physics.Interface;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenTK;
 using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -22,6 +25,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         private readonly ICollisionChecker collisionChecker;
         private readonly ICollisionMan<IEntity> collisionMan;
         private readonly IEntityMan entityMan;
+        private readonly IEventsMan eventsMan;
         private readonly IShapeMan shapeMan;
 
         #endregion Private Fields
@@ -30,11 +34,13 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         internal DynamicBodiesCollisionCheckSystem(
             IEntityMan entityMan,
+            IEventsMan eventsMan,
             IShapeMan shapeMan,
             ICollisionMan<IEntity> collisionMan,
             ICollisionChecker collisionChecker)
         {
             this.entityMan = entityMan;
+            this.eventsMan = eventsMan;
             this.shapeMan = shapeMan;
             this.collisionMan = collisionMan;
             this.collisionChecker = collisionChecker;
@@ -58,12 +64,49 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             var collisionComponent = mapEntity.Get<CollisionComponent>();
 
-            collisionComponent.ContactPairs.Clear();
+            var previousContacts = collisionComponent.Result.Contacts.Select(item => item.Copy()).ToArray();
+
+            collisionComponent.Result.Contacts.Clear();
             collisionComponent.Broadphase.Solve(
                 QueryStaticGrid,
                 TestNarrowPhaseDynamic,
-                collisionComponent.ContactPairs,
+                collisionComponent.Result,
                 context.Dt);
+
+            var contactsStarted = collisionComponent.Result.Contacts.Except(previousContacts);
+            var contactsEnded = previousContacts.Except(collisionComponent.Result.Contacts);
+
+            foreach (var contact in contactsStarted)
+            {
+                eventsMan.Raise(null, new ContactStartedEvent(
+                    contact.ItemIdA,
+                    contact.FixtureA.Id,
+                    contact.ItemIdB,
+                    contact.FixtureB.Id));
+                eventsMan.Raise(null, new ContactStartedEvent(
+                    contact.ItemIdB,
+                    contact.FixtureB.Id,
+                    contact.ItemIdA,
+                    contact.FixtureA.Id));
+
+                //Console.WriteLine($"Contact {contact.ItemIdA} <=> {contact.ItemIdB} started.");
+            }
+
+            foreach (var contact in contactsEnded)
+            {
+                eventsMan.Raise(null, new ContactEndedEvent(
+                    contact.ItemIdA,
+                    contact.FixtureA.Id,
+                    contact.ItemIdB,
+                    contact.FixtureB.Id));
+                eventsMan.Raise(null, new ContactEndedEvent(
+                    contact.ItemIdB,
+                    contact.FixtureB.Id,
+                    contact.ItemIdA,
+                    contact.FixtureA.Id));
+
+                //Console.WriteLine($"Contact {contact.ItemIdA} <=> {contact.ItemIdB} ended.");
+            }
         }
 
         #endregion Public Methods
@@ -78,7 +121,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             return shape.GetAabb().Translated(pos.Value);
         }
 
-        private void QueryStaticGrid(IBroadphase grid, BroadphaseItem cell, List<ContactPair> contactPairs, float dt)
+        private void QueryStaticGrid(IBroadphase grid, BroadphaseItem cell, BroadphaseResult result, float dt)
         {
             var dynamicAabb = cell.Aabb;
 
@@ -104,7 +147,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
                 if (contacts is not null)
                 {
-                    contactPairs.Add(new ContactPair(entity.Id, staticEntity.Id, contacts));
+                    result.Contacts.AddRange(contacts);
                 }
             }
         }
@@ -123,9 +166,9 @@ namespace OpenBreed.Wecs.Systems.Physics
         }
 
         private void TestNarrowPhaseDynamic(
-                            BroadphaseItem nextCollider,
+            BroadphaseItem nextCollider,
             BroadphaseItem currentCollider,
-            List<ContactPair> result,
+            BroadphaseResult result,
             float dt)
         {
             var entityA = entityMan.GetById(nextCollider.ItemId);
@@ -133,7 +176,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             if (TestVsDynamic(entityA, entityB, dt, out List<OpenBreed.Physics.Interface.Managers.CollisionContact> contacts))
             {
-                result.Add(new ContactPair(nextCollider.ItemId, currentCollider.ItemId, contacts));
+                result.Contacts.AddRange(contacts);
                 collisionMan.Resolve(entityA, entityB, dt, contacts);
             }
         }
@@ -180,7 +223,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                     var shapeB = fixtureB.Shape;
 
                     if (collisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
-                        contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(fixtureA, fixtureB, projection));
+                        contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(entityA.Id, entityB.Id, fixtureA, fixtureB, projection));
                 }
             }
 
@@ -218,7 +261,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                     var shapeB = fixtureB.Shape;
 
                     if (collisionChecker.Check(posA.Value, shapeA, posB.Value, shapeB, out Vector2 projection))
-                        contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(fixtureA, fixtureB, projection));
+                        contacts.Add(new OpenBreed.Physics.Interface.Managers.CollisionContact(dynamicEntity.Id, staticEntity.Id, fixtureA, fixtureB, projection));
                 }
             }
 

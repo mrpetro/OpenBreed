@@ -96,9 +96,9 @@ namespace OpenBreed.Physics.Generic.Managers
         }
 
         public void Solve(
-            Action<IBroadphase, BroadphaseItem, List<ContactPair>, float> staticPhase,
-            Action<BroadphaseItem, BroadphaseItem, List<ContactPair>, float> narrowPhase,
-            List<ContactPair> result,
+            Action<IBroadphase, BroadphaseItem, BroadphaseResult, float> staticPhase,
+            Action<BroadphaseItem, BroadphaseItem, BroadphaseResult, float> narrowPhase,
+            BroadphaseResult result,
             float dt)
         {
             var xActiveList = new List<BroadphaseItem>();

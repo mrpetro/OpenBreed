@@ -6,6 +6,24 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Events
 {
+    public abstract class EntitiesEvent : EventArgs
+    {
+        #region Protected Constructors
+
+        protected EntitiesEvent(int[] entityIds)
+        {
+            EntityIds = entityIds;
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Properties
+
+        public int[] EntityIds { get; }
+
+        #endregion Public Properties
+    }
+
     public abstract class EntityEvent : EventArgs
     {
         #region Protected Constructors

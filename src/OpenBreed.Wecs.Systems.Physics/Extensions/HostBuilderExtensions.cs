@@ -41,6 +41,7 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
                 sp.GetService<IEventsMan>()));
             systemFactory.RegisterSystem<DynamicBodiesCollisionCheckSystem>(() => new DynamicBodiesCollisionCheckSystem(
                 sp.GetService<IEntityMan>(),
+                sp.GetService<IEventsMan>(),
                 sp.GetService<IShapeMan>(),
                 sp.GetService<ICollisionMan<IEntity>>(),
                 sp.GetService<ICollisionChecker>()));

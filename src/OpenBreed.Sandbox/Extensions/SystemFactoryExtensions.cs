@@ -2,6 +2,7 @@
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Managers;
@@ -58,6 +59,20 @@ namespace OpenBreed.Sandbox.Extensions
             systemFactory.RegisterSystem<ItemPickupSystem>(() => new ItemPickupSystem(
                 sp.GetService<IEventsMan>(),
                 sp.GetService<IEntityMan>()));
+
+            systemFactory.RegisterSystem<TurretTrackingSystem>(() => new TurretTrackingSystem(
+                sp.GetService<IWorldMan>(),
+                sp.GetService<IEntityMan>()));
+
+            systemFactory.RegisterSystem<TurretTrackLockingSystem>(() => new TurretTrackLockingSystem(
+                sp.GetService<IEventsMan>(),
+                sp.GetService<IEntityMan>(),
+                sp.GetService<IFixtureMan>()));
+
+            systemFactory.RegisterSystem<TurretTrackUnlockingSystem>(() => new TurretTrackUnlockingSystem(
+                sp.GetService<IEventsMan>(),
+                sp.GetService<IEntityMan>(),
+                sp.GetService<IFixtureMan>()));
         }
 
         #endregion Public Methods

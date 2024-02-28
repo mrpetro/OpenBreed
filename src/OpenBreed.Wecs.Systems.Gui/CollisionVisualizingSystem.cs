@@ -79,9 +79,9 @@ namespace OpenBreed.Wecs.Systems.Gui
                 DrawDynamics(collisionComponent.Broadphase, context.ViewBox);
                 DrawStatics(collisionComponent.Broadphase, context.ViewBox);
 
-                if (collisionComponent.ContactPairs.Any())
+                if (collisionComponent.Result.Contacts.Any())
                 {
-                    DrawContacts(collisionComponent.ContactPairs);
+                    DrawContacts(collisionComponent.Result.Contacts);
                 }
             }
             finally
@@ -94,42 +94,34 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Private Methods
 
-        private void DrawContacts(List<ContactPair> contactPairs)
+        private void DrawContacts(List<CollisionContact> contacts)
         {
-            for (int i = 0; i < contactPairs.Count; i++)
+            for (int i = 0; i < contacts.Count; i++)
             {
-                DrawContact(contactPairs[i]);
+                DrawContact(contacts[i]);
             }
         }
 
-        private void DrawContact(ContactPair contactPair)
+        private void DrawContact(CollisionContact contact)
         {
-            var entityA = entityMan.GetById(contactPair.ItemA);
+            var entityA = entityMan.GetById(contact.ItemIdA);
             var posA = entityA.Get<PositionComponent>().Value;
 
-            var entityB = entityMan.GetById(contactPair.ItemB);
+            var entityB = entityMan.GetById(contact.ItemIdB);
             var posB = entityB.Get<PositionComponent>().Value;
 
 
             primitiveRenderer.PushMatrix();
             primitiveRenderer.Translate(new Vector3(posA));
 
-            for (int i = 0; i < contactPair.Contacts.Count; i++)
-            {
-                var contact = contactPair.Contacts[i];
-                RenderShape(contact.FixtureA.Shape, new Color4(255,0,0,80));
-            }
+            RenderShape(contact.FixtureA.Shape, new Color4(255,0,0,80));
 
             primitiveRenderer.PopMatrix();
             primitiveRenderer.PushMatrix();
 
             primitiveRenderer.Translate(new Vector3(posB));
 
-            for (int i = 0; i < contactPair.Contacts.Count; i++)
-            {
-                var contact = contactPair.Contacts[i];
-                RenderShape(contact.FixtureB.Shape, new Color4(255, 0, 0, 80));
-            }
+            RenderShape(contact.FixtureB.Shape, new Color4(255, 0, 0, 80));
 
             primitiveRenderer.PopMatrix();
         }
