@@ -26,22 +26,6 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
             }
         }
 
-        public static void OnEntityControlFireChanged(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, ControlFireChangedEventArgs> action, bool singleTime = false)
-        {
-            triggerMan.EventsMan.Subscribe<ControlFireChangedEventArgs>(ConditionalAction);
-
-            void ConditionalAction(object sender, ControlFireChangedEventArgs args)
-            {
-                if (!Equals(entity, sender))
-                    return;
-
-                if (singleTime)
-                    triggerMan.EventsMan.Unsubscribe<ControlFireChangedEventArgs>(ConditionalAction);
-
-                action.Invoke(entity, args);
-            }
-        }
-
         public static void OnEntityFollow(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EntityFollowEvent> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<EntityFollowEvent>(

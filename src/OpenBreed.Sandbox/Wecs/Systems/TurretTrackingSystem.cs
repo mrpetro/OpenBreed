@@ -96,6 +96,8 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             }
 
             tc.EntityId = e.ContactedEntityId;
+
+
         }
     }
 

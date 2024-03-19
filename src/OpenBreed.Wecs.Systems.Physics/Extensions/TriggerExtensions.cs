@@ -12,23 +12,30 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 {
     public static class TriggerExtensions
     {
+        public static void OnEntityDirectionSet(
+            this ITriggerMan triggerMan,
+            IEntity entity,
+            Action<IEntity, DirectionSetEvent> action,
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
+
+
         public static void OnEntityDirectionChanged(
             this ITriggerMan triggerMan,
             IEntity entity,
             Action<IEntity, DirectionChangedEvent> action,
-            bool singleTime = false) => triggerMan.OnEventEx(entity, action, singleTime);
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
 
         public static void OnEntityPositionChanged(
             this ITriggerMan triggerMan,
             IEntity entity,
             Action<IEntity, PositionChangedEvent> action,
-            bool singleTime = false) => triggerMan.OnEventEx(entity, action, singleTime);
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
 
 
         public static void OnEntityVelocityChanged(
             this ITriggerMan triggerMan,
             IEntity entity,
             Action<IEntity, VelocityChangedEvent> action,
-            bool singleTime = false) => triggerMan.OnEventEx(entity, action, singleTime);
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
     }
 }

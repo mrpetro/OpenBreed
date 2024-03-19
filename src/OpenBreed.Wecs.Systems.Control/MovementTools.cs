@@ -54,11 +54,19 @@ namespace OpenBreed.Wecs.Systems.Control
 
         public static float SnapToCompass16Degree(float x, float y)
         {
-            int index = (((int)Math.Round(Math.Atan2(y, -x) / (2 * Math.PI / 16))) + 16) % 16;
+            int index = (((int)Math.Round(Math.Atan2(y, x) / (2 * Math.PI / 16))) + 16) % 16;
             return compass16Degrees[index];
         }
 
         public static float SnapToCompass16Degree(Vector2 direction) => SnapToCompass16Degree(direction.X, direction.Y);
+
+        public static Vector2 SnapToCompass16Way(float x, float y)
+        {
+            var degree = SnapToCompass16Degree(x, y);
+            return FromDegreeAngle(degree);
+        }
+
+        public static Vector2 SnapToCompass16Way(Vector2 direction) => SnapToCompass16Way(direction.X, direction.Y);
 
         public static float SnapToCompass8Degree(float x, float y)
         {
@@ -77,5 +85,14 @@ namespace OpenBreed.Wecs.Systems.Control
         public static Vector2 SnapToCompass8Way(Vector2 direction) => SnapToCompass8Way(direction.X, direction.Y);
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private static Vector2 FromDegreeAngle(float angle)
+        {
+            return new Vector2((float)Math.Cos(angle * Math.PI / 180f), (float)Math.Sin(angle * Math.PI / 180f));
+        }
+
+        #endregion Private Methods
     }
 }

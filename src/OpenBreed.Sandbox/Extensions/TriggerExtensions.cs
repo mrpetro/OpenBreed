@@ -27,30 +27,24 @@ namespace OpenBreed.Sandbox.Extensions
             this ITriggerMan triggerMan,
             IEntity entity,
             Action<IEntity, LivesChangedEvent> action,
-            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
 
         public static void OnDestroyed(
             this ITriggerMan triggerMan,
             IEntity entity,
             Action<IEntity, DestroyedEvent> action,
-            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
 
         public static void OnDamaged(
             this ITriggerMan triggerMan,
             IEntity entity,
             Action<IEntity, DamagedEvent> action,
-            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
 
         public static void OnInventoryChanged(
             this ITriggerMan triggerMan,
             IEntity entity,
             Action<IEntity, InventoryChangedEvent> action,
-            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
-
-        public static void AnyKeyPressed(
-            this ITriggerMan triggerMan,
-            IEntity entity,
-            Action<IEntity, ControlFireChangedEventArgs> action,
-            bool singleTime = false) => triggerMan.OnEvent(entity, action, singleTime);
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
     }
 }

@@ -16,6 +16,6 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             this ITriggerMan triggerMan,
             IEntity entity,
             Action<IEntity, ViewportResizedEvent> action,
-            bool singleTime = false) => triggerMan.OnEventEx(entity, action, singleTime);
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
     }
 }

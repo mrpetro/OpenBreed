@@ -45,16 +45,16 @@ namespace OpenBreed.Wecs.Systems.Physics
             var angularPos = entity.Get<AngularPositionComponent>();
             var angularVel = entity.Get<AngularPositionTargetComponent>();
 
-            //Velocity equation
-            //var newVel = angularVel.Value + angularThrust.Value * dt;
-
             var aPos = angularPos.Value;
             var dPos = angularVel.Value;
 
             var newPos = aPos.RotateTowards(dPos, (float)Math.PI * 0.125f, 1.0f);
 
             if (newPos == aPos)
+            {
+                eventsMan.Raise(null, new DirectionSetEvent(entity.Id, angularPos.Value));
                 return;
+            }
 
             angularPos.Value = newPos;
             eventsMan.Raise(null, new DirectionChangedEvent(entity.Id, angularPos.Value));

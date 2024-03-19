@@ -120,6 +120,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 .SetParameter("startY", y)
                 .Build();
 
+            entity.CreateTimer("CooldownDelay");
+            entity.CreateTimer("ActionDeley");
+
             entity.Add(new TrackingComponent(-1));
 
             worldMan.RequestAddEntity(entity, world.Id);

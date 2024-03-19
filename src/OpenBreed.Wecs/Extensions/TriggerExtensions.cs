@@ -61,7 +61,7 @@ namespace OpenBreed.Wecs.Extensions
                 singleTime);
         }
 
-        public static void OnEventEx<TEvent>(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TEvent> action, bool singleTime = false) where TEvent : EntityEvent
+        public static void OnEntityEvent<TEvent>(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TEvent> action, bool singleTime = false) where TEvent : EntityEvent
         {
             triggerMan.CreateTrigger<TEvent>(
                 (args) => Equals(entity.Id, args.EntityId),
@@ -69,21 +69,6 @@ namespace OpenBreed.Wecs.Extensions
                 singleTime);
         }
 
-        public static void OnEvent<TEvent>(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TEvent> action, bool singleTime = false) where TEvent : EventArgs
-        {
-            triggerMan.EventsMan.Subscribe<TEvent>(ConditionalAction);
-
-            void ConditionalAction(object sender, TEvent args)
-            {
-                if (!Equals(entity, sender))
-                    return;
-
-                if (singleTime)
-                    triggerMan.EventsMan.Unsubscribe<TEvent>(ConditionalAction);
-
-                action.Invoke(entity, args);
-            }
-        }
         public static void OnWorldInitialized(this ITriggerMan triggerMan, IWorld world, Action action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<WorldInitializedEventArgs>(
