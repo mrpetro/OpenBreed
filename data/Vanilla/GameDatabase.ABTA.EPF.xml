@@ -187,6 +187,7 @@
 				<FileDataSource Id="Extension/Scripts/Common/Mission.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Mission.lua" />
 				<FileDataSource Id="Extension/Scripts/L1/MAP.01.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.lua" />
 				<FileDataSource Id="Extension/Scripts/L1/Turret.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\Turret.lua" />
+				<FileDataSource Id="Extension/Scripts/L1/TurretLazer.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\TurretLazer.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/LandMine.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMine.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Door.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Door.lua" />
 				<FileDataSource Id="Extension/Scripts/Common/Item.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Item.lua" />
@@ -1084,6 +1085,9 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.L1.Turret.lua" DataSourceRef="Extension/Scripts/L1/Turret.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Scripts.L1.TurretLazer.lua" DataSourceRef="Extension/Scripts/L1/TurretLazer.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Common.Mission.lua" DataSourceRef="Extension/Scripts/Common/Mission.lua" FormatType="TEXT">
@@ -12087,7 +12091,10 @@
 				</ScriptFromFile>
 				<ScriptFromFile Id="Vanilla/L1/Turret">
 					<DataRef>Assets.Scripts.L1.Turret.lua</DataRef>
-				</ScriptFromFile>		
+				</ScriptFromFile>
+				<ScriptFromFile Id="Vanilla/L1/TurretLazer">
+					<DataRef>Assets.Scripts.L1.TurretLazer.lua</DataRef>
+				</ScriptFromFile>	
 				<ScriptFromFile Id="Vanilla/Common/Mission">
 					<DataRef>Assets.Scripts.Common.Mission.lua</DataRef>
 				</ScriptFromFile>
@@ -12180,7 +12187,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="12" />
+								<Frame Time="0.0" Value="4" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12199,7 +12206,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="11" />
+								<Frame Time="0.0" Value="5" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12218,7 +12225,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="10" />
+								<Frame Time="0.0" Value="6" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12237,7 +12244,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="9" />
+								<Frame Time="0.0" Value="7" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12275,7 +12282,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="7" />
+								<Frame Time="0.0" Value="9" />
 
 							</Frames>
 						</IntTrack>
@@ -12295,7 +12302,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="6" />
+								<Frame Time="0.0" Value="10" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12314,7 +12321,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="5" />
+								<Frame Time="0.0" Value="11" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12333,7 +12340,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="4" />
+								<Frame Time="0.0" Value="12" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12352,7 +12359,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="3" />
+								<Frame Time="0.0" Value="13" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12371,7 +12378,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="2" />
+								<Frame Time="0.0" Value="14" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12390,7 +12397,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="1" />
+								<Frame Time="0.0" Value="15" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12428,7 +12435,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="15" />
+								<Frame Time="0.0" Value="1" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12447,7 +12454,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="14" />
+								<Frame Time="0.0" Value="2" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12466,7 +12473,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="13" />
+								<Frame Time="0.0" Value="3" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -12588,7 +12595,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.AtlasId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="Vanilla/Common/Hero/1" />
+								<Frame Time="0.0" Value="Vanilla/L1/B" />
 							</Frames>
 						</StringTrack>
 					</Tracks>
@@ -14271,7 +14278,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="83" />
+								<Frame Time="0.0" Value="75" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14290,7 +14297,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="84" />
+								<Frame Time="0.0" Value="74" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14309,7 +14316,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="85" />
+								<Frame Time="0.0" Value="73" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14328,7 +14335,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="86" />
+								<Frame Time="0.0" Value="72" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14366,7 +14373,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="72" />
+								<Frame Time="0.0" Value="86" />
 
 							</Frames>
 						</IntTrack>
@@ -14386,7 +14393,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="73" />
+								<Frame Time="0.0" Value="85" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14405,7 +14412,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="74" />
+								<Frame Time="0.0" Value="84" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14424,7 +14431,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="75" />
+								<Frame Time="0.0" Value="83" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14443,7 +14450,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="76" />
+								<Frame Time="0.0" Value="82" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14462,7 +14469,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="77" />
+								<Frame Time="0.0" Value="81" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14481,7 +14488,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="78" />
+								<Frame Time="0.0" Value="80" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14519,7 +14526,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="80" />
+								<Frame Time="0.0" Value="78" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14538,7 +14545,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="81" />
+								<Frame Time="0.0" Value="77" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>
@@ -14557,7 +14564,7 @@
 							<Interpolation>None</Interpolation>
 							<Controller>Sprite.ImageId</Controller>
 							<Frames>
-								<Frame Time="0.0" Value="82" />
+								<Frame Time="0.0" Value="76" />
 							</Frames>
 						</IntTrack>
 						<StringTrack>

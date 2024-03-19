@@ -1,6 +1,11 @@
 ﻿-- In 2 player game, turret locks on first player spotted and stays locked utill loosing sight.
 
+local cooldownTimerId
+local delayTimerId
 local previousDegree = 0
+local speedFactor = 30
+local fireRate = 3
+local fireReady = true
 
 local function Explode(entity)
     
@@ -14,6 +19,38 @@ local function Explode(entity)
     Worlds:RequestRemoveEntity(entity)
 	Entities:RequestErase(entity)
 		
+end
+
+local function CooldownFinish(entity, args)
+    fireReady = true
+end
+
+local function FireBullet(entity)
+
+    if(not(fireReady))
+    then
+        return
+    end
+
+    
+    local pos = entity:GetPosition()
+    local dir = MovementTools.SnapToCompass16Way(entity:GetDirection())
+
+    pos = pos + dir * 16
+    local thrust = dir * speedFactor
+
+    local emitter = entity:StartEmit("ABTA\\Templates\\L1\\TurretLazer")
+        :SetOption("startX", pos.X)
+        :SetOption("startY", pos.Y)
+        :SetOption("thrustX", thrust.X)
+        :SetOption("thrustY", thrust.Y)
+        :Finish()
+
+	Logging:Info("TURRET.FIRE" )
+
+    fireReady = false
+
+	Triggers:AfterDelay(entity, cooldownTimerId, TimeSpan.FromMilliseconds(1000 / fireRate), CooldownFinish)
 end
 
 local function OnDirectionChanged(entity, args)
@@ -37,10 +74,18 @@ local function OnDirectionChanged(entity, args)
 		entity:PlayAnimation(0, clip.Id)
 		
 		previousDegree = degree
+		
+		
+		FireBullet(entity)
+		
     end
 end
 
 local function OnInit(entity)
+
+    cooldownTimerId = entity:GetTimerId("CooldownDelay")
+    delayTimerId = entity:GetTimerId("ActionDeley")
+
 
     Triggers:OnEntityDirectionChanged(
         entity,
