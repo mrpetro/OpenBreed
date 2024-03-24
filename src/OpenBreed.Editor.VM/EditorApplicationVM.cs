@@ -68,6 +68,8 @@ namespace OpenBreed.Editor.VM
 
         #region Public Properties
 
+        public Command ExitCommand => new Command(() => TryExit());
+
         public BindingList<MenuItemVM> MenuItems { get; }
 
         public Action<LoggerVM, bool> ToggleLoggerAction { get; set; }

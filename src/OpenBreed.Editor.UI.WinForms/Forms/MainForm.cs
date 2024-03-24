@@ -3,6 +3,7 @@ using OpenBreed.Common.UI.WinForms.Controls;
 using OpenBreed.Editor.UI.WinForms.Forms.States;
 using OpenBreed.Editor.UI.WinForms.Views;
 using OpenBreed.Editor.VM;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Logging;
 using System;
 using System.ComponentModel;

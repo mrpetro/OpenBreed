@@ -3,6 +3,7 @@ using OpenBreed.Common.Tools.Sounds;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Editor.VM.Base;
 using System.Media;
+using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
@@ -62,11 +63,15 @@ namespace OpenBreed.Editor.VM.Sounds
         public SoundFromPcmEditorVM(SoundsDataProvider soundsDataProvider)
         {
             this.soundsDataProvider = soundsDataProvider;
+
+            PlayCommand = new Command(() => Play());
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public ICommand PlayCommand { get; }
 
         public int BitsPerSample
         {

@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+	<Reference Include="C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.0\WindowsFormsIntegration.dll"  />
     <PackageReference Include="DockPanelSuite" Version="3.1.0" />
     <PackageReference Include="DockPanelSuite.ThemeVS2015" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
@@ -22,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.UI.WinForms\OpenBreed.Common.UI.WinForms.csproj" />
+    <ProjectReference Include="..\OpenBreed.Editor.UI.Wpf\OpenBreed.Editor.UI.Wpf.csproj" />
     <ProjectReference Include="..\OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj" />
   </ItemGroup>
 

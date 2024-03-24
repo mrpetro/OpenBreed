@@ -4,6 +4,7 @@ using OpenBreed.Editor.VM.Sounds;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
 {
@@ -63,10 +64,15 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
 
             if (subeditor is SoundFromPcmEditorVM)
             {
-                var control = new SoundFromPcmEditorCtrl();
-                control.Initialize((SoundFromPcmEditorVM)vm.Subeditor);
-                control.Dock = DockStyle.Fill;
-                Panel.Controls.Add(control);
+
+                var ctrlHost = new ElementHost();
+                ctrlHost.Dock = DockStyle.Fill;
+
+                var control = new Wpf.Sounds.SoundFromPcmEditorCtrl();
+                control.DataContext = (SoundFromPcmEditorVM)vm.Subeditor;
+                ctrlHost.Child = control;
+                //control.Initialize((SoundFromPcmEditorVM)vm.Subeditor);
+                Panel.Controls.Add(ctrlHost);
             }
         }
 
