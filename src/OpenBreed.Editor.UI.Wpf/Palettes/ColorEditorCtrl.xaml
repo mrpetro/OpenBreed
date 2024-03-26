@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="OpenBreed.Editor.UI.Wpf.Palettes.ColorEditorCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.Palettes" 
+             xmlns:converters="clr-namespace:OpenBreed.Editor.UI.Wpf.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="423">
+    <UserControl.Resources>
+        <converters:ColorToBrushConverter x:Key="colorToBrushConverter"/>
+    </UserControl.Resources>
+    <Grid Height="80">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="21"/>
+            <RowDefinition Height="21"/>
+            <RowDefinition Height="21"/>        
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="47"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" 
+            Content="{Binding CurrentColorIndex}" FontSize="12" Padding="0,0,0,0" VerticalAlignment="Center"
+            Background="{Binding CurrentColor, Converter={StaticResource colorToBrushConverter}}" Foreground="{Binding CurrentColorNegative, Converter={StaticResource colorToBrushConverter}}"/>
+        <Label Grid.Row="1" Grid.Column="0"
+            Content="R" FontSize="12" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Grid.Row="2" Grid.Column="0"
+            Content="G" FontSize="12" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Grid.Row="3" Grid.Column="0"
+            Content="B" FontSize="12" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Slider Grid.Row="1" Grid.Column="1" Grid.RowSpan="1"
+                Value="{Binding Path=CurrentColorEx.R, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" />
+        <Slider Grid.Row="2" Grid.Column="1" Grid.RowSpan="1"
+                Value="{Binding Path=CurrentColorEx.G, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" />
+        <Slider Grid.Row="3" Grid.Column="1" Grid.RowSpan="1"
+                Value="{Binding Path=CurrentColorEx.B, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" />
+        <TextBox Grid.Row="1" Grid.Column="2" Grid.RowSpan="1"
+                 Text="{Binding Path=CurrentColorEx.R, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Row="2" Grid.Column="2" Grid.RowSpan="1"
+                 Text="{Binding Path=CurrentColorEx.G, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Row="3" Grid.Column="2" Grid.RowSpan="1"
+                 Text="{Binding Path=CurrentColorEx.B, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    </Grid>
+</UserControl>

@@ -41,8 +41,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
                 case nameof(vm.CurrentColorIndex):
                     Invalidate();
                     break;
-                case nameof(vm.CurrentColor):
-                    Invalidate();
+                //case nameof(vm.CurrentColor):
+                //    Invalidate();
                     break;
                 case nameof(vm.Colors):
                     Invalidate();

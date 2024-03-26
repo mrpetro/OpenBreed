@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Palettes;
+using OpenBreed.Editor.UI.WinForms.Helpers;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 {
@@ -36,7 +37,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
-            ColorEditor.Initialize(_vm);
+            var colorEditor = WpfHelper.CreateWpfControl<Wpf.Palettes.ColorEditorCtrl>(_vm);
+            colorEditor.Dock = DockStyle.Top;
+            grpPalette.Controls.Add(colorEditor);
+
             ColorSelector.Initialize(_vm);
 
             tbxBinaryDataRef.DataBindings.Add(nameof(tbxBinaryDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);

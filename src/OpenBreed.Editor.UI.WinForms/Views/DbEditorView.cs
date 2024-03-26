@@ -79,7 +79,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
 
-            _viewFactory.Register<SoundEditorVM, EntryEditorView<SoundEditorCtrl>>();
+            _viewFactory.Register<PcmSoundEditorVM, EntryEditorView<SoundEditorCtrl>>();
             _viewFactory.Register<TileSetEditorVM, EntryEditorView<TileSetEditorCtrl>>();
             _viewFactory.Register<SpriteSetEditorVM, EntryEditorView<SpriteSetEditorCtrl>>();
             _viewFactory.Register<ActionSetEditorVM, EntryEditorView<ActionSetEditorCtrl>>();

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM.Palettes;
+using OpenBreed.Editor.UI.WinForms.Helpers;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 {
@@ -35,7 +36,11 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
-            ColorEditor.Initialize(_vm);
+            var colorEditor = WpfHelper.CreateWpfControl<Wpf.Palettes.ColorEditorCtrl>(_vm);
+            colorEditor.Dock = DockStyle.Top;
+            grpPalette.Controls.Add(colorEditor);
+
+            //ColorEditor.Initialize(_vm);
             ColorSelector.Initialize(_vm);
 
             tbxMapDataRef.DataBindings.Add(nameof(tbxMapDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);
@@ -43,7 +48,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             cbxMapBlockName.DataSource = _vm.BlockNames;
             cbxMapBlockName.DataBindings.Add(nameof(cbxMapBlockName.Text), _vm, nameof(_vm.BlockName), false, DataSourceUpdateMode.OnPropertyChanged);
 
-            ColorEditor.DataBindings.Add(nameof(ColorEditor.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
+            colorEditor.DataBindings.Add(nameof(colorEditor.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
             ColorSelector.DataBindings.Add(nameof(ColorSelector.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
 
 

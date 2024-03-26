@@ -41,6 +41,7 @@ using OpenBreed.Database.Xml.Repositories;
 using OpenBreed.Database.Xml.Tables;
 using OpenBreed.Database.EFCore;
 using OpenBreed.Database.EFCore.Extensions;
+using OpenBreed.Editor.UI.WinForms.Extensions;
 
 namespace OpenBreed.Editor.UI.WinForms
 {
@@ -64,6 +65,8 @@ namespace OpenBreed.Editor.UI.WinForms
             builder.SetupABFormats();
             builder.SetupDataProviders();
             builder.SetupModelProvider();
+
+            builder.ConfigurePcmPlayer();
 
             builder.ConfigureServices((hostContext, services) =>
                  {

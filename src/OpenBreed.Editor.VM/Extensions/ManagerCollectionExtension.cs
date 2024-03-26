@@ -111,10 +111,6 @@ namespace OpenBreed.Editor.VM.Extensions
                         sp.GetService<TextsDataProvider>(),                                                                                          
                         sp.GetService<IModelsProvider>()));
 
-                services.AddTransient<IEntryEditor<IDbSound>, SoundFromPcmEditorVM>(
-                    (sp) => new SoundFromPcmEditorVM(
-                        sp.GetService<SoundsDataProvider>()));
-
                 services.AddTransient<IEntryEditor<IDbScriptEmbedded>, ScriptEmbeddedEditorVM>(
                     (sp) => new ScriptEmbeddedEditorVM(
                         sp.GetService<ScriptsDataProvider>()));
@@ -196,11 +192,7 @@ namespace OpenBreed.Editor.VM.Extensions
                         sp.GetService<DbEntrySubEditorFactory>(),
                         sp.GetService<IWorkspaceMan>(),
                         sp.GetService<IDialogProvider>()));
-                services.AddTransient<SoundEditorVM>(
-                    (sp) => new SoundEditorVM(
-                        sp.GetService<DbEntrySubEditorFactory>(),                                                            
-                        sp.GetService<IWorkspaceMan>(),                                                            
-                        sp.GetService<IDialogProvider>()));
+                services.AddTransient<PcmSoundEditorVM>();
                 services.AddTransient<MapEditorVM>(
                     (sp) => new MapEditorVM(
                         sp.GetService<IWorkspaceMan>(),                                                        
@@ -232,7 +224,7 @@ namespace OpenBreed.Editor.VM.Extensions
                     entryEditorFactory.Register<IRepository<IDbScript>, ScriptEditorVM>();
                     entryEditorFactory.Register<IRepository<IDbEntityTemplate>, EntityTemplateEditorVM>();
                     entryEditorFactory.Register<IRepository<IDbImage>, ImageEditorVM>();
-                    entryEditorFactory.Register<IRepository<IDbSound>, SoundEditorVM>();
+                    entryEditorFactory.Register<IRepository<IDbSound>, PcmSoundEditorVM>();
                     entryEditorFactory.Register<IRepository<IDbMap>, MapEditorVM>();
                     entryEditorFactory.Register<IRepository<IDbDataSource>, DataSourceEditorVM>();
                     return entryEditorFactory;

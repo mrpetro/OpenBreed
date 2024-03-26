@@ -31,7 +31,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
         private void InitializeComponent()
         {
             this.ColorSelector = new OpenBreed.Editor.UI.WinForms.Controls.Palettes.ColorSelectorCtrl();
-            this.ColorEditor = new OpenBreed.Editor.UI.WinForms.Controls.Palettes.ColorEditorCtrl();
             this.SuspendLayout();
             // 
             // ColorSelector
@@ -44,21 +43,11 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
             this.ColorSelector.Size = new System.Drawing.Size(543, 91);
             this.ColorSelector.TabIndex = 12;
             // 
-            // ColorEditor
-            // 
-            this.ColorEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ColorEditor.Location = new System.Drawing.Point(3, 3);
-            this.ColorEditor.Name = "ColorEditor";
-            this.ColorEditor.Size = new System.Drawing.Size(543, 100);
-            this.ColorEditor.TabIndex = 11;
-            // 
             // PaletteCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ColorSelector);
-            this.Controls.Add(this.ColorEditor);
             this.Name = "PaletteCtrl";
             this.Size = new System.Drawing.Size(549, 203);
             this.ResumeLayout(false);
@@ -68,6 +57,5 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
         #endregion
 
         private ColorSelectorCtrl ColorSelector;
-        private OpenBreed.Editor.UI.WinForms.Controls.Palettes.ColorEditorCtrl ColorEditor;
     }
 }

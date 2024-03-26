@@ -28,123 +28,121 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDataRefBrowser = new System.Windows.Forms.Button();
-            this.tbxMapDataRef = new System.Windows.Forms.TextBox();
-            this.cbxMapBlockName = new System.Windows.Forms.ComboBox();
-            this.grpPaletteFromMapSelection = new System.Windows.Forms.GroupBox();
-            this.lblMapBlockName = new System.Windows.Forms.Label();
-            this.lblMapDataRef = new System.Windows.Forms.Label();
-            this.ColorSelector = new OpenBreed.Editor.UI.WinForms.Controls.Palettes.ColorSelectorCtrl();
-            this.ColorEditor = new OpenBreed.Editor.UI.WinForms.Controls.Palettes.ColorEditorCtrl();
-            this.grpPalette = new System.Windows.Forms.GroupBox();
-            this.grpPaletteFromMapSelection.SuspendLayout();
-            this.grpPalette.SuspendLayout();
-            this.SuspendLayout();
+            btnDataRefBrowser = new System.Windows.Forms.Button();
+            tbxMapDataRef = new System.Windows.Forms.TextBox();
+            cbxMapBlockName = new System.Windows.Forms.ComboBox();
+            grpPaletteFromMapSelection = new System.Windows.Forms.GroupBox();
+            lblMapBlockName = new System.Windows.Forms.Label();
+            lblMapDataRef = new System.Windows.Forms.Label();
+            ColorSelector = new ColorSelectorCtrl();
+            grpPalette = new System.Windows.Forms.GroupBox();
+            grpPaletteFromMapSelection.SuspendLayout();
+            grpPalette.SuspendLayout();
+            SuspendLayout();
             // 
             // btnDataRefBrowser
             // 
-            this.btnDataRefBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDataRefBrowser.Location = new System.Drawing.Point(608, 19);
-            this.btnDataRefBrowser.Name = "btnDataRefBrowser";
-            this.btnDataRefBrowser.Size = new System.Drawing.Size(26, 20);
-            this.btnDataRefBrowser.TabIndex = 0;
-            this.btnDataRefBrowser.Text = "...";
-            this.btnDataRefBrowser.UseVisualStyleBackColor = true;
+            btnDataRefBrowser.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnDataRefBrowser.Location = new System.Drawing.Point(709, 22);
+            btnDataRefBrowser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDataRefBrowser.Name = "btnDataRefBrowser";
+            btnDataRefBrowser.Size = new System.Drawing.Size(30, 23);
+            btnDataRefBrowser.TabIndex = 0;
+            btnDataRefBrowser.Text = "...";
+            btnDataRefBrowser.UseVisualStyleBackColor = true;
             // 
             // tbxMapDataRef
             // 
-            this.tbxMapDataRef.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxMapDataRef.Location = new System.Drawing.Point(98, 19);
-            this.tbxMapDataRef.Name = "tbxMapDataRef";
-            this.tbxMapDataRef.Size = new System.Drawing.Size(504, 20);
-            this.tbxMapDataRef.TabIndex = 1;
+            tbxMapDataRef.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tbxMapDataRef.Location = new System.Drawing.Point(114, 22);
+            tbxMapDataRef.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbxMapDataRef.Name = "tbxMapDataRef";
+            tbxMapDataRef.Size = new System.Drawing.Size(587, 23);
+            tbxMapDataRef.TabIndex = 1;
             // 
             // cbxMapBlockName
             // 
-            this.cbxMapBlockName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxMapBlockName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxMapBlockName.FormattingEnabled = true;
-            this.cbxMapBlockName.Location = new System.Drawing.Point(98, 53);
-            this.cbxMapBlockName.Name = "cbxMapBlockName";
-            this.cbxMapBlockName.Size = new System.Drawing.Size(504, 21);
-            this.cbxMapBlockName.TabIndex = 2;
+            cbxMapBlockName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cbxMapBlockName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbxMapBlockName.FormattingEnabled = true;
+            cbxMapBlockName.Location = new System.Drawing.Point(114, 61);
+            cbxMapBlockName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cbxMapBlockName.Name = "cbxMapBlockName";
+            cbxMapBlockName.Size = new System.Drawing.Size(587, 23);
+            cbxMapBlockName.TabIndex = 2;
             // 
             // grpPaletteFromMapSelection
             // 
-            this.grpPaletteFromMapSelection.Controls.Add(this.lblMapBlockName);
-            this.grpPaletteFromMapSelection.Controls.Add(this.lblMapDataRef);
-            this.grpPaletteFromMapSelection.Controls.Add(this.cbxMapBlockName);
-            this.grpPaletteFromMapSelection.Controls.Add(this.btnDataRefBrowser);
-            this.grpPaletteFromMapSelection.Controls.Add(this.tbxMapDataRef);
-            this.grpPaletteFromMapSelection.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpPaletteFromMapSelection.Location = new System.Drawing.Point(0, 0);
-            this.grpPaletteFromMapSelection.Name = "grpPaletteFromMapSelection";
-            this.grpPaletteFromMapSelection.Size = new System.Drawing.Size(640, 82);
-            this.grpPaletteFromMapSelection.TabIndex = 3;
-            this.grpPaletteFromMapSelection.TabStop = false;
-            this.grpPaletteFromMapSelection.Text = "Source data";
+            grpPaletteFromMapSelection.Controls.Add(lblMapBlockName);
+            grpPaletteFromMapSelection.Controls.Add(lblMapDataRef);
+            grpPaletteFromMapSelection.Controls.Add(cbxMapBlockName);
+            grpPaletteFromMapSelection.Controls.Add(btnDataRefBrowser);
+            grpPaletteFromMapSelection.Controls.Add(tbxMapDataRef);
+            grpPaletteFromMapSelection.Dock = System.Windows.Forms.DockStyle.Top;
+            grpPaletteFromMapSelection.Location = new System.Drawing.Point(0, 0);
+            grpPaletteFromMapSelection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            grpPaletteFromMapSelection.Name = "grpPaletteFromMapSelection";
+            grpPaletteFromMapSelection.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            grpPaletteFromMapSelection.Size = new System.Drawing.Size(747, 95);
+            grpPaletteFromMapSelection.TabIndex = 3;
+            grpPaletteFromMapSelection.TabStop = false;
+            grpPaletteFromMapSelection.Text = "Source data";
             // 
             // lblMapBlockName
             // 
-            this.lblMapBlockName.AutoSize = true;
-            this.lblMapBlockName.Location = new System.Drawing.Point(6, 56);
-            this.lblMapBlockName.Name = "lblMapBlockName";
-            this.lblMapBlockName.Size = new System.Drawing.Size(89, 13);
-            this.lblMapBlockName.TabIndex = 4;
-            this.lblMapBlockName.Text = "Map block name:";
+            lblMapBlockName.AutoSize = true;
+            lblMapBlockName.Location = new System.Drawing.Point(7, 65);
+            lblMapBlockName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblMapBlockName.Name = "lblMapBlockName";
+            lblMapBlockName.Size = new System.Drawing.Size(99, 15);
+            lblMapBlockName.TabIndex = 4;
+            lblMapBlockName.Text = "Map block name:";
             // 
             // lblMapDataRef
             // 
-            this.lblMapDataRef.AutoSize = true;
-            this.lblMapDataRef.Location = new System.Drawing.Point(6, 23);
-            this.lblMapDataRef.Name = "lblMapDataRef";
-            this.lblMapDataRef.Size = new System.Drawing.Size(79, 13);
-            this.lblMapDataRef.TabIndex = 3;
-            this.lblMapDataRef.Text = "Map reference:";
+            lblMapDataRef.AutoSize = true;
+            lblMapDataRef.Location = new System.Drawing.Point(7, 27);
+            lblMapDataRef.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblMapDataRef.Name = "lblMapDataRef";
+            lblMapDataRef.Size = new System.Drawing.Size(86, 15);
+            lblMapDataRef.TabIndex = 3;
+            lblMapDataRef.Text = "Map reference:";
             // 
             // ColorSelector
             // 
-            this.ColorSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ColorSelector.Location = new System.Drawing.Point(3, 116);
-            this.ColorSelector.Name = "ColorSelector";
-            this.ColorSelector.Size = new System.Drawing.Size(634, 279);
-            this.ColorSelector.TabIndex = 13;
-            // 
-            // ColorEditor
-            // 
-            this.ColorEditor.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ColorEditor.Location = new System.Drawing.Point(3, 16);
-            this.ColorEditor.Name = "ColorEditor";
-            this.ColorEditor.Size = new System.Drawing.Size(634, 100);
-            this.ColorEditor.TabIndex = 14;
+            ColorSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            ColorSelector.Location = new System.Drawing.Point(4, 19);
+            ColorSelector.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            ColorSelector.Name = "ColorSelector";
+            ColorSelector.Size = new System.Drawing.Size(739, 437);
+            ColorSelector.TabIndex = 13;
             // 
             // grpPalette
             // 
-            this.grpPalette.Controls.Add(this.ColorSelector);
-            this.grpPalette.Controls.Add(this.ColorEditor);
-            this.grpPalette.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpPalette.Location = new System.Drawing.Point(0, 82);
-            this.grpPalette.Name = "grpPalette";
-            this.grpPalette.Size = new System.Drawing.Size(640, 398);
-            this.grpPalette.TabIndex = 15;
-            this.grpPalette.TabStop = false;
-            this.grpPalette.Text = "Palette";
+            grpPalette.Controls.Add(ColorSelector);
+            grpPalette.Dock = System.Windows.Forms.DockStyle.Fill;
+            grpPalette.Location = new System.Drawing.Point(0, 95);
+            grpPalette.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            grpPalette.Name = "grpPalette";
+            grpPalette.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            grpPalette.Size = new System.Drawing.Size(747, 459);
+            grpPalette.TabIndex = 15;
+            grpPalette.TabStop = false;
+            grpPalette.Text = "Palette";
             // 
             // PaletteFromMapCtrl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.grpPalette);
-            this.Controls.Add(this.grpPaletteFromMapSelection);
-            this.Name = "PaletteFromMapCtrl";
-            this.Size = new System.Drawing.Size(640, 480);
-            this.grpPaletteFromMapSelection.ResumeLayout(false);
-            this.grpPaletteFromMapSelection.PerformLayout();
-            this.grpPalette.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(grpPalette);
+            Controls.Add(grpPaletteFromMapSelection);
+            Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            Name = "PaletteFromMapCtrl";
+            Size = new System.Drawing.Size(747, 554);
+            grpPaletteFromMapSelection.ResumeLayout(false);
+            grpPaletteFromMapSelection.PerformLayout();
+            grpPalette.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -156,7 +154,6 @@
         private System.Windows.Forms.Label lblMapBlockName;
         private System.Windows.Forms.Label lblMapDataRef;
         private ColorSelectorCtrl ColorSelector;
-        private ColorEditorCtrl ColorEditor;
         private System.Windows.Forms.GroupBox grpPalette;
     }
 }

@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.Cfg", "Ope
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Common.UI.WinForms", "..\OpenBreed.Common\src\OpenBreed.Common.UI.WinForms\OpenBreed.Common.UI.WinForms.csproj", "{3840F3B5-0262-4CF4-82E8-5668D7ACECC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Editor.UI.Wpf", "OpenBreed.Editor.UI.Wpf\OpenBreed.Editor.UI.Wpf.csproj", "{A7605DF5-F8D2-4D33-84F1-69F145458CA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.UI.Wpf", "OpenBreed.Editor.UI.Wpf\OpenBreed.Editor.UI.Wpf.csproj", "{A7605DF5-F8D2-4D33-84F1-69F145458CA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common.Windows", "OpenBreed.Common.Windows\OpenBreed.Common.Windows.csproj", "{990DCB05-FCB9-432E-866E-3E52F244C945}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -395,6 +397,26 @@ Global
 		{A7605DF5-F8D2-4D33-84F1-69F145458CA1}.Release|x64.Build.0 = Release|Any CPU
 		{A7605DF5-F8D2-4D33-84F1-69F145458CA1}.Release|x86.ActiveCfg = Release|Any CPU
 		{A7605DF5-F8D2-4D33-84F1-69F145458CA1}.Release|x86.Build.0 = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|Win32.Build.0 = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|x64.Build.0 = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Debug|x86.Build.0 = Debug|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|Win32.ActiveCfg = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|Win32.Build.0 = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|x64.ActiveCfg = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|x64.Build.0 = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|x86.ActiveCfg = Release|Any CPU
+		{990DCB05-FCB9-432E-866E-3E52F244C945}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -413,6 +435,7 @@ Global
 		{CF3DFFDE-2458-46D2-ABDF-0909C2CDA6E1} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
 		{2FCC6485-0AF5-4C98-9116-5EB6AF19862E} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
 		{3840F3B5-0262-4CF4-82E8-5668D7ACECC5} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
+		{990DCB05-FCB9-432E-866E-3E52F244C945} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E7F78DD2-AA67-4DDC-824E-6BCF925446B0}
