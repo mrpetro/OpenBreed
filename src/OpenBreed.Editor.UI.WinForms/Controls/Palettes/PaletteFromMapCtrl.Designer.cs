@@ -34,7 +34,6 @@
             grpPaletteFromMapSelection = new System.Windows.Forms.GroupBox();
             lblMapBlockName = new System.Windows.Forms.Label();
             lblMapDataRef = new System.Windows.Forms.Label();
-            ColorSelector = new ColorSelectorCtrl();
             grpPalette = new System.Windows.Forms.GroupBox();
             grpPaletteFromMapSelection.SuspendLayout();
             grpPalette.SuspendLayout();
@@ -108,18 +107,8 @@
             lblMapDataRef.TabIndex = 3;
             lblMapDataRef.Text = "Map reference:";
             // 
-            // ColorSelector
-            // 
-            ColorSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            ColorSelector.Location = new System.Drawing.Point(4, 19);
-            ColorSelector.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            ColorSelector.Name = "ColorSelector";
-            ColorSelector.Size = new System.Drawing.Size(739, 437);
-            ColorSelector.TabIndex = 13;
-            // 
             // grpPalette
             // 
-            grpPalette.Controls.Add(ColorSelector);
             grpPalette.Dock = System.Windows.Forms.DockStyle.Fill;
             grpPalette.Location = new System.Drawing.Point(0, 95);
             grpPalette.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -153,7 +142,6 @@
         private System.Windows.Forms.GroupBox grpPaletteFromMapSelection;
         private System.Windows.Forms.Label lblMapBlockName;
         private System.Windows.Forms.Label lblMapDataRef;
-        private ColorSelectorCtrl ColorSelector;
         private System.Windows.Forms.GroupBox grpPalette;
     }
 }

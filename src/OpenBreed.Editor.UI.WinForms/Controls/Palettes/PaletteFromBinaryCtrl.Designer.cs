@@ -35,7 +35,6 @@
             numUpDown = new System.Windows.Forms.NumericUpDown();
             lblBinaryDataRef = new System.Windows.Forms.Label();
             grpPalette = new System.Windows.Forms.GroupBox();
-            ColorSelector = new ColorSelectorCtrl();
             grpSourceData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numUpDown).BeginInit();
             grpPalette.SuspendLayout();
@@ -108,7 +107,6 @@
             // 
             // grpPalette
             // 
-            grpPalette.Controls.Add(ColorSelector);
             grpPalette.Dock = System.Windows.Forms.DockStyle.Fill;
             grpPalette.Location = new System.Drawing.Point(0, 81);
             grpPalette.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -118,15 +116,6 @@
             grpPalette.TabIndex = 16;
             grpPalette.TabStop = false;
             grpPalette.Text = "Palette";
-            // 
-            // ColorSelector
-            // 
-            ColorSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            ColorSelector.Location = new System.Drawing.Point(4, 134);
-            ColorSelector.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            ColorSelector.Name = "ColorSelector";
-            ColorSelector.Size = new System.Drawing.Size(739, 336);
-            ColorSelector.TabIndex = 13;
             // 
             // PaletteFromBinaryCtrl
             // 
@@ -151,7 +140,6 @@
         private System.Windows.Forms.GroupBox grpSourceData;
         private System.Windows.Forms.Label lblBinaryDataRef;
         private System.Windows.Forms.GroupBox grpPalette;
-        private ColorSelectorCtrl ColorSelector;
         private System.Windows.Forms.Label lblBinaryDataStart;
         private System.Windows.Forms.NumericUpDown numUpDown;
     }

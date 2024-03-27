@@ -23,8 +23,8 @@
             <ColumnDefinition Width="47"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" 
-            Content="{Binding CurrentColorIndex}" FontSize="12" Padding="0,0,0,0" VerticalAlignment="Center"
-            Background="{Binding CurrentColor, Converter={StaticResource colorToBrushConverter}}" Foreground="{Binding CurrentColorNegative, Converter={StaticResource colorToBrushConverter}}"/>
+            Content="{Binding Index}" FontSize="12" Padding="0,0,0,0" VerticalAlignment="Center"
+            Background="{Binding Color, Converter={StaticResource colorToBrushConverter}}" Foreground="{Binding ColorNegative, Converter={StaticResource colorToBrushConverter}}"/>
         <Label Grid.Row="1" Grid.Column="0"
             Content="R" FontSize="12" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Label Grid.Row="2" Grid.Column="0"
@@ -32,16 +32,16 @@
         <Label Grid.Row="3" Grid.Column="0"
             Content="B" FontSize="12" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Slider Grid.Row="1" Grid.Column="1" Grid.RowSpan="1"
-                Value="{Binding Path=CurrentColorEx.R, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" />
+                Value="{Binding R, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" />
         <Slider Grid.Row="2" Grid.Column="1" Grid.RowSpan="1"
-                Value="{Binding Path=CurrentColorEx.G, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" />
+                Value="{Binding G, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" />
         <Slider Grid.Row="3" Grid.Column="1" Grid.RowSpan="1"
-                Value="{Binding Path=CurrentColorEx.B, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" />
+                Value="{Binding B, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" />
         <TextBox Grid.Row="1" Grid.Column="2" Grid.RowSpan="1"
-                 Text="{Binding Path=CurrentColorEx.R, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding R, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="2" Grid.Column="2" Grid.RowSpan="1"
-                 Text="{Binding Path=CurrentColorEx.G, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding G, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="3" Grid.Column="2" Grid.RowSpan="1"
-                 Text="{Binding Path=CurrentColorEx.B, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding B, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </UserControl>

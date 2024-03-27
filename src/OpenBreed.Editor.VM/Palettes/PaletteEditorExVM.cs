@@ -1,12 +1,17 @@
-﻿using OpenBreed.Common.Data;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Model.Palettes;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
@@ -14,20 +19,21 @@ namespace OpenBreed.Editor.VM.Palettes
     {
         #region Private Fields
 
+        private int _index = 0;
         private Color _color = Color.Empty;
         private Color _colorNegative = Color.Empty;
         private byte r;
         private byte g;
         private byte b;
-        private Action<Color> colorChangeCallBack;
+        private readonly IList<ColorSelectionVM> colors;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ColorEditorVM(Action<Color> colorChangeCallBack)
+        public ColorEditorVM(IList<ColorSelectionVM> colors)
         {
-            this.colorChangeCallBack = colorChangeCallBack;
+            this.colors = colors;
         }
 
         #endregion Public Constructors
@@ -64,15 +70,19 @@ namespace OpenBreed.Editor.VM.Palettes
             set { SetProperty(ref b, value); }
         }
 
+        public int Index
+        {
+            get { return _index; }
+            set { SetProperty(ref _index, value); }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Set(Color color)
+        public void Edit(int index)
         {
-            R = color.R;
-            G = color.G;
-            B = color.B;
+            Index = index;
         }
 
         #endregion Public Methods
@@ -81,15 +91,60 @@ namespace OpenBreed.Editor.VM.Palettes
 
         protected override void OnPropertyChanged(string name)
         {
-            Color = Color.FromArgb(R, G, B);
-            ColorNegative = Color.FromArgb(Color.ToArgb() ^ 0xffffff);
-
-            colorChangeCallBack.Invoke(Color.FromArgb(R, G, B));
+            switch (name)
+            {
+                case nameof(Index):
+                    var color = colors[Index].Color;
+                    R = color.R;
+                    G = color.G;
+                    B = color.B;
+                    break;
+                case nameof(R):
+                case nameof(G):
+                case nameof(B):
+                    Color = Color.FromArgb(R, G, B);
+                    ColorNegative = Color.FromArgb(Color.ToArgb() ^ 0xffffff);
+                    colors[Index].Color = Color;
+                    break;
+                default:
+                    break;
+            }
 
             base.OnPropertyChanged(name);
         }
 
         #endregion Protected Methods
+    }
+
+    public class ColorSelectionVM : BaseViewModel
+    {
+        #region Private Fields
+
+        private Color _color = Color.Empty;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public ColorSelectionVM(Color color, Action<ColorSelectionVM> selectColorCallback)
+        {
+            Color = color;
+            SelectCommand = new Command(() => selectColorCallback.Invoke(this));
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public Color Color
+        {
+            get { return _color; }
+            set { SetProperty(ref _color, value); }
+        }
+
+        public ICommand SelectCommand { get; }
+
+        #endregion Public Properties
     }
 
     public class PaletteEditorExVM : BaseViewModel, IEntryEditor<IDbPalette>
@@ -114,12 +169,13 @@ namespace OpenBreed.Editor.VM.Palettes
         {
             this.palettesDataProvider = palettesDataProvider;
             this.dataProvider = dataProvider;
-            Colors = new BindingList<Color>();
-            ColorEditor = new ColorEditorVM(ColorChangeCallBack);
+            Colors = new ObservableCollection<ColorSelectionVM>();
+
+            ColorEditor = new ColorEditorVM(Colors);
 
             Initialize();
 
-            Colors.ListChanged += (s, a) => OnPropertyChanged(nameof(Colors));
+            Colors.CollectionChanged += (s, a) => OnPropertyChanged(nameof(Colors));
         }
 
         #endregion Public Constructors
@@ -128,7 +184,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public ColorEditorVM ColorEditor { get; }
 
-        public BindingList<Color> Colors { get; }
+        public ObservableCollection<ColorSelectionVM> Colors { get; }
 
         public int CurrentColorIndex
         {
@@ -149,7 +205,7 @@ namespace OpenBreed.Editor.VM.Palettes
             var model = palettesDataProvider.GetPalette(target.Id);
 
             for (int i = 0; i < model.Length; i++)
-                model.Data[i] = Colors[i];
+                model.Data[i] = Colors[i].Color;
         }
 
         #endregion Public Methods
@@ -158,11 +214,10 @@ namespace OpenBreed.Editor.VM.Palettes
 
         protected void UpdateVMColors(PaletteModel model)
         {
-            Colors.UpdateAfter(() =>
+            for (int i = 0; i < model.Data.Length; i++)
             {
-                for (int i = 0; i < model.Data.Length; i++)
-                    Colors[i] = model.Data[i];
-            });
+                Colors[i] = new ColorSelectionVM(model.Data[i], OnColorSelected);
+            }
 
             CurrentColorIndex = 0;
         }
@@ -172,7 +227,7 @@ namespace OpenBreed.Editor.VM.Palettes
             switch (name)
             {
                 case nameof(CurrentColorIndex):
-                    ColorEditor.Set(Colors[CurrentColorIndex]);
+                    ColorEditor.Index = CurrentColorIndex;
                     break;
 
                 default:
@@ -186,18 +241,22 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Private Methods
 
+        private void OnColorSelected(ColorSelectionVM colorSelection)
+        {
+            CurrentColorIndex = Colors.IndexOf(colorSelection);
+        }
+
         private void ColorChangeCallBack(Color color)
         {
-            Colors[CurrentColorIndex] = color;
+            //Colors[CurrentColorIndex].Color = color;
         }
 
         private void Initialize()
         {
-            Colors.UpdateAfter(() =>
+            for (int i = 0; i < 256; i++)
             {
-                for (int i = 0; i < 256; i++)
-                    Colors.Add(Color.FromArgb(255, i, i, i));
-            });
+                Colors.Add(new ColorSelectionVM(Color.FromArgb(255, i, i, i), OnColorSelected));
+            }
 
             CurrentColorIndex = 0;
         }

@@ -98,7 +98,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
             for (int i = 0; i < image.Palette.Entries.Length; i++)
             {
-                var color = Colors[i];
+                var color = Colors[i].Color;
                 image.Palette.Entries[i] = Color.FromArgb(255, color.R, color.G, color.B);
             }
 

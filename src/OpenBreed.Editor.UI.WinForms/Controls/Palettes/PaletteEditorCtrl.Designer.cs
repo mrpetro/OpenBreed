@@ -28,25 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ColorSelector = new OpenBreed.Editor.UI.WinForms.Controls.Palettes.ColorSelectorCtrl();
             this.SuspendLayout();
-            // 
-            // ColorSelector
-            // 
-            this.ColorSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ColorSelector.Location = new System.Drawing.Point(4, 126);
-            this.ColorSelector.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.ColorSelector.Name = "ColorSelector";
-            this.ColorSelector.Size = new System.Drawing.Size(634, 105);
-            this.ColorSelector.TabIndex = 12;
             // 
             // PaletteEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ColorSelector);
             this.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.Name = "PaletteEditorCtrl";
             this.Size = new System.Drawing.Size(640, 234);
@@ -55,7 +42,5 @@
         }
 
         #endregion
-
-        private ColorSelectorCtrl ColorSelector;
     }
 }

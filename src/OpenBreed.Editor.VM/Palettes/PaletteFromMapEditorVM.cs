@@ -129,7 +129,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
             for (int i = 0; i < paletteBlock.Value.Length; i++)
             {
-                var color = Colors[i];
+                var color = Colors[i].Color;
                 paletteBlock.Value[i] = new MapPaletteBlock.ColorData(color.R, color.G, color.B);
             }
 

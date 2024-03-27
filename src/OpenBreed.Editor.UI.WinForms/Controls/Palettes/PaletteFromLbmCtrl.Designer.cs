@@ -32,7 +32,6 @@
             this.tbxLbmDataRef = new System.Windows.Forms.TextBox();
             this.grpPaletteFromMapSelection = new System.Windows.Forms.GroupBox();
             this.lblLbmDataRef = new System.Windows.Forms.Label();
-            this.ColorSelector = new OpenBreed.Editor.UI.WinForms.Controls.Palettes.ColorSelectorCtrl();
             this.grpPalette = new System.Windows.Forms.GroupBox();
             this.grpPaletteFromMapSelection.SuspendLayout();
             this.grpPalette.SuspendLayout();
@@ -84,18 +83,8 @@
             this.lblLbmDataRef.TabIndex = 3;
             this.lblLbmDataRef.Text = "Image reference:";
             // 
-            // ColorSelector
-            // 
-            this.ColorSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ColorSelector.Location = new System.Drawing.Point(4, 134);
-            this.ColorSelector.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.ColorSelector.Name = "ColorSelector";
-            this.ColorSelector.Size = new System.Drawing.Size(739, 360);
-            this.ColorSelector.TabIndex = 13;
-            // 
             // grpPalette
             // 
-            this.grpPalette.Controls.Add(this.ColorSelector);
             this.grpPalette.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpPalette.Location = new System.Drawing.Point(0, 57);
             this.grpPalette.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -128,7 +117,6 @@
         private System.Windows.Forms.TextBox tbxLbmDataRef;
         private System.Windows.Forms.GroupBox grpPaletteFromMapSelection;
         private System.Windows.Forms.Label lblLbmDataRef;
-        private ColorSelectorCtrl ColorSelector;
         private System.Windows.Forms.GroupBox grpPalette;
     }
 }

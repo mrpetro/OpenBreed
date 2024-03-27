@@ -36,12 +36,14 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
-            var colorEditor = WpfHelper.CreateWpfControl<Wpf.Palettes.ColorEditorCtrl>(_vm);
+            var colorSelector = WpfHelper.CreateWpfControl<Wpf.Palettes.ColorSelectorCtrl>(_vm);
+            colorSelector.Dock = DockStyle.Fill;
+            grpPalette.Controls.Add(colorSelector);
+
+            var colorEditor = WpfHelper.CreateWpfControl<Wpf.Palettes.ColorEditorCtrl>(_vm.ColorEditor);
             colorEditor.Dock = DockStyle.Top;
             grpPalette.Controls.Add(colorEditor);
 
-            //ColorEditor.Initialize(_vm);
-            ColorSelector.Initialize(_vm);
 
             tbxMapDataRef.DataBindings.Add(nameof(tbxMapDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -49,9 +51,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             cbxMapBlockName.DataBindings.Add(nameof(cbxMapBlockName.Text), _vm, nameof(_vm.BlockName), false, DataSourceUpdateMode.OnPropertyChanged);
 
             colorEditor.DataBindings.Add(nameof(colorEditor.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
-            ColorSelector.DataBindings.Add(nameof(ColorSelector.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
-
-
         }
 
         #endregion Public Methods
