@@ -33,9 +33,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         #region Public Methods
 
-        public void Initialize(PaletteFromBinaryEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
+            _vm = vm as PaletteFromBinaryEditorVM ?? throw new ArgumentNullException(nameof(vm));
 
             var colorSelector = WpfHelper.CreateWpfControl<Wpf.Palettes.ColorSelectorCtrl>(_vm);
             colorSelector.Dock = DockStyle.Fill;

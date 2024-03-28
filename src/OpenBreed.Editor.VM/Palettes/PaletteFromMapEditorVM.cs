@@ -1,18 +1,22 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
-using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Model.Maps;
+using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Model.Maps.Blocks;
-using OpenBreed.Model.Palettes;
+using OpenBreed.Model.Maps;
+using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
+using System.Collections.ObjectModel;
+using OpenBreed.Database.EFCore.DbEntries;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteFromMapEditorVM : PaletteEditorExVM, IEntryEditor<IDbPaletteFromMap>
+    public class PaletteFromMapEditorVM : PaletteEditorBaseVM<IDbPaletteFromMap>
     {
         #region Private Fields
 
@@ -24,32 +28,28 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteFromMapEditorVM(PalettesDataProvider palettesDataProvider,
-                                      IModelsProvider dataProvider) : base(palettesDataProvider, dataProvider)
+        public PaletteFromMapEditorVM(
+            PalettesDataProvider palettesDataProvider,
+            IModelsProvider dataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));
-        }
 
-        protected override void OnPropertyChanged(string name)
-        {
-            switch (name)
-            {
-                case nameof(BlockName):
-                case nameof(DataRef):
-                    EditEnabled = ValidateSettings();
-                    break;
-
-                default:
-                    break;
-            }
-
-            base.OnPropertyChanged(name);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public override string EditorName => "MAP Palette Editor";
+
+        public string DataRef
+        {
+            get { return dataRef; }
+            set { SetProperty(ref dataRef, value); }
+        }
 
         public BindingList<string> BlockNames { get; }
 
@@ -67,22 +67,25 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #endregion Public Properties
 
-        #region Internal Methods
+        #region Protected Methods
 
-
-        public override void UpdateVM(IDbPalette entry)
+        protected override void OnPropertyChanged(string name)
         {
-            base.UpdateVM(entry);
-            UpdateVM((IDbPaletteFromMap)entry);
+            switch (name)
+            {
+                case nameof(BlockName):
+                case nameof(DataRef):
+                    EditEnabled = ValidateSettings();
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
         }
 
-        public override void UpdateEntry(IDbPalette entry)
-        {
-            base.UpdateEntry(entry);
-            UpdateEntry((IDbPaletteFromMap)entry);
-        }
-
-        #endregion Internal Methods
+        #endregion Protected Methods
 
         #region Private Methods
 
@@ -102,13 +105,7 @@ namespace OpenBreed.Editor.VM.Palettes
             });
         }
 
-        public string DataRef
-        {
-            get { return dataRef; }
-            set { SetProperty(ref dataRef, value); }
-        }
-
-        private void UpdateVM(IDbPaletteFromMap entry)
+        protected override void UpdateVM(IDbPaletteFromMap entry)
         {
             UpdatePaletteBlocksList(entry);
 
@@ -121,7 +118,7 @@ namespace OpenBreed.Editor.VM.Palettes
             BlockName = entry.BlockName;
         }
 
-        private void UpdateEntry(IDbPaletteFromMap source)
+        protected override void UpdateEntry(IDbPaletteFromMap source)
         {
             var mapModel = dataProvider.GetModel<MapModel>(DataRef);
 
@@ -146,16 +143,6 @@ namespace OpenBreed.Editor.VM.Palettes
                 return false;
 
             return true;
-        }
-
-        void IEntryEditor<IDbPaletteFromMap>.UpdateEntry(IDbPaletteFromMap entry)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void IEntryEditor<IDbPaletteFromMap>.UpdateVM(IDbPaletteFromMap entry)
-        {
-            throw new System.NotImplementedException();
         }
 
         #endregion Private Methods

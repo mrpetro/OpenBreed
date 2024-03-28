@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.UI.WinForms.Helpers;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 {
@@ -32,9 +33,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         #region Public Methods
 
-        public void Initialize(PaletteFromLbmEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
+            _vm = vm as PaletteFromLbmEditorVM ?? throw new ArgumentNullException(nameof(vm));
 
             var colorSelector = WpfHelper.CreateWpfControl<Wpf.Palettes.ColorSelectorCtrl>(_vm);
             colorSelector.Dock = DockStyle.Fill;

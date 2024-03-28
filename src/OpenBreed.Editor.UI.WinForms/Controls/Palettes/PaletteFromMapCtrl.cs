@@ -7,34 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM.Palettes;
+using OpenBreed.Editor.VM;
+using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.UI.WinForms.Helpers;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 {
     public partial class PaletteFromMapCtrl : EntryEditorInnerCtrl
     {
-        #region Private Fields
-
         private PaletteFromMapEditorVM _vm;
-
-        #endregion Private Fields
-
-        #region Public Constructors
 
         public PaletteFromMapCtrl()
         {
             InitializeComponent();
         }
 
-        #endregion Public Constructors
-
-        #region Public Methods
-
-        public void Initialize(PaletteFromMapEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
+            _vm = vm as PaletteFromMapEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             var colorSelector = WpfHelper.CreateWpfControl<Wpf.Palettes.ColorSelectorCtrl>(_vm);
             colorSelector.Dock = DockStyle.Fill;
@@ -44,7 +35,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             colorEditor.Dock = DockStyle.Top;
             grpPalette.Controls.Add(colorEditor);
 
-
             tbxMapDataRef.DataBindings.Add(nameof(tbxMapDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);
 
             cbxMapBlockName.DataSource = _vm.BlockNames;
@@ -52,7 +42,5 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
             colorEditor.DataBindings.Add(nameof(colorEditor.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
         }
-
-        #endregion Public Methods
     }
 }

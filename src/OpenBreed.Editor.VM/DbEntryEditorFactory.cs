@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,15 +41,36 @@ namespace OpenBreed.Editor.VM
 
         #region Internal Methods
 
-        internal EntryEditorVM Create(IRepository repository)
+        internal EntryEditorVM Create(IRepository repository, IDbEntry dbEntry)
         {
-            var type = GetEditorType(repository);
+            var type = GetEditorType(dbEntry);
+
+            if (type is null)
+            {
+                type = GetEditorType(repository);
+            }
+
             return (EntryEditorVM)managerCollection.GetService(type);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
+
+        private Type GetEditorType(IDbEntry dbEntry)
+        {
+            var entryType = dbEntry.GetType();
+
+            foreach (var item in creators)
+            {
+                if (entryType.GetInterfaces().Contains(item.Key) || entryType.Equals(item.Key))
+                {
+                    return item.Value;
+                }
+            }
+
+            return null;
+        }
 
         private Type GetEditorType(IRepository repository)
         {

@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteFromLbmEditorVM : PaletteEditorExVM, IEntryEditor<IDbPaletteFromLbm>
+    public class PaletteFromLbmEditorVM : PaletteEditorBaseVM<IDbPaletteFromLbm>
     {
         #region Private Fields
 
@@ -25,8 +25,11 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteFromLbmEditorVM(PalettesDataProvider palettesDataProvider,
-                                      IModelsProvider dataProvider) : base(palettesDataProvider, dataProvider)
+        public PaletteFromLbmEditorVM(
+            PalettesDataProvider palettesDataProvider,
+            IModelsProvider dataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
         }
 
@@ -49,6 +52,8 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Properties
 
+        public override string EditorName => "LBM Palette Editor";
+
         public bool EditEnabled
         {
             get { return editEnabled; }
@@ -56,23 +61,6 @@ namespace OpenBreed.Editor.VM.Palettes
         }
 
         #endregion Public Properties
-
-        #region Internal Methods
-
-
-        public override void UpdateVM(IDbPalette entry)
-        {
-            base.UpdateVM(entry);
-            UpdateVM((IDbPaletteFromLbm)entry);
-        }
-
-        public override void UpdateEntry(IDbPalette entry)
-        {
-            base.UpdateEntry(entry);
-            UpdateEntry((IDbPaletteFromLbm)entry);
-        }
-
-        #endregion Internal Methods
 
         #region Private Methods
 
@@ -82,7 +70,7 @@ namespace OpenBreed.Editor.VM.Palettes
             set { SetProperty(ref dataRef, value); }
         }
 
-        private void UpdateVM(IDbPaletteFromLbm entry)
+        protected override void UpdateVM(IDbPaletteFromLbm entry)
         {
             var model = palettesDataProvider.GetPalette(entry.Id);
 
@@ -92,7 +80,7 @@ namespace OpenBreed.Editor.VM.Palettes
             DataRef = entry.DataRef;
         }
 
-        private void UpdateEntry(IDbPaletteFromLbm source)
+        protected override void UpdateEntry(IDbPaletteFromLbm source)
         {
             var image = dataProvider.GetModel<Image>(DataRef);
 
@@ -111,16 +99,6 @@ namespace OpenBreed.Editor.VM.Palettes
                 return false;
 
             return true;
-        }
-
-        void IEntryEditor<IDbPaletteFromLbm>.UpdateEntry(IDbPaletteFromLbm entry)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void IEntryEditor<IDbPaletteFromLbm>.UpdateVM(IDbPaletteFromLbm entry)
-        {
-            throw new System.NotImplementedException();
         }
 
         #endregion Private Methods

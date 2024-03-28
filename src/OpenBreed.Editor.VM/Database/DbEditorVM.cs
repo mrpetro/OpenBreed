@@ -118,14 +118,18 @@ namespace OpenBreed.Editor.VM.Database
             EntryEditorVM entryEditor = null;
             if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
             {
-                entryEditor = dbEntryEditorFactory.Create(repository);
+                var entry = repository.Find(entryId);
+
+                entryEditor = dbEntryEditorFactory.Create(repository, entry);
                 _openedEntryEditors.Add(entryEditorKey, entryEditor);
                 entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);
                 entryEditor.EditEntry(entryId);
                 EntryEditorOpeningAction?.Invoke(entryEditor);
             }
             else
+            {
                 entryEditor.Activate();
+            }
 
             return entryEditor;
         }

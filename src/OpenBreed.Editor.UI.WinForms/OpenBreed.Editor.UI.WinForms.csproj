@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\Palettes\PaletteFromMapCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Controls\Palettes\PaletteFromLbmCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>

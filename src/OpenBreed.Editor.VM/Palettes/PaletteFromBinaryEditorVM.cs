@@ -10,23 +10,32 @@ using System;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteFromBinaryEditorVM : PaletteEditorExVM, IEntryEditor<IDbPaletteFromBinary>
+    public class PaletteFromBinaryEditorVM : PaletteEditorBaseVM<IDbPaletteFromBinary>
     {
-        #region Public Constructors
+        #region Private Fields
 
+        private readonly IRepositoryProvider repositoryProvider;
         private string dataRef;
         private int dataStart;
         private int colorsNo;
         private PaletteMode paletteMode;
-        private readonly IRepositoryProvider repositoryProvider;
+        private IDbPalette currentEntry;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public PaletteFromBinaryEditorVM(
             PalettesDataProvider palettesDataProvider,
-            IRepositoryProvider repositoryProvider,
-            IModelsProvider dataProvider) : base(palettesDataProvider, dataProvider)
+            IModelsProvider dataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
-            this.repositoryProvider = repositoryProvider;
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
 
         public string DataRef
         {
@@ -52,33 +61,13 @@ namespace OpenBreed.Editor.VM.Palettes
             set { SetProperty(ref paletteMode, value); }
         }
 
-        #endregion Public Constructors
-
-        #region Public Properties
+        public override string EditorName => "Binary Palette Editor";
 
         #endregion Public Properties
 
-        #region Public Methods
+        #region Protected Methods
 
-        private IDbPalette currentEntry;
-
-        public override void UpdateVM(IDbPalette entry)
-        {
-            base.UpdateVM(entry);
-            UpdateVM((IDbPaletteFromBinary)entry);
-        }
-
-        public override void UpdateEntry(IDbPalette entry)
-        {
-            base.UpdateEntry(entry);
-            UpdateEntry((IDbPaletteFromBinary)entry);
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void UpdateVM(IDbPaletteFromBinary entry)
+        protected override void UpdateVM(IDbPaletteFromBinary entry)
         {
             var model = palettesDataProvider.GetPalette(entry.Id);
 
@@ -93,22 +82,10 @@ namespace OpenBreed.Editor.VM.Palettes
             UpdatePalette();
         }
 
-        private void UpdateEntry(IDbPaletteFromBinary entry)
+        protected override void UpdateEntry(IDbPaletteFromBinary entry)
         {
             entry.DataRef = DataRef;
         }
-
-        void IEntryEditor<IDbPaletteFromBinary>.UpdateEntry(IDbPaletteFromBinary entry)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void IEntryEditor<IDbPaletteFromBinary>.UpdateVM(IDbPaletteFromBinary entry)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        #endregion Private Methods
 
         protected override void OnPropertyChanged(string name)
         {
@@ -118,26 +95,30 @@ namespace OpenBreed.Editor.VM.Palettes
                 case nameof(DataRef):
                     UpdatePalette();
                     break;
+
                 default:
                     break;
             }
 
-
             base.OnPropertyChanged(name);
         }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void UpdatePalette()
         {
             //var entry = repositoryProvider.GetRepository<IDbAsset>().GetById(DataRef) as IDbPaletteFromBinary;
 
             //if (entry is null)
-           //     return;
+            //     return;
             var model = PalettesDataHelper.FromBinary(dataProvider, dataRef, DataStart, colorsNo, PaletteMode);
 
             if (model != null)
                 UpdateVMColors(model);
-
-
         }
+
+        #endregion Private Methods
     }
 }
