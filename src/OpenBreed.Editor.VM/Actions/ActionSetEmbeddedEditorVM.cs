@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Actions;
@@ -8,18 +9,23 @@ using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Actions
 {
-    public class ActionSetEmbeddedEditorVM : BaseViewModel, IEntryEditor<IDbActionSet>
+    public class ActionSetEmbeddedEditorVM : EntryEditorBaseVM<IDbActionSet>
     {
         #region Private Fields
 
         private const int PROP_SIZE = 32;
         private readonly ActionSetsDataProvider actionSetsDataProvider;
 
+        private ActionSetModel model;
+
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ActionSetEmbeddedEditorVM(ActionSetsDataProvider actionSetsDataProvider)
+        public ActionSetEmbeddedEditorVM(
+                    ActionSetsDataProvider actionSetsDataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
             Items = new BindingList<ActionVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
@@ -33,6 +39,8 @@ namespace OpenBreed.Editor.VM.Actions
         public BindingList<ActionVM> Items { get; }
 
         public int SelectedIndex { get; private set; }
+
+        public override string EditorName => "Action Set Editor";
 
         #endregion Public Properties
 
@@ -63,10 +71,14 @@ namespace OpenBreed.Editor.VM.Actions
             gfx.DrawImage(image, x, y, tileSize, tileSize);
         }
 
-        private ActionSetModel model;
+        #endregion Public Methods
 
-        public virtual void UpdateVM(IDbActionSet entry)
+        #region Protected Methods
+
+        protected override void UpdateVM(IDbActionSet entry)
         {
+            base.UpdateVM(entry);
+
             model = actionSetsDataProvider.GetActionSet(entry.Id);
 
             Items.UpdateAfter(() =>
@@ -80,7 +92,7 @@ namespace OpenBreed.Editor.VM.Actions
             SelectedIndex = 0;
         }
 
-        public virtual void UpdateEntry(IDbActionSet entry)
+        protected override void UpdateEntry(IDbActionSet entry)
         {
             entry.Actions.Clear();
 
@@ -90,8 +102,10 @@ namespace OpenBreed.Editor.VM.Actions
                 ActionSetsDataHelper.ToEntry(item, newAction);
                 entry.Actions.Add(newAction);
             }
+
+            base.UpdateEntry(entry);
         }
 
-        #endregion Public Methods
+        #endregion Protected Methods
     }
 }

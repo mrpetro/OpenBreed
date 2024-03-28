@@ -11,22 +11,25 @@ using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Images
 {
-    public class ImageFromFileEditorVM : BaseViewModel, IEntryEditor<IDbImage>
+    public class ImageFromFileEditorVM : EntryEditorBaseVM<IDbImage>
     {
         #region Private Fields
 
-        private string _assetRef;
-
-        private Image image;
         private readonly IWorkspaceMan workspaceMan;
         private readonly IDialogProvider dialogProvider;
         private readonly IModelsProvider dataProvider;
+        private string _assetRef;
+
+        private Image image;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ImageFromFileEditorVM(IWorkspaceMan workspaceMan, IDialogProvider dialogProvider, IModelsProvider dataProvider)
+        public ImageFromFileEditorVM(
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider,
+            IModelsProvider dataProvider) : base(workspaceMan, dialogProvider)
         {
             this.workspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;
@@ -56,6 +59,8 @@ namespace OpenBreed.Editor.VM.Images
 
         public Action RefreshAction { get; set; }
 
+        public override string EditorName => "Image Editor";
+
         #endregion Public Properties
 
         #region Public Methods
@@ -68,18 +73,26 @@ namespace OpenBreed.Editor.VM.Images
             gfx.DrawImage(Image, 0, 0, Image.Width, Image.Height);
         }
 
-        public void UpdateEntry(IDbImage entry)
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void UpdateEntry(IDbImage entry)
         {
             entry.DataRef = AssetRef;
+
+            base.UpdateEntry(entry);
         }
 
-        public void UpdateVM(IDbImage entry)
+        protected override void UpdateVM(IDbImage entry)
         {
+            base.UpdateVM(entry);
+
             AssetRef = entry.DataRef;
             UpdateImage();
         }
 
-        #endregion Public Methods
+        #endregion Protected Methods
 
         #region Private Methods
 

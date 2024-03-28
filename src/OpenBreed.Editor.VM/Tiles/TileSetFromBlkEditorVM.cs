@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM.Base;
@@ -12,23 +13,26 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetFromBlkEditorVM : BaseViewModel, IEntryEditor<IDbTileAtlas>, IEntryEditor<IDbTileAtlasFromBlk>
+    public class TileSetFromBlkEditorVM : EntryEditorBaseVM<IDbTileAtlas>
     {
         #region Private Fields
 
+        private readonly TileAtlasDataProvider tileSetsDataProvider;
+        private readonly PalettesDataProvider palettesDataProvider;
         private string currentPaletteRef = null;
         private int _currentPaletteIndex = -1;
 
         private TileSetModel model;
-        private readonly TileAtlasDataProvider tileSetsDataProvider;
-        private readonly PalettesDataProvider palettesDataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSetFromBlkEditorVM(TileAtlasDataProvider tileSetsDataProvider,
-                                      PalettesDataProvider palettesDataProvider)
+        public TileSetFromBlkEditorVM(
+            TileAtlasDataProvider tileSetsDataProvider,
+            PalettesDataProvider palettesDataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
             PaletteIds = new BindingList<string>();
             this.tileSetsDataProvider = tileSetsDataProvider;
@@ -39,9 +43,9 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #endregion Public Constructors
 
-        public TileSetViewerVM Viewer { get; set; }
-
         #region Public Properties
+
+        public TileSetViewerVM Viewer { get; set; }
 
         public BindingList<string> PaletteIds { get; }
 
@@ -57,6 +61,8 @@ namespace OpenBreed.Editor.VM.Tiles
             set { SetProperty(ref _currentPaletteIndex, value); }
         }
 
+        public override string EditorName => "Tileset Editor";
+
         #endregion Public Properties
 
         #region Internal Properties
@@ -64,31 +70,6 @@ namespace OpenBreed.Editor.VM.Tiles
         internal PaletteModel CurrentPalette { get; private set; }
 
         #endregion Internal Properties
-
-        #region Public Methods
-
-        public void UpdateEntry(IDbTileAtlasFromBlk entry) 
-        {
-
-        }
-
-        public void UpdateVM(IDbTileAtlasFromBlk entry)
-        {
-            model = tileSetsDataProvider.GetTileAtlas(entry.Id);
-
-            if (model == null)
-                return;
-
-            Viewer.FromModel(model);
-
-            SetupPaletteIds(entry.PaletteRefs);
-        }
-
-        public virtual void UpdateEntry(IDbTileAtlas entry) => UpdateEntry((IDbTileAtlasFromBlk)entry);
-
-        public virtual void UpdateVM(IDbTileAtlas entry) => UpdateVM((IDbTileAtlasFromBlk)entry);
-
-        #endregion Public Methods
 
         #region Internal Methods
 
@@ -107,6 +88,36 @@ namespace OpenBreed.Editor.VM.Tiles
         #endregion Internal Methods
 
         #region Protected Methods
+
+        protected void UpdateEntry(IDbTileAtlasFromBlk entry)
+        {
+        }
+
+        protected void UpdateVM(IDbTileAtlasFromBlk entry)
+        {
+            model = tileSetsDataProvider.GetTileAtlas(entry.Id);
+
+            if (model == null)
+                return;
+
+            Viewer.FromModel(model);
+
+            SetupPaletteIds(entry.PaletteRefs);
+        }
+
+        protected override void UpdateEntry(IDbTileAtlas entry)
+        {
+            UpdateEntry((IDbTileAtlasFromBlk)entry);
+
+            base.UpdateEntry(entry);
+        }
+
+        protected override void UpdateVM(IDbTileAtlas entry)
+        {
+            base.UpdateVM(entry);
+
+            UpdateVM((IDbTileAtlasFromBlk)entry);
+        }
 
         protected override void OnPropertyChanged(string name)
         {

@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Images;
 using System.Drawing.Drawing2D;
+using System.Drawing.Design;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 {
-    public partial class ImageFromFileEditorCtrl : UserControl
+    public partial class ImageFromFileEditorCtrl : EntryEditorInnerCtrl
     {
         private ImageFromFileEditorVM vm;
 
@@ -25,9 +26,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         }
 
-        public void Initialize(ImageFromFileEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            this.vm = vm;
+            this.vm = vm as ImageFromFileEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             this.vm.PropertyChanged += _vm_PropertyChanged;
             this.vm.RefreshAction = Invalidate;

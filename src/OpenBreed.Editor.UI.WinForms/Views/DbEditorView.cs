@@ -34,6 +34,7 @@ using OpenBreed.Editor.VM.Scripts;
 using OpenBreed.Editor.UI.WinForms.Controls.Scripts;
 using OpenBreed.Editor.VM.EntityTemplates;
 using OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates;
+using System.Drawing.Design;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
@@ -79,18 +80,21 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
 
-            _viewFactory.Register<PcmSoundEditorVM, EntryEditorView<SoundEditorCtrl>>();
-            _viewFactory.Register<TileSetEditorVM, EntryEditorView<TileSetEditorCtrl>>();
-            _viewFactory.Register<SpriteSetEditorVM, EntryEditorView<SpriteSetEditorCtrl>>();
-            _viewFactory.Register<ActionSetEditorVM, EntryEditorView<ActionSetEditorCtrl>>();
-            _viewFactory.Register<ImageEditorVM, EntryEditorView<ImageEditorCtrl>>();
             _viewFactory.Register<PaletteFromMapEditorVM, EntryEditorView<PaletteFromMapCtrl>>();
             _viewFactory.Register<PaletteFromLbmEditorVM, EntryEditorView<PaletteFromLbmCtrl>>();
             _viewFactory.Register<PaletteFromBinaryEditorVM, EntryEditorView<PaletteFromBinaryCtrl>>();
+            _viewFactory.Register<TileSetFromBlkEditorVM, EntryEditorView<TileSetFromBlkEditorCtrl>>();
+            _viewFactory.Register<MapEditorVM, EntryEditorView<MapEditorCtrl>>();
+            _viewFactory.Register<ImageFromFileEditorVM, EntryEditorView<ImageFromFileEditorCtrl>>();
+            _viewFactory.Register<PcmSoundEditorVM, EntryEditorView<PcmSoundEditorCtrl>>();
+            _viewFactory.Register<ActionSetEmbeddedEditorVM, EntryEditorView<ActionSetEmbeddedEditorCtrl>>();
+
+            _viewFactory.Register<SpriteSetEditorVM, EntryEditorView<SpriteSetEditorCtrl>>();
+
             _viewFactory.Register<TextEditorVM, EntryEditorView<TextEditorCtrl>>();
             _viewFactory.Register<ScriptEditorVM, EntryEditorView<ScriptEditorCtrl>>();
             _viewFactory.Register<EntityTemplateEditorVM, EntryEditorView<EntityTemplateEditorCtrl>>();
-            _viewFactory.Register<MapEditorVM, EntryEditorView<MapEditorCtrl>>();
+
             _viewFactory.Register<DataSourceEditorVM, EntryEditorView<DataSourceEditorCtrl>>();
 
             Theme = new WeifenLuo.WinFormsUI.Docking.VS2015LightTheme();

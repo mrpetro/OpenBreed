@@ -9,7 +9,7 @@ using System.Windows.Forms.Integration;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
 {
-    public partial class SoundEditorCtrl : EntryEditorInnerCtrl
+    public partial class PcmSoundEditorCtrl : EntryEditorInnerCtrl
     {
         #region Private Fields
 
@@ -19,7 +19,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
 
         #region Public Constructors
 
-        public SoundEditorCtrl()
+        public PcmSoundEditorCtrl()
         {
             InitializeComponent();
 

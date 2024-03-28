@@ -1,6 +1,6 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
 {
-    partial class ActionSetEditorCtrl
+    partial class PcmSoundEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -36,16 +36,16 @@
             this.Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel.Location = new System.Drawing.Point(0, 0);
             this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(541, 360);
-            this.Panel.TabIndex = 8;
+            this.Panel.Size = new System.Drawing.Size(309, 166);
+            this.Panel.TabIndex = 7;
             // 
-            // ActionSetEditorCtrl
+            // SoundEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.Panel);
-            this.Name = "ActionSetEditorCtrl";
-            this.Size = new System.Drawing.Size(541, 360);
+            this.Name = "SoundEditorCtrl";
+            this.Size = new System.Drawing.Size(309, 166);
             this.ResumeLayout(false);
 
         }

@@ -91,10 +91,14 @@ namespace OpenBreed.Editor.VM.Sounds
             model.Channels = Channels;
             model.SampleRate = SampleRate;
             model.Data = Data;
+
+            base.UpdateEntry(entry);
         }
 
         protected override void UpdateVM(IDbSound entry)
         {
+            base.UpdateVM(entry);
+
             var model = soundsDataProvider.GetSound(entry.Id);
             BitsPerSample = model.BitsPerSample;
             Channels = model.Channels;

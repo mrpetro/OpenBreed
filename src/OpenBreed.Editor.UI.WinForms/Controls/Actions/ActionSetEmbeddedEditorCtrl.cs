@@ -12,7 +12,7 @@ using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
 {
-    public partial class ActionSetEmbeddedEditorCtrl : UserControl
+    public partial class ActionSetEmbeddedEditorCtrl : EntryEditorInnerCtrl
     {
         #region Private Fields
 
@@ -55,11 +55,11 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
 
         #region Public Methods
 
-        public void Initialize(ActionSetEmbeddedEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            this.vm = vm;
+            this.vm = vm as ActionSetEmbeddedEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
-            DGV.DataSource = vm.Items;
+            DGV.DataSource = this.vm.Items;
         }
 
         #endregion Public Methods

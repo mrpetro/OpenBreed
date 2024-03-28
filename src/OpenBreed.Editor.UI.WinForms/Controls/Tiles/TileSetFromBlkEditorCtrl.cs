@@ -12,7 +12,7 @@ using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
 {
-    public partial class TileSetFromBlkEditorCtrl : UserControl
+    public partial class TileSetFromBlkEditorCtrl : EntryEditorInnerCtrl
     {
         private TileSetFromBlkEditorVM _vm;
 
@@ -21,9 +21,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
             InitializeComponent();
         }
 
-        public void Initialize(TileSetFromBlkEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm;
+            _vm = vm as TileSetFromBlkEditorVM ?? throw new ArgumentNullException(nameof(vm));
 
             cbxPalettes.DataSource = _vm.PaletteIds;
 
