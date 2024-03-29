@@ -33,9 +33,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
 
         #region Public Methods
 
-        public void Initialize(ScriptEmbeddedEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
+            _vm = vm as ScriptEmbeddedEditorVM ?? throw new ArgumentNullException(nameof(vm));
 
             tbxText.DataBindings.Add(nameof(tbxText.Text), _vm, nameof(_vm.Script), false, DataSourceUpdateMode.OnPropertyChanged);
         }

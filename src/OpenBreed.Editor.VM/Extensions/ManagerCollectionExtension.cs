@@ -40,23 +40,6 @@ namespace OpenBreed.Editor.VM.Extensions
     {
         #region Public Methods
 
-        public static void SetupDbEntrySubEditors(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddTransient<IEntryEditor<IDbFileDataSource>, FileDataSourceEditorVM>();
-                services.AddTransient<IEntryEditor<IDbEpfArchiveDataSource>, EpfArchiveFileDataSourceEditorVM>();
-                services.AddTransient<IEntryEditor<IDbEntityTemplateFromFile>, EntityTemplateFromFileEditorVM>();
-
-                services.AddTransient<IEntryEditor<IDbSpriteAtlasFromSpr>, SpriteSetFromSprEditorVM>();
-                services.AddTransient<IEntryEditor<IDbSpriteAtlasFromImage>, SpriteSetFromImageEditorVM>();
-                services.AddTransient<IEntryEditor<IDbTextEmbedded>, TextEmbeddedEditorVM>();
-                services.AddTransient<IEntryEditor<IDbTextFromMap>, TextFromMapEditorVM>();
-                services.AddTransient<IEntryEditor<IDbScriptEmbedded>, ScriptEmbeddedEditorVM>();
-                services.AddTransient<IEntryEditor<IDbScriptFromFile>, ScriptFromFileEditorVM>();
-            });
-        }
-
         public static void SetupCommonViewModels(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -82,23 +65,21 @@ namespace OpenBreed.Editor.VM.Extensions
 
                 services.AddTransient<TileSetFromBlkEditorVM>();
                 services.AddTransient<ActionSetEmbeddedEditorVM>();
-
-                services.AddTransient<SpriteSetEditorVM>();
-
+                services.AddTransient<SpriteSetFromImageEditorVM>();
+                services.AddTransient<SpriteSetFromSprEditorVM>();
                 services.AddTransient<PaletteFromMapEditorVM>();
                 services.AddTransient<PaletteFromLbmEditorVM>();
                 services.AddTransient<PaletteFromBinaryEditorVM>();
                 services.AddTransient<ImageFromFileEditorVM>();
-
-                services.AddTransient<TextEditorVM>();
-
-                services.AddTransient<ScriptEditorVM>();
-
-                services.AddTransient<EntityTemplateEditorVM>();
-
+                services.AddTransient<ScriptEmbeddedEditorVM>();
+                services.AddTransient<ScriptFromFileEditorVM>();
+                services.AddTransient<TextEmbeddedEditorVM>();
+                services.AddTransient<TextFromMapEditorVM>();
                 services.AddTransient<PcmSoundEditorVM>();
                 services.AddTransient<MapEditorVM>();
-                services.AddTransient<DataSourceEditorVM>();
+                services.AddTransient<EntityTemplateFromFileEditorVM>();
+                services.AddTransient<EpfArchiveFileDataSourceEditorVM>();
+                services.AddTransient<FileDataSourceEditorVM>();
             });
         }
 
@@ -118,14 +99,15 @@ namespace OpenBreed.Editor.VM.Extensions
                     entryEditorFactory.Register<IDbTileAtlasFromBlk, TileSetFromBlkEditorVM>();
                     entryEditorFactory.Register<IDbImage, ImageFromFileEditorVM>();
                     entryEditorFactory.Register<IDbActionSet, ActionSetEmbeddedEditorVM>();
-
-                    entryEditorFactory.Register<IRepository<IDbSpriteAtlas>, SpriteSetEditorVM>();
-
-                    entryEditorFactory.Register<IRepository<IDbText>, TextEditorVM>();
-                    entryEditorFactory.Register<IRepository<IDbScript>, ScriptEditorVM>();
-                    entryEditorFactory.Register<IRepository<IDbEntityTemplate>, EntityTemplateEditorVM>();
-
-                    entryEditorFactory.Register<IRepository<IDbDataSource>, DataSourceEditorVM>();
+                    entryEditorFactory.Register<IDbSpriteAtlasFromImage, SpriteSetFromImageEditorVM>();
+                    entryEditorFactory.Register<IDbSpriteAtlasFromSpr, SpriteSetFromSprEditorVM>();
+                    entryEditorFactory.Register<IDbScriptEmbedded, ScriptEmbeddedEditorVM>();
+                    entryEditorFactory.Register<IDbScriptFromFile, ScriptFromFileEditorVM>();
+                    entryEditorFactory.Register<IDbTextEmbedded, TextEmbeddedEditorVM>();
+                    entryEditorFactory.Register<IDbTextFromMap, TextFromMapEditorVM>();
+                    entryEditorFactory.Register<IDbEntityTemplateFromFile, EntityTemplateFromFileEditorVM>();
+                    entryEditorFactory.Register<IDbEpfArchiveDataSource, EpfArchiveFileDataSourceEditorVM>();
+                    entryEditorFactory.Register<IDbFileDataSource, FileDataSourceEditorVM>();
                     return entryEditorFactory;
                 });
             });

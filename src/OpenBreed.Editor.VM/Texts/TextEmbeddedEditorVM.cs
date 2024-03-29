@@ -1,10 +1,11 @@
 ﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.Texts
 {
-    public class TextEmbeddedEditorVM : BaseViewModel, IEntryEditor<IDbText>, IEntryEditor<IDbTextEmbedded>
+    public class TextEmbeddedEditorVM : TextEditorBaseVM<IDbTextEmbedded>
     {
         #region Private Fields
 
@@ -18,7 +19,10 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Constructors
 
-        public TextEmbeddedEditorVM(TextsDataProvider textsDataProvider)
+        public TextEmbeddedEditorVM(
+            TextsDataProvider textsDataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
             this.textsDataProvider = textsDataProvider;
         }
@@ -39,22 +43,20 @@ namespace OpenBreed.Editor.VM.Texts
             set { SetProperty(ref text, value); }
         }
 
+        public override string EditorName => "Embedded Text Editor";
+
         #endregion Public Properties
 
-        #region Public Methods
+        #region Protected Methods
 
-        public virtual void UpdateEntry(IDbText entry) => UpdateEntry((IDbTextEmbedded)entry);
-
-        public virtual void UpdateVM(IDbText entry) => UpdateVM((IDbTextEmbedded)entry);
-
-        public void UpdateEntry(IDbTextEmbedded entry)
+        protected override void UpdateEntry(IDbTextEmbedded entry)
         {
             var model = textsDataProvider.GetText(entry.Id);
             model.Text = Text;
             entry.DataRef = DataRef;
         }
 
-        public void UpdateVM(IDbTextEmbedded entry)
+        protected override void UpdateVM(IDbTextEmbedded entry)
         {
             var model = textsDataProvider.GetText(entry.Id);
 
@@ -64,6 +66,6 @@ namespace OpenBreed.Editor.VM.Texts
             DataRef = entry.DataRef;
         }
 
-        #endregion Public Methods
+        #endregion Protected Methods
     }
 }

@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Texts
 {
-    public class TextFromMapEditorVM : BaseViewModel, IEntryEditor<IDbText>, IEntryEditor<IDbTextFromMap>
+    public class TextFromMapEditorVM : TextEditorBaseVM<IDbTextFromMap>
     {
         #region Private Fields
 
@@ -27,8 +27,11 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Constructors
 
-        public TextFromMapEditorVM(TextsDataProvider textsDataProvider,
-                                   IModelsProvider dataProvider)
+        public TextFromMapEditorVM(
+            TextsDataProvider textsDataProvider,
+            IModelsProvider dataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
             this.textsDataProvider = textsDataProvider;
             this.dataProvider = dataProvider;
@@ -68,15 +71,13 @@ namespace OpenBreed.Editor.VM.Texts
             set { SetProperty(ref _text, value); }
         }
 
+        public override string EditorName => "MAP Text Editor";
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public virtual void UpdateVM(IDbText entry) => UpdateVM((IDbTextFromMap)entry);
-
-        public virtual void UpdateEntry(IDbText entry) => UpdateEntry((IDbTextFromMap)entry);
-
-        public void UpdateEntry(IDbTextFromMap entry)
+        protected override void UpdateEntry(IDbTextFromMap entry)
         {
             var textFromMapEntry = (IDbTextFromMap)entry;
 
@@ -93,7 +94,7 @@ namespace OpenBreed.Editor.VM.Texts
             textFromMapEntry.BlockName = BlockName;
         }
 
-        public void UpdateVM(IDbTextFromMap entry)
+        protected override void UpdateVM(IDbTextFromMap entry)
         {
             var textFromMapEntry = (IDbTextFromMap)entry;
 
@@ -140,10 +141,6 @@ namespace OpenBreed.Editor.VM.Texts
                 default:
                     break;
             }
-        }
-
-        private void ToEntry(IDbTextFromMap source)
-        {
         }
 
         private bool ValidateSettings()

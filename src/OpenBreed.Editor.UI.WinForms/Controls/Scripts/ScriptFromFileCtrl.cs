@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.VM.Scripts;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
 {
@@ -32,9 +33,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
 
         #region Public Methods
 
-        public void Initialize(ScriptFromFileEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
+            _vm = vm as ScriptFromFileEditorVM ?? throw new ArgumentNullException(nameof(vm));
 
             ScriptAssetRefIdEditor.Initialize(_vm.ScriptAssetRefIdEditor);
 

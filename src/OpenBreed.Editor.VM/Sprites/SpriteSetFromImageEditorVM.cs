@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetFromImageEditorVM : SpriteSetEditorExVM, IEntryEditor<IDbSpriteAtlasFromImage>
+    public class SpriteSetFromImageEditorVM : SpriteSetEditorBaseVM<IDbSpriteAtlasFromImage>
     {
         #region Private Fields
 
@@ -22,9 +22,12 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetFromImageEditorVM(SpriteAtlasDataProvider spriteAtlasDataProvider,
-                                          PalettesDataProvider palettesDataProvider,
-                                          IModelsProvider dataProvider) : base(spriteAtlasDataProvider, palettesDataProvider, dataProvider)
+        public SpriteSetFromImageEditorVM(
+            SpriteAtlasDataProvider spriteAtlasDataProvider,                             
+            PalettesDataProvider palettesDataProvider,
+            IModelsProvider dataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(spriteAtlasDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
             SpriteEditor = new SpriteFromImageEditorVM(this);
             Items = new BindingList<SpriteFromImageVM>();
@@ -49,6 +52,8 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public SpriteFromImageVM CurrentSprite { get { return Items[currentSpriteIndex]; } }
 
+        public override string EditorName => "Image Sprite Set Editor";
+
         #endregion Public Properties
 
         #region Public Methods
@@ -70,22 +75,6 @@ namespace OpenBreed.Editor.VM.Sprites
 
             Items.Add(newSprite);
             CurrentSpriteIndex = Items.Count - 1;
-        }
-
-        public void Connect()
-        {
-        }
-
-        public override void UpdateEntry(IDbSpriteAtlas entry)
-        {
-            base.UpdateEntry(entry);
-            UpdateEntry((IDbSpriteAtlasFromImage)entry);
-        }
-
-        public override void UpdateVM(IDbSpriteAtlas entry)
-        {
-            UpdateVM((IDbSpriteAtlasFromImage)entry);
-            base.UpdateVM(entry);
         }
 
         #endregion Public Methods
@@ -128,7 +117,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Private Methods
 
-        private void UpdateEntry(IDbSpriteAtlasFromImage entry)
+        protected override void UpdateEntry(IDbSpriteAtlasFromImage entry)
         {
             entry.ClearCoords();
 
@@ -139,7 +128,7 @@ namespace OpenBreed.Editor.VM.Sprites
             }
         }
 
-        private void UpdateVM(IDbSpriteAtlasFromImage entry)
+        protected override void UpdateVM(IDbSpriteAtlasFromImage entry)
         {
             SourceImage = dataProvider.GetModel<Bitmap>(entry.DataRef);
 
@@ -166,16 +155,6 @@ namespace OpenBreed.Editor.VM.Sprites
             });
 
             CurrentSpriteIndex = 0;
-        }
-
-        void IEntryEditor<IDbSpriteAtlasFromImage>.UpdateEntry(IDbSpriteAtlasFromImage entry)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IEntryEditor<IDbSpriteAtlasFromImage>.UpdateVM(IDbSpriteAtlasFromImage entry)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion Private Methods

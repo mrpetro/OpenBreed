@@ -8,7 +8,7 @@ using OpenBreed.Model.Texts;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
 {
-    public class EntityTemplateFromFileEditorVM : BaseViewModel, IEntryEditor<IDbEntityTemplate>, IEntryEditor<IDbEntityTemplateFromFile>
+    public class EntityTemplateFromFileEditorVM : EntityTemplateEditorBaseVM<IDbEntityTemplateFromFile>
     {
         #region Private Fields
 
@@ -24,7 +24,11 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         #region Public Constructors
 
-        public EntityTemplateFromFileEditorVM(EntityTemplatesDataProvider entityTemplatesDataProvider, IModelsProvider dataProvider)
+        public EntityTemplateFromFileEditorVM(
+            EntityTemplatesDataProvider entityTemplatesDataProvider,
+            IModelsProvider dataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
             this.entityTemplatesDataProvider = entityTemplatesDataProvider;
             this.dataProvider = dataProvider;
@@ -52,22 +56,20 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             set { SetProperty(ref entityTemplate, value); }
         }
 
+        public override string EditorName => "Entity Template File Editor";
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public void UpdateVM(IDbEntityTemplate entry) => UpdateVM((IDbEntityTemplateFromFile)entry);
-
-        public void UpdateEntry(IDbEntityTemplate entry) => UpdateEntry((IDbEntityTemplateFromFile)entry);
-
-        public void UpdateEntry(IDbEntityTemplateFromFile entry)
+        protected override void UpdateEntry(IDbEntityTemplateFromFile entry)
         {
             var model = dataProvider.GetModel<TextModel>(DataRef);
             model.Text = EntityTemplate;
             entry.DataRef = DataRef;
         }
 
-        public void UpdateVM(IDbEntityTemplateFromFile entry)
+        protected override void UpdateVM(IDbEntityTemplateFromFile entry)
         {
             var model = entityTemplatesDataProvider.GetEntityTemplate(entry.Id);
 

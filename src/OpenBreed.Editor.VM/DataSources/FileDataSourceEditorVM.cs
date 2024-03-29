@@ -1,9 +1,10 @@
-﻿using OpenBreed.Database.Interface.Items.DataSources;
+﻿using OpenBreed.Common.Interface.Data;
+using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.DataSources
 {
-    public class FileDataSourceEditorVM : BaseViewModel, IEntryEditor<IDbDataSource>, IEntryEditor<IDbFileDataSource>
+    public class FileDataSourceEditorVM : DataSourceEditorBaseVM<IDbFileDataSource>
     {
         #region Private Fields
 
@@ -13,7 +14,9 @@ namespace OpenBreed.Editor.VM.DataSources
 
         #region Public Constructors
 
-        public FileDataSourceEditorVM()
+        public FileDataSourceEditorVM(
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
         }
 
@@ -27,24 +30,22 @@ namespace OpenBreed.Editor.VM.DataSources
             set { SetProperty(ref _filePath, value); }
         }
 
+        public override string EditorName => "File Data Source Editor";
+
         #endregion Public Properties
 
-        #region Public Methods
+        #region Protected Methods
 
-        public void UpdateVM(IDbDataSource entry) => UpdateVM((IDbFileDataSource)entry);
-
-        public void UpdateEntry(IDbDataSource entry) => UpdateEntry((IDbFileDataSource)entry);
-
-        public void UpdateEntry(IDbFileDataSource entry)
+        protected override void UpdateEntry(IDbFileDataSource entry)
         {
             entry.FilePath = FilePath;
         }
 
-        public void UpdateVM(IDbFileDataSource entry)
+        protected override void UpdateVM(IDbFileDataSource entry)
         {
             FilePath = entry.FilePath;
         }
 
-        #endregion Public Methods
+        #endregion Protected Methods
     }
 }

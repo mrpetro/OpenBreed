@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.DataSources;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 {
-    public partial class FileDataSourceCtrl : UserControl
+    public partial class FileDataSourceCtrl : EntryEditorInnerCtrl
     {
         #region Private Fields
 
@@ -30,11 +31,11 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 
         #region Public Methods
 
-        public void Initialize(FileDataSourceEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm;
+            _vm = vm as FileDataSourceEditorVM ?? throw new ArgumentNullException(nameof(vm));
 
-            tbxFilePath.DataBindings.Add(nameof(tbxFilePath.Text), _vm, nameof(_vm.FilePath), false, DataSourceUpdateMode.OnPropertyChanged); 
+            tbxFilePath.DataBindings.Add(nameof(tbxFilePath.Text), _vm, nameof(_vm.FilePath), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         #endregion Public Methods

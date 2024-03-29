@@ -1,11 +1,12 @@
-﻿using OpenBreed.Editor.VM.Sprites;
+﻿using OpenBreed.Editor.VM;
+using OpenBreed.Editor.VM.Sprites;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
-    public partial class SpriteSetFromImageEditorCtrl : UserControl
+    public partial class SpriteSetFromImageEditorCtrl : EntryEditorInnerCtrl
     {
         #region Private Fields
 
@@ -28,9 +29,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
         #region Public Methods
 
-        public void Initialize(SpriteSetFromImageEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            this.vm = vm ?? throw new InvalidOperationException(nameof(vm));
+            this.vm = vm as SpriteSetFromImageEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             SpriteEditor.Initialize(this.vm.SpriteEditor);
 

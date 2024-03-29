@@ -88,14 +88,15 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _viewFactory.Register<ImageFromFileEditorVM, EntryEditorView<ImageFromFileEditorCtrl>>();
             _viewFactory.Register<PcmSoundEditorVM, EntryEditorView<PcmSoundEditorCtrl>>();
             _viewFactory.Register<ActionSetEmbeddedEditorVM, EntryEditorView<ActionSetEmbeddedEditorCtrl>>();
-
-            _viewFactory.Register<SpriteSetEditorVM, EntryEditorView<SpriteSetEditorCtrl>>();
-
-            _viewFactory.Register<TextEditorVM, EntryEditorView<TextEditorCtrl>>();
-            _viewFactory.Register<ScriptEditorVM, EntryEditorView<ScriptEditorCtrl>>();
-            _viewFactory.Register<EntityTemplateEditorVM, EntryEditorView<EntityTemplateEditorCtrl>>();
-
-            _viewFactory.Register<DataSourceEditorVM, EntryEditorView<DataSourceEditorCtrl>>();
+            _viewFactory.Register<SpriteSetFromImageEditorVM, EntryEditorView<SpriteSetFromImageEditorCtrl>>();
+            _viewFactory.Register<SpriteSetFromSprEditorVM, EntryEditorView<SpriteSetFromSprEditorCtrl>>();
+            _viewFactory.Register<ScriptEmbeddedEditorVM, EntryEditorView<ScriptEmbeddedCtrl>>();
+            _viewFactory.Register<ScriptFromFileEditorVM, EntryEditorView<ScriptFromFileCtrl>>();
+            _viewFactory.Register<TextEmbeddedEditorVM, EntryEditorView<TextEmbeddedEditorCtrl>>();
+            _viewFactory.Register<TextFromMapEditorVM, EntryEditorView<TextFromMapEditorCtrl>>();
+            _viewFactory.Register<EntityTemplateFromFileEditorVM, EntryEditorView<EntityTemplateFromFileCtrl>>();
+            _viewFactory.Register<FileDataSourceEditorVM, EntryEditorView<FileDataSourceCtrl>>();
+            _viewFactory.Register<EpfArchiveFileDataSourceEditorVM, EntryEditorView<EpfArchiveDataSourceCtrl>>();
 
             Theme = new WeifenLuo.WinFormsUI.Docking.VS2015LightTheme();
         }

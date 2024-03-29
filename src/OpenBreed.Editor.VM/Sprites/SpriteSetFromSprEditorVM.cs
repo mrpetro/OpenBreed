@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetFromSprEditorVM : SpriteSetEditorExVM, IEntryEditor<IDbSpriteAtlasFromSpr>
+    public class SpriteSetFromSprEditorVM : SpriteSetEditorBaseVM<IDbSpriteAtlasFromSpr>
     {
         #region Private Fields
 
@@ -21,9 +21,12 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetFromSprEditorVM(SpriteAtlasDataProvider spriteSetsDataProvider,
-                                          PalettesDataProvider palettesDataProvider,
-                                          IModelsProvider dataProvider) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider)
+        public SpriteSetFromSprEditorVM(
+            SpriteAtlasDataProvider spriteSetsDataProvider,
+            PalettesDataProvider palettesDataProvider,
+            IModelsProvider dataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
             Items = new BindingList<SpriteVM>();
         }
@@ -40,33 +43,9 @@ namespace OpenBreed.Editor.VM.Sprites
             set { SetProperty(ref currentSpriteIndex, value); }
         }
 
+        public override string EditorName => "SPR Sprite Set Editor";
+
         #endregion Public Properties
-
-        #region Public Methods
-
-        void IEntryEditor<IDbSpriteAtlasFromSpr>.UpdateEntry(IDbSpriteAtlasFromSpr entry)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void IEntryEditor<IDbSpriteAtlasFromSpr>.UpdateVM(IDbSpriteAtlasFromSpr entry)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void UpdateEntry(IDbSpriteAtlas entry)
-        {
-            base.UpdateEntry(entry);
-            UpdateEntry((IDbSpriteAtlasFromSpr)entry);
-        }
-
-        public override void UpdateVM(IDbSpriteAtlas entry)
-        {
-            base.UpdateVM(entry);
-            UpdateVM((IDbSpriteAtlasFromSpr)entry);
-        }
-
-        #endregion Public Methods
 
         #region Protected Methods
 
@@ -81,7 +60,6 @@ namespace OpenBreed.Editor.VM.Sprites
                     foreach (var item in Items)
                         BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
 
-
                     break;
 
                 default:
@@ -91,15 +69,11 @@ namespace OpenBreed.Editor.VM.Sprites
             base.OnPropertyChanged(name);
         }
 
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private void UpdateEntry(IDbSpriteAtlasFromSpr entry)
+        protected override void UpdateEntry(IDbSpriteAtlasFromSpr entry)
         {
         }
 
-        private void UpdateVM(IDbSpriteAtlasFromSpr entry)
+        protected override void UpdateVM(IDbSpriteAtlasFromSpr entry)
         {
             var model = spriteAtlasDataProvider.GetSpriteSet(entry.Id);
 
@@ -111,6 +85,10 @@ namespace OpenBreed.Editor.VM.Sprites
             foreach (var item in Items)
                 BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
         }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void FromModel(SpriteSetModel spriteSet)
         {

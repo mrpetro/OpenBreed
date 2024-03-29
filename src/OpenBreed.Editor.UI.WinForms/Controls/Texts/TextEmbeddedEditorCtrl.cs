@@ -33,11 +33,11 @@ namespace OpenBreed.Editor.UI.WinForms.Controls. Texts
 
         #region Public Methods
 
-        public void Initialize(TextEmbeddedEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            this.vm = vm ?? throw new ArgumentNullException(nameof(vm));
+            this.vm = vm as TextEmbeddedEditorVM ?? throw new ArgumentNullException(nameof(vm));
 
-            tbxText.DataBindings.Add(nameof(tbxText.Text), this.vm, nameof(vm.Text), false, DataSourceUpdateMode.OnPropertyChanged);
+            tbxText.DataBindings.Add(nameof(tbxText.Text), this.vm, nameof(this.vm.Text), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         #endregion Public Methods

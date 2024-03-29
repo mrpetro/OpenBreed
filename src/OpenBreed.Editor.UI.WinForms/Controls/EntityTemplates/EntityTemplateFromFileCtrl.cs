@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.VM.EntityTemplates;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates
 {
@@ -32,9 +33,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates
 
         #region Public Methods
 
-        public void Initialize(EntityTemplateFromFileEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
+            _vm = vm as EntityTemplateFromFileEditorVM ?? throw new ArgumentNullException(nameof(vm));
 
             tbxFileDataRef.DataBindings.Add(nameof(tbxFileDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);
 

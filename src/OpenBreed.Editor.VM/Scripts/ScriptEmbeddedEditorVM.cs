@@ -1,10 +1,11 @@
 ﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
-    public class ScriptEmbeddedEditorVM : BaseViewModel, IEntryEditor<IDbScript>, IEntryEditor<IDbScriptEmbedded>
+    public class ScriptEmbeddedEditorVM : ScriptEditorBaseVM<IDbScriptEmbedded>
     {
         #region Private Fields
 
@@ -17,7 +18,10 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Constructors
 
-        public ScriptEmbeddedEditorVM(ScriptsDataProvider scriptsDataProvider)
+        public ScriptEmbeddedEditorVM(
+            ScriptsDataProvider scriptsDataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
             this.scriptsDataProvider = scriptsDataProvider;
         }
@@ -38,20 +42,18 @@ namespace OpenBreed.Editor.VM.Scripts
             set { SetProperty(ref dataRef, value); }
         }
 
+        public override string EditorName => "Embedded Script Editor";
+
         #endregion Public Properties
 
-        #region Public Methods
+        #region Protected Methods
 
-        public void UpdateVM(IDbScript entry) => UpdateVM((IDbScriptEmbedded)entry);
-
-        public void UpdateEntry(IDbScript entry) => UpdateEntry((IDbScriptEmbedded)entry);
-
-        public void UpdateEntry(IDbScriptEmbedded entry)
+        protected override void UpdateEntry(IDbScriptEmbedded entry)
         {
             entry.DataRef = DataRef;
         }
 
-        public void UpdateVM(IDbScriptEmbedded entry)
+        protected override void UpdateVM(IDbScriptEmbedded entry)
         {
             var model = scriptsDataProvider.GetScript(entry.Id);
 
@@ -61,6 +63,6 @@ namespace OpenBreed.Editor.VM.Scripts
             DataRef = entry.DataRef;
         }
 
-        #endregion Public Methods
+        #endregion Protected Methods
     }
 }

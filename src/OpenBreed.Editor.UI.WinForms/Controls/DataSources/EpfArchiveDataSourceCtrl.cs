@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.DataSources;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 {
-    public partial class EpfArchiveDataSourceCtrl : UserControl
+    public partial class EpfArchiveDataSourceCtrl : EntryEditorInnerCtrl
     {
         #region Private Fields
 
@@ -30,9 +31,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 
         #region Public Methods
 
-        public void Initialize(EpfArchiveFileDataSourceEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm;
+            _vm = vm as EpfArchiveFileDataSourceEditorVM ?? throw new ArgumentNullException(nameof(vm));
 
             tbxEpfArchivePath.DataBindings.Add(nameof(tbxEpfArchivePath.Text), _vm, nameof(_vm.ArchivePath), false, DataSourceUpdateMode.OnPropertyChanged);
             cbxEntryName.DataBindings.Add(nameof(cbxEntryName.Text), _vm, nameof(_vm.EntryName), false, DataSourceUpdateMode.OnPropertyChanged);

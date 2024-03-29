@@ -10,7 +10,7 @@ using OpenBreed.Common.Interface.Data;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
-    public class ScriptFromFileEditorVM : BaseViewModel, IEntryEditor<IDbScript>, IEntryEditor<IDbScriptFromFile>
+    public class ScriptFromFileEditorVM : ScriptEditorBaseVM<IDbScriptFromFile>
     {
         #region Private Fields
 
@@ -26,7 +26,11 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Constructors
 
-        public ScriptFromFileEditorVM(IWorkspaceMan workspaceMan, ScriptsDataProvider scriptsDataProvider, IModelsProvider dataProvider)
+        public ScriptFromFileEditorVM(
+            ScriptsDataProvider scriptsDataProvider,
+            IModelsProvider dataProvider,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
             this.scriptsDataProvider = scriptsDataProvider;
             this.dataProvider = dataProvider;
@@ -60,11 +64,13 @@ namespace OpenBreed.Editor.VM.Scripts
             set { SetProperty(ref _script, value); }
         }
 
+        public override string EditorName => "File Script Editor";
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public void UpdateEntry(IDbScriptFromFile entry)
+        protected override void UpdateEntry(IDbScriptFromFile entry)
         {
             var scriptFromFileEntry = (IDbScriptFromFile)entry;
 
@@ -74,7 +80,7 @@ namespace OpenBreed.Editor.VM.Scripts
             scriptFromFileEntry.DataRef = DataRef;
         }
 
-        public void UpdateVM(IDbScriptFromFile entry)
+        protected override void UpdateVM(IDbScriptFromFile entry)
         {
             var scriptFromFileEntry = (IDbScriptFromFile)entry;
 
@@ -85,10 +91,6 @@ namespace OpenBreed.Editor.VM.Scripts
 
             DataRef = scriptFromFileEntry.DataRef;
         }
-
-        public void UpdateVM(IDbScript entry) => UpdateVM((IDbScriptFromFile)entry);
-
-        public void UpdateEntry(IDbScript entry) => UpdateEntry((IDbScriptFromFile)entry);
 
         #endregion Public Methods
 

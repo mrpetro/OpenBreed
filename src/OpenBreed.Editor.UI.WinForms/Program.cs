@@ -140,7 +140,6 @@ namespace OpenBreed.Editor.UI.WinForms
 
             builder.SetupCommonViewModels();
             builder.SetupDbEntryEditors();
-            builder.SetupDbEntrySubEditors();
             builder.SetupDbEntryEditorFactory();
             builder.SetupDbEntrySubEditorFactory();
 

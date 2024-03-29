@@ -1,9 +1,10 @@
-﻿using OpenBreed.Database.Interface.Items.DataSources;
+﻿using OpenBreed.Common.Interface.Data;
+using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM.DataSources
 {
-    public class EpfArchiveFileDataSourceEditorVM : BaseViewModel, IEntryEditor<IDbDataSource>, IEntryEditor<IDbEpfArchiveDataSource>
+    public class EpfArchiveFileDataSourceEditorVM : DataSourceEditorBaseVM<IDbEpfArchiveDataSource>
     {
         #region Private Fields
 
@@ -14,7 +15,8 @@ namespace OpenBreed.Editor.VM.DataSources
 
         #region Public Constructors
 
-        public EpfArchiveFileDataSourceEditorVM()
+        public EpfArchiveFileDataSourceEditorVM(IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
         }
 
@@ -34,26 +36,24 @@ namespace OpenBreed.Editor.VM.DataSources
             set { SetProperty(ref _entryName, value); }
         }
 
+        public override string EditorName => "EPF Data Source Editor";
+
         #endregion Public Properties
 
-        #region Public Methods
+        #region Protected Methods
 
-        public void UpdateVM(IDbDataSource entry) => UpdateVM((IDbEpfArchiveDataSource)entry);
-
-        public void UpdateEntry(IDbDataSource entry) => UpdateEntry((IDbEpfArchiveDataSource)entry);
-
-        public void UpdateEntry(IDbEpfArchiveDataSource entry)
+        protected override void UpdateEntry(IDbEpfArchiveDataSource entry)
         {
             entry.ArchivePath = ArchivePath;
             entry.EntryName = EntryName;
         }
 
-        public void UpdateVM(IDbEpfArchiveDataSource entry)
+        protected override void UpdateVM(IDbEpfArchiveDataSource entry)
         {
             ArchivePath = entry.ArchivePath;
             EntryName = entry.EntryName;
         }
 
-        #endregion Public Methods
+        #endregion Protected Methods
     }
 }
