@@ -26,7 +26,8 @@ namespace OpenBreed.Editor.VM.Sprites
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider, controlFactory)
         {
             Items = new BindingList<SpriteVM>();
         }

@@ -37,7 +37,14 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorVM(IWorkspaceMan workspaceMan, MapsDataProvider mapsDataProvider, PalettesDataProvider palettesDataProvider, ActionSetsDataProvider actionSetsDataProvider, TileAtlasDataProvider tileAtlasDataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+        public MapEditorVM(
+            IWorkspaceMan workspaceMan, 
+            MapsDataProvider mapsDataProvider,
+            PalettesDataProvider palettesDataProvider,
+            ActionSetsDataProvider actionSetsDataProvider, 
+            TileAtlasDataProvider tileAtlasDataProvider, 
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             Tools = new MapEditorToolsVM();
 

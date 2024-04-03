@@ -14,7 +14,8 @@ namespace OpenBreed.Editor.VM.Texts
 
         public TextEditorBaseVM(
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
         }
 

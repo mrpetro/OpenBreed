@@ -29,7 +29,8 @@ namespace OpenBreed.Editor.VM.Images
         public ImageFromFileEditorVM(
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IModelsProvider dataProvider) : base(workspaceMan, dialogProvider)
+            IModelsProvider dataProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             this.workspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;

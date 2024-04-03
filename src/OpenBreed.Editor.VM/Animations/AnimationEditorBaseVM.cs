@@ -14,7 +14,8 @@ namespace OpenBreed.Editor.VM.Animations
 
         public AnimationEditorBaseVM(
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
         }
 

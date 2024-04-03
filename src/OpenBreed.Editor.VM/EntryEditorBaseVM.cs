@@ -7,12 +7,17 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Editor.VM
 {
+
+
+
+
     public abstract class EntryEditorBaseVM<E> : EntryEditorVM where E : IDbEntry
     {
         #region Private Fields
 
         private static readonly HashSet<string> propertyNamesIgnoredForChanges = new HashSet<string>();
         private readonly IDialogProvider dialogProvider;
+        private readonly IControlFactory controlFactory;
         private readonly IRepository<E> repository;
         private E edited;
         private E next;
@@ -33,11 +38,21 @@ namespace OpenBreed.Editor.VM
 
         #region Protected Constructors
 
-        protected EntryEditorBaseVM(IWorkspaceMan workspaceMan, IDialogProvider dialogProvider)
+        protected EntryEditorBaseVM(
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory)
         {
             WorkspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;
+            this.controlFactory = controlFactory;
+
             repository = WorkspaceMan.GetRepository<E>();
+
+            if (controlFactory.SupportsWpf(GetType()))
+            {
+                InnerCtrl = controlFactory.Create(GetType());
+            }
         }
 
         #endregion Protected Constructors

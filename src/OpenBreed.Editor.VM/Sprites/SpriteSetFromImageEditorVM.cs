@@ -27,7 +27,8 @@ namespace OpenBreed.Editor.VM.Sprites
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(spriteAtlasDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(spriteAtlasDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider, controlFactory)
         {
             SpriteEditor = new SpriteFromImageEditorVM(this);
             Items = new BindingList<SpriteFromImageVM>();

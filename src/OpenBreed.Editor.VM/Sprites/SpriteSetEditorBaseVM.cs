@@ -38,7 +38,8 @@ namespace OpenBreed.Editor.VM.Sprites
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             this.spriteAtlasDataProvider = spriteAtlasDataProvider;
             this.palettesDataProvider = palettesDataProvider;

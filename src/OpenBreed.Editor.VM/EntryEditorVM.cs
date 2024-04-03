@@ -13,7 +13,6 @@ namespace OpenBreed.Editor.VM
 {
     public abstract class EntryEditorVM : BaseViewModel
     {
-
         #region Private Fields
 
         private bool _commitEnabled;
@@ -24,8 +23,21 @@ namespace OpenBreed.Editor.VM
         private string _title;
         private string _id;
         private string _description;
+        private object _innerCtrl;
 
         #endregion Private Fields
+
+        #region Protected Constructors
+
+        protected EntryEditorVM()
+        {
+            CommitCommand = new Command(() => Commit());
+            RevertCommand = new Command(() => Revert());
+            EditPreviousCommand = new Command(() => EditPreviousEntry());
+            EditNextCommand = new Command(() => EditNextEntry());
+        }
+
+        #endregion Protected Constructors
 
         #region Public Properties
 
@@ -33,6 +45,15 @@ namespace OpenBreed.Editor.VM
         public Action ClosedAction { get; set; }
         public Action<string> CommitedAction { get; set; }
         public Action ClosingAction { get; set; }
+
+        public BaseViewModel DataEditor { get; }
+
+        public object InnerCtrl
+        {
+            get { return _innerCtrl; }
+            set { SetProperty(ref _innerCtrl, value); }
+        }
+
         public bool CommitEnabled
         {
             get { return _commitEnabled; }
@@ -83,11 +104,12 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _title, value); }
         }
 
+        public Command CommitCommand { get; }
+        public Command RevertCommand { get; }
+        public Command EditPreviousCommand { get; }
+        public Command EditNextCommand { get; }
+
         #endregion Public Properties
-
-        #region Internal Properties
-
-        #endregion Internal Properties
 
         #region Public Methods
 
@@ -104,10 +126,13 @@ namespace OpenBreed.Editor.VM
         }
 
         public abstract void Commit();
+
         public abstract void Revert();
 
         public abstract void EditEntry(string name);
+
         public abstract void EditNextEntry();
+
         public abstract void EditPreviousEntry();
 
         #endregion Public Methods

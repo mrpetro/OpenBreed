@@ -13,7 +13,8 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         public EntityTemplateEditorBaseVM(
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
         }
 

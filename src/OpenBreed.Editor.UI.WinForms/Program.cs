@@ -42,6 +42,7 @@ using OpenBreed.Database.Xml.Tables;
 using OpenBreed.Database.EFCore;
 using OpenBreed.Database.EFCore.Extensions;
 using OpenBreed.Editor.UI.WinForms.Extensions;
+using OpenBreed.Editor.UI.Wpf.Extensions;
 
 namespace OpenBreed.Editor.UI.WinForms
 {
@@ -142,6 +143,7 @@ namespace OpenBreed.Editor.UI.WinForms
             builder.SetupDbEntryEditors();
             builder.SetupDbEntryEditorFactory();
             builder.SetupDbEntrySubEditorFactory();
+            builder.ConfigureControlFactory();
 
             var host = builder.Build();
 

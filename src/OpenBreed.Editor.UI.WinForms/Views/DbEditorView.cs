@@ -21,7 +21,6 @@ using OpenBreed.Editor.UI.WinForms.Controls.Sounds;
 using OpenBreed.Editor.UI.WinForms.Controls.Tiles;
 using OpenBreed.Editor.UI.WinForms.Controls.Images;
 using OpenBreed.Editor.UI.WinForms.Controls.Actions;
-using OpenBreed.Editor.UI.WinForms.Controls.Palettes;
 using OpenBreed.Editor.UI.WinForms.Controls.Maps;
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.DataSources;
@@ -35,6 +34,8 @@ using OpenBreed.Editor.UI.WinForms.Controls.Scripts;
 using OpenBreed.Editor.VM.EntityTemplates;
 using OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates;
 using System.Drawing.Design;
+using OpenBreed.Editor.UI.Wpf;
+using OpenBreed.Editor.UI.Wpf.Extensions;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
@@ -54,7 +55,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
     public partial class DbEditorView : DockPanel
     {
-        private ViewFactory _viewFactory = new ViewFactory();
+        private readonly ViewFactory _viewFactory;
 
         #region Private Fields
 
@@ -80,9 +81,13 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
 
-            _viewFactory.Register<PaletteFromMapEditorVM, EntryEditorView<PaletteFromMapCtrl>>();
-            _viewFactory.Register<PaletteFromLbmEditorVM, EntryEditorView<PaletteFromLbmCtrl>>();
-            _viewFactory.Register<PaletteFromBinaryEditorVM, EntryEditorView<PaletteFromBinaryCtrl>>();
+            var ctrlFactory = new ControlFactory();
+            ctrlFactory.RegisterWpfControls();
+
+
+
+            _viewFactory = new ViewFactory(ctrlFactory);
+
             _viewFactory.Register<TileSetFromBlkEditorVM, EntryEditorView<TileSetFromBlkEditorCtrl>>();
             _viewFactory.Register<MapEditorVM, EntryEditorView<MapEditorCtrl>>();
             _viewFactory.Register<ImageFromFileEditorVM, EntryEditorView<ImageFromFileEditorCtrl>>();
@@ -218,9 +223,19 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         private void OnEntryEditorOpening(EntryEditorVM editor)
         {
-            var editorView = _viewFactory.CreateView(editor.GetType());
-            editorView.Initialize(editor);
-            editorView.Show(this, DockState.Document);
+            var editorViewWpf = _viewFactory.CreateViewWpf(editor.GetType());
+
+            if (editorViewWpf is not null)
+            {
+                editorViewWpf.Initialize(editor);
+                editorViewWpf.Show(this, DockState.Document);
+            }
+            else
+            {
+                var editorView = _viewFactory.CreateView(editor.GetType());
+                editorView.Initialize(editor);
+                editorView.Show(this, DockState.Document);
+            }
         }
 
         #endregion Private Methods

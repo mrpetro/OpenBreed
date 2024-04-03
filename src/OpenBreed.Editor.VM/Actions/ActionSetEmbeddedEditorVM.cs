@@ -25,7 +25,8 @@ namespace OpenBreed.Editor.VM.Actions
         public ActionSetEmbeddedEditorVM(
                     ActionSetsDataProvider actionSetsDataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             Items = new BindingList<ActionVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));

@@ -1,55 +1,68 @@
-﻿using OpenBreed.Editor.UI.WinForms.Views;
+﻿using OpenBreed.Editor.UI.WinForms.Controls;
+using OpenBreed.Editor.UI.WinForms.Views;
+using OpenBreed.Editor.UI.Wpf;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace OpenBreed.Editor.VM
 {
-
-    internal interface IViewCreator
-    {
-        EntryEditorBaseView Create();
-    }
-
-    internal class ViewCreator<T> : IViewCreator where T: EntryEditorBaseView, new()
-    {
-        public EntryEditorBaseView Create()
-        {
-            return new T();
-        }
-    }
-
     public class ViewFactory
     {
-        private Dictionary<Type, IViewCreator> _creators = new Dictionary<Type, IViewCreator>();
+        #region Private Fields
 
-        public void Register<VM,V>() where VM : EntryEditorVM where V: EntryEditorBaseView, new()
+        private readonly Dictionary<Type, Func<EntryEditorBaseView>> _initializers = new Dictionary<Type, Func<EntryEditorBaseView>>();
+
+        private readonly IControlFactory controlFactory;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public ViewFactory(IControlFactory controlFactory)
+        {
+            this.controlFactory = controlFactory;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void Register<VM, V>() where VM : EntryEditorVM where V : EntryEditorBaseView, new()
         {
             var entryType = typeof(VM);
 
-            if (_creators.ContainsKey(entryType))
+            if (_initializers.ContainsKey(entryType))
+            {
                 throw new InvalidOperationException($"Factory already has type '{entryType}' registered.");
+            }
 
-            _creators.Add(typeof(VM), new ViewCreator<V>());
-        }
-
-        public EntryEditorBaseView CreateEditor<VM>()
-        {
-            return CreateView(typeof(VM));
+            _initializers.Add(typeof(VM), () => new V());
         }
 
         public EntryEditorBaseView CreateView(Type entryType)
         {
-            IViewCreator creator = null;
+            if (_initializers.TryGetValue(entryType, out Func<EntryEditorBaseView> initializer))
+            {
+                return initializer.Invoke();
+            }
 
-            if (_creators.TryGetValue(entryType, out creator))
-                return creator.Create();
-            else
-                throw new InvalidOperationException($"{entryType}' type not registered.");
-
+            throw new InvalidOperationException($"{entryType}' type not registered.");
         }
+
+        public EntryEditorViewWpf CreateViewWpf(Type entryType)
+        {
+            if (!controlFactory.SupportsWpf(entryType))
+            {
+                return null;
+            }
+
+            return new EntryEditorViewWpf();
+        }
+
+        #endregion Public Methods
     }
 }

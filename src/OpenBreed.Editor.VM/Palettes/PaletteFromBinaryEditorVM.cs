@@ -29,7 +29,8 @@ namespace OpenBreed.Editor.VM.Palettes
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(palettesDataProvider, dataProvider, workspaceMan, dialogProvider, controlFactory)
         {
         }
 

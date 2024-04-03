@@ -22,7 +22,8 @@ namespace OpenBreed.Editor.VM.Texts
         public TextEmbeddedEditorVM(
             TextsDataProvider textsDataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             this.textsDataProvider = textsDataProvider;
         }

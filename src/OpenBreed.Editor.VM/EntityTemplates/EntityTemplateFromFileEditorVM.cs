@@ -28,7 +28,8 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             EntityTemplatesDataProvider entityTemplatesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             this.entityTemplatesDataProvider = entityTemplatesDataProvider;
             this.dataProvider = dataProvider;

@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.VM.Texts
             TextsDataProvider textsDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider, IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             this.textsDataProvider = textsDataProvider;
             this.dataProvider = dataProvider;

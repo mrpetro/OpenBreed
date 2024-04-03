@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Converters\ColorToBrushConverter.cs">
       <Generator></Generator>
     </Compile>

@@ -27,7 +27,12 @@ namespace OpenBreed.Editor.VM.Sounds
 
         #region Public Constructors
 
-        public PcmSoundEditorVM(IWorkspaceMan workspaceMan, IDialogProvider dialogProvider, SoundsDataProvider soundsDataProvider, IPcmPlayer pcmPlayer) : base(workspaceMan, dialogProvider)
+        public PcmSoundEditorVM(
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider,
+            SoundsDataProvider soundsDataProvider,
+            IPcmPlayer pcmPlayer,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             this.soundsDataProvider = soundsDataProvider;
             this.pcmPlayer = pcmPlayer;

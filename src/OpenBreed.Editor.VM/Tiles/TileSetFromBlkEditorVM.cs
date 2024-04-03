@@ -32,7 +32,8 @@ namespace OpenBreed.Editor.VM.Tiles
             TileAtlasDataProvider tileSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             PaletteIds = new BindingList<string>();
             this.tileSetsDataProvider = tileSetsDataProvider;

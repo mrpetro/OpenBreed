@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Editor.UI.WinForms.Controls;
+using OpenBreed.Editor.UI.WinForms.Helpers;
 using OpenBreed.Editor.VM;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,11 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    public partial class EntryEditorBaseView : DockContent
+    public partial class EntryEditorViewWpf : DockContent
     {
         #region Public Constructors
 
-        public EntryEditorBaseView()
+        public EntryEditorViewWpf()
         {
             InitializeComponent();
         }
@@ -41,7 +42,10 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             DataBindings.Add(nameof(Text), VM, nameof(VM.Title), false, DataSourceUpdateMode.OnPropertyChanged);
 
-            EntryEditor.Initialize(VM);
+            var entryEditor = WpfHelper.CreateWpfControl<Wpf.EntryEditorCtrl>(VM);
+            entryEditor.Dock = DockStyle.Fill;
+            Controls.Add(entryEditor);
+
         }
 
         #endregion Public Methods

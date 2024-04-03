@@ -15,7 +15,8 @@ namespace OpenBreed.Editor.VM.Scripts
 
         public ScriptEditorBaseVM(
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider,
+            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
         }
 
