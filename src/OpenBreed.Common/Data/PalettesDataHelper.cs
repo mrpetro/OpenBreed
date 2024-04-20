@@ -4,7 +4,6 @@ using OpenBreed.Model.Palettes;
 using OpenBreed.Database.Interface.Items.Palettes;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +12,7 @@ using OpenBreed.Model;
 using OpenBreed.Reader.Legacy.Palettes;
 using OpenBreed.Common.Interface.Data;
 using System.Drawing.Imaging;
+using OpenBreed.Common.Interface.Drawing;
 
 namespace OpenBreed.Common.Data
 {
@@ -26,7 +26,7 @@ namespace OpenBreed.Common.Data
             for (int i = 0; i < paletteBlock.Value.Length; i++)
             {
                 var colorData = paletteBlock.Value[i];
-                paletteBuilder.SetColor(i, Color.FromArgb(255, colorData.R, colorData.G, colorData.B));
+                paletteBuilder.SetColor(i, MyColor.FromArgb(255, colorData.R, colorData.G, colorData.B));
             }
 
             //for (int i = 64; i < paletteBlock.Value.Length; i++)
@@ -38,7 +38,7 @@ namespace OpenBreed.Common.Data
             return paletteBuilder.Build();
         }
 
-        public static PaletteModel Create(ColorPalette palette)
+        public static PaletteModel Create(IColorPalette palette)
         {
             var paletteBuilder = PaletteBuilder.NewPaletteModel();
             paletteBuilder.SetName("Default");
@@ -46,7 +46,7 @@ namespace OpenBreed.Common.Data
             for (int i = 0; i < palette.Entries.Length; i++)
             {
                 var colorData = palette.Entries[i];
-                paletteBuilder.SetColor(i, Color.FromArgb(255, colorData.R, colorData.G, colorData.B));
+                paletteBuilder.SetColor(i, MyColor.FromArgb(255, colorData.R, colorData.G, colorData.B));
             }
 
             return paletteBuilder.Build();
@@ -54,7 +54,7 @@ namespace OpenBreed.Common.Data
 
         public static PaletteModel FromLbmImage(IModelsProvider dataProvider, IDbPaletteFromLbm entry)
         {
-            var image = dataProvider.GetModel<Image>(entry.DataRef);
+            var image = dataProvider.GetModel<IImage>(entry.DataRef);
 
             if (image is null)
                 return null;

@@ -1,7 +1,7 @@
-﻿using OpenBreed.Model.Palettes;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Model.Palettes;
 using OpenBreed.Reader.Palettes;
 using System;
-using System.Drawing;
 using System.IO;
 
 namespace OpenBreed.Reader.Legacy.Palettes
@@ -55,28 +55,28 @@ namespace OpenBreed.Reader.Legacy.Palettes
 
         #region Internal Methods
 
-        internal static Color From16Bit(UInt16 value)
+        internal static MyColor From16Bit(UInt16 value)
         {
             byte r = (byte)(((value & 0x0FFF) >> 8) * 17);
             byte g = (byte)(((value & 0x00FF) >> 4) * 17);
             byte b = (byte)(((value & 0x000F)) * 17);
-            return Color.FromArgb(255, r, g, b);
+            return MyColor.FromArgb(255, r, g, b);
         }
 
-        internal static Color From32Bit(UInt32 value)
+        internal static MyColor From32Bit(UInt32 value)
         {
             byte b = (byte)(((value & 0x000000FF)));
             byte g = (byte)(((value & 0x0000FFFF) >> 8));
             byte r = (byte)(((value & 0x00FFFFFF) >> 16));
-            return Color.FromArgb(255, r, g, b);
+            return MyColor.FromArgb(255, r, g, b);
         }
 
-        internal static Color FromVga24BitColor(byte[] value)
+        internal static MyColor FromVga24BitColor(byte[] value)
         {
             var r = (byte)(((int)value[0]) << 2);
             var g = (byte)(((int)value[1]) << 2);
             var b = (byte)(((int)value[2]) << 2);
-            return Color.FromArgb(255, r, g, b);
+            return MyColor.FromArgb(255, r, g, b);
         }
 
         #endregion Internal Methods

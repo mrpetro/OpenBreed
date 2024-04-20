@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using OpenBreed.Common.Interface.Drawing;
 using System.IO;
 
 namespace OpenBreed.Reader.Images
@@ -7,7 +7,7 @@ namespace OpenBreed.Reader.Images
     {
         #region Public Methods
 
-        Image Read(Stream stream);
+        IImage Read(Stream stream);
 
         #endregion Public Methods
     }

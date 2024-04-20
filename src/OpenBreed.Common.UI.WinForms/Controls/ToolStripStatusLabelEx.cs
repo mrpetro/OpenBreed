@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.UI.WinForms.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;

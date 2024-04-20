@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.DataSources;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Model.Images;
 using OpenBreed.Reader.Legacy.Images.ACBM;
@@ -11,10 +12,17 @@ namespace OpenBreed.Common.Formats
 {
     public class ACBMImageFormat : IDataFormatType
     {
+        #region Private Fields
+
+        private readonly IBitmapProvider bitmapProvider;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public ACBMImageFormat()
+        public ACBMImageFormat(IBitmapProvider bitmapProvider)
         {
+            this.bitmapProvider = bitmapProvider;
         }
 
         #endregion Public Constructors
@@ -51,7 +59,7 @@ namespace OpenBreed.Common.Formats
             //Remember to set source stream to begining
             ds.Stream.Seek(0, SeekOrigin.Begin);
 
-            var imageBuilder = ImageBuilder.NewImage();
+            var imageBuilder = ImageBuilder.NewImage(bitmapProvider);
             var reader = new ACBMImageReader(imageBuilder, width, height, bitPlanesNo, paletteMode);
             return reader.Read(ds.Stream);
         }

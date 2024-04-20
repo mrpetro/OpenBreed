@@ -1,9 +1,8 @@
-﻿using OpenBreed.Common.Tools;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Common.Tools;
 using OpenBreed.Model;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +13,15 @@ namespace OpenBreed.Model.Images
     {
         internal int Width;
         internal int Height;
-        internal PixelFormat PixelFormat;
+        internal MyPixelFormat PixelFormat;
         internal byte[] Data;
-        internal Color[] Palette;
+        internal MyColor[] Palette;
+        private readonly IBitmapProvider bitmapProvider;
+
+        public ImageBuilder(IBitmapProvider bitmapProvider)
+        {
+            this.bitmapProvider = bitmapProvider;
+        }
 
         public void SetSize(int width, int height)
         {
@@ -24,12 +29,12 @@ namespace OpenBreed.Model.Images
             Height = height;
         }
 
-        public void SetPixelFormat(PixelFormat pixelFormat)
+        public void SetPixelFormat(MyPixelFormat pixelFormat)
         {
             PixelFormat = pixelFormat;
         }
 
-        public void SetPalette(Color[] palette)
+        public void SetPalette(MyColor[] palette)
         {
             Palette = palette;
         }
@@ -39,15 +44,15 @@ namespace OpenBreed.Model.Images
             Data = data;
         }
 
-        public static ImageBuilder NewImage()
+        public static ImageBuilder NewImage(IBitmapProvider bitmapProvider)
         {
-            return new ImageBuilder();
+            return new ImageBuilder(bitmapProvider);
         }
 
-        public Image Build()
+        public IImage Build()
         {
-            var newImage = BitmapHelper.FromBytes(Width, Height, Data);
-            BitmapHelper.SetPaletteColors(newImage, Palette);
+            var newImage = bitmapProvider.FromBytes(Width, Height, Data);
+            bitmapProvider.SetPaletteColors(newImage, Palette);
             return newImage;
         }
     }

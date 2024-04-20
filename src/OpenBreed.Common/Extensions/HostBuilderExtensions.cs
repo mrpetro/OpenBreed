@@ -4,6 +4,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using System;
@@ -82,15 +83,15 @@ namespace OpenBreed.Common.Extensions
                 services.AddSingleton((s) =>
                 {
                     var formatMan = new DataFormatMan();
-                    formatMan.RegisterFormat("ABSE_MAP", new ABSEMAPFormat());
-                    formatMan.RegisterFormat("ABHC_MAP", new ABHCMAPFormat());
-                    formatMan.RegisterFormat("ABTA_MAP", new ABTAMAPFormat());
+                    formatMan.RegisterFormat("ABSE_MAP", new ABSEMAPFormat(s.GetRequiredService<IDrawingFactory>()));
+                    formatMan.RegisterFormat("ABHC_MAP", new ABHCMAPFormat(s.GetRequiredService<IDrawingFactory>()));
+                    formatMan.RegisterFormat("ABTA_MAP", new ABTAMAPFormat(s.GetRequiredService<IDrawingFactory>()));
                     formatMan.RegisterFormat("ABTABLK", new ABTABLKFormat());
                     formatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
                     formatMan.RegisterFormat("ABTAODDSPR", new ABTAODDSPRFormat());
                     formatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
-                    formatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
-                    formatMan.RegisterFormat("IFF_IMAGE", new IFFImageFormat());
+                    formatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat(s.GetRequiredService<IBitmapProvider>()));
+                    formatMan.RegisterFormat("IFF_IMAGE", new IFFImageFormat(s.GetRequiredService<IBitmapProvider>()));
                     formatMan.RegisterFormat("BINARY", new BinaryFormat());
                     formatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
                     formatMan.RegisterFormat("TEXT", new TextFormat());

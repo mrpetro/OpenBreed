@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging;
+﻿using OpenBreed.Common.Interface.Drawing;
 using System.IO;
 
 namespace OpenBreed.Model.Images
@@ -10,9 +9,9 @@ namespace OpenBreed.Model.Images
 
         void SetSize(int width, int height);
 
-        void SetPixelFormat(PixelFormat pixelFormat);
+        void SetPixelFormat(MyPixelFormat pixelFormat);
 
-        void SetPalette(Color[] palette);
+        void SetPalette(MyColor[] palette);
 
         void SetData(byte[] data);
 

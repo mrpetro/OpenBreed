@@ -1,12 +1,11 @@
-﻿using OpenBreed.Common.Readers.Images.IFF.Helpers;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Common.Readers.Images.IFF.Helpers;
 using OpenBreed.Model.Images;
 using OpenBreed.Reader.Images;
 using OpenBreed.Reader.Legacy;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,7 +25,7 @@ namespace OpenBreed.Common.Readers.Images.IFF
 
         private readonly ImageBuilder builder;
         private BMHDBlock bmhdBlock;
-        private Color[] cmapBlock;
+        private MyColor[] cmapBlock;
         private string formatId;
 
         #endregion Private Fields
@@ -47,7 +46,7 @@ namespace OpenBreed.Common.Readers.Images.IFF
         /// </summary>
         /// <param name="stream">Stream to data containing IFF data</param>
         /// <returns>Resulting image</returns>
-        public Image Read(Stream stream)
+        public IImage Read(Stream stream)
         {
             //We dont want to close the stream here so reader is not being used inside of 'using' statement
             var binReader = new BigEndianBinaryReader(stream);
@@ -119,7 +118,7 @@ namespace OpenBreed.Common.Readers.Images.IFF
             imageData = imageData.Reverse().ToArray();
 
             builder.SetSize(bmhdBlock.Width, bmhdBlock.Height);
-            builder.SetPixelFormat(PixelFormat.Format8bppIndexed);
+            builder.SetPixelFormat(MyPixelFormat.Format8bppIndexed);
             builder.SetData(imageData);
             builder.SetPalette(cmapBlock);
         }
@@ -127,7 +126,7 @@ namespace OpenBreed.Common.Readers.Images.IFF
         private void ProcessPBM(byte[] bytes)
         {
             builder.SetSize(bmhdBlock.Width, bmhdBlock.Height);
-            builder.SetPixelFormat(PixelFormat.Format8bppIndexed);
+            builder.SetPixelFormat(MyPixelFormat.Format8bppIndexed);
             builder.SetData(bytes);
             builder.SetPalette(cmapBlock);
         }
@@ -205,12 +204,12 @@ namespace OpenBreed.Common.Readers.Images.IFF
         private void ReadCMAPBlock(BigEndianBinaryReader binReader, int blockLength)
         {
             int colorsNo = (Int32)blockLength / 3;
-            cmapBlock = new Color[colorsNo];
+            cmapBlock = new MyColor[colorsNo];
 
             for (int i = 0; i < colorsNo; i++)
             {
                 var colorBytes = binReader.ReadBytes(3);
-                cmapBlock[i] = Color.FromArgb(colorBytes[0],
+                cmapBlock[i] = MyColor.FromArgb(colorBytes[0],
                                               colorBytes[1],
                                               colorBytes[2]);
             }

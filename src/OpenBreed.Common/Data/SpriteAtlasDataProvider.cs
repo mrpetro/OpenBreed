@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Model.Sprites;
@@ -11,17 +12,21 @@ namespace OpenBreed.Common.Data
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
-
+        private readonly IBitmapProvider bitmapProvider;
         private readonly IModelsProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteAtlasDataProvider(IModelsProvider dataProvider, IRepositoryProvider repositoryProvider)
+        public SpriteAtlasDataProvider(
+            IModelsProvider dataProvider,
+            IRepositoryProvider repositoryProvider,
+            IBitmapProvider bitmapProvider)
         {
             this.dataProvider = dataProvider;
             this.repositoryProvider = repositoryProvider;
+            this.bitmapProvider = bitmapProvider;
         }
 
         #endregion Public Constructors
@@ -53,7 +58,7 @@ namespace OpenBreed.Common.Data
 
         private SpriteSetModel GetModelImpl(IDbSpriteAtlasFromImage entry)
         {
-            return SpriteAtlasDataHelper.FromImageModel(dataProvider, entry);
+            return SpriteAtlasDataHelper.FromImageModel(dataProvider, bitmapProvider, entry);
         }
 
         #endregion Private Methods

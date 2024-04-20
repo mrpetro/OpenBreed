@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Model.Actions;
@@ -11,15 +12,26 @@ namespace OpenBreed.Common.Data
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
+        private readonly IDrawingFactory drawingFactory;
+        private readonly IDrawingContextProvider drawingContextProvider;
+        private readonly IImageProvider imageProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ActionSetsDataProvider(IModelsProvider modelsProvider, IRepositoryProvider repositoryProvider)
+        public ActionSetsDataProvider(
+            IModelsProvider modelsProvider,
+            IRepositoryProvider repositoryProvider,
+            IDrawingFactory drawingFactory,
+            IDrawingContextProvider drawingContextProvider,
+            IImageProvider imageProvider)
         {
             Provider = modelsProvider;
             this.repositoryProvider = repositoryProvider;
+            this.drawingFactory = drawingFactory;
+            this.drawingContextProvider = drawingContextProvider;
+            this.imageProvider = imageProvider;
         }
 
         #endregion Public Constructors
@@ -47,7 +59,7 @@ namespace OpenBreed.Common.Data
 
         private ActionSetModel GetModelImpl(IDbActionSet entry)
         {
-            return ActionSetsDataHelper.FromEmbeddedData(Provider, entry);
+            return ActionSetsDataHelper.FromEmbeddedData(drawingFactory, drawingContextProvider, imageProvider, Provider, entry);
         }
 
         private ActionSetModel GetModel(dynamic entry)

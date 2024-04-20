@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Interface.Drawing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,11 +7,18 @@ namespace OpenBreed.Model.Maps
 {
     public class MapLayoutBuilder
     {
+        #region Private Fields
+
+        private readonly IDrawingFactory drawingFactory;
+
+        #endregion Private Fields
+
         #region Private Constructors
 
-        private MapLayoutBuilder()
+        private MapLayoutBuilder(IDrawingFactory drawingFactory)
         {
             Layers = new List<MapLayerBuilder>();
+            this.drawingFactory = drawingFactory;
         }
 
         #endregion Private Constructors
@@ -27,9 +35,9 @@ namespace OpenBreed.Model.Maps
 
         #region Public Methods
 
-        public static MapLayoutBuilder NewMapLayoutModel()
+        public static MapLayoutBuilder NewMapLayoutModel(IDrawingFactory drawingFactory)
         {
-            return new MapLayoutBuilder();
+            return new MapLayoutBuilder(drawingFactory);
         }
 
         public void SetCellSize(int cellSize)
@@ -49,8 +57,6 @@ namespace OpenBreed.Model.Maps
             Height = height;
         }
 
-
-
         public MapLayoutModel Build()
         {
             var groupLayerBuilder = AddLayer(MapLayerType.Group);
@@ -59,8 +65,7 @@ namespace OpenBreed.Model.Maps
 
             groupLayerBuilder.GenerateGroups(actionLayer);
 
-
-            return new MapLayoutModel(this);
+            return new MapLayoutModel(this, drawingFactory);
         }
 
         public MapLayerBuilder AddLayer(MapLayerType layerType)

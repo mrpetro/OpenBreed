@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Interface.Drawing;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,15 +8,17 @@ namespace OpenBreed.Model.Maps
 {
     public class MapLayoutModel : IMapLayoutModel
     {
+        private readonly IDrawingFactory drawingFactory;
         #region Internal Constructors
 
-        internal MapLayoutModel(MapLayoutBuilder builder)
+        internal MapLayoutModel(MapLayoutBuilder builder, IDrawingFactory drawingFactory)
         {
+            this.drawingFactory = drawingFactory;
             CellSize = builder.CellSize;
             Width = builder.Width;
             Height = builder.Height;
             Layers = builder.Layers.Select(layer => layer.Build()).ToList();
-            Bounds = new RectangleF(0, 0, CellSize * Width, CellSize * Height);
+            Bounds = new MyRectangleF(0.0f, 0.0f, CellSize * Width, CellSize * Height);
             IndexBounds = GetIndexRectangle(Bounds);
         }
 
@@ -24,10 +27,10 @@ namespace OpenBreed.Model.Maps
         #region Public Properties
 
         public static bool FlippedY { get; set; }
-        public RectangleF Bounds { get; }
+        public MyRectangleF Bounds { get; }
         public int CellSize { get; }
         public int Height { get; }
-        public Rectangle IndexBounds { get; }
+        public MyRectangle IndexBounds { get; }
         public List<MapLayerModel> Layers { get; }
         public int Width { get; }
 
@@ -91,7 +94,7 @@ namespace OpenBreed.Model.Maps
             return values;
         }
 
-        public void GetClipIndices(RectangleF viewRect, out int xFrom, out int yFrom, out int xTo, out int yTo)
+        public void GetClipIndices(MyRectangleF viewRect, out int xFrom, out int yFrom, out int xTo, out int yTo)
         {
             xFrom = 0;
             yFrom = 0;
@@ -104,7 +107,7 @@ namespace OpenBreed.Model.Maps
             yTo = Clamp(yTo, 0, Height - 1);
         }
 
-        public Point GetIndexPoint(Point point)
+        public MyPoint GetIndexPoint(MyPoint point)
         {
             var x = point.X / CellSize;
             var y = point.Y / CellSize;
@@ -115,12 +118,12 @@ namespace OpenBreed.Model.Maps
             if (point.Y < 0)
                 y--;
 
-            return new Point(x, y);
+            return new MyPoint(x, y);
         }
 
-        public Rectangle GetIndexRectangle(RectangleF rect)
+        public MyRectangle GetIndexRectangle(MyRectangleF rect)
         {
-            return new Rectangle((int)(rect.X / CellSize), (int)(rect.Y / CellSize), (int)(rect.Width / CellSize), (int)(rect.Height / CellSize));
+            return new MyRectangle((int)(rect.X / CellSize), (int)(rect.Y / CellSize), (int)(rect.Width / CellSize), (int)(rect.Height / CellSize));
         }
 
         public MapLayerModel GetLayer(MapLayerType layerType)

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Drawing;
+﻿using OpenBreed.Common.Interface.Drawing;
+using System;
 
 namespace OpenBreed.Model.Palettes
 {
@@ -8,7 +8,7 @@ namespace OpenBreed.Model.Palettes
         #region Internal Fields
 
         internal string Name;
-        internal Color[] Colors;
+        internal MyColor[] Colors;
 
         #endregion Internal Fields
 
@@ -16,7 +16,7 @@ namespace OpenBreed.Model.Palettes
 
         private PaletteBuilder()
         {
-            Colors = new Color[256];
+            Colors = new MyColor[256];
         }
 
         #endregion Private Constructors
@@ -42,14 +42,14 @@ namespace OpenBreed.Model.Palettes
             return this;
         }
 
-        public PaletteBuilder SetColors(Color[] colors)
+        public PaletteBuilder SetColors(MyColor[] colors)
         {
             Colors = colors;
 
             return this;
         }
 
-        public PaletteBuilder SetColor(int colorIndex, Color color)
+        public PaletteBuilder SetColor(int colorIndex, MyColor color)
         {
             if (Colors == null)
                 throw new Exception("Colors not created first!");
@@ -68,12 +68,12 @@ namespace OpenBreed.Model.Palettes
 
         #region Private Methods
 
-        private static Color[] DefaultPalette()
+        private static MyColor[] DefaultPalette()
         {
-            Color[] colors = new Color[256];
+            var colors = new MyColor[256];
 
             for (int colorIndex = 0; colorIndex < colors.Length; colorIndex++)
-                colors[colorIndex] = Color.FromArgb(colorIndex, colorIndex, colorIndex);
+                colors[colorIndex] = MyColor.FromArgb((byte)colorIndex, (byte)colorIndex, (byte)colorIndex);
 
             return colors;
         }

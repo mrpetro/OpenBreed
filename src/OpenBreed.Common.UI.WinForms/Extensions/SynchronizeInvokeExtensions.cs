@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OpenBreed.Common.UI.WinForms
+namespace OpenBreed.Common.UI.WinForms.Extensions
 {
-    public static class Extensions
+    public static class SynchronizeInvokeExtensions
     {
         public static void InvokeIfRequired(this ISynchronizeInvoke obj,
                                                  MethodInvoker action)

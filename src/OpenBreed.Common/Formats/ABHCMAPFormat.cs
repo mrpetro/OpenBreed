@@ -6,15 +6,23 @@ using System.Collections.Generic;
 using System.IO;
 using OpenBreed.Reader.Legacy.Maps.MAP;
 using OpenBreed.Writer.Legacy.Maps.MAP;
+using OpenBreed.Common.Interface.Drawing;
 
 namespace OpenBreed.Common.Formats
 {
     public class ABHCMAPFormat : IDataFormatType
     {
+        #region Private Fields
+
+        private readonly IDrawingFactory drawingFactory;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public ABHCMAPFormat()
+        public ABHCMAPFormat(IDrawingFactory drawingFactory)
         {
+            this.drawingFactory = drawingFactory;
         }
 
         #endregion Public Constructors
@@ -26,7 +34,7 @@ namespace OpenBreed.Common.Formats
             //Remember to set source stream to begining
             ds.Stream.Seek(0, SeekOrigin.Begin);
 
-            var mapBuilder = MapBuilder.NewMapModel();
+            var mapBuilder = MapBuilder.NewMapModel(drawingFactory);
             var mapReader = new MAPReader(mapBuilder, MAPFormat.ABHC);
             return mapReader.Read(ds.Stream);
         }

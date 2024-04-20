@@ -1,7 +1,6 @@
-﻿using System;
+﻿using OpenBreed.Common.Interface.Drawing;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace OpenBreed.Model.Tiles
@@ -71,7 +70,7 @@ namespace OpenBreed.Model.Tiles
             {
                 int tileIndexX = tileId % TilesNoX;
                 int tileIndexY = tileId / TilesNoX;
-                Tiles[tileId].Rectangle = new Rectangle(tileIndexX * TileSize, tileIndexY * TileSize, TileSize, TileSize);
+                Tiles[tileId].Rectangle = new MyRectangle(tileIndexX * TileSize, tileIndexY * TileSize, TileSize, TileSize);
             }
         }
 
