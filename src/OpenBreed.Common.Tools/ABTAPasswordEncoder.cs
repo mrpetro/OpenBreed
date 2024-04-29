@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace OpenBreed.Common.Tools
 {
@@ -43,6 +44,8 @@ namespace OpenBreed.Common.Tools
         public static readonly Int32[] WEAPON_TRILAZER_GUN = { 0x0000, 0x0040, 0x0080, 0x00C0 };
         public static readonly Int32[] WEAPON_REFRACTION_LAZER = { 0x0000, 0x0001, 0x0002, 0x0003 };
         public static readonly Int32[] WEAPON_FIREWALL = { 0x0000, 0x0004, 0x0008, 0x000C };
+
+        public static readonly string[] EQUIPMENT_STATES = { "None", "Low", "Medium", "High" };
 
         public static readonly string[] LEVELS = {
         "0. GAME CRASH(!!!)        ",
