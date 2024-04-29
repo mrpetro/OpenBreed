@@ -41,8 +41,12 @@ using OpenBreed.Database.Xml.Repositories;
 using OpenBreed.Database.Xml.Tables;
 using OpenBreed.Database.EFCore;
 using OpenBreed.Database.EFCore.Extensions;
-using OpenBreed.Editor.UI.WinForms.Extensions;
 using OpenBreed.Editor.UI.Wpf.Extensions;
+using OpenBreed.Common.Windows.Extensions;
+using OpenBreed.Common.Interface.Dialog;
+using OpenBreed.Editor.Cfg.Managers;
+using OpenBreed.Editor.UI.WinForms.Forms;
+
 
 namespace OpenBreed.Editor.UI.WinForms
 {
@@ -78,22 +82,9 @@ namespace OpenBreed.Editor.UI.WinForms
                          (sp) => new VariableMan(
                              sp.GetService<ILogger>()));
 
-                     services.AddSingleton<SettingsMan>(
-                         (sp) => new SettingsMan(
-                             sp.GetService<IVariableMan>(),                                                         
-                             sp.GetService<ILogger>()));
+                     services.AddSingleton<SettingsMan>();
 
-                     services.AddSingleton<DbEntryFactory>(
-                         (sp) => new DbEntryFactory());
-
-                     services.AddSingleton<EditorApplication>(
-                         (sp) => new EditorApplication(
-                             sp,
-                             sp.GetService<DataSourceProvider>()));
-
-                     services.AddSingleton<IDialogProvider>(
-                         (sp) => new DialogProvider(
-                             sp.GetService<EditorApplication>()));
+                     services.AddSingleton<DbEntryFactory>();
 
                      services.AddSingleton<IWorkspaceMan>(
                          (sp) => new EditorWorkspaceMan(
@@ -140,26 +131,15 @@ namespace OpenBreed.Editor.UI.WinForms
             });
 
             builder.SetupCommonViewModels();
-            builder.SetupDbEntryEditors();
+            builder.SetupEditorViewModels();
             builder.SetupDbEntryEditorFactory();
             builder.SetupDbEntrySubEditorFactory();
             builder.ConfigureControlFactory();
 
+            builder.SetupWindowsDrawingContext();
+
             var host = builder.Build();
 
-            using (var serviceScope = host.Services.CreateScope())
-            {
-                var services = serviceScope.ServiceProvider;
-                try
-                {
-                    var application = services.GetService<EditorApplication>();
-                    application.Run();
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Error Occured");
-                }
-            }
         }
 
         #endregion Private Methods

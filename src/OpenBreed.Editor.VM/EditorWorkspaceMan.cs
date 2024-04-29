@@ -7,6 +7,7 @@ using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Xml;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Editor.VM
 {
@@ -34,7 +35,7 @@ namespace OpenBreed.Editor.VM
 
         public IUnitOfWork UnitOfWork { get; private set; }
 
-        public IEnumerable<IRepository> Repositories => UnitOfWork.Repositories;
+        public IEnumerable<IRepository> Repositories => UnitOfWork is not null ? UnitOfWork.Repositories : Enumerable.Empty<IRepository>();
 
         #endregion Public Properties
 

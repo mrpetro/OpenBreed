@@ -28,8 +28,6 @@ namespace OpenBreed.Editor.VM.Database
             UpdateWithDbTables();
         }
 
-
-
         #endregion Internal Constructors
 
         #region Public Properties
@@ -43,6 +41,15 @@ namespace OpenBreed.Editor.VM.Database
         public BindingList<string> TableNames { get; }
 
         #endregion Public Properties
+
+        #region Internal Methods
+
+        internal void Refresh()
+        {
+            UpdateWithDbTables();
+        }
+
+        #endregion Internal Methods
 
         #region Protected Methods
 

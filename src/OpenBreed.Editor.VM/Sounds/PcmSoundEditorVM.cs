@@ -2,6 +2,7 @@
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Editor.VM.Base;

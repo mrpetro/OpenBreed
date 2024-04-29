@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="OpenBreed.Editor.UI.Wpf.Sprites.SpriteSetPreviewCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.Sprites"
+             xmlns:converters="clr-namespace:OpenBreed.Editor.UI.Wpf.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:ImageToSourceConverter x:Key="imageToSourceConverter"/>
+        <!--body content datagrid cell vertical centering-->
+        <Style x:Key="Body_Content_DataGrid_Centering"
+        TargetType="{x:Type DataGridCell}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid ItemsSource="{Binding Items}"
+                  SelectedIndex="{Binding CurrentSpriteIndex}"
+                  AutoGenerateColumns="False"
+                  CanUserResizeColumns="True"
+                  CanUserResizeRows="True"
+                  RowHeight="64"
+                  VerticalContentAlignment="Center"
+                  CellStyle="{StaticResource Body_Content_DataGrid_Centering}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" MinWidth="40" Width="40" />
+                <DataGridTemplateColumn Header="Image" IsReadOnly="True" Width="*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image 
+                                    SnapsToDevicePixels="True" 
+                                    RenderOptions.BitmapScalingMode="NearestNeighbor" 
+                                    Source="{Binding Image, Converter={StaticResource imageToSourceConverter}}" 
+                                    MinWidth="{Binding Width}" 
+                                    Width="{Binding Width}" 
+                                    MinHeight="{Binding Height}" 
+                                    Height="{Binding Height}"
+                                    Margin="0" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

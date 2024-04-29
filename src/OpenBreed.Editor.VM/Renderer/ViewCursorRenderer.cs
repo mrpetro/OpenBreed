@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Maps;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Maps;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,14 +14,16 @@ namespace OpenBreed.Editor.VM.Renderer
         #region Private Fields
 
         private readonly MapEditorVM _editor;
+        private readonly IPensProvider pensProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ViewCursorRenderer(MapEditorVM editor, RenderTarget target) : base(target)
+        public ViewCursorRenderer(MapEditorVM editor, IRenderTarget target, IPensProvider pensProvider) : base(target)
         {
             _editor = editor;
+            this.pensProvider = pensProvider;
         }
 
         public override void Render(MapViewCursorVM renderable)
@@ -28,7 +31,7 @@ namespace OpenBreed.Editor.VM.Renderer
             if (!renderable.Visible)
                 return;
 
-            Target.DrawRectangle(System.Drawing.Pens.Red, new Rectangle(renderable.WorldSnapCoords, new Size(16, 16)));
+            Target.DrawRectangle(pensProvider.Red, new MyRectangle(renderable.WorldSnapCoords, new MySize(16, 16)));
         }
 
         #endregion Public Constructors

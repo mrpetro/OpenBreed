@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using OpenBreed.Editor.VM.Maps;
-using System.Drawing;
+using OpenBreed.Editor.VM.Renderer;
+using OpenBreed.Common.Interface.Drawing;
 
 namespace OpenBreed.Editor.VM.Tools
 {
@@ -23,24 +23,22 @@ namespace OpenBreed.Editor.VM.Tools
 
         public override void Activate()
         {
-            View.MouseWheel += View_MouseWheel;
+            View.MouseWheelAction += View_MouseWheel;
         }
 
         public override void Deactivate()
         {
-            View.MouseWheel -= View_MouseWheel;
+            View.MouseWheelAction = null;
         }
 
-        void View_MouseWheel(object sender, MouseEventArgs e)
+        void View_MouseWheel(int delta, MyPoint location)
         {
-            IToolView view = (IToolView)sender;
-
             float currentScale = _vm.ZoomScale;
             float scaleFactor = 1.0f;
 
-            if (Math.Sign(e.Delta) > 0)
+            if (Math.Sign(delta) > 0)
                 scaleFactor = 2.0f;
-            else if (Math.Sign(e.Delta) < 0)
+            else if (Math.Sign(delta) < 0)
                 scaleFactor = 0.5f;
 
             currentScale *= scaleFactor;
@@ -50,7 +48,7 @@ namespace OpenBreed.Editor.VM.Tools
             else if (currentScale > 8.0f)
                 currentScale = 8.0f;
 
-            _vm.ZoomViewTo(e.Location, currentScale);
+            _vm.ZoomViewTo(new MyPointF(location.X, location.Y), currentScale);
         }
     }
 }

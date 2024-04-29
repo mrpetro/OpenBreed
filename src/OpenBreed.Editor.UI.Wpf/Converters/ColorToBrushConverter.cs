@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using OpenBreed.Common.Interface.Drawing;
+using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -10,7 +11,7 @@ namespace OpenBreed.Editor.UI.Wpf.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is not System.Drawing.Color color)
+            if (value is not MyColor color)
             {
                 return new SolidColorBrush();
             }

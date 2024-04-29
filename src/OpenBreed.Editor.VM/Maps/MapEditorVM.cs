@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Maps;
@@ -32,6 +34,9 @@ namespace OpenBreed.Editor.VM.Maps
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly ActionSetsDataProvider actionSetsDataProvider;
         private readonly TileAtlasDataProvider tileAtlasDataProvider;
+        private readonly IDrawingFactory drawingFactory;
+        private readonly IBitmapProvider bitmapProvider;
+        private readonly IPensProvider pensProvider;
 
         #endregion Private Fields
 
@@ -44,28 +49,32 @@ namespace OpenBreed.Editor.VM.Maps
             ActionSetsDataProvider actionSetsDataProvider, 
             TileAtlasDataProvider tileAtlasDataProvider, 
             IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IControlFactory controlFactory,
+            IDrawingFactory drawingFactory,
+            IDrawingContextProvider drawingContextProvider,
+            IBitmapProvider bitmapProvider,
+            IPensProvider pensProvider) : base(workspaceMan, dialogProvider, controlFactory)
         {
             Tools = new MapEditorToolsVM();
 
-            TilesTool = new MapEditorTilesToolVM(this, workspaceMan);
+            TilesTool = new MapEditorTilesToolVM(this, workspaceMan, drawingFactory);
             TilesTool.TilesSelector.ModelChangeAction = OnTileSetModelChange;
             UpdateTileSets = TilesTool.TileSetSelector.UpdateList;
             TilesTool.TileSetSelector.CurrentItemChanged += OnTileSetChanged;
 
-            ActionsTool = new MapEditorActionsToolVM(this, workspaceMan);
+            ActionsTool = new MapEditorActionsToolVM(this, workspaceMan, drawingFactory, drawingContextProvider);
             ActionsTool.ModelChangeAction = OnActionSetModelChange;
 
             PalettesTool = new MapEditorPalettesToolVM(this);
             UpdatePalettes = PalettesTool.UpdateList;
             PalettesTool.ModelChangeAction = OnPalettesModelChange;
 
-            var mapViewRenderTarget = new RenderTarget(1, 1);
-            var renderer = new ViewRenderer(this, mapViewRenderTarget);
+            var mapViewRenderTarget = drawingFactory.CreateRenderTarget(1, 1);
+            var renderer = new ViewRenderer(this, mapViewRenderTarget, pensProvider);
 
-            MapView = new MapEditorViewVM(this, renderer, mapViewRenderTarget);
+            MapView = new MapEditorViewVM(this, renderer, mapViewRenderTarget, drawingFactory);
             //LayoutVm = new MapLayoutVM(this);
-            Properties = new LevelPropertiesVM(this);
+            Properties = new MapPropertiesEditorVM(this);
             //LayoutVm.PropertyChanged += (s, e) => OnPropertyChanged(nameof(LayoutVm));
 
             InitializeTools();
@@ -73,6 +82,9 @@ namespace OpenBreed.Editor.VM.Maps
             this.palettesDataProvider = palettesDataProvider;
             this.actionSetsDataProvider = actionSetsDataProvider;
             this.tileAtlasDataProvider = tileAtlasDataProvider;
+            this.drawingFactory = drawingFactory;
+            this.bitmapProvider = bitmapProvider;
+            this.pensProvider = pensProvider;
         }
 
         #endregion Public Constructors
@@ -80,7 +92,7 @@ namespace OpenBreed.Editor.VM.Maps
         #region Public Properties
 
         //public MapLayoutVM LayoutVm { get; }
-        public Bitmap CurrentTilesBitmap { get; private set; }
+        public IImage CurrentTilesBitmap { get; private set; }
 
         public Action<string> UpdateLayout { get; private set; }
         public Action<string> UpdateTileSets { get; private set; }
@@ -110,7 +122,7 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref currentPaletteRef, value); }
         }
 
-        public LevelPropertiesVM Properties { get; }
+        public MapPropertiesEditorVM Properties { get; }
 
         internal List<PaletteModel> Palettes => Model.Palettes;
         internal MapLayoutModel Layout => Model.Layout;
@@ -145,28 +157,28 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Methods
 
-        public void RenderDefaultTile(RenderTarget renderTarget, int tileId, float x, float y, int tileSize)
+        public void RenderDefaultTile(IRenderTarget renderTarget, int tileId, float x, float y, int tileSize)
         {
-            Font font = new Font("Arial", 5);
+            var font = drawingFactory.CreateFont("Arial", 5);
 
-            var rectangle = new Rectangle((int)x, (int)y, tileSize, tileSize);
+            var rectangle = new MyRectangle((int)x, (int)y, tileSize, tileSize);
 
-            Color c = Color.Black;
-            Pen tileColor = new Pen(c);
-            Brush brush = new SolidBrush(c);
+            MyColor c = MyColor.Black;
+            var tileColor = drawingFactory.CreatePen(c);
+            var brush = drawingFactory.CreateSolidBrush(c);
 
             renderTarget.FillRectangle(brush, rectangle);
 
-            c = Color.White;
-            tileColor = new Pen(c);
-            brush = new SolidBrush(c);
+            c = MyColor.White;
+            tileColor = drawingFactory.CreatePen(c);
+            brush = drawingFactory.CreateSolidBrush(c);
 
             renderTarget.DrawRectangle(tileColor, rectangle);
             renderTarget.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, x + 2, y + 1);
             renderTarget.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, x + 2, y + 7);
         }
 
-        public void DrawTile(RenderTarget renderTarget, int tileId, float x, float y, int tileSize)
+        public void DrawTile(IRenderTarget renderTarget, int tileId, float x, float y, int tileSize)
         {
             if (Model.TileSet == null)
             {
@@ -249,15 +261,15 @@ namespace OpenBreed.Editor.VM.Maps
         {
             TileSet = tileAtlasDataProvider.GetTileAtlas(tileSetRef);
 
-            CurrentTilesBitmap = BitmapHelper.FromBytes(TileSet.TilesNoX * TileSet.TileSize, TileSet.TilesNoY * TileSet.TileSize, TileSet.Bitmap);
+            CurrentTilesBitmap = bitmapProvider.FromBytes(TileSet.TilesNoX * TileSet.TileSize, TileSet.TilesNoY * TileSet.TileSize, TileSet.Bitmap);
 
-            BitmapHelper.SetPaletteColors(CurrentTilesBitmap, Model.Palettes.First().Data);
+            bitmapProvider.SetPaletteColors(CurrentTilesBitmap, Model.Palettes.First().Data);
         }
 
         private void OnPalettesModelChange(string paletteRef)
         {
             var paletteModel = palettesDataProvider.GetPalette(paletteRef);
-            BitmapHelper.SetPaletteColors(CurrentTilesBitmap, paletteModel.Data);
+            bitmapProvider.SetPaletteColors(CurrentTilesBitmap, paletteModel.Data);
         }
 
         private void OnActionSetModelChange(string tileSetRef)

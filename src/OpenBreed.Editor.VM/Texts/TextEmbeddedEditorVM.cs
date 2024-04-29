@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Editor.VM.Base;
 

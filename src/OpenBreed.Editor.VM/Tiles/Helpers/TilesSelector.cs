@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Common;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,23 +10,24 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
     public class TilesSelector
     {
         internal TileSetViewerVM Viewer;
+        private readonly IDrawingFactory drawingFactory;
 
         #region Public Fields
 
-        public Point CenterCoord;
+        public MyPoint CenterCoord;
 
-        public Point MaxCoord;
+        public MyPoint MaxCoord;
 
-        public Point MinCoord;
+        public MyPoint MinCoord;
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public TilesSelector(TileSetViewerVM viewer)
+        public TilesSelector(TileSetViewerVM viewer, IDrawingFactory drawingFactory)
         {
             Viewer = viewer;
-
+            this.drawingFactory = drawingFactory;
             SelectedIndexes = new List<int>();
             SelectionRectangle = new SelectionRectangle();
             SelectMode = SelectModeEnum.Nothing;
@@ -87,15 +89,15 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
             UpdateInfo();
         }
 
-        public void DrawSelection(Graphics gfx)
+        public void DrawSelection(IDrawingContext gfx)
         {
-            Pen selectedPen = new Pen(Color.LightGreen);
-            Pen selectPen = new Pen(Color.LightBlue);
-            Pen deselectPen = new Pen(Color.Red);
+            var selectedPen = drawingFactory.CreatePen(MyColor.LightGreen);
+            var selectPen = drawingFactory.CreatePen(MyColor.LightBlue);
+            var deselectPen = drawingFactory.CreatePen(MyColor.Red);
 
             for (int index = 0; index < SelectedIndexes.Count; index++)
             {
-                Rectangle rectangle = Viewer.Items[SelectedIndexes[index]].Rectangle;
+                var rectangle = Viewer.Items[SelectedIndexes[index]].Rectangle;
                 gfx.DrawRectangle(selectedPen, rectangle);
             }
 
@@ -105,11 +107,11 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
                 gfx.DrawRectangle(deselectPen, SelectionRectangle.GetRectangle(Viewer.TileSize));
         }
 
-        public void FinishSelection(Point point)
+        public void FinishSelection(MyPoint point)
         {
             SelectionRectangle.SetFinish(GetIndexCoords(point));
 
-            Rectangle selectionRectangle = SelectionRectangle.GetRectangle(Viewer.TileSize);
+            var selectionRectangle = SelectionRectangle.GetRectangle(Viewer.TileSize);
             List<int> selectionList = Viewer.GetTileIdList(selectionRectangle);
 
             if (SelectMode == SelectModeEnum.Select)
@@ -141,7 +143,7 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
             SelectedIndexes.Remove(tileId);
         }
 
-        public void StartSelection(SelectModeEnum selectMode, Point point)
+        public void StartSelection(SelectModeEnum selectMode, MyPoint point)
         {
             SelectMode = selectMode;
             SelectionRectangle.SetStart(GetIndexCoords(point));
@@ -150,7 +152,7 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
                 ClearSelection();
         }
 
-        public void UpdateSelection(Point point)
+        public void UpdateSelection(MyPoint point)
         {
             SelectionRectangle.Update(GetIndexCoords(point));
         }
@@ -159,7 +161,7 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
 
         #region Internal Methods
 
-        internal Point GetIndexCoords(Point point)
+        internal MyPoint GetIndexCoords(MyPoint point)
         {
             return Viewer.GetIndexCoords(point);
         }
@@ -170,7 +172,7 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
 
         private void CalculateSelectionCenter()
         {
-            Rectangle rectangle = Viewer.Items[SelectedIndexes[0]].Rectangle;
+            var rectangle = Viewer.Items[SelectedIndexes[0]].Rectangle;
 
             MinCoord.X = rectangle.Left;
             MaxCoord.X = rectangle.Right;
@@ -187,7 +189,7 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
                 MaxCoord.Y = Math.Max(MaxCoord.Y, rectangle.Top);
             }
 
-            CenterCoord = Viewer.GetSnapCoords(new Point((MinCoord.X + MaxCoord.X) / 2, (MinCoord.Y + MaxCoord.Y) / 2));
+            CenterCoord = Viewer.GetSnapCoords(new MyPoint((MinCoord.X + MaxCoord.X) / 2, (MinCoord.Y + MaxCoord.Y) / 2));
         }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)

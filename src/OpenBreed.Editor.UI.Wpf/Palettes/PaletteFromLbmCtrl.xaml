@@ -11,7 +11,7 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="Source data">
+        <GroupBox Grid.Row="0" Header="Palette source properties">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -24,7 +24,7 @@
                 <TextBox Grid.Row="0" Grid.Column="1" Margin="4" Height="21" Text="{Binding DataRef}" />
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="1" Header="Palette">
+        <GroupBox Grid.Row="1" Header="Palette colors">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="90"/>

@@ -7,6 +7,7 @@ using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -36,6 +37,8 @@ namespace OpenBreed.Editor.VM.Database
             this.dbEntryFactory = dbEntryFactory;
             Entries = new BindingList<Entries.DbEntryVM>();
             Entries.ListChanged += (s, a) => OnPropertyChanged(nameof(Entries));
+
+            OpenEntryCommand = new Command(() => EditEntry(CurrentItem.Id));
         }
 
         #endregion Internal Constructors
@@ -50,7 +53,8 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public string EditorName { get { return "Table Editor"; } }
+        public string EditorName
+        { get { return "Table Editor"; } }
 
         public Action<DbTableNewEntryCreatorVM> OpenNewEntryCreatorAction { get; set; }
 
@@ -65,6 +69,8 @@ namespace OpenBreed.Editor.VM.Database
             get { return tablePresentationName; }
             set { SetProperty(ref tablePresentationName, value); }
         }
+
+        public ICommand OpenEntryCommand { get; }
 
         #endregion Public Properties
 
@@ -149,7 +155,6 @@ namespace OpenBreed.Editor.VM.Database
                     Entries.Add(dbEntry);
                 }
             });
-
         }
 
         #endregion Protected Methods
@@ -201,6 +206,10 @@ namespace OpenBreed.Editor.VM.Database
         private void UpdateTitle()
         {
             Title = $"{EditorName} - {TablePresentationName}";
+        }
+
+        internal void Refresh()
+        {
         }
 
         #endregion Private Methods

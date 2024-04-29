@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Actions;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Actions
 {
@@ -15,7 +17,8 @@ namespace OpenBreed.Editor.VM.Actions
 
         private const int PROP_SIZE = 32;
         private readonly ActionSetsDataProvider actionSetsDataProvider;
-
+        private readonly IDrawingFactory drawingFactory;
+        private readonly IDrawingContextProvider drawingContextProvider;
         private ActionSetModel model;
 
         #endregion Private Fields
@@ -26,18 +29,22 @@ namespace OpenBreed.Editor.VM.Actions
                     ActionSetsDataProvider actionSetsDataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IControlFactory controlFactory,
+            IDrawingFactory drawingFactory,
+            IDrawingContextProvider drawingContextProvider) : base(workspaceMan, dialogProvider, controlFactory)
         {
-            Items = new BindingList<ActionVM>();
-            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
             this.actionSetsDataProvider = actionSetsDataProvider;
+            this.drawingFactory = drawingFactory;
+            this.drawingContextProvider = drawingContextProvider;
+            Items = new ObservableCollection<ActionVM>();
+            Items.CollectionChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public BindingList<ActionVM> Items { get; }
+        public ObservableCollection<ActionVM> Items { get; }
 
         public int SelectedIndex { get; private set; }
 
@@ -47,21 +54,25 @@ namespace OpenBreed.Editor.VM.Actions
 
         #region Public Methods
 
-        public void DrawProperty(Graphics gfx, int id, float x, float y, int tileSize)
+        public void DrawProperty(IDrawingContext gfx, int id, float x, float y, int tileSize)
         {
             if (id >= Items.Count)
+            {
                 return;
+            }
 
             var propertyData = Items[id];
 
             if (!propertyData.IsVisible)
+            {
                 return;
+            }
 
             var image = propertyData.Icon;
 
-            var opqPen = new Pen(Color.FromArgb(128, 255, 255, 255), 10);
-            var otranspen = new Pen(Color.FromArgb(128, 255, 255, 255), 10);
-            var ototTransPen = new Pen(Color.FromArgb(40, 0, 255, 0), 10);
+            var opqPen = drawingFactory.CreatePen(MyColor.FromArgb(128, 255, 255, 255), 10);
+            var otranspen = drawingFactory.CreatePen(MyColor.FromArgb(128, 255, 255, 255), 10);
+            var ototTransPen = drawingFactory.CreatePen(MyColor.FromArgb(40, 0, 255, 0), 10);
 
             //ColorMatrix cm = new ColorMatrix();
             //cm.Matrix33 = 0.55f;
@@ -82,13 +93,12 @@ namespace OpenBreed.Editor.VM.Actions
 
             model = actionSetsDataProvider.GetActionSet(entry.Id);
 
-            Items.UpdateAfter(() =>
-            {
-                Items.Clear();
+            Items.Clear();
 
-                foreach (var item in model.Items)
-                    Items.Add(new ActionVM(item));
-            });
+            foreach (var item in model.Items)
+            {
+                Items.Add(new ActionVM(drawingFactory, drawingContextProvider, item, OnItemPropertyChanged));
+            }
 
             SelectedIndex = 0;
         }
@@ -108,5 +118,14 @@ namespace OpenBreed.Editor.VM.Actions
         }
 
         #endregion Protected Methods
+
+        #region Private Methods
+
+        private void OnItemPropertyChanged(ActionVM action)
+        {
+            OnPropertyChanged(nameof(Items));
+        }
+
+        #endregion Private Methods
     }
 }

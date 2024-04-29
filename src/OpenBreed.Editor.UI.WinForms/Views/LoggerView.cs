@@ -7,12 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
 using OpenBreed.Editor.VM.Logging;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    public partial class LoggerView : DockContent
+    public partial class LoggerView : UserControl
     {
         public LoggerView()
         {

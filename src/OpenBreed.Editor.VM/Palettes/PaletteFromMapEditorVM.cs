@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Linq;
 using System.Collections.ObjectModel;
 using OpenBreed.Database.EFCore.DbEntries;
+using OpenBreed.Common.Interface.Dialog;
 
 namespace OpenBreed.Editor.VM.Palettes
 {

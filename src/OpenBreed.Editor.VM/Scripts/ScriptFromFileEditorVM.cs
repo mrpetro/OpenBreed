@@ -7,6 +7,7 @@ using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
 
 namespace OpenBreed.Editor.VM.Scripts
 {

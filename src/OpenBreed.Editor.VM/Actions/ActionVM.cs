@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Actions;
-using System.Drawing;
+using System;
 
 namespace OpenBreed.Editor.VM.Actions
 {
@@ -11,22 +12,31 @@ namespace OpenBreed.Editor.VM.Actions
     {
         #region Private Fields
 
-        private Color color;
+        private MyColor color;
         private string description;
         private int id;
-        private Image icon;
+        private IImage icon;
         private bool isVisible;
         private string name;
-
+        private readonly IDrawingFactory drawingFactory;
+        private readonly IDrawingContextProvider drawingContextProvider;
         private ActionModel model;
+        private readonly Action<ActionVM> changeCallback;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ActionVM(ActionModel model)
+        public ActionVM(
+            IDrawingFactory drawingFactory,
+            IDrawingContextProvider drawingContextProvider,
+            ActionModel model,
+            Action<ActionVM> changeCallback)
         {
+            this.drawingFactory = drawingFactory;
+            this.drawingContextProvider = drawingContextProvider;
             this.model = model;
+            this.changeCallback = changeCallback;
 
             Restore();
         }
@@ -37,7 +47,7 @@ namespace OpenBreed.Editor.VM.Actions
 
         public VisibilityChangedEventHandler VisibilityChanged { get; set; }
 
-        public Color Color
+        public MyColor Color
         {
             get { return color; }
             set { SetProperty(ref color, value); }
@@ -55,7 +65,7 @@ namespace OpenBreed.Editor.VM.Actions
             set { SetProperty(ref id, value); }
         }
 
-        public Image Icon
+        public IImage Icon
         {
             get { return icon; }
             set { SetProperty(ref icon, value); }
@@ -96,7 +106,7 @@ namespace OpenBreed.Editor.VM.Actions
             switch (name)
             {
                 case nameof(Color):
-                    ActionSetsDataHelper.SetPresentationDefault(model, Color);
+                    ActionSetsDataHelper.SetPresentationDefault(drawingFactory, drawingContextProvider, model, Color);
                     Icon = model.Icon;
                     model.Color = Color;
                     break;
@@ -121,6 +131,8 @@ namespace OpenBreed.Editor.VM.Actions
                 default:
                     break;
             }
+
+            changeCallback?.Invoke(this);
 
             base.OnPropertyChanged(name);
         }

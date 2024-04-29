@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="OpenBreed.Editor.UI.Wpf.General.DbTablesEditorCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.General"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ComboBox Grid.Row="0"
+                  Height="22"
+                  Margin="4" 
+                  ItemsSource="{Binding DbTableSelector.TableNames}"
+                  SelectedItem="{Binding DbTableSelector.CurrentTableName}" />
+        <DataGrid Grid.Row="1" 
+                  Margin="4" 
+                  ItemsSource="{Binding DbTableEditor.Entries}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserResizeColumns="True"
+                  VerticalContentAlignment="Center"
+                  IsSynchronizedWithCurrentItem="True" CurrentItem="{Binding DbTableEditor.CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick"
+                              Command="{Binding DbTableEditor.OpenEntryCommand}"/>
+            </DataGrid.InputBindings>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" 
+                                    IsReadOnly="True" 
+                                    Binding="{Binding Path=Id}"/>
+                <DataGridTextColumn Header="Description" 
+                                    IsReadOnly="True" 
+                                    Binding="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

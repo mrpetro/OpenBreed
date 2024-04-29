@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,8 +14,8 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Private Fields
 
         private int _index = 0;
-        private Color _color = Color.Empty;
-        private Color _colorNegative = Color.Empty;
+        private MyColor _color = MyColor.Empty;
+        private MyColor _colorNegative = MyColor.Empty;
         private byte r;
         private byte g;
         private byte b;
@@ -33,13 +34,13 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Properties
 
-        public Color Color
+        public MyColor Color
         {
             get { return _color; }
             set { SetProperty(ref _color, value); }
         }
 
-        public Color ColorNegative
+        public MyColor ColorNegative
         {
             get { return _colorNegative; }
             set { SetProperty(ref _colorNegative, value); }
@@ -83,7 +84,7 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Protected Methods
 
         protected override void OnPropertyChanged(string name)
-        {
+        { 
             switch (name)
             {
                 case nameof(Index):
@@ -95,8 +96,10 @@ namespace OpenBreed.Editor.VM.Palettes
                 case nameof(R):
                 case nameof(G):
                 case nameof(B):
-                    Color = Color.FromArgb(R, G, B);
-                    ColorNegative = Color.FromArgb(Color.ToArgb() ^ 0xffffff);
+                    Color = MyColor.FromArgb(R, G, B);
+
+                    //TODO:
+                    //ColorNegative = Color.FromArgb(Color.ToArgb() ^ 0xffffff);
                     colors[Index].Color = Color;
                     break;
                 default:

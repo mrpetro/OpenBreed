@@ -11,13 +11,11 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
-        private bool isHidden;
-
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal DbTablesEditorVM(IWorkspaceMan workspaceMan,
+        public DbTablesEditorVM(IWorkspaceMan workspaceMan,
                                   DbEntryFactory dbEntryFactory)
         {
             DbTableSelector = new DbTableSelectorVM(workspaceMan);
@@ -28,12 +26,6 @@ namespace OpenBreed.Editor.VM.Database
         #endregion Internal Constructors
 
         #region Public Properties
-
-        public bool IsHidden
-        {
-            get { return isHidden; }
-            set { SetProperty(ref isHidden, value); }
-        }
 
         public DbTableSelectorVM DbTableSelector { get; private set; }
 
@@ -61,6 +53,12 @@ namespace OpenBreed.Editor.VM.Database
             CloseAction?.Invoke();
 
             return true;
+        }
+
+        internal void Refresh()
+        {
+            DbTableSelector.Refresh();
+            DbTableEditor.Refresh();
         }
 
         #endregion Public Methods

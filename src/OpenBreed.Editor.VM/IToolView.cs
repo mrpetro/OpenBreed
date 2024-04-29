@@ -1,24 +1,25 @@
-﻿using System;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
 namespace OpenBreed.Editor.VM
 {
     public interface IToolView
     {
-        event KeyEventHandler KeyDown;
-        event KeyEventHandler KeyUp;
-        event MouseEventHandler MouseDown;
-        event MouseEventHandler MouseUp;
-        event MouseEventHandler MouseMove;
-        event MouseEventHandler MouseWheel;
-        event EventHandler MouseEnter;
-        event EventHandler MouseLeave;
-        event PaintEventHandler Paint;
+        Action KeyDownAction { get; set; }
+        Action KeyUpAction { get; set; }
+        Action<CursorButtons, MyPoint> MouseDownAction { get; set; }
+        Action<CursorButtons, MyPoint> MouseUpAction { get; set; }
+        Action<CursorButtons, MyPoint> MouseMoveAction { get; set; }
+        Action<int, MyPoint> MouseWheelAction { get; set; }
+        Action MouseEnterAction { get; set; }
+        Action MouseLeaveAction { get; set; }
+        Action PaintAction { get; set; }
 
-        Cursor Cursor { get; set; }
+        string Cursor { get; set; }
 
         void Invalidate();
     }

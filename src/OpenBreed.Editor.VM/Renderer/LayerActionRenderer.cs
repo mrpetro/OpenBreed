@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Maps;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Model.Actions;
 using OpenBreed.Model.Maps;
 using System.Drawing;
@@ -17,7 +18,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Constructors
 
-        public LayerActionRenderer(MapEditorActionsToolVM actionsTool, RenderTarget target) : base(target)
+        public LayerActionRenderer(MapEditorActionsToolVM actionsTool, IRenderTarget target) : base(target)
         {
             _actionsTool = actionsTool;
         }
@@ -30,7 +31,7 @@ namespace OpenBreed.Editor.VM.Renderer
         {
             var layerIndex = renderable.GetLayerIndex(layerType);
 
-            RectangleF viewRect = Target.ClipBounds;
+            var viewRect = Target.ClipBounds;
 
             //TODO: Get this from model
             int tileSize = 16;

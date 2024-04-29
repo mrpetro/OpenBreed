@@ -1,5 +1,5 @@
-﻿using OpenBreed.Model.Sprites;
-using System.Drawing;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Model.Sprites;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -7,13 +7,21 @@ namespace OpenBreed.Editor.VM.Sprites
     {
         #region Private Fields
 
-        private Rectangle _sourceRectangle;
+        private MyRectangle _sourceRectangle;
 
         #endregion Private Fields
 
+        #region Public Constructors
+
+        public SpriteFromImageVM(IBitmapProvider bitmapProvider) : base(bitmapProvider)
+        {
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
 
-        public Rectangle SourceRectangle
+        public MyRectangle SourceRectangle
         {
             get { return _sourceRectangle; }
             set { SetProperty(ref _sourceRectangle, value); }
@@ -23,9 +31,9 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Methods
 
-        public static SpriteFromImageVM Create(SpriteModel spriteModel, Rectangle sourceRectangle)
+        public static SpriteFromImageVM Create(IBitmapProvider bitmapProvider, SpriteModel spriteModel, MyRectangle sourceRectangle)
         {
-            var vm = new SpriteFromImageVM();
+            var vm = new SpriteFromImageVM(bitmapProvider);
             vm.FromModel(spriteModel);
             vm.SourceRectangle = sourceRectangle;
             return vm;

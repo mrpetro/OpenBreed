@@ -46,14 +46,9 @@
             this.ClientSize = new System.Drawing.Size(427, 201);
             this.Controls.Add(this.LogConsoleCtrl);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.HideOnClose = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "LogConsoleView";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "Log Console";
-            this.TopMost = true;
+
             this.ResumeLayout(false);
 
         }

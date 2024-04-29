@@ -1,10 +1,12 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Renderer;
 using OpenBreed.Editor.VM.Tools;
 using OpenBreed.Model.Maps;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -13,21 +15,26 @@ namespace OpenBreed.Editor.VM.Maps
         #region Private Fields
 
         private ViewRenderer renderer;
+        private readonly IDrawingFactory drawingFactory;
         private string _title;
-        private Matrix _transformation;
+        private IMatrix _transformation;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapEditorViewVM(MapEditorVM parent, ViewRenderer renderer, RenderTarget renderTarget)
+        public MapEditorViewVM(
+            MapEditorVM parent,
+            ViewRenderer renderer,
+            IRenderTarget renderTarget,
+            IDrawingFactory drawingFactory)
         {
             Parent = parent;
             this.renderer = renderer;
             RenderTarget = renderTarget;
-
-            Transformation = new Matrix();
-            Cursor = new MapViewCursorVM(Parent);
+            this.drawingFactory = drawingFactory;
+            Transformation = drawingFactory.CreateMatrix();
+            Cursor = new MapViewCursorVM(Parent, drawingFactory);
 
             Cursor.ToWorldCoordsFunc = ToWorldCoords;
             Cursor.PropertyChanged += Cursor_PropertyChanged;
@@ -37,7 +44,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public RenderTarget RenderTarget { get; }
+        public IRenderTarget RenderTarget { get; }
         public MapViewCursorVM Cursor { get; }
 
         public MapLayoutModel Layout => Parent.Layout;
@@ -52,7 +59,7 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref _title, value); }
         }
 
-        public Matrix Transformation
+        public IMatrix Transformation
         {
             get { return _transformation; }
             set { SetProperty(ref _transformation, value); }
@@ -91,37 +98,37 @@ namespace OpenBreed.Editor.VM.Maps
             RenderTarget.Resize(width, height);
         }
 
-        public Point ToWorldCoords(Point viewCoords)
+        public MyPoint ToWorldCoords(MyPoint viewCoords)
         {
-            Matrix invMatrix = Transformation.Clone();
+            var invMatrix = Transformation.Clone();
             invMatrix.Invert();
 
-            Point[] clipPoints = new Point[1] { viewCoords };
+            var clipPoints = new MyPoint[1] { viewCoords };
 
             invMatrix.TransformPoints(clipPoints);
 
             var x = clipPoints[0].X;
             var y = clipPoints[0].Y;
 
-            return new Point(x, (int)y);
+            return new MyPoint(x, y);
         }
 
-        public PointF ToWorldCoords(PointF viewCoords)
+        public MyPointF ToWorldCoords(MyPointF viewCoords)
         {
-            Matrix invMatrix = Transformation.Clone();
+            var invMatrix = Transformation.Clone();
             invMatrix.Invert();
 
-            PointF[] clipPoints = new PointF[1] { viewCoords };
+            MyPointF[] clipPoints = new MyPointF[1] { viewCoords };
 
             invMatrix.TransformPoints(clipPoints);
 
             var x = clipPoints[0].X; 
             var y =- clipPoints[0].Y;
 
-            return new PointF(x, y);
+            return new MyPointF(x, y);
         }
 
-        public void Render(Graphics graphics)
+        public void Render(IDrawingContext graphics)
         {
             if (Parent.Model is null)
                 return;
@@ -151,14 +158,14 @@ namespace OpenBreed.Editor.VM.Maps
             Transformation = newTransf;
         }
 
-        public void ZoomViewTo(Point location, float scale)
+        public void ZoomViewTo(MyPointF location, float scale)
         {
             var newTransf = Transformation.Clone();
 
-            Matrix invMatrix = newTransf.Clone();
+            var invMatrix = newTransf.Clone();
             invMatrix.Invert();
 
-            PointF[] t1Points = new PointF[1] { location };
+            var t1Points = new MyPointF[1] { location };
             invMatrix.TransformPoints(t1Points);
 
             var toScale = scale / newTransf.Elements[0];
@@ -167,7 +174,7 @@ namespace OpenBreed.Editor.VM.Maps
             invMatrix = newTransf.Clone();
             invMatrix.Invert();
 
-            PointF[] t2Points = new PointF[1] { location };
+            var t2Points = new MyPointF[1] { location };
             invMatrix.TransformPoints(t2Points);
 
             float offsetXDiff = t2Points[0].X - t1Points[0].X;
@@ -204,12 +211,12 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Methods
 
-        private Point CalculateWorldPosition(Point viewPosition)
+        private MyPoint CalculateWorldPosition(MyPoint viewPosition)
         {
             var inverted = Transformation.Clone();
             //inverted.Invert();
 
-            var list = new Point[] { viewPosition };
+            var list = new MyPoint[] { viewPosition };
 
             inverted.TransformPoints(list);
             return list[0];

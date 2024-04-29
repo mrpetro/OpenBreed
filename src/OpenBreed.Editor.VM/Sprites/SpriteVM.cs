@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using OpenBreed.Common.Tools;
+using OpenBreed.Common.Interface.Drawing;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -11,15 +12,20 @@ namespace OpenBreed.Editor.VM.Sprites
     {
         #region Private Fields
 
-        private Bitmap image;
-
+        private IImage image;
         private int id;
+        private readonly IBitmapProvider bitmapProvider;
+
+        public SpriteVM(IBitmapProvider bitmapProvider)
+        {
+            this.bitmapProvider = bitmapProvider;
+        }
 
         #endregion Private Fields
 
         #region Public Properties
 
-        public Bitmap Image
+        public IImage Image
         {
             get { return image; }
             set { SetProperty(ref image, value); }
@@ -31,20 +37,24 @@ namespace OpenBreed.Editor.VM.Sprites
             set { SetProperty(ref id, value); }
         }
 
+        public int Width => Image.Width;
+
+        public int Height => Image.Height;
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public static SpriteVM Create(SpriteModel spriteModel)
+        public static SpriteVM Create(SpriteModel spriteModel, IBitmapProvider bitmapProvider)
         {
-            var newSprite = new SpriteVM();
+            var newSprite = new SpriteVM(bitmapProvider);
             newSprite.FromModel(spriteModel);
             return newSprite;
         }
 
         public void UpdateBitmap(int width, int height, byte[] data)
         {
-            Image = BitmapHelper.FromBytes(width, height, data);
+            Image = bitmapProvider.FromBytes(width, height, data);
         }
 
         public void FromModel(SpriteModel model)
@@ -53,7 +63,7 @@ namespace OpenBreed.Editor.VM.Sprites
             Id = model.Index;
         }
 
-        public void Draw(Graphics gfx, float x, float y, int factor)
+        public void Draw(IDrawingContext gfx, float x, float y, int factor)
         {
             int width = image.Width * factor;
             int height = image.Height * factor;

@@ -8,6 +8,7 @@ using System.Windows;
 using OpenBreed.Editor.VM;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Markup;
 
 namespace OpenBreed.Editor.UI.Wpf.TemplateSelectors
 {
@@ -25,10 +26,13 @@ namespace OpenBreed.Editor.UI.Wpf.TemplateSelectors
                 throw new InvalidOperationException($"Expected data context of type '{nameof(EntryEditorVM)}'");
             }
 
+
+
+ 
             var rectangleFactory = new FrameworkElementFactory(entryEditor.InnerCtrl.GetType());
             return new DataTemplate
             {
-                VisualTree = rectangleFactory,
+                VisualTree = rectangleFactory, 
             };
         }
     }

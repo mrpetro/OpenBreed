@@ -12,35 +12,34 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="90"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="ID:" Width="90" />
-            <TextBox Grid.Column="1" Margin="4,4,4,4" Text="{Binding Id}" />
-            <Button Grid.Column="2" Margin="4,4,4,4" Content="Commit" Command="{Binding CommitCommand}" IsEnabled="{Binding CommitEnabled}"/>
-            <Button Grid.Column="3" Margin="4,4,4,4" Content="Revert" Command="{Binding RevertCommand}" IsEnabled="{Binding RevertEnabled}"/>
-            <Button Grid.Column="5" Margin="4,4,4,4" Content="&lt;" Command="{Binding EditPreviousCommand}" IsEnabled="{Binding PreviousAvailable}"/>
-            <Button Grid.Column="6" Margin="4,4,4,4" Content="&gt;" Command="{Binding EditNextCommand}" IsEnabled="{Binding NextAvailable}"/>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Description:" />
-            <TextBox Grid.Column="1" Margin="4,4,4,4" Text="{Binding Description}"/>
-        </Grid>
-        <ContentControl Grid.Row="2" Content="{Binding Path=DataContext, RelativeSource={RelativeSource Self}}"  ContentTemplateSelector="{StaticResource EntryEditorTemplateSelector}" />
+        <GroupBox Grid.Row="0" Header="Entry properties" >
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="ID:" Width="90" />
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="4,4,4,4" Text="{Binding Id}" />
+                <Button Grid.Row="0" Grid.Column="2" Margin="4,4,4,4" Content="Commit" Command="{Binding CommitCommand}" IsEnabled="{Binding CommitEnabled}"/>
+                <Button Grid.Row="0" Grid.Column="3" Margin="4,4,4,4" Content="Revert" Command="{Binding RevertCommand}" IsEnabled="{Binding RevertEnabled}"/>
+                <Button Grid.Row="0" Grid.Column="5" Margin="4,4,4,4" Content="&lt;" Command="{Binding EditPreviousCommand}" IsEnabled="{Binding PreviousAvailable}"/>
+                <Button Grid.Row="0" Grid.Column="6" Margin="4,4,4,4" Content="&gt;" Command="{Binding EditNextCommand}" IsEnabled="{Binding NextAvailable}"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Description:" />
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6" Margin="4,4,4,4" Text="{Binding Description}"/>
+            </Grid>
+        </GroupBox>
+        <ContentControl Grid.Row="1" Content="{Binding Path=DataContext, RelativeSource={RelativeSource Self}}"   ContentTemplateSelector="{StaticResource EntryEditorTemplateSelector}" />
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Maps;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Model.Tiles;
 
 namespace OpenBreed.Editor.VM.Renderer
@@ -13,7 +14,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Constructors
 
-        public TileSetRenderer(MapEditorTilesToolVM tilesTool, RenderTarget target) : base(target)
+        public TileSetRenderer(MapEditorTilesToolVM tilesTool, IRenderTarget target) : base(target)
         {
             this.tilesTool = tilesTool;
         }

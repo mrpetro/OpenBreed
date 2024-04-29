@@ -1,7 +1,7 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +13,13 @@ namespace OpenBreed.Editor.VM.Palettes
     {
         #region Private Fields
 
-        private Color _color = Color.Empty;
+        private MyColor _color = MyColor.Empty;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ColorSelectionVM(Color color, Action<ColorSelectionVM> selectColorCallback)
+        public ColorSelectionVM(MyColor color, Action<ColorSelectionVM> selectColorCallback)
         {
             Color = color;
             SelectCommand = new Command(() => selectColorCallback.Invoke(this));
@@ -29,7 +29,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Properties
 
-        public Color Color
+        public MyColor Color
         {
             get { return _color; }
             set { SetProperty(ref _color, value); }

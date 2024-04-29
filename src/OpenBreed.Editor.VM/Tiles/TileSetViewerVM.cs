@@ -5,11 +5,15 @@ using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Tiles.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using OpenBreed.Model;
 using OpenBreed.Common.Tools;
+using System.Windows.Input;
+using System;
+using OpenBreed.Editor.VM.Common;
+using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Renderer;
+using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
@@ -17,43 +21,86 @@ namespace OpenBreed.Editor.VM.Tiles
     {
         #region Public Fields
 
-        public Point CenterCoord;
-        public Point MaxCoord;
-        public Point MinCoord;
+        public MyPoint CenterCoord;
+        public MyPoint MaxCoord;
+        public MyPoint MinCoord;
 
         #endregion Public Fields
 
         #region Private Fields
 
         private string info;
-        private Bitmap _bitmap;
+        private IBitmap _bitmap;
         private PaletteModel _palette;
+        private int _width;
+        private int _height;
+        private readonly IDrawingFactory drawingFactory;
+        private readonly IDrawingContextProvider drawingContextProvider;
+        private readonly IBitmapProvider bitmapProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSetViewerVM()
+        public TileSetViewerVM(IDrawingFactory drawingFactory, IDrawingContextProvider drawingContextProvider, IBitmapProvider bitmapProvider)
         {
-            Selector = new TilesSelector(this);
+            Selector = new TilesSelector(this, drawingFactory);
             Selector.InfoChanged += (s, a) => Info = Selector.Info;
 
             Items = new BindingList<TileVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
+            Bitmap = drawingFactory.CreateBitmap(1, 1, MyPixelFormat.Format8bppIndexed);
+            OnMouseLeftButtonDownCommand = new Command(OnLeft);
+            OnMouseRightButtonDownCommand = new Command(OnRight);
+            this.drawingFactory = drawingFactory;
+            this.drawingContextProvider = drawingContextProvider;
+            this.bitmapProvider = bitmapProvider;
+        }
 
+        private void OnLeft()
+        {
+            if (Selector.SelectMode != SelectModeEnum.Nothing)
+            {
+                return;
+            }
 
-            Bitmap = new Bitmap(1, 1, PixelFormat.Format8bppIndexed);
+            //Selector.StartSelection(SelectModeEnum.Select, e.Location);
+        }
+
+        private void OnRight()
+        {
+            if (Selector.SelectMode != SelectModeEnum.Nothing)
+            {
+                return;
+            }
+
+            //Selector.StartSelection(SelectModeEnum.Deselect, e.Location);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public Bitmap Bitmap
+        public ICommand OnMouseLeftButtonDownCommand { get; }
+        public ICommand OnMouseRightButtonDownCommand { get; }
+
+        public IBitmap Bitmap
         {
             get { return _bitmap; }
             set { SetProperty(ref _bitmap, value); }
+        }
+
+        public int Width
+        {
+            get { return _width; }
+            set { SetProperty(ref _width, value); }
+        }
+
+        public int Height
+        {
+            get { return _height; }
+            set { SetProperty(ref _height, value); }
         }
 
         public BindingList<TileVM> Items { get; }
@@ -80,7 +127,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Methods
 
-        public void Draw(Graphics gfx)
+        public void Draw(IDrawingContext gfx)
         {
             int xMax = TilesNoX;
             int yMax = TilesNoY;
@@ -95,29 +142,29 @@ namespace OpenBreed.Editor.VM.Tiles
             }
         }
 
-        public void DrawTile(Graphics gfx, int tileId, float x, float y, int tileSize)
+        public void DrawTile(IDrawingContext gfx, int tileId, float x, float y, int tileSize)
         {
             if (tileId >= Items.Count)
                 return;
 
             var tileRect = Items[tileId].Rectangle;
-            gfx.DrawImage(Bitmap, (int)x, (int)y, tileRect, GraphicsUnit.Pixel);
+            gfx.DrawImage(Bitmap, (int)x, (int)y, tileRect);
         }
 
-        public Point GetIndexCoords(Point point)
+        public MyPoint GetIndexCoords(MyPoint point)
         {
-            return new Point(point.X / TileSize, point.Y / TileSize);
+            return new MyPoint(point.X / TileSize, point.Y / TileSize);
         }
 
-        public Point GetSnapCoords(Point point)
+        public MyPoint GetSnapCoords(MyPoint point)
         {
             int x = point.X / TileSize;
             int y = point.Y / TileSize;
 
-            return new Point(x * TileSize, y * TileSize);
+            return new MyPoint(x * TileSize, y * TileSize);
         }
 
-        public List<int> GetTileIdList(Rectangle rectangle)
+        public List<int> GetTileIdList(MyRectangle rectangle)
         {
             int left = rectangle.Left;
             int right = rectangle.Right;
@@ -136,7 +183,7 @@ namespace OpenBreed.Editor.VM.Tiles
             if (bottom > Bitmap.Height)
                 bottom = Bitmap.Height;
 
-            rectangle = new Rectangle(left, top, right - left, bottom - top);
+            rectangle = new MyRectangle(left, top, right - left, bottom - top);
 
             List<int> tileIdList = new List<int>();
             int xFrom = rectangle.Left / TileSize;
@@ -162,20 +209,20 @@ namespace OpenBreed.Editor.VM.Tiles
             RebuildTiles();
         }
 
-        public Bitmap ToBitmap(List<TileModel> tiles)
+        public IBitmap ToBitmap(List<TileModel> tiles)
         {
             int bmpWidth = 320;
             TilesNoX = bmpWidth / TileSize;
             TilesNoY = tiles.Count / TilesNoX;
             int bmpHeight = TilesNoY * TileSize;
-            Bitmap bitmap = new Bitmap(bmpWidth, bmpHeight, PixelFormat.Format8bppIndexed);
+            var bitmap = drawingFactory.CreateBitmap(bmpWidth, bmpHeight, MyPixelFormat.Format8bppIndexed);
 
             for (int j = 0; j < TilesNoY; j++)
             {
                 for (int i = 0; i < TilesNoX; i++)
                 {
                     //Create a BitmapData and Lock all pixels to be written
-                    BitmapData bmpData = bitmap.LockBits(new Rectangle(i * TileSize, j * TileSize, TileSize, TileSize),
+                    var bmpData = bitmap.LockBits(new MyRectangle(i * TileSize, j * TileSize, TileSize, TileSize),
                                                          ImageLockMode.WriteOnly, bitmap.PixelFormat);
 
                     //Copy the data from the byte array into BitmapData.Scan0
@@ -203,6 +250,8 @@ namespace OpenBreed.Editor.VM.Tiles
         internal void SetupTiles(List<TileModel> tiles)
         {
             Bitmap = ToBitmap(tiles);
+            Width = Bitmap.Width;
+            Height = Bitmap.Height;
             RebuildTiles();
         }
 
@@ -212,15 +261,16 @@ namespace OpenBreed.Editor.VM.Tiles
 
         private void CreateDefaultBitmap()
         {
-            Bitmap = new Bitmap(320, 768, PixelFormat.Format32bppArgb);
-
+            Bitmap = drawingFactory.CreateBitmap(320, 768, MyPixelFormat.Format32bppArgb);
+            Width = 320;
+            Height = 768;
             TileSize = 16;
             TilesNoX = Bitmap.Width / TileSize;
             TilesNoY = Bitmap.Height / TileSize;
 
-            using (Graphics gfx = Graphics.FromImage(Bitmap))
+            using (var gfx = drawingContextProvider.FromImage(Bitmap))
             {
-                Font font = new Font("Arial", 5);
+                var font = drawingFactory.CreateFont("Arial", 5);
 
                 for (int j = 0; j < TilesNoY; j++)
                 {
@@ -228,17 +278,17 @@ namespace OpenBreed.Editor.VM.Tiles
                     {
                         int tileId = i + j * TilesNoX;
 
-                        var rectangle = new Rectangle(i * TileSize, j * TileSize, TileSize - 1, TileSize - 1);
+                        var rectangle = new MyRectangle(i * TileSize, j * TileSize, TileSize - 1, TileSize - 1);
 
-                        Color c = Color.Black;
-                        Pen tileColor = new Pen(c);
-                        Brush brush = new SolidBrush(c);
+                        var c = MyColor.Black;
+                        var tileColor = drawingFactory.CreatePen(c);
+                        var brush = drawingFactory.CreateSolidBrush(c);
 
                         gfx.FillRectangle(brush, rectangle);
 
-                        c = Color.White;
-                        tileColor = new Pen(c);
-                        brush = new SolidBrush(c);
+                        c = MyColor.White;
+                        tileColor = drawingFactory.CreatePen(c);
+                        brush = drawingFactory.CreateSolidBrush(c);
 
                         gfx.DrawRectangle(tileColor, rectangle);
                         gfx.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, i * TileSize + 2, j * TileSize + 1);
@@ -260,7 +310,7 @@ namespace OpenBreed.Editor.VM.Tiles
                 {
                     int tileIndexX = tileId % TilesNoX;
                     int tileIndexY = tileId / TilesNoX;
-                    var rectangle = new Rectangle(tileIndexX * TileSize, tileIndexY * TileSize, TileSize, TileSize);
+                    var rectangle = new MyRectangle(tileIndexX * TileSize, tileIndexY * TileSize, TileSize, TileSize);
                     Items.Add(new TileVM(tileId, rectangle));
                 }
             });
@@ -271,7 +321,7 @@ namespace OpenBreed.Editor.VM.Tiles
             switch (name)
             {
                 case nameof(Palette):
-                    BitmapHelper.SetPaletteColors(Bitmap, Palette.Data);
+                    bitmapProvider.SetPaletteColors(Bitmap, Palette.Data);
                     break;
             }
 

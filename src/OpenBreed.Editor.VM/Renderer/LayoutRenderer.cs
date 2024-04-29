@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Maps;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Model.Maps;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Constructors
 
-        public LayoutRenderer(MapEditorVM editor, RenderTarget target) : base(target)
+        public LayoutRenderer(MapEditorVM editor, IRenderTarget target) : base(target)
         {
             _editor = editor;
 

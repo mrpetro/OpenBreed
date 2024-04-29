@@ -9,14 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\Animations\" />
-    <Folder Include="General\" />
+    <Compile Remove="Controls\Texts\**" />
+    <EmbeddedResource Remove="Controls\Texts\**" />
+    <None Remove="Controls\Texts\**" />
+    <Page Remove="Controls\Texts\**" />
   </ItemGroup>
 
   <ItemGroup>
 	<Reference Include="C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.0\WindowsFormsIntegration.dll" />
-    <PackageReference Include="DockPanelSuite" Version="3.1.0" />
-    <PackageReference Include="DockPanelSuite.ThemeVS2015" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="OpenTK" Version="3.0.1" />
     <PackageReference Include="OpenTK.GLControl" Version="3.0.1" />
@@ -27,12 +27,6 @@
     <ProjectReference Include="..\OpenBreed.Common.Windows\OpenBreed.Common.Windows.csproj" />
     <ProjectReference Include="..\OpenBreed.Editor.UI.Wpf\OpenBreed.Editor.UI.Wpf.csproj" />
     <ProjectReference Include="..\OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Views\EntryEditorViewWpf.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 
 </Project>

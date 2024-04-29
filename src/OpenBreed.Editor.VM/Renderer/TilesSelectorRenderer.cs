@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Maps;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Maps;
 
 namespace OpenBreed.Editor.VM.Renderer
 {
@@ -14,12 +15,12 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Constructors
 
-        public TilesSelectorRenderer(MapEditorTilesToolVM tilesTool, RenderTarget target) : base(target)
+        public TilesSelectorRenderer(MapEditorTilesToolVM tilesTool, IRenderTarget target, IDrawingFactory drawingFactory) : base(target)
         {
             this.tilesTool = tilesTool;
 
             tileSetRenderer = new TileSetRenderer(tilesTool, target);
-            tilesSelectionRenderer = new TilesSelectorSelectionRenderer(tilesTool, target);
+            tilesSelectionRenderer = new TilesSelectorSelectionRenderer(tilesTool, target, drawingFactory);
         }
 
         #endregion Public Constructors

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Tiles;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Model.Tiles;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,9 @@ namespace OpenBreed.Editor.VM.Renderer
 {
     public class TileRenderer : RendererBase<TileModel>
     {
-        #region Private Fields
-
-
-        #endregion Private Fields
-
         #region Public Constructors
 
-        public TileRenderer(RenderTarget target) : base(target)
+        public TileRenderer(IRenderTarget target) : base(target)
         {
         }
 
@@ -30,6 +26,7 @@ namespace OpenBreed.Editor.VM.Renderer
         {
         }
 
+        #endregion Public Methods
 
         //private void RenderDefaultTile(RenderTarget renderTarget, int tileId, float x, float y, int tileSize)
         //{
@@ -66,7 +63,5 @@ namespace OpenBreed.Editor.VM.Renderer
         //    var tileRect = Model.TileSet.Tiles[tileId].Rectangle;
         //    renderTarget.DrawImage(CurrentTilesBitmap, (int)x, (int)y, tileRect);
         //}
-
-        #endregion Public Methods
     }
 }

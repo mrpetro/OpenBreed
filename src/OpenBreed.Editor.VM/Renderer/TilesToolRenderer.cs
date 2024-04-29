@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Maps;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Maps;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,7 +14,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
         private readonly MapEditorVM _editor;
 
-        public TilesToolRenderer(MapEditorVM editor, RenderTarget target) : base(target)
+        public TilesToolRenderer(MapEditorVM editor, IRenderTarget target) : base(target)
         {
             _editor = editor;
         }

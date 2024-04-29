@@ -1,13 +1,14 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Images
 {
@@ -18,9 +19,10 @@ namespace OpenBreed.Editor.VM.Images
         private readonly IWorkspaceMan workspaceMan;
         private readonly IDialogProvider dialogProvider;
         private readonly IModelsProvider dataProvider;
+        private readonly IBitmapProvider bitmapProvider;
         private string _assetRef;
 
-        private Image image;
+        private IImage image;
 
         #endregion Private Fields
 
@@ -30,11 +32,13 @@ namespace OpenBreed.Editor.VM.Images
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             IModelsProvider dataProvider,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IControlFactory controlFactory,
+            IBitmapProvider bitmapProvider) : base(workspaceMan, dialogProvider, controlFactory)
         {
             this.workspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;
             this.dataProvider = dataProvider;
+            this.bitmapProvider = bitmapProvider;
             ImageAssetRefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbAsset));
             ImageAssetRefIdEditor.RefIdSelected = (newRefId) => { AssetRef = newRefId; };
             PropertyChanged += This_PropertyChanged;
@@ -46,7 +50,7 @@ namespace OpenBreed.Editor.VM.Images
 
         public EntryRefIdEditorVM ImageAssetRefIdEditor { get; }
 
-        public Image Image
+        public IImage Image
         {
             get { return image; }
             set { SetProperty(ref image, value); }
@@ -66,7 +70,7 @@ namespace OpenBreed.Editor.VM.Images
 
         #region Public Methods
 
-        public void Draw(Graphics gfx)
+        public void Draw(IDrawingContext gfx)
         {
             if (Image == null)
                 return;
@@ -106,10 +110,10 @@ namespace OpenBreed.Editor.VM.Images
         {
             if (AssetRef != null)
             {
-                if (!dataProvider.TryGetModel<Image>(AssetRef, out Image item, out string message))
+                if (!dataProvider.TryGetModel<IImage>(AssetRef, out IImage item, out string message))
                 {
                     dialogProvider.ShowMessage(message, "Invalid asset");
-                    Image = System.Drawing.SystemIcons.Error.ToBitmap();
+                    Image = bitmapProvider.ErrorIcon; 
                 }
                 else
                     Image = item;

@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Editor.VM.Base;
@@ -13,6 +15,7 @@ namespace OpenBreed.Editor.VM.Sprites
 {
     public class SpriteSetFromSprEditorVM : SpriteSetEditorBaseVM<IDbSpriteAtlasFromSpr>
     {
+        private readonly IBitmapProvider bitmapProvider;
         #region Private Fields
 
         private int currentSpriteIndex = -1;
@@ -27,9 +30,11 @@ namespace OpenBreed.Editor.VM.Sprites
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
+            IBitmapProvider bitmapProvider,
             IControlFactory controlFactory) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider, controlFactory)
         {
             Items = new BindingList<SpriteVM>();
+            this.bitmapProvider = bitmapProvider;
         }
 
         #endregion Public Constructors
@@ -59,7 +64,7 @@ namespace OpenBreed.Editor.VM.Sprites
                     Palette.SetColors(64, Palette.Data.Skip(16).Take(16).ToArray());
 
                     foreach (var item in Items)
-                        BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
+                        bitmapProvider.SetPaletteColors(item.Image, Palette.Data);
 
                     break;
 
@@ -84,7 +89,7 @@ namespace OpenBreed.Editor.VM.Sprites
             CurrentSpriteIndex = 0;
 
             foreach (var item in Items)
-                BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
+                bitmapProvider.SetPaletteColors(item.Image, Palette.Data);
         }
 
         #endregion Protected Methods
@@ -103,7 +108,7 @@ namespace OpenBreed.Editor.VM.Sprites
                 Items.Clear();
 
                 foreach (var sprite in sprites)
-                    Items.Add(SpriteVM.Create(sprite));
+                    Items.Add(SpriteVM.Create(sprite, bitmapProvider));
             });
         }
 

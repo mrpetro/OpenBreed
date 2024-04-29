@@ -1,0 +1,30 @@
+﻿using OpenBreed.Editor.VM.Common;
+using OpenBreed.Editor.VM.Tiles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace OpenBreed.Editor.UI.Wpf.Tiles
+{
+    /// <summary>
+    /// Interaction logic for TileSetViewerCtrl.xaml
+    /// </summary>
+    public partial class TileSetViewerCtrl : UserControl
+    {
+        public TileSetViewerCtrl()
+        {
+            InitializeComponent();
+        }
+    }
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Interface.Drawing;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace OpenBreed.Editor.VM.Renderer
 {
     public abstract class RendererBase<T> : IRenderer<T>
     {
-        public RenderTarget Target { get; }
+        public IRenderTarget Target { get; }
 
-        protected RendererBase(RenderTarget target)
+        protected RendererBase(IRenderTarget target)
         {
             Target = target;
         }

@@ -1,7 +1,9 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
 using System;
 using System.Drawing;
+using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -9,10 +11,12 @@ namespace OpenBreed.Editor.VM.Sprites
     {
         #region Public Fields
 
-        public static readonly Pen CurrentSpritePen = new Pen(Color.FromArgb(255, 255, 0, 0));
-        public static readonly Brush CurrentSpriteBrush = new SolidBrush(Color.FromArgb(50, 255, 0, 0));
-        public static readonly Pen ShadowSpritePen = new Pen(Color.FromArgb(255, 0, 255, 0));
-        public static readonly Brush ShadowSpriteBrush = new SolidBrush(Color.FromArgb(25,0,255,0));
+        public IPen CurrentSpritePen { get; }
+        public IBrush CurrentSpriteBrush { get; }
+        public IPen ShadowSpritePen { get; }
+        public IBrush ShadowSpriteBrush { get; }
+
+        private readonly IDrawingFactory drawingFactory;
 
         #endregion Public Fields
 
@@ -23,7 +27,7 @@ namespace OpenBreed.Editor.VM.Sprites
         private bool updateEnabled;
         private bool undoEnabled;
 
-        private Rectangle spriteRectangle;
+        private MyRectangle spriteRectangle;
 
         private string spriteRectangleText;
 
@@ -31,9 +35,15 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteFromImageEditorVM(SpriteSetFromImageEditorVM parent)
+        public SpriteFromImageEditorVM(SpriteSetFromImageEditorVM parent, IDrawingFactory drawingFactory)
         {
             Parent = parent;
+            this.drawingFactory = drawingFactory;
+
+            CurrentSpritePen = drawingFactory.CreatePen(MyColor.FromArgb(255, 255, 0, 0));
+            CurrentSpriteBrush = drawingFactory.CreateSolidBrush(MyColor.FromArgb(50, 255, 0, 0));
+            ShadowSpritePen = drawingFactory.CreatePen(MyColor.FromArgb(255, 0, 255, 0));
+            ShadowSpriteBrush = drawingFactory.CreateSolidBrush(MyColor.FromArgb(25, 0, 255, 0));
 
             Parent.PropertyChanged += Owner_PropertyChanged;
 
@@ -42,11 +52,17 @@ namespace OpenBreed.Editor.VM.Sprites
             SnapSize = new Size(8, 8);
 
             ShowShadowRectangles = true;
+
+            UpdateCommand = new Command(() => Update());
+            UndoCommand = new Command(() => Undo());
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public ICommand UpdateCommand { get; }
+        public ICommand UndoCommand { get; }
 
         public bool ShowShadowRectangles { get; set; }
 
@@ -74,7 +90,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public Action RefreshAction { get; set; }
 
-        public Rectangle SpriteRectangle
+        public MyRectangle SpriteRectangle
         {
             get { return spriteRectangle; }
             private set { SetProperty(ref spriteRectangle, value); }
@@ -112,7 +128,7 @@ namespace OpenBreed.Editor.VM.Sprites
             Close();
         }
 
-        public void CursorUp(Point location)
+        public void CursorUp(MyPoint location)
         {
             if (SelectionRectangle == null)
                 return;
@@ -125,7 +141,7 @@ namespace OpenBreed.Editor.VM.Sprites
             UpdateControls();
         }
 
-        public void CursorDown(Point location)
+        public void CursorDown(MyPoint location)
         {
             SelectionRectangle = new SelectionRectangle();
             location = GetSnapped(location);
@@ -135,7 +151,7 @@ namespace OpenBreed.Editor.VM.Sprites
             RefreshAction?.Invoke();
         }
 
-        public void CursorMove(Point location)
+        public void CursorMove(MyPoint location)
         {
             if (SelectionRectangle == null)
                 return;
@@ -146,7 +162,7 @@ namespace OpenBreed.Editor.VM.Sprites
             RefreshAction?.Invoke();
         }
 
-        public void DrawSpriteEditorView(Graphics gfx)
+        public void DrawSpriteEditorView(IDrawingContext gfx)
         {
             if (Parent.SourceImage == null)
                 return;
@@ -176,7 +192,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Private Methods
 
-        private void DrawShadowRectangles(Graphics gfx)
+        private void DrawShadowRectangles(IDrawingContext gfx)
         {
             for (int i = 0; i < Parent.Items.Count; i++)
             {
@@ -189,6 +205,7 @@ namespace OpenBreed.Editor.VM.Sprites
                 gfx.DrawRectangle(ShadowSpritePen, r);
             }
         }
+
         private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -222,11 +239,11 @@ namespace OpenBreed.Editor.VM.Sprites
             }
         }
 
-        private Point GetSnapped(Point point)
+        private MyPoint GetSnapped(MyPoint point)
         {
             var x = SnapSize.Width * (int)Math.Round((double)point.X / SnapSize.Width);
             var y = SnapSize.Height * (int)Math.Round((double)point.Y / SnapSize.Height);
-            return new Point(x, y);
+            return new MyPoint(x, y);
         }
 
         private void Restore(int spriteIndex)

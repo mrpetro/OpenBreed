@@ -2,36 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
+using OpenBreed.Common.Interface.Drawing;
 
 namespace OpenBreed.Editor.VM.Common
 {
     public class SelectionRectangle
     {
-        private Point selectStartPos;
-        private Point selectEndPos;
+        private MyPoint selectStartPos;
+        private MyPoint selectEndPos;
 
         public SelectionRectangle()
         {
         }
 
-        public void SetStart(Point coordinates)
+        public void SetStart(MyPoint coordinates)
         {
             selectStartPos = coordinates;
             selectEndPos = selectStartPos;
         }
 
-        public void Update(Point coordinates)
+        public void Update(MyPoint coordinates)
         {
             selectEndPos = coordinates;
         }
 
-        public void SetFinish(Point coordinates)
+        public void SetFinish(MyPoint coordinates)
         {
             selectEndPos = coordinates;
         }
 
-        public Rectangle GetRectangle()
+        public MyRectangle GetRectangle()
         {
             int startX = selectStartPos.X;
             int startY = selectStartPos.Y;
@@ -43,11 +43,11 @@ namespace OpenBreed.Editor.VM.Common
             int yFrom = Math.Min(startY, endY);
             int yTo = Math.Max(startY, endY);
 
-            return new Rectangle(xFrom, yFrom, xTo - xFrom, yTo - yFrom);
+            return new MyRectangle(xFrom, yFrom, xTo - xFrom, yTo - yFrom);
 
         }
 
-        public Rectangle GetRectangle(int size)
+        public MyRectangle GetRectangle(int size)
         {
             int startX = selectStartPos.X;
             int startY = selectStartPos.Y;
@@ -69,7 +69,7 @@ namespace OpenBreed.Editor.VM.Common
             int yFrom = Math.Min(startY, endY);
             int yTo = Math.Max(startY, endY);
 
-            return new Rectangle(xFrom * size, yFrom * size, (xTo - xFrom) * size, (yTo - yFrom) * size);
+            return new MyRectangle(xFrom * size, yFrom * size, (xTo - xFrom) * size, (yTo - yFrom) * size);
         }
     }
 }

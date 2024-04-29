@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Interface.Drawing;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace OpenBreed.Editor.VM.Tools
 
         #region Public Methods
 
-        void ZoomViewTo(Point location, float scale);
+        void ZoomViewTo(MyPointF location, float scale);
 
         #endregion Public Methods
     }

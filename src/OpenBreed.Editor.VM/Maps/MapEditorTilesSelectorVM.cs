@@ -1,10 +1,10 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Editor.VM.Renderer;
 using OpenBreed.Model.Tiles;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -12,11 +12,11 @@ namespace OpenBreed.Editor.VM.Maps
     {
         #region Public Fields
 
-        public Point CenterCoord;
+        public MyPoint CenterCoord;
 
-        public Point MaxCoord;
+        public MyPoint MaxCoord;
 
-        public Point MinCoord;
+        public MyPoint MinCoord;
 
         #endregion Public Fields
 
@@ -29,9 +29,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public RenderTarget RenderTarget { get; }
+        public IRenderTarget RenderTarget { get; }
 
-        public MapEditorTilesSelectorVM(MapEditorTilesToolVM parent, TilesSelectorRenderer renderer, RenderTarget renderTarget)
+        public MapEditorTilesSelectorVM(MapEditorTilesToolVM parent, TilesSelectorRenderer renderer, IRenderTarget renderTarget)
         {
             Parent = parent;
             this.renderer = renderer;
@@ -83,7 +83,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Methods
 
-        public void Render(Graphics graphics)
+        public void Render(IDrawingContext graphics)
         {
             if (Parent.Parent.Model is null)
                 return;
@@ -109,7 +109,7 @@ namespace OpenBreed.Editor.VM.Maps
             SelectedIndexes.Clear();
         }
 
-        public List<int> GetTileIdList(Rectangle rectangle)
+        public List<int> GetTileIdList(MyRectangle rectangle)
         {
             var bitmap = Parent.Parent.CurrentTilesBitmap;
             var tileSize = CurrentTileSet.TileSize;
@@ -132,7 +132,7 @@ namespace OpenBreed.Editor.VM.Maps
             if (bottom > bitmap.Height)
                 bottom = bitmap.Height;
 
-            rectangle = new Rectangle(left, top, right - left, bottom - top);
+            rectangle = new MyRectangle(left, top, right - left, bottom - top);
 
             List<int> tileIdList = new List<int>();
             int xFrom = rectangle.Left / tileSize;
@@ -152,11 +152,11 @@ namespace OpenBreed.Editor.VM.Maps
             return tileIdList;
         }
 
-        public void FinishSelection(Point point)
+        public void FinishSelection(MyPoint point)
         {
             SelectionRectangle.SetFinish(GetIndexCoords(point));
 
-            Rectangle selectionRectangle = SelectionRectangle.GetRectangle(CurrentTileSet.TileSize);
+            var selectionRectangle = SelectionRectangle.GetRectangle(CurrentTileSet.TileSize);
             List<int> selectionList = GetTileIdList(selectionRectangle);
 
             if (SelectMode == SelectModeEnum.Select)
@@ -188,7 +188,7 @@ namespace OpenBreed.Editor.VM.Maps
             SelectedIndexes.Remove(tileId);
         }
 
-        public void StartSelection(SelectModeEnum selectMode, Point point)
+        public void StartSelection(SelectModeEnum selectMode, MyPoint point)
         {
             SelectMode = selectMode;
             SelectionRectangle.SetStart(GetIndexCoords(point));
@@ -197,7 +197,7 @@ namespace OpenBreed.Editor.VM.Maps
                 ClearSelection();
         }
 
-        public void UpdateSelection(Point point)
+        public void UpdateSelection(MyPoint point)
         {
             SelectionRectangle.Update(GetIndexCoords(point));
         }
@@ -206,7 +206,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Internal Methods
 
-        internal Point GetIndexCoords(Point point)
+        internal MyPoint GetIndexCoords(MyPoint point)
         {
             return CurrentTileSet.GetIndexCoords(point);
         }
@@ -242,7 +242,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         private void CalculateSelectionCenter()
         {
-            Rectangle rectangle = CurrentTileSet.Tiles[SelectedIndexes[0]].Rectangle;
+            var rectangle = CurrentTileSet.Tiles[SelectedIndexes[0]].Rectangle;
 
             MinCoord.X = rectangle.Left;
             MaxCoord.X = rectangle.Right;
@@ -259,7 +259,7 @@ namespace OpenBreed.Editor.VM.Maps
                 MaxCoord.Y = Math.Max(MaxCoord.Y, rectangle.Top);
             }
 
-            CenterCoord = CurrentTileSet.GetSnapCoords(new Point((MinCoord.X + MaxCoord.X) / 2, (MinCoord.Y + MaxCoord.Y) / 2));
+            CenterCoord = CurrentTileSet.GetSnapCoords(new MyPoint((MinCoord.X + MaxCoord.X) / 2, (MinCoord.Y + MaxCoord.Y) / 2));
         }
 
         #endregion Private Methods

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Maps;
 using System;
 using System.Drawing;
@@ -35,19 +36,23 @@ namespace OpenBreed.Editor.VM.Maps
 
         private CursorActions action;
         private CursorButtons buttons;
-        private Point viewCoords;
+        private MyPoint viewCoords;
         private bool visible;
-        private Point worldCoords;
-        private Point worldIndexCoords;
+        private MyPoint worldCoords;
+        private MyPoint worldIndexCoords;
         private string info;
+        private readonly IDrawingFactory drawingFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapViewCursorVM(MapEditorVM parent)
+        public MapViewCursorVM(
+            MapEditorVM parent,
+            IDrawingFactory drawingFactory)
         {
             Parent = parent;
+            this.drawingFactory = drawingFactory;
         }
 
         #endregion Public Constructors
@@ -57,7 +62,7 @@ namespace OpenBreed.Editor.VM.Maps
         public MapLayoutModel Layout => Parent.Layout;
         public MapEditorVM Parent { get; }
 
-        public Func<Point, Point> ToWorldCoordsFunc { get; set; }
+        public Func<MyPoint, MyPoint> ToWorldCoordsFunc { get; set; }
 
         public CursorActions Action
         {
@@ -71,7 +76,7 @@ namespace OpenBreed.Editor.VM.Maps
             private set { SetProperty(ref buttons, value); }
         }
 
-        public Point ViewCoords
+        public MyPoint ViewCoords
         {
             get { return viewCoords; }
             private set { SetProperty(ref viewCoords, value); }
@@ -83,17 +88,17 @@ namespace OpenBreed.Editor.VM.Maps
             private set { SetProperty(ref visible, value); }
         }
 
-        public Point WorldCoords
+        public MyPoint WorldCoords
         {
             get { return worldCoords; }
             set { SetProperty(ref worldCoords, value); }
         }
 
-        public Point WorldSnapCoords
+        public MyPoint WorldSnapCoords
         {
             get
             {
-                return new Point(WorldIndexCoords.X * Layout.CellSize, WorldIndexCoords.Y * Layout.CellSize);
+                return new MyPoint(WorldIndexCoords.X * Layout.CellSize, WorldIndexCoords.Y * Layout.CellSize);
             }
         }
 
@@ -103,7 +108,7 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref info, value); }
         }
 
-        public Point WorldIndexCoords
+        public MyPoint WorldIndexCoords
         {
             get { return worldIndexCoords; }
             set { SetProperty(ref worldIndexCoords, value); }
@@ -133,7 +138,7 @@ namespace OpenBreed.Editor.VM.Maps
             UpdateAction?.Invoke(this);
         }
 
-        public void Move(CursorButtons buttons, Point location)
+        public void Move(CursorButtons buttons, MyPoint location)
         {
             if (Parent.Model is null)
                 return;
@@ -144,7 +149,7 @@ namespace OpenBreed.Editor.VM.Maps
             UpdateAction?.Invoke(this);
         }
 
-        public void Click(CursorButtons buttons, Point location)
+        public void Click(CursorButtons buttons, MyPoint location)
         {
             if (Parent.Model is null)
                 return;
@@ -155,7 +160,7 @@ namespace OpenBreed.Editor.VM.Maps
             UpdateAction?.Invoke(this);
         }
 
-        public void Down(CursorButtons buttons, Point location)
+        public void Down(CursorButtons buttons, MyPoint location)
         {
             if (Parent.Model is null)
                 return;
@@ -166,7 +171,7 @@ namespace OpenBreed.Editor.VM.Maps
             UpdateAction?.Invoke(this);
         }
 
-        public void Up(CursorButtons buttons, Point location)
+        public void Up(CursorButtons buttons, MyPoint location)
         {
             if (Parent.Model is null)
                 return;
@@ -207,19 +212,19 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Methods
 
-        private Point GetWorldCoords(Point point)
+        private MyPoint GetWorldCoords(MyPoint point)
         {
             var cellSize = Layout.CellSize;
             var worldCoords = ToWorldCoordsFunc(point);
             return worldCoords;
         }
 
-        private Point GetWorldSnapCoords(Point point)
+        private MyPoint GetWorldSnapCoords(MyPoint point)
         {
             var cellSize = Layout.CellSize;
             var worldCoords = ToWorldCoordsFunc(point);
 
-            return new Point((worldCoords.X / cellSize) * cellSize, (worldCoords.Y / cellSize) * cellSize);
+            return new MyPoint((worldCoords.X / cellSize) * cellSize, (worldCoords.Y / cellSize) * cellSize);
         }
 
         #endregion Private Methods

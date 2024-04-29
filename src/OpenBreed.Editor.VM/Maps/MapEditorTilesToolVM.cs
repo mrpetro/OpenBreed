@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM.Base;
@@ -33,15 +34,16 @@ namespace OpenBreed.Editor.VM.Maps
         #region Private Fields
 
         private MapEditorTileInsertOperation[,] InsertBuffer;
+        private readonly IDrawingFactory drawingFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapEditorTilesToolVM(MapEditorVM parent, IWorkspaceMan workspaceMan)
+        public MapEditorTilesToolVM(MapEditorVM parent, IWorkspaceMan workspaceMan, IDrawingFactory drawingFactory)
         {
             Parent = parent;
-
+            this.drawingFactory = drawingFactory;
             RefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbTileAtlas));
 
             TilesCursor = new List<MapEditorTileInsertOperation>();
@@ -50,8 +52,8 @@ namespace OpenBreed.Editor.VM.Maps
 
             TileSetSelector = new MapEditorTileSetSelectorVM(this);
 
-            var mapViewRenderTarget = new RenderTarget(1, 1);
-            var renderer = new TilesSelectorRenderer(this, mapViewRenderTarget);
+            var mapViewRenderTarget = drawingFactory.CreateRenderTarget(1, 1);
+            var renderer = new TilesSelectorRenderer(this, mapViewRenderTarget, drawingFactory);
             TilesSelector = new MapEditorTilesSelectorVM(this, renderer, mapViewRenderTarget);
 
             RefIdEditor.PropertyChanged += EntryRef_PropertyChanged;
@@ -230,7 +232,7 @@ namespace OpenBreed.Editor.VM.Maps
             InsertBuffer = new MapEditorTileInsertOperation[Layout.Width, Layout.Height];
         }
 
-        public void DrawBuffer(RenderTarget renderTarget, int tileSize)
+        public void DrawBuffer(IRenderTarget renderTarget, int tileSize)
         {
             for (int indexY = 0; indexY < InsertBuffer.GetLength(1); indexY++)
             {

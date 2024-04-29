@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Common;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Common;
 using OpenBreed.Editor.VM.Maps;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,16 @@ namespace OpenBreed.Editor.VM.Renderer
         #region Private Fields
 
         private readonly MapEditorTilesToolVM tilesTool;
+        private readonly IDrawingFactory drawingFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TilesSelectorSelectionRenderer(MapEditorTilesToolVM tilesTool, RenderTarget target) : base(target)
+        public TilesSelectorSelectionRenderer(MapEditorTilesToolVM tilesTool, IRenderTarget target, IDrawingFactory drawingFactory) : base(target)
         {
             this.tilesTool = tilesTool;
+            this.drawingFactory = drawingFactory;
         }
 
         #endregion Public Constructors
@@ -33,9 +36,9 @@ namespace OpenBreed.Editor.VM.Renderer
             if (renderable == null)
                 return;
 
-            Pen selectedPen = new Pen(Color.LightGreen);
-            Pen selectPen = new Pen(Color.LightBlue);
-            Pen deselectPen = new Pen(Color.Red);
+            var selectedPen = drawingFactory.CreatePen(MyColor.LightGreen);
+            var selectPen = drawingFactory.CreatePen(MyColor.LightBlue);
+            var deselectPen = drawingFactory.CreatePen(MyColor.Red);
 
             for (int index = 0; index < renderable.SelectedIndexes.Count; index++)
             {

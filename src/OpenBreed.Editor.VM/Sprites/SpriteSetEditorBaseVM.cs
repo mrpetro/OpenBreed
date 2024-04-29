@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Sprites;
@@ -25,7 +26,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Private Fields
 
-        private string _currentPaletteId;
+        private string _currentPaletteRef;
 
         private PaletteModel palette;
 
@@ -44,17 +45,20 @@ namespace OpenBreed.Editor.VM.Sprites
             this.spriteAtlasDataProvider = spriteAtlasDataProvider;
             this.palettesDataProvider = palettesDataProvider;
             this.dataProvider = dataProvider;
-            PaletteIds = new BindingList<string>();
+            PaletteRefs = new BindingList<string>();
+
+            palette = PaletteModel.NullPalette;
+
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string CurrentPaletteId
+        public string CurrentPaletteRef
         {
-            get { return _currentPaletteId; }
-            set { SetProperty(ref _currentPaletteId, value); }
+            get { return _currentPaletteRef; }
+            set { SetProperty(ref _currentPaletteRef, value); }
         }
 
         public PaletteModel Palette
@@ -63,22 +67,22 @@ namespace OpenBreed.Editor.VM.Sprites
             set { SetProperty(ref palette, value); }
         }
 
-        public BindingList<string> PaletteIds { get; }
+        public BindingList<string> PaletteRefs { get; }
         public int SelectedIndex { get; private set; }
 
         #endregion Public Properties
 
         #region Internal Methods
 
-        internal void SetupPaletteIds(List<string> paletteRefs)
+        internal void SetupPaletteRefs(List<string> paletteRefs)
         {
-            PaletteIds.UpdateAfter(() =>
+            PaletteRefs.UpdateAfter(() =>
             {
-                PaletteIds.Clear();
-                paletteRefs.ForEach(item => PaletteIds.Add(item));
+                PaletteRefs.Clear();
+                paletteRefs.ForEach(item => PaletteRefs.Add(item));
             });
 
-            CurrentPaletteId = PaletteIds.FirstOrDefault();
+            CurrentPaletteRef = PaletteRefs.FirstOrDefault();
         }
 
         #endregion Internal Methods
@@ -96,18 +100,18 @@ namespace OpenBreed.Editor.VM.Sprites
 
         protected override void UpdateVM(IDbSpriteAtlas entry)
         {
-            SetupPaletteIds(entry.PaletteRefs);
-            SwitchPalette(CurrentPaletteId);
-
             UpdateVM((TSpriteAtlas)entry);
+            SetupPaletteRefs(entry.PaletteRefs);
+            SwitchPalette(CurrentPaletteRef);
+
         }
 
         protected override void OnPropertyChanged(string name)
         {
             switch (name)
             {
-                case nameof(CurrentPaletteId):
-                    SwitchPalette(CurrentPaletteId);
+                case nameof(CurrentPaletteRef):
+                    SwitchPalette(CurrentPaletteRef);
                     break;
 
                 default:

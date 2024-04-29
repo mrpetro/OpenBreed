@@ -4,6 +4,7 @@ using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
@@ -26,12 +27,15 @@ using OpenBreed.Editor.VM.EntityTemplates;
 using OpenBreed.Editor.VM.Images;
 using OpenBreed.Editor.VM.Logging;
 using OpenBreed.Editor.VM.Maps;
+using OpenBreed.Editor.VM.Options;
 using OpenBreed.Editor.VM.Palettes;
+using OpenBreed.Editor.VM.Renderer;
 using OpenBreed.Editor.VM.Scripts;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Editor.VM.Tiles;
+using OpenBreed.Editor.VM.Tools;
 using System;
 
 namespace OpenBreed.Editor.VM.Extensions
@@ -48,21 +52,15 @@ namespace OpenBreed.Editor.VM.Extensions
             });
         }
 
-        public static void SetupDbEntryEditors(this IHostBuilder hostBuilder)
+
+
+        public static void SetupEditorViewModels(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddTransient<DbEditorVM>(
-                    (sp) => new DbEditorVM(
-                        sp,                                                    
-                        sp.GetService<DbEntryEditorFactory>(),                                                      
-                        sp.GetService<IRepositoryProvider>()));
-
-                services.AddTransient<DbTablesEditorVM>(
-                    (sp) => new DbTablesEditorVM(
-                        sp.GetService<IWorkspaceMan>(),                                                                   
-                        sp.GetService<DbEntryFactory>()));
-
+                services.AddTransient<DbEditorVM>();
+                services.AddTransient<DbTablesEditorVM>();
+                services.AddTransient<DbEntriesEditorVM>();
                 services.AddTransient<TileSetFromBlkEditorVM>();
                 services.AddTransient<ActionSetEmbeddedEditorVM>();
                 services.AddTransient<SpriteSetFromImageEditorVM>();
@@ -80,6 +78,8 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<EntityTemplateFromFileEditorVM>();
                 services.AddTransient<EpfArchiveFileDataSourceEditorVM>();
                 services.AddTransient<FileDataSourceEditorVM>();
+                services.AddTransient<OptionsVM>();
+                services.AddTransient<AbtaPasswordGeneratorVM>();
             });
         }
 

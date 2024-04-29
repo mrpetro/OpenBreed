@@ -1,7 +1,9 @@
-﻿using OpenBreed.Editor.VM.Actions;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Actions;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace OpenBreed.Editor.VM.Maps
@@ -16,12 +18,16 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorActionsSelectorVM(MapEditorActionsToolVM parent)
+        public MapEditorActionsSelectorVM(
+            MapEditorActionsToolVM parent,
+            IDrawingFactory drawingFactory,
+            IDrawingContextProvider drawingContextProvider)
         {
             Parent = parent;
-
-            Items = new BindingList<ActionVM>();
-            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
+            this.drawingFactory = drawingFactory;
+            this.drawingContextProvider = drawingContextProvider;
+            Items = new ObservableCollection<ActionVM>();
+            Items.CollectionChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
             Parent.PropertyChanged += Parent_PropertyChanged;
         }
@@ -30,14 +36,8 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public BindingList<ActionVM> Items { get; }
+        public ObservableCollection<ActionVM> Items { get; }
         public MapEditorActionsToolVM Parent { get; }
-
-        public int SelectedIndex
-        {
-            get { return _selectedIndex; }
-            set { SetProperty(ref _selectedIndex, value); }
-        }
 
         #endregion Public Properties
 
@@ -47,29 +47,29 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Methods
 
-        private string currentActionSetRef;
+        private int _currentItemIndex;
+        private readonly IDrawingFactory drawingFactory;
+        private readonly IDrawingContextProvider drawingContextProvider;
 
-        public string CurrentActionSetRef
+        public int CurrentItemIndex
         {
-            get { return currentActionSetRef; }
-            set { SetProperty(ref currentActionSetRef, value); }
+            get { return _currentItemIndex; }
+            set { SetProperty(ref _currentItemIndex, value); }
         }
 
         private void OnActionSetChanged()
         {
-            Items.UpdateAfter(() =>
+            Items.Clear();
+
+            if (Parent.Parent.ActionSet is null)
             {
-                Items.Clear();
-                SelectedIndex = -1;
+                return;
+            }
 
-                if (Parent.Parent.ActionSet == null)
-                    return;
-
-                foreach (var actionModel in Parent.Parent.ActionSet.Items)
-                {
-                    Items.Add(new ActionVM(actionModel));
-                }
-            });
+            foreach (var actionModel in Parent.Parent.ActionSet.Items)
+            {
+                Items.Add(new ActionVM(drawingFactory, drawingContextProvider, actionModel, null));
+            }
         }
 
         private void Parent_PropertyChanged(object sender, PropertyChangedEventArgs e)

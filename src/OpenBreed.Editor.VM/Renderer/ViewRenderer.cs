@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Maps;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.VM.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,12 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Constructors
 
-        public ViewRenderer(MapEditorVM editor, RenderTarget target) : base(target)
+        public ViewRenderer(MapEditorVM editor, IRenderTarget target, IPensProvider pensProvider) : base(target)
         {
             _editor = editor;
 
             _layoutRenderer = new LayoutRenderer(editor, target);
-            _cursorRenderer = new ViewCursorRenderer(editor, target);
+            _cursorRenderer = new ViewCursorRenderer(editor, target, pensProvider);
             _tilesToolRenderer = new TilesToolRenderer(editor, target);
         }
 

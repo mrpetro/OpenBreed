@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Editor.VM.Base;
@@ -9,6 +11,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -17,6 +20,7 @@ namespace OpenBreed.Editor.VM.Sprites
         #region Private Fields
 
         private int currentSpriteIndex = -1;
+        private readonly IBitmapProvider bitmapProvider;
 
         #endregion Private Fields
 
@@ -28,10 +32,16 @@ namespace OpenBreed.Editor.VM.Sprites
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(spriteAtlasDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider, controlFactory)
+            IControlFactory controlFactory,
+            IDrawingFactory drawingFactory,
+            IBitmapProvider bitmapProvider) : base(spriteAtlasDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider, controlFactory)
         {
-            SpriteEditor = new SpriteFromImageEditorVM(this);
+            SpriteEditor = new SpriteFromImageEditorVM(this, drawingFactory);
             Items = new BindingList<SpriteFromImageVM>();
+
+            AddSpriteCommand = new Command(() => AddSprite());
+            RemoveSpriteCommand = new Command(() => RemoveSprite());
+            this.bitmapProvider = bitmapProvider;
         }
 
         #endregion Public Constructors
@@ -41,9 +51,12 @@ namespace OpenBreed.Editor.VM.Sprites
         public BindingList<SpriteFromImageVM> Items { get; }
 
         public SpriteFromImageEditorVM SpriteEditor { get; }
-        public Bitmap SourceImage { get; private set; }
+        public IBitmap SourceImage { get; private set; }
 
         public Action RefreshAction { get; set; }
+
+        public ICommand AddSpriteCommand { get; }
+        public ICommand RemoveSpriteCommand { get; }
 
         public int CurrentSpriteIndex
         {
@@ -67,12 +80,12 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public void AddSprite()
         {
-            var newSprite = new SpriteFromImageVM();
+            var newSprite = new SpriteFromImageVM(bitmapProvider);
             newSprite.Id = Items.Count;
-            newSprite.SourceRectangle = new Rectangle(0, 0, 8, 8);
-            var bytes = BitmapHelper.ToBytes(SourceImage, newSprite.SourceRectangle);
+            newSprite.SourceRectangle = new MyRectangle(0, 0, 8, 8);
+            var bytes = bitmapProvider.ToBytes(SourceImage, newSprite.SourceRectangle);
             newSprite.UpdateBitmap(8, 8, bytes);
-            BitmapHelper.SetPaletteColors(newSprite.Image, SourceImage.Palette.Entries);
+            bitmapProvider.SetPaletteColors(newSprite.Image, SourceImage.Palette.Entries);
 
             Items.Add(newSprite);
             CurrentSpriteIndex = Items.Count - 1;
@@ -82,9 +95,9 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Internal Methods
 
-        internal void UpdateSpriteImage(SpriteVM sprite, Rectangle cutout)
+        internal void UpdateSpriteImage(SpriteVM sprite, MyRectangle cutout)
         {
-            var bytes = BitmapHelper.ToBytes(SourceImage, cutout);
+            var bytes = bitmapProvider.ToBytes(SourceImage, cutout);
             var originalPalette = sprite.Image.Palette;
             sprite.UpdateBitmap(cutout.Width, cutout.Height, bytes);
             sprite.Image.Palette = originalPalette;
@@ -101,10 +114,10 @@ namespace OpenBreed.Editor.VM.Sprites
             switch (name)
             {
                 case nameof(Palette):
-                    BitmapHelper.SetPaletteColors(SourceImage, Palette.Data);
+                    bitmapProvider.SetPaletteColors(SourceImage, Palette.Data);
 
                     foreach (var item in Items)
-                        BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
+                        bitmapProvider.SetPaletteColors(item.Image, Palette.Data);
                     break;
 
                 default:
@@ -131,7 +144,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         protected override void UpdateVM(IDbSpriteAtlasFromImage entry)
         {
-            SourceImage = dataProvider.GetModel<Bitmap>(entry.DataRef);
+            SourceImage = dataProvider.GetModel<IBitmap>(entry.DataRef);
 
             Items.UpdateAfter(() =>
             {
@@ -144,13 +157,13 @@ namespace OpenBreed.Editor.VM.Sprites
                     var spriteBuilder = SpriteBuilder.NewSprite();
                     spriteBuilder.SetIndex(i);
                     spriteBuilder.SetSize(spriteDef.Width, spriteDef.Height);
-                    var cutout = new Rectangle(spriteDef.X, spriteDef.Y, spriteDef.Width, spriteDef.Height);
-                    var bytes = BitmapHelper.ToBytes(SourceImage, cutout);
+                    var cutout = new MyRectangle(spriteDef.X, spriteDef.Y, spriteDef.Width, spriteDef.Height);
+                    var bytes = bitmapProvider.ToBytes(SourceImage, cutout);
                     spriteBuilder.SetData(bytes);
 
                     var sprite = spriteBuilder.Build();
 
-                    var spriteVM = SpriteFromImageVM.Create(sprite, cutout);
+                    var spriteVM = SpriteFromImageVM.Create(bitmapProvider, sprite, cutout);
                     Items.Add(spriteVM);
                 }
             });

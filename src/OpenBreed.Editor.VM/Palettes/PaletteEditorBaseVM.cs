@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore.Update;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Maps;
@@ -11,7 +13,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Palettes
@@ -130,7 +131,7 @@ namespace OpenBreed.Editor.VM.Palettes
         {
             for (int i = 0; i < 256; i++)
             {
-                Colors.Add(new ColorSelectionVM(Color.FromArgb(255, i, i, i), OnColorSelected));
+                Colors.Add(new ColorSelectionVM(MyColor.FromArgb(255, (byte)i, (byte)i, (byte)i), OnColorSelected));
             }
 
             CurrentColorIndex = 0;

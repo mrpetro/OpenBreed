@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Model.Actions;
@@ -20,11 +21,15 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorActionsToolVM(MapEditorVM parent, IWorkspaceMan workspaceMan)
+        public MapEditorActionsToolVM(
+            MapEditorVM parent,
+            IWorkspaceMan workspaceMan,
+            IDrawingFactory drawingFactory,
+            IDrawingContextProvider drawingContextProvider)
         {
             Parent = parent;
             RefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbActionSet));
-            ActionsSelector = new MapEditorActionsSelectorVM(this);
+            ActionsSelector = new MapEditorActionsSelectorVM(this, drawingFactory, drawingContextProvider);
 
             RefIdEditor.PropertyChanged += ActionEntryRef_PropertyChanged;
         }
@@ -61,10 +66,10 @@ namespace OpenBreed.Editor.VM.Maps
         internal override void OnCursor(MapViewCursorVM cursor)
         {
             if ((cursor.Action == CursorActions.Move || cursor.Action == CursorActions.Down) && cursor.Buttons.HasFlag(CursorButtons.Left))
-                SetValue(cursor.WorldIndexCoords, ActionsSelector.SelectedIndex);
+                SetValue(cursor.WorldIndexCoords, ActionsSelector.CurrentItemIndex);
         }
 
-        internal void SetValue(Point tileCoords, int value)
+        internal void SetValue(MyPoint tileCoords, int value)
         {
             var oldValue = Layout.GetCellValue(LayerIndex, tileCoords.X, tileCoords.Y);
 
