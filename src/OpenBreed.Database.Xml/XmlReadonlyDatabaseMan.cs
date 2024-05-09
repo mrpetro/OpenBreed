@@ -166,7 +166,9 @@ namespace OpenBreed.Database.Xml
             IRepository foundRepo;
 
             if (!repositories.TryGetValue(type, out foundRepo))
+            {
                 throw new Exception($"Repository of type {type} not found.");
+            }
 
             return foundRepo;
         }
