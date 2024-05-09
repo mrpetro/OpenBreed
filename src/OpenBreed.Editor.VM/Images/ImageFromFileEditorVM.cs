@@ -39,8 +39,11 @@ namespace OpenBreed.Editor.VM.Images
             this.dialogProvider = dialogProvider;
             this.dataProvider = dataProvider;
             this.bitmapProvider = bitmapProvider;
-            ImageAssetRefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbAsset));
-            ImageAssetRefIdEditor.RefIdSelected = (newRefId) => { AssetRef = newRefId; };
+            ImageAssetRefIdEditor = new EntryRefIdEditorVM(
+                workspaceMan,
+                typeof(IDbAsset),
+                (newRefId) => AssetRef = newRefId);
+
             PropertyChanged += This_PropertyChanged;
         }
 
@@ -94,6 +97,8 @@ namespace OpenBreed.Editor.VM.Images
             base.UpdateVM(entry);
 
             AssetRef = entry.DataRef;
+            ImageAssetRefIdEditor.SelectedRefId = AssetRef;
+
             UpdateImage();
         }
 
@@ -125,7 +130,7 @@ namespace OpenBreed.Editor.VM.Images
             switch (e.PropertyName)
             {
                 case nameof(AssetRef):
-                    ImageAssetRefIdEditor.RefId = (AssetRef == null) ? null : AssetRef;
+                    ImageAssetRefIdEditor.CurrentRefId = (AssetRef == null) ? null : AssetRef;
                     UpdateImage();
                     Refresh();
                     break;

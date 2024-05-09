@@ -1,21 +1,23 @@
 ﻿using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Database
 {
     public class DbTableNewEntryCreatorVM : BaseViewModel
     {
-
         #region Private Fields
 
         private bool _createEnabled;
-        private EntryTypeVM _entryType;
+        private EntryTypeVM _selectedEntryType;
         private string _newId;
+        private bool _isVisible;
 
         #endregion Private Fields
 
@@ -23,9 +25,10 @@ namespace OpenBreed.Editor.VM.Database
 
         internal DbTableNewEntryCreatorVM()
         {
-            EntryTypes = new BindingList<EntryTypeVM>();
+            EntryTypes = new ObservableCollection<EntryTypeVM>();
 
-            PropertyChanged += This_PropertyChanged;
+            CreateCommand = new Command(() => Create());
+            CancelCommand = new Command(() => Cancel());
         }
 
         #endregion Internal Constructors
@@ -38,18 +41,22 @@ namespace OpenBreed.Editor.VM.Database
 
         public Action CreateAction { get; set; }
 
+        public ICommand CreateCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
         public bool CreateEnabled
         {
             get { return _createEnabled; }
             set { SetProperty(ref _createEnabled, value); }
         }
 
-        public BindingList<EntryTypeVM> EntryTypes { get; }
+        public ObservableCollection<EntryTypeVM> EntryTypes { get; }
 
-        public EntryTypeVM EntryType
+        public EntryTypeVM SelectedEntryType
         {
-            get { return _entryType; }
-            set { SetProperty(ref _entryType, value); }
+            get { return _selectedEntryType; }
+            set { SetProperty(ref _selectedEntryType, value); }
         }
 
         public string NewId
@@ -58,12 +65,20 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _newId, value); }
         }
 
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set { SetProperty(ref _isVisible, value); }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Close()
+        public void Cancel()
         {
+            IsVisible = false;
+
             CloseAction?.Invoke();
         }
 
@@ -74,19 +89,26 @@ namespace OpenBreed.Editor.VM.Database
 
         #endregion Public Methods
 
-        #region Private Methods
+        #region Protected Methods
 
-        private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
                 case nameof(NewId):
                     CreateEnabled = ValidateNewId();
                     break;
+
                 default:
                     break;
             }
+
+            base.OnPropertyChanged(name);
         }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private bool ValidateNewId()
         {
@@ -94,6 +116,5 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         #endregion Private Methods
-
     }
 }

@@ -40,11 +40,17 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorTilesToolVM(MapEditorVM parent, IWorkspaceMan workspaceMan, IDrawingFactory drawingFactory)
+        public MapEditorTilesToolVM(
+            MapEditorVM parent,
+            IWorkspaceMan workspaceMan,
+            IDrawingFactory drawingFactory)
         {
             Parent = parent;
             this.drawingFactory = drawingFactory;
-            RefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbTileAtlas));
+            RefIdEditor = new EntryRefIdEditorVM(
+                workspaceMan,
+                typeof(IDbTileAtlas),
+                (newRefId) => TilesSelector.CurrentTileSetRef = newRefId);
 
             TilesCursor = new List<MapEditorTileInsertOperation>();
             //Inserter = new MapEditorTilesInserter(Parent);
@@ -55,8 +61,6 @@ namespace OpenBreed.Editor.VM.Maps
             var mapViewRenderTarget = drawingFactory.CreateRenderTarget(1, 1);
             var renderer = new TilesSelectorRenderer(this, mapViewRenderTarget, drawingFactory);
             TilesSelector = new MapEditorTilesSelectorVM(this, renderer, mapViewRenderTarget);
-
-            RefIdEditor.PropertyChanged += EntryRef_PropertyChanged;
         }
 
         internal void SetValue(Point tileCoords, int value)
@@ -84,20 +88,6 @@ namespace OpenBreed.Editor.VM.Maps
         public MapEditorTileSetSelectorVM TileSetSelector { get; }
         public MapEditorTilesSelectorVM TilesSelector { get; }
         public EntryRefIdEditorVM RefIdEditor { get; }
-
-        private void EntryRef_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(RefIdEditor.RefId):
-                    TilesSelector.CurrentTileSetRef = RefIdEditor.RefId;
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
 
         public List<MapEditorTileInsertOperation> TilesCursor { get; }
 

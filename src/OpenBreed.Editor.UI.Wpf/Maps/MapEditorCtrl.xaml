@@ -13,8 +13,11 @@
         </Grid.ColumnDefinitions>
         <local:MapEditorViewCtrl Grid.Column="0" DataContext="{Binding MapView}"/>
         <DockPanel Grid.Column="1"  >
-            <Expander DockPanel.Dock="Top" Header="Properties">
-                <local:MapPropertiesEditorCtrl DataContext="{Binding Properties}"/>
+            <Expander DockPanel.Dock="Top" Header="General properties">
+                <local:MapGeneralPropertiesEditorCtrl DataContext="{Binding GeneralProperties}"/>
+            </Expander>
+            <Expander DockPanel.Dock="Top" Header="Mission properties">
+                <local:MapMissionPropertiesEditorCtrl DataContext="{Binding MissionProperties}"/>
             </Expander>
             <GroupBox Header="Tools" >
                 <TabControl SelectedIndex="{Binding Tools.CurrentToolIndex}" >

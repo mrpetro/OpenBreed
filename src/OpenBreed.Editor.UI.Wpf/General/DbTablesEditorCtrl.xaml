@@ -11,31 +11,24 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="62"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label
+               Grid.Column="0"
+               VerticalAlignment="Center"
+               Margin="4"
+               Content="Table" Height="26"/>
         <ComboBox Grid.Row="0"
+                  Grid.Column="1"
                   Height="22"
                   Margin="4" 
                   ItemsSource="{Binding DbTableSelector.TableNames}"
                   SelectedItem="{Binding DbTableSelector.CurrentTableName}" />
-        <DataGrid Grid.Row="1" 
-                  Margin="4" 
-                  ItemsSource="{Binding DbTableEditor.Entries}"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  CanUserResizeColumns="True"
-                  VerticalContentAlignment="Center"
-                  IsSynchronizedWithCurrentItem="True" CurrentItem="{Binding DbTableEditor.CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-            <DataGrid.InputBindings>
-                <MouseBinding MouseAction="LeftDoubleClick"
-                              Command="{Binding DbTableEditor.OpenEntryCommand}"/>
-            </DataGrid.InputBindings>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" 
-                                    IsReadOnly="True" 
-                                    Binding="{Binding Path=Id}"/>
-                <DataGridTextColumn Header="Description" 
-                                    IsReadOnly="True" 
-                                    Binding="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <local:DbTableEditorCtrl Grid.Row="1"
+                                 Grid.Column="0"
+                                 Grid.ColumnSpan="2"
+                                 DataContext="{Binding DbTableEditor}"/>
     </Grid>
 </UserControl>

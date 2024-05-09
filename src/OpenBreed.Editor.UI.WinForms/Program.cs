@@ -45,8 +45,6 @@ using OpenBreed.Editor.UI.Wpf.Extensions;
 using OpenBreed.Common.Windows.Extensions;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Editor.Cfg.Managers;
-using OpenBreed.Editor.UI.WinForms.Forms;
-
 
 namespace OpenBreed.Editor.UI.WinForms
 {

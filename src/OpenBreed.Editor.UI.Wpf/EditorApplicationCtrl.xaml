@@ -1,4 +1,5 @@
-﻿<UserControl xmlns:General="clr-namespace:OpenBreed.Editor.UI.Wpf.General"  x:Class="OpenBreed.Editor.UI.Wpf.EditorApplicationCtrl"
+﻿<UserControl xmlns:General="clr-namespace:OpenBreed.Editor.UI.Wpf.General"
+             x:Class="OpenBreed.Editor.UI.Wpf.EditorApplicationCtrl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

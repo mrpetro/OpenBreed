@@ -6,7 +6,7 @@ using OpenBreed.Model.Maps.Blocks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapPropertiesEditorVM : BaseViewModel
+    public class MapGeneralPropertiesEditorVM : BaseViewModel
     {
 
         #region Private Fields
@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapPropertiesEditorVM(MapEditorVM parent)
+        public MapGeneralPropertiesEditorVM(MapEditorVM parent)
         {
             if (parent == null)
                 throw new ArgumentNullException(nameof(parent));

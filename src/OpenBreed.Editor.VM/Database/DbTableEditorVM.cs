@@ -7,6 +7,7 @@ using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Database
@@ -19,7 +20,6 @@ namespace OpenBreed.Editor.VM.Database
 
         private readonly IWorkspaceMan workspaceMan;
         private readonly DbEntryFactory dbEntryFactory;
-        private DbTableNewEntryCreatorVM _newEntryCreator;
 
         private DbEntryVM _currentItem;
         private IRepository _edited;
@@ -39,11 +39,18 @@ namespace OpenBreed.Editor.VM.Database
             Entries.ListChanged += (s, a) => OnPropertyChanged(nameof(Entries));
 
             OpenEntryCommand = new Command(() => EditEntry(CurrentItem.Id));
+            StartNewEntryCommand = new Command(() => StartNewEntry());
+
+            NewEntryCreator = new DbTableNewEntryCreatorVM();
+            NewEntryCreator.CreateAction = OnNewEntryCreate;
+            NewEntryCreator.ValidateNewIdFunc = OnValidateNewId;
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
+
+        public DbTableNewEntryCreatorVM NewEntryCreator { get; }
 
         public BindingList<DbEntryVM> Entries { get; }
 
@@ -71,6 +78,7 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         public ICommand OpenEntryCommand { get; }
+        public ICommand StartNewEntryCommand { get; }
 
         #endregion Public Properties
 
@@ -82,17 +90,15 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Methods
 
-        public void OpenNewEntryCreator()
+        public void StartNewEntry()
         {
-            _newEntryCreator = new DbTableNewEntryCreatorVM();
-            _newEntryCreator.CreateAction = OnNewEntryCreate;
-            _newEntryCreator.ValidateNewIdFunc = OnValidateNewId;
+            NewEntryCreator.IsVisible = true;
+            NewEntryCreator.NewId = GetUniqueId();
 
-            _edited.EntryTypes.ForEach(item => _newEntryCreator.EntryTypes.Add(new EntryTypeVM(item)));
 
-            _newEntryCreator.EntryType = _newEntryCreator.EntryTypes.FirstOrDefault();
-            _newEntryCreator.NewId = GetUniqueId();
-            OpenNewEntryCreatorAction?.Invoke(_newEntryCreator);
+            NewEntryCreator.EntryTypes.Clear();
+            _edited.EntryTypes.ForEach(item => NewEntryCreator.EntryTypes.Add(new EntryTypeVM(item)));
+            NewEntryCreator.SelectedEntryType = NewEntryCreator.EntryTypes.FirstOrDefault();
         }
 
         public void EditEntry(string entryId)
@@ -120,11 +126,7 @@ namespace OpenBreed.Editor.VM.Database
 
             UpdateTitle();
 
-            if (_newEntryCreator != null)
-            {
-                _newEntryCreator.Close();
-                _newEntryCreator = null;
-            }
+            NewEntryCreator.IsVisible = false;
         }
 
         public void SetNoModel()
@@ -183,10 +185,10 @@ namespace OpenBreed.Editor.VM.Database
 
         private void OnNewEntryCreate()
         {
-            var newEntryId = _newEntryCreator.NewId;
-            var newEntryType = _newEntryCreator.EntryType.Type;
+            var newEntryId = NewEntryCreator.NewId;
+            var newEntryType = NewEntryCreator.SelectedEntryType.Type;
 
-            _newEntryCreator.Close();
+            NewEntryCreator.IsVisible = false;
 
             var entry = _edited.New(newEntryId, newEntryType);
             var dbEntry = dbEntryFactory.Create(entry);

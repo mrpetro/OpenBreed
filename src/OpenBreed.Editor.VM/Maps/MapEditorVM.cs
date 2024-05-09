@@ -74,7 +74,8 @@ namespace OpenBreed.Editor.VM.Maps
 
             MapView = new MapEditorViewVM(this, renderer, mapViewRenderTarget, drawingFactory);
             //LayoutVm = new MapLayoutVM(this);
-            Properties = new MapPropertiesEditorVM(this);
+            GeneralProperties = new MapGeneralPropertiesEditorVM(this);
+            MissionProperties = new MapMissionPropertiesEditorVM();
             //LayoutVm.PropertyChanged += (s, e) => OnPropertyChanged(nameof(LayoutVm));
 
             InitializeTools();
@@ -122,7 +123,8 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref currentPaletteRef, value); }
         }
 
-        public MapPropertiesEditorVM Properties { get; }
+        public MapGeneralPropertiesEditorVM GeneralProperties { get; }
+        public MapMissionPropertiesEditorVM MissionProperties { get; }
 
         internal List<PaletteModel> Palettes => Model.Palettes;
         internal MapLayoutModel Layout => Model.Layout;
@@ -225,7 +227,9 @@ namespace OpenBreed.Editor.VM.Maps
             ActionsTool.CurrentActionSetRef = entry.ActionSetRef;
 
             //LayoutVm.FromMap(Model);
-            Properties.Load(Model);
+            GeneralProperties.Load(Model);
+            MissionProperties.Load(Model);
+
 
             TilesTool.UpdateVM();
             ActionsTool.UpdateVM();

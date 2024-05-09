@@ -38,8 +38,10 @@ namespace OpenBreed.Editor.VM.Scripts
             this.dataProvider = dataProvider;
             PropertyChanged += This_PropertyChanged;
 
-            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbAsset));
-            ScriptAssetRefIdEditor.RefIdSelected = (newRefId) => { DataRef = newRefId; };
+            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(
+                workspaceMan,
+                typeof(IDbAsset),
+                (newRefId) => DataRef = newRefId);
         }
 
         #endregion Public Constructors
@@ -104,7 +106,7 @@ namespace OpenBreed.Editor.VM.Scripts
             {
                 case nameof(DataRef):
                     EditEnabled = ValidateSettings();
-                    ScriptAssetRefIdEditor.RefId = (DataRef == null) ? null : DataRef;
+                    ScriptAssetRefIdEditor.CurrentRefId = (DataRef == null) ? null : DataRef;
                     break;
 
                 default:

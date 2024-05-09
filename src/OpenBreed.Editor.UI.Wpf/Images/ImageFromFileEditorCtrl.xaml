@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="OpenBreed.Editor.UI.Wpf.Images.ImageFromFileEditorCtrl"
+﻿<UserControl xmlns:General="clr-namespace:OpenBreed.Editor.UI.Wpf.General"  x:Class="OpenBreed.Editor.UI.Wpf.Images.ImageFromFileEditorCtrl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,12 @@
     <UserControl.Resources>
         <converters:ImageToSourceConverter x:Key="imageToSourceConverter"/>
     </UserControl.Resources>
-    <GroupBox Header="Preview">
-        <Image Source="{Binding Image, Converter={StaticResource imageToSourceConverter}}" Width="{Binding Path=Image.Width}" Height="{Binding Path=Image.Height}" />
-    </GroupBox>
+    <StackPanel>
+        <GroupBox Header="Image asset reference">
+            <General:EntryRefIdEditorCtrl DataContext="{Binding ImageAssetRefIdEditor}" />
+        </GroupBox>
+        <GroupBox Header="Preview">
+            <Image Source="{Binding Image, Converter={StaticResource imageToSourceConverter}}" Width="{Binding Path=Image.Width}" Height="{Binding Path=Image.Height}" />
+        </GroupBox>
+    </StackPanel>
 </UserControl>

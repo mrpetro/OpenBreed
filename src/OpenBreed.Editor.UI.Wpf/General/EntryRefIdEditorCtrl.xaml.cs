@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OpenBreed.Editor.UI.Wpf.Maps
+namespace OpenBreed.Editor.UI.Wpf.General
 {
     /// <summary>
-    /// Interaction logic for MapPropertiesEditorCtrl.xaml
+    /// Interaction logic for EntryRefIdEditorCtrl.xaml
     /// </summary>
-    public partial class MapPropertiesEditorCtrl : UserControl
+    public partial class EntryRefIdEditorCtrl : UserControl
     {
-        public MapPropertiesEditorCtrl()
+        public EntryRefIdEditorCtrl()
         {
             InitializeComponent();
         }

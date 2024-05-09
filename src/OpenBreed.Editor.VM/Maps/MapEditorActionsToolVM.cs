@@ -28,10 +28,12 @@ namespace OpenBreed.Editor.VM.Maps
             IDrawingContextProvider drawingContextProvider)
         {
             Parent = parent;
-            RefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IDbActionSet));
-            ActionsSelector = new MapEditorActionsSelectorVM(this, drawingFactory, drawingContextProvider);
+            RefIdEditor = new EntryRefIdEditorVM(
+                workspaceMan,
+                typeof(IDbActionSet),
+                (newRefId) => CurrentActionSetRef = newRefId);
 
-            RefIdEditor.PropertyChanged += ActionEntryRef_PropertyChanged;
+            ActionsSelector = new MapEditorActionsSelectorVM(this, drawingFactory, drawingContextProvider);
         }
 
         #endregion Public Constructors
@@ -96,7 +98,7 @@ namespace OpenBreed.Editor.VM.Maps
             switch (name)
             {
                 case nameof(CurrentActionSetRef):
-                    RefIdEditor.RefId = CurrentActionSetRef;
+                    RefIdEditor.CurrentRefId = CurrentActionSetRef;
                     UpdateModel();
                     break;
 
@@ -110,19 +112,6 @@ namespace OpenBreed.Editor.VM.Maps
         #endregion Protected Methods
 
         #region Private Methods
-
-        private void ActionEntryRef_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(RefIdEditor.RefId):
-                    CurrentActionSetRef = RefIdEditor.RefId;
-                    break;
-
-                default:
-                    break;
-            }
-        }
 
         private void UpdateModel()
         {
