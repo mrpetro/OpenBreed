@@ -34,6 +34,11 @@
 
         void Error(int channel, string message);
 
+        void Critical(string message);
+
+        void Critical(int channel, string message);
+
+
         #endregion Public Methods
     }
 }
