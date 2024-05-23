@@ -1,4 +1,4 @@
-﻿<UserControl xmlns:General="clr-namespace:OpenBreed.Editor.UI.Wpf.General"
+﻿<UserControl xmlns:Logging="clr-namespace:OpenBreed.Editor.UI.Wpf.Logging"  xmlns:General="clr-namespace:OpenBreed.Editor.UI.Wpf.General"
              x:Class="OpenBreed.Editor.UI.Wpf.EditorApplicationCtrl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,7 +13,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" >
             <MenuItem Header="File">
@@ -27,10 +28,12 @@
 
             </MenuItem>
             <MenuItem Header="View">
-                <MenuItem Header="Database items" />
+                <MenuItem Header="Database items"
+                          IsCheckable="True"
+                          IsChecked="{Binding DbEditor.TablesEditor.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <MenuItem Header="Logs" />
             </MenuItem>
-            
+
             <MenuItem Header="Tools">
                 <MenuItem Header="EPF pack/unpack..." Command="{Binding RubEpfManagerCommand}" />
                 <MenuItem Header="Options..." Command="{Binding ShowOptionsCommand}" />
@@ -43,10 +46,13 @@
                 <MenuItem Header="ABTA Game passwords..." Command="{Binding ShowAbtaPasswordGeneratorCommand}" />
             </MenuItem>
         </Menu>
-        <General:DbEditorCtrl
-            Grid.Row="1" 
+        <General:DbEditorCtrl Grid.Row="1"
             Visibility="{Binding IsDbOpened, Converter={StaticResource VisibleIfTrueConverter}}"
-            DataContext="{Binding DbEditor}"
-            />
+            DataContext="{Binding DbEditor}" />
+        <Expander Grid.Row="3"
+                  ExpandDirection="Down"
+                  Header="Logs">
+            <Logging:LoggingCtrl DataContext="{Binding Logger}" MaxHeight="200" />
+        </Expander>
     </Grid>
 </UserControl>

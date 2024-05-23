@@ -36,7 +36,7 @@
                          ValidatesOnDataErrors="True"
                          NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <validationRules:ReferenceValidationRule ValidatesOnTargetUpdated="True" />
+                        <validationRules:ReferenceValidationRule ValidationStep="UpdatedValue" ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                  </Binding>
             </ComboBox.Text>

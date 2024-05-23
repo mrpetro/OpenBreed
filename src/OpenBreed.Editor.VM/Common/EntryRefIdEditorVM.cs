@@ -21,6 +21,7 @@ namespace OpenBreed.Editor.VM.Common
         private string _selectedRefId;
         private bool _isChanged;
         private bool _isValid;
+        private string _validationMessage;
         private bool _confirmEnabled;
         private bool _undoEnabled;
 
@@ -88,6 +89,12 @@ namespace OpenBreed.Editor.VM.Common
             set { base.SetProperty(ref _isValid, value); }
         }
 
+        public string ValidationMessage
+        {
+            get { return _validationMessage; }
+            set { base.SetProperty(ref _validationMessage, value); }
+        }
+
         public ICommand ConfirmCommand { get; }
 
         public ICommand UndoCommand { get; }
@@ -100,6 +107,7 @@ namespace OpenBreed.Editor.VM.Common
         {
             CurrentRefId = SelectedRefId;
             refIdSelectedAction?.Invoke(CurrentRefId);
+
             Refresh();
         }
 
@@ -108,32 +116,33 @@ namespace OpenBreed.Editor.VM.Common
             SelectedRefId = CurrentRefId;
         }
 
-        public bool ValidateRefId(string refId, out string message)
+        public bool ValidateRefId(string refId)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(refId))
-                {
-                    message = "Reference ID can't be empty.";
-                    IsValid = false;
-                    return false;
-                }
+            //if (refId is null)
+            //{
+            //    IsValid = true;
+            //    ValidationMessage = null;
+            //    return true;
+            //}
 
-                if (!ReferenceHints.Contains(refId))
-                {
-                    message = $"Asset '{refId}' doesn't exist.";
-                    IsValid = false;
-                    return false;
-                }
 
-                message = null;
-                IsValid = true;
-                return true;
-            }
-            finally
+            if (string.IsNullOrWhiteSpace(refId))
             {
-                SelectedRefId = refId;
+                ValidationMessage = "Reference ID can't be empty.";
+                IsValid = false;
+                return false;
             }
+
+            if (!ReferenceHints.Contains(refId))
+            {
+                ValidationMessage = $"Asset '{refId}' doesn't exist.";
+                IsValid = false;
+                return false;
+            }
+
+            ValidationMessage = null;
+            IsValid = true;
+            return true;
         }
 
         #endregion Public Methods
@@ -145,6 +154,7 @@ namespace OpenBreed.Editor.VM.Common
             switch (name)
             {
                 case nameof(SelectedRefId):
+                    ValidateRefId(SelectedRefId);
                     Refresh();
                     break;
 

@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="OpenBreed.Editor.UI.Wpf.Logging.LoggingCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.Logging"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="300"
+             MinHeight="200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../CommonResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Style="{StaticResource CommonButtonStyle}"
+                    Width="30" FontSize="8"
+                    Content="Clear"
+                    Command="{Binding ClearCommand}"/>
+            <CheckBox Style="{StaticResource CommonCheckboxStyle}"
+                      Content="Trace"
+                      IsChecked="{Binding TraceEnabled}" />
+            <CheckBox Style="{StaticResource CommonCheckboxStyle}"
+                      Content="Info"
+                      IsChecked="{Binding InfoEnabled}" />
+            <CheckBox Style="{StaticResource CommonCheckboxStyle}"
+                      Content="Warning"
+                      IsChecked="{Binding WarningEnabled}" />
+            <CheckBox Style="{StaticResource CommonCheckboxStyle}"
+                      Content="Error"
+                      IsChecked="{Binding ErrorEnabled}" />
+        </StackPanel>
+        <ListView Grid.Row="1"
+                  ItemsSource="{Binding Logs}" 
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel Width="560">
+                        <TextBlock Text="{Binding Message}"
+                             TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Level}" Value="Critical">
+                                            <Setter Property="Foreground" Value="White" />
+                                            <Setter Property="Background" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Level}" Value="Error">
+                                            <Setter Property="Foreground" Value="Red" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Level}" Value="Warning">
+                                            <Setter Property="Foreground" Value="DarkGoldenrod" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Level}" Value="Info">
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Level}" Value="Verbose">
+                                            <Setter Property="Foreground" Value="DarkGray" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>

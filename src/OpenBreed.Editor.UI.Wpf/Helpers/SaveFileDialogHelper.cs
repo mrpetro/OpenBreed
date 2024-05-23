@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
-namespace OpenBreed.Editor.UI.WinForms.Helpers
+namespace OpenBreed.Editor.UI.Wpf.Helpers
 {
     public class SaveFileDialogHelper
     {

@@ -31,8 +31,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Common.Interface"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Database.EFCore", "..\OpenBreed.Common\src\OpenBreed.Database.EFCore\OpenBreed.Database.EFCore.csproj", "{2FCC6485-0AF5-4C98-9116-5EB6AF19862E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.UI.WinForms", "OpenBreed.Editor.UI.WinForms\OpenBreed.Editor.UI.WinForms.csproj", "{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.VM", "OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj", "{97BE64B4-0DA4-4F14-A943-6C5F9C29E9A1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.Cfg", "OpenBreed.Editor.Cfg\OpenBreed.Editor.Cfg.csproj", "{0344A0C3-2279-46C9-92BA-1398F5445E8D}"
@@ -43,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.UI.Wpf", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Common.Windows", "OpenBreed.Common.Windows\OpenBreed.Common.Windows.csproj", "{990DCB05-FCB9-432E-866E-3E52F244C945}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Editor.App", "OpenBreed.Editor.App\OpenBreed.Editor.App.csproj", "{635245B8-55A1-4BF5-AFCD-BE80CD6A8704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.App", "OpenBreed.Editor.App\OpenBreed.Editor.App.csproj", "{635245B8-55A1-4BF5-AFCD-BE80CD6A8704}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -299,26 +297,6 @@ Global
 		{2FCC6485-0AF5-4C98-9116-5EB6AF19862E}.Release|x64.Build.0 = Release|Any CPU
 		{2FCC6485-0AF5-4C98-9116-5EB6AF19862E}.Release|x86.ActiveCfg = Release|Any CPU
 		{2FCC6485-0AF5-4C98-9116-5EB6AF19862E}.Release|x86.Build.0 = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|Win32.Build.0 = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|x64.Build.0 = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Debug|x86.Build.0 = Debug|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|Win32.ActiveCfg = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|Win32.Build.0 = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|x64.ActiveCfg = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|x64.Build.0 = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|x86.ActiveCfg = Release|Any CPU
-		{B1A4B649-1043-40B4-91EF-1BA2E6AECB10}.Release|x86.Build.0 = Release|Any CPU
 		{97BE64B4-0DA4-4F14-A943-6C5F9C29E9A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{97BE64B4-0DA4-4F14-A943-6C5F9C29E9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97BE64B4-0DA4-4F14-A943-6C5F9C29E9A1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

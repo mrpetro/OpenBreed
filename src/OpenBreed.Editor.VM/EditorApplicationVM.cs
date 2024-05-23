@@ -38,8 +38,6 @@ namespace OpenBreed.Editor.VM
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IDialogProvider dialogProvider;
         private EditorState _state;
-        private LoggerVM logger;
-
         private string title;
 
         #endregion Private Fields
@@ -66,6 +64,8 @@ namespace OpenBreed.Editor.VM
 
             DbEditor = dbEditor;
 
+            Logger = managerCollection.GetService<LoggerVM>();
+
             Title = Definitions.APP_NAME;
 
             ExitCommand = new Command(() => TryExit());
@@ -73,6 +73,7 @@ namespace OpenBreed.Editor.VM
             SaveDatabaseCommand = new Command(() => TrySaveDatabase());
             CloseDatabaseCommand = new Command(() => TryCloseDatabase());
             ShowOptionsCommand = new Command(() => ShowOptions());
+
             ShowAbtaPasswordGeneratorCommand = new Command(() => ShowAbtaPasswordGenerator());
             DbEditor.PropertyChanged += DbEditor_PropertyChanged;
         }
@@ -91,13 +92,15 @@ namespace OpenBreed.Editor.VM
 
         public ICommand ShowOptionsCommand { get; }
 
-        public ICommand ShowAbtaPasswordGeneratorCommand { get; }
+        public ICommand ToggleTablesEditorCommand { get; }
 
-        public Action<LoggerVM, bool> ToggleLoggerAction { get; set; }
+        public ICommand ShowAbtaPasswordGeneratorCommand { get; }
 
         public Action ShowOptionsAction { get; set; }
 
         public Action ShowAbtaPasswordGeneratorAction { get; set; }
+
+        public LoggerVM Logger { get; }
 
         public DbEditorVM DbEditor { get; }
 
@@ -175,14 +178,6 @@ namespace OpenBreed.Editor.VM
 
         public void Run()
         {
-        }
-
-        public void ToggleLogger(bool toggle)
-        {
-            if (logger == null)
-                logger = managerCollection.GetService<LoggerVM>();
-
-            ToggleLoggerAction?.Invoke(logger, toggle);
         }
 
         public void TrySaveDatabase()

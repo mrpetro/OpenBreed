@@ -43,8 +43,6 @@ namespace OpenBreed.Editor.VM.Images
                 workspaceMan,
                 typeof(IDbAsset),
                 (newRefId) => AssetRef = newRefId);
-
-            PropertyChanged += This_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -73,12 +71,14 @@ namespace OpenBreed.Editor.VM.Images
 
         #region Public Methods
 
-        public void Draw(IDrawingContext gfx)
+        public void Draw(IDrawingContext context)
         {
-            if (Image == null)
+            if (Image is null)
+            {
                 return;
+            }
 
-            gfx.DrawImage(Image, 0, 0, Image.Width, Image.Height);
+            context.DrawImage(Image, 0, 0, Image.Width, Image.Height);
         }
 
         #endregion Public Methods
@@ -125,9 +125,9 @@ namespace OpenBreed.Editor.VM.Images
             }
         }
 
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
                 case nameof(AssetRef):
                     ImageAssetRefIdEditor.CurrentRefId = (AssetRef == null) ? null : AssetRef;
@@ -138,6 +138,8 @@ namespace OpenBreed.Editor.VM.Images
                 default:
                     break;
             }
+
+            base.OnPropertyChanged(name);
         }
 
         #endregion Private Methods

@@ -36,12 +36,12 @@ namespace OpenBreed.Editor.UI.Wpf.ValidationRules
                 return new ValidationResult(false, "Reference ID can't be null.");
             }
 
-            if (vm.ValidateRefId(refId, out string message))
+            if (vm.IsValid)
             {
                 return ValidationResult.ValidResult;
             }
 
-            return new ValidationResult(false, message);
+            return new ValidationResult(false, vm.ValidationMessage);
         }
     }
 }

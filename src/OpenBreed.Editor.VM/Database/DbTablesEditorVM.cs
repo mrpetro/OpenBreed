@@ -4,6 +4,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Editor.VM.Base;
 using System;
 using System.ComponentModel;
+using System.Reflection.Metadata;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -11,9 +12,11 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
+        private bool _isVisible;
+
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public DbTablesEditorVM(IWorkspaceMan workspaceMan,
                                   DbEntryFactory dbEntryFactory)
@@ -23,9 +26,15 @@ namespace OpenBreed.Editor.VM.Database
             DbTableEditor = new DbTableEditorVM(workspaceMan, dbEntryFactory);
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Properties
+
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set { SetProperty(ref _isVisible, value); }
+        }
 
         public DbTableSelectorVM DbTableSelector { get; private set; }
 
@@ -55,13 +64,30 @@ namespace OpenBreed.Editor.VM.Database
             return true;
         }
 
+        #endregion Public Methods
+
+        #region Internal Methods
+
         internal void Refresh()
         {
             DbTableSelector.Refresh();
             DbTableEditor.Refresh();
         }
 
-        #endregion Public Methods
+        #endregion Internal Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                //case nameof(IsVisible):
+
+                //    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
 
         #region Private Methods
 

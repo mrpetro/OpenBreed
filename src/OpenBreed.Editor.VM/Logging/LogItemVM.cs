@@ -7,13 +7,23 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Logging
 {
-    public class LogItemVM 
+    public class LogItemVM
     {
+        #region Public Constructors
+
+        public LogItemVM(string message, string level)
+        {
+            Message = message;
+            Level = level;
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
 
-        public Color Color { get; set; }
-        public string MessageText { get; set; }
-        public string MessageType { get; set; }
+        public Color Color { get; }
+        public string Message { get; }
+        public string Level { get; }
 
         #endregion Public Properties
     }

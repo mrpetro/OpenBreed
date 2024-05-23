@@ -2,6 +2,7 @@
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Editor.VM.Base;
@@ -20,6 +21,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
         private string entityTemplate;
         private readonly EntityTemplatesDataProvider entityTemplatesDataProvider;
         private readonly IModelsProvider dataProvider;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
@@ -30,10 +32,12 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
+            ILogger logger,
             IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
         {
             this.entityTemplatesDataProvider = entityTemplatesDataProvider;
             this.dataProvider = dataProvider;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -73,12 +77,19 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         protected override void UpdateVM(IDbEntityTemplateFromFile entry)
         {
-            var model = entityTemplatesDataProvider.GetEntityTemplate(entry.Id);
+            try
+            {
+                var model = entityTemplatesDataProvider.GetEntityTemplate(entry.Id);
 
-            if (model != null)
-                EntityTemplate = model.EntityTemplate;
+                if (model != null)
+                    EntityTemplate = model.EntityTemplate;
 
-            DataRef = entry.DataRef;
+                DataRef = entry.DataRef;
+            }
+            catch (System.Exception ex)
+            {
+                logger.Critical(ex.ToString());
+            }
         }
 
         #endregion Public Methods
