@@ -9,7 +9,7 @@ using System;
 
 namespace OpenBreed.Editor.VM.Animations
 {
-    public abstract class AnimationEditorBaseVM<TDbAnimation> : EntryEditorBaseVM<IDbAnimation> where TDbAnimation : IDbAnimation
+    public abstract class AnimationEditorBaseVM<TDbAnimation> : EntrySpecificEditorVM<IDbAnimation> where TDbAnimation : IDbAnimation
     {
         #region Public Constructors
 

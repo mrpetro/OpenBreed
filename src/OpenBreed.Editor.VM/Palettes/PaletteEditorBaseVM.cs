@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public abstract class PaletteEditorBaseVM<TDbPalette> : EntryEditorBaseVM<IDbPalette> where TDbPalette : IDbPalette
+    public abstract class PaletteEditorBaseVM<TDbPalette> : EntrySpecificEditorVM<IDbPalette> where TDbPalette : IDbPalette
     {
         #region Protected Fields
 

@@ -12,7 +12,7 @@ using System.ComponentModel;
 
 namespace OpenBreed.Editor.VM.Images
 {
-    public class ImageFromFileEditorVM : EntryEditorBaseVM<IDbImage>
+    public class ImageFromFileEditorVM : EntrySpecificEditorVM<IDbImage>
     {
         #region Private Fields
 

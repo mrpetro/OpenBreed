@@ -8,7 +8,7 @@ using OpenBreed.Database.Interface.Items.EntityTemplates;
 
 namespace OpenBreed.Editor.VM.DataSources
 {
-    public abstract class DataSourceEditorBaseVM<TDbDataSource> : EntryEditorBaseVM<IDbDataSource> where TDbDataSource : IDbDataSource
+    public abstract class DataSourceEditorBaseVM<TDbDataSource> : EntrySpecificEditorVM<IDbDataSource> where TDbDataSource : IDbDataSource
     {
         #region Public Constructors
 

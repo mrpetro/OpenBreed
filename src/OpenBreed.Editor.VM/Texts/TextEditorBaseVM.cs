@@ -9,7 +9,7 @@ using System;
 
 namespace OpenBreed.Editor.VM.Texts
 {
-    public abstract class TextEditorBaseVM<TDbText> : EntryEditorBaseVM<IDbText>
+    public abstract class TextEditorBaseVM<TDbText> : EntrySpecificEditorVM<IDbText>
     {
         #region Public Constructors
 

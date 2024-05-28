@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetFromBlkEditorVM : EntryEditorBaseVM<IDbTileAtlas>
+    public class TileSetFromBlkEditorVM : EntrySpecificEditorVM<IDbTileAtlas>
     {
         #region Private Fields
 

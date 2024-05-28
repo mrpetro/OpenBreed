@@ -9,6 +9,7 @@ using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Interface.Items.Images;
@@ -58,6 +59,19 @@ namespace OpenBreed.Editor.VM.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
+                services.AddTransient<EntryEditorVM<IDbImage>>();
+                services.AddTransient<EntryEditorVM<IDbPalette>>();
+                services.AddTransient<EntryEditorVM<IDbEntityTemplate>>();
+                services.AddTransient<EntryEditorVM<IDbSound>>();
+                services.AddTransient<EntryEditorVM<IDbMap>>();
+                services.AddTransient<EntryEditorVM<IDbDataSource>>();
+                services.AddTransient<EntryEditorVM<IDbAsset>>();
+                services.AddTransient<EntryEditorVM<IDbText>>();
+                services.AddTransient<EntryEditorVM<IDbScript>>();
+                services.AddTransient<EntryEditorVM<IDbActionSet>>();
+                services.AddTransient<EntryEditorVM<IDbSpriteAtlas>>();
+                services.AddTransient<EntryEditorVM<IDbTileAtlas>>();
+
                 services.AddTransient<DbEditorVM>();
                 services.AddTransient<DbTablesEditorVM>();
                 services.AddTransient<DbEntriesEditorVM>();
@@ -90,6 +104,19 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddSingleton<DbEntryEditorFactory>((sp) =>
                 {
                     var entryEditorFactory = new DbEntryEditorFactory(sp);
+
+                    entryEditorFactory.RegisterEditor<IDbMap>();
+                    entryEditorFactory.RegisterEditor<IDbSound>();
+                    entryEditorFactory.RegisterEditor<IDbPalette>();
+                    entryEditorFactory.RegisterEditor<IDbTileAtlas>();
+                    entryEditorFactory.RegisterEditor<IDbImage>();
+                    entryEditorFactory.RegisterEditor<IDbActionSet>();
+                    entryEditorFactory.RegisterEditor<IDbSpriteAtlas>();
+                    entryEditorFactory.RegisterEditor<IDbScript>();
+                    entryEditorFactory.RegisterEditor<IDbText>();
+                    entryEditorFactory.RegisterEditor<IDbEntityTemplate>();
+                    entryEditorFactory.RegisterEditor<IDbDataSource>();
+
 
                     entryEditorFactory.Register<IDbMap, MapEditorVM>();
                     entryEditorFactory.Register<IDbSound, PcmSoundEditorVM>();

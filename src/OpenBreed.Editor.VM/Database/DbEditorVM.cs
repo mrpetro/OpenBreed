@@ -147,7 +147,7 @@ namespace OpenBreed.Editor.VM.Database
 
                 var entry = repository.Find(entryId);
 
-                entryEditor = dbEntryEditorFactory.Create(repository, entry);
+                entryEditor = dbEntryEditorFactory.Create(entry);
 
                 AddEntryEditor(entryEditorKey, entryEditor);
 

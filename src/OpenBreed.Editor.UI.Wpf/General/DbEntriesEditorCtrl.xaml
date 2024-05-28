@@ -6,11 +6,22 @@
              xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.General"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../CommonResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <TabControl ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
         <TabControl.ItemTemplate>
             <DataTemplate>
-                <TextBlock Text="{Binding Title}" Height="22" Width="Auto"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="4" Text="{Binding Title}" Height="16" Width="Auto"/>
+                    <Button Style="{StaticResource TabItemCloseButtonStyle}" Command="{Binding CloseCommand}">
+                        <Image/>
+                    </Button>
+                </StackPanel>
             </DataTemplate>
         </TabControl.ItemTemplate>
         <TabControl.ContentTemplate>

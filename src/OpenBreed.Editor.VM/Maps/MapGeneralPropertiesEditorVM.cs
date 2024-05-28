@@ -8,7 +8,6 @@ namespace OpenBreed.Editor.VM.Maps
 {
     public class MapGeneralPropertiesEditorVM : BaseViewModel
     {
-
         #region Private Fields
 
         private string _altm;
@@ -37,8 +36,6 @@ namespace OpenBreed.Editor.VM.Maps
                 throw new ArgumentNullException(nameof(parent));
 
             Parent = parent;
-
-            Parent.PropertyChanged += Map_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -155,22 +152,5 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         #endregion Internal Methods
-
-        #region Private Methods
-
-        private void Map_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Parent.Title):
-                    Title = "Map properties - " + Parent.Title;
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        #endregion Private Methods
     }
 }

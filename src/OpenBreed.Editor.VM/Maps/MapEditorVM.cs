@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorVM : EntryEditorBaseVM<IDbMap>
+    public class MapEditorVM : EntrySpecificEditorVM<IDbMap>
     {
         #region Private Fields
 

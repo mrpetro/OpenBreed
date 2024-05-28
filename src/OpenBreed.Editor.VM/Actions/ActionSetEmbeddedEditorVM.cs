@@ -11,7 +11,7 @@ using System.ComponentModel;
 
 namespace OpenBreed.Editor.VM.Actions
 {
-    public class ActionSetEmbeddedEditorVM : EntryEditorBaseVM<IDbActionSet>
+    public class ActionSetEmbeddedEditorVM : EntrySpecificEditorVM<IDbActionSet>
     {
         #region Private Fields
 

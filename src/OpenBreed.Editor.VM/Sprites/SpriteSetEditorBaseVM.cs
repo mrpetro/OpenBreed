@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public abstract class SpriteSetEditorBaseVM<TSpriteAtlas> : EntryEditorBaseVM<IDbSpriteAtlas>
+    public abstract class SpriteSetEditorBaseVM<TSpriteAtlas> : EntrySpecificEditorVM<IDbSpriteAtlas>
     {
         #region Protected Fields
 

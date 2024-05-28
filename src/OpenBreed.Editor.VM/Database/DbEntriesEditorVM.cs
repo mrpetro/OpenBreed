@@ -42,16 +42,12 @@ namespace OpenBreed.Editor.VM.Database
 
         public void AddEditor(string editorKey, EntryEditorVM entryEditor)
         {
-            var itemVm = new EntryEditorsViewItemVM(entryEditor);
+            var itemVM = new EntryEditorsViewItemVM(entryEditor, OnCloseEditor);
 
-            Items.Add(itemVm);
+            Items.Add(itemVM);
 
-            CurrentItem = itemVm;
+            CurrentItem = itemVM;
         }
-
-        #endregion Public Methods
-
-        #region Internal Methods
 
         public void ActivateEditor(EntryEditorVM entryEditor)
         {
@@ -66,6 +62,31 @@ namespace OpenBreed.Editor.VM.Database
             CurrentItem = editorItem;
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void OnCloseEditor(EntryEditorsViewItemVM itemVM)
+        {
+            var index = Items.IndexOf(itemVM);
+
+            Items.Remove(itemVM);
+
+            if (Items.Any())
+            {
+                if (index >= Items.Count)
+                {
+                    index--;
+                }
+
+                CurrentItem = Items[index];
+            }
+            else
+            {
+                CurrentItem = null;
+            }
+        }
+
+        #endregion Private Methods
     }
 }

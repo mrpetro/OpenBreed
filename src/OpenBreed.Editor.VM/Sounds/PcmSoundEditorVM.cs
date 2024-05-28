@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
-    public class PcmSoundEditorVM : EntryEditorBaseVM<IDbSound>
+    public class PcmSoundEditorVM : EntrySpecificEditorVM<IDbSound>
     {
         #region Private Fields
 

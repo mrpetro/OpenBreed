@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
-    public abstract class ScriptEditorBaseVM<TDbScript> : EntryEditorBaseVM<IDbScript>
+    public abstract class ScriptEditorBaseVM<TDbScript> : EntrySpecificEditorVM<IDbScript>
     {
         #region Public Constructors
 

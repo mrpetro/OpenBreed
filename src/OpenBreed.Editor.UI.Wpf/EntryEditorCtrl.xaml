@@ -4,11 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf"
-             xmlns:localTemplateSelectors="clr-namespace:OpenBreed.Editor.UI.Wpf.TemplateSelectors"
              mc:Ignorable="d" 
              d:DesignHeight="277" d:DesignWidth="562">
     <UserControl.Resources>
-        <localTemplateSelectors:Selector x:Key="EntryEditorTemplateSelector"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DataTemplateResources.xaml"/>
+                <ResourceDictionary>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -40,6 +45,7 @@
                 <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6" Margin="4,4,4,4" Text="{Binding Description}"/>
             </Grid>
         </GroupBox>
-        <ContentControl Grid.Row="1" Content="{Binding Path=DataContext, RelativeSource={RelativeSource Self}}"   ContentTemplateSelector="{StaticResource EntryEditorTemplateSelector}" />
+        <ContentControl Grid.Row="1" Content="{Binding SpecificsEditor}">
+        </ContentControl>
     </Grid>
 </UserControl>

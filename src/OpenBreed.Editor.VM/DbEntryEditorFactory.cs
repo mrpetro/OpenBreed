@@ -12,6 +12,7 @@ namespace OpenBreed.Editor.VM
         #region Private Fields
 
         private readonly Dictionary<Type, Type> creators = new Dictionary<Type, Type>();
+        private readonly Dictionary<Type, Type> creatorsEx = new Dictionary<Type, Type>();
         private readonly IServiceProvider managerCollection;
 
         #endregion Private Fields
@@ -27,12 +28,26 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public void Register<E, C>() where C : EntryEditorVM
+        public void RegisterEditor<TDbEntry>() where TDbEntry : IDbEntry
+        {
+            var entryType = typeof(TDbEntry);
+
+            if (creatorsEx.ContainsKey(entryType))
+            {
+                throw new InvalidOperationException($"Factory already has type '{entryType}' registered.");
+            }
+
+            creatorsEx.Add(entryType, typeof(EntryEditorVM<TDbEntry>));
+        }
+
+        public void Register<E, C>() where C : EntrySpecificEditorVM where E : IDbEntry 
         {
             var entryType = typeof(E);
 
             if (creators.ContainsKey(entryType))
+            {
                 throw new InvalidOperationException($"Factory already has type '{entryType}' registered.");
+            }
 
             creators.Add(typeof(E), typeof(C));
         }
@@ -41,16 +56,18 @@ namespace OpenBreed.Editor.VM
 
         #region Internal Methods
 
-        internal EntryEditorVM Create(IRepository repository, IDbEntry dbEntry)
+        internal EntryEditorVM Create(IDbEntry dbEntry)
+        {
+            var type = GetEditorTypeEx(dbEntry);
+
+            return (EntryEditorVM)managerCollection.GetService(type);
+        }
+
+        internal EntrySpecificEditorVM CreateSpecific(IDbEntry dbEntry)
         {
             var type = GetEditorType(dbEntry);
 
-            if (type is null)
-            {
-                type = GetEditorType(repository);
-            }
-
-            return (EntryEditorVM)managerCollection.GetService(type);
+            return (EntrySpecificEditorVM)managerCollection.GetService(type);
         }
 
         #endregion Internal Methods
@@ -62,6 +79,21 @@ namespace OpenBreed.Editor.VM
             var entryType = dbEntry.GetType();
 
             foreach (var item in creators)
+            {
+                if (entryType.GetInterfaces().Contains(item.Key) || entryType.Equals(item.Key))
+                {
+                    return item.Value;
+                }
+            }
+
+            return null;
+        }
+
+        private Type GetEditorTypeEx(IDbEntry dbEntry)
+        {
+            var entryType = dbEntry.GetType();
+
+            foreach (var item in creatorsEx)
             {
                 if (entryType.GetInterfaces().Contains(item.Key) || entryType.Equals(item.Key))
                 {

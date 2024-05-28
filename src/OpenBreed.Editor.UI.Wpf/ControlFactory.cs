@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.UI.Wpf
 
         #region Public Methods
 
-        public void Register<TViewModel, TView>() where TViewModel : EntryEditorVM where TView : new()
+        public void Register<TViewModel, TView>() where TViewModel : EntrySpecificEditorVM where TView : new()
         {
             var entryType = typeof(TViewModel);
             var viewType = typeof(TView);

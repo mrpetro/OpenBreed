@@ -8,7 +8,7 @@ using OpenBreed.Database.Interface.Items.Scripts;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
 {
-    public abstract class EntityTemplateEditorBaseVM<TDbEnityTemplate> : EntryEditorBaseVM<IDbEntityTemplate>
+    public abstract class EntityTemplateEditorBaseVM<TDbEnityTemplate> : EntrySpecificEditorVM<IDbEntityTemplate>
     {
         #region Public Constructors
 

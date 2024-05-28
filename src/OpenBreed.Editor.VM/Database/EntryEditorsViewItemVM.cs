@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Editor.VM.Base;
+using System;
+using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -6,15 +8,20 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
+        private readonly Action<EntryEditorsViewItemVM> closeAction;
+
         private string content;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntryEditorsViewItemVM(EntryEditorVM entryEditor)
+        public EntryEditorsViewItemVM(EntryEditorVM entryEditor, Action<EntryEditorsViewItemVM> closeAction)
         {
-            Editor = entryEditor;
+            Editor = entryEditor ?? throw new ArgumentNullException(nameof(entryEditor));
+            this.closeAction = closeAction ?? throw new ArgumentNullException(nameof(closeAction));
+
+            CloseCommand = new Command(Close);
         }
 
         #endregion Public Constructors
@@ -31,6 +38,19 @@ namespace OpenBreed.Editor.VM.Database
 
         public EntryEditorVM Editor { get; }
 
+        public ICommand CloseCommand { get; }
+
         #endregion Public Properties
+
+        #region Private Methods
+
+        private void Close()
+        {
+            Editor.ClosingAction?.Invoke();
+            closeAction.Invoke(this);
+            Editor.ClosedAction?.Invoke();
+        }
+
+        #endregion Private Methods
     }
 }
