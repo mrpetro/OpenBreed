@@ -22,6 +22,42 @@
             </Style>
         </Style.Resources>
     </Style>
+    <Style x:Key="CancelButtonStyle" BasedOn="{StaticResource CommonButtonStyle}" TargetType="Button">
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/close_small_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="AddButtonStyle" BasedOn="{StaticResource CommonButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/add_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="RemoveButtonStyle" BasedOn="{StaticResource CommonButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/remove_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="CopyButtonStyle" BasedOn="{StaticResource CommonButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/content_copy_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
     <Style x:Key="UndoButtonStyle" BasedOn="{StaticResource CommonButtonStyle}" TargetType="Button">
         <Setter Property="Width" Value="22"/>
         <Setter Property="Height" Value="22"/>

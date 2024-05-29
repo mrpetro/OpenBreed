@@ -17,13 +17,12 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
-        private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
         private readonly DataSourceProvider dataSourceProvider;
         private readonly IWorkspaceMan workspaceMan;
         private readonly IModelsProvider modelsProvider;
         private readonly IServiceProvider managerCollection;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
-        private readonly IRepositoryProvider repositoryProvider;
+
         private bool _isDbOpened;
         private string _dbName;
 
@@ -37,7 +36,6 @@ namespace OpenBreed.Editor.VM.Database
             IModelsProvider modelsProvider,
             IServiceProvider managerCollection,
             DbEntryEditorFactory dbEntryEditorFactory,
-            IRepositoryProvider repositoryProvider,
             DbTablesEditorVM tablesEditor,
             DbEntriesEditorVM entriesEditor)
         {
@@ -46,7 +44,6 @@ namespace OpenBreed.Editor.VM.Database
             this.modelsProvider = modelsProvider;
             this.managerCollection = managerCollection;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
-            this.repositoryProvider = repositoryProvider;
 
             EntriesEditor = entriesEditor;
             TablesEditor = tablesEditor;
@@ -69,8 +66,6 @@ namespace OpenBreed.Editor.VM.Database
             get { return _dbName; }
             set { SetProperty(ref _dbName, value); }
         }
-
-        public Action<EntryEditorVM> EntryEditorOpeningAction { get; set; }
 
         public bool IsModified { get; internal set; }
 
@@ -114,10 +109,7 @@ namespace OpenBreed.Editor.VM.Database
 
         public void CloseAllEditors()
         {
-            var toClose = _openedEntryEditors.Values.ToArray();
-
-            foreach (var entryEditor in toClose)
-                entryEditor.Close();
+            EntriesEditor.CloseAll();
 
             CloseDbTablesEditor();
         }
@@ -138,27 +130,7 @@ namespace OpenBreed.Editor.VM.Database
 
         internal EntryEditorVM OpenEntryEditor(string tableName, string entryId)
         {
-            string entryEditorKey = $"{tableName}#{entryId}";
-
-            EntryEditorVM entryEditor = null;
-            if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
-            {
-                var repository = repositoryProvider.GetRepository(tableName);
-
-                var entry = repository.Find(entryId);
-
-                entryEditor = dbEntryEditorFactory.Create(entry);
-
-                AddEntryEditor(entryEditorKey, entryEditor);
-
-                entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);
-                entryEditor.EditEntry(entryId);
-                EntryEditorOpeningAction?.Invoke(entryEditor);
-            }
-            else
-            {
-                EntriesEditor.ActivateEditor(entryEditor);
-            }
+            var entryEditor = EntriesEditor.OpenOrActivateEditor(tableName, entryId);
 
             return entryEditor;
         }
@@ -166,20 +138,6 @@ namespace OpenBreed.Editor.VM.Database
         #endregion Internal Methods
 
         #region Private Methods
-
-        private void AddEntryEditor(string editorKey, EntryEditorVM entryEditor)
-        {
-            _openedEntryEditors.Add(editorKey, entryEditor);
-
-            EntriesEditor.AddEditor(editorKey, entryEditor);
-        }
-
-        private void OnEntryEditorClosed(EntryEditorVM editor)
-        {
-            //TODO: This can be done better
-            var foundItem = _openedEntryEditors.FirstOrDefault(item => item.Value == editor);
-            _openedEntryEditors.Remove(foundItem.Key);
-        }
 
         #endregion Private Methods
     }

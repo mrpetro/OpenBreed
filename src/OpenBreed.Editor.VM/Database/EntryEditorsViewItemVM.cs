@@ -10,8 +10,6 @@ namespace OpenBreed.Editor.VM.Database
 
         private readonly Action<EntryEditorsViewItemVM> closeAction;
 
-        private string content;
-
         #endregion Private Fields
 
         #region Public Constructors
@@ -30,12 +28,6 @@ namespace OpenBreed.Editor.VM.Database
 
         public string Title => Editor.Title;
 
-        public string Content
-        {
-            get { return content; }
-            set { SetProperty(ref content, value); }
-        }
-
         public EntryEditorVM Editor { get; }
 
         public ICommand CloseCommand { get; }
@@ -48,7 +40,6 @@ namespace OpenBreed.Editor.VM.Database
         {
             Editor.ClosingAction?.Invoke();
             closeAction.Invoke(this);
-            Editor.ClosedAction?.Invoke();
         }
 
         #endregion Private Methods

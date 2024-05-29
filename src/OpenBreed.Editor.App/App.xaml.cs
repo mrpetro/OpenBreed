@@ -129,7 +129,6 @@ namespace OpenBreed.Editor.App
             builder.SetupCommonViewModels();
             builder.SetupEditorViewModels();
             builder.SetupDbEntryEditorFactory();
-            builder.SetupDbEntrySubEditorFactory();
             builder.ConfigureControlFactory();
 
             builder.SetupWindowsDrawingContext();

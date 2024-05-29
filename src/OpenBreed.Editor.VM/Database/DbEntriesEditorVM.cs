@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Database.Interface;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,20 +14,27 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
+        private readonly IRepositoryProvider repositoryProvider;
+        private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private EntryEditorsViewItemVM _currentItem;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbEntriesEditorVM()
+        public DbEntriesEditorVM(
+            IRepositoryProvider repositoryProvider,
+            DbEntryEditorFactory dbEntryEditorFactory)
         {
-            Items = new ObservableCollection<EntryEditorsViewItemVM>();
+            this.repositoryProvider = repositoryProvider;
+            this.dbEntryEditorFactory = dbEntryEditorFactory;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public Action<EntryEditorVM> EntryEditorOpeningAction { get; set; }
 
         public EntryEditorsViewItemVM CurrentItem
         {
@@ -34,11 +42,15 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public ObservableCollection<EntryEditorsViewItemVM> Items { get; }
+        public ObservableCollection<EntryEditorsViewItemVM> Items { get; } = new ObservableCollection<EntryEditorsViewItemVM>();
 
         #endregion Public Properties
 
         #region Public Methods
+
+        public void OpenOrActivateEditor()
+        {
+        }
 
         public void AddEditor(string editorKey, EntryEditorVM entryEditor)
         {
@@ -63,6 +75,45 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal EntryEditorVM OpenOrActivateEditor(string tableName, string entryId)
+        {
+            string entryEditorKey = $"{tableName}#{entryId}";
+
+            var entryEditor = Items.Select(item => item.Editor).FirstOrDefault(item => item.IsEdited(tableName, entryId));
+
+            if (entryEditor is null)
+            {
+                var repository = repositoryProvider.GetRepository(tableName);
+
+                var entry = repository.Find(entryId);
+
+                entryEditor = dbEntryEditorFactory.Create(entry);
+
+                AddEditor(entryEditorKey, entryEditor);
+
+                entryEditor.EditEntry(entryId);
+                EntryEditorOpeningAction?.Invoke(entryEditor);
+            }
+            else
+            {
+                ActivateEditor(entryEditor);
+            }
+
+            return entryEditor;
+        }
+
+        public void CloseAll()
+        {
+            var toClose = Items.Select(item => item.Editor).ToArray();
+
+            foreach (var entryEditor in toClose)
+                entryEditor.Close();
+        }
+
+        #endregion Internal Methods
 
         #region Private Methods
 

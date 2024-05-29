@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Entries;
@@ -9,6 +10,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Windows.Input;
+using OpenBreed.Common.Interface.Extensions;
+using OpenBreed.Database.EFCore.DbEntries;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -20,8 +23,9 @@ namespace OpenBreed.Editor.VM.Database
 
         private readonly IWorkspaceMan workspaceMan;
         private readonly DbEntryFactory dbEntryFactory;
-
+        private readonly IDialogProvider dialogProvider;
         private DbEntryVM _currentItem;
+        private DbEntryVM _selectedItem;
         private IRepository _edited;
         private string _title;
         private string tableName;
@@ -29,24 +33,31 @@ namespace OpenBreed.Editor.VM.Database
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal DbTableEditorVM(IWorkspaceMan workspaceMan, DbEntryFactory dbEntryFactory)
+        public DbTableEditorVM(
+            IWorkspaceMan workspaceMan,
+            DbEntryFactory dbEntryFactory,
+            IDialogProvider dialogProvider)
         {
             this.workspaceMan = workspaceMan;
             this.dbEntryFactory = dbEntryFactory;
+            this.dialogProvider = dialogProvider;
+
             Entries = new BindingList<Entries.DbEntryVM>();
             Entries.ListChanged += (s, a) => OnPropertyChanged(nameof(Entries));
 
             OpenEntryCommand = new Command(() => EditEntry(CurrentItem.Id));
             StartNewEntryCommand = new Command(() => StartNewEntry());
+            RemoveEntriesCommand = new Command(() => RemoveSelectedEntries());
+            CopyEntryCommand = new Command(() => CopySelectedEntry());
 
             NewEntryCreator = new DbTableNewEntryCreatorVM();
             NewEntryCreator.CreateAction = OnNewEntryCreate;
             NewEntryCreator.ValidateNewIdFunc = OnValidateNewId;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 
@@ -58,6 +69,12 @@ namespace OpenBreed.Editor.VM.Database
         {
             get { return _currentItem; }
             set { SetProperty(ref _currentItem, value); }
+        }
+
+        public DbEntryVM SelectedItem
+        {
+            get { return _selectedItem; }
+            set { SetProperty(ref _selectedItem, value); }
         }
 
         public string EditorName
@@ -78,7 +95,12 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         public ICommand OpenEntryCommand { get; }
+
         public ICommand StartNewEntryCommand { get; }
+
+        public ICommand RemoveEntriesCommand { get; }
+
+        public ICommand CopyEntryCommand { get; }
 
         #endregion Public Properties
 
@@ -94,7 +116,6 @@ namespace OpenBreed.Editor.VM.Database
         {
             NewEntryCreator.IsVisible = true;
             NewEntryCreator.NewId = GetUniqueId();
-
 
             NewEntryCreator.EntryTypes.Clear();
             _edited.EntryTypes.ForEach(item => NewEntryCreator.EntryTypes.Add(new EntryTypeVM(item)));
@@ -113,12 +134,13 @@ namespace OpenBreed.Editor.VM.Database
         {
             var repository = workspaceMan.GetRepository(modelName);
 
-            if (repository == null)
+            if (repository is null)
+            {
                 throw new InvalidOperationException($"Repository with name '{modelName}' not found.");
+            }
 
             _edited = repository;
 
-            //var vm = application.GetInterface<DbTableFactory>().CreateTable(_edited);
             UpdateVM(_edited);
 
             tableName = modelName;
@@ -137,6 +159,14 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void Refresh()
+        {
+        }
+
+        #endregion Internal Methods
 
         #region Protected Methods
 
@@ -162,6 +192,29 @@ namespace OpenBreed.Editor.VM.Database
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void CopySelectedEntry()
+        {
+            dialogProvider.ShowNotImplementedMessage(nameof(CopySelectedEntry));
+        }
+
+        private void RemoveSelectedEntries()
+        {
+            if (SelectedItem is null)
+            {
+                return;
+            }
+
+            _edited.Remove(SelectedItem.Entry);
+
+            if (!Entries.Remove(SelectedItem))
+            {
+                throw new InvalidOperationException("You should not be here.");
+            }
+
+
+            //dialogProvider.ShowNotImplementedMessage(nameof(RemoveSelectedEntries));
+        }
 
         private string GetUniqueId()
         {
@@ -208,10 +261,6 @@ namespace OpenBreed.Editor.VM.Database
         private void UpdateTitle()
         {
             Title = $"{EditorName} - {TablePresentationName}";
-        }
-
-        internal void Refresh()
-        {
         }
 
         #endregion Private Methods

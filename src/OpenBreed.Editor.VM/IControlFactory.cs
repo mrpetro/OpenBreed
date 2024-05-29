@@ -8,8 +8,6 @@ namespace OpenBreed.Editor.VM
 
         public object Create(Type entryType);
 
-        bool SupportsWpf(Type entryType);
-
         #endregion Public Methods
     }
 }

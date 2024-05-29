@@ -7,7 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../CommonResources.xaml"/>
+                <ResourceDictionary>
+                    <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -18,53 +25,55 @@
         <Grid Grid.Row="0"
               Margin="4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="58"/>
-                <ColumnDefinition Width="58"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="58"/>
+                <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0"
-                        Width="50"
-                        Height="22"
-                        Margin="4"
-                        Content="New"
-                        Command="{Binding StartNewEntryCommand}"/>
+                    Style="{StaticResource AddButtonStyle}"
+                    ToolTip="Starts creation of new entry in current table."
+                    Command="{Binding StartNewEntryCommand}">
+                <Image/>
+            </Button>
             <Button Grid.Column="1"
-                        Width="50"
-                        Height="22"
-                        Margin="4"
-                        Content="Copy" 
-                        Command="{Binding CopyEntryCommand}"/>
+                    Style="{StaticResource CopyButtonStyle}"
+                    ToolTip="Copies current entry data into new one with new ID."
+                    Command="{Binding CopyEntryCommand}">
+                <Image/>
+            </Button>
             <Button Grid.Column="3"
-                        Width="50"
-                        Height="22"
-                        Margin="4"
-                        Content="Remove"
-                        Command="{Binding RemoveEntriesCommand}"/>
+                    Style="{StaticResource RemoveButtonStyle}"
+                    ToolTip="Removes selected entries."
+                    Command="{Binding RemoveEntriesCommand}">
+                <Image/>
+            </Button>
         </Grid>
         <local:DbTableNewEntryCreatorCtrl Grid.Row="1"
                                           Margin="4"
                                               DataContext="{Binding NewEntryCreator}"
                                               Visibility="{Binding IsVisible, Converter={StaticResource VisibleIfTrueConverter}}"/>
         <DataGrid Grid.Row="2"
-            Margin="4" 
-                      ItemsSource="{Binding Entries}"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserResizeColumns="True"
-                      VerticalContentAlignment="Center"
-                      IsSynchronizedWithCurrentItem="True" CurrentItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                  Margin="4" 
+                  ItemsSource="{Binding Entries}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserResizeColumns="True"
+                  VerticalContentAlignment="Center"
+                  IsSynchronizedWithCurrentItem="True"
+                  CurrentItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick"
                               Command="{Binding OpenEntryCommand}"/>
             </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" 
-                                        IsReadOnly="True" 
-                                        Binding="{Binding Path=Id}"/>
+                                    IsReadOnly="True" 
+                                    Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="Description" 
-                                        IsReadOnly="True" 
-                                        Binding="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                                    IsReadOnly="True" 
+                                    Binding="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

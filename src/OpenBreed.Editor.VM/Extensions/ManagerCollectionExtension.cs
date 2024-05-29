@@ -74,6 +74,8 @@ namespace OpenBreed.Editor.VM.Extensions
 
                 services.AddTransient<DbEditorVM>();
                 services.AddTransient<DbTablesEditorVM>();
+                services.AddTransient<DbTableSelectorVM>();
+                services.AddTransient<DbTableEditorVM>();
                 services.AddTransient<DbEntriesEditorVM>();
                 services.AddTransient<TileSetFromBlkEditorVM>();
                 services.AddTransient<ActionSetEmbeddedEditorVM>();
@@ -138,33 +140,6 @@ namespace OpenBreed.Editor.VM.Extensions
                     return entryEditorFactory;
                 });
             });
-        }
-
-        public static void SetupDbEntrySubEditorFactory(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<DbEntrySubEditorFactory>((sp) =>
-                {
-                    var subEditorFactory = new DbEntrySubEditorFactory(sp);
-                    subEditorFactory.Register<IDbActionSet, IDbActionSet>();
-                    subEditorFactory.Register<IDbFileDataSource, IDbDataSource>();
-                    subEditorFactory.Register<IDbEpfArchiveDataSource, IDbDataSource>();
-                    subEditorFactory.Register<IDbEntityTemplateFromFile, IDbEntityTemplate>();
-                    subEditorFactory.Register<IDbImage, IDbImage>();
-                    subEditorFactory.Register<IDbScriptEmbedded, IDbScript>();
-                    subEditorFactory.Register<IDbScriptFromFile, IDbScript>();
-                    subEditorFactory.Register<IDbSpriteAtlasFromSpr, IDbSpriteAtlas>();
-                    subEditorFactory.Register<IDbSpriteAtlasFromImage, IDbSpriteAtlas>();
-                    subEditorFactory.Register<IDbTextEmbedded, IDbText>();
-                    subEditorFactory.Register<IDbTextFromMap, IDbText>();
-                    subEditorFactory.Register<IDbTileAtlasFromBlk, IDbTileAtlas>();
-
-                    return subEditorFactory;
-                });
-            });
-
-
         }
 
         #endregion Public Methods

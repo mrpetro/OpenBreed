@@ -314,38 +314,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Private Methods
 
-        //    base.UpdateVM(source, target);
-        //}
-        //    TileSelector.CurrentItem = CurrentLevel.TileSets.FirstOrDefault();
-        //    PropSelector.CurrentItem = CurrentLevel.PropSet;
-        //    SpriteSetViewer.CurrentItem = CurrentLevel.SpriteSets.FirstOrDefault();
-        //    PaletteSelector.CurrentItem = CurrentLevel.Palettes.FirstOrDefault();
-        //}
-        //protected override void UpdateVM(IDbMap source, MapVM target)
-        //{
-        //    target.FromEntry(source);
-        //public LevelTileSelectorVM TileSelector { get; }
-        //public void Load(string name)
-        //{
-        //    CurrentLevel = Root.CreateLevel();
-        //    //CurrentLevel.Load(name);
-        //private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    var paletteSelector = sender as LevelPaletteSelectorVM;
 
-        //    switch (e.PropertyName)
-        //    {
-        //        case nameof(paletteSelector.CurrentItem):
-        //            Root.PaletteEditor.Editable = paletteSelector.CurrentItem;
-        //            Root.PaletteEditor.CurrentColorIndex = 0;
-
-        //            foreach (var tileSet in TileSets)
-        //                tileSet.Palette = paletteSelector.CurrentItem;
-
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
     }
 }

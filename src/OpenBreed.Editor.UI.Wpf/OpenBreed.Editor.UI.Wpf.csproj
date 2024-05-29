@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\add_24dp.png" />
     <None Remove="Icons\close_small_24dp.png" />
+    <None Remove="Icons\content_copy_24dp.png" />
     <None Remove="Icons\done_24dp.png" />
+    <None Remove="Icons\remove_24dp.png" />
     <None Remove="Icons\undo_24dp.png" />
   </ItemGroup>
 
@@ -38,8 +41,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Icons\add_24dp.png" />
     <Resource Include="Icons\close_small_24dp.png" />
+    <Resource Include="Icons\content_copy_24dp.png" />
     <Resource Include="Icons\done_24dp.png" />
+    <Resource Include="Icons\remove_24dp.png" />
     <Resource Include="Icons\undo_24dp.png" />
   </ItemGroup>
 

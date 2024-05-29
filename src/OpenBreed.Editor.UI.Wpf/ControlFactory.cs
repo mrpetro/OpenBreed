@@ -31,11 +31,6 @@ namespace OpenBreed.Editor.UI.Wpf
             _initializers.Add(typeof(TViewModel), () => new TView());
         }
 
-        public bool SupportsWpf(Type entryType)
-        {
-            return _initializers.ContainsKey(entryType);
-        }
-
         public object Create(Type entryType)
         {
             if (_initializers.TryGetValue(entryType, out Func<object> initializer))

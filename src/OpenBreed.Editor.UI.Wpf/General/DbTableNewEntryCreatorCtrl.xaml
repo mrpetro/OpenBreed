@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.General"
              mc:Ignorable="d" 
              d:DesignHeight="65" d:DesignWidth="309">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../CommonResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -13,8 +20,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <ComboBox Grid.Row="0"
                   Grid.Column="0"
@@ -24,15 +31,17 @@
                   SelectedItem="{Binding SelectedEntryType}"/>
         <Button Grid.Row="0"
                 Grid.Column="1"
-                Margin="4"
-                Content="Create"
+                Style="{StaticResource ConfirmButtonStyle}"
                 IsEnabled="{Binding CreateEnabled}"
-                Command="{Binding CreateCommand}"/>
+                Command="{Binding CreateCommand}">
+            <Image/>
+        </Button>
         <Button Grid.Row="0"
                 Grid.Column="2"
-                Margin="4"
-                Content="Cancel"
-                Command="{Binding CancelCommand}"/>
+                Style="{StaticResource CancelButtonStyle}"
+                Command="{Binding CancelCommand}">
+            <Image/>
+        </Button>
         <TextBox Grid.Row="1"
                  Grid.Column="0"
                  Grid.ColumnSpan="3"

@@ -50,11 +50,6 @@ namespace OpenBreed.Editor.VM
             this.controlFactory = controlFactory;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
             repository = WorkspaceMan.GetRepository<E>();
-
-            //if (controlFactory.SupportsWpf(GetType()))
-            //{
-            //    InnerCtrl = controlFactory.Create(GetType());
-            //}
         }
 
         #endregion Public Constructors
@@ -75,9 +70,9 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public override Type GetCtrlType(EntryEditorVM specificsEditor)
+        public override bool IsEdited(string repositoryName, string entryId)
         {
-            return controlFactory.Create(specificsEditor.GetType()).GetType();
+            return repository.Name == repositoryName && Id == entryId;
         }
 
         public override void Commit()
@@ -197,10 +192,7 @@ namespace OpenBreed.Editor.VM
         {
             var foundEntry = repository.Find(Id);
 
-            if (foundEntry == null)
-                return true;
-
-            return false;
+            return foundEntry is null;
         }
 
         private void EditEntry(E entry)
@@ -268,7 +260,6 @@ namespace OpenBreed.Editor.VM
         #region Public Properties
 
         public Action ActivatingAction { get; set; }
-        public Action ClosedAction { get; set; }
         public Action<string> CommitedAction { get; set; }
         public Action ClosingAction { get; set; }
 
@@ -353,13 +344,13 @@ namespace OpenBreed.Editor.VM
 
         public abstract void Revert();
 
-        public abstract void EditEntry(string name);
+        public abstract void EditEntry(string entryId);
 
         public abstract void EditNextEntry();
 
         public abstract void EditPreviousEntry();
 
-        public abstract Type GetCtrlType(EntryEditorVM specificsEditor);
+        public abstract bool IsEdited(string repositoryName, string entryId);
 
         #endregion Public Methods
     }

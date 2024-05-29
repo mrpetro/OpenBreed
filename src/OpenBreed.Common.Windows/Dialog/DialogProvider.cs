@@ -99,13 +99,7 @@ namespace OpenBreed.Common.Windows.Dialog
 
         public ISaveFileQuery SaveFileDialog()
         {
-
-
             return new SaveFileQuery();
-        }
-
-        public void ShowEditorView()
-        {
         }
     }
 }

@@ -58,14 +58,14 @@ namespace OpenBreed.Editor.VM
 
         internal EntryEditorVM Create(IDbEntry dbEntry)
         {
-            var type = GetEditorTypeEx(dbEntry);
+            var type = GetEditorType(dbEntry);
 
             return (EntryEditorVM)managerCollection.GetService(type);
         }
 
         internal EntrySpecificEditorVM CreateSpecific(IDbEntry dbEntry)
         {
-            var type = GetEditorType(dbEntry);
+            var type = GetSpecificEditorType(dbEntry);
 
             return (EntrySpecificEditorVM)managerCollection.GetService(type);
         }
@@ -74,7 +74,7 @@ namespace OpenBreed.Editor.VM
 
         #region Private Methods
 
-        private Type GetEditorType(IDbEntry dbEntry)
+        private Type GetSpecificEditorType(IDbEntry dbEntry)
         {
             var entryType = dbEntry.GetType();
 
@@ -89,7 +89,7 @@ namespace OpenBreed.Editor.VM
             return null;
         }
 
-        private Type GetEditorTypeEx(IDbEntry dbEntry)
+        private Type GetEditorType(IDbEntry dbEntry)
         {
             var entryType = dbEntry.GetType();
 
@@ -102,19 +102,6 @@ namespace OpenBreed.Editor.VM
             }
 
             return null;
-        }
-
-        private Type GetEditorType(IRepository repository)
-        {
-            var entryType = repository.GetType().GetInterfaces().FirstOrDefault(item => item.IsGenericType && item.GetInterfaces().Contains(typeof(IRepository)));
-
-            foreach (var item in creators)
-            {
-                if (entryType.IsSubclassOf(item.Key) || entryType.Equals(item.Key))
-                    return item.Value;
-            }
-
-            throw new InvalidOperationException($"{entryType}' type not registered.");
         }
 
         #endregion Private Methods

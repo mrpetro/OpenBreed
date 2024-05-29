@@ -17,9 +17,9 @@ namespace OpenBreed.Editor.VM.Database
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal DbTableSelectorVM(IWorkspaceMan workspaceMan)
+        public DbTableSelectorVM(IWorkspaceMan workspaceMan)
         {
             this.workspaceMan = workspaceMan;
             TableNames = new BindingList<string>();
@@ -28,7 +28,7 @@ namespace OpenBreed.Editor.VM.Database
             UpdateWithDbTables();
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 

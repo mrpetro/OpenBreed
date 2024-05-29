@@ -19,11 +19,13 @@ namespace OpenBreed.Editor.VM.Database
         #region Public Constructors
 
         public DbTablesEditorVM(IWorkspaceMan workspaceMan,
-                                  DbEntryFactory dbEntryFactory)
+                                DbEntryFactory dbEntryFactory,
+                                DbTableSelectorVM dbTableSelector,
+                                DbTableEditorVM dbTableEditor)
         {
-            DbTableSelector = new DbTableSelectorVM(workspaceMan);
+            DbTableSelector = dbTableSelector;
             DbTableSelector.PropertyChanged += DbTableSelector_PropertyChanged;
-            DbTableEditor = new DbTableEditorVM(workspaceMan, dbEntryFactory);
+            DbTableEditor = dbTableEditor;
         }
 
         #endregion Public Constructors
