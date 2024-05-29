@@ -62,6 +62,16 @@ namespace OpenBreed.Sandbox.Extensions
             entity.Set<ResurrectCommandComponent>(new ResurrectCommandComponent());
         }
 
+        public static int GetTrackedEntityId(this IEntity entity)
+        {
+            return entity.Get<TrackingComponent>().EntityId;
+        }
+
+        public static bool HasTrackedEntity(this IEntity entity)
+        {
+            return entity.Get<TrackingComponent>().EntityId != -1;
+        }
+
         public static void InflictDamage(this IEntity entity, int amount, int targetEntityId)
         {
             var damageComponent = entity.Get<DamagerComponent>();

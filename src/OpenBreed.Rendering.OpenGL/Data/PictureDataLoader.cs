@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Images;
@@ -48,9 +49,9 @@ namespace OpenBreed.Rendering.OpenGL.Data
             if (entry is null)
                 throw new Exception("Image error: " + entryId);
 
-            var bitmap = assetsDataProvider.LoadModel(entry.DataRef) as Bitmap;
+            var bitmap = assetsDataProvider.LoadModel(entry.DataRef) as IImage;
 
-            var bytes = BitmapHelper.ToBytes(bitmap);
+            var bytes = bitmap.GetBytes();
 
             var texture = textureMan.Create(entryId, bitmap.Width, bitmap.Height, bytes);
 

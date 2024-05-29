@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
@@ -139,7 +140,7 @@ namespace OpenBreed.Sandbox.Worlds
                 .SetName(paletteEntity.Tag)
                 .SetLength(256)
                 .SetColors(commonPaletteModel.Data.Select(color => PaletteHelper.ToColor4(color)).ToArray())
-                .SetColors(Enumerable.Range(0, 64).Select(idx => PaletteHelper.ToColor4(Color.FromArgb(255, 0, 168, 168))).ToArray(), 32);
+                .SetColors(Enumerable.Range(0, 64).Select(idx => PaletteHelper.ToColor4(MyColor.FromArgb(255, 0, 168, 168))).ToArray(), 32);
 
             var palette = builder.Build();
 

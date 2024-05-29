@@ -15,6 +15,7 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
+using OpenBreed.Common.Windows.Extensions;
 using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
@@ -141,6 +142,8 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupDataGridFactory();
 
             hostBuilder.SetupViewClient(640, 480, $"{appName} v{infoVersion}");
+
+            hostBuilder.SetupWindowsDrawingContext();
 
             hostBuilder.SetupBuilderFactory((builderFactory, sp) =>
             {
@@ -269,7 +272,7 @@ namespace OpenBreed.Sandbox
                 shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
                 shapeMan.Register("Shapes/Circle_0_0_240", new CircleShape(new Vector2(0, 0), 240));
                 shapeMan.Register("Shapes/Circle_0_0_120", new CircleShape(new Vector2(0, 0), 120));
-                shapeMan.Register("Shapes/Circle_0_0_480", new CircleShape(new Vector2(0,0), 480));
+                shapeMan.Register("Shapes/Circle_0_0_480", new CircleShape(new Vector2(0, 0), 480));
                 shapeMan.Register("Shapes/Circle_0_0_40", new CircleShape(new Vector2(0, 0), 40));
                 shapeMan.Register("Shapes/Circle_0_0_320", new CircleShape(new Vector2(0, 0), 320));
                 shapeMan.Register("Shapes/Circle_0_0_160", new CircleShape(new Vector2(0, 0), 160));

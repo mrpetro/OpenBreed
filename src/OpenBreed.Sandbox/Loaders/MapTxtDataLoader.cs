@@ -2,6 +2,7 @@
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
@@ -67,9 +68,9 @@ namespace OpenBreed.Sandbox.Loaders
             gfxLayout[x + y * Width] = value;
         }
 
-        internal MapModel GetModel()
+        internal MapModel GetModel(IDrawingFactory drawingFactory)
         {
-            var mapBuilder = MapBuilder.NewMapModel();
+            var mapBuilder = MapBuilder.NewMapModel(drawingFactory);
             var layoutBuilder = mapBuilder.CreateLayout();
             layoutBuilder.SetCellSize(16);
             layoutBuilder.SetSize(Width, Height);
@@ -210,6 +211,7 @@ namespace OpenBreed.Sandbox.Loaders
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IRenderableFactory renderableFactory;
+        private readonly IDrawingFactory drawingFactory;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
@@ -230,7 +232,9 @@ namespace OpenBreed.Sandbox.Loaders
 
         public MapTxtDataLoader(IDataLoaderFactory dataLoaderFactory,
                                 IRenderableFactory renderableFactory,
+                                IDrawingFactory drawingFactory,
                                   IRepositoryProvider repositoryProvider,
+
                                   ISystemFactory systemFactory,
                                   IWorldMan worldMan,
                                   IEntityMan entityMan,
@@ -245,6 +249,7 @@ namespace OpenBreed.Sandbox.Loaders
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
             this.renderableFactory = renderableFactory;
+            this.drawingFactory = drawingFactory;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             this.entityMan = entityMan;
@@ -297,7 +302,7 @@ namespace OpenBreed.Sandbox.Loaders
             LoadReferencedAnimations(txtMap);
             LoadReferencedTileStamps(txtMap);
 
-            var map = txtMap.GetModel();
+            var map = txtMap.GetModel(drawingFactory);
 
             if (map is null)
                 throw new Exception($"Map model  asset '{txtMap.DataRef}' could not be loaded.");

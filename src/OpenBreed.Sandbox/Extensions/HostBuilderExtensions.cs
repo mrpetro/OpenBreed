@@ -5,6 +5,7 @@ using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
@@ -258,6 +259,7 @@ namespace OpenBreed.Sandbox.Extensions
             {
                 var mapTxtDataLoader = new MapTxtDataLoader(dataLoaderFactory,
                                                             sp.GetService<IRenderableFactory>(),
+                                                            sp.GetService<IDrawingFactory>(),
                                                             sp.GetService<IRepositoryProvider>(),
                                                             sp.GetService<ISystemFactory>(),
                                                             sp.GetService<IWorldMan>(),

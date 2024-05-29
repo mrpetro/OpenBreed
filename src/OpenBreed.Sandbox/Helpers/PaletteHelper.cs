@@ -1,4 +1,5 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenTK.Mathematics;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -8,7 +9,7 @@ namespace OpenBreed.Sandbox.Helpers
     {
         #region Public Methods
 
-        public static Color4 ToColor4(Color color)
+        public static Color4 ToColor4(MyColor color)
         {
             return new Color4(
                 color.R / 255.0f,
