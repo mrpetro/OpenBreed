@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Database.EFCore;
 using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.DataSources;
+using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Database.Xml.Items.DataSources;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -107,6 +109,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public override void Add(IDbDataSource newEntry)
         {
             context.Items.Add((XmlDbDataSource)newEntry);
+        }
+
+        public override bool Remove(IDbDataSource entry)
+        {
+            return context.Items.Remove((XmlDbDataSource)entry);
         }
 
         #endregion Public Properties

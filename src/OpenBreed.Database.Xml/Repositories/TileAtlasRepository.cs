@@ -153,5 +153,15 @@ namespace OpenBreed.Database.Xml.Repositories
         {
             throw new NotImplementedException();
         }
+
+        bool IRepository<IDbTileAtlas>.Remove(IDbTileAtlas entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(IDbEntry entry)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

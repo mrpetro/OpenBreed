@@ -96,6 +96,11 @@ namespace OpenBreed.Database.Xml.Repositories
             context.Items.Add((XmlDbAnimation)newEntry);
         }
 
+        public override bool Remove(IDbAnimation entry)
+        {
+            return context.Items.Remove((XmlDbAnimation)entry);
+        }
+
         #endregion Protected Methods
     }
 }

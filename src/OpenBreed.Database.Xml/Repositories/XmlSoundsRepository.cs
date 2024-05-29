@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Songs;
 using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Xml.Items.Songs;
 using OpenBreed.Database.Xml.Items.Sounds;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -26,9 +28,12 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbSound); } }
-        public override string Name { get { return "Sounds"; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes
+        { get { yield return typeof(XmlDbSound); } }
+        public override string Name
+        { get { return "Sounds"; } }
 
         public override int Count => context.Items.Count;
 
@@ -68,13 +73,30 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbSound); } }
-        public override string Name { get { return "Sounds"; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes
+        { get { yield return typeof(XmlDbSound); } }
+        public override string Name
+        { get { return "Sounds"; } }
 
         public override int Count => context.Items.Count;
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Add(IDbSound newEntry)
+        {
+            context.Items.Add((XmlDbSound)newEntry);
+        }
+
+        public override bool Remove(IDbSound entry)
+        {
+            return context.Items.Remove((XmlDbSound)entry);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -91,11 +113,6 @@ namespace OpenBreed.Database.Xml.Repositories
         protected override void ReplaceEntryWithIndex(int index, IDbSound newEntry)
         {
             context.Items[index] = (XmlDbSound)newEntry;
-        }
-
-        public override void Add(IDbSound newEntry)
-        {
-            context.Items.Add((XmlDbSound)newEntry);
         }
 
         #endregion Protected Methods

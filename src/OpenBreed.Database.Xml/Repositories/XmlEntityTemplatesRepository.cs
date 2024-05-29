@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
+using OpenBreed.Database.Xml.Items.DataSources;
 using OpenBreed.Database.Xml.Items.EntityTemplates;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -101,6 +103,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public override void Add(IDbEntityTemplate newEntry)
         {
             context.Items.Add((XmlDbEntityTemplate)newEntry);
+        }
+
+        public override bool Remove(IDbEntityTemplate entry)
+        {
+            return context.Items.Remove((XmlDbEntityTemplate)entry);
         }
 
         #endregion Public Methods

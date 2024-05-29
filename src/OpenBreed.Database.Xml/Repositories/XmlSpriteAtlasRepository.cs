@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Database.Xml.Items.Sounds;
 using OpenBreed.Database.Xml.Items.Sprites;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -26,9 +28,12 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbSpriteAtlas); } }
-        public override string Name { get { return "Sprite sets"; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes
+        { get { yield return typeof(XmlDbSpriteAtlas); } }
+        public override string Name
+        { get { return "Sprite sets"; } }
         public override int Count => context.Items.Count;
 
         #endregion Public Properties
@@ -67,12 +72,29 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbSpriteAtlas); } }
-        public override string Name { get { return "Sprite sets"; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes
+        { get { yield return typeof(XmlDbSpriteAtlas); } }
+        public override string Name
+        { get { return "Sprite sets"; } }
         public override int Count => context.Items.Count;
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Add(IDbSpriteAtlas newEntry)
+        {
+            context.Items.Add((XmlDbSpriteAtlas)newEntry);
+        }
+
+        public override bool Remove(IDbSpriteAtlas entry)
+        {
+            return context.Items.Remove((XmlDbSpriteAtlas)entry);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -89,11 +111,6 @@ namespace OpenBreed.Database.Xml.Repositories
         protected override void ReplaceEntryWithIndex(int index, IDbSpriteAtlas newEntry)
         {
             context.Items[index] = (XmlDbSpriteAtlas)newEntry;
-        }
-
-        public override void Add(IDbSpriteAtlas newEntry)
-        {
-            context.Items.Add((XmlDbSpriteAtlas)newEntry);
         }
 
         #endregion Protected Methods

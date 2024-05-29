@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Interface.Items.Images;
+using OpenBreed.Database.Xml.Items.EntityTemplates;
 using OpenBreed.Database.Xml.Items.Images;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -85,6 +87,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public override void Add(IDbImage newEntry)
         {
             context.Items.Add((XmlDbImage)newEntry);
+        }
+
+        public override bool Remove(IDbImage entry)
+        {
+            return context.Items.Remove((XmlDbImage)entry);
         }
 
         #endregion Public Methods

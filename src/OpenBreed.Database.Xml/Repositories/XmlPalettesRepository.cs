@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Palettes;
+using OpenBreed.Database.Xml.Items.Maps;
 using OpenBreed.Database.Xml.Items.Palettes;
 using OpenBreed.Database.Xml.Tables;
 
@@ -123,6 +125,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public override void Add(IDbPalette newEntry)
         {
             context.Items.Add((XmlDbPalette)newEntry);
+        }
+
+        public override bool Remove(IDbPalette entry)
+        {
+            return context.Items.Remove((XmlDbPalette)entry);
         }
 
         #endregion Public Methods

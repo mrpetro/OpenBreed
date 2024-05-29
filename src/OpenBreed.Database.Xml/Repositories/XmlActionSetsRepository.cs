@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Xml.Items.Actions;
+using OpenBreed.Database.Xml.Items.Animations;
 using OpenBreed.Database.Xml.Tables;
 using System;
 using System.Collections.Generic;
@@ -85,6 +87,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public override void Add(IDbActionSet newEntry)
         {
             context.Items.Add((XmlDbActionSet)newEntry);
+        }
+
+        public override bool Remove(IDbActionSet entry)
+        {
+            return context.Items.Remove((XmlDbActionSet)entry);
         }
 
         #endregion Public Methods

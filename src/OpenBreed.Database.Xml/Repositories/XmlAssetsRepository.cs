@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items.Assets;
+using OpenBreed.Database.Xml.Items.Actions;
 using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -99,6 +101,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public override void Add(IDbAsset newEntry)
         {
             context.Items.Add((XmlDbAsset)newEntry);
+        }
+
+        public override bool Remove(IDbAsset entry)
+        {
+            return context.Items.Remove((XmlDbAsset)entry);
         }
 
         #endregion Public Methods

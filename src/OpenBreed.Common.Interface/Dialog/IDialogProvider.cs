@@ -32,13 +32,14 @@ namespace OpenBreed.Common.Interface.Dialog
 
         void ShowMessage(string text, string caption);
 
-        void ShowEditorView();
-
         IFolderBrowserQuery FolderBrowserDialog();
+
         IOpenFileQuery OpenFileDialog();
+
         ISaveFileQuery SaveFileDialog();
 
         DialogAnswer ShowMessageWithQuestion(string text, string caption, QuestionDialogButtons buttons);
+
         DialogAnswer ShowReplaceFileQuestion(string title, string caption);
 
         #endregion Public Methods

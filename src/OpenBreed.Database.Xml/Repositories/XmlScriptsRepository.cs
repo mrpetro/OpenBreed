@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Scripts;
+using OpenBreed.Database.Xml.Items.Palettes;
 using OpenBreed.Database.Xml.Items.Scripts;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -26,7 +28,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
@@ -37,7 +40,8 @@ namespace OpenBreed.Database.Xml.Repositories
             }
         }
 
-        public override string Name { get { return "Scripts"; } }
+        public override string Name
+        { get { return "Scripts"; } }
 
         public override int Count => context.Items.Count;
 
@@ -77,7 +81,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
@@ -88,11 +93,26 @@ namespace OpenBreed.Database.Xml.Repositories
             }
         }
 
-        public override string Name { get { return "Scripts"; } }
+        public override string Name
+        { get { return "Scripts"; } }
 
         public override int Count => context.Items.Count;
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Add(IDbScript newEntry)
+        {
+            context.Items.Add((XmlDbScript)newEntry);
+        }
+
+        public override bool Remove(IDbScript entry)
+        {
+            return context.Items.Remove((XmlDbScript)entry);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -109,11 +129,6 @@ namespace OpenBreed.Database.Xml.Repositories
         protected override void ReplaceEntryWithIndex(int index, IDbScript newEntry)
         {
             context.Items[index] = (XmlDbScript)newEntry;
-        }
-
-        public override void Add(IDbScript newEntry)
-        {
-            context.Items.Add((XmlDbScript)newEntry);
         }
 
         #endregion Protected Methods

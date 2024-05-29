@@ -14,10 +14,14 @@ namespace OpenBreed.Database.Xml.Repositories
         public IDbEntry New(string newId, Type entryType = null)
         {
             if (Find(newId) != null)
+            {
                 throw new Exception($"Entry with Id '{newId}' already exist.");
+            }
 
-            if (entryType == null)
+            if (entryType is null)
+            {
                 entryType = EntryTypes.FirstOrDefault();
+            }
 
             var newEntry = Create(entryType);
 
@@ -26,10 +30,12 @@ namespace OpenBreed.Database.Xml.Repositories
             return newEntry;
         }
 
-        public void Remove(T entry)
+        public bool Remove(IDbEntry entry)
         {
-            throw new NotImplementedException();
+            return Remove((T)entry);
         }
+
+        public abstract bool Remove(T entry);
 
         public void Update(T entry)
         {

@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Database.Xml.Items.Sprites;
 using OpenBreed.Database.Xml.Items.Texts;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -14,7 +16,6 @@ namespace OpenBreed.Database.Xml.Repositories
 {
     public class XmlReadonlyTextsRepository : XmlReadonlyRepositoryBase<IDbText>
     {
-
         #region Private Fields
 
         private readonly XmlDbTextTableDef context;
@@ -32,7 +33,9 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
+
         public override IEnumerable<Type> EntryTypes
         {
             get
@@ -42,13 +45,15 @@ namespace OpenBreed.Database.Xml.Repositories
                 yield return typeof(XmlDbTextFromFile);
             }
         }
-        public override string Name { get { return "Texts"; } }
+
+        public override string Name
+        { get { return "Texts"; } }
 
         public override int Count => context.Items.Count;
 
         #endregion Public Properties
 
-        #region Public Methods
+        #region Protected Methods
 
         protected override IDbText GetEntryWithIndex(int index)
         {
@@ -60,13 +65,11 @@ namespace OpenBreed.Database.Xml.Repositories
             return context.Items.IndexOf((XmlDbText)entry);
         }
 
-        #endregion Public Methods
-
+        #endregion Protected Methods
     }
 
     public class XmlTextsRepository : XmlRepositoryBase<IDbText>
     {
-
         #region Private Fields
 
         private readonly XmlDbTextTableDef context;
@@ -84,7 +87,9 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
+
         public override IEnumerable<Type> EntryTypes
         {
             get
@@ -94,13 +99,29 @@ namespace OpenBreed.Database.Xml.Repositories
                 yield return typeof(XmlDbTextFromFile);
             }
         }
-        public override string Name { get { return "Texts"; } }
+
+        public override string Name
+        { get { return "Texts"; } }
 
         public override int Count => context.Items.Count;
 
         #endregion Public Properties
 
         #region Public Methods
+
+        public override void Add(IDbText newEntry)
+        {
+            context.Items.Add((XmlDbText)newEntry);
+        }
+
+        public override bool Remove(IDbText entry)
+        {
+            return context.Items.Remove((XmlDbText)entry);
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
 
         protected override IDbText GetEntryWithIndex(int index)
         {
@@ -117,12 +138,6 @@ namespace OpenBreed.Database.Xml.Repositories
             context.Items[index] = (XmlDbText)newEntry;
         }
 
-        public override void Add(IDbText newEntry)
-        {
-            context.Items.Add((XmlDbText)newEntry);
-        }
-
-        #endregion Public Methods
-
+        #endregion Protected Methods
     }
 }

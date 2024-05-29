@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Database.Interface.Items.TileStamps;
+using OpenBreed.Database.Xml.Items.Tiles;
 using OpenBreed.Database.Xml.Items.TileStamps;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -26,7 +28,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
@@ -36,7 +39,8 @@ namespace OpenBreed.Database.Xml.Repositories
             }
         }
 
-        public override string Name { get { return "Tile stamps"; } }
+        public override string Name
+        { get { return "Tile stamps"; } }
 
         public override int Count => context.Items.Count;
 
@@ -76,7 +80,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
@@ -86,11 +91,26 @@ namespace OpenBreed.Database.Xml.Repositories
             }
         }
 
-        public override string Name { get { return "Tile stamps"; } }
+        public override string Name
+        { get { return "Tile stamps"; } }
 
         public override int Count => context.Items.Count;
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Add(IDbTileStamp newEntry)
+        {
+            context.Items.Add((XmlDbTileStamp)newEntry);
+        }
+
+        public override bool Remove(IDbTileStamp entry)
+        {
+            return context.Items.Remove((XmlDbTileStamp)entry);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -107,11 +127,6 @@ namespace OpenBreed.Database.Xml.Repositories
         protected override void ReplaceEntryWithIndex(int index, IDbTileStamp newEntry)
         {
             context.Items[index] = (XmlDbTileStamp)newEntry;
-        }
-
-        public override void Add(IDbTileStamp newEntry)
-        {
-            context.Items.Add((XmlDbTileStamp)newEntry);
         }
 
         #endregion Protected Methods

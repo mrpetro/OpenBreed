@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Database.Xml.Items.Images;
 using OpenBreed.Database.Xml.Items.Maps;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -89,6 +91,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public override void Add(IDbMap newEntry)
         {
             context.Items.Add((XmlDbMap)newEntry);
+        }
+
+        public override bool Remove(IDbMap entry)
+        {
+            return context.Items.Remove((XmlDbMap)entry);
         }
 
         #endregion Public Methods

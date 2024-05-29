@@ -120,5 +120,15 @@ namespace OpenBreed.Database.Xml.Repositories
         {
             throw new NotImplementedException();
         }
+
+        bool IRepository<IDbAsset>.Remove(IDbAsset entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(IDbEntry entry)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
