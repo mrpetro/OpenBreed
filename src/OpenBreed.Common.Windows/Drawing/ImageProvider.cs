@@ -15,7 +15,7 @@ namespace OpenBreed.Common.Windows.Drawing
     {
         public IImage FromFile(string filePath)
         {
-            return new ImageWrapper(Image.FromFile(filePath));
+            return new ImageWrapper((Bitmap)Bitmap.FromFile(filePath));
         }
     }
 }

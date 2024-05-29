@@ -25,6 +25,8 @@ namespace OpenBreed.Common.Interface.Drawing
 
         #region Public Methods
 
+        byte[] GetBytes();
+
         void Save(MemoryStream ms, MyImageFormat format);
 
         #endregion Public Methods

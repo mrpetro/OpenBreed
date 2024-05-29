@@ -33,6 +33,10 @@ namespace OpenBreed.Common.Windows.Drawing.Wrappers
 
         public MyPixelFormat PixelFormat => PixelFormatConverter.ToMyPixelFormat(Bitmap.PixelFormat);
 
+        public byte[] GetBytes()
+        {
+            return BitmapHelper.ToBytes(Bitmap);
+        }
 
         public IBitmapData LockBits(MyRectangle myRectangle, ImageLockMode lockMode, MyPixelFormat pixelFormat)
         {

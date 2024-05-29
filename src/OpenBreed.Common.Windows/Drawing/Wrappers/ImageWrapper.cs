@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Drawing;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace OpenBreed.Common.Windows.Drawing.Wrappers
 
         #region Public Constructors
 
-        public ImageWrapper(System.Drawing.Image wrapped)
+        public ImageWrapper(System.Drawing.Bitmap wrapped)
         {
             Wrapped = wrapped;
         }
@@ -27,7 +28,7 @@ namespace OpenBreed.Common.Windows.Drawing.Wrappers
 
         #region Public Properties
 
-        public System.Drawing.Image Wrapped { get; }
+        public System.Drawing.Bitmap Wrapped { get; }
 
         public IColorPalette Palette
         {
@@ -51,6 +52,11 @@ namespace OpenBreed.Common.Windows.Drawing.Wrappers
         #region Public Methods
 
         public void Dispose() => Wrapped.Dispose();
+
+        public byte[] GetBytes()
+        {
+            return BitmapHelper.ToBytes(Wrapped);
+        }
 
         public void Save(MemoryStream ms, MyImageFormat format)
         {

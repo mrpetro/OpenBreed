@@ -3,8 +3,8 @@
 local cooldownTimerId
 local delayTimerId
 local previousDegree = 0
-local speedFactor = 30
-local fireRate = 3
+local speedFactor = 150
+local fireRate = 0.3
 local fireReady = true
 
 local function Explode(entity)
@@ -73,12 +73,17 @@ local function OnDirectionChanged(entity, args)
 		local clip = Clips:GetByName(animName)
 		entity:PlayAnimation(0, clip.Id)
 		
-		previousDegree = degree
-		
-		
-		FireBullet(entity)
-		
+		previousDegree = degree	
     end
+end
+
+local function OnDirectionSet(entity, args)
+
+    if (entity:HasTrackedEntity())
+    then
+		FireBullet(entity)
+    end
+	
 end
 
 local function OnInit(entity)
@@ -90,6 +95,11 @@ local function OnInit(entity)
     Triggers:OnEntityDirectionChanged(
         entity,
         OnDirectionChanged,
+        false)
+
+    Triggers:OnEntityDirectionSet(
+        entity,
+        OnDirectionSet,
         false)
 
     Triggers:OnDestroyed(
