@@ -14,10 +14,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Interface\OpenBreed.Common.Interface.csproj" />
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Windows\OpenBreed.Common.Windows.csproj" />
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj" />
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj" />
-    <ProjectReference Include="..\OpenBreed.Common.Windows\OpenBreed.Common.Windows.csproj" />
     <ProjectReference Include="..\OpenBreed.Editor.UI.Wpf\OpenBreed.Editor.UI.Wpf.csproj" />
   </ItemGroup>
 
