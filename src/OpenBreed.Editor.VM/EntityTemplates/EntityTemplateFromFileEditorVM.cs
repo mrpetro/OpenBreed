@@ -1,8 +1,8 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
-using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Editor.VM.Base;
@@ -28,12 +28,11 @@ namespace OpenBreed.Editor.VM.EntityTemplates
         #region Public Constructors
 
         public EntityTemplateFromFileEditorVM(
+            ILogger logger,
             EntityTemplatesDataProvider entityTemplatesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider,
-            ILogger logger,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
         {
             this.entityTemplatesDataProvider = entityTemplatesDataProvider;
             this.dataProvider = dataProvider;
@@ -88,7 +87,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             }
             catch (System.Exception ex)
             {
-                logger.Critical(ex.ToString());
+                logger.LogCritical(ex.ToString());
             }
         }
 

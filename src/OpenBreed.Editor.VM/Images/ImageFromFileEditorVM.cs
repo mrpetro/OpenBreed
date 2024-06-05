@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
@@ -29,11 +30,11 @@ namespace OpenBreed.Editor.VM.Images
         #region Public Constructors
 
         public ImageFromFileEditorVM(
+            ILogger logger,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             IModelsProvider dataProvider,
-            IControlFactory controlFactory,
-            IBitmapProvider bitmapProvider) : base(workspaceMan, dialogProvider, controlFactory)
+            IBitmapProvider bitmapProvider) : base(logger, workspaceMan, dialogProvider)
         {
             this.workspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;

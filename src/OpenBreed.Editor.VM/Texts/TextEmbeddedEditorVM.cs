@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface.Items.Texts;
@@ -21,10 +22,10 @@ namespace OpenBreed.Editor.VM.Texts
         #region Public Constructors
 
         public TextEmbeddedEditorVM(
+            ILogger logger,
             TextsDataProvider textsDataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
         {
             this.textsDataProvider = textsDataProvider;
         }

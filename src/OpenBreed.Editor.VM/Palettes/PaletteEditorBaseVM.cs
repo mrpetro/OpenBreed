@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Update;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
@@ -35,11 +36,11 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Public Constructors
 
         public PaletteEditorBaseVM(
+            ILogger logger,
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
         {
             this.palettesDataProvider = palettesDataProvider;
             this.dataProvider = dataProvider;

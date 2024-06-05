@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
@@ -26,12 +27,12 @@ namespace OpenBreed.Editor.VM.Actions
         #region Public Constructors
 
         public ActionSetEmbeddedEditorVM(
-                    ActionSetsDataProvider actionSetsDataProvider,
+            ILogger logger,
+            ActionSetsDataProvider actionSetsDataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IControlFactory controlFactory,
             IDrawingFactory drawingFactory,
-            IDrawingContextProvider drawingContextProvider) : base(workspaceMan, dialogProvider, controlFactory)
+            IDrawingContextProvider drawingContextProvider) : base(logger, workspaceMan, dialogProvider)
         {
             this.actionSetsDataProvider = actionSetsDataProvider;
             this.drawingFactory = drawingFactory;

@@ -1,7 +1,6 @@
-﻿using OpenBreed.Common.Data;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Xml;
@@ -49,7 +48,7 @@ namespace OpenBreed.Editor.VM
             databaseMan.Open(databaseFilePath);
             UnitOfWork = databaseMan.CreateUnitOfWork();
 
-            logger.Info($"Database '{UnitOfWork.Name}' opened.");
+            logger.LogInformation($"Database '{UnitOfWork.Name}' opened.");
         }
 
         public void CloseDatabase()
@@ -63,7 +62,7 @@ namespace OpenBreed.Editor.VM
 
             UnitOfWork = null;
 
-            logger.Info($"Database '{databaseName}' closed.");
+            logger.LogInformation($"Database '{databaseName}' closed.");
         }
 
         public void SaveDatabase()
@@ -73,7 +72,7 @@ namespace OpenBreed.Editor.VM
 
             UnitOfWork.Save();
 
-            logger.Info($"Database '{UnitOfWork.Name}' saved.");
+            logger.LogInformation($"Database '{UnitOfWork.Name}' saved.");
         }
 
         public IRepository<T> GetRepository<T>() where T : IDbEntry => UnitOfWork.GetRepository<T>();

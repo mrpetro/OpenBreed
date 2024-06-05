@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface;
-using OpenBreed.Common.Logging;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface;
 using OpenBreed.Editor.VM;
@@ -29,6 +28,10 @@ using OpenBreed.Editor.UI.Wpf.Options;
 using OpenBreed.Editor.VM.Tools;
 using OpenBreed.Editor.UI.Wpf.Tools;
 using OpenBreed.Common.Tools.Extensions;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using OpenBreed.Common.Logging;
+using OpenBreed.Editor.VM.Logging;
 
 namespace OpenBreed.Editor.App
 {
@@ -43,6 +46,9 @@ namespace OpenBreed.Editor.App
         {
 
             var builder = new HostBuilder();
+
+            builder.SetupDefaultLogger();
+            builder.SetupDataHandlers();
 
             builder.ConfigureServices((hostContext, services) =>
             {
@@ -75,7 +81,7 @@ namespace OpenBreed.Editor.App
 
             builder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ILogger, DefaultLogger>();
+                //services.AddSingleton<ILogger, DefaultLogger>();
                 services.AddSingleton<IVariableMan, VariableMan>();
                 services.AddSingleton<SettingsMan>();
                 services.AddSingleton<DbEntryFactory>();
@@ -129,7 +135,6 @@ namespace OpenBreed.Editor.App
             builder.SetupCommonViewModels();
             builder.SetupEditorViewModels();
             builder.SetupDbEntryEditorFactory();
-            builder.ConfigureControlFactory();
 
             builder.SetupWindowsDrawingContext();
 

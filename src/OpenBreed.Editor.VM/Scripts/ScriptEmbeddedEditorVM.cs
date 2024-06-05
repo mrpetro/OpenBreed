@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface.Items.Scripts;
@@ -20,10 +21,10 @@ namespace OpenBreed.Editor.VM.Scripts
         #region Public Constructors
 
         public ScriptEmbeddedEditorVM(
+            ILogger logger,
             ScriptsDataProvider scriptsDataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
         {
             this.scriptsDataProvider = scriptsDataProvider;
         }

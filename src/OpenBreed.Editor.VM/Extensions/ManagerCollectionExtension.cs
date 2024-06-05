@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items.Assets;
@@ -49,7 +49,7 @@ namespace OpenBreed.Editor.VM.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddTransient<LoggerVM>((sp) => new LoggerVM(sp.GetService<ILogger>()));
+                services.AddTransient<LoggerVM>();
             });
         }
 

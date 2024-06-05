@@ -21,7 +21,6 @@ namespace OpenBreed.Editor.VM
 
         private static readonly HashSet<string> propertyNamesIgnoredForChanges = new HashSet<string>();
         private readonly IDialogProvider dialogProvider;
-        private readonly IControlFactory controlFactory;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IRepository<E> repository;
         private E edited;
@@ -42,12 +41,10 @@ namespace OpenBreed.Editor.VM
         public EntryEditorVM(
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IControlFactory controlFactory,
             DbEntryEditorFactory dbEntryEditorFactory)
         {
             WorkspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;
-            this.controlFactory = controlFactory;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
             repository = WorkspaceMan.GetRepository<E>();
         }

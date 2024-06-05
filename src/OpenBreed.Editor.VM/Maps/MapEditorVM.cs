@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
@@ -43,17 +44,17 @@ namespace OpenBreed.Editor.VM.Maps
         #region Public Constructors
 
         public MapEditorVM(
+            ILogger logger,
             IWorkspaceMan workspaceMan, 
             MapsDataProvider mapsDataProvider,
             PalettesDataProvider palettesDataProvider,
             ActionSetsDataProvider actionSetsDataProvider, 
             TileAtlasDataProvider tileAtlasDataProvider, 
             IDialogProvider dialogProvider,
-            IControlFactory controlFactory,
             IDrawingFactory drawingFactory,
             IDrawingContextProvider drawingContextProvider,
             IBitmapProvider bitmapProvider,
-            IPensProvider pensProvider) : base(workspaceMan, dialogProvider, controlFactory)
+            IPensProvider pensProvider) : base(logger, workspaceMan, dialogProvider)
         {
             Tools = new MapEditorToolsVM();
 

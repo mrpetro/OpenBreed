@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
@@ -15,9 +16,9 @@ namespace OpenBreed.Editor.VM.Scripts
         #region Public Constructors
 
         public ScriptEditorBaseVM(
+            ILogger logger,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
         {
         }
 

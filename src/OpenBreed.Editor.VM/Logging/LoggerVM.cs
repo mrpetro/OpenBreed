@@ -1,5 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
@@ -17,20 +17,21 @@ namespace OpenBreed.Editor.VM.Logging
     {
         #region Private Fields
 
-        private readonly ILogger logger;
+        private readonly ILoggerClient loggerClient;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LoggerVM(ILogger logger)
+        public LoggerVM(ILoggerClient loggerClient)
         {
-            this.logger = logger;
-
-            logger.MessageAdded += Instance_MessageAdded;
+            this.loggerClient = loggerClient;
             Logs = new ObservableCollection<LogItemVM>();
 
+            loggerClient.MessageAdded += LoggerClient_MessageAdded;
+
             ClearCommand = new Command(() => Logs.Clear());
+
         }
 
         #endregion Public Constructors
@@ -45,9 +46,9 @@ namespace OpenBreed.Editor.VM.Logging
 
         #region Private Methods
 
-        private void Instance_MessageAdded(LogLevel level, int channel, string msg)
+        private void LoggerClient_MessageAdded(LogLevel type, string msg)
         {
-            Logs.Insert(0, new LogItemVM(msg, level.ToString()));
+            Logs.Insert(0, new LogItemVM(msg, type.ToString()));
         }
 
         #endregion Private Methods

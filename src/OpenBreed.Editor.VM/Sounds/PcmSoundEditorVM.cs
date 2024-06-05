@@ -1,11 +1,16 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Common;
+using OpenBreed.Editor.VM.Tiles.Helpers;
 using System;
 using System.Threading.Channels;
 using System.Windows.Input;
@@ -19,24 +24,30 @@ namespace OpenBreed.Editor.VM.Sounds
 
         private readonly SoundsDataProvider soundsDataProvider;
         private readonly IPcmPlayer pcmPlayer;
+        private string _dataSourceRefId;
         private int _bitsPerSample;
         private int _sampleRate;
         private int _channels;
-        private byte[] _data;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public PcmSoundEditorVM(
+            ILogger logger,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             SoundsDataProvider soundsDataProvider,
-            IPcmPlayer pcmPlayer,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IPcmPlayer pcmPlayer) : base(logger, workspaceMan, dialogProvider)
         {
             this.soundsDataProvider = soundsDataProvider;
             this.pcmPlayer = pcmPlayer;
+
+            DataSourceRefIdEditor = new EntryRefIdEditorVM(
+                workspaceMan,
+                typeof(IDbDataSource),
+                (newRefId) => DataSourceRefId = newRefId);
+
             PlayCommand = new Command(() => Play());
         }
 
@@ -47,6 +58,8 @@ namespace OpenBreed.Editor.VM.Sounds
         public ICommand PlayCommand { get; }
 
         public override string EditorName => "PCM Sound Editor";
+
+        public EntryRefIdEditorVM DataSourceRefIdEditor { get; }
 
         public int BitsPerSample
         {
@@ -66,10 +79,10 @@ namespace OpenBreed.Editor.VM.Sounds
             set { SetProperty(ref _sampleRate, value); }
         }
 
-        public byte[] Data
+        public string DataSourceRefId
         {
-            get { return _data; }
-            set { SetProperty(ref _data, value); }
+            get { return _dataSourceRefId; }
+            set { SetProperty(ref _dataSourceRefId, value); }
         }
 
         #endregion Public Properties
@@ -78,8 +91,10 @@ namespace OpenBreed.Editor.VM.Sounds
 
         public void Play()
         {
+            var soundModel = soundsDataProvider.GetSound(EditedEntry);
+
             pcmPlayer.Play(
-                Data,
+                soundModel.Data,
                 SampleRate,
                 BitsPerSample,
                 Channels);
@@ -89,14 +104,30 @@ namespace OpenBreed.Editor.VM.Sounds
 
         #region Protected Methods
 
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(DataSourceRefId):
+
+                    DataSourceRefIdEditor.CurrentRefId = (DataSourceRefId == null) ? null : DataSourceRefId;
+                    //UpdateImage();
+                    //Refresh();
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
         protected override void UpdateEntry(IDbSound entry)
         {
-            var model = soundsDataProvider.GetSound(entry.Id);
-
-            model.BitsPerSample = BitsPerSample;
-            model.Channels = Channels;
-            model.SampleRate = SampleRate;
-            model.Data = Data;
+            entry.BitsPerSample = BitsPerSample;
+            entry.Channels = Channels;
+            entry.SampleRate = SampleRate;
+            entry.DataRef = DataSourceRefIdEditor.SelectedRefId;
 
             base.UpdateEntry(entry);
         }
@@ -105,11 +136,11 @@ namespace OpenBreed.Editor.VM.Sounds
         {
             base.UpdateVM(entry);
 
-            var model = soundsDataProvider.GetSound(entry.Id);
-            BitsPerSample = model.BitsPerSample;
-            Channels = model.Channels;
-            SampleRate = model.SampleRate;
-            Data = model.Data;
+            DataSourceRefId = entry.DataRef;
+            DataSourceRefIdEditor.SelectedRefId = entry.DataRef;
+            BitsPerSample = entry.BitsPerSample;
+            Channels = entry.Channels;
+            SampleRate = entry.SampleRate;
         }
 
         #endregion Protected Methods

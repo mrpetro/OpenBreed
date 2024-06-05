@@ -58,10 +58,10 @@
                                         <DataTrigger Binding="{Binding Level}" Value="Warning">
                                             <Setter Property="Foreground" Value="DarkGoldenrod" />
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Level}" Value="Info">
+                                        <DataTrigger Binding="{Binding Level}" Value="Information">
                                             <Setter Property="Foreground" Value="Black" />
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Level}" Value="Verbose">
+                                        <DataTrigger Binding="{Binding Level}" Value="Trace">
                                             <Setter Property="Foreground" Value="DarkGray" />
                                         </DataTrigger>
                                     </Style.Triggers>

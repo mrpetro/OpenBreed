@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
@@ -31,14 +32,14 @@ namespace OpenBreed.Editor.VM.Tiles
         #region Public Constructors
 
         public TileSetFromBlkEditorVM(
+            ILogger logger,
             TileAtlasDataProvider tileSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IControlFactory controlFactory,
             IDrawingFactory drawingFactory,
             IDrawingContextProvider drawingContextProvider,
-            IBitmapProvider bitmapProvider) : base(workspaceMan, dialogProvider, controlFactory)
+            IBitmapProvider bitmapProvider) : base(logger, workspaceMan, dialogProvider)
         {
             PaletteIds = new ObservableCollection<string>();
             this.tileSetsDataProvider = tileSetsDataProvider;

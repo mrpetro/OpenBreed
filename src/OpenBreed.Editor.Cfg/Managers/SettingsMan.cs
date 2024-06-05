@@ -1,7 +1,6 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Interface;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Editor.Cfg;
@@ -51,19 +50,19 @@ namespace OpenBreed.Editor.Cfg.Managers
                 if (File.Exists(cfgPath))
                 {
                     Cfg = XmlHelper.RestoreFromXml<SettingsCfg>(cfgPath);
-                    logger.Info("Settings configuration restored.");
+                    logger.LogInformation("Settings configuration restored.");
                 }
                 else
                 {
                     Cfg = GetDefault();
-                    logger.Info("No settings file yet. Default Settings configuration restored.");
+                    logger.LogInformation("No settings file yet. Default Settings configuration restored.");
                 }
 
                 RegisterVariables();
             }
             catch (Exception ex)
             {
-                logger.Error("Unable to restore settings. Reason: " + ex.Message);
+                logger.LogError("Unable to restore settings. Reason: " + ex.Message);
             }
         }
 
@@ -74,11 +73,11 @@ namespace OpenBreed.Editor.Cfg.Managers
                 string cfgPath = Path.Combine(ProgramTools.AppProductDataDir, CFG_FILE_NAME);
                 XmlHelper.StoreAsXml<SettingsCfg>(cfgPath, Cfg, true);
 
-                logger.Info("Settings configuration stored.");
+                logger.LogInformation("Settings configuration stored.");
             }
             catch (Exception ex)
             {
-                logger.Error("Unable to store settings. Reason: " + ex.Message);
+                logger.LogError("Unable to store settings. Reason: " + ex.Message);
             }
         }
 

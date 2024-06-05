@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface;
@@ -39,21 +40,29 @@ namespace OpenBreed.Editor.VM
         #region Private Fields
 
         private readonly IDialogProvider dialogProvider;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Protected Constructors
 
         protected EntrySpecificEditorVM(
+            ILogger logger,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider,
-            IControlFactory controlFactory)
+            IDialogProvider dialogProvider)
         {
             WorkspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;
+            this.logger = logger;
         }
 
         #endregion Protected Constructors
+
+        #region Public Properties
+
+        public TDbEntry EditedEntry { get; private set; }
+
+        #endregion Public Properties
 
         #region Internal Properties
 
@@ -72,7 +81,15 @@ namespace OpenBreed.Editor.VM
 
         public override void UpdateVM(IDbEntry source)
         {
-            UpdateVM((TDbEntry)source);
+            try
+            {
+                UpdateVM((TDbEntry)source);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Unable to load '{0}' entry. Exception:{2}", source.Id,
+                ex);
+            }
         }
 
         #endregion Public Methods
@@ -85,6 +102,7 @@ namespace OpenBreed.Editor.VM
 
         protected virtual void UpdateVM(TDbEntry source)
         {
+            EditedEntry = source;
         }
 
         #endregion Protected Methods

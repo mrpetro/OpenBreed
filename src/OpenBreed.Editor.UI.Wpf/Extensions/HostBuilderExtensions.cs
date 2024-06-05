@@ -52,19 +52,6 @@ namespace OpenBreed.Editor.UI.Wpf.Extensions
             });
         }
 
-        public static void ConfigureControlFactory(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<IControlFactory>((sp) =>
-                {
-                    var controlFactory = new ControlFactory();
-                    controlFactory.RegisterWpfControls();
-                    return controlFactory;
-                });
-            });
-        }
-
         #endregion Public Methods
     }
 }

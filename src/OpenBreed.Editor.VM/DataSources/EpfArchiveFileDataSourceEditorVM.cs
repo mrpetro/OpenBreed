@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Data;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Editor.VM.Base;
@@ -16,9 +17,10 @@ namespace OpenBreed.Editor.VM.DataSources
 
         #region Public Constructors
 
-        public EpfArchiveFileDataSourceEditorVM(IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+        public EpfArchiveFileDataSourceEditorVM(
+            ILogger logger,
+            IWorkspaceMan workspaceMan,
+            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
         {
         }
 

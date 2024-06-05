@@ -8,6 +8,7 @@ using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
+using Microsoft.Extensions.Logging;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
@@ -28,11 +29,11 @@ namespace OpenBreed.Editor.VM.Scripts
         #region Public Constructors
 
         public ScriptFromFileEditorVM(
+            ILogger logger,
             ScriptsDataProvider scriptsDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(workspaceMan, dialogProvider, controlFactory)
+            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
         {
             this.scriptsDataProvider = scriptsDataProvider;
             this.dataProvider = dataProvider;

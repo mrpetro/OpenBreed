@@ -14,6 +14,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Common.Interface.Dialog;
+using Microsoft.Extensions.Logging;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
@@ -30,11 +31,11 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Public Constructors
 
         public PaletteFromMapEditorVM(
+            ILogger logger,
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider,
-            IControlFactory controlFactory) : base(palettesDataProvider, dataProvider, workspaceMan, dialogProvider, controlFactory)
+            IDialogProvider dialogProvider) : base(logger, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));

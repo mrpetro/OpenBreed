@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
@@ -27,14 +28,14 @@ namespace OpenBreed.Editor.VM.Sprites
         #region Public Constructors
 
         public SpriteSetFromImageEditorVM(
+            ILogger logger,
             SpriteAtlasDataProvider spriteAtlasDataProvider,                             
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IControlFactory controlFactory,
             IDrawingFactory drawingFactory,
-            IBitmapProvider bitmapProvider) : base(spriteAtlasDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider, controlFactory)
+            IBitmapProvider bitmapProvider) : base(logger, spriteAtlasDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
             SpriteEditor = new SpriteFromImageEditorVM(this, drawingFactory);
             Items = new BindingList<SpriteFromImageVM>();
