@@ -6,8 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OpenBreed.Common.Logging;
-using OpenBreed.Common.Interface.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace OpenBreed.Common.UI.WinForms.Controls
 {
@@ -26,44 +25,44 @@ namespace OpenBreed.Common.UI.WinForms.Controls
             InitializeComponent();
 
 
-            Disposed += new EventHandler(LogConsoleCtrl_Disposed);
+            //Disposed += new EventHandler(LogConsoleCtrl_Disposed);
         }
 
         public void Initialize(ILogger logger)
         {
             this.logger = logger;
-            this.logger.MessageAdded += LogMan_MessageAdded;
+            //this.logger.MessageAdded += LogMan_MessageAdded;
         }
 
-        void LogConsoleCtrl_Disposed(object sender, EventArgs e)
-        {
-            if(logger != null)
-                logger.MessageAdded -= LogMan_MessageAdded;
-        }
+        //void LogConsoleCtrl_Disposed(object sender, EventArgs e)
+        //{
+        //    if(logger != null)
+        //        logger.MessageAdded -= LogMan_MessageAdded;
+        //}
 
-        void LogMan_MessageAdded(LogLevel level, int channel, string messageText)
-        {
-            switch (level)
-            {
-                case LogLevel.Verbose:
-                    PrintVerboseMessage(messageText);
-                    break;
-                case LogLevel.Info:
-                    PrintInfoMessage(messageText);
-                    break;
-                case LogLevel.Warning:
-                    PrintWarningMessage(messageText);
-                    break;
-                case LogLevel.Error:
-                    PrintErrorMessage(messageText);
-                    break;
-                case LogLevel.Critical:
-                    PrintCriticalMessage(messageText);
-                    break;
-                default:
-                    break;
-            }
-        }
+        //void LogMan_MessageAdded(LogLevel level, int channel, string messageText)
+        //{
+        //    switch (level)
+        //    {
+        //        case LogLevel.Verbose:
+        //            PrintVerboseMessage(messageText);
+        //            break;
+        //        case LogLevel.Info:
+        //            PrintInfoMessage(messageText);
+        //            break;
+        //        case LogLevel.Warning:
+        //            PrintWarningMessage(messageText);
+        //            break;
+        //        case LogLevel.Error:
+        //            PrintErrorMessage(messageText);
+        //            break;
+        //        case LogLevel.Critical:
+        //            PrintCriticalMessage(messageText);
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         void PrintVerboseMessage(string messageText)
         {

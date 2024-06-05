@@ -18,6 +18,15 @@ namespace OpenBreed.Database.Xml.Items.Sounds
         [XmlElement("DataRef")]
         public string DataRef { get; set; }
 
+        [XmlElement("SampleRate")]
+        public int SampleRate { get; set; }
+
+        [XmlElement("BitsPerSample")]
+        public int BitsPerSample { get; set; }
+
+        [XmlElement("Channels")]
+        public int Channels { get; set; }
+
         public override IDbEntry Copy()
         {
             throw new NotImplementedException();

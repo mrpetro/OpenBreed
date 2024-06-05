@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Interface;
@@ -10,11 +11,29 @@ using OpenBreed.Common.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Collections.Specialized.BitVector32;
 
 namespace OpenBreed.Common.Extensions
 {
     public static class HostBuilderExtensions
     {
+        public static void SetupDataHandlers(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IAssetDataHandler, PcmSoundDataHandler>();
+            });
+        }
+
+        public static void SetupDefaultLogger(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ILoggerClient, DefaultLoggerClient>();
+                services.AddSingleton<ILogger, DefaultLogger>();
+            });
+        }
+
         public static void SetupBuilderFactory(this IHostBuilder hostBuilder, Action<IBuilderFactory, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -93,7 +112,6 @@ namespace OpenBreed.Common.Extensions
                     formatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat(s.GetRequiredService<IBitmapProvider>()));
                     formatMan.RegisterFormat("IFF_IMAGE", new IFFImageFormat(s.GetRequiredService<IBitmapProvider>()));
                     formatMan.RegisterFormat("BINARY", new BinaryFormat());
-                    formatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
                     formatMan.RegisterFormat("TEXT", new TextFormat());
                     return formatMan;
                 });
