@@ -8,12 +8,13 @@ using System.ComponentModel;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Comparer;
 
 namespace OpenBreed.Database.Xml.Items.Actions
 {
     [Serializable]
     [Description("Action set"), Category("Appearance")]
-    public class XmlDbActionSet : XmlDbEntry, IDbActionSet
+    public class XmlDbActionSet : XmlDbEntry, IDbActionSet, IEquatable<IDbActionSet>
     {
         private List<IDbAction> _actions = null;
         private List<XmlDbAction> _xmlActions = new List<XmlDbAction>();
@@ -46,6 +47,11 @@ namespace OpenBreed.Database.Xml.Items.Actions
 
                 return _xmlActions;
             }
+
+            init
+            {
+                _xmlActions = value;
+            }
         }
 
         #endregion Public Properties
@@ -54,7 +60,25 @@ namespace OpenBreed.Database.Xml.Items.Actions
 
         public override IDbEntry Copy()
         {
-            throw new NotImplementedException();
+            return new XmlDbActionSet
+            {
+                XmlActions = this.XmlActions
+            };
+        }
+
+        public bool Equals(IDbActionSet other)
+        {
+            if (!base.Equals(other))
+            {
+                return false;
+            }
+
+            if (!Actions.SequenceEqual(other.Actions, DbActionComparer.Instance))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public IDbAction NewItem()

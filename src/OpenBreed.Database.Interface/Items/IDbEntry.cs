@@ -7,9 +7,8 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Interface.Items
 {
-    public interface IDbEntry
+    public interface IDbEntry : IEquatable<IDbEntry>
     {
-
         #region Public Properties
 
         string Id { get; set; }

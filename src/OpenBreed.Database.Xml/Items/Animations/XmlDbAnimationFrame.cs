@@ -14,6 +14,12 @@ namespace OpenBreed.Database.Xml.Items.Animations
         public float Time { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public abstract IDbAnimationFrame Copy();
+
+        #endregion Public Methods
     }
 
     public class XmlDbAnimationFrame<TValue> : XmlDbAnimationFrame, IDbAnimationFrame<TValue>
@@ -24,6 +30,17 @@ namespace OpenBreed.Database.Xml.Items.Animations
         public TValue Value { get; set; }
 
         #endregion Public Properties
-    }
 
+        #region Public Methods
+
+        public override IDbAnimationFrame Copy()
+        {
+            return new XmlDbAnimationFrame<TValue>
+            {
+                Value = this.Value
+            };
+        }
+
+        #endregion Public Methods
+    }
 }

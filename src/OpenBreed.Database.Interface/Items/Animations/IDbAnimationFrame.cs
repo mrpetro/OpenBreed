@@ -7,6 +7,16 @@
         float Time { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Copy this object
+        /// </summary>
+        /// <returns>Copy of this object</returns>
+        IDbAnimationFrame Copy();
+
+        #endregion Public Methods
     }
 
     public interface IDbAnimationFrame<TValue> : IDbAnimationFrame

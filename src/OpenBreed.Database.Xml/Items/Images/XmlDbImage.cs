@@ -23,7 +23,12 @@ namespace OpenBreed.Database.Xml.Items.Images
 
         public override IDbEntry Copy()
         {
-            return new XmlDbImage() { Id = this.Id, Description = this.Description, DataRef = this.DataRef };
+            return new XmlDbImage()
+            { 
+                Id = this.Id, 
+                Description = this.Description, 
+                DataRef = this.DataRef 
+            };
         }
 
         #endregion Public Properties

@@ -56,7 +56,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbAsset entry)
         {
-            return context.Items.IndexOf((XmlDbAsset)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         #endregion Protected Methods
@@ -119,7 +119,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbAsset entry)
         {
-            return context.Items.IndexOf((XmlDbAsset)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IDbAsset newEntry)

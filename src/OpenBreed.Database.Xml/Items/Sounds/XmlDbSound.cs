@@ -29,7 +29,13 @@ namespace OpenBreed.Database.Xml.Items.Sounds
 
         public override IDbEntry Copy()
         {
-            throw new NotImplementedException();
+            return new XmlDbSound
+            {
+                DataRef = this.DataRef,
+                SampleRate = this.SampleRate,
+                BitsPerSample = this.BitsPerSample,
+                Channels = this.Channels
+            };
         }
 
         #endregion Public Properties

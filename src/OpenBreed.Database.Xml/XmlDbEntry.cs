@@ -19,11 +19,31 @@ namespace OpenBreed.Database.Xml
         [XmlAttribute]
         public string Id { get; set; }
 
-        public abstract IDbEntry Copy();
-
         #endregion Public Properties
 
         #region Public Methods
+
+        public abstract IDbEntry Copy();
+
+        public bool Equals(IDbEntry other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+
+            if (!Equals(Id, other.Id))
+            {
+                return false;
+            }
+
+            if (!Equals(Description, other.Description))
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         public override string ToString()
         {

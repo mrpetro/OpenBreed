@@ -107,7 +107,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbSound entry)
         {
-            return context.Items.IndexOf((XmlDbSound)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IDbSound newEntry)

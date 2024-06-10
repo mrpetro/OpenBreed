@@ -22,14 +22,14 @@ namespace OpenBreed.Database.Xml.Items.Maps
 
         [XmlArray("PaletteRefs"),
         XmlArrayItem("PaletteRef", typeof(string))]
-        public List<string> PaletteRefs { get; } = new List<string>();
+        public List<string> PaletteRefs { get; init; } = new List<string>();
 
         [XmlElement("ActionSetRef")]
         public string ActionSetRef { get; set; }
 
         [XmlArray("SpriteSetRefs"),
         XmlArrayItem("SpriteSetRef", typeof(string))]
-        public List<string> SpriteSetRefs { get; } = new List<string>();
+        public List<string> SpriteSetRefs { get; init; } = new List<string>();
 
         [XmlElement("TileSetRef")]
         public string TileSetRef { get; set; }
@@ -37,12 +37,23 @@ namespace OpenBreed.Database.Xml.Items.Maps
         [XmlElement("ScriptRef")]
         public string ScriptRef { get; set; }
 
-        public override IDbEntry Copy()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Public Properties
 
+        #region Public Methods
+
+        public override IDbEntry Copy()
+        {
+            return new XmlDbMap
+            {
+                DataRef = this.DataRef,
+                PaletteRefs = this.PaletteRefs.ToList(),
+                ActionSetRef = this.ActionSetRef,
+                SpriteSetRefs = this.SpriteSetRefs.ToList(),
+                TileSetRef = this.TileSetRef,
+                ScriptRef = this.ScriptRef
+            };
+        }
+
+        #endregion Public Methods
     }
 }

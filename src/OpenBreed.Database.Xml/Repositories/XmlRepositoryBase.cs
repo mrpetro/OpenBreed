@@ -40,8 +40,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public void Update(T entry)
         {
             var index = GetIndexOf(entry);
+
             if (index < 0)
+            {
                 throw new InvalidOperationException($"{entry} not found in repository");
+            }
 
             ReplaceEntryWithIndex(index, entry);
         }

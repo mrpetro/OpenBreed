@@ -44,7 +44,14 @@ namespace OpenBreed.Database.Xml.Items.TileStamps
 
         public override IDbEntry Copy()
         {
-            throw new NotImplementedException();
+            return new XmlDbTileStamp
+            {
+                Width = this.Width,
+                Height = this.Height,
+                CenterX = this.CenterX,
+                CenterY = this.CenterY,
+                XmlCells = this.XmlCells.Select(item => item.Copy()).Cast<XmlDbTileStampCell>().ToList()
+            };
         }
 
         #endregion Public Methods
@@ -68,5 +75,20 @@ namespace OpenBreed.Database.Xml.Items.TileStamps
         public int TsTi { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public IDbTileStampCell Copy()
+        {
+            return new XmlDbTileStampCell
+            {
+                X = this.X,
+                Y = this.Y,
+                TsId = this.TsId,
+                TsTi = this.TsTi
+            };
+        }
+
+        #endregion Public Methods
     }
 }

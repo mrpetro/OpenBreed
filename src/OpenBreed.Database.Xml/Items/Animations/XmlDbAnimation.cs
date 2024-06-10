@@ -11,6 +11,7 @@ using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Animations;
 using System.Collections.ObjectModel;
 using OpenBreed.Database.Interface;
+using System.Drawing;
 
 namespace OpenBreed.Database.Xml.Items.Animations
 {
@@ -37,14 +38,21 @@ namespace OpenBreed.Database.Xml.Items.Animations
             }
         }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
         public override IDbEntry Copy()
         {
-            throw new NotImplementedException();
+            return new XmlDbAnimation
+            {
+                Length = this.Length,
+                XmlTracks = this.XmlTracks.Select(item => item.Copy()).Cast<XmlDbAnimationTrack>().ToList()
+            };
         }
 
-        #endregion Public Properties
+        #endregion Public Methods
     }
-
 
     [Serializable]
     public class XmlDbAnimationTrack<TValue> : XmlDbAnimationTrack, IDbAnimationTrack<TValue>
@@ -64,6 +72,10 @@ namespace OpenBreed.Database.Xml.Items.Animations
             }
         }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
         public void ClearFrames()
         {
             XmlFrames.Clear();
@@ -74,7 +86,17 @@ namespace OpenBreed.Database.Xml.Items.Animations
             XmlFrames.Add(new XmlDbAnimationFrame<TValue> { Value = value, Time = frameTime });
         }
 
-        #endregion Public Properties
+        public override IDbAnimationTrack Copy()
+        {
+            return new XmlDbAnimationTrack<TValue>
+            {
+                Interpolation = this.Interpolation,
+                Controller = this.Controller,
+                XmlFrames = this.XmlFrames.Select(item => item.Copy()).Cast<XmlDbAnimationFrame<TValue>>().ToList()
+            };
+        }
+
+        #endregion Public Methods
     }
 
     [Serializable]
@@ -88,11 +110,12 @@ namespace OpenBreed.Database.Xml.Items.Animations
         [XmlElement("Controller")]
         public string Controller { get; set; }
 
-        public IDbEntry Copy()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Public Properties
+
+        #region Public Methods
+
+        public abstract IDbAnimationTrack Copy();
+
+        #endregion Public Methods
     }
 }
