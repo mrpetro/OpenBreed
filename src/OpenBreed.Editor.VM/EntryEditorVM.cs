@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace OpenBreed.Editor.VM
 {
@@ -69,7 +70,7 @@ namespace OpenBreed.Editor.VM
 
         public override bool IsEdited(string repositoryName, string entryId)
         {
-            return repository.Name == repositoryName && Id == entryId;
+            return repository.Name == repositoryName && edited.Id == entryId;
         }
 
         public override void Commit()
@@ -134,41 +135,16 @@ namespace OpenBreed.Editor.VM
         protected virtual void UpdateEntry(E target)
         {
             SpecificsEditor.UpdateEntry(target);
-
-            target.Id = Id;
-            target.Description = Description;
         }
 
         protected virtual void UpdateVM(E source)
         {
-            Id = source.Id;
-            Description = source.Description;
-
-            SpecificsEditor = dbEntryEditorFactory.CreateSpecific(source);
-
             SpecificsEditor.UpdateVM(source);
         }
 
-        protected override void OnPropertyChanged(string name)
+        private void OnIdChanged(string newId)
         {
-            if (!propertyNamesIgnoredForChanges.Contains(name) && changesTrackingEnabled)
-            {
-                var canCommit = true;
-
-                switch (name)
-                {
-                    case nameof(Id):
-                        canCommit = IsIdUnique();
-                        break;
-
-                    default:
-                        break;
-                }
-
-                CommitEnabled = canCommit;
-            }
-
-            base.OnPropertyChanged(name);
+            CommitEnabled = IsIdUnique(newId);
         }
 
         protected virtual void DisableChangesTracking()
@@ -185,9 +161,9 @@ namespace OpenBreed.Editor.VM
 
         #region Private Methods
 
-        private bool IsIdUnique()
+        private bool IsIdUnique(string id)
         {
-            var foundEntry = repository.Find(Id);
+            var foundEntry = repository.Find(id);
 
             return foundEntry is null;
         }
@@ -196,9 +172,12 @@ namespace OpenBreed.Editor.VM
         {
             DisableChangesTracking();
 
-            edited = entry;
+            edited = (E)entry.Copy();
             next = repository.GetNextTo(edited);
             previous = repository.GetPreviousTo(edited);
+
+            SpecificsEditor = dbEntryEditorFactory.CreateSpecific(entry);
+            SpecificsEditor.IdChangedCallback = OnIdChanged;
 
             UpdateVM(entry);
 
@@ -216,7 +195,7 @@ namespace OpenBreed.Editor.VM
             if (edited == null)
                 Title = $"{EditorName} - no entry to edit";
             else
-                Title = $"{EditorName} - {Id}";
+                Title = $"{EditorName} - {edited.Id}";
 
             NextAvailable = next != null;
             PreviousAvailable = previous != null;
@@ -235,8 +214,6 @@ namespace OpenBreed.Editor.VM
         private bool _previousAvailable;
         private bool _revertEnabled;
         private string _title;
-        private string _id;
-        private string _description;
 
         private EntrySpecificEditorVM _specificsEditor;
 
@@ -296,18 +273,6 @@ namespace OpenBreed.Editor.VM
         {
             get { return _revertEnabled; }
             protected set { SetProperty(ref _revertEnabled, value); }
-        }
-
-        public string Id
-        {
-            get { return _id; }
-            set { SetProperty(ref _id, value); }
-        }
-
-        public string Description
-        {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
         }
 
         public string Title

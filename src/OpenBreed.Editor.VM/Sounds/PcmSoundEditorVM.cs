@@ -91,7 +91,7 @@ namespace OpenBreed.Editor.VM.Sounds
 
         public void Play()
         {
-            var soundModel = soundsDataProvider.GetSound(EditedEntry);
+            var soundModel = soundsDataProvider.GetSound(Entry);
 
             pcmPlayer.Play(
                 soundModel.Data,

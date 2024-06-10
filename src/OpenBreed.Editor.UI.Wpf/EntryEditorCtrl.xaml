@@ -36,13 +36,13 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="ID:" Width="90" />
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="4,4,4,4" Text="{Binding Id}" />
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="4,4,4,4" Text="{Binding SpecificsEditor.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6" Margin="4,4,4,4" Text="{Binding SpecificsEditor.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Grid.Row="0" Grid.Column="2" Margin="4,4,4,4" Content="Commit" Command="{Binding CommitCommand}" IsEnabled="{Binding CommitEnabled}"/>
                 <Button Grid.Row="0" Grid.Column="3" Margin="4,4,4,4" Content="Revert" Command="{Binding RevertCommand}" IsEnabled="{Binding RevertEnabled}"/>
                 <Button Grid.Row="0" Grid.Column="5" Margin="4,4,4,4" Content="&lt;" Command="{Binding EditPreviousCommand}" IsEnabled="{Binding PreviousAvailable}"/>
                 <Button Grid.Row="0" Grid.Column="6" Margin="4,4,4,4" Content="&gt;" Command="{Binding EditNextCommand}" IsEnabled="{Binding NextAvailable}"/>
                 <Label Grid.Row="1" Grid.Column="0" Content="Description:" />
-                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6" Margin="4,4,4,4" Text="{Binding Description}"/>
             </Grid>
         </GroupBox>
         <ContentControl Grid.Row="1" Content="{Binding SpecificsEditor}">

@@ -108,7 +108,7 @@ namespace OpenBreed.Editor.App
             builder.SetupXmlUnitOfWork((unitOfWork, sp) =>
             {
                 var database = sp.GetRequiredService<IDatabase>();
-                var context = sp.GetRequiredService<OpenBreedDbContext>();
+                //var context = sp.GetRequiredService<OpenBreedDbContext>();
 
                 //unitOfWork.RegisterRepository(new DataSourcesRepository(context, database.GetTable<XmlDbDataSourceTableDef>()));
                 //unitOfWork.RegisterRepository(new AssetsRepository(context, database.GetTable<XmlDbAssetTableDef>()));
