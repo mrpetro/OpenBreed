@@ -15,17 +15,34 @@ namespace OpenBreed.Database.Xml.Items.Palettes
     [Description("Palette from LBM"), Category("Appearance")]
     public class XmlDbPaletteFromLbm : XmlDbPalette, IDbPaletteFromLbm
     {
+        #region Public Constructors
+
+        public XmlDbPaletteFromLbm()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbPaletteFromLbm(XmlDbPaletteFromLbm other) : base(other)
+        {
+            DataRef = other.DataRef;
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Properties
+
         [XmlElement("DataRef")]
         public string DataRef { get; set; }
 
-        public override IDbEntry Copy()
-        {
-            return new XmlDbPaletteFromLbm()
-            {
-                Id = this.Id,
-                Description = this.Description,
-                DataRef = this.DataRef
-            };
-        }
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override IDbEntry Copy() => new XmlDbPaletteFromLbm(this);
+
+        #endregion Public Methods
     }
 }

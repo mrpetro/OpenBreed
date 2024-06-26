@@ -15,5 +15,11 @@ namespace OpenBreed.Database.Interface.Items.Actions
         bool Visibility { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        IDbActionPresentation Copy();
+
+        #endregion Public Methods
     }
 }

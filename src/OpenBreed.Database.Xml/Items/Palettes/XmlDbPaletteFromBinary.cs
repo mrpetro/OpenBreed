@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Palettes;
+using OpenBreed.Database.Xml.Items.Images;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,26 @@ namespace OpenBreed.Database.Xml.Items.Palettes
     [Description("Palette from binary"), Category("Appearance")]
     public class XmlDbPaletteFromBinary : XmlDbPalette, IDbPaletteFromBinary
     {
+        #region Public Constructors
+
+        public XmlDbPaletteFromBinary()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbPaletteFromBinary(XmlDbPaletteFromBinary other) : base(other)
+        {
+            DataRef = other.DataRef;
+            ColorsNo = other.ColorsNo;
+            DataStart = other.DataStart;
+            Mode = other.Mode;
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
 
         [XmlElement("DataRef")]
@@ -33,15 +54,7 @@ namespace OpenBreed.Database.Xml.Items.Palettes
 
         #region Public Methods
 
-        public override IDbEntry Copy()
-        {
-            return new XmlDbPaletteFromBinary()
-            {
-                Id = this.Id,
-                Description = this.Description,
-                DataRef = this.DataRef
-            };
-        }
+        public override IDbEntry Copy() => new XmlDbPaletteFromBinary(this);
 
         #endregion Public Methods
     }

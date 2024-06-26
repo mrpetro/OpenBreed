@@ -8,6 +8,10 @@ namespace OpenBreed.Database.Interface.Items.Scripts
 {
     public interface IDbScriptEmbedded : IDbScript
     {
+        #region Public Properties
+
         string Script { get; set; }
+
+        #endregion Public Properties
     }
 }

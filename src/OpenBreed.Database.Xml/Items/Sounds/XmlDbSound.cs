@@ -13,6 +13,26 @@ namespace OpenBreed.Database.Xml.Items.Sounds
     [Description("Sound"), Category("Appearance")]
     public class XmlDbSound : XmlDbEntry, IDbSound
     {
+        #region Public Constructors
+
+        public XmlDbSound()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbSound(XmlDbSound other) : base(other)
+        {
+            DataRef = other.DataRef;
+            SampleRate = other.SampleRate;
+            BitsPerSample = other.BitsPerSample;
+            Channels = other.Channels;
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
 
         [XmlElement("DataRef")]
@@ -27,17 +47,12 @@ namespace OpenBreed.Database.Xml.Items.Sounds
         [XmlElement("Channels")]
         public int Channels { get; set; }
 
-        public override IDbEntry Copy()
-        {
-            return new XmlDbSound
-            {
-                DataRef = this.DataRef,
-                SampleRate = this.SampleRate,
-                BitsPerSample = this.BitsPerSample,
-                Channels = this.Channels
-            };
-        }
-
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override IDbEntry Copy() => new XmlDbSound(this);
+
+        #endregion Public Methods
     }
 }

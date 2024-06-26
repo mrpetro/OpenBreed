@@ -11,6 +11,23 @@ namespace OpenBreed.Database.Xml.Items.DataSources
     [Description("File"), Category("Appearance")]
     public class XmlDbFileDataSource : XmlDbDataSource, IDbFileDataSource
     {
+        #region Public Constructors
+
+        public XmlDbFileDataSource()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbFileDataSource(XmlDbFileDataSource other) : base(other)
+        {
+            FilePath = other.FilePath;
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
 
         [XmlAttribute]
@@ -20,14 +37,7 @@ namespace OpenBreed.Database.Xml.Items.DataSources
 
         #region Public Methods
 
-        public override IDbEntry Copy()
-        {
-            return new XmlDbFileDataSource()
-            {
-                Id = this.Id,
-                FilePath = this.FilePath
-            };
-        }
+        public override IDbEntry Copy() => new XmlDbFileDataSource();
 
         #endregion Public Methods
     }

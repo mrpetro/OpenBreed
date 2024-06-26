@@ -10,12 +10,34 @@ namespace OpenBreed.Database.Xml.Items.Actions
     [Serializable]
     public class XmlDbAction : IDbAction
     {
+        #region Public Constructors
+
+        public XmlDbAction()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbAction(XmlDbAction other)
+        {
+            Id = other.Id;
+            Description = other.Description;
+            Name = other.Name;
+            XmlPresentation = (XmlDbActionPresentation)other.XmlPresentation?.Copy();
+            XmlTriggers = (XmlDbActionTriggers)other.XmlTriggers?.Copy();
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
 
         public string Description { get; set; }
 
         [XmlAttribute]
         public int Id { get; set; }
+
         [XmlAttribute]
         public string Name { get; set; }
 
@@ -55,5 +77,10 @@ namespace OpenBreed.Database.Xml.Items.Actions
 
         #endregion Public Properties
 
+        #region Public Methods
+
+        public IDbAction Copy() => new XmlDbAction(this);
+
+        #endregion Public Methods
     }
 }

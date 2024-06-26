@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Database.Xml.Items.Scripts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +17,26 @@ namespace OpenBreed.Database.Xml.Items.Sprites
     [Description("Sprite atlas from Image"), Category("Appearance")]
     public class XmlDbSpriteAtlasFromImage : XmlDbSpriteAtlas, IDbSpriteAtlasFromImage
     {
+        #region Public Constructors
+
+        public XmlDbSpriteAtlasFromImage()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbSpriteAtlasFromImage(XmlDbSpriteAtlasFromImage other) : base(other)
+        {
+            DataRef = other.DataRef;
+            XmlSprites = other.XmlSprites.Select(item => item.Copy()).Cast<XmlDbSpriteCoords>().ToList();
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Properties
+
         [XmlElement("DataRef")]
         public string DataRef { get; set; }
 
@@ -32,15 +53,11 @@ namespace OpenBreed.Database.Xml.Items.Sprites
             }
         }
 
-        public override IDbEntry Copy()
-        {
-            return new XmlDbSpriteAtlasFromImage()
-            {
-                Id = this.Id,
-                Description = this.Description,
-                DataRef = this.DataRef
-            };
-        }
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override IDbEntry Copy() => new XmlDbSpriteAtlasFromImage(this);
 
         public void ClearCoords()
         {
@@ -51,5 +68,7 @@ namespace OpenBreed.Database.Xml.Items.Sprites
         {
             XmlSprites.Add(new XmlDbSpriteCoords() { X = x, Y = y, Width = width, Height = height });
         }
+
+        #endregion Public Methods
     }
 }

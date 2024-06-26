@@ -9,6 +9,7 @@ using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Comparer;
+using OpenBreed.Database.Xml.Items.DataSources;
 
 namespace OpenBreed.Database.Xml.Items.Actions
 {
@@ -16,8 +17,30 @@ namespace OpenBreed.Database.Xml.Items.Actions
     [Description("Action set"), Category("Appearance")]
     public class XmlDbActionSet : XmlDbEntry, IDbActionSet, IEquatable<IDbActionSet>
     {
+        #region Private Fields
+
         private List<IDbAction> _actions = null;
+
         private List<XmlDbAction> _xmlActions = new List<XmlDbAction>();
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public XmlDbActionSet()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbActionSet(XmlDbActionSet other) : base(other)
+        {
+            XmlActions = other.XmlActions?.Select(item => item.Copy()).Cast<XmlDbAction>().ToList();
+        }
+
+        #endregion Protected Constructors
 
         #region Public Properties
 
@@ -58,13 +81,7 @@ namespace OpenBreed.Database.Xml.Items.Actions
 
         #region Public Methods
 
-        public override IDbEntry Copy()
-        {
-            return new XmlDbActionSet
-            {
-                XmlActions = this.XmlActions
-            };
-        }
+        public override IDbEntry Copy() => new XmlDbActionSet(this);
 
         public bool Equals(IDbActionSet other)
         {
@@ -87,6 +104,5 @@ namespace OpenBreed.Database.Xml.Items.Actions
         }
 
         #endregion Public Methods
-
     }
 }

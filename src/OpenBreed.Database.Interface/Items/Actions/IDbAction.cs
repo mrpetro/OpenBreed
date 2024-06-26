@@ -18,5 +18,11 @@ namespace OpenBreed.Database.Interface.Items.Actions
         IDbActionTriggers Triggers { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        IDbAction Copy();
+
+        #endregion Public Methods
     }
 }
