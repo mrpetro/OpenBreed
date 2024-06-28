@@ -23,3 +23,4 @@ namespace OpenBreed.Database.Interface.Items.Sprites
 
         #endregion Public Methods
     }
+}

@@ -8,6 +8,10 @@ namespace OpenBreed.Database.Interface.Items.Texts
 {
     public interface IDbTextEmbedded : IDbText
     {
+        #region Public Properties
+
         string Text { get; set; }
+
+        #endregion Public Properties
     }
 }

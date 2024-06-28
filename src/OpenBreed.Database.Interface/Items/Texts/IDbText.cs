@@ -9,10 +9,5 @@ namespace OpenBreed.Database.Interface.Items.Texts
 {
     public interface IDbText : IDbEntry
     {
-        #region Public Properties
-
-        string DataRef { get; set; }
-
-        #endregion Public Properties
     }
 }

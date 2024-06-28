@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Database.Xml.Items.Sprites;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,23 @@ namespace OpenBreed.Database.Xml.Items.Texts
     [Description("Text embedded"), Category("Appearance")]
     public class XmlDbTextEmbedded : XmlDbText, IDbTextEmbedded
     {
+        #region Public Constructors
+
+        public XmlDbTextEmbedded()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbTextEmbedded(XmlDbTextEmbedded other) : base(other)
+        {
+            Text = other.Text;
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
 
         [XmlElement("Text")]
@@ -24,16 +42,7 @@ namespace OpenBreed.Database.Xml.Items.Texts
 
         #region Public Methods
 
-        public override IDbEntry Copy()
-        {
-            return new XmlDbTextEmbedded()
-            {
-                Id = this.Id,
-                Description = this.Description,
-                DataRef = this.DataRef,
-                Text = this.Text
-            };
-        }
+        public override IDbEntry Copy() => new XmlDbTextEmbedded(this);
 
         #endregion Public Methods
     }
