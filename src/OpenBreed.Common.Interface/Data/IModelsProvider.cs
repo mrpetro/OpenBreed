@@ -14,7 +14,7 @@ namespace OpenBreed.Common.Interface.Data
 
         TModel GetModel<TModel>(string id);
 
-        TModel GetModel<TDbEntry, TModel>(TDbEntry dbEntry) where TDbEntry : IDbEntry;
+        TModel GetModel<TDbEntry, TModel>(TDbEntry dbEntry, bool refresh = false) where TDbEntry : IDbEntry;
 
         #endregion Public Methods
     }

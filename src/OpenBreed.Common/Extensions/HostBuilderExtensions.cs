@@ -22,6 +22,8 @@ namespace OpenBreed.Common.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IAssetDataHandler, PcmSoundDataHandler>();
+                services.AddSingleton<IAssetDataHandler, IffImageDataHandler>();
+                services.AddSingleton<IAssetDataHandler, AcbmImageDataHandler>();
             });
         }
 

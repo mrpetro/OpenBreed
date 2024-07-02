@@ -57,12 +57,21 @@ namespace OpenBreed.Common.Data
             return false;
         }
 
-        public TModel GetModel<TDbEntry, TModel>(TDbEntry dbEntry) where TDbEntry : IDbEntry
+
+
+        public TModel GetModel<TDbEntry, TModel>(TDbEntry dbEntry, bool refresh = false) where TDbEntry : IDbEntry
         {
             object data;
 
+            if (refresh)
+            {
+                loadedModels.Remove(dbEntry.Id);
+            }
+
             if (loadedModels.TryGetValue(dbEntry.Id, out data))
+            {
                 return (TModel)data;
+            }
 
             data = assets.LoadModel<TDbEntry>(dbEntry);
 

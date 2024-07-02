@@ -28,9 +28,9 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
-        public SoundModel GetSound(IDbSound dbSound)
+        public SoundModel GetSound(IDbSound dbSound, bool refresh = false)
         {
-            return dataProvider.GetModel<IDbSound, SoundModel>(dbSound);
+            return dataProvider.GetModel<IDbSound, SoundModel>(dbSound, refresh);
         }
 
         #endregion Public Methods

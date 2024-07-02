@@ -548,534 +548,8 @@
         <Asset Id="Assets.MAP.55" DataSourceRef="Vanilla/EPF/MAP.55" FormatType="ABTA_MAP">
           <Parameters />
         </Asset>
-        <Asset Id="Assets.ALIEN1" DataSourceRef="Vanilla/EPF/ALIEN1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.ALIEN2" DataSourceRef="Vanilla/EPF/ALIEN2" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.ALIEN3" DataSourceRef="Vanilla/EPF/ALIEN3" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.ALIEN4" DataSourceRef="Vanilla/EPF/ALIEN4" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.AMMO" DataSourceRef="Vanilla/EPF/AMMO" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.BACKING1" DataSourceRef="Vanilla/EPF/BACKING1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.BACKING2" DataSourceRef="Vanilla/EPF/BACKING2" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.BACKING3" DataSourceRef="Vanilla/EPF/BACKING3" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.BACKING4" DataSourceRef="Vanilla/EPF/BACKING4" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.CACOON1" DataSourceRef="Vanilla/EPF/CACOON1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.COMPUTER" DataSourceRef="Vanilla/EPF/COMPUTER" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.COUNTDWN" DataSourceRef="Vanilla/EPF/COUNTDWN">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.CREDITS" DataSourceRef="Vanilla/EPF/CREDITS" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.CURSOR" DataSourceRef="Vanilla/EPF/CURSOR" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.DIE" DataSourceRef="Vanilla/EPF/DIE" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.DOOR1" DataSourceRef="Vanilla/EPF/DOOR1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.EAT1" DataSourceRef="Vanilla/EPF/EAT1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.EXPLOS" DataSourceRef="Vanilla/EPF/EXPLOS" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.FLAMEOFF" DataSourceRef="Vanilla/EPF/FLAMEOFF" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.FLAMEON" DataSourceRef="Vanilla/EPF/FLAMEON" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.GENERATE" DataSourceRef="Vanilla/EPF/GENERATE" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.GRENADE" DataSourceRef="Vanilla/EPF/GRENADE" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.GRUNT1" DataSourceRef="Vanilla/EPF/GRUNT1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.HATCH1" DataSourceRef="Vanilla/EPF/HATCH1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.HEALTH" DataSourceRef="Vanilla/EPF/HEALTH" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.KEYS" DataSourceRef="Vanilla/EPF/KEYS" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.LAZER1" DataSourceRef="Vanilla/EPF/LAZER1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.LAZER2" DataSourceRef="Vanilla/EPF/LAZER2" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.LAZER3" DataSourceRef="Vanilla/EPF/LAZER3" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.LAZER4" DataSourceRef="Vanilla/EPF/LAZER4" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.LIZARD" DataSourceRef="Vanilla/EPF/LIZARD" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.MGUN" DataSourceRef="Vanilla/EPF/MGUN" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.MINETICK" DataSourceRef="Vanilla/EPF/MINETICK" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.MISSILE" DataSourceRef="Vanilla/EPF/MISSILE" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.NULLSAMP" DataSourceRef="Vanilla/EPF/NULLSAMP" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.ONEWAY" DataSourceRef="Vanilla/EPF/ONEWAY" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.OUTAMMO" DataSourceRef="Vanilla/EPF/OUTAMMO" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SELECT" DataSourceRef="Vanilla/EPF/SELECT" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SIREN" DataSourceRef="Vanilla/EPF/SIREN" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH01" DataSourceRef="Vanilla/EPF/SPEECH01" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH02" DataSourceRef="Vanilla/EPF/SPEECH02" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH03" DataSourceRef="Vanilla/EPF/SPEECH03" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH04" DataSourceRef="Vanilla/EPF/SPEECH04" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH05" DataSourceRef="Vanilla/EPF/SPEECH05" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH06" DataSourceRef="Vanilla/EPF/SPEECH06" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH07" DataSourceRef="Vanilla/EPF/SPEECH07" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH08" DataSourceRef="Vanilla/EPF/SPEECH08" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH09" DataSourceRef="Vanilla/EPF/SPEECH09" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH10" DataSourceRef="Vanilla/EPF/SPEECH10" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH11" DataSourceRef="Vanilla/EPF/SPEECH11" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH12" DataSourceRef="Vanilla/EPF/SPEECH12" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH13" DataSourceRef="Vanilla/EPF/SPEECH13" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH14" DataSourceRef="Vanilla/EPF/SPEECH14" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH15" DataSourceRef="Vanilla/EPF/SPEECH15" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH16" DataSourceRef="Vanilla/EPF/SPEECH16" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH17" DataSourceRef="Vanilla/EPF/SPEECH17" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH18" DataSourceRef="Vanilla/EPF/SPEECH18" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH19" DataSourceRef="Vanilla/EPF/SPEECH19" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH20" DataSourceRef="Vanilla/EPF/SPEECH20" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH21" DataSourceRef="Vanilla/EPF/SPEECH21" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH22" DataSourceRef="Vanilla/EPF/SPEECH22" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH23" DataSourceRef="Vanilla/EPF/SPEECH23" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH24" DataSourceRef="Vanilla/EPF/SPEECH24" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH25" DataSourceRef="Vanilla/EPF/SPEECH25" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH26" DataSourceRef="Vanilla/EPF/SPEECH26" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPEECH27" DataSourceRef="Vanilla/EPF/SPEECH27" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SPLAT1" DataSourceRef="Vanilla/EPF/SPLAT1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.SWITCH" DataSourceRef="Vanilla/EPF/SWITCH" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.TELE" DataSourceRef="Vanilla/EPF/TELE" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.TURRET1" DataSourceRef="Vanilla/EPF/TURRET1" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.TURRET2" DataSourceRef="Vanilla/EPF/TURRET2" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.XTRALIFE" DataSourceRef="Vanilla/EPF/XTRALIFE" FormatType="PCM_SOUND">
-          <Parameters>
-            <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
-            <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
-            <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.EPSLOGO1.LBM" DataSourceRef="Vanilla/EPF/EPSLOGO1.LBM" FormatType="IFF_IMAGE">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.EPSLOGO2.LBM" DataSourceRef="Vanilla/EPF/EPSLOGO2.LBM" FormatType="IFF_IMAGE">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.OUTRO.LBM" DataSourceRef="Vanilla/EPF/OUTRO.LBM" FormatType="IFF_IMAGE">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.T17LOGO.LBM" DataSourceRef="Vanilla/EPF/T17LOGO.LBM" FormatType="IFF_IMAGE">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.COMPUTER.LBM" DataSourceRef="Vanilla/EPF/COMPUTER.LBM" FormatType="IFF_IMAGE">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.IPC.LBM" DataSourceRef="Vanilla/EPF/IPC.LBM" FormatType="IFF_IMAGE">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SMARTPIC.LBM" DataSourceRef="Vanilla/EPF/SMARTPIC.LBM" FormatType="IFF_IMAGE">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.TITLEBAC.LBM" DataSourceRef="Vanilla/EPF/TITLEBAC.LBM" FormatType="IFF_IMAGE">
-          <Parameters />
-        </Asset>
+
+
         <Asset Id="Assets.TITLE.AMF" DataSourceRef="Vanilla/EPF/TITLE.AMF" FormatType="AMF_MUSIC">
           <Parameters />
         </Asset>
@@ -1179,30 +653,30 @@
     </Assets>
     <Images>
       <Items>
-        <Image Description="East Point Software logo 1 image" Id="Vanilla/Title/EPS1/Logo">
-          <DataRef>Assets.EPSLOGO1.LBM</DataRef>
-        </Image>
-        <Image Description="East Point Software logo 2 image" Id="Vanilla/Title/EPS2/Logo">
-          <DataRef>Assets.EPSLOGO2.LBM</DataRef>
-        </Image>
-        <Image Description="Team 17 logo image" Id="Vanilla/Title/Teams17/Logo">
-          <DataRef>Assets.T17LOGO.LBM</DataRef>
-        </Image>
-        <Image Description="Title screen background image" Id="Vanilla/Title/Menu/Background">
-          <DataRef>Assets.TITLEBAC.LBM</DataRef>
-        </Image>
-        <Image Description="Outro image" Id="Vanilla/Common/OutroScreen/Background">
-          <DataRef>Assets.OUTRO.LBM</DataRef>
-        </Image>
-        <Image Description="Intex network computer screen image" Id="Vanilla/Common/IntexNetworkScreen/Background">
-          <DataRef>Assets.COMPUTER.LBM</DataRef>
-        </Image>
-        <Image Description="IPC message screen image" Id="Vanilla/Common/MissionScreen/Background">
-          <DataRef>Assets.IPC.LBM</DataRef>
-        </Image>
-        <Image Description="Smart card message screen image" Id="Vanilla/Common/SmartCardScreen/Background">
-          <DataRef>Assets.SMARTPIC.LBM</DataRef>
-        </Image>
+        <IffImage Description="East Point Software logo 1 image" Id="Vanilla/Title/EPS1/Logo">
+          <DataRef>Vanilla/EPF/EPSLOGO1.LBM</DataRef>
+        </IffImage>
+        <IffImage Description="East Point Software logo 2 image" Id="Vanilla/Title/EPS2/Logo">
+          <DataRef>Vanilla/EPF/EPSLOGO2.LBM</DataRef>
+        </IffImage>
+        <IffImage Description="Team 17 logo image" Id="Vanilla/Title/Teams17/Logo">
+          <DataRef>Vanilla/EPF/T17LOGO.LBM</DataRef>
+        </IffImage>
+        <IffImage Description="Title screen background image" Id="Vanilla/Title/Menu/Background">
+          <DataRef>Vanilla/EPF/TITLEBAC.LBM</DataRef>
+        </IffImage>
+        <IffImage Description="Outro image" Id="Vanilla/Common/OutroScreen/Background">
+          <DataRef>Vanilla/EPF/OUTRO.LBM</DataRef>
+        </IffImage>
+        <IffImage Description="Intex network computer screen image" Id="Vanilla/Common/IntexNetworkScreen/Background">
+          <DataRef>Vanilla/EPF/COMPUTER.LBM</DataRef>
+        </IffImage>
+        <IffImage Description="IPC message screen image" Id="Vanilla/Common/MissionScreen/Background">
+          <DataRef>AVanilla/EPF/IPC.LBM</DataRef>
+        </IffImage>
+        <IffImage Description="Smart card message screen image" Id="Vanilla/Common/SmartCardScreen/Background">
+          <DataRef>Vanilla/EPF/SMARTPIC.LBM</DataRef>
+        </IffImage>
       </Items>
     </Images>
     <Songs>
@@ -1215,226 +689,448 @@
     <Sounds>
       <Items>
         <Sound Id="Sounds.ALIEN1">
-          <DataRef>Assets.ALIEN1</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.ALIEN2">
-          <DataRef>Assets.ALIEN2</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN2</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.ALIEN3">
-          <DataRef>Assets.ALIEN3</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN3</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.ALIEN4">
-          <DataRef>Assets.ALIEN4</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN4</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Ammo/Picked">
-          <DataRef>Assets.AMMO</DataRef>
+          <DataRef>Vanilla/EPF/AMMO</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.BACKING1">
-          <DataRef>Assets.BACKING1</DataRef>
+          <DataRef>Vanilla/EPF/BACKING1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.BACKING2">
-          <DataRef>Assets.BACKING2</DataRef>
+          <DataRef>Vanilla/EPF/BACKING2</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.BACKING3">
-          <DataRef>Assets.BACKING3</DataRef>
+          <DataRef>Vanilla/EPF/BACKING3</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.BACKING4">
-          <DataRef>Assets.BACKING4</DataRef>
+          <DataRef>Vanilla/EPF/BACKING4</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.CACOON1">
-          <DataRef>Assets.CACOON1</DataRef>
+          <DataRef>Vanilla/EPF/CACOON1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.COMPUTER">
-          <DataRef>Assets.COMPUTER</DataRef>
+          <DataRef>Vanilla/EPF/COMPUTER</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.COUNTDWN">
-          <DataRef>Assets.COUNTDWN</DataRef>
+          <DataRef>Vanilla/EPF/COUNTDWN</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/CreditsSmall/Picked">
-          <DataRef>Assets.CREDITS</DataRef>
+          <DataRef>Vanilla/EPF/CREDITS</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/CreditsBig/Picked">
-          <DataRef>Assets.CREDITS</DataRef>
+          <DataRef>Vanilla/EPF/CREDITS</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.CURSOR">
-          <DataRef>Assets.CURSOR</DataRef>
+          <DataRef>Vanilla/EPF/CURSOR</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Hero/Dying">
-          <DataRef>Assets.DIE</DataRef>
+          <DataRef>Vanilla/EPF/DIE</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Door/Opening">
-          <DataRef>Assets.DOOR1</DataRef>
+          <DataRef>Vanilla/EPF/DOOR1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.EAT1">
-          <DataRef>Assets.EAT1</DataRef>
+          <DataRef>Vanilla/EPF/EAT1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/LandMine/Explosion">
-          <DataRef>Assets.EXPLOS</DataRef>
+          <DataRef>Vanilla/EPF/EXPLOS</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.FLAMEOFF">
-          <DataRef>Assets.FLAMEOFF</DataRef>
+          <DataRef>Vanilla/EPF/FLAMEOFF</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.FLAMEON">
-          <DataRef>Assets.FLAMEON</DataRef>
+          <DataRef>Vanilla/EPF/FLAMEON</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.GENERATE">
-          <DataRef>Assets.GENERATE</DataRef>
+          <DataRef>Vanilla/EPF/GENERATE</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.GRENADE">
-          <DataRef>Assets.GRENADE</DataRef>
+          <DataRef>Vanilla/EPF/GRENADE</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.GRUNT1">
-          <DataRef>Assets.GRUNT1</DataRef>
+          <DataRef>Vanilla/EPF/GRUNT1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.HATCH1">
-          <DataRef>Assets.HATCH1</DataRef>
+          <DataRef>Vanilla/EPF/HATCH1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/MedkitSmall/Picked">
-          <DataRef>Assets.HEALTH</DataRef>
+          <DataRef>Vanilla/EPF/HEALTH</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/MedkitBig/Picked">
-          <DataRef>Assets.HEALTH</DataRef>
+          <DataRef>Vanilla/EPF/HEALTH</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Keycard/Picked">
-          <DataRef>Assets.KEYS</DataRef>
+          <DataRef>Vanilla/EPF/KEYS</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.LAZER1">
-          <DataRef>Assets.LAZER1</DataRef>
+          <DataRef>Vanilla/EPF/LAZER1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.LAZER2">
-          <DataRef>Assets.LAZER2</DataRef>
+          <DataRef>Vanilla/EPF/LAZER2</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.LAZER3">
-          <DataRef>Assets.LAZER3</DataRef>
+          <DataRef>Vanilla/EPF/LAZER3</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.LAZER4">
-          <DataRef>Assets.LAZER4</DataRef>
+          <DataRef>Vanilla/EPF/LAZER4</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.LIZARD">
-          <DataRef>Assets.LIZARD</DataRef>
+          <DataRef>Vanilla/EPF/LIZARD</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.MGUN">
-          <DataRef>Assets.MGUN</DataRef>
+          <DataRef>Vanilla/EPF/MGUN</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.MINETICK">
-          <DataRef>Assets.MINETICK</DataRef>
+          <DataRef>Vanilla/EPF/MINETICK</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.MISSILE">
-          <DataRef>Assets.MISSILE</DataRef>
+          <DataRef>Vanilla/EPF/MISSILE</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.NULLSAMP">
-          <DataRef>Assets.NULLSAMP</DataRef>
+          <DataRef>Vanilla/EPF/NULLSAMP</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.ONEWAY">
-          <DataRef>Assets.ONEWAY</DataRef>
+          <DataRef>Vanilla/EPF/ONEWAY</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.OUTAMMO">
-          <DataRef>Assets.OUTAMMO</DataRef>
+          <DataRef>Vanilla/EPF/OUTAMMO</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.SELECT">
-          <DataRef>Assets.SELECT</DataRef>
+          <DataRef>Vanilla/EPF/SELECT</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.SIREN">
-          <DataRef>Assets.SIREN</DataRef>
+          <DataRef>Vanilla/EPF/SIREN</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Nash">
-          <DataRef>Assets.SPEECH01</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH01</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/John">
-          <DataRef>Assets.SPEECH02</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH02</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/IsDead">
-          <DataRef>Assets.SPEECH03</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH03</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/YoureOnYourOwn">
-          <DataRef>Assets.SPEECH04</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH04</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/AssaultFailed">
-          <DataRef>Assets.SPEECH05</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH05</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/MissionComplete">
-          <DataRef>Assets.SPEECH06</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH06</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Hurry">
-          <DataRef>Assets.SPEECH07</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH07</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/AlarmSystemsEnabled">
-          <DataRef>Assets.SPEECH08</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH08</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/LocateExit">
-          <DataRef>Assets.SPEECH09</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH09</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/DestructionImmanent">
-          <DataRef>Assets.SPEECH10</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH10</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Warning">
-          <DataRef>Assets.SPEECH11</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH11</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/LazersOperational">
-          <DataRef>Assets.SPEECH12</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH12</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/ScanDetectsLargeAlien">
-          <DataRef>Assets.SPEECH13</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH13</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/PowerOut">
-          <DataRef>Assets.SPEECH14</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH14</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/TorchActivated">
-          <DataRef>Assets.SPEECH15</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH15</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/MinefieldDirectlyAhead">
-          <DataRef>Assets.SPEECH16</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH16</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/EnergyLow">
-          <DataRef>Assets.SPEECH17</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH17</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/IntexNetwork">
-          <DataRef>Assets.SPEECH18</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH18</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Online">
-          <DataRef>Assets.SPEECH19</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH19</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/LoggingOff">
-          <DataRef>Assets.SPEECH20</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH20</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/SmartCardMessageFollows">
-          <DataRef>Assets.SPEECH21</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH21</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/LinkCorridor">
-          <DataRef>Assets.SPEECH22</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH22</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/SurvivorRescued">
-          <DataRef>Assets.SPEECH23</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH23</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/YouveFoundTheSecretLevel">
-          <DataRef>Assets.SPEECH24</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH24</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Entering">
-          <DataRef>Assets.SPEECH25</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH25</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/MainTower">
-          <DataRef>Assets.SPEECH26</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH26</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Speech/AreaScan">
-          <DataRef>Assets.SPEECH27</DataRef>
+          <DataRef>Vanilla/EPF/SPEECH27</DataRef>
+		  <SampleRate>9600</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.SPLAT1">
-          <DataRef>Assets.SPLAT1</DataRef>
+          <DataRef>Vanilla/EPF/SPLAT1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.SWITCH">
-          <DataRef>Assets.SWITCH</DataRef>
+          <DataRef>Vanilla/EPF/SWITCH</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Sounds.TELE">
-          <DataRef>Assets.TELE</DataRef>
+          <DataRef>Vanilla/EPF/TELE</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Turret/Fire">
-          <DataRef>Assets.TURRET1</DataRef>
+          <DataRef>Vanilla/EPF/TURRET1</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/Turret/Turn">
-          <DataRef>Assets.TURRET2</DataRef>
+          <DataRef>Vanilla/EPF/TURRET2</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
         <Sound Id="Vanilla/Common/ExtraLife/Picked">
-          <DataRef>Assets.XTRALIFE</DataRef>
+          <DataRef>Vanilla/EPF/XTRALIFE</DataRef>
+		  <SampleRate>11025</SampleRate>
+		  <BitsPerSample>8</BitsPerSample>
+		  <Channels>1</Channels> 
         </Sound>
       </Items>
     </Sounds>

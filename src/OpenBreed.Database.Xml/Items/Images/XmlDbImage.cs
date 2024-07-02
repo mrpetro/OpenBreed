@@ -15,37 +15,18 @@ using System.Threading.Channels;
 namespace OpenBreed.Database.Xml.Items.Images
 {
     [Serializable]
-    [Description("Image"), Category("Appearance")]
-    public class XmlDbImage : XmlDbEntry, IDbImage
+    public abstract class XmlDbImage : XmlDbEntry, IDbImage
     {
-        #region Public Constructors
+        #region Protected Constructors
 
-        public XmlDbImage()
+        protected XmlDbImage()
         {
         }
-
-        #endregion Public Constructors
-
-        #region Protected Constructors
 
         protected XmlDbImage(XmlDbImage other) : base(other)
         {
-            DataRef = other.DataRef;
         }
 
         #endregion Protected Constructors
-
-        #region Public Properties
-
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public override IDbEntry Copy() => new XmlDbImage(this);
-
-        #endregion Public Methods
     }
 }
