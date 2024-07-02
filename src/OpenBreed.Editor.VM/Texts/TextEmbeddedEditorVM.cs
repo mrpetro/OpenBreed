@@ -56,7 +56,6 @@ namespace OpenBreed.Editor.VM.Texts
         {
             var model = textsDataProvider.GetText(entry.Id);
             model.Text = Text;
-            entry.DataRef = DataRef;
         }
 
         protected override void UpdateVM(IDbTextEmbedded entry)
@@ -64,9 +63,9 @@ namespace OpenBreed.Editor.VM.Texts
             var model = textsDataProvider.GetText(entry.Id);
 
             if (model != null)
+            {
                 Text = model.Text;
-
-            DataRef = entry.DataRef;
+            }
         }
 
         #endregion Protected Methods

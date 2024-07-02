@@ -156,6 +156,8 @@ namespace OpenBreed.Editor.VM
 
         public override void UpdateVM(IDbEntry source)
         {
+            base.UpdateVM(source);
+
             try
             {
                 Id = source.Id;

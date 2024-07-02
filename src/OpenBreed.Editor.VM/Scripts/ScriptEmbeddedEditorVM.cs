@@ -39,12 +39,6 @@ namespace OpenBreed.Editor.VM.Scripts
             set { SetProperty(ref script, value); }
         }
 
-        public string DataRef
-        {
-            get { return dataRef; }
-            set { SetProperty(ref dataRef, value); }
-        }
-
         public override string EditorName => "Embedded Script Editor";
 
         #endregion Public Properties
@@ -53,7 +47,7 @@ namespace OpenBreed.Editor.VM.Scripts
 
         protected override void UpdateEntry(IDbScriptEmbedded entry)
         {
-            entry.DataRef = DataRef;
+            entry.Script = Script;
         }
 
         protected override void UpdateVM(IDbScriptEmbedded entry)
@@ -62,8 +56,6 @@ namespace OpenBreed.Editor.VM.Scripts
 
             if (model != null)
                 Script = model.Script;
-
-            DataRef = entry.DataRef;
         }
 
         #endregion Protected Methods

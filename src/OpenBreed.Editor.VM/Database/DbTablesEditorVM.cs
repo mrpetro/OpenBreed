@@ -80,13 +80,6 @@ namespace OpenBreed.Editor.VM.Database
 
         protected override void OnPropertyChanged(string name)
         {
-            switch (name)
-            {
-                //case nameof(IsVisible):
-
-                //    break;
-            }
-
             base.OnPropertyChanged(name);
         }
 

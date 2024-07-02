@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace OpenBreed.Editor.VM.Base
@@ -21,11 +23,28 @@ namespace OpenBreed.Editor.VM.Base
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
 
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
+        protected bool SetProperty<TValue>(ref TValue storage, TValue value, [CallerMemberName] string propertyName = "")
         {
-            if (EqualityComparer<T>.Default.Equals(storage, value))
+            if (EqualityComparer<TValue>.Default.Equals(storage, value))
                 return false;
             storage = value;
+            this.OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        protected bool SetProperty<TTarget,TValue>(TTarget target, Expression<Func<TTarget, TValue>> properyExpression, TValue value, [CallerMemberName] string propertyName = "")
+        {
+            var expr = (MemberExpression)properyExpression.Body;
+            var prop = (PropertyInfo)expr.Member;
+            var newValue = (TValue)prop.GetValue(target);
+
+            if (EqualityComparer<TValue>.Default.Equals(newValue, value))
+            {
+                return false;
+            }
+
+            prop.SetValue(target, value);
+
             this.OnPropertyChanged(propertyName);
             return true;
         }

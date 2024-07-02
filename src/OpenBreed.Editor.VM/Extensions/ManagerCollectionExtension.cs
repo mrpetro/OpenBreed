@@ -84,7 +84,8 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<PaletteFromMapEditorVM>();
                 services.AddTransient<PaletteFromLbmEditorVM>();
                 services.AddTransient<PaletteFromBinaryEditorVM>();
-                services.AddTransient<ImageFromFileEditorVM>();
+                services.AddTransient<ImageFromAcbmEditorVM>();
+                services.AddTransient<ImageFromIffEditorVM>();
                 services.AddTransient<ScriptEmbeddedEditorVM>();
                 services.AddTransient<ScriptFromFileEditorVM>();
                 services.AddTransient<TextEmbeddedEditorVM>();
@@ -126,7 +127,8 @@ namespace OpenBreed.Editor.VM.Extensions
                     entryEditorFactory.Register<IDbPaletteFromLbm, PaletteFromLbmEditorVM>();
                     entryEditorFactory.Register<IDbPaletteFromBinary, PaletteFromBinaryEditorVM>();
                     entryEditorFactory.Register<IDbTileAtlasFromBlk, TileSetFromBlkEditorVM>();
-                    entryEditorFactory.Register<IDbImage, ImageFromFileEditorVM>();
+                    entryEditorFactory.Register<IDbIffImage, ImageFromIffEditorVM>();
+                    entryEditorFactory.Register<IDbAcbmImage, ImageFromAcbmEditorVM>();
                     entryEditorFactory.Register<IDbActionSet, ActionSetEmbeddedEditorVM>();
                     entryEditorFactory.Register<IDbSpriteAtlasFromImage, SpriteSetFromImageEditorVM>();
                     entryEditorFactory.Register<IDbSpriteAtlasFromSpr, SpriteSetFromSprEditorVM>();

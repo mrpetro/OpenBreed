@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace OpenBreed.Editor.UI.Wpf.Images
 {
     /// <summary>
-    /// Interaction logic for ImageFromFileEditorCtrl.xaml
+    /// Interaction logic for ImageFromAcbmEditorCtrl.xaml
     /// </summary>
-    public partial class ImageFromFileEditorCtrl : UserControl
+    public partial class ImageFromAcbmEditorCtrl : UserControl
     {
-        public ImageFromFileEditorCtrl()
+        public ImageFromAcbmEditorCtrl()
         {
             InitializeComponent();
         }

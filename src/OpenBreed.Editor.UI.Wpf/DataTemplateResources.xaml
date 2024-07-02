@@ -40,8 +40,11 @@
     <DataTemplate DataType="{x:Type vmSprites:SpriteSetFromSprEditorVM}" >
         <ctrlSprites:SpriteSetFromSprEditorCtrl />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vmImages:ImageFromFileEditorVM}" >
-        <ctrlImages:ImageFromFileEditorCtrl />
+    <DataTemplate DataType="{x:Type vmImages:ImageFromIffEditorVM}" >
+        <ctrlImages:ImageFromIffEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmImages:ImageFromAcbmEditorVM}" >
+        <ctrlImages:ImageFromAcbmEditorCtrl />
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmSounds:PcmSoundEditorVM}" >
         <ctrlSounds:SoundFromPcmEditorCtrl />

@@ -9,9 +9,6 @@ namespace OpenBreed.Editor.VM.Database.Entries
     {
         #region Private Fields
 
-        private string _assetId;
-
-
         private IDbImage _entry;
 
         #endregion Private Fields
@@ -26,13 +23,8 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #region Public Properties
 
-        public override IDbEntry Entry { get { return _entry; } }
-
-        public string AssetId
-        {
-            get { return _assetId; }
-            set { SetProperty(ref _assetId, value); }
-        }
+        public override IDbEntry Entry
+        { get { return _entry; } }
 
         #endregion Public Properties
 
@@ -41,7 +33,6 @@ namespace OpenBreed.Editor.VM.Database.Entries
         public override void Load(IDbEntry entry)
         {
             _entry = entry as IDbImage ?? throw new InvalidOperationException($"Expected {nameof(IDbImage)}");
-            AssetId = _entry.DataRef;
 
             base.Load(entry);
         }
