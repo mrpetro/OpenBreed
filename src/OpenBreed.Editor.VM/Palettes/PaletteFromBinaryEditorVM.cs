@@ -72,10 +72,12 @@ namespace OpenBreed.Editor.VM.Palettes
 
         protected override void UpdateVM(IDbPaletteFromBinary entry)
         {
-            var model = palettesDataProvider.GetPalette(entry.Id);
+            var model = palettesDataProvider.GetPalette(entry);
 
             if (model != null)
+            {
                 UpdateVMColors(model);
+            }
 
             dataRef = entry.DataRef;
             dataStart = entry.DataStart;
@@ -112,14 +114,12 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private void UpdatePalette()
         {
-            //var entry = repositoryProvider.GetRepository<IDbAsset>().GetById(DataRef) as IDbPaletteFromBinary;
-
-            //if (entry is null)
-            //     return;
-            var model = PalettesDataHelper.FromBinary(dataProvider, dataRef, DataStart, colorsNo, PaletteMode);
+            var model = palettesDataProvider.GetPalette(Entry);
 
             if (model != null)
+            {
                 UpdateVMColors(model);
+            }
         }
 
         #endregion Private Methods

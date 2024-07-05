@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.VM.Images
         {
             this.imagesDataProvider = imagesDataProvider;
             this.bitmapProvider = bitmapProvider;
-            ImageAssetRefIdEditor = new EntryRefIdEditorVM(
+            DataSourceRefIdEditor = new EntryRefIdEditorVM(
                 workspaceMan,
                 typeof(IDbDataSource),
                 (newRefId) => DataRef = newRefId);
@@ -47,7 +47,7 @@ namespace OpenBreed.Editor.VM.Images
 
         #region Public Properties
 
-        public EntryRefIdEditorVM ImageAssetRefIdEditor { get; }
+        public EntryRefIdEditorVM DataSourceRefIdEditor { get; }
 
         public string DataRef
         {
@@ -72,7 +72,7 @@ namespace OpenBreed.Editor.VM.Images
 
         protected override void UpdateVM(IDbIffImage entry)
         {
-            ImageAssetRefIdEditor.SelectedRefId = DataRef;
+            DataSourceRefIdEditor.SelectedRefId = DataRef;
 
             UpdateImage();
         }
@@ -97,7 +97,7 @@ namespace OpenBreed.Editor.VM.Images
             switch (name)
             {
                 case nameof(DataRef):
-                    ImageAssetRefIdEditor.CurrentRefId = (DataRef == null) ? null : DataRef;
+                    DataSourceRefIdEditor.CurrentRefId = (DataRef == null) ? null : DataRef;
                     UpdateImage();
                     break;
                 default:

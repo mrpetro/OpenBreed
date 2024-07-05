@@ -23,7 +23,7 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Protected Fields
 
         protected readonly PalettesDataProvider palettesDataProvider;
-        protected readonly IModelsProvider dataProvider;
+        protected readonly IModelsProvider modelsProvider;
 
         #endregion Protected Fields
 
@@ -43,7 +43,7 @@ namespace OpenBreed.Editor.VM.Palettes
             IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
         {
             this.palettesDataProvider = palettesDataProvider;
-            this.dataProvider = dataProvider;
+            this.modelsProvider = dataProvider;
             Colors = new ObservableCollection<ColorSelectionVM>();
 
             ColorEditor = new ColorEditorVM(Colors);
@@ -86,7 +86,7 @@ namespace OpenBreed.Editor.VM.Palettes
         {
             UpdateEntry((TDbPalette)target);
 
-            var model = palettesDataProvider.GetPalette(target.Id);
+            var model = palettesDataProvider.GetPalette(target);
 
             for (int i = 0; i < model.Length; i++)
                 model.Data[i] = Colors[i].Color;

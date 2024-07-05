@@ -5,6 +5,7 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface.Items.Assets;
+using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
@@ -36,9 +37,9 @@ namespace OpenBreed.Editor.VM.Images
         {
             this.imagesDataProvider = imagesDataProvider;
             this.bitmapProvider = bitmapProvider;
-            ImageAssetRefIdEditor = new EntryRefIdEditorVM(
+            DataSourceRefIdEditor = new EntryRefIdEditorVM(
                 workspaceMan,
-                typeof(IDbAsset),
+                typeof(IDbDataSource),
                 (newRefId) => DataRef = newRefId);
         }
 
@@ -46,7 +47,7 @@ namespace OpenBreed.Editor.VM.Images
 
         #region Public Properties
 
-        public EntryRefIdEditorVM ImageAssetRefIdEditor { get; }
+        public EntryRefIdEditorVM DataSourceRefIdEditor { get; }
 
         public int Width
         {
@@ -92,7 +93,7 @@ namespace OpenBreed.Editor.VM.Images
         protected override void UpdateVM(IDbAcbmImage entry)
         {
             DataRef = entry.DataRef;
-            ImageAssetRefIdEditor.SelectedRefId = DataRef;
+            DataSourceRefIdEditor.SelectedRefId = DataRef;
 
             UpdateImage();
         }
@@ -109,7 +110,7 @@ namespace OpenBreed.Editor.VM.Images
                     break;
 
                 case nameof(DataRef):
-                    ImageAssetRefIdEditor.CurrentRefId = (DataRef == null) ? null : DataRef;
+                    DataSourceRefIdEditor.CurrentRefId = (DataRef == null) ? null : DataRef;
                     UpdateImage();
                     break;
 

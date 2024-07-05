@@ -185,7 +185,12 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void Load(MapModel map)
         {
-            var missionBlock = map.Blocks.OfType<MapMissionBlock>().First(item => item.Name == "MISS");
+            var missionBlock = map.Blocks.OfType<MapMissionBlock>().FirstOrDefault(item => item.Name == "MISS");
+
+            if (missionBlock is null)
+            {
+                return;
+            }
 
             UNKN1 = missionBlock.UNKN1;
             UNKN2 = missionBlock.UNKN2;

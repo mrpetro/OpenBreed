@@ -75,17 +75,17 @@ namespace OpenBreed.Editor.VM.Palettes
 
         protected override void UpdateVM(IDbPaletteFromLbm entry)
         {
-            var model = palettesDataProvider.GetPalette(entry.Id);
+            var model = palettesDataProvider.GetPalette(entry);
 
             if (model != null)
                 UpdateVMColors(model);
 
-            DataRef = entry.DataRef;
+            DataRef = entry.ImageRef;
         }
 
         protected override void UpdateEntry(IDbPaletteFromLbm source)
         {
-            var image = dataProvider.GetModel<Image>(DataRef);
+            var image = modelsProvider.GetModel<Image>(DataRef);
 
             for (int i = 0; i < image.Palette.Entries.Length; i++)
             {
@@ -93,7 +93,7 @@ namespace OpenBreed.Editor.VM.Palettes
                 image.Palette.Entries[i] = Color.FromArgb(255, color.R, color.G, color.B);
             }
 
-            source.DataRef = DataRef;
+            source.ImageRef = DataRef;
         }
 
         private bool ValidateSettings()

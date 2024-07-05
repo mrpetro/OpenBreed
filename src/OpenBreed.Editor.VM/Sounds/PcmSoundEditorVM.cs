@@ -45,7 +45,7 @@ namespace OpenBreed.Editor.VM.Sounds
             DataSourceRefIdEditor = new EntryRefIdEditorVM(
                 workspaceMan,
                 typeof(IDbDataSource),
-                (newRefId) => DataSourceRefId = newRefId);
+                (newRefId) => DataRef = newRefId);
 
             PlayCommand = new Command(() => Play());
         }
@@ -78,7 +78,7 @@ namespace OpenBreed.Editor.VM.Sounds
             set { SetProperty(Entry, x => x.SampleRate, value); }
         }
 
-        public string DataSourceRefId
+        public string DataRef
         {
             get { return Entry.DataRef; }
             set { SetProperty(Entry, x => x.DataRef, value); }
@@ -111,8 +111,8 @@ namespace OpenBreed.Editor.VM.Sounds
                     UpdateSound();
                     break;
 
-                case nameof(DataSourceRefId):
-                    DataSourceRefIdEditor.CurrentRefId = (DataSourceRefId == null) ? null : DataSourceRefId;
+                case nameof(DataRef):
+                    DataSourceRefIdEditor.CurrentRefId = (DataRef == null) ? null : DataRef;
                     UpdateSound();
                     break;
 

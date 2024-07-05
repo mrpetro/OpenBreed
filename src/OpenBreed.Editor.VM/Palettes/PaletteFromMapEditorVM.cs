@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Common.Interface.Dialog;
 using Microsoft.Extensions.Logging;
+using OpenBreed.Database.Interface.Items.Maps;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
@@ -48,7 +49,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public override string EditorName => "MAP Palette Editor";
 
-        public string DataRef
+        public string MapRef
         {
             get { return dataRef; }
             set { SetProperty(ref dataRef, value); }
@@ -77,7 +78,7 @@ namespace OpenBreed.Editor.VM.Palettes
             switch (name)
             {
                 case nameof(BlockName):
-                case nameof(DataRef):
+                case nameof(MapRef):
                     EditEnabled = ValidateSettings();
                     break;
 
@@ -98,13 +99,17 @@ namespace OpenBreed.Editor.VM.Palettes
             {
                 BlockNames.Clear();
 
-                var map = dataProvider.GetModel<MapModel>(source.DataRef);
+                var map = modelsProvider.GetModelById<IDbMap, MapModel>(source.MapRef);
 
-                if (map == null)
+                if (map is null)
+                {
                     return;
+                }
 
                 foreach (var paletteBlock in map.Blocks.OfType<MapPaletteBlock>())
+                {
                     BlockNames.Add(paletteBlock.Name);
+                }
             });
         }
 
@@ -112,18 +117,18 @@ namespace OpenBreed.Editor.VM.Palettes
         {
             UpdatePaletteBlocksList(entry);
 
-            var model = palettesDataProvider.GetPalette(entry.Id);
+            var model = palettesDataProvider.GetPalette(entry);
 
             if (model != null)
                 UpdateVMColors(model);
 
-            DataRef = entry.DataRef;
+            MapRef = entry.MapRef;
             BlockName = entry.BlockName;
         }
 
         protected override void UpdateEntry(IDbPaletteFromMap source)
         {
-            var mapModel = dataProvider.GetModel<MapModel>(DataRef);
+            var mapModel = modelsProvider.GetModel<MapModel>(MapRef);
 
             var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == BlockName);
 
@@ -133,13 +138,13 @@ namespace OpenBreed.Editor.VM.Palettes
                 paletteBlock.Value[i] = new MapPaletteBlock.ColorData(color.R, color.G, color.B);
             }
 
-            source.DataRef = DataRef;
+            source.MapRef = MapRef;
             source.BlockName = BlockName;
         }
 
         private bool ValidateSettings()
         {
-            if (string.IsNullOrWhiteSpace(DataRef))
+            if (string.IsNullOrWhiteSpace(MapRef))
                 return false;
 
             if (string.IsNullOrWhiteSpace(BlockName))

@@ -143,12 +143,13 @@ namespace OpenBreed.Editor.VM.Maps
         {
             XBLK = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(XBLK)).Value;
             YBLK = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(YBLK)).Value;
-            XOFC = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(XOFC)).Value;
-            YOFC = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(YOFC)).Value;
-            XOFM = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(XOFM)).Value;
-            YOFM = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(YOFM)).Value;
-            XOFA = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(XOFA)).Value;
-            YOFA = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(YOFA)).Value;
+
+            //XOFC = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(XOFC)).Value;
+            //YOFC = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(YOFC)).Value;
+            //XOFM = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(XOFM)).Value;
+            //YOFM = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(YOFM)).Value;
+            //XOFA = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(XOFA)).Value;
+            //YOFA = (int)map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == nameof(YOFA)).Value;
         }
 
         #endregion Internal Methods

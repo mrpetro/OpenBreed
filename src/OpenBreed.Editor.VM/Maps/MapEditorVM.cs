@@ -213,7 +213,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             base.UpdateVM(entry);
 
-            Model = mapsDataProvider.GetMap(entry.Id);
+            Model = mapsDataProvider.GetMap(entry);
 
             if (Model is null)
             {
@@ -268,7 +268,10 @@ namespace OpenBreed.Editor.VM.Maps
 
             CurrentTilesBitmap = bitmapProvider.FromBytes(TileSet.TilesNoX * TileSet.TileSize, TileSet.TilesNoY * TileSet.TileSize, TileSet.Bitmap);
 
-            bitmapProvider.SetPaletteColors(CurrentTilesBitmap, Model.Palettes.First().Data);
+            if (Model.Palettes.Any())
+            {
+                bitmapProvider.SetPaletteColors(CurrentTilesBitmap, Model.Palettes.First().Data);
+            }
         }
 
         private void OnPalettesModelChange(string paletteRef)
