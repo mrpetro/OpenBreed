@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.DataSources;
+using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Model.Sounds;
 using System;
@@ -31,7 +32,7 @@ namespace OpenBreed.Common.Formats
 
         #region Public Methods
 
-        public void Save(IDbSound dbEntry, object model)
+        protected override void Save(IDbSound dbEntry, object model)
         {
             throw new NotImplementedException();
         }

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace OpenBreed.Database.Interface.Items.Palettes
 {
     /// <summary>
-    /// Palette entry interface where source palette comes from LMB image
+    /// Palette entry interface where source palette comes from image
     /// </summary>
     public interface IDbPaletteFromLbm : IDbPalette
     {
         #region Public Properties
 
-        string DataRef { get; set; }
+        string ImageRef { get; set; }
 
         #endregion Public Properties
     }

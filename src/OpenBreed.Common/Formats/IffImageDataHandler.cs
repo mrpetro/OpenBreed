@@ -38,16 +38,12 @@ namespace OpenBreed.Common.Formats
 
         #endregion Public Constructors
 
-        #region Public Methods
-
-        public void Save(IDbIffImage dbEntry, object model)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Public Methods
-
         #region Protected Methods
+
+        protected override void Save(IDbIffImage dbEntry, object model)
+        {
+            throw new NotImplementedException(nameof(Save));
+        }
 
         protected override object Load(IDbIffImage dbEntry)
         {

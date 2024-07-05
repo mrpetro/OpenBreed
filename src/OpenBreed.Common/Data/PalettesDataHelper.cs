@@ -13,31 +13,12 @@ using OpenBreed.Reader.Legacy.Palettes;
 using OpenBreed.Common.Interface.Data;
 using System.Drawing.Imaging;
 using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Model.Extensions;
 
 namespace OpenBreed.Common.Data
 {
     public class PalettesDataHelper
     {
-        public static PaletteModel Create(MapPaletteBlock paletteBlock)
-        {
-            var paletteBuilder = PaletteBuilder.NewPaletteModel();
-            paletteBuilder.SetName(paletteBlock.Name);
-            paletteBuilder.CreateColors();
-            for (int i = 0; i < paletteBlock.Value.Length; i++)
-            {
-                var colorData = paletteBlock.Value[i];
-                paletteBuilder.SetColor(i, MyColor.FromArgb(255, colorData.R, colorData.G, colorData.B));
-            }
-
-            //for (int i = 64; i < paletteBlock.Value.Length; i++)
-            //{
-            //    var colorData = paletteBlock.Value[i];
-            //    paletteBuilder.SetColor(i, Color.FromArgb(255, i, i, i));
-            //}
-
-            return paletteBuilder.Build();
-        }
-
         public static PaletteModel Create(IColorPalette palette)
         {
             var paletteBuilder = PaletteBuilder.NewPaletteModel();
@@ -54,7 +35,7 @@ namespace OpenBreed.Common.Data
 
         public static PaletteModel FromLbmImage(IModelsProvider dataProvider, IDbPaletteFromLbm entry)
         {
-            var image = dataProvider.GetModel<IImage>(entry.DataRef);
+            var image = dataProvider.GetModel<IImage>(entry.ImageRef);
 
             if (image is null)
                 return null;
@@ -62,55 +43,28 @@ namespace OpenBreed.Common.Data
             return Create(image.Palette);
         }
 
-        public static PaletteModel FromMapModel(IModelsProvider dataProvider, IDbPaletteFromMap entry)
+        public static PaletteModel FromMapModel(MapModel mapModel, IDbPaletteFromMap entry)
         {
-            var mapModel = dataProvider.GetModel<MapModel>(entry.DataRef);
-
-            if (mapModel == null)
-                return null;
-
             var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == entry.BlockName);
 
-            if (paletteBlock == null)
+            if (paletteBlock is null)
+            {
                 return null;
+            }
 
-            return Create(paletteBlock);
+            return paletteBlock.ToPaletteModel();
         }
 
-        public static PaletteModel FromBinary(IModelsProvider dataProvider, string dataRef, long dataStart, int colorsNo, PaletteMode paletteMode)
+        public static PaletteModel FromMapModel(IModelsProvider dataProvider, IDbPaletteFromMap entry)
         {
-            if (dataRef is null)
+            var mapModel = dataProvider.GetModel<MapModel>(entry.MapRef);
+
+            if (mapModel is null)
+            {
                 return null;
+            }
 
-            var binaryModel = dataProvider.GetModel<BinaryModel>(dataRef);
-
-            if (binaryModel is null)
-                return null;
-
-            //Remember to set source stream to begining
-            binaryModel.Stream.Seek(dataStart, SeekOrigin.Begin);
-
-            var paletteBuilder = PaletteBuilder.NewPaletteModel();
-            var paletteReader = new PaletteReader(paletteBuilder, ToPaletteMode(paletteMode), colorsNo);
-            return paletteReader.Read(binaryModel.Stream);
-        }
-
-        public static PaletteModel FromBinary(IModelsProvider dataProvider, IDbPaletteFromBinary entry)
-        {
-            if (entry.DataRef == null)
-                return null;
-
-            var binaryModel = dataProvider.GetModel<BinaryModel>(entry.DataRef);
-
-            if (binaryModel == null)
-                return null;
-
-            //Remember to set source stream to begining
-            binaryModel.Stream.Seek(entry.DataStart, SeekOrigin.Begin);
-
-            var paletteBuilder = PaletteBuilder.NewPaletteModel();
-            var paletteReader = new PaletteReader(paletteBuilder, ToPaletteMode(entry.Mode), entry.ColorsNo);
-            return paletteReader.Read(binaryModel.Stream);
+            return FromMapModel(mapModel, entry);
         }
 
         public static PaletteReader.PaletteMode ToPaletteMode(PaletteMode mode)

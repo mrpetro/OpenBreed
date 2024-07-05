@@ -27,7 +27,7 @@ namespace OpenBreed.Database.Xml.Items.Palettes
 
         protected XmlDbPaletteFromMap(XmlDbPaletteFromMap other) : base(other)
         {
-            DataRef = other.DataRef;
+            MapRef = other.MapRef;
             BlockName = other.BlockName;
         }
 
@@ -35,8 +35,8 @@ namespace OpenBreed.Database.Xml.Items.Palettes
 
         #region Public Properties
 
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
+        [XmlElement("MapRef")]
+        public string MapRef { get; set; }
 
         [XmlElement("BlockName")]
         public string BlockName { get; set; }

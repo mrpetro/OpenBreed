@@ -44,18 +44,6 @@ namespace OpenBreed.Common.Data
             }
         }
 
-        //public Image GetImage(string id)
-        //{
-        //    var entry = repositoryProvider.GetRepository<IDbImage>().GetById(id);
-        //    if (entry == null)
-        //        throw new Exception("Image error: " + id);
-
-        //    if (entry.DataRef == null)
-        //        return null;
-
-        //    return dataProvider.GetModel<Image>(entry.DataRef);
-        //}
-
         #endregion Public Methods
     }
 }

@@ -58,6 +58,21 @@ namespace OpenBreed.Common.Data
         }
 
 
+        public TModel GetModelById<TDbEntry, TModel>(string entryId) where TDbEntry : IDbEntry
+        {
+            object data;
+
+            if (loadedModels.TryGetValue(entryId, out data))
+                return (TModel)data;
+
+            data = assets.LoadModel<TDbEntry>(entryId);
+
+            logger.LogTrace($"Model loaded from asset '{entryId}'.");
+
+            loadedModels.Add(entryId, data);
+
+            return (TModel)data;
+        }
 
         public TModel GetModel<TDbEntry, TModel>(TDbEntry dbEntry, bool refresh = false) where TDbEntry : IDbEntry
         {

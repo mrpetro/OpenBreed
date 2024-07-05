@@ -112,167 +112,108 @@
 						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
 					</Parameters>
 				</Asset>
-				<Asset Id="Assets.LP01" DataSourceRef="DataSources.LP01" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">640</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">4</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.LP01B" DataSourceRef="DataSources.LP01B" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.LP02" DataSourceRef="DataSources.LP02" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.LP03" DataSourceRef="DataSources.LP03" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.LP04" DataSourceRef="DataSources.LP04" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.LP05" DataSourceRef="DataSources.LP05" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.LP06" DataSourceRef="DataSources.LP06" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.LP07" DataSourceRef="DataSources.LP07" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L0AN" DataSourceRef="DataSources.L0AN" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">144</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L1AN" DataSourceRef="DataSources.L1AN" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">144</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L2AN" DataSourceRef="DataSources.L2AN" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">144</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L3AN" DataSourceRef="DataSources.L3AN" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">144</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L4AN" DataSourceRef="DataSources.L4AN" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">144</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L5AN" DataSourceRef="DataSources.L5AN" FormatType="ACBM_IMAGE">
-					<Parameters>
-						<Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
-						<Parameter Name="HEIGHT" Type="System.Int32">144</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-						<Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.PARTF" DataSourceRef="DataSources.PARTF" FormatType="BINARY">
-					<Parameters />
-				</Asset>
 			</Items>
 		</Assets>
 		<Images>
 			<Items>
-				<Image Description="Alien Breed II: Horror Continues teaser" Id="Images.LP01">
-					<DataRef>Assets.LP01</DataRef>
-				</Image>
-				<Image Description="Superfrog teaser title" Id="Images.LP01B">
-					<DataRef>Assets.LP01B</DataRef>
-				</Image>
-				<Image Description="Superfrog teaser screenshot 1" Id="Images.LP02">
-					<DataRef>Assets.LP02</DataRef>
-				</Image>
-				<Image Description="Superfrog teaser screenshot 2" Id="Images.LP03">
-					<DataRef>Assets.LP03</DataRef>
-				</Image>
-				<Image Description="Superfrog teaser screenshot 3" Id="Images.LP04">
-					<DataRef>Assets.LP04</DataRef>
-				</Image>
-				<Image Description="Superfrog teaser screenshot 4" Id="Images.LP05">
-					<DataRef>Assets.LP05</DataRef>
-				</Image>
-				<Image Description="Superfrog teaser screenshot 5" Id="Images.LP06">
-					<DataRef>Assets.LP06</DataRef>
-				</Image>
-				<Image Description="Superfrog teaser screenshot 6" Id="Images.LP07">
-					<DataRef>Assets.LP07</DataRef>
-				</Image>
-				<Image Description="Level 0 animations" Id="Images.L0AN">
-					<DataRef>Assets.L0AN</DataRef>
-				</Image>
-				<Image Description="Level 1 animations" Id="Images.L1AN">
-					<DataRef>Assets.L1AN</DataRef>
-				</Image>
-				<Image Description="Level 2 animations" Id="Images.L2AN">
-					<DataRef>Assets.L2AN</DataRef>
-				</Image>
-				<Image Description="Level 3 animations" Id="Images.L3AN">
-					<DataRef>Assets.L3AN</DataRef>
-				</Image>
-				<Image Description="Level 4 animations" Id="Images.L4AN">
-					<DataRef>Assets.L4AN</DataRef>
-				</Image>
-				<Image Description="Level 5 animations" Id="Images.L5AN">
-					<DataRef>Assets.L5AN</DataRef>
-				</Image>
+				<AcbmImage Description="Alien Breed II: Horror Continues teaser" Id="Images.LP01">
+					<Width>640</Width>
+					<Height>256</Height>
+					<BitPlanesNo>4</BitPlanesNo>
+					<PaletteMode>16BIT</PaletteMode>	
+					<DataRef>DataSources.LP01</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Superfrog teaser title" Id="Images.LP01B">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>16BIT</PaletteMode>	
+					<DataRef>DataSources.LP01B</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Superfrog teaser screenshot 1" Id="Images.LP02">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>16BIT</PaletteMode>	
+					<DataRef>DataSources.LP02</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Superfrog teaser screenshot 2" Id="Images.LP03">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>16BIT</PaletteMode>	
+					<DataRef>DataSources.LP03</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Superfrog teaser screenshot 3" Id="Images.LP04">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>16BIT</PaletteMode>	
+					<DataRef>DataSources.LP04</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Superfrog teaser screenshot 4" Id="Images.LP05">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>16BIT</PaletteMode>	
+					<DataRef>DataSources.LP05</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Superfrog teaser screenshot 5" Id="Images.LP06">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>16BIT</PaletteMode>	
+					<DataRef>DataSources.LP06</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Superfrog teaser screenshot 6" Id="Images.LP07">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>16BIT</PaletteMode>	
+					<DataRef>DataSources.LP07</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 0 animations" Id="Images.L0AN">
+					<Width>320</Width>
+					<Height>144</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.L0AN</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 1 animations" Id="Images.L1AN">
+					<Width>320</Width>
+					<Height>144</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>		
+					<DataRef>DataSources.L1AN</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 2 animations" Id="Images.L2AN">
+					<Width>320</Width>
+					<Height>144</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>		
+					<DataRef>DataSources.L2AN</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 3 animations" Id="Images.L3AN">
+					<Width>320</Width>
+					<Height>144</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>		
+					<DataRef>DataSources.L3AN</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 4 animations" Id="Images.L4AN">
+					<Width>320</Width>
+					<Height>144</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>		
+					<DataRef>DataSources.L4AN</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 5 animations" Id="Images.L5AN">
+					<Width>320</Width>
+					<Height>144</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>		
+					<DataRef>DataSources.L5AN</DataRef>
+				</AcbmImage>
 			</Items>
 		</Images>
 		<TileSets>
@@ -318,61 +259,61 @@
 		<Palettes>
 			<Items>
 				<PaletteFromBinary Id="Palettes.LA">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>141656</DataStart>
 				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.LE">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>141720</DataStart>
 				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.LF">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>141784</DataStart>
 				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.LC">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>141848</DataStart>
 				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.LB">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>141912</DataStart>
 				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.LD">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>141976</DataStart>
 				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.LE">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>142040</DataStart>
 				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.L7">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>142104</DataStart>
 				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.L8">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>142168</DataStart>
 				</PaletteFromBinary>
 				<PaletteFromBinary Id="Palettes.L9">
-					<DataRef>Assets.PARTF</DataRef>
+					<DataRef>DataSources.PARTF</DataRef>
 					<Mode>COLOR_16BIT</Mode>
 					<ColorsNo>32</ColorsNo>
 					<DataStart>142232</DataStart>
@@ -382,7 +323,8 @@
 		<Maps>
 			<Items>
 				<Map Id="L0MA">
-					<DataRef>Assets.L0MA</DataRef>
+					<DataRef>DataSources.L0MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LA</PaletteRef>
 					</PaletteRefs>
@@ -391,7 +333,8 @@
 					<TileSetRef>TileSets.LA</TileSetRef>
 				</Map>
 				<Map Id="L1MA">
-					<DataRef>Assets.L1MA</DataRef>
+					<DataRef>DataSources.L1MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LE</PaletteRef>
 					</PaletteRefs>
@@ -400,7 +343,8 @@
 					<TileSetRef>TileSets.LE</TileSetRef>
 				</Map>
 				<Map Id="L2MA">
-					<DataRef>Assets.L2MA</DataRef>
+					<DataRef>DataSources.L2MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LF</PaletteRef>
 					</PaletteRefs>
@@ -409,7 +353,8 @@
 					<TileSetRef>TileSets.LF</TileSetRef>
 				</Map>
 				<Map Id="L3MA">
-					<DataRef>Assets.L3MA</DataRef>
+					<DataRef>DataSources.L3MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LC</PaletteRef>
 					</PaletteRefs>
@@ -418,7 +363,8 @@
 					<TileSetRef>TileSets.LC</TileSetRef>
 				</Map>
 				<Map Id="L4MA">
-					<DataRef>Assets.L4MA</DataRef>
+					<DataRef>DataSources.L4MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LB</PaletteRef>
 					</PaletteRefs>
@@ -427,7 +373,8 @@
 					<TileSetRef>TileSets.LB</TileSetRef>
 				</Map>
 				<Map Id="L5MA">
-					<DataRef>Assets.L5MA</DataRef>
+					<DataRef>DataSources.L5MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LB</PaletteRef>
 					</PaletteRefs>
@@ -436,7 +383,8 @@
 					<TileSetRef>TileSets.LB</TileSetRef>
 				</Map>
 				<Map Id="L6MA">
-					<DataRef>Assets.L6MA</DataRef>
+					<DataRef>DataSources.L6MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LC</PaletteRef>
 					</PaletteRefs>
@@ -445,7 +393,8 @@
 					<TileSetRef>TileSets.LC</TileSetRef>
 				</Map>
 				<Map Id="L7MA">
-					<DataRef>Assets.L7MA</DataRef>
+					<DataRef>DataSources.L7MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LD</PaletteRef>
 					</PaletteRefs>
@@ -454,7 +403,8 @@
 					<TileSetRef>TileSets.LD</TileSetRef>
 				</Map>
 				<Map Id="L8MA">
-					<DataRef>Assets.L8MA</DataRef>
+					<DataRef>DataSources.L8MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LD</PaletteRef>
 					</PaletteRefs>
@@ -463,7 +413,8 @@
 					<TileSetRef>TileSets.LD</TileSetRef>
 				</Map>
 				<Map Id="L9MA">
-					<DataRef>Assets.L9MA</DataRef>
+					<DataRef>DataSources.L9MA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LD</PaletteRef>
 					</PaletteRefs>
@@ -472,7 +423,8 @@
 					<TileSetRef>TileSets.LD</TileSetRef>
 				</Map>
 				<Map Id="LAMA">
-					<DataRef>Assets.LAMA</DataRef>
+					<DataRef>DataSources.LAMA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LE</PaletteRef>
 					</PaletteRefs>
@@ -481,7 +433,8 @@
 					<TileSetRef>TileSets.LE</TileSetRef>
 				</Map>
 				<Map Id="LBMA">
-					<DataRef>Assets.LBMA</DataRef>
+					<DataRef>DataSources.LBMA</DataRef>
+					<Format>ABSE</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LE</PaletteRef>
 					</PaletteRefs>

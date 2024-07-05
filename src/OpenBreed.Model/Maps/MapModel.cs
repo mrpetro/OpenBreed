@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Model.Actions;
+using OpenBreed.Model.Extensions;
+using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Tiles;
 using System;
@@ -15,8 +17,7 @@ namespace OpenBreed.Model.Maps
         {
             Header = builder.Header;
             Blocks = builder.Blocks;
-
-            Palettes = new List<PaletteModel>();
+            Palettes = Blocks.OfType<MapPaletteBlock>().Select(item => item.ToPaletteModel()).ToList();
             Layout = builder.Layout.Build();
         }
 

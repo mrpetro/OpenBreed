@@ -63,57 +63,6 @@
 		</DataSources>
 		<Assets>
 			<Items>
-				<Asset Id="Assets.L1MA" DataSourceRef="DataSources.L1MA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.L2MA" DataSourceRef="DataSources.L2MA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.L3MA" DataSourceRef="DataSources.L3MA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.L4MA" DataSourceRef="DataSources.L4MA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.L5MA" DataSourceRef="DataSources.L5MA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.L6MA" DataSourceRef="DataSources.L6MA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.L7MA" DataSourceRef="DataSources.L7MA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.L8MA" DataSourceRef="DataSources.L8MA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.L9MA" DataSourceRef="DataSources.L9MA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.LAMA" DataSourceRef="DataSources.LAMA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.LBMA" DataSourceRef="DataSources.LBMA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.LCMA" DataSourceRef="DataSources.LCMA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.LDMA" DataSourceRef="DataSources.LDMA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.LEMA" DataSourceRef="DataSources.LEMA" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.MMA1" DataSourceRef="DataSources.MMA1" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.MMA2" DataSourceRef="DataSources.MMA2" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
-				<Asset Id="Assets.MMA3" DataSourceRef="DataSources.MMA3" FormatType="ABHC_MAP" >
-					<Parameters />
-				</Asset>
 				<Asset Id="Assets.L1BM" DataSourceRef="DataSources.L1BM" FormatType="ACBM_TILE_SET">
 					<Parameters>
 						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
@@ -454,7 +403,8 @@
 		<Maps>
 			<Items>
 				<Map Id="Maps.L1MA">
-					<DataRef>Assets.L1MA</DataRef>
+					<DataRef>DataSources.L1MA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
@@ -464,7 +414,8 @@
 					<TileSetRef>TileSets.L1</TileSetRef>
 				</Map>
 				<Map Id="Maps.L2MA">
-					<DataRef>Assets.L2MA</DataRef>
+					<DataRef>DataSources.L2MA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L2MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L2MA.ALCM</PaletteRef>
@@ -474,7 +425,8 @@
 					<TileSetRef>TileSets.L2</TileSetRef>
 				</Map>
 				<Map Id="Maps.L3MA">
-					<DataRef>Assets.L3MA</DataRef>
+					<DataRef>DataSources.L3MA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L3MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L3MA.ALCM</PaletteRef>
@@ -484,7 +436,8 @@
 					<TileSetRef>TileSets.L3</TileSetRef>
 				</Map>
 				<Map Id="Maps.L4MA">
-					<DataRef>Assets.L4MA</DataRef>
+					<DataRef>DataSources.L4MA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L4MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L4MA.ALCM</PaletteRef>
@@ -494,7 +447,8 @@
 					<TileSetRef>TileSets.L4</TileSetRef>
 				</Map>
 				<Map Id="Maps.L5MA">
-					<DataRef>Assets.L5MA</DataRef>
+					<DataRef>DataSources.L5MA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L5MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L5MA.ALCM</PaletteRef>
@@ -504,7 +458,8 @@
 					<TileSetRef>TileSets.L5</TileSetRef>
 				</Map>
 				<Map Id="Maps.L6MA">
-					<DataRef>Assets.L6MA</DataRef>
+					<DataRef>DataSources.L6MA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L6MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L6MA.ALCM</PaletteRef>
@@ -514,7 +469,8 @@
 					<TileSetRef>TileSets.L6</TileSetRef>
 				</Map>
 				<Map Id="Maps.L7MA">
-					<DataRef>Assets.L7MA</DataRef>
+					<DataRef>DataSources.L7MA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L7MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L7MA.ALCM</PaletteRef>
@@ -524,7 +480,8 @@
 					<TileSetRef>TileSets.L6</TileSetRef>
 				</Map>
 				<Map Id="Maps.L8MA">
-					<DataRef>Assets.L8MA</DataRef>
+					<DataRef>DataSources.L8MA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L8MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L8MA.ALCM</PaletteRef>
@@ -534,7 +491,8 @@
 					<TileSetRef>TileSets.L6</TileSetRef>
 				</Map>
 				<Map Id="Maps.L9MA">
-					<DataRef>Assets.L9MA</DataRef>
+					<DataRef>DataSources.L9MA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L9MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L9MA.ALCM</PaletteRef>
@@ -544,7 +502,8 @@
 					<TileSetRef>TileSets.L6</TileSetRef>
 				</Map>
 				<Map Id="Maps.LAMA">
-					<DataRef>Assets.LAMA</DataRef>
+					<DataRef>DataSources.LAMA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LAMA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.LAMA.ALCM</PaletteRef>
@@ -554,7 +513,8 @@
 					<TileSetRef>TileSets.L7</TileSetRef>
 				</Map>
 				<Map Id="Maps.LBMA">
-					<DataRef>Assets.LBMA</DataRef>
+					<DataRef>DataSources.LBMA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LBMA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.LBMA.ALCM</PaletteRef>
@@ -564,7 +524,8 @@
 					<TileSetRef>TileSets.L7</TileSetRef>
 				</Map>
 				<Map Id="Maps.LCMA">
-					<DataRef>Assets.LCMA</DataRef>
+					<DataRef>DataSources.LCMA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LCMA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.LCMA.ALCM</PaletteRef>
@@ -574,7 +535,8 @@
 					<TileSetRef>TileSets.L8</TileSetRef>
 				</Map>
 				<Map Id="Maps.LDMA">
-					<DataRef>Assets.LDMA</DataRef>
+					<DataRef>DataSources.LDMA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LDMA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.LDMA.ALCM</PaletteRef>
@@ -584,7 +546,8 @@
 					<TileSetRef>TileSets.L7</TileSetRef>
 				</Map>
 				<Map Id="Maps.LEMA">
-					<DataRef>Assets.LEMA</DataRef>
+					<DataRef>DataSources.LEMA</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LEMA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.LEMA.ALCM</PaletteRef>
@@ -594,7 +557,8 @@
 					<TileSetRef>TileSets.L9</TileSetRef>
 				</Map>
 				<Map Id="Maps.MMA1">
-					<DataRef>Assets.MMA1</DataRef>
+					<DataRef>DataSources.MMA1</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MMA1.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MMA1.ALCM</PaletteRef>
@@ -604,7 +568,8 @@
 					<TileSetRef>TileSets.L1</TileSetRef>
 				</Map>
 				<Map Id="Maps.MMA2">
-					<DataRef>Assets.MMA2</DataRef>
+					<DataRef>DataSources.MMA2</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MMA2.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MMA2.ALCM</PaletteRef>
@@ -614,7 +579,8 @@
 					<TileSetRef>TileSets.L5</TileSetRef>
 				</Map>
 				<Map Id="Maps.MMA3">
-					<DataRef>Assets.MMA3</DataRef>
+					<DataRef>DataSources.MMA3</DataRef>
+					<Format>ABHC</Format>
 					<PaletteRefs>
 						<PaletteRef>Palettes.MMA3.CMAP</PaletteRef>
 						<PaletteRef>Palettes.MMA3.ALCM</PaletteRef>
@@ -2110,139 +2076,139 @@
 		<Palettes>
 			<Items>
 				<PaletteFromMAP Id="Palettes.L1MA.CMAP">
-					<DataRef>Assets.L1MA</DataRef>
+					<MapRef>Maps.L1MA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L1MA.ALCM">
-					<DataRef>Assets.L1MA</DataRef>
+					<MapRef>Maps.L1MA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L2MA.CMAP">
-					<DataRef>Assets.L2MA</DataRef>
+					<MapRef>Maps.L2MA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L2MA.ALCM">
-					<DataRef>Assets.L2MA</DataRef>
+					<MapRef>Maps.L2MA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L3MA.CMAP">
-					<DataRef>Assets.L3MA</DataRef>
+					<MapRef>Maps.L3MA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L3MA.ALCM">
-					<DataRef>Assets.L3MA</DataRef>
+					<MapRef>Maps.L3MA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L4MA.CMAP">
-					<DataRef>Assets.L4MA</DataRef>
+					<MapRef>Maps.L4MA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L4MA.ALCM">
-					<DataRef>Assets.L4MA</DataRef>
+					<MapRef>Maps.L4MA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L5MA.CMAP">
-					<DataRef>Assets.L5MA</DataRef>
+					<MapRef>Maps.L5MA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L5MA.ALCM">
-					<DataRef>Assets.L5MA</DataRef>
+					<MapRef>Maps.L5MA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L6MA.CMAP">
-					<DataRef>Assets.L6MA</DataRef>
+					<MapRef>Maps.L6MA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L6MA.ALCM">
-					<DataRef>Assets.L6MA</DataRef>
+					<MapRef>Maps.L6MA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L7MA.CMAP">
-					<DataRef>Assets.L7MA</DataRef>
+					<MapRef>Maps.L7MA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L7MA.ALCM">
-					<DataRef>Assets.L7MA</DataRef>
+					<MapRef>Maps.L7MA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L8MA.CMAP">
-					<DataRef>Assets.L8MA</DataRef>
+					<MapRef>Maps.L8MA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L8MA.ALCM">
-					<DataRef>Assets.L8MA</DataRef>
+					<MapRef>Maps.L8MA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L9MA.CMAP">
-					<DataRef>Assets.L9MA</DataRef>
+					<MapRef>Maps.L9MA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.L9MA.ALCM">
-					<DataRef>Assets.L9MA</DataRef>
+					<MapRef>Maps.L9MA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LAMA.CMAP">
-					<DataRef>Assets.LAMA</DataRef>
+					<MapRef>Maps.LAMA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LAMA.ALCM">
-					<DataRef>Assets.LAMA</DataRef>
+					<MapRef>Maps.LAMA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LBMA.CMAP">
-					<DataRef>Assets.LBMA</DataRef>
+					<MapRef>Maps.LBMA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LBMA.ALCM">
-					<DataRef>Assets.LBMA</DataRef>
+					<MapRef>Maps.LBMA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LCMA.CMAP">
-					<DataRef>Assets.LCMA</DataRef>
+					<MapRef>Maps.LCMA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LCMA.ALCM">
-					<DataRef>Assets.LCMA</DataRef>
+					<MapRef>Maps.LCMA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LDMA.CMAP">
-					<DataRef>Assets.LDMA</DataRef>
+					<MapRef>Maps.LDMA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LDMA.ALCM">
-					<DataRef>Assets.LDMA</DataRef>
+					<MapRef>Maps.LDMA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LEMA.CMAP">
-					<DataRef>Assets.LEMA</DataRef>
+					<MapRef>Maps.LEMA</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.LEMA.ALCM">
-					<DataRef>Assets.LEMA</DataRef>
+					<MapRef>Maps.LEMA</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.MMA1.CMAP">
-					<DataRef>Assets.MMA1</DataRef>
+					<MapRef>Maps.MMA1</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.MMA1.ALCM">
-					<DataRef>Assets.MMA1</DataRef>
+					<MapRef>Maps.MMA1</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.MMA2.CMAP">
-					<DataRef>Assets.MMA2</DataRef>
+					<MapRef>Maps.MMA2</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.MMA2.ALCM">
-					<DataRef>Assets.MMA2</DataRef>
+					<MapRef>Maps.MMA2</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.MMA3.CMAP">
-					<DataRef>Assets.MMA3</DataRef>
+					<MapRef>Maps.MMA3</MapRef>
 					<BlockName>CMAP</BlockName>
 				</PaletteFromMAP>
 				<PaletteFromMAP Id="Palettes.MMA3.ALCM">
-					<DataRef>Assets.MMA3</DataRef>
+					<MapRef>Maps.MMA3</MapRef>
 					<BlockName>ALCM</BlockName>
 				</PaletteFromMAP>
 			</Items>

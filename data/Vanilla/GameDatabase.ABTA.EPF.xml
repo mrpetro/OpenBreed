@@ -383,172 +383,6 @@
         <Asset Id="Assets.LEVELD.BLK" DataSourceRef="Vanilla/EPF/LEVELD.BLK" FormatType="ABTABLK">
           <Parameters />
         </Asset>
-        <Asset Id="Assets.MAP.01" DataSourceRef="Vanilla/EPF/MAP.01" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.02" DataSourceRef="Vanilla/EPF/MAP.02" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.03" DataSourceRef="Vanilla/EPF/MAP.03" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.04" DataSourceRef="Vanilla/EPF/MAP.04" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.05" DataSourceRef="Vanilla/EPF/MAP.05" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.06" DataSourceRef="Vanilla/EPF/MAP.06" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.07" DataSourceRef="Vanilla/EPF/MAP.07" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.08" DataSourceRef="Vanilla/EPF/MAP.08" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.09" DataSourceRef="Vanilla/EPF/MAP.09" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.10" DataSourceRef="Vanilla/EPF/MAP.10" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.11" DataSourceRef="Vanilla/EPF/MAP.11" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.12" DataSourceRef="Vanilla/EPF/MAP.12" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.13" DataSourceRef="Vanilla/EPF/MAP.13" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.14" DataSourceRef="Vanilla/EPF/MAP.14" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.15" DataSourceRef="Vanilla/EPF/MAP.15" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.16" DataSourceRef="Vanilla/EPF/MAP.16" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.17" DataSourceRef="Vanilla/EPF/MAP.17" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.18" DataSourceRef="Vanilla/EPF/MAP.18" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.19" DataSourceRef="Vanilla/EPF/MAP.19" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.20" DataSourceRef="Vanilla/EPF/MAP.20" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.21" DataSourceRef="Vanilla/EPF/MAP.21" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.22" DataSourceRef="Vanilla/EPF/MAP.22" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.23" DataSourceRef="Vanilla/EPF/MAP.23" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.24" DataSourceRef="Vanilla/EPF/MAP.24" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.25" DataSourceRef="Vanilla/EPF/MAP.25" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.26" DataSourceRef="Vanilla/EPF/MAP.26" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.27" DataSourceRef="Vanilla/EPF/MAP.27" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.28" DataSourceRef="Vanilla/EPF/MAP.28" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.29" DataSourceRef="Vanilla/EPF/MAP.29" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.30" DataSourceRef="Vanilla/EPF/MAP.30" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.31" DataSourceRef="Vanilla/EPF/MAP.31" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.32" DataSourceRef="Vanilla/EPF/MAP.32" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.33" DataSourceRef="Vanilla/EPF/MAP.33" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.34" DataSourceRef="Vanilla/EPF/MAP.34" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.35" DataSourceRef="Vanilla/EPF/MAP.35" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.36" DataSourceRef="Vanilla/EPF/MAP.36" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.37" DataSourceRef="Vanilla/EPF/MAP.37" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.38" DataSourceRef="Vanilla/EPF/MAP.38" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.39" DataSourceRef="Vanilla/EPF/MAP.39" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.40" DataSourceRef="Vanilla/EPF/MAP.40" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.41" DataSourceRef="Vanilla/EPF/MAP.41" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.42" DataSourceRef="Vanilla/EPF/MAP.42" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.43" DataSourceRef="Vanilla/EPF/MAP.43" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.44" DataSourceRef="Vanilla/EPF/MAP.44" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.45" DataSourceRef="Vanilla/EPF/MAP.45" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.46" DataSourceRef="Vanilla/EPF/MAP.46" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.47" DataSourceRef="Vanilla/EPF/MAP.47" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.48" DataSourceRef="Vanilla/EPF/MAP.48" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.49" DataSourceRef="Vanilla/EPF/MAP.49" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.50" DataSourceRef="Vanilla/EPF/MAP.50" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.51" DataSourceRef="Vanilla/EPF/MAP.51" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.52" DataSourceRef="Vanilla/EPF/MAP.52" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.53" DataSourceRef="Vanilla/EPF/MAP.53" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.54" DataSourceRef="Vanilla/EPF/MAP.54" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.MAP.55" DataSourceRef="Vanilla/EPF/MAP.55" FormatType="ABTA_MAP">
-          <Parameters />
-        </Asset>
-
 
         <Asset Id="Assets.TITLE.AMF" DataSourceRef="Vanilla/EPF/TITLE.AMF" FormatType="AMF_MUSIC">
           <Parameters />
@@ -643,9 +477,6 @@
         <Asset Id="Assets.Templates.Logo1.lua" DataSourceRef="Extension/Templates/Logo1.lua" FormatType="TEXT">
           <Parameters />
         </Asset>
-        <Asset Id="Assets.TA.EXE" DataSourceRef="Vanilla/TA.EXE" FormatType="BINARY">
-          <Parameters />
-        </Asset>
         <Asset Id="Assets.Scripts.Common.Hud.HealthBar.lua" DataSourceRef="Extension/Scripts/Common/Hud/HealthBar.lua" FormatType="TEXT">
           <Parameters />
         </Asset>
@@ -672,7 +503,7 @@
           <DataRef>Vanilla/EPF/COMPUTER.LBM</DataRef>
         </IffImage>
         <IffImage Description="IPC message screen image" Id="Vanilla/Common/MissionScreen/Background">
-          <DataRef>AVanilla/EPF/IPC.LBM</DataRef>
+          <DataRef>Vanilla/EPF/IPC.LBM</DataRef>
         </IffImage>
         <IffImage Description="Smart card message screen image" Id="Vanilla/Common/SmartCardScreen/Background">
           <DataRef>Vanilla/EPF/SMARTPIC.LBM</DataRef>
@@ -4777,7 +4608,8 @@
     <Maps>
       <Items>
         <Map Description="CRASH LANDING SITE" Id="Vanilla/1">
-          <DataRef>Assets.MAP.01</DataRef>
+          <DataRef>Vanilla/EPF/MAP.01</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
@@ -4791,7 +4623,8 @@
           <ScriptRef>Vanilla/L1/MAP.01</ScriptRef>
         </Map>
         <Map Description="CIVILIAN ZONE 1" Id="Vanilla/2">
-          <DataRef>Assets.MAP.02</DataRef>
+          <DataRef>Vanilla/EPF/MAP.02</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
@@ -4806,7 +4639,8 @@
           <TileSetRef>Vanilla/L4</TileSetRef>
         </Map>
         <Map Description="CIVILIAN ZONE 2" Id="Vanilla/3">
-          <DataRef>Assets.MAP.03</DataRef>
+          <DataRef>Vanilla/EPF/MAP.03</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.03.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.03.ALCM</PaletteRef>
@@ -4821,7 +4655,8 @@
           <TileSetRef>Vanilla/L4</TileSetRef>
         </Map>
         <Map Description="CIVILIAN ZONE 3" Id="Vanilla/4">
-          <DataRef>Assets.MAP.04</DataRef>
+          <DataRef>Vanilla/EPF/MAP.04</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.04.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.04.ALCM</PaletteRef>
@@ -4836,7 +4671,8 @@
           <TileSetRef>Vanilla/L4</TileSetRef>
         </Map>
         <Map Description="CIVILIAN ZONE 4" Id="Vanilla/5">
-          <DataRef>Assets.MAP.05</DataRef>
+          <DataRef>Vanilla/EPF/MAP.05</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.05.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.05.ALCM</PaletteRef>
@@ -4851,7 +4687,8 @@
           <TileSetRef>Vanilla/L4</TileSetRef>
         </Map>
         <Map Description="OUTDOOR SECTOR 2" Id="Vanilla/6">
-          <DataRef>Assets.MAP.06</DataRef>
+          <DataRef>Vanilla/EPF/MAP.06</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.06.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.06.ALCM</PaletteRef>
@@ -4866,7 +4703,8 @@
           <TileSetRef>Vanilla/L1</TileSetRef>
         </Map>
         <Map Description="STORES LEVEL 1" Id="Vanilla/7">
-          <DataRef>Assets.MAP.07</DataRef>
+          <DataRef>Vanilla/EPF/MAP.07</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
@@ -4892,7 +4730,8 @@
           <TileSetRef>Vanilla/LD</TileSetRef>
         </Map>
         <Map Description="STORES LEVEL 2" Id="Vanilla/8">
-          <DataRef>Assets.MAP.08</DataRef>
+          <DataRef>Vanilla/EPF/MAP.08</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.08.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.08.ALCM</PaletteRef>
@@ -4907,7 +4746,8 @@
           <TileSetRef>Vanilla/LD</TileSetRef>
         </Map>
         <Map Description="STORES SECTOR 3" Id="Vanilla/9">
-          <DataRef>Assets.MAP.09</DataRef>
+          <DataRef>Vanilla/EPF/MAP.09</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.09.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.09.ALCM</PaletteRef>
@@ -4922,7 +4762,8 @@
           <TileSetRef>Vanilla/LD</TileSetRef>
         </Map>
         <Map Description="STORES SECTOR 4" Id="Vanilla/10">
-          <DataRef>Assets.MAP.10</DataRef>
+          <DataRef>Vanilla/EPF/MAP.10</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.10.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.10.ALCM</PaletteRef>
@@ -4937,7 +4778,8 @@
           <TileSetRef>Vanilla/LD</TileSetRef>
         </Map>
         <Map Description="OUTDOOR SECTOR 3" Id="Vanilla/11">
-          <DataRef>Assets.MAP.11</DataRef>
+          <DataRef>Vanilla/EPF/MAP.11</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.11.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.11.ALCM</PaletteRef>
@@ -4952,7 +4794,8 @@
           <TileSetRef>Vanilla/L1</TileSetRef>
         </Map>
         <Map Description="MILITARY SECTOR 1" Id="Vanilla/12">
-          <DataRef>Assets.MAP.12</DataRef>
+          <DataRef>Vanilla/EPF/MAP.12</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
@@ -4978,7 +4821,8 @@
           <TileSetRef>Vanilla/L7</TileSetRef>
         </Map>
         <Map Description="MILITARY SECTOR 2" Id="Vanilla/13">
-          <DataRef>Assets.MAP.13</DataRef>
+          <DataRef>Vanilla/EPF/MAP.13</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.13.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.13.ALCM</PaletteRef>
@@ -4993,7 +4837,8 @@
           <TileSetRef>Vanilla/L7</TileSetRef>
         </Map>
         <Map Description="MILITARY SECTOR 3" Id="Vanilla/14">
-          <DataRef>Assets.MAP.14</DataRef>
+          <DataRef>Vanilla/EPF/MAP.14</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.14.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.14.ALCM</PaletteRef>
@@ -5008,7 +4853,8 @@
           <TileSetRef>Vanilla/L7</TileSetRef>
         </Map>
         <Map Description="MILITARY SECTOR 4" Id="Vanilla/15">
-          <DataRef>Assets.MAP.15</DataRef>
+          <DataRef>Vanilla/EPF/MAP.15</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.15.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.15.ALCM</PaletteRef>
@@ -5023,7 +4869,8 @@
           <TileSetRef>Vanilla/L7</TileSetRef>
         </Map>
         <Map Description="SECURITY ZONE 1" Id="Vanilla/16">
-          <DataRef>Assets.MAP.16</DataRef>
+          <DataRef>Vanilla/EPF/MAP.16</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
@@ -5050,7 +4897,8 @@
           <TileSetRef>Vanilla/L5</TileSetRef>
         </Map>
         <Map Description="SECURITY ZONE 2" Id="Vanilla/17">
-          <DataRef>Assets.MAP.17</DataRef>
+          <DataRef>Vanilla/EPF/MAP.17</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.17.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.17.ALCM</PaletteRef>
@@ -5065,7 +4913,8 @@
           <TileSetRef>Vanilla/L5</TileSetRef>
         </Map>
         <Map Description="SECURITY ZONE 3" Id="Vanilla/18">
-          <DataRef>Assets.MAP.18</DataRef>
+          <DataRef>Vanilla/EPF/MAP.18</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.18.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.18.ALCM</PaletteRef>
@@ -5080,7 +4929,8 @@
           <TileSetRef>Vanilla/L5</TileSetRef>
         </Map>
         <Map Description="SECURITY ZONE 4" Id="Vanilla/19">
-          <DataRef>Assets.MAP.19</DataRef>
+          <DataRef>Vanilla/EPF/MAP.19</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.19.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.19.ALCM</PaletteRef>
@@ -5095,7 +4945,8 @@
           <TileSetRef>Vanilla/L5</TileSetRef>
         </Map>
         <Map Description="COLONY GROUND SECTOR 3" Id="Vanilla/20">
-          <DataRef>Assets.MAP.20</DataRef>
+          <DataRef>Vanilla/EPF/MAP.20</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.20.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.20.ALCM</PaletteRef>
@@ -5110,7 +4961,8 @@
           <TileSetRef>Vanilla/L1</TileSetRef>
         </Map>
         <Map Description="SCIENCE SECTOR 1" Id="Vanilla/21">
-          <DataRef>Assets.MAP.21</DataRef>
+          <DataRef>Vanilla/EPF/MAP.21</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
@@ -5136,7 +4988,8 @@
           <TileSetRef>Vanilla/L6</TileSetRef>
         </Map>
         <Map Description="SCIENCE SECTOR 2" Id="Vanilla/22">
-          <DataRef>Assets.MAP.22</DataRef>
+          <DataRef>Vanilla/EPF/MAP.22</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.22.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.22.ALCM</PaletteRef>
@@ -5151,7 +5004,8 @@
           <TileSetRef>Vanilla/L6</TileSetRef>
         </Map>
         <Map Description="SCIENCE SECTOR 3" Id="Vanilla/23">
-          <DataRef>Assets.MAP.23</DataRef>
+          <DataRef>Vanilla/EPF/MAP.23</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.23.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.23.ALCM</PaletteRef>
@@ -5166,7 +5020,8 @@
           <TileSetRef>Vanilla/L6</TileSetRef>
         </Map>
         <Map Description="SCIENCE SECTOR 4" Id="Vanilla/24">
-          <DataRef>Assets.MAP.24</DataRef>
+          <DataRef>Vanilla/EPF/MAP.24</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.24.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.24.ALCM</PaletteRef>
@@ -5181,7 +5036,8 @@
           <TileSetRef>Vanilla/L6</TileSetRef>
         </Map>
         <Map Description="COLONY GROUND SECTOR 4" Id="Vanilla/25">
-          <DataRef>Assets.MAP.25</DataRef>
+          <DataRef>Vanilla/EPF/MAP.25</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.25.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.25.ALCM</PaletteRef>
@@ -5196,7 +5052,8 @@
           <TileSetRef>Vanilla/L1</TileSetRef>
         </Map>
         <Map Description="ENGINEERING SECTOR 1" Id="Vanilla/26">
-          <DataRef>Assets.MAP.26</DataRef>
+          <DataRef>Vanilla/EPF/MAP.26</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
@@ -5222,7 +5079,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="ENGINEERING SECTOR 2" Id="Vanilla/27">
-          <DataRef>Assets.MAP.27</DataRef>
+          <DataRef>Vanilla/EPF/MAP.27</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.27.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.27.ALCM</PaletteRef>
@@ -5237,7 +5095,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="ENGINEERING SECTOR 3" Id="Vanilla/28">
-          <DataRef>Assets.MAP.28</DataRef>
+          <DataRef>Vanilla/EPF/MAP.28</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.28.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.28.ALCM</PaletteRef>
@@ -5252,7 +5111,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="ENGINEERING SECTOR 4" Id="Vanilla/29">
-          <DataRef>Assets.MAP.29</DataRef>
+          <DataRef>Vanilla/EPF/MAP.29</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.29.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.29.ALCM</PaletteRef>
@@ -5267,7 +5127,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 1" Id="Vanilla/30">
-          <DataRef>Assets.MAP.30</DataRef>
+          <DataRef>Vanilla/EPF/MAP.30</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.30.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.30.ALCM</PaletteRef>
@@ -5282,7 +5143,8 @@
           <TileSetRef>Vanilla/L4</TileSetRef>
         </Map>
         <Map Description="CORRIDOR 2" Id="Vanilla/31">
-          <DataRef>Assets.MAP.31</DataRef>
+          <DataRef>Vanilla/EPF/MAP.31</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.31.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.31.ALCM</PaletteRef>
@@ -5297,7 +5159,8 @@
           <TileSetRef>Vanilla/L4</TileSetRef>
         </Map>
         <Map Description="CORRIDOR 3" Id="Vanilla/32">
-          <DataRef>Assets.MAP.32</DataRef>
+          <DataRef>Vanilla/EPF/MAP.32</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.32.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.32.ALCM</PaletteRef>
@@ -5312,7 +5175,8 @@
           <TileSetRef>Vanilla/LD</TileSetRef>
         </Map>
         <Map Description="CORRIDOR 4" Id="Vanilla/33">
-          <DataRef>Assets.MAP.33</DataRef>
+          <DataRef>Vanilla/EPF/MAP.33</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.33.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.33.ALCM</PaletteRef>
@@ -5327,7 +5191,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="CORRIDOR 5" Id="Vanilla/34">
-          <DataRef>Assets.MAP.34</DataRef>
+          <DataRef>Vanilla/EPF/MAP.34</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.34.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.34.ALCM</PaletteRef>
@@ -5342,7 +5207,8 @@
           <TileSetRef>Vanilla/LD</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 6" Id="Vanilla/35">
-          <DataRef>Assets.MAP.35</DataRef>
+          <DataRef>Vanilla/EPF/MAP.35</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.35.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.35.ALCM</PaletteRef>
@@ -5357,7 +5223,8 @@
           <TileSetRef>Vanilla/LD</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 7" Id="Vanilla/36">
-          <DataRef>Assets.MAP.36</DataRef>
+          <DataRef>Vanilla/EPF/MAP.36</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.36.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.36.ALCM</PaletteRef>
@@ -5372,7 +5239,8 @@
           <TileSetRef>Vanilla/L4</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 8" Id="Vanilla/37">
-          <DataRef>Assets.MAP.37</DataRef>
+          <DataRef>Vanilla/EPF/MAP.37</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.37.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.37.ALCM</PaletteRef>
@@ -5387,7 +5255,8 @@
           <TileSetRef>Vanilla/LD</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 9" Id="Vanilla/38">
-          <DataRef>Assets.MAP.38</DataRef>
+          <DataRef>Vanilla/EPF/MAP.38</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.38.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.38.ALCM</PaletteRef>
@@ -5402,7 +5271,8 @@
           <TileSetRef>Vanilla/LD</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 10" Id="Vanilla/39">
-          <DataRef>Assets.MAP.39</DataRef>
+          <DataRef>Vanilla/EPF/MAP.39</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.39.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.39.ALCM</PaletteRef>
@@ -5417,7 +5287,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 11" Id="Vanilla/40">
-          <DataRef>Assets.MAP.40</DataRef>
+          <DataRef>Vanilla/EPF/MAP.40</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.40.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.40.ALCM</PaletteRef>
@@ -5432,7 +5303,8 @@
           <TileSetRef>Vanilla/L4</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 12" Id="Vanilla/41">
-          <DataRef>Assets.MAP.41</DataRef>
+          <DataRef>Vanilla/EPF/MAP.41</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.41.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.41.ALCM</PaletteRef>
@@ -5447,7 +5319,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 13" Id="Vanilla/42">
-          <DataRef>Assets.MAP.42</DataRef>
+          <DataRef>Vanilla/EPF/MAP.42</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.42.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.42.ALCM</PaletteRef>
@@ -5462,7 +5335,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="CORRIDOR ZONE 14" Id="Vanilla/43">
-          <DataRef>Assets.MAP.43</DataRef>
+          <DataRef>Vanilla/EPF/MAP.43</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.43.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.43.ALCM</PaletteRef>
@@ -5477,7 +5351,8 @@
           <TileSetRef>Vanilla/L7</TileSetRef>
         </Map>
         <Map Description="CORRIDOR 15" Id="Vanilla/44">
-          <DataRef>Assets.MAP.44</DataRef>
+          <DataRef>Vanilla/EPF/MAP.44</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.44.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.44.ALCM</PaletteRef>
@@ -5492,7 +5367,8 @@
           <TileSetRef>Vanilla/L7</TileSetRef>
         </Map>
         <Map Description="CORRIDOR 16" Id="Vanilla/45">
-          <DataRef>Assets.MAP.45</DataRef>
+          <DataRef>Vanilla/EPF/MAP.45</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.45.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.45.ALCM</PaletteRef>
@@ -5505,7 +5381,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="CORRIDOR 17" Id="Vanilla/46">
-          <DataRef>Assets.MAP.46</DataRef>
+          <DataRef>Vanilla/EPF/MAP.46</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.46.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.46.ALCM</PaletteRef>
@@ -5520,7 +5397,8 @@
           <TileSetRef>Vanilla/L3</TileSetRef>
         </Map>
         <Map Description="MAIN TOWER LEVEL 1" Id="Vanilla/47">
-          <DataRef>Assets.MAP.47</DataRef>
+          <DataRef>Vanilla/EPF/MAP.47</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
@@ -5546,7 +5424,8 @@
           <TileSetRef>Vanilla/L8</TileSetRef>
         </Map>
         <Map Description="MAIN TOWER LEVEL 2" Id="Vanilla/48">
-          <DataRef>Assets.MAP.48</DataRef>
+          <DataRef>Vanilla/EPF/MAP.48</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.48.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.48.ALCM</PaletteRef>
@@ -5561,7 +5440,8 @@
           <TileSetRef>Vanilla/L8</TileSetRef>
         </Map>
         <Map Description="MAIN TOWER LEVEL 3" Id="Vanilla/49">
-          <DataRef>Assets.MAP.49</DataRef>
+          <DataRef>Vanilla/EPF/MAP.49</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.49.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.49.ALCM</PaletteRef>
@@ -5576,7 +5456,8 @@
           <TileSetRef>Vanilla/L8</TileSetRef>
         </Map>
         <Map Description="MAIN TOWER LEVEL 4" Id="Vanilla/50">
-          <DataRef>Assets.MAP.50</DataRef>
+          <DataRef>Vanilla/EPF/MAP.50</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.50.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.50.ALCM</PaletteRef>
@@ -5591,7 +5472,8 @@
           <TileSetRef>Vanilla/L8</TileSetRef>
         </Map>
         <Map Description="MAIN TOWER LEVEL 5" Id="Vanilla/51">
-          <DataRef>Assets.MAP.51</DataRef>
+          <DataRef>Vanilla/EPF/MAP.51</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.51.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.51.ALCM</PaletteRef>
@@ -5606,7 +5488,8 @@
           <TileSetRef>Vanilla/L8</TileSetRef>
         </Map>
         <Map Description="TOWER LEVEL 6" Id="Vanilla/52">
-          <DataRef>Assets.MAP.52</DataRef>
+          <DataRef>Vanilla/EPF/MAP.52</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.52.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.52.ALCM</PaletteRef>
@@ -5621,7 +5504,8 @@
           <TileSetRef>Vanilla/L8</TileSetRef>
         </Map>
         <Map Description="TOWER LEVEL 7" Id="Vanilla/53">
-          <DataRef>Assets.MAP.53</DataRef>
+          <DataRef>Vanilla/EPF/MAP.53</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.53.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.53.ALCM</PaletteRef>
@@ -5636,7 +5520,8 @@
           <TileSetRef>Vanilla/L8</TileSetRef>
         </Map>
         <Map Description="Mission One(\?\?\?)" Id="Vanilla/54">
-          <DataRef>Assets.MAP.54</DataRef>
+          <DataRef>Vanilla/EPF/MAP.54</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.54.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.54.ALCM</PaletteRef>
@@ -5651,7 +5536,8 @@
           <TileSetRef>Vanilla/L6</TileSetRef>
         </Map>
         <Map Description="OUTER COLONY SECTOR 5" Id="Vanilla/55">
-          <DataRef>Assets.MAP.55</DataRef>
+          <DataRef>Vanilla/EPF/MAP.55</DataRef>
+		  <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.55.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.55.ALCM</PaletteRef>
@@ -9802,495 +9688,495 @@
     <Palettes>
       <Items>
         <PaletteFromLBM Id="Vanilla/Title/EPS1/Logo/Palette">
-          <DataRef>Assets.EPSLOGO1.LBM</DataRef>
+          <ImageRef>Vanilla/Title/EPS1/Logo</ImageRef>
         </PaletteFromLBM>
         <PaletteFromLBM Id="Vanilla/Title/EPS2/Logo/Palette">
-          <DataRef>Assets.EPSLOGO2.LBM</DataRef>
+          <ImageRef>Vanilla/Title/EPS2/Logo</ImageRef>
         </PaletteFromLBM>
         <PaletteFromLBM Id="Vanilla/Title/Teams17/Logo/Palette">
-          <DataRef>Assets.T17LOGO.LBM</DataRef>
+          <ImageRef>Vanilla/Title/Teams17/Logo</ImageRef>
         </PaletteFromLBM>
         <PaletteFromLBM Id="Vanilla/Title/Menu/Palette">
-          <DataRef>Assets.TITLEBAC.LBM</DataRef>
+          <ImageRef>Vanilla/Title/Menu/Background</ImageRef>
         </PaletteFromLBM>
         <PaletteFromLBM Id="Vanilla/Common/OutroScreen/Palette">
-          <DataRef>Assets.OUTRO.LBM</DataRef>
+          <ImageRef>Vanilla/Common/OutroScreen/Background</ImageRef>
         </PaletteFromLBM>
         <PaletteFromLBM Id="Vanilla/Common/IntexNetworkScreen/Palette">
-          <DataRef>Assets.COMPUTER.LBM</DataRef>
+          <ImageRef>Vanilla/Common/IntexNetworkScreen/Background</ImageRef>
         </PaletteFromLBM>
         <PaletteFromLBM Id="Vanilla/Common/MissionScreen/Palette">
-          <DataRef>Assets.IPC.LBM</DataRef>
+          <ImageRef>Vanilla/Common/MissionScreen/Background</ImageRef>
         </PaletteFromLBM>
         <PaletteFromLBM Id="Vanilla/Common/SmartCardScreen/Palette">
-          <DataRef>Assets.SMARTPIC.LBM</DataRef>
+          <ImageRef>Vanilla/Common/SmartCardScreen/Background</ImageRef>
         </PaletteFromLBM>
         <PaletteFromMAP Id="Palettes.MAP.01.CMAP">
-          <DataRef>Assets.MAP.01</DataRef>
+          <MapRef>Vanilla/1</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.01.ALCM">
-          <DataRef>Assets.MAP.01</DataRef>
+          <MapRef>Vanilla/1</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.02.CMAP">
-          <DataRef>Assets.MAP.02</DataRef>
+          <MapRef>Vanilla/2</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.02.ALCM">
-          <DataRef>Assets.MAP.02</DataRef>
+          <MapRef>Vanilla/2</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.03.CMAP">
-          <DataRef>Assets.MAP.03</DataRef>
+          <MapRef>Vanilla/3</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.03.ALCM">
-          <DataRef>Assets.MAP.03</DataRef>
+          <MapRef>Vanilla/3</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.04.CMAP">
-          <DataRef>Assets.MAP.04</DataRef>
+          <MapRef>Vanilla/4</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.04.ALCM">
-          <DataRef>Assets.MAP.04</DataRef>
+          <MapRef>Vanilla/4</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.05.CMAP">
-          <DataRef>Assets.MAP.05</DataRef>
+          <MapRef>Vanilla/5</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.05.ALCM">
-          <DataRef>Assets.MAP.05</DataRef>
+          <MapRef>Vanilla/5</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.06.CMAP">
-          <DataRef>Assets.MAP.06</DataRef>
+          <MapRef>Vanilla/6</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.06.ALCM">
-          <DataRef>Assets.MAP.06</DataRef>
+          <MapRef>Vanilla/6</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.07.CMAP">
-          <DataRef>Assets.MAP.07</DataRef>
+          <MapRef>Vanilla/7</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.07.ALCM">
-          <DataRef>Assets.MAP.07</DataRef>
+          <MapRef>Vanilla/7</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.08.CMAP">
-          <DataRef>Assets.MAP.08</DataRef>
+          <MapRef>Vanilla/8</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.08.ALCM">
-          <DataRef>Assets.MAP.08</DataRef>
+          <MapRef>Vanilla/8</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.09.CMAP">
-          <DataRef>Assets.MAP.09</DataRef>
+          <MapRef>Vanilla/9</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.09.ALCM">
-          <DataRef>Assets.MAP.09</DataRef>
+          <MapRef>Vanilla/9</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.10.CMAP">
-          <DataRef>Assets.MAP.10</DataRef>
+          <MapRef>Vanilla/10</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.10.ALCM">
-          <DataRef>Assets.MAP.10</DataRef>
+          <MapRef>Vanilla/10</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.11.CMAP">
-          <DataRef>Assets.MAP.11</DataRef>
+          <MapRef>Vanilla/11</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.11.ALCM">
-          <DataRef>Assets.MAP.11</DataRef>
+          <MapRef>Vanilla/11</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.12.CMAP">
-          <DataRef>Assets.MAP.12</DataRef>
+          <MapRef>Vanilla/12</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.12.ALCM">
-          <DataRef>Assets.MAP.12</DataRef>
+          <MapRef>Vanilla/12</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.13.CMAP">
-          <DataRef>Assets.MAP.13</DataRef>
+          <MapRef>Vanilla/13</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.13.ALCM">
-          <DataRef>Assets.MAP.13</DataRef>
+          <MapRef>Vanilla/13</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.14.CMAP">
-          <DataRef>Assets.MAP.14</DataRef>
+          <MapRef>Vanilla/14</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.14.ALCM">
-          <DataRef>Assets.MAP.14</DataRef>
+          <MapRef>Vanilla/14</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.15.CMAP">
-          <DataRef>Assets.MAP.15</DataRef>
+          <MapRef>Vanilla/15</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.15.ALCM">
-          <DataRef>Assets.MAP.15</DataRef>
+          <MapRef>Vanilla/15</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.16.CMAP">
-          <DataRef>Assets.MAP.16</DataRef>
+          <MapRef>Vanilla/16</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.16.ALCM">
-          <DataRef>Assets.MAP.16</DataRef>
+          <MapRef>Vanilla/16</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.17.CMAP">
-          <DataRef>Assets.MAP.17</DataRef>
+          <MapRef>Vanilla/17</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.17.ALCM">
-          <DataRef>Assets.MAP.17</DataRef>
+          <MapRef>Vanilla/17</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.18.CMAP">
-          <DataRef>Assets.MAP.18</DataRef>
+          <MapRef>Vanilla/18</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.18.ALCM">
-          <DataRef>Assets.MAP.18</DataRef>
+          <MapRef>Vanilla/18</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.19.CMAP">
-          <DataRef>Assets.MAP.19</DataRef>
+          <MapRef>Vanilla/19</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.19.ALCM">
-          <DataRef>Assets.MAP.19</DataRef>
+          <MapRef>Vanilla/19</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.20.CMAP">
-          <DataRef>Assets.MAP.20</DataRef>
+          <MapRef>Vanilla/20</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.20.ALCM">
-          <DataRef>Assets.MAP.20</DataRef>
+          <MapRef>Vanilla/20</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.21.CMAP">
-          <DataRef>Assets.MAP.21</DataRef>
+          <MapRef>Vanilla/21</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.21.ALCM">
-          <DataRef>Assets.MAP.21</DataRef>
+          <MapRef>Vanilla/21</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.22.CMAP">
-          <DataRef>Assets.MAP.22</DataRef>
+          <MapRef>Vanilla/22</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.22.ALCM">
-          <DataRef>Assets.MAP.22</DataRef>
+          <MapRef>Vanilla/22</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.23.CMAP">
-          <DataRef>Assets.MAP.23</DataRef>
+          <MapRef>Vanilla/23</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.23.ALCM">
-          <DataRef>Assets.MAP.23</DataRef>
+          <MapRef>Vanilla/23</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.24.CMAP">
-          <DataRef>Assets.MAP.24</DataRef>
+          <MapRef>Vanilla/24</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.24.ALCM">
-          <DataRef>Assets.MAP.24</DataRef>
+          <MapRef>Vanilla/24</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.25.CMAP">
-          <DataRef>Assets.MAP.25</DataRef>
+          <MapRef>Vanilla/25</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.25.ALCM">
-          <DataRef>Assets.MAP.25</DataRef>
+          <MapRef>Vanilla/25</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.26.CMAP">
-          <DataRef>Assets.MAP.26</DataRef>
+          <MapRef>Vanilla/26</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.26.ALCM">
-          <DataRef>Assets.MAP.26</DataRef>
+          <MapRef>Vanilla/26</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.27.CMAP">
-          <DataRef>Assets.MAP.27</DataRef>
+          <MapRef>Vanilla/27</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.27.ALCM">
-          <DataRef>Assets.MAP.27</DataRef>
+          <MapRef>Vanilla/27</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.28.CMAP">
-          <DataRef>Assets.MAP.28</DataRef>
+          <MapRef>Vanilla/28</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.28.ALCM">
-          <DataRef>Assets.MAP.28</DataRef>
+          <MapRef>Vanilla/28</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.29.CMAP">
-          <DataRef>Assets.MAP.29</DataRef>
+          <MapRef>Vanilla/29</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.29.ALCM">
-          <DataRef>Assets.MAP.29</DataRef>
+          <MapRef>Vanilla/29</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.30.CMAP">
-          <DataRef>Assets.MAP.30</DataRef>
+          <MapRef>Vanilla/30</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.30.ALCM">
-          <DataRef>Assets.MAP.30</DataRef>
+          <MapRef>Vanilla/30</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.31.CMAP">
-          <DataRef>Assets.MAP.31</DataRef>
+          <MapRef>Vanilla/31</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.31.ALCM">
-          <DataRef>Assets.MAP.31</DataRef>
+          <MapRef>Vanilla/31</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.32.CMAP">
-          <DataRef>Assets.MAP.32</DataRef>
+          <MapRef>Vanilla/32</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.32.ALCM">
-          <DataRef>Assets.MAP.32</DataRef>
+          <MapRef>Vanilla/32</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.33.CMAP">
-          <DataRef>Assets.MAP.33</DataRef>
+          <MapRef>Vanilla/33</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.33.ALCM">
-          <DataRef>Assets.MAP.33</DataRef>
+          <MapRef>Vanilla/33</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.34.CMAP">
-          <DataRef>Assets.MAP.34</DataRef>
+          <MapRef>Vanilla/34</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.34.ALCM">
-          <DataRef>Assets.MAP.34</DataRef>
+          <MapRef>Vanilla/34</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.35.CMAP">
-          <DataRef>Assets.MAP.35</DataRef>
+          <MapRef>Vanilla/35</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.35.ALCM">
-          <DataRef>Assets.MAP.35</DataRef>
+          <MapRef>Vanilla/35</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.36.CMAP">
-          <DataRef>Assets.MAP.36</DataRef>
+          <MapRef>Vanilla/36</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.36.ALCM">
-          <DataRef>Assets.MAP.36</DataRef>
+          <MapRef>Vanilla/36</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.37.CMAP">
-          <DataRef>Assets.MAP.37</DataRef>
+          <MapRef>Vanilla/37</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.37.ALCM">
-          <DataRef>Assets.MAP.37</DataRef>
+          <MapRef>Vanilla/37</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.38.CMAP">
-          <DataRef>Assets.MAP.38</DataRef>
+          <MapRef>Vanilla/38</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.38.ALCM">
-          <DataRef>Assets.MAP.38</DataRef>
+          <MapRef>Vanilla/38</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.39.CMAP">
-          <DataRef>Assets.MAP.39</DataRef>
+          <MapRef>Vanilla/39</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.39.ALCM">
-          <DataRef>Assets.MAP.39</DataRef>
+          <MapRef>Vanilla/39</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.40.CMAP">
-          <DataRef>Assets.MAP.40</DataRef>
+          <MapRef>Vanilla/40</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.40.ALCM">
-          <DataRef>Assets.MAP.40</DataRef>
+          <MapRef>Vanilla/40</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.41.CMAP">
-          <DataRef>Assets.MAP.41</DataRef>
+          <MapRef>Vanilla/41</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.41.ALCM">
-          <DataRef>Assets.MAP.41</DataRef>
+          <MapRef>Vanilla/41</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.42.CMAP">
-          <DataRef>Assets.MAP.42</DataRef>
+          <MapRef>Vanilla/42</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.42.ALCM">
-          <DataRef>Assets.MAP.42</DataRef>
+          <MapRef>Vanilla/42</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.43.CMAP">
-          <DataRef>Assets.MAP.43</DataRef>
+          <MapRef>Vanilla/43</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.43.ALCM">
-          <DataRef>Assets.MAP.43</DataRef>
+          <MapRef>Vanilla/43</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.44.CMAP">
-          <DataRef>Assets.MAP.44</DataRef>
+          <MapRef>Vanilla/44</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.44.ALCM">
-          <DataRef>Assets.MAP.44</DataRef>
+          <MapRef>Vanilla/44</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.45.CMAP">
-          <DataRef>Assets.MAP.45</DataRef>
+          <MapRef>Vanilla/45</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.45.ALCM">
-          <DataRef>Assets.MAP.45</DataRef>
+          <MapRef>Vanilla/45</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.46.CMAP">
-          <DataRef>Assets.MAP.46</DataRef>
+          <MapRef>Vanilla/46</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.46.ALCM">
-          <DataRef>Assets.MAP.46</DataRef>
+          <MapRef>Vanilla/46</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.47.CMAP">
-          <DataRef>Assets.MAP.47</DataRef>
+          <MapRef>Vanilla/47</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.47.ALCM">
-          <DataRef>Assets.MAP.47</DataRef>
+          <MapRef>Vanilla/47</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.48.CMAP">
-          <DataRef>Assets.MAP.48</DataRef>
+          <MapRef>Vanilla/48</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.48.ALCM">
-          <DataRef>Assets.MAP.48</DataRef>
+          <MapRef>Vanilla/48</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.49.CMAP">
-          <DataRef>Assets.MAP.49</DataRef>
+          <MapRef>Vanilla/49</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.49.ALCM">
-          <DataRef>Assets.MAP.49</DataRef>
+          <MapRef>Vanilla/49</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.50.CMAP">
-          <DataRef>Assets.MAP.50</DataRef>
+          <MapRef>Vanilla/50</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.50.ALCM">
-          <DataRef>Assets.MAP.50</DataRef>
+          <MapRef>Vanilla/50</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.51.CMAP">
-          <DataRef>Assets.MAP.51</DataRef>
+          <MapRef>Vanilla/51</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.51.ALCM">
-          <DataRef>Assets.MAP.51</DataRef>
+          <MapRef>Vanilla/51</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.52.CMAP">
-          <DataRef>Assets.MAP.52</DataRef>
+          <MapRef>Vanilla/52</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.52.ALCM">
-          <DataRef>Assets.MAP.52</DataRef>
+          <MapRef>Vanilla/52</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.53.CMAP">
-          <DataRef>Assets.MAP.53</DataRef>
+          <MapRef>Vanilla/53</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.53.ALCM">
-          <DataRef>Assets.MAP.53</DataRef>
+          <MapRef>Vanilla/53</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.54.CMAP">
-          <DataRef>Assets.MAP.54</DataRef>
+          <MapRef>Vanilla/54</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.54.ALCM">
-          <DataRef>Assets.MAP.54</DataRef>
+          <MapRef>Vanilla/54</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.55.CMAP">
-          <DataRef>Assets.MAP.55</DataRef>
+          <MapRef>Vanilla/55</MapRef>
           <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MAP.55.ALCM">
-          <DataRef>Assets.MAP.55</DataRef>
+          <MapRef>Vanilla/55</MapRef>
           <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromBinary Id="Palettes.COMMON">
-          <DataRef>Assets.TA.EXE</DataRef>
+          <DataRef>Vanilla/TA.EXE</DataRef>
           <ColorsNo>256</ColorsNo>
           <DataStart>235563</DataStart>
           <Mode>VGA_24BIT</Mode>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.COMMON_A">
-          <DataRef>Assets.TA.EXE</DataRef>
+          <DataRef>Vanilla/TA.EXE</DataRef>
           <ColorsNo>256</ColorsNo>
           <DataStart>235659</DataStart>
           <Mode>VGA_24BIT</Mode>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.COMMON_B">
-          <DataRef>Assets.TA.EXE</DataRef>
+          <DataRef>Vanilla/TA.EXE</DataRef>
           <ColorsNo>32</ColorsNo>
           <DataStart>235755</DataStart>
           <Mode>VGA_24BIT</Mode>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.COMMON_EXTA">
-          <DataRef>Assets.TA.EXE</DataRef>
+          <DataRef>Vanilla/TA.EXE</DataRef>
           <ColorsNo>256</ColorsNo>
           <DataStart>275902</DataStart>
           <Mode>VGA_24BIT</Mode>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.COMMON_EXTB">
-          <DataRef>Assets.TA.EXE</DataRef>
+          <DataRef>Vanilla/TA.EXE</DataRef>
           <ColorsNo>32</ColorsNo>
           <DataStart>204214</DataStart>
           <Mode>VGA_24BIT</Mode>

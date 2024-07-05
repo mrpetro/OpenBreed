@@ -27,15 +27,15 @@ namespace OpenBreed.Database.Xml.Items.Palettes
 
         protected XmlDbPaletteFromLbm(XmlDbPaletteFromLbm other) : base(other)
         {
-            DataRef = other.DataRef;
+            ImageRef = other.ImageRef;
         }
 
         #endregion Protected Constructors
 
         #region Public Properties
 
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
+        [XmlElement("ImageRef")]
+        public string ImageRef { get; set; }
 
         #endregion Public Properties
 

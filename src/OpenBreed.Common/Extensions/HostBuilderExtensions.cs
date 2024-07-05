@@ -9,9 +9,6 @@ using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using static System.Collections.Specialized.BitVector32;
 
 namespace OpenBreed.Common.Extensions
 {
@@ -24,6 +21,10 @@ namespace OpenBreed.Common.Extensions
                 services.AddSingleton<IAssetDataHandler, PcmSoundDataHandler>();
                 services.AddSingleton<IAssetDataHandler, IffImageDataHandler>();
                 services.AddSingleton<IAssetDataHandler, AcbmImageDataHandler>();
+                services.AddSingleton<IAssetDataHandler, MapDataHandler>();
+                services.AddSingleton<IAssetDataHandler, MapPaletteDataHandler>();
+                services.AddSingleton<IAssetDataHandler, BinaryPaletteDataHandler>();
+                services.AddSingleton<IAssetDataHandler, LbmPaletteDataHandler>();
             });
         }
 
@@ -79,8 +80,12 @@ namespace OpenBreed.Common.Extensions
                 services.AddSingleton<PalettesDataProvider>();
                 services.AddSingleton<TextsDataProvider>();
                 services.AddSingleton<MapsDataProvider>();
+                services.AddSingleton<Lazy<MapsDataProvider>>((sp) => new Lazy<MapsDataProvider>(() => sp.GetService<MapsDataProvider>()));
                 services.AddSingleton<ImagesDataProvider>();
+                services.AddSingleton<Lazy<ImagesDataProvider>>((sp) => new Lazy<ImagesDataProvider>(() => sp.GetService<ImagesDataProvider>()));
                 services.AddSingleton<SoundsDataProvider>();
+
+
             });
        }
 

@@ -2,9 +2,11 @@
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Assets;
+using OpenBreed.Database.Interface.Items.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace OpenBreed.Common.Data
 {
@@ -20,6 +22,8 @@ namespace OpenBreed.Common.Data
 
         object Load(IDbEntry dbEntry);
 
+        void Save(IDbEntry dbEntry, object model);
+
         #endregion Public Methods
     }
 
@@ -33,7 +37,10 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
-        protected abstract object Load(TDbEntry dbEntry);
+        public void Save(IDbEntry dbEntry, object model)
+        {
+            Save((TDbEntry)dbEntry, model);
+        }
 
         public object Load(IDbEntry dbEntry)
         {
@@ -41,6 +48,14 @@ namespace OpenBreed.Common.Data
         }
 
         #endregion Public Methods
+
+        #region Protected Methods
+
+        protected abstract void Save(TDbEntry dbEntry, object model);
+
+        protected abstract object Load(TDbEntry dbEntry);
+
+        #endregion Protected Methods
     }
 
     public class AssetsDataProvider
@@ -108,6 +123,18 @@ namespace OpenBreed.Common.Data
             return handler.Load(dbEntry);
         }
 
+        public object LoadModel<TDbEntry>(string entryId) where TDbEntry : IDbEntry
+        {
+            var dbEntry = repositoryProvider.GetRepository<TDbEntry>().GetById(entryId);
+
+            if (dbEntry is null)
+            {
+                throw new Exception($"Entry '{entryId}' of type '{nameof(TDbEntry)}' not found.");
+            }
+
+            return LoadModel<TDbEntry>(dbEntry);
+        }
+
         public object LoadModel(string entryId)
         {
             var assetEntry = repositoryProvider.GetRepository<IDbAsset>().GetById(entryId);
@@ -137,6 +164,21 @@ namespace OpenBreed.Common.Data
             }
 
             formatTypeHandler.Save(ds, data, parameters);
+        }
+
+        public void SaveModel<TDbEntry>(TDbEntry dbEntry, object model) where TDbEntry : IDbEntry
+        {
+            if (dbEntry is null)
+            {
+                throw new ArgumentNullException(nameof(dbEntry));
+            }
+
+            if (!handlers.TryGetValue(typeof(TDbEntry), out IAssetDataHandler handler))
+            {
+                throw new Exception($"No save handler for '{typeof(TDbEntry)}'.");
+            }
+
+            handler.Save(dbEntry, model);
         }
 
         public void SaveModel(string entryId, object data)

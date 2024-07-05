@@ -11,6 +11,8 @@ namespace OpenBreed.Database.Interface.Items.Maps
     {
         string DataRef { get; }
 
+        string Format { get; }
+
         string TileSetRef { get; }
         string ActionSetRef { get; set; }
         string ScriptRef { get; set; }
