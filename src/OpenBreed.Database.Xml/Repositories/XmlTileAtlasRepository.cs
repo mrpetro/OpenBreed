@@ -36,7 +36,7 @@ namespace OpenBreed.Database.Xml.Repositories
             get
             {
                 yield return typeof(XmlDbTileAtlasFromBlk);
-                yield return typeof(XmlDbTileAtlasFromImage);
+                yield return typeof(XmlDbTileAtlasFromAcbm);
             }
         }
 
@@ -89,7 +89,7 @@ namespace OpenBreed.Database.Xml.Repositories
             get
             {
                 yield return typeof(XmlDbTileAtlasFromBlk);
-                yield return typeof(XmlDbTileAtlasFromImage);
+                yield return typeof(XmlDbTileAtlasFromAcbm);
             }
         }
 

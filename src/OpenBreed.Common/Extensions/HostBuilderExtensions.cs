@@ -25,6 +25,9 @@ namespace OpenBreed.Common.Extensions
                 services.AddSingleton<IAssetDataHandler, MapPaletteDataHandler>();
                 services.AddSingleton<IAssetDataHandler, BinaryPaletteDataHandler>();
                 services.AddSingleton<IAssetDataHandler, LbmPaletteDataHandler>();
+                services.AddSingleton<IAssetDataHandler, BlkTileAtlasDataHandler>();
+                services.AddSingleton<IAssetDataHandler, AcbmTileAtlasDataHandler>();
+                services.AddSingleton<IAssetDataHandler, SprSpriteAtlasDataHandler>();
             });
         }
 
@@ -109,16 +112,7 @@ namespace OpenBreed.Common.Extensions
                 services.AddSingleton((s) =>
                 {
                     var formatMan = new DataFormatMan();
-                    formatMan.RegisterFormat("ABSE_MAP", new ABSEMAPFormat(s.GetRequiredService<IDrawingFactory>()));
-                    formatMan.RegisterFormat("ABHC_MAP", new ABHCMAPFormat(s.GetRequiredService<IDrawingFactory>()));
-                    formatMan.RegisterFormat("ABTA_MAP", new ABTAMAPFormat(s.GetRequiredService<IDrawingFactory>()));
-                    formatMan.RegisterFormat("ABTABLK", new ABTABLKFormat());
-                    formatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
-                    formatMan.RegisterFormat("ABTAODDSPR", new ABTAODDSPRFormat());
                     formatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
-                    formatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat(s.GetRequiredService<IBitmapProvider>()));
-                    formatMan.RegisterFormat("IFF_IMAGE", new IFFImageFormat(s.GetRequiredService<IBitmapProvider>()));
-                    formatMan.RegisterFormat("BINARY", new BinaryFormat());
                     formatMan.RegisterFormat("TEXT", new TextFormat());
                     return formatMan;
                 });

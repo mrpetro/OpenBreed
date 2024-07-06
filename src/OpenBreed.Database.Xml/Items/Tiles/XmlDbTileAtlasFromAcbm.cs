@@ -12,12 +12,12 @@ using System.Xml.Serialization;
 namespace OpenBreed.Database.Xml.Items.Tiles
 {
     [Serializable]
-    [Description("Tile atlas from Image"), Category("Appearance")]
-    public class XmlDbTileAtlasFromImage : XmlDbTileAtlas, IDbTileAtlasFromImage
+    [Description("Tile atlas from ACBM"), Category("Appearance")]
+    public class XmlDbTileAtlasFromAcbm : XmlDbTileAtlas, IDbTileAtlasFromAcbm
     {
         #region Public Constructors
 
-        public XmlDbTileAtlasFromImage()
+        public XmlDbTileAtlasFromAcbm()
         {
         }
 
@@ -25,10 +25,11 @@ namespace OpenBreed.Database.Xml.Items.Tiles
 
         #region Protected Constructors
 
-        protected XmlDbTileAtlasFromImage(XmlDbTileAtlasFromImage other) : base(other)
+        protected XmlDbTileAtlasFromAcbm(XmlDbTileAtlasFromAcbm other) : base(other)
         {
             DataRef = other.DataRef;
             TileSize = other.TileSize;
+            BitPlanesNo = other.BitPlanesNo;
         }
 
         #endregion Protected Constructors
@@ -41,11 +42,14 @@ namespace OpenBreed.Database.Xml.Items.Tiles
         [XmlElement("TileSize")]
         public int TileSize { get; set; }
 
+        [XmlElement("BitPlanesNo")]
+        public int BitPlanesNo { get; set; }
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public override IDbEntry Copy() => new XmlDbTileAtlasFromImage(this);
+        public override IDbEntry Copy() => new XmlDbTileAtlasFromAcbm(this);
 
         #endregion Public Methods
     }

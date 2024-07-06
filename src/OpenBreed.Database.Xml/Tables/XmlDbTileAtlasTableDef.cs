@@ -17,7 +17,7 @@ namespace OpenBreed.Database.Xml.Tables
 
         [XmlArray("Items"),
         XmlArrayItem("TileSetFromBLK", typeof(XmlDbTileAtlasFromBlk)),
-        XmlArrayItem("TileSetFromImage", typeof(XmlDbTileAtlasFromImage))]
+        XmlArrayItem("TileSetFromACBM", typeof(XmlDbTileAtlasFromAcbm))]
         public readonly List<XmlDbTileAtlas> Items = new List<XmlDbTileAtlas>();
     }
 }

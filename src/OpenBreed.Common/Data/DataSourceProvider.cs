@@ -39,13 +39,17 @@ namespace OpenBreed.Common.Data
 
         public DataSourceBase GetDataSource(string name)
         {
-            DataSourceBase ds = null;
-            if (_openedDataSources.TryGetValue(name, out ds))
+            if (_openedDataSources.TryGetValue(name, out DataSourceBase ds))
+            {
                 return ds;
+            }
 
             var entry = repositoryProvider.GetRepository<IDbDataSource>().GetById(name);
-            if (entry == null)
+
+            if (entry is null)
+            {
                 throw new Exception($"Data source error: {name}");
+            }
 
             ds = CreateDataSource(entry);
 

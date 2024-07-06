@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Model.Sprites;
 using System;
@@ -40,6 +41,19 @@ namespace OpenBreed.Common.Data
                 throw new Exception("SpriteSet error: " + id);
 
             return GetModel(entry);
+        }
+
+        public SpriteSetModel GetSpriteAtlas(IDbSpriteAtlas dbSpriteAtlas, bool refresh = false)
+        {
+            switch (dbSpriteAtlas)
+            {
+                case IDbSpriteAtlasFromSpr dbSpriteAtlasFromSpr:
+                    return dataProvider.GetModel<IDbSpriteAtlasFromSpr, SpriteSetModel>(dbSpriteAtlasFromSpr, refresh);
+                case IDbSpriteAtlasFromImage dbSpriteAtlasFromImage:
+                    return dataProvider.GetModel<IDbSpriteAtlasFromImage, SpriteSetModel>(dbSpriteAtlasFromImage, refresh);
+                default:
+                    throw new NotImplementedException(dbSpriteAtlas.GetType().ToString());
+            }
         }
 
         #endregion Public Methods

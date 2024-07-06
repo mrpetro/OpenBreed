@@ -220,173 +220,6 @@
     </DataSources>
     <Assets>
       <Items>
-        <Asset Id="Assets.SPR1A.SPR" DataSourceRef="Vanilla/EPF/SPR1A.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR1B.SPR" DataSourceRef="Vanilla/EPF/SPR1B.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR3A.SPR" DataSourceRef="Vanilla/EPF/SPR3A.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR3B.SPR" DataSourceRef="Vanilla/EPF/SPR3B.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR4A.SPR" DataSourceRef="Vanilla/EPF/SPR4A.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR4B.SPR" DataSourceRef="Vanilla/EPF/SPR4B.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR5A.SPR" DataSourceRef="Vanilla/EPF/SPR5A.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR5B.SPR" DataSourceRef="Vanilla/EPF/SPR5B.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR6A.SPR" DataSourceRef="Vanilla/EPF/SPR6A.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR6B.SPR" DataSourceRef="Vanilla/EPF/SPR6B.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR7A.SPR" DataSourceRef="Vanilla/EPF/SPR7A.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR7B.SPR" DataSourceRef="Vanilla/EPF/SPR7B.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR8A.SPR" DataSourceRef="Vanilla/EPF/SPR8A.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPR8B.SPR" DataSourceRef="Vanilla/EPF/SPR8B.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPRDA.SPR" DataSourceRef="Vanilla/EPF/SPRDA.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.SPRDB.SPR" DataSourceRef="Vanilla/EPF/SPRDB.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.HERO1.SPR" DataSourceRef="Vanilla/EPF/HERO1.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.HERO2.SPR" DataSourceRef="Vanilla/EPF/HERO2.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_A.SPR" DataSourceRef="Vanilla/EPF/ALIEN_A.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_B.SPR" DataSourceRef="Vanilla/EPF/ALIEN_B.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_C.SPR" DataSourceRef="Vanilla/EPF/ALIEN_C.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_E.SPR" DataSourceRef="Vanilla/EPF/ALIEN_E.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_F.SPR" DataSourceRef="Vanilla/EPF/ALIEN_F.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_G.SPR" DataSourceRef="Vanilla/EPF/ALIEN_G.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_H.SPR" DataSourceRef="Vanilla/EPF/ALIEN_H.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_I.SPR" DataSourceRef="Vanilla/EPF/ALIEN_I.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_J.SPR" DataSourceRef="Vanilla/EPF/ALIEN_J.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_K.SPR" DataSourceRef="Vanilla/EPF/ALIEN_K.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.ALIEN_X.SPR" DataSourceRef="Vanilla/EPF/ALIEN_X.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.RESIDENT.SPR" DataSourceRef="Vanilla/EPF/RESIDENT.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.COMP1.SPR" DataSourceRef="Vanilla/EPF/COMP1.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.COMP2.SPR" DataSourceRef="Vanilla/EPF/COMP2.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.COMP3.SPR" DataSourceRef="Vanilla/EPF/COMP3.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.COMPFONT.SPR" DataSourceRef="Vanilla/EPF/COMPFONT.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.STATUS.SPR" DataSourceRef="Vanilla/EPF/STATUS.SPR" FormatType="ABTAODDSPR">
-          <Parameters>
-            <Parameter Name="S1.W" Type="System.Int32">320</Parameter>
-            <Parameter Name="S1.H" Type="System.Int32">11</Parameter>
-            <Parameter Name="S2.W" Type="System.Int32">320</Parameter>
-            <Parameter Name="S2.H" Type="System.Int32">11</Parameter>
-            <Parameter Name="S3.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S3.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S4.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S4.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S5.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S5.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S6.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S6.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S7.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S7.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S8.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S8.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S9.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S9.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S10.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S10.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S11.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S11.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S12.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S12.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S13.W" Type="System.Int32">8</Parameter>
-            <Parameter Name="S13.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S14.W" Type="System.Int32">32</Parameter>
-            <Parameter Name="S14.H" Type="System.Int32">8</Parameter>
-            <Parameter Name="S15.W" Type="System.Int32">32</Parameter>
-            <Parameter Name="S15.H" Type="System.Int32">8</Parameter>
-          </Parameters>
-        </Asset>
-        <Asset Id="Assets.TORCH.SPR" DataSourceRef="Vanilla/EPF/TORCH.SPR" FormatType="ABTASPR">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.LEVEL1.BLK" DataSourceRef="Vanilla/EPF/LEVEL1.BLK" FormatType="ABTABLK">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.LEVEL3.BLK" DataSourceRef="Vanilla/EPF/LEVEL3.BLK" FormatType="ABTABLK">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.LEVEL4.BLK" DataSourceRef="Vanilla/EPF/LEVEL4.BLK" FormatType="ABTABLK">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.LEVEL5.BLK" DataSourceRef="Vanilla/EPF/LEVEL5.BLK" FormatType="ABTABLK">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.LEVEL6.BLK" DataSourceRef="Vanilla/EPF/LEVEL6.BLK" FormatType="ABTABLK">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.LEVEL7.BLK" DataSourceRef="Vanilla/EPF/LEVEL7.BLK" FormatType="ABTABLK">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.LEVEL8.BLK" DataSourceRef="Vanilla/EPF/LEVEL8.BLK" FormatType="ABTABLK">
-          <Parameters />
-        </Asset>
-        <Asset Id="Assets.LEVELD.BLK" DataSourceRef="Vanilla/EPF/LEVELD.BLK" FormatType="ABTABLK">
-          <Parameters />
-        </Asset>
-
-        <Asset Id="Assets.TITLE.AMF" DataSourceRef="Vanilla/EPF/TITLE.AMF" FormatType="AMF_MUSIC">
-          <Parameters />
-        </Asset>
         <Asset Id="Assets.Scripts.L1.MAP.01.lua" DataSourceRef="Extension/Scripts/L1/MAP.01.lua" FormatType="TEXT">
           <Parameters />
         </Asset>
@@ -513,7 +346,7 @@
     <Songs>
       <Items>
         <Song Id="Vanilla/Menu/Title">
-          <DataRef>Assets.TITLE.AMF</DataRef>
+          <DataRef>Vanilla/EPF/TITLE.AMF</DataRef>
         </Song>
       </Items>
     </Songs>
@@ -972,232 +805,249 @@
             <PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR1A.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR1A.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L1/B">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR1B.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR1B.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L3/A">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR3A.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR3A.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L3/B">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR3B.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR3B.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L4/A">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR4A.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR4A.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L4/B">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR4B.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR4B.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L5/A">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR5A.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR5A.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L5/B">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR5B.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR5B.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L6/A">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR6A.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR6A.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L6/B">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR6B.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR6B.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L7/A">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR7A.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR7A.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L7/B">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR7B.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR7B.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L8/A">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR8A.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR8A.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L8/B">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPR8B.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPR8B.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/LD/A">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPRDA.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPRDA.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/LD/B">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.SPRDB.SPR</DataRef>
+          <DataRef>Vanilla/EPF/SPRDB.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Hero/1">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.HERO1.SPR</DataRef>
+          <DataRef>Vanilla/EPF/HERO1.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Hero/2">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.HERO2.SPR</DataRef>
+          <DataRef>Vanilla/EPF/HERO2.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Resident">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.RESIDENT.SPR</DataRef>
+          <DataRef>Vanilla/EPF/RESIDENT.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/A">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_A.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_A.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/B">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_B.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_B.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/C">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_C.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_C.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/E">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_E.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_E.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/F">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_F.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_F.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/G">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_G.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_G.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/H">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_H.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_H.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/I">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_I.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_I.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/J">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_J.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_J.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/K">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_K.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_K.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/X">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.ALIEN_X.SPR</DataRef>
+          <DataRef>Vanilla/EPF/ALIEN_X.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Computer/1">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON_A</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.COMP1.SPR</DataRef>
+          <DataRef>Vanilla/EPF/COMP1.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Computer/2">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON_A</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.COMP2.SPR</DataRef>
+          <DataRef>Vanilla/EPF/COMP2.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Computer/3">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON_A</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.COMP3.SPR</DataRef>
+          <DataRef>Vanilla/EPF/COMP3.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Computer/Font">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON_A</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.COMPFONT.SPR</DataRef>
+          <DataRef>Vanilla/EPF/COMPFONT.SPR</DataRef>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Status">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.STATUS.SPR</DataRef>
+          <DataRef>Vanilla/EPF/STATUS.SPR</DataRef>
+		  <Sizes>
+            <Size X="320" Y="11" />
+            <Size X="320" Y="11" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="8" Y="8" />
+            <Size X="32" Y="8" />
+            <Size X="32" Y="8" />
+		  </Sizes>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Torch">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.TORCH.SPR</DataRef>
+          <DataRef>Vanilla/EPF/TORCH.SPR</DataRef>
         </SpriteSetFromSPR>
       </Items>
     </SpriteSets>
@@ -1208,56 +1058,56 @@
             <PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.LEVEL1.BLK</DataRef>
+          <DataRef>Vanilla/EPF/LEVEL1.BLK</DataRef>
         </TileSetFromBLK>
         <TileSetFromBLK Id="Vanilla/L3">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.LEVEL3.BLK</DataRef>
+          <DataRef>Vanilla/EPF/LEVEL3.BLK</DataRef>
         </TileSetFromBLK>
         <TileSetFromBLK Id="Vanilla/L4">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.LEVEL4.BLK</DataRef>
+          <DataRef>Vanilla/EPF/LEVEL4.BLK</DataRef>
         </TileSetFromBLK>
         <TileSetFromBLK Id="Vanilla/L5">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.LEVEL5.BLK</DataRef>
+          <DataRef>Vanilla/EPF/LEVEL5.BLK</DataRef>
         </TileSetFromBLK>
         <TileSetFromBLK Id="Vanilla/L6">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.LEVEL6.BLK</DataRef>
+          <DataRef>Vanilla/EPF/LEVEL6.BLK</DataRef>
         </TileSetFromBLK>
         <TileSetFromBLK Id="Vanilla/L7">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.LEVEL7.BLK</DataRef>
+          <DataRef>Vanilla/EPF/LEVEL7.BLK</DataRef>
         </TileSetFromBLK>
         <TileSetFromBLK Id="Vanilla/L8">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.LEVEL8.BLK</DataRef>
+          <DataRef>Vanilla/EPF/LEVEL8.BLK</DataRef>
         </TileSetFromBLK>
         <TileSetFromBLK Id="Vanilla/LD">
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
           </PaletteRefs>
-          <DataRef>Assets.LEVELD.BLK</DataRef>
+          <DataRef>Vanilla/EPF/LEVELD.BLK</DataRef>
         </TileSetFromBLK>
       </Items>
     </TileSets>

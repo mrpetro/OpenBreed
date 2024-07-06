@@ -61,64 +61,6 @@
 				<FileDataSource Id="DataSources.MPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MPIC" />
 			</Items>
 		</DataSources>
-		<Assets>
-			<Items>
-				<Asset Id="Assets.L1BM" DataSourceRef="DataSources.L1BM" FormatType="ACBM_TILE_SET">
-					<Parameters>
-						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L2BM" DataSourceRef="DataSources.L2BM" FormatType="ACBM_TILE_SET">
-					<Parameters>
-						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L3BM" DataSourceRef="DataSources.L3BM" FormatType="ACBM_TILE_SET">
-					<Parameters>
-						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L4BM" DataSourceRef="DataSources.L4BM" FormatType="ACBM_TILE_SET">
-					<Parameters>
-						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L5BM" DataSourceRef="DataSources.L5BM" FormatType="ACBM_TILE_SET">
-					<Parameters>
-						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L6BM" DataSourceRef="DataSources.L6BM" FormatType="ACBM_TILE_SET">
-					<Parameters>
-						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L7BM" DataSourceRef="DataSources.L7BM" FormatType="ACBM_TILE_SET">
-					<Parameters>
-						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L8BM" DataSourceRef="DataSources.L8BM" FormatType="ACBM_TILE_SET">
-					<Parameters>
-						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-					</Parameters>
-				</Asset>
-				<Asset Id="Assets.L9BM" DataSourceRef="DataSources.L9BM" FormatType="ACBM_TILE_SET">
-					<Parameters>
-						<Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-						<Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-					</Parameters>
-				</Asset>
-			</Items>
-		</Assets>
 		<Images>
 			<Items>
 				<AcbmImage Description="Characters statistics screens" Id="Images.CHAD">
@@ -335,69 +277,87 @@
 		</Images>
 		<TileSets>
 			<Items>
-				<TileSetFromBLK Id="TileSets.L1">
+				<TileSetFromACBM Id="TileSets.L1">
+					<DataRef>DataSources.L1BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
 					</PaletteRefs>
-					<DataRef>Assets.L1BM</DataRef>
-				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L2">
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L2">
+					<DataRef>DataSources.L2BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L2MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L2MA.ALCM</PaletteRef>
 					</PaletteRefs>
-					<DataRef>Assets.L2BM</DataRef>
-				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L3">
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L3">
+					<DataRef>DataSources.L3BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L3MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L3MA.ALCM</PaletteRef>
 					</PaletteRefs>
-					<DataRef>Assets.L3BM</DataRef>
-				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L4">
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L4">
+					<DataRef>DataSources.L4BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L4MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L4MA.ALCM</PaletteRef>
 					</PaletteRefs>
-					<DataRef>Assets.L4BM</DataRef>
-				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L5">
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L5">
+					<DataRef>DataSources.L5BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L5MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L5MA.ALCM</PaletteRef>
 					</PaletteRefs>
-					<DataRef>Assets.L5BM</DataRef>
-				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L6">
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L6">
+					<DataRef>DataSources.L6BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
 					<PaletteRefs>
 						<PaletteRef>Palettes.L6MA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.L6MA.ALCM</PaletteRef>
 					</PaletteRefs>
-					<DataRef>Assets.L6BM</DataRef>
-				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L7">
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L7">
+					<DataRef>DataSources.L7BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LAMA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.LAMA.ALCM</PaletteRef>
 					</PaletteRefs>
-					<DataRef>Assets.L7BM</DataRef>
-				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L8">
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L8">
+					<DataRef>DataSources.L8BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LCMA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.LCMA.ALCM</PaletteRef>
 					</PaletteRefs>
-					<DataRef>Assets.L8BM</DataRef>
-				</TileSetFromBLK>
-				<TileSetFromBLK Id="TileSets.L9">
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L9">
+					<DataRef>DataSources.L9BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
 					<PaletteRefs>
 						<PaletteRef>Palettes.LEMA.CMAP</PaletteRef>
 						<PaletteRef>Palettes.LEMA.ALCM</PaletteRef>
 					</PaletteRefs>
-					<DataRef>Assets.L9BM</DataRef>
-				</TileSetFromBLK>
+				</TileSetFromACBM>
 			</Items>
 		</TileSets>
 		<Maps>
