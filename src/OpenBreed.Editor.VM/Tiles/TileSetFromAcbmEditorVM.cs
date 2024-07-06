@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetFromBlkEditorVM : EntrySpecificEditorVM<IDbTileAtlas>
+    public class TileSetFromAcbmEditorVM : EntrySpecificEditorVM<IDbTileAtlas>
     {
         #region Private Fields
 
@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Constructors
 
-        public TileSetFromBlkEditorVM(
+        public TileSetFromAcbmEditorVM(
             ILogger logger,
             TileAtlasDataProvider tileSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
@@ -87,11 +87,11 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Protected Methods
 
-        protected void UpdateEntry(IDbTileAtlasFromBlk entry)
+        protected void UpdateEntry(IDbTileAtlasFromAcbm entry)
         {
         }
 
-        protected void UpdateVM(IDbTileAtlasFromBlk entry)
+        protected void UpdateVM(IDbTileAtlasFromAcbm entry)
         {
             model = tileSetsDataProvider.GetTileAtlas(entry);
 
@@ -107,7 +107,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         protected override void UpdateEntry(IDbTileAtlas entry)
         {
-            UpdateEntry((IDbTileAtlasFromBlk)entry);
+            UpdateEntry((IDbTileAtlasFromAcbm)entry);
 
             base.UpdateEntry(entry);
         }
@@ -116,7 +116,7 @@ namespace OpenBreed.Editor.VM.Tiles
         {
             base.UpdateVM(entry);
 
-            UpdateVM((IDbTileAtlasFromBlk)entry);
+            UpdateVM((IDbTileAtlasFromAcbm)entry);
         }
 
         protected override void OnPropertyChanged(string name)

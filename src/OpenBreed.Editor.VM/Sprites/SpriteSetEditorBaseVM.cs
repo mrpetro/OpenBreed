@@ -39,13 +39,13 @@ namespace OpenBreed.Editor.VM.Sprites
             ILogger logger,
             SpriteAtlasDataProvider spriteAtlasDataProvider,
             PalettesDataProvider palettesDataProvider,
-            IModelsProvider dataProvider,
+            IModelsProvider modelsProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
         {
             this.spriteAtlasDataProvider = spriteAtlasDataProvider;
             this.palettesDataProvider = palettesDataProvider;
-            this.dataProvider = dataProvider;
+            this.dataProvider = modelsProvider;
             PaletteRefs = new BindingList<string>();
 
             palette = PaletteModel.NullPalette;

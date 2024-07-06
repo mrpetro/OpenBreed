@@ -61,6 +61,9 @@
     <DataTemplate DataType="{x:Type vmTiles:TileSetFromBlkEditorVM}" >
         <ctrlTiles:TileSetFromBlkEditorCtrl />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vmTiles:TileSetFromAcbmEditorVM}" >
+        <ctrlTiles:TileSetFromAcbmEditorCtrl />
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vmScripts:ScriptEmbeddedEditorVM}" >
         <ctrlScripts:ScriptEmbeddedCtrl />
     </DataTemplate>

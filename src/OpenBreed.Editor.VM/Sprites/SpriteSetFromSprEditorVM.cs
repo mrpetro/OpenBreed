@@ -29,10 +29,10 @@ namespace OpenBreed.Editor.VM.Sprites
             ILogger logger,
             SpriteAtlasDataProvider spriteSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
-            IModelsProvider dataProvider,
+            IModelsProvider modelsProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IBitmapProvider bitmapProvider) : base(logger, spriteSetsDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
+            IBitmapProvider bitmapProvider) : base(logger, spriteSetsDataProvider, palettesDataProvider, modelsProvider, workspaceMan, dialogProvider)
         {
             Items = new BindingList<SpriteVM>();
             this.bitmapProvider = bitmapProvider;
@@ -82,15 +82,19 @@ namespace OpenBreed.Editor.VM.Sprites
 
         protected override void UpdateVM(IDbSpriteAtlasFromSpr entry)
         {
-            var model = spriteAtlasDataProvider.GetSpriteSet(entry.Id);
+            var model = spriteAtlasDataProvider.GetSpriteAtlas(entry);
 
             if (model != null)
+            {
                 FromModel(model);
+            }
 
             CurrentSpriteIndex = 0;
 
             foreach (var item in Items)
+            {
                 bitmapProvider.SetPaletteColors(item.Image, Palette.Data);
+            }
         }
 
         #endregion Protected Methods
