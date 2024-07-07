@@ -3,7 +3,6 @@ using OpenBreed.Common.DataSources;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Readers.Images.IFF;
-using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Sounds;

@@ -27,6 +27,7 @@ namespace OpenBreed.Database.Xml.Items.Texts
 
         protected XmlDbTextFromMap(XmlDbTextFromMap other) : base(other)
         {
+            MapRef = other.MapRef;
             BlockName = other.BlockName;
         }
 
@@ -34,8 +35,8 @@ namespace OpenBreed.Database.Xml.Items.Texts
 
         #region Public Properties
 
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
+        [XmlElement("MapRef")]
+        public string MapRef { get; set; }
 
         [XmlElement("BlockName")]
         public string BlockName { get; set; }

@@ -18,9 +18,11 @@ namespace OpenBreed.Common.Data
         internal static EntityTemplateModel FromText(IModelsProvider provider, IDbEntityTemplateFromFile entry)
         {
             if (entry.DataRef == null)
+            {
                 return null;
+            }
 
-            var data = provider.GetModel<TextModel>(entry.DataRef);
+            var data = provider.GetModel<IDbEntityTemplateFromFile, TextModel>(entry);
 
             if (data == null)
                 return null;

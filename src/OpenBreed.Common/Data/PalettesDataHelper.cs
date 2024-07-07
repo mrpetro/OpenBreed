@@ -14,6 +14,8 @@ using OpenBreed.Common.Interface.Data;
 using System.Drawing.Imaging;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Model.Extensions;
+using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Database.Interface.Items.Images;
 
 namespace OpenBreed.Common.Data
 {
@@ -35,7 +37,7 @@ namespace OpenBreed.Common.Data
 
         public static PaletteModel FromLbmImage(IModelsProvider dataProvider, IDbPaletteFromLbm entry)
         {
-            var image = dataProvider.GetModel<IImage>(entry.ImageRef);
+            var image = dataProvider.GetModelById<IDbImage, IImage>(entry.ImageRef);
 
             if (image is null)
                 return null;
@@ -57,7 +59,7 @@ namespace OpenBreed.Common.Data
 
         public static PaletteModel FromMapModel(IModelsProvider dataProvider, IDbPaletteFromMap entry)
         {
-            var mapModel = dataProvider.GetModel<MapModel>(entry.MapRef);
+            var mapModel = dataProvider.GetModelById<IDbMap, MapModel>(entry.MapRef);
 
             if (mapModel is null)
             {

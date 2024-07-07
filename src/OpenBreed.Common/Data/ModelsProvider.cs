@@ -14,7 +14,7 @@ namespace OpenBreed.Common.Data
 
         private readonly ILogger logger;
         private readonly AssetsDataProvider assets;
-        private Dictionary<string, object> loadedModels = new Dictionary<string, object>();
+        private readonly Dictionary<Type, Dictionary<string, object>> loadedModels = new Dictionary<Type, Dictionary<string, object>>();
 
         #endregion Private Fields
 
@@ -57,19 +57,42 @@ namespace OpenBreed.Common.Data
             return false;
         }
 
+        private bool TryGetLoadedModel(Type entryType, string entryId, out object data)
+        {
+            if (!loadedModels.TryGetValue(entryType, out Dictionary<string, object> typeLoadedModels))
+            {
+                data = null;
+                return false;
+            }
+
+            return typeLoadedModels.TryGetValue(entryId, out data);
+        }
 
         public TModel GetModelById<TDbEntry, TModel>(string entryId) where TDbEntry : IDbEntry
         {
             object data;
 
-            if (loadedModels.TryGetValue(entryId, out data))
-                return (TModel)data;
+            var entryType = typeof(TDbEntry);
+
+            if (loadedModels.TryGetValue(entryType, out Dictionary<string, object> typeLoadedModels))
+            {
+                if (typeLoadedModels.TryGetValue(entryId, out data))
+                {
+                    return (TModel)data;
+                }
+            }
 
             data = assets.LoadModel<TDbEntry>(entryId);
 
             logger.LogTrace($"Model loaded from asset '{entryId}'.");
 
-            loadedModels.Add(entryId, data);
+            if (typeLoadedModels is null)
+            {
+                typeLoadedModels = new Dictionary<string, object>();
+                loadedModels.Add(entryType, typeLoadedModels);
+            }
+
+            typeLoadedModels.Add(entryId, data);
 
             return (TModel)data;
         }
@@ -78,12 +101,20 @@ namespace OpenBreed.Common.Data
         {
             object data;
 
-            if (refresh)
+            var entryType = typeof(TDbEntry);
+
+            if (!loadedModels.TryGetValue(entryType, out Dictionary<string, object> typeLoadedModels))
             {
-                loadedModels.Remove(dbEntry.Id);
+                typeLoadedModels = new Dictionary<string, object>();
+                loadedModels.Add(entryType, typeLoadedModels);
             }
 
-            if (loadedModels.TryGetValue(dbEntry.Id, out data))
+            if (refresh)
+            {
+                typeLoadedModels.Remove(dbEntry.Id);
+            }
+
+            if (typeLoadedModels.TryGetValue(dbEntry.Id, out data))
             {
                 return (TModel)data;
             }
@@ -92,46 +123,7 @@ namespace OpenBreed.Common.Data
 
             logger.LogTrace($"Model loaded from dbEntry '{dbEntry.Id}'.");
 
-            loadedModels.Add(dbEntry.Id, data);
-
-            return (TModel)data;
-        }
-
-        public bool TryGetModel<TModel>(string id, out TModel item, out string message)
-        {
-            var data = GetModel<TModel>(id);
-
-            if (data == null)
-            {
-                item = default(TModel);
-                message = $"No asset with ID '{id}' found.";
-                return false;
-            }
-
-            if (data is TModel)
-            {
-                item = (TModel)data;
-                message = null;
-                return true;
-            }
-
-            item = default(TModel);
-            message = $"Asset with ID '{id}' is not of type '{typeof(TModel)}'.";
-            return false;
-        }
-
-        public TModel GetModel<TModel>(string id)
-        {
-            object data;
-
-            if (loadedModels.TryGetValue(id, out data))
-                return (TModel)data;
-
-            data = assets.LoadModel(id);
-
-            logger.LogTrace($"Model loaded from asset '{id}'.");
-
-            loadedModels.Add(id, data);
+            typeLoadedModels.Add(dbEntry.Id, data);
 
             return (TModel)data;
         }
@@ -140,17 +132,22 @@ namespace OpenBreed.Common.Data
         {
             foreach (var item in loadedModels)
             {
-                var entryId = item.Key;
-                var data = item.Value;
+                var entryType = item.Key;
 
-                try
+                foreach (var subItem in item.Value)
                 {
-                    assets.SaveModel(entryId, data);
-                    logger.LogTrace($"Model saved to asset '{entryId}'.");
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError($"Problems saving model to asset '{entryId}'. Reason: {ex.Message}");
+                    var entryId = subItem.Key;
+                    var data = subItem.Value;
+
+                    try
+                    {
+                        assets.SaveModel(entryType, entryId, data);
+                        logger.LogTrace($"Model saved to asset '{entryId}'.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError($"Problems saving model to asset '{entryId}'. Reason: {ex.Message}");
+                    }
                 }
             }
 

@@ -11,7 +11,7 @@ namespace OpenBreed.Common.Data
     {
         public static SpriteSetModel FromSprModel(IModelsProvider dataProvider, IDbSpriteAtlasFromSpr entry)
         {
-            return dataProvider.GetModel<SpriteSetModel>(entry.DataRef);
+            return dataProvider.GetModel<IDbSpriteAtlasFromSpr, SpriteSetModel>(entry);
         }
 
         public static SpriteSetModel FromImageModel(
@@ -19,7 +19,7 @@ namespace OpenBreed.Common.Data
             IBitmapProvider bitmapProvider,
             IDbSpriteAtlasFromImage entry)
         {
-            var image = dataProvider.GetModel<IBitmap>(entry.DataRef);
+            var image = dataProvider.GetModel<IDbSpriteAtlasFromImage, IBitmap>(entry);
 
             var spriteSetBuilder = SpriteSetBuilder.NewSpriteSet();
 

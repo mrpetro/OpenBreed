@@ -28,6 +28,9 @@ namespace OpenBreed.Common.Extensions
                 services.AddSingleton<IAssetDataHandler, BlkTileAtlasDataHandler>();
                 services.AddSingleton<IAssetDataHandler, AcbmTileAtlasDataHandler>();
                 services.AddSingleton<IAssetDataHandler, SprSpriteAtlasDataHandler>();
+                services.AddSingleton<IAssetDataHandler, FileTextDataHandler>();
+                services.AddSingleton<IAssetDataHandler, MapTextDataHandler>();
+                services.AddSingleton<IAssetDataHandler, FileScriptDataHandler>();
             });
         }
 
@@ -104,20 +107,5 @@ namespace OpenBreed.Common.Extensions
                 });
             });
         }
-
-        public static void SetupABFormats(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton((s) =>
-                {
-                    var formatMan = new DataFormatMan();
-                    formatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
-                    formatMan.RegisterFormat("TEXT", new TextFormat());
-                    return formatMan;
-                });
-            });
-        }
-
     }
 }

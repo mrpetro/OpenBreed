@@ -6,7 +6,6 @@ using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Readers.Images.IFF;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Palettes;

@@ -10,6 +10,7 @@ using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Model.Images;
 using OpenBreed.Model.Maps;
 using OpenBreed.Model.Sounds;
@@ -26,27 +27,21 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Formats
 {
-    public class MapPaletteDataHandler : AssetDataHandlerBase<IDbPaletteFromMap>
+    public class MapTextDataHandler : AssetDataHandlerBase<IDbTextFromMap>
     {
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
-        private readonly IBitmapProvider bitmapProvider;
-        private readonly IDrawingFactory drawingFactory;
         private readonly Lazy<MapsDataProvider> lazyMapsDataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapPaletteDataHandler(
-            IBitmapProvider bitmapProvider,
-            IDrawingFactory drawingFactory,
+        public MapTextDataHandler(
             Lazy<MapsDataProvider> mapsDataProvider,
             IRepositoryProvider repositoryProvider)
         {
-            this.bitmapProvider = bitmapProvider;
-            this.drawingFactory = drawingFactory;
             this.lazyMapsDataProvider = mapsDataProvider;
             this.repositoryProvider = repositoryProvider;
         }
@@ -55,7 +50,7 @@ namespace OpenBreed.Common.Formats
 
         #region Protected Methods
 
-        protected override void Save(IDbPaletteFromMap dbEntry, object model)
+        protected override void Save(IDbTextFromMap dbEntry, object model)
         {
             var mapEntry = repositoryProvider.GetRepository<IDbMap>().GetById(dbEntry.MapRef);
 
@@ -73,7 +68,7 @@ namespace OpenBreed.Common.Formats
 
             throw new NotImplementedException();
         }
-        protected override object Load(IDbPaletteFromMap dbEntry)
+        protected override object Load(IDbTextFromMap dbEntry)
         {
             var mapEntry = repositoryProvider.GetRepository<IDbMap>().GetById(dbEntry.MapRef);
 
@@ -89,7 +84,7 @@ namespace OpenBreed.Common.Formats
                 throw new Exception($"Map problem '{mapEntry.Id}'.");
             }
 
-            return PalettesDataHelper.FromMapModel(mapModel, dbEntry);
+            return TextsDataHelper.FromMapModel(mapModel, dbEntry);
         }
 
         #endregion Protected Methods

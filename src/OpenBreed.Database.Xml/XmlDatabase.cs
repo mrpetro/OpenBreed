@@ -25,7 +25,6 @@ namespace OpenBreed.Database.Xml
 
         [XmlArray("Tables"),
         XmlArrayItem("DataSources", typeof(XmlDbDataSourceTableDef)),
-        XmlArrayItem("Assets", typeof(XmlDbAssetTableDef)),
         XmlArrayItem("Maps", typeof(XmlDbMapTableDef)),
         XmlArrayItem("Palettes", typeof(XmlDbPaletteTableDef)),
         XmlArrayItem("Texts", typeof(XmlDbTextTableDef)),

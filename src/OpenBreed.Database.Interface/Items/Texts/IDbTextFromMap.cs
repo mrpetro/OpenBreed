@@ -10,7 +10,7 @@ namespace OpenBreed.Database.Interface.Items.Texts
     {
         #region Public Properties
 
-        string DataRef { get; set; }
+        string MapRef { get; set; }
 
         string BlockName { get; set; }
 

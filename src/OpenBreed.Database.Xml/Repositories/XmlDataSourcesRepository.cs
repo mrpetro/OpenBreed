@@ -1,8 +1,6 @@
 ﻿using OpenBreed.Database.EFCore;
 using OpenBreed.Database.Interface.Items;
-using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.DataSources;
-using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Database.Xml.Items.DataSources;
 using OpenBreed.Database.Xml.Tables;
 using System;

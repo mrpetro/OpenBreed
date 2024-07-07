@@ -8,11 +8,7 @@ namespace OpenBreed.Common.Interface.Data
     {
         #region Public Methods
 
-        bool TryGetModel<TModel>(string id, out TModel item, out string message);
-
         bool TryGetModel<TDbEntry, TModel>(TDbEntry dbEntry, out TModel item, out string message) where TDbEntry : IDbEntry;
-
-        TModel GetModel<TModel>(string id);
 
         TModel GetModel<TDbEntry, TModel>(TDbEntry dbEntry, bool refresh = false) where TDbEntry : IDbEntry;
 
