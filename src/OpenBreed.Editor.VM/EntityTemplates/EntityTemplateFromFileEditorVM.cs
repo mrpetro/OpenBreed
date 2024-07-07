@@ -69,7 +69,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         protected override void UpdateEntry(IDbEntityTemplateFromFile entry)
         {
-            var model = dataProvider.GetModel<TextModel>(DataRef);
+            var model = dataProvider.GetModel<IDbEntityTemplateFromFile, TextModel>(entry);
             model.Text = EntityTemplate;
             entry.DataRef = DataRef;
         }

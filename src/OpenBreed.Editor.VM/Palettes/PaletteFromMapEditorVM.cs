@@ -128,7 +128,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         protected override void UpdateEntry(IDbPaletteFromMap source)
         {
-            var mapModel = modelsProvider.GetModel<MapModel>(MapRef);
+            var mapModel = modelsProvider.GetModelById<IDbMap, MapModel>(MapRef);
 
             var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == BlockName);
 

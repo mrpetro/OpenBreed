@@ -12,7 +12,6 @@ using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Maps;
-using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Sprites;
@@ -37,8 +36,6 @@ namespace OpenBreed.Editor.VM.Database
                 return new DbMapEntryVM();
             else if (entry is IDbDataSource)
                 return new DbDataSourceEntryVM();
-            else if (entry is IDbAsset)
-                return new DbAssetEntryVM();
             else if (entry is IDbActionSet)
                 return new DbActionSetEntryVM();
             else if (entry is IDbTileAtlas)

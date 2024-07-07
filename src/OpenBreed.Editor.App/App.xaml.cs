@@ -70,7 +70,6 @@ namespace OpenBreed.Editor.App
                 });
             });
 
-            builder.SetupABFormats();
             builder.SetupDataProviders();
             builder.SetupModelProvider();
 
@@ -115,7 +114,6 @@ namespace OpenBreed.Editor.App
                 //unitOfWork.RegisterRepository(new TileAtlasRepository(context, database.GetTable<XmlDbTileAtlasTableDef>()));
 
                 unitOfWork.RegisterRepository(new XmlDataSourcesRepository(database.GetTable<XmlDbDataSourceTableDef>()));
-                unitOfWork.RegisterRepository(new XmlAssetsRepository(database.GetTable<XmlDbAssetTableDef>()));
                 unitOfWork.RegisterRepository(new XmlTileAtlasRepository(database.GetTable<XmlDbTileAtlasTableDef>()));
                 unitOfWork.RegisterRepository(new XmlTileStampsRepository(database.GetTable<XmlDbTileStampTableDef>()));
                 unitOfWork.RegisterRepository(new XmlSpriteAtlasRepository(database.GetTable<XmlDbSpriteAtlasTableDef>()));

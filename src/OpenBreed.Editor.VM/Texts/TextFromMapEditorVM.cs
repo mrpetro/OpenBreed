@@ -38,8 +38,6 @@ namespace OpenBreed.Editor.VM.Texts
         {
             this.textsDataProvider = textsDataProvider;
             this.dataProvider = dataProvider;
-            BlockNames = new BindingList<string>();
-            BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));
 
             PropertyChanged += This_PropertyChanged;
         }
@@ -47,8 +45,6 @@ namespace OpenBreed.Editor.VM.Texts
         #endregion Public Constructors
 
         #region Public Properties
-
-        public BindingList<string> BlockNames { get; }
 
         public string BlockName
         {
@@ -82,55 +78,33 @@ namespace OpenBreed.Editor.VM.Texts
 
         protected override void UpdateEntry(IDbTextFromMap entry)
         {
-            var textFromMapEntry = (IDbTextFromMap)entry;
-
-            var mapModel = dataProvider.GetModel<MapModel>(DataRef);
+            var mapModel = dataProvider.GetModel<IDbTextFromMap, MapModel>(entry);
 
             var textBlock = mapModel.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == BlockName);
 
             textBlock.Value = Text;
 
-            var model = textsDataProvider.GetText(entry.Id);
+            var model = textsDataProvider.GetText(entry);
             model.Text = Text;
 
-            textFromMapEntry.DataRef = DataRef;
-            textFromMapEntry.BlockName = BlockName;
+            entry.MapRef = DataRef;
+            entry.BlockName = BlockName;
         }
 
         protected override void UpdateVM(IDbTextFromMap entry)
         {
-            var textFromMapEntry = (IDbTextFromMap)entry;
-
-            UpdateTextBlocksList(textFromMapEntry);
-
-            var model = textsDataProvider.GetText(entry.Id);
+            var model = textsDataProvider.GetText(entry);
 
             if (model != null)
                 Text = model.Text;
 
-            DataRef = textFromMapEntry.DataRef;
-            BlockName = textFromMapEntry.BlockName;
+            DataRef = entry.MapRef;
+            BlockName = entry.BlockName;
         }
 
         #endregion Public Methods
 
         #region Private Methods
-
-        private void UpdateTextBlocksList(IDbTextFromMap source)
-        {
-            BlockNames.UpdateAfter(() =>
-            {
-                BlockNames.Clear();
-
-                var map = dataProvider.GetModel<MapModel>(source.DataRef);
-
-                if (map == null)
-                    return;
-
-                foreach (var textBlock in map.Blocks.OfType<MapTextBlock>())
-                    BlockNames.Add(textBlock.Name);
-            });
-        }
 
         private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {

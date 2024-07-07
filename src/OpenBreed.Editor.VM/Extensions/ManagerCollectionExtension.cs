@@ -9,7 +9,6 @@ using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
-using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Interface.Items.Images;
@@ -65,7 +64,6 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<EntryEditorVM<IDbSound>>();
                 services.AddTransient<EntryEditorVM<IDbMap>>();
                 services.AddTransient<EntryEditorVM<IDbDataSource>>();
-                services.AddTransient<EntryEditorVM<IDbAsset>>();
                 services.AddTransient<EntryEditorVM<IDbText>>();
                 services.AddTransient<EntryEditorVM<IDbScript>>();
                 services.AddTransient<EntryEditorVM<IDbActionSet>>();

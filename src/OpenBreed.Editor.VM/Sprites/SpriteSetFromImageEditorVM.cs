@@ -145,7 +145,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         protected override void UpdateVM(IDbSpriteAtlasFromImage entry)
         {
-            SourceImage = dataProvider.GetModel<IBitmap>(entry.DataRef);
+            SourceImage = dataProvider.GetModel<IDbSpriteAtlasFromImage, IBitmap >(entry);
 
             Items.UpdateAfter(() =>
             {

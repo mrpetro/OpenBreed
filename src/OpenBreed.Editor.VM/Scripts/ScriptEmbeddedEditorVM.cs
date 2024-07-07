@@ -52,7 +52,7 @@ namespace OpenBreed.Editor.VM.Scripts
 
         protected override void UpdateVM(IDbScriptEmbedded entry)
         {
-            var model = scriptsDataProvider.GetScript(entry.Id);
+            var model = scriptsDataProvider.GetScript(entry);
 
             if (model != null)
                 Script = model.Script;

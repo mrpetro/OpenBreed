@@ -2,13 +2,13 @@
 using OpenBreed.Common.Data;
 using OpenBreed.Model.Texts;
 using OpenBreed.Database.Interface.Items;
-using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using Microsoft.Extensions.Logging;
+using OpenBreed.Database.Interface.Items.DataSources;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.VM.Scripts
 
             ScriptAssetRefIdEditor = new EntryRefIdEditorVM(
                 workspaceMan,
-                typeof(IDbAsset),
+                typeof(IDbDataSource),
                 (newRefId) => DataRef = newRefId);
         }
 
@@ -77,24 +77,27 @@ namespace OpenBreed.Editor.VM.Scripts
 
         protected override void UpdateEntry(IDbScriptFromFile entry)
         {
-            var scriptFromFileEntry = (IDbScriptFromFile)entry;
+            var model = scriptsDataProvider.GetScript(entry);
 
-            var model = dataProvider.GetModel<TextModel>(DataRef);
+            //if (model is not null)
+            //{
+            //    Script = model.Script;
+            //}
 
-            model.Text = Script;
-            scriptFromFileEntry.DataRef = DataRef;
+            model.Script = Script;
+            entry.DataRef = DataRef;
         }
 
         protected override void UpdateVM(IDbScriptFromFile entry)
         {
-            var scriptFromFileEntry = (IDbScriptFromFile)entry;
+            var model = scriptsDataProvider.GetScript(entry);
 
-            var model = scriptsDataProvider.GetScript(entry.Id);
-
-            if (model != null)
+            if (model is not null)
+            {
                 Script = model.Script;
+            }
 
-            DataRef = scriptFromFileEntry.DataRef;
+            DataRef = entry.DataRef;
         }
 
         #endregion Public Methods

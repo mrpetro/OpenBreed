@@ -4,7 +4,6 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Common.Interface.Drawing;
-using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;

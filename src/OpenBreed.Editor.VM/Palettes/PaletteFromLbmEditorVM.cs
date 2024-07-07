@@ -85,7 +85,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         protected override void UpdateEntry(IDbPaletteFromLbm source)
         {
-            var image = modelsProvider.GetModel<Image>(DataRef);
+            var image = modelsProvider.GetModel<IDbPaletteFromLbm, Image>(source);
 
             for (int i = 0; i < image.Palette.Entries.Length; i++)
             {

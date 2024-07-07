@@ -54,13 +54,13 @@ namespace OpenBreed.Editor.VM.Texts
 
         protected override void UpdateEntry(IDbTextEmbedded entry)
         {
-            var model = textsDataProvider.GetText(entry.Id);
+            var model = textsDataProvider.GetText(entry);
             model.Text = Text;
         }
 
         protected override void UpdateVM(IDbTextEmbedded entry)
         {
-            var model = textsDataProvider.GetText(entry.Id);
+            var model = textsDataProvider.GetText(entry);
 
             if (model != null)
             {
