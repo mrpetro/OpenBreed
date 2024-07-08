@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Attributes;
@@ -94,7 +95,7 @@ namespace OpenBreed.Wecs.Systems.Core
                     var fromStateName = fsm.GetStateName(machineState.StateId);
                     var impulseName = fsm.GetImpulseName(impulseId);
 
-                    logger.Warning($"Entity '{entity.Id}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
+                    logger.LogWarning("Entity '{0}' has missing FSM transition from state '{1}' using impulse '{2}'.", entity.Id, fromStateName, impulseName);
                     return;
                 }
 

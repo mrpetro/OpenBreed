@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
@@ -32,7 +34,7 @@ namespace OpenBreed.Scripting.Lua.Extensions
         public static void SetupScriptDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
         {
             dataLoaderFactory.Register<IScriptDataLoader>(() => new ScriptDataLoader(managerCollection.GetService<IRepositoryProvider>(),
-                                                                                     managerCollection.GetService<IModelsProvider>(),
+                                                                                     managerCollection.GetService<ScriptsDataProvider>(),
                                                                                      managerCollection.GetService<IScriptMan>()));
         }
     }

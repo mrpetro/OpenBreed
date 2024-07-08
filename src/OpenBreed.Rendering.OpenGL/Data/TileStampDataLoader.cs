@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
@@ -75,7 +76,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
             stampBuilder.Build();
 
-            logger.Verbose($"Tile stamp '{tileStampName}' loaded.");
+            logger.LogTrace("Tile stamp '{0}' loaded.", tileStampName);
 
             return null;
         }

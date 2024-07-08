@@ -1,4 +1,5 @@
-﻿using OpenBreed.Animation.Interface;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface.Logging;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,7 @@ namespace OpenBreed.Animation.Generic
             if (TryGetByName(name, out IClip<TObject> clip))
                 return clip;
 
-            logger.Error($"Clip with name '{name}' doesn't exist.");
+            logger.LogError("Clip with name '{0}' doesn't exist.", name);
             return missingClip;
         }
 

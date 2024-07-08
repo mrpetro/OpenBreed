@@ -1,4 +1,5 @@
-﻿using OpenBreed.Animation.Interface;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;

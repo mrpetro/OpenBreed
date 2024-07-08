@@ -1,4 +1,5 @@
-﻿using OpenBreed.Animation.Interface;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface.Logging;
@@ -55,7 +56,7 @@ namespace OpenBreed.Animation.Generic.Data
             foreach (var part in entry.Tracks)
                 LoadTrack(clip, part);
 
-            logger.Verbose($"Animation clip '{clipName}' loaded.");
+            logger.LogTrace("Animation clip '{0}' loaded.", clipName);
 
             return clip;
         }

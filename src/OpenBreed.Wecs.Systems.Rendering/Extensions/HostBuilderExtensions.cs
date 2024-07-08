@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;

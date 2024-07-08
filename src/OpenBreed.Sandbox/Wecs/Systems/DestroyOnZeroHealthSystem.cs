@@ -1,4 +1,5 @@
-﻿using OpenBreed.Audio.OpenAL.Managers;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Audio.OpenAL.Managers;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Audio.Interface.Managers;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenTK;
@@ -294,7 +295,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
             if (AL.IsExtensionPresent("AL_EXT_float32"))
                 reportBuilder.AppendLine("AL_EXT_float32");
 
-            logger.Info(reportBuilder.ToString());
+            logger.LogInformation(reportBuilder.ToString());
         }
 
         private SoundSource GetFirstIdleSource()

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Audio.OpenAL.Managers;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Audio.OpenAL.Managers;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
@@ -66,7 +67,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 
             if(targetEntity is null)
             {
-                logger.Error($"Target entity with ID '{targetEntityId}' not found.");
+                logger.LogError("Target entity with ID '{0}' not found.", targetEntityId);
                 return;
             }
 
@@ -74,7 +75,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 
             if(healthComponent is null)
             {
-                logger.Error($"Target entity with ID '{targetEntityId}' has no HealthComponent.");
+                logger.LogError("Target entity with ID '{0}' has no HealthComponent.", targetEntityId);
                 return;
             }
 

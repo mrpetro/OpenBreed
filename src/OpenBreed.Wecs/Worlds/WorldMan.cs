@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Entities;
@@ -100,7 +101,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             if (toDeinitialize.Contains(world))
             {
-                logger.Warning($"World '{world}' already pending removing.");
+                logger.LogWarning("World '{0}' already pending removing.", world);
                 return;
             }
 

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Animation.Interface.Data;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
@@ -398,7 +399,7 @@ namespace OpenBreed.Sandbox.Loaders
             if (entityLoaders.TryGetValue(action.Name, out IMapWorldEntityLoader entityLoader))
                 return entityLoader.Load(mapAssets, map, visited, ix, iy, action.Name, "", gfxValue, world);
 
-            logger.Warning($"Missing loader for action '{action}'");
+            logger.LogWarning("Missing loader for action '{}'.", action);
             return null;
         }
 

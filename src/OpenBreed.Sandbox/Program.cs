@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
@@ -138,6 +139,8 @@ namespace OpenBreed.Sandbox
             var appName = ProgramTools.AppProductName;
             var infoVersion = ProgramTools.AppInfoVerion;
 
+            hostBuilder.SetupDataHandlers();
+
             hostBuilder.SetupCoreManagers();
             hostBuilder.SetupDataGridFactory();
 
@@ -153,7 +156,6 @@ namespace OpenBreed.Sandbox
                 builderFactory.SetupSandboxBuilders(sp);
             });
 
-            hostBuilder.SetupABFormats();
             hostBuilder.SetupModelProvider();
             hostBuilder.SetupDataProviders();
 
@@ -411,7 +413,7 @@ namespace OpenBreed.Sandbox
             clientMan.UpdateFrameEvent += (a) => OnUpdateFrame(a);
             clientMan.LoadEvent += () => OnLoad();
 
-            logConsolePrinter = new LogConsolePrinter(GetManager<ILogger>());
+            logConsolePrinter = new LogConsolePrinter(GetManager<ILoggerClient>());
             logConsolePrinter.StartPrinting();
         }
 
@@ -577,6 +579,7 @@ namespace OpenBreed.Sandbox
                 config.AddEnvironmentVariables();
             });
 
+            hostBuilder.SetupDefaultLogger();
             hostBuilder.SetupCommandLine(args);
 
             var asm = Assembly.GetExecutingAssembly();

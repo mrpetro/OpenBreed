@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;

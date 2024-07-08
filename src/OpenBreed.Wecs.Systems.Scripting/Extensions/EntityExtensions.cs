@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
@@ -44,7 +45,7 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
 
             if (initFunction is null)
             {
-                logger.Error($"Script function '{hook.FunctionId}' for trigger '{triggerName}' doesn't exist.");
+                logger.LogError("Script function '{0}' for trigger '{1}' doesn't exist.", hook.FunctionId, triggerName);
                 return;
             }
 

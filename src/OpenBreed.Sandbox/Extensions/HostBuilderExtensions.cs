@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;

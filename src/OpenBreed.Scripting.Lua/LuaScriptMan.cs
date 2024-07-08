@@ -1,4 +1,5 @@
-﻿using NLua;
+﻿using Microsoft.Extensions.Logging;
+using NLua;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Scripting.Interface;
@@ -150,7 +151,7 @@ namespace OpenBreed.Scripting.Lua
                 funcResult = null;
 
                 #if DEBUG
-                logger.Warning($"'{funcName}' not existing.");
+                logger.LogWarning("'{0}' not existing.", funcName);
                 #endif
                 return false;
             }

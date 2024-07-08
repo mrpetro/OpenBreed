@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
@@ -51,7 +53,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
         {
             dataLoaderFactory.Register<ISpriteAtlasDataLoader>(() => new SpriteAtlasDataLoader(
                 sp.GetService<IRepositoryProvider>(),                                           
-                sp.GetService<AssetsDataProvider>(),                                            
+                sp.GetService<SpriteAtlasDataProvider>(),
                 sp.GetService<ITextureMan>(),                                            
                 sp.GetService<ISpriteMan>(),                                             
                 sp.GetService<ISpriteMerger>()));
@@ -59,9 +61,8 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 
         public static void SetupPictureDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
         {
-            dataLoaderFactory.Register<IPictureDataLoader>(() => new PictureDataLoader(
-                sp.GetService<IRepositoryProvider>(),                                           
-                sp.GetService<AssetsDataProvider>(),                                            
+            dataLoaderFactory.Register<IPictureDataLoader>(() => new PictureDataLoader(                                         
+                sp.GetService<ImagesDataProvider>(),
                 sp.GetService<ITextureMan>(),                                          
                 sp.GetService<IPictureMan>()));
         }
@@ -70,7 +71,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
         {
             dataLoaderFactory.Register<ITileAtlasDataLoader>(() => new TileAtlasDataLoader(
                 sp.GetService<IRepositoryProvider>(),                                            
-                sp.GetService<AssetsDataProvider>(),                                              
+                sp.GetService<TileAtlasDataProvider>(),
                 sp.GetService<ITextureMan>(),                                             
                 sp.GetService<ITileMan>(),                                           
                 sp.GetService<ILogger>()));

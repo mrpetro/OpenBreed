@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
@@ -55,7 +56,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             if(names.TryGetValue(name, out TileStamp result))
                 return result;
 
-            logger.Error($"Unable to find Tile stamp with name '{name}'");
+            logger.LogError("Unable to find Tile stamp with name '{0}'.", name);
 
             return missingTileStamp;
         }

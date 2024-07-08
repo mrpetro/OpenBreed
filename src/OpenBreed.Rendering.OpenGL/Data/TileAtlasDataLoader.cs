@@ -1,5 +1,7 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
@@ -24,7 +26,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
-        private readonly AssetsDataProvider assetsDataProvider;
+        private readonly TileAtlasDataProvider tileAtlasDataProvider;
         private readonly ITextureMan textureMan;
         private readonly ITileMan tileMan;
         private readonly ILogger logger;
@@ -34,13 +36,13 @@ namespace OpenBreed.Rendering.OpenGL.Data
         #region Public Constructors
 
         public TileAtlasDataLoader(IRepositoryProvider repositoryProvider,
-                                 AssetsDataProvider assetsDataProvider,
+                                 TileAtlasDataProvider tileAtlasDataProvider,
                                  ITextureMan textureMan,
                                  ITileMan tileMan,
                                  ILogger logger)
         {
             this.repositoryProvider = repositoryProvider;
-            this.assetsDataProvider = assetsDataProvider;
+            this.tileAtlasDataProvider = tileAtlasDataProvider;
             this.textureMan = textureMan;
             this.tileMan = tileMan;
             this.logger = logger;
@@ -69,7 +71,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
                 throw new Exception("Tile atlas error: " + tileAtlasName);
             }
 
-            var tileAtlasModel = assetsDataProvider.LoadModel(entry.DataRef) as TileSetModel;
+            var tileAtlasModel = tileAtlasDataProvider.GetTileAtlas(entry);
 
             var textureWidth = tileAtlasModel.TilesNoX * tileAtlasModel.TileSize;
             var textureHeight = tileAtlasModel.TilesNoY * tileAtlasModel.TileSize;
@@ -90,7 +92,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
             tileAtlas = builder.Build();
 
-            logger.Verbose($"Tile atlas '{tileAtlasName}' loaded.");
+            logger.LogTrace("Tile atlas '{0}' loaded.", tileAtlasName);
 
             return tileAtlas;
         }

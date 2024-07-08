@@ -1,4 +1,5 @@
-﻿using OpenBreed.Animation.Generic;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
@@ -55,7 +56,7 @@ namespace OpenBreed.Animation.Generic
         {
             if (!namesToIds.TryGetValue(name, out int id))
             {
-                logger.Error($"Unable to find frame updater with name '{name}'");
+                logger.LogError("Unable to find frame updater with name '{0}'.", name);
                 return null;
             }
 

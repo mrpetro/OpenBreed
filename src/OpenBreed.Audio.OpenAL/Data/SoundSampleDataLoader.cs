@@ -1,4 +1,5 @@
-﻿using OpenBreed.Audio.Interface.Data;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Audio.Interface.Data;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
@@ -60,11 +61,11 @@ namespace OpenBreed.Audio.OpenAL.Data
             if (entry == null)
                 throw new Exception("Sound sample error: " + sampleName);
 
-            modelsProvider.TryGetModel<SoundModel>(entry.DataRef, out SoundModel model, out string message);
+            modelsProvider.TryGetModel<IDbSound, SoundModel>(entry, out SoundModel model, out string message);
 
             soundSampleId = soundMan.LoadSample(sampleName, model.Data, model.SampleRate);
 
-            logger.Verbose($"Sound sample '{sampleName}' loaded.");
+            logger.LogTrace("Sound sample '{0}' loaded.", sampleName);
 
             return soundSampleId;
         }

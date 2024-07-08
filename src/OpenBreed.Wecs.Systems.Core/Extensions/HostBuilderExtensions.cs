@@ -7,6 +7,7 @@ using OpenBreed.Wecs.Entities;
 using System;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Common.Interface.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace OpenBreed.Wecs.Systems.Core.Extensions
 {

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;

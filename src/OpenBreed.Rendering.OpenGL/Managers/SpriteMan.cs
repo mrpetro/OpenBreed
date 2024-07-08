@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
@@ -66,7 +67,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             if (names.TryGetValue(name, out SpriteAtlas result))
                 return result;
 
-            logger.Error($"Unable to find sprite atlas with name '{name}'");
+            logger.LogError("Unable to find sprite atlas with name '{0}'.", name);
 
             return null;
         }
@@ -90,7 +91,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             items.Add(spriteAtlas);
             names.Add(name, spriteAtlas);
 
-            logger.Verbose($"Sprite atlas '{name}' created with ID {items.Count - 1}.");
+            logger.LogTrace("Sprite atlas '{0}' created with ID {1}.", name, items.Count - 1);
 
             return items.Count - 1;
         }

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
@@ -98,7 +99,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             items.Add(tileAtlas);
             names.Add(name, tileAtlas);
 
-            logger.Verbose($"Tile atlas '{name}' created with ID {items.Count - 1}.");
+            logger.LogTrace("Tile atlas '{0}' created with ID {1}.", name, items.Count - 1);
 
             return items.Count - 1;
         }

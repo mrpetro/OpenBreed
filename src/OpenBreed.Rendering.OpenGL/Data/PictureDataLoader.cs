@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
@@ -16,22 +17,20 @@ namespace OpenBreed.Rendering.OpenGL.Data
     {
         #region Private Fields
 
-        private readonly AssetsDataProvider assetsDataProvider;
         private readonly IPictureMan pictureMan;
-        private readonly IRepositoryProvider repositoryProvider;
+        private readonly ImagesDataProvider imagesDataProvider;
         private readonly ITextureMan textureMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PictureDataLoader(IRepositoryProvider repositoryProvider,
-                                 AssetsDataProvider assetsDataProvider,
-                                 ITextureMan textureMan,
-                                 IPictureMan pictureMan)
+        public PictureDataLoader(
+            ImagesDataProvider imagesDataProvider,
+            ITextureMan textureMan,
+            IPictureMan pictureMan)
         {
-            this.repositoryProvider = repositoryProvider;
-            this.assetsDataProvider = assetsDataProvider;
+            this.imagesDataProvider = imagesDataProvider;
             this.textureMan = textureMan;
             this.pictureMan = pictureMan;
         }
@@ -43,13 +42,11 @@ namespace OpenBreed.Rendering.OpenGL.Data
             var picture = pictureMan.GetByName(entryId);
 
             if (picture is not null)
+            {
                 return picture;
+            }
 
-            var entry = repositoryProvider.GetRepository<IDbImage>().GetById(entryId);
-            if (entry is null)
-                throw new Exception("Image error: " + entryId);
-
-            var bitmap = assetsDataProvider.LoadModel(entry.DataRef) as IImage;
+            var bitmap = imagesDataProvider.GetImageById(entryId);
 
             var bytes = bitmap.GetBytes();
 

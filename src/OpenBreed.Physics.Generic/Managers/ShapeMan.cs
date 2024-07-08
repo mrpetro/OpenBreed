@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Physics.Generic.Shapes;
@@ -71,7 +72,7 @@ namespace OpenBreed.Physics.Generic.Managers
             if (tagsToIds.ContainsKey(tag))
             {
                 if (overwrite)
-                    logger.Warning($"Overwriting existing shape under tag '{tag}'.");
+                    logger.LogWarning("Overwriting existing shape under tag '{0}'.", tag);
                 else
                     throw new InvalidOperationException($"Shape already registered under tag '{tag}'.");
             }

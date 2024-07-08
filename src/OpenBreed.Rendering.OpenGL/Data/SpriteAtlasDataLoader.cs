@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
@@ -25,7 +26,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
-        private readonly AssetsDataProvider assetsDataProvider;
+        private readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
         private readonly ITextureMan textureMan;
         private readonly ISpriteMan spriteMan;
         private readonly ISpriteMerger spriteMerger;
@@ -35,13 +36,13 @@ namespace OpenBreed.Rendering.OpenGL.Data
         #region Public Constructors
 
         public SpriteAtlasDataLoader(IRepositoryProvider repositoryProvider,
-                                 AssetsDataProvider assetsDataProvider,
+                                 SpriteAtlasDataProvider spriteAtlasDataProvider,
                                  ITextureMan textureMan,
                                  ISpriteMan spriteMan,
                                  ISpriteMerger spriteMerger)
         {
             this.repositoryProvider = repositoryProvider;
-            this.assetsDataProvider = assetsDataProvider;
+            this.spriteAtlasDataProvider = spriteAtlasDataProvider;
             this.textureMan = textureMan;
             this.spriteMan = spriteMan;
             this.spriteMerger = spriteMerger;
@@ -56,14 +57,18 @@ namespace OpenBreed.Rendering.OpenGL.Data
         public ISpriteAtlas Load(string entryId, params object[] args)
         {
             if (spriteMan.GetByName(entryId) != null)
+            {
                 return null;
+            }
 
-            var entry = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById(entryId) as IDbSpriteAtlasFromSpr;
+            var entry = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById(entryId);
 
             if (entry is null)
+            {
                 throw new Exception("Sprite atlas error: " + entryId);
+            }
 
-            var spriteSet = assetsDataProvider.LoadModel(entry.DataRef) as SpriteSetModel;
+            var spriteSet = spriteAtlasDataProvider.GetSpriteAtlas(entry) ;
 
             spriteMerger.Merge(
                 spriteSet.Sprites,

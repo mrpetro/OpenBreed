@@ -1,4 +1,5 @@
-﻿using OpenBreed.Animation.Interface;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface;
@@ -137,14 +138,14 @@ namespace OpenBreed.Sandbox.Entities
 
                 if (paletteEntity is null)
                 {
-                    logger.Error($"Unable to set palette '{paletteEntityTag}' on camera '{camera.Tag}'.");
+                    logger.LogError("Unable to set palette '{0}' on camera '{1}'.", paletteEntityTag, camera.Tag);
                     return;
                 }
 
                 var pid = paletteEntity.GetPaletteId();
                 camera.SetPaletteId(pid);
 
-                logger.Verbose($"Palette '{paletteEntityTag}' set on camera '{camera.Tag}'.");
+                logger.LogTrace("Palette '{0}' set on camera '{1}'.", paletteEntityTag, camera.Tag);
 
             }, singleTime: false);
 

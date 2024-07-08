@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
@@ -51,7 +52,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             items.Add(texture);
             names.Add(name, texture);
 
-            logger.Verbose($"Texture '{name}' created with ID {texture.Id}.");
+            logger.LogTrace("Texture '{0}' created with ID {1}.", name, texture.Id);
 
             return texture;
         }
@@ -140,7 +141,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             items.Add(texture);
             names.Add(name, texture);
 
-            logger.Verbose($"Texture '{name}' created with ID {texture.Id}.");
+            logger.LogTrace("Texture '{0}' created with ID {1}.", name, texture.Id);
 
             return texture;
         }

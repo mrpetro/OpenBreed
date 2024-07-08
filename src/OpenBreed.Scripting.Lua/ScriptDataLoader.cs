@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Data;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Model.Scripts;
@@ -13,16 +14,19 @@ namespace OpenBreed.Scripting.Lua
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
-        private readonly IModelsProvider modelsProvider;
+        private readonly ScriptsDataProvider scriptsDataProvider;
         private readonly IScriptMan scriptMan;
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ScriptDataLoader(IRepositoryProvider repositoryProvider, IModelsProvider modelsProvider, IScriptMan scriptMan)
+        public ScriptDataLoader(
+            IRepositoryProvider repositoryProvider,
+            ScriptsDataProvider scriptsDataProvider,
+            IScriptMan scriptMan)
         {
             this.repositoryProvider = repositoryProvider;
-            this.modelsProvider = modelsProvider;
+            this.scriptsDataProvider = scriptsDataProvider;
             this.scriptMan = scriptMan;
         }
 
@@ -33,13 +37,15 @@ namespace OpenBreed.Scripting.Lua
         public IScriptFunc Load(string entryId, params object[] args)
         {
             var entry = repositoryProvider.GetRepository<IDbScript>().GetById(entryId);
-            if (entry == null)
+            if (entry is null)
+            {
                 throw new Exception("Script error: " + entryId);
+            }
 
-            modelsProvider.TryGetModel<TextModel>(entry.DataRef, out TextModel model, out string message);
+            var model = scriptsDataProvider.GetScript(entry);
 
 
-            return scriptMan.CompileString(model.Text, entryId);
+            return scriptMan.CompileString(model.Script, entryId);
         }
 
         public object LoadObject(string entryId) => Load(entryId);

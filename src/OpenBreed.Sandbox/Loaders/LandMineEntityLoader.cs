@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
@@ -66,7 +67,7 @@ namespace OpenBreed.Sandbox.Loaders
             //No exit was found which is not expected
             if (!foundExits.Any())
             {
-                logger.Warning($"No teleport exit could be found for entry at ({inX},{inY})");
+                logger.LogWarning("No teleport exit could be found for entry at ({0},{1})", inX, inY);
 
                 return false;
             }
