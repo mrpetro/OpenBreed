@@ -21,6 +21,11 @@ namespace OpenBreed.Database.EFCore.DbEntries
 
         public abstract IDbEntry Copy();
 
+        public bool Equals(IDbEntry other)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion Public Properties
 
         #region Public Methods

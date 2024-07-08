@@ -44,6 +44,18 @@ namespace OpenBreed.Common.Data
             }
         }
 
+        public IImage GetImageById(string entryId)
+        {
+            var entry = repositoryProvider.GetRepository<IDbImage>().GetById(entryId);
+
+            if (entry is null)
+            {
+                return null;
+            }
+
+            return GetImage(entry);
+        }
+
         #endregion Public Methods
     }
 }

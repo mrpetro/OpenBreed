@@ -37,7 +37,7 @@ namespace OpenBreed.Database.EFCore.DbEntries
         }
     }
 
-    public class DbTileAtlasFromImage : DbTileAtlas, IDbTileAtlasFromImage
+    public class DbTileAtlasFromImage : DbTileAtlas, IDbTileAtlasFromBlk
     {
         public DbTileAtlasFromImage()
         {

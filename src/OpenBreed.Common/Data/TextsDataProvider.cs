@@ -45,6 +45,17 @@ namespace OpenBreed.Common.Data
             }
         }
 
+        public TextModel GetTextById(string entryId)
+        {
+            var entry = repositoryProvider.GetRepository<IDbText>().GetById(entryId);
+
+            if (entry is null)
+            {
+                return null;
+            }
+
+            return GetText(entry);
+        }
 
         #endregion Public Methods
 
