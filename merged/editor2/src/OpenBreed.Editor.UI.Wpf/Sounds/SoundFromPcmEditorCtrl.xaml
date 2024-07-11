@@ -1,0 +1,60 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.Sounds"
+             xmlns:General="clr-namespace:OpenBreed.Editor.UI.Wpf.General" x:Class="OpenBreed.Editor.UI.Wpf.Sounds.SoundFromPcmEditorCtrl"
+             mc:Ignorable="d" 
+             d:DesignHeight="370" d:DesignWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="54"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.RowSpan="1" Header="Data source">
+            <General:EntryRefIdEditorCtrl
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                DataContext="{Binding DataSourceRefIdEditor}" />
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.RowSpan="1" Header="Specific properties">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1"
+                    Content="Sample rate"  />
+                <TextBox Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" Height="22"
+                         Text="{Binding SampleRate}"/>
+                <Label Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1"
+                    Content="Bits per sample" />
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" Height="22"
+                         Text="{Binding BitsPerSample}"/>
+                <Label Grid.Row="2" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1"
+                    Content="Channels" />
+                <TextBox Grid.Row="2" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" Height="22"
+                         Text="{Binding Channels}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Grid.RowSpan="1" Header="Player">
+            <StackPanel>
+                <Canvas Height="40"/>
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <Button Grid.Row="1" Grid.RowSpan="1" Margin="8" Content="Play" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="50" Command="{Binding PlayCommand}" />
+                    <Button Grid.Row="1" Grid.RowSpan="1" Margin="8" Content="Stop" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="50" Command="{Binding StopCommand}" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+
+    </Grid>
+</UserControl>

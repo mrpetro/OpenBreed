@@ -1,0 +1,84 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctrlPalettes="clr-namespace:OpenBreed.Editor.UI.Wpf.Palettes"  
+                    xmlns:vmPalettes="clr-namespace:OpenBreed.Editor.VM.Palettes;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlMaps="clr-namespace:OpenBreed.Editor.UI.Wpf.Maps" 
+                    xmlns:vmMaps="clr-namespace:OpenBreed.Editor.VM.Maps;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlSprites="clr-namespace:OpenBreed.Editor.UI.Wpf.Sprites" 
+                    xmlns:vmSprites="clr-namespace:OpenBreed.Editor.VM.Sprites;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlImages="clr-namespace:OpenBreed.Editor.UI.Wpf.Images" 
+                    xmlns:vmImages="clr-namespace:OpenBreed.Editor.VM.Images;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlSounds="clr-namespace:OpenBreed.Editor.UI.Wpf.Sounds" 
+                    xmlns:vmSounds="clr-namespace:OpenBreed.Editor.VM.Sounds;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlDataSources="clr-namespace:OpenBreed.Editor.UI.Wpf.DataSources" 
+                    xmlns:vmDataSources="clr-namespace:OpenBreed.Editor.VM.DataSources;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlActions="clr-namespace:OpenBreed.Editor.UI.Wpf.Actions" 
+                    xmlns:vmActions="clr-namespace:OpenBreed.Editor.VM.Actions;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlTiles="clr-namespace:OpenBreed.Editor.UI.Wpf.Tiles" 
+                    xmlns:vmTiles="clr-namespace:OpenBreed.Editor.VM.Tiles;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlTileStamps="clr-namespace:OpenBreed.Editor.UI.Wpf.TileStamps" 
+                    xmlns:vmTileStamps="clr-namespace:OpenBreed.Editor.VM.TileStamps;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlScripts="clr-namespace:OpenBreed.Editor.UI.Wpf.Scripts" 
+                    xmlns:vmScripts="clr-namespace:OpenBreed.Editor.VM.Scripts;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlTexts="clr-namespace:OpenBreed.Editor.UI.Wpf.Texts" 
+                    xmlns:vmTexts="clr-namespace:OpenBreed.Editor.VM.Texts;assembly=OpenBreed.Editor.VM">
+
+
+    <DataTemplate DataType="{x:Type vmPalettes:PaletteFromBinaryEditorVM}" >
+        <ctrlPalettes:PaletteFromBinaryCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmPalettes:PaletteFromMapEditorVM}" >
+        <ctrlPalettes:PaletteFromMapCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmPalettes:PaletteFromLbmEditorVM}" >
+        <ctrlPalettes:PaletteFromLbmCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmMaps:MapEditorVM}" >
+        <ctrlMaps:MapEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmSprites:SpriteFromImageEditorVM}" >
+        <ctrlSprites:SpriteSetFromImageEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmSprites:SpriteSetFromSprEditorVM}" >
+        <ctrlSprites:SpriteSetFromSprEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmImages:ImageFromIffEditorVM}" >
+        <ctrlImages:ImageFromIffEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmImages:ImageFromAcbmEditorVM}" >
+        <ctrlImages:ImageFromAcbmEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmSounds:PcmSoundEditorVM}" >
+        <ctrlSounds:SoundFromPcmEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmDataSources:EpfArchiveFileDataSourceEditorVM}" >
+        <ctrlDataSources:EpfArchiveDataSourceCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmDataSources:FileDataSourceEditorVM}" >
+        <ctrlDataSources:FileDataSourceCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmActions:ActionSetEmbeddedEditorVM}" >
+        <ctrlActions:ActionSetEmbeddedEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmTiles:TileSetFromBlkEditorVM}" >
+        <ctrlTiles:TileSetFromBlkEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmTiles:TileSetFromAcbmEditorVM}" >
+        <ctrlTiles:TileSetFromAcbmEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmTileStamps:TileStampEditorVM}" >
+        <ctrlTileStamps:TileStampEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmScripts:ScriptEmbeddedEditorVM}" >
+        <ctrlScripts:ScriptEmbeddedCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmScripts:ScriptFromFileEditorVM}" >
+        <ctrlScripts:ScriptFromFileCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmTexts:TextEmbeddedEditorVM}" >
+        <ctrlTexts:TextEmbeddedEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmTexts:TextFromMapEditorVM}" >
+        <ctrlTexts:TextFromMapEditorCtrl />
+    </DataTemplate>
+</ResourceDictionary>

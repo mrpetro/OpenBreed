@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\DefaultSettings.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\DefaultSettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Interface\OpenBreed.Common.Interface.csproj" />
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj" />
+  </ItemGroup>
+
+</Project>

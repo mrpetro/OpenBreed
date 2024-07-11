@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<SettingsCfg>
+	<Options>
+    <ABHC>
+      <GameFolderPath></GameFolderPath>
+      <GameRunFilePath></GameRunFilePath>
+    </ABHC>
+		<ABTA>
+			<GameFolderPath></GameFolderPath>
+			<GameRunFilePath></GameRunFilePath>
+		</ABTA>
+    <ABSE>
+      <GameFolderPath></GameFolderPath>
+      <GameRunFilePath></GameRunFilePath>
+    </ABSE>
+	</Options>
+</SettingsCfg>
