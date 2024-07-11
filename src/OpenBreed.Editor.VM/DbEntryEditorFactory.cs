@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using System;
@@ -60,7 +61,7 @@ namespace OpenBreed.Editor.VM
         {
             var type = GetEditorType(dbEntry);
 
-            return (EntryEditorVM)managerCollection.GetService(type);
+            return (EntryEditorVM)managerCollection.GetRequiredService(type);
         }
 
         internal EntrySpecificEditorVM CreateSpecific(IDbEntry dbEntry)

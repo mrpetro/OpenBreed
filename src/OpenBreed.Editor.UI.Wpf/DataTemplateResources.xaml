@@ -16,6 +16,8 @@
                     xmlns:vmActions="clr-namespace:OpenBreed.Editor.VM.Actions;assembly=OpenBreed.Editor.VM"
                     xmlns:ctrlTiles="clr-namespace:OpenBreed.Editor.UI.Wpf.Tiles" 
                     xmlns:vmTiles="clr-namespace:OpenBreed.Editor.VM.Tiles;assembly=OpenBreed.Editor.VM"
+                    xmlns:ctrlTileStamps="clr-namespace:OpenBreed.Editor.UI.Wpf.TileStamps" 
+                    xmlns:vmTileStamps="clr-namespace:OpenBreed.Editor.VM.TileStamps;assembly=OpenBreed.Editor.VM"
                     xmlns:ctrlScripts="clr-namespace:OpenBreed.Editor.UI.Wpf.Scripts" 
                     xmlns:vmScripts="clr-namespace:OpenBreed.Editor.VM.Scripts;assembly=OpenBreed.Editor.VM"
                     xmlns:ctrlTexts="clr-namespace:OpenBreed.Editor.UI.Wpf.Texts" 
@@ -63,6 +65,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmTiles:TileSetFromAcbmEditorVM}" >
         <ctrlTiles:TileSetFromAcbmEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmTileStamps:TileStampEditorVM}" >
+        <ctrlTileStamps:TileStampEditorCtrl />
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmScripts:ScriptEmbeddedEditorVM}" >
         <ctrlScripts:ScriptEmbeddedCtrl />

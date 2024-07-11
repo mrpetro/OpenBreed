@@ -19,6 +19,7 @@ using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface.Items.Tiles;
+using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Database;
@@ -35,6 +36,7 @@ using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Editor.VM.Tiles;
+using OpenBreed.Editor.VM.TileStamps;
 using OpenBreed.Editor.VM.Tools;
 using System;
 
@@ -69,6 +71,7 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<EntryEditorVM<IDbActionSet>>();
                 services.AddTransient<EntryEditorVM<IDbSpriteAtlas>>();
                 services.AddTransient<EntryEditorVM<IDbTileAtlas>>();
+                services.AddTransient<EntryEditorVM<IDbTileStamp>>();
 
                 services.AddTransient<DbEditorVM>();
                 services.AddTransient<DbTablesEditorVM>();
@@ -77,6 +80,7 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<DbEntriesEditorVM>();
                 services.AddTransient<TileSetFromBlkEditorVM>();
                 services.AddTransient<TileSetFromAcbmEditorVM>();
+                services.AddTransient<TileStampEditorVM>();
                 services.AddTransient<ActionSetEmbeddedEditorVM>();
                 services.AddTransient<SpriteSetFromImageEditorVM>();
                 services.AddTransient<SpriteSetFromSprEditorVM>();
@@ -111,6 +115,7 @@ namespace OpenBreed.Editor.VM.Extensions
                     entryEditorFactory.RegisterEditor<IDbSound>();
                     entryEditorFactory.RegisterEditor<IDbPalette>();
                     entryEditorFactory.RegisterEditor<IDbTileAtlas>();
+                    entryEditorFactory.RegisterEditor<IDbTileStamp>();
                     entryEditorFactory.RegisterEditor<IDbImage>();
                     entryEditorFactory.RegisterEditor<IDbActionSet>();
                     entryEditorFactory.RegisterEditor<IDbSpriteAtlas>();
@@ -127,6 +132,7 @@ namespace OpenBreed.Editor.VM.Extensions
                     entryEditorFactory.Register<IDbPaletteFromBinary, PaletteFromBinaryEditorVM>();
                     entryEditorFactory.Register<IDbTileAtlasFromBlk, TileSetFromBlkEditorVM>();
                     entryEditorFactory.Register<IDbTileAtlasFromAcbm, TileSetFromAcbmEditorVM>();
+                    entryEditorFactory.Register<IDbTileStamp, TileStampEditorVM>();
                     entryEditorFactory.Register<IDbIffImage, ImageFromIffEditorVM>();
                     entryEditorFactory.Register<IDbAcbmImage, ImageFromAcbmEditorVM>();
                     entryEditorFactory.Register<IDbActionSet, ActionSetEmbeddedEditorVM>();

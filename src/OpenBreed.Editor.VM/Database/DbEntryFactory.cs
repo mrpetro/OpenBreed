@@ -19,6 +19,7 @@ using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Interface.Items.Animations;
+using OpenBreed.Database.Interface.Items.TileStamps;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -40,6 +41,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DbActionSetEntryVM();
             else if (entry is IDbTileAtlas)
                 return new DbTileSetEntryVM();
+            else if (entry is IDbTileStamp)
+                return new DbTileStampEntryVM();
             else if (entry is IDbSpriteAtlas)
                 return new DbSpriteSetEntryVM();
             else if (entry is IDbPalette)
