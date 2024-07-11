@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Metadata>
+			<Name>AmmoCounter</Name>
+		</Metadata>
+		<Position X="$(posX)" Y="$(posY)" />
+		<Text>
+			<Text>0</Text>
+			<Offset X="0" Y="0" />
+			<Color R="1.0" G="1.0" B="1.0" A="1.0" />
+			<FontName>StatusBar</FontName>
+			<Order>100</Order>
+		</Text>
+    </Components>
+</EntityTemplate>

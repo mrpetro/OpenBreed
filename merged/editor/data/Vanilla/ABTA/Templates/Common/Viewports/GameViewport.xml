@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Viewport>
+			<Width>32</Width>
+			<Height>32</Height>
+			<DrawBorder>true</DrawBorder>
+			<Clipping>true</Clipping>
+			<DrawBackgroud>false</DrawBackgroud>
+			<ScalingType>FitBothPreserveAspectRatio</ScalingType>
+			<BackgroundColor R="0" G="255" B="0" A="255" />
+		</Viewport>
+		<Position X="$(startX)" Y="$(startY)" />
+    </Components>
+</EntityTemplate>

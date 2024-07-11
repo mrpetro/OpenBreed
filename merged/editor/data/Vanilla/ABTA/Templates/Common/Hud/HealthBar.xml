@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Metadata>
+			<Name>HealthBar</Name>
+		</Metadata>
+		<Position X="$(posX)" Y="$(posY)" />
+		<Sprite>
+			<AtlasName>StatusBarPixel</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Origin X="0" Y="0" />
+			<Scale X="64" Y="1" />		
+			<Order>100</Order>
+		</Sprite>
+		<Script>
+			<ScriptId>Vanilla/Common/Hud/HealthBar</ScriptId>
+		</Script>
+    </Components>
+</EntityTemplate>

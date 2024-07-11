@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Animation>
+			<States>
+				<State>
+					<Speed>20</Speed>
+					<Loop>true</Loop>
+					<ClipName>Vanilla/L4/Environment/TVFlickering</ClipName>
+				</State>
+			</States>
+		</Animation>
+		<Position X="$(startX)" Y="$(startY)" />
+		<Sprite>
+			<AtlasName>Vanilla/L4/B</AtlasName>
+			<ImageIndex>4</ImageIndex>
+			<Origin X="0" Y="16" />
+			<Order>0</Order>
+		</Sprite>
+    </Components>
+</EntityTemplate>

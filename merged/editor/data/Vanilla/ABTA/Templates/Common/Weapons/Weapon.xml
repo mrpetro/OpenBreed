@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Metadata>
+			<Name>Weapon</Name>
+		</Metadata>
+		<Timer>
+		</Timer>
+		<Script>
+			<ScriptId>Vanilla/Common/Weapon</ScriptId>
+		</Script>
+		<SoundPlayer>		
+		</SoundPlayer>
+		<Animation>
+			<States>
+				<State>
+					<Speed>15</Speed>
+					<Loop>true</Loop>
+				</State>
+			</States>
+		</Animation>
+		<Position X="$(startX)" Y="$(startY)" />
+		<AngularPosition>
+			<Value>0</Value>
+		</AngularPosition>
+		<EntityEmitter>
+		</EntityEmitter>
+		<Sprite>
+			<AtlasName></AtlasName>
+			<ImageIndex>-1</ImageIndex>
+		</Sprite>
+    </Components>
+</EntityTemplate>

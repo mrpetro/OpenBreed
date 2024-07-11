@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Timer>
+		</Timer>
+		<Frame>
+		</Frame>
+		<SoundPlayer></SoundPlayer>
+	</Components>
+</EntityTemplate>

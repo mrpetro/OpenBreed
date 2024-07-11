@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Position X="$(posX)" Y="$(posY)" />
+		<Text>
+			<Text>01</Text>
+			<Offset X="0" Y="0" />
+			<Color R="1.0" G="1.0" B="1.0" A="1.0" />
+			<FontName>ComputerFont</FontName>
+			<Order>-5</Order>
+		</Text>
+		<Animation>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>false</Loop>
+				</State>
+			</States>
+		</Animation>
+    </Components>
+</EntityTemplate>

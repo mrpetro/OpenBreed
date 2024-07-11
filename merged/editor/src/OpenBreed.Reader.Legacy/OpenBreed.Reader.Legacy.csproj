@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj" />
+    <ProjectReference Include="..\OpenBreed.Reader.Interface\OpenBreed.Reader.Interface.csproj" />
+  </ItemGroup>
+
+</Project>

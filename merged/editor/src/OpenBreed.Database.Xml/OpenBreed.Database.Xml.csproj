@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Vanilla\**" />
+    <EmbeddedResource Remove="Vanilla\**" />
+    <None Remove="Vanilla\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj" />
+    <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
+    <ProjectReference Include="..\OpenBreed.Database.EFCore\OpenBreed.Database.EFCore.csproj" />
+    <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Position X="$(startX)" Y="$(startY)" />
+    </Components>
+</EntityTemplate>
