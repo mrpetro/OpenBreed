@@ -1,5 +1,4 @@
-﻿using OpenBreed.Database.Xml.Items.Assets;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,23 +8,24 @@ using System.ComponentModel;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Images;
+using OpenBreed.Database.Xml.Items.Sounds;
+using System.Threading.Channels;
 
 namespace OpenBreed.Database.Xml.Items.Images
 {
     [Serializable]
-    [Description("Image"), Category("Appearance")]
-    public class XmlDbImage : XmlDbEntry, IDbImage
+    public abstract class XmlDbImage : XmlDbEntry, IDbImage
     {
-        #region Public Properties
+        #region Protected Constructors
 
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
-
-        public override IDbEntry Copy()
+        protected XmlDbImage()
         {
-            return new XmlDbImage() { Id = this.Id, Description = this.Description, DataRef = this.DataRef };
         }
 
-        #endregion Public Properties
+        protected XmlDbImage(XmlDbImage other) : base(other)
+        {
+        }
+
+        #endregion Protected Constructors
     }
 }

@@ -1,5 +1,4 @@
-﻿using OpenBreed.Database.Xml.Items.Assets;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,19 +10,39 @@ using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Animations;
 using System.Collections.ObjectModel;
 using OpenBreed.Database.Interface;
+using System.Drawing;
+using OpenBreed.Database.Xml.Items.DataSources;
 
 namespace OpenBreed.Database.Xml.Items.Animations
 {
     [Serializable]
     public class XmlDbAnimation : XmlDbEntry, IDbAnimation
     {
+        #region Public Constructors
+
+        public XmlDbAnimation()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbAnimation(XmlDbAnimation other) : base(other)
+        {
+            Length = other.Length;
+            XmlTracks = this.XmlTracks.Select(item => item.Copy()).Cast<XmlDbAnimationTrack>().ToList();
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
 
         [XmlElement("Length")]
         public float Length { get; set; }
 
         [XmlArray("Tracks")]
-        [XmlArrayItem(ElementName = "IntegerTrack", Type = typeof(XmlDbAnimationTrack<int>))]
+        [XmlArrayItem(ElementName = "IntTrack", Type = typeof(XmlDbAnimationTrack<int>))]
         [XmlArrayItem(ElementName = "FloatTrack", Type = typeof(XmlDbAnimationTrack<float>))]
         [XmlArrayItem(ElementName = "StringTrack", Type = typeof(XmlDbAnimationTrack<string>))]
         public List<XmlDbAnimationTrack> XmlTracks { get; set; }
@@ -37,62 +56,12 @@ namespace OpenBreed.Database.Xml.Items.Animations
             }
         }
 
-        public override IDbEntry Copy()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Public Properties
-    }
 
+        #region Public Methods
 
-    [Serializable]
-    public class XmlDbAnimationTrack<TValue> : XmlDbAnimationTrack, IDbAnimationTrack<TValue>
-    {
-        #region Public Properties
+        public override IDbEntry Copy() => new XmlDbAnimation(this);
 
-        [XmlArray("Frames")]
-        [XmlArrayItem(ElementName = "Frame")]
-        public List<XmlDbAnimationFrame<TValue>> XmlFrames { get; set; }
-
-        [XmlIgnore]
-        public ReadOnlyCollection<IDbAnimationFrame<TValue>> Frames
-        {
-            get
-            {
-                return new ReadOnlyCollection<IDbAnimationFrame<TValue>>(XmlFrames.Cast<IDbAnimationFrame<TValue>>().ToList());
-            }
-        }
-
-        public void ClearFrames()
-        {
-            XmlFrames.Clear();
-        }
-
-        public void AddFrame(TValue value, float frameTime)
-        {
-            XmlFrames.Add(new XmlDbAnimationFrame<TValue> { Value = value, Time = frameTime });
-        }
-
-        #endregion Public Properties
-    }
-
-    [Serializable]
-    public abstract class XmlDbAnimationTrack : IDbAnimationTrack
-    {
-        #region Public Properties
-
-        [XmlElement("Interpolation")]
-        public EntryFrameInterpolation Interpolation { get; set; }
-
-        [XmlElement("Controller")]
-        public string Controller { get; set; }
-
-        public IDbEntry Copy()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Public Properties
+        #endregion Public Methods
     }
 }

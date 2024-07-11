@@ -1,8 +1,7 @@
 ﻿using EPF;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common.DataSources;
 using OpenBreed.Common.Interface;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.DataSources;
@@ -40,13 +39,17 @@ namespace OpenBreed.Common.Data
 
         public DataSourceBase GetDataSource(string name)
         {
-            DataSourceBase ds = null;
-            if (_openedDataSources.TryGetValue(name, out ds))
+            if (_openedDataSources.TryGetValue(name, out DataSourceBase ds))
+            {
                 return ds;
+            }
 
             var entry = repositoryProvider.GetRepository<IDbDataSource>().GetById(name);
-            if (entry == null)
+
+            if (entry is null)
+            {
                 throw new Exception($"Data source error: {name}");
+            }
 
             ds = CreateDataSource(entry);
 
@@ -65,12 +68,12 @@ namespace OpenBreed.Common.Data
             foreach (var openedArchive in _openedArchives)
             {
                 openedArchive.Value.Dispose();
-                logger.Verbose($"EPF Archive data source '{openedArchive.Key}' closed.");
+                logger.LogTrace($"EPF Archive data source '{openedArchive.Key}' closed.");
             }
 
             _openedArchives.Clear();
 
-            logger.Info($"All data sources closed.");
+            logger.LogInformation($"All data sources closed.");
         }
 
         public void Save()
@@ -78,10 +81,10 @@ namespace OpenBreed.Common.Data
             foreach (var openedArchive in _openedArchives)
             {
                 openedArchive.Value.Save();
-                logger.Verbose($"EPF Archive data source '{openedArchive.Key}' saved.");
+                logger.LogTrace($"EPF Archive data source '{openedArchive.Key}' saved.");
             }
 
-            logger.Info($"All data sources saved.");
+            logger.LogInformation($"All data sources saved.");
         }
 
         #endregion Public Methods
@@ -101,7 +104,7 @@ namespace OpenBreed.Common.Data
                 archive = EPFArchive.ToUpdate(File.Open(normalizedPath, FileMode.Open), false);
                 _openedArchives.Add(normalizedPath, archive);
 
-                logger.Verbose($"EPF Archive data source '{normalizedPath}' opened for update.");
+                logger.LogTrace($"EPF Archive data source '{normalizedPath}' opened for update.");
             }
 
             return archive;

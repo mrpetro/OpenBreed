@@ -1,9 +1,8 @@
-﻿using OpenBreed.Model.Images;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Model.Images;
 using OpenBreed.Reader.Images;
 using System;
 using System.Collections;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
@@ -56,10 +55,10 @@ namespace OpenBreed.Reader.Legacy.Images.ACBM
 
         #region Public Methods
 
-        public Image Read(Stream stream)
+        public IImage Read(Stream stream)
         {
             Builder.SetSize(_width, _height);
-            Builder.SetPixelFormat(PixelFormat.Format8bppIndexed);
+            Builder.SetPixelFormat(MyPixelFormat.Format8bppIndexed);
 
             var binReader = new BigEndianBinaryReader(stream);
             binReader.BaseStream.Position = 0;
@@ -86,12 +85,12 @@ namespace OpenBreed.Reader.Legacy.Images.ACBM
             if (_paletteMode != ACBMPaletteMode.NONE)
             {
                 var colorsNo = 0;
-                Color[] colors;
+                MyColor[] colors;
 
                 if (_bitPlanesNo < 6 || _bitPlanesNo > 6)
                 {
                     colorsNo = (int)Math.Pow(2, _bitPlanesNo);
-                    colors = new Color[colorsNo];
+                    colors = new MyColor[colorsNo];
 
                     if (_paletteMode == ACBMPaletteMode.PALETTE_16BIT)
                     {
@@ -107,18 +106,22 @@ namespace OpenBreed.Reader.Legacy.Images.ACBM
                 else if (_bitPlanesNo == 6)
                 {
                     colorsNo = 64; // Extra Half Byte (EHB)
-                    colors = new Color[colorsNo];
+                    colors = new MyColor[colorsNo];
 
                     for (int i = 0; i < 32; i++)
                         colors[i] = From16Bit(binReader.ReadUInt16());
 
                     for (int i = 32; i < 64; i++)
-                        colors[i] = Color.FromArgb(255, colors[i - 32].R / 2, colors[i - 32].G / 2, colors[i - 32].B / 2);
+                        colors[i] = MyColor.FromArgb(
+                            255,
+                            (byte)(colors[i - 32].R / 2),
+                            (byte)(colors[i - 32].G / 2),
+                            (byte)(colors[i - 32].B / 2));
                 }
                 else if (_bitPlanesNo > 6)
                 {
                     colorsNo = (int)Math.Pow(2, _bitPlanesNo);
-                    colors = new Color[colorsNo];
+                    colors = new MyColor[colorsNo];
 
                     for (int i = 0; i < colorsNo; i++)
                         colors[i] = From32Bit(binReader.ReadUInt32());
@@ -131,14 +134,18 @@ namespace OpenBreed.Reader.Legacy.Images.ACBM
             else
             {
                 //Read default grayscale palette for better visibility of shapes
-                var colors = new Color[256];
+                var colors = new MyColor[256];
 
                 for (int i = 0; i < 256; i++)
                 {
                     if (i % 2 == 0)
-                        colors[i] = Color.FromArgb(255, i, i, i);
+                        colors[i] = MyColor.FromArgb(255, (byte)i, (byte)i, (byte)i);
                     else
-                        colors[i] = Color.FromArgb(255, 255 - i, 255 - i, 255 - i);
+                        colors[i] = MyColor.FromArgb(
+                            (byte)255,
+                            (byte)(255 - i),
+                            (byte)(255 - i),
+                            (byte)(255 - i));
                 }
 
                 Builder.SetPalette(colors);
@@ -153,20 +160,20 @@ namespace OpenBreed.Reader.Legacy.Images.ACBM
 
         #region Internal Methods
 
-        internal static Color From32Bit(UInt32 value)
+        internal static MyColor From32Bit(UInt32 value)
         {
             byte b = (byte)(((value & 0x000000FF)));
             byte g = (byte)(((value & 0x0000FFFF) >> 8));
             byte r = (byte)(((value & 0x00FFFFFF) >> 16));
-            return Color.FromArgb(255, r, g, b);
+            return MyColor.FromArgb(255, r, g, b);
         }
 
-        internal static Color From16Bit(UInt16 value)
+        internal static MyColor From16Bit(UInt16 value)
         {
             byte r = (byte)(((value & 0x0FFF) >> 8) * 17);
             byte g = (byte)(((value & 0x00FF) >> 4) * 17);
             byte b = (byte)(((value & 0x000F)) * 17);
-            return Color.FromArgb(255, r, g, b);
+            return MyColor.FromArgb(255, r, g, b);
         }
 
         #endregion Internal Methods

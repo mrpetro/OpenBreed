@@ -1,19 +1,48 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OpenBreed.Common.Extensions
 {
     public static class HostBuilderExtensions
     {
+        public static void SetupDataHandlers(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IAssetDataHandler, PcmSoundDataHandler>();
+                services.AddSingleton<IAssetDataHandler, IffImageDataHandler>();
+                services.AddSingleton<IAssetDataHandler, AcbmImageDataHandler>();
+                services.AddSingleton<IAssetDataHandler, MapDataHandler>();
+                services.AddSingleton<IAssetDataHandler, MapPaletteDataHandler>();
+                services.AddSingleton<IAssetDataHandler, BinaryPaletteDataHandler>();
+                services.AddSingleton<IAssetDataHandler, LbmPaletteDataHandler>();
+                services.AddSingleton<IAssetDataHandler, BlkTileAtlasDataHandler>();
+                services.AddSingleton<IAssetDataHandler, AcbmTileAtlasDataHandler>();
+                services.AddSingleton<IAssetDataHandler, SprSpriteAtlasDataHandler>();
+                services.AddSingleton<IAssetDataHandler, FileTextDataHandler>();
+                services.AddSingleton<IAssetDataHandler, MapTextDataHandler>();
+                services.AddSingleton<IAssetDataHandler, FileScriptDataHandler>();
+            });
+        }
+
+        public static void SetupDefaultLogger(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ILoggerClient, DefaultLoggerClient>();
+                services.AddSingleton<ILogger, DefaultLogger>();
+            });
+        }
+
         public static void SetupBuilderFactory(this IHostBuilder hostBuilder, Action<IBuilderFactory, IServiceProvider> action)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -24,6 +53,14 @@ namespace OpenBreed.Common.Extensions
                     action.Invoke(entityFactory, sp);
                     return entityFactory;
                 });
+            });
+        }
+
+        public static void SetupDefaultTypeAttributesProvider(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ITypeAttributesProvider, DefaultTypeAttributesProvider>();
             });
         }
 
@@ -49,8 +86,12 @@ namespace OpenBreed.Common.Extensions
                 services.AddSingleton<PalettesDataProvider>();
                 services.AddSingleton<TextsDataProvider>();
                 services.AddSingleton<MapsDataProvider>();
+                services.AddSingleton<Lazy<MapsDataProvider>>((sp) => new Lazy<MapsDataProvider>(() => sp.GetService<MapsDataProvider>()));
                 services.AddSingleton<ImagesDataProvider>();
+                services.AddSingleton<Lazy<ImagesDataProvider>>((sp) => new Lazy<ImagesDataProvider>(() => sp.GetService<ImagesDataProvider>()));
                 services.AddSingleton<SoundsDataProvider>();
+
+
             });
        }
 
@@ -66,30 +107,5 @@ namespace OpenBreed.Common.Extensions
                 });
             });
         }
-
-        public static void SetupABFormats(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton((s) =>
-                {
-                    var formatMan = new DataFormatMan();
-                    formatMan.RegisterFormat("ABSE_MAP", new ABSEMAPFormat());
-                    formatMan.RegisterFormat("ABHC_MAP", new ABHCMAPFormat());
-                    formatMan.RegisterFormat("ABTA_MAP", new ABTAMAPFormat());
-                    formatMan.RegisterFormat("ABTABLK", new ABTABLKFormat());
-                    formatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
-                    formatMan.RegisterFormat("ABTAODDSPR", new ABTAODDSPRFormat());
-                    formatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
-                    formatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
-                    formatMan.RegisterFormat("IFF_IMAGE", new IFFImageFormat());
-                    formatMan.RegisterFormat("BINARY", new BinaryFormat());
-                    formatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
-                    formatMan.RegisterFormat("TEXT", new TextFormat());
-                    return formatMan;
-                });
-            });
-        }
-
     }
 }

@@ -2,21 +2,21 @@
 using OpenBreed.Database.Interface.Items.Tiles;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Model.Actions;
 using OpenBreed.Database.Interface.Items.Actions;
-using System.Drawing.Imaging;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
+using System.Drawing;
 
 namespace OpenBreed.Common.Data
 {
     public class ActionSetsDataHelper
     {
-        public static ActionSetModel FromEmbeddedData(IModelsProvider provider, IDbActionSet entry)
+        public static ActionSetModel FromEmbeddedData(IDrawingFactory drawingFactory, IDrawingContextProvider drawingContextProvider, IImageProvider imageProvider, IModelsProvider provider, IDbActionSet entry)
         {
             var model = new ActionSetModel();
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Common.Data
                 newAction.Id = actionEntry.Id;
                 newAction.Visibility = actionEntry.Presentation.Visibility;
                 newAction.Description = actionEntry.Description;
-                FromEntry(newAction, actionEntry.Presentation);
+                FromEntry(drawingFactory, drawingContextProvider, imageProvider, newAction, actionEntry.Presentation);
                 model.Items.Add(newAction);
             }
 
@@ -48,52 +48,53 @@ namespace OpenBreed.Common.Data
         }
 
 
-        public static string ColorToHex(Color c)
+        public static string ColorToHex(MyColor c)
         {
             return "#" + c.A.ToString("X2") + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
 
-        public static void FromEntry(ActionModel model, IDbActionPresentation presentationEntry)
+        public static void FromEntry(IDrawingFactory drawingFactory, IDrawingContextProvider drawingContextProvider, IImageProvider imageProvider, ActionModel model, IDbActionPresentation presentationEntry)
         {
-            Image image;
+            IImage image;
             string message;
 
             model.Visibility = presentationEntry.Visibility;
             model.Color = HexToColor(presentationEntry.Color);
 
-            if (!TryLoadImage(presentationEntry.Image, out image, out message))
-                SetPresentationDefault(model, model.Color);
+            if (!TryLoadImage(imageProvider, presentationEntry.Image, out image, out message))
+                SetPresentationDefault(drawingFactory, drawingContextProvider, model, model.Color);
             else
                 model.Icon = image;
         }
 
-        public static Color HexToColor(string hex)
+        public static MyColor HexToColor(string hex)
         {
-            return ColorTranslator.FromHtml(hex);
+            return MyColor.FromHex(hex);
         }
 
-        public static void SetPresentationDefault(ActionModel model, Color color)
+        public static void SetPresentationDefault(IDrawingFactory drawingFactory, IDrawingContextProvider drawingContextProvider, ActionModel model, MyColor color)
         {
-            Bitmap bitmap = new Bitmap(32, 32, PixelFormat.Format32bppArgb);
+            var bitmap = drawingFactory.CreateBitmap(32, 32, MyPixelFormat.Format32bppArgb);
 
-            using (Graphics gfx = Graphics.FromImage(bitmap))
+            using (var gfx = drawingContextProvider.FromImage(bitmap))
             {
-                gfx.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+                //TODO:
+                //gfx.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
 
-                Font font = new Font("Arial", 7);
+                var font = drawingFactory.CreateFont("Arial", 7);
 
-                Rectangle rectangle = new Rectangle(0, 0, bitmap.Width - 1, bitmap.Height - 1);
+                var rectangle = new MyRectangle(0, 0, bitmap.Width - 1, bitmap.Height - 1);
 
-                Color c = color;
+                var c = color;
                 //Color c = Color.FromArgb(50, 0, 0, 0);// Color.Black;
-                Pen tileColor = new Pen(c);
-                Brush brush = new SolidBrush(c);
+                var tileColor = drawingFactory.CreatePen(c);
+                var brush = drawingFactory.CreateSolidBrush(c);
 
                 gfx.FillRectangle(brush, rectangle);
 
-                c = Color.White;
-                tileColor = new Pen(c);
-                brush = new SolidBrush(c);
+                c = MyColor.White;
+                tileColor = drawingFactory.CreatePen(c);
+                brush = drawingFactory.CreateSolidBrush(c);
 
                 gfx.DrawRectangle(tileColor, rectangle);
                 gfx.DrawString(string.Format("{0,2:D2}", model.Id), font, brush, 1, 3);
@@ -111,7 +112,7 @@ namespace OpenBreed.Common.Data
             actionEntry.Presentation.Color = ColorToHex(actionModel.Color);
         }
 
-        public static bool TryLoadImage(string imagePath, out Image image, out string message)
+        public static bool TryLoadImage(IImageProvider imageProvider, string imagePath, out IImage image, out string message)
         {
             try
             {
@@ -122,7 +123,7 @@ namespace OpenBreed.Common.Data
                     return false;
                 }
 
-                image = Image.FromFile(imagePath);
+                image = imageProvider.FromFile(imagePath);
                 message = null;
                 return true;
             }

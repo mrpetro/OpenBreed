@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using OpenBreed.Common.UI.WinForms.Extensions;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace OpenBreed.Common.UI.WinForms.Controls

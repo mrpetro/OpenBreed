@@ -19,7 +19,8 @@ namespace OpenBreed.Database.Xml.Tables
 
         [XmlArray("Items"),
         XmlArrayItem("PaletteFromBinary", typeof(XmlDbPaletteFromBinary)),
-        XmlArrayItem("PaletteFromMAP", typeof(XmlDbPaletteFromMap))]
+        XmlArrayItem("PaletteFromMAP", typeof(XmlDbPaletteFromMap)),
+        XmlArrayItem("PaletteFromLBM", typeof(XmlDbPaletteFromLbm))]
         public readonly List<XmlDbPalette> Items = new List<XmlDbPalette>();
 
         #endregion Public Fields

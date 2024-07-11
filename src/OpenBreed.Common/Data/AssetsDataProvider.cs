@@ -1,15 +1,68 @@
 ﻿using OpenBreed.Common.Formats;
 using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Assets;
+using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Maps;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace OpenBreed.Common.Data
 {
+    public interface IAssetDataHandler
+    {
+        #region Public Properties
+
+        Type EntryType { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        object Load(IDbEntry dbEntry);
+
+        void Save(IDbEntry dbEntry, object model);
+
+        #endregion Public Methods
+    }
+
+    public abstract class AssetDataHandlerBase<TDbEntry> : IAssetDataHandler where TDbEntry : IDbEntry
+    {
+        #region Public Properties
+
+        public Type EntryType => typeof(TDbEntry);
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void Save(IDbEntry dbEntry, object model)
+        {
+            Save((TDbEntry)dbEntry, model);
+        }
+
+        public object Load(IDbEntry dbEntry)
+        {
+            return Load((TDbEntry)dbEntry);
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected abstract void Save(TDbEntry dbEntry, object model);
+
+        protected abstract object Load(TDbEntry dbEntry);
+
+        #endregion Protected Methods
+    }
+
     public class AssetsDataProvider
     {
         #region Private Fields
 
-        private readonly DataFormatMan formatMan;
+        private readonly Dictionary<Type, IAssetDataHandler> handlers;
+
         private readonly IRepositoryProvider repositoryProvider;
         private readonly DataSourceProvider dataSources;
 
@@ -17,53 +70,77 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public AssetsDataProvider(IRepositoryProvider repositoryProvider, DataSourceProvider dataSources, DataFormatMan formatMan)
+        public AssetsDataProvider(
+            IRepositoryProvider repositoryProvider,
+            DataSourceProvider dataSources,
+            IEnumerable<IAssetDataHandler> handlers)
         {
             this.repositoryProvider = repositoryProvider;
             this.dataSources = dataSources;
-            this.formatMan = formatMan;
+            this.handlers = handlers.ToDictionary(item => item.EntryType, item => item);
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public object LoadModel(string entryId)
+        public object LoadModel<TDbEntry>(TDbEntry dbEntry) where TDbEntry : IDbEntry
         {
-            var assetEntry = repositoryProvider.GetRepository<IDbAsset>().GetById(entryId);
-            if (assetEntry == null)
-                throw new Exception($"Asset error: {entryId}");
+            if (dbEntry is null)
+            {
+                throw new ArgumentNullException(nameof(dbEntry));
+            }
 
-            var formatType = formatMan.GetFormatType(assetEntry.FormatType);
+            if (!handlers.TryGetValue(typeof(TDbEntry), out IAssetDataHandler handler))
+            {
+                throw new Exception($"No load handler for '{typeof(TDbEntry)}'.");
+            }
 
-            if (formatType == null)
-                throw new Exception($"Unknown format {assetEntry.FormatType}");
-
-            var ds = dataSources.GetDataSource(assetEntry.DataSourceRef);
-
-            if (ds == null)
-                throw new Exception($"Unknown DataSourceRef {assetEntry.DataSourceRef}");
-
-            return formatType.Load(ds, assetEntry.Parameters);
+            return handler.Load(dbEntry);
         }
 
-        public void SaveModel(string entryId, object data)
+        public object LoadModel<TDbEntry>(string entryId) where TDbEntry : IDbEntry
         {
-            var assetEntry = repositoryProvider.GetRepository<IDbAsset>().GetById(entryId);
-            if (assetEntry == null)
-                throw new Exception($"Asset error: {entryId}");
+            var dbEntry = repositoryProvider.GetRepository<TDbEntry>().GetById(entryId);
 
-            var formatType = formatMan.GetFormatType(assetEntry.FormatType);
+            if (dbEntry is null)
+            {
+                throw new Exception($"Entry '{entryId}' of type '{nameof(TDbEntry)}' not found.");
+            }
 
-            if (formatType == null)
-                throw new Exception($"Unknown format {assetEntry.FormatType}");
+            return LoadModel<TDbEntry>(dbEntry);
+        }
 
-            var ds = dataSources.GetDataSource(assetEntry.DataSourceRef);
+        public void SaveModel(Type entryType, string entryId, object model)
+        {
+            var dbEntry = repositoryProvider.GetRepository(entryType).Find(entryId);
 
-            if (ds == null)
-                throw new Exception($"Unknown DataSourceRef {assetEntry.DataSourceRef}");
+            if (dbEntry is null)
+            {
+                throw new Exception($"Entry '{entryId}' of type '{entryType}' not found.");
+            }
 
-            formatType.Save(ds, data, assetEntry.Parameters);
+            if (!handlers.TryGetValue(entryType, out IAssetDataHandler handler))
+            {
+                throw new Exception($"No save handler for '{entryType}'.");
+            }
+
+            handler.Save(dbEntry, model);
+        }
+
+        public void SaveModel<TDbEntry>(TDbEntry dbEntry, object model) where TDbEntry : IDbEntry
+        {
+            if (dbEntry is null)
+            {
+                throw new ArgumentNullException(nameof(dbEntry));
+            }
+
+            if (!handlers.TryGetValue(typeof(TDbEntry), out IAssetDataHandler handler))
+            {
+                throw new Exception($"No save handler for '{typeof(TDbEntry)}'.");
+            }
+
+            handler.Save(dbEntry, model);
         }
 
         #endregion Public Methods

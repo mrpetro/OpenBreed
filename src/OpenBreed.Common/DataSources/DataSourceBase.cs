@@ -36,8 +36,10 @@ namespace OpenBreed.Common.DataSources
         {
             get
             {
-                if (_stream == null)
+                if (_stream is null)
+                {
                     _stream = Open();
+                }
 
                 return _stream;
             }

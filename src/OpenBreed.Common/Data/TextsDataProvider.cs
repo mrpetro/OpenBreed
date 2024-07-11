@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Model.Texts;
+using OpenBreed.Model.Tiles;
 using System;
 
 namespace OpenBreed.Common.Data
@@ -12,7 +14,7 @@ namespace OpenBreed.Common.Data
 
         private readonly IRepositoryProvider repositoryProvider;
 
-        private readonly IModelsProvider dataProvider;
+        private readonly IModelsProvider modelsProvider;
 
         #endregion Private Fields
 
@@ -20,7 +22,7 @@ namespace OpenBreed.Common.Data
 
         public TextsDataProvider(IModelsProvider dataProvider, IRepositoryProvider repositoryProvider)
         {
-            this.dataProvider = dataProvider;
+            this.modelsProvider = dataProvider;
             this.repositoryProvider = repositoryProvider;
         }
 
@@ -28,33 +30,37 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
-        public TextModel GetText(string id)
+        public TextModel GetText(IDbText dbText, bool refresh = false)
         {
-            var entry = repositoryProvider.GetRepository<IDbText>().GetById(id);
-            if (entry == null)
-                throw new Exception("Text error: " + id);
+            switch (dbText)
+            {
+                case IDbTextFromMap dbTextFromMap:
+                    return modelsProvider.GetModel<IDbTextFromMap, TextModel>(dbTextFromMap, refresh);
+                case IDbTextEmbedded dbTextEmbedded:
+                    return modelsProvider.GetModel<IDbTextEmbedded, TextModel>(dbTextEmbedded, refresh);
+                case IDbTextFromFile dbTextFromFile:
+                    return modelsProvider.GetModel<IDbTextFromFile, TextModel>(dbTextFromFile, refresh);
+                default:
+                    throw new NotImplementedException(dbText.GetType().ToString());
+            }
+        }
 
-            return GetModel(entry);
+        public TextModel GetTextById(string entryId)
+        {
+            var entry = repositoryProvider.GetRepository<IDbText>().GetById(entryId);
+
+            if (entry is null)
+            {
+                return null;
+            }
+
+            return GetText(entry);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private TextModel GetModelImpl(IDbTextFromMap entry)
-        {
-            return TextsDataHelper.FromMapModel(dataProvider, entry);
-        }
-
-        private TextModel GetModelImpl(IDbTextEmbedded entry)
-        {
-            return TextsDataHelper.FromBinary(dataProvider, entry);
-        }
-
-        private TextModel GetModel(dynamic entry)
-        {
-            return GetModelImpl(entry);
-        }
 
         #endregion Private Methods
     }

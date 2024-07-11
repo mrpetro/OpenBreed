@@ -15,21 +15,33 @@ namespace OpenBreed.Database.Xml.Items.Scripts
     [Description("Script from file"), Category("Appearance")]
     public class XmlDbScriptFromFile : XmlDbScript, IDbScriptFromFile
     {
+        #region Public Constructors
+
+        public XmlDbScriptFromFile()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbScriptFromFile(XmlDbScriptFromFile other) : base(other)
+        {
+            DataRef = this.DataRef;
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
+
+        [XmlElement("DataRef")]
+        public string DataRef { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public override IDbEntry Copy()
-        {
-            return new XmlDbScriptEmbedded()
-            {
-                Id = this.Id,
-                Description = this.Description,
-                DataRef = this.DataRef
-            };
-        }
+        public override IDbEntry Copy() => new XmlDbScriptFromFile(this);
 
         #endregion Public Methods
     }

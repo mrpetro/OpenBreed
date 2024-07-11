@@ -8,15 +8,39 @@ using System.ComponentModel;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Comparer;
+using OpenBreed.Database.Xml.Items.DataSources;
 
 namespace OpenBreed.Database.Xml.Items.Actions
 {
     [Serializable]
     [Description("Action set"), Category("Appearance")]
-    public class XmlDbActionSet : XmlDbEntry, IDbActionSet
+    public class XmlDbActionSet : XmlDbEntry, IDbActionSet, IEquatable<IDbActionSet>
     {
+        #region Private Fields
+
         private List<IDbAction> _actions = null;
+
         private List<XmlDbAction> _xmlActions = new List<XmlDbAction>();
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public XmlDbActionSet()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbActionSet(XmlDbActionSet other) : base(other)
+        {
+            XmlActions = other.XmlActions?.Select(item => item.Copy()).Cast<XmlDbAction>().ToList();
+        }
+
+        #endregion Protected Constructors
 
         #region Public Properties
 
@@ -46,15 +70,32 @@ namespace OpenBreed.Database.Xml.Items.Actions
 
                 return _xmlActions;
             }
+
+            init
+            {
+                _xmlActions = value;
+            }
         }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public override IDbEntry Copy()
+        public override IDbEntry Copy() => new XmlDbActionSet(this);
+
+        public bool Equals(IDbActionSet other)
         {
-            throw new NotImplementedException();
+            if (!base.Equals(other))
+            {
+                return false;
+            }
+
+            if (!Actions.SequenceEqual(other.Actions, DbActionComparer.Instance))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public IDbAction NewItem()
@@ -63,6 +104,5 @@ namespace OpenBreed.Database.Xml.Items.Actions
         }
 
         #endregion Public Methods
-
     }
 }

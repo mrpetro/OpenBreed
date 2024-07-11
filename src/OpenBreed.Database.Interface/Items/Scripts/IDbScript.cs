@@ -9,10 +9,5 @@ namespace OpenBreed.Database.Interface.Items.Scripts
 {
     public interface IDbScript : IDbEntry
     {
-        #region Public Properties
-
-        string DataRef { get; set; }
-
-        #endregion Public Properties
     }
 }

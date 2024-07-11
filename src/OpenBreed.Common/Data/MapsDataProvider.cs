@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Model.Maps;
+using OpenBreed.Model.Palettes;
 using System;
 
 namespace OpenBreed.Common.Data
@@ -11,23 +13,19 @@ namespace OpenBreed.Common.Data
         #region Private Fields
 
         private readonly TileAtlasDataProvider tileAtlasDataProvider;
-        private readonly PalettesDataProvider palettes;
         private readonly ActionSetsDataProvider actionSets;
-
-        private readonly IModelsProvider provider;
-
+        private readonly IModelsProvider modelsProvider;
         private readonly IRepositoryProvider repositoryProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapsDataProvider(IModelsProvider provider, IRepositoryProvider repositoryProvider, TileAtlasDataProvider tileAtlasDataProvider, PalettesDataProvider palettes, ActionSetsDataProvider actionSets)
+        public MapsDataProvider(IModelsProvider modelsProvider, IRepositoryProvider repositoryProvider, TileAtlasDataProvider tileAtlasDataProvider, ActionSetsDataProvider actionSets)
         {
-            this.provider = provider;
+            this.modelsProvider = modelsProvider;
             this.repositoryProvider = repositoryProvider;
             this.tileAtlasDataProvider = tileAtlasDataProvider;
-            this.palettes = palettes;
             this.actionSets = actionSets;
         }
 
@@ -38,23 +36,28 @@ namespace OpenBreed.Common.Data
         public MapModel GetMap(string id)
         {
             var entry = repositoryProvider.GetRepository<IDbMap>().GetById(id);
-            if (entry == null)
+
+            if (entry is null)
+            {
                 throw new Exception("Map error: " + id);
+            }
 
-            if (entry.DataRef == null)
-                return null;
+            return GetMap(entry);
+        }
 
-            var map = provider.GetModel<MapModel>(entry.DataRef);
+        public MapModel GetMap(IDbMap dbMap, bool refresh = false)
+        {
+            var map = modelsProvider.GetModel<IDbMap, MapModel>(dbMap, refresh);
 
-            if (entry.TileSetRef != null)
-                map.TileSet = tileAtlasDataProvider.GetTileAtlas(entry.TileSetRef);
+            if (dbMap.TileSetRef != null)
+            {
+                map.TileSet = tileAtlasDataProvider.GetTileAtlas(dbMap.TileSetRef);
+            }
 
-            map.Palettes.Clear();
-            foreach (var paletteRef in entry.PaletteRefs)
-                map.Palettes.Add(palettes.GetPalette(paletteRef));
-
-            if (entry.ActionSetRef != null)
-                map.ActionSet = actionSets.GetActionSet(entry.ActionSetRef);
+            if (dbMap.ActionSetRef != null)
+            {
+                map.ActionSet = actionSets.GetActionSet(dbMap.ActionSetRef);
+            }
 
             return map;
         }

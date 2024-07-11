@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
+using OpenBreed.Database.Xml.Items.DataSources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,14 +16,26 @@ namespace OpenBreed.Database.Xml.Items.EntityTemplates
     [Description("Entity template from file"), Category("Appearance")]
     public class XmlDbEntityTemplateFromFile : XmlDbEntityTemplate, IDbEntityTemplateFromFile
     {
-        public override IDbEntry Copy()
+        #region Public Constructors
+
+        public XmlDbEntityTemplateFromFile()
         {
-            return new XmlDbEntityTemplateFromFile()
-            {
-                Id = this.Id,
-                Description = this.Description,
-                DataRef = this.DataRef,
-            };
         }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbEntityTemplateFromFile(XmlDbEntityTemplateFromFile other) : base(other)
+        {
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Methods
+
+        public override IDbEntry Copy() => new XmlDbEntityTemplateFromFile(this);
+
+        #endregion Public Methods
     }
 }

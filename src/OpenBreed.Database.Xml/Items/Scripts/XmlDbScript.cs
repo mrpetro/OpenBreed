@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Database.Interface.Items.Scripts;
+using OpenBreed.Database.Xml.Items.EntityTemplates;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,14 +11,18 @@ using System.Xml.Serialization;
 namespace OpenBreed.Database.Xml.Items.Scripts
 {
     [Serializable]
-
     public abstract class XmlDbScript : XmlDbEntry, IDbScript
     {
-        #region Public Properties
+        #region Protected Constructors
 
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
+        protected XmlDbScript()
+        {
+        }
 
-        #endregion Public Properties
+        protected XmlDbScript(XmlDbScript other) : base(other)
+        {
+        }
+
+        #endregion Protected Constructors
     }
 }

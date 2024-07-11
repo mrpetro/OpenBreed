@@ -4,7 +4,6 @@ using OpenBreed.Model.Palettes;
 using OpenBreed.Database.Interface.Items.Palettes;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,62 +11,62 @@ using System.Threading.Tasks;
 using OpenBreed.Model;
 using OpenBreed.Reader.Legacy.Palettes;
 using OpenBreed.Common.Interface.Data;
+using System.Drawing.Imaging;
+using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Model.Extensions;
+using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Database.Interface.Items.Images;
 
 namespace OpenBreed.Common.Data
 {
-    internal class PalettesDataHelper
+    public class PalettesDataHelper
     {
-        public static PaletteModel Create(MapPaletteBlock paletteBlock)
+        public static PaletteModel Create(IColorPalette palette)
         {
             var paletteBuilder = PaletteBuilder.NewPaletteModel();
-            paletteBuilder.SetName(paletteBlock.Name);
+            paletteBuilder.SetName("Default");
             paletteBuilder.CreateColors();
-            for (int i = 0; i < paletteBlock.Value.Length; i++)
+            for (int i = 0; i < palette.Entries.Length; i++)
             {
-                var colorData = paletteBlock.Value[i];
-                paletteBuilder.SetColor(i, Color.FromArgb(255, colorData.R, colorData.G, colorData.B));
+                var colorData = palette.Entries[i];
+                paletteBuilder.SetColor(i, MyColor.FromArgb(255, colorData.R, colorData.G, colorData.B));
             }
-
-            //for (int i = 64; i < paletteBlock.Value.Length; i++)
-            //{
-            //    var colorData = paletteBlock.Value[i];
-            //    paletteBuilder.SetColor(i, Color.FromArgb(255, i, i, i));
-            //}
 
             return paletteBuilder.Build();
         }
 
-        public static PaletteModel FromMapModel(IModelsProvider dataProvider, IDbPaletteFromMap entry)
+        public static PaletteModel FromLbmImage(IModelsProvider dataProvider, IDbPaletteFromLbm entry)
         {
-            var mapModel = dataProvider.GetModel<MapModel>(entry.DataRef);
+            var image = dataProvider.GetModelById<IDbImage, IImage>(entry.ImageRef);
 
-            if (mapModel == null)
+            if (image is null)
                 return null;
 
-            var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == entry.BlockName);
-
-            if (paletteBlock == null)
-                return null;
-
-            return Create(paletteBlock);
+            return Create(image.Palette);
         }
 
-        public static PaletteModel FromBinary(IModelsProvider dataProvider, IDbPaletteFromBinary entry)
+        public static PaletteModel FromMapModel(MapModel mapModel, IDbPaletteFromMap entry)
         {
-            if (entry.DataRef == null)
+            var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == entry.BlockName);
+
+            if (paletteBlock is null)
+            {
                 return null;
+            }
 
-            var binaryModel = dataProvider.GetModel<BinaryModel>(entry.DataRef);
+            return paletteBlock.ToPaletteModel();
+        }
 
-            if (binaryModel == null)
+        public static PaletteModel FromMapModel(IModelsProvider dataProvider, IDbPaletteFromMap entry)
+        {
+            var mapModel = dataProvider.GetModelById<IDbMap, MapModel>(entry.MapRef);
+
+            if (mapModel is null)
+            {
                 return null;
+            }
 
-            //Remember to set source stream to begining
-            binaryModel.Stream.Seek(entry.DataStart, SeekOrigin.Begin);
-
-            var paletteBuilder = PaletteBuilder.NewPaletteModel();
-            var paletteReader = new PaletteReader(paletteBuilder, ToPaletteMode(entry.Mode), entry.ColorsNo);
-            return paletteReader.Read(binaryModel.Stream);
+            return FromMapModel(mapModel, entry);
         }
 
         public static PaletteReader.PaletteMode ToPaletteMode(PaletteMode mode)
@@ -78,6 +77,8 @@ namespace OpenBreed.Common.Data
                     return PaletteReader.PaletteMode.PALETTE_16BIT;
                 case PaletteMode.COLOR_32BIT:
                     return PaletteReader.PaletteMode.PALETTE_32BIT;
+                case PaletteMode.VGA_24BIT:
+                    return PaletteReader.PaletteMode.VGA_24BIT;
                 default:
                     throw new InvalidOperationException(mode.ToString());
             }

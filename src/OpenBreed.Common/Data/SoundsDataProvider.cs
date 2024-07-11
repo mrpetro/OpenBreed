@@ -28,16 +28,9 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
-        public SoundModel GetSound(string id)
+        public SoundModel GetSound(IDbSound dbSound, bool refresh = false)
         {
-            var entry = repositoryProvider.GetRepository<IDbSound>().GetById(id);
-            if (entry == null)
-                throw new Exception("Sound error: " + id);
-
-            if (entry.DataRef == null)
-                return null;
-
-            return dataProvider.GetModel<SoundModel>(entry.DataRef);
+            return dataProvider.GetModel<IDbSound, SoundModel>(dbSound, refresh);
         }
 
         #endregion Public Methods

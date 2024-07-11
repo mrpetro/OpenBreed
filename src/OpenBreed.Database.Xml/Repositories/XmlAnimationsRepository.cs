@@ -42,7 +42,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbAnimation entry)
         {
-            return context.Items.IndexOf((XmlDbAnimation)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         #endregion Protected Methods
@@ -83,7 +83,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbAnimation entry)
         {
-            return context.Items.IndexOf((XmlDbAnimation)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IDbAnimation newEntry)
@@ -94,6 +94,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public override void Add(IDbAnimation newEntry)
         {
             context.Items.Add((XmlDbAnimation)newEntry);
+        }
+
+        public override bool Remove(IDbAnimation entry)
+        {
+            return context.Items.Remove((XmlDbAnimation)entry);
         }
 
         #endregion Protected Methods

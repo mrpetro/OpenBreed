@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
+using OpenBreed.Database.Xml.Items.DataSources;
 using OpenBreed.Database.Xml.Items.EntityTemplates;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -55,7 +57,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbEntityTemplate entry)
         {
-            return context.Items.IndexOf((XmlDbEntityTemplate)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         #endregion Protected Methods
@@ -103,6 +105,11 @@ namespace OpenBreed.Database.Xml.Repositories
             context.Items.Add((XmlDbEntityTemplate)newEntry);
         }
 
+        public override bool Remove(IDbEntityTemplate entry)
+        {
+            return context.Items.Remove((XmlDbEntityTemplate)entry);
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
@@ -114,7 +121,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbEntityTemplate entry)
         {
-            return context.Items.IndexOf((XmlDbEntityTemplate)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IDbEntityTemplate newEntry)

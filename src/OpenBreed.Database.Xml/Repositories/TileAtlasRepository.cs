@@ -38,7 +38,7 @@ namespace OpenBreed.Database.Xml.Repositories
             get
             {
                 yield return typeof(IDbTileAtlasFromBlk);
-                yield return typeof(IDbTileAtlasFromImage);
+                yield return typeof(IDbTileAtlasFromAcbm);
             }
         }
 
@@ -84,8 +84,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
             switch (found.TypeId)
             {
-                case TileAtlasTypeEnum.DbTileAtlasFromImage:
-                    return dataEx.TileAtlasesFromImages.Find(id);
+                //case TileAtlasTypeEnum.DbTileAtlasFromImage:
+                //    return dataEx.TileAtlasesFromImages.Find(id);
                 case TileAtlasTypeEnum.DbTileAtlasFromBlk:
                     return dataEx.TileAtlasesFromBlk.Find(id);
                 default:
@@ -97,8 +97,8 @@ namespace OpenBreed.Database.Xml.Repositories
         {
             switch (type)
             {
-                case TileAtlasTypeEnum.DbTileAtlasFromImage:
-                    return dataEx.TileAtlasesFromImages.Find(id);
+                //case TileAtlasTypeEnum.DbTileAtlasFromImage:
+                //    return dataEx.TileAtlasesFromImages.Find(id);
                 case TileAtlasTypeEnum.DbTileAtlasFromBlk:
                     return dataEx.TileAtlasesFromBlk.Find(id);
                 default:
@@ -150,6 +150,16 @@ namespace OpenBreed.Database.Xml.Repositories
         }
 
         public void Update(IDbTileAtlas entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IRepository<IDbTileAtlas>.Remove(IDbTileAtlas entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(IDbEntry entry)
         {
             throw new NotImplementedException();
         }

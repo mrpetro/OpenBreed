@@ -59,5 +59,15 @@ namespace OpenBreed.Database.Interface.Items.TileStamps
         int TsTi { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Copy this object
+        /// </summary>
+        /// <returns>Copy of this object</returns>
+        IDbTileStampCell Copy();
+
+        #endregion Public Methods
     }
 }

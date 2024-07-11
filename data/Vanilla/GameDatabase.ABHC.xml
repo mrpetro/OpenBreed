@@ -1,0 +1,2187 @@
+<?xml version="1.0"?>
+<Database>
+	<Tables>
+		<DataSources>
+			<Items>
+				<FileDataSource Id="DataSources.L1MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1MA" />
+				<FileDataSource Id="DataSources.L2MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2MA" />
+				<FileDataSource Id="DataSources.L3MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3MA" />
+				<FileDataSource Id="DataSources.L4MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4MA" />
+				<FileDataSource Id="DataSources.L5MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5MA" />
+				<FileDataSource Id="DataSources.L6MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6MA" />
+				<FileDataSource Id="DataSources.L7MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7MA" />
+				<FileDataSource Id="DataSources.L8MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8MA" />
+				<FileDataSource Id="DataSources.L9MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9MA" />
+				<FileDataSource Id="DataSources.LAMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LAMA" />
+				<FileDataSource Id="DataSources.LBMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LBMA" />
+				<FileDataSource Id="DataSources.LCMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LCMA" />
+				<FileDataSource Id="DataSources.LDMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LDMA" />
+				<FileDataSource Id="DataSources.LEMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LEMA" />
+				<FileDataSource Id="DataSources.MMA1" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA1" />
+				<FileDataSource Id="DataSources.MMA2" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA2" />
+				<FileDataSource Id="DataSources.MMA3" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA3" />
+				<FileDataSource Id="DataSources.L1BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1BM" />
+				<FileDataSource Id="DataSources.L2BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2BM" />
+				<FileDataSource Id="DataSources.L3BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3BM" />
+				<FileDataSource Id="DataSources.L4BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4BM" />
+				<FileDataSource Id="DataSources.L5BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5BM" />
+				<FileDataSource Id="DataSources.L6BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6BM" />
+				<FileDataSource Id="DataSources.L7BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7BM" />
+				<FileDataSource Id="DataSources.L8BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8BM" />
+				<FileDataSource Id="DataSources.L9BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9BM" />
+				<FileDataSource Id="DataSources.L1LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1LP" />
+				<FileDataSource Id="DataSources.L2LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2LP" />
+				<FileDataSource Id="DataSources.L6LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6LP" />
+				<FileDataSource Id="DataSources.LALP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LALP" />
+				<FileDataSource Id="DataSources.CHAD" FilePath="%Cfg.Options.ABHC.GameFolderPath%\CHAD" />
+				<FileDataSource Id="DataSources.CHAR" FilePath="%Cfg.Options.ABHC.GameFolderPath%\CHAR" />
+				<FileDataSource Id="DataSources.ENDA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ENDA" />
+				<FileDataSource Id="DataSources.ENDP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ENDP" />
+				<FileDataSource Id="DataSources.ETXT" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ETXT" />
+				<FileDataSource Id="DataSources.HPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HPIC" />
+				<FileDataSource Id="DataSources.IPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\IPIC" />
+				<FileDataSource Id="DataSources.HSP1" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP1" />
+				<FileDataSource Id="DataSources.HSP2" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP2" />
+				<FileDataSource Id="DataSources.HSP3" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP3" />
+				<FileDataSource Id="DataSources.HSP4" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP4" />
+				<FileDataSource Id="DataSources.L1BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1BO" />
+				<FileDataSource Id="DataSources.L2BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2BO" />
+				<FileDataSource Id="DataSources.L3BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3BO" />
+				<FileDataSource Id="DataSources.L4BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4BO" />
+				<FileDataSource Id="DataSources.L5BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5BO" />
+				<FileDataSource Id="DataSources.L6BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6BO" />
+				<FileDataSource Id="DataSources.L7BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7BO" />
+				<FileDataSource Id="DataSources.L8BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8BO" />
+				<FileDataSource Id="DataSources.L9BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9BO" />
+				<FileDataSource Id="DataSources.LABO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LABO" />
+				<FileDataSource Id="DataSources.LBBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LBBO" />
+				<FileDataSource Id="DataSources.LCBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LCBO" />
+				<FileDataSource Id="DataSources.LDBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LDBO" />
+				<FileDataSource Id="DataSources.LEBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LEBO" />
+				<FileDataSource Id="DataSources.MPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MPIC" />
+			</Items>
+		</DataSources>
+		<Images>
+			<Items>
+				<AcbmImage Description="Characters statistics screens" Id="Images.CHAD">
+					<Width>640</Width>
+					<Height>512</Height>
+					<BitPlanesNo>2</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.CHAD</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Characters selection screen" Id="Images.CHAR">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>8</BitPlanesNo>
+					<PaletteMode>32BIT</PaletteMode>	
+					<DataRef>DataSources.CHAR</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="End animation frames" Id="Images.ENDA">
+					<Width>320</Width>
+					<Height>480</Height>
+					<BitPlanesNo>7</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.ENDA</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="End picture" Id="Images.ENDP">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>7</BitPlanesNo>
+					<PaletteMode>32BIT</PaletteMode>
+					<DataRef>DataSources.ENDP</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Highscore picture" Id="Images.HPIC">
+					<Width>320</Width>
+					<Height>288</Height>
+					<BitPlanesNo>5</BitPlanesNo>
+					<PaletteMode>32BIT</PaletteMode>
+					<DataRef>DataSources.HPIC</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Intro picture" Id="Images.IPIC">
+					<Width>640</Width>
+					<Height>512</Height>
+					<BitPlanesNo>7</BitPlanesNo>
+					<PaletteMode>32BIT</PaletteMode>
+					<DataRef>DataSources.IPIC</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Menu picture" Id="Images.MPIC">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>
+					<DataRef>DataSources.MPIC</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="End text screen" Id="Images.ETXT">
+					<Width>320</Width>
+					<Height>1024</Height>
+					<BitPlanesNo>1</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>
+					<DataRef>DataSources.ETXT</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Character 1 sprites" Id="Images.HSP1">
+					<Width>320</Width>
+					<Height>160</Height>
+					<BitPlanesNo>4</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.HSP1</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Character 2 sprites" Id="Images.HSP2">
+					<Width>320</Width>
+					<Height>160</Height>
+					<BitPlanesNo>4</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.HSP2</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Character 3 sprites" Id="Images.HSP3">
+					<Width>320</Width>
+					<Height>160</Height>
+					<BitPlanesNo>4</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.HSP3</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Character 4 sprites" Id="Images.HSP4">
+					<Width>320</Width>
+					<Height>160</Height>
+					<BitPlanesNo>4</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.HSP4</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 1 sprites" Id="Images.L1BO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>			
+					<DataRef>DataSources.L1BO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 2 sprites" Id="Images.L2BO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.L2BO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 3 sprites" Id="Images.L3BO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.L3BO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 4 sprites" Id="Images.L4BO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.L4BO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 5 sprites" Id="Images.L5BO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.L5BO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 6 sprites" Id="Images.L6BO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.L6BO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 7 sprites" Id="Images.L7BO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.L7BO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 8 sprites" Id="Images.L8BO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.L8BO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 9 sprites" Id="Images.L9BO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.L9BO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level A sprites" Id="Images.LABO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.LABO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level B sprites" Id="Images.LBBO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.LBBO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level C sprites" Id="Images.LCBO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.LCBO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level D sprites" Id="Images.LDBO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.LDBO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level E sprites" Id="Images.LEBO">
+					<Width>320</Width>
+					<Height>512</Height>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteMode>NONE</PaletteMode>	
+					<DataRef>DataSources.LEBO</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 1 picture" Id="Images.L1LP">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>8</BitPlanesNo>
+					<PaletteMode>32BIT</PaletteMode>			
+					<DataRef>DataSources.L1LP</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 2 picture" Id="Images.L2LP">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>8</BitPlanesNo>
+					<PaletteMode>32BIT</PaletteMode>
+					<DataRef>DataSources.L2LP</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level 6 picture" Id="Images.L6LP">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>8</BitPlanesNo>
+					<PaletteMode>32BIT</PaletteMode>
+					<DataRef>DataSources.L6LP</DataRef>
+				</AcbmImage>
+				<AcbmImage Description="Level A picture" Id="Images.LALP">
+					<Width>320</Width>
+					<Height>256</Height>
+					<BitPlanesNo>8</BitPlanesNo>
+					<PaletteMode>32BIT</PaletteMode>
+					<DataRef>DataSources.LALP</DataRef>
+				</AcbmImage>
+			</Items>
+		</Images>
+		<TileSets>
+			<Items>
+				<TileSetFromACBM Id="TileSets.L1">
+					<DataRef>DataSources.L1BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+					</PaletteRefs>
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L2">
+					<DataRef>DataSources.L2BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L2MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L2MA.ALCM</PaletteRef>
+					</PaletteRefs>
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L3">
+					<DataRef>DataSources.L3BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L3MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L3MA.ALCM</PaletteRef>
+					</PaletteRefs>
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L4">
+					<DataRef>DataSources.L4BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L4MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L4MA.ALCM</PaletteRef>
+					</PaletteRefs>
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L5">
+					<DataRef>DataSources.L5BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L5MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L5MA.ALCM</PaletteRef>
+					</PaletteRefs>
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L6">
+					<DataRef>DataSources.L6BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L6MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L6MA.ALCM</PaletteRef>
+					</PaletteRefs>
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L7">
+					<DataRef>DataSources.L7BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteRefs>
+						<PaletteRef>Palettes.LAMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LAMA.ALCM</PaletteRef>
+					</PaletteRefs>
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L8">
+					<DataRef>DataSources.L8BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteRefs>
+						<PaletteRef>Palettes.LCMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LCMA.ALCM</PaletteRef>
+					</PaletteRefs>
+				</TileSetFromACBM>
+				<TileSetFromACBM Id="TileSets.L9">
+					<DataRef>DataSources.L9BM</DataRef>
+					<TileSize>16</TileSize>
+					<BitPlanesNo>6</BitPlanesNo>
+					<PaletteRefs>
+						<PaletteRef>Palettes.LEMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LEMA.ALCM</PaletteRef>
+					</PaletteRefs>
+				</TileSetFromACBM>
+			</Items>
+		</TileSets>
+		<Maps>
+			<Items>
+				<Map Id="Maps.L1MA">
+					<DataRef>DataSources.L1MA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L1</TileSetRef>
+				</Map>
+				<Map Id="Maps.L2MA">
+					<DataRef>DataSources.L2MA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L2MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L2MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L2</TileSetRef>
+				</Map>
+				<Map Id="Maps.L3MA">
+					<DataRef>DataSources.L3MA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L3MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L3MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L3</TileSetRef>
+				</Map>
+				<Map Id="Maps.L4MA">
+					<DataRef>DataSources.L4MA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L4MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L4MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L4</TileSetRef>
+				</Map>
+				<Map Id="Maps.L5MA">
+					<DataRef>DataSources.L5MA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L5MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L5MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L5</TileSetRef>
+				</Map>
+				<Map Id="Maps.L6MA">
+					<DataRef>DataSources.L6MA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L6MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L6MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L6</TileSetRef>
+				</Map>
+				<Map Id="Maps.L7MA">
+					<DataRef>DataSources.L7MA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L7MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L7MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L6</TileSetRef>
+				</Map>
+				<Map Id="Maps.L8MA">
+					<DataRef>DataSources.L8MA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L8MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L8MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L6</TileSetRef>
+				</Map>
+				<Map Id="Maps.L9MA">
+					<DataRef>DataSources.L9MA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.L9MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L9MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L6</TileSetRef>
+				</Map>
+				<Map Id="Maps.LAMA">
+					<DataRef>DataSources.LAMA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.LAMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LAMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L7</TileSetRef>
+				</Map>
+				<Map Id="Maps.LBMA">
+					<DataRef>DataSources.LBMA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.LBMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LBMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L7</TileSetRef>
+				</Map>
+				<Map Id="Maps.LCMA">
+					<DataRef>DataSources.LCMA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.LCMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LCMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L8</TileSetRef>
+				</Map>
+				<Map Id="Maps.LDMA">
+					<DataRef>DataSources.LDMA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.LDMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LDMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L7</TileSetRef>
+				</Map>
+				<Map Id="Maps.LEMA">
+					<DataRef>DataSources.LEMA</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.LEMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LEMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L9</TileSetRef>
+				</Map>
+				<Map Id="Maps.MMA1">
+					<DataRef>DataSources.MMA1</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MMA1.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MMA1.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L1</TileSetRef>
+				</Map>
+				<Map Id="Maps.MMA2">
+					<DataRef>DataSources.MMA2</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MMA2.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MMA2.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L5</TileSetRef>
+				</Map>
+				<Map Id="Maps.MMA3">
+					<DataRef>DataSources.MMA3</DataRef>
+					<Format>ABHC</Format>
+					<PaletteRefs>
+						<PaletteRef>Palettes.MMA3.CMAP</PaletteRef>
+						<PaletteRef>Palettes.MMA3.ALCM</PaletteRef>
+					</PaletteRefs>
+					<ActionSetRef>Actions.Level1</ActionSetRef>
+					<SpriteSetRefs />
+					<TileSetRef>TileSets.L7</TileSetRef>
+				</Map>
+			</Items>
+		</Maps>
+		<ActionSets>
+			<Items>
+				<ActionSet Id="Actions.Level1">
+					<Actions>
+						<Action Id="0" Name="Air">
+							<Description>No collision, no action</Description>
+							<Presentation>
+								<Color>#7F000000</Color>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="1" Name="Heavy turret">
+							<Description>Left up corner of turrent, insta-kill when when player collides</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="2" Name="Lizard">
+							<Description>Almost harmless, killed when collides with player (which takes very little damage)</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="3" Name="Unknown 3">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="4" Name="Animated sprite">
+							<Description>Left up corner of sprite</Description>
+							<Presentation>
+								<Color>#50AAAAAA</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="5" Name="Unknown 5">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="6" Name="Unknown 6">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="7" Name="Unknown 7">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="8" Name="Unknown 8">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="9" Name="Unknown 9">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="10" Name="Unknown 10">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="11" Name="Unknown 11">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="12" Name="Unknown 12">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="13" Name="Unknown 13">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="14" Name="Working generator">
+							<Description>Top left corner of working generator animation</Description>
+							<Presentation>
+								<Color>#2030FFFF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="15" Name="Unknown 15">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="16" Name="Down left obstacle (for all)">
+							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="17" Name="Top left obstacle (for all)">
+							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="18" Name="Up right obstacle (for all)">
+							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="19" Name="Down right obstacle (for all)">
+							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="20" Name="Unknown 20">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="21" Name="Unknown 21">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="22" Name="Smart card 1">
+							<Description>This will show message from smart card 1</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="23" Name="Smart card 2">
+							<Description>This will show message from smart card 2</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="24" Name="Smart card 3">
+							<Description>This will show message from smart card 3</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="25" Name="Unknown 25">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="26" Name="Unknown 26">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="27" Name="Unknown 27">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="28" Name="Special door 1">
+							<Description>Door opened with special key card 1</Description>
+							<Presentation>
+								<Color>#2030FF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="29" Name="Special door 2">
+							<Description>Door opened with special key card 2</Description>
+							<Presentation>
+								<Color>#2030FF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="30" Name="Unknown 30">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="31" Name="Local teleport (start)">
+							<Description>Teleports player from this location</Description>
+							<Presentation>
+								<Color>#200FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="32" Name="Unknown 32">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="33" Name="Keycard1">
+							<Description>key card opening special door 1</Description>
+							<Presentation>
+								<Color>#503000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="34" Name="Special key card 2">
+							<Description>key card opening special door 2</Description>
+							<Presentation>
+								<Color>#503000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="35" Name="Unknown 35">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="36" Name="Local teleport (end)">
+							<Description>Teleports player to this location, the one that is furthest</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="37" Name="Exit 1">
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="38" Name="Exit 2">
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="39" Name="Unknown 39">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="40" Name="Unknown 40">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="41" Name="Unknown 41">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="42" Name="Unknown 42">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="43" Name="Unknown 43">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="44" Name="Unknown 44">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="45" Name="Entrance 1">
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="46" Name="Entrance 2">
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="47" Name="Land mine">
+							<Description>Explodes on stepping by player</Description>
+							<Presentation>
+								<Color>#50FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="48" Name="Unknown 48">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="49" Name="Unknown 49">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="50" Name="Unknown 50">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="51" Name="Unknown 51">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="52" Name="Unknown 52">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="53" Name="Unknown 53">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="54" Name="Exit 3">
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="55" Name="GenericItem">
+							<Description>Pickable item</Description>
+							<Presentation>
+								<Color>#500000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="56" Name="Entrance 3">
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="57" Name="Obstacle(for enemies only)">
+							<Description>Player can walk trough it, movable enemies can't</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="58" Name="Generator (activate switch)">
+							<Description>Activates generator when player stomps on it</Description>
+							<Presentation>
+								<Color>#2030FFFF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="59" Name="Unknown 59">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="60" Name="Obstacle(except projectiles)">
+							<Description>Collision, but weapon projectile can penetrate</Description>
+							<Presentation>
+								<Color>#32F00000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="61" Name="Unknown 61">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#C0000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="62" Name="Door">
+							<Description>Door with normal key card required</Description>
+							<Presentation>
+								<Color>#320FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="63" Name="Obstacle(for all)">
+							<Description>Collision, nothing can penetrate</Description>
+							<Presentation>
+								<Color>#50F00000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+					</Actions>
+				</ActionSet>
+				<ActionSet Id="Actions.Default">
+					<Actions>
+						<Action Id="0" Name="Air">
+							<Description>No collision, no action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="1" Name="Monster (Type 1)">
+							<Description>Start position of monster type 1</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="2" Name="Monster (Type 2)">
+							<Description>Start position of monster type 2</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="3" Name="Monster (Type 3)">
+							<Description>Start position of monster type 3</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="4" Name="Monster (Type 4)">
+							<Description>Start position of monster type 4</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="5" Name="Unknown 5">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="6" Name="Unknown 6">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="7" Name="One way gate (Up)">
+							<Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="8" Name="One way gate (Down)">
+							<Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="9" Name="Unknown 9">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="10" Name="Unknown 10">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="11" Name="Unknown 11">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="12" Name="One way gate (Right)">
+							<Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="13" Name="One way gate (Left)">
+							<Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
+							<Presentation>
+								<Color>#80FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="14" Name="Directed gun (Right)">
+							<Description>Gun directed to right, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="15" Name="Directed gun (Up)">
+							<Description>Gun directed to up, deals great damage to player</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="16" Name="Down left obstacle (for all)">
+							<Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="17" Name="Top left obstacle (for all)">
+							<Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="18" Name="Up right obstacle (for all)">
+							<Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="19" Name="Down right obstacle (for all)">
+							<Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+							<Presentation>
+								<Color>#20FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="20" Name="Unknown 20">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="21" Name="Unknown 21">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="22" Name="Smart card 1">
+							<Description>This will show note message from smart card 1</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="23" Name="Smart card 2">
+							<Description>This will show note message from smart card 2</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="24" Name="Smart card 3">
+							<Description>This will show note message from smart card 3</Description>
+							<Presentation>
+								<Color>#800000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="25" Name="Unknown 25">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="26" Name="Unknown 26">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="27" Name="Unknown 27">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="28" Name="Unknown 28">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="29" Name="Unknown 29">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="30" Name="Unknown 30">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="31" Name="Local teleport (start)">
+							<Description>Teleports player from this location</Description>
+							<Presentation>
+								<Color>#200FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="32" Name="Monster spawner">
+							<Description>Creates a hole where monsters are comming from</Description>
+							<Presentation>
+								<Color>#F0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="33" Name="Keycard1">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="34" Name="Unknown 34">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="35" Name="Unknown 35">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="36" Name="Local teleport (end)">
+							<Description>Teleports player to this location, the one that is furthest</Description>
+							<Presentation>
+								<Color>#40FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="37" Name="Exit 1">
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="38" Name="Exit 2">
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="39" Name="Unknown 39">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="40" Name="Unknown 40">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="41" Name="Unknown 41">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="42" Name="Unknown 42">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="43" Name="Unknown 43">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="44" Name="Unknown 44">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="45" Name="Entrance 1">
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="46" Name="Entrance 2">
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="47" Name="Unknown 47">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="48" Name="Unknown 48">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="49" Name="Radioactive area">
+							<Description>Radioactive area that hurts player if standing on it</Description>
+							<Presentation>
+								<Color>#4FFF7F00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="50" Name="Wall turrent (Up)">
+							<Description>Wall turret facing up</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="51" Name="Wall turrent (Right)">
+							<Description>Wall turret facing right</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="52" Name="Wall turrent (Down)">
+							<Description>Wall turret facing down</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="53" Name="Wall turrent (Left)">
+							<Description>Wall turret facing left</Description>
+							<Presentation>
+								<Color>#A0FF0000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="54" Name="Exit 3">
+							<Description>Collision, Finishes level</Description>
+							<Presentation>
+								<Color>#500FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="55" Name="GenericItem">
+							<Description>Pickable item</Description>
+							<Presentation>
+								<Color>#500000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="56" Name="Entrance 3">
+							<Description>No collision, spawns player here</Description>
+							<Presentation>
+								<Color>#7FFF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="57" Name="Obstacle(for enemies only)">
+							<Description>Player can walk trough it, movable enemies can't</Description>
+							<Presentation>
+								<Color>#20FF00FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="58" Name="Unknown 58">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="59" Name="Unknown 59">
+							<Description>Unknown action</Description>
+							<Presentation>
+								<Color>#00000000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="60" Name="Obstacle(except projectiles)">
+							<Description>Collision, but weapon projectile can penetrate</Description>
+							<Presentation>
+								<Color>#32FFFF00</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="61" Name="Intex terminal">
+							<Description>Terminal that player may use</Description>
+							<Presentation>
+								<Color>#7F0000FF</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="62" Name="Door">
+							<Description>Door with no color card required</Description>
+							<Presentation>
+								<Color>#320FF000</Color>
+								<Visibility>true</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+						<Action Id="63" Name="Obstacle(for all)">
+							<Description>Collision, nothing can penetrate</Description>
+							<Presentation>
+								<Visibility>false</Visibility>
+							</Presentation>
+							<Triggers />
+						</Action>
+					</Actions>
+				</ActionSet>
+			</Items>
+		</ActionSets>
+		<SpriteSets>
+			<Items>
+				<SpriteSetFromImage Id="SpriteSets.HSP1">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.HSP1</DataRef>
+					<Sprites>
+						<SpriteCoords Height="32" Width="32" X="0" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="96" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.HSP2">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.HSP2</DataRef>
+					<Sprites>
+						<SpriteCoords Height="32" Width="32" X="0" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="96" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.HSP3">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.HSP3</DataRef>
+					<Sprites>
+						<SpriteCoords Height="32" Width="32" X="0" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="96" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.HSP4">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.HSP4</DataRef>
+					<Sprites>
+						<SpriteCoords Height="32" Width="32" X="0" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="0" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="32" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="64" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="96" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="96" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.L1BO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.L1BO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.L2BO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L2MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L2MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.L2BO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="32" Width="16" X="0" Y="112" />
+						<SpriteCoords Height="32" Width="16" X="16" Y="112" />
+						<SpriteCoords Height="32" Width="16" X="32" Y="112" />
+						<SpriteCoords Height="32" Width="16" X="48" Y="112" />
+						<SpriteCoords Height="16" Width="32" X="64" Y="112" />
+						<SpriteCoords Height="16" Width="32" X="96" Y="112" />
+						<SpriteCoords Height="16" Width="32" X="64" Y="128" />
+						<SpriteCoords Height="16" Width="32" X="96" Y="128" />
+						<SpriteCoords Height="32" Width="16" X="128" Y="112" />
+						<SpriteCoords Height="32" Width="16" X="144" Y="112" />
+						<SpriteCoords Height="32" Width="16" X="160" Y="112" />
+						<SpriteCoords Height="32" Width="16" X="176" Y="112" />
+						<SpriteCoords Height="16" Width="32" X="192" Y="112" />
+						<SpriteCoords Height="16" Width="32" X="224" Y="112" />
+						<SpriteCoords Height="16" Width="32" X="192" Y="128" />
+						<SpriteCoords Height="16" Width="32" X="224" Y="128" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="432" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="432" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="432" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="432" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="432" />
+						<SpriteCoords Height="16" Width="32" X="0" Y="464" />
+						<SpriteCoords Height="16" Width="32" X="32" Y="464" />
+						<SpriteCoords Height="16" Width="32" X="64" Y="464" />
+						<SpriteCoords Height="16" Width="32" X="96" Y="464" />
+						<SpriteCoords Height="16" Width="32" X="128" Y="464" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="432" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="432" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="432" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="432" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="432" />
+						<SpriteCoords Height="32" Width="16" X="80" Y="480" />
+						<SpriteCoords Height="32" Width="16" X="96" Y="480" />
+						<SpriteCoords Height="32" Width="16" X="112" Y="480" />
+						<SpriteCoords Height="32" Width="16" X="128" Y="480" />
+						<SpriteCoords Height="32" Width="16" X="144" Y="480" />
+						<SpriteCoords Height="32" Width="32" X="0" Y="400" />
+						<SpriteCoords Height="32" Width="32" X="32" Y="400" />
+						<SpriteCoords Height="32" Width="32" X="64" Y="400" />
+						<SpriteCoords Height="32" Width="32" X="96" Y="400" />
+						<SpriteCoords Height="32" Width="32" X="128" Y="400" />
+						<SpriteCoords Height="16" Width="32" X="160" Y="496" />
+						<SpriteCoords Height="16" Width="32" X="192" Y="496" />
+						<SpriteCoords Height="16" Width="32" X="224" Y="496" />
+						<SpriteCoords Height="16" Width="32" X="256" Y="496" />
+						<SpriteCoords Height="16" Width="32" X="288" Y="496" />
+						<SpriteCoords Height="32" Width="32" X="160" Y="464" />
+						<SpriteCoords Height="32" Width="32" X="192" Y="464" />
+						<SpriteCoords Height="32" Width="32" X="224" Y="464" />
+						<SpriteCoords Height="32" Width="32" X="256" Y="464" />
+						<SpriteCoords Height="32" Width="32" X="288" Y="464" />
+						<SpriteCoords Height="32" Width="16" X="0" Y="480" />
+						<SpriteCoords Height="32" Width="16" X="16" Y="480" />
+						<SpriteCoords Height="32" Width="16" X="32" Y="480" />
+						<SpriteCoords Height="32" Width="16" X="48" Y="480" />
+						<SpriteCoords Height="32" Width="16" X="64" Y="480" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.L3BO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L3MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L3MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.L3BO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.L4BO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L4MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L4MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.L4BO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+						<SpriteCoords Height="8" Width="8" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.L5BO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L5MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L5MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.L5BO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.L6BO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L6MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L6MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.L6BO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.L7BO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L7MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L7MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.L7BO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.L8BO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L8MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L8MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.L8BO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.L9BO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.L9MA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.L9MA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.L9BO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.LABO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.LAMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LAMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.LABO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.LBBO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.LBMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LBMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.LBBO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.LCBO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.LCMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LCMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.LCBO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.LDBO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.LDMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LDMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.LDBO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+				<SpriteSetFromImage Id="SpriteSets.LEBO">
+					<PaletteRefs>
+						<PaletteRef>Palettes.LEMA.CMAP</PaletteRef>
+						<PaletteRef>Palettes.LEMA.ALCM</PaletteRef>
+					</PaletteRefs>
+					<DataRef>Assets.LEBO</DataRef>
+					<Sprites>
+						<SpriteCoords Height="512" Width="320" X="0" Y="0" />
+					</Sprites>
+				</SpriteSetFromImage>
+			</Items>
+		</SpriteSets>
+		<Palettes>
+			<Items>
+				<PaletteFromMAP Id="Palettes.L1MA.CMAP">
+					<MapRef>Maps.L1MA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L1MA.ALCM">
+					<MapRef>Maps.L1MA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L2MA.CMAP">
+					<MapRef>Maps.L2MA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L2MA.ALCM">
+					<MapRef>Maps.L2MA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L3MA.CMAP">
+					<MapRef>Maps.L3MA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L3MA.ALCM">
+					<MapRef>Maps.L3MA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L4MA.CMAP">
+					<MapRef>Maps.L4MA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L4MA.ALCM">
+					<MapRef>Maps.L4MA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L5MA.CMAP">
+					<MapRef>Maps.L5MA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L5MA.ALCM">
+					<MapRef>Maps.L5MA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L6MA.CMAP">
+					<MapRef>Maps.L6MA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L6MA.ALCM">
+					<MapRef>Maps.L6MA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L7MA.CMAP">
+					<MapRef>Maps.L7MA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L7MA.ALCM">
+					<MapRef>Maps.L7MA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L8MA.CMAP">
+					<MapRef>Maps.L8MA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L8MA.ALCM">
+					<MapRef>Maps.L8MA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L9MA.CMAP">
+					<MapRef>Maps.L9MA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.L9MA.ALCM">
+					<MapRef>Maps.L9MA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LAMA.CMAP">
+					<MapRef>Maps.LAMA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LAMA.ALCM">
+					<MapRef>Maps.LAMA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LBMA.CMAP">
+					<MapRef>Maps.LBMA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LBMA.ALCM">
+					<MapRef>Maps.LBMA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LCMA.CMAP">
+					<MapRef>Maps.LCMA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LCMA.ALCM">
+					<MapRef>Maps.LCMA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LDMA.CMAP">
+					<MapRef>Maps.LDMA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LDMA.ALCM">
+					<MapRef>Maps.LDMA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LEMA.CMAP">
+					<MapRef>Maps.LEMA</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.LEMA.ALCM">
+					<MapRef>Maps.LEMA</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.MMA1.CMAP">
+					<MapRef>Maps.MMA1</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.MMA1.ALCM">
+					<MapRef>Maps.MMA1</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.MMA2.CMAP">
+					<MapRef>Maps.MMA2</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.MMA2.ALCM">
+					<MapRef>Maps.MMA2</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.MMA3.CMAP">
+					<MapRef>Maps.MMA3</MapRef>
+					<BlockName>CMAP</BlockName>
+				</PaletteFromMAP>
+				<PaletteFromMAP Id="Palettes.MMA3.ALCM">
+					<MapRef>Maps.MMA3</MapRef>
+					<BlockName>ALCM</BlockName>
+				</PaletteFromMAP>
+			</Items>
+		</Palettes>
+		<Sounds>
+			<Items />
+		</Sounds>
+		<Texts>
+			<Items />
+		</Texts>
+		<Scripts>
+			<Items>
+			</Items>
+		</Scripts>
+	</Tables>
+</Database>

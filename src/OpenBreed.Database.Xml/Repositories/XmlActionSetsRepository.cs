@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Xml.Items.Actions;
+using OpenBreed.Database.Xml.Items.Animations;
 using OpenBreed.Database.Xml.Tables;
 using System;
 using System.Collections.Generic;
@@ -47,7 +49,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbActionSet entry)
         {
-            return context.Items.IndexOf((XmlDbActionSet)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         #endregion Protected Methods
@@ -87,6 +89,11 @@ namespace OpenBreed.Database.Xml.Repositories
             context.Items.Add((XmlDbActionSet)newEntry);
         }
 
+        public override bool Remove(IDbActionSet entry)
+        {
+            return context.Items.Remove((XmlDbActionSet)entry);
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
@@ -98,7 +105,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbActionSet entry)
         {
-            return context.Items.IndexOf((XmlDbActionSet)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IDbActionSet newEntry)

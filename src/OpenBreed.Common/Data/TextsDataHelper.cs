@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Database.Interface.Items.Maps;
 
 namespace OpenBreed.Common.Data
 {
@@ -25,7 +26,7 @@ namespace OpenBreed.Common.Data
 
         public static TextModel FromMapModel(IModelsProvider dataProvider, IDbTextFromMap textData)
         {
-            var mapModel = dataProvider.GetModel<MapModel>(textData.DataRef);
+            var mapModel = dataProvider.GetModelById<IDbMap, MapModel>(textData.MapRef);
 
             if (mapModel == null)
                 return null;
@@ -34,6 +35,18 @@ namespace OpenBreed.Common.Data
 
             if (textBlock == null)
                 return null;
+
+            return Create(textBlock);
+        }
+
+        public static TextModel FromMapModel(MapModel mapModel, IDbTextFromMap textData)
+        {
+            var textBlock = mapModel.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == textData.BlockName);
+
+            if (textBlock is null)
+            {
+                return null;
+            }
 
             return Create(textBlock);
         }

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Model.Maps;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Model.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,27 +9,51 @@ namespace OpenBreed.Model.Maps
 {
     public class MapBuilder
     {
-        #region Internal Fields
+        #region Public Fields
 
         //TODO: Make this one internal
         public List<IMapDataBlock> Blocks = new List<IMapDataBlock>();
+
+        #endregion Public Fields
+
+        #region Internal Fields
+
         internal byte[] Header;
 
         #endregion Internal Fields
 
+        #region Private Fields
+
+        private readonly IDrawingFactory drawingFactory;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public MapBuilder(IDrawingFactory drawingFactory)
+        {
+            this.drawingFactory = drawingFactory;
+        }
+
+        #endregion Public Constructors
+
+        #region Internal Properties
+
         internal MapLayoutBuilder Layout { get; private set; }
+
+        #endregion Internal Properties
 
         #region Public Methods
 
-        public MapLayoutBuilder CreateLayout()
+        public static MapBuilder NewMapModel(IDrawingFactory drawingFactory)
         {
-            Layout = MapLayoutBuilder.NewMapLayoutModel();
-            return Layout;
+            return new MapBuilder(drawingFactory);
         }
 
-        public static MapBuilder NewMapModel()
+        public MapLayoutBuilder CreateLayout()
         {
-            return new MapBuilder();
+            Layout = MapLayoutBuilder.NewMapLayoutModel(drawingFactory);
+            return Layout;
         }
 
         public MapModel Build()
@@ -43,15 +68,11 @@ namespace OpenBreed.Model.Maps
             return this;
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
         public void AddBlock(IMapDataBlock dataBlock)
         {
             Blocks.Add(dataBlock);
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
     }
 }

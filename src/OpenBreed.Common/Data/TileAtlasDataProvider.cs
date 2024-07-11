@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Tiles;
+using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Tiles;
 using System;
 
@@ -12,15 +14,15 @@ namespace OpenBreed.Common.Data
 
         private readonly IRepositoryProvider repositoryProvider;
 
-        private readonly IModelsProvider dataProvider;
+        private readonly IModelsProvider modelsProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileAtlasDataProvider(IModelsProvider dataProvider, IRepositoryProvider repositoryProvider)
+        public TileAtlasDataProvider(IModelsProvider modelsProvider, IRepositoryProvider repositoryProvider)
         {
-            this.dataProvider = dataProvider;
+            this.modelsProvider = modelsProvider;
             this.repositoryProvider = repositoryProvider;
         }
 
@@ -34,26 +36,24 @@ namespace OpenBreed.Common.Data
             if (entry == null)
                 throw new Exception("TileSet error: " + id);
 
-            return GetModel(entry);
+            return GetTileAtlas(entry);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private TileSetModel GetModelImpl(IDbTileAtlasFromBlk entry)
+        public TileSetModel GetTileAtlas(IDbTileAtlas dbTileAtlas, bool refresh = false)
         {
-            return TileAtlasDataHelper.FromBlkModel(dataProvider, entry);
-        }
-
-        private TileSetModel GetModelImpl(IDbTileAtlasFromImage entry)
-        {
-            return TileAtlasDataHelper.FromImageModel(dataProvider, entry);
-        }
-
-        private TileSetModel GetModel(dynamic entry)
-        {
-            return GetModelImpl(entry);
+            switch (dbTileAtlas)
+            {
+                case IDbTileAtlasFromBlk dbTileAtlasFromBlk:
+                    return modelsProvider.GetModel<IDbTileAtlasFromBlk, TileSetModel>(dbTileAtlasFromBlk, refresh);
+                case IDbTileAtlasFromAcbm dbTileAtlasFromImage:
+                    return modelsProvider.GetModel<IDbTileAtlasFromAcbm, TileSetModel>(dbTileAtlasFromImage, refresh);
+                default:
+                    throw new NotImplementedException(dbTileAtlas.GetType().ToString());
+            }
         }
 
         #endregion Private Methods

@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Common.Interface.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Scripts;
+using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Model.Scripts;
+using OpenBreed.Model.Texts;
 using System;
 
 namespace OpenBreed.Common.Data
@@ -12,15 +14,15 @@ namespace OpenBreed.Common.Data
 
         private readonly IRepositoryProvider repositoryProvider;
 
-        private readonly IModelsProvider dataProvider;
+        private readonly IModelsProvider modelsProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ScriptsDataProvider(IModelsProvider dataProvider, IRepositoryProvider repositoryProvider)
+        public ScriptsDataProvider(IModelsProvider modelsProvider, IRepositoryProvider repositoryProvider)
         {
-            this.dataProvider = dataProvider;
+            this.modelsProvider = modelsProvider;
             this.repositoryProvider = repositoryProvider;
         }
 
@@ -28,34 +30,19 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
-        public ScriptModel GetScript(string id)
+        public ScriptModel GetScript(IDbScript dbScript, bool refresh = false)
         {
-            var entry = repositoryProvider.GetRepository<IDbScript>().GetById(id);
-            if (entry == null)
-                throw new Exception("Script error: " + id);
-
-            return GetModel(entry);
+            switch (dbScript)
+            {
+                case IDbScriptFromFile dbScriptFromFile:
+                    return modelsProvider.GetModel<IDbScriptFromFile, ScriptModel>(dbScriptFromFile, refresh);
+                case IDbScriptEmbedded dbScriptEmbedded:
+                    return modelsProvider.GetModel<IDbScriptEmbedded, ScriptModel>(dbScriptEmbedded, refresh);
+                default:
+                    throw new NotImplementedException(dbScript.GetType().ToString());
+            }
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private ScriptModel GetModelImpl(IDbScriptFromFile entry)
-        {
-            return ScriptsDataHelper.FromText(dataProvider, entry);
-        }
-
-        private ScriptModel GetModelImpl(IDbScriptEmbedded entry)
-        {
-            return ScriptsDataHelper.FromBinary(dataProvider, entry);
-        }
-
-        private ScriptModel GetModel(dynamic entry)
-        {
-            return GetModelImpl(entry);
-        }
-
-        #endregion Private Methods
     }
 }

@@ -1,6 +1,5 @@
-﻿using OpenBreed.Common.Interface;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -83,13 +82,13 @@ namespace OpenBreed.Common
 
             if (!variables.TryGetValue(varName, out varValue))
             {
-                logger.Warning("Unknown Cfg variable: " + varName);
+                logger.LogWarning("Unknown Cfg variable: " + varName);
                 return string.Empty;
             }
 
             if(varValue is null)
             {
-                logger.Error($"Cfg variable '{varName}' is unset.");
+                logger.LogError($"Cfg variable '{varName}' is unset.");
                 return string.Empty;
             }
 

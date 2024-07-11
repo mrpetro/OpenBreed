@@ -8,7 +8,6 @@ namespace OpenBreed.Database.Interface.Items.Actions
 {
     public interface IDbActionSet : IDbEntry
     {
-
         #region Public Properties
 
         List<IDbAction> Actions { get; }
@@ -20,6 +19,5 @@ namespace OpenBreed.Database.Interface.Items.Actions
         IDbAction NewItem();
 
         #endregion Public Methods
-
     }
 }

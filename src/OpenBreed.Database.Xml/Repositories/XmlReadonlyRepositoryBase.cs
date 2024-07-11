@@ -60,8 +60,10 @@ namespace OpenBreed.Database.Xml.Repositories
         public T GetById(string id)
         {
             var entry = Entries.FirstOrDefault(item => item.Id == id);
-            if (entry == null)
+            if (entry is null)
+            {
                 throw new Exception("No entry found with ID: " + id);
+            }
 
             return entry as T;
         }

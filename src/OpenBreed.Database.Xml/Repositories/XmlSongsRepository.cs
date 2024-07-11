@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Database.Interface.Items.Songs;
 using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Xml.Items.Scripts;
 using OpenBreed.Database.Xml.Items.Songs;
 using OpenBreed.Database.Xml.Items.Sounds;
 using OpenBreed.Database.Xml.Tables;
@@ -28,9 +30,12 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbSong); } }
-        public override string Name { get { return "Songs"; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes
+        { get { yield return typeof(XmlDbSong); } }
+        public override string Name
+        { get { return "Songs"; } }
 
         public override int Count => context.Items.Count;
 
@@ -45,7 +50,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbSong entry)
         {
-            return context.Items.IndexOf((XmlDbSong)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         #endregion Protected Methods
@@ -70,13 +75,30 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
-        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDbSong); } }
-        public override string Name { get { return "Songs"; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes
+        { get { yield return typeof(XmlDbSong); } }
+        public override string Name
+        { get { return "Songs"; } }
 
         public override int Count => context.Items.Count;
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Add(IDbSong newEntry)
+        {
+            context.Items.Add((XmlDbSong)newEntry);
+        }
+
+        public override bool Remove(IDbSong entry)
+        {
+            return context.Items.Remove((XmlDbSong)entry);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -87,17 +109,12 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbSong entry)
         {
-            return context.Items.IndexOf((XmlDbSong)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IDbSong newEntry)
         {
             context.Items[index] = (XmlDbSong)newEntry;
-        }
-
-        public override void Add(IDbSong newEntry)
-        {
-            context.Items.Add((XmlDbSong)newEntry);
         }
 
         #endregion Protected Methods

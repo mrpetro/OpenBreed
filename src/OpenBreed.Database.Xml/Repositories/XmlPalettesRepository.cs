@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Palettes;
+using OpenBreed.Database.Xml.Items.Maps;
 using OpenBreed.Database.Xml.Items.Palettes;
 using OpenBreed.Database.Xml.Tables;
 
@@ -39,6 +41,7 @@ namespace OpenBreed.Database.Xml.Repositories
             {
                 yield return typeof(XmlDbPaletteFromBinary);
                 yield return typeof(XmlDbPaletteFromMap);
+                yield return typeof(XmlDbPaletteFromLbm);
             }
         }
 
@@ -58,7 +61,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbPalette entry)
         {
-            return context.Items.IndexOf((XmlDbPalette)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         #endregion Public Methods
@@ -111,7 +114,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbPalette entry)
         {
-            return context.Items.IndexOf((XmlDbPalette)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IDbPalette newEntry)
@@ -122,6 +125,11 @@ namespace OpenBreed.Database.Xml.Repositories
         public override void Add(IDbPalette newEntry)
         {
             context.Items.Add((XmlDbPalette)newEntry);
+        }
+
+        public override bool Remove(IDbPalette entry)
+        {
+            return context.Items.Remove((XmlDbPalette)entry);
         }
 
         #endregion Public Methods

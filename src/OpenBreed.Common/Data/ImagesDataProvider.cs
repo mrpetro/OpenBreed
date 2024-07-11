@@ -1,6 +1,9 @@
 ﻿using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Images;
+using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Model.Sounds;
 using System;
 using System.Drawing;
 
@@ -28,16 +31,29 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
-        public Image GetImage(string id)
+        public IImage GetImage(IDbImage dbImage, bool refresh = false)
         {
-            var entry = repositoryProvider.GetRepository<IDbImage>().GetById(id);
-            if (entry == null)
-                throw new Exception("Image error: " + id);
+            switch (dbImage)
+            {
+                case IDbIffImage dbIffImage:
+                    return dataProvider.GetModel<IDbIffImage, IImage>(dbIffImage, refresh);
+                case IDbAcbmImage dbAcbmImage:
+                    return dataProvider.GetModel<IDbAcbmImage, IImage>(dbAcbmImage, refresh);
+                default:
+                    throw new NotImplementedException(dbImage.GetType().ToString());
+            }
+        }
 
-            if (entry.DataRef == null)
+        public IImage GetImageById(string entryId)
+        {
+            var entry = repositoryProvider.GetRepository<IDbImage>().GetById(entryId);
+
+            if (entry is null)
+            {
                 return null;
+            }
 
-            return dataProvider.GetModel<Image>(entry.DataRef);
+            return GetImage(entry);
         }
 
         #endregion Public Methods

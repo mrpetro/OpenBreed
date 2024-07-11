@@ -52,7 +52,6 @@ namespace OpenBreed.Database.Xml
         private void RegisterTables()
         {
             RegisterTable(GetTable<XmlDbDataSourceTableDef>());
-            RegisterTable(GetTable<XmlDbAssetTableDef>());
             RegisterTable(GetTable<XmlDbTileAtlasTableDef>());
             RegisterTable(GetTable<XmlDbTileStampTableDef>());
             RegisterTable(GetTable<XmlDbSpriteAtlasTableDef>());
@@ -70,11 +69,7 @@ namespace OpenBreed.Database.Xml
 
         private void RegisterRepos()
         {
-            //RegisterRepository(new DataSourcesRepository(openBreedDbContext, GetTable<XmlDbDataSourceTableDef>()));
-            //RegisterRepository(new AssetsRepository(openBreedDbContext, GetTable<XmlDbAssetTableDef>()));
-
             RegisterRepository(new XmlDataSourcesRepository(GetTable<XmlDbDataSourceTableDef>()));
-            RegisterRepository(new XmlAssetsRepository(GetTable<XmlDbAssetTableDef>()));
             RegisterRepository(new XmlTileAtlasRepository(GetTable<XmlDbTileAtlasTableDef>()));
             RegisterRepository(new XmlTileStampsRepository(GetTable<XmlDbTileStampTableDef>()));
             RegisterRepository(new XmlSpriteAtlasRepository(GetTable<XmlDbSpriteAtlasTableDef>()));
@@ -166,7 +161,9 @@ namespace OpenBreed.Database.Xml
             IRepository foundRepo;
 
             if (!repositories.TryGetValue(type, out foundRepo))
+            {
                 throw new Exception($"Repository of type {type} not found.");
+            }
 
             return foundRepo;
         }

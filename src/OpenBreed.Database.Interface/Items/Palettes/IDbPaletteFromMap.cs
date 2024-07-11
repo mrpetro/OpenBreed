@@ -14,7 +14,7 @@ namespace OpenBreed.Database.Interface.Items.Palettes
         #region Public Properties
 
         string BlockName { get; set; }
-        string DataRef { get; set; }
+        string MapRef { get; set; }
 
         #endregion Public Properties
     }

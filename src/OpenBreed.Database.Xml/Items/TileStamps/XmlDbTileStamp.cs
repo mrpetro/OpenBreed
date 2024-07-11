@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.TileStamps;
+using OpenBreed.Database.Xml.Items.Tiles;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,27 @@ namespace OpenBreed.Database.Xml.Items.TileStamps
     [Serializable]
     public class XmlDbTileStamp : XmlDbEntry, IDbTileStamp
     {
+        #region Public Constructors
+
+        public XmlDbTileStamp()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbTileStamp(XmlDbTileStamp other) : base(other)
+        {
+            Width = other.Width;
+            Height = other.Height;
+            CenterX = other.CenterX;
+            CenterY = other.CenterY;
+            XmlCells = other.XmlCells.Select(item => item.Copy()).Cast<XmlDbTileStampCell>().ToList();
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
 
         [XmlAttribute("Width")]
@@ -42,10 +64,7 @@ namespace OpenBreed.Database.Xml.Items.TileStamps
 
         #region Public Methods
 
-        public override IDbEntry Copy()
-        {
-            throw new NotImplementedException();
-        }
+        public override IDbEntry Copy() => new XmlDbTileStamp(this);
 
         #endregion Public Methods
     }
@@ -53,6 +72,26 @@ namespace OpenBreed.Database.Xml.Items.TileStamps
     [Serializable]
     public class XmlDbTileStampCell : IDbTileStampCell
     {
+        #region Public Constructors
+
+        public XmlDbTileStampCell()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected XmlDbTileStampCell(XmlDbTileStampCell other)
+        {
+            X = other.X;
+            Y = other.Y;
+            TsId = other.TsId;
+            TsTi = other.TsTi;
+        }
+
+        #endregion Protected Constructors
+
         #region Public Properties
 
         [XmlAttribute("X")]
@@ -68,5 +107,11 @@ namespace OpenBreed.Database.Xml.Items.TileStamps
         public int TsTi { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public IDbTileStampCell Copy() => new XmlDbTileStampCell(this);
+
+        #endregion Public Methods
     }
 }

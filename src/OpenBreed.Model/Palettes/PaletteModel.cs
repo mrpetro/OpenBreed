@@ -1,5 +1,5 @@
-﻿using System;
-using System.Drawing;
+﻿using OpenBreed.Common.Interface.Drawing;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Model.Palettes
@@ -35,7 +35,7 @@ namespace OpenBreed.Model.Palettes
 
         public static PaletteModel NullPalette { get; }
 
-        public Color[] Data { get; private set; }
+        public MyColor[] Data { get; private set; }
 
         public int Length => Data.Length;
 
@@ -50,7 +50,7 @@ namespace OpenBreed.Model.Palettes
 
         #region Public Indexers
 
-        public Color this[int index]
+        public MyColor this[int index]
         {
             get
             {
@@ -59,7 +59,7 @@ namespace OpenBreed.Model.Palettes
 
             set
             {
-                Color oldValue = Data[index];
+                var oldValue = Data[index];
 
                 if (oldValue == value)
                     return;
@@ -73,12 +73,12 @@ namespace OpenBreed.Model.Palettes
 
         #region Public Methods
 
-        public Color[] GetColors(int startIndex, int size)
+        public MyColor[] GetColors(int startIndex, int size)
         {
             return Data.Skip(startIndex).Take(size).ToArray();
         }
 
-        public void SetColors(int startIndex, Color[] sourceArray)
+        public void SetColors(int startIndex, MyColor[] sourceArray)
         {
             if (startIndex + sourceArray.Length > Data.Length)
                 throw new InvalidOperationException("Start index and colors array length are surpassing size of palette.");
@@ -89,12 +89,12 @@ namespace OpenBreed.Model.Palettes
             }
         }
 
-        public static Color[] DefaultPalette()
+        public static MyColor[] DefaultPalette()
         {
-            Color[] colors = new Color[256];
+            var colors = new MyColor[256];
 
             for (int colorIndex = 0; colorIndex < colors.Length; colorIndex++)
-                colors[colorIndex] = Color.FromArgb(colorIndex, colorIndex, colorIndex);
+                colors[colorIndex] = MyColor.FromArgb((byte)colorIndex, (byte)colorIndex, (byte)colorIndex);
 
             return colors;
         }

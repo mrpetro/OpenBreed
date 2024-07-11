@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface.Items.Tiles;
+using OpenBreed.Database.Xml.Items.Texts;
 using OpenBreed.Database.Xml.Items.Tiles;
 using OpenBreed.Database.Xml.Tables;
 using System;
@@ -26,18 +28,20 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
                 yield return typeof(XmlDbTileAtlasFromBlk);
-                yield return typeof(XmlDbTileAtlasFromImage);
+                yield return typeof(XmlDbTileAtlasFromAcbm);
             }
         }
 
-        public override string Name { get { return "Tile atlases"; } }
+        public override string Name
+        { get { return "Tile atlases"; } }
 
         public override int Count => context.Items.Count;
 
@@ -52,7 +56,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbTileAtlas entry)
         {
-            return context.Items.IndexOf((XmlDbTileAtlas)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         #endregion Protected Methods
@@ -77,22 +81,38 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public override IEnumerable<IDbEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<IDbEntry> Entries
+        { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
             get
             {
                 yield return typeof(XmlDbTileAtlasFromBlk);
-                yield return typeof(XmlDbTileAtlasFromImage);
+                yield return typeof(XmlDbTileAtlasFromAcbm);
             }
         }
 
-        public override string Name { get { return "Tile atlases"; } }
+        public override string Name
+        { get { return "Tile atlases"; } }
 
         public override int Count => context.Items.Count;
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Add(IDbTileAtlas newEntry)
+        {
+            context.Items.Add((XmlDbTileAtlas)newEntry);
+        }
+
+        public override bool Remove(IDbTileAtlas entry)
+        {
+            return context.Items.Remove((XmlDbTileAtlas)entry);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -103,17 +123,12 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override int GetIndexOf(IDbTileAtlas entry)
         {
-            return context.Items.IndexOf((XmlDbTileAtlas)entry);
+            return context.Items.FindIndex(item => item.Id == entry.Id);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IDbTileAtlas newEntry)
         {
             context.Items[index] = (XmlDbTileAtlas)newEntry;
-        }
-
-        public override void Add(IDbTileAtlas newEntry)
-        {
-            context.Items.Add((XmlDbTileAtlas)newEntry);
         }
 
         #endregion Protected Methods

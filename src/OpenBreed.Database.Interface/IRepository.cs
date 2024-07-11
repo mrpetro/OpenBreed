@@ -32,6 +32,8 @@ namespace OpenBreed.Database.Interface
 
         IDbEntry New(string newId, Type entryType = null);
 
+        bool Remove(IDbEntry entry);
+
         #endregion Public Methods
     }
 
@@ -54,7 +56,7 @@ namespace OpenBreed.Database.Interface
 
         void Add(TEntry entry);
 
-        void Remove(TEntry entry);
+        bool Remove(TEntry entry);
 
         void Update(TEntry entry);
 

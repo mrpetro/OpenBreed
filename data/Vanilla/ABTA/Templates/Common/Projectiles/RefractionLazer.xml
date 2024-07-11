@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Position X="$(startX)" Y="$(startY)" />
+		<Thrust X="$(thrustX)" Y="$(thrustY)" />
+		<Velocity X="0" Y="0" />
+		<Body>
+			<CofFactor>0.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Fixtures>
+				<Fixture>
+					<ShapeName>Shapes/Point_0_0</ShapeName>
+					<Groups>
+						<Group>Projectile</Group>
+					</Groups>
+				</Fixture>
+			</Fixtures>
+		</Body>
+		<Damager></Damager>
+		<Lifetime>
+			<TimeLeft>2.2</TimeLeft>
+		</Lifetime>
+		<Script>
+			<ScriptId>Vanilla/Common/Weapons/RefractionLazer</ScriptId>
+		</Script>
+		<EntityEmitter>
+		</EntityEmitter>
+		<Sprite>
+			<AtlasName>Vanilla/Common/Resident</AtlasName>
+			<ImageIndex>-1</ImageIndex>
+			<Origin X="8" Y="8" />
+			<Order>0</Order>
+		</Sprite>
+		<Animation>
+			<States>
+				<State>
+					<Speed>5</Speed>
+					<Loop>false</Loop>
+				</State>
+			</States>
+		</Animation>
+		<!--<Text>
+			<Text>Bullet</Text>
+			<Offset X="-10" Y="10" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>6</FontSize>
+			<Order>0</Order>
+		</Text>-->
+    </Components>
+</EntityTemplate>

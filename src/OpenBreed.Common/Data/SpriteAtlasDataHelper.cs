@@ -1,16 +1,9 @@
 ﻿using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Model.Sprites;
 using OpenBreed.Database.Interface.Items.Sprites;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Model;
-using OpenBreed.Common.Tools;
+
 using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 
 namespace OpenBreed.Common.Data
 {
@@ -18,12 +11,15 @@ namespace OpenBreed.Common.Data
     {
         public static SpriteSetModel FromSprModel(IModelsProvider dataProvider, IDbSpriteAtlasFromSpr entry)
         {
-            return dataProvider.GetModel<SpriteSetModel>(entry.DataRef);
+            return dataProvider.GetModel<IDbSpriteAtlasFromSpr, SpriteSetModel>(entry);
         }
 
-        public static SpriteSetModel FromImageModel(IModelsProvider dataProvider, IDbSpriteAtlasFromImage entry)
+        public static SpriteSetModel FromImageModel(
+            IModelsProvider dataProvider,
+            IBitmapProvider bitmapProvider,
+            IDbSpriteAtlasFromImage entry)
         {
-            var image = dataProvider.GetModel<Bitmap>(entry.DataRef);
+            var image = dataProvider.GetModel<IDbSpriteAtlasFromImage, IBitmap>(entry);
 
             var spriteSetBuilder = SpriteSetBuilder.NewSpriteSet();
 
@@ -34,8 +30,8 @@ namespace OpenBreed.Common.Data
                 var spriteBuilder = SpriteBuilder.NewSprite();
                 spriteBuilder.SetIndex(i);
                 spriteBuilder.SetSize(spriteDef.Width, spriteDef.Height);
-                var cutout = new Rectangle(spriteDef.X, spriteDef.Y, spriteDef.Width, spriteDef.Height);
-                var bytes = BitmapHelper.ToBytes(image, cutout);
+                var cutout = new MyRectangle(spriteDef.X, spriteDef.Y, spriteDef.Width, spriteDef.Height);
+                var bytes = bitmapProvider.ToBytes(image, cutout);
                 spriteBuilder.SetData(bytes);
 
                 spriteSetBuilder.AddSprite(spriteBuilder.Build());

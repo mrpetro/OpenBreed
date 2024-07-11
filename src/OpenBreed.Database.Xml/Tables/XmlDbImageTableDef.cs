@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Database.Xml.Items.Images;
+using OpenBreed.Database.Xml.Items.Palettes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace OpenBreed.Database.Xml.Tables
         public override string Name => NAME;
 
         [XmlArray("Items"),
-        XmlArrayItem("Image", typeof(XmlDbImage))]
+        XmlArrayItem("IffImage", typeof(XmlDbIffImage)),
+        XmlArrayItem("AcbmImage", typeof(XmlDbAcbmImage))]
         public readonly List<XmlDbImage> Items = new List<XmlDbImage>();
     }
 }

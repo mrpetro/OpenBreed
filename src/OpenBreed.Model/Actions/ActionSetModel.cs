@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using OpenBreed.Common.Interface.Drawing;
+using System.Collections.Generic;
 
 namespace OpenBreed.Model.Actions
 {
@@ -27,8 +27,8 @@ namespace OpenBreed.Model.Actions
 
         public int Id { get; set; }
         public string Description { get; set; }
-        public Image Icon { get; set; }
-        public Color Color { get; set; }
+        public IImage Icon { get; set; }
+        public MyColor Color { get; set; }
         public bool Visibility { get; set; }
         public string Name { get; set; }
 

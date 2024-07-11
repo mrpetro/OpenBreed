@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Data;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Model.Palettes;
 using System;
@@ -12,15 +14,15 @@ namespace OpenBreed.Common.Data
 
         private readonly IRepositoryProvider repositoryProvider;
 
-        private readonly IModelsProvider dataProvider;
+        private readonly IModelsProvider modelsProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PalettesDataProvider(IModelsProvider dataProvider, IRepositoryProvider repositoryProvider)
+        public PalettesDataProvider(IModelsProvider modelsProvider, IRepositoryProvider repositoryProvider)
         {
-            this.dataProvider = dataProvider;
+            this.modelsProvider = modelsProvider;
             this.repositoryProvider = repositoryProvider;
         }
 
@@ -31,31 +33,30 @@ namespace OpenBreed.Common.Data
         public PaletteModel GetPalette(string id)
         {
             var entry = repositoryProvider.GetRepository<IDbPalette>().GetById(id);
-            if (entry == null)
+            if (entry is null)
+            {
                 throw new Exception("Palette error: " + id);
+            }
 
-            return GetModel(entry);
+            return GetPalette(entry);
+        }
+
+        public PaletteModel GetPalette(IDbPalette dbPalette, bool refresh = false)
+        {
+            switch (dbPalette)
+            {
+                case IDbPaletteFromLbm dbPaletteFromLbm:
+                    return modelsProvider.GetModel<IDbPaletteFromLbm, PaletteModel>(dbPaletteFromLbm, refresh);
+                case IDbPaletteFromBinary dbPaletteFromBinary:
+                    return modelsProvider.GetModel<IDbPaletteFromBinary, PaletteModel>(dbPaletteFromBinary, refresh);
+                case IDbPaletteFromMap dbPaletteFromMap:
+                    return modelsProvider.GetModel<IDbPaletteFromMap, PaletteModel>(dbPaletteFromMap, refresh);
+                default:
+                    throw new NotImplementedException(dbPalette.GetType().ToString());
+            }
         }
 
         #endregion Public Methods
 
-        #region Private Methods
-
-        private PaletteModel GetModelImpl(IDbPaletteFromMap entry)
-        {
-            return PalettesDataHelper.FromMapModel(dataProvider, entry);
-        }
-
-        private PaletteModel GetModelImpl(IDbPaletteFromBinary entry)
-        {
-            return PalettesDataHelper.FromBinary(dataProvider, entry);
-        }
-
-        private PaletteModel GetModel(dynamic entry)
-        {
-            return GetModelImpl(entry);
-        }
-
-        #endregion Private Methods
     }
 }

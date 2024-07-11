@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Database.Xml.Items.Sprites;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,11 +13,16 @@ namespace OpenBreed.Database.Xml.Items.Texts
     [Serializable]
     public abstract class XmlDbText : XmlDbEntry, IDbText
     {
-        #region Public Properties
+        #region Protected Constructors
 
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
+        protected XmlDbText()
+        {
+        }
 
-        #endregion Public Properties
+        protected XmlDbText(XmlDbText other) : base(other)
+        {
+        }
+
+        #endregion Protected Constructors
     }
 }

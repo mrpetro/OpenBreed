@@ -1,6 +1,5 @@
-﻿using OpenBreed.Model.Palettes;
+﻿using OpenBreed.Common.Interface.Drawing;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace OpenBreed.Model.Tiles
 {
@@ -27,7 +26,7 @@ namespace OpenBreed.Model.Tiles
 
         #region Public Properties
 
-        public Bitmap Bitmap { get; }
+        public byte[] Bitmap { get; }
 
         public TilePixelFormat PixelFormat { get; private set; }
 
@@ -48,20 +47,20 @@ namespace OpenBreed.Model.Tiles
 
         #region Public Methods
 
-        public Point GetIndexCoords(Point point)
+        public MyPoint GetIndexCoords(MyPoint point)
         {
-            return new Point(point.X / TileSize, point.Y / TileSize);
+            return new MyPoint(point.X / TileSize, point.Y / TileSize);
         }
 
-        public Point GetSnapCoords(Point point)
+        public MyPoint GetSnapCoords(MyPoint point)
         {
             int x = point.X / TileSize;
             int y = point.Y / TileSize;
 
-            return new Point(x * TileSize, y * TileSize);
+            return new MyPoint(x * TileSize, y * TileSize);
         }
 
-        public List<int> GetTileIdList(Rectangle rectangle)
+        public List<int> GetTileIdList(MyRectangle rectangle)
         {
             int left = rectangle.Left;
             int right = rectangle.Right;
@@ -71,18 +70,18 @@ namespace OpenBreed.Model.Tiles
             if (left < 0)
                 left = 0;
 
-            if (right > Bitmap.Width)
-                right = Bitmap.Width;
+            if (right > TileSize * TilesNoX)
+                right = TileSize * TilesNoX;
 
             if (top < 0)
                 top = 0;
 
-            if (bottom > Bitmap.Height)
-                bottom = Bitmap.Height;
+            if (bottom > TileSize * TilesNoY)
+                bottom = TileSize * TilesNoY;
 
-            rectangle = new Rectangle(left, top, right - left, bottom - top);
+            rectangle = new MyRectangle(left, top, right - left, bottom - top);
 
-            List<int> tileIdList = new List<int>();
+            var tileIdList = new List<int>();
             int xFrom = rectangle.Left / TileSize;
             int xTo = rectangle.Right / TileSize;
             int yFrom = rectangle.Top / TileSize;

@@ -9,7 +9,8 @@ namespace OpenBreed.Database.Interface.Items.Palettes
     public enum PaletteMode
     {
         COLOR_16BIT,
-        COLOR_32BIT
+        COLOR_32BIT,
+        VGA_24BIT
     }
 
     /// <summary>
