@@ -42,7 +42,7 @@ namespace OpenBreed.Database.Xml.Items.DataSources
 
         #region Public Methods
 
-        public override IDbEntry Copy() => new XmlDbEpfArchiveFileDataSource();
+        public override IDbEntry Copy() => new XmlDbEpfArchiveFileDataSource(this);
 
 
         #endregion Public Methods

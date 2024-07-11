@@ -37,7 +37,7 @@ namespace OpenBreed.Database.Xml.Items.DataSources
 
         #region Public Methods
 
-        public override IDbEntry Copy() => new XmlDbFileDataSource();
+        public override IDbEntry Copy() => new XmlDbFileDataSource(this);
 
         #endregion Public Methods
     }
