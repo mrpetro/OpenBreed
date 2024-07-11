@@ -56,9 +56,9 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
         public ISpriteAtlas Load(string entryId, params object[] args)
         {
-            if (spriteMan.GetByName(entryId) != null)
+            if (spriteMan.TryGetByName(entryId, out ISpriteAtlas spriteAtlas))
             {
-                return null;
+                return spriteAtlas;
             }
 
             var entry = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById(entryId);
@@ -94,7 +94,9 @@ namespace OpenBreed.Rendering.OpenGL.Data
                     bound.Height);
             }
 
-            return atlasBuilder.Build();
+            spriteAtlas = atlasBuilder.Build();
+
+            return spriteAtlas;
         }
 
         #endregion Public Methods

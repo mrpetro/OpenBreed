@@ -20,9 +20,17 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// <summary>
         /// Get sprite atlas by it's name
         /// </summary>
-        /// <param name="atlasName">Name of sprite atlas to get</param>
-        /// <returns>Sprite atlas object</returns>
+        /// <param name="atlasName">Name of sprite atlas to get.</param>
+        /// <returns>Sprite atlas object.</returns>
         ISpriteAtlas GetByName(string atlasName);
+
+        /// <summary>
+        /// Try to get sprite atlas by it's name.
+        /// </summary>
+        /// <param name="atlasName">Name of sprite atlas to get.</param>
+        /// <param name="spriteAtlas">Sprite atlas object if found, null otherwise.</param>
+        /// <returns>True if found, false otherwise.</returns>
+        bool TryGetByName(string atlasName, out ISpriteAtlas spriteAtlas);
 
         /// <summary>
         /// Get atlas name based on it's ID

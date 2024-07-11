@@ -64,7 +64,11 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         public IFontAtlasBuilder AddCharacterFromSprite(int ch, string spriteAtlasName, int spriteIndex, float width = 0.0f)
         {
-            var sptiteAtlas = SpriteMan.GetByName(spriteAtlasName);
+            if (!SpriteMan.TryGetByName(spriteAtlasName, out ISpriteAtlas sptiteAtlas))
+            {
+                throw new System.Exception($"Expected sprite atlas with name '{spriteAtlasName}'.");
+            }
+
             var size = sptiteAtlas.GetSpriteSize(spriteIndex);
             Lookup.Add(ch, (sptiteAtlas.Id, spriteIndex, width == 0.0f ? size.X : width, size.Y));
 

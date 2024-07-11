@@ -19,7 +19,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Private Fields
 
         private readonly List<SpriteAtlas> items = new List<SpriteAtlas>();
-        private readonly Dictionary<string, SpriteAtlas> names = new Dictionary<string, SpriteAtlas>();
+        private readonly Dictionary<string, ISpriteAtlas> names = new Dictionary<string, ISpriteAtlas>();
         private readonly ITextureMan textureMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly ILogger logger;
@@ -64,12 +64,17 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public ISpriteAtlas GetByName(string name)
         {
-            if (names.TryGetValue(name, out SpriteAtlas result))
+            if (names.TryGetValue(name, out ISpriteAtlas result))
                 return result;
 
             logger.LogError("Unable to find sprite atlas with name '{0}'.", name);
 
             return null;
+        }
+
+        public bool TryGetByName(string atlasName, out ISpriteAtlas spriteAtlas )
+        {
+            return names.TryGetValue(atlasName, out spriteAtlas);
         }
 
         public void UnloadAll()

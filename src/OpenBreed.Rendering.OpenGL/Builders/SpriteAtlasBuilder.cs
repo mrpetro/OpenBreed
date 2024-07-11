@@ -50,7 +50,9 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         public ISpriteAtlasBuilder SetName(string name)
         {
             if (spriteMan.Contains(name))
+            {
                 throw new InvalidOperationException($"Atlas with name '{name}' already exists.");
+            }
 
             Name = name;
             return this;
@@ -122,7 +124,9 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             var texture = textureMan.GetById(textureId);
 
             if (texture is null)
+            {
                 throw new InvalidOperationException($"Texture with ID '{textureId}' not found.");
+            }
 
             Texture = texture;
 
