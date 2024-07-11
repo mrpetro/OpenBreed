@@ -65,8 +65,9 @@ So the goal is to trace or rebuild data hardcoded in game executables and store 
 
 ## Development stuff
 
-### Source code language
-**C#**
+### Source code languages
+* **C#**
+* **Lua** (ingame scripting)
 
 ### Platform
 **.NET 5.0** for now
