@@ -27,13 +27,12 @@ namespace OpenBreed.Sandbox
         {
             var gameWindowSettings = new GameWindowSettings()
             {
-                RenderFrequency = 60,
                 UpdateFrequency = 30
             };
 
             var nativeWindowSettings = new NativeWindowSettings()
             {
-                Size = new Vector2i(width, height),
+                ClientSize = new Vector2i(width, height),
                 RedBits = 8,
                 GreenBits = 8,
                 BlueBits = 8,

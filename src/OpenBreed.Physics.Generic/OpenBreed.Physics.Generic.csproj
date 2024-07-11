@@ -13,7 +13,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTK" Version="4.7.4" />
+    <PackageReference Include="OpenTK" Version="4.8.2" />
 	<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>
 

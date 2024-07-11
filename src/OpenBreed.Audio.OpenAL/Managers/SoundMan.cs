@@ -178,11 +178,11 @@ namespace OpenBreed.Audio.OpenAL.Managers
             //AL.SourceQueueBuffer(alSource, alBuffer);
             AL.SourcePlay(alSource);
 
-            var state = AL.GetSourceState(alSource);
+            var state = ALTools.GetSourceState(alSource);
 
             while (state == ALSourceState.Playing)
             {
-                state = AL.GetSourceState(alSource);
+                state = ALTools.GetSourceState(alSource);
             }
 
             //Task.Run(() => AL.SourcePlay(alSource));
@@ -259,7 +259,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
             if (buffersProcessed <= 0)
                 return;
 
-            var state = AL.GetSourceState(alSource);
+            var state = ALTools.GetSourceState(alSource);
 
             while (buffersProcessed-- > 0)
             {
@@ -307,7 +307,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
                 var alSource = soundSource.ALSourceId;
 
-                var state = AL.GetSourceState(alSource);
+                var state = ALTools.GetSourceState(alSource);
 
                 if (state != ALSourceState.Playing)
                     return soundSource;
