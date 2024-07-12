@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+	
+	
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
+    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
+  </ItemGroup>
+
+</Project>
