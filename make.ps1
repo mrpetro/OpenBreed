@@ -8,6 +8,7 @@ $Command
 function Make-All
 {
 param (
+[Parameter()] [string] $Project,
 [Parameter()] [string] $Configuration
 )		
 	if ((ValidateDotnet) -eq 1)
@@ -15,7 +16,9 @@ param (
 		return
 	}
 
-	Write-Host ("Building using '" + $Configuration + "' configuration...") -ForegroundColor Blue
+	$slnFile = "OpenBreed." + $Project + ".sln"
+
+	Write-Host ("Building '" + $slnFile + "' using '" + $Configuration + "' configuration...") -ForegroundColor Blue
 	
 	Push-Location
 	
@@ -23,7 +26,8 @@ param (
 	{
 		Set-Location -Path ".\src"
 		
-		dotnet build -c $Configuration --nologo -p:TargetPlatform=win-x64
+	
+		dotnet build $slnFile -c $Configuration --nologo -p:TargetPlatform=win-x64
 		
 		if ($lastexitcode -ne 0)
 		{
@@ -56,12 +60,18 @@ param (
 
 function Make-Clean
 {
+param (
+[Parameter()] [string] $Project
+)		
+	
 	if ((ValidateDotnet) -eq 1)
 	{
 		return
 	}
 
-	Write-Host ("Cleaning...") -ForegroundColor Blue
+	$slnFile = "OpenBreed." + $Project + ".sln"
+
+	Write-Host ("Cleaning '" + $slnFile + "'...") -ForegroundColor Blue
 
 	Push-Location
 	
@@ -69,7 +79,7 @@ function Make-Clean
 	{
 		Set-Location -Path ".\src"
 		
-		dotnet clean /nologo
+		dotnet clean $slnFile /nologo
 	}
 	finally
 	{
@@ -92,7 +102,9 @@ function ValidateDotnet
 
 switch ($Command)
 {
-	"all"   { Make-All -Configuration $Configuration }
-	"clean" { Make-Clean }
+	"game"   { Make-All -Project "Game" -Configuration $Configuration }
+	"editor"   { Make-All -Project "Editor" -Configuration $Configuration }
+	"clean_game" { Make-Clean -Project "Game" }
+	"clean_editor" { Make-Clean -Project "Editor" }
 	Default { Write-Host ("Invalid command '{0}'" -f $Command) }
 }
