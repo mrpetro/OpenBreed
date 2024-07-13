@@ -8,7 +8,6 @@ $Command
 function Make-All
 {
 param (
-[Parameter()] [string] $Project,
 [Parameter()] [string] $Configuration
 )		
 	if ((ValidateDotnet) -eq 1)
@@ -16,7 +15,7 @@ param (
 		return
 	}
 
-	$slnFile = "OpenBreed." + $Project + ".sln"
+	$slnFile = "OpenBreed.sln"
 
 	Write-Host ("Building '" + $slnFile + "' using '" + $Configuration + "' configuration...") -ForegroundColor Blue
 	
@@ -59,17 +58,14 @@ param (
 }
 
 function Make-Clean
-{
-param (
-[Parameter()] [string] $Project
-)		
+{		
 	
 	if ((ValidateDotnet) -eq 1)
 	{
 		return
 	}
 
-	$slnFile = "OpenBreed." + $Project + ".sln"
+	$slnFile = "OpenBreed.sln"
 
 	Write-Host ("Cleaning '" + $slnFile + "'...") -ForegroundColor Blue
 
@@ -102,9 +98,7 @@ function ValidateDotnet
 
 switch ($Command)
 {
-	"game"   { Make-All -Project "Game" -Configuration $Configuration }
-	"editor"   { Make-All -Project "Editor" -Configuration $Configuration }
-	"clean_game" { Make-Clean -Project "Game" }
-	"clean_editor" { Make-Clean -Project "Editor" }
+	"all"   { Make-All -Configuration $Configuration }
+	"clean" { Make-Clean }
 	Default { Write-Host ("Invalid command '{0}'" -f $Command) }
 }
