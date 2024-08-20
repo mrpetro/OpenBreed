@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -6,7 +7,7 @@ using GL = OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    internal class SpriteRenderer : ISpriteRenderer
+    public class SpriteRenderer : ISpriteRenderer
     {
         #region Private Fields
 
@@ -34,16 +35,17 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public void Render(Vector3 pos, Vector2 scale, Color4 color, int atlasId, int imageId)
+        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int atlasId, int imageId)
         {
             var spriteAtlas = spriteMan.InternalGetById(atlasId);
             var vbo = spriteAtlas.data[imageId].Vbo;
 
-            primitiveRenderer.PushMatrix();
+            view.PushMatrix();
 
             try
             {
                 primitiveRenderer.DrawSprite(
+                    view,
                     spriteAtlas.Texture,
                     vbo,
                     pos,
@@ -52,7 +54,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             }
             finally
             {
-                primitiveRenderer.PopMatrix();
+                view.PopMatrix();
             }
         }
 

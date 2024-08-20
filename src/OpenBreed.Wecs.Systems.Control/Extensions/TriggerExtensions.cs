@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
+using OpenBreed.Input.Interface.Events;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
@@ -17,7 +18,7 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
         {
             triggerMan.EventsMan.Subscribe<KeyDownEvent>(ConditionalAction);
 
-            void ConditionalAction(object sender, KeyDownEvent args)
+            void ConditionalAction(KeyDownEvent args)
             {
                 if (singleTime)
                     triggerMan.EventsMan.Unsubscribe<KeyDownEvent>(ConditionalAction);

@@ -32,8 +32,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private readonly IWorldMan worldMan;
         private readonly IPaletteMan paletteMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
-        private readonly IRenderingMan renderingMan;
-        private readonly IViewClient viewClient;
+        private readonly IWindow viewClient;
 
         #endregion Private Fields
 
@@ -44,14 +43,12 @@ namespace OpenBreed.Wecs.Systems.Rendering
             IWorldMan worldMan,
             IPaletteMan paletteMan,
             IPrimitiveRenderer primitiveRenderer,
-            IRenderingMan renderingMan,
-            IViewClient viewClient)
+            IWindow viewClient)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;
             this.paletteMan = paletteMan;
             this.primitiveRenderer = primitiveRenderer;
-            this.renderingMan = renderingMan;
             this.viewClient = viewClient;
         }
 
@@ -59,10 +56,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(IRenderContext context)
+        public void Render(Worlds.IWorldRenderContext context)
         {
             for (int i = 0; i < entities.Count; i++)
-                RenderViewport(entities[i], context.ViewBox, context.Depth, context.Dt);
+                RenderViewport(context.View, entities[i], context.ViewBox, context.Depth, context.Dt);
         }
 
         #endregion Public Methods
@@ -79,7 +76,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// Render this viewport content to the client
         /// </summary>
         /// <param name="dt">Time step</param>
-        private void RenderViewport(IEntity vpe, Box2 clipBox, int depth, float dt)
+        private void RenderViewport(OpenBreed.Rendering.Interface.Managers.IRenderView view, IEntity vpe, Box2 clipBox, int depth, float dt)
         {
             var vpc = vpe.Get<ViewportComponent>();
             var viewportPos = vpe.Get<PositionComponent>().Value;
@@ -103,10 +100,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
             //Apply viewport transformation matrix
             var transform = TransformHelper.GetViewportTransform(viewportPos, viewportSize);
 
-            renderingMan.RenderViewport(vpc.DrawBorder, vpc.DrawBackgroud, vpc.BackgroundColor, transform, () => DrawCameraView(vpc.CameraEntityId, viewportSize, viewportScalingType, depth, dt));
+            view.RenderViewport(vpc.DrawBorder, vpc.DrawBackgroud, vpc.BackgroundColor, transform, () => DrawCameraView(view, vpc.CameraEntityId, viewportSize, viewportScalingType, depth, dt));
         }
 
-        private void DrawCameraView(int cameraEntityId, Vector2 viewportSize, ViewportScalingType viewportScalingType, int depth, float dt)
+        private void DrawCameraView(OpenBreed.Rendering.Interface.Managers.IRenderView view, int cameraEntityId, Vector2 viewportSize, ViewportScalingType viewportScalingType, int depth, float dt)
         {
             var camera = entityMan.GetById(cameraEntityId);
 
@@ -125,40 +122,40 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
                 if (palette is not null)
                 {
-                    primitiveRenderer.PushPalette();
+                    view.PushPalette();
                 }
 
-                primitiveRenderer.PushMatrix();
+                view.PushMatrix();
 
                 try
                 {
-                    if (palette is not null) primitiveRenderer.SetPalette(palette);
-                    primitiveRenderer.MultMatrix(cameraTransform);
+                    if (palette is not null) view.SetPalette(palette);
+                    view.MultMatrix(cameraTransform);
 
                     void OnRenderFrame(Box2 viewBox, int depth, float dt)
                     {
                         var renderable = cameraWorld.Systems.OfType<IRenderableSystem>().ToArray();
-                        var renderContext = new RenderContext(depth, dt, viewBox, cameraWorld);
+                        var renderContext = new WorldRenderContext(view, depth, dt, viewBox, cameraWorld);
                         for (int i = 0; i < renderable.Length; i++)
                         {
                             renderable[i].Render(renderContext);
                         }
                     }
 
-                    primitiveRenderer.DrawNested(cameraClipBox, depth, dt, OnRenderFrame);
+                    primitiveRenderer.DrawNested(view, cameraClipBox, depth, dt, OnRenderFrame);
                 }
                 finally
                 {
-                    primitiveRenderer.PopMatrix();
+                    view.PopMatrix();
 
                     if (palette is not null)
                     {
-                        primitiveRenderer.PopPalette();
+                        view.PopPalette();
                     }
                 }
 
                 //Draw camera effects
-                primitiveRenderer.DrawBrightnessBox(cameraBrightness);
+                primitiveRenderer.DrawBrightnessBox(view, cameraBrightness);
             }
         }
 

@@ -22,17 +22,18 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
-        public void Raise<T>(object sender, T eventArgs) where T : EventArgs
+        public void Raise<TEventArgs>(object sender, TEventArgs eventArgs) where TEventArgs : EventArgs
         {
-            NotifyListeners(sender, eventArgs.GetType(), eventArgs);
+            NotifyListeners(eventArgs.GetType(), eventArgs);
         }
 
-        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
-        {
-            var eventType = typeof(T);
-            List<(object, MethodInfo)> callbacks = null;
+        public void Raise<TEventArgs>(TEventArgs eventArgs) where TEventArgs : EventArgs => Raise<TEventArgs>(null, eventArgs);
 
-            if (!listeners.TryGetValue(eventType, out callbacks))
+        public void Subscribe<TEventArgs>(EventCallback<TEventArgs> callback) where TEventArgs : EventArgs
+        {
+            var eventType = typeof(TEventArgs);
+
+            if (!listeners.TryGetValue(eventType, out List<(object, MethodInfo)> callbacks))
             {
                 callbacks = new List<(object, MethodInfo)>();
                 listeners.Add(eventType, callbacks);
@@ -41,14 +42,14 @@ namespace OpenBreed.Core.Managers
             callbacks.Add((callback.Target, callback.Method));
         }
 
-        public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
+        public void Unsubscribe<TEventArgs>(EventCallback<TEventArgs> callback) where TEventArgs : EventArgs
         {
-            var eventType = typeof(T);
+            var eventType = typeof(TEventArgs);
 
-            List<(object, MethodInfo)> callbacks = null;
-
-            if (!listeners.TryGetValue(eventType, out callbacks))
+            if (!listeners.TryGetValue(eventType, out List<(object, MethodInfo)> callbacks))
+            {
                 return;
+            }
 
             callbacks.Remove((callback.Target, callback.Method));
         }
@@ -57,7 +58,7 @@ namespace OpenBreed.Core.Managers
 
         #region Private Methods
 
-        private void NotifyListeners(object sender, Type eventType, EventArgs eventArgs)
+        private void NotifyListeners(Type eventType, EventArgs eventArgs)
         {
             List<(object Target, MethodInfo Method)> callbacks = null;
 
@@ -67,7 +68,7 @@ namespace OpenBreed.Core.Managers
             for (int i = 0; i < callbacks.Count; i++)
             {
                 var item = callbacks[i];
-                item.Method.Invoke(item.Target, new object[] { sender, eventArgs });
+                item.Method.Invoke(item.Target, new object[] { eventArgs });
             }
         }
 

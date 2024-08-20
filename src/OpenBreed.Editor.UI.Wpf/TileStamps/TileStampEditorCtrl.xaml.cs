@@ -27,27 +27,6 @@ namespace OpenBreed.Editor.UI.Wpf.TileStamps
         public TileStampEditorCtrl()
         {
             InitializeComponent();
-
-            var settings = new GLWpfControlSettings
-            {
-                MajorVersion = 4,
-                MinorVersion = 0
-            };
-            OpenTkControl.Start(settings);
-
-
-        }
-        
-        public Point GetMousePos() => this.PointToScreen(Mouse.GetPosition(this));
-
-        private void OpenTkControl_OnRender(TimeSpan delta)
-        {
-            GL.ClearColor(Color4.Blue);
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-
-
-
         }
     }
 }

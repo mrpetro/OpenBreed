@@ -65,7 +65,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             }
 
             if (previousLivesNo != livesComponent.Value)
-                eventsMan.Raise(entity, new LivesChangedEvent(entity.Id, livesComponent.Value));
+                eventsMan.Raise(new LivesChangedEvent(entity.Id, livesComponent.Value));
         }
 
         #endregion Protected Methods

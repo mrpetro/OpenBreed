@@ -33,7 +33,7 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// </summary>
         /// <param name="atlasId">Atlas ID of rendered tile</param>
         /// <param name="imageId">Image ID of rendered tile</param>
-        void Render(int atlasId, int imageId);
+        void Render(IRenderView view, int atlasId, int imageId);
 
         #endregion Public Methods
     }

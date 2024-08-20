@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -18,11 +19,8 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private const int CIRCLE_PARTS_NO = 16;
         private const bool CLIPPING = true;
         private const int RENDER_MAX_DEPTH = 3;
-        private IPalette currentPalette;
-        private Stack<Matrix4> modelMatrixStack = new Stack<Matrix4>();
+
         private Shader nontexturedShader;
-        private Stack<IPalette> paletteStack = new Stack<IPalette>();
-        private Matrix4 projection;
         private Shader texturedShader;
         private Shader texturedWithPaletteShader;
 
@@ -31,7 +29,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private int unitCircleVao;
         private int unitCircleFilledVao;
         private int unitRectangleVao;
-        private Matrix4 view;
 
         #endregion Private Fields
 
@@ -71,13 +68,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return newVao;
         }
 
-        public void DisableAlpha()
-        {
-            OpenTK.Graphics.OpenGL.GL.Disable(OpenTK.Graphics.OpenGL.EnableCap.Blend);
-            OpenTK.Graphics.OpenGL.GL.Disable(OpenTK.Graphics.OpenGL.EnableCap.AlphaTest);
-        }
-
-        public void DrawBox(Box2 box, Color4 color)
+        public void DrawBox(IRenderView view, Box2 box, Color4 color)
         {
             var w = box.Size.X;
             var h = box.Size.Y;
@@ -88,10 +79,10 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             model = Matrix4.CreateScale(w, h, 1.0f) * model;
             model = model * Matrix4.CreateTranslation(w / 2.0f, h / 2.0f, 0.0f);
 
-            DrawUnitBox(model, color);
+            DrawUnitBox(view, model, color);
         }
 
-        public void DrawBrightnessBox(float brightness)
+        public void DrawBrightnessBox(IRenderView view, float brightness)
         {
             Color4 color;
 
@@ -107,27 +98,27 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 color = new Color4(brightness, brightness, brightness, 1.0f);
             }
 
-            Translate(0, 0, BRIGHTNESS_Z_LEVEL);
-            DrawUnitBox(Matrix4.Identity, color);
+            view.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
+            DrawUnitBox(view, Matrix4.Identity, color);
             GL.Disable(EnableCap.Blend);
         }
 
-        public void DrawRectangle(Vector2 center, Vector2 size, Color4 color, bool filled = false)
+        public void DrawRectangle(IRenderView view, Vector2 center, Vector2 size, Color4 color, bool filled = false)
         {
             var model = Matrix4.CreateTranslation(center.X, center.Y, 0.0f);
             model = Matrix4.CreateScale(size.X, size.Y, 1.0f) * model;
 
-            DrawUnitRectangle(model, color, filled);
+            DrawUnitRectangle(view, model, color, filled);
         }
 
-        public void DrawRectangle(Box2 rect, Color4 color, bool filled = false)
+        public void DrawRectangle(IRenderView view, Box2 rect, Color4 color, bool filled = false)
         {
-            DrawRectangle(rect.Center, rect.Size, color, filled);
+            DrawRectangle(view, rect.Center, rect.Size, color, filled);
         }
 
-        public void DrawNested(Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction)
+        public void DrawNested(IRenderView view, Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction)
         {
-            RenderBefore(clipBox, depth, dt);
+            RenderBefore(view, clipBox, depth, dt);
 
             if (depth > RENDER_MAX_DEPTH)
                 return;
@@ -136,18 +127,18 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             nestedRenderAction.Invoke(clipBox, depth, dt);
 
-            RenderAfter(clipBox, depth, dt);
+            RenderAfter(view, clipBox, depth, dt);
         }
 
-        public void DrawCircle(Vector2 center, float radius, Color4 color, bool filled = false)
+        public void DrawCircle(IRenderView view, Vector2 center, float radius, Color4 color, bool filled = false)
         {
             var model = Matrix4.CreateTranslation(center.X, center.Y, 0.0f);
             model = Matrix4.CreateScale(2.0f * radius, 2.0f * radius, 1.0f) * model;
 
-            DrawUnitCircle(model, color, filled);
+            DrawUnitCircle(view, model, color, filled);
         }
 
-        public void DrawPoint(Vector2 pos, Color4 color, PointType type)
+        public void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type)
         {
             var w = 2.0f;
             var h = 2.0f;
@@ -157,11 +148,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             switch (type)
             {
                 case PointType.Rectangle:
-                    DrawUnitRectangle(model, color, filled: true);
+                    DrawUnitRectangle(view, model, color, filled: true);
                     break;
+
                 case PointType.Circle:
-                    DrawUnitCircle(model, color, filled: true);
+                    DrawUnitCircle(view, model, color, filled: true);
                     break;
+
                 case PointType.Cross:
                 case PointType.Ex:
                 default:
@@ -169,7 +162,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             }
         }
 
-        public void DrawSprite(ITexture texture, int vao, Vector3 pos, Vector2 scale, Color4 color)
+        public void DrawSprite(IRenderView view, ITexture texture, int vao, Vector3 pos, Vector2 scale, Color4 color)
         {
             ((Texture)texture).Use(TextureUnit.Texture0);
 
@@ -179,22 +172,22 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             {
                 texturedShader.Use();
                 texturedShader.SetMatrix4("model", model);
-                texturedShader.SetMatrix4("view", view);
-                texturedShader.SetMatrix4("projection", projection);
+                texturedShader.SetMatrix4("view", view.View);
+                texturedShader.SetMatrix4("projection", view.Projection);
                 texturedShader.SetVector4("aColor", ((Vector4)color));
             }
             else if (texture.DataMode == TextureDataMode.Index)
             {
-                Debug.Assert(currentPalette is not null, "Palette is not set");
+                Debug.Assert(view.CurrentPalette is not null, "Palette is not set");
 
                 texturedWithPaletteShader.Use();
                 texturedWithPaletteShader.SetMatrix4("model", model);
-                texturedWithPaletteShader.SetMatrix4("view", view);
-                texturedWithPaletteShader.SetMatrix4("projection", projection);
+                texturedWithPaletteShader.SetMatrix4("view", view.View);
+                texturedWithPaletteShader.SetMatrix4("projection", view.Projection);
                 texturedWithPaletteShader.SetVector4("aColor", ((Vector4)color));
                 texturedWithPaletteShader.SetUInt("maskIndex", (uint)texture.MaskIndex);
 
-                texturedWithPaletteShader.SetVector4Array("palette", currentPalette.DirectData);
+                texturedWithPaletteShader.SetVector4Array("palette", view.CurrentPalette.DirectData);
             }
             else
             {
@@ -206,26 +199,26 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.BindVertexArray(0);
         }
 
-        public void DrawUnitBox(Matrix4 model, Color4 color)
+        public void DrawUnitBox(IRenderView view, Matrix4 model, Color4 color)
         {
             nontexturedShader.Use();
             nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
             nontexturedShader.SetMatrix4("model", model);
-            nontexturedShader.SetMatrix4("view", view);
-            nontexturedShader.SetMatrix4("projection", projection);
+            nontexturedShader.SetMatrix4("view", view.View);
+            nontexturedShader.SetMatrix4("projection", view.Projection);
 
             GL.BindVertexArray(unitBoxFilledVao);
             GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
             GL.BindVertexArray(0);
         }
 
-        public void DrawUnitCircle(Matrix4 model, Color4 color, bool filled = false)
+        public void DrawUnitCircle(IRenderView view, Matrix4 model, Color4 color, bool filled = false)
         {
             nontexturedShader.Use();
             nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
             nontexturedShader.SetMatrix4("model", model);
-            nontexturedShader.SetMatrix4("view", view);
-            nontexturedShader.SetMatrix4("projection", projection);
+            nontexturedShader.SetMatrix4("view", view.View);
+            nontexturedShader.SetMatrix4("projection", view.Projection);
 
             if (filled)
             {
@@ -241,13 +234,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.BindVertexArray(0);
         }
 
-        public void DrawUnitRectangle(Matrix4 model, Color4 color, bool filled = false)
+        public void DrawUnitRectangle(IRenderView view, Matrix4 model, Color4 color, bool filled = false)
         {
             nontexturedShader.Use();
             nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
             nontexturedShader.SetMatrix4("model", model);
-            nontexturedShader.SetMatrix4("view", view);
-            nontexturedShader.SetMatrix4("projection", projection);
+            nontexturedShader.SetMatrix4("view", view.View);
+            nontexturedShader.SetMatrix4("projection", view.Projection);
 
             if (filled)
             {
@@ -263,81 +256,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.BindVertexArray(0);
         }
 
-        public void EnableAlpha()
-        {
-            OpenTK.Graphics.OpenGL.GL.Enable(OpenTK.Graphics.OpenGL.EnableCap.AlphaTest);
-            OpenTK.Graphics.OpenGL.GL.Enable(OpenTK.Graphics.OpenGL.EnableCap.Blend);
-        }
-
-        public Vector4 GetScreenToWorldCoords(Vector4 coords)
-        {
-            var mat = view * projection;
-            mat.Invert();
-
-            var coordsT = coords * mat;
-            coordsT.W = 1.0f / coordsT.W;
-
-            coordsT.X *= coordsT.W;
-            coordsT.Y *= coordsT.W;
-            coordsT.Z *= coordsT.W;
-
-            return coordsT;
-        }
-
         public void Load()
         {
             SetupShaders();
             SetupDefaultVertices();
-
-            view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
         }
-
-        public void MultMatrix(Matrix4 transform)
-        {
-            view = transform * view;
-        }
-
-        public void PopMatrix()
-        {
-            view = modelMatrixStack.Pop();
-        }
-
-        public void PopPalette()
-        {
-            currentPalette = paletteStack.Pop();
-        }
-
-        public void PushMatrix()
-        {
-            modelMatrixStack.Push(view);
-        }
-
-        public void PushPalette()
-        {
-            paletteStack.Push(currentPalette);
-        }
-
-        public void SetPalette(IPalette palette)
-        {
-            currentPalette = palette;
-        }
-
-        public void SetProjection(Matrix4 matrix)
-        {
-            projection = matrix;
-        }
-
-        public void SetView(Matrix4 matrix)
-        {
-            view = matrix;
-        }
-
-        public void Translate(Vector3 vec)
-        {
-            view = Matrix4.CreateTranslation(vec) * view;
-        }
-
-        public void Translate(float x, float y, float z) => Translate(new Vector3(x, y, z));
 
         #endregion Public Methods
 
@@ -373,7 +296,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Private Methods
 
-        private void RenderAfter(Box2 clipBox, int depth, float dt)
+        private void RenderAfter(IRenderView view, Box2 clipBox, int depth, float dt)
         {
             if (CLIPPING)
             {
@@ -383,7 +306,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
 
                 // Draw black box
-                DrawBox(clipBox, Color4.Black);
+                DrawBox(view, clipBox, Color4.Black);
 
                 GL.ColorMask(true, true, true, true);
                 GL.DepthMask(true);
@@ -393,7 +316,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             }
         }
 
-        private void RenderBefore(Box2 clipBox, int depth, float dt)
+        private void RenderBefore(IRenderView view, Box2 clipBox, int depth, float dt)
         {
             if (CLIPPING)
             {
@@ -407,7 +330,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
 
                 // Draw black box
-                DrawBox(clipBox, Color4.Black);
+                DrawBox(view, clipBox, Color4.Black);
 
                 GL.ColorMask(true, true, true, true);
                 GL.DepthMask(true);
@@ -430,10 +353,10 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             unitBoxFilledVao = unitBoxBuilder.CreateVao();
 
             var unitRectangleBuilder = CreatePosArray();
-            unitRectangleBuilder.AddVertex( 0.5f,  0.5f, 0.0f);
-            unitRectangleBuilder.AddVertex( 0.5f, -0.5f, 0.0f);
+            unitRectangleBuilder.AddVertex(0.5f, 0.5f, 0.0f);
+            unitRectangleBuilder.AddVertex(0.5f, -0.5f, 0.0f);
             unitRectangleBuilder.AddVertex(-0.5f, -0.5f, 0.0f);
-            unitRectangleBuilder.AddVertex(-0.5f,  0.5f, 0.0f);
+            unitRectangleBuilder.AddVertex(-0.5f, 0.5f, 0.0f);
             unitRectangleBuilder.AddLoopIndices(0, 1, 2, 3);
 
             unitRectangleVao = unitRectangleBuilder.CreateVao();

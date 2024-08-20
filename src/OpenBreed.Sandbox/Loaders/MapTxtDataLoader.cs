@@ -211,7 +211,6 @@ namespace OpenBreed.Sandbox.Loaders
 
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IDataLoaderFactory dataLoaderFactory;
-        private readonly IRenderableFactory renderableFactory;
         private readonly IDrawingFactory drawingFactory;
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
@@ -232,7 +231,6 @@ namespace OpenBreed.Sandbox.Loaders
         #region Public Constructors
 
         public MapTxtDataLoader(IDataLoaderFactory dataLoaderFactory,
-                                IRenderableFactory renderableFactory,
                                 IDrawingFactory drawingFactory,
                                   IRepositoryProvider repositoryProvider,
 
@@ -249,7 +247,6 @@ namespace OpenBreed.Sandbox.Loaders
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
-            this.renderableFactory = renderableFactory;
             this.drawingFactory = drawingFactory;
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;

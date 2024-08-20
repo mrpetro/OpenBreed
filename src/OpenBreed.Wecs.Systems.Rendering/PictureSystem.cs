@@ -34,14 +34,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(IRenderContext context)
+        public void Render(IWorldRenderContext context)
         {
             imageRenderer.RenderBegin();
 
             try
             {
                 for (int i = 0; i < entities.Count; i++)
-                    RenderPicture(entities[i], context.ViewBox);
+                    RenderPicture(entities[i], context);
             }
             finally
             {
@@ -57,14 +57,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// Draw picture to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this picture will be rendered to</param>
-        private void RenderPicture(IEntity entity, Box2 clipBox)
+        private void RenderPicture(IEntity entity, IWorldRenderContext context)
         {
             var picComponent = entity.Get<PictureComponent>();
 
             var pos = entity.Get<PositionComponent>().Value;
             pos += picComponent.Origin;
 
-            imageRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, picComponent.Order), Vector2.One, picComponent.Color, picComponent.ImageId);
+            imageRenderer.Render(context.View, new Vector3((int)pos.X, (int)pos.Y, picComponent.Order), Vector2.One, picComponent.Color, picComponent.ImageId);
         }
 
         #endregion Private Methods

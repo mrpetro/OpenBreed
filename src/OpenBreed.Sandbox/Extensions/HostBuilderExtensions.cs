@@ -12,11 +12,14 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
+using OpenBreed.Input.Interface;
 using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Rendering.OpenGL.Extensions;
+using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Door;
@@ -32,7 +35,11 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Desktop;
 using System;
+using System.Windows.Media.Media3D;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -40,11 +47,39 @@ namespace OpenBreed.Sandbox.Extensions
     {
         #region Public Methods
 
-        public static void SetupViewClient(this IHostBuilder hostBuilder, int width, int height, string title)
+        public static void ConfigureLogConsolePrinter(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IViewClient, OpenTKWindowClient>((s) => new OpenTKWindowClient(width, height, title));
+                services.AddSingleton<LogConsolePrinter>();
+                services.AddHostedService<LogConsolePrinter>();
+            });
+        }
+
+        public static void SetupGameWindow(this IHostBuilder hostBuilder, int width, int height, string title)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                var gameWindowSettings = new GameWindowSettings()
+                {
+                    UpdateFrequency = 30
+                };
+
+                var nativeWindowSettings = new NativeWindowSettings()
+                {
+                    ClientSize = new Vector2i(width, height),
+                    RedBits = 8,
+                    GreenBits = 8,
+                    BlueBits = 8,
+                    AlphaBits = 8,
+                    DepthBits = 24,
+                    StencilBits = 8,
+                    Title = title,
+                    Flags = ContextFlags.ForwardCompatible,
+                    Vsync = VSyncMode.On
+                };
+
+                services.AddSingleton((sp) => new GameWindow(gameWindowSettings, nativeWindowSettings));
             });
         }
 
@@ -234,7 +269,6 @@ namespace OpenBreed.Sandbox.Extensions
             dataLoaderFactory.Register<MapLegacyDataLoader>(() =>
             {
                 var mapLegacyDataLoader = new MapLegacyDataLoader(dataLoaderFactory,
-                                                              sp.GetService<IRenderableFactory>(),
                                                               sp.GetService<IEntityMan>(),
                                                               sp.GetService<IRepositoryProvider>(),
                                                               sp.GetService<MapsDataProvider>(),
@@ -259,7 +293,6 @@ namespace OpenBreed.Sandbox.Extensions
             dataLoaderFactory.Register<MapTxtDataLoader>(() =>
             {
                 var mapTxtDataLoader = new MapTxtDataLoader(dataLoaderFactory,
-                                                            sp.GetService<IRenderableFactory>(),
                                                             sp.GetService<IDrawingFactory>(),
                                                             sp.GetService<IRepositoryProvider>(),
                                                             sp.GetService<ISystemFactory>(),

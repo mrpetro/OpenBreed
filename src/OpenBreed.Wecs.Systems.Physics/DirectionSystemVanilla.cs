@@ -52,12 +52,12 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             if (newPos == aPos)
             {
-                eventsMan.Raise(null, new DirectionSetEvent(entity.Id, angularPos.Value));
+                eventsMan.Raise(new DirectionSetEvent(entity.Id, angularPos.Value));
                 return;
             }
 
             angularPos.Value = newPos;
-            eventsMan.Raise(null, new DirectionChangedEvent(entity.Id, angularPos.Value));
+            eventsMan.Raise(new DirectionChangedEvent(entity.Id, angularPos.Value));
         }
 
         #endregion Protected Methods

@@ -29,8 +29,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
                 serviceProvider.GetService<IWorldMan>(),
                 serviceProvider.GetService<IPaletteMan>(),
                 serviceProvider.GetService<IPrimitiveRenderer>(),
-                serviceProvider.GetService<IRenderingMan>(),
-                serviceProvider.GetService<IViewClient>()));
+                serviceProvider.GetService<IWindow>()));
             systemFactory.RegisterSystem<SpriteSystem>(() => new SpriteSystem(
                 serviceProvider.GetService<ISpriteMan>(),
                 serviceProvider.GetService<ISpriteRenderer>()));

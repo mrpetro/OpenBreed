@@ -78,12 +78,12 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             foreach (var contact in contactsStarted)
             {
-                eventsMan.Raise(null, new ContactStartedEvent(
+                eventsMan.Raise(new ContactStartedEvent(
                     contact.ItemIdA,
                     contact.FixtureA.Id,
                     contact.ItemIdB,
                     contact.FixtureB.Id));
-                eventsMan.Raise(null, new ContactStartedEvent(
+                eventsMan.Raise(new ContactStartedEvent(
                     contact.ItemIdB,
                     contact.FixtureB.Id,
                     contact.ItemIdA,
@@ -94,12 +94,12 @@ namespace OpenBreed.Wecs.Systems.Physics
 
             foreach (var contact in contactsEnded)
             {
-                eventsMan.Raise(null, new ContactEndedEvent(
+                eventsMan.Raise(new ContactEndedEvent(
                     contact.ItemIdA,
                     contact.FixtureA.Id,
                     contact.ItemIdB,
                     contact.FixtureB.Id));
-                eventsMan.Raise(null, new ContactEndedEvent(
+                eventsMan.Raise(new ContactEndedEvent(
                     contact.ItemIdB,
                     contact.FixtureB.Id,
                     contact.ItemIdA,

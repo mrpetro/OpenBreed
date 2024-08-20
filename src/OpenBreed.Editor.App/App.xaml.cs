@@ -32,6 +32,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using OpenBreed.Common.Logging;
 using OpenBreed.Editor.VM.Logging;
+using OpenBreed.Audio.OpenAL.Extensions;
+using OpenBreed.Rendering.OpenGL.Extensions;
 
 namespace OpenBreed.Editor.App
 {
@@ -72,6 +74,9 @@ namespace OpenBreed.Editor.App
 
             builder.SetupDataProviders();
             builder.SetupModelProvider();
+
+            builder.SetupOpenALManagers();
+            builder.SetupOpenGLManagers();
 
             builder.ConfigureAbtaPasswordGeneratorForm();
             builder.ConfigureOptionsForm();

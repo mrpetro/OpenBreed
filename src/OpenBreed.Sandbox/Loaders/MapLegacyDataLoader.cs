@@ -76,7 +76,6 @@ namespace OpenBreed.Sandbox.Loaders
         //private readonly WorldBlockBuilder worldBlockBuilder;
         private readonly PalettesDataProvider palettesDataProvider;
 
-        private readonly IRenderableFactory renderableFactory;
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IScriptMan scriptMan;
         private readonly IEntityFactory entityFactory;
@@ -94,7 +93,6 @@ namespace OpenBreed.Sandbox.Loaders
         #region Public Constructors
 
         public MapLegacyDataLoader(IDataLoaderFactory dataLoaderFactory,
-                                   IRenderableFactory renderableFactory,
                                    IEntityMan entityMan,
                                    IRepositoryProvider repositoryProvider,
                                    MapsDataProvider mapsDataProvider,
@@ -114,7 +112,6 @@ namespace OpenBreed.Sandbox.Loaders
         {
             this.repositoryProvider = repositoryProvider;
             this.dataLoaderFactory = dataLoaderFactory;
-            this.renderableFactory = renderableFactory;
             this.entityMan = entityMan;
             this.mapsDataProvider = mapsDataProvider;
             this.systemFactory = systemFactory;

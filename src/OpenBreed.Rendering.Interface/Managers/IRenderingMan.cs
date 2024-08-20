@@ -6,7 +6,17 @@ using System;
 
 namespace OpenBreed.Rendering.Interface.Managers
 {
-    public delegate void RenderDelegate(Matrix4 transform, Box2 viewBox, int depth, float dt);
+    public delegate void RenderDelegate(IRenderView view, Matrix4 transform, float dt);
+
+    public delegate void ResizeDelegate(IRenderView view, float width, float height);
+
+    public enum MatrixMode
+    {
+        ModelView,
+        Projection,
+        Texture,
+        Color
+    }
 
     /// <summary>
     /// Rendering manager interface
@@ -14,11 +24,6 @@ namespace OpenBreed.Rendering.Interface.Managers
     public interface IRenderingMan
     {
         #region Public Events
-
-        /// <summary>
-        /// Occurs when rendering view client is resized
-        /// </summary>
-        event EventHandler<ClientResizedEventArgs> ClientResized;
 
         #endregion Public Events
 
@@ -29,21 +34,16 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// </summary>
         float Fps { get; }
 
-        /// <summary>
-        /// Renderer delegate
-        /// </summary>
-        public RenderDelegate Renderer { get; set; }
-
-        /// <summary>
-        /// Render viewport
-        /// </summary>
-        /// <param name="drawBorder">Draw surrounding border</param>
-        /// <param name="drawBackground">Draw background</param>
-        /// <param name="backgroundColor">Background color</param>
-        /// <param name="viewportTransform">Viewport transformation</param>
-        /// <param name="func">Drawing function</param>
-        void RenderViewport(bool drawBorder, bool drawBackground, Color4 backgroundColor, Matrix4 viewportTransform, Action func);
-
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Updates the state
+        /// </summary>
+        /// <param name="dt">delta time</param>
+        void Update(float dt);
+
+        #endregion Public Methods
     }
 }

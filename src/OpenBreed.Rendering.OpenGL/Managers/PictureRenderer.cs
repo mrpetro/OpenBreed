@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -6,7 +7,7 @@ using GL = OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    internal class PictureRenderer : IPictureRenderer
+    public class PictureRenderer : IPictureRenderer
     {
         #region Private Fields
 
@@ -28,15 +29,16 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public void Render(Vector3 pos, Vector2 scale, Color4 color, int imageId)
+        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int imageId)
         {
             var picture = pictureMan.InternalGetById(imageId);
 
-            primitiveRenderer.PushMatrix();
+            view.PushMatrix();
 
             try
             {
                 primitiveRenderer.DrawSprite(
+                    view,
                     picture.Texture,
                     picture.Vbo,
                     pos,
@@ -45,7 +47,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             }
             finally
             {
-                primitiveRenderer.PopMatrix();
+                view.PopMatrix();
             }
         }
 

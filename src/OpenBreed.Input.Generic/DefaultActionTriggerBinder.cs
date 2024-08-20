@@ -74,7 +74,7 @@ namespace OpenBreed.Input.Generic
         {
             foreach (var mapping in mappings)
             {
-                if (!inputsMan.IsPressed((int)mapping.Key))
+                if (!inputsMan.IsKeyPressed((int)mapping.Key))
                     continue;
 
                 foreach (var triggers in mapping.Value)

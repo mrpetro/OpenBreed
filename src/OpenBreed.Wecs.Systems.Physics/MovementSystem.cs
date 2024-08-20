@@ -60,7 +60,7 @@ namespace OpenBreed.Wecs.Systems.Physics
                 return;
 
             position.Value = newPos;
-            eventsMan.Raise(null, new PositionChangedEvent(entity.Id, position.Value));
+            eventsMan.Raise(new PositionChangedEvent(entity.Id, position.Value));
         }
 
         #endregion Protected Methods

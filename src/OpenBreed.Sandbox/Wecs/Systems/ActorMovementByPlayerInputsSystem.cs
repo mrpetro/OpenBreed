@@ -63,10 +63,10 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             var dx = 0.0f;
             var dy = 0.0f;
 
-            if (inputsMan.IsPressed((int)playerInputsComponent.Right)) dx = 1.0f;
-            else if (inputsMan.IsPressed((int)playerInputsComponent.Left)) dx = -1.0f;
-            if (inputsMan.IsPressed((int)playerInputsComponent.Down)) dy = -1.0f;
-            else if (inputsMan.IsPressed((int)playerInputsComponent.Up)) dy = 1.0f;
+            if (inputsMan.IsKeyPressed((int)playerInputsComponent.Right)) dx = 1.0f;
+            else if (inputsMan.IsKeyPressed((int)playerInputsComponent.Left)) dx = -1.0f;
+            if (inputsMan.IsKeyPressed((int)playerInputsComponent.Down)) dy = -1.0f;
+            else if (inputsMan.IsKeyPressed((int)playerInputsComponent.Up)) dy = 1.0f;
 
             var direction = new Vector2(dx, dy);
 
@@ -85,11 +85,11 @@ namespace OpenBreed.Sandbox.Wecs.Systems
                 angularVelocity.Value = angularPosition.Value;
             }
 
-            if (inputsMan.IsPressed((int)playerInputsComponent.Fire))
-                eventsMan.Raise(null, new EntityActionEvent<PlayerActions>(controlledEntity.Id, PlayerActions.Fire));
+            if (inputsMan.IsKeyPressed((int)playerInputsComponent.Fire))
+                eventsMan.Raise(new EntityActionEvent<PlayerActions>(controlledEntity.Id, PlayerActions.Fire));
 
-            if (inputsMan.IsPressed((int)playerInputsComponent.SwitchWeapon))
-                eventsMan.Raise(null, new EntityActionEvent<PlayerActions>(controlledEntity.Id, PlayerActions.SwitchWeapon));
+            if (inputsMan.IsKeyPressed((int)playerInputsComponent.SwitchWeapon))
+                eventsMan.Raise(new EntityActionEvent<PlayerActions>(controlledEntity.Id, PlayerActions.SwitchWeapon));
 
         }
 

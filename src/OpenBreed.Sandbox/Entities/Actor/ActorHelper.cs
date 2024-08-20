@@ -197,7 +197,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private void TriggerCallback(IFixture actorFixture, IEntity actorEntity, IFixture triggerFixture, IEntity triggerEntity, float dt, Vector2 projection)
         {
-            eventsMan.Raise<ActorCollisionEvent>(null, new ActorCollisionEvent(actorEntity.Id, triggerEntity.Id));
+            eventsMan.Raise<ActorCollisionEvent>(new ActorCollisionEvent(actorEntity.Id, triggerEntity.Id));
 
             TryOnCollision(actorEntity, triggerEntity, projection);
             TryOnCollision(triggerEntity, actorEntity, projection);

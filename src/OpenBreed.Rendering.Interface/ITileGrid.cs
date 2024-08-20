@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Rendering.Interface.Managers;
+using OpenTK;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace OpenBreed.Rendering.Interface
         ///  Render tile grid using clipping box limits
         /// </summary>
         /// <param name="clipBox">Clipping box used to limit rendering</param>
-        void Render(Box2 clipBox);
+        void Render(IRenderView view, Box2 clipBox);
 
         /// <summary>
         /// Modify single tile grid cell with new tile data using real world position

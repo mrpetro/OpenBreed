@@ -9,6 +9,7 @@ using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Sprites;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
@@ -43,10 +44,9 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private readonly ISystemFactory systemFactory;
-        private readonly IRenderableFactory renderableFactory;
         private readonly IWorldMan worldMan;
         private readonly IFontMan fontMan;
-        private readonly IViewClient viewClient;
+        private readonly IWindow viewClient;
         private readonly IEntityMan entityMan;
         private readonly ITriggerMan triggerMan;
         private readonly IEntityFactory entityFactory;
@@ -67,10 +67,9 @@ namespace OpenBreed.Sandbox.Worlds
 
         public GameHudWorldHelper(
             ISystemFactory systemFactory, 
-            IRenderableFactory renderableFactory,
             IWorldMan worldMan, 
             IFontMan fontMan, 
-            IViewClient viewClient, 
+            IWindow viewClient, 
             IEntityMan entityMan,
             ITriggerMan triggerMan,
             IEntityFactory entityFactory,
@@ -86,7 +85,6 @@ namespace OpenBreed.Sandbox.Worlds
             ItemsMan itemsMan)
         {
             this.systemFactory = systemFactory;
-            this.renderableFactory = renderableFactory;
             this.worldMan = worldMan;
             this.fontMan = fontMan;
             this.viewClient = viewClient;

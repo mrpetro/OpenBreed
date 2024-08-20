@@ -47,7 +47,7 @@ namespace OpenBreed.Core.Managers
 
         #region Private Methods
 
-        private void ConditionalAction<TEventArgs>(object sender, TEventArgs args) where TEventArgs : EventArgs
+        private void ConditionalAction<TEventArgs>(TEventArgs args) where TEventArgs : EventArgs
         {
             var eventType = typeof(TEventArgs);
 
@@ -60,14 +60,14 @@ namespace OpenBreed.Core.Managers
             {
                 var item = list[i];
 
-                if (ConditionalAction<TEventArgs>(sender, args, (Func<TEventArgs, bool>)item.ConditionFunction, (Action<TEventArgs>)item.Action, item.OneTime))
+                if (ConditionalAction<TEventArgs>(args, (Func<TEventArgs, bool>)item.ConditionFunction, (Action<TEventArgs>)item.Action, item.OneTime))
                     toRemove.Add(item);
             }
 
             toRemove.ForEach(item => list.Remove(item));
         }
 
-        private bool ConditionalAction<TEventArgs>(object sender, TEventArgs args, Func<TEventArgs, bool> conditionFunction, Action<TEventArgs> action, bool singleTime)
+        private bool ConditionalAction<TEventArgs>(TEventArgs args, Func<TEventArgs, bool> conditionFunction, Action<TEventArgs> action, bool singleTime)
         {
             if (!conditionFunction.Invoke(args))
                 return false;

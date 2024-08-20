@@ -26,7 +26,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(IRenderContext context)
+        public void Render(IWorldRenderContext context)
         {
             foreach (var item in entities)
             {
@@ -36,10 +36,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
             //tileGrid.Render(clipBox);
         }
 
-        public void RenderEntity(IEntity entity, IRenderContext context)
+        public void RenderEntity(IEntity entity, IWorldRenderContext context)
         {
             var tgc = entity.Get<TileGridComponent>();
-            tgc.Grid.Render(context.ViewBox);
+            tgc.Grid.Render(context.View, context.ViewBox);
         }
 
         #endregion Public Methods

@@ -27,6 +27,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
+using OpenBreed.Input.Interface.Events;
 using OpenBreed.Model;
 using OpenBreed.Model.Extensions;
 using OpenBreed.Model.Palettes;
@@ -34,6 +35,7 @@ using OpenBreed.Model.Sprites;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
@@ -82,6 +84,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Input;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
@@ -93,7 +96,9 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using OpenBreed.Rendering.Interface.Extensions;
 
 namespace OpenBreed.Sandbox
 {
@@ -144,7 +149,8 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupCoreManagers();
             hostBuilder.SetupDataGridFactory();
 
-            hostBuilder.SetupViewClient(640, 480, $"{appName} v{infoVersion}");
+            hostBuilder.SetupGameWindow(640, 480, $"{appName} v{infoVersion}");
+            hostBuilder.SetupGLWindow();
 
             hostBuilder.SetupWindowsDrawingContext();
 
@@ -177,13 +183,13 @@ namespace OpenBreed.Sandbox
                 var eventsMan = sp.GetService<IEventsMan>();
 
                 eventsMan.Subscribe<WorldInitializedEventArgs>(
-                    (s,a) => scriptMan.TryInvokeFunction("WorldLoaded", a.WorldId));
+                    (a) => scriptMan.TryInvokeFunction("WorldLoaded", a.WorldId));
 
 
                 scriptMan.RegisterDelegateType(typeof(Action<IEntity, WorldPausedEventArgs>), typeof(LuaEntityEventHandler<WorldPausedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<IEntity, WorldUnpausedEventArgs>), typeof(LuaEntityEventHandler<WorldUnpausedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<IEntity, AnimFinishedEvent>), typeof(LuaEntityEventHandler<AnimFinishedEvent>));
-                scriptMan.RegisterDelegateType(typeof(Action<IEntity, ClientResizedEventArgs>), typeof(LuaEntityEventHandler<ClientResizedEventArgs>));
+                //scriptMan.RegisterDelegateType(typeof(Action<IEntity, ClientResizedEventArgs>), typeof(LuaEntityEventHandler<ClientResizedEventArgs>));
                 scriptMan.RegisterDelegateType(typeof(Action<KeyDownEvent>), typeof(LuaEventHandler<KeyDownEvent>));
                 scriptMan.RegisterDelegateType(typeof(Action<KeyUpEvent>), typeof(LuaEventHandler<KeyUpEvent>));
 
@@ -232,7 +238,6 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupInputMan((inpitsMan, sp) =>
             {
             });
-
 
             hostBuilder.SetupDefaultActionCodeProvider((codeProvider, sp) =>
             {
@@ -381,10 +386,11 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupXmlReadonlyDatabase();
 
             hostBuilder.ConfigureServices((sc) => sc.AddSingleton<FontHelper>());
+            hostBuilder.ConfigureLogConsolePrinter();
 
             var host = hostBuilder.Build();
 
-            return new Program(host, host.Services.GetService<IViewClient>());
+            return new Program(host);
         }
 
         #endregion Public Methods
@@ -396,25 +402,25 @@ namespace OpenBreed.Sandbox
 
         private const string ABTA_PC_GAME_DB_FILE_NAME = "GameDatabase.ABTA.EPF.xml";
 
-        private readonly IViewClient clientMan;
-        private readonly LogConsolePrinter logConsolePrinter;
+        private readonly IWindow window;
+        private readonly IWorldMan worldMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public Program(IHost host, IViewClient clientMan) :
+        public Program(IHost host) :
             base(host)
         {
-            this.clientMan = clientMan;
+            host.RunAsync();
 
-            GetManager<IRenderingMan>();
+            window = host.Services.GetService<IWindow>();
+            worldMan = host.Services.GetService<IWorldMan>();
+            eventsMan = host.Services.GetService<IEventsMan>();
 
-            clientMan.UpdateFrameEvent += (a) => OnUpdateFrame(a);
-            clientMan.LoadEvent += () => OnLoad();
-
-            logConsolePrinter = new LogConsolePrinter(GetManager<ILoggerClient>());
-            logConsolePrinter.StartPrinting();
+            eventsMan.Subscribe<WindowUpdateEvent>((a) => OnUpdateFrame(a.Dt));
+            eventsMan.Subscribe<WindowLoadEvent>((a) => OnLoad());
         }
 
         #endregion Public Constructors
@@ -423,12 +429,12 @@ namespace OpenBreed.Sandbox
 
         public override void Run()
         {
-            clientMan.Run();
+            window.Run();
         }
 
         public override void Exit()
         {
-            clientMan.Exit();
+            window.Exit();
         }
 
         #endregion Public Methods
@@ -593,8 +599,9 @@ namespace OpenBreed.Sandbox
 
         private void OnUpdateFrame(float dt)
         {
-            dt = Math.Min(1.0f/30.0f, dt);
+            GetManager<IRenderingMan>().Update(dt);
 
+            dt = Math.Min(1.0f/30.0f, dt);
 
             GetManager<IInputsMan>().Update();
 
@@ -605,7 +612,6 @@ namespace OpenBreed.Sandbox
             GetManager<ISoundMan>().Update();
 
             GetManager<IEntityMan>().Cleanup();
-
         }
 
         private int ReadStream(InterleavedStereoModule module, int bufferSize, short[] buffer)
@@ -715,7 +721,6 @@ namespace OpenBreed.Sandbox
             var worldGateHelper = GetManager<EntriesHelper>();
             var gameSettings = GetManager<IOptions<GameSettings>>();
             var systemFactory = GetManager<ISystemFactory>();
-            var renderableFactory = GetManager<IRenderableFactory>();
             var tileGridFactory = GetManager<ITileGridFactory>();
             var broadphaseGridFactory = GetManager<IBroadphaseFactory>();
             var palettesDataProvider = GetManager<PalettesDataProvider>();
@@ -799,8 +804,27 @@ namespace OpenBreed.Sandbox
             var gameWorld = worldBuilder.Build();
         }
 
+        void OnRenderFrame(Rendering.Interface.Managers.IRenderView view, Matrix4 transform, float dt)
+        {
+            var screenWorld = worldMan.GetByName("ScreenWorld");
+
+            if (screenWorld is null)
+            {
+                return;
+            }
+
+            var renderable = screenWorld.Systems.OfType<IRenderableSystem>().ToArray();
+            var renderContext = new WorldRenderContext(view, 0, dt,new Box2(view.Box.Min, view.Box.Max), screenWorld);
+            for (int i = 0; i < renderable.Length; i++)
+            {
+                renderable[i].Render(renderContext);
+            }
+        }
+
         private void OnLoad()
         {
+            var renderView = window.Context.CreateView(OnRenderFrame);
+
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
 
             InitLua();
@@ -829,7 +853,6 @@ namespace OpenBreed.Sandbox
             var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
             var smartCardScreenWorldHelper = GetManager<SmartcardScreenWorldHelper>();
             var missionScreenWorldHelper = GetManager<MissionScreenWorldHelper>();
-            var renderingMan = GetManager<IRenderingMan>();
 
             //Create 4 sound sources, each one acting as a separate channel
             soundMan.CreateSoundSource();
@@ -847,19 +870,7 @@ namespace OpenBreed.Sandbox
 
             cameraHelper.CreateAnimations();
 
-            var screenWorld = screenWorldHelper.CreateWorld();
-
-            void OnRenderFrame(Matrix4 transform, Box2 viewBox, int depth, float dt)
-            {
-                var renderable = screenWorld.Systems.OfType<IRenderableSystem>().ToArray();
-                var renderContext = new RenderContext(depth, dt, viewBox, screenWorld);
-                for (int i = 0; i < renderable.Length; i++)
-                {
-                    renderable[i].Render(renderContext);
-                }
-            }
-
-            renderingMan.Renderer = OnRenderFrame;
+            var screenWorld = screenWorldHelper.CreateWorld(renderView);
 
             debugHudWorldHelper.Create();
 

@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    internal class PictureMan : IPictureMan
+    public class PictureMan : IPictureMan
     {
         #region Private Fields
 

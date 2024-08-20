@@ -60,7 +60,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         private void RaiseUpdateEvent(IEntity entity)
         {
-            eventsMan.Raise(entity, new EntityFrameEvent(entity.Id));
+            eventsMan.Raise(new EntityFrameEvent(entity.Id));
         }
 
         #endregion Private Methods

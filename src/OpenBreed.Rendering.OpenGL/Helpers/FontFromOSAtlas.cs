@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenTK;
 using OpenTK.Graphics.OpenGL4;
@@ -67,10 +68,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return totalWidth;
         }
 
-        public void Draw(char character, Box2 clipBox)
+        public void Draw(IRenderView view, char character, Box2 clipBox)
         {
             var found = Lookup[character];
             primitiveRenderer.DrawSprite(
+                view,
                 Texture,
                 vboList[found.Item1],
                 new Vector3(0, 0, 0),
@@ -78,7 +80,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 Color4.White);
         }
 
-        public void Draw(string text, Color4 color, Box2 clipBox)
+        public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox)
         {
             //TODO: include color in text rendering
 
@@ -92,6 +94,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 var key = Lookup[ch].Item1;
 
                 primitiveRenderer.DrawSprite(
+                    view,
                     Texture,
                     vboList[key],
                     new Vector3((int)offsetX, 0.0f, 0.0f),
@@ -104,12 +107,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
-        public void Render(string text, Box2 clipBox, Vector2 pos, float order)
+        public void Render(IRenderView view, string text, Box2 clipBox, Vector2 pos, float order)
         {
             GL.Enable(EnableCap.Texture2D);
 
-            primitiveRenderer.PushMatrix();
-            primitiveRenderer.Translate(new Vector3((int)pos.X, (int)pos.Y, 0.0f));
+            view.PushMatrix();
+            view.Translate(new Vector3((int)pos.X, (int)pos.Y, 0.0f));
 
             var caretPosX = 0.0f;
 
@@ -120,23 +123,23 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 switch (ch)
                 {
                     case '\r':
-                        primitiveRenderer.Translate(new Vector3(-caretPosX, 0.0f, 0.0f));
+                        view.Translate(new Vector3(-caretPosX, 0.0f, 0.0f));
                         caretPosX = 0.0f;
                         continue;
                     case '\n':
-                        primitiveRenderer.Translate(new Vector3(0.0f, -Height, 0.0f));
+                        view.Translate(new Vector3(0.0f, -Height, 0.0f));
                         continue;
                     default:
                         break;
                 }
 
-                Draw(ch, clipBox);
+                Draw(view, ch, clipBox);
                 var width = GetWidth(ch);
                 caretPosX += width;
-                primitiveRenderer.Translate(new Vector3(width, 0.0f, 0.0f));
+                view.Translate(new Vector3(width, 0.0f, 0.0f));
             }
 
-            primitiveRenderer.PopMatrix();
+            view.PopMatrix();
             GL.Disable(EnableCap.Texture2D);
         }
 

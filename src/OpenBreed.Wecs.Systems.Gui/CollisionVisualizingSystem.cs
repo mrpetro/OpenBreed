@@ -58,14 +58,14 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Public Methods
 
-        public void Render(IRenderContext context)
+        public void Render(Worlds.IWorldRenderContext context)
         {
             if (!visualizingOptions.Enabled)
             {
                 return;
             }
 
-            primitiveRenderer.EnableAlpha();
+            context.View.EnableAlpha();
 
             try
             {
@@ -76,17 +76,17 @@ namespace OpenBreed.Wecs.Systems.Gui
 
                 var collisionComponent = mapEntity.Get<CollisionComponent>();
 
-                DrawDynamics(collisionComponent.Broadphase, context.ViewBox);
-                DrawStatics(collisionComponent.Broadphase, context.ViewBox);
+                DrawDynamics(context, collisionComponent.Broadphase, context.ViewBox);
+                DrawStatics(context, collisionComponent.Broadphase, context.ViewBox);
 
                 if (collisionComponent.Result.Contacts.Any())
                 {
-                    DrawContacts(collisionComponent.Result.Contacts);
+                    DrawContacts(context, collisionComponent.Result.Contacts);
                 }
             }
             finally
             {
-                primitiveRenderer.DisableAlpha();
+                context.View.DisableAlpha();
             }
         }
 
@@ -94,16 +94,18 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Private Methods
 
-        private void DrawContacts(List<CollisionContact> contacts)
+        private void DrawContacts(Worlds.IWorldRenderContext context, List<CollisionContact> contacts)
         {
             for (int i = 0; i < contacts.Count; i++)
             {
-                DrawContact(contacts[i]);
+                DrawContact(context, contacts[i]);
             }
         }
 
-        private void DrawContact(CollisionContact contact)
+        private void DrawContact(Worlds.IWorldRenderContext context, CollisionContact contact)
         {
+            var view = context.View;
+
             var entityA = entityMan.GetById(contact.ItemIdA);
             var posA = entityA.Get<PositionComponent>().Value;
 
@@ -111,22 +113,22 @@ namespace OpenBreed.Wecs.Systems.Gui
             var posB = entityB.Get<PositionComponent>().Value;
 
 
-            primitiveRenderer.PushMatrix();
-            primitiveRenderer.Translate(new Vector3(posA));
+            view.PushMatrix();
+            view.Translate(new Vector3(posA));
 
-            RenderShape(contact.FixtureA.Shape, new Color4(255,0,0,80));
+            RenderShape(view, contact.FixtureA.Shape, new Color4(255,0,0,80));
 
-            primitiveRenderer.PopMatrix();
-            primitiveRenderer.PushMatrix();
+            view.PopMatrix();
+            view.PushMatrix();
 
-            primitiveRenderer.Translate(new Vector3(posB));
+            view.Translate(new Vector3(posB));
 
-            RenderShape(contact.FixtureB.Shape, new Color4(255, 0, 0, 80));
+            RenderShape(view, contact.FixtureB.Shape, new Color4(255, 0, 0, 80));
 
-            primitiveRenderer.PopMatrix();
+            view.PopMatrix();
         }
 
-        private void DrawDynamicEntityAabb(IBroadphaseItem item, Box2 clipBox)
+        private void DrawDynamicEntityAabb(Worlds.IWorldRenderContext context, IBroadphaseItem item, Box2 clipBox)
         {
             var entity = entityMan.GetById(item.ItemId);
 
@@ -145,40 +147,42 @@ namespace OpenBreed.Wecs.Systems.Gui
             if (aabb.Min.Y > clipBox.Max.Y)
                 return;
 
-            DrawEntityFixtures(entity);
+            DrawEntityFixtures(context, entity);
 
-            primitiveRenderer.DrawRectangle(aabb, Color4.Green);
+            primitiveRenderer.DrawRectangle(context.View, aabb, Color4.Green);
 
             //primitiveRenderer.DrawRectangle(new Box2(0,0, 100, 100), Color4.Red, filled: false);
         }
 
-        private void DrawDynamics(IBroadphase dynamics, Box2 viewBox)
+        private void DrawDynamics(Worlds.IWorldRenderContext context, IBroadphase dynamics, Box2 viewBox)
         {
             foreach (var item in dynamics.DynamicItems)
             {
-                DrawDynamicEntityAabb(item, viewBox);
+                DrawDynamicEntityAabb(context, item, viewBox);
             }
         }
 
-        private void DrawEntityFixtures(IEntity entity)
+        private void DrawEntityFixtures(Worlds.IWorldRenderContext context, IEntity entity)
         {
+            var view = context.View;
+
             var posCmp = entity.Get<PositionComponent>();
             var bodyCmp = entity.Get<BodyComponent>();
 
-            primitiveRenderer.PushMatrix();
-            primitiveRenderer.Translate(new Vector3(posCmp.Value));
+            view.PushMatrix();
+            view.Translate(new Vector3(posCmp.Value));
 
             for (int i = 0; i < bodyCmp.Fixtures.Count; i++)
             {
                 var fixture = bodyCmp.Fixtures[i];
                 var color = groupsToColors[fixture.GroupIds.FirstOrDefault()];
-                RenderShape(fixture.Shape, color);
+                RenderShape(view, fixture.Shape, color);
             }
 
-            primitiveRenderer.PopMatrix();
+            view.PopMatrix();
         }
 
-        private void DrawStatics(IBroadphase statics, Box2 viewBox)
+        private void DrawStatics(Worlds.IWorldRenderContext context, IBroadphase statics, Box2 viewBox)
         {
             var itemIds = statics.QueryStatic(viewBox);
 
@@ -186,11 +190,11 @@ namespace OpenBreed.Wecs.Systems.Gui
             {
                 var entity = entityMan.GetById(itemId);
 
-                DrawEntityFixtures(entity);
+                DrawEntityFixtures(context, entity);
             }
         }
 
-        private void RenderShape(IShape shape, Color4 color)
+        private void RenderShape(Rendering.Interface.Managers.IRenderView view, IShape shape, Color4 color)
         {
             switch (shape)
             {
@@ -199,15 +203,15 @@ namespace OpenBreed.Wecs.Systems.Gui
                     break;
 
                 case IBoxShape box:
-                    primitiveRenderer.DrawRectangle(new Box2(box.X, box.Y, box.X + box.Width, box.Y + box.Height), color, filled: true);
+                    primitiveRenderer.DrawRectangle(view, new Box2(box.X, box.Y, box.X + box.Width, box.Y + box.Height), color, filled: true);
                     break;
 
                 case ICircleShape circle:
-                    primitiveRenderer.DrawCircle(circle.Center, circle.Radius, color, filled: true);
+                    primitiveRenderer.DrawCircle(view, circle.Center, circle.Radius, color, filled: true);
                     break;
 
                 case IPointShape point:
-                    primitiveRenderer.DrawPoint(new Vector2(point.X, point.Y), color, PointType.Circle);
+                    primitiveRenderer.DrawPoint(view, new Vector2(point.X, point.Y), color, PointType.Circle);
                     break;
 
                 default:

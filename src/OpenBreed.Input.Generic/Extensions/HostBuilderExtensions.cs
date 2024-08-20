@@ -6,6 +6,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
+using OpenTK.Windowing.Desktop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace OpenBreed.Input.Generic.Extensions
                 services.AddSingleton<IInputsMan>((sp) =>
                 {
                     var inputsMan = new InputsMan(
-                        sp.GetService<IViewClient>(),
+                        sp.GetService<GameWindow>(),
                         sp.GetService<IEventsMan>());
                     action.Invoke(inputsMan, sp);
                     return inputsMan;

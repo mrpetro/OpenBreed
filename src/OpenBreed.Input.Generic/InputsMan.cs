@@ -1,8 +1,10 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
+using OpenBreed.Input.Interface.Events;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 
@@ -12,7 +14,8 @@ namespace OpenBreed.Input.Generic
     {
         #region Private Fields
 
-        private readonly IViewClient clientMan;
+        private readonly GameWindow gameWindow;
+
         private readonly IEventsMan eventsMan;
         private Vector2 oldCursorPos;
         private KeyboardState oldKeyboardState;
@@ -24,21 +27,20 @@ namespace OpenBreed.Input.Generic
         #region Public Constructors
 
         public InputsMan(
-            IViewClient clientMan,
+            GameWindow gameWindow,
             IEventsMan eventsMan)
         {
-            this.clientMan = clientMan;
+            this.gameWindow = gameWindow;
             this.eventsMan = eventsMan;
 
-            clientMan.KeyDownEvent += (a) => OnKeyDown(a);
-            clientMan.KeyUpEvent += (a) => OnKeyUp(a);
-            //clientMan.KeyPressEvent += (s, a) => OnKeyPress(a);
-            clientMan.MouseMoveEvent += (a) => OnMouseMove(a);
-            clientMan.MouseDownEvent += (a) => OnMouseDown(a);
-            clientMan.MouseUpEvent += (a) => OnMouseUp(a);
-            clientMan.MouseWheelEvent += (a) => OnMouseWheel(a);
+            gameWindow.MouseMove += OnMouseMove;
+            gameWindow.MouseWheel += OnMouseWheel;
+            gameWindow.KeyDown += OnKeyDown;
+            gameWindow.KeyUp += OnKeyUp;
+            gameWindow.MouseDown += OnMouseDown;
+            gameWindow.MouseUp += OnMouseUp;
 
-            oldKeyboardState = clientMan.KeyboardState.GetSnapshot();
+            oldKeyboardState = gameWindow.KeyboardState.GetSnapshot();
         }
 
         #endregion Public Constructors
@@ -46,15 +48,6 @@ namespace OpenBreed.Input.Generic
         #region Public Events
 
         public event EventHandler<KeyboardStateEventArgs> KeyboardStateChanged;
-
-        public event EventHandler<MouseButtonEventArgs> MouseDown;
-
-        public event EventHandler<MouseMoveEventArgs> MouseMove;
-
-        public event EventHandler<MouseButtonEventArgs> MouseUp;
-
-        //public event EventHandler<KeyPressEventArgs> KeyPress;
-        public event EventHandler<MouseWheelEventArgs> MouseWheel;
 
         #endregion Public Events
 
@@ -80,19 +73,23 @@ namespace OpenBreed.Input.Generic
         /// </summary>
         public float WheelPos { get; private set; }
 
+        public bool IsMousePressed => gameWindow.MouseState.IsAnyButtonDown;
+
+        public bool IsRightMousePressed => gameWindow.MouseState.IsButtonPressed(MouseButton.Right);
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public bool IsPressed(int inputCode)
+        public bool IsKeyPressed(int inputCode)
         {
-            return clientMan.KeyboardState.IsKeyDown((Keys)inputCode);
+            return gameWindow.KeyboardState.IsKeyDown((Keys)inputCode);
         }
 
         public void Update()
         {
-            var newKeyboardState = clientMan.KeyboardState.GetSnapshot();
-            var newMouseState = clientMan.MouseState.GetSnapshot();
+            var newKeyboardState = gameWindow.KeyboardState.GetSnapshot();
+            var newMouseState = gameWindow.MouseState.GetSnapshot();
             try
             {
                 if (!newKeyboardState.Equals(oldKeyboardState))
@@ -126,50 +123,42 @@ namespace OpenBreed.Input.Generic
 
         private void OnKeyDown(KeyboardKeyEventArgs e)
         {
-            eventsMan.Raise(this, new KeyDownEvent());
-            //KeyDown?.Invoke(this, e);
+            eventsMan.Raise(new KeyDownEvent());
         }
 
         private void OnKeyUp(KeyboardKeyEventArgs e)
         {
-            eventsMan.Raise(this, new KeyUpEvent());
-            //KeyUp?.Invoke(this, e);
+            eventsMan.Raise(new KeyUpEvent());
         }
 
         private void OnMouseDown(MouseButtonEventArgs e)
         {
-            MouseDown?.Invoke(this, e);
+            eventsMan.Raise(new MouseDownEvent());
+        }
+
+        private void OnMouseUp(MouseButtonEventArgs e)
+        {
+            eventsMan.Raise(new MouseUpEvent());
         }
 
         private void OnMouseMove(MouseMoveEventArgs e)
         {
-            MouseMove?.Invoke(this, e);
-
-            UpdateCursorPos(new Vector2(e.Position.X, e.Position.Y));
-        }
-
-        //private void OnKeyPress(KeyPressEventArgs e)
-        //{
-        //    KeyPress?.Invoke(this, e);
-        //}
-        private void OnMouseUp(MouseButtonEventArgs e)
-        {
-            MouseUp?.Invoke(this, e);
+            eventsMan.Raise(new MouseMoveEvent());
+            //UpdateCursorPos(new Vector2(e.Position.X, e.Position.Y));
         }
 
         private void OnMouseWheel(MouseWheelEventArgs e)
         {
-            MouseWheel?.Invoke(this, e);
-
-            UpdateWheelPos(e.OffsetY);
+            eventsMan.Raise(new MouseWheelEvent());
+            //UpdateWheelPos(e.OffsetY);
         }
 
-        private void UpdateCursorPos(Vector2 newPos)
-        {
-            var newPos4 = new Vector4(newPos) { W = 1 };
-            newPos4 *= clientMan.ClientTransform;
-            CursorPos = new Vector2(newPos4.X, newPos4.Y);
-        }
+        //private void UpdateCursorPos(Vector2 newPos)
+        //{
+        //    var newPos4 = new Vector4(newPos) { W = 1 };
+        //    newPos4 *= clientMan.ClientTransform;
+        //    CursorPos = new Vector2(newPos4.X, newPos4.Y);
+        //}
 
         private void UpdateWheelPos(float newWheelPos)
         {

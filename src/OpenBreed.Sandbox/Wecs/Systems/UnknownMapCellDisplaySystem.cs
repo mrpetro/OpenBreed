@@ -46,14 +46,14 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 
         #region Public Methods
 
-        public void Render(IRenderContext context)
+        public void Render(OpenBreed.Wecs.Worlds.IWorldRenderContext context)
         {
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawEntityAabb(entities[i], context.ViewBox);
+                DrawEntityAabb(context.View, entities[i], context.ViewBox);
 
             GL.Disable(EnableCap.Blend);
         }
@@ -66,7 +66,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
         /// Draw this wireframe to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which entity wireframe will be rendered to</param>
-        private void DrawEntityAabb(IEntity entity, Box2 clipBox)
+        private void DrawEntityAabb(Rendering.Interface.Managers.IRenderView view, IEntity entity, Box2 clipBox)
         {
             var posCmp = entity.Get<PositionComponent>();
 
@@ -84,22 +84,22 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 
             var unknownCodeCmp = entity.Get<UnknownCodeComponent>();
 
-            primitiveRenderer.PushMatrix();
+            view.PushMatrix();
 
-            primitiveRenderer.Translate((int)posCmp.Value.X, (int)posCmp.Value.Y, 0.0f);
+            view.Translate((int)posCmp.Value.X, (int)posCmp.Value.Y, 0.0f);
 
             var aabb = new Box2(0, 0, 16, 16);
 
-            primitiveRenderer.DrawRectangle(aabb, Color4.Yellow);
+            primitiveRenderer.DrawRectangle(view, aabb, Color4.Yellow);
 
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
             GL.BlendColor(Color4.Black);
 
-            font.Draw(unknownCodeCmp.Code.ToString(), Color4.White, clipBox);
+            font.Draw(view, unknownCodeCmp.Code.ToString(), Color4.White, clipBox);
             GL.Disable(EnableCap.Blend);
 
-            primitiveRenderer.PopMatrix();
+            view.PopMatrix();
         }
 
         #endregion Private Methods

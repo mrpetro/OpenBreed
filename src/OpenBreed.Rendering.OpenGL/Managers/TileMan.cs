@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    internal class TileMan : ITileMan
+    public class TileMan : ITileMan
     {
         #region Private Fields
 
@@ -43,8 +43,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #endregion Internal Constructors
 
         #region Internal Properties
-
-        internal RenderingMan Module { get; }
 
         #endregion Internal Properties
 
@@ -77,12 +75,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             throw new NotImplementedException();
         }
 
-        public void Render(int atlasId, int imageId)
+        public void Render(IRenderView view, int atlasId, int imageId)
         {
             var atlas = items[atlasId];
             var size = atlas.TileSize;
             var vao = atlas.data[imageId].Vbo;
             primitiveRenderer.DrawSprite(
+                view,
                 atlas.Texture,
                 vao,
                 new Vector3(0,0,0),

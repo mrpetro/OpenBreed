@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    internal class PaletteMan : IPaletteMan
+    public class PaletteMan : IPaletteMan
     {
         #region Private Fields
 
@@ -24,14 +24,14 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public PaletteMan(ILogger logger)
         {
             this.logger = logger;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 

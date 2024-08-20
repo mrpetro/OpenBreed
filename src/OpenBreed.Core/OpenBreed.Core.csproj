@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
@@ -13,6 +13,10 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Factories\" />
   </ItemGroup>
 
 </Project>

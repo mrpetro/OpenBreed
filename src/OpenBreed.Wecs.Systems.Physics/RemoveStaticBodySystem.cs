@@ -42,7 +42,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Public Methods
 
-        public override void Update(object sender, EntityLeavingEvent e)
+        public override void Update(EntityLeavingEvent e)
         {
             var eventEntity = entityMan.GetById(e.EntityId);
 

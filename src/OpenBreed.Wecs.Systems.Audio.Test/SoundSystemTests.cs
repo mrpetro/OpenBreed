@@ -65,7 +65,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
 
             // Assert
             mockSoundMan.Verify(mock => mock.PlaySample(It.IsAny<int>()), Times.Never());
-            mockEventsMan.Verify(mock => mock.Raise(It.IsAny<object>(),It.IsAny<SoundPlayEvent>()), Times.Never());
+            mockEventsMan.Verify(mock => mock.Raise(It.IsAny<SoundPlayEvent>()), Times.Never());
         }
         [TestCase(new object[] {new int[] { 1 } })]
         [TestCase(new object[] { new int[]{ 2, 5, 6, 7 } })]
@@ -85,7 +85,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             foreach (var sampleId in sampleIds)
                 mockSoundMan.Verify(mock => mock.PlaySample(sampleId), Times.Once());
 
-            mockEventsMan.Verify(mock => mock.Raise(It.IsAny<object>(), It.IsAny<SoundPlayEvent>()), Times.Exactly(sampleIds.Length));
+            mockEventsMan.Verify(mock => mock.Raise(It.IsAny<SoundPlayEvent>()), Times.Exactly(sampleIds.Length));
         }
 
         #endregion Public Methods

@@ -18,14 +18,14 @@ namespace OpenBreed.Wecs.Systems.Control
         {
             this.inputsMan = inputsMan;
 
-            inputsMan.KeyboardStateChanged += Update;
+            inputsMan.KeyboardStateChanged += (s,a) => Update(a);
         }
 
         #endregion Protected Constructors
 
         #region Public Methods
 
-        public void Update(object sender, KeyboardStateEventArgs e)
+        public void Update(KeyboardStateEventArgs e)
         {
             foreach (var entity in entities)
             {

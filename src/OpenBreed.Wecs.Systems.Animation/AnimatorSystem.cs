@@ -101,7 +101,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         private void RaiseAnimFinishedEvent(IEntity entity, Animator animator)
         {
-            eventsMan.Raise(null, new AnimFinishedEvent(entity.Id, animator));
+            eventsMan.Raise(new AnimFinishedEvent(entity.Id, animator));
         }
 
         #endregion Private Methods

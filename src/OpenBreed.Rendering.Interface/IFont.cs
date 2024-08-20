@@ -1,4 +1,5 @@
 ﻿
+using OpenBreed.Rendering.Interface.Managers;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Rendering.Interface
@@ -24,13 +25,13 @@ namespace OpenBreed.Rendering.Interface
 
         #region Public Methods
 
-        void Render(string text, Box2 clipBox, Vector2 pos, float order);
+        void Render(IRenderView view, string text, Box2 clipBox, Vector2 pos, float order);
 
         /// <summary>
         /// Draw single character given in parameter
         /// </summary>
         /// <param name="character">Single character to draw</param>
-        void Draw(char character, Box2 clipBox);
+        void Draw(IRenderView view, char character, Box2 clipBox);
 
         /// <summary>
         /// Draw text given in parameter
@@ -38,7 +39,7 @@ namespace OpenBreed.Rendering.Interface
         /// <param name="text">Text to draw</param>
         /// <param name="color">Color of text</param>
         /// <param name="clipBox">Clip box</param>
-        void Draw(string text, Color4 color, Box2 clipBox);
+        void Draw(IRenderView view, string text, Color4 color, Box2 clipBox);
 
         /// <summary>
         /// Gets single character width

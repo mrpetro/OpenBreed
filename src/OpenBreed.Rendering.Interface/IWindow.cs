@@ -1,42 +1,22 @@
-﻿using OpenTK;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenTK;
 using OpenTK.Input;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
-using System.Drawing;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Rendering.Interface
 {
-    public interface IViewClient
+    public interface IWindow
     {
-        #region Public Events
-
-        event Action<MouseButtonEventArgs> MouseDownEvent;
-
-        event Action<MouseButtonEventArgs> MouseUpEvent;
-
-        event Action<MouseMoveEventArgs> MouseMoveEvent;
-
-        event Action<MouseWheelEventArgs> MouseWheelEvent;
-
-        event Action<KeyboardKeyEventArgs> KeyDownEvent;
-
-        event Action<KeyboardKeyEventArgs> KeyUpEvent;
-
-        //event EventHandler<KeyPressEventArgs> KeyPressEvent;
-
-        event Action<float> UpdateFrameEvent;
-
-        event Action<float> RenderFrameEvent;
-
-        event Action LoadEvent;
-
-        event Action<Vector2i> ResizeEvent;
-
-        #endregion Public Events
-
         #region Public Properties
+
+        /// <summary>
+        /// Rendering context of this window
+        /// </summary>
+        IRenderContext Context { get; }
 
         /// <summary>
         /// Client display transformation matrix
@@ -52,10 +32,6 @@ namespace OpenBreed.Core
         /// Client display rectangle
         /// </summary>
         Box2i ClientRectangle { get; }
-
-        KeyboardState KeyboardState { get; }
-
-        MouseState MouseState { get; }
 
         #endregion Public Properties
 

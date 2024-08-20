@@ -26,7 +26,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Methods
 
-        public abstract void Update(object sender, TEvent e);
+        public abstract void Update(TEvent e);
 
         #endregion Public Methods
     }

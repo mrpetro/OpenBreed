@@ -34,7 +34,7 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
 
             systemFactory.RegisterSystem<CursorSystem>(
                 () => new CursorSystem(
-                    sp.GetRequiredService<IViewClient>(),
+                    sp.GetRequiredService<IWindow>(),
                     sp.GetRequiredService<IInputsMan>(),
                     sp.GetRequiredService<IPrimitiveRenderer>(),
                     sp.GetRequiredService<IEventsMan>()));

@@ -65,7 +65,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
                 triggerMan.OnEntityEnteredWorld(emittedEntity, (e,args) =>
                 {
-                    eventsMan.Raise(entity, new EmitEntityEvent(emittedEntity.Id, entity.Id));
+                    eventsMan.Raise(new EmitEntityEvent(emittedEntity.Id, entity.Id));
 
                 }, singleTime: true);
 

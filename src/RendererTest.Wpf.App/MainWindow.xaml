@@ -1,0 +1,22 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RendererTest.Wpf.App"
+        xmlns:Wpf="clr-namespace:OpenBreed.Editor.UI.Wpf;assembly=OpenBreed.Editor.UI.Wpf" x:Class="RendererTest.Wpf.App.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        <Wpf:GLWpfControlEx Grid.Column="0"
+            Margin="10"
+            InitFunc="{Binding InitFunc}" />
+        <Wpf:GLWpfControlEx Grid.Column="1"
+            Margin="10"
+            InitFunc="{Binding InitFunc}" />
+    </Grid>
+</Window>

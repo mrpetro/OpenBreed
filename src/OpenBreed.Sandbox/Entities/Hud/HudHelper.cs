@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Jobs;
 using OpenBreed.Sandbox.Worlds;
@@ -26,9 +27,8 @@ namespace OpenBreed.Sandbox.Entities.Hud
         private readonly IEntityFactory entityFactory;
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
-        private readonly IViewClient viewClient;
+        private readonly IWindow viewClient;
         private readonly IJobsMan jobsMan;
-        private readonly IRenderingMan renderingMan;
         private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
@@ -38,9 +38,8 @@ namespace OpenBreed.Sandbox.Entities.Hud
         public HudHelper(IEntityFactory entityFactory,
                          IEntityMan entityMan,
                          IWorldMan worldMan,
-                         IViewClient viewClient,
+                         IWindow viewClient,
                          IJobsMan jobsMan,
-                         IRenderingMan renderingMan, 
                          ITriggerMan triggerMan)
         {
             this.entityFactory = entityFactory;
@@ -48,7 +47,6 @@ namespace OpenBreed.Sandbox.Entities.Hud
             this.worldMan = worldMan;
             this.viewClient = viewClient;
             this.jobsMan = jobsMan;
-            this.renderingMan = renderingMan;
             this.triggerMan = triggerMan;
         }
 

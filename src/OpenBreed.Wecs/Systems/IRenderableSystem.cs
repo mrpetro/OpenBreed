@@ -8,7 +8,7 @@ namespace OpenBreed.Wecs.Systems
     {
         #region Public Methods
 
-        public void Render(IRenderContext context);
+        public void Render(IWorldRenderContext context);
 
         #endregion Public Methods
     }

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
@@ -12,13 +13,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         private readonly IEntityMan entityMan;
 
-        private readonly IViewClient viewClient;
+        private readonly IWindow viewClient;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public CoordsTransformer(IEntityMan entityMan, IViewClient viewClient)
+        public CoordsTransformer(IEntityMan entityMan, IWindow viewClient)
         {
             this.entityMan = entityMan;
             this.viewClient = viewClient;

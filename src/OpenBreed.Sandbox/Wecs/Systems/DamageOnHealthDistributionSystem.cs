@@ -80,7 +80,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             }
 
             healthComponent.Value -= damage;
-            eventsMan.Raise(targetEntity, new DamagedEvent(targetEntityId, damage, damagingEntity.Id));
+            eventsMan.Raise(new DamagedEvent(targetEntityId, damage, damagingEntity.Id));
         }
     }
 }

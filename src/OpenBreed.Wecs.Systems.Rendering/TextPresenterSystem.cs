@@ -34,28 +34,28 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(IRenderContext context)
+        public void Render(Worlds.IWorldRenderContext context)
         {
-            fontMan.Render(context.ViewBox, context.Dt, RenderTexts);
+            fontMan.Render(context.View, context.ViewBox, context.Dt, RenderTexts);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void RenderTexts(Box2 clipBox, float dt)
+        private void RenderTexts(OpenBreed.Rendering.Interface.Managers.IRenderView view, Box2 clipBox, float dt)
         {
             for (int i = 0; i < entities.Count; i++)
-                RenderText(entities[i], clipBox);
+                RenderText(view, entities[i], clipBox);
         }
 
-        private void RenderText(IEntity entity, Box2 clipBox)
+        private void RenderText(OpenBreed.Rendering.Interface.Managers.IRenderView view, IEntity entity, Box2 clipBox)
         {
             var pos = entity.Get<PositionComponent>();
             var tp = entity.Get<TextPresentationComponent>();
             var td = entity.Get<TextDataComponent>();
 
-            fontMan.RenderAppend(tp.FontId, td.Data, clipBox, pos.Value);
+            fontMan.RenderAppend(view, tp.FontId, td.Data, clipBox, pos.Value);
         }
 
         #endregion Private Methods

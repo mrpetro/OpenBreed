@@ -37,14 +37,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(IRenderContext context)
+        public void Render(IWorldRenderContext context)
         {
             spriteRenderer.RenderBegin();
 
             try
             {
                 for (int i = 0; i < entities.Count; i++)
-                    RenderSprite(entities[i], context.ViewBox);
+                    RenderSprite(entities[i], context);
             }
             finally
             {
@@ -60,8 +60,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        private void RenderSprite(IEntity entity, Box2 clipBox)
+        private void RenderSprite(IEntity entity, IWorldRenderContext context)
         {
+            var clipBox = context.ViewBox;
+
             var spc = entity.Get<SpriteComponent>();
 
             if (spc.Hidden)
@@ -93,7 +95,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             if (pos.Y > clipBox.Max.Y)
                 return;
 
-            spriteRenderer.Render(new Vector3((int)pos.X, (int)pos.Y, spc.Order), spc.Scale, Color4.White, spc.AtlasId, spc.ImageId);
+            spriteRenderer.Render(context.View, new Vector3((int)pos.X, (int)pos.Y, spc.Order), spc.Scale, Color4.White, spc.AtlasId, spc.ImageId);
         }
 
         #endregion Private Methods

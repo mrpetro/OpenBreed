@@ -69,7 +69,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 
             itemSlot.AddItem(itemId, quantity);
 
-            eventsMan.Raise(entity, new InventoryChangedEvent(entity.Id, itemId, quantity));
+            eventsMan.Raise(new InventoryChangedEvent(entity.Id, itemId, quantity));
         }
 
         #endregion Private Methods

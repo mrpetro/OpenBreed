@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
@@ -43,14 +44,12 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private readonly ISystemFactory systemFactory;
-        private readonly IRenderableFactory renderableFactory;
-        private readonly IRenderingMan renderingMan;
         private readonly IWorldMan worldMan;
         private readonly IEventsMan eventsMan;
         private readonly IEntityMan entityMan;
         private readonly ViewportCreator viewportCreator;
         private readonly IEntityFactory entityFactory;
-        private readonly IViewClient viewClient;
+        private readonly IWindow viewClient;
         private readonly ITriggerMan triggerMan;
         private readonly IScriptMan scriptMan;
 
@@ -59,20 +58,16 @@ namespace OpenBreed.Sandbox.Worlds
         #region Public Constructors
 
         public ScreenWorldHelper(ISystemFactory systemFactory,
-                                 IRenderableFactory renderableFactory,
-                                 IRenderingMan renderingMan,
                                  IWorldMan worldMan,
                                  IEventsMan eventsMan,
                                  IEntityMan entityMan,
                                  ViewportCreator viewportCreator,
                                  IEntityFactory entityFactory,
-                                 IViewClient viewClient,
+                                 IWindow viewClient,
                                  ITriggerMan triggerMan,
                                  IScriptMan scriptMan)
         {
             this.systemFactory = systemFactory;
-            this.renderableFactory = renderableFactory;
-            this.renderingMan = renderingMan;
             this.worldMan = worldMan;
             this.eventsMan = eventsMan;
             this.entityMan = entityMan;
@@ -122,7 +117,7 @@ namespace OpenBreed.Sandbox.Worlds
             return player1Entity;
         }
 
-        public IWorld CreateWorld()
+        public IWorld CreateWorld(IRenderView renderView)
         {
             var builder = worldMan.Create().SetName("ScreenWorld");
 
@@ -154,10 +149,10 @@ namespace OpenBreed.Sandbox.Worlds
 
             var textViewport = viewportCreator.CreateViewportEntity(TEXT_VIEWPORT, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "TextViewport");
 
-            renderingMan.ClientResized += (s, a) => ResizeGameViewport(gameViewport, a);
-            renderingMan.ClientResized += (s, a) => ResizeHudViewport(gameHudViewport, a);
-            renderingMan.ClientResized += (s, a) => ResizeHudViewport(debugHudViewport, a);
-            renderingMan.ClientResized += (s, a) => ResizeTextViewport(debugHudViewport, a);
+            renderView.Resized += (s, w, h) => ResizeGameViewport(gameViewport, w, h);
+            renderView.Resized += (s, w, h) => ResizeHudViewport(gameHudViewport, w, h);
+            renderView.Resized += (s, w, h) => ResizeHudViewport(debugHudViewport, w, h);
+            renderView.Resized += (s, w, h) => ResizeTextViewport(debugHudViewport, w, h);
 
             triggerMan.OnWorldInitialized(
                 world, () =>
@@ -187,19 +182,19 @@ namespace OpenBreed.Sandbox.Worlds
         //    throw new NotImplementedException();
         //}
 
-        private void ResizeGameViewport(IEntity viewport, ClientResizedEventArgs args)
+        private void ResizeGameViewport(IEntity viewport, float width, float height)
         {
-            viewport.SetViewportSize(eventsMan, args.Width, args.Height);
+            viewport.SetViewportSize(eventsMan, width, height);
         }
 
-        private void ResizeHudViewport(IEntity viewport, ClientResizedEventArgs args)
+        private void ResizeHudViewport(IEntity viewport, float width, float height)
         {
-            viewport.SetViewportSize(eventsMan, args.Width, args.Height);
+            viewport.SetViewportSize(eventsMan, width, height);
         }
 
-        private void ResizeTextViewport(IEntity viewport, ClientResizedEventArgs args)
+        private void ResizeTextViewport(IEntity viewport, float width, float height)
         {
-            viewport.SetViewportSize(eventsMan, args.Width, args.Height);
+            viewport.SetViewportSize(eventsMan, width, height);
         }
 
         #endregion Private Methods

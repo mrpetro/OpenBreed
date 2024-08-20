@@ -71,7 +71,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         private void RaiseEntityFollowEvent(IEntity entity, int followerId)
         {
-            eventsMan.Raise(entity, new EntityFollowEvent(entity.Id, followerId));
+            eventsMan.Raise(new EntityFollowEvent(entity.Id, followerId));
         }
 
         #endregion Private Methods

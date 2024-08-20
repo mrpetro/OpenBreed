@@ -61,7 +61,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         private void RaiseLifetimeEndEvent(IEntity entity)
         {
-            eventsMan.Raise(entity, new LifetimeEndEvent(entity.Id));
+            eventsMan.Raise(new LifetimeEndEvent(entity.Id));
         }
 
         #endregion Private Methods

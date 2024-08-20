@@ -15,7 +15,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     /// Textures manager class which handles creating textures from various sources
     /// Or just retrieving them by ID or name.
     /// </summary>
-    internal class TextureMan : ITextureMan
+    public class TextureMan : ITextureMan
     {
         #region Private Fields
 

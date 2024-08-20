@@ -17,8 +17,7 @@ namespace OpenBreed.Wecs.Systems
         /// <summary>
         /// Update system when event occurs
         /// </summary>
-        /// <param name="sender">Event sender</param>
         /// <param name="e">Event data</param>
-        void Update(object sender, TEvent e);
+        void Update(TEvent e);
     }
 }

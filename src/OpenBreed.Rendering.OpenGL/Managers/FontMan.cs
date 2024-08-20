@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    internal class FontMan : IFontMan
+    public class FontMan : IFontMan
     {
         #region Private Fields
 
@@ -26,7 +26,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public FontMan(ITextureMan textureMan, ISpriteMan spriteMan, ISpriteRenderer spriteRenderer, IPrimitiveRenderer primitiveRenderer)
         {
@@ -36,7 +36,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             this.primitiveRenderer = primitiveRenderer;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -50,15 +50,15 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer, primitiveRenderer);
         }
 
-        public void RenderPart(int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox)
+        public void RenderPart(IRenderView view, int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox)
         {
-            primitiveRenderer.Translate(new Vector3(origin.X, origin.Y, order));
-            GetById(fontId).Draw(text, color, clipBox);
+            view.Translate(new Vector3(origin.X, origin.Y, order));
+            GetById(fontId).Draw(view, text, color, clipBox);
         }
 
-        public void RenderAppend(int fontId, string text, Box2 clipBox, Vector2 value)
+        public void RenderAppend(IRenderView view, int fontId, string text, Box2 clipBox, Vector2 value)
         {
-            GetById(fontId).Draw(text, Color4.White, clipBox);
+            GetById(fontId).Draw(view, text, Color4.White, clipBox);
         }
 
         public IFont GetGfxFont(string fontName)
@@ -89,6 +89,35 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return font;
         }
 
+        public void Render(IRenderView view, Box2 clipBox, float dt, FontRenderer fontRenderer)
+        {
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
+            GL.BlendColor(Color4.Black);
+
+            fontRenderer.Invoke(view, clipBox, dt);
+
+            GL.Disable(EnableCap.Blend);
+        }
+
+        public void RenderStart(IRenderView view, Vector2 pos)
+        {
+            view.PushMatrix();
+            view.Translate(new Vector3(pos.X, pos.Y, 0.0f));
+
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
+            GL.BlendColor(Color4.Black);
+        }
+
+        public void RenderEnd(IRenderView view)
+        {
+            view.PopMatrix();
+
+            GL.Disable(EnableCap.Blend);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -102,35 +131,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         internal int GenerateNewId()
         {
             return items.Count;
-        }
-
-        public void Render(Box2 clipBox, float dt, FontRenderer fontRenderer)
-        {
-            GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
-            GL.BlendColor(Color4.Black);
-
-            fontRenderer.Invoke(clipBox, dt);
-
-            GL.Disable(EnableCap.Blend);
-        }
-
-        public void RenderStart(Vector2 pos)
-        {
-            primitiveRenderer.PushMatrix();
-            primitiveRenderer.Translate(new Vector3(pos.X, pos.Y, 0.0f));
-
-            GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-
-            GL.BlendColor(Color4.Black);
-        }
-
-        public void RenderEnd()
-        {
-            primitiveRenderer.PopMatrix();
-
-            GL.Disable(EnableCap.Blend);
         }
 
         #endregion Internal Methods

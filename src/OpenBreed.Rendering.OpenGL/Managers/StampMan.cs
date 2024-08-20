@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    internal class StampMan : IStampMan
+    public class StampMan : IStampMan
     {
         #region Protected Fields
 

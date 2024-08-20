@@ -54,7 +54,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
                 return;
             }
             
-            eventsMan.Raise(entity, new DestroyedEvent(entity.Id));
+            eventsMan.Raise(new DestroyedEvent(entity.Id));
         }
     }
 }

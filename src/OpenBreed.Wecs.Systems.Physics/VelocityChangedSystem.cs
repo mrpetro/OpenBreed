@@ -42,7 +42,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var velocity = entity.Get<VelocityComponent>();
-            eventsMan.Raise(null, new VelocityChangedEvent(entity.Id, velocity.Value));
+            eventsMan.Raise(new VelocityChangedEvent(entity.Id, velocity.Value));
         }
 
         #endregion Protected Methods

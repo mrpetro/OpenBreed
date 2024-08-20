@@ -8,6 +8,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Model.Texts;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
@@ -41,13 +42,12 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IEntityMan entityMan;
         private readonly IFontMan fontMan;
         private readonly VanillaStatusBarHelper hudHelper;
-        private readonly IRenderableFactory renderableFactory;
         private readonly IRepositoryProvider repositoryProvider;
         private readonly SpriteAtlasDataProvider spriteAtlasDataProvider;
         private readonly ISystemFactory systemFactory;
         private readonly ITriggerMan triggerMan;
         private readonly TextsDataProvider textsDataProvider;
-        private readonly IViewClient viewClient;
+        private readonly IWindow viewClient;
         private readonly IWorldMan worldMan;
 
         #endregion Private Fields
@@ -55,10 +55,9 @@ namespace OpenBreed.Sandbox.Worlds
         #region Public Constructors
 
         public SmartcardScreenWorldHelper(ISystemFactory systemFactory,
-                                  IRenderableFactory renderableFactory,
                                   IWorldMan worldMan,
                                   IFontMan fontMan,
-                                  IViewClient viewClient,
+                                  IWindow viewClient,
                                   IEntityMan entityMan,
                                   IEntityFactory entityFactory,
                                   VanillaStatusBarHelper hudHelper,
@@ -72,7 +71,6 @@ namespace OpenBreed.Sandbox.Worlds
                                   TextsDataProvider textsDataProvider)
         {
             this.systemFactory = systemFactory;
-            this.renderableFactory = renderableFactory;
             this.worldMan = worldMan;
             this.fontMan = fontMan;
             this.viewClient = viewClient;

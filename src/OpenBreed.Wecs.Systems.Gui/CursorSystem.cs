@@ -24,14 +24,14 @@ namespace OpenBreed.Wecs.Systems.Gui
         private readonly IEventsMan eventsMan;
         private readonly IInputsMan inputsMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
-        private readonly IViewClient viewClient;
+        private readonly IWindow viewClient;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public CursorSystem(
-            IViewClient viewClient,
+            IWindow viewClient,
             IInputsMan inputsMan,
             IPrimitiveRenderer primitiveRenderer,
             IEventsMan eventsMan)
@@ -46,7 +46,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Public Methods
 
-        public void Render(IRenderContext context)
+        public void Render(IWorldRenderContext context)
         {
             var cursorPos4 = new Vector4(
                 inputsMan.CursorPos.X,
@@ -54,7 +54,7 @@ namespace OpenBreed.Wecs.Systems.Gui
                 0.0f,
                 1.0f);
 
-            cursorPos4 = primitiveRenderer.GetScreenToWorldCoords(cursorPos4);
+            cursorPos4 = context.View.GetScreenToWorldCoords(cursorPos4);
 
             for (int i = 0; i < entities.Count; i++)
             {
@@ -73,11 +73,8 @@ namespace OpenBreed.Wecs.Systems.Gui
             if (delta.X != 0.0f || delta.Y != 0.0f)
                 RaiseCursorMovedEvent(entity);
 
-            if(viewClient.MouseState.IsAnyButtonDown)
+            if(inputsMan.IsMousePressed)
             {
-
-
-
                 RaiseCursorKeyPressedEvent(entity, 0);
 
                 //if(viewClient.MouseState.IsButtonPressed()
@@ -91,12 +88,12 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         private void RaiseCursorMovedEvent(IEntity entity)
         {
-            eventsMan.Raise(entity, new CursorMovedEntityEvent(entity.Id));
+            eventsMan.Raise(new CursorMovedEntityEvent(entity.Id));
         }
 
         private void RaiseCursorKeyPressedEvent(IEntity entity, int keyId)
         {
-            eventsMan.Raise(entity, new CursorKeyPressedEntityEvent(entity.Id, keyId));
+            eventsMan.Raise(new CursorKeyPressedEntityEvent(entity.Id, keyId));
         }
 
         #endregion Private Methods

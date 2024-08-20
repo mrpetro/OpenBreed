@@ -33,7 +33,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
 
         #region Public Methods
 
-        public override void Update(object sender, ActorCollisionEvent e)
+        public override void Update(ActorCollisionEvent e)
         {
             var actorEntity = entityMan.GetById(e.EntityId);
             var otherEntity = entityMan.GetById(e.OtherEntityId);

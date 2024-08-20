@@ -4,6 +4,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Model.Palettes;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
@@ -31,22 +32,20 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private readonly ISystemFactory systemFactory;
-        private readonly IRenderableFactory renderableFactory;
         private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
         private readonly HudHelper hudHelper;
         private readonly CameraHelper cameraHelper;
-        private readonly IViewClient viewClient;
+        private readonly IWindow viewClient;
         private readonly ITriggerMan triggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DebugHudWorldHelper(ISystemFactory systemFactory, IRenderableFactory renderableFactory, IWorldMan worldMan, IEntityMan entityMan, HudHelper hudHelper, CameraHelper cameraHelper, IViewClient viewClient, ITriggerMan triggerMan)
+        public DebugHudWorldHelper(ISystemFactory systemFactory, IWorldMan worldMan, IEntityMan entityMan, HudHelper hudHelper, CameraHelper cameraHelper, IWindow viewClient, ITriggerMan triggerMan)
         {
             this.systemFactory = systemFactory;
-            this.renderableFactory = renderableFactory;
             this.worldMan = worldMan;
             this.entityMan = entityMan;
             this.hudHelper = hudHelper;

@@ -140,7 +140,7 @@ namespace OpenBreed.Wecs.Worlds
             }
 
             if(entities.Add(entity))
-                eventsMan.Raise(null, new EntityLeavingEvent(entity.Id, entity.WorldId));
+                eventsMan.Raise(new EntityLeavingEvent(entity.Id, entity.WorldId));
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             worlds.Remove((World)world);
 
-            eventsMan.Raise(this, new WorldDeinitializedEventArgs(world.Id));
+            eventsMan.Raise(new WorldDeinitializedEventArgs(world.Id));
         }
 
         /// <summary>
@@ -256,17 +256,17 @@ namespace OpenBreed.Wecs.Worlds
         {
             worlds.Add((World)world);
 
-            eventsMan.Raise(this, new WorldInitializedEventArgs(world.Id));
+            eventsMan.Raise(new WorldInitializedEventArgs(world.Id));
         }
 
         private void OnEntityAdded(IEntity entity, int worldId)
         {
-            eventsMan.Raise(entity, new EntityEnteredEvent(entity.Id, worldId));
+            eventsMan.Raise(new EntityEnteredEvent(entity.Id, worldId));
         }
 
         private void OnEntityRemoved(IEntity entity, int worldId)
         {
-            eventsMan.Raise(entity, new EntityLeftEvent(entity.Id, worldId));
+            eventsMan.Raise(new EntityLeftEvent(entity.Id, worldId));
         }
 
         private void RemovePendingEntities()

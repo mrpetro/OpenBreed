@@ -13,12 +13,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj" />
     <ProjectReference Include="..\OpenBreed.Common.Interface\OpenBreed.Common.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Common.Windows\OpenBreed.Common.Windows.csproj" />
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
     <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj" />
     <ProjectReference Include="..\OpenBreed.Editor.UI.Wpf\OpenBreed.Editor.UI.Wpf.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj" />
   </ItemGroup>
 
 </Project>

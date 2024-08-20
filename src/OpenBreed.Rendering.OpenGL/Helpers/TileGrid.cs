@@ -105,7 +105,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             }
         }
 
-        public void Render(Box2 clipBox)
+        public void Render(IRenderView view, Box2 clipBox)
         {
             int leftIndex = (int)clipBox.Min.X / CellSize;
             int bottomIndex = (int)clipBox.Min.Y / CellSize;
@@ -124,12 +124,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
             for (int layerNo = 0; layerNo < LayersNo; layerNo++)
             {
-                primitiveRenderer.PushMatrix();
-                primitiveRenderer.Translate(new Vector3(leftIndex * CellSize, bottomIndex * CellSize, 0.0f));
+                view.PushMatrix();
+                view.Translate(new Vector3(leftIndex * CellSize, bottomIndex * CellSize, 0.0f));
 
                 for (int j = bottomIndex; j < topIndex; j++)
                 {
-                    primitiveRenderer.PushMatrix();
+                    view.PushMatrix();
 
                     for (int i = leftIndex; i < rightIndex; i++)
                     {
@@ -137,16 +137,16 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
                         var cellTile = Cells[index];
 
-                        RenderCellTile(cellTile);
+                        RenderCellTile(view, cellTile);
 
-                        primitiveRenderer.Translate(new Vector3(CellSize, 0.0f, 0.0f));
+                        view.Translate(new Vector3(CellSize, 0.0f, 0.0f));
                     }
 
-                    primitiveRenderer.PopMatrix();
-                    primitiveRenderer.Translate(new Vector3(0.0f, CellSize, 0.0f));
+                    view.PopMatrix();
+                    view.Translate(new Vector3(0.0f, CellSize, 0.0f));
                 }
 
-                primitiveRenderer.PopMatrix();
+                view.PopMatrix();
             }
 
             GL.Disable(EnableCap.Texture2D);
@@ -223,11 +223,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return true;
         }
 
-        private void RenderCellTile(TileCell cellTile)
+        private void RenderCellTile(IRenderView view, TileCell cellTile)
         {
             if (!cellTile.IsEmpty)
             {
-                tileMan.Render(cellTile.AtlasId, cellTile.ImageId);
+                tileMan.Render(view, cellTile.AtlasId, cellTile.ImageId);
             }
         }
 

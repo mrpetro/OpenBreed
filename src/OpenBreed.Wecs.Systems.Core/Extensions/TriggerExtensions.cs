@@ -18,9 +18,9 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
         {
             triggerMan.EventsMan.Subscribe<EntityFrameEvent>(ConditionalAction);
 
-            void ConditionalAction(object sender, EntityFrameEvent args)
+            void ConditionalAction(EntityFrameEvent args)
             {
-                if (!Equals(entity, sender))
+                if (!Equals(entity.Id, args.EntityId))
                     return;
 
                 if (singleTime)

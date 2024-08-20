@@ -69,12 +69,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return totalWidth;
         }
 
-        public void Render(string text, Box2 clipBox, Vector2 pos, float order)
+        public void Render(IRenderView view, string text, Box2 clipBox, Vector2 pos, float order)
         {
             GL.Enable(EnableCap.Texture2D);
-            primitiveRenderer.PushMatrix();
+            view.PushMatrix();
 
-            primitiveRenderer.Translate((int)pos.X, (int)pos.Y, order);
+            view.Translate((int)pos.X, (int)pos.Y, order);
 
             var caretPosX = 0.0f;
 
@@ -85,38 +85,38 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 switch (ch)
                 {
                     case '\r':
-                        primitiveRenderer.Translate(-caretPosX, 0.0f, 0.0f);
+                        view.Translate(-caretPosX, 0.0f, 0.0f);
                         caretPosX = 0.0f;
                         continue;
                     case '\n':
-                        primitiveRenderer.Translate(0.0f, -Height, 0.0f);
+                        view.Translate(0.0f, -Height, 0.0f);
                         continue;
                     default:
                         break;
                 }
 
-                Draw(ch, clipBox);
+                Draw(view, ch, clipBox);
                 var width = GetWidth(ch);
                 caretPosX += width;
-                primitiveRenderer.Translate(width, 0.0f, 0.0f);
+                view.Translate(width, 0.0f, 0.0f);
             }
 
-            primitiveRenderer.PopMatrix();
+            view.PopMatrix();
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public void Draw(char ch, Box2 clipBox)
+        public void Draw(IRenderView view, char ch, Box2 clipBox)
         {
             (int, int, float, float) data;
             if (Lookup.TryGetValue(ch, out data))
             {
                 var atlasId = data.Item1;
                 var spriteIndex = data.Item2;
-                spriteRenderer.Render(new Vector3(0, 0, 0), Vector2.One, Color4.White, atlasId, spriteIndex);
+                spriteRenderer.Render(view, new Vector3(0, 0, 0), Vector2.One, Color4.White, atlasId, spriteIndex);
             }
         }
 
-        public void Draw(string text, Color4 color, Box2 clipBox)
+        public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox)
         {
             var caretPosX = 0.0f;
             var caretPosY = 0.0f;
@@ -142,7 +142,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                         break;
                 }
 
-                spriteRenderer.Render(new Vector3(caretPosX, caretPosY - h, 0.0f), Vector2.One, color, atlasId, spriteIndex);
+                spriteRenderer.Render(view, new Vector3(caretPosX, caretPosY - h, 0.0f), Vector2.One, color, atlasId, spriteIndex);
 
                 caretPosX += w;
             }

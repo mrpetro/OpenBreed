@@ -29,7 +29,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             this.fixtureMan = fixtureMan;
         }
 
-        public override void Update(object sender, ContactEndedEvent e)
+        public override void Update(ContactEndedEvent e)
         {
             var entity = entityMan.GetById(e.EntityId);
             var tc = entity.TryGet<TrackingComponent>();
@@ -71,7 +71,7 @@ namespace OpenBreed.Sandbox.Wecs.Systems
             this.fixtureMan = fixtureMan;
         }
 
-        public override void Update(object sender, ContactStartedEvent e)
+        public override void Update(ContactStartedEvent e)
         {
             var entity = entityMan.GetById(e.EntityId);
             var tc = entity.TryGet<TrackingComponent>();

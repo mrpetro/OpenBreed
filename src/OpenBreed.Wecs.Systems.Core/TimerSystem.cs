@@ -69,17 +69,17 @@ namespace OpenBreed.Wecs.Systems.Core
 
         private void RaiseUpdateEvent(IEntity entity)
         {
-            eventsMan.Raise(entity, new EntityFrameEvent(entity.Id));
+            eventsMan.Raise(new EntityFrameEvent(entity.Id));
         }
 
         private void RaiseTimerUpdateEvent(IEntity entity, TimerData timerData)
         {
-            eventsMan.Raise(entity, new TimerUpdateEventArgs(entity.Id, timerData.TimerId));
+            eventsMan.Raise(new TimerUpdateEventArgs(entity.Id, timerData.TimerId));
         }
 
         private void RaiseTimerElapsedEvent(IEntity entity, TimerData timerData)
         {
-            eventsMan.Raise(entity, new TimerElapsedEventArgs(entity.Id, timerData.TimerId));
+            eventsMan.Raise(new TimerElapsedEventArgs(entity.Id, timerData.TimerId));
         }
 
         #endregion Private Methods

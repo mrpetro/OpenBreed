@@ -1,11 +1,13 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenBreed.Rendering.Interface.Managers;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Worlds
 {
-    public interface IRenderContext
+    public interface IWorldRenderContext
     {
         #region Public Properties
 
+        Rendering.Interface.Managers.IRenderView View { get; }
         int Depth { get; }
         float Dt { get; }
         Box2 ViewBox { get; }

@@ -15,6 +15,9 @@ using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Data;
 using OpenBreed.Rendering.OpenGL.Managers;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Desktop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,23 +32,31 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ITextureMan, TextureMan>();
-                services.AddSingleton<ITileMan, TileMan>();
                 services.AddSingleton<ITileGridFactory, TileGridFactory>();
-                services.AddSingleton<IRenderableFactory, RenderableFactory>();
-                services.AddSingleton<ITileGridFactory, TileGridFactory>();
-                services.AddSingleton<SpriteMan, SpriteMan>();
-                services.AddSingleton<PictureMan, PictureMan>();
-                services.AddSingleton<PaletteMan, PaletteMan>();
-                services.AddSingleton<ISpriteMan>((sp) => sp.GetService<SpriteMan>());
-                services.AddSingleton<IPictureMan>((sp) => sp.GetService<PictureMan>());
-                services.AddSingleton<IPaletteMan>((sp) => sp.GetService<PaletteMan>());
-                services.AddSingleton<IStampMan, StampMan>();
-                services.AddSingleton<IFontMan, FontMan>();
-                services.AddSingleton<IPrimitiveRenderer, PrimitiveRenderer>();
-                services.AddSingleton<ISpriteRenderer, SpriteRenderer>();
-                services.AddSingleton<IPictureRenderer, PictureRenderer>();
                 services.AddSingleton<IRenderingMan, RenderingMan>();
+                services.AddSingleton<Func<IGraphicsContext, IRenderContext>>((sp)
+                    => (graphicalContext)
+                    => new OpenTKRenderContext(sp.GetRequiredService<ILogger>(), sp.GetRequiredService<IEventsMan>(), graphicalContext));
+            });
+        }
+
+
+        public static void SetupGLWindow(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IWindow, OpenTKWindow>();
+                services.AddSingleton((sp) => sp.GetRequiredService<IWindow>().Context);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Primitives);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Sprites);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Fonts);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Textures);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Pictures);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().PictureRenderer);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Tiles);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().TileStamps);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Palettes);
+                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().SpriteRenderer);
             });
         }
 
