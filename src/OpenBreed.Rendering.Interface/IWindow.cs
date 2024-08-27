@@ -19,16 +19,6 @@ namespace OpenBreed.Rendering.Interface
         IRenderContext Context { get; }
 
         /// <summary>
-        /// Client display transformation matrix
-        /// </summary>
-        Matrix4 ClientTransform { get; }
-
-        /// <summary>
-        /// Client display aspect ratio
-        /// </summary>
-        float ClientRatio { get; }
-
-        /// <summary>
         /// Client display rectangle
         /// </summary>
         Box2i ClientRectangle { get; }

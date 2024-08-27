@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Rendering.Interface.Renderers
 {
-    public interface ITrigger
+    public interface ITileStampRenderer
     {
+
+
     }
 }

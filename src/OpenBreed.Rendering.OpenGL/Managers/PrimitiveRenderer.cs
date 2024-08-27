@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Interface;
+﻿using OpenBreed.Core.Interface.Extensions;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK.Graphics.OpenGL4;
@@ -29,6 +30,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private int unitCircleVao;
         private int unitCircleFilledVao;
         private int unitRectangleVao;
+        private int unitLineVao;
 
         #endregion Private Fields
 
@@ -138,12 +140,22 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             DrawUnitCircle(view, model, color, filled);
         }
 
-        public void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type)
+        public void DrawLine(IRenderView view, Vector2 startPoint, Vector2 endPoint, Color4 color)
         {
-            var w = 2.0f;
-            var h = 2.0f;
+            var model = Matrix4.CreateTranslation(startPoint.X, startPoint.Y, 0.0f);
+            var uAxis = endPoint - startPoint;
+            var angle = uAxis.CalculateAngle(Vector2.UnitX);
+            var rotation = Matrix4.CreateFromAxisAngle(Vector3.UnitZ, angle); 
+
+            model =  rotation * Matrix4.CreateScale(uAxis.X, uAxis.Y, 1.0f) * model;
+
+            DrawUnitLine(view, model, color);
+        }
+
+        public void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type, float size = 2.0f)
+        {
             var model = Matrix4.CreateTranslation(pos.X, pos.Y, 0.0f);
-            model = Matrix4.CreateScale(w, h, 1.0f) * model;
+            model = Matrix4.CreateScale(size, size, 1.0f) * model;
 
             switch (type)
             {
@@ -156,6 +168,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                     break;
 
                 case PointType.Cross:
+                    DrawLine(view, new Vector2(pos.X - size, pos.Y), new Vector2(pos.X + size, pos.Y), color);
+                    DrawLine(view, new Vector2(pos.X, pos.Y - size), new Vector2(pos.X, pos.Y + size), color);
+                    break;
                 case PointType.Ex:
                 default:
                     throw new NotImplementedException($"Point type '{type}' not implemented.");
@@ -212,6 +227,19 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.BindVertexArray(0);
         }
 
+        public void DrawUnitLine(IRenderView view, Matrix4 model, Color4 color)
+        {
+            nontexturedShader.Use();
+            nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
+            nontexturedShader.SetMatrix4("model", model);
+            nontexturedShader.SetMatrix4("view", view.View);
+            nontexturedShader.SetMatrix4("projection", view.Projection);
+
+            GL.BindVertexArray(unitLineVao);
+            GL.DrawArrays(PrimitiveType.Lines, 0, 2);
+            GL.BindVertexArray(0);
+        }
+
         public void DrawUnitCircle(IRenderView view, Matrix4 model, Color4 color, bool filled = false)
         {
             nontexturedShader.Use();
@@ -228,7 +256,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             else
             {
                 GL.BindVertexArray(unitCircleVao);
-                GL.DrawArrays(PrimitiveType.LineLoop, 0, CIRCLE_PARTS_NO + 1);
+                GL.DrawArrays(PrimitiveType.LineLoop, 0, CIRCLE_PARTS_NO);
             }
 
             GL.BindVertexArray(0);
@@ -341,16 +369,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private void SetupDefaultVertices()
         {
-            var unitBoxBuilder = CreatePosArray();
-            unitBoxBuilder.AddVertex(1.0f, 1.0f, 0.0f);
-            unitBoxBuilder.AddVertex(1.0f, 0.0f, 0.0f);
-            unitBoxBuilder.AddVertex(0.0f, 0.0f, 0.0f);
-            unitBoxBuilder.AddVertex(0.0f, 1.0f, 0.0f);
+            SetupUnitLineVertices();
 
-            unitBoxBuilder.AddTriangleIndices(0, 1, 3);
-            unitBoxBuilder.AddTriangleIndices(1, 2, 3);
-
-            unitBoxFilledVao = unitBoxBuilder.CreateVao();
+            SetupUnitBoxVertices();
 
             var unitRectangleBuilder = CreatePosArray();
             unitRectangleBuilder.AddVertex(0.5f, 0.5f, 0.0f);
@@ -391,6 +412,30 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             unitCircleBuilder.AddLoopIndices(Enumerable.Range(0, CIRCLE_PARTS_NO + 1).Append(1).ToArray());
 
             unitCircleFilledVao = unitCircleBuilder.CreateVao();
+        }
+
+        private void SetupUnitLineVertices()
+        {
+            var unitLineBuilder = CreatePosArray();
+            unitLineBuilder.AddVertex(0.0f, 0.0f, 0.0f);
+            unitLineBuilder.AddVertex(1.0f, 0.0f, 0.0f);
+            unitLineBuilder.AddLoopIndices(0, 1);
+
+            unitLineVao = unitLineBuilder.CreateVao();
+        }
+
+        private void SetupUnitBoxVertices()
+        {
+            var unitBoxBuilder = CreatePosArray();
+            unitBoxBuilder.AddVertex(1.0f, 1.0f, 0.0f);
+            unitBoxBuilder.AddVertex(1.0f, 0.0f, 0.0f);
+            unitBoxBuilder.AddVertex(0.0f, 0.0f, 0.0f);
+            unitBoxBuilder.AddVertex(0.0f, 1.0f, 0.0f);
+
+            unitBoxBuilder.AddTriangleIndices(0, 1, 3);
+            unitBoxBuilder.AddTriangleIndices(1, 2, 3);
+
+            unitBoxFilledVao = unitBoxBuilder.CreateVao();
         }
 
         private void SetupShaders()

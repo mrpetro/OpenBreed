@@ -21,6 +21,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private readonly Stack<Matrix4> modelMatrixStack = new Stack<Matrix4>();
         private readonly Stack<IPalette> paletteStack = new Stack<IPalette>();
+        private readonly HostCoordinateSystemConverter hostCoordinateSystemConverter;
         private readonly RenderDelegate renderer;
         private readonly Box2 boxNormalized;
         private IPalette currentPalette;
@@ -32,10 +33,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public RenderView(
             IRenderContext context,
+            HostCoordinateSystemConverter hostCoordinateSystemConverter,
             RenderDelegate renderer,
             Box2 boxNormalized)
         {
             Context = context;
+            this.hostCoordinateSystemConverter = hostCoordinateSystemConverter;
             this.renderer = renderer;
             this.boxNormalized = boxNormalized;
         }
@@ -105,21 +108,29 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             OpenTK.Graphics.OpenGL.GL.Disable(OpenTK.Graphics.OpenGL.EnableCap.AlphaTest);
         }
 
-        public Vector4 GetCoordinates(Vector4 coords)
+        public Vector2i GetHostToViewCoords(Vector2i point)
         {
-            throw new NotImplementedException();
+            point = hostCoordinateSystemConverter.Invoke(point);
+
+            return point - Box.Min;
         }
 
-        public Vector4 GetScreenToWorldCoords(Vector4 coords)
+        public Vector4 GetViewToWorldCoords(Vector2i point)
         {
             var mat = View;
             mat.Invert();
-            var coordsT = coords * mat;
+            var coordsT = new Vector4(point.X, point.Y, 0.0f, 1.0f) * mat;
             coordsT.W = 1.0f / coordsT.W;
             coordsT.X *= coordsT.W;
             coordsT.Y *= coordsT.W;
             coordsT.Z *= coordsT.W;
             return coordsT;
+        }
+
+        public Vector4 GetHostToWorldCoords(Vector2i point)
+        {
+            point = GetHostToViewCoords(point);
+            return GetViewToWorldCoords(point);
         }
 
         public void MultMatrix(Matrix4 transform)

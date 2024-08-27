@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenBreed.Core.Managers
+namespace OpenBreed.Core.Interface.Managers
 {
     public interface IJobBuilder
     {

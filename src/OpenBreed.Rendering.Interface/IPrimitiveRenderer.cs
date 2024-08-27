@@ -23,13 +23,15 @@ namespace OpenBreed.Rendering.Interface
         void DrawRectangle(IRenderView view, Box2 clipBox, Color4 color, bool filled = false);
         void DrawCircle(IRenderView view, Vector2 pos, float radius, Color4 color, bool filled = false);
         void DrawBox(IRenderView view, Box2 clipBox, Color4 color);
-        void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type);
+        void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type, float size = 2.0f);
+        void DrawLine(IRenderView view, Vector2 startPoint, Vector2 endPoint, Color4 color);
 
         void DrawNested(IRenderView view, Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction);
 
         void DrawUnitRectangle(IRenderView view, Matrix4 model, Color4 red, bool filled = false);
         void DrawUnitBox(IRenderView view, Matrix4 model, Color4 color);
         void DrawUnitCircle(IRenderView view, Matrix4 model, Color4 color, bool filled = false);
+        void DrawUnitLine(IRenderView view, Matrix4 model, Color4 color);
         void DrawBrightnessBox(IRenderView view, float brightness);
 
         void Load();

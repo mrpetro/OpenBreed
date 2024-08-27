@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Core;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Events;
@@ -16,6 +17,7 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows;
 
 namespace OpenBreed.Rendering.OpenGL
@@ -45,16 +47,17 @@ namespace OpenBreed.Rendering.OpenGL
             this.gameWindow.Resize += Window_Resize;
             this.gameWindow.UpdateFrame += Window_UpdateFrame;
             this.gameWindow.RenderFrame += Window_RenderFrame;
+            this.gameWindow.MouseDown += GameWindow_MouseUp;
+            this.gameWindow.MouseDown += GameWindow_MouseDown;
+            this.gameWindow.MouseEnter += GameWindow_MouseEnter;
+            this.gameWindow.MouseLeave += GameWindow_MouseLeave;
+            this.gameWindow.MouseMove += GameWindow_MouseMove;
+            this.gameWindow.MouseWheel += GameWindow_MouseWheel; ;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public Matrix4 ClientTransform { get; private set; }
-
-        public float ClientRatio
-        { get { return ClientRectangle.Size.X / (float)ClientRectangle.Size.Y; } }
 
         public Box2i ClientRectangle => gameWindow.ClientRectangle;
 
@@ -80,17 +83,61 @@ namespace OpenBreed.Rendering.OpenGL
 
         private void Window_Load()
         {
-            Context = new OpenTKRenderContext(logger, eventsMan, gameWindow.Context);
-            eventsMan.Raise(new WindowLoadEvent(this));
+            Context = new OpenTKRenderContext(logger, eventsMan, gameWindow.Context, GetRenderContextPosition);
+            eventsMan.Raise(new WindowLoadEvent(this, Context));
+        }
+
+        private void GameWindow_MouseLeave()
+        {
+            var cursorPosition = gameWindow.MousePosition;
+            Context.CursorLeave(0, (Vector2i)cursorPosition);
+        }
+
+        private void GameWindow_MouseEnter()
+        {
+            var cursorPosition = gameWindow.MousePosition;
+            Context.CursorEnter(0, (Vector2i)cursorPosition);
+        }
+
+        private void GameWindow_MouseUp(MouseButtonEventArgs e)
+        {
+            var cursorPosition = gameWindow.MousePosition;
+            Context.CursorUp(0, (Vector2i)cursorPosition, (CursorKeys)e.Button);
+        }
+
+        private void GameWindow_MouseDown(MouseButtonEventArgs e)
+        {
+            var cursorPosition = gameWindow.MousePosition;
+            Context.CursorDown(0, (Vector2i)cursorPosition, (CursorKeys)e.Button);
+        }
+
+        private void GameWindow_MouseMove(MouseMoveEventArgs e)
+        {
+            var cursorPosition = e.Position;
+            Context.CursorMove(0, (Vector2i)cursorPosition);
+        }
+
+        private void GameWindow_MouseWheel(MouseWheelEventArgs e)
+        {
+            var cursorPosition = gameWindow.MousePosition;
+            Context.CursorWheel(0, (Vector2i)cursorPosition, (int)e.OffsetY);
+        }
+
+        private Vector2i GetRenderContextPosition(Vector2i point)
+        {
+            var pointV = new Vector4(point.X, point.Y, 0.0f, 1.0f);
+
+            var translateTranform = Matrix4.CreateTranslation(0.0f, gameWindow.ClientSize.Y, 0.0f);
+            var flipYTransform = Matrix4.CreateScale(1.0f, -1.0f, 1.0f);
+  
+            var matT = flipYTransform * translateTranform;
+            pointV *= matT;
+
+            return new Vector2i((int)pointV.X, (int)pointV.Y);
         }
 
         private void Window_Resize(ResizeEventArgs obj)
         {
-            ClientTransform = Matrix4.Identity;
-            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Size.Y, 0.0f));
-            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(-ClientRectangle.Size.X / 2.0f, ClientRectangle.Size.Y / 2.0f, 0.0f));
-            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(2.0f / ClientRectangle.Size.X, -2.0f / ClientRectangle.Size.Y, 1.0f));
-
             Context.Resize(obj.Width, obj.Height);
 
             eventsMan.Raise(new WindowResizeEvent(this, ClientRectangle.Size.X, ClientRectangle.Size.Y));

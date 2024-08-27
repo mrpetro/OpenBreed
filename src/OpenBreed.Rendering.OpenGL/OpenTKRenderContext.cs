@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Events;
@@ -22,7 +23,7 @@ namespace OpenBreed.Rendering.OpenGL
         #region Private Fields
 
         private readonly IGraphicsContext graphicsContext;
-
+        private readonly HostCoordinateSystemConverter hostCoordinateSystemConverter;
         private readonly ILogger logger;
         private readonly IEventsMan eventsMan;
         private readonly List<RenderView> views = new List<RenderView>();
@@ -34,11 +35,13 @@ namespace OpenBreed.Rendering.OpenGL
         public OpenTKRenderContext(
             ILogger logger,
             IEventsMan eventsMan,
-            IGraphicsContext graphicsContext)
+            IGraphicsContext graphicsContext,
+            HostCoordinateSystemConverter hostCoordinateSystemConverter)
         {
             this.logger = logger;
             this.eventsMan = eventsMan;
             this.graphicsContext = graphicsContext;
+            this.hostCoordinateSystemConverter = hostCoordinateSystemConverter;
 
             Primitives = new PrimitiveRenderer();
             Textures = new TextureMan(logger);
@@ -75,29 +78,29 @@ namespace OpenBreed.Rendering.OpenGL
 
         public IRenderView CreateView(RenderDelegate renderer, float minX = 0, float minY = 0, float maxX = 1, float maxY = 1)
         {
-            var renderView = new RenderView(this, renderer, new Box2(new Vector2(minX, minY), new Vector2(maxX, maxY)));
+            var renderView = new RenderView(this, hostCoordinateSystemConverter, renderer, new Box2(new Vector2(minX, minY), new Vector2(maxX, maxY)));
             views.Add(renderView);
             return renderView;
         }
 
-        public void CursorDown(int cursorId, Vector2i point, int keyCode)
+        public void CursorDown(int cursorId, Vector2i point, CursorKeys cursorKey)
         {
             if (!TryGetView(point, out RenderView view))
             {
                 return;
             }
 
-            eventsMan.Raise(new ViewCursorDownEvent(view, cursorId, keyCode));
+            eventsMan.Raise(new ViewCursorDownEvent(view, cursorId, cursorKey));
         }
 
-        public void CursorUp(int cursorId, Vector2i point, int keyCode)
+        public void CursorUp(int cursorId, Vector2i point, CursorKeys cursorKey)
         {
             if (!TryGetView(point, out RenderView view))
             {
                 return;
             }
 
-            eventsMan.Raise(new ViewCursorUpEvent(view, cursorId, keyCode));
+            eventsMan.Raise(new ViewCursorUpEvent(view, cursorId, cursorKey));
         }
 
         public void CursorEnter(int cursorId, Vector2i point)
@@ -125,7 +128,18 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
+            point = view.GetHostToViewCoords(point);
             eventsMan.Raise(new ViewCursorMoveEvent(view, cursorId, point));
+        }
+
+        public void CursorWheel(int cursorId, Vector2i point, int wheelDelta)
+        {
+            if (!TryGetView(point, out RenderView view))
+            {
+                return;
+            }
+
+            eventsMan.Raise(new ViewCursorWheelEvent(view, cursorId, wheelDelta));
         }
 
         public void Render(float dt)

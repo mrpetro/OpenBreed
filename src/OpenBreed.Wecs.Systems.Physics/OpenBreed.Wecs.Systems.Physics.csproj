@@ -11,6 +11,7 @@
 	</ItemGroup>
 	
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Core.Interface\OpenBreed.Core.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Physics\OpenBreed.Wecs.Components.Physics.csproj" />

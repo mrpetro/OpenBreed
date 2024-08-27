@@ -11,6 +11,7 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Core.Managers;
 using OpenBreed.Sandbox.Wecs.Components;
+using OpenBreed.Core.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Extensions
 {

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Sandbox.Wecs.Components;
 using OpenBreed.Wecs;

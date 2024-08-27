@@ -3,6 +3,7 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Core;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Palettes;

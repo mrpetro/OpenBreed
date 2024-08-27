@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Rendering.Interface.Managers;
+using System;
 
 namespace OpenBreed.Rendering.Interface.Events
 {
@@ -6,9 +7,10 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public WindowLoadEvent(IWindow window)
+        public WindowLoadEvent(IWindow window, IRenderContext renderContext)
         {
             Window = window;
+            RenderContext = renderContext;
         }
 
         #endregion Public Constructors
@@ -16,6 +18,7 @@ namespace OpenBreed.Rendering.Interface.Events
         #region Public Properties
 
         public IWindow Window { get; }
+        public IRenderContext RenderContext { get; }
 
         #endregion Public Properties
     }

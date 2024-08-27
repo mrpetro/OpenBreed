@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface;
@@ -48,13 +49,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         public void Render(IWorldRenderContext context)
         {
-            var cursorPos4 = new Vector4(
-                inputsMan.CursorPos.X,
-                inputsMan.CursorPos.Y,
-                0.0f,
-                1.0f);
-
-            cursorPos4 = context.View.GetScreenToWorldCoords(cursorPos4);
+            var cursorPos4 = context.View.GetHostToWorldCoords((Vector2i)inputsMan.CursorPos);
 
             for (int i = 0; i < entities.Count; i++)
             {

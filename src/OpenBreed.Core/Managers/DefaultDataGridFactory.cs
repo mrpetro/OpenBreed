@@ -1,4 +1,7 @@
-﻿namespace OpenBreed.Core.Managers
+﻿using OpenBreed.Core.Interface;
+using OpenBreed.Core.Interface.Managers;
+
+namespace OpenBreed.Core.Managers
 {
     internal class DefaultDataGridFactory : IDataGridFactory
     {

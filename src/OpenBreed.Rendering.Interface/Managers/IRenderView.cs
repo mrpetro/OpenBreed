@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.Interface.Managers
 {
+    public delegate Vector2i HostCoordinateSystemConverter(Vector2i point);
+
     public interface IRenderView
     {
         #region Public Events
@@ -57,9 +59,9 @@ namespace OpenBreed.Rendering.Interface.Managers
 
         void SetProjection(Matrix4 matrix4);
 
-        Vector4 GetCoordinates(Vector4 coords);
-
-        Vector4 GetScreenToWorldCoords(Vector4 coords);
+        Vector4 GetViewToWorldCoords(Vector2i point);
+        Vector4 GetHostToWorldCoords(Vector2i point);
+        Vector2i GetHostToViewCoords(Vector2i point);
 
         void SetPalette(IPalette palette);
 

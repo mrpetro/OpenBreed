@@ -19,21 +19,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using OpenTK.Windowing.Common;
-using System.Net;
-using OpenBreed.Input.Interface;
-using System.Windows.Controls;
-using OpenBreed.Rendering.OpenGL.Managers;
-using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface.Events;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OpenBreed.Core.Interface.Managers;
 
-namespace RendererTest.Wpf.App.VM
+namespace OpenBreed.Editor.VM.Base
 {
-    public class RendererVm : BaseViewModel
+    public class RenderViewBaseVM : BaseViewModel
     {
-        private readonly IEventsMan eventsMan;
         #region Private Fields
+
+        private readonly IEventsMan eventsMan;
 
         private readonly Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> renderContextProvider;
         private Vector2i cursorPos;
@@ -42,14 +38,14 @@ namespace RendererTest.Wpf.App.VM
         private bool cursorScroll;
 
         private IRenderContext renderContext;
-        private IRenderView renderView1;
+        private IRenderView renderView;
         private IRenderView renderView2;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RendererVm(IEventsMan eventsMan, 
+        public RenderViewBaseVM(IEventsMan eventsMan,
             Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> renderContextProvider)
         {
             this.eventsMan = eventsMan;
@@ -75,12 +71,8 @@ namespace RendererTest.Wpf.App.VM
         private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
         {
             renderContext = renderContextProvider.Invoke(graphicsContext, hostCoordinateSystemConverter);
-
-            renderView1 = renderContext.CreateView(OnRender1, 0.02f, 0.3f, 0.5f, 1.0f);
-            renderView1.Reset();
-            renderView2 = renderContext.CreateView(OnRender2, 0.5f, 0.0f, 1.0f, 1.0f);
-            renderView2.Reset();
-
+            renderView = renderContext.CreateView(OnRender, 0.0f, 0.0f, 1.0f, 1.0f);
+            renderView.Reset();
 
             return renderContext;
         }
@@ -100,7 +92,7 @@ namespace RendererTest.Wpf.App.VM
 
         private void OnCursorDown(ViewCursorDownEvent e)
         {
-            if(e.Key ==CursorKeys.Right)
+            if (e.Key == CursorKeys.Right)
             {
                 cursorScroll = true;
             }
@@ -123,7 +115,7 @@ namespace RendererTest.Wpf.App.VM
             view.Context.Fonts.Render(view, new Box2(view.Box.Min, view.Box.Max), dt, RenderTexts);
         }
 
-        private void OnRender1(IRenderView view, Matrix4 transform, float dt)
+        private void OnRender(IRenderView view, Matrix4 transform, float dt)
         {
             if (cursorView == view)
                 DrawCursor(view, dt);
@@ -131,22 +123,14 @@ namespace RendererTest.Wpf.App.VM
             view.Context.Primitives.DrawRectangle(view, new Box2(0, 0, 20, 30), Color4.Red, filled: true);
         }
 
-        private void OnRender2(IRenderView view, Matrix4 transform, float dt)
-        {
-            if (cursorView == view)
-                DrawCursor(view, dt);
-
-            view.Context.Primitives.DrawRectangle(view, new Box2(0, 0, 200, 30), Color4.Blue, filled: true);
-        }
-
         private void RenderTexts(IRenderView view, Box2 clipBox, float dt)
         {
-            var cPos = view.GetViewToWorldCoords(cursorPos);
+            var textPos = view.GetViewToWorldCoords(cursorPos);
 
-            var font = view.Context.Fonts.GetOSFont("ARIAL", 12);
+            var font = view.Context.Fonts.GetOSFont("ARIAL", 9);
 
-            view.Context.Fonts.RenderStart(view, new Vector2(cPos.X, cPos.Y));
-            view.Context.Fonts.RenderPart(view, font.Id, $"({cPos.X},{cPos.Y})", Vector2.Zero, Color4.Green, 100, clipBox);
+            view.Context.Fonts.RenderStart(view, new Vector2(textPos.X + 5, textPos.Y + 5));
+            view.Context.Fonts.RenderPart(view, font.Id, $"({textPos.X},{textPos.Y})", Vector2.Zero, Color4.Green, 100, clipBox);
             view.Context.Fonts.RenderEnd(view);
         }
 

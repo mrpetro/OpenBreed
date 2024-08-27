@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Gui.Events;
 using OpenBreed.Wecs.Worlds;

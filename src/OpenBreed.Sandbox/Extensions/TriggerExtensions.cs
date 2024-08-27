@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Core.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Extensions
 {

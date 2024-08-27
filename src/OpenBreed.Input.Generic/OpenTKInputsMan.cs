@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Input.Interface.Events;
@@ -32,12 +33,12 @@ namespace OpenBreed.Input.Generic
             this.gameWindow = gameWindow;
             this.eventsMan = eventsMan;
 
-            gameWindow.MouseMove += OnMouseMove;
+            //gameWindow.MouseMove += OnMouseMove;
             gameWindow.MouseWheel += OnMouseWheel;
             gameWindow.KeyDown += OnKeyDown;
             gameWindow.KeyUp += OnKeyUp;
-            gameWindow.MouseDown += OnMouseDown;
-            gameWindow.MouseUp += OnMouseUp;
+            //gameWindow.MouseDown += OnMouseDown;
+            //gameWindow.MouseUp += OnMouseUp;
 
             oldKeyboardState = gameWindow.KeyboardState.GetSnapshot();
         }
@@ -143,7 +144,7 @@ namespace OpenBreed.Input.Generic
         private void OnMouseMove(MouseMoveEventArgs e)
         {
             eventsMan.Raise(new MouseMoveEvent());
-            //UpdateCursorPos(new Vector2(e.Position.X, e.Position.Y));
+            UpdateCursorPos(new Vector2(e.Position.X, e.Position.Y));
         }
 
         private void OnMouseWheel(MouseWheelEventArgs e)
@@ -152,12 +153,11 @@ namespace OpenBreed.Input.Generic
             //UpdateWheelPos(e.OffsetY);
         }
 
-        //private void UpdateCursorPos(Vector2 newPos)
-        //{
-        //    var newPos4 = new Vector4(newPos) { W = 1 };
-        //    newPos4 *= clientMan.ClientTransform;
-        //    CursorPos = new Vector2(newPos4.X, newPos4.Y);
-        //}
+        private void UpdateCursorPos(Vector2 newPos)
+        {
+            var newPos4 = new Vector4(newPos) { W = 1 };
+            CursorPos = new Vector2(newPos4.X, newPos4.Y);
+        }
 
         private void UpdateWheelPos(float newWheelPos)
         {

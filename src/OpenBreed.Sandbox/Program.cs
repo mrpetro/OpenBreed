@@ -99,6 +99,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using OpenBreed.Rendering.Interface.Extensions;
+using OpenBreed.Core.Interface;
+using OpenBreed.Core.Interface.Managers;
 
 namespace OpenBreed.Sandbox
 {
@@ -151,7 +153,7 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupGameWindow(640, 480, $"{appName} v{infoVersion}");
             hostBuilder.SetupGLWindow();
-
+            hostBuilder.SetupGLRenderContextComponents();
             hostBuilder.SetupWindowsDrawingContext();
 
             hostBuilder.SetupBuilderFactory((builderFactory, sp) =>
@@ -336,14 +338,13 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupFixtureTypes();
             hostBuilder.SetupViewportCreator();
 
+            hostBuilder.ConfigureGraphicsDataLoaders();
+
             hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
             {
+                dataLoaderFactory.RegisterGraphicsDataLoader(sp);
                 dataLoaderFactory.SetupAnimationDataLoader<IEntity>(sp);
                 dataLoaderFactory.SetupMapLegacyDataLoader(sp);
-                dataLoaderFactory.SetupTileSetDataLoader(sp);
-                dataLoaderFactory.SetupTileStampDataLoader(sp);
-                dataLoaderFactory.SetupSpriteSetDataLoader(sp);
-                dataLoaderFactory.SetupPictureDataLoader(sp);
                 dataLoaderFactory.SetupSoundSampleDataLoader(sp);
                 dataLoaderFactory.SetupScriptDataLoader(sp);
             });
@@ -420,7 +421,7 @@ namespace OpenBreed.Sandbox
             eventsMan = host.Services.GetService<IEventsMan>();
 
             eventsMan.Subscribe<WindowUpdateEvent>((a) => OnUpdateFrame(a.Dt));
-            eventsMan.Subscribe<WindowLoadEvent>((a) => OnLoad());
+            eventsMan.Subscribe<WindowLoadEvent>(OnWindowLoad);
         }
 
         #endregion Public Constructors
@@ -821,9 +822,9 @@ namespace OpenBreed.Sandbox
             }
         }
 
-        private void OnLoad()
+        private void OnWindowLoad(WindowLoadEvent e)
         {
-            var renderView = window.Context.CreateView(OnRenderFrame);
+            var renderView = e.RenderContext.CreateView(OnRenderFrame);
 
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
 

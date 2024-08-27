@@ -35,16 +35,7 @@
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.RowSpan="1" Header="Tiles view">
-            <Wpf:GLWpfControlEx x:Name="OpenTkControl"
-                                InitFunc="{Binding InitAction}" >
-                <behaviors:Interaction.Triggers>
-                    <behaviors:EventTrigger EventName="MouseDown">
-                        <behaviors:InvokeCommandAction Command="{Binding MouseDownCommand}"
-                                                       PassEventArgsToCommand="True"
-                                                       EventArgsConverter="{StaticResource eventArgsConverter}" />
-                    </behaviors:EventTrigger>
-                </behaviors:Interaction.Triggers>
-            </Wpf:GLWpfControlEx>
+            <Wpf:GLWpfControlEx DataContext="{Binding View}" x:Name="OpenTkControl" InitFunc="{Binding InitFunc}" />
         </GroupBox>
         <StatusBar Grid.Row="2" >
             <StatusBarItem>

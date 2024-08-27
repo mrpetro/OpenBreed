@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Extensions
+namespace OpenBreed.Core.Interface.Extensions
 {
     public static class EnumerableExtensions
     {

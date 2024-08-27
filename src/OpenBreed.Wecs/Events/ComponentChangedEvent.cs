@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Events;
+using OpenBreed.Core.Interface.Events;
 using OpenBreed.Wecs.Components;
 
 namespace OpenBreed.Wecs.Events

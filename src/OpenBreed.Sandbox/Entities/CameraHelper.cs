@@ -4,6 +4,7 @@ using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;

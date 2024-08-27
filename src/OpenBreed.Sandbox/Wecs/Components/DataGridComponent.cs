@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common.Interface;
 using OpenBreed.Core;
+using OpenBreed.Core.Interface;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components;
 using System;

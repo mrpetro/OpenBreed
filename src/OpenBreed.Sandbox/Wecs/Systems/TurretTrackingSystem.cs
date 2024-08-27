@@ -12,6 +12,7 @@ using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Sandbox.Entities;
+using OpenBreed.Core.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Wecs.Systems
 {

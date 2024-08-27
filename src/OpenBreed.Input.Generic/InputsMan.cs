@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Input.Interface.Events;
@@ -33,12 +34,12 @@ namespace OpenBreed.Input.Generic
             this.gameWindow = gameWindow;
             this.eventsMan = eventsMan;
 
-            gameWindow.MouseMove += OnMouseMove;
+            //gameWindow.MouseMove += OnMouseMove;
             gameWindow.MouseWheel += OnMouseWheel;
             gameWindow.KeyDown += OnKeyDown;
             gameWindow.KeyUp += OnKeyUp;
-            gameWindow.MouseDown += OnMouseDown;
-            gameWindow.MouseUp += OnMouseUp;
+            //gameWindow.MouseDown += OnMouseDown;
+            //gameWindow.MouseUp += OnMouseUp;
 
             oldKeyboardState = gameWindow.KeyboardState.GetSnapshot();
         }
@@ -61,7 +62,7 @@ namespace OpenBreed.Input.Generic
         /// <summary>
         /// Gets cursor position in client coordinates
         /// </summary>
-        public Vector2 CursorPos { get; private set; }
+        public Vector2 CursorPos => gameWindow.MousePosition;
 
         /// <summary>
         /// Gets wheel delta (difference between current and previous)
@@ -131,38 +132,10 @@ namespace OpenBreed.Input.Generic
             eventsMan.Raise(new KeyUpEvent());
         }
 
-        private void OnMouseDown(MouseButtonEventArgs e)
-        {
-            eventsMan.Raise(new MouseDownEvent());
-        }
-
-        private void OnMouseUp(MouseButtonEventArgs e)
-        {
-            eventsMan.Raise(new MouseUpEvent());
-        }
-
-        private void OnMouseMove(MouseMoveEventArgs e)
-        {
-            eventsMan.Raise(new MouseMoveEvent());
-            //UpdateCursorPos(new Vector2(e.Position.X, e.Position.Y));
-        }
-
         private void OnMouseWheel(MouseWheelEventArgs e)
         {
             eventsMan.Raise(new MouseWheelEvent());
             //UpdateWheelPos(e.OffsetY);
-        }
-
-        //private void UpdateCursorPos(Vector2 newPos)
-        //{
-        //    var newPos4 = new Vector4(newPos) { W = 1 };
-        //    newPos4 *= clientMan.ClientTransform;
-        //    CursorPos = new Vector2(newPos4.X, newPos4.Y);
-        //}
-
-        private void UpdateWheelPos(float newWheelPos)
-        {
-            WheelPos = newWheelPos;
         }
 
         #endregion Private Methods

@@ -8,6 +8,7 @@ using OpenBreed.Input.Interface;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using Microsoft.Extensions.Hosting;
+using OpenBreed.Core.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Gui.Extensions
 {

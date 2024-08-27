@@ -7,6 +7,7 @@ using System;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core.Managers;
 using Microsoft.Extensions.Logging;
+using OpenBreed.Core.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Animation.Extensions
 {

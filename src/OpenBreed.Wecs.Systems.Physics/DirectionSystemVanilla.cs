@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Extensions;
+﻿using OpenBreed.Core.Interface.Extensions;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;

@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Core.Managers
+﻿namespace OpenBreed.Core.Interface.Managers
 {
     /// <summary>
     /// Factory for data grids

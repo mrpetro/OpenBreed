@@ -32,6 +32,7 @@ using System.Linq;
 using System.Xml.Linq;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Physics.Interface;
+using OpenBreed.Core.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {

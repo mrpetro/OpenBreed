@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Core.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Control.Extensions
 {

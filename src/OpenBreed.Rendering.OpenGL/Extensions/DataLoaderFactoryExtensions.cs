@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Managers
+namespace OpenBreed.Rendering.OpenGL.Extensions
 {
-    public interface ITriggerBuilder
+    internal class DataLoaderFactoryExtensions
     {
-        ITriggerMan TriggerMan { get; }
     }
 }

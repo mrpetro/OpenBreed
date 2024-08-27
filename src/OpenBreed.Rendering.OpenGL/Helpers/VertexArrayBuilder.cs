@@ -42,7 +42,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             loopIndices.Add(new int[] { v1, v2, v3, v4 });
         }
 
-        public void AddLoopIndices(int[] vArray)
+        public void AddLoopIndices(params int[] vArray)
         {
             loopIndices.Add(vArray);
         }

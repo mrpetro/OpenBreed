@@ -22,6 +22,7 @@ using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Actions;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM.EntityTemplates;
@@ -73,6 +74,7 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<EntryEditorVM<IDbTileAtlas>>();
                 services.AddTransient<EntryEditorVM<IDbTileStamp>>();
 
+                services.AddTransient<RenderViewBaseVM>();
                 services.AddTransient<DbEditorVM>();
                 services.AddTransient<DbTablesEditorVM>();
                 services.AddTransient<DbTableSelectorVM>();
@@ -123,7 +125,6 @@ namespace OpenBreed.Editor.VM.Extensions
                     entryEditorFactory.RegisterEditor<IDbText>();
                     entryEditorFactory.RegisterEditor<IDbEntityTemplate>();
                     entryEditorFactory.RegisterEditor<IDbDataSource>();
-
 
                     entryEditorFactory.Register<IDbMap, MapEditorVM>();
                     entryEditorFactory.Register<IDbSound, PcmSoundEditorVM>();

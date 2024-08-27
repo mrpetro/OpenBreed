@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Interface.Managers;
+﻿using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -24,7 +25,7 @@ namespace OpenBreed.Editor.UI.Wpf
         #region Public Fields
 
         public static readonly DependencyProperty InitFuncProperty =
-            DependencyProperty.Register(nameof(InitFunc), typeof(Func<IGraphicsContext, IRenderContext>), typeof(GLWpfControlEx));
+            DependencyProperty.Register(nameof(InitFunc), typeof(Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>), typeof(GLWpfControlEx));
 
         #endregion Public Fields
 
@@ -43,6 +44,8 @@ namespace OpenBreed.Editor.UI.Wpf
             Start(mainSettings);
 
             Render += GLWpfControlEx_Init;
+
+            Cursor = Cursors.None;
         }
 
         #endregion Public Constructors
@@ -50,9 +53,9 @@ namespace OpenBreed.Editor.UI.Wpf
         #region Public Properties
 
         [Bindable(true)]
-        public Func<IGraphicsContext, IRenderContext> InitFunc
+        public Func<IGraphicsContext, HostCoordinateSystemConverter , IRenderContext> InitFunc
         {
-            get { return (Func<IGraphicsContext, IRenderContext>)GetValue(InitFuncProperty); }
+            get { return (Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>)GetValue(InitFuncProperty); }
             set { SetValue(InitFuncProperty, value); }
         }
 
@@ -72,7 +75,7 @@ namespace OpenBreed.Editor.UI.Wpf
                 return;
             }
 
-            renderContext = InitFunc.Invoke(Context);
+            renderContext = InitFunc.Invoke(Context, GetRenderContextPosition);
 
             renderContext.Resize((int)ActualWidth, (int)ActualHeight);
 
@@ -84,54 +87,43 @@ namespace OpenBreed.Editor.UI.Wpf
             MouseEnter += GLWpfControlEx_MouseEnter;
             MouseLeave += GLWpfControlEx_MouseLeave; ;
             MouseUp += GLWpfControlEx_MouseUp;
+            MouseWheel += GLWpfControlEx_MouseWheel;
         }
 
         private void GLWpfControlEx_MouseLeave(object sender, MouseEventArgs e)
         {
-            var cursorPosition = GetRenderContextPosition(e.GetPosition(this));
-
+            var cursorPosition = FromPoint(e.GetPosition(this));
             renderContext.CursorLeave(0, cursorPosition);
         }
 
         private void GLWpfControlEx_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var cursorPosition = GetRenderContextPosition(e.GetPosition(this));
-
-            renderContext.CursorUp(0, cursorPosition, (int)e.ChangedButton);
+            var cursorPosition = FromPoint(e.GetPosition(this));
+            renderContext.CursorUp(0, cursorPosition, (CursorKeys)e.ChangedButton);
         }
 
         private void GLWpfControlEx_MouseEnter(object sender, MouseEventArgs e)
         {
-            var cursorPosition = GetRenderContextPosition(e.GetPosition(this));
-
+            var cursorPosition = FromPoint(e.GetPosition(this));
             renderContext.CursorEnter(0, cursorPosition);
         }
 
         private void GLWpfControlEx_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var cursorPosition = GetRenderContextPosition(e.GetPosition(this));
-
-            renderContext.CursorDown(0, cursorPosition, (int)e.ChangedButton);
-        }
-
-        private Vector2i GetRenderContextPosition(Point point)
-        {
-            var translateTranform = Matrix.Identity;
-            translateTranform.Translate(0.0, ActualHeight);
-            var flipYTransform = Matrix.Identity;
-            flipYTransform.Scale(1.0, -1.0);
-
-            var matT = flipYTransform * translateTranform;
-            point *= matT;
-
-            return new Vector2i((int)point.X, (int)point.Y);
+            var cursorPosition = FromPoint(e.GetPosition(this));
+            renderContext.CursorDown(0, cursorPosition, (CursorKeys)e.ChangedButton);
         }
 
         private void GLWpfControlEx_MouseMove(object sender, MouseEventArgs e)
         {
-            var position = GetRenderContextPosition(e.GetPosition(this));
+            var cursorPosition = FromPoint(e.GetPosition(this));
+            renderContext.CursorMove(0, cursorPosition);
+        }
 
-            renderContext.CursorMove(0, position);
+        private void GLWpfControlEx_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            var cursorPosition = FromPoint(e.GetPosition(this));
+            renderContext.CursorWheel(0, cursorPosition, e.Delta);
         }
 
         private void GLWpfControlEx_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -142,6 +134,24 @@ namespace OpenBreed.Editor.UI.Wpf
         private void GLWpfControlEx_Render(TimeSpan delta)
         {
             renderContext.Render((float)delta.TotalMilliseconds);
+        }
+
+        private Vector2i FromPoint(Point point)
+        {
+            return new Vector2i((int)point.X, (int)point.Y);
+        }
+
+        private Vector2i GetRenderContextPosition(Vector2i point)
+        {
+            var pointV = new Vector4(point.X, point.Y, 0.0f, 1.0f);
+
+            var translateTranform = Matrix4.CreateTranslation(0.0f, (float)ActualHeight, 0.0f);
+            var flipYTransform = Matrix4.CreateScale(1.0f, -1.0f, 1.0f);
+
+            var matT = flipYTransform * translateTranform;
+            pointV *= matT;
+
+            return new Vector2i((int)pointV.X, (int)pointV.Y);
         }
 
         #endregion Private Methods

@@ -1,7 +1,7 @@
-﻿using OpenBreed.Core.Events;
+﻿using OpenBreed.Core.Interface.Events;
 using System;
 
-namespace OpenBreed.Core.Managers
+namespace OpenBreed.Core.Interface.Managers
 {
     public interface IEventHandler
     {

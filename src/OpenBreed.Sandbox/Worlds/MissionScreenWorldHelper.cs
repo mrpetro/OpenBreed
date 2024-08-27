@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core;
-using OpenBreed.Core.Managers;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;

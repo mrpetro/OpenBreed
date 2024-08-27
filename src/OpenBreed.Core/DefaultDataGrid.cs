@@ -1,4 +1,5 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenBreed.Core.Interface;
+using OpenTK.Mathematics;
 
 namespace OpenBreed.Core
 {

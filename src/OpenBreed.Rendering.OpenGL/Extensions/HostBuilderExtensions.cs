@@ -7,6 +7,7 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Model;
@@ -34,9 +35,9 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
             {
                 services.AddSingleton<ITileGridFactory, TileGridFactory>();
                 services.AddSingleton<IRenderingMan, RenderingMan>();
-                services.AddSingleton<Func<IGraphicsContext, IRenderContext>>((sp)
-                    => (graphicalContext)
-                    => new OpenTKRenderContext(sp.GetRequiredService<ILogger>(), sp.GetRequiredService<IEventsMan>(), graphicalContext));
+                services.AddSingleton<Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>>((sp)
+                    => (graphicalContext, hostCoordinateSystemConverter)
+                    => new OpenTKRenderContext(sp.GetRequiredService<ILogger>(), sp.GetRequiredService<IEventsMan>(), graphicalContext, hostCoordinateSystemConverter));
             });
         }
 
@@ -47,6 +48,13 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
             {
                 services.AddSingleton<IWindow, OpenTKWindow>();
                 services.AddSingleton((sp) => sp.GetRequiredService<IWindow>().Context);
+            });
+        }
+
+        public static void SetupGLRenderContextComponents(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
                 services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Primitives);
                 services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Sprites);
                 services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Fonts);
@@ -60,43 +68,23 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
             });
         }
 
-        public static void SetupSpriteSetDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
+        public static void ConfigureGraphicsDataLoaders(this IHostBuilder hostBuilder)
         {
-            dataLoaderFactory.Register<ISpriteAtlasDataLoader>(() => new SpriteAtlasDataLoader(
-                sp.GetService<IRepositoryProvider>(),                                           
-                sp.GetService<SpriteAtlasDataProvider>(),
-                sp.GetService<ITextureMan>(),                                            
-                sp.GetService<ISpriteMan>(),                                             
-                sp.GetService<ISpriteMerger>()));
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ISpriteAtlasDataLoader, SpriteAtlasDataLoader>();
+                services.AddSingleton<IPictureDataLoader, PictureDataLoader>();
+                services.AddSingleton<ITileAtlasDataLoader, TileAtlasDataLoader>();
+                services.AddSingleton<ITileStampDataLoader, TileStampDataLoader>();
+            });
         }
 
-        public static void SetupPictureDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
+        public static void RegisterGraphicsDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
         {
-            dataLoaderFactory.Register<IPictureDataLoader>(() => new PictureDataLoader(                                         
-                sp.GetService<ImagesDataProvider>(),
-                sp.GetService<ITextureMan>(),                                          
-                sp.GetService<IPictureMan>()));
-        }
-
-        public static void SetupTileSetDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
-        {
-            dataLoaderFactory.Register<ITileAtlasDataLoader>(() => new TileAtlasDataLoader(
-                sp.GetService<IRepositoryProvider>(),                                            
-                sp.GetService<TileAtlasDataProvider>(),
-                sp.GetService<ITextureMan>(),                                             
-                sp.GetService<ITileMan>(),                                           
-                sp.GetService<ILogger>()));
-        }
-
-        public static void SetupTileStampDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
-        {
-            dataLoaderFactory.Register<ITileStampDataLoader>(() => new TileStampDataLoader(
-                sp.GetService<IRepositoryProvider>(),                                            
-                sp.GetService<AssetsDataProvider>(),                                              
-                sp.GetService<ITextureMan>(),                                           
-                sp.GetService<IStampMan>(),                                              
-                sp.GetService<ITileMan>(),                                             
-                sp.GetService<ILogger>()));
+            dataLoaderFactory.Register<ISpriteAtlasDataLoader>(() => sp.GetRequiredService<ISpriteAtlasDataLoader>());
+            dataLoaderFactory.Register<IPictureDataLoader>(() => sp.GetRequiredService<IPictureDataLoader>());
+            dataLoaderFactory.Register<ITileAtlasDataLoader>(() => sp.GetRequiredService<ITileAtlasDataLoader>());
+            dataLoaderFactory.Register<ITileStampDataLoader>(() => sp.GetRequiredService<ITileStampDataLoader>());
         }
     }
 }

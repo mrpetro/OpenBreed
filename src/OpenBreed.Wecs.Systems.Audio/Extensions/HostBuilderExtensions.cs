@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Common;
 using System;
 using OpenBreed.Core.Managers;
+using OpenBreed.Core.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Audio.Extensions
 {

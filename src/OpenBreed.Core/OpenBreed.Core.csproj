@@ -13,10 +13,7 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
-  </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="Factories\" />
+    <ProjectReference Include="..\OpenBreed.Core.Interface\OpenBreed.Core.Interface.csproj" />
   </ItemGroup>
 
 </Project>

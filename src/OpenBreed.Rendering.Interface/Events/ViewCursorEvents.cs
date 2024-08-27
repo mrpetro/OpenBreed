@@ -9,6 +9,33 @@ using System.Threading.Tasks;
 namespace OpenBreed.Rendering.Interface.Events
 {
     /// <summary>
+    /// Cursor key names with their values.
+    /// </summary>
+    public enum CursorKeys
+    {
+        /// <summary>
+        /// Left cursor key.
+        /// </summary>
+        Left = 0,
+        /// <summary>
+        /// Middle cursor key.
+        /// </summary>
+        Middle = 1,
+        /// <summary>
+        /// Right cursor key.
+        /// </summary>
+        Right = 2,
+        /// <summary>
+        /// First extended cursor key.
+        /// </summary>
+        XButton1 = 3,
+        /// <summary>
+        /// Second extended cursor key.
+        /// </summary>
+        XButton2 = 4
+    }
+
+    /// <summary>
     /// Abstract cursor interaction on specific render view event.
     /// </summary>
     public abstract class ViewCursorEvent : EventArgs
@@ -97,9 +124,9 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorUpEvent(IRenderView view, int cursorId, int keyCode) : base(view, cursorId)
+        public ViewCursorUpEvent(IRenderView view, int cursorId, CursorKeys key) : base(view, cursorId)
         {
-            KeyCode = keyCode;
+            Key = key;
         }
 
         #endregion Public Constructors
@@ -109,7 +136,7 @@ namespace OpenBreed.Rendering.Interface.Events
         /// <summary>
         /// Key code of cursor which was released.
         /// </summary>
-        public int KeyCode { get; }
+        public CursorKeys Key { get; }
 
         #endregion Public Properties
     }
@@ -121,9 +148,9 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorDownEvent(IRenderView view, int cursorId, int keyCode) : base(view, cursorId)
+        public ViewCursorDownEvent(IRenderView view, int cursorId, CursorKeys key) : base(view, cursorId)
         {
-            KeyCode = keyCode;
+            Key = key;
         }
 
         #endregion Public Constructors
@@ -133,7 +160,31 @@ namespace OpenBreed.Rendering.Interface.Events
         /// <summary>
         /// Key code of cursor which was pressed.
         /// </summary>
-        public int KeyCode { get; }
+        public CursorKeys Key { get; }
+
+        #endregion Public Properties
+    }
+
+    /// <summary>
+    /// Occurs when cursor wheel position has changed.
+    /// </summary>
+    public class ViewCursorWheelEvent : ViewCursorEvent
+    {
+        #region Public Constructors
+
+        public ViewCursorWheelEvent(IRenderView view, int cursorId, int wheelDelta) : base(view, cursorId)
+        {
+            WheelDelta = wheelDelta;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Value indicating how much wheel position has changed.
+        /// </summary>
+        public int WheelDelta { get; }
 
         #endregion Public Properties
     }

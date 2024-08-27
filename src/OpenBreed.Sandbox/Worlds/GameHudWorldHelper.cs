@@ -2,6 +2,7 @@
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Database.Interface;
