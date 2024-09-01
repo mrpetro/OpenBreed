@@ -6,6 +6,7 @@ using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
+using OpenBreed.Database.Interface.Items.TileStamps;
 using System;
 
 namespace OpenBreed.Animation.Generic.Data
@@ -38,27 +39,42 @@ namespace OpenBreed.Animation.Generic.Data
 
         #region Public Methods
 
-        public object LoadObject(string entryId) => Load(entryId);
-
-        public IClip<TObject> Load(string clipName, params object[] args)
+        public IClip<TObject> Load(IDbAnimation dbAnimation, params object[] args)
         {
-            if(clipMan.TryGetByName(clipName, out IClip<TObject> clip))
+            if (clipMan.TryGetByName(dbAnimation.Id, out IClip<TObject> clip))
+            {
                 return clip;
+            }
 
-            var entry = repositoryProvider.GetRepository<IDbAnimation>().GetById(clipName);
-            if (entry is null)
-                throw new Exception("Animation clip error: " + clipName);
+            var totalTime = dbAnimation.Length;
 
-            var totalTime = entry.Length;
+            clip = clipMan.CreateClip(dbAnimation.Id, totalTime);
 
-            clip = clipMan.CreateClip(entry.Id, totalTime);
-
-            foreach (var part in entry.Tracks)
+            foreach (var part in dbAnimation.Tracks)
+            {
                 LoadTrack(clip, part);
+            }
 
-            logger.LogTrace("Animation clip '{0}' loaded.", clipName);
+            logger.LogTrace("Animation clip '{0}' loaded.", dbAnimation.Id);
 
             return clip;
+        }
+
+        public IClip<TObject> Load(string dbEntryId)
+        {
+            if (clipMan.TryGetByName(dbEntryId, out IClip<TObject> clip))
+            {
+                return clip;
+            }
+
+            var entry = repositoryProvider.GetRepository<IDbAnimation>().GetById(dbEntryId);
+
+            if (entry is null)
+            {
+                throw new Exception("Animation clip error: " + dbEntryId);
+            }
+
+            return Load(entry);
         }
 
         #endregion Public Methods

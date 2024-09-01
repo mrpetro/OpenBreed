@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Rendering.Interface.Events;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,13 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.Interface.Managers
 {
+    public interface IRenderContextFactory
+    {
+        void SetupScope(HostCoordinateSystemConverter hostCoordinateSystemConverter, IGraphicsContext graphicsContext);
+
+        IRenderContext CreateContext();
+    }
+
     public interface IRenderContext
     {
         #region Public Properties

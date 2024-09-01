@@ -51,6 +51,8 @@ namespace OpenBreed.Sandbox.Loaders
 
         void Register(string templateName, IMapWorldEntityLoader entityLoader);
 
+        IWorld Load(IDbMap dbMap);
+
         #endregion Public Methods
     }
 
@@ -148,21 +150,21 @@ namespace OpenBreed.Sandbox.Loaders
             return entityMan.Create($"Maps");
         }
 
-        public IWorld Load(string entryId, params object[] args)
+        public IWorld Load(IDbMap dbMap)
         {
-            var world = worldMan.GetByName(entryId);
+            var world = worldMan.GetByName(dbMap.Id);
 
             if (world != null)
+            {
                 return world;
-
-            var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
-            if (dbMap is null)
-                throw new Exception($"Missing Map: {entryId}");
+            }
 
             var map = mapsDataProvider.GetMap(dbMap.Id);
 
             if (map is null)
+            {
                 throw new Exception($"Map model asset '{dbMap.DataRef}' could not be loaded.");
+            }
 
             LoadPalettes(map, dbMap.Id);
             LoadReferencedTileSet(dbMap);
@@ -196,7 +198,7 @@ namespace OpenBreed.Sandbox.Loaders
             mapEntity.Add(collisionComponent);
 
             var worldBuilder = worldMan.Create();
-            worldBuilder.SetName(entryId);
+            worldBuilder.SetName(dbMap.Id);
 
             worldBuilder.SetupGameWorldSystems();
 
@@ -215,7 +217,7 @@ namespace OpenBreed.Sandbox.Loaders
                 var paletteEntityTag = $"Palettes/{dbMap.Id}";
                 var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
 
-                if(paletteEntity is not null)
+                if (paletteEntity is not null)
                     worldMan.RequestAddEntity(paletteEntity, world.Id);
 
                 for (int iy = 0; iy < layout.Height; iy++)
@@ -269,8 +271,8 @@ namespace OpenBreed.Sandbox.Loaders
                         var indexPos = new Vector2i(ix, iy);
 
                         var cellEntity = LoadUnknownCodeCell(mapper, map, visited, ix, iy, gfxValue, actionValue, world);
-                    
-                        if(cellEntity is not null)
+
+                        if (cellEntity is not null)
                             dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
                     }
                 }
@@ -283,6 +285,25 @@ namespace OpenBreed.Sandbox.Loaders
             }, singleTime: true);
 
             return world;
+        }
+
+        public IWorld Load(string entryId)
+        {
+            var world = worldMan.GetByName(entryId);
+
+            if (world != null)
+            {
+                return world;
+            }
+
+            var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
+
+            if (dbMap is null)
+            {
+                throw new Exception($"Missing Map: {entryId}");
+            }
+
+            return Load(dbMap);
         }
 
         private void AddCursor(IWorld world)
@@ -314,8 +335,6 @@ namespace OpenBreed.Sandbox.Loaders
 
             worldMan.RequestAddEntity(entity, world.Id);
         }
-
-        public object LoadObject(string entryId) => Load(entryId);
 
         public void Register(string templateName, IMapWorldEntityLoader entityLoader)
         {
@@ -398,14 +417,18 @@ namespace OpenBreed.Sandbox.Loaders
             var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<IEntity>>();
 
             //Load common animations
-            var dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
+            var dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.OfType<IDbAnimation>().Where(item => item.Id.StartsWith("Vanilla/Common"));
             foreach (var dbAnim in dbAnims)
-                loader.Load(dbAnim.Id);
+            {
+                loader.Load(dbAnim);
+            }
 
             //Load level specific animations
-            dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
+            dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.OfType<IDbAnimation>().Where(item => item.Id.StartsWith(dbMap.TileSetRef));
             foreach (var dbAnim in dbAnims)
-                loader.Load(dbAnim.Id);
+            {
+                loader.Load(dbAnim);
+            }
         }
 
         private void LoadReferencedSounds(IDbMap dbMap)
@@ -413,14 +436,18 @@ namespace OpenBreed.Sandbox.Loaders
             var loader = dataLoaderFactory.GetLoader<ISoundSampleDataLoader>();
 
             //Load common sounds
-            var dbSounds = repositoryProvider.GetRepository<IDbSound>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
+            var dbSounds = repositoryProvider.GetRepository<IDbSound>().Entries.OfType<IDbSound>().Where(item => item.Id.StartsWith("Vanilla/Common"));
             foreach (var dbSound in dbSounds)
-                loader.Load(dbSound.Id);
+            {
+                loader.Load(dbSound);
+            }
 
             //Load level specific sounds
-            dbSounds = repositoryProvider.GetRepository<IDbSound>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
+            dbSounds = repositoryProvider.GetRepository<IDbSound>().Entries.OfType<IDbSound>().Where(item => item.Id.StartsWith(dbMap.TileSetRef));
             foreach (var dbSound in dbSounds)
-                loader.Load(dbSound.Id);
+            {
+                loader.Load(dbSound);
+            }
         }
 
         private void LoadReferencedSpriteSets(IDbMap dbMap)
@@ -428,14 +455,18 @@ namespace OpenBreed.Sandbox.Loaders
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
             //Load common sprites
-            var dbSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
-            foreach (var dbAnim in dbSpriteAtlas)
-                loader.Load(dbAnim.Id);
+            var dbSpriteAtlases = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.OfType<IDbSpriteAtlas>().Where(item => item.Id.StartsWith("Vanilla/Common"));
+            foreach (var dbStriteAtlas in dbSpriteAtlases)
+            {
+                loader.Load(dbStriteAtlas);
+            }
 
             //Load level specific sprites
-            dbSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
-            foreach (var dbAnim in dbSpriteAtlas)
-                loader.Load(dbAnim.Id);
+            dbSpriteAtlases = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.OfType<IDbSpriteAtlas>().Where(item => item.Id.StartsWith(dbMap.TileSetRef));
+            foreach (var dbStriteAtlas in dbSpriteAtlases)
+            {
+                loader.Load(dbStriteAtlas);
+            }
 
             //var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
@@ -454,10 +485,12 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var loader = dataLoaderFactory.GetLoader<ITileStampDataLoader>();
 
-            var dbTileStamps = repositoryProvider.GetRepository<IDbTileStamp>().Entries.Where(item => item.Id.StartsWith(dbMap.TileSetRef));
+            var dbTileStamps = repositoryProvider.GetRepository<IDbTileStamp>().Entries.OfType<IDbTileStamp>().Where(item => item.Id.StartsWith(dbMap.TileSetRef));
 
             foreach (var dbTileStamp in dbTileStamps)
-                loader.Load(dbTileStamp.Id);
+            {
+                loader.Load(dbTileStamp);
+            }
         }
 
         private IEntity LoadUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, IWorld world)

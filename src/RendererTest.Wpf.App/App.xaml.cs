@@ -18,21 +18,34 @@ namespace RendererTest.Wpf.App
     {
         private readonly IHost host;
 
+        private RendererVm CreateViewVm(IServiceProvider sp)
+        {
+            var serviceScope = sp.CreateScope();
+            return serviceScope.ServiceProvider.GetService<RendererVm>();
+        }
+
         public App()
         {
             var builder = new HostBuilder();
 
             builder.SetupDefaultLogger();
 
+
             builder.ConfigureServices((hostContext, services) =>
             {
-                //Add business services as needed
+                services.AddSingleton<MainVm>();
                 services.AddScoped<RendererVm>();
+
+                //Add business services as needed
+                services.AddSingleton<Func<IServiceProvider, RendererVm>>((sp) =>
+                {
+                    return CreateViewVm(sp);
+                });
 
                 services.AddSingleton((sp) =>
                 {
                     var mainWindow = new MainWindow();
-                    var vm = sp.GetRequiredService<RendererVm>();
+                    var vm = sp.GetRequiredService<MainVm>();
 
                     mainWindow.DataContext = vm;
 

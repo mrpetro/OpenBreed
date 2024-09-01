@@ -34,7 +34,6 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         private readonly TileAtlasDataProvider tileSetsDataProvider;
         private readonly PalettesDataProvider palettesDataProvider;
-        private readonly ITileStampDataLoader tileStampDataLoader;
         private string currentPaletteRef = null;
         private TileSetModel model;
 
@@ -46,25 +45,22 @@ namespace OpenBreed.Editor.VM.TileStamps
             ILogger logger,
             TileAtlasDataProvider tileSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
-            ITileStampDataLoader tileStampDataLoader,
+            //ITileStampDataLoader tileStampDataLoader,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IDrawingFactory drawingFactory,
-            IBitmapProvider bitmapProvider,
-            RenderViewBaseVM renderViewVm) : base(logger, workspaceMan, dialogProvider)
+            RenderContextVM<IDbTileStamp, TileStampRenderViewControl> renderContext) : base(logger, workspaceMan, dialogProvider)
         {
             PaletteIds = new ObservableCollection<string>();
             this.tileSetsDataProvider = tileSetsDataProvider;
             this.palettesDataProvider = palettesDataProvider;
-            this.tileStampDataLoader = tileStampDataLoader;
-            View = renderViewVm;
+            RenderContext = renderContext;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public RenderViewBaseVM View { get; }
+        public RenderContextVM<IDbTileStamp, TileStampRenderViewControl> RenderContext { get; }
 
         public ObservableCollection<string> PaletteIds { get; }
 
@@ -92,7 +88,6 @@ namespace OpenBreed.Editor.VM.TileStamps
             paletteRefs.ForEach(item => PaletteIds.Add(item));
 
             CurrentPaletteRef = PaletteIds.FirstOrDefault();
-            //Viewer.Palette = CurrentPalette;
         }
 
         #endregion Internal Methods
@@ -101,16 +96,16 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         protected override void UpdateEntry(IDbTileStamp entry)
         {
+            RenderContext.Save();
+
             base.UpdateEntry(entry);
         }
 
         protected override void UpdateVM(IDbTileStamp entry)
         {
-
-            var tileStamp = tileStampDataLoader.LoadObject(entry.Id);
-
-
             base.UpdateVM(entry);
+
+            RenderContext.Load(entry);
         }
 
         protected override void OnPropertyChanged(string name)

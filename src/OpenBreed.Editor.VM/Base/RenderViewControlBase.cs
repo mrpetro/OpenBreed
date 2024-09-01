@@ -1,81 +1,73 @@
-﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Common.Data;
-using OpenBreed.Common.Interface.Data;
-using OpenBreed.Common.Interface.Dialog;
-using OpenBreed.Common.Interface.Drawing;
-using OpenBreed.Database.Interface.Items.TileStamps;
-using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM;
-using OpenBreed.Model.Palettes;
-using OpenBreed.Model.Tiles;
+﻿using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using OpenTK.Windowing.Common;
-using OpenBreed.Rendering.Interface.Events;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Editor.VM.Extensions;
 
 namespace OpenBreed.Editor.VM.Base
 {
-    public class RenderViewBaseVM : BaseViewModel
+    public abstract class RenderViewControlBase<TModel> : RenderViewControlBase
+    {
+        #region Protected Constructors
+
+        protected RenderViewControlBase(IEventsMan eventsMan, IRenderContext renderContext) : base(eventsMan, renderContext)
+        {
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Methods
+
+        public abstract void Initialize(TModel model);
+
+        public abstract void Save(TModel model);
+
+        #endregion Public Methods
+    }
+
+    public abstract class RenderViewControlBase
     {
         #region Private Fields
 
         private readonly IEventsMan eventsMan;
 
-        private readonly Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> renderContextProvider;
+        private readonly IRenderView renderView;
         private Vector2i cursorPos;
         private Vector2i cursorDelta;
         private IRenderView cursorView;
         private bool cursorScroll;
-
         private IRenderContext renderContext;
-        private IRenderView renderView;
-        private IRenderView renderView2;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RenderViewBaseVM(IEventsMan eventsMan,
-            Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> renderContextProvider)
+        public RenderViewControlBase(IEventsMan eventsMan, IRenderContext renderContext)
         {
             this.eventsMan = eventsMan;
-            this.renderContextProvider = renderContextProvider;
+            this.renderContext = renderContext;
+            this.renderView = renderContext.CreateView(OnRenderPrivate, 0.0f, 0.0f, 1.0f, 1.0f);
 
-            InitFunc = OnInitialize;
-
-            eventsMan.Subscribe<ViewCursorMoveEvent>(OnCursorMove);
-            eventsMan.Subscribe<ViewCursorDownEvent>(OnCursorDown);
-            eventsMan.Subscribe<ViewCursorUpEvent>(OnCursorUp);
+            eventsMan.SubscribeToView<ViewCursorMoveEvent>(renderView, OnCursorMove);
+            eventsMan.SubscribeToView<ViewCursorDownEvent>(renderView, OnCursorDown);
+            eventsMan.SubscribeToView<ViewCursorUpEvent>(renderView, OnCursorUp);
         }
 
         #endregion Public Constructors
 
-        #region Public Properties
+        #region Protected Methods
 
-        public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc { get; }
+        protected abstract void OnRender(IRenderView view, Matrix4 transform, float dt);
 
-        #endregion Public Properties
+        #endregion Protected Methods
 
         #region Private Methods
-
-        private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
-        {
-            renderContext = renderContextProvider.Invoke(graphicsContext, hostCoordinateSystemConverter);
-            renderView = renderContext.CreateView(OnRender, 0.0f, 0.0f, 1.0f, 1.0f);
-            renderView.Reset();
-
-            return renderContext;
-        }
 
         private void OnCursorMove(ViewCursorMoveEvent e)
         {
@@ -86,7 +78,7 @@ namespace OpenBreed.Editor.VM.Base
 
             if (cursorScroll)
             {
-                e.View.View *= Matrix4.CreateTranslation(cursorDelta.X, cursorDelta.Y, 0.0f);
+                renderView.View *= Matrix4.CreateTranslation(cursorDelta.X, cursorDelta.Y, 0.0f);
             }
         }
 
@@ -115,12 +107,12 @@ namespace OpenBreed.Editor.VM.Base
             view.Context.Fonts.Render(view, new Box2(view.Box.Min, view.Box.Max), dt, RenderTexts);
         }
 
-        private void OnRender(IRenderView view, Matrix4 transform, float dt)
+        private void OnRenderPrivate(IRenderView view, Matrix4 transform, float dt)
         {
             if (cursorView == view)
                 DrawCursor(view, dt);
 
-            view.Context.Primitives.DrawRectangle(view, new Box2(0, 0, 20, 30), Color4.Red, filled: true);
+            OnRender(view, transform, dt);
         }
 
         private void RenderTexts(IRenderView view, Box2 clipBox, float dt)

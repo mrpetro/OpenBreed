@@ -35,9 +35,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
             this.pictureMan = pictureMan;
         }
 
-        public object LoadObject(string entryId) => Load(entryId);
-
-        public IPicture Load(string entryId, params object[] args)
+        public IPicture Load(string entryId)
         {
             var picture = pictureMan.GetByName(entryId);
 

@@ -76,17 +76,19 @@ namespace RendererTest.Wpf.App.VM
         {
             renderContext = renderContextProvider.Invoke(graphicsContext, hostCoordinateSystemConverter);
 
-            renderView1 = renderContext.CreateView(OnRender1, 0.02f, 0.3f, 0.5f, 1.0f);
-            renderView1.Reset();
+            renderView1 = renderContext.CreateView(OnRender1, 0.0f, 0.0f, 0.5f, 1.0f);
             renderView2 = renderContext.CreateView(OnRender2, 0.5f, 0.0f, 1.0f, 1.0f);
-            renderView2.Reset();
-
 
             return renderContext;
         }
 
         private void OnCursorMove(ViewCursorMoveEvent e)
         {
+            if (e.View.Context != renderContext)
+            {
+                return;
+            }
+
             cursorView = e.View;
 
             cursorDelta = e.Position - cursorPos;
@@ -100,7 +102,12 @@ namespace RendererTest.Wpf.App.VM
 
         private void OnCursorDown(ViewCursorDownEvent e)
         {
-            if(e.Key ==CursorKeys.Right)
+            if (e.View.Context != renderContext)
+            {
+                return;
+            }
+
+            if (e.Key ==CursorKeys.Right)
             {
                 cursorScroll = true;
             }
@@ -108,6 +115,11 @@ namespace RendererTest.Wpf.App.VM
 
         private void OnCursorUp(ViewCursorUpEvent e)
         {
+            if (e.View.Context != renderContext)
+            {
+                return;
+            }
+
             if (e.Key == CursorKeys.Right)
             {
                 cursorScroll = false;

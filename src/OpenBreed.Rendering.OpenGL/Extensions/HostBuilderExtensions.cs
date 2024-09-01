@@ -35,9 +35,13 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
             {
                 services.AddSingleton<ITileGridFactory, TileGridFactory>();
                 services.AddSingleton<IRenderingMan, RenderingMan>();
-                services.AddSingleton<Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>>((sp)
-                    => (graphicalContext, hostCoordinateSystemConverter)
-                    => new OpenTKRenderContext(sp.GetRequiredService<ILogger>(), sp.GetRequiredService<IEventsMan>(), graphicalContext, hostCoordinateSystemConverter));
+
+                services.AddScoped<IRenderContextFactory, OpenTKRenderContextFactory>();
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContextFactory>().CreateContext());
+
+                //               services.AddSingleton<Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>>((sp)
+                //                   => (graphicalContext, hostCoordinateSystemConverter)
+                //                   => new OpenTKRenderContext(sp.GetRequiredService<ILogger>(), sp.GetRequiredService<IEventsMan>(), graphicalContext, hostCoordinateSystemConverter));
             });
         }
 
@@ -55,16 +59,16 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Primitives);
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Sprites);
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Fonts);
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Textures);
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Pictures);
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().PictureRenderer);
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Tiles);
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().TileStamps);
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().Palettes);
-                services.AddSingleton((sp) => sp.GetRequiredService<IRenderContext>().SpriteRenderer);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Primitives);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Sprites);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Fonts);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Textures);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Pictures);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().PictureRenderer);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Tiles);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().TileStamps);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Palettes);
+                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().SpriteRenderer);
             });
         }
 
@@ -72,10 +76,10 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ISpriteAtlasDataLoader, SpriteAtlasDataLoader>();
-                services.AddSingleton<IPictureDataLoader, PictureDataLoader>();
-                services.AddSingleton<ITileAtlasDataLoader, TileAtlasDataLoader>();
-                services.AddSingleton<ITileStampDataLoader, TileStampDataLoader>();
+                services.AddScoped<ISpriteAtlasDataLoader, SpriteAtlasDataLoader>();
+                services.AddScoped<IPictureDataLoader, PictureDataLoader>();
+                services.AddScoped<ITileAtlasDataLoader, TileAtlasDataLoader>();
+                services.AddScoped<ITileStampDataLoader, TileStampDataLoader>();
             });
         }
 

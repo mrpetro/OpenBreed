@@ -52,9 +52,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
         #region Public Methods
 
-        public object LoadObject(string entryId) => Load(entryId);
-
-        public ITileAtlas Load(string tileAtlasName, params object[] args)
+        public ITileAtlas Load(string tileAtlasName)
         {
             var tileAtlas = tileMan.GetByName(tileAtlasName);
 

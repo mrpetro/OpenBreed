@@ -150,13 +150,11 @@ namespace OpenBreed.Sandbox.Worlds
             //Load common sprites
             var dbStatusBarSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById("Vanilla/Common/Status");
 
-            var spriteSet = spriteAtlasDataProvider.GetSpriteSet(dbStatusBarSpriteAtlas.Id);
-
             //var colors = paletteModel.GetColors(0, 64);
 
             //paletteModel.SetColors(64, colors);
 
-            var spriteAtlas = loader.Load(dbStatusBarSpriteAtlas.Id);
+            var spriteAtlas = loader.Load(dbStatusBarSpriteAtlas);
 
             //Create FontAtlas
             var fontAtlas = fontMan.Create()

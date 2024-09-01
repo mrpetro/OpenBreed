@@ -48,26 +48,41 @@ namespace OpenBreed.Audio.OpenAL.Data
 
         #region Public Methods
 
-        public object LoadObject(string entryId) => Load(entryId);
-
-        public int Load(string sampleName, params object[] args)
+        public int Load(IDbSound dbSound)
         {
-            var soundSampleId = soundMan.GetByName(sampleName);
+            var soundSampleId = soundMan.GetByName(dbSound.Id);
 
             if (soundSampleId != -1)
+            {
                 return soundSampleId;
+            }
 
-            var entry = repositoryProvider.GetRepository<IDbSound>().GetById(sampleName);
-            if (entry == null)
-                throw new Exception("Sound sample error: " + sampleName);
+            modelsProvider.TryGetModel<IDbSound, SoundModel>(dbSound, out SoundModel model, out string message);
 
-            modelsProvider.TryGetModel<IDbSound, SoundModel>(entry, out SoundModel model, out string message);
+            soundSampleId = soundMan.LoadSample(dbSound.Id, model.Data, model.SampleRate);
 
-            soundSampleId = soundMan.LoadSample(sampleName, model.Data, model.SampleRate);
-
-            logger.LogTrace("Sound sample '{0}' loaded.", sampleName);
+            logger.LogTrace("Sound sample '{0}' loaded.", dbSound.Id);
 
             return soundSampleId;
+        }
+
+        public int Load(string dbEntry)
+        {
+            var soundSampleId = soundMan.GetByName(dbEntry);
+
+            if (soundSampleId != -1)
+            {
+                return soundSampleId;
+            }
+
+            var entry = repositoryProvider.GetRepository<IDbSound>().GetById(dbEntry);
+
+            if (entry is null)
+            {
+                throw new Exception("Sound sample error: " + dbEntry);
+            }
+
+            return Load(entry);
         }
 
         #endregion Public Methods

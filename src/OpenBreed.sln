@@ -130,8 +130,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.UI.Wpf", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.VM", "OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj", "{6DD5FA74-F254-4C2D-A617-40345E1E213E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{C1F486FD-1E7D-4E98-8526-7BDDA762991C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{802EF9B4-FF54-43CA-898F-C5A1CF4C380A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendererTest.Wpf.App", "RendererTest.Wpf.App\RendererTest.Wpf.App.csproj", "{5A3D6CBE-CD80-4B72-853C-B8D963434069}"

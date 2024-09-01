@@ -51,10 +51,24 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return items[id];
         }
 
+        public bool TryGetByName(string name, out ITileStamp tileStamp)
+        {
+            if(names.TryGetValue(name, out TileStamp found))
+            {
+                tileStamp = found;
+                return true;
+            }
+
+            tileStamp = null;
+            return false;
+        }
+
         public ITileStamp GetByName(string name)
         {
-            if(names.TryGetValue(name, out TileStamp result))
+            if(TryGetByName(name, out ITileStamp result))
+            {
                 return result;
+            }
 
             logger.LogError("Unable to find Tile stamp with name '{0}'.", name);
 

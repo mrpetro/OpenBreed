@@ -52,23 +52,14 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
         #region Public Methods
 
-        public object LoadObject(string entryId) => Load(entryId);
-
-        public ISpriteAtlas Load(string entryId, params object[] args)
+        public ISpriteAtlas Load(IDbSpriteAtlas dbSpriteAtlas)
         {
-            if (spriteMan.TryGetByName(entryId, out ISpriteAtlas spriteAtlas))
+            if (spriteMan.TryGetByName(dbSpriteAtlas.Id, out ISpriteAtlas spriteAtlas))
             {
                 return spriteAtlas;
             }
 
-            var entry = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById(entryId);
-
-            if (entry is null)
-            {
-                throw new Exception("Sprite atlas error: " + entryId);
-            }
-
-            var spriteSet = spriteAtlasDataProvider.GetSpriteAtlas(entry) ;
+            var spriteSet = spriteAtlasDataProvider.GetSpriteAtlas(dbSpriteAtlas);
 
             spriteMerger.Merge(
                 spriteSet.Sprites,
@@ -77,10 +68,10 @@ namespace OpenBreed.Rendering.OpenGL.Data
                 out int outHeight,
                 out List<(int X, int Y, int Width, int Height)> bounds);
 
-            var texture = textureMan.Create(entryId, outWidth, outHeight, outData, maskIndex: 0);
+            var texture = textureMan.Create(dbSpriteAtlas.Id, outWidth, outHeight, outData, maskIndex: 0);
 
             var atlasBuilder = spriteMan.CreateAtlas()
-                .SetName(entryId)
+                .SetName(dbSpriteAtlas.Id)
                 .SetTexture(texture.Id);
 
             for (int i = 0; i < bounds.Count; i++)
@@ -97,6 +88,23 @@ namespace OpenBreed.Rendering.OpenGL.Data
             spriteAtlas = atlasBuilder.Build();
 
             return spriteAtlas;
+        }
+
+        public ISpriteAtlas Load(string dbEntryId)
+        {
+            if (spriteMan.TryGetByName(dbEntryId, out ISpriteAtlas spriteAtlas))
+            {
+                return spriteAtlas;
+            }
+
+            var entry = repositoryProvider.GetRepository<IDbSpriteAtlas>().GetById(dbEntryId);
+
+            if (entry is null)
+            {
+                throw new Exception("Sprite atlas error: " + dbEntryId);
+            }
+
+            return Load(entry);
         }
 
         #endregion Public Methods

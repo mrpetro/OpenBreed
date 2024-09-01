@@ -290,26 +290,6 @@ namespace OpenBreed.Sandbox.Extensions
                 mapLegacyDataLoader.RegisterEntityLoaders(sp);
                 return mapLegacyDataLoader;
             });
-
-            dataLoaderFactory.Register<MapTxtDataLoader>(() =>
-            {
-                var mapTxtDataLoader = new MapTxtDataLoader(dataLoaderFactory,
-                                                            sp.GetService<IDrawingFactory>(),
-                                                            sp.GetService<IRepositoryProvider>(),
-                                                            sp.GetService<ISystemFactory>(),
-                                                            sp.GetService<IWorldMan>(),
-                                                            sp.GetService<IEntityMan>(),
-                                                            sp.GetService<PalettesDataProvider>(),
-                                                            sp.GetService<ActionSetsDataProvider>(),
-                                                            sp.GetService<IBroadphaseFactory>(),
-                                                            sp.GetService<ITileGridFactory>(),
-                                                            sp.GetService<IBuilderFactory>(),
-                                                            sp.GetService<ITileMan>(),
-                                                            sp.GetService<ILogger>());
-
-                mapTxtDataLoader.RegisterEntityLoaders(sp);
-                return mapTxtDataLoader;
-            });
         }
 
 

@@ -29,6 +29,7 @@ namespace OpenBreed.Rendering.OpenGL
         private readonly GameWindow gameWindow;
         private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
+        private readonly IRenderContextFactory renderContextFactory;
 
         #endregion Private Fields
 
@@ -37,10 +38,12 @@ namespace OpenBreed.Rendering.OpenGL
         public OpenTKWindow(
             IEventsMan eventsMan,
             ILogger logger,
+            IRenderContextFactory renderContextFactory,
             GameWindow gameWindow)
         {
             this.eventsMan = eventsMan;
             this.logger = logger;
+            this.renderContextFactory = renderContextFactory;
             this.gameWindow = gameWindow;
 
             this.gameWindow.Load += Window_Load;

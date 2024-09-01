@@ -13,10 +13,12 @@
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Wpf:GLWpfControlEx Grid.Column="0"
-            Margin="10"
-            InitFunc="{Binding InitFunc}" />
+                            DataContext="{Binding ViewLeft}"
+                            Margin="10"
+                            InitFunc="{Binding InitFunc}" />
         <Wpf:GLWpfControlEx Grid.Column="1"
-            Margin="10"
-            InitFunc="{Binding InitFunc}" />
+                            DataContext="{Binding ViewRight}"
+                            Margin="10"
+                            InitFunc="{Binding InitFunc}" />
     </Grid>
 </Window>

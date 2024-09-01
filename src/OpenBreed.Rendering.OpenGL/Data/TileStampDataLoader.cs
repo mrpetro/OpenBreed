@@ -24,7 +24,7 @@ namespace OpenBreed.Rendering.OpenGL.Data
         private readonly AssetsDataProvider assetsDataProvider;
         private readonly ITextureMan textureMan;
         private readonly IStampMan stampMan;
-        private readonly ITileMan tileMan;
+        private readonly ITileAtlasDataLoader tileAtlasDataLoader;
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -35,14 +35,14 @@ namespace OpenBreed.Rendering.OpenGL.Data
                                  AssetsDataProvider assetsDataProvider,
                                  ITextureMan textureMan,
                                  IStampMan stampMan,
-                                 ITileMan tileMan,
+                                 ITileAtlasDataLoader tileAtlasDataLoader,
                                  ILogger logger)
         {
             this.repositoryProvider = repositoryProvider;
             this.assetsDataProvider = assetsDataProvider;
             this.textureMan = textureMan;
             this.stampMan = stampMan;
-            this.tileMan = tileMan;
+            this.tileAtlasDataLoader = tileAtlasDataLoader;
             this.logger = logger;
         }
 
@@ -50,35 +50,48 @@ namespace OpenBreed.Rendering.OpenGL.Data
 
         #region Public Methods
 
-        public object LoadObject(string entryId) => Load(entryId);
-
-        public ITileStamp Load(string tileStampName, params object[] args)
+        public ITileStamp Load(IDbTileStamp dbTileStamp)
         {
-            if (stampMan.Contains(tileStampName))
-                return null;
-
-            var entry = repositoryProvider.GetRepository<IDbTileStamp>().GetById(tileStampName);
-            if (entry == null)
-                throw new Exception("Tilestamp error: " + tileStampName);
+            if (stampMan.TryGetByName(dbTileStamp.Id, out ITileStamp tileStamp))
+            {
+                return tileStamp;
+            }
 
             var stampBuilder = stampMan.Create();
 
             stampBuilder.ClearTiles();
-            stampBuilder.SetName(entry.Id);
-            stampBuilder.SetSize(entry.Width, entry.Height);
-            stampBuilder.SetOrigin(entry.CenterX, entry.CenterY);
+            stampBuilder.SetName(dbTileStamp.Id);
+            stampBuilder.SetSize(dbTileStamp.Width, dbTileStamp.Height);
+            stampBuilder.SetOrigin(dbTileStamp.CenterX, dbTileStamp.CenterY);
 
-            foreach (var cell in entry.Cells)
+            foreach (var cell in dbTileStamp.Cells)
             {
-                var ts = tileMan.GetByName(cell.TsId);
+                var ts = tileAtlasDataLoader.Load(cell.TsId);
                 stampBuilder.AddTile(cell.X, cell.Y, ts.Id, cell.TsTi);
             }
 
-            stampBuilder.Build();
+            tileStamp = stampBuilder.Build();
 
-            logger.LogTrace("Tile stamp '{0}' loaded.", tileStampName);
+            logger.LogTrace("Tile stamp '{0}' loaded.", dbTileStamp.Id);
 
-            return null;
+            return tileStamp;
+        }
+
+        public ITileStamp Load(string dbEntryId)
+        {
+            if (stampMan.TryGetByName(dbEntryId, out ITileStamp tileStamp))
+            {
+                return tileStamp;
+            }
+
+            var entry = repositoryProvider.GetRepository<IDbTileStamp>().GetById(dbEntryId);
+
+            if (entry is null)
+            {
+                throw new Exception("Tilestamp error: " + dbEntryId);
+            }
+
+            return Load(entry);
         }
 
         #endregion Public Methods

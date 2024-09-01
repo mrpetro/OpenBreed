@@ -643,7 +643,6 @@ namespace OpenBreed.Sandbox
             var hudHelper = GetManager<HudHelper>();
 
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
-            var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
 
             var levelName = gameSettings.Value.StartingLevelName;
             var gameWorld = mapLegacyLoader.Load(levelName);
@@ -727,18 +726,18 @@ namespace OpenBreed.Sandbox
             var palettesDataProvider = GetManager<PalettesDataProvider>();
             var repositoryProvider = GetManager<IRepositoryProvider>();
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
-            var mapTxtLoader = dataLoaderFactory.GetLoader<MapTxtDataLoader>();
             var builderFactory = GetManager<IBuilderFactory>();
-
 
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
             var palette = PaletteModel.NullPalette;//  palettesDataProvider.GetPalette(dbMap.PaletteRefs.First());
 
             //Load common sprites
-            var dbSpriteAtlas = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.Where(item => item.Id.StartsWith("Vanilla/Common"));
-            foreach (var dbAnim in dbSpriteAtlas)
-                loader.Load(dbAnim.Id, palette);
+            var dbSpriteAtlases = repositoryProvider.GetRepository<IDbSpriteAtlas>().Entries.OfType<IDbSpriteAtlas>().Where(item => item.Id.StartsWith("Vanilla/Common"));
+            foreach (var dbSpriteAtlas in dbSpriteAtlases)
+            {
+                loader.Load(dbSpriteAtlas);
+            }
 
             var gameWorldBuilder = worldMan.Create();
             gameWorldBuilder.SetName("Dummy");

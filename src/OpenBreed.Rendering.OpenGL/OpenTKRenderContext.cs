@@ -18,6 +18,31 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace OpenBreed.Rendering.OpenGL
 {
+    public class OpenTKRenderContextFactory : IRenderContextFactory
+    {
+        private readonly ILogger logger;
+        private readonly IEventsMan eventsMan;
+        private HostCoordinateSystemConverter hostCoordinateSystemConverter;
+        private IGraphicsContext graphicsContext;
+
+        public OpenTKRenderContextFactory(ILogger logger, IEventsMan eventsMan)
+        {
+            this.logger = logger;
+            this.eventsMan = eventsMan;
+        }
+
+        public IRenderContext CreateContext()
+        {
+            return new OpenTKRenderContext(logger, eventsMan, graphicsContext, hostCoordinateSystemConverter);
+        }
+
+        public void SetupScope(HostCoordinateSystemConverter hostCoordinateSystemConverter, IGraphicsContext graphicsContext)
+        {
+            this.hostCoordinateSystemConverter = hostCoordinateSystemConverter;
+            this.graphicsContext = graphicsContext;
+        }
+    }
+
     public class OpenTKRenderContext : IRenderContext
     {
         #region Private Fields
@@ -80,6 +105,7 @@ namespace OpenBreed.Rendering.OpenGL
         {
             var renderView = new RenderView(this, hostCoordinateSystemConverter, renderer, new Box2(new Vector2(minX, minY), new Vector2(maxX, maxY)));
             views.Add(renderView);
+            renderView.Reset();
             return renderView;
         }
 

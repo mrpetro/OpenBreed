@@ -74,7 +74,10 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<EntryEditorVM<IDbTileAtlas>>();
                 services.AddTransient<EntryEditorVM<IDbTileStamp>>();
 
-                services.AddTransient<RenderViewBaseVM>();
+
+                services.AddTransient<TileStampRenderViewControl>();
+                services.AddTransient<RenderContextVM<IDbTileStamp, TileStampRenderViewControl>>();
+                //services.AddTransient<RenderViewControlBase>();
                 services.AddTransient<DbEditorVM>();
                 services.AddTransient<DbTablesEditorVM>();
                 services.AddTransient<DbTableSelectorVM>();

@@ -13,6 +13,14 @@
         ITileStamp GetById(int id);
 
         /// <summary>
+        /// Try to get stamp by it's name.
+        /// </summary>
+        /// <param name="name">Name of stamp to get.</param>
+        /// <param name="tileStamp">Tile stamp object.</param>
+        /// <returns>True if tile stamp was found, false otherwise.</returns>
+        bool TryGetByName(string name, out ITileStamp tileStamp);
+
+        /// <summary>
         /// Get stamp by it's name
         /// </summary>
         /// <param name="name">Name of stamp to get</param>
