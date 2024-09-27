@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
@@ -6,14 +7,23 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Tools;
+using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Database.EFCore.DbEntries;
+using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Database.Interface.Items.TileStamps;
+using OpenBreed.Editor.UI.Mvc.Controllers;
+using OpenBreed.Editor.UI.Mvc.Models;
+using OpenBreed.Editor.UI.Mvc.Views;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Tiles;
+using OpenBreed.Editor.VM.Tiles.Helpers;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Tiles;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Interface.Factories;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -25,6 +35,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Input;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace OpenBreed.Editor.VM.TileStamps
 {
@@ -34,8 +45,11 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         private readonly TileAtlasDataProvider tileSetsDataProvider;
         private readonly PalettesDataProvider palettesDataProvider;
+        private readonly IRenderViewFactory renderViewFactory;
+        private readonly IServiceScopeFactory serviceScopeFactory;
+        private readonly TileStampModel model = new TileStampModel();
         private string currentPaletteRef = null;
-        private TileSetModel model;
+        private TileStampEditorController renderViewController;
 
         #endregion Private Fields
 
@@ -45,22 +59,54 @@ namespace OpenBreed.Editor.VM.TileStamps
             ILogger logger,
             TileAtlasDataProvider tileSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
-            //ITileStampDataLoader tileStampDataLoader,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            RenderContextVM<IDbTileStamp, TileStampRenderViewControl> renderContext) : base(logger, workspaceMan, dialogProvider)
+            TilesSelectorVM tilesSelectorVm,
+            IRenderViewFactory renderViewFactory,
+            IServiceScopeFactory serviceScopeFactory) : base(logger, workspaceMan, dialogProvider)
         {
             PaletteIds = new ObservableCollection<string>();
             this.tileSetsDataProvider = tileSetsDataProvider;
             this.palettesDataProvider = palettesDataProvider;
-            RenderContext = renderContext;
+            TilesSelector = tilesSelectorVm;
+            this.renderViewFactory = renderViewFactory;
+            this.serviceScopeFactory = serviceScopeFactory;
+
+            TilesSelector.TileSetChanged += (s, a) => renderViewController.CurrentTileAtlasId = a;
+            TilesSelector.TilesSelectionChanged += (s, a) => renderViewController.CurrentTileSelection = a.Selections;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public RenderContextVM<IDbTileStamp, TileStampRenderViewControl> RenderContext { get; }
+        public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc => OnInitialize;
+
+        public int StampWidth
+        {
+            get { return Entry.Width; }
+            set { SetProperty(Entry, x => x.Width, value); }
+        }
+
+        public int StampHeight
+        {
+            get { return Entry.Height; }
+            set { SetProperty(Entry, x => x.Height, value); }
+        }
+
+        public int StampCenterX
+        {
+            get { return Entry.CenterX; }
+            set { SetProperty(Entry, x => x.CenterX, value); }
+        }
+
+        public int StampCenterY
+        {
+            get { return Entry.CenterY; }
+            set { SetProperty(Entry, x => x.CenterY, value); }
+        }
+
+        public TilesSelectorVM TilesSelector { get; }
 
         public ObservableCollection<string> PaletteIds { get; }
 
@@ -96,8 +142,6 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         protected override void UpdateEntry(IDbTileStamp entry)
         {
-            RenderContext.Save();
-
             base.UpdateEntry(entry);
         }
 
@@ -105,7 +149,7 @@ namespace OpenBreed.Editor.VM.TileStamps
         {
             base.UpdateVM(entry);
 
-            RenderContext.Load(entry);
+            model.Load(entry);
         }
 
         protected override void OnPropertyChanged(string name)
@@ -127,6 +171,33 @@ namespace OpenBreed.Editor.VM.TileStamps
         #endregion Protected Methods
 
         #region Private Methods
+
+        private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
+        {
+            var serviceScope = serviceScopeFactory.CreateScope();
+            serviceScope.ServiceProvider.GetRequiredService<IRenderContextFactory>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
+
+            var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
+            var eventsMan = serviceScope.ServiceProvider.GetRequiredService<IEventsMan>();
+            var tileStampDataLoader = serviceScope.ServiceProvider.GetRequiredService<ITileStampDataLoader>();
+
+            var view = new EditorView(eventsMan, renderContext);
+
+            renderViewController = ActivatorUtilities.CreateInstance<TileStampEditorController>(serviceScope.ServiceProvider, view, model);
+
+            if (Entry is not null)
+            {
+                tileStampDataLoader.Load(Entry);
+
+                eventsMan.Subscribe<RenderContextInitializedEvent>((rc) =>
+                {
+                    renderViewController.Reset();
+                    renderViewController.CurrentTileAtlasId = TilesSelector.CurrentTileSetId;
+                });
+            }
+
+            return renderContext;
+        }
 
         private void SwitchPalette()
         {

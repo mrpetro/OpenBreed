@@ -47,7 +47,7 @@ namespace OpenBreed.Editor.VM.Maps
         public IRenderTarget RenderTarget { get; }
         public MapViewCursorVM Cursor { get; }
 
-        public MapLayoutModel Layout => Parent.Layout;
+        public IMapLayoutModel Layout => Parent.Layout;
 
         public MapEditorVM Parent { get; }
 

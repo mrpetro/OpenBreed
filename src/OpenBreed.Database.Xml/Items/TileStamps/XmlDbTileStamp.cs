@@ -60,6 +60,24 @@ namespace OpenBreed.Database.Xml.Items.TileStamps
             }
         }
 
+        public IDbTileStampCell AddNewCell(int x, int y)
+        {
+            var newCell = new XmlDbTileStampCell()
+            {
+                X = x,
+                Y = y
+            };
+
+            XmlCells.Add(newCell);
+
+            return newCell;
+        }
+
+        public bool RemoveCell(IDbTileStampCell cell)
+        {
+            return XmlCells.Remove((XmlDbTileStampCell)cell);
+        }
+
         #endregion Public Properties
 
         #region Public Methods

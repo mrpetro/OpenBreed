@@ -33,16 +33,8 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ITileGridFactory, TileGridFactory>();
-                services.AddSingleton<IRenderingMan, RenderingMan>();
-
-                services.AddScoped<IRenderContextFactory, OpenTKRenderContextFactory>();
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContextFactory>().CreateContext());
-
-                //               services.AddSingleton<Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>>((sp)
-                //                   => (graphicalContext, hostCoordinateSystemConverter)
-                //                   => new OpenTKRenderContext(sp.GetRequiredService<ILogger>(), sp.GetRequiredService<IEventsMan>(), graphicalContext, hostCoordinateSystemConverter));
-            });
+                services.AddOpenGLServices();
+             });
         }
 
 

@@ -1,125 +1,119 @@
-﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Common.Data;
-using OpenBreed.Common.Interface.Data;
-using OpenBreed.Common.Interface.Dialog;
-using OpenBreed.Common.Interface.Drawing;
-using OpenBreed.Database.Interface.Items.TileStamps;
-using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM;
-using OpenBreed.Model.Palettes;
-using OpenBreed.Model.Tiles;
-using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Rendering.Interface;
-using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using OpenTK.Windowing.Common;
-using OpenBreed.Rendering.Interface.Events;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using OpenBreed.Core.Interface.Managers;
-using OpenBreed.Editor.VM.Extensions;
-using System.Security.Cryptography;
-using Microsoft.Extensions.DependencyInjection;
+﻿//using Microsoft.Extensions.Logging;
+//using OpenBreed.Common.Data;
+//using OpenBreed.Common.Interface.Data;
+//using OpenBreed.Common.Interface.Dialog;
+//using OpenBreed.Common.Interface.Drawing;
+//using OpenBreed.Database.Interface.Items.TileStamps;
+//using OpenBreed.Editor.VM.Base;
+//using OpenBreed.Editor.VM;
+//using OpenBreed.Model.Palettes;
+//using OpenBreed.Model.Tiles;
+//using OpenBreed.Rendering.Interface.Managers;
+//using OpenBreed.Rendering.Interface;
+//using OpenTK.Mathematics;
+//using System;
+//using System.Collections.Generic;
+//using System.Collections.ObjectModel;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using System.Windows.Input;
+//using OpenTK.Windowing.Common;
+//using OpenBreed.Rendering.Interface.Events;
+//using Microsoft.EntityFrameworkCore.Metadata.Internal;
+//using OpenBreed.Core.Interface.Managers;
+//using OpenBreed.Editor.VM.Extensions;
+//using System.Security.Cryptography;
+//using Microsoft.Extensions.DependencyInjection;
 
-namespace OpenBreed.Editor.VM.Base
-{
-    public interface IRenderContextVM
-    {
-        Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc { get; }
-    }
+//namespace OpenBreed.Editor.VM.Base
+//{
+//    public class RenderContextVM<TDbEntry, TViewControl> : RenderContextBaseVM where TViewControl : RenderViewControlBase<TDbEntry>
+//    {
+//        #region Private Fields
 
+//        private readonly IEventsMan eventsMan;
+//        private readonly IServiceScopeFactory serviceScopeFactory;
+//        private RenderViewControlBase<TDbEntry> renderView;
+//        private TDbEntry entry;
 
-    public class RenderContextVM<TDbEntry, TViewControl> : RenderContextBaseVM where TViewControl : RenderViewControlBase<TDbEntry>
-    {
-        #region Private Fields
+//        #endregion Private Fields
 
-        private readonly IEventsMan eventsMan;
-        private readonly IServiceScopeFactory serviceScopeFactory;
-        private RenderViewControlBase<TDbEntry> renderView;
-        private TDbEntry entry;
+//        #region Public Constructors
 
-        #endregion Private Fields
+//        public RenderContextVM(IEventsMan eventsMan,
+//            IServiceScopeFactory serviceScopeFactory)
+//        {
+//            this.eventsMan = eventsMan;
+//            this.serviceScopeFactory = serviceScopeFactory;
+//        }
 
-        #region Public Constructors
+//        #endregion Public Constructors
 
-        public RenderContextVM(IEventsMan eventsMan,
-            IServiceScopeFactory serviceScopeFactory)
-        {
-            this.eventsMan = eventsMan;
-            this.serviceScopeFactory = serviceScopeFactory;
-        }
+//        #region Public Properties
 
-        #endregion Public Constructors
+//        #endregion Public Properties
 
-        #region Public Properties
+//        #region Private Methods
 
-        #endregion Public Properties
+//        protected override IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
+//        {
+//            var serviceScope = serviceScopeFactory.CreateScope();
+//            serviceScope.ServiceProvider.GetRequiredService<IRenderContextFactory>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
 
-        #region Private Methods
+//            var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
 
-        protected override IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
-        {
-            var serviceScope = serviceScopeFactory.CreateScope();
-            serviceScope.ServiceProvider.GetRequiredService<IRenderContextFactory>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
+//            renderView = ActivatorUtilities.CreateInstance<TViewControl>(serviceScope.ServiceProvider);
 
-            var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
+//            if (entry is not null)
+//            {
+//                renderView.Initialize(entry);
+//            }
 
-            renderView = ActivatorUtilities.CreateInstance<TViewControl>(serviceScope.ServiceProvider);
+//            return renderContext;
+//        }
 
-            if (entry is not null)
-            {
-                renderView.Initialize(entry);
-            }
+//        public void Load(TDbEntry entry)
+//        {
+//            this.entry = entry;
+//        }
 
-            return renderContext;
-        }
+//        public void Save()
+//        {
+//            renderView.Save(entry);
 
-        public void Load(TDbEntry entry)
-        {
-            this.entry = entry;
-        }
+//            //renderView.Save(entry);
+//        }
 
-        public void Save()
-        {
-            renderView.Save(entry);
-
-            //renderView.Save(entry);
-        }
-
-        #endregion Private Methods
-    }
+//        #endregion Private Methods
+//    }
 
 
 
-    public abstract class RenderContextBaseVM : BaseViewModel
-    {
-        #region Private Fields
+//    public abstract class RenderContextBaseVM : BaseViewModel
+//    {
+//        #region Private Fields
 
-        #endregion Private Fields
+//        #endregion Private Fields
 
-        #region Public Constructors
+//        #region Public Constructors
 
-        public RenderContextBaseVM()
-        {
-        }
+//        public RenderContextBaseVM()
+//        {
+//        }
 
-        #endregion Public Constructors
+//        #endregion Public Constructors
 
-        #region Public Properties
+//        #region Public Properties
 
-        public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc => OnInitialize;
+//        public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc => OnInitialize;
 
-        #endregion Public Properties
+//        #endregion Public Properties
 
-        #region Private Methods
+//        #region Private Methods
 
-        protected abstract IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter);
+//        protected abstract IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter);
 
-        #endregion Private Methods
-    }
-}
+//        #endregion Private Methods
+//    }
+//}

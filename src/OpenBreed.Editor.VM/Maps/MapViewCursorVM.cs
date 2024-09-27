@@ -59,7 +59,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public MapLayoutModel Layout => Parent.Layout;
+        public IMapLayoutModel Layout => Parent.Layout;
         public MapEditorVM Parent { get; }
 
         public Func<MyPoint, MyPoint> ToWorldCoordsFunc { get; set; }

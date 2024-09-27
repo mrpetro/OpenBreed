@@ -36,9 +36,9 @@ namespace OpenBreed.Editor.VM.Base
         {
             var expr = (MemberExpression)properyExpression.Body;
             var prop = (PropertyInfo)expr.Member;
-            var newValue = (TValue)prop.GetValue(target);
+            var oldValue = (TValue)prop.GetValue(target);
 
-            if (EqualityComparer<TValue>.Default.Equals(newValue, value))
+            if (EqualityComparer<TValue>.Default.Equals(oldValue, value))
             {
                 return false;
             }

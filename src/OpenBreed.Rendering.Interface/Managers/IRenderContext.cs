@@ -9,13 +9,6 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.Interface.Managers
 {
-    public interface IRenderContextFactory
-    {
-        void SetupScope(HostCoordinateSystemConverter hostCoordinateSystemConverter, IGraphicsContext graphicsContext);
-
-        IRenderContext CreateContext();
-    }
-
     public interface IRenderContext
     {
         #region Public Properties
@@ -45,6 +38,8 @@ namespace OpenBreed.Rendering.Interface.Managers
         void CursorDown(int cursorId, Vector2i point, CursorKeys cursorKey);
         void CursorMove(int cursorId, Vector2i point);
         void CursorWheel(int cursorId, Vector2i point, int wheelDelta);
+
+        void Initialize();
 
         #endregion Public Methods
     }

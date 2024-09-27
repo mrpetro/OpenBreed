@@ -46,6 +46,25 @@ namespace OpenBreed.Editor.UI.Wpf
             Render += GLWpfControlEx_Init;
 
             Cursor = Cursors.None;
+
+
+            DataContextChanged += GLWpfControlEx_DataContextChanged;
+        }
+
+        private void GLWpfControlEx_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue is not null && e.NewValue is not null)
+            {
+                MouseWheel -= GLWpfControlEx_MouseWheel;
+                MouseUp -= GLWpfControlEx_MouseUp;
+                MouseLeave -= GLWpfControlEx_MouseLeave; ;
+                MouseEnter -= GLWpfControlEx_MouseEnter;
+                MouseDown -= GLWpfControlEx_MouseDown;
+                MouseMove -= GLWpfControlEx_MouseMove;
+                SizeChanged -= GLWpfControlEx_SizeChanged;
+                Render -= GLWpfControlEx_Render;
+                Render += GLWpfControlEx_Init;
+            }
         }
 
         #endregion Public Constructors
@@ -56,7 +75,9 @@ namespace OpenBreed.Editor.UI.Wpf
         public Func<IGraphicsContext, HostCoordinateSystemConverter , IRenderContext> InitFunc
         {
             get { return (Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>)GetValue(InitFuncProperty); }
-            set { SetValue(InitFuncProperty, value); }
+            set {
+                SetValue(InitFuncProperty, value);
+            }
         }
 
         #endregion Public Properties
@@ -78,6 +99,8 @@ namespace OpenBreed.Editor.UI.Wpf
             renderContext = InitFunc.Invoke(Context, GetRenderContextPosition);
 
             renderContext.Resize((int)ActualWidth, (int)ActualHeight);
+
+            renderContext.Initialize();
 
             Render -= GLWpfControlEx_Init;
             Render += GLWpfControlEx_Render;

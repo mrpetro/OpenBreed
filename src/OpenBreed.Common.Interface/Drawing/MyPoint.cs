@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,35 @@ namespace OpenBreed.Common.Interface.Drawing
         }
 
         #endregion Public Constructors
+
+        #region Public Methods
+
+        public static MyPoint operator +(MyPoint a, MyPoint b)
+        {
+            return new MyPoint(a.X + b.X, a.Y + b.Y);
+        }
+
+        public static MyPoint operator -(MyPoint a, MyPoint b)
+        {
+            return new MyPoint(a.X - b.X, a.Y - b.Y);
+        }
+
+        public static MyPoint operator /(MyPoint a, int d)
+        {
+            return new MyPoint(a.X / d, a.Y / d);
+        }
+
+        public static MyPoint operator *(MyPoint a, int d)
+        {
+            return new MyPoint(a.X * d, a.Y * d);
+        }
+
+        public static MyPoint operator *(MyPoint a, MyPoint b)
+        {
+            return new MyPoint(a.X * b.X, a.Y * b.Y);
+        }
+
+        #endregion Public Methods
     }
 
     public struct MyPointF

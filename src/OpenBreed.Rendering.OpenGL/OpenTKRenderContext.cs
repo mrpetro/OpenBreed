@@ -8,6 +8,7 @@ using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,31 +19,6 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace OpenBreed.Rendering.OpenGL
 {
-    public class OpenTKRenderContextFactory : IRenderContextFactory
-    {
-        private readonly ILogger logger;
-        private readonly IEventsMan eventsMan;
-        private HostCoordinateSystemConverter hostCoordinateSystemConverter;
-        private IGraphicsContext graphicsContext;
-
-        public OpenTKRenderContextFactory(ILogger logger, IEventsMan eventsMan)
-        {
-            this.logger = logger;
-            this.eventsMan = eventsMan;
-        }
-
-        public IRenderContext CreateContext()
-        {
-            return new OpenTKRenderContext(logger, eventsMan, graphicsContext, hostCoordinateSystemConverter);
-        }
-
-        public void SetupScope(HostCoordinateSystemConverter hostCoordinateSystemConverter, IGraphicsContext graphicsContext)
-        {
-            this.hostCoordinateSystemConverter = hostCoordinateSystemConverter;
-            this.graphicsContext = graphicsContext;
-        }
-    }
-
     public class OpenTKRenderContext : IRenderContext
     {
         #region Private Fields
@@ -101,9 +77,9 @@ namespace OpenBreed.Rendering.OpenGL
 
         #region Public Methods
 
-        public IRenderView CreateView(RenderDelegate renderer, float minX = 0, float minY = 0, float maxX = 1, float maxY = 1)
+        public IRenderView CreateView(RenderDelegate viewRenderer, float minX = 0, float minY = 0, float maxX = 1, float maxY = 1)
         {
-            var renderView = new RenderView(this, hostCoordinateSystemConverter, renderer, new Box2(new Vector2(minX, minY), new Vector2(maxX, maxY)));
+            var renderView = new RenderView(this, hostCoordinateSystemConverter, viewRenderer, new Box2(new Vector2(minX, minY), new Vector2(maxX, maxY)));
             views.Add(renderView);
             renderView.Reset();
             return renderView;
@@ -116,7 +92,8 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            eventsMan.Raise(new ViewCursorDownEvent(view, cursorId, cursorKey));
+            point = view.GetHostToViewCoords(point);
+            eventsMan.Raise(new ViewCursorDownEvent(view, cursorId, point, cursorKey));
         }
 
         public void CursorUp(int cursorId, Vector2i point, CursorKeys cursorKey)
@@ -126,7 +103,8 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            eventsMan.Raise(new ViewCursorUpEvent(view, cursorId, cursorKey));
+            point = view.GetHostToViewCoords(point);
+            eventsMan.Raise(new ViewCursorUpEvent(view, cursorId, point, cursorKey));
         }
 
         public void CursorEnter(int cursorId, Vector2i point)
@@ -136,7 +114,8 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            eventsMan.Raise(new ViewCursorEnterEvent(view, cursorId));
+            point = view.GetHostToViewCoords(point);
+            eventsMan.Raise(new ViewCursorEnterEvent(view, cursorId, point));
         }
 
         public void CursorLeave(int cursorId, Vector2i point)
@@ -165,7 +144,8 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            eventsMan.Raise(new ViewCursorWheelEvent(view, cursorId, wheelDelta));
+            point = view.GetHostToViewCoords(point);
+            eventsMan.Raise(new ViewCursorWheelEvent(view, cursorId, point, wheelDelta));
         }
 
         public void Render(float dt)
@@ -176,6 +156,14 @@ namespace OpenBreed.Rendering.OpenGL
             {
                 view.OnRender(dt);
             }
+        }
+
+        public void Initialize()
+        {
+
+
+
+            eventsMan.Raise(new RenderContextInitializedEvent(this));
         }
 
         public void Resize(int width, int height)

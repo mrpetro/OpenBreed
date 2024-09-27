@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorVM : EntrySpecificEditorVM<IDbMap>
+    public class MapEditorVM : EntrySpecificEditorVM<IDbMap>, ITilesToolHost
     {
         #region Private Fields
 
@@ -96,6 +96,8 @@ namespace OpenBreed.Editor.VM.Maps
         //public MapLayoutVM LayoutVm { get; }
         public IImage CurrentTilesBitmap { get; private set; }
 
+        public MySize TileSetSize => new MySize(CurrentTilesBitmap.Width, CurrentTilesBitmap.Height);
+
         public Action<string> UpdateLayout { get; private set; }
         public Action<string> UpdateTileSets { get; private set; }
         public Action<IEnumerable<string>> UpdatePalettes { get; private set; }
@@ -128,7 +130,7 @@ namespace OpenBreed.Editor.VM.Maps
         public MapMissionPropertiesEditorVM MissionProperties { get; }
 
         internal List<PaletteModel> Palettes => Model.Palettes;
-        internal MapLayoutModel Layout => Model.Layout;
+        public IMapLayoutModel Layout => Model.Layout;
 
         public bool IsModified
         {
@@ -148,7 +150,7 @@ namespace OpenBreed.Editor.VM.Maps
             private set => Model.ActionSet = value;
         }
 
-        internal TileSetModel TileSet
+        public TileSetModel TileSet
         {
             get => Model.TileSet;
             private set => Model.TileSet = value;

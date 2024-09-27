@@ -6,11 +6,11 @@ using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorTileInsertOperation
+    public class TileInsertOperation
     {
         #region Public Constructors
 
-        public MapEditorTileInsertOperation(Point indexCoords, int tileIdBefore, int tileIdAfter)
+        public TileInsertOperation(Point indexCoords, int tileIdBefore, int tileIdAfter)
         {
             IndexCoords = indexCoords;
             TileIdBefore = tileIdBefore;

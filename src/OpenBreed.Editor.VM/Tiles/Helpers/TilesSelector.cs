@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Editor.UI.Mvc.Models;
 using OpenBreed.Editor.VM.Common;
 using System;
 using System.Collections.Generic;
@@ -9,18 +10,21 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
 {
     public class TilesSelector
     {
-        internal TileSetViewerVM Viewer;
-        private readonly IDrawingFactory drawingFactory;
-
         #region Public Fields
 
-        public MyPoint CenterCoord;
-
-        public MyPoint MaxCoord;
-
-        public MyPoint MinCoord;
-
         #endregion Public Fields
+
+        #region Internal Fields
+
+        internal TileSetViewerVM Viewer;
+
+        #endregion Internal Fields
+
+        #region Private Fields
+
+        private readonly IDrawingFactory drawingFactory;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -36,21 +40,26 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public bool IsEmpty { get { return SelectedIndexes.Count == 0; } }
+        #region Public Events
 
         public event EventHandler InfoChanged;
 
-        public bool MultiSelect { get; set; }
+        public event EventHandler<TilesSelectionChangedEventArgs> SelectionChanged;
 
-        public EditorApplicationVM Root { get; }
+        #endregion Public Events
+
+        #region Public Properties
+
+        public bool IsEmpty
+        { get { return SelectedIndexes.Count == 0; } }
+        public bool MultiSelect { get; set; }
 
         public List<int> SelectedIndexes { get; }
 
         public SelectionRectangle SelectionRectangle { get; }
 
         public SelectModeEnum SelectMode { get; private set; }
+        public string Info { get; private set; }
 
         #endregion Public Properties
 
@@ -60,18 +69,6 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
         {
             foreach (int tileId in tileIdList)
                 AddSelection(tileId);
-        }
-
-        public string Info { get; private set; }
-
-        private void UpdateInfo()
-        {
-            if (SelectedIndexes.Count == 1)
-                Info = $"Index: {SelectedIndexes[0]}";
-            else
-                Info = "";
-
-            InfoChanged?.Invoke(this, new EventArgs());
         }
 
         public void AddSelection(int tileId)
@@ -95,9 +92,11 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
             var selectPen = drawingFactory.CreatePen(MyColor.LightBlue);
             var deselectPen = drawingFactory.CreatePen(MyColor.Red);
 
+            var tileSize = Viewer.TileSize;
+
             for (int index = 0; index < SelectedIndexes.Count; index++)
             {
-                var rectangle = Viewer.Items[SelectedIndexes[index]].Rectangle;
+                var rectangle = Viewer.Items[SelectedIndexes[index]].GetBox(tileSize);
                 gfx.DrawRectangle(selectedPen, rectangle);
             }
 
@@ -127,7 +126,9 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
             }
 
             if (!IsEmpty)
-                CalculateSelectionCenter();
+            {
+                CalculateSelection();
+            }
 
             SelectMode = SelectModeEnum.Nothing;
         }
@@ -170,27 +171,59 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
 
         #region Private Methods
 
-        private void CalculateSelectionCenter()
+        private void UpdateInfo()
         {
-            var rectangle = Viewer.Items[SelectedIndexes[0]].Rectangle;
+            if (SelectedIndexes.Count == 1)
+                Info = $"Index: {SelectedIndexes[0]}";
+            else
+                Info = "";
 
-            MinCoord.X = rectangle.Left;
-            MaxCoord.X = rectangle.Right;
-            MinCoord.Y = rectangle.Bottom;
-            MaxCoord.Y = rectangle.Top;
+            InfoChanged?.Invoke(this, new EventArgs());
+        }
 
-            for (int i = 1; i < SelectedIndexes.Count; i++)
+        private void OnSelectionChanged(TileSelection[] selection)
+        {
+            SelectionChanged?.Invoke(this, new TilesSelectionChangedEventArgs(selection));
+        }
+
+
+        private void CalculateSelection()
+        {
+
+            var extent = new MyExtent();
+
+            var selections = new List<TileSelection>();
+
+            for (int i = 0; i < SelectedIndexes.Count; i++)
             {
-                rectangle = Viewer.Items[SelectedIndexes[i]].Rectangle;
+                var selectedItem = Viewer.Items[SelectedIndexes[i]];
 
-                MinCoord.X = Math.Min(MinCoord.X, rectangle.Left);
-                MaxCoord.X = Math.Max(MaxCoord.X, rectangle.Right);
-                MinCoord.Y = Math.Min(MinCoord.Y, rectangle.Bottom);
-                MaxCoord.Y = Math.Max(MaxCoord.Y, rectangle.Top);
+                var pos = selectedItem.IndexPosition;
+
+                extent.Expand(pos);
+
+                selections.Add(new TileSelection()
+                {
+                    Index = selectedItem.Index,
+                    Position = selectedItem.IndexPosition
+                });
             }
 
-            CenterCoord = Viewer.GetSnapCoords(new MyPoint((MinCoord.X + MaxCoord.X) / 2, (MinCoord.Y + MaxCoord.Y) / 2));
-        }
+            var selectionCenter = extent.Center;
+
+            var flipY = new MyPoint(1, -1);
+
+            for (int i = 0; i < selections.Count; i++)
+            {
+                selections[i] = new TileSelection()
+                {
+                    Index = selections[i].Index,
+                    Position = (selections[i].Position - selectionCenter) * flipY
+                };
+            }
+
+            OnSelectionChanged(selections.ToArray());
+         }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

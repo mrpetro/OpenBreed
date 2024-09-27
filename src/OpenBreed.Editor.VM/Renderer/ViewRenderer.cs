@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Editor.VM.Maps;
+using OpenBreed.Model.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace OpenBreed.Editor.VM.Renderer
         {
             Target.Transform = renderable.Transformation;
 
-            _layoutRenderer.Render(renderable.Layout);
+            _layoutRenderer.Render((MapLayoutModel)renderable.Layout);
             _tilesToolRenderer.Render(_editor.TilesTool);
             _cursorRenderer.Render(renderable.Cursor);
         }

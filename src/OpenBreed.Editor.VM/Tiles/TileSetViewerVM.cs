@@ -14,29 +14,40 @@ using OpenBreed.Editor.VM.Common;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Editor.VM.Renderer;
 using System.Drawing;
+using OpenBreed.Editor.UI.Mvc.Models;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
+    public class TilesSelectionChangedEventArgs : EventArgs
+    {
+        #region Public Constructors
+
+        public TilesSelectionChangedEventArgs(TileSelection[] selections)
+        {
+            Selections = selections;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public TileSelection[] Selections { get; }
+
+        #endregion Public Properties
+    }
+
     public class TileSetViewerVM : EditableEntryVM
     {
-        #region Public Fields
-
-        public MyPoint CenterCoord;
-        public MyPoint MaxCoord;
-        public MyPoint MinCoord;
-
-        #endregion Public Fields
-
         #region Private Fields
 
+        private readonly IDrawingFactory drawingFactory;
+        private readonly IDrawingContextProvider drawingContextProvider;
+        private readonly IBitmapProvider bitmapProvider;
         private string info;
         private IBitmap _bitmap;
         private PaletteModel _palette;
         private int _width;
         private int _height;
-        private readonly IDrawingFactory drawingFactory;
-        private readonly IDrawingContextProvider drawingContextProvider;
-        private readonly IBitmapProvider bitmapProvider;
 
         #endregion Private Fields
 
@@ -56,33 +67,22 @@ namespace OpenBreed.Editor.VM.Tiles
             this.drawingFactory = drawingFactory;
             this.drawingContextProvider = drawingContextProvider;
             this.bitmapProvider = bitmapProvider;
-        }
 
-        private void OnLeft()
-        {
-            if (Selector.SelectMode != SelectModeEnum.Nothing)
-            {
-                return;
-            }
-
-            //Selector.StartSelection(SelectModeEnum.Select, e.Location);
-        }
-
-        private void OnRight()
-        {
-            if (Selector.SelectMode != SelectModeEnum.Nothing)
-            {
-                return;
-            }
-
-            //Selector.StartSelection(SelectModeEnum.Deselect, e.Location);
+            Selector.SelectionChanged += (s, a) => SelectionChanged?.Invoke(this, a);
         }
 
         #endregion Public Constructors
 
+        #region Public Events
+
+        public event EventHandler<TilesSelectionChangedEventArgs> SelectionChanged;
+
+        #endregion Public Events
+
         #region Public Properties
 
         public ICommand OnMouseLeftButtonDownCommand { get; }
+
         public ICommand OnMouseRightButtonDownCommand { get; }
 
         public IBitmap Bitmap
@@ -120,7 +120,9 @@ namespace OpenBreed.Editor.VM.Tiles
         public TilesSelector Selector { get; }
 
         public int TileSize { get; set; }
+
         public int TilesNoX { get; private set; }
+
         public int TilesNoY { get; private set; }
 
         #endregion Public Properties
@@ -147,7 +149,7 @@ namespace OpenBreed.Editor.VM.Tiles
             if (tileId >= Items.Count)
                 return;
 
-            var tileRect = Items[tileId].Rectangle;
+            var tileRect = Items[tileId].GetBox(TileSize);
             gfx.DrawImage(Bitmap, (int)x, (int)y, tileRect);
         }
 
@@ -257,7 +259,43 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #endregion Internal Methods
 
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(Palette):
+                    bitmapProvider.SetPaletteColors(Bitmap, Palette.Data);
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
+
+        private void OnLeft()
+        {
+            if (Selector.SelectMode != SelectModeEnum.Nothing)
+            {
+                return;
+            }
+
+            //Selector.StartSelection(SelectModeEnum.Select, e.Location);
+        }
+
+        private void OnRight()
+        {
+            if (Selector.SelectMode != SelectModeEnum.Nothing)
+            {
+                return;
+            }
+
+            //Selector.StartSelection(SelectModeEnum.Deselect, e.Location);
+        }
 
         private void CreateDefaultBitmap()
         {
@@ -310,22 +348,9 @@ namespace OpenBreed.Editor.VM.Tiles
                 {
                     int tileIndexX = tileId % TilesNoX;
                     int tileIndexY = tileId / TilesNoX;
-                    var rectangle = new MyRectangle(tileIndexX * TileSize, tileIndexY * TileSize, TileSize, TileSize);
-                    Items.Add(new TileVM(tileId, rectangle));
+                    Items.Add(new TileVM(tileId, new MyPoint(tileIndexX, tileIndexY)));
                 }
             });
-        }
-
-        protected override void OnPropertyChanged(string name)
-        {
-            switch (name)
-            {
-                case nameof(Palette):
-                    bitmapProvider.SetPaletteColors(Bitmap, Palette.Data);
-                    break;
-            }
-
-            base.OnPropertyChanged(name);
         }
 
         #endregion Private Methods

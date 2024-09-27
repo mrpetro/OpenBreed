@@ -37,15 +37,12 @@ namespace OpenBreed.Editor.VM.Tiles
             PalettesDataProvider palettesDataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IDrawingFactory drawingFactory,
-            IDrawingContextProvider drawingContextProvider,
-            IBitmapProvider bitmapProvider) : base(logger, workspaceMan, dialogProvider)
+            TileSetViewerVM tileSetViewerVm) : base(logger, workspaceMan, dialogProvider)
         {
             PaletteIds = new ObservableCollection<string>();
             this.tileSetsDataProvider = tileSetsDataProvider;
             this.palettesDataProvider = palettesDataProvider;
-
-            Viewer = new TileSetViewerVM(drawingFactory, drawingContextProvider, bitmapProvider);
+            Viewer = tileSetViewerVm;
         }
 
         #endregion Public Constructors

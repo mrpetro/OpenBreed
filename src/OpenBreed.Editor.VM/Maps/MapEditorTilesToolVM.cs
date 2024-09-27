@@ -29,11 +29,24 @@ namespace OpenBreed.Editor.VM.Maps
         Draw
     }
 
+    public interface ITilesToolHost
+    {
+        bool IsModified { get; set; }
+
+        void DrawTile(IRenderTarget renderTarget, int tileId, float x, float y, int tileSize);
+
+        TileSetModel TileSet { get; }
+
+        MySize TileSetSize { get; }
+
+        IMapLayoutModel Layout { get; }
+    }
+
     public class MapEditorTilesToolVM : MapEditorToolVM
     {
         #region Private Fields
 
-        private MapEditorTileInsertOperation[,] InsertBuffer;
+        private TileInsertOperation[,] InsertBuffer;
         private readonly IDrawingFactory drawingFactory;
 
         #endregion Private Fields
@@ -41,7 +54,7 @@ namespace OpenBreed.Editor.VM.Maps
         #region Public Constructors
 
         public MapEditorTilesToolVM(
-            MapEditorVM parent,
+            ITilesToolHost parent,
             IWorkspaceMan workspaceMan,
             IDrawingFactory drawingFactory)
         {
@@ -52,9 +65,7 @@ namespace OpenBreed.Editor.VM.Maps
                 typeof(IDbTileAtlas),
                 (newRefId) => TilesSelector.CurrentTileSetRef = newRefId);
 
-            TilesCursor = new List<MapEditorTileInsertOperation>();
-            //Inserter = new MapEditorTilesInserter(Parent);
-
+            TilesCursor = new List<TileInsertOperation>();
 
             TileSetSelector = new MapEditorTileSetSelectorVM(this);
 
@@ -81,15 +92,15 @@ namespace OpenBreed.Editor.VM.Maps
 
         public InsertModeEnum Mode { get; private set; }
 
-        public MapLayoutModel Layout { get; private set; }
+        public IMapLayoutModel Layout { get; private set; }
         public int LayerIndex { get; private set; }
 
-        public MapEditorVM Parent { get; }
+        public ITilesToolHost Parent { get; }
         public MapEditorTileSetSelectorVM TileSetSelector { get; }
         public MapEditorTilesSelectorVM TilesSelector { get; }
         public EntryRefIdEditorVM RefIdEditor { get; }
 
-        public List<MapEditorTileInsertOperation> TilesCursor { get; }
+        public List<TileInsertOperation> TilesCursor { get; }
 
         #endregion Public Properties
 
@@ -110,8 +121,8 @@ namespace OpenBreed.Editor.VM.Maps
                 case CursorActions.Leave:
                     break;
                 case CursorActions.Move:
-                    UpdateInsertion();
-                    UpdateInserting();
+                    UpdateInsertion(cursor.WorldIndexCoords);
+                    UpdateInserting(cursor.WorldIndexCoords);
                     break;
                 case CursorActions.Click:
                     break;
@@ -125,7 +136,7 @@ namespace OpenBreed.Editor.VM.Maps
                     if (Mode != InsertModeEnum.Nothing)
                         return;
                     if (cursor.Buttons.HasFlag(CursorButtons.Left))
-                        StartInserting(InsertModeEnum.Point);
+                        StartInserting(InsertModeEnum.Point, cursor.WorldIndexCoords);
                     break;
                 default:
                     break;
@@ -136,7 +147,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void CommitInsertion()
         {
-            List<MapEditorTileInsertOperation> tileInserts = new List<MapEditorTileInsertOperation>();
+            List<TileInsertOperation> tileInserts = new List<TileInsertOperation>();
 
             for (int indexY = 0; indexY < InsertBuffer.GetLength(1); indexY++)
             {
@@ -162,7 +173,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Methods
 
-        internal void StartInserting(InsertModeEnum insertMode)
+        internal void StartInserting(InsertModeEnum insertMode, MyPoint indexPoint)
         {
             if (TilesSelector.IsEmpty)
                 return;
@@ -170,7 +181,7 @@ namespace OpenBreed.Editor.VM.Maps
             Mode = insertMode;
 
             if (Mode == InsertModeEnum.Point)
-                InsertSelection();
+                InsertSelection(indexPoint);
         }
 
         internal void FinishInserting()
@@ -179,19 +190,18 @@ namespace OpenBreed.Editor.VM.Maps
             Mode = InsertModeEnum.Nothing;
         }
 
-        private void UpdateInsertion()
+        private void UpdateInsertion(MyPoint indexPoint)
         {
             TilesCursor.Clear();
 
-            var indexCoords = Parent.MapView.Cursor.WorldIndexCoords;
             var selectionCenter = TilesSelector.GetIndexCoords(TilesSelector.CenterCoord);
 
             for (int i = 0; i < TilesSelector.SelectedIndexes.Count; i++)
             {
                 int tileId = TilesSelector.SelectedIndexes[i];
                 var rectangle = TilesSelector.CurrentTileSet.Tiles[tileId].Rectangle;
-                int tileInsertIndexX = indexCoords.X + rectangle.X / rectangle.Width;
-                int tileInsertIndexY = indexCoords.Y + rectangle.Y / rectangle.Height;
+                int tileInsertIndexX = indexPoint.X + rectangle.X / rectangle.Width;
+                int tileInsertIndexY = indexPoint.Y + rectangle.Y / rectangle.Height;
                 tileInsertIndexX -= selectionCenter.X;
                 tileInsertIndexY -= selectionCenter.Y;
 
@@ -201,15 +211,15 @@ namespace OpenBreed.Editor.VM.Maps
                 if (tileInsertIndexY < 0 || tileInsertIndexY >= Layout.Height)
                     continue;
 
-                TilesCursor.Add(new MapEditorTileInsertOperation(new Point(tileInsertIndexX, tileInsertIndexY), 0, tileId));
+                TilesCursor.Add(new TileInsertOperation(new Point(tileInsertIndexX, tileInsertIndexY), 0, tileId));
             }
         }
 
-        internal void UpdateInserting()
+        internal void UpdateInserting(MyPoint indexPoint)
         {
             if (Mode == InsertModeEnum.Point)
             {
-                InsertSelection();
+                InsertSelection(indexPoint);
             }
         }
 
@@ -219,7 +229,7 @@ namespace OpenBreed.Editor.VM.Maps
 
             Layout = Parent.Layout;
             LayerIndex = Layout.GetLayerIndex(MapLayerType.Gfx);
-            InsertBuffer = new MapEditorTileInsertOperation[Layout.Width, Layout.Height];
+            InsertBuffer = new TileInsertOperation[Layout.Width, Layout.Height];
         }
 
         public void DrawBuffer(IRenderTarget renderTarget, int tileSize)
@@ -238,17 +248,16 @@ namespace OpenBreed.Editor.VM.Maps
             }
         }
 
-        private void InsertSelection()
+        private void InsertSelection(MyPoint indexPoint)
         {
-            var indexCoords = Parent.MapView.Cursor.WorldIndexCoords;
             var selectionCenter = TilesSelector.GetIndexCoords(TilesSelector.CenterCoord);
 
             for (int i = 0; i < TilesSelector.SelectedIndexes.Count; i++)
             {
                 int tileId = TilesSelector.SelectedIndexes[i];
                 var rectangle = TilesSelector.CurrentTileSet.Tiles[tileId].Rectangle;
-                int tileInsertIndexX = indexCoords.X + rectangle.X / rectangle.Width;
-                int tileInsertIndexY = indexCoords.Y + rectangle.Y / rectangle.Height;
+                int tileInsertIndexX = indexPoint.X + rectangle.X / rectangle.Width;
+                int tileInsertIndexY = indexPoint.Y + rectangle.Y / rectangle.Height;
                 tileInsertIndexX -= selectionCenter.X;
                 tileInsertIndexY -= selectionCenter.Y;
 
@@ -264,12 +273,12 @@ namespace OpenBreed.Editor.VM.Maps
                     int oldTileId = Layout.GetCellValue(LayerIndex, tileInsertIndexX, tileInsertIndexY);
 
                     if (oldTileId != tileId)
-                        InsertBuffer[tileInsertIndexX, tileInsertIndexY] = new MapEditorTileInsertOperation(new Point(tileInsertIndexX, tileInsertIndexY), oldTileId, tileId);
+                        InsertBuffer[tileInsertIndexX, tileInsertIndexY] = new TileInsertOperation(new Point(tileInsertIndexX, tileInsertIndexY), oldTileId, tileId);
                 }
                 else
                 {
                     if (tileReplacement.TileIdAfter != tileId)
-                        InsertBuffer[tileInsertIndexX, tileInsertIndexY] = new MapEditorTileInsertOperation(new Point(tileInsertIndexX, tileInsertIndexY), tileReplacement.TileIdBefore, tileId);
+                        InsertBuffer[tileInsertIndexX, tileInsertIndexY] = new TileInsertOperation(new Point(tileInsertIndexX, tileInsertIndexY), tileReplacement.TileIdBefore, tileId);
                 }
             }
         }

@@ -35,6 +35,7 @@ using OpenBreed.Editor.VM.Logging;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Core.Extensions;
+using OpenBreed.Editor.UI.Mvc.Extensions;
 
 namespace OpenBreed.Editor.App
 {
@@ -141,6 +142,7 @@ namespace OpenBreed.Editor.App
             builder.ConfigureCommonTools();
             builder.SetupCommonViewModels();
             builder.SetupEditorViewModels();
+            builder.ConfigureEditorUIMvc();
             builder.SetupDbEntryEditorFactory();
 
             builder.SetupWindowsDrawingContext();

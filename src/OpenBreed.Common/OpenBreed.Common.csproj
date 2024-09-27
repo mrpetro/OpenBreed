@@ -19,4 +19,8 @@
     <ProjectReference Include="..\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+  </ItemGroup>
+
 </Project>

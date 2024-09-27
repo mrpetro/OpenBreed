@@ -21,7 +21,7 @@ namespace RendererTest.Wpf.App
         private RendererVm CreateViewVm(IServiceProvider sp)
         {
             var serviceScope = sp.CreateScope();
-            return serviceScope.ServiceProvider.GetService<RendererVm>();
+            return serviceScope.ServiceProvider.GetRequiredService<RendererVm>();
         }
 
         public App()

@@ -12,7 +12,7 @@ namespace OpenBreed.Editor.VM.Maps.Commands
     {
         #region Public Constructors
 
-        public CmdTilesInsert(MapEditorTilesToolVM inserter, List<MapEditorTileInsertOperation> operations)
+        public CmdTilesInsert(MapEditorTilesToolVM inserter, List<TileInsertOperation> operations)
         {
             Inserter = inserter;
             Operations = operations;
@@ -23,7 +23,7 @@ namespace OpenBreed.Editor.VM.Maps.Commands
         #region Internal Properties
 
         internal MapEditorTilesToolVM Inserter { get; }
-        internal List<MapEditorTileInsertOperation> Operations { get; }
+        internal List<TileInsertOperation> Operations { get; }
 
         #endregion Internal Properties
 

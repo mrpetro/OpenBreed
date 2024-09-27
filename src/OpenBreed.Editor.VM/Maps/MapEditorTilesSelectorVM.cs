@@ -85,7 +85,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Render(IDrawingContext graphics)
         {
-            if (Parent.Parent.Model is null)
+            if (((MapEditorVM)Parent.Parent).Model is null)
                 return;
 
             renderer.Render(this);
@@ -111,7 +111,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public List<int> GetTileIdList(MyRectangle rectangle)
         {
-            var bitmap = Parent.Parent.CurrentTilesBitmap;
+            var tileSetSize = Parent.Parent.TileSetSize;
             var tileSize = CurrentTileSet.TileSize;
             var tilesNoX = CurrentTileSet.TilesNoX;
 
@@ -123,14 +123,14 @@ namespace OpenBreed.Editor.VM.Maps
             if (left < 0)
                 left = 0;
 
-            if (right > bitmap.Width)
-                right = bitmap.Width;
+            if (right > tileSetSize.Width)
+                right = tileSetSize.Width;
 
             if (top < 0)
                 top = 0;
 
-            if (bottom > bitmap.Height)
-                bottom = bitmap.Height;
+            if (bottom > tileSetSize.Height)
+                bottom = tileSetSize.Height;
 
             rectangle = new MyRectangle(left, top, right - left, bottom - top);
 

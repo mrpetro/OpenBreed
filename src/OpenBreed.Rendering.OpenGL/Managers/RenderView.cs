@@ -168,7 +168,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             projection = matrix;
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
             View = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
         }
@@ -184,14 +184,14 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Methods
 
-        internal void OnRender(float dt)
+        internal virtual void OnRender(float dt)
         {
             GL.Viewport(Box);
 
             renderer?.Invoke(this, Matrix4.Identity, dt);
         }
 
-        internal void OnResize(int width, int height)
+        internal virtual void OnResize(int width, int height)
         {
             var min = new Vector2i(width, height) * boxNormalized.Min;
             var max = new Vector2i(width, height) * boxNormalized.Max;

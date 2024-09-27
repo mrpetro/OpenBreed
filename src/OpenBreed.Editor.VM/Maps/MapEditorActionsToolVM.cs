@@ -40,7 +40,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public MapLayoutModel Layout { get; private set; }
+        public IMapLayoutModel Layout { get; private set; }
         public int LayerIndex { get; private set; }
 
         public MapEditorActionsSelectorVM ActionsSelector { get; }

@@ -35,7 +35,7 @@
             </MenuItem>
 
             <MenuItem Header="Tools">
-                <MenuItem Header="EPF pack/unpack..." Command="{Binding RubEpfManagerCommand}" />
+                <MenuItem Header="EPF pack/unpack..." Command="{Binding RunEpfManagerCommand}" />
                 <MenuItem Header="Options..." Command="{Binding ShowOptionsCommand}" />
                 <MenuItem Header="Log console" Command="{Binding ShowLogConsoleCommand}" />
                 <MenuItem Header="Run game" >

@@ -42,10 +42,11 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Protected Constructors
 
-        protected ViewCursorEvent(IRenderView view, int cursorId)
+        protected ViewCursorEvent(IRenderView view, int cursorId, Vector2i position)
         {
             View = view;
             CursorId = cursorId;
+            Position = position;
         }
 
         #endregion Protected Constructors
@@ -62,6 +63,11 @@ namespace OpenBreed.Rendering.Interface.Events
         /// </summary>
         public int CursorId { get; }
 
+        /// <summary>
+        /// Cursor position (in view coordinates)
+        /// </summary>
+        public Vector2i Position { get; }
+
         #endregion Public Properties
     }
 
@@ -72,19 +78,13 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorMoveEvent(IRenderView view, int cursorId, Vector2i position) : base(view, cursorId)
+        public ViewCursorMoveEvent(IRenderView view, int cursorId, Vector2i position) : base(view, cursorId, position)
         {
-            Position = position;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        /// <summary>
-        /// Cursor position (in view coordinates)
-        /// </summary>
-        public Vector2i Position { get; }
 
         #endregion Public Properties
     }
@@ -96,7 +96,7 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorLeaveEvent(IRenderView view, int cursorId) : base(view, cursorId)
+        public ViewCursorLeaveEvent(IRenderView view, int cursorId, Vector2i position) : base(view, cursorId, position)
         {
         }
 
@@ -110,7 +110,7 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorEnterEvent(IRenderView view, int cursorId) : base(view, cursorId)
+        public ViewCursorEnterEvent(IRenderView view, int cursorId, Vector2i position) : base(view, cursorId, position)
         {
         }
 
@@ -124,7 +124,7 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorUpEvent(IRenderView view, int cursorId, CursorKeys key) : base(view, cursorId)
+        public ViewCursorUpEvent(IRenderView view, int cursorId, Vector2i position, CursorKeys key) : base(view, cursorId, position)
         {
             Key = key;
         }
@@ -148,7 +148,7 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorDownEvent(IRenderView view, int cursorId, CursorKeys key) : base(view, cursorId)
+        public ViewCursorDownEvent(IRenderView view, int cursorId, Vector2i position, CursorKeys key) : base(view, cursorId, position)
         {
             Key = key;
         }
@@ -172,7 +172,7 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorWheelEvent(IRenderView view, int cursorId, int wheelDelta) : base(view, cursorId)
+        public ViewCursorWheelEvent(IRenderView view, int cursorId, Vector2i position, int wheelDelta) : base(view, cursorId, position)
         {
             WheelDelta = wheelDelta;
         }

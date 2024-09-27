@@ -9,27 +9,31 @@ namespace OpenBreed.Database.Interface.Items.TileStamps
         /// <summary>
         /// Width of this tile stamp
         /// </summary>
-        int Width { get; }
+        int Width { get; set; }
 
         /// <summary>
         /// Height of this tile stamp
         /// </summary>
-        int Height { get; }
+        int Height { get; set; }
 
         /// <summary>
         /// Stamp center X index coordinate
         /// </summary>
-        int CenterX { get; }
+        int CenterX { get; set; }
 
         /// <summary>
         /// Stamp center Y index coordinate
         /// </summary>
-        int CenterY { get; }
+        int CenterY { get; set; }
 
         /// <summary>
         /// Cells of this tile stamp
         /// </summary>
         ReadOnlyCollection<IDbTileStampCell> Cells { get; }
+
+        IDbTileStampCell AddNewCell(int x, int y);
+
+        bool RemoveCell(IDbTileStampCell cell);
 
         #endregion Public Properties
     }
@@ -51,12 +55,12 @@ namespace OpenBreed.Database.Interface.Items.TileStamps
         /// <summary>
         /// ID of tile atlas for this cell
         /// </summary>
-        string TsId { get; }
+        string TsId { get; set; }
 
         /// <summary>
         /// Tile atlas tile index for this cell
         /// </summary>
-        int TsTi { get; }
+        int TsTi { get; set; }
 
         #endregion Public Properties
 
