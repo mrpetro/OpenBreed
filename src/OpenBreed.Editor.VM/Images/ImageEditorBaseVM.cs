@@ -4,6 +4,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
@@ -24,9 +25,10 @@ namespace OpenBreed.Editor.VM.Images
         #region Public Constructors
 
         public ImageEditorBaseVM(
+            TDbImage dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
         }
 

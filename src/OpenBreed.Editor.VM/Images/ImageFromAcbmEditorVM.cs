@@ -5,6 +5,7 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface.Items.DataSources;
+using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
@@ -28,11 +29,12 @@ namespace OpenBreed.Editor.VM.Images
         #region Public Constructors
 
         public ImageFromAcbmEditorVM(
+            IDbAcbmImage dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             ImagesDataProvider imagesDataProvider,
-            IBitmapProvider bitmapProvider) : base(logger, workspaceMan, dialogProvider)
+            IBitmapProvider bitmapProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.imagesDataProvider = imagesDataProvider;
             this.bitmapProvider = bitmapProvider;

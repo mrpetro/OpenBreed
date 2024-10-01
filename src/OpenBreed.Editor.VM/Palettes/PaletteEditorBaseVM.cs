@@ -36,11 +36,12 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Public Constructors
 
         public PaletteEditorBaseVM(
+            TDbPalette dbEntry,
             ILogger logger,
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.palettesDataProvider = palettesDataProvider;
             this.modelsProvider = dataProvider;

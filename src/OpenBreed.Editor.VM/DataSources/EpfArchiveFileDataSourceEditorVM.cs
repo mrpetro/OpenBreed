@@ -18,9 +18,10 @@ namespace OpenBreed.Editor.VM.DataSources
         #region Public Constructors
 
         public EpfArchiveFileDataSourceEditorVM(
+            IDbEpfArchiveDataSource dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
         }
 

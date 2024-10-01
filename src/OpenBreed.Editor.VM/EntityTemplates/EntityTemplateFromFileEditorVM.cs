@@ -4,6 +4,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Texts;
@@ -28,11 +29,12 @@ namespace OpenBreed.Editor.VM.EntityTemplates
         #region Public Constructors
 
         public EntityTemplateFromFileEditorVM(
+            IDbEntityTemplateFromFile dbEntry,
             ILogger logger,
             EntityTemplatesDataProvider entityTemplatesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.entityTemplatesDataProvider = entityTemplatesDataProvider;
             this.dataProvider = dataProvider;

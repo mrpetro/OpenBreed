@@ -28,11 +28,12 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Public Constructors
 
         public PaletteFromLbmEditorVM(
+            IDbPaletteFromLbm dbEntry,
             ILogger logger,
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
         }
 

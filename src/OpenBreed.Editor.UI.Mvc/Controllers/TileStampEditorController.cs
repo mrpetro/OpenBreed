@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private const int cellSize = 16;
         private readonly EditorView view;
-        private readonly TileStampModel model;
+        private readonly ITileStampEditorModel model;
         private readonly IPaletteMan paletteMan;
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly ITileMan tileMan;
@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         public TileStampEditorController(
             IEventsMan eventsMan,
             EditorView view,
-            TileStampModel model,
+            ITileStampEditorModel model,
             IPaletteMan paletteMan,
             PalettesDataProvider palettesDataProvider,
             ITileMan tileMan,
@@ -65,7 +65,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         #region Public Properties
 
         public string CurrentTileAtlasId { get; set; }
-        public TileSelection[] CurrentTileSelection { get; set; }
+        public TileSelection[] CurrentTileSelection { get; set; } = Array.Empty<TileSelection>();
 
         #endregion Public Properties
 

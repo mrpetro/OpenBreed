@@ -8,6 +8,7 @@ using OpenBreed.Database.Interface.Items;
 using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography;
 
 namespace OpenBreed.Editor.VM
@@ -16,16 +17,20 @@ namespace OpenBreed.Editor.VM
     {
         #region Private Fields
 
-        private string _id;
+        private static readonly HashSet<string> propertyNamesIgnoredForChanges = new HashSet<string>();
+        private string id;
 
-        private string _description;
+        private bool changesTrackingEnabled;
+
+        private string description;
 
         #endregion Private Fields
 
         #region Protected Constructors
 
-        protected EntrySpecificEditorVM()
+        protected EntrySpecificEditorVM(IDbEntry dbEntry)
         {
+            Entry = dbEntry;
         }
 
         #endregion Protected Constructors
@@ -34,18 +39,18 @@ namespace OpenBreed.Editor.VM
 
         public abstract string EditorName { get; }
         public Action<string> IdChangedCallback { get; set; }
-        public Action<bool> ChangesDetectedAction { get; set; }
+        public Action DataChangedCallback { get; set; }
 
         public string Id
         {
-            get { return _id; }
-            set { SetProperty(ref _id, value); }
+            get { return id; }
+            set { SetProperty(ref id, value); }
         }
 
         public string Description
         {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
+            get { return description; }
+            set { SetProperty(ref description, value); }
         }
 
         #endregion Public Properties
@@ -65,31 +70,28 @@ namespace OpenBreed.Editor.VM
 
         public virtual void UpdateEntry(IDbEntry target)
         {
-
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected virtual bool HasChanges()
+        protected virtual void DisableChangesTracking()
         {
-            if (Id != Entry.Id)
-            {
-                return true;
-            }
+            changesTrackingEnabled = false;
+        }
 
-            if (Description != Entry.Description)
-            {
-                return true;
-            }
-
-            return false;
+        protected virtual void EnableChangesTracking()
+        {
+            changesTrackingEnabled = true;
         }
 
         protected override void OnPropertyChanged(string name)
         {
-            //ChangesDetectedAction.Invoke(HasChanges());
+            if (changesTrackingEnabled)
+            {
+                DataChangedCallback.Invoke();
+            }
 
             switch (name)
             {
@@ -102,6 +104,11 @@ namespace OpenBreed.Editor.VM
             }
 
             base.OnPropertyChanged(name);
+        }
+
+        protected static void IgnoreProperty(string propertyName)
+        {
+            propertyNamesIgnoredForChanges.Add(propertyName);
         }
 
         #endregion Protected Methods
@@ -119,9 +126,10 @@ namespace OpenBreed.Editor.VM
         #region Protected Constructors
 
         protected EntrySpecificEditorVM(
+            TDbEntry dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry)
         {
             WorkspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;
@@ -156,6 +164,7 @@ namespace OpenBreed.Editor.VM
 
         public override void UpdateVM(IDbEntry source)
         {
+            DisableChangesTracking();
             base.UpdateVM(source);
 
             try
@@ -168,6 +177,10 @@ namespace OpenBreed.Editor.VM
             catch (Exception ex)
             {
                 logger.LogError("Unable to load '{0}' entry. Exception:{2}", source.Id, ex);
+            }
+            finally
+            {
+                EnableChangesTracking();
             }
         }
 

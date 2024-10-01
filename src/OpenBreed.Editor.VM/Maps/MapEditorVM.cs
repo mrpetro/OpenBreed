@@ -6,6 +6,7 @@ using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Renderer;
@@ -44,6 +45,7 @@ namespace OpenBreed.Editor.VM.Maps
         #region Public Constructors
 
         public MapEditorVM(
+            IDbMap dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan, 
             MapsDataProvider mapsDataProvider,
@@ -54,7 +56,7 @@ namespace OpenBreed.Editor.VM.Maps
             IDrawingFactory drawingFactory,
             IDrawingContextProvider drawingContextProvider,
             IBitmapProvider bitmapProvider,
-            IPensProvider pensProvider) : base(logger, workspaceMan, dialogProvider)
+            IPensProvider pensProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             Tools = new MapEditorToolsVM();
 

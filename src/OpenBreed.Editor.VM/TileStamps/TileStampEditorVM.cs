@@ -39,7 +39,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace OpenBreed.Editor.VM.TileStamps
 {
-    public class TileStampEditorVM : EntrySpecificEditorVM<IDbTileStamp>
+    public class TileStampEditorVM : EntrySpecificEditorVM<IDbTileStamp>, ITileStampEditorModel
     {
         #region Private Fields
 
@@ -47,7 +47,6 @@ namespace OpenBreed.Editor.VM.TileStamps
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly IRenderViewFactory renderViewFactory;
         private readonly IServiceScopeFactory serviceScopeFactory;
-        private readonly TileStampModel model = new TileStampModel();
         private string currentPaletteRef = null;
         private TileStampEditorController renderViewController;
 
@@ -56,6 +55,7 @@ namespace OpenBreed.Editor.VM.TileStamps
         #region Public Constructors
 
         public TileStampEditorVM(
+            IDbTileStamp dbEntry,
             ILogger logger,
             TileAtlasDataProvider tileSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
@@ -63,7 +63,7 @@ namespace OpenBreed.Editor.VM.TileStamps
             IDialogProvider dialogProvider,
             TilesSelectorVM tilesSelectorVm,
             IRenderViewFactory renderViewFactory,
-            IServiceScopeFactory serviceScopeFactory) : base(logger, workspaceMan, dialogProvider)
+            IServiceScopeFactory serviceScopeFactory) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             PaletteIds = new ObservableCollection<string>();
             this.tileSetsDataProvider = tileSetsDataProvider;
@@ -74,6 +74,8 @@ namespace OpenBreed.Editor.VM.TileStamps
 
             TilesSelector.TileSetChanged += (s, a) => renderViewController.CurrentTileAtlasId = a;
             TilesSelector.TilesSelectionChanged += (s, a) => renderViewController.CurrentTileSelection = a.Selections;
+
+            IgnoreProperty(nameof(CurrentPaletteRef));
         }
 
         #endregion Public Constructors
@@ -82,29 +84,31 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc => OnInitialize;
 
-        public int StampWidth
+        public int Width
         {
             get { return Entry.Width; }
             set { SetProperty(Entry, x => x.Width, value); }
         }
 
-        public int StampHeight
+        public int Height
         {
             get { return Entry.Height; }
             set { SetProperty(Entry, x => x.Height, value); }
         }
 
-        public int StampCenterX
+        public int CenterX
         {
             get { return Entry.CenterX; }
             set { SetProperty(Entry, x => x.CenterX, value); }
         }
 
-        public int StampCenterY
+        public int CenterY
         {
             get { return Entry.CenterY; }
             set { SetProperty(Entry, x => x.CenterY, value); }
         }
+
+        public IReadOnlyList<IDbTileStampCell> Cells => Entry.Cells;
 
         public TilesSelectorVM TilesSelector { get; }
 
@@ -126,6 +130,64 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         #endregion Internal Properties
 
+        #region Public Methods
+
+        public void EraseTile(Vector4i erasePoint)
+        {
+            var borderBox = GetBorderBox();
+
+            var tilePos = new MyPoint(erasePoint.X, erasePoint.Y);
+
+            if (!borderBox.ContainsInclusive(new Vector2i(tilePos.X, tilePos.Y)))
+            {
+                return;
+            }
+
+            var foundCell = Entry.Cells.FirstOrDefault(item => item.X == tilePos.X && item.Y == tilePos.Y);
+
+            if (foundCell is not null)
+            {
+                Entry.RemoveCell(foundCell);
+            }
+
+            DataChangedCallback.Invoke();
+        }
+
+        public void PutTiles(Vector4i insertPoint, string tileAtlasId, IReadOnlyList<TileSelection> toInsert)
+        {
+            if (toInsert.Count == 0)
+            {
+                return;
+            }
+
+            var borderBox = GetBorderBox();
+
+            for (int i = 0; i < toInsert.Count; i++)
+            {
+                var tile = toInsert[i];
+                var tilePos = new MyPoint(insertPoint.X + tile.Position.X, insertPoint.Y + tile.Position.Y);
+
+                if (!borderBox.ContainsInclusive(new Vector2i(tilePos.X, tilePos.Y)))
+                {
+                    continue;
+                }
+
+                var foundCell = Entry.Cells.FirstOrDefault(item => item.X == tilePos.X && item.Y == tilePos.Y);
+
+                if (foundCell is null)
+                {
+                    foundCell = Entry.AddNewCell(tilePos.X, tilePos.Y);
+                }
+
+                foundCell.TsId = tileAtlasId;
+                foundCell.TsTi = tile.Index;
+            }
+
+            DataChangedCallback.Invoke();
+        }
+
+        #endregion Public Methods
+
         #region Internal Methods
 
         internal void SetupPaletteIds(List<string> paletteRefs)
@@ -139,18 +201,6 @@ namespace OpenBreed.Editor.VM.TileStamps
         #endregion Internal Methods
 
         #region Protected Methods
-
-        protected override void UpdateEntry(IDbTileStamp entry)
-        {
-            base.UpdateEntry(entry);
-        }
-
-        protected override void UpdateVM(IDbTileStamp entry)
-        {
-            base.UpdateVM(entry);
-
-            model.Load(entry);
-        }
 
         protected override void OnPropertyChanged(string name)
         {
@@ -172,6 +222,15 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         #region Private Methods
 
+        private Box2i GetBorderBox()
+        {
+            return new Box2i(0, 0, Entry.Width - 1, Entry.Height - 1);
+        }
+
+        private void OnModelModified()
+        {
+        }
+
         private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
         {
             var serviceScope = serviceScopeFactory.CreateScope();
@@ -183,7 +242,7 @@ namespace OpenBreed.Editor.VM.TileStamps
 
             var view = new EditorView(eventsMan, renderContext);
 
-            renderViewController = ActivatorUtilities.CreateInstance<TileStampEditorController>(serviceScope.ServiceProvider, view, model);
+            renderViewController = ActivatorUtilities.CreateInstance<TileStampEditorController>(serviceScope.ServiceProvider, view, this);
 
             if (Entry is not null)
             {

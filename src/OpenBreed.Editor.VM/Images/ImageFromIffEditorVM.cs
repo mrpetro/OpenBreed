@@ -28,11 +28,12 @@ namespace OpenBreed.Editor.VM.Images
         #region Public Constructors
 
         public ImageFromIffEditorVM(
+            IDbIffImage dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             ImagesDataProvider imagesDataProvider,
-            IBitmapProvider bitmapProvider) : base(logger, workspaceMan, dialogProvider)
+            IBitmapProvider bitmapProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.imagesDataProvider = imagesDataProvider;
             this.bitmapProvider = bitmapProvider;

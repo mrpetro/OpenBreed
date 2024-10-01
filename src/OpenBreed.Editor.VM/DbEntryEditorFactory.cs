@@ -61,14 +61,14 @@ namespace OpenBreed.Editor.VM
         {
             var type = GetEditorType(dbEntry);
 
-            return (EntryEditorVM)managerCollection.GetRequiredService(type);
+            return (EntryEditorVM)ActivatorUtilities.CreateInstance(managerCollection, type);
         }
 
         internal EntrySpecificEditorVM CreateSpecific(IDbEntry dbEntry)
         {
             var type = GetSpecificEditorType(dbEntry);
 
-            return (EntrySpecificEditorVM)managerCollection.GetService(type);
+            return (EntrySpecificEditorVM)ActivatorUtilities.CreateInstance(managerCollection, type, dbEntry);
         }
 
         #endregion Internal Methods

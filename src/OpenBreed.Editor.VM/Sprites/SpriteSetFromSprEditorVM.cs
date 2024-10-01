@@ -26,13 +26,14 @@ namespace OpenBreed.Editor.VM.Sprites
         #region Public Constructors
 
         public SpriteSetFromSprEditorVM(
+            IDbSpriteAtlasFromSpr dbEntry,
             ILogger logger,
             SpriteAtlasDataProvider spriteSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
             IModelsProvider modelsProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            IBitmapProvider bitmapProvider) : base(logger, spriteSetsDataProvider, palettesDataProvider, modelsProvider, workspaceMan, dialogProvider)
+            IBitmapProvider bitmapProvider) : base(dbEntry, logger, spriteSetsDataProvider, palettesDataProvider, modelsProvider, workspaceMan, dialogProvider)
         {
             Items = new BindingList<SpriteVM>();
             this.bitmapProvider = bitmapProvider;

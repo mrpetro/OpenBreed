@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.Texts"
+             xmlns:General="clr-namespace:OpenBreed.Editor.UI.Wpf.General"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="95"/>
+            <RowDefinition Height="84"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="Text source properties">
@@ -21,14 +22,17 @@
                     <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Padding="0" Margin="4" Height="21" Content="Map reference:"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="4" Height="21" Text="{Binding DataRef}" />
+                <Label Grid.Row="0" Grid.Column="0" Padding="0" Margin="4" Height="21" Content="Map reference:" />
+                <General:EntryRefIdEditorCtrl Grid.Row="0"
+                                              Grid.Column="1"
+                                              Grid.ColumnSpan="2"
+                                              DataContext="{Binding MapRefIdEditor}" />
                 <Label Grid.Row="1" Grid.Column="0" Padding="0" Margin="4" Height="21" Content="Map block name:" />
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="4" Height="21" Text="{Binding BlockName}" />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="Text content">
-            <TextBox Text="{Binding Text}"/>
+            <TextBox Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding EditEnabled}"/>
         </GroupBox>
     </Grid>
 </UserControl>

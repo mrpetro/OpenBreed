@@ -5,6 +5,7 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Tools;
+using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Palettes;
@@ -32,12 +33,13 @@ namespace OpenBreed.Editor.VM.Tiles
         #region Public Constructors
 
         public TileSetFromBlkEditorVM(
+            IDbTileAtlasFromBlk dbEntry,
             ILogger logger,
             TileAtlasDataProvider tileSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            TileSetViewerVM tileSetViewerVm) : base(logger, workspaceMan, dialogProvider)
+            TileSetViewerVM tileSetViewerVm) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             PaletteIds = new ObservableCollection<string>();
             this.tileSetsDataProvider = tileSetsDataProvider;
@@ -90,7 +92,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         protected void UpdateVM(IDbTileAtlasFromBlk entry)
         {
-            model = tileSetsDataProvider.GetTileAtlas(entry);
+            model = tileSetsDataProvider.GetTileAtlas(Entry);
 
             if (model is null)
             {

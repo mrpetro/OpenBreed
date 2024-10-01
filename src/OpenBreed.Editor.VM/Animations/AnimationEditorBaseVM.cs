@@ -15,9 +15,10 @@ namespace OpenBreed.Editor.VM.Animations
         #region Public Constructors
 
         public AnimationEditorBaseVM(
+            TDbAnimation dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
         }
 

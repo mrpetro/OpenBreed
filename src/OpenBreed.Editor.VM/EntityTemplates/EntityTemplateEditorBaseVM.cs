@@ -4,19 +4,21 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Interface.Items.Scripts;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
 {
-    public abstract class EntityTemplateEditorBaseVM<TDbEnityTemplate> : EntrySpecificEditorVM<IDbEntityTemplate>
+    public abstract class EntityTemplateEditorBaseVM<TDbEnityTemplate> : EntrySpecificEditorVM<IDbEntityTemplate> where TDbEnityTemplate : IDbEntityTemplate
     {
         #region Public Constructors
 
         public EntityTemplateEditorBaseVM(
+            TDbEnityTemplate dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
         }
 

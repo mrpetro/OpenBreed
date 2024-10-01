@@ -32,11 +32,12 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Public Constructors
 
         public PaletteFromMapEditorVM(
+            IDbPaletteFromMap dbEntry,
             ILogger logger,
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));

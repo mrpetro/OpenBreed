@@ -5,6 +5,7 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
 using System;
@@ -27,11 +28,12 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Public Constructors
 
         public PaletteFromBinaryEditorVM(
+            IDbPaletteFromBinary dbEntry,
             ILogger logger,
             PalettesDataProvider palettesDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
         }
 

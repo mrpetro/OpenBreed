@@ -20,14 +20,16 @@ namespace OpenBreed.Editor.VM
     {
         #region Private Fields
 
-        private static readonly HashSet<string> propertyNamesIgnoredForChanges = new HashSet<string>();
         private readonly IDialogProvider dialogProvider;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IRepository<E> repository;
         private E edited;
         private E next;
         private E previous;
-        private bool changesTrackingEnabled;
+
+        private bool isUnique;
+
+        private bool dataChanged;
 
         #endregion Private Fields
 
@@ -35,8 +37,6 @@ namespace OpenBreed.Editor.VM
 
         static EntryEditorVM()
         {
-            IgnoreProperty(nameof(CommitEnabled));
-            IgnoreProperty(nameof(RevertEnabled));
         }
 
         public EntryEditorVM(
@@ -127,11 +127,6 @@ namespace OpenBreed.Editor.VM
 
         #region Protected Methods
 
-        protected static void IgnoreProperty(string propertyName)
-        {
-            propertyNamesIgnoredForChanges.Add(propertyName);
-        }
-
         protected virtual void UpdateEntry(E target)
         {
             SpecificsEditor.UpdateEntry(target);
@@ -142,24 +137,26 @@ namespace OpenBreed.Editor.VM
             SpecificsEditor.UpdateVM(source);
         }
 
-        private void OnIdChanged(string newId)
-        {
-            CommitEnabled = IsIdUnique(newId);
-        }
-
-        protected virtual void DisableChangesTracking()
-        {
-            changesTrackingEnabled = false;
-        }
-
-        protected virtual void EnableChangesTracking()
-        {
-            changesTrackingEnabled = true;
-        }
-
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void OnIdChanged(string newId)
+        {
+            if (edited.Id == newId)
+            {
+                return;
+            }
+
+            isUnique = IsIdUnique(newId);
+            CommitEnabled = dataChanged && isUnique;
+        }
+
+        private void OnDataChanged()
+        {
+            dataChanged = true;
+            CommitEnabled = dataChanged && isUnique;
+        }
 
         private bool IsIdUnique(string id)
         {
@@ -170,22 +167,22 @@ namespace OpenBreed.Editor.VM
 
         private void EditEntry(E entry)
         {
-            DisableChangesTracking();
-
             edited = (E)entry.Copy();
             next = repository.GetNextTo(edited);
             previous = repository.GetPreviousTo(edited);
 
             SpecificsEditor = dbEntryEditorFactory.CreateSpecific(entry);
             SpecificsEditor.IdChangedCallback = OnIdChanged;
+            SpecificsEditor.DataChangedCallback = OnDataChanged;
 
-            UpdateVM(entry);
+            UpdateVM(edited);
 
             UpdateControls();
 
             EditMode = true;
             CommitEnabled = false;
-            EnableChangesTracking();
+            isUnique = true;
+            dataChanged = false;
 
             OnPropertyChanged(nameof(SpecificsEditor));
         }

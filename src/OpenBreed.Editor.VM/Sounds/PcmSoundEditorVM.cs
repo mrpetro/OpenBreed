@@ -4,8 +4,10 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
+using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.DataSources;
+using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM.Base;
@@ -33,11 +35,12 @@ namespace OpenBreed.Editor.VM.Sounds
         #region Public Constructors
 
         public PcmSoundEditorVM(
+            IDbSound dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             SoundsDataProvider soundsDataProvider,
-            IPcmPlayer pcmPlayer) : base(logger, workspaceMan, dialogProvider)
+            IPcmPlayer pcmPlayer) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.soundsDataProvider = soundsDataProvider;
             this.pcmPlayer = pcmPlayer;
@@ -45,9 +48,13 @@ namespace OpenBreed.Editor.VM.Sounds
             DataSourceRefIdEditor = new EntryRefIdEditorVM(
                 workspaceMan,
                 typeof(IDbDataSource),
-                (newRefId) => DataRef = newRefId);
+            (newRefId) => DataRef = newRefId);
+
+            DataSourceRefIdEditor.SelectedRefId = Entry.DataRef;
 
             PlayCommand = new Command(() => Play());
+
+            UpdateSound();
         }
 
         #endregion Public Constructors
@@ -121,25 +128,6 @@ namespace OpenBreed.Editor.VM.Sounds
             }
 
             base.OnPropertyChanged(name);
-        }
-
-        protected override void UpdateEntry(IDbSound entry)
-        {
-            entry.BitsPerSample = BitsPerSample;
-            entry.Channels = Channels;
-            entry.SampleRate = SampleRate;
-            entry.DataRef = DataSourceRefIdEditor.SelectedRefId;
-
-            base.UpdateEntry(entry);
-        }
-
-        protected override void UpdateVM(IDbSound entry)
-        {
-            base.UpdateVM(entry);
-
-            DataSourceRefIdEditor.SelectedRefId = entry.DataRef;
-
-            UpdateSound();
         }
 
         #endregion Protected Methods

@@ -9,4 +9,13 @@ namespace OpenBreed.Common.Interface.Mvc
     public interface IModel
     {
     }
+
+    public interface IEditorModel : IModel
+    {
+        #region Public Properties
+
+        //bool IsModified { get; }
+
+        #endregion Public Properties
+    }
 }

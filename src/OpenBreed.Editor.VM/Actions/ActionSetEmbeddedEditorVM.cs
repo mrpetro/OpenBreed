@@ -5,6 +5,7 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Actions;
 using System.Collections.ObjectModel;
@@ -27,12 +28,13 @@ namespace OpenBreed.Editor.VM.Actions
         #region Public Constructors
 
         public ActionSetEmbeddedEditorVM(
+            IDbActionSet dbEntry,
             ILogger logger,
             ActionSetsDataProvider actionSetsDataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             IDrawingFactory drawingFactory,
-            IDrawingContextProvider drawingContextProvider) : base(logger, workspaceMan, dialogProvider)
+            IDrawingContextProvider drawingContextProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.actionSetsDataProvider = actionSetsDataProvider;
             this.drawingFactory = drawingFactory;

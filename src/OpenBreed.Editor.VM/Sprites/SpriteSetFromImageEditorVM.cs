@@ -5,6 +5,7 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Tools;
+using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Sprites;
@@ -28,6 +29,7 @@ namespace OpenBreed.Editor.VM.Sprites
         #region Public Constructors
 
         public SpriteSetFromImageEditorVM(
+            IDbSpriteAtlasFromImage dbEntry,
             ILogger logger,
             SpriteAtlasDataProvider spriteAtlasDataProvider,                             
             PalettesDataProvider palettesDataProvider,
@@ -35,7 +37,7 @@ namespace OpenBreed.Editor.VM.Sprites
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             IDrawingFactory drawingFactory,
-            IBitmapProvider bitmapProvider) : base(logger, spriteAtlasDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
+            IBitmapProvider bitmapProvider) : base(dbEntry, logger, spriteAtlasDataProvider, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
             SpriteEditor = new SpriteFromImageEditorVM(this, drawingFactory);
             Items = new BindingList<SpriteFromImageVM>();

@@ -32,12 +32,13 @@ namespace OpenBreed.Editor.VM.Tiles
         #region Public Constructors
 
         public TileSetFromAcbmEditorVM(
+            IDbTileAtlasFromAcbm dbEntry,
             ILogger logger,
             TileAtlasDataProvider tileSetsDataProvider,
             PalettesDataProvider palettesDataProvider,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
-            TileSetViewerVM tileSetViewerVm) : base(logger, workspaceMan, dialogProvider)
+            TileSetViewerVM tileSetViewerVm) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             PaletteIds = new ObservableCollection<string>();
             this.tileSetsDataProvider = tileSetsDataProvider;

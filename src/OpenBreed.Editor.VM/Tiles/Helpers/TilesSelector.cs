@@ -125,10 +125,7 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
                 RemoveSelection(selectionList);
             }
 
-            if (!IsEmpty)
-            {
-                CalculateSelection();
-            }
+            CalculateSelection();
 
             SelectMode = SelectModeEnum.Nothing;
         }

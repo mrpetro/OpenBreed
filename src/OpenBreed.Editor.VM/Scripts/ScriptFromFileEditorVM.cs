@@ -9,6 +9,7 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Database.Interface.Items.DataSources;
+using OpenBreed.Database.Interface.Items.Palettes;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
@@ -16,11 +17,9 @@ namespace OpenBreed.Editor.VM.Scripts
     {
         #region Private Fields
 
-        private bool _editEnabled;
+        private bool editEnabled;
 
-        private string _dataRef;
-
-        private string _script;
+        private string script;
         private readonly ScriptsDataProvider scriptsDataProvider;
         private readonly IModelsProvider dataProvider;
 
@@ -29,20 +28,24 @@ namespace OpenBreed.Editor.VM.Scripts
         #region Public Constructors
 
         public ScriptFromFileEditorVM(
+            IDbScriptFromFile dbEntry,
             ILogger logger,
             ScriptsDataProvider scriptsDataProvider,
             IModelsProvider dataProvider,
             IWorkspaceMan workspaceMan,
-            IDialogProvider dialogProvider) : base(logger, workspaceMan, dialogProvider)
+            IDialogProvider dialogProvider) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.scriptsDataProvider = scriptsDataProvider;
             this.dataProvider = dataProvider;
-            PropertyChanged += This_PropertyChanged;
 
-            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(
+            DataSourceRefIdEditor = new EntryRefIdEditorVM(
                 workspaceMan,
                 typeof(IDbDataSource),
                 (newRefId) => DataRef = newRefId);
+
+            DataSourceRefIdEditor.SelectedRefId = Entry.DataRef;
+
+            UpdateVM();
         }
 
         #endregion Public Constructors
@@ -51,22 +54,22 @@ namespace OpenBreed.Editor.VM.Scripts
 
         public string DataRef
         {
-            get { return _dataRef; }
-            set { SetProperty(ref _dataRef, value); }
+            get { return Entry.DataRef; }
+            set { SetProperty(Entry, x => x.DataRef, value); }
         }
 
-        public EntryRefIdEditorVM ScriptAssetRefIdEditor { get; }
+        public EntryRefIdEditorVM DataSourceRefIdEditor { get; }
 
         public bool EditEnabled
         {
-            get { return _editEnabled; }
-            set { SetProperty(ref _editEnabled, value); }
+            get { return editEnabled; }
+            set { SetProperty(ref editEnabled, value); }
         }
 
         public string Script
         {
-            get { return _script; }
-            set { SetProperty(ref _script, value); }
+            get { return script; }
+            set { SetProperty(ref script, value); }
         }
 
         public override string EditorName => "File Script Editor";
@@ -75,53 +78,53 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Methods
 
-        protected override void UpdateEntry(IDbScriptFromFile entry)
+        protected override void UpdateEntry()
         {
-            var model = scriptsDataProvider.GetScript(entry);
-
-            //if (model is not null)
-            //{
-            //    Script = model.Script;
-            //}
+            var model = scriptsDataProvider.GetScript(Entry);
 
             model.Script = Script;
-            entry.DataRef = DataRef;
         }
 
-        protected override void UpdateVM(IDbScriptFromFile entry)
+        protected override void UpdateVM()
         {
-            var model = scriptsDataProvider.GetScript(entry);
+            var model = scriptsDataProvider.GetScript(Entry);
 
             if (model is not null)
             {
                 Script = model.Script;
             }
 
-            DataRef = entry.DataRef;
+            EditEnabled = ValidateSettings();
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+
+
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
                 case nameof(DataRef):
-                    EditEnabled = ValidateSettings();
-                    ScriptAssetRefIdEditor.CurrentRefId = (DataRef == null) ? null : DataRef;
+                    DataSourceRefIdEditor.CurrentRefId = (DataRef == null) ? null : DataRef;
+                    UpdateVM();
                     break;
 
                 default:
                     break;
             }
+
+            base.OnPropertyChanged(name);
         }
 
         private bool ValidateSettings()
         {
             if (string.IsNullOrWhiteSpace(DataRef))
+            {
                 return false;
+            }
 
             return true;
         }
