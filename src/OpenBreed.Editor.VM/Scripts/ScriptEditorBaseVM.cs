@@ -32,27 +32,5 @@ namespace OpenBreed.Editor.VM.Scripts
         public new TDbScript Entry => (TDbScript)base.Entry;
 
         #endregion Public Properties
-
-        #region Protected Methods
-
-        protected virtual void UpdateVM() { }
-
-        protected virtual void UpdateEntry() { }
-
-        protected override void UpdateVM(IDbScript entry)
-        {
-            base.UpdateVM(entry);
-
-            UpdateVM();
-        }
-
-        protected override void UpdateEntry(IDbScript entry)
-        {
-            UpdateEntry();
-
-            base.UpdateEntry(entry);
-        }
-
-        #endregion Protected Methods
     }
 }

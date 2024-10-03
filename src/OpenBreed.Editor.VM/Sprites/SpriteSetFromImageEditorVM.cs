@@ -134,28 +134,30 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Private Methods
 
-        protected override void UpdateEntry(IDbSpriteAtlasFromImage entry)
+        protected override void ProtectedUpdateEntry()
         {
-            entry.ClearCoords();
+            base.ProtectedUpdateEntry();
+
+            Entry.ClearCoords();
 
             for (int i = 0; i < Items.Count; i++)
             {
                 var coords = Items[i].SourceRectangle;
-                entry.AddCoords(coords.X, coords.Y, coords.Width, coords.Height);
+                Entry.AddCoords(coords.X, coords.Y, coords.Width, coords.Height);
             }
         }
 
-        protected override void UpdateVM(IDbSpriteAtlasFromImage entry)
+        protected override void ProtectedUpdateVM()
         {
-            SourceImage = dataProvider.GetModel<IDbSpriteAtlasFromImage, IBitmap >(entry);
+            SourceImage = dataProvider.GetModel<IDbSpriteAtlasFromImage, IBitmap >(Entry);
 
             Items.UpdateAfter(() =>
             {
                 Items.Clear();
 
-                for (int i = 0; i < entry.Sprites.Count; i++)
+                for (int i = 0; i < Entry.Sprites.Count; i++)
                 {
-                    var spriteDef = entry.Sprites[i];
+                    var spriteDef = Entry.Sprites[i];
 
                     var spriteBuilder = SpriteBuilder.NewSprite();
                     spriteBuilder.SetIndex(i);
@@ -172,6 +174,8 @@ namespace OpenBreed.Editor.VM.Sprites
             });
 
             CurrentSpriteIndex = 0;
+
+            base.ProtectedUpdateVM();
         }
 
         #endregion Private Methods

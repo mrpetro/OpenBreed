@@ -25,6 +25,13 @@ namespace OpenBreed.Editor.UI.Wpf.Tiles
             RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.NearestNeighbor);
             SnapsToDevicePixels = true;
             Focusable = true;
+
+            DataContextChanged += TileSetViewerCanvas_DataContextChanged;
+        }
+
+        private void TileSetViewerCanvas_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            InvalidateVisual();
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)

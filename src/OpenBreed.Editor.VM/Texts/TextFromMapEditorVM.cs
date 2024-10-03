@@ -85,7 +85,7 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Protected Methods
 
-        protected override void UpdateEntry()
+        protected override void ProtectedUpdateEntry()
         {
             var mapModel = dataProvider.GetModel<IDbTextFromMap, MapModel>(Entry);
 
@@ -97,7 +97,7 @@ namespace OpenBreed.Editor.VM.Texts
             model.Text = Text;
         }
 
-        protected override void UpdateVM()
+        protected override void ProtectedUpdateVM()
         {
             var model = textsDataProvider.GetText(Entry);
 

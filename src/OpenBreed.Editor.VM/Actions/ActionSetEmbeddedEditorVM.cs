@@ -90,11 +90,9 @@ namespace OpenBreed.Editor.VM.Actions
 
         #region Protected Methods
 
-        protected override void UpdateVM(IDbActionSet entry)
+        protected override void ProtectedUpdateVM()
         {
-            base.UpdateVM(entry);
-
-            model = actionSetsDataProvider.GetActionSet(entry.Id);
+            model = actionSetsDataProvider.GetActionSet(Entry.Id);
 
             Items.Clear();
 
@@ -106,18 +104,16 @@ namespace OpenBreed.Editor.VM.Actions
             SelectedIndex = 0;
         }
 
-        protected override void UpdateEntry(IDbActionSet entry)
+        protected override void ProtectedUpdateEntry()
         {
-            entry.Actions.Clear();
+            Entry.Actions.Clear();
 
             foreach (var item in model.Items)
             {
-                var newAction = entry.NewItem();
+                var newAction = Entry.NewItem();
                 ActionSetsDataHelper.ToEntry(item, newAction);
-                entry.Actions.Add(newAction);
+                Entry.Actions.Add(newAction);
             }
-
-            base.UpdateEntry(entry);
         }
 
         #endregion Protected Methods

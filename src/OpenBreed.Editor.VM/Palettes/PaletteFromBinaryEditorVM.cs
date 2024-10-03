@@ -14,17 +14,6 @@ namespace OpenBreed.Editor.VM.Palettes
 {
     public class PaletteFromBinaryEditorVM : PaletteEditorBaseVM<IDbPaletteFromBinary>
     {
-        #region Private Fields
-
-        private readonly IRepositoryProvider repositoryProvider;
-        private string dataRef;
-        private int dataStart;
-        private int colorsNo;
-        private PaletteMode paletteMode;
-        private IDbPalette currentEntry;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public PaletteFromBinaryEditorVM(
@@ -43,26 +32,26 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public string DataRef
         {
-            get { return dataRef; }
-            set { SetProperty(ref dataRef, value); }
+            get { return Entry.DataRef; }
+            set { SetProperty(Entry, x => x.DataRef, value); }
         }
 
         public int DataStart
         {
-            get { return dataStart; }
-            set { SetProperty(ref dataStart, value); }
+            get { return Entry.DataStart; }
+            set { SetProperty(Entry, x => x.DataStart, value); }
         }
 
         public int ColorsNo
         {
-            get { return colorsNo; }
-            set { SetProperty(ref colorsNo, value); }
+            get { return Entry.ColorsNo; }
+            set { SetProperty(Entry, x => x.ColorsNo, value); }
         }
 
         public PaletteMode PaletteMode
         {
-            get { return paletteMode; }
-            set { SetProperty(ref paletteMode, value); }
+            get { return Entry.Mode; }
+            set { SetProperty(Entry, x => x.Mode, value); }
         }
 
         public override string EditorName => "Binary Palette Editor";
@@ -71,26 +60,21 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Protected Methods
 
-        protected override void UpdateVM(IDbPaletteFromBinary entry)
+        protected override void ProtectedUpdateVM()
         {
-            var model = palettesDataProvider.GetPalette(entry);
+            var model = palettesDataProvider.GetPalette(Entry);
 
             if (model != null)
             {
                 UpdateVMColors(model);
             }
 
-            dataRef = entry.DataRef;
-            dataStart = entry.DataStart;
-            paletteMode = entry.Mode;
-            colorsNo = entry.ColorsNo;
-
             UpdatePalette();
         }
 
-        protected override void UpdateEntry(IDbPaletteFromBinary entry)
+        protected override void ProtectedUpdateEntry()
         {
-            entry.DataRef = DataRef;
+            Entry.DataRef = DataRef;
         }
 
         protected override void OnPropertyChanged(string name)

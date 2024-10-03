@@ -78,14 +78,14 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Methods
 
-        protected override void UpdateEntry()
+        protected override void ProtectedUpdateEntry()
         {
             var model = scriptsDataProvider.GetScript(Entry);
 
             model.Script = Script;
         }
 
-        protected override void UpdateVM()
+        protected override void ProtectedUpdateVM()
         {
             var model = scriptsDataProvider.GetScript(Entry);
 

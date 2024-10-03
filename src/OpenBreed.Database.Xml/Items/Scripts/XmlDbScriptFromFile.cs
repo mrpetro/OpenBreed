@@ -27,7 +27,7 @@ namespace OpenBreed.Database.Xml.Items.Scripts
 
         protected XmlDbScriptFromFile(XmlDbScriptFromFile other) : base(other)
         {
-            DataRef = this.DataRef;
+            DataRef = other.DataRef;
         }
 
         #endregion Protected Constructors

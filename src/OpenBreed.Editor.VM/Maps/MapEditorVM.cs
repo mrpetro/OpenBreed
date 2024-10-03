@@ -204,20 +204,16 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Protected Methods
 
-        protected override void UpdateEntry(IDbMap entry)
+        protected override void ProtectedUpdateEntry()
         {
-            base.UpdateEntry(entry);
-
-            entry.ActionSetRef = ActionSetRef != null ? ActionSetRef : null;
+            Entry.ActionSetRef = ActionSetRef != null ? ActionSetRef : null;
 
             //LayoutVm.ToMap(Model);
         }
 
-        protected override void UpdateVM(IDbMap entry)
+        protected override void ProtectedUpdateVM()
         {
-            base.UpdateVM(entry);
-
-            Model = mapsDataProvider.GetMap(entry);
+            Model = mapsDataProvider.GetMap(Entry);
 
             if (Model is null)
             {
@@ -225,11 +221,11 @@ namespace OpenBreed.Editor.VM.Maps
                 return;
             }
 
-            UpdateTileSets(entry.TileSetRef);
-            UpdatePalettes(entry.PaletteRefs);
+            UpdateTileSets(Entry.TileSetRef);
+            UpdatePalettes(Entry.PaletteRefs);
 
-            ActionSetRef = entry.ActionSetRef;
-            ActionsTool.CurrentActionSetRef = entry.ActionSetRef;
+            ActionSetRef = Entry.ActionSetRef;
+            ActionsTool.CurrentActionSetRef = Entry.ActionSetRef;
 
             //LayoutVm.FromMap(Model);
             GeneralProperties.Load(Model);

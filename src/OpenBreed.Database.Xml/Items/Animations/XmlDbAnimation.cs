@@ -31,7 +31,7 @@ namespace OpenBreed.Database.Xml.Items.Animations
         protected XmlDbAnimation(XmlDbAnimation other) : base(other)
         {
             Length = other.Length;
-            XmlTracks = this.XmlTracks.Select(item => item.Copy()).Cast<XmlDbAnimationTrack>().ToList();
+            XmlTracks = other.XmlTracks.Select(item => item.Copy()).Cast<XmlDbAnimationTrack>().ToList();
         }
 
         #endregion Protected Constructors

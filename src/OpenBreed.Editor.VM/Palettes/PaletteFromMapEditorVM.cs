@@ -23,9 +23,7 @@ namespace OpenBreed.Editor.VM.Palettes
     {
         #region Private Fields
 
-        private string _blockName;
         private bool editEnabled;
-        private string dataRef;
 
         #endregion Private Fields
 
@@ -42,6 +40,7 @@ namespace OpenBreed.Editor.VM.Palettes
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));
 
+            IgnoreProperty(nameof(EditEnabled));
         }
 
         #endregion Public Constructors
@@ -52,16 +51,16 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public string MapRef
         {
-            get { return dataRef; }
-            set { SetProperty(ref dataRef, value); }
+            get { return Entry.MapRef; }
+            set { SetProperty(Entry, x => x.MapRef, value); }
         }
 
         public BindingList<string> BlockNames { get; }
 
         public string BlockName
         {
-            get { return _blockName; }
-            set { SetProperty(ref _blockName, value); }
+            get { return Entry.BlockName; }
+            set { SetProperty(Entry, x => x.BlockName, value); }
         }
 
         public bool EditEnabled
@@ -90,6 +89,31 @@ namespace OpenBreed.Editor.VM.Palettes
             base.OnPropertyChanged(name);
         }
 
+        protected override void ProtectedUpdateVM()
+        {
+            UpdatePaletteBlocksList(Entry);
+
+            var model = palettesDataProvider.GetPalette(Entry);
+
+            if (model != null)
+            {
+                UpdateVMColors(model);
+            }
+        }
+
+        protected override void ProtectedUpdateEntry()
+        {
+            var mapModel = modelsProvider.GetModelById<IDbMap, MapModel>(MapRef);
+
+            var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == BlockName);
+
+            for (int i = 0; i < paletteBlock.Value.Length; i++)
+            {
+                var color = Colors[i].Color;
+                paletteBlock.Value[i] = new MapPaletteBlock.ColorData(color.R, color.G, color.B);
+            }
+        }
+
         #endregion Protected Methods
 
         #region Private Methods
@@ -112,35 +136,6 @@ namespace OpenBreed.Editor.VM.Palettes
                     BlockNames.Add(paletteBlock.Name);
                 }
             });
-        }
-
-        protected override void UpdateVM(IDbPaletteFromMap entry)
-        {
-            UpdatePaletteBlocksList(entry);
-
-            var model = palettesDataProvider.GetPalette(entry);
-
-            if (model != null)
-                UpdateVMColors(model);
-
-            MapRef = entry.MapRef;
-            BlockName = entry.BlockName;
-        }
-
-        protected override void UpdateEntry(IDbPaletteFromMap source)
-        {
-            var mapModel = modelsProvider.GetModelById<IDbMap, MapModel>(MapRef);
-
-            var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == BlockName);
-
-            for (int i = 0; i < paletteBlock.Value.Length; i++)
-            {
-                var color = Colors[i].Color;
-                paletteBlock.Value[i] = new MapPaletteBlock.ColorData(color.R, color.G, color.B);
-            }
-
-            source.MapRef = MapRef;
-            source.BlockName = BlockName;
         }
 
         private bool ValidateSettings()

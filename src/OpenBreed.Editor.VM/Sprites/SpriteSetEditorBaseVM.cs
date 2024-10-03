@@ -50,12 +50,13 @@ namespace OpenBreed.Editor.VM.Sprites
             PaletteRefs = new BindingList<string>();
 
             palette = PaletteModel.NullPalette;
-
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public new TSpriteAtlas Entry => (TSpriteAtlas)base.Entry;
 
         public string CurrentPaletteRef
         {
@@ -91,21 +92,14 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Protected Methods
 
-        protected abstract void UpdateEntry(TSpriteAtlas target);
-
-        protected abstract void UpdateVM(TSpriteAtlas source);
-
-        protected override void UpdateEntry(IDbSpriteAtlas entry)
+        protected override void ProtectedUpdateEntry()
         {
-            UpdateEntry((TSpriteAtlas)entry);
         }
 
-        protected override void UpdateVM(IDbSpriteAtlas entry)
+        protected override void ProtectedUpdateVM()
         {
-            UpdateVM((TSpriteAtlas)entry);
-            SetupPaletteRefs(entry.PaletteRefs);
+            SetupPaletteRefs(Entry.PaletteRefs);
             SwitchPalette(CurrentPaletteRef);
-
         }
 
         protected override void OnPropertyChanged(string name)

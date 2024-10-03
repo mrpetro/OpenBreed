@@ -15,14 +15,14 @@ namespace OpenBreed.Editor.VM.EntityTemplates
     {
         #region Private Fields
 
-        private bool _editEnabled;
+        private readonly EntityTemplatesDataProvider entityTemplatesDataProvider;
+        private readonly IModelsProvider dataProvider;
+        private readonly ILogger logger;
+        private bool editEnabled;
 
         private string dataRef;
 
         private string entityTemplate;
-        private readonly EntityTemplatesDataProvider entityTemplatesDataProvider;
-        private readonly IModelsProvider dataProvider;
-        private readonly ILogger logger;
 
         #endregion Private Fields
 
@@ -39,6 +39,8 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             this.entityTemplatesDataProvider = entityTemplatesDataProvider;
             this.dataProvider = dataProvider;
             this.logger = logger;
+
+            IgnoreProperty(nameof(EditEnabled));
         }
 
         #endregion Public Constructors
@@ -47,14 +49,14 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         public bool EditEnabled
         {
-            get { return _editEnabled; }
-            set { SetProperty(ref _editEnabled, value); }
+            get { return editEnabled; }
+            set { SetProperty(ref editEnabled, value); }
         }
 
         public string DataRef
         {
-            get { return dataRef; }
-            set { SetProperty(ref dataRef, value); }
+            get { return Entry.DataRef; }
+            set { SetProperty(Entry, x => x.DataRef, value); }
         }
 
         public string EntityTemplate
@@ -67,39 +69,30 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         #endregion Public Properties
 
-        #region Public Methods
+        #region Protected Methods
 
-        protected override void UpdateEntry(IDbEntityTemplateFromFile entry)
+        protected override void ProtectedUpdateEntry()
         {
-            var model = dataProvider.GetModel<IDbEntityTemplateFromFile, TextModel>(entry);
+            var model = dataProvider.GetModel<IDbEntityTemplateFromFile, TextModel>(Entry);
             model.Text = EntityTemplate;
-            entry.DataRef = DataRef;
         }
 
-        protected override void UpdateVM(IDbEntityTemplateFromFile entry)
+        protected override void ProtectedUpdateVM()
         {
             try
             {
-                var model = entityTemplatesDataProvider.GetEntityTemplate(entry.Id);
+                var model = entityTemplatesDataProvider.GetEntityTemplate(Entry.Id);
 
                 if (model != null)
+                {
                     EntityTemplate = model.EntityTemplate;
-
-                DataRef = entry.DataRef;
+                }
             }
             catch (System.Exception ex)
             {
                 logger.LogCritical(ex.ToString());
             }
         }
-
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        #endregion Internal Methods
-
-        #region Private Methods
 
         protected override void OnPropertyChanged(string name)
         {
@@ -115,6 +108,10 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
             base.OnPropertyChanged(name);
         }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private bool ValidateSettings()
         {

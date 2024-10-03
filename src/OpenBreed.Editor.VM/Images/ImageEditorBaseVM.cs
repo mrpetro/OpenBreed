@@ -59,27 +59,5 @@ namespace OpenBreed.Editor.VM.Images
         }
 
         #endregion Public Methods
-
-        #region Protected Methods
-
-        protected abstract void UpdateEntry(TDbImage target);
-
-        protected abstract void UpdateVM(TDbImage source);
-
-        protected override void UpdateVM(IDbImage source)
-        {
-            base.UpdateVM(source);
-
-            UpdateVM((TDbImage)source);
-        }
-
-        protected override void UpdateEntry(IDbImage target)
-        {
-            UpdateEntry((TDbImage)target);
-
-            base.UpdateEntry(target);
-        }
-
-        #endregion Protected Methods
     }
 }

@@ -2,6 +2,7 @@
 using OpenBreed.Database.Xml.Items.Texts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Items.Tiles
@@ -17,6 +18,7 @@ namespace OpenBreed.Database.Xml.Items.Tiles
 
         protected XmlDbTileAtlas(XmlDbTileAtlas other) : base(other)
         {
+            PaletteRefs = other.PaletteRefs.ToList();
         }
 
         #endregion Protected Constructors

@@ -58,6 +58,8 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Properties
 
+        public new TDbPalette Entry => (TDbPalette)base.Entry;
+
         public ColorEditorVM ColorEditor { get; }
 
         public ObservableCollection<ColorSelectionVM> Colors { get; }
@@ -72,27 +74,12 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Protected Methods
 
-        protected abstract void UpdateEntry(TDbPalette target);
-
-        protected abstract void UpdateVM(TDbPalette source);
-
-        protected override void UpdateVM(IDbPalette source)
+        protected override void ProtectedUpdateEntry()
         {
-            base.UpdateVM(source);
-
-            UpdateVM((TDbPalette)source);
-        }
-
-        protected override void UpdateEntry(IDbPalette target)
-        {
-            UpdateEntry((TDbPalette)target);
-
-            var model = palettesDataProvider.GetPalette(target);
+            var model = palettesDataProvider.GetPalette(Entry);
 
             for (int i = 0; i < model.Length; i++)
                 model.Data[i] = Colors[i].Color;
-
-            base.UpdateEntry(target);
         }
 
         protected void UpdateVMColors(PaletteModel model)

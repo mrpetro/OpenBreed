@@ -42,6 +42,10 @@ namespace OpenBreed.Editor.VM.Images
                 workspaceMan,
                 typeof(IDbDataSource),
                 (newRefId) => DataRef = newRefId);
+
+            DataSourceRefIdEditor.SelectedRefId = DataRef;
+
+            UpdateImage();
         }
 
         #endregion Public Constructors
@@ -85,19 +89,6 @@ namespace OpenBreed.Editor.VM.Images
         #endregion Public Properties
 
         #region Protected Methods
-
-        protected override void UpdateEntry(IDbAcbmImage entry)
-        {
-            entry.DataRef = DataRef;
-        }
-
-        protected override void UpdateVM(IDbAcbmImage entry)
-        {
-            DataRef = entry.DataRef;
-            DataSourceRefIdEditor.SelectedRefId = DataRef;
-
-            UpdateImage();
-        }
 
         protected override void OnPropertyChanged(string name)
         {

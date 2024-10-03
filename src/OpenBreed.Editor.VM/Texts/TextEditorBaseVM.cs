@@ -30,27 +30,5 @@ namespace OpenBreed.Editor.VM.Texts
         public new TDbText Entry => (TDbText)base.Entry;
 
         #endregion Public Properties
-
-        #region Protected Methods
-
-        protected virtual void UpdateVM() { }
-
-        protected virtual void UpdateEntry() { }
-
-        protected override void UpdateVM(IDbText entry)
-        {
-            base.UpdateVM(entry);
-
-            UpdateVM();
-        }
-
-        protected override void UpdateEntry(IDbText entry)
-        {
-            UpdateEntry();
-
-            base.UpdateEntry(entry);
-        }
-
-        #endregion Protected Methods
     }
 }

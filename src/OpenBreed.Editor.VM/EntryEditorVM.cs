@@ -24,6 +24,8 @@ namespace OpenBreed.Editor.VM
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IRepository<E> repository;
         private E edited;
+        private string editedId;
+
         private E next;
         private E previous;
 
@@ -75,12 +77,15 @@ namespace OpenBreed.Editor.VM
 
         public override void Commit()
         {
-            var originalId = edited.Id;
-
-            UpdateEntry(edited);
+            SpecificsEditor.UpdateEntry();
 
             if (EditMode)
+            {
+                var newEditedId = edited.Id;
+                edited.Id = editedId;
                 repository.Update(edited);
+                edited.Id = newEditedId;
+            }
             else
                 repository.Add(edited);
 
@@ -89,7 +94,7 @@ namespace OpenBreed.Editor.VM
             RevertEnabled = true;
             EditMode = true;
 
-            CommitedAction?.Invoke(originalId);
+            CommitedAction?.Invoke(editedId);
         }
 
         public override void Revert()
@@ -125,29 +130,10 @@ namespace OpenBreed.Editor.VM
 
         #endregion Public Methods
 
-        #region Protected Methods
-
-        protected virtual void UpdateEntry(E target)
-        {
-            SpecificsEditor.UpdateEntry(target);
-        }
-
-        protected virtual void UpdateVM(E source)
-        {
-            SpecificsEditor.UpdateVM(source);
-        }
-
-        #endregion Protected Methods
-
         #region Private Methods
 
         private void OnIdChanged(string newId)
         {
-            if (edited.Id == newId)
-            {
-                return;
-            }
-
             isUnique = IsIdUnique(newId);
             CommitEnabled = dataChanged && isUnique;
         }
@@ -168,14 +154,16 @@ namespace OpenBreed.Editor.VM
         private void EditEntry(E entry)
         {
             edited = (E)entry.Copy();
+            editedId = edited.Id;
+
             next = repository.GetNextTo(edited);
             previous = repository.GetPreviousTo(edited);
 
-            SpecificsEditor = dbEntryEditorFactory.CreateSpecific(entry);
+            SpecificsEditor = dbEntryEditorFactory.CreateSpecific(edited);
             SpecificsEditor.IdChangedCallback = OnIdChanged;
             SpecificsEditor.DataChangedCallback = OnDataChanged;
 
-            UpdateVM(edited);
+            SpecificsEditor.UpdateVM();
 
             UpdateControls();
 

@@ -8,13 +8,6 @@ namespace OpenBreed.Editor.VM.DataSources
 {
     public class EpfArchiveFileDataSourceEditorVM : DataSourceEditorBaseVM<IDbEpfArchiveDataSource>
     {
-        #region Private Fields
-
-        private string _archivePath;
-        private string _entryName;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public EpfArchiveFileDataSourceEditorVM(
@@ -31,34 +24,18 @@ namespace OpenBreed.Editor.VM.DataSources
 
         public string ArchivePath
         {
-            get { return _archivePath; }
-            set { SetProperty(ref _archivePath, value); }
+            get { return Entry.ArchivePath; }
+            set { SetProperty(Entry, x => x.ArchivePath, value); }
         }
 
         public string EntryName
         {
-            get { return _entryName; }
-            set { SetProperty(ref _entryName, value); }
+            get { return Entry.EntryName; }
+            set { SetProperty(Entry, x => x.EntryName, value); }
         }
 
         public override string EditorName => "EPF Data Source Editor";
 
         #endregion Public Properties
-
-        #region Protected Methods
-
-        protected override void UpdateEntry(IDbEpfArchiveDataSource entry)
-        {
-            entry.ArchivePath = ArchivePath;
-            entry.EntryName = EntryName;
-        }
-
-        protected override void UpdateVM(IDbEpfArchiveDataSource entry)
-        {
-            ArchivePath = entry.ArchivePath;
-            EntryName = entry.EntryName;
-        }
-
-        #endregion Protected Methods
     }
 }

@@ -18,11 +18,7 @@ namespace OpenBreed.Editor.VM
         #region Private Fields
 
         private static readonly HashSet<string> propertyNamesIgnoredForChanges = new HashSet<string>();
-        private string id;
-
         private bool changesTrackingEnabled;
-
-        private string description;
 
         #endregion Private Fields
 
@@ -43,38 +39,38 @@ namespace OpenBreed.Editor.VM
 
         public string Id
         {
-            get { return id; }
-            set { SetProperty(ref id, value); }
+            get { return Entry.Id; }
+            set { SetProperty(Entry, x => x.Id, value); }
         }
 
         public string Description
         {
-            get { return description; }
-            set { SetProperty(ref description, value); }
+            get { return Entry.Description; }
+            set { SetProperty(Entry, x => x.Description, value); }
         }
 
         #endregion Public Properties
 
         #region Protected Properties
 
-        protected IDbEntry Entry { get; private set; }
+        protected IDbEntry Entry { get; }
 
         #endregion Protected Properties
 
         #region Public Methods
 
-        public virtual void UpdateVM(IDbEntry source)
-        {
-            Entry = source;
-        }
+        public abstract void UpdateVM();
 
-        public virtual void UpdateEntry(IDbEntry target)
-        {
-        }
+        public abstract void UpdateEntry();
 
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected static void IgnoreProperty(string propertyName)
+        {
+            propertyNamesIgnoredForChanges.Add(propertyName);
+        }
 
         protected virtual void DisableChangesTracking()
         {
@@ -88,7 +84,7 @@ namespace OpenBreed.Editor.VM
 
         protected override void OnPropertyChanged(string name)
         {
-            if (changesTrackingEnabled)
+            if (changesTrackingEnabled && !IsPropertyIgnored(name))
             {
                 DataChangedCallback.Invoke();
             }
@@ -106,12 +102,16 @@ namespace OpenBreed.Editor.VM
             base.OnPropertyChanged(name);
         }
 
-        protected static void IgnoreProperty(string propertyName)
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private bool IsPropertyIgnored(string propertyName)
         {
-            propertyNamesIgnoredForChanges.Add(propertyName);
+            return propertyNamesIgnoredForChanges.Contains(propertyName);
         }
 
-        #endregion Protected Methods
+        #endregion Private Methods
     }
 
     public abstract class EntrySpecificEditorVM<TDbEntry> : EntrySpecificEditorVM where TDbEntry : IDbEntry
@@ -154,29 +154,22 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public override void UpdateEntry(IDbEntry target)
+        public override void UpdateEntry()
         {
-            UpdateEntry((TDbEntry)target);
-
-            target.Id = Id;
-            target.Description = Description;
+            ProtectedUpdateEntry();
         }
 
-        public override void UpdateVM(IDbEntry source)
+        public override void UpdateVM()
         {
             DisableChangesTracking();
-            base.UpdateVM(source);
 
             try
             {
-                Id = source.Id;
-                Description = source.Description;
-
-                UpdateVM((TDbEntry)source);
+                ProtectedUpdateVM();
             }
             catch (Exception ex)
             {
-                logger.LogError("Unable to load '{0}' entry. Exception:{2}", source.Id, ex);
+                logger.LogError("Unable to load '{0}' entry. Exception:{2}", Entry.Id, ex);
             }
             finally
             {
@@ -184,23 +177,14 @@ namespace OpenBreed.Editor.VM
             }
         }
 
+        protected virtual void ProtectedUpdateEntry()
+        {
+        }
+
+        protected virtual void ProtectedUpdateVM()
+        {
+        }
+
         #endregion Public Methods
-
-        #region Protected Methods
-
-        protected override void OnPropertyChanged(string name)
-        {
-            base.OnPropertyChanged(name);
-        }
-
-        protected virtual void UpdateEntry(TDbEntry target)
-        {
-        }
-
-        protected virtual void UpdateVM(TDbEntry source)
-        {
-        }
-
-        #endregion Protected Methods
     }
 }

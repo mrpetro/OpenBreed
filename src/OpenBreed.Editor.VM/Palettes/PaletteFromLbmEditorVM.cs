@@ -19,9 +19,7 @@ namespace OpenBreed.Editor.VM.Palettes
     {
         #region Private Fields
 
-        private string _blockName;
         private bool editEnabled;
-        private string dataRef;
 
         #endregion Private Fields
 
@@ -35,7 +33,30 @@ namespace OpenBreed.Editor.VM.Palettes
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider) : base(dbEntry, logger, palettesDataProvider, dataProvider, workspaceMan, dialogProvider)
         {
+            IgnoreProperty(nameof(EditEnabled));
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public override string EditorName => "LBM Palette Editor";
+
+        public bool EditEnabled
+        {
+            get { return editEnabled; }
+            set { SetProperty(ref editEnabled, value); }
+        }
+
+        public string DataRef
+        {
+            get { return Entry.ImageRef; }
+            set { SetProperty(Entry, x => x.ImageRef, value); }
+        }
+
+        #endregion Public Properties
+
+        #region Protected Methods
 
         protected override void OnPropertyChanged(string name)
         {
@@ -52,50 +73,30 @@ namespace OpenBreed.Editor.VM.Palettes
             base.OnPropertyChanged(name);
         }
 
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public override string EditorName => "LBM Palette Editor";
-
-        public bool EditEnabled
+        protected override void ProtectedUpdateVM()
         {
-            get { return editEnabled; }
-            set { SetProperty(ref editEnabled, value); }
-        }
-
-        #endregion Public Properties
-
-        #region Private Methods
-
-        public string DataRef
-        {
-            get { return dataRef; }
-            set { SetProperty(ref dataRef, value); }
-        }
-
-        protected override void UpdateVM(IDbPaletteFromLbm entry)
-        {
-            var model = palettesDataProvider.GetPalette(entry);
+            var model = palettesDataProvider.GetPalette(Entry);
 
             if (model != null)
+            {
                 UpdateVMColors(model);
-
-            DataRef = entry.ImageRef;
+            }
         }
 
-        protected override void UpdateEntry(IDbPaletteFromLbm source)
+        protected override void ProtectedUpdateEntry()
         {
-            var image = modelsProvider.GetModel<IDbPaletteFromLbm, Image>(source);
+            var image = modelsProvider.GetModel<IDbPaletteFromLbm, Image>(Entry);
 
             for (int i = 0; i < image.Palette.Entries.Length; i++)
             {
                 var color = Colors[i].Color;
                 image.Palette.Entries[i] = Color.FromArgb(255, color.R, color.G, color.B);
             }
-
-            source.ImageRef = DataRef;
         }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private bool ValidateSettings()
         {

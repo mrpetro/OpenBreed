@@ -27,7 +27,7 @@ namespace OpenBreed.Database.Xml.Items.Scripts
 
         protected XmlDbScriptEmbedded(XmlDbScriptEmbedded other) : base(other)
         {
-            Script = this.Script;
+            Script = other.Script;
         }
 
         #endregion Protected Constructors

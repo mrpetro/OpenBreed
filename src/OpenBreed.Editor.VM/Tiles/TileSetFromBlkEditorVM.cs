@@ -45,6 +45,11 @@ namespace OpenBreed.Editor.VM.Tiles
             this.tileSetsDataProvider = tileSetsDataProvider;
             this.palettesDataProvider = palettesDataProvider;
             Viewer = tileSetViewerVm;
+
+            IgnoreProperty(nameof(CurrentPaletteRef));
+
+            UpdateVM();
+            SwitchPalette();
         }
 
         #endregion Public Constructors
@@ -67,8 +72,6 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Internal Properties
 
-        internal PaletteModel CurrentPalette { get; private set; }
-
         #endregion Internal Properties
 
         #region Internal Methods
@@ -79,18 +82,14 @@ namespace OpenBreed.Editor.VM.Tiles
             paletteRefs.ForEach(item => PaletteIds.Add(item));
 
             CurrentPaletteRef = PaletteIds.FirstOrDefault();
-            Viewer.Palette = CurrentPalette;
+            SwitchPalette();
         }
 
         #endregion Internal Methods
 
         #region Protected Methods
 
-        protected void UpdateEntry(IDbTileAtlasFromBlk entry)
-        {
-        }
-
-        protected void UpdateVM(IDbTileAtlasFromBlk entry)
+        protected override void ProtectedUpdateVM()
         {
             model = tileSetsDataProvider.GetTileAtlas(Entry);
 
@@ -101,21 +100,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
             Viewer.FromModel(model);
 
-            SetupPaletteIds(entry.PaletteRefs);
-        }
-
-        protected override void UpdateEntry(IDbTileAtlas entry)
-        {
-            UpdateEntry((IDbTileAtlasFromBlk)entry);
-
-            base.UpdateEntry(entry);
-        }
-
-        protected override void UpdateVM(IDbTileAtlas entry)
-        {
-            base.UpdateVM(entry);
-
-            UpdateVM((IDbTileAtlasFromBlk)entry);
+            SetupPaletteIds(Entry.PaletteRefs);
         }
 
         protected override void OnPropertyChanged(string name)
@@ -124,7 +109,6 @@ namespace OpenBreed.Editor.VM.Tiles
             {
                 case nameof(CurrentPaletteRef):
                     SwitchPalette();
-                    Viewer.Palette = CurrentPalette;
                     break;
 
                 default:
@@ -140,7 +124,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         private void SwitchPalette()
         {
-            CurrentPalette = palettesDataProvider.GetPalette(CurrentPaletteRef);
+            Viewer.Palette = palettesDataProvider.GetPalette(CurrentPaletteRef);
         }
 
         #endregion Private Methods

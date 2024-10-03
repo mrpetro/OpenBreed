@@ -77,13 +77,14 @@ namespace OpenBreed.Editor.VM.Sprites
             base.OnPropertyChanged(name);
         }
 
-        protected override void UpdateEntry(IDbSpriteAtlasFromSpr entry)
+        protected override void ProtectedUpdateEntry()
         {
+            base.ProtectedUpdateEntry();
         }
 
-        protected override void UpdateVM(IDbSpriteAtlasFromSpr entry)
+        protected override void ProtectedUpdateVM()
         {
-            var model = spriteAtlasDataProvider.GetSpriteAtlas(entry);
+            var model = spriteAtlasDataProvider.GetSpriteAtlas(Entry);
 
             if (model != null)
             {
@@ -96,6 +97,8 @@ namespace OpenBreed.Editor.VM.Sprites
             {
                 bitmapProvider.SetPaletteColors(item.Image, Palette.Data);
             }
+
+            base.ProtectedUpdateVM();
         }
 
         #endregion Protected Methods

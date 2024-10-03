@@ -23,27 +23,5 @@ namespace OpenBreed.Editor.VM.Animations
         }
 
         #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected abstract void UpdateVM(TDbAnimation entry);
-
-        protected abstract void UpdateEntry(TDbAnimation entry);
-
-        protected override void UpdateVM(IDbAnimation entry)
-        {
-            base.UpdateVM(entry);
-
-            UpdateVM((TDbAnimation)entry);
-        }
-
-        protected override void UpdateEntry(IDbAnimation entry)
-        {
-            UpdateEntry((TDbAnimation)entry);
-
-            base.UpdateEntry(entry);
-        }
-
-        #endregion Protected Methods
     }
 }

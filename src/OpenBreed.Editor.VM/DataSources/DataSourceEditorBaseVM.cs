@@ -24,26 +24,10 @@ namespace OpenBreed.Editor.VM.DataSources
 
         #endregion Public Constructors
 
-        #region Protected Methods
+        #region Public Properties
 
-        protected abstract void UpdateVM(TDbDataSource entry);
+        public new TDbDataSource Entry => (TDbDataSource)base.Entry;
 
-        protected abstract void UpdateEntry(TDbDataSource entry);
-
-        protected override void UpdateVM(IDbDataSource entry)
-        {
-            base.UpdateVM(entry);
-
-            UpdateVM((TDbDataSource)entry);
-        }
-
-        protected override void UpdateEntry(IDbDataSource entry)
-        {
-            UpdateEntry((TDbDataSource)entry);
-
-            base.UpdateEntry(entry);
-        }
-
-        #endregion Protected Methods
+        #endregion Public Properties
     }
 }

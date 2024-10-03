@@ -44,6 +44,10 @@ namespace OpenBreed.Editor.VM.Tiles
             this.tileSetsDataProvider = tileSetsDataProvider;
             this.palettesDataProvider = palettesDataProvider;
             Viewer = tileSetViewerVm;
+
+            IgnoreProperty(nameof(CurrentPaletteRef));
+
+            UpdateVM();
         }
 
         #endregion Public Constructors
@@ -85,13 +89,9 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Protected Methods
 
-        protected void UpdateEntry(IDbTileAtlasFromAcbm entry)
+        protected void UpdateVM()
         {
-        }
-
-        protected void UpdateVM(IDbTileAtlasFromAcbm entry)
-        {
-            model = tileSetsDataProvider.GetTileAtlas(entry);
+            model = tileSetsDataProvider.GetTileAtlas(Entry);
 
             if (model is null)
             {
@@ -100,21 +100,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
             Viewer.FromModel(model);
 
-            SetupPaletteIds(entry.PaletteRefs);
-        }
-
-        protected override void UpdateEntry(IDbTileAtlas entry)
-        {
-            UpdateEntry((IDbTileAtlasFromAcbm)entry);
-
-            base.UpdateEntry(entry);
-        }
-
-        protected override void UpdateVM(IDbTileAtlas entry)
-        {
-            base.UpdateVM(entry);
-
-            UpdateVM((IDbTileAtlasFromAcbm)entry);
+            SetupPaletteIds(Entry.PaletteRefs);
         }
 
         protected override void OnPropertyChanged(string name)
