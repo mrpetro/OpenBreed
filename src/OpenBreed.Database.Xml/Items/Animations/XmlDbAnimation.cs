@@ -60,7 +60,19 @@ namespace OpenBreed.Database.Xml.Items.Animations
 
         #region Public Methods
 
+        public IDbAnimationTrack<TValue> AddNewTrack<TValue>()
+        {
+            var newTrack = new XmlDbAnimationTrack<TValue>();
+            XmlTracks.Add(newTrack);
+            return newTrack;
+        }
+
         public override IDbEntry Copy() => new XmlDbAnimation(this);
+
+        public bool RemoveTrack(IDbAnimationTrack track)
+        {
+            return XmlTracks.Remove((XmlDbAnimationTrack)track);
+        }
 
         #endregion Public Methods
     }

@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Animations\AnimationEditorCtrl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Converters\ColorToBrushConverter.cs">
       <Generator></Generator>
     </Compile>
@@ -39,10 +42,6 @@
     <Compile Update="Tiles\TileSetFromAcbmEditorCtrl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Animations\" />
   </ItemGroup>
 
   <ItemGroup>

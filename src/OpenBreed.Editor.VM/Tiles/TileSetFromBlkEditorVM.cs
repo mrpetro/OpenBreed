@@ -49,6 +49,7 @@ namespace OpenBreed.Editor.VM.Tiles
             IgnoreProperty(nameof(CurrentPaletteRef));
 
             UpdateVM();
+
             SwitchPalette();
         }
 
@@ -82,7 +83,6 @@ namespace OpenBreed.Editor.VM.Tiles
             paletteRefs.ForEach(item => PaletteIds.Add(item));
 
             CurrentPaletteRef = PaletteIds.FirstOrDefault();
-            SwitchPalette();
         }
 
         #endregion Internal Methods

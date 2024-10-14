@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Extensions;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenTK;
@@ -68,7 +69,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return totalWidth;
         }
 
-        public void Draw(IRenderView view, char character, Box2 clipBox)
+        public void Draw(IRenderView view, char character, Box2 clipBox, bool ignoreScale = false)
         {
             var found = Lookup[character];
             primitiveRenderer.DrawSprite(
@@ -77,16 +78,23 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 vboList[found.Item1],
                 new Vector3(0, 0, 0),
                 Vector2.One,
-                Color4.White);
+                Color4.White, ignoreScale);
         }
 
-        public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox)
+        public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false)
         {
             //TODO: include color in text rendering
 
             GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
 
             var offsetX = 0.0f;
+
+            var scaleCorrection = 1.0f;
+
+            if (ignoreScale)
+            {
+                scaleCorrection = 1.0f / view.GetScale();
+            }
 
             for (int i = 0; i < text.Length; i++)
             {
@@ -97,11 +105,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                     view,
                     Texture,
                     vboList[key],
-                    new Vector3((int)offsetX, 0.0f, 0.0f),
+                    new Vector3(offsetX, 0.0f, 0.0f),
                     Vector2.One,
-                    color);
+                    color, ignoreScale);
 
-                offsetX += Lookup[ch].Item2;
+                offsetX += Lookup[ch].Item2 * scaleCorrection;
             }
 
             GL.BindTexture(TextureTarget.Texture2D, 0);

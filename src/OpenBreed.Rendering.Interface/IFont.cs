@@ -31,7 +31,7 @@ namespace OpenBreed.Rendering.Interface
         /// Draw single character given in parameter
         /// </summary>
         /// <param name="character">Single character to draw</param>
-        void Draw(IRenderView view, char character, Box2 clipBox);
+        void Draw(IRenderView view, char character, Box2 clipBox, bool ignoreScale = false);
 
         /// <summary>
         /// Draw text given in parameter
@@ -39,7 +39,7 @@ namespace OpenBreed.Rendering.Interface
         /// <param name="text">Text to draw</param>
         /// <param name="color">Color of text</param>
         /// <param name="clipBox">Clip box</param>
-        void Draw(IRenderView view, string text, Color4 color, Box2 clipBox);
+        void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false);
 
         /// <summary>
         /// Gets single character width

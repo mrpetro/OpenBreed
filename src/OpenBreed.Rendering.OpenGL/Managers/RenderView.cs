@@ -127,6 +127,31 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return coordsT;
         }
 
+        public Vector2i GetWorldToViewCoords(Vector2 point)
+        {
+            var mat = View;
+            var coordsT = new Vector4(point.X, point.Y, 0.0f, 1.0f) * mat;
+            coordsT.W = 1.0f / coordsT.W;
+            coordsT.X *= coordsT.W;
+            coordsT.Y *= coordsT.W;
+            coordsT.Z *= coordsT.W;
+            return new Vector2i((int)coordsT.X, (int)coordsT.Y);
+        }
+
+        public Box2 GetViewToWorldCoords(Box2i box)
+        {
+            var wMin = GetViewToWorldCoords(box.Min);
+            var wMax = GetViewToWorldCoords(box.Max);
+            return new Box2(new Vector2(wMin.X, wMin.Y), new Vector2(wMax.X, wMax.Y));
+        }
+
+        public Box2i GetWorldToViewCoords(Box2 box)
+        {
+            var wMin = GetWorldToViewCoords(box.Min);
+            var wMax = GetWorldToViewCoords(box.Max);
+            return new Box2i(new Vector2i(wMin.X, wMin.Y), new Vector2i(wMax.X, wMax.Y));
+        }
+
         public Vector4 GetHostToWorldCoords(Vector2i point)
         {
             point = GetHostToViewCoords(point);
@@ -179,6 +204,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         }
 
         public void Translate(float x, float y, float z) => Translate(new Vector3(x, y, z));
+
+        public void Scale(float value) => Scale(value, value);
+
+        public void Scale(float x, float y)
+        {
+            View = Matrix4.CreateScale(x, y, 1.0f) * View;
+        }
 
         #endregion Public Methods
 

@@ -74,5 +74,34 @@ namespace OpenBreed.Common.Interface.Drawing
         }
 
         #endregion Public Constructors
+
+        #region Public Methods
+
+        public static MyPointF operator +(MyPointF a, MyPointF b)
+        {
+            return new MyPointF(a.X + b.X, a.Y + b.Y);
+        }
+
+        public static MyPointF operator -(MyPointF a, MyPointF b)
+        {
+            return new MyPointF(a.X - b.X, a.Y - b.Y);
+        }
+
+        public static MyPointF operator /(MyPointF a, float d)
+        {
+            return new MyPointF(a.X / d, a.Y / d);
+        }
+
+        public static MyPointF operator *(MyPointF a, float d)
+        {
+            return new MyPointF(a.X * d, a.Y * d);
+        }
+
+        public static MyPointF operator *(MyPointF a, MyPointF b)
+        {
+            return new MyPointF(a.X * b.X, a.Y * b.Y);
+        }
+
+        #endregion Public Methods
     }
 }

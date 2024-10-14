@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Interface.Extensions;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Extensions;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK.Graphics.OpenGL4;
@@ -140,36 +141,59 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             DrawUnitCircle(view, model, color, filled);
         }
 
+        public void DrawLines(IRenderView view, IReadOnlyList<Vector2> points, Color4 color)
+        {
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                DrawLine(view, points[i], points[i + 1], color);
+            }
+        }
+
         public void DrawLine(IRenderView view, Vector2 startPoint, Vector2 endPoint, Color4 color)
         {
             var model = Matrix4.CreateTranslation(startPoint.X, startPoint.Y, 0.0f);
             var uAxis = endPoint - startPoint;
-            var angle = uAxis.CalculateAngle(Vector2.UnitX);
-            var rotation = Matrix4.CreateFromAxisAngle(Vector3.UnitZ, angle); 
+            var angle = uAxis.DirectedAngle(Vector2.UnitX);
+            var rotation = Matrix4.CreateFromAxisAngle(Vector3.UnitZ, -angle);
+            var eX = Vector2.UnitX * uAxis.Length;
 
-            model =  rotation * Matrix4.CreateScale(uAxis.X, uAxis.Y, 1.0f) * model;
+            model =  Matrix4.CreateScale(eX.X, eX.Y, 1.0f) * rotation * model;
 
             DrawUnitLine(view, model, color);
         }
 
-        public void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type, float size = 2.0f)
+        public void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type, float size = 2.0f, bool ignoreScale = false)
         {
             var model = Matrix4.CreateTranslation(pos.X, pos.Y, 0.0f);
+
             model = Matrix4.CreateScale(size, size, 1.0f) * model;
+
+            if (ignoreScale)
+            {
+                var scale = view.GetScale();
+                model = Matrix4.CreateScale(1 / scale, 1 / scale, 1.0f) * model;
+            }
 
             switch (type)
             {
                 case PointType.Rectangle:
+                    DrawUnitRectangle(view, model, color, filled: false);
+                    break;
+                case PointType.RectangleFilled:
                     DrawUnitRectangle(view, model, color, filled: true);
                     break;
-
                 case PointType.Circle:
+                    DrawUnitCircle(view, model, color, filled: false);
+                    break;
+                case PointType.CircleFilled:
                     DrawUnitCircle(view, model, color, filled: true);
                     break;
-
                 case PointType.Cross:
-                    DrawLine(view, new Vector2(pos.X - size, pos.Y), new Vector2(pos.X + size, pos.Y), color);
-                    DrawLine(view, new Vector2(pos.X, pos.Y - size), new Vector2(pos.X, pos.Y + size), color);
+                    model = Matrix4.CreateTranslation(-0.5f, 0.0f, 0.0f) * model;
+                    DrawUnitLine(view, model, color);
+                    model = Matrix4.CreateTranslation(0.5f, -0.5f, 0.0f) * model;
+                    model =  Matrix4.CreateFromAxisAngle(Vector3.UnitZ, (float)Math.PI / 2.0f) * model;
+                    DrawUnitLine(view, model, color);
                     break;
                 case PointType.Ex:
                 default:
@@ -177,11 +201,25 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             }
         }
 
-        public void DrawSprite(IRenderView view, ITexture texture, int vao, Vector3 pos, Vector2 scale, Color4 color)
+        public void DrawPoints(IRenderView view, IReadOnlyList<Vector2> points, Color4 color, PointType type, float size = 2.0f, bool ignoreScale = false)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                DrawPoint(view, points[i], color, type, size, ignoreScale);
+            }
+        }
+
+        public void DrawSprite(IRenderView view, ITexture texture, int vao, Vector3 pos, Vector2 size, Color4 color, bool ignoreScale = false)
         {
             ((Texture)texture).Use(TextureUnit.Texture0);
 
-            var model = Matrix4.CreateScale(scale.X, scale.Y, 1.0f) * Matrix4.CreateTranslation(pos);
+            var model = Matrix4.CreateScale(size.X, size.Y, 1.0f) * Matrix4.CreateTranslation(pos);
+
+            if (ignoreScale)
+            {
+                var scale = view.GetScale();
+                model = Matrix4.CreateScale(1 / scale, 1 / scale, 1.0f) * model;
+            }
 
             if (texture.DataMode == TextureDataMode.Rgba)
             {

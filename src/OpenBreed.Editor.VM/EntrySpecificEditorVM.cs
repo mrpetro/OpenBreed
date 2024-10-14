@@ -118,7 +118,6 @@ namespace OpenBreed.Editor.VM
     {
         #region Private Fields
 
-        private readonly IDialogProvider dialogProvider;
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -132,7 +131,8 @@ namespace OpenBreed.Editor.VM
             IDialogProvider dialogProvider) : base(dbEntry)
         {
             WorkspaceMan = workspaceMan;
-            this.dialogProvider = dialogProvider;
+            DialogProvider = dialogProvider;
+
             this.logger = logger;
         }
 
@@ -148,7 +148,7 @@ namespace OpenBreed.Editor.VM
 
         internal IWorkspaceMan WorkspaceMan { get; }
 
-        internal IDialogProvider DialogProvider => dialogProvider;
+        internal IDialogProvider DialogProvider { get; }
 
         #endregion Internal Properties
 

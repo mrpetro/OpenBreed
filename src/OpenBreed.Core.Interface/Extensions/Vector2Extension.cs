@@ -8,7 +8,12 @@ namespace OpenBreed.Core.Interface.Extensions
     {
         #region Public Methods
 
-        public static float CalculateAngle(this Vector2 first, Vector2 second)
+        public static float DirectedAngle(this Vector2 first, Vector2 second)
+        {
+            return (float)(Math.Atan2(second.Y, second.X) - Math.Atan2(first.Y, first.X));
+        }
+
+        public static float SmallestAngle(this Vector2 first, Vector2 second)
         {
             var dot = Vector2.Dot(first, second);
             return (float)Math.Acos(MathHelper.Clamp(dot / (first.Length * second.Length), -1.0, 1.0));
@@ -26,7 +31,7 @@ namespace OpenBreed.Core.Interface.Extensions
             newMag = Math.Min(newMag, Math.Max(magCur, magTar));
             newMag = Math.Max(newMag, Math.Min(magCur, magTar));
 
-            var totalAngle = current.CalculateAngle(target) - maxRadiansDelta;
+            var totalAngle = current.SmallestAngle(target) - maxRadiansDelta;
             if (totalAngle <= 0)
                 return target.Normalized() * newMag;
             else if (totalAngle >= Math.PI)

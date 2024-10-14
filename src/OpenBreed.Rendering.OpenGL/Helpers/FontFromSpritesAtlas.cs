@@ -105,18 +105,18 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public void Draw(IRenderView view, char ch, Box2 clipBox)
+        public void Draw(IRenderView view, char ch, Box2 clipBox, bool ignoreScale = false)
         {
             (int, int, float, float) data;
             if (Lookup.TryGetValue(ch, out data))
             {
                 var atlasId = data.Item1;
                 var spriteIndex = data.Item2;
-                spriteRenderer.Render(view, new Vector3(0, 0, 0), Vector2.One, Color4.White, atlasId, spriteIndex);
+                spriteRenderer.Render(view, new Vector3(0, 0, 0), Vector2.One, Color4.White, atlasId, spriteIndex, ignoreScale);
             }
         }
 
-        public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox)
+        public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false)
         {
             var caretPosX = 0.0f;
             var caretPosY = 0.0f;
@@ -142,7 +142,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                         break;
                 }
 
-                spriteRenderer.Render(view, new Vector3(caretPosX, caretPosY - h, 0.0f), Vector2.One, color, atlasId, spriteIndex);
+                spriteRenderer.Render(view, new Vector3(caretPosX, caretPosY - h, 0.0f), Vector2.One, color, atlasId, spriteIndex, ignoreScale);
 
                 caretPosX += w;
             }

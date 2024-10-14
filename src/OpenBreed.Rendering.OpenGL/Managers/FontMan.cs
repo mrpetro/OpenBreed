@@ -50,15 +50,15 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer, primitiveRenderer);
         }
 
-        public void RenderPart(IRenderView view, int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox)
+        public void RenderPart(IRenderView view, int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox, bool ignoreScale = false)
         {
             view.Translate(new Vector3(origin.X, origin.Y, order));
-            GetById(fontId).Draw(view, text, color, clipBox);
+            GetById(fontId).Draw(view, text, color, clipBox, ignoreScale);
         }
 
-        public void RenderAppend(IRenderView view, int fontId, string text, Box2 clipBox, Vector2 value)
+        public void RenderAppend(IRenderView view, int fontId, string text, Box2 clipBox, Vector2 value, bool ignoreScale = false)
         {
-            GetById(fontId).Draw(view, text, Color4.White, clipBox);
+            GetById(fontId).Draw(view, text, Color4.White, clipBox, ignoreScale);
         }
 
         public IFont GetGfxFont(string fontName)

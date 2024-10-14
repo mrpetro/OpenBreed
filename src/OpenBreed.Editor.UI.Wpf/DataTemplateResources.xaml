@@ -21,8 +21,9 @@
                     xmlns:ctrlScripts="clr-namespace:OpenBreed.Editor.UI.Wpf.Scripts" 
                     xmlns:vmScripts="clr-namespace:OpenBreed.Editor.VM.Scripts;assembly=OpenBreed.Editor.VM"
                     xmlns:ctrlTexts="clr-namespace:OpenBreed.Editor.UI.Wpf.Texts" 
-                    xmlns:vmTexts="clr-namespace:OpenBreed.Editor.VM.Texts;assembly=OpenBreed.Editor.VM">
-
+                    xmlns:ctrlAnimations="clr-namespace:OpenBreed.Editor.UI.Wpf.Animations" 
+                    xmlns:vmAnimations="clr-namespace:OpenBreed.Editor.VM.Animations;assembly=OpenBreed.Editor.VM"
+    xmlns:vmTexts="clr-namespace:OpenBreed.Editor.VM.Texts;assembly=OpenBreed.Editor.VM">
 
     <DataTemplate DataType="{x:Type vmPalettes:PaletteFromBinaryEditorVM}" >
         <ctrlPalettes:PaletteFromBinaryCtrl />
@@ -80,5 +81,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmTexts:TextFromMapEditorVM}" >
         <ctrlTexts:TextFromMapEditorCtrl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmAnimations:ClipEditorVM}" >
+        <ctrlAnimations:AnimationEditorCtrl />
     </DataTemplate>
 </ResourceDictionary>

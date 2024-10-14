@@ -55,11 +55,19 @@ namespace OpenBreed.Rendering.Interface.Managers
 
         void Translate(float x, float y, float z);
 
+        void Scale(float x, float y);
+
+        void Scale(float value);
+
         void MultMatrix(Matrix4 transform);
 
         void SetProjection(Matrix4 matrix4);
 
+
         Vector4 GetViewToWorldCoords(Vector2i point);
+        Vector2i GetWorldToViewCoords(Vector2 point);
+        Box2 GetViewToWorldCoords(Box2i box);
+        Box2i GetWorldToViewCoords(Box2 box);
         Vector4 GetHostToWorldCoords(Vector2i point);
         Vector2i GetHostToViewCoords(Vector2i point);
 

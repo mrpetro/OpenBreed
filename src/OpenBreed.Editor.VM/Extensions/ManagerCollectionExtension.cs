@@ -9,6 +9,7 @@ using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Interface.Items.Images;
@@ -22,6 +23,7 @@ using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Actions;
+using OpenBreed.Editor.VM.Animations;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.DataSources;
@@ -104,6 +106,8 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<EpfArchiveFileDataSourceEditorVM>();
                 services.AddTransient<FileDataSourceEditorVM>();
                 services.AddTransient<OptionsVM>();
+                services.AddTransient<ClipEditorVM>();
+                services.AddTransient<ClipTrackPropertiesEditorVM>();
                 services.AddTransient<AbtaPasswordGeneratorVM>();
             });
         }
@@ -128,6 +132,7 @@ namespace OpenBreed.Editor.VM.Extensions
                     entryEditorFactory.RegisterEditor<IDbText>();
                     entryEditorFactory.RegisterEditor<IDbEntityTemplate>();
                     entryEditorFactory.RegisterEditor<IDbDataSource>();
+                    entryEditorFactory.RegisterEditor<IDbAnimation>();
 
                     entryEditorFactory.Register<IDbMap, MapEditorVM>();
                     entryEditorFactory.Register<IDbSound, PcmSoundEditorVM>();
@@ -149,6 +154,7 @@ namespace OpenBreed.Editor.VM.Extensions
                     entryEditorFactory.Register<IDbEntityTemplateFromFile, EntityTemplateFromFileEditorVM>();
                     entryEditorFactory.Register<IDbEpfArchiveDataSource, EpfArchiveFileDataSourceEditorVM>();
                     entryEditorFactory.Register<IDbFileDataSource, FileDataSourceEditorVM>();
+                    entryEditorFactory.Register<IDbAnimation, ClipEditorVM>();
                     return entryEditorFactory;
                 });
             });

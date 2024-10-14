@@ -10,7 +10,9 @@ namespace OpenBreed.Rendering.Interface
     public enum PointType
     {
         Rectangle,
+        RectangleFilled,
         Circle,
+        CircleFilled,
         Cross,
         Ex
     }
@@ -23,8 +25,10 @@ namespace OpenBreed.Rendering.Interface
         void DrawRectangle(IRenderView view, Box2 clipBox, Color4 color, bool filled = false);
         void DrawCircle(IRenderView view, Vector2 pos, float radius, Color4 color, bool filled = false);
         void DrawBox(IRenderView view, Box2 clipBox, Color4 color);
-        void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type, float size = 2.0f);
+        void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type, float size = 2.0f, bool ignoreScale = false);
+        void DrawPoints(IRenderView view, IReadOnlyList<Vector2> points, Color4 color, PointType type, float size = 2.0f, bool ignoreScale = false);
         void DrawLine(IRenderView view, Vector2 startPoint, Vector2 endPoint, Color4 color);
+        void DrawLines(IRenderView view, IReadOnlyList<Vector2> points, Color4 color);
 
         void DrawNested(IRenderView view, Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction);
 
@@ -36,7 +40,7 @@ namespace OpenBreed.Rendering.Interface
 
         void Load();
 
-        void DrawSprite(IRenderView view, ITexture texture, int vao, Vector3 pos, Vector2 scale, Color4 color);
+        void DrawSprite(IRenderView view, ITexture texture, int vao, Vector3 pos, Vector2 scale, Color4 color, bool ignoreScale = false);
 
 
         IPosTexCoordArrayBuilder CreatePosTexCoordArray();

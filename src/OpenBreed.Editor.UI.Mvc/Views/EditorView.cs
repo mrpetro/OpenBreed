@@ -63,6 +63,26 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
         public Vector2i CursorDelta { get; private set; }
 
+        public float MinScale { get; private set; } = 0.125f;
+
+        public float MaxScale { get; private set; } = 8.0f;
+
+        public void SetScaleLimits(float min, float max)
+        {
+            if (min <= 0.0f)
+            {
+                throw new ArgumentOutOfRangeException(nameof(min), "Minimum scale must be greater than zero."); 
+            }
+
+            if (max <= min)
+            {
+                throw new ArgumentOutOfRangeException(nameof(max), "Maximum scale must be greater than minimum scale.");
+            }
+
+            MinScale = min;
+            MaxScale = max;
+        }
+
         #endregion Public Properties
 
         #region Internal Methods
@@ -134,36 +154,53 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             float scaleFactor = 1.0f;
 
             if (Math.Sign(delta) > 0)
+            {
                 scaleFactor = 2.0f;
+            }
             else if (Math.Sign(delta) < 0)
+            {
                 scaleFactor = 0.5f;
+            }
 
             currentScale *= scaleFactor;
 
-            if (currentScale < 0.125f)
-                currentScale = 0.125f;
-            else if (currentScale > 8.0f)
-                currentScale = 8.0f;
+            if (currentScale < MinScale)
+            {
+                currentScale = MinScale;
+            }
+            else if (currentScale > MaxScale)
+            {
+                currentScale = MaxScale;
+            }
 
             renderView.ZoomTo(CursorPosition, currentScale);
         }
 
         private void DrawCursor(IRenderView view, float dt)
         {
-            var cPos = view.GetViewToWorldCoords(CursorPosition);
-            var cSize = 10;
-            view.Context.Primitives.DrawPoint(view, new Vector2(cPos.X, cPos.Y), Color4.White, PointType.Cross, cSize);
-            view.Context.Fonts.Render(view, new Box2(view.Box.Min, view.Box.Max), dt, RenderTexts);
+            var wPos = view.GetViewToWorldCoords(CursorPosition);
+
+            //var scale = view.GetScale();
+            //view.Scale(1.0f / scale);
+
+            //var cPos = view.GetViewToWorldCoords(CursorPosition);
+
+            var cSize = 20;
+            view.Context.Primitives.DrawPoint(view, new Vector2(wPos.X, wPos.Y), Color4.White, PointType.Cross, cSize, ignoreScale: true);
+            view.Context.Fonts.Render(view, new Box2(view.Box.Min, view.Box.Max), dt, (view, clipBox, dt) =>  RenderCoordinates(view, clipBox, dt, wPos));
         }
 
-        private void RenderTexts(IRenderView view, Box2 clipBox, float dt)
+        private void RenderCoordinates(IRenderView view, Box2 clipBox, float dt, Vector4 wPos)
         {
             var textPos = view.GetViewToWorldCoords(CursorPosition);
 
             var font = view.Context.Fonts.GetOSFont("ARIAL", 9);
 
-            view.Context.Fonts.RenderStart(view, new Vector2(textPos.X + 5, textPos.Y + 5));
-            view.Context.Fonts.RenderPart(view, font.Id, $"({textPos.X},{textPos.Y})", Vector2.Zero, Color4.White, 100, clipBox);
+            var scale = view.GetScale();
+
+
+            view.Context.Fonts.RenderStart(view, new Vector2(wPos.X + 5 / scale, wPos.Y + 5 / scale));
+            view.Context.Fonts.RenderPart(view, font.Id, $"({wPos.X},{wPos.Y})", Vector2.Zero, Color4.White, 100, clipBox, ignoreScale: true);
             view.Context.Fonts.RenderEnd(view);
         }
 

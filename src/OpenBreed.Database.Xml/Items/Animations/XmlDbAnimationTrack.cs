@@ -51,6 +51,11 @@ namespace OpenBreed.Database.Xml.Items.Animations
             };
         }
 
+        public bool RemoveFrame(IDbAnimationFrame frame)
+        {
+            return XmlFrames.Remove((XmlDbAnimationFrame<TValue>)frame);
+        }
+
         #endregion Public Methods
     }
 

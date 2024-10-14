@@ -53,4 +53,54 @@ namespace OpenBreed.Common.Interface.Drawing
 
         #endregion Public Methods
     }
+
+    public class MyExtentF
+    {
+        #region Public Fields
+
+        public MyPointF Min = new MyPointF(int.MaxValue, int.MaxValue);
+
+        public MyPointF Max = new MyPointF(int.MinValue, int.MinValue);
+
+        public MyPointF Size => new MyPointF(Max.X - Min.X + 1, Max.Y - Min.Y + 1);
+
+        #endregion Public Fields
+
+        #region Public Constructors
+
+        public MyExtentF()
+        {
+
+        }
+
+        public MyExtentF(MyPointF min, MyPointF max)
+        {
+            Min = min;
+            Max = max;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public MyPointF Center
+        {
+            get
+            {
+                return (Min + Max) / 2;
+            }
+        }
+
+        public void Expand(float x, float y)
+        {
+            Min.X = Math.Min(Min.X, x);
+            Min.Y = Math.Min(Min.Y, y);
+            Max.X = Math.Max(Max.X, x);
+            Max.Y = Math.Max(Max.Y, y);
+        }
+
+        public void Expand(MyPointF point) => Expand(point.X, point.Y);
+
+        #endregion Public Methods
+    }
 }

@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="OpenBreed.Editor.UI.Wpf.Animations.ClipTrackPropertiesEditorCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.Animations"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="300">
+    <Grid Margin="4">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Content="Controller name"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="1"
+                           Height="20"
+                           Margin="4,6,4,6"
+                           Padding="0" />
+        <TextBox Height="22"
+                 Grid.Row="0"
+                 Grid.ColumnSpan="3"
+                 Grid.Column="1"
+                 Text="{Binding ControllerName, UpdateSourceTrigger=PropertyChanged}"
+                 />
+        <Label Content="Start"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Height="22"
+                           Margin="4,6,4,6"
+                           Padding="0" />
+        <TextBox Height="22"
+                             Grid.Row="1"
+                             Grid.Column="1"/>
+        <Label Content="End"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           Height="20"
+                           Margin="4,6,4,6"
+                           Padding="0" />
+        <TextBox Height="22"
+                             Grid.Row="1"
+                             Grid.Column="3"/>
+    </Grid>
+</UserControl>

@@ -35,7 +35,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int atlasId, int imageId)
+        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int atlasId, int imageId, bool ignoreScale = false)
         {
             var spriteAtlas = spriteMan.InternalGetById(atlasId);
             var vbo = spriteAtlas.data[imageId].Vbo;
@@ -50,7 +50,8 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                     vbo,
                     pos,
                     scale,
-                    color);
+                    color,
+                    ignoreScale);
             }
             finally
             {
