@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OpenBreed.Wecs.Attributes;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Common
 {
@@ -29,6 +30,7 @@ namespace OpenBreed.Wecs.Components.Common
         #endregion Public Properties
     }
 
+    [ComponentName("Timer")]
     public class TimerComponent : IEntityComponent
     {
         #region Public Constructors

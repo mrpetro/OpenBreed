@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components;
 using OpenTK;
 using OpenTK.Mathematics;
 using System;
@@ -10,6 +11,7 @@ namespace OpenBreed.Wecs.Components.Common
         float Value { get; }
     }
 
+    [ComponentName("AngularThrust")]
     public class AngularThrustComponent : IEntityComponent
     {
         #region Public Constructors

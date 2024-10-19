@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Wecs.Components.Common
+﻿using OpenBreed.Wecs.Attributes;
+
+namespace OpenBreed.Wecs.Components.Common
 {
     public interface ILifetimeComponentTemplate : IComponentTemplate
     {
@@ -8,6 +10,7 @@
     /// <summary>
     /// Component
     /// </summary>
+    [ComponentName("Lifetime")]
     public class LifetimeComponent : IEntityComponent
     {
         #region Public Constructors

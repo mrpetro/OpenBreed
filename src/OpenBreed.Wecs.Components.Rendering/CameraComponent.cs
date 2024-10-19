@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Interface;
+using OpenBreed.Wecs.Attributes;
 using OpenTK;
 using OpenTK.Mathematics;
 
@@ -21,6 +22,7 @@ namespace OpenBreed.Wecs.Components.Rendering
     /// Related systems:
     /// - ViewportSystem
     /// </summary>
+    [ComponentName("Camera")]
     public class CameraComponent : IEntityComponent
     {
         #region Internal Constructors

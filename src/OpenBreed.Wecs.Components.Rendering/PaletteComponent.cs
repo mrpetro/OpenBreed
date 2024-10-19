@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Interface.Data;
+using OpenBreed.Wecs.Attributes;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Rendering
@@ -37,6 +38,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Public Constructors
     }
 
+    [ComponentName("Palette")]
     public class PaletteComponent : IEntityComponent
     {
         #region Public Constructors

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Common
@@ -11,6 +12,7 @@ namespace OpenBreed.Wecs.Components.Common
     /// Component used by Follower system to store followers
     /// of Entity that has this component
     /// </summary>
+    [ComponentName("Followed")]
     public class FollowedComponent : IEntityComponent
     {
         #region Public Constructors

@@ -63,18 +63,18 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
 
         public static Vector2 GetTargetDirection(this IEntity entity)
         {
-            return entity.Get<AngularPositionTargetComponent>().Value;
+            return entity.Get<AngularVelocityComponent>().Value;
         }
 
         public static void SetTargetDirection(this IEntity entity, float x, float y)
         {
-            entity.Get<AngularPositionTargetComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
+            entity.Get<AngularVelocityComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
         }
 
         public static void SetTargetDirectionToCoordinates(this IEntity entity, Vector2 coordinates)
         {
             var direction = Vector2.Subtract(coordinates, entity.GetPosition());
-            entity.Get<AngularPositionTargetComponent>().Value = direction.Normalized();
+            entity.Get<AngularVelocityComponent>().Value = direction.Normalized();
         }
 
         public static Vector2 GetDirection(this IEntity entity)

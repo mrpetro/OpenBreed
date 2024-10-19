@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Interface;
+using OpenBreed.Wecs.Attributes;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;
@@ -82,6 +83,7 @@ namespace OpenBreed.Wecs.Components.Rendering
     /// Related systems:
     /// - ViewportSystem
     /// </summary>
+    [ComponentName("Viewport")]
     public class ViewportComponent : IEntityComponent
     {
         #region Internal Constructors

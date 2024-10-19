@@ -10,8 +10,8 @@ using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Sandbox.Extensions;
-using OpenBreed.Sandbox.Wecs.Components;
-using OpenBreed.Sandbox.Wecs.Events;
+using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
@@ -33,6 +33,7 @@ using System.Xml.Linq;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Common.Game;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {

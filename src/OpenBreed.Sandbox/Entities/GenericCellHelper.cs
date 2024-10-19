@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Sandbox.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;

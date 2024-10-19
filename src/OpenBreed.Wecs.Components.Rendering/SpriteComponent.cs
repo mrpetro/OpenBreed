@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenTK;
 using OpenTK.Mathematics;
 using System;
@@ -27,6 +28,7 @@ namespace OpenBreed.Wecs.Components.Rendering
     ///  - axis-aligned box shape
     ///  - position
     /// </summary>
+    [ComponentName("Sprite")]
     public class SpriteComponent : IEntityComponent
     {
         #region Public Fields
@@ -54,21 +56,25 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// <summary>
         /// Id of sprite atlas
         /// </summary>
+        [AnimatableProperty]
         public int AtlasId { get; set; }
 
         /// <summary>
         /// Id of sprite image from the atlas
         /// </summary>
+        [AnimatableProperty]
         public int ImageId { get; set; }
 
         /// <summary>
         /// Local origin of sprite coordinates
         /// </summary>
+        [AnimatableProperty]
         public Vector2 Origin { get; set; }
 
         /// <summary>
         /// Scale of sprite
         /// </summary>
+        [AnimatableProperty]
         public Vector2 Scale { get; set; }
 
         /// <summary>

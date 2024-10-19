@@ -9,8 +9,8 @@ using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
-using OpenBreed.Sandbox.Wecs.Components;
-using OpenBreed.Sandbox.Wecs.Systems;
+using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Rendering;
@@ -28,6 +28,8 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Numerics;
+using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -83,23 +85,6 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Methods
 
-        public void AddSystems(IWorldBuilder builder)
-        {
-            //Input Stage
-            builder.AddSystem<ActorMovementByPlayerInputsSystem>();
-
-            //Video
-
-            builder.AddSystem<ViewportSystem>();
-            //builder.AddSystem<SoundSystem>();
-            builder.AddSystem<SoundSystem>();
-            builder.AddSystem<TimerSystem>();
-            builder.AddSystem<FrameSystem>();
-            //builder.AddSystem(core.CreateSpriteSystem().Build());
-            //builder.AddSystem(core.CreateWireframeSystem().Build());
-            //builder.AddSystem(core.CreateTextSystem().Build());
-        }
-
         public IEntity CreatePlayer(string player)
         {
             var player1Entity = entityMan.Create($"Players/{player}");
@@ -122,7 +107,7 @@ namespace OpenBreed.Sandbox.Worlds
         {
             var builder = worldMan.Create().SetName("ScreenWorld");
 
-            AddSystems(builder);
+            builder.SetupScreenWorldSystems();
 
             var world = builder.Build();
 

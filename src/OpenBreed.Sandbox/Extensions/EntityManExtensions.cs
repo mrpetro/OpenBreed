@@ -1,7 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Sandbox.Entities;
-using OpenBreed.Sandbox.Wecs.Components;
-using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
@@ -12,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common.Game;
+using OpenBreed.Sandbox.Worlds;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -24,7 +24,7 @@ namespace OpenBreed.Sandbox.Extensions
 
             var entities = entityMan.Where(entity =>
             {
-                if(entity.WorldId != worldId)
+                if (entity.WorldId != worldId)
                     return false;
 
                 var meta = entity.TryGet<MetadataComponent>();
@@ -32,10 +32,10 @@ namespace OpenBreed.Sandbox.Extensions
                 if (meta is null)
                     return false;
 
-                if(meta.Name != entityType)
+                if (meta.Name != entityType)
                     return false;
 
-                if(meta.Option != option)
+                if (meta.Option != option)
                     return false;
 
                 return true;
@@ -174,7 +174,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             var player1Entity = entityMan.GetByTag("Players/P1").FirstOrDefault();
 
-            if(player1Entity is not null)
+            if (player1Entity is not null)
             {
                 if (player1Entity.Get<ControllerComponent>().ControlledEntityId == controlledEntity.Id)
                     return player1Entity;

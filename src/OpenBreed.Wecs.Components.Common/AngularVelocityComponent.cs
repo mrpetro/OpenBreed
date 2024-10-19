@@ -1,20 +1,23 @@
-﻿using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components;
 using OpenTK;
 using OpenTK.Mathematics;
 using System;
+using System.Xml.Serialization;
 
 namespace OpenBreed.Wecs.Components.Common
 {
-    public interface IAngularPositionTargetComponentTemplate : IComponentTemplate
+    public interface IAAngularVelocityComponentTemplate : IComponentTemplate
     {
         float Value { get; }
     }
 
-    public class AngularPositionTargetComponent : IEntityComponent
+    [ComponentName("AngularVelocity")]
+    public class AngularVelocityComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public AngularPositionTargetComponent(float angleValue)
+        public AngularVelocityComponent(float angleValue)
         {
             Value = GetDirection(angleValue);
         }
@@ -41,16 +44,16 @@ namespace OpenBreed.Wecs.Components.Common
     }
 
 
-    public sealed class AngularPositionTargetComponentFactory : ComponentFactoryBase<IAngularPositionTargetComponentTemplate>
+    public sealed class AngularVelocityComponentFactory : ComponentFactoryBase<IAAngularVelocityComponentTemplate>
     {
-        public AngularPositionTargetComponentFactory()
+        public AngularVelocityComponentFactory()
         {
 
         }
 
-        protected override IEntityComponent Create(IAngularPositionTargetComponentTemplate template)
+        protected override IEntityComponent Create(IAAngularVelocityComponentTemplate template)
         {
-            return new AngularPositionTargetComponent(template.Value);
+            return new AngularVelocityComponent(template.Value);
         }
     }
 }

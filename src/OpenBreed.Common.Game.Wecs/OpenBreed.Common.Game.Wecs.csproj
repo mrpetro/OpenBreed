@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Common.Game\OpenBreed.Common.Game.csproj" />
+    <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Control\OpenBreed.Wecs.Components.Control.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Audio\OpenBreed.Wecs.Systems.Audio.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Gui\OpenBreed.Wecs.Systems.Gui.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Scripting\OpenBreed.Wecs.Systems.Scripting.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
+</Project>

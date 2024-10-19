@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Attributes;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;
@@ -90,6 +91,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Public Properties
     }
 
+    [ComponentName("Text")]
     public class TextComponent : IEntityComponent
     {
         #region Internal Constructors

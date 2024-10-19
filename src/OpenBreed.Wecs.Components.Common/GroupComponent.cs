@@ -1,13 +1,15 @@
-﻿using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Components;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Common
 {
-    public class GroupComponentEx : IEntityComponent
+    [ComponentName("Group")]
+    public class GroupComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public GroupComponentEx(int id)
+        public GroupComponent(int id)
         {
             Id = id;
         }

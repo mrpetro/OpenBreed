@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Wecs.Components.Common.Xml
 {
     [XmlRoot("AngularVelocity")]
-    public class XmlAngularVelocityComponent : XmlComponentTemplate, IAngularPositionTargetComponentTemplate
+    public class XmlAngularVelocityComponent : XmlComponentTemplate, IAAngularVelocityComponentTemplate
     {
         [XmlElement("Value")]
         public float Value { get; set; }

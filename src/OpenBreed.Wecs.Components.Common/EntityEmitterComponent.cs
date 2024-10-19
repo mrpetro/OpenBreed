@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Wecs.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace OpenBreed.Wecs.Components.Common
         public Dictionary<string, object> Options { get; }
     }
 
+    [ComponentName("EntityEmitter")]
     public class EntityEmitterComponent : IEntityComponent
     {
         public EntityEmitterComponent()

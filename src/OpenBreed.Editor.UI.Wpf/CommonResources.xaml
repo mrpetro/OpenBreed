@@ -76,4 +76,70 @@
             </Style>
         </Style.Resources>
     </Style>
+    <Style x:Key="PlayerButtonStyle" TargetType="Button">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+    <Style x:Key="PlayButtonStyle" BasedOn="{StaticResource PlayerButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/play_circle_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="PauseButtonStyle" BasedOn="{StaticResource PlayerButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/pause_circle_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="StopButtonStyle" BasedOn="{StaticResource PlayerButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/stop_circle_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="FastForwardButtonStyle" BasedOn="{StaticResource PlayerButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/fast_forward_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="FastRewindButtonStyle" BasedOn="{StaticResource PlayerButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/fast_rewind_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="ToBeginButtonStyle" BasedOn="{StaticResource PlayerButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/skip_previous_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="ToEndButtonStyle" BasedOn="{StaticResource PlayerButtonStyle}" TargetType="Button" >
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Source" Value="Icons/skip_next_24dp.png"/>
+            </Style>
+        </Style.Resources>
+    </Style>
 </ResourceDictionary>

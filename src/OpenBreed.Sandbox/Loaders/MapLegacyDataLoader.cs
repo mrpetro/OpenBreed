@@ -24,9 +24,8 @@ using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Hud;
-using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
-using OpenBreed.Sandbox.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
@@ -42,6 +41,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Xml.Linq;
+using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Loaders
 {

@@ -7,7 +7,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Managers;
-using OpenBreed.Sandbox.Wecs.Systems;
+using OpenBreed.Common.Game.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;

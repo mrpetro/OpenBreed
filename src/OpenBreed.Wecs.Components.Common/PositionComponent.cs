@@ -1,4 +1,5 @@
 ﻿
+using OpenBreed.Wecs.Attributes;
 using OpenTK;
 using OpenTK.Mathematics;
 
@@ -18,6 +19,7 @@ namespace OpenBreed.Wecs.Components.Common
     /// Position entity component class that can be used to store entity current position information
     /// Example: Actor is standing somewhere in the world at current position
     /// </summary>
+    [ComponentName("Position")]
     public sealed class PositionComponent : IEntityComponent
     {
         #region Private Constructors
@@ -48,6 +50,7 @@ namespace OpenBreed.Wecs.Components.Common
         /// <summary>
         /// Position value
         /// </summary>
+        [AnimatableProperty]
         public Vector2 Value { get; set; }
 
         #endregion Public Properties

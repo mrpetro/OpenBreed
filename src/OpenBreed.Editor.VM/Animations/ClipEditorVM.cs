@@ -105,7 +105,9 @@ namespace OpenBreed.Editor.VM.Animations
 
         internal void Edit(IDbAnimationTrack dbTrack)
         {
-            TrackPropertiesEditor = ActivatorUtilities.CreateInstance<ClipTrackPropertiesEditorVM>(serviceProvider, dbTrack, OnTrackPropertyChanged);
+            TrackPropertiesEditor = ActivatorUtilities.CreateInstance<ClipTrackPropertiesEditorVM>(serviceProvider,
+                                                                                                   dbTrack,
+                                                                                                   OnTrackPropertyChanged);
             Track = dbTrack;
 
             renderViewController.Reset();
@@ -121,7 +123,8 @@ namespace OpenBreed.Editor.VM.Animations
             switch (name)
             {
                 case nameof(SelectedTrack):
-                    Edit(SelectedTrack.Source);
+
+                    Edit(SelectedTrack?.Source);
                     break;
 
                 default:

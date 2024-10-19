@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenTK;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Common
@@ -17,6 +18,7 @@ namespace OpenBreed.Wecs.Components.Common
     /// Velocity entity component class that can be used to store entity current velocity information
     /// Example: Actor is going somewhere with specific velocity vector
     /// </summary>
+    [ComponentName("Velocity")]
     public class VelocityComponent : IEntityComponent
     {
         #region Private Constructors
@@ -47,6 +49,7 @@ namespace OpenBreed.Wecs.Components.Common
         /// <summary>
         /// Velocity value
         /// </summary>
+        [AnimatableProperty]
         public Vector2 Value { get; set; }
 
         #endregion Public Properties

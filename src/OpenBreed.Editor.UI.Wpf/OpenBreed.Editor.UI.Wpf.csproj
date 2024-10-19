@@ -12,7 +12,14 @@
     <None Remove="Icons\close_small_24dp.png" />
     <None Remove="Icons\content_copy_24dp.png" />
     <None Remove="Icons\done_24dp.png" />
+    <None Remove="Icons\fast_forward_24dp.png" />
+    <None Remove="Icons\fast_rewind_24dp.png" />
+    <None Remove="Icons\pause_circle_24dp.png" />
+    <None Remove="Icons\play_circle_24dp.png" />
     <None Remove="Icons\remove_24dp.png" />
+    <None Remove="Icons\skip_next_24dp.png" />
+    <None Remove="Icons\skip_previous_24dp.png" />
+    <None Remove="Icons\stop_circle_24dp.png" />
     <None Remove="Icons\undo_24dp.png" />
   </ItemGroup>
 
@@ -56,7 +63,14 @@
     <Resource Include="Icons\close_small_24dp.png" />
     <Resource Include="Icons\content_copy_24dp.png" />
     <Resource Include="Icons\done_24dp.png" />
+    <Resource Include="Icons\fast_forward_24dp.png" />
+    <Resource Include="Icons\fast_rewind_24dp.png" />
+    <Resource Include="Icons\pause_circle_24dp.png" />
+    <Resource Include="Icons\play_circle_24dp.png" />
     <Resource Include="Icons\remove_24dp.png" />
+    <Resource Include="Icons\skip_next_24dp.png" />
+    <Resource Include="Icons\skip_previous_24dp.png" />
+    <Resource Include="Icons\stop_circle_24dp.png" />
     <Resource Include="Icons\undo_24dp.png" />
   </ItemGroup>
 

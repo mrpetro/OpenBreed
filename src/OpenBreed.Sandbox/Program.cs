@@ -49,7 +49,7 @@ using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
-using OpenBreed.Sandbox.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
@@ -101,6 +101,9 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using OpenBreed.Rendering.Interface.Extensions;
 using OpenBreed.Core.Interface;
 using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Common.Game.Managers;
 
 namespace OpenBreed.Sandbox
 {
@@ -223,9 +226,13 @@ namespace OpenBreed.Sandbox
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Scripting', 'OpenBreed.Wecs.Systems.Scripting.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Gui', 'OpenBreed.Wecs.Systems.Gui.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Common', 'OpenBreed.Common.Extensions')");
+                res = scriptMan.RunString(@"import('OpenBreed.Common.Game.Wecs', 'OpenBreed.Common.Game.Wecs.Extensions')");
 
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
-                res = scriptMan.RunString(@"import(' OpenBreed.Sandbox.Entities', ' OpenBreed.Sandbox.Entities')");
+                res = scriptMan.RunString(@"import('OpenBreed.Sandbox.Entities', 'OpenBreed.Sandbox.Entities')");
+
+                res = scriptMan.RunString(@"import('OpenBreed.Common.Game', 'OpenBreed.Common.Game')");
+                
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox')");
 
                 res = scriptMan.RunString(@"EntityTypes = {}");
@@ -319,6 +326,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupScriptingComponents();
             hostBuilder.SetupGuiComponents();
             hostBuilder.SetupSandboxComponents();
+            hostBuilder.SetupGameCommonComponents();
 
             hostBuilder.SetupComponentFactoryProvider();
 

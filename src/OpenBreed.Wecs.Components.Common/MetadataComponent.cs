@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Wecs.Components.Common
+﻿using OpenBreed.Wecs.Attributes;
+
+namespace OpenBreed.Wecs.Components.Common
 {
     public interface IMetadataComponentTemplate : IComponentTemplate
     {
@@ -12,6 +14,7 @@
         #endregion Public Properties
     }
 
+    [ComponentName("Metadata")]
     public class MetadataComponent : IEntityComponent
     {
         #region Public Constructors

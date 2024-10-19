@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -15,6 +16,7 @@ namespace OpenBreed.Wecs.Components.Common
     /// Direction entity component class that can be used to store entity current direction information
     /// Example: Actor is facing particular direction when standing
     /// </summary>
+    [ComponentName("AngularPosition")]
     public class AngularPositionComponent : IEntityComponent
     {
         #region Internal Constructors

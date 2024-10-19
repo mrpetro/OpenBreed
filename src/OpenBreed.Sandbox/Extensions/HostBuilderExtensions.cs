@@ -5,6 +5,7 @@ using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
@@ -81,27 +82,6 @@ namespace OpenBreed.Sandbox.Extensions
                 };
 
                 services.AddSingleton((sp) => new GameWindow(gameWindowSettings, nativeWindowSettings));
-            });
-        }
-
-        public static void SetupItemManager(this IHostBuilder hostBuilder, Action<ItemsMan, IServiceProvider> action)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<ItemsMan>((sp) =>
-                {
-                    var itemsMan = new ItemsMan(sp.GetService<ILogger>());
-                    action.Invoke(itemsMan, sp);
-                    return itemsMan;
-                });
-            });
-        }
-
-        public static void SetupFixtureTypes(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<FixtureTypes>();
             });
         }
 

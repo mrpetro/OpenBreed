@@ -3,6 +3,7 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Interface.Data;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Attributes;
 using OpenTK.Mathematics;
 using System;
 
@@ -26,6 +27,7 @@ namespace OpenBreed.Wecs.Components.Rendering
     ///  - axis-aligned box shape
     ///  - position
     /// </summary>
+    [ComponentName("Picture")]
     public class PictureComponent : IEntityComponent
     {
         #region Public Fields

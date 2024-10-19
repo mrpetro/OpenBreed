@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="OpenBreed.Editor.UI.Wpf.Animations.AnimationPlayerPanelCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.Animations"
+             mc:Ignorable="d" 
+             d:DesignHeight="22" d:DesignWidth="200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../CommonResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="154"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <UniformGrid Columns="7">
+            <Button Style="{StaticResource PlayButtonStyle}" Command="{Binding PlayCommand}">
+                <Image/>
+            </Button>
+            <Button Style="{StaticResource PauseButtonStyle}" Command="{Binding PauseCommand}">
+                <Image/>
+            </Button>
+            <Button Style="{StaticResource StopButtonStyle}" Command="{Binding StopCommand}">
+                <Image/>
+            </Button>
+            <Button Style="{StaticResource ToBeginButtonStyle}" Command="{Binding ToBeginCommand}">
+                <Image/>
+            </Button>
+            <Button Style="{StaticResource FastRewindButtonStyle}" Command="{Binding FastRewindCommand}">
+                <Image/>
+            </Button>
+            <Button Style="{StaticResource FastForwardButtonStyle}" Command="{Binding FastForwardCommand}">
+                <Image/>
+            </Button>
+            <Button Style="{StaticResource ToEndButtonStyle}" Command="{Binding ToEndCommand}">
+                <Image/>
+            </Button>
+        </UniformGrid>
+    </Grid>
+</UserControl>

@@ -20,6 +20,7 @@ using OpenBreed.Rendering.Interface.Extensions;
 using System.Drawing;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc.Extensions;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.UI.Mvc.Controllers
 {
@@ -89,7 +90,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             //view.SetPalette(palette);
             RenderBorder(view);
             RenderAxes(view);
-            RenderTimeScale(view);
+            RenderUnitGrid(view);
             RenderTracks(view);
             view.DisableAlpha();
         }
@@ -180,7 +181,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             view.Context.Primitives.DrawLine(view, new Vector2(0, worldBox.Min.Y), new Vector2(0, worldBox.Max.Y), Color4.Green);
         }
 
-        private void RenderTimeScale(IRenderView view)
+        private void RenderUnitGrid(IRenderView view)
         {
             var fontMan = view.Context.Fonts;
 
@@ -189,33 +190,79 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
             var worldBox = view.GetViewToWorldCoords(view.Box);
 
-            var maxX = worldBox.Max.X;
+            var minX = worldBox.Min.X;
+            var minY = worldBox.Min.Y;
 
-            if (maxX < 0.0f)
+            var maxX = worldBox.Max.X;
+            var maxY = worldBox.Max.Y;
+
+            var minXUnit = 0.25f;
+            var maxXUnit = 8.0f;
+
+            var minYUnit = 1.0f;
+            var maxYUnit = 8.0f;
+
+            var scale = view.GetScale();
+
+            var scaleDivisonFactor = 4.0f;
+
+            var boxWidth = view.Box.Size.X;
+            var boxHeight = view.Box.Size.Y;
+
+            var fW = boxWidth / scale * scaleDivisonFactor;
+            var sx = (float)scale / fW;
+            var ssx = MathHelper.NextPowerOfTwo(sx);
+            var lineStepX = 1.0f / ssx;
+
+            lineStepX = MathHelper.Clamp(lineStepX, minXUnit, maxXUnit);
+
+            var fH = boxHeight / scale * scaleDivisonFactor;
+            var sy = (float)scale / fH;
+            var ssy = MathHelper.NextPowerOfTwo(sy);
+            var lineStepY = 1.0f / ssy;
+
+            lineStepY = MathHelper.Clamp(lineStepY, minYUnit, maxYUnit);
+
+            for (float linePosX = 0; linePosX < maxX; linePosX+= lineStepX)
             {
-                return;
+                var ps = new Vector2(linePosX, worldBox.Min.Y);
+                var pe = new Vector2(linePosX, worldBox.Max.Y);
+
+                view.Context.Primitives.DrawLine(view, ps, pe, Color4.Green);
+
+                var posText = linePosX.ToString();
+
+                fontMan.RenderStart(view, new Vector2(linePosX, worldBox.Min.Y));
+                fontMan.RenderPart(view, font.Id, posText, Vector2.Zero, fontColor, 100, worldBox, ignoreScale: true);
+                fontMan.RenderEnd(view);
             }
 
-            var unit = 1.0f;
-
-            var linesCount =  maxX / unit;
-
-            var width = worldBox;
-
-            var scaleUnit = 1.0f;
-
-            var lineStepX = maxX / linesCount;
-
-            lineStepX = (int)(lineStepX / scaleUnit) * scaleUnit;
-
-            var viewLineStepX = lineStepX * view.GetScale();
-
-
-            for (int i = 0; i < linesCount; i++)
+            for (float linePosY = 0; linePosY < maxY; linePosY += lineStepY)
             {
-                var linePosX = lineStepX * i;
+                var ps = new Vector2(worldBox.Min.X, linePosY);
+                var pe = new Vector2(worldBox.Max.X, linePosY);
 
-                view.Context.Primitives.DrawLine(view, new Vector2(linePosX, worldBox.Min.Y), new Vector2(linePosX, worldBox.Max.Y), Color4.Green);
+                view.Context.Primitives.DrawLine(view, ps, pe, Color4.BurlyWood);
+
+                var posText = linePosY.ToString();
+
+                fontMan.RenderStart(view, new Vector2(worldBox.Min.X, linePosY));
+                fontMan.RenderPart(view, font.Id, posText, Vector2.Zero, fontColor, 100, worldBox, ignoreScale: true);
+                fontMan.RenderEnd(view);
+            }
+
+            for (float linePosY = -lineStepY; linePosY > minY; linePosY -= lineStepY)
+            {
+                var ps = new Vector2(worldBox.Min.X, linePosY);
+                var pe = new Vector2(worldBox.Max.X, linePosY);
+
+                view.Context.Primitives.DrawLine(view, ps, pe, Color4.BurlyWood);
+
+                var posText = linePosY.ToString();
+
+                fontMan.RenderStart(view, new Vector2(worldBox.Min.X, linePosY));
+                fontMan.RenderPart(view, font.Id, posText, Vector2.Zero, fontColor, 100, worldBox, ignoreScale: true);
+                fontMan.RenderEnd(view);
             }
 
             //view.PushMatrix();
@@ -224,16 +271,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
             //view.Scale(1.0f / scale);
 
-            for (int i = 0; i < linesCount; i++)
-            {
-                var linePosX = lineStepX * i;
-
-                var posText = linePosX.ToString();
-
-                fontMan.RenderStart(view, new Vector2(linePosX, 0));
-                fontMan.RenderPart(view, font.Id, posText, Vector2.Zero, fontColor, 100, worldBox, ignoreScale: true);
-                fontMan.RenderEnd(view);
-            }
 
             //view.PopMatrix();
         }

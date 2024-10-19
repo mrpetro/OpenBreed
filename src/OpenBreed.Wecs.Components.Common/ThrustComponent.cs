@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Wecs.Attributes;
+using OpenTK;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Common
@@ -17,6 +18,7 @@ namespace OpenBreed.Wecs.Components.Common
     /// Thrust entity component class that can be used to store entity current thrust information
     /// Example: Actor is applied with specific thrust vector to move in specific direction
     /// </summary>
+    [ComponentName("Thrust")]
     public class ThrustComponent : IEntityComponent
     {
         #region Private Constructors
@@ -47,6 +49,7 @@ namespace OpenBreed.Wecs.Components.Common
         /// <summary>
         /// Thrust value
         /// </summary>
+        [AnimatableProperty]
         public Vector2 Value { get; set; }
 
         #endregion Public Properties

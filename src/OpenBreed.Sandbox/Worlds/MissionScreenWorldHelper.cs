@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Game;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core;
 using OpenBreed.Core.Interface.Managers;
