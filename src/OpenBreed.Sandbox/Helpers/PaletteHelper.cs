@@ -1,14 +1,15 @@
 ﻿using OpenBreed.Common.Interface.Drawing;
 using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Helpers
 {
     public static class PaletteHelper
     {
-        #region Public Methods
-
         public static Color4 ToColor4(MyColor color)
         {
             return new Color4(
@@ -17,7 +18,5 @@ namespace OpenBreed.Sandbox.Helpers
                 color.B / 255.0f,
                 color.A / 255.0f);
         }
-
-        #endregion Public Methods
     }
 }

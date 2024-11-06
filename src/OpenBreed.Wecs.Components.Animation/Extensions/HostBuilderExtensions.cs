@@ -9,10 +9,10 @@ namespace OpenBreed.Wecs.Components.Animation.Extensions
     {
         #region Public Methods
 
-        public static void SetupAnimationComponents(this IHostBuilder hostBuilder)
+        public static void SetupWecsAnimationComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupAssemblyComponentFactories();
+            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

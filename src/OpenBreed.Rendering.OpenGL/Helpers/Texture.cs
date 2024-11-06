@@ -1,8 +1,12 @@
-﻿using OpenBreed.Rendering.Interface;
+﻿using OpenBreed.Common.Extensions;
+using OpenBreed.Common.Interface.Tools;
+using OpenBreed.Rendering.Interface;
 using OpenTK.Graphics.OpenGL4;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Threading;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
@@ -33,6 +37,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public static Texture CreateFromBitmap(Bitmap bitmap)
         {
+            Debug.Assert(ThreadTools.IsMainThread, "Called on non-main thread!");
+
             OpenTK.Graphics.OpenGL4.PixelFormat pixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat.Bgra;
             PixelType pixelType = PixelType.UnsignedByte;
             System.Drawing.Imaging.PixelFormat supportedPixelFormat = GetSupportedPixelFormat(bitmap.PixelFormat);
@@ -66,6 +72,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public static Texture CreateFromIndexArray(int width, int height, byte[] data, int maskIndex = -1)
         {
+            Debug.Assert(ThreadTools.IsMainThread, "Called on non-main thread!");
+
             PixelInternalFormat internalPixelFormat = PixelInternalFormat.R8ui;
             OpenTK.Graphics.OpenGL4.PixelFormat pixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat.RedInteger;
             PixelType pixelType = PixelType.UnsignedByte;
@@ -180,6 +188,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Use(TextureUnit unit)
         {
+            Debug.Assert(ThreadTools.IsMainThread, "Called on non-main thread!");
+
             GL.ActiveTexture(unit);
             GL.BindTexture(TextureTarget.Texture2D, InternalId);
         }

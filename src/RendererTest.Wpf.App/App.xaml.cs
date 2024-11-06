@@ -8,6 +8,9 @@ using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Input.Generic.Extensions;
+using OpenBreed.Common.Game.Extensions;
+using OpenBreed.Common.Interface.Tools;
+using OpenBreed.Gui.Interface.Extensions;
 
 namespace RendererTest.Wpf.App
 {
@@ -26,13 +29,16 @@ namespace RendererTest.Wpf.App
 
         public App()
         {
-            var builder = new HostBuilder();
+            ThreadTools.Initialize();
 
-            builder.SetupDefaultLogger();
+            var hostBuilder = new HostBuilder();
 
+            hostBuilder.SetupDefaultLogger();
+            hostBuilder.ConfigureInteraction();
 
-            builder.ConfigureServices((hostContext, services) =>
+            hostBuilder.ConfigureServices((hostContext, services) =>
             {
+                
                 services.AddSingleton<MainVm>();
                 services.AddScoped<RendererVm>();
 
@@ -53,14 +59,9 @@ namespace RendererTest.Wpf.App
                 });
             });
 
-            builder.SetupInputMan((inpitsMan, sp) =>
-            {
-            });
+            hostBuilder.SetupCommonGameServices(isEditor: true);
 
-            builder.SetupCoreManagers();
-            builder.SetupOpenGLManagers();
-
-            host = builder.Build();
+            host = hostBuilder.Build();
 
             using (var serviceScope = host.Services.CreateScope())
             {

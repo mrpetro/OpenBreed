@@ -36,6 +36,16 @@ using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Editor.UI.Mvc.Extensions;
+using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Wecs.Components.Animation.Extensions;
+using OpenBreed.Wecs.Components.Rendering.Extensions;
+using OpenBreed.Wecs.Components.Physics.Extensions;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Animation.Generic.Extensions;
+using OpenBreed.Scripting.Lua.Extensions;
+using OpenBreed.Fsm.Extensions;
+using OpenBreed.Common.Game.Extensions;
+using OpenBreed.Common.Interface.Tools;
 
 namespace OpenBreed.Editor.App
 {
@@ -48,13 +58,14 @@ namespace OpenBreed.Editor.App
 
         public App()
         {
+            ThreadTools.Initialize();
 
-            var builder = new HostBuilder();
+            var hostBuilder = new HostBuilder();
 
-            builder.SetupDefaultLogger();
-            builder.SetupDataHandlers();
-
-            builder.ConfigureServices((hostContext, services) =>
+            hostBuilder.SetupDefaultLogger();
+            hostBuilder.SetupDataHandlers();
+            hostBuilder.ConfigureUIDispatcher(this.Dispatcher);
+            hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 //Add business services as needed
                 services.AddScoped<EditorApplicationVM>();
@@ -74,21 +85,23 @@ namespace OpenBreed.Editor.App
                 });
             });
 
-            builder.SetupDataProviders();
-            builder.SetupModelProvider();
+            hostBuilder.SetupCommonGameServices(isEditor: true);
+            hostBuilder.SetupCommonGameWecsServices(isEditor: true);
 
-            builder.SetupCoreManagers();
-            builder.SetupOpenALManagers();
-            builder.SetupOpenGLManagers();
-            builder.SetupGLRenderContextComponents();
-            builder.ConfigureGraphicsDataLoaders();
+            hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
+            {
+                dataLoaderFactory.RegisterGraphicsDataLoader(sp);
+                dataLoaderFactory.SetupAnimationDataLoader<IEntity>(sp);
+                dataLoaderFactory.SetupSoundSampleDataLoader(sp);
+                dataLoaderFactory.SetupScriptDataLoader(sp);
+            });
 
-            builder.ConfigureAbtaPasswordGeneratorForm();
-            builder.ConfigureOptionsForm();
+            hostBuilder.ConfigureAbtaPasswordGeneratorForm();
+            hostBuilder.ConfigureOptionsForm();
 
-            builder.ConfigurePcmPlayer();
+            hostBuilder.ConfigurePcmPlayer();
 
-            builder.ConfigureServices((hostContext, services) =>
+            hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 //services.AddSingleton<ILogger, DefaultLogger>();
                 services.AddSingleton<IVariableMan, VariableMan>();
@@ -106,15 +119,15 @@ namespace OpenBreed.Editor.App
 
             });
 
-            builder.SetupEFDatabaseContext((efDatabaseContext, sp) =>
+            hostBuilder.SetupEFDatabaseContext((efDatabaseContext, sp) =>
             {
             });
 
-            builder.SetupXmlDatabase((databaseMan, sp) =>
+            hostBuilder.SetupXmlDatabase((databaseMan, sp) =>
             {
             });
 
-            builder.SetupXmlUnitOfWork((unitOfWork, sp) =>
+            hostBuilder.SetupXmlUnitOfWork((unitOfWork, sp) =>
             {
                 var database = sp.GetRequiredService<IDatabase>();
                 //var context = sp.GetRequiredService<OpenBreedDbContext>();
@@ -139,15 +152,15 @@ namespace OpenBreed.Editor.App
                 unitOfWork.RegisterRepository(new XmlEntityTemplatesRepository(database.GetTable<XmlDbEntityTemplateTableDef>()));
             });
 
-            builder.ConfigureCommonTools();
-            builder.SetupCommonViewModels();
-            builder.SetupEditorViewModels();
-            builder.ConfigureEditorUIMvc();
-            builder.SetupDbEntryEditorFactory();
+            hostBuilder.ConfigureCommonTools();
+            hostBuilder.SetupCommonViewModels();
+            hostBuilder.SetupEditorViewModels();
+            hostBuilder.ConfigureEditorUIMvc();
+            hostBuilder.SetupDbEntryEditorFactory();
 
-            builder.SetupWindowsDrawingContext();
+            hostBuilder.SetupWindowsDrawingContext();
 
-            host = builder.Build();
+            host = hostBuilder.Build();
 
             using (var serviceScope = host.Services.CreateScope())
             {

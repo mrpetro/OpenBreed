@@ -9,10 +9,10 @@ namespace OpenBreed.Wecs.Components.Physics.Extensions
     {
         #region Public Methods
 
-        public static void SetupPhysicsComponents(this IHostBuilder hostBuilder)
+        public static void SetupWecsPhysicsComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupAssemblyComponentFactories();
+            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

@@ -27,12 +27,16 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface.Events;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Gui.Interface;
+using System.Diagnostics;
+using OpenBreed.Gui.Interface.Rendering;
 
 namespace RendererTest.Wpf.App.VM
 {
     public class RendererVm : BaseViewModel
     {
         private readonly IEventsMan eventsMan;
+        private readonly IInteractionCore interactionCore;
         #region Private Fields
 
         private readonly Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> renderContextProvider;
@@ -42,7 +46,7 @@ namespace RendererTest.Wpf.App.VM
         private bool cursorScroll;
 
         private IRenderContext renderContext;
-        private IRenderView renderView1;
+        private IRenderView renderView;
         private IRenderView renderView2;
 
         #endregion Private Fields
@@ -50,9 +54,11 @@ namespace RendererTest.Wpf.App.VM
         #region Public Constructors
 
         public RendererVm(IEventsMan eventsMan, 
+            IInteractionCore interactionCore,
             Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> renderContextProvider)
         {
             this.eventsMan = eventsMan;
+            this.interactionCore = interactionCore;
             this.renderContextProvider = renderContextProvider;
 
             InitFunc = OnInitialize;
@@ -60,6 +66,14 @@ namespace RendererTest.Wpf.App.VM
             eventsMan.Subscribe<ViewCursorMoveEvent>(OnCursorMove);
             eventsMan.Subscribe<ViewCursorDownEvent>(OnCursorDown);
             eventsMan.Subscribe<ViewCursorUpEvent>(OnCursorUp);
+            eventsMan.Subscribe<ViewCursorEnterEvent>(OnCursorEnter);
+            eventsMan.Subscribe<ViewCursorLeaveEvent>(OnCursorLeave);
+            eventsMan.Subscribe<ViewCursorWheelEvent>(OnCursorWheel);
+
+
+
+
+
         }
 
         #endregion Public Constructors
@@ -76,10 +90,59 @@ namespace RendererTest.Wpf.App.VM
         {
             renderContext = renderContextProvider.Invoke(graphicsContext, hostCoordinateSystemConverter);
 
-            renderView1 = renderContext.CreateView(OnRender1, 0.0f, 0.0f, 0.5f, 1.0f);
-            renderView2 = renderContext.CreateView(OnRender2, 0.5f, 0.0f, 1.0f, 1.0f);
+            renderView = renderContext.CreateView(OnRender1, 0.0f, 0.0f, 1.0f, 1.0f);
+
+
+            var element = interactionCore
+                .BeginLabel()
+                    .SetTag("Form")
+                    .SetPosition(200.0f, 200.0f)
+                    .SetSize(200, 100)
+                    .BeginLabel()
+                        .SetTag("Ok")
+                        .SetPosition(-75.0f, 0.0f)
+                        .SetSize(25, 25)
+                        .SetClickCallback(ButtonClicked)
+                        .FinishElement()
+                    .BeginLabel()
+                        .SetTag("Cancel")
+                        .SetPosition(75.0f, 0.0f)
+                        .SetSize(25, 25)
+                        .SetClickCallback(ButtonClicked)
+                        .FinishElement()
+                .Build();
+
+
+            interactionCore.Root = element;
 
             return renderContext;
+        }
+
+        private object SetPosition(float v1, float v2)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonClicked(IInteractiveElement interactiveElement)
+        {
+            Debug.WriteLine($"Interactive element '{interactiveElement.Tag}' clicked.");
+        }
+
+        private static OpenBreed.Gui.Interface.CursorKey ToCKey(CursorKeys key)
+        {
+            switch (key)
+            {
+                case CursorKeys.Left:
+                    return CursorKey.Left;
+                case CursorKeys.Middle:
+                    return CursorKey.Middle;
+                case CursorKeys.Right:
+                    return CursorKey.Right;
+                case CursorKeys.XButton1:
+                case CursorKeys.XButton2:
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         private void OnCursorMove(ViewCursorMoveEvent e)
@@ -98,6 +161,9 @@ namespace RendererTest.Wpf.App.VM
             {
                 e.View.View *= Matrix4.CreateTranslation(cursorDelta.X, cursorDelta.Y, 0.0f);
             }
+
+            var cPos = e.View.GetViewToWorldCoords(cursorPos);
+            interactionCore.Move(e.CursorId, cPos.X, cPos.Y);
         }
 
         private void OnCursorDown(ViewCursorDownEvent e)
@@ -107,10 +173,46 @@ namespace RendererTest.Wpf.App.VM
                 return;
             }
 
-            if (e.Key ==CursorKeys.Right)
+            var cPos = e.View.GetViewToWorldCoords(cursorPos);
+            interactionCore.Down(e.CursorId, cPos.X, cPos.Y, ToCKey(e.Key));
+
+            if (e.Key == CursorKeys.Right)
             {
                 cursorScroll = true;
             }
+        }
+
+        private void OnCursorEnter(ViewCursorEnterEvent e)
+        {
+            if (e.View.Context != renderContext)
+            {
+                return;
+            }
+
+            var cPos = e.View.GetViewToWorldCoords(cursorPos);
+            interactionCore.Enter(e.CursorId, cPos.X, cPos.Y);
+
+        }
+
+        private void OnCursorWheel(ViewCursorWheelEvent e)
+        {
+            if (e.View.Context != renderContext)
+            {
+                return;
+            }
+
+            var cPos = e.View.GetViewToWorldCoords(cursorPos);
+            interactionCore.Wheel(e.CursorId, cPos.X, cPos.Y, e.WheelDelta);
+        }
+
+        private void OnCursorLeave(ViewCursorLeaveEvent e)
+        {
+            if (e.View.Context != renderContext)
+            {
+                return;
+            }
+
+            interactionCore.Leave(e.CursorId);
         }
 
         private void OnCursorUp(ViewCursorUpEvent e)
@@ -119,6 +221,9 @@ namespace RendererTest.Wpf.App.VM
             {
                 return;
             }
+
+            var cPos = e.View.GetViewToWorldCoords(cursorPos);
+            interactionCore.Up(e.CursorId, cPos.X, cPos.Y, ToCKey(e.Key));
 
             if (e.Key == CursorKeys.Right)
             {
@@ -137,19 +242,16 @@ namespace RendererTest.Wpf.App.VM
 
         private void OnRender1(IRenderView view, Matrix4 transform, float dt)
         {
+            if (interactionCore.Root is not null)
+            {
+                var interactionRederer = new InteractionRenderer();
+                interactionRederer.Render(interactionCore.Root, view);
+            }
+
             if (cursorView == view)
                 DrawCursor(view, dt);
-
-            view.Context.Primitives.DrawRectangle(view, new Box2(0, 0, 20, 30), Color4.Red, filled: true);
         }
 
-        private void OnRender2(IRenderView view, Matrix4 transform, float dt)
-        {
-            if (cursorView == view)
-                DrawCursor(view, dt);
-
-            view.Context.Primitives.DrawRectangle(view, new Box2(0, 0, 200, 30), Color4.Blue, filled: true);
-        }
 
         private void RenderTexts(IRenderView view, Box2 clipBox, float dt)
         {

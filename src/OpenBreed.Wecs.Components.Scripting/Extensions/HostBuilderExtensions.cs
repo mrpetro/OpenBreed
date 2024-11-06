@@ -9,10 +9,10 @@ namespace OpenBreed.Wecs.Components.Scripting.Extensions
     {
         #region Public Methods
 
-        public static void SetupScriptingComponents(this IHostBuilder hostBuilder)
+        public static void SetupWecsScriptingComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupAssemblyComponentFactories();
+            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

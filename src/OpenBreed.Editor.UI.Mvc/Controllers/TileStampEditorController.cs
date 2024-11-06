@@ -71,15 +71,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         #region Public Methods
 
-        public static Color4 ToColor4(MyColor color)
-        {
-            return new Color4(
-                color.R / 255.0f,
-                color.G / 255.0f,
-                color.B / 255.0f,
-                color.A / 255.0f);
-        }
-
         public void Reset()
         {
             view.Reset();
@@ -231,7 +222,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             var builder = paletteMan.CreatePalette()
                 .SetLength(256)
                 .SetName("GamePalette")
-                .SetColors(commonPaletteModel.Data.Select(color => ToColor4(color)).ToArray());
+                .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray());
 
             var cb = commonPaletteModel[0];
             builder.SetColor(0, new Color4(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));

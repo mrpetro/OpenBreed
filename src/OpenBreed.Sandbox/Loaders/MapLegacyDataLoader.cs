@@ -200,7 +200,7 @@ namespace OpenBreed.Sandbox.Loaders
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(dbMap.Id);
 
-            worldBuilder.SetupGameWorldSystems();
+            worldBuilder.SetupGameWorldSystems(isEditor: false);
 
             world = worldBuilder.Build();
 

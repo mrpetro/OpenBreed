@@ -239,8 +239,7 @@ namespace OpenBreed.Editor.VM.TileStamps
             var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
             var eventsMan = serviceScope.ServiceProvider.GetRequiredService<IEventsMan>();
             var tileStampDataLoader = serviceScope.ServiceProvider.GetRequiredService<ITileStampDataLoader>();
-
-            var view = new EditorView(eventsMan, renderContext);
+            var view = serviceScope.ServiceProvider.GetRequiredService<EditorView>();
 
             renderViewController = ActivatorUtilities.CreateInstance<TileStampEditorController>(serviceScope.ServiceProvider, view, this);
 

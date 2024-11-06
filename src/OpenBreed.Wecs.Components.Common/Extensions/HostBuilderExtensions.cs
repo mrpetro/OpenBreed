@@ -14,10 +14,10 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
     {
         #region Public Methods
 
-        public static void SetupCommonComponents(this IHostBuilder hostBuilder)
+        public static void SetupWecsCommonComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupAssemblyComponentFactories();
+            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

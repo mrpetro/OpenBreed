@@ -44,7 +44,25 @@ namespace OpenBreed.Input.Generic.Extensions
             });
         }
 
-        public static void SetupInputMan(this IHostBuilder hostBuilder, Action<IInputsMan, IServiceProvider> action)
+        public static void SetupEditorInputMan(this IHostBuilder hostBuilder, Action<IInputsMan, IServiceProvider> action = null)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IInputsMan>((sp) =>
+                {
+                    var inputsMan = new EditorInputsMan();
+
+                    if (action is not null)
+                    {
+                        action.Invoke(inputsMan, sp);
+                    }
+
+                    return inputsMan;
+                });
+            });
+        }
+
+        public static void SetupGameWindowInputMan(this IHostBuilder hostBuilder, Action<IInputsMan, IServiceProvider> action = null)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
@@ -53,7 +71,12 @@ namespace OpenBreed.Input.Generic.Extensions
                     var inputsMan = new InputsMan(
                         sp.GetService<GameWindow>(),
                         sp.GetService<IEventsMan>());
-                    action.Invoke(inputsMan, sp);
+
+                    if (action is not null)
+                    {
+                        action.Invoke(inputsMan, sp);
+                    }
+
                     return inputsMan;
                 });
             });

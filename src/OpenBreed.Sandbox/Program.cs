@@ -104,31 +104,10 @@ using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Managers;
+using OpenBreed.Common.Game.Extensions;
 
 namespace OpenBreed.Sandbox
 {
-    internal class LuaEntityEventHandler<TEvent> : NLua.Method.LuaDelegate
-    {
-        void CallFunction(IEntity entity, TEvent eventArgs)
-        {
-            object[] args = new object[] { entity, eventArgs };
-            object[] inArgs = new object[] { entity, eventArgs };
-            int[] outArgs = new int[] { };
-            base.CallFunction(args, inArgs, outArgs);
-        }
-    }
-
-    internal class LuaEventHandler<TEvent> : NLua.Method.LuaDelegate
-    {
-        void CallFunction(TEvent eventArgs)
-        {
-            object[] args = new object[] { eventArgs };
-            object[] inArgs = new object[] { eventArgs };
-            int[] outArgs = new int[] { };
-            base.CallFunction(args, inArgs, outArgs);
-        }
-    }
-
     public class ProgramFactory
     {
         private readonly IHostBuilder hostBuilder;
@@ -151,128 +130,16 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupDataHandlers();
 
-            hostBuilder.SetupCoreManagers();
             hostBuilder.SetupDataGridFactory();
 
             hostBuilder.SetupGameWindow(640, 480, $"{appName} v{infoVersion}");
             hostBuilder.SetupGLWindow();
-            hostBuilder.SetupGLRenderContextComponents();
             hostBuilder.SetupWindowsDrawingContext();
-
-            hostBuilder.SetupBuilderFactory((builderFactory, sp) =>
-            {
-                builderFactory.SetupPhysicsBuilders(sp);
-                builderFactory.SetupRenderingBuilders(sp);
-                builderFactory.SetupAnimationBuilders(sp);
-                builderFactory.SetupSandboxBuilders(sp);
-            });
-
-            hostBuilder.SetupModelProvider();
-            hostBuilder.SetupDataProviders();
-
-            hostBuilder.SetupFrameUpdaterMan<IEntity>((frameUpdaterMan, sp) =>
-            {
-                new SpriteComponentAnimator(frameUpdaterMan, sp.GetService<ISpriteMan>());
-            });
-
-            hostBuilder.SetupClipMan<IEntity>();
 
             hostBuilder.ConfigureServices(sc =>
             {
                 sc.AddSingleton<CoordsTransformer>();
             });
-
-
-            hostBuilder.SetupLuaScripting((scriptMan, sp) =>
-            {
-                var eventsMan = sp.GetService<IEventsMan>();
-
-                eventsMan.Subscribe<WorldInitializedEventArgs>(
-                    (a) => scriptMan.TryInvokeFunction("WorldLoaded", a.WorldId));
-
-
-                scriptMan.RegisterDelegateType(typeof(Action<IEntity, WorldPausedEventArgs>), typeof(LuaEntityEventHandler<WorldPausedEventArgs>));
-                scriptMan.RegisterDelegateType(typeof(Action<IEntity, WorldUnpausedEventArgs>), typeof(LuaEntityEventHandler<WorldUnpausedEventArgs>));
-                scriptMan.RegisterDelegateType(typeof(Action<IEntity, AnimFinishedEvent>), typeof(LuaEntityEventHandler<AnimFinishedEvent>));
-                //scriptMan.RegisterDelegateType(typeof(Action<IEntity, ClientResizedEventArgs>), typeof(LuaEntityEventHandler<ClientResizedEventArgs>));
-                scriptMan.RegisterDelegateType(typeof(Action<KeyDownEvent>), typeof(LuaEventHandler<KeyDownEvent>));
-                scriptMan.RegisterDelegateType(typeof(Action<KeyUpEvent>), typeof(LuaEventHandler<KeyUpEvent>));
-
-                scriptMan.Expose("Entities", sp.GetService<IEntityMan>());
-                scriptMan.Expose("Sounds", sp.GetService<ISoundMan>());
-                scriptMan.Expose("Triggers", sp.GetService<ITriggerMan>());
-                scriptMan.Expose("Logging", sp.GetService<ILogger>());
-                scriptMan.Expose("Rendering", sp.GetService<IRenderingMan>());
-                scriptMan.Expose("Stamps", sp.GetService<IStampMan>());
-                scriptMan.Expose("Clips", sp.GetService<IClipMan<IEntity>>());
-                scriptMan.Expose("Shapes", sp.GetService<IShapeMan>());
-                scriptMan.Expose("Items", sp.GetService<ItemsMan>());
-                scriptMan.Expose("Texts", sp.GetService<TextsDataProvider>());
-                scriptMan.Expose("Inputs", sp.GetService<IInputsMan>());
-                scriptMan.Expose("Worlds", sp.GetService<IWorldMan>());
-                scriptMan.Expose("Coords", sp.GetService<CoordsTransformer>());
-
-                var res = scriptMan.RunString(@"import('System')");
-                res = scriptMan.RunString(@"import('OpenTK.Mathematics')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs', 'OpenBreed.Wecs.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Components.Common', 'OpenBreed.Wecs.Components.Common.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Core', 'OpenBreed.Wecs.Systems.Core.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Control', 'OpenBreed.Wecs.Systems.Control.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Control', 'OpenBreed.Wecs.Systems.Control')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Audio', 'OpenBreed.Wecs.Systems.Audio.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Rendering', 'OpenBreed.Wecs.Systems.Rendering.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Animation', 'OpenBreed.Wecs.Systems.Animation.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Physics', 'OpenBreed.Wecs.Systems.Physics.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Scripting', 'OpenBreed.Wecs.Systems.Scripting.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Wecs.Systems.Gui', 'OpenBreed.Wecs.Systems.Gui.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Common', 'OpenBreed.Common.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Common.Game.Wecs', 'OpenBreed.Common.Game.Wecs.Extensions')");
-
-                res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Sandbox.Entities', 'OpenBreed.Sandbox.Entities')");
-
-                res = scriptMan.RunString(@"import('OpenBreed.Common.Game', 'OpenBreed.Common.Game')");
-                
-                res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox')");
-
-                res = scriptMan.RunString(@"EntityTypes = {}");
-
-                //var result = scriptMan.RunFile(@"D:\Projects\Programing\GIT\OpenBreed\OpenBreed.Common\src\OpenBreed.Database.Xml\Vanilla\Common\Scripts\Hud\FpsCounter.lua");
-
-
-                //res = scriptMan.RunString(@"EntityTypes.FpsCounter.UpdateValue()");
-
-            });
-
-            hostBuilder.SetupInputMan((inpitsMan, sp) =>
-            {
-            });
-
-            hostBuilder.SetupDefaultActionCodeProvider((codeProvider, sp) =>
-            {
-                codeProvider.Register(PlayerActions.Fire);
-            });
-
-            hostBuilder.SetupDefaultActionTriggerBinder((keyBinder, sp) =>
-            {
-                keyBinder.Bind(PlayerActions.MoveLeft, Keys.Left);
-                keyBinder.Bind(PlayerActions.MoveRight, Keys.Right);
-                keyBinder.Bind(PlayerActions.MoveDown, Keys.Down);
-                keyBinder.Bind(PlayerActions.MoveUp, Keys.Up);
-                keyBinder.Bind(PlayerActions.Fire, Keys.RightControl);
-            });
-
-            hostBuilder.SetupCollisionChecker();
-
-            hostBuilder.SetupCollisionMan<IEntity>((collisionMan, sp) =>
-            {
-                collisionMan.RegisterAbtaColliders();
-            });
-
-            hostBuilder.SetupBroadphaseFactory<IEntity>();
-
-            hostBuilder.SetupFixtureMan((s, a)=> { });
-            hostBuilder.SetupModelTools();
 
             hostBuilder.SetupShapeMan((shapeMan, sp) =>
             {
@@ -294,59 +161,17 @@ namespace OpenBreed.Sandbox
                 shapeMan.Register("Shapes/Circle_0_0_160", new CircleShape(new Vector2(0, 0), 160));
             });
 
-            hostBuilder.SetupOpenALManagers();
-            hostBuilder.SetupOpenGLManagers();
+            hostBuilder.SetupCommonGameServices(isEditor: false);
+            hostBuilder.SetupCommonGameWecsServices(isEditor: false);
 
-            hostBuilder.SetupDefaultTypeAttributesProvider();
-            hostBuilder.SetupDefaultSystemRequirementsProvider();
-            hostBuilder.SetupDefaultEntityToSystemMatcher();
-
-
-            hostBuilder.SetupCollisionVisualizingOptions();
-
-            hostBuilder.SetupSystemFactory((systemFactory, sp) =>
-            {
-                systemFactory.SetupRenderingSystems(sp);
-                systemFactory.SetupScriptingSystems(sp);
-                systemFactory.SetupAudioSystems(sp);
-                systemFactory.SetupPhysicsSystems(sp);
-                systemFactory.SetupCoreSystems(sp);
-                systemFactory.SetupControlSystems(sp);
-                systemFactory.SetupAnimationSystems(sp);
-                systemFactory.SetupGuiSystems(sp);
-                systemFactory.SetupGameSystems(sp);
-            });
-
-            hostBuilder.SetupCommonComponents();
-            hostBuilder.SetupPhysicsComponents();
-            hostBuilder.SetupRenderingComponents();
-            hostBuilder.SetupAnimationComponents();
-            hostBuilder.SetupAudioComponents();
-            hostBuilder.SetupFsmComponents();
-            hostBuilder.SetupScriptingComponents();
-            hostBuilder.SetupGuiComponents();
-            hostBuilder.SetupSandboxComponents();
-            hostBuilder.SetupGameCommonComponents();
-
-            hostBuilder.SetupComponentFactoryProvider();
-
-            hostBuilder.SetupXmlEntityTemplateLoader();
-
-            hostBuilder.SetupEntityFactory((entityFactory, sp) =>
-            {
-            });
-
-            hostBuilder.SetupWecsManagers();
+            hostBuilder.SetupWecsSandboxComponents();
 
             hostBuilder.SetupItemManager((itemsMap, sp) =>
             {
                 itemsMap.RegisterAbtaItems();
             });
 
-            hostBuilder.SetupFixtureTypes();
             hostBuilder.SetupViewportCreator();
-
-            hostBuilder.ConfigureGraphicsDataLoaders();
 
             hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
             {
@@ -355,17 +180,6 @@ namespace OpenBreed.Sandbox
                 dataLoaderFactory.SetupMapLegacyDataLoader(sp);
                 dataLoaderFactory.SetupSoundSampleDataLoader(sp);
                 dataLoaderFactory.SetupScriptDataLoader(sp);
-            });
-
-            hostBuilder.SetupFsmManager((fsmMan, sp) =>
-            {
-                //fsmMan.SetupButtonStates(sp);
-                //fsmMan.SetupProjectileStates(sp);
-                //fsmMan.SetupDoorStates(sp);
-                //fsmMan.SetupPickableStates(sp);
-                //fsmMan.SetupActorAttackingStates(sp);
-                //fsmMan.SetupActorMovementStates(sp);
-                //fsmMan.CreateTurretRotationStates(sp);
             });
 
             hostBuilder.SetupScreenWorldHelper();
@@ -764,7 +578,7 @@ namespace OpenBreed.Sandbox
             mapEntity.Add(tileGridComponent);
             mapEntity.Add(dataGridComponent);
 
-            gameWorldBuilder.SetupGameWorldSystems();
+            gameWorldBuilder.SetupGameWorldSystems(isEditor: false);
 
             var gameWorld = gameWorldBuilder.Build();
 

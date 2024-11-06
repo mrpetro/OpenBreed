@@ -9,10 +9,10 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
     {
         #region Public Methods
 
-        public static void SetupRenderingComponents(this IHostBuilder hostBuilder)
+        public static void SetupWecsRenderingComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupAssemblyComponentFactories();
+            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

@@ -24,7 +24,7 @@ using OpenBreed.Common;
 
 namespace OpenBreed.Editor.UI.Mvc.Controllers
 {
-    public class ClipEditorController : IController
+    public class AnimationCurvesEditorController : IController
     {
         #region Private Fields
 
@@ -36,7 +36,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         #region Public Constructors
 
-        public ClipEditorController(
+        public AnimationCurvesEditorController(
             IEventsMan eventsMan,
             EditorView view,
             IClipEditorModel model)
@@ -55,6 +55,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         public void Reset()
         {
+            view.SetScaleLimits(1.0f / (float)Math.Pow(2, 8), (float)Math.Pow(2, 8));
             view.Reset();
         }
 

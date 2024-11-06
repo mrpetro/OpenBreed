@@ -16,7 +16,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
 {
     public static class BuilderFactoryExtensions
     {
-        public static void SetupSandboxBuilders(this IBuilderFactory builderFactory, IServiceProvider sp)
+        public static void SetupWecsCommonBuilders(this IBuilderFactory builderFactory, IServiceProvider sp)
         {
             var dataLoderFactory = sp.GetService<IDataLoaderFactory>();
 

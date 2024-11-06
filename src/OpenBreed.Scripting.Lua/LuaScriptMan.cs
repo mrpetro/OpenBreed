@@ -19,6 +19,8 @@ namespace OpenBreed.Scripting.Lua
         private readonly NLua.Lua luaState;
         private readonly ILogger logger;
 
+        private readonly Dictionary<string, IScriptFunc> functionLookup = new Dictionary<string, IScriptFunc>();
+
         #endregion Private Fields
 
         #region Public Constructors
@@ -45,13 +47,9 @@ namespace OpenBreed.Scripting.Lua
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        #endregion Public Properties
-
         #region Public Methods
 
-        public void RegisterDelegateType(Type delegateType, Type scriptDelegateType )
+        public void RegisterDelegateType(Type delegateType, Type scriptDelegateType)
         {
             luaState.RegisterLuaDelegateType(delegateType, scriptDelegateType);
         }
@@ -95,8 +93,6 @@ namespace OpenBreed.Scripting.Lua
             return new LuaScriptFunc(luaState.LoadString(script, name));
         }
 
-        private Dictionary<string, IScriptFunc> functionLookup = new Dictionary<string, IScriptFunc>();
-
         public void RegisterFunction(string functionName, IScriptFunc func)
         {
             if (functionLookup.ContainsKey(functionName))
@@ -112,10 +108,12 @@ namespace OpenBreed.Scripting.Lua
 
         public bool TryInvokeFunction(string funcName, params object[] funcArgs)
         {
-            var func = (LuaFunction)luaState[funcName] as LuaFunction;
+            var func = luaState[funcName] as LuaFunction;
 
-            if (func == null)
+            if (func is null)
+            {
                 return false;
+            }
 
             func.Call(funcArgs);
             return true;
@@ -150,9 +148,9 @@ namespace OpenBreed.Scripting.Lua
             {
                 funcResult = null;
 
-                #if DEBUG
+#if DEBUG
                 logger.LogWarning("'{0}' not existing.", funcName);
-                #endif
+#endif
                 return false;
             }
 
@@ -165,12 +163,16 @@ namespace OpenBreed.Scripting.Lua
 
     internal class LuaActionHandler : NLua.Method.LuaDelegate
     {
-        void CallFunction()
+        #region Private Methods
+
+        private void CallFunction()
         {
             object[] args = new object[] { };
             object[] inArgs = new object[] { };
             int[] outArgs = new int[] { };
             base.CallFunction(args, inArgs, outArgs);
         }
+
+        #endregion Private Methods
     }
 }

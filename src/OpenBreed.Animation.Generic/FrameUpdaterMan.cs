@@ -5,6 +5,7 @@ using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Animation.Generic
@@ -17,7 +18,7 @@ namespace OpenBreed.Animation.Generic
 
         #region Private Fields
 
-        private readonly List<Delegate> items = new List<Delegate>();
+        private readonly List<(Delegate,Delegate)> pairs = new List<(Delegate, Delegate)>();
         private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
         private readonly ILogger logger;
 
@@ -38,10 +39,11 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Methods
 
-        public int Register<TValue>(string name, FrameUpdater<TObject, TValue> frameUpdater)
+        public int Register<TValue>(string name, FrameUpdater<TObject, TValue> frameUpdater, FrameLoader<TValue> frameLoader = null)
         {
-            items.Add(frameUpdater);
-            var id = items.Count - 1;
+            pairs.Add((frameUpdater, frameLoader));
+
+            var id = pairs.Count - 1;
             namesToIds.Add(name, id);
 
             return id;
@@ -49,7 +51,17 @@ namespace OpenBreed.Animation.Generic
 
         public FrameUpdater<TObject, TValue> GetById<TValue>(int id)
         {
-            return (FrameUpdater<TObject, TValue>)items[id];
+            return (FrameUpdater<TObject, TValue>)pairs[id].Item1;
+        }
+
+        public FrameLoader<TValue> GetLoaderByName<TValue>(string name)
+        {
+            if (!namesToIds.TryGetValue(name, out int id))
+            {
+                return null;
+            }
+
+            return (FrameLoader<TValue>)pairs[id].Item2;
         }
 
         public FrameUpdater<TObject, TValue> GetByName<TValue>(string name)

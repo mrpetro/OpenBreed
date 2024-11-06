@@ -2,6 +2,8 @@
 
 namespace OpenBreed.Animation.Interface
 {
+    public delegate void FrameLoader<TValue>(TValue value);
+
     public delegate void FrameUpdater<TObject, TValue>(TObject obj, TValue value);
 
     /// <summary>

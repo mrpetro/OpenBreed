@@ -138,11 +138,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Core.Interface", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.UI.Mvc", "OpenBreed.Editor.UI.Mvc\OpenBreed.Editor.UI.Mvc.csproj", "{377FFAB5-6505-449A-AAFD-9F8D6D87A1DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Editor.Wecs", "OpenBreed.Editor.Wecs\OpenBreed.Editor.Wecs.csproj", "{FB8A4F04-CD01-4FA3-9873-8386EFC8BE0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Editor.Wecs", "OpenBreed.Editor.Wecs\OpenBreed.Editor.Wecs.csproj", "{FB8A4F04-CD01-4FA3-9873-8386EFC8BE0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common.Game.Wecs", "OpenBreed.Common.Game.Wecs\OpenBreed.Common.Game.Wecs.csproj", "{0CD7D88D-5C13-4E03-B4DE-D8CB719EC007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Common.Game.Wecs", "OpenBreed.Common.Game.Wecs\OpenBreed.Common.Game.Wecs.csproj", "{0CD7D88D-5C13-4E03-B4DE-D8CB719EC007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common.Game", "OpenBreed.Common.Game\OpenBreed.Common.Game.csproj", "{94106826-8909-4A68-AC3E-D40BB9864432}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBreed.Common.Game", "OpenBreed.Common.Game\OpenBreed.Common.Game.csproj", "{94106826-8909-4A68-AC3E-D40BB9864432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Gui.Interface", "OpenBreed.Gui.Interface\OpenBreed.Gui.Interface.csproj", "{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1111,6 +1113,22 @@ Global
 		{94106826-8909-4A68-AC3E-D40BB9864432}.Release|Any CPU.Build.0 = Release|Any CPU
 		{94106826-8909-4A68-AC3E-D40BB9864432}.Release|x64.ActiveCfg = Release|Any CPU
 		{94106826-8909-4A68-AC3E-D40BB9864432}.Release|x64.Build.0 = Release|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Debug|x64.Build.0 = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Editor_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Editor_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Editor_Debug|x64.ActiveCfg = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Editor_Debug|x64.Build.0 = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Game_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Game_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Game_Debug|x64.ActiveCfg = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Game_Debug|x64.Build.0 = Debug|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Release|x64.ActiveCfg = Release|Any CPU
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1178,6 +1196,7 @@ Global
 		{FB8A4F04-CD01-4FA3-9873-8386EFC8BE0A} = {7B262C7F-6E81-4A87-B4DB-7CEDCD022DB0}
 		{0CD7D88D-5C13-4E03-B4DE-D8CB719EC007} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 		{94106826-8909-4A68-AC3E-D40BB9864432} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
+		{4FE9D68F-2E86-468D-A56E-7CDE5E1EB3BF} = {FDDE652A-F7BD-4EB9-9B75-96E5BB6702CC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36FCF31C-C702-49A1-8355-120BD345CF95}

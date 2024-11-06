@@ -82,7 +82,7 @@
     <DataTemplate DataType="{x:Type vmTexts:TextFromMapEditorVM}" >
         <ctrlTexts:TextFromMapEditorCtrl />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vmAnimations:ClipEditorVM}" >
+    <DataTemplate DataType="{x:Type vmAnimations:AnimationEditorVM}" >
         <ctrlAnimations:AnimationEditorCtrl />
     </DataTemplate>
 </ResourceDictionary>

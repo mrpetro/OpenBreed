@@ -11,6 +11,32 @@ using System;
 
 namespace OpenBreed.Input.Generic
 {
+    internal class EditorInputsMan : IInputsMan
+    {
+        public Vector2 CursorDelta { get; }
+
+        public Vector2 CursorPos { get; }
+
+        public float WheelDelta { get; }
+
+        public float WheelPos { get; }
+
+        public bool IsMousePressed { get; }
+
+        public bool IsRightMousePressed { get; }
+
+        public event EventHandler<KeyboardStateEventArgs> KeyboardStateChanged;
+
+        public bool IsKeyPressed(int inputCode)
+        {
+            return false;
+        }
+
+        public void Update()
+        {
+        }
+    }
+
     internal class InputsMan : IInputsMan
     {
         #region Private Fields

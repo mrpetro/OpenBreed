@@ -10,10 +10,10 @@ namespace OpenBreed.Fsm.Extensions
     {
         #region Public Methods
 
-        public static void SetupFsmComponents(this IHostBuilder hostBuilder)
+        public static void SetupWecsFsmComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupAssemblyComponentFactories();
+            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         public static void SetupFsmManager(this IHostBuilder hostBuilder, Action<IFsmMan, IServiceProvider> action)

@@ -27,33 +27,37 @@ using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Animations
 {
-    public class ClipEditorVM : EntrySpecificEditorVM<IDbAnimation>, IClipEditorModel
+    public class AnimationEditorVM : EntrySpecificEditorVM<IDbAnimation>, IClipEditorModel
     {
         #region Private Fields
 
         private ClipTrackItemVM selectedTrack;
 
         private ClipTrackPropertiesEditorVM trackPropertiesEditor;
-        private ClipEditorController renderViewController;
         private readonly IServiceProvider serviceProvider;
-        private readonly IServiceScopeFactory serviceScopeFactory;
+        public AnimationCurvesEditorVM CurvesEditor { get; }
+        public AnimationPreviewVM Preview { get; }
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClipEditorVM(
+        public AnimationEditorVM(
             IDbAnimation dbEntry,
             ILogger logger,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             IServiceProvider serviceProvider,
-            IServiceScopeFactory serviceScopeFactory) : base(dbEntry, logger, workspaceMan, dialogProvider)
+            AnimationCurvesEditorVM animationCurvesEditor,
+            AnimationPreviewVM animationPreview) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.serviceProvider = serviceProvider;
-            this.serviceScopeFactory = serviceScopeFactory;
+            this.CurvesEditor = animationCurvesEditor;
+            this.Preview = animationPreview;
 
             RestoreTracks();
+
+            Preview.View(Entry);
 
             AddNewTrackCommand = new Command(() => AddNewTrack());
             CopyTrackCommand = new Command(() => CopyTrack(SelectedTrack.Source));
@@ -63,8 +67,6 @@ namespace OpenBreed.Editor.VM.Animations
         #endregion Public Constructors
 
         #region Public Properties
-
-        public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc => OnInitialize;
 
         public ClipTrackPropertiesEditorVM TrackPropertiesEditor
         {
@@ -87,7 +89,6 @@ namespace OpenBreed.Editor.VM.Animations
         public IReadOnlyCollection<IDbAnimationTrack> Tracks => Entry.Tracks;
 
         public ObservableCollection<ClipTrackItemVM> TrackItems { get; } = new ObservableCollection<ClipTrackItemVM>();
-        public IDbAnimationTrack Track { get; private set; }
 
         public override string EditorName => "Animation editor";
 
@@ -97,20 +98,21 @@ namespace OpenBreed.Editor.VM.Animations
 
         public ICommand RemoveTrackCommand { get; }
 
+        public IDbAnimationTrack Track => SelectedTrack?.Source;
+
         #endregion Public Properties
 
         #region Protected Methods
 
 
 
-        internal void Edit(IDbAnimationTrack dbTrack)
+        internal void EditTrack(IDbAnimationTrack dbTrack)
         {
             TrackPropertiesEditor = ActivatorUtilities.CreateInstance<ClipTrackPropertiesEditorVM>(serviceProvider,
                                                                                                    dbTrack,
                                                                                                    OnTrackPropertyChanged);
-            Track = dbTrack;
 
-            renderViewController.Reset();
+            CurvesEditor.Edit(dbTrack);
         }
 
         private void OnTrackPropertyChanged(string propertyName)
@@ -124,7 +126,7 @@ namespace OpenBreed.Editor.VM.Animations
             {
                 case nameof(SelectedTrack):
 
-                    Edit(SelectedTrack?.Source);
+                    EditTrack(SelectedTrack?.Source);
                     break;
 
                 default:
@@ -166,30 +168,6 @@ namespace OpenBreed.Editor.VM.Animations
 
                 TrackItems.Add(itemVm);
             }
-        }
-
-        private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
-        {
-            var serviceScope = serviceScopeFactory.CreateScope();
-            serviceScope.ServiceProvider.GetRequiredService<IRenderContextFactory>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
-
-            var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
-            var eventsMan = serviceScope.ServiceProvider.GetRequiredService<IEventsMan>();
-
-            var view = new EditorView(eventsMan, renderContext);
-            view.SetScaleLimits(1.0f / (float)Math.Pow(2, 8), (float)Math.Pow(2, 8)); 
-
-            renderViewController = ActivatorUtilities.CreateInstance<ClipEditorController>(serviceScope.ServiceProvider, view, this);
-
-            if (Entry is not null)
-            {
-                eventsMan.Subscribe<RenderContextInitializedEvent>((rc) =>
-                {
-                    renderViewController.Reset();
-                });
-            }
-
-            return renderContext;
         }
 
         #endregion Private Methods

@@ -37,6 +37,17 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #endregion Public Fields
 
+        #region Public Constructors
+
+        public SpriteComponent()
+        {
+            AtlasId = -1;
+            ImageId = -1;
+            Scale = new Vector2(1, 1);
+        }
+
+        #endregion Public Constructors
+
         #region Internal Constructors
 
         internal SpriteComponent(SpriteComponentBuilder builder)
@@ -57,13 +68,13 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// Id of sprite atlas
         /// </summary>
         [AnimatableProperty]
-        public int AtlasId { get; set; }
+        public int AtlasId { get; set; } = -1;
 
         /// <summary>
         /// Id of sprite image from the atlas
         /// </summary>
         [AnimatableProperty]
-        public int ImageId { get; set; }
+        public int ImageId { get; set; } = -1;
 
         /// <summary>
         /// Local origin of sprite coordinates
@@ -75,7 +86,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// Scale of sprite
         /// </summary>
         [AnimatableProperty]
-        public Vector2 Scale { get; set; }
+        public Vector2 Scale { get; set; } = new Vector2(1.0f, 1.0f);
 
         /// <summary>
         /// Order of drawing, higher value object is rendered on top of lower value objects
@@ -98,14 +109,14 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public SpriteComponentFactory(IBuilderFactory builderFactory)
         {
             this.builderFactory = builderFactory;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Protected Methods
 
@@ -143,10 +154,10 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #region Internal Properties
 
-        internal int AtlasId { get; private set; }
-        internal int ImageId { get; private set; }
+        internal int AtlasId { get; private set; } = -1;
+        internal int ImageId { get; private set; } = -1;
         internal Vector2 Origin { get; private set; }
-        internal Vector2 Scale { get; private set; }
+        internal Vector2 Scale { get; private set; } = new Vector2(1.0f, 1.0f);
         internal float Order { get; private set; }
         internal bool Hidden { get; private set; }
 

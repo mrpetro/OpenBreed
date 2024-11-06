@@ -223,23 +223,10 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-        public static void SetupSandboxComponents(this IHostBuilder hostBuilder)
+        public static void SetupWecsSandboxComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupAssemblyComponentFactories();
-        }
-
-        public static void SetupDataLoaderFactory(this IHostBuilder hostBuilder, Action<DataLoaderFactory, IServiceProvider> action)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<IDataLoaderFactory>((sp) =>
-                {
-                    var dataLoaderFactory = new DataLoaderFactory();
-                    action.Invoke(dataLoaderFactory, sp);
-                    return dataLoaderFactory;
-                });
-            });
+            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         public static void SetupMapLegacyDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)

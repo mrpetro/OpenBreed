@@ -68,12 +68,12 @@
             </Grid.RowDefinitions>
             <GroupBox Grid.Row="0"
                 Header="Viewer">
-                <local:AnimationPreviewCtrl/>
+                <local:AnimationPreviewCtrl DataContext="{Binding Preview}"/>
             </GroupBox>
             <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" ResizeBehavior="BasedOnAlignment"/>
             <GroupBox Grid.Row="2"
                 Header="Curves">
-                <local:AnimationCurvesEditorCtrl/>
+                <local:AnimationCurvesEditorCtrl DataContext="{Binding CurvesEditor}"/>
             </GroupBox>
             <local:AnimationPlayerPanelCtrl Grid.Row="3" HorizontalAlignment="Left" />
         </Grid>

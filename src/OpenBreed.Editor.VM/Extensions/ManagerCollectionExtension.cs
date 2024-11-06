@@ -106,7 +106,10 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<EpfArchiveFileDataSourceEditorVM>();
                 services.AddTransient<FileDataSourceEditorVM>();
                 services.AddTransient<OptionsVM>();
-                services.AddTransient<ClipEditorVM>();
+                services.AddTransient<AnimationEditorVM>();
+                services.AddTransient<AnimationCurvesEditorVM>();
+                services.AddTransient<AnimationPreviewVM>();
+
                 services.AddTransient<ClipTrackPropertiesEditorVM>();
                 services.AddTransient<AbtaPasswordGeneratorVM>();
             });
@@ -154,7 +157,7 @@ namespace OpenBreed.Editor.VM.Extensions
                     entryEditorFactory.Register<IDbEntityTemplateFromFile, EntityTemplateFromFileEditorVM>();
                     entryEditorFactory.Register<IDbEpfArchiveDataSource, EpfArchiveFileDataSourceEditorVM>();
                     entryEditorFactory.Register<IDbFileDataSource, FileDataSourceEditorVM>();
-                    entryEditorFactory.Register<IDbAnimation, ClipEditorVM>();
+                    entryEditorFactory.Register<IDbAnimation, AnimationEditorVM>();
                     return entryEditorFactory;
                 });
             });

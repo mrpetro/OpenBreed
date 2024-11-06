@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Editor.VM.Base;
 using System;
@@ -18,20 +19,21 @@ namespace OpenBreed.Editor.VM.Logging
         #region Private Fields
 
         private readonly ILoggerClient loggerClient;
+        private readonly IDispatcher dispatcher;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LoggerVM(ILoggerClient loggerClient)
+        public LoggerVM(ILoggerClient loggerClient, IDispatcher dispatcher)
         {
             this.loggerClient = loggerClient;
+            this.dispatcher = dispatcher;
             Logs = new ObservableCollection<LogItemVM>();
 
             loggerClient.MessageAdded += LoggerClient_MessageAdded;
 
             ClearCommand = new Command(() => Logs.Clear());
-
         }
 
         #endregion Public Constructors
@@ -48,7 +50,10 @@ namespace OpenBreed.Editor.VM.Logging
 
         private void LoggerClient_MessageAdded(LogLevel type, string msg)
         {
-            Logs.Insert(0, new LogItemVM(msg, type.ToString()));
+            dispatcher.Invoke(() =>
+            {
+                Logs.Insert(0, new LogItemVM(msg, type.ToString()));
+            });
         }
 
         #endregion Private Methods

@@ -9,10 +9,10 @@ namespace OpenBreed.Wecs.Components.Gui.Extensions
     {
         #region Public Methods
 
-        public static void SetupGuiComponents(this IHostBuilder hostBuilder)
+        public static void SetupWecsGuiComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupAssemblyComponentFactories();
+            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

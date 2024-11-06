@@ -9,15 +9,11 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
             <ColumnDefinition />
-            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        <Wpf:GLWpfControlEx Grid.Column="0"
-                            DataContext="{Binding ViewLeft}"
-                            Margin="10"
-                            InitFunc="{Binding InitFunc}" />
         <Wpf:GLWpfControlEx Grid.Column="1"
-                            DataContext="{Binding ViewRight}"
+                            DataContext="{Binding View}"
                             Margin="10"
                             InitFunc="{Binding InitFunc}" />
     </Grid>

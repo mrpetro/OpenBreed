@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
@@ -8,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
@@ -38,6 +41,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public ITexture Create(string name, int width, int height, byte[] data, int maskIndex = -1)
         {
+            Debug.Assert(ThreadTools.IsMainThread, "Called on non-main thread!");
             Debug.Assert(!string.IsNullOrWhiteSpace(name), "Name is empty!");
             Debug.Assert(width > 0, "Width is zero!");
             Debug.Assert(height > 0, "Height is zero!");
@@ -91,6 +95,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         /// <returns>ITexture object</returns>
         public ITexture Create(string name, Bitmap bitmap)
         {
+            Debug.Assert(ThreadTools.IsMainThread, "Called on non-main thread!");
             Debug.Assert(!string.IsNullOrWhiteSpace(name), "Alias is empty!");
             Debug.Assert(bitmap != null, "Bitmap is null!");
 

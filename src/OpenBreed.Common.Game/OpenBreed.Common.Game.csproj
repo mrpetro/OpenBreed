@@ -7,7 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Audio.LibOpenMpt\OpenBreed.Audio.LibOpenMpt.csproj" />
+    <ProjectReference Include="..\OpenBreed.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj" />
+    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj" />
+    <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj" />
+    <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj" />
+    <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj" />
     <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj" />
+    <ProjectReference Include="..\OpenBreed.Scripting.Lua\OpenBreed.Scripting.Lua.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 

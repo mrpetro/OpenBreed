@@ -11,11 +11,9 @@ namespace RendererTest.Wpf.App.VM
     {
         public MainVm(IServiceProvider serviceProvider, Func<IServiceProvider, RendererVm> viewFactory)
         {
-            ViewLeft = viewFactory.Invoke(serviceProvider);
-            ViewRight = viewFactory.Invoke(serviceProvider);
+            View = viewFactory.Invoke(serviceProvider);
         }
 
-        public RendererVm ViewLeft { get; }
-        public RendererVm ViewRight { get; }
+        public RendererVm View { get; }
     }
 }

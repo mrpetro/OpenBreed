@@ -57,8 +57,19 @@ namespace OpenBreed.Animation.Generic.Data
 
             logger.LogTrace("Animation clip '{0}' loaded.", dbAnimation.Id);
 
+            
+
+
+
+
             return clip;
         }
+
+        private void PreloadRelated()
+        {
+
+        }
+
 
         public IClip<TObject> Load(string dbEntryId)
         {
@@ -99,11 +110,14 @@ namespace OpenBreed.Animation.Generic.Data
         private void LoadTrack<TValue>(IClip<TObject> clip, IDbAnimationTrack<TValue> entryTrack)
         {
             var updater = frameUpdaterMan.GetByName<TValue>(entryTrack.Controller);
+            var loader = frameUpdaterMan.GetLoaderByName<TValue>(entryTrack.Controller);
             var interpolation = GetFrameInterpolation(entryTrack.Interpolation);
             var track = clip.AddTrack<TValue>(interpolation, updater, default(TValue));
-
             foreach (var frame in entryTrack.Frames)
+            {
+                loader?.Invoke(frame.Value);
                 track.AddFrame(frame.Value, frame.Time);
+            }
         }
 
         private void LoadTrack(IClip<TObject> animation, IDbAnimationTrack entryTrack)

@@ -24,7 +24,7 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
             });
         }
 
-        public static void SetupGuiSystems(this ISystemFactory systemFactory, IServiceProvider sp)
+        public static void ConfigureGuiSystems(this ISystemFactory systemFactory, IServiceProvider sp, bool isEditor)
         {
             systemFactory.RegisterSystem<CollisionVisualizingSystem>(
                 () => new CollisionVisualizingSystem(
@@ -33,12 +33,15 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
                     sp.GetService<ICollisionMan<IEntity>>(),
                     sp.GetService<CollisionVisualizingOptions>()));
 
-            systemFactory.RegisterSystem<CursorSystem>(
-                () => new CursorSystem(
-                    sp.GetRequiredService<IWindow>(),
-                    sp.GetRequiredService<IInputsMan>(),
-                    sp.GetRequiredService<IPrimitiveRenderer>(),
-                    sp.GetRequiredService<IEventsMan>()));
+            if (!isEditor)
+            {
+                systemFactory.RegisterSystem<CursorSystem>(
+                    () => new CursorSystem(
+                        sp.GetRequiredService<IWindow>(),
+                        sp.GetRequiredService<IInputsMan>(),
+                        sp.GetRequiredService<IPrimitiveRenderer>(),
+                        sp.GetRequiredService<IEventsMan>()));
+            }
         }
 
         #endregion Public Methods

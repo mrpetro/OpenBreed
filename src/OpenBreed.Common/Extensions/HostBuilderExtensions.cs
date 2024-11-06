@@ -8,12 +8,15 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
+using OpenBreed.Common.Services;
 using System;
 
 namespace OpenBreed.Common.Extensions
 {
     public static class HostBuilderExtensions
     {
+        #region Public Methods
+
         public static void SetupDataHandlers(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -47,7 +50,7 @@ namespace OpenBreed.Common.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IBuilderFactory>((sp) =>
+                services.AddScoped<IBuilderFactory>((sp) =>
                 {
                     var entityFactory = new BuilderFactory();
                     action.Invoke(entityFactory, sp);
@@ -72,6 +75,19 @@ namespace OpenBreed.Common.Extensions
             });
         }
 
+        public static void SetupDataLoaderFactory(this IHostBuilder hostBuilder, Action<DataLoaderFactory, IServiceProvider> action)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IDataLoaderFactory>((sp) =>
+                {
+                    var dataLoaderFactory = new DataLoaderFactory();
+                    action.Invoke(dataLoaderFactory, sp);
+                    return dataLoaderFactory;
+                });
+            });
+        }
+
         public static void SetupDataProviders(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -90,10 +106,16 @@ namespace OpenBreed.Common.Extensions
                 services.AddSingleton<ImagesDataProvider>();
                 services.AddSingleton<Lazy<ImagesDataProvider>>((sp) => new Lazy<ImagesDataProvider>(() => sp.GetService<ImagesDataProvider>()));
                 services.AddSingleton<SoundsDataProvider>();
-
-
             });
-       }
+        }
+
+        public static void AddCommonServices(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IUpdaterFactory, DefaultUpdaterFactory>();
+            });
+        }
 
         public static void SetupVariableManager(this IHostBuilder hostBuilder, Action<IVariableMan, IServiceProvider> action)
         {
@@ -107,5 +129,7 @@ namespace OpenBreed.Common.Extensions
                 });
             });
         }
+
+        #endregion Public Methods
     }
 }

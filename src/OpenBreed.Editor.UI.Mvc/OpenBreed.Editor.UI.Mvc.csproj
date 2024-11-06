@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Common.Game.Wecs\OpenBreed.Common.Game.Wecs.csproj" />
     <ProjectReference Include="..\OpenBreed.Core.Interface\OpenBreed.Core.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 
 </Project>

@@ -41,7 +41,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             builder.AddSystem<TimerSystem>();
         }
 
-        public static void SetupGameWorldSystems(this IWorldBuilder builder)
+        public static void SetupGameWorldSystems(this IWorldBuilder builder, bool isEditor)
         {
             //Update Stage
             builder.AddSystem<MovementSystemVanilla>();
@@ -97,8 +97,11 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             builder.AddSystem<ScriptRunningSystem>();
 
 
-            //GUI Stage
-            builder.AddSystem<CursorSystem>();
+            if (!isEditor)
+            {
+                //GUI Stage
+                builder.AddSystem<CursorSystem>();
+            }
 
             //Reset Stage
         }

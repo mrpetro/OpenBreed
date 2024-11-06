@@ -18,14 +18,19 @@ namespace OpenBreed.Scripting.Lua.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupLuaScripting(this IHostBuilder hostBuilder, Action<LuaScriptMan, IServiceProvider> action)
+        public static void SetupLuaScripting(this IHostBuilder hostBuilder, Action<LuaScriptMan, IServiceProvider> action = null)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IScriptMan, LuaScriptMan>((sp) =>
                 {
                     var scriptMan = new LuaScriptMan(sp.GetService<ILogger>());
-                    action.Invoke(scriptMan, sp);
+
+                    if (action is not null)
+                    {
+                        action.Invoke(scriptMan, sp);
+                    }
+
                     return scriptMan;
                 });
             });

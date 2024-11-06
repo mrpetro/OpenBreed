@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Editor.UI.Mvc.Controllers;
+using OpenBreed.Editor.UI.Mvc.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace OpenBreed.Editor.UI.Mvc.Extensions
         public static void AddEditorUIMvc(this IServiceCollection services)
         {
             services.AddTransient<TileStampEditorController>();
+            services.AddTransient<AnimationCurvesEditorController>();
+            services.AddTransient<AnimationPreviewController>();
+            services.AddTransient<EditorView>();
         }
     }
 }

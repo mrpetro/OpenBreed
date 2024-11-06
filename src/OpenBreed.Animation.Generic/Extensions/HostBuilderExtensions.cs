@@ -20,7 +20,7 @@ namespace OpenBreed.Animation.Generic.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IFrameUpdaterMan<TObject>>((sp) =>
+                services.AddScoped<IFrameUpdaterMan<TObject>>((sp) =>
                 {
                     var frameUpdaterMan = new FrameUpdaterMan<TObject>(sp.GetService<ILogger>());
                     action.Invoke(frameUpdaterMan, sp);
@@ -33,7 +33,7 @@ namespace OpenBreed.Animation.Generic.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IClipMan<TObject>, ClipMan<TObject>>();
+                services.AddScoped<IClipMan<TObject>, ClipMan<TObject>>();
             });
         }
 
