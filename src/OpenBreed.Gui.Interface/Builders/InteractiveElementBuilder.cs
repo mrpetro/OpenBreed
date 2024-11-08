@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Gui.Interface.Elements;
 
 namespace OpenBreed.Gui.Interface.Builders
 {
@@ -54,48 +55,44 @@ namespace OpenBreed.Gui.Interface.Builders
             return InternalBuild();
         }
 
-        public IInteractiveLabelBuilder BeginLabel()
+        public IInteractiveElementBuilder AddLabel(Action<IInteractiveLabelBuilder> setter)
         {
-            return new InteractiveLabelBuilder(interactionCore, this);
+            var builder = new InteractiveLabelBuilder(interactionCore, this);
+
+            setter.Invoke(builder);
+
+            return builder.FinishElement();
         }
 
-        public IInteractivePanelBuilder BeginPanel()
+        public IInteractiveElementBuilder AddPanel(Action<IInteractivePanelBuilder> setter)
         {
-            return new InteractivePanelBuilder(interactionCore, this);
+            var builder = new InteractivePanelBuilder(interactionCore, this);
+
+            setter.Invoke(builder);
+
+            return builder.FinishElement();
         }
 
-        public IInteractiveElementBuilder FinishElement()
-        {
-            parentBuilder.childBuilders.Add(this);
-            return parentBuilder;
-        }
-
-        public IInteractiveElementBuilder SetClickCallback(Action<IInteractiveElement> callback)
+        public void SetClickCallback(Action<IInteractiveElement> callback)
         {
             ClickCallback = callback;
-            return this;
         }
 
-        public IInteractiveElementBuilder SetPosition(float x, float y)
+        public void SetPosition(float x, float y)
         {
             CenterX = x;
             CenterY = y;
-
-            return this;
         }
 
-        public IInteractiveElementBuilder SetSize(int width, int height)
+        public void SetSize(int width, int height)
         {
             Width = width;
             Height = height;
-
-            return this;
         }
 
-        public IInteractiveElementBuilder SetTag(string tag)
+        public void SetTag(string tag)
         {
             Tag = tag;
-            return this;
         }
 
         #endregion Public Methods
@@ -105,5 +102,15 @@ namespace OpenBreed.Gui.Interface.Builders
         internal abstract InteractiveElement InternalBuild();
 
         #endregion Internal Methods
+
+        #region Private Methods
+
+        private IInteractiveElementBuilder FinishElement()
+        {
+            parentBuilder.childBuilders.Add(this);
+            return parentBuilder;
+        }
+
+        #endregion Private Methods
     }
 }

@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
 
-namespace OpenBreed.Gui.Interface
+namespace OpenBreed.Gui.Interface.Elements
 {
     public interface IInteractivePanel : IInteractiveElement
     {

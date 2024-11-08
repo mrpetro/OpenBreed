@@ -30,6 +30,7 @@ using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Gui.Interface;
 using System.Diagnostics;
 using OpenBreed.Gui.Interface.Rendering;
+using OpenBreed.Gui.Interface.Elements;
 
 namespace RendererTest.Wpf.App.VM
 {
@@ -93,25 +94,115 @@ namespace RendererTest.Wpf.App.VM
             renderView = renderContext.CreateView(OnRender1, 0.0f, 0.0f, 1.0f, 1.0f);
 
 
-            var element = interactionCore
-                .BeginLabel()
-                    .SetTag("Form")
-                    .SetPosition(200.0f, 200.0f)
-                    .SetSize(200, 100)
-                    .BeginLabel()
-                        .SetTag("Ok")
-                        .SetPosition(-75.0f, 0.0f)
-                        .SetSize(25, 25)
-                        .SetClickCallback(ButtonClicked)
-                        .FinishElement()
-                    .BeginLabel()
-                        .SetTag("Cancel")
-                        .SetPosition(75.0f, 0.0f)
-                        .SetSize(25, 25)
-                        .SetClickCallback(ButtonClicked)
-                        .FinishElement()
-                .Build();
+            var element = interactionCore.AddPanel(builder =>
+            {
+                builder.SetFillColor(Color4.DarkGreen);
+                builder.SetBorderColor(Color4.White);
+                builder.SetTag("Form");
+                builder.SetPosition(200.0f, 200.0f);
+                builder.SetSize(800, 400);
 
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Left);
+                    builder.SetVerticalAlignment(VerticalAlignment.Top);
+                    builder.SetText("Left-Top");
+                    builder.SetTag("LT");
+                    builder.SetPosition(-300.0f, 150.0f);
+                    builder.SetSize(200, 100);
+                    builder.SetClickCallback(ButtonClicked);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Center);
+                    builder.SetVerticalAlignment(VerticalAlignment.Top);
+                    builder.SetText("Center-Top");
+                    builder.SetTag("CT");
+                    builder.SetPosition(0.0f, 150.0f);
+                    builder.SetSize(200, 100);
+                    builder.SetClickCallback(ButtonClicked);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Right);
+                    builder.SetVerticalAlignment(VerticalAlignment.Top);
+                    builder.SetText("Right-Top");
+                    builder.SetTag("RT");
+                    builder.SetPosition(300.0f, 150.0f);
+                    builder.SetSize(200, 100);
+                    builder.SetClickCallback(ButtonClicked);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Left);
+                    builder.SetVerticalAlignment(VerticalAlignment.Center);
+                    builder.SetText("Left-Center");
+                    builder.SetTag("LC");
+                    builder.SetPosition(-300.0f, 0.0f);
+                    builder.SetSize(200, 100);
+                    builder.SetClickCallback(ButtonClicked);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Center);
+                    builder.SetVerticalAlignment(VerticalAlignment.Center);
+                    builder.SetText("Center-Center");
+                    builder.SetTag("CC");
+                    builder.SetPosition(0.0f, 0.0f);
+                    builder.SetSize(200, 100);
+                    builder.SetClickCallback(ButtonClicked);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Right);
+                    builder.SetVerticalAlignment(VerticalAlignment.Center);
+                    builder.SetText("Right-Center");
+                    builder.SetTag("RC");
+                    builder.SetPosition(300.0f, 0.0f);
+                    builder.SetSize(200, 100);
+                    builder.SetClickCallback(ButtonClicked);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Left);
+                    builder.SetVerticalAlignment(VerticalAlignment.Bottom);
+                    builder.SetText("Left-Bottom");
+                    builder.SetTag("LB");
+                    builder.SetPosition(-300.0f, -150.0f);
+                    builder.SetSize(200, 100);
+                    builder.SetClickCallback(ButtonClicked);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Center);
+                    builder.SetVerticalAlignment(VerticalAlignment.Bottom);
+                    builder.SetText("Center-Bottom");
+                    builder.SetTag("CB");
+                    builder.SetPosition(0.0f, -150.0f);
+                    builder.SetSize(200, 100);
+                    builder.SetClickCallback(ButtonClicked);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Right);
+                    builder.SetVerticalAlignment(VerticalAlignment.Bottom);
+                    builder.SetText("Right-Bottom");
+                    builder.SetTag("RB");
+                    builder.SetPosition(300.0f, -150.0f);
+                    builder.SetSize(200, 100);
+                    builder.SetClickCallback(ButtonClicked);
+                });
+
+            }).Build();
 
             interactionCore.Root = element;
 

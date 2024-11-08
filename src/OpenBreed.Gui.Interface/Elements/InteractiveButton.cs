@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Gui.Interface.Builders;
 
-namespace OpenBreed.Gui.Interface
+namespace OpenBreed.Gui.Interface.Elements
 {
     internal class InteractiveButton : InteractiveElement, IInteractiveButton
     {

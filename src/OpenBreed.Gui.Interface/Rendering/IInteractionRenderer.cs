@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Interface.Managers;
+﻿using OpenBreed.Gui.Interface.Elements;
+using OpenBreed.Rendering.Interface.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

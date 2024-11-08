@@ -105,6 +105,7 @@ using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Game.Extensions;
+using OpenBreed.Common.Interface.Tools;
 
 namespace OpenBreed.Sandbox
 {
@@ -350,6 +351,8 @@ namespace OpenBreed.Sandbox
         [STAThread]
         private static void Main(string[] args)
         {
+            ThreadTools.Initialize();
+
             //var spriteMerger = new SpriteMarger();
             //var spriteSetBuilder = new SpriteSetBuilder();
             //var sprReader = new SPRReader(spriteSetBuilder);

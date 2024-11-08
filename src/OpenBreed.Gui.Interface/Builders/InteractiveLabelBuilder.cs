@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Gui.Interface.Elements;
 
 namespace OpenBreed.Gui.Interface.Builders
 {
@@ -11,6 +12,8 @@ namespace OpenBreed.Gui.Interface.Builders
         #region Internal Fields
 
         internal string Text;
+        internal HorizontalAlignment HorizontalAlignment;
+        internal VerticalAlignment VerticalAlignment;
 
         #endregion Internal Fields
 
@@ -28,6 +31,16 @@ namespace OpenBreed.Gui.Interface.Builders
         public void SetText(string text)
         {
             Text = text;
+        }
+
+        public void SetHorizontalAlignment(HorizontalAlignment horizontalAlignment)
+        {
+            HorizontalAlignment = horizontalAlignment;
+        }
+
+        public void SetVerticalAlignment(VerticalAlignment verticalAlignment)
+        {
+            VerticalAlignment = verticalAlignment;
         }
 
         #endregion Public Methods

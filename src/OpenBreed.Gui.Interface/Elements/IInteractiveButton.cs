@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Gui.Interface
+﻿namespace OpenBreed.Gui.Interface.Elements
 {
     public interface IInteractiveButton : IInteractiveElement
     {

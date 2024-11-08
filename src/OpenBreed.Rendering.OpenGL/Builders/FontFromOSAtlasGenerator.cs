@@ -11,6 +11,20 @@ using System.Linq;
 
 namespace OpenBreed.Rendering.OpenGL.Builders
 {
+    internal class FontCharData
+    {
+        public FontCharData(int index, float xOffset, float width)
+        {
+            Index = index;
+            XOffset = xOffset;
+            Width = width;
+        }
+
+        public int Index { get; }
+        public float XOffset { get; }
+        public float Width { get; }
+    }
+
     public class FontFromOSAtlasGenerator
     {
         #region Public Fields
@@ -26,7 +40,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         internal readonly List<Vector2> coords = new List<Vector2>();
 
-        internal readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
+        internal readonly Dictionary<int, FontCharData> Lookup = new Dictionary<int, FontCharData>();
         internal float Height;
         internal ITexture Texture;
         internal List<int> vboList;
@@ -206,7 +220,7 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
                         vboList.Add(vao);
 
-                        Lookup.Add(Characters[ci], (ci, charWidth));
+                        Lookup.Add(Characters[ci], new FontCharData(ci, charWidth - charSize.Width,  charWidth));
                     }
                 }
 

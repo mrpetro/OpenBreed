@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using OpenBreed.Gui.Interface.Builders;
 using OpenTK.Mathematics;
 
-namespace OpenBreed.Gui.Interface
+namespace OpenBreed.Gui.Interface.Elements
 {
     internal class InteractivePanel : InteractiveElement, IInteractivePanel
     {

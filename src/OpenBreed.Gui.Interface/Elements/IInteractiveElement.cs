@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Gui.Interface
+namespace OpenBreed.Gui.Interface.Elements
 {
     /// <summary>
     /// Element that user can interact with.

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Gui.Interface.Builders;
+using OpenBreed.Gui.Interface.Elements;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ namespace OpenBreed.Gui.Interface
 
         IInteractiveElement? Root { get; set; }
 
-        IInteractiveLabelBuilder BeginLabel();
+        IInteractiveElementBuilder AddLabel(Action<IInteractiveLabelBuilder> setter);
 
-        IInteractivePanelBuilder BeginPanel();
+        IInteractiveElementBuilder AddPanel(Action<IInteractivePanelBuilder> setter);
 
         void Enter(int cursorId, float x, float y);
 

@@ -13,7 +13,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
     {
         #region Private Fields
 
-        private readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
+        private readonly Dictionary<int, FontCharData> Lookup = new Dictionary<int, FontCharData>();
         private readonly List<int> vboList;
         private readonly IPrimitiveRenderer primitiveRenderer;
 
@@ -58,14 +58,22 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public float GetWidth(char character)
         {
-            return Lookup[character].Item2;
+            return Lookup[character].Width;
         }
 
         public float GetWidth(string text)
         {
+            if (text.Length == 0)
+            {
+                return 0.0f;
+            }
             var totalWidth = 0.0f;
+
             for (int i = 0; i < text.Length; i++)
-                totalWidth += Lookup[text[i]].Item2;
+            {
+                totalWidth += Lookup[text[i]].Width;
+            }
+
             return totalWidth;
         }
 
@@ -75,7 +83,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             primitiveRenderer.DrawSprite(
                 view,
                 Texture,
-                vboList[found.Item1],
+                vboList[found.Index],
                 new Vector3(0, 0, 0),
                 Vector2.One,
                 Color4.White, ignoreScale);
@@ -87,7 +95,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
             GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
 
-            var offsetX = 0.0f;
+            var charPosX = 0.0f;
 
             var scaleCorrection = 1.0f;
 
@@ -99,17 +107,25 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             for (int i = 0; i < text.Length; i++)
             {
                 var ch = text[i];
-                var key = Lookup[ch].Item1;
+                var chData = Lookup[ch];
+
+                var key = chData.Index;
+                var width = chData.Width;
+                var oX = chData.XOffset;
 
                 primitiveRenderer.DrawSprite(
                     view,
                     Texture,
                     vboList[key],
-                    new Vector3(offsetX, 0.0f, 0.0f),
+                    new Vector3(charPosX + oX / 2.0f, 0.0f, 0.0f),
                     Vector2.One,
                     color, ignoreScale);
 
-                offsetX += Lookup[ch].Item2 * scaleCorrection;
+
+                //NOTE: Uncommect this to see character box
+                //view.Context.Primitives.DrawRectangle(view, new Vector2(offsetX + width / 2.0f, Height / 2.0f), new Vector2(width, Height), Color4.Aqua, filled: false);
+
+                charPosX += width * scaleCorrection;
             }
 
             GL.BindTexture(TextureTarget.Texture2D, 0);

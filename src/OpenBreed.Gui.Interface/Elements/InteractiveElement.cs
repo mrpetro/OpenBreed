@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Gui.Interface
+namespace OpenBreed.Gui.Interface.Elements
 {
     internal abstract class InteractiveElement : IInteractiveElement
     {

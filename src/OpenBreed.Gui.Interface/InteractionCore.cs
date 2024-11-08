@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Gui.Interface.Builders;
+using OpenBreed.Gui.Interface.Elements;
 using OpenBreed.Rendering.Interface.Events;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
@@ -26,14 +27,22 @@ namespace OpenBreed.Gui.Interface
 
         #region Public Methods
 
-        public IInteractiveLabelBuilder BeginLabel()
+        public IInteractiveElementBuilder AddLabel(Action<IInteractiveLabelBuilder> setter)
         {
-            return new InteractiveLabelBuilder(this, null);
+            var builder = new InteractiveLabelBuilder(this, null);
+
+            setter.Invoke(builder);
+
+            return builder;
         }
 
-        public IInteractivePanelBuilder BeginPanel()
+        public IInteractiveElementBuilder AddPanel(Action<IInteractivePanelBuilder> setter)
         {
-            return new InteractivePanelBuilder(this, null);
+            var builder = new InteractivePanelBuilder(this, null);
+
+            setter.Invoke(builder);
+
+            return builder;
         }
 
         public bool HitTest(float x, float y, out IInteractiveElement? interactiveElement)
