@@ -85,6 +85,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             DrawUnitBox(view, model, color);
         }
 
+        public void DrawTriangle(IRenderView view, Vector2 p1, Vector2 p2, Vector2 p3, Color4 color, bool filled = false)
+        {
+            throw new NotImplementedException($"Method '{nameof(DrawTriangle)}' is not Implemented.");
+        }
+
         public void DrawBrightnessBox(IRenderView view, float brightness)
         {
             Color4 color;

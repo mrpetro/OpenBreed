@@ -8,23 +8,17 @@ using OpenTK.Mathematics;
 
 namespace OpenBreed.Gui.Interface.Elements
 {
-    internal class InteractivePanel : InteractiveElement, IInteractivePanel
+    internal class Panel : Element, IPanel
     {
         #region Internal Constructors
 
-        internal InteractivePanel(InteractivePanelBuilder builder) : base(builder)
+        internal Panel(PanelBuilder builder) : base(builder)
         {
-            FillColor = builder.FillColor;
-            BorderColor = builder.BorderColor;
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
-
-        public Color4 FillColor { get; }
-
-        public Color4 BorderColor { get; }
 
         #endregion Public Properties
     }

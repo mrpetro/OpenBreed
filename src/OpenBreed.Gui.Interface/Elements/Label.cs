@@ -7,11 +7,11 @@ using OpenBreed.Gui.Interface.Builders;
 
 namespace OpenBreed.Gui.Interface.Elements
 {
-    internal class InteractiveLabel : InteractiveElement, IInteractiveLabel
+    internal class Label : Element, ILabel
     {
         #region Internal Constructors
 
-        internal InteractiveLabel(InteractiveLabelBuilder builder) : base(builder)
+        internal Label(LabelBuilder builder) : base(builder)
         {
             Text = builder.Text;
             HorizontalAlignment = builder.HorizontalAlignment;

@@ -4,7 +4,7 @@ using System;
 
 namespace OpenBreed.Rendering.Interface.Managers
 {
-    public delegate void FontRenderer(IRenderView view, Box2 clipBox, float dt);
+    public delegate void FontRenderer(IRenderView view, Box2 clipBox);
 
     public interface IFontMan
     {
@@ -21,7 +21,7 @@ namespace OpenBreed.Rendering.Interface.Managers
         IFont GetOSFont(string fontName, int fontSize);
 
         IFont GetGfxFont(string fontName);
-        void Render(IRenderView view, Box2 clipBox, float dt, FontRenderer fontRenderer);
+        void Render(IRenderView view, Box2 clipBox, FontRenderer fontRenderer);
         void RenderStart(IRenderView view, Vector2 value);
         void RenderEnd(IRenderView view);
 

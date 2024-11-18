@@ -11,6 +11,8 @@ using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Common.Game.Extensions;
 using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Gui.Interface.Extensions;
+using OpenBreed.Editor.VM.Extensions;
+using OpenBreed.Editor.UI.Wpf.Extensions;
 
 namespace RendererTest.Wpf.App
 {
@@ -33,6 +35,8 @@ namespace RendererTest.Wpf.App
 
             var hostBuilder = new HostBuilder();
 
+            hostBuilder.ConfigureUIDispatcher(this.Dispatcher);
+            hostBuilder.SetupCommonViewModels();
             hostBuilder.SetupDefaultLogger();
             hostBuilder.ConfigureInteraction();
 

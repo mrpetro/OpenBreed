@@ -7,10 +7,16 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Interface.Builders
 {
-    public interface IInteractiveLabelBuilder : IInteractiveElementBuilder
+    public interface ILabelBuilder : IElementBuilder
     {
+        #region Public Methods
+
         void SetHorizontalAlignment(HorizontalAlignment horizontalAlignment);
+
         void SetVerticalAlignment(VerticalAlignment verticalAlignment);
+
         void SetText(string text);
+
+        #endregion Public Methods
     }
 }

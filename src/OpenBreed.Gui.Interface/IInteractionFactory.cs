@@ -11,7 +11,7 @@ namespace OpenBreed.Gui.Interface
     {
         #region Public Methods
 
-        IInteractiveLabel CreateBox(float centerX, float centerY, float width, float height);
+        ILabel CreateBox(float centerX, float centerY, float width, float height);
 
         #endregion Public Methods
     }

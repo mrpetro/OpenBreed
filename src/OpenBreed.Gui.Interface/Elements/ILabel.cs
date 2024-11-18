@@ -14,7 +14,7 @@
         Top
     }
 
-    public interface IInteractiveLabel : IInteractiveElement
+    public interface ILabel : IElement
     {
         #region Public Properties
 

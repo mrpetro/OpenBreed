@@ -187,10 +187,10 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
             var cSize = 20;
             view.Context.Primitives.DrawPoint(view, new Vector2(wPos.X, wPos.Y), Color4.White, PointType.Cross, cSize, ignoreScale: true);
-            view.Context.Fonts.Render(view, new Box2(view.Box.Min, view.Box.Max), dt, (view, clipBox, dt) =>  RenderCoordinates(view, clipBox, dt, wPos));
+            view.Context.Fonts.Render(view, new Box2(view.Box.Min, view.Box.Max), (view, clipBox) =>  RenderCoordinates(view, clipBox, wPos));
         }
 
-        private void RenderCoordinates(IRenderView view, Box2 clipBox, float dt, Vector4 wPos)
+        private void RenderCoordinates(IRenderView view, Box2 clipBox, Vector4 wPos)
         {
             var textPos = view.GetViewToWorldCoords(CursorPosition);
 

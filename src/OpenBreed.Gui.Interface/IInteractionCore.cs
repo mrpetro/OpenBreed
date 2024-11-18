@@ -13,13 +13,11 @@ namespace OpenBreed.Gui.Interface
     {
         #region Public Methods
 
-        bool HitTest(float x, float y, out IInteractiveElement? interactiveElement);
+        bool HitTest(float x, float y, out IElement? interactiveElement);
 
-        IInteractiveElement? Root { get; set; }
+        IElement? Root { get; set; }
 
-        IInteractiveElementBuilder AddLabel(Action<IInteractiveLabelBuilder> setter);
-
-        IInteractiveElementBuilder AddPanel(Action<IInteractivePanelBuilder> setter);
+        IElementBuilder CreatePanel(Action<IPanelBuilder> setter);
 
         void Enter(int cursorId, float x, float y);
 
@@ -28,8 +26,6 @@ namespace OpenBreed.Gui.Interface
         void Wheel(int cursorId, float x, float y, int delta);
 
         void Leave(int cursorId);
-
-        void Click(int cursorId, float x, float y, CursorKey cursorKey);
 
         void Down(int cursorId, float x, float y, CursorKey cursorKey);
 

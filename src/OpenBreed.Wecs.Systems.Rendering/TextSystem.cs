@@ -44,14 +44,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Worlds.IWorldRenderContext context)
         {
-            fontMan.Render(context.View, context.ViewBox, context.Dt, RenderTexts);
+            fontMan.Render(context.View, context.ViewBox, RenderTexts);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void RenderTexts(OpenBreed.Rendering.Interface.Managers.IRenderView view, Box2 clipBox, float dt)
+        private void RenderTexts(OpenBreed.Rendering.Interface.Managers.IRenderView view, Box2 clipBox)
         {
             for (int i = 0; i < entities.Count; i++)
                 RenderText(view, entities[i], clipBox);

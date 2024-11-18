@@ -1,10 +1,10 @@
 ﻿namespace OpenBreed.Gui.Interface.Elements
 {
-    public interface IInteractiveButton : IInteractiveElement
+    public interface IButton : IElement
     {
         #region Public Properties
 
-        //string Text { get; }
+        public bool IsPressed { get; }
 
         #endregion Public Properties
     }

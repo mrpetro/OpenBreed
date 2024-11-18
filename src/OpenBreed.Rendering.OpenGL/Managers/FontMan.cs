@@ -89,13 +89,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return font;
         }
 
-        public void Render(IRenderView view, Box2 clipBox, float dt, FontRenderer fontRenderer)
+        public void Render(IRenderView view, Box2 clipBox, FontRenderer fontRenderer)
         {
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
             GL.BlendColor(Color4.Black);
 
-            fontRenderer.Invoke(view, clipBox, dt);
+            fontRenderer.Invoke(view, clipBox);
 
             GL.Disable(EnableCap.Blend);
         }

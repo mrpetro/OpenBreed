@@ -7,7 +7,7 @@ using OpenBreed.Gui.Interface.Elements;
 
 namespace OpenBreed.Gui.Interface.Builders
 {
-    internal class InteractiveLabelBuilder : InteractiveElementBuilder, IInteractiveLabelBuilder
+    internal class LabelBuilder : ElementBuilder, ILabelBuilder
     {
         #region Internal Fields
 
@@ -19,8 +19,8 @@ namespace OpenBreed.Gui.Interface.Builders
 
         #region Public Constructors
 
-        public InteractiveLabelBuilder(InteractionCore interactionCore, InteractiveElementBuilder parentBuilder)
-                    : base(interactionCore, parentBuilder)
+        public LabelBuilder(ElementBuilder parentBuilder)
+                    : base(parentBuilder)
         {
         }
 
@@ -47,9 +47,9 @@ namespace OpenBreed.Gui.Interface.Builders
 
         #region Internal Methods
 
-        internal override InteractiveElement InternalBuild()
+        internal override Element InternalBuild()
         {
-            return new InteractiveLabel(this);
+            return new Label(this);
         }
 
         #endregion Internal Methods

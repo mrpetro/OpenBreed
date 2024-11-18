@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Interface.Rendering
 {
-    public interface IInteractionRenderer
+    public interface IElementRenderer
     {
-        void Render(IElement element, IRenderView renderView);
+        #region Public Methods
+
+        Type ElementType { get; }
+
+        void Render(IElement element, IRenderView view);
+
+        #endregion Public Methods
     }
 }
