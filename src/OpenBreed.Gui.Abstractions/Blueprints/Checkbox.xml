@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Blueprint Name="Checkbox" >
+	<Parameters>
+		<Parameter Name ="IsChecked" Type="bool"/>	
+		<Parameter Name ="Label" Type="string"/>
+	</Parameters>
+	<DockPanel Padding="4" >
+		<CheckboxElement Margin="4"
+						 MaximumSize="32,32"
+						 MinimumSize="32,32"
+						 DockMode="Left"
+					     IsChecked="{Parameter IsChecked}" />
+		<LabelElement DockMode="Fill" HitTestable="false" HorizontalAlignment="Left" VerticalAlignment="Center"
+					  Text="{Parameter Label}" />
+	</DockPanel>
+</Blueprint>
