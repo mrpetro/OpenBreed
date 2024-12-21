@@ -3,6 +3,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.Interface
@@ -17,6 +18,19 @@ namespace OpenBreed.Rendering.Interface
         Ex
     }
 
+    public struct ClipState
+    {
+        public int Layer;
+
+        public int Id;
+        public int Mask;
+        public BitArray ParentIdBits;
+        public BitArray ParentMaskdBits;
+        public int ParentId;
+        public int ParentMask;
+    }
+
+
     public interface IPrimitiveRenderer
     {
         #region Public Methods
@@ -30,6 +44,8 @@ namespace OpenBreed.Rendering.Interface
         void DrawPoints(IRenderView view, IReadOnlyList<Vector2> points, Color4 color, PointType type, float size = 2.0f, bool ignoreScale = false);
         void DrawLine(IRenderView view, Vector2 startPoint, Vector2 endPoint, Color4 color);
         void DrawLines(IRenderView view, IReadOnlyList<Vector2> points, Color4 color);
+        
+        void DrawNestedEx(IRenderView view, Box2 clipBox, ClipState clipState, Action<Box2, ClipState> nestedRenderAction);
 
         void DrawNested(IRenderView view, Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction);
 

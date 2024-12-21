@@ -34,8 +34,8 @@ namespace OpenBreed.Rendering.Interface.Managers
         void Resize(int width, int height);
         void CursorLeave(int cursorId, Vector2i point);
         void CursorEnter(int cursorId, Vector2i point);
-        void CursorUp(int cursorId, Vector2i point, CursorKeys cursorKey);
-        void CursorDown(int cursorId, Vector2i point, CursorKeys cursorKey);
+        void CursorUp(int cursorId, Vector2i point, CursorKey cursorKey);
+        void CursorDown(int cursorId, Vector2i point, CursorKey cursorKey);
         void CursorMove(int cursorId, Vector2i point);
         void CursorWheel(int cursorId, Vector2i point, int wheelDelta);
 

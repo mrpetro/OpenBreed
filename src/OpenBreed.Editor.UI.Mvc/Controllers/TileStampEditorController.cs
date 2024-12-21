@@ -133,13 +133,13 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private void OnCursorDown(ViewCursorDownEvent e)
         {
-            if (e.Key == CursorKeys.Left)
+            if (e.Key == CursorKey.Left)
             {
                 var cursorPos = GetCellIndexCoords(e.View, e.Position) + new Vector4i(model.CenterX, model.CenterY, 0, 1);
 
                 model.PutTiles(cursorPos, CurrentTileAtlasId, CurrentTileSelection);
             }
-            else if (e.Key == CursorKeys.Right)
+            else if (e.Key == CursorKey.Right)
             {
                 var cursorPos = GetCellIndexCoords(e.View, e.Position) + new Vector4i(model.CenterX, model.CenterY, 0, 1);
 

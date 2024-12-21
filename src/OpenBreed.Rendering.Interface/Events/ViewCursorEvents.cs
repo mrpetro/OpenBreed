@@ -11,7 +11,7 @@ namespace OpenBreed.Rendering.Interface.Events
     /// <summary>
     /// Cursor key names with their values.
     /// </summary>
-    public enum CursorKeys
+    public enum CursorKey
     {
         /// <summary>
         /// Left cursor key.
@@ -124,7 +124,7 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorUpEvent(IRenderView view, int cursorId, Vector2i position, CursorKeys key) : base(view, cursorId, position)
+        public ViewCursorUpEvent(IRenderView view, int cursorId, Vector2i position, CursorKey key) : base(view, cursorId, position)
         {
             Key = key;
         }
@@ -136,7 +136,7 @@ namespace OpenBreed.Rendering.Interface.Events
         /// <summary>
         /// Key code of cursor which was released.
         /// </summary>
-        public CursorKeys Key { get; }
+        public CursorKey Key { get; }
 
         #endregion Public Properties
     }
@@ -148,7 +148,7 @@ namespace OpenBreed.Rendering.Interface.Events
     {
         #region Public Constructors
 
-        public ViewCursorDownEvent(IRenderView view, int cursorId, Vector2i position, CursorKeys key) : base(view, cursorId, position)
+        public ViewCursorDownEvent(IRenderView view, int cursorId, Vector2i position, CursorKey key) : base(view, cursorId, position)
         {
             Key = key;
         }
@@ -160,7 +160,7 @@ namespace OpenBreed.Rendering.Interface.Events
         /// <summary>
         /// Key code of cursor which was pressed.
         /// </summary>
-        public CursorKeys Key { get; }
+        public CursorKey Key { get; }
 
         #endregion Public Properties
     }

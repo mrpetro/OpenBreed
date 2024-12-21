@@ -122,7 +122,7 @@ namespace OpenBreed.Editor.UI.Wpf
         private void GLWpfControlEx_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var cursorPosition = FromPoint(e.GetPosition(this));
-            renderContext.CursorUp(0, cursorPosition, (CursorKeys)e.ChangedButton);
+            renderContext.CursorUp(0, cursorPosition, (CursorKey)e.ChangedButton);
         }
 
         private void GLWpfControlEx_MouseEnter(object sender, MouseEventArgs e)
@@ -134,7 +134,7 @@ namespace OpenBreed.Editor.UI.Wpf
         private void GLWpfControlEx_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var cursorPosition = FromPoint(e.GetPosition(this));
-            renderContext.CursorDown(0, cursorPosition, (CursorKeys)e.ChangedButton);
+            renderContext.CursorDown(0, cursorPosition, (CursorKey)e.ChangedButton);
         }
 
         private void GLWpfControlEx_MouseMove(object sender, MouseEventArgs e)

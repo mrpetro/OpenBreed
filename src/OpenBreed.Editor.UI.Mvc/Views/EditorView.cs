@@ -98,7 +98,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
         protected virtual void OnCursorDown(ViewCursorDownEvent e)
         {
-            if (e.Key == CursorKeys.Middle)
+            if (e.Key == CursorKey.Middle)
             {
                 cursorScroll = true;
             }
@@ -113,7 +113,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
         protected virtual void OnCursorUp(ViewCursorUpEvent e)
         {
-            if (e.Key == CursorKeys.Middle)
+            if (e.Key == CursorKey.Middle)
             {
                 cursorScroll = false;
             }

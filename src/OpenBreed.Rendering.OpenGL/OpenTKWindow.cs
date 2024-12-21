@@ -106,13 +106,13 @@ namespace OpenBreed.Rendering.OpenGL
         private void GameWindow_MouseUp(MouseButtonEventArgs e)
         {
             var cursorPosition = gameWindow.MousePosition;
-            Context.CursorUp(0, (Vector2i)cursorPosition, (CursorKeys)e.Button);
+            Context.CursorUp(0, (Vector2i)cursorPosition, (CursorKey)e.Button);
         }
 
         private void GameWindow_MouseDown(MouseButtonEventArgs e)
         {
             var cursorPosition = gameWindow.MousePosition;
-            Context.CursorDown(0, (Vector2i)cursorPosition, (CursorKeys)e.Button);
+            Context.CursorDown(0, (Vector2i)cursorPosition, (CursorKey)e.Button);
         }
 
         private void GameWindow_MouseMove(MouseMoveEventArgs e)

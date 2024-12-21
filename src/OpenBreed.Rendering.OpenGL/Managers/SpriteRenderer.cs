@@ -64,7 +64,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.GL.Enable(GL.EnableCap.Blend);
             GL.GL.Enable(GL.EnableCap.AlphaTest);
             GL.GL.BlendFunc(GL.BlendingFactor.One, GL.BlendingFactor.OneMinusSrcAlpha);
-            GL.GL.AlphaFunc(GL.AlphaFunction.Greater, 0.0f);
             GL.GL.Enable(GL.EnableCap.Texture2D);
         }
 

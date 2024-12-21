@@ -85,7 +85,7 @@ namespace OpenBreed.Rendering.OpenGL
             return renderView;
         }
 
-        public void CursorDown(int cursorId, Vector2i point, CursorKeys cursorKey)
+        public void CursorDown(int cursorId, Vector2i point, CursorKey cursorKey)
         {
             if (!TryGetView(point, out RenderView view))
             {
@@ -96,7 +96,7 @@ namespace OpenBreed.Rendering.OpenGL
             eventsMan.Raise(new ViewCursorDownEvent(view, cursorId, point, cursorKey));
         }
 
-        public void CursorUp(int cursorId, Vector2i point, CursorKeys cursorKey)
+        public void CursorUp(int cursorId, Vector2i point, CursorKey cursorKey)
         {
             if (!TryGetView(point, out RenderView view))
             {

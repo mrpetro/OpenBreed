@@ -124,6 +124,40 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             DrawRectangle(view, rect.Center, rect.Size, color, filled);
         }
 
+        public void DrawNestedEx(IRenderView view, Box2 clipBox, ClipState clipState, Action<Box2, ClipState> nestedRenderAction)
+        {
+            if (clipState.Layer == 1)
+            {
+                return;
+            }
+
+            GL.Enable(EnableCap.StencilTest);
+
+            GL.StencilFunc(StencilFunction.Equal, clipState.Id, clipState.ParentMask);
+            GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
+
+            GL.StencilMask(0xFF);
+            GL.ColorMask(false, false, false, false);
+            GL.DepthMask(false);
+
+
+            // Draw black box
+            DrawBox(view, clipBox, Color4.Black);
+
+            GL.ColorMask(true, true, true, true);
+            GL.DepthMask(true);
+
+            GL.StencilMask(0x0);
+
+            GL.StencilFunc(StencilFunction.Equal, clipState.Id, clipState.Mask);
+
+            nestedRenderAction.Invoke(clipBox, clipState);
+
+            //GL.StencilFunc(StencilFunction.Equal, clipState.ParentId, clipState.ParentMask);
+
+            GL.Disable(EnableCap.StencilTest);
+        }
+
         public void DrawNested(IRenderView view, Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction)
         {
             RenderBefore(view, clipBox, depth, dt);
