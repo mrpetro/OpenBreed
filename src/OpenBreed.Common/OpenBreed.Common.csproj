@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPFArchive" Version="1.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj" />
     <ProjectReference Include="..\OpenBreed.Common.Interface\OpenBreed.Common.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj" />
