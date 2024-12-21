@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Interface.Builders
 {
-    public interface IPanelBuilder : IElementBuilder
+    public interface IDockPanelBuilder : IContainerBuilder
     {
     }
 }

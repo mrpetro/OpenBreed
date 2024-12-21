@@ -19,7 +19,7 @@ namespace OpenBreed.Gui.Interface.Builders
 
         #region Public Constructors
 
-        public LabelBuilder(ElementBuilder parentBuilder)
+        public LabelBuilder(IElementBuilder parentBuilder)
                     : base(parentBuilder)
         {
         }

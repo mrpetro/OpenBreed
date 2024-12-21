@@ -17,7 +17,9 @@ namespace OpenBreed.Gui.Interface.Rendering
 
         protected override void Render(IButton element, IRenderView view)
         {
-            var body = element.Body;
+            var box = element.LocalBox;
+            var size = box.Size;
+            var center = element.Position.AsVector();
 
             var lightColor = ButtonPresentation.LightSideColor;
             var flatColor = ButtonPresentation.FlatSideColor;
@@ -30,48 +32,51 @@ namespace OpenBreed.Gui.Interface.Rendering
                 darkColor = darkColor.Multiply(0.9f);
             }
 
-            var elementCenter = element.Position.AsVector();
+            view.PushMatrix();
+
+            view.Translate(center);
 
             view.Context.Primitives.DrawRectangle(
                 view,
-                elementCenter,
-                new Vector2(body.Width, body.Height),
+                box,
                 flatColor, filled: true);
 
             if (element.IsPressed)
             {
                 view.Context.Primitives.DrawRectangle(
                     view,
-                    elementCenter + new Vector2(1, -1),
-                    new Vector2(body.Width - 2, body.Height - 2),
+                    new Vector2(1, -1),
+                    new Vector2(size.X - 2, size.Y - 2),
                     lightColor, filled: true); ;
 
                 view.Context.Primitives.DrawRectangle(
                     view,
-                    elementCenter + new Vector2(-1, 1),
-                    new Vector2(body.Width - 2, body.Height - 2),
+                    new Vector2(-1, 1),
+                    new Vector2(size.X - 2, size.Y - 2),
                     darkColor, filled: true);
             }
             else
             {
                 view.Context.Primitives.DrawRectangle(
                     view,
-                    elementCenter + new Vector2(-1, 1),
-                    new Vector2(body.Width - 2, body.Height - 2),
+                    new Vector2(-1, 1),
+                    new Vector2(size.X - 2, size.Y - 2),
                     lightColor, filled: true);
 
                 view.Context.Primitives.DrawRectangle(
                     view,
-                    elementCenter + new Vector2(1, -1),
-                    new Vector2(body.Width - 2, body.Height - 2),
+                    new Vector2(1, -1),
+                    new Vector2(size.X - 2, size.Y - 2),
                     darkColor, filled: true);
             }
 
             view.Context.Primitives.DrawRectangle(
                 view,
-                elementCenter,
-                new Vector2(body.Width - 4, body.Height - 4),
+                Vector2.Zero,
+                new Vector2(size.X - 4, size.Y - 4),
                 flatColor, filled: true);
+
+            view.PopMatrix();
         }
 
         #endregion Protected Methods

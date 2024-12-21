@@ -17,7 +17,7 @@ namespace OpenBreed.Gui.Interface
 
         IElement? Root { get; set; }
 
-        IElementBuilder CreatePanel(Action<IPanelBuilder> setter);
+        IElementBuilder CreateDockPanel(Action<IDockPanelBuilder> setter);
 
         void Enter(int cursorId, float x, float y);
 

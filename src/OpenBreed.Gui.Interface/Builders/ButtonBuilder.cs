@@ -18,7 +18,7 @@ namespace OpenBreed.Gui.Interface.Builders
 
         #region Public Constructors
 
-        public ButtonBuilder(ElementBuilder parentBuilder)
+        public ButtonBuilder(IElementBuilder parentBuilder)
                     : base(parentBuilder)
         {
         }

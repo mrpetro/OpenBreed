@@ -53,6 +53,8 @@ namespace OpenBreed.Rendering.Interface.Managers
 
         void Translate(Vector3 pos);
 
+        void Translate(Vector2 pos);
+
         void Translate(float x, float y, float z);
 
         void Scale(float x, float y);

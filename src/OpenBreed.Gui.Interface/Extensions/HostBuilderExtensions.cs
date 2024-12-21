@@ -20,6 +20,7 @@ namespace OpenBreed.Gui.Interface.Extensions
                 services.AddSingleton<IElementRenderer, ButtonRenderer>();
                 services.AddSingleton<IElementRenderer, LabelRenderer>();
                 services.AddSingleton<IElementRenderer, PanelRenderer>();
+                services.AddSingleton<IElementRenderer, GridPanelRenderer>();
                 services.AddSingleton<IElementRenderer, CheckboxRenderer>();
             });
         }

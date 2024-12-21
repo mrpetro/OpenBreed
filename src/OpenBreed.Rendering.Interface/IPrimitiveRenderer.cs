@@ -22,7 +22,7 @@ namespace OpenBreed.Rendering.Interface
         #region Public Methods
 
         void DrawRectangle(IRenderView view, Vector2 center, Vector2 size, Color4 color, bool filled = false);
-        void DrawRectangle(IRenderView view, Box2 clipBox, Color4 color, bool filled = false);
+        void DrawRectangle(IRenderView view, Box2 rectangle, Color4 color, bool filled = false);
         void DrawCircle(IRenderView view, Vector2 pos, float radius, Color4 color, bool filled = false);
         void DrawBox(IRenderView view, Box2 clipBox, Color4 color);
         void DrawTriangle(IRenderView view, Vector2 p1, Vector2 p2, Vector2 p3, Color4 color, bool filled = false);

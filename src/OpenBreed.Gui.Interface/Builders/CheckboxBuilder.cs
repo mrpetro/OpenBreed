@@ -12,7 +12,7 @@ namespace OpenBreed.Gui.Interface.Builders
     {
         #region Public Constructors
 
-        public CheckboxBuilder(ElementBuilder parentBuilder)
+        public CheckboxBuilder(IElementBuilder parentBuilder)
                     : base(parentBuilder)
         {
         }

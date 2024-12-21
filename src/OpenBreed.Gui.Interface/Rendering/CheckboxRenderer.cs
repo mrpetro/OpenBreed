@@ -17,61 +17,48 @@ namespace OpenBreed.Gui.Interface.Rendering
 
         protected override void Render(ICheckbox element, IRenderView view)
         {
-            var body = element.Body;
+            var box = element.LocalBox;
 
-            var lightColor = ButtonPresentation.LightSideColor;
-            var flatColor = ButtonPresentation.FlatSideColor;
-            var darkColor = ButtonPresentation.DarkSideColor;
+            var borderColor = CheckboxPresentation.BorderColor;
+            var backgroundColor = CheckboxPresentation.BackgroundColor;
+            var symbolColor = CheckboxPresentation.SymbolColor;
 
             if (element.IsHovered)
             {
-                lightColor = lightColor.Multiply(0.9f);
-                flatColor = flatColor.Multiply(0.9f);
-                darkColor = darkColor.Multiply(0.9f);
+                borderColor = borderColor.Multiply(0.9f);
+                backgroundColor = backgroundColor.Multiply(0.9f);
+                symbolColor = symbolColor.Multiply(0.9f);
             }
 
             var elementCenter = element.Position.AsVector();
 
-            view.Context.Primitives.DrawRectangle(
-                view,
-                elementCenter,
-                new Vector2(body.Width, body.Height),
-                flatColor, filled: true);
-
-            if (element.IsPressed)
-            {
-                view.Context.Primitives.DrawRectangle(
-                    view,
-                    elementCenter + new Vector2(1, -1),
-                    new Vector2(body.Width - 2, body.Height - 2),
-                    lightColor, filled: true); ;
-
-                view.Context.Primitives.DrawRectangle(
-                    view,
-                    elementCenter + new Vector2(-1, 1),
-                    new Vector2(body.Width - 2, body.Height - 2),
-                    darkColor, filled: true);
-            }
-            else
-            {
-                view.Context.Primitives.DrawRectangle(
-                    view,
-                    elementCenter + new Vector2(-1, 1),
-                    new Vector2(body.Width - 2, body.Height - 2),
-                    lightColor, filled: true);
-
-                view.Context.Primitives.DrawRectangle(
-                    view,
-                    elementCenter + new Vector2(1, -1),
-                    new Vector2(body.Width - 2, body.Height - 2),
-                    darkColor, filled: true);
-            }
+            view.PushMatrix();
+            view.Translate(elementCenter);
 
             view.Context.Primitives.DrawRectangle(
                 view,
-                elementCenter,
-                new Vector2(body.Width - 4, body.Height - 4),
-                flatColor, filled: true);
+                box,
+                backgroundColor, filled: true);
+
+            view.Context.Primitives.DrawRectangle(
+                view,
+                box,
+                borderColor, filled: false);
+
+            if (element.IsChecked)
+            {
+                var points = new Vector2[] {
+                    new Vector2(-0.8f * box.HalfSize.X, 0.0f * box.HalfSize.Y ),
+                    new Vector2(-0.1f * box.HalfSize.X , -0.8f * box.HalfSize.Y),
+                    new Vector2(0.8f * box.HalfSize.X, 0.7f * box.HalfSize.Y) };
+
+                view.Context.Primitives.DrawLines(
+                    view,
+                    points,
+                    symbolColor);
+            }
+
+            view.PopMatrix();
         }
 
         #endregion Protected Methods

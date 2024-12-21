@@ -31,17 +31,14 @@ namespace OpenBreed.Gui.Interface.Elements
 
         #region Private Fields
 
-        private readonly List<Element> childs = new List<Element>();
-        private Element? parent;
+        private Container? parent;
         private Vector2? moveStartPosition;
-
-        private Box2 dockableBox;
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Protected Constructors
 
-        internal Element(ElementBuilder builder)
+        protected Element(ElementBuilder builder)
         {
             Padding = builder.Padding;
             Margin = builder.Margin;
@@ -55,30 +52,39 @@ namespace OpenBreed.Gui.Interface.Elements
             upCallback = builder.UpCallback;
             wheelCallback = builder.WheelCallback;
 
-            Position = new ElementPosition(builder.CenterX, builder.CenterY);
-            Body = new ElementBody(builder.Width, builder.Height);
-            dockableBox = new Box2(-builder.Width / 2.0f, -builder.Height / 2.0f, builder.Width / 2.0f, builder.Height / 2.0f).Deflate(Padding);
+            Position = new ElementPosition(builder.Position);
+            Size = new ElementSize(builder.Size);
 
-            DockMode = builder.DockMode;
+            Options = builder.Options;
 
             IsHitTestable = builder.IsHitTestable;
             IsMovable = builder.IsMovable;
-
-            foreach (var child in builder.childBuilders.Select(builder => builder.InternalBuild()))
-            {
-                child.SetParent(this);
-            }
         }
 
-        #endregion Internal Constructors
+        #endregion Protected Constructors
 
         #region Public Properties
 
+        public IList<IElementOption> Options { get; }
         public IElementPosition Position { get; set; }
 
-        public IElementBody Body { get; }
+        public IElementSize Size { get; set; }
 
-        public ElementDockMode DockMode { get; set; }
+        public Box2 LocalBox
+        {
+            get
+            {
+                return Box2Helper.NewBox(Vector2.Zero, Size.AsVector()).Deflate(Margin);
+            }
+        }
+
+        public Box2 ActualBox
+        {
+            get
+            {
+                return LocalBox.Translated(Position.AsVector());
+            }
+        }
 
         public Box2 Padding { get; set; }
 
@@ -91,7 +97,6 @@ namespace OpenBreed.Gui.Interface.Elements
         public bool IsMovable { get; set; }
 
         public IElement? Parent => parent;
-        public IReadOnlyList<IElement> Childs => childs;
 
         public bool IsHovered { get; private set; }
 
@@ -109,26 +114,10 @@ namespace OpenBreed.Gui.Interface.Elements
 
             var localPoint = point - Position.AsVector();
 
-            if (!Body.Contains(localPoint.X, localPoint.Y))
+            if (!LocalBox.ContainsInclusive(localPoint))
             {
                 interactiveElement = null;
                 return false;
-            }
-
-            IElement? childElement = null;
-
-            for (int i = 0; i < childs.Count; i++)
-            {
-                if (childs[i].HitTest(localPoint, out childElement))
-                {
-                    break;
-                }
-            }
-
-            if (childElement is not null)
-            {
-                interactiveElement = childElement;
-                return true;
             }
 
             interactiveElement = this;
@@ -195,11 +184,41 @@ namespace OpenBreed.Gui.Interface.Elements
             wheelCallback?.Invoke(this);
         }
 
+        public IElement? GetAncestor(string tag)
+        {
+            if (tag is null)
+            {
+                throw new ArgumentNullException(nameof(tag));
+            }
+
+            var ancestor = parent;
+
+            while (ancestor is not null)
+            {
+                if (ancestor.Tag == tag)
+                {
+                    return ancestor;
+                }
+
+                ancestor = ancestor.parent;
+            }
+
+            return ancestor;
+        }
+
+        public void Resize(Vector2 newSize, ElementResizeAnchor anchor)
+        {
+            Size.X = newSize.X;
+            Size.Y = newSize.Y;
+
+            Recalculate();
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal void SetParent(Element newParent)
+        internal void SetParent(Container newParent)
         {
             if (parent != null && newParent == parent)
             {
@@ -217,116 +236,16 @@ namespace OpenBreed.Gui.Interface.Elements
             parent = newParent;
 
             parent.AddChild(this);
-
-            RecalculatePositionAndSize();
         }
 
         #endregion Internal Methods
 
         #region Protected Methods
 
-        protected void RecalculatePositionAndSize()
+        protected virtual void Recalculate()
         {
-            if (parent is null)
-            {
-                return;
-            }
-
-            var box = parent.dockableBox;
-
-            switch (DockMode)
-            {
-                case ElementDockMode.None:
-                    break;
-
-                case ElementDockMode.Top:
-
-                    Position.X = box.Center.X;
-                    Position.Y = box.Center.Y + box.Size.Y * 0.25f;
-                    Body.Width = box.Size.X;
-                    Body.Height = box.Size.Y * 0.5f;
-
-                    parent.dockableBox = Box2Helper.NewBox(
-                        box.Center.X,
-                        box.Center.Y - box.Size.Y * 0.25f,
-                        box.Size.X,
-                        box.Size.Y * 0.5f);
-
-                    break;
-
-                case ElementDockMode.Bottom:
-
-                    Position.X = box.Center.X;
-                    Position.Y = box.Center.Y - box.Size.Y * 0.25f;
-                    Body.Width = box.Size.X;
-                    Body.Height = box.Size.Y * 0.5f;
-
-                    parent.dockableBox = Box2Helper.NewBox(
-                        box.Center.X,
-                        box.Center.Y + box.Size.Y * 0.25f,
-                        box.Size.X,
-                        box.Size.Y * 0.5f);
-
-                    break;
-
-                case ElementDockMode.Left:
-
-                    Position.X = box.Center.X - box.Size.X * 0.25f;
-                    Position.Y = box.Center.Y;
-                    Body.Width = box.Size.X * 0.5f;
-                    Body.Height = box.Size.Y;
-
-                    parent.dockableBox = Box2Helper.NewBox(
-                        box.Center.X + box.Size.X * 0.25f,
-                        box.Center.Y,
-                        box.Size.X * 0.5f,
-                        box.Size.Y);
-
-                    break;
-
-                case ElementDockMode.Right:
-
-                    Position.X = box.Center.X + box.Size.X * 0.25f;
-                    Position.Y = box.Center.Y;
-                    Body.Width = box.Size.X * 0.5f;
-                    Body.Height = box.Size.Y;
-
-                    parent.dockableBox = Box2Helper.NewBox(
-                        box.Center.X - box.Size.X * 0.25f,
-                        box.Center.Y,
-                        box.Size.X * 0.5f,
-                        box.Size.Y);
-
-                    break;
-
-                case ElementDockMode.Fill:
-
-                    Position.X = box.Center.X;
-                    Position.Y = box.Center.Y;
-                    Body.Width = box.Size.X;
-                    Body.Height = box.Size.Y;
-
-                    break;
-
-                default:
-                    break;
-            }
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
-
-        private void AddChild(Element child)
-        {
-            childs.Add(child);
-        }
-
-        private bool RemoveChild(Element child)
-        {
-            return childs.Remove(child);
-        }
-
-        #endregion Private Methods
     }
 }

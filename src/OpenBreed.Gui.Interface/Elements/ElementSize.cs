@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Interface.Elements
 {
-    public class ElementPosition : IElementPosition
+    public class ElementSize : IElementSize
     {
         #region Public Constructors
 
-        public ElementPosition(Vector2 position)
+        public ElementSize(Vector2 position)
         {
             X = position.X;
             Y = position.Y;

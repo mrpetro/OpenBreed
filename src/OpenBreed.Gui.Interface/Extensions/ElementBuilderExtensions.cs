@@ -1,48 +1,23 @@
-﻿//using OpenBreed.Gui.Interface.Builders;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using OpenBreed.Gui.Interface.Builders;
+using OpenBreed.Gui.Interface.Elements;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace OpenBreed.Gui.Interface.Extensions
-//{
-//    internal static class ElementBuilderExtensions
-//    {
-//        internal static IElementBuilder AddLabel(this ElementBuilder parentBuilder, Action<ILabelBuilder> setter)
-//        {
-//            var builder = new LabelBuilder(parentBuilder);
+namespace OpenBreed.Gui.Interface.Extensions
+{
+    public static class ElementBuilderExtensions
+    {
+        public static void SetDockMode(this IElementBuilder elementBuilder, ElementDockMode dockMode)
+        {
+            elementBuilder.SetOption(new DockPanelParentOption(dockMode));
+        }
 
-//            setter.Invoke(builder);
-
-//            return builder.FinishElement();
-//        }
-
-//        internal static IElementBuilder AddPanel(this ElementBuilder parentBuilder, Action<IPanelBuilder> setter)
-//        {
-//            var builder = new PanelBuilder(parentBuilder);
-
-//            setter.Invoke(builder);
-
-//            return builder.FinishElement();
-//        }
-
-//        internal static IElementBuilder AddButton(this ElementBuilder parentBuilder, Action<IButtonBuilder> setter)
-//        {
-//            var builder = new ButtonBuilder(parentBuilder);
-
-//            setter.Invoke(builder);
-
-//            return builder.FinishElement();
-//        }
-
-//        internal static IElementBuilder AddCheckbox(this ElementBuilder parentBuilder, Action<ICheckboxBuilder> setter)
-//        {
-//            var builder = new CheckboxBuilder(parentBuilder);
-
-//            setter.Invoke(builder);
-
-//            return builder.FinishElement();
-//        }
-//    }
-//}
+        public static void SetGridPosition(this IElementBuilder elementBuilder, int column, int row, int columnSpan = 1, int rowSpan = 1)
+        {
+            elementBuilder.SetOption(new GridPanelParentOption(column, row, columnSpan, rowSpan));
+        }
+    }
+}

@@ -32,6 +32,8 @@ namespace OpenBreed.Gui.Interface.Elements
 
         public override void OnClick(int cursorId, CursorKey cursorKey)
         {
+            IsChecked = !IsChecked;
+
             base.OnClick(cursorId, cursorKey);
         }
 

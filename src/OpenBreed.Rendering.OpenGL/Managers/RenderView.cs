@@ -203,6 +203,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             View = Matrix4.CreateTranslation(vec) * View;
         }
 
+        public void Translate(Vector2 vec)
+        {
+            View = Matrix4.CreateTranslation(new Vector3(vec)) * View;
+        }
+
         public void Translate(float x, float y, float z) => Translate(new Vector3(x, y, z));
 
         public void Scale(float value) => Scale(value, value);

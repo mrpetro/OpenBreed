@@ -42,9 +42,9 @@ namespace OpenBreed.Gui.Interface
 
         #region Public Methods
 
-        public IElementBuilder CreatePanel(Action<IPanelBuilder> setter)
+        public IElementBuilder CreateDockPanel(Action<IDockPanelBuilder> setter)
         {
-            var builder = new PanelBuilder(null);
+            var builder = new DockPanelBuilder(null);
 
             setter.Invoke(builder);
 

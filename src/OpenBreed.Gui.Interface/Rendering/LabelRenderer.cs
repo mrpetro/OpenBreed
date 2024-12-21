@@ -15,7 +15,8 @@ namespace OpenBreed.Gui.Interface.Rendering
 
         protected override void Render(ILabel element, IRenderView view)
         {
-            var body = element.Body;
+            var box = element.LocalBox;
+            var size = box.Size;
 
             //view.Context.Primitives.DrawRectangle(
             //    view,
@@ -27,8 +28,8 @@ namespace OpenBreed.Gui.Interface.Rendering
 
             var viewBox = new Box2(view.Box.Min, view.Box.Max);
 
-            var elementHalfWidth = body.Width / 2.0f;
-            var elementHalfHeight = body.Height / 2.0f;
+            var elementHalfWidth = size.X / 2.0f;
+            var elementHalfHeight = size.Y / 2.0f;
 
             var textHalfHeight = font.Height / 2.0f;
             var textHalfWidth = font.GetWidth(element.Text) / 2.0f;

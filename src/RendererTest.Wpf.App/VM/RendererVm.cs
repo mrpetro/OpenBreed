@@ -32,12 +32,14 @@ using System.Diagnostics;
 using OpenBreed.Gui.Interface.Rendering;
 using OpenBreed.Gui.Interface.Elements;
 using OpenBreed.Gui.Interface.Extensions;
+using OpenBreed.Gui.Interface.Builders;
 
 namespace RendererTest.Wpf.App.VM
 {
     public class RendererVm : BaseViewModel
     {
         private readonly IEventsMan eventsMan;
+        private readonly ILogger logger;
         private readonly IInteractionCore interactionCore;
         private readonly IInteractionRenderer interactionRenderer;
         #region Private Fields
@@ -57,11 +59,13 @@ namespace RendererTest.Wpf.App.VM
         #region Public Constructors
 
         public RendererVm(IEventsMan eventsMan, 
+            ILogger logger,
             IInteractionCore interactionCore,
             IInteractionRenderer interactionRenderer,
             Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> renderContextProvider)
         {
             this.eventsMan = eventsMan;
+            this.logger = logger;
             this.interactionCore = interactionCore;
             this.interactionRenderer = interactionRenderer;
             this.renderContextProvider = renderContextProvider;
@@ -74,11 +78,6 @@ namespace RendererTest.Wpf.App.VM
             eventsMan.Subscribe<ViewCursorEnterEvent>(OnCursorEnter);
             eventsMan.Subscribe<ViewCursorLeaveEvent>(OnCursorLeave);
             eventsMan.Subscribe<ViewCursorWheelEvent>(OnCursorWheel);
-
-
-
-
-
         }
 
         #endregion Public Constructors
@@ -91,28 +90,33 @@ namespace RendererTest.Wpf.App.VM
 
         #region Private Methods
 
-        private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
+        private void CreateButtonCtrlTest(IContainerBuilder builder)
         {
-            renderContext = renderContextProvider.Invoke(graphicsContext, hostCoordinateSystemConverter);
-
-            renderView = renderContext.CreateView(OnRender1, 0.0f, 0.0f, 1.0f, 1.0f);
-
-
-            var element = interactionCore.CreatePanel(builder =>
+            builder.AddDockPanel((builder) =>
             {
-                builder.SetTag("Form");
-                builder.SetPosition(200.0f, 200.0f);
-                builder.SetSize(900, 500);
+                builder.SetPosition(0.0f, 300.0f);
+                builder.SetSize(300, 300);
                 builder.SetMovable(true);
+                builder.SetMargin(0);
 
-                builder.AddButton((builder) =>
+                builder.SetTag("ButtonTestPanel");
+
+                builder.AddDockPanel((builder) =>
                 {
-                    builder.SetTag("Ok");
-                    builder.SetMovable(true);
-                    builder.SetPosition(-300.0f, 220.0f);
+                    builder.SetPosition(0.0f, 0.0f);
                     builder.SetSize(100, 50);
-                    builder.SetClickCallback(ButtonClicked);
+                    builder.SetMovable(true);
+                    builder.SetMargin(0);
 
+                    builder.AddButton((builder) =>
+                    {
+                        builder.SetTag("Ok");
+                        builder.SetClickCallback((element) =>
+                        {
+                            logger.LogTrace("Button '{ElementTag}' clicked.", element.Tag);
+                        });
+                        builder.SetDockMode(ElementDockMode.Fill);
+                    });
 
                     builder.AddLabel((builder) =>
                     {
@@ -120,141 +124,163 @@ namespace RendererTest.Wpf.App.VM
                         builder.SetHorizontalAlignment(HorizontalAlignment.Center);
                         builder.SetVerticalAlignment(VerticalAlignment.Center);
                         builder.SetText("Ok");
-                        builder.SetDock(ElementDockMode.Fill);
+                        builder.SetDockMode(ElementDockMode.Fill);
                     });
                 });
+            });
+        }
 
-                builder.AddPanel((builder) =>
+        private void CreateCheckboxCtrlTest(IContainerBuilder builder)
+        {
+            builder.AddDockPanel((builder) =>
+            {
+                builder.SetTag("CheckboxPanel");
+                builder.SetPosition(-50.0f, -720.0f);
+                builder.SetSize(250, 50);
+                builder.SetPadding(4);
+
+                builder.AddCheckbox((builder) =>
                 {
-                    builder.SetTag("CheckboxPanel");
-                    builder.SetPosition(-50.0f, 220.0f);
-                    builder.SetSize(250, 50);
-                    builder.SetPadding(4);
-
-                    builder.AddCheckbox((builder) =>
-                    {
-                        builder.SetDock(ElementDockMode.Left);
-                        builder.SetChecked(isChecked: true);
-                        builder.SetTag("Checkbox");
-                        builder.SetClickCallback(ButtonClicked);
-                    });
-
-                    builder.AddCheckbox((builder) =>
-                    {
-                        builder.SetDock(ElementDockMode.Fill);
-                        builder.SetChecked(isChecked: true);
-                        builder.SetTag("Checkbox");
-                        builder.SetClickCallback(ButtonClicked);
-                    });
-
-                    //builder.AddLabel((builder) =>
-                    //{
-                    //    builder.SetDock(ElementDockMode.Fill);
-                    //    builder.SetHitTestable(false);
-                    //    builder.SetHorizontalAlignment(HorizontalAlignment.Left);
-                    //    builder.SetVerticalAlignment(VerticalAlignment.Center);
-                    //    builder.SetText("This is checkbox");
-                    //    //builder.SetPosition(50.0f, 0.0f);
-                    //    //builder.SetSize(100, 50);
-                    //});
+                    builder.SetDockMode(ElementDockMode.Left);
+                    builder.SetChecked(isChecked: true);
+                    builder.SetTag("Checkbox");
+                    builder.SetMargin(4);
+                    builder.SetClickCallback(ButtonClicked);
                 });
 
-                builder.AddPanel((builder) => 
+                builder.AddCheckbox((builder) =>
                 {
-                    builder.SetTag("LabelTest");
-                    builder.SetSize(800, 400);
-                    builder.SetPosition(-20.0f, -20.0f);
-
-                    builder.AddLabel((builder) =>
-                    {
-                        builder.SetHorizontalAlignment(HorizontalAlignment.Left);
-                        builder.SetVerticalAlignment(VerticalAlignment.Top);
-                        builder.SetText("Left-Top");
-                        builder.SetTag("LT");
-                        builder.SetPosition(-300.0f, 150.0f);
-                        builder.SetSize(200, 100);
-                    });
-
-                    builder.AddLabel((builder) =>
-                    {
-                        builder.SetHorizontalAlignment(HorizontalAlignment.Center);
-                        builder.SetVerticalAlignment(VerticalAlignment.Top);
-                        builder.SetText("Center-Top");
-                        builder.SetTag("CT");
-                        builder.SetPosition(0.0f, 150.0f);
-                        builder.SetSize(200, 100);
-                    });
-
-                    builder.AddLabel((builder) =>
-                    {
-                        builder.SetHorizontalAlignment(HorizontalAlignment.Right);
-                        builder.SetVerticalAlignment(VerticalAlignment.Top);
-                        builder.SetText("Right-Top");
-                        builder.SetTag("RT");
-                        builder.SetPosition(300.0f, 150.0f);
-                        builder.SetSize(200, 100);
-                    });
-
-                    builder.AddLabel((builder) =>
-                    {
-                        builder.SetHorizontalAlignment(HorizontalAlignment.Left);
-                        builder.SetVerticalAlignment(VerticalAlignment.Center);
-                        builder.SetText("Left-Center");
-                        builder.SetTag("LC");
-                        builder.SetPosition(-300.0f, 0.0f);
-                        builder.SetSize(200, 100);
-                    });
-
-                    builder.AddLabel((builder) =>
-                    {
-                        builder.SetHorizontalAlignment(HorizontalAlignment.Center);
-                        builder.SetVerticalAlignment(VerticalAlignment.Center);
-                        builder.SetText("Center-Center");
-                        builder.SetTag("CC");
-                        builder.SetPosition(0.0f, 0.0f);
-                        builder.SetSize(200, 100);
-                    });
-
-                    builder.AddLabel((builder) =>
-                    {
-                        builder.SetHorizontalAlignment(HorizontalAlignment.Right);
-                        builder.SetVerticalAlignment(VerticalAlignment.Center);
-                        builder.SetText("Right-Center");
-                        builder.SetTag("RC");
-                        builder.SetPosition(300.0f, 0.0f);
-                        builder.SetSize(200, 100);
-                    });
-
-                    builder.AddLabel((builder) =>
-                    {
-                        builder.SetHorizontalAlignment(HorizontalAlignment.Left);
-                        builder.SetVerticalAlignment(VerticalAlignment.Bottom);
-                        builder.SetText("Left-Bottom");
-                        builder.SetTag("LB");
-                        builder.SetPosition(-300.0f, -150.0f);
-                        builder.SetSize(200, 100);
-                    });
-
-                    builder.AddLabel((builder) =>
-                    {
-                        builder.SetHorizontalAlignment(HorizontalAlignment.Center);
-                        builder.SetVerticalAlignment(VerticalAlignment.Bottom);
-                        builder.SetText("Center-Bottom");
-                        builder.SetTag("CB");
-                        builder.SetPosition(0.0f, -150.0f);
-                        builder.SetSize(200, 100);
-                    });
-
-                    builder.AddLabel((builder) =>
-                    {
-                        builder.SetHorizontalAlignment(HorizontalAlignment.Right);
-                        builder.SetVerticalAlignment(VerticalAlignment.Bottom);
-                        builder.SetText("Right-Bottom");
-                        builder.SetTag("RB");
-                        builder.SetPosition(300.0f, -150.0f);
-                        builder.SetSize(200, 100);
-                    });
+                    builder.SetDockMode(ElementDockMode.Fill);
+                    builder.SetChecked(isChecked: true);
+                    builder.SetTag("Checkbox");
+                    builder.SetClickCallback(ButtonClicked);
                 });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetDockMode(ElementDockMode.Fill);
+                    builder.SetHitTestable(false);
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Left);
+                    builder.SetVerticalAlignment(VerticalAlignment.Center);
+                    builder.SetText("This is checkbox");
+                    //builder.SetPosition(50.0f, 0.0f);
+                    //builder.SetSize(100, 50);
+                });
+            });
+        }
+
+        private static void CreateLabelCtrlTest(IContainerBuilder builder)
+        {
+            builder.AddDockPanel((builder) =>
+            {
+                builder.SetTag("LabelTest");
+                builder.SetSize(900, 300);
+                builder.SetPosition(0.0f, 0.0f);
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Left);
+                    builder.SetVerticalAlignment(VerticalAlignment.Top);
+                    builder.SetText("Left-Top");
+                    builder.SetTag("LT");
+                    builder.SetDockMode(ElementDockMode.Fill);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Center);
+                    builder.SetVerticalAlignment(VerticalAlignment.Top);
+                    builder.SetText("Center-Top");
+                    builder.SetTag("CT");
+                    builder.SetDockMode(ElementDockMode.Fill);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Right);
+                    builder.SetVerticalAlignment(VerticalAlignment.Top);
+                    builder.SetText("Right-Top");
+                    builder.SetTag("RT");
+                    builder.SetDockMode(ElementDockMode.Fill);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Left);
+                    builder.SetVerticalAlignment(VerticalAlignment.Center);
+                    builder.SetText("Left-Center");
+                    builder.SetTag("LC");
+                    builder.SetDockMode(ElementDockMode.Fill);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Center);
+                    builder.SetVerticalAlignment(VerticalAlignment.Center);
+                    builder.SetText("Center-Center");
+                    builder.SetTag("CC");
+                    builder.SetDockMode(ElementDockMode.Fill);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Right);
+                    builder.SetVerticalAlignment(VerticalAlignment.Center);
+                    builder.SetText("Right-Center");
+                    builder.SetTag("RC");
+                    builder.SetDockMode(ElementDockMode.Fill);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Left);
+                    builder.SetVerticalAlignment(VerticalAlignment.Bottom);
+                    builder.SetText("Left-Bottom");
+                    builder.SetTag("LB");
+                    builder.SetDockMode(ElementDockMode.Fill);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Center);
+                    builder.SetVerticalAlignment(VerticalAlignment.Bottom);
+                    builder.SetText("Center-Bottom");
+                    builder.SetTag("CB");
+                    builder.SetDockMode(ElementDockMode.Fill);
+                });
+
+                builder.AddLabel((builder) =>
+                {
+                    builder.SetHorizontalAlignment(HorizontalAlignment.Right);
+                    builder.SetVerticalAlignment(VerticalAlignment.Bottom);
+                    builder.SetText("Right-Bottom");
+                    builder.SetTag("RB");
+                    builder.SetDockMode(ElementDockMode.Fill);
+                });
+            });
+        }
+
+        private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
+        {
+            renderContext = renderContextProvider.Invoke(graphicsContext, hostCoordinateSystemConverter);
+
+            renderView = renderContext.CreateView(OnRender1, 0.0f, 0.0f, 1.0f, 1.0f);
+
+
+            var element = interactionCore.CreateDockPanel(builder =>
+            {
+                builder.SetTag("Form");
+                builder.SetPosition(0.0f, 0.0f);
+                builder.SetSize(900, 900);
+                builder.SetMovable(true);
+
+                CreateGridPanelTest(builder);
+
+                CreateButtonCtrlTest(builder);
+
+                CreateCheckboxCtrlTest(builder);
+
+                CreateLabelCtrlTest(builder);
 
             }).Build();
 
@@ -263,9 +289,68 @@ namespace RendererTest.Wpf.App.VM
             return renderContext;
         }
 
-        private object SetPosition(float v1, float v2)
+        private static void CreateGridPanelTest(IDockPanelBuilder builder)
         {
-            throw new NotImplementedException();
+            var element = builder.AddGridPanel(builder =>
+            {
+                builder.AddColumn(25);
+                builder.AddColumn();
+                builder.AddColumn(25);
+                builder.AddRow(25);
+                builder.AddRow();
+                builder.AddRow(25);
+
+                builder.SetTag("Form");
+                builder.SetPosition(-300.0f, 300.0f);
+                builder.SetSize(300, 300);
+                builder.SetMovable(true);
+
+                //builder.AddButton((builder) =>
+                //{
+                //    builder.SetTag("A");
+                //    builder.SetClickCallback((element) =>
+                //    {
+                //        var form = element.GetAncestor("Form");
+
+                //        form.Size.X = 550;
+                //        form.Size.Y = 250;
+
+                //        form.Refresh();
+                //        //logger.LogTrace("Button '{ElementTag}' clicked.", element.Tag);
+                //    });
+                //    builder.SetGridPosition(0, 0, 3, 1);
+                //});
+
+                //builder.AddButton((builder) =>
+                //{
+                //    builder.SetTag("B");
+                //    builder.SetClickCallback((element) =>
+                //    {
+                //        //logger.LogTrace("Button '{ElementTag}' clicked.", element.Tag);
+                //    });
+                //    builder.SetGridPosition(0, 1, 2, 1);
+                //});
+
+                builder.AddButton((builder) =>
+                {
+                    builder.SetMovable(true);
+
+                    builder.SetTag("C");
+                    builder.SetMoveCallback((element) =>
+                    {
+                    if (element.IsMovable &&  element is IButton button && button.IsPressed)
+                        {
+                            var form = element.GetAncestor("Form");
+
+                            if (form is not null)
+                            {
+                                form.Resize(new Vector2(550, 250), ElementResizeAnchor.Center);
+                            }
+                        }
+                    });
+                    builder.SetGridPosition(2, 0);
+                });
+            });
         }
 
         private void ButtonClicked(IElement interactiveElement)

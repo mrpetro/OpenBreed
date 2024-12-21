@@ -11,21 +11,15 @@ namespace OpenBreed.Gui.Interface.Builders
 {
     internal abstract class ElementBuilder : IElementBuilder
     {
-        #region Internal Fields
-
-        internal readonly List<ElementBuilder> childBuilders = new List<ElementBuilder>();
-
-        #endregion Internal Fields
-
         #region Private Fields
 
-        private readonly ElementBuilder parentBuilder;
+        private readonly IElementBuilder parentBuilder;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ElementBuilder(ElementBuilder parentBuilder)
+        public ElementBuilder(IElementBuilder parentBuilder)
         {
             this.parentBuilder = parentBuilder;
         }
@@ -33,6 +27,8 @@ namespace OpenBreed.Gui.Interface.Builders
         #endregion Public Constructors
 
         #region Internal Properties
+
+        internal List<IElementOption> Options { get; } = new List<IElementOption>();
 
         internal PositionSystem PositionSystem { get; private set; }
         internal Action<IElement> ClickCallback { get; private set; }
@@ -42,12 +38,9 @@ namespace OpenBreed.Gui.Interface.Builders
         internal Action<IElement> DownCallback { get; private set; }
         internal Action<IElement> UpCallback { get; private set; }
         internal Action<IElement> WheelCallback { get; private set; }
-        internal ElementDockMode DockMode { get; private set; }
         internal string Tag { get; private set; }
-        internal int Width { get; private set; }
-        internal int Height { get; private set; }
-        internal float CenterX { get; private set; }
-        internal float CenterY { get; private set; }
+        internal Vector2 Size { get; private set; }
+        internal Vector2 Position { get; private set; }
         internal bool IsHitTestable { get; private set; } = true;
         internal bool IsMovable { get; private set; } = false;
         internal Box2 Padding { get; private set; }
@@ -67,42 +60,6 @@ namespace OpenBreed.Gui.Interface.Builders
             var element = InternalBuild();
 
             return element;
-        }
-
-        public IElementBuilder AddLabel(Action<ILabelBuilder> setter)
-        {
-            var builder = new LabelBuilder(this);
-
-            setter.Invoke(builder);
-
-            return AddChild(builder);
-        }
-
-        public IElementBuilder AddPanel(Action<IPanelBuilder> setter)
-        {
-            var builder = new PanelBuilder(this);
-
-            setter.Invoke(builder);
-
-            return AddChild(builder);
-        }
-
-        public IElementBuilder AddButton(Action<IButtonBuilder> setter)
-        {
-            var builder = new ButtonBuilder(this);
-
-            setter.Invoke(builder);
-
-            return AddChild(builder);
-        }
-
-        public IElementBuilder AddCheckbox(Action<ICheckboxBuilder> setter)
-        {
-            var builder = new CheckboxBuilder(this);
-
-            setter.Invoke(builder);
-
-            return AddChild(builder);
         }
 
         public void SetClickCallback(Action<IElement> callback)
@@ -140,22 +97,15 @@ namespace OpenBreed.Gui.Interface.Builders
             WheelCallback = callback;
         }
 
-        public void SetDock(ElementDockMode dockMode)
-        {
-            DockMode = dockMode;
-        }
-
         public void SetPosition(float x, float y, PositionSystem positionSystem = PositionSystem.Parent)
         {
-            CenterX = x;
-            CenterY = y;
+            Position = new Vector2(x, y);
             PositionSystem = positionSystem;
         }
 
         public void SetSize(int width, int height)
         {
-            Width = width;
-            Height = height;
+            Size = new Vector2(width, height);
         }
 
         public void SetTag(string tag)
@@ -167,6 +117,11 @@ namespace OpenBreed.Gui.Interface.Builders
 
         public void SetPadding(float left, float bottom, float right, float top)
         {
+            left = MathHelper.Clamp(left, 0, float.MaxValue);
+            bottom = MathHelper.Clamp(bottom, 0, float.MaxValue);
+            right = MathHelper.Clamp(right, 0, float.MaxValue);
+            top = MathHelper.Clamp(top, 0, float.MaxValue);
+
             Padding = new Box2(left, bottom, right, top);
         }
 
@@ -174,6 +129,11 @@ namespace OpenBreed.Gui.Interface.Builders
 
         public void SetMargin(float left, float bottom, float right, float top)
         {
+            left = MathHelper.Clamp(left, 0, float.MaxValue);
+            bottom = MathHelper.Clamp(bottom, 0, float.MaxValue);
+            right = MathHelper.Clamp(right, 0, float.MaxValue);
+            top = MathHelper.Clamp(top, 0, float.MaxValue);
+
             Margin = new Box2(left, bottom, right, top);
         }
 
@@ -187,10 +147,9 @@ namespace OpenBreed.Gui.Interface.Builders
             IsMovable = flag;
         }
 
-        public IElementBuilder AddChild(ElementBuilder childBuilder)
+        public void SetOption(IElementOption parentOption)
         {
-            childBuilders.Add(childBuilder);
-            return this;
+            Options.Add(parentOption);
         }
 
         #endregion Public Methods

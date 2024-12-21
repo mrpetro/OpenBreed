@@ -7,6 +7,15 @@ namespace OpenBreed.Core.Interface.Extensions
     {
         #region Public Methods
 
+        public static Box2 Deflate(this Box2 box, float value)
+        {
+            return new Box2(
+                box.Min.X + value,
+                box.Min.Y + value,
+                box.Max.X - value,
+                box.Max.Y - value);
+        }
+
         public static Box2 Deflate(this Box2 box, Box2 value)
         {
             return new Box2(

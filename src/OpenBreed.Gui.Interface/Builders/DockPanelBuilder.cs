@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Interface.Builders
 {
-    internal class PanelBuilder : ElementBuilder, IPanelBuilder
+    internal class DockPanelBuilder : ContainerBuilder, IDockPanelBuilder
     {
         #region Public Constructors
 
-        public PanelBuilder(ElementBuilder parentBuilder)
+        public DockPanelBuilder(IElementBuilder parentBuilder)
                     : base(parentBuilder)
         {
         }
@@ -23,7 +23,7 @@ namespace OpenBreed.Gui.Interface.Builders
 
         internal override Element InternalBuild()
         {
-            return new Panel(this);
+            return new DockPanel(this);
         }
 
         #endregion Internal Methods

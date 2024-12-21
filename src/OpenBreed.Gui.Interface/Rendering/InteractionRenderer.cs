@@ -33,25 +33,32 @@ namespace OpenBreed.Gui.Interface.Rendering
 
         #region Public Methods
 
+
+
         public void Render(IElement element, IRenderView view)
         {
-            var elementType = element.GetType().GetInterfaces().FirstOrDefault(item => item != typeof(IElement));
-
-            if (elementType is not null && rendererLookup.TryGetValue(elementType, out IElementRenderer elementRenderer))
+            foreach (var elementType in element.GetType().GetInterfaces().Where(item => item != typeof(IElement)))
             {
-                elementRenderer.Render(element, view);
+                if (elementType is not null && rendererLookup.TryGetValue(elementType, out IElementRenderer? elementRenderer) && elementRenderer is not null)
+                {
+                    elementRenderer.Render(element, view);
+                    break;
+                }
             }
 
-            view.PushMatrix();
+            if (element is IContainer container)
+            {
+                view.PushMatrix();
 
-            try
-            {
-                view.Translate(new Vector3(element.Position.X, element.Position.Y, 0.0f));
-                RenderChilds(element, view);
-            }
-            finally
-            {
-                view.PopMatrix();
+                try
+                {
+                    view.Translate(new Vector3(element.Position.X, element.Position.Y, 0.0f));
+                    RenderChilds(container, view);
+                }
+                finally
+                {
+                    view.PopMatrix();
+                }
             }
         }
 
@@ -59,11 +66,11 @@ namespace OpenBreed.Gui.Interface.Rendering
 
         #region Private Methods
 
-        private void RenderChilds(IElement element, IRenderView view)
+        private void RenderChilds(IContainer container, IRenderView view)
         {
-            for (int i = 0; i < element.Childs.Count; i++)
+            for (int i = 0; i < container.Childs.Count; i++)
             {
-                Render(element.Childs[i], view);
+                Render(container.Childs[i], view);
             }
         }
 

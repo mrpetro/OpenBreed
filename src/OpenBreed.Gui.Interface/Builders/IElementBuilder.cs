@@ -19,14 +19,6 @@ namespace OpenBreed.Gui.Interface.Builders
     {
         #region Public Methods
 
-        IElementBuilder AddLabel(Action<ILabelBuilder> setter);
-
-        IElementBuilder AddPanel(Action<IPanelBuilder> setter);
-
-        IElementBuilder AddButton(Action<IButtonBuilder> setter);
-
-        IElementBuilder AddCheckbox(Action<ICheckboxBuilder> setter);
-
         void SetClickCallback(Action<IElement> callback);
 
         void SetEnterCallback(Action<IElement> callback);
@@ -53,7 +45,7 @@ namespace OpenBreed.Gui.Interface.Builders
 
         void SetTag(string tag);
 
-        void SetDock(ElementDockMode dockMode);
+        void SetOption(IElementOption parentOption);
 
         void SetHitTestable(bool flag);
 
