@@ -6,10 +6,10 @@ using OpenBreed.Wecs.Components.Audio;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Audio.Events;
 using OpenBreed.Wecs.Worlds;
+using Xunit;
 
 namespace OpenBreed.Wecs.Systems.Audio.Test
 {
-    [TestFixture]
     public class SoundSystemTests
     {
         #region Private Fields
@@ -26,8 +26,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
 
         #region Public Methods
 
-        [SetUp]
-        public void SetUp()
+        public SoundSystemTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
 
@@ -38,7 +37,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             this.mockContext = this.mockRepository.Create<IUpdateContext>();
         }
 
-        [Test]
+        [Fact]
         public void Update_NoSoundPlayerComponent_NoPlaySample()
         {
             // Arrange
@@ -53,7 +52,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             mockSoundMan.Verify(mock => mock.PlaySample(It.IsAny<int>()), Times.Never());
         }
 
-        [Test]
+        [Fact]
         public void Update_ToPlayIsEmpty_NoPlaySample()
         {
             // Arrange
@@ -68,8 +67,10 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             mockSoundMan.Verify(mock => mock.PlaySample(It.IsAny<int>()), Times.Never());
             mockEventsMan.Verify(mock => mock.Raise(It.IsAny<SoundPlayEvent>()), Times.Never());
         }
-        [TestCase(new object[] {new int[] { 1 } })]
-        [TestCase(new object[] { new int[]{ 2, 5, 6, 7 } })]
+
+        [Theory]
+        [InlineData(new int[] { 1 } )]
+        [InlineData(new int[] { 2, 5, 6, 7 } )]
         public void Update_ToPlayHasIds_PlaySamples(int[] sampleIds)
         {
             // Arrange
@@ -77,6 +78,8 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             var component = new SoundPlayerComponent();
             component.ToPlay.AddRange(sampleIds);
             SetupMockEntity(mockEntity, component);
+            soundSystem.AddEntity(mockEntity.Object);
+
             SetupWorldContext(mockContext, paused: false);
 
             // Act

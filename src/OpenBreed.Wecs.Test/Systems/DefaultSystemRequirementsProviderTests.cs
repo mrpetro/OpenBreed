@@ -1,5 +1,4 @@
 ﻿using Moq;
-using NUnit.Framework;
 using OpenBreed.Common.Interface;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components;
@@ -8,10 +7,10 @@ using System;
 using System.ComponentModel;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
+using Xunit;
 
 namespace OpenBreed.Wecs.Test.Systems
 {
-    [TestFixture]
     public class DefaultSystemRequirementsProviderTests
     {
         public class AComponent : IEntityComponent { }
@@ -22,8 +21,8 @@ namespace OpenBreed.Wecs.Test.Systems
         private MockRepository mockRepository;
         private Mock<ITypeAttributesProvider> mockTypeAttributesProvider;
 
-        [SetUp]
-        public void SetUp()
+        public DefaultSystemRequirementsProviderTests
+()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.mockTypeAttributesProvider = mockRepository.Create<ITypeAttributesProvider>();
@@ -44,7 +43,7 @@ namespace OpenBreed.Wecs.Test.Systems
             return new DefaultSystemRequirementsProvider(mockTypeAttributesProvider.Object);
         }
 
-        [Test]
+        [Fact]
         public void RegisterRequirements_NullArgument_ArgumentNullException()
         {
             // Arrange
@@ -55,7 +54,7 @@ namespace OpenBreed.Wecs.Test.Systems
             this.mockRepository.VerifyAll();
         }
 
-        [Test]
+        [Fact]
         public void RegisterRequirements_NonISystemType_ArgumentException()
         {
             // Arrange
@@ -66,7 +65,7 @@ namespace OpenBreed.Wecs.Test.Systems
             this.mockRepository.VerifyAll();
         }
 
-        [Test]
+        [Fact]
         public void RegisterRequirements_ISystemType_DoesNotThrow()
         {
             // Arrange
@@ -76,7 +75,9 @@ namespace OpenBreed.Wecs.Test.Systems
             mockTypeAttributesProvider.Setup(item => item.GetAttributes(systemType)).Returns(Array.Empty<object>);
             // Act
             // Assert
-            Assert.DoesNotThrow(() => provider.RegisterRequirements(systemType));
+            var exception = Record.Exception(() => provider.RegisterRequirements(systemType));
+            Assert.Null(exception);
+
             this.mockRepository.VerifyAll();
         }
     }

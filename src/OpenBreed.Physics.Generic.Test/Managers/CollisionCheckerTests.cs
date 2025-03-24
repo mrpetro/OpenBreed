@@ -4,8 +4,6 @@ using OpenBreed.Physics.Generic.Managers;
 using OpenBreed.Physics.Interface;
 using OpenTK.Graphics.OpenGL;
 using System;
-using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace OpenBreed.Physics.Generic.Test.Managers
 {
