@@ -10,12 +10,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using OpenBreed.Core.Interface.Extensions;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenBreed.Gui.Abstractions.Helpers;
 using System.Drawing;
 using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Builders;
+using OpenBreed.Gui.Abstractions.Presentations;
 
 namespace OpenBreed.Gui.Elements
 {
@@ -23,7 +23,7 @@ namespace OpenBreed.Gui.Elements
     {
         #region Protected Fields
 
-        protected readonly Action<IElement> clickCallback;
+        protected readonly Action<IElement, IInteractionCursor, CursorKey> clickCallback;
         protected readonly Action<IElement> enterCallback;
         protected readonly Action<IElement> leaveCallback;
         protected readonly Action<IElement, Vector2> moveCallback;
@@ -98,6 +98,28 @@ namespace OpenBreed.Gui.Elements
             }
         }
 
+        public Box2 ToWorld(Box2 box)
+        {
+            var elementBox = box.Translated(Position.AsVector());
+
+            if (Parent is null)
+            {
+                return elementBox;
+            }
+
+            return Parent.ToWorld(elementBox);
+        }
+
+        public Vector2 ToWorld(Vector2 position)
+        {
+            if (Parent is null)
+            {
+                return position;
+            }
+
+            return Parent.ToWorld(Position.AsVector() + position);
+        }
+
         public Box2 Padding { get; set; }
 
         public Box2 Margin { get; set; }
@@ -111,6 +133,8 @@ namespace OpenBreed.Gui.Elements
         public IElement? Parent => parent;
 
         public bool IsHovered { get; private set; }
+
+        public IElementPresentation Presentation => throw new NotImplementedException();
 
         #endregion Public Properties
 
@@ -136,21 +160,21 @@ namespace OpenBreed.Gui.Elements
             return true;
         }
 
-        public virtual void OnClick(IInteractionCursor cursor, CursorKey cursorKey)
+        public virtual void OnCursorClick(IInteractionCursor cursor, CursorKey cursorKey)
         {
             if (cursorKey == CursorKey.Left)
             {
-                clickCallback?.Invoke(this);
+                clickCallback?.Invoke(this, cursor, cursorKey);
             }
         }
 
-        public virtual void OnEnter(IInteractionCursor cursor)
+        public virtual void OnCursorEnter(IInteractionCursor cursor)
         {
             IsHovered = true;
             enterCallback?.Invoke(this);
         }
 
-        public virtual void OnLeave(IInteractionCursor cursor)
+        public virtual void OnCursorLeave(IInteractionCursor cursor)
         {
             leaveCallback?.Invoke(this);
             IsHovered = false;
@@ -168,17 +192,29 @@ namespace OpenBreed.Gui.Elements
         {
         }
 
-        public virtual void OnDown(IInteractionCursor cursor, CursorKey cursorKey)
+        public virtual void OnKeyboardTextInput(string text)
+        {
+        }
+
+        public virtual void OnKeyboardKeyDown(Keys key, KeyModifiers modifiers)
+        {
+        }
+
+        public virtual void OnKeyboardKeyUp(Keys key, KeyModifiers modifiers)
+        {
+        }
+
+        public virtual void OnCursorDown(IInteractionCursor cursor, CursorKey cursorKey)
         {
             downCallback?.Invoke(this);
         }
 
-        public virtual void OnUp(IInteractionCursor cursor, CursorKey cursorKey)
+        public virtual void OnCursorUp(IInteractionCursor cursor, CursorKey cursorKey)
         {
             upCallback?.Invoke(this);
         }
 
-        public virtual void OnWheel(IInteractionCursor cursor)
+        public virtual void OnCursorWheel(IInteractionCursor cursor)
         {
             wheelCallback?.Invoke(this);
         }
@@ -326,6 +362,23 @@ namespace OpenBreed.Gui.Elements
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal Desktop GetDesktop()
+        {
+            var element = this;
+
+            while (element is not null)
+            {
+                if (element is Desktop desktop)
+                {
+                    return desktop;
+                }
+
+                element = element.Parent as Element;
+            }
+
+            throw new InvalidOperationException("Expected Desktop to be found as one of ancestors.");
+        }
 
         internal void SetParent(Container newParent)
         {

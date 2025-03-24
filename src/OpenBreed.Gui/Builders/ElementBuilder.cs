@@ -1,29 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Builders;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Elements;
+using OpenBreed.Rendering.Interface.Events;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace OpenBreed.Gui.Builders
 {
+    internal abstract class ElementBuilder<TElement> : ElementBuilder, IElementBuilder<TElement> where TElement : IElement
+    {
+        #region Public Methods
+
+        public abstract TElement Build();
+
+        #endregion Public Methods
+    }
+
     internal abstract class ElementBuilder : IElementBuilder
     {
-        #region Private Fields
-
-        private readonly IElementBuilder parentBuilder;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
-        public ElementBuilder(IElementBuilder parentBuilder)
+        public ElementBuilder()
         {
-            this.parentBuilder = parentBuilder;
         }
 
         #endregion Public Constructors
@@ -33,7 +39,7 @@ namespace OpenBreed.Gui.Builders
         internal List<IElementOption> Options { get; } = new List<IElementOption>();
 
         internal PositionSystem PositionSystem { get; private set; }
-        internal Action<IElement> ClickCallback { get; private set; }
+        internal Action<IElement, IInteractionCursor, CursorKey> ClickCallback { get; private set; }
         internal Action<IElement> EnterCallback { get; private set; }
         internal Action<IElement> LeaveCallback { get; private set; }
         internal Action<IElement, Vector2> MoveCallback { get; private set; }
@@ -54,19 +60,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Methods
 
-        public IElement Build()
-        {
-            if (parentBuilder is not null)
-            {
-                throw new InvalidOperationException($"Invalid level of calling {nameof(Build)}()");
-            }
-
-            var element = InternalBuild();
-
-            return element;
-        }
-
-        public void SetClickCallback(Action<IElement> callback)
+        public void SetClickCallback(Action<IElement, IInteractionCursor, CursorKey> callback)
         {
             ClickCallback = callback;
         }
@@ -167,11 +161,5 @@ namespace OpenBreed.Gui.Builders
         }
 
         #endregion Public Methods
-
-        #region Internal Methods
-
-        internal abstract Element InternalBuild();
-
-        #endregion Internal Methods
     }
 }

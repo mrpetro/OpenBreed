@@ -16,5 +16,21 @@ namespace OpenBreed.Gui.Abstractions.Elements
         IReadOnlyList<IElement> Childs { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Adds element to this container.
+        /// </summary>
+        /// <param name="element">Element to be added.</param>
+        void AddChild(IElement element);
+
+        /// <summary>
+        /// Removes element from this container.
+        /// </summary>
+        /// <param name="element">Element t be removed.</param>
+        void RemoveChild(IElement element);
+
+        #endregion Public Methods
     }
 }

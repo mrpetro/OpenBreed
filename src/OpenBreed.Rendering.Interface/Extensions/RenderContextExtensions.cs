@@ -10,9 +10,9 @@ namespace OpenBreed.Rendering.Interface.Extensions
 {
     public static class RenderContextExtensions
     {
-        public static IRenderView CreateView(this IRenderContext renderContext, Box2 boundaryBox, RenderDelegate renderer)
+        public static IRenderView CreateView(this IRenderContext renderContext, Box2 boundaryBox)
         {
-            return renderContext.CreateView(renderer, boundaryBox.Min.X, boundaryBox.Min.Y, boundaryBox.Size.X, boundaryBox.Size.Y);
+            return renderContext.CreateView(boundaryBox.Min.X, boundaryBox.Min.Y, boundaryBox.Size.X, boundaryBox.Size.Y);
         }
     }
 }

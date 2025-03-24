@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\SampleText.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\SampleText.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+	<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj" />
+    <ProjectReference Include="..\OpenBreed.Common.Windows\OpenBreed.Common.Windows.csproj" />
+    <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
+    <ProjectReference Include="..\OpenBreed.Gui.Abstractions\OpenBreed.Gui.Abstractions.csproj" />
+    <ProjectReference Include="..\OpenBreed.Gui\OpenBreed.Gui.csproj" />
+    <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj" />
+    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj" />
+  </ItemGroup>
+
+</Project>

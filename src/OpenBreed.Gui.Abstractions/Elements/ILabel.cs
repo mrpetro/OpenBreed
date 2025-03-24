@@ -1,18 +1,8 @@
-﻿namespace OpenBreed.Gui.Abstractions.Elements
-{
-    public enum HorizontalAlignment
-    {
-        Center,
-        Left,
-        Right
-    }
+﻿using OpenBreed.Gui.Abstractions.Constants;
+using OpenBreed.Rendering.Interface;
 
-    public enum VerticalAlignment
-    {
-        Center,
-        Bottom,
-        Top
-    }
+namespace OpenBreed.Gui.Abstractions.Elements
+{
 
     public interface ILabel : IElement
     {
@@ -22,6 +12,8 @@
         VerticalAlignment VerticalAlignment { get; set; }
 
         string Text { get; set; }
+
+        IFont Font { get; }
 
         #endregion Public Properties
     }

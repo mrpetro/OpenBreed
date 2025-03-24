@@ -11,9 +11,9 @@ namespace OpenBreed.Gui.Abstractions.Presentations
     {
         #region Public Properties
 
-        public static Color4 LightSideColor { get; } = new Color4(130, 130, 130, 255);
-        public static Color4 FlatSideColor { get; } = new Color4(100, 100, 100, 255);
-        public static Color4 DarkSideColor { get; } = new Color4(70, 70, 70, 255);
+        public static Color4 LightSideColor { get; } = new Color4(130, 130, 130, 20);
+        public static Color4 FlatSideColor { get; } = new Color4(100, 100, 100, 20);
+        public static Color4 DarkSideColor { get; } = new Color4(70, 70, 70, 20);
 
         #endregion Public Properties
     }

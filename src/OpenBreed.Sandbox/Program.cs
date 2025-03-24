@@ -48,7 +48,6 @@ using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
-using OpenBreed.Sandbox.Managers;
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
@@ -648,8 +647,8 @@ namespace OpenBreed.Sandbox
 
         private void OnWindowLoad(WindowLoadEvent e)
         {
-            var renderView = e.RenderContext.CreateView(OnRenderFrame);
-
+            var renderView = e.RenderContext.CreateView();
+            renderView.Rendering += OnRenderFrame;
             var dataLoaderFactory = GetManager<IDataLoaderFactory>();
 
             InitLua();

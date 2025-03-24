@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Rendering
 {
-    public class PanelRenderer : ElementRenderer<IPanel>
+    public class PanelRenderer : ElementRenderer<IDockPanel>
     {
         #region Protected Methods
 
-        protected override void Render(IPanel element, IRenderView view)
+        protected override void Render(IDockPanel element, IRenderView view)
         {
             var box = element.LocalBox;
 

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Presentations;
 using OpenBreed.Rendering.Interface.Events;
 using OpenTK.Mathematics;
 using System;
@@ -30,7 +31,6 @@ namespace OpenBreed.Gui.Abstractions.Elements
         RightBottom,
         Bottom,
         BottomLeft
-
     }
 
     /// <summary>
@@ -65,6 +65,10 @@ namespace OpenBreed.Gui.Abstractions.Elements
 
         #region Public Methods
 
+        Box2 ToWorld(Box2 box);
+
+        Vector2 ToWorld(Vector2 position);
+
         void MoveBy(Vector2 offset);
 
         void Resize(Vector2 newSize);
@@ -73,24 +77,27 @@ namespace OpenBreed.Gui.Abstractions.Elements
 
         void OnCursorMove(IInteractionCursor cursor);
 
-        void OnWheel(IInteractionCursor cursor);
+        void OnCursorWheel(IInteractionCursor cursor);
 
-        void OnEnter(IInteractionCursor cursor);
+        void OnCursorEnter(IInteractionCursor cursor);
 
-        void OnLeave(IInteractionCursor cursor);
+        void OnCursorLeave(IInteractionCursor cursor);
 
-        void OnClick(IInteractionCursor cursor, CursorKey cursorKey);
+        void OnCursorClick(IInteractionCursor cursor, CursorKey cursorKey);
 
-        void OnDown(IInteractionCursor cursor, CursorKey cursorKey);
+        void OnCursorDown(IInteractionCursor cursor, CursorKey cursorKey);
 
-        void OnUp(IInteractionCursor cursor, CursorKey cursorKey);
+        void OnCursorUp(IInteractionCursor cursor, CursorKey cursorKey);
+
+        void OnKeyboardTextInput(string text);
+
+        void OnKeyboardKeyDown(Keys key, KeyModifiers modifiers);
+
+        void OnKeyboardKeyUp(Keys key, KeyModifiers modifiers);
 
         bool HitTest(Vector2 point, out IElement? interactiveElement);
 
         IElement? GetAncestor(string tag);
-
-
-
 
         #endregion Public Methods
     }

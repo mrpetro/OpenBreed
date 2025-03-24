@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Builders
 {
-    internal class ButtonBuilder : ElementBuilder, IButtonBuilder
+    internal class ButtonBuilder : ElementBuilder<IButton>, IButtonBuilder
     {
         #region Internal Fields
 
@@ -20,8 +20,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public ButtonBuilder(IElementBuilder parentBuilder)
-                    : base(parentBuilder)
+        public ButtonBuilder()
         {
         }
 
@@ -29,15 +28,11 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Methods
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal override Element InternalBuild()
+        public override IButton Build()
         {
             return new Button(this);
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
     }
 }

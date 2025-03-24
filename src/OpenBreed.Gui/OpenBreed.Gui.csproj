@@ -17,13 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Core.Interface\OpenBreed.Core.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Gui.Abstractions\OpenBreed.Gui.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Helpers\" />
-    <Folder Include="Presentations\" />
   </ItemGroup>
 
 </Project>

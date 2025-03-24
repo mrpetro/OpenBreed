@@ -13,6 +13,14 @@ namespace OpenBreed.Input.Generic
 {
     internal class EditorInputsMan : IInputsMan
     {
+        #region Public Events
+
+        public event EventHandler<KeyboardStateEventArgs> KeyboardStateChanged;
+
+        #endregion Public Events
+
+        #region Public Properties
+
         public Vector2 CursorDelta { get; }
 
         public Vector2 CursorPos { get; }
@@ -23,9 +31,15 @@ namespace OpenBreed.Input.Generic
 
         public bool IsMousePressed { get; }
 
+        public bool IsLeftMousePressed { get; }
+
+        public bool IsMiddleMousePressed { get; }
+
         public bool IsRightMousePressed { get; }
 
-        public event EventHandler<KeyboardStateEventArgs> KeyboardStateChanged;
+        #endregion Public Properties
+
+        #region Public Methods
 
         public bool IsKeyPressed(int inputCode)
         {
@@ -35,6 +49,8 @@ namespace OpenBreed.Input.Generic
         public void Update()
         {
         }
+
+        #endregion Public Methods
     }
 
     internal class InputsMan : IInputsMan
@@ -66,6 +82,8 @@ namespace OpenBreed.Input.Generic
             gameWindow.KeyUp += OnKeyUp;
             //gameWindow.MouseDown += OnMouseDown;
             //gameWindow.MouseUp += OnMouseUp;
+
+            gameWindow.Load += GameWindow_Load;
 
             oldKeyboardState = gameWindow.KeyboardState.GetSnapshot();
         }
@@ -102,7 +120,11 @@ namespace OpenBreed.Input.Generic
 
         public bool IsMousePressed => gameWindow.MouseState.IsAnyButtonDown;
 
-        public bool IsRightMousePressed => gameWindow.MouseState.IsButtonPressed(MouseButton.Right);
+        public bool IsLeftMousePressed => gameWindow.MouseState.IsButtonDown(MouseButton.Left);
+
+        public bool IsMiddleMousePressed => gameWindow.MouseState.IsButtonDown(MouseButton.Middle);
+
+        public bool IsRightMousePressed => gameWindow.MouseState.IsButtonDown(MouseButton.Right);
 
         #endregion Public Properties
 
@@ -147,6 +169,11 @@ namespace OpenBreed.Input.Generic
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void GameWindow_Load()
+        {
+            oldCursorPos = CursorPos;
+        }
 
         private void OnKeyDown(KeyboardKeyEventArgs e)
         {

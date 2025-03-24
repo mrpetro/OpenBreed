@@ -75,7 +75,11 @@ namespace OpenBreed.Input.Generic
 
         public bool IsMousePressed => gameWindow.MouseState.IsAnyButtonDown;
 
-        public bool IsRightMousePressed => gameWindow.MouseState.IsButtonPressed(MouseButton.Right);
+        public bool IsLeftMousePressed => gameWindow.MouseState.IsButtonDown(MouseButton.Left);
+
+        public bool IsMiddleMousePressed => gameWindow.MouseState.IsButtonDown(MouseButton.Middle);
+
+        public bool IsRightMousePressed => gameWindow.MouseState.IsButtonDown(MouseButton.Right);
 
         #endregion Public Properties
 

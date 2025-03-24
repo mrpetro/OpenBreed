@@ -28,7 +28,7 @@ namespace OpenBreed.Rendering.Interface.Managers
 
         #region Public Methods
 
-        IRenderView CreateView(RenderDelegate renderer, float minX = 0, float minY = 0, float maxX = 1, float maxY = 1);
+        IRenderView CreateView(float minX = 0, float minY = 0, float maxX = 1, float maxY = 1);
 
         void Render(float dt);
         void Resize(int width, int height);
@@ -38,6 +38,9 @@ namespace OpenBreed.Rendering.Interface.Managers
         void CursorDown(int cursorId, Vector2i point, CursorKey cursorKey);
         void CursorMove(int cursorId, Vector2i point);
         void CursorWheel(int cursorId, Vector2i point, int wheelDelta);
+        void TextInput(string text);
+        void KeyDown(Keys key, KeyModifiers modifiers);
+        void KeyUp(Keys key, KeyModifiers modifiers);
 
         void Initialize();
 

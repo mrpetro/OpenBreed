@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Abstractions.Elements
 {
-    public interface IGridPanel : IElement
+    public interface IGridPanel : IContainer
     {
         #region Public Properties
 

@@ -1,17 +1,37 @@
-﻿using System;
+﻿using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Elements;
+using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Gui.Abstractions.Elements;
 
 namespace OpenBreed.Gui.Abstractions
 {
-    public interface IInteractionFactory
+    public interface IInteractionFactoryProvider
     {
         #region Public Methods
 
-        ILabel CreateBox(float centerX, float centerY, float width, float height);
+        IInteractionFactory GetFactory(IRenderView view);
+
+        #endregion Public Methods
+    }
+
+    public interface IInteractionFactory
+    {
+        #region Public Properties
+
+        IServiceProvider ServiceProvider { get; }
+        IRenderView View { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        IDesktop CreateDesktop(Action<IDesktopBuilder> setter);
 
         #endregion Public Methods
     }

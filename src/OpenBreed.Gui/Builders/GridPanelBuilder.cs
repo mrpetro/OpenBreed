@@ -1,21 +1,23 @@
-﻿using OpenBreed.Gui.Abstractions.Builders;
+﻿using OpenBreed.Gui.Abstractions;
+using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Enums;
 using OpenBreed.Gui.Elements;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Builders
 {
-    internal class GridPanelBuilder : ContainerBuilder, IGridPanelBuilder
+    internal class GridPanelBuilder : ElementBuilder<IGridPanel>, IGridPanelBuilder
     {
         #region Public Constructors
 
-        public GridPanelBuilder(IElementBuilder parentBuilder)
-                    : base(parentBuilder)
+        public GridPanelBuilder()
         {
         }
 
@@ -40,15 +42,11 @@ namespace OpenBreed.Gui.Builders
             Rows.Add(new GridPartDimension(height, dimmensionType));
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal override Element InternalBuild()
+        public override GridPanel Build()
         {
             return new GridPanel(this);
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
     }
 }

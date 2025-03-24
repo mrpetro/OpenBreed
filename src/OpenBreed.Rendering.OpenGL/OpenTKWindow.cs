@@ -17,6 +17,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows;
@@ -51,12 +52,15 @@ namespace OpenBreed.Rendering.OpenGL
             this.gameWindow.Resize += Window_Resize;
             this.gameWindow.UpdateFrame += Window_UpdateFrame;
             this.gameWindow.RenderFrame += Window_RenderFrame;
-            this.gameWindow.MouseDown += GameWindow_MouseUp;
+            this.gameWindow.MouseUp += GameWindow_MouseUp;
             this.gameWindow.MouseDown += GameWindow_MouseDown;
             this.gameWindow.MouseEnter += GameWindow_MouseEnter;
             this.gameWindow.MouseLeave += GameWindow_MouseLeave;
             this.gameWindow.MouseMove += GameWindow_MouseMove;
-            this.gameWindow.MouseWheel += GameWindow_MouseWheel; ;
+            this.gameWindow.MouseWheel += GameWindow_MouseWheel;
+            this.gameWindow.TextInput += GameWindow_TextInput;
+            this.gameWindow.KeyDown += GameWindow_KeyDown;
+            this.gameWindow.KeyUp += GameWindow_KeyUp;
         }
 
         #endregion Public Constructors
@@ -125,6 +129,21 @@ namespace OpenBreed.Rendering.OpenGL
         {
             var cursorPosition = gameWindow.MousePosition;
             Context.CursorWheel(0, (Vector2i)cursorPosition, (int)e.OffsetY);
+        }
+
+        private void GameWindow_KeyDown(KeyboardKeyEventArgs obj)
+        {
+            Context.KeyDown((Interface.Events.Keys)obj.Key, (Interface.Events.KeyModifiers)obj.Modifiers);
+        }
+
+        private void GameWindow_KeyUp(KeyboardKeyEventArgs obj)
+        {
+            Context.KeyUp((Interface.Events.Keys)obj.Key, (Interface.Events.KeyModifiers)obj.Modifiers);
+        }
+
+        private void GameWindow_TextInput(TextInputEventArgs obj)
+        {
+            Context.TextInput(obj.AsString);
         }
 
         private Vector2i GetRenderContextPosition(Vector2i point)

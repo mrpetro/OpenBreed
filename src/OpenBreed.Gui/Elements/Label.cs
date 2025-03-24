@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Constants;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Builders;
+using OpenBreed.Rendering.Interface;
 
 namespace OpenBreed.Gui.Elements
 {
@@ -16,6 +18,7 @@ namespace OpenBreed.Gui.Elements
         internal Label(LabelBuilder builder) : base(builder)
         {
             Text = builder.Text;
+            Font = builder.GetFont();
             HorizontalAlignment = builder.HorizontalAlignment;
             VerticalAlignment = builder.VerticalAlignment;
         }
@@ -25,6 +28,7 @@ namespace OpenBreed.Gui.Elements
         #region Public Properties
 
         public string Text { get; set; }
+        public IFont Font { get; }
         public HorizontalAlignment HorizontalAlignment { get; set; }
         public VerticalAlignment VerticalAlignment { get; set; }
 

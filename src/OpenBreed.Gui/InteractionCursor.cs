@@ -1,6 +1,8 @@
-﻿using OpenBreed.Gui.Abstractions;
+﻿using OpenBreed.Common.Interface.Mvc;
+using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenTK.Mathematics;
 using System.Collections;
 
@@ -24,6 +26,8 @@ namespace OpenBreed.Gui
         #endregion Internal Constructors
 
         #region Public Properties
+
+        public IRenderView? View { get; internal set; }
 
         public bool Enabled { get; private set; }
 
@@ -50,6 +54,22 @@ namespace OpenBreed.Gui
         public bool IsPressed(CursorKey key)
         {
             return buttons[(int)key];
+        }
+
+        public Vector2 GetPositionRelativeTo(IElement element)
+        {
+            var reverseCoords = element.Position.AsVector();
+
+            while (element.Parent is not null)
+            {
+                element = element.Parent;
+
+                reverseCoords += element.Position.AsVector();
+            }
+
+            var localPosition = Position - reverseCoords;
+
+            return localPosition;
         }
 
         #endregion Public Methods

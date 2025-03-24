@@ -2,7 +2,7 @@
 
 namespace OpenBreed.Gui.Abstractions.Elements
 {
-    public interface IPanel : IElement
+    public interface IDockPanel : IContainer
     {
         #region Public Properties
 

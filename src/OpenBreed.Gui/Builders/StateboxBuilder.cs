@@ -12,12 +12,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Builders
 {
-    internal class StateboxBuilder : ElementBuilder, IStateboxBuilder
+    internal class StateboxBuilder : ElementBuilder<IStatebox>, IStateboxBuilder
     {
         #region Public Constructors
 
-        public StateboxBuilder(IElementBuilder parentBuilder)
-                    : base(parentBuilder)
+        public StateboxBuilder()
         {
         }
 
@@ -58,7 +57,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Internal Methods
 
-        internal override Element InternalBuild()
+        public override IStatebox Build()
         {
             return new Statebox(this);
         }

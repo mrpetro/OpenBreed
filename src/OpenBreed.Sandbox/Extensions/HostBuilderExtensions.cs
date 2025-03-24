@@ -29,7 +29,6 @@ using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Loaders;
-using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Xml;
@@ -48,15 +47,6 @@ namespace OpenBreed.Sandbox.Extensions
     public static class HostBuilderExtensions
     {
         #region Public Methods
-
-        public static void ConfigureLogConsolePrinter(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<LogConsolePrinter>();
-                services.AddHostedService<LogConsolePrinter>();
-            });
-        }
 
         public static void SetupGameWindow(this IHostBuilder hostBuilder, int width, int height, string title)
         {

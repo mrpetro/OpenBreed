@@ -13,6 +13,7 @@ using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Rendering.Interface.Extensions;
 using OpenBreed.Editor.UI.Mvc.Extensions;
 using OpenBreed.Rendering.Interface.Factories;
+using OpenBreed.Rendering.OpenGL.Managers;
 
 namespace OpenBreed.Editor.UI.Mvc.Views
 {
@@ -37,7 +38,8 @@ namespace OpenBreed.Editor.UI.Mvc.Views
         public EditorView(IEventsMan eventsMan, IRenderContext renderContext)
         {
             this.eventsMan = eventsMan;
-            renderView = renderContext.CreateView(OnRenderPrivate, 0.0f, 0.0f, 1.0f, 1.0f);
+            renderView = renderContext.CreateView(0.0f, 0.0f, 1.0f, 1.0f);
+            renderView.Rendering += OnRenderPrivate;
 
             eventsMan.SubscribeToView<ViewCursorMoveEvent>(renderView, OnCursorMove);
             eventsMan.SubscribeToView<ViewCursorDownEvent>(renderView, OnCursorDown);

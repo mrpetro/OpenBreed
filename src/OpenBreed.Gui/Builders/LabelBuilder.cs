@@ -1,29 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Gui.Abstractions.Builders;
+﻿using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Constants;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Elements;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Gui.Builders
 {
-    internal class LabelBuilder : ElementBuilder, ILabelBuilder
+    internal class LabelBuilder : ElementBuilder<ILabel>, ILabelBuilder
     {
         #region Internal Fields
 
         internal string Text = string.Empty;
+        internal string FontName = "Arial";
+        internal int FontSize = 12;
         internal HorizontalAlignment HorizontalAlignment;
         internal VerticalAlignment VerticalAlignment;
 
         #endregion Internal Fields
 
+        #region Private Fields
+
+        private readonly IFontMan fontMan;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public LabelBuilder(IElementBuilder parentBuilder)
-                    : base(parentBuilder)
+        public LabelBuilder(IFontMan fontMan)
         {
+            this.fontMan = fontMan;
         }
 
         #endregion Public Constructors
@@ -33,6 +39,16 @@ namespace OpenBreed.Gui.Builders
         public void SetText(string? text)
         {
             Text = text ?? string.Empty;
+        }
+
+        public void SetFontSize(int size)
+        {
+            FontSize = size;
+        }
+
+        public void SetFontName(string name)
+        {
+            FontName = name;
         }
 
         public void SetHorizontalAlignment(HorizontalAlignment horizontalAlignment)
@@ -49,7 +65,12 @@ namespace OpenBreed.Gui.Builders
 
         #region Internal Methods
 
-        internal override Element InternalBuild()
+        internal IFont GetFont()
+        {
+            return fontMan.GetOSFont(FontName, FontSize);
+        }
+
+        public override ILabel Build()
         {
             return new Label(this);
         }

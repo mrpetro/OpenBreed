@@ -10,11 +10,12 @@ using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Extensions;
 using OpenBreed.Gui.Abstractions.Helpers;
 using OpenBreed.Gui.Builders;
+using OpenBreed.Gui.Logic;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Gui.Elements
 {
-    internal class DockPanel : Container, IPanel
+    internal class DockPanel : Container, IDockPanel
     {
         #region Private Fields
 

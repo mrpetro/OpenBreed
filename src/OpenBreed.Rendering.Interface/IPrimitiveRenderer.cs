@@ -18,19 +18,6 @@ namespace OpenBreed.Rendering.Interface
         Ex
     }
 
-    public struct ClipState
-    {
-        public int Layer;
-
-        public int Id;
-        public int Mask;
-        public BitArray ParentIdBits;
-        public BitArray ParentMaskdBits;
-        public int ParentId;
-        public int ParentMask;
-    }
-
-
     public interface IPrimitiveRenderer
     {
         #region Public Methods
@@ -45,7 +32,7 @@ namespace OpenBreed.Rendering.Interface
         void DrawLine(IRenderView view, Vector2 startPoint, Vector2 endPoint, Color4 color);
         void DrawLines(IRenderView view, IReadOnlyList<Vector2> points, Color4 color);
         
-        void DrawNestedEx(IRenderView view, Box2 clipBox, ClipState clipState, Action<Box2, ClipState> nestedRenderAction);
+        void DrawClipped(IRenderView view, Box2i clipBox, Action<Box2i> nestedRenderAction);
 
         void DrawNested(IRenderView view, Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction);
 

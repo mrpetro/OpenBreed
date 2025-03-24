@@ -1,17 +1,14 @@
-﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Rendering.Interface;
+﻿using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Interface.Extensions;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection.Emit;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
@@ -21,8 +18,8 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private readonly Stack<Matrix4> modelMatrixStack = new Stack<Matrix4>();
         private readonly Stack<IPalette> paletteStack = new Stack<IPalette>();
+        private readonly Stack<Box2i> clipBoxStack = new Stack<Box2i>();
         private readonly HostCoordinateSystemConverter hostCoordinateSystemConverter;
-        private readonly RenderDelegate renderer;
         private readonly Box2 boxNormalized;
         private IPalette currentPalette;
         private Matrix4 projection = Matrix4.Identity;
@@ -34,20 +31,40 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public RenderView(
             IRenderContext context,
             HostCoordinateSystemConverter hostCoordinateSystemConverter,
-            RenderDelegate renderer,
-            Box2 boxNormalized)
+            Box2 boxNormalized,
+            int viewId)
         {
             Context = context;
             this.hostCoordinateSystemConverter = hostCoordinateSystemConverter;
-            this.renderer = renderer;
             this.boxNormalized = boxNormalized;
+            Id = viewId;
         }
 
         #endregion Public Constructors
 
         #region Public Events
 
-        public event ResizeDelegate Resized;
+        public event ViewResizeHandler Resized;
+
+        public event ViewRenderHandler Rendering;
+
+        public event ViewCursorEnterHandler CursorEnter;
+
+        public event ViewCursorLeaveHandler CursorLeave;
+
+        public event ViewCursorDownHandler CursorDown;
+
+        public event ViewCursorUpHandler CursorUp;
+
+        public event ViewCursorMoveHandler CursorMove;
+
+        public event ViewCursorWheelHandler CursorWheel;
+
+        public event ViewTextInputHandler TextInput;
+
+        public event ViewKeyboardKeyHandler KeyDown;
+
+        public event ViewKeyboardKeyHandler KeyUp;
 
         #endregion Public Events
 
@@ -56,8 +73,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public Box2i Box { get; private set; }
 
         public IRenderContext Context { get; }
+        public int Id { get; }
         public IFontMan Fonts { get; }
-        public ResizeDelegate Resizer { get; set; }
+        public ViewResizeHandler Resizer { get; set; }
         public Matrix4 View { get; set; } = Matrix4.Identity;
         public Matrix4 Projection => projection;
         public IPalette CurrentPalette => currentPalette;
@@ -193,6 +211,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             projection = matrix;
         }
 
+
         public virtual void Reset()
         {
             View = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
@@ -223,9 +242,54 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         internal virtual void OnRender(float dt)
         {
-            GL.Viewport(Box);
+            GL.ViewportIndexed(Id,Box.Min.X, Box.Min.Y, Box.Size.X, Box.Size.Y);
 
-            renderer?.Invoke(this, Matrix4.Identity, dt);
+            Rendering?.Invoke(this, Matrix4.Identity, dt);
+        }
+
+        internal virtual void OnCursorWheel(int cursorId, Vector2i cursorPosition, int wheelDelta)
+        {
+            CursorWheel?.Invoke(this, cursorId, cursorPosition, wheelDelta);
+        }
+
+        internal void OnCursorUp(int cursorId, Vector2i cursorPosition, CursorKey cursorKey)
+        {
+            CursorUp?.Invoke(this, cursorId, cursorPosition, cursorKey);
+        }
+
+        internal virtual void OnCursorDown(int cursorId, Vector2i cursorPosition, CursorKey cursorKey)
+        {
+            CursorDown?.Invoke(this, cursorId, cursorPosition, cursorKey);
+        }
+
+        internal void OnCursorMove(int cursorId, Vector2i cursorPosition)
+        {
+            CursorMove?.Invoke(this, cursorId, cursorPosition);
+        }
+
+        internal void OnCursorEnter(int cursorId, Vector2i cursorPosition)
+        {
+            CursorEnter?.Invoke(this, cursorId, cursorPosition);
+        }
+
+        internal void OnCursorLeave(int cursorId, Vector2i cursorPosition)
+        {
+            CursorLeave?.Invoke(this, cursorId, cursorPosition);
+        }
+
+        internal void OnTextInput(string text)
+        {
+            TextInput?.Invoke(this, text);
+        }
+
+        internal void OnKeyDown(Interface.Events.Keys key, Interface.Events.KeyModifiers modifiers)
+        {
+            KeyDown?.Invoke(this, key, modifiers);
+        }
+
+        internal void OnKeyUp(Interface.Events.Keys key, Interface.Events.KeyModifiers modifiers)
+        {
+            KeyUp?.Invoke(this, key, modifiers);
         }
 
         internal virtual void OnResize(int width, int height)
@@ -244,6 +308,242 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             Resized?.Invoke(this, width, height);
         }
 
+        public void RenderWinScissor(IWin win)
+        {
+            GL.Enable(EnableCap.ScissorTest);
+            GL.Disable(EnableCap.DepthTest);
+            GL.DepthFunc(DepthFunction.Greater);
+
+            RenderWinScissor(win, Vector2.Zero, layer: 0);
+
+            Dumper.DumpWhenRequested(@"D:\Projects\Output\OpenBreed\Dumps", "dmp");
+        }
+
+        private void RenderWinScissor(IWin win, Vector2 origin, int layer)
+        {
+            PushMatrix();
+
+            Translate(win.Pos);
+
+            var newPos = origin + win.Pos;
+
+            var stencilFunction = layer > 0 ? StencilFunction.Lequal : StencilFunction.Always;
+
+
+
+
+            GL.StencilFunc(stencilFunction, layer, 0xff);
+            GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Incr);
+            DrawBoxMask(Vector2.Zero, win.Body.Inflated(win.Margin), 0);
+            GL.StencilMask(0x00);
+            GL.ColorMask(true, true, true, true);
+            DrawBox(Vector2.Zero, win.Body, win.BorderColor, win.ForegroundColor);
+            GL.ColorMask(false, false, false, false);
+            GL.StencilMask(0xff);
+
+
+
+            PopMatrix();
+        }
+
+        public void RenderWinStencil(IWin win)
+        {
+            GL.Disable(EnableCap.DepthTest);
+
+            //GL.DepthFunc(DepthFunction.Less);
+            GL.Enable(EnableCap.StencilTest);
+
+            var layer = 0;
+
+            RenderWinStencilEx(win, Vector2.Zero, ref layer);
+
+            Dumper.DumpWhenRequested(@"D:\Projects\Output\OpenBreed\Dumps", "dmp");
+
+
+            GL.Disable(EnableCap.StencilTest);
+        }
+
+        private void RenderWinStencilOrg(IWin win, Vector2 origin, int layer)
+        {
+            PushMatrix();
+
+            Translate(win.Pos);
+
+            var newPos = origin + win.Pos;
+
+            var stencilFunction = layer > 0 ? StencilFunction.Lequal : StencilFunction.Always;
+
+            GL.StencilFunc(stencilFunction, layer, 0xff);
+            GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Incr);
+            DrawBoxMask(Vector2.Zero, win.Body.Inflated(win.Margin), layer);
+            GL.StencilMask(0x00);
+            GL.ColorMask(true, true, true, true);
+            DrawBox(Vector2.Zero, win.Body, win.BorderColor, win.ForegroundColor);
+            GL.ColorMask(false, false, false, false);
+
+            GL.StencilMask(0xff);
+
+            layer++;
+
+            for (int i = 0; i < win.Childs.Count; i++)
+            {
+                var child = win.Childs[i];
+
+                RenderWinStencilOrg(child, newPos, layer);
+            }
+
+            PopMatrix();
+        }
+
+        private void RenderWinStencli(IWin win, Vector2 origin, ref int layer)
+        {
+            if (layer++ == 0)
+            {
+                GL.Enable(EnableCap.StencilTest);
+            }
+
+            PushMatrix();
+
+            Translate(win.Pos);
+
+            var newPos = origin + win.Pos;
+
+            GL.ColorMask(false, false, false, false);
+            GL.DepthMask(false);
+            GL.StencilFunc(StencilFunction.Always, layer, layer);
+            GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
+
+            DrawBoxMask(Vector2.Zero, win.Body.Inflated(win.Margin), 0);
+
+            GL.ColorMask(true, true, true, true);
+            GL.DepthMask(true);
+            GL.StencilFunc(StencilFunction.Equal, layer, layer);
+            GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
+
+            // Draw rectangle
+            DrawBox(Vector2.Zero, win.Body, win.BorderColor, win.ForegroundColor);
+
+            for (int i = 0; i < win.Childs.Count; i++)
+            {
+                var child = win.Childs[i];
+
+                RenderWinStencli(child, newPos, ref layer);
+            }
+
+            GL.ColorMask(false, false, false, false);
+            GL.DepthMask(false);
+            GL.StencilFunc(StencilFunction.Always, layer, layer);
+            GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
+
+            DrawBoxMask(Vector2.Zero, win.Body.Inflated(win.Margin), 0);
+
+            GL.ColorMask(true, true, true, true);
+            GL.DepthMask(true);
+
+            if (--layer == 0)
+                GL.Disable(EnableCap.StencilTest);
+
+
+            PopMatrix();
+        }
+
+
+        private void RenderWinStencilEx(IWin win, Vector2 origin, ref int layer)
+        {
+            layer++;
+
+            PushMatrix();
+
+            Translate(win.Pos);
+
+            var newPos = origin + win.Pos;
+
+            // Draw rectangle
+            DrawBox(Vector2.Zero, win.Body, win.BorderColor, win.ForegroundColor);
+
+
+            GL.ColorMask(false, false, false, false);
+            GL.DepthMask(false);
+            GL.StencilFunc(StencilFunction.Always, layer, layer);
+            GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
+
+            DrawBoxMask(Vector2.Zero, win.Body.Inflated(win.Margin), 0);
+
+            GL.ColorMask(true, true, true, true);
+            GL.DepthMask(true);
+            GL.StencilFunc(StencilFunction.Equal, layer, layer);
+            GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
+
+            for (int i = 0; i < win.Childs.Count; i++)
+            {
+                var child = win.Childs[i];
+
+                RenderWinStencilEx(child, newPos, ref layer);
+            }
+
+            GL.ColorMask(false, false, false, false);
+            GL.DepthMask(false);
+            GL.StencilFunc(StencilFunction.Always, layer, layer);
+            GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
+
+            DrawBoxMask(Vector2.Zero, win.Body.Inflated(win.Margin), 0);
+
+            GL.ColorMask(true, true, true, true);
+            GL.DepthMask(true);
+
+            PopMatrix();
+
+            layer--;
+
+        }
+
+        private void DrawBoxMask(Vector2 pos, Box2 box, int depth)
+        {
+            PushMatrix();
+            Translate(pos.X, pos.Y, depth);
+
+            //Write to depth buffer
+            Context.Primitives.DrawBox(this, box, Color4.White);
+
+            PopMatrix();
+        }
+
+        private void DrawBox(Vector2 pos, Box2 box, Color4 borderColor, Color4 foregroundColor)
+        {
+            var boxMargin = new Vector2(-5, -5);
+
+            PushMatrix();
+            Translate(pos.X, pos.Y, 0.0f);
+            Context.Primitives.DrawBox(this, box, borderColor);
+            Context.Primitives.DrawBox(this, box.Inflated(boxMargin), foregroundColor);
+
+            PopMatrix();
+        }
+
         #endregion Internal Methods
     }
+
+    public class Win : IWin
+    {
+        public Win(Box2 body, Vector2 margin, Color4 foreColor, Color4 backColor)
+        {
+            Body = body;
+            Margin = margin;
+            BorderColor = foreColor;
+            ForegroundColor = backColor;
+        }
+
+        public Box2 Body { get; }
+
+        public Vector2 Margin { get; }
+
+        public Color4 BorderColor { get; }
+
+        public Color4 ForegroundColor { get; }
+
+        public Vector2 Pos { get; set; }
+
+        public IList<IWin> Childs { get; } = new List<IWin>();
+    }
+
 }

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Gui.Abstractions.Elements;
+﻿using OpenBreed.Gui.Abstractions.Constants;
+using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK.Mathematics;
 using System;
@@ -17,14 +18,13 @@ namespace OpenBreed.Gui.Rendering
         {
             var box = element.LocalBox;
             var size = box.Size;
+            var font = element.Font;
 
             //view.Context.Primitives.DrawRectangle(
             //    view,
             //    new Vector2(element.CenterX, element.CenterY),
             //    new Vector2(element.Width, element.Height),
             //    Color4.Yellow);
-
-            var font = view.Context.Fonts.GetOSFont("Arial", 12);
 
             var viewBox = new Box2(view.Box.Min, view.Box.Max);
 

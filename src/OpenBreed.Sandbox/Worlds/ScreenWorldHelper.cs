@@ -90,12 +90,12 @@ namespace OpenBreed.Sandbox.Worlds
             var player1Entity = entityMan.Create($"Players/{player}");
 
             var playerInputs = new PlayerInputsComponent();
-            playerInputs.Up = Keys.Up;
-            playerInputs.Down =Keys.Down;
-            playerInputs.Left = Keys.Left;
-            playerInputs.Right = Keys.Right;
-            playerInputs.Fire = Keys.RightControl;
-            playerInputs.SwitchWeapon = Keys.PageDown;
+            playerInputs.Up = OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up;
+            playerInputs.Down = OpenTK.Windowing.GraphicsLibraryFramework.Keys.Down;
+            playerInputs.Left = OpenTK.Windowing.GraphicsLibraryFramework.Keys.Left;
+            playerInputs.Right = OpenTK.Windowing.GraphicsLibraryFramework.Keys.Right;
+            playerInputs.Fire = OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightControl;
+            playerInputs.SwitchWeapon = OpenTK.Windowing.GraphicsLibraryFramework.Keys.PageDown;
 
             player1Entity.Add(playerInputs);
             player1Entity.Add(new ControllerComponent());

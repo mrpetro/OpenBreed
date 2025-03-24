@@ -6,9 +6,25 @@ using System;
 
 namespace OpenBreed.Rendering.Interface.Managers
 {
-    public delegate void RenderDelegate(IRenderView view, Matrix4 transform, float dt);
+    public delegate void ViewRenderHandler(IRenderView view, Matrix4 transform, float dt);
 
-    public delegate void ResizeDelegate(IRenderView view, float width, float height);
+    public delegate void ViewResizeHandler(IRenderView view, float width, float height);
+
+    public delegate void ViewCursorWheelHandler(IRenderView view, int cursorId, Vector2i position, int wheelDelta);
+
+    public delegate void ViewCursorDownHandler(IRenderView view, int cursorId, Vector2i position, CursorKey cursorKey);
+
+    public delegate void ViewCursorUpHandler(IRenderView view, int cursorId, Vector2i position, CursorKey cursorKey);
+
+    public delegate void ViewCursorEnterHandler(IRenderView view, int cursorId, Vector2i position);
+
+    public delegate void ViewCursorLeaveHandler(IRenderView view, int cursorId, Vector2i position);
+
+    public delegate void ViewCursorMoveHandler(IRenderView view, int cursorId, Vector2i position);
+
+    public delegate void ViewTextInputHandler(IRenderView view, string text);
+
+    public delegate void ViewKeyboardKeyHandler(IRenderView view, Keys key, KeyModifiers modifiers);
 
     public enum MatrixMode
     {

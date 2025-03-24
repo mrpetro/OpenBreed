@@ -8,32 +8,6 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.Interface.Events
 {
-    /// <summary>
-    /// Cursor key names with their values.
-    /// </summary>
-    public enum CursorKey
-    {
-        /// <summary>
-        /// Left cursor key.
-        /// </summary>
-        Left = 0,
-        /// <summary>
-        /// Middle cursor key.
-        /// </summary>
-        Middle = 1,
-        /// <summary>
-        /// Right cursor key.
-        /// </summary>
-        Right = 2,
-        /// <summary>
-        /// First extended cursor key.
-        /// </summary>
-        XButton1 = 3,
-        /// <summary>
-        /// Second extended cursor key.
-        /// </summary>
-        XButton2 = 4
-    }
 
     /// <summary>
     /// Abstract cursor interaction on specific render view event.

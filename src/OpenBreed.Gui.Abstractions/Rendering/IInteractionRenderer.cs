@@ -10,6 +10,6 @@ namespace OpenBreed.Gui.Abstractions.Rendering
 {
     public interface IInteractionRenderer
     {
-        void Render(IInteractionCore interactionCore, IRenderView renderView);
+        void Render(IDesktop desktop, IRenderView view);
     }
 }

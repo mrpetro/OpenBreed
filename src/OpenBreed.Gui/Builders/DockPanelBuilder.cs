@@ -10,24 +10,23 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Builders
 {
-    internal class DockPanelBuilder : ContainerBuilder, IDockPanelBuilder
+    internal class DockPanelBuilder : ElementBuilder<IDockPanel>, IDockPanelBuilder
     {
         #region Public Constructors
 
-        public DockPanelBuilder(IElementBuilder parentBuilder)
-                    : base(parentBuilder)
+        public DockPanelBuilder()
         {
         }
 
         #endregion Public Constructors
 
-        #region Internal Methods
+        #region Public Methods
 
-        internal override Element InternalBuild()
+        public override IDockPanel Build()
         {
             return new DockPanel(this);
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
     }
 }

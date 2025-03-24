@@ -1,4 +1,4 @@
-﻿using OpenBreed.Gui.Abstractions.Elements;
+﻿using OpenBreed.Gui.Abstractions.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;

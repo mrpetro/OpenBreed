@@ -20,12 +20,8 @@ namespace OpenBreed.Gui.Elements
 
         #region Protected Constructors
 
-        protected Container(ContainerBuilder builder) : base(builder)
+        protected Container(ElementBuilder builder) : base(builder)
         {
-            foreach (var child in builder.ChildBuilders.Select(builder => builder.InternalBuild()))
-            {
-                child.SetParent(this);
-            }
         }
 
         #endregion Protected Constructors
@@ -66,9 +62,25 @@ namespace OpenBreed.Gui.Elements
             return true;
         }
 
-        #endregion Public Methods
+        public void AddChild(IElement child)
+        {
+            if (child is not Element internalElement)
+            {
+                throw new InvalidOperationException($"Expected element of type ({typeof(Element)}).");
+            }
 
-        #region Internal Methods
+            internalElement.SetParent(this);
+        }
+
+        public void RemoveChild(IElement child)
+        {
+            if (child is not Element internalElement)
+            {
+                throw new InvalidOperationException($"Expected child element of type ({typeof(Element)}).");
+            }
+
+            internalElement.SetParent(null);
+        }
 
         internal void AddChild(Element child)
         {
@@ -80,6 +92,6 @@ namespace OpenBreed.Gui.Elements
             return childs.Remove(child);
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
     }
 }

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Gui.Abstractions.Elements;
+using OpenBreed.Rendering.Interface.Events;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace OpenBreed.Gui.Abstractions.Builders
 {
@@ -15,11 +17,20 @@ namespace OpenBreed.Gui.Abstractions.Builders
         ParentNormalized
     }
 
+    public interface IElementBuilder<TElement> : IElementBuilder where TElement : IElement
+    {
+        #region Public Methods
+
+        TElement Build();
+
+        #endregion Public Methods
+    }
+
     public interface IElementBuilder
     {
         #region Public Methods
 
-        void SetClickCallback(Action<IElement> callback);
+        void SetClickCallback(Action<IElement, IInteractionCursor, CursorKey> callback);
 
         void SetEnterCallback(Action<IElement> callback);
 
@@ -54,8 +65,6 @@ namespace OpenBreed.Gui.Abstractions.Builders
         void SetHitTestable(bool flag);
 
         void SetMovable(bool flag);
-
-        IElement Build();
 
         #endregion Public Methods
     }

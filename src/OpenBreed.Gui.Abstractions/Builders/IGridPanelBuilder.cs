@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Abstractions.Builders
 {
-    public interface IGridPanelBuilder : IContainerBuilder
+    public interface IGridPanelBuilder : IElementBuilder
     {
         #region Public Methods
 

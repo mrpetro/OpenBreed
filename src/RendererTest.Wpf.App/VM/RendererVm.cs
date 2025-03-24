@@ -34,6 +34,7 @@ using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Extensions;
 using OpenBreed.Gui.Extensions;
 using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Constants;
 
 namespace RendererTest.Wpf.App.VM
 {
@@ -41,7 +42,7 @@ namespace RendererTest.Wpf.App.VM
     {
         private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
-        private readonly IInteractionCore interactionCore;
+        private readonly IInteractionFactory interactionFactory;
         private readonly IInteractionRenderer interactionRenderer;
 
         private bool checkboxTest;
@@ -79,48 +80,32 @@ namespace RendererTest.Wpf.App.VM
 
         public RendererVm(IEventsMan eventsMan, 
             ILogger logger,
-            IInteractionCore interactionCore,
+            IInteractionFactory interactionCore,
             IInteractionRenderer interactionRenderer,
             Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> renderContextProvider)
         {
             this.eventsMan = eventsMan;
             this.logger = logger;
-            this.interactionCore = interactionCore;
+            this.interactionFactory = interactionCore;
             this.interactionRenderer = interactionRenderer;
             this.renderContextProvider = renderContextProvider;
 
             InitFunc = OnInitialize;
-
-
-            cursorInput = interactionCore.CreateCursorInput();
-
-
-            eventsMan.Subscribe<ViewCursorMoveEvent>(OnCursorMove);
-            eventsMan.Subscribe<ViewCursorDownEvent>(OnCursorDown);
-            eventsMan.Subscribe<ViewCursorUpEvent>(OnCursorUp);
-            eventsMan.Subscribe<ViewCursorEnterEvent>(OnCursorEnter);
-            eventsMan.Subscribe<ViewCursorLeaveEvent>(OnCursorLeave);
-            eventsMan.Subscribe<ViewCursorWheelEvent>(OnCursorWheel);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-
-
-
         public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc { get; }
-
-        private readonly ICursorInputHandler cursorInput;
 
         #endregion Public Properties
 
         #region Private Methods
 
-        private void CreateButtonCtrlTest(IContainerBuilder builder)
+        private IElement CreateButtonCtrlTest(IInteractionFactory factory)
         {
-            builder.AddDockPanel((builder) =>
+            return factory.CreateDockPanel((builder) =>
             {
                 builder.SetPosition(0.0f, 300.0f);
                 builder.SetSize(300, 300);
@@ -129,24 +114,24 @@ namespace RendererTest.Wpf.App.VM
 
                 builder.SetTag("ButtonTestPanel");
 
-                builder.AddDockPanel((builder) =>
+                factory.CreateDockPanel((builder) =>
                 {
                     builder.SetPosition(0.0f, 0.0f);
                     builder.SetSize(100, 50);
                     builder.SetMovable(true);
                     builder.SetMargin(0);
 
-                    builder.AddButton((builder) =>
+                    factory.CreateButton((builder) =>
                     {
                         builder.SetTag("Ok");
-                        builder.SetClickCallback((element) =>
+                        builder.SetClickCallback((element, cursor, key) =>
                         {
                             logger.LogTrace("Button '{ElementTag}' clicked.", element.Tag);
                         });
                         builder.SetDockMode(ElementDockMode.Fill);
                     });
 
-                    builder.AddLabel((builder) =>
+                    factory.CreateLabel((builder) =>
                     {
                         builder.SetHitTestable(false);
                         builder.SetHorizontalAlignment(HorizontalAlignment.Center);
@@ -158,9 +143,9 @@ namespace RendererTest.Wpf.App.VM
             });
         }
 
-        private void CreateCheckboxCtrlTest(IContainerBuilder builder)
+        private void CreateCheckboxCtrlTest(IInteractionFactory factory)
         {
-            builder.AddCheckbox((builder) =>
+            factory.CreateCheckbox((builder) =>
             {
                 builder.SetTag("MyCheckbox");
                 builder.SetPosition(300.0f, 0.0f);
@@ -170,7 +155,7 @@ namespace RendererTest.Wpf.App.VM
 
             });
 
-            builder.AddCheckbox((builder) =>
+            factory.CreateCheckbox((builder) =>
             {
                 builder.SetTag("MyCheckbox");
                 builder.SetPosition(300.0f, 40.0f);
@@ -181,15 +166,15 @@ namespace RendererTest.Wpf.App.VM
             });
         }
 
-        private static void CreateLabelCtrlTest(IContainerBuilder builder)
+        private static void CreateLabelCtrlTest(IInteractionFactory factory)
         {
-            builder.AddDockPanel((builder) =>
+            factory.CreateDockPanel((builder) =>
             {
                 builder.SetTag("LabelTest");
                 builder.SetSize(300, 300);
                 builder.SetPosition(-300.0f, 0.0f);
 
-                builder.AddLabel((builder) =>
+                factory.CreateLabel((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Left);
                     builder.SetVerticalAlignment(VerticalAlignment.Top);
@@ -198,7 +183,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                builder.AddLabel((builder) =>
+                factory.CreateLabel((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Center);
                     builder.SetVerticalAlignment(VerticalAlignment.Top);
@@ -207,7 +192,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                builder.AddLabel((builder) =>
+                factory.CreateLabel((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Right);
                     builder.SetVerticalAlignment(VerticalAlignment.Top);
@@ -216,7 +201,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                builder.AddLabel((builder) =>
+                factory.CreateLabel((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Left);
                     builder.SetVerticalAlignment(VerticalAlignment.Center);
@@ -225,7 +210,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                builder.AddLabel((builder) =>
+                factory.CreateLabel((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Center);
                     builder.SetVerticalAlignment(VerticalAlignment.Center);
@@ -234,7 +219,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                builder.AddLabel((builder) =>
+                factory.CreateLabel((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Right);
                     builder.SetVerticalAlignment(VerticalAlignment.Center);
@@ -243,7 +228,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                builder.AddLabel((builder) =>
+                factory.CreateLabel((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Left);
                     builder.SetVerticalAlignment(VerticalAlignment.Bottom);
@@ -252,7 +237,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                builder.AddLabel((builder) =>
+                factory.CreateLabel((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Center);
                     builder.SetVerticalAlignment(VerticalAlignment.Bottom);
@@ -261,7 +246,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                builder.AddLabel((builder) =>
+                factory.CreateLabel((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Right);
                     builder.SetVerticalAlignment(VerticalAlignment.Bottom);
@@ -276,20 +261,12 @@ namespace RendererTest.Wpf.App.VM
         {
             renderContext = renderContextProvider.Invoke(graphicsContext, hostCoordinateSystemConverter);
 
-            renderView = renderContext.CreateView(OnRender1, 0.0f, 0.0f, 1.0f, 1.0f);
+            renderView = renderContext.CreateView(0.0f, 0.0f, 1.0f, 1.0f);
 
 
-            var element = interactionCore.CreateDockPanel(builder =>
+            var element = interactionFactory.CreateDesktop(builder =>
             {
-                builder.SetTag("Form");
-                builder.SetPosition(0.0f, 0.0f);
-                builder.SetSize(900, 900);
-                builder.SetMovable(true);
-                builder.SetPadding(10);
-                builder.SetMargin(10);
-
-
-                builder.AddDockPanel(builder =>
+                interactionFactory.CreateDockPanel(builder =>
                 {
                     builder.SetTag("1");
                     builder.SetDockMode(ElementDockMode.Left);
@@ -298,9 +275,11 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetMovable(true);
                     builder.SetPadding(10);
                     builder.SetMargin(10);
+                    builder.SetClickCallback(ButtonClicked);
 
 
-                    builder.AddDockPanel(builder =>
+
+                    interactionFactory.CreateDockPanel(builder =>
                     {
                         builder.SetTag("2");
                         builder.SetDockMode(ElementDockMode.Left);
@@ -309,9 +288,11 @@ namespace RendererTest.Wpf.App.VM
                         builder.SetMovable(true);
                         builder.SetPadding(10);
                         builder.SetMargin(10);
+                        builder.SetClickCallback(ButtonClicked);
 
 
-                        builder.AddDockPanel(builder =>
+
+                        interactionFactory.CreateDockPanel(builder =>
                         {
                             builder.SetTag("3");
                             builder.SetDockMode(ElementDockMode.Left);
@@ -320,13 +301,15 @@ namespace RendererTest.Wpf.App.VM
                             builder.SetMovable(true);
                             builder.SetPadding(10);
                             builder.SetMargin(10);
+                            builder.SetClickCallback(ButtonClicked);
+
                         });
 
                     });
                 });
 
 
-                builder.AddDockPanel(builder =>
+                interactionFactory.CreateDockPanel(builder =>
                 {
                     builder.SetTag("4");
                     builder.SetDockMode(ElementDockMode.Fill);
@@ -335,8 +318,10 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetMovable(true);
                     builder.SetPadding(10);
                     builder.SetMargin(10);
+                    builder.SetClickCallback(ButtonClicked);
 
-                    builder.AddDockPanel(builder =>
+
+                    interactionFactory.CreateDockPanel(builder =>
                     {
                         builder.SetTag("5");
                         builder.SetDockMode(ElementDockMode.Left);
@@ -345,9 +330,11 @@ namespace RendererTest.Wpf.App.VM
                         builder.SetMovable(true);
                         builder.SetPadding(10);
                         builder.SetMargin(10);
+                        builder.SetClickCallback(ButtonClicked);
+
                     });
 
-                    builder.AddDockPanel(builder =>
+                    interactionFactory.CreateDockPanel(builder =>
                     {
                         builder.SetTag("6");
                         builder.SetDockMode(ElementDockMode.Fill);
@@ -356,6 +343,8 @@ namespace RendererTest.Wpf.App.VM
                         builder.SetMovable(true);
                         builder.SetPadding(10);
                         builder.SetMargin(10);
+                        builder.SetClickCallback(ButtonClicked);
+
                     });
 
 
@@ -369,16 +358,14 @@ namespace RendererTest.Wpf.App.VM
 
                 //CreateLabelCtrlTest(builder);
 
-            }).Build();
-
-            interactionCore.Root = element;
+            });
 
             return renderContext;
         }
 
-        private static void CreateGridPanelTest(IDockPanelBuilder builder)
+        private static IElement CreateGridPanelTest(IInteractionFactory factory)
         {
-            var element = builder.AddGridPanel(builder =>
+            return factory.CreateGridPanel(builder =>
             {
                 builder.SetMargin(5);
 
@@ -398,7 +385,7 @@ namespace RendererTest.Wpf.App.VM
 
                 builder.SetMovable(true);
 
-                builder.AddButton((builder) =>
+                factory.CreateButton((builder) =>
                 {
                     builder.SetMovable(true);
 
@@ -418,7 +405,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetGridPosition(2, 0);
                 });
 
-                builder.AddButton((builder) =>
+                factory.CreateButton((builder) =>
                 {
                     builder.SetMargin(5);
 
@@ -440,7 +427,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetGridPosition(1, 0);
                 });
 
-                builder.AddButton((builder) =>
+                factory.CreateButton((builder) =>
                 {
                     builder.SetMargin(5);
 
@@ -463,7 +450,7 @@ namespace RendererTest.Wpf.App.VM
                 });
 
 
-                builder.AddButton((builder) =>
+                factory.CreateButton((builder) =>
                 {
                     builder.SetMovable(true);
 
@@ -483,7 +470,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetGridPosition(2, 1);
                 });
 
-                builder.AddButton((builder) =>
+                factory.CreateButton((builder) =>
                 {
                     builder.SetMovable(true);
 
@@ -503,7 +490,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetGridPosition(1, 1);
                 });
 
-                builder.AddButton((builder) =>
+                factory.CreateButton((builder) =>
                 {
                     builder.SetMovable(true);
 
@@ -524,7 +511,7 @@ namespace RendererTest.Wpf.App.VM
                 });
 
 
-                builder.AddButton((builder) =>
+                factory.CreateButton((builder) =>
                 {
                     builder.SetMovable(true);
 
@@ -544,7 +531,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetGridPosition(2, 2);
                 });
 
-                builder.AddButton((builder) =>
+                factory.CreateButton((builder) =>
                 {
                     builder.SetMovable(true);
 
@@ -564,7 +551,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetGridPosition(1, 2);
                 });
 
-                builder.AddButton((builder) =>
+                factory.CreateButton((builder) =>
                 {
                     builder.SetMovable(true);
 
@@ -589,138 +576,11 @@ namespace RendererTest.Wpf.App.VM
             });
         }
 
-        private void ButtonClicked(IElement interactiveElement)
+        private void ButtonClicked(IElement interactiveElement, IInteractionCursor cursor, CursorKey cursorKey)
         {
+
+
             Debug.WriteLine($"Interactive element '{interactiveElement.Tag}' clicked.");
-        }
-
-        private void OnCursorMove(ViewCursorMoveEvent e)
-        {
-            if (e.View.Context != renderContext)
-            {
-                return;
-            }
-
-            cursorView = e.View;
-
-            cursorDelta = e.Position - cursorPos;
-            cursorPos = e.Position;
-
-            if (cursorScroll)
-            {
-                e.View.View *= Matrix4.CreateTranslation(cursorDelta.X, cursorDelta.Y, 0.0f);
-            }
-
-            var cPos = e.View.GetViewToWorldCoords(cursorPos);
-            cursorInput.Move(e.CursorId, new Vector2(cPos.X, cPos.Y));
-            //interactionCore.Move(e.CursorId, cPos.X, cPos.Y);
-        }
-
-        private void OnCursorDown(ViewCursorDownEvent e)
-        {
-            if (e.View.Context != renderContext)
-            {
-                return;
-            }
-
-            var cPos = e.View.GetViewToWorldCoords(cursorPos);
-
-            cursorInput.Down(e.CursorId, e.Key);
-            //interactionCore.Down(e.CursorId, cPos.X, cPos.Y, e.Key);
-
-            if (e.Key == CursorKey.Right)
-            {
-                cursorScroll = true;
-            }
-        }
-
-        private void OnCursorEnter(ViewCursorEnterEvent e)
-        {
-            if (e.View.Context != renderContext)
-            {
-                return;
-            }
-
-            cursorInput.Enter(e.CursorId);
-
-            var cPos = e.View.GetViewToWorldCoords(cursorPos);
-
-            //interactionCore.Enter(e.CursorId, cPos.X, cPos.Y);
-
-        }
-
-        private void OnCursorWheel(ViewCursorWheelEvent e)
-        {
-            if (e.View.Context != renderContext)
-            {
-                return;
-            }
-
-            cursorInput.Wheel(e.CursorId, e.WheelDelta);
-
-            var cPos = e.View.GetViewToWorldCoords(cursorPos);
-            //interactionCore.Wheel(e.CursorId, cPos.X, cPos.Y, e.WheelDelta);
-        }
-
-        private void OnCursorLeave(ViewCursorLeaveEvent e)
-        {
-            if (e.View.Context != renderContext)
-            {
-                return;
-            }
-
-            cursorInput.Leave(e.CursorId);
-
-            //interactionCore.Leave(e.CursorId);
-        }
-
-        private void OnCursorUp(ViewCursorUpEvent e)
-        {
-            if (e.View.Context != renderContext)
-            {
-                return;
-            }
-
-            var cPos = e.View.GetViewToWorldCoords(cursorPos);
-            cursorInput.Up(e.CursorId, e.Key);
-
-            //interactionCore.Up(e.CursorId, cPos.X, cPos.Y, e.Key);
-
-            if (e.Key == CursorKey.Right)
-            {
-                cursorScroll = false;
-            }
-        }
-
-        private void DrawCursor(IRenderView view, float dt)
-        {
-            var cPos = view.GetViewToWorldCoords(cursorPos);
-            var cSize = 10;
-            view.Context.Primitives.DrawCircle(view, new Vector2(cPos.X, cPos.Y), cSize, Color4.Red, filled: false);
-            view.Context.Primitives.DrawPoint(view, new Vector2(cPos.X, cPos.Y), Color4.Red, PointType.Cross, cSize);
-            view.Context.Fonts.Render(view, new Box2(view.Box.Min, view.Box.Max), RenderTexts);
-        }
-
-        private void OnRender1(IRenderView view, Matrix4 transform, float dt)
-        {
-            interactionRenderer.Render(interactionCore, view);
-
-            if (cursorView == view)
-            {
-                DrawCursor(view, dt);
-            }
-        }
-
-
-        private void RenderTexts(IRenderView view, Box2 clipBox)
-        {
-            var cPos = view.GetViewToWorldCoords(cursorPos);
-
-            var font = view.Context.Fonts.GetOSFont("ARIAL", 12);
-
-            view.Context.Fonts.RenderStart(view, new Vector2(cPos.X, cPos.Y));
-            view.Context.Fonts.RenderPart(view, font.Id, $"({cPos.X},{cPos.Y})", Vector2.Zero, Color4.Green, 100, clipBox);
-            view.Context.Fonts.RenderEnd(view);
         }
 
         #endregion Private Methods

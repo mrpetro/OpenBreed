@@ -10,16 +10,86 @@ namespace OpenBreed.Rendering.Interface.Managers
 {
     public delegate Vector2i HostCoordinateSystemConverter(Vector2i point);
 
+    public interface IWin
+    {
+        Box2 Body { get; }
+
+        Vector2 Margin { get; }
+
+        Color4 BorderColor { get; }
+
+        Color4 ForegroundColor { get; }
+
+        Vector2 Pos { get; set; }
+
+        IList<IWin> Childs { get; }
+    }
+
     public interface IRenderView
     {
         #region Public Events
 
-        public event ResizeDelegate Resized;
+        /// <summary>
+        /// 
+        /// </summary>
+        event ViewResizeHandler Resized;
+
+        /// <summary>
+        /// Event occuring during view rendering.
+        /// </summary>
+        event ViewRenderHandler Rendering;
+
+        /// <summary>
+        /// Event occurs when cursor enters view area.
+        /// </summary>
+        event ViewCursorEnterHandler CursorEnter;
+
+        /// <summary>
+        /// Event occurs when cursor leaves view area.
+        /// </summary>
+        event ViewCursorLeaveHandler CursorLeave;
+
+        /// <summary>
+        /// Event occurs when cursor button is pressed on view area.
+        /// </summary>
+        event ViewCursorDownHandler CursorDown;
+
+        /// <summary>
+        /// Event occurs when cursor button is released on view area.
+        /// </summary>
+        event ViewCursorUpHandler CursorUp;
+
+        /// <summary>
+        /// Event occurs when cursor is moved on view area.
+        /// </summary>
+        event ViewCursorMoveHandler CursorMove;
+
+        /// <summary>
+        /// Event occurs when cursor wheel is changing on view area.
+        /// </summary>
+        event ViewCursorWheelHandler CursorWheel;
+
+        /// <summary>
+        /// Event occurs when text is being inputed.
+        /// </summary>
+        event ViewTextInputHandler TextInput;
+
+        /// <summary>
+        /// Event occurs when keyboard key is being pressed.
+        /// </summary>
+        event ViewKeyboardKeyHandler KeyDown;
+
+        /// <summary>
+        /// Event occurs when keyboard key is being released.
+        /// </summary>
+        event ViewKeyboardKeyHandler KeyUp;
+
 
         #endregion Public Events
 
         #region Public Properties
 
+        int Id { get; }
         Box2i Box { get; }
         Matrix4 View { get; set; }
         Matrix4 Projection { get; }
@@ -31,7 +101,7 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// </summary>
         IRenderContext Context { get; }
 
-        ResizeDelegate Resizer { get; set; }
+        ViewResizeHandler Resizer { get; set; }
 
         #endregion Public Properties
 
@@ -65,7 +135,6 @@ namespace OpenBreed.Rendering.Interface.Managers
 
         void SetProjection(Matrix4 matrix4);
 
-
         Vector4 GetViewToWorldCoords(Vector2i point);
         Vector2i GetWorldToViewCoords(Vector2 point);
         Box2 GetViewToWorldCoords(Box2i box);
@@ -84,6 +153,10 @@ namespace OpenBreed.Rendering.Interface.Managers
         void DisableAlpha();
 
         void Reset();
+
+        void RenderWinScissor(IWin win);
+        void RenderWinStencil(IWin win);
+
 
         #endregion Public Methods
     }

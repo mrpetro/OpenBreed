@@ -38,7 +38,11 @@ namespace OpenBreed.Input.Interface
 
         bool IsMousePressed { get; }
 
+        bool IsLeftMousePressed { get; }
+
         bool IsRightMousePressed { get; }
+
+        bool IsMiddleMousePressed { get; }
 
         #endregion Public Properties
 

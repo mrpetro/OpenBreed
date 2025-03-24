@@ -17,6 +17,15 @@ namespace OpenBreed.Common.Extensions
     {
         #region Public Methods
 
+        public static void ConfigureLogConsolePrinter(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<LogConsolePrinter>();
+                services.AddHostedService<LogConsolePrinter>();
+            });
+        }
+
         public static void SetupDataHandlers(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>

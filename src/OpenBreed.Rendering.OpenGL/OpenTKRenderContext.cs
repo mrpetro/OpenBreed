@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface;
@@ -15,6 +16,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace OpenBreed.Rendering.OpenGL
@@ -27,7 +29,7 @@ namespace OpenBreed.Rendering.OpenGL
         private readonly HostCoordinateSystemConverter hostCoordinateSystemConverter;
         private readonly ILogger logger;
         private readonly IEventsMan eventsMan;
-        private readonly List<RenderView> views = new List<RenderView>();
+        private readonly IdMap<RenderView> views = new IdMap<RenderView>();
 
         #endregion Private Fields
 
@@ -77,9 +79,12 @@ namespace OpenBreed.Rendering.OpenGL
 
         #region Public Methods
 
-        public IRenderView CreateView(RenderDelegate viewRenderer, float minX = 0, float minY = 0, float maxX = 1, float maxY = 1)
+        public IRenderView CreateView(float minX = 0, float minY = 0, float maxX = 1, float maxY = 1)
         {
-            var renderView = new RenderView(this, hostCoordinateSystemConverter, viewRenderer, new Box2(new Vector2(minX, minY), new Vector2(maxX, maxY)));
+            var newId = views.NewId();
+
+            var renderView = new RenderView(this, hostCoordinateSystemConverter, new Box2(new Vector2(minX, minY), new Vector2(maxX, maxY)), newId);
+
             views.Add(renderView);
             renderView.Reset();
             return renderView;
@@ -93,6 +98,8 @@ namespace OpenBreed.Rendering.OpenGL
             }
 
             point = view.GetHostToViewCoords(point);
+
+            view.OnCursorDown(cursorId, point, cursorKey);
             eventsMan.Raise(new ViewCursorDownEvent(view, cursorId, point, cursorKey));
         }
 
@@ -104,7 +111,25 @@ namespace OpenBreed.Rendering.OpenGL
             }
 
             point = view.GetHostToViewCoords(point);
+
+            view.OnCursorUp(cursorId, point, cursorKey);
             eventsMan.Raise(new ViewCursorUpEvent(view, cursorId, point, cursorKey));
+        }
+
+        public void KeyDown(Interface.Events.Keys key, Interface.Events.KeyModifiers modifiers)
+        {
+            foreach (var view in views.Items)
+            {
+                view.OnKeyDown(key, modifiers);
+            }
+        }
+
+        public void KeyUp(Interface.Events.Keys key, Interface.Events.KeyModifiers modifiers)
+        {
+            foreach (var view in views.Items)
+            {
+                view.OnKeyUp(key, modifiers);
+            }
         }
 
         public void CursorEnter(int cursorId, Vector2i point)
@@ -115,6 +140,8 @@ namespace OpenBreed.Rendering.OpenGL
             }
 
             point = view.GetHostToViewCoords(point);
+
+            view.OnCursorEnter(cursorId, point);
             eventsMan.Raise(new ViewCursorEnterEvent(view, cursorId, point));
         }
 
@@ -124,6 +151,11 @@ namespace OpenBreed.Rendering.OpenGL
             {
                 return;
             }
+
+            point = view.GetHostToViewCoords(point);
+
+            view.OnCursorLeave(cursorId, point);
+            eventsMan.Raise(new ViewCursorLeaveEvent(view, cursorId, point));
         }
 
         public void CursorMove(int cursorId, Vector2i point)
@@ -134,6 +166,8 @@ namespace OpenBreed.Rendering.OpenGL
             }
 
             point = view.GetHostToViewCoords(point);
+
+            view.OnCursorMove(cursorId, point);
             eventsMan.Raise(new ViewCursorMoveEvent(view, cursorId, point));
         }
 
@@ -145,30 +179,38 @@ namespace OpenBreed.Rendering.OpenGL
             }
 
             point = view.GetHostToViewCoords(point);
+
+            view.OnCursorWheel(cursorId, point, wheelDelta);
             eventsMan.Raise(new ViewCursorWheelEvent(view, cursorId, point, wheelDelta));
         }
 
         public void Render(float dt)
         {
+            GL.ClearDepth(1.0);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
-            foreach (var view in views)
+            foreach (var view in views.Items)
             {
                 view.OnRender(dt);
             }
         }
 
+        public void TextInput(string text)
+        {
+            foreach (var view in views.Items)
+            {
+                view.OnTextInput(text);
+            }
+        }
+
         public void Initialize()
         {
-
-
-
             eventsMan.Raise(new RenderContextInitializedEvent(this));
         }
 
         public void Resize(int width, int height)
         {
-            foreach (var view in views)
+            foreach (var view in views.Items)
             {
                 view.OnResize(width, height);
             }
@@ -180,7 +222,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         private bool TryGetView(Vector2i point, out RenderView view)
         {
-            view = views.FirstOrDefault(v => v.Box.ContainsInclusive(point));
+            view = views.Items.FirstOrDefault(v => v.Box.ContainsInclusive(point));
             return view is not null;
         }
 

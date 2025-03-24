@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Sandbox.Managers
+namespace OpenBreed.Common.Services
 {
     public class LogConsolePrinter : IHostedService
     {

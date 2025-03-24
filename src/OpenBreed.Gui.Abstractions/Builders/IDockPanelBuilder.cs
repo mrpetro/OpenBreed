@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Abstractions.Builders
 {
-    public interface IDockPanelBuilder : IContainerBuilder
+    public interface IDockPanelBuilder : IElementBuilder
     {
     }
 }
