@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Gui.Abstractions.Builders;
 using OpenBreed.Gui.Abstractions.Constants;
+using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Elements;
 using OpenBreed.Rendering.Interface;
@@ -30,7 +31,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public TextBoxBuilder(IFontMan fontMan)
+        public TextBoxBuilder(IElementInputHandler<ITextBox> inputHandler, IFontMan fontMan) : base(inputHandler)
         {
             this.fontMan = fontMan;
         }

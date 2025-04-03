@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Presentations;
 using OpenBreed.Rendering.Interface.Events;
 using OpenTK.Mathematics;
@@ -51,6 +52,8 @@ namespace OpenBreed.Gui.Abstractions.Elements
         Vector2 MaximumSize { get; }
         IElementSize Size { get; }
 
+        IElementInputHandler InputHandler { get; }
+
         Box2 LocalBox { get; }
         Box2 ActualBox { get; }
 
@@ -73,27 +76,31 @@ namespace OpenBreed.Gui.Abstractions.Elements
 
         void Resize(Vector2 newSize);
 
+        /// <summary>
+        /// Focus on this element.
+        /// </summary>
+        void Focus();
+
+        /// <summary>
+        /// Click this element with given cursor.
+        /// </summary>
+        /// <param name="cursor">Clicking cursor.</param>
+        /// <param name="cursorKey">Clicking cursor key.</param>
+        void Click(IInteractionCursor cursor, CursorKey cursorKey);
+
+        /// <summary>
+        /// Enter this element with given cursor.
+        /// </summary>
+        /// <param name="cursor">Entering cursor.</param>
+        void Enter(IInteractionCursor cursor);
+
+        /// <summary>
+        /// Leave this element with given cursor.
+        /// </summary>
+        /// <param name="cursor">Leaving cursor.</param>
+        void Leave(IInteractionCursor cursor);
+
         void ResizeBy(Vector2 offset, ElementResizeAnchor anchor);
-
-        void OnCursorMove(IInteractionCursor cursor);
-
-        void OnCursorWheel(IInteractionCursor cursor);
-
-        void OnCursorEnter(IInteractionCursor cursor);
-
-        void OnCursorLeave(IInteractionCursor cursor);
-
-        void OnCursorClick(IInteractionCursor cursor, CursorKey cursorKey);
-
-        void OnCursorDown(IInteractionCursor cursor, CursorKey cursorKey);
-
-        void OnCursorUp(IInteractionCursor cursor, CursorKey cursorKey);
-
-        void OnKeyboardTextInput(string text);
-
-        void OnKeyboardKeyDown(Keys key, KeyModifiers modifiers);
-
-        void OnKeyboardKeyUp(Keys key, KeyModifiers modifiers);
 
         bool HitTest(Vector2 point, out IElement? interactiveElement);
 

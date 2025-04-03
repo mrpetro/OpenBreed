@@ -1,4 +1,5 @@
-﻿using OpenBreed.Gui.Abstractions;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Extensions;
 using OpenBreed.Gui.Builders;
@@ -12,6 +13,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace OpenBreed.Gui.Elements
 {
+
     internal class TextBox : Element, ITextBox
     {
         #region Private Fields
@@ -28,12 +30,14 @@ namespace OpenBreed.Gui.Elements
             Font = builder.GetFont();
             Pointer = new TextPointer(this);
 
-            Insert(builder.Text);
+            InsertAt(builder.Text, Pointer.ColumnIndex, Pointer.LineIndex);
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
+
+        public Vector2 ScrollPosition { get; private set; }
 
         public ITextPointer Pointer { get; }
 
@@ -49,6 +53,39 @@ namespace OpenBreed.Gui.Elements
         {
             var characterIndex = GetCharacterIndex(columnIndex, lineIndex);
             return characters[characterIndex];
+        }
+
+        public IEnumerable<char> GetCharacters(int lineIndex)
+        {
+            var startIndex = lines[lineIndex];
+            var endIndex = lineIndex == lines.Count - 1 ? characters.Count : lines[lineIndex + 1];
+
+            for (int i = startIndex; i < endIndex; i++)
+            {
+                yield return characters[i];
+            }
+        }
+
+        public IReadOnlyList<float> GetCharacterPositions(int lineIndex)
+        {
+            var xPositions = new List<float>();
+
+            var lineCharacters = GetCharacters(lineIndex).ToArray();
+            var textPLength = 0.0f;
+
+            for (int i = 0; i < lineCharacters.Length; i++)
+            {
+                var ch = lineCharacters[i];
+                var chWidth = Font.GetWidth(ch);
+
+                xPositions.Insert(i, textPLength);
+
+                textPLength += chWidth;
+            }
+
+            xPositions.Insert(lineCharacters.Length, textPLength);
+
+            return xPositions;
         }
 
         public int GetCharacterIndex(int columnIndex, int lineIndex)
@@ -69,41 +106,48 @@ namespace OpenBreed.Gui.Elements
         {
             for (int lineIndex = 0; lineIndex < lines.Count; lineIndex++)
             {
-                var lineCharacters = GetLineCharacters(lineIndex);
+                var lineCharacters = GetCharacters(lineIndex);
 
                 action.Invoke(lineIndex, lineCharacters);
             }
         }
 
-        public IEnumerable<char> GetLineCharacters(int lineIndex)
+        public Vector2i GetIndexPosition(Vector2 position)
         {
-            var startIndex = lines[lineIndex];
-            var endIndex = lineIndex == lines.Count - 1 ? characters.Count : lines[lineIndex + 1];
+            var startPos = this.StartPos();
 
-            for (int i = startIndex; i < endIndex; i++)
+            position -= startPos;
+
+            var lineIndex = (int)((Font.Height - position.Y) / Font.Height);
+
+            if (lineIndex >= this.lines.Count)
             {
-                yield return characters[i];
+                lineIndex = this.lines.Count - 1;
             }
+
+            var lineCharacters = GetCharacters(lineIndex).ToArray();
+            var lineXPositions = GetCharacterPositions(lineIndex);
+
+            for (int i = 0; i < lineCharacters.Length; i++)
+            {
+                var chWidth = Font.GetWidth(lineCharacters[i]);
+
+                if (position.X < lineXPositions[i] + chWidth / 2.0f)
+                {
+                    return new Vector2i(i, lineIndex);
+                }
+            }
+
+            return new Vector2i(lineXPositions.Count - 1, lineIndex);
         }
 
-        public float GetPointerXPosition()
+        public void Input(string text)
         {
-            var xPositions = GetXPositions(Pointer.LineIndex);
-
-            if (xPositions.Count == 0)
-            {
-                return 0.0f;
-            }
-
-            if (Pointer.ColumnIndex == -1)
-            {
-                return xPositions.Last();
-            }
-
-            return xPositions[Pointer.ColumnIndex];
+            InsertAt(text, Pointer.ColumnIndex, Pointer.LineIndex);
+            Pointer.MoveForward();
         }
 
-        public void OnBackspace()
+        public void Remove()
         {
             var characterIndex = GetCharacterIndex(Pointer.ColumnIndex, Pointer.LineIndex) - 1;
 
@@ -136,149 +180,9 @@ namespace OpenBreed.Gui.Elements
             RemoveAt(charactersCount, columnIndex, lineIndex);
         }
 
-        public void Insert(string text)
-        {
-            InsertAt(text, Pointer.ColumnIndex, Pointer.LineIndex);
-        }
-
-        public Vector2i GetIndexPosition(Vector2 position)
-        {
-            var startPos = this.StartPos();
-
-            position -= startPos;
-
-            var lineIndex = (int)((Font.Height - position.Y) / Font.Height);
-
-            if (lineIndex >= this.lines.Count)
-            {
-                lineIndex = this.lines.Count - 1;
-            }
-
-            var lineCharacters = GetLineCharacters(lineIndex).ToArray();
-            var lineXPositions = GetXPositions(lineIndex);
-
-            for (int i = 0; i < lineCharacters.Length; i++)
-            {
-                var chWidth = Font.GetWidth(lineCharacters[i]);
-
-                if (position.X < lineXPositions[i] + chWidth / 2.0f)
-                {
-                    return new Vector2i(i, lineIndex);
-                }
-            }
-
-            return new Vector2i(lineXPositions.Count - 1, lineIndex);
-        }
-
-        public override void OnKeyboardTextInput(string text)
-        {
-            Insert(text);
-            Pointer.MoveForward();
-
-            base.OnKeyboardTextInput(text);
-        }
-
-
-
-        public override void OnKeyboardKeyDown(Keys key, KeyModifiers modifiers)
-        {
-            switch (key)
-            {
-                case Keys.Right:
-                    Pointer.MoveForward();
-                    break;
-
-                case Keys.Left:
-                    Pointer.MoveBack();
-                    break;
-
-                case Keys.Down:
-                    Pointer.MoveLineForward();
-                    break;
-
-                case Keys.Up:
-                    Pointer.MoveLineBack();
-                    break;
-
-                case Keys.Home:
-                    Pointer.MoveToLineBegin();
-                    break;
-
-                case Keys.End:
-                    Pointer.MoveToLineEnd();
-                    break;
-
-                case Keys.Enter:
-                    Pointer.NewLine();
-                    break;
-
-                case Keys.Backspace:
-                    OnBackspace();
-                    break;
-
-                default:
-                    break;
-            }
-
-            base.OnKeyboardKeyDown(key, modifiers);
-        }
-
-        public override void OnCursorClick(IInteractionCursor cursor, CursorKey cursorKey)
-        {
-            var desktop = GetDesktop();
-
-            desktop.SetFocus(this);
-
-            base.OnCursorClick(cursor, cursorKey);
-        }
-
-        public override void OnCursorDown(IInteractionCursor cursor, CursorKey cursorKey)
-        {
-            if (cursor.IsPressed(CursorKey.Left))
-            {
-                var cursorPos = cursor.GetPositionRelativeTo(this);
-                Pointer.SetIndexPosition(cursorPos);
-            }
-
-            base.OnCursorDown(cursor, cursorKey);
-        }
-
-        public override void OnCursorMove(IInteractionCursor cursor)
-        {
-            if (cursor.IsPressed(CursorKey.Left))
-            {
-                var cursorPos = cursor.GetPositionRelativeTo(this);
-                Pointer.SetIndexPosition(cursorPos);
-            }
-
-            base.OnCursorMove(cursor);
-        }
-
         #endregion Public Methods
 
         #region Private Methods
-
-        private List<float> GetXPositions(int lineIndex)
-        {
-            var xPositions = new List<float>();
-
-            var lineCharacters = GetLineCharacters(lineIndex).ToArray();
-            var textPLength = 0.0f;
-
-            for (int i = 0; i < lineCharacters.Length; i++)
-            {
-                var ch = lineCharacters[i];
-                var chWidth = Font.GetWidth(ch);
-
-                xPositions.Insert(i, textPLength);
-
-                textPLength += chWidth;
-            }
-
-            xPositions.Insert(lineCharacters.Length, textPLength);
-
-            return xPositions;
-        }
 
         private void InsertAt(string text, int columnIndex, int lineIndex)
         {

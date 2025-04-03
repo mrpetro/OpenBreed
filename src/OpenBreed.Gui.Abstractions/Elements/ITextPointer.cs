@@ -1,4 +1,5 @@
 ﻿using OpenTK.Mathematics;
+using System.Reflection;
 
 namespace OpenBreed.Gui.Abstractions.Elements
 {
@@ -7,6 +8,8 @@ namespace OpenBreed.Gui.Abstractions.Elements
         int LineIndex { get; }
         int ColumnIndex { get; }
         int ValidColumnIndex { get; }
+
+        float GetXPosition();
 
         bool Blink();
 
@@ -17,6 +20,5 @@ namespace OpenBreed.Gui.Abstractions.Elements
         void MoveToLineBegin();
         void MoveToLineEnd();
         void SetIndexPosition(Vector2 cursorPos);
-        void NewLine();
     }
 }

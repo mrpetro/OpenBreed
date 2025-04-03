@@ -7,5 +7,13 @@
         public bool IsPressed { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public void Press();
+
+        public void Release();
+
+        #endregion Public Methods
     }
 }

@@ -21,7 +21,9 @@
     <ProjectReference Include="..\OpenBreed.Gui.Abstractions\OpenBreed.Gui.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+	<InternalsVisibleTo Include="OpenBreed.Gui.Test" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
   </ItemGroup>

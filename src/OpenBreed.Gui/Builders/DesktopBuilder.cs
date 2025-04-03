@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Rendering;
 using OpenBreed.Gui.Elements;
@@ -17,7 +18,7 @@ namespace OpenBreed.Gui.Builders
     {
         #region Public Constructors
 
-        public DesktopBuilder(IInteractionRenderer interactionRenderer, ILogger logger, IRenderView renderView)
+        public DesktopBuilder(IElementInputHandler<IDesktop> inputHandler, IInteractionRenderer interactionRenderer, ILogger logger, IRenderView renderView) : base(inputHandler)
         {
             InteractionRenderer = interactionRenderer;
             Logger = logger;

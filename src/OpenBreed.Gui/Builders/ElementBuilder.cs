@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Elements;
 using OpenBreed.Rendering.Interface.Events;
@@ -17,6 +18,10 @@ namespace OpenBreed.Gui.Builders
 {
     internal abstract class ElementBuilder<TElement> : ElementBuilder, IElementBuilder<TElement> where TElement : IElement
     {
+        protected ElementBuilder(IElementInputHandler inputHandler) : base(inputHandler)
+        {
+        }
+
         #region Public Methods
 
         public abstract TElement Build();
@@ -28,24 +33,21 @@ namespace OpenBreed.Gui.Builders
     {
         #region Public Constructors
 
-        public ElementBuilder()
+        public ElementBuilder(IElementInputHandler inputHandler)
         {
+            InputHandler = inputHandler;
         }
 
         #endregion Public Constructors
 
         #region Internal Properties
 
+        internal IElementInputHandler InputHandler { get; }
         internal List<IElementOption> Options { get; } = new List<IElementOption>();
 
         internal PositionSystem PositionSystem { get; private set; }
         internal Action<IElement, IInteractionCursor, CursorKey> ClickCallback { get; private set; }
-        internal Action<IElement> EnterCallback { get; private set; }
-        internal Action<IElement> LeaveCallback { get; private set; }
         internal Action<IElement, Vector2> MoveCallback { get; private set; }
-        internal Action<IElement> DownCallback { get; private set; }
-        internal Action<IElement> UpCallback { get; private set; }
-        internal Action<IElement> WheelCallback { get; private set; }
         internal string Tag { get; private set; }
         internal Vector2 Size { get; private set; }
         internal Vector2 MinimumSize { get; private set; } = Vector2.One;
@@ -65,34 +67,9 @@ namespace OpenBreed.Gui.Builders
             ClickCallback = callback;
         }
 
-        public void SetEnterCallback(Action<IElement> callback)
-        {
-            EnterCallback = callback;
-        }
-
-        public void SetLeaveCallback(Action<IElement> callback)
-        {
-            LeaveCallback = callback;
-        }
-
         public void SetMoveCallback(Action<IElement, Vector2> callback)
         {
             MoveCallback = callback;
-        }
-
-        public void SetDownCallback(Action<IElement> callback)
-        {
-            DownCallback = callback;
-        }
-
-        public void SetUpCallback(Action<IElement> callback)
-        {
-            UpCallback = callback;
-        }
-
-        public void SetWheelCallback(Action<IElement> callback)
-        {
-            WheelCallback = callback;
         }
 
         public void SetPosition(float x, float y, PositionSystem positionSystem = PositionSystem.Parent)

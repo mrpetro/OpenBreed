@@ -21,7 +21,7 @@ namespace OpenBreed.Gui.Rendering
 
         private void RenderPointer(ITextBox element, IRenderView view, Box2 viewBox, OpenBreed.Rendering.Interface.IFont font)
         {
-            var cursorXPosition = element.GetPointerXPosition();
+            var cursorXPosition = element.Pointer.GetXPosition();
 
             var sp = new Vector2(cursorXPosition, font.Height / 2);
 
@@ -36,6 +36,7 @@ namespace OpenBreed.Gui.Rendering
             var box = element.LocalBox;
             var size = box.Size;
             var font = element.Font;
+            var textPos = element.StartPos();
 
             view.Context.Primitives.DrawRectangle(view, box, Color4.Yellow);
 
@@ -43,18 +44,25 @@ namespace OpenBreed.Gui.Rendering
 
             view.PushMatrix();
 
-            for (int lineIndex = 0; lineIndex < element.LinesCount; lineIndex++)
+            var d = box.Translated(textPos * new Vector2(-1.0f, 1.0f));
+
+
+            var startLineIndex = (int)(d.Min.Y / font.Height);
+            var endLineIndex = (int)(d.Max.Y / font.Height) + 2;
+            startLineIndex = Math.Max(0, startLineIndex);
+            endLineIndex = Math.Min(endLineIndex, element.LinesCount);
+
+            for (int lineIndex = startLineIndex; lineIndex < endLineIndex; lineIndex++)
             {
-                var chars = element.GetLineCharacters(lineIndex);
+                var chars = element.GetCharacters(lineIndex);
 
                 var text = new string(chars.ToArray());
-
-                var textPos = element.StartPos();
 
                 view.PushMatrix();
                 view.Translate(textPos);
 
-                font.Draw(view, text, Color4.White, viewBox, ignoreScale: true);
+               
+                font.Draw(view, text, Color4.White, d, ignoreScale: true);
 
                 if (lineIndex == element.Pointer.LineIndex)
                 {

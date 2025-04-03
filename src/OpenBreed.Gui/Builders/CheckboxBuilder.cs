@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Builders;
 using OpenBreed.Gui.Abstractions.Constants;
+using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Extensions;
 using OpenBreed.Gui.Elements;
@@ -26,7 +27,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public CheckboxBuilder(IInteractionFactory factory)
+        public CheckboxBuilder(IElementInputHandler<ICheckbox> inputHandler, IInteractionFactory factory) : base(inputHandler)
         {
             SetTag("Checkbox");
             SetSize(300, 40);

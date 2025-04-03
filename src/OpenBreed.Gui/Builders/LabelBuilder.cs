@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Gui.Abstractions.Builders;
 using OpenBreed.Gui.Abstractions.Constants;
+using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Elements;
 using OpenBreed.Rendering.Interface;
@@ -27,7 +28,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public LabelBuilder(IFontMan fontMan)
+        public LabelBuilder(IElementInputHandler<ILabel> inputHandler, IFontMan fontMan) : base(inputHandler)
         {
             this.fontMan = fontMan;
         }

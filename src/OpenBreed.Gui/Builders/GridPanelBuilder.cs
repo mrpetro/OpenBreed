@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Enums;
 using OpenBreed.Gui.Elements;
@@ -17,7 +18,7 @@ namespace OpenBreed.Gui.Builders
     {
         #region Public Constructors
 
-        public GridPanelBuilder()
+        public GridPanelBuilder(IElementInputHandler<IGridPanel> inputHandler) : base(inputHandler)
         {
         }
 

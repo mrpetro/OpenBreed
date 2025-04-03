@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Elements;
 using OpenTK.Mathematics;
@@ -16,7 +17,7 @@ namespace OpenBreed.Gui.Builders
     {
         #region Public Constructors
 
-        public StateboxBuilder()
+        public StateboxBuilder(IElementInputHandler inputHandler) : base(inputHandler)
         {
         }
 

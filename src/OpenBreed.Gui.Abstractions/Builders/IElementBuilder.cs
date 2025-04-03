@@ -32,15 +32,7 @@ namespace OpenBreed.Gui.Abstractions.Builders
 
         void SetClickCallback(Action<IElement, IInteractionCursor, CursorKey> callback);
 
-        void SetEnterCallback(Action<IElement> callback);
-
-        void SetLeaveCallback(Action<IElement> callback);
-
         void SetMoveCallback(Action<IElement, Vector2> callback);
-
-        void SetDownCallback(Action<IElement> callback);
-
-        void SetUpCallback(Action<IElement> callback);
 
         void SetPosition(float x, float y, PositionSystem positionSystem = PositionSystem.Parent);
 

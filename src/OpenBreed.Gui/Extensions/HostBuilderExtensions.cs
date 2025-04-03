@@ -2,8 +2,11 @@
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Controllers;
+using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Rendering;
 using OpenBreed.Gui.Builders;
+using OpenBreed.Gui.Controllers;
 using OpenBreed.Gui.Rendering;
 using System;
 using System.Collections.Generic;
@@ -19,6 +22,9 @@ namespace OpenBreed.Gui.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
+
+
+
                 services.AddSingleton<IInteractionFactoryProvider, InteractionFactoryProvider>();
                 services.AddTransient<IInteractionFactory, InteractionFactory>();
                 services.AddSingleton<IInteractionRenderer, InteractionRenderer>();
@@ -33,7 +39,17 @@ namespace OpenBreed.Gui.Extensions
 
 
                 services.AddTransient<DesktopBuilder>();
+                services.AddTransient<GridPanelBuilder>();
+                services.AddTransient<DockPanelBuilder>();
+                services.AddTransient<ButtonBuilder>();
+                services.AddTransient<LabelBuilder>();
+                services.AddTransient<TextBoxBuilder>();
+                services.AddTransient<CheckboxBuilder>();
 
+                services.AddSingleton<IElementInputHandler<IButton>, ButtonInputHandler>();
+                services.AddSingleton<IElementInputHandler<IGridPanel>, GridPanelInputHandler>();
+                services.AddSingleton<IElementInputHandler<ITextBox>, TextBoxInputHandler>();
+                services.AddSingleton<IElementInputHandler<IDesktop>, DesktopInputHandler>();
             });
         }
     }

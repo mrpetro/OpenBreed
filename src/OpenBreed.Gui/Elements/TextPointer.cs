@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Gui.Abstractions.Elements;
 using OpenTK.Mathematics;
+using System.Reflection;
 
 namespace OpenBreed.Gui.Elements
 {
@@ -35,6 +36,23 @@ namespace OpenBreed.Gui.Elements
         #endregion Public Properties
 
         #region Public Methods
+
+        public float GetXPosition()
+        {
+            var xPositions = owner.GetCharacterPositions(LineIndex);
+
+            if (xPositions.Count == 0)
+            {
+                return 0.0f;
+            }
+
+            if (ColumnIndex == -1)
+            {
+                return xPositions.Last();
+            }
+
+            return xPositions[ColumnIndex];
+        }
 
         public bool Blink()
         {
@@ -137,12 +155,6 @@ namespace OpenBreed.Gui.Elements
         {
             ColumnIndex = owner.GetLineLength(LineIndex);
             SkipPreviousNewLineCharacters();
-        }
-
-        public void NewLine()
-        {
-            owner.Insert(Environment.NewLine);
-            MoveForward();
         }
 
         public void SetIndexPosition(Vector2 cursorPos)

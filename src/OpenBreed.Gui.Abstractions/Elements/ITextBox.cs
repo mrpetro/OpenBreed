@@ -15,23 +15,34 @@ namespace OpenBreed.Gui.Abstractions.Elements
 
         int LinesCount { get; }
 
+        Vector2 ScrollPosition { get; }
+
         #endregion Public Properties
 
         #region Public Methods
-
-        float GetPointerXPosition();
 
         int GetLineLength(int lineIndex);
 
         char GetCharacter(int columnIndex, int lineIndex);
 
-        void Insert(string text);
+        /// <summary>
+        /// Remove character from current text box pointer position and advance pointer back.
+        /// </summary>
+        void Remove();
+
+        /// <summary>
+        /// Input text at current text box pointer position.
+        /// </summary>
+        /// <param name="text"></param>
+        void Input(string text);
 
         int GetCharacterIndex(int columnIndex, int lineIndex);
 
+        IReadOnlyList<float> GetCharacterPositions(int lineIndex);
+
         Vector2i GetIndexPosition(Vector2 position);
 
-        IEnumerable<char> GetLineCharacters(int lineIndex);
+        IEnumerable<char> GetCharacters(int lineIndex);
 
         #endregion Public Methods
     }

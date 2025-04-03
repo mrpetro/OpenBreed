@@ -31,21 +31,14 @@ namespace OpenBreed.Gui.Elements
 
         #region Public Methods
 
-        public override void OnCursorClick(IInteractionCursor cursor, CursorKey cursorKey)
-        {
-            base.OnCursorClick(cursor, cursorKey);
-        }
-
-        public override void OnCursorDown(IInteractionCursor cursor, CursorKey cursorKey)
+        public void Press()
         {
             IsPressed = true;
-            base.OnCursorDown(cursor, cursorKey);
         }
 
-        public override void OnCursorUp(IInteractionCursor cursor, CursorKey cursorKey)
+        public void Release()
         {
             IsPressed = false;
-            base.OnCursorUp(cursor, cursorKey);
         }
 
         #endregion Public Methods

@@ -126,6 +126,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 //view.Context.Primitives.DrawRectangle(view, new Vector2(offsetX + width / 2.0f, Height / 2.0f), new Vector2(width, Height), Color4.Aqua, filled: false);
 
                 charPosX += width * scaleCorrection;
+
+                if (charPosX > clipBox.Max.X)
+                {
+                    break;
+                }
             }
 
             GL.BindTexture(TextureTarget.Texture2D, 0);

@@ -1,21 +1,13 @@
-﻿using OpenBreed.Gui.Abstractions.Builders;
+﻿using OpenBreed.Core.Interface.Extensions;
+using OpenBreed.Gui.Abstractions;
+using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Controllers;
+using OpenBreed.Gui.Abstractions.Elements;
+using OpenBreed.Gui.Abstractions.Helpers;
+using OpenBreed.Gui.Abstractions.Presentations;
+using OpenBreed.Gui.Builders;
 using OpenBreed.Rendering.Interface.Events;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
-using OpenBreed.Core.Interface.Extensions;
-using OpenBreed.Gui.Abstractions.Helpers;
-using System.Drawing;
-using OpenBreed.Gui.Abstractions;
-using OpenBreed.Gui.Abstractions.Elements;
-using OpenBreed.Gui.Builders;
-using OpenBreed.Gui.Abstractions.Presentations;
 
 namespace OpenBreed.Gui.Elements
 {
@@ -24,12 +16,7 @@ namespace OpenBreed.Gui.Elements
         #region Protected Fields
 
         protected readonly Action<IElement, IInteractionCursor, CursorKey> clickCallback;
-        protected readonly Action<IElement> enterCallback;
-        protected readonly Action<IElement> leaveCallback;
         protected readonly Action<IElement, Vector2> moveCallback;
-        protected readonly Action<IElement> downCallback;
-        protected readonly Action<IElement> upCallback;
-        protected readonly Action<IElement> wheelCallback;
 
         #endregion Protected Fields
 
@@ -43,17 +30,13 @@ namespace OpenBreed.Gui.Elements
 
         protected Element(ElementBuilder builder)
         {
+            InputHandler = builder.InputHandler;
             Padding = builder.Padding;
             Margin = builder.Margin;
 
             Tag = builder.Tag;
             clickCallback = builder.ClickCallback;
-            enterCallback = builder.EnterCallback;
-            leaveCallback = builder.LeaveCallback;
             moveCallback = builder.MoveCallback;
-            downCallback = builder.DownCallback;
-            upCallback = builder.UpCallback;
-            wheelCallback = builder.WheelCallback;
 
             Position = new ElementPosition(builder.Position);
 
@@ -136,6 +119,8 @@ namespace OpenBreed.Gui.Elements
 
         public IElementPresentation Presentation => throw new NotImplementedException();
 
+        public IElementInputHandler InputHandler { get; }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -160,23 +145,18 @@ namespace OpenBreed.Gui.Elements
             return true;
         }
 
-        public virtual void OnCursorClick(IInteractionCursor cursor, CursorKey cursorKey)
+        public virtual void Click(IInteractionCursor cursor, CursorKey cursorKey)
         {
-            if (cursorKey == CursorKey.Left)
-            {
-                clickCallback?.Invoke(this, cursor, cursorKey);
-            }
+            clickCallback?.Invoke(this, cursor, cursorKey);
         }
 
-        public virtual void OnCursorEnter(IInteractionCursor cursor)
+        public void Enter(IInteractionCursor cursor)
         {
             IsHovered = true;
-            enterCallback?.Invoke(this);
         }
 
-        public virtual void OnCursorLeave(IInteractionCursor cursor)
+        public void Leave(IInteractionCursor cursor)
         {
-            leaveCallback?.Invoke(this);
             IsHovered = false;
         }
 
@@ -188,35 +168,10 @@ namespace OpenBreed.Gui.Elements
             OnMove(offset);
         }
 
-        public virtual void OnCursorMove(IInteractionCursor cursor)
+        public virtual void Focus()
         {
-        }
-
-        public virtual void OnKeyboardTextInput(string text)
-        {
-        }
-
-        public virtual void OnKeyboardKeyDown(Keys key, KeyModifiers modifiers)
-        {
-        }
-
-        public virtual void OnKeyboardKeyUp(Keys key, KeyModifiers modifiers)
-        {
-        }
-
-        public virtual void OnCursorDown(IInteractionCursor cursor, CursorKey cursorKey)
-        {
-            downCallback?.Invoke(this);
-        }
-
-        public virtual void OnCursorUp(IInteractionCursor cursor, CursorKey cursorKey)
-        {
-            upCallback?.Invoke(this);
-        }
-
-        public virtual void OnCursorWheel(IInteractionCursor cursor)
-        {
-            wheelCallback?.Invoke(this);
+            var desktop = GetDesktop();
+            desktop.SetFocus(this);
         }
 
         public IElement? GetAncestor(string tag)

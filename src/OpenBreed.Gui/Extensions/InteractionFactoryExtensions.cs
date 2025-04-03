@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Builders;
+using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Builders;
 using System;
@@ -19,9 +20,11 @@ namespace OpenBreed.Gui.Extensions
 
         public static ILabel CreateLabel(this IInteractionFactory factory, Action<ILabelBuilder> setter)
         {
+            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ILabel>>();
+
             var fontMan = factory.View.Context.Fonts;
 
-            var builder = new LabelBuilder(fontMan);
+            var builder = new LabelBuilder(inputHandler, fontMan);
 
             setter.Invoke(builder);
 
@@ -30,9 +33,11 @@ namespace OpenBreed.Gui.Extensions
 
         public static ITextBox CreateTextBox(this IInteractionFactory factory, Action<ITextBoxBuilder> setter)
         {
+            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ITextBox>>();
+
             var fontMan = factory.View.Context.Fonts;
 
-            var builder = new TextBoxBuilder(fontMan);
+            var builder = new TextBoxBuilder(inputHandler, fontMan);
 
             setter.Invoke(builder);
 
@@ -41,7 +46,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static ICheckboxBuilder CreateCheckbox(this IInteractionFactory factory, Action<ICheckboxBuilder> setter)
         {
-            var builder = new CheckboxBuilder(factory);
+            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ICheckbox>>();
+
+            var builder = new CheckboxBuilder(inputHandler, factory);
 
             setter.Invoke(builder);
 
@@ -50,7 +57,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static IDockPanel CreateDockPanel(this IInteractionFactory factory, Action<IDockPanelBuilder> setter)
         {
-            var builder = new DockPanelBuilder();
+            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ILabel>>();
+
+            var builder = new DockPanelBuilder(inputHandler);
 
             setter.Invoke(builder);
 
@@ -59,7 +68,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static IButton CreateButton(this IInteractionFactory factory, Action<IButtonBuilder> setter)
         {
-            var builder = new ButtonBuilder();
+            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<IButton>>();
+
+            var builder = new ButtonBuilder(inputHandler);
 
             setter.Invoke(builder);
 
@@ -68,7 +79,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static IStatebox CreateStatebox(this IInteractionFactory factory, Action<IStateboxBuilder> setter)
         {
-            var builder = new StateboxBuilder();
+            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ILabel>>();
+
+            var builder = new StateboxBuilder(inputHandler);
 
             setter.Invoke(builder);
 
@@ -77,7 +90,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static IGridPanel CreateGridPanel(this IInteractionFactory factory, Action<IGridPanelBuilder> setter)
         {
-            var builder = new GridPanelBuilder();
+            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<IGridPanel>>();
+
+            var builder = new GridPanelBuilder(inputHandler);
 
             setter.Invoke(builder);
 

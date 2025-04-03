@@ -49,7 +49,7 @@ namespace OpenBreed.Gui.Elements
 
         #region Public Methods
 
-        public override void OnCursorClick(IInteractionCursor cursor, CursorKey cursorKey)
+        public override void Click(IInteractionCursor cursor, CursorKey cursorKey)
         {
             IsChecked = !IsChecked;
 
@@ -58,19 +58,17 @@ namespace OpenBreed.Gui.Elements
                 isCheckedBinding.SetValue(IsChecked);
             }
 
-            base.OnCursorClick(cursor, cursorKey);
+            base.Click(cursor, cursorKey);
         }
 
-        public override void OnCursorDown(IInteractionCursor cursor, CursorKey cursorKey)
+        public void Press()
         {
             IsPressed = true;
-            base.OnCursorDown(cursor, cursorKey);
         }
 
-        public override void OnCursorUp(IInteractionCursor cursor, CursorKey cursorKey)
+        public void Release()
         {
             IsPressed = false;
-            base.OnCursorUp(cursor, cursorKey);
         }
 
         #endregion Public Methods
