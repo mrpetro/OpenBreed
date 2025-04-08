@@ -23,5 +23,15 @@ namespace OpenBreed.Gui.Abstractions.Extensions
 
             return topLeftPos + new Vector2(offsetX, offsetY);
         }
+
+        public static Box2 GetScrollBox(this ITextBox textBox)
+        {
+            var textPos = textBox.StartPos();
+
+            var scrollBox = textBox.LocalBox.Translated((textPos + textBox.ScrollPosition) * new Vector2(-1.0f, 1.0f));
+
+            return scrollBox;
+        }
+
     }
 }

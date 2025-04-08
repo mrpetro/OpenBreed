@@ -29,6 +29,7 @@ namespace OpenBreed.Gui.Controllers
 
         protected override void OnCursorDrag(ITextBox element, IInteractionCursor cursor)
         {
+            //element.ScrollPosition += cursor.PositionDelta;
         }
 
         protected override void OnCursorEnter(ITextBox element, IInteractionCursor cursor)

@@ -113,6 +113,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 var width = chData.Width;
                 var oX = chData.XOffset;
 
+                if (charPosX < clipBox.Min.X - width * scaleCorrection)
+                {
+                    charPosX += width * scaleCorrection;
+                    continue;
+                }
+
+                if (charPosX > clipBox.Max.X)
+                {
+                    break;
+                }
+
                 primitiveRenderer.DrawSprite(
                     view,
                     Texture,
@@ -121,16 +132,9 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                     Vector2.One,
                     color, ignoreScale);
 
-
                 //NOTE: Uncommect this to see character box
                 //view.Context.Primitives.DrawRectangle(view, new Vector2(offsetX + width / 2.0f, Height / 2.0f), new Vector2(width, Height), Color4.Aqua, filled: false);
-
                 charPosX += width * scaleCorrection;
-
-                if (charPosX > clipBox.Max.X)
-                {
-                    break;
-                }
             }
 
             GL.BindTexture(TextureTarget.Texture2D, 0);

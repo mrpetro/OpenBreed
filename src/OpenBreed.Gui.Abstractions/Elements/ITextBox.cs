@@ -15,7 +15,7 @@ namespace OpenBreed.Gui.Abstractions.Elements
 
         int LinesCount { get; }
 
-        Vector2 ScrollPosition { get; }
+        Vector2 ScrollPosition { get; set; }
 
         #endregion Public Properties
 

@@ -23,6 +23,16 @@ namespace OpenBreed.Gui.Rendering
         {
             var cursorXPosition = element.Pointer.GetXPosition();
 
+            if (cursorXPosition < viewBox.Min.X)
+            {
+                return;
+            }
+
+            if (cursorXPosition > viewBox.Max.X)
+            {
+                return;
+            }
+
             var sp = new Vector2(cursorXPosition, font.Height / 2);
 
             if (element.Pointer.Blink())
@@ -37,20 +47,25 @@ namespace OpenBreed.Gui.Rendering
             var size = box.Size;
             var font = element.Font;
             var textPos = element.StartPos();
+            var textScrollBox = element.GetScrollBox();
 
             view.Context.Primitives.DrawRectangle(view, box, Color4.Yellow);
 
-            var viewBox = new Box2(view.Box.Min, view.Box.Max);
-
             view.PushMatrix();
 
-            var d = box.Translated(textPos * new Vector2(-1.0f, 1.0f));
+            var startLine = element.ScrollPosition.Y / font.Height;
+            var endLine = (box.Size.Y + element.ScrollPosition.Y) / font.Height;
 
+            var startLineIndex = (int)(startLine);
+            var endLineIndex = (int)(endLine);
 
-            var startLineIndex = (int)(d.Min.Y / font.Height);
-            var endLineIndex = (int)(d.Max.Y / font.Height) + 2;
             startLineIndex = Math.Max(0, startLineIndex);
-            endLineIndex = Math.Min(endLineIndex, element.LinesCount);
+            endLineIndex = Math.Min(endLineIndex + 1, element.LinesCount);
+
+            view.PushMatrix();
+            view.Translate(textPos);
+            view.Translate(new Vector2(0.0f, -startLineIndex * font.Height));
+            view.Translate(element.ScrollPosition);
 
             for (int lineIndex = startLineIndex; lineIndex < endLineIndex; lineIndex++)
             {
@@ -58,21 +73,17 @@ namespace OpenBreed.Gui.Rendering
 
                 var text = new string(chars.ToArray());
 
-                view.PushMatrix();
-                view.Translate(textPos);
-
-               
-                font.Draw(view, text, Color4.White, d, ignoreScale: true);
+                font.Draw(view, text, Color4.White, textScrollBox, ignoreScale: true);
 
                 if (lineIndex == element.Pointer.LineIndex)
                 {
-                    RenderPointer(element, view, viewBox, font);
+                    RenderPointer(element, view, textScrollBox, font);
                 }
-
-                view.PopMatrix();
 
                 view.Translate(new Vector2(0.0f, -font.Height));
             }
+
+            view.PopMatrix();
 
             view.PopMatrix();
         }

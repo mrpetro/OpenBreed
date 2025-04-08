@@ -1,4 +1,6 @@
-﻿using OpenBreed.Gui.Abstractions.Elements;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Gui.Abstractions.Elements;
+using OpenBreed.Gui.Abstractions.Extensions;
 using OpenTK.Mathematics;
 using System.Reflection;
 
@@ -54,6 +56,11 @@ namespace OpenBreed.Gui.Elements
             return xPositions[ColumnIndex];
         }
 
+        public float GetYPosition()
+        {
+            return LineIndex * owner.Font.Height;
+        }
+
         public bool Blink()
         {
             blinkTimer++;
@@ -96,6 +103,13 @@ namespace OpenBreed.Gui.Elements
                     LineIndex++;
                 }
             }
+
+            AdjustScroll();
+        }
+
+        public Vector2 GetPosition()
+        {
+            return new Vector2(GetXPosition(), GetYPosition());
         }
 
         public void MoveBack()
@@ -114,6 +128,8 @@ namespace OpenBreed.Gui.Elements
             }
 
             SkipPreviousNewLineCharacters();
+
+            AdjustScroll();
         }
 
         public void MoveLineBack()
@@ -129,6 +145,8 @@ namespace OpenBreed.Gui.Elements
                     ColumnIndex = lineLength;
                 }
             }
+
+            AdjustScroll();
         }
 
         public void MoveLineForward()
@@ -144,32 +162,71 @@ namespace OpenBreed.Gui.Elements
                     ColumnIndex = lineLength;
                 }
             }
+
+            AdjustScroll();
         }
 
         public void MoveToLineBegin()
         {
             ColumnIndex = 0;
+
+            AdjustScroll();
         }
 
         public void MoveToLineEnd()
         {
             ColumnIndex = owner.GetLineLength(LineIndex);
             SkipPreviousNewLineCharacters();
+
+            AdjustScroll();
         }
 
         public void SetIndexPosition(Vector2 cursorPos)
         {
-            var indexPosition = owner.GetIndexPosition(cursorPos);
+            var pos = -owner.ScrollPosition + cursorPos;
+            var indexPosition = owner.GetIndexPosition(pos);
 
             ColumnIndex = indexPosition.X;
             LineIndex = indexPosition.Y;
 
             SkipPreviousNewLineCharacters();
+
+            AdjustScroll();
         }
 
         #endregion Public Methods
 
         #region Private Methods
+
+        private void AdjustScroll()
+        {
+            var scrollBox = owner.GetScrollBox();
+
+            var position = GetPosition();
+
+            var xOffset = 0.0f;
+            var yOffset = 0.0f;
+
+            if (position.X < scrollBox.Min.X)
+            {
+                xOffset = scrollBox.Min.X - position.X + 3;
+            }
+            if (position.X > scrollBox.Max.X)
+            {
+                xOffset = scrollBox.Max.X - position.X - 3;
+            }
+
+            if (position.Y < scrollBox.Min.Y + owner.Font.Height)
+            {
+                yOffset = -(scrollBox.Min.Y +owner.Font.Height) + position.Y;
+            }
+            if (position.Y > scrollBox.Max.Y)
+            {
+                yOffset = -scrollBox.Max.Y + position.Y;
+            }
+
+            owner.ScrollPosition += new Vector2(xOffset, yOffset);
+        }
 
         private void SkipPreviousNewLineCharacters()
         {

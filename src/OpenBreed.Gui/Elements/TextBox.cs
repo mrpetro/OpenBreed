@@ -37,7 +37,7 @@ namespace OpenBreed.Gui.Elements
 
         #region Public Properties
 
-        public Vector2 ScrollPosition { get; private set; }
+        public Vector2 ScrollPosition { get; set; }
 
         public ITextPointer Pointer { get; }
 
