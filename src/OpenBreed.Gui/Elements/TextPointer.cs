@@ -12,7 +12,7 @@ namespace OpenBreed.Gui.Elements
 
         private const int BlickFrames = 15;
 
-        private readonly ITextBox owner;
+        private readonly ITextField owner;
 
         private int blinkTimer;
 
@@ -20,7 +20,7 @@ namespace OpenBreed.Gui.Elements
 
         #region Public Constructors
 
-        public TextPointer(ITextBox owner)
+        public TextPointer(ITextField owner)
         {
             this.owner = owner;
         }

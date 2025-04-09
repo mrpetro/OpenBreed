@@ -64,6 +64,8 @@ namespace OpenBreed.Gui.Abstractions.Elements
 
         string Tag { get; }
 
+        bool IsFocused { get; }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -80,6 +82,11 @@ namespace OpenBreed.Gui.Abstractions.Elements
         /// Focus on this element.
         /// </summary>
         void Focus();
+
+        /// <summary>
+        /// Unfocus from this element.
+        /// </summary>
+        void Unfocus();
 
         /// <summary>
         /// Click this element with given cursor.

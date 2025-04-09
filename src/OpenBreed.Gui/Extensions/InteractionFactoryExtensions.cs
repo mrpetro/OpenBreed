@@ -31,13 +31,13 @@ namespace OpenBreed.Gui.Extensions
             return builder.Build();
         }
 
-        public static ITextBox CreateTextBox(this IInteractionFactory factory, Action<ITextBoxBuilder> setter)
+        public static ITextField CreateTextField(this IInteractionFactory factory, Action<ITextFieldBuilder> setter)
         {
-            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ITextBox>>();
+            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ITextField>>();
 
             var fontMan = factory.View.Context.Fonts;
 
-            var builder = new TextBoxBuilder(inputHandler, fontMan);
+            var builder = new TextFieldBuilder(inputHandler, fontMan);
 
             setter.Invoke(builder);
 

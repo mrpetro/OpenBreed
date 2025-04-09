@@ -7,6 +7,8 @@ using OpenTK.Graphics;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Linq;
 
 namespace OpenBreed.Rendering.OpenGL.Builders
@@ -181,6 +183,10 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             var bmp = new Bitmap((int)size.Width, (int)size.Height);
             using (var gfx = Graphics.FromImage(bmp))
             {
+                gfx.SmoothingMode = SmoothingMode.HighQuality;
+                gfx.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                gfx.TextContrast = 4;
+
                 gfx.FillRectangle(backgroundBrush, 0, 0, bmp.Width, bmp.Height);
                 gfx.DrawString(ch.ToString(), font, Brushes.White, 0, 0); ;
             }
@@ -192,7 +198,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             using (var font = new Font(fontName, fontSize))
             {
                 var bitmap = GenerateCharacters(font, out Size maxCharSize);
-
                 //bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
                 Texture = textureMan.Create($"Textures/Fonts/{fontName}/{fontSize}", bitmap);

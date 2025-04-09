@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Abstractions.Presentations
 {
-    public interface ITextBoxPresentation : IElementPresentation
+    public interface ITextFieldPresentation : IElementPresentation
     {
         #region Public Properties
 

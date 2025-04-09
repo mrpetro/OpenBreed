@@ -34,7 +34,7 @@ namespace OpenBreed.Gui.Extensions
                 services.AddSingleton<IElementRenderer, PanelRenderer>();
                 services.AddSingleton<IElementRenderer, GridPanelRenderer>();
                 services.AddSingleton<IElementRenderer, StateboxRenderer>();
-                services.AddSingleton<IElementRenderer, TextBoxRenderer>();
+                services.AddSingleton<IElementRenderer, TextFieldRenderer>();
                 services.AddSingleton<ICursorRenderer, CursorRenderer>();
 
 
@@ -43,12 +43,12 @@ namespace OpenBreed.Gui.Extensions
                 services.AddTransient<DockPanelBuilder>();
                 services.AddTransient<ButtonBuilder>();
                 services.AddTransient<LabelBuilder>();
-                services.AddTransient<TextBoxBuilder>();
+                services.AddTransient<TextFieldBuilder>();
                 services.AddTransient<CheckboxBuilder>();
 
                 services.AddSingleton<IElementInputHandler<IButton>, ButtonInputHandler>();
                 services.AddSingleton<IElementInputHandler<IGridPanel>, GridPanelInputHandler>();
-                services.AddSingleton<IElementInputHandler<ITextBox>, TextBoxInputHandler>();
+                services.AddSingleton<IElementInputHandler<ITextField>, TextFieldInputHandler>();
                 services.AddSingleton<IElementInputHandler<IDesktop>, DesktopInputHandler>();
             });
         }

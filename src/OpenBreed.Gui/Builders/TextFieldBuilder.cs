@@ -13,7 +13,7 @@ using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Gui.Builders
 {
-    internal class TextBoxBuilder : ElementBuilder<ITextBox>, ITextBoxBuilder
+    internal class TextFieldBuilder : ElementBuilder<ITextField>, ITextFieldBuilder
     {
         #region Internal Fields
 
@@ -31,7 +31,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public TextBoxBuilder(IElementInputHandler<ITextBox> inputHandler, IFontMan fontMan) : base(inputHandler)
+        public TextFieldBuilder(IElementInputHandler<ITextField> inputHandler, IFontMan fontMan) : base(inputHandler)
         {
             this.fontMan = fontMan;
         }
@@ -59,9 +59,9 @@ namespace OpenBreed.Gui.Builders
 
         #region Internal Methods
 
-        public override ITextBox Build()
+        public override ITextField Build()
         {
-            return new TextBox(this);
+            return new TextField(this);
         }
 
         internal IFont GetFont()

@@ -9,12 +9,13 @@ using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace OpenBreed.Gui.Elements
 {
 
-    internal class TextBox : Element, ITextBox
+    internal class TextField : Element, ITextField
     {
         #region Private Fields
 
@@ -25,7 +26,7 @@ namespace OpenBreed.Gui.Elements
 
         #region Internal Constructors
 
-        internal TextBox(TextBoxBuilder builder) : base(builder)
+        internal TextField(TextFieldBuilder builder) : base(builder)
         {
             Font = builder.GetFont();
             Pointer = new TextPointer(this);

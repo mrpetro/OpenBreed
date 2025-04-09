@@ -95,6 +95,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
             GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
 
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            GL.BlendEquation(BlendEquationMode.FuncAdd);
+            //GL.BlendColor(125, 125, 125, 255);
+            GL.Enable(EnableCap.Blend);
+
             var charPosX = 0.0f;
 
             var scaleCorrection = 1.0f;
@@ -137,6 +142,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 charPosX += width * scaleCorrection;
             }
 
+            GL.Disable(EnableCap.Blend);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 

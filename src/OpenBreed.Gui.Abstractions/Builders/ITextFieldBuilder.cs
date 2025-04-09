@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Abstractions.Builders
 {
-    public interface ITextBoxBuilder : IElementBuilder
+    public interface ITextFieldBuilder : IElementBuilder
     {
         #region Public Methods
 

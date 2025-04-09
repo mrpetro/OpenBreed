@@ -61,6 +61,7 @@ using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Gui.Abstractions.Builders;
+using System.Windows.Controls;
 
 namespace OpenBreed.Sandbox
 {
@@ -298,6 +299,18 @@ namespace OpenBreed.Sandbox
             });
 
             desktop.AddChild(CreateGridPanelTest(interactionFactory));
+
+
+            desktop.AddChild(interactionFactory.CreateTextField((builder) =>
+            {
+                builder.SetSize(100, 100);
+                builder.SetFontSize(15);
+                builder.SetMovable(false);
+
+                var text = File.ReadAllText(@"Data//SampleText.txt");
+                builder.SetText(text);
+            }));
+
         }
 
         private static IGridPanel CreateGridPanelTest(IInteractionFactory factory)
@@ -410,7 +423,7 @@ namespace OpenBreed.Sandbox
                     builder.SetGridPosition(2, 1);
                 }));
 
-            grid.AddChild(factory.CreateTextBox((builder) =>
+            grid.AddChild(factory.CreateTextField((builder) =>
                 {
                     builder.SetFontSize(15);
                     builder.SetMovable(false);

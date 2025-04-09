@@ -5,7 +5,7 @@ using OpenTK.Mathematics;
 
 namespace OpenBreed.Gui.Abstractions.Elements
 {
-    public interface ITextBox : IElement
+    public interface ITextField : IElement
     {
         #region Public Properties
 
@@ -26,12 +26,12 @@ namespace OpenBreed.Gui.Abstractions.Elements
         char GetCharacter(int columnIndex, int lineIndex);
 
         /// <summary>
-        /// Remove character from current text box pointer position and advance pointer back.
+        /// Remove character from current text field pointer position and advance pointer back.
         /// </summary>
         void Remove();
 
         /// <summary>
-        /// Input text at current text box pointer position.
+        /// Input text at current text field pointer position.
         /// </summary>
         /// <param name="text"></param>
         void Input(string text);

@@ -11,30 +11,30 @@ using Xunit;
 
 namespace OpenBreed.Gui.Test.Elements
 {
-    public class TextBoxTests
+    public class TextFieldTests
     {
         private MockRepository mockRepository;
 
-        private Mock<TextBoxBuilder> mockTextBoxBuilder;
+        private Mock<TextFieldBuilder> mockTextFieldBuilder;
 
-        public TextBoxTests()
+        public TextFieldTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
 
-            this.mockTextBoxBuilder = this.mockRepository.Create<TextBoxBuilder>();
+            this.mockTextFieldBuilder = this.mockRepository.Create<TextFieldBuilder>();
         }
 
-        private ITextBox CreateTextBox()
+        private ITextField CreateTextField()
         {
-            return new TextBox(
-                this.mockTextBoxBuilder.Object);
+            return new TextField(
+                this.mockTextFieldBuilder.Object);
         }
 
         [Fact]
         public void GetCharacter_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var textBox = this.CreateTextBox();
+            var textBox = this.CreateTextField();
             int columnIndex = 0;
             int lineIndex = 0;
 
@@ -52,7 +52,7 @@ namespace OpenBreed.Gui.Test.Elements
         public void GetCharacterIndex_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var textBox = this.CreateTextBox();
+            var textBox = this.CreateTextField();
             int columnIndex = 0;
             int lineIndex = 0;
 
@@ -70,7 +70,7 @@ namespace OpenBreed.Gui.Test.Elements
         public void GetLineLength_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var textBox = this.CreateTextBox();
+            var textBox = this.CreateTextField();
             int lineIndex = 0;
 
             // Act
@@ -86,7 +86,7 @@ namespace OpenBreed.Gui.Test.Elements
         public void GetLineCharacters_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var textBox = this.CreateTextBox();
+            var textBox = this.CreateTextField();
             int lineIndex = 0;
 
             // Act
@@ -102,7 +102,7 @@ namespace OpenBreed.Gui.Test.Elements
         public void GetPointerXPosition_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var textBox = this.CreateTextBox();
+            var textBox = this.CreateTextField();
 
             // Act
             var result = textBox.Pointer.GetXPosition();
@@ -116,7 +116,7 @@ namespace OpenBreed.Gui.Test.Elements
         public void Input_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var textBox = this.CreateTextBox();
+            var textBox = this.CreateTextField();
             string text = null;
 
             // Act
@@ -132,7 +132,7 @@ namespace OpenBreed.Gui.Test.Elements
         public void GetIndexPosition_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var textBox = this.CreateTextBox();
+            var textBox = this.CreateTextField();
             Vector2 position = default(global::OpenTK.Mathematics.Vector2);
 
             // Act

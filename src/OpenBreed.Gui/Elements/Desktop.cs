@@ -30,7 +30,6 @@ namespace OpenBreed.Gui.Elements
         private readonly IRenderView renderView;
         private readonly IInteractionRenderer interactionRenderer;
         private readonly ILogger logger;
-        private IElement? focussedElement;
 
         #endregion Private Fields
 
@@ -59,6 +58,7 @@ namespace OpenBreed.Gui.Elements
 
         #region Public Properties
 
+        public IElement? FocussedElement { get; private set; }
         public IReadOnlyCollection<IInteractionCursor> Cursors => cursors.Values;
 
         #endregion Public Properties
@@ -189,17 +189,27 @@ namespace OpenBreed.Gui.Elements
 
         internal void ResolveTextInput(string text)
         {
-            focussedElement?.InputHandler.OnKeyboardTextInput(focussedElement, text);
+            FocussedElement?.InputHandler.OnKeyboardTextInput(FocussedElement, text);
         }
 
         internal void ResolveKeyDown(Keys keys, KeyModifiers modifiers)
         {
-            focussedElement?.InputHandler.OnKeyboardKeyDown(focussedElement, keys, modifiers);
+            FocussedElement?.InputHandler.OnKeyboardKeyDown(FocussedElement, keys, modifiers);
         }
 
         internal void ResolveKeyUp(Keys keys, KeyModifiers modifiers)
         {
-            focussedElement?.InputHandler.OnKeyboardKeyUp(focussedElement, keys, modifiers);
+            FocussedElement?.InputHandler.OnKeyboardKeyUp(FocussedElement, keys, modifiers);
+        }
+
+        internal void OnFocus(IElement element)
+        {
+            if (FocussedElement is not null)
+            {
+                FocussedElement.Unfocus();
+            }
+
+            FocussedElement = element;
         }
 
         #endregion Internal Methods
@@ -286,11 +296,6 @@ namespace OpenBreed.Gui.Elements
         private void RenderView_KeyDown(IRenderView view, Keys key, KeyModifiers modifiers)
         {
             ResolveKeyDown(key, modifiers);
-        }
-
-        internal void SetFocus(IElement element)
-        {
-            focussedElement = element;
         }
 
         #endregion Private Methods

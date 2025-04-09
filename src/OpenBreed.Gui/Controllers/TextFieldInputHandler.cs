@@ -7,18 +7,18 @@ using System.Reflection;
 
 namespace OpenBreed.Gui.Controllers
 {
-    public class TextBoxInputHandler : ElementInputHandler<ITextBox>
+    public class TextFieldInputHandler : ElementInputHandler<ITextField>
     {
-        public TextBoxInputHandler()
+        public TextFieldInputHandler()
         {
         }
 
-        protected override void OnCursorClick(ITextBox element, IInteractionCursor cursor, CursorKey cursorKey)
+        protected override void OnCursorClick(ITextField element, IInteractionCursor cursor, CursorKey cursorKey)
         {
             element.Focus();
         }
 
-        protected override void OnCursorDown(ITextBox element, IInteractionCursor cursor, CursorKey cursorKey)
+        protected override void OnCursorDown(ITextField element, IInteractionCursor cursor, CursorKey cursorKey)
         {
             if (cursor.IsPressed(CursorKey.Left))
             {
@@ -27,20 +27,20 @@ namespace OpenBreed.Gui.Controllers
             }
         }
 
-        protected override void OnCursorDrag(ITextBox element, IInteractionCursor cursor)
+        protected override void OnCursorDrag(ITextField element, IInteractionCursor cursor)
         {
             //element.ScrollPosition += cursor.PositionDelta;
         }
 
-        protected override void OnCursorEnter(ITextBox element, IInteractionCursor cursor)
+        protected override void OnCursorEnter(ITextField element, IInteractionCursor cursor)
         {
         }
 
-        protected override void OnCursorLeave(ITextBox element, IInteractionCursor cursor)
+        protected override void OnCursorLeave(ITextField element, IInteractionCursor cursor)
         {
         }
 
-        protected override void OnCursorMove(ITextBox element, IInteractionCursor cursor)
+        protected override void OnCursorMove(ITextField element, IInteractionCursor cursor)
         {
             if (cursor.IsPressed(CursorKey.Left))
             {
@@ -49,15 +49,15 @@ namespace OpenBreed.Gui.Controllers
             }
         }
 
-        protected override void OnCursorUp(ITextBox element, IInteractionCursor cursor, CursorKey cursorKey)
+        protected override void OnCursorUp(ITextField element, IInteractionCursor cursor, CursorKey cursorKey)
         {
         }
 
-        protected override void OnCursorWheel(ITextBox element, IInteractionCursor cursor)
+        protected override void OnCursorWheel(ITextField element, IInteractionCursor cursor)
         {
         }
 
-        protected override void OnKeyboardKeyDown(ITextBox element, Keys key, KeyModifiers modifiers)
+        protected override void OnKeyboardKeyDown(ITextField element, Keys key, KeyModifiers modifiers)
         {
             switch (key)
             {
@@ -102,11 +102,11 @@ namespace OpenBreed.Gui.Controllers
             }
         }
 
-        protected override void OnKeyboardKeyUp(ITextBox element, Keys key, KeyModifiers modifiers)
+        protected override void OnKeyboardKeyUp(ITextField element, Keys key, KeyModifiers modifiers)
         {
         }
 
-        protected override void OnKeyboardTextInput(ITextBox element, string text)
+        protected override void OnKeyboardTextInput(ITextField element, string text)
         {
             element.Input(text);
         }

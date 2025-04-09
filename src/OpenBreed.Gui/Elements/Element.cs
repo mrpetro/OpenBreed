@@ -65,6 +65,8 @@ namespace OpenBreed.Gui.Elements
 
         public Vector2 MaximumSize { get; }
 
+        public bool IsFocused => GetDesktop().FocussedElement == this;
+
         public Box2 LocalBox
         {
             get
@@ -171,7 +173,13 @@ namespace OpenBreed.Gui.Elements
         public virtual void Focus()
         {
             var desktop = GetDesktop();
-            desktop.SetFocus(this);
+            desktop.OnFocus(this);
+
+        }
+
+        public virtual void Unfocus()
+        {
+
         }
 
         public IElement? GetAncestor(string tag)
