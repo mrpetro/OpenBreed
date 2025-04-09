@@ -21,7 +21,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public ButtonBuilder(IElementInputHandler<IButton> inputHandler) : base(inputHandler)
+        public ButtonBuilder(IElementInputController<IButton> inputController) : base(inputController)
         {
         }
 

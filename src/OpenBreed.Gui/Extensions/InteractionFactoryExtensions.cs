@@ -20,11 +20,11 @@ namespace OpenBreed.Gui.Extensions
 
         public static ILabel CreateLabel(this IInteractionFactory factory, Action<ILabelBuilder> setter)
         {
-            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ILabel>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ILabel>>();
 
             var fontMan = factory.View.Context.Fonts;
 
-            var builder = new LabelBuilder(inputHandler, fontMan);
+            var builder = new LabelBuilder(inputController, fontMan);
 
             setter.Invoke(builder);
 
@@ -33,11 +33,11 @@ namespace OpenBreed.Gui.Extensions
 
         public static ITextField CreateTextField(this IInteractionFactory factory, Action<ITextFieldBuilder> setter)
         {
-            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ITextField>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ITextField>>();
 
             var fontMan = factory.View.Context.Fonts;
 
-            var builder = new TextFieldBuilder(inputHandler, fontMan);
+            var builder = new TextFieldBuilder(inputController, fontMan);
 
             setter.Invoke(builder);
 
@@ -46,9 +46,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static ICheckboxBuilder CreateCheckbox(this IInteractionFactory factory, Action<ICheckboxBuilder> setter)
         {
-            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ICheckbox>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ICheckbox>>();
 
-            var builder = new CheckboxBuilder(inputHandler, factory);
+            var builder = new CheckboxBuilder(inputController, factory);
 
             setter.Invoke(builder);
 
@@ -57,9 +57,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static IDockPanel CreateDockPanel(this IInteractionFactory factory, Action<IDockPanelBuilder> setter)
         {
-            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ILabel>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ILabel>>();
 
-            var builder = new DockPanelBuilder(inputHandler);
+            var builder = new DockPanelBuilder(inputController);
 
             setter.Invoke(builder);
 
@@ -68,9 +68,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static IButton CreateButton(this IInteractionFactory factory, Action<IButtonBuilder> setter)
         {
-            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<IButton>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<IButton>>();
 
-            var builder = new ButtonBuilder(inputHandler);
+            var builder = new ButtonBuilder(inputController);
 
             setter.Invoke(builder);
 
@@ -79,9 +79,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static IStatebox CreateStatebox(this IInteractionFactory factory, Action<IStateboxBuilder> setter)
         {
-            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<ILabel>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ILabel>>();
 
-            var builder = new StateboxBuilder(inputHandler);
+            var builder = new StateboxBuilder(inputController);
 
             setter.Invoke(builder);
 
@@ -90,9 +90,9 @@ namespace OpenBreed.Gui.Extensions
 
         public static IGridPanel CreateGridPanel(this IInteractionFactory factory, Action<IGridPanelBuilder> setter)
         {
-            var inputHandler = factory.ServiceProvider.GetRequiredService<IElementInputHandler<IGridPanel>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<IGridPanel>>();
 
-            var builder = new GridPanelBuilder(inputHandler);
+            var builder = new GridPanelBuilder(inputController);
 
             setter.Invoke(builder);
 

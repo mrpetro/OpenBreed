@@ -7,9 +7,9 @@ using System.Reflection;
 
 namespace OpenBreed.Gui.Controllers
 {
-    public class CheckboxInputHandler : ElementInputHandler<ICheckbox>
+    public class CheckboxInputController : ElementInputController<ICheckbox>
     {
-        public CheckboxInputHandler()
+        public CheckboxInputController()
         {
         }
 

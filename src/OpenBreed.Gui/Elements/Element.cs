@@ -30,7 +30,7 @@ namespace OpenBreed.Gui.Elements
 
         protected Element(ElementBuilder builder)
         {
-            InputHandler = builder.InputHandler;
+            InputController = builder.InputController;
             Padding = builder.Padding;
             Margin = builder.Margin;
 
@@ -121,7 +121,7 @@ namespace OpenBreed.Gui.Elements
 
         public IElementPresentation Presentation => throw new NotImplementedException();
 
-        public IElementInputHandler InputHandler { get; }
+        public IElementInputController InputController { get; }
 
         #endregion Public Properties
 

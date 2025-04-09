@@ -5,7 +5,7 @@ using Keys = OpenBreed.Rendering.Interface.Events.Keys;
 
 namespace OpenBreed.Gui.Abstractions.Controllers
 {
-    public abstract class ElementInputHandler<TElement> : IElementInputHandler<TElement> where TElement : IElement
+    public abstract class ElementInputController<TElement> : IElementInputController<TElement> where TElement : IElement
     {
         #region Public Methods
 

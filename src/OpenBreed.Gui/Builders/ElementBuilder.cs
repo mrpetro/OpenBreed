@@ -18,7 +18,7 @@ namespace OpenBreed.Gui.Builders
 {
     internal abstract class ElementBuilder<TElement> : ElementBuilder, IElementBuilder<TElement> where TElement : IElement
     {
-        protected ElementBuilder(IElementInputHandler inputHandler) : base(inputHandler)
+        protected ElementBuilder(IElementInputController inputController) : base(inputController)
         {
         }
 
@@ -33,16 +33,16 @@ namespace OpenBreed.Gui.Builders
     {
         #region Public Constructors
 
-        public ElementBuilder(IElementInputHandler inputHandler)
+        public ElementBuilder(IElementInputController inputController)
         {
-            InputHandler = inputHandler;
+            InputController = inputController;
         }
 
         #endregion Public Constructors
 
         #region Internal Properties
 
-        internal IElementInputHandler InputHandler { get; }
+        internal IElementInputController InputController { get; }
         internal List<IElementOption> Options { get; } = new List<IElementOption>();
 
         internal PositionSystem PositionSystem { get; private set; }

@@ -7,10 +7,14 @@ using System.Reflection;
 
 namespace OpenBreed.Gui.Controllers
 {
-    public class DesktopInputHandler : ElementInputHandler<IDesktop>
+    public class GridPanelInputController : ElementInputController<IGridPanel>
     {
-        public DesktopInputHandler()
+        #region Public Constructors
+
+        public GridPanelInputController()
         {
         }
+
+        #endregion Public Constructors
     }
 }

@@ -7,9 +7,9 @@ using System.Reflection;
 
 namespace OpenBreed.Gui.Controllers
 {
-    public class ButtonInputHandler : ElementInputHandler<IButton>
+    public class ButtonInputController : ElementInputController<IButton>
     {
-        public ButtonInputHandler()
+        public ButtonInputController()
         {
         }
 

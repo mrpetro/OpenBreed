@@ -27,7 +27,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public CheckboxBuilder(IElementInputHandler<ICheckbox> inputHandler, IInteractionFactory factory) : base(inputHandler)
+        public CheckboxBuilder(IElementInputController<ICheckbox> inputController, IInteractionFactory factory) : base(inputController)
         {
             SetTag("Checkbox");
             SetSize(300, 40);

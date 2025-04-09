@@ -46,10 +46,10 @@ namespace OpenBreed.Gui.Extensions
                 services.AddTransient<TextFieldBuilder>();
                 services.AddTransient<CheckboxBuilder>();
 
-                services.AddSingleton<IElementInputHandler<IButton>, ButtonInputHandler>();
-                services.AddSingleton<IElementInputHandler<IGridPanel>, GridPanelInputHandler>();
-                services.AddSingleton<IElementInputHandler<ITextField>, TextFieldInputHandler>();
-                services.AddSingleton<IElementInputHandler<IDesktop>, DesktopInputHandler>();
+                services.AddSingleton<IElementInputController<IButton>, ButtonInputController>();
+                services.AddSingleton<IElementInputController<IGridPanel>, GridPanelInputController>();
+                services.AddSingleton<IElementInputController<ITextField>, TextFieldInputController>();
+                services.AddSingleton<IElementInputController<IDesktop>, DesktopInputController>();
             });
         }
     }

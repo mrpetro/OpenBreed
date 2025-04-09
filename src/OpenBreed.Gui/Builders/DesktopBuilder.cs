@@ -18,7 +18,7 @@ namespace OpenBreed.Gui.Builders
     {
         #region Public Constructors
 
-        public DesktopBuilder(IElementInputHandler<IDesktop> inputHandler, IInteractionRenderer interactionRenderer, ILogger logger, IRenderView renderView) : base(inputHandler)
+        public DesktopBuilder(IElementInputController<IDesktop> inputHandler, IInteractionRenderer interactionRenderer, ILogger logger, IRenderView renderView) : base(inputHandler)
         {
             InteractionRenderer = interactionRenderer;
             Logger = logger;

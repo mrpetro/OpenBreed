@@ -7,7 +7,7 @@ using Keys = OpenBreed.Rendering.Interface.Events.Keys;
 
 namespace OpenBreed.Gui.Abstractions.Controllers
 {
-    public interface IElementInputHandler
+    public interface IElementInputController
     {
         #region Public Methods
 
@@ -36,7 +36,7 @@ namespace OpenBreed.Gui.Abstractions.Controllers
         #endregion Public Methods
     }
 
-    public interface IElementInputHandler<TElement> : IElementInputHandler where TElement : IElement
+    public interface IElementInputController<TElement> : IElementInputController where TElement : IElement
     {
     }
 }

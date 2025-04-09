@@ -28,7 +28,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public LabelBuilder(IElementInputHandler<ILabel> inputHandler, IFontMan fontMan) : base(inputHandler)
+        public LabelBuilder(IElementInputController<ILabel> inputHandler, IFontMan fontMan) : base(inputHandler)
         {
             this.fontMan = fontMan;
         }

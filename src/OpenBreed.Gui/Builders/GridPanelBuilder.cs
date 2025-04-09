@@ -18,7 +18,7 @@ namespace OpenBreed.Gui.Builders
     {
         #region Public Constructors
 
-        public GridPanelBuilder(IElementInputHandler<IGridPanel> inputHandler) : base(inputHandler)
+        public GridPanelBuilder(IElementInputController<IGridPanel> inputHandler) : base(inputHandler)
         {
         }
 

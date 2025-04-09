@@ -17,7 +17,7 @@ namespace OpenBreed.Gui.Builders
     {
         #region Public Constructors
 
-        public StateboxBuilder(IElementInputHandler inputHandler) : base(inputHandler)
+        public StateboxBuilder(IElementInputController inputController) : base(inputController)
         {
         }
 

@@ -15,7 +15,7 @@ namespace OpenBreed.Gui.Builders
     {
         #region Public Constructors
 
-        public DockPanelBuilder(IElementInputHandler inputHandler) : base(inputHandler)
+        public DockPanelBuilder(IElementInputController inputHandler) : base(inputHandler)
         {
         }
 

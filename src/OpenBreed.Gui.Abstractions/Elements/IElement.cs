@@ -52,7 +52,7 @@ namespace OpenBreed.Gui.Abstractions.Elements
         Vector2 MaximumSize { get; }
         IElementSize Size { get; }
 
-        IElementInputHandler InputHandler { get; }
+        IElementInputController InputController { get; }
 
         Box2 LocalBox { get; }
         Box2 ActualBox { get; }

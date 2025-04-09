@@ -31,7 +31,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public TextFieldBuilder(IElementInputHandler<ITextField> inputHandler, IFontMan fontMan) : base(inputHandler)
+        public TextFieldBuilder(IElementInputController<ITextField> inputController, IFontMan fontMan) : base(inputController)
         {
             this.fontMan = fontMan;
         }

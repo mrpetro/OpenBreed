@@ -7,9 +7,9 @@ using System.Reflection;
 
 namespace OpenBreed.Gui.Controllers
 {
-    public class TextFieldInputHandler : ElementInputHandler<ITextField>
+    public class TextFieldInputController : ElementInputController<ITextField>
     {
-        public TextFieldInputHandler()
+        public TextFieldInputController()
         {
         }
 

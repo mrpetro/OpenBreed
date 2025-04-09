@@ -94,7 +94,7 @@ namespace OpenBreed.Gui.Elements
 
             if (cursor.DownedElement is not null)
             {
-                cursor.DownedElement.InputHandler.OnCursorDrag(cursor.DownedElement, cursor);
+                cursor.DownedElement.InputController.OnCursorDrag(cursor.DownedElement, cursor);
             }
 
             if (HitTest(position, out IElement? element) && element is not null)
@@ -107,11 +107,11 @@ namespace OpenBreed.Gui.Elements
 
                     if (hoveredElement is not null)
                     {
-                        hoveredElement.InputHandler.OnCursorLeave(hoveredElement, cursor);
+                        hoveredElement.InputController.OnCursorLeave(hoveredElement, cursor);
                     }
 
                     logger.LogTrace("UI->{ElementTag}: Cursor.{CursorId} Enter", element.Tag, cursorId);
-                    element.InputHandler.OnCursorEnter(element, cursor);
+                    element.InputController.OnCursorEnter(element, cursor);
                 }
 
                 logger.LogTrace("UI->{ElementTag}: Cursor.{CursorId} Move ({Position})", element.Tag, cursorId, position);
@@ -120,7 +120,7 @@ namespace OpenBreed.Gui.Elements
 
                 logger.LogTrace("WorldPos ({Box})", worldBox);
 
-                element.InputHandler.OnCursorMove(element, cursor);
+                element.InputController.OnCursorMove(element, cursor);
 
                 return;
             }
@@ -131,7 +131,7 @@ namespace OpenBreed.Gui.Elements
                 cursor.HoveredElement = null;
 
                 logger.LogTrace("UI->{ElementTag}: Cursor.{CursorId} Leave", hoveredElement.Tag, cursorId);
-                hoveredElement.InputHandler.OnCursorLeave(hoveredElement, cursor);
+                hoveredElement.InputController.OnCursorLeave(hoveredElement, cursor);
             }
         }
 
@@ -145,7 +145,7 @@ namespace OpenBreed.Gui.Elements
                 cursor.DownedElement = element;
 
                 logger.LogTrace("UI->{ElementTag}: Cursor.{CursorId} Down ({CursorKey})", element.Tag, cursorId, key);
-                element.InputHandler.OnCursorDown(element, cursor, key);
+                element.InputController.OnCursorDown(element, cursor, key);
             }
         }
 
@@ -162,7 +162,7 @@ namespace OpenBreed.Gui.Elements
 
                 cursor.DownedElement = null;
 
-                downedElement?.InputHandler.OnCursorUp(downedElement, cursor, cursorKey);
+                downedElement?.InputController.OnCursorUp(downedElement, cursor, cursorKey);
             }
 
             if (HitTest(position, out IElement? element) && element is not null)
@@ -170,7 +170,7 @@ namespace OpenBreed.Gui.Elements
                 if (downedElement == element)
                 {
                     logger.LogTrace("UI->{ElementTag}: Cursor.{CursorId} Click ({CursorKey})", element.Tag, cursorId, cursorKey);
-                    element.InputHandler.OnCursorClick(element, cursor, cursorKey);
+                    element.InputController.OnCursorClick(element, cursor, cursorKey);
                 }
             }
         }
@@ -183,23 +183,23 @@ namespace OpenBreed.Gui.Elements
             if (HitTest(position, out IElement? element) && element is not null)
             {
                 logger.LogTrace("UI->{ElementTag}: Cursor {CursorId} Wheel ({WheelDelta})", element.Tag, cursorId, cursor.WheelDelta);
-                element.InputHandler.OnCursorWheel(element, cursor);
+                element.InputController.OnCursorWheel(element, cursor);
             }
         }
 
         internal void ResolveTextInput(string text)
         {
-            FocussedElement?.InputHandler.OnKeyboardTextInput(FocussedElement, text);
+            FocussedElement?.InputController.OnKeyboardTextInput(FocussedElement, text);
         }
 
         internal void ResolveKeyDown(Keys keys, KeyModifiers modifiers)
         {
-            FocussedElement?.InputHandler.OnKeyboardKeyDown(FocussedElement, keys, modifiers);
+            FocussedElement?.InputController.OnKeyboardKeyDown(FocussedElement, keys, modifiers);
         }
 
         internal void ResolveKeyUp(Keys keys, KeyModifiers modifiers)
         {
-            FocussedElement?.InputHandler.OnKeyboardKeyUp(FocussedElement, keys, modifiers);
+            FocussedElement?.InputController.OnKeyboardKeyUp(FocussedElement, keys, modifiers);
         }
 
         internal void OnFocus(IElement element)
