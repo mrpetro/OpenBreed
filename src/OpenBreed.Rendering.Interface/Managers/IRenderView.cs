@@ -10,21 +10,6 @@ namespace OpenBreed.Rendering.Interface.Managers
 {
     public delegate Vector2i HostCoordinateSystemConverter(Vector2i point);
 
-    public interface IWin
-    {
-        Box2 Body { get; }
-
-        Vector2 Margin { get; }
-
-        Color4 BorderColor { get; }
-
-        Color4 ForegroundColor { get; }
-
-        Vector2 Pos { get; set; }
-
-        IList<IWin> Childs { get; }
-    }
-
     public interface IRenderView
     {
         #region Public Events
@@ -153,10 +138,6 @@ namespace OpenBreed.Rendering.Interface.Managers
         void DisableAlpha();
 
         void Reset();
-
-        void RenderWinScissor(IWin win);
-        void RenderWinStencil(IWin win);
-
 
         #endregion Public Methods
     }
