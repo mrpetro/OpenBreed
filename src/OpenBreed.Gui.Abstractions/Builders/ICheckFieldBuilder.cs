@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Abstractions.Builders
 {
-    public interface IStateboxBuilder : IElementBuilder
+    public interface ICheckFieldBuilder : IElementBuilder
     {
         void BindIsChecked<TTarget>(TTarget target, Expression<Func<TTarget, bool>> properyExpression);
 
-        void BindIsChecked(PropertyBinding<bool>? binding);
+        void BindProperty(PropertyBinding<bool>? binding);
 
         void SetChecked(bool isChecked);
 

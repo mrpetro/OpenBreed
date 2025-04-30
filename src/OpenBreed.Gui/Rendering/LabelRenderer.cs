@@ -7,24 +7,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OpenBreed.Gui.Rendering
 {
-    public class LabelRenderer : ElementRenderer<ILabel>
+    public class LabelRenderer : ElementRenderer<ILabelField>
     {
         #region Protected Methods
 
-        protected override void Render(ILabel element, IRenderView view)
+        protected override void Render(ILabelField element, IRenderView view)
         {
             var box = element.LocalBox;
             var size = box.Size;
             var font = element.Font;
 
-            //view.Context.Primitives.DrawRectangle(
-            //    view,
-            //    new Vector2(element.CenterX, element.CenterY),
-            //    new Vector2(element.Width, element.Height),
-            //    Color4.Yellow);
+            view.Context.Primitives.DrawRectangle(
+                view,
+                element.ActualBox,
+                Color4.Yellow);
 
             var viewBox = new Box2(view.Box.Min, view.Box.Max);
 
@@ -69,11 +69,14 @@ namespace OpenBreed.Gui.Rendering
                     break;
             }
 
-            textPos = textPos + new Vector2(offsetX, offsetY);
+            textPos += new Vector2(offsetX, offsetY);
 
-            view.Context.Fonts.RenderStart(view, textPos);
-            view.Context.Fonts.RenderPart(view, font.Id, element.Text, Vector2.Zero, Color4.White, 100, viewBox);
-            view.Context.Fonts.RenderEnd(view);
+            view.PushMatrix();
+            view.Translate(textPos);
+
+            font.Draw(view, element.Text, Color4.Black, element.ActualBox, ignoreScale: true);
+
+            view.PopMatrix();
         }
 
         #endregion Protected Methods

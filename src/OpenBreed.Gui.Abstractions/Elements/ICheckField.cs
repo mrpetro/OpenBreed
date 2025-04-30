@@ -1,12 +1,12 @@
 ﻿namespace OpenBreed.Gui.Abstractions.Elements
 {
-    public interface IStatebox : IElement
+    public interface ICheckField : IElement
     {
         #region Public Properties
 
         public bool IsPressed { get; }
 
-        public bool IsChecked { get; }
+        public bool Value { get; }
 
         #endregion Public Properties
     }

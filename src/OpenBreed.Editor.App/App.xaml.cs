@@ -46,6 +46,7 @@ using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Common.Game.Extensions;
 using OpenBreed.Common.Interface.Tools;
+using OpenBreed.Gui.Extensions;
 
 namespace OpenBreed.Editor.App
 {
@@ -95,6 +96,8 @@ namespace OpenBreed.Editor.App
                 dataLoaderFactory.SetupSoundSampleDataLoader(sp);
                 dataLoaderFactory.SetupScriptDataLoader(sp);
             });
+
+            hostBuilder.ConfigureInteraction();
 
             hostBuilder.ConfigureAbtaPasswordGeneratorForm();
             hostBuilder.ConfigureOptionsForm();

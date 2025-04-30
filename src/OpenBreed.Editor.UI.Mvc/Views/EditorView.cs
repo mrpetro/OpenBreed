@@ -14,6 +14,10 @@ using OpenBreed.Rendering.Interface.Extensions;
 using OpenBreed.Editor.UI.Mvc.Extensions;
 using OpenBreed.Rendering.Interface.Factories;
 using OpenBreed.Rendering.OpenGL.Managers;
+using OpenBreed.Gui.Abstractions;
+using OpenBreed.Gui.Extensions;
+using OpenBreed.Gui.Abstractions.Elements;
+using OpenBreed.Gui.Abstractions.Extensions;
 
 namespace OpenBreed.Editor.UI.Mvc.Views
 {
@@ -35,16 +39,60 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
         #region Public Constructors
 
-        public EditorView(IEventsMan eventsMan, IRenderContext renderContext)
+        public EditorView(IEventsMan eventsMan, IInteractionFactoryProvider guiFactory, IRenderContext renderContext)
         {
             this.eventsMan = eventsMan;
             renderView = renderContext.CreateView(0.0f, 0.0f, 1.0f, 1.0f);
+
+
+            GuiFactory = guiFactory.GetFactory(renderView);
+
+            var desktop = GuiFactory.CreateDesktop(builder =>
+            {
+
+
+                //CreateButtonCtrlTest(builder);
+
+                //CreateCheckboxCtrlTest(builder);
+
+                //CreateLabelCtrlTest(builder);
+
+            });
+
             renderView.Rendering += OnRenderPrivate;
 
             eventsMan.SubscribeToView<ViewCursorMoveEvent>(renderView, OnCursorMove);
             eventsMan.SubscribeToView<ViewCursorDownEvent>(renderView, OnCursorDown);
             eventsMan.SubscribeToView<ViewCursorUpEvent>(renderView, OnCursorUp);
             eventsMan.SubscribeToView<ViewCursorWheelEvent>(renderView, OnCursorWheel);
+
+            desktop.AddChild(GuiFactory.CreateScrollbar((builder) =>
+            {
+                builder.SetMovable(false);
+
+                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Horizontal);
+                builder.SetValue(-100.0f);
+                builder.SetMinimumValue(-100.0f);
+                builder.SetMaximumValue(200.0f);
+                builder.SetValueUnit(25.0f);
+                builder.SetDockMode(ElementDockMode.Bottom);
+                //builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestVertical));
+                //builder.SetGridPosition(2, 1);
+            }));
+
+            desktop.AddChild(GuiFactory.CreateScrollbar((builder) =>
+            {
+                builder.SetMovable(false);
+
+                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Vertical);
+                builder.SetValue(-100.0f);
+                builder.SetMinimumValue(-100.0f);
+                builder.SetMaximumValue(200.0f);
+                builder.SetValueUnit(25.0f);
+                builder.SetDockMode(ElementDockMode.Right);
+                //builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestVertical));
+                //builder.SetGridPosition(2, 1);
+            }));
         }
 
         #endregion Public Constructors
@@ -68,6 +116,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
         public float MinScale { get; private set; } = 0.125f;
 
         public float MaxScale { get; private set; } = 8.0f;
+        public IInteractionFactory GuiFactory { get; }
 
         public void SetScaleLimits(float min, float max)
         {
@@ -127,11 +176,20 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
         private void OnRenderPrivate(IRenderView view, Matrix4 transform, float dt)
         {
-            Rendering.Invoke(view, transform, dt);
+            view.PushMatrix();
 
-            if (cursorView == view)
+            try
             {
-                DrawCursor(view, dt);
+                Rendering.Invoke(view, transform, dt);
+
+                if (cursorView == view)
+                {
+                    DrawCursor(view, dt);
+                }
+            }
+            finally
+            {
+                view.PopMatrix();
             }
         }
 

@@ -11,11 +11,11 @@ using OpenBreed.Rendering.Interface;
 
 namespace OpenBreed.Gui.Elements
 {
-    internal class Label : Element, ILabel
+    internal class LabelField : Element, ILabelField
     {
         #region Internal Constructors
 
-        internal Label(LabelBuilder builder) : base(builder)
+        internal LabelField(LabelFieldBuilder builder) : base(builder)
         {
             Text = builder.Text;
             Font = builder.GetFont();

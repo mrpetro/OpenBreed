@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Mvc;
 using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Elements;
+using OpenBreed.Gui.Extensions;
 using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK.Mathematics;
@@ -44,8 +45,8 @@ namespace OpenBreed.Gui
         #region Internal Properties
 
         internal IElement? HoveredElement { get; set; }
-
         internal IElement? DownedElement { get; set; }
+        internal Vector2? DownedPosition { get; set; }
 
         #endregion Internal Properties
 
@@ -58,18 +59,7 @@ namespace OpenBreed.Gui
 
         public Vector2 GetPositionRelativeTo(IElement element)
         {
-            var reverseCoords = element.Position.AsVector();
-
-            while (element.Parent is not null)
-            {
-                element = element.Parent;
-
-                reverseCoords += element.Position.AsVector();
-            }
-
-            var localPosition = Position - reverseCoords;
-
-            return localPosition;
+            return element.GetLocalPosition(Position);
         }
 
         #endregion Public Methods

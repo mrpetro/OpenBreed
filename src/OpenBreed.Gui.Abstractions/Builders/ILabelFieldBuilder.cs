@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Abstractions.Builders
 {
-    public interface ILabelBuilder : IElementBuilder
+    public interface ILabelFieldBuilder : IElementBuilder
     {
         #region Public Methods
 
@@ -16,6 +16,10 @@ namespace OpenBreed.Gui.Abstractions.Builders
         void SetVerticalAlignment(VerticalAlignment verticalAlignment);
 
         void SetText(string? text);
+
+        void SetFontSize(int size);
+
+        void SetFontName(string name);
 
         #endregion Public Methods
     }

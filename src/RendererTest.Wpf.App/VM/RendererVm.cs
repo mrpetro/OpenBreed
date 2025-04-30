@@ -131,7 +131,7 @@ namespace RendererTest.Wpf.App.VM
                         builder.SetDockMode(ElementDockMode.Fill);
                     });
 
-                    factory.CreateLabel((builder) =>
+                    factory.CreateLabelField((builder) =>
                     {
                         builder.SetHitTestable(false);
                         builder.SetHorizontalAlignment(HorizontalAlignment.Center);
@@ -151,7 +151,7 @@ namespace RendererTest.Wpf.App.VM
                 builder.SetPosition(300.0f, 0.0f);
                 builder.SetSize(300, 300);
                 builder.SetLabel("This is my checkbox");
-                builder.BindIsChecked(PropertyBinding<bool>.Create(this, (obj) => obj.CheckboxTest));
+                builder.BindValue(PropertyBinding<bool>.Create(this, (obj) => obj.CheckboxTest));
 
             });
 
@@ -161,7 +161,7 @@ namespace RendererTest.Wpf.App.VM
                 builder.SetPosition(300.0f, 40.0f);
                 builder.SetSize(300, 300);
                 builder.SetLabel("This is my checkbox 3");
-                builder.BindIsChecked(PropertyBinding<bool>.Create(this, (obj) => obj.CheckboxTest));
+                builder.BindValue(PropertyBinding<bool>.Create(this, (obj) => obj.CheckboxTest));
 
             });
         }
@@ -174,7 +174,7 @@ namespace RendererTest.Wpf.App.VM
                 builder.SetSize(300, 300);
                 builder.SetPosition(-300.0f, 0.0f);
 
-                factory.CreateLabel((builder) =>
+                factory.CreateLabelField((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Left);
                     builder.SetVerticalAlignment(VerticalAlignment.Top);
@@ -183,7 +183,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                factory.CreateLabel((builder) =>
+                factory.CreateLabelField((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Center);
                     builder.SetVerticalAlignment(VerticalAlignment.Top);
@@ -192,7 +192,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                factory.CreateLabel((builder) =>
+                factory.CreateLabelField((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Right);
                     builder.SetVerticalAlignment(VerticalAlignment.Top);
@@ -201,7 +201,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                factory.CreateLabel((builder) =>
+                factory.CreateLabelField((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Left);
                     builder.SetVerticalAlignment(VerticalAlignment.Center);
@@ -210,7 +210,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                factory.CreateLabel((builder) =>
+                factory.CreateLabelField((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Center);
                     builder.SetVerticalAlignment(VerticalAlignment.Center);
@@ -219,7 +219,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                factory.CreateLabel((builder) =>
+                factory.CreateLabelField((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Right);
                     builder.SetVerticalAlignment(VerticalAlignment.Center);
@@ -228,7 +228,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                factory.CreateLabel((builder) =>
+                factory.CreateLabelField((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Left);
                     builder.SetVerticalAlignment(VerticalAlignment.Bottom);
@@ -237,7 +237,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                factory.CreateLabel((builder) =>
+                factory.CreateLabelField((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Center);
                     builder.SetVerticalAlignment(VerticalAlignment.Bottom);
@@ -246,7 +246,7 @@ namespace RendererTest.Wpf.App.VM
                     builder.SetDockMode(ElementDockMode.Fill);
                 });
 
-                factory.CreateLabel((builder) =>
+                factory.CreateLabelField((builder) =>
                 {
                     builder.SetHorizontalAlignment(HorizontalAlignment.Right);
                     builder.SetVerticalAlignment(VerticalAlignment.Bottom);

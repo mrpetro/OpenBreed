@@ -40,11 +40,23 @@ namespace OpenBreed.Gui.Rendering
 
         public void Render(IDesktop desktop, IRenderView view)
         {
-            Render(desktop, view, 0);
+            view.PushMatrix();
 
-            foreach (var cursor in desktop.Cursors)
+            //var worldBox = view.GetViewToWorldCoords(view.Box);
+            //view.SetScale(0.5f);
+
+            try
             {
-                cursorRenderer.Render(cursor, view);
+                Render(desktop, view, 0);
+
+                foreach (var cursor in desktop.Cursors)
+                {
+                    cursorRenderer.Render(cursor, view);
+                }
+            }
+            finally
+            {
+                view.PopMatrix();
             }
         }
 

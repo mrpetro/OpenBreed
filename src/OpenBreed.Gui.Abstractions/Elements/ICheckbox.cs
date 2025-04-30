@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Gui.Abstractions.Elements
 {
-    public interface ICheckbox : IStatebox
+    public interface ICheckbox : ICheckField
     {
         #region Public Properties
 

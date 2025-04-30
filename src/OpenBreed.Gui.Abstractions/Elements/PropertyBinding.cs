@@ -1,9 +1,55 @@
-﻿using System.Linq.Expressions;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace OpenBreed.Gui.Abstractions.Elements
 {
-    public class PropertyBinding<TValue>
+    public interface IValueBinding<TValue>
+    {
+        #region Public Methods
+
+        TValue? GetValue();
+
+        void SetValue(TValue newValue);
+
+        #endregion Public Methods
+    }
+
+    public class ValueBinding<TValue> : IValueBinding<TValue>
+    {
+        #region Private Fields
+
+        private TValue value;
+
+        #endregion Private Fields
+
+        #region Private Constructors
+
+        private ValueBinding(TValue value)
+        {
+            this.value = value;
+        }
+
+        #endregion Private Constructors
+
+        #region Public Methods
+
+        public static ValueBinding<TValue> Create(TValue value)
+        {
+            return new ValueBinding<TValue>(value);
+        }
+
+        public TValue? GetValue() => value;
+
+        public void SetValue(TValue newValue)
+        {
+            this.value = newValue;
+        }
+
+        #endregion Public Methods
+    }
+
+    public class PropertyBinding<TValue> : IValueBinding<TValue>
     {
         #region Private Fields
 
@@ -44,9 +90,9 @@ namespace OpenBreed.Gui.Abstractions.Elements
             return (TValue)value;
         }
 
-        public void SetValue(bool isChecked)
+        public void SetValue(TValue newValue)
         {
-            propertyInfo.SetValue(propertyTarget, isChecked);
+            propertyInfo.SetValue(propertyTarget, newValue);
         }
 
         #endregion Public Methods

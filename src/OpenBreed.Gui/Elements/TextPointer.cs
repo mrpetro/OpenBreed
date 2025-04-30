@@ -194,6 +194,12 @@ namespace OpenBreed.Gui.Elements
             AdjustScroll();
         }
 
+        public void Reset()
+        {
+            ColumnIndex = 0;
+            LineIndex = 0;
+        }
+
         #endregion Public Methods
 
         #region Private Methods

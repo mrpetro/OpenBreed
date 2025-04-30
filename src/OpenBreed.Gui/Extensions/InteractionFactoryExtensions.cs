@@ -18,18 +18,31 @@ namespace OpenBreed.Gui.Extensions
     {
         #region Public Methods
 
-        public static ILabel CreateLabel(this IInteractionFactory factory, Action<ILabelBuilder> setter)
+        public static ILabelField CreateLabelField(this IInteractionFactory factory, Action<ILabelFieldBuilder> setter)
         {
-            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ILabel>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController>();
 
             var fontMan = factory.View.Context.Fonts;
 
-            var builder = new LabelBuilder(inputController, fontMan);
+            var builder = new LabelFieldBuilder(inputController, fontMan);
 
             setter.Invoke(builder);
 
             return builder.Build();
         }
+
+        //public static IContainer CreateTextBox(this IInteractionFactory factory, Action<ITextFieldBuilder> setter)
+        //{
+        //    var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ITextField>>();
+
+        //    var fontMan = factory.View.Context.Fonts;
+
+        //    var builder = new TextBoxBuilder(inputController, fontMan);
+
+        //    setter.Invoke(builder);
+
+        //    return builder.Build();
+        //}
 
         public static ITextField CreateTextField(this IInteractionFactory factory, Action<ITextFieldBuilder> setter)
         {
@@ -44,20 +57,20 @@ namespace OpenBreed.Gui.Extensions
             return builder.Build();
         }
 
-        public static ICheckboxBuilder CreateCheckbox(this IInteractionFactory factory, Action<ICheckboxBuilder> setter)
+        public static IContainer CreateCheckbox(this IInteractionFactory factory, Action<ICheckboxBuilder> setter)
         {
-            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ICheckbox>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController>();
 
             var builder = new CheckboxBuilder(inputController, factory);
 
             setter.Invoke(builder);
 
-            return builder;
+            return builder.Build();
         }
 
         public static IDockPanel CreateDockPanel(this IInteractionFactory factory, Action<IDockPanelBuilder> setter)
         {
-            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ILabel>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ILabelField>>();
 
             var builder = new DockPanelBuilder(inputController);
 
@@ -77,11 +90,22 @@ namespace OpenBreed.Gui.Extensions
             return builder.Build();
         }
 
-        public static IStatebox CreateStatebox(this IInteractionFactory factory, Action<IStateboxBuilder> setter)
+        public static IScrollbar CreateScrollbar(this IInteractionFactory factory, Action<IScrollbarBuilder> setter)
         {
-            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ILabel>>();
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<IScrollbar>>();
 
-            var builder = new StateboxBuilder(inputController);
+            var builder = new ScrollbarBuilder(inputController);
+
+            setter.Invoke(builder);
+
+            return builder.Build();
+        }
+
+        public static ICheckField CreateCheckField(this IInteractionFactory factory, Action<ICheckFieldBuilder> setter)
+        {
+            var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ICheckField>>();
+
+            var builder = new CheckFieldBuilder(inputController);
 
             setter.Invoke(builder);
 

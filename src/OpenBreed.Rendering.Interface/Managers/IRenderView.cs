@@ -20,7 +20,7 @@ namespace OpenBreed.Rendering.Interface.Managers
         event ViewResizeHandler Resized;
 
         /// <summary>
-        /// Event occuring during view rendering.
+        /// Event occurring during view rendering.
         /// </summary>
         event ViewRenderHandler Rendering;
 
@@ -86,21 +86,9 @@ namespace OpenBreed.Rendering.Interface.Managers
         /// </summary>
         IRenderContext Context { get; }
 
-        ViewResizeHandler Resizer { get; set; }
-
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Render
-        /// </summary>
-        /// <param name="drawBorder">Draw surrounding border</param>
-        /// <param name="drawBackground">Draw background</param>
-        /// <param name="backgroundColor">Background color</param>
-        /// <param name="viewportTransform">Viewport transformation</param>
-        /// <param name="func">Drawing function</param>
-        void RenderViewport(bool drawBorder, bool drawBackground, Color4 backgroundColor, Matrix4 viewportTransform, Action func);
 
         void PushMatrix();
 

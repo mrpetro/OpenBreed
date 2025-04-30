@@ -20,12 +20,14 @@ namespace OpenBreed.Gui.Builders
         internal string Text = string.Empty;
         internal string FontName = "Arial";
         internal int FontSize = 12;
+        internal PropertyBinding<string>? TextBinding { get; private set; }
 
         #endregion Internal Fields
 
         #region Private Fields
 
         private readonly IFontMan fontMan;
+
 
         #endregion Private Fields
 
@@ -34,6 +36,8 @@ namespace OpenBreed.Gui.Builders
         public TextFieldBuilder(IElementInputController<ITextField> inputController, IFontMan fontMan) : base(inputController)
         {
             this.fontMan = fontMan;
+
+            SetMinimumSize(100, 25);
         }
 
         #endregion Public Constructors
@@ -53,6 +57,11 @@ namespace OpenBreed.Gui.Builders
         public void SetFontName(string name)
         {
             FontName = name;
+        }
+
+        public void BindProperty(PropertyBinding<string>? binding)
+        {
+            TextBinding = binding;
         }
 
         #endregion Public Methods

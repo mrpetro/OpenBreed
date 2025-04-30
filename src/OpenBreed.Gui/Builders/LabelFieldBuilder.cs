@@ -8,7 +8,7 @@ using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Gui.Builders
 {
-    internal class LabelBuilder : ElementBuilder<ILabel>, ILabelBuilder
+    internal class LabelFieldBuilder : ElementBuilder<ILabelField>, ILabelFieldBuilder
     {
         #region Internal Fields
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Constructors
 
-        public LabelBuilder(IElementInputController<ILabel> inputHandler, IFontMan fontMan) : base(inputHandler)
+        public LabelFieldBuilder(IElementInputController inputHandler, IFontMan fontMan) : base(inputHandler)
         {
             this.fontMan = fontMan;
         }
@@ -71,9 +71,9 @@ namespace OpenBreed.Gui.Builders
             return fontMan.GetOSFont(FontName, FontSize);
         }
 
-        public override ILabel Build()
+        public override ILabelField Build()
         {
-            return new Label(this);
+            return new LabelField(this);
         }
 
         #endregion Internal Methods

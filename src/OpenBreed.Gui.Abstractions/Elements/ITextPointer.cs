@@ -20,5 +20,6 @@ namespace OpenBreed.Gui.Abstractions.Elements
         void MoveToLineBegin();
         void MoveToLineEnd();
         void SetIndexPosition(Vector2 cursorPos);
+        void Reset();
     }
 }

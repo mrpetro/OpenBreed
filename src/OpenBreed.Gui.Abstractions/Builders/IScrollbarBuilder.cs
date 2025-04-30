@@ -8,17 +8,21 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Abstractions.Builders
 {
-    public interface ITextFieldBuilder : IElementBuilder
+    public interface IScrollbarBuilder : IElementBuilder
     {
         #region Public Methods
 
-        void SetText(string? text);
+        void SetMode(ScrollbarMode mode);
 
-        void SetFontSize(int size);
+        void SetValue(float value);
 
-        void SetFontName(string name);
+        void SetMinimumValue(float value);
 
-        void BindProperty(PropertyBinding<string>? binding);
+        void SetMaximumValue(float value);
+
+        void SetValueUnit(float valueUnit);
+
+        void BindValue(IValueBinding<float>? binding);
 
         #endregion Public Methods
     }

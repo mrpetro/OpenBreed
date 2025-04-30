@@ -29,6 +29,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         private readonly ITileStampDataLoader tileStampDataLoader;
         private readonly ITileAtlasDataLoader tileAtlasDataLoader;
         private IPalette palette;
+        private bool pendingReset;
 
         #endregion Private Fields
 
@@ -54,7 +55,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             this.tileAtlasDataLoader = tileAtlasDataLoader;
 
             view.Rendering += OnRender;
-            view.Reseting += OnReset;
+            view.Reseting += (view) => pendingReset = true;
             view.CursorDown += OnCursorDown;
 
             LoadPalettes();
@@ -102,6 +103,14 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private void OnRender(IRenderView view, Matrix4 transform, float dt)
         {
+            view.PushMatrix();
+
+            if (pendingReset)
+            {
+                OnReset(view);
+                pendingReset = false;
+            }
+
             view.EnableAlpha();
             view.SetPalette(palette);
             view.PushMatrix();
@@ -129,6 +138,8 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             RenderAxes(view);
 
             view.DisableAlpha();
+
+            view.PopMatrix();
         }
 
         private void OnCursorDown(ViewCursorDownEvent e)

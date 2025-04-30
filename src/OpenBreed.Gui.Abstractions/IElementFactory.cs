@@ -1,19 +1,20 @@
 ﻿using OpenBreed.Gui.Abstractions.Elements;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Gui.Abstractions.Builders
+namespace OpenBreed.Gui.Abstractions
 {
-    public interface ICheckboxBuilder : IDockPanelBuilder
+    public interface IElementFactory
     {
         #region Public Methods
 
-        void BindValue(PropertyBinding<bool> propertyBinding);
-        void SetLabel(string text);
+        TElement Create<TElement>(string blueprintName, object model) where TElement : IElement;
 
         #endregion Public Methods
+
     }
 }

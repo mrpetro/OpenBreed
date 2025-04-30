@@ -13,21 +13,23 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Builders
 {
-    internal class StateboxBuilder : ElementBuilder<IStatebox>, IStateboxBuilder
+    internal class CheckFieldBuilder : ElementBuilder<ICheckField>, ICheckFieldBuilder
     {
         #region Public Constructors
 
-        public StateboxBuilder(IElementInputController inputController) : base(inputController)
+        public CheckFieldBuilder(IElementInputController<ICheckField> inputController) : base(inputController)
         {
+
+            SetSize(25, 25);
         }
 
         #endregion Public Constructors
 
         #region Internal Properties
 
-        internal bool IsChecked { get; private set; }
+        internal bool Value { get; private set; }
 
-        internal PropertyBinding<bool>? IsCheckedBinding { get; private set; }
+        internal PropertyBinding<bool>? ValueBinding { get; private set; }
 
 
         internal (object propertyTarget, PropertyInfo properyExpression) StateBinding { get; private set; }
@@ -36,9 +38,9 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Methods
 
-        public void BindIsChecked(PropertyBinding<bool>? binding)
+        public void BindProperty(PropertyBinding<bool>? binding)
         {
-            IsCheckedBinding = binding;
+            ValueBinding = binding;
         }
 
         public void BindIsChecked<TTarget>(TTarget target, Expression<Func<TTarget, bool>> properyExpression)
@@ -46,21 +48,21 @@ namespace OpenBreed.Gui.Builders
             var expr = (MemberExpression)properyExpression.Body;
             var prop = (PropertyInfo)expr.Member;
 
-            IsCheckedBinding = new PropertyBinding<bool>(target, prop);
+            ValueBinding = new PropertyBinding<bool>(target, prop);
         }
 
         public void SetChecked(bool isChecked)
         {
-            IsChecked = isChecked;
+            Value = isChecked;
         }
 
         #endregion Public Methods
 
         #region Internal Methods
 
-        public override IStatebox Build()
+        public override Abstractions.Elements.ICheckField Build()
         {
-            return new Statebox(this);
+            return new Elements.CheckField(this);
         }
 
         #endregion Internal Methods

@@ -7,13 +7,13 @@ using System.Reflection;
 
 namespace OpenBreed.Gui.Controllers
 {
-    public class CheckboxInputController : ElementInputController<ICheckbox>
+    public class CheckFieldInputController : ElementInputController<ICheckField>
     {
-        public CheckboxInputController()
+        public CheckFieldInputController()
         {
         }
 
-        protected override void OnCursorClick(ICheckbox element, IInteractionCursor cursor, CursorKey cursorKey)
+        protected override void OnCursorClick(ICheckField element, IInteractionCursor cursor, CursorKey cursorKey)
         {
             element.Click(cursor, cursorKey);
         }

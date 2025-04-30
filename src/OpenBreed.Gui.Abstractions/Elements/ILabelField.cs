@@ -4,7 +4,7 @@ using OpenBreed.Rendering.Interface;
 namespace OpenBreed.Gui.Abstractions.Elements
 {
 
-    public interface ILabel : IElement
+    public interface ILabelField : IElement
     {
         #region Public Properties
 

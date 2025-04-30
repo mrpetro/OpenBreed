@@ -62,6 +62,7 @@ using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Gui.Abstractions.Builders;
 using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OpenBreed.Sandbox
 {
@@ -116,14 +117,75 @@ namespace OpenBreed.Sandbox
         #endregion Public Methods
     }
 
+    public class Data
+    {
+        private readonly ILogger logger;
+        private bool checkboxTest = true;
+        private float scrollTestHorizontal = 0.5f;
+        private float scrollTestVertical = 0.5f;
+        private string textBoxTest = "HelloWorld";
+
+
+        public Data(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
+        public bool CheckboxTest
+        {
+            get => checkboxTest;
+
+            set
+            {
+                checkboxTest = value;
+                logger.LogInformation($"Check field changed: {checkboxTest}");
+            }
+        }
+
+        public float ScrollTestHorizontal
+        {
+            get => scrollTestHorizontal;
+
+            set
+            {
+                scrollTestHorizontal = value;
+                logger.LogInformation($"Horizontal scrollbar value changed: {scrollTestHorizontal}");
+            }
+        }
+
+        public float ScrollTestVertical
+        {
+            get => scrollTestVertical;
+
+            set
+            {
+                scrollTestVertical = value;
+                logger.LogInformation($"Vertical scrollbar value changed: {scrollTestVertical}");
+            }
+        }
+
+        public string TextBoxTest
+        {
+            get => textBoxTest;
+
+            set
+            {
+                textBoxTest = value;
+                logger.LogInformation($"Text changed: {textBoxTest}");
+            }
+        }
+    }
+
     public class Program : CoreBase
     {
         #region Private Fields
 
+        private Data data;
         private readonly IWindow window;
         private readonly IEventsMan eventsMan;
         private readonly IInputsMan inputsMan;
         private readonly IInteractionFactoryProvider interactionFactoryProvider;
+        private readonly IElementFactory elementFactory;
         private IRenderView renderView;
 
         #endregion Private Fields
@@ -139,9 +201,12 @@ namespace OpenBreed.Sandbox
             eventsMan = host.Services.GetRequiredService<IEventsMan>();
             inputsMan = host.Services.GetRequiredService<IInputsMan>();
             interactionFactoryProvider = host.Services.GetRequiredService<IInteractionFactoryProvider>();
+            elementFactory = host.Services.GetRequiredService<IElementFactory>();
 
             eventsMan.Subscribe<WindowUpdateEvent>((a) => OnUpdateFrame(a.Dt));
             eventsMan.Subscribe<WindowLoadEvent>(OnWindowLoad);
+
+            data = new Data(host.Services.GetRequiredService<ILogger>());
         }
 
         #endregion Public Constructors
@@ -207,22 +272,33 @@ namespace OpenBreed.Sandbox
 
             });
 
-            desktop.AddChild(CreateGridPanelTest(interactionFactory));
+            //var form = elementFactory.Create<IElement>("CheckBox", data);
 
+            //desktop.AddChild(form);
 
-            desktop.AddChild(interactionFactory.CreateTextField((builder) =>
+            desktop.AddChild(CreateGridPanelTest(interactionFactory, data));
+
+            desktop.AddChild(interactionFactory.CreateCheckbox((builder) =>
             {
-                builder.SetSize(100, 100);
-                builder.SetFontSize(15);
-                builder.SetMovable(false);
+                builder.SetPosition(80, 0);
+                builder.SetLabel("Test1");
 
-                var text = File.ReadAllText(@"Data//SampleText.txt");
-                builder.SetText(text);
+                builder.BindValue(PropertyBinding<bool>.Create(data, (obj) => obj.CheckboxTest));
             }));
+
+            //desktop.AddChild(interactionFactory.CreateTextField((builder) =>
+            //{
+            //    builder.SetFontSize(15);
+            //    //var text = File.ReadAllText(@"Data//SampleText.txt");
+
+            //    builder.BindProperty(PropertyBinding<string>.Create(data, (obj) => obj.TextBoxTest));
+
+            //    //builder.SetText(text);
+            //}));
 
         }
 
-        private static IGridPanel CreateGridPanelTest(IInteractionFactory factory)
+        private static IGridPanel CreateGridPanelTest(IInteractionFactory factory, Data data)
         {
             var grid = factory.CreateGridPanel(builder =>
             {
@@ -230,12 +306,12 @@ namespace OpenBreed.Sandbox
 
                 builder.SetMargin(5);
 
-                builder.AddColumn(25);
+                builder.AddColumn(16);
                 builder.AddColumn();
-                builder.AddColumn(25);
-                builder.AddRow(25);
+                builder.AddColumn(16);
+                builder.AddRow(16);
                 builder.AddRow();
-                builder.AddRow(25);
+                builder.AddRow(16);
 
                 builder.SetTag("Form");
                 builder.SetPosition(-300.0f, 300.0f);
@@ -267,27 +343,18 @@ namespace OpenBreed.Sandbox
                     builder.SetGridPosition(2, 0);
                 }));
 
-            grid.AddChild(factory.CreateButton((builder) =>
-                {
-                    builder.SetMargin(5);
+            grid.AddChild(factory.CreateScrollbar((builder) =>
+            {
+                builder.SetMovable(false);
 
-                    builder.SetMovable(true);
-
-                    builder.SetTag("ResizeBottom");
-                    builder.SetMoveCallback((element, offset) =>
-                    {
-                        if (element.IsMovable && element is IButton button && button.IsPressed)
-                        {
-                            var form = element.GetAncestor("Form");
-
-                            if (form is not null)
-                            {
-                                form.ResizeBy(offset, ElementResizeAnchor.Bottom);
-                            }
-                        }
-                    });
-                    builder.SetGridPosition(1, 0);
-                }));
+                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Horizontal);
+                builder.SetValue(2.0f);
+                builder.SetMinimumValue(2.0f);
+                builder.SetMaximumValue(8.0f);
+                builder.SetValueUnit(5.0f);
+                builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestHorizontal));
+                builder.SetGridPosition(1, 0);
+            }));
 
             grid.AddChild(factory.CreateButton((builder) =>
                 {
@@ -312,31 +379,21 @@ namespace OpenBreed.Sandbox
                 }));
 
 
-            grid.AddChild(factory.CreateButton((builder) =>
-                {
-                    builder.SetMovable(true);
+            grid.AddChild(factory.CreateScrollbar((builder) =>
+            {
+                builder.SetMovable(false);
 
-                    builder.SetTag("ResizeRight");
-                    builder.SetMoveCallback((element, offset) =>
-                    {
-                        if (element.IsMovable && element is IButton button && button.IsPressed)
-                        {
-                            var form = element.GetAncestor("Form");
-
-                            if (form is not null)
-                            {
-                                form.ResizeBy(offset, ElementResizeAnchor.Right);
-                            }
-                        }
-                    });
-                    builder.SetGridPosition(2, 1);
-                }));
+                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Vertical);
+                builder.SetValue(-100.0f);
+                builder.SetMinimumValue(-100.0f);
+                builder.SetMaximumValue(200.0f);
+                builder.SetValueUnit(25.0f);
+                builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestVertical));
+                builder.SetGridPosition(2, 1);
+            }));
 
             grid.AddChild(factory.CreateTextField((builder) =>
                 {
-                    builder.SetFontSize(15);
-                    builder.SetMovable(false);
-
                     var text = File.ReadAllText(@"Data//SampleText.txt");
                     builder.SetText(text);
 

@@ -9,6 +9,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
@@ -75,7 +76,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public IRenderContext Context { get; }
         public int Id { get; }
         public IFontMan Fonts { get; }
-        public ViewResizeHandler Resizer { get; set; }
         public Matrix4 View { get; set; } = Matrix4.Identity;
         public Matrix4 Projection => projection;
         public IPalette CurrentPalette => currentPalette;
@@ -83,36 +83,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #endregion Public Properties
 
         #region Public Methods
-
-        public void RenderViewport(bool drawBorder, bool drawBackground, Color4 backgroundColor, Matrix4 viewportTransform, Action func)
-        {
-            PushMatrix();
-
-            try
-            {
-                MultMatrix(viewportTransform);
-
-                if (drawBackground)
-                    Context.Primitives.DrawUnitRectangle(
-                        this,
-                        Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f),
-                        backgroundColor,
-                        filled: true);
-
-                if (drawBorder)
-                    Context.Primitives.DrawUnitRectangle(
-                        this,
-                        Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f),
-                        Color4.Red,
-                        filled: false);
-
-                func.Invoke();
-            }
-            finally
-            {
-                PopMatrix();
-            }
-        }
 
         public void EnableAlpha()
         {
@@ -242,7 +212,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         internal virtual void OnRender(float dt)
         {
-            GL.ViewportIndexed(Id,Box.Min.X, Box.Min.Y, Box.Size.X, Box.Size.Y);
+            GL.ViewportIndexed(Id, Box.Min.X, Box.Min.Y, Box.Size.X, Box.Size.Y);
 
             Rendering?.Invoke(this, Matrix4.Identity, dt);
         }
@@ -302,8 +272,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             SetProjection(Matrix4.CreateOrthographicOffCenter(0, Box.Size.X, 0, Box.Size.Y, -100.0f, 100.0f));
 
             View = Matrix4.Identity;
-
-            Resizer?.Invoke(this, width, height);
 
             Resized?.Invoke(this, width, height);
         }

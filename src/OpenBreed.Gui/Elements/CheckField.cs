@@ -14,26 +14,27 @@ using OpenTK.Mathematics;
 
 namespace OpenBreed.Gui.Elements
 {
-
-    internal class Statebox : Element, IStatebox
+    internal class CheckField : Element, ICheckField
     {
         #region Private Fields
 
-        private readonly PropertyBinding<bool> isCheckedBinding;
+        private readonly PropertyBinding<bool>? valueBinding;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal Statebox(StateboxBuilder builder) : base(builder)
+        internal CheckField(CheckFieldBuilder builder) : base(builder)
         {
-            IsChecked = builder.IsChecked;
+            valueBinding = builder.ValueBinding;
 
-            isCheckedBinding = builder.IsCheckedBinding;
-
-            if (isCheckedBinding is not null)
+            if (valueBinding is not null)
             {
-                IsChecked = isCheckedBinding.GetValue();
+                Value = valueBinding.GetValue();
+            }
+            else
+            {
+                Value = builder.Value;
             }
         }
 
@@ -43,7 +44,7 @@ namespace OpenBreed.Gui.Elements
 
         public bool IsPressed { get; private set; }
 
-        public bool IsChecked { get; private set; }
+        public bool Value { get; private set; }
 
         #endregion Public Properties
 
@@ -51,12 +52,8 @@ namespace OpenBreed.Gui.Elements
 
         public override void Click(IInteractionCursor cursor, CursorKey cursorKey)
         {
-            IsChecked = !IsChecked;
-
-            if (isCheckedBinding is not null)
-            {
-                isCheckedBinding.SetValue(IsChecked);
-            }
+            Value = !Value;
+            valueBinding?.SetValue(Value);
 
             base.Click(cursor, cursorKey);
         }

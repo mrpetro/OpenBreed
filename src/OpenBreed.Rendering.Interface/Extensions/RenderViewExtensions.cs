@@ -33,6 +33,11 @@ namespace OpenBreed.Rendering.Interface.Extensions
             renderView.View = Matrix4.CreateScale(scale, scale, 1.0f) * renderView.View.ClearScale();
         }
 
+        public static void SetScale(this IRenderView renderView, float scaleX, float scaleY)
+        {
+            renderView.View = Matrix4.CreateScale(scaleX, scaleY, 1.0f) * renderView.View.ClearScale();
+        }
+
         public static void ZoomTo(this IRenderView renderView, Vector2i position, float scale)
         {
             var newTransf = renderView.View;

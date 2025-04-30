@@ -32,12 +32,14 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         private readonly EditorView view;
         private readonly IClipEditorModel model;
 
+        private bool pendingReset = false;
+
         #endregion Private Fields
 
         #region Public Constructors
 
         public AnimationCurvesEditorController(
-            IEventsMan eventsMan,
+                    IEventsMan eventsMan,
             EditorView view,
             IClipEditorModel model)
         {
@@ -45,7 +47,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             this.model = model;
 
             view.Rendering += OnRender;
-            view.Reseting += OnReset;
+            view.Reseting += (view) => pendingReset = true;
             view.CursorDown += OnCursorDown;
         }
 
@@ -74,7 +76,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
             var ratio = extent.Size.Y / extent.Size.X;
 
-
             var offset = new Vector2(-extent.Center.X, -extent.Center.Y);
 
             var scale = ratio * view.Box.Size.Y / extent.Size.Y;
@@ -82,11 +83,18 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             view.SetScale(scale);
             view.MoveTo(view.Box.HalfSize);
             view.MoveBy((Vector2i)(offset * scale));
-
         }
 
         private void OnRender(IRenderView view, Matrix4 transform, float dt)
         {
+            view.PushMatrix();
+
+            if (pendingReset)
+            {
+                OnReset(view);
+                pendingReset = false;
+            }
+
             view.EnableAlpha();
             //view.SetPalette(palette);
             RenderBorder(view);
@@ -94,6 +102,8 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             RenderUnitGrid(view);
             RenderTracks(view);
             view.DisableAlpha();
+
+            view.PopMatrix();
         }
 
         private void OnCursorDown(ViewCursorDownEvent e)
@@ -224,7 +234,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
             lineStepY = MathHelper.Clamp(lineStepY, minYUnit, maxYUnit);
 
-            for (float linePosX = 0; linePosX < maxX; linePosX+= lineStepX)
+            for (float linePosX = 0; linePosX < maxX; linePosX += lineStepX)
             {
                 var ps = new Vector2(linePosX, worldBox.Min.Y);
                 var pe = new Vector2(linePosX, worldBox.Max.Y);
@@ -271,7 +281,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             //var scale = view.GetScale();
 
             //view.Scale(1.0f / scale);
-
 
             //view.PopMatrix();
         }

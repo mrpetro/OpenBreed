@@ -50,6 +50,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         private readonly IUpdater updater;
         private IWorld animationWorld;
         private IPalette palette;
+        private bool pendingReset;
 
         #endregion Private Fields
 
@@ -75,7 +76,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             this.entityMan = entityMan;
 
             view.Rendering += OnRender;
-            view.Reseting += OnReset;
+            view.Reseting += (view) => pendingReset = true;
             view.CursorDown += OnCursorDown;
 
             LoadPalettes();
@@ -184,6 +185,14 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private void OnRender(IRenderView view, Matrix4 transform, float dt)
         {
+            view.PushMatrix();
+
+            if (pendingReset)
+            {
+                OnReset(view);
+                pendingReset = false;
+            }
+
             view.EnableAlpha();
 
             RenderAxes(view);
@@ -191,6 +200,8 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             view.DisableAlpha();
 
             OnRenderFrame(view, transform, dt);
+
+            view.PopMatrix();
         }
 
         private void OnCursorDown(ViewCursorDownEvent e)

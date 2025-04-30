@@ -5,6 +5,7 @@ using OpenBreed.Gui.Abstractions.Extensions;
 using OpenBreed.Gui.Builders;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Events;
+using OpenTK.Graphics.ES30;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace OpenBreed.Gui.Elements
 
         private readonly List<int> lines = new List<int>([0]);
         private readonly List<char> characters = new List<char>();
+        private readonly PropertyBinding<string>? textBinding;
 
         #endregion Private Fields
 
@@ -31,7 +33,19 @@ namespace OpenBreed.Gui.Elements
             Font = builder.GetFont();
             Pointer = new TextPointer(this);
 
-            InsertAt(builder.Text, Pointer.ColumnIndex, Pointer.LineIndex);
+            textBinding = builder.TextBinding;
+
+            if (textBinding is not null)
+            {
+                var text = textBinding.GetValue() ?? string.Empty;
+
+                Clear();
+                InsertAt(text, Pointer.ColumnIndex, Pointer.LineIndex);
+            }
+            else
+            {
+                InsertAt(builder.Text, Pointer.ColumnIndex, Pointer.LineIndex);
+            }
         }
 
         #endregion Internal Constructors
@@ -49,6 +63,14 @@ namespace OpenBreed.Gui.Elements
         #endregion Public Properties
 
         #region Public Methods
+
+        public void Clear()
+        {
+            Pointer.Reset();
+            characters.Clear();
+            lines.Clear();
+            lines.Add(0);
+        }
 
         public char GetCharacter(int columnIndex, int lineIndex)
         {
@@ -148,6 +170,11 @@ namespace OpenBreed.Gui.Elements
             Pointer.MoveForward();
         }
 
+        private void OnUpdateText()
+        {
+            textBinding?.SetValue(new string(characters.ToArray()));
+        }
+
         public void Remove()
         {
             var characterIndex = GetCharacterIndex(Pointer.ColumnIndex, Pointer.LineIndex) - 1;
@@ -201,6 +228,8 @@ namespace OpenBreed.Gui.Elements
             {
                 lines[i] += text.Length;
             }
+
+            OnUpdateText();
         }
 
         private void RemoveAt(int charactersCount, int columnIndex, int lineIndex)
@@ -227,6 +256,8 @@ namespace OpenBreed.Gui.Elements
             {
                 lines[i] -= charactersCount;
             }
+
+            OnUpdateText();
         }
 
         #endregion Private Methods

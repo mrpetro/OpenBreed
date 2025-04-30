@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Gui.Rendering
 {
-    public class StateboxRenderer : ElementRenderer<IStatebox>
+    public class StateboxRenderer : ElementRenderer<ICheckField>
     {
         #region Protected Methods
 
-        protected override void Render(IStatebox element, IRenderView view)
+        protected override void Render(ICheckField element, IRenderView view)
         {
             var box = element.LocalBox;
 
@@ -45,7 +45,7 @@ namespace OpenBreed.Gui.Rendering
                 box,
                 borderColor, filled: false);
 
-            if (element.IsChecked)
+            if (element.Value)
             {
                 var points = new Vector2[] {
                     new Vector2(-0.8f * box.HalfSize.X, 0.0f * box.HalfSize.Y ),

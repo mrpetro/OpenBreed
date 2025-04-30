@@ -79,12 +79,12 @@ namespace OpenBreed.Gui.Elements
 
         internal void ResolveCursorEnter(IInteractionCursor cursor)
         {
-            Debug.WriteLine("Enter");
+            //Debug.WriteLine("Enter");
         }
 
         internal void ResolveCursorLeave(InteractionCursor cursor)
         {
-            Debug.WriteLine("Leave");
+            //Debug.WriteLine("Leave");
         }
 
         internal void ResolveCursorMove(InteractionCursor cursor)
@@ -94,6 +94,8 @@ namespace OpenBreed.Gui.Elements
 
             if (cursor.DownedElement is not null)
             {
+                var downedPosition  = cursor.DownedPosition ?? Vector2.Zero;
+
                 cursor.DownedElement.InputController.OnCursorDrag(cursor.DownedElement, cursor);
             }
 
@@ -143,6 +145,7 @@ namespace OpenBreed.Gui.Elements
             if (HitTest(position, out IElement? element) && element is not null)
             {
                 cursor.DownedElement = element;
+                cursor.DownedPosition = position;
 
                 logger.LogTrace("UI->{ElementTag}: Cursor.{CursorId} Down ({CursorKey})", element.Tag, cursorId, key);
                 element.InputController.OnCursorDown(element, cursor, key);

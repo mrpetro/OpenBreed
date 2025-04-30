@@ -20,20 +20,21 @@ namespace OpenBreed.Gui.Builders
         #region Private Fields
 
         private readonly IInteractionFactory factory;
-        private PropertyBinding<bool>? isCheckedBinding;
         private string? labelText;
+        private bool value;
+        private PropertyBinding<bool>? valueBinding;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public CheckboxBuilder(IElementInputController<ICheckbox> inputController, IInteractionFactory factory) : base(inputController)
+        public CheckboxBuilder(IElementInputController inputController, IInteractionFactory factory) : base(inputController)
         {
             SetTag("Checkbox");
-            SetSize(300, 40);
-            SetMinimumSize(40, 40);
-            SetMaximumSize(float.MaxValue, 40);
-            SetPadding(4);
+            SetSize(300, 16);
+            SetMinimumSize(16, 16);
+            SetMaximumSize(float.MaxValue, 16);
+            SetPadding(1);
             this.factory = factory;
         }
 
@@ -41,9 +42,14 @@ namespace OpenBreed.Gui.Builders
 
         #region Public Methods
 
-        public void BindIsChecked(PropertyBinding<bool> binding)
+        public void SetValue(bool value)
         {
-            isCheckedBinding = binding;
+            this.value = value;
+        }
+
+        public void BindValue(PropertyBinding<bool> binding)
+        {
+            valueBinding = binding;
         }
 
         public void SetLabel(string text)
@@ -59,19 +65,20 @@ namespace OpenBreed.Gui.Builders
         {
             var element = base.Build();
 
-            element.AddChild(factory.CreateStatebox((builder) =>
+            element.AddChild(factory.CreateCheckField((builder) =>
             {
                 builder.SetDockMode(ElementDockMode.Left);
-                builder.SetChecked(isChecked: true);
+                builder.SetChecked(value);
                 builder.SetTag("Checkbox");
-                builder.SetMargin(4);
-                builder.SetMaximumSize(32, 32);
-                builder.SetMinimumSize(32, 32);
-                builder.BindIsChecked(isCheckedBinding);
+                builder.SetMargin(1);
+                builder.SetMaximumSize(14, 14);
+                builder.SetMinimumSize(14, 14);
+                builder.BindProperty(valueBinding);
             }));
 
-            element.AddChild(factory.CreateLabel((builder) =>
+            element.AddChild(factory.CreateLabelField((builder) =>
             {
+                builder.SetFontSize(8);
                 builder.SetDockMode(ElementDockMode.Fill);
                 builder.SetHitTestable(false);
                 builder.SetHorizontalAlignment(HorizontalAlignment.Left);
