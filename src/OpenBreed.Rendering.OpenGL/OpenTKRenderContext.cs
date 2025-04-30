@@ -2,9 +2,9 @@
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -116,7 +116,7 @@ namespace OpenBreed.Rendering.OpenGL
             eventsMan.Raise(new ViewCursorUpEvent(view, cursorId, point, cursorKey));
         }
 
-        public void KeyDown(Interface.Events.Keys key, Interface.Events.KeyModifiers modifiers)
+        public void KeyDown(Abstractions.Events.Keys key, Abstractions.Events.KeyModifiers modifiers)
         {
             foreach (var view in views.Items)
             {
@@ -124,7 +124,7 @@ namespace OpenBreed.Rendering.OpenGL
             }
         }
 
-        public void KeyUp(Interface.Events.Keys key, Interface.Events.KeyModifiers modifiers)
+        public void KeyUp(Abstractions.Events.Keys key, Abstractions.Events.KeyModifiers modifiers)
         {
             foreach (var view in views.Items)
             {

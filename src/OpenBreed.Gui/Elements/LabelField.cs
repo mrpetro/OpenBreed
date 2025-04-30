@@ -7,7 +7,7 @@ using OpenBreed.Gui.Abstractions.Builders;
 using OpenBreed.Gui.Abstractions.Constants;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Builders;
-using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Abstractions;
 
 namespace OpenBreed.Gui.Elements
 {

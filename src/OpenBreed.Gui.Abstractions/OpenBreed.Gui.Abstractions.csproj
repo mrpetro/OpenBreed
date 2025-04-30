@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.Abstractions\OpenBreed.Rendering.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

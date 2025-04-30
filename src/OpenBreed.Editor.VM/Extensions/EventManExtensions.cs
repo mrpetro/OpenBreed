@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Interface.Managers;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

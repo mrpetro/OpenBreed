@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Interface;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenTK;
 using OpenTK.Mathematics;

@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common;
 using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Wecs.Entities;
 using System;
 using OpenBreed.Core;

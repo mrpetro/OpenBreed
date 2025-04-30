@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Gui.Abstractions.Constants;
-using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Abstractions;
 
 namespace OpenBreed.Gui.Abstractions.Elements
 {

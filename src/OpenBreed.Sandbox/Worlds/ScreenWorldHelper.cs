@@ -2,9 +2,9 @@
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Viewport;

@@ -8,7 +8,7 @@ using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Builders;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Builders;
-using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Abstractions.Events;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Gui.Elements

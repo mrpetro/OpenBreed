@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Common.Interface;
-using OpenBreed.Rendering.Interface.Data;
+using OpenBreed.Rendering.Abstractions.Data;
 
 namespace OpenBreed.Wecs.Components.Rendering.Extensions
 {

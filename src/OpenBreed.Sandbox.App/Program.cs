@@ -21,10 +21,10 @@ using OpenBreed.Model.Extensions;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Sprites;
 
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Data;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Data;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 
 using OpenTK;
@@ -43,7 +43,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
-using OpenBreed.Rendering.Interface.Extensions;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Core.Interface;
 using OpenBreed.Core.Interface.Managers;
 

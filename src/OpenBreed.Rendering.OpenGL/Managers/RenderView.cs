@@ -1,7 +1,7 @@
-﻿using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Extensions;
-using OpenBreed.Rendering.Interface.Managers;
+﻿using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Extensions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -252,12 +252,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             TextInput?.Invoke(this, text);
         }
 
-        internal void OnKeyDown(Interface.Events.Keys key, Interface.Events.KeyModifiers modifiers)
+        internal void OnKeyDown(Abstractions.Events.Keys key, Abstractions.Events.KeyModifiers modifiers)
         {
             KeyDown?.Invoke(this, key, modifiers);
         }
 
-        internal void OnKeyUp(Interface.Events.Keys key, Interface.Events.KeyModifiers modifiers)
+        internal void OnKeyUp(Abstractions.Events.Keys key, Abstractions.Events.KeyModifiers modifiers)
         {
             KeyUp?.Invoke(this, key, modifiers);
         }

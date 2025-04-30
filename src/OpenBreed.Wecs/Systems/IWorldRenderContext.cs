@@ -1,4 +1,4 @@
-﻿using OpenBreed.Rendering.Interface.Managers;
+﻿using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Worlds
@@ -7,7 +7,7 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Public Properties
 
-        Rendering.Interface.Managers.IRenderView View { get; }
+        Rendering.Abstractions.Managers.IRenderView View { get; }
         int Depth { get; }
         float Dt { get; }
         Box2 ViewBox { get; }

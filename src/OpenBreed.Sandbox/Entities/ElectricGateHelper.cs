@@ -2,7 +2,7 @@
 using OpenBreed.Core;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
-using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
@@ -18,7 +18,7 @@ using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Worlds;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Database.Interface;

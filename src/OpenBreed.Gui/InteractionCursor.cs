@@ -2,8 +2,8 @@
 using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Extensions;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 using System.Collections;
 

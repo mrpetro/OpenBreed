@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Gui.Abstractions.Elements;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Gui.Abstractions

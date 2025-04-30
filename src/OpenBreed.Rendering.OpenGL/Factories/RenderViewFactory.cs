@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Rendering.Interface.Factories;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Factories;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

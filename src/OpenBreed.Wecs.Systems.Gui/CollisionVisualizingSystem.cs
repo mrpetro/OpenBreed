@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
@@ -194,7 +194,7 @@ namespace OpenBreed.Wecs.Systems.Gui
             }
         }
 
-        private void RenderShape(Rendering.Interface.Managers.IRenderView view, IShape shape, Color4 color)
+        private void RenderShape(Rendering.Abstractions.Managers.IRenderView view, IShape shape, Color4 color)
         {
             switch (shape)
             {

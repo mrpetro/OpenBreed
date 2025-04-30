@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Interface.Tools;
-using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Abstractions;
 using OpenTK.Graphics.OpenGL4;
 using System;
 using System.Diagnostics;

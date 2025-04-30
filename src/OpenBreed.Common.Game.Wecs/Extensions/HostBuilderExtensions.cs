@@ -25,7 +25,7 @@ using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Animation.Generic.Extensions;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Managers;
 using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Common.Interface;
 

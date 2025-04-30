@@ -2,8 +2,8 @@
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Managers;
-using OpenBreed.Rendering.Interface.Data;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Data;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 

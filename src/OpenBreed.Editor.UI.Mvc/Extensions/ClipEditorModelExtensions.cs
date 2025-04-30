@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc.Models;
-using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

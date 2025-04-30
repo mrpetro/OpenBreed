@@ -2,8 +2,8 @@
 using OpenBreed.Core;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Sandbox.Jobs;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Components.Common;

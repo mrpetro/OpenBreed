@@ -4,7 +4,7 @@ using OpenBreed.Gui.Abstractions.Builders;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Builders;
 using OpenBreed.Gui.Elements;
-using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Abstractions.Events;
 using OpenTK.Mathematics;
 using System;
 using Xunit;

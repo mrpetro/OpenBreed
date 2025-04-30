@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Core;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;

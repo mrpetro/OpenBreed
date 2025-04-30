@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Gui.Abstractions.Elements;
-using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Abstractions.Events;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 

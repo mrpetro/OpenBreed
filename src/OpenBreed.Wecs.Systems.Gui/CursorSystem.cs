@@ -2,8 +2,8 @@
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Gui;

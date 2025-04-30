@@ -55,7 +55,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj" />
-    <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.Abstractions\OpenBreed.Rendering.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

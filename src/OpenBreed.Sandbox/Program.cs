@@ -35,10 +35,10 @@ using OpenBreed.Model.Sprites;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Data;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Data;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -97,7 +97,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using OpenBreed.Rendering.Interface.Extensions;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Core.Interface;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Common.Game;
@@ -628,7 +628,7 @@ namespace OpenBreed.Sandbox
             var gameWorld = worldBuilder.Build();
         }
 
-        void OnRenderFrame(Rendering.Interface.Managers.IRenderView view, Matrix4 transform, float dt)
+        void OnRenderFrame(Rendering.Abstractions.Managers.IRenderView view, Matrix4 transform, float dt)
         {
             var screenWorld = worldMan.GetByName("ScreenWorld");
 

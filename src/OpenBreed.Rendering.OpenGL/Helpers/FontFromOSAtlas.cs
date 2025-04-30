@@ -1,6 +1,6 @@
-﻿using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Extensions;
-using OpenBreed.Rendering.Interface.Managers;
+﻿using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Extensions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenTK;
 using OpenTK.Graphics.OpenGL4;

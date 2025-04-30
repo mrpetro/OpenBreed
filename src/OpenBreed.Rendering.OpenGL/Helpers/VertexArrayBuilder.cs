@@ -1,4 +1,4 @@
-﻿using OpenBreed.Rendering.Interface;
+﻿using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Mathematics;
 using System.Collections.Generic;

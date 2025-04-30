@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Gui.Abstractions.Constants;
 using OpenBreed.Gui.Abstractions.Elements;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

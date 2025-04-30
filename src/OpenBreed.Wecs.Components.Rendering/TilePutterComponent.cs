@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Interface;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

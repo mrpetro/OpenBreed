@@ -1,4 +1,4 @@
-﻿using OpenBreed.Rendering.Interface;
+﻿using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;

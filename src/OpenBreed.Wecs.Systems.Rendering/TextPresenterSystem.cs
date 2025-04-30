@@ -1,4 +1,4 @@
-﻿using OpenBreed.Rendering.Interface.Managers;
+﻿using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
@@ -43,13 +43,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Private Methods
 
-        private void RenderTexts(OpenBreed.Rendering.Interface.Managers.IRenderView view, Box2 clipBox)
+        private void RenderTexts(OpenBreed.Rendering.Abstractions.Managers.IRenderView view, Box2 clipBox)
         {
             for (int i = 0; i < entities.Count; i++)
                 RenderText(view, entities[i], clipBox);
         }
 
-        private void RenderText(OpenBreed.Rendering.Interface.Managers.IRenderView view, IEntity entity, Box2 clipBox)
+        private void RenderText(OpenBreed.Rendering.Abstractions.Managers.IRenderView view, IEntity entity, Box2 clipBox)
         {
             var pos = entity.Get<PositionComponent>();
             var tp = entity.Get<TextPresentationComponent>();

@@ -7,7 +7,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Palettes;
-using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Abstractions;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

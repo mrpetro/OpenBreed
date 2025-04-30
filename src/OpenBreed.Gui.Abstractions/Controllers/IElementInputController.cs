@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Elements;
-using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Abstractions.Events;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using KeyModifiers = OpenBreed.Rendering.Interface.Events.KeyModifiers;
-using Keys = OpenBreed.Rendering.Interface.Events.Keys;
+using KeyModifiers = OpenBreed.Rendering.Abstractions.Events.KeyModifiers;
+using Keys = OpenBreed.Rendering.Abstractions.Events.Keys;
 
 namespace OpenBreed.Gui.Abstractions.Controllers
 {

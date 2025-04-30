@@ -2,8 +2,8 @@
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Interface.Tools;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using System;
 using System.Collections.Generic;

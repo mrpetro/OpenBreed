@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Database.Interface;
-using OpenBreed.Rendering.Interface.Data;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Data;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Helpers

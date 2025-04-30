@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Rendering;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

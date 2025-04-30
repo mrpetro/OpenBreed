@@ -1,5 +1,5 @@
-﻿using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Managers;
+﻿using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
@@ -63,7 +63,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
         /// Draw this wireframe to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which entity wireframe will be rendered to</param>
-        private void DrawEntityAabb(Rendering.Interface.Managers.IRenderView view, IEntity entity, Box2 clipBox)
+        private void DrawEntityAabb(Rendering.Abstractions.Managers.IRenderView view, IEntity entity, Box2 clipBox)
         {
             var posCmp = entity.Get<PositionComponent>();
             var groupCmp = entity.Get<GroupComponent>();

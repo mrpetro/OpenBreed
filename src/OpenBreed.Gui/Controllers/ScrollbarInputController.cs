@@ -3,7 +3,7 @@ using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Elements;
 using OpenBreed.Gui.Extensions;
-using OpenBreed.Rendering.Interface.Events;
+using OpenBreed.Rendering.Abstractions.Events;
 using OpenTK.Mathematics;
 using System.Reflection;
 

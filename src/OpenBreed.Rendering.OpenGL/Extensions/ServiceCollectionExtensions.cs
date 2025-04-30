@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Core.Interface.Managers;
-using OpenBreed.Rendering.Interface.Factories;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Factories;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Factories;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Windowing.Common;

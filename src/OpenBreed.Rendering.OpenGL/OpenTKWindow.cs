@@ -2,10 +2,10 @@
 using OpenBreed.Core;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Factories;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Factories;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
@@ -133,12 +133,12 @@ namespace OpenBreed.Rendering.OpenGL
 
         private void GameWindow_KeyDown(KeyboardKeyEventArgs obj)
         {
-            Context.KeyDown((Interface.Events.Keys)obj.Key, (Interface.Events.KeyModifiers)obj.Modifiers);
+            Context.KeyDown((Abstractions.Events.Keys)obj.Key, (Abstractions.Events.KeyModifiers)obj.Modifiers);
         }
 
         private void GameWindow_KeyUp(KeyboardKeyEventArgs obj)
         {
-            Context.KeyUp((Interface.Events.Keys)obj.Key, (Interface.Events.KeyModifiers)obj.Modifiers);
+            Context.KeyUp((Abstractions.Events.Keys)obj.Key, (Abstractions.Events.KeyModifiers)obj.Modifiers);
         }
 
         private void GameWindow_TextInput(TextInputEventArgs obj)

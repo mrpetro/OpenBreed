@@ -4,7 +4,7 @@ using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Extensions;
 using OpenBreed.Gui.Elements;
 using OpenBreed.Gui.Presentations;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -75,7 +75,7 @@ namespace OpenBreed.Gui.Rendering
 
         #region Private Methods
 
-        private void RenderPointer(ITextField element, IRenderView view, Box2 viewBox, OpenBreed.Rendering.Interface.IFont font)
+        private void RenderPointer(ITextField element, IRenderView view, Box2 viewBox, OpenBreed.Rendering.Abstractions.IFont font)
         {
             var cursorXPosition = element.Pointer.GetXPosition();
 

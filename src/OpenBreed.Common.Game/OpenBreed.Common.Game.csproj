@@ -15,7 +15,7 @@
     <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj" />
     <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj" />
     <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
-    <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Rendering.Abstractions\OpenBreed.Rendering.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj" />
     <ProjectReference Include="..\OpenBreed.Scripting.Lua\OpenBreed.Scripting.Lua.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj" />

@@ -2,10 +2,10 @@
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Mvc;
 using OpenBreed.Editor.UI.Mvc.Models;
-using OpenBreed.Rendering.Interface.Data;
-using OpenBreed.Rendering.Interface.Events;
-using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Abstractions.Data;
+using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using OpenBreed.Editor.UI.Mvc.Views;
 using OpenBreed.Core.Interface.Managers;
-using OpenBreed.Rendering.Interface.Extensions;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using System.Drawing;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc.Extensions;
@@ -119,7 +119,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             worldMan.Update(dt);
         }
 
-        private void OnRenderFrame(Rendering.Interface.Managers.IRenderView view, Matrix4 transform, float dt)
+        private void OnRenderFrame(Rendering.Abstractions.Managers.IRenderView view, Matrix4 transform, float dt)
         {
             if (animationWorld is null)
             {

@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 
