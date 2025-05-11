@@ -1,5 +1,4 @@
-﻿using OpenBreed.Rendering.Abstractions.Managers;
-using System;
+﻿using System;
 
 namespace OpenBreed.Rendering.Abstractions.Events
 {

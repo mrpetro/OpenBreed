@@ -22,6 +22,7 @@ namespace OpenBreed.Gui.Builders
 
         public ScrollbarBuilder(IElementInputController<IScrollbar> inputController) : base(inputController)
         {
+            SetSize(16, 16);
         }
 
         public void SetMode(ScrollbarMode mode)

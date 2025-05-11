@@ -1,4 +1,6 @@
-﻿using OpenBreed.Rendering.Abstractions.Managers;
+﻿using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Extensions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

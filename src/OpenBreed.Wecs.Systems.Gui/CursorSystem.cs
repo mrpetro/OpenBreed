@@ -49,7 +49,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         public void Render(IWorldRenderContext context)
         {
-            var cursorPos4 = context.View.GetHostToWorldCoords((Vector2i)inputsMan.CursorPos);
+            var cursorPos4 = context.View.FromHostToWorldPoint((Vector2i)inputsMan.CursorPos);
 
             for (int i = 0; i < entities.Count; i++)
             {

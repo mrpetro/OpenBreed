@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Rendering.Abstractions.Managers
+namespace OpenBreed.Rendering.Abstractions
 {
     public interface IRenderContext
     {

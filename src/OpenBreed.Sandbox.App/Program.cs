@@ -276,15 +276,46 @@ namespace OpenBreed.Sandbox
 
             //desktop.AddChild(form);
 
-            desktop.AddChild(CreateGridPanelTest(interactionFactory, data));
-
-            desktop.AddChild(interactionFactory.CreateCheckbox((builder) =>
+            desktop.AddChild(interactionFactory.CreateScrollbar((builder) =>
             {
-                builder.SetPosition(80, 0);
-                builder.SetLabel("Test1");
+                builder.SetMovable(false);
 
-                builder.BindValue(PropertyBinding<bool>.Create(data, (obj) => obj.CheckboxTest));
+                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Horizontal);
+                builder.SetValue(-100.0f);
+                builder.SetMaximumSize(float.MaxValue, 16.0f);
+                builder.SetMinimumValue(-100.0f);
+                builder.SetMaximumValue(200.0f);
+                builder.SetValueUnit(25.0f);
+                builder.SetDockMode(ElementDockMode.Top);
+                //builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestVertical));
+                //builder.SetGridPosition(2, 1);
             }));
+
+            desktop.AddChild(interactionFactory.CreateScrollbar((builder) =>
+            {
+                builder.SetMovable(false);
+
+                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Vertical);
+                builder.SetMaximumSize(16.0f, float.MaxValue);
+                builder.SetValue(-100.0f);
+                builder.SetMinimumValue(-100.0f);
+                builder.SetMaximumValue(200.0f);
+                builder.SetValueUnit(25.0f);
+                builder.SetDockMode(ElementDockMode.Right);
+                //builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestVertical));
+                //builder.SetGridPosition(2, 1);
+            }));
+
+
+            //desktop.AddChild(CreateGridPanelTest(interactionFactory, data));
+
+            //desktop.AddChild(interactionFactory.CreateCheckbox((builder) =>
+            //{
+            //    builder.SetPosition(80, 0);
+            //    builder.SetLabel("Test1");
+
+            //    builder.BindValue(PropertyBinding<bool>.Create(data, (obj) => obj.CheckboxTest));
+            //}));
 
             //desktop.AddChild(interactionFactory.CreateTextField((builder) =>
             //{

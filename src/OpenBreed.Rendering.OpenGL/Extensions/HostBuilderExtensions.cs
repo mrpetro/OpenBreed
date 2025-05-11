@@ -13,7 +13,6 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Model;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Data;
-using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Data;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Mathematics;

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 
-namespace OpenBreed.Rendering.OpenGL.Managers
+namespace OpenBreed.Rendering.OpenGL
 {
     public class RenderView : IRenderView
     {
@@ -24,6 +24,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly Box2 boxNormalized;
         private IPalette currentPalette;
         private Matrix4 projection = Matrix4.Identity;
+        private readonly List<IRenderLayer> layers = new List<IRenderLayer>();
 
         #endregion Private Fields
 
@@ -96,59 +97,54 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             OpenTK.Graphics.OpenGL.GL.Disable(OpenTK.Graphics.OpenGL.EnableCap.AlphaTest);
         }
 
-        public Vector2i GetHostToViewCoords(Vector2i point)
+        public Vector2i FromHostPoint(Vector2i hostPoint)
         {
-            point = hostCoordinateSystemConverter.Invoke(point);
+            hostPoint = hostCoordinateSystemConverter.Invoke(hostPoint);
 
-            return point - Box.Min;
+            return hostPoint - Box.Min;
         }
 
-        public Vector4 GetViewToWorldCoords(Vector2i point)
+        public Vector4 ToWorldPoint(Vector2i viewPoint)
         {
             var mat = View;
             mat.Invert();
-            var coordsT = new Vector4(point.X, point.Y, 0.0f, 1.0f) * mat;
-            coordsT.W = 1.0f / coordsT.W;
-            coordsT.X *= coordsT.W;
-            coordsT.Y *= coordsT.W;
-            coordsT.Z *= coordsT.W;
-            return coordsT;
+            var worldPoint = new Vector4(viewPoint.X, viewPoint.Y, 0.0f, 1.0f) * mat;
+            worldPoint.W = 1.0f / worldPoint.W;
+            worldPoint.X *= worldPoint.W;
+            worldPoint.Y *= worldPoint.W;
+            worldPoint.Z *= worldPoint.W;
+            return worldPoint;
         }
 
-        public Vector2i GetWorldToViewCoords(Vector2 point)
+        public Vector2i FromWorldPoint(Vector2 worldPoint)
         {
             var mat = View;
-            var coordsT = new Vector4(point.X, point.Y, 0.0f, 1.0f) * mat;
-            coordsT.W = 1.0f / coordsT.W;
-            coordsT.X *= coordsT.W;
-            coordsT.Y *= coordsT.W;
-            coordsT.Z *= coordsT.W;
-            return new Vector2i((int)coordsT.X, (int)coordsT.Y);
+            var viewPoint = new Vector4(worldPoint.X, worldPoint.Y, 0.0f, 1.0f) * mat;
+            viewPoint.W = 1.0f / viewPoint.W;
+            viewPoint.X *= viewPoint.W;
+            viewPoint.Y *= viewPoint.W;
+            viewPoint.Z *= viewPoint.W;
+            return new Vector2i((int)viewPoint.X, (int)viewPoint.Y);
         }
 
-        public Box2 GetViewToWorldCoords(Box2i box)
+        public Box2 ToWorldBox(Box2i viewBox)
         {
-            var wMin = GetViewToWorldCoords(box.Min);
-            var wMax = GetViewToWorldCoords(box.Max);
+            var wMin = ToWorldPoint(viewBox.Min);
+            var wMax = ToWorldPoint(viewBox.Max);
             return new Box2(new Vector2(wMin.X, wMin.Y), new Vector2(wMax.X, wMax.Y));
         }
 
-        public Box2i GetWorldToViewCoords(Box2 box)
+        public Box2i FromWorldBox(Box2 worldBox)
         {
-            var wMin = GetWorldToViewCoords(box.Min);
-            var wMax = GetWorldToViewCoords(box.Max);
+            var wMin = FromWorldPoint(worldBox.Min);
+            var wMax = FromWorldPoint(worldBox.Max);
             return new Box2i(new Vector2i(wMin.X, wMin.Y), new Vector2i(wMax.X, wMax.Y));
         }
 
-        public Vector4 GetHostToWorldCoords(Vector2i point)
+        public Vector4 FromHostToWorldPoint(Vector2i hostPoint)
         {
-            point = GetHostToViewCoords(point);
-            return GetViewToWorldCoords(point);
-        }
-
-        public void MultMatrix(Matrix4 transform)
-        {
-            View = transform * View;
+            hostPoint = FromHostPoint(hostPoint);
+            return ToWorldPoint(hostPoint);
         }
 
         public void PopMatrix()
@@ -181,29 +177,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             projection = matrix;
         }
 
-
-        public virtual void Reset()
+        public IRenderLayer CreateLayer(ViewRenderHandler renderHandler)
         {
-            View = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
-        }
-
-        public void Translate(Vector3 vec)
-        {
-            View = Matrix4.CreateTranslation(vec) * View;
-        }
-
-        public void Translate(Vector2 vec)
-        {
-            View = Matrix4.CreateTranslation(new Vector3(vec)) * View;
-        }
-
-        public void Translate(float x, float y, float z) => Translate(new Vector3(x, y, z));
-
-        public void Scale(float value) => Scale(value, value);
-
-        public void Scale(float x, float y)
-        {
-            View = Matrix4.CreateScale(x, y, 1.0f) * View;
+            var newLayer = new RenderLayer(renderHandler);
+            layers.Add(newLayer);
+            return newLayer;
         }
 
         #endregion Public Methods
@@ -215,7 +193,33 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.ViewportIndexed(Id, Box.Min.X, Box.Min.Y, Box.Size.X, Box.Size.Y);
 
             Rendering?.Invoke(this, Matrix4.Identity, dt);
+
+            RenderLayers(dt);
         }
+
+        private void RenderLayers(float dt)
+        {
+
+            for (int i = 0; i < layers.Count; i++)
+            {
+                RenderLayer(layers[i], dt);
+            }
+        }
+
+        private void RenderLayer(IRenderLayer layer, float dt)
+        {
+            PushMatrix();
+
+            try
+            {
+                layer.Render(this, dt);
+            }
+            finally
+            {
+                PopMatrix();
+            }
+        }
+
 
         internal virtual void OnCursorWheel(int cursorId, Vector2i cursorPosition, int wheelDelta)
         {
@@ -267,7 +271,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             var min = new Vector2i(width, height) * boxNormalized.Min;
             var max = new Vector2i(width, height) * boxNormalized.Max;
 
-            Box = new Box2i(((Vector2i)min), (Vector2i)max);
+            Box = new Box2i((Vector2i)min, (Vector2i)max);
 
             SetProjection(Matrix4.CreateOrthographicOffCenter(0, Box.Size.X, 0, Box.Size.Y, -100.0f, 100.0f));
 

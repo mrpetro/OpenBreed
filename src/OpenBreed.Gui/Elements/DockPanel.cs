@@ -67,38 +67,44 @@ namespace OpenBreed.Gui.Elements
 
                 case ElementDockMode.Top:
 
-                    var hBoxesH = dockableBox.SplitHorizontally(Math.Min(child.MaximumSize.Y, dockableBox.HalfSize.Y));
+                    var sizeY = Math.Min(child.MaximumSize.Y, dockableBox.HalfSize.Y);
 
-                    child.Position.X = hBoxesH.Top.Center.X;
-                    child.Position.Y = hBoxesH.Top.Center.Y;
-                    childNewSize.X = hBoxesH.Top.Size.X;
-                    childNewSize.Y = hBoxesH.Top.Size.Y;
+                    var hBoxes = dockableBox.SplitHorizontally(dockableBox.Size.Y - sizeY);
 
-                    dockableBox = hBoxesH.Bottom;
+                    childNewSize = MyMathHelper.Clamp(hBoxes.Top.Size, child.MinimumSize, child.MaximumSize);
+
+                    child.Position.X = hBoxes.Top.Center.X;
+                    child.Position.Y = hBoxes.Top.Center.Y;
+
+                    dockableBox = hBoxes.Bottom;
 
                     break;
 
                 case ElementDockMode.Bottom:
 
-                    hBoxesH = dockableBox.SplitHorizontally(Math.Min(child.MaximumSize.Y, dockableBox.HalfSize.Y));
+                    sizeY = Math.Min(child.MaximumSize.Y, dockableBox.HalfSize.Y);
 
-                    child.Position.X = hBoxesH.Bottom.Center.X;
-                    child.Position.Y = hBoxesH.Bottom.Center.Y;
-                    childNewSize.X = hBoxesH.Bottom.Size.X;
-                    childNewSize.Y = hBoxesH.Bottom.Size.Y;
+                    hBoxes = dockableBox.SplitHorizontally(sizeY);
 
-                    dockableBox = hBoxesH.Top;
+                    childNewSize = MyMathHelper.Clamp(hBoxes.Bottom.Size, child.MinimumSize, child.MaximumSize);
+
+                    child.Position.X = hBoxes.Bottom.Center.X;
+                    child.Position.Y = hBoxes.Bottom.Center.Y;
+
+                    dockableBox = hBoxes.Top;
 
                     break;
 
                 case ElementDockMode.Left:
 
-                    var vBoxes = dockableBox.SplitVertically(Math.Min(child.MaximumSize.X, dockableBox.HalfSize.X));
+                    var sizeX = Math.Min(child.MaximumSize.X, dockableBox.HalfSize.X);
+
+                    var vBoxes = dockableBox.SplitVertically(sizeX);
+
+                    childNewSize = MyMathHelper.Clamp(vBoxes.Left.Size, child.MinimumSize, child.MaximumSize);
 
                     child.Position.X = vBoxes.Left.Center.X;
                     child.Position.Y = vBoxes.Left.Center.Y;
-                    childNewSize.X = vBoxes.Left.Size.X;
-                    childNewSize.Y = vBoxes.Left.Size.Y;
 
                     dockableBox = vBoxes.Right;
 
@@ -106,12 +112,14 @@ namespace OpenBreed.Gui.Elements
 
                 case ElementDockMode.Right:
 
-                    vBoxes = dockableBox.SplitVertically(Math.Min(child.MaximumSize.X, dockableBox.HalfSize.X));
+                    sizeX = Math.Min(child.MaximumSize.X, dockableBox.HalfSize.X);
+
+                    vBoxes = dockableBox.SplitVertically(dockableBox.Size.X - sizeX);
+
+                    childNewSize = MyMathHelper.Clamp(vBoxes.Right.Size, child.MinimumSize, child.MaximumSize);
 
                     child.Position.X = vBoxes.Right.Center.X;
                     child.Position.Y = vBoxes.Right.Center.Y;
-                    childNewSize.X = vBoxes.Right.Size.X;
-                    childNewSize.Y = vBoxes.Right.Size.Y;
 
                     dockableBox = vBoxes.Left;
 
@@ -119,11 +127,10 @@ namespace OpenBreed.Gui.Elements
 
                 case ElementDockMode.Fill:
 
+                    childNewSize = MyMathHelper.Clamp(dockableBox.Size, child.MinimumSize, child.MaximumSize);
+
                     child.Position.X = dockableBox.Center.X;
                     child.Position.Y = dockableBox.Center.Y;
-
-                    childNewSize.X = dockableBox.Size.X;
-                    childNewSize.Y = dockableBox.Size.Y;
 
                     break;
 
@@ -131,9 +138,7 @@ namespace OpenBreed.Gui.Elements
                     break;
             }
 
-
-            var limitedSize = MyMathHelper.Clamp(childNewSize, child.MinimumSize, child.MaximumSize);
-            child.Resize(limitedSize);
+            child.Resize(childNewSize);
         }
 
         #endregion Private Methods

@@ -4,7 +4,7 @@ using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Rendering;
 using OpenBreed.Gui.Elements;
-using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Gui.Abstractions.Elements;
-using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenTK.Graphics.OpenGL4;

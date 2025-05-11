@@ -9,6 +9,7 @@ using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc.Controllers;
 using OpenBreed.Editor.UI.Mvc.Views;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
 using OpenBreed.Rendering.Abstractions.Managers;

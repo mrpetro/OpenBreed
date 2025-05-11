@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Managers;
 using System;

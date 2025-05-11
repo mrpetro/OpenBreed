@@ -16,7 +16,9 @@ using OpenBreed.Gui.Abstractions.Helpers;
 using OpenBreed.Gui.Abstractions.Rendering;
 using OpenBreed.Gui.Builders;
 using OpenBreed.Gui.Rendering;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 
@@ -30,6 +32,7 @@ namespace OpenBreed.Gui.Elements
         private readonly IRenderView renderView;
         private readonly IInteractionRenderer interactionRenderer;
         private readonly ILogger logger;
+        private readonly IRenderLayer renderLayer;
 
         #endregion Private Fields
 
@@ -41,7 +44,7 @@ namespace OpenBreed.Gui.Elements
             interactionRenderer = builder.InteractionRenderer;
             logger = builder.Logger;
 
-            renderView.Rendering += View_Rendering;
+            renderLayer = renderView.CreateLayer(OnViewRender);
             renderView.Resized += RenderView_Resized;
             renderView.CursorMove += RenderView_CursorMove;
             renderView.CursorDown += RenderView_CursorDown;
@@ -219,8 +222,10 @@ namespace OpenBreed.Gui.Elements
 
         #region Private Methods
 
-        private void View_Rendering(IRenderView view, Matrix4 transform, float dt)
-        {
+        private void OnViewRender(IRenderView view, Matrix4 transform, float dt)
+        {  
+            view.Reset();
+
             interactionRenderer.Render(this, view);
         }
 

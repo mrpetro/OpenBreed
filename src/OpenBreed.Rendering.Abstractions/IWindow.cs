@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK;
 using OpenTK.Input;
 using OpenTK.Mathematics;

@@ -7,7 +7,7 @@ namespace OpenBreed.Wecs.Worlds
     {
         #region Public Properties
 
-        Rendering.Abstractions.Managers.IRenderView View { get; }
+        Rendering.Abstractions.IRenderView View { get; }
         int Depth { get; }
         float Dt { get; }
         Box2 ViewBox { get; }

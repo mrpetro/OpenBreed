@@ -55,7 +55,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             this.tileAtlasDataLoader = tileAtlasDataLoader;
 
             view.Rendering += OnRender;
-            view.Reseting += (view) => pendingReset = true;
             view.CursorDown += OnCursorDown;
 
             LoadPalettes();
@@ -160,7 +159,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private Vector4i GetCellIndexCoords(IRenderView view, Vector2i viewPosition)
         {
-            var worldPosition = view.GetViewToWorldCoords(viewPosition);
+            var worldPosition = view.ToWorldPoint(viewPosition);
 
             return GetIndexPoint(worldPosition);
         }

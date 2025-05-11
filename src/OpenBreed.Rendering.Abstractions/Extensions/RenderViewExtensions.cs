@@ -18,6 +18,16 @@ namespace OpenBreed.Rendering.Abstractions.Extensions
             renderView.View *= Matrix4.CreateTranslation(offset.X, offset.Y, 0.0f);
         }
 
+        public static void Reset(this IRenderView renderView)
+        {
+            renderView.View = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
+        }
+
+        public static void MultMatrix(this IRenderView renderView, Matrix4 transform)
+        {
+            renderView.View = transform * renderView.View;
+        }
+
         public static void MoveTo(this IRenderView renderView, Vector2i position)
         {
             var scale = renderView.View[0, 0];
@@ -38,10 +48,29 @@ namespace OpenBreed.Rendering.Abstractions.Extensions
             renderView.View = Matrix4.CreateScale(scaleX, scaleY, 1.0f) * renderView.View.ClearScale();
         }
 
+        public static void Translate(this IRenderView renderView, Vector3 vec)
+        {
+            renderView.View = Matrix4.CreateTranslation(vec) * renderView.View;
+        }
+
+        public static void Translate(this IRenderView renderView, Vector2 vec)
+        {
+            renderView.View = Matrix4.CreateTranslation(new Vector3(vec)) * renderView.View;
+        }
+
+        public static void Translate(this IRenderView renderView, float x, float y, float z) => Translate(renderView, new Vector3(x, y, z));
+
+        public static void Scale(this IRenderView renderView, float value) => Scale(renderView, value, value);
+
+        public static void Scale(this IRenderView renderView, float x, float y)
+        {
+            renderView.View = Matrix4.CreateScale(x, y, 1.0f) * renderView.View;
+        }
+
         public static void ZoomTo(this IRenderView renderView, Vector2i position, float scale)
         {
             var newTransf = renderView.View;
-            ;
+
             var invMatrix = newTransf.Inverted();
 
             var t1Point = new Vector4(position.X, position.Y, 0.0f, 1.0f) * invMatrix;

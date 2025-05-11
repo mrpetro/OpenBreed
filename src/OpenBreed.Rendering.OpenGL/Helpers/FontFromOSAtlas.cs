@@ -91,6 +91,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false)
         {
+            //var s = view.FromWorldBox(clipBox);
+
             //TODO: include color in text rendering
 
             GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
@@ -116,7 +118,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
                 var key = chData.Index;
                 var width = chData.Width;
-                var oX = chData.XOffset;
+                var oX = chData.XOffset * scaleCorrection;
 
                 if (charPosX < clipBox.Min.X - width * scaleCorrection)
                 {
@@ -138,7 +140,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                     color, ignoreScale);
 
                 //NOTE: Uncommect this to see character box
-                //view.Context.Primitives.DrawRectangle(view, new Vector2(offsetX + width / 2.0f, Height / 2.0f), new Vector2(width, Height), Color4.Aqua, filled: false);
+                view.Context.Primitives.DrawRectangle(view, new Vector2(width / 2.0f, Height / 2.0f), new Vector2(width, Height), Color4.Aqua, filled: false);
                 charPosX += width * scaleCorrection;
             }
 

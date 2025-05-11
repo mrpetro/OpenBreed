@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
@@ -77,7 +78,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// Render this viewport content to the client
         /// </summary>
         /// <param name="dt">Time step</param>
-        private void RenderViewport(OpenBreed.Rendering.Abstractions.Managers.IRenderView view, IEntity vpe, Box2 clipBox, int depth, float dt)
+        private void RenderViewport(OpenBreed.Rendering.Abstractions.IRenderView view, IEntity vpe, Box2 clipBox, int depth, float dt)
         {
             var vpc = vpe.Get<ViewportComponent>();
             var viewportPos = vpe.Get<PositionComponent>().Value;
@@ -104,7 +105,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             view.RenderViewport(vpc.DrawBorder, vpc.DrawBackgroud, vpc.BackgroundColor, transform, () => DrawCameraView(view, vpc.CameraEntityId, viewportSize, viewportScalingType, depth, dt));
         }
 
-        private void DrawCameraView(OpenBreed.Rendering.Abstractions.Managers.IRenderView view, int cameraEntityId, Vector2 viewportSize, ViewportScalingType viewportScalingType, int depth, float dt)
+        private void DrawCameraView(OpenBreed.Rendering.Abstractions.IRenderView view, int cameraEntityId, Vector2 viewportSize, ViewportScalingType viewportScalingType, int depth, float dt)
         {
             var camera = entityMan.GetById(cameraEntityId);
 

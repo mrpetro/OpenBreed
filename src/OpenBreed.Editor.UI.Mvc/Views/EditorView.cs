@@ -72,6 +72,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
                 builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Horizontal);
                 builder.SetValue(-100.0f);
+                builder.SetMaximumSize(float.MaxValue, 16.0f);
                 builder.SetMinimumValue(-100.0f);
                 builder.SetMaximumValue(200.0f);
                 builder.SetValueUnit(25.0f);
@@ -85,6 +86,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
                 builder.SetMovable(false);
 
                 builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Vertical);
+                builder.SetMaximumSize(16.0f, float.MaxValue);
                 builder.SetValue(-100.0f);
                 builder.SetMinimumValue(-100.0f);
                 builder.SetMaximumValue(200.0f);
@@ -100,8 +102,6 @@ namespace OpenBreed.Editor.UI.Mvc.Views
         #region Public Events
 
         public event Action<IRenderView, Matrix4, float> Rendering;
-
-        public event Action<IRenderView> Reseting;
 
         public event Action<ViewCursorDownEvent> CursorDown;
 
@@ -140,7 +140,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
         internal void Reset()
         {
-            OnReset(renderView);
+            renderView.Reset();
         }
 
         #endregion Internal Methods
@@ -155,11 +155,6 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             }
 
             CursorDown?.Invoke(e);
-        }
-
-        protected void OnReset(IRenderView view)
-        {
-            Reseting?.Invoke(view);
         }
 
         protected virtual void OnCursorUp(ViewCursorUpEvent e)
@@ -181,11 +176,6 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             try
             {
                 Rendering.Invoke(view, transform, dt);
-
-                if (cursorView == view)
-                {
-                    DrawCursor(view, dt);
-                }
             }
             finally
             {
@@ -236,23 +226,9 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             renderView.ZoomTo(CursorPosition, currentScale);
         }
 
-        private void DrawCursor(IRenderView view, float dt)
-        {
-            var wPos = view.GetViewToWorldCoords(CursorPosition);
-
-            //var scale = view.GetScale();
-            //view.Scale(1.0f / scale);
-
-            //var cPos = view.GetViewToWorldCoords(CursorPosition);
-
-            var cSize = 20;
-            view.Context.Primitives.DrawPoint(view, new Vector2(wPos.X, wPos.Y), Color4.White, PointType.Cross, cSize, ignoreScale: true);
-            view.Context.Fonts.Render(view, new Box2(view.Box.Min, view.Box.Max), (view, clipBox) =>  RenderCoordinates(view, clipBox, wPos));
-        }
-
         private void RenderCoordinates(IRenderView view, Box2 clipBox, Vector4 wPos)
         {
-            var textPos = view.GetViewToWorldCoords(CursorPosition);
+            var textPos = view.ToWorldPoint(CursorPosition);
 
             var font = view.Context.Fonts.GetOSFont("ARIAL", 9);
 

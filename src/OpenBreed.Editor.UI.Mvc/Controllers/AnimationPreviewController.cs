@@ -76,7 +76,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             this.entityMan = entityMan;
 
             view.Rendering += OnRender;
-            view.Reseting += (view) => pendingReset = true;
             view.CursorDown += OnCursorDown;
 
             LoadPalettes();
@@ -119,7 +118,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             worldMan.Update(dt);
         }
 
-        private void OnRenderFrame(Rendering.Abstractions.Managers.IRenderView view, Matrix4 transform, float dt)
+        private void OnRenderFrame(Rendering.Abstractions.IRenderView view, Matrix4 transform, float dt)
         {
             if (animationWorld is null)
             {
@@ -222,7 +221,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private void RenderAxes(IRenderView view)
         {
-            var worldBox = view.GetViewToWorldCoords(view.Box);
+            var worldBox = view.ToWorldBox(view.Box);
 
             view.Context.Primitives.DrawLine(view, new Vector2(worldBox.Min.X, 0), new Vector2(worldBox.Max.X, 0), Color4.Red);
             view.Context.Primitives.DrawLine(view, new Vector2(0, worldBox.Min.Y), new Vector2(0, worldBox.Max.Y), Color4.Green);

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Rendering.Abstractions.Managers
+namespace OpenBreed.Rendering.Abstractions
 {
     public delegate Vector2i HostCoordinateSystemConverter(Vector2i point);
 
@@ -90,30 +90,20 @@ namespace OpenBreed.Rendering.Abstractions.Managers
 
         #region Public Methods
 
+        IRenderLayer CreateLayer(ViewRenderHandler renderHandler);
+
         void PushMatrix();
 
         void PopMatrix();
 
-        void Translate(Vector3 pos);
-
-        void Translate(Vector2 pos);
-
-        void Translate(float x, float y, float z);
-
-        void Scale(float x, float y);
-
-        void Scale(float value);
-
-        void MultMatrix(Matrix4 transform);
-
         void SetProjection(Matrix4 matrix4);
 
-        Vector4 GetViewToWorldCoords(Vector2i point);
-        Vector2i GetWorldToViewCoords(Vector2 point);
-        Box2 GetViewToWorldCoords(Box2i box);
-        Box2i GetWorldToViewCoords(Box2 box);
-        Vector4 GetHostToWorldCoords(Vector2i point);
-        Vector2i GetHostToViewCoords(Vector2i point);
+        Vector4 ToWorldPoint(Vector2i point);
+        Vector2i FromWorldPoint(Vector2 point);
+        Box2 ToWorldBox(Box2i box);
+        Box2i FromWorldBox(Box2 box);
+        Vector4 FromHostToWorldPoint(Vector2i point);
+        Vector2i FromHostPoint(Vector2i point);
 
         void SetPalette(IPalette palette);
 
@@ -124,8 +114,6 @@ namespace OpenBreed.Rendering.Abstractions.Managers
         void EnableAlpha();
 
         void DisableAlpha();
-
-        void Reset();
 
         #endregion Public Methods
     }

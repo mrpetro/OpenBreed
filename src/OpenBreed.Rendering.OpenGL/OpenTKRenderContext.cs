@@ -4,6 +4,7 @@ using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Graphics.OpenGL4;
@@ -97,7 +98,7 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            point = view.GetHostToViewCoords(point);
+            point = view.FromHostPoint(point);
 
             view.OnCursorDown(cursorId, point, cursorKey);
             eventsMan.Raise(new ViewCursorDownEvent(view, cursorId, point, cursorKey));
@@ -110,7 +111,7 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            point = view.GetHostToViewCoords(point);
+            point = view.FromHostPoint(point);
 
             view.OnCursorUp(cursorId, point, cursorKey);
             eventsMan.Raise(new ViewCursorUpEvent(view, cursorId, point, cursorKey));
@@ -139,7 +140,7 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            point = view.GetHostToViewCoords(point);
+            point = view.FromHostPoint(point);
 
             view.OnCursorEnter(cursorId, point);
             eventsMan.Raise(new ViewCursorEnterEvent(view, cursorId, point));
@@ -152,7 +153,7 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            point = view.GetHostToViewCoords(point);
+            point = view.FromHostPoint(point);
 
             view.OnCursorLeave(cursorId, point);
             eventsMan.Raise(new ViewCursorLeaveEvent(view, cursorId, point));
@@ -165,7 +166,7 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            point = view.GetHostToViewCoords(point);
+            point = view.FromHostPoint(point);
 
             view.OnCursorMove(cursorId, point);
             eventsMan.Raise(new ViewCursorMoveEvent(view, cursorId, point));
@@ -178,7 +179,7 @@ namespace OpenBreed.Rendering.OpenGL
                 return;
             }
 
-            point = view.GetHostToViewCoords(point);
+            point = view.FromHostPoint(point);
 
             view.OnCursorWheel(cursorId, point, wheelDelta);
             eventsMan.Raise(new ViewCursorWheelEvent(view, cursorId, point, wheelDelta));

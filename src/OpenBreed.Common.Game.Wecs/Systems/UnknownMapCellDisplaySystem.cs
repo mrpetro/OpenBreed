@@ -11,6 +11,7 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
+using OpenBreed.Rendering.Abstractions.Extensions;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {
@@ -65,7 +66,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
         /// Draw this wireframe to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which entity wireframe will be rendered to</param>
-        private void DrawEntityAabb(Rendering.Abstractions.Managers.IRenderView view, IEntity entity, Box2 clipBox)
+        private void DrawEntityAabb(Rendering.Abstractions.IRenderView view, IEntity entity, Box2 clipBox)
         {
             var posCmp = entity.Get<PositionComponent>();
 

@@ -32,8 +32,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         private readonly EditorView view;
         private readonly IClipEditorModel model;
 
-        private bool pendingReset = false;
-
         #endregion Private Fields
 
         #region Public Constructors
@@ -47,7 +45,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             this.model = model;
 
             view.Rendering += OnRender;
-            view.Reseting += (view) => pendingReset = true;
             view.CursorDown += OnCursorDown;
         }
 
@@ -88,12 +85,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         private void OnRender(IRenderView view, Matrix4 transform, float dt)
         {
             view.PushMatrix();
-
-            if (pendingReset)
-            {
-                OnReset(view);
-                pendingReset = false;
-            }
 
             view.EnableAlpha();
             //view.SetPalette(palette);
@@ -136,7 +127,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private void RenderAxes(IRenderView view)
         {
-            var worldBox = view.GetViewToWorldCoords(view.Box);
+            var worldBox = view.ToWorldBox(view.Box);
 
             view.Context.Primitives.DrawLine(view, new Vector2(worldBox.Min.X, 0), new Vector2(worldBox.Max.X, 0), Color4.Red);
             view.Context.Primitives.DrawLine(view, new Vector2(0, worldBox.Min.Y), new Vector2(0, worldBox.Max.Y), Color4.Green);
@@ -179,7 +170,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private void RenderTracks(IRenderView view)
         {
-            var worldBox = view.GetViewToWorldCoords(view.Box);
+            var worldBox = view.ToWorldBox(view.Box);
 
             if (model.Track is null)
             {
@@ -196,10 +187,10 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         {
             var fontMan = view.Context.Fonts;
 
-            var font = fontMan.GetOSFont("ARIAL", 8);
+            var font = fontMan.GetOSFont("ARIAL", 15);
             var fontColor = Color4.Purple;
 
-            var worldBox = view.GetViewToWorldCoords(view.Box);
+            var worldBox = view.ToWorldBox(view.Box);
 
             var minX = worldBox.Min.X;
             var minY = worldBox.Min.Y;
@@ -207,7 +198,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             var maxX = worldBox.Max.X;
             var maxY = worldBox.Max.Y;
 
-            var minXUnit = 0.25f;
+            var minXUnit = 2.0f;
             var maxXUnit = 8.0f;
 
             var minYUnit = 1.0f;
@@ -215,24 +206,28 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
             var scale = view.GetScale();
 
+            var fontHeight = font.Height / scale;
+
             var scaleDivisonFactor = 4.0f;
 
             var boxWidth = view.Box.Size.X;
             var boxHeight = view.Box.Size.Y;
 
-            var fW = boxWidth / scale * scaleDivisonFactor;
-            var sx = (float)scale / fW;
-            var ssx = MathHelper.NextPowerOfTwo(sx);
-            var lineStepX = 1.0f / ssx;
+            //var fW = boxWidth / scale * scaleDivisonFactor;
+            //var sx = (float)scale / fW;
+            //var ssx = MathHelper.NextPowerOfTwo(sx);
+            //var lineStepX = 1.0f / ssx;
 
-            lineStepX = MathHelper.Clamp(lineStepX, minXUnit, maxXUnit);
+            //lineStepX = MathHelper.Clamp(lineStepX, minXUnit, maxXUnit);
+            var lineStepX = 4.0f;
 
-            var fH = boxHeight / scale * scaleDivisonFactor;
-            var sy = (float)scale / fH;
-            var ssy = MathHelper.NextPowerOfTwo(sy);
-            var lineStepY = 1.0f / ssy;
+            //var fH = boxHeight / scale * scaleDivisonFactor;
+            //var sy = (float)scale / fH;
+            //var ssy = MathHelper.NextPowerOfTwo(sy);
+            //var lineStepY = 1.0f / ssy;
 
-            lineStepY = MathHelper.Clamp(lineStepY, minYUnit, maxYUnit);
+            //lineStepY = MathHelper.Clamp(lineStepY, minYUnit, maxYUnit);
+            var lineStepY = 4.0f;
 
             for (float linePosX = 0; linePosX < maxX; linePosX += lineStepX)
             {
@@ -242,10 +237,12 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
                 view.Context.Primitives.DrawLine(view, ps, pe, Color4.Green);
 
                 var posText = linePosX.ToString();
+                var textWidth = font.GetWidth(posText) / scale;
 
-                fontMan.RenderStart(view, new Vector2(linePosX, worldBox.Min.Y));
-                fontMan.RenderPart(view, font.Id, posText, Vector2.Zero, fontColor, 100, worldBox, ignoreScale: true);
-                fontMan.RenderEnd(view);
+                view.PushMatrix();
+                view.Translate(new Vector2(linePosX, worldBox.Max.Y - fontHeight));
+                font.Draw(view, posText, fontColor, worldBox, ignoreScale: true);
+                view.PopMatrix();
             }
 
             for (float linePosY = 0; linePosY < maxY; linePosY += lineStepY)
@@ -257,9 +254,10 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
                 var posText = linePosY.ToString();
 
-                fontMan.RenderStart(view, new Vector2(worldBox.Min.X, linePosY));
-                fontMan.RenderPart(view, font.Id, posText, Vector2.Zero, fontColor, 100, worldBox, ignoreScale: true);
-                fontMan.RenderEnd(view);
+                view.PushMatrix();
+                view.Translate(new Vector2(worldBox.Min.X, linePosY));
+                font.Draw(view, posText, fontColor, worldBox, ignoreScale: true);
+                view.PopMatrix();
             }
 
             for (float linePosY = -lineStepY; linePosY > minY; linePosY -= lineStepY)
@@ -271,9 +269,10 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
                 var posText = linePosY.ToString();
 
-                fontMan.RenderStart(view, new Vector2(worldBox.Min.X, linePosY));
-                fontMan.RenderPart(view, font.Id, posText, Vector2.Zero, fontColor, 100, worldBox, ignoreScale: true);
-                fontMan.RenderEnd(view);
+                view.PushMatrix();
+                view.Translate(new Vector2(worldBox.Min.X, linePosY));
+                font.Draw(view, posText, fontColor, worldBox, ignoreScale: true);
+                view.PopMatrix();
             }
 
             //view.PushMatrix();

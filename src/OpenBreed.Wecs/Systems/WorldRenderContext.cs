@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Worlds
         #region Public Constructors
 
         public WorldRenderContext(
-            Rendering.Abstractions.Managers.IRenderView view,
+            Rendering.Abstractions.IRenderView view,
             int depth,
             float dt,
             Box2 viewBox,
@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Public Properties
 
-        public Rendering.Abstractions.Managers.IRenderView View { get; }
+        public Rendering.Abstractions.IRenderView View { get; }
         public int Depth { get; }
         public float Dt { get; }
         public Box2 ViewBox { get; }

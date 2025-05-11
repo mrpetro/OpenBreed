@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Rendering;
-using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions;
 
 namespace OpenBreed.Gui.Rendering
 {
