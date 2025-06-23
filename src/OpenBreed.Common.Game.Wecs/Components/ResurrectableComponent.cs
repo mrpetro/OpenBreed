@@ -62,7 +62,7 @@ namespace OpenBreed.Common.Game.Wecs.Components
         {
             var worldId = WecsConsts.NO_WORLD_ID;
 
-            var world = worldMan.GetByName(template.WorldName);
+            var world = template.WorldName is null ? null : worldMan.GetByName(template.WorldName);
 
             if (world is not null)
                 worldId = world.Id;

@@ -233,6 +233,11 @@
       <Platform Solution="Editor_Debug|x64" Project="x64" />
       <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
+    <Project Path="OpenBreed.Rendering.Common/OpenBreed.Rendering.Common.csproj">
+      <BuildType Solution="Editor_Debug|*" Project="Release" />
+      <BuildType Solution="Game_Debug|*" Project="Debug" />
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
     <Project Path="OpenBreed.Rendering.OpenGL/OpenBreed.Rendering.OpenGL.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
@@ -286,7 +291,7 @@
       <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
   </Folder>
-  <Folder Name="/Wecs/Components/" Id="5544c88c-6b48-4da6-b382-d786ae65bad7">
+  <Folder Name="/Wecs/Components/">
     <Project Path="OpenBreed.Wecs.Components.Animation/OpenBreed.Wecs.Components.Animation.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
@@ -344,7 +349,7 @@
       <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
   </Folder>
-  <Folder Name="/Wecs/Systems/" Id="b5214815-33cc-178d-da71-05e315fd18b7">
+  <Folder Name="/Wecs/Systems/">
     <Project Path="OpenBreed.Wecs.Systems.Animation/OpenBreed.Wecs.Systems.Animation.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />

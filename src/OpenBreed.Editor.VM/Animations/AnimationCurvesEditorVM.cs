@@ -1,23 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Common.Interface.Mvc;
 using OpenBreed.Core.Interface.Managers;
-using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Database.Interface.Items.Animations;
+using OpenBreed.Editor.UI.Mvc;
 using OpenBreed.Editor.UI.Mvc.Controllers;
 using OpenBreed.Editor.UI.Mvc.Models;
 using OpenBreed.Editor.UI.Mvc.Views;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
-using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Animations
 {
@@ -26,17 +20,31 @@ namespace OpenBreed.Editor.VM.Animations
         #region Private Fields
 
         private readonly IServiceProvider serviceProvider;
+        private readonly EditorView editorView;
+        private readonly IAnimationSandbox animationSandbox;
         private readonly IServiceScopeFactory serviceScopeFactory;
-        private AnimationCurvesEditorController controller;
+        private readonly AnimationCurvesEditorController controller;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AnimationCurvesEditorVM(IServiceProvider serviceProvider, IServiceScopeFactory serviceScopeFactory)
+        public AnimationCurvesEditorVM(
+            IServiceProvider serviceProvider,
+            EditorView editorView,
+            IAnimationSandbox animationSandbox,
+            IServiceScopeFactory serviceScopeFactory)
         {
             this.serviceProvider = serviceProvider;
+            this.editorView = editorView;
+            this.animationSandbox = animationSandbox;
             this.serviceScopeFactory = serviceScopeFactory;
+            this.controller = ActivatorUtilities.CreateInstance<AnimationCurvesEditorController>(serviceProvider, editorView, this);
+
+            //eventsMan.Subscribe<RenderContextInitializedEvent>((rc) =>
+            //{
+            //    controller.Reset();
+            //});
         }
 
         #endregion Public Constructors
@@ -68,17 +76,10 @@ namespace OpenBreed.Editor.VM.Animations
         private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
         {
             var serviceScope = serviceScopeFactory.CreateScope();
-            serviceScope.ServiceProvider.GetRequiredService<IRenderContextFactory>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
-
+            serviceScope.ServiceProvider.GetRequiredService<IRenderContextProvider>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
             var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
-            var eventsMan = serviceScope.ServiceProvider.GetRequiredService<IEventsMan>();
 
-            controller = ActivatorUtilities.CreateInstance<AnimationCurvesEditorController>(serviceScope.ServiceProvider, this);
-
-            eventsMan.Subscribe<RenderContextInitializedEvent>((rc) =>
-            {
-                controller.Reset();
-            });
+            editorView.RenderContext = renderContext;
 
             return renderContext;
         }

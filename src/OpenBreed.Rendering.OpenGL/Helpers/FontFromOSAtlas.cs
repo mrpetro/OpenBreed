@@ -91,8 +91,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false)
         {
-            //var s = view.FromWorldBox(clipBox);
-
             //TODO: include color in text rendering
 
             GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
@@ -111,37 +109,44 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 scaleCorrection = 1.0f / view.GetScale();
             }
 
+            var height = Height * scaleCorrection;
+
             for (int i = 0; i < text.Length; i++)
             {
                 var ch = text[i];
                 var chData = Lookup[ch];
 
                 var key = chData.Index;
-                var width = chData.Width;
+                var width = chData.Width * scaleCorrection;
                 var oX = chData.XOffset * scaleCorrection;
 
-                if (charPosX < clipBox.Min.X - width * scaleCorrection)
-                {
-                    charPosX += width * scaleCorrection;
-                    continue;
-                }
+                //if (charPosX < clipBox.Min.X - width)
+                //{
+                //    charPosX += width;
+                //    continue;
+                //}
 
-                if (charPosX > clipBox.Max.X)
-                {
-                    break;
-                }
+                //if (charPosX > clipBox.Max.X)
+                //{
+                //    break;
+                //}
+
+                var charPosition = new Vector3(charPosX + oX / 2.0f, 0.0f, 0.0f);
 
                 primitiveRenderer.DrawSprite(
                     view,
                     Texture,
                     vboList[key],
-                    new Vector3(charPosX + oX / 2.0f, 0.0f, 0.0f),
+                    charPosition,
                     Vector2.One,
                     color, ignoreScale);
 
+                var posT = new Vector2(width / 2.0f, height / 2.0f);
+                posT += new Vector2(charPosition.X, charPosition.Y);
+
                 //NOTE: Uncommect this to see character box
-                view.Context.Primitives.DrawRectangle(view, new Vector2(width / 2.0f, Height / 2.0f), new Vector2(width, Height), Color4.Aqua, filled: false);
-                charPosX += width * scaleCorrection;
+                //view.Context.Primitives.DrawRectangle(view, posT, new Vector2(width, height), Color4.Aqua, filled: false);
+                charPosX += width;
             }
 
             GL.Disable(EnableCap.Blend);

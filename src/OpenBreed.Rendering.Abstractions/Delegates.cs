@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.Abstractions
 {
-    public delegate void ViewRenderHandler(IRenderView view, Matrix4 transform, float dt);
+    public delegate void ViewRenderHandler(IRenderView view, float dt);
 
     public delegate void ViewResizeHandler(IRenderView view, float width, float height);
 

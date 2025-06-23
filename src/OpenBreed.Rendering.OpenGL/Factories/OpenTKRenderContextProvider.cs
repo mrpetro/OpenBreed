@@ -12,12 +12,15 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.OpenGL.Factories
 {
-    public class OpenTKRenderContextFactory : IRenderContextFactory
+    public class OpenTKRenderContextProvider : IRenderContextProvider
     {
         #region Private Fields
 
         private readonly ILogger logger;
         private readonly IEventsMan eventsMan;
+        private readonly IPaletteMan paletteMan;
+        private readonly IStampMan stampMan;
+        private readonly Dictionary<IGraphicsContext, IRenderContext> contextLookup = new Dictionary<IGraphicsContext, IRenderContext>();
         private HostCoordinateSystemConverter hostCoordinateSystemConverter;
         private IGraphicsContext graphicsContext;
 
@@ -25,19 +28,40 @@ namespace OpenBreed.Rendering.OpenGL.Factories
 
         #region Public Constructors
 
-        public OpenTKRenderContextFactory(ILogger logger, IEventsMan eventsMan)
+        public OpenTKRenderContextProvider(ILogger logger, IEventsMan eventsMan, IPaletteMan paletteMan, IStampMan stampMan)
         {
             this.logger = logger;
             this.eventsMan = eventsMan;
+            this.paletteMan = paletteMan;
+            this.stampMan = stampMan;
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public IRenderContext CreateContext()
+        public IRenderContext GetContext()
         {
-            return new OpenTKRenderContext(logger, eventsMan, graphicsContext, hostCoordinateSystemConverter);
+            if (!contextLookup.TryGetValue(graphicsContext, out IRenderContext renderContext))
+            {
+                renderContext = new OpenTKRenderContext(
+                    logger,
+                    eventsMan,
+                    paletteMan,
+                    stampMan,
+                    graphicsContext,
+                    DeinitializeContext,
+                    hostCoordinateSystemConverter);
+
+                contextLookup.Add(graphicsContext, renderContext);
+            }
+
+            return renderContext;
+        }
+
+        private void DeinitializeContext(IGraphicsContext context)
+        {
+            contextLookup.Remove(context);
         }
 
         public void SetupScope(HostCoordinateSystemConverter hostCoordinateSystemConverter, IGraphicsContext graphicsContext)

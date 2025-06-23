@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Rendering.OpenGL.Builders;
+using OpenBreed.Rendering.Common.Builders;
 
-namespace OpenBreed.Rendering.OpenGL.Helpers
+namespace OpenBreed.Rendering.Common.Helpers
 {
     internal class TileStampCell : ITileStampCell
     {

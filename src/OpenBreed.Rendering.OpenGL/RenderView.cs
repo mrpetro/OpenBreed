@@ -192,7 +192,7 @@ namespace OpenBreed.Rendering.OpenGL
         {
             GL.ViewportIndexed(Id, Box.Min.X, Box.Min.Y, Box.Size.X, Box.Size.Y);
 
-            Rendering?.Invoke(this, Matrix4.Identity, dt);
+            Rendering?.Invoke(this, dt);
 
             RenderLayers(dt);
         }

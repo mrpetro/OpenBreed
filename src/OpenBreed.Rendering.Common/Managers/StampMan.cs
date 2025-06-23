@@ -2,11 +2,11 @@
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Rendering.OpenGL.Builders;
-using OpenBreed.Rendering.OpenGL.Helpers;
+using OpenBreed.Rendering.Common.Builders;
+using OpenBreed.Rendering.Common.Helpers;
 using System.Collections.Generic;
 
-namespace OpenBreed.Rendering.OpenGL.Managers
+namespace OpenBreed.Rendering.Common.Managers
 {
     public class StampMan : IStampMan
     {
@@ -30,7 +30,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             this.logger = logger;
 
-            this.missingTileStamp = Create()
+            missingTileStamp = Create()
                 .SetName("Missing")
                 .SetSize(1, 1)
                 .AddTile(0, 0, 0, 0)

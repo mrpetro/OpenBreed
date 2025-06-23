@@ -45,6 +45,7 @@ using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Model.Extensions;
+using OpenBreed.Rendering.Common.Extensions;
 
 namespace OpenBreed.Common.Game.Extensions
 {
@@ -81,6 +82,7 @@ namespace OpenBreed.Common.Game.Extensions
             hostBuilder.SetupCoreManagers();
             hostBuilder.SetupOpenALManagers();
             hostBuilder.SetupOpenGLManagers();
+            hostBuilder.SetupCommonRenderingServices();
             hostBuilder.SetupGLRenderContextComponents();
 
             hostBuilder.ConfigureGraphicsDataLoaders();

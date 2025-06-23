@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Rendering.OpenGL.Builders;
+using OpenBreed.Rendering.Common.Builders;
 using OpenTK.Mathematics;
 
-namespace OpenBreed.Rendering.OpenGL.Helpers
+namespace OpenBreed.Rendering.Common.Helpers
 {
     internal class Palette : IPalette
     {

@@ -33,7 +33,7 @@ namespace OpenBreed.Animation.Generic.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddScoped<IClipMan<TObject>, ClipMan<TObject>>();
+                services.AddSingleton<IClipMan<TObject>, ClipMan<TObject>>();
             });
         }
 

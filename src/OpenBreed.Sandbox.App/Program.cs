@@ -63,6 +63,7 @@ using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Gui.Abstractions.Builders;
 using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
+using OpenBreed.Rendering.Common.Extensions;
 
 namespace OpenBreed.Sandbox
 {
@@ -97,6 +98,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.ConfigureLogConsolePrinter();
             hostBuilder.SetupCoreManagers();
             hostBuilder.SetupOpenGLManagers();
+            hostBuilder.SetupCommonRenderingServices();
             hostBuilder.ConfigureInteraction();
             hostBuilder.SetupGameWindowInputMan();
 

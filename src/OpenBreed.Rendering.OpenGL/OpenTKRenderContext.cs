@@ -27,10 +27,13 @@ namespace OpenBreed.Rendering.OpenGL
         #region Private Fields
 
         private readonly IGraphicsContext graphicsContext;
+        private readonly Action<IGraphicsContext> deinitializeCallback;
         private readonly HostCoordinateSystemConverter hostCoordinateSystemConverter;
         private readonly ILogger logger;
         private readonly IEventsMan eventsMan;
         private readonly IdMap<RenderView> views = new IdMap<RenderView>();
+        private static int nextId = 0;
+        private int id = nextId++;
 
         #endregion Private Fields
 
@@ -39,13 +42,20 @@ namespace OpenBreed.Rendering.OpenGL
         public OpenTKRenderContext(
             ILogger logger,
             IEventsMan eventsMan,
+            IPaletteMan paletteMan,
+            IStampMan stampMan,
             IGraphicsContext graphicsContext,
+            Action<IGraphicsContext> destroyCallback,
             HostCoordinateSystemConverter hostCoordinateSystemConverter)
         {
+
             this.logger = logger;
             this.eventsMan = eventsMan;
             this.graphicsContext = graphicsContext;
+            this.deinitializeCallback = destroyCallback ?? throw new ArgumentNullException(nameof(destroyCallback));
             this.hostCoordinateSystemConverter = hostCoordinateSystemConverter;
+            Palettes = paletteMan;
+            TileStamps = stampMan;
 
             Primitives = new PrimitiveRenderer();
             Textures = new TextureMan(logger);
@@ -55,8 +65,8 @@ namespace OpenBreed.Rendering.OpenGL
             Tiles = new TileMan(Textures, logger, Primitives);
             Pictures = new PictureMan(Textures, Primitives, logger);
             PictureRenderer = new PictureRenderer((PictureMan)Pictures, Primitives);
-            TileStamps = new StampMan(logger);
-            Palettes = new PaletteMan(logger);
+
+
 
             Primitives.Load();
         }
@@ -76,6 +86,8 @@ namespace OpenBreed.Rendering.OpenGL
         public IStampMan TileStamps { get; }
         public IPaletteMan Palettes { get; }
 
+        public IEnumerable<IRenderView> Views => views.Items;
+
         #endregion Public Properties
 
         #region Public Methods
@@ -89,6 +101,16 @@ namespace OpenBreed.Rendering.OpenGL
             views.Add(renderView);
             renderView.Reset();
             return renderView;
+        }
+
+        public void RemoveView(IRenderView renderView)
+        {
+            if (renderView.Context != this)
+            {
+                throw new InvalidOperationException("Trying to remove view from incorrect render context.");
+            }
+
+            views.RemoveById(renderView.Id);
         }
 
         public void CursorDown(int cursorId, Vector2i point, CursorKey cursorKey)
@@ -207,6 +229,11 @@ namespace OpenBreed.Rendering.OpenGL
         public void Initialize()
         {
             eventsMan.Raise(new RenderContextInitializedEvent(this));
+        }
+
+        public void Deinitialize()
+        {
+            deinitializeCallback.Invoke(graphicsContext);
         }
 
         public void Resize(int width, int height)

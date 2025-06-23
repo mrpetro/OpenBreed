@@ -19,7 +19,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         public void Render(IRenderView renderView, float dt)
         {
-            renderHandler.Invoke(renderView, Matrix4.Identity, dt);
+            renderHandler.Invoke(renderView, dt);
         }
     }
 }

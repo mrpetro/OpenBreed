@@ -10,6 +10,15 @@ namespace OpenBreed.Rendering.Abstractions.Extensions
 {
     public static class Color4Extensions
     {
+        public static Color4 SetAlpha(this Color4 color, float alpha)
+        {
+            return new Color4(
+                color.R,
+                color.G,
+                color.B,
+                alpha);
+        }
+
         public static Color4 Multiply(this Color4 color, float value)
         {
             return new Color4(

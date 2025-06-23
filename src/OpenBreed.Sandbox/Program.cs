@@ -628,7 +628,7 @@ namespace OpenBreed.Sandbox
             var gameWorld = worldBuilder.Build();
         }
 
-        void OnRenderFrame(Rendering.Abstractions.IRenderView view, Matrix4 transform, float dt)
+        void OnRenderFrame(Rendering.Abstractions.IRenderView view, float dt)
         {
             var screenWorld = worldMan.GetByName("ScreenWorld");
 

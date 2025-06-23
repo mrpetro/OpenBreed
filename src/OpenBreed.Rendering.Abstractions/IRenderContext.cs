@@ -25,11 +25,14 @@ namespace OpenBreed.Rendering.Abstractions
         IStampMan TileStamps { get; }
         IPaletteMan Palettes { get; }
 
+        IEnumerable<IRenderView> Views { get; }
+
         #endregion Public Properties
 
         #region Public Methods
 
         IRenderView CreateView(float minX = 0, float minY = 0, float maxX = 1, float maxY = 1);
+        void RemoveView(IRenderView renderView);
 
         void Render(float dt);
         void Resize(int width, int height);
@@ -44,6 +47,7 @@ namespace OpenBreed.Rendering.Abstractions
         void KeyUp(Keys key, KeyModifiers modifiers);
 
         void Initialize();
+        void Deinitialize();
 
         #endregion Public Methods
     }

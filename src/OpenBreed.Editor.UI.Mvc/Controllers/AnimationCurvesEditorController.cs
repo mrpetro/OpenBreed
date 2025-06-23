@@ -21,6 +21,10 @@ using System.Drawing;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc.Extensions;
 using OpenBreed.Common;
+using OpenBreed.Core.Interface.Extensions;
+using static System.Net.Mime.MediaTypeNames;
+using System.Collections;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace OpenBreed.Editor.UI.Mvc.Controllers
 {
@@ -31,13 +35,17 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         private const int cellSize = 16;
         private readonly EditorView view;
         private readonly IClipEditorModel model;
+        private readonly Color4 xUnitLineColor =  Color4.Green.SetAlpha(0.5f);
+        private readonly Color4 yUnitLineColor = Color4.Red.SetAlpha(0.5f);
+        private readonly Color4 xAxisLineColor = Color4.Red;
+        private readonly Color4 yAxisLineColor = Color4.Green;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public AnimationCurvesEditorController(
-                    IEventsMan eventsMan,
+            IEventsMan eventsMan,
             EditorView view,
             IClipEditorModel model)
         {
@@ -62,7 +70,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         #region Private Methods
 
-        private void OnReset(IRenderView view)
+        private void AutoCenter(IRenderView view)
         {
             if (model.Track is null)
             {
@@ -82,15 +90,16 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             view.MoveBy((Vector2i)(offset * scale));
         }
 
-        private void OnRender(IRenderView view, Matrix4 transform, float dt)
+        private void OnRender(IRenderView view, float dt)
         {
             view.PushMatrix();
 
             view.EnableAlpha();
             //view.SetPalette(palette);
             RenderBorder(view);
-            RenderAxes(view);
+
             RenderUnitGrid(view);
+            RenderAxes(view);
             RenderTracks(view);
             view.DisableAlpha();
 
@@ -107,6 +116,8 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             }
             else if (e.Key == CursorKey.Right)
             {
+                AutoCenter(e.View);
+
                 //var cursorPos = GetCellIndexCoords(e.View, e.Position) + new Vector4i(model.CenterX, model.CenterY, 0, 1);
 
                 //model.EraseTile(cursorPos);
@@ -179,18 +190,24 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
             RenderTrack(view, model.Track);
 
-            view.Context.Primitives.DrawLine(view, new Vector2(worldBox.Min.X, 0), new Vector2(worldBox.Max.X, 0), Color4.Red);
-            view.Context.Primitives.DrawLine(view, new Vector2(0, worldBox.Min.Y), new Vector2(0, worldBox.Max.Y), Color4.Green);
+            view.Context.Primitives.DrawLine(view, new Vector2(worldBox.Min.X, 0), new Vector2(worldBox.Max.X, 0), xAxisLineColor);
+            view.Context.Primitives.DrawLine(view, new Vector2(0, worldBox.Min.Y), new Vector2(0, worldBox.Max.Y), yAxisLineColor);
         }
 
         private void RenderUnitGrid(IRenderView view)
         {
+
             var fontMan = view.Context.Fonts;
 
-            var font = fontMan.GetOSFont("ARIAL", 15);
+            var font = fontMan.GetOSFont("ARIAL", 6);
             var fontColor = Color4.Purple;
 
             var worldBox = view.ToWorldBox(view.Box);
+
+            RenderUnitGridLines(view, worldBox);
+
+            return;
+
 
             var minX = worldBox.Min.X;
             var minY = worldBox.Min.Y;
@@ -229,7 +246,14 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             //lineStepY = MathHelper.Clamp(lineStepY, minYUnit, maxYUnit);
             var lineStepY = 4.0f;
 
-            for (float linePosX = 0; linePosX < maxX; linePosX += lineStepX)
+            var steps = new Vector2(lineStepX, lineStepY);
+
+            var start = GetIndexPoint(worldBox.Min, steps) * steps;
+
+           // var startX = ((int)(minX / lineStepX) + 1) * lineStepX;
+            //var startY = ((int)(minY / lineStepY) + 1) * lineStepY;
+
+            for (float linePosX = start.X; linePosX < maxX; linePosX += lineStepX)
             {
                 var ps = new Vector2(linePosX, worldBox.Min.Y);
                 var pe = new Vector2(linePosX, worldBox.Max.Y);
@@ -237,15 +261,19 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
                 view.Context.Primitives.DrawLine(view, ps, pe, Color4.Green);
 
                 var posText = linePosX.ToString();
-                var textWidth = font.GetWidth(posText) / scale;
 
                 view.PushMatrix();
-                view.Translate(new Vector2(linePosX, worldBox.Max.Y - fontHeight));
-                font.Draw(view, posText, fontColor, worldBox, ignoreScale: true);
+
+                var tPos = new Vector2(linePosX, worldBox.Max.Y - fontHeight);
+
+                var clipBox = worldBox.Translated(tPos * new Vector2(-1.0f, 1.0f));
+
+                view.Translate(tPos);
+                font.Draw(view, posText, fontColor, clipBox, ignoreScale: true);
                 view.PopMatrix();
             }
 
-            for (float linePosY = 0; linePosY < maxY; linePosY += lineStepY)
+            for (float linePosY = start.Y; linePosY < maxY; linePosY += lineStepY)
             {
                 var ps = new Vector2(worldBox.Min.X, linePosY);
                 var pe = new Vector2(worldBox.Max.X, linePosY);
@@ -255,33 +283,165 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
                 var posText = linePosY.ToString();
 
                 view.PushMatrix();
-                view.Translate(new Vector2(worldBox.Min.X, linePosY));
-                font.Draw(view, posText, fontColor, worldBox, ignoreScale: true);
+
+                var tPos = new Vector2(worldBox.Min.X, linePosY);
+
+                var clipBox = worldBox.Translated(tPos * new Vector2(-1.0f, 1.0f));
+
+                view.Translate(tPos);
+                font.Draw(view, posText, fontColor, clipBox, ignoreScale: true);
                 view.PopMatrix();
             }
+        }
 
-            for (float linePosY = -lineStepY; linePosY > minY; linePosY -= lineStepY)
+        public Vector2i GetIndexPoint(Vector2 point, Vector2 cellSize)
+        {
+            var x = point.X / cellSize.X;
+            var y = point.Y / cellSize.Y;
+
+            if (point.X > 0)
+                x++;
+
+            if (point.Y > 0)
+                y++;
+
+            return new Vector2i((int)x, (int)y);
+        }
+
+        public Box2i GetIndexRectangle(Box2 rect, Vector2 unit)
+        {
+            var min = GetIndexPoint(rect.Min, unit) - new Vector2i(1, 1);
+            var max = GetIndexPoint(rect.Max, unit);
+
+            return new Box2i((int)min.X, (int)min.Y, (int)max.X, (int)max.Y);
+        }
+
+        private float LimitLineUnit(float scale, float lineUnit)
+        {
+            var scaledXLineUnit = lineUnit * scale;
+
+            if (scaledXLineUnit < 32)
             {
-                var ps = new Vector2(worldBox.Min.X, linePosY);
-                var pe = new Vector2(worldBox.Max.X, linePosY);
+                while (scaledXLineUnit < 32)
+                {
+                    lineUnit++;
+                    scaledXLineUnit = lineUnit * scale;
 
-                view.Context.Primitives.DrawLine(view, ps, pe, Color4.BurlyWood);
+                }
+
+                return lineUnit;
+            }
+            else if (scaledXLineUnit > 64)
+            {
+                //while (scaledXLineUnit > 64)
+                //{
+                //    xLineUnit--;
+                //    scaledXLineUnit = xLineUnit * scale;
+
+                //}
+            }
+
+            return lineUnit;
+        }
+
+        private void RenderUnitGridLines(IRenderView view, Box2 worldBox)
+        {
+            var scale = view.GetScale();
+
+            var xLineUnit = 1.0f;
+            var yLineUnit = 1.0f;
+
+            var minXLineUnit = 2.0f;
+            var maxXLineUnit = 8.0f;
+
+            var minYLineUnit = 1.0f;
+            var maxYLineUnit = 8.0f;
+
+
+            xLineUnit = LimitLineUnit(scale, xLineUnit);
+            yLineUnit = LimitLineUnit(scale, yLineUnit);
+
+            var steps = new Vector2(xLineUnit, yLineUnit);
+            var wBoxi = GetIndexRectangle(worldBox, steps);
+            var drawStart = wBoxi.Min * steps;
+
+            view.PushMatrix();
+
+            view.Translate(new Vector2(drawStart.X, 0));
+
+            for (int ix = wBoxi.Min.X; ix < wBoxi.Max.X; ix++)
+            {
+                var ps = new Vector2(0, worldBox.Min.Y);
+                var pe = new Vector2(0, worldBox.Max.Y);
+                view.Context.Primitives.DrawLine(view, ps, pe, xUnitLineColor);
+                view.Translate(new Vector2(xLineUnit, 0));
+            }
+
+            view.PopMatrix();
+
+            view.PushMatrix();
+
+            view.Translate(new Vector2(0, drawStart.Y));
+
+            for (int iy = wBoxi.Min.Y; iy < wBoxi.Max.Y; iy++)
+            {
+                var ps = new Vector2(worldBox.Min.X, 0);
+                var pe = new Vector2(worldBox.Max.X, 0);
+
+                view.Context.Primitives.DrawLine(view, ps, pe, yUnitLineColor);
+                view.Translate(new Vector2(0, yLineUnit));
+            }
+
+            view.PopMatrix();
+
+
+            //Draw unit texts
+
+            var fontMan = view.Context.Fonts;
+            var font = fontMan.GetOSFont("ARIAL", 10);
+            var fontColor = Color4.Purple;
+            var fontHeight = font.Height / scale;
+
+            view.PushMatrix();
+
+            view.Translate(new Vector2(drawStart.X - xLineUnit, worldBox.Max.Y - fontHeight));
+
+            for (int ix = wBoxi.Min.X; ix < wBoxi.Max.X; ix++)
+            {
+                var linePosX = ix * xLineUnit;
+
+                var posText = linePosX.ToString();
+
+                var tPos = new Vector2(xLineUnit, 0.0f);
+
+                var clipBox = worldBox.Translated(tPos * new Vector2(-1.0f, 1.0f));
+
+                view.Translate(tPos);
+
+                font.Draw(view, posText, fontColor, clipBox, ignoreScale: true);
+            }
+
+            view.PopMatrix();
+
+            view.PushMatrix();
+
+            view.Translate(new Vector2(worldBox.Min.X, drawStart.Y - yLineUnit));
+
+            for (int iy = wBoxi.Min.Y; iy < wBoxi.Max.Y; iy++)
+            {
+                var linePosY = iy * yLineUnit;
 
                 var posText = linePosY.ToString();
 
-                view.PushMatrix();
-                view.Translate(new Vector2(worldBox.Min.X, linePosY));
-                font.Draw(view, posText, fontColor, worldBox, ignoreScale: true);
-                view.PopMatrix();
+                var tPos = new Vector2(0.0f, yLineUnit);
+
+                var clipBox = worldBox.Translated(tPos * new Vector2(-1.0f, 1.0f));
+
+                view.Translate(tPos);
+                font.Draw(view, posText, fontColor, clipBox, ignoreScale: true);
             }
 
-            //view.PushMatrix();
-
-            //var scale = view.GetScale();
-
-            //view.Scale(1.0f / scale);
-
-            //view.PopMatrix();
+            view.PopMatrix();
         }
 
         #endregion Private Methods

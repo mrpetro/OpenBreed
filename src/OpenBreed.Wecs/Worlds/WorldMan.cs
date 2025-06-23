@@ -78,11 +78,14 @@ namespace OpenBreed.Wecs.Worlds
         public IWorld GetByName(string name)
         {
             if (name is null)
-                return null;
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
-            int worldId;
-            if (!namesToIdsLookup.TryGetValue(name, out worldId))
+            if (!namesToIdsLookup.TryGetValue(name, out int worldId))
+            {
                 return null;
+            }
 
             return IdsToWorldsLookup[worldId];
         }

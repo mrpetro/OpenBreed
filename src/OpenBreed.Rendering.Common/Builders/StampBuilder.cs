@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Rendering.OpenGL.Helpers;
-using OpenBreed.Rendering.OpenGL.Managers;
+using OpenBreed.Rendering.Common.Helpers;
+using OpenBreed.Rendering.Common.Managers;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace OpenBreed.Rendering.OpenGL.Builders
+namespace OpenBreed.Rendering.Common.Builders
 {
     internal class StampBuilder : IStampBuilder
     {

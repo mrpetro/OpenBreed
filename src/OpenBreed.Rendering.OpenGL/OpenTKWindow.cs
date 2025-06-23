@@ -5,6 +5,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
@@ -30,7 +31,9 @@ namespace OpenBreed.Rendering.OpenGL
         private readonly GameWindow gameWindow;
         private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
-        private readonly IRenderContextFactory renderContextFactory;
+        private readonly IPaletteMan paletteMan;
+        private readonly IStampMan stampMan;
+        private readonly IRenderContextProvider renderContextFactory;
 
         #endregion Private Fields
 
@@ -39,11 +42,15 @@ namespace OpenBreed.Rendering.OpenGL
         public OpenTKWindow(
             IEventsMan eventsMan,
             ILogger logger,
-            IRenderContextFactory renderContextFactory,
+            IPaletteMan paletteMan,
+            IStampMan stampMan,
+            IRenderContextProvider renderContextFactory,
             GameWindow gameWindow)
         {
             this.eventsMan = eventsMan;
             this.logger = logger;
+            this.paletteMan = paletteMan;
+            this.stampMan = stampMan;
             this.renderContextFactory = renderContextFactory;
             this.gameWindow = gameWindow;
 
@@ -90,7 +97,9 @@ namespace OpenBreed.Rendering.OpenGL
 
         private void Window_Load()
         {
-            Context = new OpenTKRenderContext(logger, eventsMan, gameWindow.Context, GetRenderContextPosition);
+            renderContextFactory.SetupScope(GetRenderContextPosition, gameWindow.Context);
+            Context = renderContextFactory.GetContext();
+        
             eventsMan.Raise(new WindowLoadEvent(this, Context));
         }
 

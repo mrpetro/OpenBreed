@@ -75,7 +75,7 @@
                 Header="Curves">
                 <local:AnimationCurvesEditorCtrl DataContext="{Binding CurvesEditor}"/>
             </GroupBox>
-            <local:AnimationPlayerPanelCtrl Grid.Row="3" HorizontalAlignment="Left" />
+            <local:AnimationPlayerPanelCtrl Grid.Row="3" HorizontalAlignment="Left" DataContext="{Binding Player}" />
         </Grid>
     </Grid>
 </UserControl>

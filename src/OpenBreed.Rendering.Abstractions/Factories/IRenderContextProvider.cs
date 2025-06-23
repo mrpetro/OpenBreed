@@ -3,13 +3,13 @@ using OpenTK.Windowing.Common;
 
 namespace OpenBreed.Rendering.Abstractions.Factories
 {
-    public interface IRenderContextFactory
+    public interface IRenderContextProvider
     {
         #region Public Methods
 
         void SetupScope(HostCoordinateSystemConverter hostCoordinateSystemConverter, IGraphicsContext graphicsContext);
 
-        IRenderContext CreateContext();
+        IRenderContext GetContext();
 
         #endregion Public Methods
     }

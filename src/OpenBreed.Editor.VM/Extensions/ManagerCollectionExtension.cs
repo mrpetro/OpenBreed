@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Common;
@@ -63,6 +64,8 @@ namespace OpenBreed.Editor.VM.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
+                services.AddSingleton<IMessenger, WeakReferenceMessenger>((sp) => WeakReferenceMessenger.Default);
+
                 services.AddTransient<EntryEditorVM<IDbImage>>();
                 services.AddTransient<EntryEditorVM<IDbPalette>>();
                 services.AddTransient<EntryEditorVM<IDbEntityTemplate>>();
@@ -109,6 +112,7 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<AnimationEditorVM>();
                 services.AddTransient<AnimationCurvesEditorVM>();
                 services.AddTransient<AnimationPreviewVM>();
+                services.AddTransient<AnimationPlayerVM>();
 
                 services.AddTransient<ClipTrackPropertiesEditorVM>();
                 services.AddTransient<AbtaPasswordGeneratorVM>();

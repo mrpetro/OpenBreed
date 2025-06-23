@@ -46,10 +46,16 @@ namespace OpenBreed.Editor.UI.Wpf
 
             Render += GLWpfControlEx_Init;
 
+            Unloaded += GLWpfControlEx_Unloaded;
+
             Cursor = Cursors.None;
 
-
             DataContextChanged += GLWpfControlEx_DataContextChanged;
+        }
+
+        private void GLWpfControlEx_Unloaded(object sender, RoutedEventArgs e)
+        {
+            renderContext.Deinitialize();
         }
 
         private void GLWpfControlEx_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -85,8 +91,13 @@ namespace OpenBreed.Editor.UI.Wpf
 
         #region Private Methods
 
+        private static HashSet<IGraphicsContext> contexts = new HashSet<IGraphicsContext>();
+
+
+
         private void GLWpfControlEx_Init(TimeSpan obj)
         {
+
             if (Context is null)
             {
                 return;
@@ -96,6 +107,8 @@ namespace OpenBreed.Editor.UI.Wpf
             {
                 return;
             }
+
+            contexts.Add(Context);
 
             renderContext = InitFunc.Invoke(Context, GetRenderContextPosition);
 
@@ -109,7 +122,7 @@ namespace OpenBreed.Editor.UI.Wpf
             MouseMove += GLWpfControlEx_MouseMove;
             MouseDown += GLWpfControlEx_MouseDown;
             MouseEnter += GLWpfControlEx_MouseEnter;
-            MouseLeave += GLWpfControlEx_MouseLeave; ;
+            MouseLeave += GLWpfControlEx_MouseLeave;
             MouseUp += GLWpfControlEx_MouseUp;
             MouseWheel += GLWpfControlEx_MouseWheel;
         }

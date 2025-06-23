@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
 using OpenBreed.Core.Interface.Managers;
@@ -10,6 +12,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
+using OpenBreed.Editor.UI.Mvc;
 using OpenBreed.Editor.UI.Mvc.Controllers;
 using OpenBreed.Editor.UI.Mvc.Models;
 using OpenBreed.Editor.UI.Mvc.Views;
@@ -18,6 +21,7 @@ using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Wecs.Entities;
 using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
@@ -35,8 +39,11 @@ namespace OpenBreed.Editor.VM.Animations
 
         private ClipTrackPropertiesEditorVM trackPropertiesEditor;
         private readonly IServiceProvider serviceProvider;
+        private readonly IAnimationSandbox animationSandbox;
+
         public AnimationCurvesEditorVM CurvesEditor { get; }
         public AnimationPreviewVM Preview { get; }
+        public AnimationPlayerVM Player { get; }
 
         #endregion Private Fields
 
@@ -48,12 +55,14 @@ namespace OpenBreed.Editor.VM.Animations
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             IServiceProvider serviceProvider,
-            AnimationCurvesEditorVM animationCurvesEditor,
-            AnimationPreviewVM animationPreview) : base(dbEntry, logger, workspaceMan, dialogProvider)
+            IAnimationSandboxFactory animationSandboxFactory) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.serviceProvider = serviceProvider;
-            this.CurvesEditor = animationCurvesEditor;
-            this.Preview = animationPreview;
+            this.animationSandbox = animationSandboxFactory.Create();
+
+            this.Preview = ActivatorUtilities.CreateInstance<AnimationPreviewVM>(serviceProvider, animationSandbox);
+            this.CurvesEditor = ActivatorUtilities.CreateInstance<AnimationCurvesEditorVM>(serviceProvider, animationSandbox);
+            this.Player = ActivatorUtilities.CreateInstance<AnimationPlayerVM>(serviceProvider, animationSandbox); ;
 
             RestoreTracks();
 
@@ -62,6 +71,8 @@ namespace OpenBreed.Editor.VM.Animations
             AddNewTrackCommand = new Command(() => AddNewTrack());
             CopyTrackCommand = new Command(() => CopyTrack(SelectedTrack.Source));
             RemoveTrackCommand = new Command(() => RemoveTrack(SelectedTrack.Source));
+
+
         }
 
         #endregion Public Constructors

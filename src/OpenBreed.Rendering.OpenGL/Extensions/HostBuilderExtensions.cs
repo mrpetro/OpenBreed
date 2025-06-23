@@ -57,8 +57,6 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
                 services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Pictures);
                 services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().PictureRenderer);
                 services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Tiles);
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().TileStamps);
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Palettes);
                 services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().SpriteRenderer);
             });
         }

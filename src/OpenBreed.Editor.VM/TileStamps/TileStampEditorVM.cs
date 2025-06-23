@@ -45,6 +45,7 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         private readonly TileAtlasDataProvider tileSetsDataProvider;
         private readonly PalettesDataProvider palettesDataProvider;
+        private readonly EditorView view;
         private readonly IRenderViewFactory renderViewFactory;
         private readonly IServiceScopeFactory serviceScopeFactory;
         private string currentPaletteRef = null;
@@ -62,6 +63,7 @@ namespace OpenBreed.Editor.VM.TileStamps
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             TilesSelectorVM tilesSelectorVm,
+            EditorView view,
             IRenderViewFactory renderViewFactory,
             IServiceScopeFactory serviceScopeFactory) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
@@ -69,6 +71,7 @@ namespace OpenBreed.Editor.VM.TileStamps
             this.tileSetsDataProvider = tileSetsDataProvider;
             this.palettesDataProvider = palettesDataProvider;
             TilesSelector = tilesSelectorVm;
+            this.view = view;
             this.renderViewFactory = renderViewFactory;
             this.serviceScopeFactory = serviceScopeFactory;
 
@@ -234,14 +237,15 @@ namespace OpenBreed.Editor.VM.TileStamps
         private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
         {
             var serviceScope = serviceScopeFactory.CreateScope();
-            serviceScope.ServiceProvider.GetRequiredService<IRenderContextFactory>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
+            serviceScope.ServiceProvider.GetRequiredService<IRenderContextProvider>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
 
             var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
             var eventsMan = serviceScope.ServiceProvider.GetRequiredService<IEventsMan>();
             var tileStampDataLoader = serviceScope.ServiceProvider.GetRequiredService<ITileStampDataLoader>();
-            var view = serviceScope.ServiceProvider.GetRequiredService<EditorView>();
 
             renderViewController = ActivatorUtilities.CreateInstance<TileStampEditorController>(serviceScope.ServiceProvider, view, this);
+
+            view.RenderContext = renderContext;
 
             if (Entry is not null)
             {

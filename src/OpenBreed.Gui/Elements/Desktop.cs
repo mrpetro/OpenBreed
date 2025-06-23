@@ -222,7 +222,7 @@ namespace OpenBreed.Gui.Elements
 
         #region Private Methods
 
-        private void OnViewRender(IRenderView view, Matrix4 transform, float dt)
+        private void OnViewRender(IRenderView view, float dt)
         {  
             view.Reset();
 

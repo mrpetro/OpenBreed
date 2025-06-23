@@ -17,6 +17,9 @@ namespace OpenBreed.Editor.UI.Mvc.Extensions
             services.AddTransient<AnimationCurvesEditorController>();
             services.AddTransient<AnimationPreviewController>();
             services.AddTransient<EditorView>();
+
+            services.AddSingleton<IAnimationSandboxFactory, AnimationSandboxFactory>();
+            services.AddScoped<IAnimationSandbox, AnimationSandbox>();
         }
     }
 }

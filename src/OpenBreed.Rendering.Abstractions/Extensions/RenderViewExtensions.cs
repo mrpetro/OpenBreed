@@ -33,7 +33,6 @@ namespace OpenBreed.Rendering.Abstractions.Extensions
             var scale = renderView.View[0, 0];
             renderView.View = Matrix4.CreateScale(scale, scale, 1.0f);
             renderView.View *= Matrix4.CreateTranslation(position.X, position.Y, 0.0f);
-
         }
 
         public static float GetScale(this IRenderView renderView) => renderView.View[0, 0];

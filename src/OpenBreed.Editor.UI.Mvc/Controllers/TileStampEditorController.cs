@@ -100,7 +100,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
             view.SetScale(2.0f);
         }
 
-        private void OnRender(IRenderView view, Matrix4 transform, float dt)
+        private void OnRender(IRenderView view, float dt)
         {
             view.PushMatrix();
 

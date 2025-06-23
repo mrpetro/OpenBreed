@@ -41,5 +41,12 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
             animator.Position = 0.0f;
             animator.Paused = true;
         }
+
+        public static void SetAnimationClipById(this IEntity entity, int animatorId, int clipId)
+        {
+            var ac = entity.Get<AnimationComponent>();
+            var animator = ac.States[animatorId];
+            animator.ClipId = clipId;
+        }
     }
 }

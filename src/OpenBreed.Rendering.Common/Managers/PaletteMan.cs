@@ -3,18 +3,15 @@ using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Rendering.OpenGL.Builders;
-using OpenBreed.Rendering.OpenGL.Helpers;
-using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Mathematics;
+using OpenBreed.Rendering.Common.Builders;
+using OpenBreed.Rendering.Common.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Rendering.OpenGL.Managers
+namespace OpenBreed.Rendering.Common.Managers
 {
-    public class PaletteMan : IPaletteMan
+    internal class PaletteMan : IPaletteMan
     {
         #region Private Fields
 

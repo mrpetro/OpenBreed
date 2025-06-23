@@ -25,12 +25,17 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 
             services.AddScoped<IRenderViewFactory, RenderViewFactory>();
 
-            services.AddScoped<IRenderContextFactory, OpenTKRenderContextFactory>();
-            services.AddScoped((sp) => sp.GetRequiredService<IRenderContextFactory>().CreateContext());
+            services.AddSingleton<IRenderContextProvider, OpenTKRenderContextProvider>();
+            services.AddScoped((sp) => sp.GetRequiredService<IRenderContextProvider>().GetContext());
 
-            services.AddSingleton<Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>>((sp)
-                => (graphicalContext, hostCoordinateSystemConverter)
-                => new OpenTKRenderContext(sp.GetRequiredService<ILogger>(), sp.GetRequiredService<IEventsMan>(), graphicalContext, hostCoordinateSystemConverter));
+            services.AddSingleton<Func<IGraphicsContext, HostCoordinateSystemConverter, Action<IGraphicsContext>, IRenderContext>>((sp)
+                => (graphicalContext, hostCoordinateSystemConverter, deinitializeCallback)
+                => new OpenTKRenderContext(
+                    sp.GetRequiredService<ILogger>(),
+                    sp.GetRequiredService<IEventsMan>(),
+                    sp.GetRequiredService<IPaletteMan>(),
+                    sp.GetRequiredService<IStampMan>(),
+                    graphicalContext, deinitializeCallback, hostCoordinateSystemConverter));
         }
     }
 }
