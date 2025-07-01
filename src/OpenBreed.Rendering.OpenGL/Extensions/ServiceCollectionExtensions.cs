@@ -20,13 +20,12 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
     {
         public static void AddOpenGLServices(this IServiceCollection services)
         {
-            services.AddSingleton<ITileGridFactory, TileGridFactory>();
+            services.AddScoped<ITileGridFactory, TileGridFactory>();
             services.AddSingleton<IRenderingMan, RenderingMan>();
 
             services.AddScoped<IRenderViewFactory, RenderViewFactory>();
 
             services.AddSingleton<IRenderContextProvider, OpenTKRenderContextProvider>();
-            services.AddScoped((sp) => sp.GetRequiredService<IRenderContextProvider>().GetContext());
 
             services.AddSingleton<Func<IGraphicsContext, HostCoordinateSystemConverter, Action<IGraphicsContext>, IRenderContext>>((sp)
                 => (graphicalContext, hostCoordinateSystemConverter, deinitializeCallback)
@@ -35,6 +34,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
                     sp.GetRequiredService<IEventsMan>(),
                     sp.GetRequiredService<IPaletteMan>(),
                     sp.GetRequiredService<IStampMan>(),
+                    sp.GetRequiredService<IServiceScopeFactory>(),
                     graphicalContext, deinitializeCallback, hostCoordinateSystemConverter));
         }
     }

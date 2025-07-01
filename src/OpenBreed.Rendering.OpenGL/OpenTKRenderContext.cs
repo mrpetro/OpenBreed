@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
@@ -31,6 +32,7 @@ namespace OpenBreed.Rendering.OpenGL
         private readonly HostCoordinateSystemConverter hostCoordinateSystemConverter;
         private readonly ILogger logger;
         private readonly IEventsMan eventsMan;
+        private readonly IServiceScope serviceScope;
         private readonly IdMap<RenderView> views = new IdMap<RenderView>();
         private static int nextId = 0;
         private int id = nextId++;
@@ -44,6 +46,7 @@ namespace OpenBreed.Rendering.OpenGL
             IEventsMan eventsMan,
             IPaletteMan paletteMan,
             IStampMan stampMan,
+            IServiceScopeFactory serviceScopeFactory,
             IGraphicsContext graphicsContext,
             Action<IGraphicsContext> destroyCallback,
             HostCoordinateSystemConverter hostCoordinateSystemConverter)
@@ -51,20 +54,21 @@ namespace OpenBreed.Rendering.OpenGL
 
             this.logger = logger;
             this.eventsMan = eventsMan;
+            this.serviceScope = serviceScopeFactory.CreateScope();
             this.graphicsContext = graphicsContext;
             this.deinitializeCallback = destroyCallback ?? throw new ArgumentNullException(nameof(destroyCallback));
             this.hostCoordinateSystemConverter = hostCoordinateSystemConverter;
             Palettes = paletteMan;
             TileStamps = stampMan;
 
-            Primitives = new PrimitiveRenderer();
-            Textures = new TextureMan(logger);
-            Sprites = new SpriteMan(Textures, Primitives, logger);
-            SpriteRenderer = new SpriteRenderer((SpriteMan)Sprites, Primitives);
-            Fonts = new FontMan(Textures, Sprites, SpriteRenderer, Primitives);
-            Tiles = new TileMan(Textures, logger, Primitives);
-            Pictures = new PictureMan(Textures, Primitives, logger);
-            PictureRenderer = new PictureRenderer((PictureMan)Pictures, Primitives);
+            Primitives = ServiceProvider.GetRequiredService<IPrimitiveRenderer>();
+            Textures = ServiceProvider.GetRequiredService<ITextureMan>();
+            Sprites = ServiceProvider.GetRequiredService<ISpriteMan>();
+            SpriteRenderer = ServiceProvider.GetRequiredService<ISpriteRenderer>();
+            Fonts = ServiceProvider.GetRequiredService<IFontMan>();
+            Tiles = ServiceProvider.GetRequiredService<ITileMan>();
+            Pictures = ServiceProvider.GetRequiredService<IPictureMan>();
+            PictureRenderer = ServiceProvider.GetRequiredService<IPictureRenderer>();
 
 
 
@@ -74,6 +78,8 @@ namespace OpenBreed.Rendering.OpenGL
         #endregion Public Constructors
 
         #region Public Properties
+
+        public IServiceProvider ServiceProvider => serviceScope.ServiceProvider;
 
         public ITextureMan Textures { get; }
         public ISpriteMan Sprites { get; }

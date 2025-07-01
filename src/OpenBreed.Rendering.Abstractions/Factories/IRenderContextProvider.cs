@@ -7,9 +7,7 @@ namespace OpenBreed.Rendering.Abstractions.Factories
     {
         #region Public Methods
 
-        void SetupScope(HostCoordinateSystemConverter hostCoordinateSystemConverter, IGraphicsContext graphicsContext);
-
-        IRenderContext GetContext();
+        IRenderContext GetContext(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter);
 
         #endregion Public Methods
     }

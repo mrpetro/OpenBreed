@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ViewportCreator>();
+                services.AddScoped<ViewportCreator>();
             });
         }
 
@@ -89,7 +89,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<TeleportHelper>();
+                services.AddScoped<TeleportHelper>();
             });
         }
 
@@ -97,7 +97,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<CameraHelper>();
+                services.AddScoped<CameraHelper>();
             });
         }
 
@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<EnvironmentHelper>();
+                services.AddScoped<EnvironmentHelper>();
             });
         }
 
@@ -113,7 +113,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<GenericCellHelper>();
+                services.AddScoped<GenericCellHelper>();
             });
         }
 
@@ -121,7 +121,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<PickableHelper>();
+                services.AddScoped<PickableHelper>();
             });
         }
 
@@ -129,7 +129,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ElectricGateHelper>();
+                services.AddScoped<ElectricGateHelper>();
             });
         }
 
@@ -137,7 +137,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<HudHelper>();
+                services.AddScoped<HudHelper>();
             });
         }
 
@@ -145,7 +145,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<VanillaStatusBarHelper>();
+                services.AddScoped<VanillaStatusBarHelper>();
             });
         }
 
@@ -153,7 +153,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<EntriesHelper>();
+                services.AddScoped<EntriesHelper>();
             });
         }
 
@@ -161,7 +161,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<DoorHelper>();
+                services.AddScoped<DoorHelper>();
             });
         }
 
@@ -169,7 +169,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ScreenWorldHelper>();
+                services.AddScoped<ScreenWorldHelper>();
             });
         }
 
@@ -177,7 +177,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<GameHudWorldHelper>();
+                services.AddScoped<GameHudWorldHelper>();
             });
         }
 
@@ -185,7 +185,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<SmartcardScreenWorldHelper>();
+                services.AddScoped<SmartcardScreenWorldHelper>();
             });
         }
 
@@ -193,7 +193,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<MissionScreenWorldHelper>();
+                services.AddScoped<MissionScreenWorldHelper>();
             });
         }
 
@@ -201,7 +201,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<DebugHudWorldHelper>();
+                services.AddScoped<DebugHudWorldHelper>();
             });
         }
 
@@ -209,7 +209,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ActorHelper>();
+                services.AddScoped<ActorHelper>();
             });
         }
 

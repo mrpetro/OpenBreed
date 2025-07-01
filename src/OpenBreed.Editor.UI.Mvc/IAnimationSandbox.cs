@@ -19,7 +19,7 @@ namespace OpenBreed.Editor.UI.Mvc
 
         void FastRewindAnimation();
 
-        void Load(string name);
+        void Load(string name, IRenderContext renderContext);
 
         void PauseAnimation();
 

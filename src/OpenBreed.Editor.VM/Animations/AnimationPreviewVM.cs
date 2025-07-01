@@ -58,7 +58,7 @@ namespace OpenBreed.Editor.VM.Animations
 
         #region Public Properties
 
-        public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc => OnInitialize;
+        public LoadContextHandler InitFunc => OnInitialize;
 
         public IDbAnimation Animation { get; private set; }
 
@@ -77,23 +77,21 @@ namespace OpenBreed.Editor.VM.Animations
 
         #region Private Methods
 
-        private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
+        private void OnInitialize(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> contextInitializer)
         {
-            var serviceScope = serviceScopeFactory.CreateScope();
-            serviceScope.ServiceProvider.GetRequiredService<IRenderContextProvider>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
+            renderContextProvider = serviceProvider.GetRequiredService<IRenderContextProvider>();
 
-            var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
+            contextInitializer = (context) =>
+            {
+                var dataLoaderFactory = context.ServiceProvider.GetService<IDataLoaderFactory>();
+                var clipLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<IEntity>>();
 
-            var dataLoaderFactory = serviceScope.ServiceProvider.GetService<IDataLoaderFactory>();
-            var clipLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<IEntity>>();
+                editorView.RenderContext = context;
 
-            editorView.RenderContext = renderContext;
+                var model = clipLoader.Load(Animation);
 
-            var model = clipLoader.Load(Animation);
-
-            animationSandbox.Load(model.Name);
-
-            return renderContext;
+                animationSandbox.Load(model.Name, context);
+            };
         }
 
         #endregion Private Methods

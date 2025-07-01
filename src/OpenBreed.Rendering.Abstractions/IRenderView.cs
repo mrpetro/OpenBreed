@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Rendering.Abstractions.Factories;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.Abstractions
 {
+    public delegate void LoadContextHandler(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> renderContextInitializer);
+
     public delegate Vector2i HostCoordinateSystemConverter(Vector2i point);
 
     public interface IRenderView

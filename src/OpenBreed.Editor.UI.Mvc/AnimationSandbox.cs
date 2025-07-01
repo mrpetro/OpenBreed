@@ -62,7 +62,7 @@ namespace OpenBreed.Editor.UI.Mvc
         private readonly IClipMan<IEntity> clipMan;
         private readonly IPaletteMan paletteMan;
 
-        private readonly IBuilderFactory builderFactory;
+        //private readonly IBuilderFactory builderFactory;
 
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly IUpdater updater;
@@ -79,7 +79,6 @@ namespace OpenBreed.Editor.UI.Mvc
             IEntityMan entityMan,
             IClipMan<IEntity> clipMan,
             IPaletteMan paletteMan,
-            IBuilderFactory builderFactory,
             IUpdaterFactory updaterFactory,
             PalettesDataProvider palettesDataProvider)
         {
@@ -87,7 +86,6 @@ namespace OpenBreed.Editor.UI.Mvc
             this.entityMan = entityMan ?? throw new ArgumentNullException(nameof(entityMan));
             this.clipMan = clipMan ?? throw new ArgumentNullException(nameof(clipMan));
             this.paletteMan = paletteMan ?? throw new ArgumentNullException(nameof(paletteMan));
-            this.builderFactory = builderFactory ?? throw new ArgumentNullException(nameof(builderFactory));
             this.palettesDataProvider = palettesDataProvider ?? throw new ArgumentNullException(nameof(palettesDataProvider));
             updater = updaterFactory.CreateUpdater(60.0f, Update);
         }
@@ -96,10 +94,10 @@ namespace OpenBreed.Editor.UI.Mvc
 
         #region Public Methods
 
-        public void Load(string name)
+        public void Load(string name, IRenderContext renderContext)
         {
-            SetupPalettes();
-            SetupWorld(name);
+            SetupPalettes(renderContext);
+            SetupWorld(name, renderContext);
         }
 
         public void Render(IRenderView view, float dt)
@@ -162,7 +160,7 @@ namespace OpenBreed.Editor.UI.Mvc
             worldMan.Update(dt);
         }
 
-        private void SetupPalettes()
+        private void SetupPalettes(IRenderContext renderContext)
         {
             var commonPaletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
 
@@ -188,8 +186,10 @@ namespace OpenBreed.Editor.UI.Mvc
             palette = builder.Build();
         }
 
-        private void SetupWorld(string clipName)
+        private void SetupWorld(string clipName, IRenderContext renderContext)
         {
+            var builderFactory = renderContext.ServiceProvider.GetRequiredService<IBuilderFactory>();
+
             animationWorld = worldMan.GetByName("Preview");
 
             if (animationWorld is null)

@@ -14,6 +14,8 @@ namespace OpenBreed.Rendering.Abstractions
     {
         #region Public Properties
 
+        IServiceProvider ServiceProvider { get; }
+
         ISpriteMan Sprites { get; }
         ISpriteRenderer SpriteRenderer { get; }
         IPrimitiveRenderer Primitives { get; }

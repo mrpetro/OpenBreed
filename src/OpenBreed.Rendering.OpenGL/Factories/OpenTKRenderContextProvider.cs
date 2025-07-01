@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Factories;
@@ -20,54 +21,38 @@ namespace OpenBreed.Rendering.OpenGL.Factories
         private readonly IEventsMan eventsMan;
         private readonly IPaletteMan paletteMan;
         private readonly IStampMan stampMan;
-        private readonly Dictionary<IGraphicsContext, IRenderContext> contextLookup = new Dictionary<IGraphicsContext, IRenderContext>();
-        private HostCoordinateSystemConverter hostCoordinateSystemConverter;
-        private IGraphicsContext graphicsContext;
+        private readonly IServiceScopeFactory serviceScopeFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenTKRenderContextProvider(ILogger logger, IEventsMan eventsMan, IPaletteMan paletteMan, IStampMan stampMan)
+        public OpenTKRenderContextProvider(ILogger logger, IEventsMan eventsMan, IPaletteMan paletteMan, IStampMan stampMan, IServiceScopeFactory serviceScopeFactory)
         {
             this.logger = logger;
             this.eventsMan = eventsMan;
             this.paletteMan = paletteMan;
             this.stampMan = stampMan;
+            this.serviceScopeFactory = serviceScopeFactory;
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public IRenderContext GetContext()
+        public IRenderContext GetContext(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
         {
-            if (!contextLookup.TryGetValue(graphicsContext, out IRenderContext renderContext))
-            {
-                renderContext = new OpenTKRenderContext(
-                    logger,
-                    eventsMan,
-                    paletteMan,
-                    stampMan,
-                    graphicsContext,
-                    DeinitializeContext,
-                    hostCoordinateSystemConverter);
-
-                contextLookup.Add(graphicsContext, renderContext);
-            }
+            var renderContext = new OpenTKRenderContext(
+                logger,
+                eventsMan,
+                paletteMan,
+                stampMan,
+                serviceScopeFactory,
+                graphicsContext,
+                (c) => { },
+                hostCoordinateSystemConverter);
 
             return renderContext;
-        }
-
-        private void DeinitializeContext(IGraphicsContext context)
-        {
-            contextLookup.Remove(context);
-        }
-
-        public void SetupScope(HostCoordinateSystemConverter hostCoordinateSystemConverter, IGraphicsContext graphicsContext)
-        {
-            this.hostCoordinateSystemConverter = hostCoordinateSystemConverter;
-            this.graphicsContext = graphicsContext;
         }
 
         #endregion Public Methods

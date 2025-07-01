@@ -47,6 +47,7 @@ namespace OpenBreed.Editor.VM.TileStamps
         private readonly PalettesDataProvider palettesDataProvider;
         private readonly EditorView view;
         private readonly IRenderViewFactory renderViewFactory;
+        private readonly IRenderContextProvider renderContextProvider;
         private readonly IServiceScopeFactory serviceScopeFactory;
         private string currentPaletteRef = null;
         private TileStampEditorController renderViewController;
@@ -65,6 +66,7 @@ namespace OpenBreed.Editor.VM.TileStamps
             TilesSelectorVM tilesSelectorVm,
             EditorView view,
             IRenderViewFactory renderViewFactory,
+            IRenderContextProvider renderContextProvider,
             IServiceScopeFactory serviceScopeFactory) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             PaletteIds = new ObservableCollection<string>();
@@ -73,6 +75,7 @@ namespace OpenBreed.Editor.VM.TileStamps
             TilesSelector = tilesSelectorVm;
             this.view = view;
             this.renderViewFactory = renderViewFactory;
+            this.renderContextProvider = renderContextProvider;
             this.serviceScopeFactory = serviceScopeFactory;
 
             TilesSelector.TileSetChanged += (s, a) => renderViewController.CurrentTileAtlasId = a;
@@ -85,7 +88,7 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         #region Public Properties
 
-        public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc => OnInitialize;
+        public LoadContextHandler InitFunc => OnInitialize;
 
         public int Width
         {
@@ -234,31 +237,30 @@ namespace OpenBreed.Editor.VM.TileStamps
         {
         }
 
-        private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
+        private void OnInitialize(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> contextInitializer)
         {
-            var serviceScope = serviceScopeFactory.CreateScope();
-            serviceScope.ServiceProvider.GetRequiredService<IRenderContextProvider>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
+            renderContextProvider = this.renderContextProvider;
 
-            var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
-            var eventsMan = serviceScope.ServiceProvider.GetRequiredService<IEventsMan>();
-            var tileStampDataLoader = serviceScope.ServiceProvider.GetRequiredService<ITileStampDataLoader>();
-
-            renderViewController = ActivatorUtilities.CreateInstance<TileStampEditorController>(serviceScope.ServiceProvider, view, this);
-
-            view.RenderContext = renderContext;
-
-            if (Entry is not null)
+            contextInitializer = (context) =>
             {
-                tileStampDataLoader.Load(Entry);
+                var eventsMan = context.ServiceProvider.GetRequiredService<IEventsMan>();
+                var tileStampDataLoader = context.ServiceProvider.GetRequiredService<ITileStampDataLoader>();
 
-                eventsMan.Subscribe<RenderContextInitializedEvent>((rc) =>
+                renderViewController = ActivatorUtilities.CreateInstance<TileStampEditorController>(context.ServiceProvider, view, this);
+
+                view.RenderContext = context;
+
+                if (Entry is not null)
                 {
-                    renderViewController.Reset();
-                    renderViewController.CurrentTileAtlasId = TilesSelector.CurrentTileSetId;
-                });
-            }
+                    tileStampDataLoader.Load(Entry);
 
-            return renderContext;
+                    eventsMan.Subscribe<RenderContextInitializedEvent>((rc) =>
+                    {
+                        renderViewController.Reset();
+                        renderViewController.CurrentTileAtlasId = TilesSelector.CurrentTileSetId;
+                    });
+                }
+            };
         }
 
         private void SwitchPalette()

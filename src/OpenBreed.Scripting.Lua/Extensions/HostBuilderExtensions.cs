@@ -22,7 +22,7 @@ namespace OpenBreed.Scripting.Lua.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IScriptMan, LuaScriptMan>((sp) =>
+                services.AddScoped<IScriptMan, LuaScriptMan>((sp) =>
                 {
                     var scriptMan = new LuaScriptMan(sp.GetService<ILogger>());
 

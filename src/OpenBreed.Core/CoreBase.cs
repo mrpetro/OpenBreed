@@ -28,8 +28,6 @@ namespace OpenBreed.Core
 
         public abstract void Exit();
 
-        public TManager GetManager<TManager>() => host.Services.GetService<TManager>();
-
         #endregion Public Methods
     }
 }

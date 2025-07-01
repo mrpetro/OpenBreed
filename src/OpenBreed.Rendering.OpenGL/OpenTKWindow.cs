@@ -28,6 +28,7 @@ namespace OpenBreed.Rendering.OpenGL
     {
         #region Private Fields
 
+        private static readonly Matrix4 flipYTransform = Matrix4.CreateScale(1.0f, -1.0f, 1.0f);
         private readonly GameWindow gameWindow;
         private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
@@ -97,8 +98,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         private void Window_Load()
         {
-            renderContextFactory.SetupScope(GetRenderContextPosition, gameWindow.Context);
-            Context = renderContextFactory.GetContext();
+            Context = renderContextFactory.GetContext(gameWindow.Context, GetRenderContextPosition);
         
             eventsMan.Raise(new WindowLoadEvent(this, Context));
         }
@@ -159,8 +159,7 @@ namespace OpenBreed.Rendering.OpenGL
             var pointV = new Vector4(point.X, point.Y, 0.0f, 1.0f);
 
             var translateTranform = Matrix4.CreateTranslation(0.0f, gameWindow.ClientSize.Y, 0.0f);
-            var flipYTransform = Matrix4.CreateScale(1.0f, -1.0f, 1.0f);
-  
+            
             var matT = flipYTransform * translateTranform;
             pointV *= matT;
 

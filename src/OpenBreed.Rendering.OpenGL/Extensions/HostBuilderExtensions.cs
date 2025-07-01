@@ -13,6 +13,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Model;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Data;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Data;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Mathematics;
@@ -50,14 +51,16 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Primitives);
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Sprites);
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Fonts);
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Textures);
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Pictures);
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().PictureRenderer);
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().Tiles);
-                services.AddScoped((sp) => sp.GetRequiredService<IRenderContext>().SpriteRenderer);
+                services.AddScoped<IPrimitiveRenderer, PrimitiveRenderer>();
+                services.AddScoped<SpriteMan>();
+                services.AddScoped<ISpriteMan>((sp) => sp.GetRequiredService<SpriteMan>());
+                services.AddScoped<IFontMan, FontMan>();
+                services.AddScoped<ITextureMan, TextureMan>();
+                services.AddScoped<PictureMan>();
+                services.AddScoped<IPictureMan>((sp) => sp.GetRequiredService<PictureMan>());
+                services.AddScoped<IPictureRenderer, PictureRenderer>();
+                services.AddScoped<ITileMan,TileMan>();
+                services.AddScoped<ISpriteRenderer, SpriteRenderer>();
             });
         }
 

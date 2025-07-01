@@ -19,13 +19,6 @@ namespace OpenBreed.Core.Interface
         #region Public Methods
 
         /// <summary>
-        /// Gets manager of specific type
-        /// </summary>
-        /// <typeparam name="TManager">Type of manager to get</typeparam>
-        /// <returns>Return manager instance</returns>
-        TManager GetManager<TManager>();
-
-        /// <summary>
         /// Perform exit
         /// </summary>
         void Exit();

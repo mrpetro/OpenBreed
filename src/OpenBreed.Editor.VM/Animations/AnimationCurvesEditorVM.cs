@@ -51,7 +51,7 @@ namespace OpenBreed.Editor.VM.Animations
 
         #region Public Properties
 
-        public Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext> InitFunc => OnInitialize;
+        public LoadContextHandler InitFunc => OnInitialize;
 
         public IDbAnimationTrack Track { get; private set; }
         public float ClipLength { get; private set; }
@@ -73,15 +73,14 @@ namespace OpenBreed.Editor.VM.Animations
 
         #region Private Methods
 
-        private IRenderContext OnInitialize(IGraphicsContext graphicsContext, HostCoordinateSystemConverter hostCoordinateSystemConverter)
+        private void OnInitialize(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> contextInitializer)
         {
-            var serviceScope = serviceScopeFactory.CreateScope();
-            serviceScope.ServiceProvider.GetRequiredService<IRenderContextProvider>().SetupScope(hostCoordinateSystemConverter, graphicsContext);
-            var renderContext = serviceScope.ServiceProvider.GetRequiredService<IRenderContext>();
+            renderContextProvider = serviceProvider.GetRequiredService<IRenderContextProvider>();
 
-            editorView.RenderContext = renderContext;
-
-            return renderContext;
+            contextInitializer = (context) =>
+            {
+                editorView.RenderContext = context;
+            };
         }
 
         #endregion Private Methods

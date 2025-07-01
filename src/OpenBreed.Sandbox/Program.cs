@@ -208,7 +208,7 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupXmlReadonlyDatabase();
 
-            hostBuilder.ConfigureServices((sc) => sc.AddSingleton<FontHelper>());
+            hostBuilder.ConfigureServices((sc) => sc.AddScoped<FontHelper>());
             hostBuilder.ConfigureLogConsolePrinter();
 
             var host = hostBuilder.Build();
@@ -226,7 +226,6 @@ namespace OpenBreed.Sandbox
         private const string ABTA_PC_GAME_DB_FILE_NAME = "GameDatabase.ABTA.EPF.xml";
 
         private readonly IWindow window;
-        private readonly IWorldMan worldMan;
         private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
@@ -239,10 +238,9 @@ namespace OpenBreed.Sandbox
             host.RunAsync();
 
             window = host.Services.GetService<IWindow>();
-            worldMan = host.Services.GetService<IWorldMan>();
             eventsMan = host.Services.GetService<IEventsMan>();
 
-            eventsMan.Subscribe<WindowUpdateEvent>((a) => OnUpdateFrame(a.Dt));
+            eventsMan.Subscribe<WindowUpdateEvent>(OnUpdateFrame);
             eventsMan.Subscribe<WindowLoadEvent>(OnWindowLoad);
         }
 
@@ -264,9 +262,9 @@ namespace OpenBreed.Sandbox
 
         #region Protected Methods
 
-        protected void OnEngineInitialized()
+        protected void OnEngineInitialized(IServiceProvider serviceProvider)
         {
-            GetManager<IScriptMan>().TryInvokeFunction("EngineInitialized");
+            serviceProvider.GetRequiredService<IScriptMan>().TryInvokeFunction("EngineInitialized");
         }
 
         #endregion Protected Methods
@@ -422,21 +420,26 @@ namespace OpenBreed.Sandbox
             program.Run();
         }
 
-        private void OnUpdateFrame(float dt)
+        private void OnUpdateFrame(WindowUpdateEvent e)
         {
-            GetManager<IRenderingMan>().Update(dt);
+            var dt = e.Dt;
+
+            var sp = e.Window.Context.ServiceProvider;
+
+
+            sp.GetRequiredService<IRenderingMan>().Update(dt);
 
             dt = Math.Min(1.0f/30.0f, dt);
 
-            GetManager<IInputsMan>().Update();
+            sp.GetRequiredService<IInputsMan>().Update();
 
-            GetManager<IWorldMan>().Update(dt);
+            sp.GetRequiredService<IWorldMan>().Update(dt);
 
-            GetManager<IJobsMan>().Update(dt);
+            sp.GetRequiredService<IJobsMan>().Update(dt);
 
-            GetManager<ISoundMan>().Update();
+            sp.GetRequiredService<ISoundMan>().Update();
 
-            GetManager<IEntityMan>().Cleanup();
+            sp.GetRequiredService<IEntityMan>().Cleanup();
         }
 
         private int ReadStream(InterleavedStereoModule module, int bufferSize, short[] buffer)
@@ -449,22 +452,22 @@ namespace OpenBreed.Sandbox
             return new InterleavedStereoModule(moduleFilePath);
         }
 
-        private void InitPlayers()
+        private void InitPlayers(IServiceProvider serviceProvider)
         {
 
         }
 
-        private void InitGameWorld()
+        private void InitGameWorld(IServiceProvider serviceProvider)
         {
-            var dataLoaderFactory = GetManager<IDataLoaderFactory>();
-            var cameraHelper = GetManager<CameraHelper>();
-            var entityMan = GetManager<IEntityMan>();
-            var actorHelper = GetManager<ActorHelper>();
-            var scriptMan = GetManager<IScriptMan>();
-            var triggerMan = GetManager<ITriggerMan>();
-            var worldGateHelper = GetManager<EntriesHelper>();
-            var gameSettings = GetManager<IOptions<GameSettings>>();
-            var hudHelper = GetManager<HudHelper>();
+            var dataLoaderFactory = serviceProvider.GetRequiredService<IDataLoaderFactory>();
+            var cameraHelper = serviceProvider.GetRequiredService<CameraHelper>();
+            var entityMan = serviceProvider.GetRequiredService<IEntityMan>();
+            var actorHelper = serviceProvider.GetRequiredService<ActorHelper>();
+            var scriptMan = serviceProvider.GetRequiredService<IScriptMan>();
+            var triggerMan = serviceProvider.GetRequiredService<ITriggerMan>();
+            var worldGateHelper = serviceProvider.GetRequiredService<EntriesHelper>();
+            var gameSettings = serviceProvider.GetRequiredService<IOptions<GameSettings>>();
+            var hudHelper = serviceProvider.GetRequiredService<HudHelper>();
 
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
 
@@ -533,24 +536,24 @@ namespace OpenBreed.Sandbox
             followerPos.Value = followedPos.Value;
         }
 
-        private void LoadSandboxWorld(int width, int height)
+        private void LoadSandboxWorld(IServiceProvider serviceProvider, int width, int height)
         {
-            var dataLoaderFactory = GetManager<IDataLoaderFactory>();
-            var cameraHelper = GetManager<CameraHelper>();
-            var entityMan = GetManager<IEntityMan>();
-            var actorHelper = GetManager<ActorHelper>();
-            var scriptMan = GetManager<IScriptMan>();
-            var triggerMan = GetManager<ITriggerMan>();
-            var worldMan = GetManager<IWorldMan>();
-            var worldGateHelper = GetManager<EntriesHelper>();
-            var gameSettings = GetManager<IOptions<GameSettings>>();
-            var systemFactory = GetManager<ISystemFactory>();
-            var tileGridFactory = GetManager<ITileGridFactory>();
-            var broadphaseGridFactory = GetManager<IBroadphaseFactory>();
-            var palettesDataProvider = GetManager<PalettesDataProvider>();
-            var repositoryProvider = GetManager<IRepositoryProvider>();
+            var dataLoaderFactory = serviceProvider.GetRequiredService<IDataLoaderFactory>();
+            var cameraHelper = serviceProvider.GetRequiredService<CameraHelper>();
+            var entityMan = serviceProvider.GetRequiredService<IEntityMan>();
+            var actorHelper = serviceProvider.GetRequiredService<ActorHelper>();
+            var scriptMan = serviceProvider.GetRequiredService<IScriptMan>();
+            var triggerMan = serviceProvider.GetRequiredService<ITriggerMan>();
+            var worldMan = serviceProvider.GetRequiredService<IWorldMan>();
+            var worldGateHelper = serviceProvider.GetRequiredService<EntriesHelper>();
+            var gameSettings = serviceProvider.GetRequiredService<IOptions<GameSettings>>();
+            var systemFactory = serviceProvider.GetRequiredService<ISystemFactory>();
+            var tileGridFactory = serviceProvider.GetRequiredService<ITileGridFactory>();
+            var broadphaseGridFactory = serviceProvider.GetRequiredService<IBroadphaseFactory>();
+            var palettesDataProvider = serviceProvider.GetRequiredService<PalettesDataProvider>();
+            var repositoryProvider = serviceProvider.GetRequiredService<IRepositoryProvider>();
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
-            var builderFactory = GetManager<IBuilderFactory>();
+            var builderFactory = serviceProvider.GetRequiredService<IBuilderFactory>();
 
             var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
 
@@ -618,9 +621,9 @@ namespace OpenBreed.Sandbox
             });
         }
 
-        private void InitLimboWorld()
+        private void InitLimboWorld(IServiceProvider serviceProvider)
         {
-            var worldMan = GetManager<IWorldMan>();
+            var worldMan = serviceProvider.GetRequiredService<IWorldMan>();
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName("Limbo");
             worldBuilder.SetupLimboWorldSystems();
@@ -630,6 +633,8 @@ namespace OpenBreed.Sandbox
 
         void OnRenderFrame(Rendering.Abstractions.IRenderView view, float dt)
         {
+            var worldMan = view.Context.ServiceProvider.GetRequiredService<IWorldMan>();
+
             var screenWorld = worldMan.GetByName("ScreenWorld");
 
             if (screenWorld is null)
@@ -648,35 +653,38 @@ namespace OpenBreed.Sandbox
         private void OnWindowLoad(WindowLoadEvent e)
         {
             var renderView = e.RenderContext.CreateView();
+
+            var sp = e.RenderContext.ServiceProvider;
+
             renderView.Rendering += OnRenderFrame;
-            var dataLoaderFactory = GetManager<IDataLoaderFactory>();
+            var dataLoaderFactory = sp.GetRequiredService<IDataLoaderFactory>();
 
             InitLua();
 
-            GetManager<FixtureTypes>().Register();
-            GetManager<FontHelper>().SetupGameFont();
+            sp.GetRequiredService<FixtureTypes>().Register();
+            sp.GetRequiredService<FontHelper>().SetupGameFont();
 
-            var spriteMan = GetManager<ISpriteMan>();
-            var worldMan = GetManager<IWorldMan>();
-            var scriptMan = GetManager<IScriptMan>();
-            var tileMan = GetManager<ITileMan>();
-            var textureMan = GetManager<ITextureMan>();
-            var soundMan = GetManager<ISoundMan>();
-            var worldGateHelper = GetManager<EntriesHelper>();
-            var doorHelper = GetManager<DoorHelper>();
-            var electicGateHelper = GetManager<ElectricGateHelper>();
-            var pickableHelper = GetManager<PickableHelper>();
-            var environmentHelper = GetManager<EnvironmentHelper>();
-            var actorHelper = GetManager<ActorHelper>();
-            var teleportHelper = GetManager<TeleportHelper>();
-            var cameraHelper = GetManager<CameraHelper>();
-            var entityMan = GetManager<IEntityMan>();
-            var triggerMan = GetManager<ITriggerMan>();
-            var screenWorldHelper = GetManager<ScreenWorldHelper>();
-            var gameHudWorldHelper = GetManager<GameHudWorldHelper>();
-            var debugHudWorldHelper = GetManager<DebugHudWorldHelper>();
-            var smartCardScreenWorldHelper = GetManager<SmartcardScreenWorldHelper>();
-            var missionScreenWorldHelper = GetManager<MissionScreenWorldHelper>();
+            var spriteMan = sp.GetRequiredService<ISpriteMan>();
+            var worldMan = sp.GetRequiredService<IWorldMan>();
+            var scriptMan = sp.GetRequiredService<IScriptMan>();
+            var tileMan = sp.GetRequiredService<ITileMan>();
+            var textureMan = sp.GetRequiredService<ITextureMan>();
+            var soundMan = sp.GetRequiredService<ISoundMan>();
+            var worldGateHelper = sp.GetRequiredService<EntriesHelper>();
+            var doorHelper = sp.GetRequiredService<DoorHelper>();
+            var electicGateHelper = sp.GetRequiredService<ElectricGateHelper>();
+            var pickableHelper = sp.GetRequiredService<PickableHelper>();
+            var environmentHelper = sp.GetRequiredService<EnvironmentHelper>();
+            var actorHelper = sp.GetRequiredService<ActorHelper>();
+            var teleportHelper = sp.GetRequiredService<TeleportHelper>();
+            var cameraHelper = sp.GetRequiredService<CameraHelper>();
+            var entityMan = sp.GetRequiredService<IEntityMan>();
+            var triggerMan = sp.GetRequiredService<ITriggerMan>();
+            var screenWorldHelper = sp.GetRequiredService<ScreenWorldHelper>();
+            var gameHudWorldHelper = sp.GetRequiredService<GameHudWorldHelper>();
+            var debugHudWorldHelper = sp.GetRequiredService<DebugHudWorldHelper>();
+            var smartCardScreenWorldHelper = sp.GetRequiredService<SmartcardScreenWorldHelper>();
+            var missionScreenWorldHelper = sp.GetRequiredService<MissionScreenWorldHelper>();
 
             //Create 4 sound sources, each one acting as a separate channel
             soundMan.CreateSoundSource();
@@ -698,13 +706,13 @@ namespace OpenBreed.Sandbox
 
             debugHudWorldHelper.Create();
 
-            GetManager<IScriptMan>().Expose("Factory", GetManager<IEntityFactory>());
+            sp.GetRequiredService<IScriptMan>().Expose("Factory", sp.GetRequiredService<IEntityFactory>());
 
             //LoadSandboxWorld(40, 40);
 
-            InitPlayers();
-            InitLimboWorld();
-            InitGameWorld();
+            InitPlayers(sp);
+            InitLimboWorld(sp);
+            InitGameWorld(sp);
 
             gameHudWorldHelper.Create();
             smartCardScreenWorldHelper.Create();
@@ -721,15 +729,15 @@ namespace OpenBreed.Sandbox
             //    gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
             //}, singleTime: true);
 
-            OnEngineInitialized();
-            StartLuaConsoleInput();
+            OnEngineInitialized(sp);
+            StartLuaConsoleInput(sp);
         }
 
-        private void StartLuaConsoleInput()
+        private void StartLuaConsoleInput(IServiceProvider serviceProvider)
         {
             Task.Run(() => LuaConsoleInput(
-                GetManager<IScriptMan>(),
-                GetManager<CollisionVisualizingOptions>()));
+                serviceProvider.GetRequiredService<IScriptMan>(),
+                serviceProvider.GetRequiredService<CollisionVisualizingOptions>()));
         }
 
         private void InitLua()

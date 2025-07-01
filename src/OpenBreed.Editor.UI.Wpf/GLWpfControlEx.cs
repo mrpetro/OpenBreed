@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Factories;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -26,7 +27,7 @@ namespace OpenBreed.Editor.UI.Wpf
         #region Public Fields
 
         public static readonly DependencyProperty InitFuncProperty =
-            DependencyProperty.Register(nameof(InitFunc), typeof(Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>), typeof(GLWpfControlEx));
+            DependencyProperty.Register(nameof(InitFunc), typeof(LoadContextHandler), typeof(GLWpfControlEx));
 
         #endregion Public Fields
 
@@ -79,9 +80,9 @@ namespace OpenBreed.Editor.UI.Wpf
         #region Public Properties
 
         [Bindable(true)]
-        public Func<IGraphicsContext, HostCoordinateSystemConverter , IRenderContext> InitFunc
+        public LoadContextHandler InitFunc
         {
-            get { return (Func<IGraphicsContext, HostCoordinateSystemConverter, IRenderContext>)GetValue(InitFuncProperty); }
+            get { return (LoadContextHandler)GetValue(InitFuncProperty); }
             set {
                 SetValue(InitFuncProperty, value);
             }
@@ -90,10 +91,6 @@ namespace OpenBreed.Editor.UI.Wpf
         #endregion Public Properties
 
         #region Private Methods
-
-        private static HashSet<IGraphicsContext> contexts = new HashSet<IGraphicsContext>();
-
-
 
         private void GLWpfControlEx_Init(TimeSpan obj)
         {
@@ -108,9 +105,14 @@ namespace OpenBreed.Editor.UI.Wpf
                 return;
             }
 
-            contexts.Add(Context);
+            InitFunc.Invoke(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> renderContextInitializer);
 
-            renderContext = InitFunc.Invoke(Context, GetRenderContextPosition);
+            if (renderContext is null)
+            {
+                renderContext = renderContextProvider.GetContext(Context, GetRenderContextPosition);
+            }
+
+            renderContextInitializer.Invoke(renderContext);
 
             renderContext.Resize((int)ActualWidth, (int)ActualHeight);
 
