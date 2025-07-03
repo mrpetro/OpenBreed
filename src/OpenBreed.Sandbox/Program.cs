@@ -464,6 +464,7 @@ namespace OpenBreed.Sandbox
             var entityMan = serviceProvider.GetRequiredService<IEntityMan>();
             var actorHelper = serviceProvider.GetRequiredService<ActorHelper>();
             var scriptMan = serviceProvider.GetRequiredService<IScriptMan>();
+            var tileMan = serviceProvider.GetRequiredService<ITileMan>();
             var triggerMan = serviceProvider.GetRequiredService<ITriggerMan>();
             var worldGateHelper = serviceProvider.GetRequiredService<EntriesHelper>();
             var gameSettings = serviceProvider.GetRequiredService<IOptions<GameSettings>>();

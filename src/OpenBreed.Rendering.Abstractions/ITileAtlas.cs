@@ -18,5 +18,15 @@
         float TileSize { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Load this tile atlas into render context
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void Load(IRenderContext renderContext);
+
+        #endregion Public Methods
     }
 }

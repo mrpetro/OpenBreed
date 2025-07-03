@@ -27,6 +27,7 @@ namespace OpenBreed.Rendering.OpenGL
     {
         #region Private Fields
 
+        private static int nextId = 0;
         private readonly IGraphicsContext graphicsContext;
         private readonly Action<IGraphicsContext> deinitializeCallback;
         private readonly HostCoordinateSystemConverter hostCoordinateSystemConverter;
@@ -34,7 +35,6 @@ namespace OpenBreed.Rendering.OpenGL
         private readonly IEventsMan eventsMan;
         private readonly IServiceScope serviceScope;
         private readonly IdMap<RenderView> views = new IdMap<RenderView>();
-        private static int nextId = 0;
         private int id = nextId++;
 
         #endregion Private Fields
@@ -51,7 +51,6 @@ namespace OpenBreed.Rendering.OpenGL
             Action<IGraphicsContext> destroyCallback,
             HostCoordinateSystemConverter hostCoordinateSystemConverter)
         {
-
             this.logger = logger;
             this.eventsMan = eventsMan;
             this.serviceScope = serviceScopeFactory.CreateScope();
@@ -69,8 +68,6 @@ namespace OpenBreed.Rendering.OpenGL
             Tiles = ServiceProvider.GetRequiredService<ITileMan>();
             Pictures = ServiceProvider.GetRequiredService<IPictureMan>();
             PictureRenderer = ServiceProvider.GetRequiredService<IPictureRenderer>();
-
-
 
             Primitives.Load();
         }
@@ -215,6 +212,8 @@ namespace OpenBreed.Rendering.OpenGL
 
         public void Render(float dt)
         {
+            LoadRefresh();
+
             GL.ClearDepth(1.0);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
@@ -253,6 +252,11 @@ namespace OpenBreed.Rendering.OpenGL
         #endregion Public Methods
 
         #region Private Methods
+
+        private void LoadRefresh()
+        {
+            Tiles.LoadRefresh(this);
+        }
 
         private bool TryGetView(Vector2i point, out RenderView view)
         {
