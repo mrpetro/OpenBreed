@@ -53,9 +53,16 @@ namespace OpenBreed.Rendering.Abstractions.Managers
         ISpriteAtlasBuilder CreateAtlas();
 
         /// <summary>
-        /// Unloads all textures
+        /// Unload all sprite atlases from render context.
         /// </summary>
-        void UnloadAll();
+        /// <param name="renderContext">Render context</param>
+        void UnloadAll(IRenderContext context);
+
+        /// <summary>
+        /// Load all sprite atlases to render context.
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void LoadRefresh(IRenderContext context);
 
         #endregion Public Methods
     }

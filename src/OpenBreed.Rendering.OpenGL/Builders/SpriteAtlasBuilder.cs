@@ -162,8 +162,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                     Height = (int)bound.Size.Y
                 };
 
-                spriteData.Vbo = spriteMan.CreateSpriteVertices(spriteData, Texture.Width, Texture.Height);
-
                 data.Add(spriteData);
             }
 
