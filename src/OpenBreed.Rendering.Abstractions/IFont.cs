@@ -25,6 +25,12 @@ namespace OpenBreed.Rendering.Abstractions
 
         #region Public Methods
 
+        /// <summary>
+        /// Load this font into render context
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void Load(IRenderContext renderContext);
+
         void Render(IRenderView view, string text, Box2 clipBox, Vector2 pos, float order);
 
         /// <summary>

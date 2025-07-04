@@ -25,6 +25,18 @@ namespace OpenBreed.Rendering.Abstractions.Managers
         void RenderStart(IRenderView view, Vector2 value);
         void RenderEnd(IRenderView view);
 
+        /// <summary>
+        /// Unload all fonts from render context.
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void UnloadAll(IRenderContext context);
+
+        /// <summary>
+        /// Load all fonts to render context.
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void LoadRefresh(IRenderContext context);
+
         #endregion Public Methods
     }
 }

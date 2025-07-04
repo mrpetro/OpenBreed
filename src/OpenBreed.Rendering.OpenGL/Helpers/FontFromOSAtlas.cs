@@ -189,6 +189,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             GL.Disable(EnableCap.Texture2D);
         }
 
+        public void Load(IRenderContext renderContext)
+        {
+            //TODO
+        }
+
         #endregion Public Methods
     }
 }

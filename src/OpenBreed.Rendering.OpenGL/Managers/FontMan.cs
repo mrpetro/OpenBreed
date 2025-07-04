@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Tools;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Tools;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
@@ -16,10 +17,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
+        private readonly Queue<IFont> loadQueue = new Queue<IFont>();
         private readonly ITextureMan textureMan;
         private readonly ISpriteMan spriteMan;
         private readonly ISpriteRenderer spriteRenderer;
         private readonly IPrimitiveRenderer primitiveRenderer;
+        private readonly ILogger logger;
         private readonly List<IFont> items = new List<IFont>();
         private readonly Dictionary<string, IFont> aliases = new Dictionary<string, IFont>();
         private readonly TextMeasurer textMeasurer = new TextMeasurer();
@@ -29,12 +32,18 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Constructors
 
-        public FontMan(ITextureMan textureMan, ISpriteMan spriteMan, ISpriteRenderer spriteRenderer, IPrimitiveRenderer primitiveRenderer)
+        public FontMan(
+            ITextureMan textureMan, 
+            ISpriteMan spriteMan,
+            ISpriteRenderer spriteRenderer,
+            IPrimitiveRenderer primitiveRenderer,
+            ILogger logger)
         {
             this.textureMan = textureMan;
             this.spriteMan = spriteMan;
             this.spriteRenderer = spriteRenderer;
             this.primitiveRenderer = primitiveRenderer;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -48,7 +57,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public IFontAtlasBuilder Create()
         {
-            return new FontFromSpritesAtlasBuilder(this, spriteMan, spriteRenderer, primitiveRenderer);
+            return new FontFromSpritesAtlasBuilder(this, spriteMan);
         }
 
         public void RenderPart(IRenderView view, int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox, bool ignoreScale = false)
@@ -71,6 +80,17 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 return result;
             else
                 return null;
+        }
+
+        public void LoadRefresh(IRenderContext renderContext)
+        {
+            while (loadQueue.Count > 0)
+            {
+                var item = loadQueue.Dequeue();
+                item.Load(renderContext);
+
+                logger.LogTrace("Font '{0}' loaded into render context..", item.Id);
+            }
         }
 
         public IFont GetOSFont(string fontName, int fontSize)
@@ -127,11 +147,17 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             items.Add(font);
             aliases.Add(alias, font);
+            loadQueue.Enqueue(font);
         }
 
         internal int GenerateNewId()
         {
             return items.Count;
+        }
+
+        public void UnloadAll(IRenderContext context)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion Internal Methods

@@ -17,14 +17,10 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         #region Internal Constructors
 
         internal FontFromSpritesAtlasBuilder(FontMan fontMan,
-                                             ISpriteMan spriteMan,
-                                             ISpriteRenderer spriteRenderer,
-                                             IPrimitiveRenderer primitiveRenderer)
+                                             ISpriteMan spriteMan)
         {
             this.fontMan = fontMan;
             SpriteMan = spriteMan;
-            SpriteRenderer = spriteRenderer;
-            PrimitiveRenderer = primitiveRenderer;
         }
 
         #endregion Internal Constructors
@@ -35,8 +31,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         internal int AtlasId { get; private set; }
 
         internal ISpriteMan SpriteMan { get; }
-        internal ISpriteRenderer SpriteRenderer { get; }
-        internal IPrimitiveRenderer PrimitiveRenderer { get; }
         internal int[] Characters { get; private set; }
 
         internal int Id { get; private set; }
@@ -75,15 +69,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
             return this;
         }
 
-        //public IFontAtlasBuilder AddWhiteChar(int ch, float width)
-        //{
-        //    var sptiteAtlas = SpriteMan.GetByName(spriteAtlasName);
-        //    var size = sptiteAtlas.GetSpriteSize(spriteIndex);
-        //    Lookup.Add(ch, (sptiteAtlas.Id, spriteIndex, size.X, size.Y));
-
-        //    return this;
-        //}
-
         public IFontAtlasBuilder SetHeight(float height)
         {
             Height = height;
@@ -97,9 +82,5 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         }
 
         #endregion Public Methods
-
-        #region Internal Methods
-
-        #endregion Internal Methods
     }
 }

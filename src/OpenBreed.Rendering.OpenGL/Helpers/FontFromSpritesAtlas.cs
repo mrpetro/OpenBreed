@@ -13,8 +13,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #region Private Fields
 
         private readonly ISpriteMan spriteMan;
-        private readonly ISpriteRenderer spriteRenderer;
-        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly int atlasId;
 
         private readonly Dictionary<int, (int, int, float, float)> Lookup = new Dictionary<int, (int, int, float, float)>();
@@ -26,8 +24,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         internal FontFromSpritesAtlas(FontFromSpritesAtlasBuilder builder)
         {
             spriteMan = builder.SpriteMan;
-            spriteRenderer = builder.SpriteRenderer;
-            primitiveRenderer = builder.PrimitiveRenderer; 
             Id = builder.Id;
             atlasId = builder.AtlasId;
             Lookup = builder.Lookup;
@@ -113,7 +109,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             {
                 var atlasId = data.Item1;
                 var spriteIndex = data.Item2;
-                spriteRenderer.Render(view, new Vector3(0, 0, 0), Vector2.One, Color4.White, atlasId, spriteIndex, ignoreScale);
+                view.Context.SpriteRenderer.Render(view, new Vector3(0, 0, 0), Vector2.One, Color4.White, atlasId, spriteIndex, ignoreScale);
             }
         }
 
@@ -143,7 +139,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                         break;
                 }
 
-                spriteRenderer.Render(view, new Vector3(caretPosX, caretPosY - h, 0.0f), Vector2.One, color, atlasId, spriteIndex, ignoreScale);
+                view.Context.SpriteRenderer.Render(view, new Vector3(caretPosX, caretPosY - h, 0.0f), Vector2.One, color, atlasId, spriteIndex, ignoreScale);
 
                 caretPosX += w;
             }
@@ -151,7 +147,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Draw(int spriteId)
         {
+        }
 
+        public void Load(IRenderContext renderContext)
+        {
+            //NOTE: nothing to load here
         }
 
         #endregion Public Methods
