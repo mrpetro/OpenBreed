@@ -18,10 +18,10 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
+        private readonly Queue<IPicture> loadQueue = new Queue<IPicture>();
         private readonly List<Picture> items = new List<Picture>();
         private readonly Dictionary<string, Picture> names = new Dictionary<string, Picture>();
         private readonly ITextureMan textureMan;
-        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -29,11 +29,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Internal Constructors
 
         public PictureMan(ITextureMan textureMan,
-                         IPrimitiveRenderer primitiveRenderer,
                          ILogger logger)
         {
             this.textureMan = textureMan;
-            this.primitiveRenderer = primitiveRenderer;
             this.logger = logger;
         }
 
@@ -70,7 +68,18 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return null;
         }
 
-        public void UnloadAll()
+        public void LoadRefresh(IRenderContext renderContext)
+        {
+            while (loadQueue.Count > 0)
+            {
+                var item = loadQueue.Dequeue();
+                item.Load(renderContext);
+
+                logger.LogTrace("Picture '{0}' loaded into render context..", item.Id);
+            }
+        }
+
+        public void UnloadAll(IRenderContext renderContext)
         {
             throw new NotImplementedException();
         }
@@ -88,26 +97,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             items.Add(picture);
             names.Add(name, picture);
+            loadQueue.Enqueue(picture);
 
             logger.LogTrace("Picture '{0}' created with ID {1}.", name, items.Count - 1);
 
             return items.Count - 1;
-        }
-
-        internal int CreateVertices(UvBox uvBox, int width, int height)
-        {
-            var vertices = UvBox.CreateVertices(uvBox, width, height);
-
-            var vertexArrayBuilder = primitiveRenderer.CreatePosTexCoordArray();
-            vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
-            vertexArrayBuilder.AddVertex(vertices[1].position, vertices[1].texCoord);
-            vertexArrayBuilder.AddVertex(vertices[2].position, vertices[2].texCoord);
-            vertexArrayBuilder.AddVertex(vertices[3].position, vertices[3].texCoord);
-
-            vertexArrayBuilder.AddTriangleIndices(0, 1, 3);
-            vertexArrayBuilder.AddTriangleIndices(1, 2, 3);
-
-            return vertexArrayBuilder.CreateTexturedVao();
         }
 
         #endregion Internal Methods

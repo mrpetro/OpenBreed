@@ -81,11 +81,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         #region Internal Methods
 
-        internal int GetVbo()
-        {
-            return pictureMan.CreateVertices(new UvBox(0, 0, Texture.Width, Texture.Height), Texture.Width, Texture.Height);
-        }
-
         internal int Register(Picture picture)
         {
             return pictureMan.Register(Name, picture);

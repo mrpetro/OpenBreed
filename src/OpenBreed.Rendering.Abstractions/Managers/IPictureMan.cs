@@ -45,9 +45,16 @@ namespace OpenBreed.Rendering.Abstractions.Managers
         IPictureBuilder CreatePicture();
 
         /// <summary>
-        /// Unloads all textures
+        /// Unload all pictures from render context.
         /// </summary>
-        void UnloadAll();
+        /// <param name="renderContext">Render context</param>
+        void UnloadAll(IRenderContext context);
+
+        /// <summary>
+        /// Load all pictures to render context.
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void LoadRefresh(IRenderContext context);
 
         #endregion Public Methods
     }

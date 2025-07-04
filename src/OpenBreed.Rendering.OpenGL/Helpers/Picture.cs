@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
+using OpenBreed.Rendering.OpenGL.Managers;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
@@ -11,7 +13,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         {
             Texture = builder.Texture;
             Id = builder.Register(this);
-            Vbo = builder.GetVbo();
         }
 
         #endregion Public Constructors
@@ -27,10 +28,40 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Internal Properties
 
-        internal int Vbo { get; }
+        internal int Vbo { get; private set; } = -1;
 
         internal ITexture Texture { get; }
 
         #endregion Internal Properties
+
+        #region Public Methods
+
+        public void Load(IRenderContext renderContext)
+        {
+            Vbo = CreateVertices(renderContext);
+        }
+
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal int CreateVertices(IRenderContext renderContext)
+        {
+            var uvBox = new UvBox(0, 0, Texture.Width, Texture.Height);
+            var vertices = UvBox.CreateVertices(uvBox, Texture.Width, Texture.Height);
+
+            var vertexArrayBuilder = renderContext.Primitives.CreatePosTexCoordArray();
+            vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[1].position, vertices[1].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[2].position, vertices[2].texCoord);
+            vertexArrayBuilder.AddVertex(vertices[3].position, vertices[3].texCoord);
+
+            vertexArrayBuilder.AddTriangleIndices(0, 1, 3);
+            vertexArrayBuilder.AddTriangleIndices(1, 2, 3);
+
+            return vertexArrayBuilder.CreateTexturedVao();
+        }
+
+        #endregion Internal Methods
     }
 }
