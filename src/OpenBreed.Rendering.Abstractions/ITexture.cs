@@ -47,5 +47,15 @@ namespace OpenBreed.Rendering.Abstractions
         int MaskIndex { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Load this texture into render context
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void Load(IRenderContext renderContext);
+
+        #endregion Public Methods
     }
 }

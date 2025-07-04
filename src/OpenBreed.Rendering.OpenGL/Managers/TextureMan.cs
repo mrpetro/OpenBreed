@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Interface.Tools;
@@ -11,6 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
+using System.Xml.Linq;
 
 namespace OpenBreed.Rendering.OpenGL.Managers
 {
@@ -22,6 +24,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
+        private readonly Queue<ITexture> loadQueue = new Queue<ITexture>();
         private readonly List<ITexture> items = new List<ITexture>();
         private readonly ILogger logger;
         private readonly Dictionary<string, ITexture> names = new Dictionary<string, ITexture>();
@@ -47,16 +50,14 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             Debug.Assert(height > 0, "Height is zero!");
             Debug.Assert(data is not null, "Bitmap is null!");
 
-            ITexture result;
-            if (names.TryGetValue(name, out result))
+            if (names.TryGetValue(name, out ITexture result))
+            {
                 return result;
+            }
 
             var texture = Texture.CreateFromIndexArray(width, height, data, maskIndex);
-            texture.Id = items.Count;
-            items.Add(texture);
-            names.Add(name, texture);
 
-            logger.LogTrace("Texture '{0}' created with ID {1}.", name, texture.Id);
+            Register(name, texture);
 
             return texture;
         }
@@ -73,12 +74,15 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             Debug.Assert(!string.IsNullOrWhiteSpace(name), "Alias is empty!");
             Debug.Assert(!string.IsNullOrWhiteSpace(filePath), "File path is empty!");
 
-            ITexture result;
-            if (names.TryGetValue(name, out result))
+            if (names.TryGetValue(name, out ITexture result))
+            {
                 return result;
+            }
 
             if (!File.Exists(filePath))
+            {
                 throw new InvalidOperationException($"File '{filePath}' doesn't exist.");
+            }
 
             using (var bitmap = new Bitmap(filePath))
             {
@@ -99,9 +103,10 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             Debug.Assert(!string.IsNullOrWhiteSpace(name), "Alias is empty!");
             Debug.Assert(bitmap != null, "Bitmap is null!");
 
-            ITexture result;
-            if (names.TryGetValue(name, out result))
+            if (names.TryGetValue(name, out ITexture result))
+            {
                 return result;
+            }
 
             return CreateFromBitmap(name, bitmap);
         }
@@ -123,10 +128,21 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return result;
         }
 
+        public void LoadRefresh(IRenderContext renderContext)
+        {
+            while (loadQueue.Count > 0)
+            {
+                var item = loadQueue.Dequeue();
+                item.Load(renderContext);
+
+                logger.LogTrace("Texture '{0}' loaded into render context..", item.Id);
+            }
+        }
+
         /// <summary>
         /// Unloads all textures
         /// </summary>
-        public void UnloadAll()
+        public void UnloadAll(IRenderContext context)
         {
             foreach (var texture in items)
                 texture.Dispose();
@@ -139,14 +155,21 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Private Methods
 
-        private ITexture CreateFromBitmap(string name, Bitmap bitmap)
+        private void Register(string name, Texture texture)
         {
-            var texture = Texture.CreateFromBitmap(bitmap);
             texture.Id = items.Count;
             items.Add(texture);
             names.Add(name, texture);
+            loadQueue.Enqueue(texture);
 
             logger.LogTrace("Texture '{0}' created with ID {1}.", name, texture.Id);
+        }
+
+        private ITexture CreateFromBitmap(string name, Bitmap bitmap)
+        {
+            var texture = Texture.CreateFromBitmap(bitmap);
+
+            Register(name, texture);
 
             return texture;
         }

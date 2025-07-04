@@ -256,6 +256,7 @@ namespace OpenBreed.Rendering.OpenGL
         private void LoadRefresh()
         {
             Tiles.LoadRefresh(this);
+            Textures.LoadRefresh(this);
         }
 
         private bool TryGetView(Vector2i point, out RenderView view)

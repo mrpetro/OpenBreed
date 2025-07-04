@@ -6,7 +6,9 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using System.Threading;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
@@ -14,9 +16,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
     {
         #region Public Constructors
 
-        public Texture(int id)
+        public Texture()
         {
-            InternalId = id;
         }
 
         #endregion Public Constructors
@@ -25,47 +26,51 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public TextureDataMode DataMode { get; private set; }
         public int Height { get; private set; }
+        public byte[] Data { get; private set; }
         public int Id { get; internal set; }
-        public int InternalId { get; }
+        public int InternalId { get; private set; } = -1;
         public int Width { get; private set; }
 
         public int MaskIndex { get; private set; }
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        internal OpenTK.Graphics.OpenGL4.PixelInternalFormat InternalPixelFormat { get; private set; }
+        internal OpenTK.Graphics.OpenGL4.PixelFormat PixelFormat { get; private set; }
+
+        #endregion Internal Properties
+
         #region Public Methods
+
+        public static byte[] ToBytes(Bitmap bmp, System.Drawing.Imaging.PixelFormat pixelFormat)
+        {
+            var pixelSize = Image.GetPixelFormatSize(pixelFormat) / 8;
+
+            var bytes = new byte[bmp.Width * bmp.Height * pixelSize];
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, pixelFormat);
+            Marshal.Copy(bmpData.Scan0, bytes, 0, bytes.Length);
+            bmp.UnlockBits(bmpData);
+            return bytes;
+        }
 
         public static Texture CreateFromBitmap(Bitmap bitmap)
         {
             Debug.Assert(ThreadTools.IsMainThread, "Called on non-main thread!");
 
-            OpenTK.Graphics.OpenGL4.PixelFormat pixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat.Bgra;
-            PixelType pixelType = PixelType.UnsignedByte;
-            System.Drawing.Imaging.PixelFormat supportedPixelFormat = GetSupportedPixelFormat(bitmap.PixelFormat);
-            PixelInternalFormat internalPixelFormat = ToGlPixelFormat(supportedPixelFormat);
+            var supportedPixelFormat = GetSupportedPixelFormat(bitmap.PixelFormat);
 
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                      ImageLockMode.ReadOnly,
-                                      supportedPixelFormat);
+            var data = ToBytes(bitmap, supportedPixelFormat);
 
-            // Generate handle
-            int textureId = GL.GenTexture();
+            var texture = new Texture();
 
-            // Bind the handle
-            GL.BindTexture(TextureTarget.Texture2D, textureId);
-
-            GL.TexImage2D(TextureTarget.Texture2D, 0, internalPixelFormat, bitmap.Width, bitmap.Height, 0, pixelFormat, pixelType, bitmapData.Scan0);
-
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
-
-            //Release from memory
-            bitmap.UnlockBits(bitmapData);
-
-            var texture = new Texture(textureId);
             texture.Width = bitmap.Width;
             texture.Height = bitmap.Height;
+            texture.Data = data;
             texture.DataMode = TextureDataMode.Rgba;
+            texture.InternalPixelFormat = ToGlPixelFormat(supportedPixelFormat);
+            texture.PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat.Bgra;
 
             return texture;
         }
@@ -74,25 +79,13 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         {
             Debug.Assert(ThreadTools.IsMainThread, "Called on non-main thread!");
 
-            PixelInternalFormat internalPixelFormat = PixelInternalFormat.R8ui;
-            OpenTK.Graphics.OpenGL4.PixelFormat pixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat.RedInteger;
-            PixelType pixelType = PixelType.UnsignedByte;
-
-            // Generate handle
-            int textureId = GL.GenTexture();
-
-            // Bind the handle
-            GL.BindTexture(TextureTarget.Texture2D, textureId);
-
-            GL.TexImage2D(TextureTarget.Texture2D, 0, internalPixelFormat, width, height, 0, pixelFormat, pixelType, data);
-
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
-
-            var texture = new Texture(textureId);
+            var texture = new Texture();
             texture.Width = width;
             texture.Height = height;
+            texture.Data = data;
             texture.DataMode = TextureDataMode.Index;
+            texture.InternalPixelFormat = PixelInternalFormat.R8ui;
+            texture.PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat.RedInteger;
             texture.MaskIndex = maskIndex;
 
             return texture;
@@ -179,6 +172,24 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             }
 
             throw new NotSupportedException();
+        }
+
+        public void Load(IRenderContext renderContext)
+        {
+            var pixelType = PixelType.UnsignedByte;
+
+            // Generate handle
+            int textureId = GL.GenTexture();
+
+            // Bind the handle
+            GL.BindTexture(TextureTarget.Texture2D, textureId);
+
+            GL.TexImage2D(TextureTarget.Texture2D, 0, InternalPixelFormat, Width, Height, 0, PixelFormat, pixelType, Data);
+
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
+
+            InternalId = textureId;
         }
 
         public void Dispose()

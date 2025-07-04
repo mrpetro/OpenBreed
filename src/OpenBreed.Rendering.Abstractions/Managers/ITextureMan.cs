@@ -52,9 +52,16 @@ namespace OpenBreed.Rendering.Abstractions.Managers
         ITexture Create(string alias, string filePath);
 
         /// <summary>
-        /// Unloads all textures
+        /// Unload all textures from render context.
         /// </summary>
-        void UnloadAll();
+        /// <param name="renderContext">Render context</param>
+        void UnloadAll(IRenderContext context);
+
+        /// <summary>
+        /// Load all textures to render context.
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void LoadRefresh(IRenderContext context);
 
         #endregion Public Methods
     }
