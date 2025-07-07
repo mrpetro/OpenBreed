@@ -123,7 +123,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
                 var tileAtlas = tileMan.GetByName(cell.TsId);
 
-                view.Context.Tiles.Render(view, tileAtlas.Id, cell.TsTi);
+                view.Context.TileRenderer.Render(view, tileAtlas.Id, cell.TsTi);
 
                 view.PopMatrix();
             }
@@ -220,7 +220,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
                 view.PushMatrix();
                 view.Translate(cellPos.X, cellPos.Y, 0.0f);
-                view.Context.Tiles.Render(view, tileAtlasId, tile.Index);
+                view.Context.TileRenderer.Render(view, tileAtlasId, tile.Index);
                 view.PopMatrix();
             }
         }

@@ -104,7 +104,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return font;
         }
 
-        public void Render(IRenderView view, Box2 clipBox, FontRenderer fontRenderer)
+        public void Render(IRenderView view, Box2 clipBox, FontRenderCallback fontRenderer)
         {
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);

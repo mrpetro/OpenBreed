@@ -76,29 +76,14 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             throw new NotImplementedException();
         }
 
-        public void Render(IRenderView view, int atlasId, int imageId)
-        {
-            var atlas = items[atlasId];
-            var size = atlas.TileSize;
-            var vao = atlas.data[imageId].Vbo;
-
-            if (vao == -1)
-            {
-                return;
-            }
-
-            view.Context.Primitives.DrawSprite(
-                view,
-                atlas.Texture,
-                vao,
-                new Vector3(0, 0, 0),
-                Vector2.One,
-                Color4.White);
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal TileAtlas InternalGetById(int atlasId)
+        {
+            return items[atlasId];
+        }
 
         internal int Register(string name, TileAtlas tileAtlas)
         {

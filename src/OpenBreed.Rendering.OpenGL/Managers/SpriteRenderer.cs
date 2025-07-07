@@ -11,24 +11,15 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        //private readonly uint[] indicesArray = {
-        //                                    0,1,2,
-        //                                    0,2,3
-        //                               };
-
-        // private readonly int ibo;
         private readonly SpriteMan spriteMan;
-        private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteRenderer(SpriteMan spriteMan,
-                              IPrimitiveRenderer primitiveRenderer)
+        public SpriteRenderer(SpriteMan spriteMan)
         {
             this.spriteMan = spriteMan;
-            this.primitiveRenderer = primitiveRenderer;
         }
 
         #endregion Public Constructors
@@ -44,7 +35,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             try
             {
-                primitiveRenderer.DrawSprite(
+                view.Context.Primitives.DrawSprite(
                     view,
                     spriteAtlas.Texture,
                     vbo,

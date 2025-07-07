@@ -7,6 +7,7 @@ using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -64,6 +65,7 @@ namespace OpenBreed.Rendering.OpenGL
             Textures = ServiceProvider.GetRequiredService<ITextureMan>();
             Sprites = ServiceProvider.GetRequiredService<ISpriteMan>();
             SpriteRenderer = ServiceProvider.GetRequiredService<ISpriteRenderer>();
+            TileRenderer = ServiceProvider.GetRequiredService<ITileRenderer>();
             Fonts = ServiceProvider.GetRequiredService<IFontMan>();
             Tiles = ServiceProvider.GetRequiredService<ITileMan>();
             Pictures = ServiceProvider.GetRequiredService<IPictureMan>();
@@ -81,6 +83,7 @@ namespace OpenBreed.Rendering.OpenGL
         public ITextureMan Textures { get; }
         public ISpriteMan Sprites { get; }
         public ISpriteRenderer SpriteRenderer { get; }
+        public ITileRenderer TileRenderer { get; }
         public IPrimitiveRenderer Primitives { get; }
         public IPictureMan Pictures { get; }
         public IPictureRenderer PictureRenderer { get; }

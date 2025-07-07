@@ -35,13 +35,6 @@ namespace OpenBreed.Rendering.Abstractions.Managers
         /// <param name="renderContext">Render context</param>
         void UnloadAll(IRenderContext renderContext);
 
-        /// <summary>
-        /// Render particular tile giving it's atlas and image ID
-        /// </summary>
-        /// <param name="atlasId">Atlas ID of rendered tile</param>
-        /// <param name="imageId">Image ID of rendered tile</param>
-        void Render(IRenderView view, int atlasId, int imageId);
-
         #endregion Public Methods
     }
 }

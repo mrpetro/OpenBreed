@@ -14,6 +14,7 @@ using OpenBreed.Model;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Data;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Mathematics;
@@ -59,8 +60,10 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
                 services.AddScoped<PictureMan>();
                 services.AddScoped<IPictureMan>((sp) => sp.GetRequiredService<PictureMan>());
                 services.AddScoped<IPictureRenderer, PictureRenderer>();
-                services.AddScoped<ITileMan,TileMan>();
+                services.AddScoped<TileMan>();
+                services.AddScoped<ITileMan>((sp) => sp.GetRequiredService<TileMan>());
                 services.AddScoped<ISpriteRenderer, SpriteRenderer>();
+                services.AddScoped<ITileRenderer, TileRenderer>();
             });
         }
 

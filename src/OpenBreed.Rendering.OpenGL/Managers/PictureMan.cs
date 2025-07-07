@@ -26,7 +26,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public PictureMan(ITextureMan textureMan,
                          ILogger logger)
@@ -35,7 +35,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             this.logger = logger;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -105,27 +105,5 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         }
 
         #endregion Internal Methods
-
-        #region Private Methods
-
-        private Vertex[] CreateVertices(SpriteData data, int textureWidth, int textureHeight)
-        {
-            var uvCoord = Vector2.Divide(new Vector2(data.U, data.V), new Vector2(textureWidth, textureHeight));
-            var uvSize = Vector2.Divide(new Vector2(data.Width, data.Height), new Vector2(textureWidth, textureHeight));
-
-            var uvLD = new Vector2(uvCoord.X, uvCoord.Y);
-            var uvRT = Vector2.Add(uvLD, uvSize);
-
-            Vertex[] vertices = {
-                                new Vertex(new Vector2(0,   0),              new Vector2(uvLD.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(data.Width,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(data.Width,  data.Height), new Vector2(uvRT.X, uvLD.Y), Color4.White),
-                                new Vertex(new Vector2(0,   data.Height),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
-                            };
-
-            return vertices;
-        }
-
-        #endregion Private Methods
     }
 }

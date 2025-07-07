@@ -228,7 +228,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         {
             if (!cellTile.IsEmpty)
             {
-                tileMan.Render(view, cellTile.AtlasId, cellTile.ImageId);
+                view.Context.TileRenderer.Render(view, cellTile.AtlasId, cellTile.ImageId);
             }
         }
 

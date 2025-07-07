@@ -12,17 +12,14 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Private Fields
 
         private readonly PictureMan pictureMan;
-        private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PictureRenderer(PictureMan pictureMan,
-                              IPrimitiveRenderer primitiveRenderer)
+        public PictureRenderer(PictureMan pictureMan)
         {
             this.pictureMan = pictureMan;
-            this.primitiveRenderer = primitiveRenderer;
         }
 
         #endregion Public Constructors
@@ -37,7 +34,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             try
             {
-                primitiveRenderer.DrawSprite(
+                view.Context.Primitives.DrawSprite(
                     view,
                     picture.Texture,
                     picture.Vbo,

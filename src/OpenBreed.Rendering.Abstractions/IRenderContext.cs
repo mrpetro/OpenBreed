@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using System;
@@ -18,6 +19,7 @@ namespace OpenBreed.Rendering.Abstractions
 
         ISpriteMan Sprites { get; }
         ISpriteRenderer SpriteRenderer { get; }
+        ITileRenderer TileRenderer { get; }
         IPrimitiveRenderer Primitives { get; }
         IFontMan Fonts { get; }
         ITextureMan Textures { get; }
