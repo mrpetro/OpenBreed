@@ -276,9 +276,9 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
             var scale = view.GetScale();
 
-            view.Context.Fonts.RenderStart(view, new Vector2(textPos.X + 5 / scale, textPos.Y + 5 / scale));
-            view.Context.Fonts.RenderPart(view, font.Id, $"({textPos.X},{textPos.Y})", Vector2.Zero, Color4.White, 100, clipBox, ignoreScale: true);
-            view.Context.Fonts.RenderEnd(view);
+            view.Context.FontRenderer.RenderStart(view, new Vector2(textPos.X + 5 / scale, textPos.Y + 5 / scale));
+            view.Context.FontRenderer.RenderPart(view, font.Id, $"({textPos.X},{textPos.Y})", Vector2.Zero, Color4.White, 100, clipBox, ignoreScale: true);
+            view.Context.FontRenderer.RenderEnd(view);
         }
 
         #endregion Private Methods

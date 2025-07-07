@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Renderers;
+using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Rendering.OpenGL.Managers
+namespace OpenBreed.Rendering.OpenGL.Renderers
 {
     public class TileRenderer : ITileRenderer
     {

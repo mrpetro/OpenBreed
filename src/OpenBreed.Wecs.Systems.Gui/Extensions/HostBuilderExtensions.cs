@@ -9,6 +9,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Rendering.Abstractions.Renderers;
 
 namespace OpenBreed.Wecs.Systems.Gui.Extensions
 {

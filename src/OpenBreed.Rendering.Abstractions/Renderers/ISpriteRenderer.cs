@@ -2,7 +2,7 @@
 using OpenTK;
 using OpenTK.Mathematics;
 
-namespace OpenBreed.Rendering.Abstractions
+namespace OpenBreed.Rendering.Abstractions.Renderers
 {
     public interface ISpriteRenderer
     {

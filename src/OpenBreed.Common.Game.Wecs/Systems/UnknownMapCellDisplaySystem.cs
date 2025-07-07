@@ -12,6 +12,7 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
 using OpenBreed.Rendering.Abstractions.Extensions;
+using OpenBreed.Rendering.Abstractions.Renderers;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {

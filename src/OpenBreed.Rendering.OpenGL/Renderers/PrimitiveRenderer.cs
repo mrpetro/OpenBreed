@@ -2,6 +2,7 @@
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -11,7 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 
-namespace OpenBreed.Rendering.OpenGL.Managers
+namespace OpenBreed.Rendering.OpenGL.Renderers
 {
     public class PrimitiveRenderer : IPrimitiveRenderer
     {
@@ -289,7 +290,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 texturedShader.SetMatrix4("model", model);
                 texturedShader.SetMatrix4("view", view.View);
                 texturedShader.SetMatrix4("projection", view.Projection);
-                texturedShader.SetVector4("aColor", ((Vector4)color));
+                texturedShader.SetVector4("aColor", (Vector4)color);
             }
             else if (texture.DataMode == TextureDataMode.Index)
             {
@@ -299,7 +300,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
                 texturedWithPaletteShader.SetMatrix4("model", model);
                 texturedWithPaletteShader.SetMatrix4("view", view.View);
                 texturedWithPaletteShader.SetMatrix4("projection", view.Projection);
-                texturedWithPaletteShader.SetVector4("aColor", ((Vector4)color));
+                texturedWithPaletteShader.SetVector4("aColor", (Vector4)color);
                 texturedWithPaletteShader.SetUInt("maskIndex", (uint)texture.MaskIndex);
 
                 texturedWithPaletteShader.SetVector4Array("palette", view.CurrentPalette.DirectData);

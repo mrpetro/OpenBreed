@@ -44,7 +44,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Worlds.IWorldRenderContext context)
         {
-            fontMan.Render(context.View, context.ViewBox, RenderTexts);
+            context.View.Context.FontRenderer.Render(context.View, context.ViewBox, RenderTexts);
         }
 
         #endregion Public Methods
@@ -62,19 +62,19 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var pos = entity.Get<PositionComponent>();
             var tcp = entity.Get<TextComponent>();
 
-            fontMan.RenderStart(view, pos.Value);
+            view.Context.FontRenderer.RenderStart(view, pos.Value);
 
             try
             {
                 for (int i = 0; i < tcp.Parts.Count; i++)
                 {
                     var part = tcp.Parts[i];
-                    fontMan.RenderPart(view, part.FontId, part.Text, part.Offset, part.Color, part.Order, clipBox);
+                    view.Context.FontRenderer.RenderPart(view, part.FontId, part.Text, part.Offset, part.Color, part.Order, clipBox);
                 }
             }
             finally
             {
-                fontMan.RenderEnd(view);
+                view.Context.FontRenderer.RenderEnd(view);
             }
         }
 

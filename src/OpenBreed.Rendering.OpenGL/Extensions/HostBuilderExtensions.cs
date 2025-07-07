@@ -17,6 +17,7 @@ using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Data;
 using OpenBreed.Rendering.OpenGL.Managers;
+using OpenBreed.Rendering.OpenGL.Renderers;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -52,18 +53,21 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddScoped<IPrimitiveRenderer, PrimitiveRenderer>();
                 services.AddScoped<SpriteMan>();
                 services.AddScoped<ISpriteMan>((sp) => sp.GetRequiredService<SpriteMan>());
-                services.AddScoped<IFontMan, FontMan>();
+                services.AddScoped<FontMan>();
+                services.AddScoped<IFontMan>((sp) => sp.GetRequiredService<FontMan>());
                 services.AddScoped<ITextureMan, TextureMan>();
                 services.AddScoped<PictureMan>();
                 services.AddScoped<IPictureMan>((sp) => sp.GetRequiredService<PictureMan>());
-                services.AddScoped<IPictureRenderer, PictureRenderer>();
                 services.AddScoped<TileMan>();
                 services.AddScoped<ITileMan>((sp) => sp.GetRequiredService<TileMan>());
+
+                services.AddScoped<IPrimitiveRenderer, PrimitiveRenderer>();
+                services.AddScoped<IPictureRenderer, PictureRenderer>();
                 services.AddScoped<ISpriteRenderer, SpriteRenderer>();
                 services.AddScoped<ITileRenderer, TileRenderer>();
+                services.AddScoped<IFontRenderer, FontRenderer>();
             });
         }
 

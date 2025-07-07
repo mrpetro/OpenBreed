@@ -1,34 +1,37 @@
 ﻿using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Helpers;
+using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
 using OpenTK.Mathematics;
 using GL = OpenTK.Graphics.OpenGL;
 
-namespace OpenBreed.Rendering.OpenGL.Managers
+namespace OpenBreed.Rendering.OpenGL.Renderers
 {
-    public class PictureRenderer : IPictureRenderer
+    public class SpriteRenderer : ISpriteRenderer
     {
         #region Private Fields
 
-        private readonly PictureMan pictureMan;
+        private readonly SpriteMan spriteMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PictureRenderer(PictureMan pictureMan)
+        public SpriteRenderer(SpriteMan spriteMan)
         {
-            this.pictureMan = pictureMan;
+            this.spriteMan = spriteMan;
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int imageId)
+        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int atlasId, int imageId, bool ignoreScale = false)
         {
-            var picture = pictureMan.InternalGetById(imageId);
+            var spriteAtlas = spriteMan.InternalGetById(atlasId);
+            var vbo = spriteAtlas.data[imageId].Vbo;
 
             view.PushMatrix();
 
@@ -36,11 +39,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             {
                 view.Context.Primitives.DrawSprite(
                     view,
-                    picture.Texture,
-                    picture.Vbo,
+                    spriteAtlas.Texture,
+                    vbo,
                     pos,
                     scale,
-                    color);
+                    color,
+                    ignoreScale);
             }
             finally
             {
@@ -51,6 +55,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void RenderBegin()
         {
             GL.GL.Enable(GL.EnableCap.Blend);
+            GL.GL.Enable(GL.EnableCap.AlphaTest);
             GL.GL.BlendFunc(GL.BlendingFactor.One, GL.BlendingFactor.OneMinusSrcAlpha);
             GL.GL.Enable(GL.EnableCap.Texture2D);
         }
@@ -58,6 +63,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void RenderEnd()
         {
             GL.GL.Disable(GL.EnableCap.Texture2D);
+            GL.GL.Disable(GL.EnableCap.AlphaTest);
             GL.GL.Disable(GL.EnableCap.Blend);
         }
 

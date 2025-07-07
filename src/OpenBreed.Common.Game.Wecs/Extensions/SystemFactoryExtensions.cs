@@ -5,7 +5,6 @@ using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Common.Game.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
@@ -14,6 +13,7 @@ using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
 using OpenBreed.Common.Game.Managers;
+using OpenBreed.Rendering.Abstractions.Renderers;
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {

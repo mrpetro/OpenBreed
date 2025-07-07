@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace OpenBreed.Rendering.Abstractions
+namespace OpenBreed.Rendering.Abstractions.Renderers
 {
     public enum PointType
     {

@@ -36,7 +36,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(Worlds.IWorldRenderContext context)
         {
-            fontMan.Render(context.View, context.ViewBox, RenderTexts);
+            context.View.Context.FontRenderer.Render(context.View, context.ViewBox, RenderTexts);
         }
 
         #endregion Public Methods
@@ -55,7 +55,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var tp = entity.Get<TextPresentationComponent>();
             var td = entity.Get<TextDataComponent>();
 
-            fontMan.RenderAppend(view, tp.FontId, td.Data, clipBox, pos.Value);
+            view.Context.FontRenderer.RenderAppend(view, tp.FontId, td.Data, clipBox, pos.Value);
         }
 
         #endregion Private Methods

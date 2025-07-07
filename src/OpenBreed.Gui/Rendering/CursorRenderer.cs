@@ -2,6 +2,7 @@
 using OpenBreed.Gui.Abstractions.Rendering;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,9 @@ namespace OpenBreed.Gui.Rendering
         {
             var font = view.Context.Fonts.GetOSFont("ARIAL", 12);
 
-            view.Context.Fonts.RenderStart(view, pos);
-            view.Context.Fonts.RenderPart(view, font.Id, $"({pos.X},{pos.Y})", Vector2.Zero, Color4.Green, 100, clipBox);
-            view.Context.Fonts.RenderEnd(view);
+            view.Context.FontRenderer.RenderStart(view, pos);
+            view.Context.FontRenderer.RenderPart(view, font.Id, $"({pos.X},{pos.Y})", Vector2.Zero, Color4.Green, 100, clipBox);
+            view.Context.FontRenderer.RenderEnd(view);
         }
     }
 }

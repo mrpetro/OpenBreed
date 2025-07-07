@@ -54,17 +54,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return new FontFromSpritesAtlasBuilder(this, spriteMan);
         }
 
-        public void RenderPart(IRenderView view, int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox, bool ignoreScale = false)
-        {
-            view.Translate(new Vector3(origin.X, origin.Y, order));
-            GetById(fontId).Draw(view, text, color, clipBox, ignoreScale);
-        }
-
-        public void RenderAppend(IRenderView view, int fontId, string text, Box2 clipBox, Vector2 value, bool ignoreScale = false)
-        {
-            GetById(fontId).Draw(view, text, Color4.White, clipBox, ignoreScale);
-        }
-
         public IFont GetGfxFont(string fontName)
         {
             var alias = $"Gfx/{fontName}";
@@ -102,35 +91,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             var font = fontGenerator.Build();
             Register(alias, font);
             return font;
-        }
-
-        public void Render(IRenderView view, Box2 clipBox, FontRenderCallback fontRenderer)
-        {
-            GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
-            GL.BlendColor(Color4.Black);
-
-            fontRenderer.Invoke(view, clipBox);
-
-            GL.Disable(EnableCap.Blend);
-        }
-
-        public void RenderStart(IRenderView view, Vector2 pos)
-        {
-            view.PushMatrix();
-            view.Translate(new Vector3(pos.X, pos.Y, 0.0f));
-
-            GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-
-            GL.BlendColor(Color4.Black);
-        }
-
-        public void RenderEnd(IRenderView view)
-        {
-            view.PopMatrix();
-
-            GL.Disable(EnableCap.Blend);
         }
 
         public void UnloadAll(IRenderContext context)
