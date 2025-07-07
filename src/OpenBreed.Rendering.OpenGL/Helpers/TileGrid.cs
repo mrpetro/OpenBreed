@@ -14,18 +14,14 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
     {
         #region Private Fields
 
-        private readonly ITileMan tileMan;
-        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly IStampMan stampMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileGrid(ITileMan tileMan, IPrimitiveRenderer primitiveRenderer, IStampMan stampMan, int width, int height, int layersNo, int cellSize)
+        public TileGrid(IStampMan stampMan, int width, int height, int layersNo, int cellSize)
         {
-            this.tileMan = tileMan;
-            this.primitiveRenderer = primitiveRenderer;
             this.stampMan = stampMan;
             Width = width;
             Height = height;

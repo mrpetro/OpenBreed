@@ -19,18 +19,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Private Fields
 
         private readonly ISpriteMan spriteMan;
-        private readonly ISpriteRenderer spriteRenderer;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal SpriteSystem(
-            ISpriteMan spriteMan,
-            ISpriteRenderer spriteRenderer)
+        internal SpriteSystem(ISpriteMan spriteMan)
         {
             this.spriteMan = spriteMan;
-            this.spriteRenderer = spriteRenderer;
         }
 
         #endregion Internal Constructors
@@ -39,6 +35,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(IWorldRenderContext context)
         {
+            var spriteRenderer = context.View.Context.SpriteRenderer;
+
             spriteRenderer.RenderBegin();
 
             try
@@ -95,7 +93,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             if (pos.Y > clipBox.Max.Y)
                 return;
 
-            spriteRenderer.Render(context.View, new Vector3((int)pos.X, (int)pos.Y, spc.Order), spc.Scale, Color4.White, spc.AtlasId, spc.ImageId);
+            context.View.Context.SpriteRenderer.Render(context.View, new Vector3((int)pos.X, (int)pos.Y, spc.Order), spc.Scale, Color4.White, spc.AtlasId, spc.ImageId);
         }
 
         #endregion Private Methods

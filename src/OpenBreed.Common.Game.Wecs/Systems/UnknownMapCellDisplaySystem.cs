@@ -23,8 +23,6 @@ namespace OpenBreed.Common.Game.Wecs.Systems
     {
         #region Private Fields
 
-        private readonly IPrimitiveRenderer primitiveRenderer;
-
         private readonly IFontMan fontMan;
 
         private readonly IFont font;
@@ -34,10 +32,8 @@ namespace OpenBreed.Common.Game.Wecs.Systems
         #region Public Constructors
 
         public UnknownMapCellDisplaySystem(
-            IPrimitiveRenderer primitiveRenderer,
             IFontMan fontMan)
         {
-            this.primitiveRenderer = primitiveRenderer;
             this.fontMan = fontMan;
 
             font = fontMan.GetOSFont("ARIAL", 8);
@@ -91,7 +87,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
             var aabb = new Box2(0, 0, 16, 16);
 
-            primitiveRenderer.DrawRectangle(view, aabb, Color4.Yellow);
+            view.Context.Primitives.DrawRectangle(view, aabb, Color4.Yellow);
 
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);

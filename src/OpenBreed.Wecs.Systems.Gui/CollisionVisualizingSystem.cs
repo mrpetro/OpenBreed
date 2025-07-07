@@ -35,7 +35,6 @@ namespace OpenBreed.Wecs.Systems.Gui
         private readonly IEntityMan entityMan;
 
         private readonly Dictionary<int, Color4> groupsToColors = new Dictionary<int, Color4>();
-        private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
@@ -43,12 +42,10 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         public CollisionVisualizingSystem(
             IEntityMan entityMan,
-            IPrimitiveRenderer primitiveRenderer,
             ICollisionMan<IEntity> collisionMan,
             CollisionVisualizingOptions collisionVisualizingOptions)
         {
             this.entityMan = entityMan;
-            this.primitiveRenderer = primitiveRenderer;
             this.collisionMan = collisionMan;
             this.visualizingOptions = collisionVisualizingOptions;
 
@@ -150,7 +147,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
             DrawEntityFixtures(context, entity);
 
-            primitiveRenderer.DrawRectangle(context.View, aabb, Color4.Green);
+            context.View.Context.Primitives.DrawRectangle(context.View, aabb, Color4.Green);
 
             //primitiveRenderer.DrawRectangle(new Box2(0,0, 100, 100), Color4.Red, filled: false);
         }
@@ -204,15 +201,15 @@ namespace OpenBreed.Wecs.Systems.Gui
                     break;
 
                 case IBoxShape box:
-                    primitiveRenderer.DrawRectangle(view, new Box2(box.X, box.Y, box.X + box.Width, box.Y + box.Height), color, filled: true);
+                    view.Context.Primitives.DrawRectangle(view, new Box2(box.X, box.Y, box.X + box.Width, box.Y + box.Height), color, filled: true);
                     break;
 
                 case ICircleShape circle:
-                    primitiveRenderer.DrawCircle(view, circle.Center, circle.Radius, color, filled: true);
+                    view.Context.Primitives.DrawCircle(view, circle.Center, circle.Radius, color, filled: true);
                     break;
 
                 case IPointShape point:
-                    primitiveRenderer.DrawPoint(view, new Vector2(point.X, point.Y), color, PointType.Circle);
+                    view.Context.Primitives.DrawPoint(view, new Vector2(point.X, point.Y), color, PointType.Circle);
                     break;
 
                 default:

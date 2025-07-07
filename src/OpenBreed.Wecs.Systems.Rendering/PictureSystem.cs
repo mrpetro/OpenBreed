@@ -16,18 +16,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
         typeof(PositionComponent))]
     public class PictureSystem : MatchingSystemBase<PictureSystem>, IRenderableSystem
     {
-        #region Private Fields
-
-        private readonly IPictureRenderer imageRenderer;
-
-        #endregion Private Fields
-
         #region Internal Constructors
 
-        internal PictureSystem(
-            IPictureRenderer imageRenderer)
+        internal PictureSystem()
         {
-            this.imageRenderer = imageRenderer;
         }
 
         #endregion Internal Constructors
@@ -36,7 +28,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         public void Render(IWorldRenderContext context)
         {
-            imageRenderer.RenderBegin();
+            var pictureRenderer = context.View.Context.PictureRenderer;
+
+            pictureRenderer.RenderBegin();
 
             try
             {
@@ -45,7 +39,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             }
             finally
             {
-                imageRenderer.RenderEnd();
+                pictureRenderer.RenderEnd();
             }
         }
 
@@ -59,12 +53,15 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// <param name="viewport">Viewport which this picture will be rendered to</param>
         private void RenderPicture(IEntity entity, IWorldRenderContext context)
         {
+            var pictureRenderer = context.View.Context.PictureRenderer;
+
+
             var picComponent = entity.Get<PictureComponent>();
 
             var pos = entity.Get<PositionComponent>().Value;
             pos += picComponent.Origin;
 
-            imageRenderer.Render(context.View, new Vector3((int)pos.X, (int)pos.Y, picComponent.Order), Vector2.One, picComponent.Color, picComponent.ImageId);
+            pictureRenderer.Render(context.View, new Vector3((int)pos.X, (int)pos.Y, picComponent.Order), Vector2.One, picComponent.Color, picComponent.ImageId);
         }
 
         #endregion Private Methods

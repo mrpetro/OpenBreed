@@ -25,7 +25,6 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         private readonly IEventsMan eventsMan;
         private readonly IInputsMan inputsMan;
-        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly IWindow viewClient;
 
         #endregion Private Fields
@@ -35,12 +34,10 @@ namespace OpenBreed.Wecs.Systems.Gui
         public CursorSystem(
             IWindow viewClient,
             IInputsMan inputsMan,
-            IPrimitiveRenderer primitiveRenderer,
             IEventsMan eventsMan)
         {
             this.viewClient = viewClient;
             this.inputsMan = inputsMan;
-            this.primitiveRenderer = primitiveRenderer;
             this.eventsMan = eventsMan;
         }
 

@@ -34,7 +34,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
         private readonly IPaletteMan paletteMan;
-        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly IWindow viewClient;
 
         #endregion Private Fields
@@ -45,13 +44,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
             IEntityMan entityMan,
             IWorldMan worldMan,
             IPaletteMan paletteMan,
-            IPrimitiveRenderer primitiveRenderer,
             IWindow viewClient)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;
             this.paletteMan = paletteMan;
-            this.primitiveRenderer = primitiveRenderer;
             this.viewClient = viewClient;
         }
 
@@ -145,7 +142,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
                         }
                     }
 
-                    primitiveRenderer.DrawNested(view, cameraClipBox, depth, dt, OnRenderFrame);
+                    view.Context.Primitives.DrawNested(view, cameraClipBox, depth, dt, OnRenderFrame);
                 }
                 finally
                 {
@@ -158,7 +155,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 }
 
                 //Draw camera effects
-                primitiveRenderer.DrawBrightnessBox(view, cameraBrightness);
+                view.Context.Primitives.DrawBrightnessBox(view, cameraBrightness);
             }
         }
 

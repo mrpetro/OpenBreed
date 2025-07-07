@@ -30,7 +30,6 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
             systemFactory.RegisterSystem<CollisionVisualizingSystem>(
                 () => new CollisionVisualizingSystem(
                     sp.GetService<IEntityMan>(),
-                    sp.GetService<IPrimitiveRenderer>(),
                     sp.GetService<ICollisionMan<IEntity>>(),
                     sp.GetService<CollisionVisualizingOptions>()));
 
@@ -40,7 +39,6 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
                     () => new CursorSystem(
                         sp.GetRequiredService<IWindow>(),
                         sp.GetRequiredService<IInputsMan>(),
-                        sp.GetRequiredService<IPrimitiveRenderer>(),
                         sp.GetRequiredService<IEventsMan>()));
             }
         }

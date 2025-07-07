@@ -29,13 +29,10 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
                 serviceProvider.GetService<IEntityMan>(),                                        
                 serviceProvider.GetService<IWorldMan>(),
                 serviceProvider.GetService<IPaletteMan>(),
-                serviceProvider.GetService<IPrimitiveRenderer>(),
                 serviceProvider.GetService<IWindow>()));
             systemFactory.RegisterSystem<SpriteSystem>(() => new SpriteSystem(
-                serviceProvider.GetService<ISpriteMan>(),
-                serviceProvider.GetService<ISpriteRenderer>()));
-            systemFactory.RegisterSystem<PictureSystem>(() => new PictureSystem(
-                serviceProvider.GetService<IPictureRenderer>()));
+                serviceProvider.GetService<ISpriteMan>()));
+            systemFactory.RegisterSystem<PictureSystem>(() => new PictureSystem());
             systemFactory.RegisterSystem<StampPutterSystem>(() => new StampPutterSystem());
             systemFactory.RegisterSystem<TilePutterSystem>(() => new TilePutterSystem());
             systemFactory.RegisterSystem<TileRenderSystem>(() => new TileRenderSystem());

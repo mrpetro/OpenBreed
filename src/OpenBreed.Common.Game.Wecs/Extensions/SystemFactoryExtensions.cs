@@ -29,10 +29,8 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
                 sp.GetService<IEventsMan>()));
 
             systemFactory.RegisterSystem<UnknownMapCellDisplaySystem>(() => new UnknownMapCellDisplaySystem(
-                sp.GetService<IPrimitiveRenderer>(),
                 sp.GetService<IFontMan>()));
             systemFactory.RegisterSystem<GroupMapCellDisplaySystem>(() => new GroupMapCellDisplaySystem(
-                sp.GetService<IPrimitiveRenderer>(),
                 sp.GetService<IFontMan>()));
 
             systemFactory.RegisterSystem<DamageOnHealthDistributionSystem>(() => new DamageOnHealthDistributionSystem(
