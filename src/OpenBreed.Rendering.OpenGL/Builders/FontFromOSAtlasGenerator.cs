@@ -59,12 +59,11 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         #region Internal Constructors
 
-        internal FontFromOSAtlasGenerator(FontMan fontMan, TextMeasurer textMeasurer, ITextureMan textureMan, IPrimitiveRenderer primitiveRenderer)
+        internal FontFromOSAtlasGenerator(FontMan fontMan, TextMeasurer textMeasurer, ITextureMan textureMan)
         {
             this.fontMan = fontMan;
             this.textMeasurer = textMeasurer;
             this.textureMan = textureMan;
-            PrimitiveRenderer = primitiveRenderer;
         }
 
         #endregion Internal Constructors
@@ -77,9 +76,9 @@ namespace OpenBreed.Rendering.OpenGL.Builders
 
         internal string FontName { get; private set; }
 
-        internal int Id { get; private set; }
+        internal Size MaximumCharacterSize { get; private set; }
 
-        internal IPrimitiveRenderer PrimitiveRenderer { get; }
+        internal int Id { get; private set; }
 
         #endregion Internal Properties
 
@@ -112,25 +111,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
         #endregion Public Methods
 
         #region Internal Methods
-
-        internal Vertex[] CreateVertices(Vector2 fontCoord, float fontWidth, float fontHeight)
-        {
-            var uvSize = new Vector2(fontWidth, fontHeight);
-            uvSize = Vector2.Divide(uvSize, new Vector2(Texture.Width, Texture.Height));
-
-            var uvLD = fontCoord;
-            uvLD = Vector2.Divide(uvLD, new Vector2(Texture.Width, Texture.Height));
-            var uvRT = Vector2.Add(uvLD, uvSize);
-
-            Vertex[] vertices = {
-                                new Vertex(new Vector2(0,   0),              new Vector2(uvLD.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(fontWidth,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(fontWidth,  fontHeight), new Vector2(uvRT.X, uvLD.Y), Color4.White),
-                                new Vertex(new Vector2(0,   fontHeight),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
-                            };
-
-            return vertices;
-        }
 
         internal int GetNewId()
         {
@@ -200,6 +180,8 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                 var bitmap = GenerateCharacters(font, out Size maxCharSize);
                 //bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
+                MaximumCharacterSize = maxCharSize;
+
                 Texture = textureMan.Create($"Textures/Fonts/{fontName}/{fontSize}", bitmap);
 
                 for (int ci = 0; ci < Characters.Length; ci++)
@@ -208,22 +190,6 @@ namespace OpenBreed.Rendering.OpenGL.Builders
                     {
                         var charSize = textMeasurer.MeasureSize(font, (char)Characters[ci]);
                         var charWidth = textMeasurer.MeasureWidth(font, (char)Characters[ci]);
-
-                        var texCoord = new Vector2(ci * maxCharSize.Width, 0);
-                        var vertices = CreateVertices(texCoord, charSize.Width, charSize.Height);
-
-                        var vertexArrayBuilder = PrimitiveRenderer.CreatePosTexCoordArray();
-                        vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
-                        vertexArrayBuilder.AddVertex(vertices[1].position, vertices[1].texCoord);
-                        vertexArrayBuilder.AddVertex(vertices[2].position, vertices[2].texCoord);
-                        vertexArrayBuilder.AddVertex(vertices[3].position, vertices[3].texCoord);
-
-                        vertexArrayBuilder.AddTriangleIndices(0, 1, 3);
-                        vertexArrayBuilder.AddTriangleIndices(1, 2, 3);
-
-                        var vao = vertexArrayBuilder.CreateTexturedVao();
-
-                        vboList.Add(vao);
 
                         Lookup.Add(Characters[ci], new FontCharData(ci, charWidth - charSize.Width,  charWidth));
                     }

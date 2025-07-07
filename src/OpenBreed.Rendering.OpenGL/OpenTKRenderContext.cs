@@ -258,6 +258,7 @@ namespace OpenBreed.Rendering.OpenGL
             Textures.LoadRefresh(this);
             Tiles.LoadRefresh(this);
             Sprites.LoadRefresh(this);
+            Fonts.LoadRefresh(this);
             Pictures.LoadRefresh(this);
         }
 

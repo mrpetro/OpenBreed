@@ -20,8 +20,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         private readonly Queue<IFont> loadQueue = new Queue<IFont>();
         private readonly ITextureMan textureMan;
         private readonly ISpriteMan spriteMan;
-        private readonly ISpriteRenderer spriteRenderer;
-        private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly ILogger logger;
         private readonly List<IFont> items = new List<IFont>();
         private readonly Dictionary<string, IFont> aliases = new Dictionary<string, IFont>();
@@ -33,16 +31,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Public Constructors
 
         public FontMan(
-            ITextureMan textureMan, 
+            ITextureMan textureMan,
             ISpriteMan spriteMan,
-            ISpriteRenderer spriteRenderer,
-            IPrimitiveRenderer primitiveRenderer,
             ILogger logger)
         {
             this.textureMan = textureMan;
             this.spriteMan = spriteMan;
-            this.spriteRenderer = spriteRenderer;
-            this.primitiveRenderer = primitiveRenderer;
             this.logger = logger;
         }
 
@@ -102,7 +96,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             if (aliases.TryGetValue(alias, out result))
                 return result;
 
-            var fontGenerator = new FontFromOSAtlasGenerator(this, textMeasurer, textureMan, primitiveRenderer);
+            var fontGenerator = new FontFromOSAtlasGenerator(this, textMeasurer, textureMan);
             fontGenerator.SetName(fontName);
             fontGenerator.SetSize(fontSize);
             var font = fontGenerator.Build();
@@ -139,6 +133,11 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             GL.Disable(EnableCap.Blend);
         }
 
+        public void UnloadAll(IRenderContext context)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -153,11 +152,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         internal int GenerateNewId()
         {
             return items.Count;
-        }
-
-        public void UnloadAll(IRenderContext context)
-        {
-            throw new System.NotImplementedException();
         }
 
         #endregion Internal Methods
