@@ -54,17 +54,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return new FontFromSpritesAtlasBuilder(this, spriteMan);
         }
 
-        public IFont GetGfxFont(string fontName)
-        {
-            var alias = $"Gfx/{fontName}";
-
-            IFont result;
-            if (aliases.TryGetValue(alias, out result))
-                return result;
-            else
-                return null;
-        }
-
         public void LoadRefresh(IRenderContext renderContext)
         {
             while (loadQueue.Count > 0)
@@ -74,6 +63,17 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
                 logger.LogTrace("Font '{0}' loaded into render context..", item.Id);
             }
+        }
+
+        public IFont GetGfxFont(string fontName)
+        {
+            var alias = $"Gfx/{fontName}";
+
+            IFont result;
+            if (aliases.TryGetValue(alias, out result))
+                return result;
+            else
+                return null;
         }
 
         public IFont GetOSFont(string fontName, int fontSize)

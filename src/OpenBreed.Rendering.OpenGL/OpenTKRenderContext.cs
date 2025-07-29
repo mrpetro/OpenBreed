@@ -62,16 +62,16 @@ namespace OpenBreed.Rendering.OpenGL
             Palettes = paletteMan;
             TileStamps = stampMan;
 
-            Primitives = ServiceProvider.GetRequiredService<IPrimitiveRenderer>();
-            Textures = ServiceProvider.GetRequiredService<ITextureMan>();
-            Sprites = ServiceProvider.GetRequiredService<ISpriteMan>();
             FontRenderer = ServiceProvider.GetRequiredService<IFontRenderer>();
             SpriteRenderer = ServiceProvider.GetRequiredService<ISpriteRenderer>();
             TileRenderer = ServiceProvider.GetRequiredService<ITileRenderer>();
+            PictureRenderer = ServiceProvider.GetRequiredService<IPictureRenderer>();
+            Primitives = ServiceProvider.GetRequiredService<IPrimitiveRenderer>();
+            Textures = ServiceProvider.GetRequiredService<ITextureMan>();
+            Sprites = ServiceProvider.GetRequiredService<ISpriteMan>();
             Fonts = ServiceProvider.GetRequiredService<IFontMan>();
             Tiles = ServiceProvider.GetRequiredService<ITileMan>();
             Pictures = ServiceProvider.GetRequiredService<IPictureMan>();
-            PictureRenderer = ServiceProvider.GetRequiredService<IPictureRenderer>();
 
             Primitives.Load();
         }

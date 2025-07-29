@@ -21,15 +21,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public int V;
 
         #endregion Public Fields
-
-        #region Internal Fields
-
-        /// <summary>
-        /// OpenGL vertex buffer object ID
-        /// </summary>
-        internal int Vbo = -1;
-
-        #endregion Internal Fields
     }
 
     internal class TileAtlas : ITileAtlas
@@ -60,15 +51,27 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        internal RenderContextItem<List<int>> ContextData { get; } = new RenderContextItem<List<int>>();
+
+        #endregion Internal Properties
+
         #region Public Methods
 
         public void Load(IRenderContext renderContext)
         {
+            var vboList = new List<int>();
+
             for (int i = 0; i < data.Count; i++)
             {
                 var item = data[i];
-                item.Vbo = CreateTileVertices(renderContext, item);
+                var itemVbo = CreateTileVertices(renderContext, item);
+
+                vboList.Add(itemVbo);
             }
+
+            ContextData.Add(renderContext, vboList);
         }
 
         #endregion Public Methods
@@ -77,7 +80,13 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         private int CreateTileVertices(IRenderContext renderContext, TileData tileData)
         {
-            var vertices = CreateVertices(tileData);
+            var vertices = UvBox.CreateVertices(
+            tileData.U,
+            tileData.V,
+            (int)TileSize,
+            (int)TileSize,
+            Texture.Width,
+            Texture.Height);
 
             var vertexArrayBuilder = renderContext.Primitives.CreatePosTexCoordArray();
             vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
@@ -89,24 +98,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             vertexArrayBuilder.AddTriangleIndices(1, 2, 3);
 
             return vertexArrayBuilder.CreateTexturedVao();
-        }
-
-        private Vertex[] CreateVertices(TileData data)
-        {
-            var uvCoord = Vector2.Divide(new Vector2(data.U, data.V), new Vector2(Texture.Width, Texture.Height));
-            var uvSize = Vector2.Divide(new Vector2(TileSize, TileSize), new Vector2(Texture.Width, Texture.Height));
-
-            var uvLD = new Vector2(uvCoord.X, uvCoord.Y);
-            var uvRT = Vector2.Add(uvLD, uvSize);
-
-            Vertex[] vertices = {
-                                new Vertex(new Vector2(0,   0),              new Vector2(uvLD.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(TileSize,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(TileSize,  TileSize), new Vector2(uvRT.X, uvLD.Y), Color4.White),
-                                new Vertex(new Vector2(0,   TileSize),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
-                            };
-
-            return vertices;
         }
 
         #endregion Private Methods

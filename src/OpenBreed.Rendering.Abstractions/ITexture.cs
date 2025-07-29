@@ -11,14 +11,9 @@ namespace OpenBreed.Rendering.Abstractions
     /// <summary>
     /// Basic texture interface
     /// </summary>
-    public interface ITexture : IDisposable
+    public interface ITexture
     {
         #region Public Properties
-
-        /// <summary>
-        /// Internal Id of this texture, used for OpenGL for example
-        /// </summary>
-        int InternalId { get; }
 
         /// <summary>
         /// Texture manager Id
@@ -55,6 +50,18 @@ namespace OpenBreed.Rendering.Abstractions
         /// </summary>
         /// <param name="renderContext">Render context</param>
         void Load(IRenderContext renderContext);
+
+        /// <summary>
+        /// Unload this texture from render context
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void Unload(IRenderContext context);
+
+        /// <summary>
+        /// Uses  this texture on render context
+        /// </summary>
+        /// <param name="renderContext">Render context</param>
+        void Use(IRenderContext renderContext);
 
         #endregion Public Methods
     }

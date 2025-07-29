@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using GL = OpenTK.Graphics.OpenGL;
+using System.Drawing;
 
 namespace OpenBreed.Rendering.OpenGL.Renderers
 {
@@ -31,20 +33,29 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
         public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int atlasId, int imageId, bool ignoreScale = false)
         {
             var spriteAtlas = spriteMan.InternalGetById(atlasId);
-            var vbo = spriteAtlas.data[imageId].Vbo;
+            var vbo = spriteAtlas.ContextData.Get(view.Context)[imageId];
 
             view.PushMatrix();
 
             try
             {
+                var model = Matrix4.CreateScale(scale.X, scale.Y, 1.0f) * Matrix4.CreateTranslation(pos);
+
+                if (ignoreScale)
+                {
+                    var viewScale = view.GetScale();
+                    model = Matrix4.CreateScale(1 / viewScale, 1 / viewScale, 1.0f) * model;
+                }
+
                 view.Context.Primitives.DrawSprite(
                     view,
                     spriteAtlas.Texture,
-                    vbo,
-                    pos,
-                    scale,
-                    color,
-                    ignoreScale);
+                    model,
+                    color);
+
+                GL.BindVertexArray(vbo);
+                GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+                GL.BindVertexArray(0);
             }
             finally
             {
@@ -54,17 +65,17 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         public void RenderBegin()
         {
-            GL.GL.Enable(GL.EnableCap.Blend);
-            GL.GL.Enable(GL.EnableCap.AlphaTest);
-            GL.GL.BlendFunc(GL.BlendingFactor.One, GL.BlendingFactor.OneMinusSrcAlpha);
-            GL.GL.Enable(GL.EnableCap.Texture2D);
+            GL.Enable(EnableCap.Blend);
+            GL.Enable(EnableCap.AlphaTest);
+            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
+            GL.Enable(EnableCap.Texture2D);
         }
 
         public void RenderEnd()
         {
-            GL.GL.Disable(GL.EnableCap.Texture2D);
-            GL.GL.Disable(GL.EnableCap.AlphaTest);
-            GL.GL.Disable(GL.EnableCap.Blend);
+            GL.Disable(EnableCap.Texture2D);
+            GL.Disable(EnableCap.AlphaTest);
+            GL.Disable(EnableCap.Blend);
         }
 
         #endregion Public Methods

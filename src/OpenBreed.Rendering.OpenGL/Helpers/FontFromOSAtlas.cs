@@ -16,7 +16,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #region Private Fields
 
         private readonly Dictionary<int, FontCharData> Lookup = new Dictionary<int, FontCharData>();
-        private List<int> vboList = null;
+        private readonly RenderContextItem<List<int>> contextItem = new RenderContextItem<List<int>>();
 
         #endregion Private Fields
 
@@ -27,7 +27,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             Characters = builder.Characters;
             Id = builder.Id;
             MaximumCharacterSize = builder.MaximumCharacterSize;
-            vboList = builder.vboList;
             Height = builder.Height;
             Lookup = builder.Lookup;
             Texture = builder.Texture;
@@ -82,20 +81,32 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public void Draw(IRenderView view, char character, Box2 clipBox, bool ignoreScale = false)
         {
             var found = Lookup[character];
+
+            var vboList = contextItem.Get(view.Context);
+
+            var model = Matrix4.CreateTranslation(Vector3.Zero);
+
+            if (ignoreScale)
+            {
+                var scale = view.GetScale();
+                model = Matrix4.CreateScale(1 / scale, 1 / scale, 1.0f) * model;
+            }
+
             view.Context.Primitives.DrawSprite(
                 view,
                 Texture,
-                vboList[found.Index],
-                new Vector3(0, 0, 0),
-                Vector2.One,
-                Color4.White, ignoreScale);
+                model,
+                Color4.White);
+
+            GL.BindVertexArray(vboList[found.Index]);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+            GL.BindVertexArray(0);
         }
 
         public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false)
         {
             //TODO: include color in text rendering
-
-            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
+            Texture.Use(view.Context);
 
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.BlendEquation(BlendEquationMode.FuncAdd);
@@ -112,6 +123,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             }
 
             var height = Height * scaleCorrection;
+
+            var vboList = contextItem.Get(view.Context);
 
             for (int i = 0; i < text.Length; i++)
             {
@@ -135,13 +148,24 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
                 var charPosition = new Vector3(charPosX + oX / 2.0f, 0.0f, 0.0f);
 
+
+                var model = Matrix4.CreateTranslation(charPosition);
+
+                if (ignoreScale)
+                {
+                    var scale = view.GetScale();
+                    model = Matrix4.CreateScale(1 / scale, 1 / scale, 1.0f) * model;
+                }
+
                 view.Context.Primitives.DrawSprite(
                     view,
                     Texture,
-                    vboList[key],
-                    charPosition,
-                    Vector2.One,
-                    color, ignoreScale);
+                    model,
+                    color);
+
+                GL.BindVertexArray(vboList[key]);
+                GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+                GL.BindVertexArray(0);
 
                 var posT = new Vector2(width / 2.0f, height / 2.0f);
                 posT += new Vector2(charPosition.X, charPosition.Y);
@@ -193,14 +217,21 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Load(IRenderContext renderContext)
         {
-            vboList = new List<int>();
+            var vboList = new List<int>();
 
             int i = 0;
 
             foreach (var pair in Lookup)
             {
-                var texCoord = new Vector2(i * MaximumCharacterSize.Width, 0);
-                var vertices = CreateVertices(texCoord, pair.Value.Width - pair.Value.XOffset, Height);
+                var texCoord = new Vector2i(i * MaximumCharacterSize.Width, 0);
+
+                var vertices = UvBox.CreateVertices(
+                    texCoord.X,
+                    texCoord.Y,
+                    (int)(pair.Value.Width - pair.Value.XOffset),
+                    (int)Height,
+                    Texture.Width,
+                    Texture.Height);
 
                 var vertexArrayBuilder = renderContext.Primitives.CreatePosTexCoordArray();
                 vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);
@@ -217,31 +248,10 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
                 i++;
             }
+
+            contextItem.Add(renderContext, vboList);
         }
 
         #endregion Public Methods
-
-        #region Internal Methods
-
-        internal Vertex[] CreateVertices(Vector2 fontCoord, float fontWidth, float fontHeight)
-        {
-            var uvSize = new Vector2(fontWidth, fontHeight);
-            uvSize = Vector2.Divide(uvSize, new Vector2(Texture.Width, Texture.Height));
-
-            var uvLD = fontCoord;
-            uvLD = Vector2.Divide(uvLD, new Vector2(Texture.Width, Texture.Height));
-            var uvRT = Vector2.Add(uvLD, uvSize);
-
-            Vertex[] vertices = {
-                                new Vertex(new Vector2(0,   0),              new Vector2(uvLD.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(fontWidth,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(fontWidth,  fontHeight), new Vector2(uvRT.X, uvLD.Y), Color4.White),
-                                new Vertex(new Vector2(0,   fontHeight),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
-                            };
-
-            return vertices;
-        }
-
-        #endregion Internal Methods
     }
 }

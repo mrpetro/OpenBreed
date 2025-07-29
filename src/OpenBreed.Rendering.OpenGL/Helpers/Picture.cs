@@ -38,14 +38,14 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Load(IRenderContext renderContext)
         {
-            Vbo = CreateVertices(renderContext);
+            Vbo = CreatePictureVertices(renderContext);
         }
 
         #endregion Public Methods
 
-        #region Internal Methods
+        #region Private Methods
 
-        internal int CreateVertices(IRenderContext renderContext)
+        private int CreatePictureVertices(IRenderContext renderContext)
         {
             var uvBox = new UvBox(0, 0, Texture.Width, Texture.Height);
             var vertices = UvBox.CreateVertices(uvBox, Texture.Width, Texture.Height);
@@ -62,6 +62,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return vertexArrayBuilder.CreateTexturedVao();
         }
 
-        #endregion Internal Methods
+        #endregion Private Methods
     }
 }

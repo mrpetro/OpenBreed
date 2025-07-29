@@ -145,7 +145,9 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         public void UnloadAll(IRenderContext context)
         {
             foreach (var texture in items)
-                texture.Dispose();
+            {
+                texture.Unload(context);
+            }
 
             items.Clear();
             names.Clear();

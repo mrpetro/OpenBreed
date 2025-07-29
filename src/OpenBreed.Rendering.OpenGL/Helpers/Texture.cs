@@ -3,6 +3,7 @@ using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Rendering.Abstractions;
 using OpenTK.Graphics.OpenGL4;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -12,8 +13,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
-    public class Texture : ITexture, IDisposable
+    public class Texture : ITexture
     {
+        private readonly RenderContextItem<int> contextItem = new RenderContextItem<int>();
+
+
         #region Public Constructors
 
         public Texture()
@@ -28,7 +32,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public int Height { get; private set; }
         public byte[] Data { get; private set; }
         public int Id { get; internal set; }
-        public int InternalId { get; private set; } = -1;
         public int Width { get; private set; }
 
         public int MaskIndex { get; private set; }
@@ -189,20 +192,30 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
 
-            InternalId = textureId;
+            contextItem.Add(renderContext, textureId);
+
         }
 
-        public void Dispose()
+        public void Unload(IRenderContext renderContext)
         {
-            GL.DeleteTexture(InternalId);
+            var glId = contextItem.Get(renderContext);
+
+            GL.DeleteTexture(glId);
         }
 
-        public void Use(TextureUnit unit)
+        public void Use(IRenderContext renderContext)
         {
-            Debug.Assert(ThreadTools.IsMainThread, "Called on non-main thread!");
+            var glId = contextItem.Get(renderContext);
+
+            GL.BindTexture(TextureTarget.Texture2D, glId);
+        }
+
+        public void Use(IRenderContext renderContext, TextureUnit unit)
+        {
+            var glId = contextItem.Get(renderContext);
 
             GL.ActiveTexture(unit);
-            GL.BindTexture(TextureTarget.Texture2D, InternalId);
+            GL.BindTexture(TextureTarget.Texture2D, glId);
         }
 
         #endregion Public Methods

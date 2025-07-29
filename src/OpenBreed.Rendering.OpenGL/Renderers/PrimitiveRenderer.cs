@@ -1,9 +1,11 @@
-﻿using OpenBreed.Core.Interface.Extensions;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Core.Interface.Extensions;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Helpers;
+using OpenBreed.Rendering.OpenGL.Shaders;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
@@ -23,9 +25,11 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
         private const bool CLIPPING = true;
         private const int RENDER_MAX_DEPTH = 3;
 
-        private Shader nontexturedShader;
-        private Shader texturedShader;
-        private Shader texturedWithPaletteShader;
+        private NontexturedShader nontexturedShader;
+        private TexturedShader texturedShader;
+        private TexturedWithPaletteShader texturedWithPaletteShader;
+
+        private readonly ShaderController shaderController = new ShaderController();
 
         private int unitBoxFilledVao;
         private int unitRectangleFilledVao;
@@ -49,28 +53,6 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
         public IPosArrayBuilder CreatePosArray() => new PosArrayBuilder(this);
 
         public IPosTexCoordArrayBuilder CreatePosTexCoordArray() => new PosTexCoordArrayBuilder(this);
-
-        public int CreateVao(float[] vertexArray)
-        {
-            nontexturedShader.Use();
-
-            var newVao = GL.GenVertexArray();
-            var newVbo = GL.GenBuffer();
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, newVbo);
-            GL.BufferData(BufferTarget.ArrayBuffer, vertexArray.Length * sizeof(float), vertexArray, BufferUsageHint.StaticDraw);
-
-            GL.BindVertexArray(newVao);
-            GL.EnableVertexAttribArray(0);
-            var vertexLocation = nontexturedShader.GetAttribLocation("aPosition");
-            GL.EnableVertexAttribArray(vertexLocation);
-            GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            GL.BindVertexArray(0);
-
-            return newVao;
-        }
 
         public void DrawBox(IRenderView view, Box2 box, Color4 color)
         {
@@ -125,7 +107,6 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             DrawRectangle(view, rect.Center, rect.Size, color, filled);
         }
 
-
         public void DrawClipped(IRenderView view, Box2i clipBox, Action<Box2i> nestedRenderAction)
         {
             var isEnabled = GL.IsEnabled(EnableCap.ScissorTest);
@@ -147,40 +128,6 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
                 GL.Disable(EnableCap.ScissorTest);
             }
         }
-
-        //public void DrawNestedEx(IRenderView view, Box2 clipBox, ClipState clipState, Action<Box2, ClipState> nestedRenderAction)
-        //{
-        //    if (clipState.Layer == 1)
-        //    {
-        //        return;
-        //    }
-
-        //    GL.Enable(EnableCap.StencilTest);
-
-        //    GL.StencilFunc(StencilFunction.Equal, clipState.Id, clipState.ParentMask);
-        //    GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
-
-        //    GL.StencilMask(0xFF);
-        //    GL.ColorMask(false, false, false, false);
-        //    GL.DepthMask(false);
-
-
-        //    // Draw black box
-        //    DrawBox(view, clipBox, Color4.Black);
-
-        //    GL.ColorMask(true, true, true, true);
-        //    GL.DepthMask(true);
-
-        //    GL.StencilMask(0x0);
-
-        //    GL.StencilFunc(StencilFunction.Equal, clipState.Id, clipState.Mask);
-
-        //    nestedRenderAction.Invoke(clipBox, clipState);
-
-        //    //GL.StencilFunc(StencilFunction.Equal, clipState.ParentId, clipState.ParentMask);
-
-        //    GL.Disable(EnableCap.StencilTest);
-        //}
 
         public void DrawNested(IRenderView view, Box2 clipBox, int depth, float dt, Action<Box2, int, float> nestedRenderAction)
         {
@@ -220,7 +167,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             var rotation = Matrix4.CreateFromAxisAngle(Vector3.UnitZ, -angle);
             var eX = Vector2.UnitX * uAxis.Length;
 
-            model =  Matrix4.CreateScale(eX.X, eX.Y, 1.0f) * rotation * model;
+            model = Matrix4.CreateScale(eX.X, eX.Y, 1.0f) * rotation * model;
 
             DrawUnitLine(view, model, color);
         }
@@ -242,22 +189,27 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
                 case PointType.Rectangle:
                     DrawUnitRectangle(view, model, color, filled: false);
                     break;
+
                 case PointType.RectangleFilled:
                     DrawUnitRectangle(view, model, color, filled: true);
                     break;
+
                 case PointType.Circle:
                     DrawUnitCircle(view, model, color, filled: false);
                     break;
+
                 case PointType.CircleFilled:
                     DrawUnitCircle(view, model, color, filled: true);
                     break;
+
                 case PointType.Cross:
                     model = Matrix4.CreateTranslation(-0.5f, 0.0f, 0.0f) * model;
                     DrawUnitLine(view, model, color);
                     model = Matrix4.CreateTranslation(0.5f, -0.5f, 0.0f) * model;
-                    model =  Matrix4.CreateFromAxisAngle(Vector3.UnitZ, (float)Math.PI / 2.0f) * model;
+                    model = Matrix4.CreateFromAxisAngle(Vector3.UnitZ, (float)Math.PI / 2.0f) * model;
                     DrawUnitLine(view, model, color);
                     break;
+
                 case PointType.Ex:
                 default:
                     throw new NotImplementedException($"Point type '{type}' not implemented.");
@@ -272,56 +224,60 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             }
         }
 
-        public void DrawSprite(IRenderView view, ITexture texture, int vao, Vector3 pos, Vector2 size, Color4 color, bool ignoreScale = false)
+        public void UsingShader<TShader>(TShader shader, Action<TShader, ShaderController> action) where TShader : Shader, new()
         {
-            ((Texture)texture).Use(TextureUnit.Texture0);
+            shaderController.Use(shader);
+            action.Invoke(shader, shaderController);
+        }
 
-            var model = Matrix4.CreateScale(size.X, size.Y, 1.0f) * Matrix4.CreateTranslation(pos);
-
-            if (ignoreScale)
-            {
-                var scale = view.GetScale();
-                model = Matrix4.CreateScale(1 / scale, 1 / scale, 1.0f) * model;
-            }
-
+        public void SetShader(IRenderView view, ITexture texture, Matrix4 model, Color4 color)
+        {
             if (texture.DataMode == TextureDataMode.Rgba)
             {
-                texturedShader.Use();
-                texturedShader.SetMatrix4("model", model);
-                texturedShader.SetMatrix4("view", view.View);
-                texturedShader.SetMatrix4("projection", view.Projection);
-                texturedShader.SetVector4("aColor", (Vector4)color);
+                UsingShader(texturedShader, (item, setter) =>
+                {
+                    setter.SetMatrix4(item.model, model);
+                    setter.SetMatrix4(item.view, view.View);
+                    setter.SetMatrix4(item.projection, view.Projection);
+                    setter.SetVector4(item.aColor, (Vector4)color);
+                });
             }
             else if (texture.DataMode == TextureDataMode.Index)
             {
                 Debug.Assert(view.CurrentPalette is not null, "Palette is not set");
 
-                texturedWithPaletteShader.Use();
-                texturedWithPaletteShader.SetMatrix4("model", model);
-                texturedWithPaletteShader.SetMatrix4("view", view.View);
-                texturedWithPaletteShader.SetMatrix4("projection", view.Projection);
-                texturedWithPaletteShader.SetVector4("aColor", (Vector4)color);
-                texturedWithPaletteShader.SetUInt("maskIndex", (uint)texture.MaskIndex);
-
-                texturedWithPaletteShader.SetVector4Array("palette", view.CurrentPalette.DirectData);
+                UsingShader(texturedWithPaletteShader, (item, setter) =>
+                {
+                    setter.SetMatrix4(item.model, model);
+                    setter.SetMatrix4(item.view, view.View);
+                    setter.SetMatrix4(item.projection, view.Projection);
+                    setter.SetVector4(item.aColor, (Vector4)color);
+                    setter.SetUInt(item.maskIndex, (uint)texture.MaskIndex);
+                    setter.SetVector4Array(item.palette, view.CurrentPalette.DirectData);
+                });
             }
             else
             {
                 throw new Exception($"Data mode '{texture.DataMode}' is not implemented.");
             }
+        }
 
-            GL.BindVertexArray(vao);
-            GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
-            GL.BindVertexArray(0);
+        public void DrawSprite(IRenderView view, ITexture texture, Matrix4 model, Color4 color)
+        {
+            texture.Use(view.Context);
+
+            SetShader(view, texture, model, color);
         }
 
         public void DrawUnitBox(IRenderView view, Matrix4 model, Color4 color)
         {
-            nontexturedShader.Use();
-            nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
-            nontexturedShader.SetMatrix4("model", model);
-            nontexturedShader.SetMatrix4("view", view.View);
-            nontexturedShader.SetMatrix4("projection", view.Projection);
+            UsingShader(nontexturedShader, (def, shader) =>
+            {
+                shader.SetVector4(def.aColor, new Vector4(color.R, color.G, color.B, color.A));
+                shader.SetMatrix4(def.model, model);
+                shader.SetMatrix4(def.view, view.View);
+                shader.SetMatrix4(def.projection, view.Projection);
+            });
 
             GL.BindVertexArray(unitBoxFilledVao);
             GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
@@ -330,11 +286,13 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         public void DrawUnitLine(IRenderView view, Matrix4 model, Color4 color)
         {
-            nontexturedShader.Use();
-            nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
-            nontexturedShader.SetMatrix4("model", model);
-            nontexturedShader.SetMatrix4("view", view.View);
-            nontexturedShader.SetMatrix4("projection", view.Projection);
+            UsingShader(nontexturedShader, (item, setter) =>
+            {
+                setter.SetVector4(item.aColor, new Vector4(color.R, color.G, color.B, color.A));
+                setter.SetMatrix4(item.model, model);
+                setter.SetMatrix4(item.view, view.View);
+                setter.SetMatrix4(item.projection, view.Projection);
+            });
 
             GL.BindVertexArray(unitLineVao);
             GL.DrawArrays(PrimitiveType.Lines, 0, 2);
@@ -343,11 +301,13 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         public void DrawUnitCircle(IRenderView view, Matrix4 model, Color4 color, bool filled = false)
         {
-            nontexturedShader.Use();
-            nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
-            nontexturedShader.SetMatrix4("model", model);
-            nontexturedShader.SetMatrix4("view", view.View);
-            nontexturedShader.SetMatrix4("projection", view.Projection);
+            UsingShader(nontexturedShader, (item, setter) =>
+            {
+                setter.SetVector4(item.aColor, new Vector4(color.R, color.G, color.B, color.A));
+                setter.SetMatrix4(item.model, model);
+                setter.SetMatrix4(item.view, view.View);
+                setter.SetMatrix4(item.projection, view.Projection);
+            });
 
             if (filled)
             {
@@ -365,11 +325,13 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         public void DrawUnitRectangle(IRenderView view, Matrix4 model, Color4 color, bool filled = false)
         {
-            nontexturedShader.Use();
-            nontexturedShader.SetVector4("aColor", new Vector4(color.R, color.G, color.B, color.A));
-            nontexturedShader.SetMatrix4("model", model);
-            nontexturedShader.SetMatrix4("view", view.View);
-            nontexturedShader.SetMatrix4("projection", view.Projection);
+            UsingShader(nontexturedShader, (item, setter) =>
+            {
+                setter.SetVector4(item.aColor, new Vector4(color.R, color.G, color.B, color.A));
+                setter.SetMatrix4(item.model, model);
+                setter.SetMatrix4(item.view, view.View);
+                setter.SetMatrix4(item.projection, view.Projection);
+            });
 
             if (filled)
             {
@@ -387,7 +349,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         public void Load()
         {
-            SetupShaders();
+            LoadShaders();
             SetupDefaultVertices();
         }
 
@@ -395,9 +357,9 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         #region Internal Methods
 
-        internal int CreateTexturedVao(float[] vertexArray)
+        internal int CreateVao(float[] vertexArray)
         {
-            texturedShader.Use();
+            shaderController.Use(nontexturedShader);
 
             var newVao = GL.GenVertexArray();
             var newVbo = GL.GenBuffer();
@@ -407,11 +369,33 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
             GL.BindVertexArray(newVao);
             GL.EnableVertexAttribArray(0);
-            var vertexLocation = texturedShader.GetAttribLocation("aPosition");
+            var vertexLocation = shaderController.GetAttribLocation(nontexturedShader, "aPosition");
+            GL.EnableVertexAttribArray(vertexLocation);
+            GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            GL.BindVertexArray(0);
+
+            return newVao;
+        }
+
+        internal int CreateTexturedVao(float[] vertexArray)
+        {
+            shaderController.Use(texturedShader);
+
+            var newVao = GL.GenVertexArray();
+            var newVbo = GL.GenBuffer();
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, newVbo);
+            GL.BufferData(BufferTarget.ArrayBuffer, vertexArray.Length * sizeof(float), vertexArray, BufferUsageHint.StaticDraw);
+
+            GL.BindVertexArray(newVao);
+            GL.EnableVertexAttribArray(0);
+            var vertexLocation = shaderController.GetAttribLocation(texturedShader, "aPosition");
             GL.EnableVertexAttribArray(vertexLocation);
             GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
 
-            var texCoordLocation = texturedShader.GetAttribLocation("aTexCoord");
+            var texCoordLocation = shaderController.GetAttribLocation(texturedShader, "aTexCoord");
             GL.EnableVertexAttribArray(texCoordLocation);
             GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
 
@@ -539,14 +523,11 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             unitBoxFilledVao = unitBoxBuilder.CreateVao();
         }
 
-        private void SetupShaders()
+        private void LoadShaders()
         {
-            texturedShader = new Shader("Shaders/textured.vert", "Shaders/textured.frag");
-            texturedShader.Use();
-            texturedWithPaletteShader = new Shader("Shaders/textured.vert", "Shaders/texturedWithPalette.frag");
-            texturedWithPaletteShader.Use();
-            nontexturedShader = new Shader("Shaders/nontextured.vert", "Shaders/nontextured.frag");
-            nontexturedShader.Use();
+            texturedShader = shaderController.LoadShader<TexturedShader>();
+            texturedWithPaletteShader = shaderController.LoadShader<TexturedWithPaletteShader>();
+            nontexturedShader = shaderController.LoadShader<NontexturedShader>();
         }
 
         #endregion Private Methods

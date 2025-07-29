@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
 using OpenTK.Mathematics;
-using GL = OpenTK.Graphics.OpenGL;
+using System.Drawing;
+using OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Rendering.OpenGL.Renderers
 {
@@ -36,13 +38,18 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
             try
             {
+                var model = Matrix4.CreateScale(scale.X, scale.Y, 1.0f) * Matrix4.CreateTranslation(pos);
+
                 view.Context.Primitives.DrawSprite(
                     view,
                     picture.Texture,
-                    picture.Vbo,
-                    pos,
-                    scale,
+
+                    model,
                     color);
+
+                GL.BindVertexArray(picture.Vbo);
+                GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+                GL.BindVertexArray(0);
             }
             finally
             {
@@ -52,15 +59,15 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         public void RenderBegin()
         {
-            GL.GL.Enable(GL.EnableCap.Blend);
-            GL.GL.BlendFunc(GL.BlendingFactor.One, GL.BlendingFactor.OneMinusSrcAlpha);
-            GL.GL.Enable(GL.EnableCap.Texture2D);
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
+            GL.Enable(EnableCap.Texture2D);
         }
 
         public void RenderEnd()
         {
-            GL.GL.Disable(GL.EnableCap.Texture2D);
-            GL.GL.Disable(GL.EnableCap.Blend);
+            GL.Disable(EnableCap.Texture2D);
+            GL.Disable(EnableCap.Blend);
         }
 
         #endregion Public Methods

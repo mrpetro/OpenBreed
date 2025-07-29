@@ -33,15 +33,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #endregion Public Fields
 
-        #region Internal Fields
-
-        /// <summary>
-        /// OpenGL vertex buffer object ID
-        /// </summary>
-        internal int Vbo = -1;
-
-        #endregion Internal Fields
-
         #region Public Properties
 
         /// <summary>
@@ -82,6 +73,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Internal Properties
 
+        internal RenderContextItem<List<int>> ContextData { get; } = new RenderContextItem<List<int>>();
         internal ITexture Texture { get; }
 
         #endregion Internal Properties
@@ -95,11 +87,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Load(IRenderContext renderContext)
         {
+            var vboList = new List<int>();
+
             for (int i = 0; i < data.Count; i++)
             {
                 var item = data[i];
-                item.Vbo = CreateSpriteVertices(renderContext, item);
+                var itemVbo = CreateSpriteVertices(renderContext, item);
+
+                vboList.Add(itemVbo);
             }
+
+            ContextData.Add(renderContext, vboList);
         }
 
         public bool IsValid(int imageId)
@@ -117,27 +115,15 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Internal Methods
 
-        private Vertex[] CreateVertices(SpriteData data)
-        {
-            var uvCoord = Vector2.Divide(new Vector2(data.U, data.V), new Vector2(Texture.Width, Texture.Height));
-            var uvSize = Vector2.Divide(new Vector2(data.Width, data.Height), new Vector2(Texture.Width, Texture.Height));
-
-            var uvLD = new Vector2(uvCoord.X, uvCoord.Y);
-            var uvRT = Vector2.Add(uvLD, uvSize);
-
-            Vertex[] vertices = {
-                                new Vertex(new Vector2(0,   0),              new Vector2(uvLD.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(data.Width,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(data.Width,  data.Height), new Vector2(uvRT.X, uvLD.Y), Color4.White),
-                                new Vertex(new Vector2(0,   data.Height),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
-                            };
-
-            return vertices;
-        }
-
         internal int CreateSpriteVertices(IRenderContext renderContext, SpriteData spriteData)
         {
-            var vertices = CreateVertices(spriteData);
+            var vertices = UvBox.CreateVertices(
+                spriteData.U,
+                spriteData.V,
+                spriteData.Width,
+                spriteData.Height,
+                Texture.Width,
+                Texture.Height);
 
             var vertexArrayBuilder = renderContext.Primitives.CreatePosTexCoordArray();
             vertexArrayBuilder.AddVertex(vertices[0].position, vertices[0].texCoord);

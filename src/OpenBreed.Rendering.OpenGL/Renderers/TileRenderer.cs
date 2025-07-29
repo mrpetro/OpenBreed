@@ -1,6 +1,10 @@
-﻿using OpenBreed.Rendering.Abstractions;
+﻿using OpenBreed.Common.Tools.Collections;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Renderers;
+using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -33,7 +37,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
         {
             var atlas = tileMan.InternalGetById(atlasId);
             var size = atlas.TileSize;
-            var vao = atlas.data[imageId].Vbo;
+            var vao = atlas.ContextData.Get(view.Context)[imageId];
 
             if (vao == -1)
             {
@@ -43,10 +47,12 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             view.Context.Primitives.DrawSprite(
                 view,
                 atlas.Texture,
-                vao,
-                new Vector3(0, 0, 0),
-                Vector2.One,
+                Matrix4.Identity,
                 Color4.White);
+
+            GL.BindVertexArray(vao);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+            GL.BindVertexArray(0);
         }
 
         #endregion Public Methods

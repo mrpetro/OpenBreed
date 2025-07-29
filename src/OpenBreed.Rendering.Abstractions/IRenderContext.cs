@@ -17,15 +17,15 @@ namespace OpenBreed.Rendering.Abstractions
 
         IServiceProvider ServiceProvider { get; }
 
-        ISpriteMan Sprites { get; }
         IFontRenderer FontRenderer { get; }
         ISpriteRenderer SpriteRenderer { get; }
         ITileRenderer TileRenderer { get; }
+        IPictureRenderer PictureRenderer { get; }
         IPrimitiveRenderer Primitives { get; }
+        ISpriteMan Sprites { get; }
         IFontMan Fonts { get; }
         ITextureMan Textures { get; }
         IPictureMan Pictures { get; }
-        IPictureRenderer PictureRenderer { get; }
         ITileMan Tiles { get; }
         IStampMan TileStamps { get; }
         IPaletteMan Palettes { get; }
