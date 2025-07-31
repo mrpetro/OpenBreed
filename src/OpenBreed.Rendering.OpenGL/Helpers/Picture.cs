@@ -1,12 +1,21 @@
-﻿using OpenBreed.Rendering.Abstractions;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Managers;
+using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
     internal class Picture : IPicture
     {
+        #region Private Fields
+
+        private readonly RenderContextItem<int> contextData = new RenderContextItem<int>();
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public Picture(PictureBuilder builder)
@@ -28,22 +37,28 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Internal Properties
 
-        internal int Vbo { get; private set; } = -1;
-
         internal ITexture Texture { get; }
 
         #endregion Internal Properties
 
-        #region Public Methods
+        #region Internal Methods
 
-        public void Load(IRenderContext renderContext)
+        internal int GetVbo(IRenderContext context)
         {
-            Vbo = CreatePictureVertices(renderContext);
+            var vao = contextData.GetOrAdd(context, Load);
+            return vao;
         }
 
-        #endregion Public Methods
+        #endregion Internal Methods
 
         #region Private Methods
+
+        private int Load(IRenderContext renderContext)
+        {
+            //logger.LogTrace("Picture '{0}' loaded into render context..", item.Id);
+
+            return CreatePictureVertices(renderContext);
+        }
 
         private int CreatePictureVertices(IRenderContext renderContext)
         {

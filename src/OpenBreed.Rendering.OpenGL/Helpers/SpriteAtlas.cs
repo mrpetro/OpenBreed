@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Abstractions;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK;
@@ -51,6 +52,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #endregion Internal Fields
 
+        #region Private Fields
+
+        private readonly RenderContextItem<List<int>> contextData = new RenderContextItem<List<int>>();
+
+        #endregion Private Fields
+
         #region Internal Constructors
 
         internal SpriteAtlas(SpriteAtlasBuilder builder)
@@ -73,7 +80,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Internal Properties
 
-        internal RenderContextItem<List<int>> ContextData { get; } = new RenderContextItem<List<int>>();
         internal ITexture Texture { get; }
 
         #endregion Internal Properties
@@ -83,21 +89,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         public Vector2 GetSpriteSize(int spriteId)
         {
             return data[spriteId].Size;
-        }
-
-        public void Load(IRenderContext renderContext)
-        {
-            var vboList = new List<int>();
-
-            for (int i = 0; i < data.Count; i++)
-            {
-                var item = data[i];
-                var itemVbo = CreateSpriteVertices(renderContext, item);
-
-                vboList.Add(itemVbo);
-            }
-
-            ContextData.Add(renderContext, vboList);
         }
 
         public bool IsValid(int imageId)
@@ -114,6 +105,17 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal int GetSpriteVao(IRenderContext context, int spriteId)
+        {
+            if (spriteId == -1)
+            {
+                return -1;
+            }
+
+            var atlasVaos = contextData.GetOrAdd(context, Load);
+            return atlasVaos[spriteId];
+        }
 
         internal int CreateSpriteVertices(IRenderContext renderContext, SpriteData spriteData)
         {
@@ -138,5 +140,26 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         }
 
         #endregion Internal Methods
+
+        #region Private Methods
+
+        private List<int> Load(IRenderContext renderContext)
+        {
+            var vboList = new List<int>();
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                var item = data[i];
+                var itemVbo = CreateSpriteVertices(renderContext, item);
+
+                vboList.Add(itemVbo);
+            }
+
+            //logger.LogTrace("Sprite atlas '{0}' loaded into render context..", item.Id);
+
+            return vboList;
+        }
+
+        #endregion Private Methods
     }
 }

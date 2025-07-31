@@ -34,12 +34,6 @@ namespace OpenBreed.Rendering.Abstractions
         void Render(IRenderView view, string text, Box2 clipBox, Vector2 pos, float order);
 
         /// <summary>
-        /// Draw single character given in parameter
-        /// </summary>
-        /// <param name="character">Single character to draw</param>
-        void Draw(IRenderView view, char character, Box2 clipBox, bool ignoreScale = false);
-
-        /// <summary>
         /// Draw text given in parameter
         /// </summary>
         /// <param name="text">Text to draw</param>

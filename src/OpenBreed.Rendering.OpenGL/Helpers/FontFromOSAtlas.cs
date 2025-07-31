@@ -78,31 +78,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return totalWidth;
         }
 
-        public void Draw(IRenderView view, char character, Box2 clipBox, bool ignoreScale = false)
-        {
-            var found = Lookup[character];
-
-            var vboList = contextItem.Get(view.Context);
-
-            var model = Matrix4.CreateTranslation(Vector3.Zero);
-
-            if (ignoreScale)
-            {
-                var scale = view.GetScale();
-                model = Matrix4.CreateScale(1 / scale, 1 / scale, 1.0f) * model;
-            }
-
-            view.Context.Primitives.DrawSprite(
-                view,
-                Texture,
-                model,
-                Color4.White);
-
-            GL.BindVertexArray(vboList[found.Index]);
-            GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
-            GL.BindVertexArray(0);
-        }
-
         public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false)
         {
             //TODO: include color in text rendering
@@ -124,7 +99,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
             var height = Height * scaleCorrection;
 
-            var vboList = contextItem.Get(view.Context);
+            var vboList = contextItem.GetOrAdd(view.Context, LoadFont);
 
             for (int i = 0; i < text.Length; i++)
             {
@@ -148,7 +123,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
                 var charPosition = new Vector3(charPosX + oX / 2.0f, 0.0f, 0.0f);
 
-
                 var model = Matrix4.CreateTranslation(charPosition);
 
                 if (ignoreScale)
@@ -157,7 +131,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                     model = Matrix4.CreateScale(1 / scale, 1 / scale, 1.0f) * model;
                 }
 
-                view.Context.Primitives.DrawSprite(
+                view.Context.Primitives.SetTextureShader(
                     view,
                     Texture,
                     model,
@@ -188,6 +162,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
             var caretPosX = 0.0f;
 
+            var vboList = contextItem.Get(view.Context);
+
             for (int i = 0; i < text.Length; i++)
             {
                 var ch = text[i];
@@ -205,7 +181,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                         break;
                 }
 
-                Draw(view, ch, clipBox);
+                var found = Lookup[ch];
+                var vbo = vboList[found.Index];
+
+                Draw(view, vbo, clipBox);
+
                 var width = GetWidth(ch);
                 caretPosX += width;
                 view.Translate(new Vector3(width, 0.0f, 0.0f));
@@ -216,6 +196,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         }
 
         public void Load(IRenderContext renderContext)
+        {
+            var vboList = LoadFont(renderContext);
+            contextItem.Add(renderContext, vboList);
+        }
+
+        private List<int> LoadFont(IRenderContext renderContext)
         {
             var vboList = new List<int>();
 
@@ -249,9 +235,28 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 i++;
             }
 
-            contextItem.Add(renderContext, vboList);
+            return vboList;
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void Draw(IRenderView view, int vbo, Box2 clipBox)
+        {
+            var model = Matrix4.CreateTranslation(Vector3.Zero);
+
+            view.Context.Primitives.SetTextureShader(
+                view,
+                Texture,
+                model,
+                Color4.White);
+
+            GL.BindVertexArray(vbo);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+            GL.BindVertexArray(0);
+        }
+
+        #endregion Private Methods
     }
 }

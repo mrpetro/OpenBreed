@@ -24,12 +24,6 @@ namespace OpenBreed.Rendering.Abstractions.Managers
         ITileAtlasBuilder CreateAtlas();
 
         /// <summary>
-        /// Load all tile atlases to render context.
-        /// </summary>
-        /// <param name="renderContext">Render context</param>
-        void LoadRefresh(IRenderContext renderContext);
-
-        /// <summary>
         /// Unload all tile atlases from render context.
         /// </summary>
         /// <param name="renderContext">Render context</param>

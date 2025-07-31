@@ -57,12 +57,6 @@ namespace OpenBreed.Rendering.Abstractions.Managers
         /// <param name="renderContext">Render context</param>
         void UnloadAll(IRenderContext context);
 
-        /// <summary>
-        /// Load all textures to render context.
-        /// </summary>
-        /// <param name="renderContext">Render context</param>
-        void LoadRefresh(IRenderContext context);
-
         #endregion Public Methods
     }
 }

@@ -67,10 +67,7 @@ namespace OpenBreed.Rendering.OpenGL
             TileRenderer = ServiceProvider.GetRequiredService<ITileRenderer>();
             PictureRenderer = ServiceProvider.GetRequiredService<IPictureRenderer>();
             Primitives = ServiceProvider.GetRequiredService<IPrimitiveRenderer>();
-            Textures = ServiceProvider.GetRequiredService<ITextureMan>();
-            Sprites = ServiceProvider.GetRequiredService<ISpriteMan>();
             Fonts = ServiceProvider.GetRequiredService<IFontMan>();
-            Tiles = ServiceProvider.GetRequiredService<ITileMan>();
             Pictures = ServiceProvider.GetRequiredService<IPictureMan>();
 
             Primitives.Load();
@@ -82,15 +79,12 @@ namespace OpenBreed.Rendering.OpenGL
 
         public IServiceProvider ServiceProvider => serviceScope.ServiceProvider;
 
-        public ITextureMan Textures { get; }
-        public ISpriteMan Sprites { get; }
         public IFontRenderer FontRenderer { get; }
         public ISpriteRenderer SpriteRenderer { get; }
         public ITileRenderer TileRenderer { get; }
         public IPrimitiveRenderer Primitives { get; }
         public IPictureMan Pictures { get; }
         public IPictureRenderer PictureRenderer { get; }
-        public ITileMan Tiles { get; }
         public IFontMan Fonts { get; }
         public IStampMan TileStamps { get; }
         public IPaletteMan Palettes { get; }
@@ -261,11 +255,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         private void LoadRefresh()
         {
-            Textures.LoadRefresh(this);
-            Tiles.LoadRefresh(this);
-            Sprites.LoadRefresh(this);
             Fonts.LoadRefresh(this);
-            Pictures.LoadRefresh(this);
         }
 
         private bool TryGetView(Vector2i point, out RenderView view)

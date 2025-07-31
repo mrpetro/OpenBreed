@@ -30,10 +30,10 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         #region Public Methods
 
-        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int atlasId, int imageId, bool ignoreScale = false)
+        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int atlasId, int spriteId, bool ignoreScale = false)
         {
             var spriteAtlas = spriteMan.InternalGetById(atlasId);
-            var vbo = spriteAtlas.ContextData.Get(view.Context)[imageId];
+            var vbo = spriteAtlas.GetSpriteVao(view.Context, spriteId);
 
             view.PushMatrix();
 
@@ -47,7 +47,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
                     model = Matrix4.CreateScale(1 / viewScale, 1 / viewScale, 1.0f) * model;
                 }
 
-                view.Context.Primitives.DrawSprite(
+                view.Context.Primitives.SetTextureShader(
                     view,
                     spriteAtlas.Texture,
                     model,

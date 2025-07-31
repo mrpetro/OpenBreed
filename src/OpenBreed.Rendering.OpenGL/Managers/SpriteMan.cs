@@ -75,17 +75,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return names.TryGetValue(atlasName, out spriteAtlas);
         }
 
-        public void LoadRefresh(IRenderContext renderContext)
-        {
-            while (loadQueue.Count > 0)
-            {
-                var item = loadQueue.Dequeue();
-                item.Load(renderContext);
-
-                logger.LogTrace("Sprite atlas '{0}' loaded into render context..", item.Id);
-            }
-        }
-
         public void UnloadAll(IRenderContext context)
         {
             throw new NotImplementedException();

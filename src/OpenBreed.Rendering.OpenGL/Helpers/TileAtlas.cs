@@ -1,7 +1,9 @@
-﻿using OpenBreed.Rendering.Abstractions;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
@@ -31,6 +33,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #endregion Internal Fields
 
+        #region Private Fields
+
+        private readonly RenderContextItem<List<int>> contextData = new RenderContextItem<List<int>>();
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public TileAtlas(TileAtlasBuilder builder)
@@ -51,15 +59,24 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #endregion Public Properties
 
-        #region Internal Properties
+        #region Internal Methods
 
-        internal RenderContextItem<List<int>> ContextData { get; } = new RenderContextItem<List<int>>();
+        internal int GetTileVao(IRenderContext context, int tileId)
+        {
+            if (tileId == -1)
+            {
+                return -1;
+            }
 
-        #endregion Internal Properties
+            var atlasVaos = contextData.GetOrAdd(context, Load);
+            return atlasVaos[tileId];
+        }
 
-        #region Public Methods
+        #endregion Internal Methods
 
-        public void Load(IRenderContext renderContext)
+        #region Private Methods
+
+        private List<int> Load(IRenderContext renderContext)
         {
             var vboList = new List<int>();
 
@@ -71,12 +88,10 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 vboList.Add(itemVbo);
             }
 
-            ContextData.Add(renderContext, vboList);
+            //logger.LogTrace("Tile atlas '{0}' loaded into render context..", item.Id);
+
+            return vboList;
         }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         private int CreateTileVertices(IRenderContext renderContext, TileData tileData)
         {

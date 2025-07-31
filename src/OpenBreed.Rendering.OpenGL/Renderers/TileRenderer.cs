@@ -33,18 +33,17 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         #region Public Methods
 
-        public void Render(IRenderView view, int atlasId, int imageId)
+        public void Render(IRenderView view, int atlasId, int tileId)
         {
             var atlas = tileMan.InternalGetById(atlasId);
-            var size = atlas.TileSize;
-            var vao = atlas.ContextData.Get(view.Context)[imageId];
+            var vao = atlas.GetTileVao(view.Context, tileId);
 
             if (vao == -1)
             {
                 return;
             }
 
-            view.Context.Primitives.DrawSprite(
+            view.Context.Primitives.SetTextureShader(
                 view,
                 atlas.Texture,
                 Matrix4.Identity,

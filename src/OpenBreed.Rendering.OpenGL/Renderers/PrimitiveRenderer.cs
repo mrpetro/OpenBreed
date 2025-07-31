@@ -230,8 +230,10 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             action.Invoke(shader, shaderController);
         }
 
-        public void SetShader(IRenderView view, ITexture texture, Matrix4 model, Color4 color)
+        public void SetTextureShader(IRenderView view, ITexture texture, Matrix4 model, Color4 color)
         {
+            texture.Use(view.Context);
+
             if (texture.DataMode == TextureDataMode.Rgba)
             {
                 UsingShader(texturedShader, (item, setter) =>
@@ -260,13 +262,6 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             {
                 throw new Exception($"Data mode '{texture.DataMode}' is not implemented.");
             }
-        }
-
-        public void DrawSprite(IRenderView view, ITexture texture, Matrix4 model, Color4 color)
-        {
-            texture.Use(view.Context);
-
-            SetShader(view, texture, model, color);
         }
 
         public void DrawUnitBox(IRenderView view, Matrix4 model, Color4 color)

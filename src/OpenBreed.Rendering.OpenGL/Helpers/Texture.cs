@@ -1,22 +1,21 @@
-﻿using OpenBreed.Common.Extensions;
-using OpenBreed.Common.Interface.Tools;
+﻿using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Rendering.Abstractions;
 using OpenTK.Graphics.OpenGL4;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using System.Threading;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
     public class Texture : ITexture
     {
+        #region Private Fields
+
         private readonly RenderContextItem<int> contextItem = new RenderContextItem<int>();
 
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -177,25 +176,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             throw new NotSupportedException();
         }
 
-        public void Load(IRenderContext renderContext)
-        {
-            var pixelType = PixelType.UnsignedByte;
-
-            // Generate handle
-            int textureId = GL.GenTexture();
-
-            // Bind the handle
-            GL.BindTexture(TextureTarget.Texture2D, textureId);
-
-            GL.TexImage2D(TextureTarget.Texture2D, 0, InternalPixelFormat, Width, Height, 0, PixelFormat, pixelType, Data);
-
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
-
-            contextItem.Add(renderContext, textureId);
-
-        }
-
         public void Unload(IRenderContext renderContext)
         {
             var glId = contextItem.Get(renderContext);
@@ -205,7 +185,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Use(IRenderContext renderContext)
         {
-            var glId = contextItem.Get(renderContext);
+            var glId = contextItem.GetOrAdd(renderContext, LoadTexture);
 
             GL.BindTexture(TextureTarget.Texture2D, glId);
         }
@@ -297,6 +277,24 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             }
 
             return pixelFormat;
+        }
+
+        private int LoadTexture(IRenderContext renderContext)
+        {
+            var pixelType = PixelType.UnsignedByte;
+
+            // Generate handle
+            int textureId = GL.GenTexture();
+
+            // Bind the handle
+            GL.BindTexture(TextureTarget.Texture2D, textureId);
+
+            GL.TexImage2D(TextureTarget.Texture2D, 0, InternalPixelFormat, Width, Height, 0, PixelFormat, pixelType, Data);
+
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
+
+            return textureId;
         }
 
         #endregion Private Methods

@@ -44,7 +44,7 @@ namespace OpenBreed.Rendering.Abstractions.Renderers
 
         void Load();
 
-        void DrawSprite(IRenderView view, ITexture texture, Matrix4 model, Color4 color);
+        void SetTextureShader(IRenderView view, ITexture texture, Matrix4 model, Color4 color);
 
         IPosTexCoordArrayBuilder CreatePosTexCoordArray();
         IPosArrayBuilder CreatePosArray();

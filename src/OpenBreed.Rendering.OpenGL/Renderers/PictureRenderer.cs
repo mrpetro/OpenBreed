@@ -34,20 +34,21 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
         {
             var picture = pictureMan.InternalGetById(imageId);
 
+            var vao = picture.GetVbo(view.Context);
+
             view.PushMatrix();
 
             try
             {
                 var model = Matrix4.CreateScale(scale.X, scale.Y, 1.0f) * Matrix4.CreateTranslation(pos);
 
-                view.Context.Primitives.DrawSprite(
+                view.Context.Primitives.SetTextureShader(
                     view,
                     picture.Texture,
-
                     model,
                     color);
 
-                GL.BindVertexArray(picture.Vbo);
+                GL.BindVertexArray(vao);
                 GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
                 GL.BindVertexArray(0);
             }

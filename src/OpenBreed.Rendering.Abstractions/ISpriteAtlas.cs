@@ -23,12 +23,6 @@ namespace OpenBreed.Rendering.Abstractions
 
         bool IsValid(int imageId);
 
-        /// <summary>
-        /// Load this sprite atlas into render context
-        /// </summary>
-        /// <param name="renderContext">Render context</param>
-        void Load(IRenderContext renderContext);
-
         #endregion Public Methods
     }
 }

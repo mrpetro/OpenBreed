@@ -46,12 +46,6 @@ namespace OpenBreed.Rendering.Abstractions
         #region Public Methods
 
         /// <summary>
-        /// Load this texture into render context
-        /// </summary>
-        /// <param name="renderContext">Render context</param>
-        void Load(IRenderContext renderContext);
-
-        /// <summary>
         /// Unload this texture from render context
         /// </summary>
         /// <param name="renderContext">Render context</param>

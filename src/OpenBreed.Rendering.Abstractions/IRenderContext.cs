@@ -22,11 +22,8 @@ namespace OpenBreed.Rendering.Abstractions
         ITileRenderer TileRenderer { get; }
         IPictureRenderer PictureRenderer { get; }
         IPrimitiveRenderer Primitives { get; }
-        ISpriteMan Sprites { get; }
         IFontMan Fonts { get; }
-        ITextureMan Textures { get; }
         IPictureMan Pictures { get; }
-        ITileMan Tiles { get; }
         IStampMan TileStamps { get; }
         IPaletteMan Palettes { get; }
 
