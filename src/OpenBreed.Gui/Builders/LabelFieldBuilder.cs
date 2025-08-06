@@ -66,7 +66,7 @@ namespace OpenBreed.Gui.Builders
 
         #region Internal Methods
 
-        internal IFont GetFont()
+        internal IFontAtlas GetFont()
         {
             return fontMan.GetOSFont(FontName, FontSize);
         }

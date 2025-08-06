@@ -25,7 +25,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
         private readonly IFontMan fontMan;
 
-        private readonly IFont font;
+        private readonly IFontAtlas font;
 
         #endregion Private Fields
 

@@ -11,7 +11,7 @@ namespace OpenBreed.Gui.Abstractions.Elements
 
         ITextPointer Pointer { get; }
 
-        IFont Font { get; }
+        IFontAtlas Font { get; }
 
         int LinesCount { get; }
 

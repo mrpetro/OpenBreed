@@ -212,8 +212,6 @@ namespace OpenBreed.Rendering.OpenGL
 
         public void Render(float dt)
         {
-            LoadRefresh();
-
             GL.ClearDepth(1.0);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
@@ -252,11 +250,6 @@ namespace OpenBreed.Rendering.OpenGL
         #endregion Public Methods
 
         #region Private Methods
-
-        private void LoadRefresh()
-        {
-            Fonts.LoadRefresh(this);
-        }
 
         private bool TryGetView(Vector2i point, out RenderView view)
         {

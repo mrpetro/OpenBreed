@@ -76,6 +76,8 @@ namespace OpenBreed.Gui.Rendering
             view.PushMatrix();
             view.Translate(textPos);
 
+            //view.Context.FontRenderer.Render(
+
             font.Draw(view, element.Text, Color4.Black, element.ActualBox, ignoreScale: true);
 
             view.PopMatrix();

@@ -10,25 +10,19 @@ namespace OpenBreed.Rendering.Abstractions.Managers
     {
         #region Public Methods
 
-        IFont GetById(int id);
+        IFontAtlas GetById(int id);
 
         IFontAtlasBuilder Create();
 
-        IFont GetOSFont(string fontName, int fontSize);
+        IFontAtlas GetOSFont(string fontName, int fontSize);
 
-        IFont GetGfxFont(string fontName);
+        IFontAtlas GetGfxFont(string fontName);
 
         /// <summary>
         /// Unload all fonts from render context.
         /// </summary>
         /// <param name="renderContext">Render context</param>
         void UnloadAll(IRenderContext context);
-
-        /// <summary>
-        /// Load all fonts to render context.
-        /// </summary>
-        /// <param name="renderContext">Render context</param>
-        void LoadRefresh(IRenderContext context);
 
         #endregion Public Methods
     }

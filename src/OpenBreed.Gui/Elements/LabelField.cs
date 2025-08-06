@@ -28,7 +28,7 @@ namespace OpenBreed.Gui.Elements
         #region Public Properties
 
         public string Text { get; set; }
-        public IFont Font { get; }
+        public IFontAtlas Font { get; }
         public HorizontalAlignment HorizontalAlignment { get; set; }
         public VerticalAlignment VerticalAlignment { get; set; }
 

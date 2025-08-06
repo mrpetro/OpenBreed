@@ -13,7 +13,7 @@ namespace OpenBreed.Gui.Abstractions.Elements
 
         string Text { get; set; }
 
-        IFont Font { get; }
+        IFontAtlas Font { get; }
 
         #endregion Public Properties
     }

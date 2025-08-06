@@ -4,15 +4,18 @@
     {
         #region Public Methods
 
-        IFontAtlasBuilder AddCharacterFromSprite(int ch, string spriteAtlasName, int spriteIndex, float width = 0.0f);
+        IFontAtlasBuilder SetSpriteAtlas(string spriteAtlasName);
+
+        IFontAtlasBuilder MapCharacterToSpriteId(int ch, int spriteIndex, float width = 0.0f, float xOffset = 0.0f);
 
         //IFontAtlasBuilder AddWhiteChar(int ch, float width);
 
         IFontAtlasBuilder SetHeight(float height);
 
         IFontAtlasBuilder SetName(string fontName);
+        IFontAtlasBuilder SetAlias(string alias);
 
-        IFont Build();
+        IFontAtlas Build();
 
         #endregion Public Methods
     }

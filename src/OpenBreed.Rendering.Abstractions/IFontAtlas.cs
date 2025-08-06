@@ -5,9 +5,9 @@ using OpenTK.Mathematics;
 namespace OpenBreed.Rendering.Abstractions
 {
     /// <summary>
-    /// Interface for accessing font functionality
+    /// Interface for accessing font atlas
     /// </summary>
-    public interface IFont
+    public interface IFontAtlas
     {
         #region Public Properties
 
@@ -24,14 +24,6 @@ namespace OpenBreed.Rendering.Abstractions
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Load this font into render context
-        /// </summary>
-        /// <param name="renderContext">Render context</param>
-        void Load(IRenderContext renderContext);
-
-        void Render(IRenderView view, string text, Box2 clipBox, Vector2 pos, float order);
 
         /// <summary>
         /// Draw text given in parameter

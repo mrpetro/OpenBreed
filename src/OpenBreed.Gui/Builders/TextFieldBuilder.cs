@@ -73,7 +73,7 @@ namespace OpenBreed.Gui.Builders
             return new TextField(this);
         }
 
-        internal IFont GetFont()
+        internal IFontAtlas GetFont()
         {
             return fontMan.GetOSFont(FontName, FontSize);
         }

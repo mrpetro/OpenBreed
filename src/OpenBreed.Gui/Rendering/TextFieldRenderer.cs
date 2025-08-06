@@ -77,7 +77,7 @@ namespace OpenBreed.Gui.Rendering
 
         #region Private Methods
 
-        private void RenderPointer(ITextField element, IRenderView view, Box2 viewBox, OpenBreed.Rendering.Abstractions.IFont font)
+        private void RenderPointer(ITextField element, IRenderView view, Box2 viewBox, OpenBreed.Rendering.Abstractions.IFontAtlas font)
         {
             var cursorXPosition = element.Pointer.GetXPosition();
 

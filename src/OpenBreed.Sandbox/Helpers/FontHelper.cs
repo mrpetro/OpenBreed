@@ -47,17 +47,19 @@ namespace OpenBreed.Sandbox.Helpers
 
             //Create FontAtlas
             var fontAtlasBuilder = fontMan.Create()
-                                     .SetName("ComputerFont");
+                                     .SetName("ComputerFont")
+                                     .SetAlias("Gfx/ComputerFont")
+                                     .SetSpriteAtlas("Vanilla/Common/Computer/Font");
 
             for (int i = 0; i < 59; i++)
             {
                 var ch = 32 + (char)i;
-                fontAtlasBuilder.AddCharacterFromSprite(ch, $"Vanilla/Common/Computer/Font", i, 8);
+                fontAtlasBuilder.MapCharacterToSpriteId(ch, i, 8);
             }
 
-            fontAtlasBuilder.AddCharacterFromSprite('\0', $"Vanilla/Common/Computer/Font", 0, 8);
-            fontAtlasBuilder.AddCharacterFromSprite('\r', $"Vanilla/Common/Computer/Font", 0, 8);
-            fontAtlasBuilder.AddCharacterFromSprite('\n', $"Vanilla/Common/Computer/Font", 0, 8);
+            fontAtlasBuilder.MapCharacterToSpriteId('\0', 0, 8);
+            fontAtlasBuilder.MapCharacterToSpriteId('\r', 0, 8);
+            fontAtlasBuilder.MapCharacterToSpriteId('\n', 0, 8);
             fontAtlasBuilder.SetHeight(12);
 
             var fontAtlas = fontAtlasBuilder.Build();

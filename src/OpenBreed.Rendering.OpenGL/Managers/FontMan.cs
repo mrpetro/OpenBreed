@@ -17,14 +17,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly Queue<IFont> loadQueue = new Queue<IFont>();
+        private readonly Queue<IFontAtlas> loadQueue = new Queue<IFontAtlas>();
         private readonly ITextureMan textureMan;
         private readonly ISpriteMan spriteMan;
         private readonly ILogger logger;
-        private readonly List<IFont> items = new List<IFont>();
-        private readonly Dictionary<string, IFont> aliases = new Dictionary<string, IFont>();
+        private readonly List<IFontAtlas> items = new List<IFontAtlas>();
+        private readonly Dictionary<string, IFontAtlas> aliases = new Dictionary<string, IFontAtlas>();
         private readonly TextMeasurer textMeasurer = new TextMeasurer();
-        private readonly Dictionary<string, FontFromOSAtlas> fonts = new Dictionary<string, FontFromOSAtlas>();
 
         #endregion Private Fields
 
@@ -44,52 +43,40 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public IFont GetById(int id)
+        public IFontAtlas GetById(int id)
         {
             return items[id];
         }
 
         public IFontAtlasBuilder Create()
         {
-            return new FontFromSpritesAtlasBuilder(this, spriteMan);
+            return new FontAtlasBuilder(this, spriteMan);
         }
 
-        public void LoadRefresh(IRenderContext renderContext)
-        {
-            while (loadQueue.Count > 0)
-            {
-                var item = loadQueue.Dequeue();
-                item.Load(renderContext);
-
-                logger.LogTrace("Font '{0}' loaded into render context..", item.Id);
-            }
-        }
-
-        public IFont GetGfxFont(string fontName)
+        public IFontAtlas GetGfxFont(string fontName)
         {
             var alias = $"Gfx/{fontName}";
 
-            IFont result;
+            IFontAtlas result;
             if (aliases.TryGetValue(alias, out result))
                 return result;
             else
                 return null;
         }
 
-        public IFont GetOSFont(string fontName, int fontSize)
+        public IFontAtlas GetOSFont(string fontName, int fontSize)
         {
             fontName = fontName.Trim().ToLower();
 
             var alias = $"OS/{fontName}/{fontSize}";
-            IFont result;
-            if (aliases.TryGetValue(alias, out result))
-                return result;
 
-            var fontGenerator = new FontFromOSAtlasGenerator(this, textMeasurer, textureMan);
-            fontGenerator.SetName(fontName);
-            fontGenerator.SetSize(fontSize);
-            var font = fontGenerator.Build();
-            Register(alias, font);
+            if (aliases.TryGetValue(alias, out IFontAtlas result))
+            {
+                return result;
+            }
+
+            var fontGenerator = new OSFontAtlasGenerator(this, textMeasurer, textureMan, spriteMan);
+            var font = fontGenerator.Generate(fontName, fontSize);
             return font;
         }
 
@@ -102,7 +89,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Methods
 
-        internal void Register(string alias, IFont font)
+        internal void Register(string alias, IFontAtlas font)
         {
             items.Add(font);
             aliases.Add(alias, font);

@@ -56,7 +56,7 @@ namespace OpenBreed.Gui.Elements
 
         public ITextPointer Pointer { get; }
 
-        public IFont Font { get; }
+        public IFontAtlas Font { get; }
 
         public int LinesCount => lines.Count;
 
