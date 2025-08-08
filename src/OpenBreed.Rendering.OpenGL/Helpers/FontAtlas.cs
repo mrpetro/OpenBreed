@@ -5,6 +5,7 @@ using OpenBreed.Rendering.OpenGL.Builders;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
@@ -73,10 +74,20 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             var caretPosX = 0.0f;
             var caretPosY = 0.0f;
 
+            var scaleCorrection = 1.0f;
+
+            if (ignoreScale)
+            {
+                scaleCorrection = 1.0f / view.GetScale();
+            }
+
             for (int i = 0; i < text.Length; i++)
             {
                 var ch = text[i];
                 var data = lookup[ch];
+
+                var width = data.Width * scaleCorrection;
+
                 var spriteId = data.SpriteId;
 
                 switch (ch)
@@ -93,7 +104,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
                 view.Context.SpriteRenderer.Render(view, new Vector3(caretPosX, caretPosY, 0.0f), Vector2.One, color, spriteAtlas.Id, spriteId, ignoreScale);
 
-                caretPosX += data.Width;
+                caretPosX += width;
             }
         }
 

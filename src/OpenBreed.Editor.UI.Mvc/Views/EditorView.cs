@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Interface.Drawing;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Editor.UI.Mvc.Extensions;
 using OpenBreed.Gui.Abstractions;
@@ -272,7 +273,9 @@ namespace OpenBreed.Editor.UI.Mvc.Views
         {
             var textPos = view.ToWorldPoint(CursorPosition);
 
-            var font = view.Context.Fonts.GetOSFont("ARIAL", 9);
+            var fontMan = view.Context.ServiceProvider.GetRequiredService<IFontMan>();
+
+            var font = fontMan.GetOSFont("ARIAL", 9);
 
             var scale = view.GetScale();
 

@@ -118,37 +118,40 @@ namespace OpenBreed.Editor.UI.Mvc
 
         public void StopAnimation()
         {
-            throw new NotImplementedException();
+            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
+            animationSampleEntity.StopAnimation(animatorId: 0);
         }
 
         public void PlayAnimation()
         {
-            throw new NotImplementedException();
+            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
+            animationSampleEntity.PlayAnimationEx(animatorId: 0);
         }
 
         public void PauseAnimation()
         {
-            throw new NotImplementedException();
+            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
+            animationSampleEntity.PauseAnimation(animatorId: 0);
         }
 
         public void ToEndAnimation()
         {
-            throw new NotImplementedException();
+            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
+            animationSampleEntity.AnimationToEnd(animatorId: 0);
         }
 
         public void ToBeginAnimation()
         {
-            throw new NotImplementedException();
+            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
+            animationSampleEntity.AnimationToBegin(animatorId: 0);
         }
 
         public void FastRewindAnimation()
         {
-            throw new NotImplementedException();
         }
 
         public void FastForwardAnimation()
         {
-            throw new NotImplementedException();
         }
 
         #endregion Public Methods

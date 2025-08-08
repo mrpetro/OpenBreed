@@ -26,6 +26,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Collections;
 using static System.Formats.Asn1.AsnWriter;
 using OpenBreed.Rendering.Abstractions.Renderers;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace OpenBreed.Editor.UI.Mvc.Controllers
 {
@@ -197,8 +198,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private void RenderUnitGrid(IRenderView view)
         {
-
-            var fontMan = view.Context.Fonts;
+            var fontMan = view.Context.ServiceProvider.GetRequiredService<IFontMan>();
 
             var font = fontMan.GetOSFont("ARIAL", 6);
             var fontColor = Color4.Purple;
@@ -397,8 +397,8 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
 
             //Draw unit texts
+            var fontMan = view.Context.ServiceProvider.GetRequiredService<IFontMan>();
 
-            var fontMan = view.Context.Fonts;
             var font = fontMan.GetOSFont("ARIAL", 10);
             var fontColor = Color4.Purple;
             var fontHeight = font.Height / scale;

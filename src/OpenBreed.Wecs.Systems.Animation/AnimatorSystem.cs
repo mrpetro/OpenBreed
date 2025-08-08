@@ -77,10 +77,14 @@ namespace OpenBreed.Wecs.Systems.Animation
         private void UpdateAnimator(IEntity entity, Animator animator, float dt)
         {
             if (animator.Paused)
+            {
                 return;
+            }
 
             if (animator.ClipId < 0)
+            {
                 return;
+            }
 
             var data = clipMan.GetById(animator.ClipId);
 
@@ -89,7 +93,9 @@ namespace OpenBreed.Wecs.Systems.Animation
             if (animator.Position > data.Length)
             {
                 if (animator.Loop)
+                {
                     animator.Position = animator.Position - data.Length;
+                }
                 else
                 {
                     Finish(entity, animator);

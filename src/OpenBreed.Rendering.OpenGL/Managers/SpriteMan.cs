@@ -18,7 +18,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly Queue<ISpriteAtlas> loadQueue = new Queue<ISpriteAtlas>();
         private readonly List<SpriteAtlas> items = new List<SpriteAtlas>();
         private readonly Dictionary<string, ISpriteAtlas> names = new Dictionary<string, ISpriteAtlas>();
         private readonly ITextureMan textureMan;
@@ -75,11 +74,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return names.TryGetValue(atlasName, out spriteAtlas);
         }
 
-        public void UnloadAll(IRenderContext context)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
@@ -93,7 +87,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             items.Add(spriteAtlas);
             names.Add(name, spriteAtlas);
-            loadQueue.Enqueue(spriteAtlas);
 
             logger.LogTrace("Sprite atlas '{0}' created with ID {1}.", name, items.Count - 1);
 

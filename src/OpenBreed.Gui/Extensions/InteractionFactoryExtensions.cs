@@ -4,6 +4,7 @@ using OpenBreed.Gui.Abstractions.Builders;
 using OpenBreed.Gui.Abstractions.Controllers;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Builders;
+using OpenBreed.Rendering.Abstractions.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace OpenBreed.Gui.Extensions
         {
             var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController>();
 
-            var fontMan = factory.View.Context.Fonts;
+            var fontMan = factory.ServiceProvider.GetRequiredService<IFontMan>();
 
             var builder = new LabelFieldBuilder(inputController, fontMan);
 
@@ -47,8 +48,7 @@ namespace OpenBreed.Gui.Extensions
         public static ITextField CreateTextField(this IInteractionFactory factory, Action<ITextFieldBuilder> setter)
         {
             var inputController = factory.ServiceProvider.GetRequiredService<IElementInputController<ITextField>>();
-
-            var fontMan = factory.View.Context.Fonts;
+            var fontMan = factory.ServiceProvider.GetRequiredService<IFontMan>();
 
             var builder = new TextFieldBuilder(inputController, fontMan);
 

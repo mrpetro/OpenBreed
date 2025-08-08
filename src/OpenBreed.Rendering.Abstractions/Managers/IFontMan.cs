@@ -18,12 +18,6 @@ namespace OpenBreed.Rendering.Abstractions.Managers
 
         IFontAtlas GetGfxFont(string fontName);
 
-        /// <summary>
-        /// Unload all fonts from render context.
-        /// </summary>
-        /// <param name="renderContext">Render context</param>
-        void UnloadAll(IRenderContext context);
-
         #endregion Public Methods
     }
 }

@@ -6,7 +6,6 @@
 		<Animation>
 			<States>
 				<State>
-					<Speed>20</Speed>
 					<Loop>true</Loop>
 				</State>
 			</States>

@@ -18,7 +18,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly Queue<TileAtlas> loadQueue = new Queue<TileAtlas>();
         private readonly List<TileAtlas> items = new List<TileAtlas>();
         private readonly Dictionary<string, TileAtlas> names = new Dictionary<string, TileAtlas>();
         private readonly ITextureMan textureMan;
@@ -78,7 +77,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             items.Add(tileAtlas);
             names.Add(name, tileAtlas);
-            loadQueue.Enqueue(tileAtlas);
 
             logger.LogTrace("Tile atlas '{0}' created with ID {1}.", name, items.Count - 1);
 

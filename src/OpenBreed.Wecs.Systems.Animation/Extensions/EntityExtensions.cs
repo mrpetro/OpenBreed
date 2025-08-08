@@ -10,20 +10,46 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
 {
     public static class EntityExtensions
     {
-        public static void PlayAnimation(this IEntity entity, int animatorId, int clipId = -1)
+        public static void AnimationToEnd(this IEntity entity, int animatorId)
         {
             var ac = entity.Get<AnimationComponent>();
             var animator = ac.States[animatorId];
-            animator.ClipId = clipId;
-            animator.Paused = false;
+            animator.Position = 0.0f;
+            animator.Speed = 0.0f;         
         }
 
-        public static void PlayAnimation(this IEntity entity, int animatorId, int clipId = -1, float startPosition = 0.0f)
+        public static void AnimationToBegin(this IEntity entity, int animatorId)
+        {
+            var ac = entity.Get<AnimationComponent>();
+            var animator = ac.States[animatorId];
+            animator.Position = 0.0f;
+            animator.Speed = 0.0f;
+        }
+
+        public static void PlayAnimationEx(this IEntity entity, int animatorId)
+        {
+            var ac = entity.Get<AnimationComponent>();
+            var animator = ac.States[animatorId];
+            animator.Paused = false;
+            animator.Speed = 1.0f;
+        }
+
+        public static void PlayAnimation(this IEntity entity, int animatorId, int clipId)
         {
             var ac = entity.Get<AnimationComponent>();
             var animator = ac.States[animatorId];
             animator.ClipId = clipId;
             animator.Paused = false;
+            animator.Speed = 1.0f;
+        }
+
+        public static void PlayAnimation(this IEntity entity, int animatorId, int clipId, float startPosition)
+        {
+            var ac = entity.Get<AnimationComponent>();
+            var animator = ac.States[animatorId];
+            animator.ClipId = clipId;
+            animator.Paused = false;
+            animator.Speed = 1.0f;
             animator.Position = startPosition;
         }
 
@@ -39,7 +65,7 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
             var ac = entity.Get<AnimationComponent>();
             var animator = ac.States[animatorId];
             animator.Position = 0.0f;
-            animator.Paused = true;
+            animator.Speed = 0.0f;
         }
 
         public static void SetAnimationClipById(this IEntity entity, int animatorId, int clipId)

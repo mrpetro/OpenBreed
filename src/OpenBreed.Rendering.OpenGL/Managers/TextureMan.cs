@@ -24,7 +24,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly Queue<ITexture> loadQueue = new Queue<ITexture>();
         private readonly List<ITexture> items = new List<ITexture>();
         private readonly ILogger logger;
         private readonly Dictionary<string, ITexture> names = new Dictionary<string, ITexture>();
@@ -151,7 +150,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             texture.Id = items.Count;
             items.Add(texture);
             names.Add(name, texture);
-            loadQueue.Enqueue(texture);
 
             logger.LogTrace("Texture '{0}' created with ID {1}.", name, texture.Id);
         }

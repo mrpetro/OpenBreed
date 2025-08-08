@@ -18,7 +18,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly Queue<IPicture> loadQueue = new Queue<IPicture>();
         private readonly List<Picture> items = new List<Picture>();
         private readonly Dictionary<string, Picture> names = new Dictionary<string, Picture>();
         private readonly ITextureMan textureMan;
@@ -86,7 +85,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             items.Add(picture);
             names.Add(name, picture);
-            loadQueue.Enqueue(picture);
 
             logger.LogTrace("Picture '{0}' created with ID {1}.", name, items.Count - 1);
 

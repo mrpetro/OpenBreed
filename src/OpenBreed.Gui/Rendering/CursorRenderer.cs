@@ -14,6 +14,13 @@ namespace OpenBreed.Gui.Rendering
 {
     public class CursorRenderer : ICursorRenderer
     {
+        private readonly IFontMan fontMan;
+
+        public CursorRenderer(IFontMan fontMan)
+        {
+            this.fontMan = fontMan;
+        }
+
         public void Render(IInteractionCursor cursor, IRenderView view)
         {
             var cPos = cursor.Position;
@@ -27,7 +34,7 @@ namespace OpenBreed.Gui.Rendering
 
         private void RenderTexts(Vector2 pos, IRenderView view, Box2 clipBox)
         {
-            var font = view.Context.Fonts.GetOSFont("ARIAL", 12);
+            var font = fontMan.GetOSFont("ARIAL", 12);
 
             view.Context.FontRenderer.RenderStart(view, pos);
             view.Context.FontRenderer.RenderPart(view, font.Id, $"({pos.X},{pos.Y})", Vector2.Zero, Color4.Green, 100, clipBox);

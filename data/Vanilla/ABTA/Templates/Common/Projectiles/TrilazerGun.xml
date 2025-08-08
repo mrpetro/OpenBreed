@@ -34,7 +34,6 @@
 		<Animation>
 			<States>
 				<State>
-					<Speed>5</Speed>
 					<Loop>false</Loop>
 				</State>
 			</States>

@@ -67,8 +67,6 @@ namespace OpenBreed.Rendering.OpenGL
             TileRenderer = ServiceProvider.GetRequiredService<ITileRenderer>();
             PictureRenderer = ServiceProvider.GetRequiredService<IPictureRenderer>();
             Primitives = ServiceProvider.GetRequiredService<IPrimitiveRenderer>();
-            Fonts = ServiceProvider.GetRequiredService<IFontMan>();
-            Pictures = ServiceProvider.GetRequiredService<IPictureMan>();
 
             Primitives.Load();
         }
@@ -83,9 +81,7 @@ namespace OpenBreed.Rendering.OpenGL
         public ISpriteRenderer SpriteRenderer { get; }
         public ITileRenderer TileRenderer { get; }
         public IPrimitiveRenderer Primitives { get; }
-        public IPictureMan Pictures { get; }
         public IPictureRenderer PictureRenderer { get; }
-        public IFontMan Fonts { get; }
         public IStampMan TileStamps { get; }
         public IPaletteMan Palettes { get; }
 

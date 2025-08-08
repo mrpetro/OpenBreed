@@ -13,7 +13,6 @@
 		<Animation>
 			<States>
 				<State>
-					<Speed>20</Speed>
 					<Loop>true</Loop>
 					<ClipName>$(level)/ElectricGate/Working/Horizontal</ClipName>
 				</State>

@@ -32,7 +32,7 @@ namespace OpenBreed.Wecs.Components.Animation.Xml
         #region Public Properties
 
         [XmlElement("Speed")]
-        public float Speed { get; set; }
+        public float Speed { get; set; } = 1;
 
         [XmlElement("Loop")]
         public bool Loop { get; set; }

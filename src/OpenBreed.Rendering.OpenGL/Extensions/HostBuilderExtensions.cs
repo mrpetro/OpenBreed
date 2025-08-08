@@ -53,15 +53,15 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddScoped<SpriteMan>();
-                services.AddScoped<ISpriteMan>((sp) => sp.GetRequiredService<SpriteMan>());
-                services.AddScoped<FontMan>();
-                services.AddScoped<IFontMan>((sp) => sp.GetRequiredService<FontMan>());
-                services.AddScoped<ITextureMan, TextureMan>();
-                services.AddScoped<PictureMan>();
-                services.AddScoped<IPictureMan>((sp) => sp.GetRequiredService<PictureMan>());
-                services.AddScoped<TileMan>();
-                services.AddScoped<ITileMan>((sp) => sp.GetRequiredService<TileMan>());
+                services.AddSingleton<SpriteMan>();
+                services.AddSingleton<ISpriteMan>((sp) => sp.GetRequiredService<SpriteMan>());
+                services.AddSingleton<FontMan>();
+                services.AddSingleton<IFontMan>((sp) => sp.GetRequiredService<FontMan>());
+                services.AddSingleton<ITextureMan, TextureMan>();
+                services.AddSingleton<PictureMan>();
+                services.AddSingleton<IPictureMan>((sp) => sp.GetRequiredService<PictureMan>());
+                services.AddSingleton<TileMan>();
+                services.AddSingleton<ITileMan>((sp) => sp.GetRequiredService<TileMan>());
 
                 services.AddScoped<IPrimitiveRenderer, PrimitiveRenderer>();
                 services.AddScoped<IPictureRenderer, PictureRenderer>();

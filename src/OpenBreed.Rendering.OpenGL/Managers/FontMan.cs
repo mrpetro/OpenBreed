@@ -17,7 +17,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly Queue<IFontAtlas> loadQueue = new Queue<IFontAtlas>();
         private readonly ITextureMan textureMan;
         private readonly ISpriteMan spriteMan;
         private readonly ILogger logger;
@@ -80,11 +79,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             return font;
         }
 
-        public void UnloadAll(IRenderContext context)
-        {
-            throw new System.NotImplementedException();
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
@@ -93,7 +87,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         {
             items.Add(font);
             aliases.Add(alias, font);
-            loadQueue.Enqueue(font);
         }
 
         internal int GenerateNewId()
