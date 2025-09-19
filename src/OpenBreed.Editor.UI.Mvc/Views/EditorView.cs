@@ -5,6 +5,7 @@ using OpenBreed.Editor.UI.Mvc.Extensions;
 using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Extensions;
+using OpenBreed.Gui.Abstractions.Helpers;
 using OpenBreed.Gui.Extensions;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
@@ -25,20 +26,133 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.UI.Mvc.Views
 {
-    public class EditorView
+    public abstract class EditorView
     {
         #region Private Fields
 
         private readonly IEventsMan eventsMan;
         private readonly IInteractionFactoryProvider guiFactoryProvider;
-        private IRenderView renderView;
         private bool cursorScroll;
 
-        private IRenderContext renderContext;
+        private IRenderView renderView;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Protected Constructors
+
+        protected EditorView(IEventsMan eventsMan, IInteractionFactoryProvider guiFactoryProvider)
+        {
+            this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
+            this.guiFactoryProvider = guiFactoryProvider ?? throw new ArgumentNullException(nameof(guiFactoryProvider));
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Events
+
+        public event Action<IRenderView, float> Rendering;
+
+        public event Action<ViewCursorDownEvent> CursorDown;
+
+        #endregion Public Events
+
+        #region Public Properties
+
+        public IRenderView RenderView
+        {
+            get
+            {
+                return renderView;
+            }
+
+            set
+            {
+                if (renderView == value)
+                {
+                    return;
+                }
+
+                if (renderView is not null)
+                {
+                    UnregisterRenderView(renderView);
+                }
+
+                renderView = value;
+
+                RegisterRenderView(renderView);
+                InitGui(renderView);
+            }
+        }
+
+        public Vector2i CursorPosition { get; private set; }
+
+        public Vector2i CursorSnapPosition { get; private set; }
+
+        public Vector2i CursorDelta { get; private set; }
+
+        public float MinScale { get; private set; } = 0.0625f;
+
+        public float MaxScale { get; private set; } = 16.0f;
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void SetScaleLimits(float min, float max)
+        {
+            if (min <= 0.0f)
+            {
+                throw new ArgumentOutOfRangeException(nameof(min), "Minimum scale must be greater than zero.");
+            }
+
+            if (max <= min)
+            {
+                throw new ArgumentOutOfRangeException(nameof(max), "Maximum scale must be greater than minimum scale.");
+            }
+
+            MinScale = min;
+            MaxScale = max;
+        }
+
+        public virtual void Reset()
+        {
+            renderView?.Reset();
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected virtual void OnCursorDown(ViewCursorDownEvent e)
+        {
+            if (e.Key == CursorKey.Middle)
+            {
+                cursorScroll = true;
+            }
+
+            CursorDown?.Invoke(e);
+        }
+
+        protected virtual void OnCursorUp(ViewCursorUpEvent e)
+        {
+            if (e.Key == CursorKey.Middle)
+            {
+                cursorScroll = false;
+            }
+        }
+
+        protected virtual void OnRender(IRenderView view, float dt)
+        {
+        }
+
+        protected virtual Vector2i ResolveCursorSnap(Vector2i coordinates)
+        {
+            return coordinates;
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void InitGui(IRenderView renderView)
         {
@@ -84,114 +198,6 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             }));
         }
 
-        public EditorView(IEventsMan eventsMan, IInteractionFactoryProvider guiFactoryProvider)
-        {
-            this.eventsMan = eventsMan;
-            this.guiFactoryProvider = guiFactoryProvider;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Events
-
-        public event Action<IRenderView, float> Rendering;
-
-        public event Action<ViewCursorDownEvent> CursorDown;
-
-        #endregion Public Events
-
-        #region Public Properties
-
-        public IRenderContext RenderContext
-        {
-            get
-            {
-                return renderContext;
-            }
-
-            set
-            {
-                if (renderContext == value)
-                {
-                    return;
-                }
-
-                if (renderContext is not null)
-                {
-                    UnregisterRenderView(renderView);
-                    renderContext.RemoveView(renderView);
-                }
-
-                renderContext = value;
-                renderView = renderContext.CreateView(0.0f, 0.0f, 1.0f, 1.0f);
-                RegisterRenderView(renderView);
-                InitGui(renderView);
-            }
-        }
-
-        public Vector2i CursorPosition { get; private set; }
-
-        public Vector2i CursorDelta { get; private set; }
-
-        public float MinScale { get; private set; } = 0.125f;
-
-        public float MaxScale { get; private set; } = 8.0f;
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public void SetScaleLimits(float min, float max)
-        {
-            if (min <= 0.0f)
-            {
-                throw new ArgumentOutOfRangeException(nameof(min), "Minimum scale must be greater than zero.");
-            }
-
-            if (max <= min)
-            {
-                throw new ArgumentOutOfRangeException(nameof(max), "Maximum scale must be greater than minimum scale.");
-            }
-
-            MinScale = min;
-            MaxScale = max;
-        }
-
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal void Reset()
-        {
-            renderView?.Reset();
-        }
-
-        #endregion Internal Methods
-
-        #region Protected Methods
-
-        protected virtual void OnCursorDown(ViewCursorDownEvent e)
-        {
-            if (e.Key == CursorKey.Middle)
-            {
-                cursorScroll = true;
-            }
-
-            CursorDown?.Invoke(e);
-        }
-
-        protected virtual void OnCursorUp(ViewCursorUpEvent e)
-        {
-            if (e.Key == CursorKey.Middle)
-            {
-                cursorScroll = false;
-            }
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
         private void UnregisterRenderView(IRenderView renderView)
         {
             eventsMan.Unsubscribe<ViewCursorMoveEvent>(OnCursorMove);
@@ -218,9 +224,10 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
             try
             {
+                OnRender(view, dt);
                 Rendering?.Invoke(view, dt);
 
-                RenderCoordinates(view, view.Box.AsBox2());
+                RenderCursor(view, view.Box.AsBox2());
             }
             finally
             {
@@ -233,6 +240,8 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             CursorDelta = e.Position - CursorPosition;
             CursorPosition = e.Position;
 
+            CursorSnapPosition = ResolveCursorSnap(CursorPosition);
+
             if (cursorScroll)
             {
                 renderView.MoveBy(CursorDelta);
@@ -243,7 +252,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
         {
             var delta = e.WheelDelta;
 
-            float currentScale = renderView.GetScale();
+            float currentScale = renderView.GetScaleX();
             float scaleFactor = 1.0f;
 
             if (Math.Sign(delta) > 0)
@@ -269,18 +278,24 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             renderView.ZoomTo(CursorPosition, currentScale);
         }
 
-        private void RenderCoordinates(IRenderView view, Box2 clipBox)
+        protected virtual Vector2 GetInteractionCursorPosition(IRenderView view)
         {
-            var textPos = view.ToWorldPoint(CursorPosition);
+            var position4 = view.ToWorldPoint(CursorPosition);
+            return new Vector2(position4.X, position4.Y);
+        }
+
+        private void RenderCursor(IRenderView view, Box2 clipBox)
+        {
+            var cursorPos = GetInteractionCursorPosition(view);
 
             var fontMan = view.Context.ServiceProvider.GetRequiredService<IFontMan>();
-
             var font = fontMan.GetOSFont("ARIAL", 9);
-
             var scale = view.GetScale();
 
-            view.Context.FontRenderer.RenderStart(view, new Vector2(textPos.X + 5 / scale, textPos.Y + 5 / scale));
-            view.Context.FontRenderer.RenderPart(view, font.Id, $"({textPos.X},{textPos.Y})", Vector2.Zero, Color4.White, 100, clipBox, ignoreScale: true);
+            view.Context.Primitives.DrawPoint(view, cursorPos, Color4.Green, OpenBreed.Rendering.Abstractions.Renderers.PointType.Cross, size: 20, ignoreScale: true);
+
+            view.Context.FontRenderer.RenderStart(view, new Vector2(cursorPos.X + 5 / scale.X, cursorPos.Y + 5 / scale.Y));
+            view.Context.FontRenderer.RenderPart(view, font.Id, $"({cursorPos.X},{cursorPos.Y})", Vector2.Zero, Color4.White, 100, clipBox, ignoreScale: true);
             view.Context.FontRenderer.RenderEnd(view);
         }
 

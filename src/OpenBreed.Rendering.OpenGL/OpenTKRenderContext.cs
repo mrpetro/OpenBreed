@@ -29,7 +29,6 @@ namespace OpenBreed.Rendering.OpenGL
     {
         #region Private Fields
 
-        private static int nextId = 0;
         private readonly IGraphicsContext graphicsContext;
         private readonly Action<IGraphicsContext> deinitializeCallback;
         private readonly HostCoordinateSystemConverter hostCoordinateSystemConverter;
@@ -37,7 +36,7 @@ namespace OpenBreed.Rendering.OpenGL
         private readonly IEventsMan eventsMan;
         private readonly IServiceScope serviceScope;
         private readonly IdMap<RenderView> views = new IdMap<RenderView>();
-        private int id = nextId++;
+        private readonly HashSet<RenderView> activeViews = new HashSet<RenderView>();
 
         #endregion Private Fields
 
@@ -85,13 +84,16 @@ namespace OpenBreed.Rendering.OpenGL
         public IStampMan TileStamps { get; }
         public IPaletteMan Palettes { get; }
 
+        public Vector2i Size { get; private set; }
+
         public IEnumerable<IRenderView> Views => views.Items;
+        public IEnumerable<IRenderView> ActiveViews => activeViews;
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public IRenderView CreateView(float minX = 0, float minY = 0, float maxX = 1, float maxY = 1)
+        public IRenderView CreateView(float minX = 0, float minY = 0, float maxX = 1, float maxY = 1, bool activate = true)
         {
             var newId = views.NewId();
 
@@ -99,6 +101,17 @@ namespace OpenBreed.Rendering.OpenGL
 
             views.Add(renderView);
             renderView.Reset();
+
+            renderView.OnResize();
+
+            if (activate)
+            {
+                if (!renderView.Activate())
+                {
+                    throw new InvalidOperationException("Expected new render view to be activated.");
+                }
+            }
+
             return renderView;
         }
 
@@ -109,6 +122,7 @@ namespace OpenBreed.Rendering.OpenGL
                 throw new InvalidOperationException("Trying to remove view from incorrect render context.");
             }
 
+            activeViews.Remove((RenderView)renderView);
             views.RemoveById(renderView.Id);
         }
 
@@ -140,7 +154,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         public void KeyDown(Abstractions.Events.Keys key, Abstractions.Events.KeyModifiers modifiers)
         {
-            foreach (var view in views.Items)
+            foreach (var view in activeViews)
             {
                 view.OnKeyDown(key, modifiers);
             }
@@ -148,7 +162,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         public void KeyUp(Abstractions.Events.Keys key, Abstractions.Events.KeyModifiers modifiers)
         {
-            foreach (var view in views.Items)
+            foreach (var view in activeViews)
             {
                 view.OnKeyUp(key, modifiers);
             }
@@ -211,7 +225,7 @@ namespace OpenBreed.Rendering.OpenGL
             GL.ClearDepth(1.0);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
-            foreach (var view in views.Items)
+            foreach (var view in activeViews)
             {
                 view.OnRender(dt);
             }
@@ -219,7 +233,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         public void TextInput(string text)
         {
-            foreach (var view in views.Items)
+            foreach (var view in activeViews)
             {
                 view.OnTextInput(text);
             }
@@ -237,19 +251,35 @@ namespace OpenBreed.Rendering.OpenGL
 
         public void Resize(int width, int height)
         {
-            foreach (var view in views.Items)
+            Size = new Vector2i(width, height);
+
+            foreach (var view in activeViews)
             {
-                view.OnResize(width, height);
+                view.OnResize();
             }
         }
 
         #endregion Public Methods
 
+        #region Internal Methods
+
+        internal bool ActivateView(RenderView renderView)
+        {
+            return activeViews.Add(renderView);
+        }
+
+        internal bool DeactivateView(RenderView renderView)
+        {
+            return activeViews.Remove(renderView);
+        }
+
+        #endregion Internal Methods
+
         #region Private Methods
 
         private bool TryGetView(Vector2i point, out RenderView view)
         {
-            view = views.Items.FirstOrDefault(v => v.Box.ContainsInclusive(point));
+            view = activeViews.FirstOrDefault(v => v.Box.ContainsInclusive(point));
             return view is not null;
         }
 

@@ -4,6 +4,7 @@ using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
@@ -92,7 +93,43 @@ namespace OpenBreed.Editor.UI.Mvc
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        public float CurrentTime
+        {
+            get
+            {
+                var ac = AnimationEntity.Get<AnimationComponent>();
+                var animator = ac.States[0];
+                return animator.Position;
+            }
+        }
+
+        #endregion Public Properties
+
+        #region Internal Properties
+
+        internal IEntity AnimationEntity => entityMan.GetByTag("AnimationSample").First();
+
+        #endregion Internal Properties
+
         #region Public Methods
+
+        public MyExtentF GetGraphicalExtent()
+        {
+            var animationSampleEntity = entityMan.GetByTag("AnimationSample").FirstOrDefault();
+
+            if (animationSampleEntity is null)
+            {
+                return MyExtentF.Empty;
+            }
+
+            //var sprite = animationSampleEntity.Get<SpriteComponent>();
+
+            //sprite.
+
+            return MyExtentF.Empty;
+        }
 
         public void Load(string name, IRenderContext renderContext)
         {
@@ -118,32 +155,27 @@ namespace OpenBreed.Editor.UI.Mvc
 
         public void StopAnimation()
         {
-            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
-            animationSampleEntity.StopAnimation(animatorId: 0);
+            AnimationEntity.StopAnimation(animatorId: 0);
         }
 
         public void PlayAnimation()
         {
-            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
-            animationSampleEntity.PlayAnimationEx(animatorId: 0);
+            AnimationEntity.PlayAnimationEx(animatorId: 0);
         }
 
         public void PauseAnimation()
         {
-            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
-            animationSampleEntity.PauseAnimation(animatorId: 0);
+            AnimationEntity.PauseAnimation(animatorId: 0);
         }
 
         public void ToEndAnimation()
         {
-            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
-            animationSampleEntity.AnimationToEnd(animatorId: 0);
+            AnimationEntity.AnimationToEnd(animatorId: 0);
         }
 
         public void ToBeginAnimation()
         {
-            var animationSampleEntity = entityMan.GetByTag("AnimationSample").First();
-            animationSampleEntity.AnimationToBegin(animatorId: 0);
+            AnimationEntity.AnimationToBegin(animatorId: 0);
         }
 
         public void FastRewindAnimation()

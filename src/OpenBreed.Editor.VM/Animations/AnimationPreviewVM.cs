@@ -10,6 +10,7 @@ using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc;
 using OpenBreed.Editor.UI.Mvc.Controllers;
+using OpenBreed.Editor.UI.Mvc.Models;
 using OpenBreed.Editor.UI.Mvc.Views;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Messages;
@@ -27,15 +28,16 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Animations
 {
-    public class AnimationPreviewVM : BaseViewModel
+    public class AnimationPreviewVM : BaseViewModel, IRenderViewVM
     {
         #region Private Fields
 
         private readonly IServiceProvider serviceProvider;
-        private readonly EditorView editorView;
+        private readonly AnimationPreviewView view;
         private readonly IAnimationSandbox animationSandbox;
-        private readonly IServiceScopeFactory serviceScopeFactory;
+        private readonly IAnimationEditorModel model;
         private readonly AnimationPreviewController controller;
+        private IRenderView renderView;
 
         #endregion Private Fields
 
@@ -43,54 +45,58 @@ namespace OpenBreed.Editor.VM.Animations
 
         public AnimationPreviewVM(
             IServiceProvider serviceProvider,
-            EditorView editorView,
             IAnimationSandbox animationSandbox,
-            IServiceScopeFactory serviceScopeFactory)
+            IAnimationEditorModel model)
         {
-            this.serviceProvider = serviceProvider;
-            this.editorView = editorView;
-            this.animationSandbox = animationSandbox;
-            this.serviceScopeFactory = serviceScopeFactory;
-            this.controller = ActivatorUtilities.CreateInstance<AnimationPreviewController>(serviceProvider, editorView, animationSandbox);
+            this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            this.animationSandbox = animationSandbox ?? throw new ArgumentNullException(nameof(animationSandbox));
+            this.model = model ?? throw new ArgumentNullException(nameof(model));
+            this.view = ActivatorUtilities.CreateInstance<AnimationPreviewView>(serviceProvider, animationSandbox);
+            this.controller = ActivatorUtilities.CreateInstance<AnimationPreviewController>(serviceProvider, view, animationSandbox);
+
+            controller?.Reset();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public LoadContextHandler InitFunc => OnInitialize;
-
-        public IDbAnimation Animation { get; private set; }
+        public LoadContextHandler InitFunc => OnControlInitialize;
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void View(IDbAnimation dbAnimation)
+        public void Activate()
         {
-            Animation = dbAnimation;
+            renderView?.Activate();
+        }
 
-            controller?.Reset();
+        public void Deactivate()
+        {
+            renderView?.Deactivate();
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnInitialize(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> contextInitializer)
+        private void OnControlInitialize(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> contextInitializer)
         {
             renderContextProvider = serviceProvider.GetRequiredService<IRenderContextProvider>();
 
             contextInitializer = (context) =>
             {
-                var dataLoaderFactory = context.ServiceProvider.GetService<IDataLoaderFactory>();
-                var clipLoader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<IEntity>>();
+                if (renderView is null)
+                {
+                    renderView = context.CreateView(activate: true);
 
-                editorView.RenderContext = context;
+                    view.RenderView = renderView;
 
-                var model = clipLoader.Load(Animation);
+                    var clip = model.Load();
 
-                animationSandbox.Load(model.Name, context);
+                    animationSandbox.Load(clip.Name, context);
+                }
             };
         }
 

@@ -30,12 +30,17 @@ namespace OpenBreed.Rendering.Abstractions.Extensions
 
         public static void MoveTo(this IRenderView renderView, Vector2i position)
         {
-            var scale = renderView.View[0, 0];
-            renderView.View = Matrix4.CreateScale(scale, scale, 1.0f);
+            var scaleX = renderView.View[0, 0];
+            var scaleY = renderView.View[1, 1];
+            renderView.View = Matrix4.CreateScale(scaleX, scaleY, 1.0f);
             renderView.View *= Matrix4.CreateTranslation(position.X, position.Y, 0.0f);
         }
 
-        public static float GetScale(this IRenderView renderView) => renderView.View[0, 0];
+        public static float GetScaleX(this IRenderView renderView) => renderView.View[0, 0];
+
+        public static float GetScaleY(this IRenderView renderView) => renderView.View[1, 1];
+
+        public static Vector2 GetScale(this IRenderView renderView) => new Vector2(renderView.View[0, 0], renderView.View[1, 1]);
 
         public static void SetScale(this IRenderView renderView, float scale)
         {
@@ -57,6 +62,16 @@ namespace OpenBreed.Rendering.Abstractions.Extensions
             renderView.View = Matrix4.CreateTranslation(new Vector3(vec)) * renderView.View;
         }
 
+        public static void TranslateX(this IRenderView renderView, float value)
+        {
+            renderView.View = Matrix4.CreateTranslation(new Vector3(value, 0.0f, 0.0f)) * renderView.View;
+        }
+
+        public static void TranslateY(this IRenderView renderView, float value)
+        {
+            renderView.View = Matrix4.CreateTranslation(new Vector3(0.0f, value, 0.0f)) * renderView.View;
+        }
+
         public static void Translate(this IRenderView renderView, float x, float y, float z) => Translate(renderView, new Vector3(x, y, z));
 
         public static void Scale(this IRenderView renderView, float value) => Scale(renderView, value, value);
@@ -76,6 +91,11 @@ namespace OpenBreed.Rendering.Abstractions.Extensions
 
             var toScale = scale / newTransf[0, 0];
             newTransf *= Matrix4.CreateScale(toScale, toScale, 1.0f);
+
+            //var toScaleX = scale / invMatrix[0, 0];
+            //var toScaleY = scale / invMatrix[1, 1];
+
+            //newTransf *= Matrix4.CreateScale(toScaleX, toScaleY, 1.0f);
 
             invMatrix = newTransf.Inverted();
 

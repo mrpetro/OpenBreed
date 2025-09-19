@@ -22,6 +22,7 @@ namespace OpenBreed.Rendering.OpenGL
         private readonly Stack<Box2i> clipBoxStack = new Stack<Box2i>();
         private readonly HostCoordinateSystemConverter hostCoordinateSystemConverter;
         private readonly Box2 boxNormalized;
+        private readonly OpenTKRenderContext context;
         private IPalette currentPalette;
         private Matrix4 projection = Matrix4.Identity;
         private readonly List<IRenderLayer> layers = new List<IRenderLayer>();
@@ -31,12 +32,12 @@ namespace OpenBreed.Rendering.OpenGL
         #region Public Constructors
 
         public RenderView(
-            IRenderContext context,
+            OpenTKRenderContext context,
             HostCoordinateSystemConverter hostCoordinateSystemConverter,
             Box2 boxNormalized,
             int viewId)
         {
-            Context = context;
+            this.context = context;
             this.hostCoordinateSystemConverter = hostCoordinateSystemConverter;
             this.boxNormalized = boxNormalized;
             Id = viewId;
@@ -74,7 +75,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         public Box2i Box { get; private set; }
 
-        public IRenderContext Context { get; }
+        public IRenderContext Context => context;
         public int Id { get; }
         public IFontMan Fonts { get; }
         public Matrix4 View { get; set; } = Matrix4.Identity;
@@ -84,6 +85,16 @@ namespace OpenBreed.Rendering.OpenGL
         #endregion Public Properties
 
         #region Public Methods
+
+        public bool Activate()
+        {
+            return context.ActivateView(this);
+        }
+
+        public bool Deactivate()
+        {
+            return context.DeactivateView(this);
+        }
 
         public void EnableAlpha()
         {
@@ -266,10 +277,12 @@ namespace OpenBreed.Rendering.OpenGL
             KeyUp?.Invoke(this, key, modifiers);
         }
 
-        internal virtual void OnResize(int width, int height)
+        internal virtual void OnResize()
         {
-            var min = new Vector2i(width, height) * boxNormalized.Min;
-            var max = new Vector2i(width, height) * boxNormalized.Max;
+            var size = context.Size;
+
+            var min = size * boxNormalized.Min;
+            var max = size * boxNormalized.Max;
 
             Box = new Box2i((Vector2i)min, (Vector2i)max);
 
@@ -277,7 +290,7 @@ namespace OpenBreed.Rendering.OpenGL
 
             View = Matrix4.Identity;
 
-            Resized?.Invoke(this, width, height);
+            Resized?.Invoke(this, size.X, size.Y);
         }
 
         #endregion Internal Methods

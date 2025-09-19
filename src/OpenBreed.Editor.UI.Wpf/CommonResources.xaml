@@ -5,6 +5,7 @@
     </Style>
     <Style x:Key="CommonComboBoxStyle" TargetType="ComboBox">
         <Setter Property="Margin" Value="4"/>
+        <Setter Property="Height" Value="22"/>
     </Style>
     <Style x:Key="CommonButtonStyle" TargetType="Button">
         <Setter Property="Margin" Value="4"/>
@@ -142,4 +143,5 @@
             </Style>
         </Style.Resources>
     </Style>
+    <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
 </ResourceDictionary>

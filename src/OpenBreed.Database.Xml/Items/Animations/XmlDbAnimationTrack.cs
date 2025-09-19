@@ -16,7 +16,7 @@ namespace OpenBreed.Database.Xml.Items.Animations
 
         [XmlArray("Frames")]
         [XmlArrayItem(ElementName = "Frame")]
-        public List<XmlDbAnimationFrame<TValue>> XmlFrames { get; set; }
+        public List<XmlDbAnimationFrame<TValue>> XmlFrames { get; set; } = new List<XmlDbAnimationFrame<TValue>>();
 
         [XmlIgnore]
         public ReadOnlyCollection<IDbAnimationFrame<TValue>> Frames

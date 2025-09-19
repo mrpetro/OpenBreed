@@ -26,12 +26,18 @@ namespace OpenBreed.Rendering.Abstractions
         IPaletteMan Palettes { get; }
 
         IEnumerable<IRenderView> Views { get; }
+        IEnumerable<IRenderView> ActiveViews { get; }
+
+        /// <summary>
+        /// Width (X) and height (Y) of this render context.
+        /// </summary>
+        Vector2i Size { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        IRenderView CreateView(float minX = 0, float minY = 0, float maxX = 1, float maxY = 1);
+        IRenderView CreateView(float minX = 0, float minY = 0, float maxX = 1, float maxY = 1, bool activate = true);
         void RemoveView(IRenderView renderView);
 
         void Render(float dt);

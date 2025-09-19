@@ -16,14 +16,14 @@ namespace OpenBreed.Editor.UI.Mvc.Extensions
     {
         #region Public Methods
 
-        public static MyExtentF GetExtent(this IClipEditorModel model)
+        public static MyExtentF GetExtent(this IAnimationEditorModel model)
         {
-            if (model.Track is null)
+            if (model.EditedTrack is null)
             {
                 return new MyExtentF();
             }
 
-            var extent = GetExtent(model.Track);
+            var extent = GetExtent(model.EditedTrack);
 
             extent.Expand(model.ClipLength, extent.Center.Y);
 

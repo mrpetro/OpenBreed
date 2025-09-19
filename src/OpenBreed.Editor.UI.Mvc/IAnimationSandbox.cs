@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Abstractions;
+﻿using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Rendering.Abstractions;
 
 namespace OpenBreed.Editor.UI.Mvc
 {
@@ -13,7 +14,15 @@ namespace OpenBreed.Editor.UI.Mvc
 
     public interface IAnimationSandbox
     {
+        #region Public Properties
+
+        float CurrentTime { get; }
+
+        #endregion Public Properties
+
         #region Public Methods
+
+        MyExtentF GetGraphicalExtent();
 
         void FastForwardAnimation();
 

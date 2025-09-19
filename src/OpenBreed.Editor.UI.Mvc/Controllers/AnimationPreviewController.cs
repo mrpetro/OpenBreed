@@ -39,7 +39,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
     {
         #region Private Fields
 
-        private readonly EditorView view;
+        private readonly AnimationPreviewView view;
         private readonly IAnimationSandbox animationSandbox;
         private bool pendingReset;
 
@@ -49,13 +49,12 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         public AnimationPreviewController(
             IEventsMan eventsMan,
-            EditorView view,
+            AnimationPreviewView view,
             IAnimationSandbox animationSandbox)
         {
             this.view = view;
             this.animationSandbox = animationSandbox;
 
-            view.Rendering += OnRender;
             view.CursorDown += OnCursorDown;
         }
 
@@ -65,7 +64,6 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         public void Reset()
         {
-            view.SetScaleLimits(1.0f / (float)Math.Pow(2, 8), (float)Math.Pow(2, 8));
             view.Reset();
         }
 
@@ -73,55 +71,12 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         #region Private Methods
 
-        private void OnReset(IRenderView view)
-        {
-            view.SetScale(2.0f);
-            view.MoveTo(view.Box.HalfSize);
-        }
-
-        private void OnRender(IRenderView view, float dt)
-        {
-            view.PushMatrix();
-
-            if (pendingReset)
-            {
-                OnReset(view);
-                pendingReset = false;
-            }
-
-            view.EnableAlpha();
-
-            RenderAxes(view);
-
-            view.DisableAlpha();
-
-            animationSandbox.Render(view, dt);
-
-            view.PopMatrix();
-        }
-
         private void OnCursorDown(ViewCursorDownEvent e)
         {
-            if (e.Key == CursorKey.Left)
+            if (e.Key == CursorKey.Right)
             {
-                //var cursorPos = GetCellIndexCoords(e.View, e.Position) + new Vector4i(model.CenterX, model.CenterY, 0, 1);
-
-                //model.PutTiles(cursorPos, CurrentTileAtlasId, CurrentTileSelection);
+                view.AutoCenter();
             }
-            else if (e.Key == CursorKey.Right)
-            {
-                //var cursorPos = GetCellIndexCoords(e.View, e.Position) + new Vector4i(model.CenterX, model.CenterY, 0, 1);
-
-                //model.EraseTile(cursorPos);
-            }
-        }
-
-        private void RenderAxes(IRenderView view)
-        {
-            var worldBox = view.ToWorldBox(view.Box);
-
-            view.Context.Primitives.DrawLine(view, new Vector2(worldBox.Min.X, 0), new Vector2(worldBox.Max.X, 0), Color4.Red);
-            view.Context.Primitives.DrawLine(view, new Vector2(0, worldBox.Min.Y), new Vector2(0, worldBox.Max.Y), Color4.Green);
         }
 
         #endregion Private Methods

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Interface.Builders;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface.Logging;
@@ -39,28 +40,30 @@ namespace OpenBreed.Animation.Generic.Data
 
         #region Public Methods
 
-        public IClip<TObject> Load(IDbAnimation dbAnimation, params object[] args)
+        public IReadOnlyClip<TObject> Load(IDbAnimation dbAnimation, bool reload = false)
         {
-            if (clipMan.TryGetByName(dbAnimation.Id, out IClip<TObject> clip))
+            if (clipMan.TryGetByName(dbAnimation.Id, out IReadOnlyClip<TObject> clip))
             {
-                return clip;
+                if (!reload)
+                {
+                    return clip;
+                }
             }
 
             var totalTime = dbAnimation.Length;
 
-            clip = clipMan.CreateClip(dbAnimation.Id, totalTime);
+            var clipBuilder = clipMan.NewClip(dbAnimation.Id, totalTime);
 
             foreach (var part in dbAnimation.Tracks)
             {
-                LoadTrack(clip, part);
+                LoadTrack(clipBuilder, part);
             }
 
             logger.LogTrace("Animation clip '{0}' loaded.", dbAnimation.Id);
 
-            
+            clip = clipBuilder.Build();
 
-
-
+            clipMan.Register(clip);
 
             return clip;
         }
@@ -71,9 +74,9 @@ namespace OpenBreed.Animation.Generic.Data
         }
 
 
-        public IClip<TObject> Load(string dbEntryId)
+        public IReadOnlyClip<TObject> Load(string dbEntryId)
         {
-            if (clipMan.TryGetByName(dbEntryId, out IClip<TObject> clip))
+            if (clipMan.TryGetByName(dbEntryId, out IReadOnlyClip<TObject> clip))
             {
                 return clip;
             }
@@ -107,27 +110,28 @@ namespace OpenBreed.Animation.Generic.Data
             }
         }
 
-        private void LoadTrack<TValue>(IClip<TObject> clip, IDbAnimationTrack<TValue> entryTrack)
+        private void LoadTrack<TValue>(IReadOnlyClipBuilder<TObject> clipBuilder, IDbAnimationTrack<TValue> entryTrack)
         {
             var updater = frameUpdaterMan.GetByName<TValue>(entryTrack.Controller);
             var loader = frameUpdaterMan.GetLoaderByName<TValue>(entryTrack.Controller);
             var interpolation = GetFrameInterpolation(entryTrack.Interpolation);
-            var track = clip.AddTrack<TValue>(interpolation, updater, default(TValue));
+            var trackBuilder = clipBuilder.AddTrack<TValue>(interpolation, updater, default(TValue));
+
             foreach (var frame in entryTrack.Frames)
             {
                 loader?.Invoke(frame.Value);
-                track.AddFrame(frame.Value, frame.Time);
+                trackBuilder.AddFrame(frame.Value, frame.Time);
             }
         }
 
-        private void LoadTrack(IClip<TObject> animation, IDbAnimationTrack entryTrack)
+        private void LoadTrack(IReadOnlyClipBuilder<TObject> clipBuilder, IDbAnimationTrack entryTrack)
         {
             if (entryTrack is IDbAnimationTrack<int>)
-                LoadTrack<int>(animation, (IDbAnimationTrack<int>)entryTrack);
+                LoadTrack<int>(clipBuilder, (IDbAnimationTrack<int>)entryTrack);
             else if (entryTrack is IDbAnimationTrack<float>)
-                LoadTrack<float>(animation, (IDbAnimationTrack<float>)entryTrack);
+                LoadTrack<float>(clipBuilder, (IDbAnimationTrack<float>)entryTrack);
             else if (entryTrack is IDbAnimationTrack<string>)
-                LoadTrack<string>(animation, (IDbAnimationTrack<string>)entryTrack);
+                LoadTrack<string>(clipBuilder, (IDbAnimationTrack<string>)entryTrack);
         }
 
         #endregion Private Methods

@@ -1,7 +1,9 @@
-﻿using OpenBreed.Animation.Interface;
+﻿using OpenBreed.Animation.Generic.Builders;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace OpenBreed.Animation.Generic
@@ -18,11 +20,11 @@ namespace OpenBreed.Animation.Generic
 
         #region Internal Constructors
 
-        internal Track(FrameInterpolation interpolation, FrameUpdater<TObject, TValue> frameUpdater, TValue initialValue)
+        internal Track(ReadOnlyTrackBuilder<TObject, TValue> builder)
         {
-            this.interpolation = interpolation;
-            this.frameUpdater = frameUpdater;
-            //this.frames.Add(0.0f, initialValue);
+            this.interpolation = builder.Interpolation;
+            this.frameUpdater = builder.FrameUpdater;
+            this.frames = new SortedDictionary<float, TValue>(builder.Frames);
         }
 
         #endregion Internal Constructors

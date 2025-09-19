@@ -71,22 +71,28 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false)
         {
+
             var caretPosX = 0.0f;
             var caretPosY = 0.0f;
 
-            var scaleCorrection = 1.0f;
+            var scaleCorrectionX = 1.0f;
+            var scaleCorrectionY = 1.0f;
 
             if (ignoreScale)
             {
-                scaleCorrection = 1.0f / view.GetScale();
+                scaleCorrectionX = 1.0f / view.GetScaleX();
+                scaleCorrectionY = 1.0f / view.GetScaleY();
             }
+
+           // var scaledHeight = Height * scaleCorrectionY;
+            //caretPosY = -scaledHeight;
 
             for (int i = 0; i < text.Length; i++)
             {
                 var ch = text[i];
                 var data = lookup[ch];
 
-                var width = data.Width * scaleCorrection;
+                var width = data.Width * scaleCorrectionX;
 
                 var spriteId = data.SpriteId;
 

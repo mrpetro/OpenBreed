@@ -2,6 +2,7 @@
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.OpenGL;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -45,33 +46,21 @@ namespace OpenBreed.Editor.UI.Wpf
 
             Start(mainSettings);
 
-            Render += GLWpfControlEx_Init;
-
             Unloaded += GLWpfControlEx_Unloaded;
-
-            Cursor = Cursors.None;
 
             DataContextChanged += GLWpfControlEx_DataContextChanged;
         }
 
-        private void GLWpfControlEx_Unloaded(object sender, RoutedEventArgs e)
-        {
-            renderContext.Deinitialize();
-        }
-
         private void GLWpfControlEx_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (e.OldValue is not null && e.NewValue is not null)
+            if (e.OldValue is IRenderViewVM oldVm)
             {
-                MouseWheel -= GLWpfControlEx_MouseWheel;
-                MouseUp -= GLWpfControlEx_MouseUp;
-                MouseLeave -= GLWpfControlEx_MouseLeave; ;
-                MouseEnter -= GLWpfControlEx_MouseEnter;
-                MouseDown -= GLWpfControlEx_MouseDown;
-                MouseMove -= GLWpfControlEx_MouseMove;
-                SizeChanged -= GLWpfControlEx_SizeChanged;
-                Render -= GLWpfControlEx_Render;
-                Render += GLWpfControlEx_Init;
+                oldVm.Deactivate();
+            }
+
+            if (e.NewValue is IRenderViewVM newVm)
+            {
+                newVm.Activate();
             }
         }
 
@@ -83,34 +72,49 @@ namespace OpenBreed.Editor.UI.Wpf
         public LoadContextHandler InitFunc
         {
             get { return (LoadContextHandler)GetValue(InitFuncProperty); }
-            set {
+            set
+            {
                 SetValue(InitFuncProperty, value);
             }
         }
 
         #endregion Public Properties
 
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            if (e.Property == InitFuncProperty)
+            {
+                if (InitFunc != null)
+                {
+                    Render += GLWpfControlEx_Init;
+                }
+            }
+
+            base.OnPropertyChanged(e);
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
 
-        private void GLWpfControlEx_Init(TimeSpan obj)
+        private void GLWpfControlEx_Unloaded(object sender, RoutedEventArgs e)
         {
+            renderContext.Deinitialize();
+        }
 
-            if (Context is null)
-            {
-                return;
-            }
-
-            if (InitFunc is null)
-            {
-                return;
-            }
-
+        private void InitRenderContext()
+        {
             InitFunc.Invoke(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> renderContextInitializer);
 
-            if (renderContext is null)
+            if (renderContext is not null)
             {
-                renderContext = renderContextProvider.GetContext(Context, GetRenderContextPosition);
+                renderContextInitializer.Invoke(renderContext);
+                return;
             }
+
+            renderContext = renderContextProvider.GetContext(Context, GetRenderContextPosition);
 
             renderContextInitializer.Invoke(renderContext);
 
@@ -118,7 +122,6 @@ namespace OpenBreed.Editor.UI.Wpf
 
             renderContext.Initialize();
 
-            Render -= GLWpfControlEx_Init;
             Render += GLWpfControlEx_Render;
             SizeChanged += GLWpfControlEx_SizeChanged;
             MouseMove += GLWpfControlEx_MouseMove;
@@ -168,6 +171,13 @@ namespace OpenBreed.Editor.UI.Wpf
         private void GLWpfControlEx_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             renderContext.Resize((int)e.NewSize.Width, (int)e.NewSize.Height);
+        }
+
+        private void GLWpfControlEx_Init(TimeSpan delta)
+        {
+            InitRenderContext();
+
+            Render -= GLWpfControlEx_Init;
         }
 
         private void GLWpfControlEx_Render(TimeSpan delta)

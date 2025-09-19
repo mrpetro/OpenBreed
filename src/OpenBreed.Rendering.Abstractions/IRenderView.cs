@@ -1,16 +1,11 @@
-﻿using OpenBreed.Common.Interface.Drawing;
-using OpenBreed.Rendering.Abstractions.Factories;
+﻿using OpenBreed.Rendering.Abstractions.Factories;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.Abstractions
 {
-    public delegate void LoadContextHandler(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> renderContextInitializer);
+    public delegate void LoadContextHandler(
+        out IRenderContextProvider renderContextProvider, out Action<IRenderContext> renderContextInitializer);
 
     public delegate Vector2i HostCoordinateSystemConverter(Vector2i point);
 
@@ -93,6 +88,18 @@ namespace OpenBreed.Rendering.Abstractions
         #endregion Public Properties
 
         #region Public Methods
+
+        /// <summary>
+        /// Add this render view to render context pipeline.
+        /// </summary>
+        /// <returns>True if view has been activated, false if view was already activated.</returns>
+        bool Activate();
+
+        /// <summary>
+        /// Remove this render view to render context pipeline.
+        /// </summary>
+        /// <returns>True if view has been deactivated, false if view was already deactivated.</returns>
+        bool Deactivate();
 
         IRenderLayer CreateLayer(ViewRenderHandler renderHandler);
 

@@ -180,8 +180,9 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
             if (ignoreScale)
             {
-                var scale = view.GetScale();
-                model = Matrix4.CreateScale(1 / scale, 1 / scale, 1.0f) * model;
+                var scaleX = view.GetScaleX();
+                var scaleY = view.GetScaleY();
+                model = Matrix4.CreateScale(1 / scaleX, 1 / scaleY, 1.0f) * model;
             }
 
             switch (type)

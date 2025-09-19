@@ -35,6 +35,8 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Properties
 
+        public IReadOnlyCollection<string> AnimatorNames => namesToIds.Keys;
+
         #endregion Public Properties
 
         #region Public Methods

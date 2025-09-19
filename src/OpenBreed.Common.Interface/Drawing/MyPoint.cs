@@ -61,11 +61,18 @@ namespace OpenBreed.Common.Interface.Drawing
         #region Public Fields
 
         public float X;
+
         public float Y;
 
         #endregion Public Fields
 
         #region Public Constructors
+
+        static MyPointF()
+        {
+            Min = new MyPointF(float.MinValue, float.MinValue);
+            Max = new MyPointF(float.MaxValue, float.MaxValue);
+        }
 
         public MyPointF(float x, float y)
         {
@@ -74,6 +81,13 @@ namespace OpenBreed.Common.Interface.Drawing
         }
 
         #endregion Public Constructors
+
+        #region Public Properties
+
+        public static MyPointF Min { get; }
+        public static MyPointF Max { get; }
+
+        #endregion Public Properties
 
         #region Public Methods
 

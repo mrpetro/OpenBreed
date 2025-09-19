@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
@@ -31,15 +32,19 @@ using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM.Animations
 {
-    public class AnimationEditorVM : EntrySpecificEditorVM<IDbAnimation>, IClipEditorModel
+    public class AnimationEditorVM : EntrySpecificEditorVM<IDbAnimation>
     {
         #region Private Fields
 
         private ClipTrackItemVM selectedTrack;
 
-        private ClipTrackPropertiesEditorVM trackPropertiesEditor;
+        private float clipLength;
+        private bool isSetClipLengthVisible;
+        private bool isAddTrackModeEnabled;
         private readonly IServiceProvider serviceProvider;
+        private readonly IFrameUpdaterMan<IEntity> frameUpdaterMan;
         private readonly IAnimationSandbox animationSandbox;
+        private readonly IAnimationEditorModel model;
 
         public AnimationCurvesEditorVM CurvesEditor { get; }
         public AnimationPreviewVM Preview { get; }
@@ -51,44 +56,53 @@ namespace OpenBreed.Editor.VM.Animations
 
         public AnimationEditorVM(
             IDbAnimation dbEntry,
+
             ILogger logger,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             IServiceProvider serviceProvider,
+            IFrameUpdaterMan<IEntity> frameUpdaterMan,
             IAnimationSandboxFactory animationSandboxFactory) : base(dbEntry, logger, workspaceMan, dialogProvider)
         {
             this.serviceProvider = serviceProvider;
+            this.frameUpdaterMan = frameUpdaterMan;
             this.animationSandbox = animationSandboxFactory.Create();
 
-            this.Preview = ActivatorUtilities.CreateInstance<AnimationPreviewVM>(serviceProvider, animationSandbox);
-            this.CurvesEditor = ActivatorUtilities.CreateInstance<AnimationCurvesEditorVM>(serviceProvider, animationSandbox);
-            this.Player = ActivatorUtilities.CreateInstance<AnimationPlayerVM>(serviceProvider, animationSandbox); ;
+            this.model = ActivatorUtilities.CreateInstance<AnimationEditorModel>(serviceProvider, dbEntry);
+            this.Preview = ActivatorUtilities.CreateInstance<AnimationPreviewVM>(serviceProvider, animationSandbox, model);
+            this.CurvesEditor = ActivatorUtilities.CreateInstance<AnimationCurvesEditorVM>(serviceProvider, animationSandbox, model);
+            this.Player = ActivatorUtilities.CreateInstance<AnimationPlayerVM>(serviceProvider, animationSandbox);
+            ComponentSelector = new AnimationComponentSelectorVM(frameUpdaterMan, OnAnimationSelectorConfirm, OnAnimationSelectorCancel);
 
-            RestoreTracks();
-
-            Preview.View(Entry);
+            Restore();
 
             AddNewTrackCommand = new Command(() => AddNewTrack());
-            CopyTrackCommand = new Command(() => CopyTrack(SelectedTrack.Source));
+            SetClipLengthCommand = new Command(() => SetClipLength());
             RemoveTrackCommand = new Command(() => RemoveTrack(SelectedTrack.Source));
 
-
+            IsAddTrackModeEnabled = true;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ClipTrackPropertiesEditorVM TrackPropertiesEditor
-        {
-            get { return trackPropertiesEditor; }
-            set { SetProperty(ref trackPropertiesEditor, value); }
-        }
-
         public float ClipLength
         {
-            get { return Entry.Length; }
-            set { SetProperty(Entry, x => x.Length, value); }
+            get { return clipLength; }
+            set { SetProperty(ref clipLength, value); }
+        }
+
+        public bool IsAddTrackModeEnabled
+        {
+            get { return isAddTrackModeEnabled; }
+            set { SetProperty(ref isAddTrackModeEnabled, value); }
+        }
+
+        public bool IsSetClipLengthVisible
+        {
+            get { return isSetClipLengthVisible; }
+            set { SetProperty(ref isSetClipLengthVisible, value); }
         }
 
         public ClipTrackItemVM SelectedTrack
@@ -97,38 +111,34 @@ namespace OpenBreed.Editor.VM.Animations
             set { SetProperty(ref selectedTrack, value); }
         }
 
-        public IReadOnlyCollection<IDbAnimationTrack> Tracks => Entry.Tracks;
-
         public ObservableCollection<ClipTrackItemVM> TrackItems { get; } = new ObservableCollection<ClipTrackItemVM>();
+
+        public AnimationComponentSelectorVM ComponentSelector { get; }
 
         public override string EditorName => "Animation editor";
 
         public ICommand AddNewTrackCommand { get; }
-
-        public ICommand CopyTrackCommand { get; }
-
+        public ICommand SetClipLengthCommand { get; }
         public ICommand RemoveTrackCommand { get; }
-
-        public IDbAnimationTrack Track => SelectedTrack?.Source;
 
         #endregion Public Properties
 
         #region Protected Methods
 
-
-
         internal void EditTrack(IDbAnimationTrack dbTrack)
         {
-            TrackPropertiesEditor = ActivatorUtilities.CreateInstance<ClipTrackPropertiesEditorVM>(serviceProvider,
-                                                                                                   dbTrack,
-                                                                                                   OnTrackPropertyChanged);
-
+            model.Edit(dbTrack);
             CurvesEditor.Edit(dbTrack);
         }
 
         private void OnTrackPropertyChanged(string propertyName)
         {
             SelectedTrack?.Refresh();
+        }
+
+        private void OnClipLengthChanging()
+        {
+            IsSetClipLengthVisible = ClipLength != model.ClipLength;
         }
 
         protected override void OnPropertyChanged(string name)
@@ -139,7 +149,9 @@ namespace OpenBreed.Editor.VM.Animations
 
                     EditTrack(SelectedTrack?.Source);
                     break;
-
+                case nameof(ClipLength):
+                    OnClipLengthChanging();
+                    break;
                 default:
                     break;
             }
@@ -151,15 +163,30 @@ namespace OpenBreed.Editor.VM.Animations
 
         #region Private Methods
 
-        private void AddNewTrack()
+        private void OnAnimationSelectorCancel()
         {
-            var track = Entry.AddNewTrack<int>();
-            TrackItems.Add(new ClipTrackItemVM(track));
+            IsAddTrackModeEnabled = true;
         }
 
-        private void CopyTrack(IDbAnimationTrack source)
+        private void OnAnimationSelectorConfirm(string animatorName)
         {
-            throw new NotImplementedException();
+            var track = Entry.AddNewTrack<int>(animatorName);
+            TrackItems.Add(new ClipTrackItemVM(track));
+
+            IsAddTrackModeEnabled = true;
+        }
+
+        private void AddNewTrack()
+        {
+            IsAddTrackModeEnabled = false;
+
+            ComponentSelector.Start(TrackItems.Select(item => item.Source.Controller));
+        }
+
+        private void SetClipLength()
+        {
+            model.ClipLength = ClipLength;
+            OnClipLengthChanging();
         }
 
         private void RemoveTrack(IDbAnimationTrack source)
@@ -169,8 +196,10 @@ namespace OpenBreed.Editor.VM.Animations
             TrackItems.Remove(trackVm);
         }
 
-        private void RestoreTracks()
+        private void Restore()
         {
+            ClipLength = model.ClipLength;
+
             TrackItems.Clear();
 
             foreach (var item in Entry.Tracks)

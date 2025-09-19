@@ -1,7 +1,9 @@
-﻿using OpenBreed.Common.Interface.Drawing;
+﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Mvc;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.TileStamps;
+using OpenBreed.Wecs.Entities;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -11,15 +13,23 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.UI.Mvc.Models
 {
-    public interface IClipEditorModel : IEditorModel
+    public interface IAnimationEditorModel : IEditorModel
     {
         #region Public Properties
 
-        float ClipLength { get; }
+        float ClipLength { get; set; }
 
         IReadOnlyCollection<IDbAnimationTrack> Tracks { get; }
 
-        IDbAnimationTrack Track { get; }
+        IDbAnimationTrack EditedTrack { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        void Edit(IDbAnimationTrack dbTrack);
+
+        IReadOnlyClip<IEntity> Load(bool reload = false);
 
         #endregion Public Methods
     }

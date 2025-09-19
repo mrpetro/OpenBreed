@@ -21,7 +21,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         #region Private Fields
 
         private const int cellSize = 16;
-        private readonly EditorView view;
+        private readonly TileStampEditorView view;
         private readonly ITileStampEditorModel model;
         private readonly IPaletteMan paletteMan;
         private readonly PalettesDataProvider palettesDataProvider;
@@ -37,22 +37,22 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         public TileStampEditorController(
             IEventsMan eventsMan,
-            EditorView view,
-            ITileStampEditorModel model,
             IPaletteMan paletteMan,
             PalettesDataProvider palettesDataProvider,
             ITileMan tileMan,
             ITileStampDataLoader tileStampDataLoader,
-            ITileAtlasDataLoader tileAtlasDataLoader
+            ITileAtlasDataLoader tileAtlasDataLoader,
+            TileStampEditorView view,
+            ITileStampEditorModel model
             )
         {
-            this.view = view;
-            this.model = model;
             this.paletteMan = paletteMan;
             this.palettesDataProvider = palettesDataProvider;
             this.tileMan = tileMan;
             this.tileStampDataLoader = tileStampDataLoader;
             this.tileAtlasDataLoader = tileAtlasDataLoader;
+            this.view = view;
+            this.model = model;
 
             view.Rendering += OnRender;
             view.CursorDown += OnCursorDown;

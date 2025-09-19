@@ -23,7 +23,6 @@
               Grid.ColumnSpan="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
         <GroupBox Header="Tracks" Grid.Row="0" >
             <Grid>
@@ -31,33 +30,31 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0"
-              Margin="4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0"
+                <StackPanel Grid.Row="0">
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
                     Style="{StaticResource AddButtonStyle}"
                     ToolTip="Adds new track."
+                    IsEnabled="{Binding IsAddTrackModeEnabled}"
                     Command="{Binding AddNewTrackCommand}">
-                        <Image/>
-                    </Button>
-                    <Button Grid.Column="1"
-                    Style="{StaticResource CopyButtonStyle}"
-                    ToolTip="Copies current track to new one."
-                    Command="{Binding CopyTrackCommand}">
-                        <Image/>
-                    </Button>
-                    <Button Grid.Column="3"
+                            <Image/>
+                        </Button>
+                        <Button Grid.Column="3"
+                    IsEnabled="{Binding IsAddTrackModeEnabled}"       
                     Style="{StaticResource RemoveButtonStyle}"
                     ToolTip="Removes selected track."
                     Command="{Binding RemoveTrackCommand}">
-                        <Image/>
-                    </Button>
-                </Grid>
+                            <Image/>
+                        </Button>
+                    </Grid>
+                    <local:AnimationComponentSelectorCtrl DataContext="{Binding ComponentSelector}" Visibility="{Binding IsVisible, Converter={StaticResource VisibleIfTrueConverter}}" />
+                </StackPanel>
                 <ListView Grid.Row="1"
                         ItemsSource="{Binding TrackItems}"
                         SelectedItem="{Binding SelectedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -73,9 +70,6 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-        </GroupBox>
-        <GroupBox Header="Track properties" Grid.Row="1" >
-            <local:ClipTrackPropertiesEditorCtrl DataContext="{Binding TrackPropertiesEditor}"/>
         </GroupBox>
     </Grid>
 </UserControl>

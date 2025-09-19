@@ -43,8 +43,9 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
                 if (ignoreScale)
                 {
-                    var viewScale = view.GetScale();
-                    model = Matrix4.CreateScale(1 / viewScale, 1 / viewScale, 1.0f) * model;
+                    var viewScaleX = view.GetScaleX();
+                    var viewScaleY = view.GetScaleY();
+                    model = Matrix4.CreateScale(1 / viewScaleX, 1 / viewScaleY, 1.0f) * model;
                 }
 
                 view.Context.Primitives.SetTextureShader(

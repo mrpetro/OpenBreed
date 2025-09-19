@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Animation.Interface.Data;
+using OpenBreed.Common.Interface;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc;
@@ -9,21 +11,24 @@ using OpenBreed.Editor.VM.Base;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
+using OpenBreed.Wecs.Entities;
 using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Editor.VM.Animations
 {
-    public class AnimationCurvesEditorVM : BaseViewModel, IClipEditorModel
+    public class AnimationCurvesEditorVM : BaseViewModel, IRenderViewVM
     {
         #region Private Fields
 
         private readonly IServiceProvider serviceProvider;
-        private readonly EditorView editorView;
+        private readonly AnimationCurvesEditorView view;
         private readonly IAnimationSandbox animationSandbox;
+        private readonly IAnimationEditorModel model;
         private readonly IServiceScopeFactory serviceScopeFactory;
         private readonly AnimationCurvesEditorController controller;
+        private IRenderView renderView;
 
         #endregion Private Fields
 
@@ -31,20 +36,16 @@ namespace OpenBreed.Editor.VM.Animations
 
         public AnimationCurvesEditorVM(
             IServiceProvider serviceProvider,
-            EditorView editorView,
             IAnimationSandbox animationSandbox,
-            IServiceScopeFactory serviceScopeFactory)
+            IServiceScopeFactory serviceScopeFactory,
+            IAnimationEditorModel model)
         {
             this.serviceProvider = serviceProvider;
-            this.editorView = editorView;
             this.animationSandbox = animationSandbox;
             this.serviceScopeFactory = serviceScopeFactory;
-            this.controller = ActivatorUtilities.CreateInstance<AnimationCurvesEditorController>(serviceProvider, editorView, this);
-
-            //eventsMan.Subscribe<RenderContextInitializedEvent>((rc) =>
-            //{
-            //    controller.Reset();
-            //});
+            this.model = model;
+            this.view = ActivatorUtilities.CreateInstance<AnimationCurvesEditorView>(serviceProvider, model, animationSandbox);
+            this.controller = ActivatorUtilities.CreateInstance<AnimationCurvesEditorController>(serviceProvider, view, model);
         }
 
         #endregion Public Constructors
@@ -53,10 +54,18 @@ namespace OpenBreed.Editor.VM.Animations
 
         public LoadContextHandler InitFunc => OnInitialize;
 
-        public IDbAnimationTrack Track { get; private set; }
-        public float ClipLength { get; private set; }
+        public float ClipLength => model.ClipLength;
+        public IReadOnlyCollection<IDbAnimationTrack> Tracks => model.Tracks;
 
-        public IReadOnlyCollection<IDbAnimationTrack> Tracks => throw new NotImplementedException();
+        public void Activate()
+        {
+            renderView?.Activate();
+        }
+
+        public void Deactivate()
+        {
+            renderView?.Deactivate();
+        }
 
         #endregion Public Properties
 
@@ -64,9 +73,7 @@ namespace OpenBreed.Editor.VM.Animations
 
         public void Edit(IDbAnimationTrack dbTrack)
         {
-            Track = dbTrack;
-
-            controller?.Reset();
+            controller.Reset();
         }
 
         #endregion Public Methods
@@ -79,7 +86,12 @@ namespace OpenBreed.Editor.VM.Animations
 
             contextInitializer = (context) =>
             {
-                editorView.RenderContext = context;
+                if (renderView is null)
+                {
+                    renderView = context.CreateView(activate: true);
+
+                    view.RenderView = renderView;
+                }
             };
         }
 

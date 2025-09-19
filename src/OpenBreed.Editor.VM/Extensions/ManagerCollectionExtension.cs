@@ -113,8 +113,6 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<AnimationCurvesEditorVM>();
                 services.AddTransient<AnimationPreviewVM>();
                 services.AddTransient<AnimationPlayerVM>();
-
-                services.AddTransient<ClipTrackPropertiesEditorVM>();
                 services.AddTransient<AbtaPasswordGeneratorVM>();
             });
         }

@@ -12,7 +12,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../CommonResources.xaml"/>
                 <ResourceDictionary>
-                    <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

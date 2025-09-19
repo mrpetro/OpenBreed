@@ -1,17 +1,19 @@
-﻿using System;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Interface.Mvc;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Animations;
+using OpenBreed.Database.Xml.Items.DataSources;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using System.ComponentModel;
-using OpenBreed.Common;
-using OpenBreed.Database.Interface.Items;
-using OpenBreed.Database.Interface.Items.Animations;
-using System.Collections.ObjectModel;
-using OpenBreed.Database.Interface;
-using System.Drawing;
-using OpenBreed.Database.Xml.Items.DataSources;
+using static System.Net.WebRequestMethods;
 
 namespace OpenBreed.Database.Xml.Items.Animations
 {
@@ -45,7 +47,7 @@ namespace OpenBreed.Database.Xml.Items.Animations
         [XmlArrayItem(ElementName = "IntTrack", Type = typeof(XmlDbAnimationTrack<int>))]
         [XmlArrayItem(ElementName = "FloatTrack", Type = typeof(XmlDbAnimationTrack<float>))]
         [XmlArrayItem(ElementName = "StringTrack", Type = typeof(XmlDbAnimationTrack<string>))]
-        public List<XmlDbAnimationTrack> XmlTracks { get; set; }
+        public List<XmlDbAnimationTrack> XmlTracks { get; set; } = new List<XmlDbAnimationTrack>();
 
         [XmlIgnore]
         public ReadOnlyCollection<IDbAnimationTrack> Tracks
@@ -60,9 +62,12 @@ namespace OpenBreed.Database.Xml.Items.Animations
 
         #region Public Methods
 
-        public IDbAnimationTrack<TValue> AddNewTrack<TValue>()
+        public IDbAnimationTrack<TValue> AddNewTrack<TValue>(string controller)
         {
-            var newTrack = new XmlDbAnimationTrack<TValue>();
+            var newTrack = new XmlDbAnimationTrack<TValue>()
+            {
+                Controller = controller, 
+            };
             XmlTracks.Add(newTrack);
             return newTrack;
         }

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace OpenBreed.Editor.UI.Wpf.Animations
 {
     /// <summary>
-    /// Interaction logic for ClipTrackPropertiesEditorCtrl.xaml
+    /// Interaction logic for AnimationComponentSelectorCtrl.xaml
     /// </summary>
-    public partial class ClipTrackPropertiesEditorCtrl : UserControl
+    public partial class AnimationComponentSelectorCtrl : UserControl
     {
-        public ClipTrackPropertiesEditorCtrl()
+        public AnimationComponentSelectorCtrl()
         {
             InitializeComponent();
         }

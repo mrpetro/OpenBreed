@@ -25,6 +25,7 @@ using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using System;
@@ -45,12 +46,13 @@ namespace OpenBreed.Editor.VM.TileStamps
 
         private readonly TileAtlasDataProvider tileSetsDataProvider;
         private readonly PalettesDataProvider palettesDataProvider;
-        private readonly EditorView view;
+        private readonly TileStampEditorView view;
         private readonly IRenderViewFactory renderViewFactory;
         private readonly IRenderContextProvider renderContextProvider;
         private readonly IServiceScopeFactory serviceScopeFactory;
         private string currentPaletteRef = null;
         private TileStampEditorController renderViewController;
+        private IRenderView renderView;
 
         #endregion Private Fields
 
@@ -64,7 +66,7 @@ namespace OpenBreed.Editor.VM.TileStamps
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
             TilesSelectorVM tilesSelectorVm,
-            EditorView view,
+            TileStampEditorView view,
             IRenderViewFactory renderViewFactory,
             IRenderContextProvider renderContextProvider,
             IServiceScopeFactory serviceScopeFactory) : base(dbEntry, logger, workspaceMan, dialogProvider)
@@ -233,32 +235,33 @@ namespace OpenBreed.Editor.VM.TileStamps
             return new Box2i(0, 0, Entry.Width - 1, Entry.Height - 1);
         }
 
-        private void OnModelModified()
-        {
-        }
-
         private void OnInitialize(out IRenderContextProvider renderContextProvider, out Action<IRenderContext> contextInitializer)
         {
             renderContextProvider = this.renderContextProvider;
 
             contextInitializer = (context) =>
             {
-                var eventsMan = context.ServiceProvider.GetRequiredService<IEventsMan>();
-                var tileStampDataLoader = context.ServiceProvider.GetRequiredService<ITileStampDataLoader>();
-
-                renderViewController = ActivatorUtilities.CreateInstance<TileStampEditorController>(context.ServiceProvider, view, this);
-
-                view.RenderContext = context;
-
-                if (Entry is not null)
+                if (renderView is null)
                 {
-                    tileStampDataLoader.Load(Entry);
+                    renderView = context.CreateView();
 
-                    eventsMan.Subscribe<RenderContextInitializedEvent>((rc) =>
+                    view.RenderView = renderView;
+
+                    var eventsMan = context.ServiceProvider.GetRequiredService<IEventsMan>();
+                    var tileStampDataLoader = context.ServiceProvider.GetRequiredService<ITileStampDataLoader>();
+
+                    renderViewController = ActivatorUtilities.CreateInstance<TileStampEditorController>(context.ServiceProvider, view, this);
+
+                    if (Entry is not null)
                     {
-                        renderViewController.Reset();
-                        renderViewController.CurrentTileAtlasId = TilesSelector.CurrentTileSetId;
-                    });
+                        tileStampDataLoader.Load(Entry);
+
+                        eventsMan.Subscribe<RenderContextInitializedEvent>((rc) =>
+                        {
+                            renderViewController.Reset();
+                            renderViewController.CurrentTileAtlasId = TilesSelector.CurrentTileSetId;
+                        });
+                    }
                 }
             };
         }

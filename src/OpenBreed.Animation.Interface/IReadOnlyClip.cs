@@ -25,11 +25,29 @@ namespace OpenBreed.Animation.Interface
     /// <summary>
     /// Animation clip which represents collection of tracks
     /// </summary>
-    public interface IClip<TObject>
+    public interface IClip<TObject> : IReadOnlyClip<TObject>
     {
         #region Public Properties
 
-        int Id { get; }
+        new float Length { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        ITrack<TObject, TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TObject, TValue> frameUpdater, TValue initialValue);
+
+        #endregion Public Methods
+    }
+
+    /// <summary>
+    /// Readonly Animation clip which represents collection of tracks
+    /// </summary>
+    public interface IReadOnlyClip<TObject>
+    {
+        #region Public Properties
+
+        int Id { get; set; }
         string Name { get; }
         float Length { get; }
 
@@ -38,8 +56,6 @@ namespace OpenBreed.Animation.Interface
         #region Public Methods
 
         bool UpdateWithNextFrame(TObject obj, float time);
-         
-        ITrack<TObject, TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TObject, TValue> frameUpdater, TValue initialValue);
 
         #endregion Public Methods
     }
