@@ -261,8 +261,11 @@ namespace OpenBreed.Editor.UI.Mvc
                 animationWorld.AddEntity(e);
             });
 
-            var clip = clipMan.GetByName(clipName);
-            animationSampleEntity.PlayAnimation(animatorId: 0, clip.Id, startPosition: 0);
+
+            if (clipMan.TryGetId(clipName, out int clipId))
+            {
+                animationSampleEntity.PlayAnimation(animatorId: 0, clipId, startPosition: 0);
+            }
         }
 
         #endregion Private Methods

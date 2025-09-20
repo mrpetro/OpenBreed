@@ -8,7 +8,7 @@ local function OnInit(entity)
 
     local entityMetadata = entity:GetMetadata()
     local clipName = "Vanilla/Common/Explosion/" .. entityMetadata.Flavor
-    local clipId = Clips:GetByName(clipName).Id
+    local clipId = Clips:GetId(clipName)
 
     entity:SetSpriteOn()
 

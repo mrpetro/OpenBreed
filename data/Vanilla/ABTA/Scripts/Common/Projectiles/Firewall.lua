@@ -29,7 +29,7 @@ end
 local function OnInit(entity)
 
     local clipName = "Vanilla/Common/Explosion/Small"
-    local animId = Clips:GetByName(clipName).Id
+    local animId = Clips:GetId(clipName)
     entity:PlayAnimation(0, animId)
 
 end

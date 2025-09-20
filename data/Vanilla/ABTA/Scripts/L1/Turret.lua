@@ -70,8 +70,8 @@ local function OnDirectionChanged(entity, args)
 		entity:EmitSound(soundId)
 		
 	    local animName = "Vanilla/L1/Turret/Tracking/" .. tostring(degree)	
-		local clip = Clips:GetByName(animName)
-		entity:PlayAnimation(0, clip.Id)
+		local clipId = Clips:GetId(animName)
+		entity:PlayAnimation(0, clipId)
 		
 		previousDegree = degree	
     end

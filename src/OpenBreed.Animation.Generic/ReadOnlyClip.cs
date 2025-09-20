@@ -23,18 +23,10 @@ namespace OpenBreed.Animation.Generic
             tracks = builder.Tracks.Select(b => b.Build()).ToList();
         }
 
-        internal ReadOnlyClip(int id, string name, float length)
-        {
-            Id = id;
-            Name = name;
-            Length = length;
-        }
-
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public int Id { get; set; }
         public string Name { get; }
         public float Length { get; }
 
@@ -52,7 +44,7 @@ namespace OpenBreed.Animation.Generic
 
         public override string ToString()
         {
-            return $"{Name} ({Id})";
+            return $"Clip ({Name})";
         }
 
         #endregion Public Methods

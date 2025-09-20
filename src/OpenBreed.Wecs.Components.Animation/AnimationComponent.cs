@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Interface.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface;
 using OpenBreed.Wecs.Entities;
@@ -161,7 +162,7 @@ namespace OpenBreed.Wecs.Components.Animation
 
         public AnimationStateBuilder SetClipByName(string clipName)
         {
-            ClipId = clipMan.GetByName(clipName).Id;
+            ClipId = clipMan.GetId(clipName);
             return this;
         }
 

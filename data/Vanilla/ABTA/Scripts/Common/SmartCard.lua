@@ -9,8 +9,8 @@
     local hudCameraEntity = Entities:GetHudCamera()
     local hudViewportEntity = Entities:GetHudViewport()
     local gameViewportEntity = Entities:GetGameViewport()
-    local cameraFadeOutClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeOut").Id
-    local cameraFadeInClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeIn").Id
+    local cameraFadeOutClipId = Clips:GetId("Vanilla/Common/Camera/Effects/FadeOut")
+    local cameraFadeInClipId = Clips:GetId("Vanilla/Common/Camera/Effects/FadeIn")
     local smartCardMetadata = smartCardEntity:GetMetadata()
     local textId = gameWorld.Name .. "/" .. smartCardMetadata.Name .. "/" .. tostring(smartCardMetadata.Option)
     Logging:Info("Text Id: " .. textId)

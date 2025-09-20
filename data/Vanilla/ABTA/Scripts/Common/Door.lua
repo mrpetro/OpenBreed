@@ -66,7 +66,7 @@ local function Open(doorEntity, actorEntity, projection)
         local stampName = metaData.Level .. "/" .. metaData.Name .. "/" .. flavor .. "/Opened"
         local soundName = "Vanilla/Common/" .. metaData.Name .. "/Opening"
 
-        local clipId = Clips:GetByName(clipName).Id
+        local clipId = Clips:GetId(clipName)
         local stampId = Stamps:GetByName(stampName).Id
         local soundId = Sounds:GetByName(soundName)
 

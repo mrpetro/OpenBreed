@@ -3,6 +3,7 @@ using OpenBreed.Animation.Generic.Builders;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Builders;
 using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Common.Tools.Collections;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -24,8 +25,8 @@ namespace OpenBreed.Animation.Generic
 
         #region Private Fields
 
-        private readonly List<IReadOnlyClip<TObject>> clips = new List<IReadOnlyClip<TObject>>();
-        private readonly Dictionary<string, IReadOnlyClip<TObject>> names = new Dictionary<string, IReadOnlyClip<TObject>>();
+        private readonly IdMap<IReadOnlyClip<TObject>> clips = new IdMap<IReadOnlyClip<TObject>>();
+        private readonly Dictionary<string, int> namesToIdsLookup = new Dictionary<string, int>();
 
         #endregion Private Fields
 
@@ -38,7 +39,8 @@ namespace OpenBreed.Animation.Generic
             this.logger = logger;
 
             var clipBuilder = NewClip("Animations/Missing", 1.0f);
-            this.missingClip = clipBuilder.Build();
+            missingClip = clipBuilder.Build();
+            Register(missingClip);
         }
 
         #endregion Public Constructors
@@ -65,9 +67,37 @@ namespace OpenBreed.Animation.Generic
             return missingClip;
         }
 
+        /// <summary>
+        /// Get animation clip ID by it's name
+        /// </summary>
+        /// <param name="name">Name of clip to find</param>
+        /// <returns>Clip ID</returns>
+        /// Throws when not found
+        public int GetId(string clipName)
+        {
+            if (!TryGetId(clipName, out int foundId))
+            {
+                throw new InvalidOperationException($"Clip with name '{clipName}' is not found.");
+            }
+
+            return foundId;
+        }
+
+        public bool TryGetId(string name, out int clipId)
+        {
+            return namesToIdsLookup.TryGetValue(name, out clipId);
+        }
+
         public bool TryGetByName(string name, out IReadOnlyClip<TObject> clip)
         {
-            return names.TryGetValue(name, out clip);
+            if (!TryGetId(name, out int id))
+            {
+                clip = null;
+                return false;
+            }
+
+            clip = clips[id];
+            return true;
         }
 
         public IReadOnlyClipBuilder<TObject> NewClip(string name, float length)
@@ -81,12 +111,13 @@ namespace OpenBreed.Animation.Generic
 
         public bool Register(IReadOnlyClip<TObject> clip)
         {
-            if (!names.TryAdd(clip.Name, clip))
+            var newId = clips.NewId();
+
+            if (!namesToIdsLookup.TryAdd(clip.Name, newId))
             {
                 return false;
             }
 
-            clip.Id = clips.Count;
             clips.Add(clip);
             return true;
         }

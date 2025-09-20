@@ -182,9 +182,9 @@ local function OnDirectionChanged(entity, args)
         movementStateName = "Standing"
     end
         
-    local clip = Clips:GetByName("Vanilla/Common/Actor/" .. movementStateName .. "/" .. animDirName)
+    local clipId = Clips:GetId("Vanilla/Common/Actor/" .. movementStateName .. "/" .. animDirName)
 
-    entity:PlayAnimation(0, clip.Id)
+    entity:PlayAnimation(0, clipId)
 end
 
 local function OnVelocityChanged(entity, args)
@@ -199,12 +199,12 @@ local function OnVelocityChanged(entity, args)
     if(isMoving)
     then
         movementStateName = "Walking"
-        local clip = Clips:GetByName("Vanilla/Common/Actor/" .. movementStateName .. "/" .. animDirName)
-        entity:PlayAnimation(0, clip.Id)
+        local clipId = Clips:GetId("Vanilla/Common/Actor/" .. movementStateName .. "/" .. animDirName)
+        entity:PlayAnimation(0, clipId)
     else
         movementStateName = "Standing"
 
-        local clip = Clips:GetByName("Vanilla/Common/Actor/" .. movementStateName .. "/" .. animDirName)
+        local clipId = Clips:GetId("Vanilla/Common/Actor/" .. movementStateName .. "/" .. animDirName)
 
         entity:StopAnimation(0)
     end

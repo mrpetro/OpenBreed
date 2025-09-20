@@ -47,7 +47,6 @@ namespace OpenBreed.Animation.Interface
     {
         #region Public Properties
 
-        int Id { get; set; }
         string Name { get; }
         float Length { get; }
 

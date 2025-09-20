@@ -10,11 +10,11 @@
     local hudCameraEntity = Entities:GetHudCamera()
     local hudViewportEntity = Entities:GetHudViewport()
     local gameViewportEntity = Entities:GetGameViewport()
-    local backgroundDarkenClipId = Clips:GetByName("Vanilla/Common/Picture/Effects/Darken").Id
-    local textFadeInClipId = Clips:GetByName("Vanilla/Common/Text/Effects/FadeIn").Id
-    local textFadeOutClipId = Clips:GetByName("Vanilla/Common/Text/Effects/FadeOut").Id
-    local cameraFadeOutClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeOut").Id
-    local cameraFadeInClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeIn").Id
+    local backgroundDarkenClipId = Clips:GetId("Vanilla/Common/Picture/Effects/Darken")
+    local textFadeInClipId = Clips:GetId("Vanilla/Common/Text/Effects/FadeIn")
+    local textFadeOutClipId = Clips:GetId("Vanilla/Common/Text/Effects/FadeOut")
+    local cameraFadeOutClipId = Clips:GetId("Vanilla/Common/Camera/Effects/FadeOut")
+    local cameraFadeInClipId = Clips:GetId("Vanilla/Common/Camera/Effects/FadeIn")
     local missionMetadata = missionEntity:GetMetadata()
     local textId = gameWorld.Name .. "/" .. missionMetadata.Name
     Logging:Info("Text Id: " .. textId)

@@ -23,7 +23,7 @@ local function Hit(projectileEntity, targetEntity, projection)
 
     local animName = "Vanilla/Common/Projectile/RefractionLazer/High/" .. tostring(degree)
 
-    local animId = Clips:GetByName(animName).Id
+    local animId = Clips:GetId(animName)
     projectileEntity:PlayAnimation(0, animId)
 
      if(targetEntity:HasHealth())
@@ -54,7 +54,7 @@ local function OnInit(entity)
     local dir = entity:GetThrust():Normalized()
     local degree = MovementTools.SnapToCompass8Degree(dir.X, dir.Y)
     local animName = "Vanilla/Common/Projectile/RefractionLazer/High/" .. tostring(degree)
-    local animId = Clips:GetByName(animName).Id
+    local animId = Clips:GetId(animName)
     entity:PlayAnimation(0, animId)
 
     Triggers:OnLifetimeEnd(

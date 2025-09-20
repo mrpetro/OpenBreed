@@ -5,8 +5,8 @@
 
     local hudCameraEntity = Entities:GetHudCamera()
 
-    local cameraFadeOutClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeOut").Id
-    local cameraFadeInClipId = Clips:GetByName("Vanilla/Common/Camera/Effects/FadeIn").Id
+    local cameraFadeOutClipId = Clips:GetId("Vanilla/Common/Camera/Effects/FadeOut")
+    local cameraFadeInClipId = Clips:GetId("Vanilla/Common/Camera/Effects/FadeIn")
 
     --functions
     local PauseWorld

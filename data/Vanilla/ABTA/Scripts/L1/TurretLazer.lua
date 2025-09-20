@@ -41,7 +41,7 @@ local function OnInit(entity)
     local dir = entity:GetThrust():Normalized()
     local degree = MovementTools.SnapToCompass16Degree(dir.X, dir.Y)
     local animName = "Vanilla/L1/Projectile/TurretLazer/" .. tostring(degree)
-    local animId = Clips:GetByName(animName).Id
+    local animId = Clips:GetId(animName)
     entity:PlayAnimation(0, animId)
 
     Triggers:OnLifetimeEnd(

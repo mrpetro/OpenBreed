@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Interface.Builders;
+using System;
 
 namespace OpenBreed.Animation.Interface
 {
@@ -38,6 +39,22 @@ namespace OpenBreed.Animation.Interface
         /// <param name="name">Name of animation clip</param>
         /// <returns>Animation clip</returns>
         IReadOnlyClip<TObject> GetByName(string name);
+
+        /// <summary>
+        /// Get animation clip ID by it's name
+        /// </summary>
+        /// <param name="name">Name of clip to find</param>
+        /// <returns>Clip ID</returns>
+        /// Throws when not found
+        int GetId(string clipName);
+
+        /// <summary>
+        /// Try to get animation clip ID by it's name
+        /// </summary>
+        /// <param name="name">Name of clip to find</param>
+        /// <param name="clip">Clip ID</param>
+        /// <returns>True if clip was found, false otherwise.</returns>
+        bool TryGetId(string name, out int clipId);
 
         /// <summary>
         /// Try to get animation clip by it's name

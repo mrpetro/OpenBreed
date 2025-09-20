@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Interface.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Interface;
@@ -185,11 +186,10 @@ namespace OpenBreed.Sandbox.Entities
 
             var mapKey = $"Vanilla/{mapId}";
 
-            var cameraFadeOutClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_OUT).Id;
-            var cameraFadeInClipId = clipMan.GetByName(CameraHelper.CAMERA_FADE_IN).Id;
+            var cameraFadeOutClipId = clipMan.GetId(CameraHelper.CAMERA_FADE_OUT);
+            var cameraFadeInClipId = clipMan.GetId(CameraHelper.CAMERA_FADE_IN);
 
             var worldIdToRemoveFrom = actorEntity.WorldId;
-
 
             var actorWorld = worldMan.GetById(actorEntity.WorldId);
             var cameraWorld = worldMan.GetById(cameraEntity.WorldId);

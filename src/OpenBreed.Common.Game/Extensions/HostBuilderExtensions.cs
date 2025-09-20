@@ -162,6 +162,9 @@ namespace OpenBreed.Common.Game.Extensions
                 res = scriptMan.RunString(@"import('OpenBreed.Common', 'OpenBreed.Common.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Common.Game.Wecs', 'OpenBreed.Common.Game.Wecs.Extensions')");
 
+
+
+                res = scriptMan.RunString(@"import('OpenBreed.Animation.Interface', 'OpenBreed.Animation.Interface.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox.Entities', 'OpenBreed.Sandbox.Entities')");
 
