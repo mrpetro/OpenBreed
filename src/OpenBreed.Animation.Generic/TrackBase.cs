@@ -3,16 +3,14 @@ using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 
 namespace OpenBreed.Animation.Generic
 {
-    internal class Track<TObject, TValue> : ITrack<TObject, TValue>
+    internal abstract class TrackBase<TObject, TValue>
     {
         #region Private Fields
 
-        private SortedDictionary<float, TValue> frames = new SortedDictionary<float, TValue>();
         private readonly FrameInterpolation interpolation;
         private FrameUpdater<TObject, TValue> frameUpdater;
 
@@ -20,14 +18,22 @@ namespace OpenBreed.Animation.Generic
 
         #region Internal Constructors
 
-        internal Track(ReadOnlyTrackBuilder<TObject, TValue> builder)
+        internal TrackBase(TrackBuilderBase<TObject, TValue> builder)
         {
+            this.Id = builder.Id;
             this.interpolation = builder.Interpolation;
             this.frameUpdater = builder.FrameUpdater;
-            this.frames = new SortedDictionary<float, TValue>(builder.Frames);
         }
 
         #endregion Internal Constructors
+
+        #region Public Properties
+
+        public string Id { get; }
+
+        public abstract IReadOnlyDictionary<float, TValue> Frames { get; }
+
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -51,9 +57,10 @@ namespace OpenBreed.Animation.Generic
             return true;
         }
 
-        public void AddFrame(TValue value, float frameTime)
+        public bool TryFindInRange(float minTime, float maxTime, out IEnumerable<float> keyFrames)
         {
-            frames.Add(frameTime, value);
+            keyFrames = Frames.SkipWhile(item => item.Key < minTime).TakeWhile(item => item.Key < maxTime).Select(item => item.Key);
+            return keyFrames.Any();
         }
 
         #endregion Public Methods
@@ -77,20 +84,20 @@ namespace OpenBreed.Animation.Generic
 
         private TValue SampleNoInterpolation(float time)
         {
-            foreach (var frame in frames)
+            foreach (var frame in Frames)
             {
                 if (time <= frame.Key)
                     return frame.Value;
             }
 
-            return frames.Last().Value;
+            return Frames.Last().Value;
         }
 
         private void GetFrames(float time, out KeyValuePair<float, TValue> start, out KeyValuePair<float, TValue> end)
         {
-            start = frames.First();
+            start = Frames.First();
 
-            foreach (var frame in frames)
+            foreach (var frame in Frames)
             {
                 if (time <= frame.Key)
                 {
@@ -101,7 +108,7 @@ namespace OpenBreed.Animation.Generic
                     start = frame;
             }
 
-            end = frames.Last();
+            end = Frames.Last();
         }
 
         private TValue SampleLinearInterpolation(float time)

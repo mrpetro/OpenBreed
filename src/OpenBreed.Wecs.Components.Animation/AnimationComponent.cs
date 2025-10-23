@@ -178,6 +178,12 @@ namespace OpenBreed.Wecs.Components.Animation
             return this;
         }
 
+        public AnimationStateBuilder SetTime(float time)
+        {
+            Time = time;
+            return this;
+        }
+
         public AnimationStateBuilder SetSpeed(float speed)
         {
             Speed = speed;

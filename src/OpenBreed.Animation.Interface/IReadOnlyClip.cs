@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace OpenBreed.Animation.Interface
 {
@@ -23,9 +25,9 @@ namespace OpenBreed.Animation.Interface
     }
 
     /// <summary>
-    /// Animation clip which represents collection of tracks
+    /// Editable animation clip which represents collection of tracks.
     /// </summary>
-    public interface IClip<TObject> : IReadOnlyClip<TObject>
+    public interface IEditableClip<TObject> : IReadOnlyClip<TObject>
     {
         #region Public Properties
 
@@ -35,7 +37,11 @@ namespace OpenBreed.Animation.Interface
 
         #region Public Methods
 
-        ITrack<TObject, TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TObject, TValue> frameUpdater, TValue initialValue);
+        IEditableTrack<TObject, TValue> AddTrack<TValue>(string id, FrameInterpolation interpolation, FrameUpdater<TObject, TValue> frameUpdater, TValue initialValue);
+
+        IEditableTrack<TObject> GetTrack(string id);
+
+        bool RemoveTrack(string id);
 
         #endregion Public Methods
     }
@@ -49,6 +55,7 @@ namespace OpenBreed.Animation.Interface
 
         string Name { get; }
         float Length { get; }
+        IReadOnlyCollection<IReadOnlyTrack<TObject>> Tracks { get; }
 
         #endregion Public Properties
 
@@ -59,21 +66,60 @@ namespace OpenBreed.Animation.Interface
         #endregion Public Methods
     }
 
-    public interface ITrack<TObject>
+    public interface IEditableTrack<TObject> : IReadOnlyTrack<TObject>
+    {
+        float Rebuild();
+        void RemoveFrames(IEnumerable<ITrackKeyFrame> keyFrame);
+    }
+
+    public interface ITrackKeyFrame
+    {
+        float Key { get; set; }
+
+        object GetValue();
+    }
+
+    public interface ITrackKeyFrame<TValue> : ITrackKeyFrame
+    {
+        TValue Value { get; set; }
+    }
+
+    public interface IEditableTrack<TObject, TValue> : IReadOnlyTrack<TObject, TValue>, IEditableTrack<TObject>
     {
         #region Public Methods
 
-        bool UpdateWithNextFrame(TObject obj, float time);
+        bool TryGetKeyFrame(float key, out ITrackKeyFrame<TValue> keyFrame);
+
+        ITrackKeyFrame<TValue> GetKeyFrame(float key);
+
+        bool TryAddKeyFrame(float frameTime, TValue value);
 
         #endregion Public Methods
     }
 
-    public interface ITrack<TObject, TValue> : ITrack<TObject>
+    public interface IReadOnlyTrack<TObject>
     {
+        #region Public Properties
+
+        string Id { get; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
-        void AddFrame(TValue value, float frameTime);
+        bool UpdateWithNextFrame(TObject obj, float time);
+
+        bool TryFindInRange(float minTime, float maxTime, out IEnumerable<float> keyFrames);
 
         #endregion Public Methods
+    }
+
+    public interface IReadOnlyTrack<TObject, TValue> : IReadOnlyTrack<TObject>
+    {
+        #region Public Properties
+
+        IReadOnlyDictionary<float, TValue> Frames { get; }
+
+        #endregion Public Properties
     }
 }

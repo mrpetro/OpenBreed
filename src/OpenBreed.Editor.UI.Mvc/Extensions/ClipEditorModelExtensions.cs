@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Editor.UI.Mvc.Extensions
 {
@@ -18,26 +20,31 @@ namespace OpenBreed.Editor.UI.Mvc.Extensions
 
         public static MyExtentF GetExtent(this IAnimationEditorModel model)
         {
-            if (model.EditedTrack is null)
+            if (model is null)
             {
-                return new MyExtentF();
+                return MyExtentF.Empty;
             }
 
-            var extent = GetExtent(model.EditedTrack);
+            if (model.CurrentTrack is null)
+            {
+                return MyExtentF.Empty;
+            }
+
+            var extent = GetExtent(model.CurrentTrack);
 
             extent.Expand(model.ClipLength, extent.Center.Y);
 
             return extent;
         }
 
-        public static MyExtentF GetExtent(IDbAnimationTrack track)
+        public static MyExtentF GetExtent(IReadOnlyTrack<IEntity> track)
         {
             switch (track)
             {
-                case IDbAnimationTrack<int> intTrack:
+                case IReadOnlyTrack<IEntity, int> intTrack:
                     return GetExtent(intTrack);
 
-                case IDbAnimationTrack<string> stringTrack:
+                case IReadOnlyTrack<IEntity, string> stringTrack:
                     return GetExtent(stringTrack);
 
                 default:
@@ -49,12 +56,12 @@ namespace OpenBreed.Editor.UI.Mvc.Extensions
 
         #region Private Methods
 
-        private static MyExtentF GetExtent(IDbAnimationTrack<string> track)
+        private static MyExtentF GetExtent(IReadOnlyTrack<IEntity, string> track)
         {
             return new MyExtentF();
         }
 
-        private static MyExtentF GetExtent(IDbAnimationTrack<int> track)
+        private static MyExtentF GetExtent(IReadOnlyTrack<IEntity, int> track)
         {
             var extent = new MyExtentF();
 
@@ -65,7 +72,7 @@ namespace OpenBreed.Editor.UI.Mvc.Extensions
 
             foreach (var frame in track.Frames)
             {
-                extent.Expand(frame.Time, frame.Value);
+                extent.Expand(frame.Key, frame.Value);
             }
 
             return extent;

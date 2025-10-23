@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Animation.Generic.Builders;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace OpenBreed.Animation.Generic
     {
         #region Private Fields
 
-        private readonly List<ITrack<TObject>> tracks;
+        private readonly List<IReadOnlyTrack<TObject>> tracks;
 
         #endregion Private Fields
 
@@ -20,7 +21,7 @@ namespace OpenBreed.Animation.Generic
         {
             Name = builder.Name;
             Length = builder.Length;
-            tracks = builder.Tracks.Select(b => b.Build()).ToList();
+            tracks = builder.Tracks.Select(b => ((IBuilder<IReadOnlyTrack<TObject>>)b).Build()).ToList();
         }
 
         #endregion Internal Constructors
@@ -28,7 +29,9 @@ namespace OpenBreed.Animation.Generic
         #region Public Properties
 
         public string Name { get; }
-        public float Length { get; }
+        public float Length { get; protected set; }
+
+        public IReadOnlyCollection<IReadOnlyTrack<TObject>> Tracks => tracks;
 
         #endregion Public Properties
 

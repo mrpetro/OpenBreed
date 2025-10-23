@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.Animations"
              mc:Ignorable="d" 
-             d:DesignHeight="22" d:DesignWidth="200">
+             d:DesignHeight="22" d:DesignWidth="170">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,8 +15,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="154"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="170"/>
         </Grid.ColumnDefinitions>
         <UniformGrid Columns="7">
             <Button Style="{StaticResource PlayButtonStyle}" Command="{Binding PlayCommand}">

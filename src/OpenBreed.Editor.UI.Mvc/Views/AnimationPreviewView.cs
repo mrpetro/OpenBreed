@@ -108,16 +108,13 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             view.PopMatrix();
         }
 
-        protected override Vector2 GetInteractionCursorPosition(IRenderView view)
+        protected override Vector2 GetInteractionSnapCursorPosition(Vector2 worldPosition)
         {
-            var cursorPos = base.GetInteractionCursorPosition(view);
-
             var stepX = (1, 1);
             var stepY = (1, 1);
+            var snappedPosition = MyMathHelper.Snap(new Vector2(worldPosition.X, worldPosition.Y), stepX, stepY);
 
-            var snappedCursorPos = MyMathHelper.Snap(new Vector2(cursorPos.X, cursorPos.Y), stepX, stepY);
-
-            return snappedCursorPos;
+            return snappedPosition;
         }
 
         #endregion Protected Methods

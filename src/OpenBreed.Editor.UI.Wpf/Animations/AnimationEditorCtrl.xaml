@@ -71,21 +71,24 @@
                    Grid.Column="2"
                    Grid.ColumnSpan="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="46"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="22"/>
             </Grid.RowDefinitions>
             <GroupBox Grid.Row="0"
+                Header="Player">
+                <local:AnimationPlayerPanelCtrl HorizontalAlignment="Left" DataContext="{Binding Player}" />
+            </GroupBox>
+            <GroupBox Grid.Row="1"
                 Header="Viewer">
                 <local:AnimationPreviewCtrl DataContext="{Binding Preview}"/>
             </GroupBox>
-            <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" ResizeBehavior="BasedOnAlignment"/>
-            <GroupBox Grid.Row="2"
+            <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" ResizeBehavior="BasedOnAlignment"/>
+            <GroupBox Grid.Row="3"
                 Header="Curves">
                 <local:AnimationCurvesEditorCtrl DataContext="{Binding CurvesEditor}"/>
             </GroupBox>
-            <local:AnimationPlayerPanelCtrl Grid.Row="3" HorizontalAlignment="Left" DataContext="{Binding Player}" />
         </Grid>
     </Grid>
 </UserControl>

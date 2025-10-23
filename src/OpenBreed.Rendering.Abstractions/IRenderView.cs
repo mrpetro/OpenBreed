@@ -54,19 +54,19 @@ namespace OpenBreed.Rendering.Abstractions
         event ViewCursorWheelHandler CursorWheel;
 
         /// <summary>
-        /// Event occurs when text is being inputed.
+        /// Event occurs when text is being inputted.
         /// </summary>
         event ViewTextInputHandler TextInput;
 
         /// <summary>
         /// Event occurs when keyboard key is being pressed.
         /// </summary>
-        event ViewKeyboardKeyHandler KeyDown;
+        event ViewKeyDownHandler KeyDown;
 
         /// <summary>
         /// Event occurs when keyboard key is being released.
         /// </summary>
-        event ViewKeyboardKeyHandler KeyUp;
+        event ViewKeyUpHandler KeyUp;
 
 
         #endregion Public Events

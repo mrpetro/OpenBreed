@@ -414,7 +414,7 @@ namespace OpenBreed.Sandbox.Loaders
 
         private void LoadReferencedAnimations(IDbMap dbMap)
         {
-            var loader = dataLoaderFactory.GetLoader<IAnimationClipDataLoader<IEntity>>();
+            var loader = dataLoaderFactory.GetLoader<IReadOnlyClipDataLoader<IEntity>>();
 
             //Load common animations
             var dbAnims = repositoryProvider.GetRepository<IDbAnimation>().Entries.OfType<IDbAnimation>().Where(item => item.Id.StartsWith("Vanilla/Common"));

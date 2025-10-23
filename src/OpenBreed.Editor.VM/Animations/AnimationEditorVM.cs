@@ -56,7 +56,6 @@ namespace OpenBreed.Editor.VM.Animations
 
         public AnimationEditorVM(
             IDbAnimation dbEntry,
-
             ILogger logger,
             IWorkspaceMan workspaceMan,
             IDialogProvider dialogProvider,
@@ -191,7 +190,7 @@ namespace OpenBreed.Editor.VM.Animations
 
         private void RemoveTrack(IDbAnimationTrack source)
         {
-            Entry.RemoveTrack(source);
+            model.RemoveTrack(source);
             var trackVm = TrackItems.First(item => item.Source == source);
             TrackItems.Remove(trackVm);
         }

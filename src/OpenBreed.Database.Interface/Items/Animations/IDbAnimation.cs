@@ -29,7 +29,9 @@ namespace OpenBreed.Database.Interface.Items.Animations
 
         ReadOnlyCollection<IDbAnimationTrack> Tracks { get; }
 
-        IDbAnimationTrack<TValue> AddNewTrack<TValue>(string controller);
+        IDbAnimationTrack<TValue> GetTrack<TValue>(string id);
+
+        IDbAnimationTrack<TValue> AddNewTrack<TValue>(string id);
 
         bool RemoveTrack(IDbAnimationTrack track);
 

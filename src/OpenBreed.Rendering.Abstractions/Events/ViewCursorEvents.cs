@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Mathematics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +9,16 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Rendering.Abstractions.Events
 {
-
     /// <summary>
-    /// Abstract cursor interaction on specific render view event.
+    /// Abstract interaction on specific render view event.
     /// </summary>
-    public abstract class ViewCursorEvent : EventArgs
+    public abstract class ViewEvent : EventArgs
     {
         #region Protected Constructors
 
-        protected ViewCursorEvent(IRenderView view, int cursorId, Vector2i position)
+        protected ViewEvent(IRenderView view)
         {
             View = view;
-            CursorId = cursorId;
-            Position = position;
         }
 
         #endregion Protected Constructors
@@ -28,9 +26,29 @@ namespace OpenBreed.Rendering.Abstractions.Events
         #region Public Properties
 
         /// <summary>
-        /// View which cursor interacts with.
+        /// View which is interacted with.
         /// </summary>
         public IRenderView View { get; }
+
+        #endregion Public Properties
+    }
+
+    /// <summary>
+    /// Abstract cursor interaction on specific render view event.
+    /// </summary>
+    public abstract class ViewCursorEvent : ViewEvent
+    {
+        #region Protected Constructors
+
+        protected ViewCursorEvent(IRenderView view, int cursorId, Vector2i position) : base(view)
+        {
+            CursorId = cursorId;
+            Position = position;
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Properties
 
         /// <summary>
         /// Cursor ID which is interacting with view.
@@ -50,17 +68,25 @@ namespace OpenBreed.Rendering.Abstractions.Events
     /// </summary>
     public class ViewCursorMoveEvent : ViewCursorEvent
     {
+        #region Private Fields
+
+        private readonly BitArray keysPressed;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public ViewCursorMoveEvent(IRenderView view, int cursorId, Vector2i position) : base(view, cursorId, position)
+        public ViewCursorMoveEvent(IRenderView view, int cursorId, BitArray keysPressed, Vector2i position) : base(view, cursorId, position)
         {
+            this.keysPressed = keysPressed;
+        }
+
+        public bool IsCursorKeyPressed(CursorKey key)
+        {
+            return keysPressed[(int)key];
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        #endregion Public Properties
     }
 
     /// <summary>
@@ -98,9 +124,10 @@ namespace OpenBreed.Rendering.Abstractions.Events
     {
         #region Public Constructors
 
-        public ViewCursorUpEvent(IRenderView view, int cursorId, Vector2i position, CursorKey key) : base(view, cursorId, position)
+        public ViewCursorUpEvent(IRenderView view, int cursorId, Vector2i position, CursorKey key, KeyModifiers modifiers) : base(view, cursorId, position)
         {
             Key = key;
+            Modifiers = modifiers;
         }
 
         #endregion Public Constructors
@@ -112,6 +139,11 @@ namespace OpenBreed.Rendering.Abstractions.Events
         /// </summary>
         public CursorKey Key { get; }
 
+        /// <summary>
+        /// Flags indicating if ore or more special keys were pressed during cursor key up event.
+        /// </summary>
+        public KeyModifiers Modifiers { get; }
+
         #endregion Public Properties
     }
 
@@ -122,9 +154,10 @@ namespace OpenBreed.Rendering.Abstractions.Events
     {
         #region Public Constructors
 
-        public ViewCursorDownEvent(IRenderView view, int cursorId, Vector2i position, CursorKey key) : base(view, cursorId, position)
+        public ViewCursorDownEvent(IRenderView view, int cursorId, Vector2i position, CursorKey key, KeyModifiers modifiers) : base(view, cursorId, position)
         {
             Key = key;
+            Modifiers = modifiers;
         }
 
         #endregion Public Constructors
@@ -135,6 +168,11 @@ namespace OpenBreed.Rendering.Abstractions.Events
         /// Key code of cursor which was pressed.
         /// </summary>
         public CursorKey Key { get; }
+
+        /// <summary>
+        /// Flags indicating if ore or more special keys were pressed during cursor key down event.
+        /// </summary>
+        public KeyModifiers Modifiers { get; }
 
         #endregion Public Properties
     }
@@ -159,6 +197,66 @@ namespace OpenBreed.Rendering.Abstractions.Events
         /// Value indicating how much wheel position has changed.
         /// </summary>
         public int WheelDelta { get; }
+
+        #endregion Public Properties
+    }
+
+    /// <summary>
+    /// Occurs when specific keyboard key has been pressed on specific render view.
+    /// </summary>
+    public class ViewKeyDownEvent : ViewEvent
+    {
+        #region Public Constructors
+
+        public ViewKeyDownEvent(IRenderView view, Keys key, KeyModifiers modifiers) : base(view)
+        {
+            Key = key;
+            Modifiers = modifiers;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Key code of keyboard which was pressed.
+        /// </summary>
+        public Keys Key { get; }
+
+        /// <summary>
+        /// Flags indicating if ore or more special keys were pressed during keyboard key down event.
+        /// </summary>
+        public KeyModifiers Modifiers { get; }
+
+        #endregion Public Properties
+    }
+
+    /// <summary>
+    /// Occurs when specific keyboard key has been released on specific render view.
+    /// </summary>
+    public class ViewKeyUpEvent : ViewEvent
+    {
+        #region Public Constructors
+
+        public ViewKeyUpEvent(IRenderView view, Keys key, KeyModifiers modifiers) : base(view)
+        {
+            Key = key;
+            Modifiers = modifiers;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Key code of keyboard which was released.
+        /// </summary>
+        public Keys Key { get; }
+
+        /// <summary>
+        /// Flags indicating if ore or more special keys were pressed during keyboard key up event.
+        /// </summary>
+        public KeyModifiers Modifiers { get; }
 
         #endregion Public Properties
     }

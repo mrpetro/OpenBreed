@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using OpenBreed.Common;
 using OpenBreed.Common.Interface.Mvc;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
@@ -61,6 +62,11 @@ namespace OpenBreed.Database.Xml.Items.Animations
         #endregion Public Properties
 
         #region Public Methods
+
+        public IDbAnimationTrack<TValue> GetTrack<TValue>(string id)
+        {
+            return XmlTracks.FirstOrDefault(item => item.Controller == id) as IDbAnimationTrack<TValue>;
+        }
 
         public IDbAnimationTrack<TValue> AddNewTrack<TValue>(string controller)
         {

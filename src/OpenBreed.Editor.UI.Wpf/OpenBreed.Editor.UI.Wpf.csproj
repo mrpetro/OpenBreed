@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Icons\add_24dp.png" />
+    <None Remove="Icons\center_focus_24dp.png" />
     <None Remove="Icons\close_small_24dp.png" />
     <None Remove="Icons\content_copy_24dp.png" />
     <None Remove="Icons\done_24dp.png" />
@@ -16,6 +17,8 @@
     <None Remove="Icons\fast_rewind_24dp.png" />
     <None Remove="Icons\pause_circle_24dp.png" />
     <None Remove="Icons\play_circle_24dp.png" />
+    <None Remove="Icons\point_add_24dp.png" />
+    <None Remove="Icons\point_select_24dp.png" />
     <None Remove="Icons\remove_24dp.png" />
     <None Remove="Icons\skip_next_24dp.png" />
     <None Remove="Icons\skip_previous_24dp.png" />
@@ -60,6 +63,7 @@
 
   <ItemGroup>
     <Resource Include="Icons\add_24dp.png" />
+    <Resource Include="Icons\center_focus_24dp.png" />
     <Resource Include="Icons\close_small_24dp.png" />
     <Resource Include="Icons\content_copy_24dp.png" />
     <Resource Include="Icons\done_24dp.png" />
@@ -67,6 +71,8 @@
     <Resource Include="Icons\fast_rewind_24dp.png" />
     <Resource Include="Icons\pause_circle_24dp.png" />
     <Resource Include="Icons\play_circle_24dp.png" />
+    <Resource Include="Icons\point_add_24dp.png" />
+    <Resource Include="Icons\point_select_24dp.png" />
     <Resource Include="Icons\remove_24dp.png" />
     <Resource Include="Icons\skip_next_24dp.png" />
     <Resource Include="Icons\skip_previous_24dp.png" />

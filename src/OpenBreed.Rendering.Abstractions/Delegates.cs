@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Rendering.Abstractions.Events;
 using OpenTK.Mathematics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,11 @@ namespace OpenBreed.Rendering.Abstractions
 
     public delegate void ViewCursorLeaveHandler(IRenderView view, int cursorId, Vector2i position);
 
-    public delegate void ViewCursorMoveHandler(IRenderView view, int cursorId, Vector2i position);
+    public delegate void ViewCursorMoveHandler(IRenderView view, int cursorId, Vector2i position, BitArray cursorKeyStates, KeyModifiers modifiers);
 
     public delegate void ViewTextInputHandler(IRenderView view, string text);
 
-    public delegate void ViewKeyboardKeyHandler(IRenderView view, Keys key, KeyModifiers modifiers);
+    public delegate void ViewKeyDownHandler(IRenderView view, Keys key, KeyModifiers modifiers);
+
+    public delegate void ViewKeyUpHandler(IRenderView view, Keys key, KeyModifiers modifiers);
 }

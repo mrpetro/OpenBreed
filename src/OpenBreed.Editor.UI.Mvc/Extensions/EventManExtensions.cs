@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.UI.Mvc.Extensions
     {
         #region Public Methods
 
-        public static void SubscribeToView<TEvent>(this IEventsMan eventsMan, IRenderView view, EventCallback<TEvent> callback) where TEvent : ViewCursorEvent
+        public static void SubscribeToView<TEvent>(this IEventsMan eventsMan, IRenderView view, EventCallback<TEvent> callback) where TEvent : ViewEvent
         {
             void OnEvent(TEvent e)
             {

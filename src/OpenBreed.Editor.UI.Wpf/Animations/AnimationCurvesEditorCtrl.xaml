@@ -7,7 +7,36 @@
              xmlns:Wpf="clr-namespace:OpenBreed.Editor.UI.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../CommonResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <Wpf:GLWpfControlEx InitFunc="{Binding InitFunc}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <local:AnimationCurvesEditorToolsCtrl Grid.Row="0" HorizontalAlignment="Left" DataContext="{Binding Tools}" />
+        <Wpf:GLWpfControlEx Grid.Row="1" InitFunc="{Binding InitFunc}" >
+            <Wpf:GLWpfControlEx.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Actions}"
+                             IsOpen="{Binding ActionsShow}" >
+                    <ContextMenu.ItemTemplate  >
+                        <DataTemplate DataType="MenuItem">
+                            <MenuItem Command="{Binding Command}" >
+                                <MenuItem.Template>
+                                    <ControlTemplate>
+                                        <Label Content="{Binding HeaderText}" />
+                                    </ControlTemplate>
+                                </MenuItem.Template>
+                            </MenuItem>
+                        </DataTemplate>
+                    </ContextMenu.ItemTemplate>
+                </ContextMenu>
+            </Wpf:GLWpfControlEx.ContextMenu>
+        </Wpf:GLWpfControlEx>
     </Grid>
 </UserControl>

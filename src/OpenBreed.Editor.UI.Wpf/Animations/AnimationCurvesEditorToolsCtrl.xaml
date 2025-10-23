@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="OpenBreed.Editor.UI.Wpf.Animations.AnimationCurvesEditorToolsCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.Animations"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             mc:Ignorable="d" 
+             d:DesignHeight="22" d:DesignWidth="74">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../CommonResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <system:String x:Key="SetAddKeyFramesModeToolTip">Changes curves interaction mode to adding key frames.</system:String>
+            <system:String x:Key="SelectPointButtonToolTip">Changes curves interaction mode to point selection.</system:String>
+            <system:String x:Key="FocusButtonToolTip">Auto center on entire animation curve.</system:String>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="74"/>
+        </Grid.ColumnDefinitions>
+        <UniformGrid Columns="3">
+            <Button Style="{StaticResource AddPointButtonStyle}"
+                    ToolTip="{StaticResource SetAddKeyFramesModeToolTip}"
+                    IsEnabled="{Binding SetAddKeyFramesModeEnabled}"
+                    Command="{Binding SetAddKeyFramesModeCommand}" >
+                <Image/>
+            </Button>
+            <Button Style="{StaticResource SelectPointButtonStyle}"
+                    ToolTip="{StaticResource SelectPointButtonToolTip}"
+                    IsEnabled="{Binding SetSelectionModeEnabled}"
+                    Command="{Binding SetSelectionModeCommand}">
+                <Image/>
+            </Button>
+            <Button Style="{StaticResource FocusButtonStyle}"
+                    ToolTip="{StaticResource FocusButtonToolTip}"
+                    Command="{Binding FocusCommand}">
+                <Image/>
+            </Button>
+        </UniformGrid>
+    </Grid>
+</UserControl>

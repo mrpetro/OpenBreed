@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -282,7 +283,7 @@ namespace OpenBreed.Gui.Elements
             ResolveCursorDown(cursor, cursorKey);
         }
 
-        private void RenderView_CursorMove(IRenderView view, int cursorId, Vector2i position)
+        private void RenderView_CursorMove(IRenderView view, int cursorId, Vector2i position, BitArray cursorKeyStates, KeyModifiers modifiers)
         {
             var cursor = GetCursor(cursorId);
 

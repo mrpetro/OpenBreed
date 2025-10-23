@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Database.Interface.Items.Animations;
+using OpenBreed.Editor.UI.Mvc.Controllers;
 using OpenBreed.Editor.UI.Mvc.Extensions;
 using OpenBreed.Editor.UI.Mvc.Models;
 using OpenBreed.Gui.Abstractions;
@@ -10,6 +12,7 @@ using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
+using OpenBreed.Wecs.Entities;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Editor.UI.Mvc.Views
@@ -43,6 +46,20 @@ namespace OpenBreed.Editor.UI.Mvc.Views
         #endregion Public Constructors
 
         #region Public Methods
+
+        public static string ToTime(TimeSpan timeSpan)
+        {
+            var result = timeSpan.ToString(@"m\:s\:ff");
+
+            if (!result.StartsWith("0:"))
+            {
+                return result;
+            }
+
+            result = result.Remove(0, 2);
+
+            return result;
+        }
 
         public Vector2i GetIndexPoint(Vector2 point, Vector2 cellSize)
         {
@@ -84,7 +101,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
                 return;
             }
 
-            if (model.EditedTrack is null)
+            if (model.CurrentTrack is null)
             {
                 return;
             }
@@ -122,21 +139,24 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             var sx = scaleX;
             var sy = scaleY;
 
-            RenderView.MoveBy((Vector2i)(offset * new Vector2(sx,sy)));
+            RenderView.MoveBy((Vector2i)(offset * new Vector2(sx, sy)));
+        }
+
+        public void InsertKeyFrame()
+        {
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override Vector2 GetInteractionCursorPosition(IRenderView view)
+        protected override Vector2 GetInteractionSnapCursorPosition(Vector2 worldPosition)
         {
-            var cursorPos = base.GetInteractionCursorPosition(view);
             var stepX = (1, 50);
             var stepY = (1, 1);
-            var snappedCursorPos = MyMathHelper.Snap(new Vector2(cursorPos.X, cursorPos.Y), stepX, stepY);
+            var snappedPosition = MyMathHelper.Snap(new Vector2(worldPosition.X, worldPosition.Y), stepX, stepY);
 
-            return snappedCursorPos;
+            return snappedPosition;
         }
 
         protected override void OnRender(IRenderView view, float dt)
@@ -152,11 +172,42 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             RenderAxes(view, extent);
             RenderTracks(view, extent);
 
+            if (model.Mode == AnimationCurvesEditorMode.SelectKeyFrames)
+            {
+                RenderHoveredKeyFrame(view, extent);
+
+                RenderSelectedKeyFrames(view, extent);
+            }
+
             RenderCurrentTimeLine(view);
 
             view.DisableAlpha();
 
             view.PopMatrix();
+        }
+
+        private void RenderHoveredKeyFrame(IRenderView view, MyExtentF extent)
+        {
+            if (model.HoveredKeyFrame is not null)
+            {
+                if (model.HoveredKeyFrame is ITrackKeyFrame<int> intKeyFrame)
+                {
+                    var point = new Vector2(intKeyFrame.Key, intKeyFrame.Value);
+                    view.Context.Primitives.DrawPoint(view, point, Color4.Red, PointType.Circle, size: 15.0f, ignoreScale: true);
+                }
+            }
+        }
+
+        private void RenderSelectedKeyFrames(IRenderView view, MyExtentF extent)
+        {
+            foreach (var keyFrame in model.SelectedKeyFrames)
+            {
+                if (keyFrame is ITrackKeyFrame<int> intKeyFrame)
+                {
+                    var point = new Vector2(intKeyFrame.Key, intKeyFrame.Value);
+                    view.Context.Primitives.DrawPoint(view, point, Color4.Red, PointType.CircleFilled, size: 10.0f, ignoreScale: true);
+                }
+            }
         }
 
         #endregion Protected Methods
@@ -178,7 +229,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
             var border = new Box2(0, extent.Min.Y, model.ClipLength, extent.Max.Y);
 
-            view.Context.Primitives.DrawRectangle(view, border, new Color4(128, 128, 128, 128), filled: true);
+            view.Context.Primitives.DrawRectangle(view, border, new Color4(64, 64, 64, 64), filled: true);
 
             view.PopMatrix();
         }
@@ -191,15 +242,15 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             view.Context.Primitives.DrawLine(view, new Vector2(0, worldBox.Min.Y), new Vector2(0, worldBox.Max.Y), Color4.Green);
         }
 
-        private void RenderTrack(IRenderView view, IDbAnimationTrack track)
+        private void RenderTrack(IRenderView view, IReadOnlyTrack<IEntity> track)
         {
             switch (track)
             {
-                case IDbAnimationTrack<int> intTrack:
+                case IReadOnlyTrack<IEntity, int> intTrack:
                     RenderTrack(view, intTrack);
                     break;
 
-                case IDbAnimationTrack<string> stringTrack:
+                case IReadOnlyTrack<IEntity, string> stringTrack:
                     RenderTrack(view, stringTrack);
                     break;
 
@@ -208,18 +259,18 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             }
         }
 
-        private void RenderTrack(IRenderView view, IDbAnimationTrack<string> track)
+        private void RenderTrack(IRenderView view, IReadOnlyTrack<IEntity, string> track)
         {
         }
 
-        private void RenderTrack(IRenderView view, IDbAnimationTrack<int> track)
+        private void RenderTrack(IRenderView view, IReadOnlyTrack<IEntity, int> track)
         {
             if (track.Frames.Count == 0)
             {
                 return;
             }
 
-            var points = track.Frames.Select(item => new Vector2(item.Time, item.Value)).ToArray();
+            var points = track.Frames.Select(item => new Vector2(item.Key, item.Value)).ToArray();
 
             view.Context.Primitives.DrawPoints(view, points, Color4.Aqua, PointType.Rectangle, size: 10, ignoreScale: true);
 
@@ -230,15 +281,12 @@ namespace OpenBreed.Editor.UI.Mvc.Views
         {
             var worldBox = view.ToWorldBox(view.Box);
 
-            if (model.EditedTrack is null)
+            if (model.CurrentTrack is null)
             {
                 return;
             }
 
-            RenderTrack(view, model.EditedTrack);
-
-            view.Context.Primitives.DrawLine(view, new Vector2(worldBox.Min.X, 0), new Vector2(worldBox.Max.X, 0), xAxisLineColor);
-            view.Context.Primitives.DrawLine(view, new Vector2(0, worldBox.Min.Y), new Vector2(0, worldBox.Max.Y), yAxisLineColor);
+            RenderTrack(view, model.CurrentTrack);
         }
 
         private void RenderUnitGrid(IRenderView view, MyExtentF extent)
@@ -252,21 +300,6 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
             RenderUnitGridLines(view, worldBox);
         }
-
-        public static string ToTime(TimeSpan timeSpan)
-        {
-            var result = timeSpan.ToString(@"m\:s\:ff");
-
-            if (!result.StartsWith("0:"))
-            {
-                return result;
-            }
-
-            result = result.Remove(0,2);
-
-            return result;
-        }
-
 
         private void RenderTimeLabel(IRenderView view, float time, IFontAtlas font, Color4 fontColor, Box2 worldBox)
         {

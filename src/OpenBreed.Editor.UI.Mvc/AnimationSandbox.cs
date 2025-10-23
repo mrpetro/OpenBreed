@@ -251,7 +251,8 @@ namespace OpenBreed.Editor.UI.Mvc
                 var animationComponentBuilder = builderFactory.GetBuilder<AnimationComponentBuilder>();
                 var state = animationComponentBuilder.AddState();
 
-                state.SetSpeed(1.0f);
+                state.SetTime(0.0f);
+                state.SetSpeed(0.0f);
                 state.SetLoop(true);
 
                 e.Add(PositionComponent.Create(0.0f, 0.0f));
@@ -264,7 +265,7 @@ namespace OpenBreed.Editor.UI.Mvc
 
             if (clipMan.TryGetId(clipName, out int clipId))
             {
-                animationSampleEntity.PlayAnimation(animatorId: 0, clipId, startPosition: 0);
+                animationSampleEntity.SetAnimationClipById(animatorId: 0, clipId);
             }
         }
 

@@ -3,11 +3,11 @@ using OpenBreed.Database.Interface.Items.Animations;
 
 namespace OpenBreed.Animation.Interface.Data
 {
-    public interface IAnimationClipDataLoader<TObject> : IDataLoader<IReadOnlyClip<TObject>>
+    public interface IEditableClipDataLoader<TObject> : IDataLoader<IEditableClip<TObject>>
     {
         #region Public Methods
 
-        IReadOnlyClip<TObject> Load(IDbAnimation dbAnimation, bool reload = false);
+        IEditableClip<TObject> Load(IDbAnimation dbAnimation);
 
         #endregion Public Methods
     }

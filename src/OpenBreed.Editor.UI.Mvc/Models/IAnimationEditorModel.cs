@@ -13,23 +13,49 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.UI.Mvc.Models
 {
+    public enum AnimationCurvesEditorMode
+    {
+        InsertKeyFrames,
+        SelectKeyFrames,
+        MoveKeyFrames
+    }
+
     public interface IAnimationEditorModel : IEditorModel
     {
         #region Public Properties
 
+        string Name { get; }
+
         float ClipLength { get; set; }
 
-        IReadOnlyCollection<IDbAnimationTrack> Tracks { get; }
+        IEditableTrack<IEntity> CurrentTrack { get; }
 
-        IDbAnimationTrack EditedTrack { get; }
+        AnimationCurvesEditorMode Mode { get; set; }
+
+        IReadOnlyCollection<ITrackKeyFrame> SelectedKeyFrames { get; }
+        ITrackKeyFrame? HoveredKeyFrame { get; set; }
+        Vector2? AnchorPoint { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
         void Edit(IDbAnimationTrack dbTrack);
-
-        IReadOnlyClip<IEntity> Load(bool reload = false);
+        void InsertKeyFrame(float time, float value);
+        void Rebuild();
+        void ReleaseKeyFrames();
+        void RemoveTrack(IDbAnimationTrack source);
+        void SelectKeyFrame(ITrackKeyFrame keyFrame);
+        void ClearSelectedKeyFrames();
+        void DeleteSelectedKeyFrames();
+        bool TryGetClosestKeyFrame(Vector2 position, Vector2 tolerance, out ITrackKeyFrame? value);
+        void StartSelecting(Vector2 anchorPoint);
+        void CancelSelecting();
+        void FinishSelecting();
+        Vector2 GetStatingPosition(ITrackKeyFrame keyFrame);
+        void MoveKeyFramesTo(Vector2 position);
+        void MoveKeyFrameBy(ITrackKeyFrame keyFrame, Vector2 offsetPos);
+        void FinishMoving();
 
         #endregion Public Methods
     }

@@ -7,6 +7,7 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
@@ -65,9 +66,9 @@ namespace OpenBreed.Rendering.OpenGL
 
         public event ViewTextInputHandler TextInput;
 
-        public event ViewKeyboardKeyHandler KeyDown;
+        public event ViewKeyDownHandler KeyDown;
 
-        public event ViewKeyboardKeyHandler KeyUp;
+        public event ViewKeyUpHandler KeyUp;
 
         #endregion Public Events
 
@@ -247,9 +248,9 @@ namespace OpenBreed.Rendering.OpenGL
             CursorDown?.Invoke(this, cursorId, cursorPosition, cursorKey);
         }
 
-        internal void OnCursorMove(int cursorId, Vector2i cursorPosition)
+        internal void OnCursorMove(int cursorId, Vector2i cursorPosition, BitArray cursorKeyStates, Abstractions.Events.KeyModifiers modifiers)
         {
-            CursorMove?.Invoke(this, cursorId, cursorPosition);
+            CursorMove?.Invoke(this, cursorId, cursorPosition, cursorKeyStates, modifiers);
         }
 
         internal void OnCursorEnter(int cursorId, Vector2i cursorPosition)
@@ -287,8 +288,6 @@ namespace OpenBreed.Rendering.OpenGL
             Box = new Box2i((Vector2i)min, (Vector2i)max);
 
             SetProjection(Matrix4.CreateOrthographicOffCenter(0, Box.Size.X, 0, Box.Size.Y, -100.0f, 100.0f));
-
-            View = Matrix4.Identity;
 
             Resized?.Invoke(this, size.X, size.Y);
         }

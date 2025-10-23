@@ -40,7 +40,7 @@ namespace OpenBreed.Database.Interface.Items.Animations
 
         void ClearFrames();
 
-        void AddFrame(TValue value, float frameTime);
+        void AddFrame(float frameTime, TValue value);
 
         bool RemoveFrame(IDbAnimationFrame frame);
 

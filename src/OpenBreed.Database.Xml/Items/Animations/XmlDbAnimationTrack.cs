@@ -36,8 +36,21 @@ namespace OpenBreed.Database.Xml.Items.Animations
             XmlFrames.Clear();
         }
 
-        public void AddFrame(TValue value, float frameTime)
+        public void AddFrame(float frameTime, TValue value)
         {
+            var foundIndex = XmlFrames.FindIndex(x => x.Time > frameTime);
+
+            if (foundIndex < 0)
+            {
+                return;
+            }
+
+            if (foundIndex < XmlFrames.Count)
+            {
+                XmlFrames.Insert(foundIndex, new XmlDbAnimationFrame<TValue> { Value = value, Time = frameTime });
+                return;
+            }
+
             XmlFrames.Add(new XmlDbAnimationFrame<TValue> { Value = value, Time = frameTime });
         }
 

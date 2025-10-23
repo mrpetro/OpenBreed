@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Abstractions;
+﻿using OpenBreed.Editor.UI.Wpf.Extensions;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
 using OpenBreed.Rendering.Abstractions.Managers;
@@ -9,6 +10,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Wpf;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -49,6 +51,13 @@ namespace OpenBreed.Editor.UI.Wpf
             Unloaded += GLWpfControlEx_Unloaded;
 
             DataContextChanged += GLWpfControlEx_DataContextChanged;
+
+            //EventManager.RegisterClassHandler(typeof(GLWpfControlEx), KeyDownEvent, new RoutedEventHandler(OnMyKeyDown));
+        }
+
+        private void OnMyKeyDown(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void GLWpfControlEx_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -130,6 +139,22 @@ namespace OpenBreed.Editor.UI.Wpf
             MouseLeave += GLWpfControlEx_MouseLeave;
             MouseUp += GLWpfControlEx_MouseUp;
             MouseWheel += GLWpfControlEx_MouseWheel;
+            KeyDown += GLWpfControlEx_KeyDown;
+            KeyUp += GLWpfControlEx_KeyUp;
+        }
+
+        private void GLWpfControlEx_KeyUp(object sender, KeyEventArgs e)
+        {
+            var key = e.Key.ToKeysEnum();
+            var keyModifiers = GetKeyModifiers();
+            renderContext.KeyUp(key, keyModifiers);
+        }
+
+        private void GLWpfControlEx_KeyDown(object sender, KeyEventArgs e)
+        {
+            var key = e.Key.ToKeysEnum();
+            var keyModifiers = GetKeyModifiers();
+            renderContext.KeyDown(key, keyModifiers);
         }
 
         private void GLWpfControlEx_MouseLeave(object sender, MouseEventArgs e)
@@ -140,26 +165,35 @@ namespace OpenBreed.Editor.UI.Wpf
 
         private void GLWpfControlEx_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            var keyModifiers = GetKeyModifiers();
             var cursorPosition = FromPoint(e.GetPosition(this));
-            renderContext.CursorUp(0, cursorPosition, (CursorKey)e.ChangedButton);
+            renderContext.CursorUp(0, cursorPosition, (CursorKey)e.ChangedButton, keyModifiers);
         }
 
         private void GLWpfControlEx_MouseEnter(object sender, MouseEventArgs e)
         {
+            if (!IsFocused)
+            {
+                Focus();
+            }
+
             var cursorPosition = FromPoint(e.GetPosition(this));
             renderContext.CursorEnter(0, cursorPosition);
         }
 
         private void GLWpfControlEx_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            var keyModifiers = GetKeyModifiers();
             var cursorPosition = FromPoint(e.GetPosition(this));
-            renderContext.CursorDown(0, cursorPosition, (CursorKey)e.ChangedButton);
+            renderContext.CursorDown(0, cursorPosition, (CursorKey)e.ChangedButton, keyModifiers);
         }
 
         private void GLWpfControlEx_MouseMove(object sender, MouseEventArgs e)
         {
+            var cursorKeyStates = GetCursorKeyStates(e).ToArray();
+            var keyModifiers = GetKeyModifiers();
             var cursorPosition = FromPoint(e.GetPosition(this));
-            renderContext.CursorMove(0, cursorPosition);
+            renderContext.CursorMove(0, cursorPosition, new BitArray(cursorKeyStates), keyModifiers);
         }
 
         private void GLWpfControlEx_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
@@ -194,13 +228,33 @@ namespace OpenBreed.Editor.UI.Wpf
         {
             var pointV = new Vector4(point.X, point.Y, 0.0f, 1.0f);
 
-            var translateTranform = Matrix4.CreateTranslation(0.0f, (float)ActualHeight, 0.0f);
+            var translateTransform = Matrix4.CreateTranslation(0.0f, (float)ActualHeight, 0.0f);
             var flipYTransform = Matrix4.CreateScale(1.0f, -1.0f, 1.0f);
 
-            var matT = flipYTransform * translateTranform;
+            var matT = flipYTransform * translateTransform;
             pointV *= matT;
 
             return new Vector2i((int)pointV.X, (int)pointV.Y);
+        }
+
+        private static IEnumerable<bool> GetCursorKeyStates(MouseEventArgs e)
+        {
+            yield return e.LeftButton == MouseButtonState.Pressed;
+            yield return e.MiddleButton == MouseButtonState.Pressed;
+            yield return e.RightButton == MouseButtonState.Pressed;
+            yield return e.XButton1 == MouseButtonState.Pressed;
+            yield return e.XButton2 == MouseButtonState.Pressed;
+        }
+
+        private static KeyModifiers GetKeyModifiers()
+        {
+            var modifiers = (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) ? KeyModifiers.Shift : 0;
+            modifiers |= (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) ? KeyModifiers.Control : 0;
+            modifiers |= (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)) ? KeyModifiers.Alt : 0;
+            modifiers |= Keyboard.IsKeyDown(Key.CapsLock) ? KeyModifiers.CapsLock : 0;
+            modifiers |= Keyboard.IsKeyDown(Key.NumLock) ? KeyModifiers.NumLock : 0;
+
+            return modifiers;
         }
 
         #endregion Private Methods

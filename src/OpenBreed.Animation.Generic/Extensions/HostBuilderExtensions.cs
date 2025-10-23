@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Generic.Builders;
 using OpenBreed.Animation.Generic.Data;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Interface.Builders;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface.Logging;
@@ -37,9 +39,21 @@ namespace OpenBreed.Animation.Generic.Extensions
             });
         }
 
+        public static void SetupBuilders<TObject>(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<IReadOnlyClipBuilder<TObject>, ReadOnlyClipBuilder<TObject>>();
+            });
+        }
+
         public static void SetupAnimationDataLoader<TObject>(this DataLoaderFactory dataLoaderFactory, IServiceProvider managerCollection)
         {
-            dataLoaderFactory.Register<IAnimationClipDataLoader<TObject>>(() => new AnimationClipDataLoader<TObject>(managerCollection.GetService<IRepositoryProvider>(),
+            dataLoaderFactory.Register<IReadOnlyClipDataLoader<TObject>>(() => new ReadOnlyClipDataLoader<TObject>(managerCollection.GetService<IRepositoryProvider>(),
+                                                                            managerCollection.GetService<IClipMan<TObject>>(),
+                                                                            managerCollection.GetService<IFrameUpdaterMan<TObject>>(),
+                                                                            managerCollection.GetService<ILogger>()));
+            dataLoaderFactory.Register<IEditableClipDataLoader<TObject>>(() => new EditableClipDataLoader<TObject>(managerCollection.GetService<IRepositoryProvider>(),
                                                                             managerCollection.GetService<IClipMan<TObject>>(),
                                                                             managerCollection.GetService<IFrameUpdaterMan<TObject>>(),
                                                                             managerCollection.GetService<ILogger>()));

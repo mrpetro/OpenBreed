@@ -15,6 +15,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -126,7 +127,7 @@ namespace OpenBreed.Rendering.OpenGL
             views.RemoveById(renderView.Id);
         }
 
-        public void CursorDown(int cursorId, Vector2i point, CursorKey cursorKey)
+        public void CursorDown(int cursorId, Vector2i point, CursorKey cursorKey, Abstractions.Events.KeyModifiers modifiers)
         {
             if (!TryGetView(point, out RenderView view))
             {
@@ -136,10 +137,10 @@ namespace OpenBreed.Rendering.OpenGL
             point = view.FromHostPoint(point);
 
             view.OnCursorDown(cursorId, point, cursorKey);
-            eventsMan.Raise(new ViewCursorDownEvent(view, cursorId, point, cursorKey));
+            eventsMan.Raise(new ViewCursorDownEvent(view, cursorId, point, cursorKey, modifiers));
         }
 
-        public void CursorUp(int cursorId, Vector2i point, CursorKey cursorKey)
+        public void CursorUp(int cursorId, Vector2i point, CursorKey cursorKey, Abstractions.Events.KeyModifiers modifiers)
         {
             if (!TryGetView(point, out RenderView view))
             {
@@ -149,7 +150,7 @@ namespace OpenBreed.Rendering.OpenGL
             point = view.FromHostPoint(point);
 
             view.OnCursorUp(cursorId, point, cursorKey);
-            eventsMan.Raise(new ViewCursorUpEvent(view, cursorId, point, cursorKey));
+            eventsMan.Raise(new ViewCursorUpEvent(view, cursorId, point, cursorKey, modifiers));
         }
 
         public void KeyDown(Abstractions.Events.Keys key, Abstractions.Events.KeyModifiers modifiers)
@@ -157,6 +158,7 @@ namespace OpenBreed.Rendering.OpenGL
             foreach (var view in activeViews)
             {
                 view.OnKeyDown(key, modifiers);
+                eventsMan.Raise(new ViewKeyDownEvent(view, key, modifiers));
             }
         }
 
@@ -165,6 +167,7 @@ namespace OpenBreed.Rendering.OpenGL
             foreach (var view in activeViews)
             {
                 view.OnKeyUp(key, modifiers);
+                eventsMan.Raise(new ViewKeyUpEvent(view, key, modifiers));
             }
         }
 
@@ -194,7 +197,7 @@ namespace OpenBreed.Rendering.OpenGL
             eventsMan.Raise(new ViewCursorLeaveEvent(view, cursorId, point));
         }
 
-        public void CursorMove(int cursorId, Vector2i point)
+        public void CursorMove(int cursorId, Vector2i point, BitArray cursorKeyStates, Abstractions.Events.KeyModifiers modifiers)
         {
             if (!TryGetView(point, out RenderView view))
             {
@@ -203,8 +206,8 @@ namespace OpenBreed.Rendering.OpenGL
 
             point = view.FromHostPoint(point);
 
-            view.OnCursorMove(cursorId, point);
-            eventsMan.Raise(new ViewCursorMoveEvent(view, cursorId, point));
+            view.OnCursorMove(cursorId, point, cursorKeyStates, modifiers);
+            eventsMan.Raise(new ViewCursorMoveEvent(view, cursorId, cursorKeyStates, point));
         }
 
         public void CursorWheel(int cursorId, Vector2i point, int wheelDelta)

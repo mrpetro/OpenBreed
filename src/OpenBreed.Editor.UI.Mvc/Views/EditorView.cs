@@ -53,6 +53,10 @@ namespace OpenBreed.Editor.UI.Mvc.Views
         public event Action<IRenderView, float> Rendering;
 
         public event Action<ViewCursorDownEvent> CursorDown;
+        public event Action<ViewCursorUpEvent> CursorUp;
+        public event Action<ViewCursorMoveEvent> CursorMove;
+        public event Action<ViewKeyDownEvent> KeyDown;
+        public event Action<ViewKeyUpEvent> KeyUp;
 
         #endregion Public Events
 
@@ -86,8 +90,10 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
         public Vector2i CursorPosition { get; private set; }
 
-        public Vector2i CursorSnapPosition { get; private set; }
-
+        public Vector2 CursorInteractionSnapPosition { get; private set; }
+        public Vector2 CursorInteractionPosition { get; private set; }
+        public Vector2 CursorInteractionDelta { get; private set; }
+        public Vector2 CursorInteractionSnapDelta { get; private set; }
         public Vector2i CursorDelta { get; private set; }
 
         public float MinScale { get; private set; } = 0.0625f;
@@ -139,13 +145,25 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             {
                 cursorScroll = false;
             }
+
+            CursorUp?.Invoke(e);
+        }
+
+        protected virtual void OnKeyDown(ViewKeyDownEvent e)
+        {
+            KeyDown?.Invoke(e);
+        }
+
+        protected virtual void OnKeyUp(ViewKeyUpEvent e)
+        {
+            KeyUp?.Invoke(e);
         }
 
         protected virtual void OnRender(IRenderView view, float dt)
         {
         }
 
-        protected virtual Vector2i ResolveCursorSnap(Vector2i coordinates)
+        protected virtual Vector2 GetInteractionSnapCursorPosition(Vector2 coordinates)
         {
             return coordinates;
         }
@@ -204,6 +222,8 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             eventsMan.Unsubscribe<ViewCursorDownEvent>(OnCursorDown);
             eventsMan.Unsubscribe<ViewCursorUpEvent>(OnCursorUp);
             eventsMan.Unsubscribe<ViewCursorWheelEvent>(OnCursorWheel);
+            eventsMan.Unsubscribe<ViewKeyDownEvent>(OnKeyDown);
+            eventsMan.Unsubscribe<ViewKeyUpEvent>(OnKeyUp);
 
             renderView.Rendering -= OnRenderPrivate;
         }
@@ -216,6 +236,8 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             eventsMan.SubscribeToView<ViewCursorDownEvent>(renderView, OnCursorDown);
             eventsMan.SubscribeToView<ViewCursorUpEvent>(renderView, OnCursorUp);
             eventsMan.SubscribeToView<ViewCursorWheelEvent>(renderView, OnCursorWheel);
+            eventsMan.SubscribeToView<ViewKeyDownEvent>(renderView, OnKeyDown);
+            eventsMan.SubscribeToView<ViewKeyUpEvent>(renderView, OnKeyUp);
         }
 
         private void OnRenderPrivate(IRenderView view, float dt)
@@ -240,12 +262,21 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             CursorDelta = e.Position - CursorPosition;
             CursorPosition = e.Position;
 
-            CursorSnapPosition = ResolveCursorSnap(CursorPosition);
+            var newInteractionPosition = GetInteractionCursorPosition(e.View);
+            var newInteractionSnapPosition = GetInteractionSnapCursorPosition(newInteractionPosition);
+            CursorInteractionDelta = newInteractionPosition - CursorInteractionPosition;
+            CursorInteractionPosition = newInteractionPosition;
+            CursorInteractionSnapDelta = newInteractionSnapPosition - CursorInteractionSnapPosition;
+            CursorInteractionSnapPosition = newInteractionSnapPosition;
+
+
 
             if (cursorScroll)
             {
                 renderView.MoveBy(CursorDelta);
             }
+
+            CursorMove?.Invoke(e);
         }
 
         private void OnCursorWheel(ViewCursorWheelEvent e)
@@ -286,7 +317,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
         private void RenderCursor(IRenderView view, Box2 clipBox)
         {
-            var cursorPos = GetInteractionCursorPosition(view);
+            var cursorPos = CursorInteractionSnapPosition;
 
             var fontMan = view.Context.ServiceProvider.GetRequiredService<IFontMan>();
             var font = fontMan.GetOSFont("ARIAL", 9);

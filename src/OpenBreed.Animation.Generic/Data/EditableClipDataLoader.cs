@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Generic.Builders;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Builders;
 using OpenBreed.Animation.Interface.Data;
@@ -9,10 +10,11 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.TileStamps;
 using System;
+using System.Xml.Linq;
 
 namespace OpenBreed.Animation.Generic.Data
 {
-    internal class AnimationClipDataLoader<TObject> : IAnimationClipDataLoader<TObject>
+    internal class EditableClipDataLoader<TObject> : IEditableClipDataLoader<TObject>
     {
         #region Private Fields
 
@@ -25,7 +27,7 @@ namespace OpenBreed.Animation.Generic.Data
 
         #region Public Constructors
 
-        public AnimationClipDataLoader(IRepositoryProvider repositoryProvider,
+        public EditableClipDataLoader(IRepositoryProvider repositoryProvider,
                                    IClipMan<TObject> clipMan,
                                    IFrameUpdaterMan<TObject> frameUpdaterMan,
                                    ILogger logger)
@@ -40,19 +42,21 @@ namespace OpenBreed.Animation.Generic.Data
 
         #region Public Methods
 
-        public IReadOnlyClip<TObject> Load(IDbAnimation dbAnimation, bool reload = false)
+        public IEditableClip<TObject> Load(IDbAnimation dbAnimation)
         {
             if (clipMan.TryGetByName(dbAnimation.Id, out IReadOnlyClip<TObject> clip))
             {
-                if (!reload)
+                if (clip is IEditableClip<TObject> existingClip)
                 {
-                    return clip;
+                    return existingClip;
                 }
             }
 
             var totalTime = dbAnimation.Length;
 
-            var clipBuilder = clipMan.NewClip(dbAnimation.Id, totalTime);
+            var clipBuilder = new EditableClipBuilder<TObject>();
+            clipBuilder.SetName(dbAnimation.Id);
+            clipBuilder.SetLength(dbAnimation.Length);
 
             foreach (var part in dbAnimation.Tracks)
             {
@@ -61,26 +65,15 @@ namespace OpenBreed.Animation.Generic.Data
 
             logger.LogTrace("Animation clip '{0}' loaded.", dbAnimation.Id);
 
-            clip = clipBuilder.Build();
+            var editableClip = clipBuilder.Build();
 
-            clipMan.Register(clip);
+            clipMan.Register(editableClip);
 
-            return clip;
+            return editableClip;
         }
 
-        private void PreloadRelated()
+        public IEditableClip<TObject> Load(string dbEntryId)
         {
-
-        }
-
-
-        public IReadOnlyClip<TObject> Load(string dbEntryId)
-        {
-            if (clipMan.TryGetByName(dbEntryId, out IReadOnlyClip<TObject> clip))
-            {
-                return clip;
-            }
-
             var entry = repositoryProvider.GetRepository<IDbAnimation>().GetById(dbEntryId);
 
             if (entry is null)
@@ -94,6 +87,10 @@ namespace OpenBreed.Animation.Generic.Data
         #endregion Public Methods
 
         #region Private Methods
+
+        private void PreloadRelated()
+        {
+        }
 
         private FrameInterpolation GetFrameInterpolation(EntryFrameInterpolation interpolation)
         {
@@ -110,12 +107,12 @@ namespace OpenBreed.Animation.Generic.Data
             }
         }
 
-        private void LoadTrack<TValue>(IReadOnlyClipBuilder<TObject> clipBuilder, IDbAnimationTrack<TValue> entryTrack)
+        private void LoadTrack<TValue>(IClipBuilder<TObject> clipBuilder, IDbAnimationTrack<TValue> entryTrack)
         {
             var updater = frameUpdaterMan.GetByName<TValue>(entryTrack.Controller);
             var loader = frameUpdaterMan.GetLoaderByName<TValue>(entryTrack.Controller);
             var interpolation = GetFrameInterpolation(entryTrack.Interpolation);
-            var trackBuilder = clipBuilder.AddTrack<TValue>(interpolation, updater, default(TValue));
+            var trackBuilder = clipBuilder.AddTrack<TValue>(entryTrack.Controller, interpolation, updater, default(TValue));
 
             foreach (var frame in entryTrack.Frames)
             {
@@ -124,7 +121,7 @@ namespace OpenBreed.Animation.Generic.Data
             }
         }
 
-        private void LoadTrack(IReadOnlyClipBuilder<TObject> clipBuilder, IDbAnimationTrack entryTrack)
+        private void LoadTrack(IClipBuilder<TObject> clipBuilder, IDbAnimationTrack entryTrack)
         {
             if (entryTrack is IDbAnimationTrack<int>)
                 LoadTrack<int>(clipBuilder, (IDbAnimationTrack<int>)entryTrack);

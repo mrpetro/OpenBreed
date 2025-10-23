@@ -93,9 +93,9 @@ namespace OpenBreed.Editor.VM.Animations
 
                     view.RenderView = renderView;
 
-                    var clip = model.Load();
+                    //var clip = model.Load();
 
-                    animationSandbox.Load(clip.Name, context);
+                    animationSandbox.Load(model.Name, context);
                 }
             };
         }
