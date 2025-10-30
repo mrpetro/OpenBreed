@@ -35,6 +35,8 @@ namespace OpenBreed.Database.Interface.Items.Animations
 
         bool RemoveTrack(IDbAnimationTrack track);
 
+        void ClearTracks();
+
         #endregion Public Properties
     }
 }

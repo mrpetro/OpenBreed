@@ -36,19 +36,15 @@ namespace OpenBreed.Editor.VM.Animations
     {
         #region Private Fields
 
+        private readonly IServiceProvider serviceProvider;
+        private readonly IFrameUpdaterMan<IEntity> frameUpdaterMan;
+        private readonly IAnimationSandbox animationSandbox;
+        private readonly IAnimationEditorModel editorModel;
         private ClipTrackItemVM selectedTrack;
 
         private float clipLength;
         private bool isSetClipLengthVisible;
         private bool isAddTrackModeEnabled;
-        private readonly IServiceProvider serviceProvider;
-        private readonly IFrameUpdaterMan<IEntity> frameUpdaterMan;
-        private readonly IAnimationSandbox animationSandbox;
-        private readonly IAnimationEditorModel model;
-
-        public AnimationCurvesEditorVM CurvesEditor { get; }
-        public AnimationPreviewVM Preview { get; }
-        public AnimationPlayerVM Player { get; }
 
         #endregion Private Fields
 
@@ -67,9 +63,9 @@ namespace OpenBreed.Editor.VM.Animations
             this.frameUpdaterMan = frameUpdaterMan;
             this.animationSandbox = animationSandboxFactory.Create();
 
-            this.model = ActivatorUtilities.CreateInstance<AnimationEditorModel>(serviceProvider, dbEntry);
-            this.Preview = ActivatorUtilities.CreateInstance<AnimationPreviewVM>(serviceProvider, animationSandbox, model);
-            this.CurvesEditor = ActivatorUtilities.CreateInstance<AnimationCurvesEditorVM>(serviceProvider, animationSandbox, model);
+            this.editorModel = ActivatorUtilities.CreateInstance<AnimationEditorModel>(serviceProvider, dbEntry);
+            this.Preview = ActivatorUtilities.CreateInstance<AnimationPreviewVM>(serviceProvider, animationSandbox, editorModel);
+            this.CurvesEditor = ActivatorUtilities.CreateInstance<AnimationCurvesEditorVM>(serviceProvider, animationSandbox, editorModel);
             this.Player = ActivatorUtilities.CreateInstance<AnimationPlayerVM>(serviceProvider, animationSandbox);
             ComponentSelector = new AnimationComponentSelectorVM(frameUpdaterMan, OnAnimationSelectorConfirm, OnAnimationSelectorCancel);
 
@@ -85,6 +81,10 @@ namespace OpenBreed.Editor.VM.Animations
         #endregion Public Constructors
 
         #region Public Properties
+
+        public AnimationCurvesEditorVM CurvesEditor { get; }
+        public AnimationPreviewVM Preview { get; }
+        public AnimationPlayerVM Player { get; }
 
         public float ClipLength
         {
@@ -122,22 +122,22 @@ namespace OpenBreed.Editor.VM.Animations
 
         #endregion Public Properties
 
-        #region Protected Methods
+        #region Internal Methods
 
         internal void EditTrack(IDbAnimationTrack dbTrack)
         {
-            model.Edit(dbTrack);
             CurvesEditor.Edit(dbTrack);
         }
 
-        private void OnTrackPropertyChanged(string propertyName)
-        {
-            SelectedTrack?.Refresh();
-        }
+        #endregion Internal Methods
 
-        private void OnClipLengthChanging()
+        #region Protected Methods
+
+        protected override void ProtectedUpdateEntry()
         {
-            IsSetClipLengthVisible = ClipLength != model.ClipLength;
+            editorModel.Store();
+
+            base.ProtectedUpdateEntry();
         }
 
         protected override void OnPropertyChanged(string name)
@@ -148,9 +148,11 @@ namespace OpenBreed.Editor.VM.Animations
 
                     EditTrack(SelectedTrack?.Source);
                     break;
+
                 case nameof(ClipLength):
                     OnClipLengthChanging();
                     break;
+
                 default:
                     break;
             }
@@ -161,6 +163,16 @@ namespace OpenBreed.Editor.VM.Animations
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void OnTrackPropertyChanged(string propertyName)
+        {
+            SelectedTrack?.Refresh();
+        }
+
+        private void OnClipLengthChanging()
+        {
+            IsSetClipLengthVisible = ClipLength != editorModel.ClipLength;
+        }
 
         private void OnAnimationSelectorCancel()
         {
@@ -184,20 +196,20 @@ namespace OpenBreed.Editor.VM.Animations
 
         private void SetClipLength()
         {
-            model.ClipLength = ClipLength;
+            editorModel.ClipLength = ClipLength;
             OnClipLengthChanging();
         }
 
         private void RemoveTrack(IDbAnimationTrack source)
         {
-            model.RemoveTrack(source);
+            editorModel.RemoveTrack(source);
             var trackVm = TrackItems.First(item => item.Source == source);
             TrackItems.Remove(trackVm);
         }
 
         private void Restore()
         {
-            ClipLength = model.ClipLength;
+            ClipLength = editorModel.ClipLength;
 
             TrackItems.Clear();
 

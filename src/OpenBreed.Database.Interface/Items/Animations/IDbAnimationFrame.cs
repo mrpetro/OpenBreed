@@ -1,5 +1,10 @@
 ﻿namespace OpenBreed.Database.Interface.Items.Animations
 {
+    public enum FrameTangentsMode
+    {
+
+    }
+
     public interface IDbAnimationFrame
     {
         #region Public Properties

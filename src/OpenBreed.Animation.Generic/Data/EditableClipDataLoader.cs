@@ -88,10 +88,6 @@ namespace OpenBreed.Animation.Generic.Data
 
         #region Private Methods
 
-        private void PreloadRelated()
-        {
-        }
-
         private FrameInterpolation GetFrameInterpolation(EntryFrameInterpolation interpolation)
         {
             switch (interpolation)

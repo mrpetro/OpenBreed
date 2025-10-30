@@ -257,447 +257,447 @@
       <Items>
         <Sound Id="Sounds.ALIEN1">
           <DataRef>Vanilla/EPF/ALIEN1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.ALIEN2">
           <DataRef>Vanilla/EPF/ALIEN2</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.ALIEN3">
           <DataRef>Vanilla/EPF/ALIEN3</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.ALIEN4">
           <DataRef>Vanilla/EPF/ALIEN4</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Ammo/Picked">
           <DataRef>Vanilla/EPF/AMMO</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.BACKING1">
           <DataRef>Vanilla/EPF/BACKING1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.BACKING2">
           <DataRef>Vanilla/EPF/BACKING2</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.BACKING3">
           <DataRef>Vanilla/EPF/BACKING3</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.BACKING4">
           <DataRef>Vanilla/EPF/BACKING4</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.CACOON1">
           <DataRef>Vanilla/EPF/CACOON1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.COMPUTER">
           <DataRef>Vanilla/EPF/COMPUTER</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.COUNTDWN">
           <DataRef>Vanilla/EPF/COUNTDWN</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/CreditsSmall/Picked">
           <DataRef>Vanilla/EPF/CREDITS</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/CreditsBig/Picked">
           <DataRef>Vanilla/EPF/CREDITS</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.CURSOR">
           <DataRef>Vanilla/EPF/CURSOR</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Hero/Dying">
           <DataRef>Vanilla/EPF/DIE</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Door/Opening">
           <DataRef>Vanilla/EPF/DOOR1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.EAT1">
           <DataRef>Vanilla/EPF/EAT1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/LandMine/Explosion">
           <DataRef>Vanilla/EPF/EXPLOS</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.FLAMEOFF">
           <DataRef>Vanilla/EPF/FLAMEOFF</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.FLAMEON">
           <DataRef>Vanilla/EPF/FLAMEON</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.GENERATE">
           <DataRef>Vanilla/EPF/GENERATE</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.GRENADE">
           <DataRef>Vanilla/EPF/GRENADE</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.GRUNT1">
           <DataRef>Vanilla/EPF/GRUNT1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.HATCH1">
           <DataRef>Vanilla/EPF/HATCH1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/MedkitSmall/Picked">
           <DataRef>Vanilla/EPF/HEALTH</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/MedkitBig/Picked">
           <DataRef>Vanilla/EPF/HEALTH</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Keycard/Picked">
           <DataRef>Vanilla/EPF/KEYS</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.LAZER1">
           <DataRef>Vanilla/EPF/LAZER1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.LAZER2">
           <DataRef>Vanilla/EPF/LAZER2</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.LAZER3">
           <DataRef>Vanilla/EPF/LAZER3</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.LAZER4">
           <DataRef>Vanilla/EPF/LAZER4</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.LIZARD">
           <DataRef>Vanilla/EPF/LIZARD</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.MGUN">
           <DataRef>Vanilla/EPF/MGUN</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.MINETICK">
           <DataRef>Vanilla/EPF/MINETICK</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.MISSILE">
           <DataRef>Vanilla/EPF/MISSILE</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.NULLSAMP">
           <DataRef>Vanilla/EPF/NULLSAMP</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.ONEWAY">
           <DataRef>Vanilla/EPF/ONEWAY</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.OUTAMMO">
           <DataRef>Vanilla/EPF/OUTAMMO</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.SELECT">
           <DataRef>Vanilla/EPF/SELECT</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.SIREN">
           <DataRef>Vanilla/EPF/SIREN</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Nash">
           <DataRef>Vanilla/EPF/SPEECH01</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/John">
           <DataRef>Vanilla/EPF/SPEECH02</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/IsDead">
           <DataRef>Vanilla/EPF/SPEECH03</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/YoureOnYourOwn">
           <DataRef>Vanilla/EPF/SPEECH04</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/AssaultFailed">
           <DataRef>Vanilla/EPF/SPEECH05</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/MissionComplete">
           <DataRef>Vanilla/EPF/SPEECH06</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Hurry">
           <DataRef>Vanilla/EPF/SPEECH07</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/AlarmSystemsEnabled">
           <DataRef>Vanilla/EPF/SPEECH08</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/LocateExit">
           <DataRef>Vanilla/EPF/SPEECH09</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/DestructionImmanent">
           <DataRef>Vanilla/EPF/SPEECH10</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Warning">
           <DataRef>Vanilla/EPF/SPEECH11</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/LazersOperational">
           <DataRef>Vanilla/EPF/SPEECH12</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/ScanDetectsLargeAlien">
           <DataRef>Vanilla/EPF/SPEECH13</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/PowerOut">
           <DataRef>Vanilla/EPF/SPEECH14</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/TorchActivated">
           <DataRef>Vanilla/EPF/SPEECH15</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/MinefieldDirectlyAhead">
           <DataRef>Vanilla/EPF/SPEECH16</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/EnergyLow">
           <DataRef>Vanilla/EPF/SPEECH17</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/IntexNetwork">
           <DataRef>Vanilla/EPF/SPEECH18</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Online">
           <DataRef>Vanilla/EPF/SPEECH19</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/LoggingOff">
           <DataRef>Vanilla/EPF/SPEECH20</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/SmartCardMessageFollows">
           <DataRef>Vanilla/EPF/SPEECH21</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/LinkCorridor">
           <DataRef>Vanilla/EPF/SPEECH22</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/SurvivorRescued">
           <DataRef>Vanilla/EPF/SPEECH23</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/YouveFoundTheSecretLevel">
           <DataRef>Vanilla/EPF/SPEECH24</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/Entering">
           <DataRef>Vanilla/EPF/SPEECH25</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/MainTower">
           <DataRef>Vanilla/EPF/SPEECH26</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Speech/AreaScan">
           <DataRef>Vanilla/EPF/SPEECH27</DataRef>
-		  <SampleRate>9600</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>9600</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.SPLAT1">
           <DataRef>Vanilla/EPF/SPLAT1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.SWITCH">
           <DataRef>Vanilla/EPF/SWITCH</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Sounds.TELE">
           <DataRef>Vanilla/EPF/TELE</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Turret/Fire">
           <DataRef>Vanilla/EPF/TURRET1</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/Turret/Turn">
           <DataRef>Vanilla/EPF/TURRET2</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
         <Sound Id="Vanilla/Common/ExtraLife/Picked">
           <DataRef>Vanilla/EPF/XTRALIFE</DataRef>
-		  <SampleRate>11025</SampleRate>
-		  <BitsPerSample>8</BitsPerSample>
-		  <Channels>1</Channels> 
+          <SampleRate>11025</SampleRate>
+          <BitsPerSample>8</BitsPerSample>
+          <Channels>1</Channels>
         </Sound>
       </Items>
     </Sounds>
@@ -709,6 +709,7 @@
             <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR1A.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L1/B">
           <PaletteRefs>
@@ -716,6 +717,7 @@
             <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR1B.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L3/A">
           <PaletteRefs>
@@ -723,6 +725,7 @@
             <PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR3A.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L3/B">
           <PaletteRefs>
@@ -730,6 +733,7 @@
             <PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR3B.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L4/A">
           <PaletteRefs>
@@ -737,6 +741,7 @@
             <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR4A.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L4/B">
           <PaletteRefs>
@@ -744,6 +749,7 @@
             <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR4B.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L5/A">
           <PaletteRefs>
@@ -751,6 +757,7 @@
             <PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR5A.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L5/B">
           <PaletteRefs>
@@ -758,6 +765,7 @@
             <PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR5B.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L6/A">
           <PaletteRefs>
@@ -765,6 +773,7 @@
             <PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR6A.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L6/B">
           <PaletteRefs>
@@ -772,6 +781,7 @@
             <PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR6B.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L7/A">
           <PaletteRefs>
@@ -779,6 +789,7 @@
             <PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR7A.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L7/B">
           <PaletteRefs>
@@ -786,6 +797,7 @@
             <PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR7B.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L8/A">
           <PaletteRefs>
@@ -793,6 +805,7 @@
             <PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR8A.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/L8/B">
           <PaletteRefs>
@@ -800,6 +813,7 @@
             <PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPR8B.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/LD/A">
           <PaletteRefs>
@@ -807,6 +821,7 @@
             <PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPRDA.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/LD/B">
           <PaletteRefs>
@@ -814,121 +829,140 @@
             <PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/SPRDB.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Hero/1">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/HERO1.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Hero/2">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/HERO2.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Resident">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/RESIDENT.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/A">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_A.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/B">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_B.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/C">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_C.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/E">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_E.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/F">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_F.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/G">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_G.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/H">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_H.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/I">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_I.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/J">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_J.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/K">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_K.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Alien/X">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/ALIEN_X.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Computer/1">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON_A</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/COMP1.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Computer/2">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON_A</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/COMP2.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Computer/3">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON_A</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/COMP3.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Computer/Font">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON_A</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/COMPFONT.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Status">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/STATUS.SPR</DataRef>
-		  <Sizes>
+          <Sizes>
             <Size X="320" Y="11" />
             <Size X="320" Y="11" />
             <Size X="8" Y="8" />
@@ -944,13 +978,14 @@
             <Size X="8" Y="8" />
             <Size X="32" Y="8" />
             <Size X="32" Y="8" />
-		  </Sizes>
+          </Sizes>
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="Vanilla/Common/Torch">
           <PaletteRefs>
             <PaletteRef>Palettes.COMMON</PaletteRef>
           </PaletteRefs>
           <DataRef>Vanilla/EPF/TORCH.SPR</DataRef>
+          <Sizes />
         </SpriteSetFromSPR>
       </Items>
     </SpriteSets>
@@ -4362,7 +4397,7 @@
       <Items>
         <Map Description="CRASH LANDING SITE" Id="Vanilla/1">
           <DataRef>Vanilla/EPF/MAP.01</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
@@ -4377,7 +4412,7 @@
         </Map>
         <Map Description="CIVILIAN ZONE 1" Id="Vanilla/2">
           <DataRef>Vanilla/EPF/MAP.02</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
@@ -4393,7 +4428,7 @@
         </Map>
         <Map Description="CIVILIAN ZONE 2" Id="Vanilla/3">
           <DataRef>Vanilla/EPF/MAP.03</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.03.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.03.ALCM</PaletteRef>
@@ -4409,7 +4444,7 @@
         </Map>
         <Map Description="CIVILIAN ZONE 3" Id="Vanilla/4">
           <DataRef>Vanilla/EPF/MAP.04</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.04.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.04.ALCM</PaletteRef>
@@ -4425,7 +4460,7 @@
         </Map>
         <Map Description="CIVILIAN ZONE 4" Id="Vanilla/5">
           <DataRef>Vanilla/EPF/MAP.05</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.05.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.05.ALCM</PaletteRef>
@@ -4441,7 +4476,7 @@
         </Map>
         <Map Description="OUTDOOR SECTOR 2" Id="Vanilla/6">
           <DataRef>Vanilla/EPF/MAP.06</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.06.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.06.ALCM</PaletteRef>
@@ -4457,7 +4492,7 @@
         </Map>
         <Map Description="STORES LEVEL 1" Id="Vanilla/7">
           <DataRef>Vanilla/EPF/MAP.07</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
@@ -4484,7 +4519,7 @@
         </Map>
         <Map Description="STORES LEVEL 2" Id="Vanilla/8">
           <DataRef>Vanilla/EPF/MAP.08</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.08.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.08.ALCM</PaletteRef>
@@ -4500,7 +4535,7 @@
         </Map>
         <Map Description="STORES SECTOR 3" Id="Vanilla/9">
           <DataRef>Vanilla/EPF/MAP.09</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.09.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.09.ALCM</PaletteRef>
@@ -4516,7 +4551,7 @@
         </Map>
         <Map Description="STORES SECTOR 4" Id="Vanilla/10">
           <DataRef>Vanilla/EPF/MAP.10</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.10.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.10.ALCM</PaletteRef>
@@ -4532,7 +4567,7 @@
         </Map>
         <Map Description="OUTDOOR SECTOR 3" Id="Vanilla/11">
           <DataRef>Vanilla/EPF/MAP.11</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.11.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.11.ALCM</PaletteRef>
@@ -4548,7 +4583,7 @@
         </Map>
         <Map Description="MILITARY SECTOR 1" Id="Vanilla/12">
           <DataRef>Vanilla/EPF/MAP.12</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
@@ -4575,7 +4610,7 @@
         </Map>
         <Map Description="MILITARY SECTOR 2" Id="Vanilla/13">
           <DataRef>Vanilla/EPF/MAP.13</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.13.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.13.ALCM</PaletteRef>
@@ -4591,7 +4626,7 @@
         </Map>
         <Map Description="MILITARY SECTOR 3" Id="Vanilla/14">
           <DataRef>Vanilla/EPF/MAP.14</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.14.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.14.ALCM</PaletteRef>
@@ -4607,7 +4642,7 @@
         </Map>
         <Map Description="MILITARY SECTOR 4" Id="Vanilla/15">
           <DataRef>Vanilla/EPF/MAP.15</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.15.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.15.ALCM</PaletteRef>
@@ -4623,7 +4658,7 @@
         </Map>
         <Map Description="SECURITY ZONE 1" Id="Vanilla/16">
           <DataRef>Vanilla/EPF/MAP.16</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
@@ -4651,7 +4686,7 @@
         </Map>
         <Map Description="SECURITY ZONE 2" Id="Vanilla/17">
           <DataRef>Vanilla/EPF/MAP.17</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.17.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.17.ALCM</PaletteRef>
@@ -4667,7 +4702,7 @@
         </Map>
         <Map Description="SECURITY ZONE 3" Id="Vanilla/18">
           <DataRef>Vanilla/EPF/MAP.18</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.18.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.18.ALCM</PaletteRef>
@@ -4683,7 +4718,7 @@
         </Map>
         <Map Description="SECURITY ZONE 4" Id="Vanilla/19">
           <DataRef>Vanilla/EPF/MAP.19</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.19.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.19.ALCM</PaletteRef>
@@ -4699,7 +4734,7 @@
         </Map>
         <Map Description="COLONY GROUND SECTOR 3" Id="Vanilla/20">
           <DataRef>Vanilla/EPF/MAP.20</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.20.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.20.ALCM</PaletteRef>
@@ -4715,7 +4750,7 @@
         </Map>
         <Map Description="SCIENCE SECTOR 1" Id="Vanilla/21">
           <DataRef>Vanilla/EPF/MAP.21</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
@@ -4742,7 +4777,7 @@
         </Map>
         <Map Description="SCIENCE SECTOR 2" Id="Vanilla/22">
           <DataRef>Vanilla/EPF/MAP.22</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.22.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.22.ALCM</PaletteRef>
@@ -4758,7 +4793,7 @@
         </Map>
         <Map Description="SCIENCE SECTOR 3" Id="Vanilla/23">
           <DataRef>Vanilla/EPF/MAP.23</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.23.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.23.ALCM</PaletteRef>
@@ -4774,7 +4809,7 @@
         </Map>
         <Map Description="SCIENCE SECTOR 4" Id="Vanilla/24">
           <DataRef>Vanilla/EPF/MAP.24</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.24.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.24.ALCM</PaletteRef>
@@ -4790,7 +4825,7 @@
         </Map>
         <Map Description="COLONY GROUND SECTOR 4" Id="Vanilla/25">
           <DataRef>Vanilla/EPF/MAP.25</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.25.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.25.ALCM</PaletteRef>
@@ -4806,7 +4841,7 @@
         </Map>
         <Map Description="ENGINEERING SECTOR 1" Id="Vanilla/26">
           <DataRef>Vanilla/EPF/MAP.26</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
@@ -4833,7 +4868,7 @@
         </Map>
         <Map Description="ENGINEERING SECTOR 2" Id="Vanilla/27">
           <DataRef>Vanilla/EPF/MAP.27</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.27.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.27.ALCM</PaletteRef>
@@ -4849,7 +4884,7 @@
         </Map>
         <Map Description="ENGINEERING SECTOR 3" Id="Vanilla/28">
           <DataRef>Vanilla/EPF/MAP.28</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.28.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.28.ALCM</PaletteRef>
@@ -4865,7 +4900,7 @@
         </Map>
         <Map Description="ENGINEERING SECTOR 4" Id="Vanilla/29">
           <DataRef>Vanilla/EPF/MAP.29</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.29.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.29.ALCM</PaletteRef>
@@ -4881,7 +4916,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 1" Id="Vanilla/30">
           <DataRef>Vanilla/EPF/MAP.30</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.30.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.30.ALCM</PaletteRef>
@@ -4897,7 +4932,7 @@
         </Map>
         <Map Description="CORRIDOR 2" Id="Vanilla/31">
           <DataRef>Vanilla/EPF/MAP.31</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.31.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.31.ALCM</PaletteRef>
@@ -4913,7 +4948,7 @@
         </Map>
         <Map Description="CORRIDOR 3" Id="Vanilla/32">
           <DataRef>Vanilla/EPF/MAP.32</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.32.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.32.ALCM</PaletteRef>
@@ -4929,7 +4964,7 @@
         </Map>
         <Map Description="CORRIDOR 4" Id="Vanilla/33">
           <DataRef>Vanilla/EPF/MAP.33</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.33.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.33.ALCM</PaletteRef>
@@ -4945,7 +4980,7 @@
         </Map>
         <Map Description="CORRIDOR 5" Id="Vanilla/34">
           <DataRef>Vanilla/EPF/MAP.34</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.34.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.34.ALCM</PaletteRef>
@@ -4961,7 +4996,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 6" Id="Vanilla/35">
           <DataRef>Vanilla/EPF/MAP.35</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.35.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.35.ALCM</PaletteRef>
@@ -4977,7 +5012,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 7" Id="Vanilla/36">
           <DataRef>Vanilla/EPF/MAP.36</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.36.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.36.ALCM</PaletteRef>
@@ -4993,7 +5028,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 8" Id="Vanilla/37">
           <DataRef>Vanilla/EPF/MAP.37</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.37.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.37.ALCM</PaletteRef>
@@ -5009,7 +5044,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 9" Id="Vanilla/38">
           <DataRef>Vanilla/EPF/MAP.38</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.38.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.38.ALCM</PaletteRef>
@@ -5025,7 +5060,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 10" Id="Vanilla/39">
           <DataRef>Vanilla/EPF/MAP.39</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.39.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.39.ALCM</PaletteRef>
@@ -5041,7 +5076,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 11" Id="Vanilla/40">
           <DataRef>Vanilla/EPF/MAP.40</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.40.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.40.ALCM</PaletteRef>
@@ -5057,7 +5092,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 12" Id="Vanilla/41">
           <DataRef>Vanilla/EPF/MAP.41</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.41.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.41.ALCM</PaletteRef>
@@ -5073,7 +5108,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 13" Id="Vanilla/42">
           <DataRef>Vanilla/EPF/MAP.42</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.42.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.42.ALCM</PaletteRef>
@@ -5089,7 +5124,7 @@
         </Map>
         <Map Description="CORRIDOR ZONE 14" Id="Vanilla/43">
           <DataRef>Vanilla/EPF/MAP.43</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.43.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.43.ALCM</PaletteRef>
@@ -5105,7 +5140,7 @@
         </Map>
         <Map Description="CORRIDOR 15" Id="Vanilla/44">
           <DataRef>Vanilla/EPF/MAP.44</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.44.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.44.ALCM</PaletteRef>
@@ -5121,7 +5156,7 @@
         </Map>
         <Map Description="CORRIDOR 16" Id="Vanilla/45">
           <DataRef>Vanilla/EPF/MAP.45</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.45.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.45.ALCM</PaletteRef>
@@ -5135,7 +5170,7 @@
         </Map>
         <Map Description="CORRIDOR 17" Id="Vanilla/46">
           <DataRef>Vanilla/EPF/MAP.46</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.46.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.46.ALCM</PaletteRef>
@@ -5151,7 +5186,7 @@
         </Map>
         <Map Description="MAIN TOWER LEVEL 1" Id="Vanilla/47">
           <DataRef>Vanilla/EPF/MAP.47</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
@@ -5178,7 +5213,7 @@
         </Map>
         <Map Description="MAIN TOWER LEVEL 2" Id="Vanilla/48">
           <DataRef>Vanilla/EPF/MAP.48</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.48.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.48.ALCM</PaletteRef>
@@ -5194,7 +5229,7 @@
         </Map>
         <Map Description="MAIN TOWER LEVEL 3" Id="Vanilla/49">
           <DataRef>Vanilla/EPF/MAP.49</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.49.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.49.ALCM</PaletteRef>
@@ -5210,7 +5245,7 @@
         </Map>
         <Map Description="MAIN TOWER LEVEL 4" Id="Vanilla/50">
           <DataRef>Vanilla/EPF/MAP.50</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.50.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.50.ALCM</PaletteRef>
@@ -5226,7 +5261,7 @@
         </Map>
         <Map Description="MAIN TOWER LEVEL 5" Id="Vanilla/51">
           <DataRef>Vanilla/EPF/MAP.51</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.51.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.51.ALCM</PaletteRef>
@@ -5242,7 +5277,7 @@
         </Map>
         <Map Description="TOWER LEVEL 6" Id="Vanilla/52">
           <DataRef>Vanilla/EPF/MAP.52</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.52.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.52.ALCM</PaletteRef>
@@ -5258,7 +5293,7 @@
         </Map>
         <Map Description="TOWER LEVEL 7" Id="Vanilla/53">
           <DataRef>Vanilla/EPF/MAP.53</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.53.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.53.ALCM</PaletteRef>
@@ -5274,7 +5309,7 @@
         </Map>
         <Map Description="Mission One(\?\?\?)" Id="Vanilla/54">
           <DataRef>Vanilla/EPF/MAP.54</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.54.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.54.ALCM</PaletteRef>
@@ -5290,7 +5325,7 @@
         </Map>
         <Map Description="OUTER COLONY SECTOR 5" Id="Vanilla/55">
           <DataRef>Vanilla/EPF/MAP.55</DataRef>
-		  <Format>ABTA</Format>
+          <Format>ABTA</Format>
           <PaletteRefs>
             <PaletteRef>Palettes.MAP.55.CMAP</PaletteRef>
             <PaletteRef>Palettes.MAP.55.ALCM</PaletteRef>
@@ -11602,7 +11637,7 @@
           </Tracks>
         </Animation>
         <Animation Id="Vanilla/L1/Generator/Working">
-          <Length>2</Length>
+          <Length>1</Length>
           <Tracks>
             <IntTrack>
               <Interpolation>None</Interpolation>
@@ -11635,12 +11670,12 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="5" />
+                <Frame Time="0" Value="5" />
                 <Frame Time="0.2" Value="4" />
                 <Frame Time="0.4" Value="3" />
                 <Frame Time="0.6" Value="2" />
                 <Frame Time="0.8" Value="1" />
-                <Frame Time="1.0" Value="0" />
+                <Frame Time="1" Value="0" />
               </Frames>
             </IntTrack>
           </Tracks>
@@ -11659,12 +11694,12 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="0" />
+                <Frame Time="0" Value="0" />
                 <Frame Time="0.2" Value="1" />
                 <Frame Time="0.4" Value="2" />
                 <Frame Time="0.6" Value="3" />
                 <Frame Time="0.8" Value="4" />
-                <Frame Time="1.0" Value="5" />
+                <Frame Time="1" Value="5" />
               </Frames>
             </IntTrack>
           </Tracks>
@@ -11683,7 +11718,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="8" />
+                <Frame Time="0" Value="8" />
                 <Frame Time="0.2" Value="9" />
                 <Frame Time="0.4" Value="10" />
                 <Frame Time="0.8" Value="11" />
@@ -11705,7 +11740,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="12" />
+                <Frame Time="0" Value="12" />
                 <Frame Time="0.2" Value="13" />
                 <Frame Time="0.4" Value="14" />
                 <Frame Time="0.8" Value="15" />
@@ -11727,7 +11762,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="3" />
+                <Frame Time="0" Value="3" />
                 <Frame Time="0.3" Value="2" />
                 <Frame Time="0.6" Value="1" />
                 <Frame Time="0.9" Value="0" />
@@ -11749,7 +11784,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="0" />
+                <Frame Time="0" Value="0" />
                 <Frame Time="0.3" Value="1" />
                 <Frame Time="0.6" Value="2" />
                 <Frame Time="0.9" Value="3" />
@@ -11771,7 +11806,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="7" />
+                <Frame Time="0" Value="7" />
                 <Frame Time="0.3" Value="6" />
                 <Frame Time="0.6" Value="5" />
                 <Frame Time="0.9" Value="4" />
@@ -11793,7 +11828,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="4" />
+                <Frame Time="0" Value="4" />
                 <Frame Time="0.3" Value="5" />
                 <Frame Time="0.6" Value="6" />
                 <Frame Time="0.9" Value="7" />
@@ -11815,7 +11850,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="3" />
+                <Frame Time="0" Value="3" />
                 <Frame Time="0.3" Value="2" />
                 <Frame Time="0.6" Value="1" />
                 <Frame Time="0.9" Value="0" />
@@ -11837,7 +11872,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="0" />
+                <Frame Time="0" Value="0" />
                 <Frame Time="0.3" Value="1" />
                 <Frame Time="0.6" Value="2" />
                 <Frame Time="0.9" Value="3" />
@@ -11859,7 +11894,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="7" />
+                <Frame Time="0" Value="7" />
                 <Frame Time="0.3" Value="6" />
                 <Frame Time="0.6" Value="5" />
                 <Frame Time="0.9" Value="4" />
@@ -11881,7 +11916,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="4" />
+                <Frame Time="0" Value="4" />
                 <Frame Time="0.3" Value="5" />
                 <Frame Time="0.6" Value="6" />
                 <Frame Time="0.9" Value="7" />
@@ -11903,7 +11938,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="8" />
+                <Frame Time="0" Value="8" />
                 <Frame Time="0.2" Value="9" />
                 <Frame Time="0.4" Value="10" />
                 <Frame Time="0.8" Value="11" />
@@ -11925,7 +11960,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="12" />
+                <Frame Time="0" Value="12" />
                 <Frame Time="0.2" Value="13" />
                 <Frame Time="0.4" Value="14" />
                 <Frame Time="0.8" Value="15" />
@@ -11947,7 +11982,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="3" />
+                <Frame Time="0" Value="3" />
                 <Frame Time="0.3" Value="2" />
                 <Frame Time="0.6" Value="1" />
                 <Frame Time="0.9" Value="0" />
@@ -11969,7 +12004,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="0" />
+                <Frame Time="0" Value="0" />
                 <Frame Time="0.3" Value="1" />
                 <Frame Time="0.6" Value="2" />
                 <Frame Time="0.9" Value="3" />
@@ -11991,7 +12026,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="7" />
+                <Frame Time="0" Value="7" />
                 <Frame Time="0.3" Value="6" />
                 <Frame Time="0.6" Value="5" />
                 <Frame Time="0.9" Value="4" />
@@ -12013,7 +12048,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="4" />
+                <Frame Time="0" Value="4" />
                 <Frame Time="0.3" Value="5" />
                 <Frame Time="0.6" Value="6" />
                 <Frame Time="0.9" Value="7" />
@@ -12035,7 +12070,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="8" />
+                <Frame Time="0" Value="8" />
                 <Frame Time="0.2" Value="9" />
                 <Frame Time="0.4" Value="10" />
                 <Frame Time="0.8" Value="11" />
@@ -12057,7 +12092,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="12" />
+                <Frame Time="0" Value="12" />
                 <Frame Time="0.2" Value="13" />
                 <Frame Time="0.4" Value="14" />
                 <Frame Time="0.8" Value="15" />
@@ -12079,7 +12114,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="3" />
+                <Frame Time="0" Value="3" />
                 <Frame Time="0.3" Value="2" />
                 <Frame Time="0.6" Value="1" />
                 <Frame Time="0.9" Value="0" />
@@ -12101,7 +12136,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="0" />
+                <Frame Time="0" Value="0" />
                 <Frame Time="0.3" Value="1" />
                 <Frame Time="0.6" Value="2" />
                 <Frame Time="0.9" Value="3" />
@@ -12123,7 +12158,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="7" />
+                <Frame Time="0" Value="7" />
                 <Frame Time="0.3" Value="6" />
                 <Frame Time="0.6" Value="5" />
                 <Frame Time="0.9" Value="4" />
@@ -12145,7 +12180,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="4" />
+                <Frame Time="0" Value="4" />
                 <Frame Time="0.3" Value="5" />
                 <Frame Time="0.6" Value="6" />
                 <Frame Time="0.9" Value="7" />
@@ -12167,7 +12202,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="3" />
+                <Frame Time="0" Value="3" />
                 <Frame Time="0.3" Value="2" />
                 <Frame Time="0.6" Value="1" />
                 <Frame Time="0.9" Value="0" />
@@ -12189,7 +12224,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="0" />
+                <Frame Time="0" Value="0" />
                 <Frame Time="0.3" Value="1" />
                 <Frame Time="0.6" Value="2" />
                 <Frame Time="0.9" Value="3" />
@@ -12211,7 +12246,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="7" />
+                <Frame Time="0" Value="7" />
                 <Frame Time="0.3" Value="6" />
                 <Frame Time="0.6" Value="5" />
                 <Frame Time="0.9" Value="4" />
@@ -12233,7 +12268,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="4" />
+                <Frame Time="0" Value="4" />
                 <Frame Time="0.3" Value="5" />
                 <Frame Time="0.6" Value="6" />
                 <Frame Time="0.9" Value="7" />
@@ -12255,7 +12290,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="8" />
+                <Frame Time="0" Value="8" />
                 <Frame Time="0.2" Value="9" />
                 <Frame Time="0.4" Value="10" />
                 <Frame Time="0.8" Value="11" />
@@ -12277,7 +12312,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="12" />
+                <Frame Time="0" Value="12" />
                 <Frame Time="0.2" Value="13" />
                 <Frame Time="0.4" Value="14" />
                 <Frame Time="0.8" Value="15" />
@@ -12299,7 +12334,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="3" />
+                <Frame Time="0" Value="3" />
                 <Frame Time="0.3" Value="2" />
                 <Frame Time="0.6" Value="1" />
                 <Frame Time="0.9" Value="0" />
@@ -12321,7 +12356,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="0" />
+                <Frame Time="0" Value="0" />
                 <Frame Time="0.3" Value="1" />
                 <Frame Time="0.6" Value="2" />
                 <Frame Time="0.9" Value="3" />
@@ -12343,7 +12378,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="7" />
+                <Frame Time="0" Value="7" />
                 <Frame Time="0.3" Value="6" />
                 <Frame Time="0.6" Value="5" />
                 <Frame Time="0.9" Value="4" />
@@ -12365,7 +12400,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="4" />
+                <Frame Time="0" Value="4" />
                 <Frame Time="0.3" Value="5" />
                 <Frame Time="0.6" Value="6" />
                 <Frame Time="0.9" Value="7" />
@@ -12387,7 +12422,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="8" />
+                <Frame Time="0" Value="8" />
                 <Frame Time="0.2" Value="9" />
                 <Frame Time="0.4" Value="10" />
                 <Frame Time="0.8" Value="11" />
@@ -12409,7 +12444,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="12" />
+                <Frame Time="0" Value="12" />
                 <Frame Time="0.2" Value="13" />
                 <Frame Time="0.4" Value="14" />
                 <Frame Time="0.8" Value="15" />
@@ -12431,7 +12466,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="3" />
+                <Frame Time="0" Value="3" />
                 <Frame Time="0.3" Value="2" />
                 <Frame Time="0.6" Value="1" />
                 <Frame Time="0.9" Value="0" />
@@ -12453,7 +12488,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="0" />
+                <Frame Time="0" Value="0" />
                 <Frame Time="0.3" Value="1" />
                 <Frame Time="0.6" Value="2" />
                 <Frame Time="0.9" Value="3" />
@@ -12475,7 +12510,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="7" />
+                <Frame Time="0" Value="7" />
                 <Frame Time="0.3" Value="6" />
                 <Frame Time="0.6" Value="5" />
                 <Frame Time="0.9" Value="4" />
@@ -12497,7 +12532,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="4" />
+                <Frame Time="0" Value="4" />
                 <Frame Time="0.3" Value="5" />
                 <Frame Time="0.6" Value="6" />
                 <Frame Time="0.9" Value="7" />
@@ -12519,7 +12554,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="8" />
+                <Frame Time="0" Value="8" />
                 <Frame Time="0.2" Value="9" />
                 <Frame Time="0.4" Value="10" />
                 <Frame Time="0.8" Value="11" />
@@ -12541,7 +12576,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0"   Value="12" />
+                <Frame Time="0" Value="12" />
                 <Frame Time="0.2" Value="13" />
                 <Frame Time="0.4" Value="14" />
                 <Frame Time="0.8" Value="15" />
@@ -12556,7 +12591,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0"  Value="0" />
+                <Frame Time="0" Value="0" />
                 <Frame Time="0.04" Value="1" />
                 <Frame Time="0.08" Value="2" />
                 <Frame Time="0.12" Value="3" />
@@ -12582,7 +12617,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0"  Value="5" />
+                <Frame Time="0" Value="5" />
                 <Frame Time="0.04" Value="6" />
                 <Frame Time="0.08" Value="7" />
                 <Frame Time="0.12" Value="8" />
@@ -12608,7 +12643,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0"  Value="10" />
+                <Frame Time="0" Value="10" />
                 <Frame Time="0.04" Value="11" />
                 <Frame Time="0.08" Value="12" />
                 <Frame Time="0.12" Value="13" />
@@ -12634,7 +12669,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0"  Value="15" />
+                <Frame Time="0" Value="15" />
                 <Frame Time="0.04" Value="16" />
                 <Frame Time="0.08" Value="17" />
                 <Frame Time="0.12" Value="18" />
@@ -12660,7 +12695,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0"  Value="20" />
+                <Frame Time="0" Value="20" />
                 <Frame Time="0.04" Value="21" />
                 <Frame Time="0.08" Value="22" />
                 <Frame Time="0.12" Value="23" />
@@ -12686,7 +12721,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0"  Value="25" />
+                <Frame Time="0" Value="25" />
                 <Frame Time="0.04" Value="26" />
                 <Frame Time="0.08" Value="27" />
                 <Frame Time="0.12" Value="28" />
@@ -12712,7 +12747,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0"  Value="30" />
+                <Frame Time="0" Value="30" />
                 <Frame Time="0.04" Value="31" />
                 <Frame Time="0.08" Value="32" />
                 <Frame Time="0.12" Value="33" />
@@ -12738,7 +12773,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0"  Value="35" />
+                <Frame Time="0" Value="35" />
                 <Frame Time="0.04" Value="36" />
                 <Frame Time="0.08" Value="37" />
                 <Frame Time="0.12" Value="38" />
@@ -13011,7 +13046,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0" Value="1" />
+                <Frame Time="0" Value="1" />
                 <Frame Time="0.1" Value="2" />
                 <Frame Time="0.2" Value="3" />
                 <Frame Time="0.3" Value="4" />
@@ -13021,7 +13056,7 @@
                 <Frame Time="0.7" Value="8" />
                 <Frame Time="0.8" Value="9" />
                 <Frame Time="0.9" Value="10" />
-                <Frame Time="1.0" Value="11" />
+                <Frame Time="1" Value="11" />
                 <Frame Time="1.1" Value="12" />
                 <Frame Time="1.2" Value="13" />
                 <Frame Time="1.3" Value="14" />
@@ -13057,7 +13092,7 @@
               <Interpolation>None</Interpolation>
               <Controller>Sprite.ImageId</Controller>
               <Frames>
-                <Frame Time="0.0" Value="15" />
+                <Frame Time="0" Value="15" />
                 <Frame Time="0.1" Value="16" />
                 <Frame Time="0.2" Value="17" />
                 <Frame Time="0.3" Value="18" />

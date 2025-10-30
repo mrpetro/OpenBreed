@@ -85,6 +85,11 @@ namespace OpenBreed.Database.Xml.Items.Animations
             return XmlTracks.Remove((XmlDbAnimationTrack)track);
         }
 
+        public void ClearTracks()
+        {
+            XmlTracks.Clear();
+        }
+
         #endregion Public Methods
     }
 }

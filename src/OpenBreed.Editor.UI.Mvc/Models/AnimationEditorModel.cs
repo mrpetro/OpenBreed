@@ -19,20 +19,21 @@ namespace OpenBreed.Editor.UI.Mvc.Models
         #region Private Fields
 
         private readonly IDataLoaderFactory dataLoaderFactory;
+        private readonly IDbAnimation dbEntry;
         private readonly IEditableClip<IEntity> model;
-        private Dictionary<ITrackKeyFrame, (float, object)> selectedKeyFrames = new Dictionary<ITrackKeyFrame, (float, object)>();
+        private readonly Dictionary<ITrackKeyFrame, (float, object)> selectedKeyFrames = new Dictionary<ITrackKeyFrame, (float, object)>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AnimationEditorModel(IDataLoaderFactory dataLoaderFactory, IDbAnimation dbAnimation)
+        public AnimationEditorModel(IDataLoaderFactory dataLoaderFactory, IDbAnimation dbEntry)
         {
             this.dataLoaderFactory = dataLoaderFactory ?? throw new ArgumentNullException(nameof(dataLoaderFactory));
-
+            this.dbEntry = dbEntry;
             var loader = dataLoaderFactory.GetLoader<IEditableClipDataLoader<IEntity>>();
 
-            this.model = loader.Load(dbAnimation);
+            this.model = loader.Load(dbEntry);
         }
 
         #endregion Public Constructors
@@ -91,7 +92,7 @@ namespace OpenBreed.Editor.UI.Mvc.Models
 
         public void Rebuild()
         {
-           ClipLength = CurrentTrack?.Rebuild() ?? 0;
+            ClipLength = CurrentTrack?.Rebuild() ?? 0;
         }
 
         public void ReleaseKeyFrames()
@@ -193,7 +194,7 @@ namespace OpenBreed.Editor.UI.Mvc.Models
             {
                 MoveKeyFrameBy(keyFrame, offsetPos);
             }
-            
+
             if (SelectedKeyFrames.Any())
             {
                 Rebuild();
@@ -227,10 +228,52 @@ namespace OpenBreed.Editor.UI.Mvc.Models
 
             intKeyFrame.Key = startPos.X + offsetPos.X;
             intKeyFrame.Value = (int)startPos.Y + (int)offsetPos.Y;
+        }
 
+        public void Store()
+        {
+            dbEntry.Length = model.Length;
 
+            dbEntry.ClearTracks();
+
+            foreach (var track in model.Tracks)
+            {
+                switch (track)
+                {
+                    case IReadOnlyTrack<IEntity, int> intTrack:
+                        StoreTrack(intTrack);
+                        break;
+
+                    case IReadOnlyTrack<IEntity, float> floatTrack:
+                        StoreTrack(floatTrack);
+                        break;
+
+                    case IReadOnlyTrack<IEntity, string> stringTrack:
+                        StoreTrack(stringTrack);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void StoreTrack<TValue>(IReadOnlyTrack<IEntity, TValue> track)
+        {
+            var newTrack = dbEntry.AddNewTrack<TValue>(track.Id);
+
+            newTrack.Controller = track.Id;
+
+            foreach (var frame in track.Frames)
+            {
+                newTrack.AddFrame(frame.Key, frame.Value);
+            }
+        }
+
+        #endregion Private Methods
     }
 }

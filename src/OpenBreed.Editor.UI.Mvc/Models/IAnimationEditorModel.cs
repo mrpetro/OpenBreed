@@ -56,6 +56,7 @@ namespace OpenBreed.Editor.UI.Mvc.Models
         void MoveKeyFramesTo(Vector2 position);
         void MoveKeyFrameBy(ITrackKeyFrame keyFrame, Vector2 offsetPos);
         void FinishMoving();
+        void Store();
 
         #endregion Public Methods
     }

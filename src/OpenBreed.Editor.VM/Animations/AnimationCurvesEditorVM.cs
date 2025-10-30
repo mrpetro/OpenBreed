@@ -87,6 +87,8 @@ namespace OpenBreed.Editor.VM.Animations
 
         public void Edit(IDbAnimationTrack dbTrack)
         {
+            model.Edit(dbTrack);
+
             controller.Focus();
         }
 
