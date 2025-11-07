@@ -60,6 +60,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             builder.AddSystem<ItemPickupSystem>();
             builder.AddSystem<ItemManagingSystem>();
             builder.AddSystem<LivesSystem>();
+            builder.AddSystem<ActorSystem>();
             builder.AddSystem<DamageOnHealthDistributionSystem>();
             builder.AddSystem<DestroyOnZeroHealthSystem>();
             builder.AddSystem<LifetimeSystem>();

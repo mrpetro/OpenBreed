@@ -31,7 +31,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal MovementSystemVanilla(
+        public MovementSystemVanilla(
             IEntityMan entityMan,
             IEventsMan eventsMan)
         {

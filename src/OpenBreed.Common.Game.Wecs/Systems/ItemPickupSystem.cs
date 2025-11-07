@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {
-    public class ItemPickupSystem : EventSystem<ActorCollisionEvent, ItemPickupSystem>
+    public class ItemPickupSystem : IEventSystem<ActorCollisionEvent>
     {
         #region Private Fields
 
@@ -24,8 +24,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
         #region Public Constructors
 
-        public ItemPickupSystem(IEventsMan eventsMan, IEntityMan entityMan)
-            : base(eventsMan)
+        public ItemPickupSystem(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
         }
@@ -34,7 +33,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
         #region Public Methods
 
-        public override void Update(ActorCollisionEvent e)
+        public void Update(ActorCollisionEvent e)
         {
             var actorEntity = entityMan.GetById(e.EntityId);
             var otherEntity = entityMan.GetById(e.OtherEntityId);

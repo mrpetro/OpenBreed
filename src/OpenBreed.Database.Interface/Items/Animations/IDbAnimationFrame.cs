@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Database.Interface.Items.Animations
 {
-    public enum FrameTangentsMode
+    public enum CurveTangentMode
     {
 
     }

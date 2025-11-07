@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(CollisionComponent))]
-    public class AddDynamicBodySystem : EventMatchingSystem<EntityEnteredEvent, AddDynamicBodySystem>
+    public class AddDynamicBodySystem : MatchingSystemBase<AddDynamicBodySystem>, IEventSystem<EntityEnteredEvent>
     {
         #region Private Fields
 
@@ -28,23 +28,21 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal AddDynamicBodySystem(
-            IEventsMan eventsMan,
+        public AddDynamicBodySystem(
             IEntityMan entityMan,
             IWorldMan worldMan)
-            : base(eventsMan)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
-        public override void Update(EntityEnteredEvent e)
+        public void Update(EntityEnteredEvent e)
         {
             var eventEntity = entityMan.GetById(e.EntityId);
 
@@ -67,6 +65,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             }
         }
 
+        #endregion Public Methods
+
         //protected override void UpdateEntity(IEntity entity, IWorldContext context)
         //{
         //    var entityIds = entity.Get<BroadphaseStaticPutterComponent>().Ids;
@@ -78,7 +78,5 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         //    entityIds.Clear();
         //}
-
-        #endregion Public Methods
     }
 }

@@ -22,9 +22,9 @@ namespace OpenBreed.Wecs.Systems.Scripting
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal ScriptRunningSystem(
+        public ScriptRunningSystem(
             IScriptMan scriptMan,
             ILogger logger)
         {
@@ -32,9 +32,9 @@ namespace OpenBreed.Wecs.Systems.Scripting
             this.logger = logger;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
-        #region Protected Methods
+        #region Public Methods
 
         public override void AddEntity(IEntity entity)
         {
@@ -42,6 +42,10 @@ namespace OpenBreed.Wecs.Systems.Scripting
 
             entity.TryInvoke(scriptMan, logger, "OnInit");
         }
+
+        #endregion Public Methods
+
+        #region Protected Methods
 
         protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {

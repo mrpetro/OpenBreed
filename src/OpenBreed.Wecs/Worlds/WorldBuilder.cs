@@ -22,6 +22,7 @@ namespace OpenBreed.Wecs.Worlds
 
         internal readonly WorldMan worldMan;
         internal readonly IEntityToSystemMatcher entityToSystemMatcher;
+        private readonly IEventSystemManager eventSystemUpdater;
         internal string name;
         internal Dictionary<Type, Func<ISystem>> systemInitializers = new Dictionary<Type, Func<ISystem>>();
 
@@ -39,11 +40,13 @@ namespace OpenBreed.Wecs.Worlds
         internal WorldBuilder(
             WorldMan worldMan,
             IEntityToSystemMatcher entityToSystemMatcher,
+            IEventSystemManager eventSystemUpdater,
             ILogger logger,
             ISystemFactory systemFactory)
         {
             this.worldMan = worldMan;
             this.entityToSystemMatcher = entityToSystemMatcher;
+            this.eventSystemUpdater = eventSystemUpdater;
             this.logger = logger;
             this.systemFactory = systemFactory;
         }
@@ -55,7 +58,18 @@ namespace OpenBreed.Wecs.Worlds
         internal IEnumerable<ISystem> CreateSystems(IWorld world)
         {
             foreach (var initializer in systemInitializers.Values)
-                yield return initializer.Invoke();
+            {
+                var newSystem = initializer.Invoke();
+                var systemType = newSystem.GetType();
+
+                if (newSystem is IEventSystem eventSystem)
+                {
+                    eventSystemUpdater.RegisterSystem(eventSystem);
+                }
+
+                yield return newSystem;
+
+            }
         }
 
         public IWorldBuilder AddSystem<TSystem>() where TSystem : ISystem
@@ -66,6 +80,7 @@ namespace OpenBreed.Wecs.Worlds
                 throw new InvalidOperationException($"System with type '{systemType}' already added.");
 
             systemInitializers.Add(systemType, systemFactory.CreateSystem<TSystem>);
+
             return this;
         }
 

@@ -26,9 +26,9 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal VelocityChangedSystem(
+        public VelocityChangedSystem(
             IEntityMan entityMan,
             IEventsMan eventsMan)
         {
@@ -36,7 +36,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             this.eventsMan = eventsMan;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Protected Methods
 

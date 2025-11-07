@@ -18,7 +18,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(CollisionComponent))]
-    public class RemoveDynamicBodySystem : EventMatchingSystem<EntityLeftEvent, RemoveDynamicBodySystem>
+    public class RemoveDynamicBodySystem : MatchingSystemBase<RemoveDynamicBodySystem>, IEventSystem<EntityLeftEvent>
     {
         #region Private Fields
 
@@ -27,23 +27,21 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal RemoveDynamicBodySystem(
-            IEventsMan eventsMan,
+        public RemoveDynamicBodySystem(
             IEntityMan entityMan,
             IWorldMan worldMan)
-            : base(eventsMan)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
-        public override void Update(EntityLeftEvent e)
+        public void Update(EntityLeftEvent e)
         {
             var eventEntity = entityMan.GetById(e.EntityId);
 

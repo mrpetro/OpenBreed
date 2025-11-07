@@ -18,9 +18,9 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal TextInputSystem(
+        public TextInputSystem(
             IEntityMan entityMan,
             IEventsMan eventsMan)
         {
@@ -28,7 +28,7 @@ namespace OpenBreed.Wecs.Systems.Core
             this.eventsMan = eventsMan;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Protected Methods
 

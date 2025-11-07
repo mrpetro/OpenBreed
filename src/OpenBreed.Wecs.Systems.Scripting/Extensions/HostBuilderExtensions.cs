@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Extensions;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Scripting.Extensions
@@ -10,12 +12,9 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
     {
         #region Public Methods
 
-        public static void SetupScriptingSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
+        public static void SetupScriptingSystems(this IHostBuilder hostBuilder)
         {
-            systemFactory.RegisterSystem<ScriptRunningSystem>(
-                () => new ScriptRunningSystem(
-                    serviceProvider.GetService<IScriptMan>(),
-                    serviceProvider.GetService<ILogger>()));
+            hostBuilder.SetupWecsAssemblySystems();
         }
 
         #endregion Public Methods

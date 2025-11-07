@@ -23,6 +23,7 @@ namespace OpenBreed.Wecs.Worlds
         private readonly Dictionary<int, HashSet<IEntity>> entitiesToRemove = new Dictionary<int, HashSet<IEntity>>();
         private readonly HashSet<IEntity> entitiesToUpdate = new HashSet<IEntity>();
         private readonly IEntityToSystemMatcher entityToSystemMatcher;
+        private readonly IEventSystemManager eventSystemUpdater;
         private readonly IEventsMan eventsMan;
         private readonly IdMap<World> IdsToWorldsLookup = new IdMap<World>();
         private readonly ILogger logger;
@@ -40,11 +41,13 @@ namespace OpenBreed.Wecs.Worlds
             IEventsMan eventsMan,
             ISystemFactory systemFactory,
             IEntityToSystemMatcher entityToSystemMatcher,
+            IEventSystemManager eventSystemUpdater,
             ILogger logger)
         {
             this.eventsMan = eventsMan;
             this.systemFactory = systemFactory;
             this.entityToSystemMatcher = entityToSystemMatcher;
+            this.eventSystemUpdater = eventSystemUpdater;
             this.logger = logger;
         }
 
@@ -54,7 +57,7 @@ namespace OpenBreed.Wecs.Worlds
 
         public IWorldBuilder Create()
         {
-            return new WorldBuilder(this, entityToSystemMatcher, logger, systemFactory);
+            return new WorldBuilder(this, entityToSystemMatcher, eventSystemUpdater, logger, systemFactory);
         }
 
         /// <summary>

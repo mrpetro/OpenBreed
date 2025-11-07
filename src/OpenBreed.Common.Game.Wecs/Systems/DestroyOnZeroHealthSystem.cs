@@ -22,14 +22,20 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(HealthComponent))]
-    internal class DestroyOnZeroHealthSystem : UpdatableMatchingSystemBase<DestroyOnZeroHealthSystem>
+    public class DestroyOnZeroHealthSystem : UpdatableMatchingSystemBase<DestroyOnZeroHealthSystem>
     {
+        #region Private Fields
+
         private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
 
-        internal DestroyOnZeroHealthSystem(
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public DestroyOnZeroHealthSystem(
             IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan,
@@ -41,6 +47,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems
             this.logger = logger;
         }
 
+        #endregion Public Constructors
+
+        #region Protected Methods
+
         protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var healthComponent = entity.Get<HealthComponent>();
@@ -49,8 +59,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems
             {
                 return;
             }
-            
+
             eventsMan.Raise(new DestroyedEvent(entity.Id));
         }
+
+        #endregion Protected Methods
     }
 }

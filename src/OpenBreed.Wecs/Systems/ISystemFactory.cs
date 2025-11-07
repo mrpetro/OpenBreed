@@ -12,8 +12,6 @@ namespace OpenBreed.Wecs.Systems
 
         ISystem CreateSystem<TSystem>() where TSystem : ISystem;
 
-        void RegisterSystem<TSystem>(Func<ISystem> initializer) where TSystem : ISystem;
-
         #endregion Public Methods
     }
 }

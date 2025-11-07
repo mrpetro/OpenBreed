@@ -16,21 +16,20 @@ using OpenBreed.Common.Game;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {
-    public class TurretTrackUnlockingSystem : EntityEventSystem<TurretTrackUnlockingSystem, ContactEndedEvent>
+    public class TurretTrackUnlockingSystem : IEventSystem<ContactEndedEvent>
     {
         private readonly IFixtureMan fixtureMan;
         private readonly IEntityMan entityMan;
 
         public TurretTrackUnlockingSystem(
-            IEventsMan eventsMan,
             IEntityMan entityMan,
-            IFixtureMan fixtureMan) : base(eventsMan)
+            IFixtureMan fixtureMan)
         {
             this.entityMan = entityMan;
             this.fixtureMan = fixtureMan;
         }
 
-        public override void Update(ContactEndedEvent e)
+        public void Update(ContactEndedEvent e)
         {
             var entity = entityMan.GetById(e.EntityId);
             var tc = entity.TryGet<TrackingComponent>();
@@ -58,21 +57,20 @@ namespace OpenBreed.Common.Game.Wecs.Systems
         }
     }
 
-    public class TurretTrackLockingSystem : EntityEventSystem<TurretTrackLockingSystem, ContactStartedEvent>
+    public class TurretTrackLockingSystem : IEventSystem<ContactStartedEvent>
     {
         private readonly IFixtureMan fixtureMan;
         private readonly IEntityMan entityMan;
 
         public TurretTrackLockingSystem(
-            IEventsMan eventsMan,
             IEntityMan entityMan,
-            IFixtureMan fixtureMan) : base(eventsMan)
+            IFixtureMan fixtureMan)
         {
             this.entityMan = entityMan;
             this.fixtureMan = fixtureMan;
         }
 
-        public override void Update(ContactStartedEvent e)
+        public void Update(ContactStartedEvent e)
         {
             var entity = entityMan.GetById(e.EntityId);
             var tc = entity.TryGet<TrackingComponent>();

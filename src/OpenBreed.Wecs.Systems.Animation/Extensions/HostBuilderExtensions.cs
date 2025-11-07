@@ -1,13 +1,15 @@
-﻿using OpenBreed.Animation.Interface;
-using OpenBreed.Common;
-using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Common.Logging;
-using OpenBreed.Wecs.Entities;
-using System;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Core.Managers;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Common;
+using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Common.Logging;
 using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Animation.Extensions
 {
@@ -15,13 +17,9 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
     {
         #region Public Methods
 
-        public static void SetupAnimationSystems(this ISystemFactory systemFactory, IServiceProvider sp)
+        public static void SetupAnimationSystems(this IHostBuilder hostBuilder)
         {
-            systemFactory.RegisterSystem<AnimatorSystem>(() => new AnimatorSystem(
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IEventsMan>(),
-                sp.GetService<IClipMan<IEntity>>(),
-                sp.GetService<ILogger>()));
+            hostBuilder.SetupWecsAssemblySystems();
         }
 
         #endregion Public Methods

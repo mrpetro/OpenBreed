@@ -83,23 +83,6 @@ namespace OpenBreed.Editor.UI.Mvc.Models
             {
                 return;
             }
-
-            if (time > ClipLength)
-            {
-                ClipLength = time;
-            }
-        }
-
-        public void Rebuild()
-        {
-            ClipLength = CurrentTrack?.Rebuild() ?? 0;
-        }
-
-        public void ReleaseKeyFrames()
-        {
-            Rebuild();
-            //SelectedKeyFrame = null;
-            //Mode = AnimationCurvesEditorMode.SelectKeyFrames;
         }
 
         public void RemoveTrack(IDbAnimationTrack dbTrack)
@@ -193,11 +176,6 @@ namespace OpenBreed.Editor.UI.Mvc.Models
             foreach (var keyFrame in SelectedKeyFrames)
             {
                 MoveKeyFrameBy(keyFrame, offsetPos);
-            }
-
-            if (SelectedKeyFrames.Any())
-            {
-                Rebuild();
             }
         }
 

@@ -163,7 +163,9 @@ namespace OpenBreed.Input.Generic
 
         protected virtual void OnKeyboardStateChanged(KeyboardState keyboardState)
         {
-            KeyboardStateChanged?.Invoke(this, new KeyboardStateEventArgs(oldKeyboardState, keyboardState));
+            var eventArgs = new KeyboardStateEventArgs(oldKeyboardState, keyboardState);
+            KeyboardStateChanged?.Invoke(this, eventArgs);
+            eventsMan.Raise(eventArgs);
         }
 
         #endregion Protected Methods

@@ -29,7 +29,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal DirectionSystemVanilla(
+        public DirectionSystemVanilla(
             IEntityMan entityMan,
             IEventsMan eventsMan)
         {

@@ -34,9 +34,49 @@ using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Common.Game;
+using OpenTK.Graphics.ES11;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
+    public enum HeroStates
+    {
+        Silent,
+        Speaks,
+        FinishedSpeaking
+    }
+
+    public enum SpeakerImpulses
+    {
+
+    }
+
+    public class HeroFsm
+    {
+
+
+
+        public void Walking(int entityId, Vector2 direction)
+        {
+
+        }
+
+        public void Standing(int entityId)
+        {
+
+        }
+
+        public void Interacting(int entityId)
+        {
+
+        }
+
+        public void Shooting(int entityId)
+        {
+
+        }
+    }
+
+
     public class ActorHelper
     {
         #region Private Fields

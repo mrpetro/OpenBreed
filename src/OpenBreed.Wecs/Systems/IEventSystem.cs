@@ -9,10 +9,17 @@ using System.Threading.Tasks;
 namespace OpenBreed.Wecs.Systems
 {
     /// <summary>
+    /// Event system base interface
+    /// </summary>
+    public interface IEventSystem : ISystem
+    {
+    }
+
+    /// <summary>
     /// System that updates on specified event
     /// </summary>
     /// <typeparam name="TEvent">Event which should occur to trigger the update.</typeparam>
-    public interface IEventSystem<TEvent> : ISystem
+    public interface IEventSystem<TEvent> : IEventSystem
     {
         /// <summary>
         /// Update system when event occurs

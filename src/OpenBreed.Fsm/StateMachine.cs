@@ -93,21 +93,11 @@ namespace OpenBreed.Fsm
         public void EnterState(IEntity entity, int stateId, int withImpulseId)
         {
             states[ToState(stateId)].EnterState(entity);
-
-            //Dictionary<int, StateChangeCallback> fromImpulses;
-            //if (onEnterActions.TryGetValue(stateId, out fromImpulses))
-            //    if (fromImpulses.TryGetValue(withImpulseId, out StateChangeCallback callback))
-            //        callback.Invoke(Core, entity.Id, Id, stateId, withImpulseId);
         }
 
         public void LeaveState(IEntity entity, int stateId, int withImpulseId)
         {
             states[ToState(stateId)].LeaveState(entity);
-
-            //Dictionary<int, StateChangeCallback> toImpulses;
-            //if (onLeaveActions.TryGetValue(stateId, out toImpulses))
-            //    if (toImpulses.TryGetValue(withImpulseId, out StateChangeCallback action))
-            //        action.Invoke(Core, entity.Id, Id, stateId, withImpulseId);
         }
 
         public void SetInitialState(IEntity entity, int initialStateId)

@@ -37,6 +37,7 @@ namespace OpenBreed.Wecs.Extensions
                         sp.GetRequiredService<IEventsMan>(),
                         sp.GetRequiredService<ISystemFactory>(),
                         sp.GetRequiredService<IEntityToSystemMatcher>(),
+                        sp.GetRequiredService<IEventSystemManager>(),
                         sp.GetRequiredService<ILogger>());
 
                     entityMan.ComponentAdded += (entity, componentType) => worldMan.RequestUpdateEntity(entity);
@@ -50,18 +51,19 @@ namespace OpenBreed.Wecs.Extensions
             });
         }
 
-        public static void SetupWecsSystemFactory(this IHostBuilder hostBuilder, Action<ISystemFactory, IServiceProvider> action)
+        public static void SetupWecsSystemFactory(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddScoped<ISystemRequirementsProvider, DefaultSystemRequirementsProvider>();
                 services.AddScoped<IEntityToSystemMatcher, DefaultEntityToSystemMatcher>();
+                services.AddScoped<IEventSystemManager, EventSystemManager>();
 
                 services.AddScoped<ISystemFactory>((sp) =>
                 {
                     var systemFactory = new DefaultSystemFactory(
+                        sp,
                         sp.GetRequiredService<ISystemRequirementsProvider>());
-                    action.Invoke(systemFactory, sp);
                     return systemFactory;
                 });
             });
@@ -72,6 +74,39 @@ namespace OpenBreed.Wecs.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddScoped<IComponentFactoryProvider>((sp) => new ComponentFactoryProvider(services, sp));
+            });
+        }
+
+        public static void SetupWecsAssemblySystems(this IHostBuilder hostBuilder)
+        {
+            var callingAssembly = Assembly.GetCallingAssembly();
+
+            var systemTypes = new List<Type>();
+
+            foreach (var type in callingAssembly
+                .DefinedTypes.Where(type => !type.IsAbstract && !type.IsInterface)
+                .Where(type => type.ImplementedInterfaces.Any(item => item == typeof(ISystem))))
+            {
+                systemTypes.Add(type);
+            }
+
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                foreach (var systemType in systemTypes)
+                {
+                    services.AddTransient(systemType,(sp) => {
+
+                        var requirementsProvider = sp.GetRequiredService<ISystemRequirementsProvider>();
+
+                        if (typeof(IMatchingSystem).IsAssignableFrom(systemType))
+                        {
+                            requirementsProvider.RegisterRequirements(systemType);
+                        }
+
+                        var system = ActivatorUtilities.CreateInstance(sp, systemType);
+                        return system;
+                    });
+                }
             });
         }
 

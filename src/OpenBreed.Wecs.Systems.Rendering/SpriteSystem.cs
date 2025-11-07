@@ -22,14 +22,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal SpriteSystem(ISpriteMan spriteMan)
+        public SpriteSystem(ISpriteMan spriteMan)
         {
             this.spriteMan = spriteMan;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -67,7 +67,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             if (spc.Hidden)
                 return;
 
-            if(spc.AtlasId == -1)
+            if (spc.AtlasId == -1)
                 return;
 
             var atlas = spriteMan.GetById(spc.AtlasId);

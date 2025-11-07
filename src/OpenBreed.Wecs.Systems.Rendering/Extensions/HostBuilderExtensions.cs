@@ -11,6 +11,7 @@ using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -23,25 +24,9 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupRenderingSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
+        public static void SetupRenderingSystems(this IHostBuilder hostBuilder)
         {
-            systemFactory.RegisterSystem<ViewportSystem>(() => new ViewportSystem(
-                serviceProvider.GetService<IEntityMan>(),                                        
-                serviceProvider.GetService<IWorldMan>(),
-                serviceProvider.GetService<IPaletteMan>(),
-                serviceProvider.GetService<IWindow>()));
-            systemFactory.RegisterSystem<SpriteSystem>(() => new SpriteSystem(
-                serviceProvider.GetService<ISpriteMan>()));
-            systemFactory.RegisterSystem<PictureSystem>(() => new PictureSystem());
-            systemFactory.RegisterSystem<StampPutterSystem>(() => new StampPutterSystem());
-            systemFactory.RegisterSystem<TilePutterSystem>(() => new TilePutterSystem());
-            systemFactory.RegisterSystem<TileRenderSystem>(() => new TileRenderSystem());
-            systemFactory.RegisterSystem<TextPresenterSystem>(() => new TextPresenterSystem(
-                serviceProvider.GetService<IFontMan>()));
-            systemFactory.RegisterSystem<TextSystem>(() => new TextSystem(
-                serviceProvider.GetService<IEntityMan>(),
-                serviceProvider.GetService<IFontMan>(),
-                serviceProvider.GetService<ILogger>()));
+            hostBuilder.SetupWecsAssemblySystems();
         }
     }
 }

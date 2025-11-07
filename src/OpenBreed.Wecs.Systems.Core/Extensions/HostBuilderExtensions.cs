@@ -1,14 +1,16 @@
-﻿using OpenBreed.Common;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using OpenBreed.Common;
+using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
+using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
-using System;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Worlds;
-using OpenBreed.Common.Interface.Logging;
-using Microsoft.Extensions.Logging;
-using OpenBreed.Core.Interface.Managers;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Core.Extensions
 {
@@ -16,40 +18,9 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
     {
         #region Public Methods
 
-        public static void SetupCoreSystems(this ISystemFactory systemFactory, IServiceProvider sp)
+        public static void SetupCoreSystems(this IHostBuilder hostBuilder)
         {
-            systemFactory.RegisterSystem<FsmSystem>(() => new FsmSystem(
-                sp.GetService<IFsmMan>(),
-                sp.GetService<ILogger>()));
-
-            systemFactory.RegisterSystem<TextInputSystem>(() => new TextInputSystem(
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IEventsMan>()));
-            
-            systemFactory.RegisterSystem<TimerSystem>(() => new TimerSystem(
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IEventsMan>(),
-                sp.GetService<ILogger>()));
-
-            systemFactory.RegisterSystem<FrameSystem>(() => new FrameSystem(
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IEventsMan>(),
-                sp.GetService<ILogger>()));
-
-            systemFactory.RegisterSystem<PausingSystem>(() => new PausingSystem(
-                sp.GetService<IWorldMan>(),                                                    
-                sp.GetService<IEventsMan>()));
-
-            systemFactory.RegisterSystem<EntityEmitterSystem>(() => new EntityEmitterSystem(
-                sp.GetRequiredService<IEntityFactory>(),
-                sp.GetRequiredService<IEventsMan>(),
-                sp.GetRequiredService<ITriggerMan>(),
-                sp.GetRequiredService<IWorldMan>()));
-
-            systemFactory.RegisterSystem<LifetimeSystem>(() => new LifetimeSystem(
-                sp.GetRequiredService<IWorldMan>(),
-                sp.GetRequiredService<IEntityMan>(),
-                sp.GetRequiredService<IEventsMan>()));
+            hostBuilder.SetupWecsAssemblySystems();
         }
 
         #endregion Public Methods

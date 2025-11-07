@@ -42,8 +42,6 @@ namespace OpenBreed.Editor.UI.Mvc.Models
 
         void Edit(IDbAnimationTrack dbTrack);
         void InsertKeyFrame(float time, float value);
-        void Rebuild();
-        void ReleaseKeyFrames();
         void RemoveTrack(IDbAnimationTrack source);
         void SelectKeyFrame(ITrackKeyFrame keyFrame);
         void ClearSelectedKeyFrames();

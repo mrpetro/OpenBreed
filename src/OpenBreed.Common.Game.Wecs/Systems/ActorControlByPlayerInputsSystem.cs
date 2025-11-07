@@ -22,7 +22,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
     [RequireEntityWith(
         typeof(PlayerInputsComponent),
         typeof(ControllerComponent))]
-    internal class ActorControlByPlayerInputsSystem : InputsEventSystem<ActorControlByPlayerInputsSystem>
+    public class ActorControlByPlayerInputsSystem : InputsEventSystem<ActorControlByPlayerInputsSystem>
     {
         #region Private Fields
 

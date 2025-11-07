@@ -5,6 +5,7 @@ using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Worlds;
@@ -26,52 +27,9 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             });
         }
 
-        public static void SetupPhysicsSystems(this ISystemFactory systemFactory, IServiceProvider sp)
+        public static void SetupPhysicsSystems(this IHostBuilder hostBuilder)
         {
-            systemFactory.RegisterSystem<DirectionSystemVanilla>(() => new DirectionSystemVanilla(
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IEventsMan>()));
-            systemFactory.RegisterSystem<MovementSystem>(() => new MovementSystem(
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IEventsMan>()));
-            systemFactory.RegisterSystem<VelocityChangedSystem>(() => new VelocityChangedSystem(
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IEventsMan>()));
-            systemFactory.RegisterSystem<MovementSystemVanilla>(() => new MovementSystemVanilla(
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IEventsMan>()));
-            systemFactory.RegisterSystem<DynamicBodiesCollisionCheckSystem>(() => new DynamicBodiesCollisionCheckSystem(
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IEventsMan>(),
-                sp.GetService<IShapeMan>(),
-                sp.GetService<ICollisionMan<IEntity>>(),
-                sp.GetService<ICollisionChecker>()));
-
-            systemFactory.RegisterSystem<AddDynamicBodySystem>(() => new AddDynamicBodySystem(
-                sp.GetService<IEventsMan>(),
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IWorldMan>()));
-
-            systemFactory.RegisterSystem<RemoveDynamicBodySystem>(() => new RemoveDynamicBodySystem(
-                sp.GetService<IEventsMan>(),
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IWorldMan>()));
-
-            systemFactory.RegisterSystem<UpdateDynamicBodySystem>(() => new UpdateDynamicBodySystem(
-                sp.GetService<IEventsMan>(),
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IWorldMan>()));
-
-            systemFactory.RegisterSystem<AddStaticBodySystem>(() => new AddStaticBodySystem(
-                sp.GetService<IEventsMan>(),
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IWorldMan>()));
-
-            systemFactory.RegisterSystem<RemoveStaticBodySystem>(() => new RemoveStaticBodySystem(
-                sp.GetService<IEventsMan>(),
-                sp.GetService<IEntityMan>(),
-                sp.GetService<IWorldMan>()));
-
+            hostBuilder.SetupWecsAssemblySystems();
         }
 
     }

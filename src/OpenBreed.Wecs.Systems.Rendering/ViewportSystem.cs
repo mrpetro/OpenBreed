@@ -40,7 +40,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Internal Constructors
 
-        internal ViewportSystem(
+        public ViewportSystem(
             IEntityMan entityMan,
             IWorldMan worldMan,
             IPaletteMan paletteMan,

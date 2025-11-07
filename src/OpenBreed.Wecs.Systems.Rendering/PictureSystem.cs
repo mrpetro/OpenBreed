@@ -16,13 +16,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
         typeof(PositionComponent))]
     public class PictureSystem : MatchingSystemBase<PictureSystem>, IRenderableSystem
     {
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal PictureSystem()
+        public PictureSystem()
         {
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -54,7 +54,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private void RenderPicture(IEntity entity, IWorldRenderContext context)
         {
             var pictureRenderer = context.View.Context.PictureRenderer;
-
 
             var picComponent = entity.Get<PictureComponent>();
 

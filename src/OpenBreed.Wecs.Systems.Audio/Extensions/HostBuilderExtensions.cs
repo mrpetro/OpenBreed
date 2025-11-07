@@ -1,9 +1,11 @@
-﻿using OpenBreed.Audio.Interface.Managers;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common;
-using System;
-using OpenBreed.Core.Managers;
 using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Extensions;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Audio.Extensions
 {
@@ -11,12 +13,9 @@ namespace OpenBreed.Wecs.Systems.Audio.Extensions
     {
         #region Public Methods
 
-        public static void SetupAudioSystems(this ISystemFactory systemFactory, IServiceProvider serviceProvider)
+        public static void SetupAudioSystems(this IHostBuilder hostBuilder)
         {
-            systemFactory.RegisterSystem<SoundSystem>(
-                () => new SoundSystem(
-                    serviceProvider.GetService<ISoundMan>(),
-                    serviceProvider.GetService<IEventsMan>()));
+            hostBuilder.SetupWecsAssemblySystems();
         }
 
         #endregion Public Methods

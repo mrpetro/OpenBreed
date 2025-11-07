@@ -8,19 +8,11 @@ namespace OpenBreed.Wecs.Systems.Core
 {
     public abstract class EventSystem<TEvent, TSystem> : SystemBase<TSystem>, IEventSystem<TEvent> where TEvent : EventArgs where TSystem : ISystem
     {
-        #region Private Fields
-
-        private readonly IEventsMan eventsMan;
-
-        #endregion Private Fields
-
         #region Protected Constructors
 
-        protected EventSystem(IEventsMan eventsMan)
+        protected EventSystem()
         {
-            this.eventsMan = eventsMan;
 
-            eventsMan.Subscribe<TEvent>(Update);
         }
 
         #endregion Protected Constructors

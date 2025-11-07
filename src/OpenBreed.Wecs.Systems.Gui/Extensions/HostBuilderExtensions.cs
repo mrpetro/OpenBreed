@@ -1,15 +1,16 @@
-﻿using OpenBreed.Common;
-using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Wecs.Entities;
-using System;
-using OpenBreed.Core;
-using OpenBreed.Input.Interface;
-using OpenBreed.Core.Managers;
-using OpenBreed.Physics.Interface.Managers;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenBreed.Common;
+using OpenBreed.Core;
 using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Managers;
+using OpenBreed.Input.Interface;
+using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Renderers;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
+using System;
 
 namespace OpenBreed.Wecs.Systems.Gui.Extensions
 {
@@ -25,22 +26,19 @@ namespace OpenBreed.Wecs.Systems.Gui.Extensions
             });
         }
 
-        public static void ConfigureGuiSystems(this ISystemFactory systemFactory, IServiceProvider sp, bool isEditor)
+        public static void ConfigureGuiSystems(this IHostBuilder hostBuilder, bool isEditor)
         {
-            systemFactory.RegisterSystem<CollisionVisualizingSystem>(
-                () => new CollisionVisualizingSystem(
-                    sp.GetService<IEntityMan>(),
-                    sp.GetService<ICollisionMan<IEntity>>(),
-                    sp.GetService<CollisionVisualizingOptions>()));
+            //hostBuilder.ConfigureServices((hostContext, services) =>
+            //{
+            //    services.AddTransient<CollisionVisualizingSystem>();
 
-            if (!isEditor)
-            {
-                systemFactory.RegisterSystem<CursorSystem>(
-                    () => new CursorSystem(
-                        sp.GetRequiredService<IWindow>(),
-                        sp.GetRequiredService<IInputsMan>(),
-                        sp.GetRequiredService<IEventsMan>()));
-            }
+            //    if (!isEditor)
+            //    {
+            //        services.AddTransient<CursorSystem>();
+            //    }
+            //});
+
+            hostBuilder.SetupWecsAssemblySystems();
         }
 
         #endregion Public Methods

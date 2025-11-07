@@ -20,13 +20,19 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(DamagerComponent))]
-    internal class DamageOnHealthDistributionSystem : UpdatableMatchingSystemBase<DamageOnHealthDistributionSystem>
+    public class DamageOnHealthDistributionSystem : UpdatableMatchingSystemBase<DamageOnHealthDistributionSystem>
     {
+        #region Private Fields
+
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
         private readonly ILogger logger;
 
-        internal DamageOnHealthDistributionSystem(
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public DamageOnHealthDistributionSystem(
             IEntityMan entityMan,
             IEventsMan eventsMan,
             ILogger logger)
@@ -35,6 +41,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems
             this.eventsMan = eventsMan;
             this.logger = logger;
         }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
 
         protected override void UpdateEntity(IEntity entity, IUpdateContext context)
         {
@@ -50,6 +60,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems
             toDistribute.Clear();
         }
 
+        #endregion Protected Methods
+
+        #region Private Methods
+
         private void Inflict(IEntity damagingEntity, DamageInfliction damageDistribution)
         {
             for (int i = 0; i < damageDistribution.Targets.Length; i++)
@@ -62,7 +76,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
         {
             var targetEntity = entityMan.GetById(targetEntityId);
 
-            if(targetEntity is null)
+            if (targetEntity is null)
             {
                 logger.LogError("Target entity with ID '{0}' not found.", targetEntityId);
                 return;
@@ -70,7 +84,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
             var healthComponent = targetEntity.TryGet<HealthComponent>();
 
-            if(healthComponent is null)
+            if (healthComponent is null)
             {
                 logger.LogError("Target entity with ID '{0}' has no HealthComponent.", targetEntityId);
                 return;
@@ -79,5 +93,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
             healthComponent.Value -= damage;
             eventsMan.Raise(new DamagedEvent(targetEntityId, damage, damagingEntity.Id));
         }
+
+        #endregion Private Methods
     }
 }

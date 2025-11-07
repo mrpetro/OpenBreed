@@ -25,9 +25,9 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal AnimatorSystem(
+        public AnimatorSystem(
             IEntityMan entityMan,
             IEventsMan eventsMan,
             IClipMan<IEntity> clipMan,
@@ -39,7 +39,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             this.logger = logger;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 

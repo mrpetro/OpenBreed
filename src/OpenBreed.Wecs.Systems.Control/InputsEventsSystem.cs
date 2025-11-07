@@ -17,8 +17,6 @@ namespace OpenBreed.Wecs.Systems.Control
         protected InputsEventSystem(IInputsMan inputsMan)
         {
             this.inputsMan = inputsMan;
-
-            inputsMan.KeyboardStateChanged += (s,a) => Update(a);
         }
 
         #endregion Protected Constructors

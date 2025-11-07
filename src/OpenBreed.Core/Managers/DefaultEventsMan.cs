@@ -30,10 +30,8 @@ namespace OpenBreed.Core.Managers
 
         public void Raise<TEventArgs>(TEventArgs eventArgs) where TEventArgs : EventArgs => Raise<TEventArgs>(null, eventArgs);
 
-        public void Subscribe<TEventArgs>(EventCallback<TEventArgs> callback) where TEventArgs : EventArgs
+        public void Subscribe(Type eventType, Delegate callback)
         {
-            var eventType = typeof(TEventArgs);
-
             if (!listeners.TryGetValue(eventType, out List<(object, MethodInfo)> callbacks))
             {
                 callbacks = new List<(object, MethodInfo)>();
@@ -42,6 +40,9 @@ namespace OpenBreed.Core.Managers
 
             callbacks.Add((callback.Target, callback.Method));
         }
+
+        public void Subscribe<TEventArgs>(EventCallback<TEventArgs> callback) where TEventArgs : EventArgs
+            => Subscribe(typeof(TEventArgs), callback);
 
         public void Unsubscribe<TEventArgs>(EventCallback<TEventArgs> callback) where TEventArgs : EventArgs
         {

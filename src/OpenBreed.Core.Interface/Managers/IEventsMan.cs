@@ -14,6 +14,8 @@ namespace OpenBreed.Core.Interface.Managers
 
         void Subscribe<TEventArgs>(EventCallback<TEventArgs> callback) where TEventArgs : EventArgs;
 
+        void Subscribe(Type eventType, Delegate callback);
+
         void Unsubscribe<TEventArgs>(EventCallback<TEventArgs> callback) where TEventArgs : EventArgs;
 
         #endregion Public Methods

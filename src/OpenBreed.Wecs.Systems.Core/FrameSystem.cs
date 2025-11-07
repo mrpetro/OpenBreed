@@ -22,9 +22,9 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal FrameSystem(
+        public FrameSystem(
             IEntityMan entityMan,
             IEventsMan eventsMan,
             ILogger logger)
@@ -32,10 +32,9 @@ namespace OpenBreed.Wecs.Systems.Core
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;
             this.logger = logger;
-
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Protected Methods
 
@@ -43,7 +42,7 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             var tc = entity.Get<FrameComponent>();
 
-            if(tc.Target != -1)
+            if (tc.Target != -1)
             {
                 if (tc.Current >= tc.Target)
                 {

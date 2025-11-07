@@ -28,9 +28,9 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal UpdateDynamicBodySystem(
+        public UpdateDynamicBodySystem(
             IEventsMan eventsMan,
             IEntityMan entityMan,
             IWorldMan worldMan)
@@ -39,9 +39,13 @@ namespace OpenBreed.Wecs.Systems.Physics
             this.worldMan = worldMan;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
         public int PhaseId => throw new System.NotImplementedException();
 
-        #endregion Internal Constructors
+        #endregion Public Properties
 
         #region Public Methods
 
