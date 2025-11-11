@@ -6,18 +6,7 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems
 {
-    public abstract class MatchingSystemBase<TSystem> : MatchingSystemBase where TSystem : IMatchingSystem
-    {
-        #region Protected Constructors
-
-        protected MatchingSystemBase()
-        {
-        }
-
-        #endregion Protected Constructors
-    }
-
-    public abstract class MatchingSystemBase : IMatchingSystem
+    public abstract class MatchingSystemBase : IMatchingSystem, IOnAddEntitySystem, IOnRemoveEntitySystem
     {
         #region Protected Fields
 
@@ -35,11 +24,11 @@ namespace OpenBreed.Wecs.Systems
 
         #region Public Methods
 
-        public virtual void AddEntity(IEntity entity) => entities.Add(entity);
+        public virtual void OnAddEntity(IWorld world, IEntity entity) => entities.Add(entity);
 
         public virtual bool ContainsEntity(IEntity entity) => entities.Contains(entity);
 
-        public virtual void RemoveEntity(IEntity entity) => entities.Remove(entity);
+        public virtual void OnRemoveEntity(IWorld world, IEntity entity) => entities.Remove(entity);
 
         #endregion Public Methods
     }

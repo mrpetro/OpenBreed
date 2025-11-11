@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
-    public abstract class InputsEventSystem<TSystem> : MatchingSystemBase<TSystem>, IEventSystem<KeyboardStateEventArgs> where TSystem : IMatchingSystem
+    public abstract class InputsEventSystem : MatchingSystemBase, IEventSystem<KeyboardStateEventArgs>
     {
         #region Private Fields
 

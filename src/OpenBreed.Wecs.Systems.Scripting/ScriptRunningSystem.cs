@@ -7,6 +7,7 @@ using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Linq;
 
@@ -36,9 +37,9 @@ namespace OpenBreed.Wecs.Systems.Scripting
 
         #region Public Methods
 
-        public override void AddEntity(IEntity entity)
+        public override void OnAddEntity(IWorld world, IEntity entity)
         {
-            base.AddEntity(entity);
+            base.OnAddEntity(world, entity);
 
             entity.TryInvoke(scriptMan, logger, "OnInit");
         }

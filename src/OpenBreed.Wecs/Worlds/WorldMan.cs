@@ -212,7 +212,7 @@ namespace OpenBreed.Wecs.Worlds
                 {
                     if (!areMatching)
                     {
-                        system.RemoveEntity(entity);
+                        system.OnRemoveEntity(world, entity);
                         continue;
                     }
                 }
@@ -220,7 +220,7 @@ namespace OpenBreed.Wecs.Worlds
                 {
                     if (areMatching)
                     {
-                        system.AddEntity(entity);
+                        system.OnAddEntity(world, entity);
                         continue;
                     }
                 }

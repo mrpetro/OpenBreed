@@ -59,6 +59,13 @@ namespace OpenBreed.Wecs.Worlds
         /// <returns>World system of specific type</returns>
         T GetSystem<T>() where T : IMatchingSystem;
 
+        /// <summary>
+        /// Gets all entities that are matching system given in argument.
+        /// </summary>
+        /// <param name="system">System which is used for matching entities.</param>
+        /// <returns>Enumeration of matching entities.</returns>
+        IEnumerable<IEntity> GetMatchingEntities(IMatchingSystem system);
+
         #endregion Public Methods
     }
 }

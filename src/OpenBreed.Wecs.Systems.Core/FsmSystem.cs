@@ -4,6 +4,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -45,18 +46,18 @@ namespace OpenBreed.Wecs.Systems.Core
             }
         }
 
-        public override void AddEntity(IEntity entity)
+        public override void OnAddEntity(IWorld world, IEntity entity)
         {
-            base.AddEntity(entity);
+            base.OnAddEntity(world, entity);
 
             InitializeComponent(entity);
         }
 
-        public override void RemoveEntity(IEntity entity)
+        public override void OnRemoveEntity(IWorld world, IEntity entity)
         {
             DeinitializeComponent(entity);
 
-            base.RemoveEntity(entity);
+            base.OnRemoveEntity(world, entity);
         }
 
         #endregion Protected Methods

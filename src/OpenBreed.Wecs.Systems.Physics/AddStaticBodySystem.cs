@@ -18,7 +18,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(CollisionComponent))]
-    public class AddStaticBodySystem : MatchingSystemBase<AddStaticBodySystem>, IEventSystem<EntityEnteredEvent>
+    public class AddStaticBodySystem : MatchingSystemBase, IEventSystem<EntityEnteredEvent>
     {
         #region Private Fields
 

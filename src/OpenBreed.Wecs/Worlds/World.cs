@@ -90,24 +90,6 @@ namespace OpenBreed.Wecs.Worlds
             return Systems.OfType<T>().FirstOrDefault();
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal void Update(float dt)
-        {
-            context.WorldId = Id;
-            context.DtMultiplier = DtMultiplier;
-            context.UpdateDeltaTime(dt);
-
-            foreach (var item in Systems.OfType<IUpdatableSystem>())
-                item.Update(context);
-        }
-
-        #endregion Internal Methods
-
-        #region Private Methods
-
         public void RemoveEntity(IEntity entity)
         {
             RemoveFromAllSystems(entity);
@@ -126,10 +108,39 @@ namespace OpenBreed.Wecs.Worlds
             entities.Add(entity, matchingSystems);
 
             foreach (var system in matchingSystems)
-                system.AddEntity(entity);
+                system.OnAddEntity(this, entity);
 
             ((Entity)entity).WorldId = Id;
         }
+
+        public IEnumerable<IEntity> GetMatchingEntities(IMatchingSystem system)
+        {
+            foreach (var entity in entities)
+            {
+                if (entityToSystemMatcher.AreMatch(system, entity.Key))
+                {
+                    yield return entity.Key;
+                }
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void Update(float dt)
+        {
+            context.WorldId = Id;
+            context.DtMultiplier = DtMultiplier;
+            context.UpdateDeltaTime(dt);
+
+            foreach (var item in Systems.OfType<IUpdatableSystem>())
+                item.Update(context);
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
 
         private IEnumerable<IMatchingSystem> GetMatchingSystems(IEntity entity)
         {
@@ -146,7 +157,7 @@ namespace OpenBreed.Wecs.Worlds
                 throw new InvalidOperationException();
 
             foreach (var system in systems)
-                system.RemoveEntity(entity);
+                system.OnRemoveEntity(this, entity);
         }
 
         #endregion Private Methods

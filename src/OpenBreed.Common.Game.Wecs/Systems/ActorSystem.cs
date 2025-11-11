@@ -13,7 +13,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
     {
         public void Update(DestroyedEvent e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

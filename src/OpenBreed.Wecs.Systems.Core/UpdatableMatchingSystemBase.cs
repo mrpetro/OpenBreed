@@ -5,13 +5,8 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public abstract class UpdatableMatchingSystemBase<TSystem> : MatchingSystemBase<TSystem>, IUpdatableSystem, IMatchingSystem where TSystem : IMatchingSystem
+    public abstract class UpdatableMatchingSystemBase<TSystem> : MatchingSystemBase, IUpdatableSystem where TSystem : IMatchingSystem
     {
-        #region Protected Fields
-
-
-        #endregion Protected Fields
-
         #region Public Methods
 
         public virtual void Update(IUpdateContext context)

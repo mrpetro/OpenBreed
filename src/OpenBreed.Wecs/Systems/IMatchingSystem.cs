@@ -15,9 +15,9 @@ namespace OpenBreed.Wecs.Systems
 
         bool ContainsEntity(IEntity entity);
 
-        void AddEntity(IEntity entity);
+        void OnAddEntity(IWorld world, IEntity entity);
 
-        void RemoveEntity(IEntity entity);
+        void OnRemoveEntity(IWorld world, IEntity entity);
 
         #endregion Public Methods
     }

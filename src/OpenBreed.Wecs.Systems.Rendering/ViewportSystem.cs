@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(ViewportComponent),
         typeof(PositionComponent))]
-    public class ViewportSystem : MatchingSystemBase<ViewportSystem>, IRenderableSystem
+    public class ViewportSystem : MatchingSystemBase, IRenderableSystem
     {
         #region Private Fields
 
