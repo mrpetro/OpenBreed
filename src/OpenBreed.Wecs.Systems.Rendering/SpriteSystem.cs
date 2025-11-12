@@ -1,20 +1,17 @@
 ﻿using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
 using OpenTK.Mathematics;
-using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
     [RequireEntityWith(
         typeof(SpriteComponent),
         typeof(PositionComponent))]
-    public class SpriteSystem : MatchingSystemBase, IRenderableSystem
+    public class SpriteSystem : IMatchingSystem, IRenderableSystem
     {
         #region Private Fields
 
@@ -33,16 +30,40 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
+        //TODO: Remove me
+        public bool ContainsEntity(IEntity entity)
+        {
+            return false;
+
+            //throw new System.NotImplementedException();
+        }
+
+        //TODO: Remove me
+        public void OnAddEntity(IWorld world, IEntity entity)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        //TODO: Remove me
+        public void OnRemoveEntity(IWorld world, IEntity entity)
+        {
+            //throw new System.NotImplementedException();
+        }
+
         public void Render(IWorldRenderContext context)
         {
+            var entities = context.World.GetMatchingEntities(this);
+
             var spriteRenderer = context.View.Context.SpriteRenderer;
 
             spriteRenderer.RenderBegin();
 
             try
             {
-                for (int i = 0; i < entities.Count; i++)
-                    RenderSprite(entities[i], context);
+                foreach (var entity in entities)
+                {
+                    RenderSprite(entity, context);
+                }
             }
             finally
             {

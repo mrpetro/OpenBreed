@@ -14,7 +14,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         typeof(TextDataComponent),
         typeof(TextPresentationComponent),
         typeof(PositionComponent))]
-    public class TextPresenterSystem : MatchingSystemBase, IRenderableSystem
+    public class TextPresenterSystem : IMatchingSystem, IRenderableSystem
     {
         #region Private Fields
 
@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public TextPresenterSystem(
             IFontMan fontMan)
@@ -30,23 +30,47 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.fontMan = fontMan;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
+        //TODO: Remove me
+        public bool ContainsEntity(IEntity entity)
+        {
+            return false;
+
+            //throw new System.NotImplementedException();
+        }
+
+        //TODO: Remove me
+        public void OnAddEntity(IWorld world, IEntity entity)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        //TODO: Remove me
+        public void OnRemoveEntity(IWorld world, IEntity entity)
+        {
+            //throw new System.NotImplementedException();
+        }
+
         public void Render(Worlds.IWorldRenderContext context)
         {
-            context.View.Context.FontRenderer.Render(context.View, context.ViewBox, RenderTexts);
+            context.View.Context.FontRenderer.Render(context.View, context.ViewBox, (view, clipBox) => RenderTexts(context, view, clipBox));
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void RenderTexts(OpenBreed.Rendering.Abstractions.IRenderView view, Box2 clipBox)
+        private void RenderTexts(IWorldRenderContext context, OpenBreed.Rendering.Abstractions.IRenderView view, Box2 clipBox)
         {
-            for (int i = 0; i < entities.Count; i++)
-                RenderText(view, entities[i], clipBox);
+            var entities = context.World.GetMatchingEntities(this);
+
+            foreach (var entity in entities)
+            {
+                RenderText(view, entity, clipBox);
+            }
         }
 
         private void RenderText(OpenBreed.Rendering.Abstractions.IRenderView view, IEntity entity, Box2 clipBox)

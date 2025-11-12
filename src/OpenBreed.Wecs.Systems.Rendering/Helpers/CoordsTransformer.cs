@@ -5,7 +5,7 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenTK.Mathematics;
 
-namespace OpenBreed.Wecs.Systems.Rendering
+namespace OpenBreed.Wecs.Systems.Rendering.Helpers
 {
     public class CoordsTransformer
     {

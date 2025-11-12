@@ -8,6 +8,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Helpers;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -27,7 +28,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(ViewportComponent),
         typeof(PositionComponent))]
-    public class ViewportSystem : MatchingSystemBase, IRenderableSystem
+    public class ViewportSystem : IMatchingSystem, IRenderableSystem
     {
         #region Private Fields
 
@@ -38,7 +39,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public ViewportSystem(
             IEntityMan entityMan,
@@ -52,25 +53,43 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.viewClient = viewClient;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
+        //TODO: Remove me
+        public bool ContainsEntity(IEntity entity)
+        {
+            return false;
+
+            //throw new System.NotImplementedException();
+        }
+
+        //TODO: Remove me
+        public void OnAddEntity(IWorld world, IEntity entity)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        //TODO: Remove me
+        public void OnRemoveEntity(IWorld world, IEntity entity)
+        {
+            //throw new System.NotImplementedException();
+        }
+
         public void Render(Worlds.IWorldRenderContext context)
         {
-            for (int i = 0; i < entities.Count; i++)
-                RenderViewport(context.View, entities[i], context.ViewBox, context.Depth, context.Dt);
+            var entities = context.World.GetMatchingEntities(this);
+
+            foreach (var entity in entities)
+            {
+                RenderViewport(context.View, entity, context.ViewBox, context.Depth, context.Dt);
+            }
         }
 
         #endregion Public Methods
 
-        #region Protected Methods
-
-        #endregion Protected Methods
-
         #region Private Methods
-
-
 
         /// <summary>
         /// Render this viewport content to the client

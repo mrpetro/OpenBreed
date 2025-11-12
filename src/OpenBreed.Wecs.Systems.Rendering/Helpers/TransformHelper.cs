@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Wecs.Components.Rendering;
 using OpenTK.Mathematics;
 
-namespace OpenBreed.Wecs.Systems.Rendering
+namespace OpenBreed.Wecs.Systems.Rendering.Helpers
 {
     public static class TransformHelper
     {        /// <summary>

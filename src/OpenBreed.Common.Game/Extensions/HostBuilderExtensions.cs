@@ -31,7 +31,6 @@ using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Core.Events;
-using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -46,6 +45,7 @@ using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Model.Extensions;
 using OpenBreed.Rendering.Common.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Helpers;
 
 namespace OpenBreed.Common.Game.Extensions
 {

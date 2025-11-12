@@ -75,7 +75,6 @@ using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
-using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Scripting;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
@@ -105,6 +104,7 @@ using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Game.Extensions;
 using OpenBreed.Common.Interface.Tools;
+using OpenBreed.Wecs.Systems.Rendering.Helpers;
 
 namespace OpenBreed.Sandbox
 {

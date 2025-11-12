@@ -3,29 +3,69 @@ using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
     [RequireEntityWith(
         typeof(StampPutterComponent),
         typeof(TileGridComponent))]
-    public class StampPutterSystem : UpdatableMatchingSystemBase<StampPutterSystem>
+    public class StampPutterSystem : IUpdatableSystem, IMatchingSystem
     {
+        #region Private Fields
+
+        private readonly IWorldMan worldMan;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public StampPutterSystem()
+        public StampPutterSystem(IWorldMan worldMan)
         {
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
+        //TODO: Remove me
+        public bool ContainsEntity(IEntity entity)
+        {
+            return false;
+
+            //throw new System.NotImplementedException();
+        }
+
+        //TODO: Remove me
+        public void OnAddEntity(IWorld world, IEntity entity)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        //TODO: Remove me
+        public void OnRemoveEntity(IWorld world, IEntity entity)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public void Update(IUpdateContext context)
+        {
+            var world = worldMan.GetById(context.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
+            foreach (var entity in entities)
+            {
+                UpdateEntity(entity, context);
+            }
+        }
+
         #endregion Public Methods
 
-        #region Protected Methods
+        #region Private Methods
 
-        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
+        private void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var items = entity.Get<StampPutterComponent>().Items;
             var grid = entity.Get<TileGridComponent>().Grid;
@@ -42,6 +82,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             tileGrid.ModifyTiles(data.Position, data.StampId);
         }
 
-        #endregion Protected Methods
+        #endregion Private Methods
     }
 }
