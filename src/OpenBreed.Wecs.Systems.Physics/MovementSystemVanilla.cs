@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Events;
+using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Systems.Physics
@@ -18,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         typeof(PositionComponent),
         typeof(VelocityComponent),
         typeof(BodyComponent))]
-    public class MovementSystemVanilla : UpdatableMatchingSystemBase<MovementSystemVanilla>
+    public class MovementSystemVanilla : UpdatableMatchingSystemBase
     {
         #region Private Fields
 
@@ -32,8 +33,9 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Internal Constructors
 
         public MovementSystemVanilla(
+            IWorldMan worldMan,
             IEntityMan entityMan,
-            IEventsMan eventsMan)
+            IEventsMan eventsMan) : base(worldMan)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;

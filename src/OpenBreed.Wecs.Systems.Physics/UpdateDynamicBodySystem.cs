@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(CollisionComponent))]
-    public class UpdateDynamicBodySystem : MatchingSystemBase, IUpdatableSystem
+    public class UpdateDynamicBodySystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields
 
@@ -51,6 +51,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public void Update(IUpdateContext context)
         {
+            var world = this.worldMan.GetById(context.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
             foreach (var entity in entities)
             {
                 if (entity.WorldId != context.WorldId)

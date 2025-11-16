@@ -1,15 +1,16 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Common.Game.Wecs.Components;
-using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(DamagerComponent))]
-    public class DamageOnHealthDistributionSystem : UpdatableMatchingSystemBase<DamageOnHealthDistributionSystem>
+    public class DamageOnHealthDistributionSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields
 
@@ -33,9 +34,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems
         #region Public Constructors
 
         public DamageOnHealthDistributionSystem(
+            IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan,
-            ILogger logger)
+            ILogger logger) : base(worldMan)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;

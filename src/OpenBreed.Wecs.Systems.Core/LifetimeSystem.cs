@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Systems.Core
     /// Updates entity life time and when it's down to zero, it removes it from the world.
     /// </summary>
     [RequireEntityWith(typeof(LifetimeComponent))]
-    public class LifetimeSystem : UpdatableMatchingSystemBase<LifetimeSystem>
+    public class LifetimeSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields
 
@@ -37,9 +37,25 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Public Constructors
 
-        #region Protected Methods
+        #region Public Methods
 
-        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
+        public void Update(IUpdateContext context)
+        {
+            var world = worldMan.GetById(context.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
+            foreach (var entity in entities)
+            {
+                UpdateEntity(entity, context);
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var lc = entity.Get<LifetimeComponent>();
 
@@ -55,10 +71,6 @@ namespace OpenBreed.Wecs.Systems.Core
             worldMan.RequestRemoveEntity(entity);
             RaiseLifetimeEndEvent(entity);
         }
-
-        #endregion Protected Methods
-
-        #region Private Methods
 
         private void RaiseLifetimeEndEvent(IEntity entity)
         {

@@ -1,16 +1,28 @@
 ﻿using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public abstract class UpdatableMatchingSystemBase<TSystem> : MatchingSystemBase, IUpdatableSystem where TSystem : IMatchingSystem
+    public abstract class UpdatableMatchingSystemBase : IMatchingSystem, IUpdatableSystem
     {
+        private readonly IWorldMan worldMan;
+
+        protected UpdatableMatchingSystemBase(IWorldMan worldMan)
+        {
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+        }
+
         #region Public Methods
 
         public virtual void Update(IUpdateContext context)
         {
+            var world = worldMan.GetById(context.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
             if (context.Paused)
             {
                 foreach (var entity in entities)

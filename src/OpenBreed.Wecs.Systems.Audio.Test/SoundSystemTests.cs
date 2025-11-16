@@ -16,9 +16,9 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
 
         private Mock<IUpdateContext> mockContext;
         private Mock<IEntity> mockEntity;
+        private Mock<IWorldMan> mockWorldMan;
         private Mock<IEventsMan> mockEventsMan;
         private MockRepository mockRepository;
-
         private Mock<ISoundMan> mockSoundMan;
         private Mock<IWorld> mockWorld;
 
@@ -34,6 +34,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             this.mockEventsMan = this.mockRepository.Create<IEventsMan>(MockBehavior.Loose);
             this.mockWorld = this.mockRepository.Create<IWorld>();
             this.mockEntity = this.mockRepository.Create<IEntity>();
+            this.mockWorldMan = this.mockRepository.Create<IWorldMan>();
             this.mockContext = this.mockRepository.Create<IUpdateContext>();
         }
 
@@ -78,7 +79,6 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
             var component = new SoundPlayerComponent();
             component.ToPlay.AddRange(sampleIds);
             SetupMockEntity(mockEntity, component);
-            soundSystem.OnAddEntity(mockWorld.Object, mockEntity.Object);
 
             SetupWorldContext(mockContext, paused: false);
 
@@ -110,6 +110,7 @@ namespace OpenBreed.Wecs.Systems.Audio.Test
         private SoundSystem CreateSoundSystem()
         {
             return new SoundSystem(
+                this.mockWorldMan.Object,
                 this.mockSoundMan.Object,
                 this.mockEventsMan.Object);
         }

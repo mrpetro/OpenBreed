@@ -18,7 +18,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(CollisionComponent))]
-    public class RemoveDynamicBodySystem : MatchingSystemBase, IEventSystem<EntityLeftEvent>
+    public class RemoveDynamicBodySystem : IMatchingSystem, IEventSystem<EntityLeftEvent>
     {
         #region Private Fields
 
@@ -43,6 +43,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public void Update(EntityLeftEvent e)
         {
+            var world = this.worldMan.GetById(e.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
             var eventEntity = entityMan.GetById(e.EntityId);
 
             //Check if cell entity has dynamic body

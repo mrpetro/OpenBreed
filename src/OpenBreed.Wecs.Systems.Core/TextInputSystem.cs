@@ -1,17 +1,19 @@
 ﻿using OpenBreed.Core.Interface.Managers;
-using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(
         typeof(TextCaretComponent),
         typeof(TextDataComponent))]
-    public class TextInputSystem : UpdatableMatchingSystemBase<TextInputSystem>
+    public class TextInputSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields
+
+        private readonly IWorldMan worldMan;
 
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
@@ -21,22 +23,40 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Public Constructors
 
         public TextInputSystem(
+            IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan)
         {
-            this.entityMan = entityMan;
-            this.eventsMan = eventsMan;
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+            this.entityMan = entityMan ?? throw new System.ArgumentNullException(nameof(entityMan));
+            this.eventsMan = eventsMan ?? throw new System.ArgumentNullException(nameof(eventsMan));
         }
 
         #endregion Public Constructors
 
-        #region Protected Methods
+        #region Public Methods
 
-        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
+        public void Update(IUpdateContext context)
+        {
+            var world = worldMan.GetById(context.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
+            foreach (var entity in entities)
+            {
+                UpdateEntity(entity, context);
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void UpdateEntity(IEntity entity, IUpdateContext context)
         {
         }
 
-        #endregion Protected Methods
+        #endregion Private Methods
 
         //private bool HandleTextDataInsert(TextDataInsert cmd)
         //{

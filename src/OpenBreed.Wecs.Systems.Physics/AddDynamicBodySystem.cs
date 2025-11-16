@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(CollisionComponent))]
-    public class AddDynamicBodySystem : MatchingSystemBase, IEventSystem<EntityEnteredEvent>
+    public class AddDynamicBodySystem : IMatchingSystem, IEventSystem<EntityEnteredEvent>
     {
         #region Private Fields
 
@@ -44,6 +44,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public void Update(EntityEnteredEvent e)
         {
+            var world = this.worldMan.GetById(e.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
             var eventEntity = entityMan.GetById(e.EntityId);
 
             //Check if cell entity has dynamic body
@@ -66,17 +70,5 @@ namespace OpenBreed.Wecs.Systems.Physics
         }
 
         #endregion Public Methods
-
-        //protected override void UpdateEntity(IEntity entity, IWorldContext context)
-        //{
-        //    var entityIds = entity.Get<BroadphaseStaticPutterComponent>().Ids;
-        //    var grid = entity.Get<BroadphaseStaticComponent>().Grid;
-
-        //    //Update all tiles
-        //    for (int i = 0; i < entityIds.Count; i++)
-        //        entity.AddEntityToStatics(entityMan.GetById(entityIds[i]));
-
-        //    entityIds.Clear();
-        //}
     }
 }

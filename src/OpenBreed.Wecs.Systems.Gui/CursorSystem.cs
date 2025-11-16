@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Gui
     [RequireEntityWith(
         typeof(CursorInputComponent),
         typeof(PositionComponent))]
-    public class CursorSystem : MatchingSystemBase, IRenderableSystem
+    public class CursorSystem : IMatchingSystem, IRenderableSystem
     {
         #region Private Fields
 
@@ -47,11 +47,13 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         public void Render(IWorldRenderContext context)
         {
+            var entities = context.World.GetMatchingEntities(this);
+
             var cursorPos4 = context.View.FromHostToWorldPoint((Vector2i)inputsMan.CursorPos);
 
-            for (int i = 0; i < entities.Count; i++)
+            foreach (var entity in entities)
             {
-                Update(entities[i], context.ViewBox, context.Depth, cursorPos4, context.Dt);
+                Update(entity, context.ViewBox, context.Depth, cursorPos4, context.Dt);
             }
         }
 

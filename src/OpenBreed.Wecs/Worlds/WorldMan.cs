@@ -3,9 +3,11 @@ using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;
+using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +51,8 @@ namespace OpenBreed.Wecs.Worlds
             this.entityToSystemMatcher = entityToSystemMatcher;
             this.eventSystemUpdater = eventSystemUpdater;
             this.logger = logger;
+
+            eventsMan.Subscribe<KeyboardStateEventArgs>(OnKeyboardKey);
         }
 
         #endregion Public Constructors
@@ -183,6 +187,14 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Methods
 
+        private void OnKeyboardKey(KeyboardStateEventArgs e)
+        {
+            foreach (var world in worlds)
+            {
+                eventsMan.Raise(new WorldKeyboardEvent(world.Id, e.OldState, e.NewState));
+            }
+        }
+
         private void AddPendingEntities()
         {
             foreach (var keyValuePair in entitiesToAdd)
@@ -204,24 +216,25 @@ namespace OpenBreed.Wecs.Worlds
 
         private void CheckUpdateAddToSystems(IWorld world, IEntity entity)
         {
+            world.UpdateSystemsCache(entity);
+
             foreach (var system in world.Systems.OfType<IMatchingSystem>())
             {
                 var areMatching = entityToSystemMatcher.AreMatch(system, entity);
 
-                if (system.ContainsEntity(entity))
+                if (world.HasSystemEntityCached(system, entity))
                 {
-                    if (!areMatching)
+                    if (!areMatching && system is IOnRemoveEntitySystem onRemoveEntitySystem)
                     {
-                        system.OnRemoveEntity(world, entity);
+                        onRemoveEntitySystem.OnRemoveEntity(world, entity);
                         continue;
                     }
                 }
                 else
                 {
-                    if (areMatching)
+                    if (areMatching && system is IOnAddEntitySystem onAddEntitySystem)
                     {
-                        system.OnAddEntity(world, entity);
-                        continue;
+                        onAddEntitySystem.OnAddEntity(world, entity);
                     }
                 }
             }

@@ -11,7 +11,7 @@ using System.Linq;
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(FsmComponent))]
-    public class FsmSystem : UpdatableMatchingSystemBase<FsmSystem>
+    public class FsmSystem : UpdatableMatchingSystemBase, IOnAddEntitySystem, IOnRemoveEntitySystem
     {
         #region Private Fields
 
@@ -23,8 +23,9 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Public Constructors
 
         public FsmSystem(
+            IWorldMan worldMan,
             IFsmMan fsmMan,
-            ILogger logger)
+            ILogger logger) : base(worldMan)
         {
             this.fsmMan = fsmMan;
             this.logger = logger;
@@ -46,18 +47,14 @@ namespace OpenBreed.Wecs.Systems.Core
             }
         }
 
-        public override void OnAddEntity(IWorld world, IEntity entity)
+        public void OnAddEntity(IWorld world, IEntity entity)
         {
-            base.OnAddEntity(world, entity);
-
             InitializeComponent(entity);
         }
 
-        public override void OnRemoveEntity(IWorld world, IEntity entity)
+        public void OnRemoveEntity(IWorld world, IEntity entity)
         {
             DeinitializeComponent(entity);
-
-            base.OnRemoveEntity(world, entity);
         }
 
         #endregion Protected Methods

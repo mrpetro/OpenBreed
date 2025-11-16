@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Events;
+using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(typeof(VelocityComponent))]
-    public class VelocityChangedSystem : UpdatableMatchingSystemBase<VelocityChangedSystem>
+    public class VelocityChangedSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields
 
@@ -29,8 +30,9 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Public Constructors
 
         public VelocityChangedSystem(
+            IWorldMan worldMan,
             IEntityMan entityMan,
-            IEventsMan eventsMan)
+            IEventsMan eventsMan) : base(worldMan)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;

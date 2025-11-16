@@ -19,11 +19,11 @@ namespace OpenBreed.Common.Game.Wecs.Systems
     [RequireEntityWith(
         typeof(ResurrectCommandComponent),
         typeof(ResurrectableComponent))]
-    public class ResurrectionSystem : UpdatableMatchingSystemBase<ResurrectionSystem>
+    public class ResurrectionSystem : UpdatableMatchingSystemBase
     {
         private readonly IWorldMan worldMan;
 
-        public ResurrectionSystem(IWorldMan worldMan)
+        public ResurrectionSystem(IWorldMan worldMan) : base(worldMan)
         {
             this.worldMan = worldMan;
         }

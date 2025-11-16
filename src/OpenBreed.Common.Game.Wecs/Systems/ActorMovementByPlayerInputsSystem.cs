@@ -1,21 +1,22 @@
-﻿using OpenBreed.Core.Interface.Managers;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Managers;
+using OpenBreed.Input.Interface;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Systems.Control;
+using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
-using OpenBreed.Wecs.Components.Control;
-using OpenBreed.Wecs.Systems.Control;
-using OpenBreed.Input.Interface;
-using OpenBreed.Wecs.Systems.Control.Events;
-using OpenBreed.Common.Game;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {
@@ -35,11 +36,12 @@ namespace OpenBreed.Common.Game.Wecs.Systems
         #region Public Constructors
 
         public ActorMovementByPlayerInputsSystem(
+            IWorldMan worldMan,
             IInputsMan inputsMan,
             IEntityMan entityMan,
             IEventsMan eventsMan
             )
-            : base(inputsMan)
+            : base(worldMan, inputsMan)
         {
             this.inputsMan = inputsMan;
             this.entityMan = entityMan;
@@ -50,7 +52,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, KeyboardStateEventArgs e)
+        protected override void UpdateEntity(IEntity entity, WorldKeyboardEvent e)
         {
             var playerInputsComponent = entity.Get<PlayerInputsComponent>();
             var controllerComponent = entity.Get<ControllerComponent>();

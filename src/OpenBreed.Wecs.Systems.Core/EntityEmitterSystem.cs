@@ -10,7 +10,7 @@ using OpenBreed.Wecs.Worlds;
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(EntityEmitterComponent))]
-    public class EntityEmitterSystem : UpdatableMatchingSystemBase<EntityEmitterSystem>
+    public class EntityEmitterSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields
 
@@ -29,17 +29,33 @@ namespace OpenBreed.Wecs.Systems.Core
             ITriggerMan triggerMan,
             IWorldMan worldMan)
         {
-            this.entityFactory = entityFactory;
-            this.eventsMan = eventsMan;
-            this.triggerMan = triggerMan;
-            this.worldMan = worldMan;
+            this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
+            this.eventsMan = eventsMan ?? throw new System.ArgumentNullException(nameof(eventsMan));
+            this.triggerMan = triggerMan ?? throw new System.ArgumentNullException(nameof(triggerMan));
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
         }
 
         #endregion Public Constructors
 
-        #region Protected Methods
+        #region Public Methods
 
-        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
+        public void Update(IUpdateContext context)
+        {
+            var world = worldMan.GetById(context.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
+            foreach (var entity in entities)
+            {
+                UpdateEntity(entity, context);
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var emitEntityComponent = entity.Get<EntityEmitterComponent>();
 
@@ -64,20 +80,17 @@ namespace OpenBreed.Wecs.Systems.Core
                 var emittedEntity = templateBuilder.Build();
                 emittedEntity.Add(SourceEntityComponent.Create(entity.Id));
 
-                triggerMan.OnEntityEnteredWorld(emittedEntity, (e,args) =>
+                triggerMan.OnEntityEnteredWorld(emittedEntity, (e, args) =>
                 {
                     eventsMan.Raise(new EmitEntityEvent(emittedEntity.Id, entity.Id));
-
                 }, singleTime: true);
 
                 worldMan.RequestAddEntity(emittedEntity, context.WorldId);
-
-                
             }
 
             toEmit.Clear();
         }
 
-        #endregion Protected Methods
+        #endregion Private Methods
     }
 }

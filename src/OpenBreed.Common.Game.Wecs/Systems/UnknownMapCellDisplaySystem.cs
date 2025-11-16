@@ -19,7 +19,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
     [RequireEntityWith(
         typeof(PositionComponent),
         typeof(UnknownCodeComponent))]
-    public class UnknownMapCellDisplaySystem : MatchingSystemBase, IRenderableSystem
+    public class UnknownMapCellDisplaySystem : IMatchingSystem, IRenderableSystem
     {
         #region Private Fields
 
@@ -45,12 +45,16 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
         public void Render(OpenBreed.Wecs.Worlds.IWorldRenderContext context)
         {
+            var entities = context.World.GetMatchingEntities(this);
+
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);
 
-            for (int i = 0; i < entities.Count; i++)
-                DrawEntityAabb(context.View, entities[i], context.ViewBox);
+            foreach (var entity in entities)
+            {
+                DrawEntityAabb(context.View, entity, context.ViewBox);
+            }
 
             GL.Disable(EnableCap.Blend);
         }

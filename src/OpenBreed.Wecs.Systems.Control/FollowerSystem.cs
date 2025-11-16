@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Systems.Control
 {
     [RequireEntityWith(
         typeof(FollowedComponent))]
-    public class FollowerSystem : UpdatableMatchingSystemBase<FollowerSystem>
+    public class FollowerSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields
 
@@ -26,7 +26,7 @@ namespace OpenBreed.Wecs.Systems.Control
         public FollowerSystem(
             IWorldMan worldMan,
             IEntityMan entityMan,
-            IEventsMan eventsMan)
+            IEventsMan eventsMan) : base(worldMan)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;

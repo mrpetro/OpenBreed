@@ -1,20 +1,21 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Common.Game.Wecs.Components;
-using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Worlds;
 using System.Linq;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(LivesComponent))]
-    public class LivesSystem : UpdatableMatchingSystemBase<LivesSystem>
+    public class LivesSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields
 
@@ -27,8 +28,9 @@ namespace OpenBreed.Common.Game.Wecs.Systems
         #region Public Constructors
 
         public LivesSystem(
+            IWorldMan worldMan,
             IEventsMan eventsMan,
-            ILogger logger)
+            ILogger logger) : base(worldMan)
         {
             this.eventsMan = eventsMan;
             this.logger = logger;

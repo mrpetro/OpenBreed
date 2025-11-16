@@ -14,7 +14,7 @@ using System.Linq;
 namespace OpenBreed.Wecs.Systems.Scripting
 {
     [RequireEntityWith(typeof(ScriptComponent))]
-    public class ScriptRunningSystem : UpdatableMatchingSystemBase<ScriptRunningSystem>
+    public class ScriptRunningSystem : UpdatableMatchingSystemBase, IOnAddEntitySystem
     {
         #region Private Fields
 
@@ -26,8 +26,9 @@ namespace OpenBreed.Wecs.Systems.Scripting
         #region Public Constructors
 
         public ScriptRunningSystem(
+            IWorldMan worldMan,
             IScriptMan scriptMan,
-            ILogger logger)
+            ILogger logger) : base(worldMan)
         {
             this.scriptMan = scriptMan;
             this.logger = logger;
@@ -37,10 +38,8 @@ namespace OpenBreed.Wecs.Systems.Scripting
 
         #region Public Methods
 
-        public override void OnAddEntity(IWorld world, IEntity entity)
+        public void OnAddEntity(IWorld world, IEntity entity)
         {
-            base.OnAddEntity(world, entity);
-
             entity.TryInvoke(scriptMan, logger, "OnInit");
         }
 

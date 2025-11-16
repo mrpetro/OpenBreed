@@ -7,14 +7,17 @@ using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
+using OpenBreed.Wecs.Worlds;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(TimerComponent))]
-    public class TimerSystem : UpdatableMatchingSystemBase<TimerSystem>
+    public class TimerSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields
+
+        private readonly IWorldMan worldMan;
 
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
@@ -22,23 +25,41 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public TimerSystem(
+            IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan,
             ILogger logger)
         {
-            this.entityMan = entityMan;
-            this.eventsMan = eventsMan;
-            this.logger = logger;
+            this.worldMan = worldMan ?? throw new ArgumentNullException(nameof(worldMan));
+            this.entityMan = entityMan ?? throw new ArgumentNullException(nameof(entityMan));
+            this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
-        #region Protected Methods
+        #region Public Methods
 
-        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
+        public void Update(IUpdateContext context)
+        {
+            var world = worldMan.GetById(context.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
+            foreach (var entity in entities)
+            {
+                UpdateEntity(entity, context);
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void UpdateEntity(IEntity entity, IUpdateContext context)
         {
             var tc = entity.Get<TimerComponent>();
 
@@ -46,10 +67,6 @@ namespace OpenBreed.Wecs.Systems.Core
             for (int i = 0; i < tc.Items.Count; i++)
                 UpdateTimer(entity, tc.Items[i], context.Dt);
         }
-
-        #endregion Protected Methods
-
-        #region Private Methods
 
         private void UpdateTimer(IEntity entity, TimerData timerData, float dt)
         {

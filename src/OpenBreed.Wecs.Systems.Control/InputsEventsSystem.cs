@@ -1,21 +1,25 @@
 ﻿using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
-    public abstract class InputsEventSystem : MatchingSystemBase, IEventSystem<KeyboardStateEventArgs>
+    public abstract class InputsEventSystem : IMatchingSystem, IEventSystem<WorldKeyboardEvent>
     {
         #region Private Fields
 
+        private readonly IWorldMan worldMan;
         private readonly IInputsMan inputsMan;
 
         #endregion Private Fields
 
         #region Protected Constructors
 
-        protected InputsEventSystem(IInputsMan inputsMan)
+        protected InputsEventSystem(IWorldMan worldMan, IInputsMan inputsMan)
         {
+            this.worldMan = worldMan;
             this.inputsMan = inputsMan;
         }
 
@@ -23,8 +27,12 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Public Methods
 
-        public void Update(KeyboardStateEventArgs e)
+        public void Update(WorldKeyboardEvent e)
         {
+            var world = this.worldMan.GetById(e.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
             foreach (var entity in entities)
             {
                 UpdateEntity(entity, e);
@@ -35,7 +43,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Protected Methods
 
-        protected abstract void UpdateEntity(IEntity entity, KeyboardStateEventArgs e);
+        protected abstract void UpdateEntity(IEntity entity, WorldKeyboardEvent e);
 
         #endregion Protected Methods
     }

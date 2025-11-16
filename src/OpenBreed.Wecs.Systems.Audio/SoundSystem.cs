@@ -6,12 +6,13 @@ using OpenBreed.Wecs.Components.Audio;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Audio.Events;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Audio
 {
     [RequireEntityWith(typeof(SoundPlayerComponent))]
-    public class SoundSystem : UpdatableMatchingSystemBase<SoundSystem>
+    public class SoundSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields
 
@@ -23,8 +24,9 @@ namespace OpenBreed.Wecs.Systems.Audio
         #region Public Constructors
 
         public SoundSystem(
+            IWorldMan worldMan,
             ISoundMan soundMan,
-            IEventsMan eventsMan)
+            IEventsMan eventsMan) : base(worldMan)
         {
             this.soundMan = soundMan;
             this.eventsMan = eventsMan;

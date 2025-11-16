@@ -66,6 +66,20 @@ namespace OpenBreed.Wecs.Worlds
         /// <returns>Enumeration of matching entities.</returns>
         IEnumerable<IEntity> GetMatchingEntities(IMatchingSystem system);
 
+        /// <summary>
+        /// !!!!!!!!!!TEMP METHOD
+        /// </summary>
+        /// <param name="entity"></param>
+        void UpdateSystemsCache(IEntity entity);
+
+        /// <summary>
+        /// !!!!!!!!!!TEMP METHOD
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="system"></param>
+        /// <returns></returns>
+        bool HasSystemEntityCached(IMatchingSystem system, IEntity entity);
+
         #endregion Public Methods
     }
 }

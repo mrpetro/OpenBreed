@@ -6,6 +6,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Events;
+using OpenBreed.Wecs.Worlds;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Physics
@@ -18,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         typeof(AngularVelocityComponent),
         typeof(AngularThrustComponent))]
 
-    public class DirectionSystemVanilla : UpdatableMatchingSystemBase<DirectionSystemVanilla>
+    public class DirectionSystemVanilla : UpdatableMatchingSystemBase
     {
         #region Private Fields
 
@@ -30,8 +31,9 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Internal Constructors
 
         public DirectionSystemVanilla(
+            IWorldMan worldMan,
             IEntityMan entityMan,
-            IEventsMan eventsMan)
+            IEventsMan eventsMan) : base(worldMan)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;

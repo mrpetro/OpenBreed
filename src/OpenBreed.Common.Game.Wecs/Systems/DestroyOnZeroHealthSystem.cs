@@ -22,7 +22,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 {
     [RequireEntityWith(
         typeof(HealthComponent))]
-    public class DestroyOnZeroHealthSystem : UpdatableMatchingSystemBase<DestroyOnZeroHealthSystem>
+    public class DestroyOnZeroHealthSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields
 
@@ -39,7 +39,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
             IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan,
-            ILogger logger)
+            ILogger logger) : base(worldMan)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;

@@ -18,7 +18,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(CollisionComponent))]
-    public class RemoveStaticBodySystem : MatchingSystemBase, IEventSystem<EntityLeavingEvent>
+    public class RemoveStaticBodySystem : IMatchingSystem, IEventSystem<EntityLeavingEvent>
     {
         #region Private Fields
 
@@ -43,6 +43,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public void Update(EntityLeavingEvent e)
         {
+            var world = this.worldMan.GetById(e.WorldId);
+
+            var entities = world.GetMatchingEntities(this);
+
             var eventEntity = entityMan.GetById(e.EntityId);
 
             //Check if cell entity has static body

@@ -25,7 +25,9 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Fields
 
-        private readonly Dictionary<IEntity, HashSet<IMatchingSystem>> entities = new Dictionary<IEntity, HashSet<IMatchingSystem>>();
+        private readonly Dictionary<IEntity, HashSet<IMatchingSystem>> entitiesToSystemsLookup = new Dictionary<IEntity, HashSet<IMatchingSystem>>();
+        private readonly Dictionary<IMatchingSystem, HashSet<IEntity>> systemToEntriesLookup = new Dictionary<IMatchingSystem, HashSet<IEntity>>();
+
         private readonly IEntityToSystemMatcher entityToSystemMatcher;
         private readonly UpdateContext context;
         private float timeMultiplier = 1.0f;
@@ -64,7 +66,7 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        public IEnumerable<IEntity> Entities => entities.Keys;
+        public IEnumerable<IEntity> Entities => entitiesToSystemsLookup.Keys;
 
         /// <summary>
         /// Id of this world
@@ -93,7 +95,7 @@ namespace OpenBreed.Wecs.Worlds
         public void RemoveEntity(IEntity entity)
         {
             RemoveFromAllSystems(entity);
-            entities.Remove(entity);
+            entitiesToSystemsLookup.Remove(entity);
 
             if (((Entity)entity).WorldId == Id)
             {
@@ -105,21 +107,71 @@ namespace OpenBreed.Wecs.Worlds
         {
             var matchingSystems = GetMatchingSystems(entity).ToHashSet();
 
-            entities.Add(entity, matchingSystems);
+            entitiesToSystemsLookup.Add(entity, matchingSystems);
 
             foreach (var system in matchingSystems)
-                system.OnAddEntity(this, entity);
+            {
+                CacheEntityToSystem(entity, system);
+
+                if (system is IOnAddEntitySystem onAddEntitySystem)
+                {
+                    onAddEntitySystem.OnAddEntity(this, entity);
+                }
+            }
 
             ((Entity)entity).WorldId = Id;
         }
 
         public IEnumerable<IEntity> GetMatchingEntities(IMatchingSystem system)
         {
-            foreach (var entity in entities)
+            //foreach (var entity in entitiesToSystemsLookup)
+            //{
+            //    if (entityToSystemMatcher.AreMatch(system, entity.Key))
+            //    {
+            //        yield return entity.Key;
+            //    }
+            //}
+
+            if (systemToEntriesLookup.TryGetValue(system, out HashSet<IEntity> entities))
             {
-                if (entityToSystemMatcher.AreMatch(system, entity.Key))
+                foreach (var entity in entities)
                 {
-                    yield return entity.Key;
+                    yield return entity;
+                }
+            }
+        }
+
+        public bool HasSystemEntityCached(IMatchingSystem system, IEntity entity)
+        {
+            if (!systemToEntriesLookup.TryGetValue(system, out HashSet<IEntity> entities))
+            {
+                return false;
+            }
+
+            return entities.Contains(entity);
+        }
+
+        public void UpdateSystemsCache(IEntity entity)
+        {
+            foreach (var system in Systems.OfType<IMatchingSystem>())
+            {
+                var areMatching = entityToSystemMatcher.AreMatch(system, entity);
+
+                if (HasSystemEntityCached(system, entity))
+                {
+                    if (!areMatching)
+                    {
+                        DecacheEntityFromSystem(entity, system);
+                        continue;
+                    }
+                }
+                else
+                {
+                    if (areMatching)
+                    {
+                        CacheEntityToSystem(entity, system);
+                        continue;
+                    }
                 }
             }
         }
@@ -142,22 +194,54 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Methods
 
+        private void CacheEntityToSystem(IEntity entity, IMatchingSystem system)
+        {
+            if (!systemToEntriesLookup.TryGetValue(system, out HashSet<IEntity> entities))
+            {
+                entities = new HashSet<IEntity>();
+                systemToEntriesLookup.Add(system, entities);
+            }
+
+            entities.Add(entity);
+        }
+
+        private void DecacheEntityFromSystem(IEntity entity, IMatchingSystem system)
+        {
+            if (!systemToEntriesLookup.TryGetValue(system, out HashSet<IEntity> entities))
+            {
+                return;
+            }
+
+            entities.Remove(entity);
+        }
+
         private IEnumerable<IMatchingSystem> GetMatchingSystems(IEntity entity)
         {
             foreach (var system in Systems.OfType<IMatchingSystem>())
             {
                 if (entityToSystemMatcher.AreMatch(system, entity))
+                {
                     yield return system;
+                }
             }
         }
 
         private void RemoveFromAllSystems(IEntity entity)
         {
-            if (!entities.TryGetValue(entity, out HashSet<IMatchingSystem> systems))
+            if (!entitiesToSystemsLookup.TryGetValue(entity, out HashSet<IMatchingSystem> systems))
+            {
                 throw new InvalidOperationException();
+            }
 
             foreach (var system in systems)
-                system.OnRemoveEntity(this, entity);
+            {
+                if (system is IOnRemoveEntitySystem onRemoveEntitySystem)
+                {
+                    onRemoveEntitySystem.OnRemoveEntity(this, entity);
+                }
+
+                DecacheEntityFromSystem(entity, system);
+            }
         }
 
         #endregion Private Methods

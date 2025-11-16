@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Wecs.Systems
+﻿using OpenBreed.Wecs.Worlds;
+
+namespace OpenBreed.Wecs.Systems
 {
     public interface IEventSystemManager
     {

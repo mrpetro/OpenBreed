@@ -9,11 +9,12 @@ using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Animation
 {
     [RequireEntityWith(typeof(AnimationComponent))]
-    public class AnimatorSystem : UpdatableMatchingSystemBase<AnimatorSystem>
+    public class AnimatorSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields
 
@@ -28,10 +29,11 @@ namespace OpenBreed.Wecs.Systems.Animation
         #region Public Constructors
 
         public AnimatorSystem(
+            IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan,
             IClipMan<IEntity> clipMan,
-            ILogger logger)
+            ILogger logger) : base(worldMan)
         {
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;
