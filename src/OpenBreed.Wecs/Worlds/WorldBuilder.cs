@@ -60,12 +60,12 @@ namespace OpenBreed.Wecs.Worlds
             foreach (var initializer in systemInitializers.Values)
             {
                 var newSystem = initializer.Invoke();
-                var systemType = newSystem.GetType();
+                //var systemType = newSystem.GetType();
 
-                if (newSystem is IEventSystem eventSystem)
-                {
-                    eventSystemUpdater.RegisterSystem(eventSystem);
-                }
+                //if (newSystem is IEventSystem eventSystem)
+                //{
+                //    eventSystemUpdater.RegisterSystem(eventSystem);
+                //}
 
                 yield return newSystem;
 

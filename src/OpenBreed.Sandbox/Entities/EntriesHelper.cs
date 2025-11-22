@@ -134,14 +134,6 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
-        public void RegisterCollisionPairs()
-        {
-            //collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv ) => Actor2TriggerCallback(ca, ea, cb,eb, pv));
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, dt, pv) => Actor2TriggerCallbackEx(ca, ea, cb, eb, dt, pv));
-
-            //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
-        }
-
         public void ExecuteHeroEnter(IEntity heroEntity, IEntity cameraEntity, string worldName, int entryId)
         {
             var context = new Context()
@@ -161,59 +153,6 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Private Methods
 
-        private void PerformEntityExit(IEntity actorEntity, IEntity exitEntity)
-        {
-            // For preventing running rest of the code when actor will hit couple of teleporter blocks at same time
-            if (Equals(actorEntity.State, "Exiting"))
-                return;
-
-            actorEntity.State = "Exiting";
-
-            var cameraEntity = actorEntity.TryGet<FollowedComponent>()?.FollowerIds.
-                                                                              Select(item => entityMan.GetById(item)).
-                                                                              FirstOrDefault(item => item.Tag is "Camera.Player");
-
-            if (cameraEntity == null)
-                return;
-
-            var matadataCmp = exitEntity.Get<MetadataComponent>();
-
-            if (!int.TryParse(matadataCmp.Flavor, out int exitId))
-                throw new InvalidOperationException("Expected exit number");
-
-            var mapId = exitId % 64;
-            var entryId = exitId / 64;
-
-            var mapKey = $"Vanilla/{mapId}";
-
-            var cameraFadeOutClipId = clipMan.GetId(CameraHelper.CAMERA_FADE_OUT);
-            var cameraFadeInClipId = clipMan.GetId(CameraHelper.CAMERA_FADE_IN);
-
-            var worldIdToRemoveFrom = actorEntity.WorldId;
-
-            var actorWorld = worldMan.GetById(actorEntity.WorldId);
-            var cameraWorld = worldMan.GetById(cameraEntity.WorldId);
-            //var doorOpening = PerformFunction(() => door.TryOpen(key));
-            //var doorClosing = doorOpening.OnFinishResult((result) => result == "Matching").PerformAction(() => door.Close())
-            //door.Wait(5).OnFinish((door) => door.Close()) 
-            //door.Close()
-
-            var context = new Context()
-            {
-                actorEntity = actorEntity,
-                cameraEntity = cameraEntity,
-                cameraFadeInClipId = cameraFadeInClipId,
-                cameraFadeOutClipId = cameraFadeOutClipId,
-                mapKey = mapKey,
-                entryId = entryId
-            };
-
-            PauseWorld(context); 
-            //    .Then(FadeOut)
-            //    .Then(RemoveFromWorld)
-            //    .Then(RemoveFromWorld);
-        }
-
         class Context
         {
             public IEntity cameraEntity { get; set; }
@@ -229,53 +168,6 @@ namespace OpenBreed.Sandbox.Entities
                 return function.Invoke(this);
             }
 
-        }
-
-        private Context PauseWorld(Context context)
-        {
-            triggerMan.OnPausedWorld(context.cameraEntity, (e, a) =>
-            {
-                FadeOut(context);
-            }, singleTime: true);
-
-            context.cameraEntity.PauseWorld();
-
-            return context;
-        }
-
-        private Context FadeOut(Context context)
-        {
-            triggerMan.OnEntityAnimFinished(context.cameraEntity, (e, a) =>
-            {
-                RemoveFromWorld(context);
-
-            }, singleTime: true);
-
-            context.cameraEntity.PlayAnimation(0, context.cameraFadeOutClipId);
-
-            return context;
-        }
-
-        private Context RemoveFromWorld(Context context)
-        {
-            triggerMan.OnEntityLeftWorld(context.actorEntity, (s,a) =>
-            {
-                LoadWorld(context);
-            }, singleTime: true);
-
-            worldMan.RequestRemoveEntity(context.actorEntity);
-
-            return context;
-        }
-
-        private void LoadWorld(Context context)
-        {
-            context.targetWorld = TryLoadWorld(context.mapKey);
-
-            triggerMan.OnWorldInitialized(context.targetWorld, () =>
-            {
-                AddToWorld(context);
-            }, singleTime: true);
         }
 
         private void AddToWorld(Context context)
@@ -300,29 +192,11 @@ namespace OpenBreed.Sandbox.Entities
             SetPosition(context.actorEntity, context.entryId);
         }
 
-        private void Actor2TriggerCallbackEx(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
-        {
-            PerformEntityExit(entityA, entityB);
-        }
-
         private void AddToWorld(IEntity target, string worldName)
         {
             var world = worldMan.GetByName(worldName);
 
             worldMan.RequestAddEntity(target, world.Id);
-        }
-
-        private IWorld TryLoadWorld(string worldName)
-        {
-            var world = worldMan.GetByName(worldName);
-
-            if (world is null)
-            {
-                var mapWorldDataLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
-                world = mapWorldDataLoader.Load(worldName);
-            }
-
-            return world;
         }
 
         private IEnumerable<IEntity> FindEntryEntities(IWorld world, int entryId)

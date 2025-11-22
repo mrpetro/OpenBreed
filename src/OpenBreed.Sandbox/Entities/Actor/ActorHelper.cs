@@ -34,7 +34,7 @@ using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Common.Game;
-using OpenTK.Graphics.ES11;
+using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -132,20 +132,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         #region Public Methods
 
-        public void RegisterCollisionPairs()
-        {
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.FullObstacle, FullObstableCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorBody, FullObstableCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.ActorOnlyObstacle, FullObstableCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlopeObstacle, SlopeObstacleCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.SlowdownObstacle, SlowdownObstacleCallback);
-            
-            collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.FullObstacle, ProjectileTriggerCallback);
-            collisionMan.RegisterFixturePair(ColliderTypes.Projectile, ColliderTypes.ActorBody, ProjectileTriggerCallback);
-
-            collisionMan.RegisterFixturePair(ColliderTypes.ActorBody, ColliderTypes.Trigger, TriggerCallback);
-        }
-
         public IEntity CreateMission(string name)
         {
             var entity = entityFactory.Create(@"ABTA\Templates\Common\Mission")
@@ -204,89 +190,5 @@ namespace OpenBreed.Sandbox.Entities.Actor
         #region Internal Methods
 
         #endregion Internal Methods
-
-        #region Private Methods
-
-        private void Dynamic2StaticCallback(int colliderTypeA, IEntity entityA, int colliderTypeB, IEntity entityB, float dt, Vector2 projection)
-        {
-            dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
-        }
-
-        private void FullObstableCallback(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
-        {
-            dynamicResolver.ResolveVsStatic(entityA, entityB, dt, projection);
-        }
-
-        private void TryOnCollision(IEntity entityA, IEntity entityB, Vector2 projection)
-        {
-            var functionId = entityA.GetFunctionId("OnCollision");
-
-            if (functionId is null)
-                return;
-
-            var scriptFunction = scriptMan.GetFunction(functionId);
-
-            if (scriptFunction is null)
-                return;
-
-            scriptFunction.Invoke(entityA, entityB, projection);
-        }
-
-        private void ProjectileTriggerCallback(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
-        {
-            TryOnCollision(entityA, entityB, projection);
-        }
-
-        private void TriggerCallback(IFixture actorFixture, IEntity actorEntity, IFixture triggerFixture, IEntity triggerEntity, float dt, Vector2 projection)
-        {
-            eventsMan.Raise<ActorCollisionEvent>(new ActorCollisionEvent(actorEntity.Id, triggerEntity.Id));
-
-            TryOnCollision(actorEntity, triggerEntity, projection);
-            TryOnCollision(triggerEntity, actorEntity, projection);
-        }
-
-        private void SlopeObstacleCallback(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
-        {
-            var metadata = entityB.Get<MetadataComponent>();
-
-            Vector2 slopeDirection;
-
-            switch (metadata.Flavor)
-            {
-                case "DownLeft":
-                    slopeDirection = new Vector2(0, 1);
-                    break;
-                case "UpLeft":
-                    slopeDirection = new Vector2(0, -1);
-                    break;
-                case "UpRight":
-                    slopeDirection = new Vector2(0, -1);
-                    break;
-                case "DownRight":
-                    slopeDirection = new Vector2(0, 1);
-                    break;
-                default:
-                    slopeDirection = new Vector2(0, 0);
-                    break;
-            }
-
-            dynamicResolver.ResolveVsSlope(entityA, entityB, projection, slopeDirection);
-        }
-
-        private void SlowdownObstacleCallback(IFixture fixtureA, IEntity entityA, IFixture fixtureB, IEntity entityB, float dt, Vector2 projection)
-        {
-            //if (entityA.State is "Slowdown")
-            //    return;
-
-            var velCmp = entityA.Get<VelocityComponent>();
-
-            velCmp.Value = Vector2.Multiply(velCmp.Value, 0.5f);
-
-            //entityA.State = "Slowdown";
-
-            Console.WriteLine("Slowdown");
-        }
-
-        #endregion Private Methods
     }
 }

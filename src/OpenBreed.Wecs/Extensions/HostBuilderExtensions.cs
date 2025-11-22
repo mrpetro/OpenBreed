@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OpenBreed.Common;
+using OpenBreed.Common.Interface.Extensions;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
@@ -17,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,6 +50,7 @@ namespace OpenBreed.Wecs.Extensions
 
                 services.AddScoped<ISystemFinder, SystemFinder>();
                 services.AddTransient<WorldBuilder>();
+                services.AddSingleton<ISystemInitializer, DefaultSystemInitializer>();
             });
         }
 
@@ -81,29 +84,23 @@ namespace OpenBreed.Wecs.Extensions
         {
             var callingAssembly = Assembly.GetCallingAssembly();
 
-            var systemTypes = new List<Type>();
-
-            foreach (var type in callingAssembly
-                .DefinedTypes.Where(type => !type.IsAbstract && !type.IsInterface)
-                .Where(type => type.ImplementedInterfaces.Any(item => item == typeof(ISystem))))
-            {
-                systemTypes.Add(type);
-            }
+            var systemTypes = callingAssembly.GetInterfaces<ISystem>().ToArray();
 
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 foreach (var systemType in systemTypes)
                 {
-                    services.AddTransient(systemType,(sp) => {
+                    services.AddScoped(systemType,(sp) => 
+                    {
+                        var systemInitializers = sp.GetServices<ISystemInitializer>();
 
-                        var requirementsProvider = sp.GetRequiredService<ISystemRequirementsProvider>();
+                        var system = (ISystem)ActivatorUtilities.CreateInstance(sp, systemType);
 
-                        if (typeof(IMatchingSystem).IsAssignableFrom(systemType))
+                        foreach (var systemInitializer in systemInitializers)
                         {
-                            requirementsProvider.RegisterRequirements(systemType);
+                            systemInitializer.Initialize(sp, system);
                         }
 
-                        var system = ActivatorUtilities.CreateInstance(sp, systemType);
                         return system;
                     });
                 }

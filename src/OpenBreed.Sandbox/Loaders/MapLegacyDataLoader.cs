@@ -2,6 +2,8 @@
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Audio.Interface.Data;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core;
@@ -25,7 +27,7 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Helpers;
-using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Sandbox.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
@@ -41,7 +43,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Xml.Linq;
-using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Loaders
 {
@@ -199,6 +200,9 @@ namespace OpenBreed.Sandbox.Loaders
 
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(dbMap.Id);
+
+
+            worldBuilder.AddSystem<Actor2ExitCollisionHandlerSystem>();
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);
 

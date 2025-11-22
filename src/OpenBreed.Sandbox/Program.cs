@@ -161,6 +161,7 @@ namespace OpenBreed.Sandbox
                 shapeMan.Register("Shapes/Circle_0_0_160", new CircleShape(new Vector2(0, 0), 160));
             });
 
+            hostBuilder.SetupSandboxSystems();
             hostBuilder.SetupCommonGameServices(isEditor: false);
             hostBuilder.SetupCommonGameWecsServices(isEditor: false);
 
@@ -698,8 +699,7 @@ namespace OpenBreed.Sandbox
             //var musicId = soundMan.CreateStream("MUSIC", (bufferSize, buffer) => ReadStream(mod, bufferSize, buffer));
             //soundMan.PlayStream(musicId);
 
-            actorHelper.RegisterCollisionPairs();
-            worldGateHelper.RegisterCollisionPairs();
+            //worldGateHelper.RegisterCollisionPairs();
 
             cameraHelper.CreateAnimations();
 

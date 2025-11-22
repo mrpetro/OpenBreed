@@ -3,6 +3,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -23,20 +24,11 @@ namespace OpenBreed.Wecs.Systems.Core
 
             var entities = world.GetMatchingEntities(this);
 
-            if (context.Paused)
+            entities = context.Paused ? entities.Where(item => item.Contains<PauseImmuneComponent>()) : entities;
+
+            foreach (var entity in entities)
             {
-                foreach (var entity in entities)
-                {
-                    if (entity.Contains<PauseImmuneComponent>())
-                        UpdateEntity(entity, context);
-                }
-            }
-            else
-            {
-                foreach (var entity in entities)
-                {
-                    UpdateEntity(entity, context);
-                }
+                UpdateEntity(entity, context);
             }
         }
 

@@ -213,6 +213,11 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
+        public static void SetupSandboxSystems(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.SetupWecsAssemblySystems();
+        }
+
         public static void SetupWecsSandboxComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();

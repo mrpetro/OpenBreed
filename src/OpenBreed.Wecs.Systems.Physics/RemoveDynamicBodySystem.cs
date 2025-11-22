@@ -57,11 +57,9 @@ namespace OpenBreed.Wecs.Systems.Physics
                 return;
             }
 
-            var eventWorld = worldMan.GetById(e.WorldId);
-
             foreach (var entity in entities)
             {
-                if (entity.WorldId != eventWorld.Id)
+                if (entity.WorldId != world.Id)
                     continue;
 
                 entity.RemoveEntityFromDynamic(eventEntity);

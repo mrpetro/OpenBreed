@@ -76,7 +76,9 @@ namespace OpenBreed.Physics.Generic.Managers
         public void RemoveItem(int itemId)
         {
             if (!items.TryGetValue(itemId, out BroadphaseItem item))
+            {
                 throw new InvalidOperationException($"Item with ID '{itemId}' was not inserted.");
+            }
 
             switch (item.Type)
             {

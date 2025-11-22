@@ -19,6 +19,8 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
 {
     public static class HostBuilderExtensions
     {
+        #region Public Methods
+
         public static void SetupDynamicResolver(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -27,10 +29,20 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             });
         }
 
+        public static void SetupPhysicsSystemInitializer(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ISystemInitializer, PhysicsSystemInitializer>();
+            });
+        }
+
         public static void SetupPhysicsSystems(this IHostBuilder hostBuilder)
         {
+            hostBuilder.SetupPhysicsSystemInitializer();
             hostBuilder.SetupWecsAssemblySystems();
         }
 
+        #endregion Public Methods
     }
 }

@@ -3,7 +3,9 @@ using Microsoft.Extensions.Hosting;
 using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Extensions;
 using OpenBreed.Fsm.Extensions;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Animation.Extensions;
 using OpenBreed.Wecs.Components.Audio.Extensions;
@@ -21,12 +23,14 @@ using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
+using OpenBreed.Wecs.Systems.Physics.Abstractions;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,7 +60,6 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             hostBuilder.SetupAnimationSystems();
             hostBuilder.ConfigureGuiSystems(isEditor);
             hostBuilder.SetupGameSystems();
-
             hostBuilder.SetupWecsSystemFactory();
 
             hostBuilder.SetupWecsCommonComponents();
@@ -85,6 +88,11 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             });
         }
 
+        public static void SetupGameSystems(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.SetupWecsAssemblySystems();
+        }
+
         #endregion Public Methods
 
         #region Private Methods
@@ -93,11 +101,6 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
             hostBuilder.SetupWecsAssemblyComponentFactories();
-        }
-
-        public static void SetupGameSystems(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.SetupWecsAssemblySystems();
         }
 
         #endregion Private Methods
