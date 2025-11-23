@@ -54,7 +54,7 @@ namespace OpenBreed.Sandbox.Extensions
             {
                 var gameWindowSettings = new GameWindowSettings()
                 {
-                    UpdateFrequency = 30
+                    UpdateFrequency = 60
                 };
 
                 var nativeWindowSettings = new NativeWindowSettings()

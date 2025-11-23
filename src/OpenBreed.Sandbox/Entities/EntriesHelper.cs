@@ -12,6 +12,7 @@ using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
@@ -136,146 +137,47 @@ namespace OpenBreed.Sandbox.Entities
 
         public void ExecuteHeroEnter(IEntity heroEntity, IEntity cameraEntity, string worldName, int entryId)
         {
-            var context = new Context()
+            var context = new TransferContext()
             {
                 actorEntity = heroEntity,
                 cameraEntity = cameraEntity,
-                //cameraFadeInClipId = cameraFadeInClipId,
-                //cameraFadeOutClipId = cameraFadeOutClipId,
                 mapKey = worldName,
                 entryId = entryId
             };
 
-            AddToWorld(context);
+            AddToWorld(context)
+                .Then(PlayerCharacterEnter);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        class Context
-        {
-            public IEntity cameraEntity { get; set; }
-            public IEntity actorEntity { get; set; }
-            public int cameraFadeOutClipId { get; set; }
-            public int cameraFadeInClipId { get; set; }
-            public string mapKey { get; set; }
-            public int entryId { get; set; }
-            public IWorld targetWorld { get; internal set; }
-
-            public Context Then(Func<Context, Context> function)
-            {
-                return function.Invoke(this);
-            }
-
-        }
-
-        private void AddToWorld(Context context)
+        private TransferContext AddToWorld(TransferContext context)
         {
             triggerMan.OnEntityEnteredWorld(context.cameraEntity, (e, args) =>
             {
-                PlayerCharacterEnter(context);
-                SetPosition(context);
-                //FadeIn(context);
+                context.InvokeNextJob();
             }, singleTime: true);
 
             AddToWorld(context.actorEntity, context.mapKey);
+
+            return context;
         }
 
-        private void PlayerCharacterEnter(Context context)
+        private TransferContext PlayerCharacterEnter(TransferContext context)
         {
             context.actorEntity.TryInvoke(scriptMan, logger, "OnEnter");
-        }
 
-        private void SetPosition(Context context)
-        {
-            SetPosition(context.actorEntity, context.entryId);
+            worldMan.SetEntityPosition(context.actorEntity, context.entryId);
+
+            return context;
         }
 
         private void AddToWorld(IEntity target, string worldName)
         {
             var world = worldMan.GetByName(worldName);
-
             worldMan.RequestAddEntity(target, world.Id);
-        }
-
-        private IEnumerable<IEntity> FindEntryEntities(IWorld world, int entryId)
-        {
-            foreach (var entity in world.Entities.Where(e => e.Contains<MetadataComponent>()))
-            {
-                var cmpClass = entity.Get<MetadataComponent>();
-
-                if (cmpClass.Name != "WorldEntry")
-                    continue;
-
-                if (cmpClass.Flavor != entryId.ToString())
-                    continue;
-
-                yield return entity;
-            }
-        }
-
-        /// <summary>
-        /// This function should emulate scanline method from vanilla ABTA for searching 
-        /// Entities
-        /// </summary>
-        /// <param name="entities">Entities to check coordinates</param>
-        /// <returns></returns>
-        private IEntity GetTopLeftMostEntity(IEnumerable<IEntity> entities)
-        {
-            IEntity topMostEntity = null;
-            var topMostPosX = float.MaxValue;
-            var topMostPosY = 0.0f;
-
-            foreach (var entity in entities)
-            {
-                var pos = entity.Get<PositionComponent>().Value;
-
-                if (pos.Y < topMostPosY)
-                    continue;
-
-                if(pos.Y == topMostPosY)
-                {
-                    if (pos.X > topMostPosX)
-                        continue;
-                }
-
-                topMostPosX = pos.X;
-                topMostPosY = pos.Y;
-                topMostEntity = entity;
-            }
-
-            return topMostEntity;
-        }
-
-        private void SetPosition(IEntity target, int entryId)
-        {
-            var world = worldMan.GetById(target.WorldId);
-
-            var entryEntity = GetTopLeftMostEntity(FindEntryEntities(world, entryId));
-
-            if(entryEntity is null)
-                entryEntity = GetTopLeftMostEntity(FindEntryEntities(world, 2));
-
-            if (entryEntity is null)
-                throw new Exception($"No entry with ID '{entryId}' found.");
-
-            var entryPos = entryEntity.Get<PositionComponent>();
-            var targetPos = target.Get<PositionComponent>();
-            //var targetAabb = broadphase.GetAabb(target.Id);
-            //var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
-
-            var newPosition = entryPos.Value;// + offset;
-
-            targetPos.Value = newPosition;
-
-            var velocityCmp = target.Get<VelocityComponent>();
-            velocityCmp.Value = Vector2.Zero;
-
-            var thrustCmp = target.Get<ThrustComponent>();
-            thrustCmp.Value = Vector2.Zero;
-
-            target.State = null;
         }
 
         #endregion Private Methods
