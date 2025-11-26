@@ -162,6 +162,12 @@ namespace OpenBreed.Wecs.Worlds
                     if (!areMatching)
                     {
                         DecacheEntityFromSystem(entity, system);
+
+                        if (entitiesToSystemsLookup.TryGetValue(entity, out HashSet<IMatchingSystem> systems))
+                        {
+                            systems.Remove(system);
+                        }
+
                         continue;
                     }
                 }
@@ -170,6 +176,15 @@ namespace OpenBreed.Wecs.Worlds
                     if (areMatching)
                     {
                         CacheEntityToSystem(entity, system);
+
+                        if (!entitiesToSystemsLookup.TryGetValue(entity, out HashSet<IMatchingSystem> systems))
+                        {
+                            systems = new HashSet<IMatchingSystem>();
+                            entitiesToSystemsLookup.Add(entity, systems);
+                        }
+
+                        systems.Add(system);
+
                         continue;
                     }
                 }

@@ -14,6 +14,7 @@ using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
+using OpenBreed.Sandbox.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
@@ -135,43 +136,34 @@ namespace OpenBreed.Sandbox.Entities
             return entity;
         }
 
-        public void ExecuteHeroEnter(IEntity heroEntity, IEntity cameraEntity, string worldName, int entryId)
+        public void ExecuteHeroEnter(IEntity heroEntity, string worldName, int entryId)
         {
-            var context = new TransferContext()
-            {
-                actorEntity = heroEntity,
-                cameraEntity = cameraEntity,
-                mapKey = worldName,
-                entryId = entryId
-            };
+            var job = Job.Create((job) => AddToWorld(job, heroEntity, worldName));
 
-            AddToWorld(context)
-                .Then(PlayerCharacterEnter);
+            job.Then((context) => PlayerCharacterEnter(context, heroEntity, entryId));
+
+            job.Start();
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private TransferContext AddToWorld(TransferContext context)
+        private void AddToWorld(Job job, IEntity actorEntity, string mapKey)
         {
-            triggerMan.OnEntityEnteredWorld(context.cameraEntity, (e, args) =>
+            triggerMan.OnEntityEnteredWorld(actorEntity, (e, args) =>
             {
-                context.InvokeNextJob();
+                job.Finish();
             }, singleTime: true);
 
-            AddToWorld(context.actorEntity, context.mapKey);
-
-            return context;
+            AddToWorld(actorEntity, mapKey);
         }
 
-        private TransferContext PlayerCharacterEnter(TransferContext context)
+        private void PlayerCharacterEnter(Job job, IEntity actorEntity, int entryId)
         {
-            context.actorEntity.TryInvoke(scriptMan, logger, "OnEnter");
+            actorEntity.TryInvoke(scriptMan, logger, "OnEnter");
 
-            worldMan.SetEntityPosition(context.actorEntity, context.entryId);
-
-            return context;
+            worldMan.SetEntityPosition(actorEntity, entryId);
         }
 
         private void AddToWorld(IEntity target, string worldName)

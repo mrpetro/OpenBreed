@@ -3,6 +3,7 @@ using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Interface;
+using OpenBreed.Core.Interface;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Sandbox.Entities;
@@ -26,9 +27,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 
 namespace OpenBreed.Sandbox.Systems
 {
+
+    public class Job
+    {
+        public static Job Create(Action<Job> action)
+        {
+            return new Job(action);
+        }
+
+        private Job(Action<Job> action)
+        {
+            this.action = action;
+        }
+
+        private readonly Action<Job> action;
+        private Job next;
+
+        public Job Then(Action<Job> action)
+        {
+            next = new Job(action);
+            return next;
+        }
+
+        public void Finish()
+        {
+            next?.Start();
+        }
+
+        internal Job Start()
+        {
+            action.Invoke(this);
+            return this;
+        }
+    }
+
     public class Actor2ExitCollisionHandlerSystem : IOnEntityCollisionSystem
     {
         #region Private Fields
@@ -116,95 +152,90 @@ namespace OpenBreed.Sandbox.Systems
             //door.Wait(5).OnFinish((door) => door.Close())
             //door.Close()
 
-            var context = new TransferContext()
-            {
-                actorEntity = actorEntity,
-                cameraEntity = cameraEntity,
-                mapKey = mapKey,
-                entryId = entryId
-            };
+            var job = Job.Create((job) => PauseWorld(job, actorEntity));
 
-            PauseWorld(context)
-                .Then(FadeOut)
-                .Then(RemoveFromWorld)
-                .Then(LoadWorld)
-                .Then(AddToWorld)
-                .Then(PlayerCharacterEnter);
+            job.Then((job) => FadeOut(job, cameraEntity))
+                .Then((job) => RemoveFromWorld(job, actorEntity))
+                .Then((job) => LoadWorld(job, mapKey))
+                .Then((job) => AddToWorld(job, actorEntity, mapKey))
+                .Then((job) => PlayerCharacterEnter(job, actorEntity, entryId));
+
+            job.Start();
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private TransferContext PauseWorld(TransferContext context)
+        private void PauseWorld(Job job, IEntity entity)
         {
-            triggerMan.OnPausedWorld(context.cameraEntity, (e, a) =>
+            triggerMan.OnPausedWorld(entity, (e, a) =>
             {
-                context.InvokeNextJob();
+                job.Finish();
             }, singleTime: true);
 
-            context.cameraEntity.PauseWorld();
-
-            return context;
+            entity.PauseWorld();
         }
 
-        private TransferContext FadeOut(TransferContext context)
+        private void FadeOut(Job job, IEntity cameraEntity)
         {
+            logger.LogTrace("OnExit: Fade out...");
+
             var cameraFadeOutClipId = clipMan.GetId(CameraHelper.CAMERA_FADE_OUT);
 
-            triggerMan.OnEntityAnimFinished(context.cameraEntity, (e, a) =>
+            triggerMan.OnEntityAnimFinished(cameraEntity, (e, a) =>
             {
-                context.InvokeNextJob();
+                job.Finish();
             }, singleTime: true);
 
-            context.cameraEntity.PlayAnimation(0, cameraFadeOutClipId);
-
-            return context;
+            cameraEntity.PlayAnimation(0, cameraFadeOutClipId);
         }
 
-        private TransferContext LoadWorld(TransferContext context)
+        private void LoadWorld(Job job, string mapKey)
         {
-            context.targetWorld = TryLoadWorld(context.mapKey);
+            logger.LogTrace("OnExit: Loading world '{mapKey}'...", mapKey);
 
-            triggerMan.OnWorldInitialized(context.targetWorld, () =>
+            var targetWorld = TryLoadWorld(mapKey);
+
+            triggerMan.OnWorldInitialized(targetWorld, () =>
             {
-                context.InvokeNextJob();
+                job.Finish();
+            }, singleTime: true);
+        }
+
+        private void RemoveFromWorld(Job job, IEntity actorEntity)
+        {
+            logger.LogTrace("OnExit: Removing entity '{actorEntity}'...", actorEntity);
+
+            triggerMan.OnEntityLeftWorld(actorEntity, (s, a) =>
+            {
+                job.Finish();
             }, singleTime: true);
 
-            return context;
+            worldMan.RequestRemoveEntity(actorEntity);
         }
 
-        private TransferContext RemoveFromWorld(TransferContext context)
+        private void AddToWorld(Job job, IEntity actorEntity, string mapKey)
         {
-            triggerMan.OnEntityLeftWorld(context.actorEntity, (s, a) =>
+            logger.LogTrace("OnExit: Adding entity '{actorEntity}' to world '{mapKey}'...", actorEntity, mapKey);
+
+            triggerMan.OnEntityEnteredWorld(actorEntity, (e, args) =>
             {
-                context.InvokeNextJob();
+                job.Finish();
             }, singleTime: true);
 
-            worldMan.RequestRemoveEntity(context.actorEntity);
-
-            return context;
+            AddToWorld(actorEntity, mapKey);
         }
 
-        private TransferContext AddToWorld(TransferContext context)
+        private void PlayerCharacterEnter(Job job, IEntity actorEntity, int entryId)
         {
-            triggerMan.OnEntityEnteredWorld(context.cameraEntity, (e, args) =>
-            {
-                context.InvokeNextJob();
-            }, singleTime: true);
+            logger.LogTrace("OnExit: Actor '{actorEntity}' arrives at entry {entryId}...", actorEntity, entryId);
 
-            AddToWorld(context.actorEntity, context.mapKey);
+            actorEntity.TryInvoke(scriptMan, logger, "OnEnter");
 
-            return context;
-        }
+            worldMan.SetEntityPosition(actorEntity, entryId);
 
-        private TransferContext PlayerCharacterEnter(TransferContext context)
-        {
-            context.actorEntity.TryInvoke(scriptMan, logger, "OnEnter");
-
-            worldMan.SetEntityPosition(context.actorEntity, context.entryId);
-
-            return context;
+            job.Finish();
         }
 
         private void AddToWorld(IEntity target, string worldName)

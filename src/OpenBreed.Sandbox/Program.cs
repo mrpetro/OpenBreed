@@ -526,7 +526,7 @@ namespace OpenBreed.Sandbox
 
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
-                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, playerCamera, gameWorld.Name, 0);
+                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
             });
         }
 
