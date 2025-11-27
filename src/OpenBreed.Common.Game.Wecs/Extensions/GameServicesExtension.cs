@@ -2,8 +2,8 @@
 using OpenBreed.Animation.Generic;
 using OpenBreed.Common.Game.Wecs.Services;
 using OpenBreed.Common.Interface;
-using OpenBreed.Core.Interface;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Entities;

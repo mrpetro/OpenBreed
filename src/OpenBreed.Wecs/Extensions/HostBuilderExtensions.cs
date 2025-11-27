@@ -7,7 +7,7 @@ using OpenBreed.Common.Interface.Extensions;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components;

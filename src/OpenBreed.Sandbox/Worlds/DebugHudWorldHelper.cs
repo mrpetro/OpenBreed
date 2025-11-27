@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Core;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;

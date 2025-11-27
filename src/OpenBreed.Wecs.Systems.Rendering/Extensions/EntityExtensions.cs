@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Interface.Managers;
+﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;

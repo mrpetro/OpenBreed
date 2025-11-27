@@ -1,7 +1,7 @@
 ﻿using OpenTK;
 using OpenTK.Mathematics;
 
-namespace OpenBreed.Core.Interface.Extensions
+namespace OpenBreed.Core.Abstractions.Extensions
 {
     public static class Box2Extensions
     {

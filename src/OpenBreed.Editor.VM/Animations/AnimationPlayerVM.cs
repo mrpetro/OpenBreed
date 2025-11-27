@@ -4,7 +4,7 @@ using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc;

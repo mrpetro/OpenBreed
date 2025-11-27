@@ -2,7 +2,7 @@
 using OpenTK.Mathematics;
 using System;
 
-namespace OpenBreed.Core.Interface.Extensions
+namespace OpenBreed.Core.Abstractions.Extensions
 {
     public static class Vector2Extension
     {

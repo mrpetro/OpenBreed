@@ -1,9 +1,9 @@
 using OpenBreed.Common.Logging;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenTK;
 using System.Drawing;
 
-namespace OpenBreed.Core.Interface
+namespace OpenBreed.Core.Abstractions
 {
     /// <summary>
     /// Engine core interface

@@ -2,7 +2,7 @@
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;

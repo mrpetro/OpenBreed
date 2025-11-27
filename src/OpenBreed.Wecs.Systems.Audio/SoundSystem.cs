@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Audio.Interface.Managers;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Audio;

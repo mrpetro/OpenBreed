@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;

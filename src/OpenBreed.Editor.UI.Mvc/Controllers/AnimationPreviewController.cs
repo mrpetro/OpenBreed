@@ -14,7 +14,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using OpenBreed.Editor.UI.Mvc.Views;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using System.Drawing;
 using OpenBreed.Database.Interface.Items.Animations;

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenBreed.Core.Interface\OpenBreed.Core.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Core.Abstractions\OpenBreed.Core.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Editor.UI.Wpf\OpenBreed.Editor.UI.Wpf.csproj" />
     <ProjectReference Include="..\OpenBreed.Gui.Abstractions\OpenBreed.Gui.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Gui\OpenBreed.Gui.csproj" />

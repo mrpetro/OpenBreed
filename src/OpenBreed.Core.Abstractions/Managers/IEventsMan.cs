@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenBreed.Core.Interface.Managers
+namespace OpenBreed.Core.Abstractions.Managers
 {
     public delegate void EventCallback<TEventArgs>(TEventArgs e) where TEventArgs : EventArgs;
 

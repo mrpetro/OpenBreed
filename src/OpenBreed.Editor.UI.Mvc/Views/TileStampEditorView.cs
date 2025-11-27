@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Interface.Managers;
+﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Gui.Abstractions;
 using System;
 using System.Collections.Generic;

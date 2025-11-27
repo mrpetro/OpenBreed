@@ -1,5 +1,5 @@
-﻿using OpenBreed.Core.Interface;
-using OpenBreed.Core.Interface.Managers;
+﻿using OpenBreed.Core.Abstractions;
+using OpenBreed.Core.Abstractions.Managers;
 
 namespace OpenBreed.Core.Managers
 {

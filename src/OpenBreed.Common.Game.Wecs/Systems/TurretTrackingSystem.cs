@@ -11,7 +11,7 @@ using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Common.Game;
 
 namespace OpenBreed.Common.Game.Wecs.Systems

@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Mvc;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Database.Interface.Items.TileStamps;
 using OpenBreed.Editor.UI.Mvc.Models;
 using OpenBreed.Editor.UI.Mvc.Views;

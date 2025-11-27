@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Interface.Extensions;
+﻿using OpenBreed.Core.Abstractions.Extensions;
 using OpenBreed.Gui.Abstractions.Elements;
 using OpenBreed.Gui.Abstractions.Extensions;
 using OpenBreed.Gui.Abstractions.Logic;

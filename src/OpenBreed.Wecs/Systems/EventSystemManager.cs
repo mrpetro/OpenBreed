@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Interface.Extensions;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;

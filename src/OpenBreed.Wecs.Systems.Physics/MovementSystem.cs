@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Interface.Managers;
+﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;

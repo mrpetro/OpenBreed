@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
 
-namespace OpenBreed.Core.Interface
+namespace OpenBreed.Core.Abstractions
 {
     /// <summary>
     /// Interface for operating on data grid of generic type

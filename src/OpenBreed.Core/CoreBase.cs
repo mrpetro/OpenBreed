@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using OpenBreed.Common;
 using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Core.Interface;
+using OpenBreed.Core.Abstractions;
 
 namespace OpenBreed.Core
 {

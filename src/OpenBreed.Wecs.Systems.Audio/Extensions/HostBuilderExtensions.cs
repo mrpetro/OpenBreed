@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Extensions;
 using System;

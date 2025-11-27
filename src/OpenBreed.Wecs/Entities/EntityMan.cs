@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Events;

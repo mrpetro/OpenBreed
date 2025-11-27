@@ -44,8 +44,8 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using OpenBreed.Rendering.Abstractions.Extensions;
-using OpenBreed.Core.Interface;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions;
+using OpenBreed.Core.Abstractions.Managers;
 
 using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Sandbox.App.Extensions;

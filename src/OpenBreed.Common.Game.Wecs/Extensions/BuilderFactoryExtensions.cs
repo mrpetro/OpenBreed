@@ -10,7 +10,7 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Core.Managers;
 using OpenBreed.Common.Game.Wecs.Components;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {

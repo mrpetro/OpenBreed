@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Interface.Drawing;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc.Controllers;
 using OpenBreed.Editor.UI.Mvc.Extensions;

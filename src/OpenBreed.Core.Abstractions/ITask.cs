@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Interface
+namespace OpenBreed.Core.Abstractions
 {
     public interface ITask
     {

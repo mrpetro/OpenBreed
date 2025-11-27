@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenBreed.Core.Interface
+namespace OpenBreed.Core.Abstractions
 {
     /// <summary>
     /// Interface for Job object

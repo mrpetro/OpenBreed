@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Interface.Extensions
+namespace OpenBreed.Core.Abstractions.Extensions
 {
     public static class Vector3Extension
     {

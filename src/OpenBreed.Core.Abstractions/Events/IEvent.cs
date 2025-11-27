@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Interface.Managers
+namespace OpenBreed.Core.Abstractions.Events
 {
-    public interface ITriggerBuilder
+    public interface IEvent
     {
-        ITriggerMan TriggerMan { get; }
     }
 }

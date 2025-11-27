@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Entities;

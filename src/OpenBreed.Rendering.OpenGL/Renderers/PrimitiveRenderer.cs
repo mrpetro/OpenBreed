@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Interface.Drawing;
-using OpenBreed.Core.Interface.Extensions;
+using OpenBreed.Core.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;

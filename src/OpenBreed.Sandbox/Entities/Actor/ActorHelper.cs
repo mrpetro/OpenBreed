@@ -32,7 +32,7 @@ using System.Linq;
 using System.Xml.Linq;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Physics.Interface;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Extensions;
 

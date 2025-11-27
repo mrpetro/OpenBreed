@@ -59,7 +59,7 @@
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Core.Interface/OpenBreed.Core.Interface.csproj">
+    <Project Path="OpenBreed.Core.Abstractions/OpenBreed.Core.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
       <Platform Solution="*|x64" Project="x64" />

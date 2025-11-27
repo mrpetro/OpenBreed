@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Events;

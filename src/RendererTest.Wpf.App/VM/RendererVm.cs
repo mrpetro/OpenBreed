@@ -26,7 +26,7 @@ using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Abstractions.Events;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Gui.Abstractions;
 using System.Diagnostics;
 using OpenBreed.Gui.Abstractions.Rendering;

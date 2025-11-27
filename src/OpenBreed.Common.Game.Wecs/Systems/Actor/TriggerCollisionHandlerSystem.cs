@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;

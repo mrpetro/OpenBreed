@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Interface;
+﻿using OpenBreed.Core.Abstractions;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Core

@@ -7,7 +7,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Dialog;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Database.EFCore.DbEntries;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;

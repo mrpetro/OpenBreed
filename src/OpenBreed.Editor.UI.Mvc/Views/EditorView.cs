@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Common.Interface.Drawing;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Editor.UI.Mvc.Extensions;
 using OpenBreed.Gui.Abstractions;
 using OpenBreed.Gui.Abstractions.Elements;

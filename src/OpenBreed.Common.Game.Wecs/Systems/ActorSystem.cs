@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Game.Wecs.Events;
-using OpenBreed.Core.Interface.Managers;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
