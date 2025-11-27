@@ -2,6 +2,7 @@
 using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Wecs.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Interface;
 using OpenBreed.Core.Interface.Managers;
@@ -28,43 +29,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
+using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Systems
 {
-
-    public class Job
-    {
-        public static Job Create(Action<Job> action)
-        {
-            return new Job(action);
-        }
-
-        private Job(Action<Job> action)
-        {
-            this.action = action;
-        }
-
-        private readonly Action<Job> action;
-        private Job next;
-
-        public Job Then(Action<Job> action)
-        {
-            next = new Job(action);
-            return next;
-        }
-
-        public void Finish()
-        {
-            next?.Start();
-        }
-
-        internal Job Start()
-        {
-            action.Invoke(this);
-            return this;
-        }
-    }
-
     public class Actor2ExitCollisionHandlerSystem : IOnEntityCollisionSystem
     {
         #region Private Fields
@@ -76,6 +44,7 @@ namespace OpenBreed.Sandbox.Systems
         private readonly ITriggerMan triggerMan;
         private readonly IScriptMan scriptMan;
         private readonly IClipMan<IEntity> clipMan;
+        private readonly IGameServices services;
         private readonly IDataLoaderFactory dataLoaderFactory;
 
         #endregion Private Fields
@@ -89,6 +58,7 @@ namespace OpenBreed.Sandbox.Systems
             ITriggerMan triggerMan,
             IScriptMan scriptMan,
             IClipMan<IEntity> clipMan,
+            IGameServices services,
             IDataLoaderFactory dataLoaderFactory)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -97,6 +67,7 @@ namespace OpenBreed.Sandbox.Systems
             this.triggerMan = triggerMan ?? throw new ArgumentNullException(nameof(triggerMan));
             this.scriptMan = scriptMan ?? throw new ArgumentNullException(nameof(scriptMan));
             this.clipMan = clipMan ?? throw new ArgumentNullException(nameof(clipMan));
+            this.services = services ?? throw new ArgumentNullException(nameof(services));
             this.dataLoaderFactory = dataLoaderFactory ?? throw new ArgumentNullException(nameof(dataLoaderFactory));
         }
 
@@ -152,111 +123,23 @@ namespace OpenBreed.Sandbox.Systems
             //door.Wait(5).OnFinish((door) => door.Close())
             //door.Close()
 
-            var job = Job.Create((job) => PauseWorld(job, actorEntity));
+            var task = Core.Task.Create((t) => services.PauseWorld(t, actorEntity));
 
-            job.Then((job) => FadeOut(job, cameraEntity))
-                .Then((job) => RemoveFromWorld(job, actorEntity))
-                .Then((job) => LoadWorld(job, mapKey))
-                .Then((job) => AddToWorld(job, actorEntity, mapKey))
-                .Then((job) => PlayerCharacterEnter(job, actorEntity, entryId));
+            task.Then((job) => services.FadeOut(job, cameraEntity))
+                .Then((job) => services.RemoveFromWorld(job, actorEntity))
+                .Then((job) => services.LoadWorld(job, mapKey))
+                .Then((job) => services.AddToWorld(job, actorEntity, mapKey))
+                .Then((job) => services.PlayerCharacterEnter(job, actorEntity, entryId));
 
-            job.Start();
+            task.Start();
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void PauseWorld(Job job, IEntity entity)
-        {
-            triggerMan.OnPausedWorld(entity, (e, a) =>
-            {
-                job.Finish();
-            }, singleTime: true);
 
-            entity.PauseWorld();
-        }
 
-        private void FadeOut(Job job, IEntity cameraEntity)
-        {
-            logger.LogTrace("OnExit: Fade out...");
-
-            var cameraFadeOutClipId = clipMan.GetId(CameraHelper.CAMERA_FADE_OUT);
-
-            triggerMan.OnEntityAnimFinished(cameraEntity, (e, a) =>
-            {
-                job.Finish();
-            }, singleTime: true);
-
-            cameraEntity.PlayAnimation(0, cameraFadeOutClipId);
-        }
-
-        private void LoadWorld(Job job, string mapKey)
-        {
-            logger.LogTrace("OnExit: Loading world '{mapKey}'...", mapKey);
-
-            var targetWorld = TryLoadWorld(mapKey);
-
-            triggerMan.OnWorldInitialized(targetWorld, () =>
-            {
-                job.Finish();
-            }, singleTime: true);
-        }
-
-        private void RemoveFromWorld(Job job, IEntity actorEntity)
-        {
-            logger.LogTrace("OnExit: Removing entity '{actorEntity}'...", actorEntity);
-
-            triggerMan.OnEntityLeftWorld(actorEntity, (s, a) =>
-            {
-                job.Finish();
-            }, singleTime: true);
-
-            worldMan.RequestRemoveEntity(actorEntity);
-        }
-
-        private void AddToWorld(Job job, IEntity actorEntity, string mapKey)
-        {
-            logger.LogTrace("OnExit: Adding entity '{actorEntity}' to world '{mapKey}'...", actorEntity, mapKey);
-
-            triggerMan.OnEntityEnteredWorld(actorEntity, (e, args) =>
-            {
-                job.Finish();
-            }, singleTime: true);
-
-            AddToWorld(actorEntity, mapKey);
-        }
-
-        private void PlayerCharacterEnter(Job job, IEntity actorEntity, int entryId)
-        {
-            logger.LogTrace("OnExit: Actor '{actorEntity}' arrives at entry {entryId}...", actorEntity, entryId);
-
-            actorEntity.TryInvoke(scriptMan, logger, "OnEnter");
-
-            worldMan.SetEntityPosition(actorEntity, entryId);
-
-            job.Finish();
-        }
-
-        private void AddToWorld(IEntity target, string worldName)
-        {
-            var world = worldMan.GetByName(worldName);
-
-            worldMan.RequestAddEntity(target, world.Id);
-        }
-
-        private IWorld TryLoadWorld(string worldName)
-        {
-            var world = worldMan.GetByName(worldName);
-
-            if (world is null)
-            {
-                var mapWorldDataLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
-                world = mapWorldDataLoader.Load(worldName);
-            }
-
-            return world;
-        }
 
         #endregion Private Methods
     }

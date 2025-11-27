@@ -651,7 +651,7 @@ namespace OpenBreed.Sandbox
 
         private void StartLuaConsoleInput(IServiceProvider serviceProvider)
         {
-            Task.Run(() => LuaConsoleInput(
+            System.Threading.Tasks.Task.Run(() => LuaConsoleInput(
                 serviceProvider.GetRequiredService<IScriptMan>(),
                 serviceProvider.GetRequiredService<CollisionVisualizingOptions>()));
         }

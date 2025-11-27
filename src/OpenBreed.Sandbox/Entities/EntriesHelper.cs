@@ -3,9 +3,11 @@ using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Wecs.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core;
+using OpenBreed.Core.Interface;
 using OpenBreed.Core.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface;
@@ -36,7 +38,7 @@ using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static OpenBreed.Wecs.Components.Animation.AnimationPlayerComponent;
+using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Entities
 {
@@ -70,6 +72,7 @@ namespace OpenBreed.Sandbox.Entities
         private readonly IDataLoaderFactory dataLoaderFactory;
         private readonly IScriptMan scriptMan;
         private readonly ILogger logger;
+        private readonly IGameServices services;
 
         #endregion Private Fields
 
@@ -87,7 +90,8 @@ namespace OpenBreed.Sandbox.Entities
             ViewportCreator viewportCreator,
             IDataLoaderFactory dataLoaderFactory,
             IScriptMan scriptMan,
-            ILogger logger)
+            ILogger logger,
+            IGameServices services)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;
@@ -101,6 +105,7 @@ namespace OpenBreed.Sandbox.Entities
             this.dataLoaderFactory = dataLoaderFactory;
             this.scriptMan = scriptMan;
             this.logger = logger;
+            this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
         #endregion Public Constructors
@@ -138,40 +143,13 @@ namespace OpenBreed.Sandbox.Entities
 
         public void ExecuteHeroEnter(IEntity heroEntity, string worldName, int entryId)
         {
-            var job = Job.Create((job) => AddToWorld(job, heroEntity, worldName));
+            var task = Task.Create((t) => services.AddToWorld(t, heroEntity, worldName));
 
-            job.Then((context) => PlayerCharacterEnter(context, heroEntity, entryId));
+            task.Then((t) => services.PlayerCharacterEnter(t, heroEntity, entryId));
 
-            job.Start();
+            task.Start();
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private void AddToWorld(Job job, IEntity actorEntity, string mapKey)
-        {
-            triggerMan.OnEntityEnteredWorld(actorEntity, (e, args) =>
-            {
-                job.Finish();
-            }, singleTime: true);
-
-            AddToWorld(actorEntity, mapKey);
-        }
-
-        private void PlayerCharacterEnter(Job job, IEntity actorEntity, int entryId)
-        {
-            actorEntity.TryInvoke(scriptMan, logger, "OnEnter");
-
-            worldMan.SetEntityPosition(actorEntity, entryId);
-        }
-
-        private void AddToWorld(IEntity target, string worldName)
-        {
-            var world = worldMan.GetByName(worldName);
-            worldMan.RequestAddEntity(target, world.Id);
-        }
-
-        #endregion Private Methods
     }
 }

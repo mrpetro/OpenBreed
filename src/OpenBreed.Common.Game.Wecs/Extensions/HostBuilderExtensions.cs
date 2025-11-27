@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Generic.Extensions;
+using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Extensions;
+using OpenBreed.Common.Game.Wecs.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Extensions;
 using OpenBreed.Fsm.Extensions;
@@ -86,11 +89,22 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
                 builderFactory.SetupWecsAnimationBuilders(sp);
                 builderFactory.SetupWecsCommonBuilders(sp);
             });
+
+            hostBuilder.SetupGameServices();
         }
+
 
         public static void SetupGameSystems(this IHostBuilder hostBuilder)
         {
             hostBuilder.SetupWecsAssemblySystems();
+        }
+
+        public static void SetupGameServices(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IGameServices, GameServices>();
+            });
         }
 
         #endregion Public Methods
