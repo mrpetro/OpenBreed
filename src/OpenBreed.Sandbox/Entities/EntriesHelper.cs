@@ -3,7 +3,7 @@ using OpenBreed.Animation.Interface;
 using OpenBreed.Animation.Interface.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Game;
-using OpenBreed.Common.Game.Wecs.Services;
+using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core;
@@ -39,6 +39,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Common.Game.Wecs.Extensions;
+
 
 namespace OpenBreed.Sandbox.Entities
 {

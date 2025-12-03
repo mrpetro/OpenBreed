@@ -24,7 +24,7 @@ namespace OpenBreed.Scripting.Lua.Extensions
             {
                 services.AddScoped<IScriptMan, LuaScriptMan>((sp) =>
                 {
-                    var scriptMan = new LuaScriptMan(sp.GetService<ILogger>());
+                    var scriptMan = new LuaScriptMan(sp.GetRequiredService<ILogger>());
 
                     if (action is not null)
                     {
@@ -32,7 +32,9 @@ namespace OpenBreed.Scripting.Lua.Extensions
                     }
 
                     return scriptMan;
-                });
+                })
+                .AddScoped((sp) => new Lazy<IScriptMan>(() => sp.GetRequiredService<IScriptMan>()));
+
             });
         }
 

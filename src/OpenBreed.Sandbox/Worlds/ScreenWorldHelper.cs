@@ -112,17 +112,13 @@ namespace OpenBreed.Sandbox.Worlds
             var world = builder.Build();
 
             var gameCommentatorBuilder = entityFactory.Create($@"ABTA\Templates\Common\GameCommentator");
+            gameCommentatorBuilder.SetTag("Commentator");
 
             var gameCommentator = gameCommentatorBuilder.Build();
             gameCommentator.CreateTimer("SpeechDelay");
             gameCommentator.CreateTimer("MissionDelay");
 
-
-
             var player1Entity = CreatePlayer("P1");
-
-
-
 
             scriptMan.Expose("Commentator", gameCommentator);
 

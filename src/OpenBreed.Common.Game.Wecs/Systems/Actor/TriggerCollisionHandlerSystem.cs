@@ -1,9 +1,11 @@
 ﻿using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Common.Game.Wecs.Services;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Abstractions;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
@@ -26,15 +28,20 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
         private readonly IEventsMan eventsMan;
 
         private readonly IScriptMan scriptMan;
+        private readonly IActorTriggerMan actorTriggerMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TriggerCollisionHandlerSystem(IEventsMan eventsMan, IScriptMan scriptMan)
+        public TriggerCollisionHandlerSystem(
+            IEventsMan eventsMan,
+            IScriptMan scriptMan,
+            IActorTriggerMan actorTriggerMan)
         {
             this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
             this.scriptMan = scriptMan ?? throw new ArgumentNullException(nameof(scriptMan));
+            this.actorTriggerMan = actorTriggerMan ?? throw new ArgumentNullException(nameof(actorTriggerMan));
         }
 
         #endregion Public Constructors
@@ -58,6 +65,14 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
         public void OnCollision(IFixture actorFixture, IEntity actorEntity, IFixture triggerFixture, IEntity triggerEntity, float dt, Vector2 projection)
         {
             eventsMan.Raise(new ActorCollisionEvent(actorEntity.Id, triggerEntity.Id));
+
+            var actionName = triggerEntity.GetOnTriggerAction();
+
+            if (actionName is not null && actorTriggerMan.TryGetCallback(actionName, out ActorTriggerCallback actorTriggerCallback))
+            {
+                actorTriggerCallback.Invoke(actorEntity, triggerEntity);
+                return;
+            }
 
             scriptMan.TryOnCollision(actorEntity, triggerEntity, projection);
             scriptMan.TryOnCollision(triggerEntity, actorEntity, projection);

@@ -160,6 +160,11 @@ namespace OpenBreed.Sandbox.Extensions
             return entityMan.GetByTag("Director").FirstOrDefault(entity => entity.WorldId == worldId);
         }
 
+        public static IEntity GetCommentator(this IEntityMan entityMan)
+        {
+            return entityMan.GetByTag("Commentator").FirstOrDefault();
+        }
+
         public static IEntity GetSmartCardScreenCamera(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Camera.SmartCardScreen").FirstOrDefault();

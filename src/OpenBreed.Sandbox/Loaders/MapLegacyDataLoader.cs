@@ -202,7 +202,8 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.SetName(dbMap.Id);
 
 
-            worldBuilder.AddSystem<Actor2ExitCollisionHandlerSystem>();
+            worldBuilder.AddSystem<ActorOnExitTriggerSystem>();
+            worldBuilder.AddSystem<ActorOnSmartCardTriggerSystem>();
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);
 

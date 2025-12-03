@@ -46,6 +46,7 @@ using OpenBreed.Core.Extensions;
 using OpenBreed.Model.Extensions;
 using OpenBreed.Rendering.Common.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Helpers;
+using OpenBreed.Common.Game.Services;
 
 namespace OpenBreed.Common.Game.Extensions
 {
@@ -71,6 +72,14 @@ namespace OpenBreed.Common.Game.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<FixtureTypes>();
+            });
+        }
+
+        public static void SetupGameServices(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IGameServices, GameServices>();
             });
         }
 
@@ -117,6 +126,8 @@ namespace OpenBreed.Common.Game.Extensions
             });
 
 
+
+
             hostBuilder.SetupLuaScripting((scriptMan, sp) =>
             {
                 var eventsMan = sp.GetService<IEventsMan>();
@@ -144,6 +155,8 @@ namespace OpenBreed.Common.Game.Extensions
                 scriptMan.Expose("Texts", sp.GetService<TextsDataProvider>());
                 scriptMan.Expose("Inputs", sp.GetService<IInputsMan>());
                 scriptMan.Expose("Worlds", sp.GetService<IWorldMan>());
+                scriptMan.Expose("Services", sp.GetService<IGameServices>());
+
                 scriptMan.Expose("Coords", sp.GetService<CoordsTransformer>());
 
                 var res = scriptMan.RunString(@"import('System')");
@@ -203,6 +216,7 @@ namespace OpenBreed.Common.Game.Extensions
             hostBuilder.SetupBroadphaseFactory<IEntity>();
             hostBuilder.SetupFixtureMan((s, a) => { });
             hostBuilder.SetupFixtureTypes();
+            hostBuilder.SetupGameServices();
         }
 
         #endregion Public Methods

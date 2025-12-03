@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Generic;
-using OpenBreed.Common.Game.Wecs.Services;
+using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Core.Abstractions.Managers;

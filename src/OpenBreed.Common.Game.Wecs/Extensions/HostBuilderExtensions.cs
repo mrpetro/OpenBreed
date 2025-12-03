@@ -1,15 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Extensions;
+using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Extensions;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Wecs;
 using OpenBreed.Wecs.Components.Animation.Extensions;
 using OpenBreed.Wecs.Components.Audio.Extensions;
 using OpenBreed.Wecs.Components.Common.Extensions;
@@ -26,10 +30,12 @@ using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Gui.Extensions;
+using OpenBreed.Wecs.Systems.Physics;
 using OpenBreed.Wecs.Systems.Physics.Abstractions;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,21 +96,25 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
                 builderFactory.SetupWecsCommonBuilders(sp);
             });
 
-            hostBuilder.SetupGameServices();
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IActorTriggerMan, ActorTriggerMan>();
+            });
+
+            hostBuilder.SetupActorTriggerSystemInitializer();
         }
 
+        public static void SetupActorTriggerSystemInitializer(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<ISystemInitializer, ActorTriggerSystemInitializer>();
+            });
+        }
 
         public static void SetupGameSystems(this IHostBuilder hostBuilder)
         {
             hostBuilder.SetupWecsAssemblySystems();
-        }
-
-        public static void SetupGameServices(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<IGameServices, GameServices>();
-            });
         }
 
         #endregion Public Methods

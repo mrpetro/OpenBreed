@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Managers
 {
+
+
     internal class DefaultTriggerMan : ITriggerMan
     {
         #region Private Fields

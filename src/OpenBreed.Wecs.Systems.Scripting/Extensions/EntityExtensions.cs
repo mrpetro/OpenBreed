@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
 using System.Linq;
@@ -10,6 +11,18 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
     public static class EntityExtensions
     {
         #region Public Methods
+
+        public static string GetOnTriggerAction(this IEntity entity)
+        {
+            var sc = entity.TryGet<OnTriggerComponent>();
+
+            if (sc is null)
+            {
+                return null;
+            }
+
+            return sc.ActionName;
+        }
 
         public static string GetFunctionId(this IEntity entity, string triggerName)
         {
