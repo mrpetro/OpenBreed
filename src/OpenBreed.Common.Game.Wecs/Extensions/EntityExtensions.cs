@@ -30,7 +30,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             return entity.Contains<HealthComponent>();
         }
 
-        public static void RestoreFillHealth(this IEntity entity)
+        public static void RestoreFullHealth(this IEntity entity)
         {
             var cmp = entity.Get<HealthComponent>();
             cmp.Value = cmp.MaximumValue;

@@ -2,6 +2,7 @@
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
@@ -28,5 +29,6 @@ namespace OpenBreed.Common.Game.Services
         TextsDataProvider Texts { get; }
         ISoundMan Sounds { get; }
         IStampMan Stamps { get; }
+        ItemsMan Items { get; }
     }
 }

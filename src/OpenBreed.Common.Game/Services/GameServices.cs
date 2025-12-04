@@ -2,6 +2,7 @@
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
@@ -35,7 +36,8 @@ namespace OpenBreed.Common.Game.Services
             IDataLoaderFactory dataLoaderFactory,
             TextsDataProvider texts,
             ISoundMan sounds,
-            IStampMan stamps)
+            IStampMan stamps,
+            ItemsMan items)
         {
             Triggers = triggers;
             Logger = logger;
@@ -47,6 +49,7 @@ namespace OpenBreed.Common.Game.Services
             Texts = texts;
             Sounds = sounds;
             Stamps = stamps;
+            Items = items;
         }
 
         #endregion Public Constructors
@@ -72,6 +75,8 @@ namespace OpenBreed.Common.Game.Services
         public ISoundMan Sounds { get; }
 
         public IStampMan Stamps { get; }
+
+        public ItemsMan Items { get; }
 
         #endregion Public Properties
     }

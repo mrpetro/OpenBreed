@@ -47,6 +47,11 @@ namespace OpenBreed.Common.Game.Managers
                 return -1;
         }
 
+        public bool TryGetItemId(string itemName, out int itemId)
+        {
+            return itemNames.TryGetValue(itemName, out itemId);
+        }
+
         #endregion Public Methods
     }
 }
