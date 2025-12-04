@@ -5,6 +5,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions.Managers;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
@@ -37,7 +38,8 @@ namespace OpenBreed.Common.Game.Services
             TextsDataProvider texts,
             ISoundMan sounds,
             IStampMan stamps,
-            ItemsMan items)
+            ItemsMan items,
+            IShapeMan shapes)
         {
             Triggers = triggers;
             Logger = logger;
@@ -50,6 +52,7 @@ namespace OpenBreed.Common.Game.Services
             Sounds = sounds;
             Stamps = stamps;
             Items = items;
+            Shapes = shapes;
         }
 
         #endregion Public Constructors
@@ -77,6 +80,8 @@ namespace OpenBreed.Common.Game.Services
         public IStampMan Stamps { get; }
 
         public ItemsMan Items { get; }
+
+        public IShapeMan Shapes { get; }
 
         #endregion Public Properties
     }

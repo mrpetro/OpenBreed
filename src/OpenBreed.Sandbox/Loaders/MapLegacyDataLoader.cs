@@ -203,6 +203,7 @@ namespace OpenBreed.Sandbox.Loaders
 
 
             worldBuilder.AddSystem<ActorOnExitTriggerSystem>();
+            worldBuilder.AddSystem<ActorOnTeleportTriggerSystem>();
             worldBuilder.AddSystem<ActorOnItemTriggerSystem>();
             worldBuilder.AddSystem<ActorOnSmartCardTriggerSystem>();
 

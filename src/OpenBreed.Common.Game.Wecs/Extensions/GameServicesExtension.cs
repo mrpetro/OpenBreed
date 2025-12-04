@@ -34,6 +34,16 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             entity.PauseWorld();
         }
 
+        public static void UnpauseWorld(this IGameServices services, ITask task, IEntity entity)
+        {
+            services.Triggers.OnUnpausedWorld(entity, (e, a) =>
+            {
+                task.Finish();
+            }, singleTime: true);
+
+            entity.UnpauseWorld();
+        }
+
         public static void RemoveFromWorld(this IGameServices services, ITask task, IEntity actorEntity)
         {
             services.Logger.LogTrace("OnExit: Removing entity '{actorEntity}'...", actorEntity);

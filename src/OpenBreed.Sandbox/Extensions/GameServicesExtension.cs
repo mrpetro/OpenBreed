@@ -31,14 +31,28 @@ namespace OpenBreed.Sandbox.Extensions
         {
             services.Logger.LogTrace("OnExit: Fade out...");
 
-            var cameraFadeOutClipId = services.Clips.GetId(CameraHelper.CAMERA_FADE_OUT);
+            var clipId = services.Clips.GetId(CameraHelper.CAMERA_FADE_OUT);
 
             services.Triggers.OnEntityAnimFinished(cameraEntity, (e, a) =>
             {
                 task.Finish();
             }, singleTime: true);
 
-            cameraEntity.PlayAnimation(0, cameraFadeOutClipId);
+            cameraEntity.PlayAnimation(0, clipId);
+        }
+
+        public static void FadeIn(this IGameServices services, ITask task, IEntity cameraEntity)
+        {
+            services.Logger.LogTrace("OnExit: Fade in...");
+
+            var clipId = services.Clips.GetId(CameraHelper.CAMERA_FADE_IN);
+
+            services.Triggers.OnEntityAnimFinished(cameraEntity, (e, a) =>
+            {
+                task.Finish();
+            }, singleTime: true);
+
+            cameraEntity.PlayAnimation(0, clipId);
         }
 
         public static void LoadWorld(this IGameServices services, ITask task, string mapKey)

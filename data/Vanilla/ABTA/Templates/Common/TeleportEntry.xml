@@ -14,8 +14,8 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
-		<Script>
-			<ScriptId>Vanilla/Common/Teleporter</ScriptId>
-		</Script>
+		<OnTrigger>
+			<ActionName>Vanilla/Common/Teleporter</ActionName>
+		</OnTrigger>
     </Components>
 </EntityTemplate>
