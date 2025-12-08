@@ -35,9 +35,11 @@
 				</Fixture>
 			</Fixtures>
 		</Body>
-		<Script>
-			<ScriptId>Vanilla/Common/Door</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="ActorTouch" Action="ActorTouch_TryOpen" />
+            </Actions>
+		</OnTrigger>
 		<EntityEmitter>
 		</EntityEmitter>
 		<Sprite>

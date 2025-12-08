@@ -10,7 +10,9 @@
 		<SoundPlayer>
 		</SoundPlayer>
 		<OnTrigger>
-			<ActionName>Vanilla/Common/SmartCard</ActionName>
+            <Actions>
+                <Action Trigger="ActorTouch" Action="Read" />
+            </Actions>
 		</OnTrigger>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>

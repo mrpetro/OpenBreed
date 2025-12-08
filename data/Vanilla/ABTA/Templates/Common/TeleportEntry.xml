@@ -15,7 +15,9 @@
 			</Fixtures>
 		</Body>
 		<OnTrigger>
-			<ActionName>Vanilla/Common/Teleporter</ActionName>
+            <Actions>
+                <Action Trigger="ActorTouch" Action="Teleport" />
+            </Actions>
 		</OnTrigger>
     </Components>
 </EntityTemplate>

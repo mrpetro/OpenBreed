@@ -1,12 +1,12 @@
 ﻿using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Common.Game.Wecs.Services;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Systems.Physics.Abstractions;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenTK.Mathematics;
@@ -28,7 +28,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
         private readonly IEventsMan eventsMan;
 
         private readonly IScriptMan scriptMan;
-        private readonly IActorTriggerMan actorTriggerMan;
+        private readonly IEntityTriggerMan actorTriggerMan;
 
         #endregion Private Fields
 
@@ -37,7 +37,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
         public TriggerCollisionHandlerSystem(
             IEventsMan eventsMan,
             IScriptMan scriptMan,
-            IActorTriggerMan actorTriggerMan)
+            IEntityTriggerMan actorTriggerMan)
         {
             this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
             this.scriptMan = scriptMan ?? throw new ArgumentNullException(nameof(scriptMan));
@@ -66,9 +66,9 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
         {
             eventsMan.Raise(new ActorCollisionEvent(actorEntity.Id, triggerEntity.Id));
 
-            var actionName = triggerEntity.GetOnTriggerAction();
+            var actionName = triggerEntity.GetOnTriggerAction("ActorTouch");
 
-            if (actionName is not null && actorTriggerMan.TryGetCallback(actionName, out ActorTriggerCallback actorTriggerCallback))
+            if (actionName is not null && actorTriggerMan.TryGetCallback("ActorTouch", actionName, out EntityOnTriggerActionCallback actorTriggerCallback))
             {
                 actorTriggerCallback.Invoke(actorEntity, triggerEntity);
                 return;

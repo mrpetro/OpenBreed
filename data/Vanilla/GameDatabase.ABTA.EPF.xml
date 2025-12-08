@@ -188,9 +188,7 @@
         <FileDataSource Id="Extension/Scripts/L1/MAP.01.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.lua" />
         <FileDataSource Id="Extension/Scripts/L1/Turret.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\Turret.lua" />
         <FileDataSource Id="Extension/Scripts/L1/TurretLazer.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\TurretLazer.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/LandMine.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\LandMine.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Door.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Door.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Item.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Item.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Actor.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Actor.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Projectiles/AssaultGun.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\AssaultGun.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Projectiles/Missile.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\Missile.lua" />
@@ -10945,9 +10943,6 @@
         <ScriptFromFile Id="Vanilla/Common/Mission">
           <DataRef>Extension/Scripts/Common/Mission.lua</DataRef>
         </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/LandMine">
-          <DataRef>Extension/Scripts/Common/LandMine.lua</DataRef>
-        </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/Common/Door">
           <DataRef>Extension/Scripts/Common/Door.lua</DataRef>
         </ScriptFromFile>
@@ -10962,18 +10957,6 @@
         </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/Common/Explosion">
           <DataRef>Extension/Scripts/Common/Explosion.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Pickables/AreaScanner">
-          <DataRef>Extension/Scripts/Common/Pickables/AreaScanner.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Pickables/Keycard">
-          <DataRef>Extension/Scripts/Common/Pickables/Keycard.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Pickables/PowerUp">
-          <DataRef>Extension/Scripts/Common/Pickables/PowerUp.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Pickables/SmartCard">
-          <DataRef>Extension/Scripts/Common/Pickables/SmartCard.lua</DataRef>
         </ScriptFromFile>
         <ScriptFromFile Id="Common/Hud/Fps/Update">
           <DataRef>Extension/Scripts/Hud/FpsUpdate.lua</DataRef>

@@ -9,7 +9,9 @@
 		<SoundPlayer>
 		</SoundPlayer>
 		<OnTrigger>
-			<ActionName>Vanilla/Common/Pickables/Item</ActionName>
+            <Actions>
+                <Action Trigger="ActorTouch" Action="Pickup" />
+            </Actions>
 		</OnTrigger>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>

@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
     {
         #region Public Methods
 
-        public static string GetOnTriggerAction(this IEntity entity)
+        public static string GetOnTriggerAction(this IEntity entity, string triggerName)
         {
             var sc = entity.TryGet<OnTriggerComponent>();
 
@@ -21,7 +21,9 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
                 return null;
             }
 
-            return sc.ActionName;
+            var action = sc.Actions.FirstOrDefault(item => item.Trigger == triggerName);
+
+            return action?.Action;
         }
 
         public static string GetFunctionId(this IEntity entity, string triggerName)

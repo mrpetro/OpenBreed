@@ -201,11 +201,12 @@ namespace OpenBreed.Sandbox.Loaders
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(dbMap.Id);
 
-
+            worldBuilder.AddSystem<ActorOnOpenDoorTriggerService>();
             worldBuilder.AddSystem<ActorOnExitTriggerSystem>();
             worldBuilder.AddSystem<ActorOnTeleportTriggerSystem>();
             worldBuilder.AddSystem<ActorOnItemTriggerSystem>();
             worldBuilder.AddSystem<ActorOnSmartCardTriggerSystem>();
+            worldBuilder.AddSystem<ActorOnLandMineTriggerSystem>();
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);
 

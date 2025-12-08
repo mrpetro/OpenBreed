@@ -8,9 +8,11 @@
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>
-		<Script>
-			<ScriptId>Vanilla/Common/Item</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="ActorTouch" Action="Pickup" />
+            </Actions>
+		</OnTrigger>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>

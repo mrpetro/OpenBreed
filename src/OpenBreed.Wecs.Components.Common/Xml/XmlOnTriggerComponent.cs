@@ -8,13 +8,30 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Wecs.Components.Common.Xml
 {
+    public class XmlOnTriggerActionTemplate : IOnTriggerActionTemplate
+    {
+        #region Public Properties
+
+        [XmlAttribute("Trigger")]
+        public string Trigger { get; set; }
+
+        [XmlAttribute("Action")]
+        public string Action { get; set; }
+
+        #endregion Public Properties
+    }
+
     [XmlRoot("OnTrigger")]
     public class XmlOnTriggerComponent : XmlComponentTemplate, IOnTriggerComponentTemplate
     {
         #region Public Properties
 
-        [XmlElement("ActionName")]
-        public string ActionName { get; set; }
+        [XmlIgnore]
+        public IEnumerable<IOnTriggerActionTemplate> Actions => XmlActions.Cast<IOnTriggerActionTemplate>();
+
+        [XmlArray("Actions")]
+        [XmlArrayItem(ElementName = "Action")]
+        public XmlOnTriggerActionTemplate[] XmlActions { get; set; } = Array.Empty<XmlOnTriggerActionTemplate>();
 
         #endregion Public Properties
     }

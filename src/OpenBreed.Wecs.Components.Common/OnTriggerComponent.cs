@@ -7,44 +7,94 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Components.Common
 {
-    public interface IOnTriggerComponentTemplate : IComponentTemplate
+    public interface IOnTriggerActionTemplate
     {
         #region Public Properties
 
-        string ActionName { get; }
+        string Trigger { get; set; }
+        string Action { get; set; }
 
         #endregion Public Properties
     }
 
+    public interface IOnTriggerComponentTemplate : IComponentTemplate
+    {
+        #region Public Properties
+
+        IEnumerable<IOnTriggerActionTemplate> Actions { get; }
+
+        #endregion Public Properties
+    }
+
+    public class OnTriggerAction
+    {
+        #region Internal Constructors
+
+        internal OnTriggerAction(string trigger, string action)
+        {
+            Trigger = trigger;
+            Action = action;
+        }
+
+        #endregion Internal Constructors
+
+        #region Public Properties
+
+        public string Trigger { get; }
+        public string Action { get; }
+
+        #endregion Public Properties
+    }
 
     [ComponentName("OnTrigger")]
     public class OnTriggerComponent : IEntityComponent
     {
-        public string ActionName { get; }
+        #region Internal Constructors
 
-        public OnTriggerComponent(string actionName)
+        internal OnTriggerComponent(IEnumerable<OnTriggerAction> actions)
         {
-            ActionName = actionName;
+            Actions = actions.ToArray();
         }
+
+        #endregion Internal Constructors
+
+        #region Public Properties
+
+        public OnTriggerAction[] Actions { get; }
+
+        #endregion Public Properties
     }
 
     public sealed class OnTriggerComponentFactory : ComponentFactoryBase<IOnTriggerComponentTemplate>
     {
-        #region Internal Constructors
+        #region Public Constructors
 
         public OnTriggerComponentFactory()
         {
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Protected Methods
 
         protected override IEntityComponent Create(IOnTriggerComponentTemplate template)
         {
-            return new OnTriggerComponent(template.ActionName);
+            var actions = GetActions(template.Actions);
+            return new OnTriggerComponent(actions);
         }
 
         #endregion Protected Methods
+
+        #region Private Methods
+
+        private IEnumerable<OnTriggerAction> GetActions(IEnumerable<IOnTriggerActionTemplate> actionTemplates)
+        {
+            foreach (var actionTemplate in actionTemplates)
+            {
+                yield return new OnTriggerAction(actionTemplate.Trigger, actionTemplate.Action);
+            }
+        }
+
+        #endregion Private Methods
     }
 }

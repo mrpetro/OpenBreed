@@ -6,7 +6,9 @@
 			<Flavor>$(exitId)</Flavor>
 		</Metadata>
 		<OnTrigger>
-			<ActionName>Vanilla/Common/MapExit</ActionName>
+            <Actions>
+                <Action Trigger="ActorTouch" Action="Exit" />
+            </Actions>
 		</OnTrigger>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>

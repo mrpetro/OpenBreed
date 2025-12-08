@@ -15,9 +15,11 @@
 			</Fixtures>
 		</Body>
 		<Damager></Damager>
-		<Script>
-			<ScriptId>Vanilla/Common/LandMine</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="ActorTouch" Action="Detonate" />
+            </Actions>
+		</OnTrigger>
 		<EntityEmitter>
 		</EntityEmitter>
 		<SoundPlayer>

@@ -32,5 +32,7 @@ namespace OpenBreed.Common.Game.Services
         ISoundMan Sounds { get; }
         IStampMan Stamps { get; }
         ItemsMan Items { get; }
-    }
+        IEntityFactory Factory { get; }
+
+}
 }

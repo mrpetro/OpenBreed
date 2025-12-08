@@ -5,7 +5,6 @@ using OpenBreed.Audio.Interface;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Common.Game.Wecs.Systems.Actor;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Core.Abstractions.Managers;
@@ -19,6 +18,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
@@ -38,7 +38,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems
 {
-    public class ActorOnItemTriggerSystem : IActorOnTriggerSystem
+    public class ActorOnItemTriggerSystem : IEntityOnTriggerActionSystem
     {
         #region Private Fields
 
@@ -58,7 +58,8 @@ namespace OpenBreed.Sandbox.Systems
 
         #region Public Properties
 
-        public string ActionName => "Vanilla/Common/Pickables/Item";
+        public string TriggerName => "ActorTouch";
+        public string ActionName => "Pickup";
 
         #endregion Public Properties
 
@@ -71,9 +72,6 @@ namespace OpenBreed.Sandbox.Systems
             var mapEntity = services.Entities.GetMapEntity(itemEntity.WorldId);
             var metaData = itemEntity.GetMetadata();
             var name = metaData.Name;
-
-            services.Logger.LogInformation("ItemEntityId: {0}", itemEntity.Id);
-            services.Logger.LogInformation("ActorEntityId: {0}", actorEntity.Id);
 
             if (!HandlePickup(actorEntity, name))
             {

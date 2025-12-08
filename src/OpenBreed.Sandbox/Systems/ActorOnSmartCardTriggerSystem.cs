@@ -2,13 +2,13 @@
 using OpenBreed.Audio.Interface;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Common.Game.Wecs.Systems.Actor;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Input.Interface.Events;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
@@ -21,7 +21,7 @@ using System.Windows.Controls;
 
 namespace OpenBreed.Sandbox.Systems
 {
-    public class ActorOnSmartCardTriggerSystem : IActorOnTriggerSystem
+    public class ActorOnSmartCardTriggerSystem : IEntityOnTriggerActionSystem
     {
         #region Private Fields
 
@@ -40,7 +40,8 @@ namespace OpenBreed.Sandbox.Systems
 
         #region Public Properties
 
-        public string ActionName => "Vanilla/Common/SmartCard";
+        public string TriggerName => "ActorTouch";
+        public string ActionName => "Read";
 
         #endregion Public Properties
 

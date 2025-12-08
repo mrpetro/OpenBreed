@@ -6,7 +6,6 @@ using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Game.Services;
-using OpenBreed.Common.Game.Wecs.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Extensions;
 using OpenBreed.Core.Abstractions.Managers;
@@ -24,6 +23,7 @@ using OpenBreed.Wecs.Components.Scripting.Extensions;
 using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
@@ -94,21 +94,6 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
                 builderFactory.SetupWecsRenderingBuilders(sp);
                 builderFactory.SetupWecsAnimationBuilders(sp);
                 builderFactory.SetupWecsCommonBuilders(sp);
-            });
-
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<IActorTriggerMan, ActorTriggerMan>();
-            });
-
-            hostBuilder.SetupActorTriggerSystemInitializer();
-        }
-
-        public static void SetupActorTriggerSystemInitializer(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<ISystemInitializer, ActorTriggerSystemInitializer>();
             });
         }
 

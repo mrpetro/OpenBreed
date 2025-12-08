@@ -23,6 +23,7 @@ namespace OpenBreed.Common.Game.Services
         #region Private Fields
 
         private readonly Lazy<IScriptMan> lazyScripts;
+        private readonly Lazy<IEntityFactory> lazyFactory;
 
         #endregion Private Fields
 
@@ -39,7 +40,8 @@ namespace OpenBreed.Common.Game.Services
             ISoundMan sounds,
             IStampMan stamps,
             ItemsMan items,
-            IShapeMan shapes)
+            IShapeMan shapes,
+            Lazy<IEntityFactory> lazyFactory)
         {
             Triggers = triggers;
             Logger = logger;
@@ -53,6 +55,7 @@ namespace OpenBreed.Common.Game.Services
             Stamps = stamps;
             Items = items;
             Shapes = shapes;
+            this.lazyFactory = lazyFactory;
         }
 
         #endregion Public Constructors
@@ -82,6 +85,8 @@ namespace OpenBreed.Common.Game.Services
         public ItemsMan Items { get; }
 
         public IShapeMan Shapes { get; }
+
+        public IEntityFactory Factory => lazyFactory.Value;
 
         #endregion Public Properties
     }

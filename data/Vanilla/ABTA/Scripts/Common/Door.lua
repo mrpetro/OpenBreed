@@ -40,8 +40,6 @@ local function RemoveVerticalDoorObstacle(doorCell)
 
 end
 
-
-
 local function Open(doorEntity, actorEntity, projection)
 
     local metaData = doorEntity:GetMetadata()

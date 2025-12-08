@@ -7,7 +7,6 @@ using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Services;
 
 using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Common.Game.Wecs.Systems.Actor;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Core.Abstractions.Managers;
@@ -21,6 +20,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Abstractions;
@@ -39,7 +39,7 @@ using System.Windows.Media.Animation;
 
 namespace OpenBreed.Sandbox.Systems
 {
-    public class ActorOnTeleportTriggerSystem : IActorOnTriggerSystem
+    public class ActorOnTeleportTriggerSystem : IEntityOnTriggerActionSystem
     {
         #region Private Fields
 
@@ -59,7 +59,8 @@ namespace OpenBreed.Sandbox.Systems
 
         #region Public Properties
 
-        public string ActionName => "Vanilla/Common/Teleporter";
+        public string TriggerName => "ActorTouch";
+        public string ActionName => "Teleport";
 
         #endregion Public Properties
 

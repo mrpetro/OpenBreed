@@ -61,52 +61,6 @@ namespace OpenBreed.Sandbox.Loaders
             return entity;
         }
 
-        public IEntity LoadOld(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, string templateName, string flavor, int gfxValue, IWorld world)
-        {
-            var entity = default(IEntity);
-            var key = default(string);
-
-            switch (templateName)
-            {
-                case "DoorStandard":
-                    key = "";
-                    break;
-                case "DoorRed":
-                    key = "Keycard1";
-                    break;
-                case "DoorGreen":
-                    key = "Keycard2";
-                    break;
-                case "DoorBlue":
-                    key = "Keycard3";
-                    break;
-            }
-
-            var rightValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
-            var rightAction = map.GetAction(rightValue);
-
-            if (rightAction?.Name == templateName)
-            {
-                entity = doorHelper.AddHorizontal(world, ix, iy, mapper.Level, key);
-                visited[ix, iy] = true;
-                visited[ix + 1, iy] = true;
-                return entity;
-            }
-
-            var downValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
-            var downAction = map.GetAction(downValue);
-
-            if (downAction?.Name == templateName)
-            {
-                entity = doorHelper.AddVertical(world, ix, iy, mapper.Level, key);
-                visited[ix, iy] = true;
-                visited[ix, iy + 1] = true;
-                return entity;
-            }
-
-            return entity;
-        }
-
         #endregion Public Methods
     }
 }

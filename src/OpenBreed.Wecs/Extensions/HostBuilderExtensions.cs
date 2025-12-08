@@ -12,6 +12,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -51,6 +52,8 @@ namespace OpenBreed.Wecs.Extensions
                 services.AddScoped<ISystemFinder, SystemFinder>();
                 services.AddTransient<WorldBuilder>();
                 services.AddSingleton<ISystemInitializer, DefaultSystemInitializer>();
+                services.AddScoped<IEntityTriggerMan, EntityTriggerMan>();
+                services.AddSingleton<ISystemInitializer, EntityTriggerSystemInitializer>();
             });
         }
 
@@ -146,7 +149,8 @@ namespace OpenBreed.Wecs.Extensions
                     }
 
                     return entityFactory;
-                });
+                })
+                .AddScoped((sp) => new Lazy<IEntityFactory>(() => sp.GetRequiredService<IEntityFactory>()));
             });
         }
 
