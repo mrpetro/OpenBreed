@@ -207,6 +207,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddSystem<ActorOnItemTriggerSystem>();
             worldBuilder.AddSystem<ActorOnSmartCardTriggerSystem>();
             worldBuilder.AddSystem<ActorOnLandMineTriggerSystem>();
+            worldBuilder.AddSystem<ExplosionOnEnterWorldSystem>();
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);
 

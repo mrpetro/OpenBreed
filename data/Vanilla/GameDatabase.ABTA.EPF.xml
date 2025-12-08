@@ -202,7 +202,6 @@
         <FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
         <FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\SimpleEntry.lua" />
         <FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Exit.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Explosion.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Explosion.lua" />
         <FileDataSource Id="Extension/Templates/Logo1.lua" FilePath="%Db.Current.FolderPath%\Templates\Logo1.lua" />
       </Items>
     </DataSources>
@@ -10954,9 +10953,6 @@
         </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/Common/SmartCard">
           <DataRef>Extension/Scripts/Common/SmartCard.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Explosion">
-          <DataRef>Extension/Scripts/Common/Explosion.lua</DataRef>
         </ScriptFromFile>
         <ScriptFromFile Id="Common/Hud/Fps/Update">
           <DataRef>Extension/Scripts/Hud/FpsUpdate.lua</DataRef>

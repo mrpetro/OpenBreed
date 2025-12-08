@@ -12,20 +12,6 @@ namespace OpenBreed.Wecs.Systems.Scripting.Extensions
     {
         #region Public Methods
 
-        public static string GetOnTriggerAction(this IEntity entity, string triggerName)
-        {
-            var sc = entity.TryGet<OnTriggerComponent>();
-
-            if (sc is null)
-            {
-                return null;
-            }
-
-            var action = sc.Actions.FirstOrDefault(item => item.Trigger == triggerName);
-
-            return action?.Action;
-        }
-
         public static string GetFunctionId(this IEntity entity, string triggerName)
         {
             var sc = entity.TryGet<ScriptComponent>();

@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Systems
     /// <summary>
     /// System that updates when entity is added to world.
     /// </summary>
-    public interface IOnAddEntitySystem
+    public interface IOnAddEntitySystem : ISystem
     {
         #region Public Methods
 

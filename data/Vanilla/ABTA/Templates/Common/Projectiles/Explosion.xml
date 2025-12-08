@@ -16,9 +16,11 @@
 			</States>
 		</Animation>
 		<Position X="$(startX)" Y="$(startY)" />
-		<Script>
-			<ScriptId>Vanilla/Common/Explosion</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="EnterWorld" Action="Perform" />
+            </Actions>
+		</OnTrigger>
 		<Sprite>
 			<AtlasName></AtlasName>
 			<ImageIndex>-1</ImageIndex>

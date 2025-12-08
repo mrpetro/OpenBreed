@@ -4,9 +4,11 @@ using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Scripting;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Services;
+using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Abstractions;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenTK.Mathematics;
@@ -28,7 +30,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
         private readonly IEventsMan eventsMan;
 
         private readonly IScriptMan scriptMan;
-        private readonly IEntityTriggerMan actorTriggerMan;
+        private readonly IEntityTriggerMan entityTriggerMan;
 
         #endregion Private Fields
 
@@ -41,7 +43,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
         {
             this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
             this.scriptMan = scriptMan ?? throw new ArgumentNullException(nameof(scriptMan));
-            this.actorTriggerMan = actorTriggerMan ?? throw new ArgumentNullException(nameof(actorTriggerMan));
+            this.entityTriggerMan = actorTriggerMan ?? throw new ArgumentNullException(nameof(actorTriggerMan));
         }
 
         #endregion Public Constructors
@@ -66,11 +68,8 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
         {
             eventsMan.Raise(new ActorCollisionEvent(actorEntity.Id, triggerEntity.Id));
 
-            var actionName = triggerEntity.GetOnTriggerAction("ActorTouch");
-
-            if (actionName is not null && actorTriggerMan.TryGetCallback("ActorTouch", actionName, out EntityOnTriggerActionCallback actorTriggerCallback))
+            if (entityTriggerMan.TryOnTrigger("ActorTouch", actorEntity, triggerEntity))
             {
-                actorTriggerCallback.Invoke(actorEntity, triggerEntity);
                 return;
             }
 

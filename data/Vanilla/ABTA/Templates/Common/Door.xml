@@ -37,7 +37,7 @@
 		</Body>
 		<OnTrigger>
             <Actions>
-                <Action Trigger="ActorTouch" Action="ActorTouch_TryOpen" />
+                <Action Trigger="ActorTouch" Action="TryOpen" />
             </Actions>
 		</OnTrigger>
 		<EntityEmitter>

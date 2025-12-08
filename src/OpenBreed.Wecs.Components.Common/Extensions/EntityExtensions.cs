@@ -96,5 +96,19 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
         {
             entity.Get<ThrustComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
         }
+
+        public static string GetOnTriggerAction(this IEntity entity, string triggerName)
+        {
+            var sc = entity.TryGet<OnTriggerComponent>();
+
+            if (sc is null)
+            {
+                return null;
+            }
+
+            var action = sc.Actions.FirstOrDefault(item => item.Trigger == triggerName);
+
+            return action?.Action;
+        }
     }
 }
