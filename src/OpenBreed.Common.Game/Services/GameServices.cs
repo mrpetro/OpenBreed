@@ -9,6 +9,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,8 @@ namespace OpenBreed.Common.Game.Services
             IStampMan stamps,
             ItemsMan items,
             IShapeMan shapes,
-            Lazy<IEntityFactory> lazyFactory)
+            Lazy<IEntityFactory> lazyFactory,
+            IEntityTriggerMan entityTriggers)
         {
             Triggers = triggers;
             Logger = logger;
@@ -56,6 +58,7 @@ namespace OpenBreed.Common.Game.Services
             Items = items;
             Shapes = shapes;
             this.lazyFactory = lazyFactory;
+            EntityTriggers = entityTriggers;
         }
 
         #endregion Public Constructors
@@ -87,6 +90,8 @@ namespace OpenBreed.Common.Game.Services
         public IShapeMan Shapes { get; }
 
         public IEntityFactory Factory => lazyFactory.Value;
+
+        public IEntityTriggerMan EntityTriggers { get; }
 
         #endregion Public Properties
     }

@@ -11,6 +11,11 @@
 				<!--<State FsmName="Actor.Movement" StateName="Standing" />-->
 			</States>
 		</Fsm>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="EnterWorld" Action="ShowMission" />
+            </Actions>
+		</OnTrigger>
 		<Script>
 			<ScriptId>Vanilla/Common/Actor</ScriptId>
 		</Script>

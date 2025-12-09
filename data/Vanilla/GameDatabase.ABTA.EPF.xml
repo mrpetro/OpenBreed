@@ -184,7 +184,6 @@
         <EPFArchiveFileDataSource Id="Vanilla/EPF/TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <FileDataSource Id="Vanilla/TA.EXE" FilePath="%Cfg.Options.ABTA.GameFolderPath%\ta.exe" />
-        <FileDataSource Id="Extension/Scripts/Common/Mission.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Mission.lua" />
         <FileDataSource Id="Extension/Scripts/L1/MAP.01.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.lua" />
         <FileDataSource Id="Extension/Scripts/L1/Turret.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\Turret.lua" />
         <FileDataSource Id="Extension/Scripts/L1/TurretLazer.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\TurretLazer.lua" />
@@ -10938,9 +10937,6 @@
         </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/L1/TurretLazer">
           <DataRef>Extension/Scripts/L1/TurretLazer.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Mission">
-          <DataRef>Extension/Scripts/Common/Mission.lua</DataRef>
         </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/Common/Door">
           <DataRef>Extension/Scripts/Common/Door.lua</DataRef>

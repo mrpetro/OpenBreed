@@ -9,6 +9,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace OpenBreed.Common.Game.Services
         IStampMan Stamps { get; }
         ItemsMan Items { get; }
         IEntityFactory Factory { get; }
+        IEntityTriggerMan EntityTriggers { get; }
 
 }
 }

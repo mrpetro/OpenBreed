@@ -28,6 +28,7 @@ using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Systems;
+using OpenBreed.Sandbox.Systems.Mission;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
@@ -208,6 +209,8 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddSystem<ActorOnSmartCardTriggerSystem>();
             worldBuilder.AddSystem<ActorOnLandMineTriggerSystem>();
             worldBuilder.AddSystem<ExplosionOnEnterWorldSystem>();
+            worldBuilder.AddSystem<ActorOnEnterTriggerSystem>();
+            worldBuilder.AddSystem<MissionShowOnHeroEnterSystem>();
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);
 
@@ -328,7 +331,7 @@ namespace OpenBreed.Sandbox.Loaders
         private void AddMission(IWorld world)
         {
             var entity = entityFactory.Create(@"ABTA\Templates\Common\Mission")
-                .SetParameter("scriptId", "Vanilla/Common/Mission")
+                //.SetParameter("scriptId", "Vanilla/Common/Mission")
                 .SetTag("Mission")
                 .Build();
 

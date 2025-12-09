@@ -4,8 +4,10 @@
 		<Metadata>
 			<Name>Mission</Name>
 		</Metadata>
-		<Script>
-			<ScriptId>$(scriptId)</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="HeroEnter" Action="Show" />
+            </Actions>
+		</OnTrigger>
     </Components>
 </EntityTemplate>

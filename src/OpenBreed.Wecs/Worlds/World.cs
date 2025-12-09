@@ -109,6 +109,8 @@ namespace OpenBreed.Wecs.Worlds
 
             entitiesToSystemsLookup.Add(entity, matchingSystems);
 
+            ((Entity)entity).WorldId = Id;
+
             foreach (var system in matchingSystems)
             {
                 CacheEntityToSystem(entity, system);
@@ -118,8 +120,6 @@ namespace OpenBreed.Wecs.Worlds
                     onAddEntitySystem.OnAddEntity(this, entity);
                 }
             }
-
-            ((Entity)entity).WorldId = Id;
         }
 
         public IEnumerable<IEntity> GetMatchingEntities(IMatchingSystem system)

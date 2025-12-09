@@ -21,12 +21,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
+
 using OpenBreed.Common.Game.Services;
 
 namespace OpenBreed.Sandbox.Extensions
 {
     public static class GameServicesExtension
     {
+        #region Public Methods
+
+        public static void Wait(this IGameServices services, ITask task, IEntity entity, int timeMs)
+        {
+            services.Logger.LogInformation("Wait {0} seconds...", timeMs);
+
+            services.Triggers.AfterDelay(
+                entity,
+                timerId: 0,
+                TimeSpan.FromMilliseconds(timeMs),
+                (e, a) =>
+                {
+                    task.Finish();
+                },
+                singleTime: true);
+        }
+
         public static void FadeOut(this IGameServices services, ITask task, IEntity cameraEntity)
         {
             services.Logger.LogTrace("OnExit: Fade out...");
@@ -71,7 +89,9 @@ namespace OpenBreed.Sandbox.Extensions
         {
             services.Logger.LogTrace("OnExit: Actor '{actorEntity}' arrives at entry {entryId}...", actorEntity, entryId);
 
-            actorEntity.TryInvoke(services.Scripts, services.Logger, "OnEnter");
+            //services.EntityTriggers.TryOnTrigger("EnterWorld", actorEntity, actorEntity);
+
+            //actorEntity.TryInvoke(services.Scripts, services.Logger, "OnEnter");
 
             services.Worlds.SetEntityPosition(actorEntity, entryId);
 
@@ -90,5 +110,7 @@ namespace OpenBreed.Sandbox.Extensions
 
             return world;
         }
+
+        #endregion Public Methods
     }
 }
