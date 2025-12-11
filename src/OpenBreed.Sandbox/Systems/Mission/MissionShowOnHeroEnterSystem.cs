@@ -52,6 +52,17 @@ namespace OpenBreed.Sandbox.Systems.Mission
         public void OnTrigger(IEntity triggeringEntity, IEntity triggerEntity)
         {
             var playerCharacterEntity = triggeringEntity;
+
+            if (Equals(playerCharacterEntity.State, "MissionShowing"))
+            {
+                return;
+            }
+
+            if (Equals(playerCharacterEntity.State, "Dead"))
+            {
+                return;
+            }
+
             var missionEntity = triggerEntity;
 
             var gameCameraEntity = services.Entities.GetPlayerCamera(playerCharacterEntity);
@@ -70,11 +81,6 @@ namespace OpenBreed.Sandbox.Systems.Mission
             services.Logger.LogInformation("Text Id: {0}", textId);
             var text = services.Texts.GetTextString(textId);
             var textLength = text.Length;
-
-            if (Equals(playerCharacterEntity.State, "MissionShowing"))
-            {
-                return;
-            }
 
             playerCharacterEntity.State = "MissionShowing";
 

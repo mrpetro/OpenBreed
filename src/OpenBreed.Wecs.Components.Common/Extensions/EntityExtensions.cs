@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace OpenBreed.Wecs.Components.Common.Extensions
 {
@@ -97,18 +98,19 @@ namespace OpenBreed.Wecs.Components.Common.Extensions
             entity.Get<ThrustComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
         }
 
-        public static string GetOnTriggerAction(this IEntity entity, string triggerName)
+        public static IEnumerable<string> GetActionsOnTrigger(this IEntity entity, string triggerName)
         {
             var sc = entity.TryGet<OnTriggerComponent>();
 
             if (sc is null)
             {
-                return null;
+                yield break;
             }
 
-            var action = sc.Actions.FirstOrDefault(item => item.Trigger == triggerName);
-
-            return action?.Action;
+            foreach (var action in sc.Actions.Where(item => item.Trigger == triggerName))
+            {
+                yield return action.Action;
+            }
         }
     }
 }

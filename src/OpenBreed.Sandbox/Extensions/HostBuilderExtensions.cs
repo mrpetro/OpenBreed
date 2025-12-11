@@ -29,6 +29,7 @@ using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Loaders;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Xml;
@@ -122,6 +123,14 @@ namespace OpenBreed.Sandbox.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddScoped<PickableHelper>();
+            });
+        }
+
+        public static void SetupWeaponsMan(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IWeaponMan, WeaponMan>();
             });
         }
 

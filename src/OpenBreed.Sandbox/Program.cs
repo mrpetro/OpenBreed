@@ -194,6 +194,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupVanillaStatusBarHelper();
             hostBuilder.SetupElectricGateHelper();
             hostBuilder.SetupPickableHelper();
+            hostBuilder.SetupWeaponsMan();
             hostBuilder.SetupGenericCellHelper();
             hostBuilder.SetupEnvironmentHelper();
             hostBuilder.SetupCameraHelper();

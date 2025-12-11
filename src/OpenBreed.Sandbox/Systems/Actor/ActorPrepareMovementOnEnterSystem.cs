@@ -35,7 +35,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class ActorPrepareOnEnterSystem : IEntityOnTriggerActionSystem
+    public class ActorPrepareMovementOnEnterSystem : IEntityOnTriggerActionSystem
     {
         #region Private Fields
 
@@ -45,7 +45,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public ActorPrepareOnEnterSystem(IGameServices services)
+        public ActorPrepareMovementOnEnterSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
@@ -56,7 +56,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         public string TriggerName => "EnterWorld";
 
-        public string ActionName => "Prepare";
+        public string ActionName => "PrepareMovement";
 
         #endregion Public Properties
 
@@ -66,36 +66,11 @@ namespace OpenBreed.Sandbox.Systems.Actor
         {
             var cooldownTimerId = triggerEntity.GetTimerId("CooldownDelay");
             var delayTimerId = triggerEntity.GetTimerId("ActionDeley");
-            var currentWeaponNo = 0;
-            var flamethrowerOffsetIndex = 0;
-            var fireReady = true;
-            var fireCooldownTime = 1000;
-            var speedFactor = 30;
-
-            int[] flamethrowerOffsets = [0, 1, 2, 1, 0, -1, -2, -1];
-
-            (string Name, string Projectile, int FireRate, string MuzzleFlash, int Speed)[] weapons =
-                [
-                ("AssaultGun",      "AssaultGun",      25, "AssaultGun", 12 * speedFactor),
-                ("MissileLauncher", "Missile",         1,  "",           10 * speedFactor),
-                ("TrilazerGun",     "TrilazerGun",     7,  "",           12 * speedFactor),
-                ("Flamethrower",    "Firewall",        25, "",           10 * speedFactor),
-                ("RefractionGun",   "RefractionLazer", 10, "",           8 * speedFactor)];
-
-            var actions = new Dictionary<PlayerActions, Action<IEntity>> {
-                { PlayerActions.Fire, FireBullet },
-                { PlayerActions.SwitchWeapon, SwitchToNextWeapon }
-            };
 
             var gameWorld = services.Worlds.GetWorld(triggeringEntity);
             var missionEntity = services.Entities.GetMission(gameWorld.Id);
 
             services.EntityTriggers.TryOnTrigger("HeroEnter", triggerEntity, missionEntity);
-
-            services.Triggers.OnEntityAction(
-                    triggerEntity,
-                    CheckAction,
-                    false);
 
             services.Triggers.OnEntityDirectionChanged(
                 triggerEntity,
@@ -111,87 +86,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 triggerEntity,
                 SendToLimbo,
                 false);
-
-
-            void CooldownFinish(IEntity entity, TimerElapsedEventArgs e)
-            {
-                fireReady = true;
-            }
-
-            void FireBullet(IEntity entity)
-            {
-                if (!fireReady)
-                {
-                    return;
-                }
-
-                var currentWeapon = weapons[currentWeaponNo];
-
-                var pos = entity.GetPosition();
-                var dir = MovementTools.SnapToCompass8Way(entity.GetDirection());
-
-                pos = pos + dir * 16;
-                var thrust = dir * currentWeapon.Speed;
-
-                var emitter = entity.StartEmit($"ABTA\\Templates\\Common\\Projectiles\\{currentWeapon.Projectile}")
-                    .SetOption("startX", pos.X)
-                    .SetOption("startY", pos.Y);
-
-                if (currentWeapon.Name == "TrilazerGun")
-                {
-                    emitter.SetOption("thrustX", thrust.X)
-                            .SetOption("thrustY", thrust.Y)
-                            .Finish();
-
-                    var perp = new Vector2(dir.Y, -dir.X);
-
-                    var p1Thrust = thrust + perp * 2 * speedFactor;
-
-                    emitter.SetOption("thrustX", p1Thrust.X)
-                           .SetOption("thrustY", p1Thrust.Y)
-                           .Finish();
-
-                    var p2Thrust = thrust - perp * 2 * speedFactor;
-
-                    emitter.SetOption("thrustX", p2Thrust.X)
-                           .SetOption("thrustY", p2Thrust.Y)
-                           .Finish();
-
-                }
-                else if(currentWeapon.Name == "Flamethrower")
-                {
-                    flamethrowerOffsetIndex++;
-
-                    if (flamethrowerOffsetIndex > 7)
-                    {
-                        flamethrowerOffsetIndex = 1;
-                    }
-
-                    var flamethrowerOffset = flamethrowerOffsets[flamethrowerOffsetIndex];
-
-                    var perp = new Vector2(thrust.Y, -thrust.X);
-                    perp.Normalize();
-
-                    thrust = thrust + perp * flamethrowerOffset * speedFactor;
-
-                    emitter.SetOption("thrustX", thrust.X)
-                        .SetOption("thrustY", thrust.Y)
-                        .Finish();
-                }
-                else
-                {
-                    emitter.SetOption("thrustX", thrust.X)
-                        .SetOption("thrustY", thrust.Y)
-                        .Finish();
-                }
-
-                fireReady = false;
-                services.Triggers.AfterDelay(
-                    entity,
-                    cooldownTimerId,
-                    TimeSpan.FromMilliseconds(1000 / currentWeapon.FireRate),
-                    CooldownFinish, singleTime: true);
-            }
 
             void OnDirectionChanged(IEntity entity, DirectionChangedEvent e)
             {
@@ -238,33 +132,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 }
             }
 
-            void SwitchToNextWeapon(IEntity entity)
-            {
-                currentWeaponNo++;
-
-                if (currentWeaponNo > 4)
-                {
-                    currentWeaponNo = 1;
-                }
-
-                var currentWeapon = weapons[currentWeaponNo];
-
-                services.Logger.LogInformation("Switching weapon to: {0}", currentWeapon.Name);
-            }
-
-            void CheckAction(IEntity entity, EntityActionEvent<PlayerActions> e)
-            {
-                if (actions.TryGetValue(e.ActionCode, out var func))
-                {
-                    func.Invoke(entity);
-                }
-                else
-                {
-                    services.Logger.LogError("Missing implementation for action: {0}", e.ActionCode);
-                }
- 
-            }
-
             void SendToLimbo(IEntity entity, DestroyedEvent e)
             {
                 var pos = entity.GetPosition();
@@ -288,6 +155,8 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 services.Logger.LogInformation("Player Died!");
 
                 var limboWorld = services.Worlds.GetByName("Limbo");
+
+                entity.State = "Dead";
 
                 services.Worlds.RequestAddEntity(entity, limboWorld.Id);
 

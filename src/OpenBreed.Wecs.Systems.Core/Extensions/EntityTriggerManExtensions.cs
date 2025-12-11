@@ -16,15 +16,20 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
 
         public static bool TryOnTrigger(this IEntityTriggerMan entityTriggerMan, string triggerName, IEntity actorEntity, IEntity triggerEntity)
         {
-            var actionName = triggerEntity.GetOnTriggerAction(triggerName);
+            var actionNames = triggerEntity.GetActionsOnTrigger(triggerName);
 
-            if (actionName is not null && entityTriggerMan.TryGetCallback(triggerName, actionName, out EntityOnTriggerActionCallback actorTriggerCallback))
+            bool result = true;
+
+            foreach (var actionName in actionNames)
             {
-                actorTriggerCallback.Invoke(actorEntity, triggerEntity);
-                return false;
+                if (entityTriggerMan.TryGetCallback(triggerName, actionName, out EntityOnTriggerActionCallback actorTriggerCallback))
+                {
+                    actorTriggerCallback.Invoke(actorEntity, triggerEntity);
+                    result = false;
+                }
             }
 
-            return true;
+            return result;
         }
 
         #endregion Public Methods
