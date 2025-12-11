@@ -188,7 +188,6 @@
         <FileDataSource Id="Extension/Scripts/L1/Turret.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\Turret.lua" />
         <FileDataSource Id="Extension/Scripts/L1/TurretLazer.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\TurretLazer.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Door.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Door.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Actor.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Actor.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Projectiles/AssaultGun.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\AssaultGun.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Projectiles/Missile.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\Missile.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Projectiles/TrilazerGun.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\TrilazerGun.lua" />
@@ -10943,9 +10942,6 @@
         </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/Common/Item">
           <DataRef>Extension/Scripts/Common/Item.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Actor">
-          <DataRef>Extension/Scripts/Common/Actor.lua</DataRef>
         </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/Common/SmartCard">
           <DataRef>Extension/Scripts/Common/SmartCard.lua</DataRef>

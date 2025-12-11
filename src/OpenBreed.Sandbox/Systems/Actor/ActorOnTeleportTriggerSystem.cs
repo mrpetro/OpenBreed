@@ -37,7 +37,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 
-namespace OpenBreed.Sandbox.Systems
+namespace OpenBreed.Sandbox.Systems.Actor
 {
     public class ActorOnTeleportTriggerSystem : IEntityOnTriggerActionSystem
     {

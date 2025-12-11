@@ -13,12 +13,9 @@
 		</Fsm>
 		<OnTrigger>
             <Actions>
-                <Action Trigger="EnterWorld" Action="ShowMission" />
+                <Action Trigger="EnterWorld" Action="Prepare" />
             </Actions>
 		</OnTrigger>
-		<Script>
-			<ScriptId>Vanilla/Common/Actor</ScriptId>
-		</Script>
 		<SoundPlayer>		
 		</SoundPlayer>
 		<Animation>

@@ -36,7 +36,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 using System.Xml.Linq;
 
-namespace OpenBreed.Sandbox.Systems
+namespace OpenBreed.Sandbox.Systems.Actor
 {
     public class ActorOnLandMineTriggerSystem : IEntityOnTriggerActionSystem
     {

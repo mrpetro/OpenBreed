@@ -19,7 +19,7 @@ using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using System;
 using System.Windows.Controls;
 
-namespace OpenBreed.Sandbox.Systems
+namespace OpenBreed.Sandbox.Systems.Actor
 {
     public class ActorOnSmartCardTriggerSystem : IEntityOnTriggerActionSystem
     {

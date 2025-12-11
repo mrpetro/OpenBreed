@@ -22,7 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 
-using OpenBreed.Common.Game.Services;
+using OpenBreed.Wecs.Systems.Control.Extensions;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -45,32 +45,58 @@ namespace OpenBreed.Sandbox.Extensions
                 singleTime: true);
         }
 
-        public static void FadeOut(this IGameServices services, ITask task, IEntity cameraEntity)
+        public static void TextFadeIn(this IGameServices services, ITask task, IEntity entity)
         {
-            services.Logger.LogTrace("OnExit: Fade out...");
+            var textFadeInClipId = services.Clips.GetId("Vanilla/Common/Text/Effects/FadeIn");
+            services.PlayAnimation(task, entity, textFadeInClipId, "Text fade in...");
+        }
 
-            var clipId = services.Clips.GetId(CameraHelper.CAMERA_FADE_OUT);
-
-            services.Triggers.OnEntityAnimFinished(cameraEntity, (e, a) =>
-            {
-                task.Finish();
-            }, singleTime: true);
-
-            cameraEntity.PlayAnimation(0, clipId);
+        public static void TextFadeOut(this IGameServices services, ITask task, IEntity entity)
+        {
+            var textFadeOutClipId = services.Clips.GetId("Vanilla/Common/Text/Effects/FadeOut");
+            services.PlayAnimation(task, entity, textFadeOutClipId, "Text fade out...");
         }
 
         public static void FadeIn(this IGameServices services, ITask task, IEntity cameraEntity)
         {
-            services.Logger.LogTrace("OnExit: Fade in...");
-
             var clipId = services.Clips.GetId(CameraHelper.CAMERA_FADE_IN);
+            services.PlayAnimation(task, cameraEntity, clipId, "Fade in...");
+        }
 
-            services.Triggers.OnEntityAnimFinished(cameraEntity, (e, a) =>
+        public static void FadeOut(this IGameServices services, ITask task, IEntity cameraEntity)
+        {
+            var clipId = services.Clips.GetId(CameraHelper.CAMERA_FADE_OUT);
+            services.PlayAnimation(task, cameraEntity, clipId, "Fade out...");
+        }
+
+        public static void WaitForKey(this IGameServices services, ITask task, string taskDescription = null)
+        {
+            if (string.IsNullOrEmpty(taskDescription))
+            {
+                services.Logger.LogInformation(taskDescription);
+            }
+
+            services.Triggers.AnyKeyPressed((a) =>
             {
                 task.Finish();
             }, singleTime: true);
+        }
 
-            cameraEntity.PlayAnimation(0, clipId);
+        public static void PlayAnimation(this IGameServices services, ITask task, IEntity entity, int animationId, string taskDescription = null)
+        {
+            if (string.IsNullOrEmpty(taskDescription))
+            {
+                services.Logger.LogInformation(taskDescription);
+            }
+
+            services.Triggers.OnEntityAnimFinished(
+                entity, (e, a) =>
+                {
+                    task.Finish();
+                },
+                singleTime: true);
+
+            entity.PlayAnimation(0, animationId);
         }
 
         public static void LoadWorld(this IGameServices services, ITask task, string mapKey)

@@ -12,7 +12,7 @@ using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems;
 
-namespace OpenBreed.Sandbox.Systems
+namespace OpenBreed.Sandbox.Systems.Actor
 {
     internal class ActorOnOpenDoorTriggerService : IEntityOnTriggerActionSystem
     {

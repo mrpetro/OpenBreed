@@ -28,6 +28,7 @@ using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Systems;
+using OpenBreed.Sandbox.Systems.Actor;
 using OpenBreed.Sandbox.Systems.Mission;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
@@ -209,7 +210,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddSystem<ActorOnSmartCardTriggerSystem>();
             worldBuilder.AddSystem<ActorOnLandMineTriggerSystem>();
             worldBuilder.AddSystem<ExplosionOnEnterWorldSystem>();
-            worldBuilder.AddSystem<ActorOnEnterTriggerSystem>();
+            worldBuilder.AddSystem<ActorPrepareOnEnterSystem>();
             worldBuilder.AddSystem<MissionShowOnHeroEnterSystem>();
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);

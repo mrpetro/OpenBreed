@@ -11,9 +11,11 @@
 				<!--<State FsmName="Actor.Movement" StateName="Standing" />-->
 			</States>
 		</Fsm>
-		<Script>
-			<ScriptId>Vanilla/Common/Actor</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="EnterWorld" Action="Prepare" />
+            </Actions>
+		</OnTrigger>
 		<SoundPlayer>		
 		</SoundPlayer>
 		<Animation>
