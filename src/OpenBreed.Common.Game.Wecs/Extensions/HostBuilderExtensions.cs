@@ -21,7 +21,6 @@ using OpenBreed.Wecs.Components.Physics.Extensions;
 using OpenBreed.Wecs.Components.Rendering.Extensions;
 using OpenBreed.Wecs.Components.Scripting.Extensions;
 using OpenBreed.Wecs.Components.Xml;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Systems;

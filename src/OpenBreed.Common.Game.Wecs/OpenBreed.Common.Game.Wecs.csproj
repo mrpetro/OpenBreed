@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj" />
     <ProjectReference Include="..\OpenBreed.Common.Game\OpenBreed.Common.Game.csproj" />
     <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
@@ -24,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Entities\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

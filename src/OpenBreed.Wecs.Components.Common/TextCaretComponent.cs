@@ -1,9 +1,4 @@
-﻿using OpenBreed.Wecs.Components;
-using OpenTK;
-using OpenTK.Graphics;
-using System.Collections.Generic;
-
-namespace OpenBreed.Wecs.Components.Common
+﻿namespace OpenBreed.Wecs.Components.Common
 {
     public class TextCaretComponent : IEntityComponent
     {

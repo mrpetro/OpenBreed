@@ -1,4 +1,4 @@
-﻿using OpenBreed.Wecs.Events;
+﻿using OpenBreed.Wecs.Abstractions.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;

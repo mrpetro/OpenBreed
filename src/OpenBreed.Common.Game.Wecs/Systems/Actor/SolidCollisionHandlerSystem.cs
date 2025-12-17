@@ -4,7 +4,6 @@ using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Abstractions;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;

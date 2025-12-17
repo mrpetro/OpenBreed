@@ -1,7 +1,4 @@
-﻿using OpenBreed.Wecs.Components;
-using System;
-
-namespace OpenBreed.Wecs.Components.Common
+﻿namespace OpenBreed.Wecs.Components.Common
 {
     public class TextDataComponent : IEntityComponent
     {

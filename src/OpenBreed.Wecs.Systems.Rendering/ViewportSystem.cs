@@ -1,19 +1,12 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Rendering.Abstractions;
+﻿using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Rendering.Abstractions.Renderers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Helpers;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Rendering
@@ -57,7 +50,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(Worlds.IWorldRenderContext context)
+        public void Render(Abstractions.Primitives.IWorldRenderContext context)
         {
             var entities = context.World.GetMatchingEntities(this);
 

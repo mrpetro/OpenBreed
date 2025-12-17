@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Wecs.Components.Control;
-using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Wecs.Systems.Control.Extensions
 {

@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Common.Interface;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

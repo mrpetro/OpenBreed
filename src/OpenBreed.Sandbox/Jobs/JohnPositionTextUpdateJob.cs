@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Abstractions;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using System;
 using System.Globalization;

@@ -3,11 +3,9 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
-using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;
@@ -26,7 +24,7 @@ namespace OpenBreed.Wecs.Systems.Gui
         public bool Enabled { get; set; } = true;
     }
 
-    public class CollisionVisualizingSystem : SystemBase<CollisionVisualizingSystem>, IRenderableSystem
+    public class CollisionVisualizingSystem : IRenderableSystem
     {
         #region Private Fields
 
@@ -56,7 +54,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Public Methods
 
-        public void Render(Worlds.IWorldRenderContext context)
+        public void Render(IWorldRenderContext context)
         {
             if (!visualizingOptions.Enabled)
             {
@@ -92,7 +90,7 @@ namespace OpenBreed.Wecs.Systems.Gui
 
         #region Private Methods
 
-        private void DrawContacts(Worlds.IWorldRenderContext context, List<CollisionContact> contacts)
+        private void DrawContacts(IWorldRenderContext context, List<CollisionContact> contacts)
         {
             for (int i = 0; i < contacts.Count; i++)
             {
@@ -100,7 +98,7 @@ namespace OpenBreed.Wecs.Systems.Gui
             }
         }
 
-        private void DrawContact(Worlds.IWorldRenderContext context, CollisionContact contact)
+        private void DrawContact(IWorldRenderContext context, CollisionContact contact)
         {
             var view = context.View;
 
@@ -126,7 +124,7 @@ namespace OpenBreed.Wecs.Systems.Gui
             view.PopMatrix();
         }
 
-        private void DrawDynamicEntityAabb(Worlds.IWorldRenderContext context, IBroadphaseItem item, Box2 clipBox)
+        private void DrawDynamicEntityAabb(IWorldRenderContext context, IBroadphaseItem item, Box2 clipBox)
         {
             var entity = entityMan.GetById(item.ItemId);
 
@@ -152,7 +150,7 @@ namespace OpenBreed.Wecs.Systems.Gui
             //primitiveRenderer.DrawRectangle(new Box2(0,0, 100, 100), Color4.Red, filled: false);
         }
 
-        private void DrawDynamics(Worlds.IWorldRenderContext context, IBroadphase dynamics, Box2 viewBox)
+        private void DrawDynamics(IWorldRenderContext context, IBroadphase dynamics, Box2 viewBox)
         {
             foreach (var item in dynamics.DynamicItems)
             {
@@ -160,7 +158,7 @@ namespace OpenBreed.Wecs.Systems.Gui
             }
         }
 
-        private void DrawEntityFixtures(Worlds.IWorldRenderContext context, IEntity entity)
+        private void DrawEntityFixtures(IWorldRenderContext context, IEntity entity)
         {
             var view = context.View;
 
@@ -180,7 +178,7 @@ namespace OpenBreed.Wecs.Systems.Gui
             view.PopMatrix();
         }
 
-        private void DrawStatics(Worlds.IWorldRenderContext context, IBroadphase statics, Box2 viewBox)
+        private void DrawStatics(IWorldRenderContext context, IBroadphase statics, Box2 viewBox)
         {
             var itemIds = statics.QueryStatic(viewBox);
 

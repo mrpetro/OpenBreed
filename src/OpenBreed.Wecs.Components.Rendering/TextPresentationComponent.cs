@@ -1,5 +1,4 @@
-﻿using OpenBreed.Wecs.Components;
-using OpenTK.Graphics;
+﻿using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Rendering

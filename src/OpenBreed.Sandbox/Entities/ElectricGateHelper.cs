@@ -15,9 +15,7 @@ using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities.Xml;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
-using OpenBreed.Wecs.Worlds;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
@@ -27,6 +25,8 @@ using System.Globalization;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common.Interface;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Primitives;
 
 namespace OpenBreed.Sandbox.Entities
 {

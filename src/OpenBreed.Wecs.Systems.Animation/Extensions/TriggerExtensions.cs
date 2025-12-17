@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Worlds;
 using System;

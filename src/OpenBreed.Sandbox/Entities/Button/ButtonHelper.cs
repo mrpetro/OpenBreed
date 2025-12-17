@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Entities.Button

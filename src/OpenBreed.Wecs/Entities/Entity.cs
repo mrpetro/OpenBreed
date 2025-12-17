@@ -1,4 +1,6 @@
-﻿using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Components;
+using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;

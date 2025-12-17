@@ -3,7 +3,7 @@ using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc.Controllers;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

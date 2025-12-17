@@ -2,8 +2,6 @@
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -12,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Game;
 using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Primitives;
 
 namespace OpenBreed.Sandbox.Extensions
 {

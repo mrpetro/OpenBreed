@@ -1,12 +1,7 @@
 ﻿using Moq;
 using OpenBreed.Common.Interface;
-using OpenBreed.Wecs.Attributes;
-using OpenBreed.Wecs.Components;
+using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Systems;
-using System;
-using System.ComponentModel;
-using System.Reflection.Emit;
-using System.Reflection.Metadata;
 using Xunit;
 
 namespace OpenBreed.Wecs.Test.Systems

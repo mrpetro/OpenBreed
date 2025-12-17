@@ -3,7 +3,7 @@ using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Linq;

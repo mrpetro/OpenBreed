@@ -6,8 +6,6 @@ using OpenBreed.Physics.Interface;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Scripting;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Abstractions;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;

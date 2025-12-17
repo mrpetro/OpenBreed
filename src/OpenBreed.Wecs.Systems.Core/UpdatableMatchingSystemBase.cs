@@ -1,8 +1,4 @@
-﻿using OpenBreed.Wecs.Attributes;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
-using System.Collections.Generic;
+﻿using OpenBreed.Wecs.Components.Common;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Core

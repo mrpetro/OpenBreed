@@ -1,5 +1,4 @@
-﻿using OpenBreed.Wecs.Entities;
-using System;
+﻿using System;
 
 namespace OpenBreed.Fsm
 {

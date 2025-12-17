@@ -1,13 +1,8 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenBreed.Wecs.Worlds;
-using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {

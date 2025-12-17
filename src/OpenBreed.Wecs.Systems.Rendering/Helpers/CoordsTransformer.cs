@@ -2,7 +2,6 @@
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Systems.Rendering.Helpers

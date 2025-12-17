@@ -1,15 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
-using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -42,7 +36,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(Worlds.IWorldRenderContext context)
+        public void Render(IWorldRenderContext context)
         {
             context.View.Context.FontRenderer.Render(context.View, context.ViewBox, (view, viewBox) => RenderTexts(context, view, viewBox));
         }
@@ -51,7 +45,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Private Methods
 
-        private void RenderTexts(Worlds.IWorldRenderContext context, OpenBreed.Rendering.Abstractions.IRenderView view, Box2 clipBox)
+        private void RenderTexts(IWorldRenderContext context, OpenBreed.Rendering.Abstractions.IRenderView view, Box2 clipBox)
         {
             var entities = context.World.GetMatchingEntities(this);
 

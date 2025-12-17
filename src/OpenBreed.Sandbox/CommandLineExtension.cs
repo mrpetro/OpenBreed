@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using OpenBreed.Audio.Interface;
 using OpenBreed.Database.Xml;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Services;
 using System;
 using System.CommandLine;
 using System.CommandLine.Invocation;

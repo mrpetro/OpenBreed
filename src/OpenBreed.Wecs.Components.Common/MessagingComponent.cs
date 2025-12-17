@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Common

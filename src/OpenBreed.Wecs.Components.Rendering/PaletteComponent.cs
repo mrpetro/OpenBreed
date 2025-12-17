@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Interface;
-using OpenBreed.Rendering.Abstractions.Data;
-using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Abstractions.Attributes;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Rendering
@@ -8,7 +9,6 @@ namespace OpenBreed.Wecs.Components.Rendering
     public interface IPaletteComponentTemplate : IComponentTemplate
     {
     }
-
 
     public struct PaletteColor
     {

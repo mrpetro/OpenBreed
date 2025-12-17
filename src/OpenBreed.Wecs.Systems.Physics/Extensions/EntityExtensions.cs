@@ -4,7 +4,6 @@ using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Extensions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenTK.Mathematics;
 using System;

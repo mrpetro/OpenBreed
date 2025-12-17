@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

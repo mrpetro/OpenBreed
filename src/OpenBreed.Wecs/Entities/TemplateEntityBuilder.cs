@@ -1,6 +1,9 @@
 ﻿using OpenBreed.Common.Tools.Xml;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Services;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

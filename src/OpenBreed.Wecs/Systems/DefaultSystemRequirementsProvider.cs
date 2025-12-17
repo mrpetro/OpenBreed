@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Interface;
-using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Abstractions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -47,12 +47,18 @@ namespace OpenBreed.Wecs.Systems
                 {
                     case RequireEntityWithAttribute requireEntityWithAttribute:
                         foreach (var componentType in requireEntityWithAttribute.ComponentTypes)
+                        {
                             AddAllowedComponentType(systemType, componentType);
+                        }
+
                         break;
 
                     case RequireEntityWithoutAttribute requireEntityWithoutAttribute:
                         foreach (var componentType in requireEntityWithoutAttribute.ComponentTypes)
+                        {
                             AddForbiddenComponentType(systemType, componentType);
+                        }
+
                         break;
 
                     default:

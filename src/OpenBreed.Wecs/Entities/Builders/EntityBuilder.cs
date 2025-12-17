@@ -1,4 +1,7 @@
-﻿namespace OpenBreed.Wecs.Entities.Builders
+﻿using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
+
+namespace OpenBreed.Wecs.Entities.Builders
 {
     public abstract class EntityBuilder : IEntityBuilder
     {

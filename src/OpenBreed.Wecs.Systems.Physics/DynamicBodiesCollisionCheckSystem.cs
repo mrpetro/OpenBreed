@@ -1,19 +1,12 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Extensions;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenBreed.Wecs.Systems.Physics.Helpers;
-using OpenTK;
 using OpenTK.Mathematics;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics

@@ -283,6 +283,11 @@
     </Project>
   </Folder>
   <Folder Name="/Wecs/">
+    <Project Path="OpenBreed.Wecs.Abstractions/OpenBreed.Wecs.Abstractions.csproj">
+      <BuildType Solution="Editor_Debug|*" Project="Release" />
+      <BuildType Solution="Game_Debug|*" Project="Debug" />
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
     <Project Path="OpenBreed.Wecs/OpenBreed.Wecs.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />

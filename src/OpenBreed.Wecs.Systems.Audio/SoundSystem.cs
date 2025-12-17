@@ -1,13 +1,8 @@
 ﻿using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Audio;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Audio.Events;
 using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
-using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Audio
 {

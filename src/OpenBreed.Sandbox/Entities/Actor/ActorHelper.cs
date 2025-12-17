@@ -16,7 +16,6 @@ using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Control.Events;
@@ -24,7 +23,6 @@ using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
-using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
 using System;
@@ -35,6 +33,8 @@ using OpenBreed.Physics.Interface;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Primitives;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {

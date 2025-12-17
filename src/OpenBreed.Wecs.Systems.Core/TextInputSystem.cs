@@ -1,8 +1,5 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Core
 {

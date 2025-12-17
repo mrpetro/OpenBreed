@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Physics.Interface;
-using OpenBreed.Wecs.Entities;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

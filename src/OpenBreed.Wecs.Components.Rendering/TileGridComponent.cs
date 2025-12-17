@@ -1,12 +1,7 @@
 ﻿using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using OpenBreed.Wecs.Abstractions.Primitives;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {

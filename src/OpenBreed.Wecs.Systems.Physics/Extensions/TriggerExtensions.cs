@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using System;
 using System.Collections.Generic;

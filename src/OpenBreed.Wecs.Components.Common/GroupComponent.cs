@@ -1,8 +1,4 @@
-﻿using OpenBreed.Wecs.Attributes;
-using OpenBreed.Wecs.Components;
-using System.Collections.Generic;
-
-namespace OpenBreed.Wecs.Components.Common
+﻿namespace OpenBreed.Wecs.Components.Common
 {
     [ComponentName("Group")]
     public class GroupComponent : IEntityComponent

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Wecs.Events;
+﻿using OpenBreed.Wecs.Abstractions.Events;
 
 namespace OpenBreed.Common.Game.Wecs.Events
 {

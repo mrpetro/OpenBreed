@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

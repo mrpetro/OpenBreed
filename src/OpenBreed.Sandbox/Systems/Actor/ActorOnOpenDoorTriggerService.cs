@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Audio.Interface;
-using OpenBreed.Wecs.Entities;
 using System;
 using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Common.Game.Services;
@@ -10,7 +9,8 @@ using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Events;
-using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Systems;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {

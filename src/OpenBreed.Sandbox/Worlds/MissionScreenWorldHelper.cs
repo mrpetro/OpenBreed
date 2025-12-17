@@ -9,14 +9,13 @@ using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
-using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System.Linq;
 

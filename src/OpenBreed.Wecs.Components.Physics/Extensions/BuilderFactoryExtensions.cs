@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Wecs.Entities;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;

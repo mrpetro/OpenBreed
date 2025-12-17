@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Common.Tools;
 using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Core;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenTK;
 using OpenTK.Graphics;

@@ -4,10 +4,9 @@ using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
@@ -19,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Wecs.Abstractions.Systems;
 
 namespace OpenBreed.Sandbox.Systems.Mission
 {

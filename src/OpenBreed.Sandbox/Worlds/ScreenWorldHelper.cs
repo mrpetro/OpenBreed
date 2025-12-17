@@ -14,9 +14,6 @@ using OpenBreed.Common.Game.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Audio;
 using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Wecs.Systems.Core;
@@ -24,12 +21,14 @@ using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
-using OpenBreed.Wecs.Worlds;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Numerics;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Extensions;
 
 namespace OpenBreed.Sandbox.Worlds
 {

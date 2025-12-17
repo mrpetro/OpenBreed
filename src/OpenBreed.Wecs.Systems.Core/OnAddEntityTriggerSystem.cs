@@ -1,16 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Attributes;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Services;
+﻿using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Worlds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems.Core
 {

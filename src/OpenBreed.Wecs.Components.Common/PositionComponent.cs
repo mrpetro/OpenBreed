@@ -1,7 +1,4 @@
-﻿
-using OpenBreed.Wecs.Attributes;
-using OpenTK;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Common
 {

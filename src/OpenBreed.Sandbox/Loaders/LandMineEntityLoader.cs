@@ -4,7 +4,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;

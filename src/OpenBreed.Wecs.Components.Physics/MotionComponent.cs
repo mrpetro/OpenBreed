@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Wecs.Abstractions.Services;
+using OpenTK;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Physics

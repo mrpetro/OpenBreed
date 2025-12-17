@@ -1,4 +1,4 @@
-﻿using OpenBreed.Wecs.Entities;
+﻿using OpenBreed.Wecs.Abstractions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;

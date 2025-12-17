@@ -3,8 +3,8 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 
 namespace OpenBreed.Sandbox.Entities.Hud
 {

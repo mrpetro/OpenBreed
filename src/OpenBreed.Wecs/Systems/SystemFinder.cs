@@ -1,7 +1,4 @@
-﻿using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
-
-namespace OpenBreed.Wecs.Systems
+﻿namespace OpenBreed.Wecs.Systems
 {
     public class SystemFinder : ISystemFinder
     {

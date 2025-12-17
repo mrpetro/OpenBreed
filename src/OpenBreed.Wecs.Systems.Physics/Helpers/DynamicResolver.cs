@@ -2,7 +2,6 @@
 using OpenBreed.Core;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
 using OpenTK;
 using System;
 using System.Linq;

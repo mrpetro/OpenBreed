@@ -22,9 +22,6 @@ using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Control.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
@@ -32,13 +29,15 @@ using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Scripting;
-using OpenBreed.Wecs.Worlds;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenTK;
 using OpenTK.Mathematics;
 using System.Linq;
 using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Game;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Extensions;
 
 namespace OpenBreed.Sandbox.Worlds
 {

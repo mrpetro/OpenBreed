@@ -1,4 +1,4 @@
-﻿using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Wecs.Abstractions.Primitives;
 
 namespace OpenBreed.Common.Game.Wecs.Components
 {

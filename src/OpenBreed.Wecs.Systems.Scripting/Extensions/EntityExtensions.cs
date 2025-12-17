@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Scripting;
-using OpenBreed.Wecs.Entities;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Scripting.Extensions

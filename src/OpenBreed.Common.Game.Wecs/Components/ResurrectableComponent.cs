@@ -1,6 +1,5 @@
-﻿using OpenBreed.Wecs;
+﻿using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Components;
-using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Common.Game.Wecs.Components
 {

@@ -1,18 +1,7 @@
-﻿using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Physics.Interface;
-using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Wecs.Attributes;
+﻿using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Events;
-using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
-using OpenBreed.Wecs.Worlds;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {

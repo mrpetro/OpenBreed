@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 using OpenTK.Mathematics;
 using System;

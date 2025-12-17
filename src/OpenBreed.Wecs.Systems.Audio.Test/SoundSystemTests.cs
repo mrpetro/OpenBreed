@@ -2,10 +2,10 @@
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components.Audio;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Audio.Events;
-using OpenBreed.Wecs.Worlds;
 using Xunit;
 
 namespace OpenBreed.Wecs.Systems.Audio.Test

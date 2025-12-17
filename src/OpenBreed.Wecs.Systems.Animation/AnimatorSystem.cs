@@ -1,15 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Interface;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
 using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Animation;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Animation
 {

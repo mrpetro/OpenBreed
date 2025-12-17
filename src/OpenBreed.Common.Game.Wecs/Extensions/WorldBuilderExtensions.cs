@@ -11,7 +11,6 @@ using OpenBreed.Wecs.Systems.Gui;
 using OpenBreed.Wecs.Systems.Physics;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Scripting;
-using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {
@@ -27,13 +26,9 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             //Video
 
             builder.AddSystem<ViewportSystem>();
-            //builder.AddSystem<SoundSystem>();
             builder.AddSystem<SoundSystem>();
             builder.AddSystem<TimerSystem>();
             builder.AddSystem<FrameSystem>();
-            //builder.AddSystem(core.CreateSpriteSystem().Build());
-            //builder.AddSystem(core.CreateWireframeSystem().Build());
-            //builder.AddSystem(core.CreateTextSystem().Build());
         }
 
         public static void SetupLimboWorldSystems(this IWorldBuilder builder)
@@ -45,10 +40,11 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
         public static void SetupGameWorldSystems(this IWorldBuilder builder, bool isEditor)
         {
             //Update Stage
+            //builder.AddGameLogicSystems();
+
             builder.AddSystem<MovementSystemVanilla>();
             builder.AddSystem<DirectionSystemVanilla>();
 
-            //builder.AddSystem(new FollowerSystem(core));
             builder.AddSystem<AddDynamicBodySystem>();
             builder.AddSystem<RemoveDynamicBodySystem>();
             builder.AddSystem<UpdateDynamicBodySystem>();
@@ -56,8 +52,6 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             builder.AddSystem<AddStaticBodySystem>();
             builder.AddSystem<RemoveStaticBodySystem>();
             builder.AddSystem<OnAddEntityTriggerSystem>();
-            //builder.AddSystem<StaticBodiesSystem>();
-            //builder.AddSystem(systemFactory.Create<CollisionResponseSystem>());
             builder.AddSystem<SolidCollisionHandlerSystem>();
             builder.AddSystem<SlowdownObstacleCollisionSystem>();
             builder.AddSystem<SlopeObstacleCollisionSystem>();
@@ -88,21 +82,17 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
 
             //Audio Stage
             builder.AddSystem<SoundSystem>();
-            //builder.AddSystem<SoundSystem>();
 
             //Video Stage
             builder.AddSystem<TileRenderSystem>();
             builder.AddSystem<SpriteSystem>();
             builder.AddSystem<PictureSystem>();
-            //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem<TextSystem>();
             builder.AddSystem<CollisionVisualizingSystem>();
             builder.AddSystem<UnknownMapCellDisplaySystem>();
-            //builder.AddSystem(systemFactory.Create<GroupMapCellDisplaySystem>());
             builder.AddSystem<ViewportSystem>();
 
             builder.AddSystem<ScriptRunningSystem>();
-
 
             if (!isEditor)
             {

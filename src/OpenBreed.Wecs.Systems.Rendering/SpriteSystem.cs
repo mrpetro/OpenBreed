@@ -1,8 +1,6 @@
 ﻿using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 

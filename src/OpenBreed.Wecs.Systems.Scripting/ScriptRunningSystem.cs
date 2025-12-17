@@ -1,13 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Attributes;
-using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Abstractions.Attributes;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Components.Scripting;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
-using OpenBreed.Wecs.Worlds;
 using System;
 using System.Linq;
 

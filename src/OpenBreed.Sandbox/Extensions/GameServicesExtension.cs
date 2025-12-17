@@ -10,8 +10,6 @@ using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Worlds;
@@ -23,6 +21,8 @@ using System.Threading.Tasks;
 using OpenBreed.Wecs.Systems.Scripting.Extensions;
 
 using OpenBreed.Wecs.Systems.Control.Extensions;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Extensions;
 
 namespace OpenBreed.Sandbox.Extensions
 {

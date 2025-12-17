@@ -1,6 +1,6 @@
-﻿using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
+﻿using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Components.Common;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

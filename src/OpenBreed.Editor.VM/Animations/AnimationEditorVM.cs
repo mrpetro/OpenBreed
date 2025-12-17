@@ -22,7 +22,7 @@ using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;

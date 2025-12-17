@@ -1,14 +1,8 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Rendering.Abstractions.Renderers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Gui;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Gui.Events;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;

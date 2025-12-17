@@ -3,7 +3,7 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Database.Interface;
 using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Abstractions.Services;
 
 namespace OpenBreed.Sandbox.Helpers
 {

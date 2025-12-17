@@ -2,14 +2,14 @@
 using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Common.Game.Wecs.Components;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
-using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Primitives;
 
 namespace OpenBreed.Sandbox.Entities
 {

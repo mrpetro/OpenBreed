@@ -1,22 +1,14 @@
-﻿using OpenBreed.Common.Game;
-using OpenBreed.Common.Game.Wecs.Components;
+﻿using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Attributes;
+using OpenBreed.Wecs.Abstractions;
+using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Wecs.Systems.Control.Events;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {

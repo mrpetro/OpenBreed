@@ -1,13 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
 using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Events;
-using OpenBreed.Wecs.Worlds;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Core

@@ -1,4 +1,4 @@
-﻿using OpenTK;
+﻿using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
 

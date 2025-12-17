@@ -1,5 +1,4 @@
-﻿using OpenBreed.Wecs.Entities;
-using System.Linq;
+﻿using System.Linq;
 
 namespace OpenBreed.Fsm.Extensions
 {

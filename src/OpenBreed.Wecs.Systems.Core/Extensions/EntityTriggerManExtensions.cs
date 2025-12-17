@@ -1,7 +1,5 @@
 ﻿using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

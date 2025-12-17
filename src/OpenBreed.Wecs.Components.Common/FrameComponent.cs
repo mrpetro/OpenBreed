@@ -1,7 +1,4 @@
-﻿using OpenBreed.Wecs.Attributes;
-using System.Collections.Generic;
-
-namespace OpenBreed.Wecs.Components.Common
+﻿namespace OpenBreed.Wecs.Components.Common
 {
     public interface IFrameComponentTemplate : IComponentTemplate
     {

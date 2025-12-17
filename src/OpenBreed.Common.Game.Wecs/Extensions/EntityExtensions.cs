@@ -3,8 +3,6 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

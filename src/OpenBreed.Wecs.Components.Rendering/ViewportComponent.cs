@@ -1,8 +1,6 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Interface;
-using OpenBreed.Wecs.Attributes;
-using OpenTK;
-using OpenTK.Graphics;
+﻿using OpenBreed.Common.Interface;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Wecs.Components.Rendering

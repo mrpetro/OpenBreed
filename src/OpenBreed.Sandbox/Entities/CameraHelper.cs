@@ -6,11 +6,11 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
-using OpenBreed.Wecs.Worlds;
 using System;
 using System.Linq;
 

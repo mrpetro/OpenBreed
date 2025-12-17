@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Common.Game.Services;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Compute.OpenCL;
 using System;
@@ -12,6 +10,8 @@ using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Events;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Systems;
 
 namespace OpenBreed.Sandbox.Systems
 {

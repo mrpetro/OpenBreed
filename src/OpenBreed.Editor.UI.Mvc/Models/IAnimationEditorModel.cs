@@ -3,7 +3,7 @@ using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Mvc;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.TileStamps;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

@@ -1,9 +1,5 @@
 ﻿using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {

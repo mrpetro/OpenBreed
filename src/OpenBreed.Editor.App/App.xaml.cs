@@ -40,13 +40,13 @@ using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Wecs.Components.Animation.Extensions;
 using OpenBreed.Wecs.Components.Rendering.Extensions;
 using OpenBreed.Wecs.Components.Physics.Extensions;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Common.Game.Extensions;
 using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Gui.Extensions;
+using OpenBreed.Wecs.Abstractions.Primitives;
 
 namespace OpenBreed.Editor.App
 {

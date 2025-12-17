@@ -12,7 +12,7 @@ using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Editor.UI.Mvc.Views

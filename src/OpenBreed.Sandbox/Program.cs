@@ -62,10 +62,7 @@ using OpenBreed.Wecs.Components.Physics.Extensions;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Components.Rendering.Extensions;
 using OpenBreed.Wecs.Components.Scripting.Extensions;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
-using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
@@ -105,6 +102,10 @@ using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Game.Extensions;
 using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Wecs.Systems.Rendering.Helpers;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Abstractions.Systems;
 
 namespace OpenBreed.Sandbox
 {

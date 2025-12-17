@@ -25,13 +25,10 @@ using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Components.Xml;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Core.Events;
-using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -47,6 +44,9 @@ using OpenBreed.Model.Extensions;
 using OpenBreed.Rendering.Common.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Helpers;
 using OpenBreed.Common.Game.Services;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Events;
 
 namespace OpenBreed.Common.Game.Extensions
 {

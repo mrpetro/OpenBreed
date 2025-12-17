@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Common.Game.Wecs.Events;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenTK.Windowing.Common;
 using System;
@@ -9,9 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Wecs.Extensions;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Common.Game;
+using OpenBreed.Wecs.Abstractions.Extensions;
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {

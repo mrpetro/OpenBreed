@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Wecs.Entities;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;

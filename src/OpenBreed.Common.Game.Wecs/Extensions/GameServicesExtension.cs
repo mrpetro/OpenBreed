@@ -3,20 +3,11 @@ using OpenBreed.Animation.Generic;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions;
-using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems.Animation.Extensions;
+
 using OpenBreed.Wecs.Systems.Core.Extensions;
-using OpenBreed.Wecs.Systems.Scripting.Extensions;
-using OpenBreed.Wecs.Worlds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {

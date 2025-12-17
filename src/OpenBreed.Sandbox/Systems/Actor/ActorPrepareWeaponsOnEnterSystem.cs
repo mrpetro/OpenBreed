@@ -6,11 +6,10 @@ using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Managers;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
-using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
@@ -33,6 +32,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
+using OpenBreed.Wecs.Abstractions.Systems;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {

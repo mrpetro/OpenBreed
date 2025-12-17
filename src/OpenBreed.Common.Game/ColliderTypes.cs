@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using System.Runtime.CompilerServices;
 
 namespace OpenBreed.Common.Game

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Wecs.Events;
+﻿using OpenBreed.Wecs.Abstractions.Events;
 using OpenTK;
 using OpenTK.Mathematics;
 using System;

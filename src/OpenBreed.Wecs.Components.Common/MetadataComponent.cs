@@ -1,6 +1,4 @@
-﻿using OpenBreed.Wecs.Attributes;
-
-namespace OpenBreed.Wecs.Components.Common
+﻿namespace OpenBreed.Wecs.Components.Common
 {
     public interface IMetadataComponentTemplate : IComponentTemplate
     {

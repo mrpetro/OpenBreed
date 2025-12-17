@@ -1,17 +1,5 @@
-﻿using OpenBreed.Common.Game.Wecs.Components;
-using OpenBreed.Common.Game.Wecs.Events;
-using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Attributes;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenBreed.Common.Game.Wecs.Events;
+
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {

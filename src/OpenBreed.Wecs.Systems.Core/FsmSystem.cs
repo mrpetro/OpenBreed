@@ -1,11 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
 using OpenBreed.Fsm;
-using OpenBreed.Wecs.Attributes;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Core

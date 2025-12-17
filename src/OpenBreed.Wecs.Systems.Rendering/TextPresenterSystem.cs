@@ -1,12 +1,8 @@
 ﻿using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Wecs.Attributes;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
 using OpenTK.Mathematics;
-using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -34,7 +30,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public void Render(Worlds.IWorldRenderContext context)
+        public void Render(Abstractions.Primitives.IWorldRenderContext context)
         {
             context.View.Context.FontRenderer.Render(context.View, context.ViewBox, (view, clipBox) => RenderTexts(context, view, clipBox));
         }

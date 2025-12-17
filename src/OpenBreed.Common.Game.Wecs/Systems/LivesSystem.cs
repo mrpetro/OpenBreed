@@ -1,15 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Events;
-using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Attributes;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Worlds;
-using System.Linq;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {

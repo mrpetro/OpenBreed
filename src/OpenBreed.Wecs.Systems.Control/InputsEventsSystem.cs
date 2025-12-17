@@ -1,7 +1,5 @@
 ﻿using OpenBreed.Input.Interface;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Events;
-using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Abstractions.Events;
 using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Systems.Control

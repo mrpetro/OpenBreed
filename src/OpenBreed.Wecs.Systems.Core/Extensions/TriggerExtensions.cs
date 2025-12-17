@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Worlds;

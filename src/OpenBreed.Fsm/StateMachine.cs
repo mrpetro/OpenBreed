@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Components.Animation;
-using OpenBreed.Wecs.Events;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Animation.Events

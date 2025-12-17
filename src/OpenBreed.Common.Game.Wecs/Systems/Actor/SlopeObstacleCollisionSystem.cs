@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Common.Game;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Abstractions;
 using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenTK.Mathematics;

@@ -16,26 +16,13 @@ using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
-using OpenBreed.Wecs.Systems.Core.Extensions;
-using OpenBreed.Wecs.Systems.Physics.Abstractions;
-using OpenBreed.Wecs.Systems.Physics.Helpers;
-using OpenBreed.Wecs.Systems.Scripting.Extensions;
-using OpenBreed.Wecs.Worlds;
-using OpenTK.Compute.OpenCL;
-using OpenTK.Mathematics;
 using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
