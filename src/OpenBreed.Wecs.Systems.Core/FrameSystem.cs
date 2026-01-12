@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Core.Events;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(FrameComponent))]
+    [SystemCategory(CommonCategories.General)]
     public class FrameSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields

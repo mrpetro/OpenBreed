@@ -1,12 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Wecs.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Wecs
+namespace OpenBreed.Wecs.Services
 {
     internal class DefaultSystemInitializer : ISystemInitializer
     {

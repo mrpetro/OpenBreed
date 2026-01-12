@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace OpenBreed.Wecs.Systems
+namespace OpenBreed.Wecs.Services
 {
     /// <summary>
     /// Default implementation for ISystemRequirementsProvider interface

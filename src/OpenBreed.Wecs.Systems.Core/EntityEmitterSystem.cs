@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Core.Events;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(EntityEmitterComponent))]
+    [SystemCategory(CommonCategories.General)]
     public class EntityEmitterSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields

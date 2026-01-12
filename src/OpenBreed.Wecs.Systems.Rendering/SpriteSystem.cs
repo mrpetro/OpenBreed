@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 
@@ -9,6 +10,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(SpriteComponent),
         typeof(PositionComponent))]
+    [SystemCategory(CommonCategories.Rendering)]
     public class SpriteSystem : IMatchingSystem, IRenderableSystem
     {
         #region Private Fields

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Wecs.Systems
+namespace OpenBreed.Wecs.Services
 {
     /// <summary>
     /// Default implementation for IEntityToSystemMatcher interface

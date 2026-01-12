@@ -1,12 +1,14 @@
 ﻿using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(
         typeof(CollisionComponent))]
+    [SystemCategory(CommonCategories.Physics)]
     public class RemoveDynamicBodySystem : IMatchingSystem, IEventSystem<EntityLeftEvent>
     {
         #region Private Fields

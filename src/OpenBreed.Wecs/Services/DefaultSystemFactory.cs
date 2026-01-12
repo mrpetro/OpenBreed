@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace OpenBreed.Wecs.Systems
+namespace OpenBreed.Wecs.Services
 {
     internal class DefaultSystemFactory : ISystemFactory
     {

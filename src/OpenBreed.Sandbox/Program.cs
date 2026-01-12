@@ -106,6 +106,7 @@ using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Systems;
+using OpenBreed.Wecs.Systems.Rendering.Primitives;
 
 namespace OpenBreed.Sandbox
 {

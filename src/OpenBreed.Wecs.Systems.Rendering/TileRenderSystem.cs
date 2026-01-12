@@ -1,10 +1,12 @@
 ﻿using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
     [RequireEntityWith(
         typeof(TileGridComponent))]
+    [SystemCategory(CommonCategories.Rendering)]
     public class TileRenderSystem : IMatchingSystem, IRenderableSystem
     {
         #region Public Constructors

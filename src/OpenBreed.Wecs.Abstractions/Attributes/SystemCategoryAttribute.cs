@@ -3,18 +3,26 @@ using System.ComponentModel;
 
 namespace OpenBreed.Wecs.Abstractions.Attributes
 {
-    public abstract class SystemCategory { }
+    public abstract class SystemCategory
+    {
+    }
 
     /// <summary>
     /// System attribute that defines it's category
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class SystemCategoryAttribute<TSystemCategory> : Attribute where TSystemCategory : SystemCategory
+    public class SystemCategoryAttribute : Attribute
     {
         #region Public Constructors
 
-        public SystemCategoryAttribute()
+        public SystemCategoryAttribute(string category)
         {
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                throw new ArgumentException("Expected non empty category name");
+            }
+
+            Category = category;
         }
 
         #endregion Public Constructors
@@ -24,7 +32,7 @@ namespace OpenBreed.Wecs.Abstractions.Attributes
         /// <summary>
         /// System category
         /// </summary>
-        public Type Category => typeof(TSystemCategory);
+        public string Category { get; }
 
         #endregion Public Properties
     }

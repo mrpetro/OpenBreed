@@ -2,6 +2,7 @@
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenTK;
 using OpenTK.Mathematics;
 
@@ -10,6 +11,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(TextComponent),
         typeof(PositionComponent))]
+    [SystemCategory(CommonCategories.Rendering)]
     public class TextSystem : IMatchingSystem, IRenderableSystem
     {
         #region Private Fields

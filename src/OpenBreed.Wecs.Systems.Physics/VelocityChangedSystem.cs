@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Physics.Events;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
     [RequireEntityWith(typeof(VelocityComponent))]
+    [SystemCategory(CommonCategories.Physics)]
     public class VelocityChangedSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields

@@ -4,7 +4,6 @@ using OpenBreed.Common;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems.Core;

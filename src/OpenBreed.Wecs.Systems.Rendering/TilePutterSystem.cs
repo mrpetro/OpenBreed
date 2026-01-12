@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Rendering
@@ -7,6 +8,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(TilePutterComponent),
         typeof(TileGridComponent))]
+    [SystemCategory(CommonCategories.Rendering)]
     public class TilePutterSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields

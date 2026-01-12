@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Systems.Core.Categories;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
     [RequireEntityWith(
         typeof(StampPutterComponent),
         typeof(TileGridComponent))]
+    [SystemCategory(CommonCategories.Rendering)]
     public class StampPutterSystem : IUpdatableSystem, IMatchingSystem
     {
         #region Private Fields

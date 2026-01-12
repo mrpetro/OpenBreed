@@ -2,6 +2,7 @@
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using System;
 
@@ -14,7 +15,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         typeof(AngularPositionComponent),
         typeof(AngularVelocityComponent),
         typeof(AngularThrustComponent))]
-
+    [SystemCategory(CommonCategories.Physics)]
     public class DirectionSystemVanilla : UpdatableMatchingSystemBase
     {
         #region Private Fields

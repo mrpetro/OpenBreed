@@ -3,10 +3,12 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Audio;
 using OpenBreed.Wecs.Systems.Audio.Events;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Core.Categories;
 
 namespace OpenBreed.Wecs.Systems.Audio
 {
     [RequireEntityWith(typeof(SoundPlayerComponent))]
+    [SystemCategory(CommonCategories.Audio)]
     public class SoundSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields

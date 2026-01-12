@@ -1,12 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Core.Events;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(TimerComponent))]
+    [SystemCategory(CommonCategories.General)]
     public class TimerSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields

@@ -1,10 +1,12 @@
 ﻿using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Core.Extensions;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(OnTriggerComponent))]
+    [SystemCategory(CommonCategories.General)]
     public class OnAddEntityTriggerSystem : IOnAddEntitySystem, IMatchingSystem
     {
         #region Private Fields

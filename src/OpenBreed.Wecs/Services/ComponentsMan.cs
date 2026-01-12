@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Wecs.Components
+namespace OpenBreed.Wecs.Services
 {
     public class ComponentsMan : IComponentsMan
     {

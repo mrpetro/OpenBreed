@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Fsm;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(typeof(FsmComponent))]
+    [SystemCategory(CommonCategories.General)]
     public class FsmSystem : UpdatableMatchingSystemBase, IOnAddEntitySystem, IOnRemoveEntitySystem
     {
         #region Private Fields

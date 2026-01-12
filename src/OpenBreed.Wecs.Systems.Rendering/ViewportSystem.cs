@@ -3,6 +3,7 @@ using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Helpers;
 using OpenBreed.Wecs.Worlds;
@@ -21,6 +22,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(ViewportComponent),
         typeof(PositionComponent))]
+    [SystemCategory(CommonCategories.Rendering)]
     public class ViewportSystem : IMatchingSystem, IRenderableSystem
     {
         #region Private Fields

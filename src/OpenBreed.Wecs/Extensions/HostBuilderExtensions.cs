@@ -10,7 +10,6 @@ using OpenBreed.Core;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Systems;

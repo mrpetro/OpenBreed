@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Core.Events;
 
 namespace OpenBreed.Wecs.Systems.Core
@@ -8,6 +9,7 @@ namespace OpenBreed.Wecs.Systems.Core
     /// Updates entity life time and when it's down to zero, it removes it from the world.
     /// </summary>
     [RequireEntityWith(typeof(LifetimeComponent))]
+    [SystemCategory(CommonCategories.General)]
     public class LifetimeSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields

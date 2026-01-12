@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenBreed.Wecs.Worlds;
 
-namespace OpenBreed.Wecs.Systems
+namespace OpenBreed.Wecs.Primitives
 {
     internal class UpdateContext : IUpdateContext
     {

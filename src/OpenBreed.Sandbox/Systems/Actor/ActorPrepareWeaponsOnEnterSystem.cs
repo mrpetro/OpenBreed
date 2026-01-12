@@ -13,7 +13,6 @@ using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Audio.Extensions;
-using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Core.Events;
 using OpenBreed.Wecs.Systems.Core.Extensions;
@@ -33,6 +32,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 using OpenBreed.Wecs.Abstractions.Systems;
+using OpenBreed.Wecs.Systems.Control.Helpers;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {

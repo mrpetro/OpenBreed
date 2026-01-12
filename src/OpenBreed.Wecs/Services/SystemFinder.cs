@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Wecs.Systems
+﻿namespace OpenBreed.Wecs.Services
 {
     public class SystemFinder : ISystemFinder
     {
@@ -26,13 +26,13 @@
         {
             var entity = entityMan.GetById(entityId);
             if (entity.WorldId == -1)
-                return default(T);
+                return default;
 
             var world = worldMan.GetById(entity.WorldId);
 
             var system = world.GetSystem<T>();
             if (system == null)
-                return default(T);
+                return default;
 
             return system;
         }
@@ -41,10 +41,10 @@
         {
             var world = worldMan.GetById(worldId);
             if (world == null)
-                return default(T);
+                return default;
             var system = world.GetSystem<T>();
             if (system == null)
-                return default(T);
+                return default;
 
             return system;
         }

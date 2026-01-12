@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 
@@ -8,6 +9,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
     [RequireEntityWith(
         typeof(PictureComponent),
         typeof(PositionComponent))]
+    [SystemCategory(CommonCategories.Rendering)]
     public class PictureSystem : IMatchingSystem, IRenderableSystem
     {
         #region Public Constructors

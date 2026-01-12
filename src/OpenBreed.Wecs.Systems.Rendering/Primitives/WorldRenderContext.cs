@@ -1,16 +1,17 @@
 ﻿using System;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Systems;
 using OpenTK.Mathematics;
 
-namespace OpenBreed.Wecs.Worlds
+namespace OpenBreed.Wecs.Systems.Rendering.Primitives
 {
     public class WorldRenderContext : IWorldRenderContext
     {
         #region Public Constructors
 
         public WorldRenderContext(
-            Rendering.Abstractions.IRenderView view,
+            IRenderView view,
             int depth,
             float dt,
             Box2 viewBox,
@@ -27,7 +28,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Public Properties
 
-        public Rendering.Abstractions.IRenderView View { get; }
+        public IRenderView View { get; }
         public int Depth { get; }
         public float Dt { get; }
         public Box2 ViewBox { get; }

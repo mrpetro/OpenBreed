@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
 using System;
 
-namespace OpenBreed.Wecs.Systems.Control
+namespace OpenBreed.Wecs.Systems.Control.Helpers
 {
     /// <summary>
     /// Various methods and values related with movement system and components
@@ -54,7 +54,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         public static float SnapToCompass16Degree(float x, float y)
         {
-            int index = (((int)Math.Round(Math.Atan2(y, x) / (2 * Math.PI / 16))) + 16) % 16;
+            int index = ((int)Math.Round(Math.Atan2(y, x) / (2 * Math.PI / 16)) + 16) % 16;
             return compass16Degrees[index];
         }
 
@@ -70,7 +70,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         public static float SnapToCompass8Degree(float x, float y)
         {
-            int index = (((int)Math.Round(Math.Atan2(y, x) / (2 * Math.PI / 8))) + 8) % 8;
+            int index = ((int)Math.Round(Math.Atan2(y, x) / (2 * Math.PI / 8)) + 8) % 8;
             return compass8Degrees[index];
         }
 
@@ -78,7 +78,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         public static Vector2 SnapToCompass8Way(float x, float y)
         {
-            int index = (((int)Math.Round(Math.Atan2(y, x) / (2 * Math.PI / 8))) + 8) % 8;
+            int index = ((int)Math.Round(Math.Atan2(y, x) / (2 * Math.PI / 8)) + 8) % 8;
             return compass8Ways[index];
         }
 

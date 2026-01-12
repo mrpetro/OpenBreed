@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Core.Categories;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
     [RequireEntityWith(
         typeof(TextCaretComponent),
         typeof(TextDataComponent))]
+    [SystemCategory(CommonCategories.General)]
     public class TextInputSystem : IMatchingSystem, IUpdatableSystem
     {
         #region Private Fields

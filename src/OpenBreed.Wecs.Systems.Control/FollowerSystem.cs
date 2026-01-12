@@ -3,11 +3,13 @@ using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Core.Categories;
 
 namespace OpenBreed.Wecs.Systems.Control
 {
     [RequireEntityWith(
         typeof(FollowedComponent))]
+    [SystemCategory(CommonCategories.Control)]
     public class FollowerSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields

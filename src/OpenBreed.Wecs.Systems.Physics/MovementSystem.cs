@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Physics.Events;
 
 namespace OpenBreed.Wecs.Systems.Physics
@@ -11,6 +12,7 @@ namespace OpenBreed.Wecs.Systems.Physics
         typeof(PositionComponent),
         typeof(VelocityComponent),
         typeof(BodyComponent))]
+    [SystemCategory(CommonCategories.Physics)]
     public class MovementSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields

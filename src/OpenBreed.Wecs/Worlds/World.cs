@@ -3,7 +3,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Primitives;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

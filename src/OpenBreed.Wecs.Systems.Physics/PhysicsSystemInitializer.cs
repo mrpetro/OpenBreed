@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Systems.Physics.Abstractions;
 using System;

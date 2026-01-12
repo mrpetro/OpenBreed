@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Wecs.Abstractions;
 using System;
 
 namespace OpenBreed.Wecs.Services

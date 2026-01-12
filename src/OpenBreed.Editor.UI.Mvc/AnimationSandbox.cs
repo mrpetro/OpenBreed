@@ -18,6 +18,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Systems.Rendering.Primitives;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 

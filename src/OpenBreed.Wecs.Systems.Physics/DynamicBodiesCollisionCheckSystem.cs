@@ -4,6 +4,7 @@ using OpenBreed.Physics.Interface.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Systems.Core.Categories;
 using OpenBreed.Wecs.Systems.Physics.Events;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
+    [SystemCategory(CommonCategories.Physics)]
     public class DynamicBodiesCollisionCheckSystem : IUpdatableSystem
     {
         #region Private Fields

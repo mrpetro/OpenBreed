@@ -4,10 +4,12 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Core.Categories;
 
 namespace OpenBreed.Wecs.Systems.Animation
 {
     [RequireEntityWith(typeof(AnimationComponent))]
+    [SystemCategory(CommonCategories.Animation)]
     public class AnimatorSystem : UpdatableMatchingSystemBase
     {
         #region Private Fields

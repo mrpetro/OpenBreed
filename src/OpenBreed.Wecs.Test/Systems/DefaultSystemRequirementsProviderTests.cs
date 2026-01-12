@@ -1,7 +1,7 @@
 ﻿using Moq;
 using OpenBreed.Common.Interface;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Services;
 using Xunit;
 
 namespace OpenBreed.Wecs.Test.Systems
