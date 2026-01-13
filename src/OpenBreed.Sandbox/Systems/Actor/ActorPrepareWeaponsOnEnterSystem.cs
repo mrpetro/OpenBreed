@@ -7,18 +7,18 @@ using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Wecs.Abstractions.Primitives;
-using OpenBreed.Wecs.Components.Common.Extensions;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Abstractions.Extensions;
-using OpenBreed.Wecs.Systems.Animation.Events;
-using OpenBreed.Wecs.Systems.Animation.Extensions;
-using OpenBreed.Wecs.Systems.Audio.Extensions;
-using OpenBreed.Wecs.Systems.Control.Events;
-using OpenBreed.Wecs.Systems.Core.Events;
-using OpenBreed.Wecs.Systems.Core.Extensions;
-using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenBreed.Wecs.Systems.Physics.Extensions;
-using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Animation.Systems.Events;
+using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenBreed.Wecs.Audio.Systems.Extensions;
+using OpenBreed.Wecs.Control.Systems.Events;
+using OpenBreed.Wecs.Core.Systems.Events;
+using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Wecs.Physics.Systems.Events;
+using OpenBreed.Wecs.Physics.Systems.Extensions;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Compute.OpenCL;
 using OpenTK.Graphics.OpenGL;
@@ -32,7 +32,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Systems.Control.Helpers;
+using OpenBreed.Wecs.Control.Systems.Helpers;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {

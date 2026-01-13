@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Core.Components;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 

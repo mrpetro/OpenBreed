@@ -2,7 +2,7 @@
 using OpenBreed.Common.Interface;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Common.Game.Wecs.Components;
-using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -9,18 +9,18 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Systems.Animation.Extensions;
-using OpenBreed.Wecs.Systems.Core.Extensions;
+using OpenBreed.Wecs.Core.Components.Extensions;
+using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Wecs.Systems.Scripting.Extensions;
+using OpenBreed.Wecs.Scripting.Systems.Extensions;
 
-using OpenBreed.Wecs.Systems.Control.Extensions;
+using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Extensions;
 

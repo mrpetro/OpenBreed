@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Wecs.Scripting.Components\OpenBreed.Wecs.Scripting.Components.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Core.Systems\OpenBreed.Wecs.Core.Systems.csproj" />
+  </ItemGroup>
+
+</Project>

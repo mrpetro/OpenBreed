@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Common.Game;
 using OpenBreed.Physics.Interface;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Systems.Physics.Abstractions;
-using OpenBreed.Wecs.Systems.Physics.Helpers;
+using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Physics.Systems.Abstractions;
+using OpenBreed.Wecs.Physics.Systems.Helpers;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Common.Game.Wecs.Systems.Actor

@@ -1,14 +1,14 @@
 ﻿using OpenBreed.Audio.Interface;
 using System;
-using OpenBreed.Wecs.Components.Common.Extensions;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Common.Game.Services;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Wecs.Systems.Rendering.Extensions;
-using OpenBreed.Wecs.Systems.Animation.Extensions;
-using OpenBreed.Wecs.Systems.Audio.Extensions;
-using OpenBreed.Wecs.Systems.Animation.Events;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
+using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenBreed.Wecs.Audio.Systems.Extensions;
+using OpenBreed.Wecs.Animation.Systems.Events;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
 

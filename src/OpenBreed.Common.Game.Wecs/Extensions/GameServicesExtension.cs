@@ -4,9 +4,9 @@ using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Wecs.Abstractions.Extensions;
-using OpenBreed.Wecs.Components.Common.Extensions;
+using OpenBreed.Wecs.Core.Components.Extensions;
 
-using OpenBreed.Wecs.Systems.Core.Extensions;
+using OpenBreed.Wecs.Core.Systems.Extensions;
 
 
 namespace OpenBreed.Common.Game.Wecs.Extensions

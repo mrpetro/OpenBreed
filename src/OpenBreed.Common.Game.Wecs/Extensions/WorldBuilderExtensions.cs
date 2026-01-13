@@ -2,15 +2,15 @@
 using OpenBreed.Common.Game.Wecs.Systems.Actor;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Animation;
-using OpenBreed.Wecs.Systems.Audio;
-using OpenBreed.Wecs.Systems.Control;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems.Core.Extensions;
-using OpenBreed.Wecs.Systems.Gui;
-using OpenBreed.Wecs.Systems.Physics;
-using OpenBreed.Wecs.Systems.Rendering;
-using OpenBreed.Wecs.Systems.Scripting;
+using OpenBreed.Wecs.Animation.Systems;
+using OpenBreed.Wecs.Audio.Systems;
+using OpenBreed.Wecs.Control.Systems;
+using OpenBreed.Wecs.Core.Systems;
+using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Wecs.Gui.Systems;
+using OpenBreed.Wecs.Physics.Systems;
+using OpenBreed.Wecs.Rendering.Systems;
+using OpenBreed.Wecs.Scripting.Systems;
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {

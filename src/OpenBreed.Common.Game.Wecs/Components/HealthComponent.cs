@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Wecs.Components;
-using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Core.Components;
 
 namespace OpenBreed.Common.Game.Wecs.Components
 {

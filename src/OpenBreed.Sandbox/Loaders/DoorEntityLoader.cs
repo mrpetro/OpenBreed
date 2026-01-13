@@ -3,7 +3,7 @@ using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Wecs.Abstractions.Primitives;
-using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders

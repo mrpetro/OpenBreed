@@ -12,6 +12,7 @@
     <ProjectReference Include="..\OpenBreed.Gui.Abstractions\OpenBreed.Gui.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Gui\OpenBreed.Gui.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Abstractions\OpenBreed.Rendering.Abstractions.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Rendering.Systems\OpenBreed.Wecs.Rendering.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 

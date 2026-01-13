@@ -3,11 +3,11 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Abstractions.Events;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Control;
-using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Systems.Control;
-using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Control.Components;
+using OpenBreed.Wecs.Physics.Components;
+using OpenBreed.Wecs.Control.Systems;
+using OpenBreed.Wecs.Control.Systems.Events;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Common.Game.Wecs.Systems

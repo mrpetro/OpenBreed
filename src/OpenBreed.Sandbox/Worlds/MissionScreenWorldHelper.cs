@@ -12,10 +12,10 @@ using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Systems.Animation;
-using OpenBreed.Wecs.Systems.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Rendering.Components;
+using OpenBreed.Wecs.Animation.Systems;
+using OpenBreed.Wecs.Rendering.Systems;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenTK.Mathematics;
 using System.Linq;
 

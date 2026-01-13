@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Common.Game.Wecs.Components;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Physics.Components;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

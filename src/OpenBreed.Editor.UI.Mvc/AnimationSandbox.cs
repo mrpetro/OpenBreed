@@ -13,14 +13,13 @@ using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Components.Animation;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Systems.Animation.Extensions;
-using OpenBreed.Wecs.Systems.Rendering.Extensions;
-using OpenBreed.Wecs.Systems.Rendering.Primitives;
+using OpenBreed.Wecs.Animation.Components;
+using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Rendering.Components;
+using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
+using OpenBreed.Wecs.Rendering.Systems.Primitives;
 
 namespace OpenBreed.Editor.UI.Mvc
 {

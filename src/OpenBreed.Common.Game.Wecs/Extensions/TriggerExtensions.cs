@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Common.Game.Wecs.Events;
-using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Control.Systems.Events;
 using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Core.Abstractions\OpenBreed.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Core.Components\OpenBreed.Wecs.Core.Components.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Physics.Components\OpenBreed.Wecs.Physics.Components.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Core.Systems\OpenBreed.Wecs.Core.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
+  </ItemGroup>
+
+</Project>

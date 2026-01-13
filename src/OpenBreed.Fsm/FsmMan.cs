@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Core.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;

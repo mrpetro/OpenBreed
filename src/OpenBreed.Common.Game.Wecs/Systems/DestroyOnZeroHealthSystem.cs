@@ -3,7 +3,7 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Core.Systems;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
 {

@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Common.Game.Wecs.Components;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Control;
+using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Control.Components;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

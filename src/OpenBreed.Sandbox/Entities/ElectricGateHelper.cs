@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Tools;
 using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Core.Events;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Sandbox.Helpers;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Physics.Components;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities.Xml;

@@ -7,7 +7,7 @@ using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenTK;
 using System.Collections.Generic;

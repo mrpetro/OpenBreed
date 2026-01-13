@@ -9,8 +9,8 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Wecs.Rendering.Components;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using System;
 using System.Linq;
 

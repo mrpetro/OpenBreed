@@ -25,11 +25,11 @@ using OpenBreed.Common.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Wecs.Components.Animation;
-using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Animation.Components;
+using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
-using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Rendering.OpenGL.Managers;
 

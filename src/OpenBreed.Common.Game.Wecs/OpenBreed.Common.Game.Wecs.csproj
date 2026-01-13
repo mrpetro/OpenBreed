@@ -16,15 +16,15 @@
     <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj" />
     <ProjectReference Include="..\OpenBreed.Common.Game\OpenBreed.Common.Game.csproj" />
     <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Components.Control\OpenBreed.Wecs.Components.Control.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Audio\OpenBreed.Wecs.Systems.Audio.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Gui\OpenBreed.Wecs.Systems.Gui.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Scripting\OpenBreed.Wecs.Systems.Scripting.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Control.Components\OpenBreed.Wecs.Control.Components.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Animation.Systems\OpenBreed.Wecs.Animation.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Audio.Systems\OpenBreed.Wecs.Audio.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Control.Systems\OpenBreed.Wecs.Control.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Core.Systems\OpenBreed.Wecs.Core.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Gui.Systems\OpenBreed.Wecs.Gui.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Physics.Systems\OpenBreed.Wecs.Physics.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Rendering.Systems\OpenBreed.Wecs.Rendering.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Scripting.Systems\OpenBreed.Wecs.Scripting.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 

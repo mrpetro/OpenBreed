@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Wecs.Components.Common.Extensions;
-using OpenBreed.Wecs.Systems.Rendering.Extensions;
-using OpenBreed.Wecs.Systems.Animation.Extensions;
-using OpenBreed.Wecs.Systems.Animation.Events;
+using OpenBreed.Wecs.Core.Components.Extensions;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
+using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenBreed.Wecs.Animation.Systems.Events;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
 

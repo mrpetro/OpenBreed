@@ -18,10 +18,10 @@ using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Common.Extensions;
+using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Wecs.Animation.Systems.Extensions;
 using System;
 
 namespace OpenBreed.Sandbox.Systems.Actor
