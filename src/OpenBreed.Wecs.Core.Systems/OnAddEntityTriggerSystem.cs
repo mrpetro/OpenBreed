@@ -29,7 +29,14 @@ namespace OpenBreed.Wecs.Core.Systems
 
         public void OnAddEntity(IWorld world, IEntity entity)
         {
-            entityTriggerMan.TryOnTrigger("EnterWorld", entity, entity);
+            if (entityTriggerMan.TryOnTrigger<IOnAddEntityActionSystem>(
+                "EnterWorld",
+                entity,
+                entity,
+                (system) => system.OnAddEntity(world, entity)))
+            {
+                return;
+            }
         }
 
         #endregion Public Methods

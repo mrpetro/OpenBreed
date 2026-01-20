@@ -34,10 +34,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
+using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class ActorOnExitTriggerSystem : IEntityOnTriggerActionSystem
+    public class OnActorTouchExitTriggerSystem : IOnActorTouchObstacleSystem
     {
         #region Private Fields
 
@@ -47,7 +48,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public ActorOnExitTriggerSystem(
+        public OnActorTouchExitTriggerSystem(
             IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
@@ -64,7 +65,10 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void OnTrigger(IEntity actorEntity, IEntity triggerEntity)
+        public void OnTouch(
+            IFixture actorFixture, IEntity actorEntity,
+            IFixture triggerFixture, IEntity triggerEntity,
+            Vector2 projection)
         {
             // For preventing running rest of the code when actor will hit couple of teleporter blocks at same time
             if (Equals(actorEntity.State, "Exiting"))

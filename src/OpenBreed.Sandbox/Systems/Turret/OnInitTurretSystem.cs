@@ -38,7 +38,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class TurretPrepareOnEnterSystem : IEntityOnTriggerActionSystem
+    public class OnInitTurretSystem : IOnAddEntityActionSystem
     {
         #region Private Fields
 
@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public TurretPrepareOnEnterSystem(IGameServices services)
+        public OnInitTurretSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
@@ -65,10 +65,10 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void OnTrigger(IEntity triggeringEntity, IEntity triggerEntity)
+        public void OnAddEntity(IWorld world, IEntity entity)
         {
-            var cooldownTimerId = triggerEntity.GetTimerId("CooldownDelay");
-            var delayTimerId = triggerEntity.GetTimerId("ActionDeley");
+            var cooldownTimerId = entity.GetTimerId("CooldownDelay");
+            var delayTimerId = entity.GetTimerId("ActionDeley");
 
             var previousDegree = 0.0f;
             var speedFactor = 150.0f;
@@ -76,17 +76,17 @@ namespace OpenBreed.Sandbox.Systems.Actor
             var fireReady = true;
 
             services.Triggers.OnEntityDirectionChanged(
-                triggeringEntity,
+                entity,
                 OnDirectionChanged,
                 false);
 
             services.Triggers.OnTrackingTarget(
-                triggeringEntity,
+                entity,
                 OnTrackingTarget,
                 false);
 
             services.Triggers.OnDestroyed(
-                triggeringEntity,
+                entity,
                 Explode,
                 false);
 

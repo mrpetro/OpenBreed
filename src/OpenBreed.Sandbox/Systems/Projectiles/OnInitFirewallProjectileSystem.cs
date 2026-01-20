@@ -39,7 +39,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnInitFirewallProjectileSystem : IEntityOnTriggerActionSystem
+    public class OnInitFirewallProjectileSystem : IOnAddEntityActionSystem
     {
         #region Private Fields
 
@@ -68,11 +68,11 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void OnTrigger(IEntity targetEntity, IEntity projectileEntity)
+        public void OnAddEntity(IWorld world, IEntity entity)
         {
             var clipName = "Vanilla/Common/Explosion/Small";
             var animId = services.Clips.GetId(clipName);
-            projectileEntity.PlayAnimation(0, animId);
+            entity.PlayAnimation(0, animId);
         }
 
         #endregion Public Methods

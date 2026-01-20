@@ -10,19 +10,27 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Game.Wecs.Systems.Cursor
 {
-    internal class RefreshCursorOnWorldUpdateSystem : IEntityOnTriggerActionSystem
+    internal class RefreshCursorOnWorldUpdateSystem : IOnWorldUpdateActionSystem
     {
+        #region Public Properties
+
         public string TriggerName => "UpdateWorld";
 
         public string ActionName => "RefreshCursor";
 
-        public void OnTrigger(IEntity triggeringEntity, IEntity triggerEntity)
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void OnUpdate(IEntity entity, IWorld world)
         {
-            var pos = triggeringEntity.GetPosition();
+            var pos = entity.GetPosition();
 
             FormattableString text = $"({pos.X:0.0}, {pos.Y:0.0})";
 
-            triggeringEntity.SetText(0, text.ToString(CultureInfo.InvariantCulture));
+            entity.SetText(0, text.ToString(CultureInfo.InvariantCulture));
         }
+
+        #endregion Public Methods
     }
 }

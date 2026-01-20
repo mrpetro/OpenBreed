@@ -202,14 +202,14 @@ namespace OpenBreed.Sandbox.Loaders
             var worldBuilder = worldMan.Create();
             worldBuilder.SetName(dbMap.Id);
 
-            worldBuilder.AddSystem<ActorOnOpenDoorTriggerService>();
-            worldBuilder.AddSystem<ActorOnExitTriggerSystem>();
-            worldBuilder.AddSystem<ActorOnTeleportTriggerSystem>();
-            worldBuilder.AddSystem<ActorOnItemTriggerSystem>();
-            worldBuilder.AddSystem<ActorOnSmartCardTriggerSystem>();
-            worldBuilder.AddSystem<ActorOnLandMineTriggerSystem>();
+            worldBuilder.AddSystem<OnActorTouchDoorTriggerService>();
+            worldBuilder.AddSystem<OnActorTouchExitTriggerSystem>();
+            worldBuilder.AddSystem<OnActorTouchTeleportTriggerSystem>();
+            worldBuilder.AddSystem<OnActorTouchItemTriggerSystem>();
+            worldBuilder.AddSystem<OnActorTouchSmartCardTriggerSystem>();
+            worldBuilder.AddSystem<OnActorTouchLandMineTriggerSystem>();
             worldBuilder.AddSystem<ExplosionOnEnterWorldSystem>();
-            worldBuilder.AddSystem<TurretPrepareOnEnterSystem>();
+            worldBuilder.AddSystem<OnInitTurretSystem>();
             worldBuilder.AddSystem<ActorPrepareMovementOnEnterSystem>();
             worldBuilder.AddSystem<ActorPrepareWeaponsOnEnterSystem>();
             worldBuilder.AddSystem<OnRefractionLazerProjectileHitSystem>();

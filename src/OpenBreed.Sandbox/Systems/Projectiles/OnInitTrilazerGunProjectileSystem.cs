@@ -38,7 +38,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnInitTrilazerGunProjectileSystem : IEntityOnTriggerActionSystem
+    public class OnInitTrilazerGunProjectileSystem : IOnAddEntityActionSystem
     {
         #region Private Fields
 
@@ -67,16 +67,16 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void OnTrigger(IEntity targetEntity, IEntity projectileEntity)
+        public void OnAddEntity(IWorld world, IEntity entity)
         {
-            var dir = projectileEntity.GetThrust().Normalized();
+            var dir = entity.GetThrust().Normalized();
             var degree = MovementTools.SnapToCompass8Degree(dir.X, dir.Y);
             FormattableString animName = $"Vanilla/Common/Projectile/TrilazerGun/High/{degree:0.0}";
             var animId = services.Clips.GetId(animName.ToString(CultureInfo.InvariantCulture));
-            projectileEntity.PlayAnimation(0, animId);
+            entity.PlayAnimation(0, animId);
 
             services.Triggers.OnLifetimeEnd(
-                projectileEntity,
+                entity,
                 Explode,
                 true);
 

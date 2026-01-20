@@ -101,13 +101,6 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
             //{
             //    return;
             //}
-
-            if (entityTriggerMan.TryOnTrigger("ObstacleCollision", obstacleEntity, projectileEntity))
-            {
-                return;
-            }
-
-            scriptMan.TryOnCollision(projectileEntity, obstacleEntity, projection);
         }
 
         #endregion Public Methods

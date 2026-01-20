@@ -2,27 +2,30 @@
 using OpenBreed.Audio.Interface;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Input.Interface.Events;
+using OpenBreed.Physics.Interface;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Events;
-using OpenBreed.Wecs.Abstractions.Primitives;
-using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Animation.Systems.Events;
 using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Extensions;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Events;
 using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
+using OpenTK.Mathematics;
 using System;
 using System.Windows.Controls;
-using OpenBreed.Wecs.Abstractions.Systems;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class ActorOnSmartCardTriggerSystem : IEntityOnTriggerActionSystem
+    public class OnActorTouchSmartCardTriggerSystem : IOnActorTouchObstacleSystem
     {
         #region Private Fields
 
@@ -32,7 +35,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public ActorOnSmartCardTriggerSystem(IGameServices services)
+        public OnActorTouchSmartCardTriggerSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
@@ -48,7 +51,10 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void OnTrigger(IEntity actorEntity, IEntity triggerEntity)
+        public void OnTouch(
+            IFixture actorFixture, IEntity actorEntity,
+            IFixture triggerFixture, IEntity triggerEntity,
+            Vector2 projection)
         {
             var smartCardEntity = triggerEntity;
 

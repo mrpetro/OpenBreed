@@ -40,7 +40,11 @@ namespace OpenBreed.Wecs.Core.Systems
 
             foreach (var entity in entities)
             {
-                entityTriggerMan.TryOnTrigger("UpdateWorld", entity, entity);
+                entityTriggerMan.TryOnTrigger<IOnWorldUpdateActionSystem>(
+                    "UpdateWorld",
+                    entity,
+                    entity,
+                    (system) => system.OnUpdate(entity, world));
             }
         }
 

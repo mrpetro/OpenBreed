@@ -5,6 +5,7 @@ using OpenBreed.Audio.Interface;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Core.Abstractions.Managers;
@@ -16,12 +17,12 @@ using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Core.Components;
-using OpenBreed.Wecs.Core.Components.Extensions;
-using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
+using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Abstractions;
 using OpenBreed.Wecs.Physics.Systems.Helpers;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
@@ -38,7 +39,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class ActorOnLandMineTriggerSystem : IEntityOnTriggerActionSystem
+    public class OnActorTouchLandMineTriggerSystem : IOnActorTouchObstacleSystem
     {
         #region Private Fields
 
@@ -48,7 +49,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public ActorOnLandMineTriggerSystem(
+        public OnActorTouchLandMineTriggerSystem(
             IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
@@ -65,7 +66,10 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void OnTrigger(IEntity actorEntity, IEntity triggerEntity)
+        public void OnTouch(
+            IFixture actorFixture, IEntity actorEntity,
+            IFixture triggerFixture, IEntity triggerEntity,
+            Vector2 projection)
         {
             if (!actorEntity.HasHealth())
             {

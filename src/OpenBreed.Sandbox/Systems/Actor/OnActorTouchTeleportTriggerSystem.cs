@@ -3,10 +3,9 @@ using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
-
 using OpenBreed.Common.Game.Services;
-
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Core.Abstractions.Managers;
@@ -18,15 +17,16 @@ using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
+using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenTK.Mathematics;
 using System;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class ActorOnTeleportTriggerSystem : IEntityOnTriggerActionSystem
+    public class OnActorTouchTeleportTriggerSystem : IOnActorTouchObstacleSystem
     {
         #region Private Fields
 
@@ -36,7 +36,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public ActorOnTeleportTriggerSystem(
+        public OnActorTouchTeleportTriggerSystem(
             IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
@@ -53,7 +53,10 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void OnTrigger(IEntity actorEntity, IEntity triggerEntity)
+        public void OnTouch(
+            IFixture actorFixture, IEntity actorEntity,
+            IFixture triggerFixture, IEntity triggerEntity,
+            Vector2 projection)
         {
             var teleportEntity = triggerEntity;
             var cameraEntity = services.Entities.GetPlayerCamera(actorEntity);

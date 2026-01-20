@@ -1,20 +1,23 @@
-﻿using OpenBreed.Audio.Interface;
-using System;
-using OpenBreed.Wecs.Core.Components.Extensions;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Audio.Interface;
 using OpenBreed.Common.Game.Services;
-using Microsoft.Extensions.Logging;
-using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Wecs.Rendering.Systems.Extensions;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
-using OpenBreed.Wecs.Audio.Systems.Extensions;
-using OpenBreed.Wecs.Animation.Systems.Events;
+using OpenBreed.Common.Game.Wecs.Systems.Projectile;
+using OpenBreed.Physics.Interface;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
+using OpenBreed.Wecs.Animation.Systems.Events;
+using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenBreed.Wecs.Audio.Systems.Extensions;
+using OpenBreed.Wecs.Core.Components.Extensions;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
+using OpenTK.Mathematics;
+using System;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    internal class ActorOnOpenDoorTriggerService : IEntityOnTriggerActionSystem
+    internal class OnActorTouchDoorTriggerService : IOnActorTouchObstacleSystem
     {
         #region Private Fields
 
@@ -24,7 +27,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public ActorOnOpenDoorTriggerService(IGameServices services)
+        public OnActorTouchDoorTriggerService(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
@@ -40,7 +43,10 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void OnTrigger(IEntity actorEntity, IEntity triggerEntity)
+        public void OnTouch(
+            IFixture actorFixture, IEntity actorEntity,
+            IFixture triggerFixture, IEntity triggerEntity,
+            Vector2 projection)
         {
             var doorEntity = triggerEntity;
 

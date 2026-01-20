@@ -36,7 +36,7 @@ using OpenBreed.Wecs.Control.Systems.Helpers;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class ActorPrepareWeaponsOnEnterSystem : IEntityOnTriggerActionSystem
+    public class ActorPrepareWeaponsOnEnterSystem : IOnAddEntityActionSystem
     {
         #region Private Fields
 
@@ -65,10 +65,10 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void OnTrigger(IEntity triggeringEntity, IEntity triggerEntity)
+        public void OnAddEntity(IWorld world, IEntity entity)
         {
-            var cooldownTimerId = triggerEntity.GetTimerId("CooldownDelay");
-            var delayTimerId = triggerEntity.GetTimerId("ActionDeley");
+            var cooldownTimerId = entity.GetTimerId("CooldownDelay");
+            var delayTimerId = entity.GetTimerId("ActionDeley");
             var currentWeaponNo = 0;
             var flamethrowerOffsetIndex = 0;
             var fireReady = true;
@@ -82,13 +82,11 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 { PlayerActions.SwitchWeapon, SwitchToNextWeapon }
             };
 
-            var gameWorld = services.Worlds.GetWorld(triggeringEntity);
+            var gameWorld = services.Worlds.GetWorld(entity);
             var missionEntity = services.Entities.GetMission(gameWorld.Id);
 
-            services.EntityTriggers.TryOnTrigger("HeroEnter", triggerEntity, missionEntity);
-
             services.Triggers.OnEntityAction(
-                    triggerEntity,
+                    entity,
                     CheckAction,
                     false);
 

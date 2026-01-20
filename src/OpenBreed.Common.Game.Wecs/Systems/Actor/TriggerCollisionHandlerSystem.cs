@@ -1,13 +1,14 @@
 ﻿using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Core.Components.Extensions;
-using OpenBreed.Wecs.Scripting.Components;
 using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Abstractions;
+using OpenBreed.Wecs.Scripting.Components;
 using OpenBreed.Wecs.Scripting.Systems.Extensions;
 using OpenTK.Mathematics;
 using System;
@@ -62,11 +63,15 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
 
         #region Public Methods
 
-        public void OnCollision(IFixture actorFixture, IEntity actorEntity, IFixture triggerFixture, IEntity triggerEntity, float dt, Vector2 projection)
+        public void OnCollision(IFixture actorFixture, IEntity actorEntity, IFixture obstacleFixture, IEntity triggerEntity, float dt, Vector2 projection)
         {
             eventsMan.Raise(new ActorCollisionEvent(actorEntity.Id, triggerEntity.Id));
 
-            if (entityTriggerMan.TryOnTrigger("ActorTouch", actorEntity, triggerEntity))
+            if (entityTriggerMan.TryOnTrigger<IOnActorTouchObstacleSystem>(
+                "ActorTouch",
+                actorEntity,
+                triggerEntity,
+                (system) => system.OnTouch(actorFixture, actorEntity, obstacleFixture, triggerEntity, projection)))
             {
                 return;
             }

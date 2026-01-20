@@ -15,7 +15,7 @@ using OpenBreed.Wecs.Abstractions.Systems;
 
 namespace OpenBreed.Sandbox.Systems
 {
-    public class ExplosionOnEnterWorldSystem : IEntityOnTriggerActionSystem
+    public class ExplosionOnEnterWorldSystem : IOnAddEntityActionSystem
     {
         #region Private Fields
 
@@ -38,20 +38,20 @@ namespace OpenBreed.Sandbox.Systems
 
         #region Public Methods
 
-        public void OnTrigger(IEntity triggeringEntity, IEntity triggerEntity)
+        public void OnAddEntity(IWorld world, IEntity entity)
         {
-            var entityMetadata = triggerEntity.GetMetadata();
+            var entityMetadata = entity.GetMetadata();
             var clipName = $"Vanilla/Common/Explosion/{entityMetadata.Flavor}";
             var clipId = services.Clips.GetId(clipName);
 
-            triggerEntity.SetSpriteOn();
+            entity.SetSpriteOn();
 
             services.Triggers.OnEntityAnimFinished(
-                triggerEntity,
+                entity,
                 Erase,
                 true);
 
-            triggerEntity.PlayAnimation(0, clipId);
+            entity.PlayAnimation(0, clipId);
         }
 
         #endregion Public Methods
