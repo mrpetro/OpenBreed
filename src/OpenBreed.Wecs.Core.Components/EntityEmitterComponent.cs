@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Core.Components
 {
@@ -8,13 +9,15 @@ namespace OpenBreed.Wecs.Core.Components
 
     public class EntityEmit
     {
-        public EntityEmit(string templateName, Dictionary<string, object> options)
+        public EntityEmit(Guid id, string templateName, Dictionary<string, object> options)
         {
+            Id = id;
             TemplateName = templateName;
             Options = options;
         }
 
         public string TemplateName { get; }
+        public Guid Id { get; }
         public Dictionary<string, object> Options { get; }
     }
 

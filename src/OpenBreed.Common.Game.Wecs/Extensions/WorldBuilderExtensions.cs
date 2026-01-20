@@ -11,6 +11,7 @@ using OpenBreed.Wecs.Gui.Systems;
 using OpenBreed.Wecs.Physics.Systems;
 using OpenBreed.Wecs.Rendering.Systems;
 using OpenBreed.Wecs.Scripting.Systems;
+using OpenBreed.Common.Game.Wecs.Systems.Cursor;
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {
@@ -52,6 +53,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             builder.AddSystem<AddStaticBodySystem>();
             builder.AddSystem<RemoveStaticBodySystem>();
             builder.AddSystem<OnAddEntityTriggerSystem>();
+            builder.AddSystem<OnWorldUpdateTriggerSystem>();
             builder.AddSystem<SolidCollisionHandlerSystem>();
             builder.AddSystem<SlowdownObstacleCollisionSystem>();
             builder.AddSystem<SlopeObstacleCollisionSystem>();
@@ -68,6 +70,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             builder.AddSystem<TurretTrackingSystem>();
             builder.AddSystem<TurretTrackLockingSystem>();
             builder.AddSystem<TurretTrackUnlockingSystem>();
+            builder.AddSystem<RefreshCursorOnWorldUpdateSystem>();
 
             builder.AddSystem<FollowerSystem>();
             builder.AddSystem<AnimatorSystem>();

@@ -36,6 +36,18 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             Action<IEntity, DestroyedEvent> action,
             bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
 
+        public static void OnTrackingTargetChanged(
+            this ITriggerMan triggerMan,
+            IEntity entity,
+            Action<IEntity, TrackingTargetChangedEvent> action,
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
+
+        public static void OnTrackingTarget(
+            this ITriggerMan triggerMan,
+            IEntity entity,
+            Action<IEntity, TrackingTargetEvent> action,
+            bool singleTime = false) => triggerMan.OnEntityEvent(entity, action, singleTime);
+
         public static void OnDamaged(
             this ITriggerMan triggerMan,
             IEntity entity,

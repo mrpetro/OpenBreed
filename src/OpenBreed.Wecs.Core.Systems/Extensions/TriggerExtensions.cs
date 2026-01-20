@@ -75,10 +75,10 @@ namespace OpenBreed.Wecs.Core.Systems.Extensions
                 singleTime);
         }
 
-        public static void OnEmitEntity(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, EmitEntityEvent> action, bool singleTime = false)
+        public static void OnEmitEntity(this ITriggerMan triggerMan, IEntity entity, Guid emitId, Action<IEntity, EmitEntityEvent> action, bool singleTime = false)
         {
             triggerMan.CreateTrigger<EmitEntityEvent>(
-                (args) => Equals(entity.Id, args.EntityId),
+                (args) => Equals(entity.Id, args.EntityId) && Equals(emitId, args.EmitId),
                 (args) => action.Invoke(entity, args),
                 singleTime);
         }

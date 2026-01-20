@@ -27,9 +27,11 @@ namespace OpenBreed.Wecs.Core.Systems.Extensions
                 return this;
             }
 
-            public void Finish()
+            public Guid Finish()
             {
-                emitterComponent.ToEmit.Add(new EntityEmit(templateName, options.ToDictionary(item => item.Key, item => item.Value)));
+                var newEmit = new EntityEmit(Guid.NewGuid(), templateName, options.ToDictionary(item => item.Key, item => item.Value));
+                emitterComponent.ToEmit.Add(newEmit);
+                return newEmit.Id;
             }
         }
 
@@ -42,7 +44,8 @@ namespace OpenBreed.Wecs.Core.Systems.Extensions
         public static void Emit(this IEntity entity, string templateName)
         {
             var emitComponent = entity.Get<EntityEmitterComponent>();
-            emitComponent.ToEmit.Add(new EntityEmit(templateName, new Dictionary<string, object>()));
+            var newEmit = new EntityEmit(Guid.NewGuid(), templateName, new Dictionary<string, object>());
+            emitComponent.ToEmit.Add(newEmit);
         }
 
         public static int GetSourceEntityId(this IEntity entity)

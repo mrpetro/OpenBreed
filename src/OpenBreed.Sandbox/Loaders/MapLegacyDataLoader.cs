@@ -209,9 +209,17 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddSystem<ActorOnSmartCardTriggerSystem>();
             worldBuilder.AddSystem<ActorOnLandMineTriggerSystem>();
             worldBuilder.AddSystem<ExplosionOnEnterWorldSystem>();
+            worldBuilder.AddSystem<TurretPrepareOnEnterSystem>();
             worldBuilder.AddSystem<ActorPrepareMovementOnEnterSystem>();
             worldBuilder.AddSystem<ActorPrepareWeaponsOnEnterSystem>();
+            worldBuilder.AddSystem<OnRefractionLazerProjectileHitSystem>();
+            worldBuilder.AddSystem<OnDefaultProjectileHitSystem>();
+            worldBuilder.AddSystem<OnInitFirewallProjectileSystem>();
+            worldBuilder.AddSystem<OnInitMissileProjectileSystem>();
+            worldBuilder.AddSystem<OnInitTrilazerGunProjectileSystem>();
+            worldBuilder.AddSystem<OnInitRefractionLazerProjectileSystem>();
             worldBuilder.AddSystem<MissionShowOnHeroEnterSystem>();
+
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);
 

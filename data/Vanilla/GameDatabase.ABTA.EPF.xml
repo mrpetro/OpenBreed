@@ -185,22 +185,10 @@
         <EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <FileDataSource Id="Vanilla/TA.EXE" FilePath="%Cfg.Options.ABTA.GameFolderPath%\ta.exe" />
         <FileDataSource Id="Extension/Scripts/L1/MAP.01.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.lua" />
-        <FileDataSource Id="Extension/Scripts/L1/Turret.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\Turret.lua" />
         <FileDataSource Id="Extension/Scripts/L1/TurretLazer.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\TurretLazer.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Door.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Door.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Projectiles/AssaultGun.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\AssaultGun.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Projectiles/Missile.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\Missile.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Projectiles/TrilazerGun.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\TrilazerGun.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Projectiles/Firewall.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\Firewall.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Projectiles/RefractionLazer.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Projectiles\RefractionLazer.lua" />
         <FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
         <FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
-        <FileDataSource Id="Extension/Scripts/Hud/Cursor.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\Cursor.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Hud/HealthBar.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Hud\HealthBar.lua" />
-        <FileDataSource Id="Extension/Scripts/Entry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\entry.lua" />
-        <FileDataSource Id="Extension/Scripts/SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\SimpleEntry.lua" />
-        <FileDataSource Id="Extension/Scripts/Exit.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Exit.lua" />
-        <FileDataSource Id="Extension/Templates/Logo1.lua" FilePath="%Db.Current.FolderPath%\Templates\Logo1.lua" />
       </Items>
     </DataSources>
     <Images>
@@ -10931,17 +10919,8 @@
         <ScriptFromFile Id="Vanilla/L1/MAP.01">
           <DataRef>Extension/Scripts/L1/MAP.01.lua</DataRef>
         </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/L1/Turret">
-          <DataRef>Extension/Scripts/L1/Turret.lua</DataRef>
-        </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/L1/TurretLazer">
           <DataRef>Extension/Scripts/L1/TurretLazer.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Door">
-          <DataRef>Extension/Scripts/Common/Door.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Item">
-          <DataRef>Extension/Scripts/Common/Item.lua</DataRef>
         </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/Common/SmartCard">
           <DataRef>Extension/Scripts/Common/SmartCard.lua</DataRef>
@@ -10951,27 +10930,6 @@
         </ScriptFromFile>
         <ScriptFromFile Id="EntityTypes.FpsCounter">
           <DataRef>Extension/Scripts/Hud/FpsCounter.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="EntityTypes.Cursor">
-          <DataRef>Extension/Scripts/Hud/Cursor.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Weapons/AssaultGun">
-          <DataRef>Extension/Scripts/Common/Projectiles/AssaultGun.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Weapons/Missile">
-          <DataRef>Extension/Scripts/Common/Projectiles/Missile.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Weapons/TrilazerGun">
-          <DataRef>Extension/Scripts/Common/Projectiles/TrilazerGun.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Weapons/RefractionLazer">
-          <DataRef>Extension/Scripts/Common/Projectiles/RefractionLazer.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Weapons/Firewall">
-          <DataRef>Extension/Scripts/Common/Projectiles/Firewall.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Scripts.Entry.lua">
-          <DataRef>Extension/Scripts/Entry.lua</DataRef>
         </ScriptFromFile>
         <ScriptFromFile Id="Vanilla/Common/Hud/HealthBar">
           <DataRef>Extension/Scripts/Common/Hud/HealthBar.lua</DataRef>

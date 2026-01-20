@@ -152,7 +152,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
                     thrust = thrust + perp * flamethrowerOffset * speedFactor;
 
-                    emitter.SetOption("thrustX", thrust.X)
+                    var emitId = emitter.SetOption("thrustX", thrust.X)
                         .SetOption("thrustY", thrust.Y)
                         .Finish();
                 }

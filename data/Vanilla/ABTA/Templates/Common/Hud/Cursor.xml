@@ -5,9 +5,11 @@
 			<Name>Cursor</Name>
 		</Metadata>
 		<Position X="$(posX)" Y="$(posY)" />
-		<Script>
-			<ScriptId>EntityTypes.Cursor</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="UpdateWorld" Action="RefreshCursor" />
+            </Actions>
+		</OnTrigger>
 		<Cursor>
 		</Cursor>
 		<EntityEmitter>

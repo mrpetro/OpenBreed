@@ -14,19 +14,21 @@ namespace OpenBreed.Wecs.Core.Systems.Events
     {
         #region Public Constructors
 
-        public EmitEntityEvent(int entityId, int emiterEntityId)
+        public EmitEntityEvent(int entityId, Guid emitId, int emittedEntityId)
             : base(entityId)
         {
-            EmiterEntityId = emiterEntityId;
+            EmitId = emitId;
+            EmittedEntityId = emittedEntityId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int EmiterEntityId { get; }
+        public Guid EmitId { get; }
+
+        public int EmittedEntityId { get; }
 
         #endregion Public Properties
     }
-
 }

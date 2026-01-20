@@ -20,9 +20,12 @@
 		<Lifetime>
 			<TimeLeft>5.0</TimeLeft>
 		</Lifetime>
-		<Script>
-			<ScriptId>Vanilla/Common/Weapons/Missile</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="ObstacleCollision" Action="ProjectileHit" />
+                <Action Trigger="EnterWorld" Action="MissileProjectileInit" />
+            </Actions>
+		</OnTrigger>
 		<EntityEmitter>
 		</EntityEmitter>
 		<Sprite>

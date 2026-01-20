@@ -32,9 +32,11 @@
 		</Body>
 		<EntityEmitter>
 		</EntityEmitter>
-		<Script>
-			<ScriptId>Vanilla/L1/Turret</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="EnterWorld" Action="PrepareTurret" />
+            </Actions>
+		</OnTrigger>
 		<Position X="$(startX)" Y="$(startY)" />
 		<AngularPosition>
 			<Value>0</Value>

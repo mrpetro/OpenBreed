@@ -4,6 +4,7 @@ using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Primitives;
+using OpenBreed.Wecs.Services;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -204,7 +205,9 @@ namespace OpenBreed.Wecs.Worlds
             context.UpdateDeltaTime(dt);
 
             foreach (var item in Systems.OfType<IUpdatableSystem>())
+            {
                 item.Update(context);
+            }
         }
 
         #endregion Internal Methods

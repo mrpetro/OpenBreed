@@ -11,6 +11,7 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Wecs.Physics.Systems;
 using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
@@ -53,6 +54,7 @@ namespace OpenBreed.Wecs.Extensions
                 services.AddSingleton<ISystemInitializer, DefaultSystemInitializer>();
                 services.AddScoped<IEntityTriggerMan, EntityTriggerMan>();
                 services.AddSingleton<ISystemInitializer, EntityTriggerSystemInitializer>();
+                services.AddSingleton<ISystemInitializer, ActionOnTriggerSystemInitializer>();
             });
         }
 

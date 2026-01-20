@@ -20,9 +20,12 @@
 		<Lifetime>
 			<TimeLeft>2.2</TimeLeft>
 		</Lifetime>
-		<Script>
-			<ScriptId>Vanilla/Common/Weapons/RefractionLazer</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="ObstacleCollision" Action="RefractionLazerProjectileOnHit" />
+                <Action Trigger="EnterWorld" Action="RefractionLazerProjectileInit" />
+            </Actions>
+		</OnTrigger>
 		<EntityEmitter>
 		</EntityEmitter>
 		<Sprite>
