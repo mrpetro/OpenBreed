@@ -36,7 +36,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class ActorPrepareMovementOnEnterSystem : IOnAddEntityActionSystem
+    public class OnActorInitPrepareMovementSystem : IOnAddEntityActionSystem
     {
         #region Private Fields
 
@@ -46,7 +46,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public ActorPrepareMovementOnEnterSystem(IGameServices services)
+        public OnActorInitPrepareMovementSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
@@ -67,11 +67,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
         {
             var cooldownTimerId = entity.GetTimerId("CooldownDelay");
             var delayTimerId = entity.GetTimerId("ActionDeley");
-
-            var gameWorld = services.Worlds.GetWorld(entity);
-            var missionEntity = services.Entities.GetMission(gameWorld.Id);
-
-            services.EntityTriggers.TryOnTrigger("HeroEnter", entity, missionEntity);
 
             services.Triggers.OnEntityDirectionChanged(
                 entity,

@@ -22,7 +22,7 @@ using OpenBreed.Wecs.Abstractions.Systems;
 
 namespace OpenBreed.Sandbox.Systems.Mission
 {
-    internal class MissionShowOnHeroEnterSystem : IEntityOnTriggerActionSystem
+    internal class OnActorInitShowMissionSystem : IOnAddEntityActionSystem
     {
         #region Private Fields
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Sandbox.Systems.Mission
 
         #region Public Constructors
 
-        public MissionShowOnHeroEnterSystem(IGameServices services)
+        public OnActorInitShowMissionSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
@@ -41,17 +41,17 @@ namespace OpenBreed.Sandbox.Systems.Mission
 
         #region Public Properties
 
-        public string TriggerName => "HeroEnter";
+        public string TriggerName => "EnterWorld";
 
-        public string ActionName => "Show";
+        public string ActionName => "ShowMission";
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void OnTrigger(IEntity triggeringEntity, IEntity triggerEntity)
+        public void OnAddEntity(IWorld world, IEntity entity)
         {
-            var playerCharacterEntity = triggeringEntity;
+            var playerCharacterEntity = entity;
 
             if (Equals(playerCharacterEntity.State, "MissionShowing"))
             {
@@ -62,8 +62,7 @@ namespace OpenBreed.Sandbox.Systems.Mission
             {
                 return;
             }
-
-            var missionEntity = triggerEntity;
+            var missionEntity = services.Entities.GetMission(world.Id);
 
             var gameCameraEntity = services.Entities.GetPlayerCamera(playerCharacterEntity);
             var missionScreenCameraEntity = services.Entities.GetMissionScreenCamera();

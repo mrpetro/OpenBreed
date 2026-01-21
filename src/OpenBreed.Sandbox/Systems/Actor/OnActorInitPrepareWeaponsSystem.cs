@@ -36,7 +36,7 @@ using OpenBreed.Wecs.Control.Systems.Helpers;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class ActorPrepareWeaponsOnEnterSystem : IOnAddEntityActionSystem
+    public class OnActorInitPrepareWeaponsSystem : IOnAddEntityActionSystem
     {
         #region Private Fields
 
@@ -47,7 +47,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public ActorPrepareWeaponsOnEnterSystem(IGameServices services, IWeaponMan weaponMan)
+        public OnActorInitPrepareWeaponsSystem(IGameServices services, IWeaponMan weaponMan)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
             this.weaponMan = weaponMan ?? throw new ArgumentNullException(nameof(weaponMan));

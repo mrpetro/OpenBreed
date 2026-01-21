@@ -53,7 +53,6 @@ namespace OpenBreed.Wecs.Extensions
                 services.AddTransient<WorldBuilder>();
                 services.AddSingleton<ISystemInitializer, DefaultSystemInitializer>();
                 services.AddScoped<IEntityTriggerMan, EntityTriggerMan>();
-                services.AddSingleton<ISystemInitializer, EntityTriggerSystemInitializer>();
                 services.AddSingleton<ISystemInitializer, ActionOnTriggerSystemInitializer>();
             });
         }
