@@ -87,5 +87,7 @@
 		<Keys>
 			<GeneralCount>15</GeneralCount>
 		</Keys>
+		<Weapons>
+		</Weapons>
     </Components>
 </EntityTemplate>

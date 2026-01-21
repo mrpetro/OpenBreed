@@ -64,6 +64,24 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             return entity.Get<TrackingComponent>().EntityId;
         }
 
+        public static int NextWeapon(this IEntity entity)
+        {
+            var weapons = entity.Get<WeaponsComponent>();
+
+            var currentWeaponNo = weapons.CurrentWeaponNo;
+
+            currentWeaponNo++;
+
+            if (currentWeaponNo > 4)
+            {
+                currentWeaponNo = 1;
+            }
+
+            weapons.CurrentWeaponNo = currentWeaponNo;
+            weapons.CurrentWeaponState = 0;
+            return currentWeaponNo;
+        }
+
         public static bool HasTrackedEntity(this IEntity entity)
         {
             return entity.Get<TrackingComponent>().EntityId != -1;

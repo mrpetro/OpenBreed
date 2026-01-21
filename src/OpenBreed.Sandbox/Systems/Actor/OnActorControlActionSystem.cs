@@ -1,45 +1,32 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Audio.Interface;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
-using OpenBreed.Common.Game.Wecs.Events;
-using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Wecs.Abstractions.Primitives;
-using OpenBreed.Wecs.Core.Components.Extensions;
-using OpenBreed.Wecs.Events;
-using OpenBreed.Wecs.Abstractions.Extensions;
-using OpenBreed.Wecs.Animation.Systems.Events;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
-using OpenBreed.Wecs.Audio.Systems.Extensions;
+using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Control.Systems.Events;
+using OpenBreed.Wecs.Control.Systems.Helpers;
 using OpenBreed.Wecs.Core.Systems.Events;
-using OpenBreed.Wecs.Core.Systems.Extensions;
-using OpenBreed.Wecs.Physics.Systems.Events;
-using OpenBreed.Wecs.Physics.Systems.Extensions;
-using OpenBreed.Wecs.Rendering.Systems.Extensions;
-using OpenBreed.Wecs.Worlds;
-using OpenTK.Compute.OpenCL;
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Xml.Linq;
-using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Control.Systems.Helpers;
+using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Wecs.Core.Components.Extensions;
+using OpenTK.Mathematics;
+using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnActorInitPrepareWeaponsSystem : IOnAddEntityActionSystem
+    public class OnActorControlActionSystem : IEventSystem<EntityActionEvent<PlayerActions>>
     {
         #region Private Fields
 
+        private const int fireCooldownTime = 1000;
+        private static readonly int[] flamethrowerOffsets = [0, 1, 2, 1, 0, -1, -2, -1];
         private readonly IGameServices services;
         private readonly IWeaponMan weaponMan;
 
@@ -47,7 +34,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public OnActorInitPrepareWeaponsSystem(IGameServices services, IWeaponMan weaponMan)
+        public OnActorControlActionSystem(IGameServices services, IWeaponMan weaponMan)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
             this.weaponMan = weaponMan ?? throw new ArgumentNullException(nameof(weaponMan));
@@ -55,52 +42,57 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public string TriggerName => "EnterWorld";
-
-        public string ActionName => "PrepareWeapons";
-
-        #endregion Public Properties
-
         #region Public Methods
 
-        public void OnAddEntity(IWorld world, IEntity entity)
+        public void Update(EntityActionEvent<PlayerActions> e)
         {
+            var entity = services.Entities.GetById(e.EntityId);
+
             var cooldownTimerId = entity.GetTimerId("CooldownDelay");
             var delayTimerId = entity.GetTimerId("ActionDeley");
-            var currentWeaponNo = 0;
-            var flamethrowerOffsetIndex = 0;
-            var fireReady = true;
-            var fireCooldownTime = 1000;
             var speedFactor = 30;
 
-            int[] flamethrowerOffsets = [0, 1, 2, 1, 0, -1, -2, -1];
+            switch (e.ActionCode)
+            {
+                case PlayerActions.Fire:
+                    FireBullet(entity);
+                    break;
 
-            var actions = new Dictionary<PlayerActions, Action<IEntity>> {
-                { PlayerActions.Fire, FireBullet },
-                { PlayerActions.SwitchWeapon, SwitchToNextWeapon }
-            };
+                case PlayerActions.SwitchWeapon:
+                    SwitchToNextWeapon(entity);
+                    break;
+
+                default:
+                    break;
+            }
 
             var gameWorld = services.Worlds.GetWorld(entity);
             var missionEntity = services.Entities.GetMission(gameWorld.Id);
 
-            services.Triggers.OnEntityAction(
-                    entity,
-                    CheckAction,
-                    false);
-
             void CooldownFinish(IEntity entity, TimerElapsedEventArgs e)
             {
-                fireReady = true;
+                entity.Get<WeaponsComponent>().FireReady = true;
+            }
+
+            void SwitchToNextWeapon(IEntity entity)
+            {
+                var currentWraponNo = entity.NextWeapon();
+
+                var currentWeapon = weaponMan.GetWeapon(currentWraponNo);
+
+                services.Logger.LogInformation("Switching weapon to: {0}", currentWeapon.Name);
             }
 
             void FireBullet(IEntity entity)
             {
-                if (!fireReady)
+                var weapons = entity.Get<WeaponsComponent>();
+
+                if (!weapons.FireReady)
                 {
                     return;
                 }
+
+                var currentWeaponNo = weapons.CurrentWeaponNo;
 
                 var currentWeapon = weaponMan.GetWeapon(currentWeaponNo);
 
@@ -136,14 +128,18 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 }
                 else if (currentWeapon.Name == "Flamethrower")
                 {
-                    flamethrowerOffsetIndex++;
+                    var weaponState = weapons.CurrentWeaponState;
 
-                    if (flamethrowerOffsetIndex > 7)
+                    weaponState++;
+
+                    if (weaponState > 7)
                     {
-                        flamethrowerOffsetIndex = 1;
+                        weaponState = 1;
                     }
 
-                    var flamethrowerOffset = flamethrowerOffsets[flamethrowerOffsetIndex];
+                    var flamethrowerOffset = flamethrowerOffsets[weaponState];
+
+                    weapons.CurrentWeaponState = weaponState;
 
                     var perp = new Vector2(thrust.Y, -thrust.X);
                     perp.Normalize();
@@ -161,38 +157,14 @@ namespace OpenBreed.Sandbox.Systems.Actor
                         .Finish();
                 }
 
-                fireReady = false;
+                weapons.FireReady = false;
+
                 services.Triggers.AfterDelay(
                     entity,
                     cooldownTimerId,
-                    TimeSpan.FromMilliseconds(1000 / currentWeapon.FireRate),
-                    CooldownFinish, singleTime: true);
-            }
-
-            void SwitchToNextWeapon(IEntity entity)
-            {
-                currentWeaponNo++;
-
-                if (currentWeaponNo > 4)
-                {
-                    currentWeaponNo = 1;
-                }
-
-                var currentWeapon = weaponMan.GetWeapon(currentWeaponNo);
-
-                services.Logger.LogInformation("Switching weapon to: {0}", currentWeapon.Name);
-            }
-
-            void CheckAction(IEntity entity, EntityActionEvent<PlayerActions> e)
-            {
-                if (actions.TryGetValue(e.ActionCode, out var func))
-                {
-                    func.Invoke(entity);
-                }
-                else
-                {
-                    services.Logger.LogError("Missing implementation for action: {0}", e.ActionCode);
-                }
+                    TimeSpan.FromMilliseconds(fireCooldownTime / currentWeapon.FireRate),
+                    CooldownFinish,
+                    singleTime: true);
             }
         }
 

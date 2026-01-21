@@ -219,7 +219,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddSystem<OnInitTrilazerGunProjectileSystem>();
             worldBuilder.AddSystem<OnInitRefractionLazerProjectileSystem>();
             worldBuilder.AddSystem<OnActorInitShowMissionSystem>();
-
+            worldBuilder.AddSystem<OnActorControlActionSystem>();
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);
 

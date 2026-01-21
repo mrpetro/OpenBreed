@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="Entities\electricgate\**" />
+    <Compile Remove="Systems\Mission\**" />
     <EmbeddedResource Remove="Entities\electricgate\**" />
+    <EmbeddedResource Remove="Systems\Mission\**" />
     <None Remove="Entities\electricgate\**" />
+    <None Remove="Systems\Mission\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,7 +80,6 @@
 
   <ItemGroup>
     <Folder Include="Factories\" />
-    <Folder Include="Systems\Mission\" />
   </ItemGroup>
 
 </Project>
