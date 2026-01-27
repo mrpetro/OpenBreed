@@ -20,9 +20,12 @@
 		<Lifetime>
 			<TimeLeft>5.0</TimeLeft>
 		</Lifetime>
-		<Script>
-			<ScriptId>Vanilla/L1/TurretLazer</ScriptId>
-		</Script>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="ObstacleCollision" Action="ProjectileHit" />
+                <Action Trigger="EnterWorld" Action="TurretLazerProjectileInit" />
+            </Actions>
+		</OnTrigger>
 		<EntityEmitter>
 		</EntityEmitter>
 		<Sprite>

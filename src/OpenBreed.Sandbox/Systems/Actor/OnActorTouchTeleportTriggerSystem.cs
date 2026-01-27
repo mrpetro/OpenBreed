@@ -3,7 +3,6 @@ using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
-using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 using OpenBreed.Common.Interface;

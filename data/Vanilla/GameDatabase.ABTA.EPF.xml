@@ -185,7 +185,6 @@
         <EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <FileDataSource Id="Vanilla/TA.EXE" FilePath="%Cfg.Options.ABTA.GameFolderPath%\ta.exe" />
         <FileDataSource Id="Extension/Scripts/L1/MAP.01.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.lua" />
-        <FileDataSource Id="Extension/Scripts/L1/TurretLazer.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\TurretLazer.lua" />
         <FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
         <FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
         <FileDataSource Id="Extension/Scripts/Common/Hud/HealthBar.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Hud\HealthBar.lua" />
@@ -10918,12 +10917,6 @@
       <Items>
         <ScriptFromFile Id="Vanilla/L1/MAP.01">
           <DataRef>Extension/Scripts/L1/MAP.01.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/L1/TurretLazer">
-          <DataRef>Extension/Scripts/L1/TurretLazer.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/SmartCard">
-          <DataRef>Extension/Scripts/Common/SmartCard.lua</DataRef>
         </ScriptFromFile>
         <ScriptFromFile Id="Common/Hud/Fps/Update">
           <DataRef>Extension/Scripts/Hud/FpsUpdate.lua</DataRef>
