@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Core.Systems
 {
-    public abstract class UpdatableMatchingSystemBase : IMatchingSystem, IUpdatableSystem
+    public abstract class UpdatableMatchingSystemBase : IUpdatableSystem
     {
         private readonly IWorldMan worldMan;
 

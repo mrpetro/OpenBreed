@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Core.Systems
     /// </summary>
     [RequireEntityWith(typeof(LifetimeComponent))]
     [SystemCategory(CommonCategories.General)]
-    public class LifetimeSystem : IMatchingSystem, IUpdatableSystem
+    public class LifetimeSystem : IUpdatableSystem
     {
         #region Private Fields
 

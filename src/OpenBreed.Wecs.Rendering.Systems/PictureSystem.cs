@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Rendering.Systems
         typeof(PictureComponent),
         typeof(PositionComponent))]
     [SystemCategory(CommonCategories.Rendering)]
-    public class PictureSystem : IMatchingSystem, IRenderableSystem
+    public class PictureSystem : IRenderableSystem
     {
         #region Public Constructors
 

@@ -9,7 +9,7 @@ namespace OpenBreed.Wecs.Physics.Systems
     [RequireEntityWith(
         typeof(CollisionComponent))]
     [SystemCategory(CommonCategories.Physics)]
-    public class RemoveDynamicBodySystem : IMatchingSystem, IEventSystem<EntityLeftEvent>
+    public class RemoveDynamicBodySystem : IEventSystem<EntityLeftEvent>
     {
         #region Private Fields
 

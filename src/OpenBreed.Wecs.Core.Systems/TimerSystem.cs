@@ -9,7 +9,7 @@ namespace OpenBreed.Wecs.Core.Systems
 {
     [RequireEntityWith(typeof(TimerComponent))]
     [SystemCategory(CommonCategories.General)]
-    public class TimerSystem : IMatchingSystem, IUpdatableSystem
+    public class TimerSystem : IUpdatableSystem
     {
         #region Private Fields
 

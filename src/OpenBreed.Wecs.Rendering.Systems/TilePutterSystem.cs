@@ -9,7 +9,7 @@ namespace OpenBreed.Wecs.Rendering.Systems
         typeof(TilePutterComponent),
         typeof(TileGridComponent))]
     [SystemCategory(CommonCategories.Rendering)]
-    public class TilePutterSystem : IMatchingSystem, IUpdatableSystem
+    public class TilePutterSystem : IUpdatableSystem
     {
         #region Private Fields
 

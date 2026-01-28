@@ -8,7 +8,7 @@ namespace OpenBreed.Wecs.Core.Systems
 {
     [RequireEntityWith(typeof(FrameComponent))]
     [SystemCategory(CommonCategories.General)]
-    public class FrameSystem : IMatchingSystem, IUpdatableSystem
+    public class FrameSystem : IUpdatableSystem
     {
         #region Private Fields
 

@@ -8,7 +8,7 @@ namespace OpenBreed.Wecs.Rendering.Systems
         typeof(StampPutterComponent),
         typeof(TileGridComponent))]
     [SystemCategory(CommonCategories.Rendering)]
-    public class StampPutterSystem : IUpdatableSystem, IMatchingSystem
+    public class StampPutterSystem : IUpdatableSystem
     {
         #region Private Fields
 

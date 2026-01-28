@@ -8,7 +8,7 @@ namespace OpenBreed.Wecs.Physics.Systems
     [RequireEntityWith(
         typeof(CollisionComponent))]
     [SystemCategory(CommonCategories.Physics)]
-    public class UpdateDynamicBodySystem : IMatchingSystem, IUpdatableSystem
+    public class UpdateDynamicBodySystem : IUpdatableSystem
     {
         #region Private Fields
 

@@ -28,8 +28,8 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Fields
 
-        private readonly Dictionary<IEntity, HashSet<IMatchingSystem>> entitiesToSystemsLookup = new Dictionary<IEntity, HashSet<IMatchingSystem>>();
-        private readonly Dictionary<IMatchingSystem, HashSet<IEntity>> systemToEntriesLookup = new Dictionary<IMatchingSystem, HashSet<IEntity>>();
+        private readonly Dictionary<IEntity, HashSet<ISystem>> entitiesToSystemsLookup = new Dictionary<IEntity, HashSet<ISystem>>();
+        private readonly Dictionary<ISystem, HashSet<IEntity>> systemToEntriesLookup = new Dictionary<ISystem, HashSet<IEntity>>();
 
         private readonly IEntityToSystemMatcher entityToSystemMatcher;
         private readonly UpdateContext context;
@@ -90,7 +90,7 @@ namespace OpenBreed.Wecs.Worlds
             return $"World:{Name}";
         }
 
-        public T GetSystem<T>() where T : IMatchingSystem
+        public T GetSystem<T>() where T : ISystem
         {
             return Systems.OfType<T>().FirstOrDefault();
         }
@@ -125,7 +125,7 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        public IEnumerable<IEntity> GetMatchingEntities(IMatchingSystem system)
+        public IEnumerable<IEntity> GetMatchingEntities(ISystem system)
         {
             //foreach (var entity in entitiesToSystemsLookup)
             //{
@@ -144,7 +144,7 @@ namespace OpenBreed.Wecs.Worlds
             }
         }
 
-        public bool HasSystemEntityCached(IMatchingSystem system, IEntity entity)
+        public bool HasSystemEntityCached(ISystem system, IEntity entity)
         {
             if (!systemToEntriesLookup.TryGetValue(system, out HashSet<IEntity> entities))
             {
@@ -156,7 +156,7 @@ namespace OpenBreed.Wecs.Worlds
 
         public void UpdateSystemsCache(IEntity entity)
         {
-            foreach (var system in Systems.OfType<IMatchingSystem>())
+            foreach (var system in Systems.OfType<ISystem>())
             {
                 var areMatching = entityToSystemMatcher.AreMatch(system, entity);
 
@@ -166,7 +166,7 @@ namespace OpenBreed.Wecs.Worlds
                     {
                         DecacheEntityFromSystem(entity, system);
 
-                        if (entitiesToSystemsLookup.TryGetValue(entity, out HashSet<IMatchingSystem> systems))
+                        if (entitiesToSystemsLookup.TryGetValue(entity, out HashSet<ISystem> systems))
                         {
                             systems.Remove(system);
                         }
@@ -180,9 +180,9 @@ namespace OpenBreed.Wecs.Worlds
                     {
                         CacheEntityToSystem(entity, system);
 
-                        if (!entitiesToSystemsLookup.TryGetValue(entity, out HashSet<IMatchingSystem> systems))
+                        if (!entitiesToSystemsLookup.TryGetValue(entity, out HashSet<ISystem> systems))
                         {
-                            systems = new HashSet<IMatchingSystem>();
+                            systems = new HashSet<ISystem>();
                             entitiesToSystemsLookup.Add(entity, systems);
                         }
 
@@ -214,7 +214,7 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Methods
 
-        private void CacheEntityToSystem(IEntity entity, IMatchingSystem system)
+        private void CacheEntityToSystem(IEntity entity, ISystem system)
         {
             if (!systemToEntriesLookup.TryGetValue(system, out HashSet<IEntity> entities))
             {
@@ -225,7 +225,7 @@ namespace OpenBreed.Wecs.Worlds
             entities.Add(entity);
         }
 
-        private void DecacheEntityFromSystem(IEntity entity, IMatchingSystem system)
+        private void DecacheEntityFromSystem(IEntity entity, ISystem system)
         {
             if (!systemToEntriesLookup.TryGetValue(system, out HashSet<IEntity> entities))
             {
@@ -235,9 +235,9 @@ namespace OpenBreed.Wecs.Worlds
             entities.Remove(entity);
         }
 
-        private IEnumerable<IMatchingSystem> GetMatchingSystems(IEntity entity)
+        private IEnumerable<ISystem> GetMatchingSystems(IEntity entity)
         {
-            foreach (var system in Systems.OfType<IMatchingSystem>())
+            foreach (var system in Systems.OfType<ISystem>())
             {
                 if (entityToSystemMatcher.AreMatch(system, entity))
                 {
@@ -248,7 +248,7 @@ namespace OpenBreed.Wecs.Worlds
 
         private void RemoveFromAllSystems(IEntity entity)
         {
-            if (!entitiesToSystemsLookup.TryGetValue(entity, out HashSet<IMatchingSystem> systems))
+            if (!entitiesToSystemsLookup.TryGetValue(entity, out HashSet<ISystem> systems))
             {
                 throw new InvalidOperationException();
             }

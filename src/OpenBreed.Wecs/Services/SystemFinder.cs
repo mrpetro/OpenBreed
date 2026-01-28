@@ -22,7 +22,7 @@
 
         #region Public Methods
 
-        public T GetSystemByEntityId<T>(int entityId) where T : IMatchingSystem
+        public T GetSystemByEntityId<T>(int entityId) where T : ISystem
         {
             var entity = entityMan.GetById(entityId);
             if (entity.WorldId == -1)
@@ -37,7 +37,7 @@
             return system;
         }
 
-        public T GetSystemByWorldId<T>(int worldId) where T : IMatchingSystem
+        public T GetSystemByWorldId<T>(int worldId) where T : ISystem
         {
             var world = worldMan.GetById(worldId);
             if (world == null)

@@ -13,7 +13,7 @@
         /// <param name="system">System that is being matched</param>
         /// <param name="entity">Entity that is being matched</param>
         /// <returns>True if system and entity are matching, false otherwise</returns>
-        bool AreMatch(IMatchingSystem system, IEntity entity);
+        bool AreMatch(ISystem system, IEntity entity);
 
         #endregion Public Methods
     }

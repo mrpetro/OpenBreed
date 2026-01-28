@@ -7,7 +7,7 @@ namespace OpenBreed.Wecs.Rendering.Systems
     [RequireEntityWith(
         typeof(TileGridComponent))]
     [SystemCategory(CommonCategories.Rendering)]
-    public class TileRenderSystem : IMatchingSystem, IRenderableSystem
+    public class TileRenderSystem : IRenderableSystem
     {
         #region Public Constructors
 

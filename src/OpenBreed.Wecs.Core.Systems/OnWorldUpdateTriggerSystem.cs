@@ -9,7 +9,7 @@ namespace OpenBreed.Wecs.Core.Systems
 {
     [RequireEntityWith(typeof(OnTriggerComponent))]
     [SystemCategory(CommonCategories.General)]
-    public class OnWorldUpdateTriggerSystem : IUpdatableSystem, IMatchingSystem
+    public class OnWorldUpdateTriggerSystem : IUpdatableSystem
     {
         private readonly IWorldMan worldMan;
         #region Private Fields

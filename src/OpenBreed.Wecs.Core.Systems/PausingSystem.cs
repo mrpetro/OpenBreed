@@ -7,7 +7,7 @@ namespace OpenBreed.Wecs.Core.Systems
 {
     [RequireEntityWith(typeof(PauserComponent))]
     [SystemCategory(CommonCategories.General)]
-    public class PausingSystem : IMatchingSystem, IUpdatableSystem
+    public class PausingSystem : IUpdatableSystem
     {
         #region Private Fields
 

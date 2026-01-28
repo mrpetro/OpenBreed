@@ -11,7 +11,7 @@ namespace OpenBreed.Wecs.Rendering.Systems
         typeof(SpriteComponent),
         typeof(PositionComponent))]
     [SystemCategory(CommonCategories.Rendering)]
-    public class SpriteSystem : IMatchingSystem, IRenderableSystem
+    public class SpriteSystem : IRenderableSystem
     {
         #region Private Fields
 

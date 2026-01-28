@@ -10,7 +10,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
     [RequireEntityWith(
         typeof(PositionComponent),
         typeof(GroupComponent))]
-    public class GroupMapCellDisplaySystem : IMatchingSystem, IRenderableSystem
+    public class GroupMapCellDisplaySystem : IRenderableSystem
     {
         #region Private Fields
 

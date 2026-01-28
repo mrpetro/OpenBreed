@@ -8,7 +8,7 @@ namespace OpenBreed.Wecs.Core.Systems
         typeof(TextCaretComponent),
         typeof(TextDataComponent))]
     [SystemCategory(CommonCategories.General)]
-    public class TextInputSystem : IMatchingSystem, IUpdatableSystem
+    public class TextInputSystem : IUpdatableSystem
     {
         #region Private Fields
 

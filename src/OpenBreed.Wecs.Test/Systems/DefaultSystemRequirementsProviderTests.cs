@@ -65,7 +65,7 @@ namespace OpenBreed.Wecs.Test.Systems
         {
             // Arrange
             var provider = this.CreateProvider();
-            var mockSystem = mockRepository.Create<IMatchingSystem>();
+            var mockSystem = mockRepository.Create<ISystem>();
             var systemType = mockSystem.Object.GetType();
             mockTypeAttributesProvider.Setup(item => item.GetAttributes(systemType)).Returns(Array.Empty<object>);
             // Act

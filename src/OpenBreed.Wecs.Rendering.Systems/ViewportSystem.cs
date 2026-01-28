@@ -23,7 +23,7 @@ namespace OpenBreed.Wecs.Rendering.Systems
         typeof(ViewportComponent),
         typeof(PositionComponent))]
     [SystemCategory(CommonCategories.Rendering)]
-    public class ViewportSystem : IMatchingSystem, IRenderableSystem
+    public class ViewportSystem : IRenderableSystem
     {
         #region Private Fields
 

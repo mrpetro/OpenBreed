@@ -16,11 +16,8 @@ namespace OpenBreed.Wecs.Physics.Systems
 
         public void Initialize(IServiceProvider serviceProvider, ISystem system)
         {
-            if (system is IMatchingSystem)
-            {
-                var systemRequirementsProvider = serviceProvider.GetRequiredService<ISystemRequirementsProvider>();
-                systemRequirementsProvider.RegisterRequirements(system.GetType());
-            }
+            var systemRequirementsProvider = serviceProvider.GetRequiredService<ISystemRequirementsProvider>();
+            systemRequirementsProvider.RegisterRequirements(system.GetType());
 
             if (system is IOnEntityCollisionSystem onEntityCollisionSystem)
             {

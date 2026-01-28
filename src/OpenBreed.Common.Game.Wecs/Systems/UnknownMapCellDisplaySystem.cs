@@ -11,7 +11,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
     [RequireEntityWith(
         typeof(PositionComponent),
         typeof(UnknownCodeComponent))]
-    public class UnknownMapCellDisplaySystem : IMatchingSystem, IRenderableSystem
+    public class UnknownMapCellDisplaySystem : IRenderableSystem
     {
         #region Private Fields
 

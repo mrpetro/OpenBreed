@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Rendering.Systems
         typeof(TextPresentationComponent),
         typeof(PositionComponent))]
     [SystemCategory(CommonCategories.Rendering)]
-    public class TextPresenterSystem : IMatchingSystem, IRenderableSystem
+    public class TextPresenterSystem : IRenderableSystem
     {
         #region Private Fields
 

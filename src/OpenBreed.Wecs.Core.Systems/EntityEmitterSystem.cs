@@ -8,7 +8,7 @@ namespace OpenBreed.Wecs.Core.Systems
 {
     [RequireEntityWith(typeof(EntityEmitterComponent))]
     [SystemCategory(CommonCategories.General)]
-    public class EntityEmitterSystem : IMatchingSystem, IUpdatableSystem
+    public class EntityEmitterSystem : IUpdatableSystem
     {
         #region Private Fields
 

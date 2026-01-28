@@ -55,14 +55,14 @@ namespace OpenBreed.Wecs.Abstractions.Primitives
         /// </summary>
         /// <typeparam name="T">Type of system to get</typeparam>
         /// <returns>World system of specific type</returns>
-        T GetSystem<T>() where T : IMatchingSystem;
+        T GetSystem<T>() where T : ISystem;
 
         /// <summary>
         /// Gets all entities that are matching system given in argument.
         /// </summary>
         /// <param name="system">System which is used for matching entities.</param>
         /// <returns>Enumeration of matching entities.</returns>
-        IEnumerable<IEntity> GetMatchingEntities(IMatchingSystem system);
+        IEnumerable<IEntity> GetMatchingEntities(ISystem system);
 
         /// <summary>
         /// !!!!!!!!!!TEMP METHOD
@@ -76,7 +76,7 @@ namespace OpenBreed.Wecs.Abstractions.Primitives
         /// <param name="entity"></param>
         /// <param name="system"></param>
         /// <returns></returns>
-        bool HasSystemEntityCached(IMatchingSystem system, IEntity entity);
+        bool HasSystemEntityCached(ISystem system, IEntity entity);
 
         #endregion Public Methods
     }

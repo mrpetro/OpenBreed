@@ -7,7 +7,7 @@ namespace OpenBreed.Wecs.Core.Systems
 {
     [RequireEntityWith(typeof(OnTriggerComponent))]
     [SystemCategory(CommonCategories.General)]
-    public class OnAddEntityTriggerSystem : IOnAddEntitySystem, IMatchingSystem
+    public class OnAddEntityTriggerSystem : IOnAddEntitySystem
     {
         #region Private Fields
 

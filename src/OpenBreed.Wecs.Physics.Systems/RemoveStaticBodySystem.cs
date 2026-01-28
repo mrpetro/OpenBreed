@@ -9,7 +9,7 @@ namespace OpenBreed.Wecs.Physics.Systems
     [RequireEntityWith(
         typeof(CollisionComponent))]
     [SystemCategory(CommonCategories.Physics)]
-    public class RemoveStaticBodySystem : IMatchingSystem, IEventSystem<EntityLeavingEvent>
+    public class RemoveStaticBodySystem : IEventSystem<EntityLeavingEvent>
     {
         #region Private Fields
 

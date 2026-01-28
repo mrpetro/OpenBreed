@@ -217,7 +217,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             world.UpdateSystemsCache(entity);
 
-            foreach (var system in world.Systems.OfType<IMatchingSystem>())
+            foreach (var system in world.Systems.OfType<ISystem>())
             {
                 var areMatching = entityToSystemMatcher.AreMatch(system, entity);
 
