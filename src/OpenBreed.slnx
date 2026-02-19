@@ -4,27 +4,21 @@
     <BuildType Name="Editor_Debug" />
     <BuildType Name="Game_Debug" />
     <BuildType Name="Release" />
-    <Platform Name="Any CPU" />
-    <Platform Name="x64" />
   </Configurations>
   <Folder Name="/Apps/">
     <Project Path="OpenBreed.Editor.App/OpenBreed.Editor.App.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Build Solution="Game_Debug|Any CPU" Project="false" />
+      <Build Solution="Game_Debug|*" Project="false" />
     </Project>
     <Project Path="OpenBreed.Sandbox.App/OpenBreed.Sandbox.App.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="*|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Sandbox/OpenBreed.Sandbox.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
-      <Build Solution="Editor_Debug|Any CPU" Project="false" />
+      <Build Solution="Editor_Debug|*" Project="false" />
     </Project>
     <Project Path="RendererTest.Wpf.App/RendererTest.Wpf.App.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
@@ -47,9 +41,6 @@
     <Project Path="OpenBreed.Common.Tools/OpenBreed.Common.Tools.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Common.Windows/OpenBreed.Common.Windows.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
@@ -62,14 +53,10 @@
     <Project Path="OpenBreed.Core.Abstractions/OpenBreed.Core.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="*|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Core/OpenBreed.Core.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Database.EFCore/OpenBreed.Database.EFCore.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
@@ -86,44 +73,26 @@
     <Project Path="OpenBreed.Fsm/OpenBreed.Fsm.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Model/OpenBreed.Model.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Reader.Interface/OpenBreed.Reader.Interface.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Reader.Legacy/OpenBreed.Reader.Legacy.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Writer.Interface/OpenBreed.Writer.Interface.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Writer.Legacy/OpenBreed.Writer.Legacy.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
   </Folder>
   <Folder Name="/Docs/">
@@ -133,7 +102,7 @@
     <Project Path="OpenBreed.Editor.Cfg/OpenBreed.Editor.Cfg.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Build Solution="Game_Debug|Any CPU" Project="false" />
+      <Build Solution="Game_Debug|*" Project="false" />
     </Project>
     <Project Path="OpenBreed.Editor.UI.Mvc/OpenBreed.Editor.UI.Mvc.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
@@ -142,12 +111,12 @@
     <Project Path="OpenBreed.Editor.UI.Wpf/OpenBreed.Editor.UI.Wpf.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Build Solution="Game_Debug|Any CPU" Project="false" />
+      <Build Solution="Game_Debug|*" Project="false" />
     </Project>
     <Project Path="OpenBreed.Editor.VM/OpenBreed.Editor.VM.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Build Solution="Game_Debug|Any CPU" Project="false" />
+      <Build Solution="Game_Debug|*" Project="false" />
     </Project>
     <Project Path="OpenBreed.Editor.Wecs/OpenBreed.Editor.Wecs.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
@@ -158,37 +127,22 @@
     <Project Path="OpenBreed.Animation.Generic/OpenBreed.Animation.Generic.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Animation.Interface/OpenBreed.Animation.Interface.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Audio.Interface/OpenBreed.Audio.Interface.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Audio.LibOpenMpt/OpenBreed.Audio.LibOpenMpt.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Audio.OpenAL/OpenBreed.Audio.OpenAL.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Gui.Abstractions/OpenBreed.Gui.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
@@ -201,63 +155,38 @@
     <Project Path="OpenBreed.Input.Generic/OpenBreed.Input.Generic.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Input.Interface/OpenBreed.Input.Interface.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Physics.Generic/OpenBreed.Physics.Generic.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Physics.Interface/OpenBreed.Physics.Interface.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Rendering.Abstractions/OpenBreed.Rendering.Abstractions.csproj" Id="f73d61df-4aeb-c0a8-6ab5-6baf1aac0b23">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Rendering.Common/OpenBreed.Rendering.Common.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Release" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="*|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Rendering.OpenGL/OpenBreed.Rendering.OpenGL.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Scripting.Interface/OpenBreed.Scripting.Interface.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Scripting.Lua/OpenBreed.Scripting.Lua.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
   </Folder>
   <Folder Name="/Tests/">
@@ -286,130 +215,78 @@
     <Project Path="OpenBreed.Wecs.Abstractions/OpenBreed.Wecs.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Release" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="*|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs/OpenBreed.Wecs.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
   </Folder>
   <Folder Name="/Wecs/Components/">
     <Project Path="OpenBreed.Wecs.Animation.Components/OpenBreed.Wecs.Animation.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Audio.Components/OpenBreed.Wecs.Audio.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Core.Components/OpenBreed.Wecs.Core.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Control.Components/OpenBreed.Wecs.Control.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Gui.Components/OpenBreed.Wecs.Gui.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Physics.Components/OpenBreed.Wecs.Physics.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Rendering.Components/OpenBreed.Wecs.Rendering.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Scripting.Components/OpenBreed.Wecs.Scripting.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
   </Folder>
   <Folder Name="/Wecs/Systems/">
     <Project Path="OpenBreed.Wecs.Animation.Systems/OpenBreed.Wecs.Animation.Systems.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Audio.Systems/OpenBreed.Wecs.Audio.Systems.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Control.Systems/OpenBreed.Wecs.Control.Systems.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Core.Systems/OpenBreed.Wecs.Core.Systems.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Gui.Systems/OpenBreed.Wecs.Gui.Systems.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Physics.Systems/OpenBreed.Wecs.Physics.Systems.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Rendering.Systems/OpenBreed.Wecs.Rendering.Systems.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
     <Project Path="OpenBreed.Wecs.Scripting.Systems/OpenBreed.Wecs.Scripting.Systems.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Editor_Debug|x64" Project="x64" />
-      <Platform Solution="Game_Debug|x64" Project="x64" />
     </Project>
   </Folder>
 </Solution>

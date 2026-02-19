@@ -67,9 +67,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         public void OnAddEntity(IWorld world, IEntity entity)
         {
-            var cooldownTimerId = entity.GetTimerId("CooldownDelay");
-            var delayTimerId = entity.GetTimerId("ActionDeley");
-
             var previousDegree = 0.0f;
             var speedFactor = 150.0f;
             var fireRate = 0.3f;
@@ -162,7 +159,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
                 fireReady = false;
 
-                services.Triggers.AfterDelay(entity, cooldownTimerId, TimeSpan.FromMilliseconds(1000 / fireRate), CooldownFinish);
+                services.Triggers.AfterDelay(entity, TimeSpan.FromMilliseconds(1000 / fireRate), CooldownFinish);
             }
         }
 

@@ -61,14 +61,11 @@ namespace OpenBreed.Wecs.Core.Systems
 
             //Update all timers with delta time
             for (int i = 0; i < tc.Items.Count; i++)
-                UpdateTimer(entity, tc.Items[i], context.Dt);
+                UpdateTimer(entity, tc, tc.Items[i], context.Dt);
         }
 
-        private void UpdateTimer(IEntity entity, TimerData timerData, float dt)
+        private void UpdateTimer(IEntity entity, TimerComponent timerComponent, TimerData timerData, float dt)
         {
-            if (!timerData.Enabled)
-                return;
-
             timerData.Interval -= dt;
 
             if (timerData.Interval > 0.0)
@@ -77,8 +74,8 @@ namespace OpenBreed.Wecs.Core.Systems
                 return;
             }
 
-            timerData.Enabled = false;
             RaiseTimerElapsedEvent(entity, timerData);
+            timerComponent.Items.Remove(timerData);
         }
 
         private void RaiseUpdateEvent(IEntity entity)

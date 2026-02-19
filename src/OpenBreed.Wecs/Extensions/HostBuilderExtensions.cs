@@ -29,6 +29,7 @@ namespace OpenBreed.Wecs.Extensions
     {
         public static void SetupWecsManagers(this IHostBuilder hostBuilder)
         {
+            hostBuilder.SetupEntityClasses();
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddScoped<IEntityMan, EntityMan>();
@@ -54,6 +55,33 @@ namespace OpenBreed.Wecs.Extensions
                 services.AddSingleton<ISystemInitializer, DefaultSystemInitializer>();
                 services.AddScoped<IEntityTriggerMan, EntityTriggerMan>();
                 services.AddSingleton<ISystemInitializer, ActionOnTriggerSystemInitializer>();
+            });
+        }
+
+
+        public static void SetupEntityClasses(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IEntityClassMan>((sp) =>
+                {
+                    var classMan = new EntityClassMan();
+
+                    classMan.CreateClass("Entity");
+                    classMan.CreateClass("Actor", "Entity");
+
+                    return classMan;
+                });
+                services.AddScoped<IEntityToSystemMatcher, DefaultEntityToSystemMatcher>();
+                services.AddScoped<IEventSystemManager, EventSystemManager>();
+
+                services.AddScoped<ISystemFactory>((sp) =>
+                {
+                    var systemFactory = new DefaultSystemFactory(
+                        sp,
+                        sp.GetRequiredService<ISystemRequirementsProvider>());
+                    return systemFactory;
+                });
             });
         }
 

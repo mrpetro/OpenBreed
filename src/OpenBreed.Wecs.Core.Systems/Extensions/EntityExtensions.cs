@@ -53,49 +53,13 @@ namespace OpenBreed.Wecs.Core.Systems.Extensions
             return entity.Get<SourceEntityComponent>().EntityId;
         }
 
-        public static int GetTimerId(this IEntity entity, string timerName)
+
+        public static int StartTimer(this IEntity entity, double interval)
         {
             var timerCmp = entity.Get<TimerComponent>();
-
-            var timerId = timerCmp.Items.FindIndex(timer => timer.Name == timerName);
-
-            if (timerId == -1)
-                throw new InvalidOperationException($"Timer with name '{timerName}' not found.");
-
-            return timerId;
-        }
-
-        public static int CreateTimer(this IEntity entity, string timerName)
-        {
-            var timerCmp = entity.Get<TimerComponent>();
-
-            if (timerCmp.Items.Any(timer => timer.Name == timerName))
-                throw new InvalidOperationException($"Timer with name '{timerName}' already exists.");
-
-            var timerData = new TimerData(timerName, timerCmp.Items.Count, 0);
-            timerData.Enabled = false;
-            timerCmp.Items.Add(timerData);
-            return timerData.TimerId;
-        }
-
-        public static void StartTimerEx(this IEntity entity, int timerId, double interval)
-        {
-            var timerCmp = entity.Get<TimerComponent>();
-            var timerData = timerCmp.Items[timerId];
-            timerData.Interval = interval;
-            timerData.Enabled = true;
-        }
-
-        public static void StopTimer(this IEntity entity, int timerId)
-        {
-            var timerCmp = entity.Get<TimerComponent>();
-
-            var timerData = timerCmp.Items.FirstOrDefault(item => item.TimerId == timerId);
-
-            if (timerData is null)
-                throw new InvalidOperationException($"Timer with ID '{timerId}' not found.");
-
-            timerData.Enabled = false;
+            var id = timerCmp.Items.Count;
+            timerCmp.Items.Add(new TimerData(id, interval));
+            return id;
         }
     }
 }

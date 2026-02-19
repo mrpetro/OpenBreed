@@ -114,8 +114,6 @@ namespace OpenBreed.Sandbox.Worlds
             gameCommentatorBuilder.SetTag("Commentator");
 
             var gameCommentator = gameCommentatorBuilder.Build();
-            gameCommentator.CreateTimer("SpeechDelay");
-            gameCommentator.CreateTimer("MissionDelay");
 
             var player1Entity = CreatePlayer("P1");
 

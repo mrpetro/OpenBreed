@@ -10,8 +10,8 @@
 	end
 
 	SayNash = function()
-		local delay = PlaySound("Vanilla/Common/Speech/Nash")
-		local soundId = Sounds:GetByName("Vanilla/Common/Speech/Nash")
+		local delay = PlaySound("Vanilla/Common/Speech/IsDead")
+		local soundId = Sounds:GetByName("Vanilla/Common/Speech/IsDead")
 		Triggers:AfterDelay(Commentator, speechTimerId, TimeSpan.FromMilliseconds(delay), SayIsDead, true)
 	end
 

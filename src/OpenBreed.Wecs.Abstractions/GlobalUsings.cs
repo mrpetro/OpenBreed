@@ -1,4 +1,9 @@
-﻿global using OpenBreed.Core.Abstractions.Events;
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;
+global using OpenBreed.Core.Abstractions.Events;
 global using OpenBreed.Core.Abstractions.Managers;
 global using OpenBreed.Wecs.Abstractions.Primitives;
 global using OpenBreed.Wecs.Abstractions.Events;

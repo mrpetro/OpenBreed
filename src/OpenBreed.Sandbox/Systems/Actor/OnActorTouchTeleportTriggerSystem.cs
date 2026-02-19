@@ -61,6 +61,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             var cameraEntity = services.Entities.GetPlayerCamera(actorEntity);
             var hudCameraEntity = services.Entities.GetHudCamera();
             var cameraFadeInClipId = services.Clips.GetId("Vanilla/Common/Camera/Effects/FadeIn");
+            var exitPosition = services.GetExitPosition(teleportEntity);
 
             if (Equals(actorEntity.State, "Teleporting"))
             {
@@ -72,20 +73,11 @@ namespace OpenBreed.Sandbox.Systems.Actor
             var task = Core.Task.Create((t) => services.PauseWorld(t, actorEntity));
 
             task.Then((t) => services.FadeOut(t, cameraEntity))
-                .Then((t) => SetPosition(t))
+                .Then((t) => services.SetPosition(t, actorEntity, exitPosition))
                 .Then((t) => services.UnpauseWorld(t, cameraEntity))
                 .Then((t) => FadeIn(t));
 
             task.Start();
-
-            void SetPosition(ITask task)
-            {
-                services.Logger.LogInformation("SetPosition to exit...");
-
-                actorEntity.SetPositionToExit(services.Entities, services.Shapes, teleportEntity);
-
-                task.Finish();
-            }
 
             void FadeIn(ITask task)
             {

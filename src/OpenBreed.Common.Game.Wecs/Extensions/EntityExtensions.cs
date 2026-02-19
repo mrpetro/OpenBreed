@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Services;
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {
@@ -125,38 +126,5 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             inventoryCmp.ToAdd.Add((itemId, quantity));
         }
 
-        public static void SetPositionToExit(this IEntity target,
-                                       IEntityMan entityMan,
-                                       IShapeMan shapeMan,
-                                       IEntity entryEntity)
-        {
-            var pairId = entryEntity.Tag.Split('/')[1];
-            // Search for all exits from same world as entry with same pair ID 
-            var exitEntity = entityMan.GetByTag($"TeleportExit/{pairId}").FirstOrDefault(item => item.WorldId == entryEntity.WorldId);
-
-            if (exitEntity is null)
-                throw new Exception("No exit entity found");
-
-            var exitPos = exitEntity.Get<PositionComponent>();
-            var targetPos = target.Get<PositionComponent>();
-
-            var bodyCmp = target.Get<BodyComponent>();
-            var shape = bodyCmp.Fixtures.First().Shape;
-            var targetAabb = shape.GetAabb().Translated(targetPos.Value);
-
-            var offset = new Vector2((32 - targetAabb.Size.X) / 2.0f, (32 - targetAabb.Size.Y) / 2.0f);
-
-            var newPosition = exitPos.Value + offset;
-
-            targetPos.Value = newPosition;
-
-            var velocityCmp = target.Get<VelocityComponent>();
-            velocityCmp.Value = Vector2.Zero;
-
-            var thrustCmp = target.Get<ThrustComponent>();
-            thrustCmp.Value = Vector2.Zero;
-
-            target.State = null;
-        }
     }
 }

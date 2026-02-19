@@ -71,6 +71,11 @@ namespace OpenBreed.Wecs.Entities
         /// </summary>
         public int Id { get; internal set; }
 
+        /// <summary>
+        /// Identification number of this entity
+        /// </summary>
+        public int ClassId { get; internal set; } = -1;
+
         #endregion Public Properties
 
         #region Public Methods

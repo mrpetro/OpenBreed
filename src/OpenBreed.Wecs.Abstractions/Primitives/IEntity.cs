@@ -21,6 +21,11 @@ namespace OpenBreed.Wecs.Abstractions.Primitives
         int WorldId { get; }
 
         /// <summary>
+        /// Id of this entity class.
+        /// </summary>
+        int ClassId { get; }
+
+        /// <summary>
         /// Read-olny list of components for this entity
         /// </summary>
         ICollection<IEntityComponent> ComponentValues { get; }

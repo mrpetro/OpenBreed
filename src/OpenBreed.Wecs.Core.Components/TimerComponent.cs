@@ -10,9 +10,8 @@ namespace OpenBreed.Wecs.Core.Components
     {
         #region Public Constructors
 
-        public TimerData(string name, int timerId, double interval)
+        public TimerData(int timerId, double interval)
         {
-            Name = name;
             TimerId = timerId;
             Interval = interval;
         }
@@ -21,9 +20,7 @@ namespace OpenBreed.Wecs.Core.Components
 
         #region Public Properties
 
-        public string Name { get; }
         public int TimerId { get; }
-        public bool Enabled { get; set; }
         public double Interval { get; set; }
 
         #endregion Public Properties

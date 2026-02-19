@@ -210,7 +210,8 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddSystem<OnActorTouchLandMineTriggerSystem>();
             worldBuilder.AddSystem<ExplosionOnEnterWorldSystem>();
             worldBuilder.AddSystem<OnInitTurretSystem>();
-            worldBuilder.AddSystem<OnActorInitPrepareMovementSystem>();
+            worldBuilder.AddSystem<ActorAnimateSystem>();
+            worldBuilder.AddSystem<ActorResurectSystem>();
             worldBuilder.AddSystem<OnRefractionLazerProjectileHitSystem>();
             worldBuilder.AddSystem<OnDefaultProjectileHitSystem>();
             worldBuilder.AddSystem<OnInitFirewallProjectileSystem>();
@@ -220,6 +221,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddSystem<OnInitRefractionLazerProjectileSystem>();
             worldBuilder.AddSystem<OnActorInitShowMissionSystem>();
             worldBuilder.AddSystem<OnActorControlActionSystem>();
+            worldBuilder.AddSystem<OnLevelStartedSystem>();
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);
 

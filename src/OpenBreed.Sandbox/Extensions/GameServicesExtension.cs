@@ -23,6 +23,7 @@ using OpenBreed.Wecs.Scripting.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Audio.Systems.Extensions;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -36,7 +37,6 @@ namespace OpenBreed.Sandbox.Extensions
 
             services.Triggers.AfterDelay(
                 entity,
-                timerId: 0,
                 TimeSpan.FromMilliseconds(timeMs),
                 (e, a) =>
                 {
@@ -80,6 +80,30 @@ namespace OpenBreed.Sandbox.Extensions
             {
                 task.Finish();
             }, singleTime: true);
+        }
+
+        public static void Say(this IGameServices services, ITask task, IEntity entity, string sampleName)
+        {
+            services.Logger.LogInformation($"Saying '{sampleName}...'");
+            var soundId = services.Sounds.GetByName(sampleName);
+
+            var duration = services.Sounds.GetDuration(soundId);
+
+            entity.EmitSound(soundId);
+
+            services.Triggers.AfterDelay(
+                entity,
+                TimeSpan.FromMilliseconds(duration), (e, a) => task.Finish(),
+                singleTime: true);
+        }
+
+        public static void Resurrect(this IGameServices services, ITask task, IEntity entity)
+        {
+            services.Logger.LogInformation("Resurrect...");
+            entity.RestoreFullHealth();
+            entity.Resurrect();
+
+            task.Finish();
         }
 
         public static void PlayAnimation(this IGameServices services, ITask task, IEntity entity, int animationId, string taskDescription = null)

@@ -33,14 +33,13 @@ namespace OpenBreed.Wecs.Core.Systems.Extensions
             entity.Get<FrameComponent>().Target = framesNo;
         }
 
-        public static void AfterDelay(this ITriggerMan triggerMan, IEntity entity, int timerId, TimeSpan timeSpan, Action<IEntity, TimerElapsedEventArgs>  action, bool singleTime = false)
+        public static void AfterDelay(this ITriggerMan triggerMan, IEntity entity, TimeSpan timeSpan, Action<IEntity, TimerElapsedEventArgs>  action, bool singleTime = false)
         {
+            var timerId = entity.StartTimer(timeSpan.TotalSeconds);
             triggerMan.CreateTrigger<TimerElapsedEventArgs>(
                 (args) => Equals(entity.Id, args.EntityId) && Equals(timerId, args.TimerId),
                 (args) => action.Invoke(entity, args),
                 singleTime);
-
-            entity.StartTimerEx(timerId, timeSpan.TotalSeconds);
         }
 
         public static void OnEntityTimerElapsed(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, TimerElapsedEventArgs> action, bool singleTime = false)

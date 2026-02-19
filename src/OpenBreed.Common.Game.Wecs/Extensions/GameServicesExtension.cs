@@ -3,10 +3,14 @@ using OpenBreed.Animation.Generic;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions;
+using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Components.Extensions;
 
 using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Wecs.Physics.Components;
+using OpenTK.Mathematics;
 
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
@@ -64,6 +68,44 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             var world = services.Worlds.GetByName(worldName);
 
             services.Worlds.RequestAddEntity(target, world.Id);
+        }
+
+        public static Vector2 GetExitPosition(this IGameServices services, IEntity entryEntity)
+        {
+            var pairId = entryEntity.Tag.Split('/')[1];
+            // Search for all exits from same world as entry with same pair ID 
+            var exitEntity = services.Entities.GetByTag($"TeleportExit/{pairId}").FirstOrDefault(item => item.WorldId == entryEntity.WorldId);
+
+            if (exitEntity is null)
+                throw new Exception("No exit entity found");
+
+            var exitPos = exitEntity.Get<PositionComponent>();
+
+            return exitPos.Value;
+        }
+
+        public static void SetPosition(this IGameServices services, ITask task, IEntity target, Vector2 exitPosition)
+        {
+            var targetPos = target.Get<PositionComponent>();
+            var bodyCmp = target.Get<BodyComponent>();
+            var shape = bodyCmp.Fixtures.First().Shape;
+            var targetAabb = shape.GetAabb().Translated(targetPos.Value);
+
+            var offset = new Vector2((32 - targetAabb.Size.X) / 2.0f, (32 - targetAabb.Size.Y) / 2.0f);
+
+            var newPosition = exitPosition + offset;
+
+            targetPos.Value = newPosition;
+
+            var velocityCmp = target.Get<VelocityComponent>();
+            velocityCmp.Value = Vector2.Zero;
+
+            var thrustCmp = target.Get<ThrustComponent>();
+            thrustCmp.Value = Vector2.Zero;
+
+            target.State = null;
+
+            task.Finish();
         }
 
         #endregion Public Methods

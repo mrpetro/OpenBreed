@@ -48,8 +48,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
         {
             var entity = services.Entities.GetById(e.EntityId);
 
-            var cooldownTimerId = entity.GetTimerId("CooldownDelay");
-            var delayTimerId = entity.GetTimerId("ActionDeley");
             var speedFactor = 30;
 
             switch (e.ActionCode)
@@ -161,7 +159,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
                 services.Triggers.AfterDelay(
                     entity,
-                    cooldownTimerId,
                     TimeSpan.FromMilliseconds(fireCooldownTime / currentWeapon.FireRate),
                     CooldownFinish,
                     singleTime: true);

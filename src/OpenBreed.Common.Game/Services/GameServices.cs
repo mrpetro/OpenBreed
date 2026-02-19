@@ -34,6 +34,7 @@ namespace OpenBreed.Common.Game.Services
             IClipMan<IEntity> clips,
             IWorldMan worlds,
             IEntityMan entities,
+            IEntityClassMan classes,
             Lazy<IScriptMan> lazyScripts,
             IDataLoaderFactory dataLoaderFactory,
             TextsDataProvider texts,
@@ -42,13 +43,15 @@ namespace OpenBreed.Common.Game.Services
             ItemsMan items,
             IShapeMan shapes,
             Lazy<IEntityFactory> lazyFactory,
-            IEntityTriggerMan entityTriggers)
+            IEntityTriggerMan entityTriggers,
+            IEventsMan events)
         {
             Triggers = triggers;
             Logger = logger;
             Clips = clips;
             Worlds = worlds;
             Entities = entities;
+            Classes = classes;
             this.lazyScripts = lazyScripts;
             DataLoaderFactory = dataLoaderFactory;
             Texts = texts;
@@ -58,6 +61,7 @@ namespace OpenBreed.Common.Game.Services
             Shapes = shapes;
             this.lazyFactory = lazyFactory;
             EntityTriggers = entityTriggers;
+            Events = events;
         }
 
         #endregion Public Constructors
@@ -73,6 +77,8 @@ namespace OpenBreed.Common.Game.Services
         public IWorldMan Worlds { get; }
 
         public IEntityMan Entities { get; }
+
+        public IEntityClassMan Classes { get; }
 
         public IScriptMan Scripts => lazyScripts.Value;
 
@@ -91,6 +97,9 @@ namespace OpenBreed.Common.Game.Services
         public IEntityFactory Factory => lazyFactory.Value;
 
         public IEntityTriggerMan EntityTriggers { get; }
+
+        public IEventsMan Events { get; }
+
 
         #endregion Public Properties
     }

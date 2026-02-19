@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <EntityTemplate>
     <Components>
+		<Class>
+			<Name>Actor</Name>
+		</Class>
 		<Metadata>
 			<Name>John</Name>
 		</Metadata>
@@ -14,7 +17,6 @@
 		<OnTrigger>
             <Actions>
                 <Action Trigger="EnterWorld" Action="ShowMission" />
-                <Action Trigger="EnterWorld" Action="PrepareMovement" />
                 <Action Trigger="EnterWorld" Action="PrepareWeapons" />
             </Actions>
 		</OnTrigger>

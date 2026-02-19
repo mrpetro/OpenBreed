@@ -1,14 +1,17 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Game.Services;
+using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Core.Abstractions;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;
-using OpenBreed.Wecs.Abstractions.Primitives;
-using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Extensions;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenBreed.Wecs.Scripting.Systems.Extensions;
@@ -18,7 +21,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Wecs.Abstractions.Systems;
 
 namespace OpenBreed.Sandbox.Systems.Mission
 {
@@ -129,8 +131,12 @@ namespace OpenBreed.Sandbox.Systems.Mission
 
                 playerCharacterEntity.State = null;
 
-                directorEntity.TryInvoke(services.Scripts, services.Logger, "OnStartMission", null);
+                services.Events.Raise(new LevelStartedEvent(directorEntity.Id));
+
+                //directorEntity.TryInvoke(services.Scripts, services.Logger, "OnStartMission", null);
             }
+
+
         }
 
         #endregion Public Methods

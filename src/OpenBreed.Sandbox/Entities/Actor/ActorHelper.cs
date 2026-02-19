@@ -148,9 +148,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 .SetParameter("startY", y)
                 .Build();
 
-            entity.CreateTimer("CooldownDelay");
-            entity.CreateTimer("ActionDeley");
-
             entity.Add(new TrackingComponent(-1));
 
             worldMan.RequestAddEntity(entity, world.Id);
@@ -160,8 +157,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
         public IEntity CreatePlayerActor(string name, Vector2 pos)
         {
             var actor = CreateActor(name, pos);
-            actor.CreateTimer("CooldownDelay");
-            actor.CreateTimer("ActionDeley");
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             actor.Add(new EquipmentComponent(

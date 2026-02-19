@@ -1,4 +1,5 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,23 @@ namespace OpenBreed.Wecs.Core.Components.Extensions
         public static Vector2 GetVelocity(this IEntity entity)
         {
             return entity.Get<VelocityComponent>().Value;
+        }
+
+        public static bool Is(this IEntity entity, IEntityClass entityClass)
+        {
+            var classComponent = entity.TryGet<ClassComponent>();
+
+            if (classComponent is null)
+            {
+                return false;
+            }
+
+            if (classComponent.Id == entityClass.Id)
+            {
+                return true;
+            }
+
+            return entityClass.HasAncestorById(classComponent.Id);
         }
 
         public static bool IsMoving(this IEntity entity)

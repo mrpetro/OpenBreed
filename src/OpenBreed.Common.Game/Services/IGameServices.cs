@@ -25,6 +25,7 @@ namespace OpenBreed.Common.Game.Services
         IClipMan<IEntity> Clips { get; }
         IWorldMan Worlds { get; }   
         IEntityMan Entities { get; }
+        IEntityClassMan Classes { get; }
         IShapeMan Shapes { get; }
         IScriptMan Scripts { get; }
         IDataLoaderFactory DataLoaderFactory { get; }
@@ -34,6 +35,7 @@ namespace OpenBreed.Common.Game.Services
         ItemsMan Items { get; }
         IEntityFactory Factory { get; }
         IEntityTriggerMan EntityTriggers { get; }
+        IEventsMan Events { get; }
 
 }
 }

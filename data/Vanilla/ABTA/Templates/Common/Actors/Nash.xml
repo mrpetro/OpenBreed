@@ -13,7 +13,6 @@
 		</Fsm>
 		<OnTrigger>
             <Actions>
-                <Action Trigger="EnterWorld" Action="PrepareMovement" />
                 <Action Trigger="EnterWorld" Action="PrepareWeapons" />
             </Actions>
 		</OnTrigger>
