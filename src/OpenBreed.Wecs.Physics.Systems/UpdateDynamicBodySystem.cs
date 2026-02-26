@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Wecs.Physics.Components;
 using OpenBreed.Wecs.Core.Systems.Categories;
+using OpenBreed.Wecs.Physics.Components;
 using OpenBreed.Wecs.Physics.Systems.Extensions;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Physics.Systems
 {
@@ -38,12 +39,8 @@ namespace OpenBreed.Wecs.Physics.Systems
 
         #region Public Methods
 
-        public void Update(IUpdateContext context)
+        public void Update(IEnumerable<IEntity> entities, IUpdateContext context)
         {
-            var world = this.worldMan.GetById(context.WorldId);
-
-            var entities = world.GetMatchingEntities(this);
-
             foreach (var entity in entities)
             {
                 if (entity.WorldId != context.WorldId)

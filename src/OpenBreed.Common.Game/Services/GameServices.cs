@@ -42,6 +42,7 @@ namespace OpenBreed.Common.Game.Services
             IStampMan stamps,
             ItemsMan items,
             IShapeMan shapes,
+            IRenderingMan renders,
             Lazy<IEntityFactory> lazyFactory,
             IEntityTriggerMan entityTriggers,
             IEventsMan events)
@@ -59,6 +60,7 @@ namespace OpenBreed.Common.Game.Services
             Stamps = stamps;
             Items = items;
             Shapes = shapes;
+            Renders = renders;
             this.lazyFactory = lazyFactory;
             EntityTriggers = entityTriggers;
             Events = events;
@@ -81,6 +83,8 @@ namespace OpenBreed.Common.Game.Services
         public IEntityClassMan Classes { get; }
 
         public IScriptMan Scripts => lazyScripts.Value;
+
+        public IRenderingMan Renders { get; }
 
         public IDataLoaderFactory DataLoaderFactory { get; }
 

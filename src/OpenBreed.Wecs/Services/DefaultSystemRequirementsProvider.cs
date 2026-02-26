@@ -13,7 +13,7 @@ namespace OpenBreed.Wecs.Services
     {
         #region Private Fields
 
-        private static readonly Dictionary<Type, (HashSet<Type> Allowed, HashSet<Type> Forbidden)> requirementsLookup = new Dictionary<Type, (HashSet<Type>, HashSet<Type>)>();
+        private static readonly Dictionary<Type, DefaultSystemRequirements> requirementsLookup = new Dictionary<Type, DefaultSystemRequirements>();
 
         private readonly ITypeAttributesProvider typeAttributesProvider;
 
@@ -45,6 +45,12 @@ namespace OpenBreed.Wecs.Services
             {
                 switch (attributes[i])
                 {
+                    case RequireEntityWithTagAttribute requireEntityWithTagAttribute:
+
+                        AddTag(systemType, requireEntityWithTagAttribute.Tag);
+
+                        break;
+
                     case RequireEntityWithAttribute requireEntityWithAttribute:
                         foreach (var componentType in requireEntityWithAttribute.ComponentTypes)
                         {
@@ -67,37 +73,71 @@ namespace OpenBreed.Wecs.Services
             }
         }
 
-        public bool TryGetRequirements(Type systemType, out (HashSet<Type> Allowed, HashSet<Type> Forbidden) requirements)
+        public bool TryGetRequirements(Type systemType, out ISystemRequirements requirements)
         {
-            return requirementsLookup.TryGetValue(systemType, out requirements);
+            if (!requirementsLookup.TryGetValue(systemType, out DefaultSystemRequirements defaultRequirements))
+            {
+                requirements = null;
+                return false;
+            }
+
+            requirements = defaultRequirements;
+            return true;
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static void AddAllowedComponentType(Type systemType, Type componentType)
+        private static DefaultSystemRequirements GetRequirements(Type systemType)
         {
-            if (!requirementsLookup.TryGetValue(systemType, out (HashSet<Type> Allowed, HashSet<Type> Forbidden) requirements))
+            if (!requirementsLookup.TryGetValue(systemType, out DefaultSystemRequirements requirements))
             {
-                requirements = new(new HashSet<Type>(), new HashSet<Type>());
+                requirements = new DefaultSystemRequirements();
                 requirementsLookup.Add(systemType, requirements);
             }
 
-            requirements.Allowed.Add(componentType);
+            return requirements;
+        }
+
+        private static void AddAllowedComponentType(Type systemType, Type componentType)
+        {
+            var requirements = GetRequirements(systemType);
+
+            requirements.AllowedComponents.Add(componentType);
         }
 
         private static void AddForbiddenComponentType(Type systemType, Type componentType)
         {
-            if (!requirementsLookup.TryGetValue(systemType, out (HashSet<Type> Allowed, HashSet<Type> Forbidden) requirements))
-            {
-                requirements = new(new HashSet<Type>(), new HashSet<Type>());
-                requirementsLookup.Add(systemType, requirements);
-            }
+            var requirements = GetRequirements(systemType);
 
-            requirements.Forbidden.Add(componentType);
+            requirements.ForbiddenComponents.Add(componentType);
+        }
+
+        private static void AddTag(Type systemType, string tag)
+        {
+            var requirements = GetRequirements(systemType);
+
+            requirements.Tag = tag;
         }
 
         #endregion Private Methods
+    }
+
+    internal class DefaultSystemRequirements : ISystemRequirements
+    {
+        #region Public Properties
+
+        public HashSet<Type> AllowedComponents { get; } = new HashSet<Type>();
+
+        public HashSet<Type> ForbiddenComponents { get; } = new HashSet<Type>();
+
+        IReadOnlySet<Type> ISystemRequirements.AllowedComponents => AllowedComponents;
+
+        IReadOnlySet<Type> ISystemRequirements.ForbiddenComponents => ForbiddenComponents;
+
+        public string Tag { get; set; }
+
+        #endregion Public Properties
     }
 }

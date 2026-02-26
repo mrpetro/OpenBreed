@@ -44,6 +44,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Xml.Linq;
+using OpenBreed.Common.Game.Wecs.Systems.Hud;
 
 namespace OpenBreed.Sandbox.Loaders
 {
@@ -222,6 +223,7 @@ namespace OpenBreed.Sandbox.Loaders
             worldBuilder.AddSystem<OnActorInitShowMissionSystem>();
             worldBuilder.AddSystem<OnActorControlActionSystem>();
             worldBuilder.AddSystem<OnLevelStartedSystem>();
+
 
             worldBuilder.SetupGameWorldSystems(isEditor: false);
 

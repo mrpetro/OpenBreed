@@ -28,6 +28,7 @@ namespace OpenBreed.Common.Game.Services
         IEntityClassMan Classes { get; }
         IShapeMan Shapes { get; }
         IScriptMan Scripts { get; }
+        IRenderingMan Renders { get; }
         IDataLoaderFactory DataLoaderFactory { get; }
         TextsDataProvider Texts { get; }
         ISoundMan Sounds { get; }

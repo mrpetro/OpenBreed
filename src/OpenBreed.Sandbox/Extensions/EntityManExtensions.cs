@@ -212,6 +212,11 @@ namespace OpenBreed.Sandbox.Extensions
             return entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
         }
 
+        public static IEntity GetFpsCounter(this IEntityMan entityMan)
+        {
+            return entityMan.GetByTag("FpsCounter").First();
+        }
+
         public static IEntity GetGameViewport(this IEntityMan entityMan)
         {
             return entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();

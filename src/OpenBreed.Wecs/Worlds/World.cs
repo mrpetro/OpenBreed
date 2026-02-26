@@ -127,14 +127,6 @@ namespace OpenBreed.Wecs.Worlds
 
         public IEnumerable<IEntity> GetMatchingEntities(ISystem system)
         {
-            //foreach (var entity in entitiesToSystemsLookup)
-            //{
-            //    if (entityToSystemMatcher.AreMatch(system, entity.Key))
-            //    {
-            //        yield return entity.Key;
-            //    }
-            //}
-
             if (systemToEntriesLookup.TryGetValue(system, out HashSet<IEntity> entities))
             {
                 foreach (var entity in entities)
@@ -204,9 +196,10 @@ namespace OpenBreed.Wecs.Worlds
             context.DtMultiplier = DtMultiplier;
             context.UpdateDeltaTime(dt);
 
-            foreach (var item in Systems.OfType<IUpdatableSystem>())
+            foreach (var system in Systems.OfType<IUpdatableSystem>())
             {
-                item.Update(context);
+                var entities = GetMatchingEntities(system);
+                system.Update(entities, context);
             }
         }
 

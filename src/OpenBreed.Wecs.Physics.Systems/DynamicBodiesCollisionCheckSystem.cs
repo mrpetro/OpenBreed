@@ -12,6 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Wecs.Physics.Systems
 {
+    [RequireEntityWith(typeof(CollisionComponent))]
     [SystemCategory(CommonCategories.Physics)]
     public class DynamicBodiesCollisionCheckSystem : IUpdatableSystem
     {
@@ -20,21 +21,24 @@ namespace OpenBreed.Wecs.Physics.Systems
         private const int CELL_SIZE = 16;
         private readonly ICollisionChecker collisionChecker;
         private readonly ICollisionMan<IEntity> collisionMan;
+        private readonly IWorldMan worldMan;
         private readonly IEntityMan entityMan;
         private readonly IEventsMan eventsMan;
         private readonly IShapeMan shapeMan;
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
         public DynamicBodiesCollisionCheckSystem(
+            IWorldMan worldMan,
             IEntityMan entityMan,
             IEventsMan eventsMan,
             IShapeMan shapeMan,
             ICollisionMan<IEntity> collisionMan,
             ICollisionChecker collisionChecker)
         {
+            this.worldMan = worldMan;
             this.entityMan = entityMan;
             this.eventsMan = eventsMan;
             this.shapeMan = shapeMan;
@@ -42,7 +46,7 @@ namespace OpenBreed.Wecs.Physics.Systems
             this.collisionChecker = collisionChecker;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -51,14 +55,21 @@ namespace OpenBreed.Wecs.Physics.Systems
             return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
 
-        public void Update(IUpdateContext context)
+        public void Update(IEnumerable<IEntity> entities, IUpdateContext context)
         {
-            var mapEntity = entityMan.GetByTag("Maps").Where(e => e.WorldId == context.WorldId).FirstOrDefault();
+            foreach (var entity in entities)
+            {
+                UpdateEntity(entity, context);
+            }
+        }
 
-            if (mapEntity is null)
-                return;
+        #endregion Public Methods
 
-            var collisionComponent = mapEntity.Get<CollisionComponent>();
+        #region Private Methods
+
+        private void UpdateEntity(IEntity entity, IUpdateContext context)
+        {
+            var collisionComponent = entity.Get<CollisionComponent>();
 
             var previousContacts = collisionComponent.Result.Contacts.Select(item => item.Copy()).ToArray();
 
@@ -104,10 +115,6 @@ namespace OpenBreed.Wecs.Physics.Systems
                 //Console.WriteLine($"Contact {contact.ItemIdA} <=> {contact.ItemIdB} ended.");
             }
         }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         private Box2 GetAabb(IEntity entity)
         {

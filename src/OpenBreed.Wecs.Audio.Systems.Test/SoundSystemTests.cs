@@ -46,8 +46,10 @@ namespace OpenBreed.Wecs.Audio.Systems.Test
             SetupMockEntity(mockEntity, null);
             SetupWorldContext(mockContext, paused: false);
 
+
+
             // Act
-            soundSystem.Update(mockContext.Object);
+            soundSystem.Update(Enumerable.Repeat(mockEntity.Object, 1), mockContext.Object);
 
             // Assert
             mockSoundMan.Verify(mock => mock.PlaySample(It.IsAny<int>()), Times.Never());
@@ -62,7 +64,7 @@ namespace OpenBreed.Wecs.Audio.Systems.Test
             SetupWorldContext(mockContext, paused: false);
 
             // Act
-            soundSystem.Update(mockContext.Object);
+            soundSystem.Update(Enumerable.Repeat(mockEntity.Object, 1), mockContext.Object);
 
             // Assert
             mockSoundMan.Verify(mock => mock.PlaySample(It.IsAny<int>()), Times.Never());
@@ -83,7 +85,7 @@ namespace OpenBreed.Wecs.Audio.Systems.Test
             SetupWorldContext(mockContext, paused: false);
 
             // Act
-            soundSystem.Update(mockContext.Object);
+            soundSystem.Update(Enumerable.Repeat(mockEntity.Object, 1), mockContext.Object);
 
             // Assert
             foreach (var sampleId in sampleIds)

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Core.Systems.Categories;
+using OpenBreed.Wecs.Rendering.Components;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Rendering.Systems
 {
@@ -27,12 +28,8 @@ namespace OpenBreed.Wecs.Rendering.Systems
 
         #region Public Methods
 
-        public void Update(IUpdateContext context)
+        public void Update(IEnumerable<IEntity> entities, IUpdateContext context)
         {
-            var world = worldMan.GetById(context.WorldId);
-
-            var entities = world.GetMatchingEntities(this);
-
             foreach (var entity in entities)
             {
                 UpdateEntity(entity, context);

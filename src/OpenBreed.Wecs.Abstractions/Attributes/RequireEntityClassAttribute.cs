@@ -2,6 +2,7 @@
 
 namespace OpenBreed.Wecs.Abstractions.Attributes
 {
+
     /// <summary>
     /// Entity System Attribute that can set requirement for entities of specific class.
     /// </summary>

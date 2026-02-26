@@ -12,8 +12,5 @@
 			<Scale X="64" Y="1" />		
 			<Order>100</Order>
 		</Sprite>
-		<Script>
-			<ScriptId>Vanilla/Common/Hud/HealthBar</ScriptId>
-		</Script>
     </Components>
 </EntityTemplate>

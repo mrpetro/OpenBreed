@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Game.Wecs.Systems.Hud;
 using OpenBreed.Core;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
@@ -14,9 +15,9 @@ using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Animation.Systems;
 using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Rendering.Systems;
 using OpenBreed.Wecs.Rendering.Systems.Events;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
@@ -77,6 +78,7 @@ namespace OpenBreed.Sandbox.Worlds
         {
             builder.AddSystem<AnimatorSystem>();
             builder.AddSystem<TextSystem >();
+            builder.AddSystem<FpsCounterSystem>();
             builder.AddSystem<ScriptRunningSystem>();
         }
 

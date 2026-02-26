@@ -4,6 +4,7 @@ using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Systems.Categories;
 using OpenBreed.Wecs.Core.Systems.Events;
 using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Core.Systems
 {
@@ -39,12 +40,8 @@ namespace OpenBreed.Wecs.Core.Systems
 
         #region Public Methods
 
-        public void Update(IUpdateContext context)
+        public void Update(IEnumerable<IEntity> entities, IUpdateContext context)
         {
-            var world = worldMan.GetById(context.WorldId);
-
-            var entities = world.GetMatchingEntities(this);
-
             foreach (var entity in entities)
             {
                 UpdateEntity(entity, context);

@@ -60,6 +60,7 @@ namespace OpenBreed.Sandbox.Entities.Hud
             var fpsCounter = entityFactory.Create(@"ABTA\Templates\Common\Hud\FpsCounter")
                 .SetParameter("posX", -viewClient.ClientRectangle.Size.X / 2.0f)
                 .SetParameter("posY", -viewClient.ClientRectangle.Size.Y / 2.0f)
+                .SetTag("FpsCounter")
                 .Build();
 
             triggerMan.OnWorldInitialized(world, () => worldMan.RequestAddEntity(fpsCounter, world.Id), singleTime: true);

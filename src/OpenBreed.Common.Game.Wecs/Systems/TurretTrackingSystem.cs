@@ -113,7 +113,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
         }
     }
 
-
+    [RequireEntityWith(typeof(TrackingComponent))]
     public class TurretTrackingSystem : IUpdatableSystem
     {
         private readonly IWorldMan worldMan;
@@ -130,10 +130,8 @@ namespace OpenBreed.Common.Game.Wecs.Systems
             this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
         }
 
-        public void Update(IUpdateContext context)
+        public void Update(IEnumerable<IEntity> entities, IUpdateContext context)
         {
-            var entities = entityMan.Where(entity => entity.Contains<TrackingComponent>());
-
             foreach (var entity in entities)
             {
                 var tc = entity.Get<TrackingComponent>();

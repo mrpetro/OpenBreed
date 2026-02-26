@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Wecs.Core.Components;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Core.Systems
@@ -14,12 +15,8 @@ namespace OpenBreed.Wecs.Core.Systems
 
         #region Public Methods
 
-        public virtual void Update(IUpdateContext context)
+        public virtual void Update(IEnumerable<IEntity> entities, IUpdateContext context)
         {
-            var world = worldMan.GetById(context.WorldId);
-
-            var entities = world.GetMatchingEntities(this);
-
             entities = context.Paused ? entities.Where(item => item.Contains<PauseImmuneComponent>()) : entities;
 
             foreach (var entity in entities)

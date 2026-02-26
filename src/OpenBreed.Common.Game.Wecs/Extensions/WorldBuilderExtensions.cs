@@ -53,7 +53,6 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             builder.AddSystem<AddStaticBodySystem>();
             builder.AddSystem<RemoveStaticBodySystem>();
             builder.AddSystem<OnAddEntityTriggerSystem>();
-            builder.AddSystem<OnWorldUpdateTriggerSystem>();
             builder.AddSystem<SolidCollisionHandlerSystem>();
             builder.AddSystem<SlowdownObstacleCollisionSystem>();
             builder.AddSystem<SlopeObstacleCollisionSystem>();

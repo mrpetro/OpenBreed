@@ -12,9 +12,10 @@ namespace OpenBreed.Wecs.Abstractions.Systems
     public interface IUpdatableSystem : ISystem
     {
         /// <summary>
-        /// Update all entities in this system using given time step
+        /// Update all entities in this system using given update context
         /// </summary>
+        /// <param name="entities">Entities to update</param>
         /// <param name="context">World context</param>
-        void Update(IUpdateContext context);
+        void Update(IEnumerable<IEntity> entities, IUpdateContext context);
     }
 }

@@ -184,10 +184,6 @@
         <EPFArchiveFileDataSource Id="Vanilla/EPF/TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <EPFArchiveFileDataSource Id="Vanilla/EPF/TITLE.AMF" EntryName="TITLE.AMF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <FileDataSource Id="Vanilla/TA.EXE" FilePath="%Cfg.Options.ABTA.GameFolderPath%\ta.exe" />
-        <FileDataSource Id="Extension/Scripts/L1/MAP.01.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\L1\MAP.01.lua" />
-        <FileDataSource Id="Extension/Scripts/Hud/FpsUpdate.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsUpdate.lua" />
-        <FileDataSource Id="Extension/Scripts/Hud/FpsCounter.lua" FilePath="%Db.Current.FolderPath%\Common\Scripts\Hud\FpsCounter.lua" />
-        <FileDataSource Id="Extension/Scripts/Common/Hud/HealthBar.lua" FilePath="%Db.Current.FolderPath%\ABTA\Scripts\Common\Hud\HealthBar.lua" />
       </Items>
     </DataSources>
     <Images>
@@ -4386,7 +4382,6 @@
             <SpriteSetRef>Vanilla/L1/B</SpriteSetRef>
           </SpriteSetRefs>
           <TileSetRef>Vanilla/L1</TileSetRef>
-          <ScriptRef>Vanilla/L1/MAP.01</ScriptRef>
         </Map>
         <Map Description="CIVILIAN ZONE 1" Id="Vanilla/2">
           <DataRef>Vanilla/EPF/MAP.02</DataRef>
@@ -10915,18 +10910,6 @@
     </Texts>
     <Scripts>
       <Items>
-        <ScriptFromFile Id="Vanilla/L1/MAP.01">
-          <DataRef>Extension/Scripts/L1/MAP.01.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Common/Hud/Fps/Update">
-          <DataRef>Extension/Scripts/Hud/FpsUpdate.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="EntityTypes.FpsCounter">
-          <DataRef>Extension/Scripts/Hud/FpsCounter.lua</DataRef>
-        </ScriptFromFile>
-        <ScriptFromFile Id="Vanilla/Common/Hud/HealthBar">
-          <DataRef>Extension/Scripts/Common/Hud/HealthBar.lua</DataRef>
-        </ScriptFromFile>
       </Items>
     </Scripts>
     <Animations>
