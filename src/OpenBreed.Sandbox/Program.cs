@@ -562,11 +562,15 @@ namespace OpenBreed.Sandbox
                 return;
             }
 
-            var renderable = screenWorld.Systems.OfType<IRenderableSystem>().ToArray();
+            var renderableSystems = screenWorld.Systems.OfType<IRenderableSystem>().ToArray();
             var renderContext = new WorldRenderContext(view, 0, dt,new Box2(view.Box.Min, view.Box.Max), screenWorld);
-            for (int i = 0; i < renderable.Length; i++)
+            for (int i = 0; i < renderableSystems.Length; i++)
             {
-                renderable[i].Render(renderContext);
+                var renderableSystem = renderableSystems[i];
+
+                var entities = screenWorld.GetMatchingEntities(renderableSystem);
+
+                renderableSystem.Render(entities, renderContext);
             }
         }
 

@@ -35,10 +35,8 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
         #region Public Methods
 
-        public void Render(IWorldRenderContext context)
+        public void Render(IEnumerable<IEntity> entities, IWorldRenderContext context)
         {
-            var entities = context.World.GetMatchingEntities(this);
-
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);

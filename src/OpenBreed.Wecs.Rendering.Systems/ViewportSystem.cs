@@ -2,12 +2,13 @@
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Core.Components;
-using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Core.Systems.Categories;
+using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenBreed.Wecs.Rendering.Systems.Helpers;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Wecs.Rendering.Systems
@@ -52,10 +53,8 @@ namespace OpenBreed.Wecs.Rendering.Systems
 
         #region Public Methods
 
-        public void Render(Abstractions.Primitives.IWorldRenderContext context)
+        public void Render(IEnumerable<IEntity> entities, IWorldRenderContext context)
         {
-            var entities = context.World.GetMatchingEntities(this);
-
             foreach (var entity in entities)
             {
                 RenderViewport(context.View, entity, context.ViewBox, context.Depth, context.Dt);
@@ -128,11 +127,15 @@ namespace OpenBreed.Wecs.Rendering.Systems
 
                     void OnRenderFrame(Box2 viewBox, int depth, float dt)
                     {
-                        var renderable = cameraWorld.Systems.OfType<IRenderableSystem>().ToArray();
+                        var renderableSystems = cameraWorld.Systems.OfType<IRenderableSystem>().ToArray();
                         var renderContext = new WorldRenderContext(view, depth, dt, viewBox, cameraWorld);
-                        for (int i = 0; i < renderable.Length; i++)
+                        for (int i = 0; i < renderableSystems.Length; i++)
                         {
-                            renderable[i].Render(renderContext);
+                            var renderableSystem = renderableSystems[i];
+
+                            var entities = cameraWorld.GetMatchingEntities(renderableSystem);
+
+                            renderableSystem.Render(entities, renderContext);
                         }
                     }
 

@@ -24,6 +24,7 @@ namespace OpenBreed.Wecs.Gui.Systems
         public bool Enabled { get; set; } = true;
     }
 
+    [RequireEntityWith(typeof(CollisionComponent))]
     public class CollisionVisualizingSystem : IRenderableSystem
     {
         #region Private Fields
@@ -54,7 +55,7 @@ namespace OpenBreed.Wecs.Gui.Systems
 
         #region Public Methods
 
-        public void Render(IWorldRenderContext context)
+        public void Render(IEnumerable<IEntity> entities, IWorldRenderContext context)
         {
             if (!visualizingOptions.Enabled)
             {
@@ -65,19 +66,9 @@ namespace OpenBreed.Wecs.Gui.Systems
 
             try
             {
-                var mapEntity = entityMan.GetByTag("Maps").Where(e => e.WorldId == context.World.Id).FirstOrDefault();
-
-                if (mapEntity is null)
-                    return;
-
-                var collisionComponent = mapEntity.Get<CollisionComponent>();
-
-                DrawDynamics(context, collisionComponent.Broadphase, context.ViewBox);
-                DrawStatics(context, collisionComponent.Broadphase, context.ViewBox);
-
-                if (collisionComponent.Result.Contacts.Any())
+                foreach (var entity in entities)
                 {
-                    DrawContacts(context, collisionComponent.Result.Contacts);
+                    DrawEntity(entity, context);
                 }
             }
             finally
@@ -89,6 +80,19 @@ namespace OpenBreed.Wecs.Gui.Systems
         #endregion Public Methods
 
         #region Private Methods
+
+        private void DrawEntity(IEntity entity, IWorldRenderContext context)
+        {
+            var collisionComponent = entity.Get<CollisionComponent>();
+
+            DrawDynamics(context, collisionComponent.Broadphase, context.ViewBox);
+            DrawStatics(context, collisionComponent.Broadphase, context.ViewBox);
+
+            if (collisionComponent.Result.Contacts.Any())
+            {
+                DrawContacts(context, collisionComponent.Result.Contacts);
+            }
+        }
 
         private void DrawContacts(IWorldRenderContext context, List<CollisionContact> contacts)
         {

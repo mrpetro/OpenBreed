@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Core.Components;
-using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Core.Systems.Categories;
+using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Rendering.Systems
 {
@@ -30,10 +31,8 @@ namespace OpenBreed.Wecs.Rendering.Systems
 
         #region Public Methods
 
-        public void Render(IWorldRenderContext context)
+        public void Render(IEnumerable<IEntity> entities, IWorldRenderContext context)
         {
-            var entities = context.World.GetMatchingEntities(this);
-
             var spriteRenderer = context.View.Context.SpriteRenderer;
 
             spriteRenderer.RenderBegin();

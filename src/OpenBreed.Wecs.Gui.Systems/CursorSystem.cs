@@ -39,10 +39,8 @@ namespace OpenBreed.Wecs.Gui.Systems
 
         #region Public Methods
 
-        public void Render(IWorldRenderContext context)
+        public void Render(IEnumerable<IEntity> entities, IWorldRenderContext context)
         {
-            var entities = context.World.GetMatchingEntities(this);
-
             var cursorPos4 = context.View.FromHostToWorldPoint((Vector2i)inputsMan.CursorPos);
 
             foreach (var entity in entities)

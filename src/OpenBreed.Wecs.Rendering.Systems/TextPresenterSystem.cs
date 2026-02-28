@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Core.Components;
-using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Core.Systems.Categories;
+using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Rendering.Systems
 {
@@ -32,24 +33,20 @@ namespace OpenBreed.Wecs.Rendering.Systems
 
         #region Public Methods
 
-        public void Render(Abstractions.Primitives.IWorldRenderContext context)
+        public void Render(IEnumerable<IEntity> entities, IWorldRenderContext context)
         {
-            context.View.Context.FontRenderer.Render(context.View, context.ViewBox, (view, clipBox) => RenderTexts(context, view, clipBox));
+            context.View.Context.FontRenderer.Render(context.View, context.ViewBox, (view, clipBox) =>
+            {
+                foreach (var entity in entities)
+                {
+                    RenderText(view, entity, clipBox);
+                }
+            });
         }
 
         #endregion Public Methods
 
         #region Private Methods
-
-        private void RenderTexts(IWorldRenderContext context, OpenBreed.Rendering.Abstractions.IRenderView view, Box2 clipBox)
-        {
-            var entities = context.World.GetMatchingEntities(this);
-
-            foreach (var entity in entities)
-            {
-                RenderText(view, entity, clipBox);
-            }
-        }
 
         private void RenderText(OpenBreed.Rendering.Abstractions.IRenderView view, IEntity entity, Box2 clipBox)
         {

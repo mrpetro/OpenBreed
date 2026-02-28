@@ -146,11 +146,15 @@ namespace OpenBreed.Editor.UI.Mvc
             }
 
             view.SetPalette(palette);
-            var renderable = animationWorld.Systems.OfType<IRenderableSystem>().ToArray();
+            var renderableSystems = animationWorld.Systems.OfType<IRenderableSystem>().ToArray();
             var renderContext = new WorldRenderContext(view, 0, dt, new Box2(view.Box.Min, view.Box.Max), animationWorld);
-            for (int i = 0; i < renderable.Length; i++)
+            for (int i = 0; i < renderableSystems.Length; i++)
             {
-                renderable[i].Render(renderContext);
+                var renderableSystem = renderableSystems[i];
+
+                var entities = animationWorld.GetMatchingEntities(renderableSystem);
+
+                renderableSystem.Render(entities, renderContext);
             }
         }
 
