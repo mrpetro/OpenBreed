@@ -3,6 +3,7 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -28,14 +29,30 @@ namespace OpenBreed.Wecs.Systems
 
         #endregion Public Constructors
 
-        #region Public Methods
+        #region Public Delegates
 
         public delegate void EventCaller(EventArgs args);
 
+        #endregion Public Delegates
+
+        #region Public Methods
+
         public void RegisterSystem(IEventSystem system)
         {
-            var genericSystemType = system.GetType().GetInterfaces().Where(item => item.IsGenericType).FirstOrDefault(item => typeof(IEventSystem).IsAssignableFrom(item));
+            var genericSystemTypes = system.GetType().GetInterfaces().Where(item => item.IsGenericType).Where(item => typeof(IEventSystem).IsAssignableFrom(item));
 
+            foreach (var genericSystemType in genericSystemTypes)
+            {
+                RegisterGenericSystem(system, genericSystemType);
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void RegisterGenericSystem(IEventSystem system, Type genericSystemType)
+        {
             if (genericSystemType is null)
             {
                 throw new InvalidOperationException("Expected event system which implements IEventSystem<TEvent>.");
@@ -65,6 +82,6 @@ namespace OpenBreed.Wecs.Systems
             eventsMan.Subscribe(eventType, handler);
         }
 
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

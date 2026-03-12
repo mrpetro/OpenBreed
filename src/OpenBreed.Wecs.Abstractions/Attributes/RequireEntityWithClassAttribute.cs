@@ -7,11 +7,11 @@ namespace OpenBreed.Wecs.Abstractions.Attributes
     /// Entity System Attribute that can set requirement for entities of specific class.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class RequireEntityClassAttribute : Attribute
+    public class RequireEntityWithClassAttribute : Attribute
     {
         #region Public Constructors
 
-        public RequireEntityClassAttribute(string entityClass)
+        public RequireEntityWithClassAttribute(string entityClass)
         {
             EntityClass = entityClass;
         }

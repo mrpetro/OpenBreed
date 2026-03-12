@@ -11,7 +11,7 @@ using OpenBreed.Wecs.Abstractions.Attributes;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    [RequireEntityClass("Actor")]
+    [RequireEntityWithClass("Actor")]
     public class ActorAnimateSystem : IEventSystem<VelocityChangedEvent>, IEventSystem<DirectionChangedEvent>
     {
         private readonly IGameServices services;

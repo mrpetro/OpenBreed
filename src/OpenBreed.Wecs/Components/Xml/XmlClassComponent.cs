@@ -1,12 +1,11 @@
-﻿using OpenBreed.Wecs.Components.Xml;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Wecs.Core.Components.Xml
+namespace OpenBreed.Wecs.Components.Xml
 {
     [XmlRoot("Class")]
     public class XmlClassComponent : XmlComponentTemplate, IClassComponentTemplate

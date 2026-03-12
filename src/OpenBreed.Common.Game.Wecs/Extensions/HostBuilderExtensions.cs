@@ -70,6 +70,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             hostBuilder.SetupGameSystems();
             hostBuilder.SetupWecsSystemFactory();
 
+            hostBuilder.SetupWecsComponents();
             hostBuilder.SetupWecsCommonComponents();
             hostBuilder.SetupWecsPhysicsComponents();
             hostBuilder.SetupWecsRenderingComponents();

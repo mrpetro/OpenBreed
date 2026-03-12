@@ -159,7 +159,7 @@ namespace OpenBreed.Sandbox.Worlds
                 worldMan.RequestAddEntity(missionScreenCamera, world.Id);
 
                 AddBackground(world, -320, -272);
-                AddText(world, -320 / 2 + 48, 240 / 2 - 24);
+                AddText(world, -320 / 2 + 48, 240 / 2 - 35);
             }, singleTime: true);
         }
 

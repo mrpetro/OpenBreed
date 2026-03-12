@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OpenBreed.Wecs.Abstractions.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Wecs.Core.Components
+namespace OpenBreed.Wecs.Components
 {
     public interface IClassComponentTemplate : IComponentTemplate
     {

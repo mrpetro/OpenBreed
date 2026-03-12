@@ -13,6 +13,9 @@ namespace OpenBreed.Wecs.Services
 
         public void Initialize(IServiceProvider serviceProvider, ISystem system)
         {
+            var systemRequirementsProvider = serviceProvider.GetRequiredService<ISystemRequirementsProvider>();
+            systemRequirementsProvider.RegisterRequirements(system.GetType());
+
             if (system is IEventSystem eventSystem)
             {
                 var eventSystemManager = serviceProvider.GetRequiredService<IEventSystemManager>();

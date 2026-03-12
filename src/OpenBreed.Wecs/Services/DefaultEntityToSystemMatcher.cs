@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Wecs.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -46,6 +47,21 @@ namespace OpenBreed.Wecs.Services
             if (requirements.Tag is not null)
             {
                 if (entity.Tag != requirements.Tag)
+                {
+                    return false;
+                }
+            }
+
+            if (requirements.Class is not null)
+            {
+                var dc = entity.TryGet<ClassComponent>();
+
+                if (dc is null)
+                {
+                    return false;
+                }
+
+                if (dc.Id != requirements.Class.Id)
                 {
                     return false;
                 }

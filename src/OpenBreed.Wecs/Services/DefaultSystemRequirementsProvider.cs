@@ -16,14 +16,18 @@ namespace OpenBreed.Wecs.Services
         private static readonly Dictionary<Type, DefaultSystemRequirements> requirementsLookup = new Dictionary<Type, DefaultSystemRequirements>();
 
         private readonly ITypeAttributesProvider typeAttributesProvider;
+        private readonly IEntityClassMan entityClassMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DefaultSystemRequirementsProvider(ITypeAttributesProvider typeAttributesProvider)
+        public DefaultSystemRequirementsProvider(
+            ITypeAttributesProvider typeAttributesProvider,
+            IEntityClassMan entityClassMan)
         {
-            this.typeAttributesProvider = typeAttributesProvider;
+            this.typeAttributesProvider = typeAttributesProvider ?? throw new ArgumentNullException(nameof(typeAttributesProvider));
+            this.entityClassMan = entityClassMan ?? throw new ArgumentNullException(nameof(entityClassMan));
         }
 
         #endregion Public Constructors
@@ -48,6 +52,14 @@ namespace OpenBreed.Wecs.Services
                     case RequireEntityWithTagAttribute requireEntityWithTagAttribute:
 
                         AddTag(systemType, requireEntityWithTagAttribute.Tag);
+
+                        break;
+
+                    case RequireEntityWithClassAttribute requireEntityWithClassAttribute:
+
+                        var entityCLass = entityClassMan.GetByName(requireEntityWithClassAttribute.EntityClass);
+
+                        AddClass(systemType, entityCLass);
 
                         break;
 
@@ -121,6 +133,13 @@ namespace OpenBreed.Wecs.Services
             requirements.Tag = tag;
         }
 
+        private static void AddClass(Type systemType, IEntityClass entityClass)
+        {
+            var requirements = GetRequirements(systemType);
+
+            requirements.Class = entityClass;
+        }
+
         #endregion Private Methods
     }
 
@@ -137,6 +156,8 @@ namespace OpenBreed.Wecs.Services
         IReadOnlySet<Type> ISystemRequirements.ForbiddenComponents => ForbiddenComponents;
 
         public string Tag { get; set; }
+
+        public IEntityClass Class { get; set; }
 
         #endregion Public Properties
     }

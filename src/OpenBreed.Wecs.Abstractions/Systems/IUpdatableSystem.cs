@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace OpenBreed.Wecs.Abstractions.Systems
 {
     /// <summary>
-    /// System that state will be updated during core update phase
+    /// System that updates given entities.
     /// </summary>
     public interface IUpdatableSystem : ISystem
     {
         /// <summary>
-        /// Update all entities in this system using given update context
+        /// Update all entities in this system using given update context.
         /// </summary>
-        /// <param name="entities">Entities to update</param>
-        /// <param name="context">World context</param>
+        /// <param name="entities">Entities to update.</param>
+        /// <param name="context">World context.</param>
         void Update(IEnumerable<IEntity> entities, IUpdateContext context);
     }
 }

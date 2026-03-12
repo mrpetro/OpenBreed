@@ -9,6 +9,7 @@ namespace OpenBreed.Wecs.Abstractions.Services
         IReadOnlySet<Type> AllowedComponents { get; }
         IReadOnlySet< Type > ForbiddenComponents { get; }
         string Tag { get; }
+        IEntityClass Class { get; }
     }
 
     /// <summary>

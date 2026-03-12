@@ -15,12 +15,14 @@ namespace OpenBreed.Wecs.Test.Systems
 
         private MockRepository mockRepository;
         private Mock<ITypeAttributesProvider> mockTypeAttributesProvider;
+        private Mock<IEntityClassMan> mockEntityClassMan;
 
         public DefaultSystemRequirementsProviderTests
 ()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.mockTypeAttributesProvider = mockRepository.Create<ITypeAttributesProvider>();
+            this.mockEntityClassMan = mockRepository.Create<IEntityClassMan>();
         }
 
         private void SetupForbiddenComponentTypes(Mock<ITypeAttributesProvider> mock, Type inputType, params Type[] types )
@@ -35,7 +37,7 @@ namespace OpenBreed.Wecs.Test.Systems
 
         private DefaultSystemRequirementsProvider CreateProvider()
         {
-            return new DefaultSystemRequirementsProvider(mockTypeAttributesProvider.Object);
+            return new DefaultSystemRequirementsProvider(mockTypeAttributesProvider.Object, mockEntityClassMan.Object);
         }
 
         [Fact]

@@ -16,9 +16,6 @@ namespace OpenBreed.Wecs.Physics.Systems
 
         public void Initialize(IServiceProvider serviceProvider, ISystem system)
         {
-            var systemRequirementsProvider = serviceProvider.GetRequiredService<ISystemRequirementsProvider>();
-            systemRequirementsProvider.RegisterRequirements(system.GetType());
-
             if (system is IOnEntityCollisionSystem onEntityCollisionSystem)
             {
                 var collisionMan = serviceProvider.GetRequiredService<ICollisionMan<IEntity>>();

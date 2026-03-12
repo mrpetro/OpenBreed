@@ -11,6 +11,7 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Physics.Systems;
 using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Systems;
@@ -188,6 +189,12 @@ namespace OpenBreed.Wecs.Extensions
             {
                 services.AddScoped<IEntityTemplateLoader>((sp) => new XmlEntityTemplateLoader(sp.GetService<IOptions<XmlEntityTemplateLoaderSettings>>()));
             });
+        }
+
+        public static void SetupWecsComponents(this IHostBuilder hostBuilder)
+        {
+            XmlComponentsList.RegisterAllAssemblyComponentTypes();
+            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Components;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

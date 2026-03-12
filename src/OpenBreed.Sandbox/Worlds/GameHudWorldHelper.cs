@@ -1,5 +1,10 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Managers;
+using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Common.Game.Wecs.Systems.Hud;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core;
 using OpenBreed.Core.Abstractions.Managers;
@@ -19,25 +24,21 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
-using OpenBreed.Common.Game.Wecs.Components;
-using OpenBreed.Wecs.Control.Components;
-using OpenBreed.Wecs.Rendering.Components;
+using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Animation.Systems;
+using OpenBreed.Wecs.Control.Components;
 using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Rendering.Systems;
 using OpenBreed.Wecs.Rendering.Systems.Events;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenBreed.Wecs.Scripting.Systems;
-using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenTK;
 using OpenTK.Mathematics;
 using System.Linq;
-using OpenBreed.Common.Game.Managers;
-using OpenBreed.Common.Game;
-using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Abstractions.Primitives;
-using OpenBreed.Wecs.Abstractions.Extensions;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -199,6 +200,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem<SpriteSystem>();
             builder.AddSystem<TextSystem>();
             builder.AddSystem<ScriptRunningSystem>();
+            builder.AddSystem<GameHudUpdatingSystem>();
         }
 
         private void BindHealthBar(IEntity statusBarEntity, IEntity targetActor)
@@ -208,12 +210,6 @@ namespace OpenBreed.Sandbox.Worlds
 
             var percent = healthComponent.GetPercent();
             spriteComponent.Scale = new Vector2((int)(64 * percent), 1);
-
-            triggerMan.OnDamaged(targetActor, (s, a) =>
-            {
-                var percent = healthComponent.GetPercent();
-                spriteComponent.Scale = new Vector2((int)(64 * percent), 1);
-            });
         }
 
         private void BindAmmoBar(IEntity statusBarEntity, IEntity targetActor)
@@ -223,61 +219,13 @@ namespace OpenBreed.Sandbox.Worlds
 
             var percent = ammoComponent.GetRoundsPercent();
             spriteComponent.Scale = new Vector2((int)(32 * percent), 1);
-
-            triggerMan.OnInventoryChanged(targetActor, (s, a) =>
-            {
-                var percent = ammoComponent.GetRoundsPercent();
-                spriteComponent.Scale = new Vector2((int)(32 * percent), 1);
-            });
         }
 
         private void BindLivesCounter(IEntity statusCounterEntity, IEntity targetActor)
         {
             var livesComponent = targetActor.Get<LivesComponent>();
-
             var livesCount = livesComponent.Value;
             statusCounterEntity.SetText(0, livesCount.ToString().PadLeft(2, '0'));
-
-            triggerMan.OnEntityLivesChanged(targetActor, (s, a) =>
-            {
-                var livesCount = livesComponent.Value;
-                statusCounterEntity.SetText(0, livesCount.ToString().PadLeft(2, '0'));
-            });
-        }
-
-        private void BindAmmoCounter(IEntity statusCounterEntity, IEntity targetActor)
-        {
-            var inventoryComponent = targetActor.Get<InventoryComponent>();
-
-            triggerMan.OnInventoryChanged(targetActor, (s, a) =>
-            {
-                if (a.ItemId != ItemTypes.Ammo)
-                    return;
-
-                var slot = inventoryComponent.GetItemSlot(ItemTypes.Ammo);
-                var quantity = slot.GetItemQuantity(ItemTypes.Ammo);
-
-                if(quantity > 9)
-                    statusCounterEntity.SetText(0, "+");
-                else
-                    statusCounterEntity.SetText(0, quantity.ToString());
-            });
-        }
-
-        private void BindKeysCounter(IEntity statusCounterEntity, IEntity targetActor)
-        {
-            triggerMan.OnInventoryChanged(targetActor, (s, a) =>
-            {
-                if (a.ItemId != ItemTypes.KeycardStandard)
-                    return;
-
-                var inventoryComponent = targetActor.Get<InventoryComponent>();
-
-                var slot = inventoryComponent.GetItemSlot(ItemTypes.KeycardStandard);
-                var quantity = slot.GetItemQuantity(ItemTypes.KeycardStandard);
-
-                statusCounterEntity.SetText(0, quantity.ToString().PadLeft(2, '0'));
-            });
         }
 
         private IEntity GetPlayerControlledEntity(string playerName)
@@ -310,13 +258,13 @@ namespace OpenBreed.Sandbox.Worlds
                 var p1HealthBar = hudHelper.CreateHudElement("HealthBar", "Hud/HealthBar/P1", -128, 115);
                 worldMan.RequestAddEntity(p1HealthBar, world.Id);
 
-                var p1LivesCounter = hudHelper.CreateHudElement("LivesCounter", "Hud/LivesCounter/P1", -24, 120);
+                var p1LivesCounter = hudHelper.CreateHudElement("LivesCounter", "Hud/LivesCounter/P1", -24, 112);
                 worldMan.RequestAddEntity(p1LivesCounter, world.Id);
 
-                var p1AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "Hud/AmmoCounter/P1", 80, 120);
+                var p1AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "Hud/AmmoCounter/P1", 80, 112);
                 worldMan.RequestAddEntity(p1AmmoCounter, world.Id);
 
-                var p1KeysCounter = hudHelper.CreateHudElement("KeysCounter", "Hud/KeysCounter/P1", 128, 120);
+                var p1KeysCounter = hudHelper.CreateHudElement("KeysCounter", "Hud/KeysCounter/P1", 128, 112);
                 worldMan.RequestAddEntity(p1KeysCounter, world.Id);
 
                 var p2StatusBar = hudHelper.CreateHudElement("StatusBarP2", "Hud/StatusBar/P2", -160, -120);
@@ -328,13 +276,13 @@ namespace OpenBreed.Sandbox.Worlds
                 var p2HealthBar = hudHelper.CreateHudElement("HealthBar", "Hud/HealthBar/P2", -128, -114);
                 worldMan.RequestAddEntity(p2HealthBar, world.Id);
 
-                var p2LivesCounter = hudHelper.CreateHudElement("LivesCounter", "Hud/LivesCounter/P2", -24, -109);
+                var p2LivesCounter = hudHelper.CreateHudElement("LivesCounter", "Hud/LivesCounter/P2", -24, -117);
                 worldMan.RequestAddEntity(p2LivesCounter, world.Id);
 
-                var p2AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "Hud/AmmoCounter/P2", 80, -109);
+                var p2AmmoCounter = hudHelper.CreateHudElement("AmmoCounter", "Hud/AmmoCounter/P2", 80, -117);
                 worldMan.RequestAddEntity(p2AmmoCounter, world.Id);
 
-                var p2KeysCounter = hudHelper.CreateHudElement("KeysCounter", "Hud/KeysCounter/P2", 128, -109);
+                var p2KeysCounter = hudHelper.CreateHudElement("KeysCounter", "Hud/KeysCounter/P2", 128, -117);
                 worldMan.RequestAddEntity(p2KeysCounter, world.Id);
 
                 var hudViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
@@ -347,8 +295,6 @@ namespace OpenBreed.Sandbox.Worlds
                     BindHealthBar(p1HealthBar, p1Actor);
                     BindAmmoBar(p1AmmoBar, p1Actor);
                     BindLivesCounter(p1LivesCounter, p1Actor);
-                    BindAmmoCounter(p1AmmoCounter, p1Actor);
-                    BindKeysCounter(p1KeysCounter, p1Actor);
                 }
 
             }, singleTime: true);

@@ -167,8 +167,9 @@ namespace OpenBreed.Sandbox.Worlds
                 smartCardCamera.Get<PaletteComponent>().PaletteId = AddWorldPalette(world);
 
                 worldMan.RequestAddEntity(smartCardCamera, world.Id);
+
                 AddBackground(world, -320, -272);
-                AddText(world, - 320 / 2 + 20 , 240 / 2 - 38);
+                AddText(world, -320 / 2 + 20 , 240 / 2 - 49);
             }, singleTime: true);
         }
 
