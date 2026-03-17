@@ -53,7 +53,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static IEntity GetSmartCardScreenText(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag($"{WorldNames.SMARTCARD_SCREEN}/Text").FirstOrDefault();
+            return entityMan.GetByTag($"{WorldNames.SmartCardReader}/Text").FirstOrDefault();
         }
 
         public static IEntity GetEntityByDataGrid(this IEntityMan entityMan, IWorldMan worldMan, IEntity entity, int ox, int oy)
@@ -137,17 +137,17 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static IEntity GetMissionScreenText(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag($"{WorldNames.MISSION_SCREEN}/Text").FirstOrDefault();
+            return entityMan.GetByTag($"{WorldNames.MissionScreen}/Text").FirstOrDefault();
         }
 
         public static IEntity GetMissionScreenBackground(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag($"{WorldNames.MISSION_SCREEN}/Background").FirstOrDefault();
+            return entityMan.GetByTag($"{WorldNames.MissionScreen}/Background").FirstOrDefault();
         }
 
         public static IEntity GetHudCamera(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag($"Camera.{WorldNames.GAME_HUD}").FirstOrDefault();
+            return entityMan.GetByTag($"Camera.{WorldNames.GameHud}").FirstOrDefault();
         }
 
         public static IEntity GetMission(this IEntityMan entityMan, int worldId)

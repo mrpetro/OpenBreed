@@ -45,7 +45,8 @@ namespace OpenBreed.Common.Game.Services
             IRenderingMan renders,
             Lazy<IEntityFactory> lazyFactory,
             IEntityTriggerMan entityTriggers,
-            IEventsMan events)
+            IEventsMan events,
+            IPaletteMan palettes)
         {
             Triggers = triggers;
             Logger = logger;
@@ -64,6 +65,7 @@ namespace OpenBreed.Common.Game.Services
             this.lazyFactory = lazyFactory;
             EntityTriggers = entityTriggers;
             Events = events;
+            Palettes = palettes;
         }
 
         #endregion Public Constructors
@@ -103,6 +105,8 @@ namespace OpenBreed.Common.Game.Services
         public IEntityTriggerMan EntityTriggers { get; }
 
         public IEventsMan Events { get; }
+
+        public IPaletteMan Palettes { get; }
 
 
         #endregion Public Properties

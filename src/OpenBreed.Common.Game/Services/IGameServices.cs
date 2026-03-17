@@ -37,6 +37,7 @@ namespace OpenBreed.Common.Game.Services
         IEntityFactory Factory { get; }
         IEntityTriggerMan EntityTriggers { get; }
         IEventsMan Events { get; }
+        IPaletteMan Palettes { get; }
 
-}
+    }
 }

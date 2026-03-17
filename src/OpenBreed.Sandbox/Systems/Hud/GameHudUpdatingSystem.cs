@@ -31,6 +31,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         #region Private Fields
 
         private readonly IGameServices services;
+        private readonly IEntityClass actorClass;
 
         #endregion Private Fields
 
@@ -39,6 +40,8 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         public GameHudUpdatingSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
+
+            this.actorClass = services.Classes.GetByName("Actor");
         }
 
         #endregion Public Constructors
@@ -47,6 +50,17 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 
         public void Update(EntityEnteredEvent e)
         {
+            var entity = services.Entities.GetById(e.EntityId);
+
+            if (!entity.Is(actorClass))
+            {
+                return;
+            }
+
+            InitHealthBar(entity);
+            InitAmmoBar(entity);
+            InitLivesCounter(entity);
+            InitKeysCounter(entity);
         }
 
         public void Update(DamagedEvent e)
@@ -67,9 +81,12 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
                 var inventoryComponent = actorEntity.Get<InventoryComponent>();
 
                 var slot = inventoryComponent.GetItemSlot(ItemTypes.KeycardStandard);
-                var quantity = slot.GetItemQuantity(ItemTypes.KeycardStandard);
 
-                TryUpdateHudText("Hud/KeysCounter/P1", quantity.ToString().PadLeft(2, '0'));
+
+
+                var quantity = slot is null ? 0 : slot.GetItemQuantity(ItemTypes.KeycardStandard);
+
+                TryUpdateText("Hud/KeysCounter/P1", quantity.ToString().PadLeft(2, '0'));
 
                 return;
             }
@@ -79,12 +96,12 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
                 var inventoryComponent = actorEntity.Get<InventoryComponent>();
                 var ammoComponent = actorEntity.Get<AmmoComponent>();
                 var slot = inventoryComponent.GetItemSlot(ItemTypes.Ammo);
-                var quantity = slot.GetItemQuantity(ItemTypes.Ammo);
+                var quantity = slot is null ? 0 : slot.GetItemQuantity(ItemTypes.Ammo);
                 var percent = ammoComponent.GetRoundsPercent();
 
                 var text = quantity > 9 ? "+" : quantity.ToString();
 
-                TryUpdateHudText("Hud/AmmoCounter/P1", text);
+                TryUpdateText("Hud/AmmoCounter/P1", text);
                 TryUpdateBar("Hud/AmmoBar/P1", 32, percent);
 
                 return;
@@ -99,14 +116,14 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 
             var livesCount = livesComponent.Value;
 
-            TryUpdateHudText("Hud/LivesCounter/P1", livesCount.ToString().PadLeft(2, '0'));
+            TryUpdateText("Hud/LivesCounter/P1", livesCount.ToString().PadLeft(2, '0'));
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void TryUpdateHudText(string hudElementTag, string text)
+        private void TryUpdateText(string hudElementTag, string text)
         {
             var hudElementEntity = services.Entities.GetByTag(hudElementTag).FirstOrDefault();
 
@@ -129,6 +146,40 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 
             var spriteComponent = hudElementEntity.Get<SpriteComponent>();
             spriteComponent.Scale = new Vector2((int)(barSize * percent), 1);
+        }
+
+        private void InitHealthBar(IEntity entity)
+        {
+            var healthComponent = entity.Get<HealthComponent>();
+            var percent = healthComponent.GetPercent();
+
+            TryUpdateBar("Hud/HealthBar/P1", 64, percent);
+        }
+
+        private void InitAmmoBar(IEntity entity)
+        {
+            var ammoComponent = entity.Get<AmmoComponent>();
+            var percent = ammoComponent.GetRoundsPercent();
+
+            TryUpdateBar("Hud/AmmoBar/P1", 32, percent);
+        }
+
+        private void InitLivesCounter(IEntity entity)
+        {
+            var livesComponent = entity.Get<LivesComponent>();
+            var livesCount = livesComponent.Value;
+
+            TryUpdateText("Hud/LivesCounter/P1", livesCount.ToString().PadLeft(2, '0'));
+        }
+
+        private void InitKeysCounter(IEntity entity)
+        {
+            var inventoryComponent = entity.Get<InventoryComponent>();
+
+            var slot = inventoryComponent.GetItemSlot(ItemTypes.KeycardStandard);
+            var quantity = slot is null ? 0 : slot.GetItemQuantity(ItemTypes.KeycardStandard);
+
+            TryUpdateText("Hud/KeysCounter/P1", quantity.ToString().PadLeft(2, '0'));
         }
 
         #endregion Private Methods

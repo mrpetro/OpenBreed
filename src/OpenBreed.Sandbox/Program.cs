@@ -43,7 +43,6 @@ using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Door;
-using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
@@ -56,19 +55,8 @@ using OpenBreed.Wecs.Animation.Components.Extensions;
 using OpenBreed.Wecs.Audio.Components.Extensions;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Components.Extensions;
-using OpenBreed.Wecs.Control.Components;
-using OpenBreed.Wecs.Gui.Components.Extensions;
-using OpenBreed.Wecs.Physics.Components.Extensions;
-using OpenBreed.Wecs.Rendering.Components;
-using OpenBreed.Wecs.Rendering.Components.Extensions;
-using OpenBreed.Wecs.Scripting.Components.Extensions;
-using OpenBreed.Wecs.Events;
-using OpenBreed.Wecs.Animation.Systems.Events;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
-using OpenBreed.Wecs.Audio.Systems.Extensions;
+
 using OpenBreed.Wecs.Control.Systems.Extensions;
-using OpenBreed.Wecs.Core.Systems.Events;
-using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Gui.Systems;
 using OpenBreed.Wecs.Gui.Systems.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Extensions;
@@ -187,19 +175,13 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupScreenWorldHelper();
             hostBuilder.SetupGameHudWorldHelper();
-            hostBuilder.SetupGameSmartcardWorldHelper();
-            hostBuilder.SetupMissionScreenWorldHelper();
-            hostBuilder.SetupDebugHudWorldHelper();
             hostBuilder.SetupEntriesHelper();
             hostBuilder.SetupDoorHelper();
-            hostBuilder.SetupHudHelper();
-            hostBuilder.SetupVanillaStatusBarHelper();
             hostBuilder.SetupElectricGateHelper();
             hostBuilder.SetupPickableHelper();
             hostBuilder.SetupWeaponsMan();
             hostBuilder.SetupGenericCellHelper();
             hostBuilder.SetupEnvironmentHelper();
-            hostBuilder.SetupCameraHelper();
             hostBuilder.SetupTeleportHelper();
             hostBuilder.SetupActorHelper();
             hostBuilder.SetupDynamicResolver();
@@ -464,7 +446,6 @@ namespace OpenBreed.Sandbox
         private void InitGameWorld(IServiceProvider serviceProvider)
         {
             var dataLoaderFactory = serviceProvider.GetRequiredService<IDataLoaderFactory>();
-            var cameraHelper = serviceProvider.GetRequiredService<CameraHelper>();
             var entityMan = serviceProvider.GetRequiredService<IEntityMan>();
             var actorHelper = serviceProvider.GetRequiredService<ActorHelper>();
             var scriptMan = serviceProvider.GetRequiredService<IScriptMan>();
@@ -472,7 +453,8 @@ namespace OpenBreed.Sandbox
             var triggerMan = serviceProvider.GetRequiredService<ITriggerMan>();
             var worldGateHelper = serviceProvider.GetRequiredService<EntriesHelper>();
             var gameSettings = serviceProvider.GetRequiredService<IOptions<GameSettings>>();
-            var hudHelper = serviceProvider.GetRequiredService<HudHelper>();
+            var entityFactory = serviceProvider.GetRequiredService<IEntityFactory>();
+
 
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
 
@@ -499,7 +481,7 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapLegacyLoader.Load("Vanilla/47");
 
             //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
-            var playerCamera = cameraHelper.CreateCamera("Camera.Player", 0, 0, 320, 240);
+            var playerCamera = entityFactory.CreateCamera("Camera.Player", 0, 0, 320, 240);
 
             playerCamera.Add(new PauseImmuneComponent());
 
@@ -601,14 +583,10 @@ namespace OpenBreed.Sandbox
             var environmentHelper = sp.GetRequiredService<EnvironmentHelper>();
             var actorHelper = sp.GetRequiredService<ActorHelper>();
             var teleportHelper = sp.GetRequiredService<TeleportHelper>();
-            var cameraHelper = sp.GetRequiredService<CameraHelper>();
             var entityMan = sp.GetRequiredService<IEntityMan>();
             var triggerMan = sp.GetRequiredService<ITriggerMan>();
             var screenWorldHelper = sp.GetRequiredService<ScreenWorldHelper>();
-            var gameHudWorldHelper = sp.GetRequiredService<GameHudWorldHelper>();
-            var debugHudWorldHelper = sp.GetRequiredService<DebugHudWorldHelper>();
-            var smartCardScreenWorldHelper = sp.GetRequiredService<SmartcardScreenWorldHelper>();
-            var missionScreenWorldHelper = sp.GetRequiredService<MissionScreenWorldHelper>();
+            var gameHudWorldHelper = sp.GetRequiredService<SetupHelper>();
 
             //Create 4 sound sources, each one acting as a separate channel
             soundMan.CreateSoundSource();
@@ -623,11 +601,9 @@ namespace OpenBreed.Sandbox
 
             //worldGateHelper.RegisterCollisionPairs();
 
-            cameraHelper.CreateAnimations();
+            gameHudWorldHelper.Setup();
 
             var screenWorld = screenWorldHelper.CreateWorld(renderView);
-
-            debugHudWorldHelper.Create();
 
             sp.GetRequiredService<IScriptMan>().Expose("Factory", sp.GetRequiredService<IEntityFactory>());
 
@@ -636,11 +612,10 @@ namespace OpenBreed.Sandbox
             InitPlayers(sp);
             InitLimboWorld(sp);
             InitGameWorld(sp);
-
-            gameHudWorldHelper.Create();
-            smartCardScreenWorldHelper.Create();
-            missionScreenWorldHelper.Create();
-
+            worldMan.CreateDebugHud();
+            worldMan.CreateGameHud();
+            worldMan.CreateSmartCardReader();
+            worldMan.CreateMissionScreen();
 
             //var hudWorld = worldMan.GetByName(GameHudWorldHelper.WorldName);
 

@@ -37,8 +37,8 @@ namespace OpenBreed.Sandbox.Worlds
         #region Public Fields
 
         public const string GAME_VIEWPORT = "Viewport.Game";
-        public const string DEBUG_HUD_VIEWPORT = $"Viewport.{WorldNames.DEBUG_HUD}";
-        public const string GAME_HUD_VIEWPORT = $"Viewport.{WorldNames.GAME_HUD}";
+        public const string DEBUG_HUD_VIEWPORT = $"Viewport.{WorldNames.DebugHud}";
+        public const string GAME_HUD_VIEWPORT = $"Viewport.{WorldNames.GameHud}";
         public const string TEXT_VIEWPORT = "Viewport.Text";
 
         #endregion Public Fields

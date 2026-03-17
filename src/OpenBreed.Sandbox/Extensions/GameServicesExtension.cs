@@ -27,6 +27,18 @@ using OpenBreed.Wecs.Audio.Systems.Extensions;
 
 namespace OpenBreed.Sandbox.Extensions
 {
+    public static class AnimationNames
+    {
+        #region Public Fields
+
+        public const string CameraFadeOut = "Vanilla/Common/Camera/Effects/FadeOut";
+        public const string CameraFadeIn = "Vanilla/Common/Camera/Effects/FadeIn";
+        public const string TextFadeIn = "Vanilla/Common/Text/Effects/FadeIn";
+        public const string TextFadeOut = "Vanilla/Common/Text/Effects/FadeOut";
+
+        #endregion Public Fields
+    }
+
     public static class GameServicesExtension
     {
         #region Public Methods
@@ -47,25 +59,25 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void TextFadeIn(this IGameServices services, ITask task, IEntity entity)
         {
-            var textFadeInClipId = services.Clips.GetId("Vanilla/Common/Text/Effects/FadeIn");
+            var textFadeInClipId = services.Clips.GetId(AnimationNames.TextFadeIn);
             services.PlayAnimation(task, entity, textFadeInClipId, "Text fade in...");
         }
 
         public static void TextFadeOut(this IGameServices services, ITask task, IEntity entity)
         {
-            var textFadeOutClipId = services.Clips.GetId("Vanilla/Common/Text/Effects/FadeOut");
+            var textFadeOutClipId = services.Clips.GetId(AnimationNames.TextFadeOut);
             services.PlayAnimation(task, entity, textFadeOutClipId, "Text fade out...");
         }
 
         public static void FadeIn(this IGameServices services, ITask task, IEntity cameraEntity)
         {
-            var clipId = services.Clips.GetId(CameraHelper.CAMERA_FADE_IN);
+            var clipId = services.Clips.GetId(AnimationNames.CameraFadeIn);
             services.PlayAnimation(task, cameraEntity, clipId, "Fade in...");
         }
 
         public static void FadeOut(this IGameServices services, ITask task, IEntity cameraEntity)
         {
-            var clipId = services.Clips.GetId(CameraHelper.CAMERA_FADE_OUT);
+            var clipId = services.Clips.GetId(AnimationNames.CameraFadeOut);
             services.PlayAnimation(task, cameraEntity, clipId, "Fade out...");
         }
 

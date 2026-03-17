@@ -25,7 +25,6 @@ using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Door;
-using OpenBreed.Sandbox.Entities.Hud;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Loaders;
@@ -92,14 +91,6 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-        public static void SetupCameraHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<CameraHelper>();
-            });
-        }
-
         public static void SetupEnvironmentHelper(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -140,22 +131,6 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-        public static void SetupHudHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<HudHelper>();
-            });
-        }
-
-        public static void SetupVanillaStatusBarHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<VanillaStatusBarHelper>();
-            });
-        }
-
         public static void SetupEntriesHelper(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -184,31 +159,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddScoped<GameHudWorldHelper>();
-            });
-        }
-
-        public static void SetupGameSmartcardWorldHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<SmartcardScreenWorldHelper>();
-            });
-        }
-
-        public static void SetupMissionScreenWorldHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<MissionScreenWorldHelper>();
-            });
-        }
-
-        public static void SetupDebugHudWorldHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<DebugHudWorldHelper>();
+                services.AddScoped<SetupHelper>();
             });
         }
 

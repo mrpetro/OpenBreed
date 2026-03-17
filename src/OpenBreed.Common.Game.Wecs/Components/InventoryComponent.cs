@@ -23,10 +23,14 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #region Public Properties
 
+        public static InventorySlot Empty { get; } = new InventorySlot("Empty");
+
         /// <summary>
         /// Name of this bag. I.e. "Backpack"
         /// </summary>
         public string Name { get; }
+
+        public bool IsEmpty => items.Count == 0;
 
         #endregion Public Properties
 
@@ -35,8 +39,6 @@ namespace OpenBreed.Common.Game.Wecs.Components
         public int GetItemQuantity(int itemId) => items[itemId];
 
         public bool ContainsItem(int itemId) => items.ContainsKey(itemId);
-
-        public bool IsEmpty => items.Count == 0;
 
         public void AddItem(int itemId, int quantity = 1)
         {
@@ -74,6 +76,8 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         public InventorySlot[] Slots { get; }
 
+        public List<(int, int)> ToAdd { get; } = new List<(int, int)>();
+
         #endregion Public Properties
 
         #region Public Methods
@@ -87,8 +91,6 @@ namespace OpenBreed.Common.Game.Wecs.Components
         {
             return Slots.FirstOrDefault(slot => slot.IsEmpty);
         }
-
-        public List<(int, int)> ToAdd { get; } = new List<(int, int)>();
 
         #endregion Public Methods
     }

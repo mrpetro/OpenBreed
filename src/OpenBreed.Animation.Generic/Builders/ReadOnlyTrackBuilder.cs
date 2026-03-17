@@ -58,7 +58,7 @@ namespace OpenBreed.Animation.Generic.Builders
 
         internal void SetFrameUpdater(FrameUpdater<TObject, TValue> frameUpdater)
         {
-            FrameUpdater = frameUpdater;
+            FrameUpdater = frameUpdater ?? throw new System.ArgumentNullException(nameof(frameUpdater));
         }
 
         internal void SetInitialValue(TValue initialValue)

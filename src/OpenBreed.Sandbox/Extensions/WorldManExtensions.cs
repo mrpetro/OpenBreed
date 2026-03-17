@@ -1,6 +1,19 @@
-﻿using OpenBreed.Wecs.Abstractions.Primitives;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Wecs.Systems.Hud;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Rendering.Abstractions.Data;
+using OpenBreed.Rendering.OpenGL.Managers;
+using OpenBreed.Sandbox.Systems.Camera;
+using OpenBreed.Sandbox.Systems.MissionScreen;
+using OpenBreed.Sandbox.Systems.SmartCard;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Animation.Systems;
 using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Rendering.Systems;
+using OpenBreed.Wecs.Scripting.Systems;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -12,6 +25,60 @@ namespace OpenBreed.Sandbox.Extensions
 {
     public static class WorldManExtensions
     {
+        #region Public Methods
+
+        public static IWorld CreateDebugHud(this IWorldMan worldMan)
+        {
+            return worldMan.Create()
+                .SetName(WorldNames.DebugHud)
+                .AddSystem<AnimatorSystem>()
+                .AddSystem<TextSystem>()
+                .AddSystem<DebugHudSystem>()
+                .AddSystem<DebugHudInitSystem>()
+                .AddSystem<ScriptRunningSystem>()
+                .AddSystem<CameraSettingPaletteSystem>()
+                .Build();
+        }
+
+        public static IWorld CreateGameHud(this IWorldMan worldMan)
+        {
+            return worldMan.Create().SetName(WorldNames.GameHud)
+            .AddSystem<AnimatorSystem>()
+            .AddSystem<SpriteSystem>()
+            .AddSystem<TextSystem>()
+            .AddSystem<ScriptRunningSystem>()
+            .AddSystem<GameHudUpdatingSystem>()
+            .AddSystem<GameHudInitSystem>()
+            .AddSystem<CameraSettingPaletteSystem>()
+            .Build();
+        }
+
+        public static IWorld CreateSmartCardReader(this IWorldMan worldMan)
+        {
+            return worldMan.Create()
+                .SetName(WorldNames.SmartCardReader)
+                .AddSystem<AnimatorSystem>()
+                .AddSystem<SpriteSystem>()
+                .AddSystem<PictureSystem>()
+                .AddSystem<TextSystem>()
+                .AddSystem<SmartCardInitSystem>()
+                .AddSystem<CameraSettingPaletteSystem>()
+                .Build();
+        }
+
+        public static IWorld CreateMissionScreen(this IWorldMan worldMan)
+        {
+            return worldMan.Create()
+                .SetName("MissionScreen")
+                .AddSystem<AnimatorSystem>()
+                .AddSystem<SpriteSystem>()
+                .AddSystem<PictureSystem>()
+                .AddSystem<TextSystem>()
+                .AddSystem<MissionScreenInitSystem>()
+                .AddSystem<CameraSettingPaletteSystem>()
+                .Build();
+        }
+
         public static void SetEntityPosition(this IWorldMan worldMan, IEntity target, int entryId)
         {
             var world = worldMan.GetById(target.WorldId);
@@ -43,5 +110,7 @@ namespace OpenBreed.Sandbox.Extensions
 
             target.State = null;
         }
+
+        #endregion Public Methods
     }
 }

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
@@ -17,27 +18,13 @@ using System.Threading.Tasks;
 namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 {
     [RequireEntityWithTag("FpsCounter")]
-    public class FpsCounterSystem : IEventSystem<ViewportResizedEvent>, IUpdatableSystem
+    public class DebugHudSystem : IUpdatableSystem
     {
         private readonly IGameServices services;
 
-        public FpsCounterSystem(IGameServices services)
+        public DebugHudSystem(IGameServices services)
         {
             this.services = services;
-        }
-
-        public void Update(ViewportResizedEvent e)
-        {
-            var entity = services.Entities.GetById(e.EntityId);
-            var hudViewport = services.Entities.GetHudViewport();
-
-            if (entity != hudViewport)
-            {
-                return;
-            }
-
-            var fpsCounter = services.Entities.GetFpsCounter();
-            fpsCounter.SetPosition(-e.Width / 2.0f, -e.Height / 2.0f);
         }
 
         public void UpdateEntity(IEntity entity, IUpdateContext context)

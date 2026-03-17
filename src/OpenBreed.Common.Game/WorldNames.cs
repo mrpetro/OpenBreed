@@ -8,9 +8,9 @@ namespace OpenBreed.Common.Game
 {
     public static class WorldNames
     {
-        public const string GAME_HUD = "GameHUD";
-        public const string DEBUG_HUD = "DebugHud";
-        public const string MISSION_SCREEN = "MissionScreen";
-        public const string SMARTCARD_SCREEN = "SmartCardScreen";
+        public const string GameHud = "GameHUD";
+        public const string DebugHud = "DebugHUD";
+        public const string MissionScreen = "MissionScreen";
+        public const string SmartCardReader = "SmartCardScreen";
     }
 }
