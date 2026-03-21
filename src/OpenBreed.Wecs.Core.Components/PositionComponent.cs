@@ -2,6 +2,8 @@
 
 namespace OpenBreed.Wecs.Core.Components
 {
+
+
     public interface IPositionComponentTemplate : IComponentTemplate
     {
         #region Public Properties

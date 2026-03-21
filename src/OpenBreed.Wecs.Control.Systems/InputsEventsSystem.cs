@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Control.Systems
 
         #region Public Methods
 
-        public void Update(WorldKeyboardEvent e)
+        public void OnEvent(WorldKeyboardEvent e)
         {
             var world = this.worldMan.GetById(e.WorldId);
 

@@ -32,7 +32,7 @@ namespace OpenBreed.Wecs.Physics.Systems
 
         #region Public Methods
 
-        public void Update(EntityEnteredEvent e)
+        public void OnEvent(EntityEnteredEvent e)
         {
             var world = this.worldMan.GetById(e.WorldId);
 

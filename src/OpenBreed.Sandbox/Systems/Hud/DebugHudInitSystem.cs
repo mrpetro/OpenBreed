@@ -33,7 +33,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             this.viewClient = viewClient;
         }
 
-        public void Update(WorldInitializedEventArgs e)
+        public void OnEvent(WorldInitializedEventArgs e)
         {
             var world = services.Worlds.GetById(e.WorldId);
 
@@ -54,7 +54,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             AddFpsCounter(world);
             AddPositionInfo(world);
 
-            var hudViewport = services.Entities.GetByTag(ScreenWorldHelper.DEBUG_HUD_VIEWPORT).First();
+            var hudViewport = services.Entities.GetByTag(EntityNames.DebugHudViewport).First();
             hudViewport.SetViewportCamera(hudCamera.Id);
 
         }
@@ -86,11 +86,11 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         }
 
 
-        public void Update(ViewportResizedEvent e)
+        public void OnEvent(ViewportResizedEvent e)
         {
             var viewportEntity = services.Entities.GetById(e.EntityId);
 
-            if (viewportEntity.Tag != ScreenWorldHelper.DEBUG_HUD_VIEWPORT)
+            if (viewportEntity.Tag != EntityNames.DebugHudViewport)
             {
                 return;
             }

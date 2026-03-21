@@ -209,7 +209,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static IEntity GetHudViewport(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
+            return entityMan.GetByTag(EntityNames.GameHudViewport).First();
         }
 
         public static IEntity GetFpsCounter(this IEntityMan entityMan)
@@ -219,7 +219,7 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static IEntity GetGameViewport(this IEntityMan entityMan)
         {
-            return entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
+            return entityMan.GetByTag(EntityNames.GameViewport).First();
         }
     }
 }

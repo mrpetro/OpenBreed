@@ -56,12 +56,7 @@ namespace OpenBreed.Wecs.Physics.Systems
             var newPos = position.Value + (velocity.Value + newVel) * 0.5f * context.Dt;
 
             velocity.Value = newVel;
-
-            if (position.Value == newPos)
-                return;
-
             position.Value = newPos;
-            eventsMan.Raise(new PositionChangedEvent(entity.Id, position.Value));
         }
 
         #endregion Protected Methods

@@ -70,7 +70,7 @@ namespace OpenBreed.Wecs.Systems
                 throw new InvalidOperationException("Expected event system with generic type argument that inherits EventArgs.");
             }
 
-            var updateMethodInfo = genericSystemType.GetMethod("Update", BindingFlags.Instance | BindingFlags.Public);
+            var updateMethodInfo = genericSystemType.GetMethod("OnEvent", BindingFlags.Instance | BindingFlags.Public);
 
             if (updateMethodInfo is null)
             {

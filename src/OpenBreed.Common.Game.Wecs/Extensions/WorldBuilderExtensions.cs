@@ -19,30 +19,12 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
     {
         #region Public Methods
 
-        public static void SetupScreenWorldSystems(this IWorldBuilder builder)
-        {
-            //Input Stage
-            builder.AddSystem<ActorMovementByPlayerInputsSystem>();
-
-            //Video
-
-            builder.AddSystem<ViewportSystem>();
-            builder.AddSystem<SoundSystem>();
-            builder.AddSystem<TimerSystem>();
-            builder.AddSystem<FrameSystem>();
-        }
-
-        public static void SetupLimboWorldSystems(this IWorldBuilder builder)
-        {
-            builder.AddSystem<ResurrectionSystem>();
-            builder.AddSystem<TimerSystem>();
-        }
-
         public static void SetupGameWorldSystems(this IWorldBuilder builder, bool isEditor)
         {
             //Update Stage
             //builder.AddGameLogicSystems();
 
+            builder.AddSystem<PositionTrackingSystem>();
             builder.AddSystem<MovementSystemVanilla>();
             builder.AddSystem<DirectionSystemVanilla>();
 
@@ -93,6 +75,8 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             builder.AddSystem<CollisionVisualizingSystem>();
             builder.AddSystem<UnknownMapCellDisplaySystem>();
             builder.AddSystem<ViewportSystem>();
+
+            builder.AddSystem<FollowPositionSystem>();
 
             builder.AddSystem<ScriptRunningSystem>();
 

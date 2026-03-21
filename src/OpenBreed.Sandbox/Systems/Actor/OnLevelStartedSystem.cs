@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             return duration;
         }
 
-        public void Update(LevelStartedEvent e)
+        public void OnEvent(LevelStartedEvent e)
         {
             var commentator = services.Entities.GetCommentator();
 

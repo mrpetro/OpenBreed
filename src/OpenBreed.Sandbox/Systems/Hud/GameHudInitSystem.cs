@@ -54,7 +54,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 
         #region Public Methods
 
-        public void Update(WorldInitializedEventArgs e)
+        public void OnEvent(WorldInitializedEventArgs e)
         {
             var world = services.Worlds.GetById(e.WorldId);
 
@@ -105,7 +105,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             var p2KeysCounter = CreateHudElement("KeysCounter", "Hud/KeysCounter/P2", 128, -117);
             services.Worlds.RequestAddEntity(p2KeysCounter, world.Id);
 
-            var hudViewport = services.Entities.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
+            var hudViewport = services.Entities.GetByTag(EntityNames.GameHudViewport).First();
             hudViewport.SetViewportCamera(hudCamera.Id);
         }
 

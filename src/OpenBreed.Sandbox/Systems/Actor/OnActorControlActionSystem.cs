@@ -44,7 +44,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Methods
 
-        public void Update(EntityActionEvent<PlayerActions> e)
+        public void OnEvent(EntityActionEvent<PlayerActions> e)
         {
             var entity = services.Entities.GetById(e.EntityId);
 

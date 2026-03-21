@@ -147,14 +147,6 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-        public static void SetupScreenWorldHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<ScreenWorldHelper>();
-            });
-        }
-
         public static void SetupGameHudWorldHelper(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>

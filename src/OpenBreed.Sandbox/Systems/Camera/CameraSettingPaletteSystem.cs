@@ -17,7 +17,7 @@ namespace OpenBreed.Sandbox.Systems.Camera
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
-        public void Update(EntityEnteredEvent e)
+        public void OnEvent(EntityEnteredEvent e)
         {
             var camera = services.Entities.GetById(e.EntityId);
 

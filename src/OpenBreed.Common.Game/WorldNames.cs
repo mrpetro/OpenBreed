@@ -12,5 +12,8 @@ namespace OpenBreed.Common.Game
         public const string DebugHud = "DebugHUD";
         public const string MissionScreen = "MissionScreen";
         public const string SmartCardReader = "SmartCardScreen";
+        public const string ScreenWorld = "ScreenWorld";
+        public const string Limbo = "Limbo";
+        public const string Game = "Vanilla";
     }
 }

@@ -96,7 +96,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             var mapId = exitId % 64;
             var entryId = exitId / 64;
 
-            var mapKey = $"Vanilla/{mapId}";
+            var mapKey = $"{WorldNames.Game}/{mapId}";
 
             var worldIdToRemoveFrom = actorEntity.WorldId;
 

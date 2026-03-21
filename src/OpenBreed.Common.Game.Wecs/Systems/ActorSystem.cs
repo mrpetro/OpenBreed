@@ -11,7 +11,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 {
     public class ActorSystem : IEventSystem<DestroyedEvent>
     {
-        public void Update(DestroyedEvent e)
+        public void OnEvent(DestroyedEvent e)
         {
             //throw new NotImplementedException();
         }

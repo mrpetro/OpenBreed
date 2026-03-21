@@ -44,7 +44,7 @@ namespace OpenBreed.Sandbox.Systems.MissionScreen
 
         #region Public Methods
 
-        public void Update(WorldInitializedEventArgs e)
+        public void OnEvent(WorldInitializedEventArgs e)
         {
             var world = services.Worlds.GetById(e.WorldId);
 

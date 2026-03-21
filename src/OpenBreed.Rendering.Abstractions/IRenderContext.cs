@@ -39,6 +39,7 @@ namespace OpenBreed.Rendering.Abstractions
         #region Public Methods
 
         IRenderView CreateView(float minX = 0, float minY = 0, float maxX = 1, float maxY = 1, bool activate = true);
+
         void RemoveView(IRenderView renderView);
 
         void Render(float dt);

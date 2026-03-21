@@ -30,6 +30,7 @@
 			</States>
 		</Animation>
 		<Position X="$(startX)" Y="$(startY)" />
+		<PreviousPosition X="$(startX)" Y="$(startY)" />
 		<Thrust X="0" Y="0" />
 		<Velocity X="0" Y="0" />
 		<AngularPosition>
@@ -91,5 +92,12 @@
 		</Keys>
 		<Weapons>
 		</Weapons>
+        <!-- <Inventory> -->
+            <!-- <Slot Name="Backpack"> -->
+                <!-- <Items> -->
+                    <!-- <Item Name="" />   -->
+                <!-- </Items> -->
+            <!-- </Slot> -->
+        <!-- </Inventory> -->
     </Components>
 </EntityTemplate>

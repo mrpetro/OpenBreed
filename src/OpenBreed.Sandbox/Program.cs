@@ -12,12 +12,21 @@ using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Database.Xml.Extensions;
 using OpenBreed.Common.Extensions;
+using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Extensions;
+using OpenBreed.Common.Game.Managers;
+using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Common.Game.Wecs.Systems;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
 using OpenBreed.Common.Windows.Extensions;
 using OpenBreed.Core;
+using OpenBreed.Core.Abstractions;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
@@ -38,6 +47,7 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Rendering.Abstractions.Events;
+using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
@@ -47,20 +57,25 @@ using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
-using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
+using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Animation.Components.Extensions;
 using OpenBreed.Wecs.Audio.Components.Extensions;
+using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Components.Extensions;
-
-using OpenBreed.Wecs.Control.Systems.Extensions;
+using OpenBreed.Wecs.Core.Systems;
 using OpenBreed.Wecs.Gui.Systems;
 using OpenBreed.Wecs.Gui.Systems.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Extensions;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
+using OpenBreed.Wecs.Rendering.Systems.Helpers;
+using OpenBreed.Wecs.Rendering.Systems.Primitives;
 using OpenBreed.Wecs.Scripting.Systems;
 using OpenBreed.Wecs.Scripting.Systems.Extensions;
 using OpenBreed.Wecs.Worlds;
@@ -80,21 +95,8 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using OpenBreed.Rendering.Abstractions.Extensions;
-using OpenBreed.Core.Abstractions;
-using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Common.Game;
-using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Common.Game.Managers;
-using OpenBreed.Common.Game.Extensions;
-using OpenBreed.Common.Interface.Tools;
-using OpenBreed.Wecs.Rendering.Systems.Helpers;
-using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Abstractions.Primitives;
-using OpenBreed.Wecs.Abstractions.Extensions;
-using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Rendering.Systems.Primitives;
 
 namespace OpenBreed.Sandbox
 {
@@ -173,7 +175,6 @@ namespace OpenBreed.Sandbox
                 dataLoaderFactory.SetupScriptDataLoader(sp);
             });
 
-            hostBuilder.SetupScreenWorldHelper();
             hostBuilder.SetupGameHudWorldHelper();
             hostBuilder.SetupEntriesHelper();
             hostBuilder.SetupDoorHelper();
@@ -481,63 +482,34 @@ namespace OpenBreed.Sandbox
             //var gameWorld = mapLegacyLoader.Load("Vanilla/47");
 
             //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
-            var playerCamera = entityFactory.CreateCamera("Camera.Player", 0, 0, 320, 240);
 
-            playerCamera.Add(new PauseImmuneComponent());
-
-            var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
-            gameViewport.SetViewportCamera(playerCamera.Id);
-
-            //Follow John actor
-            //var johnPlayerEntity = entityMan.GetByTag("John").First();
-
-            var player1Entity = entityMan.GetByTag("Players/P1").First();
-
-            var johnPlayerEntity = actorHelper.CreatePlayerActor("John", new Vector2(0, 0));
-
-            player1Entity.SetControlledEntity(johnPlayerEntity.Id);
-
-            scriptMan.Expose("JohnPlayer", johnPlayerEntity);
-
-            //hudHelper.AddCursor(gameWorld);
-
-            johnPlayerEntity.AddFollower(playerCamera);
-
-            triggerMan.OnEntityFollow(johnPlayerEntity, (s, a) =>
-            {
-                var followerEntity = entityMan.GetById(a.FollowerId);
-                Glue(johnPlayerEntity, followerEntity);
-            });
 
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
+                var playerCamera = entityFactory.CreateCamera("Camera.Player", 0, 0, 320, 240);
+
+                playerCamera.Add(new PauseImmuneComponent());
+
+                var gameViewport = entityMan.GetByTag(EntityNames.GameViewport).First();
+                gameViewport.SetViewportCamera(playerCamera.Id);
+
+                var player1Entity = entityMan.GetByTag("Players/P1").First();
+
+                var johnPlayerEntity = actorHelper.CreatePlayerActor("John", new Vector2(0, 0));
+
+                player1Entity.SetControlledEntity(johnPlayerEntity.Id);
+
+                johnPlayerEntity.AddFollower(playerCamera);
+
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
             });
-        }
-
-        private void Glue(IEntity followed, IEntity follower)
-        {
-            var followedPos = followed.Get<PositionComponent>();
-            var followerPos = follower.Get<PositionComponent>();
-
-            followerPos.Value = followedPos.Value;
-        }
-
-        private void InitLimboWorld(IServiceProvider serviceProvider)
-        {
-            var worldMan = serviceProvider.GetRequiredService<IWorldMan>();
-            var worldBuilder = worldMan.Create();
-            worldBuilder.SetName("Limbo");
-            worldBuilder.SetupLimboWorldSystems();
-
-            var gameWorld = worldBuilder.Build();
         }
 
         void OnRenderFrame(Rendering.Abstractions.IRenderView view, float dt)
         {
             var worldMan = view.Context.ServiceProvider.GetRequiredService<IWorldMan>();
 
-            var screenWorld = worldMan.GetByName("ScreenWorld");
+            var screenWorld = worldMan.GetByName(WorldNames.ScreenWorld);
 
             if (screenWorld is null)
             {
@@ -585,7 +557,6 @@ namespace OpenBreed.Sandbox
             var teleportHelper = sp.GetRequiredService<TeleportHelper>();
             var entityMan = sp.GetRequiredService<IEntityMan>();
             var triggerMan = sp.GetRequiredService<ITriggerMan>();
-            var screenWorldHelper = sp.GetRequiredService<ScreenWorldHelper>();
             var gameHudWorldHelper = sp.GetRequiredService<SetupHelper>();
 
             //Create 4 sound sources, each one acting as a separate channel
@@ -603,14 +574,12 @@ namespace OpenBreed.Sandbox
 
             gameHudWorldHelper.Setup();
 
-            var screenWorld = screenWorldHelper.CreateWorld(renderView);
-
-            sp.GetRequiredService<IScriptMan>().Expose("Factory", sp.GetRequiredService<IEntityFactory>());
+            worldMan.CreateScreenWorld();
 
             //LoadSandboxWorld(40, 40);
 
             InitPlayers(sp);
-            InitLimboWorld(sp);
+            worldMan.CreateLimboWorld();
             InitGameWorld(sp);
             worldMan.CreateDebugHud();
             worldMan.CreateGameHud();

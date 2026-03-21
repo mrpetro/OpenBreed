@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
@@ -30,7 +31,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             actorClass = services.Classes.GetByName("Actor");
         }
 
-        public void Update(DestroyedEvent e)
+        public void OnEvent(DestroyedEvent e)
         {
             var entity = services.Entities.GetById(e.EntityId);
 
@@ -53,11 +54,11 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
             services.Logger.LogInformation("Player Died!");
 
-            var limboWorld = services.Worlds.GetByName("Limbo");
+            var limboWorld = services.Worlds.GetByName(WorldNames.Limbo);
 
             entity.State = "Dead";
 
-            var task = Core.Task.Create((t) => services.AddToWorld(t, entity, "Limbo"));
+            var task = Core.Task.Create((t) => services.AddToWorld(t, entity, WorldNames.Limbo));
 
             task.Then((t) => services.Wait(t, entity, 3000))
                 .Then((t) => services.Resurrect(t, entity));

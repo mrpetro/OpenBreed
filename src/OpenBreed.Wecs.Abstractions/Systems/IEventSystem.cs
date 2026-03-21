@@ -17,6 +17,6 @@
         /// Update system when event occurs
         /// </summary>
         /// <param name="e">Event data</param>
-        void Update(TEvent e);
+        void OnEvent(TEvent e);
     }
 }
