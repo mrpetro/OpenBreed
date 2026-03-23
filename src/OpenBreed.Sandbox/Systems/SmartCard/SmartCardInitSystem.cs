@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Systems.SmartCard
 {

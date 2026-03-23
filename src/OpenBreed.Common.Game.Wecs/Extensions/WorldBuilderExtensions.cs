@@ -19,7 +19,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
     {
         #region Public Methods
 
-        public static void SetupGameWorldSystems(this IWorldBuilder builder, bool isEditor)
+        public static IWorldBuilder AddGameWorldSystems(this IWorldBuilder builder, bool isEditor)
         {
             //Update Stage
             //builder.AddGameLogicSystems();
@@ -86,7 +86,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
                 builder.AddSystem<CursorSystem>();
             }
 
-            //Reset Stage
+            return builder;
         }
 
         #endregion Public Methods

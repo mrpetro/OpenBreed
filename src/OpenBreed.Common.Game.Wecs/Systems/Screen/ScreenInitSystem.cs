@@ -2,6 +2,7 @@
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Components;
+using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.OpenGL;
@@ -10,6 +11,9 @@ using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Control.Components;
+using OpenBreed.Wecs.Control.Systems.Extensions;
+using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenTK.Mathematics;
@@ -57,21 +61,25 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Screen
                 throw new InvalidOperationException("Expected at least one active render view");
             }
 
-            var gameCommentatorBuilder = services.Factory.Create($@"ABTA\Templates\Common\GameCommentator");
-            gameCommentatorBuilder.SetTag("Commentator");
-
-            var gameCommentator = gameCommentatorBuilder.Build();
-
             var player1Entity = CreatePlayer("P1");
+            var gameCommentator = services.Factory.CreateCommentator();
+            var playerCamera = services.Factory.CreateCamera("Camera.Player", 0, 0, 320, 240);
+            var johnPlayerEntity = services.Factory.CreatePlayerActor("John", new Vector2(0, 0));
+            var gameViewport = services.Factory.CreateViewport(EntityNames.GameViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "GameViewport");
+            var gameHudViewport = services.Factory.CreateViewport(EntityNames.GameHudViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "GameHudViewport");
+            var debugHudViewport = services.Factory.CreateViewport(EntityNames.DebugHudViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "DebugHudViewport");
+            var textViewport = services.Factory.CreateViewport(EntityNames.TextViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "TextViewport");
 
-            var gameViewport = CreateViewportEntity(EntityNames.GameViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "GameViewport");
-            var gameHudViewport = CreateViewportEntity(EntityNames.GameHudViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "GameHudViewport");
+            playerCamera.Add(new PauseImmuneComponent());
+            gameViewport.SetViewportCamera(playerCamera.Id);
+
+            player1Entity.SetControlledEntity(johnPlayerEntity.Id);
+
+            johnPlayerEntity.AddFollower(playerCamera);
+
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             gameHudViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
 
-            var debugHudViewport = CreateViewportEntity(EntityNames.DebugHudViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "DebugHudViewport");
-
-            var textViewport = CreateViewportEntity(EntityNames.TextViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "TextViewport");
 
             renderView.Resized += (s, w, h) => ResizeViewport(gameViewport, w, h);
             renderView.Resized += (s, w, h) => ResizeViewport(gameHudViewport, w, h);
@@ -111,22 +119,6 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Screen
         private void ResizeViewport(IEntity viewport, float width, float height)
         {
             viewport.SetViewportSize(services.Events, width, height);
-        }
-
-        private IEntity CreateViewportEntity(string name, float x, float y, float width, float height, string templateName)
-        {
-            var viewport = services.Factory.Create($@"ABTA\Templates\Common\Viewports\{templateName}")
-                .SetParameter("startX", x)
-                .SetParameter("startY", y)
-                .SetTag(name)
-                .Build();
-
-            //var viewport = entityMan.Create();
-            //viewport.Tag = name;
-
-            viewport.Get<ViewportComponent>().Size = new Vector2(width, height);
-
-            return viewport;
         }
 
         #endregion Private Methods

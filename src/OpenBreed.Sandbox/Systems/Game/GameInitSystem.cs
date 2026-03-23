@@ -44,20 +44,7 @@ namespace OpenBreed.Sandbox.Systems.Game
                 return;
             }
 
-            var playerCamera = services.Factory.CreateCamera("Camera.Player", 0, 0, 320, 240);
-
-            playerCamera.Add(new PauseImmuneComponent());
-
-            var gameViewport = services.Entities.GetByTag(EntityNames.GameViewport).First();
-            gameViewport.SetViewportCamera(playerCamera.Id);
-
-            var player1Entity = services.Entities.GetByTag("Players/P1").First();
-
-            var johnPlayerEntity = actorHelper.CreatePlayerActor("John", new Vector2(0, 0));
-
-            player1Entity.SetControlledEntity(johnPlayerEntity.Id);
-
-            johnPlayerEntity.AddFollower(playerCamera);
+            var johnPlayerEntity = services.Entities.GetByTag("John").FirstOrDefault();
 
             ExecuteHeroEnter(johnPlayerEntity, world.Name, 0);
         }

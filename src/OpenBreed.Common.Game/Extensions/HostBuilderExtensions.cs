@@ -96,7 +96,7 @@ namespace OpenBreed.Common.Game.Extensions
 
             hostBuilder.ConfigureGraphicsDataLoaders();
 
-            hostBuilder.SetupDataProviders();
+            hostBuilder.SetupDataProviders(isEditor);
             hostBuilder.AddCommonServices();
             hostBuilder.SetupModelProvider();
 
@@ -180,7 +180,6 @@ namespace OpenBreed.Common.Game.Extensions
 
                 res = scriptMan.RunString(@"import('OpenBreed.Animation.Interface', 'OpenBreed.Animation.Interface.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
-                res = scriptMan.RunString(@"import('OpenBreed.Sandbox.Entities', 'OpenBreed.Sandbox.Entities')");
 
                 res = scriptMan.RunString(@"import('OpenBreed.Common.Game', 'OpenBreed.Common.Game')");
 

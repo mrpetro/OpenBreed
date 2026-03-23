@@ -236,7 +236,7 @@ namespace OpenBreed.Editor.UI.Mvc
             {
                 var gameWorldBuilder = worldMan.Create();
                 gameWorldBuilder.SetName("Preview");
-                gameWorldBuilder.SetupGameWorldSystems(isEditor: true);
+                gameWorldBuilder.AddGameWorldSystems(isEditor: true);
 
                 animationWorld = gameWorldBuilder.Build();
             }

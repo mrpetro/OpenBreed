@@ -5,7 +5,10 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Rendering.OpenGL.Managers;
+using OpenBreed.Sandbox.Systems;
+using OpenBreed.Sandbox.Systems.Actor;
 using OpenBreed.Sandbox.Systems.Camera;
+using OpenBreed.Sandbox.Systems.Mission;
 using OpenBreed.Sandbox.Systems.MissionScreen;
 using OpenBreed.Sandbox.Systems.SmartCard;
 using OpenBreed.Wecs.Abstractions.Primitives;
@@ -20,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -63,6 +67,34 @@ namespace OpenBreed.Sandbox.Extensions
                 .AddSystem<TextSystem>()
                 .AddSystem<SmartCardInitSystem>()
                 .AddSystem<CameraSettingPaletteSystem>()
+                .Build();
+        }
+
+        public static IWorld CreateGameWorld(this IWorldMan worldMan, string name)
+        {
+            return worldMan.Create()
+                .SetName(name)
+                .AddSystem<OnActorTouchDoorTriggerService>()
+                .AddSystem<OnActorTouchExitTriggerSystem>()
+                .AddSystem<OnActorTouchTeleportTriggerSystem>()
+                .AddSystem<OnActorTouchItemTriggerSystem>()
+                .AddSystem<OnActorTouchSmartCardTriggerSystem>()
+                .AddSystem<OnActorTouchLandMineTriggerSystem>()
+                .AddSystem<ExplosionOnEnterWorldSystem>()
+                .AddSystem<OnInitTurretSystem>()
+                .AddSystem<ActorAnimateSystem>()
+                .AddSystem<ActorResurectSystem>()
+                .AddSystem<OnRefractionLazerProjectileHitSystem>()
+                .AddSystem<OnDefaultProjectileHitSystem>()
+                .AddSystem<OnInitFirewallProjectileSystem>()
+                .AddSystem<OnInitMissileProjectileSystem>()
+                .AddSystem<OnInitTrilazerGunProjectileSystem>()
+                .AddSystem<OnInitTurretLazerProjectileSystem>()
+                .AddSystem<OnInitRefractionLazerProjectileSystem>()
+                .AddSystem<OnActorInitShowMissionSystem>()
+                .AddSystem<OnActorControlActionSystem>()
+                .AddSystem<OnLevelStartedSystem>()
+                .AddGameWorldSystems(isEditor: false)
                 .Build();
         }
 

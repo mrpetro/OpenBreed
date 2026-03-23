@@ -154,32 +154,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return entity;
         }
 
-        public IEntity CreatePlayerActor(string name, Vector2 pos)
-        {
-            var actor = CreateActor(name, pos);
-
-            //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
-            actor.Add(new EquipmentComponent(
-                new []{
-                    new EquipmentSlot("Torso"),
-                    new EquipmentSlot("Hands")
-                }));
-            actor.Add(new InventoryComponent(16));
-
-            return actor;
-        }
-
-        public IEntity CreateActor(string name, Vector2 pos)
-        {
-            var actor = entityFactory.Create($@"ABTA\Templates\Common\Actors\{name}")
-                .SetParameter("startX", pos.X)
-                .SetParameter("startY", pos.Y)
-                .SetTag(name)
-                .Build();
-
-            return actor;
-        }
-
         #endregion Public Methods
 
         #region Internal Methods

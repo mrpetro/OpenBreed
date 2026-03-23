@@ -486,21 +486,7 @@ namespace OpenBreed.Sandbox
 
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
-                var playerCamera = entityFactory.CreateCamera("Camera.Player", 0, 0, 320, 240);
-
-                playerCamera.Add(new PauseImmuneComponent());
-
-                var gameViewport = entityMan.GetByTag(EntityNames.GameViewport).First();
-                gameViewport.SetViewportCamera(playerCamera.Id);
-
-                var player1Entity = entityMan.GetByTag("Players/P1").First();
-
-                var johnPlayerEntity = actorHelper.CreatePlayerActor("John", new Vector2(0, 0));
-
-                player1Entity.SetControlledEntity(johnPlayerEntity.Id);
-
-                johnPlayerEntity.AddFollower(playerCamera);
-
+                var johnPlayerEntity = entityMan.GetByTag("John").FirstOrDefault();
                 worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
             });
         }

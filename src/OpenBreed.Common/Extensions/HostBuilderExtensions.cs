@@ -97,11 +97,11 @@ namespace OpenBreed.Common.Extensions
             });
         }
 
-        public static void SetupDataProviders(this IHostBuilder hostBuilder)
+        public static void SetupDataProviders(this IHostBuilder hostBuilder, bool isEditor)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<DataSourceProvider>();
+                services.AddSingleton<DataSourceProvider>((sp) => ActivatorUtilities.CreateInstance<DataSourceProvider>(sp, !isEditor));
                 services.AddSingleton<AssetsDataProvider>();
                 services.AddSingleton<ActionSetsDataProvider>();
                 services.AddSingleton<SpriteAtlasDataProvider>();

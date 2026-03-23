@@ -18,6 +18,7 @@ namespace OpenBreed.Common.Data
         private readonly Dictionary<string, DataSourceBase> _openedDataSources = new Dictionary<string, DataSourceBase>();
         private readonly IRepositoryProvider repositoryProvider;
         private readonly IVariableMan variables;
+        private readonly bool openReadonly;
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
         private bool disposedValue;
         private ILogger logger;
@@ -26,11 +27,12 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public DataSourceProvider(IRepositoryProvider repositoryProvider, ILogger logger, IVariableMan variables)
+        public DataSourceProvider(IRepositoryProvider repositoryProvider, ILogger logger, IVariableMan variables, bool openReadonly)
         {
-            this.repositoryProvider = repositoryProvider;
-            this.logger = logger;
-            this.variables = variables;
+            this.repositoryProvider = repositoryProvider ?? throw new ArgumentNullException(nameof(repositoryProvider));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.variables = variables ?? throw new ArgumentNullException(nameof(variables));
+            this.openReadonly = openReadonly;
         }
 
         #endregion Public Constructors
@@ -100,8 +102,7 @@ namespace OpenBreed.Common.Data
             EPFArchive archive = null;
             if (!_openedArchives.TryGetValue(normalizedPath, out archive))
             {
-                File.Copy(normalizedPath, normalizedPath + ".bkp", true);
-                archive = EPFArchive.ToUpdate(File.Open(normalizedPath, FileMode.Open), false);
+                archive = CreateEpfArchive(normalizedPath);
                 _openedArchives.Add(normalizedPath, archive);
 
                 logger.LogTrace($"EPF Archive data source '{normalizedPath}' opened for update.");
@@ -140,6 +141,17 @@ namespace OpenBreed.Common.Data
         #endregion Protected Methods
 
         #region Private Methods
+
+        private EPFArchive CreateEpfArchive(string normalizedPath)
+        {
+            if (openReadonly)
+            {
+                return EPFArchive.ToExtract(File.Open(normalizedPath, FileMode.Open, FileAccess.Read), false);
+            }
+
+            File.Copy(normalizedPath, normalizedPath + ".bkp", true);
+            return EPFArchive.ToUpdate(File.Open(normalizedPath, FileMode.Open), false);
+        }
 
         private DataSourceBase CreateDataSource(IDbDataSource dsEntry)
         {

@@ -2,6 +2,7 @@
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Events;
+using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;

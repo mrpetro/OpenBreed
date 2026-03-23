@@ -4,8 +4,10 @@ using OpenBreed.Audio.Interface.Data;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Common.Game.Wecs.Systems.Hud;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Logging;
+using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
@@ -35,15 +37,16 @@ using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Physics.Components;
-using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Physics.Systems.Extensions;
+using OpenBreed.Wecs.Rendering.Components;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Documents;
 using System.Xml.Linq;
-using OpenBreed.Common.Game.Wecs.Systems.Hud;
+using OpenBreed.Sandbox.Extensions;
 
 namespace OpenBreed.Sandbox.Loaders
 {
@@ -199,34 +202,7 @@ namespace OpenBreed.Sandbox.Loaders
             mapEntity.Add(dataGridComponent);
             mapEntity.Add(collisionComponent);
 
-            var worldBuilder = worldMan.Create();
-            worldBuilder.SetName(dbMap.Id);
-
-            worldBuilder.AddSystem<OnActorTouchDoorTriggerService>();
-            worldBuilder.AddSystem<OnActorTouchExitTriggerSystem>();
-            worldBuilder.AddSystem<OnActorTouchTeleportTriggerSystem>();
-            worldBuilder.AddSystem<OnActorTouchItemTriggerSystem>();
-            worldBuilder.AddSystem<OnActorTouchSmartCardTriggerSystem>();
-            worldBuilder.AddSystem<OnActorTouchLandMineTriggerSystem>();
-            worldBuilder.AddSystem<ExplosionOnEnterWorldSystem>();
-            worldBuilder.AddSystem<OnInitTurretSystem>();
-            worldBuilder.AddSystem<ActorAnimateSystem>();
-            worldBuilder.AddSystem<ActorResurectSystem>();
-            worldBuilder.AddSystem<OnRefractionLazerProjectileHitSystem>();
-            worldBuilder.AddSystem<OnDefaultProjectileHitSystem>();
-            worldBuilder.AddSystem<OnInitFirewallProjectileSystem>();
-            worldBuilder.AddSystem<OnInitMissileProjectileSystem>();
-            worldBuilder.AddSystem<OnInitTrilazerGunProjectileSystem>();
-            worldBuilder.AddSystem<OnInitTurretLazerProjectileSystem>();
-            worldBuilder.AddSystem<OnInitRefractionLazerProjectileSystem>();
-            worldBuilder.AddSystem<OnActorInitShowMissionSystem>();
-            worldBuilder.AddSystem<OnActorControlActionSystem>();
-            worldBuilder.AddSystem<OnLevelStartedSystem>();
-
-
-            worldBuilder.SetupGameWorldSystems(isEditor: false);
-
-            world = worldBuilder.Build();
+            world = worldMan.CreateGameWorld(dbMap.Id);
 
             var mapper = new MapMapper(dbMap.TileSetRef);
 
@@ -234,79 +210,83 @@ namespace OpenBreed.Sandbox.Loaders
             var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
             var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
 
-            triggerMan.OnWorldInitialized(world, () =>
+            worldMan.RequestAddEntity(mapEntity, world.Id);
+
+            var paletteEntityTag = $"Palettes/{dbMap.Id}";
+            var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
+
+            if (paletteEntity is not null)
+                worldMan.RequestAddEntity(paletteEntity, world.Id);
+
+            for (int iy = 0; iy < layout.Height; iy++)
             {
-                worldMan.RequestAddEntity(mapEntity, world.Id);
-
-                var paletteEntityTag = $"Palettes/{dbMap.Id}";
-                var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
-
-                if (paletteEntity is not null)
-                    worldMan.RequestAddEntity(paletteEntity, world.Id);
-
-                for (int iy = 0; iy < layout.Height; iy++)
+                for (int ix = 0; ix < layout.Width; ix++)
                 {
-                    for (int ix = 0; ix < layout.Width; ix++)
-                    {
-                        var cellValues = layout.GetCellValues(ix, iy);
-                        var gfxValue = cellValues[gfxLayer];
-                        var actionValue = cellValues[actionLayer];
+                    var cellValues = layout.GetCellValues(ix, iy);
+                    var gfxValue = cellValues[gfxLayer];
+                    var actionValue = cellValues[actionLayer];
 
-                        var action = map.GetAction(actionValue);
+                    var action = map.GetAction(actionValue);
 
-                        var indexPos = new Vector2i(ix, iy);
+                    var indexPos = new Vector2i(ix, iy);
 
-                        tileGridComponent.Grid.ModifyTile(indexPos, atlasId, gfxValue);
+                    tileGridComponent.Grid.ModifyTile(indexPos, atlasId, gfxValue);
 
-                        if (action is null)
-                            continue;
+                    if (action is null)
+                        continue;
 
-                        var cellEntity = LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
+                    var cellEntity = LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
 
-                        if (cellEntity is null)
-                            continue;
+                    if (cellEntity is null)
+                        continue;
 
+                    dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
+
+                    //Check if cell entity has static body
+                    //if (cellEntity.Contains<PositionComponent>() &&
+                    //    cellEntity.Contains<BodyComponent>() &&
+                    //    !cellEntity.Contains<VelocityComponent>())
+                    //{
+                    //    mapEntity.AddEntityToStatics(cellEntity);
+                    //}
+
+                    //if (mapper.Map(actionValue, gfxValue, out string templaneName, out string flavor))
+                    //    LoadCellEntity(mapper, map, visited, ix, iy, world, templaneName, flavor, gfxValue);
+                }
+            }
+
+            //Process trough all not visited
+            for (int iy = 0; iy < layout.Height; iy++)
+            {
+                for (int ix = 0; ix < layout.Width; ix++)
+                {
+                    if (visited[ix, iy])
+                        continue;
+
+                    var cellValues = layout.GetCellValues(ix, iy);
+                    var gfxValue = cellValues[gfxLayer];
+                    var actionValue = cellValues[actionLayer];
+                    var indexPos = new Vector2i(ix, iy);
+
+                    var cellEntity = LoadUnknownCodeCell(mapper, map, visited, ix, iy, gfxValue, actionValue, world);
+
+                    if (cellEntity is not null)
                         dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
-
-                        //Check if cell entity has static body
-                        //if (cellEntity.Contains<PositionComponent>() &&
-                        //    cellEntity.Contains<BodyComponent>() &&
-                        //    !cellEntity.Contains<VelocityComponent>())
-                        //{
-                        //    mapEntity.AddEntityToStatics(cellEntity);
-                        //}
-
-                        //if (mapper.Map(actionValue, gfxValue, out string templaneName, out string flavor))
-                        //    LoadCellEntity(mapper, map, visited, ix, iy, world, templaneName, flavor, gfxValue);
-                    }
                 }
+            }
 
-                //Process trough all not visited
-                for (int iy = 0; iy < layout.Height; iy++)
-                {
-                    for (int ix = 0; ix < layout.Width; ix++)
-                    {
-                        if (visited[ix, iy])
-                            continue;
+            AddMission(world);
+            AddDirector(world, dbMap.ScriptRef);
 
-                        var cellValues = layout.GetCellValues(ix, iy);
-                        var gfxValue = cellValues[gfxLayer];
-                        var actionValue = cellValues[actionLayer];
-                        var indexPos = new Vector2i(ix, iy);
+            //DEBUG entities
+            AddCursor(world);
 
-                        var cellEntity = LoadUnknownCodeCell(mapper, map, visited, ix, iy, gfxValue, actionValue, world);
 
-                        if (cellEntity is not null)
-                            dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
-                    }
-                }
 
-                AddMission(world);
-                AddDirector(world, dbMap.ScriptRef);
+            //triggerMan.OnWorldInitialized(world, () =>
+            //{
 
-                //DEBUG entities
-                AddCursor(world);
-            }, singleTime: true);
+            //}, singleTime: true);
 
             return world;
         }
