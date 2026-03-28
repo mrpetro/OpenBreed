@@ -81,6 +81,7 @@
   <ItemGroup>
     <Folder Include="Factories\" />
     <Folder Include="Systems\Screen\" />
+    <Folder Include="Worlds\" />
   </ItemGroup>
 
 </Project>

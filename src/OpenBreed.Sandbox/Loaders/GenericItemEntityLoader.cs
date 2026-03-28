@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.Pickable;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
@@ -10,15 +11,17 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Private Fields
 
-        private readonly PickableHelper pickableHelper;
+        private readonly IWorldMan worldMan;
+        private readonly IEntityFactory entityFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public GenericItemEntityLoader(PickableHelper pickableHelper)
+        public GenericItemEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory)
         {
-            this.pickableHelper = pickableHelper;
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+            this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
         }
 
         #endregion Public Constructors
@@ -40,8 +43,11 @@ namespace OpenBreed.Sandbox.Loaders
             templateName = split[0];
             flavor = split[1];
 
-            entity = pickableHelper.AddItem(world, ix, iy, templateName, mapper.Level, gfxValue, null, flavor);
+            entity = entityFactory.CreateItem(ix, iy, templateName, mapper.Level, gfxValue, null, flavor);
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
             return entity;
         }
 

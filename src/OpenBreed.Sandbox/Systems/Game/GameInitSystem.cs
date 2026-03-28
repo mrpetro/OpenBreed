@@ -1,7 +1,5 @@
 ﻿using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
-using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Abstractions.Events;
@@ -26,13 +24,10 @@ namespace OpenBreed.Sandbox.Systems.Game
         IEventSystem<WorldInitializedEventArgs>
     {
         private readonly IGameServices services;
-        private readonly ActorHelper actorHelper;
 
-        public GameInitSystem(IGameServices services,
-            ActorHelper actorHelper)
+        public GameInitSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
-            this.actorHelper = actorHelper ?? throw new ArgumentNullException(nameof(actorHelper));
         }
 
         public void OnEvent(WorldInitializedEventArgs e)
@@ -46,16 +41,7 @@ namespace OpenBreed.Sandbox.Systems.Game
 
             var johnPlayerEntity = services.Entities.GetByTag("John").FirstOrDefault();
 
-            ExecuteHeroEnter(johnPlayerEntity, world.Name, 0);
-        }
-
-        public void ExecuteHeroEnter(IEntity heroEntity, string worldName, int entryId)
-        {
-            var task = OpenBreed.Core.Task.Create((t) => services.AddToWorld(t, heroEntity, worldName));
-
-            task.Then((t) => services.PlayerCharacterEnter(t, heroEntity, entryId));
-
-            task.Start();
+            services.ExecuteHeroEnter(johnPlayerEntity, world.Name, 0);
         }
     }
 }

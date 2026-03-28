@@ -5,6 +5,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Drawing;
+using OpenBreed.Common.Interface.Mvc;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
@@ -14,12 +15,13 @@ using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Animation.Components;
+using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Rendering.Components;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
+using OpenBreed.Wecs.Rendering.Systems.Primitives;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
-using OpenBreed.Wecs.Rendering.Systems.Primitives;
 
 namespace OpenBreed.Editor.UI.Mvc
 {
@@ -146,16 +148,8 @@ namespace OpenBreed.Editor.UI.Mvc
             }
 
             view.SetPalette(palette);
-            var renderableSystems = animationWorld.Systems.OfType<IRenderableSystem>().ToArray();
-            var renderContext = new WorldRenderContext(view, 0, dt, new Box2(view.Box.Min, view.Box.Max), animationWorld);
-            for (int i = 0; i < renderableSystems.Length; i++)
-            {
-                var renderableSystem = renderableSystems[i];
 
-                var entities = animationWorld.GetMatchingEntities(renderableSystem);
-
-                renderableSystem.Render(entities, renderContext);
-            }
+            view.RenderWorld(animationWorld, 0, new Box2(view.Box.Min, view.Box.Max), dt);
         }
 
         public void StopAnimation()
@@ -209,9 +203,7 @@ namespace OpenBreed.Editor.UI.Mvc
                 return;
             }
 
-            palette = paletteMan.GetByName("GamePalette");
-
-            if (palette is not null)
+            if (paletteMan.TryGetByName("GamePalette", out palette))
             {
                 return;
             }

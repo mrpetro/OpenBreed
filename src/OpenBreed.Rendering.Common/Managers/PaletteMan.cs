@@ -53,12 +53,16 @@ namespace OpenBreed.Rendering.Common.Managers
             return names.First(pair => pair.Value == items[paletteId]).Key;
         }
 
-        public IPalette GetByName(string paletteName)
+        public bool TryGetByName(string paletteName, out IPalette palette)
         {
             if (names.TryGetValue(paletteName, out Palette result))
-                return result;
+            {
+                palette = result;
+                return true;
+            }
 
-            return null;
+            palette = null;
+            return false;
         }
 
         public void UnloadAll()

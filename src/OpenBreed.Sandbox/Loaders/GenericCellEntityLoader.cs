@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
@@ -18,15 +20,17 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Fields
 
-        private readonly GenericCellHelper genericCellHelper;
+        private IWorldMan worldMan;
+        private IEntityFactory entityFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public GenericCellEntityLoader(GenericCellHelper genericCellHelper)
+        public GenericCellEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory)
         {
-            this.genericCellHelper = genericCellHelper;
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+            this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
         }
 
         #endregion Public Constructors
@@ -40,29 +44,38 @@ namespace OpenBreed.Sandbox.Loaders
             switch (templateName)
             {
                 case "FullObstacle":
-                    entity = genericCellHelper.AddFullObstacleCell(world, ix, iy, mapAssets.Level, gfxValue);
+                    entity = entityFactory.CreateFullObstacleCell(ix, iy, mapAssets.Level, gfxValue);
                     break;
+
                 case "ActorOnlyObstacle":
-                    entity = genericCellHelper.AddActorOnlyObstacleCell(world, ix, iy, mapAssets.Level, gfxValue);
+                    entity = entityFactory.CreateActorOnlyObstacleCell(ix, iy, mapAssets.Level, gfxValue);
                     break;
+
                 case "Void":
-                    entity = genericCellHelper.AddVoidCell(world, ix, iy, mapAssets.Level, gfxValue);
+                    entity = entityFactory.CreateVoidCell(ix, iy, mapAssets.Level, gfxValue);
                     break;
+
                 case "ObstacleDownLeft":
-                    entity = genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "DownLeft");
+                    entity = entityFactory.CreateSlopeObstacleCell(ix, iy, mapAssets.Level, gfxValue, "DownLeft");
                     break;
+
                 case "ObstacleDownRight":
-                    entity = genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "DownRight");
+                    entity = entityFactory.CreateSlopeObstacleCell(ix, iy, mapAssets.Level, gfxValue, "DownRight");
                     break;
+
                 case "ObstacleUpLeft":
-                    entity = genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "UpLeft");
+                    entity = entityFactory.CreateSlopeObstacleCell(ix, iy, mapAssets.Level, gfxValue, "UpLeft");
                     break;
+
                 case "ObstacleUpRight":
-                    entity = genericCellHelper.AddSlopeObstacleCell(world, ix, iy, mapAssets.Level, gfxValue, "UpRight");
+                    entity = entityFactory.CreateSlopeObstacleCell(ix, iy, mapAssets.Level, gfxValue, "UpRight");
                     break;
             }
 
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
             return entity;
         }
 

@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
@@ -16,15 +18,17 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Fields
 
-        private readonly GenericCellHelper genericCellHelper;
+        private readonly IWorldMan worldMan;
+        private readonly IEntityFactory entityFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public UnknownCellEntityLoader(GenericCellHelper genericCellHelper)
+        public UnknownCellEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory)
         {
-            this.genericCellHelper = genericCellHelper;
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+            this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
         }
 
         #endregion Public Constructors
@@ -35,9 +39,11 @@ namespace OpenBreed.Sandbox.Loaders
         {
             var actionValue = int.Parse(flavor);
 
-            var entity = genericCellHelper.AddUnknownCell(world, ix, iy, actionValue, mapAssets.Level, gfxValue);
+            var entity = entityFactory.CreateUnknownCell(ix, iy, actionValue, mapAssets.Level, gfxValue);
 
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }

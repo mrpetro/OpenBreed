@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Model.Maps;
-using OpenBreed.Sandbox.Entities;
-using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
 using System;
 
@@ -10,23 +10,19 @@ namespace OpenBreed.Sandbox.Loaders
 {
     internal class LevelEntryCellLoader : IMapWorldEntityLoader
     {
-        #region Public Fields
-
-        #endregion Public Fields
-
         #region Private Fields
 
-        private readonly ActorHelper actorHelper;
-        private readonly EntriesHelper entriesHelper;
+        private readonly IWorldMan worldMan;
+        private readonly IEntityFactory entityFactory;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal LevelEntryCellLoader(ActorHelper actorHelper, EntriesHelper entriesHelper)
+        internal LevelEntryCellLoader(IWorldMan worldMan, IEntityFactory entityFactory)
         {
-            this.actorHelper = actorHelper;
-            this.entriesHelper = entriesHelper;
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+            this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
         }
 
         #endregion Internal Constructors
@@ -50,12 +46,16 @@ namespace OpenBreed.Sandbox.Loaders
                 case "MapEntry2":
                     entryId = 1;
                     break;
+
                 default:
                     throw new NotImplementedException("Entry type not implemented");
             }
 
-            var entity = entriesHelper.AddMapEntry(world, ix, iy, entryId, mapAssets.Level, gfxValue);
+            var entity = entityFactory.CreateMapEntry(ix, iy, entryId, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
             return entity;
         }
 

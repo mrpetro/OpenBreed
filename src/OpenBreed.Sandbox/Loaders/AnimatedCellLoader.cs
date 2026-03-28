@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
@@ -19,15 +21,17 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Fields
 
-        private readonly EnvironmentHelper environmentHelper;
+        private readonly IWorldMan worldMan;
+        private readonly IEntityFactory entityFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AnimatedCellLoader(EnvironmentHelper environmentHelper)
+        public AnimatedCellLoader(IWorldMan worldMan, IEntityFactory entityFactory)
         {
-            this.environmentHelper = environmentHelper;
+            this.worldMan = worldMan ?? throw new ArgumentNullException(nameof(worldMan));
+            this.entityFactory = entityFactory ?? throw new ArgumentNullException(nameof(entityFactory));
         }
 
         #endregion Public Constructors
@@ -62,22 +66,31 @@ namespace OpenBreed.Sandbox.Loaders
 
         private IEntity PutTVFlickering(MapMapper mapAssets, MapModel map, bool[,] visited, IWorld world, int ix, int iy, int gfxValue)
         {
-            var entity = environmentHelper.AddTVFlickering(world, ix, iy, mapAssets.Level, gfxValue);
+            var entity = entityFactory.CreateTVFlickering(ix, iy, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
             return entity;
         }
 
         private IEntity PutMonsterEating(MapMapper mapAssets, MapModel map, bool[,] visited, IWorld world, int ix, int iy, int gfxValue)
         {
-            var entity = environmentHelper.AddMonsterEating(world, ix, iy, mapAssets.Level, gfxValue);
+            var entity = entityFactory.CreateMonsterEating(ix, iy, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
             return entity;
         }
 
         private IEntity PutEngineSmoke(MapMapper mapAssets, MapModel map, bool[,] visited, IWorld world, int ix, int iy, int gfxValue)
         {
-            var entity = environmentHelper.AddShipSmoke(world, ix, iy, mapAssets.Level, gfxValue);
+            var entity = entityFactory.CreateShipSmoke(ix, iy, mapAssets.Level, gfxValue);
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
             return entity;
         }
 

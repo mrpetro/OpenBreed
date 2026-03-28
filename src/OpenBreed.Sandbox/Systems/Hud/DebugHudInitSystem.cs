@@ -1,9 +1,7 @@
 ﻿using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;
-using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Primitives;

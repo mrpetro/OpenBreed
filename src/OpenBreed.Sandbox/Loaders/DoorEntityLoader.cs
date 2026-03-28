@@ -1,8 +1,9 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Worlds;
 
@@ -20,15 +21,17 @@ namespace OpenBreed.Sandbox.Loaders
 
         #region Private Fields
 
-        private readonly DoorHelper doorHelper;
+        private readonly IWorldMan worldMan;
+        private readonly IEntityFactory entityFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DoorEntityLoader(DoorHelper doorHelper)
+        public DoorEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory)
         {
-            this.doorHelper = doorHelper;
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+            this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
         }
 
         #endregion Public Constructors
@@ -55,8 +58,10 @@ namespace OpenBreed.Sandbox.Loaders
                     break;
             }
 
-            var entity = doorHelper.AddDoor(world, ix, iy, mapper.Level, key);
+            var entity = entityFactory.CreateDoor(ix, iy, mapper.Level, key);
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
 
             return entity;
         }

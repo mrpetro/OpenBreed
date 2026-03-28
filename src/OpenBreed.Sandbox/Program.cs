@@ -15,6 +15,7 @@ using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Extensions;
 using OpenBreed.Common.Game.Managers;
+using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Wecs.Systems;
@@ -51,13 +52,9 @@ using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
-using OpenBreed.Sandbox.Entities.Actor;
-using OpenBreed.Sandbox.Entities.Door;
-using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
-using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Abstractions.Extensions;
@@ -127,6 +124,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupGameWindow(640, 480, $"{appName} v{infoVersion}");
             hostBuilder.SetupGLWindow();
             hostBuilder.SetupWindowsDrawingContext();
+            //hostBuilder.SetupLuaConsoleInput();
 
             hostBuilder.ConfigureServices(sc =>
             {
@@ -176,16 +174,10 @@ namespace OpenBreed.Sandbox
             });
 
             hostBuilder.SetupGameHudWorldHelper();
-            hostBuilder.SetupEntriesHelper();
-            hostBuilder.SetupDoorHelper();
-            hostBuilder.SetupElectricGateHelper();
-            hostBuilder.SetupPickableHelper();
             hostBuilder.SetupWeaponsMan();
-            hostBuilder.SetupGenericCellHelper();
-            hostBuilder.SetupEnvironmentHelper();
             hostBuilder.SetupTeleportHelper();
-            hostBuilder.SetupActorHelper();
             hostBuilder.SetupDynamicResolver();
+            //hostBuilder.SetupWecsWorlds();
 
             hostBuilder.SetupVariableManager((variableMan, serviceProvider) =>
             {
@@ -258,79 +250,6 @@ namespace OpenBreed.Sandbox
 
         #region Private Methods
 
-        private void LuaConsoleInput(
-            IScriptMan scriptMan,
-            CollisionVisualizingOptions visualizingOptions)
-        {
-
-            do
-            {
-                Console.SetCursorPosition(0, Console.BufferHeight - 1);
-                Console.Write("Command: ");
-                var commandLine = Console.ReadLine().Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-
-
-                if (!commandLine.Any())
-                {
-                    continue;
-
-                }
-
-                var command = commandLine.First();
-
-                var exit = false;
-
-                switch (command.ToLower())
-                {
-                    case "exit":
-                        exit = true;
-                        break;
-                    case "collisions":
-                        var options = commandLine.Skip(1).Take(1);
-
-                        if (!options.Any())
-                        {
-                            Console.WriteLine("Missing option to 'collisions' command.");
-                            continue;
-                        }
-
-                        var option = options.First().ToLower();
-
-                        switch (option)
-                        {
-                            case "show":
-                                visualizingOptions.Enabled = true;
-                                continue;
-                            case "hide":
-                                visualizingOptions.Enabled = false;
-                                continue;
-                            default:
-                                Console.WriteLine($"Invalid option ('{option}'). Accepted options: show, hide");
-                                continue;
-                        }
-                    default:
-                        break;
-                }
-
-                if (exit)
-                {
-                    break;
-                };
-
-                try
-                {
-                    scriptMan.RunString(command);
-                }
-
-                catch (NLua.Exceptions.LuaException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            while (true);
-
-            Exit();
-        }
 
         [STAThread]
         private static void Main(string[] args)
@@ -398,8 +317,6 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupDefaultLogger();
             hostBuilder.SetupCommandLine(args);
 
-            var asm = Assembly.GetExecutingAssembly();
-
             var programFactory = new ProgramFactory(hostBuilder);
 
             var program = programFactory.Create();
@@ -448,11 +365,10 @@ namespace OpenBreed.Sandbox
         {
             var dataLoaderFactory = serviceProvider.GetRequiredService<IDataLoaderFactory>();
             var entityMan = serviceProvider.GetRequiredService<IEntityMan>();
-            var actorHelper = serviceProvider.GetRequiredService<ActorHelper>();
             var scriptMan = serviceProvider.GetRequiredService<IScriptMan>();
+            var gameServices = serviceProvider.GetRequiredService<IGameServices>();
             var tileMan = serviceProvider.GetRequiredService<ITileMan>();
             var triggerMan = serviceProvider.GetRequiredService<ITriggerMan>();
-            var worldGateHelper = serviceProvider.GetRequiredService<EntriesHelper>();
             var gameSettings = serviceProvider.GetRequiredService<IOptions<GameSettings>>();
             var entityFactory = serviceProvider.GetRequiredService<IEntityFactory>();
 
@@ -487,7 +403,7 @@ namespace OpenBreed.Sandbox
             triggerMan.OnWorldInitialized(gameWorld, () =>
             {
                 var johnPlayerEntity = entityMan.GetByTag("John").FirstOrDefault();
-                worldGateHelper.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
+                gameServices.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
             });
         }
 
@@ -502,16 +418,7 @@ namespace OpenBreed.Sandbox
                 return;
             }
 
-            var renderableSystems = screenWorld.Systems.OfType<IRenderableSystem>().ToArray();
-            var renderContext = new WorldRenderContext(view, 0, dt,new Box2(view.Box.Min, view.Box.Max), screenWorld);
-            for (int i = 0; i < renderableSystems.Length; i++)
-            {
-                var renderableSystem = renderableSystems[i];
-
-                var entities = screenWorld.GetMatchingEntities(renderableSystem);
-
-                renderableSystem.Render(entities, renderContext);
-            }
+            view.RenderWorld(screenWorld, 0, new Box2(view.Box.Min, view.Box.Max), dt);
         }
 
         private void OnWindowLoad(WindowLoadEvent e)
@@ -523,8 +430,6 @@ namespace OpenBreed.Sandbox
             renderView.Rendering += OnRenderFrame;
             var dataLoaderFactory = sp.GetRequiredService<IDataLoaderFactory>();
 
-            InitLua();
-
             sp.GetRequiredService<FixtureTypes>().Register();
             sp.GetRequiredService<FontHelper>().SetupGameFont();
 
@@ -534,12 +439,6 @@ namespace OpenBreed.Sandbox
             var tileMan = sp.GetRequiredService<ITileMan>();
             var textureMan = sp.GetRequiredService<ITextureMan>();
             var soundMan = sp.GetRequiredService<ISoundMan>();
-            var worldGateHelper = sp.GetRequiredService<EntriesHelper>();
-            var doorHelper = sp.GetRequiredService<DoorHelper>();
-            var electicGateHelper = sp.GetRequiredService<ElectricGateHelper>();
-            var pickableHelper = sp.GetRequiredService<PickableHelper>();
-            var environmentHelper = sp.GetRequiredService<EnvironmentHelper>();
-            var actorHelper = sp.GetRequiredService<ActorHelper>();
             var teleportHelper = sp.GetRequiredService<TeleportHelper>();
             var entityMan = sp.GetRequiredService<IEntityMan>();
             var triggerMan = sp.GetRequiredService<ITriggerMan>();
@@ -583,19 +482,6 @@ namespace OpenBreed.Sandbox
             //}, singleTime: true);
 
             OnEngineInitialized(sp);
-            StartLuaConsoleInput(sp);
-        }
-
-        private void StartLuaConsoleInput(IServiceProvider serviceProvider)
-        {
-            System.Threading.Tasks.Task.Run(() => LuaConsoleInput(
-                serviceProvider.GetRequiredService<IScriptMan>(),
-                serviceProvider.GetRequiredService<CollisionVisualizingOptions>()));
-        }
-
-        private void InitLua()
-        {
-            //scriptMan.RunFile(@"Content\Scripts\start.lua");
         }
 
         #endregion Private Methods

@@ -4,7 +4,9 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
@@ -16,17 +18,19 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Private Fields
 
-        private readonly GenericCellHelper genericCellHelper;
+        private readonly IWorldMan worldMan;
+        private readonly IEntityFactory entityFactory;
         private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LandMineEntityLoader(GenericCellHelper genericCellHelper, ILogger logger)
+        public LandMineEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory, ILogger logger)
         {
-            this.genericCellHelper = genericCellHelper;
-            this.logger = logger;
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+            this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
+            this.logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
         }
 
         #endregion Public Constructors
@@ -40,11 +44,14 @@ namespace OpenBreed.Sandbox.Loaders
             switch (templateName)
             {
                 case "LandMine":
-                    entity = genericCellHelper.AddLandMineCell(world, ix, iy, mapAssets.Level, gfxValue);
+                    entity = entityFactory.CreateLandMineCell(ix, iy, mapAssets.Level, gfxValue);
                     break;
             }
 
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
             return entity;
         }
 

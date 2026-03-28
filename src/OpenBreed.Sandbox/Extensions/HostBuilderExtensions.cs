@@ -23,21 +23,21 @@ using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
-using OpenBreed.Sandbox.Entities.Actor;
-using OpenBreed.Sandbox.Entities.Door;
-using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Viewport;
+using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
-using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Sandbox.Services;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Gui.Systems;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using System;
+using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 
 namespace OpenBreed.Sandbox.Extensions
@@ -45,6 +45,14 @@ namespace OpenBreed.Sandbox.Extensions
     public static class HostBuilderExtensions
     {
         #region Public Methods
+
+        public static void SetupLuaConsoleInput(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices(services =>
+             {
+                 services.AddHostedService<LuaInputConsole>();
+             });
+        }
 
         public static void SetupGameWindow(this IHostBuilder hostBuilder, int width, int height, string title)
         {
@@ -91,30 +99,6 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-        public static void SetupEnvironmentHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<EnvironmentHelper>();
-            });
-        }
-
-        public static void SetupGenericCellHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<GenericCellHelper>();
-            });
-        }
-
-        public static void SetupPickableHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<PickableHelper>();
-            });
-        }
-
         public static void SetupWeaponsMan(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -123,43 +107,11 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-        public static void SetupElectricGateHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<ElectricGateHelper>();
-            });
-        }
-
-        public static void SetupEntriesHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<EntriesHelper>();
-            });
-        }
-
-        public static void SetupDoorHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<DoorHelper>();
-            });
-        }
-
         public static void SetupGameHudWorldHelper(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddScoped<SetupHelper>();
-            });
-        }
-
-        public static void SetupActorHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<ActorHelper>();
             });
         }
 
@@ -207,17 +159,18 @@ namespace OpenBreed.Sandbox.Extensions
 
         public static void RegisterEntityLoaders(this IMapDataLoader mapLegacyDataLoader, IServiceProvider managerCollection)
         {
-            mapLegacyDataLoader.Register("Unknown", new UnknownCellEntityLoader(managerCollection.GetService<GenericCellHelper>()));
+            mapLegacyDataLoader.Register("Unknown", new UnknownCellEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>()));
 
-            var levelExitCellLoader = new LevelExitCellLoader(managerCollection.GetService<ActorHelper>(),
-                                                                managerCollection.GetService<EntriesHelper>());
+            var levelExitCellLoader = new LevelExitCellLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
 
             mapLegacyDataLoader.Register("MapExit1", levelExitCellLoader);
             mapLegacyDataLoader.Register("MapExit2", levelExitCellLoader);
             mapLegacyDataLoader.Register("MapExit3", levelExitCellLoader);
 
-            var levelEntryCellLoader = new LevelEntryCellLoader(managerCollection.GetService<ActorHelper>(),
-                                                                     managerCollection.GetService<EntriesHelper>());
+            var levelEntryCellLoader = new LevelEntryCellLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
 
 
             mapLegacyDataLoader.Register("MapEntry1", levelEntryCellLoader);
@@ -228,7 +181,8 @@ namespace OpenBreed.Sandbox.Extensions
             //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_1, levelEntryCellLoader);
             //mapWorldDataLoader.Register(LevelEntryCellLoader.ENTRY_2, levelEntryCellLoader);
 
-            var genericCellEntityLoader = new GenericCellEntityLoader(managerCollection.GetService<GenericCellHelper>());
+            var genericCellEntityLoader = new GenericCellEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
 
             mapLegacyDataLoader.Register("Void", genericCellEntityLoader);
             mapLegacyDataLoader.Register("FullObstacle", genericCellEntityLoader);
@@ -238,34 +192,42 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("ObstacleUpRight", genericCellEntityLoader);
             mapLegacyDataLoader.Register("ObstacleDownRight", genericCellEntityLoader);
 
-            var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetService<EnvironmentHelper>());
+            var environmentCellLoader = new AnimatedCellLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
+
             mapLegacyDataLoader.Register("TVFlickering", environmentCellLoader);
             mapLegacyDataLoader.Register("MonsterEating", environmentCellLoader);
             mapLegacyDataLoader.Register("L1/ShipSmoke", environmentCellLoader);
 
-            var doorCellEntityLoader = new DoorEntityLoader(managerCollection.GetService<DoorHelper>());
+            var doorCellEntityLoader = new DoorEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
+
             mapLegacyDataLoader.Register("DoorStandard", doorCellEntityLoader);
             mapLegacyDataLoader.Register("DoorRed", doorCellEntityLoader);
             mapLegacyDataLoader.Register("DoorGreen", doorCellEntityLoader);
             mapLegacyDataLoader.Register("DoorBlue", doorCellEntityLoader);
 
-            var electricGateEntityLoader = new ElectricGateEntityLoader(managerCollection.GetService<ElectricGateHelper>());
+            var electricGateEntityLoader = new ElectricGateEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
             mapLegacyDataLoader.Register("ElectricGateUp", electricGateEntityLoader);
             mapLegacyDataLoader.Register("ElectricGateDown", electricGateEntityLoader);
             mapLegacyDataLoader.Register("ElectricGateRight", electricGateEntityLoader);
             mapLegacyDataLoader.Register("ElectricGateLeft", electricGateEntityLoader);
 
-            var genericItemEntityLoader = new GenericItemEntityLoader(managerCollection.GetService<PickableHelper>());
+            var genericItemEntityLoader = new GenericItemEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
 
             mapLegacyDataLoader.Register("GenericItem", genericItemEntityLoader);
 
-            var keycardCellEntityLoader = new KeycardEntityLoader(managerCollection.GetService<PickableHelper>());
+            var keycardCellEntityLoader = new KeycardEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
             mapLegacyDataLoader.Register("Keycard1", keycardCellEntityLoader);
             mapLegacyDataLoader.Register("Keycard2", keycardCellEntityLoader);
             mapLegacyDataLoader.Register("Keycard3", keycardCellEntityLoader);
             mapLegacyDataLoader.Register("KeycardSpecial", keycardCellEntityLoader);
 
-            var smartCardCellEntityLoader = new SmartCardEntityLoader(managerCollection.GetService<PickableHelper>());
+            var smartCardCellEntityLoader = new SmartCardEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
             mapLegacyDataLoader.Register("SmartCard1", smartCardCellEntityLoader);
             mapLegacyDataLoader.Register("SmartCard2", smartCardCellEntityLoader);
             mapLegacyDataLoader.Register("SmartCard3", smartCardCellEntityLoader);
@@ -277,14 +239,14 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("TeleportEntry", teleportLoader);
             mapLegacyDataLoader.Register("TeleportExit", teleportLoader);
 
-            var landMineEntityLoader = new LandMineEntityLoader(managerCollection.GetService<GenericCellHelper>(),
-                                        managerCollection.GetService<ILogger>());
+            var landMineEntityLoader = new LandMineEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>(),
+                managerCollection.GetService<ILogger>());
 
             mapLegacyDataLoader.Register("LandMine", landMineEntityLoader);
 
-            var heavyTurretEntityLoader = new TurretEntryLoader(
-                managerCollection.GetService<ActorHelper>(),
-                managerCollection.GetService<EntriesHelper>());
+            var heavyTurretEntityLoader = new TurretEntryLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
 
             mapLegacyDataLoader.Register("HeavyTurret", heavyTurretEntityLoader);
         }

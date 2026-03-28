@@ -19,11 +19,12 @@ namespace OpenBreed.Rendering.Abstractions.Managers
         IPalette GetById(int paletteId);
 
         /// <summary>
-        /// Get palette by it's name
+        /// Tries to get palette by it's name
         /// </summary>
         /// <param name="paletteName">Name of palette to get</param>
-        /// <returns>Palette object</returns>
-        IPalette GetByName(string paletteName);
+        /// <param name="palette">Resulting palette if found, null otherwise.</param>
+        /// <returns>True if palette with given name is found, false otherwise.</returns>
+        bool TryGetByName(string paletteName, out IPalette palette);
 
         /// <summary>
         /// Get palette name based on it's ID

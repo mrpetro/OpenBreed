@@ -30,7 +30,7 @@ using OpenTK;
 using OpenTK.Mathematics;
 using System.Linq;
 
-namespace OpenBreed.Sandbox.Worlds
+namespace OpenBreed.Sandbox.Helpers
 {
     public class SetupHelper
     {

@@ -68,9 +68,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             hostBuilder.SetupAnimationSystems();
             hostBuilder.ConfigureGuiSystems(isEditor);
             hostBuilder.SetupGameSystems();
-            hostBuilder.SetupWecsSystemFactory();
 
-            hostBuilder.SetupWecsComponents();
             hostBuilder.SetupWecsCommonComponents();
             hostBuilder.SetupWecsPhysicsComponents();
             hostBuilder.SetupWecsRenderingComponents();
@@ -80,13 +78,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             hostBuilder.SetupWecsScriptingComponents();
             hostBuilder.SetupWecsGuiComponents();
             hostBuilder.SetupWecsGameCommonComponents();
-            hostBuilder.SetupWecsComponentFactoryProvider();
-
-            hostBuilder.SetupWecsXmlEntityTemplateLoader();
-
-            hostBuilder.SetupWecsEntityFactory();
-
-            hostBuilder.SetupWecsManagers();
+            hostBuilder.SetupWecsBase();
 
             hostBuilder.SetupBuilderFactory((builderFactory, sp) =>
             {
@@ -97,21 +89,21 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             });
         }
 
-        public static void SetupGameSystems(this IHostBuilder hostBuilder)
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal static void SetupGameSystems(this IHostBuilder hostBuilder)
         {
             hostBuilder.SetupWecsAssemblySystems();
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private static void SetupWecsGameCommonComponents(this IHostBuilder hostBuilder)
+        internal static void SetupWecsGameCommonComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
             hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
-        #endregion Private Methods
+        #endregion Internal Methods
     }
 }

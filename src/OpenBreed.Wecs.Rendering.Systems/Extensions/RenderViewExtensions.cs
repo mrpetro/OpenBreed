@@ -52,6 +52,20 @@ namespace OpenBreed.Wecs.Rendering.Systems.Extensions
             }
         }
 
+        public static void RenderWorld(this IRenderView view, IWorld world, int depth, Box2 viewBox, float dt)
+        {
+            var renderableSystems = world.Systems.OfType<IRenderableSystem>().ToArray();
+            var renderContext = new WorldRenderContext(view, depth, dt, viewBox, world);
+            for (int i = 0; i < renderableSystems.Length; i++)
+            {
+                var renderableSystem = renderableSystems[i];
+
+                var entities = world.GetMatchingEntities(renderableSystem);
+
+                renderableSystem.Render(entities, renderContext);
+            }
+        }
+
         #endregion Public Methods
     }
 }

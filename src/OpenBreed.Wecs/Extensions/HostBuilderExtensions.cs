@@ -28,88 +28,16 @@ namespace OpenBreed.Wecs.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupWecsManagers(this IHostBuilder hostBuilder)
+        #region Public Methods
+
+        public static void SetupWecsBase(this IHostBuilder hostBuilder)
         {
-            hostBuilder.SetupEntityClasses();
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<IEntityMan, EntityMan>();
-                services.AddScoped<IWorldMan, WorldMan>((sp) =>
-                {
-                    var entityMan = sp.GetRequiredService<IEntityMan>();
-
-                    var worldMan = new WorldMan(
-                        sp.GetRequiredService<IEventsMan>(),
-                        sp.GetRequiredService<ISystemFactory>(),
-                        sp.GetRequiredService<IEntityToSystemMatcher>(),
-                        sp.GetRequiredService<IEventSystemManager>(),
-                        sp.GetRequiredService<ILogger>());
-
-                    entityMan.ComponentAdded += (entity, componentType) => worldMan.RequestUpdateEntity(entity);
-                    entityMan.ComponentRemoved += (entity, componentType) => worldMan.RequestUpdateEntity(entity);
-
-                    return worldMan;
-                });
-
-                services.AddScoped<ISystemFinder, SystemFinder>();
-                services.AddTransient<WorldBuilder>();
-                services.AddSingleton<ISystemInitializer, DefaultSystemInitializer>();
-                services.AddScoped<IEntityTriggerMan, EntityTriggerMan>();
-                services.AddSingleton<ISystemInitializer, ActionOnTriggerSystemInitializer>();
-            });
-        }
-
-
-        public static void SetupEntityClasses(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<IEntityClassMan>((sp) =>
-                {
-                    var classMan = new EntityClassMan();
-
-                    classMan.CreateClass("Entity");
-                    classMan.CreateClass("Actor", "Entity");
-
-                    return classMan;
-                });
-                services.AddScoped<IEntityToSystemMatcher, DefaultEntityToSystemMatcher>();
-                services.AddScoped<IEventSystemManager, EventSystemManager>();
-
-                services.AddScoped<ISystemFactory>((sp) =>
-                {
-                    var systemFactory = new DefaultSystemFactory(
-                        sp,
-                        sp.GetRequiredService<ISystemRequirementsProvider>());
-                    return systemFactory;
-                });
-            });
-        }
-
-        public static void SetupWecsSystemFactory(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<ISystemRequirementsProvider, DefaultSystemRequirementsProvider>();
-                services.AddScoped<IEntityToSystemMatcher, DefaultEntityToSystemMatcher>();
-                services.AddScoped<IEventSystemManager, EventSystemManager>();
-
-                services.AddScoped<ISystemFactory>((sp) =>
-                {
-                    var systemFactory = new DefaultSystemFactory(
-                        sp,
-                        sp.GetRequiredService<ISystemRequirementsProvider>());
-                    return systemFactory;
-                });
-            });
-        }
-
-        public static void SetupWecsComponentFactoryProvider(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<IComponentFactoryProvider>((sp) => new ComponentFactoryProvider(services, sp));
-            });
+            hostBuilder.SetupWecsManagers();
+            hostBuilder.SetupWecsSystemFactory();
+            hostBuilder.SetupWecsComponentFactoryProvider();
+            hostBuilder.SetupWecsEntityFactory();
+            hostBuilder.SetupWecsXmlEntityTemplateLoader();
+            hostBuilder.SetupWecsComponents();
         }
 
         public static void SetupWecsAssemblySystems(this IHostBuilder hostBuilder)
@@ -122,7 +50,7 @@ namespace OpenBreed.Wecs.Extensions
             {
                 foreach (var systemType in systemTypes)
                 {
-                    services.AddScoped(systemType,(sp) => 
+                    services.AddScoped(systemType, (sp) =>
                     {
                         var systemInitializers = sp.GetServices<ISystemInitializer>();
 
@@ -161,7 +89,25 @@ namespace OpenBreed.Wecs.Extensions
             });
         }
 
-        public static void SetupWecsEntityFactory(this IHostBuilder hostBuilder, Action<IEntityFactory, IServiceProvider> action = null)
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal static void SetupWecsComponents(this IHostBuilder hostBuilder)
+        {
+            XmlComponentsList.RegisterAllAssemblyComponentTypes();
+            hostBuilder.SetupWecsAssemblyComponentFactories();
+        }
+
+        internal static void SetupWecsXmlEntityTemplateLoader(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IEntityTemplateLoader>((sp) => new XmlEntityTemplateLoader(sp.GetService<IOptions<XmlEntityTemplateLoaderSettings>>()));
+            });
+        }
+
+        internal static void SetupWecsEntityFactory(this IHostBuilder hostBuilder, Action<IEntityFactory, IServiceProvider> action = null)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
@@ -183,18 +129,89 @@ namespace OpenBreed.Wecs.Extensions
             });
         }
 
-        public static void SetupWecsXmlEntityTemplateLoader(this IHostBuilder hostBuilder)
+        internal static void SetupWecsComponentFactoryProvider(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddScoped<IEntityTemplateLoader>((sp) => new XmlEntityTemplateLoader(sp.GetService<IOptions<XmlEntityTemplateLoaderSettings>>()));
+                services.AddScoped<IComponentFactoryProvider>((sp) => new ComponentFactoryProvider(services, sp));
             });
         }
 
-        public static void SetupWecsComponents(this IHostBuilder hostBuilder)
+        internal static void SetupWecsSystemFactory(this IHostBuilder hostBuilder)
         {
-            XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<ISystemRequirementsProvider, DefaultSystemRequirementsProvider>();
+                services.AddScoped<IEntityToSystemMatcher, DefaultEntityToSystemMatcher>();
+                services.AddScoped<IEventSystemManager, EventSystemManager>();
+
+                services.AddScoped<ISystemFactory>((sp) =>
+                {
+                    var systemFactory = new DefaultSystemFactory(
+                        sp,
+                        sp.GetRequiredService<ISystemRequirementsProvider>());
+                    return systemFactory;
+                });
+            });
         }
+
+        internal static void SetupEntityClasses(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IEntityClassMan>((sp) =>
+                {
+                    var classMan = new EntityClassMan();
+
+                    classMan.CreateClass("Entity");
+                    classMan.CreateClass("Actor", "Entity");
+
+                    return classMan;
+                });
+                services.AddScoped<IEntityToSystemMatcher, DefaultEntityToSystemMatcher>();
+                services.AddScoped<IEventSystemManager, EventSystemManager>();
+
+                services.AddScoped<ISystemFactory>((sp) =>
+                {
+                    var systemFactory = new DefaultSystemFactory(
+                        sp,
+                        sp.GetRequiredService<ISystemRequirementsProvider>());
+                    return systemFactory;
+                });
+            });
+        }
+
+        internal static void SetupWecsManagers(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.SetupEntityClasses();
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IEntityMan, EntityMan>();
+                services.AddScoped<IWorldMan, WorldMan>((sp) =>
+                {
+                    var entityMan = sp.GetRequiredService<IEntityMan>();
+
+                    var worldMan = new WorldMan(
+                        sp.GetRequiredService<IEventsMan>(),
+                        sp.GetRequiredService<ISystemFactory>(),
+                        sp.GetRequiredService<IEntityToSystemMatcher>(),
+                        sp.GetRequiredService<IEventSystemManager>(),
+                        sp.GetRequiredService<ILogger>());
+
+                    entityMan.ComponentAdded += (entity, componentType) => worldMan.RequestUpdateEntity(entity);
+                    entityMan.ComponentRemoved += (entity, componentType) => worldMan.RequestUpdateEntity(entity);
+
+                    return worldMan;
+                });
+
+                services.AddScoped<ISystemFinder, SystemFinder>();
+                services.AddTransient<WorldBuilder>();
+                services.AddSingleton<ISystemInitializer, DefaultSystemInitializer>();
+                services.AddScoped<IEntityTriggerMan, EntityTriggerMan>();
+                services.AddSingleton<ISystemInitializer, ActionOnTriggerSystemInitializer>();
+            });
+        }
+
+        #endregion Internal Methods
     }
 }

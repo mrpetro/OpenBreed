@@ -25,7 +25,6 @@ using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Data;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Systems;

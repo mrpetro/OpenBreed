@@ -1,24 +1,26 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
-using OpenBreed.Sandbox.Entities.Pickable;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
 {
     public class KeycardEntityLoader : IMapWorldEntityLoader
     {
+        private readonly IWorldMan worldMan;
+        private readonly IEntityFactory entityFactory;
         #region Private Fields
-
-        private readonly PickableHelper pickableHelper;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public KeycardEntityLoader(PickableHelper pickableHelper)
+        public KeycardEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory)
         {
-            this.pickableHelper = pickableHelper;
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+            this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
         }
 
         #endregion Public Constructors
@@ -33,8 +35,11 @@ namespace OpenBreed.Sandbox.Loaders
             if (!mapper.TryGetFlavor("Keycard", gfxValue, out flavor))
                 return null;
 
-            var entity = pickableHelper.AddItem(world, ix, iy, entityType, mapper.Level, gfxValue, option, flavor);
+            var entity = entityFactory.CreateItem(ix, iy, entityType, mapper.Level, gfxValue, option, flavor);
             visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
             return entity;
         }
 

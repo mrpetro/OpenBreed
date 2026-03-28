@@ -64,6 +64,7 @@ using OpenBreed.Gui.Abstractions.Builders;
 using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
 using OpenBreed.Rendering.Common.Extensions;
+using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox
 {
@@ -105,11 +106,12 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupGameWindow(640, 480, $"{appName} v{infoVersion}");
             hostBuilder.SetupGLWindow();
             hostBuilder.SetupWindowsDrawingContext();
-
+            hostBuilder.SetupGLRenderContextComponents();
             hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
             {
                 dataLoaderFactory.RegisterGraphicsDataLoader(sp);
             });
+            hostBuilder.SetupCommonGameWecsServices(isEditor: false);
 
             var host = hostBuilder.Build();
 

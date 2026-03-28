@@ -127,16 +127,7 @@ namespace OpenBreed.Wecs.Rendering.Systems
 
                     void OnRenderFrame(Box2 viewBox, int depth, float dt)
                     {
-                        var renderableSystems = cameraWorld.Systems.OfType<IRenderableSystem>().ToArray();
-                        var renderContext = new WorldRenderContext(view, depth, dt, viewBox, cameraWorld);
-                        for (int i = 0; i < renderableSystems.Length; i++)
-                        {
-                            var renderableSystem = renderableSystems[i];
-
-                            var entities = cameraWorld.GetMatchingEntities(renderableSystem);
-
-                            renderableSystem.Render(entities, renderContext);
-                        }
+                        view.RenderWorld(cameraWorld, depth, viewBox, dt);
                     }
 
                     view.Context.Primitives.DrawNested(view, cameraClipBox, depth, dt, OnRenderFrame);

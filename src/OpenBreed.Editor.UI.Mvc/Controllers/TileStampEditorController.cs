@@ -229,6 +229,11 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
         {
             var commonPaletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
 
+            if (paletteMan.TryGetByName("GamePalette", out palette))
+            {
+                return;
+            }
+
             var builder = paletteMan.CreatePalette()
                 .SetLength(256)
                 .SetName("GamePalette")
