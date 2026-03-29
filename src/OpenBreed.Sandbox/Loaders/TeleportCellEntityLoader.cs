@@ -5,10 +5,12 @@ using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Mathematics;
 using System.Linq;
+using OpenBreed.Sandbox.Extensions;
 
 namespace OpenBreed.Sandbox.Loaders
 {
@@ -16,17 +18,18 @@ namespace OpenBreed.Sandbox.Loaders
     {
         #region Private Fields
 
-        private readonly TeleportHelper teleportHelper;
         private readonly ILogger logger;
+        private readonly IWorldMan worldMan;
+        private readonly IEntityFactory entityFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TeleportCellEntityLoader(TeleportHelper teleportHelper, ILogger logger)
+        public TeleportCellEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory)
         {
-            this.teleportHelper = teleportHelper;
-            this.logger = logger;
+            this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
+            this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
         }
 
         #endregion Public Constructors
@@ -52,16 +55,21 @@ namespace OpenBreed.Sandbox.Loaders
                 foreach (var cell in cells)
                 {
                     var cellGfxValue = layout.GetCellValue(gfxLayerIdx, cell.X, cell.Y);
-                    teleportHelper.AddTeleportEntry(world, cell.X, cell.Y, ix, mapAssets.Level, cellGfxValue);
+                    var entryEntity = entityFactory.CreateTeleportEntry(cell.X, cell.Y, ix, mapAssets.Level, cellGfxValue);
+
+                    worldMan.RequestAddEntity(entryEntity, world.Id);
+
                     visited[cell.X, cell.Y] = true;
                 }
 
                 var exitGfxValue = layout.GetCellValue(gfxLayerIdx, found.X, found.Y);
 
-                var entity = teleportHelper.AddTeleportExit(world, found.X, found.Y, ix, mapAssets.Level, exitGfxValue);
+                var exitEntity = entityFactory.CreateTeleportExit(found.X, found.Y, ix, mapAssets.Level, exitGfxValue);
+                worldMan.RequestAddEntity(exitEntity, world.Id);
+
                 visited[found.X, found.Y] = true;
 
-                return entity;
+                return exitEntity;
             }
             //else if (templateName == "TeleportExit")
             //{

@@ -162,8 +162,6 @@ namespace OpenBreed.Sandbox
                 itemsMap.RegisterAbtaItems();
             });
 
-            hostBuilder.SetupViewportCreator();
-
             hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
             {
                 dataLoaderFactory.RegisterGraphicsDataLoader(sp);
@@ -175,7 +173,6 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupGameHudWorldHelper();
             hostBuilder.SetupWeaponsMan();
-            hostBuilder.SetupTeleportHelper();
             hostBuilder.SetupDynamicResolver();
             //hostBuilder.SetupWecsWorlds();
 
@@ -433,15 +430,8 @@ namespace OpenBreed.Sandbox
             sp.GetRequiredService<FixtureTypes>().Register();
             sp.GetRequiredService<FontHelper>().SetupGameFont();
 
-            var spriteMan = sp.GetRequiredService<ISpriteMan>();
             var worldMan = sp.GetRequiredService<IWorldMan>();
-            var scriptMan = sp.GetRequiredService<IScriptMan>();
-            var tileMan = sp.GetRequiredService<ITileMan>();
-            var textureMan = sp.GetRequiredService<ITextureMan>();
             var soundMan = sp.GetRequiredService<ISoundMan>();
-            var teleportHelper = sp.GetRequiredService<TeleportHelper>();
-            var entityMan = sp.GetRequiredService<IEntityMan>();
-            var triggerMan = sp.GetRequiredService<ITriggerMan>();
             var gameHudWorldHelper = sp.GetRequiredService<SetupHelper>();
 
             //Create 4 sound sources, each one acting as a separate channel

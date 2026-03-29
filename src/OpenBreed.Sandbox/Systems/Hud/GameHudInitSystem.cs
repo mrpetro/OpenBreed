@@ -124,7 +124,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             var builder = paletteMan.CreatePalette()
                 .SetName(paletteEntity.Tag)
                 .SetLength(256)
-                .SetColors(commonPaletteModel.Data.Select(color => PaletteHelper.ToColor4(color)).ToArray());
+                .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray());
 
             var cb = commonPaletteModel[0];
             builder.SetColor(0, new Color4(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));

@@ -100,8 +100,8 @@ namespace OpenBreed.Sandbox.Systems.SmartCard
             var builder = services.Palettes.CreatePalette()
                 .SetName(paletteEntity.Tag)
                 .SetLength(256)
-                .SetColors(commonPaletteModel.Data.Select(color => PaletteHelper.ToColor4(color)).ToArray())
-                .SetColors(Enumerable.Range(0, 64).Select(idx => PaletteHelper.ToColor4(MyColor.FromArgb(255, 0, 168, 168))).ToArray(), 32);
+                .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray())
+                .SetColors(Enumerable.Range(0, 64).Select(idx => MyColor.FromArgb(255, 0, 168, 168).ToColor4()).ToArray(), 32);
 
             var palette = builder.Build();
 

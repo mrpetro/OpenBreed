@@ -101,7 +101,7 @@ namespace OpenBreed.Sandbox.Systems.MissionScreen
             var builder = services.Palettes.CreatePalette()
                 .SetName(paletteEntity.Tag)
                 .SetLength(256)
-                .SetColors(commonPaletteModel.Data.Select(color => PaletteHelper.ToColor4(color)).ToArray())
+                .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray())
                 .SetColors(Enumerable.Range(0, 64).Select(idx => Color4.White).ToArray(), 32);
 
             var palette = builder.Build();

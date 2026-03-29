@@ -247,6 +247,32 @@ namespace OpenBreed.Sandbox.Extensions
             return entity;
         }
 
+        public static IEntity CreateTeleportEntry(this IEntityFactory entityFactory, int x, int y, int pairId, string level, int gfxValue)
+        {
+            var teleportEntry = entityFactory.Create(@"ABTA\Templates\Common\TeleportEntry")
+                .SetParameter("level", level)
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
+                .SetTag($"TeleportEntry/{pairId}")
+                .Build();
+
+            return teleportEntry;
+        }
+
+        public static IEntity CreateTeleportExit(this IEntityFactory entityFactory, int x, int y, int pairId, string level, int gfxValue)
+        {
+            var teleportExit = entityFactory.Create(@"ABTA\Templates\Common\TeleportExit")
+                .SetParameter("level", level)
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
+                .SetTag($"TeleportExit/{pairId}")
+                .Build();
+
+            return teleportExit;
+        }
+
 
         #endregion Internal Methods
     }

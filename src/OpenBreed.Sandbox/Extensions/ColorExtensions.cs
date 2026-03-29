@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Sandbox.Helpers
+namespace OpenBreed.Sandbox.Extensions
 {
-    public static class PaletteHelper
+    public static class ColorExtensions
     {
-        public static Color4 ToColor4(MyColor color)
+        #region Public Methods
+
+        public static Color4 ToColor4(this MyColor color)
         {
             return new Color4(
                 color.R / 255.0f,
@@ -18,5 +20,7 @@ namespace OpenBreed.Sandbox.Helpers
                 color.B / 255.0f,
                 color.A / 255.0f);
         }
+
+        #endregion Public Methods
     }
 }

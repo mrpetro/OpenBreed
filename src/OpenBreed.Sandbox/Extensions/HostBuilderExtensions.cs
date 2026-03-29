@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Generic.Extensions;
+using OpenBreed.Audio.Interface;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
@@ -14,6 +15,7 @@ using OpenBreed.Core;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Xml;
 using OpenBreed.Input.Interface;
 using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
@@ -23,7 +25,6 @@ using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Entities;
-using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Sandbox.Managers;
@@ -33,10 +34,13 @@ using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Gui.Systems;
+using OpenBreed.Wecs.Services;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using System;
+using System.CommandLine;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 
@@ -78,24 +82,6 @@ namespace OpenBreed.Sandbox.Extensions
                 };
 
                 services.AddSingleton((sp) => new GameWindow(gameWindowSettings, nativeWindowSettings));
-            });
-        }
-
-        public static void SetupViewportCreator(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<ViewportCreator>();
-            });
-        }
-
-
-
-        public static void SetupTeleportHelper(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<TeleportHelper>();
             });
         }
 
@@ -156,7 +142,6 @@ namespace OpenBreed.Sandbox.Extensions
             });
         }
 
-
         public static void RegisterEntityLoaders(this IMapDataLoader mapLegacyDataLoader, IServiceProvider managerCollection)
         {
             mapLegacyDataLoader.Register("Unknown", new UnknownCellEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
@@ -171,7 +156,6 @@ namespace OpenBreed.Sandbox.Extensions
 
             var levelEntryCellLoader = new LevelEntryCellLoader(managerCollection.GetRequiredService<IWorldMan>(),
                 managerCollection.GetRequiredService<IEntityFactory>());
-
 
             mapLegacyDataLoader.Register("MapEntry1", levelEntryCellLoader);
             mapLegacyDataLoader.Register("MapEntry2", levelEntryCellLoader);
@@ -232,9 +216,8 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("SmartCard2", smartCardCellEntityLoader);
             mapLegacyDataLoader.Register("SmartCard3", smartCardCellEntityLoader);
 
-
-            var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetService<TeleportHelper>(),
-                                                    managerCollection.GetService<ILogger>());
+            var teleportLoader = new TeleportCellEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
 
             mapLegacyDataLoader.Register("TeleportEntry", teleportLoader);
             mapLegacyDataLoader.Register("TeleportExit", teleportLoader);
@@ -251,9 +234,87 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("HeavyTurret", heavyTurretEntityLoader);
         }
 
+        public static void SetupCommandLine(this IHostBuilder hostBuilder, string[] args)
+        {
+            hostBuilder.ConfigureServices((sc) =>
+            {
+                var dbFilePathOption = new Option<string>("--dbFilePath")
+                {
+                    Description = "Path to the game database file",
+                    DefaultValueFactory = (a) => "db.xml"
+                };
 
+                var legacyFolderPathOption = new Option<string>("--legacyFolderPath")
+                {
+                    Description = "Path to legacy game resources folder."
+                };
 
+                var startingLevelOption = new Option<string>("--startingLevelName")
+                {
+                    Description = "Name of the starting level."
+                };
+
+                var disableAudioOption = new Option<bool>("--disableAudio")
+                {
+                    Description = "Disable all game audio."
+                };
+
+                var rootCommand = new RootCommand
+                {
+                    dbFilePathOption,
+                    legacyFolderPathOption,
+                    startingLevelOption,
+                    disableAudioOption
+                };
+
+                ConfigureXmlDbSettings(rootCommand, args, (result) =>
+                {
+                    sc.Configure<XmlDbSettings>(xmlDbSettings =>
+                    {
+                        xmlDbSettings.DbFilePath = result.GetValue(dbFilePathOption);
+                    });
+
+                    sc.Configure<XmlEntityTemplateLoaderSettings>(xmlDbSettings =>
+                    {
+                        xmlDbSettings.DataDirPath = Path.GetDirectoryName(result.GetValue(dbFilePathOption));
+                    });
+
+                    sc.Configure<EnvironmentSettings>(settings =>
+                    {
+                        settings.LegacyFolderPath = result.GetValue(legacyFolderPathOption);
+                    });
+
+                    sc.Configure<GameSettings>(settings =>
+                    {
+                        settings.StartingLevelName = result.GetValue(startingLevelOption);
+                    });
+
+                    sc.Configure<AudioSettings>(settings =>
+                    {
+                        settings.DisableSound = result.GetValue(disableAudioOption);
+                    });
+                });
+            });
+        }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private static void ConfigureXmlDbSettings(
+            RootCommand rootCommand,
+            string[] args,
+            Action<ParseResult> resultProvider)
+        {
+            rootCommand.SetAction((parseResult) =>
+            {
+                resultProvider.Invoke(parseResult);
+            });
+
+            var parseResult = rootCommand.Parse(args);
+            parseResult.Invoke();
+        }
+
+        #endregion Private Methods
     }
 }

@@ -396,8 +396,8 @@ namespace OpenBreed.Sandbox.Loaders
             var builder = paletteMan.CreatePalette()
                 .SetName(paletteEntityTag)
                 .SetLength(256)
-                .SetColors(commonPaletteModel.Data.Select(color => PaletteHelper.ToColor4(color)).ToArray())
-                .SetColors(mapPaletteModel.Data.Take(64).Select(color => PaletteHelper.ToColor4(color)).ToArray());
+                .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray())
+                .SetColors(mapPaletteModel.Data.Take(64).Select(color => color.ToColor4()).ToArray());
 
             //for (int i = 0; i < 256; i++)
             //{

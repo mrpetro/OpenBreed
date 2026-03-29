@@ -8,22 +8,27 @@
 
   <ItemGroup>
     <Compile Remove="Entities\electricgate\**" />
+    <Compile Remove="Factories\**" />
     <Compile Remove="Systems\Mission\**" />
+    <Compile Remove="Systems\Screen\**" />
+    <Compile Remove="Worlds\**" />
     <EmbeddedResource Remove="Entities\electricgate\**" />
+    <EmbeddedResource Remove="Factories\**" />
     <EmbeddedResource Remove="Systems\Mission\**" />
+    <EmbeddedResource Remove="Systems\Screen\**" />
+    <EmbeddedResource Remove="Worlds\**" />
     <None Remove="Entities\electricgate\**" />
+    <None Remove="Factories\**" />
     <None Remove="Systems\Mission\**" />
+    <None Remove="Systems\Screen\**" />
+    <None Remove="Worlds\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Entities\Turret\Turret.xml" />
     <None Remove="RunABTA.bat" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Entities\Turret\Turret.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="RunABTA.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -76,12 +81,6 @@
     <ProjectReference Include="..\OpenBreed.Wecs.Rendering.Systems\OpenBreed.Wecs.Rendering.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Scripting.Systems\OpenBreed.Wecs.Scripting.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Factories\" />
-    <Folder Include="Systems\Screen\" />
-    <Folder Include="Worlds\" />
   </ItemGroup>
 
 </Project>
