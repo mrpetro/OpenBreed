@@ -65,6 +65,7 @@ using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
 using OpenBreed.Rendering.Common.Extensions;
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Core.Abstractions.Events;
 
 namespace OpenBreed.Sandbox
 {
@@ -207,7 +208,6 @@ namespace OpenBreed.Sandbox
             interactionFactoryProvider = host.Services.GetRequiredService<IInteractionFactoryProvider>();
             elementFactory = host.Services.GetRequiredService<IElementFactory>();
 
-            eventsMan.Subscribe<WindowUpdateEvent>((a) => OnUpdateFrame(a.Dt));
             eventsMan.Subscribe<WindowLoadEvent>(OnWindowLoad);
 
             data = new Data(host.Services.GetRequiredService<ILogger>());
@@ -251,11 +251,6 @@ namespace OpenBreed.Sandbox
             var program = programFactory.Create();
 
             program.Run();
-        }
-
-        private void OnUpdateFrame(float dt)
-        {
-            inputsMan.Update();
         }
 
         private void OnWindowLoad(WindowLoadEvent e)

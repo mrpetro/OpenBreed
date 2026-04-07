@@ -55,8 +55,6 @@ namespace OpenBreed.Sandbox.Loaders
 
         void Register(string templateName, IMapWorldEntityLoader entityLoader);
 
-        IWorld Load(IDbMap dbMap);
-
         #endregion Public Methods
     }
 
@@ -154,14 +152,37 @@ namespace OpenBreed.Sandbox.Loaders
             return entityMan.Create($"Maps");
         }
 
-        public IWorld Load(IDbMap dbMap)
+        public IWorld Load(string entryId)
         {
-            var world = worldMan.GetByName(dbMap.Id);
+            var world = worldMan.GetByName(entryId);
 
             if (world != null)
             {
                 return world;
             }
+
+            var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
+
+            if (dbMap is null)
+            {
+                throw new Exception($"Missing Map: {entryId}");
+            }
+
+            return Load(dbMap);
+        }
+
+        public void Register(string templateName, IMapWorldEntityLoader entityLoader)
+        {
+            entityLoaders.Add(templateName, entityLoader);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private IWorld Load(IDbMap dbMap)
+        {
+            var world = worldMan.CreateGameWorld(dbMap.Id);
 
             var map = mapsDataProvider.GetMap(dbMap.Id);
 
@@ -201,7 +222,6 @@ namespace OpenBreed.Sandbox.Loaders
             mapEntity.Add(dataGridComponent);
             mapEntity.Add(collisionComponent);
 
-            world = worldMan.CreateGameWorld(dbMap.Id);
 
             var mapper = new MapMapper(dbMap.TileSetRef);
 
@@ -280,33 +300,11 @@ namespace OpenBreed.Sandbox.Loaders
             //DEBUG entities
             AddCursor(world);
 
-
-
             //triggerMan.OnWorldInitialized(world, () =>
             //{
-
             //}, singleTime: true);
 
             return world;
-        }
-
-        public IWorld Load(string entryId)
-        {
-            var world = worldMan.GetByName(entryId);
-
-            if (world != null)
-            {
-                return world;
-            }
-
-            var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(entryId);
-
-            if (dbMap is null)
-            {
-                throw new Exception($"Missing Map: {entryId}");
-            }
-
-            return Load(dbMap);
         }
 
         private void AddCursor(IWorld world)
@@ -338,15 +336,6 @@ namespace OpenBreed.Sandbox.Loaders
 
             worldMan.RequestAddEntity(entity, world.Id);
         }
-
-        public void Register(string templateName, IMapWorldEntityLoader entityLoader)
-        {
-            entityLoaders.Add(templateName, entityLoader);
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         private IEntity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, IWorld world, ActionModel action, int gfxValue)
         {
@@ -381,7 +370,7 @@ namespace OpenBreed.Sandbox.Loaders
             if (paletteEntity is not null)
             {
                 return;
-            }   
+            }
 
             paletteEntity = entityMan.Create(tag: paletteEntityTag);
 
@@ -405,14 +394,12 @@ namespace OpenBreed.Sandbox.Loaders
             //    builder.SetColor(i, new Color4(c.R / 255.0f, c.G / 255.0f, c.B / 255.0f, c.A / 255.0f));
             //}
 
-
             var cb = commonPaletteModel[0];
             builder.SetColor(0, new Color4(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));
 
             var palette = builder.Build();
 
             paletteComponent.PaletteId = palette.Id;
-
         }
 
         private void LoadReferencedAnimations(IDbMap dbMap)

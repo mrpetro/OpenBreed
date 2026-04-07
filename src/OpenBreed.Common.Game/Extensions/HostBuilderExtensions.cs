@@ -67,14 +67,6 @@ namespace OpenBreed.Common.Game.Extensions
             });
         }
 
-        public static void SetupFixtureTypes(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<FixtureTypes>();
-            });
-        }
-
         public static void SetupGameServices(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
@@ -215,7 +207,6 @@ namespace OpenBreed.Common.Game.Extensions
 
             hostBuilder.SetupBroadphaseFactory<IEntity>();
             hostBuilder.SetupFixtureMan((s, a) => { });
-            hostBuilder.SetupFixtureTypes();
             hostBuilder.SetupGameServices();
         }
 

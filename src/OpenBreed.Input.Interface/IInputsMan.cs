@@ -48,8 +48,6 @@ namespace OpenBreed.Input.Interface
 
         #region Public Methods
 
-        void Update();
-
         bool IsKeyPressed(int inputCode);
 
         #endregion Public Methods

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Abstractions.Events;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
@@ -84,8 +85,31 @@ namespace OpenBreed.Input.Generic
             //gameWindow.MouseUp += OnMouseUp;
 
             gameWindow.Load += GameWindow_Load;
+            this.eventsMan.Subscribe<WindowUpdateEvent>((e) => OnUpdateFrame(e.Dt));
 
             oldKeyboardState = gameWindow.KeyboardState.GetSnapshot();
+        }
+
+        private void OnUpdateFrame(float dt)
+        {
+            var newKeyboardState = gameWindow.KeyboardState.GetSnapshot();
+            var newMouseState = gameWindow.MouseState.GetSnapshot();
+            try
+            {
+                if (!newKeyboardState.Equals(oldKeyboardState))
+                    OnKeyboardStateChanged(newKeyboardState);
+
+                CursorDelta = CursorPos - oldCursorPos;
+                oldCursorPos = CursorPos;
+
+                WheelDelta = WheelPos - oldWheelPos;
+                oldWheelPos = WheelPos;
+            }
+            finally
+            {
+                oldKeyboardState = newKeyboardState;
+                oldMouseState = newMouseState;
+            }
         }
 
         #endregion Public Constructors
@@ -133,28 +157,6 @@ namespace OpenBreed.Input.Generic
         public bool IsKeyPressed(int inputCode)
         {
             return gameWindow.KeyboardState.IsKeyDown((Keys)inputCode);
-        }
-
-        public void Update()
-        {
-            var newKeyboardState = gameWindow.KeyboardState.GetSnapshot();
-            var newMouseState = gameWindow.MouseState.GetSnapshot();
-            try
-            {
-                if (!newKeyboardState.Equals(oldKeyboardState))
-                    OnKeyboardStateChanged(newKeyboardState);
-
-                CursorDelta = CursorPos - oldCursorPos;
-                oldCursorPos = CursorPos;
-
-                WheelDelta = WheelPos - oldWheelPos;
-                oldWheelPos = WheelPos;
-            }
-            finally
-            {
-                oldKeyboardState = newKeyboardState;
-                oldMouseState = newMouseState;
-            }
         }
 
         #endregion Public Methods

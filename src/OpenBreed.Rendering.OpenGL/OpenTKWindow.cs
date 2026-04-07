@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Core;
+using OpenBreed.Core.Abstractions;
+using OpenBreed.Core.Abstractions.Events;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Abstractions;
@@ -27,7 +29,7 @@ using System.Windows;
 
 namespace OpenBreed.Rendering.OpenGL
 {
-    internal class OpenTKWindow : IWindow
+    internal class OpenTKWindow : IWindow, IUpdateContext
     {
         #region Private Fields
 
@@ -80,6 +82,8 @@ namespace OpenBreed.Rendering.OpenGL
         public Box2i ClientRectangle => gameWindow.ClientRectangle;
 
         public IRenderContext Context { get; private set; }
+
+        public IServiceProvider ServiceProvider => Context.ServiceProvider;
 
         #endregion Public Properties
 

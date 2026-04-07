@@ -62,8 +62,6 @@
         /// <returns>Sample duration in milliseconds</returns>
         int GetDuration(int sampleId);
 
-        void Update();
-
         #endregion Public Methods
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace OpenBreed.Rendering.Abstractions.Events
+namespace OpenBreed.Core.Abstractions.Events
 {
     public class WindowUpdateEvent : EventArgs
     {
         #region Public Constructors
 
-        public WindowUpdateEvent(IWindow window, float dt)
+        public WindowUpdateEvent(IUpdateContext context, float dt)
         {
-            Window = window;
+            Context = context;
             Dt = dt;
         }
 
@@ -16,7 +16,7 @@ namespace OpenBreed.Rendering.Abstractions.Events
 
         #region Public Properties
 
-        public IWindow Window { get; }
+        public IUpdateContext Context { get; }
 
         public float Dt { get; }
 

@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Audio.OpenAL.Managers;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Game;
@@ -40,6 +42,7 @@ namespace OpenBreed.Sandbox.Helpers
         private readonly IWorldMan worldMan;
         private readonly IFontMan fontMan;
         private readonly IWindow viewClient;
+        private readonly ISoundMan soundMan;
         private readonly IEntityMan entityMan;
         private readonly ITriggerMan triggerMan;
         private readonly IEntityFactory entityFactory;
@@ -60,6 +63,7 @@ namespace OpenBreed.Sandbox.Helpers
             IWorldMan worldMan,
             IFontMan fontMan,
             IWindow viewClient,
+            ISoundMan soundMan,
             IEntityMan entityMan,
             ITriggerMan triggerMan,
             IEntityFactory entityFactory,
@@ -75,7 +79,7 @@ namespace OpenBreed.Sandbox.Helpers
             this.worldMan = worldMan;
             this.fontMan = fontMan;
             this.viewClient = viewClient;
-
+            this.soundMan = soundMan;
             this.entityMan = entityMan;
             this.triggerMan = triggerMan;
             this.entityFactory = entityFactory;
@@ -94,6 +98,8 @@ namespace OpenBreed.Sandbox.Helpers
 
         public void Setup()
         {
+            SetupSound();
+            SetupGameFont();
             CreateNonDbAssets();
             BindAnimationProperties();
         }
@@ -101,6 +107,40 @@ namespace OpenBreed.Sandbox.Helpers
         #endregion Public Methods
 
         #region Private Methods
+
+        private void SetupSound()
+        {
+            soundMan.CreateSoundSource();
+            soundMan.CreateSoundSource();
+            soundMan.CreateSoundSource();
+            soundMan.CreateSoundSource();
+        }
+
+        private void SetupGameFont()
+        {
+            var loader = dataLoaderFactory.GetLoader<ISpriteAtlasDataLoader>();
+
+            var spriteAtlas = loader.Load("Vanilla/Common/Computer/Font");
+
+            //Create FontAtlas
+            var fontAtlasBuilder = fontMan.Create()
+                                     .SetName("ComputerFont")
+                                     .SetAlias("Gfx/ComputerFont")
+                                     .SetSpriteAtlas("Vanilla/Common/Computer/Font");
+
+            for (int i = 0; i < 59; i++)
+            {
+                var ch = 32 + (char)i;
+                fontAtlasBuilder.MapCharacterToSpriteId(ch, i, 8);
+            }
+
+            fontAtlasBuilder.MapCharacterToSpriteId('\0', 0, 8);
+            fontAtlasBuilder.MapCharacterToSpriteId('\r', 0, 8);
+            fontAtlasBuilder.MapCharacterToSpriteId('\n', 0, 8);
+            fontAtlasBuilder.SetHeight(12);
+
+            var fontAtlas = fontAtlasBuilder.Build();
+        }
 
         private void CreateNonDbAssets()
         {

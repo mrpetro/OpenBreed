@@ -13,6 +13,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Database.Interface;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace OpenBreed.Audio.OpenAL.Extensions
                     if (audioOptions.Value.DisableSound)
                         return NullSoundMan.Instance;
                     else
-                        return new SoundMan(sp.GetService<ILogger>());
+                        return new SoundMan(sp.GetService<ILogger>(), sp.GetService<IEventsMan>());
                 });
             });
         }

@@ -2,6 +2,8 @@
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
+using OpenBreed.Core.Abstractions.Events;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenTK;
 using OpenTK.Audio;
 using OpenTK.Audio.OpenAL;
@@ -23,6 +25,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
         private readonly List<SoundSource> alSources = new List<SoundSource>();
 
         private readonly ILogger logger;
+        private readonly IEventsMan eventsMan;
         private readonly List<SoundSource> streamSources = new List<SoundSource>();
 
         private readonly ALDevice alDevice;
@@ -34,15 +37,18 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         #region Public Constructors
 
-        public SoundMan(ILogger logger)
+        public SoundMan(ILogger logger, IEventsMan eventsMan)
         {
-            this.logger = logger;
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
 
             alDevice = ALC.OpenDevice(null);
             alContext = ALC.CreateContext(alDevice, new ALContextAttributes());
 
             ALC.MakeContextCurrent(alContext);
             ReportOpenAL();
+
+            this.eventsMan.Subscribe<WindowUpdateEvent>((e) => OnUpdate(e.Dt));
         }
 
         #endregion Public Constructors
@@ -127,14 +133,6 @@ namespace OpenBreed.Audio.OpenAL.Managers
                 return;
 
             streamSources.Add(soundSource);
-        }
-
-        public void Update()
-        {
-            foreach (var soundSource in streamSources)
-            {
-                UpdateBuffers(soundSource);
-            }
         }
 
         public void PlaySample(int sampleId)
@@ -249,6 +247,14 @@ namespace OpenBreed.Audio.OpenAL.Managers
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void OnUpdate(float dt)
+        {
+            foreach (var soundSource in streamSources)
+            {
+                UpdateBuffers(soundSource);
+            }
+        }
 
         private void UpdateBuffers(SoundSource soundSource)
         {

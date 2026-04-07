@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,7 @@ using OpenBreed.Common.Tools;
 using OpenBreed.Common.Windows.Extensions;
 using OpenBreed.Core;
 using OpenBreed.Core.Abstractions;
+using OpenBreed.Core.Abstractions.Events;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
@@ -99,7 +101,11 @@ namespace OpenBreed.Sandbox
 {
     public class ProgramFactory
     {
+        #region Private Fields
+
         private readonly IHostBuilder hostBuilder;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -183,8 +189,6 @@ namespace OpenBreed.Sandbox
             });
 
             hostBuilder.SetupXmlReadonlyDatabase();
-
-            hostBuilder.ConfigureServices((sc) => sc.AddScoped<FontHelper>());
             hostBuilder.ConfigureLogConsolePrinter();
 
             var host = hostBuilder.Build();
@@ -236,53 +240,31 @@ namespace OpenBreed.Sandbox
 
         #endregion Public Methods
 
-        #region Protected Methods
-
-        protected void OnEngineInitialized(IServiceProvider serviceProvider)
-        {
-            serviceProvider.GetRequiredService<IScriptMan>().TryInvokeFunction("EngineInitialized");
-        }
-
-        #endregion Protected Methods
-
         #region Private Methods
-
 
         [STAThread]
         private static void Main(string[] args)
         {
             ThreadTools.Initialize();
 
-            //var spriteMerger = new SpriteMarger();
-            //var spriteSetBuilder = new SpriteSetBuilder();
-            //var sprReader = new SPRReader(spriteSetBuilder);
+            var hostBuilder = new HostBuilder().ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config.AddJsonFile("appsettings.json", optional: true);
+                config.AddEnvironmentVariables();
+            });
 
-            //var inputFileName = @"D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)\extract\COMPFONT.SPR";
+            hostBuilder.SetupDefaultLogger();
+            hostBuilder.SetupCommandLine(args);
 
-            //var fileStream = File.OpenRead(inputFileName);
-            //var model = sprReader.Read(fileStream);
-            //byte[] outData = default;
-            //int width = -1;
-            //int height = -1;
-            //List<(int X, int Y, int Width, int Height)> bounds = default;
-            //spriteMerger.Merge(model.Sprites, out outData, out width, out height, out bounds);
+            var programFactory = new ProgramFactory(hostBuilder);
 
-            //var bitmap = BitmapHelper.FromBytes(width, height, outData);
+            var program = programFactory.Create();
 
-            //var outputFileName = Path.Combine(Path.GetDirectoryName(inputFileName), $"{Path.GetFileNameWithoutExtension(inputFileName)}.png");
+            program.Run();
+        }
 
-            //bitmap.Save(outputFileName);
-
-            //return;
-
-
-
-
-
-
-
-
-
+        private void PlayMod()
+        {
             //            var amfFilePath = @"D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)\extract\TITLE.AMF";
             //            var module = new OpenMpt.Module(amfFilePath);
 
@@ -301,44 +283,19 @@ namespace OpenBreed.Sandbox
             //    var amfReader = new Amf.AmfReader();
             //    var amf = amfReader.Read(file);
             //}
-
-            //SetupCommandLine(args);
-
-
-            var hostBuilder = new HostBuilder().ConfigureAppConfiguration((hostingContext, config) =>
-            {
-                config.AddJsonFile("appsettings.json", optional: true);
-                config.AddEnvironmentVariables();
-            });
-
-            hostBuilder.SetupDefaultLogger();
-            hostBuilder.SetupCommandLine(args);
-
-            var programFactory = new ProgramFactory(hostBuilder);
-
-            var program = programFactory.Create();
-
-            program.Run();
         }
 
         private void OnUpdateFrame(WindowUpdateEvent e)
         {
             var dt = e.Dt;
 
-            var sp = e.Window.Context.ServiceProvider;
+            var sp = e.Context.ServiceProvider;
 
-
-            sp.GetRequiredService<IRenderingMan>().Update(dt);
-
-            dt = Math.Min(1.0f/30.0f, dt);
-
-            sp.GetRequiredService<IInputsMan>().Update();
+            dt = Math.Min(1.0f / 30.0f, dt);
 
             sp.GetRequiredService<IWorldMan>().Update(dt);
 
             sp.GetRequiredService<IJobsMan>().Update(dt);
-
-            sp.GetRequiredService<ISoundMan>().Update();
 
             sp.GetRequiredService<IEntityMan>().Cleanup();
         }
@@ -353,22 +310,11 @@ namespace OpenBreed.Sandbox
             return new InterleavedStereoModule(moduleFilePath);
         }
 
-        private void InitPlayers(IServiceProvider serviceProvider)
-        {
-
-        }
-
         private void InitGameWorld(IServiceProvider serviceProvider)
         {
             var dataLoaderFactory = serviceProvider.GetRequiredService<IDataLoaderFactory>();
-            var entityMan = serviceProvider.GetRequiredService<IEntityMan>();
-            var scriptMan = serviceProvider.GetRequiredService<IScriptMan>();
             var gameServices = serviceProvider.GetRequiredService<IGameServices>();
-            var tileMan = serviceProvider.GetRequiredService<ITileMan>();
-            var triggerMan = serviceProvider.GetRequiredService<ITriggerMan>();
             var gameSettings = serviceProvider.GetRequiredService<IOptions<GameSettings>>();
-            var entityFactory = serviceProvider.GetRequiredService<IEntityFactory>();
-
 
             var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
 
@@ -396,70 +342,36 @@ namespace OpenBreed.Sandbox
 
             //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
 
-
-            triggerMan.OnWorldInitialized(gameWorld, () =>
+            gameServices.Triggers.OnWorldInitialized(gameWorld, () =>
             {
-                var johnPlayerEntity = entityMan.GetByTag("John").FirstOrDefault();
+                var johnPlayerEntity = gameServices.Entities.GetByTag("John").First();
                 gameServices.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
             });
         }
 
-        void OnRenderFrame(Rendering.Abstractions.IRenderView view, float dt)
-        {
-            var worldMan = view.Context.ServiceProvider.GetRequiredService<IWorldMan>();
-
-            var screenWorld = worldMan.GetByName(WorldNames.ScreenWorld);
-
-            if (screenWorld is null)
-            {
-                return;
-            }
-
-            view.RenderWorld(screenWorld, 0, new Box2(view.Box.Min, view.Box.Max), dt);
-        }
-
         private void OnWindowLoad(WindowLoadEvent e)
         {
-            var renderView = e.RenderContext.CreateView();
-
             var sp = e.RenderContext.ServiceProvider;
 
-            renderView.Rendering += OnRenderFrame;
-            var dataLoaderFactory = sp.GetRequiredService<IDataLoaderFactory>();
-
-            sp.GetRequiredService<FixtureTypes>().Register();
-            sp.GetRequiredService<FontHelper>().SetupGameFont();
-
             var worldMan = sp.GetRequiredService<IWorldMan>();
-            var soundMan = sp.GetRequiredService<ISoundMan>();
-            var gameHudWorldHelper = sp.GetRequiredService<SetupHelper>();
-
-            //Create 4 sound sources, each one acting as a separate channel
-            soundMan.CreateSoundSource();
-            soundMan.CreateSoundSource();
-            soundMan.CreateSoundSource();
-            soundMan.CreateSoundSource();
+            var setupHelper = sp.GetRequiredService<SetupHelper>();
 
             //var amfFilePath = @"D:\Games\Alien Breed Tower Assault Enhanced (1994)(Psygnosis Team 17)\extract\TITLE.AMF";
             //var mod = OpenMod(amfFilePath);
             //var musicId = soundMan.CreateStream("MUSIC", (bufferSize, buffer) => ReadStream(mod, bufferSize, buffer));
             //soundMan.PlayStream(musicId);
 
-            //worldGateHelper.RegisterCollisionPairs();
+            setupHelper.Setup();
 
-            gameHudWorldHelper.Setup();
+            worldMan.CreateScreenWorld().CreateView(e.RenderContext);
 
-            worldMan.CreateScreenWorld();
-
-            //LoadSandboxWorld(40, 40);
-
-            InitPlayers(sp);
             worldMan.CreateLimboWorld();
-            InitGameWorld(sp);
             worldMan.CreateDebugHud();
             worldMan.CreateGameHud();
             worldMan.CreateSmartCardReader();
             worldMan.CreateMissionScreen();
+
+            InitGameWorld(sp);
 
             //var hudWorld = worldMan.GetByName(GameHudWorldHelper.WorldName);
 
@@ -470,8 +382,6 @@ namespace OpenBreed.Sandbox
             //    var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_HUD_VIEWPORT).First();
             //    gameViewport.SetViewportCamera(smartcardReaderCameraEntity.Id);
             //}, singleTime: true);
-
-            OnEngineInitialized(sp);
         }
 
         #endregion Private Methods

@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Core;
+using OpenBreed.Core.Abstractions.Events;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -16,13 +17,17 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         #region Private Fields
 
         private readonly MovingAverage fpsAverage = new MovingAverage(samplesCount: 60);
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RenderingMan()
+        public RenderingMan(IEventsMan eventsMan)
         {
+            this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
+
+            this.eventsMan.Subscribe<WindowUpdateEvent>((e) => OnUpdateFrame(e.Dt));
         }
 
         #endregion Public Constructors
@@ -33,13 +38,13 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #endregion Public Properties
 
-        #region Public Methods
+        #region Private Methods
 
-        public void Update(float dt)
+        private void OnUpdateFrame(float dt)
         {
             fpsAverage.Update(1.0f / dt);
         }
 
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

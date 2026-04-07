@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Core.Abstractions\OpenBreed.Core.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
