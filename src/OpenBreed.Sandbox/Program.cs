@@ -291,13 +291,8 @@ namespace OpenBreed.Sandbox
 
             var sp = e.Context.ServiceProvider;
 
-            dt = Math.Min(1.0f / 30.0f, dt);
+            sp.GetRequiredService<IWecsCore>().Update(dt);
 
-            sp.GetRequiredService<IWorldMan>().Update(dt);
-
-            sp.GetRequiredService<IJobsMan>().Update(dt);
-
-            sp.GetRequiredService<IEntityMan>().Cleanup();
         }
 
         private int ReadStream(InterleavedStereoModule module, int bufferSize, short[] buffer)

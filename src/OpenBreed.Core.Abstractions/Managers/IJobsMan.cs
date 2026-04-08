@@ -18,7 +18,6 @@ namespace OpenBreed.Core.Abstractions.Managers
 
         void Execute(IJob job);
 
-        void Update(float dt);
         IJobBuilder Create();
 
         #endregion Public Methods

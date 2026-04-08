@@ -186,6 +186,7 @@ namespace OpenBreed.Wecs.Extensions
             hostBuilder.SetupEntityClasses();
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
+                services.AddScoped<IWecsCore, WecsCore>();
                 services.AddScoped<IEntityMan, EntityMan>();
                 services.AddScoped<IWorldMan, WorldMan>((sp) =>
                 {
@@ -203,7 +204,7 @@ namespace OpenBreed.Wecs.Extensions
 
                     return worldMan;
                 });
-
+                services.AddScoped<IComponentsMan, ComponentsMan>();
                 services.AddScoped<ISystemFinder, SystemFinder>();
                 services.AddTransient<WorldBuilder>();
                 services.AddSingleton<ISystemInitializer, DefaultSystemInitializer>();

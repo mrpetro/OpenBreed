@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Abstractions;
+using OpenBreed.Core.Abstractions.Events;
 using OpenBreed.Core.Abstractions.Managers;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace OpenBreed.Core.Managers
 
         private readonly List<IJob> running = new List<IJob>();
         private readonly List<IJob> completed = new List<IJob>();
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
@@ -24,22 +26,21 @@ namespace OpenBreed.Core.Managers
         /// Constructor which requires core object
         /// </summary>
         /// <param name="core">Reference to Core object</param>
-        public JobsMan()
+        public JobsMan(IEventsMan eventsMan)
         {
+            this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
+
+            this.eventsMan.Subscribe<WindowUpdateEvent>((e) => OnUpdate(e.Dt));
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public IJobBuilder Create()
         {
             throw new NotImplementedException();
         }
-
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        #endregion Public Properties
-
-        #region Public Methods
 
         /// <summary>
         /// Execute job given in argument. Job will be executed immediately.
@@ -52,12 +53,11 @@ namespace OpenBreed.Core.Managers
             running.Add(job);
         }
 
-        /// <summary>
-        /// Perform an update of this manager. This will update all running jobs.
-        /// It will also dispose all completed jobs.
-        /// </summary>
-        /// <param name="dt">Time step</param>
-        public void Update(float dt)
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void OnUpdate(float dt)
         {
             for (int i = 0; i < running.Count; i++)
                 running[i].Update(dt);
@@ -70,10 +70,6 @@ namespace OpenBreed.Core.Managers
                 completed.Clear();
             }
         }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         private void OnComplete(IJob job)
         {
