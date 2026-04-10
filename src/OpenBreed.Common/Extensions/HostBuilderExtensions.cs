@@ -68,19 +68,13 @@ namespace OpenBreed.Common.Extensions
             });
         }
 
-        public static void SetupDefaultTypeAttributesProvider(this IHostBuilder hostBuilder)
+        public static void SetupCommonServices(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<ITypeAttributesProvider, DefaultTypeAttributesProvider>();
-            });
-        }
-
-        public static void SetupModelProvider(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
                 services.AddSingleton<IModelsProvider, ModelsProvider>();
+                services.AddSingleton<IUpdaterFactory, DefaultUpdaterFactory>();
             });
         }
 
@@ -118,22 +112,19 @@ namespace OpenBreed.Common.Extensions
             });
         }
 
-        public static void AddCommonServices(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddSingleton<IUpdaterFactory, DefaultUpdaterFactory>();
-            });
-        }
-
-        public static void SetupVariableManager(this IHostBuilder hostBuilder, Action<IVariableMan, IServiceProvider> action)
+        public static void SetupVariableManager(this IHostBuilder hostBuilder, Action<IVariableMan, IServiceProvider> action = null)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<IVariableMan>((sp) =>
                 {
-                    var variableMan = new VariableMan(sp.GetService<ILogger>());
-                    action.Invoke(variableMan, sp);
+                    var variableMan = new VariableMan(sp.GetRequiredService<ILogger>());
+
+                    if (action is not null)
+                    {
+                        action.Invoke(variableMan, sp);
+                    }
+
                     return variableMan;
                 });
             });

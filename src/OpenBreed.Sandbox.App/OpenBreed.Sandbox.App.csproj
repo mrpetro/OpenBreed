@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenBreed.Common.Game.Wecs\OpenBreed.Common.Game.Wecs.csproj" />
+    <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj" />
     <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj" />
     <ProjectReference Include="..\OpenBreed.Common.Windows\OpenBreed.Common.Windows.csproj" />
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
@@ -34,6 +34,18 @@
     <ProjectReference Include="..\OpenBreed.Rendering.Abstractions\OpenBreed.Rendering.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Common\OpenBreed.Rendering.Common.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Abstractions\OpenBreed.Wecs.Abstractions.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Audio.Systems\OpenBreed.Wecs.Audio.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Control.Systems\OpenBreed.Wecs.Control.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Core.Systems\OpenBreed.Wecs.Core.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Gui.Systems\OpenBreed.Wecs.Gui.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Physics.Systems\OpenBreed.Wecs.Physics.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Rendering.Systems\OpenBreed.Wecs.Rendering.Systems.csproj" />
+    <ProjectReference Include="..\OpenBreed.Wecs.Scripting.Systems\OpenBreed.Wecs.Scripting.Systems.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Worlds\" />
   </ItemGroup>
 
 </Project>

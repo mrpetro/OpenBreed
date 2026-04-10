@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OpenBreed.Wecs.Animation.Components
+namespace OpenBreed.Wecs.Control.Components
 {
     public enum AnimationPlayerActionType
     {

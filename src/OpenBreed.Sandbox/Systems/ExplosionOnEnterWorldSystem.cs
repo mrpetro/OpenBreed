@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
-using OpenBreed.Wecs.Animation.Systems.Events;
+using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
+using OpenBreed.Wecs.Control.Systems.Events;
 
 namespace OpenBreed.Sandbox.Systems
 {

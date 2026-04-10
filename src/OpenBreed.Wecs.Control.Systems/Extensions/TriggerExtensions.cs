@@ -34,5 +34,13 @@ namespace OpenBreed.Wecs.Control.Systems.Extensions
                 (args) => action.Invoke(entity, args),
                 singleTime);
         }
+
+        public static void OnEntityAnimFinished(this ITriggerMan triggerMan, IEntity entity, Action<IEntity, AnimFinishedEvent> action, bool singleTime = false)
+        {
+            triggerMan.CreateTrigger<AnimFinishedEvent>(
+                (args) => Equals(entity.Id, args.EntityId),
+                (args) => action.Invoke(entity, args),
+                singleTime);
+        }
     }
 }

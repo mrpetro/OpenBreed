@@ -24,7 +24,6 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Animation.Systems;
 using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Rendering.Systems;
 using OpenBreed.Wecs.Scripting.Systems;

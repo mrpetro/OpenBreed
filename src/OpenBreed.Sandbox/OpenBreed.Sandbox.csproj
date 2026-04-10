@@ -64,7 +64,6 @@
     <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj" />
     <ProjectReference Include="..\OpenBreed.Scripting.Interface\OpenBreed.Scripting.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Scripting.Lua\OpenBreed.Scripting.Lua.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Animation.Components\OpenBreed.Wecs.Animation.Components.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Audio.Components\OpenBreed.Wecs.Audio.Components.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Core.Components\OpenBreed.Wecs.Core.Components.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Control.Components\OpenBreed.Wecs.Control.Components.csproj" />
@@ -72,7 +71,6 @@
     <ProjectReference Include="..\OpenBreed.Wecs.Physics.Components\OpenBreed.Wecs.Physics.Components.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Rendering.Components\OpenBreed.Wecs.Rendering.Components.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Scripting.Components\OpenBreed.Wecs.Scripting.Components.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Animation.Systems\OpenBreed.Wecs.Animation.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Audio.Systems\OpenBreed.Wecs.Audio.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Control.Systems\OpenBreed.Wecs.Control.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Core.Systems\OpenBreed.Wecs.Core.Systems.csproj" />

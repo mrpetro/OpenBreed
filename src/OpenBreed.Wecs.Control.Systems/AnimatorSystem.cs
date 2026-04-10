@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Wecs.Animation.Components;
-using OpenBreed.Wecs.Animation.Systems.Events;
+using OpenBreed.Wecs.Control.Components;
+using OpenBreed.Wecs.Control.Systems.Events;
 using OpenBreed.Wecs.Core.Systems;
 using OpenBreed.Wecs.Core.Systems.Categories;
 
-namespace OpenBreed.Wecs.Animation.Systems
+namespace OpenBreed.Wecs.Control.Systems
 {
     [RequireEntityWith(typeof(AnimationComponent))]
     [SystemCategory(CommonCategories.Animation)]

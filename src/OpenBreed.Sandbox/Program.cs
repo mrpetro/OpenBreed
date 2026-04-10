@@ -31,19 +31,7 @@ using OpenBreed.Core.Abstractions;
 using OpenBreed.Core.Abstractions.Events;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Managers;
-using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Sprites;
-using OpenBreed.Database.Xml;
-using OpenBreed.Fsm;
-using OpenBreed.Fsm.Extensions;
-using OpenBreed.Input.Generic.Extensions;
-using OpenBreed.Input.Interface;
-using OpenBreed.Input.Interface.Events;
-using OpenBreed.Model;
-using OpenBreed.Model.Extensions;
-using OpenBreed.Model.Palettes;
-using OpenBreed.Model.Sprites;
+
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
@@ -62,40 +50,15 @@ using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Animation.Components.Extensions;
-using OpenBreed.Wecs.Audio.Components.Extensions;
-using OpenBreed.Wecs.Control.Systems.Extensions;
-using OpenBreed.Wecs.Core.Components;
-using OpenBreed.Wecs.Core.Components.Extensions;
-using OpenBreed.Wecs.Core.Systems;
-using OpenBreed.Wecs.Gui.Systems;
-using OpenBreed.Wecs.Gui.Systems.Extensions;
-using OpenBreed.Wecs.Physics.Systems.Extensions;
+
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenBreed.Wecs.Rendering.Systems.Helpers;
-using OpenBreed.Wecs.Rendering.Systems.Primitives;
-using OpenBreed.Wecs.Scripting.Systems;
-using OpenBreed.Wecs.Scripting.Systems.Extensions;
-using OpenBreed.Wecs.Worlds;
-using OpenTK;
-using OpenTK.Input;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.GraphicsLibraryFramework;
+
 using System;
-using System.Collections.Generic;
-using System.CommandLine;
-using System.Diagnostics.Metrics;
-using System.Drawing;
-using System.IO;
+
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Documents;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 
 namespace OpenBreed.Sandbox
 {
@@ -179,7 +142,6 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupGameHudWorldHelper();
             hostBuilder.SetupWeaponsMan();
-            hostBuilder.SetupDynamicResolver();
             //hostBuilder.SetupWecsWorlds();
 
             hostBuilder.SetupVariableManager((variableMan, serviceProvider) =>

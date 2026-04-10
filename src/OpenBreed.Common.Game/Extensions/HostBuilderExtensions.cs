@@ -27,7 +27,7 @@ using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Animation.Systems.Events;
+using OpenBreed.Wecs.Control.Systems.Events;
 using OpenBreed.Wecs.Core.Systems.Events;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -60,7 +60,7 @@ namespace OpenBreed.Common.Game.Extensions
             {
                 services.AddSingleton((sp) =>
                 {
-                    var itemsMan = new ItemsMan(sp.GetService<ILogger>());
+                    var itemsMan = new ItemsMan(sp.GetRequiredService<ILogger>());
                     action.Invoke(itemsMan, sp);
                     return itemsMan;
                 });
@@ -89,11 +89,7 @@ namespace OpenBreed.Common.Game.Extensions
             hostBuilder.ConfigureGraphicsDataLoaders();
 
             hostBuilder.SetupDataProviders(isEditor);
-            hostBuilder.AddCommonServices();
-            hostBuilder.SetupModelProvider();
-
-            hostBuilder.SetupDefaultTypeAttributesProvider();
-
+            hostBuilder.SetupCommonServices();
             hostBuilder.SetupDefaultActionCodeProvider((codeProvider, sp) =>
             {
                 codeProvider.Register(PlayerActions.Fire);

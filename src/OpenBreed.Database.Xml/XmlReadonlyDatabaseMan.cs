@@ -38,7 +38,14 @@ namespace OpenBreed.Database.Xml
             this.variables = variableMan;
 
             if(dbSettings.Value.DbFilePath != null)
+            {
                 Open(dbSettings.Value.DbFilePath);
+            }
+
+            if (Data is null)
+            {
+                Data = XmlDatabase.Empty();
+            }
 
             RegisterTables();
             RegisterRepos();
@@ -138,7 +145,7 @@ namespace OpenBreed.Database.Xml
         public T GetTable<T>() where T : XmlDbTableDef, new()
         {
             var table = Data.Tables.OfType<T>().FirstOrDefault();
-            if (table == null)
+            if (table is null)
             {
                 table = new T();
                 Data.Tables.Add(table);

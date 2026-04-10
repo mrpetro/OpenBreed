@@ -5,7 +5,7 @@ using OpenBreed.Common.Interface;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace OpenBreed.Wecs.Animation.Components
+namespace OpenBreed.Wecs.Control.Components
 {
     public interface IAnimationComponentTemplate : IComponentTemplate
     {

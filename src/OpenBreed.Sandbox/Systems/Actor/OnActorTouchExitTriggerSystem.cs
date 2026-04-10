@@ -18,7 +18,6 @@ using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Abstractions;
 using OpenBreed.Wecs.Physics.Systems.Helpers;

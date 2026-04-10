@@ -39,6 +39,7 @@ namespace OpenBreed.Wecs.Physics.Systems.Extensions
 
         public static void SetupPhysicsSystems(this IHostBuilder hostBuilder)
         {
+            hostBuilder.SetupDynamicResolver();
             hostBuilder.SetupPhysicsSystemInitializer();
             hostBuilder.SetupWecsAssemblySystems();
         }

@@ -1,16 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Wecs.Abstractions.Primitives;
-using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Rendering.Systems.Extensions;
+﻿using OpenBreed.Rendering.Abstractions;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Game.Extensions
+namespace OpenBreed.Wecs.Rendering.Systems.Extensions
 {
     public static class WorldExtensions
     {

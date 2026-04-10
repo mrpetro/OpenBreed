@@ -13,7 +13,6 @@ using OpenBreed.Sandbox.Systems.MissionScreen;
 using OpenBreed.Sandbox.Systems.SmartCard;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Animation.Systems;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Rendering.Systems;
 using OpenBreed.Wecs.Scripting.Systems;
@@ -24,6 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Game.Wecs.Extensions;
+using OpenBreed.Wecs.Control.Systems;
 
 namespace OpenBreed.Sandbox.Extensions
 {

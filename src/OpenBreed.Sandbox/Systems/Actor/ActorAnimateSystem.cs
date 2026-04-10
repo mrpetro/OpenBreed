@@ -2,7 +2,7 @@
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Core.Components.Extensions;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Helpers;
 using OpenBreed.Wecs.Physics.Systems.Events;
 using System;

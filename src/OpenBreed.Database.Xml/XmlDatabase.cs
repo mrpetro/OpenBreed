@@ -58,6 +58,11 @@ namespace OpenBreed.Database.Xml
             return XmlHelper.RestoreFromXml<XmlDatabase>(filePath);
         }
 
+        public static XmlDatabase Empty()
+        {
+            return new XmlDatabase();
+        }
+
         public void Save(string xmlFilePath)
         {
             XmlHelper.StoreAsXml<XmlDatabase>(xmlFilePath, this);

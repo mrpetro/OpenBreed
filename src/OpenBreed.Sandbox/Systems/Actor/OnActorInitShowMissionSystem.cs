@@ -9,7 +9,6 @@ using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Extensions;

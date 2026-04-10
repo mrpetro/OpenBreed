@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Wecs.Animation.Components.Xml
+namespace OpenBreed.Wecs.Control.Components.Xml
 {
     [XmlRoot("Animation")]
     public class XmlAnimationComponent : XmlComponentTemplate, IAnimationComponentTemplate

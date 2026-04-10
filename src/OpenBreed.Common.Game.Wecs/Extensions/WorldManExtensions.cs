@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Common.Game.Wecs.Systems;
 using OpenBreed.Common.Game.Wecs.Systems.Screen;
-using OpenBreed.Wecs.Animation.Systems;
 using OpenBreed.Wecs.Audio.Systems;
 using OpenBreed.Wecs.Core.Systems;
 using OpenBreed.Wecs.Rendering.Systems;

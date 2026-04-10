@@ -10,7 +10,6 @@ using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Core.Components.Extensions;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Worlds;
 using System;

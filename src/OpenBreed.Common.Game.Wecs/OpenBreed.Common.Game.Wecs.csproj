@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entities\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Entities\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Entities\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 
@@ -17,7 +20,6 @@
     <ProjectReference Include="..\OpenBreed.Common.Game\OpenBreed.Common.Game.csproj" />
     <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Control.Components\OpenBreed.Wecs.Control.Components.csproj" />
-    <ProjectReference Include="..\OpenBreed.Wecs.Animation.Systems\OpenBreed.Wecs.Animation.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Audio.Systems\OpenBreed.Wecs.Audio.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Control.Systems\OpenBreed.Wecs.Control.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Core.Systems\OpenBreed.Wecs.Core.Systems.csproj" />
@@ -29,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
     <Folder Include="Systems\Turret\" />
   </ItemGroup>
 

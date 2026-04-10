@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Wecs.Animation.Components
+namespace OpenBreed.Wecs.Control.Components
 {
     public class Animator
     {

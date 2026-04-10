@@ -1,9 +1,9 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Wecs.Abstractions.Events;
-using OpenBreed.Wecs.Animation.Components;
+using OpenBreed.Wecs.Control.Components;
 using System;
 
-namespace OpenBreed.Wecs.Animation.Systems.Events
+namespace OpenBreed.Wecs.Control.Systems.Events
 {
     /// <summary>
     /// Event args for event that occurs when animation is finished

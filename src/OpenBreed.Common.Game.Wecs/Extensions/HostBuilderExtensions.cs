@@ -13,7 +13,7 @@ using OpenBreed.Fsm.Extensions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs;
-using OpenBreed.Wecs.Animation.Components.Extensions;
+using OpenBreed.Wecs.Control.Components.Extensions;
 using OpenBreed.Wecs.Audio.Components.Extensions;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Gui.Components.Extensions;
@@ -24,7 +24,6 @@ using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Core.Systems.Extensions;
@@ -41,6 +40,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Wecs.Control.Components.Extensions;
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {
@@ -65,14 +65,13 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             hostBuilder.SetupPhysicsSystems();
             hostBuilder.SetupCoreSystems();
             hostBuilder.SetupControlSystems();
-            hostBuilder.SetupAnimationSystems();
             hostBuilder.ConfigureGuiSystems(isEditor);
             hostBuilder.SetupGameSystems();
 
             hostBuilder.SetupWecsCommonComponents();
             hostBuilder.SetupWecsPhysicsComponents();
             hostBuilder.SetupWecsRenderingComponents();
-            hostBuilder.SetupWecsAnimationComponents();
+            hostBuilder.SetupWecsControlComponents();
             hostBuilder.SetupWecsAudioComponents();
             hostBuilder.SetupWecsFsmComponents();
             hostBuilder.SetupWecsScriptingComponents();
@@ -84,7 +83,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             {
                 builderFactory.SetupWecsPhysicsBuilders(sp);
                 builderFactory.SetupWecsRenderingBuilders(sp);
-                builderFactory.SetupWecsAnimationBuilders(sp);
+                builderFactory.SetupWecsControlBuilders(sp);
                 builderFactory.SetupWecsCommonBuilders(sp);
             });
         }

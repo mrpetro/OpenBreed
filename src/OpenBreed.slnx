@@ -222,19 +222,15 @@
     </Project>
   </Folder>
   <Folder Name="/Wecs/Components/">
-    <Project Path="OpenBreed.Wecs.Animation.Components/OpenBreed.Wecs.Animation.Components.csproj">
-      <BuildType Solution="Editor_Debug|*" Project="Debug" />
-      <BuildType Solution="Game_Debug|*" Project="Debug" />
-    </Project>
     <Project Path="OpenBreed.Wecs.Audio.Components/OpenBreed.Wecs.Audio.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Wecs.Core.Components/OpenBreed.Wecs.Core.Components.csproj">
+    <Project Path="OpenBreed.Wecs.Control.Components/OpenBreed.Wecs.Control.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Wecs.Control.Components/OpenBreed.Wecs.Control.Components.csproj">
+    <Project Path="OpenBreed.Wecs.Core.Components/OpenBreed.Wecs.Core.Components.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
@@ -256,10 +252,6 @@
     </Project>
   </Folder>
   <Folder Name="/Wecs/Systems/">
-    <Project Path="OpenBreed.Wecs.Animation.Systems/OpenBreed.Wecs.Animation.Systems.csproj">
-      <BuildType Solution="Editor_Debug|*" Project="Debug" />
-      <BuildType Solution="Game_Debug|*" Project="Debug" />
-    </Project>
     <Project Path="OpenBreed.Wecs.Audio.Systems/OpenBreed.Wecs.Audio.Systems.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />

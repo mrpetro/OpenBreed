@@ -16,7 +16,7 @@ using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Extensions;

@@ -2,70 +2,41 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+
 using OpenBreed.Common;
-using OpenBreed.Common.Data;
+
 using OpenBreed.Common.Extensions;
-using OpenBreed.Common.Interface;
-using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Common.Logging;
-using OpenBreed.Common.Tools;
-using OpenBreed.Common.Windows.Extensions;
-using OpenBreed.Core;
-using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Managers;
-using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Sprites;
-using OpenBreed.Model;
-using OpenBreed.Model.Extensions;
-using OpenBreed.Model.Palettes;
-using OpenBreed.Model.Sprites;
 
-using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Rendering.Abstractions.Data;
-using OpenBreed.Rendering.Abstractions.Events;
-using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Rendering.OpenGL.Extensions;
-
-using OpenTK;
-using OpenTK.Input;
-using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using System;
-using System.Collections.Generic;
-using System.CommandLine;
-using System.Diagnostics.Metrics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using System.Windows;
-using OpenBreed.Rendering.Abstractions.Extensions;
-using OpenBreed.Core.Abstractions;
-using OpenBreed.Core.Abstractions.Managers;
 
 using OpenBreed.Common.Interface.Tools;
-using OpenBreed.Sandbox.App.Extensions;
+
+using OpenBreed.Common.Windows.Extensions;
+using OpenBreed.Core;
+using OpenBreed.Core.Abstractions;
+using OpenBreed.Core.Abstractions.Events;
+using OpenBreed.Core.Abstractions.Managers;
+using OpenBreed.Core.Extensions;
 using OpenBreed.Gui.Abstractions;
-using OpenBreed.Gui.Extensions;
-using OpenBreed.Gui.Abstractions.Extensions;
-using OpenBreed.Gui.Abstractions.Rendering;
+
 using OpenBreed.Gui.Abstractions.Elements;
-using System.Diagnostics;
-using System.Windows.Input;
+using OpenBreed.Gui.Abstractions.Extensions;
+
+using OpenBreed.Gui.Extensions;
 using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
-using OpenBreed.Rendering.OpenGL.Managers;
-using OpenBreed.Rendering.OpenGL.Helpers;
-using OpenBreed.Gui.Abstractions.Builders;
-using System.Windows.Controls;
-using static System.Net.Mime.MediaTypeNames;
+using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Common.Extensions;
-using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Core.Abstractions.Events;
+using OpenBreed.Rendering.OpenGL.Extensions;
+using OpenBreed.Sandbox.App.Extensions;
+using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
+using System;
+
+using System.IO;
+
+using System.Reflection;
+
 
 namespace OpenBreed.Sandbox
 {
@@ -97,13 +68,13 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupDataGridFactory();
             hostBuilder.SetupDefaultLogger();
+            //hostBuilder.SetupXmlReadonlyDatabase();
             hostBuilder.ConfigureLogConsolePrinter();
             hostBuilder.SetupCoreManagers();
             hostBuilder.SetupOpenGLManagers();
             hostBuilder.SetupCommonRenderingServices();
             hostBuilder.ConfigureInteraction();
             hostBuilder.SetupGameWindowInputMan();
-
             hostBuilder.SetupGameWindow(640, 480, $"{appName} v{infoVersion}");
             hostBuilder.SetupGLWindow();
             hostBuilder.SetupWindowsDrawingContext();
@@ -112,7 +83,33 @@ namespace OpenBreed.Sandbox
             {
                 dataLoaderFactory.RegisterGraphicsDataLoader(sp);
             });
-            hostBuilder.SetupCommonGameWecsServices(isEditor: false);
+
+            hostBuilder.SetupSandboxWecsSystems();
+
+            //hostBuilder.SetupShapeMan((shapeMan, sp) =>
+            //{
+            //    shapeMan.Register("Shapes/Point_14_14", new PointShape(14, 14));
+            //    shapeMan.Register("Shapes/Point_0_0", new PointShape(0, 0));
+            //    shapeMan.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
+            //    shapeMan.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
+            //    shapeMan.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
+            //    shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
+            //    shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
+            //    shapeMan.Register("Shapes/Box_-24_-24_48_48", new BoxShape(-24, -24, 48, 48));
+            //    shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
+            //    shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
+            //    shapeMan.Register("Shapes/Circle_0_0_240", new CircleShape(new Vector2(0, 0), 240));
+            //    shapeMan.Register("Shapes/Circle_0_0_120", new CircleShape(new Vector2(0, 0), 120));
+            //    shapeMan.Register("Shapes/Circle_0_0_480", new CircleShape(new Vector2(0, 0), 480));
+            //    shapeMan.Register("Shapes/Circle_0_0_40", new CircleShape(new Vector2(0, 0), 40));
+            //    shapeMan.Register("Shapes/Circle_0_0_320", new CircleShape(new Vector2(0, 0), 320));
+            //    shapeMan.Register("Shapes/Circle_0_0_160", new CircleShape(new Vector2(0, 0), 160));
+            //});
+
+            //hostBuilder.SetupVariableManager();
+
+            //hostBuilder.SetupCommonGameServices(isEditor: false);
+            //hostBuilder.SetupCommonGameWecsServices(isEditor: false);
 
             var host = hostBuilder.Build();
 
@@ -209,8 +206,14 @@ namespace OpenBreed.Sandbox
             elementFactory = host.Services.GetRequiredService<IElementFactory>();
 
             eventsMan.Subscribe<WindowLoadEvent>(OnWindowLoad);
+            eventsMan.Subscribe<WindowUpdateEvent>(OnWindowUpdate);
 
             data = new Data(host.Services.GetRequiredService<ILogger>());
+        }
+
+        private void OnWindowUpdate(WindowUpdateEvent e)
+        {
+            e.Context.ServiceProvider.GetRequiredService<IWecsCore>().Update(e.Dt);
         }
 
         #endregion Public Constructors
@@ -255,7 +258,10 @@ namespace OpenBreed.Sandbox
 
         private void OnWindowLoad(WindowLoadEvent e)
         {
+            var wecsCore = e.RenderContext.ServiceProvider.GetRequiredService<IWecsCore>();
+            var world = wecsCore.Worlds.CreateSandboxWorld();
             renderView = e.RenderContext.CreateView();
+            world.AddToView(renderView);
 
             var interactionFactory = interactionFactoryProvider.GetFactory(renderView);
 

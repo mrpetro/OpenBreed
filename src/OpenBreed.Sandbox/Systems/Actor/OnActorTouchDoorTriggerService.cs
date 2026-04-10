@@ -7,13 +7,13 @@ using OpenBreed.Physics.Interface;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Animation.Systems.Events;
-using OpenBreed.Wecs.Animation.Systems.Extensions;
+using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenTK.Mathematics;
 using System;
+using OpenBreed.Wecs.Control.Systems.Events;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
