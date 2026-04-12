@@ -1,29 +1,43 @@
 ﻿using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Services;
+using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Entities.Builders
 {
-    public abstract class EntityBuilder : IEntityBuilder
+    public class EntityBuilder : IEntityBuilder
     {
-        #region Protected Fields
+        #region Private Fields
 
-        protected readonly IEntityMan entityMan;
-        protected string tag;
+        private readonly EntityMan entityMan;
+        private readonly List<IEntityComponent> components = new List<IEntityComponent>();
+        private string tag;
 
-        #endregion Protected Fields
+        #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public EntityBuilder(IEntityMan entityMan)
+        internal EntityBuilder(EntityMan entityMan)
         {
             this.entityMan = entityMan;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
-        public abstract IEntity Build();
+        public IEntityBuilder AddComponent<TEntityComponent>(TEntityComponent component) where TEntityComponent : IEntityComponent
+        {
+            components.Add(component);
+            return this;
+        }
+
+        public IEntity Build()
+        {
+            var newEntity = new Entity(entityMan, tag, components);
+            entityMan.Register(newEntity);
+            return newEntity;
+        }
 
         public IEntityBuilder SetTag(string tag)
         {

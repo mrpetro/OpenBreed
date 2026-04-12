@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Abstractions.Services
 
         IEntity GetById(int id);
 
-        IEntity Create(string tag, List<IEntityComponent> initialComponents = null);
+        IEntityBuilder Create();
 
         /// <summary>
         /// Request to erase given entity from existance

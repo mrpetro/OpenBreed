@@ -2,7 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using OpenBreed.Animation.Generic.Extensions;
+using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 
 using OpenBreed.Common.Extensions;
@@ -16,6 +17,7 @@ using OpenBreed.Core.Abstractions;
 using OpenBreed.Core.Abstractions.Events;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Extensions;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Gui.Abstractions;
 
 using OpenBreed.Gui.Abstractions.Elements;
@@ -24,18 +26,25 @@ using OpenBreed.Gui.Abstractions.Extensions;
 using OpenBreed.Gui.Extensions;
 using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
+using OpenBreed.Physics.Generic.Extensions;
+using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Common.Extensions;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.App.Extensions;
+using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
+using OpenTK.Mathematics;
 using System;
 
 using System.IO;
 
 using System.Reflection;
+using static OpenBreed.Wecs.Control.Components.AnimationPlayerComponent;
 
 
 namespace OpenBreed.Sandbox
@@ -66,12 +75,16 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupDataHandlers();
 
+            hostBuilder.SetupCollisionVisualizingOptions();
+
+
             hostBuilder.SetupDataGridFactory();
             hostBuilder.SetupDefaultLogger();
             //hostBuilder.SetupXmlReadonlyDatabase();
             hostBuilder.ConfigureLogConsolePrinter();
             hostBuilder.SetupCoreManagers();
-            hostBuilder.SetupOpenGLManagers();
+            hostBuilder.SetupOpenALServices();
+            hostBuilder.SetupOpenGLServices();
             hostBuilder.SetupCommonRenderingServices();
             hostBuilder.ConfigureInteraction();
             hostBuilder.SetupGameWindowInputMan();
@@ -79,6 +92,7 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupGLWindow();
             hostBuilder.SetupWindowsDrawingContext();
             hostBuilder.SetupGLRenderContextComponents();
+            hostBuilder.SetupCommonServices();
             hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
             {
                 dataLoaderFactory.RegisterGraphicsDataLoader(sp);
@@ -86,30 +100,57 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupSandboxWecsSystems();
 
-            //hostBuilder.SetupShapeMan((shapeMan, sp) =>
-            //{
-            //    shapeMan.Register("Shapes/Point_14_14", new PointShape(14, 14));
-            //    shapeMan.Register("Shapes/Point_0_0", new PointShape(0, 0));
-            //    shapeMan.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
-            //    shapeMan.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
-            //    shapeMan.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
-            //    shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
-            //    shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
-            //    shapeMan.Register("Shapes/Box_-24_-24_48_48", new BoxShape(-24, -24, 48, 48));
-            //    shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
-            //    shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
-            //    shapeMan.Register("Shapes/Circle_0_0_240", new CircleShape(new Vector2(0, 0), 240));
-            //    shapeMan.Register("Shapes/Circle_0_0_120", new CircleShape(new Vector2(0, 0), 120));
-            //    shapeMan.Register("Shapes/Circle_0_0_480", new CircleShape(new Vector2(0, 0), 480));
-            //    shapeMan.Register("Shapes/Circle_0_0_40", new CircleShape(new Vector2(0, 0), 40));
-            //    shapeMan.Register("Shapes/Circle_0_0_320", new CircleShape(new Vector2(0, 0), 320));
-            //    shapeMan.Register("Shapes/Circle_0_0_160", new CircleShape(new Vector2(0, 0), 160));
-            //});
+            hostBuilder.SetupShapeMan((shapeMan, sp) =>
+            {
+                shapeMan.Register("Shapes/Point_14_14", new PointShape(14, 14));
+                shapeMan.Register("Shapes/Point_0_0", new PointShape(0, 0));
+                shapeMan.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
+                shapeMan.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
+                shapeMan.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
+                shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
+                shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
+                shapeMan.Register("Shapes/Box_-24_-24_48_48", new BoxShape(-24, -24, 48, 48));
+                shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
+                shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
+                shapeMan.Register("Shapes/Circle_0_0_240", new CircleShape(new Vector2(0, 0), 240));
+                shapeMan.Register("Shapes/Circle_0_0_120", new CircleShape(new Vector2(0, 0), 120));
+                shapeMan.Register("Shapes/Circle_0_0_480", new CircleShape(new Vector2(0, 0), 480));
+                shapeMan.Register("Shapes/Circle_0_0_40", new CircleShape(new Vector2(0, 0), 40));
+                shapeMan.Register("Shapes/Circle_0_0_320", new CircleShape(new Vector2(0, 0), 320));
+                shapeMan.Register("Shapes/Circle_0_0_160", new CircleShape(new Vector2(0, 0), 160));
+            });
 
-            //hostBuilder.SetupVariableManager();
+            hostBuilder.SetupCollisionChecker();
 
-            //hostBuilder.SetupCommonGameServices(isEditor: false);
-            //hostBuilder.SetupCommonGameWecsServices(isEditor: false);
+            hostBuilder.SetupCollisionMan<IEntity>((collisionMan, sp) =>
+            {
+
+            });
+
+            hostBuilder.SetupBroadphaseFactory<IEntity>();
+            hostBuilder.SetupFixtureMan((s, a) => { });
+
+            hostBuilder.SetupClipMan<IEntity>();
+
+            hostBuilder.SetupFrameUpdaterMan<IEntity>((frameUpdaterMan, sp) =>
+            {
+                //new SpriteComponentAnimator(frameUpdaterMan, sp.GetService<ISpriteMan>(), sp.GetRequiredService<IDataLoaderFactory>());
+            });
+
+            hostBuilder.SetupFsmManager((fsmMan, sp) =>
+            {
+            });
+
+
+            hostBuilder.SetupLuaScripting((scriptMan, sp) =>
+            {
+
+            });
+
+            hostBuilder.SetupDefaultActionCodeProvider((codeProvider, sp) =>
+            {
+                //codeProvider.Register(PlayerActions.Fire);
+            });
 
             var host = hostBuilder.Build();
 

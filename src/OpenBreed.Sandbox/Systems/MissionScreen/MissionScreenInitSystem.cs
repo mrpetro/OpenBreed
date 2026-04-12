@@ -92,21 +92,25 @@ namespace OpenBreed.Sandbox.Systems.MissionScreen
 
         private int AddWorldPalette(IWorld world)
         {
+            var tag = $"Palettes/{WorldNames.MissionScreen}";
+
             var commonPaletteModel = palettesDataProvider.GetPalette("Vanilla/Common/MissionScreen/Palette");
 
-            var paletteEntity = services.Entities.Create(tag: $"Palettes/{WorldNames.MissionScreen}");
-            var paletteComponent = new PaletteComponent();
-            paletteEntity.Add(paletteComponent);
-
             var builder = services.Palettes.CreatePalette()
-                .SetName(paletteEntity.Tag)
+                .SetName(tag)
                 .SetLength(256)
                 .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray())
                 .SetColors(Enumerable.Range(0, 64).Select(idx => Color4.White).ToArray(), 32);
 
             var palette = builder.Build();
 
+            var paletteComponent = new PaletteComponent();
             paletteComponent.PaletteId = palette.Id;
+
+            var paletteEntity = services.Entities.Create()
+                .SetTag(tag)
+                .AddComponent(paletteComponent)
+                .Build();
 
             services.Worlds.RequestAddEntity(paletteEntity, world.Id);
 

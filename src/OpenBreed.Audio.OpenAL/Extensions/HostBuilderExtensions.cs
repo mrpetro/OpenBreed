@@ -26,7 +26,7 @@ namespace OpenBreed.Audio.OpenAL.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupOpenALManagers(this IHostBuilder hostBuilder)
+        public static void SetupOpenALServices(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {

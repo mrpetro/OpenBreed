@@ -31,7 +31,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static void SetupOpenGLManagers(this IHostBuilder hostBuilder)
+        public static void SetupOpenGLServices(this IHostBuilder hostBuilder)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {

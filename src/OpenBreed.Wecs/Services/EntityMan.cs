@@ -1,7 +1,10 @@
-﻿using OpenBreed.Common.Tools.Collections;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Entities.Builders;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,14 +48,9 @@ namespace OpenBreed.Wecs.Services
 
         #region Public Methods
 
-        public IEntity Create(string tag, List<IEntityComponent> initialComponents = null)
+        public IEntityBuilder Create()
         {
-            var newEntity = new Entity(this, tag, initialComponents);
-            newEntity.Id = entities.Add(newEntity);
-
-            AddToLookup(tag, newEntity);
-
-            return newEntity;
+            return new EntityBuilder(this);
         }
 
         public IEntity GetById(int id)
@@ -88,7 +86,7 @@ namespace OpenBreed.Wecs.Services
         {
             foreach (var entity in toErase)
             {
-                //Erase only entities that have no world 
+                //Erase only entities that have no world
                 if (entity.HasWorld())
                 {
                     continue;
@@ -104,6 +102,12 @@ namespace OpenBreed.Wecs.Services
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal void Register(Entity entity)
+        {
+            entity.Id = entities.Add(entity);
+            AddToLookup(entity.Tag, entity);
+        }
 
         internal void OnComponentAdded(IEntity entity, Type componentType)
         {

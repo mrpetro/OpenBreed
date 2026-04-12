@@ -15,7 +15,7 @@ namespace OpenBreed.Wecs.Services
     {
         #region Private Fields
 
-        private readonly IEntityMan entityMan;
+        private readonly EntityMan entityMan;
         private readonly IComponentFactoryProvider componentFactoryProvider;
         private readonly IEntityTemplateLoader entityTemplateLoader;
         private readonly Dictionary<Type, IComponentFactory> componentFactories = new Dictionary<Type, IComponentFactory>();
@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Services
         #region Internal Constructors
 
         public EntityFactory(
-            IEntityMan entityMan,
+            EntityMan entityMan,
             IComponentFactoryProvider componentFactoryProvider,
             IEntityTemplateLoader entityTemplateLoader)
         {

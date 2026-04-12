@@ -8,14 +8,15 @@ namespace OpenBreed.Wecs.Abstractions.Extensions
 {
     public static class EntityManExtensions
     {
-        public static IEntity FindOrCreate(this IEntityMan entityMan, string tag, Action<IEntity> create)
+        public static IEntity FindOrCreate(this IEntityMan entityMan, string tag, Func<IEntityBuilder, IEntity> initializer)
         {
             var foundEntity = entityMan.GetByTag(tag).FirstOrDefault();
 
             if (foundEntity is null)
             {
-                foundEntity = entityMan.Create(tag);
-                create.Invoke(foundEntity);
+                var builder = entityMan.Create()
+                    .SetTag(tag);
+                foundEntity = initializer.Invoke(builder);
             }
 
             return foundEntity;

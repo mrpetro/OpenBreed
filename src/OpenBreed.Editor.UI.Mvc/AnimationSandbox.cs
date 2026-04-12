@@ -233,16 +233,17 @@ namespace OpenBreed.Editor.UI.Mvc
                 animationWorld = gameWorldBuilder.Build();
             }
 
-            var cameraEntity = entityMan.FindOrCreate("Camera", (e) =>
+            var cameraEntity = entityMan.FindOrCreate("Camera", (builder) =>
             {
                 var cameraComponentBuilder = builderFactory.GetBuilder<CameraComponentBuilder>();
                 cameraComponentBuilder.SetSize(100, 100);
-
-                e.Add(cameraComponentBuilder.Build());
-                animationWorld.AddEntity(e);
+                builder.AddComponent(cameraComponentBuilder.Build());
+                var output = builder.Build();
+                animationWorld.AddEntity(output);
+                return output;
             });
 
-            var animationSampleEntity = entityMan.FindOrCreate("AnimationSample", (e) =>
+            var animationSampleEntity = entityMan.FindOrCreate("AnimationSample", (builder) =>
             {
                 var spriteComponentBuilder = builderFactory.GetBuilder<SpriteComponentBuilder>();
                 var animationComponentBuilder = builderFactory.GetBuilder<AnimationComponentBuilder>();
@@ -252,11 +253,14 @@ namespace OpenBreed.Editor.UI.Mvc
                 state.SetSpeed(0.0f);
                 state.SetLoop(true);
 
-                e.Add(PositionComponent.Create(0.0f, 0.0f));
-                e.Add(spriteComponentBuilder.Build());
-                e.Add(animationComponentBuilder.Build());
+                builder.AddComponent(PositionComponent.Create(0.0f, 0.0f));
+                builder.AddComponent(spriteComponentBuilder.Build());
+                builder.AddComponent(animationComponentBuilder.Build());
 
-                animationWorld.AddEntity(e);
+                var output = builder.Build();
+
+                animationWorld.AddEntity(output);
+                return output;
             });
 
 

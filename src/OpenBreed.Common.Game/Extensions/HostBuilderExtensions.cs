@@ -81,8 +81,8 @@ namespace OpenBreed.Common.Game.Extensions
             hostBuilder.SetupModelTools();
 
             hostBuilder.SetupCoreManagers();
-            hostBuilder.SetupOpenALManagers();
-            hostBuilder.SetupOpenGLManagers();
+            hostBuilder.SetupOpenALServices();
+            hostBuilder.SetupOpenGLServices();
             hostBuilder.SetupCommonRenderingServices();
             hostBuilder.SetupGLRenderContextComponents();
 

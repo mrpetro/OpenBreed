@@ -91,21 +91,25 @@ namespace OpenBreed.Sandbox.Systems.SmartCard
 
         private int AddWorldPalette(IWorld world)
         {
+            var tag = $"Palettes/{WorldNames.SmartCardReader}";
+
             var commonPaletteModel = palettesDataProvider.GetPalette("Vanilla/Common/SmartCardScreen/Palette");
 
-            var paletteEntity = services.Entities.Create(tag: $"Palettes/{WorldNames.SmartCardReader}");
-            var paletteComponent = new PaletteComponent();
-            paletteEntity.Add(paletteComponent);
-
             var builder = services.Palettes.CreatePalette()
-                .SetName(paletteEntity.Tag)
+                .SetName(tag)
                 .SetLength(256)
                 .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray())
                 .SetColors(Enumerable.Range(0, 64).Select(idx => MyColor.FromArgb(255, 0, 168, 168).ToColor4()).ToArray(), 32);
 
             var palette = builder.Build();
 
+            var paletteComponent = new PaletteComponent();
             paletteComponent.PaletteId = palette.Id;
+
+            var paletteEntity = services.Entities.Create()
+                .SetTag(tag)
+                .AddComponent(paletteComponent)
+                .Build();
 
             services.Worlds.RequestAddEntity(paletteEntity, world.Id);
 

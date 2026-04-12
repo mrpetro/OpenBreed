@@ -117,12 +117,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         {
             var commonPaletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
 
-            var paletteEntity = services.Entities.Create(tag: $"Palettes/{WorldNames.GameHud}");
-            var paletteComponent = new PaletteComponent();
-            paletteEntity.Add(paletteComponent);
+            var tag = $"Palettes/{WorldNames.GameHud}";
 
             var builder = paletteMan.CreatePalette()
-                .SetName(paletteEntity.Tag)
+                .SetName(tag)
                 .SetLength(256)
                 .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray());
 
@@ -131,7 +129,13 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 
             var palette = builder.Build();
 
+            var paletteComponent = new PaletteComponent();
             paletteComponent.PaletteId = palette.Id;
+
+            var paletteEntity = services.Entities.Create()
+                .SetTag(tag)
+                .AddComponent(paletteComponent)
+                .Build();
 
             services.Worlds.RequestAddEntity(paletteEntity, world.Id);
 

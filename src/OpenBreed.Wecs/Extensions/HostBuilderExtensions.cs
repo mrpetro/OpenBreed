@@ -111,20 +111,7 @@ namespace OpenBreed.Wecs.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddScoped<IEntityFactory>((sp) =>
-                {
-                    var entityFactory = new EntityFactory(
-                        sp.GetService<IEntityMan>(),
-                        sp.GetService<IComponentFactoryProvider>(),
-                        sp.GetService<IEntityTemplateLoader>());
-
-                    if (action is not null)
-                    {
-                        action.Invoke(entityFactory, sp);
-                    }
-
-                    return entityFactory;
-                })
+                services.AddScoped<IEntityFactory, EntityFactory>()
                 .AddScoped((sp) => new Lazy<IEntityFactory>(() => sp.GetRequiredService<IEntityFactory>()));
             });
         }
@@ -187,7 +174,8 @@ namespace OpenBreed.Wecs.Extensions
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
                 services.AddScoped<IWecsCore, WecsCore>();
-                services.AddScoped<IEntityMan, EntityMan>();
+                services.AddScoped<EntityMan>();
+                services.AddScoped<IEntityMan>((sp) => sp.GetRequiredService<EntityMan>());
                 services.AddScoped<IWorldMan, WorldMan>((sp) =>
                 {
                     var entityMan = sp.GetRequiredService<IEntityMan>();

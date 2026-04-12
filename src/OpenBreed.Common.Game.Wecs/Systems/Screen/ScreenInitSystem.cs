@@ -100,8 +100,6 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Screen
 
         private IEntity CreatePlayer(string player)
         {
-            var player1Entity = services.Entities.Create($"Players/{player}");
-
             var playerInputs = new PlayerInputsComponent();
             playerInputs.Up = OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up;
             playerInputs.Down = OpenTK.Windowing.GraphicsLibraryFramework.Keys.Down;
@@ -110,8 +108,11 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Screen
             playerInputs.Fire = OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightControl;
             playerInputs.SwitchWeapon = OpenTK.Windowing.GraphicsLibraryFramework.Keys.PageDown;
 
-            player1Entity.Add(playerInputs);
-            player1Entity.Add(new ControllerComponent());
+            var player1Entity = services.Entities.Create()
+                .SetTag($"Players/{player}")
+                .AddComponent(playerInputs)
+                .AddComponent(new ControllerComponent())
+                .Build();
 
             return player1Entity;
         }

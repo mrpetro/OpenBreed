@@ -147,11 +147,6 @@ namespace OpenBreed.Sandbox.Loaders
             return values[actionLayer];
         }
 
-        public IEntity CreateMapEntity()
-        {
-            return entityMan.Create($"Maps");
-        }
-
         public IWorld Load(string entryId)
         {
             var world = worldMan.GetByName(entryId);
@@ -198,7 +193,9 @@ namespace OpenBreed.Sandbox.Loaders
             LoadReferencedTileStamps(dbMap);
             LoadReferencedSounds(dbMap);
 
-            var mapEntity = CreateMapEntity();
+
+
+
 
             var layout = map.Layout;
             var visited = new bool[layout.Width, layout.Height];
@@ -217,11 +214,13 @@ namespace OpenBreed.Sandbox.Loaders
                 .SetStaticGrid(layout.Width, layout.Height, cellSize)
                 .Build();
 
-            mapEntity.Add(new StampPutterComponent());
-            mapEntity.Add(tileGridComponent);
-            mapEntity.Add(dataGridComponent);
-            mapEntity.Add(collisionComponent);
-
+            var mapEntity = entityMan.Create()
+                .SetTag($"Maps")
+                .AddComponent(new StampPutterComponent())
+                .AddComponent(tileGridComponent)
+                .AddComponent(dataGridComponent)
+                .AddComponent(collisionComponent)
+                .Build();
 
             var mapper = new MapMapper(dbMap.TileSetRef);
 
@@ -372,16 +371,6 @@ namespace OpenBreed.Sandbox.Loaders
                 return;
             }
 
-            paletteEntity = entityMan.Create(tag: paletteEntityTag);
-
-            var paletteComponent = paletteEntity.TryGet<PaletteComponent>();
-
-            if (paletteComponent is null)
-            {
-                paletteComponent = new PaletteComponent();
-                paletteEntity.Add(paletteComponent);
-            }
-
             var builder = paletteMan.CreatePalette()
                 .SetName(paletteEntityTag)
                 .SetLength(256)
@@ -399,7 +388,13 @@ namespace OpenBreed.Sandbox.Loaders
 
             var palette = builder.Build();
 
+            var paletteComponent = new PaletteComponent();
             paletteComponent.PaletteId = palette.Id;
+
+            paletteEntity = entityMan.Create()
+                .SetTag(paletteEntityTag)
+                .AddComponent(paletteComponent)
+                .Build();
         }
 
         private void LoadReferencedAnimations(IDbMap dbMap)

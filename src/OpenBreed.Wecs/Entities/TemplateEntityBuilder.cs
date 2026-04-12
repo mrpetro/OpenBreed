@@ -15,7 +15,7 @@ namespace OpenBreed.Wecs.Entities
         #region Private Fields
 
         private readonly EntityFactory entityFactory;
-        private readonly IEntityMan entityMan;
+        private readonly EntityMan entityMan;
         private readonly IComponentFactoryProvider componentFactoryProvider;
         private readonly IEntityTemplateLoader entityTemplateLoader;
         private readonly string templateName;
@@ -28,7 +28,7 @@ namespace OpenBreed.Wecs.Entities
 
         public TemplateEntityBuilder(
             EntityFactory entityFactory,
-            IEntityMan entityMan,
+            EntityMan entityMan,
             IComponentFactoryProvider componentFactoryProvider,
             IEntityTemplateLoader entityTemplateLoader,
             string templateName)
@@ -72,7 +72,14 @@ namespace OpenBreed.Wecs.Entities
                 components.Add(componentFactory.Create(componentTemplate));
             }
 
-            return entityMan.Create(tag, components);
+            var newEntity = new Entity(entityMan, tag, components);
+            entityMan.Register(newEntity);
+            return newEntity;
+        }
+
+        public IEntityBuilder AddComponent<TEntityComponent>(TEntityComponent component) where TEntityComponent : IEntityComponent
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Methods
