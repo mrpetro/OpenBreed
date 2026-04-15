@@ -1,5 +1,5 @@
-﻿using OpenBreed.Animation.Interface;
-using OpenBreed.Animation.Interface.Data;
+﻿using OpenBreed.Animation.Abstractions;
+using OpenBreed.Animation.Abstractions.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Editor.UI.Mvc.Controllers;

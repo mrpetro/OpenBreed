@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Audio.Interface;
+using OpenBreed.Audio.Abstractions;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 using OpenBreed.Core.Abstractions;
-using OpenBreed.Input.Interface.Events;
+using OpenBreed.Input.Abstractions.Events;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Events;

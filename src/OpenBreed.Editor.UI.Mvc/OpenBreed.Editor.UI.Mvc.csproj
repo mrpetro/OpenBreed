@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Animation.Abstractions\OpenBreed.Animation.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Common.Game.Wecs\OpenBreed.Common.Game.Wecs.csproj" />
     <ProjectReference Include="..\OpenBreed.Core.Abstractions\OpenBreed.Core.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Gui.Abstractions\OpenBreed.Gui.Abstractions.csproj" />

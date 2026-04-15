@@ -11,8 +11,8 @@
 	</ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj" />
-    <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Input.Abstractions\OpenBreed.Input.Abstractions.csproj" />
+    <ProjectReference Include="..\OpenBreed.Physics.Abstractions\OpenBreed.Physics.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Abstractions\OpenBreed.Rendering.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Core.Components\OpenBreed.Wecs.Core.Components.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Gui.Components\OpenBreed.Wecs.Gui.Components.csproj" />

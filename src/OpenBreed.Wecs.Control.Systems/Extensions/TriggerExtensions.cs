@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Input.Interface;
-using OpenBreed.Input.Interface.Events;
+using OpenBreed.Input.Abstractions;
+using OpenBreed.Input.Abstractions.Events;
 using OpenBreed.Wecs.Control.Components;
 using OpenBreed.Wecs.Control.Systems.Events;
 using System;

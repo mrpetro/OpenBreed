@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
@@ -13,7 +13,7 @@ using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Control.Systems.Extensions;

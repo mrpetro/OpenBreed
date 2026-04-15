@@ -1,4 +1,4 @@
-﻿using OpenBreed.Input.Interface;
+﻿using OpenBreed.Input.Abstractions;
 using System;
 using System.Collections.Generic;
 

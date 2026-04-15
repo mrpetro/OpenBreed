@@ -4,7 +4,7 @@ using OpenBreed.Common;
 using OpenBreed.Core;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Input.Interface;
+using OpenBreed.Input.Abstractions;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Renderers;

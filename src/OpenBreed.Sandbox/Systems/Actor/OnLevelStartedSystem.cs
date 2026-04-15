@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Audio.Interface;
+using OpenBreed.Audio.Abstractions;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;

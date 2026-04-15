@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Input.Interface;
+using OpenBreed.Input.Abstractions;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Gui.Components;

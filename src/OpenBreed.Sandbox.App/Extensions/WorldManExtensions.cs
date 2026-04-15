@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
+using OpenBreed.Sandbox.App.Systems;
 
 namespace OpenBreed.Sandbox.App.Extensions
 {
@@ -27,6 +28,7 @@ namespace OpenBreed.Sandbox.App.Extensions
                 .AddGuiSystems(isEditor: false)
                 .AddRenderingSystems()
                 .AddScriptingSystems()
+                .AddSystem<MapRenderSystem>()
                 .SetName("Sandbox").Build();
         }
     }

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Animation.Interface;
+﻿using OpenBreed.Animation.Abstractions;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Control.Components;
 using System;

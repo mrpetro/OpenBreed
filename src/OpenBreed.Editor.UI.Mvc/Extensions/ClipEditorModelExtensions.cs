@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 
 namespace OpenBreed.Editor.UI.Mvc.Extensions

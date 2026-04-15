@@ -8,7 +8,7 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Loaders;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Worlds;

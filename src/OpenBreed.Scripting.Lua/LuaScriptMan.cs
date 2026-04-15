@@ -2,7 +2,7 @@
 using NLua;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

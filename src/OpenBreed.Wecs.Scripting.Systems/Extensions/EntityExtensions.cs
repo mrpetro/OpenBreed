@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Scripting.Components;

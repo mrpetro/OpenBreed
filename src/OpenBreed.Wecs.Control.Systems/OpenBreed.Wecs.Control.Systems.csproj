@@ -18,7 +18,7 @@
   </ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Input.Abstractions\OpenBreed.Input.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Core.Components\OpenBreed.Wecs.Core.Components.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Control.Components\OpenBreed.Wecs.Control.Components.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Core.Systems\OpenBreed.Wecs.Core.Systems.csproj" />

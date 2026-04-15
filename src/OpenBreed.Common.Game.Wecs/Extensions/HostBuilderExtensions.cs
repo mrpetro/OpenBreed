@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Generic.Extensions;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Interface;

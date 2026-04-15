@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Animation.Interface.Data;
+using OpenBreed.Animation.Abstractions.Data;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Mvc;
 using OpenBreed.Core.Abstractions.Managers;

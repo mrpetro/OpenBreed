@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
-using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Animation.Abstractions;
+using OpenBreed.Audio.Abstractions.Managers;
 using OpenBreed.Audio.OpenAL.Managers;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;

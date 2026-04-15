@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Database.Interface.Items.Animations;

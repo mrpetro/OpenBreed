@@ -1,4 +1,4 @@
-﻿using OpenBreed.Animation.Interface;
+﻿using OpenBreed.Animation.Abstractions;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Mvc;
 using OpenBreed.Database.Interface.Items.Animations;

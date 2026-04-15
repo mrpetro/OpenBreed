@@ -27,7 +27,7 @@ using OpenBreed.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Rendering.OpenGL.Managers;

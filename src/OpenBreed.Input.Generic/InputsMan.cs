@@ -2,8 +2,8 @@
 using OpenBreed.Core.Abstractions.Events;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Input.Interface;
-using OpenBreed.Input.Interface.Events;
+using OpenBreed.Input.Abstractions;
+using OpenBreed.Input.Abstractions.Events;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;

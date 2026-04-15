@@ -3,7 +3,7 @@ using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Input.Interface;
+using OpenBreed.Input.Abstractions;
 using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Events;
 using OpenTK.Windowing.Common;

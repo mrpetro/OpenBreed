@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Rendering.Abstractions.Factories;
 using OpenTK.Mathematics;
 using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.Abstractions
 {
@@ -67,7 +68,6 @@ namespace OpenBreed.Rendering.Abstractions
         /// Event occurs when keyboard key is being released.
         /// </summary>
         event ViewKeyUpHandler KeyUp;
-
 
         #endregion Public Events
 

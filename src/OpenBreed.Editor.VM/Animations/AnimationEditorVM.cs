@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using OpenBreed.Animation.Interface;
-using OpenBreed.Animation.Interface.Data;
+using OpenBreed.Animation.Abstractions;
+using OpenBreed.Animation.Abstractions.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Interface;

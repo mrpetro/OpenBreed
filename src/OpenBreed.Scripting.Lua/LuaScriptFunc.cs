@@ -1,5 +1,5 @@
 ﻿using NLua;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using System.Collections.Generic;
 
 namespace OpenBreed.Scripting.Lua

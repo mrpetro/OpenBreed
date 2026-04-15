@@ -1,4 +1,4 @@
-﻿using OpenBreed.Audio.Interface.Managers;
+﻿using OpenBreed.Audio.Abstractions.Managers;
 using OpenTK.Audio.OpenAL;
 using System;
 using System.Collections.Generic;

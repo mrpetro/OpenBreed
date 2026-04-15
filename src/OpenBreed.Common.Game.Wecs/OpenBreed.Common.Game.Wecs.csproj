@@ -18,7 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj" />
     <ProjectReference Include="..\OpenBreed.Common.Game\OpenBreed.Common.Game.csproj" />
-    <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Physics.Abstractions\OpenBreed.Physics.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Control.Components\OpenBreed.Wecs.Control.Components.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Audio.Systems\OpenBreed.Wecs.Audio.Systems.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs.Control.Systems\OpenBreed.Wecs.Control.Systems.csproj" />

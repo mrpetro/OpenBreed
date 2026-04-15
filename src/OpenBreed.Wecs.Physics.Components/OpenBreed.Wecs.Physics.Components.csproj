@@ -12,7 +12,7 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
-    <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Physics.Abstractions\OpenBreed.Physics.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 

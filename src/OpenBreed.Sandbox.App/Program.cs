@@ -2,50 +2,15 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using OpenBreed.Animation.Generic.Extensions;
-using OpenBreed.Audio.OpenAL.Extensions;
-using OpenBreed.Common;
-
-using OpenBreed.Common.Extensions;
-
-
-using OpenBreed.Common.Interface.Tools;
-
-using OpenBreed.Common.Windows.Extensions;
-using OpenBreed.Core;
-using OpenBreed.Core.Abstractions;
-using OpenBreed.Core.Abstractions.Events;
-using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Core.Extensions;
-using OpenBreed.Fsm.Extensions;
-using OpenBreed.Gui.Abstractions;
-
-using OpenBreed.Gui.Abstractions.Elements;
-using OpenBreed.Gui.Abstractions.Extensions;
-
-using OpenBreed.Gui.Extensions;
-using OpenBreed.Input.Generic.Extensions;
-using OpenBreed.Input.Interface;
-using OpenBreed.Physics.Generic.Extensions;
-using OpenBreed.Physics.Generic.Shapes;
-using OpenBreed.Rendering.Abstractions;
-using OpenBreed.Rendering.Abstractions.Events;
-using OpenBreed.Rendering.Common.Extensions;
-using OpenBreed.Rendering.OpenGL.Extensions;
+using OpenBreed.Sandbox.App.Components;
 using OpenBreed.Sandbox.App.Extensions;
 using OpenBreed.Scripting.Lua.Extensions;
-using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Core.Components;
-using OpenBreed.Wecs.Rendering.Components;
-using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenTK.Mathematics;
 using System;
 
 using System.IO;
 
 using System.Reflection;
-using static OpenBreed.Wecs.Control.Components.AnimationPlayerComponent;
-
 
 namespace OpenBreed.Sandbox
 {
@@ -146,6 +111,8 @@ namespace OpenBreed.Sandbox
             {
 
             });
+
+            hostBuilder.SetupWecsAssemblySystems();
 
             hostBuilder.SetupDefaultActionCodeProvider((codeProvider, sp) =>
             {
@@ -299,10 +266,37 @@ namespace OpenBreed.Sandbox
 
         private void OnWindowLoad(WindowLoadEvent e)
         {
+            var spriteMan = e.RenderContext.ServiceProvider.GetRequiredService<ISpriteMan>();
+            var tileMan = e.RenderContext.ServiceProvider.GetRequiredService<ITileMan>();
+            var textureMan = e.RenderContext.ServiceProvider.GetRequiredService<ITextureMan>();
+            var dataGridFactory = e.RenderContext.ServiceProvider.GetRequiredService<IDataGridFactory>();
+            var texture = textureMan.Create("TileMap", "D:\\666.png");
+
+
+            var tileAtlas = tileMan.CreateAtlas()
+                .SetName("Tiles")
+                .SetTileSize(16)
+                .SetTexture(texture.Id)
+                .AppendCoordsFromGrid(16,16,0,0)
+                .Build();
+
             var wecsCore = e.RenderContext.ServiceProvider.GetRequiredService<IWecsCore>();
             var world = wecsCore.Worlds.CreateSandboxWorld();
             renderView = e.RenderContext.CreateView();
             world.AddToView(renderView);
+
+            var dataGrid = dataGridFactory.Create<CellData>(100, 50);
+
+            dataGrid.Set(new Vector2i(20, 20), new CellData() { GfxId = 0 });
+
+            var dummy = wecsCore.Entities.Create()
+                .AddComponent(new MapComponent(dataGrid))
+                .Build();
+
+            wecsCore.Worlds.RequestAddEntity(dummy, world.Id);
+
+
+
 
             var interactionFactory = interactionFactoryProvider.GetFactory(renderView);
 

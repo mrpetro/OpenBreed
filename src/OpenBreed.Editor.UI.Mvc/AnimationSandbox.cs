@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Interface;

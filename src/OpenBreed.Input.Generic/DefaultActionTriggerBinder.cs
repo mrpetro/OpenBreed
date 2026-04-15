@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Input.Interface;
+using OpenBreed.Input.Abstractions;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;

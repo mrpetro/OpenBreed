@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Interface.Logging;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Extensions;
 using System;
 

@@ -1,5 +1,5 @@
-﻿using OpenBreed.Animation.Interface;
-using OpenBreed.Animation.Interface.Extensions;
+﻿using OpenBreed.Animation.Abstractions;
+using OpenBreed.Animation.Abstractions.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Interface;
 using System.Collections.Generic;

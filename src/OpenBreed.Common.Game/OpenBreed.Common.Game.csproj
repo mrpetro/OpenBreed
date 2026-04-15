@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Audio.Abstractions\OpenBreed.Audio.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Audio.LibOpenMpt\OpenBreed.Audio.LibOpenMpt.csproj" />
     <ProjectReference Include="..\OpenBreed.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj" />
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj" />
     <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj" />
     <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj" />
     <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj" />
-    <ProjectReference Include="..\OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Physics.Abstractions\OpenBreed.Physics.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Abstractions\OpenBreed.Rendering.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Common\OpenBreed.Rendering.Common.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj" />

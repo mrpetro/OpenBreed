@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Interface;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Scripting.Lua;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;

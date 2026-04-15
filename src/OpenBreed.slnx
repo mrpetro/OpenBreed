@@ -128,11 +128,11 @@
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Animation.Interface/OpenBreed.Animation.Interface.csproj">
+    <Project Path="OpenBreed.Animation.Abstractions/OpenBreed.Animation.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Audio.Interface/OpenBreed.Audio.Interface.csproj">
+    <Project Path="OpenBreed.Audio.Abstractions/OpenBreed.Audio.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
@@ -156,7 +156,7 @@
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Input.Interface/OpenBreed.Input.Interface.csproj">
+    <Project Path="OpenBreed.Input.Abstractions/OpenBreed.Input.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
@@ -164,7 +164,7 @@
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Physics.Interface/OpenBreed.Physics.Interface.csproj">
+    <Project Path="OpenBreed.Physics.Abstractions/OpenBreed.Physics.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
@@ -180,7 +180,7 @@
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Scripting.Interface/OpenBreed.Scripting.Interface.csproj">
+    <Project Path="OpenBreed.Scripting.Abstractions/OpenBreed.Scripting.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>

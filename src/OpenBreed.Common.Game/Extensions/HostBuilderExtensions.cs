@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using OpenBreed.Animation.Interface;
-using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Animation.Abstractions;
+using OpenBreed.Audio.Abstractions.Managers;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Game;
@@ -16,13 +16,13 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Input.Generic.Extensions;
-using OpenBreed.Input.Interface;
-using OpenBreed.Input.Interface.Events;
+using OpenBreed.Input.Abstractions;
+using OpenBreed.Input.Abstractions.Events;
 using OpenBreed.Model.Maps;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Extensions;
@@ -166,7 +166,7 @@ namespace OpenBreed.Common.Game.Extensions
 
 
 
-                res = scriptMan.RunString(@"import('OpenBreed.Animation.Interface', 'OpenBreed.Animation.Interface.Extensions')");
+                res = scriptMan.RunString(@"import('OpenBreed.Animation.Abstractions', 'OpenBreed.Animation.Abstractions.Extensions')");
                 res = scriptMan.RunString(@"import('OpenBreed.Sandbox', 'OpenBreed.Sandbox.Extensions')");
 
                 res = scriptMan.RunString(@"import('OpenBreed.Common.Game', 'OpenBreed.Common.Game')");

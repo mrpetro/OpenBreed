@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OpenBreed.Animation.Interface;
-using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Animation.Abstractions;
+using OpenBreed.Audio.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Physics.Interface.Managers;

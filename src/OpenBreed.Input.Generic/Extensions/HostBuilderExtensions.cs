@@ -6,7 +6,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Input.Interface;
+using OpenBreed.Input.Abstractions;
 using OpenTK.Windowing.Desktop;
 using System;
 using System.Collections.Generic;

@@ -7,7 +7,7 @@ using OpenBreed.Common.Interface.Data;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

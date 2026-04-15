@@ -1,5 +1,5 @@
 ﻿using Moq;
-using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Audio.Abstractions.Managers;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Abstractions.Primitives;

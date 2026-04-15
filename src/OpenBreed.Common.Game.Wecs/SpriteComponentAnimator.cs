@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Abstractions.Data;

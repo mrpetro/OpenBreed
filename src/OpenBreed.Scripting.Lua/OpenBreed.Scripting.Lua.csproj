@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
-    <ProjectReference Include="..\OpenBreed.Scripting.Interface\OpenBreed.Scripting.Interface.csproj" />
+    <ProjectReference Include="..\OpenBreed.Scripting.Abstractions\OpenBreed.Scripting.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Core.Abstractions.Managers;
-using OpenBreed.Input.Interface;
+using OpenBreed.Input.Abstractions;
 using OpenBreed.Wecs.Abstractions;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Core.Components;

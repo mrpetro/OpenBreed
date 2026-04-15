@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Input.Interface;
-using OpenBreed.Input.Interface.Events;
+using OpenBreed.Input.Abstractions;
+using OpenBreed.Input.Abstractions.Events;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -37,8 +37,8 @@ namespace OpenBreed.Input.Generic
             gameWindow.MouseWheel += OnMouseWheel;
             gameWindow.KeyDown += OnKeyDown;
             gameWindow.KeyUp += OnKeyUp;
-            //gameWindow.MouseDown += OnMouseDown;
-            //gameWindow.MouseUp += OnMouseUp;
+            gameWindow.MouseDown += OnMouseDown;
+            gameWindow.MouseUp += OnMouseUp;
 
             oldKeyboardState = gameWindow.KeyboardState.GetSnapshot();
         }

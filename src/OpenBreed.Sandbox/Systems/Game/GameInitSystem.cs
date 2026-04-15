@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Sandbox.Extensions;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;

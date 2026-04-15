@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using System;

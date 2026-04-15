@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Audio.Abstractions.Managers;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Abstractions.Events;

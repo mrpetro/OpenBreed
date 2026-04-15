@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Interface;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 
 namespace OpenBreed.Wecs.Control.Components.Extensions
 {

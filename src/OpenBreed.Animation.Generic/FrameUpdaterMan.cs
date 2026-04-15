@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using System;

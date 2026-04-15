@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using OpenTK.Windowing.Common;
 using System.Net;
-using OpenBreed.Input.Interface;
+using OpenBreed.Input.Abstractions;
 using System.Windows.Controls;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Core.Managers;

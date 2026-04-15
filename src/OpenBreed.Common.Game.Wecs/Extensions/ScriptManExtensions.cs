@@ -1,4 +1,4 @@
-﻿using OpenBreed.Scripting.Interface;
+﻿using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Scripting.Systems.Extensions;
 using OpenTK.Mathematics;
 using System;

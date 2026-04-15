@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Audio.Abstractions.Managers;
 using OpenBreed.Common;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;

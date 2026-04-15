@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Animation.Interface;
-using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Animation.Abstractions;
+using OpenBreed.Audio.Abstractions.Managers;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using System;

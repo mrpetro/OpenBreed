@@ -4,7 +4,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Model.Scripts;
 using OpenBreed.Model.Texts;
-using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Abstractions;
 using System;
 
 namespace OpenBreed.Scripting.Lua

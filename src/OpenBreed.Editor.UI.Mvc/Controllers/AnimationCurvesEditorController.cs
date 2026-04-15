@@ -28,7 +28,7 @@ using static System.Formats.Asn1.AsnWriter;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO.Pipes;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 
 namespace OpenBreed.Editor.UI.Mvc.Controllers
 {

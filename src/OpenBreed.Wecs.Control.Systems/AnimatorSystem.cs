@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Abstractions;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Control.Components;
 using OpenBreed.Wecs.Control.Systems.Events;
