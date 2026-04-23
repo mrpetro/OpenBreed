@@ -48,7 +48,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 
         #region Public Methods
 
-        public void OnEvent(EntityEnteredEvent e)
+        public void OnEvent(IWorld world, EntityEnteredEvent e)
         {
             var entity = services.Entities.GetById(e.EntityId);
 
@@ -63,7 +63,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             InitKeysCounter(entity);
         }
 
-        public void OnEvent(DamagedEvent e)
+        public void OnEvent(IWorld world, DamagedEvent e)
         {
             var actorEntity = services.Entities.GetById(e.EntityId);
 
@@ -72,7 +72,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             TryUpdateBar("Hud/HealthBar/P1", 64, percent);
         }
 
-        public void OnEvent(InventoryChangedEvent e)
+        public void OnEvent(IWorld world, InventoryChangedEvent e)
         {
             var actorEntity = services.Entities.GetById(e.EntityId);
 
@@ -108,7 +108,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             }
         }
 
-        public void OnEvent(LivesChangedEvent e)
+        public void OnEvent(IWorld world, LivesChangedEvent e)
         {
             var actorEntity = services.Entities.GetById(e.EntityId);
 

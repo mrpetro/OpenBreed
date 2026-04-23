@@ -50,8 +50,6 @@ namespace OpenBreed.Wecs.Worlds
             this.entityToSystemMatcher = entityToSystemMatcher;
             this.eventSystemUpdater = eventSystemUpdater;
             this.logger = logger;
-
-            eventsMan.Subscribe<KeyboardStateEventArgs>(OnKeyboardKey);
         }
 
         #endregion Public Constructors
@@ -150,7 +148,9 @@ namespace OpenBreed.Wecs.Worlds
             }
 
             if(entities.Add(entity))
-                eventsMan.Raise(new EntityLeavingEvent(entity.Id, entity.WorldId));
+            {
+                eventsMan.Raise(new EntityLeavingEvent(entity.WorldId, entity.Id));
+            }
         }
 
         /// <summary>
@@ -186,18 +186,12 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Methods
 
-        private void OnKeyboardKey(KeyboardStateEventArgs e)
-        {
-            foreach (var world in worlds)
-            {
-                eventsMan.Raise(new WorldKeyboardEvent(world.Id, e.OldState, e.NewState));
-            }
-        }
-
         private void AddPendingEntities()
         {
             foreach (var keyValuePair in entitiesToAdd)
+            {
                 AddPendingEntities(keyValuePair.Key, keyValuePair.Value);
+            }
 
             entitiesToAdd.Clear();
         }
@@ -254,7 +248,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             worlds.Remove((World)world);
 
-            eventsMan.Raise(new WorldDeinitializedEventArgs(world.Id));
+            eventsMan.Raise(new WorldDeinitialized(world.Id));
         }
 
         /// <summary>
@@ -275,17 +269,17 @@ namespace OpenBreed.Wecs.Worlds
         {
             worlds.Add((World)world);
 
-            eventsMan.Raise(new WorldInitializedEventArgs(world.Id));
+            eventsMan.Raise(new WorldInitialized(world.Id));
         }
 
         private void OnEntityAdded(IEntity entity, int worldId)
         {
-            eventsMan.Raise(new EntityEnteredEvent(entity.Id, worldId));
+            eventsMan.Raise(new EntityEnteredEvent(worldId, entity.Id));
         }
 
         private void OnEntityRemoved(IEntity entity, int worldId)
         {
-            eventsMan.Raise(new EntityLeftEvent(entity.Id, worldId));
+            eventsMan.Raise(new EntityLeftEvent(worldId, entity.Id));
         }
 
         private void RemovePendingEntities()
@@ -320,6 +314,25 @@ namespace OpenBreed.Wecs.Worlds
             }
 
             entitiesToUpdate.Clear();
+        }
+
+        public void Update(Action<IWorld> updater)
+        {
+            foreach (var world in worlds)
+            {
+                updater.Invoke(world);
+            }
+        }
+
+        public IEnumerable<IWorld> GetWorldsWithSystem(Type systemType)
+        {
+            foreach (var world in worlds)
+            {
+                if(world.Systems.Any(item => item.GetType() == systemType))
+                {
+                    yield return world;
+                }
+            }
         }
 
         #endregion Private Methods

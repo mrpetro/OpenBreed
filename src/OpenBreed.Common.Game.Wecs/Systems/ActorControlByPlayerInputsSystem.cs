@@ -51,7 +51,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
         #region Protected Methods
 
-        protected override void UpdateEntity(IEntity entity, WorldKeyboardEvent e)
+        protected override void UpdateEntity(IEntity entity, KeyboardStateEventArgs e)
         {
             var playerInputsComponent = entity.Get<PlayerInputsComponent>();
             var controllerComponent = entity.Get<ControllerComponent>();

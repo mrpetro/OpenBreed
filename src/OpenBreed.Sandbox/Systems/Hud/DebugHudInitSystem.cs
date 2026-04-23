@@ -19,7 +19,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 {
     [RequireEntityWithTag("FpsCounter")]
     public class DebugHudInitSystem :
-        IEventSystem<WorldInitializedEventArgs>,
+        IEventSystem<WorldInitialized>,
         IEventSystem<ViewportResizedEvent>
     {
         private readonly IGameServices services;
@@ -32,15 +32,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             this.viewClient = viewClient;
         }
 
-        public void OnEvent(WorldInitializedEventArgs e)
+        public void OnEvent(IWorld world,
+            [RequireWorldWithName(WorldNames.DebugHud)]
+            WorldInitialized e)
         {
-            var world = services.Worlds.GetById(e.WorldId);
-
-            if (world.Name != WorldNames.DebugHud)
-            {
-                return;
-            }
-
             var hudCamera = services.Factory.CreateCamera(
                 "Camera.DebugHud",
                 0.0f,
@@ -85,7 +80,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         }
 
 
-        public void OnEvent(ViewportResizedEvent e)
+        public void OnEvent(IWorld world, ViewportResizedEvent e)
         {
             var viewportEntity = services.Entities.GetById(e.EntityId);
 

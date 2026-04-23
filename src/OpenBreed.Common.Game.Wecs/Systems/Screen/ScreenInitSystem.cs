@@ -23,7 +23,7 @@ using System.Linq;
 namespace OpenBreed.Common.Game.Wecs.Systems.Screen
 {
     public class ScreenInitSystem :
-        IEventSystem<WorldInitializedEventArgs>
+        IEventSystem<WorldInitialized>
     {
         #region Private Fields
 
@@ -45,15 +45,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Screen
 
         #region Public Methods
 
-        public void OnEvent(WorldInitializedEventArgs e)
+        public void OnEvent(IWorld world,
+            [RequireWorldWithName(WorldNames.ScreenWorld)]
+            WorldInitialized e)
         {
-            var world = services.Worlds.GetById(e.WorldId);
-
-            if (world.Name != WorldNames.ScreenWorld)
-            {
-                return;
-            }
-
             var renderView = viewClient.Context.ActiveViews.FirstOrDefault();
 
             if (renderView is null)

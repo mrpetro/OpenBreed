@@ -35,6 +35,10 @@
         /// <param name="entity">Entity to be removed</param>
         void RequestRemoveEntity(IEntity entity);
 
+        void Update(Action<IWorld> action);
+
+        IEnumerable<IWorld> GetWorldsWithSystem(Type systemType);
+
         #endregion Public Methods
     }
 }

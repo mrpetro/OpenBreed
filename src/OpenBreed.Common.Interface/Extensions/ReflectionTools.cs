@@ -33,7 +33,9 @@ namespace OpenBreed.Common.Interface.Extensions
                 return Delegate.CreateDelegate(getType(types.ToArray()), methodInfo);
             }
 
-            return Delegate.CreateDelegate(getType(types.ToArray()), target, methodInfo.Name);
+            var r = getType(types.ToArray());
+
+            return Delegate.CreateDelegate(r, target, methodInfo.Name);
         }
 
         #endregion Public Methods

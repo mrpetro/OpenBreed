@@ -131,11 +131,12 @@ namespace OpenBreed.Sandbox
                 itemsMap.RegisterAbtaItems();
             });
 
+            hostBuilder.SetupMapLegacyDataLoader();
+
             hostBuilder.SetupDataLoaderFactory((dataLoaderFactory, sp) =>
             {
                 dataLoaderFactory.RegisterGraphicsDataLoader(sp);
                 dataLoaderFactory.SetupAnimationDataLoader<IEntity>(sp);
-                dataLoaderFactory.SetupMapLegacyDataLoader(sp);
                 dataLoaderFactory.SetupSoundSampleDataLoader(sp);
                 dataLoaderFactory.SetupScriptDataLoader(sp);
             });
@@ -273,10 +274,10 @@ namespace OpenBreed.Sandbox
             var gameServices = serviceProvider.GetRequiredService<IGameServices>();
             var gameSettings = serviceProvider.GetRequiredService<IOptions<GameSettings>>();
 
-            var mapLegacyLoader = dataLoaderFactory.GetLoader<MapLegacyDataLoader>();
+            var mapDataLoader = serviceProvider.GetRequiredService<IMapDataLoader>();
 
             var levelName = gameSettings.Value.StartingLevelName;
-            var gameWorld = mapLegacyLoader.Load(levelName);
+            var gameWorld = mapDataLoader.Load(levelName);
 
             //var gameWorld = mapTxtLoader.Load(@"Content\Maps\demo_1.txt");
 
@@ -299,11 +300,11 @@ namespace OpenBreed.Sandbox
 
             //var playerCamera = cameraHelper.CreateCamera(0, 0, 640, 480);
 
-            gameServices.Triggers.OnWorldInitialized(gameWorld, () =>
-            {
-                var johnPlayerEntity = gameServices.Entities.GetByTag("John").First();
-                gameServices.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
-            });
+            //gameServices.Triggers.OnWorldInitialized(gameWorld, () =>
+            //{
+            //    var johnPlayerEntity = gameServices.Entities.GetByTag("John").First();
+            //    gameServices.ExecuteHeroEnter(johnPlayerEntity, gameWorld.Name, 0);
+            //});
         }
 
         private void OnWindowLoad(WindowLoadEvent e)

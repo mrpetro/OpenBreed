@@ -53,9 +53,16 @@ namespace OpenBreed.Wecs.Abstractions.Primitives
         /// <summary>
         /// Get specific system from this world
         /// </summary>
-        /// <typeparam name="T">Type of system to get</typeparam>
+        /// <typeparam name="TSystem">Type of system to get</typeparam>
         /// <returns>World system of specific type</returns>
-        T GetSystem<T>() where T : ISystem;
+        TSystem GetSystem<TSystem>() where TSystem : ISystem;
+
+        /// <summary>
+        /// Get systems of specifc type from this wortld. 
+        /// </summary>
+        /// <typeparam name="TSystem">Type of systems to get</typeparam>
+        /// <returns>World systems of specific type</returns>
+        IEnumerable<TSystem> GetSystems<TSystem>() where TSystem : ISystem;
 
         /// <summary>
         /// Gets all entities that are matching system given in argument.

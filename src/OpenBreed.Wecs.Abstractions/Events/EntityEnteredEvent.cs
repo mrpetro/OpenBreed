@@ -1,23 +1,23 @@
 ﻿namespace OpenBreed.Wecs.Abstractions.Events
 {
     /// <summary>
-    /// Event args for event that occurs when is added to world
+    /// Event that occurs when entity entered the world.
     /// </summary>
-    public class EntityEnteredEvent : EntityEvent
+    public class EntityEnteredEvent : WorldEvent
     {
         #region Public Constructors
 
-        public EntityEnteredEvent(int entityId, int worldId)
-            : base(entityId)
+        public EntityEnteredEvent(int worldId, int entityId)
+            : base(worldId)
         {
-            WorldId = worldId;
+            EntityId = entityId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int WorldId { get; }
+        public int EntityId { get; }
 
         #endregion Public Properties
     }

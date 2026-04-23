@@ -30,18 +30,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
-        public int PlaySound(IEntity entity, string sampleName)
-        {
-            var soundId = services.Sounds.GetByName(sampleName);
-
-            var duration = services.Sounds.GetDuration(soundId);
-
-            entity.EmitSound(soundId);
-
-            return duration;
-        }
-
-        public void OnEvent(LevelStartedEvent e)
+        public void OnEvent(IWorld world, LevelStartedEvent e)
         {
             var commentator = services.Entities.GetCommentator();
 

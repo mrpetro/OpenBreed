@@ -29,6 +29,7 @@ namespace OpenBreed.Sandbox.App.Extensions
                 .AddRenderingSystems()
                 .AddScriptingSystems()
                 .AddSystem<MapRenderSystem>()
+                .AddSystem<MapEditSystem>()
                 .SetName("Sandbox").Build();
         }
     }

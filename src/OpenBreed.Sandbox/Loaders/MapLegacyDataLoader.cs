@@ -55,6 +55,8 @@ namespace OpenBreed.Sandbox.Loaders
 
         void Register(string templateName, IMapWorldEntityLoader entityLoader);
 
+        bool TryGetEntityLoader(string templateName, out IMapWorldEntityLoader entityLoader);
+
         #endregion Public Methods
     }
 
@@ -171,6 +173,11 @@ namespace OpenBreed.Sandbox.Loaders
             entityLoaders.Add(templateName, entityLoader);
         }
 
+        public bool TryGetEntityLoader(string templateName, out IMapWorldEntityLoader entityLoader)
+        {
+            return entityLoaders.TryGetValue(templateName, out entityLoader);
+        }
+
         #endregion Public Methods
 
         #region Private Methods
@@ -193,168 +200,7 @@ namespace OpenBreed.Sandbox.Loaders
             LoadReferencedTileStamps(dbMap);
             LoadReferencedSounds(dbMap);
 
-
-
-
-
-            var layout = map.Layout;
-            var visited = new bool[layout.Width, layout.Height];
-
-            var cellSize = layout.CellSize;
-
-            var tileGridComponent = builderFactory.GetBuilder<TileGridComponentBuilder>()
-                .SetGrid(layout.Width, layout.Height, 1, cellSize)
-                .Build();
-
-            var dataGridComponent = builderFactory.GetBuilder<DataGridComponentBuilder>()
-                .SetGrid(layout.Width, layout.Height)
-            .Build();
-
-            var collisionComponent = builderFactory.GetBuilder<CollisionComponentBuilder>()
-                .SetStaticGrid(layout.Width, layout.Height, cellSize)
-                .Build();
-
-            var mapEntity = entityMan.Create()
-                .SetTag($"Maps")
-                .AddComponent(new StampPutterComponent())
-                .AddComponent(tileGridComponent)
-                .AddComponent(dataGridComponent)
-                .AddComponent(collisionComponent)
-                .Build();
-
-            var mapper = new MapMapper(dbMap.TileSetRef);
-
-            var atlasId = tileMan.GetByName(mapper.Level).Id;
-            var gfxLayer = layout.GetLayerIndex(MapLayerType.Gfx);
-            var actionLayer = layout.GetLayerIndex(MapLayerType.Action);
-
-            worldMan.RequestAddEntity(mapEntity, world.Id);
-
-            var paletteEntityTag = $"Palettes/{dbMap.Id}";
-            var paletteEntity = entityMan.GetByTag(paletteEntityTag).FirstOrDefault();
-
-            if (paletteEntity is not null)
-                worldMan.RequestAddEntity(paletteEntity, world.Id);
-
-            for (int iy = 0; iy < layout.Height; iy++)
-            {
-                for (int ix = 0; ix < layout.Width; ix++)
-                {
-                    var cellValues = layout.GetCellValues(ix, iy);
-                    var gfxValue = cellValues[gfxLayer];
-                    var actionValue = cellValues[actionLayer];
-
-                    var action = map.GetAction(actionValue);
-
-                    var indexPos = new Vector2i(ix, iy);
-
-                    tileGridComponent.Grid.ModifyTile(indexPos, atlasId, gfxValue);
-
-                    if (action is null)
-                        continue;
-
-                    var cellEntity = LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
-
-                    if (cellEntity is null)
-                        continue;
-
-                    dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
-
-                    //Check if cell entity has static body
-                    //if (cellEntity.Contains<PositionComponent>() &&
-                    //    cellEntity.Contains<BodyComponent>() &&
-                    //    !cellEntity.Contains<VelocityComponent>())
-                    //{
-                    //    mapEntity.AddEntityToStatics(cellEntity);
-                    //}
-
-                    //if (mapper.Map(actionValue, gfxValue, out string templaneName, out string flavor))
-                    //    LoadCellEntity(mapper, map, visited, ix, iy, world, templaneName, flavor, gfxValue);
-                }
-            }
-
-            //Process trough all not visited
-            for (int iy = 0; iy < layout.Height; iy++)
-            {
-                for (int ix = 0; ix < layout.Width; ix++)
-                {
-                    if (visited[ix, iy])
-                        continue;
-
-                    var cellValues = layout.GetCellValues(ix, iy);
-                    var gfxValue = cellValues[gfxLayer];
-                    var actionValue = cellValues[actionLayer];
-                    var indexPos = new Vector2i(ix, iy);
-
-                    var cellEntity = LoadUnknownCodeCell(mapper, map, visited, ix, iy, gfxValue, actionValue, world);
-
-                    if (cellEntity is not null)
-                        dataGridComponent.Grid.Set(indexPos, cellEntity.Id);
-                }
-            }
-
-            AddMission(world);
-            AddDirector(world, dbMap.ScriptRef);
-
-            //DEBUG entities
-            AddCursor(world);
-
-            //triggerMan.OnWorldInitialized(world, () =>
-            //{
-            //}, singleTime: true);
-
             return world;
-        }
-
-        private void AddCursor(IWorld world)
-        {
-            var entity = entityFactory.Create(@"ABTA\Templates\Common\Hud\Cursor")
-                .SetParameter("posX", 0.0f)
-                .SetParameter("posY", 0.0f)
-                .Build();
-
-            worldMan.RequestAddEntity(entity, world.Id);
-        }
-
-        private void AddMission(IWorld world)
-        {
-            var entity = entityFactory.Create(@"ABTA\Templates\Common\Mission")
-                //.SetParameter("scriptId", "Vanilla/Common/Mission")
-                .SetTag("Mission")
-                .Build();
-
-            worldMan.RequestAddEntity(entity, world.Id);
-        }
-
-        private void AddDirector(IWorld world, string scriptId)
-        {
-            var entity = entityFactory.Create(@"ABTA\Templates\Common\Director")
-                .SetParameter("scriptId", scriptId)
-                .SetTag("Director")
-                .Build();
-
-            worldMan.RequestAddEntity(entity, world.Id);
-        }
-
-        private IEntity LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, IWorld world, ActionModel action, int gfxValue)
-        {
-            if (visited[ix, iy])
-                return null;
-
-            if (entityLoaders.TryGetValue(action.Name, out IMapWorldEntityLoader entityLoader))
-                return entityLoader.Load(mapAssets, map, visited, ix, iy, action.Name, "", gfxValue, world);
-
-            logger.LogWarning("Missing loader for action '{0}'.", action);
-            return null;
-        }
-
-        private void LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, IWorld world, string templateName, string flavor, int gfxValue)
-        {
-            if (visited[ix, iy])
-                return;
-
-            if (entityLoaders.TryGetValue(templateName, out IMapWorldEntityLoader entityLoader))
-                entityLoader.Load(mapAssets, map, visited, ix, iy, templateName, flavor, gfxValue, world);
         }
 
         private void LoadPalettes(MapModel mapModel, string mapId)
@@ -476,14 +322,6 @@ namespace OpenBreed.Sandbox.Loaders
             {
                 loader.Load(dbTileStamp);
             }
-        }
-
-        private IEntity LoadUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, IWorld world)
-        {
-            if (entityLoaders.TryGetValue("Unknown", out IMapWorldEntityLoader entityLoader))
-                return entityLoader.Load(worldBlockBuilder, map, visited, ix, iy, "Unknown", actionValue.ToString(), gfxValue, world);
-
-            return null;
         }
 
         #endregion Private Methods

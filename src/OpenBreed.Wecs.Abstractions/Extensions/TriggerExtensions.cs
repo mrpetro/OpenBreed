@@ -61,7 +61,7 @@ namespace OpenBreed.Wecs.Abstractions.Extensions
 
         public static void OnWorldInitialized(this ITriggerMan triggerMan, IWorld world, Action action, bool singleTime = false)
         {
-            triggerMan.CreateTrigger<WorldInitializedEventArgs>(
+            triggerMan.CreateTrigger<WorldInitialized>(
                 (args) => Equals(world.Id, args.WorldId),
                 (args) => action.Invoke(),
                 singleTime);

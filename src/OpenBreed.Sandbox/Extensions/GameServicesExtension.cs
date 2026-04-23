@@ -23,6 +23,7 @@ using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -139,11 +140,6 @@ namespace OpenBreed.Sandbox.Extensions
             services.Logger.LogTrace("OnExit: Loading world '{mapKey}'...", mapKey);
 
             var targetWorld = services.TryLoadWorld(mapKey);
-
-            services.Triggers.OnWorldInitialized(targetWorld, () =>
-            {
-                task.Finish();
-            }, singleTime: true);
         }
 
         public static void PlayerCharacterEnter(this IGameServices services, ITask task, IEntity actorEntity, int entryId)
@@ -165,7 +161,7 @@ namespace OpenBreed.Sandbox.Extensions
 
             if (world is null)
             {
-                var mapWorldDataLoader = services.DataLoaderFactory.GetLoader<MapLegacyDataLoader>();
+                var mapWorldDataLoader = services.Other.GetRequiredService<IMapDataLoader>();
                 world = mapWorldDataLoader.Load(worldName);
             }
 

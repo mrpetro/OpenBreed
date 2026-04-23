@@ -120,7 +120,7 @@ namespace OpenBreed.Common.Game.Extensions
             {
                 var eventsMan = sp.GetService<IEventsMan>();
 
-                eventsMan.Subscribe<WorldInitializedEventArgs>(
+                eventsMan.Subscribe<WorldInitialized>(
                     (a) => scriptMan.TryInvokeFunction("WorldLoaded", a.WorldId));
 
 

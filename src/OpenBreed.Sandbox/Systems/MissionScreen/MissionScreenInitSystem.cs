@@ -7,6 +7,7 @@ using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
@@ -23,11 +24,12 @@ using System.Threading.Tasks;
 namespace OpenBreed.Sandbox.Systems.MissionScreen
 {
     public class MissionScreenInitSystem :
-        IEventSystem<WorldInitializedEventArgs>
+        IEventSystem<WorldInitialized>
     {
         #region Private Fields
 
         private readonly IGameServices services;
+        private readonly IPaletteMan paletteMan;
         private readonly PalettesDataProvider palettesDataProvider;
 
         #endregion Private Fields
@@ -35,9 +37,11 @@ namespace OpenBreed.Sandbox.Systems.MissionScreen
         #region Public Constructors
 
         public MissionScreenInitSystem(IGameServices services,
+            IPaletteMan paletteMan,
             PalettesDataProvider palettesDataProvider)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
+            this.paletteMan = paletteMan ?? throw new ArgumentNullException(nameof(paletteMan));
             this.palettesDataProvider = palettesDataProvider ?? throw new ArgumentNullException(nameof(palettesDataProvider));
         }
 
@@ -45,15 +49,10 @@ namespace OpenBreed.Sandbox.Systems.MissionScreen
 
         #region Public Methods
 
-        public void OnEvent(WorldInitializedEventArgs e)
+        public void OnEvent(IWorld world,
+            [RequireWorldWithName(WorldNames.MissionScreen)]
+            WorldInitialized e)
         {
-            var world = services.Worlds.GetById(e.WorldId);
-
-            if (world.Name != WorldNames.MissionScreen)
-            {
-                return;
-            }
-
             var missionScreenCamera = services.Factory.CreateCamera("Camera.MissionScreen", 0, 0, 320, 240);
 
             missionScreenCamera.Get<PaletteComponent>().PaletteId = AddWorldPalette(world);
@@ -94,6 +93,11 @@ namespace OpenBreed.Sandbox.Systems.MissionScreen
         {
             var tag = $"Palettes/{WorldNames.MissionScreen}";
 
+            if (paletteMan.TryGetByName(tag, out var palette))
+            {
+                return palette.Id;
+            }
+
             var commonPaletteModel = palettesDataProvider.GetPalette("Vanilla/Common/MissionScreen/Palette");
 
             var builder = services.Palettes.CreatePalette()
@@ -102,7 +106,7 @@ namespace OpenBreed.Sandbox.Systems.MissionScreen
                 .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray())
                 .SetColors(Enumerable.Range(0, 64).Select(idx => Color4.White).ToArray(), 32);
 
-            var palette = builder.Build();
+            palette = builder.Build();
 
             var paletteComponent = new PaletteComponent();
             paletteComponent.PaletteId = palette.Id;

@@ -8,6 +8,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Input.Generic
 {
@@ -19,9 +20,11 @@ namespace OpenBreed.Input.Generic
 
         private readonly IEventsMan eventsMan;
         private Vector2 oldCursorPos;
-        private KeyboardState oldKeyboardState;
+        private KeyboardState previousKeyboardState;
         private MouseState oldMouseState;
         private float oldWheelPos;
+        private HashSet<Keys> keysPressed = new HashSet<Keys>();
+        private HashSet<Keys> keysReleased = new HashSet<Keys>();
 
         #endregion Private Fields
 
@@ -40,7 +43,7 @@ namespace OpenBreed.Input.Generic
             gameWindow.MouseDown += OnMouseDown;
             gameWindow.MouseUp += OnMouseUp;
 
-            oldKeyboardState = gameWindow.KeyboardState.GetSnapshot();
+            previousKeyboardState = gameWindow.KeyboardState.GetSnapshot();
         }
 
         #endregion Public Constructors
@@ -92,13 +95,11 @@ namespace OpenBreed.Input.Generic
 
         public void Update()
         {
-            var newKeyboardState = gameWindow.KeyboardState.GetSnapshot();
+            CheckKeyboardState();
+
             var newMouseState = gameWindow.MouseState.GetSnapshot();
             try
             {
-                if (!newKeyboardState.Equals(oldKeyboardState))
-                    OnKeyboardStateChanged(newKeyboardState);
-
                 CursorDelta = CursorPos - oldCursorPos;
                 oldCursorPos = CursorPos;
 
@@ -107,7 +108,6 @@ namespace OpenBreed.Input.Generic
             }
             finally
             {
-                oldKeyboardState = newKeyboardState;
                 oldMouseState = newMouseState;
             }
         }
@@ -118,7 +118,7 @@ namespace OpenBreed.Input.Generic
 
         protected virtual void OnKeyboardStateChanged(KeyboardState keyboardState)
         {
-            var eventArgs = new KeyboardStateEventArgs(oldKeyboardState, keyboardState);
+            var eventArgs = new KeyboardStateEventArgs(keyboardState, keysPressed, keysReleased);
             KeyboardStateChanged?.Invoke(this, eventArgs);
             eventsMan.Raise(eventArgs);
         }
@@ -126,6 +126,40 @@ namespace OpenBreed.Input.Generic
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void CheckKeyboardState()
+        {
+            keysPressed.Clear();
+            keysReleased.Clear();
+            var currentKeyboardState = gameWindow.KeyboardState.GetSnapshot();
+
+            try
+            {
+                foreach (Keys key in Enum.GetValues(typeof(Keys)))
+                {
+                    if (currentKeyboardState.IsKeyDown(key) && !previousKeyboardState.IsKeyDown(key))
+                    {
+                        keysPressed.Add(key);
+                        //Console.WriteLine($"Key pressed: {key}");
+                    }
+
+                    if (!currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyDown(key))
+                    {
+                        keysReleased.Add(key);
+                        //Console.WriteLine($"Key released: {key}");
+                    }
+                }
+
+                if (keysPressed.Count > 0 || keysReleased.Count > 0)
+                {
+                    OnKeyboardStateChanged(currentKeyboardState);
+                }
+            }
+            finally
+            {
+                previousKeyboardState = currentKeyboardState;
+            }
+        }
 
         private void OnKeyDown(KeyboardKeyEventArgs e)
         {

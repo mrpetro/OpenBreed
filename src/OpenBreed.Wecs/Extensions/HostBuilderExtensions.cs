@@ -176,6 +176,7 @@ namespace OpenBreed.Wecs.Extensions
                 services.AddScoped<IWecsCore, WecsCore>();
                 services.AddScoped<EntityMan>();
                 services.AddScoped<IEntityMan>((sp) => sp.GetRequiredService<EntityMan>());
+
                 services.AddScoped<IWorldMan, WorldMan>((sp) =>
                 {
                     var entityMan = sp.GetRequiredService<IEntityMan>();
@@ -192,6 +193,7 @@ namespace OpenBreed.Wecs.Extensions
 
                     return worldMan;
                 });
+                services.AddScoped(sp => new Lazy<IWorldMan>(() => sp.GetRequiredService<IWorldMan>()));
                 services.AddScoped<IComponentsMan, ComponentsMan>();
                 services.AddScoped<ISystemFinder, SystemFinder>();
                 services.AddTransient<WorldBuilder>();

@@ -290,7 +290,7 @@ namespace OpenBreed.Sandbox
             dataGrid.Set(new Vector2i(20, 20), new CellData() { GfxId = 0 });
 
             var dummy = wecsCore.Entities.Create()
-                .AddComponent(new MapComponent(dataGrid))
+                .AddComponent(new MapComponent(dataGrid,16))
                 .Build();
 
             wecsCore.Worlds.RequestAddEntity(dummy, world.Id);

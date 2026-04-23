@@ -1,32 +1,34 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
+using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Sandbox.Entities;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Systems;
 using OpenBreed.Wecs.Rendering.Components;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Wecs.Rendering.Systems.Extensions;
-using OpenBreed.Sandbox.Extensions;
-using OpenBreed.Common.Game.Wecs.Extensions;
 
 namespace OpenBreed.Sandbox.Systems.SmartCard
 {
     public class SmartCardInitSystem :
-        IEventSystem<WorldInitializedEventArgs>
+        IEventSystem<WorldInitialized>
     {
         #region Private Fields
 
         private readonly IGameServices services;
+        private readonly IPaletteMan paletteMan;
         private readonly PalettesDataProvider palettesDataProvider;
 
         #endregion Private Fields
@@ -34,9 +36,11 @@ namespace OpenBreed.Sandbox.Systems.SmartCard
         #region Public Constructors
 
         public SmartCardInitSystem(IGameServices services,
+            IPaletteMan paletteMan,
             PalettesDataProvider palettesDataProvider)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
+            this.paletteMan = paletteMan ?? throw new ArgumentNullException(nameof(paletteMan));
             this.palettesDataProvider = palettesDataProvider ?? throw new ArgumentNullException(nameof(palettesDataProvider));
         }
 
@@ -44,15 +48,10 @@ namespace OpenBreed.Sandbox.Systems.SmartCard
 
         #region Public Methods
 
-        public void OnEvent(WorldInitializedEventArgs e)
+        public void OnEvent(IWorld world,
+            [RequireWorldWithName(WorldNames.SmartCardReader)]
+            WorldInitialized e)
         {
-            var world = services.Worlds.GetById(e.WorldId);
-
-            if (world.Name != WorldNames.SmartCardReader)
-            {
-                return;
-            }
-
             var smartCardCamera = services.Factory.CreateCamera($"Camera.{WorldNames.SmartCardReader}", 0, 0, 320, 240);
 
             smartCardCamera.Get<PaletteComponent>().PaletteId = AddWorldPalette(world);
@@ -93,6 +92,11 @@ namespace OpenBreed.Sandbox.Systems.SmartCard
         {
             var tag = $"Palettes/{WorldNames.SmartCardReader}";
 
+            if (paletteMan.TryGetByName(tag, out var palette))
+            {
+                return palette.Id;
+            }
+
             var commonPaletteModel = palettesDataProvider.GetPalette("Vanilla/Common/SmartCardScreen/Palette");
 
             var builder = services.Palettes.CreatePalette()
@@ -101,7 +105,7 @@ namespace OpenBreed.Sandbox.Systems.SmartCard
                 .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray())
                 .SetColors(Enumerable.Range(0, 64).Select(idx => MyColor.FromArgb(255, 0, 168, 168).ToColor4()).ToArray(), 32);
 
-            var palette = builder.Build();
+            palette = builder.Build();
 
             var paletteComponent = new PaletteComponent();
             paletteComponent.PaletteId = palette.Id;

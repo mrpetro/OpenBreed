@@ -1,23 +1,23 @@
 ﻿namespace OpenBreed.Wecs.Abstractions.Events
 {
     /// <summary>
-    /// Event args for event that occurs when is left the world
+    /// Event that occurs when entity left the world.
     /// </summary>
-    public class EntityLeftEvent : EntityEvent
+    public class EntityLeftEvent : WorldEvent
     {
         #region Public Constructors
 
-        public EntityLeftEvent(int entityId, int worldId)
-            : base(entityId)
+        public EntityLeftEvent(int worldId, int entityId)
+            : base(worldId)
         {
-            WorldId = worldId;
+            EntityId = entityId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int WorldId { get; }
+        public int EntityId { get; }
 
         #endregion Public Properties
     }

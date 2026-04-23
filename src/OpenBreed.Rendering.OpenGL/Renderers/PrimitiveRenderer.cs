@@ -247,7 +247,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             }
             else if (texture.DataMode == TextureDataMode.Index)
             {
-                Debug.Assert(view.CurrentPalette is not null, "Palette is not set");
+                //Debug.Assert(view.CurrentPalette is not null, "Palette is not set");
 
                 UsingShader(texturedWithPaletteShader, (item, setter) =>
                 {
@@ -256,7 +256,11 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
                     setter.SetMatrix4(item.projection, view.Projection);
                     setter.SetVector4(item.aColor, (Vector4)color);
                     setter.SetUInt(item.maskIndex, (uint)texture.MaskIndex);
-                    setter.SetVector4Array(item.palette, view.CurrentPalette.DirectData);
+
+                    if (view.CurrentPalette != null)
+                    {
+                        setter.SetVector4Array(item.palette, view.CurrentPalette.DirectData);
+                    }
                 });
             }
             else

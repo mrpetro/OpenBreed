@@ -22,7 +22,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
         #region Public Methods
 
-        public void OnEvent(ActorCollisionEvent e)
+        public void OnEvent(IWorld world, ActorCollisionEvent e)
         {
             var actorEntity = entityMan.GetById(e.EntityId);
             var otherEntity = entityMan.GetById(e.OtherEntityId);

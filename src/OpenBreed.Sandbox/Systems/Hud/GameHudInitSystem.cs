@@ -28,7 +28,7 @@ using System.Windows.Documents;
 namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 {
     public class GameHudInitSystem :
-        IEventSystem<WorldInitializedEventArgs>
+        IEventSystem<WorldInitialized>
     {
         #region Private Fields
 
@@ -54,15 +54,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 
         #region Public Methods
 
-        public void OnEvent(WorldInitializedEventArgs e)
+        public void OnEvent(IWorld world,
+            [RequireWorldWithName(WorldNames.GameHud)]
+            WorldInitialized e)
         {
-            var world = services.Worlds.GetById(e.WorldId);
-
-            if (world.Name != WorldNames.GameHud)
-            {
-                return;
-            }
-
             var hudCamera = services.Factory.CreateCamera($"Camera.{WorldNames.GameHud}", 0, 0, 320, 240);
 
             hudCamera.Get<PaletteComponent>().PaletteId = AddWorldPalette(world);
@@ -115,9 +110,14 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 
         private int AddWorldPalette(IWorld world)
         {
-            var commonPaletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
-
             var tag = $"Palettes/{WorldNames.GameHud}";
+
+            if (paletteMan.TryGetByName(tag, out var palette))
+            {
+                return palette.Id;
+            }
+
+            var commonPaletteModel = palettesDataProvider.GetPalette("Palettes.COMMON");
 
             var builder = paletteMan.CreatePalette()
                 .SetName(tag)
@@ -127,7 +127,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             var cb = commonPaletteModel[0];
             builder.SetColor(0, new Color4(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));
 
-            var palette = builder.Build();
+            palette = builder.Build();
 
             var paletteComponent = new PaletteComponent();
             paletteComponent.PaletteId = palette.Id;

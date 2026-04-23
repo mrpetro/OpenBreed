@@ -31,7 +31,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             actorClass = services.Classes.GetByName("Actor");
         }
 
-        public void OnEvent(DestroyedEvent e)
+        public void OnEvent(IWorld world, DestroyedEvent e)
         {
             var entity = services.Entities.GetById(e.EntityId);
 

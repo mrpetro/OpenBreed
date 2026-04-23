@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Wecs.Abstractions.Events;
+using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
+using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using System;
 using System.Linq;
-using OpenBreed.Wecs.Rendering.Systems.Extensions;
 
 namespace OpenBreed.Sandbox.Systems.Camera
 {
@@ -17,8 +18,13 @@ namespace OpenBreed.Sandbox.Systems.Camera
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
-        public void OnEvent(EntityEnteredEvent e)
+        public void OnEvent(IWorld world, EntityEnteredEvent e)
         {
+            if (e.WorldId != world.Id)
+            {
+                return;
+            }
+
             var camera = services.Entities.GetById(e.EntityId);
 
             if (camera.Tag is null || !camera.Tag.StartsWith("Camera."))
@@ -26,9 +32,9 @@ namespace OpenBreed.Sandbox.Systems.Camera
                 return;
             }
 
-            var world = services.Worlds.GetById(camera.WorldId);
+            var cameraWorld = services.Worlds.GetById(camera.WorldId);
 
-            var paletteEntityTag = $"Palettes/{world.Name}";
+            var paletteEntityTag = $"Palettes/{cameraWorld.Name}";
 
             var paletteEntity = services.Entities.GetByTag(paletteEntityTag).FirstOrDefault();
 

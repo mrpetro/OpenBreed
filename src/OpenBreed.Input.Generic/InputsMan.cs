@@ -9,6 +9,8 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Input.Generic
 {
@@ -61,17 +63,22 @@ namespace OpenBreed.Input.Generic
         private readonly GameWindow gameWindow;
 
         private readonly IEventsMan eventsMan;
+        private readonly IReadOnlyList<Keys> scanKeys;
         private Vector2 oldCursorPos;
-        private KeyboardState oldKeyboardState;
+        private KeyboardState previousKeyboardState;
         private MouseState oldMouseState;
         private float oldWheelPos;
+
+        private HashSet<Keys> keysPressed = new HashSet<Keys>();
+
+        private HashSet<Keys> keysReleased = new HashSet<Keys>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public InputsMan(
-            GameWindow gameWindow,
+                            GameWindow gameWindow,
             IEventsMan eventsMan)
         {
             this.gameWindow = gameWindow;
@@ -86,30 +93,9 @@ namespace OpenBreed.Input.Generic
 
             gameWindow.Load += GameWindow_Load;
             this.eventsMan.Subscribe<WindowUpdateEvent>((e) => OnUpdateFrame(e.Dt));
+            this.scanKeys = GetScanKeys().ToList();
 
-            oldKeyboardState = gameWindow.KeyboardState.GetSnapshot();
-        }
-
-        private void OnUpdateFrame(float dt)
-        {
-            var newKeyboardState = gameWindow.KeyboardState.GetSnapshot();
-            var newMouseState = gameWindow.MouseState.GetSnapshot();
-            try
-            {
-                if (!newKeyboardState.Equals(oldKeyboardState))
-                    OnKeyboardStateChanged(newKeyboardState);
-
-                CursorDelta = CursorPos - oldCursorPos;
-                oldCursorPos = CursorPos;
-
-                WheelDelta = WheelPos - oldWheelPos;
-                oldWheelPos = WheelPos;
-            }
-            finally
-            {
-                oldKeyboardState = newKeyboardState;
-                oldMouseState = newMouseState;
-            }
+            previousKeyboardState = gameWindow.KeyboardState.GetSnapshot();
         }
 
         #endregion Public Constructors
@@ -165,7 +151,7 @@ namespace OpenBreed.Input.Generic
 
         protected virtual void OnKeyboardStateChanged(KeyboardState keyboardState)
         {
-            var eventArgs = new KeyboardStateEventArgs(oldKeyboardState, keyboardState);
+            var eventArgs = new KeyboardStateEventArgs(keyboardState, keysPressed, keysReleased);
             KeyboardStateChanged?.Invoke(this, eventArgs);
             eventsMan.Raise(eventArgs);
         }
@@ -173,6 +159,72 @@ namespace OpenBreed.Input.Generic
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void OnUpdateFrame(float dt)
+        {
+            CheckKeyboardState();
+
+            var newMouseState = gameWindow.MouseState.GetSnapshot();
+            try
+            {
+                CursorDelta = CursorPos - oldCursorPos;
+                oldCursorPos = CursorPos;
+
+                WheelDelta = WheelPos - oldWheelPos;
+                oldWheelPos = WheelPos;
+            }
+            finally
+            {
+                oldMouseState = newMouseState;
+            }
+        }
+
+        private IEnumerable<Keys> GetScanKeys()
+        {
+            foreach (Keys key in Enum.GetValues(typeof(Keys)))
+            {
+                if (key == Keys.Unknown)
+                {
+                    continue;
+                }
+
+                yield return key;
+            }
+        }
+
+        private void CheckKeyboardState()
+        {
+            keysPressed.Clear();
+            keysReleased.Clear();
+            var currentKeyboardState = gameWindow.KeyboardState.GetSnapshot();
+
+            try
+            {
+                foreach (Keys key in scanKeys)
+                {
+                    if (currentKeyboardState.IsKeyDown(key) && !previousKeyboardState.IsKeyDown(key))
+                    {
+                        keysPressed.Add(key);
+                        //Console.WriteLine($"Key pressed: {key}");
+                    }
+
+                    if (!currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyDown(key))
+                    {
+                        keysReleased.Add(key);
+                        //Console.WriteLine($"Key released: {key}");
+                    }
+                }
+
+                if (keysPressed.Count > 0 || keysReleased.Count > 0)
+                {
+                    OnKeyboardStateChanged(currentKeyboardState);
+                }
+            }
+            finally
+            {
+                previousKeyboardState = currentKeyboardState;
+            }
+        }
 
         private void GameWindow_Load()
         {

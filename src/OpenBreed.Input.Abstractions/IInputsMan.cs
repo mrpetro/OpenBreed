@@ -3,6 +3,9 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace OpenBreed.Input.Abstractions
 {
@@ -57,18 +60,20 @@ namespace OpenBreed.Input.Abstractions
     {
         #region Public Constructors
 
-        public KeyboardStateEventArgs(KeyboardState oldState, KeyboardState newState)
+        public KeyboardStateEventArgs(KeyboardState keyboardState, IReadOnlySet<Keys> keysPressed, IReadOnlySet<Keys> keysReleased)
         {
-            OldState = oldState;
-            NewState = newState;
+            KeyboardState = keyboardState;
+            KeysPressed = keysPressed;
+            KeysReleased = keysReleased;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public KeyboardState NewState { get; }
-        public KeyboardState OldState { get; }
+        public KeyboardState KeyboardState { get; }
+        public IReadOnlySet<Keys> KeysPressed { get; }
+        public IReadOnlySet<Keys> KeysReleased { get; }
 
         #endregion Public Properties
 
@@ -76,12 +81,12 @@ namespace OpenBreed.Input.Abstractions
 
         public bool IsKeyDown(Keys key)
         {
-            return !OldState[key] && NewState[key];
+            return KeysPressed.Contains(key);
         }
 
         public bool IsKeyUp(Keys key)
         {
-            return OldState[key] && !NewState[key];
+            return KeysReleased.Contains(key);
         }
 
         #endregion Public Methods

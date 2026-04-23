@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Wecs.Systems.Hud;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
@@ -8,11 +9,13 @@ using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Systems;
 using OpenBreed.Sandbox.Systems.Actor;
 using OpenBreed.Sandbox.Systems.Camera;
+using OpenBreed.Sandbox.Systems.Game;
 using OpenBreed.Sandbox.Systems.Mission;
 using OpenBreed.Sandbox.Systems.MissionScreen;
 using OpenBreed.Sandbox.Systems.SmartCard;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Control.Systems;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Rendering.Systems;
 using OpenBreed.Wecs.Scripting.Systems;
@@ -22,8 +25,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.Game.Wecs.Extensions;
-using OpenBreed.Wecs.Control.Systems;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -94,6 +95,7 @@ namespace OpenBreed.Sandbox.Extensions
                 .AddSystem<OnActorInitShowMissionSystem>()
                 .AddSystem<OnActorControlActionSystem>()
                 .AddSystem<OnLevelStartedSystem>()
+                .AddSystem<GameInitSystem>()
                 .AddGameWorldSystems(isEditor: false)
                 .Build();
         }

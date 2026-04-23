@@ -90,9 +90,15 @@ namespace OpenBreed.Wecs.Worlds
             return $"World:{Name}";
         }
 
-        public T GetSystem<T>() where T : ISystem
+        public TSystem GetSystem<TSystem>() where TSystem : ISystem
         {
-            return Systems.OfType<T>().FirstOrDefault();
+            return Systems.OfType<TSystem>().FirstOrDefault();
+        }
+
+
+        public IEnumerable<TSystem> GetSystems<TSystem>() where TSystem : ISystem
+        {
+            return Systems.OfType<TSystem>();
         }
 
         public void RemoveEntity(IEntity entity)

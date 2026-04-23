@@ -9,7 +9,7 @@ namespace OpenBreed.Core.Managers
     {
         #region Private Fields
 
-        private readonly Dictionary<Type, List<(object, MethodInfo)>> listeners = new Dictionary<Type, List<(object, MethodInfo)>>();
+        private readonly Dictionary<Type, List<Delegate>> listeners = new Dictionary<Type, List<Delegate>>();
 
         #endregion Private Fields
 
@@ -32,13 +32,13 @@ namespace OpenBreed.Core.Managers
 
         public void Subscribe(Type eventType, Delegate callback)
         {
-            if (!listeners.TryGetValue(eventType, out List<(object, MethodInfo)> callbacks))
+            if (!listeners.TryGetValue(eventType, out List<Delegate> callbacks))
             {
-                callbacks = new List<(object, MethodInfo)>();
+                callbacks = new List<Delegate>();
                 listeners.Add(eventType, callbacks);
             }
 
-            callbacks.Add((callback.Target, callback.Method));
+            callbacks.Add(callback);
         }
 
         public void Subscribe<TEventArgs>(EventCallback<TEventArgs> callback) where TEventArgs : EventArgs
@@ -48,12 +48,12 @@ namespace OpenBreed.Core.Managers
         {
             var eventType = typeof(TEventArgs);
 
-            if (!listeners.TryGetValue(eventType, out List<(object, MethodInfo)> callbacks))
+            if (!listeners.TryGetValue(eventType, out List<Delegate> callbacks))
             {
                 return;
             }
 
-            callbacks.Remove((callback.Target, callback.Method));
+            callbacks.Remove(callback);
         }
 
         #endregion Public Methods
@@ -62,15 +62,14 @@ namespace OpenBreed.Core.Managers
 
         private void NotifyListeners(Type eventType, EventArgs eventArgs)
         {
-            List<(object Target, MethodInfo Method)> callbacks = null;
+            List<Delegate> callbacks = null;
 
             if (!listeners.TryGetValue(eventType, out callbacks))
                 return;
 
             for (int i = 0; i < callbacks.Count; i++)
             {
-                var item = callbacks[i];
-                item.Method.Invoke(item.Target, new object[] { eventArgs });
+                callbacks[i].DynamicInvoke(eventArgs);
             }
         }
 

@@ -112,33 +112,35 @@ namespace OpenBreed.Sandbox.Extensions
             hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
-        public static void SetupMapLegacyDataLoader(this DataLoaderFactory dataLoaderFactory, IServiceProvider sp)
-        {
+        public static void SetupMapLegacyDataLoader(this IHostBuilder hostBuilder)
+        {   
             //NOTE: Needed for correct display of map in this coordinate system
             MapLayoutModel.FlippedY = true;
 
-            dataLoaderFactory.Register<MapLegacyDataLoader>(() =>
+            hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                var mapLegacyDataLoader = new MapLegacyDataLoader(dataLoaderFactory,
-                                                              sp.GetService<IEntityMan>(),
-                                                              sp.GetService<IRepositoryProvider>(),
-                                                              sp.GetService<MapsDataProvider>(),
-                                                              sp.GetService<ISystemFactory>(),
-                                                              sp.GetService<IWorldMan>(),
-                                                              sp.GetService<PalettesDataProvider>(),
-                                                              sp.GetService<IBroadphaseFactory>(),
-                                                              sp.GetService<ITileGridFactory>(),
-                                                              sp.GetService<IDataGridFactory>(),
-                                                              sp.GetService<ITileMan>(),
-                                                              sp.GetService<IPaletteMan>(),
-                                                              sp.GetService<ILogger>(),
-                                                              sp.GetService<ITriggerMan>(),
-                                                              sp.GetService<IScriptMan>(),
-                                                              sp.GetService<IEntityFactory>(),
-                                                              sp.GetService<IBuilderFactory>());
+                services.AddScoped<IMapDataLoader>((sp) => {
+                    var mapLegacyDataLoader = new MapLegacyDataLoader(sp.GetService<IDataLoaderFactory>(),
+                                                                  sp.GetService<IEntityMan>(),
+                                                                  sp.GetService<IRepositoryProvider>(),
+                                                                  sp.GetService<MapsDataProvider>(),
+                                                                  sp.GetService<ISystemFactory>(),
+                                                                  sp.GetService<IWorldMan>(),
+                                                                  sp.GetService<PalettesDataProvider>(),
+                                                                  sp.GetService<IBroadphaseFactory>(),
+                                                                  sp.GetService<ITileGridFactory>(),
+                                                                  sp.GetService<IDataGridFactory>(),
+                                                                  sp.GetService<ITileMan>(),
+                                                                  sp.GetService<IPaletteMan>(),
+                                                                  sp.GetService<ILogger>(),
+                                                                  sp.GetService<ITriggerMan>(),
+                                                                  sp.GetService<IScriptMan>(),
+                                                                  sp.GetService<IEntityFactory>(),
+                                                                  sp.GetService<IBuilderFactory>());
 
-                mapLegacyDataLoader.RegisterEntityLoaders(sp);
-                return mapLegacyDataLoader;
+                    mapLegacyDataLoader.RegisterEntityLoaders(sp);
+                    return mapLegacyDataLoader;
+                });
             });
         }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Control.Systems
 {
-    public abstract class InputsEventSystem : IEventSystem<WorldKeyboardEvent>
+    public abstract class InputsEventSystem : IEventSystem<KeyboardStateEventArgs>
     {
         #region Private Fields
 
@@ -25,10 +25,8 @@ namespace OpenBreed.Wecs.Control.Systems
 
         #region Public Methods
 
-        public void OnEvent(WorldKeyboardEvent e)
+        public void OnEvent(IWorld world, KeyboardStateEventArgs e)
         {
-            var world = this.worldMan.GetById(e.WorldId);
-
             var entities = world.GetMatchingEntities(this);
 
             foreach (var entity in entities)
@@ -41,7 +39,7 @@ namespace OpenBreed.Wecs.Control.Systems
 
         #region Protected Methods
 
-        protected abstract void UpdateEntity(IEntity entity, WorldKeyboardEvent e);
+        protected abstract void UpdateEntity(IEntity entity, KeyboardStateEventArgs e);
 
         #endregion Protected Methods
     }

@@ -1,13 +1,14 @@
 ﻿using OpenBreed.Common.Game.Services;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Wecs.Abstractions.Attributes;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Helpers;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Events;
 using System;
-using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Abstractions.Attributes;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
@@ -24,7 +25,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             actorClass = services.Classes.GetByName("Actor");
         }
 
-        public void OnEvent(VelocityChangedEvent e)
+        public void OnEvent(IWorld world, VelocityChangedEvent e)
         {
             var entity = services.Entities.GetById(e.EntityId);
 
@@ -54,7 +55,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             }
         }
 
-        public void OnEvent(DirectionChangedEvent e)
+        public void OnEvent(IWorld world, DirectionChangedEvent e)
         {
             var entity = services.Entities.GetById(e.EntityId);
 
