@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace OpenBreed.Wecs.Systems
 {
@@ -23,7 +24,6 @@ namespace OpenBreed.Wecs.Systems
         private readonly IEventsMan eventsMan;
         private readonly Lazy<IWorldMan> lazyWorldMan;
         private Dictionary<Type, Delegate> onEventCallbacks = new Dictionary<Type, Delegate>();
-
 
         #endregion Private Fields
 
@@ -53,6 +53,29 @@ namespace OpenBreed.Wecs.Systems
             {
                 RegisterGenericSystem(system, genericSystemType);
             }
+        }
+
+        public bool CanInvoke<TEvent>(IEventSystem<TEvent> system, TEvent e, IWorld world) where TEvent : EventArgs
+        {
+            var method = system.GetType().GetMethod(nameof(system.OnEvent), BindingFlags.Instance | BindingFlags.Public, [typeof(TEvent), typeof(IWorld)]);
+
+            if (method is null)
+            {
+                throw new InvalidOperationException("Method not found");
+            }
+
+            if (e is WorldEvent worldEvent)
+            {
+                var eventParameter = method.GetParameters().First();
+
+                var eventFilters = eventParameter.GetCustomAttributes<WorldEventFilterAttribute>();
+                if (!EvaluateWorldEventFilters(eventFilters, worldEvent, world))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         #endregion Public Methods
@@ -86,7 +109,7 @@ namespace OpenBreed.Wecs.Systems
             //var updateMethodInfo = genericSystemType.GetMethod("OnEvent", BindingFlags.Instance | BindingFlags.Public);
             var thisType = this.GetType();
 
-            var updateMethodInfo = thisType.GetMethod("UpdateSystems", BindingFlags.Instance | BindingFlags.NonPublic);
+            var updateMethodInfo = thisType.GetMethod(nameof(UpdateSystems), BindingFlags.Instance | BindingFlags.NonPublic);
 
             if (updateMethodInfo is null)
             {
@@ -129,41 +152,47 @@ namespace OpenBreed.Wecs.Systems
 
                 foreach (var system in systems)
                 {
-                    if (CanInvoke(system, e))
+                    if (CanInvoke(system, e, world))
                     {
-                        system.OnEvent(world, e);
+                        system.OnEvent(e, world);
                     }
 
                     //var entities = world.GetMatchingEntities(system);
-
-                }    
+                }
             });
         }
 
-        public bool CanInvoke<TEvent>(IEventSystem<TEvent> system, TEvent e) where TEvent : EventArgs
+        private bool EvaluateWorldEventFilters(IEnumerable<WorldEventFilterAttribute> eventFilters, WorldEvent e, IWorld world)
         {
-            var method = system.GetType().GetMethod(nameof(system.OnEvent), BindingFlags.Instance | BindingFlags.Public, [typeof(IWorld), typeof(TEvent)]);
+            var eventSourceWorld = lazyWorldMan.Value.GetById(e.WorldId);
 
-            if (method is null)
+            foreach (var eventFilter in eventFilters)
             {
-                throw new InvalidOperationException("Method not found");
-            }
-
-            var parameter = method.GetParameters().Last();
-
-            var validators = parameter.GetCustomAttributes<OnEventParameterRequireAttribute>();
-
-            foreach (var validator in validators)
-            {
-                if (!validator.IsValid(lazyWorldMan.Value, e))
+                switch (eventFilter)
                 {
-                    return false;
+                    case SourceWorldWithNameFilterAttribute worldWithNameFilter:
+                        if (!eventSourceWorld.Name.StartsWith(worldWithNameFilter.Name))
+                        {
+                            return false;
+                        }
+
+                        break;
+
+                    case TargetWorldAsSourceFilter sameTargetFilter:
+
+                        if (eventSourceWorld.Id != world.Id)
+                        {
+                            return false;
+                        }
+
+                        break;
+                    default:
+                        break;
                 }
             }
 
             return true;
         }
-
 
         #endregion Private Methods
     }

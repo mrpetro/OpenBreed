@@ -70,15 +70,12 @@ namespace OpenBreed.Sandbox.Systems.Game
             this.builderFactory = builderFactory ?? throw new ArgumentNullException(nameof(builderFactory));
         }
 
-        public void OnEvent(IWorld world,
-            [RequireWorldWithName(WorldNames.Game)]
-            WorldInitialized e)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.Game)]
+            WorldInitialized e,
+            IWorld world)
         {
-            if (e.WorldId != world.Id)
-            {
-                return;
-            }
-
             var dbMap = repositoryProvider.GetRepository<IDbMap>().GetById(world.Name);
 
             if (dbMap is null)

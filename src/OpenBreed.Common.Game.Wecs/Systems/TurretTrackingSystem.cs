@@ -31,7 +31,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
             this.fixtureMan = fixtureMan ?? throw new ArgumentNullException(nameof(fixtureMan));
         }
 
-        public void OnEvent(IWorld world, ContactEndedEvent e)
+        public void OnEvent(ContactEndedEvent e, IWorld world)
         {
             var entity = entityMan.GetById(e.EntityId);
             var tc = entity.TryGet<TrackingComponent>();
@@ -81,7 +81,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
             this.fixtureMan = fixtureMan ?? throw new ArgumentNullException(nameof(fixtureMan));
         }
 
-        public void OnEvent(IWorld world, ContactStartedEvent e)
+        public void OnEvent(ContactStartedEvent e, IWorld world)
         {
             var entity = entityMan.GetById(e.EntityId);
             var tc = entity.TryGet<TrackingComponent>();

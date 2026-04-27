@@ -25,7 +25,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             actorClass = services.Classes.GetByName("Actor");
         }
 
-        public void OnEvent(IWorld world, VelocityChangedEvent e)
+        public void OnEvent(VelocityChangedEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
 
@@ -55,7 +55,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             }
         }
 
-        public void OnEvent(IWorld world, DirectionChangedEvent e)
+        public void OnEvent(DirectionChangedEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
 

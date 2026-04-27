@@ -16,8 +16,8 @@
         /// <summary>
         /// Update system when event occurs
         /// </summary>
-        /// <param name="world">World to notify.</param>
         /// <param name="e">Event data.</param>
-        void OnEvent(IWorld world, TEvent e);
+        /// <param name="world">World to notify.</param>
+        void OnEvent(TEvent e, IWorld world);
     }
 }

@@ -130,7 +130,7 @@ namespace OpenBreed.Sandbox.Systems.Mission
 
                 playerCharacterEntity.State = null;
 
-                services.Events.Raise(new LevelStartedEvent(directorEntity.Id));
+                services.Events.Raise(new LevelStartedEvent(gameWorld.Id));
 
                 //directorEntity.TryInvoke(services.Scripts, services.Logger, "OnStartMission", null);
             }

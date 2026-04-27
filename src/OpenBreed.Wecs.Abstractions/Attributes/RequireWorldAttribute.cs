@@ -3,31 +3,47 @@
 namespace OpenBreed.Wecs.Abstractions.Attributes
 {
     [AttributeUsage(AttributeTargets.Parameter)]
-    public class RequireWorldWithNameAttribute : OnEventParameterRequireAttribute
+    public class SourceWorldWithNameFilterAttribute : WorldEventFilterAttribute
     {
-        public RequireWorldWithNameAttribute(string name)
+        public SourceWorldWithNameFilterAttribute(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; }
+    }
+
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public class TargetWorldAsSourceFilter : WorldEventFilterAttribute
+    {
+        public TargetWorldAsSourceFilter()
+        {
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public class NotifyWorldWithNameAttribute : WorldFilterAttribute
+    {
+        public NotifyWorldWithNameAttribute(string name)
         {
             Name = name;
         }
 
         public string Name { get; }
 
-        public override bool IsValid(IWorldMan worldMan, EventArgs e)
+        public override bool IsValid(IWorld world)
         {
-            if (e is not WorldEvent worldEvent)
-            {
-                return false;
-            }
-
-            var world = worldMan.GetById(worldEvent.WorldId);
-
             return world.Name.StartsWith(Name);
         }
     }
 
-    public abstract class OnEventParameterRequireAttribute : Attribute
+    public abstract class WorldEventFilterAttribute : Attribute
     {
-        public abstract bool IsValid(IWorldMan worldMan, EventArgs value);
+    }
+
+    public abstract class WorldFilterAttribute : Attribute
+    {
+        public abstract bool IsValid(IWorld world);
     }
 
     /// <summary>

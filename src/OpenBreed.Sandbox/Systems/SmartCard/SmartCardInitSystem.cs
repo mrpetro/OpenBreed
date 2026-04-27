@@ -48,9 +48,11 @@ namespace OpenBreed.Sandbox.Systems.SmartCard
 
         #region Public Methods
 
-        public void OnEvent(IWorld world,
-            [RequireWorldWithName(WorldNames.SmartCardReader)]
-            WorldInitialized e)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.SmartCardReader)]
+            WorldInitialized e,
+            IWorld world)
         {
             var smartCardCamera = services.Factory.CreateCamera($"Camera.{WorldNames.SmartCardReader}", 0, 0, 320, 240);
 

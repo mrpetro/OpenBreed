@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Audio.Abstractions;
+using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Core;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
@@ -30,7 +32,11 @@ namespace OpenBreed.Sandbox.Systems.Actor
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
-        public void OnEvent(IWorld world, LevelStartedEvent e)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.Game)]
+            LevelStartedEvent e,
+            IWorld world)
         {
             var commentator = services.Entities.GetCommentator();
 

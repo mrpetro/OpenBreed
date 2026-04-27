@@ -32,9 +32,11 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             this.viewClient = viewClient;
         }
 
-        public void OnEvent(IWorld world,
-            [RequireWorldWithName(WorldNames.DebugHud)]
-            WorldInitialized e)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.DebugHud)]
+            WorldInitialized e,
+            IWorld world)
         {
             var hudCamera = services.Factory.CreateCamera(
                 "Camera.DebugHud",
@@ -80,7 +82,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         }
 
 
-        public void OnEvent(IWorld world, ViewportResizedEvent e)
+        public void OnEvent(ViewportResizedEvent e, IWorld world)
         {
             var viewportEntity = services.Entities.GetById(e.EntityId);
 

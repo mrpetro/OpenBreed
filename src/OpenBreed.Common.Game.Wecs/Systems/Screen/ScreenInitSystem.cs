@@ -45,9 +45,11 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Screen
 
         #region Public Methods
 
-        public void OnEvent(IWorld world,
-            [RequireWorldWithName(WorldNames.ScreenWorld)]
-            WorldInitialized e)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.ScreenWorld)]
+            WorldInitialized e,
+            IWorld world)
         {
             var renderView = viewClient.Context.ActiveViews.FirstOrDefault();
 

@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Control.Systems
 
         #region Public Methods
 
-        public void OnEvent(IWorld world, KeyboardStateEventArgs e)
+        public void OnEvent(KeyboardStateEventArgs e, IWorld world)
         {
             var entities = world.GetMatchingEntities(this);
 

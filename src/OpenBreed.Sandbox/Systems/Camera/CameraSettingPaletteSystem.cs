@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Common.Game.Services;
+using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
@@ -18,13 +19,11 @@ namespace OpenBreed.Sandbox.Systems.Camera
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
-        public void OnEvent(IWorld world, EntityEnteredEvent e)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            EntityEnteredEvent e,
+            IWorld world)
         {
-            if (e.WorldId != world.Id)
-            {
-                return;
-            }
-
             var camera = services.Entities.GetById(e.EntityId);
 
             if (camera.Tag is null || !camera.Tag.StartsWith("Camera."))

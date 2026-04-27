@@ -49,9 +49,11 @@ namespace OpenBreed.Sandbox.Systems.MissionScreen
 
         #region Public Methods
 
-        public void OnEvent(IWorld world,
-            [RequireWorldWithName(WorldNames.MissionScreen)]
-            WorldInitialized e)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.MissionScreen)]
+            WorldInitialized e,
+            IWorld world)
         {
             var missionScreenCamera = services.Factory.CreateCamera("Camera.MissionScreen", 0, 0, 320, 240);
 

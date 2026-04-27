@@ -31,12 +31,12 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
         #region Public Methods
 
-        public void OnEvent(IWorld world, PositionChangedEvent e)
+        public void OnEvent(PositionChangedEvent e, IWorld world)
         {
             TryFollow(e.EntityId);
         }
 
-        public void OnEvent(IWorld world, EntityEnteredEvent e)
+        public void OnEvent(EntityEnteredEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
 

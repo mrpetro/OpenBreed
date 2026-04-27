@@ -54,9 +54,11 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
 
         #region Public Methods
 
-        public void OnEvent(IWorld world,
-            [RequireWorldWithName(WorldNames.GameHud)]
-            WorldInitialized e)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.GameHud)]
+            WorldInitialized e,
+            IWorld world)
         {
             var hudCamera = services.Factory.CreateCamera($"Camera.{WorldNames.GameHud}", 0, 0, 320, 240);
 

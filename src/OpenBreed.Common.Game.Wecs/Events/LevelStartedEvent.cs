@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Game.Wecs.Events
 {
-    public class LevelStartedEvent : EntityEvent
+    public class LevelStartedEvent : WorldEvent
     {
-        public LevelStartedEvent(int entityId) : base(entityId)
+        public LevelStartedEvent(int worldId) : base(worldId)
         {
         }
     }

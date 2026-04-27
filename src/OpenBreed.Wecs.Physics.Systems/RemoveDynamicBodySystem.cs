@@ -32,13 +32,11 @@ namespace OpenBreed.Wecs.Physics.Systems
 
         #region Public Methods
 
-        public void OnEvent(IWorld world, EntityLeftEvent e)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            EntityLeftEvent e,
+            IWorld world)
         {
-            if (e.WorldId != world.Id)
-            {
-                return;
-            }
-
             var entities = world.GetMatchingEntities(this);
 
             var eventEntity = entityMan.GetById(e.EntityId);
