@@ -3,7 +3,7 @@
     /// <summary>
     /// Event that occurs when entity entered the world.
     /// </summary>
-    public class EntityEnteredEvent : WorldEvent
+    public class EntityEnteredEvent : WorldEvent, IEntityEvent
     {
         #region Public Constructors
 

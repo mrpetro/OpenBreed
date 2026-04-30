@@ -7,9 +7,11 @@ namespace OpenBreed.Wecs.Core.Systems
 {
     [RequireEntityWith(typeof(FsmComponent))]
     [SystemCategory(CommonCategories.General)]
-    public class FsmSystem : UpdatableMatchingSystemBase, IOnAddEntitySystem, IOnRemoveEntitySystem
+    public class FsmSystem : UpdatableMatchingSystemBase, IEventSystem<EntityEnteredEvent>, IEventSystem<EntityLeftEvent>
     {
         #region Private Fields
+
+        private readonly IEntityMan entityMan;
 
         private readonly IFsmMan fsmMan;
         private readonly ILogger logger;
@@ -20,14 +22,38 @@ namespace OpenBreed.Wecs.Core.Systems
 
         public FsmSystem(
             IWorldMan worldMan,
+            IEntityMan entityMan,
             IFsmMan fsmMan,
             ILogger logger) : base(worldMan)
         {
+            this.entityMan = entityMan;
             this.fsmMan = fsmMan;
             this.logger = logger;
         }
 
         #endregion Public Constructors
+
+        #region Public Methods
+
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            EntityEnteredEvent e, IWorld world)
+        {
+            var entity = entityMan.GetById(e.EntityId);
+
+            InitializeComponent(entity);
+        }
+
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            EntityLeftEvent e, IWorld world)
+        {
+            var entity = entityMan.GetById(e.EntityId);
+
+            DeinitializeComponent(entity);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -43,23 +69,18 @@ namespace OpenBreed.Wecs.Core.Systems
             }
         }
 
-        public void OnAddEntity(IWorld world, IEntity entity)
-        {
-            InitializeComponent(entity);
-        }
-
-        public void OnRemoveEntity(IWorld world, IEntity entity)
-        {
-            DeinitializeComponent(entity);
-        }
-
         #endregion Protected Methods
 
         #region Private Methods
 
         private void InitializeComponent(IEntity entity)
         {
-            var fsmComponent = entity.Get<FsmComponent>();
+            var fsmComponent = entity.TryGet<FsmComponent>();
+
+            if (fsmComponent is null)
+            {
+                return;
+            }
 
             foreach (var state in fsmComponent.States)
                 fsmMan.EnterState(entity, state, 0);
@@ -67,7 +88,12 @@ namespace OpenBreed.Wecs.Core.Systems
 
         private void DeinitializeComponent(IEntity entity)
         {
-            var fsmComponent = entity.Get<FsmComponent>();
+            var fsmComponent = entity.TryGet<FsmComponent>();
+
+            if (fsmComponent is null)
+            {
+                return;
+            }
 
             foreach (var state in fsmComponent.States)
                 fsmMan.EnterState(entity, state, 0);

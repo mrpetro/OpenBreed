@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
@@ -6,6 +7,8 @@ using OpenBreed.Core.Abstractions;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Wecs.Abstractions.Attributes;
+using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
@@ -23,7 +26,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Systems.Mission
 {
-    internal class OnActorInitShowMissionSystem : IOnAddEntityActionSystem
+    internal class OnActorInitShowMissionSystem : IEventSystem<EntityEnteredEvent>
     {
         #region Private Fields
 
@@ -40,19 +43,15 @@ namespace OpenBreed.Sandbox.Systems.Mission
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public string TriggerName => "EnterWorld";
-
-        public string ActionName => "ShowMission";
-
-        #endregion Public Properties
-
         #region Public Methods
 
-        public void OnAddEntity(IWorld world, IEntity entity)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.Game)]
+            [EntityTriggerActionFilter("EnterWorld", "ShowMission")]
+            EntityEnteredEvent e, IWorld world)
         {
-            var playerCharacterEntity = entity;
+            var playerCharacterEntity = services.Entities.GetById(e.EntityId);
 
             if (Equals(playerCharacterEntity.State, "MissionShowing"))
             {
@@ -131,11 +130,7 @@ namespace OpenBreed.Sandbox.Systems.Mission
                 playerCharacterEntity.State = null;
 
                 services.Events.Raise(new LevelStartedEvent(gameWorld.Id));
-
-                //directorEntity.TryInvoke(services.Scripts, services.Logger, "OnStartMission", null);
             }
-
-
         }
 
         #endregion Public Methods

@@ -6,7 +6,7 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Core.Components.Extensions;
-using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Abstractions;
 using OpenBreed.Wecs.Scripting.Components;
 using OpenBreed.Wecs.Scripting.Systems.Extensions;

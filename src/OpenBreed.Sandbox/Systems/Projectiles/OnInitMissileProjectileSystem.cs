@@ -8,12 +8,14 @@ using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Managers;
+using OpenBreed.Wecs.Abstractions.Attributes;
+using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Events;
+using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Helpers;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Events;
@@ -38,7 +40,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnInitMissileProjectileSystem : IOnAddEntityActionSystem
+    public class OnInitMissileProjectileSystem : IEventSystem<EntityEnteredEvent>
     {
         #region Private Fields
 
@@ -57,18 +59,16 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public string TriggerName => "EnterWorld";
-
-        public string ActionName => "MissileProjectileInit";
-
-        #endregion Public Properties
-
         #region Public Methods
 
-        public void OnAddEntity(IWorld world, IEntity entity)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.Game)]
+            [EntityTriggerActionFilter("EnterWorld", "MissileProjectileInit")]
+            EntityEnteredEvent e, IWorld world)
         {
+            var entity = services.Entities.GetById(e.EntityId);
+
             var dir = entity.GetThrust().Normalized();
             var degree = MovementTools.SnapToCompass16Degree(dir.X, dir.Y);
             FormattableString animName = $"Vanilla/Common/Projectile/Missile/High/{degree:0.0}";

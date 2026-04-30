@@ -12,7 +12,6 @@ namespace OpenBreed.Wecs.Core.Systems.Extensions
 
         public static IWorldBuilder AddCoreSystems(this IWorldBuilder builder)
         {
-            builder.AddSystem<OnAddEntityTriggerSystem>();
             builder.AddSystem<LifetimeSystem>();
             builder.AddSystem<EntityEmitterSystem>();
             builder.AddSystem<TimerSystem>();

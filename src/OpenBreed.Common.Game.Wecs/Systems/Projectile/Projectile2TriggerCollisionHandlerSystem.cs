@@ -8,6 +8,7 @@ using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Abstractions;
 using OpenBreed.Wecs.Scripting.Systems.Extensions;
 using OpenTK.Graphics.ES20;

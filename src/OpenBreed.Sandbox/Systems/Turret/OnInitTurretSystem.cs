@@ -5,14 +5,15 @@ using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Events;
+using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Helpers;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Events;
@@ -37,7 +38,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnInitTurretSystem : IOnAddEntityActionSystem
+    public class OnInitTurretSystem : IEventSystem<EntityEnteredEvent>
     {
         #region Private Fields
 
@@ -54,18 +55,16 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public string TriggerName => "EnterWorld";
-
-        public string ActionName => "PrepareTurret";
-
-        #endregion Public Properties
-
         #region Public Methods
 
-        public void OnAddEntity(IWorld world, IEntity entity)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.Game)]
+            [EntityTriggerActionFilter("EnterWorld", "PrepareTurret")]
+            EntityEnteredEvent e, IWorld world)
         {
+            var entity = services.Entities.GetById(e.EntityId);
+
             var previousDegree = 0.0f;
             var speedFactor = 150.0f;
             var fireRate = 0.3f;

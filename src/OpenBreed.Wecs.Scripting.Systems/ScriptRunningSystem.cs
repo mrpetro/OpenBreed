@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Wecs.Abstractions.Attributes;
+using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Scripting.Components;
 using OpenBreed.Wecs.Core.Systems;
+using OpenBreed.Wecs.Scripting.Components;
 using OpenBreed.Wecs.Scripting.Systems.Extensions;
 using System;
 using System.Linq;
@@ -13,8 +14,9 @@ using System.Linq;
 namespace OpenBreed.Wecs.Scripting.Systems
 {
     [RequireEntityWith(typeof(ScriptComponent))]
-    public class ScriptRunningSystem : UpdatableMatchingSystemBase, IOnAddEntitySystem
+    public class ScriptRunningSystem : UpdatableMatchingSystemBase, IEventSystem<EntityEnteredEvent>
     {
+        private readonly IEntityMan entityMan;
         #region Private Fields
 
         private readonly IScriptMan scriptMan;
@@ -26,9 +28,11 @@ namespace OpenBreed.Wecs.Scripting.Systems
 
         public ScriptRunningSystem(
             IWorldMan worldMan,
+            IEntityMan entityMan,
             IScriptMan scriptMan,
             ILogger logger) : base(worldMan)
         {
+            this.entityMan = entityMan;
             this.scriptMan = scriptMan;
             this.logger = logger;
         }
@@ -37,8 +41,12 @@ namespace OpenBreed.Wecs.Scripting.Systems
 
         #region Public Methods
 
-        public void OnAddEntity(IWorld world, IEntity entity)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            EntityEnteredEvent e, IWorld world)
         {
+            var entity = entityMan.GetById(e.EntityId);
+
             entity.TryInvoke(scriptMan, logger, "OnInit");
         }
 

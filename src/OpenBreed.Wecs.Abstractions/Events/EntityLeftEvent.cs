@@ -3,7 +3,7 @@
     /// <summary>
     /// Event that occurs when entity left the world.
     /// </summary>
-    public class EntityLeftEvent : WorldEvent
+    public class EntityLeftEvent : WorldEvent, IEntityEvent
     {
         #region Public Constructors
 

@@ -24,6 +24,7 @@ using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Wecs.Abstractions.Events;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -55,6 +56,14 @@ namespace OpenBreed.Sandbox.Extensions
                     task.Finish();
                 },
                 singleTime: true);
+        }
+
+        public static void WaitForEnterWorld(this IGameServices services, ITask task, IEntity entity)
+        {
+            services.Triggers.OnEntityEnteredWorld(entity, (e, args) =>
+            {
+                task.Finish();
+            }, singleTime: true);
         }
 
         public static void TextFadeIn(this IGameServices services, ITask task, IEntity entity)

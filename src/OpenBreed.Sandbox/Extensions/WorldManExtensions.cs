@@ -75,6 +75,7 @@ namespace OpenBreed.Sandbox.Extensions
         {
             return worldMan.Create()
                 .SetName(name)
+                .AddSystem<CameraSettingPaletteSystem>()
                 .AddSystem<OnActorTouchDoorTriggerService>()
                 .AddSystem<OnActorTouchExitTriggerSystem>()
                 .AddSystem<OnActorTouchTeleportTriggerSystem>()

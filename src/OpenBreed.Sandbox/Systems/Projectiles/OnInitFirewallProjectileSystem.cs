@@ -9,12 +9,14 @@ using OpenBreed.Core.Abstractions;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Managers;
+using OpenBreed.Wecs.Abstractions.Attributes;
+using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Systems;
-using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Events;
+using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Helpers;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Events;
@@ -38,7 +40,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnInitFirewallProjectileSystem : IOnAddEntityActionSystem
+    public class OnInitFirewallProjectileSystem : IEventSystem<EntityEnteredEvent>
     {
         #region Private Fields
 
@@ -57,18 +59,16 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public string TriggerName => "EnterWorld";
-
-        public string ActionName => "FirewallProjectileInit";
-
-        #endregion Public Properties
-
         #region Public Methods
 
-        public void OnAddEntity(IWorld world, IEntity entity)
+        public void OnEvent(
+            [TargetWorldAsSourceFilter]
+            [SourceWorldWithNameFilter(WorldNames.Game)]
+            [EntityTriggerActionFilter("EnterWorld", "FirewallProjectileInit")]
+            EntityEnteredEvent e, IWorld world)
         {
+            var entity = services.Entities.GetById(e.EntityId);
+
             var clipName = "Vanilla/Common/Explosion/Small";
             var animId = services.Clips.GetId(clipName);
             entity.PlayAnimation(0, animId);

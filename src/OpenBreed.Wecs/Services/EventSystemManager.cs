@@ -2,6 +2,8 @@
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Abstractions.Extensions;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Compute.OpenCL;
@@ -23,16 +25,18 @@ namespace OpenBreed.Wecs.Systems
 
         private readonly IEventsMan eventsMan;
         private readonly Lazy<IWorldMan> lazyWorldMan;
+        private readonly IEntityMan entityMan;
         private Dictionary<Type, Delegate> onEventCallbacks = new Dictionary<Type, Delegate>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EventSystemManager(IEventsMan eventsMan, Lazy<IWorldMan> lazyWorldMan)
+        public EventSystemManager(IEventsMan eventsMan, Lazy<IWorldMan> lazyWorldMan, IEntityMan entityMan)
         {
             this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
             this.lazyWorldMan = lazyWorldMan ?? throw new ArgumentNullException(nameof(lazyWorldMan));
+            this.entityMan = entityMan ?? throw new ArgumentNullException(nameof(entityMan));
         }
 
         #endregion Public Constructors
@@ -64,12 +68,24 @@ namespace OpenBreed.Wecs.Systems
                 throw new InvalidOperationException("Method not found");
             }
 
+
             if (e is WorldEvent worldEvent)
             {
                 var eventParameter = method.GetParameters().First();
 
                 var eventFilters = eventParameter.GetCustomAttributes<WorldEventFilterAttribute>();
                 if (!EvaluateWorldEventFilters(eventFilters, worldEvent, world))
+                {
+                    return false;
+                }
+            }
+
+            if (e is IEntityEvent entityEvent)
+            {
+                var eventParameter = method.GetParameters().First();
+
+                var eventFilters = eventParameter.GetCustomAttributes<EntityEventFilterAttribute>();
+                if (!EvaluateEntityEventFilters(eventFilters, entityEvent, world))
                 {
                     return false;
                 }
@@ -186,6 +202,33 @@ namespace OpenBreed.Wecs.Systems
                         }
 
                         break;
+                    default:
+                        break;
+                }
+            }
+
+            return true;
+        }
+
+        private bool EvaluateEntityEventFilters(IEnumerable<EntityEventFilterAttribute> eventFilters, IEntityEvent e, IWorld world)
+        {
+            var eventEntity = entityMan.GetById(e.EntityId);
+
+            foreach (var eventFilter in eventFilters)
+            {
+                switch (eventFilter)
+                {
+                    case EntityTriggerActionFilter entityTriggerActionFilter:
+
+                        var actions = eventEntity.GetActionsOnTrigger(entityTriggerActionFilter.TriggerName);
+
+                        if (actions is null || !actions.Contains(entityTriggerActionFilter.ActionName))
+                        {
+                            return false;
+                        }
+
+                        break;
+
                     default:
                         break;
                 }

@@ -4,13 +4,12 @@ using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Control.Systems.Events;
 using OpenBreed.Wecs.Core.Systems;
 using OpenBreed.Wecs.Core.Systems.Categories;
+using OpenBreed.Wecs.Abstractions.Events;
 
 namespace OpenBreed.Wecs.Control.Systems
 {
-    [RequireEntityWith(
-        typeof(FollowedComponent))]
     [SystemCategory(CommonCategories.Control)]
-    public class FollowerSystem : UpdatableMatchingSystemBase
+    public class FollowerSystem : IEventSystem<EntityEnteringEvent>
     {
         #region Private Fields
 
@@ -25,7 +24,7 @@ namespace OpenBreed.Wecs.Control.Systems
         public FollowerSystem(
             IWorldMan worldMan,
             IEntityMan entityMan,
-            IEventsMan eventsMan) : base(worldMan)
+            IEventsMan eventsMan)
         {
             this.worldMan = worldMan;
             this.entityMan = entityMan;
@@ -34,38 +33,41 @@ namespace OpenBreed.Wecs.Control.Systems
 
         #endregion Public Constructors
 
-        #region Protected Methods
+        #region Public Methods
 
-        protected override void UpdateEntity(IEntity entity, IUpdateContext context)
+        public void OnEvent(EntityEnteringEvent e, IWorld world)
         {
-            var fc = entity.Get<FollowedComponent>();
+            var enteringEntity = entityMan.GetById(e.EntityId);
+
+            var fc = enteringEntity.TryGet<FollowedComponent>();
+
+            if (fc is null)
+            {
+                return;
+            }
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
                 var follower = entityMan.GetById(fc.FollowerIds[i]);
 
                 if (follower is null)
-                    continue;
-
-                //If follower is not in the same world as followed then
-                //Make sure it will arrive there
-                if (follower.WorldId != entity.WorldId)
                 {
-                    //If follower is in limbo then enter same world as followed
-                    //Otherwise follower needs to leave its current world
-                    if (follower.WorldId == WecsConsts.NO_WORLD_ID)
-                        worldMan.RequestAddEntity(follower, entity.WorldId);
-                    else
-                        worldMan.RequestRemoveEntity(follower);
-
                     continue;
                 }
 
-                RaiseEntityFollowEvent(entity, follower.Id);
+                //If follower is not in the same world as followed then
+                //Make sure it will arrive there
+                if (follower.WorldId != e.WorldId)
+                {
+                    worldMan.RequestAddEntity(follower, e.WorldId);
+                    continue;
+                }
+
+                RaiseEntityFollowEvent(enteringEntity, follower.Id);
             }
         }
 
-        #endregion Protected Methods
+        #endregion Public Methods
 
         #region Private Methods
 

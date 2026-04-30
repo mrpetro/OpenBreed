@@ -1,13 +1,11 @@
 ﻿using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Core.Components.Extensions;
-using OpenBreed.Wecs.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Wecs.Core.Systems.Extensions
+namespace OpenBreed.Wecs.Extensions
 {
     public static class EntityTriggerManExtensions
     {

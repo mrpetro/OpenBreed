@@ -123,11 +123,6 @@ namespace OpenBreed.Wecs.Worlds
             foreach (var system in matchingSystems)
             {
                 CacheEntityToSystem(entity, system);
-
-                if (system is IOnAddEntitySystem onAddEntitySystem)
-                {
-                    onAddEntitySystem.OnAddEntity(this, entity);
-                }
             }
         }
 
@@ -254,11 +249,6 @@ namespace OpenBreed.Wecs.Worlds
 
             foreach (var system in systems)
             {
-                if (system is IOnRemoveEntitySystem onRemoveEntitySystem)
-                {
-                    onRemoveEntitySystem.OnRemoveEntity(this, entity);
-                }
-
                 DecacheEntityFromSystem(entity, system);
             }
         }

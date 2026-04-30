@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using OpenBreed.Wecs.Abstractions.Attributes;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Wecs.Core.Components
+namespace OpenBreed.Wecs.Components
 {
     public interface IOnTriggerActionTemplate
     {

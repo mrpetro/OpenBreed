@@ -5,6 +5,7 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Abstractions;
 using OpenBreed.Wecs.Abstractions;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenTK.Windowing.Common;
 using System;
@@ -132,7 +133,10 @@ namespace OpenBreed.Wecs.Worlds
                 entitiesToAdd.Add(worldId, entities);
             }
 
-            entities.Add(entity);
+            if (entities.Add(entity))
+            {
+                eventsMan.Raise(new EntityEnteringEvent(worldId, entity.Id));
+            }
         }
 
         public void RequestRemoveEntity(IEntity entity)
@@ -199,38 +203,23 @@ namespace OpenBreed.Wecs.Worlds
         private void AddPendingEntities(int worldId, HashSet<IEntity> entities)
         {
             var world = GetById(worldId);
+            var added = new List<IEntity>();
 
             foreach (var entity in entities)
             {
                 world.AddEntity(entity);
-                OnEntityAdded(entity, worldId);
+                added.Add(entity);
+            }
+
+            for (int i = 0; i < added.Count; i++)
+            {
+                OnEntityAdded(added[i], worldId);
             }
         }
 
         private void CheckUpdateAddToSystems(IWorld world, IEntity entity)
         {
             world.UpdateSystemsCache(entity);
-
-            foreach (var system in world.Systems.OfType<ISystem>())
-            {
-                var areMatching = entityToSystemMatcher.AreMatch(system, entity);
-
-                if (world.HasSystemEntityCached(system, entity))
-                {
-                    if (!areMatching && system is IOnRemoveEntitySystem onRemoveEntitySystem)
-                    {
-                        onRemoveEntitySystem.OnRemoveEntity(world, entity);
-                        continue;
-                    }
-                }
-                else
-                {
-                    if (areMatching && system is IOnAddEntitySystem onAddEntitySystem)
-                    {
-                        onAddEntitySystem.OnAddEntity(world, entity);
-                    }
-                }
-            }
         }
 
         private void DeinitializePendingWorlds()

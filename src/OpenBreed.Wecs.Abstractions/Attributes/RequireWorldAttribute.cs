@@ -14,6 +14,19 @@ namespace OpenBreed.Wecs.Abstractions.Attributes
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
+    public class EntityTriggerActionFilter : EntityEventFilterAttribute
+    {
+        public EntityTriggerActionFilter(string triggerName, string actionName)
+        {
+            TriggerName = triggerName;
+            ActionName = actionName;
+        }
+
+        public string TriggerName { get; }
+        public string ActionName { get; }
+    }
+
+    [AttributeUsage(AttributeTargets.Parameter)]
     public class TargetWorldAsSourceFilter : WorldEventFilterAttribute
     {
         public TargetWorldAsSourceFilter()
@@ -38,6 +51,10 @@ namespace OpenBreed.Wecs.Abstractions.Attributes
     }
 
     public abstract class WorldEventFilterAttribute : Attribute
+    {
+    }
+
+    public abstract class EntityEventFilterAttribute : Attribute
     {
     }
 
