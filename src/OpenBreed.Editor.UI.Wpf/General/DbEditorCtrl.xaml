@@ -4,20 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.General"
+             xmlns:localEntityClasses="clr-namespace:OpenBreed.Editor.UI.Wpf.EntityClasses"
+             xmlns:vm="clr-namespace:OpenBreed.Editor.VM.Database;assembly=OpenBreed.Editor.VM"
+             xmlns:vmEntityClasses="clr-namespace:OpenBreed.Editor.VM.EntityClasses;assembly=OpenBreed.Editor.VM"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+        <DataTemplate DataType="{x:Type vm:DbTablesEditorMainVM}">
+            <local:DbTablesEditorMainCtrl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmEntityClasses:EntityClassesTreeEditorVM}">
+            <localEntityClasses:EntityClassesTreeEditorCtrl/>
+        </DataTemplate>
     </UserControl.Resources>
-    <DockPanel LastChildFill="True" >
-        <Expander DockPanel.Dock="Left"
-                  ExpandDirection="Left">
-            <local:DbTablesEditorCtrl Width="300" DataContext="{Binding TablesEditor}" />
-        </Expander>
-        <GroupBox DockPanel.Dock="Right"
-                  Header="Entries editor">
-            <local:DbEntriesEditorCtrl 
-                                   DataContext="{Binding EntriesEditor}" />
-        </GroupBox>
-    </DockPanel>
+    <Grid>
+        <ContentControl Content="{Binding CurrentView}" />
+    </Grid>
 </UserControl>

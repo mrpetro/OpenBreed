@@ -24,20 +24,21 @@ namespace OpenBreed.Database.Xml
         public const string DEFAULT_DATABASE_DIR_NAME = "Defaults";
 
         [XmlArray("Tables"),
-        XmlArrayItem("DataSources", typeof(XmlDbDataSourceTableDef)),
-        XmlArrayItem("Maps", typeof(XmlDbMapTableDef)),
-        XmlArrayItem("Palettes", typeof(XmlDbPaletteTableDef)),
-        XmlArrayItem("Texts", typeof(XmlDbTextTableDef)),
-        XmlArrayItem("ActionSets", typeof(XmlDbActionSetTableDef)),
+        XmlArrayItem(XmlDbDataSourceTableDef.NAME, typeof(XmlDbDataSourceTableDef)),
+        XmlArrayItem(XmlDbMapTableDef.NAME, typeof(XmlDbMapTableDef)),
+        XmlArrayItem(XmlDbPaletteTableDef.NAME, typeof(XmlDbPaletteTableDef)),
+        XmlArrayItem(XmlDbTextTableDef.NAME, typeof(XmlDbTextTableDef)),
+        XmlArrayItem(XmlDbActionSetTableDef.NAME, typeof(XmlDbActionSetTableDef)),
         XmlArrayItem("TileSets", typeof(XmlDbTileAtlasTableDef)),
         XmlArrayItem("TileStamps", typeof(XmlDbTileStampTableDef)),
         XmlArrayItem("SpriteSets", typeof(XmlDbSpriteAtlasTableDef)),
-        XmlArrayItem("Sounds", typeof(XmlDbSoundTableDef)),
-        XmlArrayItem("Songs", typeof(XmlDbSongTableDef)),
-        XmlArrayItem("Images", typeof(XmlDbImageTableDef)),
-        XmlArrayItem("Scripts", typeof(XmlDbScriptTableDef)),
-        XmlArrayItem("Animations", typeof(XmlDbAnimationTableDef)),
-        XmlArrayItem("EntityTemplates", typeof(XmlDbEntityTemplateTableDef))]
+        XmlArrayItem(XmlDbSoundTableDef.NAME, typeof(XmlDbSoundTableDef)),
+        XmlArrayItem(XmlDbSongTableDef.NAME, typeof(XmlDbSongTableDef)),
+        XmlArrayItem(XmlDbImageTableDef.NAME, typeof(XmlDbImageTableDef)),
+        XmlArrayItem(XmlDbScriptTableDef.NAME, typeof(XmlDbScriptTableDef)),
+        XmlArrayItem(XmlDbAnimationTableDef.NAME, typeof(XmlDbAnimationTableDef)),
+        XmlArrayItem(XmlDbEntityTemplateTableDef.NAME, typeof(XmlDbEntityTemplateTableDef)),
+        XmlArrayItem(XmlDbEntityClassTableDef.NAME, typeof(XmlDbEntityClassTableDef))]
         public readonly List<XmlDbTableDef> Tables = new List<XmlDbTableDef>();
 
         #endregion Public Fields

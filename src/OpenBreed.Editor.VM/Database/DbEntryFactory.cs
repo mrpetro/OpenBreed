@@ -20,6 +20,7 @@ using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Interface.Items.Animations;
 using OpenBreed.Database.Interface.Items.TileStamps;
+using OpenBreed.Database.Interface.Items.EntityClasses;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -53,6 +54,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DbScriptEntryVM();
             else if (entry is IDbEntityTemplate)
                 return new DbEntityTemplateEntryVM();
+            else if (entry is IDbEntityClass)
+                return new DbEntityClassEntryVM();
             else if (entry is IDbAnimation)
                 return new DbAnimationEntryVM();
             else

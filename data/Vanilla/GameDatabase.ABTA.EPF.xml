@@ -10909,8 +10909,7 @@
       </Items>
     </Texts>
     <Scripts>
-      <Items>
-      </Items>
+      <Items />
     </Scripts>
     <Animations>
       <Items>
@@ -14626,5 +14625,15 @@
         </EntityTemplateFromFile>
       </Items>
     </EntityTemplates>
+    <EntityClasses>
+      <Items>
+        <EntityClass Description="Root entity class" Id="Entity" />
+        <EntityClass Description="" Id="Actor" ParentId="Entity" />
+        <EntityClass Description="" Id="John" ParentId="Hero" />
+        <EntityClass Id="Nash" ParentId="Hero" />
+        <EntityClass Id="Hero" ParentId="Actor" />
+        <EntityClass Id="Enemy" ParentId="Actor" />
+      </Items>
+    </EntityClasses>
   </Tables>
 </Database>

@@ -16,35 +16,44 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" >
-            <MenuItem Header="File">
-                <MenuItem Header="Open Database..." Command="{Binding OpenDatabaseCommand}" />
-                <MenuItem Header="Save Database" Command="{Binding SaveDatabaseCommand}" />
-                <MenuItem Header="Close database" Command="{Binding CloseDatabaseCommand}" />
-                <Separator/>
-                <MenuItem Header="Exit" Command="{Binding ExitCommand}" />
-            </MenuItem>
-            <MenuItem Header="Edit">
+        <Menu Grid.Row="0" ItemsSource="{Binding Menus}">
+            <Menu.ItemContainerStyle>
+                <Style TargetType="MenuItem">
 
-            </MenuItem>
-            <MenuItem Header="View">
-                <MenuItem Header="Database items"
-                          IsCheckable="True"
-                          IsChecked="{Binding DbEditor.TablesEditor.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <MenuItem Header="Logs" />
-            </MenuItem>
+                    <Setter Property="Header"
+                    Value="{Binding Header}" />
 
-            <MenuItem Header="Tools">
-                <MenuItem Header="EPF pack/unpack..." Command="{Binding RunEpfManagerCommand}" />
-                <MenuItem Header="Options..." Command="{Binding ShowOptionsCommand}" />
-                <MenuItem Header="Log console" Command="{Binding ShowLogConsoleCommand}" />
-                <MenuItem Header="Run game" >
-                    <MenuItem Header="AB: Special Edition" Command="{Binding RunAbseGameCommand}"/>
-                    <MenuItem Header="AB: The Horror Continues" Command="{Binding RunAbhcGameCommand}"/>
-                    <MenuItem Header="AB: Tower Assault" Command="{Binding RunAbtaGameCommand}"/>
-                </MenuItem>
-                <MenuItem Header="ABTA Game passwords..." Command="{Binding ShowAbtaPasswordGeneratorCommand}" />
-            </MenuItem>
+                    <Setter Property="Command"
+                    Value="{Binding Command}" />
+
+                    <Setter Property="ItemsSource"
+                    Value="{Binding Children}" />
+
+                    <Style.Triggers>
+
+                        <DataTrigger Binding="{Binding IsSeparator}"
+                             Value="True">
+
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="MenuItem">
+                                        <Separator />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Setter Property="Focusable"
+                            Value="False" />
+
+                            <Setter Property="IsHitTestVisible"
+                            Value="False" />
+
+                        </DataTrigger>
+
+                    </Style.Triggers>
+
+                </Style>
+            </Menu.ItemContainerStyle>
         </Menu>
         <General:DbEditorCtrl Grid.Row="1"
             Visibility="{Binding IsDbOpened, Converter={StaticResource VisibleIfTrueConverter}}"

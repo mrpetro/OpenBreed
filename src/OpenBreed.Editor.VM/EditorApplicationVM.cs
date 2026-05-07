@@ -11,8 +11,11 @@ using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Logging;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Net.NetworkInformation;
 using System.Windows.Input;
 using System.Xml.Linq;
 
@@ -20,15 +23,16 @@ namespace OpenBreed.Editor.VM
 {
     public enum EditorState
     {
-        Active,
+        NoDatabase,
         Exiting,
-        Exited
+        DatabaseOpened
     }
 
     public class EditorApplicationVM : BaseViewModel
     {
         #region Private Fields
 
+        private const string NoDatabaseOpenedInfo = "No database opened.";
         private readonly DataSourceProvider dataSourceProvider;
         private readonly IModelsProvider modelsProvider;
         private readonly IServiceProvider managerCollection;
@@ -66,8 +70,6 @@ namespace OpenBreed.Editor.VM
 
             Logger = managerCollection.GetService<LoggerVM>();
 
-            Title = Definitions.APP_NAME;
-
             ExitCommand = new Command(() => TryExit());
             OpenDatabaseCommand = new Command(() => TryOpenXmlDatabase());
             SaveDatabaseCommand = new Command(() => TrySaveDatabase());
@@ -76,6 +78,9 @@ namespace OpenBreed.Editor.VM
 
             ShowAbtaPasswordGeneratorCommand = new Command(() => ShowAbtaPasswordGenerator());
             DbEditor.PropertyChanged += DbEditor_PropertyChanged;
+
+            UpdateTitle();
+            RebuildMenus();
         }
 
         #endregion Public Constructors
@@ -103,6 +108,8 @@ namespace OpenBreed.Editor.VM
         public LoggerVM Logger { get; }
 
         public DbEditorVM DbEditor { get; }
+
+        public ObservableCollection<MenuItemViewModel> Menus { get; } = new();
 
         public string Title
         {
@@ -247,14 +254,204 @@ namespace OpenBreed.Editor.VM
 
         #endregion Internal Methods
 
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(State):
+                    RebuildMenus();
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
+
+        private void RebuildMenus()
+        {
+            Menus.Clear();
+
+            Menus.Add(BuildFileMenu());
+            Menus.Add(BuildViewMenu());
+            Menus.Add(BuildToolsMenu());
+
+            //switch (State)
+            //{
+            //    case EditorState.NoDatabase:
+            //        Menus.Add(BuildLoginMenu());
+            //        break;
+
+            //    case EditorState.DatabaseOpened:
+            //        Menus.Add(BuildFileMenu());
+            //        Menus.Add(BuildToolsMenu());
+            //        break;
+            //}
+        }
+
+        private MenuItemViewModel BuildFileMenu()
+        {
+            var menu = new MenuItemViewModel()
+            {
+                Header = "File",
+                IsEnabled = true
+            };
+
+            menu.Children.Add(new MenuItemViewModel()
+            {
+                Header = "Open Database...",
+                Command = OpenDatabaseCommand,
+            });
+
+            menu.Children.Add(new MenuItemViewModel()
+            {
+                Header = "Save Database",
+                Command = SaveDatabaseCommand,
+                IsEnabled = true
+            });
+
+            menu.Children.Add(new MenuItemViewModel()
+            {
+                Header = "Close Database",
+                Command = CloseDatabaseCommand,
+                IsEnabled = true
+            });
+
+            menu.Children.Add(new MenuItemViewModel()
+            {
+                IsSeparator = true
+            });
+
+            menu.Children.Add(new MenuItemViewModel()
+            {
+                Header = "Exit",
+                Command = ExitCommand,
+                IsEnabled = true
+            });
+
+            return menu;
+        }
+
+        private MenuItemViewModel BuildViewMenu()
+        {
+            var menu = new MenuItemViewModel()
+            {
+                Header = "View",
+                IsEnabled = true
+            };
+
+            menu.Children.Add(new MenuItemViewModel()
+            {
+                Header = "Tables editor",
+                Command = DbEditor.OpenTablesEditorCommand,
+                IsEnabled = true
+            });
+
+            menu.Children.Add(new MenuItemViewModel()
+            {
+                Header = "Classes tree editor",
+                Command = DbEditor.OpenClassesTreeEditorCommand,
+                IsEnabled = true
+            });
+
+            return menu;
+        }
+
+        private MenuItemViewModel BuildToolsMenu()
+        {
+            var menu = new MenuItemViewModel()
+            {
+                Header = "Tools",
+                IsEnabled = true
+            };
+
+            //menu.Children.Add(new MenuItemViewModel()
+            //{
+            //    Header = "EPF pack/unpack...",
+            //    Command = RunEpfManagerCommand,
+            //    IsEnabled = true
+            //});
+
+            menu.Children.Add(new MenuItemViewModel()
+            {
+                Header = "Options...",
+                Command = ShowOptionsCommand,
+                IsEnabled = true
+            });
+
+            //menu.Children.Add(new MenuItemViewModel()
+            //{
+            //    Header = "Log console",
+            //    Command = ShowLogConsoleCommand,
+            //    IsEnabled = true
+            //});
+
+            menu.Children.Add(new MenuItemViewModel()
+            {
+                Header = "ABTA Game passwords....",
+                Command = ShowAbtaPasswordGeneratorCommand,
+                IsEnabled = true
+            });
+
+            return menu;
+        }
+
+        private MenuItemViewModel BuildRunMenu()
+        {
+            var menu = new MenuItemViewModel()
+            {
+                Header = "Run game",
+                IsEnabled = true
+            };
+
+            //menu.Children.Add(new MenuItemViewModel()
+            //{
+            //    Header = "AB: Special Edition",
+            //    Command = RunAbseGameCommand,
+            //    IsEnabled = true
+            //});
+
+            //menu.Children.Add(new MenuItemViewModel()
+            //{
+            //    Header = "AB: The Horror Continues",
+            //    Command = RunAbhcGameCommand,
+            //    IsEnabled = true
+            //});
+
+            //menu.Children.Add(new MenuItemViewModel()
+            //{
+            //    Header = "AB: Tower Assault",
+            //    Command = RunAbtaGameCommand,
+            //    IsEnabled = true
+            //});
+
+            return menu;
+        }
+
+        private void UpdateTitle()
+        {
+            if (string.IsNullOrEmpty(DbEditor.DbName))
+            {
+                Title = $"{Definitions.APP_NAME} - {NoDatabaseOpenedInfo}";
+                return;
+            }
+
+            Title = $"{Definitions.APP_NAME} - {DbEditor.DbName}";
+        }
 
         private void DbEditor_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
                 case nameof(DbEditor.DbName):
-                    Title = $"{Definitions.APP_NAME} - {DbEditor.DbName}";
+                    UpdateTitle();
                     break;
 
                 default:

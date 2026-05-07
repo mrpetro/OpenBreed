@@ -72,6 +72,7 @@ namespace OpenBreed.Database.Xml
             RegisterTable(GetTable<XmlDbScriptTableDef>());
             RegisterTable(GetTable<XmlDbAnimationTableDef>());
             RegisterTable(GetTable<XmlDbEntityTemplateTableDef>());
+            RegisterTable(GetTable<XmlDbEntityClassTableDef>());
         }
 
         private void RegisterRepos()
@@ -90,6 +91,7 @@ namespace OpenBreed.Database.Xml
             RegisterRepository(new XmlScriptsRepository(GetTable<XmlDbScriptTableDef>()));
             RegisterRepository(new XmlAnimationsRepository(GetTable<XmlDbAnimationTableDef>()));
             RegisterRepository(new XmlEntityTemplatesRepository(GetTable<XmlDbEntityTemplateTableDef>()));
+            RegisterRepository(new XmlEntityClassesRepository(GetTable<XmlDbEntityClassTableDef>()));
         }
 
         #endregion Public Constructors

@@ -148,10 +148,11 @@ namespace OpenBreed.Wecs.Extensions
             {
                 services.AddScoped<IEntityClassMan>((sp) =>
                 {
+                    var classesLoader = sp.GetRequiredService<IEntityClassesLoader>();
+
                     var classMan = new EntityClassMan();
 
-                    classMan.CreateClass("Entity");
-                    classMan.CreateClass("Actor", "Entity");
+                    classesLoader.Load((name, parentName) => classMan.CreateClass(name, parentName));
 
                     return classMan;
                 });

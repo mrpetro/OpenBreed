@@ -76,6 +76,7 @@
     <!--Common control styles.-->
     <Style x:Key="CommonTextBoxStyle" TargetType="TextBox">
         <Setter Property="Margin" Value="4"/>
+        <Setter Property="Height" Value="22"/>
     </Style>
     <Style x:Key="CommonComboBoxStyle" TargetType="ComboBox">
         <Setter Property="Margin" Value="4"/>

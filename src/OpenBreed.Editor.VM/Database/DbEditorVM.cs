@@ -6,9 +6,11 @@ using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.EntityClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using System.Xml.Linq;
 
 namespace OpenBreed.Editor.VM.Database
@@ -21,10 +23,11 @@ namespace OpenBreed.Editor.VM.Database
         private readonly IWorkspaceMan workspaceMan;
         private readonly IModelsProvider modelsProvider;
         private readonly IServiceProvider managerCollection;
-        private readonly DbEntryEditorFactory dbEntryEditorFactory;
-
+        private readonly Func<DbTablesEditorMainVM> dbTablesEditorInitializer;
+        private readonly Func<EntityClassesTreeEditorVM> entityClassesTreeEditorInitializer;
         private bool _isDbOpened;
         private string _dbName;
+        private BaseViewModel currentView;
 
         #endregion Private Fields
 
@@ -35,20 +38,18 @@ namespace OpenBreed.Editor.VM.Database
             IWorkspaceMan workspaceMan,
             IModelsProvider modelsProvider,
             IServiceProvider managerCollection,
-            DbEntryEditorFactory dbEntryEditorFactory,
-            DbTablesEditorVM tablesEditor,
-            DbEntriesEditorVM entriesEditor)
+            Func<DbTablesEditorMainVM> dbTablesEditorInitializer,
+            Func<EntityClassesTreeEditorVM> entityClassesTreeEditorInitializer)
         {
             this.dataSourceProvider = dataSourceProvider;
             this.workspaceMan = workspaceMan;
             this.modelsProvider = modelsProvider;
             this.managerCollection = managerCollection;
-            this.dbEntryEditorFactory = dbEntryEditorFactory;
+            this.dbTablesEditorInitializer = dbTablesEditorInitializer ?? throw new ArgumentNullException(nameof(dbTablesEditorInitializer));
+            this.entityClassesTreeEditorInitializer = entityClassesTreeEditorInitializer ?? throw new ArgumentNullException(nameof(entityClassesTreeEditorInitializer));
 
-            EntriesEditor = entriesEditor;
-            TablesEditor = tablesEditor;
-
-            TablesEditor.EntryEditorOpener = OpenEntryEditor;
+            OpenTablesEditorCommand = new Command(() => OpenTablesEditor());
+            OpenClassesTreeEditorCommand = new Command(() => OpenClassesTreeEditor());
         }
 
         #endregion Public Constructors
@@ -67,11 +68,17 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _dbName, value); }
         }
 
+        public BaseViewModel CurrentView
+        {
+            get { return currentView; }
+            set { SetProperty(ref currentView, value); }
+        }
+
         public bool IsModified { get; internal set; }
 
-        public DbTablesEditorVM TablesEditor { get; }
+        public ICommand OpenTablesEditorCommand { get; }
 
-        public DbEntriesEditorVM EntriesEditor { get; }
+        public ICommand OpenClassesTreeEditorCommand { get; }
 
         #endregion Public Properties
 
@@ -93,7 +100,7 @@ namespace OpenBreed.Editor.VM.Database
             DbName = workspaceMan.UnitOfWork.Name;
             IsDbOpened = true;
 
-            TablesEditor.Refresh();
+            //TablesEditor.Refresh();
         }
 
         public void SaveDatabase()
@@ -107,37 +114,35 @@ namespace OpenBreed.Editor.VM.Database
             }
         }
 
-        public void CloseAllEditors()
-        {
-            EntriesEditor.CloseAll();
+        //public void CloseAllEditors()
+        //{
+        //    EntriesEditor.CloseAll();
+        //    TablesEditor.Close();
 
-            CloseDbTablesEditor();
-        }
+        //}
 
-        public void CloseDbTablesEditor()
-        {
-            TablesEditor.Close();
-        }
-
-        public void ToggleDbTablesEditor(bool toggle)
-        {
-            TablesEditor.DbTableEditor.SetModel(TablesEditor.DbTableSelector.CurrentTableName);
-        }
+        //public void ToggleDbTablesEditor(bool toggle)
+        //{
+        //    TablesEditor.DbTableEditor.SetModel(TablesEditor.DbTableSelector.CurrentTableName);
+        //}
 
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal EntryEditorVM OpenEntryEditor(string tableName, string entryId)
-        {
-            var entryEditor = EntriesEditor.OpenOrActivateEditor(tableName, entryId);
-
-            return entryEditor;
-        }
-
         #endregion Internal Methods
 
         #region Private Methods
+
+        private void OpenClassesTreeEditor()
+        {
+            CurrentView = entityClassesTreeEditorInitializer.Invoke();
+        }
+
+        private void OpenTablesEditor()
+        {
+            CurrentView = dbTablesEditorInitializer.Invoke();
+        }
 
         #endregion Private Methods
     }

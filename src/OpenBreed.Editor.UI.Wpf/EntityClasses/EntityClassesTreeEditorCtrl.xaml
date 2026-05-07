@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="OpenBreed.Editor.UI.Wpf.EntityClasses.EntityClassesTreeEditorCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf.EntityClasses"
+             xmlns:vm="clr-namespace:OpenBreed.Editor.VM.EntityClasses;assembly=OpenBreed.Editor.VM"    
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../CommonResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TreeView Name="MyTree"
+                  Grid.Column="0"
+                  ItemsSource="{Binding Items}"
+                  AllowDrop="True"
+                  SelectedItemChanged="TreeView_SelectedItemChanged"
+                  PreviewMouseMove="TreeView_PreviewMouseMove"
+                  DragOver="TreeView_DragOver"
+                  Drop="TreeView_Drop">
+            <TreeView.Resources>
+
+                <HierarchicalDataTemplate
+            DataType="{x:Type vm:EntityClassNodeVM}"
+            ItemsSource="{Binding Children}">
+
+                    <TextBlock Text="{Binding Id}" />
+
+                </HierarchicalDataTemplate>
+
+            </TreeView.Resources>
+
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu
+                        DataContext="{Binding PlacementTarget.DataContext, 
+                                              RelativeSource={RelativeSource Self}}">
+
+                                <MenuItem Header="New"
+                                  Command="{Binding NewCommand}" />
+
+                                <MenuItem Header="Delete"
+                                  Command="{Binding DeleteCommand}" />
+
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+        <Border Grid.Column="1" Padding="10" BorderBrush="Gray" BorderThickness="1">
+            <ContentControl Content="{Binding ClassEditor}">
+                <ContentControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type vm:EntityClassEditorVM}">
+                        <StackPanel>
+                            <TextBlock Text="Class" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <TextBlock Text="ID:"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Style="{StaticResource CommonTextBoxStyle}" Text="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" />
+                                <Button Grid.Column="1"
+                                        Style="{StaticResource ConfirmButtonStyle}"
+                                        ToolTip="Confirms new track creation."
+                                        IsEnabled="{Binding IsConfirmIdEnabled}" 
+                                        Command="{Binding ConfirmIdCommand}">
+                                    <Image/>
+                                </Button>
+                                <Button Grid.Column="2"
+                                        Style="{StaticResource CancelButtonStyle}"
+                                        ToolTip="Cancels new track creation."
+                                        IsEnabled="{Binding IsCancelIdEnabled}" 
+                                        Command="{Binding CancelIdCommand}">
+                                    <Image/>
+                                </Button>
+                            </Grid>
+                            <TextBlock Text="Description:" Margin="0,10,0,0"/>
+                            <TextBox Style="{StaticResource CommonTextBoxStyle}" Text="{Binding Description}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ContentControl.ContentTemplate>
+            </ContentControl>
+        </Border>
+    </Grid>
+</UserControl>

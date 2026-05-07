@@ -40,7 +40,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+
 using OpenBreed.Wecs.Control.Components.Extensions;
+
+using OpenBreed.Common.Game.Wecs.Services;
 
 namespace OpenBreed.Common.Game.Wecs.Extensions
 {
@@ -86,11 +89,21 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
                 builderFactory.SetupWecsControlBuilders(sp);
                 builderFactory.SetupWecsCommonBuilders(sp);
             });
+
+            hostBuilder.SetupEntityClassesFromDb();
         }
 
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal static void SetupEntityClassesFromDb(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IEntityClassesLoader, EntityClassesLoaderFromDb>();
+            });
+        }
 
         internal static void SetupGameSystems(this IHostBuilder hostBuilder)
         {

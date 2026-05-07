@@ -28,6 +28,7 @@ using OpenBreed.Editor.VM.Animations;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.DataSources;
+using OpenBreed.Editor.VM.EntityClasses;
 using OpenBreed.Editor.VM.EntityTemplates;
 using OpenBreed.Editor.VM.Images;
 using OpenBreed.Editor.VM.Logging;
@@ -85,6 +86,10 @@ namespace OpenBreed.Editor.VM.Extensions
                 
                 services.AddTransient<DbEditorVM>();
                 services.AddTransient<DbTablesEditorVM>();
+                services.AddTransient<DbTablesEditorMainVM>();
+                services.AddTransient<Func<DbTablesEditorMainVM>>((sp) => () => ActivatorUtilities.CreateInstance<DbTablesEditorMainVM>(sp));
+                services.AddTransient<EntityClassesTreeEditorVM>();
+                services.AddTransient<Func<EntityClassesTreeEditorVM>>((sp) => () => ActivatorUtilities.CreateInstance<EntityClassesTreeEditorVM>(sp));
                 services.AddTransient<DbTableSelectorVM>();
                 services.AddTransient<DbTableEditorVM>();
                 services.AddTransient<DbEntriesEditorVM>();

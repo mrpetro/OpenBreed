@@ -48,6 +48,7 @@ namespace OpenBreed.Common.Database.Xml.Extensions
                 unitOfWork.RegisterRepository(new XmlScriptsRepository(database.GetTable<XmlDbScriptTableDef>()));
                 unitOfWork.RegisterRepository(new XmlAnimationsRepository(database.GetTable<XmlDbAnimationTableDef>()));
                 unitOfWork.RegisterRepository(new XmlEntityTemplatesRepository(database.GetTable<XmlDbEntityTemplateTableDef>()));
+                unitOfWork.RegisterRepository(new XmlEntityClassesRepository(database.GetTable<XmlDbEntityClassTableDef>()));
             });
         }
 
