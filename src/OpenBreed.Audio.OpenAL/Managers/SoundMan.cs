@@ -18,8 +18,8 @@ namespace OpenBreed.Audio.OpenAL.Managers
     {
         #region Private Fields
 
-        private readonly Dictionary<int, int> alBuffers = new Dictionary<int, int>();
-        private readonly Dictionary<int, SampleStream> sampleStreams = new Dictionary<int, SampleStream>();
+        private readonly Dictionary<int, SoundSample> alSamples = new Dictionary<int, SoundSample>();
+        private readonly Dictionary<int, SoundStream> alStreams = new Dictionary<int, SoundStream>();
         private readonly Dictionary<string, int> sampleNames = new Dictionary<string, int>();
         private readonly Dictionary<string, int> streamNames = new Dictionary<string, int>();
         private readonly List<SoundSource> alSources = new List<SoundSource>();
@@ -78,44 +78,46 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         public int LoadSample(string sampleName, byte[] sampleData, int sampleFreq)
         {
-            var sampleBuffer = AL.GenBuffer();
+            var alBufferId = AL.GenBuffer();
 
-            AL.BufferData(sampleBuffer, ALFormat.Mono8, ref sampleData[0], sampleData.Length, sampleFreq);
+            AL.BufferData(alBufferId, ALFormat.Mono8, ref sampleData[0], sampleData.Length, sampleFreq);
 
-            alBuffers.Add(alBuffers.Count, sampleBuffer);
-            sampleNames.Add(sampleName, alBuffers.Count - 1);
-
-            return alBuffers.Count - 1;
+            return RegisterSample(sampleName, alBufferId);
         }
 
         public int LoadSample(string sampleName, short[] sampleData, int sampleFreq)
         {
-            var sampleBuffer = AL.GenBuffer();
-            AL.BufferData(sampleBuffer, ALFormat.Stereo16, ref sampleData[0], sampleData.Length * 2, sampleFreq);
+            var alBufferId = AL.GenBuffer();
+            AL.BufferData(alBufferId, ALFormat.Stereo16, ref sampleData[0], sampleData.Length * 2, sampleFreq);
 
-            alBuffers.Add(alBuffers.Count, sampleBuffer);
-            sampleNames.Add(sampleName, alBuffers.Count - 1);
-
-            return alBuffers.Count - 1;
+            return RegisterSample(sampleName, alBufferId);
         }
 
         public int CreateStream(string streamName, SoundStreamReader reader)
         {
             var buffers = AL.GenBuffers(4);
-            var sampleStream = new SampleStream(buffers, reader);
+            var sampleStream = new SoundStream(buffers, reader)
+            {
+                Id = alStreams.Count
+            };
 
-            sampleStreams.Add(sampleStreams.Count, sampleStream);
-            streamNames.Add(streamName, sampleStreams.Count - 1);
+            alStreams.Add(sampleStream.Id, sampleStream);
+            streamNames.Add(streamName, sampleStream.Id);
 
-            return sampleStreams.Count - 1;
+            return sampleStream.Id;
         }
 
-        public void PlayStream(int sampleStreamId)
+        public void PlayStream(int streamId)
         {
-            if (sampleStreamId == -1)
+            if (streamId == -1)
+            {
                 return;
+            }
 
-            var streamSource = GetSampleStream(sampleStreamId);
+            if (!TryGetStream(streamId, out var stream))
+            {
+                throw new InvalidOperationException($"Unable to find sound stream with Id '{streamId}'.");
+            }
 
             var soundSource = GetFirstIdleSource();
 
@@ -125,7 +127,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
                 return;
             }
 
-            streamSource.PlayAtSource(soundSource);
+            stream.PlayAtSource(soundSource);
             AL.SourceStop(soundSource.ALSourceId);
             AL.SourcePlay(soundSource.ALSourceId);
 
@@ -138,9 +140,14 @@ namespace OpenBreed.Audio.OpenAL.Managers
         public void PlaySample(int sampleId)
         {
             if (sampleId == -1)
+            {
                 return;
+            }
 
-            var alBuffer = GetSampleBufferId(sampleId);
+            if (!TryGetSample(sampleId, out var sample))
+            {
+                throw new InvalidOperationException($"Unable to find sample with Id'{sampleId}'.");
+            }
 
             var soundSource = GetFirstIdleSource();
 
@@ -152,9 +159,9 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
             var alSource = soundSource.ALSourceId;
 
-            Console.WriteLine($"Playing sample '{sampleId}' at source '{alSource}'");
+            Console.WriteLine($"Playing sample '{sample.Name}' at source '{alSource}'");
 
-            AL.Source(alSource, ALSourcei.Buffer, alBuffer);
+            AL.Source(alSource, ALSourcei.Buffer, sample.AlBufferId);
             AL.Source(alSource, ALSourceb.Looping, false);
 
             AL.SourcePlay(alSource);
@@ -162,15 +169,23 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         public void PlaySampleAtSource(int sampleId, int sourceId)
         {
-            Console.WriteLine($"Playing sample '{sampleId}' at source '{sourceId}'");
+            if (sampleId == -1)
+            {
+                return;
+            }
 
-            var alBuffer = GetSampleBufferId(sampleId);
+            if (!TryGetSample(sampleId, out var sample))
+            {
+                throw new InvalidOperationException($"Unable to find sample with Id'{sampleId}'.");
+            }
+
+            Console.WriteLine($"Playing sample '{sample.Name}' at source '{sourceId}'");
 
             var soundSource = GetSoundSource(sourceId);
 
             var alSource = soundSource.ALSourceId;
 
-            AL.Source(alSource, ALSourcei.Buffer, alBuffer);
+            AL.Source(alSource, ALSourcei.Buffer, sample.AlBufferId);
             AL.Source(alSource, ALSourceb.Looping, false);
 
             //AL.SourceQueueBuffer(alSource, alBuffer);
@@ -189,17 +204,24 @@ namespace OpenBreed.Audio.OpenAL.Managers
         public int GetDuration(int sampleId)
         {
             if (sampleId == -1)
+            {
                 return 0;
+            }
 
-            var alBuffer = GetSampleBufferId(sampleId);
+            if (!TryGetSample(sampleId, out var sample))
+            {
+                throw new InvalidOperationException($"Unable to find sample with Id'{sampleId}'.");
+            }
 
-            AL.GetBuffer(alBuffer, ALGetBufferi.Size, out int sizeInBytes);
-            AL.GetBuffer(alBuffer, ALGetBufferi.Channels, out int channels);
-            AL.GetBuffer(alBuffer, ALGetBufferi.Bits, out int bits);
+            var alBufferId = sample.AlBufferId;
+
+            AL.GetBuffer(alBufferId, ALGetBufferi.Size, out int sizeInBytes);
+            AL.GetBuffer(alBufferId, ALGetBufferi.Channels, out int channels);
+            AL.GetBuffer(alBufferId, ALGetBufferi.Bits, out int bits);
 
             var lengthInSamples = sizeInBytes * 8 / (channels * bits);
 
-            AL.GetBuffer(alBuffer, ALGetBufferi.Frequency, out int frequency);
+            AL.GetBuffer(alBufferId, ALGetBufferi.Frequency, out int frequency);
 
             var durationInSeconds = (float)lengthInSamples / (float)frequency;
 
@@ -247,6 +269,21 @@ namespace OpenBreed.Audio.OpenAL.Managers
         #endregion Protected Methods
 
         #region Private Methods
+
+        private int RegisterSample(string sampleName, int alBufferId)
+        {
+            var sample = new SoundSample
+            {
+                Id = alSamples.Count,
+                AlBufferId = alBufferId,
+                Name = sampleName
+            };
+
+            alSamples.Add(sample.Id, sample);
+            sampleNames.Add(sampleName, sample.Id);
+
+            return sample.Id;
+        }
 
         private void OnUpdate(float dt)
         {
@@ -322,20 +359,14 @@ namespace OpenBreed.Audio.OpenAL.Managers
             return null;
         }
 
-        private int GetSampleBufferId(int sampleId)
+        private bool TryGetSample(int sampleId, out SoundSample sample)
         {
-            if (alBuffers.TryGetValue(sampleId, out int sampleBufferId))
-                return sampleBufferId;
-            else
-                throw new InvalidOperationException($"Unable to find OpenAL buffer ID for sample '{sampleId}'");
+            return alSamples.TryGetValue(sampleId, out sample);
         }
 
-        private SampleStream GetSampleStream(int sampleStreamId)
+        private bool TryGetStream(int sampleStreamId, out SoundStream stream)
         {
-            if (sampleStreams.TryGetValue(sampleStreamId, out SampleStream sampleStream))
-                return sampleStream;
-            else
-                throw new InvalidOperationException($"Unable to find sample stream '{sampleStreamId}'");
+            return alStreams.TryGetValue(sampleStreamId, out stream);
         }
 
         #endregion Private Methods

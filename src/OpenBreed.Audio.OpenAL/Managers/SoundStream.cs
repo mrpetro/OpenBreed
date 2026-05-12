@@ -8,26 +8,27 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Audio.OpenAL.Managers
 {
-    internal class SampleStream
+    internal class SoundStream
     {
         #region Public Fields
 
         public const int NUM_BUFFERS = 4;
         public const int BUFFER_SIZE = 48000;
 
+        public int[] buffers;
+
         #endregion Public Fields
 
         #region Private Fields
 
         private readonly SoundStreamReader soundStreamReader;
-        public int[] buffers;
         private short[] readerBuffer = new short[BUFFER_SIZE];
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SampleStream(int[] buffers, SoundStreamReader soundStreamReader)
+        public SoundStream(int[] buffers, SoundStreamReader soundStreamReader)
         {
             this.buffers = buffers;
             this.soundStreamReader = soundStreamReader;
@@ -37,14 +38,28 @@ namespace OpenBreed.Audio.OpenAL.Managers
                 FillBuffer(buffers[i]);
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public int Id { get; init; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
         public int FillBuffer(int bufferId)
         {
             var dataLength = soundStreamReader.Invoke(BUFFER_SIZE, readerBuffer);
-  
+
             AL.BufferData(bufferId, ALFormat.Stereo16, ref readerBuffer[0], dataLength * 2, 48000);
 
             return dataLength;
         }
+
+        #endregion Public Methods
+
+        #region Internal Methods
 
         internal void PlayAtSource(SoundSource soundSource)
         {
@@ -52,6 +67,6 @@ namespace OpenBreed.Audio.OpenAL.Managers
             AL.SourceQueueBuffers(soundSource.ALSourceId, buffers.Length, buffers);
         }
 
-        #endregion Public Constructors
+        #endregion Internal Methods
     }
 }

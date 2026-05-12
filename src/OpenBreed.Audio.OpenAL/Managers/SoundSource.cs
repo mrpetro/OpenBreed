@@ -21,7 +21,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
         #region Public Properties
 
         public int Id { get; }
-        public SampleStream CurrentStream { get; internal set; }
+        public SoundStream CurrentStream { get; internal set; }
 
         #endregion Public Properties
 
