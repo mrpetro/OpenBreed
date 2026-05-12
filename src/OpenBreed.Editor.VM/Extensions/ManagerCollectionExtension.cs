@@ -85,6 +85,7 @@ namespace OpenBreed.Editor.VM.Extensions
                 services.AddTransient<TilesSelectorVM>();
                 
                 services.AddTransient<DbEditorVM>();
+                services.AddTransient<Func<DbEditorVM>>((sp) => () => ActivatorUtilities.CreateInstance<DbEditorVM>(sp));
                 services.AddTransient<DbTablesEditorVM>();
                 services.AddTransient<DbTablesEditorMainVM>();
                 services.AddTransient<Func<DbTablesEditorMainVM>>((sp) => () => ActivatorUtilities.CreateInstance<DbTablesEditorMainVM>(sp));

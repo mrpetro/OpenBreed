@@ -5,10 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OpenBreed.Editor.UI.Wpf"
+             xmlns:databaseVm="clr-namespace:OpenBreed.Editor.VM.Database;assembly=OpenBreed.Editor.VM"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+        <DataTemplate DataType="{x:Type databaseVm:DbEditorVM}">
+            <General:DbEditorCtrl Background="White"/>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,8 +30,11 @@
                     <Setter Property="Command"
                     Value="{Binding Command}" />
 
+                    <Setter Property="IsEnabled"
+                    Value="{Binding IsEnabled}" />
+
                     <Setter Property="ItemsSource"
-                    Value="{Binding Children}" />
+                    Value="{Binding Menus}" />
 
                     <Style.Triggers>
 
@@ -55,9 +62,11 @@
                 </Style>
             </Menu.ItemContainerStyle>
         </Menu>
-        <General:DbEditorCtrl Grid.Row="1"
-            Visibility="{Binding IsDbOpened, Converter={StaticResource VisibleIfTrueConverter}}"
-            DataContext="{Binding DbEditor}" />
+        <Grid Grid.Row="1" Background="#8B8B8B">
+            <ContentControl  
+                        Content="{Binding CurrentView}" >
+            </ContentControl>
+        </Grid>
         <Expander Grid.Row="3"
                   ExpandDirection="Down"
                   Header="Logs">

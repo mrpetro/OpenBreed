@@ -43,6 +43,10 @@ namespace OpenBreed.Editor.VM
         private readonly IDialogProvider dialogProvider;
         private EditorState _state;
         private string title;
+        private bool _isDbOpened;
+        private string _dbName;
+        private readonly Func<DbEditorVM> dbEditorInitializer;
+        private BaseViewModel currentView;
 
         #endregion Private Fields
 
@@ -56,7 +60,7 @@ namespace OpenBreed.Editor.VM
             SettingsMan settings,
             DbEntryEditorFactory dbEntryEditorFactory,
             IDialogProvider dialogProvider,
-            DbEditorVM dbEditor)
+            Func<DbEditorVM> dbEditorInitializer)
         {
             this.dataSourceProvider = dataSourceProvider;
             this.modelsProvider = modelsProvider;
@@ -65,19 +69,15 @@ namespace OpenBreed.Editor.VM
             this.settings = settings;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
             this.dialogProvider = dialogProvider;
-
-            DbEditor = dbEditor;
+            this.dbEditorInitializer = dbEditorInitializer;
 
             Logger = managerCollection.GetService<LoggerVM>();
 
             ExitCommand = new Command(() => TryExit());
             OpenDatabaseCommand = new Command(() => TryOpenXmlDatabase());
-            SaveDatabaseCommand = new Command(() => TrySaveDatabase());
-            CloseDatabaseCommand = new Command(() => TryCloseDatabase());
             ShowOptionsCommand = new Command(() => ShowOptions());
 
             ShowAbtaPasswordGeneratorCommand = new Command(() => ShowAbtaPasswordGenerator());
-            DbEditor.PropertyChanged += DbEditor_PropertyChanged;
 
             UpdateTitle();
             RebuildMenus();
@@ -91,10 +91,6 @@ namespace OpenBreed.Editor.VM
 
         public ICommand OpenDatabaseCommand { get; }
 
-        public ICommand SaveDatabaseCommand { get; }
-
-        public ICommand CloseDatabaseCommand { get; }
-
         public ICommand ShowOptionsCommand { get; }
 
         public ICommand ToggleTablesEditorCommand { get; }
@@ -107,9 +103,7 @@ namespace OpenBreed.Editor.VM
 
         public LoggerVM Logger { get; }
 
-        public DbEditorVM DbEditor { get; }
-
-        public ObservableCollection<MenuItemViewModel> Menus { get; } = new();
+        public ObservableCollection<MenuItemVM> Menus { get; } = new();
 
         public string Title
         {
@@ -122,6 +116,25 @@ namespace OpenBreed.Editor.VM
             get { return _state; }
             set { SetProperty(ref _state, value); }
         }
+
+        public bool IsDbOpened
+        {
+            get { return _isDbOpened; }
+            set { SetProperty(ref _isDbOpened, value); }
+        }
+
+        public string DbName
+        {
+            get { return _dbName; }
+            set { SetProperty(ref _dbName, value); }
+        }
+
+        public BaseViewModel CurrentView
+        {
+            get { return currentView; }
+            set { SetProperty(ref currentView, value); }
+        }
+
 
         public Action ExitAction { get; set; }
 
@@ -144,18 +157,6 @@ namespace OpenBreed.Editor.VM
             ShowAbtaPasswordGeneratorAction?.Invoke();
         }
 
-        public bool TryCloseDatabase()
-        {
-            if (TrySaveBeforeClosing())
-            {
-                DbEditor.CloseDatabase();
-
-                return true;
-            }
-            else
-                return false;
-        }
-
         public bool TryOpenXmlDatabase()
         {
             var openFileDialog = dialogProvider.OpenFileDialog();
@@ -173,46 +174,23 @@ namespace OpenBreed.Editor.VM
 
             string databaseFilePath = openFileDialog.FileName;
 
-            if (!CheckCloseCurrentDatabase(databaseFilePath))
-            {
-                return false;
-            }
+            //if (!CheckCloseCurrentDatabase(databaseFilePath))
+            //{
+            //    return false;
+            //}
 
-            DbEditor.OpenXmlDatabase(databaseFilePath);
+            workspaceMan.OpenXmlDatabase(databaseFilePath);
+
+            DbName = workspaceMan.UnitOfWork.Name;
+            IsDbOpened = true;
+
+            CurrentView = dbEditorInitializer.Invoke();
 
             return true;
         }
 
         public void Run()
         {
-        }
-
-        public void TrySaveDatabase()
-        {
-            DbEditor.SaveDatabase();
-        }
-
-        public bool TrySaveBeforeExiting()
-        {
-            if (workspaceMan.UnitOfWork != null)
-            {
-                if (DbEditor.IsModified)
-                {
-                    var answer = dialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before exiting?",
-                                                                               "Save database before exiting?", QuestionDialogButtons.YesNoCancel);
-
-                    if (answer == DialogAnswer.Cancel)
-                    {
-                        return false;
-                    }
-                    else if (answer == DialogAnswer.Yes)
-                    {
-                        DbEditor.SaveDatabase();
-                    }
-                }
-            }
-
-            return true;
         }
 
         public void TryRunABTAGame()
@@ -224,33 +202,33 @@ namespace OpenBreed.Editor.VM
 
         #region Internal Methods
 
-        /// <summary>
-        /// This checks if database is opened already,
-        /// If it is then it asks of it can be closed
-        /// </summary>
-        /// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
-        internal bool CheckCloseCurrentDatabase(string newDatabaseFilePath)
-        {
-            if (workspaceMan.UnitOfWork != null)
-            {
-                if (IOHelper.GetNormalizedPath(newDatabaseFilePath) == IOHelper.GetNormalizedPath(DbEditor.DbName))
-                {
-                    //Root.Logger.Warning("Database already opened.");
-                    return false;
-                }
+        ///// <summary>
+        ///// This checks if database is opened already,
+        ///// If it is then it asks of it can be closed
+        ///// </summary>
+        ///// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
+        //internal bool CheckCloseCurrentDatabase(string newDatabaseFilePath)
+        //{
+        //    if (workspaceMan.UnitOfWork != null)
+        //    {
+        //        if (IOHelper.GetNormalizedPath(newDatabaseFilePath) == IOHelper.GetNormalizedPath(DbName))
+        //        {
+        //            //Root.Logger.Warning("Database already opened.");
+        //            return false;
+        //        }
 
-                var answer = dialogProvider.ShowMessageWithQuestion($"Another database ({DbEditor.DbName}) is already opened. Do you want to close it?",
-                                                                "Close current database?",
-                                                                QuestionDialogButtons.OKCancel);
-                if (answer != DialogAnswer.OK)
-                    return false;
+        //        var answer = dialogProvider.ShowMessageWithQuestion($"Another database ({DbName}) is already opened. Do you want to close it?",
+        //                                                        "Close current database?",
+        //                                                        QuestionDialogButtons.OKCancel);
+        //        if (answer != DialogAnswer.OK)
+        //            return false;
 
-                if (!TryCloseDatabase())
-                    return false;
-            }
+        //        if (!TryCloseDatabase())
+        //            return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         #endregion Internal Methods
 
@@ -262,6 +240,10 @@ namespace OpenBreed.Editor.VM
             {
                 case nameof(State):
                     RebuildMenus();
+                    break;
+
+                case nameof(DbName):
+                    UpdateTitle();
                     break;
 
                 default:
@@ -296,40 +278,26 @@ namespace OpenBreed.Editor.VM
             //}
         }
 
-        private MenuItemViewModel BuildFileMenu()
+        private MenuItemVM BuildFileMenu()
         {
-            var menu = new MenuItemViewModel()
+            var menu = new MenuItemVM()
             {
                 Header = "File",
                 IsEnabled = true
             };
 
-            menu.Children.Add(new MenuItemViewModel()
+            menu.Menus.Add(new MenuItemVM()
             {
                 Header = "Open Database...",
                 Command = OpenDatabaseCommand,
             });
 
-            menu.Children.Add(new MenuItemViewModel()
-            {
-                Header = "Save Database",
-                Command = SaveDatabaseCommand,
-                IsEnabled = true
-            });
-
-            menu.Children.Add(new MenuItemViewModel()
-            {
-                Header = "Close Database",
-                Command = CloseDatabaseCommand,
-                IsEnabled = true
-            });
-
-            menu.Children.Add(new MenuItemViewModel()
+            menu.Menus.Add(new MenuItemVM()
             {
                 IsSeparator = true
             });
 
-            menu.Children.Add(new MenuItemViewModel()
+            menu.Menus.Add(new MenuItemVM()
             {
                 Header = "Exit",
                 Command = ExitCommand,
@@ -339,34 +307,21 @@ namespace OpenBreed.Editor.VM
             return menu;
         }
 
-        private MenuItemViewModel BuildViewMenu()
+        private MenuItemVM BuildViewMenu()
         {
-            var menu = new MenuItemViewModel()
+            var menu = new MenuItemVM()
             {
                 Header = "View",
                 IsEnabled = true
             };
 
-            menu.Children.Add(new MenuItemViewModel()
-            {
-                Header = "Tables editor",
-                Command = DbEditor.OpenTablesEditorCommand,
-                IsEnabled = true
-            });
-
-            menu.Children.Add(new MenuItemViewModel()
-            {
-                Header = "Classes tree editor",
-                Command = DbEditor.OpenClassesTreeEditorCommand,
-                IsEnabled = true
-            });
 
             return menu;
         }
 
-        private MenuItemViewModel BuildToolsMenu()
+        private MenuItemVM BuildToolsMenu()
         {
-            var menu = new MenuItemViewModel()
+            var menu = new MenuItemVM()
             {
                 Header = "Tools",
                 IsEnabled = true
@@ -379,7 +334,7 @@ namespace OpenBreed.Editor.VM
             //    IsEnabled = true
             //});
 
-            menu.Children.Add(new MenuItemViewModel()
+            menu.Menus.Add(new MenuItemVM()
             {
                 Header = "Options...",
                 Command = ShowOptionsCommand,
@@ -393,7 +348,7 @@ namespace OpenBreed.Editor.VM
             //    IsEnabled = true
             //});
 
-            menu.Children.Add(new MenuItemViewModel()
+            menu.Menus.Add(new MenuItemVM()
             {
                 Header = "ABTA Game passwords....",
                 Command = ShowAbtaPasswordGeneratorCommand,
@@ -403,9 +358,9 @@ namespace OpenBreed.Editor.VM
             return menu;
         }
 
-        private MenuItemViewModel BuildRunMenu()
+        private MenuItemVM BuildRunMenu()
         {
-            var menu = new MenuItemViewModel()
+            var menu = new MenuItemVM()
             {
                 Header = "Run game",
                 IsEnabled = true
@@ -437,49 +392,13 @@ namespace OpenBreed.Editor.VM
 
         private void UpdateTitle()
         {
-            if (string.IsNullOrEmpty(DbEditor.DbName))
+            if (string.IsNullOrEmpty(DbName))
             {
                 Title = $"{Definitions.APP_NAME} - {NoDatabaseOpenedInfo}";
                 return;
             }
 
-            Title = $"{Definitions.APP_NAME} - {DbEditor.DbName}";
-        }
-
-        private void DbEditor_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(DbEditor.DbName):
-                    UpdateTitle();
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        private bool TrySaveBeforeClosing()
-        {
-            if (workspaceMan.UnitOfWork != null)
-            {
-                if (DbEditor.IsModified)
-                {
-                    var answer = dialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
-                                                                               "Save database before closing?", QuestionDialogButtons.YesNoCancel);
-
-                    if (answer == DialogAnswer.Cancel)
-                    {
-                        return false;
-                    }
-                    else if (answer == DialogAnswer.Yes)
-                    {
-                        DbEditor.SaveDatabase();
-                    }
-                }
-            }
-
-            return true;
+            Title = $"{Definitions.APP_NAME} - {DbName}";
         }
 
         private void RunABTAGame()

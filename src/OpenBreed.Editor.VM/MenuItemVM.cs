@@ -1,44 +1,34 @@
-﻿using OpenBreed.Editor.VM.Base;
-using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace OpenBreed.Editor.VM
 {
-    public class MenuItemVM : BaseViewModel
+    public class MenuItemVM : ObservableObject
     {
         #region Private Fields
 
-        private string name;
-
-        private bool isChecked;
+        private bool isEnabled = true;
 
         #endregion Private Fields
 
-        #region Public Constructors
-
-        public MenuItemVM(string name, Action clickAction, bool isChecked)
-        {
-            Name = name;
-            ClickAction = clickAction;
-            IsChecked = isChecked;
-        }
-
-        #endregion Public Constructors
-
         #region Public Properties
 
-        public string Name
+        public string Header { get; set; }
+
+        public ICommand Command { get; set; }
+
+        public ObservableCollection<MenuItemVM> Menus { get; set; } = new();
+
+        public bool IsVisible { get; set; } = true;
+
+        public bool IsEnabled
         {
-            get { return name; }
-            set { SetProperty(ref name, value); }
+            get { return isEnabled; }
+            set { SetProperty(ref isEnabled, value); }
         }
 
-        public Action ClickAction { get; }
-
-        public bool IsChecked
-        {
-            get { return isChecked; }
-            set { SetProperty(ref isChecked, value); }
-        }
+        public bool IsSeparator { get; set; }
 
         #endregion Public Properties
     }

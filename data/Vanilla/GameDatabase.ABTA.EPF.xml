@@ -14633,6 +14633,22 @@
         <EntityClass Id="Nash" ParentId="Hero" />
         <EntityClass Id="Hero" ParentId="Actor" />
         <EntityClass Id="Enemy" ParentId="Actor" />
+        <EntityClass Id="Monster" ParentId="Enemy" />
+        <EntityClass Id="Robot" ParentId="Enemy" />
+        <EntityClass Id="Lizard" ParentId="Enemy" />
+        <EntityClass Id="Door" ParentId="Entity" />
+        <EntityClass Id="Turret" ParentId="Enemy" />
+        <EntityClass Description="Can be picked up." Id="Item" ParentId="Entity" />
+        <EntityClass Id="Medkit" ParentId="Item" />
+        <EntityClass Id="Ammo" ParentId="Item" />
+        <EntityClass Id="Credit" ParentId="Item" />
+        <EntityClass Id="Keycard" ParentId="Item" />
+        <EntityClass Id="SecurityDoor" ParentId="Door" />
+        <EntityClass Id="GenericDoor" ParentId="Door" />
+        <EntityClass Id="Boss" ParentId="Enemy" />
+        <EntityClass Id="Immovable" ParentId="Entity" />
+        <EntityClass Id="NPC" ParentId="Actor" />
+        <EntityClass Id="Robinson" ParentId="NPC" />
       </Items>
     </EntityClasses>
   </Tables>
