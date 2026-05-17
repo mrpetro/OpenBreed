@@ -11,5 +11,9 @@ namespace OpenBreed.Wecs.Core.Components.Xml
     [XmlRoot("Followed")]
     public class XmlFollowedComponent : XmlComponentTemplate, IFollowedComponentTemplate
     {
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new FollowedComponent();
+        }
     }
 }

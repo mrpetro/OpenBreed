@@ -37,24 +37,4 @@
 
         #endregion Public Properties
     }
-
-    public sealed class MetadataComponentFactory : ComponentFactoryBase<IMetadataComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public MetadataComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IMetadataComponentTemplate template)
-        {
-            return new MetadataComponent(template.Level, template.Name, template.Option, template.Flavor);
-        }
-
-        #endregion Protected Methods
-    }
 }

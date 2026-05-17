@@ -51,18 +51,4 @@ namespace OpenBreed.Wecs.Core.Components
 
         #endregion Public Methods
     }
-
-
-    public sealed class AngularPositionComponentFactory : ComponentFactoryBase<IAngularPositionComponentTemplate>
-    {
-        public AngularPositionComponentFactory()
-        {
-
-        }
-
-        protected override IEntityComponent Create(IAngularPositionComponentTemplate template)
-        {
-            return new AngularPositionComponent(template.Value);
-        }
-    }
 }

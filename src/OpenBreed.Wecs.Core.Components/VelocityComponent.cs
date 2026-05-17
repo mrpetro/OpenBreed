@@ -66,24 +66,4 @@ namespace OpenBreed.Wecs.Core.Components
 
         #endregion Public Methods
     }
-
-    public sealed class VelocityComponentFactory : ComponentFactoryBase<IVelocityComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public VelocityComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IVelocityComponentTemplate template)
-        {
-            return VelocityComponent.Create(template.X, template.Y);
-        }
-
-        #endregion Protected Methods
-    }
 }

@@ -16,7 +16,7 @@ namespace OpenBreed.Wecs.Abstractions.Attributes
 
         public ComponentNameAttribute(string name)
         {
-            Name = name;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
         #endregion Public Constructors

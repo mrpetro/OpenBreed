@@ -31,17 +31,4 @@ namespace OpenBreed.Wecs.Core.Components
 
         public List<EntityEmit> ToEmit { get; }
     }
-
-    public sealed class EntityEmitterComponentFactory : ComponentFactoryBase<IEntityEmitterComponentTemplate>
-    {
-        public EntityEmitterComponentFactory()
-        {
-
-        }
-
-        protected override IEntityComponent Create(IEntityEmitterComponentTemplate template)
-        {
-            return new EntityEmitterComponent();
-        }
-    }
 }

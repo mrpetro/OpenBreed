@@ -62,31 +62,4 @@ namespace OpenBreed.Wecs.Rendering.Components
         #endregion Public Properties
     }
 
-
-    public sealed class PaletteComponentFactory : ComponentFactoryBase<IPaletteComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-        private readonly IDataLoaderFactory dataLoaderFactory;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public PaletteComponentFactory()
-        {
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IPaletteComponentTemplate template)
-        {
-            return new PaletteComponent();
-        }
-
-        #endregion Protected Methods
-    }
 }

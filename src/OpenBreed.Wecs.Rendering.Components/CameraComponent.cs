@@ -51,36 +51,6 @@ namespace OpenBreed.Wecs.Rendering.Components
         #endregion Public Properties
     }
 
-    public sealed class CameraComponentFactory : ComponentFactoryBase<ICameraComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-
-        #endregion Private Fields
-
-        #region Internal Constructors
-
-        public CameraComponentFactory(IBuilderFactory builderFactory)
-        {
-            this.builderFactory = builderFactory;
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ICameraComponentTemplate template)
-        {
-            var builder = builderFactory.GetBuilder<CameraComponentBuilder>();
-            builder.SetSize(template.Width, template.Height);
-            builder.SetBrightness(template.Brightness);
-            return builder.Build();
-        }
-
-        #endregion Protected Methods
-    }
-
     public class CameraComponentBuilder : IBuilder<CameraComponent>
     {
         #region Internal Fields

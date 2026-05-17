@@ -50,46 +50,6 @@ namespace OpenBreed.Wecs.Control.Components
         #endregion Public Properties
     }
 
-    public sealed class AnimationComponentFactory : ComponentFactoryBase<IAnimationComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public AnimationComponentFactory(IBuilderFactory builderFactory)
-        {
-            this.builderFactory = builderFactory;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IAnimationComponentTemplate template)
-        {
-            var builder = builderFactory.GetBuilder<AnimationComponentBuilder>();
-
-            foreach (var stateTemplate in template.States)
-            {
-                var stateBuilder = builder.AddState();
-
-                if (!string.IsNullOrEmpty(stateTemplate.ClipName))
-                    stateBuilder.SetClipByName(stateTemplate.ClipName);
-
-                stateBuilder.SetLoop(stateTemplate.Loop);
-                stateBuilder.SetSpeed(stateTemplate.Speed);
-            }
-
-            return builder.Build();
-        }
-
-        #endregion Protected Methods
-    }
-
     public class AnimationComponentBuilder : IBuilder<AnimationComponent>
     {
         #region Internal Fields

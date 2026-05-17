@@ -12,7 +12,20 @@ namespace OpenBreed.Common.Game.Wecs.Components.Xml
     [XmlRoot("Lives")]
     public class XmlLivesComponent : XmlComponentTemplate, ILivesComponentTemplate
     {
+        #region Public Properties
+
         [XmlElement("Value")]
         public int Value { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new LivesComponent(Value);
+        }
+
+        #endregion Public Methods
     }
 }

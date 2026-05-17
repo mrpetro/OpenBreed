@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Wecs.Components.Xml;
+using System;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Wecs.Core.Components.Xml
@@ -15,5 +16,14 @@ namespace OpenBreed.Wecs.Core.Components.Xml
         public int Y { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return GridPositionComponent.Create(X, Y);
+        }
+
+        #endregion Public Methods
     }
 }

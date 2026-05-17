@@ -42,40 +42,6 @@ namespace OpenBreed.Wecs.Rendering.Components
         //public int CameraEntityId { get; set; }
     }
 
-    public sealed class ViewportComponentFactory : ComponentFactoryBase<IViewportComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public ViewportComponentFactory(IBuilderFactory builderFactory)
-        {
-            this.builderFactory = builderFactory;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IViewportComponentTemplate template)
-        {
-            var builder = builderFactory.GetBuilder<ViewportComponentBuilder>();
-            builder.SetBackgroundColor(template.BackgroundColor);
-            builder.SetClippingFlag(template.Clipping);
-            builder.SetDrawBackgroundFlag(template.DrawBackgroud);
-            builder.SetDrawBorderFlag(template.DrawBorder);
-            builder.SetSize(template.Width, template.Height);
-
-            return builder.Build();
-        }
-
-        #endregion Protected Methods
-    }
-
     /// <summary>
     /// Viewport component as display for cameras
     /// Related systems:

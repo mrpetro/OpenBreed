@@ -34,5 +34,27 @@ namespace OpenBreed.Wecs.Components.Xml
         public XmlOnTriggerActionTemplate[] XmlActions { get; set; } = Array.Empty<XmlOnTriggerActionTemplate>();
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            var actions = GetActions(Actions);
+            return new OnTriggerComponent(actions);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private IEnumerable<OnTriggerAction> GetActions(IEnumerable<IOnTriggerActionTemplate> actionTemplates)
+        {
+            foreach (var actionTemplate in actionTemplates)
+            {
+                yield return new OnTriggerAction(actionTemplate.Trigger, actionTemplate.Action);
+            }
+        }
+
+        #endregion Private Methods
     }
 }

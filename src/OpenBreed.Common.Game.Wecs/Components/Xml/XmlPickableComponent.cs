@@ -12,7 +12,20 @@ namespace OpenBreed.Common.Game.Wecs.Components.Xml
     [XmlRoot("Pickable")]
     public class XmlPickableComponent : XmlComponentTemplate, IPickableComponentTemplate
     {
+        #region Public Properties
+
         [XmlElement("Value")]
         public int Value { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new PickableComponent(Value);
+        }
+
+        #endregion Public Methods
     }
 }

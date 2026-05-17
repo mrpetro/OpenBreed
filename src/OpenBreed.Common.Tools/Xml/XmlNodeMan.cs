@@ -42,7 +42,7 @@ namespace OpenBreed.Common.Tools.Xml
         /// <summary>
         /// Enabling this property will case XmlNodeMan not to throw exception when reading unrecognised node types, but skip them
         /// </summary>
-        public bool IgnoreUnknownNodes { get; set; }
+        public bool IgnoreUnknownNodes { get; set; } = true;
 
         #endregion
 
@@ -55,8 +55,10 @@ namespace OpenBreed.Common.Tools.Xml
         /// </summary>
         /// <typeparam name="T">Type of object to be deserialized</typeparam>
         /// <param name="reader">XmlReader that currently reads the XML</param>
-        /// <returns>Deserialized object of type T</returns>
-        public T DeserializeXml<T>(XmlReader reader)
+        /// <param name="obj">Deserialized object of type T</param>
+        /// <returns>True if object was deserialized, false otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public bool DeserializeXml<T>(XmlReader reader, out T deserialized)
         {
             try
             {
@@ -66,16 +68,16 @@ namespace OpenBreed.Common.Tools.Xml
                 {
                     if (IgnoreUnknownNodes || reader.NodeType == XmlNodeType.Comment)
                     {
-                        reader.Skip();
-                        return default(T);
+                        deserialized = default;
+                        return false;
                     }
                     else
                         throw new InvalidOperationException($"Unknown node type '{nodeName}'");
                 }
 
                 var xmlSerializer = new XmlSerializer(nodeType);
-                var deserialized = (T)xmlSerializer.Deserialize(reader);
-                return deserialized;
+                deserialized = (T)xmlSerializer.Deserialize(reader);
+                return true;
             }
             catch (Exception ex)
             {

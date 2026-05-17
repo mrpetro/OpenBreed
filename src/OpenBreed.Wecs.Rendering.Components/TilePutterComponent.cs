@@ -162,44 +162,4 @@ namespace OpenBreed.Wecs.Rendering.Components
 
         #endregion Public Methods
     }
-
-    public sealed class TilePutterComponentFactory : ComponentFactoryBase<ITilePutterComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public TilePutterComponentFactory(IBuilderFactory builderFactory)
-        {
-            this.builderFactory = builderFactory;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ITilePutterComponentTemplate template)
-        {
-            var tilePutterBuilder = builderFactory.GetBuilder<TilePutterComponentBuilder>();
-
-            var dataBuilder = tilePutterBuilder.CreateData();
-
-            foreach (var item in template.Items)
-            {
-                dataBuilder.SetAtlasByName(item.AtlasName);
-                dataBuilder.SetImageIndex(item.ImageIndex);
-                dataBuilder.SetPosition(item.Position);
-
-                tilePutterBuilder.AddData(dataBuilder.Build());
-            }
-
-            return tilePutterBuilder.Build();
-        }
-
-        #endregion Protected Methods
-    }
 }

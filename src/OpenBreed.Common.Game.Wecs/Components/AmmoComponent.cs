@@ -44,27 +44,4 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #endregion Public Methods
     }
-
-    public sealed class AmmoComponentFactory : ComponentFactoryBase<IAmmoComponentTemplate>
-    {
-        #region Public Constructors
-
-        public AmmoComponentFactory()
-        {
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IAmmoComponentTemplate template)
-        {
-            return new AmmoComponent(
-                template.MaximumRoundsCount,
-                template.RoundsCount,
-                template.MagazinesCount);
-        }
-
-        #endregion Protected Methods
-    }
 }

@@ -12,5 +12,13 @@ namespace OpenBreed.Common.Game.Wecs.Components.Xml
     [XmlRoot("Damager")]
     public class XmlDamagerComponent : XmlComponentTemplate, IDamagerComponentTemplate
     {
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new DamagerComponent();
+        }
+
+        #endregion Public Methods
     }
 }

@@ -34,25 +34,4 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #endregion Public Properties
     }
-
-    public sealed class KeysComponentFactory : ComponentFactoryBase<IKeysComponentTemplate>
-    {
-        #region Public Constructors
-
-        public KeysComponentFactory()
-        {
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IKeysComponentTemplate template)
-        {
-            return new KeysComponent(
-                template.GeneralCount);
-        }
-
-        #endregion Protected Methods
-    }
 }

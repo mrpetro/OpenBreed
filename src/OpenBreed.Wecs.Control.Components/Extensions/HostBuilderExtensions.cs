@@ -16,7 +16,6 @@ namespace OpenBreed.Wecs.Control.Components.Extensions
         public static void SetupWecsControlComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

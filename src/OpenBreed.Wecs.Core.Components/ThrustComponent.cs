@@ -66,24 +66,4 @@ namespace OpenBreed.Wecs.Core.Components
 
         #endregion Public Methods
     }
-
-    public sealed class ThrustComponentFactory : ComponentFactoryBase<IThrustComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public ThrustComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IThrustComponentTemplate template)
-        {
-            return ThrustComponent.Create(template.X, template.Y);
-        }
-
-        #endregion Protected Methods
-    }
 }

@@ -68,24 +68,4 @@ namespace OpenBreed.Wecs.Core.Components
 
         #endregion Public Methods
     }
-
-    public sealed class PositionComponentFactory : ComponentFactoryBase<IPositionComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public PositionComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IPositionComponentTemplate template)
-        {
-            return PositionComponent.Create(template.X, template.Y);
-        }
-
-        #endregion Protected Methods
-    }
 }

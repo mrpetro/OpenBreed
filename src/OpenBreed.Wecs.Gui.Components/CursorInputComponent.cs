@@ -39,39 +39,4 @@ namespace OpenBreed.Wecs.Gui.Components
 
         #endregion Public Properties
     }
-
-    public sealed class CursorInputComponentFactory : ComponentFactoryBase<ICursorInputComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IActionCodeProvider actionCodeProvider;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public CursorInputComponentFactory(IActionCodeProvider actionCodeProvider)
-        {
-            this.actionCodeProvider = actionCodeProvider;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ICursorInputComponentTemplate template)
-        {
-            var actions = new List<int>();
-
-            //foreach (var action in template.Actions)
-            //{
-            //    if (actionCodeProvider.TryGetCode(action.Type, action.Name, out int code))
-            //        actions.Add(code);
-            //}
-
-            return new CursorInputComponent(actions);
-        }
-
-        #endregion Protected Methods
-    }
 }

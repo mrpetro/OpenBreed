@@ -46,47 +46,6 @@ namespace OpenBreed.Fsm
         #endregion Public Properties
     }
 
-    public sealed class FsmComponentFactory : ComponentFactoryBase<IFsmComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IFsmMan fsmMan;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public FsmComponentFactory(IFsmMan fsmMan)
-        {
-            this.fsmMan = fsmMan;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IFsmComponentTemplate template)
-        {
-            var fsmComponentBuilder = Create();
-
-            foreach (var state in template.States)
-                fsmComponentBuilder.AddState(state.FsmName, state.StateName);
-
-            return fsmComponentBuilder.Build();
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private FsmComponentBuilder Create()
-        {
-            return new FsmComponentBuilder(fsmMan);
-        }
-
-        #endregion Private Methods
-    }
-
     public class FsmComponentBuilder
     {
         #region Internal Fields

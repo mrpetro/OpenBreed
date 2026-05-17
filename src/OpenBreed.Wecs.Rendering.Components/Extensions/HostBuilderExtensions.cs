@@ -12,7 +12,6 @@ namespace OpenBreed.Wecs.Rendering.Components.Extensions
         public static void SetupWecsRenderingComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

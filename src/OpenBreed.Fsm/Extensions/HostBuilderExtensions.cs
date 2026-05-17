@@ -13,7 +13,6 @@ namespace OpenBreed.Fsm.Extensions
         public static void SetupWecsFsmComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         public static void SetupFsmManager(this IHostBuilder hostBuilder, Action<IFsmMan, IServiceProvider> action)

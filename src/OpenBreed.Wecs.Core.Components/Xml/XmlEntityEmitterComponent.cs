@@ -11,5 +11,13 @@ namespace OpenBreed.Wecs.Core.Components.Xml
     [XmlRoot("EntityEmitter")]
     public class XmlEntityEmitterComponent : XmlComponentTemplate, IEntityEmitterComponentTemplate
     {
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new EntityEmitterComponent();
+        }
+
+        #endregion Public Methods
     }
 }

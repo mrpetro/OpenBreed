@@ -6,26 +6,6 @@ namespace OpenBreed.Common.Game.Wecs.Components
     {
     }
 
-    public sealed class WeaponsComponentFactory : ComponentFactoryBase<IWeaponsComponentTemplate>
-    {
-        #region Public Constructors
-
-        public WeaponsComponentFactory()
-        {
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IWeaponsComponentTemplate template)
-        {
-            return new WeaponsComponent();
-        }
-
-        #endregion Protected Methods
-    }
-
     public class WeaponsComponent : IEntityComponent
     {
         #region Public Constructors

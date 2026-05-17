@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices.JavaScript;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -15,6 +16,8 @@ namespace OpenBreed.Wecs.Components.Xml
         public XmlComponentsList() : base()
         {
         }
+
+        private readonly List<IEntityComponent> components = new List<IEntityComponent>();
 
         #endregion Public Constructors
 
@@ -46,9 +49,13 @@ namespace OpenBreed.Wecs.Components.Xml
             reader.ReadStartElement(listNodeName);
             while (reader.Name != listNodeName)
             {
-                var outputDef = XmlNodeMan.Instance.DeserializeXml<XmlComponentTemplate>(reader);
-                if (outputDef != null)
+                if (XmlNodeMan.Instance.DeserializeXml<XmlComponentTemplate>(reader, out var outputDef))
+                {
                     this.Add(outputDef);
+                    continue;
+                }
+
+                reader.Skip();
             }
             reader.ReadEndElement();
         }

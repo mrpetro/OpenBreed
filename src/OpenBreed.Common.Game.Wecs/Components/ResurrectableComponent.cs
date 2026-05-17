@@ -37,38 +37,4 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #endregion Public Properties
     }
-
-    public sealed class ResurrectableComponentFactory : ComponentFactoryBase<IResurrectableComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IWorldMan worldMan;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public ResurrectableComponentFactory(IWorldMan worldMan)
-        {
-            this.worldMan = worldMan;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IResurrectableComponentTemplate template)
-        {
-            var worldId = WecsConsts.NO_WORLD_ID;
-
-            var world = template.WorldName is null ? null : worldMan.GetByName(template.WorldName);
-
-            if (world is not null)
-                worldId = world.Id;
-
-            return new ResurrectableComponent(worldId);
-        }
-
-        #endregion Protected Methods
-    }
 }

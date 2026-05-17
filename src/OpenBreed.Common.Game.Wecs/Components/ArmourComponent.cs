@@ -30,25 +30,4 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #endregion Public Properties
     }
-
-    public sealed class ArmourComponentFactory : ComponentFactoryBase<IArmourComponentTemplate>
-    {
-        #region Public Constructors
-
-        public ArmourComponentFactory()
-        {
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IArmourComponentTemplate template)
-        {
-            return new ArmourComponent(
-                template.Value);
-        }
-
-        #endregion Protected Methods
-    }
 }

@@ -101,40 +101,6 @@ namespace OpenBreed.Wecs.Rendering.Components
         #endregion Public Properties
     }
 
-    public sealed class SpriteComponentFactory : ComponentFactoryBase<ISpriteComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public SpriteComponentFactory(IBuilderFactory builderFactory)
-        {
-            this.builderFactory = builderFactory;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ISpriteComponentTemplate template)
-        {
-            var builder = builderFactory.GetBuilder<SpriteComponentBuilder>();
-            builder.SetAtlasByName(template.AtlasName);
-            builder.SetImageId(template.ImageIndex);
-            builder.SetOrigin(template.Origin);
-            builder.SetScale(template.Scale);
-            builder.SetOrder(template.Order);
-            builder.SetHidden(template.Hidden);
-            return builder.Build();
-        }
-
-        #endregion Protected Methods
-    }
-
     public class SpriteComponentBuilder : IBuilder<SpriteComponent>
     {
         #region Private Fields

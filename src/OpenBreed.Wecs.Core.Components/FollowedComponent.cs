@@ -27,25 +27,4 @@ namespace OpenBreed.Wecs.Core.Components
 
         #endregion Public Properties
     }
-
-    public sealed class FollowedComponentFactory : ComponentFactoryBase<IFollowedComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public FollowedComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IFollowedComponentTemplate template)
-        {
-            return new FollowedComponent();
-        }
-
-        #endregion Protected Methods
-    }
-
 }

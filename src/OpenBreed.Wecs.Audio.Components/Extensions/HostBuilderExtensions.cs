@@ -12,7 +12,6 @@ namespace OpenBreed.Wecs.Audio.Components.Extensions
         public static void SetupWecsAudioComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

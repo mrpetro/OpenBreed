@@ -29,24 +29,4 @@ namespace OpenBreed.Wecs.Core.Components
 
         #endregion Public Properties
     }
-
-    public sealed class MessagingComponentFactory : ComponentFactoryBase<IMessagingComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public MessagingComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IMessagingComponentTemplate template)
-        {
-            return new MessagingComponent();
-        }
-
-        #endregion Protected Methods
-    }
 }

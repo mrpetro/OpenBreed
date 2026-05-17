@@ -26,18 +26,4 @@
 
         #endregion Public Properties
     }
-
-    public sealed class LifetimeComponentFactory : ComponentFactoryBase<ILifetimeComponentTemplate>
-    {
-        public LifetimeComponentFactory()
-        {
-
-        }
-
-        protected override IEntityComponent Create(ILifetimeComponentTemplate template)
-        {
-            return new LifetimeComponent(template.TimeLeft);
-        }
-    }
-
 }

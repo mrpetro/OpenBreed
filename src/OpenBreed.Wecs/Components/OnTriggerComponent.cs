@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Wecs.Abstractions.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace OpenBreed.Wecs.Components
 {
@@ -48,6 +50,10 @@ namespace OpenBreed.Wecs.Components
     {
         #region Internal Constructors
 
+        internal OnTriggerComponent()
+        {
+        }
+
         internal OnTriggerComponent(IEnumerable<OnTriggerAction> actions)
         {
             Actions = actions.ToArray();
@@ -62,36 +68,4 @@ namespace OpenBreed.Wecs.Components
         #endregion Public Properties
     }
 
-    public sealed class OnTriggerComponentFactory : ComponentFactoryBase<IOnTriggerComponentTemplate>
-    {
-        #region Public Constructors
-
-        public OnTriggerComponentFactory()
-        {
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IOnTriggerComponentTemplate template)
-        {
-            var actions = GetActions(template.Actions);
-            return new OnTriggerComponent(actions);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private IEnumerable<OnTriggerAction> GetActions(IEnumerable<IOnTriggerActionTemplate> actionTemplates)
-        {
-            foreach (var actionTemplate in actionTemplates)
-            {
-                yield return new OnTriggerAction(actionTemplate.Trigger, actionTemplate.Action);
-            }
-        }
-
-        #endregion Private Methods
-    }
 }

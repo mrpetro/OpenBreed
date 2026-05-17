@@ -84,37 +84,4 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #endregion Public Methods
     }
-
-    public sealed class DataGridComponentFactory : ComponentFactoryBase<IDataGridComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public DataGridComponentFactory(IBuilderFactory builderFactory)
-        {
-            this.builderFactory = builderFactory;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IDataGridComponentTemplate template)
-        {
-            var builder = builderFactory.GetBuilder<DataGridComponentBuilder>();
-
-            builder.SetGrid(
-                template.Width,
-                template.Height);
-
-            return builder.Build();
-        }
-
-        #endregion Protected Methods
-    }
 }

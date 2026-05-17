@@ -112,40 +112,6 @@ namespace OpenBreed.Wecs.Rendering.Components
         #endregion Public Properties
     }
 
-    public sealed class TextComponentFactory : ComponentFactoryBase<ITextComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public TextComponentFactory(IBuilderFactory builderFactory)
-        {
-            this.builderFactory = builderFactory;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ITextComponentTemplate template)
-        {
-            var builder = builderFactory.GetBuilder<TextComponentBuilder>();
-            builder.SetColor(template.Color);
-            builder.SetFont(template.FontName, template.FontSize);
-            builder.SetOffset(template.Offset);
-            builder.SetOrder(template.Order);
-            builder.SetText(template.Text);
-
-            return builder.Build();
-        }
-
-        #endregion Protected Methods
-    }
-
     public class TextComponentBuilder : IBuilder<TextComponent>
     {
         #region Private Fields

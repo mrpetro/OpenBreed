@@ -1,4 +1,8 @@
-﻿using OpenBreed.Wecs.Components.Xml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common;
+using OpenBreed.Common.Interface;
+using OpenBreed.Wecs.Components.Xml;
+using System;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Wecs.Rendering.Components.Xml
@@ -13,5 +17,19 @@ namespace OpenBreed.Wecs.Rendering.Components.Xml
         public float Brightness { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            var builderFactory = serviceProvider.GetRequiredService<IBuilderFactory>();
+
+            var builder = builderFactory.GetBuilder<CameraComponentBuilder>();
+            builder.SetSize(Width, Height);
+            builder.SetBrightness(Brightness);
+            return builder.Build();
+        }
+
+        #endregion Public Methods
     }
 }

@@ -1,4 +1,8 @@
-﻿using OpenBreed.Wecs.Components.Xml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common;
+using OpenBreed.Common.Interface;
+using OpenBreed.Wecs.Components.Xml;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,6 +29,30 @@ namespace OpenBreed.Wecs.Control.Components.Xml
         }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            var builderFactory = serviceProvider.GetRequiredService<IBuilderFactory>();
+
+            var builder = builderFactory.GetBuilder<AnimationComponentBuilder>();
+
+            foreach (var stateTemplate in States)
+            {
+                var stateBuilder = builder.AddState();
+
+                if (!string.IsNullOrEmpty(stateTemplate.ClipName))
+                    stateBuilder.SetClipByName(stateTemplate.ClipName);
+
+                stateBuilder.SetLoop(stateTemplate.Loop);
+                stateBuilder.SetSpeed(stateTemplate.Speed);
+            }
+
+            return builder.Build();
+        }
+
+        #endregion Public Methods
     }
 
     public class XmlAnimationState : IAnimationStateTemplate
@@ -42,5 +70,4 @@ namespace OpenBreed.Wecs.Control.Components.Xml
 
         #endregion Public Properties
     }
-
 }

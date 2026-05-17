@@ -33,25 +33,4 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #endregion Public Properties
     }
-
-    public sealed class PickableComponentFactory : ComponentFactoryBase<IPickableComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public PickableComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IPickableComponentTemplate template)
-        {
-            return new PickableComponent(
-                template.Value);
-        }
-
-        #endregion Protected Methods
-    }
 }

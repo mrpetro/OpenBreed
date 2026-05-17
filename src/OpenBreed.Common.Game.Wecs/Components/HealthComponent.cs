@@ -33,26 +33,4 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #endregion Public Properties
     }
-
-    public sealed class HealthComponentFactory : ComponentFactoryBase<IHealthComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public HealthComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IHealthComponentTemplate template)
-        {
-            return new HealthComponent(
-                template.MaximumRoundsCount,
-                template.RoundsCount);
-        }
-
-        #endregion Protected Methods
-    }
 }

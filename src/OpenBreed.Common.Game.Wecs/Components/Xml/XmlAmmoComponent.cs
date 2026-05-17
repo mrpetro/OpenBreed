@@ -12,6 +12,8 @@ namespace OpenBreed.Common.Game.Wecs.Components.Xml
     [XmlRoot("Ammo")]
     public class XmlAmmoComponent : XmlComponentTemplate, IAmmoComponentTemplate
     {
+        #region Public Properties
+
         [XmlElement("MaximumRoundsCount")]
         public int MaximumRoundsCount { get; set; }
 
@@ -20,5 +22,19 @@ namespace OpenBreed.Common.Game.Wecs.Components.Xml
 
         [XmlElement("MagazinesCount")]
         public int MagazinesCount { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new AmmoComponent(
+                MaximumRoundsCount,
+                RoundsCount,
+                MagazinesCount);
+        }
+
+        #endregion Public Methods
     }
 }

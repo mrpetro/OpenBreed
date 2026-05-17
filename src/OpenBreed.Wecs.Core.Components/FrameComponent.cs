@@ -30,24 +30,4 @@
 
         #endregion Public Properties
     }
-
-    public sealed class FrameComponentFactory : ComponentFactoryBase<IFrameComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public FrameComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IFrameComponentTemplate template)
-        {
-            return new FrameComponent();
-        }
-
-        #endregion Protected Methods
-    }
 }

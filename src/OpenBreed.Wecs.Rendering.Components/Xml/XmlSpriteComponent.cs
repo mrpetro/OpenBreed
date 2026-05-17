@@ -1,8 +1,12 @@
-﻿using OpenBreed.Wecs.Core.Components.Xml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common;
+using OpenBreed.Common.Interface;
+using OpenBreed.Wecs.Components.Xml;
+using OpenBreed.Wecs.Core.Components.Xml;
 using OpenTK.Mathematics;
+using System;
 using System.Xml;
 using System.Xml.Serialization;
-using OpenBreed.Wecs.Components.Xml;
 
 namespace OpenBreed.Wecs.Rendering.Components.Xml
 {
@@ -51,5 +55,23 @@ namespace OpenBreed.Wecs.Rendering.Components.Xml
         public XmlVector2 XmlScale { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            var builderFactory = serviceProvider.GetRequiredService<IBuilderFactory>();
+
+            var builder = builderFactory.GetBuilder<SpriteComponentBuilder>();
+            builder.SetAtlasByName(AtlasName);
+            builder.SetImageId(ImageIndex);
+            builder.SetOrigin(Origin);
+            builder.SetScale(Scale);
+            builder.SetOrder(Order);
+            builder.SetHidden(Hidden);
+            return builder.Build();
+        }
+
+        #endregion Public Methods
     }
 }

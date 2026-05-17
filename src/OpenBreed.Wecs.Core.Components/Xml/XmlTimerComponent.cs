@@ -11,5 +11,13 @@ namespace OpenBreed.Wecs.Core.Components.Xml
     [XmlRoot("Timer")]
     public class XmlTimerComponent : XmlComponentTemplate, ITimerComponentTemplate
     {
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new TimerComponent();
+        }
+
+        #endregion Public Methods
     }
 }

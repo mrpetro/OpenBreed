@@ -1,9 +1,13 @@
-﻿using OpenBreed.Wecs.Core.Components.Xml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common;
+using OpenBreed.Common.Interface;
+using OpenBreed.Wecs.Components.Xml;
+using OpenBreed.Wecs.Core.Components.Xml;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Mathematics;
+using System;
 using System.Xml.Serialization;
-using OpenBreed.Wecs.Components.Xml;
 
 namespace OpenBreed.Wecs.Rendering.Components.Xml
 {
@@ -38,5 +42,23 @@ namespace OpenBreed.Wecs.Rendering.Components.Xml
         public XmlColor4 XmlColor { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            var builderFactory = serviceProvider.GetRequiredService<IBuilderFactory>();
+
+            var builder = builderFactory.GetBuilder<TextComponentBuilder>();
+            builder.SetColor(Color);
+            builder.SetFont(FontName, FontSize);
+            builder.SetOffset(Offset);
+            builder.SetOrder(Order);
+            builder.SetText(Text);
+
+            return builder.Build();
+        }
+
+        #endregion Public Methods
     }
 }

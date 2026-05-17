@@ -11,5 +11,9 @@ namespace OpenBreed.Wecs.Core.Components.Xml
     [XmlRoot("Frame")]
     public class XmlFrameComponent : XmlComponentTemplate, IFrameComponentTemplate
     {
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new FrameComponent();
+        }
     }
 }

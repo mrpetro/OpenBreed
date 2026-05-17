@@ -38,18 +38,4 @@ namespace OpenBreed.Wecs.Core.Components
 
         #endregion Public Methods
     }
-
-
-    public sealed class AngularVelocityComponentFactory : ComponentFactoryBase<IAAngularVelocityComponentTemplate>
-    {
-        public AngularVelocityComponentFactory()
-        {
-
-        }
-
-        protected override IEntityComponent Create(IAAngularVelocityComponentTemplate template)
-        {
-            return new AngularVelocityComponent(template.Value);
-        }
-    }
 }

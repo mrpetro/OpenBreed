@@ -23,24 +23,4 @@ namespace OpenBreed.Wecs.Audio.Components
 
         #endregion Public Properties
     }
-
-    public sealed class SoundPlayerComponentFactory : ComponentFactoryBase<ISoundPlayerComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public SoundPlayerComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ISoundPlayerComponentTemplate template)
-        {
-            return new SoundPlayerComponent();
-        }
-
-        #endregion Protected Methods
-    }
 }

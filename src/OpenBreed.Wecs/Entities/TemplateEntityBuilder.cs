@@ -16,7 +16,7 @@ namespace OpenBreed.Wecs.Entities
 
         private readonly EntityFactory entityFactory;
         private readonly EntityMan entityMan;
-        private readonly IComponentFactoryProvider componentFactoryProvider;
+        private readonly IServiceProvider serviceProvider;
         private readonly IEntityTemplateLoader entityTemplateLoader;
         private readonly string templateName;
         private string tag;
@@ -29,13 +29,13 @@ namespace OpenBreed.Wecs.Entities
         public TemplateEntityBuilder(
             EntityFactory entityFactory,
             EntityMan entityMan,
-            IComponentFactoryProvider componentFactoryProvider,
+            IServiceProvider serviceProvider,
             IEntityTemplateLoader entityTemplateLoader,
             string templateName)
         {
             this.entityFactory = entityFactory;
             this.entityMan = entityMan;
-            this.componentFactoryProvider = componentFactoryProvider;
+            this.serviceProvider = serviceProvider;
             this.entityTemplateLoader = entityTemplateLoader;
             this.templateName = templateName;
         }
@@ -64,12 +64,13 @@ namespace OpenBreed.Wecs.Entities
 
             foreach (var componentTemplate in entityTemplate.Components)
             {
-                var componentFactory = componentFactoryProvider.GetFactory(componentTemplate.GetType());
+                var component = componentTemplate.ToComponent(serviceProvider);
 
-                if (componentFactory is null)
-                    throw new Exception($"Don't know how to create component based on template '{componentTemplate.GetType()}'");
-
-                components.Add(componentFactory.Create(componentTemplate));
+                if (component != null)
+                {
+                    components.Add(component);
+                    continue;
+                }
             }
 
             var newEntity = new Entity(entityMan, tag, components);

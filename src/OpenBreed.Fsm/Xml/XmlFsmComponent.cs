@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
 using OpenBreed.Wecs.Components.Xml;
+using System;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace OpenBreed.Fsm.Xml
 {
@@ -32,5 +34,20 @@ namespace OpenBreed.Fsm.Xml
         public XmlMachineStateTemplate[] XmlStates { get; set; }
 
         #endregion Public Properties
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            var fsmMan = serviceProvider.GetRequiredService<IFsmMan>();
+
+            var fsmComponentBuilder = new FsmComponentBuilder(fsmMan);
+
+            foreach (var state in States)
+                fsmComponentBuilder.AddState(state.FsmName, state.StateName);
+
+            return fsmComponentBuilder.Build();
+        }
+
+
+
     }
 }

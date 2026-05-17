@@ -44,24 +44,4 @@ namespace OpenBreed.Wecs.Physics.Components
 
         #endregion Public Properties
     }
-
-    public sealed class MotionComponentFactory : ComponentFactoryBase<IMotionComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public MotionComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IMotionComponentTemplate template)
-        {
-            return new MotionComponent();
-        }
-
-        #endregion Protected Methods
-    }
 }

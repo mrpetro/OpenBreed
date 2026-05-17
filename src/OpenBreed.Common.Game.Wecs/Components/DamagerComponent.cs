@@ -20,26 +20,6 @@ namespace OpenBreed.Common.Game.Wecs.Components
         #endregion Public Properties
     }
 
-    public sealed class DamagerComponentFactory : ComponentFactoryBase<IDamagerComponentTemplate>
-    {
-        #region Public Constructors
-
-        public DamagerComponentFactory()
-        {
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IDamagerComponentTemplate template)
-        {
-            return new DamagerComponent();
-        }
-
-        #endregion Protected Methods
-    }
-
     public class DamageInfliction
     {
         #region Public Constructors

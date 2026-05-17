@@ -12,10 +12,25 @@ namespace OpenBreed.Common.Game.Wecs.Components.Xml
     [XmlRoot("Health")]
     public class XmlHealthComponent : XmlComponentTemplate, IHealthComponentTemplate
     {
+        #region Public Properties
+
         [XmlElement("MaximumValue")]
         public int MaximumRoundsCount { get; set; }
 
         [XmlElement("Value")]
         public int RoundsCount { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new HealthComponent(
+                MaximumRoundsCount,
+                RoundsCount);
+        }
+
+        #endregion Public Methods
     }
 }

@@ -113,7 +113,6 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
         internal static void SetupWecsGameCommonComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Internal Methods

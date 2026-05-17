@@ -25,25 +25,4 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #endregion Public Properties
     }
-
-    public sealed class CreditsComponentFactory : ComponentFactoryBase<ICreditsComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public CreditsComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ICreditsComponentTemplate template)
-        {
-            return new CreditsComponent(
-                template.Value);
-        }
-
-        #endregion Protected Methods
-    }
 }

@@ -46,17 +46,4 @@ namespace OpenBreed.Wecs.Core.Components
 
         #endregion Public Methods
     }
-
-    public sealed class AngularThrustComponentFactory : ComponentFactoryBase<IAngularThrustComponentTemplate>
-    {
-        public AngularThrustComponentFactory()
-        {
-
-        }
-
-        protected override IEntityComponent Create(IAngularThrustComponentTemplate template)
-        {
-            return new AngularThrustComponent(template.Value);
-        }
-    }
 }

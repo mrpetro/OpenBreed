@@ -9,5 +9,9 @@ namespace OpenBreed.Wecs.Components.Xml
 {
     public class XmlComponentTemplate : IComponentTemplate
     {
+        public virtual IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return null;
+        }
     }
 }

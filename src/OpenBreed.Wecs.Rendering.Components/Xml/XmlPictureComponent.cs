@@ -1,8 +1,13 @@
-﻿using OpenBreed.Wecs.Core.Components.Xml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OpenBreed.Common;
+using OpenBreed.Common.Interface;
+using OpenBreed.Rendering.Abstractions.Data;
+using OpenBreed.Wecs.Components.Xml;
+using OpenBreed.Wecs.Core.Components.Xml;
 using OpenTK;
 using OpenTK.Mathematics;
+using System;
 using System.Xml.Serialization;
-using OpenBreed.Wecs.Components.Xml;
 
 namespace OpenBreed.Wecs.Rendering.Components.Xml
 {
@@ -37,5 +42,26 @@ namespace OpenBreed.Wecs.Rendering.Components.Xml
         public int Order { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            var dataLoaderFactory = serviceProvider.GetRequiredService<IDataLoaderFactory>();
+            var builderFactory = serviceProvider.GetRequiredService<IBuilderFactory>();
+
+            var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
+
+            pictureDataLoader.Load(ImageName);
+
+            var builder = builderFactory.GetBuilder<PictureComponentBuilder>();
+            builder.SetImageByName(ImageName);
+            builder.SetOrigin(Origin);
+            builder.SetOrder(Order);
+            builder.SetColor(Color);
+            return builder.Build();
+        }
+
+        #endregion Public Methods
     }
 }

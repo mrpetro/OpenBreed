@@ -12,7 +12,6 @@ namespace OpenBreed.Wecs.Physics.Components.Extensions
         public static void SetupWecsPhysicsComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

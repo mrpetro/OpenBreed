@@ -34,7 +34,6 @@ namespace OpenBreed.Wecs.Extensions
         {
             hostBuilder.SetupWecsManagers();
             hostBuilder.SetupWecsSystemFactory();
-            hostBuilder.SetupWecsComponentFactoryProvider();
             hostBuilder.SetupWecsEntityFactory();
             hostBuilder.SetupWecsXmlEntityTemplateLoader();
             hostBuilder.SetupWecsComponents();
@@ -67,28 +66,6 @@ namespace OpenBreed.Wecs.Extensions
             });
         }
 
-        public static void SetupWecsAssemblyComponentFactories(this IHostBuilder hostBuilder)
-        {
-            var callingAssembly = Assembly.GetCallingAssembly();
-
-            var componentFactoryServiceTypes = new List<Type>();
-
-            foreach (var type in callingAssembly
-                .DefinedTypes
-                .Where(type => type.ImplementedInterfaces.Any(item => item == typeof(IComponentFactory))))
-            {
-                componentFactoryServiceTypes.Add(type);
-            }
-
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                foreach (var type in componentFactoryServiceTypes)
-                {
-                    services.AddScoped(type);
-                }
-            });
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
@@ -96,7 +73,6 @@ namespace OpenBreed.Wecs.Extensions
         internal static void SetupWecsComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         internal static void SetupWecsXmlEntityTemplateLoader(this IHostBuilder hostBuilder)
@@ -113,14 +89,6 @@ namespace OpenBreed.Wecs.Extensions
             {
                 services.AddScoped<IEntityFactory, EntityFactory>()
                 .AddScoped((sp) => new Lazy<IEntityFactory>(() => sp.GetRequiredService<IEntityFactory>()));
-            });
-        }
-
-        internal static void SetupWecsComponentFactoryProvider(this IHostBuilder hostBuilder)
-        {
-            hostBuilder.ConfigureServices((hostContext, services) =>
-            {
-                services.AddScoped<IComponentFactoryProvider>((sp) => new ComponentFactoryProvider(services, sp));
             });
         }
 

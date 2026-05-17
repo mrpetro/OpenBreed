@@ -12,7 +12,6 @@ namespace OpenBreed.Wecs.Scripting.Components.Extensions
         public static void SetupWecsScriptingComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         #endregion Public Methods

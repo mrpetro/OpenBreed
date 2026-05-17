@@ -109,7 +109,6 @@ namespace OpenBreed.Sandbox.Extensions
         public static void SetupWecsSandboxComponents(this IHostBuilder hostBuilder)
         {
             XmlComponentsList.RegisterAllAssemblyComponentTypes();
-            hostBuilder.SetupWecsAssemblyComponentFactories();
         }
 
         public static void SetupMapLegacyDataLoader(this IHostBuilder hostBuilder)

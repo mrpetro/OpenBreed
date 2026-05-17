@@ -32,25 +32,4 @@ namespace OpenBreed.Common.Game.Wecs.Components
 
         #endregion Public Properties
     }
-
-    public sealed class LivesComponentFactory : ComponentFactoryBase<ILivesComponentTemplate>
-    {
-        #region Internal Constructors
-
-        public LivesComponentFactory()
-        {
-        }
-
-        #endregion Internal Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(ILivesComponentTemplate template)
-        {
-            return new LivesComponent(
-                template.Value);
-        }
-
-        #endregion Protected Methods
-    }
 }

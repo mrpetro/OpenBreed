@@ -11,7 +11,20 @@ namespace OpenBreed.Wecs.Core.Components.Xml
     [XmlRoot("AngularVelocity")]
     public class XmlAngularVelocityComponent : XmlComponentTemplate, IAAngularVelocityComponentTemplate
     {
+        #region Public Properties
+
         [XmlElement("Value")]
         public float Value { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new AngularVelocityComponent(Value);
+        }
+
+        #endregion Public Methods
     }
 }

@@ -12,5 +12,13 @@ namespace OpenBreed.Common.Game.Wecs.Components.Xml
     [XmlRoot("Weapons")]
     public class XmlWeaponsComponent : XmlComponentTemplate, IWeaponsComponentTemplate
     {
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new WeaponsComponent();
+        }
+
+        #endregion Public Methods
     }
 }

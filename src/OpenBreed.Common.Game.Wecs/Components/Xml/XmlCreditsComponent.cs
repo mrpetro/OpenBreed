@@ -12,7 +12,20 @@ namespace OpenBreed.Common.Game.Wecs.Components.Xml
     [XmlRoot("Credits")]
     public class XmlCreditsComponent : XmlComponentTemplate, ICreditsComponentTemplate
     {
+        #region Public Properties
+
         [XmlElement("Value")]
         public int Value { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
+        {
+            return new CreditsComponent(Value);
+        }
+
+        #endregion Public Methods
     }
 }

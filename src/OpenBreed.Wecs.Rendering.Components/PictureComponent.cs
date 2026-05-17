@@ -139,44 +139,4 @@ namespace OpenBreed.Wecs.Rendering.Components
 
         #endregion Public Methods
     }
-
-    public sealed class PictureComponentFactory : ComponentFactoryBase<IPictureComponentTemplate>
-    {
-        #region Private Fields
-
-        private readonly IBuilderFactory builderFactory;
-        private readonly IDataLoaderFactory dataLoaderFactory;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public PictureComponentFactory(
-            IBuilderFactory builderFactory,
-            IDataLoaderFactory dataLoaderFactory)
-        {
-            this.builderFactory = builderFactory;
-            this.dataLoaderFactory = dataLoaderFactory;
-        }
-
-        #endregion Public Constructors
-
-        #region Protected Methods
-
-        protected override IEntityComponent Create(IPictureComponentTemplate template)
-        {
-            var pictureDataLoader = dataLoaderFactory.GetLoader<IPictureDataLoader>();
-
-            pictureDataLoader.Load(template.ImageName);
-
-            var builder = builderFactory.GetBuilder<PictureComponentBuilder>();
-            builder.SetImageByName(template.ImageName);
-            builder.SetOrigin(template.Origin);
-            builder.SetOrder(template.Order);
-            builder.SetColor(template.Color);
-            return builder.Build();
-        }
-
-        #endregion Protected Methods
-    }
 }
