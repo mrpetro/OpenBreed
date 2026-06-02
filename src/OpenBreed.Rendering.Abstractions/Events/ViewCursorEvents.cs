@@ -76,17 +76,31 @@ namespace OpenBreed.Rendering.Abstractions.Events
 
         #region Public Constructors
 
-        public ViewCursorMoveEvent(IRenderView view, int cursorId, BitArray keysPressed, Vector2i position) : base(view, cursorId, position)
+        public ViewCursorMoveEvent(IRenderView view, int cursorId, BitArray keysPressed, KeyModifiers modifiers, Vector2i position) : base(view, cursorId, position)
         {
             this.keysPressed = keysPressed;
+            Modifiers = modifiers;
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Flags indicating if ore or more special keys were pressed during cursor move event.
+        /// </summary>
+        public KeyModifiers Modifiers { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public bool IsCursorKeyPressed(CursorKey key)
         {
             return keysPressed[(int)key];
         }
 
-        #endregion Public Constructors
+        #endregion Public Methods
     }
 
     /// <summary>

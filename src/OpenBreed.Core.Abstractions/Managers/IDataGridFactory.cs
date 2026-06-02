@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Core.Abstractions.Managers
+﻿using System;
+
+namespace OpenBreed.Core.Abstractions.Managers
 {
     /// <summary>
     /// Factory for data grids
@@ -13,8 +15,9 @@
         /// <typeparam name="TObject">Type of data</typeparam>
         /// <param name="width">Width of the grid</param>
         /// <param name="height">Height of the grid</param>
+        /// <param name="cellInitializer">Cell initializer</param>
         /// <returns>Data grid</returns>
-        IDataGrid<TObject> Create<TObject>(int width, int height);
+        IDataGrid<TObject> Create<TObject>(int width, int height, Func<int, int, TObject> cellInitializer = null);
 
         #endregion Public Methods
     }

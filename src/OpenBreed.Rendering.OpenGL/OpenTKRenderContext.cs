@@ -207,7 +207,7 @@ namespace OpenBreed.Rendering.OpenGL
             point = view.FromHostPoint(point);
 
             view.OnCursorMove(cursorId, point, cursorKeyStates, modifiers);
-            eventsMan.Raise(new ViewCursorMoveEvent(view, cursorId, cursorKeyStates, point));
+            eventsMan.Raise(new ViewCursorMoveEvent(view, cursorId, cursorKeyStates, modifiers, point));
         }
 
         public void CursorWheel(int cursorId, Vector2i point, int wheelDelta)

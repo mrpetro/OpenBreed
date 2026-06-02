@@ -17,8 +17,6 @@ namespace OpenBreed.Wecs.Components.Xml
         {
         }
 
-        private readonly List<IEntityComponent> components = new List<IEntityComponent>();
-
         #endregion Public Constructors
 
         #region Public Methods

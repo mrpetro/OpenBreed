@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Core.Abstractions;
 using OpenTK.Mathematics;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OpenBreed.Core
 {
@@ -7,17 +9,18 @@ namespace OpenBreed.Core
     {
         #region Private Fields
 
+        private readonly Func<int, int, TObject> cellInitializer;
         private TObject[] datas;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DefaultDataGrid(int width, int height)
+        public DefaultDataGrid(int width, int height, Func<int, int, TObject> cellInitializer)
         {
             Width = width;
             Height = height;
-
+            this.cellInitializer = cellInitializer ?? throw new ArgumentNullException(nameof(cellInitializer));
             datas = new TObject[Width * Height];
         }
 
@@ -34,14 +37,140 @@ namespace OpenBreed.Core
 
         public TObject Get(Vector2i pos)
         {
-            var dataIndex = pos.X + Width * pos.Y;
+            var dataIndex = GetId(pos);
             return datas[dataIndex];
+        }
+
+        public bool IsValidId(int id)
+        {
+            return id >= 0 && id < datas.Length;
+        }
+
+        public bool IsValid(Vector2i pos)
+        {
+            if (pos.X < 0 || pos.X >= Width)
+            {
+                return false;
+            }
+
+            if (pos.Y < 0 || pos.Y >= Height)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool TryGet(Vector2i pos, out TObject value)
+        {
+            if (!IsValid(pos))
+            {
+                value = default;
+                return false;
+            }
+
+            var dataIndex = GetId(pos);
+            value = datas[dataIndex];
+            return true;
         }
 
         public void Set(Vector2i pos, TObject data)
         {
-            var dataIndex = pos.X + Width * pos.Y;
+            var dataIndex = GetId(pos);
             datas[dataIndex] = data;
+        }
+
+        public void SetAll(Action<TObject> cellAction)
+        {
+            for (int i = 0; i < datas.Length; i++)
+            {
+                cellAction.Invoke(datas[i]);
+            }
+        }
+
+        public void Set(Vector2i pos, Action<TObject> cellAction)
+        {
+            var dataIndex = GetId(pos);
+            cellAction.Invoke(datas[dataIndex]);
+        }
+
+        public void ClearAll()
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    datas[x + Width * y] = cellInitializer.Invoke(x,y);
+                }
+            }
+        }
+
+        public int GetId(Vector2i pos)
+        {
+            return pos.X + Width * pos.Y;
+        }
+
+        public Vector2i GetPosition(int id)
+        {
+            var x = id % Width;
+            var y = id / Width;
+            return new Vector2i(x, y);
+        }
+
+        public bool TryGetLeftFromId(int id, out int leftId)
+        {
+            var oldY = id / Width;
+
+            leftId = id - 1;
+
+            if (leftId < 0)
+            {
+                return false;
+            }
+
+            var newY = leftId / Width;
+
+            return oldY == newY;
+        }
+
+        public bool TryGetRightFromId(int id, out int rightId)
+        {
+            var oldY = id / Width;
+
+            rightId = id + 1;
+
+            if (rightId >= datas.Length)
+            {
+                return false;
+            }
+
+            var newY = rightId / Width;
+
+            return oldY == newY;
+        }
+
+        public bool TryGetUpFromId(int id, out int upId)
+        {
+            upId = id + Width;
+
+            if (upId >= datas.Length)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool TryGetDownFromId(int id, out int downId)
+        {
+            downId = id - Width;
+
+            if (downId < 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         #endregion Public Methods

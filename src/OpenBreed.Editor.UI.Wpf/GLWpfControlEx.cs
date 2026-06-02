@@ -240,8 +240,8 @@ namespace OpenBreed.Editor.UI.Wpf
         private static IEnumerable<bool> GetCursorKeyStates(MouseEventArgs e)
         {
             yield return e.LeftButton == MouseButtonState.Pressed;
-            yield return e.MiddleButton == MouseButtonState.Pressed;
             yield return e.RightButton == MouseButtonState.Pressed;
+            yield return e.MiddleButton == MouseButtonState.Pressed;
             yield return e.XButton1 == MouseButtonState.Pressed;
             yield return e.XButton2 == MouseButtonState.Pressed;
         }

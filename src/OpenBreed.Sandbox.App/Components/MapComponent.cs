@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Abstractions;
+using OpenBreed.Pathfinding.Abstractions.Services;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,20 @@ using System.Windows.Media.Media3D;
 
 namespace OpenBreed.Sandbox.App.Components
 {
-    public class CellData
+    public class MapPositionComponent : IEntityComponent
     {
+        #region Public Constructors
+
+        public MapPositionComponent(int x, int y)
+        {
+            Value = new Vector2i(x, y);
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
 
-        public int GfxId { get; set; }
+        public Vector2i Value { get; set; }
 
         #endregion Public Properties
     }
@@ -35,6 +45,10 @@ namespace OpenBreed.Sandbox.App.Components
         public int CellSize { get; }
         public IDataGrid<CellData> Grid { get; }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
         public Box2i GetIndices(Box2 box)
         {
             int minIndexX = (int)box.Min.X / CellSize;
@@ -49,6 +63,6 @@ namespace OpenBreed.Sandbox.App.Components
             return new Box2i(minIndexX, minIndexY, maxIndexX, maxIndexY);
         }
 
-        #endregion Public Properties
+        #endregion Public Methods
     }
 }

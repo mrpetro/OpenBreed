@@ -124,11 +124,11 @@
     </Project>
   </Folder>
   <Folder Name="/Modules/">
-    <Project Path="OpenBreed.Animation.Generic/OpenBreed.Animation.Generic.csproj">
+    <Project Path="OpenBreed.Animation.Abstractions/OpenBreed.Animation.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Animation.Abstractions/OpenBreed.Animation.Abstractions.csproj">
+    <Project Path="OpenBreed.Animation.Generic/OpenBreed.Animation.Generic.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
@@ -152,19 +152,27 @@
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Input.Generic/OpenBreed.Input.Generic.csproj">
-      <BuildType Solution="Editor_Debug|*" Project="Debug" />
-      <BuildType Solution="Game_Debug|*" Project="Debug" />
-    </Project>
     <Project Path="OpenBreed.Input.Abstractions/OpenBreed.Input.Abstractions.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
-    <Project Path="OpenBreed.Physics.Generic/OpenBreed.Physics.Generic.csproj">
+    <Project Path="OpenBreed.Input.Generic/OpenBreed.Input.Generic.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>
+    <Project Path="OpenBreed.Pathfinding.Abstractions/OpenBreed.Pathfinding.Abstractions.csproj">
+      <BuildType Solution="Editor_Debug|*" Project="Release" />
+      <BuildType Solution="Game_Debug|*" Project="Debug" />
+    </Project>
+    <Project Path="OpenBreed.Pathfinding/OpenBreed.Pathfinding.csproj">
+      <BuildType Solution="Editor_Debug|*" Project="Release" />
+      <BuildType Solution="Game_Debug|*" Project="Debug" />
+    </Project>
     <Project Path="OpenBreed.Physics.Abstractions/OpenBreed.Physics.Abstractions.csproj">
+      <BuildType Solution="Editor_Debug|*" Project="Debug" />
+      <BuildType Solution="Game_Debug|*" Project="Debug" />
+    </Project>
+    <Project Path="OpenBreed.Physics.Generic/OpenBreed.Physics.Generic.csproj">
       <BuildType Solution="Editor_Debug|*" Project="Debug" />
       <BuildType Solution="Game_Debug|*" Project="Debug" />
     </Project>

@@ -2,7 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OpenBreed.Pathfinding.Abstractions.Services;
 using OpenBreed.Sandbox.App.Components;
+using OpenBreed.Sandbox.App.Constants;
 using OpenBreed.Sandbox.App.Extensions;
 using OpenBreed.Scripting.Lua.Extensions;
 using OpenTK.Mathematics;
@@ -41,7 +43,6 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupDataHandlers();
 
             hostBuilder.SetupCollisionVisualizingOptions();
-
 
             hostBuilder.SetupDataGridFactory();
             hostBuilder.SetupDefaultLogger();
@@ -89,7 +90,6 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupCollisionMan<IEntity>((collisionMan, sp) =>
             {
-
             });
 
             hostBuilder.SetupBroadphaseFactory<IEntity>();
@@ -106,10 +106,8 @@ namespace OpenBreed.Sandbox
             {
             });
 
-
             hostBuilder.SetupLuaScripting((scriptMan, sp) =>
             {
-
             });
 
             hostBuilder.SetupWecsAssemblySystems();
@@ -129,17 +127,26 @@ namespace OpenBreed.Sandbox
 
     public class Data
     {
+        #region Private Fields
+
         private readonly ILogger logger;
         private bool checkboxTest = true;
         private float scrollTestHorizontal = 0.5f;
         private float scrollTestVertical = 0.5f;
         private string textBoxTest = "HelloWorld";
 
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public Data(ILogger logger)
         {
             this.logger = logger;
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
 
         public bool CheckboxTest
         {
@@ -184,18 +191,29 @@ namespace OpenBreed.Sandbox
                 logger.LogInformation($"Text changed: {textBoxTest}");
             }
         }
+
+        #endregion Public Properties
+    }
+
+    public class CellData
+    {
+        #region Public Properties
+
+        public int GfxId { get; set; }
+
+        #endregion Public Properties
     }
 
     public class Program : CoreBase
     {
         #region Private Fields
 
-        private Data data;
         private readonly IWindow window;
         private readonly IEventsMan eventsMan;
         private readonly IInputsMan inputsMan;
         private readonly IInteractionFactoryProvider interactionFactoryProvider;
         private readonly IElementFactory elementFactory;
+        private Data data;
         private IRenderView renderView;
 
         #endregion Private Fields
@@ -217,11 +235,6 @@ namespace OpenBreed.Sandbox
             eventsMan.Subscribe<WindowUpdateEvent>(OnWindowUpdate);
 
             data = new Data(host.Services.GetRequiredService<ILogger>());
-        }
-
-        private void OnWindowUpdate(WindowUpdateEvent e)
-        {
-            e.Context.ServiceProvider.GetRequiredService<IWecsCore>().Update(e.Dt);
         }
 
         #endregion Public Constructors
@@ -262,111 +275,6 @@ namespace OpenBreed.Sandbox
             var program = programFactory.Create();
 
             program.Run();
-        }
-
-        private void OnWindowLoad(WindowLoadEvent e)
-        {
-            var spriteMan = e.RenderContext.ServiceProvider.GetRequiredService<ISpriteMan>();
-            var tileMan = e.RenderContext.ServiceProvider.GetRequiredService<ITileMan>();
-            var textureMan = e.RenderContext.ServiceProvider.GetRequiredService<ITextureMan>();
-            var dataGridFactory = e.RenderContext.ServiceProvider.GetRequiredService<IDataGridFactory>();
-            var texture = textureMan.Create("TileMap", "D:\\666.png");
-
-
-            var tileAtlas = tileMan.CreateAtlas()
-                .SetName("Tiles")
-                .SetTileSize(16)
-                .SetTexture(texture.Id)
-                .AppendCoordsFromGrid(16,16,0,0)
-                .Build();
-
-            var wecsCore = e.RenderContext.ServiceProvider.GetRequiredService<IWecsCore>();
-            var world = wecsCore.Worlds.CreateSandboxWorld();
-            renderView = e.RenderContext.CreateView();
-            world.AddToView(renderView);
-
-            var dataGrid = dataGridFactory.Create<CellData>(100, 50);
-
-            dataGrid.Set(new Vector2i(20, 20), new CellData() { GfxId = 0 });
-
-            var dummy = wecsCore.Entities.Create()
-                .AddComponent(new MapComponent(dataGrid,16))
-                .Build();
-
-            wecsCore.Worlds.RequestAddEntity(dummy, world.Id);
-
-
-
-
-            var interactionFactory = interactionFactoryProvider.GetFactory(renderView);
-
-            var desktop = interactionFactory.CreateDesktop(builder =>
-            {
-
-
-                //CreateButtonCtrlTest(builder);
-
-                //CreateCheckboxCtrlTest(builder);
-
-                //CreateLabelCtrlTest(builder);
-
-            });
-
-            //var form = elementFactory.Create<IElement>("CheckBox", data);
-
-            //desktop.AddChild(form);
-
-            desktop.AddChild(interactionFactory.CreateScrollbar((builder) =>
-            {
-                builder.SetMovable(false);
-
-                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Horizontal);
-                builder.SetValue(-100.0f);
-                builder.SetMaximumSize(float.MaxValue, 16.0f);
-                builder.SetMinimumValue(-100.0f);
-                builder.SetMaximumValue(200.0f);
-                builder.SetValueUnit(25.0f);
-                builder.SetDockMode(ElementDockMode.Top);
-                //builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestVertical));
-                //builder.SetGridPosition(2, 1);
-            }));
-
-            desktop.AddChild(interactionFactory.CreateScrollbar((builder) =>
-            {
-                builder.SetMovable(false);
-
-                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Vertical);
-                builder.SetMaximumSize(16.0f, float.MaxValue);
-                builder.SetValue(-100.0f);
-                builder.SetMinimumValue(-100.0f);
-                builder.SetMaximumValue(200.0f);
-                builder.SetValueUnit(25.0f);
-                builder.SetDockMode(ElementDockMode.Right);
-                //builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestVertical));
-                //builder.SetGridPosition(2, 1);
-            }));
-
-
-            //desktop.AddChild(CreateGridPanelTest(interactionFactory, data));
-
-            //desktop.AddChild(interactionFactory.CreateCheckbox((builder) =>
-            //{
-            //    builder.SetPosition(80, 0);
-            //    builder.SetLabel("Test1");
-
-            //    builder.BindValue(PropertyBinding<bool>.Create(data, (obj) => obj.CheckboxTest));
-            //}));
-
-            //desktop.AddChild(interactionFactory.CreateTextField((builder) =>
-            //{
-            //    builder.SetFontSize(15);
-            //    //var text = File.ReadAllText(@"Data//SampleText.txt");
-
-            //    builder.BindProperty(PropertyBinding<string>.Create(data, (obj) => obj.TextBoxTest));
-
-            //    //builder.SetText(text);
-            //}));
-
         }
 
         private static IGridPanel CreateGridPanelTest(IInteractionFactory factory, Data data)
@@ -449,7 +357,6 @@ namespace OpenBreed.Sandbox
                     builder.SetGridPosition(0, 0);
                 }));
 
-
             grid.AddChild(factory.CreateScrollbar((builder) =>
             {
                 builder.SetMovable(false);
@@ -490,7 +397,6 @@ namespace OpenBreed.Sandbox
                     });
                     builder.SetGridPosition(0, 1);
                 }));
-
 
             grid.AddChild(factory.CreateButton((builder) =>
                 {
@@ -553,6 +459,113 @@ namespace OpenBreed.Sandbox
                 }));
 
             return grid;
+        }
+
+        private void OnWindowUpdate(WindowUpdateEvent e)
+        {
+            e.Context.ServiceProvider.GetRequiredService<IWecsCore>().Update(e.Dt);
+        }
+
+        private void OnWindowLoad(WindowLoadEvent e)
+        {
+            var spriteMan = e.RenderContext.ServiceProvider.GetRequiredService<ISpriteMan>();
+            var tileMan = e.RenderContext.ServiceProvider.GetRequiredService<ITileMan>();
+            var textureMan = e.RenderContext.ServiceProvider.GetRequiredService<ITextureMan>();
+            var dataGridFactory = e.RenderContext.ServiceProvider.GetRequiredService<IDataGridFactory>();
+            var texture = textureMan.Create("TileMap", "Data\\Tiles.png");
+
+            var tileAtlas = tileMan.CreateAtlas()
+                .SetName("Tiles")
+                .SetTileSize(16)
+                .SetTexture(texture.Id)
+                .AppendCoordsFromGrid(16, 16, 0, 0)
+                .Build();
+
+            var wecsCore = e.RenderContext.ServiceProvider.GetRequiredService<IWecsCore>();
+            var world = wecsCore.Worlds.CreateSandboxWorld();
+            renderView = e.RenderContext.CreateView();
+            world.AddToView(renderView);
+
+            var dataGrid = dataGridFactory.Create<CellData>(100, 50, (x, y) => new CellData() { GfxId = Tiles.Empty });
+            dataGrid.ClearAll();
+
+            var dummy = wecsCore.Entities.Create()
+                .AddComponent(new MapComponent(dataGrid, 16))
+                .SetTag("Map")
+                .Build();
+
+            wecsCore.Worlds.RequestAddEntity(dummy, world.Id);
+
+            var dude = wecsCore.Entities.Create()
+                .AddComponent(new MapPositionComponent(5, 5))
+                .SetTag("Dude")
+                .Build();
+            wecsCore.Worlds.RequestAddEntity(dude, world.Id);
+
+            var interactionFactory = interactionFactoryProvider.GetFactory(renderView);
+
+            var desktop = interactionFactory.CreateDesktop(builder =>
+            {
+                //CreateButtonCtrlTest(builder);
+
+                //CreateCheckboxCtrlTest(builder);
+
+                //CreateLabelCtrlTest(builder);
+            });
+
+            //var form = elementFactory.Create<IElement>("CheckBox", data);
+
+            //desktop.AddChild(form);
+
+            desktop.AddChild(interactionFactory.CreateScrollbar((builder) =>
+            {
+                builder.SetMovable(false);
+
+                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Horizontal);
+                builder.SetValue(-100.0f);
+                builder.SetMaximumSize(float.MaxValue, 16.0f);
+                builder.SetMinimumValue(-100.0f);
+                builder.SetMaximumValue(200.0f);
+                builder.SetValueUnit(25.0f);
+                builder.SetDockMode(ElementDockMode.Top);
+                //builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestVertical));
+                //builder.SetGridPosition(2, 1);
+            }));
+
+            desktop.AddChild(interactionFactory.CreateScrollbar((builder) =>
+            {
+                builder.SetMovable(false);
+
+                builder.SetMode(Gui.Abstractions.Constants.ScrollbarMode.Vertical);
+                builder.SetMaximumSize(16.0f, float.MaxValue);
+                builder.SetValue(-100.0f);
+                builder.SetMinimumValue(-100.0f);
+                builder.SetMaximumValue(200.0f);
+                builder.SetValueUnit(25.0f);
+                builder.SetDockMode(ElementDockMode.Right);
+                //builder.BindValue(PropertyBinding<float>.Create(data, (obj) => obj.ScrollTestVertical));
+                //builder.SetGridPosition(2, 1);
+            }));
+
+            //desktop.AddChild(CreateGridPanelTest(interactionFactory, data));
+
+            //desktop.AddChild(interactionFactory.CreateCheckbox((builder) =>
+            //{
+            //    builder.SetPosition(80, 0);
+            //    builder.SetLabel("Test1");
+
+            //    builder.BindValue(PropertyBinding<bool>.Create(data, (obj) => obj.CheckboxTest));
+            //}));
+
+            //desktop.AddChild(interactionFactory.CreateTextField((builder) =>
+            //{
+            //    builder.SetFontSize(15);
+            //    //var text = File.ReadAllText(@"Data//SampleText.txt");
+
+            //    builder.BindProperty(PropertyBinding<string>.Create(data, (obj) => obj.TextBoxTest));
+
+            //    //builder.SetText(text);
+            //}));
         }
 
         #endregion Private Methods

@@ -530,13 +530,13 @@ namespace OpenBreed.Rendering.Abstractions.Events
         /// </summary>
         Left = 0,
         /// <summary>
-        /// Middle cursor key.
-        /// </summary>
-        Middle = 1,
-        /// <summary>
         /// Right cursor key.
         /// </summary>
-        Right = 2,
+        Right = 1,
+        /// <summary>
+        /// Middle cursor key.
+        /// </summary>
+        Middle = 2,
         /// <summary>
         /// First extended cursor key.
         /// </summary>

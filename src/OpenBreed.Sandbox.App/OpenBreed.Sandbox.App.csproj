@@ -8,10 +8,14 @@
 
   <ItemGroup>
     <None Remove="Data\SampleText.txt" />
+    <None Remove="Data\Tiles.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Data\SampleText.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Tiles.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -32,6 +36,8 @@
     <ProjectReference Include="..\OpenBreed.Gui\OpenBreed.Gui.csproj" />
     <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj" />
     <ProjectReference Include="..\OpenBreed.Input.Abstractions\OpenBreed.Input.Abstractions.csproj" />
+    <ProjectReference Include="..\OpenBreed.Pathfinding.Abstractions\OpenBreed.Pathfinding.Abstractions.csproj" />
+    <ProjectReference Include="..\OpenBreed.Pathfinding\OpenBreed.Pathfinding.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Abstractions\OpenBreed.Rendering.Abstractions.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.Common\OpenBreed.Rendering.Common.csproj" />
     <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj" />
@@ -46,6 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Events\" />
     <Folder Include="Worlds\" />
   </ItemGroup>
 

@@ -78,7 +78,7 @@ namespace OpenBreed.Input.Generic
         #region Public Constructors
 
         public InputsMan(
-                            GameWindow gameWindow,
+            GameWindow gameWindow,
             IEventsMan eventsMan)
         {
             this.gameWindow = gameWindow;
@@ -88,8 +88,8 @@ namespace OpenBreed.Input.Generic
             gameWindow.MouseWheel += OnMouseWheel;
             gameWindow.KeyDown += OnKeyDown;
             gameWindow.KeyUp += OnKeyUp;
-            //gameWindow.MouseDown += OnMouseDown;
-            //gameWindow.MouseUp += OnMouseUp;
+            gameWindow.MouseDown += OnMouseDown;
+            gameWindow.MouseUp += OnMouseUp;
 
             gameWindow.Load += GameWindow_Load;
             this.eventsMan.Subscribe<WindowUpdateEvent>((e) => OnUpdateFrame(e.Dt));
@@ -241,10 +241,19 @@ namespace OpenBreed.Input.Generic
             eventsMan.Raise(new KeyUpEvent());
         }
 
+        private void OnMouseDown(MouseButtonEventArgs e)
+        {
+            eventsMan.Raise(new MouseDownEvent());
+        }
+
+        private void OnMouseUp(MouseButtonEventArgs e)
+        {
+            eventsMan.Raise(new MouseUpEvent());
+        }
+
         private void OnMouseWheel(MouseWheelEventArgs e)
         {
             eventsMan.Raise(new MouseWheelEvent());
-            //UpdateWheelPos(e.OffsetY);
         }
 
         #endregion Private Methods

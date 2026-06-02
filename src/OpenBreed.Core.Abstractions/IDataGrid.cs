@@ -1,4 +1,5 @@
 ﻿using OpenTK.Mathematics;
+using System;
 
 namespace OpenBreed.Core.Abstractions
 {
@@ -25,6 +26,21 @@ namespace OpenBreed.Core.Abstractions
         #region Public Methods
 
         /// <summary>
+        /// Check if  index coordinates are not out of grid bounds.
+        /// </summary>
+        /// <param name="pos">Index coordinates</param>
+        /// <returns>True if given index coordinates are in bounds of this grid, false otherwise.</returns>
+        bool IsValid(Vector2i pos);
+
+        /// <summary>
+        /// Try to get data from given index coordinates
+        /// </summary>
+        /// <param name="pos">Index coordinates</param>
+        /// <param name="value">Resulting data in case of valid coordinates.</param>
+        /// <returns>True if given index coordinates are in bounds of this grid, false otherwise.</returns>
+        bool TryGet(Vector2i pos, out TObject value);
+
+        /// <summary>
         /// Get data from given index coordinates
         /// </summary>
         /// <param name="pos">Index coordinates</param>
@@ -32,11 +48,46 @@ namespace OpenBreed.Core.Abstractions
         TObject Get(Vector2i pos);
 
         /// <summary>
+        /// Gets the grid coordinates identifier.
+        /// </summary>
+        /// <param name="pos">Index coordinates</param>
+        /// <returns>Identifier</returns>
+        int GetId(Vector2i pos);
+
+        /// <summary>
         /// Set data under given index coordinates
         /// </summary>
         /// <param name="pos">Index coordinates</param>
         /// <param name="data">Data to set</param>
         void Set(Vector2i pos, TObject data);
+
+        /// <summary>
+        /// Set data using given cell action.
+        /// </summary>
+        /// <param name="pos">Index coordinates</param>
+        /// <param name="data">Action to perform</param>
+        void Set(Vector2i pos, Action<TObject> cellAction);
+
+        /// <summary>
+        /// Clears all data to initialization state.
+        /// </summary>
+        void ClearAll();
+
+        /// <summary>
+        /// Sets all data using same cell action.
+        /// </summary>
+        /// <param name="cellAction">Action to perform on all cells.</param>
+        void SetAll(Action<TObject> cellAction);
+
+        Vector2i GetPosition(int id);
+
+        bool TryGetUpFromId(int id, out int upId);
+
+        bool TryGetDownFromId(int id, out int downId);
+
+        bool TryGetLeftFromId(int id, out int leftId);
+
+        bool TryGetRightFromId(int id, out int rightId);
 
         #endregion Public Methods
     }

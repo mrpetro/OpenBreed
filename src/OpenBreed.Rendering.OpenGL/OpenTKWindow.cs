@@ -144,11 +144,11 @@ namespace OpenBreed.Rendering.OpenGL
 
         private Abstractions.Events.KeyModifiers GetKeyModifiers()
         {
-            var modifiers = (gameWindow.IsKeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightShift) || gameWindow.IsKeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightShift)) ? Abstractions.Events.KeyModifiers.Shift : 0;
-            modifiers |= (gameWindow.IsKeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.LeftControl) || gameWindow.IsKeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightControl)) ? Abstractions.Events.KeyModifiers.Control : 0;
-            modifiers |= (gameWindow.IsKeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.LeftAlt) || gameWindow.IsKeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightAlt)) ? Abstractions.Events.KeyModifiers.Alt : 0;
-            modifiers |= gameWindow.IsKeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.CapsLock) ? Abstractions.Events.KeyModifiers.CapsLock : 0;
-            modifiers |= gameWindow.IsKeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.NumLock) ? Abstractions.Events.KeyModifiers.NumLock : 0;
+            var modifiers = (gameWindow.IsKeyDown(OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightShift) || gameWindow.IsKeyDown(OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightShift)) ? Abstractions.Events.KeyModifiers.Shift : 0;
+            modifiers |= (gameWindow.IsKeyDown(OpenTK.Windowing.GraphicsLibraryFramework.Keys.LeftControl) || gameWindow.IsKeyDown(OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightControl)) ? Abstractions.Events.KeyModifiers.Control : 0;
+            modifiers |= (gameWindow.IsKeyDown(OpenTK.Windowing.GraphicsLibraryFramework.Keys.LeftAlt) || gameWindow.IsKeyDown(OpenTK.Windowing.GraphicsLibraryFramework.Keys.RightAlt)) ? Abstractions.Events.KeyModifiers.Alt : 0;
+            modifiers |= gameWindow.IsKeyDown(OpenTK.Windowing.GraphicsLibraryFramework.Keys.CapsLock) ? Abstractions.Events.KeyModifiers.CapsLock : 0;
+            modifiers |= gameWindow.IsKeyDown(OpenTK.Windowing.GraphicsLibraryFramework.Keys.NumLock) ? Abstractions.Events.KeyModifiers.NumLock : 0;
 
             return modifiers;
         }
@@ -209,11 +209,11 @@ namespace OpenBreed.Rendering.OpenGL
 
         private IEnumerable<bool> GetCursorKeyStates()
         {
-            yield return gameWindow.IsMouseButtonPressed(MouseButton.Left);
-            yield return gameWindow.IsMouseButtonPressed(MouseButton.Middle);
-            yield return gameWindow.IsMouseButtonPressed(MouseButton.Right);
-            yield return gameWindow.IsMouseButtonPressed(MouseButton.Button1);
-            yield return gameWindow.IsMouseButtonPressed(MouseButton.Button2);
+            yield return gameWindow.IsMouseButtonDown(MouseButton.Left);
+            yield return gameWindow.IsMouseButtonDown(MouseButton.Right);
+            yield return gameWindow.IsMouseButtonDown(MouseButton.Middle);
+            yield return gameWindow.IsMouseButtonDown(MouseButton.Button1);
+            yield return gameWindow.IsMouseButtonDown(MouseButton.Button2);
         }
 
         #endregion Private Methods

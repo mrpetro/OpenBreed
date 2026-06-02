@@ -13,11 +13,14 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Fsm.Extensions;
+using OpenBreed.Pathfinding.Abstractions.Services;
+using OpenBreed.Pathfinding.Extensions;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Rendering.OpenGL.Managers;
+using OpenBreed.Sandbox.App.Services;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -30,8 +33,19 @@ namespace OpenBreed.Sandbox.App.Extensions
     {
         #region Public Methods
 
+        private static void SetupDummyEntityClassLoader(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.ConfigureServices((hostContext, services) =>
+            {
+                services.AddScoped<IEntityClassesLoader, DummyEntityClassLoader>();
+
+            });
+        }
+
         public static void SetupSandboxWecsSystems(this IHostBuilder hostBuilder)
         {
+            hostBuilder.SetupPathfindingService();
+            hostBuilder.SetupDummyEntityClassLoader();
             hostBuilder.SetupRenderingSystems();
             hostBuilder.SetupScriptingSystems();
             hostBuilder.SetupAudioSystems();

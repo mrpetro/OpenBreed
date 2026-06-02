@@ -85,7 +85,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
             using (var bitmap = new Bitmap(filePath))
             {
-                bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 return CreateFromBitmap(name, bitmap);
             }
         }
