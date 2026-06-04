@@ -57,7 +57,7 @@ namespace OpenBreed.Sandbox.App.Systems
             {
                 Start = dudePositionCmp.Value,
                 Goal = indexPos,
-                Terain = new GridPathfindTerain(mapCmp.Grid),
+                Topology = new GridTopology(mapCmp.Grid),
                 Tag = dudeEntity
             };
 

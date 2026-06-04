@@ -28,7 +28,7 @@ namespace OpenBreed.Pathfinding.Abstractions.Services
 
         public Vector2i Start;
         public Vector2i Goal;
-        public IPathfindTerain Terain;
+        public ITopology Topology;
         public object Tag;
 
         #endregion Public Fields

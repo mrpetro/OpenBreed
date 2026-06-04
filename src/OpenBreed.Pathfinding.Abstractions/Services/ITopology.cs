@@ -2,7 +2,7 @@
 
 namespace OpenBreed.Pathfinding.Abstractions.Services
 {
-    public interface IPathfindTerain
+    public interface ITopology
     {
         #region Public Methods
 

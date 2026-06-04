@@ -7,13 +7,34 @@ using System.Linq;
 
 namespace OpenBreed.Pathfinding.Services
 {
+    internal class PathfindFront : IPathfindFront
+    {
+        private int stepsLeft;
+
+        public PathfindFront(int id, int stepsLeft)
+        {
+            Id = id;
+            this.stepsLeft = stepsLeft;
+        }
+
+        public int Id { get; }
+        public bool Step()
+        {
+            stepsLeft--;
+            return stepsLeft == 0;
+        }
+    }
+
     internal class PathfindJob4Way : IInternalPathfindJob
     {
+
+
         #region Private Fields
 
         private readonly Dictionary<int, int> cameFrom = new Dictionary<int, int>();
+        private readonly Dictionary<int, int> progress = new Dictionary<int, int>();
 
-        private List<int> front = new List<int>();
+        private readonly List<PathfindFront> fronts = new List<PathfindFront>();
 
         private int startId;
 
@@ -26,7 +47,7 @@ namespace OpenBreed.Pathfinding.Services
         public PathfindJob4Way(int id, PathfindRequest request)
         {
             Id = id;
-            Terain = request.Terain;
+            Topology = request.Topology;
             Tag = request.Tag;
             Reset(request);
         }
@@ -36,14 +57,18 @@ namespace OpenBreed.Pathfinding.Services
         #region Public Properties
 
         public Vector2i Start { get; private set; }
+
         public Vector2i Goal { get; private set; }
 
         public PathfindStatus Status { get; private set; } = PathfindStatus.NotStarted;
 
         public int Id { get; }
+
         public object Tag { get; }
-        public IPathfindTerain Terain { get; }
-        public IReadOnlyList<int> Fronts => front;
+
+        public ITopology Topology { get; }
+
+        public IEnumerable<IPathfindFront> Fronts => fronts;
 
         #endregion Public Properties
 
@@ -53,8 +78,8 @@ namespace OpenBreed.Pathfinding.Services
         {
             foreach (var pair in cameFrom)
             {
-                var fromPos = Terain.GetPosition(pair.Key);
-                var toPos = Terain.GetPosition(pair.Value);
+                var fromPos = Topology.GetPosition(pair.Key);
+                var toPos = Topology.GetPosition(pair.Value);
                 yield return (fromPos, Vector2i.Subtract(toPos, fromPos));
             }
         }
@@ -63,10 +88,12 @@ namespace OpenBreed.Pathfinding.Services
         {
             Status = PathfindStatus.Searching;
 
-            var startId = Terain.GetId(Start);
-            front.Add(startId);
+            var startId = Topology.GetId(Start);
+            fronts.Add(new PathfindFront(startId, 1));
             cameFrom.Add(startId, -1);
         }
+
+        private readonly List<PathfindFront> newFronts = new List<PathfindFront>();
 
         public bool Step()
         {
@@ -75,25 +102,51 @@ namespace OpenBreed.Pathfinding.Services
                 return false;
             }
 
-            if (front.Count == 0)
+            if (fronts.Count == 0 && newFronts.Count == 0)
             {
                 Status = PathfindStatus.Failed;
                 return true;
             }
 
-            var oldFront = front;
-            front = new List<int>();
-
-            foreach (var id in oldFront)
+            foreach (var front in fronts)
             {
-                if (goalId == id)
+                if (goalId == front.Id)
                 {
                     Status = PathfindStatus.Found;
                     return true;
                 }
 
-                ExpandFront(id);
+                if (!front.Step())
+                {
+                    newFronts.Add(front);
+                    continue;
+                }
+
+                if (ExpandFront(front))
+                {
+
+                }
             }
+
+            fronts.Clear();
+
+            //var toRemove = new List<PathfindFront>();
+
+            foreach (var front in newFronts)
+            {
+                //if (front.Step())
+                //{
+                    fronts.Add(front);
+                    //toRemove.Add(front);
+                //}
+            }
+
+            //foreach (var front in toRemove)
+            //{
+            //    newFronts.Remove(front);
+            //}
+
+            newFronts.Clear();
 
             return false;
         }
@@ -103,12 +156,12 @@ namespace OpenBreed.Pathfinding.Services
             var id = goalId;
             var waypoints = new List<Vector2i>();
 
-            var pos = Terain.GetPosition(id);
+            var pos = Topology.GetPosition(id);
             waypoints.Add(pos);
 
             while (cameFrom.TryGetValue(id, out int prevId) && prevId != -1)
             {
-                pos = Terain.GetPosition(prevId);
+                pos = Topology.GetPosition(prevId);
                 waypoints.Add(pos);
                 id = prevId;
             }
@@ -121,59 +174,108 @@ namespace OpenBreed.Pathfinding.Services
             Start = request.Start;
             Goal = request.Goal;
 
-            startId = Terain.GetId(Start);
-            goalId = Terain.GetId(Goal);
+            startId = Topology.GetId(Start);
+            goalId = Topology.GetId(Goal);
             Status = PathfindStatus.NotStarted;
             cameFrom.Clear();
-            front.Clear();
+            fronts.Clear();
+            newFronts.Clear();
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void ExpandFront(int frontId)
+        private bool ExpandFront(PathfindFront front)
         {
-            if (Terain.TryGetUpFromId(frontId, out int upId))
+            var frontId = front.Id;
+            var survived = false;
+
+            if (Topology.TryGetUpFromId(frontId, out int upId))
             {
-                CheckFront(frontId, upId);
+                if (CheckNeighbour(front, upId, out PathfindFront newUpFront))
+                {
+                    newFronts.Add(newUpFront);
+                    survived = true;
+                }
             }
 
-            if (Terain.TryGetDownFromId(frontId, out int downId))
+            if (Topology.TryGetDownFromId(frontId, out int downId))
             {
-                CheckFront(frontId, downId);
+                if (CheckNeighbour(front, downId, out PathfindFront newDownFront))
+                {
+                    newFronts.Add(newDownFront);
+                    survived = true;
+                }
             }
 
-            if (Terain.TryGetLeftFromId(frontId, out int leftId))
+            if (Topology.TryGetLeftFromId(frontId, out int leftId))
             {
-                CheckFront(frontId, leftId);
+                if (CheckNeighbour(front, leftId, out PathfindFront newLeftFront))
+                {
+                    newFronts.Add(newLeftFront);
+                    survived = true;
+                }
             }
 
-            if (Terain.TryGetRightFromId(frontId, out int rightId))
+            if (Topology.TryGetRightFromId(frontId, out int rightId))
             {
-                CheckFront(frontId, rightId);
+                if (CheckNeighbour(front, rightId, out PathfindFront newRightFront))
+                {
+                    newFronts.Add(newRightFront);
+                    survived = true;
+                }
             }
+
+            return survived;
         }
 
-        private void CheckFront(int frontId, int nextId)
+        private bool CheckNeighbour(PathfindFront front, int nextId, out PathfindFront newFront)
         {
-            var pos = Terain.GetPosition(nextId);
-            float value = Terain.GetWeight(nextId);
-
-            if (value == 0)
-            {
-                return;
-            }
-
             if (cameFrom.ContainsKey(nextId))
             {
-                return;
+                newFront = null;
+                return false;
             }
 
-            cameFrom.Add(nextId, frontId);
-            front.Add(nextId);
+            var pos = Topology.GetPosition(nextId);
+            var weight = Topology.GetWeight(nextId);
+
+            if (weight == 0)
+            {
+                newFront = null;
+                return false;
+            }
+
+            cameFrom.Add(nextId, front.Id);
+            newFront = new PathfindFront(nextId, 3 - weight);
+            return true;
         }
 
         #endregion Private Methods
+
+        #region Internal Classes
+
+        internal class NodeState
+        {
+            #region Private Constructors
+
+            public NodeState(int id, int progress)
+            {
+                Id = id;
+                this.progress = progress;
+            }
+
+            #endregion Private Constructors
+
+            #region Public Properties
+
+            public int Id { get; }
+            public int progress { get; }
+
+            #endregion Public Properties
+        }
+
+        #endregion Internal Classes
     }
 }

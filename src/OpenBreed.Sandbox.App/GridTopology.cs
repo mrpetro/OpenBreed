@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.App
 {
-    internal class GridPathfindTerain : IPathfindTerain
+    internal class GridTopology : ITopology
     {
         private readonly IDataGrid<CellData> dataGrid;
 
-        public GridPathfindTerain(IDataGrid<CellData> dataGrid)
+        public GridTopology(IDataGrid<CellData> dataGrid)
         {
             this.dataGrid = dataGrid;
         }

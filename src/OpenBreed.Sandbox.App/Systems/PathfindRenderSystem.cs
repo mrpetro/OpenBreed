@@ -88,7 +88,7 @@ namespace OpenBreed.Sandbox.App.Systems
 
         private void Render(IPathfindJob job, IRenderView view, Box2 clipBox)
         {
-            var dataGrid = job.Terain;
+            var dataGrid = job.Topology;
 
             if (job.Status == PathfindStatus.Found)
             {
@@ -117,9 +117,9 @@ namespace OpenBreed.Sandbox.App.Systems
                 RenderWaypoint(job, pair.Item1, pair.Item2, view);
             }
 
-            foreach (var frontId in job.Fronts)
+            foreach (var front in job.Fronts)
             {
-                var frontPos = dataGrid.GetPosition(frontId);
+                var frontPos = dataGrid.GetPosition(front.Id);
 
                 view.PushMatrix();
                 view.Translate(new Vector3(frontPos.X * 16, frontPos.Y * 16, 0.0f));
