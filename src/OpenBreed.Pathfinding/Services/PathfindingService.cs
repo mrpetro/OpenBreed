@@ -1,12 +1,15 @@
-﻿using OpenBreed.Core.Abstractions.Managers;
+﻿using Microsoft.Extensions.Hosting;
+using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Pathfinding.Abstractions.Events;
 using OpenBreed.Pathfinding.Abstractions.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Pathfinding.Services
 {
-    internal class PathfindingService : IPathfindingService
+    internal class PathfindingService : BackgroundService, IPathfindingService
     {
         #region Private Fields
 
@@ -100,7 +103,28 @@ namespace OpenBreed.Pathfinding.Services
 
         #endregion Public Methods
 
+        #region Protected Methods
+
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            return Task.Factory.StartNew(
+                () => Run(stoppingToken),
+                stoppingToken,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default);
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
+
+        private void Run(CancellationToken stoppingToken)
+        {
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                Step();
+            }
+        }
 
         private void RunJob(IInternalPathfindJob job)
         {

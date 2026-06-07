@@ -19,7 +19,13 @@ namespace OpenBreed.Sandbox.App.Systems
 
         protected override void UpdateEntity(IEntity entity, Wecs.Abstractions.Primitives.IUpdateContext context)
         {
-            var pathFollowRequestCmp = entity.Get<PathFollowRequestComponent>();
+            var pathFollowRequestCmp = entity.TryGet<PathFollowRequestComponent>();
+
+            if (pathFollowRequestCmp is null)
+            {
+                return;
+            }
+
             var mapPosition = entity.Get<MapPositionComponent>();
 
             var currentWaypoint = pathFollowRequestCmp.GetCurrentWaypoint();

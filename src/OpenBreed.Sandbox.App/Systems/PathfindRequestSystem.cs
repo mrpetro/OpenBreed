@@ -70,6 +70,7 @@ namespace OpenBreed.Sandbox.App.Systems
 
             if (pathfindRequestCmp is null)
             {
+                dudeEntity.Remove<PathFollowRequestComponent>();
                 dudeEntity.Set(new PathfindRequestComponent(requestId));
             }
 

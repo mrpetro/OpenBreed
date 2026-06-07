@@ -1,5 +1,9 @@
-﻿using OpenBreed.Core.Abstractions.Managers;
+﻿using OpenBreed.Common.Interface;
+using OpenBreed.Common.Interface.Tools;
+using OpenBreed.Core.Abstractions.Events;
+using OpenBreed.Core.Abstractions.Managers;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -9,6 +13,7 @@ namespace OpenBreed.Core.Managers
     {
         #region Private Fields
 
+        private readonly ConcurrentQueue<Action> mainThreadActions = new();
         private readonly Dictionary<Type, List<Delegate>> listeners = new Dictionary<Type, List<Delegate>>();
 
         #endregion Private Fields
@@ -17,6 +22,7 @@ namespace OpenBreed.Core.Managers
 
         public DefaultEventsMan()
         {
+            Subscribe<WindowUpdateEvent>((e) => NotifyMainThread());
         }
 
         #endregion Public Constructors
@@ -41,6 +47,8 @@ namespace OpenBreed.Core.Managers
             callbacks.Add(callback);
         }
 
+
+
         public void Subscribe<TEventArgs>(EventCallback<TEventArgs> callback) where TEventArgs : EventArgs
             => Subscribe(typeof(TEventArgs), callback);
 
@@ -60,12 +68,33 @@ namespace OpenBreed.Core.Managers
 
         #region Private Methods
 
+        private void NotifyMainThread()
+        {
+            while (mainThreadActions.TryDequeue(out Action action))
+            {
+                action.Invoke();
+            }
+        }
+
         private void NotifyListeners(Type eventType, EventArgs eventArgs)
         {
             List<Delegate> callbacks = null;
 
             if (!listeners.TryGetValue(eventType, out callbacks))
+            {
                 return;
+            }
+
+            if (!ThreadTools.IsMainThread)
+            {
+                for (int i = 0; i < callbacks.Count; i++)
+                {
+                    var callback = callbacks[i];
+                    mainThreadActions.Enqueue(() => callback.DynamicInvoke(eventArgs));
+                }
+
+                return;
+            }
 
             for (int i = 0; i < callbacks.Count; i++)
             {

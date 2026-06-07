@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Events\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <None Remove="Events\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Data\SampleText.txt" />
     <None Remove="Data\Tiles.png" />
   </ItemGroup>
@@ -52,7 +58,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Events\" />
     <Folder Include="Worlds\" />
   </ItemGroup>
 

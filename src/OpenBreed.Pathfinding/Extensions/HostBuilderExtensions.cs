@@ -18,7 +18,9 @@ namespace OpenBreed.Pathfinding.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddScoped<IPathfindingService, PathfindingService>();
+                services.AddSingleton<PathfindingService>();
+                services.AddSingleton<IPathfindingService>((sp) => sp.GetRequiredService<PathfindingService>());
+                services.AddHostedService<PathfindingService>((sp) => sp.GetRequiredService<PathfindingService>());
             });
         }
 
