@@ -27,8 +27,8 @@ namespace OpenBreed.Pathfinding.Abstractions.Services
     {
         #region Public Fields
 
-        public Vector2i Start;
-        public Vector2i Goal;
+        public int StartId;
+        public int GoalId;
         public ITopology Topology;
         public object Tag;
 

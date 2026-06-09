@@ -73,8 +73,17 @@ namespace OpenBreed.Sandbox.App.Systems
                 return;
             }
 
+            if (job.Topology is not GridTopology gridTopology)
+            {
+                throw new InvalidOperationException($"Expected {typeof(GridTopology)}");
+            }
+
+            var dataGrid = gridTopology.DataGrid;
+
+            var goal = dataGrid.GetPosition(job.GoalId);
+
             view.PushMatrix();
-            view.Translate(new Vector3(job.Goal.X * 16, job.Goal.Y * 16, 0.0f));
+            view.Translate(new Vector3(goal.X * 16, goal.Y * 16, 0.0f));
             view.Context.TileRenderer.Render(view, 0, Tiles.Target);
             view.PopMatrix();
         }

@@ -51,12 +51,12 @@ namespace OpenBreed.Sandbox.App.Systems
             var mapCmp = mapEntity.Get<MapComponent>();
             var dudePositionCmp = dudeEntity.Get<MapPositionComponent>();
             var pathfindRequestCmp = dudeEntity.TryGet<PathfindRequestComponent>();
-
+            var dataGrid = mapCmp.Grid;
             var requestId = -1;
             var pathfindRequest = new PathfindRequest()
             {
-                Start = dudePositionCmp.Value,
-                Goal = indexPos,
+                StartId = dataGrid.GetId(dudePositionCmp.Value),
+                GoalId = dataGrid.GetId(indexPos),
                 Topology = new GridTopology(mapCmp.Grid),
                 Tag = dudeEntity
             };

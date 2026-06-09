@@ -88,14 +88,20 @@ namespace OpenBreed.Sandbox.App.Systems
 
         private void Render(IPathfindJob job, IRenderView view, Box2 clipBox)
         {
-            var dataGrid = job.Topology;
+            if (job.Topology is not GridTopology gridTopology)
+            {
+                throw new InvalidOperationException($"Expected {typeof(GridTopology)}");
+            }
+
+            var dataGrid = gridTopology.DataGrid;
 
             if (job.Status == PathfindStatus.Found)
             {
                 GL.Enable(EnableCap.Texture2D);
-                var waypoints = job.GetShortestPath();
 
-                var previousWayPoint = job.Start;
+                var waypoints = job.GetShortestPath().Select((id) => dataGrid.GetPosition(id)).ToArray();
+
+                var previousWayPoint = dataGrid.GetPosition(job.StartId);
 
                 foreach (var waypoint in waypoints)
                 {
@@ -110,8 +116,8 @@ namespace OpenBreed.Sandbox.App.Systems
                 return;
             }
 
+            var positions = GetWaypoints(job, dataGrid);
 
-            var positions = job.GetWaypoints();
             foreach (var pair in positions)
             {
                 RenderWaypoint(job, pair.Item1, pair.Item2, view);
@@ -129,6 +135,16 @@ namespace OpenBreed.Sandbox.App.Systems
             }
 
             GL.Disable(EnableCap.Texture2D);
+        }
+
+        public IEnumerable<(Vector2i, Vector2i)> GetWaypoints(IPathfindJob job, IDataGrid<CellData> dataGrid)
+        {
+            foreach (var pair in job.CameFrom)
+            {
+                var fromPos = dataGrid.GetPosition(pair.Key);
+                var toPos = dataGrid.GetPosition(pair.Value);
+                yield return (fromPos, Vector2i.Subtract(toPos, fromPos));
+            }
         }
 
         #endregion Private Methods

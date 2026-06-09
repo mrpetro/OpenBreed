@@ -1,69 +1,71 @@
 ﻿using OpenBreed.Pathfinding.Abstractions.Services;
 using OpenBreed.Sandbox.App.Constants;
-using OpenTK.Mathematics;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.App
 {
     internal class GridTopology : ITopology
     {
-        private readonly IDataGrid<CellData> dataGrid;
+        #region Public Constructors
 
         public GridTopology(IDataGrid<CellData> dataGrid)
         {
-            this.dataGrid = dataGrid;
+            DataGrid = dataGrid;
         }
 
-        public int GetId(Vector2i position)
-        {
-            return dataGrid.GetId(position);
-        }
+        #endregion Public Constructors
 
-        public Vector2i GetPosition(int id)
-        {
-            return dataGrid.GetPosition(id);
-        }
+        #region Public Properties
+
+        public IDataGrid<CellData> DataGrid { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public int GetWeight(int id)
         {
-            var pos = dataGrid.GetPosition(id);
-            var cell = dataGrid.Get(pos);
+            var pos = DataGrid.GetPosition(id);
+            var cell = DataGrid.Get(pos);
 
             switch (cell.GfxId)
             {
                 case Tiles.Empty:
                     return 2;
+
                 case Tiles.Water:
                     return 1;
+
                 case Tiles.Wall:
                     return 0;
+
                 default:
                     return 2;
             }
         }
 
-        public bool TryGetDownFromId(int id, out int downId)
+        public bool TryGetNeighborNodeId(int id, int exitId, out int neighbourId)
         {
-           return dataGrid.TryGetDownFromId(id, out downId);
+            switch (exitId)
+            {
+                case 0:
+                    return DataGrid.TryGetLeftFromId(id, out neighbourId);
+
+                case 1:
+                    return DataGrid.TryGetUpFromId(id, out neighbourId);
+
+                case 2:
+                    return DataGrid.TryGetRightFromId(id, out neighbourId);
+
+                case 3:
+                    return DataGrid.TryGetDownFromId(id, out neighbourId);
+
+                default:
+                    throw new InvalidOperationException("Supports only 0-3 exit IDs");
+            }
         }
 
-        public bool TryGetLeftFromId(int id, out int leftId)
-        {
-            return dataGrid.TryGetLeftFromId(id, out leftId);
-        }
-
-        public bool TryGetRightFromId(int id, out int rightId)
-        {
-            return dataGrid.TryGetRightFromId(id, out rightId);
-        }
-
-        public bool TryGetUpFromId(int id, out int upId)
-        {
-            return dataGrid.TryGetUpFromId(id, out upId);
-        }
+        #endregion Public Methods
     }
 }

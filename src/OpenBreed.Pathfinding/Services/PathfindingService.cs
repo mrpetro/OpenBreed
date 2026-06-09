@@ -56,7 +56,7 @@ namespace OpenBreed.Pathfinding.Services
                 return requestId;
             }
 
-            job = new PathfindJob4Way(id, request);
+            job = new Pathfind4WayJob(id, request);
 
             jobQueue.AddLast(job);
             jobLookup.Add(id, job);

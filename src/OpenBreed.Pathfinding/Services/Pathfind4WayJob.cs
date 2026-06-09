@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Abstractions;
 using OpenBreed.Pathfinding.Abstractions.Services;
-using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,26 +24,19 @@ namespace OpenBreed.Pathfinding.Services
         }
     }
 
-    internal class PathfindJob4Way : IInternalPathfindJob
+    internal class Pathfind4WayJob : IInternalPathfindJob
     {
-
-
         #region Private Fields
 
         private readonly Dictionary<int, int> cameFrom = new Dictionary<int, int>();
-        private readonly Dictionary<int, int> progress = new Dictionary<int, int>();
 
         private readonly List<PathfindFront> fronts = new List<PathfindFront>();
-
-        private int startId;
-
-        private int goalId;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PathfindJob4Way(int id, PathfindRequest request)
+        public Pathfind4WayJob(int id, PathfindRequest request)
         {
             Id = id;
             Topology = request.Topology;
@@ -56,9 +48,9 @@ namespace OpenBreed.Pathfinding.Services
 
         #region Public Properties
 
-        public Vector2i Start { get; private set; }
+        public int StartId { get; private set; }
 
-        public Vector2i Goal { get; private set; }
+        public int GoalId { get; private set; }
 
         public PathfindStatus Status { get; private set; } = PathfindStatus.NotStarted;
 
@@ -70,27 +62,17 @@ namespace OpenBreed.Pathfinding.Services
 
         public IEnumerable<IPathfindFront> Fronts => fronts;
 
+        public IReadOnlyDictionary<int, int> CameFrom => cameFrom;
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public IEnumerable<(Vector2i, Vector2i)> GetWaypoints()
-        {
-            foreach (var pair in cameFrom)
-            {
-                var fromPos = Topology.GetPosition(pair.Key);
-                var toPos = Topology.GetPosition(pair.Value);
-                yield return (fromPos, Vector2i.Subtract(toPos, fromPos));
-            }
-        }
-
         public void Run()
         {
             Status = PathfindStatus.Searching;
-
-            var startId = Topology.GetId(Start);
-            fronts.Add(new PathfindFront(startId, 1));
-            cameFrom.Add(startId, -1);
+            fronts.Add(new PathfindFront(StartId, 1));
+            cameFrom.Add(StartId, -1);
         }
 
         private readonly List<PathfindFront> newFronts = new List<PathfindFront>();
@@ -110,7 +92,7 @@ namespace OpenBreed.Pathfinding.Services
 
             foreach (var front in fronts)
             {
-                if (goalId == front.Id)
+                if (GoalId == front.Id)
                 {
                     Status = PathfindStatus.Found;
                     return true;
@@ -130,52 +112,36 @@ namespace OpenBreed.Pathfinding.Services
 
             fronts.Clear();
 
-            //var toRemove = new List<PathfindFront>();
-
             foreach (var front in newFronts)
             {
-                //if (front.Step())
-                //{
                     fronts.Add(front);
-                    //toRemove.Add(front);
-                //}
             }
-
-            //foreach (var front in toRemove)
-            //{
-            //    newFronts.Remove(front);
-            //}
 
             newFronts.Clear();
 
             return false;
         }
 
-        public IEnumerable<Vector2i> GetShortestPath()
+        public IEnumerable<int> GetShortestPath()
         {
-            var id = goalId;
-            var waypoints = new List<Vector2i>();
+            var id = GoalId;
+            var waypoints = new List<int>();
 
-            var pos = Topology.GetPosition(id);
-            waypoints.Add(pos);
+            waypoints.Add(id);
 
             while (cameFrom.TryGetValue(id, out int prevId) && prevId != -1)
             {
-                pos = Topology.GetPosition(prevId);
-                waypoints.Add(pos);
+                waypoints.Add(prevId);
                 id = prevId;
             }
 
-            return waypoints.Reverse<Vector2i>();
+            return waypoints.Reverse<int>();
         }
 
         public void Reset(PathfindRequest request)
         {
-            Start = request.Start;
-            Goal = request.Goal;
-
-            startId = Topology.GetId(Start);
-            goalId = Topology.GetId(Goal);
+            StartId = request.StartId;
+            GoalId = request.GoalId;
             Status = PathfindStatus.NotStarted;
             cameFrom.Clear();
             fronts.Clear();
@@ -191,25 +157,7 @@ namespace OpenBreed.Pathfinding.Services
             var frontId = front.Id;
             var survived = false;
 
-            if (Topology.TryGetUpFromId(frontId, out int upId))
-            {
-                if (CheckNeighbour(front, upId, out PathfindFront newUpFront))
-                {
-                    newFronts.Add(newUpFront);
-                    survived = true;
-                }
-            }
-
-            if (Topology.TryGetDownFromId(frontId, out int downId))
-            {
-                if (CheckNeighbour(front, downId, out PathfindFront newDownFront))
-                {
-                    newFronts.Add(newDownFront);
-                    survived = true;
-                }
-            }
-
-            if (Topology.TryGetLeftFromId(frontId, out int leftId))
+            if (Topology.TryGetNeighborNodeId(frontId, 0, out int leftId))
             {
                 if (CheckNeighbour(front, leftId, out PathfindFront newLeftFront))
                 {
@@ -218,11 +166,29 @@ namespace OpenBreed.Pathfinding.Services
                 }
             }
 
-            if (Topology.TryGetRightFromId(frontId, out int rightId))
+            if (Topology.TryGetNeighborNodeId(frontId, 1, out int upId))
+            {
+                if (CheckNeighbour(front, upId, out PathfindFront newUpFront))
+                {
+                    newFronts.Add(newUpFront);
+                    survived = true;
+                }
+            }
+
+            if (Topology.TryGetNeighborNodeId(frontId, 2, out int rightId))
             {
                 if (CheckNeighbour(front, rightId, out PathfindFront newRightFront))
                 {
                     newFronts.Add(newRightFront);
+                    survived = true;
+                }
+            }
+
+            if (Topology.TryGetNeighborNodeId(frontId, 3, out int downId))
+            {
+                if (CheckNeighbour(front, downId, out PathfindFront newDownFront))
+                {
+                    newFronts.Add(newDownFront);
                     survived = true;
                 }
             }
@@ -238,7 +204,6 @@ namespace OpenBreed.Pathfinding.Services
                 return false;
             }
 
-            var pos = Topology.GetPosition(nextId);
             var weight = Topology.GetWeight(nextId);
 
             if (weight == 0)

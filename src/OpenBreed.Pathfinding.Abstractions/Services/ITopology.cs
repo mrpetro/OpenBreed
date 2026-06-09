@@ -1,24 +1,12 @@
-﻿using OpenTK.Mathematics;
-
-namespace OpenBreed.Pathfinding.Abstractions.Services
+﻿namespace OpenBreed.Pathfinding.Abstractions.Services
 {
     public interface ITopology
     {
         #region Public Methods
 
-        int GetId(Vector2i position);
-
-        Vector2i GetPosition(int id);
-
         int GetWeight(int id);
 
-        bool TryGetDownFromId(int id, out int downId);
-
-        bool TryGetLeftFromId(int id, out int leftId);
-
-        bool TryGetRightFromId(int id, out int rightId);
-
-        bool TryGetUpFromId(int id, out int upId);
+        bool TryGetNeighborNodeId( int id, int exitId, out int neighbourId);
 
         #endregion Public Methods
     }

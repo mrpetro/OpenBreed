@@ -45,7 +45,12 @@ namespace OpenBreed.Sandbox.App.Systems
 
             if (job.Status == PathfindStatus.Found)
             {
-                var waypoints = job.GetShortestPath().ToArray();
+                if (job.Topology is not GridTopology gridTopology)
+                {
+                    throw new InvalidOperationException($"Expected {typeof(GridTopology)}");
+                }
+     
+                var waypoints = job.GetShortestPath().Select((id) => gridTopology.DataGrid.GetPosition(id)).ToArray();
 
                 if (waypoints.Length > 0)
                 {
