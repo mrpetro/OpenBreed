@@ -136,62 +136,6 @@ namespace OpenBreed.Core
             return true;
         }
 
-        public bool TryGetLeftFromId(int id, out int leftId)
-        {
-            var oldY = id / Width;
-
-            leftId = id - 1;
-
-            if (leftId < 0)
-            {
-                return false;
-            }
-
-            var newY = leftId / Width;
-
-            return oldY == newY;
-        }
-
-        public bool TryGetRightFromId(int id, out int rightId)
-        {
-            var oldY = id / Width;
-
-            rightId = id + 1;
-
-            if (rightId >= datas.Length)
-            {
-                return false;
-            }
-
-            var newY = rightId / Width;
-
-            return oldY == newY;
-        }
-
-        public bool TryGetUpFromId(int id, out int upId)
-        {
-            upId = id + Width;
-
-            if (upId >= datas.Length)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public bool TryGetDownFromId(int id, out int downId)
-        {
-            downId = id - Width;
-
-            if (downId < 0)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         #endregion Public Methods
     }
 }

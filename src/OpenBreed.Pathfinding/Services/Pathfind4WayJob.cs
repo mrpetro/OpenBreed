@@ -11,7 +11,7 @@ namespace OpenBreed.Pathfinding.Services
     {
         #region Private Fields
 
-        private const int directionsCount = 8;
+        private const int directionsCount = 4;
 
         private readonly Dictionary<int, int> cameFrom = new Dictionary<int, int>();
 
@@ -153,30 +153,29 @@ namespace OpenBreed.Pathfinding.Services
 
             for (int i = 0; i < directionsCount; i++)
             {
-                if (Topology.TryGetNeighborNodeId(frontId, i, out int nextId, out float distance))
+                if (!Topology.TryGetNeighborNodeId(frontId, i * 2, out int nextId, out float distance, out float weight))
                 {
-                    if (CheckNeighbour(front, nextId, distance, out PathfindFront newFront))
-                    {
-                        newFronts.Add(newFront);
-                        survived = true;
-                    }
+                    continue;
+                }
+
+                if (weight == 0.0f)
+                {
+                    continue;
+                }
+
+                if (CheckNeighbour(front, nextId, distance, weight, out PathfindFront newFront))
+                {
+                    newFronts.Add(newFront);
+                    survived = true;
                 }
             }
 
             return survived;
         }
 
-        private bool CheckNeighbour(PathfindFront front, int nextId, float distance, out PathfindFront newFront)
+        private bool CheckNeighbour(PathfindFront front, int nextId, float distance, float weight, out PathfindFront newFront)
         {
             if (cameFrom.ContainsKey(nextId))
-            {
-                newFront = null;
-                return false;
-            }
-
-            var weight = Topology.GetWeight(nextId);
-
-            if (weight == 0.0f)
             {
                 newFront = null;
                 return false;

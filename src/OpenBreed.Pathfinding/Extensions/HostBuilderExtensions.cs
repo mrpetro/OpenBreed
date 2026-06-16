@@ -20,7 +20,7 @@ namespace OpenBreed.Pathfinding.Extensions
             {
                 services.AddSingleton<PathfindingService>();
                 services.AddSingleton<IPathfindingService>((sp) => sp.GetRequiredService<PathfindingService>());
-                services.AddHostedService<PathfindingService>((sp) => sp.GetRequiredService<PathfindingService>());
+                //services.AddHostedService<PathfindingService>((sp) => sp.GetRequiredService<PathfindingService>());
             });
         }
 

@@ -55,10 +55,10 @@ namespace OpenBreed.Sandbox.App.Systems
                     continue;
                 }
 
-                if (job.Status != PathfindStatus.Found)
-                {
-                    continue;
-                }
+                //if (job.Status != PathfindStatus.Found)
+                //{
+                //    continue;
+                //}
 
                 Render(job, context.View, context.ViewBox);
             }

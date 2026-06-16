@@ -4,9 +4,7 @@
     {
         #region Public Methods
 
-        float GetWeight(int id);
-
-        bool TryGetNeighborNodeId( int id, int exitId, out int neighbourId, out float distance);
+        bool TryGetNeighborNodeId( int id, int exitId, out int neighbourId, out float distance, out float weight);
 
         #endregion Public Methods
     }

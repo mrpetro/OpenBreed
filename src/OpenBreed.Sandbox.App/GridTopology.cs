@@ -24,7 +24,30 @@ namespace OpenBreed.Sandbox.App
 
         #region Public Methods
 
-        public float GetWeight(int id)
+        public bool TryGetNeighborNodeId(int id, int exitId, out int neighbourId, out float distance, out float weight)
+        {
+            var offset = GetOffset(exitId);
+            distance = offset.EuclideanLength;
+
+            var result = DataGrid.TryGetIdByOffset(id, offset, out neighbourId);
+
+            if (!result)
+            {
+                distance = 0.0f;
+                weight = 0.0f;
+                return false;
+            }
+
+            weight = GetWeight(neighbourId);
+
+            return result;
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private float GetWeight(int id)
         {
             var cell = DataGrid.Get(id);
 
@@ -40,7 +63,7 @@ namespace OpenBreed.Sandbox.App
                     return 0.0f;
 
                 default:
-                    return 2;
+                    return 1.0f;
             }
         }
 
@@ -77,13 +100,6 @@ namespace OpenBreed.Sandbox.App
             }
         }
 
-        public bool TryGetNeighborNodeId(int id, int exitId, out int neighbourId, out float distance)
-        {
-            var offset = GetOffset(exitId);
-            distance = offset.EuclideanLength;
-            return DataGrid.TryGetIdByOffset(id, offset, out neighbourId);
-        }
-
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

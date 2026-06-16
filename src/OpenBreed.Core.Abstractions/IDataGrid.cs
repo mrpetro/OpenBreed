@@ -90,14 +90,6 @@ namespace OpenBreed.Core.Abstractions
 
         bool TryGetIdByOffset(int id, Vector2i offset, out int resultId);
             
-        bool TryGetUpFromId(int id, out int upId);
-
-        bool TryGetDownFromId(int id, out int downId);
-
-        bool TryGetLeftFromId(int id, out int leftId);
-
-        bool TryGetRightFromId(int id, out int rightId);
-
         #endregion Public Methods
     }
 }
