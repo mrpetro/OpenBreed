@@ -11,9 +11,13 @@
         public const int MoveDown = 4;
         public const int MoveLeft = 5;
         public const int MoveUp = 6;
-        public const int Wall = 7;
-        public const int Front = 8;
-        public const int Water = 9;
+        public const int MoveRightDown = 7;
+        public const int MoveDownLeft = 8;
+        public const int MoveLeftUp = 9;
+        public const int MoveUpRight = 10;
+        public const int Wall = 11;
+        public const int Front = 12;
+        public const int Water = 13;
         #endregion Public Fields
     }
 }

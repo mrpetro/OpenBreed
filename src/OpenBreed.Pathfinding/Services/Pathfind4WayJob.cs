@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Abstractions;
+using OpenBreed.Pathfinding.Abstractions;
 using OpenBreed.Pathfinding.Abstractions.Services;
 using System;
 using System.Collections.Generic;
@@ -6,31 +7,17 @@ using System.Linq;
 
 namespace OpenBreed.Pathfinding.Services
 {
-    internal class PathfindFront : IPathfindFront
-    {
-        private int stepsLeft;
-
-        public PathfindFront(int id, int stepsLeft)
-        {
-            Id = id;
-            this.stepsLeft = stepsLeft;
-        }
-
-        public int Id { get; }
-        public bool Step()
-        {
-            stepsLeft--;
-            return stepsLeft == 0;
-        }
-    }
-
     internal class Pathfind4WayJob : IInternalPathfindJob
     {
         #region Private Fields
 
+        private const int directionsCount = 8;
+
         private readonly Dictionary<int, int> cameFrom = new Dictionary<int, int>();
 
         private readonly List<PathfindFront> fronts = new List<PathfindFront>();
+
+        private readonly List<PathfindFront> newFronts = new List<PathfindFront>();
 
         #endregion Private Fields
 
@@ -71,11 +58,14 @@ namespace OpenBreed.Pathfinding.Services
         public void Run()
         {
             Status = PathfindStatus.Searching;
-            fronts.Add(new PathfindFront(StartId, 1));
+            fronts.Add(CreateFront(StartId, 1, 0));
             cameFrom.Add(StartId, -1);
         }
 
-        private readonly List<PathfindFront> newFronts = new List<PathfindFront>();
+        private PathfindFront CreateFront(int id, float weight, float distance)
+        {
+            return new PathfindFront(id,  distance / weight);
+        }
 
         public bool Step()
         {
@@ -98,7 +88,7 @@ namespace OpenBreed.Pathfinding.Services
                     return true;
                 }
 
-                if (!front.Step())
+                if (!front.Step(smallestStep))
                 {
                     newFronts.Add(front);
                     continue;
@@ -106,15 +96,17 @@ namespace OpenBreed.Pathfinding.Services
 
                 if (ExpandFront(front))
                 {
-
                 }
             }
 
             fronts.Clear();
 
+            smallestStep = float.MaxValue;
+
             foreach (var front in newFronts)
             {
-                    fronts.Add(front);
+                smallestStep = Math.Min(smallestStep, front.StepLeft);
+                fronts.Add(front);
             }
 
             newFronts.Clear();
@@ -152,51 +144,29 @@ namespace OpenBreed.Pathfinding.Services
 
         #region Private Methods
 
+        private float smallestStep = float.MaxValue;
+
         private bool ExpandFront(PathfindFront front)
         {
             var frontId = front.Id;
             var survived = false;
 
-            if (Topology.TryGetNeighborNodeId(frontId, 0, out int leftId))
+            for (int i = 0; i < directionsCount; i++)
             {
-                if (CheckNeighbour(front, leftId, out PathfindFront newLeftFront))
+                if (Topology.TryGetNeighborNodeId(frontId, i, out int nextId, out float distance))
                 {
-                    newFronts.Add(newLeftFront);
-                    survived = true;
-                }
-            }
-
-            if (Topology.TryGetNeighborNodeId(frontId, 1, out int upId))
-            {
-                if (CheckNeighbour(front, upId, out PathfindFront newUpFront))
-                {
-                    newFronts.Add(newUpFront);
-                    survived = true;
-                }
-            }
-
-            if (Topology.TryGetNeighborNodeId(frontId, 2, out int rightId))
-            {
-                if (CheckNeighbour(front, rightId, out PathfindFront newRightFront))
-                {
-                    newFronts.Add(newRightFront);
-                    survived = true;
-                }
-            }
-
-            if (Topology.TryGetNeighborNodeId(frontId, 3, out int downId))
-            {
-                if (CheckNeighbour(front, downId, out PathfindFront newDownFront))
-                {
-                    newFronts.Add(newDownFront);
-                    survived = true;
+                    if (CheckNeighbour(front, nextId, distance, out PathfindFront newFront))
+                    {
+                        newFronts.Add(newFront);
+                        survived = true;
+                    }
                 }
             }
 
             return survived;
         }
 
-        private bool CheckNeighbour(PathfindFront front, int nextId, out PathfindFront newFront)
+        private bool CheckNeighbour(PathfindFront front, int nextId, float distance, out PathfindFront newFront)
         {
             if (cameFrom.ContainsKey(nextId))
             {
@@ -206,14 +176,14 @@ namespace OpenBreed.Pathfinding.Services
 
             var weight = Topology.GetWeight(nextId);
 
-            if (weight == 0)
+            if (weight == 0.0f)
             {
                 newFront = null;
                 return false;
             }
 
             cameFrom.Add(nextId, front.Id);
-            newFront = new PathfindFront(nextId, 3 - weight);
+            newFront = CreateFront(nextId, weight, distance);
             return true;
         }
 
@@ -223,7 +193,7 @@ namespace OpenBreed.Pathfinding.Services
 
         internal class NodeState
         {
-            #region Private Constructors
+            #region Public Constructors
 
             public NodeState(int id, int progress)
             {
@@ -231,7 +201,7 @@ namespace OpenBreed.Pathfinding.Services
                 this.progress = progress;
             }
 
-            #endregion Private Constructors
+            #endregion Public Constructors
 
             #region Public Properties
 

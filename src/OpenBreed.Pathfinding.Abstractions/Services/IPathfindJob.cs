@@ -3,21 +3,6 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Pathfinding.Abstractions.Services
 {
-    public interface IPathfindFront
-    {
-        #region Public Properties
-
-        int Id { get; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        bool Step();
-
-        #endregion Public Methods
-    }
-
     public interface IPathfindJob
     {
         #region Public Properties

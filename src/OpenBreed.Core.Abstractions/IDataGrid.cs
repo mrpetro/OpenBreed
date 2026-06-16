@@ -43,9 +43,16 @@ namespace OpenBreed.Core.Abstractions
         /// <summary>
         /// Get data from given index coordinates
         /// </summary>
-        /// <param name="pos">Index coordinates</param>
+        /// <param name="pos">Grid cell index coordinates</param>
         /// <returns>Resulting data</returns>
         TObject Get(Vector2i pos);
+
+        /// <summary>
+        /// Get data from given id
+        /// </summary>
+        /// <param name="id">Id of grid cell</param>
+        /// <returns>Resulting data</returns>
+        TObject Get(int id);
 
         /// <summary>
         /// Gets the grid coordinates identifier.
@@ -81,6 +88,8 @@ namespace OpenBreed.Core.Abstractions
 
         Vector2i GetPosition(int id);
 
+        bool TryGetIdByOffset(int id, Vector2i offset, out int resultId);
+            
         bool TryGetUpFromId(int id, out int upId);
 
         bool TryGetDownFromId(int id, out int downId);

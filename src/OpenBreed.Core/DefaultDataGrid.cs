@@ -37,8 +37,13 @@ namespace OpenBreed.Core
 
         public TObject Get(Vector2i pos)
         {
-            var dataIndex = GetId(pos);
-            return datas[dataIndex];
+            var cellId = GetId(pos);
+            return Get(cellId);
+        }
+
+        public TObject Get(int id)
+        {
+            return datas[id];
         }
 
         public bool IsValidId(int id)
@@ -115,6 +120,20 @@ namespace OpenBreed.Core
             var x = id % Width;
             var y = id / Width;
             return new Vector2i(x, y);
+        }
+
+        public bool TryGetIdByOffset(int id, Vector2i offset, out int resultId)
+        {
+            var position = GetPosition(id) + offset;
+
+            if (!IsValid(position))
+            {
+                resultId = -1;
+                return false;
+            }
+
+            resultId = GetId(position);
+            return true;
         }
 
         public bool TryGetLeftFromId(int id, out int leftId)

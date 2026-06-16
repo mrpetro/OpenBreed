@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Pathfinding.Abstractions.Services;
 using OpenBreed.Sandbox.App.Constants;
-
+using OpenTK.Mathematics;
 using System;
 
 namespace OpenBreed.Sandbox.App
@@ -24,46 +24,64 @@ namespace OpenBreed.Sandbox.App
 
         #region Public Methods
 
-        public int GetWeight(int id)
+        public float GetWeight(int id)
         {
-            var pos = DataGrid.GetPosition(id);
-            var cell = DataGrid.Get(pos);
+            var cell = DataGrid.Get(id);
 
             switch (cell.GfxId)
             {
                 case Tiles.Empty:
-                    return 2;
+                    return 1.0f;
 
                 case Tiles.Water:
-                    return 1;
+                    return 0.5f;
 
                 case Tiles.Wall:
-                    return 0;
+                    return 0.0f;
 
                 default:
                     return 2;
             }
         }
 
-        public bool TryGetNeighborNodeId(int id, int exitId, out int neighbourId)
+        private Vector2i GetOffset(int exitId)
         {
             switch (exitId)
             {
                 case 0:
-                    return DataGrid.TryGetLeftFromId(id, out neighbourId);
+                    return new Vector2i(-1, 0);
 
                 case 1:
-                    return DataGrid.TryGetUpFromId(id, out neighbourId);
+                    return new Vector2i(-1, 1);
 
                 case 2:
-                    return DataGrid.TryGetRightFromId(id, out neighbourId);
+                    return new Vector2i(0, 1);
 
                 case 3:
-                    return DataGrid.TryGetDownFromId(id, out neighbourId);
+                    return new Vector2i(1, 1);
+
+                case 4:
+                    return new Vector2i(1, 0);
+
+                case 5:
+                    return new Vector2i(1, -1);
+
+                case 6:
+                    return new Vector2i(0, -1);
+
+                case 7:
+                    return new Vector2i(-1, -1);
 
                 default:
                     throw new InvalidOperationException("Supports only 0-3 exit IDs");
             }
+        }
+
+        public bool TryGetNeighborNodeId(int id, int exitId, out int neighbourId, out float distance)
+        {
+            var offset = GetOffset(exitId);
+            distance = offset.EuclideanLength;
+            return DataGrid.TryGetIdByOffset(id, offset, out neighbourId);
         }
 
         #endregion Public Methods

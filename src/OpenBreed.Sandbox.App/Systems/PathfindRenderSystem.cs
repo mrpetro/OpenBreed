@@ -14,9 +14,11 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 
@@ -53,6 +55,11 @@ namespace OpenBreed.Sandbox.App.Systems
                     continue;
                 }
 
+                if (job.Status != PathfindStatus.Found)
+                {
+                    continue;
+                }
+
                 Render(job, context.View, context.ViewBox);
             }
         }
@@ -66,21 +73,49 @@ namespace OpenBreed.Sandbox.App.Systems
             view.PushMatrix();
             view.Translate(new Vector3(pos.X * 16, pos.Y * 16, 0.0f));
 
-            if (dir.X == -1 && dir.Y == 0)
+            if (dir.X == -1)
             {
-                view.Context.TileRenderer.Render(view, 0, Tiles.MoveLeft);
+                if (dir.Y == -1)
+                {
+                    view.Context.TileRenderer.Render(view, 0, Tiles.MoveDownLeft);
+                }
+                else if (dir.Y == 0)
+                {
+                    view.Context.TileRenderer.Render(view, 0, Tiles.MoveLeft);
+                }
+                else if (dir.Y == 1)
+                {
+                    view.Context.TileRenderer.Render(view, 0, Tiles.MoveLeftUp);
+                }
             }
-            else if (dir.X == 1 && dir.Y == 0)
+            else if (dir.X == 0)
             {
-                view.Context.TileRenderer.Render(view, 0, Tiles.MoveRight);
+                if (dir.Y == -1)
+                {
+                    view.Context.TileRenderer.Render(view, 0, Tiles.MoveDown);
+                }
+                else if (dir.Y == 0)
+                {
+                }
+                else if (dir.Y == 1)
+                {
+                    view.Context.TileRenderer.Render(view, 0, Tiles.MoveUp);
+                }
             }
-            else if (dir.X == 0 && dir.Y == -1)
+            else if (dir.X == 1)
             {
-                view.Context.TileRenderer.Render(view, 0, Tiles.MoveDown);
-            }
-            else if (dir.X == 0 && dir.Y == 1)
-            {
-                view.Context.TileRenderer.Render(view, 0, Tiles.MoveUp);
+                if (dir.Y == -1)
+                {
+                    view.Context.TileRenderer.Render(view, 0, Tiles.MoveRightDown);
+                }
+                else if (dir.Y == 0)
+                {
+                    view.Context.TileRenderer.Render(view, 0, Tiles.MoveRight);
+                }
+                else if (dir.Y == 1)
+                {
+                    view.Context.TileRenderer.Render(view, 0, Tiles.MoveUpRight);
+                }
             }
 
             view.PopMatrix();
