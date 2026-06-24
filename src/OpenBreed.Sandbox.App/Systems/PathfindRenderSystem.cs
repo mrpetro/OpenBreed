@@ -151,6 +151,9 @@ namespace OpenBreed.Sandbox.App.Systems
                 return;
             }
 
+            return;
+
+
             var positions = GetWaypoints(job, dataGrid);
 
             foreach (var pair in positions)

@@ -1,17 +1,17 @@
 ﻿using OpenBreed.Core.Abstractions;
+using OpenBreed.Database.Interface.Items;
 using OpenBreed.Pathfinding.Abstractions;
 using OpenBreed.Pathfinding.Abstractions.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace OpenBreed.Pathfinding.Services
 {
-    internal class Pathfind4WayJob : IInternalPathfindJob
+    internal class Pathfind8WayJob : IInternalPathfindJob
     {
         #region Private Fields
-
-        private const int directionsCount = 4;
 
         private readonly Dictionary<int, int> cameFrom = new Dictionary<int, int>();
 
@@ -23,7 +23,7 @@ namespace OpenBreed.Pathfinding.Services
 
         #region Public Constructors
 
-        public Pathfind4WayJob(int id, PathfindRequest request)
+        public Pathfind8WayJob(int id, PathfindRequest request)
         {
             Id = id;
             Topology = request.Topology;
@@ -94,9 +94,7 @@ namespace OpenBreed.Pathfinding.Services
                     continue;
                 }
 
-                if (ExpandFront(front))
-                {
-                }
+                ExpandFront(front);
             }
 
             fronts.Clear();
@@ -146,31 +144,85 @@ namespace OpenBreed.Pathfinding.Services
 
         private float smallestStep = float.MaxValue;
 
-        private bool ExpandFront(PathfindFront front)
+
+
+        private int hghg(PathfindFront front, int exit1, int exit2, int exit3)
         {
-            var frontId = front.Id;
-            var survived = false;
+            var newFrontsNo = 0;
 
-            for (int i = 0; i < directionsCount; i++)
+
+
+            return newFrontsNo;
+        }
+
+        private bool ExpandFrontAtExit(PathfindFront front, int exitId)
+        {
+            if (!Topology.TryGetNeighborNodeId(front.Id, exitId, out int nextId, out float distance, out float weight))
             {
-                if (!Topology.TryGetNeighborNodeId(frontId, i * 2, out int nextId, out float distance, out float weight))
-                {
-                    continue;
-                }
-
-                if (weight == 0.0f)
-                {
-                    continue;
-                }
-
-                if (CheckNeighbour(front, nextId, distance, weight, out PathfindFront newFront))
-                {
-                    newFronts.Add(newFront);
-                    survived = true;
-                }
+                return false;
             }
 
-            return survived;
+            if (weight == 0.0f)
+            {
+                return false;
+            }
+
+            if (CheckNeighbour(front, nextId, distance, weight, out PathfindFront newFront))
+            {
+                newFronts.Add(newFront);
+            }
+
+            return true;
+        }
+
+        private void ExpandFront(PathfindFront front)
+        {
+            var frontId = front.Id;
+            var leftOk = false;
+            var rightOk = false;
+            var upOk = false;
+            var downOk = false;
+
+
+            if (ExpandFrontAtExit(front, 0))
+            {
+                leftOk = true;
+            }
+
+            if (ExpandFrontAtExit(front, 2))
+            {
+                upOk = true;
+            }
+
+            if (ExpandFrontAtExit(front, 4))
+            {
+                rightOk = true;
+            }
+
+            if (ExpandFrontAtExit(front, 6))
+            {
+                downOk = true;
+            }
+
+            if (leftOk && upOk)
+            {
+                ExpandFrontAtExit(front, 1);
+            }
+
+            if (upOk && rightOk)
+            {
+                ExpandFrontAtExit(front, 3);
+            }
+
+            if (rightOk && downOk)
+            {
+                ExpandFrontAtExit(front, 5);
+            }
+
+            if (downOk && leftOk)
+            {
+                ExpandFrontAtExit(front, 7);
+            }
         }
 
         private bool CheckNeighbour(PathfindFront front, int nextId, float distance, float weight, out PathfindFront newFront)
