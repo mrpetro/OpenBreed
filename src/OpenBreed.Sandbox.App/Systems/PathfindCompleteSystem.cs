@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using OpenBreed.Core.Abstractions.Extensions;
 
 namespace OpenBreed.Sandbox.App.Systems
 {
@@ -49,12 +50,22 @@ namespace OpenBreed.Sandbox.App.Systems
                 {
                     throw new InvalidOperationException($"Expected {typeof(GridTopology)}");
                 }
-     
-                var waypoints = job.GetShortestPath().Select((id) => gridTopology.DataGrid.GetPosition(id)).ToArray();
 
-                if (waypoints.Length > 0)
+                var pathfindRequest = entity.Get<PathfindRequestComponent>();
+
+                var waypoints = job.GetShortestPath().Skip(1).SkipLast(1)
+                    .Select((id) => gridTopology.DataGrid.GetIndex(id)).Select(item => item.ToPosition(cellSize: 16, CellAnchor.Center)).ToList();
+
+                waypoints.Add(pathfindRequest.GoalPosition);
+
+                if (waypoints.Count > 0)
                 {
-                    entity.Add(new PathFollowRequestComponent(waypoints));
+                    var follower = entity.Get<WaypointFollowerComponent>();
+
+                    follower.Waypoints = waypoints;
+                    follower.CurrentWaypointIndex = 0;
+                    follower.MoveSpeed = 128;
+                    follower.ArrivalDistance = 8f;
                 }
             }
 

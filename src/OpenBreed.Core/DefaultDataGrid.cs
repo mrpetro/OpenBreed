@@ -115,7 +115,7 @@ namespace OpenBreed.Core
             return pos.X + Width * pos.Y;
         }
 
-        public Vector2i GetPosition(int id)
+        public Vector2i GetIndex(int id)
         {
             var x = id % Width;
             var y = id / Width;
@@ -124,7 +124,7 @@ namespace OpenBreed.Core
 
         public bool TryGetIdByOffset(int id, Vector2i offset, out int resultId)
         {
-            var position = GetPosition(id) + offset;
+            var position = GetIndex(id) + offset;
 
             if (!IsValid(position))
             {

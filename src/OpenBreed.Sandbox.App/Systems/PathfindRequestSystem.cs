@@ -1,7 +1,9 @@
-﻿using OpenBreed.Pathfinding.Abstractions.Services;
+﻿using OpenBreed.Core.Abstractions.Extensions;
+using OpenBreed.Pathfinding.Abstractions.Services;
 using OpenBreed.Sandbox.App.Components;
 using OpenBreed.Sandbox.App.Services;
 using OpenBreed.Wecs.Abstractions.Events;
+using OpenBreed.Wecs.Core.Components;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -43,20 +45,20 @@ namespace OpenBreed.Sandbox.App.Systems
 
             var cursorPos4 = e.Position;
 
-            var indexPos = new Vector2i((int)(cursorPos4.X / 16), (int)(cursorPos4.Y / 16));
+            var goalPos = new Vector2(cursorPos4.X, cursorPos4.Y);
 
             var mapEntity = entityMan.GetByTag("Map").First();
             var dudeEntity = entityMan.GetByTag("Dude").First();
 
             var mapCmp = mapEntity.Get<MapComponent>();
-            var dudePositionCmp = dudeEntity.Get<MapPositionComponent>();
+            var dudePositionCmp = dudeEntity.Get<PositionComponent>();
             var pathfindRequestCmp = dudeEntity.TryGet<PathfindRequestComponent>();
             var dataGrid = mapCmp.Grid;
             var requestId = -1;
             var pathfindRequest = new PathfindRequest()
             {
-                StartId = dataGrid.GetId(dudePositionCmp.Value),
-                GoalId = dataGrid.GetId(indexPos),
+                StartId = dataGrid.GetId(dudePositionCmp.Value.ToCellIndex(cellSize: 16)),
+                GoalId = dataGrid.GetId(goalPos.ToCellIndex(cellSize: 16)),
                 Topology = new GridTopology(mapCmp.Grid),
                 Tag = dudeEntity
             };
@@ -71,7 +73,7 @@ namespace OpenBreed.Sandbox.App.Systems
             if (pathfindRequestCmp is null)
             {
                 dudeEntity.Remove<PathFollowRequestComponent>();
-                dudeEntity.Set(new PathfindRequestComponent(requestId));
+                dudeEntity.Set(new PathfindRequestComponent(requestId, goalPos));
             }
 
             return;

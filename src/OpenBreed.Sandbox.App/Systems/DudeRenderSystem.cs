@@ -10,6 +10,7 @@ using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Sandbox.App.Components;
 using OpenBreed.Sandbox.App.Constants;
 using OpenBreed.Sandbox.App.Services;
+using OpenBreed.Wecs.Core.Components;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
@@ -55,11 +56,12 @@ namespace OpenBreed.Sandbox.App.Systems
 
         private void RenderDude(IEntity entity, IRenderView view, Box2 clipBox)
         {
-            var position = entity.Get<MapPositionComponent>();
+            var position = entity.Get<PositionComponent>();
             var pathfindRequestCmp = entity.TryGet<PathfindRequestComponent>();
 
             view.PushMatrix();
-            view.Translate(new Vector3(position.Value.X * 16, position.Value.Y * 16, 0.0f));
+            view.Translate(position.Value);
+            view.Translate(new Vector3(-8, -8, 0.0f));
             view.Context.TileRenderer.Render(view, 0, Tiles.Dude);
             view.PopMatrix();
 
@@ -80,7 +82,7 @@ namespace OpenBreed.Sandbox.App.Systems
 
             var dataGrid = gridTopology.DataGrid;
 
-            var goal = dataGrid.GetPosition(job.GoalId);
+            var goal = dataGrid.GetIndex(job.GoalId);
 
             view.PushMatrix();
             view.Translate(new Vector3(goal.X * 16, goal.Y * 16, 0.0f));

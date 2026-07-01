@@ -7,9 +7,10 @@ namespace OpenBreed.Sandbox.App.Components
     {
         #region Public Constructors
 
-        public PathfindRequestComponent(int requestId)
+        public PathfindRequestComponent(int requestId, Vector2 goalPosition)
         {
             RequestId = requestId;
+            GoalPosition = goalPosition;
         }
 
         #endregion Public Constructors
@@ -17,6 +18,7 @@ namespace OpenBreed.Sandbox.App.Components
         #region Public Properties
 
         public int RequestId { get; }
+        public Vector2 GoalPosition { get; }
 
         #endregion Public Properties
     }

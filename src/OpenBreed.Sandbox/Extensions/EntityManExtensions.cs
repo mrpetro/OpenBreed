@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using OpenBreed.Common.Game;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Core.Abstractions.Extensions;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -61,7 +62,7 @@ namespace OpenBreed.Sandbox.Extensions
             var world = worldMan.GetById(entity.WorldId);
             var mapEntity = entityMan.GetMapEntity(entity.WorldId);
             var dataGrid = mapEntity.Get<DataGridComponent>().Grid;
-            var indexPos = new Vector2i((int)pos.Value.X / 16, (int)pos.Value.Y / 16);
+            var indexPos = pos.Value.ToCellIndex(cellSize: 16);
             var thisEntity = dataGrid.Get(indexPos);
             var indexIndexPos = Vector2i.Add(indexPos, new Vector2i(ox, oy));
             var resultEntityId = dataGrid.Get(indexIndexPos);

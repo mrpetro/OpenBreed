@@ -16,11 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
+
 
 namespace OpenBreed.Sandbox.App.Systems
 {
@@ -134,9 +130,9 @@ namespace OpenBreed.Sandbox.App.Systems
             {
                 GL.Enable(EnableCap.Texture2D);
 
-                var waypoints = job.GetShortestPath().Select((id) => dataGrid.GetPosition(id)).ToArray();
+                var waypoints = job.GetShortestPath().Select((id) => dataGrid.GetIndex(id)).ToArray();
 
-                var previousWayPoint = dataGrid.GetPosition(job.StartId);
+                var previousWayPoint = dataGrid.GetIndex(job.StartId);
 
                 foreach (var waypoint in waypoints)
                 {
@@ -163,7 +159,7 @@ namespace OpenBreed.Sandbox.App.Systems
 
             foreach (var front in job.Fronts)
             {
-                var frontPos = dataGrid.GetPosition(front.Id);
+                var frontPos = dataGrid.GetIndex(front.Id);
 
                 view.PushMatrix();
                 view.Translate(new Vector3(frontPos.X * 16, frontPos.Y * 16, 0.0f));
@@ -179,8 +175,8 @@ namespace OpenBreed.Sandbox.App.Systems
         {
             foreach (var pair in job.CameFrom)
             {
-                var fromPos = dataGrid.GetPosition(pair.Key);
-                var toPos = dataGrid.GetPosition(pair.Value);
+                var fromPos = dataGrid.GetIndex(pair.Key);
+                var toPos = dataGrid.GetIndex(pair.Value);
                 yield return (fromPos, Vector2i.Subtract(toPos, fromPos));
             }
         }

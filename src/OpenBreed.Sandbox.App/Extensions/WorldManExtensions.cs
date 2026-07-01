@@ -29,13 +29,15 @@ namespace OpenBreed.Sandbox.App.Extensions
                 .AddRenderingSystems()
                 .AddScriptingSystems()
                 .AddSystem<MapRenderSystem>()
-                .AddSystem<DudeRenderSystem>()
                 .AddSystem<PathfindRenderSystem>()
                 .AddSystem<MapEditSystem>()
                 .AddSystem<PathfindRequestSystem>()
                 .AddSystem<PathfindCompleteSystem>()   
                 .AddSystem<PathfindStepSystem>()
-                .AddSystem<PathFollowSystem>()
+                //.AddSystem<PathFollowSystem>()
+                .AddSystem<WaypointMovementSystem>()
+                .AddSystem<WaypointRenderSystem>()
+                .AddSystem<DudeRenderSystem>()
                 .SetName("Sandbox").Build();
         }
     }

@@ -72,6 +72,11 @@ namespace OpenBreed.Core.Abstractions.Extensions
             return newVec * (magA + (magB - magA) * t);
         }
 
+        public static Vector2i ToCellIndex(this Vector2 v, int cellSize = 16)
+        {
+            return new Vector2i((int)v.X / 16, (int)v.Y / 16);
+        }
+
         #endregion Public Methods
     }
 }

@@ -6,7 +6,9 @@ using OpenBreed.Pathfinding.Abstractions.Services;
 using OpenBreed.Sandbox.App.Components;
 using OpenBreed.Sandbox.App.Constants;
 using OpenBreed.Sandbox.App.Extensions;
+using OpenBreed.Sandbox.App.Systems;
 using OpenBreed.Scripting.Lua.Extensions;
+using OpenBreed.Wecs.Core.Components;
 using OpenTK.Mathematics;
 using System;
 
@@ -497,7 +499,9 @@ namespace OpenBreed.Sandbox
             wecsCore.Worlds.RequestAddEntity(dummy, world.Id);
 
             var dude = wecsCore.Entities.Create()
-                .AddComponent(new MapPositionComponent(5, 5))
+                //.AddComponent(new MapPositionComponent(5, 5))
+                .AddComponent(new WaypointFollowerComponent())
+                .AddComponent(PositionComponent.Create(16, 16))
                 .SetTag("Dude")
                 .Build();
             wecsCore.Worlds.RequestAddEntity(dude, world.Id);

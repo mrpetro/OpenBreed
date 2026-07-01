@@ -86,7 +86,12 @@ namespace OpenBreed.Core.Abstractions
         /// <param name="cellAction">Action to perform on all cells.</param>
         void SetAll(Action<TObject> cellAction);
 
-        Vector2i GetPosition(int id);
+        /// <summary>
+        /// Gets cell index coordinates from given cell ID.
+        /// </summary>
+        /// <param name="id">ID of grid cell.</param>
+        /// <returns>Cell index coordinates.</returns>
+        Vector2i GetIndex(int id);
 
         bool TryGetIdByOffset(int id, Vector2i offset, out int resultId);
             
