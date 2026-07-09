@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Game.Services;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Attributes;
+using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Systems;
@@ -28,12 +29,14 @@ namespace OpenBreed.Sandbox.Systems.Actor
         public void OnEvent(VelocityChangedEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
+            var entityClass = services.Classes.GetById(entity.ClassId);
 
-            if (!entity.Is(actorClass))
+            if (!entityClass.IsOrInheritsFrom(actorClass))
             {
                 return;
             }
 
+            var className = entityClass.Name;
             var targetDirection = entity.GetTargetDirection();
             var direction = entity.GetDirection();
             var animDirName = AnimHelper.ToDirectionName(direction);
@@ -44,13 +47,13 @@ namespace OpenBreed.Sandbox.Systems.Actor
             if (isMoving)
             {
                 movementStateName = "Walking";
-                var clipId = services.Clips.GetId($"Vanilla/Common/Actor/{movementStateName}/{animDirName}");
+                var clipId = services.Clips.GetId($"Vanilla/Common/{className}/{movementStateName}/{animDirName}");
                 entity.PlayAnimation(0, clipId);
             }
             else
             {
                 movementStateName = "Standing";
-                var clipId = services.Clips.GetId($"Vanilla/Common/Actor/{movementStateName}/{animDirName}");
+                var clipId = services.Clips.GetId($"Vanilla/Common/{className}/{movementStateName}/{animDirName}");
                 entity.StopAnimation(0);
             }
         }
@@ -58,11 +61,14 @@ namespace OpenBreed.Sandbox.Systems.Actor
         public void OnEvent(DirectionChangedEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
+            var entityClass = services.Classes.GetById(entity.ClassId);
 
-            if (!entity.Is(actorClass))
+            if (!entityClass.IsOrInheritsFrom(actorClass))
             {
                 return;
             }
+
+            var className = entityClass.Name;
 
             var targetDirection = entity.GetTargetDirection();
             var direction = entity.GetDirection();
@@ -80,7 +86,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 movementStateName = "Standing";
             }
 
-            var clipId = services.Clips.GetId($"Vanilla/Common/Actor/{movementStateName}/{animDirName}");
+            var clipId = services.Clips.GetId($"Vanilla/Common/{className}/{movementStateName}/{animDirName}");
             entity.PlayAnimation(0, clipId);
         }
     }

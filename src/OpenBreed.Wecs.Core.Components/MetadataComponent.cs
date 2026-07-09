@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Wecs.Core.Components
+﻿using System.Collections.Generic;
+
+namespace OpenBreed.Wecs.Core.Components
 {
     public interface IMetadataComponentTemplate : IComponentTemplate
     {
@@ -34,6 +36,8 @@
         public string Option { get; }
         public string Flavor { get; set; }
         public string State { get; set; }
+
+        public Dictionary<string, object> Attributes { get; } = new Dictionary<string, object>();
 
         #endregion Public Properties
     }

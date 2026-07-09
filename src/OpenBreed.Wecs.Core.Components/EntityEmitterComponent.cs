@@ -9,15 +9,17 @@ namespace OpenBreed.Wecs.Core.Components
 
     public class EntityEmit
     {
-        public EntityEmit(Guid id, string templateName, Dictionary<string, object> options)
+        public EntityEmit(Guid id, string templateName, string tag, Dictionary<string, object> options)
         {
             Id = id;
             TemplateName = templateName;
+            Tag = tag;
             Options = options;
         }
 
         public string TemplateName { get; }
         public Guid Id { get; }
+        public string Tag { get; } 
         public Dictionary<string, object> Options { get; }
     }
 

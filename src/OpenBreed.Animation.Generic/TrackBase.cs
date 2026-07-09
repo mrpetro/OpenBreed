@@ -12,6 +12,8 @@ namespace OpenBreed.Animation.Generic
         #region Private Fields
 
         private readonly FrameInterpolation interpolation;
+        private readonly float[] times;
+        private readonly TValue[] values;
         private FrameUpdater<TObject, TValue> frameUpdater;
 
         #endregion Private Fields
@@ -23,6 +25,18 @@ namespace OpenBreed.Animation.Generic
             this.Id = builder.Id;
             this.interpolation = builder.Interpolation;
             this.frameUpdater = builder.FrameUpdater;
+
+            this.times = new float[builder.Frames.Count];
+            this.values = new TValue[builder.Frames.Count];
+
+            var counter = 0;
+
+            foreach (var (key, value) in builder.Frames)
+            {
+                times[counter] = key;
+                values[counter] = value;
+                counter++;
+            }
         }
 
         #endregion Internal Constructors
@@ -30,7 +44,6 @@ namespace OpenBreed.Animation.Generic
         #region Public Properties
 
         public string Id { get; }
-
         public abstract IReadOnlyDictionary<float, TValue> Frames { get; }
 
         #endregion Public Properties
@@ -65,6 +78,23 @@ namespace OpenBreed.Animation.Generic
 
         #endregion Public Methods
 
+        #region Protected Methods
+
+        protected int GetKeyFrameIndex(float time)
+        {
+            var index = Array.BinarySearch(times, time);
+
+            if (index < 0)
+            {
+                index = Math.Abs(index) - 2;
+            }
+
+            return index;
+        }
+
+
+        #endregion Protected Methods
+
         #region Private Methods
 
         private TValue SampleFrame(float time)
@@ -84,13 +114,9 @@ namespace OpenBreed.Animation.Generic
 
         private TValue SampleNoInterpolation(float time)
         {
-            foreach (var frame in Frames)
-            {
-                if (time <= frame.Key)
-                    return frame.Value;
-            }
+            var valueIndex = GetKeyFrameIndex(time);
 
-            return Frames.Last().Value;
+            return values[valueIndex];
         }
 
         private void GetFrames(float time, out KeyValuePair<float, TValue> start, out KeyValuePair<float, TValue> end)

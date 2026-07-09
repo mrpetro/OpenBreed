@@ -11,6 +11,8 @@ namespace OpenBreed.Wecs.Core.Components.Extensions
 {
     public static class EntityExtensions
     {
+        #region Public Methods
+
         public static void AddFollower(this IEntity entity, IEntity followerEntity)
         {
             var fc = entity.Get<FollowedComponent>();
@@ -50,23 +52,6 @@ namespace OpenBreed.Wecs.Core.Components.Extensions
         public static Vector2 GetVelocity(this IEntity entity)
         {
             return entity.Get<VelocityComponent>().Value;
-        }
-
-        public static bool Is(this IEntity entity, IEntityClass entityClass)
-        {
-            var classComponent = entity.TryGet<ClassComponent>();
-
-            if (classComponent is null)
-            {
-                return false;
-            }
-
-            if (classComponent.Id == entityClass.Id)
-            {
-                return true;
-            }
-
-            return entityClass.HasAncestorById(classComponent.Id);
         }
 
         public static bool IsMoving(this IEntity entity)
@@ -115,6 +100,22 @@ namespace OpenBreed.Wecs.Core.Components.Extensions
             entity.Get<ThrustComponent>().Value = new OpenTK.Mathematics.Vector2(x, y);
         }
 
+        public static void SetMetadata<TValue>(this IEntity entity, string name, TValue value) where TValue : struct
+        {
+            entity.Get<MetadataComponent>().Attributes[name] = value;
+        }
+
+        public static void SetMetadata(this IEntity entity, string name, string value)
+        {
+            entity.Get<MetadataComponent>().Attributes[name] = value;
+        }
+
+        public static bool TryGetMetadata(this IEntity entity, string name, out string value)
+            => TryGetMetadataPrivate<string>(entity, name, out value);
+
+        public static bool TryGetMetadata<TValue>(this IEntity entity, string name, out TValue value) where TValue : struct
+            => TryGetMetadataPrivate<TValue>(entity, name, out value);
+
         public static IEnumerable<string> GetActionsOnTrigger(this IEntity entity, string triggerName)
         {
             var sc = entity.TryGet<OnTriggerComponent>();
@@ -129,5 +130,29 @@ namespace OpenBreed.Wecs.Core.Components.Extensions
                 yield return action.Action;
             }
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private static bool TryGetMetadataPrivate<TValue>(this IEntity entity, string name, out TValue value)
+        {
+            if (!entity.Get<MetadataComponent>().Attributes.TryGetValue(name, out object objValue))
+            {
+                value = default;
+                return false;
+            }
+
+            if (objValue is not TValue)
+            {
+                value = default;
+                return false;
+            }
+
+            value = (TValue)objValue;
+            return true;
+        }
+
+        #endregion Private Methods
     }
 }

@@ -17,6 +17,7 @@ namespace OpenBreed.Wecs.Services
 
         private readonly EntityMan entityMan;
         private readonly IEntityTemplateLoader entityTemplateLoader;
+        private readonly IEntityClassMan entityClassMan;
         private readonly IServiceProvider serviceProvider;
 
         #endregion Private Fields
@@ -26,10 +27,12 @@ namespace OpenBreed.Wecs.Services
         public EntityFactory(
             EntityMan entityMan,
             IEntityTemplateLoader entityTemplateLoader,
+            IEntityClassMan entityClassMan,
             IServiceProvider serviceProvider)
         {
             this.entityMan = entityMan;
             this.entityTemplateLoader = entityTemplateLoader;
+            this.entityClassMan = entityClassMan;
             this.serviceProvider = serviceProvider;
         }
 
@@ -44,6 +47,7 @@ namespace OpenBreed.Wecs.Services
                 entityMan,
                 serviceProvider,
                 entityTemplateLoader,
+                entityClassMan,
                 entityTemplateName);
         }
 

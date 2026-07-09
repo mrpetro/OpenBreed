@@ -14,6 +14,7 @@ namespace OpenBreed.Wecs.Core.Systems.Extensions
             private readonly EntityEmitterComponent emitterComponent;
             private readonly string templateName;
             private readonly Dictionary<string, object> options = new Dictionary<string, object>();
+            private string tag;
 
             internal EmitBuilder(EntityEmitterComponent emitterComponent, string templateName)
             {
@@ -27,9 +28,15 @@ namespace OpenBreed.Wecs.Core.Systems.Extensions
                 return this;
             }
 
+            public EmitBuilder SetTag(string value)
+            {
+                tag = value;
+                return this;
+            }
+
             public Guid Finish()
             {
-                var newEmit = new EntityEmit(Guid.NewGuid(), templateName, options.ToDictionary(item => item.Key, item => item.Value));
+                var newEmit = new EntityEmit(Guid.NewGuid(), templateName, tag, options.ToDictionary(item => item.Key, item => item.Value));
                 emitterComponent.ToEmit.Add(newEmit);
                 return newEmit.Id;
             }
@@ -41,10 +48,10 @@ namespace OpenBreed.Wecs.Core.Systems.Extensions
             return new EmitBuilder(emitterComponent, templateName);
         }
 
-        public static void Emit(this IEntity entity, string templateName)
+        public static void Emit(this IEntity entity, string templateName, string tag = null)
         {
             var emitComponent = entity.Get<EntityEmitterComponent>();
-            var newEmit = new EntityEmit(Guid.NewGuid(), templateName, new Dictionary<string, object>());
+            var newEmit = new EntityEmit(Guid.NewGuid(), templateName, tag, new Dictionary<string, object>());
             emitComponent.ToEmit.Add(newEmit);
         }
 

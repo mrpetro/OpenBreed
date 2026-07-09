@@ -27,6 +27,30 @@ namespace OpenBreed.Wecs.Abstractions.Attributes
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
+    public class EntityWithTagFilter : EntityEventFilterAttribute
+    {
+        public EntityWithTagFilter(string tag)
+        {
+            Tag = tag;
+
+        }
+
+        public string Tag { get; }
+    }
+
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public class EntityOfClassFilter : EntityEventFilterAttribute
+    {
+        public EntityOfClassFilter(string className)
+        {
+            ClassName = className;
+
+        }
+
+        public string ClassName { get; }
+    }
+
+    [AttributeUsage(AttributeTargets.Parameter)]
     public class TargetWorldAsSourceFilter : WorldEventFilterAttribute
     {
         public TargetWorldAsSourceFilter()

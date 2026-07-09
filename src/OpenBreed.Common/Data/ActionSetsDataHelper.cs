@@ -25,6 +25,7 @@ namespace OpenBreed.Common.Data
                 var newAction = new ActionModel();
                 newAction.Name = actionEntry.Name;
                 newAction.Id = actionEntry.Id;
+                newAction.Disabled = actionEntry.Disabled;
                 newAction.Visibility = actionEntry.Presentation.Visibility;
                 newAction.Description = actionEntry.Description;
                 FromEntry(drawingFactory, drawingContextProvider, imageProvider, newAction, actionEntry.Presentation);

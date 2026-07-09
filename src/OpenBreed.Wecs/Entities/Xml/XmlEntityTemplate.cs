@@ -14,6 +14,9 @@ namespace OpenBreed.Wecs.Entities.Xml
     {
         #region Public Properties
 
+        [XmlElement("Class")]
+        public string ClassName { get; set; }
+
         [XmlElement("Components")]
         public XmlComponentsList XmlComponents { get; set; }
 

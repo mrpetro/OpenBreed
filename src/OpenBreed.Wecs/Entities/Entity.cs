@@ -26,11 +26,12 @@ namespace OpenBreed.Wecs.Entities
         internal Entity(
             EntityMan entityMan,
             string tag,
+            int classId,
             List<IEntityComponent> initialComponents)
         {
             this.entityMan = entityMan;
             Tag = tag;
-
+            ClassId = classId;
             if (initialComponents is null)
                 components = new Dictionary<Type, IEntityComponent>();
             else

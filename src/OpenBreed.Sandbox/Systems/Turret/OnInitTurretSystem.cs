@@ -151,6 +151,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
                     .SetOption("startY", pos.Y)
                     .SetOption("thrustX", thrust.X)
                     .SetOption("thrustY", thrust.Y)
+                    .SetTag("TurretLazer")
                     .Finish();
 
                 services.Logger.LogInformation("TURRET.FIRE");

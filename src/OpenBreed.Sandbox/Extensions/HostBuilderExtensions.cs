@@ -183,6 +183,7 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("TVFlickering", environmentCellLoader);
             mapLegacyDataLoader.Register("MonsterEating", environmentCellLoader);
             mapLegacyDataLoader.Register("L1/ShipSmoke", environmentCellLoader);
+            mapLegacyDataLoader.Register("L1/WorkingGenerator", environmentCellLoader);
 
             var doorCellEntityLoader = new DoorEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
                 managerCollection.GetRequiredService<IEntityFactory>());

@@ -35,7 +35,9 @@ namespace OpenBreed.Sandbox.Systems.Actor
         {
             var entity = services.Entities.GetById(e.EntityId);
 
-            if (!entity.Is(actorClass))
+            var entityClass = services.Classes.GetById(entity.ClassId);
+
+            if (!entityClass.IsOrInheritsFrom(actorClass))
             {
                 return;
             }

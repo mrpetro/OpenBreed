@@ -74,6 +74,12 @@ namespace OpenBreed.Wecs.Services
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        public IEntityClass RootClass => GetById(0);
+
+        #endregion Public Properties
+
         #region Public Methods
 
         public IEntityClass GetByName(string name)

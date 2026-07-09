@@ -154,7 +154,15 @@ namespace OpenBreed.Sandbox.Systems.Game
                     tileGridComponent.Grid.ModifyTile(indexPos, atlasId, gfxValue);
 
                     if (action is null)
+                    {
                         continue;
+                    }
+
+                    if (action.Disabled)
+                    {
+                        visited[ix, iy] = true;
+                        continue;
+                    }
 
                     var cellEntity = LoadCellEntity(mapper, map, visited, ix, iy, world, action, gfxValue);
 
@@ -244,7 +252,9 @@ namespace OpenBreed.Sandbox.Systems.Game
                 return null;
 
             if (mapDataLoader.TryGetEntityLoader(action.Name, out IMapWorldEntityLoader entityLoader))
+            {
                 return entityLoader.Load(mapAssets, map, visited, ix, iy, action.Name, "", gfxValue, world);
+            }
 
             services.Logger.LogWarning("Missing loader for action '{0}'.", action);
             return null;

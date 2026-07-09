@@ -23,6 +23,7 @@ namespace OpenBreed.Database.Xml.Items.Actions
         protected XmlDbAction(XmlDbAction other)
         {
             Id = other.Id;
+            Disabled = other.Disabled;
             Description = other.Description;
             Name = other.Name;
             XmlPresentation = (XmlDbActionPresentation)other.XmlPresentation?.Copy();
@@ -40,6 +41,9 @@ namespace OpenBreed.Database.Xml.Items.Actions
 
         [XmlAttribute]
         public string Name { get; set; }
+
+        [XmlAttribute]
+        public bool Disabled { get; set; }
 
         [XmlIgnore]
         public IDbActionPresentation Presentation { get; private set; } = new XmlDbActionPresentation();

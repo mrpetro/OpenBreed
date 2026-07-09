@@ -26,17 +26,23 @@ namespace OpenBreed.Wecs.Systems
         private readonly IEventsMan eventsMan;
         private readonly Lazy<IWorldMan> lazyWorldMan;
         private readonly IEntityMan entityMan;
+        private readonly IEntityClassMan entityClassMan;
         private Dictionary<Type, Delegate> onEventCallbacks = new Dictionary<Type, Delegate>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EventSystemManager(IEventsMan eventsMan, Lazy<IWorldMan> lazyWorldMan, IEntityMan entityMan)
+        public EventSystemManager(
+            IEventsMan eventsMan,
+            Lazy<IWorldMan> lazyWorldMan,
+            IEntityMan entityMan,
+            IEntityClassMan entityClassMan)
         {
             this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
             this.lazyWorldMan = lazyWorldMan ?? throw new ArgumentNullException(nameof(lazyWorldMan));
             this.entityMan = entityMan ?? throw new ArgumentNullException(nameof(entityMan));
+            this.entityClassMan = entityClassMan ?? throw new ArgumentNullException(nameof(entityClassMan));
         }
 
         #endregion Public Constructors
@@ -223,6 +229,25 @@ namespace OpenBreed.Wecs.Systems
                         var actions = eventEntity.GetActionsOnTrigger(entityTriggerActionFilter.TriggerName);
 
                         if (actions is null || !actions.Contains(entityTriggerActionFilter.ActionName))
+                        {
+                            return false;
+                        }
+
+                        break;
+
+                    case EntityWithTagFilter entityWithTagFilter:
+
+                        if (!string.Equals(entityWithTagFilter.Tag, eventEntity.Tag, StringComparison.Ordinal))
+                        {
+                            return false;
+                        }
+
+                        break;
+
+                    case EntityOfClassFilter entityOfClassFilter:
+
+                        var filterClass = entityClassMan.GetByName(entityOfClassFilter.ClassName);
+                        if (!filterClass.IsOrInheritsFrom(eventEntity.ClassId))
                         {
                             return false;
                         }

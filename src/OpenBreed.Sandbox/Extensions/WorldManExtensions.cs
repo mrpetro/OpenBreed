@@ -95,7 +95,7 @@ namespace OpenBreed.Sandbox.Extensions
                 .AddSystem<OnInitRefractionLazerProjectileSystem>()
                 .AddSystem<OnActorInitShowMissionSystem>()
                 .AddSystem<OnActorControlActionSystem>()
-                .AddSystem<OnLevelStartedSystem>()
+                .AddSystem<LynetteVoiceSystem>()
                 .AddSystem<GameInitSystem>()
                 .AddGameWorldSystems(isEditor: false)
                 .Build();

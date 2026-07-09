@@ -160,7 +160,7 @@ namespace OpenBreed.Sandbox.Extensions
             return entityMan.GetByTag("Director").FirstOrDefault(entity => entity.WorldId == worldId);
         }
 
-        public static IEntity GetCommentator(this IEntityMan entityMan)
+        public static IEntity GetLynette(this IEntityMan entityMan)
         {
             return entityMan.GetByTag("Commentator").FirstOrDefault();
         }

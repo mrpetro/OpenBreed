@@ -56,7 +56,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
         {
             var smartCardEntity = triggerEntity;
 
-            var gameCommentator = services.Entities.GetCommentator();
+            var gameCommentator = services.Entities.GetLynette();
             var gameCameraEntity = services.Entities.GetPlayerCamera(actorEntity);
             var smartCardScreenCameraEntity = services.Entities.GetSmartCardScreenCamera();
             var smartCardScreenTextEntity = services.Entities.GetSmartCardScreenText();

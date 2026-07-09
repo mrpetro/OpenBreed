@@ -12,6 +12,7 @@ namespace OpenBreed.Database.Interface.Items.Actions
 
         string Description { get; set; }
         int Id { get; set; }
+        bool Disabled { get; set; }
         string Name { get; set; }
 
         IDbActionPresentation Presentation { get; }

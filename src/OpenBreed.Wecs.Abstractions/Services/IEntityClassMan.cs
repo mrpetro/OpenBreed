@@ -20,6 +20,12 @@ namespace OpenBreed.Wecs.Abstractions.Services
 
     public interface IEntityClassMan
     {
+        #region Public Properties
+
+        IEntityClass RootClass { get; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
         IEntityClass GetById(int classId);

@@ -31,6 +31,7 @@ namespace OpenBreed.Model.Actions
         public MyColor Color { get; set; }
         public bool Visibility { get; set; }
         public string Name { get; set; }
+        public bool Disabled { get; set; }
 
         #endregion Public Properties
 

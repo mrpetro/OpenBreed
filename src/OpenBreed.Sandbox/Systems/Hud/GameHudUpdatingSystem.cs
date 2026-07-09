@@ -4,6 +4,7 @@ using OpenBreed.Common.Game.Wecs.Events;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Attributes;
 using OpenBreed.Wecs.Abstractions.Events;
+using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Systems;
@@ -51,8 +52,9 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         public void OnEvent(EntityEnteredEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
+            var entityClass = services.Classes.GetById(entity.ClassId);
 
-            if (!entity.Is(actorClass))
+            if (!entityClass.IsOrInheritsFrom(actorClass))
             {
                 return;
             }

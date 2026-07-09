@@ -70,6 +70,7 @@ namespace OpenBreed.Wecs.Core.Systems
                 foreach (var option in entityEmit.Options)
                 {
                     templateBuilder.SetParameter(option.Key, option.Value);
+                    templateBuilder.SetTag(entityEmit.Tag);
                 }
 
                 var emittedEntity = templateBuilder.Build();

@@ -210,6 +210,18 @@ namespace OpenBreed.Sandbox.Extensions
             return entity;
         }
 
+        public static IEntity CreateWorkingGenerator(this IEntityFactory entityFactory, int x, int y, string level, int gfxValue)
+        {
+            var entity = entityFactory.Create(@"ABTA\Templates\L1\Generator")
+                .SetParameter("level", level)
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .SetParameter("imageIndex", gfxValue)
+                .Build();
+
+            return entity;
+        }
+
         public static IEntity CreateMission(this IEntityFactory entityFactory, string name)
         {
             var entity = entityFactory.Create(@"ABTA\Templates\Common\Mission")

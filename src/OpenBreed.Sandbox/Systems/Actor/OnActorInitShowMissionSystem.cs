@@ -92,7 +92,7 @@ namespace OpenBreed.Sandbox.Systems.Mission
             missionScreenTextEntity.SetTextColor(0, 1.0f, 1.0f, 1.0f, 0.0f);
             missionScreenTextEntity.SetText(0, text);
 
-            var commentator = services.Entities.GetCommentator();
+            var commentator = services.Entities.GetLynette();
 
             var task = Core.Task.Create((t) => services.PauseWorld(t, gameCameraEntity));
 

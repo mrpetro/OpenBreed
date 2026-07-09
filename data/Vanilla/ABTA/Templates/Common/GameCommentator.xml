@@ -6,5 +6,6 @@
 		<Frame>
 		</Frame>
 		<SoundPlayer></SoundPlayer>
+        <Metadata></Metadata>
 	</Components>
 </EntityTemplate>

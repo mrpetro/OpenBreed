@@ -6,6 +6,8 @@ namespace OpenBreed.Wecs.Abstractions.Primitives
     {
         #region Public Properties
 
+        string ClassName { get; }
+
         IEnumerable<IComponentTemplate> Components { get; }
 
         #endregion Public Properties

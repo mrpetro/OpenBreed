@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <EntityTemplate>
+    <Class>Actor</Class>
     <Components>
-		<Class>
-			<Name>Actor</Name>
-		</Class>
 		<Metadata>
 			<Name>John</Name>
 		</Metadata>

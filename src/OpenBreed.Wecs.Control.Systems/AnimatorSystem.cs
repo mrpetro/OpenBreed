@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Control.Components;
 using OpenBreed.Wecs.Control.Systems.Events;
 using OpenBreed.Wecs.Core.Systems;
 using OpenBreed.Wecs.Core.Systems.Categories;
+using System;
 
 namespace OpenBreed.Wecs.Control.Systems
 {
@@ -86,13 +87,14 @@ namespace OpenBreed.Wecs.Control.Systems
 
             var data = clipMan.GetById(animator.ClipId);
 
-            animator.Position += animator.Speed * dt;
 
-            if (animator.Position > data.Length)
+            animator.Position += animator.Speed * dt / data.Length;
+
+            if (animator.Position > 1.0f)
             {
                 if (animator.Loop)
                 {
-                    animator.Position = animator.Position - data.Length;
+                    animator.Position -= 1.0f;
                 }
                 else
                 {

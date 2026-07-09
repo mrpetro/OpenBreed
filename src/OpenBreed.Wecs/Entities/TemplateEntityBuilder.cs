@@ -18,6 +18,7 @@ namespace OpenBreed.Wecs.Entities
         private readonly EntityMan entityMan;
         private readonly IServiceProvider serviceProvider;
         private readonly IEntityTemplateLoader entityTemplateLoader;
+        private readonly IEntityClassMan entityClassMan;
         private readonly string templateName;
         private string tag;
         private readonly Dictionary<string, string> templateParameters = new Dictionary<string, string>();
@@ -31,12 +32,14 @@ namespace OpenBreed.Wecs.Entities
             EntityMan entityMan,
             IServiceProvider serviceProvider,
             IEntityTemplateLoader entityTemplateLoader,
+            IEntityClassMan entityClassMan,
             string templateName)
         {
             this.entityFactory = entityFactory;
             this.entityMan = entityMan;
             this.serviceProvider = serviceProvider;
             this.entityTemplateLoader = entityTemplateLoader;
+            this.entityClassMan = entityClassMan;
             this.templateName = templateName;
         }
 
@@ -56,9 +59,21 @@ namespace OpenBreed.Wecs.Entities
             return this;
         }
 
+        private IEntityClass GetClass(string className)
+        {
+            if (string.IsNullOrEmpty(className))
+            {
+                return entityClassMan.RootClass;
+            }
+
+            return entityClassMan.GetByName(className);
+        }
+
         public IEntity Build()
         {
             var entityTemplate = entityTemplateLoader.Load(templateName, templateParameters);
+
+            var entityClass = GetClass(entityTemplate.ClassName);
 
             var components = new List<IEntityComponent>();
 
@@ -73,7 +88,7 @@ namespace OpenBreed.Wecs.Entities
                 }
             }
 
-            var newEntity = new Entity(entityMan, tag, components);
+            var newEntity = new Entity(entityMan, tag, entityClass.Id, components);
             entityMan.Register(newEntity);
             return newEntity;
         }
