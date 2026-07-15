@@ -4,7 +4,7 @@ using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 
@@ -110,10 +110,10 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             int rightIndex = (int)clipBox.Max.X / CellSize + 1;
             int topIndex = (int)clipBox.Max.Y / CellSize + 1;
 
-            leftIndex = MathHelper.Clamp(leftIndex, 0, Width);
-            rightIndex = MathHelper.Clamp(rightIndex, 0, Width);
-            bottomIndex = MathHelper.Clamp(bottomIndex, 0, Height);
-            topIndex = MathHelper.Clamp(topIndex, 0, Height);
+            leftIndex = Math.Clamp(leftIndex, 0, Width);
+            rightIndex = Math.Clamp(rightIndex, 0, Width);
+            bottomIndex = Math.Clamp(bottomIndex, 0, Height);
+            topIndex = Math.Clamp(topIndex, 0, Height);
 
             //if (CellBordersVisible)
             //    DrawCellBorders(leftIndex, bottomIndex, rightIndex, topIndex);

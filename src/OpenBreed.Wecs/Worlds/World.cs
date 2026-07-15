@@ -65,7 +65,7 @@ namespace OpenBreed.Wecs.Worlds
 
             set
             {
-                timeMultiplier = MathHelper.Clamp(value, 0, MAX_TIME_MULTIPLIER);
+                timeMultiplier = Math.Clamp(value, 0, MAX_TIME_MULTIPLIER);
             }
         }
 

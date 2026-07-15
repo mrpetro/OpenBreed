@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Interface.Drawing;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;

@@ -129,7 +129,7 @@ namespace OpenBreed.Gui.Elements
 
         private void ClampValue(float value)
         {
-            var clampedValued = MathHelper.Clamp(value, MinimumValue, MaximumValue);
+            var clampedValued = Math.Clamp(value, MinimumValue, MaximumValue);
             valueBinding.SetValue(clampedValued);
         }
 

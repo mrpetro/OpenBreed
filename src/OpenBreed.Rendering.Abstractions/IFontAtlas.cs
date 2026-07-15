@@ -31,7 +31,7 @@ namespace OpenBreed.Rendering.Abstractions
         /// <param name="text">Text to draw</param>
         /// <param name="color">Color of text</param>
         /// <param name="clipBox">Clip box</param>
-        void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false);
+        void Draw(IRenderView view, string text, Color4<Rgba> color, Box2 clipBox, bool ignoreScale = false);
 
         /// <summary>
         /// Gets single character width

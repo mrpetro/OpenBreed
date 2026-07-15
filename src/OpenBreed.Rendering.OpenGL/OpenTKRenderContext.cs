@@ -10,7 +10,7 @@ using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Rendering.OpenGL.Renderers;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;

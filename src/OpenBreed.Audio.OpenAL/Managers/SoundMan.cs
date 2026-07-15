@@ -7,6 +7,7 @@ using OpenBreed.Core.Abstractions.Managers;
 using OpenTK;
 using OpenTK.Audio;
 using OpenTK.Audio.OpenAL;
+using OpenTK.Audio.OpenAL.ALC;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,8 @@ namespace OpenBreed.Audio.OpenAL.Managers
         private readonly IEventsMan eventsMan;
         private readonly List<SoundSource> streamSources = new List<SoundSource>();
 
-        private readonly ALDevice alDevice;
-        private ALContext alContext;
+        private readonly ALCDevice alDevice;
+        private ALCContext alContext;
 
         private bool disposedValue;
 
@@ -43,7 +44,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
             this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
 
             alDevice = ALC.OpenDevice(null);
-            alContext = ALC.CreateContext(alDevice, new ALContextAttributes());
+            alContext = ALC.CreateContext(alDevice, new ALCContextAttributes());
 
             ALC.MakeContextCurrent(alContext);
             ReportOpenAL();
@@ -59,9 +60,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
         {
             var alSource = AL.GenSource();
 
-            var pos = new Vector3(posX, posY, posZ);
-
-            AL.Source(alSource, ALSource3f.Position, ref pos);
+            AL.Source3f(alSource, SourcePName3F.Position, posX, posY, posZ);
 
             var newSoundSource = new SoundSource(alSources.Count, alSource);
             alSources.Add(newSoundSource);
@@ -80,7 +79,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
         {
             var alBufferId = AL.GenBuffer();
 
-            AL.BufferData(alBufferId, ALFormat.Mono8, ref sampleData[0], sampleData.Length, sampleFreq);
+            AL.BufferData(alBufferId, Format.Mono8, ref sampleData[0], sampleData.Length, sampleFreq);
 
             return RegisterSample(sampleName, alBufferId);
         }
@@ -88,14 +87,15 @@ namespace OpenBreed.Audio.OpenAL.Managers
         public int LoadSample(string sampleName, short[] sampleData, int sampleFreq)
         {
             var alBufferId = AL.GenBuffer();
-            AL.BufferData(alBufferId, ALFormat.Stereo16, ref sampleData[0], sampleData.Length * 2, sampleFreq);
+            AL.BufferData(alBufferId, Format.Stereo16, ref sampleData[0], sampleData.Length * 2, sampleFreq);
 
             return RegisterSample(sampleName, alBufferId);
         }
 
         public int CreateStream(string streamName, SoundStreamReader reader)
         {
-            var buffers = AL.GenBuffers(4);
+            var buffers = new int[4];
+            AL.GenBuffers(4, buffers);
             var sampleStream = new SoundStream(buffers, reader)
             {
                 Id = alStreams.Count
@@ -161,8 +161,8 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
             Console.WriteLine($"Playing sample '{sample.Name}' at source '{alSource}'");
 
-            AL.Source(alSource, ALSourcei.Buffer, sample.AlBufferId);
-            AL.Source(alSource, ALSourceb.Looping, false);
+            AL.Sourcei(alSource, SourcePNameI.Buffer, sample.AlBufferId);
+            AL.Sourcei(alSource, SourcePNameI.Looping, 0);
 
             AL.SourcePlay(alSource);
         }
@@ -185,15 +185,15 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
             var alSource = soundSource.ALSourceId;
 
-            AL.Source(alSource, ALSourcei.Buffer, sample.AlBufferId);
-            AL.Source(alSource, ALSourceb.Looping, false);
+            AL.Sourcei(alSource, SourcePNameI.Buffer, sample.AlBufferId);
+            AL.Sourcei(alSource, SourcePNameI.Looping, 0);
 
             //AL.SourceQueueBuffer(alSource, alBuffer);
             AL.SourcePlay(alSource);
 
             var state = ALTools.GetSourceState(alSource);
 
-            while (state == ALSourceState.Playing)
+            while (state == SourceState.Playing)
             {
                 state = ALTools.GetSourceState(alSource);
             }
@@ -215,13 +215,13 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
             var alBufferId = sample.AlBufferId;
 
-            AL.GetBuffer(alBufferId, ALGetBufferi.Size, out int sizeInBytes);
-            AL.GetBuffer(alBufferId, ALGetBufferi.Channels, out int channels);
-            AL.GetBuffer(alBufferId, ALGetBufferi.Bits, out int bits);
+            AL.GetBufferi(alBufferId, BufferGetPNameI.Size, out int sizeInBytes);
+            AL.GetBufferi(alBufferId, BufferGetPNameI.Channels, out int channels);
+            AL.GetBufferi(alBufferId, BufferGetPNameI.Bits, out int bits);
 
             var lengthInSamples = sizeInBytes * 8 / (channels * bits);
 
-            AL.GetBuffer(alBufferId, ALGetBufferi.Frequency, out int frequency);
+            AL.GetBufferi(alBufferId, BufferGetPNameI.Frequency, out int frequency);
 
             var durationInSeconds = (float)lengthInSamples / (float)frequency;
 
@@ -297,7 +297,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
         {
             var alSource = soundSource.ALSourceId;
 
-            AL.GetSource(alSource, ALGetSourcei.BuffersProcessed, out int buffersProcessed);
+            AL.GetSourcei(alSource, SourceGetPNameI.BuffersProcessed, out int buffersProcessed);
 
             if (buffersProcessed <= 0)
                 return;
@@ -315,7 +315,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
                     AL.SourceQueueBuffers(alSource, 1, bufferArray);
             }
 
-            if (state != ALSourceState.Playing)
+            if (state != SourceState.Playing)
             {
                 AL.SourceStop(soundSource.ALSourceId);
                 AL.SourcePlay(soundSource.ALSourceId);
@@ -324,9 +324,9 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
         private void ReportOpenAL()
         {
-            var version = AL.Get(ALGetString.Version);
-            var vendor = AL.Get(ALGetString.Vendor);
-            var renderer = AL.Get(ALGetString.Renderer);
+            var version = AL.GetString(OpenTK.Audio.OpenAL.StringName.Version);
+            var vendor = AL.GetString(OpenTK.Audio.OpenAL.StringName.Vendor);
+            var renderer = AL.GetString(OpenTK.Audio.OpenAL.StringName.Renderer);
 
             var reportBuilder = new StringBuilder();
             reportBuilder.AppendLine("Open AL info:");
@@ -352,7 +352,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
                 var state = ALTools.GetSourceState(alSource);
 
-                if (state != ALSourceState.Playing)
+                if (state != SourceState.Playing)
                     return soundSource;
             }
 

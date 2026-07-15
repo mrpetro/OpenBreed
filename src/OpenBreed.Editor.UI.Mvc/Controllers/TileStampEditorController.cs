@@ -96,7 +96,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
         private void OnReset(IRenderView view)
         {
-            view.MoveTo(view.Box.HalfSize);
+            view.MoveTo(((Vector2i)view.Box.HalfSize));
             view.SetScale(2.0f);
         }
 
@@ -176,7 +176,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
 
             var border = new Box2(0, 0, cellSize * model.Width, cellSize * model.Height);
 
-            view.Context.Primitives.DrawRectangle(view, border, new Color4(128, 128, 128, 128), filled: false);
+            view.Context.Primitives.DrawRectangle(view, border, new Color4<Rgba>(128, 128, 128, 128), filled: false);
 
             view.PopMatrix();
         }
@@ -205,7 +205,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
                 RenderCursorSelectedTiles(view, tileAtlas.Id);
             }
 
-            view.Context.Primitives.DrawRectangle(view, new Box2(0, 0, cellSize, cellSize), new Color4(0, 0, 255, 64), filled: true);
+            view.Context.Primitives.DrawRectangle(view, new Box2(0, 0, cellSize, cellSize), new Color4<Rgba>(0, 0, 255, 64), filled: true);
 
             view.PopMatrix();
         }
@@ -240,7 +240,7 @@ namespace OpenBreed.Editor.UI.Mvc.Controllers
                 .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray());
 
             var cb = commonPaletteModel[0];
-            builder.SetColor(0, new Color4(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));
+            builder.SetColor(0, new Color4<Rgba>(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));
 
             palette = builder.Build();
         }

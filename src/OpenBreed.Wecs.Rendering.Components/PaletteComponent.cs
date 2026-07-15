@@ -47,7 +47,7 @@ namespace OpenBreed.Wecs.Rendering.Components
         {
             PaletteId = -1;
 
-            Colors = new Color4[256];
+            Colors = new Color4<Rgba>[256];
         }
 
         #endregion Public Constructors
@@ -57,7 +57,7 @@ namespace OpenBreed.Wecs.Rendering.Components
         public int PaletteId { get; set; }
 
 
-        public Color4[] Colors { get; }
+        public Color4<Rgba>[] Colors { get; }
 
         #endregion Public Properties
     }

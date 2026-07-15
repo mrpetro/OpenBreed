@@ -31,7 +31,7 @@ namespace OpenBreed.Wecs.Rendering.Components
 
         bool Clipping { get; set; }
 
-        Color4 BackgroundColor { get; set; }
+        Color4<Rgba> BackgroundColor { get; set; }
 
         bool DrawBackgroud { get; set; }
 
@@ -93,7 +93,7 @@ namespace OpenBreed.Wecs.Rendering.Components
         /// <summary>
         /// Viewport background color
         /// </summary>
-        public Color4 BackgroundColor { get; set; }
+        public Color4<Rgba> BackgroundColor { get; set; }
 
         /// <summary>
         /// Draw viewport background if this flag is true
@@ -127,7 +127,7 @@ namespace OpenBreed.Wecs.Rendering.Components
 
         internal bool DrawBackground = false;
 
-        internal Color4 BackgroundColor;
+        internal Color4<Rgba> BackgroundColor;
 
         internal bool Clipping = false;
 
@@ -159,7 +159,7 @@ namespace OpenBreed.Wecs.Rendering.Components
             Height = height;
         }
 
-        public void SetBackgroundColor(Color4 value)
+        public void SetBackgroundColor(Color4<Rgba> value)
         {
             BackgroundColor = value;
         }

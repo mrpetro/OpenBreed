@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Wecs.Abstractions.Services;
 using OpenTK;
 using OpenTK.Mathematics;
+using System;
 
 namespace OpenBreed.Wecs.Physics.Components
 {
@@ -36,7 +37,7 @@ namespace OpenBreed.Wecs.Physics.Components
 
             set
             {
-                speedPercent = MathHelper.Clamp(value, 0.0f, 1.0f);
+                speedPercent = Math.Clamp(value, 0.0f, 1.0f);
             }
         }
 

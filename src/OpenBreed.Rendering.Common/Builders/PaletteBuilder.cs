@@ -13,7 +13,7 @@ namespace OpenBreed.Rendering.Common.Builders
     {
         #region Private Fields
 
-        private readonly List<Color4> colors = new List<Color4>();
+        private readonly List<Color4<Rgba>> colors = new List<Color4<Rgba>>();
         private readonly PaletteMan paletteMan;
 
         #endregion Private Fields
@@ -31,7 +31,7 @@ namespace OpenBreed.Rendering.Common.Builders
 
         internal string Name { get; private set; }
 
-        internal float[] DirectData => colors.SelectMany(item => new float[] { item.R, item.G, item.B, item.A }).ToArray();
+        internal float[] DirectData => colors.SelectMany(item => new float[] { item.X, item.Y, item.Z, item.W }).ToArray();
 
         #endregion Internal Properties
 
@@ -42,7 +42,7 @@ namespace OpenBreed.Rendering.Common.Builders
             return new Palette(this);
         }
 
-        public IPaletteBuilder SetColor(int index, Color4 color)
+        public IPaletteBuilder SetColor(int index, Color4<Rgba> color)
         {
             if (index < 0)
             {
@@ -59,7 +59,7 @@ namespace OpenBreed.Rendering.Common.Builders
             return this;
         }
 
-        public IPaletteBuilder SetColors(Color4[] colors, int startIndex = 0, int length = 0)
+        public IPaletteBuilder SetColors(Color4<Rgba>[] colors, int startIndex = 0, int length = 0)
         {
             ArgumentNullException.ThrowIfNull(colors);
 
@@ -112,7 +112,7 @@ namespace OpenBreed.Rendering.Common.Builders
             }
             else if (colors.Count < length)
             {
-                colors.AddRange(Enumerable.Range(0, length - colors.Count).Select(item => new Color4()));
+                colors.AddRange(Enumerable.Range(0, length - colors.Count).Select(item => new Color4<Rgba>()));
             }
 
             return this;

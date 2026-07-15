@@ -32,7 +32,7 @@ namespace OpenBreed.Wecs.Rendering.Systems.Extensions
         public static void SetPictureColor(this IEntity entity, float r, float g, float b, float a)
         {
             var cmp = entity.Get<PictureComponent>();
-            cmp.Color = new Color4(r, g, b, a);
+            cmp.Color = new Color4<Rgba>(r, g, b, a);
         }
 
         public static void SetTextColor(this IEntity entity, int textPartId, float r, float g, float b, float a)
@@ -42,7 +42,7 @@ namespace OpenBreed.Wecs.Rendering.Systems.Extensions
             if (textPartId < 0 || textPartId >= textCmp.Parts.Count)
                 return;
 
-            textCmp.Parts[textPartId].Color = new Color4(r,g,b,a);
+            textCmp.Parts[textPartId].Color = new Color4<Rgba>(r,g,b,a);
         }
 
         public static void SetText(this IEntity entity, int textPartId, string text)

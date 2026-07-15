@@ -31,23 +31,23 @@ namespace OpenBreed.Rendering.Common.Helpers
 
         #region Public Methods
 
-        public Color4 GetColor(uint index)
+        public Color4<Rgba> GetColor(uint index)
         {
             index = index * 4;
-            return new Color4(
+            return new Color4<Rgba>(
                 DirectData[index],
                 DirectData[++index],
                 DirectData[++index],
                 DirectData[++index]);
         }
 
-        public void SetColor(uint index, Color4 color)
+        public void SetColor(uint index, Color4<Rgba> color)
         {
             index = index * 4;
-            DirectData[index] = color.R;
-            DirectData[++index] = color.G;
-            DirectData[++index] = color.B;
-            DirectData[++index] = color.A;
+            DirectData[index] = color.X;
+            DirectData[++index] = color.Y;
+            DirectData[++index] = color.Z;
+            DirectData[++index] = color.W;
         }
 
         #endregion Public Methods

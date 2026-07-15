@@ -6,7 +6,7 @@ using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Shaders;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -54,7 +54,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         public IPosTexCoordArrayBuilder CreatePosTexCoordArray() => new PosTexCoordArrayBuilder(this);
 
-        public void DrawBox(IRenderView view, Box2 box, Color4 color)
+        public void DrawBox(IRenderView view, Box2 box, Color4<Rgba> color)
         {
             var w = box.Size.X;
             var h = box.Size.Y;
@@ -68,25 +68,25 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             DrawUnitBox(view, model, color);
         }
 
-        public void DrawTriangle(IRenderView view, Vector2 p1, Vector2 p2, Vector2 p3, Color4 color, bool filled = false)
+        public void DrawTriangle(IRenderView view, Vector2 p1, Vector2 p2, Vector2 p3, Color4<Rgba> color, bool filled = false)
         {
             throw new NotImplementedException($"Method '{nameof(DrawTriangle)}' is not Implemented.");
         }
 
         public void DrawBrightnessBox(IRenderView view, float brightness)
         {
-            Color4 color;
+            Color4<Rgba> color;
 
             GL.Enable(EnableCap.Blend);
             if (brightness > 1.0)
             {
                 GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.One);
-                color = new Color4(brightness - 1, brightness - 1, brightness - 1, 1.0f);
+                color = new Color4<Rgba>(brightness - 1, brightness - 1, brightness - 1, 1.0f);
             }
             else
             {
                 GL.BlendFunc(BlendingFactor.Zero, BlendingFactor.SrcColor);
-                color = new Color4(brightness, brightness, brightness, 1.0f);
+                color = new Color4<Rgba>(brightness, brightness, brightness, 1.0f);
             }
 
             view.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
@@ -94,7 +94,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             GL.Disable(EnableCap.Blend);
         }
 
-        public void DrawRectangle(IRenderView view, Vector2 center, Vector2 size, Color4 color, bool filled = false)
+        public void DrawRectangle(IRenderView view, Vector2 center, Vector2 size, Color4<Rgba> color, bool filled = false)
         {
             var model = Matrix4.CreateTranslation(center.X, center.Y, 0.0f);
             model = Matrix4.CreateScale(size.X, size.Y, 1.0f) * model;
@@ -102,7 +102,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             DrawUnitRectangle(view, model, color, filled);
         }
 
-        public void DrawRectangle(IRenderView view, Box2 rect, Color4 color, bool filled = false)
+        public void DrawRectangle(IRenderView view, Box2 rect, Color4<Rgba> color, bool filled = false)
         {
             DrawRectangle(view, rect.Center, rect.Size, color, filled);
         }
@@ -113,15 +113,15 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
             var rect = new int[4];
 
-            GL.GetInteger(GetIndexedPName.ScissorBox, view.Id, rect);
+            GL.GetInteger(GetPName.ScissorBox, (uint)view.Id, rect);
 
             GL.Enable(EnableCap.ScissorTest);
 
-            GL.ScissorIndexed(view.Id, clipBox.Min.X, clipBox.Min.Y, clipBox.Size.X, clipBox.Size.Y);
+            GL.ScissorIndexed((uint)view.Id, clipBox.Min.X, clipBox.Min.Y, clipBox.Size.X, clipBox.Size.Y);
 
             nestedRenderAction.Invoke(clipBox);
 
-            GL.ScissorIndexed(view.Id, rect[0], rect[1], rect[2], rect[3]);
+            GL.ScissorIndexed((uint)view.Id, rect[0], rect[1], rect[2], rect[3]);
 
             if (isEnabled)
             {
@@ -143,7 +143,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             RenderAfter(view, clipBox, depth, dt);
         }
 
-        public void DrawCircle(IRenderView view, Vector2 center, float radius, Color4 color, bool filled = false)
+        public void DrawCircle(IRenderView view, Vector2 center, float radius, Color4<Rgba> color, bool filled = false)
         {
             var model = Matrix4.CreateTranslation(center.X, center.Y, 0.0f);
             model = Matrix4.CreateScale(2.0f * radius, 2.0f * radius, 1.0f) * model;
@@ -151,7 +151,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             DrawUnitCircle(view, model, color, filled);
         }
 
-        public void DrawLines(IRenderView view, IReadOnlyList<Vector2> points, Color4 color)
+        public void DrawLines(IRenderView view, IReadOnlyList<Vector2> points, Color4<Rgba> color)
         {
             for (int i = 0; i < points.Count - 1; i++)
             {
@@ -159,7 +159,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             }
         }
 
-        public void DrawLine(IRenderView view, Vector2 startPoint, Vector2 endPoint, Color4 color)
+        public void DrawLine(IRenderView view, Vector2 startPoint, Vector2 endPoint, Color4<Rgba> color)
         {
             var model = Matrix4.CreateTranslation(startPoint.X, startPoint.Y, 0.0f);
             var uAxis = endPoint - startPoint;
@@ -172,7 +172,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             DrawUnitLine(view, model, color);
         }
 
-        public void DrawPoint(IRenderView view, Vector2 pos, Color4 color, PointType type, float size = 2.0f, bool ignoreScale = false)
+        public void DrawPoint(IRenderView view, Vector2 pos, Color4<Rgba> color, PointType type, float size = 2.0f, bool ignoreScale = false)
         {
             var model = Matrix4.CreateTranslation(pos.X, pos.Y, 0.0f);
 
@@ -217,7 +217,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             }
         }
 
-        public void DrawPoints(IRenderView view, IReadOnlyList<Vector2> points, Color4 color, PointType type, float size = 2.0f, bool ignoreScale = false)
+        public void DrawPoints(IRenderView view, IReadOnlyList<Vector2> points, Color4<Rgba> color, PointType type, float size = 2.0f, bool ignoreScale = false)
         {
             for (int i = 0; i < points.Count; i++)
             {
@@ -231,7 +231,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             action.Invoke(shader, shaderController);
         }
 
-        public void SetTextureShader(IRenderView view, ITexture texture, Matrix4 model, Color4 color)
+        public void SetTextureShader(IRenderView view, ITexture texture, Matrix4 model, Color4<Rgba> color)
         {
             texture.Use(view.Context);
 
@@ -269,11 +269,11 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             }
         }
 
-        public void DrawUnitBox(IRenderView view, Matrix4 model, Color4 color)
+        public void DrawUnitBox(IRenderView view, Matrix4 model, Color4<Rgba> color)
         {
             UsingShader(nontexturedShader, (def, shader) =>
             {
-                shader.SetVector4(def.aColor, new Vector4(color.R, color.G, color.B, color.A));
+                shader.SetVector4(def.aColor, new Vector4(color.X, color.Y, color.Z, color.W));
                 shader.SetMatrix4(def.model, model);
                 shader.SetMatrix4(def.view, view.View);
                 shader.SetMatrix4(def.projection, view.Projection);
@@ -284,11 +284,11 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             GL.BindVertexArray(0);
         }
 
-        public void DrawUnitLine(IRenderView view, Matrix4 model, Color4 color)
+        public void DrawUnitLine(IRenderView view, Matrix4 model, Color4<Rgba> color)
         {
             UsingShader(nontexturedShader, (item, setter) =>
             {
-                setter.SetVector4(item.aColor, new Vector4(color.R, color.G, color.B, color.A));
+                setter.SetVector4(item.aColor, new Vector4(color.X, color.Y, color.Z, color.W));
                 setter.SetMatrix4(item.model, model);
                 setter.SetMatrix4(item.view, view.View);
                 setter.SetMatrix4(item.projection, view.Projection);
@@ -299,11 +299,11 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             GL.BindVertexArray(0);
         }
 
-        public void DrawUnitCircle(IRenderView view, Matrix4 model, Color4 color, bool filled = false)
+        public void DrawUnitCircle(IRenderView view, Matrix4 model, Color4<Rgba> color, bool filled = false)
         {
             UsingShader(nontexturedShader, (item, setter) =>
             {
-                setter.SetVector4(item.aColor, new Vector4(color.R, color.G, color.B, color.A));
+                setter.SetVector4(item.aColor, new Vector4(color.X, color.Y, color.Z, color.W));
                 setter.SetMatrix4(item.model, model);
                 setter.SetMatrix4(item.view, view.View);
                 setter.SetMatrix4(item.projection, view.Projection);
@@ -323,11 +323,11 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             GL.BindVertexArray(0);
         }
 
-        public void DrawUnitRectangle(IRenderView view, Matrix4 model, Color4 color, bool filled = false)
+        public void DrawUnitRectangle(IRenderView view, Matrix4 model, Color4<Rgba> color, bool filled = false)
         {
             UsingShader(nontexturedShader, (item, setter) =>
             {
-                setter.SetVector4(item.aColor, new Vector4(color.R, color.G, color.B, color.A));
+                setter.SetVector4(item.aColor, new Vector4(color.X, color.Y, color.Z, color.W));
                 setter.SetMatrix4(item.model, model);
                 setter.SetMatrix4(item.view, view.View);
                 setter.SetMatrix4(item.projection, view.Projection);
@@ -365,13 +365,13 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             var newVbo = GL.GenBuffer();
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, newVbo);
-            GL.BufferData(BufferTarget.ArrayBuffer, vertexArray.Length * sizeof(float), vertexArray, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, vertexArray.Length * sizeof(float), vertexArray, BufferUsage.StaticDraw);
 
             GL.BindVertexArray(newVao);
             GL.EnableVertexAttribArray(0);
             var vertexLocation = shaderController.GetAttribLocation(nontexturedShader, "aPosition");
-            GL.EnableVertexAttribArray(vertexLocation);
-            GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+            GL.EnableVertexAttribArray((uint)vertexLocation);
+            GL.VertexAttribPointer((uint)vertexLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindVertexArray(0);
@@ -387,17 +387,17 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             var newVbo = GL.GenBuffer();
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, newVbo);
-            GL.BufferData(BufferTarget.ArrayBuffer, vertexArray.Length * sizeof(float), vertexArray, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, vertexArray.Length * sizeof(float), vertexArray, BufferUsage.StaticDraw);
 
             GL.BindVertexArray(newVao);
             GL.EnableVertexAttribArray(0);
             var vertexLocation = shaderController.GetAttribLocation(texturedShader, "aPosition");
-            GL.EnableVertexAttribArray(vertexLocation);
-            GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
+            GL.EnableVertexAttribArray((uint)vertexLocation);
+            GL.VertexAttribPointer((uint)vertexLocation, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
 
             var texCoordLocation = shaderController.GetAttribLocation(texturedShader, "aTexCoord");
-            GL.EnableVertexAttribArray(texCoordLocation);
-            GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
+            GL.EnableVertexAttribArray((uint)texCoordLocation);
+            GL.VertexAttribPointer((uint)texCoordLocation, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindVertexArray(0);
@@ -415,7 +415,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             {
                 GL.ColorMask(false, false, false, false);
                 GL.DepthMask(false);
-                GL.StencilFunc(StencilFunction.Always, depth, depth);
+                GL.StencilFunc(StencilFunction.Always, depth, (uint)depth);
                 GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
 
                 // Draw black box
@@ -439,7 +439,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
                 GL.ColorMask(false, false, false, false);
                 GL.DepthMask(false);
-                GL.StencilFunc(StencilFunction.Always, depth, depth);
+                GL.StencilFunc(StencilFunction.Always, depth, (uint)depth);
                 GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
 
                 // Draw black box
@@ -447,7 +447,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
                 GL.ColorMask(true, true, true, true);
                 GL.DepthMask(true);
-                GL.StencilFunc(StencilFunction.Equal, depth, depth);
+                GL.StencilFunc(StencilFunction.Equal, depth, (uint)depth);
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
             }
         }

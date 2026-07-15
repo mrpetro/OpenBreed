@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Rendering.Components
     {
         #region Internal Constructors
 
-        internal Wireframe(float thickness, Color4 color)
+        internal Wireframe(float thickness, Color4<Rgba> color)
         {
             Thickness = thickness;
             Color = color;
@@ -30,7 +30,7 @@ namespace OpenBreed.Wecs.Rendering.Components
         /// <summary>
         /// Color of wireframe lines
         /// </summary>
-        public Color4 Color { get; set; }
+        public Color4<Rgba> Color { get; set; }
 
         #endregion Public Properties
     }

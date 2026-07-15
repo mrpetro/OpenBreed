@@ -7,7 +7,7 @@ using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Sandbox.App.Components;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

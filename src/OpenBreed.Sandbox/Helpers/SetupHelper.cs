@@ -204,35 +204,35 @@ namespace OpenBreed.Sandbox.Helpers
         {
             var textCmp = entity.Get<TextComponent>();
             var c = textCmp.Parts[0].Color;
-            textCmp.Parts[0].Color = new OpenTK.Mathematics.Color4(c.R, c.G, c.B, nextValue);
+            textCmp.Parts[0].Color = new OpenTK.Mathematics.Color4<Rgba>(c.X, c.Y, c.Z, nextValue);
         }
 
         private void UpdatePictureColorA(IEntity entity, float nextValue)
         {
             var picCmp = entity.Get<PictureComponent>();
             var c = picCmp.Color;
-            picCmp.Color = new OpenTK.Mathematics.Color4(c.R, c.G, c.B, nextValue);
+            picCmp.Color = new OpenTK.Mathematics.Color4<Rgba>(c.X, c.Y, c.Z, nextValue);
         }
 
         private void UpdatePictureColorR(IEntity entity, float nextValue)
         {
             var picCmp = entity.Get<PictureComponent>();
             var c = picCmp.Color;
-            picCmp.Color = new OpenTK.Mathematics.Color4(nextValue, c.G, c.B, c.A);
+            picCmp.Color = new OpenTK.Mathematics.Color4<Rgba>(nextValue, c.Y, c.Z, c.W);
         }
 
         private void UpdatePictureColorG(IEntity entity, float nextValue)
         {
             var picCmp = entity.Get<PictureComponent>();
             var c = picCmp.Color;
-            picCmp.Color = new OpenTK.Mathematics.Color4(c.R, nextValue, c.B, c.A);
+            picCmp.Color = new OpenTK.Mathematics.Color4<Rgba>(c.X, nextValue, c.Z, c.W);
         }
 
         private void UpdatePictureColorB(IEntity entity, float nextValue)
         {
             var picCmp = entity.Get<PictureComponent>();
             var c = picCmp.Color;
-            picCmp.Color = new OpenTK.Mathematics.Color4(c.R, c.G, nextValue, c.A);
+            picCmp.Color = new OpenTK.Mathematics.Color4<Rgba>(c.X, c.Y, nextValue, c.W);
         }
 
         #endregion Private Methods

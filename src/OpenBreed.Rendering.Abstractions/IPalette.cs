@@ -34,14 +34,14 @@ namespace OpenBreed.Rendering.Abstractions
         /// </summary>
         /// <param name="index">Index of palette color to get</param>
         /// <returns>Color</returns>
-        Color4 GetColor(uint index);
+        Color4<Rgba> GetColor(uint index);
 
         /// <summary>
         /// Sets color by given index
         /// </summary>
         /// <param name="index">>Index of palette color to set</param>
         /// <param name="color">Color</param>
-        void SetColor(uint index, Color4 color);
+        void SetColor(uint index, Color4<Rgba> color);
 
         #endregion Public Methods
     }

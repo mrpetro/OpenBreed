@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Rendering.Components
     {
         #region Public Properties
 
-        Color4 Color { get; set; }
+        Color4<Rgba> Color { get; set; }
         string ImageName { get; set; }
         int Order { get; set; }
         Vector2 Origin { get; set; }
@@ -52,7 +52,7 @@ namespace OpenBreed.Wecs.Rendering.Components
         /// <summary>
         /// Color of this picture
         /// </summary>
-        public Color4 Color { get; set; }
+        public Color4<Rgba> Color { get; set; }
 
         /// <summary>
         /// Id of image from the atlas
@@ -92,7 +92,7 @@ namespace OpenBreed.Wecs.Rendering.Components
 
         #region Internal Properties
 
-        internal Color4 Color { get; private set; }
+        internal Color4<Rgba> Color { get; private set; }
         internal int ImageId { get; private set; }
         internal float Order { get; private set; }
         internal Vector2 Origin { get; private set; }
@@ -106,7 +106,7 @@ namespace OpenBreed.Wecs.Rendering.Components
             return new PictureComponent(this);
         }
 
-        public void SetColor(Color4 value)
+        public void SetColor(Color4<Rgba> value)
         {
             Color = value;
         }

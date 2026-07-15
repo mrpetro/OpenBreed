@@ -30,7 +30,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         #region Public Methods
 
-        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int atlasId, int spriteId, bool ignoreScale = false)
+        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4<Rgba> color, int atlasId, int spriteId, bool ignoreScale = false)
         {
             var spriteAtlas = spriteMan.InternalGetById(atlasId);
             var vbo = spriteAtlas.GetSpriteVao(view.Context, spriteId);
@@ -67,7 +67,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
         public void RenderBegin()
         {
             GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
+            //GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);
         }
@@ -75,7 +75,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
         public void RenderEnd()
         {
             GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
+            //GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 

@@ -56,10 +56,10 @@ namespace OpenBreed.Sandbox.App.Components
             int maxIndexX = (int)box.Max.X / CellSize + 1;
             int maxIndexY = (int)box.Max.Y / CellSize + 1;
 
-            minIndexX = MathHelper.Clamp(minIndexX, 0, Grid.Width);
-            maxIndexX = MathHelper.Clamp(maxIndexX, 0, Grid.Width);
-            minIndexY = MathHelper.Clamp(minIndexY, 0, Grid.Height);
-            maxIndexY = MathHelper.Clamp(maxIndexY, 0, Grid.Height);
+            minIndexX = Math.Clamp(minIndexX, 0, Grid.Width);
+            maxIndexX = Math.Clamp(maxIndexX, 0, Grid.Width);
+            minIndexY = Math.Clamp(minIndexY, 0, Grid.Height);
+            maxIndexY = Math.Clamp(maxIndexY, 0, Grid.Height);
             return new Box2i(minIndexX, minIndexY, maxIndexX, maxIndexY);
         }
 

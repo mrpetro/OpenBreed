@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Rendering.OpenGL.Renderers
 {
@@ -33,7 +33,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         #region Public Methods
 
-        public void RenderPart(IRenderView view, int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox, bool ignoreScale = false)
+        public void RenderPart(IRenderView view, int fontId, string text, Vector2 origin, Color4<Rgba> color, float order, Box2 clipBox, bool ignoreScale = false)
         {
             view.Translate(new Vector3(origin.X, origin.Y, order));
             fontMan.GetById(fontId).Draw(view, text, color, clipBox, ignoreScale);
@@ -48,7 +48,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
         {
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
-            GL.BlendColor(Color4.Black);
+            GL.BlendColor(Color4.Black[0], Color4.Black[1], Color4.Black[2], Color4.Black[3]);
 
             fontRenderer.Invoke(view, clipBox);
 
@@ -63,7 +63,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-            GL.BlendColor(Color4.Black);
+            GL.BlendColor(Color4.Black[0], Color4.Black[1], Color4.Black[2], Color4.Black[3]);
         }
 
         public void RenderEnd(IRenderView view)

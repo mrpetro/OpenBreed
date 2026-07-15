@@ -12,10 +12,10 @@ namespace OpenBreed.Audio.OpenAL
     {
         #region Public Methods
 
-        public static ALSourceState GetSourceState(int source)
+        public static SourceState GetSourceState(int source)
         {
-            AL.GetSource(source, ALGetSourcei.SourceState, out int state);
-            return (ALSourceState)state;
+            AL.GetSourcei(source, SourceGetPNameI.SourceState, out int state);
+            return (SourceState)state;
         }
 
         #endregion Public Methods

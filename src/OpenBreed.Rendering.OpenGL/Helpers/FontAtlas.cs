@@ -2,7 +2,7 @@
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -69,7 +69,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             return totalWidth;
         }
 
-        public void Draw(IRenderView view, string text, Color4 color, Box2 clipBox, bool ignoreScale = false)
+        public void Draw(IRenderView view, string text, Color4<Rgba> color, Box2 clipBox, bool ignoreScale = false)
         {
 
             var caretPosX = 0.0f;

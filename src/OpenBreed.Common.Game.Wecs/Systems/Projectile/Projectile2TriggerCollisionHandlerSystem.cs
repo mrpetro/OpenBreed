@@ -11,7 +11,7 @@ using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Abstractions;
 using OpenBreed.Wecs.Scripting.Systems.Extensions;
-using OpenTK.Graphics.ES20;
+
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

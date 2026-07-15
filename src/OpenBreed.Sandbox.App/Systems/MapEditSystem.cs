@@ -10,7 +10,6 @@ using OpenBreed.Rendering.Abstractions.Factories;
 using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Sandbox.App.Components;
 using OpenBreed.Sandbox.App.Constants;
-using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

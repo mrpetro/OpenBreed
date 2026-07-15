@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Rendering.Systems.Extensions
         /// <param name="backgroundColor">Background color</param>
         /// <param name="viewportTransform">Viewport transformation</param>
         /// <param name="func">Drawing function</param>
-        public static void RenderViewport(this IRenderView view, bool drawBorder, bool drawBackground, Color4 backgroundColor, Matrix4 viewportTransform, Action func)
+        public static void RenderViewport(this IRenderView view, bool drawBorder, bool drawBackground, Color4<Rgba> backgroundColor, Matrix4 viewportTransform, Action func)
         {
             view.PushMatrix();
 

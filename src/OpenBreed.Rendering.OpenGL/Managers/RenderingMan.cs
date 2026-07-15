@@ -5,7 +5,6 @@ using OpenBreed.Core.Abstractions.Events;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;

@@ -3,7 +3,7 @@ using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
@@ -99,14 +99,14 @@ namespace OpenBreed.Rendering.OpenGL
 
         public void EnableAlpha()
         {
-            OpenTK.Graphics.OpenGL.GL.Enable(OpenTK.Graphics.OpenGL.EnableCap.AlphaTest);
+            //OpenTK.Graphics.OpenGL.GL.Enable(EnableCap.AlphaTest);
             OpenTK.Graphics.OpenGL.GL.Enable(OpenTK.Graphics.OpenGL.EnableCap.Blend);
         }
 
         public void DisableAlpha()
         {
             OpenTK.Graphics.OpenGL.GL.Disable(OpenTK.Graphics.OpenGL.EnableCap.Blend);
-            OpenTK.Graphics.OpenGL.GL.Disable(OpenTK.Graphics.OpenGL.EnableCap.AlphaTest);
+            //OpenTK.Graphics.OpenGL.GL.Disable(OpenTK.Graphics.OpenGL.EnableCap.AlphaTest);
         }
 
         public Vector2i FromHostPoint(Vector2i hostPoint)
@@ -202,7 +202,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         internal virtual void OnRender(float dt)
         {
-            GL.ViewportIndexed(Id, Box.Min.X, Box.Min.Y, Box.Size.X, Box.Size.Y);
+            GL.ViewportIndexedf((uint)Id, Box.Min.X, Box.Min.Y, Box.Size.X, Box.Size.Y);
 
             Rendering?.Invoke(this, dt);
 

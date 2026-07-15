@@ -11,7 +11,7 @@ using OpenBreed.Sandbox.App.Components;
 using OpenBreed.Sandbox.App.Constants;
 using OpenBreed.Sandbox.App.Services;
 using OpenBreed.Wecs.Core.Components;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

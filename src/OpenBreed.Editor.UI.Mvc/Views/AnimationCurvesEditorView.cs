@@ -21,10 +21,10 @@ namespace OpenBreed.Editor.UI.Mvc.Views
     {
         #region Private Fields
 
-        private readonly Color4 xUnitLineColor = Color4.Green.SetAlpha(0.5f);
-        private readonly Color4 yUnitLineColor = Color4.Red.SetAlpha(0.5f);
-        private readonly Color4 xAxisLineColor = Color4.Red;
-        private readonly Color4 yAxisLineColor = Color4.Green;
+        private readonly Color4<Rgba> xUnitLineColor = Color4.Green.SetAlpha(0.5f);
+        private readonly Color4<Rgba> yUnitLineColor = Color4.Red.SetAlpha(0.5f);
+        private readonly Color4<Rgba> xAxisLineColor = Color4.Red;
+        private readonly Color4<Rgba> yAxisLineColor = Color4.Green;
 
         private readonly IAnimationEditorModel model;
         private readonly IAnimationSandbox animationSandbox;
@@ -134,7 +134,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             var offset = new Vector2(-extent.Center.X, -extent.Center.Y);
 
             RenderView.SetScale(scaleX, scaleY);
-            RenderView.MoveTo(RenderView.Box.HalfSize);
+            RenderView.MoveTo(((Vector2i)RenderView.Box.HalfSize));
 
             var sx = scaleX;
             var sy = scaleY;
@@ -229,7 +229,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
 
             var border = new Box2(0, extent.Min.Y, model.ClipLength, extent.Max.Y);
 
-            view.Context.Primitives.DrawRectangle(view, border, new Color4(64, 64, 64, 64), filled: true);
+            view.Context.Primitives.DrawRectangle(view, border, new Color4<Rgba>(64, 64, 64, 64), filled: true);
 
             view.PopMatrix();
         }
@@ -301,7 +301,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             RenderUnitGridLines(view, worldBox);
         }
 
-        private void RenderTimeLabel(IRenderView view, float time, IFontAtlas font, Color4 fontColor, Box2 worldBox)
+        private void RenderTimeLabel(IRenderView view, float time, IFontAtlas font, Color4<Rgba> fontColor, Box2 worldBox)
         {
             var timeInSeconds = TimeSpan.FromSeconds(time);
             var timeText = ToTime(timeInSeconds);
@@ -309,7 +309,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             font.Draw(view, timeText, fontColor, worldBox, ignoreScale: true);
         }
 
-        private void RenderValueLabel(IRenderView view, float value, IFontAtlas font, Color4 fontColor, Box2 worldBox)
+        private void RenderValueLabel(IRenderView view, float value, IFontAtlas font, Color4<Rgba> fontColor, Box2 worldBox)
         {
             var valueText = value.ToString();
 

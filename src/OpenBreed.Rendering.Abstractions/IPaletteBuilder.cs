@@ -30,7 +30,7 @@ namespace OpenBreed.Rendering.Abstractions
         /// <param name="index">Index of palette color to set</param>
         /// <param name="color">Color to set</param>
         /// <returns>This builder instance</returns>
-        IPaletteBuilder SetColor(int index, Color4 color);
+        IPaletteBuilder SetColor(int index, Color4<Rgba> color);
 
         /// <summary>
         /// Sets multiple palette colors
@@ -39,7 +39,7 @@ namespace OpenBreed.Rendering.Abstractions
         /// <param name="startIndex">Optional starting index of color to modify</param>
         /// <param name="startIndex">Optional length of colors array to modify</param>
         /// <returns>This builder instance</returns>
-        IPaletteBuilder SetColors(Color4[] colors, int startIndex = 0, int length = 0);
+        IPaletteBuilder SetColors(Color4<Rgba>[] colors, int startIndex = 0, int length = 0);
 
         /// <summary>
         /// Build palette

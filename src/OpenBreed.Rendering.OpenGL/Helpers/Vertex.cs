@@ -31,11 +31,11 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             this.color = color;
         }
 
-        public Vertex(Vector2 position, Vector2 texCoord, Color4 color)
+        public Vertex(Vector2 position, Vector2 texCoord, Color4<Rgba> color)
         {
             this.position = position;
             this.texCoord = texCoord;
-            this.color = new Vector4(color.R, color.G, color.B, color.A);
+            this.color = new Vector4(color.X, color.Y, color.Z, color.W);
         }
 
         public Vertex(Vector2 position, Vector2 texCoord, Color color)

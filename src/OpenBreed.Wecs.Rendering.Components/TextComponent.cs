@@ -30,7 +30,7 @@ namespace OpenBreed.Wecs.Rendering.Components
         /// <summary>
         /// Color of this text part
         /// </summary>
-        Color4 Color { get; set; }
+        Color4<Rgba> Color { get; set; }
 
         /// <summary>
         /// Actual text of this part
@@ -49,7 +49,7 @@ namespace OpenBreed.Wecs.Rendering.Components
     {
         #region Public Constructors
 
-        public TextPart(int fontId, Vector2 offset, Color4 color, string text, float order)
+        public TextPart(int fontId, Vector2 offset, Color4<Rgba> color, string text, float order)
         {
             FontId = fontId;
             Offset = offset;
@@ -75,7 +75,7 @@ namespace OpenBreed.Wecs.Rendering.Components
         /// <summary>
         /// Color of this text part
         /// </summary>
-        public Color4 Color { get; set; }
+        public Color4<Rgba> Color { get; set; }
 
         /// <summary>
         /// Actual text of this part
@@ -133,7 +133,7 @@ namespace OpenBreed.Wecs.Rendering.Components
 
         internal int FontId { get; private set; }
         internal Vector2 Offset { get; private set; }
-        internal Color4 Color { get; private set; }
+        internal Color4<Rgba> Color { get; private set; }
         internal string Text { get; private set; }
         internal int Order { get; private set; }
 
@@ -151,7 +151,7 @@ namespace OpenBreed.Wecs.Rendering.Components
             Order = order;
         }
 
-        public void SetColor(Color4 color)
+        public void SetColor(Color4<Rgba> color)
         {
             Color = color;
         }

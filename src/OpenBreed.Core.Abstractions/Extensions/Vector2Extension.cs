@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Abstractions.Extensions
         public static float SmallestAngle(this Vector2 first, Vector2 second)
         {
             var dot = Vector2.Dot(first, second);
-            return (float)Math.Acos(MathHelper.Clamp(dot / (first.Length * second.Length), -1.0, 1.0));
+            return (float)Math.Acos(Math.Clamp(dot / (first.Length * second.Length), -1.0, 1.0));
         }
 
         public static Vector2 RotateTowards(this Vector2 current, Vector2 target, float maxRadiansDelta, float maxMagnitudeDelta)

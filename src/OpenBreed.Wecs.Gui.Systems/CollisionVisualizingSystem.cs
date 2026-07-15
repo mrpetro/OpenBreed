@@ -33,7 +33,7 @@ namespace OpenBreed.Wecs.Gui.Systems
         private readonly CollisionVisualizingOptions visualizingOptions;
         private readonly IEntityMan entityMan;
 
-        private readonly Dictionary<int, Color4> groupsToColors = new Dictionary<int, Color4>();
+        private readonly Dictionary<int, Color4<Rgba>> groupsToColors = new Dictionary<int, Color4<Rgba>>();
 
         #endregion Private Fields
 
@@ -116,14 +116,14 @@ namespace OpenBreed.Wecs.Gui.Systems
             view.PushMatrix();
             view.Translate(new Vector3(posA));
 
-            RenderShape(view, contact.FixtureA.Shape, new Color4(255,0,0,80));
+            RenderShape(view, contact.FixtureA.Shape, new Color4<Rgba>(255,0,0,80));
 
             view.PopMatrix();
             view.PushMatrix();
 
             view.Translate(new Vector3(posB));
 
-            RenderShape(view, contact.FixtureB.Shape, new Color4(255, 0, 0, 80));
+            RenderShape(view, contact.FixtureB.Shape, new Color4<Rgba>(255, 0, 0, 80));
 
             view.PopMatrix();
         }
@@ -194,7 +194,7 @@ namespace OpenBreed.Wecs.Gui.Systems
             }
         }
 
-        private void RenderShape(Rendering.Abstractions.IRenderView view, IShape shape, Color4 color)
+        private void RenderShape(Rendering.Abstractions.IRenderView view, IShape shape, Color4<Rgba> color)
         {
             switch (shape)
             {
@@ -227,19 +227,19 @@ namespace OpenBreed.Wecs.Gui.Systems
             {
                 var result = groupName switch
                 {
-                    "ActorBody" => new Color4(0, 127, 127, alpha),
-                    "ActorSight" => new Color4(127, 127, 0, alpha),
-                    "ActorTrigger" => new Color4(0, 127, 0, alpha),
-                    "DoorOpenTrigger" => new Color4(0, 127, 0, alpha),
-                    "Projectile" => new Color4(127, 0, 0, alpha),
-                    "FullObstacle" => new Color4(127, 127, 127, alpha),
-                    "SlopeObstacle" => new Color4(127, 127, 127, alpha),
-                    "ActorOnlyObstacle" => new Color4(127, 127, 127, alpha),
-                    "SlowdownObstacle" => new Color4(127, 127, 127, alpha),
-                    "WorldExitTrigger" => new Color4(0, 127, 0, alpha),
-                    "TeleportEntryTrigger" => new Color4(0, 127, 0, alpha),
-                    "Trigger" => new Color4(0, 127, 0, alpha),
-                    _ => new Color4(127, 127, 127, alpha)
+                    "ActorBody" => new Color4<Rgba>(0, 127, 127, alpha),
+                    "ActorSight" => new Color4<Rgba>(127, 127, 0, alpha),
+                    "ActorTrigger" => new Color4<Rgba>(0, 127, 0, alpha),
+                    "DoorOpenTrigger" => new Color4<Rgba>(0, 127, 0, alpha),
+                    "Projectile" => new Color4<Rgba>(127, 0, 0, alpha),
+                    "FullObstacle" => new Color4<Rgba>(127, 127, 127, alpha),
+                    "SlopeObstacle" => new Color4<Rgba>(127, 127, 127, alpha),
+                    "ActorOnlyObstacle" => new Color4<Rgba>(127, 127, 127, alpha),
+                    "SlowdownObstacle" => new Color4<Rgba>(127, 127, 127, alpha),
+                    "WorldExitTrigger" => new Color4<Rgba>(0, 127, 0, alpha),
+                    "TeleportEntryTrigger" => new Color4<Rgba>(0, 127, 0, alpha),
+                    "Trigger" => new Color4<Rgba>(0, 127, 0, alpha),
+                    _ => new Color4<Rgba>(127, 127, 127, alpha)
                 };
 
                 var groupId = collisionMan.GetGroupId(groupName);

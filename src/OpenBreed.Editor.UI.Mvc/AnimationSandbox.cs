@@ -214,7 +214,7 @@ namespace OpenBreed.Editor.UI.Mvc
                 .SetColors(commonPaletteModel.Data.Select(color => color.ToColor4()).ToArray());
 
             var cb = commonPaletteModel[0];
-            builder.SetColor(0, new Color4(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));
+            builder.SetColor(0, new Color4<Rgba>(cb.R / 255.0f, cb.G / 255.0f, cb.B / 255.0f, 0.0f));
             palette = builder.Build();
         }
 

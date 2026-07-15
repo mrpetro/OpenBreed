@@ -30,7 +30,7 @@ namespace OpenBreed.Rendering.OpenGL.Renderers
 
         #region Public Methods
 
-        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4 color, int imageId)
+        public void Render(IRenderView view, Vector3 pos, Vector2 scale, Color4<Rgba> color, int imageId)
         {
             var picture = pictureMan.InternalGetById(imageId);
 

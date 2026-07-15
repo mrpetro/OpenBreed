@@ -4,7 +4,7 @@ using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Renderers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;

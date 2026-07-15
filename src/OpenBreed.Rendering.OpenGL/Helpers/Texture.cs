@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Interface.Tools;
 using OpenBreed.Rendering.Abstractions;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -39,8 +39,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
         #region Internal Properties
 
-        internal OpenTK.Graphics.OpenGL4.PixelInternalFormat InternalPixelFormat { get; private set; }
-        internal OpenTK.Graphics.OpenGL4.PixelFormat PixelFormat { get; private set; }
+        internal OpenTK.Graphics.OpenGL.InternalFormat InternalPixelFormat { get; private set; }
+        internal OpenTK.Graphics.OpenGL.PixelFormat PixelFormat { get; private set; }
 
         #endregion Internal Properties
 
@@ -72,7 +72,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             texture.Data = data;
             texture.DataMode = TextureDataMode.Rgba;
             texture.InternalPixelFormat = ToGlPixelFormat(supportedPixelFormat);
-            texture.PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat.Bgra;
+            texture.PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat.Bgra;
 
             return texture;
         }
@@ -86,8 +86,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             texture.Height = height;
             texture.Data = data;
             texture.DataMode = TextureDataMode.Index;
-            texture.InternalPixelFormat = PixelInternalFormat.R8ui;
-            texture.PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat.RedInteger;
+            texture.InternalPixelFormat = InternalFormat.R8ui;
+            texture.PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat.RedInteger;
             texture.MaskIndex = maskIndex;
 
             return texture;
@@ -99,7 +99,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 return CreateFromBitmap(image);
         }
 
-        public static PixelInternalFormat ToGlPixelFormat(System.Drawing.Imaging.PixelFormat pixelFormat)
+        public static InternalFormat ToGlPixelFormat(System.Drawing.Imaging.PixelFormat pixelFormat)
         {
             switch (pixelFormat)
             {
@@ -149,10 +149,10 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                     break;
 
                 case System.Drawing.Imaging.PixelFormat.Format32bppRgb:
-                    return PixelInternalFormat.Rgb;
+                    return InternalFormat.Rgb;
 
                 case System.Drawing.Imaging.PixelFormat.Format32bppArgb:
-                    return PixelInternalFormat.Rgba;
+                    return InternalFormat.Rgba;
 
                 case System.Drawing.Imaging.PixelFormat.Format32bppPArgb:
                     break;
@@ -291,8 +291,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
             GL.TexImage2D(TextureTarget.Texture2D, 0, InternalPixelFormat, Width, Height, 0, PixelFormat, pixelType, Data);
 
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
+            GL.TexParameteri(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
+            GL.TexParameteri(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
 
             return textureId;
         }

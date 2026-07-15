@@ -7,7 +7,7 @@ using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System.Collections.Generic;
 

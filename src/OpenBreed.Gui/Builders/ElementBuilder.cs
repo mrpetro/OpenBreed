@@ -102,10 +102,10 @@ namespace OpenBreed.Gui.Builders
 
         public void SetPadding(float left, float bottom, float right, float top)
         {
-            left = MathHelper.Clamp(left, 0, float.MaxValue);
-            bottom = MathHelper.Clamp(bottom, 0, float.MaxValue);
-            right = MathHelper.Clamp(right, 0, float.MaxValue);
-            top = MathHelper.Clamp(top, 0, float.MaxValue);
+            left = Math.Clamp(left, 0, float.MaxValue);
+            bottom = Math.Clamp(bottom, 0, float.MaxValue);
+            right = Math.Clamp(right, 0, float.MaxValue);
+            top = Math.Clamp(top, 0, float.MaxValue);
 
             Padding = new Box2(left, bottom, right, top);
         }
@@ -114,10 +114,10 @@ namespace OpenBreed.Gui.Builders
 
         public void SetMargin(float left, float bottom, float right, float top)
         {
-            left = MathHelper.Clamp(left, 0, float.MaxValue);
-            bottom = MathHelper.Clamp(bottom, 0, float.MaxValue);
-            right = MathHelper.Clamp(right, 0, float.MaxValue);
-            top = MathHelper.Clamp(top, 0, float.MaxValue);
+            left = Math.Clamp(left, 0, float.MaxValue);
+            bottom = Math.Clamp(bottom, 0, float.MaxValue);
+            right = Math.Clamp(right, 0, float.MaxValue);
+            top = Math.Clamp(top, 0, float.MaxValue);
 
             Margin = new Box2(left, bottom, right, top);
         }

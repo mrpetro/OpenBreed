@@ -2,7 +2,7 @@
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Wecs.Core.Components;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
 namespace OpenBreed.Common.Game.Wecs.Systems
@@ -85,7 +85,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems
 
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
-            GL.BlendColor(Color4.Black);
+            GL.BlendColor(Color4.Black[0], Color4.Black[1], Color4.Black[2], Color4.Black[3]);
 
             font.Draw(view, groupCmp.Id.ToString(), Color4.White, clipBox);
 

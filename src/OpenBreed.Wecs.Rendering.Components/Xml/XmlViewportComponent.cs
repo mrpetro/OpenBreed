@@ -16,10 +16,10 @@ namespace OpenBreed.Wecs.Rendering.Components.Xml
         #region Public Properties
 
         [XmlIgnore]
-        public Color4 BackgroundColor
+        public Color4<Rgba> BackgroundColor
         {
-            get => new Color4(XmlBackgroundColor.R, XmlBackgroundColor.G, XmlBackgroundColor.B, XmlBackgroundColor.A);
-            set => XmlBackgroundColor = new XmlColor4() { R = value.R, G = value.G, B = value.B, A = value.A };
+            get => new Color4<Rgba>(XmlBackgroundColor.R, XmlBackgroundColor.G, XmlBackgroundColor.B, XmlBackgroundColor.A);
+            set => XmlBackgroundColor = new XmlColor4() { R = value.X, G = value.Y, B = value.Z, A = value.W };
         }
 
         public float Width { get; set; }

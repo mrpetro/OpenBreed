@@ -27,10 +27,10 @@ namespace OpenBreed.Wecs.Rendering.Components.Xml
         }
 
         [XmlIgnore]
-        public Color4 Color
+        public Color4<Rgba> Color
         {
-            get => new Color4(XmlColor.R, XmlColor.G, XmlColor.B, XmlColor.A);
-            set => XmlColor = new XmlColor4() { R = value.R, G = value.G, B = value.B, A = value.A };
+            get => new Color4<Rgba>(XmlColor.R, XmlColor.G, XmlColor.B, XmlColor.A);
+            set => XmlColor = new XmlColor4() { R = value.X, G = value.Y, B = value.Z, A = value.W };
         }
 
         [XmlElement("Origin")]

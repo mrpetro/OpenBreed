@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenTK;
-using OpenTK.Input;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;

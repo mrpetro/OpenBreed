@@ -11,9 +11,9 @@ namespace OpenBreed.Gui.Abstractions.Presentations
     {
         #region Public Properties
 
-        public static Color4 BorderColor { get; } = new Color4(0, 0, 0, 255);
-        public static Color4 BackgroundColor { get; } = new Color4(255, 255, 255, 255);
-        public static Color4 SymbolColor { get; } = new Color4(0, 0, 0, 255);
+        public static Color4<Rgba> BorderColor { get; } = new Color4<Rgba>(0, 0, 0, 255);
+        public static Color4<Rgba> BackgroundColor { get; } = new Color4<Rgba>(255, 255, 255, 255);
+        public static Color4<Rgba> SymbolColor { get; } = new Color4<Rgba>(0, 0, 0, 255);
 
         #endregion Public Properties
     }

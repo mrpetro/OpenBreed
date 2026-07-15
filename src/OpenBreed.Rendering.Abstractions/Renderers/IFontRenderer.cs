@@ -12,7 +12,7 @@ namespace OpenBreed.Rendering.Abstractions.Renderers
     {
         #region Public Methods
 
-        void RenderPart(IRenderView view, int fontId, string text, Vector2 origin, Color4 color, float order, Box2 clipBox, bool ignoreScale = false);
+        void RenderPart(IRenderView view, int fontId, string text, Vector2 origin, Color4<Rgba> color, float order, Box2 clipBox, bool ignoreScale = false);
 
         void RenderAppend(IRenderView view, int fontId, string text, Box2 clipBox, Vector2 value, bool ignoreScale = false);
 

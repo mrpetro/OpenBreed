@@ -7,7 +7,7 @@ namespace OpenBreed.Wecs.Rendering.Components
     {
         #region Internal Constructors
 
-        public TextPresentationComponent(int fontId, Color4 color, float order)
+        public TextPresentationComponent(int fontId, Color4<Rgba> color, float order)
         {
             FontId = fontId;
             Color = color;
@@ -20,7 +20,7 @@ namespace OpenBreed.Wecs.Rendering.Components
 
         public int FontId { get; set; }
 
-        public Color4 Color { get; set; }
+        public Color4<Rgba> Color { get; set; }
 
         public float Order { get; set; }
 

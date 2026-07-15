@@ -14,8 +14,8 @@ namespace OpenBreed.Gui.Abstractions.Helpers
         public static Vector2 Clamp(Vector2 v, Vector2 min, Vector2 max)
         {
             return new Vector2(
-                MathHelper.Clamp(v.X, min.X, max.X),
-                MathHelper.Clamp(v.Y, min.Y, max.Y));
+                Math.Clamp(v.X, min.X, max.X),
+                Math.Clamp(v.Y, min.Y, max.Y));
         }
 
         public static float Snap(float original, int numerator, int denominator)

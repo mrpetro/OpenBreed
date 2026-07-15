@@ -1,4 +1,4 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -66,8 +66,8 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             // later.
 
             // First, we have to get the number of active uniforms in the shader.
-            GL.GetProgram(handle, GetProgramParameterName.ActiveUniforms, out var numberOfUniforms);
-            GL.GetProgram(handle, GetProgramParameterName.ActiveUniformBlocks, out var numberOfUniformBlocks);
+            GL.GetProgrami(handle, ProgramProperty.ActiveUniforms, out var numberOfUniforms);
+            GL.GetProgrami(handle, ProgramProperty.ActiveUniformBlocks, out var numberOfUniformBlocks);
 
             // Next, allocate the dictionary to hold the locations.
             var uniformLocations = new Dictionary<string, int>();
@@ -76,7 +76,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             for (var i = 0; i < numberOfUniforms; i++)
             {
                 // get the name of this uniform,
-                var key = GL.GetActiveUniform(handle, i, out int size, out ActiveUniformType type);
+                var key = GL.GetActiveUniform(handle, (uint)i, 6, out int length, out int size, out UniformType type);
 
                 var arrayTokenIdx = key.IndexOf('[');
                 if (arrayTokenIdx >= 1)
@@ -118,7 +118,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         /// <param name="data">The data to set</param>
         public void SetUInt(int location, uint data)
         {
-            GL.Uniform1(location, data);
+            GL.Uniform1ui(location, data);
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         /// </remarks>
         public void SetMatrix4(int location, Matrix4 data)
         {
-            GL.UniformMatrix4(location, true, ref data);
+            //GL.UniformMatrix4(location, true, ref data);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         /// <param name="data">The data to set</param>
         public void SetVector4(int location, Vector4 data)
         {
-            GL.Uniform4(location, data);
+            GL.Uniform4f(location, data[0], data[1], data[2], data[3]);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         /// <param name="data">The data to set</param>
         public void SetVector4Array(int location, float[] data)
         {
-            GL.Uniform4(location, data.Length / 4, data);
+            //GL.Uniform4f(location, data.Length / 4, data[0], data[0], data[0], data[0]);
         }
 
         #endregion Public Methods
@@ -166,7 +166,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             GL.CompileShader(shader);
 
             // Check for compilation errors
-            GL.GetShader(shader, ShaderParameter.CompileStatus, out var code);
+            GL.GetShaderi(shader, ShaderParameterName.CompileStatus, out var code);
             if (code != (int)All.True)
             {
                 // We can use `GL.GetShaderInfoLog(shader)` to get information about the error.
@@ -181,7 +181,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             GL.LinkProgram(program);
 
             // Check for linking errors
-            GL.GetProgram(program, GetProgramParameterName.LinkStatus, out var code);
+            GL.GetProgrami(program, ProgramProperty.LinkStatus, out var code);
             if (code != (int)All.True)
             {
                 // We can use `GL.GetProgramInfoLog(program)` to get information about the error.

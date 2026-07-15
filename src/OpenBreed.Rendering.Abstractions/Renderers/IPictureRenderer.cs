@@ -11,7 +11,7 @@ namespace OpenBreed.Rendering.Abstractions.Renderers
         void RenderBegin();
 
         void RenderEnd();
-        void Render(IRenderView view, Vector3 pos3, Vector2 size, Color4 color, int imageId);
+        void Render(IRenderView view, Vector3 pos3, Vector2 size, Color4<Rgba> color, int imageId);
 
         #endregion Public Methods
     }

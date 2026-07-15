@@ -3,8 +3,6 @@ using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Events;
 using OpenBreed.Rendering.Abstractions.Factories;
 using OpenBreed.Rendering.Abstractions.Managers;
-using OpenBreed.Rendering.OpenGL;
-using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;

@@ -81,7 +81,7 @@ namespace OpenBreed.Editor.UI.Mvc.Views
             var offset = new Vector2(-extent.Center.X, -extent.Center.Y);
 
             RenderView.SetScale(scaleX, scaleY);
-            RenderView.MoveTo(RenderView.Box.HalfSize);
+            RenderView.MoveTo(((Vector2i)RenderView.Box.HalfSize));
 
             var sx = scaleX;
             var sy = scaleY;

@@ -17,9 +17,9 @@ namespace OpenBreed.Gui.Presentations
 
         #region Public Properties
 
-        public static Color4 BackgroundColor { get; } = new Color4(255, 255, 255, 20);
-        public static Color4 BorderColor { get; } = new Color4(127, 127, 127, 20);
-        public static Color4 PointerColor { get; } = new Color4(0, 0, 0, 20);
+        public static Color4<Rgba> BackgroundColor { get; } = new Color4<Rgba>(255, 255, 255, 20);
+        public static Color4<Rgba> BorderColor { get; } = new Color4<Rgba>(127, 127, 127, 20);
+        public static Color4<Rgba> PointerColor { get; } = new Color4<Rgba>(0, 0, 0, 20);
 
         public string FontName { get; }
         public int FontSize { get; }
