@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <EntityTemplate>
-    <Class>Actor</Class>
+    <Class>John</Class>
     <Components>
 		<Metadata>
 			<Name>John</Name>
@@ -63,7 +63,7 @@
 		<EntityEmitter>
 		</EntityEmitter>
 		<Sprite>
-			<AtlasName>Vanilla/Common/Hero/1</AtlasName>
+			<AtlasName>Vanilla/Common/John</AtlasName>
 			<ImageIndex>0</ImageIndex>
 			<Origin X="18" Y="18" />
 			<Order>100</Order>

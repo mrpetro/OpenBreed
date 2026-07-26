@@ -27,8 +27,4 @@
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Systems\Turret\" />
-  </ItemGroup>
-
 </Project>

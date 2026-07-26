@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <EntityTemplate>
+    <Class>Nash</Class>
     <Components>
 		<Metadata>
 			<Name>Nash</Name>
@@ -60,7 +61,7 @@
 		<EntityEmitter>
 		</EntityEmitter>
 		<Sprite>
-			<AtlasName>Vanilla/Common/Hero/1</AtlasName>
+			<AtlasName>Vanilla/Common/Nash</AtlasName>
 			<ImageIndex>0</ImageIndex>
 			<Origin X="18" Y="18" />
 			<Order>100</Order>

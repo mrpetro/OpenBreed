@@ -32,7 +32,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         #region Private Fields
 
         private readonly IGameServices services;
-        private readonly IEntityClass actorClass;
+        private readonly IEntityClass heroClass;
 
         #endregion Private Fields
 
@@ -42,7 +42,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
 
-            this.actorClass = services.Classes.GetByName("Actor");
+            this.heroClass = services.Classes.GetByName("Hero");
         }
 
         #endregion Public Constructors
@@ -54,7 +54,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
             var entity = services.Entities.GetById(e.EntityId);
             var entityClass = services.Classes.GetById(entity.ClassId);
 
-            if (!entityClass.IsOrInheritsFrom(actorClass))
+            if (!entityClass.IsOrInheritsFrom(heroClass))
             {
                 return;
             }

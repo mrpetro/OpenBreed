@@ -22,6 +22,7 @@ namespace OpenBreed.Rendering.Common.Helpers
         internal TileStamp(StampBuilder builder)
         {
             Id = builder.GetId();
+            Name = builder.name;
             Cells = builder.GetData();
             Width = builder.width;
             Height = builder.height;
@@ -36,6 +37,7 @@ namespace OpenBreed.Rendering.Common.Helpers
 
         public ITileStampCell[] Cells { get; }
         public int Id { get; }
+        public string Name { get; }
         public int Width { get; }
         public int Height { get; }
         public int OriginX { get; }

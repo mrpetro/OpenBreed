@@ -225,9 +225,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             if (metaData.Flavor != "Trigger")
             {
                 var stampName = $"{metaData.Level}/{metaData.Name}/{metaData.Flavor}/Picked";
-                services.Logger.LogInformation("StampName: {0}", stampName);
                 var stampId = services.Stamps.GetByName(stampName).Id;
-                services.Logger.LogInformation("StampId: {0}", stampId);
                 mapEntity.PutStampAtEntityPosition(entity, stampId, 0);
             }
 

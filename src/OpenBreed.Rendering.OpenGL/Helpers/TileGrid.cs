@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Abstractions;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Abstractions.Renderers;
@@ -15,14 +16,16 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         #region Private Fields
 
         private readonly IStampMan stampMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileGrid(IStampMan stampMan, int width, int height, int layersNo, int cellSize)
+        public TileGrid(IStampMan stampMan, ILogger logger, int width, int height, int layersNo, int cellSize)
         {
-            this.stampMan = stampMan;
+            this.stampMan = stampMan ?? throw new ArgumentNullException(nameof(stampMan));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Width = width;
             Height = height;
             LayersNo = layersNo;
@@ -80,14 +83,21 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
         {
             var stamp = stampMan.GetById(stampId);
 
-            if (stamp == null)
+            if (stamp is null)
+            {
+                logger.LogTrace($"Unable to find stamp with Id '{stampId}'.");
                 return;
+            }
+
+            logger.LogTrace($"Putting stamp '{stamp.Name}' at {pos}.");
 
             int xIndex;
             int yIndex;
 
             if (!TryGetGridIndices(pos, out xIndex, out yIndex))
+            {
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
+            }
 
             for (int j = 0; j < stamp.Height; j++)
             {
@@ -102,6 +112,9 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 }
             }
         }
+
+
+
 
         public void Render(IRenderView view, Box2 clipBox)
         {

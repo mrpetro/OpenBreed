@@ -13,29 +13,25 @@ using System;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    [RequireEntityWithClass("Actor")]
+    [RequireEntityWithClass("Hero")]
     public class ActorAnimateSystem : IEventSystem<VelocityChangedEvent>, IEventSystem<DirectionChangedEvent>
     {
         private readonly IGameServices services;
-        private readonly IEntityClass actorClass;
+        private readonly IEntityClass heroClass;
 
         public ActorAnimateSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
 
-            actorClass = services.Classes.GetByName("Actor");
+            heroClass = services.Classes.GetByName("Hero");
         }
 
-        public void OnEvent(VelocityChangedEvent e, IWorld world)
+        public void OnEvent(
+            [EntityOfClassFilter("Hero")]
+            VelocityChangedEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
             var entityClass = services.Classes.GetById(entity.ClassId);
-
-            if (!entityClass.IsOrInheritsFrom(actorClass))
-            {
-                return;
-            }
-
             var className = entityClass.Name;
             var targetDirection = entity.GetTargetDirection();
             var direction = entity.GetDirection();
@@ -58,16 +54,12 @@ namespace OpenBreed.Sandbox.Systems.Actor
             }
         }
 
-        public void OnEvent(DirectionChangedEvent e, IWorld world)
+        public void OnEvent(
+            [EntityOfClassFilter("Hero")]
+            DirectionChangedEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
             var entityClass = services.Classes.GetById(entity.ClassId);
-
-            if (!entityClass.IsOrInheritsFrom(actorClass))
-            {
-                return;
-            }
-
             var className = entityClass.Name;
 
             var targetDirection = entity.GetTargetDirection();

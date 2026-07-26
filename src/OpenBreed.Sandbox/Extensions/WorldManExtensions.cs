@@ -83,7 +83,7 @@ namespace OpenBreed.Sandbox.Extensions
                 .AddSystem<OnActorTouchSmartCardTriggerSystem>()
                 .AddSystem<OnActorTouchLandMineTriggerSystem>()
                 .AddSystem<ExplosionOnEnterWorldSystem>()
-                .AddSystem<OnInitTurretSystem>()
+                .AddSystem<TurretSystem>()
                 .AddSystem<ActorAnimateSystem>()
                 .AddSystem<ActorResurectSystem>()
                 .AddSystem<OnRefractionLazerProjectileHitSystem>()

@@ -153,13 +153,13 @@ namespace OpenBreed.Audio.OpenAL.Managers
 
             if (soundSource is null)
             {
-                Console.WriteLine("No idle source available for playing.");
+                logger.LogTrace("No idle source available for playing.");
                 return;
             }
 
             var alSource = soundSource.ALSourceId;
 
-            Console.WriteLine($"Playing sample '{sample.Name}' at source '{alSource}'");
+            logger.LogTrace($"Playing sample '{sample.Name}' at source '{alSource}'");
 
             AL.Source(alSource, ALSourcei.Buffer, sample.AlBufferId);
             AL.Source(alSource, ALSourceb.Looping, false);

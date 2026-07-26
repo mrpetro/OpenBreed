@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Abstractions.Extensions;
+﻿using Microsoft.Extensions.Primitives;
+using OpenBreed.Wecs.Abstractions.Extensions;
 using OpenBreed.Wecs.Components;
 using OpenTK.Mathematics;
 using System;
@@ -108,6 +109,26 @@ namespace OpenBreed.Wecs.Core.Components.Extensions
         public static void SetMetadata(this IEntity entity, string name, string value)
         {
             entity.Get<MetadataComponent>().Attributes[name] = value;
+        }
+
+        public static string GetMetadata(this IEntity entity, string name)
+        {
+            if (!TryGetMetadataPrivate(entity, name, out string value))
+            {
+                return default;
+            }
+
+            return value;
+        }
+
+        public static TValue GetMetadata<TValue>(this IEntity entity, string name) where TValue : struct
+        {
+            if (!TryGetMetadataPrivate(entity, name, out TValue value))
+            {
+                return default;
+            }
+
+            return value;
         }
 
         public static bool TryGetMetadata(this IEntity entity, string name, out string value)

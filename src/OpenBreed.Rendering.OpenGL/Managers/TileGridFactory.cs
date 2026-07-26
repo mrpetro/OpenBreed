@@ -33,7 +33,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         public ITileGrid CreateGrid(int width, int height, int layersNo, int cellSize)
         {
-            return new TileGrid(stampMan, width, height, layersNo, cellSize);
+            return new TileGrid(stampMan, logger, width, height, layersNo, cellSize);
         }
 
         #endregion Public Methods

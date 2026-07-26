@@ -22,13 +22,13 @@ namespace OpenBreed.Sandbox.Systems.Actor
     public class ActorResurectSystem : IEventSystem<DestroyedEvent>
     {
         private readonly IGameServices services;
-        private readonly IEntityClass actorClass;
+        private readonly IEntityClass heroClass;
 
         public ActorResurectSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
 
-            actorClass = services.Classes.GetByName("Actor");
+            heroClass = services.Classes.GetByName("Hero");
         }
 
         public void OnEvent(DestroyedEvent e, IWorld world)
@@ -37,7 +37,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
             var entityClass = services.Classes.GetById(entity.ClassId);
 
-            if (!entityClass.IsOrInheritsFrom(actorClass))
+            if (!entityClass.IsOrInheritsFrom(heroClass))
             {
                 return;
             }

@@ -12,6 +12,7 @@
 
         ITileStampCell[] Cells { get; }
         int Id { get; }
+        string Name { get; }
         int Width { get; }
         int Height { get; }
         int OriginX { get; }

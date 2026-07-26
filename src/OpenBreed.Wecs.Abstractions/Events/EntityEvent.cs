@@ -20,7 +20,7 @@ namespace OpenBreed.Wecs.Abstractions.Events
         #endregion Public Properties
     }
 
-    public abstract class EntityEvent : EventArgs
+    public abstract class EntityEvent : EventArgs, IEntityEvent
     {
         #region Protected Constructors
 

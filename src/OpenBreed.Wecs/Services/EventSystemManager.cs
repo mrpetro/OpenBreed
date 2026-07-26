@@ -219,6 +219,7 @@ namespace OpenBreed.Wecs.Systems
         private bool EvaluateEntityEventFilters(IEnumerable<EntityEventFilterAttribute> eventFilters, IEntityEvent e, IWorld world)
         {
             var eventEntity = entityMan.GetById(e.EntityId);
+            var eventEntityClass = entityClassMan.GetById(eventEntity.ClassId);
 
             foreach (var eventFilter in eventFilters)
             {
@@ -246,8 +247,13 @@ namespace OpenBreed.Wecs.Systems
 
                     case EntityOfClassFilter entityOfClassFilter:
 
+                        if (eventEntityClass is null)
+                        {
+                            return false;
+                        }
+
                         var filterClass = entityClassMan.GetByName(entityOfClassFilter.ClassName);
-                        if (!filterClass.IsOrInheritsFrom(eventEntity.ClassId))
+                        if (!eventEntityClass.IsOrInheritsFrom(filterClass))
                         {
                             return false;
                         }

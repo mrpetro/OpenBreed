@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <EntityTemplate>
+    <Class>Turret</Class>
     <Components>
+		<Metadata>
+            <Attributes>
+                <BoolAttribute Name="fireReady" Value="true" />
+            </Attributes>
+		</Metadata>
 		<Timer>
 		</Timer>
 		<Animation>

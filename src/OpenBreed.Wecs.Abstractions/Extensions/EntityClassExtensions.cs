@@ -26,6 +26,8 @@
                 {
                     return true;
                 }
+
+                parent = parent.Parent;
             }
 
             return false;
