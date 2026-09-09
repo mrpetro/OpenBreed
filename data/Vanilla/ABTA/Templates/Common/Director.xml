@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <EntityTemplate>
+    <Class>Director</Class>
     <Components>
 		<Metadata>
-			<Name>Director</Name>
 		</Metadata>
 		<Script>
 			<ScriptId>$(scriptId)</ScriptId>

@@ -158,7 +158,9 @@ namespace OpenBreed.Wecs.Core.Components.Extensions
 
         private static bool TryGetMetadataPrivate<TValue>(this IEntity entity, string name, out TValue value)
         {
-            if (!entity.Get<MetadataComponent>().Attributes.TryGetValue(name, out object objValue))
+            var meta = entity.TryGet<MetadataComponent>();
+
+            if (meta is null || !meta.Attributes.TryGetValue(name, out object objValue))
             {
                 value = default;
                 return false;

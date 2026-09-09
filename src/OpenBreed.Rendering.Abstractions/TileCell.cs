@@ -3,7 +3,7 @@
     /// <summary>
     /// Tile system cell data
     /// </summary>
-    public class TileCell
+    public class TileCell : ITileCell
     {
         #region Private Constructors
 

@@ -31,24 +31,17 @@ namespace OpenBreed.Wecs.Core.Components.Xml
     {
         #region Public Properties
 
-        [XmlElement("Level")]
-        public string Level { get; set; }
-
-        [XmlElement("Name")]
-        public string Name { get; set; }
-
-        [XmlElement("Option")]
-        public string Option { get; set; }
-
-        [XmlElement("Flavor")]
-        public string Flavor { get; set; }
-
         [XmlIgnore]
-        public IEnumerable<IMetadataAttributeTemplate> Attributes => XmlAttributes.Cast<IMetadataAttributeTemplate>();
+        public IEnumerable<IMetadataAttributeTemplate> Attributes => XmlAttributes?.Cast<IMetadataAttributeTemplate>() ?? Enumerable.Empty<IMetadataAttributeTemplate>();
 
-        [XmlArray("Attributes")]
-        [XmlArrayItem(ElementName = "IntAttribute", Type=typeof(XmlAttributeTemplate<int>))]
-        [XmlArrayItem(ElementName = "BoolAttribute", Type = typeof(XmlAttributeTemplate<bool>))]
+        //[XmlArray("Attributes")]
+        //[XmlArrayItem(ElementName = "IntAttribute", Type=typeof(XmlAttributeTemplate<int>))]
+        //[XmlArrayItem(ElementName = "BoolAttribute", Type = typeof(XmlAttributeTemplate<bool>))]
+        //[XmlArrayItem(ElementName = "StringAttribute", Type = typeof(XmlAttributeTemplate<string>))]
+
+        [XmlElement("Int", typeof(XmlAttributeTemplate<int>))]
+        [XmlElement("Bool", typeof(XmlAttributeTemplate<bool>))]
+        [XmlElement("String", typeof(XmlAttributeTemplate<string>))]
         public XmlAttributeTemplate[] XmlAttributes { get; set; } = Array.Empty<XmlAttributeTemplate>();
 
         #endregion Public Properties
@@ -57,7 +50,7 @@ namespace OpenBreed.Wecs.Core.Components.Xml
 
         public override IEntityComponent ToComponent(IServiceProvider serviceProvider)
         {
-            return new MetadataComponent(Level, Name, Option, Flavor, Attributes);
+            return new MetadataComponent(Attributes);
         }
 
         #endregion Public Methods

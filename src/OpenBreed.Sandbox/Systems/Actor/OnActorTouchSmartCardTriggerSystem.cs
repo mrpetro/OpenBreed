@@ -6,6 +6,7 @@ using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 using OpenBreed.Core.Abstractions;
 using OpenBreed.Input.Abstractions.Events;
 using OpenBreed.Physics.Interface;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Events;
 using OpenBreed.Wecs.Abstractions.Extensions;
@@ -13,12 +14,16 @@ using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Audio.Systems.Extensions;
 using OpenBreed.Wecs.Control.Systems.Events;
 using OpenBreed.Wecs.Control.Systems.Extensions;
+using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Events;
 using OpenBreed.Wecs.Core.Systems.Extensions;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenTK.Mathematics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
 namespace OpenBreed.Sandbox.Systems.Actor
@@ -66,8 +71,9 @@ namespace OpenBreed.Sandbox.Systems.Actor
             var gameViewportEntity = services.Entities.GetGameViewport();
             var cameraFadeOutClipId = services.Clips.GetId("Vanilla/Common/Camera/Effects/FadeOut");
             var cameraFadeInClipId = services.Clips.GetId("Vanilla/Common/Camera/Effects/FadeIn");
-            var smartCardMetadata = smartCardEntity.GetMetadata();
-            var textId = $"{gameWorld.Name}/{smartCardMetadata.Name}/{smartCardMetadata.Option}";
+            var option = smartCardEntity.GetMetadata("Option");
+            var smartCardClassName = services.Classes.GetById(smartCardEntity.ClassId).Name;
+            var textId = $"{gameWorld.Name}/{smartCardClassName}/{option}";
             services.Logger.LogInformation("Text Id: {0}", textId);
             var text = services.Texts.GetTextString(textId);
             var currentCharacter = 0;
@@ -85,9 +91,11 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 return;
             }
 
+            var classId = services.Classes.GetByName("SmartCard").Id;
+
             services.Entities.ForEachEntity(gameWorld.Id,
-                "SmartCard",
-                smartCardMetadata.Option,
+                classId,
+                option,
                 RemoveSmartcard);
 
             var soundName = "Vanilla/Common/Speech/SmartCardMessageFollows";
@@ -221,10 +229,17 @@ namespace OpenBreed.Sandbox.Systems.Actor
         {
             var mapEntity = services.Entities.GetMapEntity(entity.WorldId);
             var metaData = entity.GetMetadata();
+            var smartCardClassName = services.Classes.GetById(entity.ClassId).Name;
 
-            if (metaData.Flavor != "Trigger")
+
+            var position = entity.Get<PositionComponent>().Value;
+            var targetCell = mapEntity.GetTileGridCell(position);
+
+            var findPattern = @$"Vanilla\/(?<level>\w+)\/{smartCardClassName}\/(?<flavor>\w+)\/Lying";
+
+            if (services.TryGetCellGfxFlavor(targetCell, findPattern, out string level, out string flavor))
             {
-                var stampName = $"{metaData.Level}/{metaData.Name}/{metaData.Flavor}/Picked";
+                var stampName = $"Vanilla/{level}/{smartCardClassName}/{flavor}/Picked";
                 var stampId = services.Stamps.GetByName(stampName).Id;
                 mapEntity.PutStampAtEntityPosition(entity, stampId, 0);
             }

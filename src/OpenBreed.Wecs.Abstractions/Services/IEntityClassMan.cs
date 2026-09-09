@@ -32,6 +32,8 @@ namespace OpenBreed.Wecs.Abstractions.Services
 
         IEntityClass GetByName(string name);
 
+        bool TryGetByName(string name, out IEntityClass entityClass);
+
         #endregion Public Methods
     }
 }

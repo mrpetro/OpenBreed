@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Tools.Xml;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components;
@@ -18,6 +19,7 @@ namespace OpenBreed.Wecs.Services
         private readonly EntityMan entityMan;
         private readonly IEntityTemplateLoader entityTemplateLoader;
         private readonly IEntityClassMan entityClassMan;
+        private readonly ILogger logger;
         private readonly IServiceProvider serviceProvider;
 
         #endregion Private Fields
@@ -28,11 +30,13 @@ namespace OpenBreed.Wecs.Services
             EntityMan entityMan,
             IEntityTemplateLoader entityTemplateLoader,
             IEntityClassMan entityClassMan,
+            ILogger logger,
             IServiceProvider serviceProvider)
         {
             this.entityMan = entityMan;
             this.entityTemplateLoader = entityTemplateLoader;
             this.entityClassMan = entityClassMan;
+            this.logger = logger;
             this.serviceProvider = serviceProvider;
         }
 
@@ -48,6 +52,7 @@ namespace OpenBreed.Wecs.Services
                 serviceProvider,
                 entityTemplateLoader,
                 entityClassMan,
+                logger,
                 entityTemplateName);
         }
 

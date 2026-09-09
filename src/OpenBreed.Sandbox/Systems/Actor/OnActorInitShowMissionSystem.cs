@@ -63,6 +63,7 @@ namespace OpenBreed.Sandbox.Systems.Mission
                 return;
             }
             var missionEntity = services.Entities.GetMission(world.Id);
+            var missionClassName = services.Classes.GetById(missionEntity.ClassId).Name; 
 
             var gameCameraEntity = services.Entities.GetPlayerCamera(playerCharacterEntity);
             var missionScreenCameraEntity = services.Entities.GetMissionScreenCamera();
@@ -75,8 +76,7 @@ namespace OpenBreed.Sandbox.Systems.Mission
             var gameViewportEntity = services.Entities.GetGameViewport();
             var backgroundDarkenClipId = services.Clips.GetId("Vanilla/Common/Picture/Effects/Darken");
             var cameraFadeInClipId = services.Clips.GetId("Vanilla/Common/Camera/Effects/FadeIn");
-            var missionMetadata = missionEntity.GetMetadata();
-            var textId = $"{gameWorld.Name}/{missionMetadata.Name}";
+            var textId = $"{gameWorld.Name}/{missionClassName}";
             services.Logger.LogInformation("Text Id: {0}", textId);
             var text = services.Texts.GetTextString(textId);
             var textLength = text.Length;

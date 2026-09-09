@@ -83,4 +83,8 @@
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Systems\Player\" />
+  </ItemGroup>
+
 </Project>

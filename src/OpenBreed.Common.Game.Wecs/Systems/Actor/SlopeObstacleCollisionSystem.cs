@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Game;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Physics.Systems.Abstractions;
 using OpenBreed.Wecs.Physics.Systems.Helpers;
 using OpenTK.Mathematics;
@@ -43,10 +44,11 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
         public void OnCollision(IFixture aFixture, IEntity aEntity, IFixture bFixture, IEntity bEntity, float dt, Vector2 projection)
         {
             var metadata = bEntity.Get<MetadataComponent>();
+            var flavor = bEntity.GetMetadata("Flavor");
 
             Vector2 slopeDirection;
 
-            switch (metadata.Flavor)
+            switch (flavor)
             {
                 case "DownLeft":
                     slopeDirection = new Vector2(0, 1);

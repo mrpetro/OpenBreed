@@ -36,7 +36,7 @@ namespace OpenBreed.Sandbox.Loaders
             if (!mapper.TryGetFlavor(entityType, gfxValue, out flavor))
                 return null;
 
-            var entity = entityFactory.CreateItem(ix, iy, entityType, mapper.Level, gfxValue, option, flavor);
+            var entity = entityFactory.CreateItem(ix, iy, entityType, mapper.Level, gfxValue, option);
             visited[ix, iy] = true;
 
             worldMan.RequestAddEntity(entity, world.Id);

@@ -12,33 +12,34 @@ using OpenBreed.Common.Game;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Core.Abstractions.Extensions;
+using OpenBreed.Wecs.Core.Components.Extensions;
 
 namespace OpenBreed.Sandbox.Extensions
 {
     public static class EntityManExtensions
     {
-        public static void ForEachEntity(this IEntityMan entityMan, int worldId, string entityType, string option, Action<IEntity> action)
+        public static void ForEachEntity(this IEntityMan entityMan, int worldId, int classId, string option, Action<IEntity> action)
         {
-
             var nullOnes = entityMan.Where(entity => entity == null).ToArray();
 
             var entities = entityMan.Where(entity =>
             {
                 if (entity.WorldId != worldId)
+                {
                     return false;
+                }
 
-                var meta = entity.TryGet<MetadataComponent>();
-
-                if (meta is null)
+                if (entity.ClassId != classId)
+                {
                     return false;
+                }
 
-                if (meta.Name != entityType)
+                if (!entity.TryGetMetadata("Option", out var entOption))
+                {
                     return false;
+                }
 
-                if (meta.Option != option)
-                    return false;
-
-                return true;
+                return entOption == option;
 
             }).ToArray();
 
@@ -54,85 +55,6 @@ namespace OpenBreed.Sandbox.Extensions
         public static IEntity GetSmartCardScreenText(this IEntityMan entityMan)
         {
             return entityMan.GetByTag($"{WorldNames.SmartCardReader}/Text").FirstOrDefault();
-        }
-
-        public static IEntity GetEntityByDataGrid(this IEntityMan entityMan, IWorldMan worldMan, IEntity entity, int ox, int oy)
-        {
-            var pos = entity.Get<PositionComponent>();
-            var world = worldMan.GetById(entity.WorldId);
-            var mapEntity = entityMan.GetMapEntity(entity.WorldId);
-            var dataGrid = mapEntity.Get<DataGridComponent>().Grid;
-            var indexPos = pos.Value.ToCellIndex(cellSize: 16);
-            var thisEntity = dataGrid.Get(indexPos);
-            var indexIndexPos = Vector2i.Add(indexPos, new Vector2i(ox, oy));
-            var resultEntityId = dataGrid.Get(indexIndexPos);
-            return entityMan.GetById(resultEntityId);
-        }
-
-        public static IEntity FindVerticalDoorCell(this IEntityMan entityMan, IWorldMan worldMan, IEntity entity)
-        {
-            var foundCell = entity;
-
-            var thisData = entity.Get<MetadataComponent>();
-
-            var nextCell = foundCell;
-
-            while (nextCell is not null)
-            {
-                var nextCellMeta = nextCell.TryGet<MetadataComponent>();
-
-                if (nextCellMeta is null)
-                    break;
-
-                if (!(nextCellMeta.Name == thisData.Name && nextCellMeta.Option == thisData.Option))
-                    break;
-
-                foundCell = nextCell;
-
-                nextCell = entityMan.GetEntityByDataGrid(worldMan, nextCell, 0, -1);
-            }
-
-            return foundCell;
-        }
-
-        public static bool IsSameCellType(this IEntityMan entityMan, IWorldMan worldMan, IEntity entity, int ox, int oy)
-        {
-            var nextCell = entityMan.GetEntityByDataGrid(worldMan, entity, ox, oy);
-
-            var nextCellMeta = nextCell.TryGet<MetadataComponent>();
-
-            if (nextCellMeta is null)
-                return false;
-
-            var thisData = entity.Get<MetadataComponent>();
-
-            return nextCellMeta.Name == thisData.Name && nextCellMeta.Option == thisData.Option;
-        }
-
-        public static IEntity FindHorizontalDoorCell(this IEntityMan entityMan, IWorldMan worldMan, IEntity entity)
-        {
-            var foundCell = entity;
-
-            var thisData = entity.Get<MetadataComponent>();
-
-            var nextCell = foundCell;
-
-            while (nextCell is not null)
-            {
-                var nextCellMeta = nextCell.TryGet<MetadataComponent>();
-
-                if (nextCellMeta is null)
-                    break;
-
-                if (!(nextCellMeta.Name == thisData.Name && nextCellMeta.Option == thisData.Option))
-                    break;
-
-                foundCell = nextCell;
-
-                nextCell = entityMan.GetEntityByDataGrid(worldMan, nextCell, -1, 0);
-            }
-
-            return foundCell;
         }
 
         public static IEntity GetMissionScreenText(this IEntityMan entityMan)

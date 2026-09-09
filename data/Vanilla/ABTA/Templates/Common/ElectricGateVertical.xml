@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <EntityTemplate>
+	<Class>ElectricGate</Class>
     <Components>
 		<Metadata>
-			<Level>$(level)</Level>
-			<Name>ElectricGate</Name>
-			<Flavor>Vertical</Flavor>
+            <String Name="flavor" Value="Vertical" />
 		</Metadata>
 		<Timer>
 		</Timer>

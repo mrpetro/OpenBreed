@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Class>Door</Class>
+    <Components>
+		<Metadata>
+            <String Name="Option" Value="$(key)" />
+		</Metadata>
+        <HasParts>
+            <Entity TemplateName="DoorPart.xml">
+                
+            </Entity>
+            <Entity TemplateName="DoorPart.xml">
+            
+            </Entity>
+        </HasParts>
+		<Timer>
+		</Timer>
+		<Health>
+			<MaximumValue>100</MaximumValue>
+			<Value>100</Value>
+		</Health>
+		<SoundPlayer>
+		</SoundPlayer>
+        <Fsm>
+          <States/>
+          <ExStates>
+            <ExState Name="DoorState" Value="Closed" />
+          </ExStates>
+        </Fsm>
+		<Animation>
+			<States>
+				<State>
+					<Loop>false</Loop>		
+				</State>
+			</States>
+		</Animation>
+		<Position X="$(startX)" Y="$(startY)" />
+		<EntityEmitter>
+		</EntityEmitter>
+		<Sprite>
+			<AtlasName></AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Origin X="0" Y="0" />
+			<Order>0</Order>
+		</Sprite>
+    </Components>
+</EntityTemplate>

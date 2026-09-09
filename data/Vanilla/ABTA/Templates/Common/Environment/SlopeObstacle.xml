@@ -2,7 +2,7 @@
 <EntityTemplate>
 	<Components>
 		<Metadata>
-			<Flavor>$(slopeDir)</Flavor>
+            <String Name="Flavor" Value="$(slopeDir)" />
 		</Metadata>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>

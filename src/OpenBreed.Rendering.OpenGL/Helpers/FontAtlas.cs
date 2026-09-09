@@ -1,4 +1,5 @@
-﻿using OpenBreed.Rendering.Abstractions;
+﻿using Microsoft.VisualBasic;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Extensions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
@@ -90,7 +91,12 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             for (int i = 0; i < text.Length; i++)
             {
                 var ch = text[i];
-                var data = lookup[ch];
+
+                if (!lookup.TryGetValue(ch, out var data))
+                {
+                    // Skip characters that are not available for font.
+                    continue;
+                }
 
                 var width = data.Width * scaleCorrectionX;
 

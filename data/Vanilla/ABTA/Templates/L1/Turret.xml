@@ -3,9 +3,7 @@
     <Class>Turret</Class>
     <Components>
 		<Metadata>
-            <Attributes>
-                <BoolAttribute Name="fireReady" Value="true" />
-            </Attributes>
+            <Bool Name="fireReady" Value="true" />
 		</Metadata>
 		<Timer>
 		</Timer>

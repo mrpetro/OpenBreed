@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Class>DoorPart</Class>
+    <Components>
+		<Metadata>
+            <String Name="Option" Value="$(key)" />
+		</Metadata>
+		<Position X="$(startX)" Y="$(startY)" />
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Fixtures>
+				<Fixture>
+					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
+					<Groups>
+						<Group>FullObstacle</Group>
+						<Group>Trigger</Group>
+					</Groups>
+				</Fixture>
+			</Fixtures>
+		</Body>
+		<OnTrigger>
+            <Actions>
+                <Action Trigger="ActorTouch" Action="TryOpen" />
+            </Actions>
+		</OnTrigger>
+    </Components>
+</EntityTemplate>

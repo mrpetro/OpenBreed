@@ -3,7 +3,6 @@
     <Class>Nash</Class>
     <Components>
 		<Metadata>
-			<Name>Nash</Name>
 		</Metadata>
 		<Timer>
 		</Timer>

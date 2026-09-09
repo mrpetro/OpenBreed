@@ -260,15 +260,6 @@ namespace OpenBreed.Sandbox.Systems.Game
             return null;
         }
 
-        private void LoadCellEntity(MapMapper mapAssets, MapModel map, bool[,] visited, int ix, int iy, IWorld world, string templateName, string flavor, int gfxValue)
-        {
-            if (visited[ix, iy])
-                return;
-
-            if (mapDataLoader.TryGetEntityLoader(templateName, out IMapWorldEntityLoader entityLoader))
-                entityLoader.Load(mapAssets, map, visited, ix, iy, templateName, flavor, gfxValue, world);
-        }
-
         private IEntity LoadUnknownCodeCell(MapMapper worldBlockBuilder, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, int actionValue, IWorld world)
         {
             if (mapDataLoader.TryGetEntityLoader("Unknown", out IMapWorldEntityLoader entityLoader))

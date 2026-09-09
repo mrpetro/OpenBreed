@@ -94,10 +94,16 @@ namespace OpenBreed.Sandbox.Entities.Builders
             }
 
             if (subDict.TryGetValue(gfxValue, out flavor))
+            {
+                flavor = $"{Level}/{flavor}";
                 return true;
+            }
 
             if (subDict.TryGetValue(GFX_ANY, out flavor))
+            {
+                flavor = $"{Level}/{flavor}";
                 return true;
+            }
 
             flavor = null;
             return true;
@@ -125,7 +131,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
             }
         }
 
-        public void RegisterAction(string actionName, string entityType, string option)
+        public void RegisterAction(string actionName, string entityType, string option = null)
         {
             if (actionsToEntityTypesMap.ContainsKey(actionName))
                 throw new InvalidOperationException($"Action '{actionName}' already registered.");

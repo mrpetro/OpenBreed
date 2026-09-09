@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace OpenBreed.Fsm.Extensions
 {
@@ -26,6 +27,18 @@ namespace OpenBreed.Fsm.Extensions
                 return state.StateId;
 
             return -1;
+        }
+
+        public static void SetState<TState>(this IEntity entity, TState value) where TState : Enum
+        {
+            var fsmComponent = entity.Get<FsmComponent>();
+            fsmComponent.Set(value);
+        }
+
+        public static TState GetState<TState>(this IEntity entity) where TState : Enum
+        {
+            var fsmComponent = entity.Get<FsmComponent>();
+            return fsmComponent.Get<TState>();
         }
 
         #endregion Public Methods

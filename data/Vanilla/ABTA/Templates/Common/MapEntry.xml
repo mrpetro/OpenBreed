@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <EntityTemplate>
+    <Class>MapEntry</Class>
     <Components>
 		<Metadata>
-			<Name>WorldEntry</Name>
-			<Flavor>$(entryId)</Flavor>
+            <String Name="Flavor" Value="$(entryId)" />
 		</Metadata>
 		<Position X="$(startX)" Y="$(startY)" />
     </Components>

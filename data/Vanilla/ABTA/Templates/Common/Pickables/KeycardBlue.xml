@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0"?>
 <EntityTemplate>
+	<Class>Keycard</Class>
 	<Components>
 		<Metadata>
-			<Level>$(level)</Level>
-			<Name>Keycard</Name>
-			<Flavor>$(flavor)</Flavor>
-			<Option>$(option)</Option>
+            <String Name="KeyId" Value="Blue" />
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>

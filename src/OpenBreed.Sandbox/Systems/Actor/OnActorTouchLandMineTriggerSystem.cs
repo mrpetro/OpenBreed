@@ -109,7 +109,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
             {
                 for (int j = -1; j <= 1; j++)
                 {
-                    var nextDoorCell = services.Entities.GetEntityByDataGrid(services.Worlds, mineEntity, i, j);
+                    var nextDoorCell = services.GetEntityByDataGrid(mineEntity, i, j);
 
                     services.Factory.CreateSlowdown(services.Worlds, mineEntity, mineEntity.WorldId, i, j);
 

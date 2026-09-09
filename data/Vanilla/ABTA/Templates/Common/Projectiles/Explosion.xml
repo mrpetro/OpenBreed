@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
 <EntityTemplate>
+	<Class>Explosion</Class>
     <Components>
 		<Metadata>
-			<Flavor>$(flavor)</Flavor>
+            <String Name="Flavor" Value="$(flavor)" />
 		</Metadata>
 		<Timer>
 		</Timer>
-		<SoundPlayer>		
+		<SoundPlayer>
 		</SoundPlayer>
 		<Animation>
 			<States>
 				<State>
-					<Loop>false</Loop>		
+					<Loop>false</Loop>
 				</State>
 			</States>
 		</Animation>

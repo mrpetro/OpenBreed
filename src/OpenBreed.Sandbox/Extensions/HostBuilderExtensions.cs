@@ -207,9 +207,9 @@ namespace OpenBreed.Sandbox.Extensions
 
             var keycardCellEntityLoader = new KeycardEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
                 managerCollection.GetRequiredService<IEntityFactory>());
-            mapLegacyDataLoader.Register("Keycard1", keycardCellEntityLoader);
-            mapLegacyDataLoader.Register("Keycard2", keycardCellEntityLoader);
-            mapLegacyDataLoader.Register("Keycard3", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("KeycardRed", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("KeycardGreen", keycardCellEntityLoader);
+            mapLegacyDataLoader.Register("KeycardBlue", keycardCellEntityLoader);
             mapLegacyDataLoader.Register("KeycardSpecial", keycardCellEntityLoader);
 
             var smartCardCellEntityLoader = new SmartCardEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),

@@ -3,6 +3,7 @@ using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Loaders
@@ -40,10 +41,10 @@ namespace OpenBreed.Sandbox.Loaders
 
             var split = flavor.Split('/');
 
-            templateName = split[0];
-            flavor = split[1];
+            templateName = split[2];
 
-            entity = entityFactory.CreateItem(ix, iy, templateName, mapper.Level, gfxValue, null, flavor);
+            entity = entityFactory.CreateItem(ix, iy, templateName, mapper.Level, gfxValue, null);
+            entity.SetMetadata("Flavor", flavor);
             visited[ix, iy] = true;
 
             worldMan.RequestAddEntity(entity, world.Id);

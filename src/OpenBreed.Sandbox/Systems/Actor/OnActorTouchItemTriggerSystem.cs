@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Abstractions;
+using OpenBreed.Animation.Generic;
 using OpenBreed.Audio.Abstractions;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
@@ -11,6 +11,7 @@ using OpenBreed.Core.Abstractions;
 using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Sandbox.Entities;
+using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Loaders;
@@ -30,6 +31,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,21 +76,26 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
             var mapEntity = services.Entities.GetMapEntity(itemEntity.WorldId);
             var metaData = itemEntity.GetMetadata();
-            var name = metaData.Name;
+            var pickupClassName = services.Classes.GetById(itemEntity.ClassId).Name;
 
-            if (!HandlePickup(actorEntity, name))
+            var pickupName = pickupClassName;
+
+            if (!HandlePickup(actorEntity, itemEntity, pickupName))
             {
-                services.Logger.LogError("Unknown item with name '{0}'.", name);
+                services.Logger.LogError("Unknown pickup with name '{0}'.", pickupName);
                 return;
             }
 
-            var stampName = $"{metaData.Level}/{name}/{metaData.Flavor}/Picked";
-            var soundName = $"Vanilla/Common/{name}/Picked";
+            var flavor = itemEntity.GetMetadata("Flavor");
 
+            var position = itemEntity.Get<PositionComponent>().Value;
+            var targetCell = mapEntity.GetTileGridCell(position);
+            var stampName = $"{flavor}/Picked";
             var stampId = services.Stamps.GetByName(stampName).Id;
-            var soundId = services.Sounds.GetByName(soundName);
-
             mapEntity.PutStampAtEntityPosition(itemEntity, stampId, 0);
+
+            var soundName = $"Vanilla/Common/{pickupClassName}/Picked";
+            var soundId = services.Sounds.GetByName(soundName);
 
             itemEntity.EmitSound(soundId);
 
@@ -100,33 +107,44 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Private Methods
 
-        private bool HandleItem(IEntity actorEntity, string itemName)
+        private bool TryGiveItem(IEntity actorEntity, string itemName, int quantity)
         {
             if (!services.Items.TryGetItemId(itemName, out var itemId))
             {
                 return false;
             }
 
-            switch (itemName)
-            {
-                case "CreditsSmall":
-                    actorEntity.GiveItem(itemId, 100);
-                    services.Logger.LogInformation("Picked up '{0}' credits.", 100);
-                    return true;
+            actorEntity.GiveItem(itemId, quantity);
+            services.Logger.LogInformation("Picked up {0} '{1}'.", quantity, itemName);
+            return true;
+        }
 
-                case "CreditsBig":
-                    actorEntity.GiveItem(itemId, 1000);
-                    services.Logger.LogInformation("Picked up '{0}' credits.", 1000);
-                    return true;
+        private bool HandleItemPickup(IEntity actorEntity, IEntity itemEntity, string itemClassName)
+        {
+            switch (itemClassName)
+            {
+                case "Credits":
+                    if (itemEntity.TryGetMetadata<int>("Value", out var value))
+                    {
+                        return TryGiveItem(actorEntity, itemClassName, value);
+                    }
+
+                    return TryGiveItem(actorEntity, itemClassName, 100);
+
+                case "Keycard":
+                    if (itemEntity.TryGetMetadata("KeyId", out var keyId))
+                    {
+                        return TryGiveItem(actorEntity, $"Keycard{keyId}", 1);
+                    }
+
+                    return TryGiveItem(actorEntity, itemClassName, 1);
 
                 default:
-                    actorEntity.GiveItem(itemId, 1);
-                    services.Logger.LogInformation("Picked up '{0}'.", itemName);
-                    return true;
+                    return TryGiveItem(actorEntity, itemClassName, 1);
             }
         }
 
-        private bool HandlePickup(IEntity actorEntity, string pickupName)
+        private bool HandlePickup(IEntity actorEntity, IEntity itemEntity, string pickupName)
         {
             switch (pickupName)
             {
@@ -146,7 +164,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
                     return true;
 
                 default:
-                    return HandleItem(actorEntity, pickupName);
+                    return HandleItemPickup(actorEntity, itemEntity, pickupName);
             }
         }
 

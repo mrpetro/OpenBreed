@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0"?>
 <EntityTemplate>
+	<Class>Credits</Class>
 	<Components>
 		<Metadata>
-			<Level>$(level)</Level>
-			<Name>CreditsSmall</Name>
-			<Flavor>$(flavor)</Flavor>	
+            <Int Name="Value" Value="100" />
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>

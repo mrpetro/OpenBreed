@@ -92,6 +92,18 @@ namespace OpenBreed.Wecs.Services
             return entityClass;
         }
 
+        public bool TryGetByName(string name, out IEntityClass entityClass)
+        {
+            if (!classByNameLookup.TryGetValue(name, out EntityClass internalEntityClass))
+            {
+                entityClass = null;
+                return false;
+            }
+
+            entityClass = internalEntityClass;
+            return true;
+        }
+
         public IEntityClass GetById(int classId)
         {
             if (!entityClasses.TryGetValue(classId, out EntityClass entityClass))

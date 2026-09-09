@@ -3,7 +3,6 @@
     <Class>John</Class>
     <Components>
 		<Metadata>
-			<Name>John</Name>
 		</Metadata>
 		<Timer>
 		</Timer>
@@ -88,6 +87,7 @@
 		<Keys>
 			<GeneralCount>15</GeneralCount>
 		</Keys>
+        <CanOpenDoor/>
 		<Weapons>
 		</Weapons>
         <!-- <Inventory> -->

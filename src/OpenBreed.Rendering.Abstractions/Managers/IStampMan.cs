@@ -1,4 +1,7 @@
-﻿namespace OpenBreed.Rendering.Abstractions.Managers
+﻿using System;
+using System.Collections.Generic;
+
+namespace OpenBreed.Rendering.Abstractions.Managers
 {
     /// <summary>
     /// Stamp manager interface
@@ -39,5 +42,7 @@
         /// </summary>
         /// <returns>Stamp builder</returns>
         IStampBuilder Create();
+
+        IEnumerable<ITileStamp> FindAll(Predicate<ITileStamp> predicate);
     }
 }

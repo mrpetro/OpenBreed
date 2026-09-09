@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Tools.Xml;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices.JavaScript;
@@ -25,12 +26,8 @@ namespace OpenBreed.Wecs.Components.Xml
         {
             var callingAssembly = Assembly.GetCallingAssembly();
 
-            foreach (var type in callingAssembly
-                .DefinedTypes
-                .Where(type => type.BaseType == typeof(XmlComponentTemplate)))
-            {
-                XmlNodeMan.Instance.RegisterNodeType(type);
-            }
+            RegisterComponents(callingAssembly);
+            RegisterXmlComponentTemplates(callingAssembly);
         }
 
         public System.Xml.Schema.XmlSchema GetSchema()
@@ -53,8 +50,12 @@ namespace OpenBreed.Wecs.Components.Xml
                     continue;
                 }
 
+                var nonTemplateComponent = new XmlComponentTemplate(reader.Name);
+                this.Add(nonTemplateComponent);
+
                 reader.Skip();
             }
+
             reader.ReadEndElement();
         }
 
@@ -67,5 +68,31 @@ namespace OpenBreed.Wecs.Components.Xml
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private static void RegisterComponents(Assembly assembly)
+        {
+            var componentType = typeof(IEntityComponent);
+
+            foreach (var type in assembly
+                .DefinedTypes
+                .Where(type => componentType.IsAssignableFrom(type)))
+            {
+                XmlComponentTemplate.RegisterComponentType(type);
+            }
+        }
+
+        private static void RegisterXmlComponentTemplates(Assembly assembly)
+        {
+            foreach (var type in assembly
+                .DefinedTypes
+                .Where(type => type.BaseType == typeof(XmlComponentTemplate)))
+            {
+                XmlNodeMan.Instance.RegisterNodeType(type);
+            }
+        }
+
+        #endregion Private Methods
     }
 }

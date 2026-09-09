@@ -243,7 +243,7 @@ namespace OpenBreed.Sandbox.Extensions
             return entity;
         }
 
-        public static IEntity CreateItem(this IEntityFactory entityFactory, int x, int y, string name, string level, int gfxValue, string option, string flavor = null)
+        public static IEntity CreateItem(this IEntityFactory entityFactory, int x, int y, string name, string level, int gfxValue, string option)
         {
             var path = $@"{PICKABLE_PREFIX}\{name}";
 
@@ -252,7 +252,6 @@ namespace OpenBreed.Sandbox.Extensions
                 .SetParameter("startX", 16 * x)
                 .SetParameter("startY", 16 * y)
                 .SetParameter("imageIndex", gfxValue)
-                .SetParameter("flavor", flavor)
                 .SetParameter("option", option)
                 .Build();
 

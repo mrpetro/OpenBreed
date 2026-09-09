@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Abstractions.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Rendering.Systems.Events;
@@ -132,6 +133,12 @@ namespace OpenBreed.Wecs.Rendering.Systems.Extensions
         {
             var items = entity.Get<StampPutterComponent>().Items;
             items.Add(new StampData(stampId, layerNo, position));
+        }
+
+        public static ITileCell GetTileGridCell(this IEntity entity, Vector2 position)
+        {
+            var grid = entity.Get<TileGridComponent>().Grid;
+            return grid.GetCell(position);
         }
 
         public static void PutTile(this IEntity entity, int atlasId, int tileId, int layerNo, Vector2 position)

@@ -46,7 +46,9 @@ namespace OpenBreed.Sandbox.Systems
             var entity = services.Entities.GetById(e.EntityId);
 
             var entityMetadata = entity.GetMetadata();
-            var clipName = $"Vanilla/Common/Explosion/{entityMetadata.Flavor}";
+            var flavor = entity.GetMetadata("Flavor");
+
+            var clipName = $"Vanilla/Common/Explosion/{flavor}";
             var clipId = services.Clips.GetId(clipName);
 
             entity.SetSpriteOn();

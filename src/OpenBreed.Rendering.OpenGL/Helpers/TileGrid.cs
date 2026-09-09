@@ -8,6 +8,7 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
+using System.Reflection;
 
 namespace OpenBreed.Rendering.OpenGL.Helpers
 {
@@ -91,10 +92,7 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
 
             logger.LogTrace($"Putting stamp '{stamp.Name}' at {pos}.");
 
-            int xIndex;
-            int yIndex;
-
-            if (!TryGetGridIndices(pos, out xIndex, out yIndex))
+            if (!TryGetGridIndices(pos, out  var xIndex, out var yIndex))
             {
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
             }
@@ -112,9 +110,6 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
                 }
             }
         }
-
-
-
 
         public void Render(IRenderView view, Box2 clipBox)
         {
@@ -161,6 +156,16 @@ namespace OpenBreed.Rendering.OpenGL.Helpers
             }
 
             GL.Disable(EnableCap.Texture2D);
+        }
+
+        public ITileCell GetCell(Vector2 pos)
+        {
+            if (!TryGetGridIndices(pos, out var xIndex, out var yIndex))
+            {
+                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
+            }
+
+            return Cells[xIndex + Width * yIndex];
         }
 
         #endregion Public Methods

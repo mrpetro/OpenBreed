@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Tools.Xml;
+﻿using Microsoft.Extensions.Logging;
+using OpenBreed.Common.Tools.Xml;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components;
@@ -19,6 +20,7 @@ namespace OpenBreed.Wecs.Entities
         private readonly IServiceProvider serviceProvider;
         private readonly IEntityTemplateLoader entityTemplateLoader;
         private readonly IEntityClassMan entityClassMan;
+        private readonly ILogger logger;
         private readonly string templateName;
         private string tag;
         private readonly Dictionary<string, string> templateParameters = new Dictionary<string, string>();
@@ -33,6 +35,7 @@ namespace OpenBreed.Wecs.Entities
             IServiceProvider serviceProvider,
             IEntityTemplateLoader entityTemplateLoader,
             IEntityClassMan entityClassMan,
+            ILogger logger,
             string templateName)
         {
             this.entityFactory = entityFactory;
@@ -40,6 +43,7 @@ namespace OpenBreed.Wecs.Entities
             this.serviceProvider = serviceProvider;
             this.entityTemplateLoader = entityTemplateLoader;
             this.entityClassMan = entityClassMan;
+            this.logger = logger;
             this.templateName = templateName;
         }
 
@@ -66,7 +70,13 @@ namespace OpenBreed.Wecs.Entities
                 return entityClassMan.RootClass;
             }
 
-            return entityClassMan.GetByName(className);
+            if (!entityClassMan.TryGetByName(className, out var entityClass))
+            {
+                logger.LogError($"Unable to find class with name '{className}'");
+                return entityClassMan.RootClass;
+            }
+
+            return entityClass;
         }
 
         public IEntity Build()

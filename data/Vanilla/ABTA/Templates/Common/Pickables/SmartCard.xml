@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0"?>
 <EntityTemplate>
+	<Class>SmartCard</Class>
 	<Components>
 		<Metadata>
-			<Level>$(level)</Level>
-			<Name>SmartCard</Name>
-			<Option>$(option)</Option>
-			<Flavor>$(flavor)</Flavor>
+            <String Name="Option" Value="$(option)" />
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>

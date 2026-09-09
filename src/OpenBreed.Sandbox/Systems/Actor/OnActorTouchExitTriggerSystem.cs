@@ -85,9 +85,9 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 return;
             }
 
-            var matadataCmp = exitEntity.Get<MetadataComponent>();
+            var flavor = exitEntity.GetMetadata("Flavor");
 
-            if (!int.TryParse(matadataCmp.Flavor, out int exitId))
+            if (!int.TryParse(flavor, out int exitId))
             {
                 throw new InvalidOperationException("Expected exit number");
             }

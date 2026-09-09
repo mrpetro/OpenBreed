@@ -25,6 +25,7 @@ namespace OpenBreed.Fsm.Extensions
                     action.Invoke(fsmMan, sp);
                     return fsmMan;
                 });
+                services.AddSingleton<IFsmMachineFactory<IEntity>, EntityFsmMachineFactory>();
             });
         }
 

@@ -159,7 +159,7 @@ namespace OpenBreed.Sandbox.Extensions
 
             //actorEntity.TryInvoke(services.Scripts, services.Logger, "OnEnter");
 
-            services.Worlds.SetEntityPosition(actorEntity, entryId);
+            services.SetEntityPosition(actorEntity, entryId);
 
             task.Finish();
         }

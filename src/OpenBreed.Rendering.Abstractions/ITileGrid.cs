@@ -31,6 +31,12 @@ namespace OpenBreed.Rendering.Abstractions
         void ModifyTile(Vector2 pos, int tileAtlasId, int tileImageId);
 
         /// <summary>
+        /// Get tile grid cell using real world position
+        /// </summary>
+        /// <param name="pos">Position of tile grid cell to get</param>
+        ITileCell GetCell(Vector2 pos);
+
+        /// <summary>
         /// Modify single tile grid cell with new tile data using tile grid index position
         /// </summary>
         /// <param name="pos">Index position of tile grid cell to modify</param>

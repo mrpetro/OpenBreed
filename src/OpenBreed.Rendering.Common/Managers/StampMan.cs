@@ -4,6 +4,7 @@ using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Rendering.Common.Builders;
 using OpenBreed.Rendering.Common.Helpers;
+using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Rendering.Common.Managers
@@ -76,6 +77,11 @@ namespace OpenBreed.Rendering.Common.Managers
         }
 
         public bool Contains(string name) => names.ContainsKey(name);
+
+        public IEnumerable<ITileStamp> FindAll(Predicate<ITileStamp> predicate)
+        {
+            return items.FindAll(predicate);
+        }
 
         #endregion Public Methods
 
