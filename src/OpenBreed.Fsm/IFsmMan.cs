@@ -25,22 +25,19 @@ namespace OpenBreed.Fsm
     sealed class Transition<TContext, TState, TImpulse> : ITransition<TContext, TState>
         where TState : Enum where TImpulse : IFsmImpulse
     {
-        private readonly TransitionHandler<TContext, TState, TImpulse> _handler;
+        private readonly TransitionHandler<TContext, TState, TImpulse> handler;
         private readonly Action<TContext, TState> stateSetter;
 
         public TState From { get; }
-        public TState To { get; }
 
         public Transition(
             TState from,
-            TState to,
             TransitionHandler<TContext, TState, TImpulse> handler,
             Action<TContext, TState> stateSetter)
         {
             From = from;
-            To = to;
-            _handler = handler;
-            this.stateSetter = stateSetter;
+            this.handler = handler ?? throw new ArgumentNullException(nameof(handler));
+            this.stateSetter = stateSetter ?? throw new ArgumentNullException(nameof(stateSetter));
         }
 
         public void Execute<T>(
@@ -50,14 +47,18 @@ namespace OpenBreed.Fsm
         {
             var typedImpulse = (TImpulse)(object)impulse;
 
-            stateSetter.Invoke(context, To);
+            var nextState = handler(context, typedImpulse, From);
 
-            // Then notify the transition handler.
-            _handler(context, typedImpulse, From, To);
+            if (From.Equals(nextState))
+            {
+                return;
+            }
+
+            stateSetter.Invoke(context, nextState);
         }
     }
 
-    public delegate void TransitionHandler<TContext, TState, TFsmImpulse>(TContext context, TFsmImpulse impulse, TState from, TState to) where TState : Enum where TFsmImpulse : IFsmImpulse;
+    public delegate TState TransitionHandler<TContext, TState, TFsmImpulse>(TContext context, TFsmImpulse impulse, TState from) where TState : Enum where TFsmImpulse : IFsmImpulse;
 
     public interface IFsmMan
     {

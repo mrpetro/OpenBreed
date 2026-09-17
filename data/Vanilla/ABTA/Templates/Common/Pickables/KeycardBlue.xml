@@ -7,11 +7,6 @@
 		</Metadata>
 		<SoundPlayer>
 		</SoundPlayer>
-		<OnTrigger>
-            <Actions>
-                <Action Trigger="ActorTouch" Action="Pickup" />
-            </Actions>
-		</OnTrigger>
 		<Position X="$(startX)" Y="$(startY)" />
 		<Body>
 			<CofFactor>1.0</CofFactor>
@@ -20,7 +15,7 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
 					<Groups>
-						<Group>Trigger</Group>
+						<Group>PickupItemTrigger</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>

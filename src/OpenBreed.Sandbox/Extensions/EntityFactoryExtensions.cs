@@ -45,18 +45,6 @@ namespace OpenBreed.Sandbox.Extensions
             return entity;
         }
 
-        public static IEntity CreateDoor(this IEntityFactory entityFactory, int x, int y, string level, string key)
-        {
-            var entity = entityFactory.Create(@"ABTA\Templates\Common\Door")
-                .SetParameter("level", level)
-                .SetParameter("key", key)
-                .SetParameter("startX", 16 * x)
-                .SetParameter("startY", 16 * y)
-                .Build();
-
-            return entity;
-        }
-
         public static IEntity CreateMapEntry(this IEntityFactory entityFactory, int x, int y, int entryId, string level, int gfxValue)
         {
             var entryEntity = entityFactory.Create(@"ABTA\Templates\Common\MapEntry")

@@ -2,10 +2,14 @@
 using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Core.Abstractions.Extensions;
+using OpenBreed.Model.Maps;
 using OpenBreed.Rendering.Abstractions;
+using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Sandbox.Loaders;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -14,7 +18,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xaml;
-using OpenBreed.Wecs.Core.Components.Extensions;
 
 namespace OpenBreed.Sandbox.Extensions
 {
@@ -274,5 +277,62 @@ namespace OpenBreed.Sandbox.Extensions
 
             task.Start();
         }
+
+        public static IEntity PutPassUpDown(this IGameServices gameServices, MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, IWorld world)
+        {
+            var rightValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
+            var rightAction = map.GetAction(rightValue);
+
+            if (rightAction?.Name == templateName)
+            {
+                var entity = gameServices.Factory.CreateElectricGateHorizontal(ix, iy, mapper.Level);
+                visited[ix, iy] = true;
+                visited[ix + 1, iy] = true;
+
+                gameServices.Worlds.RequestAddEntity(entity, world.Id);
+
+                return entity;
+            }
+            else
+            {
+                var entity = gameServices.Factory.CreateElectricGateHorizontal(ix - 1, iy, mapper.Level);
+                visited[ix, iy] = true;
+                visited[ix - 1, iy] = true;
+
+                gameServices.Worlds.RequestAddEntity(entity, world.Id);
+
+                return entity;
+            }
+
+            return null;
+        }
+
+        public static IEntity PutPassRightLeft(this IGameServices gameServices, MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, IWorld world)
+        {
+            var downValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
+            var downAction = map.GetAction(downValue);
+
+            if (downAction?.Name == templateName)
+            {
+                var entity = gameServices.Factory.CreateElectricGateVertical(ix, iy, mapper.Level);
+                visited[ix, iy] = true;
+                visited[ix, iy + 1] = true;
+
+                gameServices.Worlds.RequestAddEntity(entity, world.Id);
+
+                return entity;
+            }
+            else
+            {
+                var entity = gameServices.Factory.CreateElectricGateVertical(ix, iy - 1, mapper.Level);
+                visited[ix, iy] = true;
+                visited[ix, iy - 1] = true;
+
+                gameServices.Worlds.RequestAddEntity(entity, world.Id);
+
+                return entity;
+            }
+        }
+
     }
 }

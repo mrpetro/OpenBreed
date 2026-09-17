@@ -35,6 +35,26 @@ namespace OpenBreed.Wecs.Core.Components.Extensions
             return entity.Get<MetadataComponent>();
         }
 
+        public static void AddPart(this IEntity entity, IEntity partEntity)
+        {
+            var parts = entity.Get<HasPartsComponent>();
+            parts.Add(partEntity.Id);
+            var owner = partEntity.Get<IsPartOfComponent>();
+            owner.EntityId = entity.Id;
+        }
+
+        public static IEnumerable<int> GetParts(this IEntity entity)
+        {
+            var parts = entity.Get<HasPartsComponent>();
+            return parts.EntityIds;
+        }
+
+        public static int GetOwner(this IEntity entity)
+        {
+            var parts = entity.Get<IsPartOfComponent>();
+            return parts.EntityId;
+        }
+
         public static FollowedComponent GetFollowers(this IEntity entity)
         {
             return entity.Get<FollowedComponent>();

@@ -7,6 +7,7 @@ using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Game.Managers;
+using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
@@ -186,7 +187,8 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("L1/WorkingGenerator", environmentCellLoader);
 
             var doorCellEntityLoader = new DoorEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
-                managerCollection.GetRequiredService<IEntityFactory>());
+                managerCollection.GetRequiredService<IEntityFactory>(),
+                managerCollection.GetRequiredService<IGameServices>());
 
             mapLegacyDataLoader.Register("DoorStandard", doorCellEntityLoader);
             mapLegacyDataLoader.Register("DoorRed", doorCellEntityLoader);
@@ -194,7 +196,8 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("DoorBlue", doorCellEntityLoader);
 
             var electricGateEntityLoader = new ElectricGateEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
-                managerCollection.GetRequiredService<IEntityFactory>());
+                managerCollection.GetRequiredService<IEntityFactory>(),
+                managerCollection.GetRequiredService<IGameServices>());
             mapLegacyDataLoader.Register("ElectricGateUp", electricGateEntityLoader);
             mapLegacyDataLoader.Register("ElectricGateDown", electricGateEntityLoader);
             mapLegacyDataLoader.Register("ElectricGateRight", electricGateEntityLoader);

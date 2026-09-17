@@ -26,6 +26,7 @@ namespace OpenBreed.Wecs.Rendering.Components
         #endregion Public Properties
     }
 
+    [ComponentName("StampPutter")]
     public class StampPutterComponent : IEntityComponent
     {
         #region Public Constructors

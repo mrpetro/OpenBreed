@@ -127,6 +127,15 @@ namespace OpenBreed.Sandbox.Extensions
             task.Finish();
         }
 
+        public static void PlayAnimation(this IGameServices services, IEntity entity, int animationId, Action<IEntity> onFinishAction)
+        {
+            services.Triggers.OnEntityAnimFinished(
+                entity, (e, a) => onFinishAction.Invoke(e),
+                singleTime: true);
+
+            entity.PlayAnimation(0, animationId);
+        }
+
         public static void PlayAnimation(this IGameServices services, ITask task, IEntity entity, int animationId, string taskDescription = null)
         {
             if (string.IsNullOrEmpty(taskDescription))

@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Common.Game.Services;
 
 namespace OpenBreed.Sandbox.Loaders
 {
@@ -23,15 +24,17 @@ namespace OpenBreed.Sandbox.Loaders
         #region Private Fields
 
         private readonly IEntityFactory entityFactory;
+        private readonly IGameServices gameServices;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ElectricGateEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory)
+        public ElectricGateEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory, IGameServices gameServices)
         {
             this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
             this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
+            this.gameServices = gameServices ?? throw new System.ArgumentNullException(nameof(gameServices));
         }
 
         #endregion Public Constructors
@@ -46,12 +49,12 @@ namespace OpenBreed.Sandbox.Loaders
             {
                 case PASS_UP:
                 case PASS_DOWN:
-                    entity = PutPassUpDown(mapAssets, map, visited, ix, iy, gfxValue, templateName, world);
+                    entity = gameServices.PutPassUpDown(mapAssets, map, visited, ix, iy, gfxValue, templateName, world);
                     break;
 
                 case PASS_RIGHT:
                 case PASS_LEFT:
-                    entity = PutPassRightLeft(mapAssets, map, visited, ix, iy, gfxValue, templateName, world);
+                    entity = gameServices.PutPassRightLeft(mapAssets, map, visited, ix, iy, gfxValue, templateName, world);
                     break;
 
                 default:
@@ -62,65 +65,5 @@ namespace OpenBreed.Sandbox.Loaders
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private IEntity PutPassUpDown(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, IWorld world)
-        {
-            var rightValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
-            var rightAction = map.GetAction(rightValue);
-
-            if (rightAction?.Name == templateName)
-            {
-                var entity = entityFactory.CreateElectricGateHorizontal(ix, iy, mapper.Level);
-                visited[ix, iy] = true;
-                visited[ix + 1, iy] = true;
-
-                worldMan.RequestAddEntity(entity, world.Id);
-
-                return entity;
-            }
-            else
-            {
-                var entity = entityFactory.CreateElectricGateHorizontal(ix - 1, iy, mapper.Level);
-                visited[ix, iy] = true;
-                visited[ix - 1, iy] = true;
-
-                worldMan.RequestAddEntity(entity, world.Id);
-
-                return entity;
-            }
-
-            return null;
-        }
-
-        private IEntity PutPassRightLeft(MapMapper mapper, MapModel map, bool[,] visited, int ix, int iy, int gfxValue, string templateName, IWorld world)
-        {
-            var downValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
-            var downAction = map.GetAction(downValue);
-
-            if (downAction?.Name == templateName)
-            {
-                var entity = entityFactory.CreateElectricGateVertical(ix, iy, mapper.Level);
-                visited[ix, iy] = true;
-                visited[ix, iy + 1] = true;
-
-                worldMan.RequestAddEntity(entity, world.Id);
-
-                return entity;
-            }
-            else
-            {
-                var entity = entityFactory.CreateElectricGateVertical(ix, iy - 1, mapper.Level);
-                visited[ix, iy] = true;
-                visited[ix, iy - 1] = true;
-
-                worldMan.RequestAddEntity(entity, world.Id);
-
-                return entity;
-            }
-        }
-
-        #endregion Private Methods
     }
 }

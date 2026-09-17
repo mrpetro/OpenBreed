@@ -1,11 +1,17 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Game.Services;
+using OpenBreed.Core;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Model.Maps;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Systems.Door;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Core.Components;
+using OpenBreed.Wecs.Core.Components.Extensions;
+using OpenBreed.Wecs.Rendering.Components;
 using OpenBreed.Wecs.Worlds;
+using System.Windows.Controls;
 
 namespace OpenBreed.Sandbox.Loaders
 {
@@ -23,15 +29,17 @@ namespace OpenBreed.Sandbox.Loaders
 
         private readonly IWorldMan worldMan;
         private readonly IEntityFactory entityFactory;
+        private readonly IGameServices gameServices;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DoorEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory)
+        public DoorEntityLoader(IWorldMan worldMan, IEntityFactory entityFactory, IGameServices gameServices)
         {
             this.worldMan = worldMan ?? throw new System.ArgumentNullException(nameof(worldMan));
             this.entityFactory = entityFactory ?? throw new System.ArgumentNullException(nameof(entityFactory));
+            this.gameServices = gameServices ?? throw new System.ArgumentNullException(nameof(gameServices));
         }
 
         #endregion Public Constructors
@@ -47,25 +55,82 @@ namespace OpenBreed.Sandbox.Loaders
                 case "DoorStandard":
                     key = "";
                     break;
+
                 case "DoorRed":
-                    key = "Keycard1";
+                    key = "KeycardRed";
                     break;
+
                 case "DoorGreen":
-                    key = "Keycard2";
+                    key = "KeycardGreen";
                     break;
+
                 case "DoorBlue":
-                    key = "Keycard3";
+                    key = "KeycardBlue";
                     break;
             }
 
-            var entity = entityFactory.CreateDoor(ix, iy, mapper.Level, key);
-            visited[ix, iy] = true;
+            var rightValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix + 1, iy);
+            var rightAction = map.GetAction(rightValue);
 
-            worldMan.RequestAddEntity(entity, world.Id);
+            if (rightAction?.Name == templateName)
+            {
+                //Door horizontal
+                visited[ix, iy] = true;
+                visited[ix + 1, iy] = true;
+                var entity = CreateDoor(ix, iy, "Horizontal");
+                entity.SetMetadata("RequiredKey", key);
+                entity.SetMetadata("Flavor", "Horizontal");
+                entity.SetMetadata("Level", mapper.Level);
+                entity.SetState(string.IsNullOrEmpty(key) ? DoorState.Closed : DoorState.Locked);
+                gameServices.Worlds.RequestAddEntity(entity, world.Id);
+                return entity;
+            }
+
+            var downValue = MapLegacyDataLoader.GetActionCellValue(map.Layout, ix, iy + 1);
+            var downAction = map.GetAction(downValue);
+
+            if (downAction?.Name == templateName)
+            {
+                //Door vertical
+                visited[ix, iy] = true;
+                visited[ix, iy + 1] = true;
+                var entity = CreateDoor(ix, iy, "Vertical");
+                entity.SetMetadata("RequiredKey", key);
+                entity.SetMetadata("Flavor", "Vertical");
+                entity.SetMetadata("Level", mapper.Level);
+                entity.SetState(string.IsNullOrEmpty(key) ? DoorState.Closed : DoorState.Locked);
+                gameServices.Worlds.RequestAddEntity(entity, world.Id);
+
+                return entity;
+            }
+
+            return null;
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private IEntity CreateDoorPart(int x, int y, string key)
+        {
+            var entity = gameServices.Factory.Create($@"ABTA\Templates\Common\DoorPart")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
 
             return entity;
         }
 
-        #endregion Public Methods
+        private IEntity CreateDoor(int x, int y, string orientation)
+        {
+            var entity = gameServices.Factory.Create($@"ABTA\Templates\Common\Door{orientation}")
+                .SetParameter("startX", 16 * x)
+                .SetParameter("startY", 16 * y)
+                .Build();
+
+            return entity;
+        }
+
+        #endregion Private Methods
     }
 }

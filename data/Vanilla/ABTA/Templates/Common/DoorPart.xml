@@ -3,9 +3,10 @@
     <Class>DoorPart</Class>
     <Components>
 		<Metadata>
-            <String Name="Option" Value="$(key)" />
 		</Metadata>
 		<Position X="$(startX)" Y="$(startY)" />
+        <IsPartOf>
+		</IsPartOf>
 		<Body>
 			<CofFactor>1.0</CofFactor>
 			<CorFactor>1.0</CorFactor>

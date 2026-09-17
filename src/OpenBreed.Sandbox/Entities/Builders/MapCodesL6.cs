@@ -92,10 +92,10 @@ namespace OpenBreed.Sandbox.Entities.Builders
             mapper.RegisterAction(ItemNames.KeycardGreen, "KeycardGreen");
             mapper.RegisterAction(ItemNames.KeycardBlue, "KeycardBlue");
 
-            mapper.Register("SmartCard", GFX_SMART_CARD_F1, "F1");
-            mapper.Register("SmartCard", GFX_SMART_CARD_F2, "F2");
-            mapper.Register("SmartCard", GFX_SMART_CARD_F3, "F3");
-            mapper.Register("SmartCard", MapMapper.GFX_ANY, "Trigger");
+            mapper.Register("SmartCard", GFX_SMART_CARD_F1, "SmartCard/F1");
+            mapper.Register("SmartCard", GFX_SMART_CARD_F2, "SmartCard/F2");
+            mapper.Register("SmartCard", GFX_SMART_CARD_F3, "SmartCard/F3");
+            mapper.Register("SmartCard", MapMapper.GFX_ANY, "SmartCard/Trigger");
             mapper.RegisterAction("SmartCard1", "SmartCard", "1");
             mapper.RegisterAction("SmartCard2", "SmartCard", "2");
             mapper.RegisterAction("SmartCard3", "SmartCard", "3");

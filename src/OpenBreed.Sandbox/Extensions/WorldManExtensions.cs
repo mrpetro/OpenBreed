@@ -9,6 +9,7 @@ using OpenBreed.Rendering.OpenGL.Managers;
 using OpenBreed.Sandbox.Systems;
 using OpenBreed.Sandbox.Systems.Actor;
 using OpenBreed.Sandbox.Systems.Camera;
+using OpenBreed.Sandbox.Systems.Door;
 using OpenBreed.Sandbox.Systems.Game;
 using OpenBreed.Sandbox.Systems.Mission;
 using OpenBreed.Sandbox.Systems.MissionScreen;
@@ -76,10 +77,10 @@ namespace OpenBreed.Sandbox.Extensions
             return worldMan.Create()
                 .SetName(name)
                 .AddSystem<CameraSettingPaletteSystem>()
-                .AddSystem<OnActorTouchDoorTriggerService>()
+                .AddSystem<DoorSystem>()
                 .AddSystem<OnActorTouchExitTriggerSystem>()
                 .AddSystem<OnActorTouchTeleportTriggerSystem>()
-                .AddSystem<OnActorTouchItemTriggerSystem>()
+                .AddSystem<ItemPickupSystem>()
                 .AddSystem<OnActorTouchSmartCardTriggerSystem>()
                 .AddSystem<OnActorTouchLandMineTriggerSystem>()
                 .AddSystem<ExplosionOnEnterWorldSystem>()

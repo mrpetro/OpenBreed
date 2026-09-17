@@ -47,7 +47,9 @@ namespace OpenBreed.Wecs.Rendering.Systems
 
             //Update all tiles
             for (int i = 0; i < items.Count; i++)
+            {
                 ModifyTiles(grid, items[i]);
+            }
 
             items.Clear();
         }

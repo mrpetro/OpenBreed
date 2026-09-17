@@ -21,9 +21,10 @@ namespace OpenBreed.Common.Game
         public static int WorldExitTrigger { get; private set; }
         public static int TeleportEntryTrigger { get; private set; }
         public static int Projectile { get; private set; }
-        public static int Pickable { get; private set; }
         public static int Trigger { get; private set; }
-
+        public static int OpenDoorTrigger { get; private set; }
+        public static int PickupItemTrigger { get; private set; }
+        public static int ReadSmartCardTrigger { get; private set; }
         #endregion Public Properties
 
         #region Public Methods
@@ -42,6 +43,9 @@ namespace OpenBreed.Common.Game
             WorldExitTrigger = collisions.RegisterGroup(nameof(WorldExitTrigger));
             TeleportEntryTrigger = collisions.RegisterGroup(nameof(TeleportEntryTrigger));
             Trigger = collisions.RegisterGroup(nameof(Trigger));
+            OpenDoorTrigger = collisions.RegisterGroup(nameof(OpenDoorTrigger));
+            PickupItemTrigger = collisions.RegisterGroup(nameof(PickupItemTrigger));
+            ReadSmartCardTrigger = collisions.RegisterGroup(nameof(ReadSmartCardTrigger));
         }
 
         #endregion Public Methods

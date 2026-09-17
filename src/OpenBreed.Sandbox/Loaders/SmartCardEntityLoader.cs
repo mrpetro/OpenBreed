@@ -4,6 +4,7 @@ using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Wecs.Abstractions.Primitives;
 using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Core.Components.Extensions;
 
 namespace OpenBreed.Sandbox.Loaders
 {
@@ -37,6 +38,7 @@ namespace OpenBreed.Sandbox.Loaders
                 return null;
 
             var entity = entityFactory.CreateItem(ix, iy, entityType, mapper.Level, gfxValue, option);
+            entity.SetMetadata("Flavor", flavor);
             visited[ix, iy] = true;
 
             worldMan.RequestAddEntity(entity, world.Id);

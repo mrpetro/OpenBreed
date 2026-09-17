@@ -36,7 +36,7 @@ namespace OpenBreed.Fsm
 
         #region Public Methods
 
-        public IFsmMachine<TContext, TState> Register<TImpulse>(TState from, TState to, TransitionHandler<TContext, TState, TImpulse> transitionHandler) where TImpulse : IFsmImpulse
+        public IFsmMachine<TContext, TState> Register<TImpulse>(TState from, TransitionHandler<TContext, TState, TImpulse> transitionHandler) where TImpulse : IFsmImpulse
         {
             var type = typeof(TImpulse);
 
@@ -46,7 +46,7 @@ namespace OpenBreed.Fsm
                 _transitions.Add(type, transitions);
             }
 
-            if (!transitions.TryAdd(from, new Transition<TContext, TState, TImpulse>(from, to, transitionHandler, stateSetter)))
+            if (!transitions.TryAdd(from, new Transition<TContext, TState, TImpulse>(from, transitionHandler, stateSetter)))
             {
                 throw new InvalidOperationException();
             }

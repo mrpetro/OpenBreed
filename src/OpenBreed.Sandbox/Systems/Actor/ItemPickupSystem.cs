@@ -31,6 +31,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.CommandLine;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnActorTouchItemTriggerSystem : IOnActorTouchObstacleSystem
+    public class ItemPickupSystem : IOnEntityCollisionSystem
     {
         #region Private Fields
 
@@ -50,7 +51,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public OnActorTouchItemTriggerSystem(
+        public ItemPickupSystem(
             IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
@@ -60,21 +61,24 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Properties
 
-        public string TriggerName => "ActorTouch";
-        public string ActionName => "Pickup";
+        public int ColliderTypeA => ColliderTypes.ActorBody;
+
+        public IEnumerable<int> ColliderTypesB
+        {
+            get
+            {
+                yield return ColliderTypes.PickupItemTrigger;
+            }
+        }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void OnTouch(
-            IFixture actorFixture, IEntity actorEntity,
-            IFixture triggerFixture, IEntity triggerEntity,
+        public void OnCollision(IFixture actorFixture, IEntity actorEntity,
+            IFixture triggerFixture, IEntity itemEntity, float dt,
             Vector2 projection)
         {
-            var itemEntity = triggerEntity;
-
-            var mapEntity = services.Entities.GetMapEntity(itemEntity.WorldId);
             var metaData = itemEntity.GetMetadata();
             var pickupClassName = services.Classes.GetById(itemEntity.ClassId).Name;
 
@@ -86,18 +90,34 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 return;
             }
 
-            var flavor = itemEntity.GetMetadata("Flavor");
-
-            var position = itemEntity.Get<PositionComponent>().Value;
-            var targetCell = mapEntity.GetTileGridCell(position);
-            var stampName = $"{flavor}/Picked";
-            var stampId = services.Stamps.GetByName(stampName).Id;
-            mapEntity.PutStampAtEntityPosition(itemEntity, stampId, 0);
+            if (pickupName == "SmartCard")
+            {
+                RemoveAllItems(itemEntity);
+            }
+            else
+            {
+                RemoveItem(itemEntity);
+            }
 
             var soundName = $"Vanilla/Common/{pickupClassName}/Picked";
             var soundId = services.Sounds.GetByName(soundName);
 
             itemEntity.EmitSound(soundId);
+        }
+
+        private void RemoveItem(IEntity itemEntity)
+        {
+            var flavor = itemEntity.GetMetadata("Flavor");
+
+            if (!flavor.EndsWith("Trigger"))
+            {
+                var mapEntity = services.Entities.GetMapEntity(itemEntity.WorldId);
+                var position = itemEntity.Get<PositionComponent>().Value;
+                var targetCell = mapEntity.GetTileGridCell(position);
+                var stampName = $"{flavor}/Picked";
+                var stampId = services.Stamps.GetByName(stampName).Id;
+                mapEntity.PutStampAtEntityPosition(itemEntity, stampId, 0);
+            }
 
             services.Worlds.RequestRemoveEntity(itemEntity);
             services.Entities.RequestErase(itemEntity);
@@ -139,9 +159,31 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
                     return TryGiveItem(actorEntity, itemClassName, 1);
 
+                case "SmartCard":
+                    if (itemEntity.TryGetMetadata("Option", out var option))
+                    {
+                        return TryGiveItem(actorEntity, $"SmartCard{option}", 1);
+                    }
+
+                    return false;
+
                 default:
                     return TryGiveItem(actorEntity, itemClassName, 1);
             }
+        }
+
+        private bool RemoveAllItems(IEntity itemEntity)
+        {
+            var option = itemEntity.GetMetadata("Option");
+            var classId = services.Classes.GetByName("SmartCard").Id;
+
+            // Remove all smart cards from level
+            services.Entities.ForEachEntity(itemEntity.WorldId,
+                classId,
+                option,
+                RemoveItem);
+
+            return true;
         }
 
         private bool HandlePickup(IEntity actorEntity, IEntity itemEntity, string pickupName)

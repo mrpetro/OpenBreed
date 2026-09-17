@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Audio.Abstractions;
+using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Wecs.Systems.Projectile;
@@ -18,6 +19,7 @@ using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Core.Systems.Events;
 using OpenBreed.Wecs.Core.Systems.Extensions;
+using OpenBreed.Wecs.Physics.Systems.Abstractions;
 using OpenBreed.Wecs.Rendering.Systems.Extensions;
 using OpenTK.Mathematics;
 using System;
@@ -28,7 +30,7 @@ using System.Windows.Controls;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnActorTouchSmartCardTriggerSystem : IOnActorTouchObstacleSystem
+    public class OnActorTouchSmartCardTriggerSystem : IOnEntityCollisionSystem
     {
         #region Private Fields
 
@@ -47,20 +49,24 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Properties
 
-        public string TriggerName => "ActorTouch";
-        public string ActionName => "Read";
+        public int ColliderTypeA => ColliderTypes.ActorBody;
+
+        public IEnumerable<int> ColliderTypesB
+        {
+            get
+            {
+                yield return ColliderTypes.ReadSmartCardTrigger;
+            }
+        }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void OnTouch(
-            IFixture actorFixture, IEntity actorEntity,
-            IFixture triggerFixture, IEntity triggerEntity,
+        public void OnCollision(IFixture actorFixture, IEntity actorEntity,
+            IFixture triggerFixture, IEntity smartCardEntity, float dt,
             Vector2 projection)
         {
-            var smartCardEntity = triggerEntity;
-
             var gameCommentator = services.Entities.GetLynette();
             var gameCameraEntity = services.Entities.GetPlayerCamera(actorEntity);
             var smartCardScreenCameraEntity = services.Entities.GetSmartCardScreenCamera();
@@ -92,11 +98,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
             }
 
             var classId = services.Classes.GetByName("SmartCard").Id;
-
-            services.Entities.ForEachEntity(gameWorld.Id,
-                classId,
-                option,
-                RemoveSmartcard);
 
             var soundName = "Vanilla/Common/Speech/SmartCardMessageFollows";
             var soundId = services.Sounds.GetByName(soundName);
@@ -224,29 +225,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
         #endregion Public Methods
 
         #region Private Methods
-
-        private void RemoveSmartcard(IEntity entity)
-        {
-            var mapEntity = services.Entities.GetMapEntity(entity.WorldId);
-            var metaData = entity.GetMetadata();
-            var smartCardClassName = services.Classes.GetById(entity.ClassId).Name;
-
-
-            var position = entity.Get<PositionComponent>().Value;
-            var targetCell = mapEntity.GetTileGridCell(position);
-
-            var findPattern = @$"Vanilla\/(?<level>\w+)\/{smartCardClassName}\/(?<flavor>\w+)\/Lying";
-
-            if (services.TryGetCellGfxFlavor(targetCell, findPattern, out string level, out string flavor))
-            {
-                var stampName = $"Vanilla/{level}/{smartCardClassName}/{flavor}/Picked";
-                var stampId = services.Stamps.GetByName(stampName).Id;
-                mapEntity.PutStampAtEntityPosition(entity, stampId, 0);
-            }
-
-            services.Worlds.RequestRemoveEntity(entity);
-            services.Entities.RequestErase(entity);
-        }
 
         #endregion Private Methods
     }
