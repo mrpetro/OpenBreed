@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Abstractions;
+using OpenBreed.Animation.Generic;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
@@ -20,12 +20,14 @@ using OpenBreed.Wecs.Control.Systems.Extensions;
 using OpenBreed.Wecs.Core.Components;
 using OpenBreed.Wecs.Core.Components.Extensions;
 using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Physics.Systems.Abstractions;
 using OpenTK.Mathematics;
 using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnActorTouchTeleportTriggerSystem : IOnActorTouchObstacleSystem
+    public class TeleportingSystem : IOnEntityCollisionSystem
     {
         #region Private Fields
 
@@ -35,7 +37,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public OnActorTouchTeleportTriggerSystem(
+        public TeleportingSystem(
             IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
@@ -45,19 +47,24 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Properties
 
-        public string TriggerName => "ActorTouch";
-        public string ActionName => "Teleport";
+        public int ColliderTypeA => ColliderTypes.ActorBody;
+
+        public IEnumerable<int> ColliderTypesB
+        {
+            get
+            {
+                yield return ColliderTypes.TeleportTrigger;
+            }
+        }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void OnTouch(
-            IFixture actorFixture, IEntity actorEntity,
-            IFixture triggerFixture, IEntity triggerEntity,
+        public void OnCollision(IFixture actorFixture, IEntity actorEntity,
+            IFixture triggerFixture, IEntity teleportEntity, float dt,
             Vector2 projection)
         {
-            var teleportEntity = triggerEntity;
             var cameraEntity = services.Entities.GetPlayerCamera(actorEntity);
             var hudCameraEntity = services.Entities.GetHudCamera();
             var cameraFadeInClipId = services.Clips.GetId("Vanilla/Common/Camera/Effects/FadeIn");

@@ -31,9 +31,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             builder.AddSystem<SolidCollisionHandlerSystem>();
             builder.AddSystem<SlowdownObstacleCollisionSystem>();
             builder.AddSystem<SlopeObstacleCollisionSystem>();
-            builder.AddSystem<TriggerCollisionHandlerSystem>();
             builder.AddSystem<Projectile2TriggerCollisionHandlerSystem>();
-            builder.AddSystem<ItemPickupSystem>();
             builder.AddSystem<ItemManagingSystem>();
             builder.AddSystem<LivesSystem>();
             builder.AddSystem<ActorSystem>();

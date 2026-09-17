@@ -30,7 +30,7 @@ using System.Windows.Controls;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnActorTouchSmartCardTriggerSystem : IOnEntityCollisionSystem
+    public class SmartCardReadingSystem : IOnEntityCollisionSystem
     {
         #region Private Fields
 
@@ -40,7 +40,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public OnActorTouchSmartCardTriggerSystem(IGameServices services)
+        public SmartCardReadingSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
@@ -67,19 +67,23 @@ namespace OpenBreed.Sandbox.Systems.Actor
             IFixture triggerFixture, IEntity smartCardEntity, float dt,
             Vector2 projection)
         {
+            var gameWorld = services.Worlds.GetWorld(smartCardEntity);
+            var option = smartCardEntity.GetMetadata("Option");
+            var smartCardClassName = services.Classes.GetById(smartCardEntity.ClassId).Name;
+            var textId = $"{gameWorld.Name}/{smartCardClassName}/{option}";
+
             var gameCommentator = services.Entities.GetLynette();
             var gameCameraEntity = services.Entities.GetPlayerCamera(actorEntity);
             var smartCardScreenCameraEntity = services.Entities.GetSmartCardScreenCamera();
             var smartCardScreenTextEntity = services.Entities.GetSmartCardScreenText();
-            var gameWorld = services.Worlds.GetWorld(smartCardEntity);
+
             var hudCameraEntity = services.Entities.GetHudCamera();
             var hudViewportEntity = services.Entities.GetHudViewport();
             var gameViewportEntity = services.Entities.GetGameViewport();
             var cameraFadeOutClipId = services.Clips.GetId("Vanilla/Common/Camera/Effects/FadeOut");
             var cameraFadeInClipId = services.Clips.GetId("Vanilla/Common/Camera/Effects/FadeIn");
-            var option = smartCardEntity.GetMetadata("Option");
-            var smartCardClassName = services.Classes.GetById(smartCardEntity.ClassId).Name;
-            var textId = $"{gameWorld.Name}/{smartCardClassName}/{option}";
+
+
             services.Logger.LogInformation("Text Id: {0}", textId);
             var text = services.Texts.GetTextString(textId);
             var currentCharacter = 0;
@@ -211,12 +215,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
                 gameCameraEntity.SetBrightness(0);
                 hudViewportEntity.SetViewportCamera(hudCameraEntity.Id);
-                //actorEntity.SetPosition(Entities, Shapes, smartCardEntity);
-                //services.Triggers.OnEntityAnimFinished(
-                //gameCameraEntity,
-                //GameWorldUnpause,
-                //true);
-
                 gameCameraEntity.PlayAnimation(0, cameraFadeInClipId);
                 actorEntity.State = null;
             }

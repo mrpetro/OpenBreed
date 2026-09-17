@@ -9,15 +9,10 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
 					<Groups>
-						<Group>Trigger</Group>
+						<Group>TeleportTrigger</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>
 		</Body>
-		<OnTrigger>
-            <Actions>
-                <Action Trigger="ActorTouch" Action="Teleport" />
-            </Actions>
-		</OnTrigger>
     </Components>
 </EntityTemplate>

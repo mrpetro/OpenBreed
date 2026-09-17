@@ -38,7 +38,7 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class OnActorTouchLandMineTriggerSystem : IOnActorTouchObstacleSystem
+    public class LandMineDetonationSystem : IOnEntityCollisionSystem
     {
         #region Private Fields
 
@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Constructors
 
-        public OnActorTouchLandMineTriggerSystem(
+        public LandMineDetonationSystem(
             IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
@@ -58,24 +58,28 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Properties
 
-        public string TriggerName => "ActorTouch";
-        public string ActionName => "Detonate";
+        public int ColliderTypeA => ColliderTypes.ActorBody;
+
+        public IEnumerable<int> ColliderTypesB
+        {
+            get
+            {
+                yield return ColliderTypes.DetonateTrigger;
+            }
+        }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void OnTouch(
-            IFixture actorFixture, IEntity actorEntity,
-            IFixture triggerFixture, IEntity triggerEntity,
+        public void OnCollision(IFixture actorFixture, IEntity actorEntity,
+            IFixture triggerFixture, IEntity mineEntity, float dt,
             Vector2 projection)
         {
             if (!actorEntity.HasHealth())
             {
                 return;
             }
-
-            var mineEntity = triggerEntity;
 
             Explode(mineEntity, actorEntity);
         }

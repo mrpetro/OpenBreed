@@ -9,17 +9,12 @@
 				<Fixture>
 					<ShapeName>Shapes/Box_0_0_16_16</ShapeName>
 					<Groups>
-						<Group>Trigger</Group>
+						<Group>DetonateTrigger</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>
 		</Body>
 		<Damager></Damager>
-		<OnTrigger>
-            <Actions>
-                <Action Trigger="ActorTouch" Action="Detonate" />
-            </Actions>
-		</OnTrigger>
 		<EntityEmitter>
 		</EntityEmitter>
 		<SoundPlayer>
