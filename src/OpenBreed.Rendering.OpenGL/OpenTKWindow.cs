@@ -89,16 +89,6 @@ namespace OpenBreed.Rendering.OpenGL
 
         #region Public Methods
 
-        public void Exit()
-        {
-            gameWindow.Close();
-        }
-
-        public void Run()
-        {
-            gameWindow.Run();
-        }
-
         #endregion Public Methods
 
         #region Private Methods

@@ -10,6 +10,7 @@ using OpenBreed.Sandbox.App.Systems;
 using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Core.Components;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Desktop;
 using System;
 
 using System.IO;
@@ -66,7 +67,7 @@ namespace OpenBreed.Sandbox
                 dataLoaderFactory.RegisterGraphicsDataLoader(sp);
             });
 
-            hostBuilder.SetupSandboxWecsSystems();
+            hostBuilder.SetupSandboxWecsSystems(); 
 
             hostBuilder.SetupShapeMan((shapeMan, sp) =>
             {
@@ -211,6 +212,7 @@ namespace OpenBreed.Sandbox
         #region Private Fields
 
         private readonly IWindow window;
+        private readonly GameWindow gameWindow;
         private readonly IEventsMan eventsMan;
         private readonly IInputsMan inputsMan;
         private readonly IInteractionFactoryProvider interactionFactoryProvider;
@@ -228,6 +230,7 @@ namespace OpenBreed.Sandbox
             host.RunAsync();
 
             window = host.Services.GetRequiredService<IWindow>();
+            gameWindow = host.Services.GetRequiredService<GameWindow>();
             eventsMan = host.Services.GetRequiredService<IEventsMan>();
             inputsMan = host.Services.GetRequiredService<IInputsMan>();
             interactionFactoryProvider = host.Services.GetRequiredService<IInteractionFactoryProvider>();
@@ -245,12 +248,12 @@ namespace OpenBreed.Sandbox
 
         public override void Run()
         {
-            window.Run();
+            gameWindow.Run();
         }
 
         public override void Exit()
         {
-            window.Exit();
+            gameWindow.Close();
         }
 
         #endregion Public Methods

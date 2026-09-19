@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using OpenBreed.Audio.Abstractions;
 using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Wecs.Systems.Projectile;
@@ -51,18 +52,20 @@ namespace OpenBreed.Sandbox.Systems.Door
         #region Private Fields
 
         private readonly IGameServices services;
-        private readonly IEventsMan eventsMan;
+        private readonly ItemsMan itemsMan;
         private readonly IFsmMachine<IEntity, DoorState> machine;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DoorSystem(IGameServices services, IEventsMan eventsMan, IFsmMachineFactory<IEntity> fsmMachineFactory)
+        public DoorSystem(
+            IGameServices services,
+            ItemsMan itemsMan)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
-            this.eventsMan = eventsMan ?? throw new ArgumentNullException(nameof(eventsMan));
-            this.machine = fsmMachineFactory.GetMachine<DoorState>()
+            this.itemsMan = itemsMan ?? throw new ArgumentNullException(nameof(itemsMan));
+            this.machine = services.FsmFactory.GetMachine<DoorState>()
                 .Register<TouchImpulse>(DoorState.Locked, Unlocking)
                 .Register<TouchImpulse>(DoorState.Closed, ClosedToOpening)
                 .Register<CompletionImpulse>(DoorState.Opening, OpeningToOpen);
@@ -154,7 +157,7 @@ namespace OpenBreed.Sandbox.Systems.Door
 
             if (doorEntity.TryGetMetadata("RequiredKey", out var requiredKey) && !string.IsNullOrEmpty(requiredKey))
             {
-                var keycardItemId = services.Items.GetItemId(requiredKey);
+                var keycardItemId = itemsMan.GetItemId(requiredKey);
 
                 if (keycardItemId == -1)
                 {

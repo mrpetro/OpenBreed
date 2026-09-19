@@ -20,7 +20,7 @@ namespace OpenBreed.Physics.Generic.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IFixtureMan>((sp) =>
+                services.AddScoped<IFixtureMan>((sp) =>
                 {
                     var fixtureMan = new FixtureMan(sp.GetService<ILogger>());
                     action.Invoke(fixtureMan, sp);
@@ -33,7 +33,7 @@ namespace OpenBreed.Physics.Generic.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IShapeMan>((sp) =>
+                services.AddScoped<IShapeMan>((sp) =>
                 {
                     var shapeMan = new ShapeMan(sp.GetService<ILogger>());
                     action.Invoke(shapeMan, sp);
@@ -46,7 +46,7 @@ namespace OpenBreed.Physics.Generic.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ICollisionMan<TObject>>((sp) =>
+                services.AddScoped<ICollisionMan<TObject>>((sp) =>
                 {
                     var collisionMan = new CollisionMan<TObject>(sp.GetService<ILogger>());
                     action.Invoke(collisionMan, sp);
@@ -59,7 +59,7 @@ namespace OpenBreed.Physics.Generic.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<ICollisionChecker>((sp) =>
+                services.AddScoped<ICollisionChecker>((sp) =>
                 {
                     var collisionChecker = new CollisionChecker();
                     action?.Invoke(collisionChecker, sp);
@@ -72,7 +72,7 @@ namespace OpenBreed.Physics.Generic.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<IFixtureMan>((sp) =>
+                services.AddScoped<IFixtureMan>((sp) =>
                 {
                     var collisionMan = new FixtureMan(sp.GetService<ILogger>());
                     action.Invoke(collisionMan, sp);

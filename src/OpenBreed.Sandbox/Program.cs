@@ -59,6 +59,7 @@ using System;
 
 using System.Linq;
 using System.IO;
+using OpenTK.Windowing.Desktop;
 
 
 namespace OpenBreed.Sandbox
@@ -90,6 +91,10 @@ namespace OpenBreed.Sandbox
             hostBuilder.SetupDataHandlers();
 
             hostBuilder.SetupDataGridFactory();
+            hostBuilder.ConfigureServices(services =>
+            {
+                services.AddMemoryCache();
+            });
 
             hostBuilder.SetupGameWindow(640, 480, $"{appName} v{infoVersion}");
             hostBuilder.SetupGLWindow();
@@ -101,36 +106,11 @@ namespace OpenBreed.Sandbox
                 sc.AddSingleton<CoordsTransformer>();
             });
 
-            hostBuilder.SetupShapeMan((shapeMan, sp) =>
-            {
-                shapeMan.Register("Shapes/Point_14_14", new PointShape(14, 14));
-                shapeMan.Register("Shapes/Point_0_0", new PointShape(0, 0));
-                shapeMan.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
-                shapeMan.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
-                shapeMan.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
-                shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
-                shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
-                shapeMan.Register("Shapes/Box_-24_-24_48_48", new BoxShape(-24, -24, 48, 48));
-                shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
-                shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
-                shapeMan.Register("Shapes/Circle_0_0_240", new CircleShape(new Vector2(0, 0), 240));
-                shapeMan.Register("Shapes/Circle_0_0_120", new CircleShape(new Vector2(0, 0), 120));
-                shapeMan.Register("Shapes/Circle_0_0_480", new CircleShape(new Vector2(0, 0), 480));
-                shapeMan.Register("Shapes/Circle_0_0_40", new CircleShape(new Vector2(0, 0), 40));
-                shapeMan.Register("Shapes/Circle_0_0_320", new CircleShape(new Vector2(0, 0), 320));
-                shapeMan.Register("Shapes/Circle_0_0_160", new CircleShape(new Vector2(0, 0), 160));
-            });
-
             hostBuilder.SetupSandboxSystems();
             hostBuilder.SetupCommonGameServices(isEditor: false);
             hostBuilder.SetupCommonGameWecsServices(isEditor: false);
 
             hostBuilder.SetupWecsSandboxComponents();
-
-            hostBuilder.SetupItemManager((itemsMap, sp) =>
-            {
-                itemsMap.RegisterAbtaItems();
-            });
 
             hostBuilder.SetupMapLegacyDataLoader();
 
@@ -170,6 +150,7 @@ namespace OpenBreed.Sandbox
         private const string ABTA_PC_GAME_DB_FILE_NAME = "GameDatabase.ABTA.EPF.xml";
 
         private readonly IWindow window;
+        private readonly GameWindow gameWindow;
         private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
@@ -182,6 +163,7 @@ namespace OpenBreed.Sandbox
             host.RunAsync();
 
             window = host.Services.GetService<IWindow>();
+            gameWindow = host.Services.GetRequiredService<GameWindow>();
             eventsMan = host.Services.GetService<IEventsMan>();
 
             eventsMan.Subscribe<WindowUpdateEvent>(OnUpdateFrame);
@@ -194,12 +176,12 @@ namespace OpenBreed.Sandbox
 
         public override void Run()
         {
-            window.Run();
+            gameWindow.Run();
         }
 
         public override void Exit()
         {
-            window.Exit();
+            gameWindow.Close();
         }
 
         #endregion Public Methods

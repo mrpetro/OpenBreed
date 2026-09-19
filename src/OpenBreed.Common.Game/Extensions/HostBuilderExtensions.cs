@@ -3,50 +3,51 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenBreed.Animation.Abstractions;
 using OpenBreed.Audio.Abstractions.Managers;
+using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Managers;
+using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Interface;
 using OpenBreed.Common.Interface.Drawing;
 using OpenBreed.Common.Interface.Logging;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Abstractions.Managers;
+using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
-using OpenBreed.Input.Generic.Extensions;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Input.Abstractions;
 using OpenBreed.Input.Abstractions.Events;
+using OpenBreed.Input.Generic.Extensions;
+using OpenBreed.Model.Extensions;
 using OpenBreed.Model.Maps;
+using OpenBreed.Physics.Generic.Extensions;
+using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions;
 using OpenBreed.Rendering.Abstractions.Managers;
+using OpenBreed.Rendering.Common.Extensions;
+using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Scripting.Abstractions;
 using OpenBreed.Scripting.Lua.Extensions;
+using OpenBreed.Wecs.Abstractions.Events;
+using OpenBreed.Wecs.Abstractions.Primitives;
+using OpenBreed.Wecs.Abstractions.Services;
 using OpenBreed.Wecs.Components.Xml;
-using OpenBreed.Wecs.Extensions;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Control.Systems.Events;
 using OpenBreed.Wecs.Core.Systems.Events;
+using OpenBreed.Wecs.Extensions;
+using OpenBreed.Wecs.Rendering.Systems.Helpers;
+using OpenBreed.Wecs.Systems;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using OpenBreed.Common.Extensions;
 using System;
-using OpenBreed.Fsm.Extensions;
-using OpenBreed.Physics.Generic.Extensions;
-using OpenBreed.Audio.OpenAL.Extensions;
-using OpenBreed.Rendering.OpenGL.Extensions;
-using OpenBreed.Core.Extensions;
-using OpenBreed.Model.Extensions;
-using OpenBreed.Rendering.Common.Extensions;
-using OpenBreed.Wecs.Rendering.Systems.Helpers;
-using OpenBreed.Common.Game.Services;
-using OpenBreed.Wecs.Abstractions.Services;
-using OpenBreed.Wecs.Abstractions.Primitives;
-using OpenBreed.Wecs.Abstractions.Events;
 
 namespace OpenBreed.Common.Game.Extensions
 {
@@ -204,6 +205,31 @@ namespace OpenBreed.Common.Game.Extensions
             hostBuilder.SetupBroadphaseFactory<IEntity>();
             hostBuilder.SetupFixtureMan((s, a) => { });
             hostBuilder.SetupGameServices();
+
+            hostBuilder.SetupShapeMan((shapeMan, sp) =>
+            {
+                shapeMan.Register("Shapes/Point_14_14", new PointShape(14, 14));
+                shapeMan.Register("Shapes/Point_0_0", new PointShape(0, 0));
+                shapeMan.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
+                shapeMan.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
+                shapeMan.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
+                shapeMan.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
+                shapeMan.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
+                shapeMan.Register("Shapes/Box_-24_-24_48_48", new BoxShape(-24, -24, 48, 48));
+                shapeMan.Register("Shapes/Box_0_0_28_28", new BoxShape(0, 0, 28, 28));
+                shapeMan.Register("Shapes/Box_-14_-14_28_28", new BoxShape(-14, -14, 28, 28));
+                shapeMan.Register("Shapes/Circle_0_0_240", new CircleShape(new Vector2(0, 0), 240));
+                shapeMan.Register("Shapes/Circle_0_0_120", new CircleShape(new Vector2(0, 0), 120));
+                shapeMan.Register("Shapes/Circle_0_0_480", new CircleShape(new Vector2(0, 0), 480));
+                shapeMan.Register("Shapes/Circle_0_0_40", new CircleShape(new Vector2(0, 0), 40));
+                shapeMan.Register("Shapes/Circle_0_0_320", new CircleShape(new Vector2(0, 0), 320));
+                shapeMan.Register("Shapes/Circle_0_0_160", new CircleShape(new Vector2(0, 0), 160));
+            });
+
+            hostBuilder.SetupItemManager((itemsMap, sp) =>
+            {
+                itemsMap.RegisterAbtaItems();
+            });
         }
 
         #endregion Public Methods

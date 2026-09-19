@@ -19,18 +19,15 @@ namespace OpenBreed.Wecs.Gui.Systems
 
         private readonly IEventsMan eventsMan;
         private readonly IInputsMan inputsMan;
-        private readonly IWindow viewClient;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public CursorSystem(
-            IWindow viewClient,
             IInputsMan inputsMan,
             IEventsMan eventsMan)
         {
-            this.viewClient = viewClient;
             this.inputsMan = inputsMan;
             this.eventsMan = eventsMan;
         }

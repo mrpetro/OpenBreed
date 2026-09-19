@@ -31,7 +31,6 @@ namespace OpenBreed.Wecs.Rendering.Systems
         private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
         private readonly IPaletteMan paletteMan;
-        private readonly IWindow viewClient;
 
         #endregion Private Fields
 
@@ -40,13 +39,11 @@ namespace OpenBreed.Wecs.Rendering.Systems
         public ViewportSystem(
             IEntityMan entityMan,
             IWorldMan worldMan,
-            IPaletteMan paletteMan,
-            IWindow viewClient)
+            IPaletteMan paletteMan)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;
             this.paletteMan = paletteMan;
-            this.viewClient = viewClient;
         }
 
         #endregion Public Constructors

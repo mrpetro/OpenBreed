@@ -17,27 +17,6 @@ namespace OpenBreed.Rendering.Abstractions
         /// </summary>
         IRenderContext Context { get; }
 
-        /// <summary>
-        /// Client display rectangle
-        /// </summary>
-        Box2i ClientRectangle { get; }
-
         #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Exits the application
-        /// TODO: Show not be part of this inteface
-        /// </summary>
-        void Exit();
-
-        /// <summary>
-        /// Start running main aplication loop
-        /// TODO: Show not be part of this inteface
-        /// </summary>
-        void Run();
-
-        #endregion Public Methods
     }
 }

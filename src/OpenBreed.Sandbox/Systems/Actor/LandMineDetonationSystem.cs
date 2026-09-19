@@ -98,8 +98,6 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
             var soundId = services.Sounds.GetByName("Vanilla/Common/LandMine/Explosion");
 
-            var duration = services.Sounds.GetDuration(soundId);
-
             mineEntity.EmitSound(soundId);
 
             mineEntity.StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")

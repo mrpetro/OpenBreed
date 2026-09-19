@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -79,7 +80,9 @@ namespace OpenBreed.Wecs.Extensions
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddScoped<IEntityTemplateLoader>((sp) => new XmlEntityTemplateLoader(sp.GetService<IOptions<XmlEntityTemplateLoaderSettings>>()));
+                services.AddScoped<IEntityTemplateLoader>((sp) => new XmlEntityTemplateLoader(
+                    sp.GetRequiredService<IOptions<XmlEntityTemplateLoaderSettings>>(),
+                    sp.GetRequiredService<IMemoryCache>()));
             });
         }
 

@@ -86,6 +86,11 @@ namespace OpenBreed.Editor.App
                 });
             });
 
+            hostBuilder.ConfigureServices(services =>
+            {
+                services.AddMemoryCache();
+            });
+
             hostBuilder.SetupCommonGameServices(isEditor: true);
             hostBuilder.SetupCommonGameWecsServices(isEditor: true);
 

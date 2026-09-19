@@ -3,6 +3,7 @@ using OpenBreed.Animation.Abstractions;
 using OpenBreed.Animation.Generic;
 using OpenBreed.Audio.Abstractions;
 using OpenBreed.Common.Game;
+using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Game.Services;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Wecs.Systems.Projectile;
@@ -46,15 +47,18 @@ namespace OpenBreed.Sandbox.Systems.Actor
         #region Private Fields
 
         private readonly IGameServices services;
+        private readonly ItemsMan itemsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public ItemPickupSystem(
-            IGameServices services)
+            IGameServices services,
+            ItemsMan itemsMan)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
+            this.itemsMan = itemsMan ?? throw new ArgumentNullException(nameof(itemsMan));
         }
 
         #endregion Public Constructors
@@ -129,7 +133,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         private bool TryGiveItem(IEntity actorEntity, string itemName, int quantity)
         {
-            if (!services.Items.TryGetItemId(itemName, out var itemId))
+            if (!itemsMan.TryGetItemId(itemName, out var itemId))
             {
                 return false;
             }

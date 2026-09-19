@@ -40,7 +40,6 @@ namespace OpenBreed.Sandbox.Helpers
         private readonly ISystemFactory systemFactory;
         private readonly IWorldMan worldMan;
         private readonly IFontMan fontMan;
-        private readonly IWindow viewClient;
         private readonly ISoundMan soundMan;
         private readonly IEntityMan entityMan;
         private readonly ITriggerMan triggerMan;
@@ -61,7 +60,6 @@ namespace OpenBreed.Sandbox.Helpers
             ISystemFactory systemFactory,
             IWorldMan worldMan,
             IFontMan fontMan,
-            IWindow viewClient,
             ISoundMan soundMan,
             IEntityMan entityMan,
             ITriggerMan triggerMan,
@@ -77,7 +75,6 @@ namespace OpenBreed.Sandbox.Helpers
             this.systemFactory = systemFactory;
             this.worldMan = worldMan;
             this.fontMan = fontMan;
-            this.viewClient = viewClient;
             this.soundMan = soundMan;
             this.entityMan = entityMan;
             this.triggerMan = triggerMan;

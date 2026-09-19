@@ -5,6 +5,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions.Managers;
+using OpenBreed.Fsm;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Scripting.Abstractions;
@@ -33,11 +34,11 @@ namespace OpenBreed.Common.Game.Services
         TextsDataProvider Texts { get; }
         ISoundMan Sounds { get; }
         IStampMan Stamps { get; }
-        ItemsMan Items { get; }
         IEntityFactory Factory { get; }
         IEntityTriggerMan EntityTriggers { get; }
         IEventsMan Events { get; }
         IPaletteMan Palettes { get; }
+        IFsmMachineFactory<IEntity> FsmFactory { get; }
         IServiceProvider Other { get; }
 
     }

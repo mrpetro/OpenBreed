@@ -31,6 +31,7 @@ namespace OpenBreed.Editor.UI.Wpf
 
         public static readonly DependencyProperty InitFuncProperty =
             DependencyProperty.Register(nameof(InitFunc), typeof(LoadContextHandler), typeof(GLWpfControlEx));
+        private readonly DpiScale dpi;
 
         #endregion Public Fields
 
@@ -51,8 +52,7 @@ namespace OpenBreed.Editor.UI.Wpf
             Unloaded += GLWpfControlEx_Unloaded;
 
             DataContextChanged += GLWpfControlEx_DataContextChanged;
-
-            //EventManager.RegisterClassHandler(typeof(GLWpfControlEx), KeyDownEvent, new RoutedEventHandler(OnMyKeyDown));
+            dpi = VisualTreeHelper.GetDpi(this);
         }
 
         private void OnMyKeyDown(object sender, RoutedEventArgs e)
@@ -127,7 +127,7 @@ namespace OpenBreed.Editor.UI.Wpf
 
             renderContextInitializer.Invoke(renderContext);
 
-            renderContext.Resize((int)ActualWidth, (int)ActualHeight);
+            renderContext.Resize(FrameBufferWidth, FrameBufferHeight);
 
             renderContext.Initialize();
 
@@ -204,7 +204,7 @@ namespace OpenBreed.Editor.UI.Wpf
 
         private void GLWpfControlEx_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            renderContext.Resize((int)e.NewSize.Width, (int)e.NewSize.Height);
+            renderContext.Resize(FrameBufferWidth, FrameBufferHeight);
         }
 
         private void GLWpfControlEx_Init(TimeSpan delta)
@@ -219,16 +219,21 @@ namespace OpenBreed.Editor.UI.Wpf
             renderContext.Render((float)delta.TotalMilliseconds);
         }
 
+        protected override void OnDpiChanged(DpiScale oldDpi, DpiScale newDpi)
+        {
+            base.OnDpiChanged(oldDpi, newDpi);
+        }
+
         private Vector2i FromPoint(Point point)
         {
-            return new Vector2i((int)point.X, (int)point.Y);
+            return new Vector2i((int)(point.X * dpi.DpiScaleX), (int)(point.Y * dpi.DpiScaleY));
         }
 
         private Vector2i GetRenderContextPosition(Vector2i point)
         {
             var pointV = new Vector4(point.X, point.Y, 0.0f, 1.0f);
 
-            var translateTransform = Matrix4.CreateTranslation(0.0f, (float)ActualHeight, 0.0f);
+            var translateTransform = Matrix4.CreateTranslation(0.0f, FrameBufferHeight, 0.0f);
             var flipYTransform = Matrix4.CreateScale(1.0f, -1.0f, 1.0f);
 
             var matT = flipYTransform * translateTransform;

@@ -23,13 +23,13 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         IEventSystem<ViewportResizedEvent>
     {
         private readonly IGameServices services;
-        private readonly IWindow viewClient;
+        private readonly IRenderContext renderContext;
 
         public DebugHudInitSystem(IGameServices services,
-            IWindow viewClient)
+            IRenderContext renderContext)
         {
-            this.services = services;
-            this.viewClient = viewClient;
+            this.services = services ?? throw new System.ArgumentNullException(nameof(services));
+            this.renderContext = renderContext ?? throw new System.ArgumentNullException(nameof(renderContext));
         }
 
         public void OnEvent(
@@ -42,8 +42,8 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
                 "Camera.DebugHud",
                 0.0f,
                 0.0f,
-                viewClient.ClientRectangle.Size.X,
-                viewClient.ClientRectangle.Size.Y);
+                renderContext.Size.X,
+                renderContext.Size.Y);
 
             services.Worlds.RequestAddEntity(hudCamera, world.Id);
 
@@ -58,8 +58,8 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         public void AddFpsCounter(IWorld world)
         {
             var fpsCounter = services.Factory.Create(@"ABTA\Templates\Common\Hud\FpsCounter")
-                .SetParameter("posX", -viewClient.ClientRectangle.Size.X / 2.0f)
-                .SetParameter("posY", -viewClient.ClientRectangle.Size.Y / 2.0f)
+                .SetParameter("posX", -renderContext.Size.X / 2.0f)
+                .SetParameter("posY", -renderContext.Size.Y / 2.0f)
                 .SetTag("FpsCounter")
                 .Build();
 
@@ -69,8 +69,8 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Hud
         public void AddPositionInfo(IWorld world)
         {
             var positionInfo = services.Factory.Create(@"ABTA\Templates\Common\Hud\PositionInfo")
-                .SetParameter("posX", viewClient.ClientRectangle.Size.X / 2.0f - 180.0f)
-                .SetParameter("posY", -viewClient.ClientRectangle.Size.Y / 2.0f)
+                .SetParameter("posX", renderContext.Size.X / 2.0f - 180.0f)
+                .SetParameter("posY", -renderContext.Size.Y / 2.0f)
                 .SetTag("PositionInfo")
                 .Build();
 

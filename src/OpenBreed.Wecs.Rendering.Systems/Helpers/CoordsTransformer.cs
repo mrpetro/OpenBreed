@@ -12,16 +12,13 @@ namespace OpenBreed.Wecs.Rendering.Systems.Helpers
 
         private readonly IEntityMan entityMan;
 
-        private readonly IWindow viewClient;
-
         #endregion Private Fields
 
         #region Public Constructors
 
-        public CoordsTransformer(IEntityMan entityMan, IWindow viewClient)
+        public CoordsTransformer(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
-            this.viewClient = viewClient;
         }
 
         #endregion Public Constructors

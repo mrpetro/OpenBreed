@@ -132,6 +132,25 @@ namespace OpenBreed.Common.Tools.Xml
             }
         }
 
+        public static XmlDocument RestoreFromXml(string path)
+        {
+            // Verify input
+            if (path is null)
+            {
+                throw new ArgumentNullException("path");
+            }
+
+            if (path == string.Empty)
+            {
+                throw new InvalidOperationException("path cannot be empty");
+            }
+
+            var xmlDoc = new XmlDocument();
+            xmlDoc.Load(path);
+
+            return xmlDoc;
+        }
+
         /// <summary>
         /// Deserializes object from file with given path
         /// </summary>
@@ -162,21 +181,30 @@ namespace OpenBreed.Common.Tools.Xml
         /// <typeparam name="T">Type of object to restore</typeparam>
         /// <param name="xmlDocument">XmlDocument instance</param>
         /// <returns>Object instance</returns>
-        public static T RestoreFromXml<T>(XmlDocument xmlDocument)
+        public static T RestoreFromXml<T>(XmlDocument xmlDocument, IReadOnlyDictionary<string, string> variables = null)
         {
             // Verify input
             if (xmlDocument is null)
+            {
                 throw new ArgumentNullException("xmlDocument");
+            }
+
+            if (variables is not null)
+            {
+                ReplaceVariablesWithValues(xmlDocument, variables);
+            }
 
             using (var reader = new XmlNodeReader(xmlDocument))
+            {
                 return RestoreFromXml<T>(reader);
+            }
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static string ReplaceVariablesWithValues(string input, Dictionary<string, string> variables)
+        private static string ReplaceVariablesWithValues(string input, IReadOnlyDictionary<string, string> variables)
         {
             return variableRegexPattern.Replace(input, (match) =>
             {
@@ -192,7 +220,7 @@ namespace OpenBreed.Common.Tools.Xml
             });
         }
 
-        private static void ReplaceVariablesWithValues(XmlNode xmlNode, Dictionary<string, string> variables)
+        private static void ReplaceVariablesWithValues(XmlNode xmlNode, IReadOnlyDictionary<string, string> variables)
         {
             if (xmlNode.NodeType == XmlNodeType.Text)
                 xmlNode.Value = ReplaceVariablesWithValues(xmlNode.Value, variables);

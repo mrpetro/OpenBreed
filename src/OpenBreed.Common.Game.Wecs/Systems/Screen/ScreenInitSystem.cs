@@ -28,17 +28,17 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Screen
         #region Private Fields
 
         private readonly IGameServices services;
-        private readonly IWindow viewClient;
+        private readonly IRenderContext renderContext;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public ScreenInitSystem(IGameServices services,
-            IWindow viewClient)
+            IRenderContext renderContext)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
-            this.viewClient = viewClient ?? throw new ArgumentNullException(nameof(viewClient));
+            this.renderContext = renderContext ?? throw new ArgumentNullException(nameof(renderContext));
         }
 
         #endregion Public Constructors
@@ -51,7 +51,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Screen
             WorldInitialized e,
             IWorld world)
         {
-            var renderView = viewClient.Context.ActiveViews.FirstOrDefault();
+            var renderView = renderContext.ActiveViews.FirstOrDefault();
 
             if (renderView is null)
             {
@@ -62,10 +62,10 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Screen
             var gameCommentator = services.Factory.CreateCommentator();
             var playerCamera = services.Factory.CreateCamera("Camera.Player", 0, 0, 320, 240);
             var johnPlayerEntity = services.Factory.CreatePlayerActor("John", new Vector2(0, 0));
-            var gameViewport = services.Factory.CreateViewport(EntityNames.GameViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "GameViewport");
-            var gameHudViewport = services.Factory.CreateViewport(EntityNames.GameHudViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "GameHudViewport");
-            var debugHudViewport = services.Factory.CreateViewport(EntityNames.DebugHudViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "DebugHudViewport");
-            var textViewport = services.Factory.CreateViewport(EntityNames.TextViewport, 0, 0, viewClient.ClientRectangle.Size.X, viewClient.ClientRectangle.Size.Y, "TextViewport");
+            var gameViewport = services.Factory.CreateViewport(EntityNames.GameViewport, 0, 0, renderContext.Size.X, renderContext.Size.Y, "GameViewport");
+            var gameHudViewport = services.Factory.CreateViewport(EntityNames.GameHudViewport, 0, 0, renderContext.Size.X, renderContext.Size.Y, "GameHudViewport");
+            var debugHudViewport = services.Factory.CreateViewport(EntityNames.DebugHudViewport, 0, 0, renderContext.Size.X, renderContext.Size.Y, "DebugHudViewport");
+            var textViewport = services.Factory.CreateViewport(EntityNames.TextViewport, 0, 0, renderContext.Size.X, renderContext.Size.Y, "TextViewport");
 
             playerCamera.Add(new PauseImmuneComponent());
             gameViewport.SetViewportCamera(playerCamera.Id);

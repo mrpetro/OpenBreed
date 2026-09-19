@@ -5,6 +5,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Interface;
 using OpenBreed.Core.Abstractions.Managers;
+using OpenBreed.Fsm;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Abstractions.Managers;
 using OpenBreed.Scripting.Abstractions;
@@ -40,13 +41,13 @@ namespace OpenBreed.Common.Game.Services
             TextsDataProvider texts,
             ISoundMan sounds,
             IStampMan stamps,
-            ItemsMan items,
             IShapeMan shapes,
             IRenderingMan renders,
             Lazy<IEntityFactory> lazyFactory,
             IEntityTriggerMan entityTriggers,
             IEventsMan events,
             IPaletteMan palettes,
+            IFsmMachineFactory<IEntity> fsmFactory,
             IServiceProvider other)
         {
             Triggers = triggers;
@@ -60,13 +61,13 @@ namespace OpenBreed.Common.Game.Services
             Texts = texts;
             Sounds = sounds;
             Stamps = stamps;
-            Items = items;
             Shapes = shapes;
             Renders = renders;
             this.lazyFactory = lazyFactory;
             EntityTriggers = entityTriggers;
             Events = events;
             Palettes = palettes;
+            FsmFactory = fsmFactory;
             Other = other;
         }
 
@@ -109,6 +110,8 @@ namespace OpenBreed.Common.Game.Services
         public IEventsMan Events { get; }
 
         public IPaletteMan Palettes { get; }
+
+        public IFsmMachineFactory<IEntity> FsmFactory { get; }
 
         public IServiceProvider Other { get; }
 
