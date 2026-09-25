@@ -5328,7 +5328,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="2" Name="Lizard" Disabled="false">
+            <Action Id="2" Name="L1/Lizard" Disabled="false">
               <Description>Almost harmless, killed when collides with player (which takes very little damage)</Description>
               <Presentation>
                 <Color>#50FFFF00</Color>
@@ -14610,6 +14610,375 @@
             </StringTrack>
           </Tracks>
         </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Walking/Up">
+          <Length>0.4</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="24" />
+                <Frame Time="0.125" Value="25" />
+                <Frame Time="0.25" Value="26" />
+                <Frame Time="0.375" Value="27" />
+                <Frame Time="0.5" Value="28" />
+                <Frame Time="0.625" Value="27" />
+                <Frame Time="0.75" Value="26" />
+                <Frame Time="0.875" Value="25" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Walking/UpRight">
+          <Length>0.4</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="29" />
+                <Frame Time="0.125" Value="30" />
+                <Frame Time="0.25" Value="31" />
+                <Frame Time="0.375" Value="32" />
+                <Frame Time="0.5" Value="33" />
+                <Frame Time="0.625" Value="32" />
+                <Frame Time="0.75" Value="31" />
+                <Frame Time="0.875" Value="30" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Walking/Right">
+          <Length>0.4</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="34" />
+                <Frame Time="0.125" Value="35" />
+                <Frame Time="0.25" Value="36" />
+                <Frame Time="0.375" Value="37" />
+                <Frame Time="0.5" Value="38" />
+                <Frame Time="0.625" Value="37" />
+                <Frame Time="0.75" Value="36" />
+                <Frame Time="0.875" Value="35" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Walking/RightDown">
+          <Length>0.4</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="39" />
+                <Frame Time="0.125" Value="40" />
+                <Frame Time="0.25" Value="41" />
+                <Frame Time="0.375" Value="42" />
+                <Frame Time="0.5" Value="43" />
+                <Frame Time="0.625" Value="42" />
+                <Frame Time="0.75" Value="41" />
+                <Frame Time="0.875" Value="40" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Walking/Down">
+          <Length>0.4</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="44" />
+                <Frame Time="0.125" Value="45" />
+                <Frame Time="0.25" Value="46" />
+                <Frame Time="0.375" Value="47" />
+                <Frame Time="0.5" Value="48" />
+                <Frame Time="0.625" Value="47" />
+                <Frame Time="0.75" Value="46" />
+                <Frame Time="0.875" Value="45" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Walking/DownLeft">
+          <Length>0.4</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="49" />
+                <Frame Time="0.125" Value="50" />
+                <Frame Time="0.25" Value="51" />
+                <Frame Time="0.375" Value="52" />
+                <Frame Time="0.5" Value="53" />
+                <Frame Time="0.625" Value="52" />
+                <Frame Time="0.75" Value="51" />
+                <Frame Time="0.875" Value="50" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Walking/Left">
+          <Length>0.4</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="54" />
+                <Frame Time="0.125" Value="55" />
+                <Frame Time="0.25" Value="56" />
+                <Frame Time="0.375" Value="57" />
+                <Frame Time="0.5" Value="58" />
+                <Frame Time="0.625" Value="57" />
+                <Frame Time="0.75" Value="56" />
+                <Frame Time="0.875" Value="55" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Walking/LeftUp">
+          <Length>0.4</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="59" />
+                <Frame Time="0.125" Value="60" />
+                <Frame Time="0.25" Value="61" />
+                <Frame Time="0.375" Value="62" />
+                <Frame Time="0.5" Value="63" />
+                <Frame Time="0.625" Value="62" />
+                <Frame Time="0.75" Value="61" />
+                <Frame Time="0.875" Value="60" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        
+        
+        
+        
+        <Animation Id="Vanilla/L1/Lizard/Standing/Up">
+          <Length>1</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="24" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Standing/UpRight">
+          <Length>1</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="29" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Standing/Right">
+          <Length>1</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="34" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Standing/RightDown">
+          <Length>1</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="39" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Standing/Down">
+          <Length>1</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="44" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Standing/DownLeft">
+          <Length>1</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="49" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Standing/Left">
+          <Length>1</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="54" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        <Animation Id="Vanilla/L1/Lizard/Standing/LeftUp">
+          <Length>1</Length>
+          <Tracks>
+            <IntTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.ImageId</Controller>
+              <Frames>
+                <Frame Time="0" Value="59" />
+              </Frames>
+            </IntTrack>
+            <StringTrack>
+              <Interpolation>None</Interpolation>
+              <Controller>Sprite.AtlasId</Controller>
+              <Frames>
+                <Frame Time="0" Value="Vanilla/L1/A" />
+              </Frames>
+            </StringTrack>
+          </Tracks>
+        </Animation>
+        
+        
+        
+        
+        
       </Items>
     </Animations>
     <EntityTemplates>
@@ -14625,13 +14994,13 @@
         <EntityClass Description="" Id="Actor" ParentId="Entity" />
         <EntityClass Description="" Id="John" ParentId="Hero" />
         <EntityClass Id="Nash" ParentId="Hero" />
-        <EntityClass Id="Hero" ParentId="Actor" />
-        <EntityClass Id="Enemy" ParentId="Actor" />
-        <EntityClass Id="Monster" ParentId="Enemy" />
-        <EntityClass Id="Robot" ParentId="Enemy" />
-        <EntityClass Id="Lizard" ParentId="Enemy" />
+        <EntityClass Id="Hero" ParentId="MovableActor" />
+        <EntityClass Id="MovableEnemy" ParentId="MovableActor" />
+        <EntityClass Id="Monster" ParentId="MovableEnemy" />
+        <EntityClass Id="Robot" ParentId="MovableEnemy" />
+        <EntityClass Id="Lizard" ParentId="MovableEnemy" />
         <EntityClass Id="Door" ParentId="Entity" />
-        <EntityClass Id="Turret" ParentId="Enemy" />
+        <EntityClass Id="Turret" ParentId="StaticEnemy" />
         <EntityClass Description="Can be picked up." Id="Item" ParentId="Entity" />
         <EntityClass Id="MedkitSmall" ParentId="Item" />
         <EntityClass Id="Ammo" ParentId="Item" />
@@ -14639,7 +15008,7 @@
         <EntityClass Id="Keycard" ParentId="Item" />
         <EntityClass Id="SecurityDoor" ParentId="Door" />
         <EntityClass Id="GenericDoor" ParentId="Door" />
-        <EntityClass Id="Boss" ParentId="Enemy" />
+        <EntityClass Id="Boss" ParentId="MovableEnemy" />
         <EntityClass Id="Immovable" ParentId="Entity" />
         <EntityClass Id="NPC" ParentId="Actor" />
         <EntityClass Id="Robinson" ParentId="NPC" />
@@ -14662,6 +15031,9 @@
         <EntityClass Id="Event" ParentId="Entity" />
         <EntityClass Id="PhysicalEvent" ParentId="Event" />
         <EntityClass Id="Explosion" ParentId="PhysicalEvent" />
+        <EntityClass Id="MovableActor" ParentId="Actor" />
+        <EntityClass Id="StaticActor" ParentId="Actor" />
+        <EntityClass Id="StaticEnemy" ParentId="StaticActor" />
       </Items>
     </EntityClasses>
   </Tables>

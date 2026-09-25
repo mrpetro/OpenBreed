@@ -60,7 +60,7 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
                 new SpriteComponentAnimator(frameUpdaterMan, sp.GetService<ISpriteMan>(), sp.GetRequiredService<IDataLoaderFactory>());
             });
 
-            hostBuilder.SetupCollisionVisualizingOptions();
+            hostBuilder.SetupCollisionVisualizingOptions((options) => options.Enabled = false);
 
             hostBuilder.SetupRenderingSystems();
             hostBuilder.SetupScriptingSystems();

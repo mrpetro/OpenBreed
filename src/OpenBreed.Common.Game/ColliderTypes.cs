@@ -11,6 +11,8 @@ namespace OpenBreed.Common.Game
         #region Public Properties
 
         public static int ActorBody { get; private set; }
+        public static int EnemyBody { get; private set; }
+        public static int EnemyTarget { get; private set; }
         public static int ActorSight { get; private set; }
         public static int ActorTrigger { get; private set; }
         public static int FullObstacle { get; private set; }
@@ -34,6 +36,8 @@ namespace OpenBreed.Common.Game
         public static void RegisterAbtaColliders(this ICollisionMan<IEntity> collisions)
         {
             ActorBody = collisions.RegisterGroup(nameof(ActorBody));
+            EnemyBody = collisions.RegisterGroup(nameof(EnemyBody));
+            EnemyTarget = collisions.RegisterGroup(nameof(EnemyTarget));
             ActorSight = collisions.RegisterGroup(nameof(ActorSight));
             ActorTrigger = collisions.RegisterGroup(nameof(ActorTrigger));
             Projectile = collisions.RegisterGroup(nameof(Projectile));

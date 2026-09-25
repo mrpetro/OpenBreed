@@ -41,7 +41,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Turret
 
             var tracedFixture = fixtureMan.GetById(e.ContactedFixtureId);
 
-            if (!tracedFixture.GroupIds.Any(g => g == ColliderTypes.ActorBody))
+            if (!tracedFixture.GroupIds.Any(g => g == ColliderTypes.EnemyTarget))
             {
                 return;
             }

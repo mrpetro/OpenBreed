@@ -48,6 +48,18 @@ namespace OpenBreed.Wecs.Abstractions.Attributes
         }
 
         public string ClassName { get; }
+
+        private IEntityClass _class;
+
+        public IEntityClass GetClass(IEntityClassMan entityClassMan)
+        {
+            if (_class is null)
+            {
+                _class = entityClassMan.GetByName(ClassName);
+            }
+
+            return _class;
+        }
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]

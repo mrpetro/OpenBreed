@@ -51,7 +51,13 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
 
         #region Public Properties
 
-        public int ColliderTypeA => ColliderTypes.Projectile;
+        public IEnumerable<int> ColliderTypesA
+        {
+            get
+            {
+                yield return ColliderTypes.Projectile;
+            }
+        }
 
         public IEnumerable<int> ColliderTypesB
         {

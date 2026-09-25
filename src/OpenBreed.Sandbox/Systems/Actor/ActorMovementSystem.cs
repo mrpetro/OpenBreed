@@ -23,49 +23,17 @@ using System;
 
 namespace OpenBreed.Sandbox.Systems.Actor
 {
-    public class HeroSystem : IEventSystem<DestroyedEvent>, IEventSystem<VelocityChangedEvent>, IEventSystem<DirectionChangedEvent>
+    public class ActorMovementSystem : IEventSystem<VelocityChangedEvent>, IEventSystem<DirectionChangedEvent>
     {
         private readonly IGameServices services;
 
-        public HeroSystem(IGameServices services)
+        public ActorMovementSystem(IGameServices services)
         {
             this.services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
         public void OnEvent(
-            [EntityOfClassFilter("Hero")]
-            DestroyedEvent e, IWorld world)
-        {
-            var entity = services.Entities.GetById(e.EntityId);
-
-            var pos = entity.GetPosition();
-            entity.StartEmit("ABTA\\Templates\\Common\\Projectiles\\Explosion")
-                .SetOption("flavor", "Small")
-                .SetOption("startX", pos.X)
-                .SetOption("startY", pos.Y)
-                .Finish();
-
-            var soundId = services.Sounds.GetByName("Vanilla/Common/Hero/Dying");
-            entity.EmitSound(soundId);
-
-            entity.SetResurrectable(entity.WorldId);
-
-            services.Logger.LogInformation("Player Died!");
-
-            var limboWorld = services.Worlds.GetByName(WorldNames.Limbo);
-
-            entity.State = "Dead";
-
-            var task = Core.Task.Create((t) => services.AddToWorld(t, entity, WorldNames.Limbo));
-
-            task.Then((t) => services.Wait(t, entity, 3000))
-                .Then((t) => services.Resurrect(t, entity));
-
-            task.Start();
-        }
-
-        public void OnEvent(
-            [EntityOfClassFilter("Hero")]
+            [EntityOfClassFilter("MovableActor")]
             VelocityChangedEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
@@ -74,6 +42,12 @@ namespace OpenBreed.Sandbox.Systems.Actor
             var targetDirection = entity.GetTargetDirection();
             var direction = entity.GetDirection();
             var animDirName = AnimHelper.ToDirectionName(direction);
+            var level = entity.GetMetadata("Level");
+
+            if (level is null)
+            {
+                level = "Vanilla/Common";
+            }
 
             var isMoving = entity.IsMoving();
             var movementStateName = default(string);
@@ -81,19 +55,19 @@ namespace OpenBreed.Sandbox.Systems.Actor
             if (isMoving)
             {
                 movementStateName = "Walking";
-                var clipId = services.Clips.GetId($"Vanilla/Common/{className}/{movementStateName}/{animDirName}");
+                var clipId = services.Clips.GetId($"{level}/{className}/{movementStateName}/{animDirName}");
                 entity.PlayAnimation(0, clipId);
             }
             else
             {
                 movementStateName = "Standing";
-                var clipId = services.Clips.GetId($"Vanilla/Common/{className}/{movementStateName}/{animDirName}");
+                var clipId = services.Clips.GetId($"{level}/{className}/{movementStateName}/{animDirName}");
                 entity.StopAnimation(0);
             }
         }
 
         public void OnEvent(
-            [EntityOfClassFilter("Hero")]
+            [EntityOfClassFilter("MovableActor")]
             DirectionChangedEvent e, IWorld world)
         {
             var entity = services.Entities.GetById(e.EntityId);
@@ -103,6 +77,12 @@ namespace OpenBreed.Sandbox.Systems.Actor
             var targetDirection = entity.GetTargetDirection();
             var direction = entity.GetDirection();
             var animDirName = AnimHelper.ToDirectionName(direction);
+            var level = entity.GetMetadata("Level");
+
+            if (level is null)
+            {
+                level = "Vanilla/Common";
+            }
 
             var isMoving = entity.IsMoving();
             var movementStateName = default(string);
@@ -116,7 +96,7 @@ namespace OpenBreed.Sandbox.Systems.Actor
                 movementStateName = "Standing";
             }
 
-            var clipId = services.Clips.GetId($"Vanilla/Common/{className}/{movementStateName}/{animDirName}");
+            var clipId = services.Clips.GetId($"{level}/{className}/{movementStateName}/{animDirName}");
             entity.PlayAnimation(0, clipId);
         }
     }

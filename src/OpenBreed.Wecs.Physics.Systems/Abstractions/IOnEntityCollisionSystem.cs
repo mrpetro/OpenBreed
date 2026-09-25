@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Physics.Systems.Abstractions
     {
         #region Public Properties
 
-        int ColliderTypeA { get; }
+        IEnumerable<int> ColliderTypesA { get; }
         IEnumerable<int> ColliderTypesB { get; }
 
         #endregion Public Properties

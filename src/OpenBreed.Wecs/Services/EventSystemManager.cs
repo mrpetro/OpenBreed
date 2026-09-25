@@ -8,6 +8,7 @@ using OpenBreed.Wecs.Services;
 using OpenBreed.Wecs.Worlds;
 using OpenTK.Compute.OpenCL;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -19,8 +20,22 @@ using System.Xml.Linq;
 
 namespace OpenBreed.Wecs.Systems
 {
+
+
+
     public class EventSystemManager : IEventSystemManager
     {
+
+        //private static readonly ConcurrentDictionary<ParameterInfo, IEnumerable<EntityEventFilterAttribute>?> Cache = new();
+
+        //public static IEnumerable<EntityEventFilterAttribute>? GetCachedAttributes(ParameterInfo parameterInfo)
+        //{
+        //    return Cache.GetOrAdd(
+        //        parameterInfo,
+        //        t => t.GetCustomAttributes<EntityEventFilterAttribute>(inherit: true));
+        //}
+
+
         #region Private Fields
 
         private readonly IEventsMan eventsMan;
@@ -91,6 +106,9 @@ namespace OpenBreed.Wecs.Systems
                 var eventParameter = method.GetParameters().First();
 
                 var eventFilters = eventParameter.GetCustomAttributes<EntityEventFilterAttribute>();
+
+                //var eventFilters = GetCachedAttributes(eventParameter);
+
                 if (!EvaluateEntityEventFilters(eventFilters, entityEvent, world))
                 {
                     return false;
@@ -252,7 +270,8 @@ namespace OpenBreed.Wecs.Systems
                             return false;
                         }
 
-                        var filterClass = entityClassMan.GetByName(entityOfClassFilter.ClassName);
+                        var filterClass = entityOfClassFilter.GetClass(entityClassMan);
+
                         if (!eventEntityClass.IsOrInheritsFrom(filterClass))
                         {
                             return false;

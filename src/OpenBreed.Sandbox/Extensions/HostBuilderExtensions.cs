@@ -186,6 +186,12 @@ namespace OpenBreed.Sandbox.Extensions
             mapLegacyDataLoader.Register("L1/ShipSmoke", environmentCellLoader);
             mapLegacyDataLoader.Register("L1/WorkingGenerator", environmentCellLoader);
 
+
+            var actorLoader = new ActorLoader(managerCollection.GetRequiredService<IWorldMan>(),
+                managerCollection.GetRequiredService<IEntityFactory>());
+
+            mapLegacyDataLoader.Register("L1/Lizard", actorLoader);
+
             var doorCellEntityLoader = new DoorEntityLoader(managerCollection.GetRequiredService<IWorldMan>(),
                 managerCollection.GetRequiredService<IEntityFactory>(),
                 managerCollection.GetRequiredService<IGameServices>());

@@ -41,7 +41,14 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
 
         #region Public Properties
 
-        public int ColliderTypeA => ColliderTypes.ActorBody;
+        public IEnumerable<int> ColliderTypesA
+        {
+            get
+            {
+                yield return ColliderTypes.ActorBody;
+                yield return ColliderTypes.EnemyBody;
+            }
+        }
 
         public IEnumerable<int> ColliderTypesB
         {
@@ -49,6 +56,7 @@ namespace OpenBreed.Common.Game.Wecs.Systems.Actor
             {
                 yield return ColliderTypes.FullObstacle;
                 yield return ColliderTypes.ActorBody;
+                yield return ColliderTypes.EnemyBody;
                 yield return ColliderTypes.ActorOnlyObstacle;
             }
         }

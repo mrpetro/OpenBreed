@@ -97,6 +97,16 @@ namespace OpenBreed.Sandbox.Loaders
             return entity;
         }
 
+        private IEntity PutLizard(MapMapper mapAssets, MapModel map, bool[,] visited, IWorld world, int ix, int iy, int gfxValue)
+        {
+            var entity = entityFactory.CreateShipSmoke(ix, iy, mapAssets.Level, gfxValue);
+            visited[ix, iy] = true;
+
+            worldMan.RequestAddEntity(entity, world.Id);
+
+            return entity;
+        }
+
         private IEntity PutWorkingGenerator(MapMapper mapAssets, MapModel map, bool[,] visited, IWorld world, int ix, int iy, int gfxValue)
         {
             var entity = entityFactory.CreateWorkingGenerator(ix, iy, mapAssets.Level, gfxValue);

@@ -1,22 +1,13 @@
 <?xml version="1.0"?>
 <EntityTemplate>
-    <Class>Nash</Class>
+    <Class>Lizard</Class>
     <Components>
 		<Metadata>
 		</Metadata>
 		<Timer>
 		</Timer>
-		<Fsm>
-			<States>
-				<!--<State FsmName="Actor.Movement" StateName="Standing" />-->
-			</States>
-		</Fsm>
-		<OnTrigger>
-            <Actions>
-                <Action Trigger="EnterWorld" Action="PrepareWeapons" />
-            </Actions>
-		</OnTrigger>
-		<SoundPlayer>		
+		<Fsm/>
+		<SoundPlayer>
 		</SoundPlayer>
 		<Animation>
 			<States>
@@ -26,6 +17,7 @@
 			</States>
 		</Animation>
 		<Position X="$(startX)" Y="$(startY)" />
+		<PreviousPosition X="$(startX)" Y="$(startY)" />
 		<Thrust X="0" Y="0" />
 		<Velocity X="0" Y="0" />
 		<AngularPosition>
@@ -43,16 +35,9 @@
 			<CorFactor>0.0</CorFactor>
 			<Fixtures>
 				<Fixture>
-					<ShapeName>Shapes/Box_-14_-14_28_28</ShapeName>
+					<ShapeName>Shapes/Box_-8_-8_16_16</ShapeName>
 					<Groups>
-						<Group>ActorBody</Group>
-						<Group>EnemyTarget</Group>
-					</Groups>
-				</Fixture>
-				<Fixture>
-					<ShapeName>Shapes/Point_0_0</ShapeName>
-					<Groups>
-						<Group>ActorTrigger</Group>
+						<Group>EnemyBody</Group>
 					</Groups>
 				</Fixture>
 			</Fixtures>
@@ -61,9 +46,9 @@
 		<EntityEmitter>
 		</EntityEmitter>
 		<Sprite>
-			<AtlasName>Vanilla/Common/Nash</AtlasName>
+			<AtlasName>Vanilla/L1/A</AtlasName>
 			<ImageIndex>0</ImageIndex>
-			<Origin X="18" Y="18" />
+			<Origin X="8" Y="8" />
 			<Order>100</Order>
 		</Sprite>
 		<Health>
@@ -76,6 +61,8 @@
 		<Lives>
 			<Value>3</Value>
 		</Lives>
+		<Resurrectable>
+		</Resurrectable>
 		<Ammo>
 			<MaximumRoundsCount>32</MaximumRoundsCount>
 			<RoundsCount>32</RoundsCount>
@@ -84,5 +71,15 @@
 		<Keys>
 			<GeneralCount>15</GeneralCount>
 		</Keys>
+        <CanOpenDoor/>
+		<Weapons>
+		</Weapons>
+        <!-- <Inventory> -->
+            <!-- <Slot Name="Backpack"> -->
+                <!-- <Items> -->
+                    <!-- <Item Name="" />   -->
+                <!-- </Items> -->
+            <!-- </Slot> -->
+        <!-- </Inventory> -->
     </Components>
 </EntityTemplate>

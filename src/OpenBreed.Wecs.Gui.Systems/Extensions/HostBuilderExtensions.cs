@@ -18,11 +18,16 @@ namespace OpenBreed.Wecs.Gui.Systems.Extensions
     {
         #region Public Methods
 
-        public static void SetupCollisionVisualizingOptions(this IHostBuilder hostBuilder)
+        public static void SetupCollisionVisualizingOptions(this IHostBuilder hostBuilder, Action<CollisionVisualizingOptions> optionsSetter)
         {
             hostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton<CollisionVisualizingOptions>();
+                services.AddSingleton((sp) =>
+                {
+                    var options = new CollisionVisualizingOptions();
+                    optionsSetter?.Invoke(options);
+                    return options;
+                });
             });
         }
 

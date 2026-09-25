@@ -20,12 +20,15 @@ namespace OpenBreed.Wecs.Physics.Systems
             {
                 var collisionMan = serviceProvider.GetRequiredService<ICollisionMan<IEntity>>();
 
-                foreach (var colliderType in onEntityCollisionSystem.ColliderTypesB)
+                foreach (var colliderTypeA in onEntityCollisionSystem.ColliderTypesA)
                 {
-                    collisionMan.RegisterFixturePair(
-                        onEntityCollisionSystem.ColliderTypeA,
-                        colliderType,
-                        onEntityCollisionSystem.OnCollision);
+                    foreach (var colliderTypeB in onEntityCollisionSystem.ColliderTypesB)
+                    {
+                        collisionMan.RegisterFixturePair(
+                            colliderTypeA,
+                            colliderTypeB,
+                            onEntityCollisionSystem.OnCollision);
+                    }
                 }
             }
         }

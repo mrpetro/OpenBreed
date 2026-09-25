@@ -55,7 +55,13 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Properties
 
-        public int ColliderTypeA => ColliderTypes.ActorBody;
+        public IEnumerable<int> ColliderTypesA
+        {
+            get
+            {
+                yield return ColliderTypes.ActorBody;
+            }
+        }
 
         public IEnumerable<int> ColliderTypesB
         {

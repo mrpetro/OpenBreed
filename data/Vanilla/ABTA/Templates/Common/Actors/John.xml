@@ -48,6 +48,7 @@
 					<ShapeName>Shapes/Box_-14_-14_28_28</ShapeName>
 					<Groups>
 						<Group>ActorBody</Group>
+						<Group>EnemyTarget</Group>
 					</Groups>
 				</Fixture>
 				<Fixture>

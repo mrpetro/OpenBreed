@@ -27,21 +27,22 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             //Update Stage
             //builder.AddGameLogicSystems();
 
-            builder.AddPhysicsSystems();
-            builder.AddSystem<SolidCollisionHandlerSystem>();
-            builder.AddSystem<SlowdownObstacleCollisionSystem>();
-            builder.AddSystem<SlopeObstacleCollisionSystem>();
-            builder.AddSystem<Projectile2TriggerCollisionHandlerSystem>();
-            builder.AddSystem<ItemManagingSystem>();
-            builder.AddSystem<LivesSystem>();
-            builder.AddSystem<ActorSystem>();
-            builder.AddSystem<DamageOnHealthDistributionSystem>();
-            builder.AddSystem<DestroyOnZeroHealthSystem>();
-            builder.AddSystem<TurretTrackingSystem>();
-            builder.AddSystem<TurretTrackLockingSystem>();
-            builder.AddSystem<TurretTrackUnlockingSystem>();
-            builder.AddSystem<RefreshCursorOnWorldUpdateSystem>();
-            builder.AddSystem<FollowPositionSystem>();
+            builder.AddPhysicsSystems()
+                .AddSystem<SolidCollisionHandlerSystem>()
+                .AddSystem<SlowdownObstacleCollisionSystem>()
+                .AddSystem<SlopeObstacleCollisionSystem>()
+                .AddSystem<Projectile2TriggerCollisionHandlerSystem>()
+                .AddSystem<ItemManagingSystem>()
+                .AddSystem<LivesSystem>()
+                .AddSystem<ActorSystem>()
+                .AddSystem<DamageOnHealthDistributionSystem>()
+                .AddSystem<DestroyOnZeroHealthSystem>()
+                .AddSystem<TurretTrackingSystem>()
+                .AddSystem<TurretTrackLockingSystem>()
+                .AddSystem<TurretTrackUnlockingSystem>()
+                .AddSystem<RefreshCursorOnWorldUpdateSystem>()
+                .AddSystem<FollowPositionSystem>()
+                .AddSystem<MovableEnemyControlSystem>();
 
             builder.AddControlSystems();
 
@@ -50,12 +51,11 @@ namespace OpenBreed.Common.Game.Wecs.Extensions
             //Audio Stage
             builder.AddSoundSystems();
 
-            builder.AddGuiSystems(isEditor);
-
             //Video Stage
             builder.AddRenderingSystems();
 
             builder.AddSystem<UnknownMapCellDisplaySystem>();
+            builder.AddGuiSystems(isEditor);
 
             builder.AddScriptingSystems();
 

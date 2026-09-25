@@ -5,6 +5,7 @@ using OpenBreed.Audio.Abstractions;
 using OpenBreed.Common.Game;
 using OpenBreed.Common.Game.Managers;
 using OpenBreed.Common.Game.Services;
+using OpenBreed.Common.Game.Wecs.Components;
 using OpenBreed.Common.Game.Wecs.Extensions;
 using OpenBreed.Common.Game.Wecs.Systems.Projectile;
 using OpenBreed.Common.Interface;
@@ -65,7 +66,13 @@ namespace OpenBreed.Sandbox.Systems.Actor
 
         #region Public Properties
 
-        public int ColliderTypeA => ColliderTypes.ActorBody;
+        public IEnumerable<int> ColliderTypesA
+        {
+            get
+            {
+                yield return ColliderTypes.ActorBody;
+            }
+        }
 
         public IEnumerable<int> ColliderTypesB
         {
@@ -134,6 +141,11 @@ namespace OpenBreed.Sandbox.Systems.Actor
         private bool TryGiveItem(IEntity actorEntity, string itemName, int quantity)
         {
             if (!itemsMan.TryGetItemId(itemName, out var itemId))
+            {
+                return false;
+            }
+
+            if (actorEntity.TryGet<InventoryComponent>() == null)
             {
                 return false;
             }

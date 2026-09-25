@@ -45,7 +45,7 @@ namespace OpenBreed.Sandbox
 
             hostBuilder.SetupDataHandlers();
 
-            hostBuilder.SetupCollisionVisualizingOptions();
+            hostBuilder.SetupCollisionVisualizingOptions((options) => options.Enabled = false);
 
             hostBuilder.SetupDataGridFactory();
             hostBuilder.SetupDefaultLogger();

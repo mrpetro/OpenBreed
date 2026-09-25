@@ -116,14 +116,14 @@ namespace OpenBreed.Wecs.Gui.Systems
             view.PushMatrix();
             view.Translate(new Vector3(posA));
 
-            RenderShape(view, contact.FixtureA.Shape, new Color4(255,0,0,80));
+            RenderShape(view, contact.FixtureA.Shape, new Color4(255,0,0,40));
 
             view.PopMatrix();
             view.PushMatrix();
 
             view.Translate(new Vector3(posB));
 
-            RenderShape(view, contact.FixtureB.Shape, new Color4(255, 0, 0, 80));
+            RenderShape(view, contact.FixtureB.Shape, new Color4(255, 0, 0, 40));
 
             view.PopMatrix();
         }
@@ -167,10 +167,14 @@ namespace OpenBreed.Wecs.Gui.Systems
             var view = context.View;
 
             var posCmp = entity.Get<PositionComponent>();
+
             var bodyCmp = entity.Get<BodyComponent>();
 
             view.PushMatrix();
             view.Translate(new Vector3(posCmp.Value));
+
+            // Draw Position cross
+            view.Context.Primitives.DrawPoint(view, Vector2.Zero, Color4.Red, PointType.Cross);
 
             for (int i = 0; i < bodyCmp.Fixtures.Count; i++)
             {
@@ -221,7 +225,7 @@ namespace OpenBreed.Wecs.Gui.Systems
 
         private void SetupColors()
         {
-            byte alpha = 50;
+            byte alpha = 20;
 
             foreach (var groupName in collisionMan.GroupNames)
             {

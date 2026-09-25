@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Wecs.Abstractions.Extensions;
 
 namespace OpenBreed.Wecs.Services
 {
@@ -13,14 +14,16 @@ namespace OpenBreed.Wecs.Services
         #region Private Fields
 
         private readonly ISystemRequirementsProvider systemRequirementsProvider;
+        private readonly IEntityClassMan entityClassMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DefaultEntityToSystemMatcher(ISystemRequirementsProvider systemRequirementsProvider)
+        public DefaultEntityToSystemMatcher(ISystemRequirementsProvider systemRequirementsProvider, IEntityClassMan entityClassMan)
         {
-            this.systemRequirementsProvider = systemRequirementsProvider;
+            this.systemRequirementsProvider = systemRequirementsProvider ?? throw new ArgumentNullException(nameof(systemRequirementsProvider));
+            this.entityClassMan = entityClassMan ?? throw new ArgumentNullException(nameof(entityClassMan));
         }
 
         #endregion Public Constructors
@@ -54,7 +57,14 @@ namespace OpenBreed.Wecs.Services
 
             if (requirements.Class is not null)
             {
-                if (entity.ClassId != requirements.Class.Id)
+                var entityClass = entityClassMan.GetById(entity.ClassId);
+
+                if (entityClass is null)
+                {
+                    return false;
+                }
+
+                if (!entityClass.IsOrInheritsFrom(requirements.Class))
                 {
                     return false;
                 }
